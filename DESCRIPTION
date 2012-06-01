@@ -1,0 +1,14 @@
+Package: quandis
+Type: Package
+Title: This package assists in performing quantitative discourse analysis
+Version: 0.1.0
+Date: 2012-05-09
+Author: Tyler Rinker
+Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
+Depends: R (>= 2.15.0), ggplot2 (>= 0.9.1), tm (>= 0.5-7.1), wordcloud, openNLP, openNLPmodels.en, Snowball, gplots
+Suggests: plyr, venneuler
+Description: This package automates many of the tasks associated with quantitative discourse analysis oftranscripts containing discourse including frequency counts of sentence types, words, sentence, turns of talk, syllable counts and other assorted analyysis tasks.  The package provides parsing tools for preparing transcript data.  Many functions enable the user to aggregate data by any number of grouping variables providing analysis and seamless integration with other R packages that undertake higher level analysis and visualization of text.  This provides the user with a more efficient and targeted analysis.
+License: GPL-2
+URL: http://trinkerrstuff.wordpress.com/qdap-package-quantitative-discourse-analysis/
+
+

@@ -1,0 +1,65 @@
+\name{pollysyllable.sum}
+\alias{pollysyllable.sum}
+%- Also NEED an '\alias' for EACH other topic documented here.
+\title{
+Transcript Apply Summing of Polysyllables
+}
+\description{
+%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+}
+\usage{
+pollysyllable.sum(text)
+}
+%- maybe also 'usage' for other objects documented here.
+\arguments{
+  \item{text}{
+%%     ~~Describe \code{text} here~~
+}
+}
+\details{
+%%  ~~ If necessary, more details than the description above ~~
+}
+\value{
+%%  ~Describe the value returned
+%%  If it is a LIST, use
+%%  \item{comp1 }{Description of 'comp1'}
+%%  \item{comp2 }{Description of 'comp2'}
+%% ...
+}
+\references{
+%% ~put references to the literature/web site here ~
+}
+\author{
+%%  ~~who you are~~
+}
+\note{
+%%  ~~further notes~~
+}
+
+%% ~Make other sections like Warning with \section{Warning }{....} ~
+
+\seealso{
+%% ~~objects to See Also as \code{\link{help}}, ~~~
+}
+\examples{
+##---- Should be DIRECTLY executable !! ----
+##-- ==>  Define data, use random,
+##--	or do  help(data=index)  for the standard data sets.
+
+## The function is currently defined as
+function (text) 
+{
+    Trim <- function(x) gsub("^\\s+|\\s+$", "", x)
+    counter <- function(x) {
+        y <- as.data.frame(table(syllable.count(Trim(x))["syllables"]))
+        z <- subset(y, as.numeric(as.character(Var1)) >= 3)
+        j <- sum(z$Freq)
+        return(j)
+    }
+    unlist(lapply(as.character(text), function(x) counter(x)))
+  }
+}
+% Add one or more standard keywords, see file 'KEYWORDS' in the
+% R documentation directory.
+\keyword{ ~kwd1 }
+\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
