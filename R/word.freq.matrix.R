@@ -29,3 +29,5 @@ function(wfdf = NULL, text.var = NULL,
     comment(x2) <- "true.matrix"
     return(x2)
 }
+
+wfm <- word.freq.matrix 

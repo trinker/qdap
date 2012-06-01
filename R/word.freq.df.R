@@ -61,3 +61,5 @@ function(text.var, grouping.var, stopwords = NULL,
     }
     return(DF)
 }
+
+wfdf <- word.freq.df
