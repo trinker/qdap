@@ -11,7 +11,7 @@ function(text.var, grouping.var, match.string,
         G[length(G)]
     }
     x <- termco(text.var = text.var, match.string = match.string,
-        grouping.var = grouping.var)
+        grouping.var = grouping.var, ignore.case = ignore.case)
     names(x)[1] <- NAME
     y <- termco.p(tco = x, output = output, digits = digits)
     if (zero.replace != 0){
