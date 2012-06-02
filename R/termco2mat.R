@@ -5,7 +5,7 @@ function (dataframe, drop.wc=TRUE, short.colnames=TRUE) {
     rownames(MAT) <- dataframe[, 1]
     if (short.colnames) {
         x <- gsub("term(", "", colnames(MAT), fixed=TRUE)
-        colnames(MAT) <- gsub(")", "", x, fixed=TRUE)
+        colnames(MAT) <- Trim(gsub(")", "", x, fixed=TRUE))
     }
     return(MAT)
 }
