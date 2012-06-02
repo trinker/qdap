@@ -1,5 +1,5 @@
 termco.d <-
-function(text.var, match.string, grouping.var, 
+function(text.var, grouping.var, match.string,
     ignore.case = FALSE, zero.replace = 0, output = "percent", 
     digits = 2){
     NAME <- if (is.list(grouping.var)) {
