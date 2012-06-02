@@ -10,6 +10,10 @@ function(str, mat){
         )
         return(j)
     }
+    spacer <- function(string){
+        sapply(string, function(x) paste0(" ", x, " "), USE.NAMES = FALSE)
+    }
+    str <- spacer(str)
     y <- sapply(mat, function(x) tester(x, str))
     return(y)
 }
