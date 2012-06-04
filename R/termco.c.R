@@ -94,6 +94,7 @@ function(termco.d.object, combined.columns, new.name,
     DF <- replacer(DF, "0(0)", with = zero.replace)
     DF <- replacer(DF, "0(0.00)", with = zero.replace)
     o <- list(raw = x2, prop = y2, rnp = DF)
+    comment(o) <- cm
     class(o) <- "termco_c"
     return(o)
 }
