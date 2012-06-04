@@ -87,6 +87,7 @@ function(text.var, grouping.var, match.string,
     z[, -c(1:2)] <- lapply(z[, -c(1:2)], 
         function(x) replacer(x, h, zero.replace))
     o <- list(raw = x, prop = y, rnp = z)
+    comment(o) <- paste0("digits=", digits)
     class(o) <- "termco_d"
     return(o)
 }
