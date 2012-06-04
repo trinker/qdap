@@ -72,6 +72,9 @@ function(termco.d.object, combined.columns, new.name,
     } else {
         seq_along(x)
     }
+    #if (elim.old & new.name %in% combined.columns){
+    #
+    #}
     x2 <- replacer(x, with = zero.replace)[, z]
     y2 <- replacer(y, with = zero.replace)[, z]
     DF <- replacer(termco.rnp(x, y), "0(0)", with = zero.replace)[, z]
