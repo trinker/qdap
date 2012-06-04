@@ -1,3 +1,4 @@
+qda <-
 function(text.var, group.vars, stopwords = NULL, 
     cut.n = 20, cap = TRUE, cap.list=NULL, cap.I=TRUE) {
     
