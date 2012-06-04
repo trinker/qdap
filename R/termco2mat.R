@@ -1,3 +1,20 @@
+#' Convert a termco dataframe to a matrix
+#' 
+#' Convert a termco dataframe to a matrix for use with visualization functions
+#' (e.g. heatmap2 of gplots)
+#' 
+#' 
+#' @param dataframe A termco dataframe
+#' @param drop.wc logical.  If TRUE the word count column will be dropped.
+#' @param short.colnames logical.  If TRUE the ``term()'' portion of column
+#' names will be dropped.
+#' @keywords ~kwd1 ~kwd2
+#' @examples
+#' 
+#' ##---- Should be DIRECTLY executable !! ----
+#' ##-- ==>  Define data, use random,
+#' ##--	or do  help(data=index)  for the standard data sets.
+#' 
 termco2mat <-
 function (dataframe, drop.wc=TRUE, short.colnames=TRUE) {
     ind <- if(drop.wc) 1:2 else 1
