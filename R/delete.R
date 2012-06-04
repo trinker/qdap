@@ -1,3 +1,4 @@
+delete <-
 function(file = NULL) {
     x <- if (is.null(file)) {
         menu(dir())
