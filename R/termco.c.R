@@ -77,7 +77,7 @@ function(termco.d.object, combined.columns, new.name,
     names(x)[length(x)] <- names(y)[length(y)] <- new.name
     x2 <- replacer(x, with = zero.replace)[, z]
     y2 <- replacer(y, with = zero.replace)[, z]
-    if (new.name %in% names(x)[combined.columns]){
+    if (new.name %in% names(x)[combined.columns] & elim.old){
         names(x2)[ncol(x2)] <- new.name
         names(y2)[ncol(y2)] <- new.name
     }
