@@ -54,7 +54,7 @@
 #'     return(o)
 #'   }
 #' 
-termco.c2 <-
+termco.c <-
 function(termco.d.object, combined.columns, new.name, 
          zero.replace = 0, elim.old = TRUE){ 
     # browser ()
@@ -77,11 +77,27 @@ function(termco.d.object, combined.columns, new.name,
     names(x)[length(x)] <- names(y)[length(y)] <- new.name
     x2 <- replacer(x, with = zero.replace)[, z]
     y2 <- replacer(y, with = zero.replace)[, z]
+    if (new.name %in% names(x)[combined.columns]){
+        names(x2)[ncol(x2)] <- new.name
+        names(y2)[ncol(y2)] <- new.name
+    }
     
+    p <- data.frame(sapply(x2[, -1], function(x) 
+        as.numeric(as.character(x))), check.names=FALSE)
+    x2 <- data.frame(x2[, 1, drop=FALSE], p, check.names=FALSE)
+    p <- data.frame(sapply(y2[, -1], function(x) 
+        as.numeric(as.character(x))), check.names=FALSE)
+    y2 <- data.frame(y2[, 1, drop=FALSE], p, check.names=FALSE)
+    
+    d <- as.numeric(gsub("digits=", "", comment(termco.d.object)))
+    trnp <- termco.rnp(x2, y2)
     ####end of fun now lapply it  or single depending in input
-    DF <- replacer(termco.rnp(x2, y2), "0(0)", with = zero.replace)
+    DF <- data.frame(sapply(trnp, Trim), check.names=FALSE)
+    DF <- replacer(DF, "0(0)", with = zero.replace)
+    DF <- replacer(DF, "0(0.00)", with = zero.replace)
     o <- list(raw = x2, prop = y2, rnp = DF)
     class(o) <- "termco_c"
     return(o)
 }
+
 
