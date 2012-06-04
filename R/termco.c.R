@@ -54,31 +54,34 @@
 #'     return(o)
 #'   }
 #' 
-termco.c <-
+termco.c2 <-
 function(termco.d.object, combined.columns, new.name, 
-    zero.replace = 0, elim.old = TRUE){     
+         zero.replace = 0, elim.old = TRUE){ 
+    # browser ()
+    #find out if cc and nn are a list and vector or vector and single
+    #make fun here 
     x <- termco.d.object$raw
     y <- termco.d.object$prop
     if (!is.numeric(combined.columns)){
         combined.columns <- which(names(x) %in% combined.columns)
     }
     x <- transform(x, new.name = rowSums(x[, combined.columns]), 
-        check.names=FALSE)
-    names(x)[length(x)] <- names(y)[length(y)] <- new.name
+                   check.names=FALSE)
     y <- transform(y, new.name = rowSums(y[, combined.columns]), 
-        check.names=FALSE)
+                   check.names=FALSE)
     z <- if (elim.old) {
         seq_along(x)[!seq_along(x) %in% combined.columns] 
     } else {
         seq_along(x)
     }
-    #if (elim.old & new.name %in% combined.columns){
-    #
-    #}
+    names(x)[length(x)] <- names(y)[length(y)] <- new.name
     x2 <- replacer(x, with = zero.replace)[, z]
     y2 <- replacer(y, with = zero.replace)[, z]
-    DF <- replacer(termco.rnp(x, y), "0(0)", with = zero.replace)[, z]
+    
+    ####end of fun now lapply it  or single depending in input
+    DF <- replacer(termco.rnp(x2, y2), "0(0)", with = zero.replace)
     o <- list(raw = x2, prop = y2, rnp = DF)
     class(o) <- "termco_c"
     return(o)
 }
+
