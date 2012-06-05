@@ -2,10 +2,10 @@
 \alias{hash}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+Create a new environemnt for quick hash style dictionary lookup
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Creates a new environemnt for quick hash style dictionary lookup
 }
 \usage{
 hash(x)
