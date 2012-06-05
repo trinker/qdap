@@ -1,6 +1,6 @@
-#' %% ~~function to do ... ~~
+#' Create a new environemnt for quick hash style dictionary lookup
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' Creates a new environemnt for quick hash style dictionary lookup
 #' 
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
