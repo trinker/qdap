@@ -37,6 +37,7 @@ Search <-
 function(term, dataframe, column.name, variation = 0.02, ...) {
     te <- as.character(substitute(term))
     cn <- as.character(substitute(column.name))
+    if(cn %in% as.character(1:10000)) cn <- as.numeric(cn)
     HUNT <- agrep(te, dataframe[, cn], ignore.case = TRUE, 
         max.distance = variation, ...)
     dataframe[c(HUNT), ]
