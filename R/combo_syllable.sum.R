@@ -38,7 +38,7 @@
 #'   }
 #' 
 combo_syllable.sum <-
-function(text) {
+function(text.var) {
     fun <- function(x) ifelse(x=="", NA, x)
     text <- fun(as.character(text.var))
     Trim <- function(x) gsub("^\\s+|\\s+$", "", x)

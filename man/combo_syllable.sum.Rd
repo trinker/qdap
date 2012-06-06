@@ -12,7 +12,7 @@ combo_syllable.sum(text)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{text}{
+  \item{text.var}{
 %%     ~~Describe \code{text} here~~
 }
 }
