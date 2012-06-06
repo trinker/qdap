@@ -34,13 +34,17 @@
 #'   }
 #' 
 word.split <-
-function(x) {
+function (text.var) {
     NAer <- function(x) {
         if (is.na(x)) {
             NA
-        } else {
+        }
+        else {
             strsplit(x, " ")
         }
     }
-    sapply(x, function(x) as.vector(unlist(NAer(x))))
+    x <- reducer(Trim(clean(text.var)))
+    y <- sapply(x, function(x) 
+        unlist(strsplit(x, "[[:space:]]|(?=[.!?*-])", perl = TRUE)))
+    return(y)
 }
