@@ -48,7 +48,8 @@
 DF_word_stats <-
 function(text.var, digit.remove = FALSE, 
     apostrophe.remove = FALSE) {
-    text <- as.character(text.var)
+    fun <- function(x) ifelse(x=="", NA, x)
+    text <- fun(as.character(text.var))
     DF <- na.omit(data.frame(text.var = text, 
         stringsAsFactors = FALSE))
     DF$n.sent <- 1:nrow(DF)
