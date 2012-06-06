@@ -28,6 +28,11 @@ function (dataframe, drop.wc=TRUE, short.colnames=TRUE, rm.zerocol=FALSE,
         fun <- function(x) all(ifelse(x==0, T, F))
         MAT <- MAT[, !apply(MAT, 2, fun)]
     }
+    if (length(grep("(", as.vector(unlist(MAT)), fixed=TRUE))==0) {
+        z <- rownames(MAT)
+        MAT <- apply(MAT, 2, as.numeric)
+        rownames(MAT) <- z
+    }
     if (no.quote) MAT <- noquote(MAT)
     return(MAT)
 }
