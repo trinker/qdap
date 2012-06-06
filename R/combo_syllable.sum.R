@@ -39,8 +39,6 @@
 #' 
 combo_syllable.sum <-
 function(text.var) {
-    fun <- function(x) ifelse(x=="", NA, x)
-    text <- fun(as.character(text.var))
     Trim <- function(x) gsub("^\\s+|\\s+$", "", x)
     counter <- function(x) {
         w <- syllable.count(Trim(x))["syllables"]
@@ -50,7 +48,7 @@ function(text.var) {
         k <- sum(w)
         return(c(k, j))
     }
-    m <- unlist(lapply(text, function(x) counter(x)))
+    m <- unlist(lapply(as.character(text.var), function(x) counter(x)))
     n <- as.data.frame(t(matrix(m, 2, length(m)/2)))
     names(n) <- c("syllable.count", "polysyllable.count")
     return(n)
