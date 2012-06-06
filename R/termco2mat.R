@@ -14,9 +14,9 @@
 #' ##---- Should be DIRECTLY executable !! ----
 #' ##-- ==>  Define data, use random,
 #' ##--	or do  help(data=index)  for the standard data sets.
-#' 
 termco2mat <-
-function (dataframe, drop.wc=TRUE, short.colnames=TRUE) {
+function (dataframe, drop.wc=TRUE, short.colnames=TRUE, rm.zerocol=FALSE,
+          no.quote=TRUE) {
     ind <- if(drop.wc) 1:2 else 1
     MAT <- as.matrix(dataframe[, -c(ind)])
     rownames(MAT) <- dataframe[, 1]
@@ -24,6 +24,11 @@ function (dataframe, drop.wc=TRUE, short.colnames=TRUE) {
         w <- do.call(rbind, strsplit(colnames(MAT), " "))[, 2:3]
         colnames(MAT) <- Trim(paste0(w[, 1], gsub(")", "", w[, 2], fixed=TRUE)))
     }
+    if (rm.zerocol) {
+        fun <- function(x) all(ifelse(x==0, T, F))
+        MAT <- MAT[, !apply(MAT, 2, fun)]
+    }
+    if (no.quote) MAT <- noquote(MAT)
     return(MAT)
 }
 
