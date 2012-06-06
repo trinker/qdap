@@ -21,8 +21,8 @@ function (dataframe, drop.wc=TRUE, short.colnames=TRUE) {
     MAT <- as.matrix(dataframe[, -c(ind)])
     rownames(MAT) <- dataframe[, 1]
     if (short.colnames) {
-        x <- gsub("term(", "", colnames(MAT), fixed=TRUE)
-        colnames(MAT) <- Trim(gsub(")", "", x, fixed=TRUE))
+        w <- do.call(rbind, strsplit(colnames(MAT), " "))[, 2:3]
+        colnames(MAT) <- Trim(paste0(w[, 1], gsub(")", "", w[, 2], fixed=TRUE)))
     }
     return(MAT)
 }
