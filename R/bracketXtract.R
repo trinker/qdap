@@ -48,15 +48,15 @@
 #'   }
 #' 
 bracketXtract <-
-function(txt, br = c("(", "[", "{", "all"), with=FALSE){
+function(txt, br = c("(", "[", "<", "{", "all"), with=FALSE){
     br <- match.arg(br)
     left <- if ("all" == br) {
-        "\\(|\\{|\\["
+        "\\(|\\{|\\<|\\["
     } else {
         sprintf("\\%s", br)
     }
     map <- c(`\\(`="\\)", `\\[`="\\]", `\\{`="\\}",
-        `\\(|\\{|\\[`="\\)|\\}|\\]")
+             `\\<`="\\>", `\\(|\\{|<|\\[`="\\)|\\}|\\>|\\]")
     fmt <- if (with==TRUE) {
         "(%s).*?(%s)"
     } else {
@@ -69,3 +69,4 @@ function(txt, br = c("(", "[", "{", "all"), with=FALSE){
         regmatches(txt, gregexpr(re, txt, perl=TRUE)) 
     }
 }
+
