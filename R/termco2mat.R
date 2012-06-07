@@ -16,7 +16,7 @@
 #' ##--	or do  help(data=index)  for the standard data sets.
 termco2mat <-
 function (dataframe, drop.wc = TRUE, short.colnames = TRUE, rm.zerocol = FALSE, 
-          no.quote = TRUE, transform = TRUE) {
+    no.quote = TRUE, transform = TRUE) {
     ind <- if (drop.wc) {
         1:2
     } else {
