@@ -1,4 +1,4 @@
-g <-
+partition <-
 function(x, k = 100){
     n <- length(x)
     if (sum(x) < k) {
