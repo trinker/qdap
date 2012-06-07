@@ -39,7 +39,7 @@
 #' 
 stopwords<-
 function (textString, stopwords = Top25Words, unlist = FALSE, 
-          strip = FALSE, names = FALSE) {
+          strip = FALSE, unique = FALSE, names = FALSE) {
     Stopwords <- if (is.null(stopwords)) {
         c(" ")
     } else {
