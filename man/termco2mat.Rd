@@ -21,6 +21,12 @@ logical.  If TRUE the word count column will be dropped.
   \item{short.colnames}{
 logical.  If TRUE the ``term()'' portion of column names will be dropped.
 }
+  \item{no.quote}{
+logical.  If TRUE the matrix will be printed without quotes if it's character.
+}
+  \item{transform{
+logical.  If TRUE the matrix will be transformed.
+}
 }
  
 \examples{
