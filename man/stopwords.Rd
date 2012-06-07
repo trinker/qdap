@@ -30,6 +30,7 @@ stopwords(textString, stopwords = Top25Words)
   \item{names}{
 %%     ~~Describe \code{stopwords} here~~
 }
+}
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
