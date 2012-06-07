@@ -48,8 +48,13 @@
 #'   }
 #' 
 bracketXtract <-
-function(txt, br = c("(", "[", "<", "{", "all"), with=FALSE){
-    br <- match.arg(br)
+function(txt, bracket = "all", with=FALSE){   
+    br <- bracket
+    br <- ifelse(br=="round", "(", 
+                 ifelse(br=="square", "[", 
+                        ifelse(br=="curly", "{",
+                               ifelse(br=="html", "<",
+                                      ifelse(br=="angle", "<", br)))))
     left <- if ("all" == br) {
         "\\(|\\{|<|\\["
     } else {
