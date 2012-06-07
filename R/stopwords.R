@@ -57,5 +57,8 @@ function (textString, stopwords = Top25Words, unlist = FALSE,
     if (strip) {
         x <- strip(x)
     }
+    if (unique) {
+        x <- unique(x)
+    }
     return(x)
 }
