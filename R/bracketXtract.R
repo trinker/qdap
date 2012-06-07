@@ -51,7 +51,7 @@ bracketXtract <-
 function(txt, br = c("(", "[", "<", "{", "all"), with=FALSE){
     br <- match.arg(br)
     left <- if ("all" == br) {
-        "\\(|\\{|\\<|\\["
+        "\\(|\\{|<|\\["
     } else {
         sprintf("\\%s", br)
     }
