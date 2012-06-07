@@ -83,7 +83,7 @@
 termco.c <-
 function(termco.d.object, combined.columns, new.name, 
          zero.replace = 0, elim.old = TRUE){ 
-    if (!class(termco.d.object) %in% c("termco_d, "termco_c)){
+    if (!class(termco.d.object) %in% c("termco_d", "termco_c")){
         stop("termco.d.object must be a termco.d.object or termco.c.object")
     }
     x <- termco.d.object$raw
