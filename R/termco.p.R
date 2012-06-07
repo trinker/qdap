@@ -37,7 +37,7 @@
 #' 
 termco.p <-
 function(tco, output = "percent", digits = 2){
-    a <- tco[, -c(1:2)]
+    a <- tco[, -c(1:2), drop = FALSE]
     b <- tco[, 2]
     e <- tco[, 1:2]
     d <- switch(output, 
