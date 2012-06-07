@@ -24,9 +24,8 @@ function (dataframe, drop.wc = TRUE, short.colnames = TRUE, rm.zerocol = FALSE,
     MAT <- as.matrix(dataframe[, -c(ind)])
     rownames(MAT) <- dataframe[, 1]
     if (short.colnames) {
-        w <- do.call(rbind, strsplit(colnames(MAT), " "))[, 2:3]
-        colnames(MAT) <- Trim(paste0(w[, 1], gsub(")", "", w[, 
-                                                             2], fixed = TRUE)))
+        mn <- gsub("(.*)\\)([^\\)]*)", "\\1\\2", colnames(MAT))
+        colnames(MAT) <- gsub("term(", "", mn, fixed=TRUE)
     }
     if (rm.zerocol) {
         fun <- function(x) all(ifelse(x == 0, T, F))
