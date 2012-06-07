@@ -38,7 +38,8 @@
 #'   }
 #' 
 stopwords <-
-function(textString, stopwords = Top25Words) {  
+function(textString, stopwords = Top25Words, unlist = FALSE,
+    names = FALSE) { 
     Stopwords <- if (is.null(stopwords)) {
         c(" ")
     } else {
@@ -46,8 +47,13 @@ function(textString, stopwords = Top25Words) {
     }
     SW <- function(textString, stopwords) {
         "%w/o%" <- function(x, y) x[!x %in% y]
-        unlist(strsplit(tolower(Trim(textString)), 
-            " ")) %w/o% tolower(Trim(stopwords))
+        unlist(strsplit(tolower(Trim(textString)), " ")) %w/o% 
+            tolower(Trim(stopwords))
     }
-    sapply(textString, function(x) SW(x, Stopwords))
+    x <- sapply(textString, function(x) SW(x, Stopwords),  
+                USE.NAMES = names)
+    if (unlist){
+        x <- unlist(x)
+    } 
+    return(x)
 }

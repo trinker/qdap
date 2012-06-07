@@ -18,6 +18,9 @@ stopwords(textString, stopwords = Top25Words)
   \item{stopwords}{
 %%     ~~Describe \code{stopwords} here~~
 }
+  \item{unlist}{
+%%     ~~Describe \code{stopwords} here~~
+}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
