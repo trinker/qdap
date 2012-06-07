@@ -8,7 +8,7 @@ Convert a termco dataframe to a matrix
 Convert a termco dataframe to a matrix for use with visualization functions (e.g. heatmap2 of gplots)
 }
 \usage{
-termco2mat(dataframe, drop.wc=TRUE, short.colnames=TRUE)
+termco2mat(dataframe, drop.wc=TRUE, short.colnames=TRUE, no.quote=TRUE, transform=TRUE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,7 +28,6 @@ logical.  If TRUE the matrix will be printed without quotes if it's character.
 logical.  If TRUE the matrix will be transformed.
 }
 }
- 
 \examples{
 ##---- Should be DIRECTLY executable !! ----
 ##-- ==>  Define data, use random,
