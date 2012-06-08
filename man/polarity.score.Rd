@@ -18,16 +18,16 @@ polarity.score(text.var, grouping.var = NULL, pos.words = positive.words, neg.wo
   \item{grouping.var}{
 %%     ~~Describe \code{grouping.var} here~~
 }
-  \item{pos.words}{
+  \item{positive.list}{
 %%     ~~Describe \code{pos.words} here~~
 }
-  \item{neg.words}{
+  \item{negative.list}{
 %%     ~~Describe \code{neg.words} here~~
 }
-  \item{negation.words}{
+  \item{negation.list}{
 %%     ~~Describe \code{negation.words} here~~
 }
-  \item{increase.amplification.words}{
+  \item{amplification.list}{
 %%     ~~Describe \code{increase.amplification.words} here~~
 }
 }
