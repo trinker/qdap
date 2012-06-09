@@ -180,19 +180,19 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
     L1 <- mapply(function(x, y) x[y - 1], x$words, pos1, SIMPLIFY = FALSE)
     L2 <- mapply(function(x, y) x[y - 1], x$words, neg1, SIMPLIFY = FALSE)
     x$pos.matchesNEG <- lapply(L1, function(x) sum(no.na(match(x, 
-                                                               negation))) * (-2))
+        negation))) * (-2))
     x$neg.matchesNEG <- lapply(L2, function(x) sum(no.na(match(x, 
-                                                               negation)) * 2))
+        negation)) * 2))
     x$pos.matchesAMP <- lapply(L1, function(x) no.na(match(x, 
-                                                           amplification)))
+        amplification)))
     x$neg.matchesAMP <- lapply(L2, function(x) no.na(match(x, 
-                                                           amplification)))
+        amplification)))
     ans <- list()
     for (i in 1:nrow(x)) {
         ans[[i]] <- numeric(0)
         for (j in 1:length(x[[i, "neg.matchesAMP"]])) {
             ans[[i]][j] <- ifelse(x$neg.matchesAMP[[i]][j], as.numeric(1/(x[i, 
-                                                                            "wc"] - 1)), 0)
+                "wc"] - 1)), 0)
         }
     }
     AMPneg <- lapply(ans, function(x) sum(miss(x)) * -1)
@@ -201,32 +201,31 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
         ans2[[i]] <- numeric(0)
         for (j in 1:length(x[[i, "pos.matchesAMP"]])) {
             ans2[[i]][j] <- ifelse(x$pos.matchesAMP[[i]][j], 
-                                   as.numeric(1/(x[i, "wc"] - 1)), 0)
+                as.numeric(1/(x[i, "wc"] - 1)), 0)
         }
     }
     AMPpos <- lapply(ans2, function(x) sum(miss(x)))
     x$negation.adj.raw <- mapply(add, x$raw, x$pos.matchesNEG, 
-                                 x$neg.matchesNEG)
+        x$neg.matchesNEG)
     x$amplification.adj.raw <- mapply(add, x$negation.adj.raw, 
-                                      AMPneg, AMPpos)
+        AMPneg, AMPpos)
     x$polarity <- round(x$amplification.adj.raw/wc(x$words), 
-                        digits = 3)
+        digits = 3)
     x <- x[, c("text.var", "wc", "polarity", "raw", "negation.adj.raw", 
-               "amplification.adj.raw", "pos.words", "neg.words")]
+        "amplification.adj.raw", "pos.words", "neg.words")]
     x[NAfill, 1:8] <- NA
     x2 <- x
     TX <- as.character(substitute(text.var))
     TX <- TX[length(TX)]
-    grouping.var <- if (is.null(grouping.var)) {
-        rep("all", length(text.var))
+    if (is.null(grouping.var)) {
+        grouping.var <- rep("all", length(text.var))
     }
     grouping.vars <- if (is.list(grouping.var) & length(grouping.var) > 
         1) {
         apply(data.frame(grouping.var), 1, function(x) {
             if (any(is.na(x))) {
                 NA
-            }
-            else {
+            } else {
                 paste(x, collapse = ".")
             }
         })
@@ -250,25 +249,29 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
         x
     }
     DF <- data.frame(group = grouping.vars, x2[, c("text.var", 
-                                                   "wc", "polarity")])
-    na.instruct <- function(x, y){
+        "wc", "polarity")])
+    na.instruct <- function(x, y) {
         LIST <- split(x, y)
-        z <- unlist(sapply(LIST, function(x) 
-            !all(is.na(x[, "text.var"])), USE.NAMES = FALSE))
+        z <- unlist(sapply(LIST, function(x) !all(is.na(x[, "text.var"])), 
+            USE.NAMES = FALSE))
         return(z)
     }
     DF2 <- aggregate(wc ~ group, DF, sum)
     z <- na.instruct(DF, DF$group)
     DF2$total.sentences <- as.data.frame(table(na.omit(DF)$group))$Freq[z]
-    DF2$ave.polarity <- round(aggregate(polarity ~ group, 
-                                        DF, mean)$polarity, digits = digits)
+    DF2$ave.polarity <- round(aggregate(polarity ~ group, DF, 
+        mean)$polarity, digits = digits)
     names(DF2)[names(DF2) == "wc"] <- "total.words"
     names(DF2)[1] <- NAME
     DF2 <- DF2[order(-DF2$ave.polarity), ]
     rownames(DF2) <- 1:nrow(DF2)
     DF2 <- DF2[, c(1, 3, 2, 4)]
     o <- list(all = x, group = DF2, POLARITY_FOR_ALL_SENTENCES = x, 
-              POLARITY_BY_GROUP = DF2)
+        POLARITY_BY_GROUP = DF2)
     class(o) <- "polarity_score"
     return(o)
+}
+
+print.polarity_score <- function(polarity_score) {
+    print(polarity_score$POLARITY_BY_GROUP)
 }
