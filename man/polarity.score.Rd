@@ -8,7 +8,7 @@ Transcript Apply Polarity Score of Dialogue
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
 }
 \usage{
-polarity.score(text.var, grouping.var = NULL, pos.words = positive.words, neg.words = negative.words, negation.words = negation.words, increase.amplification.words = increase.amplification.words)
+polarity.score(text.var, grouping.var = NULL, pos.words = positive.words, neg.words = negative.words, negation.words = negation.words, increase.amplification.words = increase.amplification.words, digits = 3)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -28,6 +28,9 @@ polarity.score(text.var, grouping.var = NULL, pos.words = positive.words, neg.wo
 %%     ~~Describe \code{negation.words} here~~
 }
   \item{amplification.list}{
+%%     ~~Describe \code{increase.amplification.words} here~~
+}
+  \item{digits}{
 %%     ~~Describe \code{increase.amplification.words} here~~
 }
 }
