@@ -47,7 +47,7 @@
 #' 
 DF_word_stats <-
 function(text.var, digit.remove = FALSE, 
-    apostrophe.remove = FALSE) {
+    apostrophe.remove = FALSE, digits = 3) {
     DF <- na.omit(data.frame(text.var = text.var, 
         stringsAsFactors = FALSE))
     DF$n.sent <- 1:nrow(DF)
@@ -61,9 +61,9 @@ function(text.var, digit.remove = FALSE,
     DF <- DF[, c("text.var", "n.sent", "word.count", "character.count",
         "syllable.count",  "polysyllable.count") ]
     DF <- transform(DF, char2word.ratio = 
-        round(character.count/word.count, digits=3),
-        syl2word.ratio = round(syllable.count/word.count, digits=3),
-        polysyl2word.ratio = round(polysyllable.count/word.count, digits=3))
+        round(character.count/word.count, digits=digits),
+        syl2word.ratio = round(syllable.count/word.count, digits=digits),
+        polysyl2word.ratio = round(polysyllable.count/word.count, digits=digits))
     punctuation <- function(x) substr(x, nchar(x), nchar(x))
     DF$end.mark <- unlist(lapply(DF$text.var, punctuation))
     rownames(DF) <- 1:nrow(DF)
