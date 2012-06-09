@@ -142,7 +142,11 @@ function(text.var, group.vars, stopwords = NULL,
         substring(x, 2, nchar(x)), sep="")
     Sw1 <- stopwords[!substring(stopwords, 1, 1) %in% LETTERS]
     Sw2 <- stopwords[substring(stopwords, 1, 1) %in% LETTERS]
-    Sw3 <- paste(Sw2, "'s", sep="")
+    Sw3 <- if (!is.null(Sw2)) {
+        paste0(Sw2, "'s")
+    } else {
+        NULL
+    }
     stopwords <- c(Sw1, upper(Sw2), Sw2, tolower(Sw2), Sw3, tolower(Sw3))
     group.var <- if (is.list(group.vars) & length(group.vars)>1) {
         apply(data.frame(group.vars), 1, function(x){
