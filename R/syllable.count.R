@@ -124,7 +124,7 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
         row.names(DF) <- 1:nrow(DF)
         if (algorithm.report == TRUE){
             list("ALGORITHM REPORT" = DF[which(DF$in.dictionary == 'NF'), ], 
-                 "SYLLABLE DATAFRAME" = DF)
+                "SYLLABLE DATAFRAME" = DF)
         } else {
             DF
         }
