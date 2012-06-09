@@ -239,10 +239,10 @@ function(text.var, grouping.var = NULL, tot = NULL,
     stats <- function(x){
         st <- c(n.tot = totter(x[, "TOT"]),
                 n.sent = nrow(x),
-                n.words = sum(x[, "word.count"]), 
-                n.char = sum(x[, "character.count"]),
-                n.syl = sum(x[, "syllable.count"]),
-                n.poly = sum(x[, "polysyllable.count"])
+                n.words = sum(x[, "word.count"], na.rm = TRUE), 
+                n.char = sum(x[, "character.count"], na.rm = TRUE),
+                n.syl = sum(x[, "syllable.count"], na.rm = TRUE),
+                n.poly = sum(x[, "polysyllable.count"], na.rm = TRUE)
         )
         return(st)
     }
@@ -270,6 +270,7 @@ function(text.var, grouping.var = NULL, tot = NULL,
     }
     DF2 <- data.frame(DF2, do.call("rbind", lapply(LIST, typer)))   
     DF2 <- DF2[order(-DF2$n.words), ]
+    rownames(DF2) <- NULL
     #browser()
     qdaMOD <-if(is.null(grouping.var)){
         DFfreq <- data.frame(table(unlist(
@@ -286,9 +287,9 @@ function(text.var, grouping.var = NULL, tot = NULL,
                          n.hapax=HAPAX, n.dis=DIS, grow.rate=round(HAPAX/ALL, 
                                                                    digits=digits), prop.dis= round(DIS/ALL, digits=digits))
     rankDF <- rankDF[order(-rankDF$words),]
-    rownames(rankDF) <- 1:nrow(rankDF)
+    rownames(rankDF) <- NULL
     DF2 <- data.frame(DF2, rankDF[, -c(1:2)])
-    names(DF2) <- c(G, names(DF2)[-1])
+    names(DF2)[1] <- G
     DF2 <- DF2[order(-DF2$n.tot, -DF2$n.sent), ]
     rownames(DF2) <- NULL
     DF3 <- DF
@@ -318,13 +319,12 @@ function(text.var, grouping.var = NULL, tot = NULL,
     }
     sum2 <- function(x){
         if(is.numeric(x)){
-            sum(x)
+            sum(x, na.rm = TRUE)
         } else {
             TRUE
         }
     }
     DF2 <- DF2[, unlist(lapply(DF2, sum2))!=0]
-    
     o <- list(ts= DF3, gts = DF2)
     class(o) <- "word.stats"
     return(o)
