@@ -1,4 +1,4 @@
 print.polarity.score <-
-function(polarity_score) {
-    print(polarity_score$POLARITY_BY_GROUP)
+function(polarity.score) {
+    print(polarity.score$POLARITY_BY_GROUP)
 }

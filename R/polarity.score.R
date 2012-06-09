@@ -268,6 +268,6 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
     DF2 <- DF2[, c(1, 3, 2, 4)]
     o <- list(all = x, group = DF2, POLARITY_FOR_ALL_SENTENCES = x, 
         POLARITY_BY_GROUP = DF2)
-    class(o) <- "polarity_score"
+    class(o) <- "polarity.score"
     return(o)
 }
