@@ -41,17 +41,25 @@
 #'     }
 #'   }
 #' 
-colsplit2df <-
+colsplit2df <- 
 function(dataframe, splitcol = 1, new.names=NULL, sep=".", 
          orig.keep=FALSE, ...){
-    if(is.numeric(dataframe[, splitcol])) stop("splitcol can not be numeric")
+    if(is.numeric(dataframe[, splitcol])) {
+        stop("splitcol can not be numeric")
+    }
     X <- data.frame(do.call(rbind, strsplit(as.vector(
         dataframe[, splitcol]), split = sep, fixed=TRUE)))
-    z <- if (!is.numeric(splitcol)) match(splitcol, names(dataframe)) else splitcol
-    if (!is.null(new.names)) colnames(X) <- new.names
+    z <- if (!is.numeric(splitcol)) {
+        match(splitcol, names(dataframe)) 
+    } else {
+        splitcol
+    }
+    if (!is.null(new.names)) {
+        colnames(X) <- new.names
+    }
     if (z!=1 & ncol(dataframe) > z) {
         w <- cbind(dataframe[, 1:(z-1), drop=FALSE], X, 
-                   dataframe[, (z + 1):ncol(dataframe), drop=FALSE])
+            dataframe[, (z + 1):ncol(dataframe), drop=FALSE])
     } else {
         if (z!=1 & ncol(dataframe) == z) {
             w <- cbind(dataframe[, 1:(z-1), drop=FALSE], X)
@@ -64,13 +72,13 @@ function(dataframe, splitcol = 1, new.names=NULL, sep=".",
         }
     }
     if (is.null(new.names) &"&" %in% unlist(strsplit(names(dataframe[, 
-                                                                     splitcol, drop=FALSE]), split=NULL))) {
+        splitcol, drop=FALSE]), split=NULL))) {
         nams <- unlist(strsplit(names(dataframe[, 
-                                                splitcol, drop=FALSE]), split="&"))
+            splitcol, drop=FALSE]), split="&"))
         colnames(w)[1:length(nams)] <- nams
     }
     if(orig.keep) {
-        cbind(dataframe[, splitcol, drop=FALSE], w)
+        w <- cbind(dataframe[, splitcol, drop=FALSE], w)
     }
     return(w)
 }
