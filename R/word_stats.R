@@ -184,8 +184,8 @@ function(text.var, grouping.var = NULL, tot = NULL,
         if (is.list(grouping.var)) {
             m <- unlist(as.character(substitute(grouping.var))[-1])
             m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
-                    x[length(x)]
-                }
+                x[length(x)]
+            }
             )
             paste(m, collapse="&")
         } else {
@@ -198,12 +198,12 @@ function(text.var, grouping.var = NULL, tot = NULL,
     } else {
         if (is.list(grouping.var) & length(grouping.var)>1) {
             apply(data.frame(grouping.var), 1, function(x){
-                    if (any(is.na(x))){
-                        NA
-                    } else {
-                        paste(x, collapse = ".")
-                    }
+                if (any(is.na(x))){
+                    NA
+                } else {
+                    paste(x, collapse = ".")
                 }
+            }
             )
         } else {
             unlist(grouping.var)
@@ -216,37 +216,45 @@ function(text.var, grouping.var = NULL, tot = NULL,
     }
     Text <- as.character(text.var)
     DF <- na.omit(data.frame(group = grouping, tot.sen = t.o.t., 
-        TOT = TOT(t.o.t.), text.var = Text, stringsAsFactors = FALSE))
+                             TOT = TOT(t.o.t.), text.var = Text, stringsAsFactors = FALSE))
     DF$group <- DF$group[ , drop=TRUE]
     DF$n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(DF$group, DF$n.sent)), ]
     M <- DF_word_stats(text.var = DF$text.var, digit.remove = digit.remove, 
-        apostrophe.remove = apostrophe.remove)
+                       apostrophe.remove = apostrophe.remove)
     M <- M[, !names(M) %in% c("text.var", "n.sent")]
     DF <- data.frame(DF, M)
     DF$end.mark <- substring(DF$text.var, nchar(DF$text.var), 
-        nchar(DF$text.var))
+                             nchar(DF$text.var))
     DF$end.mark2 <- substring(DF$text.var, nchar(DF$text.var)-1, 
-        nchar(DF$text.var))
+                              nchar(DF$text.var))
     DF$sent.type <- ifelse(DF$end.mark2%in%c("*.", "*?", "*!"), "imperative",
-        ifelse(DF$end.mark==".", "statement", 
-        ifelse(DF$end.mark=="?", "question",
-        ifelse(DF$end.mark=="!", "exclamation",
-        ifelse(DF$end.mark=="|", "interupted", NA))))) 
+                           ifelse(DF$end.mark==".", "statement", 
+                                  ifelse(DF$end.mark=="?", "question",
+                                         ifelse(DF$end.mark=="!", "exclamation",
+                                                ifelse(DF$end.mark=="|", "interupted", NA))))) 
     DF$end.mark2 <- NULL
-    DF2 <- aggregate(word.count ~ group, DF, sum)
-    names(DF2) <- c("group", "n.words")
-    totter <- function(x)length(unique(x))
-    DF2$n.tot <- aggregate(TOT ~ group, DF, totter)$TOT
-    DF2$n.sent <- as.data.frame(table(DF$group))$Freq
-    DF2$n.char <- aggregate(character.count ~ 
-        group, DF, sum)$character.count
-    DF2$n.syl <- aggregate(syllable.count ~ 
-        group, DF, sum)$syllable.count
-    DF2$n.poly <- aggregate(polysyllable.count ~ 
-        group, DF, sum)$polysyllable.count
-    DF2 <- DF2[,c("group", "n.tot", "n.sent", "n.words", 
-                  names(DF2)[-c(1:4)])]
+    LIST <- split(DF, DF[, "group"])
+    totter <- function(x) {length(unique(x))}
+    stats <- function(x){
+        st <- c(n.tot = totter(x[, "TOT"]),
+                n.sent = nrow(x),
+                n.words = sum(x[, "word.count"]), 
+                n.char = sum(x[, "character.count"]),
+                n.syl = sum(x[, "syllable.count"]),
+                n.poly = sum(x[, "polysyllable.count"])
+        )
+        return(st)
+    }
+    DF2 <- do.call("rbind", lapply(LIST, stats))
+    row2col <- function(dataframe, new.col.name = NULL){
+        x <- data.frame(NEW = rownames(dataframe), dataframe, 
+                        check.names=FALSE)
+        if(!is.null(new.col.name)) names(x)[1] <- new.col.name
+        rownames(x) <- 1:nrow(x)
+        return(x)
+    }
+    DF2 <- row2col(DF2, "group")
     DF2 <- transform(DF2, sptot = round(n.sent/n.tot, digits=digits),
                      wps = round(n.words/n.sent, digits=digits),
                      cps = round(n.char/n.sent, digits=digits),
@@ -255,15 +263,14 @@ function(text.var, grouping.var = NULL, tot = NULL,
                      cpw = round(n.char/n.words, digits=digits),
                      spw = round(n.syl/n.words, digits=digits),
                      pspw = round(n.poly/n.words, digits=digits))
-    LIST <- split(DF, DF[, "group"])
     typer <- function(df){
         types <- c("statement", "question", "exclamation", "imperative", 
                    "interupted")
         sapply(types, function(x) sum(na.omit(df[, "sent.type"]==x)))
     }
-    DF2 <- data.frame(DF2, do.call("rbind", lapply(LIST, typer)))
-    rownames(DF2) <- NULL
+    DF2 <- data.frame(DF2, do.call("rbind", lapply(LIST, typer)))   
     DF2 <- DF2[order(-DF2$n.words), ]
+    #browser()
     qdaMOD <-if(is.null(grouping.var)){
         DFfreq <- data.frame(table(unlist(
             word.split(strip(text.var)))))
@@ -276,8 +283,8 @@ function(text.var, grouping.var = NULL, tot = NULL,
     HAPAX <- unlist(lapply(qdaMOD$fwl, function(x) sum(x[,2]==1)))
     ALL <- unlist(lapply(qdaMOD$fwl, function(x) sum(x[,2])))
     rankDF <- data.frame(words=ALL, group=names(DIS), 
-        n.hapax=HAPAX, n.dis=DIS, grow.rate=round(HAPAX/ALL, 
-        digits=digits), prop.dis= round(DIS/ALL, digits=digits))
+                         n.hapax=HAPAX, n.dis=DIS, grow.rate=round(HAPAX/ALL, 
+                                                                   digits=digits), prop.dis= round(DIS/ALL, digits=digits))
     rankDF <- rankDF[order(-rankDF$words),]
     rownames(rankDF) <- 1:nrow(rankDF)
     DF2 <- data.frame(DF2, rankDF[, -c(1:2)])
@@ -288,7 +295,7 @@ function(text.var, grouping.var = NULL, tot = NULL,
     DF3 <- DF3[order(DF3$n.sent), ]
     rownames(DF3) <- NULL
     names(DF3) <- c(G, names(DF3)[c(2:3)], "text.var", 
-        "sent.num", names(DF3)[-c(1:5)])
+                    "sent.num", names(DF3)[-c(1:5)])
     DF3$tot.sen <- if(is.null(tot)){
         NULL
     } else {
