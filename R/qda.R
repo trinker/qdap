@@ -203,13 +203,17 @@ function(text.var, group.vars, stopwords = NULL,
         }
     )
     COUNT <- function(x) {
-        DF <- data.frame(table(x))
-        names(DF) <- c("WORD", "FREQ")
-        DF$WORD <- as.character(DF$WORD)
-        DF$FREQ <- as.numeric(DF$FREQ)
-        DF <- DF[rev(order(DF$FREQ)), ]
-        rownames(DF) <- NULL
-        return(DF)
+        if (is.null(x) | identical(x, logical(0))) {
+            return(NA)
+        } else {
+            DF <- data.frame(table(x))
+            names(DF) <- c("WORD", "FREQ")
+            DF$WORD <- as.character(DF$WORD)
+            DF$FREQ <- as.numeric(DF$FREQ)
+            DF <- DF[rev(order(DF$FREQ)), ]
+            rownames(DF) <- NULL
+            return(DF)
+        }
     }
     freq.word.list <- lapply(word.lists2, COUNT)
     freq.stop.word.list <- lapply(stopped.word.list, COUNT)
