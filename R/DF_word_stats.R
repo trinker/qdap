@@ -48,7 +48,7 @@
 DF_word_stats <-
 function(text.var, digit.remove = FALSE, 
     apostrophe.remove = FALSE) {
-    DF <- na.omit(data.frame(text.var = text, 
+    DF <- na.omit(data.frame(text.var = text.text.var, 
         stringsAsFactors = FALSE))
     DF$n.sent <- 1:nrow(DF)
     DF$word.count <- word.count(DF$text.var, missing = 0, 
