@@ -271,7 +271,3 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
     class(o) <- "polarity_score"
     return(o)
 }
-
-print.polarity_score <- function(polarity_score) {
-    print(polarity_score$POLARITY_BY_GROUP)
-}
