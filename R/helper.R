@@ -1,7 +1,7 @@
 helper <-
-function(data, res.col="person",start.col="start",
-    end.col="end", res.colors=rainbow(40), title=NULL, box.color = "black", 
-    xlab = "Duration", ylab=NA, y2 = NULL){
+function(data, res.col = "person", start.col = "start",
+    end.col = "end", res.colors = rainbow(40), title = NULL, 
+    box.color = "black", xlab = "Duration", ylab = NA, y2 = NULL){
     op <- par("mar")
     if (is.null(y2)){
         par(mar = op + c(0,3,0,0)) 

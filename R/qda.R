@@ -204,7 +204,7 @@ function(text.var, group.vars, stopwords = NULL,
     )
     COUNT <- function(x) {
         if (is.null(x) | identical(x, logical(0))) {
-            return(NA)
+            return(NULL)  #the NULL used tobe NA and may need to be switched
         } else {
             DF <- data.frame(table(x))
             names(DF) <- c("WORD", "FREQ")

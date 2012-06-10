@@ -1,7 +1,5 @@
 textLISTER <-
-function(text.var, group.vars) {
-    reducer <- function(x) gsub(" +", " ", x)
-
+function(text.var, group.vars, rm.bracket = TRUE) {
     NAME <- if (is.list(group.vars)) {
         m <- unlist(as.character(substitute(group.vars))[-1])
         m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
@@ -14,7 +12,11 @@ function(text.var, group.vars) {
         G[length(G)]
     }
     DF <- data.frame(text.var, group.vars)
-    DF$dia2word <- Trim(as.character(bracketX(DF[, 1])))
+    if (rm.bracket) {
+        DF$dia2word <- Trim(as.character(bracketX(DF[, 1])))
+    } else {
+        DF$dia2word <- Trim(as.character(DF[, 1]))   
+    }
     DF$dia2word <- as.vector(word.split(reducer(strip(DF$dia2word))))
     X <- split(DF[, -1], DF$group.vars)
     NAMES <- names(X)
@@ -26,7 +28,7 @@ function(text.var, group.vars) {
         }
     )
     X <- lapply(X, function(x) {
-        data.frame(words=x, stringsAsFactors = FALSE)
+            data.frame(words=x, stringsAsFactors = FALSE)
         }
     )
     names(X) <- NAMES
