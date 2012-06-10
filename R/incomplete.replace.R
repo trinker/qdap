@@ -1,8 +1,8 @@
 incomplete.replace <-
 function(text.var, en.dash = FALSE,
     em.dash = FALSE) {
-    x <- gsub("[.?!]+\\.[.?!]*|[.?!]*\\.[.?!]+", 
-        "|", scrubber(text.var))
+    x <- gsub("[.?!]*\\? [.][.?!]+|[.?!]*\\. [.?!]+|[.?!]+\\. [.?!]*|
+        [.?!]+\\.[.?!]*|[.?!]*\\.[.?!]+", "|", scrubber(text.var))
     if (en.dash) {
         x <- gsub("[?]", "|", x)
     }
