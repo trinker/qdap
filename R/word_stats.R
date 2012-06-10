@@ -238,7 +238,7 @@ function(text.var, grouping.var = NULL, tot = NULL,
     
     if(any(is.na(DF$sent.type))) {
         warning("Some sentences do have standard qdap punctuation endmarks.",
-            "\nUse $mpun for list of missing endmarks.")
+            "\n  Use $mpun for list of missing endmarks.")
     }
     DF$end.mark2 <- NULL
     LIST <- split(DF, DF[, "group"])
