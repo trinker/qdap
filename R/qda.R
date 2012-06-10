@@ -203,8 +203,9 @@ function(text.var, group.vars, stopwords = NULL,
         }
     )
     COUNT <- function(x) {
-        if (is.null(x) | identical(x, logical(0))) {
-            return(NULL)  #the NULL used tobe NA and may need to be switched
+        if (is.null(x) | identical(x, character(0)) | 
+            identical(x, logical(0))) {
+            DF <- data.frame(WORD=NA, FREQ=NA)
         } else {
             DF <- data.frame(table(x))
             names(DF) <- c("WORD", "FREQ")
@@ -212,8 +213,8 @@ function(text.var, group.vars, stopwords = NULL,
             DF$FREQ <- as.numeric(DF$FREQ)
             DF <- DF[rev(order(DF$FREQ)), ]
             rownames(DF) <- NULL
-            return(DF)
         }
+        return(DF)
     }
     freq.word.list <- lapply(word.lists2, COUNT)
     freq.stop.word.list <- lapply(stopped.word.list, COUNT)
