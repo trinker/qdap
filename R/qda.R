@@ -220,29 +220,49 @@ function(text.var, group.vars, stopwords = NULL,
     freq.stop.word.list <- lapply(stopped.word.list, COUNT)
     red.freq.stop.word.list <- ncutWORDS(freq.stop.word.list, cut.n = cut.n) 
     word.lists2 <- lapply(word.lists2, function(x) {
-        comment(x) <- "bagOwords"
-        return(x)
+        if (is.null(x)){
+            return(x)
+        } else { 
+            comment(x) <- "bagOwords"
+            return(x)
         }
+    }
     )
     stopped.word.list <- lapply(stopped.word.list, function(x) {
-        comment(x) <- "bagOwords"
-        return(x)
+        if (is.null(x)){
+            return(x)
+        } else { 
+            comment(x) <- "bagOwords"
+            return(x)
         }
+    }
     )
     freq.word.list <- lapply(freq.word.list, function(x) {
-        comment(x) <- "freqList"
-        return(x)
+        if (is.null(x)){
+            return(x)
+        } else { 
+            comment(x) <- "freqList"
+            return(x)
         }
+    }
     )
     freq.stop.word.list <- lapply(freq.stop.word.list, function(x) {
-        comment(x) <- "freqList"
-        return(x)
+        if (is.null(x)){
+            return(x)
+        } else { 
+            comment(x) <- "freqList"
+            return(x)
         }
+    }
     )
     red.freq.stop.word.list <- lapply(red.freq.stop.word.list, function(x) {
-        comment(x) <- "freqList"
-        return(x)
+        if (is.null(x)){
+            return(x)
+        } else { 
+            comment(x) <- "freqList"
+            return(x)
         }
+    }
     )
     comment(word.lists2) <- "cwl"    
     comment(stopped.word.list) <- "swl"
