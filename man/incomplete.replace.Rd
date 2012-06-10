@@ -1,11 +1,12 @@
 \name{incomplete.replace}
 \alias{incomplete.replace}
+\alias{incomp}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+Replaces incomplete sentence marks with a "|"
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Replaces incomplete sentence marks (.., ..., .?, ..?, the en dash (–) and the em dash (—) with a "|"
 }
 \usage{
 incomplete.replace(text.var, en.dash = FALSE, em.dash = FALSE)
