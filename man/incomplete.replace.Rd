@@ -6,7 +6,7 @@
 Replaces incomplete sentence marks with a "|"
 }
 \description{
-Replaces incomplete sentence marks (.., ..., .?, ..?, the en dash (–) and the em dash (—) with a "|"
+Replaces incomplete sentence marks (.., ..., .?, ..?, en \& em dash etc. with "|"
 }
 \usage{
 incomplete.replace(text.var, en.dash = FALSE, em.dash = FALSE)
