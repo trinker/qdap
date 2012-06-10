@@ -232,7 +232,7 @@ function(text.var, grouping.var = NULL, tot = NULL,
         ifelse(DF$end.mark==".", "statement", 
         ifelse(DF$end.mark=="?", "question",
         ifelse(DF$end.mark=="!", "exclamation",
-        ifelse(DF$end.mark=="|", "interupted", NA))))) 
+        ifelse(DF$end.mark=="|", "incomplete", NA))))) 
     if(any(is.na(DF$sent.type))) {
         warning("Some sentences did have proper punctuation endmarks")
     }
@@ -268,7 +268,7 @@ function(text.var, grouping.var = NULL, tot = NULL,
         pspw = round(n.poly/n.words, digits=digits))
     typer <- function(df){
         types <- c("statement", "question", "exclamation", "imperative", 
-            "interupted")
+            "incomplete")
         sapply(types, function(x) sum(na.omit(df[, "sent.type"]==x)))
     }
     DF2 <- data.frame(DF2, do.call("rbind", lapply(LIST, typer)))   
