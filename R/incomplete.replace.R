@@ -5,10 +5,10 @@ function(text.var, en.dash = FALSE,
         [.?!]+\\. [.?!]*|[.?!]+\\.[.?!]*|[.?!]*\\.[.?!]+", "|", 
         scrubber(text.var))
     if (en.dash) {
-        x <- gsub("[–]", "|", x)
+        x <- gsub("\\–", "|", x)
     }
     if (em.dash) {
-        x <- gsub("[—]", "|", x)
+        x <- gsub("\\—", "|", x)
     }
     return(x)
 }
