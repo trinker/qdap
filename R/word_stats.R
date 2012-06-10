@@ -175,6 +175,7 @@
 #'     return(o)
 #'   }
 #' 
+word_stats <-
 function(text.var, grouping.var = NULL, tot = NULL,
          digit.remove = FALSE, apostrophe.remove = FALSE, digits = 3) {
     G <- if(is.null(grouping.var)) {
