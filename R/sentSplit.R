@@ -91,9 +91,12 @@
 #'   }
 #' 
 sentSplit <-
-function(dataframe, text.var, splitpoint = NULL, 
+function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,  
     rnames = 'numeric', text.place = 'original') {
     DF <- dataframe
+    if (incomplete.sub) {
+        DF[, text.var] <- incomplete.replace(DF[, text.var])
+    }
     if(length(DF) < 3) {
         DF$EXTRA1x2 <-  1:nrow(DF); DF$EXTRA2x2 <-  1:nrow(DF)
     } else {
