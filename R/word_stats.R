@@ -234,7 +234,7 @@ function(text.var, grouping.var = NULL, tot = NULL,
         ifelse(DF$end.mark=="!", "exclamation",
         ifelse(DF$end.mark=="|", "incomplete", NA))))) 
     if(any(is.na(DF$sent.type))) {
-        warning("Some sentences did have proper punctuation endmarks")
+        warning("Some sentences do have standard qdap punctuation endmarks")
     }
     DF$end.mark2 <- NULL
     LIST <- split(DF, DF[, "group"])
