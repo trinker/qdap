@@ -233,8 +233,12 @@ function(text.var, grouping.var = NULL, tot = NULL,
         ifelse(DF$end.mark=="?", "n.quest",
         ifelse(DF$end.mark=="!", "n.exclm",
         ifelse(DF$end.mark=="|", "n.incom", NA))))) 
+    mpun <- which(!DF$end.mark %in% c("!", ".", "|", "?", "*"))
+    comment(mpun) <- "These observations did not have a ! . | ? * endmark"
+    
     if(any(is.na(DF$sent.type))) {
-        warning("Some sentences do have standard qdap punctuation endmarks")
+        warning("Some sentences do have standard qdap punctuation endmarks.",
+            "\nUse $mpun for list of missing endmarks.")
     }
     DF$end.mark2 <- NULL
     LIST <- split(DF, DF[, "group"])
@@ -334,7 +338,7 @@ function(text.var, grouping.var = NULL, tot = NULL,
         }
     }
     DF2 <- DF2[, unlist(lapply(DF2, sum2))!=0]
-    o <- list(ts= DF3, gts = DF2)
+    o <- list(ts = DF3, gts = DF2, mpun = mpun )
     class(o) <- "word.stats"
     return(o)
 }
