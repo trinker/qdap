@@ -235,7 +235,6 @@ function(text.var, grouping.var = NULL, tot = NULL,
         ifelse(DF$end.mark=="|", "n.incom", NA))))) 
     mpun <- which(!DF$end.mark %in% c("!", ".", "|", "?", "*"))
     comment(mpun) <- "These observations did not have a ! . | ? * endmark"
-    
     if(any(is.na(DF$sent.type))) {
         warning("Some sentences do have standard qdap punctuation endmarks.",
             "\n  Use $mpun for list of observations with missing endmarks.")
