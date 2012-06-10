@@ -103,7 +103,7 @@ function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,
         DF
     }
     input <- as.character(substitute(text.var))
-    re <- ifelse(is.null(splitpoint), "[\\?\\.\\!]", 
+    re <- ifelse(is.null(splitpoint), "[\\?\\.\\!\\|]", 
         as.character(substitute(splitpoint)))
     RN <- as.character(substitute(rnames))
     TP <- as.character(substitute(text.place))
