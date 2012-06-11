@@ -1,6 +1,6 @@
 endf <-
 function(dataframe, text.var, report=TRUE){
-    tx <- scrubber(dataframe[, text.var])
+    tx <- scrubber(dataframe[, as.character(substitute(text.var))])
     nc <- nchar(tx)
     keep <- substring(tx, nc, nc) != "|"
     if (report) {
