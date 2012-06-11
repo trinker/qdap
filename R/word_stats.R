@@ -176,7 +176,7 @@
 #'   }
 #' 
 word_stats <-
-function(text.var, grouping.var = NULL, tot = NULL,
+function(text.var, grouping.var = NULL, tot = NULL, rm.incomplete = FALSE,
          digit.remove = FALSE, apostrophe.remove = FALSE, digits = 3) {
     G <- if(is.null(grouping.var)) {
         "all"
@@ -217,7 +217,11 @@ function(text.var, grouping.var = NULL, tot = NULL,
     Text <- as.character(text.var)
     DF <- na.omit(data.frame(group = grouping, tot.sen = t.o.t., 
         TOT = TOT(t.o.t.), text.var = Text, stringsAsFactors = FALSE))
-    DF <-endf(dataframe = DF, text.var = text.var)
+    
+    if (rm.incomplete) {
+        DF <- endf(dataframe = DF, text.var = text.var)
+    }
+    
     DF$group <- DF$group[ , drop = TRUE]
     DF$n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(DF$group, DF$n.sent)), ]
