@@ -141,7 +141,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF$word.count <- word.count(DF$text.var)
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
-    DF$read.gr <- unlist(by(DF$word.count, DF$group, g))
+    DF$read.gr <- unlist(by(DF$word.count, DF$group, partition))
     LIST <- names(which(tapply(DF$word.count, DF$group, function(x) {
             max(cumsum(x))
         }
