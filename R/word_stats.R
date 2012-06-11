@@ -217,7 +217,8 @@ function(text.var, grouping.var = NULL, tot = NULL,
     Text <- as.character(text.var)
     DF <- na.omit(data.frame(group = grouping, tot.sen = t.o.t., 
         TOT = TOT(t.o.t.), text.var = Text, stringsAsFactors = FALSE))
-    DF$group <- DF$group[ , drop=TRUE]
+    DF <-endf(dataframe = DF, text.var = text.var)
+    DF$group <- DF$group[ , drop = TRUE]
     DF$n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(DF$group, DF$n.sent)), ]
     M <- DF_word_stats(text.var = DF$text.var, digit.remove = digit.remove, 
