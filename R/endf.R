@@ -6,8 +6,9 @@ function(dataframe, text.var, warning.report=TRUE, which.mode = FALSE){
     if (which.mode) {
         return(list("NOT" = keep, "INC" = !keep))
     } else {
-        if (warning.report) {
-            warning(sum(!keep, na.rm=TRUE), 
+        nrp <- sum(!keep, na.rm=TRUE)
+        if (warning.report & nrp > 0) {
+            warning(nrp, 
             " incomplete sentence items removed\n")
         }
         return(dataframe[keep, ])

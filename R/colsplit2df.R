@@ -44,7 +44,10 @@
 colsplit2df <- 
 function(dataframe, splitcol = 1, new.names=NULL, sep=".", 
          orig.keep=FALSE, ...){
-    if(is.numeric(dataframe[, splitcol])) {
+    if (!is.dataframe(dataframe)){
+        stop("Please supply a data.frame to colsplit2df")
+    }
+    if (is.numeric(dataframe[, splitcol])) {
         stop("splitcol can not be numeric")
     }
     X <- data.frame(do.call(rbind, strsplit(as.vector(
