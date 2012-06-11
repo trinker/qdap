@@ -162,7 +162,7 @@
 #'   }
 #' 
 imperative <-
-function(dataframe, person.var, text.var, 
+function(dataframe, person.var, text.var, lock.incomplete = FALSE, 
     additional.names = NULL, warning=FALSE){
     TV <- as.character(substitute(text.var))
     original <- names(dataframe)
@@ -174,9 +174,6 @@ function(dataframe, person.var, text.var,
     } else {
         c(NAMES, tolower(as.character(additional.names)))
     }
-    load("preposition.RData")
-    load("adverb.RData")
-    load("action.verbs.RData")
     '%p%' <- function(x, y) paste(x, y, sep="")
     vcheck <- function(x, place = 1) x[place]%in% action.verbs
     pcheck <- function(x, place = 1) x[place]%in% preposition
@@ -195,7 +192,7 @@ function(dataframe, person.var, text.var,
         SL <- nchar(x)
         x <- gsub(" +", " ", x)
         y <- gsub("[^[:alnum:][:space:]'\ ,\"]", "", 
-            x, perl = T) #eliminate extra puntuatuion
+                  x, perl = T) #eliminate extra puntuatuion
         y <- gsub(",", " ,", y, perl=TRUE)      
         y <- gsub(" +", " ", y)
         y <- tolower(breaker(y))                   
@@ -203,16 +200,15 @@ function(dataframe, person.var, text.var,
         P <- "*"%p%substring(x, SL, SL)
         z <- noP%p%P
         cp <- if(sum(unlist(lapply(y, ccheck))) > 0) which(unlist(lapply(y, 
-             ccheck)))[1]+1 else length(y)+1
+            ccheck)))[1]+1 else length(y)+1
         cp2 <- if(sum(unlist(lapply(y, ccheck)))>1) which(unlist(lapply(y, 
             ccheck)))[2]+1 else length(y) +1
         ifelse(y[1]%in%c("sh", "shh", "shhh", "shhhh") & length(y)==1, z,
         ifelse(dcheck(y) & length(y)==1, z, 
         ifelse(y[1]=="duck" & length(y)==1, z, 
         ifelse(dcheck(y) & vcheck(y, 2), z, 
-        ifelse(y[1]=="let's" & ((vcheck(y, 2) & 
-            !y[2]%in%c("see", "think", "ponder"))|y[2]=="not" & 
-                vcheck(y, 3)), z,
+        ifelse(y[1]=="let's" & ((vcheck(y, 2) & !y[2]%in%c("see", "think", 
+            "ponder"))|y[2]=="not" & vcheck(y, 3)), z,
         ifelse(ncheck(y) & dcheck(y, 2) & vcheck(y, 3), z, 
         ifelse(ncheck(y) & ccheck(y, 2) & dcheck(y, 3) & vcheck(y, 4), z, 
         ifelse(vcheck(y) & !y[1]%in%c("do", "cause", "last", "like", "come", 
@@ -237,22 +233,22 @@ function(dataframe, person.var, text.var,
         ifelse(y[1]=="and" & ncheck(y, 2) & vcheck(y, 3), z,
         ifelse(y[1]=="and" & vcheck(y, 2) & ccheck(y, 3) & vcheck(y,4), z,
         ifelse(pcheck(y) & (vcheck(y[cp:length(y)])| acheck(y[cp:length(y)]) &
-            vcheck(y[cp:length(y)], 2)), z, 
+           vcheck(y[cp:length(y)], 2)), z, 
         ifelse(pcheck(y) & ncheck(y[cp:length(y)]) & 
-            (vcheck(y[cp:length(y)], 2)| ncheck(y[cp:length(y)]) &
-                acheck(y[cp:length(y)], 2) & vcheck(y[cp:length(y)], 3)), z,  
+           (vcheck(y[cp:length(y)], 2)| ncheck(y[cp:length(y)]) &
+           acheck(y[cp:length(y)], 2) & vcheck(y[cp:length(y)], 3)), z,  
         ifelse(pcheck(y) & ncheck(y[cp:length(y)]) & 
-            ccheck(y[cp:length(y)], 2) & (vcheck(y[cp:length(y)], 
-                3)| ncheck(y[cp:length(y)]) & ccheck(y[cp:length(y)], 2) & 
-                    acheck(y[cp:length(y)], 3) & vcheck(y[cp:length(y)], 4)), z, 
+           ccheck(y[cp:length(y)], 2) & (vcheck(y[cp:length(y)], 
+           3)| ncheck(y[cp:length(y)]) & ccheck(y[cp:length(y)], 2) & 
+           acheck(y[cp:length(y)], 3) & vcheck(y[cp:length(y)], 4)), z, 
         ifelse(acheck(y) & ccheck(y, 2) & pcheck(y, 3) & 
-            vcheck(y[cp2:length(y)]), z,
+           vcheck(y[cp2:length(y)]), z,
         ifelse(ncheck(y) & pcheck(y, 2) & 
-            (vcheck(y[cp:length(y)])| acheck(y[cp:length(y)]) & 
-                vcheck(y[cp:length(y)], 2)), z,  
+           (vcheck(y[cp:length(y)])| acheck(y[cp:length(y)]) & 
+            vcheck(y[cp:length(y)], 2)), z,  
         ifelse(ncheck(y) & ccheck(y, 2) & pcheck(y, 3) & 
-            (vcheck(y[cp2:length(y)])| acheck(y[cp2:length(y)]) &
-                vcheck(y[cp2:length(y)], 2)), z, x)
+           (vcheck(y[cp2:length(y)])| acheck(y[cp2:length(y)]) &
+           vcheck(y[cp2:length(y)], 2)), z, x)
         )))))))))))))))))))))))))))))
     }
     WARN <- function(x){
@@ -266,25 +262,40 @@ function(dataframe, person.var, text.var,
             vcheck(y, 4) , TRUE, FALSE)
         i <- if(sum(a,b)>0) "ebonics"
         j <- if(sum(y%in%",")>2) {
-                 "+3 commas"
-             } else {
-                 if(sum(y%in%",")>1){
-                     "2 commas"
-                 } else {
-                     NULL
-                 }
-             }
+            "+3 commas"
+        } else {
+            if(sum(y%in%",")>1){
+                "2 commas"
+            } else {
+                NULL
+            }
+        }
         k <- if(sum(y%in%"read")>0) "read"
         d <- c(i, j, k)
-    d <- ifelse(length(d)==0, "-", paste(d, collapse=" & "))
-    d <- ifelse(substring(x, SL, SL)=="?", "-", d)
-    return(d)
+        d <- ifelse(length(d)==0, "-", paste(d, collapse=" & "))
+        d <- ifelse(substring(x, SL, SL)=="?", "-", d)
+        return(d)
     } 
-    DF2$text <- lapply(as.character(text), IMP)
+    endf2 <- function(tx){
+        nc <- nchar(tx)
+        y <- substring(tx, nc, nc) == "|"
+        if (is.na(y)) {
+            y <- FALSE
+        }
+        return(y)
+    }
+    DF2$text <- lapply(as.character(text), function(x) {
+        if (lock.incomplete & endf2(x)){
+            x
+        } else {
+            IMP(x)
+        }
+    }
+    )
     names(DF2)[which(names(DF2)%in%"text")] <- TV
     DF2$a <- NULL; DF2$b <- NULL
     DF2 <- DF2[, original]
-    if(warning){
+    if(warning) {
         DF2$warnings <- unlist(lapply(text, WARN))
     }
     return(DF2)
