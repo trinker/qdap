@@ -44,7 +44,7 @@
 colsplit2df <- 
 function(dataframe, splitcol = 1, new.names=NULL, sep=".", 
          orig.keep=FALSE, ...){
-    if (!is.dataframe(dataframe)){
+    if (!is.data.frame(dataframe)){
         stop("Please supply a data.frame to colsplit2df")
     }
     if (is.numeric(dataframe[, splitcol])) {
