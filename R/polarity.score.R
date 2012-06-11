@@ -150,7 +150,8 @@
 polarity.score <-
 function (text.var, grouping.var = NULL, positive.list = positive.words, 
           negative.list = negative.words, negation.list = negation.words, 
-          amplification.list = increase.amplification.words, digits = 3) {
+          amplification.list = increase.amplification.words, 
+          rm.incomplete = FALSE, digits = 3, ...) {
     grouping.vars <- grouping.var
     Trim <- function(x) gsub("^\\s+|\\s+$", "", x)
     unblank <- function(x) {
@@ -250,6 +251,9 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
     }
     DF <- data.frame(group = grouping.vars, x2[, c("text.var", 
         "wc", "polarity")])
+    if (rm.incomplete) {
+        DF <- endf(dataframe = DF, text.var = text.var, ...)
+    }
     na.instruct <- function(x, y) {
         LIST <- split(x, y)
         z <- unlist(sapply(LIST, function(x) !all(is.na(x[, "text.var"])), 

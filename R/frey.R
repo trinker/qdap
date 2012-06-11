@@ -165,7 +165,8 @@
 #'   }
 #' 
 frey <-
-function(text.var, grouping.var = NULL, labels = "automatic") {
+function(text.var, grouping.var = NULL, labels = "automatic", 
+    rm.incomplete = FALSE, ...) {
     G <- if(is.null(grouping.var)) {
              "all"
          } else {
@@ -195,6 +196,9 @@ function(text.var, grouping.var = NULL, labels = "automatic") {
     text <- as.character(text.var)
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
+    if (rm.incomplete) {
+        DF <- endf(dataframe = DF, text.var = text.var, ...)
+    }
     DF$word.count <- word.count(DF$text.var, missing = 0)
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]

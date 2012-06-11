@@ -78,7 +78,7 @@
 #'   }
 #' 
 coleman_liau <-
-function(text.var, grouping.var = NULL) {
+function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     G <- if(is.null(grouping.var)) {
              "all"
          } else {
@@ -108,6 +108,9 @@ function(text.var, grouping.var = NULL) {
     text <- as.character(text.var)
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
+    if (rm.incomplete) {
+        DF <- endf(dataframe = DF, text.var = text.var, ...)
+    }
     DF$word.count <- word.count(DF$text.var, missing = 0, 
         digit.remove = FALSE)
     i <- as.data.frame(table(DF$group))
