@@ -223,7 +223,7 @@ function(text.var, grouping.var = NULL, tot = NULL, rm.incomplete = FALSE,
       ))
     }
     if (is.dp(text.var=Text)){
-      warning("Some rows contain double punctuation.",
+      warning("\nSome rows contain double punctuation.",
           "\n  Suggested use of sentSplit function")
     }
     DF <- na.omit(data.frame(group = grouping, tot.sen = t.o.t., 
