@@ -216,6 +216,7 @@ function(text.var, grouping.var = NULL, tot = NULL, rm.incomplete = FALSE,
     }
     Text <- as.character(text.var)
     is.dp <- function(text.var) {
+      punct <- c(".", "?", "!", "|")
       any(sapply(strsplit(text.var, NULL), function(x) {
         sum(x %in% punct) > 1
       }
