@@ -215,6 +215,15 @@ function(text.var, grouping.var = NULL, tot = NULL, rm.incomplete = FALSE,
         as.character(tot)
     }
     Text <- as.character(text.var)
+    is.dp <- function(text.var) {
+      any(sapply(strsplit(text.var, NULL), function(x) {
+        sum(x %in% punct) > 1
+      }
+      ))
+    }
+    if (is.dp(v)){
+      warning("Some rows contain double punctuation: Suggested use of sentSplit function")
+    }
     DF <- na.omit(data.frame(group = grouping, tot.sen = t.o.t., 
         TOT = TOT(t.o.t.), text.var = Text, stringsAsFactors = FALSE))
     
