@@ -48,20 +48,34 @@
 #' 
 symbol_change <-
 function(text.var, dollar = TRUE, percent = TRUE, 
-    pound = TRUE, at = TRUE, and = TRUE) {
-    
-    sch <- function(text, dollar = TRUE, percent = TRUE, pound = TRUE, 
-        at = TRUE, and = TRUE) {
-            x <- ifelse(percent == TRUE, gsub("%", " percent ", 
-                text), text)
-            x <- ifelse(dollar == TRUE, gsub("$", " dollars ", x, 
-                fixed = TRUE), x)
-            x <- ifelse(pound == TRUE, gsub("#", " number ", x, 
-                fixed = TRUE), x)
-            x <- ifelse(and == TRUE, gsub("&", " and ", x, fixed = TRUE), x)
-            x <- ifelse(at == TRUE, gsub("@", " at ", x, fixed = TRUE), x)
-            gsub(" +", " ", x)
+         pound = TRUE, at = TRUE, and = TRUE, with = TRUE) {
+  
+  sch <- function(text.var, dollar, percent, pound, 
+                  at, and, with) {
+    if(percent) {
+      text.var <- gsub("%", " percent ", text.var)
     }
-    unlist(lapply(text.var, function(text) sch(text, dollar = dollar, 
-        percent = percent, pound = pound, at = at, and = and)))
+    if (dollar) {
+      text.var <- gsub("$", " dollars ", text.var, fixed = TRUE)
+    }
+    if (pound) {
+      text.var <- gsub("#", " number ", text.var, fixed = TRUE)
+    }
+    if (and) {
+      text.var <- gsub("&", " and ", text.var, fixed = TRUE)
+    }
+    if (at) {
+      text.var <- gsub("@", " at ", text.var, fixed = TRUE)
+    }
+    if (with) {
+      text.var <- gsub("w/o", " without ", text.var, fixed = TRUE)
+    }
+    if (with) {
+      text.var <- gsub("w/", " with ", text.var, fixed = TRUE)
+    }
+    return(gsub(" +", " ", text.var))
+  }
+  sch(text.var, dollar = dollar, 
+      percent = percent, pound = pound, at = at, and = and, with = with)
 }
+
