@@ -24,4 +24,6 @@
 #' gsub("\s+", " ", gsub("\n|\t", " ", text))
 #' 
 clean <-
-function(text) gsub("\\s+", " ", gsub("\n|\t", " ", text))
+function(text) {
+    gsub("\\s+", " ", gsub("\r|\n|\t", " ", text))
+}
