@@ -1,5 +1,11 @@
 multigsub <-
-function(pattern, replacement, text.var, ...){
+function(pattern, replacement, text.var, spacer = TRUE, ...){
+    if (spacer) {
+        spc <- function(y) {
+            paste0(" ", y, " ")
+        }
+        replacement <- spc(replacement)
+    }
     key <- data.frame(pat=pattern, rep=replacement, 
         stringsAsFactors = FALSE)
     msubs <-function(K, x, ...){
@@ -7,9 +13,9 @@ function(pattern, replacement, text.var, ...){
                 x <<- gsub(K[i, 1], K[i, 2], x, ...)
             }
         )
-        return(x)
+       return(gsub(" +", " ", x))
     }
-    x <- msubs(K=key, x=text.var, ...)
+    x <- Trim(msubs(K=key, x=text.var, ...))
     return(x)
 }
 
