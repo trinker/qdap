@@ -49,33 +49,9 @@
 symbol_change <-
 function(text.var, dollar = TRUE, percent = TRUE, 
          pound = TRUE, at = TRUE, and = TRUE, with = TRUE) {
-  
-  sch <- function(text.var, dollar, percent, pound, 
-                  at, and, with) {
-    if(percent) {
-      text.var <- gsub("%", " percent ", text.var)
-    }
-    if (dollar) {
-      text.var <- gsub("$", " dollars ", text.var, fixed = TRUE)
-    }
-    if (pound) {
-      text.var <- gsub("#", " number ", text.var, fixed = TRUE)
-    }
-    if (and) {
-      text.var <- gsub("&", " and ", text.var, fixed = TRUE)
-    }
-    if (at) {
-      text.var <- gsub("@", " at ", text.var, fixed = TRUE)
-    }
-    if (with) {
-      text.var <- gsub("w/o", " without ", text.var, fixed = TRUE)
-    }
-    if (with) {
-      text.var <- gsub("w/", " with ", text.var, fixed = TRUE)
-    }
-    return(gsub(" +", " ", text.var))
-  }
-  sch(text.var, dollar = dollar, 
-      percent = percent, pound = pound, at = at, and = and, with = with)
+  x <- c(dollar, percent, pound, at, and, with, with)
+  mgsub(pattern = c("%", "$", "#", "&", "@", "w/o", "w/")[x], 
+        replacement = c("percent", "dollar", "pound", "and", "at", 
+        "without", "with")[x], text.var = text.var, fixed = TRUE)
 }
 
