@@ -1,5 +1,5 @@
 multigsub <-
-function(pattern, replacement, x, ...){
+function(pattern, replacement, text.var, ...){
     key <- data.frame(pat=pattern, rep=replacement, 
         stringsAsFactors = FALSE)
     msubs <-function(K, x, ...){
@@ -9,7 +9,7 @@ function(pattern, replacement, x, ...){
         )
         return(x)
     }
-    x <- msubs(K=key, x=x, ...)
+    x <- msubs(K=key, x=text.var, ...)
     return(x)
 }
 
