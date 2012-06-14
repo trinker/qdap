@@ -80,8 +80,8 @@ function (text.var, grouping.var=NULL, match.string, ignore.case = FALSE,
                 grouping.var = grouping.var, ignore.case = ignore.case)
     names(x)[1] <- NAME
     y <- termco.p(tco = x, output = output, digits = digits)
-    z <- termco.rnp(x, y)
     if (is.null(grouping.var)){
+      z <- termco.rnp(x, y)
       znull <- as.character(z$DF)
       names(znull) <- rownames(z)
       z <- t(as.data.frame(znull))
@@ -98,9 +98,10 @@ function (text.var, grouping.var=NULL, match.string, ignore.case = FALSE,
         x[, -c(1:2)] <- replacer(x[, -c(1:2)], 0, zero.replace)
         y[, -c(1:2)] <- replacer(y[, -c(1:2)], 0, zero.replace)
       }
+      z <- termco.rnp(x, y)
       h <- paste(zero.replace, "(", zero.replace, ")", sep = "")
-      z[, -c(1:2)] <- lapply(z[, -c(1:2)], function(x) replacer(x, 
-                                                                h, zero.replace))
+      z[, -c(1:2)] <- lapply(z[, -c(1:2)], function(x) replacer(x,
+          h, zero.replace))
     }
     o <- list(raw = x, prop = y, rnp = z, zero_replace = zero.replace,
               output = output, digits = digits)
