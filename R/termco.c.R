@@ -80,7 +80,7 @@
 #'     return(o)
 #'   }
 #' 
-terco.c <-
+termco.c <-
 function(termco.d.object, combined.columns, new.name, 
          zero.replace = NULL, lazy.term = TRUE, elim.old = TRUE){ 
   if (!class(termco.d.object) %in% c("termco_d", "termco_c")){
