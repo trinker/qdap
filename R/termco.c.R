@@ -96,7 +96,6 @@ function(termco.d.object, combined.columns, new.name,
     paster <- function(x) {
       paste0("term(", x, ")")
     }
-    
     if (lazy.term) {
       if (!is.list(combined.columns)){
         if(substring(combined.columns[[1]][1], 1, 5)!= "term("){
@@ -105,7 +104,7 @@ function(termco.d.object, combined.columns, new.name,
       } else {
         if(substring(combined.columns[[1]][1], 1, 5)!= "term("){
           combined.columns <- lapply(combined.columns, 
-                                     paster) 
+              paster) 
         }
       }
     }
@@ -119,7 +118,7 @@ function(termco.d.object, combined.columns, new.name,
     combined.columns2 <- combined.columns
     cc <- function(X, Y) names(Y)[X]
     if (!is.list(combined.columns)){
-      combined.columns <- cc(combined.columns, x)            
+        combined.columns <- cc(combined.columns, x)            
     } else {
       combined.columns <- lapply(combined.columns, function(x2) 
         cc(X=x2, x)) 
@@ -148,7 +147,6 @@ function(termco.d.object, combined.columns, new.name,
   cm <- comment(termco.d.object)
   y2 <- termco.p(x, output = cm[1], digits=as.numeric(cm[2]))
   if (any(new.name %in% xcheck) & elim.old){
-    #   names(x)[(ncol(x) - length(new.name) + 1):ncol(x)] <- new.name
     names(x2)[(ncol(x2) - length(new.name) + 1):ncol(x2)] <- new.name
     names(y2)[(ncol(y2) - length(new.name) + 1):ncol(y2)] <- new.name
   } else {
