@@ -80,9 +80,9 @@
 #'     return(o)
 #'   }
 #' 
-termco.c <-
+terco.c <-
 function(termco.d.object, combined.columns, new.name, 
-    zero.replace = NULL, lazy.term = TRUE, elim.old = TRUE){ 
+         zero.replace = NULL, lazy.term = TRUE, elim.old = TRUE){ 
   if (!class(termco.d.object) %in% c("termco_d", "termco_c")){
     stop("termco.d.object must be a termco.d.object or termco.c.object")
   }
@@ -108,7 +108,7 @@ function(termco.d.object, combined.columns, new.name,
     }
     if (lazy.term) {
       if (!is.list(combined.columns)){
-        if(substring(combined.columns[[1]][1], 1, 5)!= "term("){
+        if (substring(combined.columns[[1]][1], 1, 5)!= "term(") {
           combined.columns <- paster(combined.columns, x)
         }
       } else {
@@ -134,6 +134,8 @@ function(termco.d.object, combined.columns, new.name,
         cc(X=x2, x)) 
     }
   }
+  
+  
   if (is.list(combined.columns)){
     trx <- function(i) {  
       x <- transform(x, new.name2 = rowSums(x[, combined.columns[[i]]]), 
@@ -162,18 +164,22 @@ function(termco.d.object, combined.columns, new.name,
   } else {
     if (any(new.name %in% xcheck) & !elim.old){
       new.name <- paste0(new.name, ".2")
-      #       names(x)[(ncol(x) - length(new.name) + 1):ncol(x)] <- new.name
       names(x2)[(ncol(x2) - length(new.name) + 1):ncol(x2)] <- new.name
       names(y2)[(ncol(y2) - length(new.name) + 1):ncol(y2)] <- new.name
     }
   }
-  p <- data.frame(sapply(x2[, -1], function(x) 
-    as.numeric(as.character(x))), check.names=FALSE)
-  x2 <- data.frame(x2[, 1, drop=FALSE], p, check.names=FALSE)
-  p <- data.frame(sapply(y2[, -1], function(x) 
-    as.numeric(as.character(x))), check.names=FALSE)
-  y2 <- data.frame(y2[, 1, drop=FALSE], p, check.names=FALSE)
-  trnp <- termco.rnp(x2, y2)
+  if (is.numeric(zero.replace)){
+    p <- data.frame(sapply(x2[, -1], function(x) 
+      as.numeric(as.character(x))), check.names=FALSE)
+    x2 <- data.frame(x2[, 1, drop=FALSE], p, check.names=FALSE)
+    p <- data.frame(sapply(y2[, -1], function(x) 
+      as.numeric(as.character(x))), check.names=FALSE)
+    y2 <- data.frame(y2[, 1, drop=FALSE], p, check.names=FALSE)
+  } 
+  trnp <- termco.rnp(x, y2)
+  if (!is.numeric(zero.replace)) {
+    y2 <- y
+  }
   DF <- data.frame(sapply(trnp, Trim), check.names=FALSE)
   DF <- replacer(DF, "0(0)", with = zero.replace)
   DF <- replacer(DF, "0(0.00)", with = zero.replace)
@@ -182,6 +188,3 @@ function(termco.d.object, combined.columns, new.name,
   class(o) <- "termco_c"
   return(o)
 }
-    
-
-
