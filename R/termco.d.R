@@ -81,10 +81,8 @@ function (text.var, grouping.var=NULL, match.string, ignore.case = FALSE,
     names(x)[1] <- NAME
     y <- termco.p(tco = x, output = output, digits = digits)
     if (zero.replace != 0) {
-        x[, -c(1:2)] <- lapply(x[, -c(1:2)], function(x) replacer(x, 
-            0, zero.replace))
-        y[, -c(1:2)] <- lapply(y[, -c(1:2)], function(x) replacer(x,
-            0, zero.replace))
+      x[, -c(1:2)] <- replacer(x[, -c(1:2)], 0, zero.replace)
+      y[, -c(1:2)] <- replacer(y[, -c(1:2)], 0, zero.replace)
     }
     z <- termco.rnp(x, y)
     if (is.null(grouping.var)){
