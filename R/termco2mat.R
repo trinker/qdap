@@ -17,6 +17,9 @@
 termco2mat <-
 function (dataframe, drop.wc = TRUE, short.colnames = TRUE, rm.zerocol = FALSE, 
     no.quote = TRUE, transform = TRUE) {
+    if (!is.data.frame(dataframe)) {
+        stop("Please supply a data.frame to termco2mat")
+    }
     ind <- if (drop.wc) {
         1:2
     } else {
