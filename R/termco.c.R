@@ -82,25 +82,25 @@
 #' 
 termco.c <-
 function(termco.d.object, combined.columns, new.name, 
-         zero.replace = NULL, lazy.term = TRUE, elim.old = TRUE){ 
-  if (!class(termco.d.object) %in% c("termco_d", "termco_c")){
+         zero.replace = NULL, lazy.term = TRUE, elim.old = TRUE) { 
+  if (!class(termco.d.object) %in% c("termco_d", "termco_c")) {
     stop("termco.d.object must be a termco.d.object or termco.c.object")
   }
   x <- termco.d.object$raw
   if (termco.d.object$zero_replace != 0){
     x <- replacer(x, termco.d.object$zero_replace, 0)
     x <- data.frame(x[, 1, drop =FALSE], 
-                    sapply(x[, -1, drop =FALSE], function(x) 
-                      as.numeric(as.character((x)))),
-                    check.names = FALSE)
+      sapply(x[, -1, drop =FALSE], function(x) 
+        as.numeric(as.character((x)))),
+        check.names = FALSE)
   }
   if (is.null(zero.replace)) {
     zero.replace <- termco.d.object$zero_replace
   }
   xcheck <- names(x)
   y <- termco.d.object$prop
-  if (!is.numeric(unlist(combined.columns))){
-    cc <- function(X, Y){
+  if (!is.numeric(unlist(combined.columns))) {
+    cc <- function(X, Y) {
       which(names(Y) %in% X)
     }
     paster <- function(x) {
@@ -112,9 +112,8 @@ function(termco.d.object, combined.columns, new.name,
           combined.columns <- paster(combined.columns, x)
         }
       } else {
-        if(substring(combined.columns[[1]][1], 1, 5)!= "term("){
-          combined.columns <- lapply(combined.columns, 
-                                     paster) 
+        if(substring(combined.columns[[1]][1], 1, 5)!= "term(") {
+          combined.columns <- lapply(combined.columns, paster) 
         }
       }
     }
@@ -127,25 +126,23 @@ function(termco.d.object, combined.columns, new.name,
   } else {
     combined.columns2 <- combined.columns
     cc <- function(X, Y) names(Y)[X]
-    if (!is.list(combined.columns)){
+    if (!is.list(combined.columns)) {
       combined.columns <- cc(combined.columns, x)            
     } else {
       combined.columns <- lapply(combined.columns, function(x2) 
         cc(X=x2, x)) 
     }
   }
-  
-  
   if (is.list(combined.columns)){
     trx <- function(i) {  
       x <- transform(x, new.name2 = rowSums(x[, combined.columns[[i]]]), 
-                     check.names=FALSE)
+        check.names=FALSE)
       names(x)[ncol(x)] <- new.name[i]
       return(x)
     }
     invisible(lapply(seq_along(combined.columns), function(inp) {
-      x <<- trx(inp)
-    }
+        x <<- trx(inp)
+      }
     )) 
   } else {
     x <- transform(x, new.name = rowSums(x[, combined.columns]), 
@@ -157,7 +154,7 @@ function(termco.d.object, combined.columns, new.name,
   } 
   x2 <- replacer(x, with = zero.replace)
   y2 <- termco.p(x, output = termco.d.object$output, 
-                 digits=termco.d.object$digits)
+    digits=termco.d.object$digits)
   if (any(new.name %in% xcheck) & elim.old){
     names(x2)[(ncol(x2) - length(new.name) + 1):ncol(x2)] <- new.name
     names(y2)[(ncol(y2) - length(new.name) + 1):ncol(y2)] <- new.name
@@ -184,7 +181,7 @@ function(termco.d.object, combined.columns, new.name,
   DF <- replacer(DF, "0(0)", with = zero.replace)
   DF <- replacer(DF, "0(0.00)", with = zero.replace)
   o <- list(raw = x2, prop = y2, rnp = DF, zero_replace = zero.replace,
-            output = termco.d.object$output, digits = termco.d.object$digits)
+    output = termco.d.object$output, digits = termco.d.object$digits)
   class(o) <- "termco_c"
   return(o)
 }
