@@ -97,8 +97,8 @@ function (text.var, grouping.var=NULL, match.string, ignore.case = FALSE,
         z[, -c(1:2)] <- lapply(z[, -c(1:2)], function(x) replacer(x, 
             h, zero.replace))
     }
-    o <- list(raw = x, prop = y, rnp = z)
-    comment(o) <- c(output, digits)
+    o <- list(raw = x, prop = y, rnp = z, zero_replace = zero.replace,
+              output = output, digits = digits)
     class(o) <- "termco_d"
     return(o)
 }
