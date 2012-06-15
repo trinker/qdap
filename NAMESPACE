@@ -1,4 +1,6 @@
-export(affix)                        
+export(adjacency_matrix)
+export(adjmat)
+export(affix)
 export(affixFind)                   
 export(all.words)                    
 export(automated_readability_index) 
