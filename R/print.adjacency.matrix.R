@@ -4,5 +4,5 @@ function(adjacency.matrix) {
     print(adjacency.matrix$shared, na.print="", quote=FALSE)
     cat("\n\n")
     cat("Summed Overlap:\n\n")
-    print(adjacency.matrix$sums)
+    print(adjacency.matrix$summed_occurrences)
 }
