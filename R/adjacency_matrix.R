@@ -29,7 +29,7 @@ function(matrix.obj) {
     Z <- Z2 <- t(Y) %*% Y                    
     Z2[!lower.tri(Z2)] <- NA
     Z2 <- Z2[-1, -ncol(Z2)]
-    o <- list(boolean = Y, adjacency = Z, shared = Z2, summed_occurrences = colSums(Y))
+    o <- list(boolean = Y, adjacency = Z, shared = Z2, sum = colSums(Y))
     class(o) <- "adjacency.matrix"
     return(o)
 }
