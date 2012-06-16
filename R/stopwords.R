@@ -50,12 +50,12 @@ function (textString, stopwords = Top25Words, unlist = FALSE,
         unlist(strsplit(tolower(Trim(textString)), " ")) %w/o% 
             tolower(Trim(stopwords))
     }
+    if (strip) {
+      textString <- strip(textString)
+    }
     x <- sapply(textString, function(x) SW(x, Stopwords), USE.NAMES = names)
     if (unlist) {
         x <- unlist(x)
-    }
-    if (strip) {
-        x <- strip(x)
     }
     if (unique) {
         x <- unique(x)
