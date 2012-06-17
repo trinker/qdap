@@ -12,6 +12,10 @@ function(text.var, group.vars, rm.bracket = TRUE) {
         G[length(G)]
     }
     DF <- data.frame(text.var, group.vars)
+    if (NAME == "") {
+      NAME <- "all"
+      names(DF)[2] <- "group.vars"
+    }
     if (rm.bracket) {
         DF$dia2word <- Trim(as.character(bracketX(DF[, 1])))
     } else {
