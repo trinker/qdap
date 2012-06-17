@@ -135,7 +135,7 @@
 #'   }
 #' 
 qda <- 
-function(text.var, grouping.var, stopwords = NULL, 
+function(text.var, grouping.var, stopwords = NULL, aplphabetical = FALSE,
          cut.n = 20, cap = TRUE, cap.list=NULL, cap.I=TRUE) {
   upper <- function(x) paste(substring(x, 1, 1), 
                              substring(x, 2, nchar(x)), sep="")
@@ -277,6 +277,17 @@ function(text.var, grouping.var, stopwords = NULL,
   o <- list(cwl = word.lists2, swl = stopped.word.list, 
             fwl = freq.word.list, fswl = freq.stop.word.list, 
             rfswl = red.freq.stop.word.list)
+  
+  if (alpahbetical) {
+    asort <- function(dat, col=1) {
+      dat2 <- dat[order(dat[, col]), ]
+      names(dat2) <- NULL
+      return(dat2)
+    }
+    o <- lapply(o, asort)
+  }    
+  
+  
   class(o) <- "qda"
   return(o)
 }
