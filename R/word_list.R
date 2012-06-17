@@ -284,7 +284,9 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
       names(dat2) <- NULL
       return(dat2)
     }
-    o <- lapply(o, asort)
+    o[["fwl"]] <- asort(o[["fwl"]])
+    o[["fswl"]] <- asort(o[["fswl"]])
+    o[["rfswl"]] <- asort(o[["rfswl"]])
   }    
   
   
