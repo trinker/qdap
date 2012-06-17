@@ -135,9 +135,8 @@
 #'   }
 #' 
 qda <- 
-function(text.var, grouping.var = NULL, stopwords = NULL, 
+function(text.var, grouping.var, stopwords = NULL, 
          cut.n = 20, cap = TRUE, cap.list=NULL, cap.I=TRUE) {
-  browser()    
   upper <- function(x) paste(substring(x, 1, 1), 
                              substring(x, 2, nchar(x)), sep="")
   Sw1 <- stopwords[!substring(stopwords, 1, 1) %in% LETTERS]
