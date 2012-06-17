@@ -1,11 +1,12 @@
 \name{xnoy}
 \alias{xnoy}
-%- Also NEED an '\alias' for EACH other topic documented here.
+Find the elements in x not found in y
 \title{
-Determine the Unique Elements of Vector X Compared to Vector Y
+%%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+\alias{xnoy}
+Find the elements in x not found in y
 }
 \usage{
 xnoy(x, y)
@@ -51,7 +52,9 @@ xnoy(x, y)
 
 ## The function is currently defined as
 function (x, y) 
-x[!x \%in\% y]
+{
+    x[!x \%in\% y]
+  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
