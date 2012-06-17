@@ -96,7 +96,7 @@
 #'   }
 #' 
 word.freq.df <-
-function(text.var, grouping.var, stopwords = NULL,
+function(text.var, grouping.var = NULL, stopwords = NULL,
     margins = FALSE, output = "raw", digits = 2){
     grouping.var <- if (is.list(grouping.var) & length(grouping.var)>1) {
         apply(data.frame(grouping.var), 1, function(x){
