@@ -1,12 +1,11 @@
 \name{xnoy}
 \alias{xnoy}
-Find the elements in x not found in y
+%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+Finds the items in x not found in y
 }
 \description{
-\alias{xnoy}
-Find the elements in x not found in y
+Finds the items in x not found in y
 }
 \usage{
 xnoy(x, y)
