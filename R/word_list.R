@@ -282,4 +282,4 @@ function(text.var, grouping.var = NULL, stopwords = NULL,
   return(o)
 }
 
-word.list <- qda
+word_list <- qda
