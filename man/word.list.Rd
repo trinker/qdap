@@ -1,4 +1,5 @@
-\name{qda}
+\name{word.list}
+\alias{qda}
 \alias{qda}
 \alias{print.qda}
 
