@@ -16,4 +16,4 @@ function(str, mat){
   } else {
     a <- findit(mat)
   }
-  
+} 
