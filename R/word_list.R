@@ -274,22 +274,19 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
   comment(freq.word.list) <- "fwl" 
   comment(freq.stop.word.list) <- "fswl"
   comment(red.freq.stop.word.list) <- "rfswl"
+  if (alphabetical) {
+    asort <- function(dat, col=1) {
+      dat2 <-dat[order(dat[, col]), ]
+      rownames(dat2) <- NULL
+      return(dat2)
+    }
+    freq.word.list <- lapply(freq.word.list, asort)
+    freq.stop.word.list <- lapply(freq.stop.word.list, asort)
+    red.freq.stop.word.list <- lapply(red.freq.stop.word.list, asort)
+  }  
   o <- list(cwl = word.lists2, swl = stopped.word.list, 
             fwl = freq.word.list, fswl = freq.stop.word.list, 
             rfswl = red.freq.stop.word.list)
-  
-  if (alphabetical) {
-    asort <- function(dat, col=1) {
-      dat2 <- dat[order(dat[, col]), ]
-      names(dat2) <- NULL
-      return(dat2)
-    }
-    o[["fwl"]] <- asort(o[["fwl"]])
-    o[["fswl"]] <- asort(o[["fswl"]])
-    o[["rfswl"]] <- asort(o[["rfswl"]])
-  }    
-  
-  
   class(o) <- "qda"
   return(o)
 }
