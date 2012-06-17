@@ -135,7 +135,7 @@
 #'   }
 #' 
 qda <- 
-function(text.var, grouping.var = NULL, stopwords = NULL, aplphabetical = FALSE,
+function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
          cut.n = 20, cap = TRUE, cap.list=NULL, cap.I=TRUE) {
   upper <- function(x) paste(substring(x, 1, 1), 
                              substring(x, 2, nchar(x)), sep="")
