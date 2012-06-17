@@ -136,7 +136,7 @@
 #' 
 qda <- 
 function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
-         cut.n = 20, cap = TRUE, cap.list=NULL, cap.I=TRUE) {
+         cut.n = 20, cap = TRUE, cap.list=NULL, cap.I=TRUE, rm.bracket = TRUE) {
   upper <- function(x) paste(substring(x, 1, 1), 
                              substring(x, 2, nchar(x)), sep="")
   Sw1 <- stopwords[!substring(stopwords, 1, 1) %in% LETTERS]
@@ -174,7 +174,8 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
     G <- as.character(substitute(grouping.var))
     G[length(G)]
   }
-  word.lists1 <- textLISTER(text.var = text.var, group.vars = group.var)
+  word.lists1 <- textLISTER(text.var = text.var, group.vars = group.var,
+                   rm.bracket = rm.bracket)
   words.UNLISTED <- lapply(word.lists1, function(x) {
     y <- unlist(x)
     names(y) <- NULL
