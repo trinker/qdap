@@ -45,7 +45,7 @@ function(text.var, rm.bracket = TRUE, capitalize = TRUE,
     return(txt2)
 }
 
-stem.words 
-<- function(...) {
+stem.words <- 
+function(...) {
   stemmer(c(...),capitalize = FALSE, warn = FALSE)
 }
