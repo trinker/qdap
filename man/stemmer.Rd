@@ -1,8 +1,7 @@
 \name{stemmer}
 \alias{stemmer}
-Stems a vector of text strings
 \title{
-%%  ~~function to do ... ~~
+Stems a vector of text strings
 }
 \description{
 Stems a vector of text strings

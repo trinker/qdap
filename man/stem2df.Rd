@@ -1,8 +1,7 @@
 \name{stem2df}
 \alias{stem2df}
-Stems a vector of text strings and outputs a data frame
 \title{
-%%  ~~function to do ... ~~
+Stems a vector of text strings and outputs a data frame
 }
 \description{
 Input a data frame with a text variable and outputs the data frame with the stemmed text variable appended
