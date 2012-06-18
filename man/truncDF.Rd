@@ -1,5 +1,6 @@
-\name{truncDF}
-\alias{truncDF}
+\name{truncdf}
+\alias{truncdf}
+\alias{htruncdf}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Truncate a Data Frame
