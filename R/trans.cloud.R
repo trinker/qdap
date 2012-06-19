@@ -207,11 +207,11 @@
 trans.cloud <-
 function(word.list, stem = FALSE, target.words = NULL, 
     stopwords = NULL, min.freq = 1, caps = TRUE, caps.list = NULL, 
-    random.order = FALSE, rot.per = 0.5, cloud.colors = NULL, 
+    random.order = FALSE, rot.per = 0.0, cloud.colors = NULL, 
     cloud.font = NULL, title.font = NULL, title.color = NULL, 
     title.padj = -4.5, title.location = 3, title.cex = NULL,
     proportional = FALSE, max.word.size = NULL, min.word.size = 0.5,
-    legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03)) {
+    legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03), ...) {
     suppressWarnings(require(wordcloud))
     PRO <- if(length(word.list)>1) {
             max(sapply(word.list, length))
@@ -341,5 +341,5 @@ function(word.list, stem = FALSE, target.words = NULL,
         font = cloud.font, title.font = title.font, title.cex = title.cex,
         title.color = title.color, side = title.location, legend = legend, 
         legend.cex = legend.cex, legend.location = legend.location, 
-        text = names(word.list)[i]))
+        text = names(word.list)[i]), ...)
 }
