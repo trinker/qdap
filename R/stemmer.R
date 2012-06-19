@@ -36,10 +36,9 @@ function(text.var, rm.bracket = TRUE, capitalize = TRUE,
                 NA
             } else {
                 nc <- nchar(string)
-                paste0(toupper(substr(string, 1, 1)), substr(string, 2, nc))
+                paste0(toupper(substring(string, 1, 1)), substr(string, 2, nc))
             }
         }
-        #txt2 <- ifelse(is.natxt)
         txt2 <- unlist(lapply(Trim(txt2), capit))
     }
     return(txt2)
