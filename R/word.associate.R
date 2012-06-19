@@ -2,8 +2,8 @@ word.associate <-
 function(text.var, grouping.var = NULL, match.string, 
     stopwords = NULL, network.graph = FALSE, wordcloud = FALSE, 
     cloud.colors = c("black", "gray"), nw.label.cex =.8, 
-    nw.label.colors = c("blue", "gray70"), nw.layout = NULL, 
-    nw.edge.color = "gray95", ...){
+    nw.label.colors = c("blue", "gray65"), nw.layout = NULL, 
+    nw.edge.color = "gray90", ...){
     if (!is.list(match.string)) {
         match.string <- list(match.string)
     }
