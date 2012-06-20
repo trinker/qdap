@@ -112,7 +112,7 @@ function(text.var, grouping.var = NULL, match.string,
     lapply(seq_along(ads), function(i) gigraph(ads[[i]], 
         nw.label.cex = nw.label.cex, 
         nw.layout = nw.layout, nw.edge.col = nw.edge.color, 
-        nw.label.cols = nw.label.colors, mat[[i]]))
+        nw.label.cols = nw.label.colors, match.string[[i]]))
     }
     if (wordcloud) {
         lapply(seq_along(freqlist), function(i) trans.cloud(
