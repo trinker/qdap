@@ -209,7 +209,7 @@ function(word.list, stem = FALSE, target.words = NULL,
     stopwords = NULL, min.freq = 1, caps = TRUE, caps.list = NULL, 
     random.order = FALSE, rot.per = 0.0, cloud.colors = NULL, 
     cloud.font = NULL, title.font = NULL, title.color = NULL, 
-    title.padj = -4.5, title.location = 3, title.cex = NULL,
+    title.padj = -4.5, title.location = 3, title.cex = NULL, title.names = NULL,
     proportional = FALSE, max.word.size = NULL, min.word.size = 0.5,
     legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03), ...) {
     suppressWarnings(require(wordcloud))
@@ -234,7 +234,8 @@ function(word.list, stem = FALSE, target.words = NULL,
     CLOUD <- function(words, stem, target.words, stopwords, min.freq, 
         word.size, word.size2, random.order, cloud.colors, caps, 
         caps.list, title.color, text, side, PRO, proportional, font, 
-        title.font, title.cex, legend, legend.cex, legend.location) {
+        title.font, title.cex, legend, legend.cex, legend.location,
+        title.names) {
         target.words <- if(is.list(target.words) & length(target.words)==1) {
             unlist(target.words)
         } else {
@@ -333,6 +334,11 @@ function(word.list, stem = FALSE, target.words = NULL,
         }
     }  #end of CLOUD function
     word.list <- if (!is.list(word.list)) list(word.list) else word.list
+    if(!is.null(title.names)){
+        namers <- title.names
+    } else { 
+        namers <- names(word.list)
+    }
     lapply(seq_along(word.list), function(i) CLOUD(words = word.list[[i]], 
         stem = stem, target.words = target.words, stopwords = stopwords,
         proportional = proportional, PRO = PRO, word.size2 = max.word.size, 
@@ -341,5 +347,7 @@ function(word.list, stem = FALSE, target.words = NULL,
         font = cloud.font, title.font = title.font, title.cex = title.cex,
         title.color = title.color, side = title.location, legend = legend, 
         legend.cex = legend.cex, legend.location = legend.location, 
-        text = names(word.list)[i]), ...)
+        text = namers[i], ...)
+    )
 }
+
