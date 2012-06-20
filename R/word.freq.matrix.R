@@ -74,14 +74,14 @@ function(wfdf = NULL, text.var = NULL,
             }
         }
 
-        x2 <- wfdf[, -1]
+        x2 <- wfdf[, -1, drop = FALSE]
         rownames(x2) <- wfdf[, 1]
         x2 <- as.matrix(x2)
     } else {
         if (!is.null(text.var) & ! is.null(grouping.var)) {
             wfdf <- word.freq.df(text.var = text.var, grouping.var = grouping.var, 
                  stopwords = stopwords) 
-            x2 <- wfdf[, -1]
+            x2 <- wfdf[, -1, drop = FALSE]
             rownames(x2) <- wfdf[, 1]
             x2 <- as.matrix(x2)
         } else {
