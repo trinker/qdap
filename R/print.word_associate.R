@@ -11,7 +11,6 @@ function(word_associate) {
     options(width = 10000)
     lapply(seq_along(word.associate2), 
         function(x){ 
-        if(nrow(word.associate2[[x]]) > 0) {
             cat("\n")
             print(noquote(nms[x]))
             if (nrow(word.associate2[[x]]) > 1){
@@ -19,7 +18,6 @@ function(word_associate) {
             } else {
                 print(word.associate2[[x]])
             }
-        }
         }
     )
     options(width = wid)

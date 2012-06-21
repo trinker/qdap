@@ -1,9 +1,10 @@
 word.associate <-
 function(text.var, grouping.var = NULL, text.unit = NULL, match.string, 
     stopwords = NULL, network.plot = FALSE, wordcloud = FALSE, 
-    cloud.colors = c("black", "gray"), title.color = NULL, nw.label.cex =.8, 
-    nw.label.colors = c("blue", "gray65"), nw.layout = NULL, 
-    nw.edge.color = "gray90", ...){
+    cloud.colors = c("black", "gray"), title.color = "blue", nw.label.cex =.8, 
+    title.padj = title.padj, nw.label.colors = c("blue", "gray65"), nw.layout = NULL, 
+    nw.edge.color = "gray90", nw.title.padj = NULL, nw.title.location = NULL, 
+    title.font = NULL, title.cex = NULL, ...){
     G <- if(is.null(grouping.var)) {
         "all"
     } else {
@@ -110,9 +111,10 @@ function(text.var, grouping.var = NULL, text.unit = NULL, match.string,
         }
         RETb <- lapply(locs2, function(x) {DF[x, ]}) 
         names(RETb) <- name <- lapply(match.string, 
-            function(x) collapse(capitalizer(strip(x)), "_"))       
+            function(x) collapse(capitalizer(strip(x)), "_"))  
+        RETb <- RETb[!sapply(RETb, function(x) nrow(x) == 0)] 
         RET2 <- RET <- lapply(locs, function(x) {DF[x, ]})
-        names(RET) <- name <- lapply(match.string, 
+        names(RET)  <- lapply(match.string, 
             function(x) collapse(capitalizer(strip(x)), "_"))[!keeps]
         mats <- lapply(RET2, function(x) {
                wfm(grouping.var = Trim(x[, "group"]), text.var = x[, "text"],
@@ -124,15 +126,17 @@ function(text.var, grouping.var = NULL, text.unit = NULL, match.string,
             }
         )
         lapply(seq_along(RET), function(i){
-                names(RET[[i]])[1] <<- ifelse(TU == "all", "sentences", TU)
+                names(RETb[[i]])[1] <<- ifelse(TU == "all", "sentences", TU)
             }
         )
         ord <- function(x) x[order(x[, 1]), ]
-        lapply(seq_along(RET), function(i){
-                RET[[i]] <<- ord(RET[[i]])
+        lapply(seq_along(RETb), function(i){
+                RETb[[i]] <<- ord(RETb[[i]])
             }
         )
-        freqlist <- lapply(RET, function(x) qda(x$text, stopwords = stopwords))
+        freqlist <- lapply(RETb, function(x) {
+            qda(x$text, stopwords = stopwords)
+        })
         name <- strsplit(as.character(name), "_", fixed=TRUE)
         o <- unlist(list(obs = RETb, search.terms = name, freqlist = freqlist, 
             freqmat = mats, adjmat = mats2), recursive = FALSE)
@@ -150,7 +154,7 @@ function(text.var, grouping.var = NULL, text.unit = NULL, match.string,
             an <-  which(substring(names(o), 1, 6) == "adjmat")
             ads <- lapply(an, function(i) o[[i]][["adjacency"]])
             gigraph <- function(am, mat, nw.label.cex, nw.edge.col, nw.label.cols, 
-                nw.layout) {
+                nw.layout, text, nw.title.padj, side, title.font, title.cex) {
                 g <- igraph::graph.adjacency(am, weighted=TRUE, mode ='undirected') 
                 g <- igraph::simplify(g)
                 igraph::V(g)$label <- igraph::V(g)$name
@@ -164,17 +168,29 @@ function(text.var, grouping.var = NULL, text.unit = NULL, match.string,
                 }
                 if (dev.interactive()) dev.new()
                 plot(g, layout=nw.layout, vertex.size=0, vertex.color="white")
+                if (is.null(nw.title.padj)){
+                    nw.title.padj = -4.5
+                }
+                if (is.null(nw.title.location)){
+                    nw.title.location = 3
+                }
+                if (!is.null(title.color)) {
+                    mtext(text, side = nw.title.location, padj = nw.title.padj, 
+                    col = title.color, family = title.font, cex = title.cex)
+                }
             }
         lapply(seq_along(ads), function(i) gigraph(ads[[i]], 
-            nw.label.cex = nw.label.cex, 
+            nw.label.cex = nw.label.cex, text = title.names, #text = names(ads)[i], 
             nw.layout = nw.layout, nw.edge.col = nw.edge.color, 
-            nw.label.cols = nw.label.colors, match.string[[i]]))
+            nw.label.cols = nw.label.colors, match.string[[i]],
+            nw.title.padj = nw.title.padj, side = nw.title.location, title.font = title.font, title.cex = title.cex))
         }
         if (wordcloud) {
-            lapply(seq_along(freqlist), function(i) trans.cloud(
-               word.list = freqlist[[i]]$swl, target.words = name[[i]], 
+            lapply(seq_along(freqlist), function(i) {
+               trans.cloud(word.list = freqlist[[i]]$swl, target.words = name[[i]], 
                stopwords = stopwords, cloud.colors = cloud.colors,
-               title.color = title.color, title.names = title.names, ...))
+               title.color = title.color, title.names = title.names, ...)
+            })
         }
         return(o)    
     }
