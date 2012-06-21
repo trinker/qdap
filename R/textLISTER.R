@@ -21,7 +21,14 @@ function(text.var, group.vars, rm.bracket = TRUE) {
     } else {
         DF$dia2word <- Trim(as.character(DF[, 1]))   
     }
-    DF$dia2word <- as.vector(word.split(reducer(strip(DF$dia2word))))
+    if (nrow(DF) == 1) {
+      DF <- do.call("rbind", list(DF, DF))
+      DF[2, 3] <- "void"
+      DF$dia2word <- as.vector(word.split(reducer(strip(DF$dia2word))))
+      DF <- DF[1, ]
+    } else {
+      DF$dia2word <- as.vector(word.split(reducer(strip(DF$dia2word))))
+    }    
     X <- split(DF[, -1], DF$group.vars)
     NAMES <- names(X)
     X <- lapply(seq_along(X), function(x) as.data.frame(X[[x]])[, 2])
