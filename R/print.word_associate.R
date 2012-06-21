@@ -9,6 +9,11 @@ function(word_associate) {
     wid <- options()$width
     options(width = 10000)
     lapply(seq_along(word.associate2), 
-        function(x) print(left.just(word.associate2[[x]], 2)))
+           function(x){ 
+             print(noquote(names(word_associate)[x]))
+             print(left.just(word.associate2[[x]], 2))
+             cat("\n")
+           }
+    )
     options(width = wid)
 }
