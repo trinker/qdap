@@ -90,6 +90,7 @@ export(termco.rnp)
 export(termco2mat)
 export(tester)
 export(textLISTER)
+export(ncutwords)#internal delete from here later
 export(TOT)                          
 export(trans.cloud)                 
 export(Trim)                         
