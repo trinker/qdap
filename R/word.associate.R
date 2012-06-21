@@ -1,6 +1,6 @@
 word.associate <-
 function(text.var, grouping.var = NULL, text.unit = NULL, match.string, 
-    stopwords = NULL, network.graph = FALSE, wordcloud = FALSE, 
+    stopwords = NULL, network.plot = FALSE, wordcloud = FALSE, 
     cloud.colors = c("black", "gray"), title.color = NULL, nw.label.cex =.8, 
     nw.label.colors = c("blue", "gray65"), nw.layout = NULL, 
     nw.edge.color = "gray90", ...){
@@ -145,7 +145,7 @@ function(text.var, grouping.var = NULL, text.unit = NULL, match.string,
                 o[["warning"]] <- Trim(unlist(match.string))[check]
             }
         }  
-        if (network.graph) {
+        if (network.plot) {
             require(igraph)
             an <-  which(substring(names(o), 1, 6) == "adjmat")
             ads <- lapply(an, function(i) o[[i]][["adjacency"]])
