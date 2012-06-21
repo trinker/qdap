@@ -16,4 +16,5 @@ function(str, mat){
   } else {
     a <- findit(mat)
   }
+  return(a)
 } 
