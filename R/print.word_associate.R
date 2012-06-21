@@ -6,14 +6,21 @@ function(word_associate) {
         rownames(word_associate[[x]]) <- NULL
         return(word_associate[[x]])
     })
+    nms <- names(word_associate)[y]
     wid <- options()$width
     options(width = 10000)
     lapply(seq_along(word.associate2), 
-           function(x){ 
-             print(noquote(names(word_associate)[x]))
-             print(left.just(word.associate2[[x]], 2))
-             cat("\n")
-           }
+        function(x){ 
+        if(nrow(word.associate2[[x]]) > 0) {
+            cat("\n")
+            print(noquote(nms[x]))
+            if (nrow(word.associate2[[x]]) > 1){
+                print(left.just(word.associate2[[x]], 2))
+            } else {
+                print(word.associate2[[x]])
+            }
+        }
+        }
     )
     options(width = wid)
 }
