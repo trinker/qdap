@@ -4,7 +4,6 @@ function(text.var, grouping.var = NULL, text.unit = NULL, match.string,
     cloud.colors = c("black", "gray"), title.color = NULL, nw.label.cex =.8, 
     nw.label.colors = c("blue", "gray65"), nw.layout = NULL, 
     nw.edge.color = "gray90", ...){
-
     G <- if(is.null(grouping.var)) {
         "all"
     } else {
@@ -88,10 +87,20 @@ function(text.var, grouping.var = NULL, text.unit = NULL, match.string,
         if (TU %in% c("all", "tot")) {
             DF$group <- as.numeric(as.character(DF$group))
         }
-        locs <- unique(term.find(str =  DF$text, mat = match.string))
+        locs2 <- locs <- unique(term.find(str =  DF$text, mat = match.string))
         if (length(locs) == 1) {
-            if (identical(as.character(locs), "integer(0)")) {
-                return(NULL)
+            if (!is.list(locs)) {
+                if (any(identical(locs, integer(0)), length(locs) < 2)) {
+                    return(NULL)
+                } else {
+                    keeps <- rep(FALSE, seq_along(locs))
+                }
+            } else {
+                if (any(identical(locs[[1]], integer(0)), length(locs[[1]]) < 2)) {
+                    return(NULL)
+                } else {
+                    keeps <- rep(FALSE, seq_along(locs))
+                }                
             }
         } else {
             keeps <- sapply(seq_along(locs), function(i){
@@ -99,6 +108,9 @@ function(text.var, grouping.var = NULL, text.unit = NULL, match.string,
             })
             locs <- lapply(which(!keeps), function(i) locs[[i]])
         }
+        RETb <- lapply(locs2, function(x) {DF[x, ]}) 
+        names(RETb) <- name <- lapply(match.string, 
+            function(x) collapse(capitalizer(strip(x)), "_"))       
         RET2 <- RET <- lapply(locs, function(x) {DF[x, ]})
         names(RET) <- name <- lapply(match.string, 
             function(x) collapse(capitalizer(strip(x)), "_"))[!keeps]
@@ -122,7 +134,7 @@ function(text.var, grouping.var = NULL, text.unit = NULL, match.string,
         )
         freqlist <- lapply(RET, function(x) qda(x$text, stopwords = stopwords))
         name <- strsplit(as.character(name), "_", fixed=TRUE)
-        o <- unlist(list(obs = RET, search.terms = name, freqlist = freqlist, 
+        o <- unlist(list(obs = RETb, search.terms = name, freqlist = freqlist, 
             freqmat = mats, adjmat = mats2), recursive = FALSE)
         if (!is.null(stopwords)) {
             o[["stopwords"]] <- stopwords
