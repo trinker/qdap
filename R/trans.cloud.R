@@ -206,33 +206,33 @@
 #' 
 trans.cloud <-
 function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE, 
-    target.words = NULL, expand.target = TRUE, stopwords = NULL, min.freq = 1, 
-    caps = TRUE, caps.list = NULL, random.order = FALSE, rot.per = 0.0, 
-    cloud.colors = NULL, cloud.font = NULL, title.font = NULL, title.color = NULL, 
+    target.words = NULL, expand.target = TRUE,
+    stopwords = NULL, min.freq = 1, caps = TRUE, caps.list = NULL, 
+    random.order = FALSE, rot.per = 0.0, cloud.colors = NULL, 
+    cloud.font = NULL, title.font = NULL, title.color = NULL, 
     title.padj = -4.5, title.location = 3, title.cex = NULL, title.names = NULL,
     proportional = FALSE, max.word.size = NULL, min.word.size = 0.5,
     legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03), ...) {
     suppressWarnings(require(wordcloud))
-
     if (!is.null(text.var)){
         word.list <- qda(text.var = text.var, 
             grouping.var = grouping.var)[["cwl"]]
     }
-    PRO <- if(length(word.list)>1) {
-            max(sapply(word.list, length))
-        } else {
-            length(word.list)
-        }
-    word.list <- if(is.null(comment(word.list))){
-        word.list
+    if(length(word.list)>1) {
+        PRO <- max(sapply(word.list, length))
+    } else {
+        PRO <- length(word.list)
+    }
+    if(is.null(comment(word.list))){
+        word.list <- word.list
     } else {
         if (comment(word.list) %in% "bagOwords"){
-            word.list
+            word.list <- word.list
         } else {
             if (comment(word.list) %in% "freqList") {
-                freqTab2words(word.list)
+                word.list <- freqTab2words(word.list)
             } else {
-                lapply(word.list, qda.handler)
+                word.list <- lapply(word.list, qda.handler)
             }
         }
     }
@@ -247,26 +247,30 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
             target.words
         }
         TWstatus <- is.vector(target.words) & !is.list(target.words)
-        target.words <- if (is.vector(target.words) & !is.list(target.words)) {
-            list(target.words)
-        } else {
-            target.words
+        if (is.vector(target.words) & !is.list(target.words)) {
+            target.words <- list(target.words)
         } 
         if ((length(target.words) + 1) != length(cloud.colors) & 
             !is.null(cloud.colors)) {
             stop("length(cloud.colors) should = length(target.words) + 1")
         }       
-        df <- if (stem) {
+        if (stem) {
             require(tm);require(Snowball)
-            tm::stemDocument(words)
-        } else {
-            words
+             df <- tm::stemDocument(words)
+        }  else {
+            df <- words
         }
-        df <- if (!is.null(stopwords)) df[!df %in% stopwords] else df
-        df <- if (caps) capitalizer(df, caps.list) else df
+        if (!is.null(stopwords)) {
+            df <- df[!df %in% stopwords] 
+        }
+        if (caps) {
+            df <- capitalizer(df, caps.list) 
+        }
         df2 <- as.data.frame(table(df), stringsAsFactors = FALSE)
         names(df2) <- c("word", "freq")
-        df2$freq <- if(proportional) floor((PRO/length(words))*df2$freq) else df2$freq
+        if(proportional) {
+            df2$freq <- floor((PRO/length(words))*df2$freq) 
+        }
         COL1 <- if (stem & !is.null(target.words)) {
             sapply(target.words, tm::stemDocument)
         } else {
@@ -296,10 +300,10 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
             ncc <- length(cloud.colors)
            if (TWstatus) {
                 text2color(words = df2$word, recode.words = list(c(COL1)), 
-                    colors = cloud.colors[-ncc], nomatch = cloud.colors[ncc])
+                    colors = cloud.colors)
             } else {
                 text2color(words = df2$word, recode.words = COL1, 
-                    colors = cloud.colors[-ncc], nomatch = cloud.colors[ncc])
+                    colors = cloud.colors)
             }
         }
         Scale <- if(!is.null(word.size2)) {
@@ -351,4 +355,5 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
         text = namers[i], ...)
     )
 }
+
 
