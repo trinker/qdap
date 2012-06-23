@@ -205,14 +205,19 @@
 #'   }
 #' 
 trans.cloud <-
-function(word.list, stem = FALSE, target.words = NULL, 
-    stopwords = NULL, min.freq = 1, caps = TRUE, caps.list = NULL, 
-    random.order = FALSE, rot.per = 0.0, cloud.colors = NULL, 
-    cloud.font = NULL, title.font = NULL, title.color = NULL, 
+function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE, 
+    target.words = NULL, expand.target = TRUE, stopwords = NULL, min.freq = 1, 
+    caps = TRUE, caps.list = NULL, random.order = FALSE, rot.per = 0.0, 
+    cloud.colors = NULL, cloud.font = NULL, title.font = NULL, title.color = NULL, 
     title.padj = -4.5, title.location = 3, title.cex = NULL, title.names = NULL,
     proportional = FALSE, max.word.size = NULL, min.word.size = 0.5,
     legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03), ...) {
     suppressWarnings(require(wordcloud))
+
+    if (!is.null(text.var)){
+        word.list <- qda(text.var = text.var, 
+            grouping.var = grouping.var)[["cwl"]]
+    }
     PRO <- if(length(word.list)>1) {
             max(sapply(word.list, length))
         } else {
@@ -262,7 +267,6 @@ function(word.list, stem = FALSE, target.words = NULL,
         df2 <- as.data.frame(table(df), stringsAsFactors = FALSE)
         names(df2) <- c("word", "freq")
         df2$freq <- if(proportional) floor((PRO/length(words))*df2$freq) else df2$freq
-
         COL1 <- if (stem & !is.null(target.words)) {
             sapply(target.words, tm::stemDocument)
         } else {
@@ -286,25 +290,16 @@ function(word.list, stem = FALSE, target.words = NULL,
         } else {
             NULL
         }
-        text2color <- function(text, words, colors, nomatch) {
-            lookup <- lapply(seq_along(words), function(n) cbind(words[[n]], 
-                colors[n]))
-            lookup <- do.call("rbind.data.frame", lookup)
-            lookup <- apply(lookup, 2, as.character)
-            recode <- lookup[match(text, lookup[, 1]), 2]
-            recode[is.na(recode)] <- nomatch
-            return(recode)
-        }
         COL <- if (is.null(cloud.colors)) {
             rep("black", length(df2$word))
         } else {
             ncc <- length(cloud.colors)
            if (TWstatus) {
-                text2color(text = df2$word, words = list(c(COL1)), colors = cloud.colors[-ncc], 
-                    nomatch = cloud.colors[ncc])
+                text2color(words = df2$word, recode.words = list(c(COL1)), 
+                    colors = cloud.colors[-ncc], nomatch = cloud.colors[ncc])
             } else {
-                text2color(text = df2$word, words = COL1, colors = cloud.colors[-ncc], 
-                    nomatch = cloud.colors[ncc])
+                text2color(words = df2$word, recode.words = COL1, 
+                    colors = cloud.colors[-ncc], nomatch = cloud.colors[ncc])
             }
         }
         Scale <- if(!is.null(word.size2)) {
@@ -333,11 +328,17 @@ function(word.list, stem = FALSE, target.words = NULL,
             par(mar = c(5, 4, 4, 2) + 0.1, xpd = TRUE)
         }
     }  #end of CLOUD function
-    word.list <- if (!is.list(word.list)) list(word.list) else word.list
+    if (!is.list(word.list)) {
+        word.list <- list(word.list) 
+    } 
     if(!is.null(title.names)){
         namers <- title.names
     } else { 
         namers <- names(word.list)
+    }
+    if (expand.target) {
+        uni <- unique(unlist(word.list))
+        target.words <- lapply(term.find(uni, target.words), function(i) uni[i])
     }
     lapply(seq_along(word.list), function(i) CLOUD(words = word.list[[i]], 
         stem = stem, target.words = target.words, stopwords = stopwords,
