@@ -2,7 +2,7 @@ network.plot <-
 function(adj.mat.object, target.words = NULL, label.cex = .8, 
     edge.color = gray70, label.colors = c("black", "gray50"), layout, 
     title.name = NULL, title.padj, title.location = 3, title.font, 
-    title.cex = .8, log.labels = FALSE, title.color = "black") {
+    title.cex = .8, log.labels = FALSE, title.color = "black", plot = TRUE) {
     suppressWarnings(require(igraph))
     if (class(adj.mat.object) == "adjacency.matrix") {
        adj.mat.object <- adj.mat.object[["adjacency"]]
@@ -25,16 +25,19 @@ function(adj.mat.object, target.words = NULL, label.cex = .8,
     if (is.null(layout)) {
         layout <- igraph::layout.fruchterman.reingold(g)
     }
-    if (dev.interactive()) dev.new()
-    plot(g, layout=layout, vertex.size=0, vertex.color="white")
-    if (is.null(title.padj)){
-        title.padj = -4.5
+    if (plot) {
+        if (dev.interactive()) dev.new()
+        plot(g, layout=layout, vertex.size=0, vertex.color="white")
+        if (is.null(title.padj)){
+            title.padj = -4.5
+        }
+        if (is.null(title.location)){
+            title.location = 3
+        }
+        if (!is.null(title.name)) {
+            mtext(text = title.name, side = title.location, padj = title.padj, 
+            col = title.color, family = title.font, cex = title.cex)
+        }
     }
-    if (is.null(title.location)){
-        title.location = 3
-    }
-    if (!is.null(title.name)) {
-        mtext(text = title.name, side = title.location, padj = title.padj, 
-        col = title.color, family = title.font, cex = title.cex)
-    }
+    invisible(g)
 }
