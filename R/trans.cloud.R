@@ -250,7 +250,7 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
         } 
         if ((length(target.words) + 1) != length(cloud.colors) & 
             !is.null(cloud.colors)) {
-            stop("length(cloud.colors) should = length(target.words) + 1")
+                warning("length(cloud.colors) should = length(target.words) + 1")
         }       
         if (stem) {
             require(tm);require(Snowball)

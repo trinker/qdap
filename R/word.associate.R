@@ -211,15 +211,15 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
             an <-  which(substring(names(o), 1, 6) == "adjmat")
             ads <- lapply(an, function(i) o[[i]][["adjacency"]])
             lapply(seq_along(ads), function(i) {
-                network.plot(ads[[i]], nw.label.cex = nw.label.cex, 
-                title.name = namesL2[[i]], nw.layout = nw.layout, 
-                nw.edge.col = nw.edge.color, 
-                nw.label.cols = nw.label.colors,
+                network.plot(ads[[i]], label.cex = nw.label.cex, 
+                title.name = namesL2[[i]], layout = nw.layout, 
+                edge.color = nw.edge.color, 
+                label.colors = nw.label.colors,
                 log.labels = nw.label.proportional, 
-                nw.title.padj = nw.title.padj, 
-                nw.title.location = nw.title.location, 
+                title.padj = nw.title.padj, 
+                title.location = nw.title.location, 
                 title.font = title.font, title.cex = title.cex, 
-                COLTERMSi = WSEARCH[[i]])
+                target.words = WSEARCH[[i]])
              })
         }
         if (wordcloud) {
