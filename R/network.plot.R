@@ -1,14 +1,17 @@
 network.plot <-
-function(adj.mat, mat, label.cex, edge.color, 
+function(adj.mat.object, mat, label.cex, edge.color, 
     label.colors, layout, title.name = NULL, title.padj, 
     title.location = 3, title.font, title.cex = .8, target.words,
     log.labels = FALSE, title.color = "black") {
     suppressWarnings(require(igraph))
-    g <- igraph::graph.adjacency(adj.mat, weighted=TRUE, mode ='undirected') 
+    if (class(adj.mat.object) == "adjacency.matrix") {
+       adj.mat.object <- adj.mat.object[["adjacency"]]
+    }
+    g <- igraph::graph.adjacency(adj.mat.object, weighted=TRUE, mode ='undirected') 
     g <- igraph::simplify(g)
     igraph::V(g)$label <- igraph::V(g)$name
     igraph::V(g)$degree <- igraph::degree(g)
-    SUMS <- diag(adj.mat)
+    SUMS <- diag(adj.mat.object)
     if (!log.labels) {
         igraph::V(g)$label.cex <- label.cex
     } else {
