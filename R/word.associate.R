@@ -1,10 +1,17 @@
 word.associate <-
-function(text.var, grouping.var = NULL, text.unit = NULL, match.string, 
-    stopwords = NULL, network.plot = FALSE, wordcloud = FALSE, 
-    cloud.colors = c("black", "gray"), title.color = "blue", nw.label.cex =.8, 
-    title.padj = title.padj, nw.label.colors = c("blue", "gray65"), nw.layout = NULL, 
-    nw.edge.color = "gray90", nw.title.padj = NULL, nw.title.location = NULL, 
+function(text.var, grouping.var = NULL, text.unit = "sentence", match.string, 
+    extra.terms = NULL, target.exclude = NULL, stopwords = NULL, 
+    network.plot = FALSE, wordcloud = FALSE, cloud.colors = c("black", "gray"), 
+    title.color = "blue", nw.label.cex = .8, title.padj = title.padj, 
+    nw.label.colors = NULL, nw.layout = NULL, nw.edge.color = "gray90", 
+    nw.label.proportional = TRUE, nw.title.padj = NULL, nw.title.location = NULL, 
     title.font = NULL, title.cex = NULL, ...){
+    if(is.null(nw.label.colors)) {
+        nw.label.colors <- cloud.colors
+    }
+    if(is.null(cloud.colors)) {
+        cloud.colors <- nw.label.colors
+    }
     G <- if(is.null(grouping.var)) {
         "all"
     } else {
@@ -21,8 +28,8 @@ function(text.var, grouping.var = NULL, text.unit = NULL, match.string,
     grouping <- if(is.null(grouping.var)){
         rep("all", length(text.var))
     } else {
-        if(is.list(grouping.var) & length(grouping.var)>1) {
-             apply(data.frame(grouping.var), 1, function(x){
+    if(is.list(grouping.var) & length(grouping.var)>1) {
+         apply(data.frame(grouping.var), 1, function(x){
                      if (any(is.na(x))){
                          NA
                      }else{
@@ -34,90 +41,155 @@ function(text.var, grouping.var = NULL, text.unit = NULL, match.string,
             unlist(grouping.var)
         } 
     }
-    word.as <- 
-    function(text.var, text.unit, match.string, stopwords, title.names,
-        network.graph, wordcloud, cloud.colors, title.color, nw.label.cex, 
-        nw.label.colors, nw.layout, nw.edge.color, ...){
-        if (!is.list(match.string)) {
-            match.string <- list(match.string)
-        }
-        TU <- if(is.null(text.unit)) {
-            "all"
+    if (!is.list(match.string)) {
+        match.string <- list(match.string)
+    }
+    TU <- suppressWarnings(if(is.null(text.unit)) {
+        "row"
+    } else {
+        if (is.list(text.unit)) {
+            m <- unlist(as.character(substitute(text.unit))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), 
+                function(x) x[length(x)])
+                paste(m, collapse="&")
         } else {
-            if (is.list(text.unit)) {
-                m <- unlist(as.character(substitute(text.unit))[-1])
-                m <- sapply(strsplit(m, "$", fixed=TRUE), 
-                    function(x) x[length(x)])
-                    paste(m, collapse="&")
+            if (is.vector(text.unit) & length(text.unit) == 1 & 
+                text.unit == "sentence") {
+                    "sentence"
             } else {
                 TU <- as.character(substitute(text.unit))
                 TU[length(TU)]
             }
         }
-        texting <- if(is.null(text.unit)){
-            as.factor(1:length(text.var))
+    })
+    texting <- if(is.null(text.unit)){
+        as.factor(1:length(text.var))
+    } else {
+        if(is.list(text.unit) & length(text.unit)>1) {
+            apply(data.frame(text.unit), 1, function(x){
+                if(any(is.na(x))){
+                    NA
+                }else{
+                    paste(x, collapse = ".")
+                     }
+                }
+            )
         } else {
-            if(is.list(text.unit) & length(text.unit)>1) {
-                apply(data.frame(text.unit), 1, function(x){
-                    if(any(is.na(x))){
-                        NA
-                    }else{
-                        paste(x, collapse = ".")
-                         }
-                    }
-                )
+            if (TU == "tot") {
+                sapply(strsplit(as.character(text.unit), ".", 
+                    fixed=TRUE), function(x) x[[1]])
             } else {
-                if (TU == "tot") {
-                    sapply(strsplit(as.character(text.unitr), ".", 
-                        fixed=TRUE), function(x) x[[1]])
+                if (TU %in% c("sentence", "sent")) {
+                    as.factor(1:length(text.var))
                 } else {
                     unlist(text.unit)
                 }
-            } 
+            }
         } 
-        DF <- data.frame(group = texting, text = as.character(text.var), 
-            stringsAsFactors = FALSE)
-        DF <- na.omit(DF)    
-        LIST <- split(DF, DF$group)
+    } 
+    DF <- data.frame(row = seq_along(text.var), group = grouping, unit = texting,
+        text = as.character(text.var), stringsAsFactors = FALSE)    
+    LOG <- lapply(match.string, function(x) {
+            apply(term.find(DF$text, mat = x, logic = TRUE), 1, any)
+        } 
+    )
+    DF2 <- data.frame(do.call("cbind", LOG))
+    names(DF2) <- paste0("list", 1:ncol(DF2))
+    DF2[, "any"] <- apply(DF2, 1, any)
+    DF3 <- data.frame(DF, DF2)
+    LDF <- lapply(4:ncol(DF3), function(i) DF3[DF3[, i], 1:3])
+    names(LDF) <- names(DF3)[5:ncol(DF3)]
+    ALN <- 5:ncol(DF3)
+    LN <- 5:c(ncol(DF3)-1)
+    shortDF <- function(dat, col) {
+        unlist(lapply(split(dat, dat[, 3]), function(x) {
+            rep(any(x[, col]), nrow(x))
+        }))
+    }
+    DFsl <- lapply(ALN, function(i) na.omit(DF3[shortDF(DF3, i), 1:4]))
+    names(DFsl) <- colnames(DF3)[-c(1:4)]
+    Terms <- qdap::stopwords(text.var, stopwords = NULL, unlist = TRUE, 
+          strip = TRUE, unique = TRUE, names = FALSE)     
+    TM <- lapply(match.string, function(x) term.find(Terms, 
+        mat = x))
+    COLTERMS <- lapply(TM, function(i) Terms[i])
+    if (!is.null(target.exclude)) {
+        COLTERMS <- lapply(COLTERMS, function(x) x[!x %in% target.exclude])
+    }
+    if (!is.null(stopwords)) {
+        check <- unique(unlist(COLTERMS)) %in% Trim(unlist(stopwords))
+        if (any(check)) {
+            stop("match.string word(s) match stopword(s)\n",
+                "  overlap terms: ",
+                 paste(unique(unlist(COLTERMS))[check], collapse = " "))
+        }
+    }
+    ECOLTERMS <- NULL
+    if (!is.null(extra.terms)) {
+        UET <- unlist(extra.terms, recursive = FALSE)
+        ECOLTERMS <- lapply(UET, function(x) term.find(Terms, mat = x))
+        ECOLTERMS <- lapply(ECOLTERMS, function(i) Terms[i])
+        if (!is.null(target.exclude)) {
+            ECOLTERMS <- lapply(ECOLTERMS, function(x) x[!x %in% target.exclude])
+        }
+    }
+    if (wordcloud | network.plot) {
+        if (!is.null(extra.terms)) {
+            nm <- length(match.string)
+            enm <- length(UET)
+            ratio <- enm/nm
+            snm <- 1:nm
+            WSEARCH <- lapply(1:nm , function(i) unlist(list(COLTERMS[i], 
+                ECOLTERMS[seq(ratio-1, enm, by=ratio)[i]:seq(ratio, enm, 
+                by=ratio)[i]]), recursive=F))
+        } else {
+            WSEARCH <- COLTERMS
+        }
+        if (!is.null(target.exclude)) {
+            WSEARCH <- lapply(WSEARCH, function(x) x[!x %in% target.exclude])
+        }
+    }
+    word.as <- function(dat, stopwords, search_terms = WSEARCH,
+        network.graph, wordcloud, cloud.colors, title.color, nw.label.cex, 
+        nw.label.colors, nw.layout, nw.edge.color, LN, nw.label.proportional,
+        ECOLTERMS, ...){  
+        LIST <- lapply(LN, function(x) dat[dat[, x], 2:4])
+        LISTb <- lapply(LN, function(x) dat[dat[, x], 1:4])
+        if (sum(sapply(LISTb, function(x) nrow(x))) == 0) {
+            return(NULL)
+        }
+        lapply(seq_along(LISTb), function(i){
+            names(LISTb[[i]])[2:3] <<- c(G, TU)
+        })
+        LISTb <- LISTb[!sapply(LISTb, function(x) nrow(x) == 0)]
+        names(LIST) <- paste0(unique(na.omit(LIST[[1]][, "group"])),
+            "_list", seq_along(LIST))
+        LIST <- LIST[!sapply(LIST, is.null)]
+        LIST <- LIST[!sapply(LIST, function(x) nrow(x) == 0)]
+        namesL1 <- names(LIST)
+        LIST2 <- LIST[sapply(LIST, function(x) nrow(x) > 1)]
         collapse <-function(x, sep = " ") {
             paste(x, collapse=sep)
         }
-        LIST2 <- lapply(seq_along(LIST), function(i) collapse(LIST[[i]][, "text"]))
-        DF <- data.frame(group = names(LIST), text = do.call("rbind", LIST2),
-            stringsAsFactors = FALSE)
-        if (TU %in% c("all", "tot")) {
-            DF$group <- as.numeric(as.character(DF$group))
-        }
-        locs2 <- locs <- unique(term.find(str =  DF$text, mat = match.string))
-        if (length(locs) == 1) {
-            if (!is.list(locs)) {
-                if (any(identical(locs, integer(0)), length(locs) < 2)) {
-                    return(NULL)
-                } else {
-                    keeps <- rep(FALSE, seq_along(locs))
-                }
+        collap <- function(DF){ 
+            SP <- split(DF, DF[, "unit"])
+            SP2 <- lapply(SP, function(x) collapse(x[, "text"]))
+            if (length(SP2) > 1) {
+                SP3 <- do.call("rbind", SP2)
+                return(data.frame(unit = rownames(SP3), text = SP3,
+                    stringsAsFactors = FALSE))
             } else {
-                if (any(identical(locs[[1]], integer(0)), length(locs[[1]]) < 2)) {
-                    return(NULL)
-                } else {
-                    keeps <- rep(FALSE, seq_along(locs))
-                }                
+                return(NULL)
             }
-        } else {
-            keeps <- sapply(seq_along(locs), function(i){
-                any(identical(locs[[i]], integer(0)), length(locs[[i]]) < 2) 
-            })
-            locs <- lapply(which(!keeps), function(i) locs[[i]])
         }
-        RETb <- lapply(locs2, function(x) {DF[x, ]}) 
-        names(RETb) <- name <- lapply(match.string, 
-            function(x) collapse(capitalizer(strip(x)), "_"))  
-        RETb <- RETb[!sapply(RETb, function(x) nrow(x) == 0)] 
-        RET2 <- RET <- lapply(locs, function(x) {DF[x, ]})
-        names(RET)  <- lapply(match.string, 
-            function(x) collapse(capitalizer(strip(x)), "_"))[!keeps]
-        mats <- lapply(RET2, function(x) {
-               wfm(grouping.var = Trim(x[, "group"]), text.var = x[, "text"],
+        if (!TU %in% c("sentence", "row")){
+            LIST2 <- lapply(LIST2, collap)
+        } else {
+            LIST2 <- lapply(LIST2, function(x) x[, 2:3]) 
+        }
+        namesL2 <- names(LIST2)
+        mats <- lapply(LIST2, function(x) {
+               wfm(grouping.var = Trim(x[, "unit"]), text.var = x[, "text"],
                     stopwords = stopwords)
             }
         )
@@ -125,86 +197,50 @@ function(text.var, grouping.var = NULL, text.unit = NULL, match.string,
                 adjacency_matrix(t(x))
             }
         )
-        lapply(seq_along(RET), function(i){
-                names(RETb[[i]])[1] <<- ifelse(TU == "all", "sentences", TU)
-            }
-        )
-        ord <- function(x) x[order(x[, 1]), ]
-        lapply(seq_along(RETb), function(i){
-                RETb[[i]] <<- ord(RETb[[i]])
-            }
-        )
-        freqlist <- lapply(RETb, function(x) {
+        freqlist <- lapply(LIST, function(x) {
             qda(x$text, stopwords = stopwords)
         })
-        name <- strsplit(as.character(name), "_", fixed=TRUE)
-        o <- unlist(list(obs = RETb, search.terms = name, freqlist = freqlist, 
-            freqmat = mats, adjmat = mats2), recursive = FALSE)
-        if (!is.null(stopwords)) {
-            o[["stopwords"]] <- stopwords
-            check <- Trim(unlist(match.string)) %in% Trim(unlist(stopwords))
-            if (any(check)) {
-                stop("match.string word(s) match stopword(s)\n",
-                    "  use $warning to see overlap words")
-                o[["warning"]] <- Trim(unlist(match.string))[check]
-            }
-        }  
+        o <- list(list = LISTb, search.terms = COLTERMS, freqlist = freqlist, 
+            freqmat = mats, adjmat = mats2)
+        if(!is.null(ECOLTERMS)) {
+            o[["extra.terms"]] <- ECOLTERMS
+        }
+        o <- unlist(o, recursive = FALSE)
         if (network.plot) {
-            require(igraph)
             an <-  which(substring(names(o), 1, 6) == "adjmat")
             ads <- lapply(an, function(i) o[[i]][["adjacency"]])
-            gigraph <- function(am, mat, nw.label.cex, nw.edge.col, nw.label.cols, 
-                nw.layout, text, nw.title.padj, side, title.font, title.cex) {
-                g <- igraph::graph.adjacency(am, weighted=TRUE, mode ='undirected') 
-                g <- igraph::simplify(g)
-                igraph::V(g)$label <- igraph::V(g)$name
-                igraph::V(g)$degree <- igraph::degree(g)
-                igraph::V(g)$label.cex <- nw.label.cex
-                V(g)$label.color <- ifelse(V(g)$label %in% Trim(mat), nw.label.cols[1],
-                    nw.label.cols[2])
-                E(g)$color <- nw.edge.col
-                if (is.null(nw.layout)) {
-                    nw.layout <- igraph::layout.fruchterman.reingold(g)
-                }
-                if (dev.interactive()) dev.new()
-                plot(g, layout=nw.layout, vertex.size=0, vertex.color="white")
-                if (is.null(nw.title.padj)){
-                    nw.title.padj = -4.5
-                }
-                if (is.null(nw.title.location)){
-                    nw.title.location = 3
-                }
-                if (!is.null(title.color)) {
-                    mtext(text, side = nw.title.location, padj = nw.title.padj, 
-                    col = title.color, family = title.font, cex = title.cex)
-                }
-            }
-        lapply(seq_along(ads), function(i) gigraph(ads[[i]], 
-            nw.label.cex = nw.label.cex, text = title.names, #text = names(ads)[i], 
-            nw.layout = nw.layout, nw.edge.col = nw.edge.color, 
-            nw.label.cols = nw.label.colors, match.string[[i]],
-            nw.title.padj = nw.title.padj, side = nw.title.location, title.font = title.font, title.cex = title.cex))
+            lapply(seq_along(ads), function(i) {
+                network.plot(ads[[i]], nw.label.cex = nw.label.cex, 
+                title.name = namesL2[[i]], nw.layout = nw.layout, 
+                nw.edge.col = nw.edge.color, 
+                nw.label.cols = nw.label.colors,
+                log.labels = nw.label.proportional, 
+                nw.title.padj = nw.title.padj, 
+                nw.title.location = nw.title.location, 
+                title.font = title.font, title.cex = title.cex, 
+                COLTERMSi = WSEARCH[[i]])
+             })
         }
         if (wordcloud) {
             lapply(seq_along(freqlist), function(i) {
-               trans.cloud(word.list = freqlist[[i]]$swl, target.words = name[[i]], 
-               stopwords = stopwords, cloud.colors = cloud.colors,
-               title.color = title.color, title.names = title.names, ...)
+               trans.cloud(word.list = freqlist[[i]]$swl, target.words = WSEARCH[[i]], 
+               stopwords = stopwords, cloud.colors = cloud.colors, expand.target = FALSE,
+               title.color = title.color, title.names = namesL1[[i]], ...)
             })
         }
         return(o)    
     }
-    Zdat <- split(text.var, grouping)
-    o2 <- lapply(seq_along(Zdat), function(i) word.as(text.var = Zdat[[i]],  
-        text.unit = text.unit, match.string = match.string,  
+    Zdat <- split(DF3, DF3$group)
+    lapply(seq_along(Zdat), function(i) {rownames(Zdat[[1]]) <<- NULL})
+    o2 <- lapply(seq_along(Zdat), function(i) word.as(dat = Zdat[[i]],  
         stopwords = stopwords, network.graph = network.graph,  
-        wordcloud = wordcloud,  
-        cloud.colors = cloud.colors,  
+        wordcloud = wordcloud, ECOLTERMS = ECOLTERMS, 
+        cloud.colors = cloud.colors, nw.label.proportional = nw.label.proportional,  
         nw.label.cex = nw.label.cex, nw.label.colors = nw.label.colors,  
         nw.layout = nw.layout, nw.edge.color = nw.edge.color, title.color =title.color,
-        title.names = names(Zdat)[i], ...))
+        LN = LN, ...))
     names(o2) <- names(Zdat)
-    o2 <- unlist(o2, recursive=FALSE)
+    o2$DF <- DFsl
     class(o2) <- "word_associate"  
     return(o2)
 }
