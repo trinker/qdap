@@ -1,8 +1,8 @@
 network.plot <-
-function(adj.mat.object, mat, label.cex, edge.color, 
-    label.colors, layout, title.name = NULL, title.padj, 
-    title.location = 3, title.font, title.cex = .8, target.words,
-    log.labels = FALSE, title.color = "black") {
+function(adj.mat.object, target.words = NULL, label.cex = .8, 
+    edge.color = gray70, label.colors = c("black", "gray50"), layout, 
+    title.name = NULL, title.padj, title.location = 3, title.font, 
+    title.cex = .8, log.labels = FALSE, title.color = "black") {
     suppressWarnings(require(igraph))
     if (class(adj.mat.object) == "adjacency.matrix") {
        adj.mat.object <- adj.mat.object[["adjacency"]]
