@@ -188,6 +188,7 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
             LIST2 <- lapply(LIST2, function(x) x[, 2:3]) 
         }
         namesL2 <- names(LIST2)
+        LIST2 <- LIST2[!sapply(LIST2, is.null)]
         mats <- lapply(LIST2, function(x) {
                wfm(grouping.var = Trim(x[, "unit"]), text.var = x[, "text"],
                     stopwords = stopwords)
