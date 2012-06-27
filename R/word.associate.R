@@ -1,7 +1,7 @@
 word.associate <-
 function(text.var, grouping.var = NULL, text.unit = "sentence", match.string, 
     extra.terms = NULL, target.exclude = NULL, stopwords = NULL, 
-    network.plot = FALSE, wordcloud = FALSE, cloud.colors = c("black", "gray40"), 
+    network.plot = FALSE, wordcloud = FALSE, cloud.colors = c("black", "gray55"), 
     title.color = "blue", nw.label.cex = .8, title.padj = -4.5, 
     nw.label.colors = NULL, nw.layout = NULL, nw.edge.color = "gray90", 
     nw.label.proportional = TRUE, nw.title.padj = NULL, nw.title.location = NULL, 
