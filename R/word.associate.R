@@ -5,7 +5,7 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
     title.color = "blue", nw.label.cex = .8, title.padj = -4.5, 
     nw.label.colors = NULL, nw.layout = NULL, nw.edge.color = "gray90", 
     nw.label.proportional = TRUE, nw.title.padj = NULL, nw.title.location = NULL, 
-    title.font = NULL, title.cex = NULL, ...){
+    title.font = NULL, title.cex = NULL, nw.edge.curved = FALSE, ...){
     if(is.null(nw.label.colors)) {
         nw.label.colors <- cloud.colors
     }
@@ -216,7 +216,7 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
                 edge.color = nw.edge.color, 
                 label.colors = nw.label.colors,
                 log.labels = nw.label.proportional, 
-                title.padj = nw.title.padj, 
+                title.padj = nw.title.padj, edge.curved = nw.edge.curved,
                 title.location = nw.title.location, 
                 title.font = title.font, title.cex = title.cex, 
                 target.words = WSEARCH[[i]])
@@ -224,8 +224,9 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
         }
         if (wordcloud) {
             lapply(seq_along(freqlist), function(i) {
-               trans.cloud(word.list = freqlist[[i]]$swl, target.words = WSEARCH[[i]], 
-               stopwords = stopwords, cloud.colors = cloud.colors, expand.target = FALSE,
+               trans.cloud(word.list = freqlist[[i]]$swl, 
+               target.words = WSEARCH[[i]], stopwords = stopwords, 
+               cloud.colors = cloud.colors, expand.target = FALSE,
                title.color = title.color, title.names = namesL1[[i]], ...)
             })
         }
@@ -235,10 +236,11 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
     lapply(seq_along(Zdat), function(i) {rownames(Zdat[[1]]) <<- NULL})
     o2 <- lapply(seq_along(Zdat), function(i) word.as(dat = Zdat[[i]],  
         stopwords = stopwords, network.graph = network.graph,  
-        wordcloud = wordcloud, ECOLTERMS = ECOLTERMS, 
-        cloud.colors = cloud.colors, nw.label.proportional = nw.label.proportional,  
+        wordcloud = wordcloud, ECOLTERMS = ECOLTERMS,
+        cloud.colors = cloud.colors, title.color =title.color,
+        nw.label.proportional = nw.label.proportional,  
         nw.label.cex = nw.label.cex, nw.label.colors = nw.label.colors,  
-        nw.layout = nw.layout, nw.edge.color = nw.edge.color, title.color =title.color,
+        nw.layout = nw.layout, nw.edge.color = nw.edge.color, 
         LN = LN, ...))
     names(o2) <- names(Zdat)
     o2$DF <- DFsl
