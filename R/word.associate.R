@@ -209,9 +209,9 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
         o <- unlist(o, recursive = FALSE)
         if (network.plot) {
             an <-  which(substring(names(o), 1, 6) == "adjmat")
-            ads <- lapply(an, function(i) o[[i]][["adjacency"]])
+            ads <- lapply(an, function(i) o[[i]])
             lapply(seq_along(ads), function(i) {
-                network.plot(ads[[i]], label.cex = nw.label.cex, 
+                word.network.plot(ads[[i]], label.cex = nw.label.cex, 
                 title.name = namesL2[[i]], layout = nw.layout, 
                 edge.color = nw.edge.color, 
                 label.colors = nw.label.colors,
