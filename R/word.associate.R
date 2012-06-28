@@ -179,8 +179,13 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
             WSEARCH <- lapply(WSEARCH, function(x) x[!x %in% target.exclude])
         }
     }
-    if(length(WSEARCH) != length(cloud.colors)-1) {
-        need <- length(WSEARCH)- (length(cloud.colors)-1)
+    if (!is.null(ECOLTERMS)) {
+        v <- (length(COLTERMS) + length(ECOLTERMS))/length(COLTERMS)
+    } else {
+        v <- length(WSEARCH)
+    }
+    if(v != length(cloud.colors)-1) {
+        need <- (v - (length(cloud.colors)-1))
         a1 <- ifelse(need > 0, "add", "subtract")
         a2 <- ifelse(need > 0, "to", "from")
         a3 <- ifelse(abs(need) > 1, "s ", " ")
