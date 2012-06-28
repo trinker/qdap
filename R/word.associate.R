@@ -173,6 +173,14 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
         nw.label.colors, nw.layout, nw.edge.color, LN, nw.label.proportional,
         ECOLTERMS, ...){  
         LIST <- lapply(LN, function(x) dat[dat[, x], 2:4])
+        FUN <- function(x) {
+            (nrow(x) > 1) & !is.null(x)
+        }
+        choosennames <- sapply(LIST, FUN)
+        FUN2 <- function(x) {
+            (nrow(x) > 0) & !is.null(x)
+        }
+        choosennames2 <- sapply(LIST, FUN2)
         LISTb <- lapply(LN, function(x) dat[dat[, x], 1:4])
         if (sum(sapply(LISTb, function(x) nrow(x))) == 0) {
             return(NULL)
@@ -240,13 +248,13 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
                 title.padj = nw.title.padj, edge.curved = nw.edge.curved,
                 title.location = nw.title.location, 
                 title.font = title.font, title.cex = title.cex, 
-                target.words = WSEARCH[[i]])
+                target.words = WSEARCH[choosennames][[i]])
              })
         }
         if (wordcloud) {
             lapply(seq_along(freqlist), function(i) {
                trans.cloud(word.list = freqlist[[i]]$swl, 
-               target.words = WSEARCH[[i]], stopwords = stopwords, 
+               target.words = WSEARCH[choosennames2][[i]], stopwords = stopwords, 
                cloud.colors = cloud.colors, expand.target = FALSE,
                title.color = title.color, title.names = namesL1[[i]], ...)
             })
