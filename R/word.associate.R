@@ -168,6 +168,16 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
             WSEARCH <- lapply(WSEARCH, function(x) x[!x %in% target.exclude])
         }
     }
+    if(length(WSEARCH) != length(cloud.colors)-1) {
+        need <- length(WSEARCH)- (length(cloud.colors)-1)
+        a1 <- ifelse(need > 0, "add", "subtract")
+        a2 <- ifelse(need > 0, "to", "from")
+        a3 <- ifelse(abs(need) > 1, "s ", " ")
+        warning(a1, " ", abs(need), " ", "color", a3, a2, " the length of cloud.colors/nw.label.colors")
+    }
+    if (length(cloud.colors) != length(nw.label.colors)) {
+        warning("the length of cloud.colors and nw.label.colors are not equal")
+    }
     word.as <- function(dat, stopwords, search_terms = WSEARCH,
         network.graph, wordcloud, cloud.colors, title.color, nw.label.cex, 
         nw.label.colors, nw.layout, nw.edge.color, LN, nw.label.proportional,
@@ -253,10 +263,10 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
         }
         if (wordcloud) {
             lapply(seq_along(freqlist), function(i) {
-               trans.cloud(word.list = freqlist[[i]]$swl, 
+               suppressWarnings(trans.cloud(word.list = freqlist[[i]]$swl, 
                target.words = WSEARCH[choosennames2][[i]], stopwords = stopwords, 
                cloud.colors = cloud.colors, expand.target = FALSE,
-               title.color = title.color, title.names = namesL1[[i]], ...)
+               title.color = title.color, title.names = namesL1[[i]], ...))
             })
         }
         return(o)    
