@@ -5,12 +5,23 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
     title.color = "blue", nw.label.cex = .8, title.padj = -4.5, 
     nw.label.colors = NULL, nw.layout = NULL, nw.edge.color = "gray90", 
     nw.label.proportional = TRUE, nw.title.padj = NULL, nw.title.location = NULL, 
-    title.font = NULL, title.cex = NULL, nw.edge.curved = FALSE, ...){
+    title.font = NULL, title.cex = NULL, nw.edge.curved = FALSE, 
+    cloud.legend = NULL, cloud.legend.cex = .8, cloud.legend.location = c(-.03, 1.03), 
+    nw.legend = NULL, nw.legend.cex = .8, nw.legend.location = c(-.03, 1.03),
+    legend.overide = FALSE, ...){
     if(is.null(nw.label.colors)) {
         nw.label.colors <- cloud.colors
     }
     if(is.null(cloud.colors)) {
         cloud.colors <- nw.label.colors
+    }
+    if (!legend.overide) {
+        if(is.null(cloud.legend)) {
+            cloud.legend <- nw.legend
+        }
+        if(is.null(nw.legend)) {
+            nw.legend <- cloud.legend
+        }
     }
     G <- if(is.null(grouping.var)) {
         "all"
@@ -181,7 +192,8 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
     word.as <- function(dat, stopwords, search_terms = WSEARCH,
         network.graph, wordcloud, cloud.colors, title.color, nw.label.cex, 
         nw.label.colors, nw.layout, nw.edge.color, LN, nw.label.proportional,
-        ECOLTERMS, ...){  
+        ECOLTERMS, cloud.legend, cloud.legend.cex, cloud.legend.location, 
+        nw.legend, nw.legend.cex, nw.legend.location, ...){  
         LIST <- lapply(LN, function(x) dat[dat[, x], 2:4])
         FUN <- function(x) {
             (nrow(x) > 1) & !is.null(x)
@@ -257,7 +269,9 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
                 log.labels = nw.label.proportional, 
                 title.padj = nw.title.padj, edge.curved = nw.edge.curved,
                 title.location = nw.title.location, 
-                title.font = title.font, title.cex = title.cex, 
+                title.font = title.font, title.cex = title.cex,
+                legend = nw.legend, legend.cex = nw.legend.cex, 
+                legend.location = nw.legend.location, 
                 target.words = WSEARCH[choosennames][[i]])
              })
         }
@@ -266,7 +280,9 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
                suppressWarnings(trans.cloud(word.list = freqlist[[i]]$swl, 
                target.words = WSEARCH[choosennames2][[i]], stopwords = stopwords, 
                cloud.colors = cloud.colors, expand.target = FALSE,
-               title.color = title.color, title.names = namesL1[[i]], ...))
+               title.color = title.color, title.names = namesL1[[i]], 
+               legend = cloud.legend, legend.cex = cloud.legend.cex, 
+               legend.location = cloud.legend.location, ...))
             })
         }
         return(o)    
@@ -280,7 +296,10 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
         nw.label.proportional = nw.label.proportional,  
         nw.label.cex = nw.label.cex, nw.label.colors = nw.label.colors,  
         nw.layout = nw.layout, nw.edge.color = nw.edge.color, 
-        LN = LN, ...))
+        LN = LN, cloud.legend = cloud.legend, cloud.legend.cex = cloud.legend.cex, 
+        cloud.legend.location = cloud.legend.location, 
+        nw.legend = nw.legend, nw.legend.cex = nw.legend.cex, 
+        nw.legend.location = nw.legend.location, ...))
     names(o2) <- names(Zdat)
     o2$DF <- DFsl
     o2$match.terms <- match.string
