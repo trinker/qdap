@@ -232,7 +232,7 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
             lapply(seq_along(ads), function(i) {
                 word.network.plot(ads[[i]], label.cex = nw.label.cex, 
                 title.name = namesL2[[i]], layout = nw.layout, 
-                edge.color = nw.edge.color, 
+                edge.color = nw.edge.color, title.color =title.color,
                 label.colors = nw.label.colors,
                 log.labels = nw.label.proportional, 
                 title.padj = nw.title.padj, edge.curved = nw.edge.curved,
