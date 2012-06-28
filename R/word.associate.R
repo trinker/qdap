@@ -173,10 +173,10 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
         a1 <- ifelse(need > 0, "add", "subtract")
         a2 <- ifelse(need > 0, "to", "from")
         a3 <- ifelse(abs(need) > 1, "s ", " ")
-        warning(a1, " ", abs(need), " ", "color", a3, a2, " the length of cloud.colors/nw.label.colors")
+        stop(a1, " ", abs(need), " ", "color", a3, a2, " the length of cloud.colors/nw.label.colors")
     }
     if (length(cloud.colors) != length(nw.label.colors)) {
-        warning("the length of cloud.colors and nw.label.colors are not equal")
+        stop("the length of cloud.colors and nw.label.colors are not equal")
     }
     word.as <- function(dat, stopwords, search_terms = WSEARCH,
         network.graph, wordcloud, cloud.colors, title.color, nw.label.cex, 
