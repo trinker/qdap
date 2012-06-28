@@ -181,7 +181,9 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
             names(LISTb[[i]])[2:3] <<- c(G, TU)
         })
         LISTb <- LISTb[!sapply(LISTb, function(x) nrow(x) == 0)]
-        names(LIST) <- paste0(unique(na.omit(LIST[[1]][, "group"])),
+        qn <- LIST[!sapply(LIST, function(x) nrow(x)) == 0]
+        qn <- unlist(lapply(length(qn), function(i) qn[[i]][, "group"]))
+        names(LIST) <- paste0(unique(na.omit(qn)),
             "_list", seq_along(LIST))
         LIST <- LIST[!sapply(LIST, is.null)]
         LIST <- LIST[!sapply(LIST, function(x) nrow(x) == 0)]
