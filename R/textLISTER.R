@@ -27,8 +27,8 @@ function(text.var, group.vars, rm.bracket = TRUE) {
       DF$dia2word <- as.vector(word.split(reducer(strip(DF$dia2word))))
       DF <- DF[1, ]
     } else {
-      #DF$dia2word <- as.vector(word.split(reducer(strip(DF$dia2word))))
-      DF$dia2word <- lapply(DF$dia2word, function(x) as.vector(word.split(reducer(strip(x)))))
+      DF$dia2word <- as.vector(word.split(reducer(strip(DF$dia2word))))
+      #DF$dia2word <- lapply(DF$dia2word, function(x) as.vector(word.split(reducer(strip(x)))))
     }    
     X <- split(DF[, -1], DF$group.vars)
     NAMES <- names(X)
