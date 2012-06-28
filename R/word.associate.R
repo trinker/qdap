@@ -44,6 +44,25 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
     if (!is.list(match.string)) {
         match.string <- list(match.string)
     }
+    Terms2 <- qdap::stopwords(text.var, stopwords = NULL, unlist = TRUE, 
+          strip = TRUE, unique = TRUE, names = FALSE)    
+    TM2 <- lapply(match.string, function(x) term.find(Terms2, 
+        mat = tolower(x)))
+    match.string <- lapply(TM2, function(i) Terms2[i])
+    if (!is.null(target.exclude)) {
+        match.string <- lapply(match.string, function(x) 
+            x[!x %in% unlist(tolower(target.exclude))])
+    }
+    match.string <- lapply(match.string, function(x) paste0(" ", x, " "))
+    if (!is.null(extra.terms)) {
+        TM3 <- lapply(extra.terms, function(x) term.find(Terms2, 
+            mat = tolower(x)))
+        TM3 <- lapply(TM3, function(i) Terms2[i])
+        if (!is.null(target.exclude)) {
+            TM3 <- lapply(TM3, function(x) 
+                x[!x %in% unlist(tolower(target.exclude))])
+        }
+    }
     TU <- suppressWarnings(if(is.null(text.unit)) {
         "row"
     } else {
@@ -244,6 +263,10 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
         LN = LN, ...))
     names(o2) <- names(Zdat)
     o2$DF <- DFsl
+    o2$match.terms <- match.string
+    if (!is.null(extra.terms)) {
+        o2$extra.terms <- TM3
+    }
     class(o2) <- "word_associate"  
     return(o2)
 }
