@@ -61,8 +61,8 @@
 #'   }
 #' 
 word.freq.matrix <-
-function(wfdf = NULL, text.var = NULL, 
-    grouping.var = NULL, stopwords = NULL, digits = 2){
+function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
+    stopwords = NULL, digits = 2){
     if (!is.null(wfdf)) {
         if (comment(wfdf) == "t.df") {
             wfdf <- wfdf
