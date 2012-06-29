@@ -5,7 +5,7 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
     title.color = "blue", nw.label.cex = .8, title.padj = -4.5, 
     nw.label.colors = NULL, nw.layout = NULL, nw.edge.color = "gray90", 
     nw.label.proportional = TRUE, nw.title.padj = NULL, nw.title.location = NULL, 
-    title.font = NULL, title.cex = NULL, nw.edge.curved = FALSE, 
+    title.font = NULL, title.cex = NULL, nw.edge.curved = TRUE, 
     cloud.legend = NULL, cloud.legend.cex = .8, cloud.legend.location = c(-.03, 1.03), 
     nw.legend = NULL, nw.legend.cex = .8, nw.legend.location = c(-1.54, 1.41),
     legend.overide = FALSE, ...){
