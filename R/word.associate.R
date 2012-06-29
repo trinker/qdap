@@ -307,9 +307,9 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
         nw.legend.location = nw.legend.location, ...))
     names(o2) <- names(Zdat)
     o2$DF <- DFsl
-    o2$match.terms <- match.string
+    o2$match.terms <- Trim(match.string)
     if (!is.null(extra.terms)) {
-        o2$extra.terms <- TM3
+        o2$extra.terms <- Trim(TM3)
     }
     class(o2) <- "word_associate"  
     return(o2)
