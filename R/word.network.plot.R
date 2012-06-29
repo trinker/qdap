@@ -1,6 +1,6 @@
 word.network.plot <-
 function(text.var, grouping.var = NULL, target.words = NULL, stopwords = Top100Words,
-    label.cex = .8, label.size = .5, edge.curved = FALSE, vertex.shape = "circle", 
+    label.cex = .8, label.size = .5, edge.curved = TRUE, vertex.shape = "circle", 
     edge.color = "gray70", label.colors = "black", layout = NULL, 
     title.name = NULL, title.padj =  -4.5, title.location = 3, title.font = NULL, 
     title.cex = .8, log.labels = FALSE, title.color = "black", 
