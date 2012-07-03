@@ -4,6 +4,7 @@
 #' 
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
+#' @aliases truncdf htruncdf
 #' @param x %% ~~Describe \code{x} here~~
 #' @param end %% ~~Describe \code{end} here~~
 #' @param begin %% ~~Describe \code{begin} here~~

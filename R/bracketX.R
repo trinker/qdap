@@ -7,7 +7,6 @@
 #' @param text %% ~~Describe \code{text} here~~
 #' @param bracket %% ~~Describe \code{bracket} here~~
 #' @param missing %% ~~Describe \code{missing} here~~
-#' @param names %% ~~Describe \code{names} here~~
 #' @return %% ~Describe the value returned %% If it is a LIST, use %%
 #' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 #' 'comp2'} %% ...
@@ -40,6 +39,7 @@
 #'     }
 #'     return(X)
 #'   }
+#' 
 bracketX <-
 function (text, bracket = "all", missing = NULL, names=FALSE) {
     X <- switch(bracket, 

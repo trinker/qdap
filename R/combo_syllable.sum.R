@@ -4,7 +4,7 @@
 #' 
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
-#' @param text %% ~~Describe \code{text} here~~
+#' @param text.var %% ~~Describe \code{text} here~~
 #' @return %% ~Describe the value returned %% If it is a LIST, use %%
 #' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 #' 'comp2'} %% ...

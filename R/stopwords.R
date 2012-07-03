@@ -6,6 +6,10 @@
 #' 
 #' @param textString %% ~~Describe \code{textString} here~~
 #' @param stopwords %% ~~Describe \code{stopwords} here~~
+#' @param unlist %% ~~Describe \code{stopwords} here~~
+#' @param strip %% ~~Describe \code{stopwords} here~~
+#' @param unique %% ~~Describe \code{stopwords} here~~
+#' @param names %% ~~Describe \code{stopwords} here~~
 #' @return %% ~Describe the value returned %% If it is a LIST, use %%
 #' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 #' 'comp2'} %% ...

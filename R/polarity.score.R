@@ -6,11 +6,12 @@
 #' 
 #' @param text.var %% ~~Describe \code{text.var} here~~
 #' @param grouping.var %% ~~Describe \code{grouping.var} here~~
-#' @param pos.words %% ~~Describe \code{pos.words} here~~
-#' @param neg.words %% ~~Describe \code{neg.words} here~~
-#' @param negation.words %% ~~Describe \code{negation.words} here~~
-#' @param increase.amplification.words %% ~~Describe
-#' \code{increase.amplification.words} here~~
+#' @param positive.list %% ~~Describe \code{pos.words} here~~
+#' @param negative.list %% ~~Describe \code{neg.words} here~~
+#' @param negation.list %% ~~Describe \code{negation.words} here~~
+#' @param amplification.list %% ~~Describe \code{increase.amplification.words}
+#' here~~
+#' @param digits %% ~~Describe \code{increase.amplification.words} here~~
 #' @return %% ~Describe the value returned %% If it is a LIST, use %%
 #' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 #' 'comp2'} %% ...

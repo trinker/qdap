@@ -4,7 +4,7 @@
 #' 
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
-#' @aliases duplicates2
+#' @aliases duplicates duplicates2
 #' @param string %% ~~Describe \code{string} here~~
 #' @param threshhold %% ~~Describe \code{threshhold} here~~
 #' @return %% ~Describe the value returned %% If it is a LIST, use %%

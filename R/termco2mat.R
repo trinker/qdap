@@ -8,12 +8,16 @@
 #' @param drop.wc logical.  If TRUE the word count column will be dropped.
 #' @param short.colnames logical.  If TRUE the ``term()'' portion of column
 #' names will be dropped.
+#' @param no.quote logical.  If TRUE the matrix will be printed without quotes
+#' if it's character.
+#' @param transform logical.  If TRUE the matrix will be transformed.
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #' 
 #' ##---- Should be DIRECTLY executable !! ----
 #' ##-- ==>  Define data, use random,
 #' ##--	or do  help(data=index)  for the standard data sets.
+#' 
 termco2mat <-
 function (dataframe, drop.wc = TRUE, short.colnames = TRUE, rm.zerocol = FALSE, 
     no.quote = TRUE, transform = TRUE) {
