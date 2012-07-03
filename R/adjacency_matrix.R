@@ -1,8 +1,5 @@
 adjacency_matrix <-
 function(matrix.obj) {
-    if (nrow(matrix.obj) < 2) {
-      stop("matrix.obj must have > 1 rows")
-    }  
     if(class(matrix.obj) %in% c("termco_d", "termco_c")){
         info <- matrix.obj #for later use
         if (matrix.obj[["zero_replace"]] != 0){
@@ -25,6 +22,9 @@ function(matrix.obj) {
         } else {
              warning("Not a matrix object; results may not be correct.")
         }
+    }
+    if (nrow(matrix.obj) < 2) {
+      stop("matrix.obj must have > 1 rows")
     }
     Y <- matrix.obj >= 1
     Y <- apply(Y, 2, as, "numeric") 
