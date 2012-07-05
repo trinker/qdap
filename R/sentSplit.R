@@ -22,7 +22,7 @@
 #' 
 sentSplit <-
 function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,  
-  stem.col = TRUE, rnames = 'numeric', text.place = 'right', ...) {
+    stem.col = TRUE, text.place = 'right', ...) {
   DF <- dataframe
   if (is.numeric(text.var)) {
     text.var <- colnames(DF)[text.var]
@@ -93,10 +93,9 @@ function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,
       }
     }
   }
-  if (RN == "numeric") {
-    ans <- data.frame(tot=TOT , ans)
-    ans <- ans[, c(2, 1, 3:ncol(ans))]
-  }
+  TOT <- as.character(sort(as.numeric(TOT)))
+  ans <- data.frame(tot=TOT , ans)
+  ans <- ans[, c(2, 1, 3:ncol(ans))]
   ans$EXTRA1x2 <- NULL; ans$EXTRA2x2 <- NULL
   return(ans)
 }
