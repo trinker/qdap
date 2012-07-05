@@ -17,23 +17,8 @@
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (transcript.df, key.df, common.column, defualt.arrange = TRUE) 
-#' {
-#'     DF <- merge(transcript.df, key.df, by = c(common.column, 
-#'         common.column), incomparables = NA)
-#'     if (defualt.arrange) {
-#'         DF[, c(1, 3:ncol(DF), 2)]
-#'     }
-#'     else {
-#'         DF
-#'     }
-#'   }
+#'merged.raj <- key_merge(raj, raj.demographics, "person")
+#'htruncdf(merged.raj, 10, 40)
 #' 
 key_merge <-
 function(transcript.df, key.df, common.column, 
