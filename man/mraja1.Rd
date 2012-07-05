@@ -2,10 +2,10 @@
 \alias{mraja1}
 \docType{data}
 \title{
-A demographic merged dialogue data set of Romeo and Juliet
+A demographic merged dialogue data set of Romeo and Juliet Act 1
 }
 \description{
-A demographic merged dialogue data set of Romeo and Juliet
+A demographic merged dialogue data set of Romeo and Juliet Act 1
 }
 \usage{data(mraja1)}
 \format{
