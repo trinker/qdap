@@ -7,7 +7,7 @@ Deomographic information for the Romeo and Juliet characters
 \description{
 Deomographic information for the Romeo and Juliet characters
 }
-\usage{data(raj.demograph)}
+\usage{data(raj.demographics)}
 \format{
   A data frame with 34 observations on the following 3 variables.
   \describe{
@@ -26,7 +26,7 @@ Deomographic information for the Romeo and Juliet characters
 %%  ~~ possibly secondary sources and usages ~~
 }
 \examples{
-data(raj.demograph)
-## maybe str(raj.demograph) ; plot(raj.demograph) ...
+data(raj.demographics)
+## maybe str(raj.demographics) ; plot(raj.demographics) ...
 }
 \keyword{datasets}
