@@ -38,7 +38,6 @@ function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,
   input <- text.var
   re <- ifelse(is.null(splitpoint), "[\\?\\.\\!\\|]", 
     as.character(substitute(splitpoint)))
-  RN <- rnames
   TP <- text.place
   breakinput <- function(input, re) {
     j <- gregexpr(re, input)
@@ -66,9 +65,6 @@ function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,
   a <- sapply(y, function(x)x[1])
   x <- paste0(a, ".", z)
   rownames(ans) <- TOT <- x
-  if (RN == "numeric") {
-    rownames(ans) <- NULL
-  }
   ans[ans[, input]=="", ] <- NA
   if (TP == "original") {
     ans <- ans[, colnames(DF)]
