@@ -44,9 +44,9 @@ function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,
     lengths <- unlist(lapply(j, length))
     spots <- lapply(j, as.numeric)
     first <- unlist(lapply(spots, function(x) {
-          c(1, (x + 1)[-length(x)])
-        }
-      )
+      c(1, (x + 1)[-length(x)])
+    }
+    )
     )
     last <- unlist(spots)
     ans <- substring(rep(input, lengths), first, last)
@@ -57,15 +57,13 @@ function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,
   idx <- rep(1:dim(others)[1], j$lengths)
   ans <- data.frame(cbind(input = Trim(j$text), others[idx, ]))
   colnames(ans)[1] <- input
-  x <- as.character(rownames(ans))
-  y <- strsplit(x, "\\.")
-  z <- sapply(y, function(x) as.numeric(x[2]))
-  z[is.na(z)] <- 0
-  z <- as.character(z+1)
-  a <- sapply(y, function(x)x[1])
-  x <- paste0(a, ".", z)
-  rownames(ans) <- TOT <- x
-  ans[ans[, input]=="", ] <- NA
+  vlen <- sapply(j$lengths, seq_len)
+  ans$tot <- unlist(lapply(seq_along(vlen), function(i) paste0(i, ".", vlen[[i]])))
+  if(any(na.omit(ans[, input]==""))){
+    NAdet <- ans[, input]==""
+    NAdet[is.na(NAdet)] <- FALSE
+    ans[NAdet, input] <- NA
+  }
   if (TP == "original") {
     ans <- ans[, colnames(DF)]
     if (stem.col) {
@@ -74,6 +72,9 @@ function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,
   } else {
     if (TP == "right") {
       ans <- data.frame(ans[, -1], ans[, 1])
+      totn <- which(names(ans)=="tot")
+      ans <- data.frame(ans[, 1, drop= FALSE], ans[, totn, drop = FALSE],
+                        ans[, -c(1, totn), drop = FALSE])
       colnames(ans) <- c(colnames(ans)[-ncol(ans)], input)
       if (stem.col) {
         ans <- stem2df(ans, ncol(ans), ...)
@@ -89,9 +90,6 @@ function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,
       }
     }
   }
-  TOT <- as.character(sort(as.numeric(TOT)))
-  ans <- data.frame(tot=TOT , ans)
-  ans <- ans[, c(2, 1, 3:ncol(ans))]
   ans$EXTRA1x2 <- NULL; ans$EXTRA2x2 <- NULL
   return(ans)
 }
