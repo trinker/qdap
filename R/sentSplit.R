@@ -23,7 +23,6 @@
 sentSplit <-
 function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,  
   stem.col = TRUE, rnames = 'numeric', text.place = 'right', ...) {
-  browser()
   DF <- dataframe
   if (is.numeric(text.var)) {
     text.var <- colnames(DF)[text.var]
