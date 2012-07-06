@@ -33,5 +33,6 @@ function(transcript.df, key.df, common.column,
   }
   DF <- DF[order(DF$IDCOL), ]
   DF$IDCOL <- NULL
+  rownames(DF) <- NULL
   return(DF)
 }
