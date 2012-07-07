@@ -22,13 +22,16 @@
 #' 
 sentSplit <-
 function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,  
-    stem.col = TRUE, text.place = 'right', ...) {
+  rm.bracket = TRUE, stem.col = TRUE, text.place = 'right', ...) {
   DF <- dataframe
   if (is.numeric(text.var)) {
     text.var <- colnames(DF)[text.var]
   }
   if (incomplete.sub) {
     DF[, text.var] <- incomplete.replace(DF[, text.var])
+  }
+  if (rm.bracket) {
+      DF[, text.var] <- bracketX(DF[, text.var])
   }
   if(length(DF) < 3) {
     DF$EXTRA1x2 <-  1:nrow(DF); DF$EXTRA2x2 <-  1:nrow(DF)
@@ -44,9 +47,9 @@ function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,
     lengths <- unlist(lapply(j, length))
     spots <- lapply(j, as.numeric)
     first <- unlist(lapply(spots, function(x) {
-      c(1, (x + 1)[-length(x)])
-    }
-    )
+          c(1, (x + 1)[-length(x)])
+        }
+      )
     )
     last <- unlist(spots)
     ans <- substring(rep(input, lengths), first, last)
