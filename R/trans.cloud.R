@@ -341,7 +341,19 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
     }
     if (expand.target) {
         uni <- unique(unlist(word.list))
-        target.words <- lapply(term.find(uni, target.words), function(i) uni[i])
+        TF <- lapply(target.words, function(x){
+                if (length(x) == 1) {
+                    if (is.na(x) | Trim(x)=="") {
+                        FALSE
+                    } else {
+                        term.find(uni, x)
+                    }
+                } else {
+                    term.find(uni, x)
+                }
+            }
+        )
+        target.words <- lapply(TF, function(i) uni[i])
     }
     if (!is.null(target.exclude)) {
         target.words <- lapply(target.words, function(x) x[!x %in% target.exclude])
