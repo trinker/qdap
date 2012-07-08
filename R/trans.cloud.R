@@ -209,7 +209,7 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
     target.words = NULL, expand.target = TRUE, target.exclude = NULL,
     stopwords = NULL, min.freq = 1, caps = TRUE, caps.list = NULL, 
     random.order = FALSE, rot.per = 0.0, cloud.colors = NULL, title = TRUE, 
-    cloud.font = NULL, title.font = NULL, title.color = black, 
+    cloud.font = NULL, title.font = NULL, title.color = "black", 
     title.padj = -4.5, title.location = 3, title.cex = NULL, title.names = NULL,
     proportional = FALSE, max.word.size = NULL, min.word.size = 0.5,
     legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03), ...) {
