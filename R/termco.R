@@ -84,15 +84,15 @@ function (text.var, match.string, grouping.var = NULL, ignore.case = FALSE,
           zero.replace = 0){
   group.var <- grouping.var
   if (ignore.case) {
-    x <- lapply(text.var, function(x) term.count(tolower(x), mat = tolower(match.string)))
+    x <- lapply(text.var, function(x) term.count(tolower(x), 
+                                                 mat = tolower(match.string)))
   } else {
     x <- lapply(text.var, function(x) term.count(x, mat = match.string))
   }
   group.var <- if(is.null(group.var)){
     rep("all", length(text.var))
   } else {
-    if (is.list(group.var) & length(group.var) > 
-      1) {
+    if (is.list(group.var) & length(group.var) > 1) {
       apply(data.frame(group.var), 1, function(x) {
         if (any(is.na(x))) {
           NA
@@ -104,7 +104,11 @@ function (text.var, match.string, grouping.var = NULL, ignore.case = FALSE,
       grouping.var
     }
   }
-  y <- data.frame(text.var, do.call("rbind", x))
+  if (lapply(x, length)[[1]] == 1){
+    y <- data.frame(text.var, do.call("c", x))
+  } else {
+    y <- data.frame(text.var, do.call("rbind", x))
+  }
   if (is.null(group.var)) {
     names(y) <- c(as.character(substitute(text.var))[3], 
                   paste("term(", match.string, ")", sep = ""))
