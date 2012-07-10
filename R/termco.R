@@ -85,7 +85,7 @@ function (text.var, match.string, grouping.var = NULL, ignore.case = FALSE,
   group.var <- grouping.var
   if (ignore.case) {
     x <- lapply(text.var, function(x) term.count(tolower(x), 
-                                                 mat = tolower(match.string)))
+      mat = tolower(match.string)))
   } else {
     x <- lapply(text.var, function(x) term.count(x, mat = match.string))
   }
@@ -135,7 +135,7 @@ function (text.var, match.string, grouping.var = NULL, ignore.case = FALSE,
       }
     }
     names(w) <- c(NAME, "word.count", paste("term(", match.string, 
-                                            ")", sep = ""))
+      ")", sep = ""))
     w[, -c(1:2)] <- replacer(w[, -c(1:2)], replace = 0, with = zero.replace)
     return(w)
   }

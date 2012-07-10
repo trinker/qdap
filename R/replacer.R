@@ -67,8 +67,8 @@ function(dat, replace=0, with="-"){
     if (is.numeric(replace)){
           NAMES <- names(dat)
           not.num <- Negate(is.numeric)
-          dat1 <- dat[, sapply(dat, not.num)]
-          dat2 <- dat[, sapply(dat, is.numeric)]
+          dat1 <- dat[, sapply(dat, not.num), drop = FALSE]
+          dat2 <- dat[, sapply(dat, is.numeric), drop = FALSE]
     } else {
           dat2 <- dat
     }
