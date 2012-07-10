@@ -59,8 +59,8 @@
 #'     return(y)
 #'   }
 #' 
-replacer 
-<- function(dat, replace=0, with="-"){ 
+replacer <- 
+function(dat, replace=0, with="-"){ 
   h <- is.vector(dat)
   i <- is.matrix(dat)
   j <- is.data.frame(dat)
