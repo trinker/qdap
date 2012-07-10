@@ -18,8 +18,8 @@
 #' ##-- ==>  Define data, use random,
 #' ##--	or do  help(data=index)  for the standard data sets.
 #' 
-termco2mat <-function (dataframe, drop.wc = TRUE, short.colnames = TRUE, 
-  rm.zerocol = FALSE, no.quote = TRUE, transform = TRUE) {
+termco2mat <-function (dataframe, drop.wc = TRUE, short.terms = TRUE, 
+  rm.zerocol = FALSE, no.quote = TRUE, transform = TRUE, trim.terms = TRUE) {
   if (class(dataframe) %in% c("termco_d", "termco_c")) {
     dataframe <- dataframe[["raw"]]
   }
@@ -33,7 +33,7 @@ termco2mat <-function (dataframe, drop.wc = TRUE, short.colnames = TRUE,
   }
   MAT <- as.matrix(dataframe[, -c(ind)])
   rownames(MAT) <- dataframe[, 1]
-  if (short.colnames) {
+  if (short.terms) {
     mn <- gsub("(.*)\\)([^\\)]*)", "\\1\\2", colnames(MAT))
     colnames(MAT) <- gsub("term(", "", mn, fixed=TRUE)
   }
@@ -53,6 +53,9 @@ termco2mat <-function (dataframe, drop.wc = TRUE, short.colnames = TRUE,
   }
   if (transform){
     MAT <- t(MAT)
+  }
+  if (trim.terms) {
+    rownames(MAT) <- Trim(rownames(MAT))
   }
   return(MAT)
 }
