@@ -73,7 +73,6 @@ function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
         stop("Object must be a raw word frequency data frame")
       }
     }
-    
     x2 <- wfdf[, -1, drop = FALSE]
     rownames(x2) <- wfdf[, 1]
     x2 <- as.matrix(x2)
