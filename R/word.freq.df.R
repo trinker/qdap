@@ -108,6 +108,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL,
     }
     bl <- split(text.var, grouping.var)
     x <- lapply(bl, bag.o.words)
+    tabs <- tabs[sapply(tabs, nrow)!=0]
     tabs <- lapply(x, function(x) as.data.frame(table(x)))
     lapply(seq_along(tabs), function(x) {
         names(tabs[[x]]) <<- c("Words", names(tabs)[x])  
