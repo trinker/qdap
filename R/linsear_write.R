@@ -174,8 +174,8 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF5$sent.per.100 <- sent.per.100[as.character(DF5$sub), "x"]
     hun.grab <- function(x) paste(unblanker(unlist(word.split(reducer(
         unlist(strip(x))))))[1:100], collapse = " ")
-    DF5$SYL.LIST <- unlist(lapply(DF5$text.var, function(x) unlist(syllable.count(
-        hun.grab(x))$syllables)))
+    DF5$SYL.LIST <- lapply(DF5$text.var, function(x) unlist(syllable.count(
+        hun.grab(x))$syllables))
     DF5$hard_easy_sum <- unlist(lapply(DF5$SYL.LIST, function(x) sum(ifelse(x >= 
       3, 3, 1))))
     DF5$HE_tsent_ratio <- unlist(DF5$hard_easy_sum)/DF5$sent.per.100
