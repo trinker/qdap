@@ -34,16 +34,16 @@
 #' 
 pollysyllable.sum <-
 function(text) {
-    Trim <- function(x) gsub("^\\s+|\\s+$", "", x)
-    counter <- function(x) {
-      v <- table(syllable.count(Trim(x))["syllables"])
-        if (identical(c(v), integer(0))){
-          return(0)
-        }
-        y <- as.data.frame(v))
-        z <- subset(y, as.numeric(as.character(Var1)) >= 3)
-        j <- sum(z$Freq)
-        return(j)
+  Trim <- function(x) gsub("^\\s+|\\s+$", "", x)
+  counter <- function(x) {
+    v <- table(syllable.count(Trim(x))["syllables"])
+    if (identical(c(v), integer(0))){
+      return(0)
     }
-    unlist(lapply(as.character(text), function(x) counter(x)))
+    y <- as.data.frame(v)
+    z <- subset(y, as.numeric(as.character(Var1)) >= 3)
+    j <- sum(z$Freq)
+    return(j)
+  }
+  unlist(lapply(as.character(text), function(x) counter(x)))
 }
