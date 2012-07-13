@@ -17,7 +17,8 @@ function(str, mat, logic = FALSE){
       }
   } else {
       findit <- function(x, logic) {
-        sort(unique(c(unlist(sapply(x, function(z) tester(z, str, logic))))))
+        sort(unique(c(unlist(sapply(x, 
+          function(z) tester(z, str, logic = TRUE))))))
       }
   }
   if (is.list(mat)) {
