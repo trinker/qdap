@@ -26,7 +26,10 @@ function(text.var, grouping.var, stopwords = Top200Words,
     } else {
       grouping.var
     }
-    Counts <- wfm(text.var, group.var, stopwords = stopwords)
+    word.list <- qda(text.var, group.var, stopwords = stopwords)[["cwl"]]
+    all <- unique(unlist(word.list))
+    C1 <- lapply(word.list, function(x) as.numeric(all%in%x))
+    Counts <- do.call(cbind, C1) 
     v <- venneuler::venneuler(Counts)
     if (title) {
         if (!is.null(title.name)){
@@ -43,7 +46,7 @@ function(text.var, grouping.var, stopwords = Top200Words,
         cols <- col.fn(v$colors)
         par(mar = rep(0, 4), xpd = TRUE)
         legend(legend.location[1], legend.location[2], horiz = legend.horiz,
-            legend = colnames(Counts), fill = cols, cex = legend.cex, 
+            legend = names(C1), fill = cols, cex = legend.cex, 
             text.col = legend.text.col)
         par(mar = c(5, 4, 4, 2) + 0.1, xpd = TRUE)
     }
