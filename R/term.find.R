@@ -12,13 +12,13 @@ function(str, mat, logic = FALSE){
   }
   str <- spacer(str)
   if (logic) {
-      findit <- function(x, logic) {
+      findit <- function(x, logic = TRUE) {
         sapply(x, function(z) tester(z, str, logic))
       }
   } else {
-      findit <- function(x, logic) {
+      findit <- function(x, logic = FALSE) {
         sort(unique(c(unlist(sapply(x, 
-          function(z) tester(z, str, logic = TRUE))))))
+          function(z) tester(z, str, logic))))))
       }
   }
   if (is.list(mat)) {
