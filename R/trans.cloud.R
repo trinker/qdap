@@ -341,6 +341,7 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
     }
     if (expand.target) {
         uni <- unique(unlist(word.list))
+        target.words <- lapply(target.words, function(x) x[!is.na(x)])
         TF <- lapply(target.words, function(x){
                 if (length(x) == 1) {
                     if (is.na(x) | Trim(x)=="") {
