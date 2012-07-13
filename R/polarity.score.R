@@ -176,7 +176,7 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
     neg <- lapply(neg.matchesPOS, no.na)
     pos1 <- lapply(pos.matchesPOS, truer)
     neg1 <- lapply(neg.matchesPOS, truer)
-    x$raw <- mapply(score, pos1, neg1, SIMPLIFY = FALSE)
+    x$raw <- unlist(mapply(score, pos1, neg1, SIMPLIFY = FALSE))
     x$pos.words <- mapply(SEL, x$words, pos1, SIMPLIFY = FALSE)
     x$neg.words <- mapply(SEL, x$words, neg1, SIMPLIFY = FALSE)
     L1 <- mapply(function(x, y) x[y - 1], x$words, pos1, SIMPLIFY = FALSE)
