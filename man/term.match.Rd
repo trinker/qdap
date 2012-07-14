@@ -1,5 +1,5 @@
-\name{termco.mt}
-\alias{termco.mt}
+\name{term.match}
+\alias{term.match}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Generate a list of words that matching functions will match to
