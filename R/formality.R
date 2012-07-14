@@ -25,12 +25,13 @@ function(text.var, grouping.var = NULL, sort.by.formality = TRUE){
         pronoun = rowSums(X[, names(X) %in% c('PRP', 'PRP.', 'WDT', 'WP', 'WP.', 'JI', 'JK')]),  
         prep = rowSums(X[, names(X) %in% c('IN', 'RP', 'TO', 'JI', 'JK')]),  
         adj = rowSums(X[, names(X) %in% c('CD', 'DT', 'JJ', 'JJR', 'JJS', 'JI', 'JK')]),  
-        interj = rowSums(X[, names(X) %in% c('UH', 'JI', 'JK')]))
-
+        interj = rowSums(X[, names(X) %in% c('UH', 'JI', 'JK')])
+    )
     FOR <- (rowSums(cbind(DF1$noun, DF1$adj, DF1$prep)) - rowSums(cbind(DF1$pronoun, 
         DF1$verb, DF1$adverb, DF1$interj)) + 100)/2
     if(!is.null(grouping.var)) {
-        FOR <- data.frame(replace = X[, 1], formality = FOR); colnames(FOR)[1] <- G
+        FOR <- data.frame(replace = X[, 1], formality = FOR)
+        colnames(FOR)[1] <- G
     }
     if (sort.by.formality) {
         FOR <- FOR[order(-FOR$formality), ]
