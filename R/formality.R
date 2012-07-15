@@ -11,15 +11,13 @@ formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE){
                   G[length(G)]
              }
          }
-    if (class(text.var) != "POS") {
+    if (!class(text.var) %in% c("POS", "POSby", "formality.measure")) {
         WOR <- word.count(text.var)
+    } else {
+        WOR <- word.count(text.var$text)
     }
-    if (class(text.var) == "POS") {
-        text.var2 <- text.var$text
-        WOR <- word.count(text.var2)
-        text.var <- text.var$POSfreq
-    }
-    X <- pos.by(text.var = text.var, grouping.var = grouping.var)
+    pos.list <- pos.by(text.var = text.var, grouping.var = grouping.var)
+    X <- pos.list[["pos.by.freq"]]
     nameX <- rownames(X)
     X <- data.frame(X)
     xn <- nrow(X)
@@ -46,14 +44,13 @@ formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE){
             "VBN", "VBP", "VBZ", "JI", "JK")]),  
         adverb = rowSums(X[, names(X) %in% c("RB", "RBR", "RBS", "WRB", 
             "JI", "JK")]),  
-        pronoun = rowSums(X[, names(X) %in% c("PRP", "PRP.", "WDT", "WP", 
-            "WP.", "JI", "JK", "EX")]),  
+        pronoun = rowSums(X[, names(X) %in% c("PRP", "PRP$", "PRP.", "WDT", 
+            "WP", "WP$", "WP.", "JI", "JK", "EX")]),  
         prep = rowSums(X[, names(X) %in% c("IN", "RP", "TO", "JI", "JK")]),  
         adj = rowSums(cbind(X[, names(X) %in% c("CD", "JJ", "JJR", "JJS", 
             "JI", "JK")], PD)),  
         interj = rowSums(X[, names(X) %in% c("UH", "JI", "JK")]))
     DF1RS <- rowSums(DF1)
-#browser()#issue is likely with the apply 2 and it should be 1/need DF1RS index
     DF1 <- do.call(rbind, lapply(1:nrow(DF1), function(i) 100*(DF1[i, ]/DF1RS[i])))
     FOR <- (rowSums(cbind(DF1$noun, DF1$article, DF1$adj, DF1$prep)) - 
         rowSums(cbind(DF1$pronoun, DF1$verb, DF1$adverb, DF1$interj)) + 100)/2
@@ -66,5 +63,8 @@ formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE){
         FOR <- FOR[order(-FOR$formality), ]
         rownames(FOR) <- NULL
     }
-    return(FOR)
+    o <- unclass(pos.list)
+    o$formality <- FOR
+    class(o) <- "formality.measure"
+    return(o)
 }
