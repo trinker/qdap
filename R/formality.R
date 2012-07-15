@@ -12,13 +12,26 @@ formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE,
                   G[length(G)]
              }
          }
-    if (!class(text.var) %in% c("POS", "POSby", "formality.measure")) {
-        WOR <- word.count(text.var)
+    grouping.var <- if(is.null(grouping.var)){
+        rep("all", length(text.var))
     } else {
-        WOR <- word.count(text.var$text)
+    if(is.list(grouping.var) & length(grouping.var)>1) {
+         apply(data.frame(grouping.var), 1, function(x){
+                     if (any(is.na(x))){
+                         NA
+                     }else{
+                         paste(x, collapse = ".")
+                     }
+                 }
+             )
+        } else {
+            unlist(grouping.var)
+        } 
     }
     pos.list <- pos.by(text.var = text.var, grouping.var = grouping.var, 
         digits = digits)
+    text.var <- pos.list$text
+    WOR <- word.count(text.var)
     X <- pos.list[["pos.by.freq"]]
     nameX <- rownames(X)
     X <- data.frame(X)
@@ -26,15 +39,24 @@ formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE,
     X$JI <- rep(0, xn)
     X$JK <- rep(0, xn)
     article <- function(x) {
-        WORDS <- stopwords(x, stopwords = NULL, 
-            unlist = FALSE, strip = TRUE)
-        sapply(WORDS, function(x) sum(x %in% c("the", "an", "a")))
+        if (identical(x, character(0))) {
+            return(0)
+        } else {
+            WORDS <- stopwords(x, stopwords = NULL, 
+                unlist = FALSE, strip = TRUE)
+            sapply(WORDS, function(x) sum(x %in% c("the", "an", "a"),
+                na.rm = TRUE ))
+        }
     }
     if (!is.null(grouping.var)){
-        articles <- unlist(lapply(split(text.var, grouping.var), function(x) 
-            sum(article(x))))
+        stv <- split(text.var, grouping.var)
+        stv <- stv[sapply(stv, function(x) !identical(x, character(0)))]
+        articles <- unlist(lapply(stv, function(x){ 
+                sum(article(x))
+            }
+        )) 
     } else {
-        articles <- sum(article(text.var))
+        articles <- sum(article(text.var$text))
     }
     if (!is.null(X$DT)) {
         PD <- X$DT-articles
