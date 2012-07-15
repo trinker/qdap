@@ -172,6 +172,6 @@ function(text.var, na.omit = FALSE, digits = 2,
        }
     )
     if(na.omit) POS <- lapply(POS, na.omit)
-    comment(POS) <- "POS"
+    class(POS) <- "POS"
     return(POS)
 }
