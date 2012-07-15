@@ -153,10 +153,10 @@ function(text.var, grouping.var = NULL, digits = 2,
     colnames(DF2)[1] <- G
     o <- unclass(pos.list)
     o[["pos.by.freq"]] <- DF2
-    propby <- lapply(1:nrow(DF2), function(i) DF2[i, -1]/rowSums(DF2[, -1])[i])
+    propby <- lapply(1:nrow(DF2), function(i) DF2[i, -c(1:2)]/rowSums(DF2[, -c(1:2)])[i])
     propby <- sapply(do.call(rbind, propby), round, digits = digits)
     propby[is.nan(propby)] <- 0
-    o[["pos.by.prop"]] <- data.frame(DF2[, 1, drop=FALSE], propby)
+    o[["pos.by.prop"]] <- data.frame(DF2[, 1:2], propby, check.names = FALSE)
     class(o) <- "POSby"
     return(o)
 }
