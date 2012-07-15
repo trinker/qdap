@@ -11,6 +11,14 @@ formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE){
                   G[length(G)]
              }
          }
+    if (class(text.var) != "POS") {
+        WOR <- word.count(text.var)
+    }
+    if (class(text.var) == "POS") {
+        text.var2 <- text.var$text
+        WOR <- word.count(text.var2)
+        text.var <- text.var$POSfreq
+    }
     X <- pos.by(text.var = text.var, grouping.var = grouping.var)
     nameX <- rownames(X)
     X <- data.frame(X)
@@ -45,11 +53,13 @@ formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE){
             "JI", "JK")], PD)),  
         interj = rowSums(X[, names(X) %in% c("UH", "JI", "JK")]))
     DF1RS <- rowSums(DF1)
-    DF1 <- data.frame(apply(DF1, 2, function(x) 100*(x/DF1RS)))
+#browser()#issue is likely with the apply 2 and it should be 1/need DF1RS index
+    DF1 <- do.call(rbind, lapply(1:nrow(DF1), function(i) 100*(DF1[i, ]/DF1RS[i])))
     FOR <- (rowSums(cbind(DF1$noun, DF1$article, DF1$adj, DF1$prep)) - 
         rowSums(cbind(DF1$pronoun, DF1$verb, DF1$adverb, DF1$interj)) + 100)/2
+    WOR <- sapply(split(WOR, grouping.var), sum, na.rm = TRUE)
     if(!is.null(grouping.var)) {
-        FOR <- data.frame(replace = X[, 1], formality = FOR)
+        FOR <- data.frame(replace = X[, 1], word.count = WOR, formality = FOR)
         colnames(FOR)[1] <- G
     }
     if (!is.null(grouping.var) & sort.by.formality) {
