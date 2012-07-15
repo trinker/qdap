@@ -166,7 +166,7 @@ function(text.var, na.omit = FALSE, digits = 2,
         G4[nas, 2:ncol(G4)] <- NA
         m[nas, 1:ncol(m)] <- NA
     }
-    POS <- list(POStagged = m, POSprop = G5, POSfreq = G4)
+    POS <- list(text = text.var, POStagged = m, POSprop = G5, POSfreq = G4)
     lapply(seq_along(POS), function(i) {
         comment(POS[[i]]) <<- names(POS)[[i]]
        }
