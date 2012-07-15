@@ -1,4 +1,4 @@
-formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE.
+formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE,
     digits = 2, ....){
     G <- if(is.null(grouping.var)) {
              "all"
