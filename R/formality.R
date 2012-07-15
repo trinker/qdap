@@ -1,4 +1,5 @@
-formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE){
+formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE.
+    ....){
     G <- if(is.null(grouping.var)) {
              "all"
          } else {
@@ -16,7 +17,7 @@ formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE){
     } else {
         WOR <- word.count(text.var$text)
     }
-    pos.list <- pos.by(text.var = text.var, grouping.var = grouping.var)
+    pos.list <- pos.by(text.var = text.var, grouping.var = grouping.var, ...)
     X <- pos.list[["pos.by.freq"]]
     nameX <- rownames(X)
     X <- data.frame(X)
@@ -29,7 +30,8 @@ formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE){
         sapply(WORDS, function(x) sum(x %in% c("the", "an", "a")))
     }
     if (!is.null(grouping.var)){
-        articles <- unlist(lapply(split(text.var, grouping.var), function(x) sum(article(x))))
+        articles <- unlist(lapply(split(text.var, grouping.var), function(x) 
+            sum(article(x))))
     } else {
         articles <- sum(article(text.var))
     }

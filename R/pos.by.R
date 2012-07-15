@@ -109,8 +109,7 @@
 #'   }
 #' 
 pos.by <-
-function(text.var, grouping.var = NULL, digits = 2, 
-    return.pos = FALSE){
+function(text.var, grouping.var = NULL, digits = 2, ...){
     G <- if(is.null(grouping.var)) {
              "all"
          } else {
@@ -125,7 +124,7 @@ function(text.var, grouping.var = NULL, digits = 2,
              }
          }
     if (!class(text.var) %in% c("POS", "POSby", "formality.measure")) {
-        pos.list <- pos(text.var, digits = digits)
+        pos.list <- pos(text.var, digits = digits, ...)
         text.var <- pos.list[["POSfreq"]]
     } else {
         pos.list <- text.var
