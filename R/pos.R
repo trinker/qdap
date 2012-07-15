@@ -167,10 +167,6 @@ function(text.var, na.omit = FALSE, digits = 2,
         m[nas, 1:ncol(m)] <- NA
     }
     POS <- list(text = text.var, POStagged = m, POSprop = G5, POSfreq = G4)
-    lapply(seq_along(POS), function(i) {
-        comment(POS[[i]]) <<- names(POS)[[i]]
-       }
-    )
     if(na.omit) POS <- lapply(POS, na.omit)
     class(POS) <- "POS"
     return(POS)
