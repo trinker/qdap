@@ -1,5 +1,5 @@
 formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE,
-    digits = 2, ....){
+    digits = 2){
     G <- if(is.null(grouping.var)) {
              "all"
          } else {
@@ -18,7 +18,7 @@ formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE,
         WOR <- word.count(text.var$text)
     }
     pos.list <- pos.by(text.var = text.var, grouping.var = grouping.var, 
-        digits = digits, ...)
+        digits = digits)
     X <- pos.list[["pos.by.freq"]]
     nameX <- rownames(X)
     X <- data.frame(X)
