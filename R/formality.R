@@ -1,5 +1,5 @@
 formality <- function(text.var, grouping.var = NULL, plot = FALSE,
-    sort.by.formality = TRUE, rev.grouping = TRUE, digits = 2){
+    sort.by.formality = TRUE, digits = 2){
     G <- if(is.null(grouping.var)) {
              "all"
          } else {
@@ -110,10 +110,6 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
     dat[, "form.class"] <- rep(c("formal", "contectual"), each = nrow(dat)/2)
     dat <- dat[rep(seq_len(dim(dat)[1]), dat[, 4]), -4]
     dat[, "pos"] <- factor(dat[, "pos"], levels=unique(dat[, "pos"]))
-    if (rev.grouping) {
-        dat[, "grouping"] <- factor(dat[, "grouping"] , 
-            levels=rev(levels(dat[, "grouping"] )))
-    }
     dat[, "form.class"] <- factor(dat[, "form.class"], 
         levels=unique(dat[, "form.class"]))
     row.names(dat) <- NULL
