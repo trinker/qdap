@@ -1,5 +1,6 @@
 formality <- function(text.var, grouping.var = NULL, plot = FALSE,
-    sort.by.formality = TRUE, digits = 2, point.colors = c("gray50", "blue")){
+    sort.by.formality = TRUE, digits = 2, symb = "|",
+    point.colors = c("gray50", "blue")){
     G <- if(is.null(grouping.var)) {
              gv <- TRUE
              "all"
@@ -157,7 +158,12 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             geom_text(aes(label = word.count), vjust = 2, size = 3, 
                 position = "identity") +  labs(size="word count") + 
             opts(title = "F Measure (Formality)", legend.position = 'bottom') +
-            geom_point(colour=point.colors[2], shape=20, size=.5)  
+            if (symb == "|") {
+                geom_text(aes(label = "|"), colour="red", size=2,
+                    position = "identity", hjust = .25, vjust = .25) 
+            } else {
+                geom_point(colour=point.colors[2], shape=20, size=.5)
+            }
             gridExtra::grid.arrange(YY, XX, ZZ, widths=c(.25, .45, .3), ncol=3)
     }
     class(o) <- "formality.measure"
