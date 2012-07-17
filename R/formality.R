@@ -1,6 +1,6 @@
 formality <- function(text.var, grouping.var = NULL, plot = FALSE,
     sort.by.formality = TRUE, digits = 2, plot.symbol = 20,
-    point.colors = c("gray50", "red")){
+    point.colors = c("gray50", "red"), bar.colors = NULL){
     G <- if(is.null(grouping.var)) {
              gv <- TRUE
              "all"
@@ -145,13 +145,19 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             geom_bar(position='fill') + 
             coord_flip() +  labs(fill=NULL) + 
             opts(title = "Percent Contextual-Formal", 
-                legend.position = 'bottom') 
+                legend.position = 'bottom')
+            if (!is.null(bar.colors)) {
+                YY <- YY + suppressWarnings(scale_fill_brewer(palette=bar.colors))
+            } 
         XX <- ggplot(data=dat, aes(grouping,  fill=pos)) + 
             geom_bar(position='fill') + coord_flip() + 
             facet_grid(~form.class, scales="free", margins = TRUE) +
             scale_x_discrete(drop=F) +  labs(fill=NULL) + 
             opts(title = "Percent Parts of Speech By Contextual-Formal", 
                 legend.position = 'bottom')
+            if (!is.null(bar.colors)) {
+                XX <- XX + scale_fill_brewer(palette=bar.colors)
+            }
         names(FOR)[1] <- "grouping"
         ZZ <- ggplot(data=FOR, aes(grouping,  formality, size=word.count)) + 
             geom_point(colour=point.colors[1]) + coord_flip()+
@@ -164,7 +170,8 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             } else {
                 geom_point(colour=point.colors[2], shape=20, size=.5)
             }
-            gridExtra::grid.arrange(YY, XX, ZZ, widths=c(.25, .45, .3), ncol=3)
+            suppressWarnings(gridExtra::grid.arrange(YY, XX, 
+                ZZ, widths=c(.25, .45, .3), ncol=3))
     }
     class(o) <- "formality.measure"
     return(o)
