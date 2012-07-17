@@ -133,7 +133,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
                 position = "identity") +  labs(size="word count") + 
             opts(title = "F Measure (Formality)", legend.position = 'bottom') +
             geom_point(colour="red", shape=20, size=.5)  
-        gridExtra::grid.arrange(YY, XX, ZZ, widths=c(.25, .45, .3), ncol=3)
+        gridExtra::grid.arrange(XX, YY, ZZ, widths=c(.45, .25, .3), ncol=3)
     }
     class(o) <- "formality.measure"
     return(o)
