@@ -172,7 +172,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             geom_text(aes(label = word.count), vjust = 2, size = 3, 
                 position = "identity") +  labs(size="word count") + 
             opts(title = "F Measure (Formality)", legend.position = 'bottom') +
-            scale_size_continuous(range = c(3, 8)) + xlab(G)  +
+            scale_size_continuous(range = c(1, 8)) + xlab(G)  +
             if (point.pch == "|") {
                 geom_text(aes(label = "|"), colour=point.colors[2], size=point.cex,
                     position = "identity", hjust = .25, vjust = .25) 
