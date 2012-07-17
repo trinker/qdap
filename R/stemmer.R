@@ -74,7 +74,7 @@
 stemmer <-
 function(text.var, rm.bracket = TRUE, capitalize = TRUE, 
          warn = TRUE, ...){
-  require(tm)
+  suppressWarnings(require(tm))
   txt <- as.character(text.var)
   if (rm.bracket){
     txt <- bracketX(txt)

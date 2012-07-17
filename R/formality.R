@@ -1,5 +1,5 @@
-formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE,
-    digits = 2){
+formality <- function(text.var, grouping.var = NULL, plot = FALSE,
+    sort.by.formality = TRUE, digits = 2){
     G <- if(is.null(grouping.var)) {
              "all"
          } else {
@@ -61,19 +61,19 @@ formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE,
     if (!is.null(X$DT)) {
         PD <- X$DT-articles
     }
-    DF1 <- data.frame( 
+    DF1 <- DF2 <- data.frame( 
         noun = rowSums(X[, names(X) %in% c("NN", "NNS", "NNP", "NNPS", 
-            "POS", "JI", "JK")]), 
+            "POS", "JI", "JK")]),
+        adj = rowSums(cbind(X[, names(X) %in% c("CD", "JJ", "JJR", "JJS", 
+            "JI", "JK")], PD)),   
+        prep = rowSums(X[, names(X) %in% c("IN", "RP", "TO", "JI", "JK")]),  
         articles = articles,
+        pronoun = rowSums(X[, names(X) %in% c("PRP", "PRP$", "PRP.", "WDT", 
+            "WP", "WP$", "WP.", "JI", "JK", "EX")]),  
         verb = rowSums(X[, names(X) %in% c("MD", "VB", "VBD", "VBG", 
             "VBN", "VBP", "VBZ", "JI", "JK")]),  
         adverb = rowSums(X[, names(X) %in% c("RB", "RBR", "RBS", "WRB", 
             "JI", "JK")]),  
-        pronoun = rowSums(X[, names(X) %in% c("PRP", "PRP$", "PRP.", "WDT", 
-            "WP", "WP$", "WP.", "JI", "JK", "EX")]),  
-        prep = rowSums(X[, names(X) %in% c("IN", "RP", "TO", "JI", "JK")]),  
-        adj = rowSums(cbind(X[, names(X) %in% c("CD", "JJ", "JJR", "JJS", 
-            "JI", "JK")], PD)),  
         interj = rowSums(X[, names(X) %in% c("UH", "JI", "JK")]))
     DF1RS <- rowSums(DF1)
     DF1 <- do.call(rbind, lapply(1:nrow(DF1), function(i) 100*(DF1[i, ]/DF1RS[i])))
@@ -89,8 +89,48 @@ formality <- function(text.var, grouping.var = NULL, sort.by.formality = TRUE,
         FOR <- FOR[order(-FOR$formality), ]
         rownames(FOR) <- NULL
     }
+    prop.by <- data.frame(FOR[, 1, drop = FALSE], word.count = WOR, 
+        apply(DF1, 2, round, digits = digits))
+    freq.by <- data.frame(FOR[, 1, drop = FALSE], word.count = WOR, DF2)
+    rownames(prop.by) <- rownames(freq.by) <- NULL
     o <- unclass(pos.list)
+    o$form.freq.by <- freq.by
+    o$form.prop.by <- prop.by
+    dat <- reshape(freq.by,           
+        direction="long",           
+        varying=list(c(3:10)), 
+        idvar='word.count',          
+        timevar="pos",          
+        v.names=c("freq"),        
+        times =names(freq.by)[-c(1:2)])
+    colnames(dat)[1] <- "grouping"
+    dat[, "form.class"] <- rep(c("formal", "contectual"), each = nrow(dat)/2)
+    dat <- dat[rep(seq_len(dim(dat)[1]), dat[, 4]), -4]
+    row.names(dat) <- NULL
+    o$pos.reshaped <- dat
     o$formality <- FOR
+    if (plot) {
+        suppressWarnings(require(ggplot2))
+        suppressWarnings(require(gridExtra))
+        YY <- ggplot(dat, aes(grouping,  fill=form.class)) + 
+            geom_bar(position='fill') + 
+            coord_flip() +  labs(fill=NULL) + 
+            opts(title = "Percent Contextual-Formal", 
+                legend.position = 'bottom') 
+        XX <- ggplot(data=dat, aes(grouping,  fill=pos)) + 
+            geom_bar(position='fill') + coord_flip() + 
+            facet_grid(~form.class, scales="free", margins = TRUE) +
+            scale_x_discrete(drop=F) +  labs(fill=NULL) + 
+            opts(title = "Percent Parts of Speech By Contextual-Formal", 
+                legend.position = 'bottom')
+        names(FOR)[1] <- "grouping"
+        ZZ <- ggplot(data=FOR, aes(grouping,  formality, size=word.count)) + 
+            geom_point() + coord_flip()+
+            geom_text(aes(label = word.count), vjust = 2, size = 3, 
+                position = "identity") +  labs(size="word count") + 
+            opts(title = "F Measure (Formality)", legend.position = 'bottom') 
+        gridExtra::grid.arrange(YY, XX, ZZ, widths=c(.25, .45, .3), ncol=3) 
+    }
     class(o) <- "formality.measure"
     return(o)
 }
