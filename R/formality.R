@@ -124,7 +124,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
     dat <- reshape(freq.by,           
         direction="long",           
         varying=list(c(3:10)), 
-        idvar='word.count',          
+        idvar= names(freq.by)[1:2],          
         timevar="pos",          
         v.names=c("freq"),        
         times =names(freq.by)[-c(1:2)])
