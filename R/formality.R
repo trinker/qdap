@@ -112,9 +112,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
     row.names(dat) <- NULL
     o$pos.reshaped <- dat
     o$formality <- FOR
-browser()
     if (plot) {
-browser()
         suppressWarnings(require(ggplot2))
         suppressWarnings(require(gridExtra))
         YY <- ggplot(dat, aes(grouping,  fill=form.class)) + 
