@@ -1,8 +1,10 @@
 formality <- function(text.var, grouping.var = NULL, plot = FALSE,
     sort.by.formality = TRUE, digits = 2){
     G <- if(is.null(grouping.var)) {
+             gv <- TRUE
              "all"
          } else {
+             gv <- FALSE
              if (is.list(grouping.var)) {
                  m <- unlist(as.character(substitute(grouping.var))[-1])
                  m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) x[length(x)])
@@ -28,8 +30,13 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             unlist(grouping.var)
         } 
     }
-    pos.list <- pos.by(text.var = text.var, grouping.var = grouping.var, 
-        digits = digits)
+    if (!gv) {
+        pos.list <- pos.by(text.var = text.var, 
+            grouping.var = grouping.var, digits = digits)
+    } else {
+        pos.list <- suppressWarnings(pos.by(text.var = text.var, 
+            grouping.var = NULL, digits = digits))
+    }
     text.var <- pos.list$text
     WOR <- word.count(text.var)
     X <- pos.list[["pos.by.freq"]]
@@ -79,21 +86,36 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
     DF1 <- do.call(rbind, lapply(1:nrow(DF1), function(i) 100*(DF1[i, ]/DF1RS[i])))
     FOR <- (rowSums(cbind(DF1$noun, DF1$article, DF1$adj, DF1$prep)) - 
         rowSums(cbind(DF1$pronoun, DF1$verb, DF1$adverb, DF1$interj)) + 100)/2
-    WOR <- sapply(split(WOR, grouping.var), sum, na.rm = TRUE)
-    if(!is.null(grouping.var)) {
+    if (!gv) {
+        WOR <- sapply(split(WOR, grouping.var), sum, na.rm = TRUE)
+    } else {
+        WOR <- sum(WOR, na.rm=TRUE)
+    }
+    if(!gv) {
         FOR <- data.frame(replace = X[, 1], word.count = WOR, formality = FOR)
+        colnames(FOR)[1] <- G
+    } else {
+        FOR <- data.frame(replace = X[, 1], word.count = WOR, 
+            formality = FOR)
         colnames(FOR)[1] <- G
     }
     FOR[, "formality"] <- round(FOR[, "formality"], digits = digits)
-    if (!is.null(grouping.var) & sort.by.formality) {
+    if (!gv & sort.by.formality) {
         FOR <- FOR[order(-FOR$formality), ]
         rownames(FOR) <- NULL
     }
-    prop.by <- data.frame(var=names(WOR), 
-        word.count = WOR, 
-        apply(DF1, 2, round, digits = digits))
-    freq.by <- data.frame(var=names(WOR), 
-        word.count = WOR, DF2)
+    if (!gv) {
+        prop.by <- data.frame(var=names(WOR), 
+            word.count = WOR, 
+            apply(DF1, 2, round, digits = digits))
+        freq.by <- data.frame(var=names(WOR), 
+            word.count = WOR, DF2)
+    } else {
+        prop.by <- data.frame(var="all", 
+            word.count = sum(WOR, na.rm = TRUE), DF1)
+        freq.by <- data.frame(var="all", 
+            word.count = sum(WOR, na.rm = TRUE), DF2)
+    }
     colnames(prop.by)[1] <- colnames(freq.by)[1] <- colnames(FOR)[1]
     rownames(prop.by) <- rownames(freq.by) <- NULL
     o <- unclass(pos.list)
