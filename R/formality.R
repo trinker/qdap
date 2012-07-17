@@ -55,7 +55,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
                 na.rm = TRUE ))
         }
     }
-    if (!is.null(grouping.var)){
+    if (!gv){
         stv <- split(text.var, grouping.var)
         stv <- stv[sapply(stv, function(x) !identical(x, character(0)))]
         articles <- unlist(lapply(stv, function(x){ 
