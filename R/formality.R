@@ -121,6 +121,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
     o <- unclass(pos.list)
     o$form.freq.by <- freq.by
     o$form.prop.by <- prop.by
+    o$formality <- FOR
     dat <- reshape(freq.by,           
         direction="long",           
         varying=list(c(3:10)), 
@@ -136,7 +137,6 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
         levels=unique(dat[, "form.class"]))
     row.names(dat) <- NULL
     o$pos.reshaped <- dat
-    o$formality <- FOR
     if (plot) {
         suppressWarnings(require(ggplot2))
         suppressWarnings(require(gridExtra))
