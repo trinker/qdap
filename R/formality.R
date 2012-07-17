@@ -169,7 +169,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
         names(FOR)[1] <- "grouping"
         ZZ <- ggplot(data=FOR, aes(grouping,  formality, size=word.count)) + 
             geom_point(colour=point.colors[1]) + coord_flip()+
-            geom_text(aes(label = word.count), vjust = 2, size = 3, 
+            geom_text(aes(label = word.count), vjust = 1.2, size = 3, 
                 position = "identity") +  labs(size="word count") + 
             opts(title = "F Measure (Formality)", legend.position = 'bottom') +
             scale_size_continuous(range = c(1, 8)) + xlab(G)  +
