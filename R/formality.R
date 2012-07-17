@@ -63,7 +63,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             }
         )) 
     } else {
-        articles <- sum(article(text.var$text))
+        articles <- sum(article(text.var))
     }
     if (!is.null(X$DT)) {
         PD <- X$DT-articles
