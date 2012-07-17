@@ -89,9 +89,11 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
         FOR <- FOR[order(-FOR$formality), ]
         rownames(FOR) <- NULL
     }
-    prop.by <- data.frame(FOR[, 1, drop = FALSE], word.count = WOR, 
+    prop.by <- data.frame(FOR[, 1, drop = FALSE], 
+        word.count = WOR[match(FOR[, 1], names(WOR))], 
         apply(DF1, 2, round, digits = digits))
-    freq.by <- data.frame(FOR[, 1, drop = FALSE], word.count = WOR, DF2)
+    freq.by <- data.frame(FOR[, 1, drop = FALSE], 
+        word.count = WOR[match(FOR[, 1], names(WOR))], DF2)
     rownames(prop.by) <- rownames(freq.by) <- NULL
     o <- unclass(pos.list)
     o$form.freq.by <- freq.by
