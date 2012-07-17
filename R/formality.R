@@ -144,6 +144,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
         YY <- ggplot(dat, aes(grouping,  fill=form.class)) + 
             geom_bar(position='fill') + 
             coord_flip() +  labs(fill=NULL) + 
+            ylab("proportion") + xlab(G)  +
             opts(title = "Percent Contextual-Formal", 
                 legend.position = 'bottom')
             if (!is.null(bar.colors)) {
@@ -153,10 +154,17 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             geom_bar(position='fill') + coord_flip() + 
             facet_grid(~form.class, scales="free", margins = TRUE) +
             scale_x_discrete(drop=F) +  labs(fill=NULL) + 
+            ylab("proportion") + xlab(G)  +
+            scale_fill_discrete(name = "", breaks=levels(dat$pos),
+                labels=c("noun", "adjective", "preposition", 
+                "articles", "pronoun", "verb", "adverb", "interjection")) +
             opts(title = "Percent Parts of Speech By Contextual-Formal", 
                 legend.position = 'bottom')
             if (!is.null(bar.colors)) {
-                XX <- XX + scale_fill_brewer(palette=bar.colors)
+                XX <- XX + scale_fill_brewer(palette=bar.colors, 
+                    name = "", breaks=levels(dat$pos),
+                    labels=c("noun", "adjective", "preposition", 
+                    "articles", "pronoun", "verb", "adverb", "interjection"))
             }
         names(FOR)[1] <- "grouping"
         ZZ <- ggplot(data=FOR, aes(grouping,  formality, size=word.count)) + 
@@ -164,6 +172,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             geom_text(aes(label = word.count), vjust = 2, size = 3, 
                 position = "identity") +  labs(size="word count") + 
             opts(title = "F Measure (Formality)", legend.position = 'bottom') +
+            scale_size_continuous(range = c(3, 8)) + xlab(G)  +
             if (point.pch == "|") {
                 geom_text(aes(label = "|"), colour=point.colors[2], size=point.cex,
                     position = "identity", hjust = .25, vjust = .25) 
