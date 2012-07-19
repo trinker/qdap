@@ -1,6 +1,6 @@
 formality <- function(text.var, grouping.var = NULL, plot = FALSE,
     sort.by.formality = TRUE, digits = 2, point.pch = 20, point.cex = .5,
-    point.colors = c("gray50", "red"), bar.colors = NULL){
+    point.colors = c("gray65", "red"), bar.colors = NULL, min.val = NULL){
     G <- if(is.null(grouping.var)) {
              gv <- TRUE
              "all"
@@ -138,6 +138,11 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
         levels=unique(dat[, "form.class"]))
     row.names(dat) <- NULL
     o$pos.reshaped <- dat
+    if (!is.null(min.val)){
+        dat <- dat[dat[, "word.count"] > min.val, ,drop = TRUE]
+        dat[, 1] <- factor(dat[, 1])
+        FOR <- FOR[FOR[, "word.count"] > min.val, ,drop = TRUE]
+    }
     if (plot) {
         suppressWarnings(require(ggplot2))
         suppressWarnings(require(gridExtra))
@@ -167,11 +172,15 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
                     "articles", "pronoun", "verb", "adverb", "interjection"))
             }
         names(FOR)[1] <- "grouping"
+        buffer <- diff(range(FOR$formality))*.05
         ZZ <- ggplot(data=FOR, aes(grouping,  formality, size=word.count)) + 
             geom_point(colour=point.colors[1]) + coord_flip()+
             geom_text(aes(label = word.count), vjust = 1.2, size = 3, 
-                position = "identity") +  labs(size="word count") + 
+                position = "identity",colour = "grey30") +  
+            labs(size="word count") + 
             opts(title = "F Measure (Formality)", legend.position = 'bottom') +
+            scale_y_continuous(limits=c(min(FOR$formality)-buffer, 
+                max(FOR$formality) + buffer)) +
             scale_size_continuous(range = c(1, 8)) + xlab(G)  +
             if (point.pch == "|") {
                 geom_text(aes(label = "|"), colour=point.colors[2], size=point.cex,
