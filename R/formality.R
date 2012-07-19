@@ -1,6 +1,6 @@
 formality <- function(text.var, grouping.var = NULL, plot = FALSE,
     sort.by.formality = TRUE, digits = 2, point.pch = 20, point.cex = .5,
-    point.colors = c("gray65", "red"), bar.colors = NULL, min.val = NULL){
+    point.colors = c("gray65", "red"), bar.colors = NULL, min.wrdcnt = NULL){
     G <- if(is.null(grouping.var)) {
              gv <- TRUE
              "all"
@@ -138,10 +138,10 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
         levels=unique(dat[, "form.class"]))
     row.names(dat) <- NULL
     o$pos.reshaped <- dat
-    if (!is.null(min.val)){
-        dat <- dat[dat[, "word.count"] > min.val, ,drop = TRUE]
+    if (!is.null(min.wrdcnt)){
+        dat <- dat[dat[, "word.count"] > min.wrdcnt, ,drop = TRUE]
         dat[, 1] <- factor(dat[, 1])
-        FOR <- FOR[FOR[, "word.count"] > min.val, ,drop = TRUE]
+        FOR <- FOR[FOR[, "word.count"] > min.wrdcnt, ,drop = TRUE]
     }
     if (plot) {
         suppressWarnings(require(ggplot2))
