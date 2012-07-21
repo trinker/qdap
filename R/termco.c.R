@@ -83,7 +83,7 @@
 #'   }
 #' 
 termco.c <-
-function(termco.d.object, combined.columns, new.name, 
+function(termco.d.object, combined.columns, new.name, short.term = FALSE,
          zero.replace = NULL, lazy.term = TRUE, elim.old = TRUE) { 
   if (!class(termco.d.object) %in% c("termco_d", "termco_c")) {
     stop("termco.d.object must be a termco.d.object or termco.c.object")
@@ -185,5 +185,8 @@ function(termco.d.object, combined.columns, new.name,
   o <- list(raw = x2, prop = y2, rnp = DF, zero_replace = zero.replace,
     output = termco.d.object$output, digits = termco.d.object$digits)
   class(o) <- "termco_c"
+  if (short.term) {
+    o <- termco2short.term(o)
+  }
   return(o)
 }

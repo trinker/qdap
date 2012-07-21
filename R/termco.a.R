@@ -1,6 +1,7 @@
 termco.a <-
-function (text.var, grouping.var=NULL, match.list, ignore.case = FALSE, 
-    lazy.term = TRUE, elim.old = TRUE, zero.replace = 0, output = "percent", digits = 2) {
+function (text.var, grouping.var=NULL, match.list, short.term = FALSE,
+    ignore.case = FALSE, lazy.term = TRUE, elim.old = TRUE, zero.replace = 0, 
+    output = "percent", digits = 2) {
     preIND <- match.list
     IND <- unlist(lapply(preIND, length))
     new.names <- paste0("term(", names(IND)[IND != 1], ")")
@@ -18,6 +19,9 @@ function (text.var, grouping.var=NULL, match.list, ignore.case = FALSE,
         }
     } else {
         o <- TD
+    }
+    if (short.term) {
+      o <- termco2short.term(o)
     }
     return(o)
 }

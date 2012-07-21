@@ -61,8 +61,8 @@
 #'   }
 #' 
 termco.d <-
-  function (text.var, grouping.var=NULL, match.string, ignore.case = FALSE, 
-    zero.replace = 0, output = "percent", digits = 2){
+  function (text.var, grouping.var=NULL, match.string, short.term = FALSE,
+    ignore.case = FALSE, zero.replace = 0, output = "percent", digits = 2){
   NAME <- if (is.null(grouping.var)) {
     "all"
   } else {
@@ -108,5 +108,8 @@ termco.d <-
   o <- list(raw = x, prop = y, rnp = z, zero_replace = zero.replace,
     output = output, digits = digits)
   class(o) <- "termco_d"
+  if (short.term) {
+    o <- termco2short.term(o)
+  }
   return(o)
 }
