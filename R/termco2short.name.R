@@ -1,4 +1,4 @@
-termco.short.name <-
+termco2short.name <-
 function(termco.object){
     CLASS <- class(termco.object)
     short.name <- function(df){
