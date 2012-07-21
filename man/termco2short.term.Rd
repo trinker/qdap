@@ -1,5 +1,5 @@
-\name{termco2short.name}
-\alias{termco2short.name}
+\name{termco2short.term}
+\alias{termco2short.term}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Converts a termco object to a termco object with shortened column names.
