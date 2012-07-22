@@ -1,5 +1,5 @@
 term.match <-
-function(terms, text.var, return.list=TRUE) {
+function(text.var, terms, return.list=TRUE) {
     y <- stopwords(text.var, stopwords = NULL, 
         unlist=TRUE, strip=TRUE, unique=TRUE)
     x <- lapply(unlist(terms), function(z) {
