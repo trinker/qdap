@@ -1,5 +1,5 @@
 spaste <- 
-function(terms, leading = TRUE, trailing = TRUE){
+function(terms, trailing = TRUE, leading = TRUE){
   if (leading) {
     s1 <- " "
   } else {
