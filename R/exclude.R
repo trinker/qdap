@@ -36,5 +36,9 @@ function(word.list, ...) {
         mf <- match.call(expand.dots = FALSE)   
         excluded <- as.character(mf[[3]])
     }
-    word.list[!word.list %in% excluded]
+    if (!is.list(word.list)) {
+      word.list[!word.list %in% excluded]
+    } else {
+      lapply(word.list, function(x) x[!x %in% excluded])
+    }
 }
