@@ -31,7 +31,7 @@ termco2mat <-function (dataframe, drop.wc = TRUE, short.terms = TRUE,
   } else {
     1
   }
-  MAT <- as.matrix(dataframe[, -c(ind)])
+  MAT <- as.matrix(dataframe[, -c(ind), drop = FALSE])
   rownames(MAT) <- dataframe[, 1]
   if (short.terms) {
     mn <- gsub("(.*)\\)([^\\)]*)", "\\1\\2", colnames(MAT))
