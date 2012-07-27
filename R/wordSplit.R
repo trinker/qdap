@@ -1,6 +1,5 @@
-wordSplit <-
-function(dataframe, text.var, codes = NULL, csv = FALSE, 
-    file.name = NULL, strip =FALSE){
+wordSplit <- function(dataframe, text.var, codes = NULL, csv = FALSE, 
+    file.name = NULL, transpose = FALSE, strip =FALSE){
     tv <- as.character(dataframe[, text.var])
     if (strip) {
         tv <- strip(tv)
@@ -19,6 +18,11 @@ function(dataframe, text.var, codes = NULL, csv = FALSE,
         DF <- data.frame(leftover[rep(1:nrow(leftover), lens), , 
             drop = FALSE], text=unlist(wrds)) 
     }
+    if (transpose) {
+        DF <- t(DF)
+        DF <- data.frame(vars = rownames(DF), DF, check.names = FALSE)
+        rownames(DF) <- NULL
+    }
     if(csv) {
         if (is.null(file.name)) {
             file.name <- as.character(substitute(dataframe))
@@ -27,4 +31,4 @@ function(dataframe, text.var, codes = NULL, csv = FALSE,
             col.names = T, row.names=F, qmethod = "double") 
     }
     return(DF)
-}
+} 
