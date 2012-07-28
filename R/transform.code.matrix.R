@@ -1,0 +1,23 @@
+transform.code.matrix <-
+function(dataframe, text.var, code.vars) {
+    DF <- data.frame(t(dataframe))
+    if (!is.numeric(text.var)) {
+        text.var <- which(colnames(DF) == text.var)
+    }
+    if (!is.numeric(code.vars)) {
+        code.vars <- which(colnames(DF) %in% c(code.vars))
+    }
+    left.overs <- which(!1:ncol(DF) %in% c(code.vars, text.var))
+    DF[, text.var] <- as.character(DF[, text.var])
+    lapply(code.vars, function(i) {
+            DF[, i] <<- as.numeric(DF[, i])
+        return(DF)
+        }
+    )
+    lapply(left.overs, function(i) {
+            DF[, i] <<- as.factor(DF[, i])
+        return(DF)
+        }
+    )
+    return(DF)
+}
