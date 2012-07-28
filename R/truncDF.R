@@ -28,7 +28,9 @@
 #'     data.frame(lapply(x, substr, begin, end), check.names = FALSE)
 #'   }
 #' 
-truncdf <-
+truncdf <- 
 function(x, end=10, begin=1) {
-    data.frame(lapply(x, substr, begin, end), check.names=FALSE)
+    DF <- data.frame(lapply(x, substr, begin, end), check.names=FALSE)
+    names(DF) <- substring(names(DF), begin, end)
+    return(DF)
 }
