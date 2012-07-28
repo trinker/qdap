@@ -1,6 +1,6 @@
 transform.code.matrix <-
 function(dataframe, text.var, code.vars) {
-    DF <- data.frame(t(dataframe))
+    DF <- data.frame(t(dataframe), stringsAsFactors = FALSE)
     if (!is.numeric(text.var)) {
         text.var <- which(colnames(DF) == text.var)
     }
