@@ -1,8 +1,8 @@
 qcv <- 
   function(..., terms = NULL, space.wrap = FALSE, trailing = FALSE, 
-    leading = FALSE){
+    leading = FALSE, split = " "){
   if (!is.null(terms)) {
-    x <- strsplit(terms, split=",")
+    x <- strsplit(terms, split = split)
   } else {
     x <- substitute(...())
   }
