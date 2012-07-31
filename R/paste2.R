@@ -51,6 +51,9 @@
 #' 
 paste2 <-
 function(multi.columns, sep=".", handle.na=TRUE, trim=TRUE){
+    if (is.matrix(multi.columns)) {
+        multi.columns <- data.frame(multi.columns)
+    }
     if (trim) multi.columns <- lapply(multi.columns, function(x) {
             gsub("^\\s+|\\s+$", "", x)
         }
