@@ -28,6 +28,15 @@
 #'   }
 #' 
 scrubber <-
-function(text.var, num2word=FALSE){
-    reducer(Trim(clean(text.var)))
+function(text.var, num2word = FALSE, fixComma = TRUE, ...){
+    x <- reducer(Trim(clean(text.var)))
+    if (fixComma) {
+        x <- gsub(" ,", ",", x)
+    }
+    ncx <- nchar(x)
+    x <- paste0(Trim(substring(x, 1, ncx - 1)), substring(x, ncx))
+    if (num2word) {
+        x <- num_replace(x, ...)
+    }
+    return(x)
 }
