@@ -38,7 +38,12 @@
 strWrap <-
 function(text = "clipboard", width = 70) {
     if (text == "clipboard") {
-        text <- paste(readClipboard(), collapse=" ")
+        if (Sys.info()["sysname"] == "Darwin") {
+            text <- paste(pipe("pbpaste"), collapse=" ")
+        }
+        if (Sys.info()["sysname"] == "Windows") {
+            text <- paste(readClipboard(), collapse=" ")
+        }
     } 
     x <- gsub("\\s+", " ", gsub("\n|\t", " ", text))
     x <- strwrap(x, width = width)
