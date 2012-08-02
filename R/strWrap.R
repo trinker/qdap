@@ -37,13 +37,18 @@
 #' 
 strWrap <-
 function(text = "clipboard", width = 70) {
-    x <- if (text == "clipboard") {
-         paste(readClipboard(), collapse=" ")
-    } else {
-        text
-    }
-    x <- gsub("\\s+", " ", gsub("\n|\t", " ", x))
+    if (text == "clipboard") {
+        text <- paste(readClipboard(), collapse=" ")
+    } 
+    x <- gsub("\\s+", " ", gsub("\n|\t", " ", text))
     x <- strwrap(x, width = width)
-    writeClipboard(x, format = 1)
-    writeLines(strwrap(x, width = width))
+    if (Sys.info()["sysname"] == "Windows") {
+        writeClipboard(x, format = 1)
+    }
+    if (Sys.info()["sysname"] == "Darwin") {
+        j <- pipe("pbcopy", "w")
+        cat(x, file = j)
+        close(j)
+    }
+    writeLines(x)
 }
