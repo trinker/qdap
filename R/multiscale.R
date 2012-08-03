@@ -60,7 +60,7 @@
 #'     list(SCALED_OBSERVATIONS = X, DESCRIPTIVES_BY_GROUP = mean.sd.n)
 #'   }
 #' 
-multi.scale <-
+multiscale <-
 function(numeric.var, grouping.var, order.by = "original", 
     digits = 2) {
     G <- as.character(substitute(grouping.var))
