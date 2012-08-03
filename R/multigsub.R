@@ -37,7 +37,7 @@
 #'     return(x)
 #'   }
 #' 
-mgsub <-
+multigsub <-
 function(pattern, replacement = NULL, text.var, leadspace = FALSE, 
     trailspace = FALSE, fixed = TRUE, ...){
     if (leadspace | trailspace) {
