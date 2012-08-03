@@ -38,9 +38,12 @@
 strWrap <-
 function(text = "clipboard", width = 70) {
     if (text == "clipboard") {
-        if (Sys.info()["sysname"] == "Darwin") {
-            text <- paste(pipe("pbpaste"), collapse=" ")
-        }
+        if (Sys.info()["sysname"] == "Darwin") {        
+            pcon <- pipe("pbpaste")
+            text <- paste(scan(pcon, what="character", 
+                quiet=TRUE), collapse=" ")
+            close(pcon)
+        }                                             
         if (Sys.info()["sysname"] == "Windows") {
             text <- paste(readClipboard(), collapse=" ")
         }
@@ -50,10 +53,10 @@ function(text = "clipboard", width = 70) {
     if (Sys.info()["sysname"] == "Windows") {
         writeClipboard(x, format = 1)
     }
-    if (Sys.info()["sysname"] == "Darwin") {
-        j <- pipe("pbcopy", "w")
-        cat(x, file = j)
-        close(j)
-    }
+    if (Sys.info()["sysname"] == "Darwin") {           
+        j <- pipe("pbcopy", "w")                       
+        writeLines(x, con = j)                               
+        close(j)                                    
+    }                                                 
     writeLines(x)
 }
