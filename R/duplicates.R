@@ -31,5 +31,9 @@
 duplicates <-
 function(string, threshhold=1){
     x<-sort(unlist(strsplit(string, " ")))
-    names(table(x))[table(x) >= threshhold]
+    if (threshhold > 1) {
+        names(table(x))[table(x) >= threshhold]
+    } else {
+        unique(x[duplicated(x)])
+    }
 }

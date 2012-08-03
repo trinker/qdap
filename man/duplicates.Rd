@@ -1,6 +1,5 @@
 \name{duplicates}
 \alias{duplicates}
-\alias{duplicates2}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Find Duplicated Words in a Text String
