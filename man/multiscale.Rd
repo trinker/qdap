@@ -1,5 +1,5 @@
-\name{multi.scale}
-\alias{multi.scale}
+\name{multiscale}
+\alias{multiscale}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Standardize Within a Person and then Within a Group

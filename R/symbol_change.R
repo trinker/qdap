@@ -52,6 +52,7 @@ function(text.var, dollar = TRUE, percent = TRUE,
   x <- c(dollar, percent, pound, at, and, with, with)
   mgsub(pattern = c("%", "$", "#", "&", "@", "w/o", "w/")[x], 
         replacement = c("percent", "dollar", "pound", "and", "at", 
-        "without", "with")[x], text.var = text.var, fixed = TRUE)
+        "without", "with")[x], text.var = text.var, fixed = TRUE,
+         leadspace = FALSE, trailspace = FALSE)
 }
 
