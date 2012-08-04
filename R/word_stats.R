@@ -74,8 +74,7 @@ function(text.var, grouping.var = NULL, tot = NULL, rm.incomplete = FALSE,
           "  Suggested use of sentSplit function."))
     }
     DF <- na.omit(data.frame(group = grouping, tot.sen = t.o.t., 
-        TOT = TOT(t.o.t.), text.var = Text, stringsAsFactors = FALSE))
-    
+        TOT = TOT(t.o.t.), text.var = Text, stringsAsFactors = FALSE))  
     if (rm.incomplete) {
         DF <- endf(dataframe = DF, text.var = text.var, ...)
     }
