@@ -16,7 +16,7 @@
 #' all.words(raj$dialogue, contains="conc")
 #' all.words(raj$dialogue)
 #' 
-all.words <-
+all_words <-
 function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE){
     if (!is.null(begins.with) & !is.null(contains)) {
         stop("Can not use both 'begins.with' & 'contains' arguments")

@@ -1,6 +1,6 @@
 export(adjacency_matrix)
 export(adjmat)                   
-export(all.words)                    
+export(all_words)                    
 export(automated_readability_index) 
 export(bag.o.words)                  
 export(blank2NA)                    
