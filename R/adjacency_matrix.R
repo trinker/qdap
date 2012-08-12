@@ -11,7 +11,8 @@
 #' @keywords adjacency matrix
 #' @examples
 #' wordLIST <- c(" montague", " capulet", " court", " marry")
-#' (raj.termco <- with(raj.act.1, termco.a(dialogue, person, wordLIST, ignore.case = T)))
+#' (raj.termco <- with(raj.act.1, termco.a(dialogue, person, 
+#'     wordLIST, ignore.case = T)))
 #' (raj.adjmat <- adjmat(raj.termco))
 #' 
 adjacency_matrix <-
