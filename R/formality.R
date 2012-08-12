@@ -1,3 +1,25 @@
+#' Formality score
+#' 
+#' Transcript apply formality score by grouping variable(s)
+#' 
+#' @param text.var The text variable.
+#' @param group.vars The grouping variables.  Default NULL generates formality score for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
+#' @param plot logical. Provides a visualization for the results
+#' @param sort.by.formality logical.  If TURE orders the results by formality score.
+#' @param digits The number of digits displayed
+#' @param point.pch The plotting symbol.
+#' @param point.cex  The plotting symbol size.
+#' @param point.colors A vector of colors (length of two) to plot word count and formality score
+#' @param bar.colors A palette of colors to supply to the bars in the visualization
+#' @param min.wrdcnt A minimum word count threshold that must be achieved to be considered in the results.  Default includes all subgroups.
+#' @return returns a bject of the class "word.list".  This is a list of 5 word lists: complete word list (raw words; "cwl"), stop word list (same as rwl with stop words removed; "swl"), frequency word list (a data frame of words and correspnding frequency counts; "fwl"), fequency stopword word list (same as fwl but with stopwords removed; "fswl") and reduced frequency stopword word list (same as fswl but truncated to n rows; "rfswl").
+#' @references Heylighen, F., & Dewaele, J.M. (2002). Variation in the contextuality of language: An empirical measure. Context in Context, Special issue of Foundations of Science, 7 (3), 293-340.
+#' @keywords formality explicit
+#' @examples
+#' rajDEM <- key_merge(raj, raj.demographics, 'person')
+#' with(rajDEM, formality(rajPOS, list(sex, died), plot=T))
+#'
+
 formality <- function(text.var, grouping.var = NULL, plot = FALSE,                   
     sort.by.formality = TRUE, digits = 2, point.pch = 20, point.cex = .5,            
     point.colors = c("gray65", "red"), bar.colors = NULL, min.wrdcnt = NULL){        

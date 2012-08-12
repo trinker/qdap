@@ -1,4 +1,4 @@
-#' Transcript Apply Raw Word Lists and Frequency Counts
+#' Generate Raw Word Lists and Word Frequency Counts
 #' 
 #' Transcript Apply Raw Word Lists and Frequency Counts by grouping variable(s)
 #' 
@@ -7,10 +7,15 @@
 #' @param group.vars The grouping variables.  Default NULL generates one word list for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
 #' @param stopwords A vector of stop words to remove.
 #' @param cut.n Cut off point for reduced frequency stop word list (rfswl)
-#' @param cap logical.  If TRUE capitalizes words from the cap.list
+#' @param cap logical. If TRUE capitalizes words from the cap.list
 #' @param cap.list Vector of words to capitalize.
-#' @param cap.I logical.  If TRUE capitalizes words containing the personal pronoun I.
-#' @return retruns a bject of the class "word.list".  This is a list of 5 word lists: complete word list (raw words; "cwl"), stop word list (same as rwl with stop words removed; "swl"), frequency word list (a data frame of words and correspnding frequency counts; "fwl"), fequency stopword word list (same as fwl but with stopwords removed; "fswl") and reduced frequency stopword word list (same as fswl but truncated to n rows; "rfswl").
+#' @param cap.I logical. If TRUE capitalizes words containing the personal pronoun I.
+#' @return An object of class "word.list" is a list containing at the following components: 
+#' \item{cwl}{complete word list; raw words}
+#' \item{swl}{stop word list; same as rwl with stop words removed}
+#' \item{fwl}{frequency word list; a data frame of words and correspnding frequency counts}
+#' \item{fswl}{fequency stopword word list; same as fwl but with stopwords removed}
+#' \item{rfswl}{reduced frequency stopword word list; same as fswl but truncated to n rows}
 #' @keywords word list
 #' @examples
 #' XX <-word_list(raj.act.1$dialogue)
