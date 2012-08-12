@@ -14,6 +14,15 @@
 #' (raj.termco <- with(raj.act.1, termco.a(dialogue, person, 
 #'     wordLIST, ignore.case = T)))
 #' (raj.adjmat <- adjmat(raj.termco))
+#' names(raj.adjmat)  #see what's available from the adjacency_matrix object
+#' 
+#' g <- graph.adjacency(raj.adjmat$adjacency, weighted=TRUE, mode ='undirected')
+#' library(igraph)
+#' g <- simplify(g)
+#' V(g)$label <- V(g)$name
+#' V(g)$degree <- degree(g)
+#' layout1 <- layout.auto(g)
+#' plot(g, layout=layout1)
 #' 
 adjacency_matrix <-
 function(matrix.obj) {
