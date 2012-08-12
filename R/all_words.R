@@ -11,10 +11,10 @@
 #' @seealso 
 #' \code{\link[qdap]{term.match}}
 #' @examples
-#' #' all.words(raj$dialogue, begins.with="re")
-#' all.words(raj$dialogue, "q")
-#' all.words(raj$dialogue, contains="conc")
-#' all.words(raj$dialogue)
+#' all_words(raj$dialogue, begins.with="re")
+#' all_words(raj$dialogue, "q")
+#' all_words(raj$dialogue, contains="conc")
+#' all_words(raj$dialogue)
 #' 
 all_words <-
 function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE){
