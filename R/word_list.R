@@ -1,26 +1,30 @@
 #' Transcript Apply Raw Word Lists and Frequency Counts
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-#' 
-#' %% ~~ If necessary, more details than the description above ~~
+#' Transcript Apply Raw Word Lists and Frequency Counts by grouping variable(s)
 #' 
 #' @aliases word_list qda print.qda
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param group.vars %% ~~Describe \code{group.vars} here~~
-#' @param stopwords %% ~~Describe \code{stopwords} here~~
-#' @param cut.n %% ~~Describe \code{cut.n} here~~
-#' @param cap %% ~~Describe \code{cap} here~~
-#' @param cap.list %% ~~Describe \code{cap.list} here~~
-#' @param cap.I %% ~~Describe \code{cap.I} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param text.var The text variable.
+#' @param group.vars The grouping variables.  Default NULL generates one word list for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
+#' @param stopwords A vector of stop words to remove.
+#' @param cut.n Cut off point for reduced frequency stop word list (rfswl)
+#' @param cap logical.  If TRUE capitalizes words from the cap.list
+#' @param cap.list Vector of words to capitalize.
+#' @param cap.I logical.  If TRUE capitalizes words containing the personal pronoun I.
+#' @return retruns a bject of the class "word.list".  This is a list of 5 word lists: complete word list (raw words; "cwl"), stop word list (same as rwl with stop words removed; "swl"), frequency word list (a data frame of words and correspnding frequency counts; "fwl"), fequency stopword word list (same as fwl but with stopwords removed; "fswl") and reduced frequency stopword word list (same as fswl but truncated to n rows; "rfswl").
+#' @keywords word list
 #' @examples
+#' XX <-word_list(raj.act.1$dialogue)
+#' names(XX)
+#' XX$cwl
+#' XX$swl
+#' XX$fwl 
+#' XX$fswl 
+#' XX$rfswl 
+#' 
+#' with(raj, word_list(text.var = dialogue, grouping.var = list(person, act)))
+#' with(DATA, word_list(state, person))
+#' with(DATA, word_list(state, person, stopwords = Top25Words))
+#' with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))
 #' 
 word_list <- 
 function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
