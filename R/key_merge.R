@@ -1,38 +1,44 @@
 #' Merge Demogrphic Information with Person/Text Transcript
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' Wrapper function for merging demogrphic information with person/text transcript
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param transcript.df %% ~~Describe \code{transcript.df} here~~
-#' @param key.df %% ~~Describe \code{key.df} here~~
-#' @param common.column %% ~~Describe \code{common.column} here~~
-#' @param defualt.arrange %% ~~Describe \code{defualt.arrange} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param transcript.df The text/person transcript dataframe
+#' @param key.df The demographic dataframe.
+#' @param common.column The column(s) shared by transcript.ef and key.df.  If NULL function defaults to use any columns with the same name.
+#' @param defualt.arrange logical.  If TRUE will arrange the columns with text to the far right.
+#' @return Outputs a merged transcript dataframe with demographic information.
+#' @keywords merge, demographic
+#' @seealso 
+#' \code{\link[base]{merge}},
 #' @examples
-#'merged.raj <- key_merge(raj, raj.demographics, "person")
+#'merged.raj <- key_merge(raj, raj.demographics)
 #'htruncdf(merged.raj, 10, 40)
 #' 
 key_merge <-
-function(transcript.df, key.df, common.column, 
-         defualt.arrange = TRUE) {
-  transcript.df$IDCOL <- 1:nrow(transcript.df)
-  DF <- merge(transcript.df, key.df, by = c(common.column, 
-                                            common.column), incomparables = NA)
-  if (defualt.arrange) {
-    DF <- DF[, c(1, 3:ncol(DF), 2)]
-  } else {
-    DF <- DF
-  }
-  DF <- DF[order(DF$IDCOL), ]
-  DF$IDCOL <- NULL
-  rownames(DF) <- NULL
-  return(DF)
+function(transcript.df, key.df, common.column = NULL, 
+    defualt.arrange = TRUE) {
+    transcript.df$IDCOL <- 1:nrow(transcript.df)
+    if (!is.null(common.column)) {
+        if (length(common.column) == 1) {
+            CC <- c(common.column,  common.column) 
+        } else {
+            if (length(common.column) == 2) {
+                CC <- c(common.column[1],  common.column[2])    
+            } else {
+                stop("common.column must be off length 1 or 2")
+            }         
+        }
+    } else {
+        cc <- colnames(transcript.df)
+        CC <- cc[cc %in% colnames(key.df)]
+    }
+    DF <- merge(transcript.df, key.df, by = CC, 
+        incomparables = NA)
+    if (defualt.arrange) {
+        DF <- DF[, c(1, 3:ncol(DF), 2)]
+    }
+    DF <- DF[order(DF$IDCOL), ]
+    DF$IDCOL <- NULL
+    rownames(DF) <- NULL
+    return(DF)
 }
