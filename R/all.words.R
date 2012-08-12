@@ -5,6 +5,7 @@
 #' @param text.var The text variable
 #' @param begins.with This argument takes a word chunk.  Default is NULL. Use this if searching for a word begining with the word chunk.
 #' @param contains This argument takes a word chunk.  Default is NULL. Use this if searching for a word containing the word chunk.
+#' @param alphabetical logical.  If True orders rows alphabetically, if false orders the rows by frequency.
 #' @return Returns a dataframe with frequency counts of words that begin with or containt he provided word chunk.
 #' @note Can not provide both begins.with and contains arguments at once.  If both begins.with and contains are NULL all.words returns a frequency count for all words.
 #' @seealso 
@@ -16,7 +17,7 @@
 #' all.words(raj$dialogue)
 #' 
 all.words <-
-function(text.var, begins.with = NULL, contains = NULL){
+function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE){
     if (!is.null(begins.with) & !is.null(contains)) {
         stop("Can not use both 'begins.with' & 'contains' arguments")
     }
@@ -34,6 +35,9 @@ function(text.var, begins.with = NULL, contains = NULL){
     if (!is.null(contains)) {
         y <- y[grep(contains, y[, 1]), ]
         if(nrow(y)==0) stop("No words match")
+    }
+    if (!alphabetical) {
+        y <- y[order(y$FREQ, y$WORD), ]
     }
     rownames(y) <- NULL
     left.just(y, "WORD")
