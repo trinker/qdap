@@ -46,7 +46,8 @@ function(dataframe, ranges, value = 1, text.var = NULL, code.vars = NULL,
         value <- rep(value, length(code.vars))
     }
     CV <- dataframe[, code.vars]
-    lapply(1:ncol(CV), function(i) {
+    inds <- which(colnames(CV) %in% names(ranges))
+    lapply(inds, function(i) {
             CV[ ranges[[colnames(CV)[i]]], colnames(CV)[i]] <<- value[i]
             return(CV)
         }
