@@ -12,6 +12,7 @@
 #' @param point.colors A vector of colors (length of two) to plot word count and formality score
 #' @param bar.colors A palette of colors to supply to the bars in the visualization.  If two palettes are provided to the two bar plots respectively.
 #' @param min.wrdcnt A minimum word count threshold that must be achieved to be considered in the results.  Default includes all subgroups.
+#' @warning Heylighen & Dewaele(2002) say "At present, a sample would probably need to contain a few hundred words for the measure to be minimally reliable. For single sentences, the F-value should only be computed for purposes of illustration".
 #' @return A list containing at the following components: 
 #' \item{text}{The text variable} 
 #' \item{POStagged}{Raw part of speech for every word of the text variable} 
