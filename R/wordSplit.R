@@ -13,11 +13,12 @@ wordSplit <- function(dataframe, text.var, codes = NULL, csv = FALSE,
         MAT <- matrix(rep(0, lcodes*lwrds), lwrds, lcodes)
         colnames(MAT) <- codes      
         DF <- data.frame(leftover[rep(1:nrow(leftover), lens), , 
-            drop = FALSE], text=unlist(wrds), MAT)  
+            drop = FALSE], text=unlist(wrds), word.num = 1:lwrds, MAT)  
     } else {
         DF <- data.frame(leftover[rep(1:nrow(leftover), lens), , 
             drop = FALSE], text=unlist(wrds)) 
     }
+    DF[, "word.num"] <- 1:nrow(DF)
     if (transpose) {
         DF <- t(DF)
         DF <- data.frame(vars = rownames(DF), DF, check.names = FALSE)
