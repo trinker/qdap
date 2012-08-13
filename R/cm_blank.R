@@ -1,4 +1,4 @@
-#' Breaks transcript dialogue into words for coding
+#' Break Transcript Dialogue into Blank Code Matrix
 #' 
 #' Breaks transcript dialogue into words while retaining the demographic factors associate with each word.  The codes argument provides a matrix of zeros that can serve as a dummy coded matrix of codes per word.
 #' 
@@ -11,9 +11,9 @@
 #' @param strip logical.  If TRUE all punctuation is removed.
 #' @return Generates a dataframe, and optional csv file, of individual words while maintaing demgraphic information.  If a vector of codes is provided the outcome is a matrix of words used by codes filled with zeros.  This dataframe is useful for dummy coded (1-yes code exists; 2-no it does not) representation of data and can be used for visualizations and statistical analysis.
 #' @seealso 
-#' \code{\link{insertDummy}}
-#' \code{\link{code2long}}
-#' \code{\link{transform.code.matrix}}
+#' \code{\link{cm_fill}}
+#' \code{\link{cm2long}}
+#' \code{\link{cm_transform}}
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding
 #' @examples
@@ -23,7 +23,7 @@
 #' head(wordSplit(raj.act.1, "dialogue", codes))
 #' wordSplit(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
 #'
-wordSplit <- function(dataframe, text.var, codes = NULL, csv = FALSE, 
+cm_blank <- function(dataframe, text.var, codes = NULL, csv = FALSE, 
     file.name = NULL, transpose = FALSE, strip =FALSE){
     tv <- as.character(dataframe[, text.var])
     if (strip) {

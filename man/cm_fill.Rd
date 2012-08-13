@@ -1,5 +1,5 @@
-\name{insertDummy}
-\alias{insertDummy}
+\name{cm_fill
+\alias{cm_fill}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Range Coding of a splitWord Matrix

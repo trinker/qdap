@@ -1,4 +1,4 @@
-transform.code.matrix <-
+cm_transform <-
 function(dataframe, text.var, code.vars) {
     DF <- data.frame(t(dataframe), stringsAsFactors = FALSE)
     if (!is.numeric(text.var)) {

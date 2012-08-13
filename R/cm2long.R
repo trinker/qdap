@@ -1,4 +1,4 @@
-code2long <- function(dataframe, code.vars, repeat.vars = NULL, 
+cm2long <- function(dataframe, code.vars, repeat.vars = NULL, 
     rev.code = TRUE){
     if (is.numeric(code.vars)) {
         code.vars <- colnames(dataframe)[code.vars]

@@ -1,5 +1,5 @@
-\name{wordSplit}
-\alias{wordSplit}
+\name{cm_blank}
+\alias{cm_blank}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Breaks transcript dialogue into words while retaining the demographic factors associate with each word

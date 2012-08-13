@@ -1,5 +1,5 @@
-\name{transform.code.matrix}
-\alias{transform.code.matrix}
+\name{cm_transform}
+\alias{cm_transform}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Takes a transformed code.matrix and ``untransforms'' it to a matrix
