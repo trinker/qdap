@@ -17,9 +17,8 @@
 #' @references R. J. Senter and E. A. Smith. (1967) Automated readability index. Technical Report AMRLTR-66-220, University of Cincinnati, Cincinnati, Ohio.
 #' @keywords readability, Automated Readability Index
 #' @examples
-#' rajDEM <- key_merge(raj, raj.demographics, 'person')
-#' with(rajDEM, automated_readability_index(dialogue, list(person, act)))
-#' with(rajDEM, automated_readability_index(dialogue, list(sex, fam.aff)))
+#' with(rajSPLIT, automated_readability_index(dialogue, list(person, act)))
+#' with(rajSPLIT, automated_readability_index(dialogue, list(sex, fam.aff)))
 #' 
 automated_readability_index <-
 function(text.var, grouping.var = NULL) {
