@@ -10,7 +10,7 @@
 #' @param point.pch The plotting symbol.
 #' @param point.cex  The plotting symbol size.
 #' @param point.colors A vector of colors (length of two) to plot word count and formality score
-#' @param bar.colors A palette of colors to supply to the bars in the visualization
+#' @param bar.colors A palette of colors to supply to the bars in the visualization.  If two palettes are provided to the two bar plots respectively.
 #' @param min.wrdcnt A minimum word count threshold that must be achieved to be considered in the results.  Default includes all subgroups.
 #' @return A list containing at the following components: 
 #' \item{text}{The text variable} 
@@ -32,6 +32,7 @@
 #' rajDEM <- key_merge(raj, raj.demographics, 'person')
 #' with(raj, formality(rajPOS, act, plot=TRUE))
 #' with(raj, formality(rajPOS, person, plot=TRUE, bar.colors="Dark2"))
+#' with(raj, formality(rajPOS, person, plot=TRUE, bar.colors=c("Dark2", "Set1")))
 #' with(raj, formality(rajPOS, list(person, act), plot=TRUE, bar.colors="Set1"))
 #' with(rajDEM, formality(rajPOS, sex, plot=TRUE, bar.colors="RdBu"))
 #' with(rajDEM, formality(rajPOS, list(fam.aff, sex), plot=TRUE, bar.colors="RdBu"))
@@ -199,8 +200,18 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             opts(title = "Percent Contextual-Formal",                                
                 legend.position = 'bottom')                                          
             if (!is.null(bar.colors)) {                                              
-                YY <- YY + suppressWarnings(scale_fill_brewer(palette=bar.colors))   
-            }          
+                YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
+                    bar.colors))   
+            }     
+            if (!is.null(bar.colors)) {  
+                if (length(bar.colors) == 1) {
+                    YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
+                        bar.colors))
+          } else {
+                    YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
+                        bar.colors[2]))
+          }
+        }        
         dat2 <- dat[dat[, "pos"] != "other", ] 
         dat2[, "pos"] <- factor(dat2[, "pos"])
         dat2[, "form.class"] <- factor(dat2[, "form.class"])
@@ -216,11 +227,17 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
                 labels = LAB2) +          
             opts(title = "Percent Parts of Speech By Contextual-Formal",             
                 legend.position = 'bottom')                                          
-            if (!is.null(bar.colors)) {                                              
-                XX <- XX + scale_fill_brewer(palette=bar.colors,                     
-                    name = "", breaks=levels(dat2$pos),                               
-                    labels = LAB2)        
-            }                                                                        
+            if (!is.null(bar.colors)) {  
+                if (length(bar.colors) == 1) {
+                    XX <- XX + scale_fill_brewer(palette=bar.colors,                     
+                        name = "", breaks=levels(dat2$pos),                               
+                        labels = LAB2) 
+                } else {
+                    XX <- XX + scale_fill_brewer(palette=bar.colors [2],                     
+                        name = "", breaks=levels(dat2$pos),                               
+                        labels = LAB2)  
+                }
+            }         
         names(FOR)[1] <- "grouping"                                                  
         buffer <- diff(range(FOR$formality))*.05                                     
         ZZ <- ggplot(data=FOR, aes(grouping,  formality, size=word.count)) +         
@@ -233,10 +250,12 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
                 max(FOR$formality) + buffer)) +                                      
             scale_size_continuous(range = c(1, 8)) + xlab(G)  +                      
             if (point.pch == "|") {                                                  
-                geom_text(aes(label = "|"), colour=point.colors[2], size=point.cex,  
-                    position = "identity", hjust = .25, vjust = .25)                 
+                geom_text(aes(label = "|"), colour=point.colors[2], 
+                    size=point.cex, position = "identity", hjust = .25, 
+                    vjust = .25)                 
             } else {                                                                 
-                geom_point(colour=point.colors[2], shape=point.pch, size=point.cex)  
+                geom_point(colour=point.colors[2], shape=point.pch, 
+                    size=point.cex)  
             }                                                                        
             suppressWarnings(gridExtra::grid.arrange(YY, XX,                         
                 ZZ, widths=c(.25, .45, .3), ncol=3))                                 
