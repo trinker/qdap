@@ -18,8 +18,9 @@
 #' @keywords coding
 #' @examples
 #' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
-#' X <- wordSplit(DATA, "state", codes)
-#' insertDummy(X, list(dc=c(1:3, 5),  sf=c(4, 6:9, 11), wes=0, pol=0, rejk=0, lk=0, azx=1:30, mmm=5))
+#' X <- cm_blank(DATA, "state", codes)
+#' cm_fill(X, list(dc=c(1:3, 5),  sf=c(4, 6:9, 11), wes=0, pol=0, rejk=0, lk=0, azx=1:30, mmm=5))
+#' cm_fill(X, list(sf=c(4, 6:9, 11), dc=c(1:3, 5), azx=1:30, mmm=5))
 #'
 cm_fill <-
 function(dataframe, ranges, value = 1, text.var = NULL, code.vars = NULL, 

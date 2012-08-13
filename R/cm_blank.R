@@ -18,10 +18,10 @@
 #' @keywords coding
 #' @examples
 #' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
-#' wordSplit(DATA, "state", codes)
-#' wordSplit(DATA, "state", codes, transpose = TRUE)
-#' head(wordSplit(raj.act.1, "dialogue", codes))
-#' wordSplit(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
+#' cm_blank(DATA, "state", codes)
+#' cm_blank(DATA, "state", codes, transpose = TRUE)
+#' head(cm_blank(raj.act.1, "dialogue", codes))
+#' cm_blank(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
 #'
 cm_blank <- function(dataframe, text.var, codes = NULL, csv = FALSE, 
     file.name = NULL, transpose = FALSE, strip =FALSE){
