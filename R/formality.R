@@ -12,12 +12,33 @@
 #' @param point.colors A vector of colors (length of two) to plot word count and formality score
 #' @param bar.colors A palette of colors to supply to the bars in the visualization
 #' @param min.wrdcnt A minimum word count threshold that must be achieved to be considered in the results.  Default includes all subgroups.
-#' @return returns a bject of the class "word.list".  This is a list of 5 word lists: complete word list (raw words; "cwl"), stop word list (same as rwl with stop words removed; "swl"), frequency word list (a data frame of words and correspnding frequency counts; "fwl"), fequency stopword word list (same as fwl but with stopwords removed; "fswl") and reduced frequency stopword word list (same as fswl but truncated to n rows; "rfswl").
+#' @return A list containing at the following components: 
+#' \item{text}{The text variable} 
+#' \item{POStagged}{Raw part of speech for every word of the text variable} 
+#' \item{POSprop}{Part of speech proportion for every word of the text variable} 
+#' \item{POSfreq}{Part of speech count for every word of the text variable} 
+#' \item{pos.by.freq}{The part of speech count for every word of the text variable by grouping variable(s)} 
+#' \item{pos.by.prop}{The part of speech proportion for every word of the text variable by grouping variable(s)} 
+#' \item{form.freq.by}{The nine broad part of speech categories count for every word of the text variable by grouping variable(s)} 
+#' \item{form.prop.by}{The nine broad part of speech categories proportion for every word of the text variable by grouping variable(s)} 
+#' \item{formality}{Formality scores by grouping variable(s)} 
+#' \item{pos.reshaped}{An expanded formality scores output (grouping, word.count, pos & form.class) by word}
 #' @references Heylighen, F., & Dewaele, J.M. (2002). Variation in the contextuality of language: An empirical measure. Context in Context, Special issue of Foundations of Science, 7 (3), 293-340.
 #' @keywords formality explicit
 #' @examples
+#' with(DATA, formality(state, person))
+#' with(DATA, formality(state, list(sex, adult), plot = TRUE))
+#'
 #' rajDEM <- key_merge(raj, raj.demographics, 'person')
-#' with(rajDEM, formality(rajPOS, list(sex, died), plot=T))
+#' with(raj, formality(rajPOS, act, plot=TRUE))
+#' with(raj, formality(rajPOS, person, plot=TRUE, bar.colors="Dark2"))
+#' with(raj, formality(rajPOS, list(person, act), plot=TRUE, bar.colors="Set1"))
+#' with(rajDEM, formality(rajPOS, sex, plot=TRUE, bar.colors="RdBu"))
+#' with(rajDEM, formality(rajPOS, list(fam.aff, sex), plot=TRUE, bar.colors="RdBu"))
+#' with(rajDEM, formality(rajPOS, list(died, fam.aff), plot=TRUE, bar.colors="RdBu",  point.cex=2, point.pch = 3))
+#' raj.form <- with(rajDEM, formality(rajPOS, list(died, sex), plot=TRUE, bar.colors="RdBu",  point.cex=2, point.pch = "|"))
+#' names(raj.form)
+#' colsplit2df(raj.form$formality)
 #'
 
 formality <- function(text.var, grouping.var = NULL, plot = FALSE,                   
@@ -182,22 +203,23 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             }          
         dat2 <- dat[dat[, "pos"] != "other", ] 
         dat2[, "pos"] <- factor(dat2[, "pos"])
-        dat2[, "form.class"] <- factor(dat2[, "form.class"])                                                          
+        dat2[, "form.class"] <- factor(dat2[, "form.class"])
+        LAB <- c("noun", "adjective", "preposition",                         
+            "articles", "pronoun", "verb", "adverb", "interjection")  
+        LAB2 <- LAB[substring(LAB, 1, 3) %in% substring(levels(dat2$pos), 1, 3)]
         XX <- ggplot(data=dat2, aes(grouping,  fill=pos)) +                           
             geom_bar(position='fill') + coord_flip() +                               
             facet_grid(~form.class, scales="free", margins = TRUE) +                 
             scale_x_discrete(drop=F) +  labs(fill=NULL) +                            
             ylab("proportion") + xlab(G)  +                                          
             scale_fill_discrete(name = "", breaks=levels(dat2$pos),                   
-                labels=c("noun", "adjective", "preposition",                         
-                "articles", "pronoun", "verb", "adverb", "interjection")) +          
+                labels = LAB2) +          
             opts(title = "Percent Parts of Speech By Contextual-Formal",             
                 legend.position = 'bottom')                                          
             if (!is.null(bar.colors)) {                                              
                 XX <- XX + scale_fill_brewer(palette=bar.colors,                     
                     name = "", breaks=levels(dat2$pos),                               
-                    labels=c("noun", "adjective", "preposition",                     
-                    "articles", "pronoun", "verb", "adverb", "interjection"))        
+                    labels = LAB2)        
             }                                                                        
         names(FOR)[1] <- "grouping"                                                  
         buffer <- diff(range(FOR$formality))*.05                                     
