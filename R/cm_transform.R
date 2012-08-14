@@ -19,5 +19,7 @@ function(dataframe, text.var, code.vars) {
         return(DF)
         }
     )
-    return(DF)
+    colnames(DF) <- as.character(unlist(DF[1, ]))
+    rownames(DF) <- NULL
+    return(DF[-1, ])
 }
