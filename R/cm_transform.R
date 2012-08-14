@@ -1,9 +1,12 @@
 cm_transform <-
-function(dataframe, text.var, code.vars) {
+function(dataframe, text.var, code.vars = NULL) {
     DF <- data.frame(t(dataframe), stringsAsFactors = FALSE)
     if (!is.numeric(text.var)) {
         text.var <- which(colnames(DF) == text.var)
     }
+    if (is.null(code.vars)) {
+        code.vars <- text.var + 2
+    } 
     if (!is.numeric(code.vars)) {
         code.vars <- which(colnames(DF) %in% c(code.vars))
     }
