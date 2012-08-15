@@ -47,8 +47,8 @@ cm_blank <- function(dataframe, text.var, codes = NULL, csv = FALSE,
     if (transpose) {
         DF <- t(DF)
         DF <- data.frame(vars = rownames(DF), DF, check.names = FALSE)
-        rownames(DF) <- NULL
     }
+    rownames(DF) <- NULL
     if(csv) {
         if (is.null(file.name)) {
             file.name <- as.character(substitute(dataframe))
