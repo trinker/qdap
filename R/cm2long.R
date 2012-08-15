@@ -1,27 +1,34 @@
-cm2long <- function(dataframe, code.vars, repeat.vars = NULL, 
-    rev.code = TRUE){
+cm2long <- function(dataframe, code.vars, no.code = NA, 
+    repeat.vars = NULL, rev.code = TRUE){
     if (is.numeric(code.vars)) {
         code.vars <- colnames(dataframe)[code.vars]
     }
     A <- paste2(dataframe[, code.vars])
     B <- lapply(strsplit(A, "\\."), function(x) as.logical(as.numeric(x)))
     D <- lapply(B, function(x) code.vars[x])
+    D <- lapply(D, function(x) {
+            if (identical(x, character(0))) {
+                x <- no.code
+            }
+            return(x)
+        }
+    )
     if (is.null(repeat.vars)){
-        repeat.vars <- colnames(dataframe)[!c(text.var, codes) %in% 
-            colnames(dataframe)]
+        repeat.vars <- colnames(dataframe)[!colnames(dataframe) %in% 
+            codes]
     } else {
         if (is.numeric(repeat.vars)) {
             repeat.vars <- colnames(dataframe)[repeat.vars]
         }
     }
-    E <- dat[, repeat.vars, drop = FALSE]
+    E <- dataframe[, repeat.vars, drop = FALSE]
     lens <- sapply(D, length)
     NEW <- data.frame(code = unlist(D), E[rep(1:nrow(E), lens), ])
     rownames(NEW) <- NULL
     if (rev.code) {
-        NEW[, "code"] <- factor(NEW[, "code"], levels = rev(code.vars))
+        NEW[, "code"] <- factor(NEW[, "code"], levels = rev(c(code.vars, no.code)))
     } else {
-        NEW[, "code"] <- factor(NEW[, "code"], levels = code.vars)
+        NEW[, "code"] <- factor(NEW[, "code"], levels = c(code.vars, no.code))
     }
     return(NEW)
 }
