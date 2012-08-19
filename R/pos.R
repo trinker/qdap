@@ -32,12 +32,9 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 2,
     if (parallel) {
         suppressWarnings(require(parallel))
         cl <- parallel::makeCluster(mc <- getOption("cl.cores", detectCores()))
-        parallel::clusterExport(cl=cl, varlist=c("text.var", "ntv", "gc.rate"))
+        clusterExport(cl=cl, varlist=c("text.var", "ntv", "gc.rate", 
+            "pos1"), envir = environment())
         m <- parallel::parLapply(cl, seq_len(ntv), function(i) {
-                pos1 <-  function(i) {
-                    x <- openNLP::tagPOS(qdap::strip(i))   
-                    return(x)
-                }
                 x <- pos1(text.var[i])
                 if (i%%gc.rate==0) gc()
                 return(x)
