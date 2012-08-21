@@ -17,3 +17,5 @@ install_github("qdap", "trinker")
 ```
 
 Note: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](http://CRAN.R-project.org/package=devtools) to install this way.
+
+For a variety of qdap help files and videos [click here](https://github.com/trinker/qdap/wiki).
