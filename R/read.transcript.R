@@ -43,7 +43,7 @@ function(file, text.var = NULL, header = TRUE, dash = "",
     if(rm.empty.rows) {
         x <- rm_empty_row(x) 
     }
-    if (!is.null(colnames)) {
+    if (!is.null(col.names)) {
         colnames(x) <- col.names
     }
     return(x)
