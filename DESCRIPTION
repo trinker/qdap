@@ -5,7 +5,7 @@ Version: 0.1.0
 Date: 2012-05-09
 Author: Tyler Rinker
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
-Depends: R (>= 2.15.0), ggplot2 (>= 0.9.1), igraph, tm (>= 0.5-7.1), wordcloud, venneuler, openNLP, openNLPmodels.en, Snowball, gplots, gridExtra
+Depends: R (>= 2.15.0), ggplot2 (>= 0.9.1), igraph, tm (>= 0.5-7.1), wordcloud, venneuler, openNLP, openNLPmodels.en, Snowball, gplots, gridExtra, gdata
 Suggests: plyr, sentiment
 LazyData: true
 ByteCompile: yes

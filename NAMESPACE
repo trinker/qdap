@@ -140,6 +140,7 @@ export(clean)
 export(reducer)
 export(reduceWORDS)   #nv
 import(ggplot2)
+import(gdata)
 import(igraph)
 import(tm)
 import(openNLP)

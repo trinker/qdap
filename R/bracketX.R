@@ -55,7 +55,7 @@ function (text, bracket = "all", missing = NULL, names=FALSE) {
                     sapply(P1, function(x) gsub("\\{.+?\\}", "", x))
                 }
     )
-    X <- Trim(gsub(" +", " ", X))
+    X <- scrubber(gsub(" +", " ", X))
     if (!is.null(missing)) {
         X[X == ""] <- missing
     }
