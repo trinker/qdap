@@ -12,10 +12,15 @@ You can, however, download the [zip ball](https://github.com/trinker/qdap/zipbal
 
 ```r
 # install.packages("devtools")
+
 library(devtools)
 install_github("qdap", "trinker")
 ```
 
 Note: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](http://CRAN.R-project.org/package=devtools) to install this way.
 
+Note: Mac users must install `openNLP` before attempting to install `qdap`
+```r
+install.packages("openNLP", type = "source")
+```
 For a variety of qdap help files and videos [click here](https://github.com/trinker/qdap/wiki).
