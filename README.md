@@ -23,4 +23,6 @@ Note: Mac users must install `openNLP` before attempting to install `qdap`
 ```r
 install.packages("openNLP", type = "source")
 ```
+
+## Help
 For a variety of qdap help files and videos [click here](https://github.com/trinker/qdap/wiki).
