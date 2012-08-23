@@ -2,8 +2,8 @@ read.transcript <-
 function(file, col.names = NULL, text.var = NULL, header = FALSE, dash = "",
     ellipsis = "...", quote2bracket = FALSE, rm.empty.rows = TRUE, 
     na.strings = c("999", "NA", "", " "), sep = ",", skip = 0, ...) {
-
-    y <- unlist(strsplit(file, "\\.")); y[[length(y)]]
+    y <- unlist(strsplit(file, "\\."))
+    y <- y[[length(y)]]
     switch(y, 
         xlsx = {require(gdata) 
             x <-gdata::read.xls(file,  header = header, 
