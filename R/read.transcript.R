@@ -1,11 +1,11 @@
 read.transcript <-
 function(file, text.var = NULL, header = TRUE, dash = "",
     ellipsis = "...", quote2bracket = FALSE, rm.empty.rows = TRUE, 
-    col.names = NULL, sep = ",") {
+    col.names = NULL, sep = ",", ...) {
     require(gdata) 
     x <-gdata::read.xls(file,  header = header, sep = sep, 
         as.is=FALSE, na.strings= c("999", "NA", " "), strip.white = TRUE, 
-        stringsAsFactors = FALSE, blank.lines.skip = rm.empty.rows) 
+        stringsAsFactors = FALSE, blank.lines.skip = rm.empty.rows, ...) 
     if (!is.null(text.var) & !is.numeric(text.var)) {
         text.var <- which(colnames(x) == text.var)
     } else {
