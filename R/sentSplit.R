@@ -86,7 +86,7 @@ function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,
       if (TP == "left") {
         ans <- ans
         if (stem.col) {
-          ans <- stem2df(ans, 1, ...)
+          ans <- suppressWarnings(stem2df(ans, 1, ...))
         }             
       } else {
         warning("incorrect text.place argument")
