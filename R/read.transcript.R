@@ -1,11 +1,28 @@
 read.transcript <-
 function(file, col.names = NULL, text.var = NULL, header = FALSE, dash = "",
     ellipsis = "...", quote2bracket = FALSE, rm.empty.rows = TRUE, 
-    sep = ",", ...) {
-    require(gdata) 
-    x <-gdata::read.xls(file,  header = header, sep = sep, 
-        as.is=FALSE, na.strings= c("999", "NA", " "), strip.white = TRUE, 
-        stringsAsFactors = FALSE, blank.lines.skip = rm.empty.rows, ...) 
+    na.strings = c("999", "NA", "", " "), sep = ",", skip = 0, ...) {
+
+    y <- unlist(strsplit(file, "\\.")); y[[length(y)]]
+    switch(y, 
+        xlsx = {require(gdata) 
+            x <-gdata::read.xls(file,  header = header, 
+                sep = sep, as.is=FALSE, na.strings= na.strings, 
+                strip.white = TRUE, stringsAsFactors = FALSE, 
+                blank.lines.skip = rm.empty.rows, ...)
+            },
+        docx = {
+            x <- read.docx(file, skip = skip)
+            },
+        csv = {
+            x <- read.csv(file,  header = header, 
+                sep = sep, as.is=FALSE, na.strings= na.strings, 
+                strip.white = TRUE, stringsAsFactors = FALSE, 
+                blank.lines.skip = rm.empty.rows, ...)
+            },
+        doc = stop("convert file to docx"),
+        stop("invalid file extension:\n \bfile must be a .docx .csv .xls or .xlsx" )
+    )
     if (!is.null(text.var) & !is.numeric(text.var)) {
         text.var <- which(colnames(x) == text.var)
     } else {
