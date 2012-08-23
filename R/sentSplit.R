@@ -80,13 +80,13 @@ function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,
                         ans[, -c(1, totn), drop = FALSE])
       colnames(ans) <- c(colnames(ans)[-ncol(ans)], input)
       if (stem.col) {
-        ans <- stem2df(ans, ncol(ans), ...)
+        ans <- stem2df(ans, ncol(ans), warn = FALSE, ...)
       }   
     } else {
       if (TP == "left") {
         ans <- ans
         if (stem.col) {
-          ans <- suppressWarnings(stem2df(ans, 1, ...))
+          ans <- stem2df(ans, 1, ...)
         }             
       } else {
         warning("incorrect text.place argument")
