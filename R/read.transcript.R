@@ -1,7 +1,7 @@
 read.transcript <-
-function(file, text.var = NULL, header = TRUE, dash = "",
+function(file, col.names = NULL, text.var = NULL, header = FALSE, dash = "",
     ellipsis = "...", quote2bracket = FALSE, rm.empty.rows = TRUE, 
-    col.names = NULL, sep = ",", ...) {
+    sep = ",", ...) {
     require(gdata) 
     x <-gdata::read.xls(file,  header = header, sep = sep, 
         as.is=FALSE, na.strings= c("999", "NA", " "), strip.white = TRUE, 
