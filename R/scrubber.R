@@ -35,6 +35,7 @@ function(text.var, num2word = FALSE, fixComma = TRUE, ...){
     }
     ncx <- nchar(x)
     x <- paste0(Trim(substring(x, 1, ncx - 1)), substring(x, ncx))
+    x[x=="NANA"] <- NA
     if (num2word) {
         x <- num_replace(x, ...)
     }
