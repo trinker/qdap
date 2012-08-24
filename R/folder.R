@@ -37,13 +37,17 @@
 #' 
 folder <-
 function(folder.name = NULL) {
-    FN <- if (is.null(folder.name)) {
+    if (is.null(folder.name)) {
         SS <- gsub(":", ".", substr(Sys.time(), 1, 19))
-        paste(substr(SS, 1, 10), "  Time", substr(SS, 11, 19), sep = "")
+        FN <-paste(substr(SS, 1, 10), "  Time", substr(SS, 11, 19), sep = "")
     } else {
-        folder.name
+        FN <-folder.name
     }
-    x <- paste(getwd(), "/", FN, sep = "")
+    if (length(unlist(strsplit(FN, "/"))) == 1) {
+        x <- paste(getwd(), "/", FN, sep = "")
+    } else {
+        x <- FN
+    }
     dir.create(x)
-    return(FN)
+    return(x)
 }
