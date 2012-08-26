@@ -82,5 +82,5 @@ function(text.var, num.paste = "separate") {
         }
         return(x)
     }
-    unlist(lapply(text.var, num_sub))
+    unlist(lapply(gsub(",([[:digit:]])", "\\1", text.var), num_sub))
 }
