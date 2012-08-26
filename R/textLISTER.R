@@ -1,5 +1,5 @@
 textLISTER <-
-function(text.var, group.vars, rm.bracket = TRUE, char.keep = TRUE) {
+function(text.var, group.vars, rm.bracket = TRUE, char.keep = NULL) {
     NAME <- if (is.list(group.vars)) {
         m <- unlist(as.character(substitute(group.vars))[-1])
         m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
