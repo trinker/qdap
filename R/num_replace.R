@@ -82,5 +82,13 @@ function(text.var, num.paste = "separate") {
         }
         return(x)
     }
-    unlist(lapply(gsub(",([[:digit:]])", "\\1", text.var), num_sub))
+    unlist(lapply(gsub(",([0-9])", "\\1", text.var), function(x) {
+            if (!is.na(x) & length(unlist(strsplit(x, 
+                "([0-9])", perl = TRUE))) > 1) {
+                num_sub(x)
+            } else {
+                x
+            }
+        }
+    ))
 }
