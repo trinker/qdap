@@ -17,39 +17,24 @@
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (x, digit.remove = TRUE, apostrophe.remove = FALSE) 
-#' {
-#'     strp <- function(x, digit.remove, apostrophe.remove) {
-#'         x2 <- Trim(tolower(gsub(".*?($|'|[^[:punct:]]).*?", "\1", 
-#'             as.character(x))))
-#'         x2 <- if (apostrophe.remove) 
-#'             gsub("'", "", x2)
-#'         else x2
-#'         ifelse(digit.remove == TRUE, gsub("[[:digit:]]", "", 
-#'             x2), x2)
-#'     }
-#'     unlist(lapply(x, function(x) Trim(strp(x = x, digit.remove = digit.remove, 
-#'         apostrophe.remove = apostrophe.remove))))
-#'   }
-#' 
 strip <-
-function (x, digit.remove = TRUE, apostrophe.remove = FALSE) {
-    strp <- function(x, digit.remove, apostrophe.remove) {
-        x2 <- Trim(tolower(gsub(".*?($|'|[^[:punct:]]).*?", "\\1", 
-                                as.character(x))))
-        x2 <- if (apostrophe.remove) 
-            gsub("'", "", x2)
-        else x2
+function (x, digit.remove = TRUE, apostrophe.remove = FALSE, 
+    rm.underscore = TRUE) {
+    strp <- function(x, digit.remove, apostrophe.remove, rm.underscore) {
+        if (!rm.underscore) {
+            x2 <- Trim(tolower(gsub(".*?($|'|_|[^[:punct:]]).*?", "\\1", 
+                as.character(x))))
+        } else {
+            x2 <- Trim(tolower(gsub(".*?($|'|[^[:punct:]]).*?", "\\1", 
+                as.character(x))))
+        }
+        if (apostrophe.remove) {
+            x2 <- gsub("'", "", x2)
+        }
         ifelse(digit.remove == TRUE, gsub("[[:digit:]]", "", 
                                           x2), x2)
     }
     x <- clean(gsub("/", " ", gsub("-", " ", x))) 
     unlist(lapply(x, function(x) Trim(strp(x = x, digit.remove = digit.remove, 
-                                           apostrophe.remove = apostrophe.remove))))
+       apostrophe.remove = apostrophe.remove, rm.underscore = rm.underscore))))
 }
-

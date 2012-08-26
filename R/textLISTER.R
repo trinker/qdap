@@ -1,5 +1,5 @@
 textLISTER <-
-function(text.var, group.vars, rm.bracket = TRUE) {
+function(text.var, group.vars, rm.bracket = TRUE, rm.underscore = TRUE) {
     NAME <- if (is.list(group.vars)) {
         m <- unlist(as.character(substitute(group.vars))[-1])
         m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
@@ -24,11 +24,13 @@ function(text.var, group.vars, rm.bracket = TRUE) {
     if (nrow(DF) == 1) {
       DF <- do.call("rbind", list(DF, DF))
       DF[2, 3] <- "void"
-      DF$dia2word <- as.vector(word.split(reducer(strip(DF$dia2word))))
+      DF$dia2word <- as.vector(word.split(reducer(strip(DF$dia2word, 
+          rm.underscore = rm.underscore))))
       DF <- DF[1, ]
     } else {
-      DF$dia2word <- as.vector(word.split(reducer(strip(DF$dia2word))))
-    }    
+      DF$dia2word <- as.vector(word.split(reducer(strip(DF$dia2word, 
+          rm.underscore = rm.underscore))))
+    }     
     X <- split(DF[, -1], DF$group.vars)
     NAMES <- names(X)
     X <- lapply(seq_along(X), function(x) as.data.frame(X[[x]])[, 2])
