@@ -18,11 +18,12 @@
 #' @examples
 #' 
 strip <-
-function (x, digit.remove = TRUE, apostrophe.remove = FALSE, 
-    rm.underscore = TRUE) {
-    strp <- function(x, digit.remove, apostrophe.remove, rm.underscore) {
-        if (!rm.underscore) {
-            x2 <- Trim(tolower(gsub(".*?($|'|_|[^[:punct:]]).*?", "\\1", 
+function (x, char.keep = NULL, digit.remove = TRUE, apostrophe.remove = TRUE) {
+    strp <- function(x, digit.remove, apostrophe.remove, char.keep) {
+        if (!is.null(char.keep)) {
+            x2 <- Trim(tolower(gsub(paste0(".*?($|'|",
+            paste(char.keep, collapse = "|"),
+            "|[^[:punct:]]).*?"), "\\1", 
                 as.character(x))))
         } else {
             x2 <- Trim(tolower(gsub(".*?($|'|[^[:punct:]]).*?", "\\1", 
@@ -36,5 +37,5 @@ function (x, digit.remove = TRUE, apostrophe.remove = FALSE,
     }
     x <- clean(gsub("/", " ", gsub("-", " ", x))) 
     unlist(lapply(x, function(x) Trim(strp(x = x, digit.remove = digit.remove, 
-       apostrophe.remove = apostrophe.remove, rm.underscore = rm.underscore))))
+       apostrophe.remove = apostrophe.remove, char.keep = char.keep))))
 }

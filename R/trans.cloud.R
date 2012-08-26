@@ -44,11 +44,11 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
     cloud.font = NULL, title.font = NULL, title.color = "black", 
     title.padj = -4.5, title.location = 3, title.cex = NULL, title.names = NULL,
     proportional = FALSE, max.word.size = NULL, min.word.size = 0.5,
-    legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03), rm.underscore = FALSE, ...) {
+    legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03), char.keep = NULL, ...) {
     suppressWarnings(require(wordcloud))
     if (!is.null(text.var)){
         word.list <- word_list(text.var = text.var, 
-            grouping.var = grouping.var, rm.underscore = rm.underscore)[["cwl"]]
+            grouping.var = grouping.var, char.keep = char.keep)[["cwl"]]
     }
     if(is.list(word.list)) {
         PRO <- max(sapply(word.list, length))
