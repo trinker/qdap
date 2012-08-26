@@ -44,8 +44,12 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
     cloud.font = NULL, title.font = NULL, title.color = "black", 
     title.padj = -4.5, title.location = 3, title.cex = NULL, title.names = NULL,
     proportional = FALSE, max.word.size = NULL, min.word.size = 0.5,
-    legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03), char.keep = NULL, ...) {
+    legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03), 
+    char.keep = NULL, char2space = NULL, ...) {
     suppressWarnings(require(wordcloud))
+    if(!is.null(char2space) & is.null(char.keep)) {
+        char.keep <- char2space
+    }
     if (!is.null(text.var)){
         word.list <- word_list(text.var = text.var, 
             grouping.var = grouping.var, char.keep = char.keep)[["cwl"]]
@@ -72,7 +76,7 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
         word.size, word.size2, random.order, cloud.colors, caps, 
         caps.list, title.color, text, side, PRO, proportional, font, 
         title.font, title.cex, legend, legend.cex, legend.location,
-        title.names) {
+        title.names, char2space) {
         if(is.list(target.words) & length(target.words)==1) {
             target.words <- unlist(target.words)
         }
@@ -98,6 +102,10 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
         }
         df2 <- as.data.frame(table(df), stringsAsFactors = FALSE)
         names(df2) <- c("word", "freq")
+        if (!is.null(char2space)) {
+            df2[, "word"] <- mgsub(pattern = char2space, replacement = " ", 
+                text.var = df2[, "word"])
+        }
         if(proportional) {
             df2$freq <- floor((PRO/length(words))*df2$freq) 
         }
@@ -199,7 +207,7 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
         font = cloud.font, title.font = title.font, title.cex = title.cex,
         title.color = title.color, side = title.location, legend = legend, 
         legend.cex = legend.cex, legend.location = legend.location, 
-        text = namers[i], ...)
+        text = namers[i], char2space = char2space, ...)
     )
 }
 # trans.cloud <-
