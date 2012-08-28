@@ -5,7 +5,7 @@ function(file, col.names = NULL, text.var = NULL, header = FALSE, dash = "",
     y <- unlist(strsplit(file, "\\."))
     y <- y[[length(y)]]
     if (is.null(sep)) {
-        if (y == "docx")
+        if (y == "docx") {
             sep <- ":"
         } else {
             sep <- ","
