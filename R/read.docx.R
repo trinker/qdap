@@ -15,7 +15,7 @@ function(file, skip = 0, sep = ":") {
     pvalues <- gsub(paste0("^.*?", sep), "", pvalues)  # Remove speaker from lines
     speaker <- rep(speaker[which(keys)], diff(c(which(keys), length(speaker)+1)))
     speaker <- unlist(speaker)  # Make sure it's a vector
-    speaker <- substr(speaker, 1, nchar(speaker)-1)  # Remove ending colon
+    speaker <- substr(speaker, 1, nchar(speaker)-nchar(sep)) # Remove ending colon
     transcript <- data.frame(speaker   = speaker, 
         paragraph = pvalues, stringsAsFactors = FALSE)
     return(transcript)
