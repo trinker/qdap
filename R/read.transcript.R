@@ -1,9 +1,16 @@
 read.transcript <-
 function(file, col.names = NULL, text.var = NULL, header = FALSE, dash = "",
     ellipsis = "...", quote2bracket = FALSE, rm.empty.rows = TRUE, 
-    na.strings = c("999", "NA", "", " "), sep = ",", skip = 0, ...) {
+    na.strings = c("999", "NA", "", " "), sep = NULL, skip = 0, ...) {
     y <- unlist(strsplit(file, "\\."))
     y <- y[[length(y)]]
+    if (is.null(sep)) {
+        if (y == "docx")
+            sep <- ":"
+        } else {
+            sep <- ","
+        }
+    }
     switch(y, 
         xlsx = {require(gdata) 
             x <-gdata::read.xls(file,  header = header, 
@@ -12,7 +19,7 @@ function(file, col.names = NULL, text.var = NULL, header = FALSE, dash = "",
                 blank.lines.skip = rm.empty.rows, ...)
             },
         docx = {
-            x <- read.docx(file, skip = skip)
+            x <- read.docx(file, skip = skip, sep = sep)
             },
         csv = {
             x <- read.csv(file,  header = header, 

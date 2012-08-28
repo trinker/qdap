@@ -1,5 +1,5 @@
 read.docx <-
-function(file, skip = 0) {
+function(file, skip = 0, sep = ":") {
     require(XML)
     tdir    <- tempdir()  # Create a temporary directory
     unzip(file, exdir = tdir)  # Unzip to temporary directory
@@ -10,9 +10,9 @@ function(file, skip = 0) {
     pvalues <- sapply(nodeSet, xmlValue)  # Return their (textual) values
     pvalues <- pvalues[pvalues != ""]  # Remove empty lines
     if (skip > 0) pvalues <- pvalues[-seq(skip)]  # Ignore these many lines
-    keys    <- sapply(gregexpr("^.*?:", pvalues), function(x) x > 0)
-    speaker <- regmatches(pvalues, gregexpr("^.*?:", pvalues))
-    pvalues <- gsub("^.*?:", "", pvalues)  # Remove speaker from lines
+    keys    <- sapply(gregexpr(paste0("^.*?", sep), pvalues), function(x) x > 0)
+    speaker <- regmatches(pvalues, gregexpr(paste0("^.*?", sep), pvalues))
+    pvalues <- gsub(paste0("^.*?", sep), "", pvalues)  # Remove speaker from lines
     speaker <- rep(speaker[which(keys)], diff(c(which(keys), length(speaker)+1)))
     speaker <- unlist(speaker)  # Make sure it's a vector
     speaker <- substr(speaker, 1, nchar(speaker)-1)  # Remove ending colon
