@@ -16,7 +16,8 @@ function(file, skip = 0, sep = ":") {
     speaker <- rep(speaker[which(keys)], diff(c(which(keys), length(speaker)+1)))
     speaker <- unlist(speaker)  # Make sure it's a vector
     speaker <- substr(speaker, 1, nchar(speaker)-nchar(sep)) # Remove ending colon
-    transcript <- data.frame(speaker   = speaker, 
-        paragraph = pvalues, stringsAsFactors = FALSE)
+    transcript <- data.frame(X1 = speaker, 
+        X2 = pvalues, stringsAsFactors = FALSE)
+    transcript[, "X1"] <- as.factor(transcript[, "X1"])
     return(transcript)
 }
