@@ -1,7 +1,8 @@
 read.transcript <-
-function(file, col.names = NULL, text.var = NULL, header = FALSE, dash = "",
-    ellipsis = "...", quote2bracket = FALSE, rm.empty.rows = TRUE, 
-    na.strings = c("999", "NA", "", " "), sep = NULL, skip = 0, ...) {
+function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE, 
+    header = FALSE, dash = "", ellipsis = "...", quote2bracket = FALSE, 
+    rm.empty.rows = TRUE, na.strings = c("999", "NA", "", " "), 
+    sep = NULL, skip = 0, ...) {
     y <- unlist(strsplit(file, "\\."))
     y <- y[[length(y)]]
     if (is.null(sep)) {
@@ -69,6 +70,9 @@ function(file, col.names = NULL, text.var = NULL, header = FALSE, dash = "",
     }
     if (!is.null(col.names)) {
         colnames(x) <- col.names
+    }
+    if (merge.broke.tot) {
+        x <- combine_tot(x)
     }
     return(x)
 }
