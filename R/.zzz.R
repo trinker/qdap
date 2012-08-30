@@ -15,5 +15,7 @@
     if (!"XML" %in% .packages(all.available = TRUE)) {
         p_getRipley("RCurl")
     }    
-    p_load(openNLP, XML, RCurl)
+    require(openNLP)
+    require(XML)
+    require(RCurl)
 }
