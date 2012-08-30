@@ -150,5 +150,5 @@ import(openNLPmodels.en)
 import(wordcloud)
 import(Snowball)
 import(gplots)
-import(XML)
+#import(XML)
 #delete qda
