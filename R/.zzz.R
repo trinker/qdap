@@ -9,7 +9,7 @@
         install.packages("openNLP", type = "source")       
     }                                                      
     require(pacman)                                        
-    if (!"XML" %in% .packages(all.available = TRUE)) {     
+    if (!"RCurl" %in% .packages(all.available = TRUE)) {     
         URL <- "http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/2.15/"
         install.packages("RCurl", contriburl = URL)                                
     }                                                      
