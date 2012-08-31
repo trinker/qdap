@@ -1,23 +1,5 @@
-#' Left Justify Columns in a Data Frame
-#' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-#' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param dataframe %% ~~Describe \code{dataframe} here~~
-#' @param column %% ~~Describe \code{column} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
-#' @examples
-#' 
 left.just <-
-function(dataframe, column = NULL) {
+function(dataframe, column = NULL, keep.class = FALSE) {
     df.class <- function(dataframe) {
         sapply(1:ncol(dataframe), function(i) {
             x <- class(dataframe[, i])
@@ -72,18 +54,20 @@ function(dataframe, column = NULL) {
         newloc <- match(ndf, STrim(NAMES))
         DF3 <- dat2[, newloc]
     }
-    colClasses <- function(d, colClasses) {
-        colClasses <- rep(colClasses, len=length(d))
-        d[] <- lapply(seq_along(d), function(i) switch(colClasses[i], 
-            numeric=as.numeric(d[[i]]), 
-            character=as.character(d[[i]]), 
-            Date=as.Date(d[[i]], origin='1970-01-01'), 
-            POSIXct=as.POSIXct(d[[i]], origin='1970-01-01'), 
-            factor=as.factor(d[[i]]),
-            as(d[[i]], colClasses[i]) ))
-        d
+    if (keep.class) {
+        colClasses <- function(d, colClasses) {
+            colClasses <- rep(colClasses, len=length(d))
+            d[] <- lapply(seq_along(d), function(i) switch(colClasses[i], 
+                numeric=as.numeric(d[[i]]), 
+                character=as.character(d[[i]]), 
+                Date=as.Date(d[[i]], origin='1970-01-01'), 
+                POSIXct=as.POSIXct(d[[i]], origin='1970-01-01'), 
+                factor=as.factor(d[[i]]),
+                as(d[[i]], colClasses[i]) ))
+            d
+        }
+        DF3 <- colClasses(DF3, CLASS)
     }
-    DF3 <- colClasses(DF3, CLASS)
     colnames(DF3) <- gsub("\\.(?=\\.*$)", " ", colnames(DF3), perl=TRUE)
     return(DF3)
 }
