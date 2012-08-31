@@ -4,7 +4,8 @@
 #         install.packages("devtools")                       
 #         library(devtools)                                  
 #         install_github("pacman", "trinker")                
-#     }                                                      
+#     }   
+browser()                                                   
     if (!"openNLP" %in% .packages(all.available = TRUE)) { 
         install.packages("openNLP", type = "source")       
     }                                                      
