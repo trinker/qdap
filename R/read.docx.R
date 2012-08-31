@@ -1,8 +1,9 @@
 read.docx <-
 function(file, skip = 0, sep = ":") {
     require(XML)
-    tdir    <- tempdir()  # Create a temporary directory
-    unzip(file, exdir = tdir)  # Unzip to temporary directory
+    if (!dir.create(tmp))
+      stop("Temporary directory could not be established.")
+    unzip(file, exdir = tmp)  # Unzip to temporary directory
     xmlfile <- file.path(tdir, "word", "document.xml")  # Path to xml document
     doc     <- xmlTreeParse(xmlfile, useInternalNodes=TRUE)  # Import XML
     unlink(tdir, recursive = TRUE)  # Delete unzipped files; no longer needed
@@ -18,6 +19,5 @@ function(file, skip = 0, sep = ":") {
     speaker <- substr(speaker, 1, nchar(speaker)-nchar(sep)) # Remove ending colon
     transcript <- data.frame(X1 = speaker, 
         X2 = pvalues, stringsAsFactors = FALSE)
-    transcript[, "X1"] <- as.factor(transcript[, "X1"])
     return(transcript)
 }
