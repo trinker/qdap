@@ -117,7 +117,10 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
             } else {
                 NULL
             }
-        }       
+        }   
+        if (!is.null(char2space)) {
+            COL1 <- lapply(COL1, function(x) gsub(char2space, " ", x))
+        }   
         COL1 <- if(!is.null(target.words)){ 
             capitalize <- function(x) {
                 simpleCap <- function(x) {
