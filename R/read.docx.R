@@ -7,7 +7,7 @@ function(file, skip = 0, sep = ":") {
     unzip(file, exdir = tmp)  # Unzip to temporary directory
     xmlfile <- file.path(tmp, "word", "document.xml")  # Path to xml document
     doc     <- xmlTreeParse(xmlfile, useInternalNodes=TRUE)  # Import XML
-    unlink(tdir, recursive = TRUE)  # Delete unzipped files; no longer needed
+    unlink(tmp, recursive = TRUE)  # Delete unzipped files; no longer needed
     nodeSet <- getNodeSet(doc, "//w:p")  # Access all p-nodes in document
     pvalues <- sapply(nodeSet, xmlValue)  # Return their (textual) values
     pvalues <- pvalues[pvalues != ""]  # Remove empty lines
