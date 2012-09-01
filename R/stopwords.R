@@ -20,30 +20,9 @@
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (textString, stopwords = Top25Words) 
-#' {
-#'     Stopwords <- if (is.null(stopwords)) {
-#'         c(" ")
-#'     }
-#'     else {
-#'         stopwords
-#'     }
-#'     SW <- function(textString, stopwords) {
-#'         "%w/o%" <- function(x, y) x[!x %in% y]
-#'         unlist(strsplit(tolower(Trim(textString)), " ")) %w/o% 
-#'             tolower(Trim(stopwords))
-#'     }
-#'     sapply(textString, function(x) SW(x, Stopwords))
-#'   }
-#' 
 stopwords<-
 function (textString, stopwords = Top25Words, unlist = FALSE, 
-          strip = FALSE, unique = FALSE, names = FALSE) {
+          strip = FALSE, unique = FALSE, names = FALSE, char.keep = NULL) {
     Stopwords <- if (is.null(stopwords)) {
         c(" ")
     } else {
@@ -55,7 +34,7 @@ function (textString, stopwords = Top25Words, unlist = FALSE,
             tolower(Trim(stopwords))
     }
     if (strip) {
-      textString <- strip(textString)
+      textString <- strip(textString, char.keep = char.keep)
     }
     x <- sapply(textString, function(x) SW(x, Stopwords), USE.NAMES = names)
     if (unlist) {
