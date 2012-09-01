@@ -1,3 +1,4 @@
+export(abbreviation_replace)
 export(adjacency_matrix)
 export(adjmat)                   
 export(all_words)                    
