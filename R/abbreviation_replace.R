@@ -40,8 +40,10 @@ function(text.var, abbreviation = NULL, replace = NULL, ignore.case=TRUE) {
     text.var <- mgsub(ab[, 1], ab[, 2], text.var)
     x <- Trim(gsub("\\s+", " ", text.var))
     x[pn] <- sapply(x[pn], function(z) {
-        if (substring(z, nchar(z)) != ".") {
-            paste(z, ".", sep="")
+            if (substring(z, nchar(z)) != ".") {
+                paste(z, ".", sep="")
+            } else {
+                z
             }
         }, USE.NAMES = FALSE)
     return(scrubber(x))
