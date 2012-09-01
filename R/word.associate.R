@@ -37,7 +37,7 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
     title.font = NULL, title.cex = NULL, nw.edge.curved = TRUE, 
     cloud.legend = NULL, cloud.legend.cex = .8, cloud.legend.location = c(-.03, 1.03), 
     nw.legend = NULL, nw.legend.cex = .8, nw.legend.location = c(-1.54, 1.41),
-    legend.overide = FALSE, ...){
+    legend.overide = FALSE, char2space = NULL, ...){
     if(is.null(nw.label.colors)) {
         nw.label.colors <- cloud.colors
     }
@@ -89,7 +89,10 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
         match.string <- list(match.string)
     }
     Terms2 <- qdap::stopwords(text.var, stopwords = NULL, unlist = TRUE, 
-          strip = TRUE, unique = TRUE, names = FALSE)    
+          strip = TRUE, unique = TRUE, names = FALSE, char.keep = char2space)  
+    if (!is.null(char2space)) {
+        Terms2 <- mgsub(char2space, " ", Terms2)
+    }  
     TM2 <- lapply(match.string, function(x) term.find(Terms2, 
         mat = tolower(x)))
     match.string <- lapply(TM2, function(i) Terms2[i])
@@ -153,7 +156,7 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
     DF <- data.frame(row = seq_along(text.var), group = grouping, unit = texting,
         text = as.character(text.var), stringsAsFactors = FALSE)    
     LOG <- lapply(match.string, function(x) {
-            apply(term.find(DF$text, mat = x, logic = TRUE), 1, any)
+            apply(term.find(tolower(DF$text), mat = x, logic = TRUE), 1, any)
         } 
     )
     DF2 <- data.frame(do.call("cbind", LOG))
