@@ -1,1 +1,4 @@
 ^\.Rproj\.user$
+^.*\.Rproj$
+.Rbuildignore
+qdap.Rproj
