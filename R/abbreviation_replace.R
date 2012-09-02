@@ -25,7 +25,9 @@ function(text.var, abbreviation = qdap::abbreviations, replace = NULL, ignore.ca
         ab2 <- do.call(rbind, list(ab, ab))
         temp <- unlist(lapply(ab2[, 1], caps, TRUE))
         ab2[, 1] <- temp[1:(length(temp)/2)]
+        v <- as.character(ab[, 2])
         ab <- data.frame(rbind(ab, ab2))
+        ab[, 2] <- c(v, rep(v, each=2))
         ab[, 2] <- spaste(ab[, 2])
     }
     text.var <- Trim(text.var)
