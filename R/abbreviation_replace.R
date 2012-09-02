@@ -8,9 +8,9 @@ function(text.var, abbreviation = NULL, replace = NULL, ignore.case=TRUE) {
     } else {
         if (is.list(abbreviation)) {
         ab <-  data.frame(abv=c("Mr.", "Mrs.", "Ms.", "www.", ".com", "i.e.", 
-            "A.D.", "B.C.", "A.M.", "P.M.", "et al."),
+            "A.D.", "B.C.", "A.M.", "P.M.", "et al.", "Jr.", "Dr.", "Sr."),
             rep=c("Mister", "Misses", "Miss", "dot com", "www dot", "ie", 
-            "AD", "BC", "AM", "PM", "et al"))
+            "AD", "BC", "AM", "PM", "et al", "Junior.", "Doctor.", "Senior"))
             #ab <- data.frame(abv=abbreviation[[1]], repl=abbreviation[[2]])            
         } else {
             stop("must supply vector of abbreviations and vector of replacements")
