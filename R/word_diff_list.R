@@ -10,7 +10,10 @@
 #' @param stopwords A vector of stop words to remove.
 #' @param alphabetical logical. If TRUE orders the word lists alphabetized by word.  If FALSE order first by frequency and then by word.
 #' @param digits the number of digits to be displayed in the proportion column (default is 3).
-#' @return An list of word data frames comparing grouping variables word use against one another. 
+#' @return An list of word data frames comparing grouping variables word use against one another. Eachdata frame contains three columns:
+#' \item{word}The words unique to that group.  
+#' \item{freq}The number of times that group used that word.  
+#' \item{prop}The proportion of that group's over all word use dedicated to that particular word.
 #' @keywords word list
 #' @examples
 #' 
