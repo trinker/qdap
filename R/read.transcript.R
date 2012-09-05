@@ -80,16 +80,16 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     }
     x[, text.var] <- as.character(x[, text.var])
     x[, text.var] <- Trim(iconv(x[, text.var], "", "ASCII", "byte"))
-    if (quote2bracket == TRUE) {
-        rbrac <- "}"
-        lbrac <- "{"
-    } else {
-        if (length(quote2bracket) == 2) {
-            rbrac <- quote2bracket[2]
-            lbrac <- quote2bracket[1]
+    if (is.logical(quote2bracket)) {
+        if (quote2bracket) {
+            rbrac <- "}"
+            lbrac <- "{"
         } else {
             lbrac <- rbrac <- ""
         }
+    } else {
+            rbrac <- quote2bracket[2]
+            lbrac <- quote2bracket[1]
     }
     ser <- c("<e2><80><9c>", "<e2><80><9d>", "<e2><80><98>", "<e2><80><99>", 
         "<e2><80><9b>", "<ef><bc><87>", "<e2><80><a6>", "<e2><80><93>", 
