@@ -76,4 +76,5 @@ function(dataframe, plot.var, facet.vars = NULL, title = NULL,
         }
     }         
     print(theplot)
+    invisible(theplot)
 }
