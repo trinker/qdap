@@ -29,7 +29,6 @@
 #' @examples
 #' with(DATA, formality(state, person))
 #' with(DATA, formality(state, list(sex, adult), plot = TRUE))
-#'
 #' rajDEM <- key_merge(raj, raj.demographics, 'person')
 #' with(raj, formality(rajPOS, act, plot=TRUE))
 #' with(raj, formality(rajPOS, person, plot=TRUE, bar.colors="Dark2"))
@@ -41,8 +40,6 @@
 #' raj.form <- with(rajDEM, formality(rajPOS, list(died, sex), plot=TRUE, bar.colors="RdBu",  point.cex=2, point.pch = "|"))
 #' names(raj.form)
 #' colsplit2df(raj.form$formality)
-#'
-
 formality <- function(text.var, grouping.var = NULL, plot = FALSE,                   
     sort.by.formality = TRUE, digits = 2, point.pch = 20, point.cex = .5,            
     point.colors = c("gray65", "red"), bar.colors = NULL, min.wrdcnt = NULL){        
@@ -198,8 +195,8 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             geom_bar(position='fill') +                                              
             coord_flip() +  labs(fill=NULL) +                                        
             ylab("proportion") + xlab(G)  +                                          
-            opts(title = "Percent Contextual-Formal",                                
-                legend.position = 'bottom')                                          
+            theme(legend.position = 'bottom') +
+            ggtitle("Percent Contextual-Formal")
             if (!is.null(bar.colors)) {                                              
                 YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
                     bar.colors))   
@@ -226,8 +223,8 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             ylab("proportion") + xlab(G)  +                                          
             scale_fill_discrete(name = "", breaks=levels(dat2$pos),                   
                 labels = LAB2) +          
-            opts(title = "Percent Parts of Speech By Contextual-Formal",             
-                legend.position = 'bottom')                                          
+            theme(legend.position = 'bottom') +
+            ggtitle("Percent Parts of Speech By Contextual-Formal")                                         
             if (!is.null(bar.colors)) {  
                 if (length(bar.colors) == 1) {
                     XX <- XX + scale_fill_brewer(palette=bar.colors,                     
@@ -246,7 +243,8 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             geom_text(aes(label = word.count), vjust = 1.2, size = 3,                
                 position = "identity",colour = "grey30") +                           
             labs(size="word count") +                                                
-            opts(title = "F Measure (Formality)", legend.position = 'bottom') +      
+            theme(legend.position = 'bottom') +      
+            ggtitle("F Measure (Formality)") +
             scale_y_continuous(limits=c(min(FOR$formality)-buffer,                   
                 max(FOR$formality) + buffer)) +                                      
             scale_size_continuous(range = c(1, 8)) + xlab(G)  +                      
@@ -257,10 +255,10 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             } else {                                                                 
                 geom_point(colour=point.colors[2], shape=point.pch, 
                     size=point.cex)  
-            }                                                                        
+            }                                                                     
             suppressWarnings(gridExtra::grid.arrange(YY, XX,                         
-                ZZ, widths=c(.25, .45, .3), ncol=3))                                 
+                ZZ, widths=c(.24, .47, .29), ncol=3))                                 
     }                                                                                
     class(o) <- "formality.measure"                                                  
     return(o)                                                                        
-} 
+}
