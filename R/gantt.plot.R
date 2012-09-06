@@ -24,14 +24,13 @@
 #' 
 gantt.plot <-
 function(text.var, grouping.var, plot = TRUE, units = "words", 
-    sums = FALSE, plot.colors = NULL, box.color = NULL, 
-    name.sep = "&", col.sep = "."){
+    sums = FALSE, plot.colors = NULL, box.color = NULL){
     g <- grouping.var
     NAME <- if (is.list(grouping.var)) {
         m <- unlist(as.character(substitute(grouping.var))[-1])
         m <- sapply(strsplit(m, "$", fixed=TRUE), 
             function(x) x[length(x)])
-        paste(m, collapse=name.sep)
+        paste(m, collapse="&")
     } else {
         G <- as.character(substitute(grouping.var))
         G[length(G)]
@@ -41,7 +40,7 @@ function(text.var, grouping.var, plot = TRUE, units = "words",
                 if (any(is.na(x))) {
                     NA 
                 } else {
-                    paste(x, collapse = col.sep) 
+                    paste(x, collapse = ".") 
                 }
             }
         )
@@ -95,7 +94,7 @@ function(text.var, grouping.var, plot = TRUE, units = "words",
     if (is.list(g) & length(g)>1){     
         X <- as.data.frame(ans[, 1], drop = FALSE)   
         names(X) <- names(ans)[1]      
-        splits <- colSplit(ans[, 1, drop = FALSE],  name.sep = name.sep, col.sep = col.sep)          
+        splits <- colSplit(ans[, 1, drop = FALSE])          
         ans <- data.frame(splits, ans, stringsAsFactors = FALSE, 
             check.names =  FALSE) 
     }  
