@@ -1,8 +1,8 @@
 #' Generate Time Spans for Repeated Measures
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' A ggplot2 Wrapper for Gantt Plots
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
+#' A ggplot2 wrapper for data frames produced from gantt and gantt_rep
 #' 
 #' @param rm.var %% ~~Describe \code{rm.var} here~~
 #' @param text.var %% ~~Describe \code{text.var} here~~
