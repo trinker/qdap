@@ -1,4 +1,4 @@
-\name{gantt.plot}
+\name{gantt_plot}
 \alias{helper}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{

@@ -107,7 +107,7 @@
 #'     return(DAT3)
 #'   }
 #' 
-rm.gantt <-
+gantt_rep <-
 function(rm.var, text.var, grouping.var, units = "words", col.sep = "_"){
     g <- grouping.var
     r <- rm.var

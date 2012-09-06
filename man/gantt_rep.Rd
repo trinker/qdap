@@ -1,5 +1,5 @@
-\name{rm.gantt}
-\alias{rm.gantt}
+\name{gantt_rep}
+\alias{gantt_rep}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Generate Time Spans for Repeated Measures

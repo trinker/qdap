@@ -22,7 +22,7 @@
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #' 
-gantt.plot <-
+gantt_plot <-
 function(text.var, grouping.var, plot = TRUE, units = "words", 
     sums = FALSE, plot.colors = NULL, box.color = NULL, col.sep = "_"){
     g <- grouping.var
