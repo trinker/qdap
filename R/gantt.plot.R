@@ -105,5 +105,6 @@ function(text.var, grouping.var, plot = TRUE, units = "words",
     }
     la <- length(ans)
     ans[, (la-2):la] <- lapply(ans[, (la-2):la], as.numeric)
+    comment(ans ) <- units
     if (sums) list("sums" = z, "gantt.df" = ans) else return(ans)
 }
