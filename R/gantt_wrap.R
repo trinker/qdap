@@ -28,7 +28,7 @@
 gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.defalut", rev.factor = TRUE,
-    transform = FALSE, minor.line.freq = 5, major.line.freq = 25) { 
+    transform = FALSE, minor.line.freq = 5, major.line.freq = 25, scale = "free") { 
     require(ggplot2)
     plot.var <- as.character(substitute(plot.var))
     if (rev.factor) {
@@ -66,12 +66,12 @@ function(dataframe, plot.var, facet.vars = NULL, title = NULL,
     if (!is.null(facet.vars)) { 
         if (length(facet.vars) == 1) {
             if (transform) {
-                theplot <- theplot + facet_grid(.~new2)           
+                theplot <- theplot + facet_grid(.~new2, scale = scale)           
             } else {
-                theplot <- theplot + facet_grid(new2~.)
+                theplot <- theplot + facet_grid(new2~., scale = scale)
             }
         } else {
-            theplot <- theplot + facet_grid(new2~new3)
+            theplot <- theplot + facet_grid(new2~new3, scale = scale)
         }
     }         
     print(theplot)
