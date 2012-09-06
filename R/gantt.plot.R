@@ -24,7 +24,7 @@
 #' 
 gantt.plot <-
 function(text.var, grouping.var, plot = TRUE, units = "words", 
-    sums = FALSE, plot.colors = NULL, box.color = NULL, col.sep = "&"){
+    sums = FALSE, plot.colors = NULL, box.color = NULL, col.sep = "_"){
     g <- grouping.var
     NAME <- if (is.list(grouping.var)) {
         m <- unlist(as.character(substitute(grouping.var))[-1])

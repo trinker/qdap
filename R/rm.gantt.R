@@ -108,7 +108,7 @@
 #'   }
 #' 
 rm.gantt <-
-function(rm.var, text.var, grouping.var, units = "words"){
+function(rm.var, text.var, grouping.var, units = "words", col.sep = "_"){
     g <- grouping.var
     r <- rm.var
     NAME <- if (is.list(grouping.var)) {
@@ -179,6 +179,9 @@ function(rm.var, text.var, grouping.var, units = "words"){
         data.frame(DAT3[, 1, drop =FALSE], RMV, DAT4)
     } else {
         data.frame(DAT3[, 1, drop =FALSE], DAT4)
+    }
+    if (col.sep != "&") {
+        colnames(DAT3) <- gsub("&", col.sep, colnames(DAT3), fixed = TRUE)
     }
     return(DAT3)
 }
