@@ -1,7 +1,8 @@
 gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.defalut", rev.factor = TRUE,
-    transform = FALSE, minor.line.freq = 5, major.line.freq = 25) {   
+    transform = FALSE, minor.line.freq = 5, major.line.freq = 25) { 
+    require(ggplot2)
     plot.var <- as.character(substitute(plot.var))
     if (rev.factor) {
         dataframe[, "new"] <- factor(dataframe[, plot.var], levels=rev(levels(dataframe[, plot.var])))

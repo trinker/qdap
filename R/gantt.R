@@ -21,7 +21,25 @@
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
 #' @examples
+#' gantt(DATA$state, DATA$person)                                                        
+#' gantt(DATA$state, DATA$person, sums = TRUE)                                           
+#' gantt(DATA$state, list(DATA$sex, DATA$adult))                                                           
+#' gantt(mraja1$dialogue, mraja1$person) #hard to see without box color   
+#' gantt(mraja1$dialogue, mraja1$sex)                       
+#' gantt(mraja1$dialogue, mraja1$person, box.col = "black")                                      
+#' gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), plot.colors = NULL)                         
+#' gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), plot.colors = "black")                      
+#' gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), plot = FALSE)                                                                                                                       
+#' gantt(mraja1$dialogue, mraja1$person, units = "characters", box.color = "black")              
+#' gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "characters")                       
+#' with(mraja1, gantt(dialogue, list(fam.aff, sex, died), 
+#'    units = "characters", sums = TRUE))       
+#' gantt(mraja1$dialogue, mraja1$person, units = "syllables", box.color = "black", sums = TRUE)  
+#' gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "syllables")                        
 #' 
+#' (dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "sentences",                
+#'      plot.colors = 'black', sums = TRUE, col.sep = "_")$gantt.df)     
+#' gantt_wrap(dat, fam.aff_sex, title = "Gantt Plot")  
 gantt <-
 function(text.var, grouping.var, plot = TRUE, units = "words", 
     sums = FALSE, plot.colors = NULL, box.color = NULL, col.sep = "_"){
