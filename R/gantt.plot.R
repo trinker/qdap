@@ -107,7 +107,7 @@ function(text.var, grouping.var, plot = TRUE, units = "words",
     ans[, (la-2):la] <- lapply(ans[, (la-2):la], as.numeric)
     comment(ans) <- units
     if (col.sep != "&") {
-        colnames(ans) gsub("&", col.sep, colnames(ans), fixed = TRUE)
+        colnames(ans) <- gsub("&", col.sep, colnames(ans), fixed = TRUE)
     }
     if (sums) list("sums" = z, "gantt.df" = ans) else return(ans)
 }
