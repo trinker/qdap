@@ -6,7 +6,7 @@ qcv <-
   } else {
     x <- substitute(...())
   }
-  z <- Trim(unlist(lapply(x, function(y) as.character(y))))
+  z <- clean(Trim(unlist(lapply(x, function(y) as.character(y)))))
   if (space.wrap){
     z <- spaste(z)
   }      
