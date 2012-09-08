@@ -14,7 +14,7 @@
 #' @note %% ~~further notes~~
 #' @author %% ~~who you are~~
 #' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
+#' @references \url{http://wiki.stdout.org/rcookbook/Graphs/Colors%20(ggplot2)/}
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #' (dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "sentences",                
@@ -23,20 +23,20 @@
 #' 
 #' (dat3 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex), units = "words",                
 #'    col.sep = "_")))    
-#' gantt_wrap(dat3, fam.aff_sex, facet.vars = "act", title = "Repeated MeasuresGantt Plot",
-#'    minor.line.freq = 25, major.line.freq = 100)
+#' gantt_wrap(dat3, fam.aff_sex, facet.vars = "act", title = "Repeated MeasuresGantt Plot")
 gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.defalut", rev.factor = TRUE,
     transform = FALSE, minor.line.freq = 25, major.line.freq = 100, scale = NULL, 
-    space = NULL) { 
+    space = NULL, size = 2) { 
     require(ggplot2)
     plot.var2 <- as.character(substitute(plot.var))
     if(plot.var2 != "NAME") {
         plot.var <- as.character(substitute(plot.var))
     }
     if (rev.factor) {
-        dataframe[, "new"] <- factor(dataframe[, plot.var], levels=rev(levels(dataframe[, plot.var])))
+        dataframe[, "new"] <- factor(dataframe[, plot.var], 
+            levels=rev(levels(dataframe[, plot.var])))
     }
     if(xlab == "duration.defalut") {
         if (!is.null(comment(dataframe))) {
@@ -51,12 +51,16 @@ function(dataframe, plot.var, facet.vars = NULL, title = NULL,
             dataframe[, "new3"] <- dataframe[, facet.vars[2]]
         }
     } 
-    theplot <- ggplot(dataframe, aes(colour=new)) +                        
-        geom_vline(xintercept = seq(0, round(max(dataframe$end), -2), 
-           minor.line.freq), colour="gray92", size = .025) +                                                        
-        geom_vline(xintercept = seq(0, round(max(dataframe$end), -2),            
-           major.line.freq), colour="gray50", size = .05) +                                                            
-        geom_segment(aes(x=start, xend=end, y=new, yend=new), size=2) +  
+    theplot <- ggplot(dataframe, aes(colour=new)) 
+    if (!is.null(minor.line.freq)) {                 
+        theplot <- theplot + geom_vline(xintercept = seq(0, round(max(dataframe$end), -2), 
+           minor.line.freq), colour="gray92", size = .025) 
+    }       
+    if (!is.null(major.line.freq)) {                                                  
+        theplot <- theplot + geom_vline(xintercept = seq(0, round(max(dataframe$end), -2),            
+           major.line.freq), colour="gray50", size = .05)  
+    }                                                           
+    theplot <- theplot + geom_segment(aes(x=start, xend=end, y=new, yend=new), size=size) +  
         ylab(ylab) +    
         xlab(xlab) +                   
         theme_bw() +                                                                  
