@@ -28,8 +28,7 @@ gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.defalut", rev.factor = TRUE,
     transform = FALSE, minor.line.freq = 25, major.line.freq = 100, scale = NULL, 
-    space = NULL, size = 2, rm.horiz.lines = TRUE, axis.ticks.x = element_blank(),
-    axis.ticks.y = element_blank()) { 
+    space = NULL, size = 2, rm.horiz.lines = TRUE, x.ticks = FALSE, y.ticks = FALSE) { 
     require(ggplot2)
     plot.var2 <- as.character(substitute(plot.var))
     if(plot.var2 != "NAME") {
@@ -65,7 +64,10 @@ function(dataframe, plot.var, facet.vars = NULL, title = NULL,
     if (!is.null(major.line.freq)) {                                                  
         theplot <- theplot + geom_vline(xintercept = seq(0, round(max(dataframe$end), -2),            
            major.line.freq), colour="gray50", size = .05)  
-    }                                                           
+    } 
+    FUN <- function(x) {if(x) {NULL} else {element_blank()}}
+    axis.ticks.x <- FUN(x.ticks)
+    axis.ticks.y <- FUN(y.ticks)                                                  
     theplot <- theplot + geom_segment(aes(x=start, xend=end, y=new, yend=new), size=size) +  
         ylab(ylab) +    
         xlab(xlab) +                   
