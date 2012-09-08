@@ -28,7 +28,8 @@ gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.defalut", rev.factor = TRUE,
     transform = FALSE, minor.line.freq = 25, major.line.freq = 100, scale = NULL, 
-    space = NULL, size = 2, rm.horiz.lines = TRUE) { 
+    space = NULL, size = 2, rm.horiz.lines = TRUE, axis.ticks.x = element_blank(),
+    axis.ticks.y = element_blank()) { 
     require(ggplot2)
     plot.var2 <- as.character(substitute(plot.var))
     if(plot.var2 != "NAME") {
@@ -76,7 +77,8 @@ function(dataframe, plot.var, facet.vars = NULL, title = NULL,
            panel.grid.minor.y = cond,
            panel.grid.major.x = element_blank(),
            panel.grid.minor.x = element_blank(),
-        axis.ticks = element_blank()) +
+           axis.ticks.x = axis.ticks.x,
+           axis.ticks.y = axis.ticks.y) +
         ggtitle(title)  
     if (!is.null(facet.vars)) { 
         if (length(facet.vars) == 1) {
