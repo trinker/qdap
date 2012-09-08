@@ -28,7 +28,7 @@
 gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.defalut", rev.factor = TRUE,
-    transform = FALSE, minor.line.freq = 5, major.line.freq = 25, scale = NULL, 
+    transform = FALSE, minor.line.freq = 25, major.line.freq = 100, scale = NULL, 
     space = NULL) { 
     require(ggplot2)
     plot.var2 <- as.character(substitute(plot.var))
