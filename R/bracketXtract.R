@@ -13,7 +13,7 @@
 #' @note %% ~~further notes~~
 #' @author %% ~~who you are~~
 #' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
+#' @references \url{http://stackoverflow.com/questions/8621066/remove-text-inside-brackets-parens-and-or-braces}
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #' 

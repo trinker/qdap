@@ -10,6 +10,7 @@
 #' @param  col.sep     
 #' @param \\ldots   
 #' @return   
+#' @author Dason Kurkiewicz and Tyler Rinker <tyler.rinker@gmail.com>.
 #' @seealso
 #' @references\url{http://wiki.stdout.org/rcookbook/Graphs/Colors%20(ggplot2)/}
 #' @keywords ~kwd1 ~kwd2

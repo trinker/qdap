@@ -18,6 +18,7 @@
 #' @param \ldots Further arguments to be passed to read.table.
 #' @return Retruns a dataframe of dialogue and people
 #' @note If a transcript is a .docx file read transcript expects two columns (generally person and dialogue) with some sort of separator (default is colon separator).  .doc fils must be converted to .docx before reding in.
+#' @author Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
 #' @seealso \url{https://github.com/trinker/qdap/wiki/Reading-Transcripts-into-R}
 #' @keywords transcript
 #' @examples
