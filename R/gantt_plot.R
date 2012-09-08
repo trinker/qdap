@@ -16,12 +16,15 @@
 #' @examples
 #' with(rajSPLIT, gantt_plot(text.var = dialogue, grouping.var = person,
 #'     minor.line.freq = NULL, major.line.freq = NULL, size=4))
-#' with(rajSPLIT, gantt_plot(text.var = dialogue, grouping.var = list(fam.aff, sex), 
-#'     rm.var  = act, title = "Romeo and Juliet's dialogue"))
+#' with(rajSPLIT, gantt_plot(text.var = dialogue, grouping.var = 
+#'     list(fam.aff, sex), rm.var  = act, 
+#'     title = "Romeo and Juliet's dialogue"))
 #' with(rajSPLIT, gantt_plot(dialogue, list(fam.aff, sex), act, transform=T))
 #' rajSPLIT2 <- rajSPLIT
-#' rajSPLIT2$newb <- as.factor(sample(LETTERS[1:2], nrow(rajSPLIT2), replace=TRUE))
-#' z <- with(rajSPLIT2, gantt_plot(dialogue, list(fam.aff, sex), list(act, newb)))
+#' rajSPLIT2$newb <- as.factor(sample(LETTERS[1:2], nrow(rajSPLIT2), 
+#'     replace=TRUE))
+#' z <- with(rajSPLIT2, gantt_plot(dialogue, list(fam.aff, sex), 
+#'     list(act, newb), size = 4))
 #' z + theme(panel.margin = unit(1, "lines")) + scale_colour_grey()
 #' z + scale_colour_brewer(palette="Dark2")
 gantt_plot <-

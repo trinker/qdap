@@ -28,7 +28,7 @@ gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.defalut", rev.factor = TRUE,
     transform = FALSE, minor.line.freq = 25, major.line.freq = 100, scale = NULL, 
-    space = NULL, size = 2) { 
+    space = NULL, size = 2, rm.horiz.lines = TRUE) { 
     require(ggplot2)
     plot.var2 <- as.character(substitute(plot.var))
     if(plot.var2 != "NAME") {
@@ -51,6 +51,11 @@ function(dataframe, plot.var, facet.vars = NULL, title = NULL,
             dataframe[, "new3"] <- dataframe[, facet.vars[2]]
         }
     } 
+    if (rm.horiz.lines) {
+        cond <- element_blank()
+    } else {
+        cond <- NULL
+    }
     theplot <- ggplot(dataframe, aes(colour=new)) 
     if (!is.null(minor.line.freq)) {                 
         theplot <- theplot + geom_vline(xintercept = seq(0, round(max(dataframe$end), -2), 
@@ -67,8 +72,10 @@ function(dataframe, plot.var, facet.vars = NULL, title = NULL,
         scale_x_continuous(expand = c(0,0))+                                     
         theme(panel.background = element_rect(fill=NA, color="black"),       
            legend.position = "none", legend.position = "none",
-           panel.grid.major.y = element_blank(),
-           panel.grid.minor.y = element_blank(),
+           panel.grid.major.y = cond,
+           panel.grid.minor.y = cond,
+           panel.grid.major.x = element_blank(),
+           panel.grid.minor.x = element_blank(),
         axis.ticks = element_blank()) +
         ggtitle(title)  
     if (!is.null(facet.vars)) { 
