@@ -31,7 +31,10 @@ function(dataframe, plot.var, facet.vars = NULL, title = NULL,
     transform = FALSE, minor.line.freq = 5, major.line.freq = 25, scale = NULL, 
     space = NULL) { 
     require(ggplot2)
-    plot.var <- as.character(substitute(plot.var))
+    plot.var2 <- as.character(substitute(plot.var))
+    if(plot.var2 != "NAME") {
+        plot.var <- as.character(substitute(plot.var))
+    }
     if (rev.factor) {
         dataframe[, "new"] <- factor(dataframe[, plot.var], levels=rev(levels(dataframe[, plot.var])))
     }
