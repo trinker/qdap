@@ -99,14 +99,14 @@ function(text.var, grouping.var, plot = TRUE, units = "words",
         if(sums) y2 <- z[, 2] 
         if (is.null(plot.colors)) {
             plot.colors <- rainbow(10 + length(levels(ans[, 1]))) 
-            helper(ans, res.col = names(ans)[1], 
-                start.col = 'start', end.col='end', 
-                res.colors = plot.colors, 
-                xlab = units, box.color = box.color,
-                title = paste("Speech Duration (", units, ")", 
-                    sep = ""), y2 = y2) 
-            mtext(names(ans)[1], side = 2, padj = -4.5)
         }
+        helper(ans, res.col = names(ans)[1], 
+            start.col = 'start', end.col='end', 
+            res.colors = plot.colors, 
+            xlab = units, box.color = box.color,
+            title = paste("Speech Duration (", units, ")", 
+                sep = ""), y2 = y2) 
+        mtext(names(ans)[1], side = 2, padj = -4.5)
         if (sums) mtext("sums", side = 4, padj = 1)
     }
     if (is.list(g) & length(g)>1){     
