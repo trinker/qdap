@@ -28,8 +28,11 @@
 #'   }
 #' 
 scrubber <-
-function(text.var, num2word = FALSE, fixComma = TRUE, ...){
+function(text.var, num2word = FALSE, rm.quote = TRUE, fixComma = TRUE, ...){
     x <- reducer(Trim(clean(text.var)))
+    if (rm.quote) {
+        x  <- gsub('\"', "", x)
+    }
     if (fixComma) {
         x <- gsub(" ,", ",", x)
     }
