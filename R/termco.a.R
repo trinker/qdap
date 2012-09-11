@@ -1,6 +1,6 @@
 termco.a <-
 function (text.var, grouping.var=NULL, match.list, short.term = FALSE,
-    ignore.case = FALSE, lazy.term = TRUE, elim.old = TRUE, zero.replace = 0, 
+    ignore.case = TRUE, lazy.term = TRUE, elim.old = TRUE, zero.replace = 0, 
     output = "percent", digits = 2) {
     preIND <- match.list
     IND <- unlist(lapply(preIND, length))
