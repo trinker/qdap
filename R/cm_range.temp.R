@@ -1,5 +1,5 @@
 cm_range.temp <- 
-function(codes) {
+function(codes, file=NULL) {
     cat(paste("list(\n",
         paste0("    ", paste0("\b", paste(codes, 
             collapse = " = c(),\n    "), " = c()")), "\n)\n")
@@ -14,6 +14,12 @@ function(codes) {
     if (Sys.info()["sysname"] == "Darwin") {                 
         j <- pipe("pbcopy", "w")                             
         writeLines(x, con = j)                               
-        close(j)                                             
-    }                   
+        close(j)  
+    }
+    if (!is.null(file)) {                                           
+        cat(paste("list(\n",
+            paste0("    ", paste0("\b", paste(codes, 
+                collapse = " = c(),\n    "), " = c()")), "\n)\n"),
+        file=file)  
+    }         
 }
