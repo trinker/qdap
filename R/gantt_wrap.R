@@ -58,17 +58,18 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
         }
     } 
     if (!is.null(fill.var)) {
-         dataframe[, "new3"] <- dataframe[, fill.var]
+         dataframe[, "new4"] <- dataframe[, fill.var]
     } else {
-         dataframe[, "new3"] <- factor(dataframe[, plot.var], 
-            levels=rev(levels(dataframe[, plot.var])))
+#dataframe[, "new4"] <- factor(dataframe[, plot.var], #remove once I'm sure there's no issues with removing these lines
+#levels=rev(levels(dataframe[, plot.var])))
+    dataframe[, "new4"] <- dataframe[, "new"] 
     }
     if (rm.horiz.lines) {
         cond <- element_blank()
     } else {
         cond <- NULL
     }
-    theplot <- ggplot(dataframe, aes(colour=new3)) 
+    theplot <- ggplot(dataframe, aes(colour=new4)) 
     if (!is.null(minor.line.freq)) {                 
         theplot <- theplot + geom_vline(xintercept = seq(0, round(max(dataframe$end), -2), 
            minor.line.freq), colour="gray92", size = .025) 
