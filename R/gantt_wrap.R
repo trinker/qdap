@@ -40,6 +40,9 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     if (rev.factor) {
         dataframe[, "new"] <- factor(dataframe[, plot.var], 
             levels=rev(levels(dataframe[, plot.var])))
+    } else {
+        dataframe[, "new"] <- factor(dataframe[, plot.var], 
+            levels=levels(dataframe[, plot.var]))
     }
     if(xlab == "duration.defalut") {
         if (!is.null(comment(dataframe))) {
