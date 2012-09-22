@@ -1,7 +1,12 @@
 cm2long <- function(dataframe, code.vars, no.code = NA, 
-    repeat.vars = NULL, rev.code = FALSE){
+    add.start.end = TRUE, repeat.vars = NULL, rev.code = FALSE){
     if (is.numeric(code.vars)) {
         code.vars <- colnames(dataframe)[code.vars]
+    }
+    if (add.start.end) {
+        end <- seq_len(nrow(dataframe)) 
+        dataframe$start <- end - 1
+        dataframe$end <- end
     }
     A <- paste2(dataframe[, code.vars])
     B <- lapply(strsplit(A, "\\."), function(x) as.logical(as.numeric(x)))
