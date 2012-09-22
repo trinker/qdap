@@ -15,7 +15,7 @@ cm2long <- function(dataframe, code.vars, no.code = NA,
     )
     if (is.null(repeat.vars)){
         repeat.vars <- colnames(dataframe)[!colnames(dataframe) %in% 
-            codes]
+            code.vars]
     } else {
         if (is.numeric(repeat.vars)) {
             repeat.vars <- colnames(dataframe)[repeat.vars]
