@@ -31,7 +31,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     ylab = as.character(plot.var), xlab = "duration.default", rev.factor = TRUE,
     transform = FALSE, minor.line.freq = 25, major.line.freq = 100, scale = NULL, 
     space = NULL, size = 3, rm.horiz.lines = TRUE, x.ticks = FALSE, y.ticks = FALSE,
-    legend.position = NULL) { 
+    legend.position = NULL, border.color = NULL, border.size = 2) { 
     require(ggplot2)
     plot.var2 <- as.character(substitute(plot.var))
     if(plot.var2 != "NAME") {
@@ -69,19 +69,34 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     } else {
         cond <- NULL
     }
+    if (!is.null(border.color)) {
+      ld <- length(dataframe$start)
+      dataframe$startp <- c(dataframe$start[1], (dataframe$start[-1] - border.size[1]))
+      dataframe$endp <- c((dataframe$start[-ld] + border.size[1]), dataframe$start[ld])
+    }  
     theplot <- ggplot(dataframe, aes(colour=new4)) 
     if (!is.null(minor.line.freq)) {                 
-        theplot <- theplot + geom_vline(xintercept = seq(0, round(max(dataframe$end), -2), 
+        theplot <- theplot + geom_vline(xintercept = seq(0, 
+           round(max(dataframe$end), -2), 
            minor.line.freq), colour="gray92", size = .025) 
     }       
     if (!is.null(major.line.freq)) {                                                  
-        theplot <- theplot + geom_vline(xintercept = seq(0, round(max(dataframe$end), -2),            
+        theplot <- theplot + geom_vline(xintercept = seq(0, 
+            round(max(dataframe$end), -2),            
            major.line.freq), colour="gray50", size = .05)  
     } 
     FUN <- function(x) {if(x) {NULL} else {element_blank()}}
     axis.ticks.x <- FUN(x.ticks)
-    axis.ticks.y <- FUN(y.ticks)                                                  
-    theplot <- theplot + geom_segment(aes(x=start, xend=end, y=new, yend=new), size=size) +  
+    axis.ticks.y <- FUN(y.ticks) 
+    if (!is.null(border.color)) {
+        if (length(border.size) == 1) {
+            border.size[2] <- size + size*.1
+        }
+        theplot <- theplot + geom_segment(aes(x=startp, xend=endp, y=new, 
+            yend=new), colour = border.color, size=border.size[2], legend.position = "none")  
+    }                                                 
+    theplot <- theplot + geom_segment(aes(x=start, xend=end, y=new, yend=new), 
+        size=size) +  
         ylab(ylab) +    
         xlab(xlab) +                   
         theme_bw() +                                                                  
