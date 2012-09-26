@@ -29,9 +29,9 @@
 gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.default", rev.factor = TRUE,
-    transform = FALSE, minor.line.freq = 25, major.line.freq = 100, scale = NULL, 
-    space = NULL, size = 3, rm.horiz.lines = TRUE, x.ticks = FALSE, y.ticks = FALSE,
-    legend.position = NULL, border.color = NULL, border.size = 2) { 
+    transform = FALSE, minor.line.freq = 25, major.line.freq = 100, sig.dig.line.freq = -2,
+    scale = NULL, space = NULL, size = 3, rm.horiz.lines = TRUE, x.ticks = FALSE, 
+    y.ticks = FALSE, legend.position = NULL, border.color = NULL, border.size = 2) { 
     require(ggplot2)
     plot.var2 <- as.character(substitute(plot.var))
     if(plot.var2 != "NAME") {
@@ -77,12 +77,12 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     theplot <- ggplot(dataframe, aes(colour=new4)) 
     if (!is.null(minor.line.freq)) {                 
         theplot <- theplot + geom_vline(xintercept = seq(0, 
-           round(max(dataframe$end), -2), 
+           round(max(dataframe$end), sig.dig.line.freq[1]), 
            minor.line.freq), colour="gray92", size = .025) 
     }       
     if (!is.null(major.line.freq)) {                                                  
         theplot <- theplot + geom_vline(xintercept = seq(0, 
-            round(max(dataframe$end), -2),            
+            round(max(dataframe$end), sig.dig.line.freq[length(sig.dig.line.freq)]),            
            major.line.freq), colour="gray50", size = .05)  
     } 
     FUN <- function(x) {if(x) {NULL} else {element_blank()}}
