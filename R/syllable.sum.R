@@ -15,17 +15,6 @@
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (text) 
-#' {
-#'     Trim <- function(x) gsub("^\s+|\s+$", "", x)
-#'     unlist(lapply(as.character(text), function(x) sum(syllable.count(Trim(x))["syllables"])))
-#'   }
-#' 
 syllable.sum <-
 function(text) {
     Trim <- function(x) gsub("^\\s+|\\s+$", "", x)
