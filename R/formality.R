@@ -42,7 +42,7 @@
 #' colsplit2df(raj.form$formality)
 formality <- function(text.var, grouping.var = NULL, plot = FALSE,                   
     sort.by.formality = TRUE, digits = 2, point.pch = 20, point.cex = .5,            
-    point.colors = c("gray65", "red"), bar.colors = NULL, min.wrdcnt = NULL){        
+    point.colors = c("gray65", "red"), bar.colors = NULL, min.wrdcnt = NULL, ...){        
     G <- if(is.null(grouping.var)) {                                                 
              gv <- TRUE                                                              
              "all"                                                                   
@@ -75,10 +75,10 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
     }                                                                                
     if (!gv) {                                                                       
         pos.list <- pos.by(text.var = text.var,                                      
-            grouping.var = grouping.var, digits = digits)                            
+            grouping.var = grouping.var, digits = digits, ...)                            
     } else {                                                                         
         pos.list <- suppressWarnings(pos.by(text.var = text.var,                     
-            grouping.var = NULL, digits = digits))                                   
+            grouping.var = NULL, digits = digits, ...))                                   
     }                                                                                
     text.var <- pos.list$text                                                        
     WOR <- word.count(text.var)                                                      
