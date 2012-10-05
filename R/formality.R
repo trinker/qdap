@@ -216,13 +216,15 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
         LAB <- c("noun", "adjective", "preposition",                         
             "articles", "pronoun", "verb", "adverb", "interjection")  
         LAB2 <- LAB[substring(LAB, 1, 3) %in% substring(levels(dat2$pos), 1, 3)]
+        LABy <- strsplit(as.character(LAB2), "\\.")
+        LABy  <- sapply(LABy , function(z) z[length(z)])
         XX <- ggplot(data=dat2, aes(grouping,  fill=pos)) +                           
             geom_bar(position='fill') + coord_flip() +                               
             facet_grid(~form.class, scales="free", margins = TRUE) +                  
             labs(fill=NULL) +     
             ylab("proportion") + xlab(G)  +                                          
             scale_fill_discrete(name = "", breaks=levels(dat2$pos),                   
-                                labels=c("0", ".25", ".50", ".75", "1"))+ #labels = LAB2) +          
+                                labels = LABy) + # labels = LAB2) +          
             theme(legend.position = 'bottom') +
             ggtitle("Percent Parts of Speech By Contextual-Formal")                                         
             if (!is.null(bar.colors)) {  
