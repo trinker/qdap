@@ -223,7 +223,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             facet_grid(~form.class, scales="free", margins = TRUE) +                 
             scale_x_discrete(drop=F) +  labs(fill=NULL) +   
             scale_y_continuous(breaks = c(0, .25, .5, .75, 1),
-                labels=c("0", ".25", ".5", ".75", "1"))
+                labels=c("0", ".25", ".5", ".75", "1")) +
             ylab("proportion") + xlab(G)  +                                          
             scale_fill_discrete(name = "", breaks=levels(dat2$pos),                   
                 labels = LAB2) +          
