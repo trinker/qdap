@@ -195,8 +195,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             geom_bar(position='fill') +                                              
             coord_flip() +  labs(fill=NULL) +                                        
             ylab("proportion") + xlab(G)  +  
-            scale_x_continuous(breaks=c(0.00, 0.25, 0.50, 0.75, 1.00), 
-                labels=c("0", ".25", ".50", ".75", "1")) +
+            scale_x_discrete(labels=c("0", ".25", ".50", ".75", "1")) +
             theme(legend.position = 'bottom') +
             ggtitle("Percent Contextual-Formal")
             if (!is.null(bar.colors)) {                                              
