@@ -198,7 +198,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             theme(legend.position = 'bottom') +
             ggtitle("Percent Contextual-Formal") +
             scale_y_continuous(breaks = c(0, .25, .5, .75, 1),
-                               labels=c("0", ".25", ".5", ".75", "1"))
+                labels=c("0", ".25", ".5", ".75", "1"))
             if (!is.null(bar.colors)) {                                              
                 YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
                     bar.colors))   
@@ -221,7 +221,9 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
         XX <- ggplot(data=dat2, aes(grouping,  fill=pos)) +                           
             geom_bar(position='fill') + coord_flip() +                               
             facet_grid(~form.class, scales="free", margins = TRUE) +                 
-            scale_x_discrete(drop=F) +  labs(fill=NULL) +                            
+            scale_x_discrete(drop=F) +  labs(fill=NULL) +   
+            scale_y_continuous(breaks = c(0, .25, .5, .75, 1),
+                labels=c("0", ".25", ".5", ".75", "1"))
             ylab("proportion") + xlab(G)  +                                          
             scale_fill_discrete(name = "", breaks=levels(dat2$pos),                   
                 labels = LAB2) +          
