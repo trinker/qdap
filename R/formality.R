@@ -194,20 +194,20 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
         YY <- ggplot(dat, aes(grouping,  fill=form.class)) +                         
             geom_bar(position='fill') +                                              
             coord_flip() +  labs(fill=NULL) +                                        
-            ylab("proportion") + xlab(G)  +  
+            ylab("proportion") + xlab(G)  +                                          
             theme(legend.position = 'bottom') +
             ggtitle("Percent Contextual-Formal")
             if (!is.null(bar.colors)) {                                              
                 YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
-                    bar.colors, labels=c("0", ".25", ".50", ".75", "1")))   
+                    bar.colors))   
             }     
             if (!is.null(bar.colors)) {  
                 if (length(bar.colors) == 1) {
                     YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
-                        bar.colors, labels=c("0", ".25", ".50", ".75", "1")))
+                        bar.colors))
           } else {
                     YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
-                        bar.colors[2], labels=c("0", ".25", ".50", ".75", "1")))
+                        bar.colors[2]))
           }
         }        
         dat2 <- dat[dat[, "pos"] != "other", ] 
@@ -216,15 +216,13 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
         LAB <- c("noun", "adjective", "preposition",                         
             "articles", "pronoun", "verb", "adverb", "interjection")  
         LAB2 <- LAB[substring(LAB, 1, 3) %in% substring(levels(dat2$pos), 1, 3)]
-        LABy <- strsplit(as.character(LAB2), "\\.")
-        LABy  <- sapply(LABy , function(z) z[length(z)])
         XX <- ggplot(data=dat2, aes(grouping,  fill=pos)) +                           
             geom_bar(position='fill') + coord_flip() +                               
-            facet_grid(~form.class, scales="free", margins = TRUE) +                  
-            labs(fill=NULL) +     
+            facet_grid(~form.class, scales="free", margins = TRUE) +                 
+            scale_x_discrete(drop=F) +  labs(fill=NULL) +                            
             ylab("proportion") + xlab(G)  +                                          
             scale_fill_discrete(name = "", breaks=levels(dat2$pos),                   
-                                labels = LABy) + # labels = LAB2) +          
+                labels = LAB2) +          
             theme(legend.position = 'bottom') +
             ggtitle("Percent Parts of Speech By Contextual-Formal")                                         
             if (!is.null(bar.colors)) {  
