@@ -221,9 +221,8 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
         XX <- ggplot(data=dat2, aes(grouping,  fill=pos)) +                           
             geom_bar(position='fill') + coord_flip() +                               
             facet_grid(~form.class, scales="free", margins = TRUE) +                 
-            scale_x_discrete(drop=F) +  labs(fill=NULL) +     
-            scale_x_continuous(breaks=c(0.00, 0.25, 0.50, 0.75, 1.00), 
-                               labels=c("0", ".25", ".50", ".75", "1")) +
+            scale_x_discrete(drop=F, labels=c("0", ".25", ".50", ".75", "1")) +  
+            labs(fill=NULL) +     
             ylab("proportion") + xlab(G)  +                                          
             scale_fill_discrete(name = "", breaks=levels(dat2$pos),                   
                 labels = LAB2) +          
