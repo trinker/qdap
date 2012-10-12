@@ -26,6 +26,9 @@ function(termco.d.object, combined.columns, new.name, short.term = FALSE,
   if (!class(termco.d.object) %in% c("termco_d", "termco_c")) {
     stop("termco.d.object must be a termco.d.object or termco.c.object")
   }
+  subdf <- function(df, ii) {
+    do.call("data.frame", c(as.list(df)[ii, drop=FALSE], check.names=FALSE))
+  }
   x <- termco.d.object$raw
   if (termco.d.object$zero_replace != 0){
     x <- replacer(x, termco.d.object$zero_replace, 0)
@@ -91,7 +94,9 @@ function(termco.d.object, combined.columns, new.name, short.term = FALSE,
     names(x) [length(x)] <- new.name
   } 
   if (elim.old) {
+    NMS <- colnames(x)[!seq_along(x) %in% unlist(combined.columns2)]
     x <- x[, seq_along(x)[!seq_along(x) %in% unlist(combined.columns2)]]
+    colnames(x)<- NMS
   } 
   x2 <- replacer(x, with = zero.replace)
   y2 <- termco.p(x, output = termco.d.object$output, 
@@ -107,10 +112,10 @@ function(termco.d.object, combined.columns, new.name, short.term = FALSE,
     }
   }
   if (is.numeric(zero.replace)){
-    p <- data.frame(sapply(x2[, -1], function(x) 
+    p <- data.frame(sapply(subdf(x2, -1), function(x) 
       as.numeric(as.character(x))), check.names=FALSE)
     x2 <- data.frame(x2[, 1, drop=FALSE], p, check.names=FALSE)
-    p <- data.frame(sapply(y2[, -1], function(x) 
+    p <- data.frame(sapply(subdf(y2, -1), function(x) 
       as.numeric(as.character(x))), check.names=FALSE)
     y2 <- data.frame(y2[, 1, drop=FALSE], p, check.names=FALSE)
   } 

@@ -30,10 +30,14 @@
 #'   }
 #' 
 termco.rnp <-
-function(termco1, termco2){
+    function(termco1, termco2){
     mypaste <- function(x,y) paste(x, "(", y, ")", sep="")  
-    DF <- mapply(mypaste, termco1[, -c(1:2), drop=FALSE], 
-                 termco2[, -c(1:2), drop = FALSE])
+    subdf <- function(df, ii) {
+        do.call("data.frame", c(as.list(df)[ii, drop=FALSE], check.names=FALSE))
+    }
+    DF <- mapply(mypaste, subdf(termco1, -c(1:2)), 
+        subdf(termco2, -c(1:2)))
     DF <- data.frame(termco1[, 1:2], DF, check.names = FALSE)
     return(DF)
 }
+

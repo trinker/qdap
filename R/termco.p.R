@@ -37,7 +37,7 @@
 #' 
 termco.p <-
 function(tco, output = "percent", short.term = FALSE, digits = 2){
-     subdf <- function(df, ii) {
+    subdf <- function(df, ii) {
         do.call("data.frame", c(as.list(df)[ii, drop=FALSE], check.names=FALSE))
     }
     a <- subdf(tco, -c(1:2))

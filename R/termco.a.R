@@ -16,6 +16,19 @@ function (text.var, grouping.var=NULL, match.list, short.term = FALSE,
         } else {
             o <- termco.c(TD, combined.columns = CC, new.name = new.names, 
                 zero.replace = NULL, lazy.term = lazy.term, elim.old = elim.old)
+            if (elim.old) {
+                names(match.list)[names(match.list) == ""] <- unlist(match.list[names(match.list) == ""])
+                tailend <- paste0("term(", names(match.list)[names(match.list) != ""], ")")
+                subdf <- function(df, ii) {
+                  do.call("data.frame", c(as.list(df)[ii, drop=FALSE], check.names=FALSE))
+                }
+                INDS <- lapply(tailend, function(x) which(colnames(o[["raw"]]) == x))
+                keeps <- c(1:2, sapply(INDS, max))
+                lapply(1:3, function(i) {
+                        o[[i]] <<- subdf(o[[i]], keeps)
+                    }
+                )
+            }
         }
     } else {
         o <- TD

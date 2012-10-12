@@ -65,13 +65,17 @@ function(dat, replace=0, with="-"){
   i <- is.matrix(dat)
   j <- is.data.frame(dat)
   if (is.numeric(replace)){
-    NAMES <- names(dat)
+    NAMES <- colnames(dat)
     if (h) {
       dat <- data.frame(dat)
     }
     not.num <- Negate(is.numeric)
     dat1 <- dat[, sapply(dat, not.num), drop = FALSE]
-    dat2 <- dat[, sapply(dat, is.numeric), drop = FALSE]
+    inds <- which(sapply(dat, is.numeric))
+    subdf <- function(df, ii) {
+      do.call("data.frame", c(as.list(df)[ii, drop=FALSE], check.names=FALSE))
+    }
+    dat2 <- subdf(dat, inds)
   } else {
     dat2 <- dat
   }
@@ -85,7 +89,7 @@ function(dat, replace=0, with="-"){
     y <- data.frame(dat1, y, check.names = FALSE)
     m <- NAMES[!NAMES%in%names(y)]
     if(length(m) == 1) names(y)[1] <- m
-    y <- y[, NAMES]
+    y <- subdf(y, NAMES)
   }
   if(h) y <- as.vector(y)
   if(i) y <- as.matrix(y)
