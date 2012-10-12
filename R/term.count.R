@@ -14,6 +14,6 @@ function(str, mat){
         sapply(string, function(x) paste0(" ", x, " "), USE.NAMES = FALSE)
     }
     str <- spacer(str)
-    y <- sapply(mat, function(x) tester(x, str))
+    y <- sapply(mat, function(x) tester(x, strip(str)))
     return(y)
 }
