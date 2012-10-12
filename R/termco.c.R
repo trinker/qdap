@@ -41,7 +41,8 @@ function(termco.d.object, combined.columns, new.name, short.term = FALSE,
   y <- termco.d.object$prop
   if (!is.numeric(unlist(combined.columns))) {
     cc <- function(X, Y) {
-      which(names(Y) %in% X)
+      ZZ <- which(names(Y) %in% X)
+      ZZ[!ZZ %in% which(duplicated(names(Y)))]
     }
     paster <- function(x) {
       paste0("term(", x, ")")
