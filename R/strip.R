@@ -18,16 +18,20 @@
 #' @examples
 #' 
 strip <-
-function (x, char.keep = NULL, digit.remove = TRUE, apostrophe.remove = TRUE) {
-    strp <- function(x, digit.remove, apostrophe.remove, char.keep) {
+function (x, char.keep = NULL, digit.remove = TRUE, apostrophe.remove = TRUE,
+    lower.case = TRUE) {
+    strp <- function(x, digit.remove, apostrophe.remove, char.keep, lower.case) {
         if (!is.null(char.keep)) {
-            x2 <- Trim(tolower(gsub(paste0(".*?($|'|",
+            x2 <- Trim(gsub(paste0(".*?($|'|",
             paste(char.keep, collapse = "|"),
             "|[^[:punct:]]).*?"), "\\1", 
-                as.character(x))))
+                as.character(x)))
         } else {
-            x2 <- Trim(tolower(gsub(".*?($|'|[^[:punct:]]).*?", "\\1", 
-                as.character(x))))
+            x2 <- Trim(gsub(".*?($|'|[^[:punct:]]).*?", "\\1", 
+                as.character(x)))
+        }
+        if (lower.case) {
+            x2 <- tolower(x2)
         }
         if (apostrophe.remove) {
             x2 <- gsub("'", "", x2)
@@ -37,5 +41,6 @@ function (x, char.keep = NULL, digit.remove = TRUE, apostrophe.remove = TRUE) {
     }
     x <- clean(gsub("/", " ", gsub("-", " ", x))) 
     unlist(lapply(x, function(x) Trim(strp(x = x, digit.remove = digit.remove, 
-       apostrophe.remove = apostrophe.remove, char.keep = char.keep))))
+       apostrophe.remove = apostrophe.remove, char.keep = char.keep, 
+       lower.case = lower.case))))
 }

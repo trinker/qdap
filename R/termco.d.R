@@ -38,7 +38,7 @@ termco.d <-
       G[length(G)]
     }
   }
-  x <- termco(text.var = text.var, match.string = match.string, 
+  x <- termco(text.var = strip(text.var, lower.case = FALSE), match.string = match.string, 
               grouping.var = grouping.var, ignore.case = ignore.case)
   names(x)[1] <- NAME
   y <- termco.p(tco = x, output = output, digits = digits)

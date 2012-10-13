@@ -10,7 +10,7 @@ function(str, mat, logic = FALSE){
   spacer <- function(string){
     sapply(string, function(x) paste0(" ", x, " "), USE.NAMES = FALSE)
   }
-  str <- spacer(str)
+  str <- spacer(strip(str, lower.case = FALSE))
   if (logic) {
       findit <- function(x, logic = TRUE) {
         sapply(x, function(z) tester(z, str, logic))
