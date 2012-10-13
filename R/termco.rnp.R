@@ -16,19 +16,6 @@
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (termco1, termco2) 
-#' {
-#'     mypaste <- function(x, y) paste(x, "(", y, ")", sep = "")
-#'     DF <- mapply(mypaste, termco1[, -c(1:2)], termco2[, -c(1:2)])
-#'     DF <- data.frame(termco1[, 1:2], DF, check.names = FALSE)
-#'     return(DF)
-#'   }
-#' 
 termco.rnp <-
     function(termco1, termco2){
     mypaste <- function(x,y) paste(x, "(", y, ")", sep="")  
@@ -37,6 +24,21 @@ termco.rnp <-
     }
     DF <- mapply(mypaste, subdf(termco1, -c(1:2)), 
         subdf(termco2, -c(1:2)))
+    dims <- dim(DF)
+    NMS <- colnames(DF)
+    formatter <- function(x) {
+        numformat <- function(val){
+            sub("^(-?)0.", "\\1.", sprintf("%.2f", as.numeric(val)))
+        }
+        z <- unlist(strsplit(gsub("\\)", "", x), "\\("))
+        z[2] <- numformat(z[2])
+        paste0(z[1], "(", z[2], ")")
+    }
+    formatter2 <- function(string) {
+        ifelse(unlist(strsplit(string, "\\("))[1] == "0", string, formatter(string))
+    }
+    DF <- matrix(sapply(DF, formatter2), dims)
+    colnames(DF) <- NMS
     DF <- data.frame(termco1[, 1:2], DF, check.names = FALSE)
     return(DF)
 }
