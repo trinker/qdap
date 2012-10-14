@@ -22,7 +22,8 @@
 #' 
 termco.c <-
 function(termco.d.object, combined.columns, new.name, short.term = FALSE,
-         zero.replace = NULL, lazy.term = TRUE, elim.old = TRUE) { 
+         zero.replace = NULL, lazy.term = TRUE, elim.old = TRUE, 
+         output = "percent") { 
   if (!class(termco.d.object) %in% c("termco_d", "termco_c")) {
     stop("termco.d.object must be a termco.d.object or termco.c.object")
   }
@@ -119,7 +120,7 @@ function(termco.d.object, combined.columns, new.name, short.term = FALSE,
       as.numeric(as.character(x))), check.names=FALSE)
     y2 <- data.frame(y2[, 1, drop=FALSE], p, check.names=FALSE)
   } 
-  trnp <- termco.rnp(x, y2)
+  trnp <- termco.rnp(x, y2, output = output)
   if (!is.numeric(zero.replace)) {
     y2 <- y
   }

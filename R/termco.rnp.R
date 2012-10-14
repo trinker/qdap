@@ -17,7 +17,7 @@
 #' @examples
 #' 
 termco.rnp <-
-    function(termco1, termco2, output = NULL){
+    function(termco1, termco2, output = "proportion"){
     mypaste <- function(x,y) paste(x, "(", y, ")", sep="")  
     subdf <- function(df, ii) {
         do.call("data.frame", c(as.list(df)[ii, drop=FALSE], check.names=FALSE))
