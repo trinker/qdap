@@ -1,7 +1,7 @@
 termco.a <-
 function (text.var, grouping.var=NULL, match.list, short.term = FALSE,
     ignore.case = TRUE, lazy.term = TRUE, elim.old = TRUE, zero.replace = 0, 
-    output = "percent", digits = 2, latex = FALSE) {
+    output = "percent", digits = 2) {
     preIND <- match.list
     IND <- unlist(lapply(preIND, length))
     new.names <- paste0("term(", names(IND)[IND != 1], ")")
@@ -17,7 +17,7 @@ function (text.var, grouping.var=NULL, match.list, short.term = FALSE,
         } else {
             o <- termco.c(TD, combined.columns = CC, new.name = new.names, 
                 zero.replace = NULL, lazy.term = lazy.term, elim.old = elim.old,
-                output = output, latex = latex)
+                output = output)
             if (elim.old) {
                 names(match.list)[names(match.list) == ""] <- unlist(match.list[names(match.list) == ""])
                 tailend <- paste0("term(", names(match.list)[names(match.list) != ""], ")")
