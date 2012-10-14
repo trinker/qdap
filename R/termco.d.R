@@ -73,5 +73,5 @@ termco.d <-
   if (short.term) {
     o <- termco2short.term(o)
   }
-  return(o)
+  return(o) 
 }
