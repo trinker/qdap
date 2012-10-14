@@ -35,7 +35,8 @@ termco.rnp <-
         paste0(z[1], "(", z[2], output, ")")
     }
     formatter2 <- function(string, output) {
-        ifelse(unlist(strsplit(string, "\\("))[1] == "0", string, formatter(string))
+        ifelse(unlist(strsplit(string, "\\("))[1] == "0", string, 
+            formatter(string, output))
     }
     if (output == "percent") {
         output <- "%"
