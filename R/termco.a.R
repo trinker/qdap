@@ -9,8 +9,7 @@ function (text.var, grouping.var=NULL, match.list, short.term = FALSE,
     ML <- unlist(match.list) 
     TD <- termco.d(text.var = text.var, grouping.var = grouping.var, 
         match.string = ML, ignore.case = ignore.case, 
-        zero.replace = zero.replace, output = output, digits = digits, 
-        latex = latex)
+        zero.replace = zero.replace, output = output, digits = digits)
     if (is.list(preIND)) {
         if(length(IND) == sum(IND)){
             o <- TD
