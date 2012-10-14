@@ -27,7 +27,7 @@ termco.rnp <-
     dims <- dim(DF)
     NMS <- colnames(DF)
     formatter <- function(x, output, digits) {
-        numformat <- function(val){
+        numformat <- function(val, digits){
             sub("^(-?)0.", "\\1.", sprintf(paste0("%.", digits, "f"), 
                 as.numeric(val)))
         }
