@@ -15,7 +15,8 @@ function (text.var, grouping.var=NULL, match.list, short.term = FALSE,
             o <- TD
         } else {
             o <- termco.c(TD, combined.columns = CC, new.name = new.names, 
-                zero.replace = NULL, lazy.term = lazy.term, elim.old = elim.old)
+                zero.replace = NULL, lazy.term = lazy.term, elim.old = elim.old,
+                output = output)
             if (elim.old) {
                 names(match.list)[names(match.list) == ""] <- unlist(match.list[names(match.list) == ""])
                 tailend <- paste0("term(", names(match.list)[names(match.list) != ""], ")")

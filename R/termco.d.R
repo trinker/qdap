@@ -62,7 +62,7 @@ termco.d <-
       y[, -c(1:2)] <- replacer(y[, -c(1:2), drop = FALSE], 
         0, zero.replace)
     }
-    z <- termco.rnp(x, y)
+    z <- termco.rnp(x, y, output = output)
     h <- paste(zero.replace, "(", zero.replace, ")", sep = "")
     z[, -c(1:2)] <- lapply(z[, -c(1:2), drop = FALSE], 
       function(x) replacer(x, h, zero.replace))

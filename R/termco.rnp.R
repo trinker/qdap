@@ -17,7 +17,7 @@
 #' @examples
 #' 
 termco.rnp <-
-    function(termco1, termco2){
+    function(termco1, termco2, output = NULL){
     mypaste <- function(x,y) paste(x, "(", y, ")", sep="")  
     subdf <- function(df, ii) {
         do.call("data.frame", c(as.list(df)[ii, drop=FALSE], check.names=FALSE))
@@ -26,18 +26,23 @@ termco.rnp <-
         subdf(termco2, -c(1:2)))
     dims <- dim(DF)
     NMS <- colnames(DF)
-    formatter <- function(x) {
+    formatter <- function(x, output) {
         numformat <- function(val){
             sub("^(-?)0.", "\\1.", sprintf("%.2f", as.numeric(val)))
         }
         z <- unlist(strsplit(gsub("\\)", "", x), "\\("))
         z[2] <- numformat(z[2])
-        paste0(z[1], "(", z[2], ")")
+        paste0(z[1], "(", z[2], output, ")")
     }
-    formatter2 <- function(string) {
+    formatter2 <- function(string, output) {
         ifelse(unlist(strsplit(string, "\\("))[1] == "0", string, formatter(string))
     }
-    DF <- matrix(sapply(DF, formatter2), dims)
+    if (output == "percent") {
+        output <- "%"
+    } else {
+        output <- "" 
+    }
+    DF <- matrix(sapply(DF, formatter2, output = output), dims)
     colnames(DF) <- NMS
     DF <- data.frame(termco1[, 1:2], DF, check.names = FALSE)
     return(DF)
