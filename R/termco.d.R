@@ -43,7 +43,7 @@ termco.d <-
   names(x)[1] <- NAME
   y <- termco.p(tco = x, output = output, digits = digits)
   if (is.null(grouping.var)){
-    z <- termco.rnp(x, y)
+    z <- termco.rnp(x, y, output = output)
     znull <- as.character(z$DF)
     names(znull) <- rownames(z)
     z <- t(as.data.frame(znull))
