@@ -18,7 +18,7 @@
 #' 
 termco.rnp <-
     function(termco1, termco2, output = "proportion", digits = 2){
-    mypaste <- function(x,y) paste(x, "(", y, ")", sep="")  
+    mypaste <- function(x,y) paste(x, "(", y, ")", sep="", latex = FALSE)  
     subdf <- function(df, ii) {
         do.call("data.frame", c(as.list(df)[ii, drop=FALSE], check.names=FALSE))
     }
@@ -40,7 +40,11 @@ termco.rnp <-
             formatter(string, output, digits))
     }
     if (output == "percent") {
-        output <- "%"
+        if (latex) {
+            output <- "\\%"
+        } else {
+            output <- "%"
+        }
     } else {
         output <- "" 
     }

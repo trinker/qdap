@@ -24,7 +24,8 @@
 #' 
 termco.d <-
   function (text.var, grouping.var=NULL, match.string, short.term = FALSE,
-    ignore.case = TRUE, zero.replace = 0, output = "percent", digits = 2){
+    ignore.case = TRUE, zero.replace = 0, output = "percent", digits = 2,
+    latex = FALSE){
   NAME <- if (is.null(grouping.var)) {
     "all"
   } else {
@@ -62,7 +63,7 @@ termco.d <-
       y[, -c(1:2)] <- replacer(y[, -c(1:2), drop = FALSE], 
         0, zero.replace)
     }
-    z <- termco.rnp(x, y, output = output)
+    z <- termco.rnp(x, y, output = output, latex = latex)
     h <- paste(zero.replace, "(", zero.replace, ")", sep = "")
     z[, -c(1:2)] <- lapply(z[, -c(1:2), drop = FALSE], 
       function(x) replacer(x, h, zero.replace))
