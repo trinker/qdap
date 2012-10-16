@@ -4,8 +4,11 @@
 #' 
 #' @aliases lookup
 #' @param terms a vector of terms to undergo a lookup
-#' @param key.match either a two column data frame (if data frame supplied no key reassign needed)  of a match key and reassignment column or a single vector match key.
-#' @param key.reassign a single reassingment vector supplied if key.match is not a two column data frame
+#' @param key.match either a two column data frame (if data frame supplied no 
+#' key reassign needed)  of a match key and reassignment column or a single 
+#' vector match key.
+#' @param key.reassign a single reassingment vector supplied if key.match is 
+#' not a two column data frame
 #' @param missing value to assign to terms not matching the key.match
 #' @return Outputs a new vector with reassigned values.
 #' @seealso 
