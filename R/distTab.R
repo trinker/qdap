@@ -2,6 +2,7 @@
 #' 
 #' Generates a dsitribution table for vectors, matrices and data.frames
 #' 
+#' @aliases distTab
 #' @param dataframe a vector or data.frame object
 #' @param breaks either a numeric vector of two or more cut points or a single number (greater than or equal to 2) giving the number of intervals into which x is to be cut 
 #' @param \lodots other variables passed to cut
