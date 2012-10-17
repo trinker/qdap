@@ -72,7 +72,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     if (!is.null(border.color)) {
       ld <- length(dataframe$start)
       dataframe$startp <- c(dataframe$start[1], (dataframe$start[-1] - border.size[1]))
-      dataframe$endp <- c((dataframe$start[-ld] + border.size[1]), dataframe$start[ld])
+      dataframe$endp <- c((dataframe$end[-ld] + border.size[1]), dataframe$end[ld])
     }  
     theplot <- ggplot(dataframe, aes(colour=new4)) 
     if (!is.null(minor.line.freq)) {                 
