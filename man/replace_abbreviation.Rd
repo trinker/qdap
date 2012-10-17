@@ -1,5 +1,5 @@
-\name{abbreviation_replace}
-\alias{abbreviation_replace}
+\name{replace_abbreviation}
+\alias{replace_abbreviation}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Replace Abbreviated Words
