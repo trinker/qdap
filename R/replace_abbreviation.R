@@ -23,7 +23,7 @@
 #' 
 #' KEY <- rbind(abbreviations, data.frame(abv = abv, rep = repl))
 #' replace_abbreviation(x, KEY)
-replaceabbreviation <-
+replace_abbreviation <-
 function(text.var, abbreviation = qdap::abbreviations, replace = NULL, ignore.case=TRUE) {
     if (!is.null(replace)) {
         ab <- data.frame(abv=abbreviation, repl=replace)
