@@ -16,7 +16,7 @@
 #' \code{\link[base]{require}},
 #' \code{\link[utils]{install.packages}}
 #' @examples
-#' x <- "I like 60 (laughter) # and $6 @ the store w/o 8p.m."
+#' x <- "I like 60 (laughter) #d-bot and $6 @ the store w/o 8p.m."
 #' qprep(x)
 qprep <-
 function(text.var, rm.dash = TRUE, bracket = "all", missing = NULL, 
