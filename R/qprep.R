@@ -29,7 +29,7 @@ qprep <-
 function(text.var, bracket = "all", missing = NULL, 
     names = FALSE, abbreviation = qdap::abbreviations, 
     replace = NULL, ignore.case = TRUE, num.paste = "separate") {
-    x <- bracketX(text.var, bracket = bracket, 
+    x <- bracketX(clean(text.var), bracket = bracket, 
         missing = missing, names = names)
     x <- replace_abbreviation(x, abbreviation = abbreviation, 
         replace = replace, ignore.case = ignore.case)
