@@ -31,6 +31,7 @@
 #' 
 htruncdf <-
 function(dataframe, n=10, width=10) {
-    x <- head(truncdf(dataframe, width),n=n)
-    return(x)
+    x <- as.data.frame(dataframe)
+    x <- head(truncdf(x, width),n=n)
+    x
 }

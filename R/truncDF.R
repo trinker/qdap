@@ -29,8 +29,9 @@
 #'   }
 #' 
 truncdf <- 
-function(x, end=10, begin=1) {
+function(dataframe, end=10, begin=1) {
+    x <- as.data.frame(dataframe)
     DF <- data.frame(lapply(x, substr, begin, end), check.names=FALSE)
     names(DF) <- substring(names(DF), begin, end)
-    return(DF)
+    DF
 }

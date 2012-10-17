@@ -24,9 +24,9 @@ replace_symbol <-
 function(text.var, dollar = TRUE, percent = TRUE, 
          pound = TRUE, at = TRUE, and = TRUE, with = TRUE) {
   x <- c(dollar, percent, pound, at, and, with, with)
-  mgsub(pattern = c("%", "$", "#", "&", "@", "w/o", "w/")[x], 
-        replacement = c("percent", "dollar", "pound", "and", "at", 
-        "without", "with")[x], text.var = text.var, fixed = TRUE,
-         leadspace = FALSE, trailspace = FALSE)
+  scrubber(mgsub(pattern = c("%", "$", "#", "&", "@", "w/o", "w/")[x], 
+        replacement = spaste(c("percent", "dollar", "pound", "and", "at", 
+        "without", "with")[x]), text.var = text.var, fixed = TRUE,
+         leadspace = FALSE, trailspace = FALSE))
 }
 

@@ -40,7 +40,7 @@ function(text.var, num2word = FALSE, rm.quote = TRUE, fixComma = TRUE, ...){
     x <- paste0(Trim(substring(x, 1, ncx - 1)), substring(x, ncx))
     x[x=="NANA"] <- NA
     if (num2word) {
-        x <- num_replace(x, ...)
+        x <- replace_number(x, ...)
     }
-    return(x)
+    x
 }
