@@ -15,7 +15,6 @@
 #' all_words(raj$dialogue, "q")
 #' all_words(raj$dialogue, contains="conc")
 #' all_words(raj$dialogue)
-#' 
 all_words <-
 function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE){
     if (!is.null(begins.with) & !is.null(contains)) {

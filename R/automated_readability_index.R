@@ -19,7 +19,6 @@
 #' @examples
 #' with(rajSPLIT, automated_readability_index(dialogue, list(person, act)))
 #' with(rajSPLIT, automated_readability_index(dialogue, list(sex, fam.aff)))
-#' 
 automated_readability_index <-
 function(text.var, grouping.var = NULL) {
     G <- if(is.null(grouping.var)) {

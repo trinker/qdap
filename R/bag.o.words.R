@@ -1,27 +1,17 @@
-#' Text Column to a Bag of Stripped Words
+#' Bag of Stripped Words
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' Reduces a text column to a bag of words.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param text %% ~~Describe \code{text} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param text.varThe text variable
+#' @param \\ldots further arguments passed to strip function
+#' @return Returns a vector of striped words
+#' @seealso \code{\link[qdap]{strip}}
+#' @keywords bag of words
 #' @examples
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (text) 
-#' unblanker(words(strip(clean(text))))
-#' 
+#' DATA 
+#' bag.o.words(DATA$state)
+#' by(DATA$state, DATA$person, bag.o.words)
+#' lapply(DATA$state,  bag.o.words)
+#' bag.o.words("I'm going home!", apostrophe.remove = FALSE)
 bag.o.words <-
-function(text) unblanker(words(strip(clean(text))))
+function(text.var, ...) unblanker(words(strip(clean(text.var), ...)))
