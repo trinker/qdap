@@ -16,7 +16,7 @@
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #' 
-num_replace <-
+replace_number  <-
 function(text.var, num.paste = "separate") {
     numb2word <- function(x){ 
         helper <- function(x){ 

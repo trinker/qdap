@@ -1,5 +1,5 @@
-\name{num_replace}
-\alias{num_replace}
+\name{replace_number}
+\alias{replace_number}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Replace Numerbers With Text Representation
