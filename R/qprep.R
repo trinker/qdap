@@ -15,16 +15,9 @@
 #' \code{\link[base]{library}},
 #' \code{\link[base]{require}},
 #' \code{\link[utils]{install.packages}}
-#' @export
 #' @examples
-#' \dontrun{
-#' p_load(lattice)
-#' p_unload(lattice)
-#' p_load(lattice, foreign, boot, rpart)
-#' p_loaded()
-#' p_unload(lattice, foreign, boot, rpart)
-#' p_loaded()
-#' }
+#' x <- "I like 60 (laughter) # and $6 @ the store w/o 8p.m."
+#' qprep(x)
 qprep <-
 function(text.var, bracket = "all", missing = NULL, 
     names = FALSE, abbreviation = qdap::abbreviations, 
