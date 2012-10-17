@@ -19,7 +19,7 @@
 #' x <- "I like 60 (laughter) # and $6 @ the store w/o 8p.m."
 #' qprep(x)
 qprep <-
-function(text.var, rm. dash = TRUE, bracket = "all", missing = NULL, 
+function(text.var, rm.dash = TRUE, bracket = "all", missing = NULL, 
     names = FALSE, abbreviation = qdap::abbreviations, 
     replace = NULL, ignore.case = TRUE, num.paste = "separate") {
     x <- bracketX(clean(text.var), bracket = bracket, 
