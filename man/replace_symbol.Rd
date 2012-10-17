@@ -1,5 +1,5 @@
-\name{symbol_change}
-\alias{symbol_change}
+\name{replace_symbol}
+\alias{replace_symbol}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Transcript Apply Change Symbols for Word Equivalents

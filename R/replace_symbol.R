@@ -20,7 +20,7 @@
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 #' 
-symbol_change <-
+replace_symbol <-
 function(text.var, dollar = TRUE, percent = TRUE, 
          pound = TRUE, at = TRUE, and = TRUE, with = TRUE) {
   x <- c(dollar, percent, pound, at, and, with, with)
