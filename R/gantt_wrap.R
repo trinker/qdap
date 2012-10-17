@@ -31,7 +31,8 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     ylab = as.character(plot.var), xlab = "duration.default", rev.factor = TRUE,
     transform = FALSE, minor.line.freq = 25, major.line.freq = 100, sig.dig.line.freq = -2,
     scale = NULL, space = NULL, size = 3, rm.horiz.lines = TRUE, x.ticks = FALSE, 
-    y.ticks = FALSE, legend.position = NULL, border.color = NULL, border.size = 2) { 
+    y.ticks = FALSE, legend.position = NULL, border.color = NULL, border.size = 2,
+    border.width = .1) { 
     require(ggplot2)
     plot.var2 <- as.character(substitute(plot.var))
     if(plot.var2 != "NAME") {
@@ -90,7 +91,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     axis.ticks.y <- FUN(y.ticks) 
     if (!is.null(border.color)) {
         if (length(border.size) == 1) {
-            border.size[2] <- size + size*.1
+            border.size[2] <- size + size*border.width
         }
         theplot <- theplot + geom_segment(aes(x=startp, xend=endp, y=new, 
             yend=new), colour = border.color, size=border.size[2], legend.position = "none")  
