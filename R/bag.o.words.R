@@ -2,10 +2,10 @@
 #' 
 #' Reduces a text column to a bag of words.
 #' 
-#' @param text.varThe text variable
+#' @param text.var The text variable
 #' @param \\ldots further arguments passed to strip function
-#' @return Returns a vector of striped words
-#' @seealso \code{\link[qdap]{strip}}
+#' @return Returns a vector of striped words.
+#' @seealso \code{\link[qdap]{strip}},, \code{\link[qda]{breaker}}
 #' @keywords bag of words
 #' @examples
 #' DATA 
