@@ -19,7 +19,7 @@
 #' x <- "I like 60 (laughter) # and $6 @ the store w/o 8p.m."
 #' qprep(x)
 qprep <-
-function(text.var, bracket = "all", missing = NULL, 
+function(text.var, rm. dash = TRUE, bracket = "all", missing = NULL, 
     names = FALSE, abbreviation = qdap::abbreviations, 
     replace = NULL, ignore.case = TRUE, num.paste = "separate") {
     x <- bracketX(clean(text.var), bracket = bracket, 
@@ -27,5 +27,8 @@ function(text.var, bracket = "all", missing = NULL,
     x <- replace_abbreviation(x, abbreviation = abbreviation, 
         replace = replace, ignore.case = ignore.case)
     x <- replace_number(x, num.paste = num.paste)
+    if (rm.dash) {
+        x <- gsub("-", " ", x)
+    }
     Trim(scrubber(replace_symbol(x)))
 }
