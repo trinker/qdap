@@ -39,6 +39,7 @@ function(codes, start = ":00", end, file=NULL) {
         z[x, (en[2] + 2):60] <- NA
     }
     zz <- matrix(capture.output(print(z, na.print=""))[-1], ncol =1)
+    zz <- rbind("    transcript_time_span = c(00:00 - 00:00)", zz)
     print(z, na.print=""); cat("\n\n")
     cat(paste0("list(\n",
         "    transcript_time_span = c(00:00 - 00:00),\n",
