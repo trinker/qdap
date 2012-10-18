@@ -157,5 +157,7 @@ import(Snowball)
 import(gplots)
 import(XML)
 import(RCurl)
+import(scales) 
+import(RColorBrewer)
 import(venneuler)
 #delete qda

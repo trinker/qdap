@@ -19,8 +19,8 @@
 cm_time.temp <-
 function(codes, start = ":00", end, file=NULL) {
     x1 <- matrix(c("list(", 
-        paste0("    ", codes[1:(length(codes)-1)], " = c(),"),
-        paste0("    ", codes[length(codes)], " = c()"),
+        paste0("    ", codes[1:(length(codes)-1)], " = qcv(),"),
+        paste0("    ", codes[length(codes)], " = qcv()"),
         ")"), ncol = 1)
     st <- unlist(strsplit(start, ":"))
     en <- as.numeric(unlist(strsplit(end, ":")))
@@ -40,7 +40,7 @@ function(codes, start = ":00", end, file=NULL) {
     print(z, na.print=""); cat("\n\n")
     cat(paste("list(\n",
         paste0("    ", paste0("\b", paste(codes, 
-            collapse = " = c(),\n    "), " = c()")), "\n)\n")
+            collapse = " = qcv(),\n    "), " = qcv()")), "\n)\n")
     ) 
     dimnames(zz) <- list(c(rep("", x)), c(""))
     if (Sys.info()["sysname"] == "Windows") {
@@ -57,7 +57,7 @@ function(codes, start = ":00", end, file=NULL) {
         lapply(2:x, function(i) cat(v[i], file=file, append = TRUE))                                     
         cat(paste("list(\n",
             paste0("    ", paste0("\b", paste(codes, 
-                collapse = " = c(),\n    "), " = c()")), "\n)\n"),
+                collapse = " = qcv(),\n    "), " = qcv()")), "\n)\n"),
         file=file, append = TRUE)  
     }   
 }

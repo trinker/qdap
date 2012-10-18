@@ -17,20 +17,17 @@
 #' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
-#' @examples
+#' @examples 
 #' 
 pos <-
 function(text.var, parallel = FALSE, na.omit = FALSE, digits = 2, 
     progress.bar = TRUE, gc.rate=10){
-    suppressWarnings(require(openNLP))
-    suppressWarnings(require(openNLPmodels.en))
     ntv <- length(text.var)    
     pos1 <-  function(i) {
         x <- openNLP::tagPOS(qdap::strip(i))   
         return(x)
     }
-    if (parallel) {
-        suppressWarnings(require(parallel))
+    if (parallel) 
         cl <- parallel::makeCluster(mc <- getOption("cl.cores", detectCores()))
         clusterExport(cl=cl, varlist=c("text.var", "ntv", "gc.rate", 
             "pos1"), envir = environment())

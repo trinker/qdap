@@ -33,7 +33,6 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     scale = NULL, space = NULL, size = 3, rm.horiz.lines = TRUE, x.ticks = FALSE, 
     y.ticks = FALSE, legend.position = NULL, border.color = NULL, border.size = 2,
     border.width = .1) { 
-    require(ggplot2)
     plot.var2 <- as.character(substitute(plot.var))
     if(plot.var2 != "NAME") {
         plot.var <- as.character(substitute(plot.var))
