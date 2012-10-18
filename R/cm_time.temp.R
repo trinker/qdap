@@ -18,6 +18,8 @@
 #' }
 cm_time.temp <-
 function(codes, start = ":00", end, file=NULL) {
+    wid <- options()$width
+    options(width=1000)
     x1 <- matrix(c("list(", 
         paste0("    ", codes[1:(length(codes)-1)], " = qcv(),"),
         paste0("    ", codes[length(codes)], " = qcv()"),
@@ -60,4 +62,5 @@ function(codes, start = ":00", end, file=NULL) {
                 collapse = " = qcv(),\n    "), " = qcv()")), "\n)\n"),
         file=file, append = TRUE)  
     }   
+    options(width=wid)
 }
