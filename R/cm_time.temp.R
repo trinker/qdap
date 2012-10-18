@@ -21,7 +21,7 @@ function(codes, start = ":00", end, file=NULL) {
     wid <- options()$width
     options(width=1000)
     x1 <- matrix(c("list(", 
-        "    transcript_time_span = c(00:00 - 00:00),", 
+        "    transcript_time_span = qcv(00:00 - 00:00),", 
         paste0("    ", codes[1:(length(codes)-1)], " = qcv(),"),
         paste0("    ", codes[length(codes)], " = qcv()"),
         ")"), ncol = 1)
@@ -42,7 +42,7 @@ function(codes, start = ":00", end, file=NULL) {
     zz <- matrix(capture.output(print(z, na.print=""))[-1], ncol =1)
     print(z, na.print=""); cat("\n\n")
     cat(paste0("list(\n",
-        "    transcript_time_span = c(00:00 - 00:00),\n",
+        "    transcript_time_span = qcv(00:00 - 00:00),\n",
         paste0("    ", paste0(paste(codes, 
         collapse = " = c(),\n    "), " = c()")), "\n)\n"))
     dimnames(zz) <- list(c(rep("", x)), c(""))
@@ -59,7 +59,7 @@ function(codes, start = ":00", end, file=NULL) {
         cat(v[1], file=file)   
         lapply(2:x, function(i) cat(v[i], file=file, append = TRUE))                                     
         cat(paste0("list(\n",
-            "    transcript_time_span = c(00:00 - 00:00),\n",
+            "    transcript_time_span = qcv(00:00 - 00:00),\n",
             paste0("    ", paste0(paste(codes, 
             collapse = " = c(),\n    "), " = c()")), "\n)\n"),
             file = file, append = TRUE) 
