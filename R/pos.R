@@ -27,7 +27,7 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 2,
         x <- openNLP::tagPOS(qdap::strip(i))   
         return(x)
     }
-    if (parallel) 
+    if (parallel){
         cl <- parallel::makeCluster(mc <- getOption("cl.cores", detectCores()))
         clusterExport(cl=cl, varlist=c("text.var", "ntv", "gc.rate", 
             "pos1"), envir = environment())
