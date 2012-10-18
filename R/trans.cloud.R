@@ -46,7 +46,6 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
     proportional = FALSE, max.word.size = NULL, min.word.size = 0.5,
     legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03), 
     char.keep = NULL, char2space = NULL, ...) {
-    suppressWarnings(require(wordcloud))
     if(!is.null(char2space) & is.null(char.keep)) {
         char.keep <- char2space
     }

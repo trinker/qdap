@@ -39,8 +39,7 @@ function(text.var, grouping.var = NULL, target.words = NULL, stopwords = Top100W
     edge.color = "gray70", label.colors = "black", layout = NULL,                     
     title.name = NULL, title.padj =  -4.5, title.location = 3, title.font = NULL,     
     title.cex = .8, log.labels = FALSE, title.color = "black",                        
-    legend = NULL, legend.cex = .8, legend.location = c(-1.54, 1.41), plot = TRUE) {  
-    suppressWarnings(require(igraph))                                                 
+    legend = NULL, legend.cex = .8, legend.location = c(-1.54, 1.41), plot = TRUE) {                                                  
     if (class(text.var) == "adjacency.matrix") { #actually takes an adjaceny matrix   
        adj.mat.object <- text.var[["adjacency"]]                                      
     } else {                                                                          

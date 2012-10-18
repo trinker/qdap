@@ -4,7 +4,6 @@ function(text.var, grouping.var, stopwords = Top200Words,
     title.cex = NULL, title.name = NULL, legend = TRUE, 
     legend.cex = .8, legend.location = "bottomleft", 
     legend.text.col = "black", legend.horiz = FALSE, ...) {
-    suppressWarnings(require(venneuler))
     if (is.list(grouping.var)) {
       m <- unlist(as.character(substitute(grouping.var))[-1])
       m <- sapply(strsplit(m, "$", fixed = TRUE), 
