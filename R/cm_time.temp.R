@@ -40,10 +40,10 @@ function(codes, start = ":00", end, file=NULL) {
     }
     zz <- matrix(capture.output(print(z, na.print=""))[-1], ncol =1)
     print(z, na.print=""); cat("\n\n")
-    cat(paste("list(\n",
-        paste0("    ", paste0("\b", paste(codes, 
-            collapse = " = qcv(),\n    "), " = qcv()")), "\n)\n")
-    ) 
+    cat(paste0("list(\n",
+        "    transcript_time_span = c(00:00 - 00:00),\n",
+        paste0("    ", paste0(paste(codes, 
+        collapse = " = c(),\n    "), " = c()")), "\n)\n"))
     dimnames(zz) <- list(c(rep("", x)), c(""))
     if (Sys.info()["sysname"] == "Windows") {
         writeClipboard(noquote(rbind(zz, "", "", x1)), format = 1)                        
@@ -57,10 +57,11 @@ function(codes, start = ":00", end, file=NULL) {
         v <- paste0(zz, "\n")
         cat(v[1], file=file)   
         lapply(2:x, function(i) cat(v[i], file=file, append = TRUE))                                     
-        cat(paste("list(\n",
-            paste0("    ", paste0("\b", paste(codes, 
-                collapse = " = qcv(),\n    "), " = qcv()")), "\n)\n"),
-        file=file, append = TRUE)  
+        cat(paste0("list(\n",
+            "    transcript_time_span = c(00:00 - 00:00),\n",
+            paste0("    ", paste0(paste(codes, 
+            collapse = " = c(),\n    "), " = c()")), "\n)\n"),
+            file = file, append = TRUE) 
     }   
     options(width=wid)
 }
