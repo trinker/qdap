@@ -1,6 +1,5 @@
 read.docx <-
 function(file, skip = 0, sep = ":") {
-    require(XML)
     tmp <- tempfile()
     if (!dir.create(tmp))
       stop("Temporary directory could not be established.")
