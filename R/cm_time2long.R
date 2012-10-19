@@ -66,23 +66,21 @@ function(time.list){
             return(x)
         })
         x[period] <- paste2(apply(do.call(rbind, v), 2, FUN))
-
-        # period2 <- unlist(strsplit(x[period], "\\."))
-#         after <- period2[c(FALSE, TRUE)]
-#         before <- period2[c(TRUE, FALSE)]
-#         after2 <- nchar(after) != 2
-#         after[after2] <- paste0(after[after2], "0")
-#         x[period] <- paste0(before, ".", after)
-#         period2 <- nchar(gsub("[^\\.]", "", x)) == 1
-#         x[period2] <- paste0("0.", x[period2])
-
         x
     }
     colon <- function(x) which(x == ":")
     ncolon <- function(x) x != ":"
+
     x <- time.list
     x[[1]] <- suppressWarnings(gsub(":", "\\.", x[[1]][-1]))
     x <- suppressWarnings(lapply(x, reformat))
+    x <- lapply(x, function(x){
+        if (length(x) == 1) {
+            c(x, "00.00.00")
+        } else {
+            x
+        }
+    })
     COL <- lapply(x[-1], colon)
     Wcol <- lapply(COL, function(x) -1 + sort(x + rep(1:2, 
         each = length(x))))
@@ -99,10 +97,16 @@ function(time.list){
     x2 <- lapply(seq_along(x)[-1], function(n) append2(x[[n]], 
         z = COL[[n - 1]]))
     x3 <- lapply(x2, function(v){
-        data.frame(
-            start = v[-c(f <- which(v==":") , f + 1)], 
-            end = v[-c(f, f-1)], stringsAsFactors = FALSE
-        )
+        if (!any(v == ":")) {
+            dat <- data.frame(matrix(rep(v, each = 2), byrow = TRUE, ncol = 2))
+            colnames(dat) <- c("start", "end")
+            dat
+        } else {
+            data.frame(
+                start = v[-c(f <- which(v==":") , f + 1)], 
+                end = v[-c(f, f-1)], stringsAsFactors = FALSE
+            )
+        }
     })
     names(x3) <- names(x)[-1]
     tonum <- function(z){
@@ -115,5 +119,6 @@ function(time.list){
     span <- tonum(x[[1]])
     print(paste0(paste0("start time = ", span[1]), 
         paste0("; end time = ", span[2])))
-    do.call(rbind, x3)
+    DF <- do.call(rbind, x3)
+    DF[DF[, 3] != 0, ]
 }
