@@ -8,6 +8,7 @@
 #' @param file A connection, or a character string naming the file to print to (.txt is recommended).
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding
+#' @note If a time excedes or is equal to one hour the string in qcv must be padded with terms = " ".  
 #' @seealso 
 #' \code{\link[qdap]{cm_range.temp}},
 #' @export
