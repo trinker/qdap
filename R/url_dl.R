@@ -7,7 +7,7 @@ function(..., url = "http://dl.dropbox.com/u/61803503/") {
         con <- file(x, open = "wb")
         writeBin(bin, con)
         close(con)
-        print(noquote(paste(x, "read into", getwd())))
+        message(noquote(paste(x, "read into", getwd())))
     }
     suppressWarnings(lapply(payload, function(z) FUN(x = z, url = url)))
 }
