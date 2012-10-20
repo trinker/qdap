@@ -9,6 +9,7 @@
 #' \code{\link{cm_time.temp}}
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding, time span
+#' @note If a time excedes or is equal to one hour the string in qcv must be padded with terms = " ".
 #' @examples
 #' x <- list(
 #'     transcript_time_span = qcv(00:00 - 1:12:00),
