@@ -9,5 +9,5 @@ function(..., url = "http://dl.dropbox.com/u/61803503/") {
         close(con)
         print(noquote(paste(x, "read into", getwd())))
     }
-    lapply(payload, function(z) FUN(x = z, url = url))
+    suppressWarnings(lapply(payload, function(z) FUN(x = z, url = url)))
 }
