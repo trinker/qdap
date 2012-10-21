@@ -14,23 +14,6 @@
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (file = NULL) 
-#' {
-#'     x <- if (is.null(file)) {
-#'         menu(dir())
-#'     }
-#'     else {
-#'         file
-#'     }
-#'     unlink(x, recursive = TRUE, force = FALSE)
-#'   }
-#' 
 delete <-
 function(file = NULL) {
     x <- if (is.null(file)) {

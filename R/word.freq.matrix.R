@@ -1,65 +1,17 @@
-#' Generate Word Ffrequency Matrix by Person
+#' Generate Word Ffrequency Matrix by Grouping Variable
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-#' 
-#' %% ~~ If necessary, more details than the description above ~~
+#' Generate a word frequency matrix by grouping variable
 #' 
 #' @aliases word.freq.matrix wfm
-#' @param wfdf %% ~~Describe \code{wfdf} here~~
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param grouping.var %% ~~Describe \code{grouping.var} here~~
-#' @param stopwords %% ~~Describe \code{stopwords} here~~
-#' @param digits %% ~~Describe \code{digits} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param text.var A text variable or word frequency matrix object.
+#' @param grouping.var The grouping variables.  Default NULL generates one word list for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
+#' @param wfdf a word frequency data frame. Default is null.
+#' @param output output type (either "proportion", "proportion" or "percent")
+#' @param stopwords A vector of stop words to remove.
+#' @param digits integer indicating the number of decimal places (round) or significant digits (signif) to be used. Negative values are allowed
+#' @return Returns a word frequency of the class matrix
+#' @seealso \code{\link[qdap]{word.freq.df}}
 #' @examples
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (wfdf = NULL, text.var = NULL, grouping.var = NULL, 
-#'     stopwords = NULL, digits = 2) 
-#' {
-#'     if (!is.null(wfdf)) {
-#'         if (comment(wfdf) == "t.df") {
-#'             wfdf <- wfdf
-#'         }
-#'         else {
-#'             if (comment(wfdf) == "m.df") {
-#'                 wfdf <- wfdf[-nrow(wfdf), -ncol(wfdf)]
-#'             }
-#'             else {
-#'                 stop("Object must be a raw word frequency data frame")
-#'             }
-#'         }
-#'         x2 <- wfdf[, -1]
-#'         rownames(x2) <- wfdf[, 1]
-#'         x2 <- as.matrix(x2)
-#'     }
-#'     else {
-#'         if (!is.null(text.var) & !is.null(grouping.var)) {
-#'             wfdf <- word.freq.df(text.var = text.var, grouping.var = grouping.var, 
-#'                 stopwords = stopwords)
-#'             x2 <- wfdf[, -1]
-#'             rownames(x2) <- wfdf[, 1]
-#'             x2 <- as.matrix(x2)
-#'         }
-#'         else {
-#'             stop("must specify both text.var & grouping var or wfdf")
-#'         }
-#'     }
-#'     comment(x2) <- "true.matrix"
-#'     return(x2)
-#'   }
-#' 
 word.freq.matrix <-
 function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
          output = "raw", stopwords = NULL, digits = 2){
