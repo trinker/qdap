@@ -12,6 +12,15 @@
 #' @return Returns a word frequency of the class matrix
 #' @seealso \code{\link[qdap]{word.freq.df}}
 #' @examples
+#' with(DATA, wfm(state, list(sex, adult)))
+#' (dat <- with(DATA, wfm(state, person)))
+#' library(reshape2)
+#' dat2 <- melt(dat)
+#' dat3 <- ddply(dat2, .(variable), transform, rescale = rescale(value))
+#' 
+#' ggplot(dat3, aes(variable, Words)) + geom_tile(aes(fill = rescale),
+#'     colour = "white") + scale_fill_gradient(low = "white",
+#'     high = "steelblue")
 word.freq.matrix <-
 function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
          output = "raw", stopwords = NULL, digits = 2){
