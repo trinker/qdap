@@ -5,8 +5,9 @@
 #' @aliases distTab
 #' @param dataframe a vector or data.frame object
 #' @param breaks either a numeric vector of two or more cut points or a single number (greater than or equal to 2) giving the number of intervals into which x is to be cut 
+#' @param digits integer indicating the number of decimal places (round) or significant digits (signif) to be used. Negative values are allowed
 #' @param \lodots other variables passed to cut
-#' @return a list of data frames (or singular data frame for a vector) of frequencies, cumulative frequencies, percentages and cumalative percentages for each interval.
+#' @return a list of data frames (or singular data frame for a vector) of frequencies, cumulative frequencies, percentages and cumalative percentages for each interval
 #' @seealso \code{\link[base]{cut}}
 #' @keywords distribution 
 #' @examples

@@ -3,7 +3,7 @@
 #' Transcript Apply Automated Readability Index
 #' 
 #' @param text.var The text variable
-#' @param group.vars The grouping variables.  Default NULL generates one word list for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
+#' @param grouping.var The grouping variables.  Default NULL generates one word list for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
 #' @return Generates the Automated Readability Index by grouping variable(s)
 #' @note The Automated Readability Index is a readability score which approximates the grade level needed to comprehend the text. The Automated Readability Index is derived from word difficulty (letters per word) and sentence difficulty (words per sentence).
 #' @warning If you have not run the sentSplit function on your data the results will not be accurate.
