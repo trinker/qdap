@@ -13,14 +13,7 @@
 #' @seealso \code{\link[qdap]{word.freq.df}}
 #' @examples
 #' with(DATA, wfm(state, list(sex, adult)))
-#' (dat <- with(DATA, wfm(state, person)))
-#' library(reshape2)
-#' dat2 <- melt(dat)
-#' dat3 <- ddply(dat2, .(variable), transform, rescale = rescale(value))
-#' 
-#' ggplot(dat3, aes(variable, Words)) + geom_tile(aes(fill = rescale),
-#'     colour = "white") + scale_fill_gradient(low = "white",
-#'     high = "steelblue")
+#' dat <- with(DATA, wfm(state, person))
 word.freq.matrix <-
 function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
          output = "raw", stopwords = NULL, digits = 2){
