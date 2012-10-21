@@ -20,6 +20,8 @@ function(text.var, grouping.var= NULL, method = "prop", diag = FALSE,
     upper = FALSE, p = 2, digits = 3){   
     if(is.null(comment(text.var))){ 
         wfm.object <- wfm(text.var = text.var, grouping.var = grouping.var)
+    } else {
+        wfm.object <- text.var
     }
     if (comment(wfm.object)!= "true.matrix") {
         warning("not a matrix from word.freq.matrix function")
