@@ -19,9 +19,9 @@ character.count <-
 function(text.var, by = "row", missing = NA, apostrophe = TRUE, 
     digit.remove = TRUE) {
     text2 <- if (apostrophe == TRUE) {
-        text
+      text.var
     } else {
-        gsub("'", "", text, fixed = TRUE)
+        gsub("'", "", text.var, fixed = TRUE)
     }
     chara <- function(x) {
         y <- unlist(strsplit(strip(x, digit.remove = digit.remove), 
