@@ -41,7 +41,9 @@ function(text.var, grouping.var, rm.var = NULL,
     if (is.null(rm.var)) {
         x <- gantt(text.var = text.var, grouping.var = grouping.var, 
             plot = FALSE, units =units, col.sep = col.sep)
-        colnames(x)[1] <- NAME
+        colnames(x)[ncol(x)-3] <- NAME
+        initial <- unlist(strsplit(NAME, col.sep))
+        colnames(x)[1:length(initial)] <- initial
     } else {
         rmNAME <- if (is.list(rm.var)) {
             m <- unlist(as.character(substitute(rm.var))[-1])

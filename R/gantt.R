@@ -44,14 +44,14 @@ gantt <-
 function(text.var, grouping.var, plot = TRUE, units = "words", 
     sums = FALSE, plot.colors = NULL, box.color = NULL, col.sep = "_"){
     g <- grouping.var
-    NAME <- if (is.list(grouping.var)) {
+    if (is.list(grouping.var)) {
         m <- unlist(as.character(substitute(grouping.var))[-1])
         m <- sapply(strsplit(m, "$", fixed=TRUE), 
             function(x) x[length(x)])
-        paste(m, collapse="&")
+        NAME <- paste(m, collapse="&")
     } else {
         G <- as.character(substitute(grouping.var))
-        G[length(G)]
+        NAME <- G[length(G)]
     }
     if (is.list(grouping.var)) {
         LEVS <- lapply(grouping.var, levels)
