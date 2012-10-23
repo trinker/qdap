@@ -2,11 +2,11 @@
 #'
 #' A convenience that wraps gantt, gantt_rm and gantt_wrap into a single plotting function.
 #'
-#' @param  text.var    
-#' @param  grouping.var
-#' @param  rm.var      
-#' @param  units       
-#' @param  col.sep     
+#' @param text.var    
+#' @param grouping.var
+#' @param rm.var      
+#' @param units       
+#' @param col.sep     
 #' @param \\ldots   
 #' @return   
 #' @seealso

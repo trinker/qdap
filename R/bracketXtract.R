@@ -1,60 +1,44 @@
-#' Transcript Apply of Extraction the Information Inside Brackets
+#' Extract Bracketted Text
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' Transcript Apply Extraction of Bracket Encased Text
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param txt %% ~~Describe \code{txt} here~~
-#' @param br %% ~~Describe \code{br} here~~
-#' @param with %% ~~Describe \code{with} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+#' @param text.var The text variable
+#' @param bracket The type of bracketted text to extract.  This is one of 
+#' the strings "curly", "square", "round", "angle" and "all".  
+#' These strings correspond to: {, [, (, < or all four types.
+#' @param with logical.  If TRUE returns the brackets and the bracketted text.
+#' @return Returns a list of vectors of bracketed text.
+#' @author  Martin Morgan and Tyler Rinker <tyler.rinker@gmail.com>.
+#' @seealso \code[qdap]{\link{bracketX}}
 #' @references \url{http://stackoverflow.com/questions/8621066/remove-text-inside-brackets-parens-and-or-braces}
-#' @keywords ~kwd1 ~kwd2
+#' @keywords bracket extract
 #' @examples
+#' examp2 <- examp2 <- structure(list(person = structure(c(1L, 2L, 1L, 3L), 
+#'     .Label = c("bob", "greg", "sue"), class = "factor"), text = 
+#'     c("I love chicken [unintelligible]!", 
+#'     "Me too! (laughter) It's so good.[interupting]", 
+#'     "Yep it's awesome {reading}.", "Agreed. {is so much fun}")), .Names = 
+#'     c("person", "text"), row.names = c(NA, -4L), class = "data.frame")      
 #' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
+#' examp2                                                              
+#' bracketX(examp2$text, 'square')  
+#' bracketX(examp2$text, 'curly')  
+#' bracketX(examp2$text)  
+#'                                               
+#' examp2                                              
+#' bracketXtract(examp2$text, 'square')  
+#' bracketXtract(examp2$text, 'curly')  
+#' bracketXtract(examp2$text)  
 #' 
-#' ## The function is currently defined as
-#' function (txt, br = c("(", "[", "{", "all"), with = FALSE) 
-#' {
-#'     br <- match.arg(br)
-#'     left <- if ("all" == br) {
-#'         "\(|\{|\["
-#'     }
-#'     else {
-#'         sprintf("\%s", br)
-#'     }
-#'     map <- c(`\(` = "\)", `\[` = "\]", `\{` = "\}", `\(|\{|\[` = "\)|\}|\]")
-#'     fmt <- if (with == TRUE) {
-#'         "(%s).*?(%s)"
-#'     }
-#'     else {
-#'         "(?<=%s).*?(?=%s)"
-#'     }
-#'     re <- sprintf(fmt, left, map[left])
-#'     if (length(txt) == 1) {
-#'         unlist(regmatches(txt, gregexpr(re, txt, perl = TRUE)))
-#'     }
-#'     else {
-#'         regmatches(txt, gregexpr(re, txt, perl = TRUE))
-#'     }
-#'   }
-#' 
+#' paste2(bracketXtract(examp2$text, 'curly'), " ")
 bracketXtract <-
-function(txt, bracket = "all", with=FALSE){   
+function(text.var, bracket = "all", with = FALSE){   
     br <- bracket
     br <- ifelse(br=="round", "(", 
-                 ifelse(br=="square", "[", 
-                        ifelse(br=="curly", "{",
-                               ifelse(br=="html", "<",
-                                      ifelse(br=="angle", "<", br)))))
+        ifelse(br=="square", "[", 
+        ifelse(br=="curly", "{",
+        ifelse(br=="html", "<",
+        ifelse(br=="angle", "<", br)))))
     left <- if ("all" == br) {
         "\\(|\\{|<|\\["
     } else {
@@ -68,10 +52,10 @@ function(txt, bracket = "all", with=FALSE){
         "(?<=%s).*?(?=%s)"
     }
     re <- sprintf(fmt, left, map[left])
-    if(length(txt)==1){
-        unlist(regmatches(txt, gregexpr(re, txt, perl=TRUE)))
+    if(length(text.var)==1){
+        unlist(regmatches(text.var, gregexpr(re, text.var, perl=TRUE)))
     }else{  
-        regmatches(txt, gregexpr(re, txt, perl=TRUE)) 
+        regmatches(text.var, gregexpr(re, text.var, perl=TRUE)) 
     }
 }
 
