@@ -5,7 +5,7 @@
 #' @aliases word.count wc
 #' @param text.var The text variable
 #' @param by an optional character string giving a method for counting words.  
-#' This is one of the strings ``row'' or ``all''.
+#' This is one of the strings "row" or "all".
 #' @param missing Value to insert for missing values (empty cells).
 #' @param digit.remove logical.  If TRUE removes digits before counting words.
 #' @param names logical.  If TRUE the sentences are given as the names of the counts.

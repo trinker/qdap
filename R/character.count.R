@@ -4,7 +4,7 @@
 #' 
 #' @param text.var The text variable
 #' @param by an optional character string giving a method for counting words.  
-#' This is one of the strings ``row'' or ``all''.
+#' This is one of the strings "row" or "all".
 #' @param missing Value to insert for missing values (empty cells).
 #' @param apostrophe logical.  If TRUE apostrophes will be counted in the character count.
 #' @param digit.remove logical.  If TRUE removes digits before counting words.
