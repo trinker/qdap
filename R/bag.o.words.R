@@ -8,7 +8,6 @@
 #' @seealso \code{\link[qdap]{strip}},, \code{\link[qda]{breaker}}
 #' @keywords bag of words
 #' @examples
-#' DATA 
 #' bag.o.words(DATA$state)
 #' by(DATA$state, DATA$person, bag.o.words)
 #' lapply(DATA$state,  bag.o.words)
