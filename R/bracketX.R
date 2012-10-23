@@ -33,13 +33,13 @@
 bracketX <-
 function (text.var, bracket = "all", missing = NULL, names = FALSE) {
     X <- switch(bracket, 
-        html = sapply(text, function(x) gsub("<.+?>", "", x)),
-        angle = sapply(text, function(x) gsub("<.+?>", "", x)),
-        square = sapply(text, function(x) gsub("\\[.+?\\]", "", x)), 
-        round = sapply(text, function(x) gsub("\\(.+?\\)", "", x)), 
-        curly = sapply(text, function(x) gsub("\\{.+?\\}", "", x)), 
+        html = sapply(text.var, function(x) gsub("<.+?>", "", x)),
+        angle = sapply(text.var, function(x) gsub("<.+?>", "", x)),
+        square = sapply(text.var, function(x) gsub("\\[.+?\\]", "", x)), 
+        round = sapply(text.var, function(x) gsub("\\(.+?\\)", "", x)), 
+        curly = sapply(text.var, function(x) gsub("\\{.+?\\}", "", x)), 
         all = {
-            P1 <- sapply(text, function(x) gsub("\\[.+?\\]", "", x))
+            P1 <- sapply(text.var, function(x) gsub("\\[.+?\\]", "", x))
             P1 <- sapply(P1, function(x) gsub("\\(.+?\\)", "", x))
             P1 <- sapply(P1, function(x) gsub("<.+?>", "", x))
             sapply(P1, function(x) gsub("\\{.+?\\}", "", x))
