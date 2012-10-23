@@ -2,8 +2,8 @@
 #'
 #' A convenience that wraps gantt, gantt_rm and gantt_wrap into a single plotting function.
 #'
-#' @param text.var    
-#' @param grouping.var
+#' @param text.var The text variable    
+#' @param grouping.var The grouping variables. Also takes a single grouping variable or a list of 1 or more grouping variables.
 #' @param rm.var      
 #' @param units       
 #' @param col.sep     

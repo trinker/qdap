@@ -5,14 +5,39 @@
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
 #' @aliases word_stats DF_word_stats print.word.stats
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param grouping.var %% ~~Describe \code{grouping.var} here~~
-#' @param tot %% ~~Describe \code{tot} here~~
-#' @param digit.remove %% ~~Describe \code{digit.remove} here~~
-#' @param apostrophe.remove %% ~~Describe \code{apostrophe.remove} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
+#' @param text.var The text variable         
+#' @param grouping.var The grouping variables.  Default NULL generates one output for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.  
+#' @param tot Optional toutn of talk variable.           
+#' @param rm.incomplete logical.  If TRUE incomplete statments are removed from calculating the output.   
+#' @param digit.remove logical.  If TRUE removes digits from calculating the output.       
+#' @param apostrophe.remove logical.  If TRUE removes apostophes from calculating the output.   
+#' @param digits Number of dicimal places to round.                     
+#' @param \\ldots Any other arguments passed to endf     
+#' @return Returns a list of three descriptive word statistics:
+#' \item{ts}{A data frame of descriptive word statistics by row} 
+#' \item{gts}{A data frame of word statistics per grouping variable:
+#' \item{n.tot}{number of turns of talk}
+#' \item{n.sent}{number of sentences}
+#' \item{n.words}{number of words}
+#' \item{n.char}{number of characters}
+#' \item{n.syl}{number of syllables}
+#' \item{n.poly}{number of polysyllables}
+#' \item{sptot}{syllables per turn of talk}
+#' \item{wps}{words per sentence}
+#' \item{cps}{characters per sentemce}
+#' \item{sps}{syllables per sentence}
+#' \item{psps}{polly syllables per sentence}
+#' \item{cpw}{characters per word}
+#' \item{spw}{syllables per word}
+#' \item{n.state}{number of statements}
+#' \item{n.quest}{number of questions}
+#' \item{n.incom}{number of incomplete satetments}
+#' \item{n.hapax}{number of hapax legomenon}
+#' \item{n.dis}{number of dis legomenon}
+#' \item{grow.rate}{proportion of hapax legomenon to words}
+#' \item{prop.dis}{proportion of dis legomenon to words}
+#' } 
+#' \item{mpun}{An account of sentences with improper end mark} 
 #' @note %% ~~further notes~~
 #' @author %% ~~who you are~~
 #' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~

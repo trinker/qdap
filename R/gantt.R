@@ -53,8 +53,14 @@ function(text.var, grouping.var, plot = TRUE, units = "words",
         G <- as.character(substitute(grouping.var))
         G[length(G)]
     }
-    grouping.var <- if (is.list(grouping.var) & length(grouping.var)>1) {
-        apply(data.frame(grouping.var), 1, function(x){
+    if (is.list(grouping.var)) {
+        LEVS <- lapply(grouping.var, levels)
+        LEVS2 <- paste2(do.call(expand.grid, LEVS))
+    } else {
+        LEVS2 <- levels(grouping.var)
+    }
+    if (is.list(grouping.var) & length(grouping.var)>1) {
+        grouping.var <- apply(data.frame(grouping.var), 1, function(x){
                 if (any(is.na(x))) {
                     NA 
                 } else {
@@ -63,11 +69,12 @@ function(text.var, grouping.var, plot = TRUE, units = "words",
             }
         )
     } else {
-        grouping.var
+        grouping.var <- grouping.var
     }
     DF <- data.frame(text = as.character(text.var), 
-        group = as.factor(grouping.var), stringsAsFactors = FALSE)
+        group = grouping.var, stringsAsFactors = FALSE)
     names(DF) <- c("text", "group")
+    DF$group <- factor(DF$group, levels=LEVS2)
     k <- rle(as.numeric(DF$group))
     id <- rep(seq_along(k$len), k$len)
     out <- tapply(DF$text, id, paste, collapse = " ")
@@ -92,7 +99,7 @@ function(text.var, grouping.var, plot = TRUE, units = "words",
     z <- data.frame(names(z), total = z)
     names(z)[1] <- NAME
     z <- z[order(z[, 1]), ]
-    rownames(z) <- 1:nrow(z)
+    rownames(z) <- NULL
     if (plot) {
         if (is.null(box.color)) box.color <- "white" 
         y2 <- NULL
@@ -124,6 +131,8 @@ function(text.var, grouping.var, plot = TRUE, units = "words",
     la <- length(ans)
     ans[, (la-2):la] <- lapply(ans[, (la-2):la], as.numeric)
     comment(ans) <- units
+    ans[, c(ncol(ans)-3)] <- factor(ans[, c(ncol(ans)-3)], levels=LEVS2)
+    z[, 1] <- factor(z[, 1], levels=LEVS2)
     if (col.sep != "&") {
         colnames(ans) <- gsub("&", col.sep, colnames(ans), fixed = TRUE)
     }
