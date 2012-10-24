@@ -43,7 +43,8 @@
 #' names(desc_wrds)
 #' desc_wrds$ts 
 #' desc_wrds$gts
-#' desc_wrds$pun  
+#' desc_wrds$pun 
+#' with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff))) 
 word_stats <-
 function(text.var, grouping.var = NULL, tot = NULL, rm.incomplete = FALSE,
          digit.remove = FALSE, apostrophe.remove = FALSE, digits = 3, ...) {
