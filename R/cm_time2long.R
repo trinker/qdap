@@ -72,7 +72,7 @@ function(time.list){
     ncolon <- function(x) x != ":"
     x <- time.list
     x[[1]] <- suppressWarnings(gsub("-", "", x[[1]]))
-    x[[1]] <- suppressWarnings(gsub(":", "\\.", x[[1]][-1]))
+    x[[1]] <- unblanker(suppressWarnings(gsub(":", "\\.", x[[1]])))
     x <- suppressWarnings(lapply(x, reformat))
     x <- lapply(x, function(x){
         if (length(x) == 1) {
@@ -120,5 +120,7 @@ function(time.list){
     message(paste0(paste0("start time = ", span[1]), 
         paste0("; end time = ", span[2])))
     DF <- do.call(rbind, x3)
-    DF[DF[, 3] != 0, ]
+    DF <- DF[DF[, 3] != 0, ]
+    comment(DF) <- paste0(paste0("start time = ", span[1]), 
+        paste0("; end time = ", span[2]))
 }
