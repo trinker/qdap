@@ -8,7 +8,6 @@
 #' @param file A connection, or a character string naming the file to print to (.txt is recommended).
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding
-#' @note If a time excedes or is equal to one hour the string in qcv must be padded with terms = " ".  
 #' @seealso 
 #' \code{\link[qdap]{cm_range.temp}},
 #' @export
@@ -18,20 +17,19 @@
 #' # delete("foo.txt")
 #' x <- list(
 #'     transcript_time_span = qcv(00:00 - 1:12:00),
-#'     A = qcv(2.40:3.00, 5.01, 6.62:7.00, 9.00),
-#'     B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.62:7.00, 9.00, 1.12.00:1.19.01"),
-#'     C = qcv(2.40:3.00, 5.01, 6.62:7.00, 9.00, 17.01)
+#'     A = qcv(terms= '2.40:3.00, 5.01, 6.62:7.00, 9.00'),
+#'     B = qcv(terms = '2.40, 3.01:3.02, 5.01, 6.62:7.00, 9.00, 1.12.00:1.19.01'),
+#'     C = qcv(terms= '2.40:3.00, 5.01, 6.62:7.00, 9.00, 17.01')
 #' )
 #' cm_time2long(x)
-#' }
 cm_time.temp <-
 function(codes, start = ":00", end, file=NULL) {
     wid <- options()$width
     options(width=1000)
     x1 <- matrix(c("list(", 
         "    transcript_time_span = qcv(00:00 - 00:00),", 
-        paste0("    ", codes[1:(length(codes)-1)], " = qcv(),"),
-        paste0("    ", codes[length(codes)], " = qcv()"),
+        paste0("    ", codes[1:(length(codes)-1)], " = qcv(terms=''),"),
+        paste0("    ", codes[length(codes)], " = qcv(terms='')"),
         ")"), ncol = 1)
     st <- unlist(strsplit(start, ":"))
     en <- as.numeric(unlist(strsplit(end, ":")))
@@ -52,7 +50,7 @@ function(codes, start = ":00", end, file=NULL) {
     cat(paste0("list(\n",
         "    transcript_time_span = qcv(00:00 - 00:00),\n",
         paste0("    ", paste0(paste(codes, 
-        collapse = " = qcv(),\n    "), " = qcv()")), "\n)\n"))
+        collapse = " = qcv(terms=''),\n    "), " = qcv(terms='')")), "\n)\n"))
     dimnames(zz) <- list(c(rep("", x)), c(""))
     if (Sys.info()["sysname"] == "Windows") {
         writeClipboard(noquote(rbind(zz, "", "", x1)), format = 1)                        
@@ -69,7 +67,7 @@ function(codes, start = ":00", end, file=NULL) {
         cat(paste0("list(\n",
             "    transcript_time_span = qcv(00:00 - 00:00),\n",
             paste0("    ", paste0(paste(codes, 
-            collapse = " = qcv(),\n    "), " = qcv()")), "\n)\n"),
+            collapse = " = qcv(terms=''),\n    "), " = qcv(terms='')")), "\n)\n"),
             file = file, append = TRUE) 
     }   
     options(width=wid)
