@@ -9,6 +9,7 @@
 #' @return Returns a vector of capitalized words based on supplied capitalization arguments.
 #' @examples
 #' capitalizer(bag.o.words("i like it but i'm not certain"), "like")
+#' capitalizer(bag.o.words("i like it but i'm not certain"), "like", F)
 capitalizer <-
 function(text, caps.list = NULL, I.list = TRUE, no.apostrophe = FALSE) {
     I_list <- c("I'm", "I'll", "I'd", "I've", "I")
