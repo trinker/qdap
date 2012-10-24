@@ -23,7 +23,7 @@
 #' )
 #' cm_time2long(x)
 cm_time.temp <-
-function(codes, start = ":00", end, file=NULL) {
+function(codes, start = ":00", end = ":00", file=NULL) {
     wid <- options()$width
     options(width=1000)
     x1 <- matrix(c("list(", 
