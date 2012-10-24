@@ -2,22 +2,15 @@
 #' 
 #' A helper function for word_list that allows the user to supply vectors of words to be capitalized.
 #' 
-#' @param text %% ~~Describe \code{text} here~~
-#' @param caps.list %% ~~Describe \code{caps.list} here~~
-#' @param I.list %% ~~Describe \code{I.list} here~~
-#' @param no.apostrophe %% ~~Describe \code{no.apostrophe} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param text A vector of words (generally from bag.o.words or breaker).
+#' @param caps.list A list of words to capitalize.
+#' @param I.list logical.  If TRUE capitalizes I words and contractions.
+#' @param no.apostrophe logical.  If TRUE will not insert apostrophe's back into words.
+#' @return Returns a vector of capitalized words based on supplied capitalization arguments.
 #' @examples
+#' capitalizer(bag.o.words("i like it but i'm not certain"), "like")
 capitalizer <-
-function(text, caps.list = NULL, I.list = TRUE, 
-    no.apostrophe = FALSE) {
+function(text, caps.list = NULL, I.list = TRUE, no.apostrophe = FALSE) {
     I_list <- c("I'm", "I'll", "I'd", "I've", "I")
     IDF <- data.frame(from1 = sapply(I_list, function(x) strip(x, 
         apostrophe.remove = TRUE)), from2 = sapply(I_list, strip), 

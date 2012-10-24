@@ -26,7 +26,7 @@ export(csv.dump)
 export(delete) 
 export(diversity)                                            
 export(endf)
-export(DF_word_stats)                              
+export(DF_word_stats)     #remove                         
 export(dissimilarity)                
 export(distTab)                     
 export(duplicates)                                                            
