@@ -29,9 +29,9 @@
 gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.default", rev.factor = TRUE,
-    transform = FALSE, minor.line.freq = 25, major.line.freq = 100, sig.dig.line.freq = -2,
-    scale = NULL, space = NULL, size = 3, rm.horiz.lines = TRUE, x.ticks = FALSE, 
-    y.ticks = FALSE, legend.position = NULL, border.color = NULL, border.size = 2,
+    transform = FALSE, minor.line.freq = NULL, major.line.freq = NULL, sig.dig.line.freq = -2,
+    scale = NULL, space = NULL, size = 3, rm.horiz.lines = FALSE, x.ticks = TRUE, 
+    y.ticks = TRUE, legend.position = NULL, border.color = NULL, border.size = 2,
     border.width = .1) { 
     plot.var2 <- as.character(substitute(plot.var))
     if(plot.var2 != "NAME") {
