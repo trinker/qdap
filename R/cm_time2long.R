@@ -71,8 +71,8 @@ function(time.list){
     }
     colon <- function(x) which(x == ":")
     ncolon <- function(x) x != ":"
-
     x <- time.list
+    x[[1]] <- suppressWarnings(gsub("-", "", x[[1]]))
     x[[1]] <- suppressWarnings(gsub(":", "\\.", x[[1]][-1]))
     x <- suppressWarnings(lapply(x, reformat))
     x <- lapply(x, function(x){
