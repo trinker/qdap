@@ -123,4 +123,5 @@ function(time.list){
     DF <- DF[DF[, 3] != 0, ]
     comment(DF) <- paste0(paste0("start time = ", span[1]), 
         paste0("; end time = ", span[2]))
+    DF
 }
