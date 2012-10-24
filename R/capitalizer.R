@@ -7,6 +7,7 @@
 #' @param I.list logical.  If TRUE capitalizes I words and contractions.
 #' @param no.apostrophe logical.  If TRUE will not insert apostrophe's back into words.
 #' @return Returns a vector of capitalized words based on supplied capitalization arguments.
+#' @note Not intended for general use.  Acts as a helper function to several qdap functions.
 #' @examples
 #' capitalizer(bag.o.words("i like it but i'm not certain"), "like")
 #' capitalizer(bag.o.words("i like it but i'm not certain"), "like", F)
