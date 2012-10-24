@@ -1,8 +1,6 @@
-#' Transcript Apply Descriptive Word Statistics
+#' Descriptive Word Statistics
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-#' 
-#' %% ~~ If necessary, more details than the description above ~~
+#' Transcript apply descriptive word statistics
 #' 
 #' @aliases word_stats DF_word_stats print.word.stats
 #' @param text.var The text variable         
@@ -38,15 +36,14 @@
 #' \item{prop.dis}{proportion of dis legomenon to words}
 #' } 
 #' \item{mpun}{An account of sentences with improper end mark} 
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @keywords descriptive statistic
 #' @examples
 #' word_stats(mraja1spl$dialogue, mraja1spl$person)
-#' with(mraja1spl, word_stats(dialogue, person, tot = tot))
-#' 
+#' (desc_wrds <- with(mraja1spl, word_stats(dialogue, person, tot = tot)))
+#' names(desc_wrds)
+#' desc_wrds$ts 
+#' desc_wrds$gts
+#' desc_wrds$pun  
 word_stats <-
 function(text.var, grouping.var = NULL, tot = NULL, rm.incomplete = FALSE,
          digit.remove = FALSE, apostrophe.remove = FALSE, digits = 3, ...) {
