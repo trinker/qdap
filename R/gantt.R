@@ -43,7 +43,8 @@
 gantt <-
 function(text.var, grouping.var, plot = TRUE, units = "words", 
     sums = FALSE, plot.colors = NULL, box.color = NULL, col.sep = "_"){
-    g <- grouping.var
+    g <- factor(grouping.var)
+    grouping.var <- factor(grouping.var)
     if (is.list(grouping.var)) {
         m <- unlist(as.character(substitute(grouping.var))[-1])
         m <- sapply(strsplit(m, "$", fixed=TRUE), 
