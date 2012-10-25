@@ -1,12 +1,10 @@
 #' Generate Time Spans for Repeated Measures
 #' 
-#' A ggplot2 Wrapper for Gantt Plots
+#' Produces start and end times for occurances for each repeated measure condition.
 #' 
-#' A ggplot2 wrapper for data frames produced from gantt and gantt_rep
-#' 
-#' @param rm.var %% ~~Describe \code{rm.var} here~~
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param grouping.var %% ~~Describe \code{grouping.var} here~~
+#' @param rm.var an optional single vector or list of 1 or 2 of repeated emasures to facet by   
+#' @param text.var The text variable    
+#' @param grouping.var The grouping variables. Also takes a single grouping variable or a list of 1 or more grouping variables.
 #' @param units %% ~~Describe \code{units} here~~
 #' @return %% ~Describe the value returned %% If it is a LIST, use %%
 #' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of

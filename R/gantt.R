@@ -5,8 +5,8 @@
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
 #' @aliases helper
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param grouping.var %% ~~Describe \code{grouping.var} here~~
+#' @param text.var The text variable    
+#' @param grouping.var The grouping variables. Also takes a single grouping variable or a list of 1 or more grouping variables.
 #' @param plot %% ~~Describe \code{plot} here~~
 #' @param units %% ~~Describe \code{units} here~~
 #' @param sums %% ~~Describe \code{sums} here~~
