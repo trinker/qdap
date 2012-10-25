@@ -27,7 +27,7 @@
 #' z + theme(panel.margin = unit(1, "lines")) + scale_colour_grey()
 #' z + scale_colour_brewer(palette="Dark2")
 gantt_plot <-
-function(text.var, grouping.var, rm.var = NULL, 
+function(text.var, grouping.var, rm.var = NULL, xlab = "duration (in words)", 
     units = "words", col.sep = "_", ...) {
     NAME <- if (is.list(grouping.var)) {
         m <- unlist(as.character(substitute(grouping.var))[-1])
