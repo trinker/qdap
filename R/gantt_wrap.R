@@ -21,6 +21,7 @@
 #' @param x.ticks  logical.  if TRUE the x tixks will be displayed
 #' @param y.ticks  logical.  if TRUE the y tixks will be displayed
 #' @param legend.position the position of legends. ("left", "right", "bottom", "top", or two-element numeric vector)
+#' @param bar.color optional color to constrain all bars
 #' @param border.color the color to plot border around Gantt bars (default is NULL)
 #' @param border.size the size to plot borders around Gantt bars. Controls length (width also controlled if not specified).
 #' @param border.width controls broder width around Gantt bars.  Use a numeric value in addition to border size if plot borders appear disproportional.
@@ -49,8 +50,8 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     ylab = as.character(plot.var), xlab = "duration.default", rev.factor = TRUE,
     transform = FALSE, minor.line.freq = NULL, major.line.freq = NULL, sig.dig.line.freq = -2,
     scale = NULL, space = NULL, size = 3, rm.horiz.lines = FALSE, x.ticks = TRUE, 
-    y.ticks = TRUE, legend.position = NULL, border.color = NULL, border.size = 2,
-    border.width = .1) { 
+    y.ticks = TRUE, legend.position = NULL, bar.color = NULL, 
+    border.color = NULL, border.size = 2, border.width = .1) { 
     plot.var2 <- as.character(substitute(plot.var))
     if(plot.var2 != "NAME") {
         plot.var <- as.character(substitute(plot.var))
@@ -111,8 +112,14 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
         theplot <- theplot + geom_segment(aes(x=startp, xend=endp, y=new, 
             yend=new), colour = border.color, size=border.size[2], legend.position = "none")  
     }                                                 
-    theplot <- theplot + geom_segment(aes(x=start, xend=end, y=new, yend=new), 
-        size=size) +  
+    if (is.null(fill.var) & !is.null(bar.color)) {
+        theplot <- theplot + 
+          geom_segment(aes(x=start, xend=end, y=new, yend=new), color=bar.color, size=size)  
+    } else {                                           
+        theplot <- theplot + 
+            geom_segment(aes(x=start, xend=end, y=new, yend=new), size=size) 
+    }
+    theplot <- theplot +  
         ylab(ylab) +    
         xlab(xlab) +                   
         theme_bw() +                                                                  
