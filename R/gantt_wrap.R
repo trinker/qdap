@@ -2,30 +2,29 @@
 #' 
 #' A ggplot2 wrapper that produces a Gantt plot
 #' 
-#' @param dataframe A data frame with ploting variable(s) and a column of start and end times.
-#' @param plot.var A factor plotting variable (y axis)
-#' @param facet.vars An optional single vector or list of 1 or 2 to facet by
-#' @param fill.var An optional variable to fill the code stips by.
-#' @param title An optional title for the plot.
-#' @param ylab An optional y label.
-#' @param xlab An optional x label.
-#' @param rev.factor logical.  If TRUE reverse the current plotting order so the first element in the plotting variable's levels is plotted on top.
-#' @param transform logical.  If TRUE the repeated facets will be transformed from stacked to side by side.
-#' @param minor.line.freq A numeric value for frequency of minor grid lines.
-#' @param major.line.freq A numeric value for frequency of major grid lines.
+#' @param dataframe a data frame with ploting variable(s) and a column of start and end times.
+#' @param plot.var a factor plotting variable (y axis)
+#' @param facet.vars an optional single vector or list of 1 or 2 to facet by
+#' @param fill.var an optional variable to fill the code stips by.
+#' @param title an optional title for the plot.
+#' @param ylab an optional y label.
+#' @param xlab an optional x label.
+#' @param rev.factor logical.  if TRUE reverse the current plotting order so the first element in the plotting variable's levels is plotted on top.
+#' @param transform logical.  if TRUE the repeated facets will be transformed from stacked to side by side.
+#' @param minor.line.freq a numeric value for frequency of minor grid lines.
+#' @param major.line.freq a numeric value for frequency of major grid lines.
 #' @param sig.dig.line.freq An internal rounding factor.  Generally, default value surfices.
 #' @param scale should scales be fixed ("fixed", the default), free ("free"), or free in one dimension ("free_x", "free_y")
-#' @param space
-#' @param size
-#' @param rm.horiz.lines
-#' @param x.ticks
-#' @param y.ticks
-#' @param legend.position
-#' @param border.color
-#' @param border.size
-#' @param border.width
+#' @param space if "fixed", the default, all panels have the same size. If "free_y" their height will be proportional to the length of the y scale; if "free_x" their width will be proportional to the length of the x scale; or if "free" both height and width will vary. This setting has no effect unless the appropriate scales also vary.
+#' @param size the width of the plot bars.
+#' @param rm.horiz.lines logical.  if TRUE the horzontal lines will be removed
+#' @param x.ticks  logical.  if TRUE the x tixks will be displayed
+#' @param y.ticks  logical.  if TRUE the y tixks will be displayed
+#' @param legend.position the position of legends. ("left", "right", "bottom", "top", or two-element numeric vector)
+#' @param border.color the color to plot border around Gantt bars (default is NULL)
+#' @param border.size the size to plot borders around Gantt bars. Controls length (width also controlled if not specified).
+#' @param border.width controls broder width around Gantt bars.  Use a numeric value in addition to border size if plot borders appear disproportional.
 #' @return Returns a Gantt style visualization.
-#' @note %% ~~further notes~~
 #' @author Andrie de Vries and and Tyler Rinker <tyler.rinker@gmail.com>.
 #' @seealso 
 #' \code{\link[qdap]{gantt}},
@@ -79,8 +78,6 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     if (!is.null(fill.var)) {
          dataframe[, "new4"] <- dataframe[, fill.var]
     } else {
-#dataframe[, "new4"] <- factor(dataframe[, plot.var], #remove once I'm sure there's no issues with removing these lines
-#levels=rev(levels(dataframe[, plot.var])))
     dataframe[, "new4"] <- dataframe[, "new"] 
     }
     if (rm.horiz.lines) {
