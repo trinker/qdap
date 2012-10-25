@@ -1,21 +1,38 @@
-#' Generate Time Spans for Repeated Measures
+#' Gantt Plot Wrapper
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' A ggplot2 wrapper that produces a Gantt plot
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param rm.var %% ~~Describe \code{rm.var} here~~
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param grouping.var %% ~~Describe \code{grouping.var} here~~
-#' @param units %% ~~Describe \code{units} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
+#' @param dataframe A data frame with ploting variable(s) and a column of start and end times.
+#' @param plot.var A factor plotting variable (y axis)
+#' @param facet.vars An optional single vector or list of 1 or 2 to facet by
+#' @param fill.var An optional variable to fill the code stips by.
+#' @param title An optional title for the plot.
+#' @param ylab An optional y label.
+#' @param xlab An optional x label.
+#' @param rev.factor logical.  If TRUE reverse the current plotting order so the first element in the plotting variable's levels is plotted on top.
+#' @param transform logical.  If TRUE the repeated facets will be transformed from stacked to side by side.
+#' @param minor.line.freq A numeric value for frequency of minor grid lines.
+#' @param major.line.freq A numeric value for frequency of major grid lines.
+#' @param sig.dig.line.freq An internal rounding factor.  Generally, default value surfices.
+#' @param scale should scales be fixed ("fixed", the default), free ("free"), or free in one dimension ("free_x", "free_y")
+#' @param space
+#' @param size
+#' @param rm.horiz.lines
+#' @param x.ticks
+#' @param y.ticks
+#' @param legend.position
+#' @param border.color
+#' @param border.size
+#' @param border.width
+#' @return Returns a Gantt style visualization.
 #' @note %% ~~further notes~~
 #' @author Andrie de Vries and and Tyler Rinker <tyler.rinker@gmail.com>.
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references \url{http://wiki.stdout.org/rcookbook/Graphs/Colors%20(ggplot2)/}
-#' @keywords ~kwd1 ~kwd2
+#' @seealso 
+#' \code{\link[qdap]{gantt}},
+#' \code{\link[qdap]{gantt_plot}},
+#' \code{\link[qdap]{gantt_rep}}
+#' @references Wallace Clark and Henry Gantt (1922) The Gantt chart, a working tool of management. New York, Ronald Press
+#' @keywords Gantt
 #' @examples
 #' (dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "sentences",                
 #'      plot.colors = 'black', sums = TRUE, col.sep = "_")$gantt.df)     
@@ -23,9 +40,11 @@
 #' dat$codes <- sample(LETTERS[1:3], nrow(dat), TRUE)
 #' gantt_wrap(dat, fam.aff_sex, fill.var = "codes", legend.position = "bottom")
 #'
-#' (dat3 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex), units = "words",                
-#'    col.sep = "_")))    
-#' gantt_wrap(dat3, fam.aff_sex, facet.vars = "act", title = "Repeated MeasuresGantt Plot")
+#' (dat3 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex), 
+#'    units = "words", col.sep = "_")))    
+#' x <- gantt_wrap(dat3, fam.aff_sex, facet.vars = "act", 
+#'     title = "Repeated MeasuresGantt Plot")
+#' x + scale_color_manual(values=rep("black", length(levels(dat3$fam.aff_sex)))) 
 gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.default", rev.factor = TRUE,
@@ -118,12 +137,12 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     if (!is.null(facet.vars)) { 
         if (length(facet.vars) == 1) {
             if (transform) {
-                theplot <- theplot + facet_grid(.~new2, scale = scale, space = space)           
+                theplot <- theplot + facet_grid(.~new2, scales = scale, space = space)           
             } else {
-                theplot <- theplot + facet_grid(new2~., scale = scale, space = space)
+                theplot <- theplot + facet_grid(new2~., scales = scale, space = space)
             }
         } else {
-            theplot <- theplot + facet_grid(new2~new3, scale = scale, space = space)
+            theplot <- theplot + facet_grid(new2~new3, scales = scale, space = space)
         }
     }         
     print(theplot)
