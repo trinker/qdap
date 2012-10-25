@@ -66,6 +66,7 @@ function(text.var, grouping.var, rm.var = NULL, xlab = "duration (in words)",
         rmNAME <- unlist(strsplit(rmNAME, col.sep, fixed=TRUE))
         colnames(x)[1:2] <- rmNAME
     }
-    y <- gantt_wrap(dataframe = x, plot.var = NAME, facet.vars = rmNAME, ...)
+    y <- gantt_wrap(dataframe = x, plot.var = NAME, facet.vars = rmNAME, 
+        scale = scale, xlab = xlab, ...)
     invisible(y)
 }
