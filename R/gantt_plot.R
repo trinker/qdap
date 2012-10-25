@@ -13,8 +13,7 @@
 #' @references\url{http://wiki.stdout.org/rcookbook/Graphs/Colors%20(ggplot2)/}
 #' @keywords ~kwd1 ~kwd2
 #' @examples
-#' with(rajSPLIT, gantt_plot(text.var = dialogue, grouping.var = person,
-#'     minor.line.freq = NULL, major.line.freq = NULL, size=4))
+#' with(rajSPLIT, gantt_plot(text.var = dialogue, grouping.var = person, size=4))
 #' with(rajSPLIT, gantt_plot(text.var = dialogue, grouping.var = 
 #'     list(fam.aff, sex), rm.var  = act, 
 #'     title = "Romeo and Juliet's dialogue"))
