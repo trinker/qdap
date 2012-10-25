@@ -76,6 +76,10 @@ function(rm.var, text.var, grouping.var, units = "words", col.sep = "_"){
             return(gn3)
         }
     )
+    DAT3 <- lapply(DAT3, function(x) {
+        colnames(x)[ncol(x) - 3] <- NAME
+        x
+    })
     DAT3 <- do.call("rbind", DAT3)
     names(DAT3)[1:2] <- c(NAME2, NAME)
     if (col.sep != "&") {
