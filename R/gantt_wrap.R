@@ -10,6 +10,7 @@
 #' @param ylab an optional y label.
 #' @param xlab an optional x label.
 #' @param rev.factor logical.  if TRUE reverse the current plotting order so the first element in the plotting variable's levels is plotted on top.
+#' @param ncol if an integer value is passed to this gantt_wrap uses facet_wrap rather than facet_grid
 #' @param transform logical.  if TRUE the repeated facets will be transformed from stacked to side by side.
 #' @param minor.line.freq a numeric value for frequency of minor grid lines.
 #' @param major.line.freq a numeric value for frequency of major grid lines.
@@ -48,9 +49,10 @@
 gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.default", rev.factor = TRUE,
-    transform = FALSE, minor.line.freq = NULL, major.line.freq = NULL, sig.dig.line.freq = -2,
+    transform = FALSE, ncol = NULL, minor.line.freq = NULL, 
+    major.line.freq = NULL, sig.dig.line.freq = -2,
     scale = NULL, space = NULL, size = 3, rm.horiz.lines = FALSE, x.ticks = TRUE, 
-    y.ticks = TRUE, legend.position = NULL, bar.color = NULL, 
+    y.ticks = TRUE, legend.position = NULL, bar.color = NULL,
     border.color = NULL, border.size = 2, border.width = .1) { 
     plot.var2 <- as.character(substitute(plot.var))
     if(plot.var2 != "NAME") {
@@ -139,16 +141,20 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
         theplot <- theplot + theme(legend.position = legend.position)   
     }
     if (!is.null(facet.vars)) { 
-        if (length(facet.vars) == 1) {
-            if (transform) {
-                theplot <- theplot + facet_grid(.~new2, scales = scale, space = space)           
-            } else {
-                theplot <- theplot + facet_grid(new2~., scales = scale, space = space)
-            }
+        if(!is.null(ncol)){
+            theplot <- theplot + facet_wrap(~new2, scales = scale, ncol=ncol)           
         } else {
-            theplot <- theplot + facet_grid(new2~new3, scales = scale, space = space)
+            if (length(facet.vars) == 1) {
+                if (transform) {
+                    theplot <- theplot + facet_grid(.~new2, scales = scale, space = space)           
+                } else {
+                    theplot <- theplot + facet_grid(new2~., scales = scale, space = space)
+                }
+            } else {
+                theplot <- theplot + facet_grid(new2~new3, scales = scale, space = space)
+            }
         }
-    }         
+    }    
     print(theplot)
     invisible(theplot)
 }
