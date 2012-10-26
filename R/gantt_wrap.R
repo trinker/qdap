@@ -15,6 +15,7 @@
 #' @param minor.line.freq a numeric value for frequency of minor grid lines.
 #' @param major.line.freq a numeric value for frequency of major grid lines.
 #' @param sig.dig.line.freq An internal rounding factor.  Generally, default value surfices.
+#' @param hms.scale convert scale to h:m:s format (must pass a chron object)
 #' @param scale should scales be fixed ("fixed", the default), free ("free"), or free in one dimension ("free_x", "free_y")
 #' @param space if "fixed", the default, all panels have the same size. If "free_y" their height will be proportional to the length of the y scale; if "free_x" their width will be proportional to the length of the x scale; or if "free" both height and width will vary. This setting has no effect unless the appropriate scales also vary.
 #' @param size the width of the plot bars.
@@ -50,7 +51,7 @@ gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.default", rev.factor = TRUE,
     transform = FALSE, ncol = NULL, minor.line.freq = NULL, 
-    major.line.freq = NULL, sig.dig.line.freq = -2,
+    major.line.freq = NULL, sig.dig.line.freq = -2, hms.scale = FALSE, 
     scale = NULL, space = NULL, size = 3, rm.horiz.lines = FALSE, x.ticks = TRUE, 
     y.ticks = TRUE, legend.position = NULL, bar.color = NULL,
     border.color = NULL, border.size = 2, border.width = .1) { 
@@ -65,11 +66,15 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
         dataframe[, "new"] <- factor(dataframe[, plot.var], 
             levels=levels(dataframe[, plot.var]))
     }
-    if(xlab == "duration.defalut") {
-        if (!is.null(comment(dataframe))) {
-            xlab <- paste0("duration (", comment(dataframe), ")")
+    if(xlab == "duration.default") {
+        if (hms.scale) {
+                xlab <- "Duration (minutes)"
         } else {
-            xlab <- "duration"
+            if (!is.null(comment(dataframe))) {
+                xlab <- paste0("Duration (", comment(dataframe), ")")
+            } else {
+                xlab <- "Duration"
+            }
         }
     }
     if (!is.null(facet.vars)) { 
@@ -88,11 +93,38 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     } else {
         cond <- NULL
     }
+    convert <- function(x) {
+        h <- floor(x/3600)
+        m <- floor((x-h*3600)/60)
+        s <- x-(m*60 + h*3600)
+        pad <- function(x) sprintf("%02d", as.numeric(x))
+        times(paste2(data.frame(apply(data.frame(h=h, m=m, s=s), 2, pad)), sep=":"))
+    }
     if (!is.null(border.color)) {
-      ld <- length(dataframe$start)
-      dataframe$startp <- c(dataframe$start[1], (dataframe$start[-1] - border.size[1]))
-      dataframe$endp <- c((dataframe$end[-ld] + border.size[1]), dataframe$end[ld])
-    }  
+        ld <- length(dataframe$start)
+        dataframe$startp <- c((dataframe$start - border.size[1]))
+        dataframe$endp <- c((dataframe$end + border.size[1]))
+        if (hms.scale) {
+            dataframe$startp[dataframe$startp <= 0] <- 0
+            dataframe$endp[dataframe$endp <= 0] <- 0
+            dataframe$startp <- convert(dataframe$startp)
+            dataframe$endp <- convert(dataframe$endp )
+        }
+    } 
+    #if (!is.null(border.color)) {
+    #  ld <- length(dataframe$start)
+    #  dataframe$startp <- c(dataframe$start[1], (dataframe$start[-1] - border.size[1]))
+    #  dataframe$endp <- c((dataframe$end[-ld] + border.size[1]), dataframe$end[ld])
+    #}  
+    if (hms.scale) {
+        if (all(colnames(dataframe) %in% c("Start", "End"))) {
+            dataframe$start <- dataframe$Start
+            dataframe$end <- dataframe$End
+        } else {
+            dataframe$start <- convert(dataframe$start)
+            dataframe$end <- convert(dataframe$end)
+        }
+    }
     theplot <- ggplot(dataframe, aes(colour=new4)) 
     if (!is.null(minor.line.freq)) {                 
         theplot <- theplot + geom_vline(xintercept = seq(0, 
@@ -124,8 +156,24 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     theplot <- theplot +  
         ylab(ylab) +    
         xlab(xlab) +                   
-        theme_bw() +                                                                  
-        scale_x_continuous(expand = c(0,0))+                                     
+        theme_bw()    
+    if (hms.scale) {
+        times_trans <- function() {
+            fmt <- function(x) {
+                format(x, simplify = !any(diff(x) < 1/(24*60)))
+            }
+            trans_new("chrontimes",
+                      transform = as.numeric,
+                      inverse = times,
+                      breaks = pretty_breaks(),
+                      format = fmt,
+                      domain=c(0,1))
+        }
+        theplot <- theplot + scale_x_continuous(trans=times_trans())
+    } else {                                                       
+        theplot <- theplot + scale_x_continuous(expand = c(0,0))  
+    }  
+    theplot <- theplot +                             
         theme(panel.background = element_rect(fill=NA, color="black"),       
            panel.grid.major.y = cond,
            panel.grid.minor.y = cond,
