@@ -5,6 +5,7 @@
 #' @param rm.var %% ~~Describe \code{rm.var} here~~
 #' @param text.var The text variable or an a word frequency matrix object
 #' @param grouping.var The grouping variables. Also takes a single grouping variable or a list of 1 or more grouping variables.
+#' @param \ldots other arguments supplied to word.freq.matrix
 #' @return Returns a matrix similar to a word frequency matrix but the rows are expanded to represent the maximum usages of the word and cells are dummy coded to indicate that numer of uses.
 #' @seealso \code{\link[qdap]{word.freq.matrix}}, 
 #' \code{\link[qdap]{wfm}}
@@ -14,9 +15,9 @@
 #' wfm.expanded(DATA$state, DATA$person)
 #' wfm.expanded(DATA$state, list(DATA$sex, DATA$adult))
 wfm.expanded <-
-function(text.var, grouping.var = NULL){
+function(text.var, grouping.var = NULL, ...){
     if(is.null(comment(text.var))) {
-        z <- wfm(text.var, grouping.var)
+        z <- wfm(text.var, grouping.var, ...)
     } else {
         if (comment(text.var)== "true.matrix") {
             z <- text.var
