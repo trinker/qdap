@@ -148,7 +148,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     }                                                 
     if (is.null(fill.var) & !is.null(bar.color)) {
         theplot <- theplot + 
-          geom_segment(aes(x=start, xend=end, y=new, yend=new), color=bar.color, size=size)  
+            geom_segment(aes(x=start, xend=end, y=new, yend=new), color=bar.color, size=size)  
     } else {                                           
         theplot <- theplot + 
             geom_segment(aes(x=start, xend=end, y=new, yend=new), size=size) 
@@ -169,7 +169,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
                       format = fmt,
                       domain=c(0,1))
         }
-        theplot <- theplot + scale_x_continuous(trans=times_trans())
+        theplot <- theplot + scale_x_continuous(expand = c(0,0), trans=times_trans())
     } else {                                                       
         theplot <- theplot + scale_x_continuous(expand = c(0,0))  
     }  
