@@ -117,6 +117,7 @@ function(time.list){
         data.frame(code = names(x3)[i], apply(x3[[i]], 2, tonum))
     })
     span <- tonum(x[[1]])
+    span[2] <- span[2] + 1
     message(paste0(paste0("start time = ", span[1]), 
         paste0("; end time = ", span[2])))
     DF <- do.call(rbind, x3)
