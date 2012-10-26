@@ -13,7 +13,6 @@
 #' wfm.expanded(z)
 #' wfm.expanded(DATA$state, DATA$person)
 #' wfm.expanded(DATA$state, list(DATA$sex, DATA$adult))
-#' wfm.expanded(CO2) #error
 wfm.expanded <-
 function(text.var, grouping.var = NULL){
     if(is.null(comment(text.var))) {
