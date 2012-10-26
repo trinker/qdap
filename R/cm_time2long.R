@@ -19,7 +19,8 @@
 #' dat <- cm_time2long(x)
 #' gantt_wrap(dat, "code", border.color = "black", border.size = .75)
 cm_time2long <-
-function(time.list){
+function(time.list, list.var.name = "variable", list.var = TRUE){
+    lv <- as.character(substitute(time.list))
     bef <- sapply(time.list, length, USE.NAMES = FALSE)
     aft <- sapply(time.list, function(x) length(unlist(strsplit( x, ":"))), 
         USE.NAMES = FALSE)
@@ -102,10 +103,17 @@ function(time.list){
             colnames(dat) <- c("start", "end")
             dat
         } else {
-            data.frame(
-                start = v[-c(f <- which(v==":") , f + 1)], 
-                end = v[-c(f, f-1)], stringsAsFactors = FALSE
-            )
+            if (sum(v == ":") & length(v) == 3){
+                v <- v[v != ":"]
+                dat <- data.frame(rbind(v, c("00.00.00", "00.00.00")), row.names = NULL)
+                colnames(dat) <- c("start", "end")
+                dat
+            } else {
+                data.frame(
+                    start = v[-c(f <- which(v==":") , f + 1)], 
+                    end = v[-c(f, f-1)], stringsAsFactors = FALSE
+                )
+            }
         }
     })
     names(x3) <- names(x)[-1]
@@ -120,10 +128,19 @@ function(time.list){
     span[2] <- span[2] + 1
     message(paste0(paste0("start time = ", span[1]), 
         paste0("; end time = ", span[2])))
+    x3 <- lapply(x3, function(x) {
+        if (sum(colSums(x[, -1])) == 0) {
+             x[1, ]
+        } else {
+             x[rowSums(x[, -1]) != 0, ]
+        }
+    })
     DF <- do.call(rbind, x3)
-    DF <- DF[DF[, 3] != 0, ]
     DF[, 3] <- DF[, 3] + 1
-    comment(DF) <- paste0(paste0("start time = ", span[1]), 
-        paste0("; end time = ", span[2]))
-    DF
+    if (list.var) {
+        DF <- data.frame(DF, VAR = rep(lv, nrow(DF)))
+        colnames(DF)[ncol(DF)] <- list.var.name
+    }
+    comment(DF) <- "cmtime"
+    return(DF)
 }

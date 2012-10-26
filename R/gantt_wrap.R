@@ -15,7 +15,7 @@
 #' @param minor.line.freq a numeric value for frequency of minor grid lines.
 #' @param major.line.freq a numeric value for frequency of major grid lines.
 #' @param sig.dig.line.freq An internal rounding factor.  Generally, default value surfices.
-#' @param hms.scale convert scale to h:m:s format (must pass a chron object)
+#' @param hms.scale logical.  If TURE converts scale to h:m:s format.  Default NULL attempts to detect if object is a cm_time2long object
 #' @param scale should scales be fixed ("fixed", the default), free ("free"), or free in one dimension ("free_x", "free_y")
 #' @param space if "fixed", the default, all panels have the same size. If "free_y" their height will be proportional to the length of the y scale; if "free_x" their width will be proportional to the length of the x scale; or if "free" both height and width will vary. This setting has no effect unless the appropriate scales also vary.
 #' @param size the width of the plot bars.
@@ -51,10 +51,17 @@ gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.default", rev.factor = TRUE,
     transform = FALSE, ncol = NULL, minor.line.freq = NULL, 
-    major.line.freq = NULL, sig.dig.line.freq = -2, hms.scale = FALSE, 
+    major.line.freq = NULL, sig.dig.line.freq = -2, hms.scale = NULL, 
     scale = NULL, space = NULL, size = 3, rm.horiz.lines = FALSE, x.ticks = TRUE, 
     y.ticks = TRUE, legend.position = NULL, bar.color = NULL,
     border.color = NULL, border.size = 2, border.width = .1) { 
+    if (is.null(hms.scale)) {
+        if (!is.null(comment(hms.scale)) && comment(hms.scale) == "cmtime") {
+            hms.scale <- TRUE
+        } else {
+            hms.scale <- FALSE
+        }
+    }
     plot.var2 <- as.character(substitute(plot.var))
     if(plot.var2 != "NAME") {
         plot.var <- as.character(substitute(plot.var))
@@ -106,16 +113,10 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
         dataframe$endp <- c((dataframe$end + border.size[1]))
         if (hms.scale) {
             dataframe$startp[dataframe$startp <= 0] <- 0
-            dataframe$endp[dataframe$endp <= 0] <- 0
-            dataframe$startp <- convert(dataframe$startp)
-            dataframe$endp <- convert(dataframe$endp )
+            dataframe$startp <- as.numeric(convert(dataframe$startp +5))- as.numeric(convert(c(border.size[1], 1))[1])
+            dataframe$endp <- as.numeric(convert(dataframe$endp))
         }
     } 
-    #if (!is.null(border.color)) {
-    #  ld <- length(dataframe$start)
-    #  dataframe$startp <- c(dataframe$start[1], (dataframe$start[-1] - border.size[1]))
-    #  dataframe$endp <- c((dataframe$end[-ld] + border.size[1]), dataframe$end[ld])
-    #}  
     if (hms.scale) {
         if (all(colnames(dataframe) %in% c("Start", "End"))) {
             dataframe$start <- dataframe$Start
