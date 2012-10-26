@@ -204,7 +204,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
         }
     }    
     if (!is.null(fill.var)){
-        theplot <- theplot + theme(legend.title=fill.var)
+        theplot <- theplot + guides(colour = guide_legend(fill.var))
     }
     print(theplot)
     invisible(theplot)
