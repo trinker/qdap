@@ -172,13 +172,13 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
                       domain=c(0,1))
         }
         if (constrain) {
-            theplot <- theplot + scale_x_continuous(expand = con, trans=times_trans())
+            theplot <- theplot + scale_x_continuous(expand = c(0, 0), trans=times_trans())
         } else {
             theplot <- theplot + scale_x_continuous(trans=times_trans())
         }  
     } else {                                                       
         if (constrain) {
-            theplot <- theplot + scale_x_continuous(expand = con, trans=times_trans())
+            theplot <- theplot + scale_x_continuous(expand = c(0, 0), trans=times_trans())
         } else {
             theplot <- theplot + scale_x_continuous(trans=times_trans())
         }  
