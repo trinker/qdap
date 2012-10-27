@@ -23,6 +23,7 @@
 cm_t2l <-
 function(time.list, list.var.name = "variable", list.var = TRUE, 
     start.end = TRUE){
+    time.list <- time.list[sapply(time.list, function(x) all(Trim(x) != ""))]
     lv <- as.character(substitute(time.list))
     bef <- sapply(time.list, length, USE.NAMES = FALSE)
     aft <- sapply(time.list, function(x) length(unlist(strsplit( x, ":"))), 
