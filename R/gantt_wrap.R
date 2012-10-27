@@ -76,7 +76,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     }
     if(xlab == "duration.default") {
         if (hms.scale) {
-                xlab <- "Duration (minutes)"
+                xlab <- "Duration (hours:minutes)"
         } else {
             if (!is.null(comment(dataframe))) {
                 xlab <- paste0("Duration (", comment(dataframe), ")")
