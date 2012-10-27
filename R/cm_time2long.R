@@ -37,5 +37,6 @@ function(..., v.name = "variable", list.var = TRUE,
     if (list.var) {
         colnames(DF)[ncol(DF)] <- v.name
     }
+    comment(DF) <- "cmtime"
     DF
 }
