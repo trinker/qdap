@@ -5,15 +5,24 @@
 Transform Codes to Start-End Times
 }
 \description{
-Transforms the range coding structure from cm_time.temp (in list format) into a data frame of start and end times in long format.
+Transforms the range coding structure(s) from cm_time.temp (in list format) into a data frame of start and end times in long format.
 }
 \usage{
-cm_time2long(time.list)
+cm_time2long(..., v.name = "variable", list.var = TRUE, start.end = FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{time.list}{
-%%     ~~Describe \code{time.list} here~~
+  \item{\dots}{
+%%     ~~Describe \code{\dots} here~~
+}
+  \item{v.name}{
+%%     ~~Describe \code{v.name} here~~
+}
+  \item{list.var}{
+%%     ~~Describe \code{list.var} here~~
+}
+  \item{start.end}{
+%%     ~~Describe \code{start.end} here~~
 }
 }
 \details{
@@ -47,93 +56,22 @@ cm_time2long(time.list)
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (time.list) 
+function (..., v.name = "variable", list.var = TRUE, start.end = FALSE) 
 {
-    bef <- sapply(time.list, length, USE.NAMES = FALSE)
-    aft <- sapply(time.list, function(x) length(unlist(strsplit(x, 
-        ":"))), USE.NAMES = FALSE)
-    check <- unlist(aft > bef)
-    check[1] <- FALSE
-    if (any(check)) {
-        inds <- which(check)
-        append2 <- function(x, y = ":", z) {
-            lapply(z, function(z) {
-                x <<- append(x, y, after = z)
-            })
-            x
-        }
-        NM <- names(time.list)
-        lapply(inds, function(i) {
-            inds2 <- which(grepl(":", unlist(time.list[i]))) - 
-                1
-            new <- unlist(strsplit(unlist(time.list[i]), ":"))
-            constant <- (seq_along(inds2) - 1) * 2
-            x1 <- gsub(",", "", append2(new, z = c(inds2 + constant)))
-            names(x1) <- NULL
-            time.list[[i]] <<- x1
-        })
-        names(time.list) <- NM
+    mf <- match.call(expand.dots = FALSE)
+    objs <- as.character(mf[[2]])
+    L1 <- lapply(objs, get)
+    names(L1) <- objs
+    L2 <- lapply(L1, cm_t2l, list.var = FALSE, start.end = start.end)
+    if (list.var) {
+        L2 <- lapply(seq_along(L2), function(i) data.frame(L2[[i]], 
+            VAR = objs[i]))
     }
-    reformat <- function(x) {
-        colon <- grepl(":", x)
-        period <- grepl("\\.", x)
-        add <- colSums(rbind(colon, period)) == 0
-        x[add] <- paste0(x[add], ".00")
-        period <- grepl("\\.", x)
-        per2 <- unlist(lapply(gregexpr("\\.", x), function(x) {
-            ifelse(x < 0, 0, length(x))
-        }))
-        per2 <- !per2 \%in\% c(0, 2)
-        FUN <- function(x) ifelse(nchar(x) < 2, paste0("0", x), 
-            x)
-        v <- strsplit(x[period], "\\.")
-        v <- lapply(v, function(x) {
-            if (length(x) == 1) {
-                x <- c("00", "00", x)
-            }
-            if (length(x) == 2) {
-                x <- c("00", x)
-            }
-            return(x)
-        })
-        x[period] <- paste2(apply(do.call(rbind, v), 2, FUN))
-        x
+    DF <- data.frame(do.call(rbind, L2), row.names = NULL)
+    if (list.var) {
+        colnames(DF)[ncol(DF)] <- v.name
     }
-    colon <- function(x) which(x == ":")
-    ncolon <- function(x) x != ":"
-    x <- time.list
-    x[[1]] <- suppressWarnings(gsub(":", "\\.", x[[1]][-1]))
-    x <- suppressWarnings(lapply(x, reformat))
-    COL <- lapply(x[-1], colon)
-    Wcol <- lapply(COL, function(x) -1 + sort(x + rep(1:2, each = length(x))))
-    COLneg <- lapply(x[-1], ncolon)
-    x[-1] <- lapply(seq_along(x)[-1], function(i) {
-        x[[i]][unlist(COLneg[i - 1])]
-    })
-    append2 <- function(x, y = ":", z) {
-        lapply(z, function(z) {
-            x <<- append(x, y, after = z)
-        })
-        x
-    }
-    x2 <- lapply(seq_along(x)[-1], function(n) append2(x[[n]], 
-        z = COL[[n - 1]]))
-    x3 <- lapply(x2, function(v) {
-        data.frame(start = v[-c(f <- which(v == ":"), f + 1)], 
-            end = v[-c(f, f - 1)], stringsAsFactors = FALSE)
-    })
-    names(x3) <- names(x)[-1]
-    tonum <- function(z) {
-        v <- apply(do.call(rbind, strsplit(z, "\\.")), 2, as.numeric)
-        v[, 1] * 60^2 + v[, 2] * 60 + v[, 3]
-    }
-    x3 <- lapply(seq_along(x3), function(i) {
-        data.frame(code = names(x3)[i], apply(x3[[i]], 2, tonum))
-    })
-    span <- tonum(x[[1]])
-    print(paste0(paste0("start time = ", span[1]), paste0("; end time = ", 
-        span[2])))
-    do.call(rbind, x3)
+    DF
   }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

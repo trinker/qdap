@@ -27,6 +27,7 @@
 #' @param border.color the color to plot border around Gantt bars (default is NULL)
 #' @param border.size the size to plot borders around Gantt bars. Controls length (width also controlled if not specified).
 #' @param border.width controls broder width around Gantt bars.  Use a numeric value in addition to border size if plot borders appear disproportional.
+#' @param constrain logical.  If TRUE the Gantt bars touch the edge of the graph.
 #' @return Returns a Gantt style visualization.
 #' @author Andrie de Vries and and Tyler Rinker <tyler.rinker@gmail.com>.
 #' @seealso 
@@ -54,7 +55,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     major.line.freq = NULL, sig.dig.line.freq = -2, hms.scale = NULL, 
     scale = NULL, space = NULL, size = 3, rm.horiz.lines = FALSE, x.ticks = TRUE, 
     y.ticks = TRUE, legend.position = NULL, bar.color = NULL,
-    border.color = NULL, border.size = 2, border.width = .1) { 
+    border.color = NULL, border.size = 2, border.width = .1, constrain = TRUE) { 
     if (is.null(hms.scale)) {
         if (!is.null(comment(hms.scale)) && comment(hms.scale) == "cmtime") {
             hms.scale <- TRUE
@@ -157,7 +158,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     theplot <- theplot +  
         ylab(ylab) +    
         xlab(xlab) +                   
-        theme_bw()    
+        theme_bw()  
     if (hms.scale) {
         times_trans <- function() {
             fmt <- function(x) {
@@ -170,9 +171,17 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
                       format = fmt,
                       domain=c(0,1))
         }
-        theplot <- theplot + scale_x_continuous(expand = c(0,0), trans=times_trans())
+        if (constrain) {
+            theplot <- theplot + scale_x_continuous(expand = con, trans=times_trans())
+        } else {
+            theplot <- theplot + scale_x_continuous(trans=times_trans())
+        }  
     } else {                                                       
-        theplot <- theplot + scale_x_continuous(expand = c(0,0))  
+        if (constrain) {
+            theplot <- theplot + scale_x_continuous(expand = con, trans=times_trans())
+        } else {
+            theplot <- theplot + scale_x_continuous(trans=times_trans())
+        }  
     }  
     theplot <- theplot +                             
         theme(panel.background = element_rect(fill=NA, color="black"),       

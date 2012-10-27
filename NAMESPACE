@@ -12,6 +12,7 @@ export(cm_blank)
 export(cm_combine)
 export(cm_fill)
 export(cm_range.temp)
+#export(cm_t2l)          #don't export
 export(cm_time.temp)
 export(cm_time2long)
 export(cm_transform)
