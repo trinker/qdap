@@ -137,6 +137,15 @@ function(time.list, list.var.name = "variable", list.var = TRUE){
     })
     DF <- do.call(rbind, x3)
     DF[, 3] <- DF[, 3] + 1
+    convert <- function(x) {
+        h <- floor(x/3600)
+        m <- floor((x-h*3600)/60)
+        s <- x-(m*60 + h*3600)
+        pad <- function(x) sprintf("%02d", as.numeric(x))
+        times(paste2(data.frame(apply(data.frame(h=h, m=m, s=s), 2, pad)), sep=":"))
+    }
+    DF$Start <- convert(DF$start)
+    DF$End <- convert(DF$end)
     if (list.var) {
         DF <- data.frame(DF, VAR = rep(lv, nrow(DF)))
         colnames(DF)[ncol(DF)] <- list.var.name
