@@ -101,20 +101,14 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     } else {
         cond <- NULL
     }
-    convert <- function(x) {
-        h <- floor(x/3600)
-        m <- floor((x-h*3600)/60)
-        s <- x-(m*60 + h*3600)
-        pad <- function(x) sprintf("%02d", as.numeric(x))
-        times(paste2(data.frame(apply(data.frame(h=h, m=m, s=s), 2, pad)), sep=":"))
-    }
     if (!is.null(border.color)) {
         ld <- length(dataframe$start)
         dataframe$startp <- c((dataframe$start - border.size[1]))
         dataframe$endp <- c((dataframe$end + border.size[1]))
         if (hms.scale) {
             dataframe$startp[dataframe$startp <= 0] <- 0
-            dataframe$startp <- as.numeric(convert(dataframe$startp +5))- as.numeric(convert(c(border.size[1], 1))[1])
+            dataframe$startp <- as.numeric(convert(dataframe$startp +5))- 
+                as.numeric(convert(border.size[1]))
             dataframe$endp <- as.numeric(convert(dataframe$endp))
         }
     } 
@@ -146,11 +140,13 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
             border.size[2] <- size + size*border.width
         }
         theplot <- theplot + geom_segment(aes(x=startp, xend=endp, y=new, 
-            yend=new), colour = border.color, size=border.size[2], legend.position = "none")  
+            yend=new), colour = border.color, size=border.size[2], 
+            legend.position = "none")  
     }                                                 
     if (is.null(fill.var) & !is.null(bar.color)) {
         theplot <- theplot + 
-            geom_segment(aes(x=start, xend=end, y=new, yend=new), color=bar.color, size=size)  
+            geom_segment(aes(x=start, xend=end, y=new, yend=new), 
+                color=bar.color, size=size)  
     } else {                                           
         theplot <- theplot + 
             geom_segment(aes(x=start, xend=end, y=new, yend=new), size=size) 
@@ -172,13 +168,15 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
                       domain=c(0,1))
         }
         if (constrain) {
-            theplot <- theplot + scale_x_continuous(expand = c(0, 0), trans=times_trans())
+            theplot <- theplot + scale_x_continuous(expand = c(0, 0), 
+                trans=times_trans())
         } else {
             theplot <- theplot + scale_x_continuous(trans=times_trans())
         }  
     } else {                                                       
         if (constrain) {
-            theplot <- theplot + scale_x_continuous(expand = c(0, 0), trans=times_trans())
+            theplot <- theplot + scale_x_continuous(expand = c(0, 0), 
+                trans=times_trans())
         } else {
             theplot <- theplot + scale_x_continuous(trans=times_trans())
         }  
