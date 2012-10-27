@@ -57,7 +57,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     y.ticks = TRUE, legend.position = NULL, bar.color = NULL,
     border.color = NULL, border.size = 2, border.width = .1, constrain = TRUE) { 
     if (is.null(hms.scale)) {
-        if (!is.null(comment(hms.scale)) && comment(hms.scale) == "cmtime") {
+        if (!is.null(comment(dataframe)) && comment(dataframe) == "cmtime") {
             hms.scale <- TRUE
         } else {
             hms.scale <- FALSE
