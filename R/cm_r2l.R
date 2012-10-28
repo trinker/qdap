@@ -18,8 +18,7 @@
 #'     CC = qcv(terms='60:90, 100:120, 150'),
 #'     DD = qcv(terms='')
 #' )
-cm_r2l <-
-function(range.list, v.name = "variable", list.var = TRUE){
+cm_r2l <- function(range.list, v.name = "variable", list.var = TRUE){
     lv <- as.character(substitute(range.list))
     range.list <- range.list[sapply(range.list, function(x) all(Trim(x) != ""))]
     bef <- sapply(range.list, length, USE.NAMES = FALSE)
@@ -83,14 +82,16 @@ function(range.list, v.name = "variable", list.var = TRUE){
         }
     })
     x3 <- lapply(seq_along(x3), function(i) {
-        data.frame(x3[[i]], varaible = rep(names(range.list)[i], nrow(x3[[i]])))
-    })
+        data.frame(x3[[i]], code = rep(names(range.list)[i], 
+            nrow(x3[[i]])), variable = rep(lv, nrow(x3[[i]])))
+    })   
     dat <- data.frame(do.call(rbind, x3), row.names = NULL)
     DF <- dat[!is.na(dat[, 1]), ]
     invisible(lapply(1:2, function(i) {
         DF[, i] <<- as.numeric(as.character(DF[, i]))
     })) 
     DF[, 1] <- DF[, 1] - 1
+    DF <- DF[, c("code", "start", "end", "variable")]
     if (list.var) {
         names(DF)[ncol(DF)] <- v.name
     } else {
