@@ -20,7 +20,7 @@
 #' )
 #' dat <- cm_time2long(x)
 #' gantt_wrap(dat, "code", border.color = "black", border.size = .75)
-cm_t2l <-
+cm_2long <-
 function(time.list, list.var.name = "variable", list.var = TRUE, 
     start.end = TRUE){
     time.list <- time.list[sapply(time.list, function(x) all(Trim(x) != ""))]
