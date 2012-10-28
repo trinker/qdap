@@ -7,8 +7,9 @@
 #' @param list.var logical.  If TRUE creates a column for the data frame created by each time.list passed to cm_t2l
 #' @return Generates a data frame of start and end times for each code.
 #' @seealso 
-#' \code{\link{cm2long}}
-#' \code{\link{cm_time.temp}}
+#' \code{\link[qdap]{cm2long}}
+#' \code{\link[qdap]{cm_time.temp}}
+#' \code{\link[qdap]{cm_rtl}}
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding, time span
 #' @examples
@@ -23,8 +24,8 @@
 cm_t2l <-
 function(time.list, list.var.name = "variable", list.var = TRUE, 
     start.end = TRUE){
-    time.list <- time.list[sapply(time.list, function(x) all(Trim(x) != ""))]
     lv <- as.character(substitute(time.list))
+    time.list <- time.list[sapply(time.list, function(x) all(Trim(x) != ""))]
     bef <- sapply(time.list, length, USE.NAMES = FALSE)
     aft <- sapply(time.list, function(x) length(unlist(strsplit( x, ":"))), 
         USE.NAMES = FALSE)
