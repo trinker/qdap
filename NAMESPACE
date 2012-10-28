@@ -7,18 +7,18 @@ export(blank2NA)
 export(bracketX)                     
 export(bracketXtract)                                                               
 export(character.count)                                    
-export(cm2long)
+export(cm2long)             #export for now
 export(cm_range2long)
-#export(cm_r2l)  #don't export
-export(cm_blank)
+#export(cm_r2l)            #don't export
+export(cm_csv.temp)
 export(cm_combine)
-export(cm_fill)
+export(cm_fill)             #export for now
 export(cm_range.temp)
 #export(cm_t2l)          #don't export
 export(convert)           #remove later
 export(cm_time.temp)
 export(cm_time2long)
-export(cm_transform)
+export(cm_transform)       #export for now
 export(col.fn)
 export(coleman_liau)                                    
 export(colSplit)                     

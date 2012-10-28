@@ -5,7 +5,9 @@
 #' @param files csv file(s) to read.   
 #' @param a.names object names to assign the csv file(s) to.  If NULL assigns the csv to the name(s) of the csv file(s) in the global enviroment.
 #' @return Creates a directory with multiple csv files.  Silently returns the path of the directory.
-#' @seealso \code{\link[qdap]{mcsv_w}}
+#' @note Useful for reading in multiple csv files from cm_csv.temp for interaction with cm_range2long.
+#' @seealso \code{\link[qdap]{mcsv_w}},
+#' \code{\link[qdap]{cm_range2long}}
 #' @examples
 #' \dontrun{
 #' mtcarsb <- mtcars; CO2b <- CO2

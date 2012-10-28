@@ -11,19 +11,20 @@
 #' @param strip logical.  If TRUE all punctuation is removed.
 #' @return Generates a dataframe, and optional csv file, of individual words while maintaing demgraphic information.  If a vector of codes is provided the outcome is a matrix of words used by codes filled with zeros.  This dataframe is useful for dummy coded (1-yes code exists; 2-no it does not) representation of data and can be used for visualizations and statistical analysis.
 #' @seealso 
-#' \code{\link{cm_fill}}
-#' \code{\link{cm2long}}
+#' \code{\link{mcsv_r}}
+#' \code{\link{cm_range2long}}
+#' #' \code{\link{cm_fill}}
 #' \code{\link{cm_transform}}
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding
 #' @examples
 #' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
-#' cm_blank(DATA, "state", codes)
-#' cm_blank(DATA, "state", codes, transpose = TRUE)
-#' head(cm_blank(raj.act.1, "dialogue", codes))
-#' cm_blank(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
+#' cm_csv.temp(DATA, "state", codes)
+#' cm_csv.temp(DATA, "state", codes, transpose = TRUE)
+#' head(cm_csv.temp(raj.act.1, "dialogue", codes))
+#' cm_csv.temp(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
 #'
-cm_blank <- function(dataframe, text.var, codes = NULL, csv = FALSE, 
+cm_csv.temp <- function(dataframe, text.var, codes = NULL, csv = FALSE, 
     file.name = NULL, transpose = FALSE, strip =FALSE){
     tv <- as.character(dataframe[, text.var])
     if (strip) {
