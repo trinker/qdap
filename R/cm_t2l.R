@@ -18,9 +18,9 @@
 #'     B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.62:7.00, 9.00, 1.12.00:1.19.01"),
 #'     C = qcv(2.40:3.00, 5.01, 6.62:7.00, 9.00, 17.01)
 #' )
-#' dat <- cm_time2long(x)
+#' dat <- cm_t2l(x)
 #' gantt_wrap(dat, "code", border.color = "black", border.size = .75)
-cm_2long <-
+cm_t2l <-
 function(time.list, list.var.name = "variable", list.var = TRUE, 
     start.end = TRUE){
     time.list <- time.list[sapply(time.list, function(x) all(Trim(x) != ""))]
