@@ -9,7 +9,8 @@
 #' @seealso \code{\link[qdap]{mcsv_r}}
 #' @examples
 #' \dontrun{
-#' mcsv_w(mtcars, CO2, dir="foo", open=TRUE)
+#' a <- mcsv_w(mtcars, CO2, dir="foo")
+#' a
 #' delete("foo")
 #' }
 mcsv_w <-
