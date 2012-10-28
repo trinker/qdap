@@ -5,7 +5,7 @@
 #' @param \dots data.frame object(s) to write to a file
 #' @param dir optional directory names.  If NULL a directory will be created in the working directory with the data and time stamp as the folder name.
 #' @param open logical.  If TURE opens the directory upon completion.
-#' @return Creates a directory with multiple csv files.
+#' @return Creates a directory with multiple csv files.  Silently returns the path of the directory.
 #' @seealso \code{\link[qdap]{mcsv_r}}
 #' @examples
 #' \dontrun{
@@ -34,5 +34,5 @@ function(..., dir = NULL, open = FALSE){
             system(paste(Sys.getenv("R_BROWSER"), y))
         }
     }
-    return(y)
+    invisible(y)
 }
