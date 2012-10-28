@@ -18,6 +18,7 @@
 #' rm("mtcarsb", "CO2b")  # gone from .GlobalEnv
 #' mcsv_r(paste(a, nms, sep="/"), paste0("foo.dat", 1:2))
 #' foo.dat1; foo.dat2
+#' rm("foo.dat1", "foo.dat2")  # gone from .GlobalEnv
 #' delete("foo")
 #' }
 mcsv_r <-
