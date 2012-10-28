@@ -9,6 +9,7 @@ export(bracketXtract)
 export(character.count)                                    
 export(cm2long)
 #export(cm_range2long)
+export(cm_r2l)  #don't export
 export(cm_blank)
 export(cm_combine)
 export(cm_fill)
