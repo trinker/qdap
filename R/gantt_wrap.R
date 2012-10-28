@@ -61,7 +61,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
             hms.scale <- TRUE
         } else {
             hms.scale <- FALSE
-            if (comment(dataframe) == "cmtime" & xlab == "duration.default"){
+            if (comment(dataframe) == "cmrange" & xlab == "duration.default"){
                 xlab <- "Duration (words)"
             }
         }
