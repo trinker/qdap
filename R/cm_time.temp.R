@@ -23,6 +23,7 @@
 #' )
 #' cm_time2long(x)
 #' cm_time.temp(qcv(AA, BB, CC))
+#' }
 cm_time.temp <-
 function(codes, start = ":00", end = NULL, file=NULL) {
     if (!is.null(end)) {

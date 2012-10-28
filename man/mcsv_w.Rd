@@ -1,5 +1,5 @@
-\name{csv.dump}
-\alias{csv.dump}
+\name{mcsv_w}
+\alias{mcsv_w}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Create a directory and place multiple csv files there
