@@ -61,6 +61,9 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
             hms.scale <- TRUE
         } else {
             hms.scale <- FALSE
+            if (comment(dataframe) == "cmtime" & xlab == "duration.default"){
+                xlab <- "Duration (words)"
+            }
         }
     }
     plot.var2 <- as.character(substitute(plot.var))
