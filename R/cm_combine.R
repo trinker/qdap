@@ -1,3 +1,4 @@
+#I believe this combine's codes into one and optionally eliminates the old
 cm_combine <-
 function(dataframe, combined.columns, elim.old = FALSE) { 
     combo <- function(dat, comb, new.name, elim.old) {

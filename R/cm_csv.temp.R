@@ -24,7 +24,7 @@
 #' head(cm_csv.temp(raj.act.1, "dialogue", codes))
 #' cm_csv.temp(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
 #'
-cm_csv.temp <- function(dataframe, text.var, codes = NULL, csv = FALSE, 
+cm_csv.temp <- function(dataframe, text.var, codes = NULL, csv = TRUE, 
     file.name = NULL, transpose = FALSE, strip =FALSE){
     tv <- as.character(dataframe[, text.var])
     if (strip) {

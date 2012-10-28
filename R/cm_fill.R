@@ -11,17 +11,18 @@
 #' @return Generates a dummy coded dataframe.
 #' @note %% ~~further notes~~
 #' @seealso 
-#' \code{\link{cm_blank}}
+#' \code{\link{cm_csv.temp}}
 #' \code{\link{cm2long}}
 #' \code{\link{cm_transform}}
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding
 #' @examples
 #' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
-#' X <- cm_blank(DATA, "state", codes)
+#' X <- cm_csv.temp(DATA, "state", codes)
 #' cm_fill(X, list(dc=c(1:3, 5),  sf=c(4, 6:9, 11), wes=0, pol=0, rejk=0, lk=0, azx=1:30, mmm=5))
 #' cm_fill(X, list(sf=c(4, 6:9, 11), dc=c(1:3, 5), azx=1:30, mmm=5))
-#'
+#maybe rename cm_csv.fill
+#I believe the transform.code.matrix should be cm_transform
 cm_fill <-
 function(dataframe, ranges, value = 1, text.var = NULL, code.vars = NULL, 
     transform = FALSE) {
