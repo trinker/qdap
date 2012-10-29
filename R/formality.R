@@ -260,7 +260,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
                 geom_point(colour=point.colors[2], shape=point.pch, 
                     size=point.cex)  
             }                                                                     
-            suppressWarnings(gridExtra::grid.arrange(YY, XX,                         
+            suppressWarnings(grid.arrange(YY, XX,                         
                 ZZ, widths=c(.24, .47, .29), ncol=3))                                 
     }                                                                                
     class(o) <- "formality.measure"                                                  

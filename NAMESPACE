@@ -153,6 +153,7 @@ export(clean)
 export(reducer)
 export(reduceWORDS)   #nv
 import(ggplot2)
+export(grid.arrange)
 import(gdata)
 import(igraph)
 import(tm)
