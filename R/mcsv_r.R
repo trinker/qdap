@@ -38,7 +38,7 @@ function(files, a.names = NULL, l.name = NULL, list = TRUE){
     }))
     if (list) {
         L1 <- lapply(a.names, function(x){
-            get(a.names)
+            get(x)
         }) 
         names(L1) <- a.names
         if (is.null(l.name)){
