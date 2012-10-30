@@ -23,7 +23,7 @@
 #' cm_df.temp(DATA, "state", codes, transpose = TRUE)
 #' head(cm_df.temp(raj.act.1, "dialogue", codes))
 #' cm_df.temp(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
-cm_df.tem <- function(dataframe, text.var, codes = NULL, csv = TRUE, 
+cm_df.temp <- function(dataframe, text.var, codes = NULL, csv = TRUE, 
     file.name = NULL, transpose = FALSE, strip =FALSE){
     tv <- as.character(dataframe[, text.var])
     if (strip) {
