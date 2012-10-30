@@ -2,7 +2,7 @@
 #' 
 #' Transforms the range coding structure(s) from cm_df.temp (in list format) into a data frame of start and end durations in long format.
 #' 
-#' @param df.temp.obj a character vector of names of object(s) created by cm_df.temp
+#' @param df.temp.obj a character vector of names of object(s) created by cm_df.temp, a list of cm_df.temp cr4eated objects or a data frame created by cm_df.temp.
 #' @param v.name sn optional name for the column created for the list.var argument
 #' @param list.var logical.  If TRUE creates a column for the data frame created by each time.list passed to cm_t2l
 #' @param code.vars a character vector of code variables.  If NULL uses all variables from the first column after the column named word.num.
@@ -21,10 +21,21 @@
 cm_df2long <-
 function(df.temp.obj, v.name = "variable", list.var = TRUE, code.vars = NULL, 
     no.code = NA, add.start.end = TRUE, repeat.vars = NULL, 
-    rev.code = FALSE){
-    objs <- df.temp.obj
-    L1 <- lapply(objs, get)
-    names(L1) <- objs
+    rev.code = FALSE){ 
+    if (is.list(df.temp.obj)) { 
+        if (is.data.frame(df.temp.obj)){
+            objs <- as.character(substitute(df.temp.obj))
+            L1 <- list(df.temp.obj)
+            names(L1) <- objs    
+        } else {
+            objs <- names(df.temp.obj)
+            L1 <- df.temp.obj
+        }
+    } else {
+        objs <- df.temp.obj
+        L1 <- lapply(objs, get)
+        names(L1) <- objs
+    }
     if (is.null(code.vars)) {
         code.vars <- (1 + which(colnames(L1[[1]]) == "word.num")):ncol(L1[[1]])
     }
