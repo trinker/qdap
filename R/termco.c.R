@@ -38,6 +38,7 @@ function(termco.d.object, combined.columns, new.name, short.term = FALSE,
         as.numeric(as.character((x)))),
         check.names = FALSE)
   }
+browser()
   if (is.null(zero.replace)) {
     zero.replace <- termco.d.object$zero_replace
   }
@@ -79,7 +80,7 @@ function(termco.d.object, combined.columns, new.name, short.term = FALSE,
     }
   }
   if (is.list(combined.columns)){
-    trx <- function(i) {  
+    trx <- function(i) { 
       x <- transform(x, new.name2 = rowSums(x[, combined.columns[[i]]]), 
         check.names=FALSE)
       names(x)[ncol(x)] <- new.name[i]
@@ -113,18 +114,36 @@ function(termco.d.object, combined.columns, new.name, short.term = FALSE,
     }
   }
   if (is.numeric(zero.replace)){
-    p <- data.frame(sapply(subdf(x2, -1), function(x) 
-      as.numeric(as.character(x))), check.names=FALSE)
-    x2 <- data.frame(x2[, 1, drop=FALSE], p, check.names=FALSE)
-    p <- data.frame(sapply(subdf(y2, -1), function(x) 
-      as.numeric(as.character(x))), check.names=FALSE)
-    y2 <- data.frame(y2[, 1, drop=FALSE], p, check.names=FALSE)
+    if (nrow(x2) > 1) {
+      p <- data.frame(sapply(subdf(x2, -1), function(x) 
+        as.numeric(as.character(x))), check.names=FALSE)
+      x2 <- data.frame(x2[, 1, drop=FALSE], p, check.names=FALSE)
+    } else {
+
+      p <- sapply(subdf(x2, -1), function(x) as.numeric(as.character(x)))
+      x2 <- data.frame(c(x2[, 1, drop=FALSE], p), check.names=FALSE)
+
+    }
+    if (nrow(y2) > 1) {
+      p <- data.frame(sapply(subdf(y2, -1), function(x) 
+        as.numeric(as.character(x))), check.names=FALSE)
+      y2 <- data.frame(y2[, 1, drop=FALSE], p, check.names=FALSE)
+    } else {
+
+      p <- sapply(subdf(y2, -1), function(x) as.numeric(as.character(x)))
+      y2 <- data.frame(c(y2[, 1, drop=FALSE], p), check.names=FALSE)
+
+    }
   } 
   trnp <- termco.rnp(x, y2, output = output, digits = termco.d.object$digits)
   if (!is.numeric(zero.replace)) {
     y2 <- y
   }
-  DF <- data.frame(sapply(trnp, Trim), check.names=FALSE)
+  if (nrow(trnp) < 2) {
+    DF <- trnp
+  } else {
+    DF <- data.frame(sapply(trnp, Trim), check.names=FALSE)
+  }
   DF <- replacer(DF, "0(0)", with = zero.replace)
   DF <- replacer(DF, "0(0.00)", with = zero.replace)
   o <- list(raw = x2, prop = y2, rnp = DF, zero_replace = zero.replace,
