@@ -28,10 +28,10 @@
 mcsv_r <-
 function(files, a.names = NULL, l.name = NULL, list = TRUE){
     if (is.null(a.names)){
-        a.names <- sapply(files, function(x){
+        a.names <- unlist(lapply(files, function(x){
             v <- unlist(strsplit(x, "/|\\\\"))
             gsub(".csv", "", v)
-        })
+        }))
     }
     invisible(lapply(seq_along(files), function(i) {
         assign(a.names[i], read.csv(files[i]), envir = .GlobalEnv)
@@ -40,6 +40,7 @@ function(files, a.names = NULL, l.name = NULL, list = TRUE){
         L1 <- lapply(a.names, function(x){
             get(a.names)
         }) 
+        names(L1) <- a.names
         if (is.null(l.name)){
             l.name <- "L1"
         }
