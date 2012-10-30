@@ -1,5 +1,5 @@
-\name{cm_combine}
-\alias{cm_combine}
+\name{cm_df.combine}
+\alias{cm_df.combine}
 \title{
 Combine Multiple Codes Columns
 }

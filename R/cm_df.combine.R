@@ -1,5 +1,16 @@
+#' T
+#' 
+#' T
+#' 
+#' @param dataframe
+#' @param combined.columns
+#' @param elim.old
+#' @return 
+#' @seealso 
+#' \code{\link[stats]{dist}}
+#' @examples
 #I believe this combine's codes into one and optionally eliminates the old
-cm_combine <-
+cm_df.combine <-
 function(dataframe, combined.columns, elim.old = FALSE) { 
     combo <- function(dat, comb, new.name, elim.old) {
         DF <- data.frame(dat, as.numeric(rowSums(dat[, comb]) > 0))
