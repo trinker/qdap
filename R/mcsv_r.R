@@ -4,6 +4,8 @@
 #' 
 #' @param files csv file(s) to read.   
 #' @param a.names object names to assign the csv file(s) to.  If NULL assigns the csv to the name(s) of the csv file(s) in the global enviroment.
+#' @param l.name 
+#' @param list 
 #' @return Creates a directory with multiple csv files.  Silently returns the path of the directory.
 #' @note Useful for reading in multiple csv files from cm_csv.temp for interaction with cm_range2long.
 #' @seealso \code{\link[qdap]{mcsv_w}},
@@ -34,7 +36,6 @@ function(files, a.names = NULL, l.name = NULL, list = TRUE){
     invisible(lapply(seq_along(files), function(i) {
         assign(a.names[i], read.csv(files[i]), envir = .GlobalEnv)
     }))
-
     if (list) {
         L1 <- lapply(a.names, function(x){
             get(a.names)

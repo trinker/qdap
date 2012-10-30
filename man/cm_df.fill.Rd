@@ -1,5 +1,5 @@
-\name{cm_fill}
-\alias{cm_fill}
+\name{cm_df.fill}
+\alias{cm_df.fill}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Range Coding of a splitWord Matrix

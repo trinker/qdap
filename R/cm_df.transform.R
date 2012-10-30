@@ -1,4 +1,4 @@
-cm_transform <-
+cm_df.transform <-
 function(dataframe, text.var, code.vars = NULL) {
     DF <- data.frame(t(dataframe), stringsAsFactors = FALSE)
     if (!is.numeric(text.var)) {

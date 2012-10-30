@@ -1,5 +1,5 @@
-\name{cm2long}
-\alias{cm2long}
+\name{cm_df2long}
+\alias{cm_df2long}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Reshape a code matrix or data frame to a long data frame 

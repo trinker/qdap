@@ -13,18 +13,17 @@
 #' @seealso 
 #' \code{\link{mcsv_r}}
 #' \code{\link{cm_range2long}}
-#' #' \code{\link{cm_fill}}
-#' \code{\link{cm_transform}}
+#' #' \code{\link{cm_df.fill}}
+#' \code{\link{cm_df.transform}}
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding
 #' @examples
 #' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
-#' cm_csv.temp(DATA, "state", codes)
-#' cm_csv.temp(DATA, "state", codes, transpose = TRUE)
-#' head(cm_csv.temp(raj.act.1, "dialogue", codes))
-#' cm_csv.temp(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
-#'
-cm_csv.temp <- function(dataframe, text.var, codes = NULL, csv = TRUE, 
+#' cm_df.temp(DATA, "state", codes)
+#' cm_df.temp(DATA, "state", codes, transpose = TRUE)
+#' head(cm_df.temp(raj.act.1, "dialogue", codes))
+#' cm_df.temp(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
+cm_df.tem <- function(dataframe, text.var, codes = NULL, csv = TRUE, 
     file.name = NULL, transpose = FALSE, strip =FALSE){
     tv <- as.character(dataframe[, text.var])
     if (strip) {

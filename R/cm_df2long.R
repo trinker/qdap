@@ -1,7 +1,6 @@
-#' Takes a matrix and generates an adjacency matrix
+#' T
 #' 
-#' Takes a matrix (wfm) or termco object (.a, .c or .d) and generates an adjacency
-#' matrix for use with igraph
+#' T
 #' 
 #' @param dataframe
 #' @param code.vars
@@ -9,11 +8,11 @@
 #' @param add.start.end
 #' @param repeat.vars
 #' @param rev.code
-#' @return Generates an adjacency matrix
+#' @return 
 #' @seealso 
 #' \code{\link[stats]{dist}}
 #' @examples
-cm2long <- function(dataframe, code.vars, no.code = NA, 
+cm_df2long <- function(dataframe, code.vars, no.code = NA, 
     add.start.end = TRUE, repeat.vars = NULL, rev.code = FALSE){
     if (is.numeric(code.vars)) {
         code.vars <- colnames(dataframe)[code.vars]
