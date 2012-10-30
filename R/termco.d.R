@@ -24,7 +24,7 @@
 #' 
 termco.d <-
   function (text.var, grouping.var=NULL, match.string, short.term = FALSE,
-    ignore.case = TRUE, zero.replace = 0, output = "percent", digits = 2){
+    ignore.case = TRUE, zero.replace = 0, output = "percent", digits = 2, ...){
   NAME <- if (is.null(grouping.var)) {
     "all"
   } else {
@@ -38,11 +38,11 @@ termco.d <-
       G[length(G)]
     }
   }
-  x <- termco(text.var = strip(text.var, lower.case = FALSE), match.string = match.string, 
+  x <- termco(text.var = strip(text.var, lower.case = FALSE, ...), match.string = match.string, 
               grouping.var = grouping.var, ignore.case = ignore.case)
   names(x)[1] <- NAME
   y <- termco.p(tco = x, output = output, digits = digits)
-  if (is.null(grouping.var)){
+  if (is.null(grouping.var) & y[1, 1] != "all"){
     z <- termco.rnp(x, y, output = output)
     znull <- as.character(z$DF)
     names(znull) <- rownames(z)

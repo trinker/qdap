@@ -26,6 +26,10 @@ termco.rnp <-
         subdf(termco2, -c(1:2)))
     dims <- dim(DF)
     NMS <- colnames(DF)
+    if (is.null(dims)){
+        dims <- c(1, length(DF))
+        NMS <- names(DF)
+    }
     formatter <- function(x, output, digits) {
         numformat <- function(val, digits){
             sub("^(-?)0.", "\\1.", sprintf(paste0("%.", digits, "f"), 
@@ -49,4 +53,3 @@ termco.rnp <-
     DF <- data.frame(termco1[, 1:2], DF, check.names = FALSE)
     return(DF)
 }
-
