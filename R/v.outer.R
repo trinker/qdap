@@ -4,12 +4,20 @@ function(x, FUN, digits = 3, ...){
     if (is.matrix(x)) {
         x <- as.data.frame(x)
     }
+    if (is.list(x) & !is.data.frame(x)){
+        if (is.null(names(x))) {
+            names(x) <- paste0("X", seq_along(x))
+        }
+        nms <- names(x)   
+    } else {
+        nms <- colnames(x)
+    }
     z <- outer(
-      colnames(x), 
-      colnames(x), 
-      Vectorize(function(i,j) FUN(x[[i]], x[[j]], ...))
+      nms, 
+      nms, 
+      Vectorize(function(i,j) FUN(unlist(x[[i]]), unlist(x[[j]]), ...))
     )
-    dimnames(z) <- list(colnames(x), colnames(x))
+    dimnames(z) <- list(nms, nms)
     if (is.numeric(z)) {
         z <- round(z, digits = digits)
     }
