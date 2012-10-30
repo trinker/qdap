@@ -153,6 +153,7 @@ export(capitalizer)
 export(clean)
 export(reducer)
 export(reduceWORDS)   #nv
+export(v.outer)   #export but not docuemnted
 import(ggplot2)
 import(gridExtra)
 import(gdata)
