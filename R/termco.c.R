@@ -38,7 +38,6 @@ function(termco.d.object, combined.columns, new.name, short.term = FALSE,
         as.numeric(as.character((x)))),
         check.names = FALSE)
   }
-browser()
   if (is.null(zero.replace)) {
     zero.replace <- termco.d.object$zero_replace
   }
