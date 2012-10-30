@@ -7,8 +7,8 @@ export(blank2NA)
 export(bracketX)                     
 export(bracketXtract)                                                               
 export(character.count)                                    
-#export(cm_df2long)             #export for now
-export(cm_d2l)              #don't export
+export(cm_df2long)             #export for now
+#export(cm_d2l)              #don't export
 export(cm_range2long)
 #export(cm_r2l)            #don't export
 export(cm_df.temp)
