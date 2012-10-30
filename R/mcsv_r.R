@@ -30,7 +30,7 @@ function(files, a.names = NULL, l.name = NULL, list = TRUE){
     if (is.null(a.names)){
         a.names <- sapply(files, function(x){
             v <- unlist(strsplit(x, "/|\\\\"))
-            gsub(".csv", "", v[length(v)])
+            gsub(".csv", "", v)
         })
     }
     invisible(lapply(seq_along(files), function(i) {
