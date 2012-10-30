@@ -12,7 +12,7 @@
 #' @seealso 
 #' \code{\link[stats]{dist}}
 #' @examples
-cm_df2long <- function(dataframe, code.vars, no.code = NA, 
+cm_d2l <- function(dataframe, code.vars, no.code = NA, 
     add.start.end = TRUE, repeat.vars = NULL, rev.code = FALSE){
     if (is.numeric(code.vars)) {
         code.vars <- colnames(dataframe)[code.vars]
