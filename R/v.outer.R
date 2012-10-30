@@ -6,5 +6,8 @@ v.outer <- function(x, FUN, digits = 3, ...){
       Vectorize(function(i,j) FUN(x[,i], x[,j], ...))
     )
     dimnames(z) <- list(colnames(x), colnames(x))
-    round(z, digits = digits)
+    if (is.numeric(z) {
+        z <- round(z, digits = digits)
+    }
+    z
 }
