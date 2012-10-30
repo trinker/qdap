@@ -26,7 +26,7 @@ function(df.temp.obj, v.name = "variable", list.var = TRUE, code.vars = NULL,
     L1 <- lapply(objs, get)
     names(L1) <- objs
     if (is.null(code.vars)) {
-        code.vars <- which(colnames(L1[[1]]) == "word.num"):ncol(L1[[1]])
+        code.vars <- (1 + which(colnames(L1[[1]]) == "word.num")):ncol(L1[[1]])
     }
     L2 <- lapply(L1, function(x) { 
             cm_d2l(x, code.vars = code.vars, no.code=no.code, 
