@@ -10,6 +10,9 @@ function (text.var, grouping.var=NULL, match.list, short.term = FALSE,
     TD <- termco.d(text.var = text.var, grouping.var = grouping.var, 
         match.string = ML, ignore.case = ignore.case, zero.replace = zero.replace, 
         output = output, digits = digits, ...)
+    if (!lazy.term) {
+        CC <- lapply(CC, function(x) paste0("term(", x, ")"))
+    }
     if (is.list(preIND)) {
         if(length(IND) == sum(IND)){
             o <- TD
