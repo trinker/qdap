@@ -3,6 +3,7 @@ function (text.var, grouping.var=NULL, match.list, short.term = TRUE,
     ignore.case = TRUE, elim.old = TRUE, zero.replace = 0, 
     output = "percent", digits = 2, ...) {
     lazy.term <- TRUE
+    if(any(duplicated(names(match.list)))) stop("Repeated vector name in match.list")
     mprot <- names(match.list) != "" & sapply(match.list, length) == 1
     NAME <- if (is.null(grouping.var)) {
         "all"
