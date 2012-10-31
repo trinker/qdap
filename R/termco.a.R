@@ -60,7 +60,6 @@
 #' 
 #' with(dat2, termco.a(dialogue, person, match.list=ml, 
 #'     char.keep="@", output="proportion"))
-
 termco.a <-
   function (text.var, grouping.var=NULL, match.list, short.term = TRUE,
             ignore.case = TRUE, elim.old = TRUE, output = "percent", digits = 2, ...) {
