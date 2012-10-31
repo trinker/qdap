@@ -5,13 +5,13 @@
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
 #' @aliases termco.d print.termco_d
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param match.string %% ~~Describe \code{match.string} here~~
-#' @param grouping.var %% ~~Describe \code{grouping.var} here~~
-#' @param ignore.case %% ~~Describe \code{ignore.case} here~~
-#' @param zero.replace %% ~~Describe \code{zero.replace} here~~
-#' @param output %% ~~Describe \code{output} here~~
-#' @param digits %% ~~Describe \code{digits} here~~
+#' @param text.var text.var The text variable
+#' @param grouping.var The grouping variables.  Default NULL generates one word list for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
+#' @param match.string a vector of word bases to search for
+#' @param ignore.case logical.  If TRUE case is ignored.
+#' @param zero.replace value to replace 0 values with
+#' @param output Type of proportion output; either "proportion" (decimal format) or "percent".  Default is percent.
+#' @param digits  integer indicating the number of decimal places (round) or significant digits (signif) to be used. Negative values are allowed
 #' @return %% ~Describe the value returned %% If it is a LIST, use %%
 #' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 #' 'comp2'} %% ...
@@ -21,7 +21,6 @@
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
 termco.d <-
   function (text.var, grouping.var=NULL, match.string, short.term = FALSE,
     ignore.case = TRUE, zero.replace = 0, output = "percent", digits = 2, 
