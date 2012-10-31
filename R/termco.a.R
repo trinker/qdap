@@ -1,7 +1,8 @@
 termco.a <-
-function (text.var, grouping.var=NULL, match.list, short.term = FALSE,
+function (text.var, grouping.var=NULL, match.list, short.term = TRUE,
     ignore.case = TRUE, lazy.term = TRUE, elim.old = TRUE, zero.replace = 0, 
     output = "percent", digits = 2, ...) {
+    mprot <- names(match.list) != "" & sapply(match.list, length) == 1
     NAME <- if (is.null(grouping.var)) {
         "all"
     } else {
@@ -36,10 +37,20 @@ function (text.var, grouping.var=NULL, match.list, short.term = FALSE,
                 subdf <- function(df, ii) {
                   do.call("data.frame", c(as.list(df)[ii, drop=FALSE], check.names=FALSE))
                 }
-                INDS <- lapply(tailend, function(x) which(colnames(o[["raw"]]) == x))
+                INDS <- lapply(tailend, function(x) {
+                    x
+                    inds <- which(colnames(o[["raw"]]) == x)
+                    if(identical(inds, integer(0))){
+                        inds <- which(names(match.list) == bracketXtract(x))-1
+                    }
+                    inds
+                })
                 keeps <- c(1:2, sapply(INDS, max))
                 lapply(1:3, function(i) {
                         o[[i]] <<- subdf(o[[i]], keeps)
+                        pv <- match.list[mprot]
+                        pv2 <- colnames(o[[i]]) %in% paste0("term(", pv, ")")
+                        colnames(o[[i]])[pv2] <<- names(match.list)[pv2[-c(1:2)]]
                     }
                 )
             }
