@@ -24,7 +24,8 @@
 #' 
 termco.d <-
   function (text.var, grouping.var=NULL, match.string, short.term = FALSE,
-    ignore.case = TRUE, zero.replace = 0, output = "percent", digits = 2, ...){
+    ignore.case = TRUE, zero.replace = 0, output = "percent", digits = 2, 
+    lazy.term = TRUE, ...){
   NAME <- if (is.null(grouping.var)) {
     "all"
   } else {

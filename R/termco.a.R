@@ -1,7 +1,8 @@
 termco.a <-
 function (text.var, grouping.var=NULL, match.list, short.term = TRUE,
-    ignore.case = TRUE, lazy.term = TRUE, elim.old = TRUE, zero.replace = 0, 
+    ignore.case = TRUE, elim.old = TRUE, zero.replace = 0, 
     output = "percent", digits = 2, ...) {
+    lazy.term <- TRUE
     mprot <- names(match.list) != "" & sapply(match.list, length) == 1
     NAME <- if (is.null(grouping.var)) {
         "all"
