@@ -50,6 +50,12 @@
 #' dat$prop
 #' dat <- with(raj.act.1,  termco.a(dialogue, person, ml, 
 #'     short.term = FALSE, elim.old=FALSE))
+#'     
+#' dat2 <- data.frame(dialogue=c("@bryan is bryan good @br", 
+#'     "indeed", "@ brian"), person=qcv(A, B, A))
+#' 
+#' ml <- list(b2=c("bryan", "indeed"), bryan=c("bryan", "@ br", "@br"))
+#' with(dat2, termco.a(dialogue, person, match.list=ml, char.keep="@"))
 termco.a <-
   function (text.var, grouping.var=NULL, match.list, short.term = TRUE,
             ignore.case = TRUE, elim.old = TRUE, output = "percent", digits = 2, ...) {
