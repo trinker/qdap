@@ -2,6 +2,19 @@ termco.a <-
 function (text.var, grouping.var=NULL, match.list, short.term = FALSE,
     ignore.case = TRUE, lazy.term = TRUE, elim.old = TRUE, zero.replace = 0, 
     output = "percent", digits = 2, ...) {
+    NAME <- if (is.null(grouping.var)) {
+        "all"
+    } else {
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed = TRUE), 
+                function(x) x[length(x)])
+            paste(m, collapse = "&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G[length(G)]
+        }
+    }
     preIND <- match.list
     IND <- unlist(lapply(preIND, length))
     new.names <- paste0("term(", names(IND)[IND != 1], ")")
@@ -34,6 +47,11 @@ function (text.var, grouping.var=NULL, match.list, short.term = FALSE,
     } else {
         o <- TD
     }
+    o[1:3] <- lapply(o[1:3], function(x) {
+        colnames(x)[1] <- NAME
+        rownames(x) <- NULL
+        return(x)
+    })
     if (short.term) {
       o <- termco2short.term(o)
     }
