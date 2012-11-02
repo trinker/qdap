@@ -5,7 +5,7 @@ cm_se2vect <- function(start, end, n.words = NULL, safety = TRUE) {
     }
     if (safety) {
         y <- dat[, "start"]
-        if(!identical(y,sort(y))){
+        if(sum(diff(y) < 0) > 0){
             stop("each element of the start column is not growing")
         }
     }
