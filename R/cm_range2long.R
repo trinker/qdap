@@ -19,7 +19,7 @@
 #'     CC = qcv(terms='1:9, 100:150')
 #' )
 #' 
-#' foo  <- list(
+#' foo2  <- list(
 #'     AA = qcv(terms='40'),
 #'     BB = qcv(terms='50:90'),
 #'     CC = qcv(terms='60:90, 100:120, 150'),
