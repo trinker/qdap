@@ -18,8 +18,12 @@
 #'     CC = qcv(terms='60:90, 100:120, 150'),
 #'     DD = qcv(terms='')
 #' )
-cm_r2l <- function(range.list, v.name = "variable", list.var = TRUE){
+cm_r2l <- 
+function(range.list, v.name = "variable", list.var = TRUE){
     lv <- as.character(substitute(range.list))
+    if (length(lv) > 1) {
+        lv <- paste0("X", lv[length(lv)])
+    }
     range.list <- range.list[sapply(range.list, function(x) all(Trim(x) != ""))]
     bef <- sapply(range.list, length, USE.NAMES = FALSE)
     aft <- sapply(range.list, function(x) length(unlist(strsplit( x, ":"))), 
