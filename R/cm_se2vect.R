@@ -6,7 +6,7 @@ function(start, end, n.words = NULL, safety = TRUE) {
     }
     if (safety) {
         y <- dat[, "start"]
-        if(any(sapply(seq_along(y)[-length(y)], function(i) y[i] > y[i+1]))){
+        if(!identical(y,sort(y))){
             stop("each element of the start column is not growing")
         }
     }
