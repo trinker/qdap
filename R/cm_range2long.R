@@ -15,7 +15,7 @@
 #' @examples
 #' foo <- list(
 #'     AA = qcv(terms='1'),
-#'     BB = qcv(terms='1:2, 3:10, 9'),
+#'     BB = qcv(terms='1:2, 3:10, 19'),
 #'     CC = qcv(terms='1:9, 100:150')
 #' )
 #' 

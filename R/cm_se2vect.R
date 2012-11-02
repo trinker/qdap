@@ -1,8 +1,7 @@
-cm_se2vect <-
-function(start, end, n.words = NULL, safety = TRUE) {
+cm_se2vect <- function(start, end, n.words = NULL, safety = TRUE) {
     dat <- data.frame(start =start, end = end)
     if (is.null(n.words)){
-        n.words <- max(dat$end) - 1
+        n.words <- max(dat$end)
     }
     if (safety) {
         y <- dat[, "start"]
@@ -11,6 +10,6 @@ function(start, end, n.words = NULL, safety = TRUE) {
         }
     }
     x <- rep(0, n.words)
-    x[unlist(lapply(1:nrow(dat), function(i) dat$start[i]:(dat$end[i]-1)))] <- 1
+    x[unlist(lapply(1:nrow(dat), function(i) dat$start[i]:(dat$end[i])))] <- 1
     x
 }
