@@ -88,4 +88,7 @@ function(dataframe, time.var = NULL, code.var = "code",
         list(mean=means, sd=sds, n=ns, combined=noquote(comb), standardized=stand)
     }
     lapply(L5, FUN)
+    o <- lapply(L5, FUN)
+    class(o) <- "cm.dist"
+    retuen(o)
 }
