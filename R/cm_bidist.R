@@ -19,7 +19,6 @@ function(code_x, code_y, grouping.var = NULL) {
             min(abs(c(sdif, edif)))
         }
     )
-    Dnc[is.infinite(Dnc)] <- NA
     Dc <- sapply(1:nrow(x), function(i) {
         FUN <- function(xstart, xend, ystart){
              max(0, min(ystart[ystart > xstart] - xend))
@@ -28,8 +27,9 @@ function(code_x, code_y, grouping.var = NULL) {
         }
     )
     Dc[is.infinite(Dc)] <- NA
-    v <- list(associated_distance = Dnc, mean.sd_assoc_dist = c(mean(na.omit(Dnc)), sd(na.omit(Dnc))), 
-        causal_distance = Dc, mean.sd_causal_dist = c(mean(na.omit(Dc)), sd(na.omit(Dc))))
+    v <- list(associated_distance = Dnc, mean.sd.n_assoc_dist = c(mean(na.omit(Dnc)), 
+        sd(na.omit(Dnc)), length(na.omit(Dnc))), causal_distance = Dc, 
+        mean.sd.n_causal_dist = c(mean(na.omit(Dc)), sd(na.omit(Dc)), length(na.omit(Dc))))
     v2 <- invisible(lapply(v, function(x){
         x[is.nan(x)] <- NA
         return(x)
