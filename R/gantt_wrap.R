@@ -14,7 +14,7 @@
 #' @param transform logical.  if TRUE the repeated facets will be transformed from stacked to side by side.
 #' @param minor.line.freq a numeric value for frequency of minor grid lines.
 #' @param major.line.freq a numeric value for frequency of major grid lines.
-#' @param sig.dig.line.freq An internal rounding factor.  Generally, default value surfices.
+#' @param sig.dig.line.freq An internal rounding factor for minor and major line freq.  Generally, default value of 1 suffices for larger range of x scale may need to be set to -2..
 #' @param hms.scale logical.  If TURE converts scale to h:m:s format.  Default NULL attempts to detect if object is a cm_time2long object
 #' @param scale should scales be fixed ("fixed", the default), free ("free"), or free in one dimension ("free_x", "free_y")
 #' @param space if "fixed", the default, all panels have the same size. If "free_y" their height will be proportional to the length of the y scale; if "free_x" their width will be proportional to the length of the x scale; or if "free" both height and width will vary. This setting has no effect unless the appropriate scales also vary.
@@ -48,7 +48,6 @@
 #' x <- gantt_wrap(dat3, fam.aff_sex, facet.vars = "act", 
 #'     title = "Repeated MeasuresGantt Plot")
 #' x + scale_color_manual(values=rep("black", length(levels(dat3$fam.aff_sex)))) 
-#' #sig.dig.line.freq note this used to be set to -2 but I set it to 1 to get vert lines to print
 gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.default", rev.factor = TRUE,
