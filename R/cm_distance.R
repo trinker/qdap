@@ -35,7 +35,7 @@
 cm_distance <-
 function(dataframe, time.var = NULL, code.var = "code",
     causal = FALSE, start.var = "start", end.var = "end", mean.digits = 2, 
-    sd.digits = 2) {
+    sd.digits = 2, stan.digits = 2) {
     if (!is.null(time.var)) {
         L1 <- split(dataframe, dataframe[, time.var])
     } else {
@@ -83,7 +83,7 @@ function(dataframe, time.var = NULL, code.var = "code",
             mapply(pfun, means, sds, ns), fixed=TRUE)
         dim(comb) <- DIM
         dimnames(comb) <- list(rownames(means), colnames(means))
-        stand <- means/sds
+        stand <- round(means/sds, digits=stan.digits)
         stand[is.nan(stand)] <- NA
         list(mean=means, sd=sds, n=ns, combined=noquote(comb), standardized=stand)
     }
