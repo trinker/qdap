@@ -2,10 +2,10 @@
 \alias{cm_distance}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+Distance Matrix Between Codes
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Generate distance measures to assertain a mean distance emasure between codes.
 }
 \usage{
 cm_distance(dataframe, time.var = NULL, code.var = "code", causal = FALSE, start.var = "start", end.var = "end", mean.digits = 3, sd.digits = 3, safety = TRUE)
