@@ -11,7 +11,7 @@
 #' @param end.var the name of the end variable column.  Defaults to "end" as out putted by x2long family
 #' @param mean.digits the number of digits to be displayed in the mean matrix
 #' @param sd.digits the number of digits to be displayed in the sd matrix
-#' @return A list of lists per time variable: 
+#' @return An object of the class cm.dist.  This is a list of n lists with the following components per each list (time.var): 
 #' \item{mean}{A distance matrix of average distances between codes}
 #' \item{sd}{A matrix of standard deviations of distances between codes}
 #' \item{n}{A matrix of counts of distances between codes}
@@ -31,7 +31,10 @@
 #'     DD = qcv(terms='')
 #' )
 #' (dat <- cm_range2long(foo, foo2, v.name = "time"))
-#' cm_distance(dat, time.var = "time", causal=T)
+#' (out <- cm_distance(dat, time.var = "time", causal=T))
+#' names(out)
+#' names(out$foo2)
+#' out$foo2
 cm_distance <-
 function(dataframe, time.var = NULL, code.var = "code",
     causal = FALSE, start.var = "start", end.var = "end", mean.digits = 2, 
