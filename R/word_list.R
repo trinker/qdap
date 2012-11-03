@@ -16,6 +16,7 @@
 #' \item{fwl}{frequency word list; a data frame of words and correspnding frequency counts}
 #' \item{fswl}{fequency stopword word list; same as fwl but with stopwords removed}
 #' \item{rfswl}{reduced frequency stopword word list; same as fswl but truncated to n rows}
+#' @references A matrix of standard deviations of distances between codes
 #' @keywords word list
 #' @examples
 #' XX <-word_list(raj.act.1$dialogue)
