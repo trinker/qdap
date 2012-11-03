@@ -48,11 +48,12 @@
 #' x <- gantt_wrap(dat3, fam.aff_sex, facet.vars = "act", 
 #'     title = "Repeated MeasuresGantt Plot")
 #' x + scale_color_manual(values=rep("black", length(levels(dat3$fam.aff_sex)))) 
+#' #sig.dig.line.freq note this used to be set to -2 but I set it to 1 to get vert lines to print
 gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.default", rev.factor = TRUE,
     transform = FALSE, ncol = NULL, minor.line.freq = NULL, 
-    major.line.freq = NULL, sig.dig.line.freq = -2, hms.scale = NULL, 
+    major.line.freq = NULL, sig.dig.line.freq = 1, hms.scale = NULL, 
     scale = NULL, space = NULL, size = 3, rm.horiz.lines = FALSE, x.ticks = TRUE, 
     y.ticks = TRUE, legend.position = NULL, bar.color = NULL,
     border.color = NULL, border.size = 2, border.width = .1, constrain = TRUE) { 
