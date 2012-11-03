@@ -90,5 +90,5 @@ function(dataframe, time.var = NULL, code.var = "code",
     lapply(L5, FUN)
     o <- lapply(L5, FUN)
     class(o) <- "cm.dist"
-    retuen(o)
+    return(o)
 }
