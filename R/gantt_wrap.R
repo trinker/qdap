@@ -25,7 +25,7 @@
 #' @param legend.position the position of legends. ("left", "right", "bottom", "top", or two-element numeric vector)
 #' @param bar.color optional color to constrain all bars
 #' @param border.color the color to plot border around Gantt bars (default is NULL)
-#' @param border.size the size to plot borders around Gantt bars. Controls length (width also controlled if not specified).
+#' @param border.size an integer value for the size to plot borders around Gantt bars. Controls length (width also controlled if not specified).
 #' @param border.width controls broder width around Gantt bars.  Use a numeric value in addition to border size if plot borders appear disproportional.
 #' @param constrain logical.  If TRUE the Gantt bars touch the edge of the graph.
 #' @return Returns a Gantt style visualization.
@@ -52,7 +52,7 @@ gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL, 
     ylab = as.character(plot.var), xlab = "duration.default", rev.factor = TRUE,
     transform = FALSE, ncol = NULL, minor.line.freq = NULL, 
-    major.line.freq = NULL, sig.dig.line.freq = -2, hms.scale = NULL, 
+    major.line.freq = NULL, sig.dig.line.freq = 1, hms.scale = NULL, 
     scale = NULL, space = NULL, size = 3, rm.horiz.lines = FALSE, x.ticks = TRUE, 
     y.ticks = TRUE, legend.position = NULL, bar.color = NULL,
     border.color = NULL, border.size = 2, border.width = .1, constrain = TRUE) { 

@@ -20,7 +20,7 @@
 #'     C = qcv(2.40:3.00, 5.01, 6.62:7.00, 9.00, 17.01)
 #' )
 #' dat <- cm_time2long(x)
-#' gantt_wrap(dat, "code", border.color = "black", border.size = .75)
+#' gantt_wrap(dat, "code", border.color = "black", border.size = 5)
 cm_time2long <-
 function(..., v.name = "variable", list.var = TRUE, 
     start.end = FALSE){
