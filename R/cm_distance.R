@@ -35,7 +35,7 @@
 #' names(out)
 #' names(out$foo2)
 #' out$foo2
-cm_distance <-
+cm_distance <- 
 function(dataframe, time.var = NULL, code.var = "code",
     causal = FALSE, start.var = "start", end.var = "end", mean.digits = 2, 
     sd.digits = 2, stan.digits = 2) {
@@ -43,7 +43,8 @@ function(dataframe, time.var = NULL, code.var = "code",
         L1 <- split(dataframe, dataframe[, time.var])
     } else {
         L1 <- list(dataframe)
-    }
+        names(L1) <- as.character(substitute(dataframe))
+    }   
     L2 <- lapply(L1, function(x) split(x, x[, code.var]))   
     NMS <- lapply(L2, names)
     NMS <- unlist(lapply(seq_along(NMS), function(i) {
@@ -90,7 +91,6 @@ function(dataframe, time.var = NULL, code.var = "code",
         stand[is.nan(stand)] <- NA
         list(mean=means, sd=sds, n=ns, combined=noquote(comb), standardized=stand)
     }
-    lapply(L5, FUN)
     o <- lapply(L5, FUN)
     class(o) <- "cm.dist"
     return(o)
