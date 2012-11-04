@@ -16,7 +16,7 @@
 #' \item{sd}{A matrix of standard deviations of distances between codes}
 #' \item{n}{A matrix of counts of distances between codes}
 #' \item{combined}{A matrix of combined mean, sd and n of distances between codes}
-#' \item{standardized}{A matrix of standardized values of distances between codes}
+#' \item{standardized}{A matrix of standardized values of distances between codes.  The closer a value is to zero the closer two codes relate.}
 #' @keywords distance
 #' @examples
 #' foo <- list(
