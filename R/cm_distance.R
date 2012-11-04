@@ -42,7 +42,7 @@ function(dataframe, time.var = NULL, code.var = "code",
     if (!is.null(time.var)) {
         L1 <- split(dataframe, dataframe[, time.var])
     } else {
-        L1 <- dataframe
+        L1 <- list(dataframe)
     }
     L2 <- lapply(L1, function(x) split(x, x[, code.var]))   
     NMS <- lapply(L2, names)
