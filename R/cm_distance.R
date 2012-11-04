@@ -35,6 +35,19 @@
 #' names(out)
 #' names(out$foo2)
 #' out$foo2
+#' #========================================
+#' x <- list(
+#'     transcript_time_span = qcv(00:00 - 1:12:00),
+#'     A = qcv(terms = "2.40:3.00, 6.62:7.00, 9.00, 10.00:11:00, 59.56"),
+#'     B = qcv(terms = "3.01:3.02, 5.01,  19.00, 1.12.00:1.19.01"),
+#'     C = qcv(terms = "2.40:3.00, 5.01, 6.62:7.00, 9.00, 17.01")
+#' )
+#' dat <- cm_time2long(x)
+#' gantt_wrap(dat, "code", border.color = "black", border.size = 5, sig.dig.line.freq = -2)
+#' a <- cm_distance(dat)
+#' names(a)
+#' names(a$dat)
+#' a$dat
 cm_distance <- 
 function(dataframe, time.var = NULL, code.var = "code",
     causal = FALSE, start.var = "start", end.var = "end", mean.digits = 2, 
