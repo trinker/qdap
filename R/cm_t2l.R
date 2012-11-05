@@ -94,13 +94,6 @@ function(time.list, list.var.name = "variable", list.var = TRUE,
     x[-1] <- lapply(seq_along(x)[-1], function(i) {
         x[[i]][unlist(COLneg[i - 1])]
     })
-    x[-1] <- lapply(seq_along(x[-1]), function(i) {
-        if (all(COLneg[[i]])) {
-            gsub(",", "", x[-1][[i]])
-        } else {
-            x[-1][i]
-        }
-    })
     append2 <- function(x, y = ":", z) {
         lapply(z, function(z) {
             x <<- append(x, y, after = z)
@@ -129,6 +122,18 @@ function(time.list, list.var.name = "variable", list.var = TRUE,
         }
     })
     names(x3) <- names(x)[-1]
+    x3 <- lapply(x3, function(x) {
+        coms <- substring(as.character(x[, 1]), nchar(as.character(x[, 1])))
+        if(any(coms == ",")) {
+            x[, 1:2] <- lapply(x, function(var) {
+                gsub(",", "", as.character(var), fixed=TRUE)
+            })
+            x
+        } else {
+            x
+        }
+
+    })
     tonum <- function(z){
         v <- apply(do.call(rbind, strsplit(z, "\\.")), 2, as.numeric)
         v[, 1]*60^2 + v[, 2]*60 + v[, 3]
