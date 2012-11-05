@@ -94,6 +94,13 @@ function(time.list, list.var.name = "variable", list.var = TRUE,
     x[-1] <- lapply(seq_along(x)[-1], function(i) {
         x[[i]][unlist(COLneg[i - 1])]
     })
+    x[-1] <- lapply(seq_along(x[-1]), function(i) {
+        if (all(COLneg[[i]])) {
+            gsub(",", "", x[-1][[i]])
+        } else {
+            x[-1][i]
+        }
+    })
     append2 <- function(x, y = ":", z) {
         lapply(z, function(z) {
             x <<- append(x, y, after = z)
