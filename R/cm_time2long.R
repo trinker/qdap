@@ -36,10 +36,9 @@ function(..., v.name = "variable", list.var = TRUE,
         m <- x[!sapply(x, is.null)]
         if (!identical(as.character(m), character(0))) {
             message("Warning: possible errors not found:\n")
-            return(m)
+            print(m); stop("Check warnings")
         }  
     }  
-
     L2 <- lapply(L1, cm_t2l, list.var = FALSE, start.end = start.end)
     if (list.var) {
         L2 <- lapply(seq_along(L2), function(i) data.frame(L2[[i]], 
