@@ -19,6 +19,7 @@ export(cm_range.temp)
 export(cm_t2l)          #don't export
 export(proximaty)        #EXPORT FOR NOW FOR cm_distance
 export(cm_describe)      #EXPORT FOR NOW FOR cm_distance
+export(cm_debug)
 export(cm_bidist)        
 export(cm_se2vect)       #EXPORT FOR NOW FOR cm_distance
 export(convert)           #remove later
