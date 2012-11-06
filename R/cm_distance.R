@@ -5,6 +5,7 @@
 #' @aliases word_list qda print.qda
 #' @param dataframe a data frame from the cm_x2long family (cm_range2long; cm_df2long; cm_time2long)
 #' @param time.var an optional variable to split the dataframe by (if you have data that is by various times this must be supplied).
+#' @param parallel logical.  If TRUE runs the cm_distance on multiple cores.  This is effective with larger data sets but may actually be slower with smaller data sets.
 #' @param code.var the name of the code variable column.  Defaults to "codes" as out putted by x2long family
 #' @param causal logical.  If TRUE measures the distance ebtween x and y given that x must procede y
 #' @param start.var the name of the start variable column.  Defaults to "start" as out putted by x2long family
@@ -49,7 +50,7 @@
 #' names(a$dat)
 #' a$dat
 cm_distance <- 
-function(dataframe, time.var = NULL, code.var = "code",
+function(dataframe, time.var = NULL, parallel = FALSE, code.var = "code",
     causal = FALSE, start.var = "start", end.var = "end", mean.digits = 2, 
     sd.digits = 2, stan.digits = 2) {
     DIST <- function(DF, CV= code.var, 
@@ -102,8 +103,18 @@ function(dataframe, time.var = NULL, code.var = "code",
     } else {
         L1 <- list(dataframe)
         names(L1) <- as.character(substitute(dataframe))
-    }   
-    o <- lapply(L1, DIST)
+    }  
+    if (parallel){
+        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
+        clusterExport(cl=cl, varlist=c("dataframe", "time.var", "code.var",
+        "causal", "start.var", "end.var", "mean.digits", "sd.digits", 
+        "stan.digits", "cm_se2vect", "v.outer", "cm_bidist", "mgsub"), 
+        envir = environment())
+        o <- parLapply(cl, L1, DIST)
+        stopCluster(cl)
+    } else { 
+        o <- lapply(L1, DIST)
+    }
     class(o) <- "cm.dist"
     return(o)
 }

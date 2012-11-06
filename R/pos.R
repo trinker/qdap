@@ -5,6 +5,7 @@
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
 #' @param text.var %% ~~Describe \code{text.var} here~~
+#' @param parallel logical.  If TRUE runs the cm_distance on multiple cores.  This is effective with larger data sets but may actually be slower with smaller data sets.
 #' @param na.omit %% ~~Describe \code{na.omit} here~~
 #' @param digits %% ~~Describe \code{digits} here~~
 #' @param progress.bar %% ~~Describe \code{progress.bar} here~~
