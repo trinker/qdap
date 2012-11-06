@@ -155,7 +155,8 @@ function(time.list, list.var.name = "variable", list.var = TRUE,
         }
     })
     DF <- do.call(rbind, x3)
-    DF[, 3] <- DF[, 3] + 1
+#DF[, 3] <- DF[, 3] + 1            #REMOVE LATER IF NO PROLEMS ARISE
+    DF[, 2] <- DF[, 2] - 1
     DF$Start <- convert(DF$start)
     DF$End <- convert(DF$end)
     if (list.var) {
