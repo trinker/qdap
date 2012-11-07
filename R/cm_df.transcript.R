@@ -4,7 +4,7 @@
 #' 
 #' @param text.var text.var The text variable
 #' @param grouping.var The grouping variables.  Default NULL generates one word list for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
-#' @param file A connection, or a character string naming the file to print to (e.g. .doc, .docx, .txt).
+#' @param file A connection, or a character string naming the file to print to (e.g. .doc, .txt).
 #' @param indent Number of spaces to indent.
 #' @param width Width to output the file (defaults to 70; this is generally a good width and indent for a .docx file).
 #' @return Returns a transcript by grouping variable with word number above each word.  This makes use with cm_df2long transfer/usage easier because the researcher has coded on a transcript with the numeric word index already.
