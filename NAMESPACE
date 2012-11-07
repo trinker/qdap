@@ -13,13 +13,14 @@ export(cm_range2long)
 export(cm_r2l)            #don't export
 export(cm_distance)
 export(cm_df.temp)
+export(cm_df.transcript)
 export(cm_df.combine)
 export(cm_df.fill)             #export for now
 export(cm_range.temp)
 export(cm_t2l)          #don't export
 export(proximaty)        #EXPORT FOR NOW FOR cm_distance
 export(cm_describe)      #EXPORT FOR NOW FOR cm_distance
-export(cm_debug)
+export(cm_debug)        #EXPORT FOR NOW FOR cm_time2long
 export(cm_bidist)        
 export(cm_se2vect)       #EXPORT FOR NOW FOR cm_distance
 export(convert)           #remove later
@@ -65,7 +66,8 @@ export(mcsv_r)
 export(merge.all)                    
 export(multiscale)
 export(multigsub)
-export(mgsub)                       
+export(mgsub)          
+export(numbtext)             #don't export later
 export(outlier.detect)                  
 export(outlier.labeler)   
 export(paste2)                       
@@ -104,6 +106,7 @@ export(rm_row)
 export(Search)                      
 export(sentFind)                     
 export(sentSplit)  
+export(sentCombine)        #Export for now
 export(scrubber)
 export(SMOG)  
 export(spaste)
