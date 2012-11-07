@@ -2,10 +2,10 @@
 \alias{cm_df.transcript}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+Transcript With Word Number
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Out put a transcript with word  number/index above for easy input back into qdap after coding.
 }
 \usage{
 cm_df.transcript(text.var, grouping.var, txt.file = NULL, indent = 4, width = 80)
