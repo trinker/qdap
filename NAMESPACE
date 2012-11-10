@@ -14,6 +14,7 @@ export(cm_r2l)            #don't export
 export(cm_distance)
 export(cm_df.temp)
 export(cm_df.transcript)
+export(cm_long2dummy)
 export(cm_df.combine)
 export(cm_df.fill)             #export for now
 export(cm_range.temp)
