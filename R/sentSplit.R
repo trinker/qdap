@@ -18,8 +18,6 @@
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
-#' 
 sentSplit <-
 function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,  
   rm.bracket = TRUE, stem.col = TRUE, text.place = 'right', ...) {

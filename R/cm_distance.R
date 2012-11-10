@@ -2,7 +2,6 @@
 #' 
 #' Generate distance measures to assertain a mean distance emasure between codes.
 #' 
-#' @aliases word_list qda print.qda
 #' @param dataframe a data frame from the cm_x2long family (cm_range2long; cm_df2long; cm_time2long)
 #' @param time.var an optional variable to split the dataframe by (if you have data that is by various times this must be supplied).
 #' @param parallel logical.  If TRUE runs the cm_distance on multiple cores.  This is effective with larger data sets but may actually be slower with smaller data sets.
