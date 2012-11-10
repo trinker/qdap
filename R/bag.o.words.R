@@ -5,7 +5,7 @@
 #' @param text.var The text variable
 #' @param \\ldots further arguments passed to strip function
 #' @return Returns a vector of striped words.
-#' @seealso \code{\link[qdap]{strip}},, \code{\link[qda]{breaker}}
+#' @seealso \code{\link[qdap]{strip}}, \code{\link[qda]{breaker}}
 #' @keywords bag of words
 #' @examples
 #' bag.o.words(DATA$state)

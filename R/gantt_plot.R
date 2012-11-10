@@ -4,7 +4,7 @@
 #'
 #' @param text.var The text variable    
 #' @param grouping.var The grouping variables. Also takes a single grouping variable or a list of 1 or more grouping variables.
-#' @param rm.var an optional single vector or list of 1 or 2 of repeated emasures to facet by     
+#' @param rm.var an optional single vector or list of 1 or 2 of repeated measures to facet by     
 #' @param units       
 #' @param col.sep     
 #' @param \\ldots Other arguments passed to gantt_wrap 

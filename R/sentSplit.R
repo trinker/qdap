@@ -4,8 +4,8 @@
 #' 
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
-#' @param dataframe %% ~~Describe \code{dataframe} here~~
-#' @param text.var %% ~~Describe \code{text.var} here~~
+#' @param dataframe A dataframe that contains the person variable.
+#' @param text.var The text variable.
 #' @param splitpoint %% ~~Describe \code{splitpoint} here~~
 #' @param rnames %% ~~Describe \code{rnames} here~~
 #' @param text.place %% ~~Describe \code{text.place} here~~
