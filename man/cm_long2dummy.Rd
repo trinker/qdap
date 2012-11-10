@@ -2,10 +2,10 @@
 \alias{cm_long2dummy}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+Stretch and Dummy Code cm_xxx2long 
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Stretches and dummy codes a cm_xxx2long dataframe to allow for combining columns.
 }
 \usage{
 cm_long2dummy(dataframe, repmes = NULL, code = "code", start = "start", end = "end")
