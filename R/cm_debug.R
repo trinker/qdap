@@ -2,13 +2,12 @@
 #' 
 #' Debug a list of time span codes for cm_time2long
 #' 
-#' @aliases termco.d print.termco_d
 #' @param cm.list.obj an object being prepared for the cm_time2long function
 #' @return Returns possible bugs if any 
 #' @keywords debug
 #' @examples
 #' video3 <- list(
-#'     transcript_time_span = qcv(3:30 - 18:30),
+#'     transcript_time_span = qcv(terms='3:30 - 18:30'),
 #'     A2 = qcv(terms=''),
 #'     B1 = qcv(terms='3:33, 3.35, 3.39, 3.43:3.44, 3.50, 3.52:3.53, 
 #'         3.56, 4.12, 4.20, 4.30, 4.32, 4.35, 4.41, 4.52:4.53, 5.06'),
@@ -63,7 +62,7 @@ function(cm.list.obj) {
     if (identical(as.character(L3), character(0))) {
         message("Obvious errors not found.")
     } else {
-        message("Possible errors not found:")
+        message("Possible errors found:")
         L3
     }
 }
