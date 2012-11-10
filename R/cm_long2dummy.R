@@ -7,7 +7,7 @@
 #' @param code A character argument of the name of a repeated measures column.  Default is "code".
 #' @param start A character argument of the name of a repeated measures column.  Default is "start".
 #' @param end A character argument of the name of a repeated measures column.  Default is "end".
-#' @return Returns a stretched and dummy coded dataframe
+#' @return Returns a dataframe or a list of stretched and dummy coded dataframe(s)
 #' @seealso \code{\link[qdap]{cm_range2long}},
 #' \code{\link[qda]{cm_time2long}},
 #' \code{\link[qda]{cm_df2long}}
@@ -61,5 +61,10 @@ function(dataframe, rm.var = NULL,
         }))
         data.frame(mat)
     }
-    lapply(L1, function(x) dummy(dat=x, code = code, start = start, end = end))
+    L5 <- lapply(L1, function(x) dummy(dat=x, code = code, start = start, end = end))
+    if (is.null(rm.var)) {
+        L5 <- data.frame(L5)
+        colnames(L5) <- gsub("x,", "", colnames(L5) )
+    }
+    return(L5)
 }
