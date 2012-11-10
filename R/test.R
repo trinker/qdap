@@ -40,26 +40,26 @@ function(dataframe, rm.var = NULL,
         L1 <- list(dataframe)
         names(L1) <- as.character(substitute(dataframe))
     }
-    dummy <- function(dat, code, start, end){
-        L2 <- split(dat, dat[, code])
-        inc <- function(dataframe, start, end) {
-            any(diff(c(apply(dataframe[, c(start, end)], 1, c))) < 0)
+    dummy <- function(dat, codeb, startb, endb){
+        L2 <- split(dat, dat[, codeb])
+        inc <- function(dataframe, startc, endc) {
+            any(diff(c(apply(dataframe[, c(startb, endb)], 1, c))) < 0)
         }
-        if(any(sapply(L2, function(x) inc(x, start = start, end = end)))) {
-            stop("Code values not increasing.  Possible missing rm.var argument.")
+        if(any(sapply(L2, function(x) inc(x, startc = startb, endc = endb)))) {
+            stop("Codeb values not increasing.  Possible missing rm.var argument.")
         }
-        nr <- max(sapply(L2, function(x) max(x[, end])))
+        nr <- max(sapply(L2, function(x) max(x[, endb])))
         nc <- length(L2)
         mat <- matrix(rep(0, nr*nc), ncol=nc)
         colnames(mat) <- names(L2)
         yes <- lapply(L2, function(x) {
             c(unique(unlist(sapply(1:nrow(x), 
-                function(i) x[i, start]:x[i, end]))))
+                function(i) x[i, startb]:x[i, endb]))))
         })
         invisible(lapply(seq_along(yes), function(i){
             mat[yes[[i]], i] <<- 1
         }))
         data.frame(mat)
     }
-    lapply(L1, function(x) dummy(dat=x, code = code, start = start, end = end))
+    lapply(L1, function(x) dummy(dat=x, codeb = code, startb = start, endb = end))
 }
