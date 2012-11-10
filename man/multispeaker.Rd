@@ -2,10 +2,10 @@
 \alias{multispeaker}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+Break and Stretch if Multiple Persons per Cell 
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Look for cells with multiple perople and create separate rows for each person.
 }
 \usage{
 multi_speaker(dataframe, person.var = 1, sep = c("and", "&", ","), track.reps = FALSE)
