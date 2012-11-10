@@ -66,6 +66,5 @@ function(dataframe, rm.var = NULL,
         L5 <- data.frame(L5)
         colnames(L5) <- gsub("x.", "", colnames(L5) )
     }
-    #
     return(L5)
 }
