@@ -6,6 +6,7 @@
 #' @param v.name sn optional name for the column created for the list.var argument
 #' @param list.var logical.  If TRUE creates a column for the data frame created by each time.list passed to cm_t2l
 #' @param star.end logical. If TRUE outputs stop and end times for each cm_time.temp list object
+#' @param debug logical. If TRUE debugging mode is on.  cm_time2long willr eturn possible errors in time span inputs.
 #' @return Generates a data frame of start and end times for each code.
 #' @seealso 
 #' \code{\link{cm_df2long}}
@@ -28,11 +29,21 @@
 #' dat <- cm_range2long(foo, foo2, v.name = "time")
 #' gantt_wrap(dat, "code", "time")
 cm_range2long <-
-function(..., v.name = "variable", list.var = TRUE){
+function(..., v.name = "variable", list.var = TRUE, debug = TRUE){
     mf <- match.call(expand.dots = FALSE)
     objs <- as.character(mf[[2]])
     L1 <- lapply(objs, get)
     names(L1) <- objs
+    if(debug){
+        x <- suppressMessages(lapply(L1, function(x) {
+            cm_debug2(x)
+        }))
+        m <- x[!sapply(x, is.null)]
+        if (!identical(as.character(m), character(0))) {
+            message("Warning: possible errors found:\n")
+            print(m); stop("Check warnings")
+        }  
+    }  
     L2 <- lapply(L1, cm_r2l, list.var = FALSE)
     if (list.var) {
         L2 <- lapply(seq_along(L2), function(i) data.frame(L2[[i]], 

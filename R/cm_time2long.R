@@ -35,7 +35,7 @@ function(..., v.name = "variable", list.var = TRUE,
         }))
         m <- x[!sapply(x, is.null)]
         if (!identical(as.character(m), character(0))) {
-            message("Warning: possible errors not found:\n")
+            message("Warning: possible errors found:\n")
             print(m); stop("Check warnings")
         }  
     }  
