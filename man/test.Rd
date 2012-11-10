@@ -1,5 +1,5 @@
-\name{cm_long2dummy}
-\alias{cm_long2dummy}
+\name{test}
+\alias{test}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Stretch and Dummy Code cm_xxx2long 

@@ -31,7 +31,7 @@
 #' 
 #' z <- cm_range2long(foo, foo2, v.name="time")
 #' cm_long2dummy(z, "time")
-cm_long2dummy <-
+test <-
 function(dataframe, rm.var = NULL, 
     code = "code", start = "start", end = "end") {
     if (!is.null(rm.var)) {
