@@ -64,7 +64,7 @@ function(dataframe, rm.var = NULL,
     L5 <- lapply(L1, function(x) dummy(dat=x, code = code, start = start, end = end))
     if (is.null(rm.var)) {
         L5 <- data.frame(L5)
-        colnames(L5) <- gsub("x,", "", colnames(L5) )
+        colnames(L5) <- gsub("x.", "", colnames(L5) )
     }
     return(L5)
 }
