@@ -26,7 +26,6 @@
 #' 
 #' x <- cm_range2long(foo)
 #' z <- cm_range2long(foo, foo2, v.name="time")
-#' cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)))
 #' combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 #' cm_overlap(x, list(AB=qcv(AA, BB)))
 #' cm_overlap(x, list(AB=qcv(AA, BB)))
