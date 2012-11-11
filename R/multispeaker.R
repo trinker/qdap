@@ -29,8 +29,9 @@ multispeaker <- function(dataframe, person.var = 1,
     locs <- which(rowSums(termco.a(dataframe[, person.var], 
         seq_along(dataframe[, person.var]), sep, 
         char.keep =sep)[[1]][, -c(1:2)]) > 0)
+    ps <- ifelse(gsub("[[:punct:]]", "", sep) == "", "\\", "")
     newp <- lapply(dataframe[locs, person.var], function(x) {
-        unblanker(Trim(unlist(strsplit(x, paste(paste0("\\", sep), 
+        unblanker(Trim(unlist(strsplit(x, paste(paste0(ps, sep), 
         collapse="|")))))
     })
     lens <- unlist(lapply(newp, length))
