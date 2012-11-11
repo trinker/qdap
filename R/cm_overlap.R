@@ -6,6 +6,7 @@
 #' @param overlap.code.list A list of named character vertors of at least two code column names to combine
 #' @param rm.var Name of the repeated measures column.  Default is "time".
 #' @return Returns a dataframe with co-occurrences of supplied overlapping codes added.
+#' @note The code column must be names code and your start and end columns must be named "start" and "end".
 #' @seealso \code{\link[qdap]{cm_range2long}},
 #' \code{\link[qdap]{cm_time2long}},
 #' \code{\link[qdap]{cm_df2long}},
@@ -70,6 +71,7 @@ cm_overlap <- function(x2long.obj, overlap.code.list, rm.var = NULL) {
     }
     DF <- cm_dummy2long(x2, rm.var = rm.var)
     if (comment(x2long.obj) == "cmtime") {
+        DF$start <- DF$start + 1
         DF$Start <- convert(DF$start)
         DF$End <- convert(DF$end) 
     }

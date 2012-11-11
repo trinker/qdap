@@ -60,5 +60,7 @@ cm_dummy2long <- function(cm.comb.obj, rm.var = "time") {
     }))
     L2 <- unlist(L2, recursive = FALSE)
     L2 <- L2[sapply(L2, function(x) nrow(x) != 0)]
-    data.frame(do.call(rbind, L2), row.names=NULL)
+    dat <- data.frame(do.call(rbind, L2), row.names=NULL)
+    data.frame(dat[, 3, drop=FALSE], dat[, -3, drop=FALSE])
 }
+
