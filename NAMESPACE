@@ -13,6 +13,7 @@ export(cm_combine.dummy)      # EFN
 #export(cm_d2l)              #don't export
 export(cm_code.overlap)
 export(cm_code.combine)
+export(cm_code.transform)
 export(cm_distance)
 export(cm_df.temp)
 export(cm_df.transcript)
