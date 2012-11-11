@@ -1,4 +1,4 @@
-\name{multispeaker}
+\name{speakerSplit}
 \title{
 Break and Stretch if Multiple Persons per Cell 
 }

@@ -12,16 +12,16 @@
 #' DATA$person[c(1, 4, 6)] <- c("greg, sally, & sam", 
 #'     "greg, sally", "sam and sally")
 #' 
-#' multispeaker(DATA)
-#' multispeaker(DATA, track.reps=TRUE)
+#' speakerSplit(DATA)
+#' speakerSplit(DATA, track.reps=TRUE)
 #' 
 #' DATA$person[c(1, 4, 6)] <- c("greg_sally_sam", 
 #'     "greg.sally", "sam; sally")
 #' 
-#' multispeaker(DATA, sep = c(".", "_", ";"))
+#' speakerSplit(DATA, sep = c(".", "_", ";"))
 #' 
 #' DATA <- qdap::DATA  #reset DATA
-multispeaker <- function(dataframe, person.var = 1, 
+speakerSplit <- function(dataframe, person.var = 1, 
     sep=c("and", "&", ","), track.reps = FALSE) {
     if (!is.numeric(person.var)) {
         person.var <- which(colnames(dataframe) %in% person.var)
