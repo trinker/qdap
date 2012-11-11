@@ -28,7 +28,7 @@
 #' z <- cm_range2long(foo, foo2, v.name="time")
 #' combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 #' cm_overlap(x, list(AB=qcv(AA, BB)))
-#' cm_overlap(x, list(AB=qcv(AA, BB)))
+#' cm_overlap(x, list(ALL=qcv(AA, BB, CC)))
 #' cm_overlap(z, combines, "time")
 #' 
 #' #WITH cm_time2long
