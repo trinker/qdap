@@ -1,5 +1,5 @@
-\name{cm_overlap}
-\alias{cm_overlap}
+\name{cm_code.overlap}
+\alias{cm_code.overlap}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Find Co-occurrence Between Codes

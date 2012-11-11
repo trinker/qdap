@@ -10,6 +10,8 @@
 #' @seealso \code{\link[qdap]{cm_range2long}},
 #' \code{\link[qdap]{cm_time2long}},
 #' \code{\link[qdap]{cm_df2long}},
+#' \code{\link[qdap]{cm_code.combine}},
+#' \code{\link[qdap]{cm_code.transform}}
 #' @keywords co-occurence
 #' @examples
 #' foo <- list(
@@ -28,9 +30,9 @@
 #' x <- cm_range2long(foo)
 #' z <- cm_range2long(foo, foo2, v.name="time")
 #' combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
-#' cm_overlap(x, list(AB=qcv(AA, BB)))
-#' cm_overlap(x, list(ALL=qcv(AA, BB, CC)))
-#' cm_overlap(z, combines, "time")
+#' cm_code.overlap(x, list(AB=qcv(AA, BB)))
+#' cm_code.overlap(x, list(ALL=qcv(AA, BB, CC)))
+#' cm_code.overlap(z, combines, "time")
 #' 
 #' #WITH cm_time2long
 #' x <- list(
@@ -48,8 +50,8 @@
 #' )
 #' 
 #' dat <- cm_time2long(x, y)
-#' cm_overlap(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)), "variable")
-cm_overlap <- function(x2long.obj, overlap.code.list, rm.var = NULL) {
+#' cm_code.overlap(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)), "variable")
+cm_code.overlap <- function(x2long.obj, overlap.code.list, rm.var = NULL) {
     NMS <- as.character(substitute(x2long.obj))
     if (!is.null(rm.var)) {
         if(!rm.var %in% colnames(x2long.obj)) {
