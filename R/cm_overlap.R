@@ -75,7 +75,7 @@ cm_overlap <- function(x2long.obj, overlap.code.list, rm.var = NULL) {
         DF$Start <- convert(DF$start)
         DF$End <- convert(DF$end) 
     }
-    comment(x2long.obj)
+    DF <- data.frame(DF[, -4, drop=FALSE], DF[, 4, drop=FALSE])
     comment(DF) <- comment(x2long.obj)
     if (rmv) {
         DF$time <- NULL
