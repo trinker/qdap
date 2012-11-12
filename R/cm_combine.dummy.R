@@ -29,6 +29,8 @@
 #' z <- cm_range2long(foo, foo2, v.name="time")
 #' D2 <- cm_long2dummy(z, "time")
 #' cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)))
+#' D1 <- cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)), overlap=0)
+#' D1 <- cm_combine.dummy(D1, combine.code = list(CAB=qcv(AB, CC)), overlap=FALSE)
 #' 
 #' combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 #' cm_combine.dummy(D1, combine.code = combines)
@@ -55,7 +57,24 @@ cm_combine.dummy <- function(cm.l2d.obj, combine.code, rm.var = "time", overlap 
                 as.numeric(rowSums(DF[, c(combine.code[[i]])]) > 0)  
             }
         } else {
+            if (is.numeric(overlap))
                 as.numeric(rowSums(DF[, c(combine.code[[i]])]) == overlap) 
+            } else {
+                if (is.numeric(overlap))
+                    as.numeric(rowSums(DF[, c(combine.code[[i]])]) == overlap) 
+                } else {
+                    if (is.character(overlap))
+                        Olap <- unblanker(Trim(unlist(strsplit( overlap, NULL))))
+                        sel <- Olap %in% 0:9
+                        as.numeric(paste(Olap[sel], collapse=""))
+                        Thresh <- as.numeric(paste(Olap[sel], collapse=""))
+                        Comp <- match.fun( Olap[!sel])
+                        as.numeric(Comp(rowSums(DF[, c(combine.code[[i]])]), Thresh))
+                    } else {
+                      stop("incorect output supplied to overlap")
+                    }    
+                }               
+            }
         }
     })
     names(NEW) <- names(combine.code)
