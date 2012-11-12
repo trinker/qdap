@@ -4,9 +4,10 @@
 #' 
 #' @param x2long.obj An object from cm_range2long, cm_time2long or cm_df2long
 #' @param overlap.code.list A list of named character vertors of at least two code column names to aggregate co-occurences.
-#' @param overlap.code.list A list of named character vertors of at least two code column names to combine
+#' @param combine.code.list A list of named character vertors of at least two code column names to combine
+#' @param exclude.code.list A list of named character vertors of at least two code column names to compare and exclude.  The last column name is the one that will be excluded.
 #' @param rm.var Name of the repeated measures column.  
-#' @return Returns a dataframe with and/or overlapping combined occurrences of supplied overlapping codes added.
+#' @return Returns a dataframe with overlapping, combined occurrences, and/or exclusion of supplied overlapping codes added.
 #' @note The code column must be named code and your start and end columns must be named "start" and "end".
 #' @seealso \code{\link[qdap]{cm_range2long}},
 #' \code{\link[qdap]{cm_time2long}},
