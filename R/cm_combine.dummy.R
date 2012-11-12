@@ -5,7 +5,7 @@
 #' @param cm.l2d.obj An object from cm_long2dummy
 #' @param combine.code A list of named character vertors of at least two code column names to combine
 #' @param rm.var Name of the repeated measures column.  Default is "time".
-#' @param logical or integer.  If TRUE finds the overlap.  If FALSE finds anywhere any of the codes occur.  If integer finds that exact combination of overlaps.
+#' @param overlap logical, integer or character of binary operator + integer.  If TRUE finds the overlap.  If FALSE finds anywhere any of the codes occur.  If integer finds that exact combination of overlaps.
 #' @return Returns a dataframe with co-occurrences of provided code columns.
 #' @seealso \code{\link[qdap]{cm_long2dummy}}
 #' @keywords co-occurence
@@ -29,13 +29,16 @@
 #' z <- cm_range2long(foo, foo2, v.name="time")
 #' D2 <- cm_long2dummy(z, "time")
 #' cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)))
+#' cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)), overlap="==1")
+#' cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)), overlap="!=1")
 #' D1 <- cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)), overlap=0)
 #' D1 <- cm_combine.dummy(D1, combine.code = list(CAB=qcv(AB, CC)), overlap=FALSE)
 #' 
 #' combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 #' cm_combine.dummy(D1, combine.code = combines)
 #' cm_combine.dummy(D2, combine.code = combines)
-cm_combine.dummy <- function(cm.l2d.obj, combine.code, rm.var = "time", overlap = TRUE) {
+cm_combine.dummy <- function(cm.l2d.obj, combine.code, rm.var = "time", 
+    overlap = TRUE) {
     if (is.data.frame(cm.l2d.obj)) {
         NMS <- as.character(substitute(cm.l2d.obj))
         cm.l2d.obj <- list(cm.l2d.obj)
