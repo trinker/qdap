@@ -65,7 +65,7 @@ cm_combine.dummy <- function(cm.l2d.obj, combine.code, rm.var = "time", overlap 
                     sel <- Olap %in% 0:9
                     as.numeric(paste(Olap[sel], collapse=""))
                     Thresh <- as.numeric(paste(Olap[sel], collapse=""))
-                    Comp <- match.fun( Olap[!sel])
+                    Comp <- match.fun(paste(Olap[!sel], collapse=""))
                     as.numeric(Comp(rowSums(DF[, c(combine.code[[i]])]), Thresh))
                 } else {
                   stop("incorect output supplied to overlap")
