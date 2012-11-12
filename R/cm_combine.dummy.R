@@ -57,28 +57,24 @@ cm_combine.dummy <- function(cm.l2d.obj, combine.code, rm.var = "time", overlap 
                 as.numeric(rowSums(DF[, c(combine.code[[i]])]) > 0)  
             }
         } else {
-            if (is.numeric(overlap))
+            if (is.numeric(overlap)) {
                 as.numeric(rowSums(DF[, c(combine.code[[i]])]) == overlap) 
             } else {
-                if (is.numeric(overlap))
-                    as.numeric(rowSums(DF[, c(combine.code[[i]])]) == overlap) 
+                if (is.character(overlap)) {
+                    Olap <- unblanker(Trim(unlist(strsplit( overlap, NULL))))
+                    sel <- Olap %in% 0:9
+                    as.numeric(paste(Olap[sel], collapse=""))
+                    Thresh <- as.numeric(paste(Olap[sel], collapse=""))
+                    Comp <- match.fun( Olap[!sel])
+                    as.numeric(Comp(rowSums(DF[, c(combine.code[[i]])]), Thresh))
                 } else {
-                    if (is.character(overlap))
-                        Olap <- unblanker(Trim(unlist(strsplit( overlap, NULL))))
-                        sel <- Olap %in% 0:9
-                        as.numeric(paste(Olap[sel], collapse=""))
-                        Thresh <- as.numeric(paste(Olap[sel], collapse=""))
-                        Comp <- match.fun( Olap[!sel])
-                        as.numeric(Comp(rowSums(DF[, c(combine.code[[i]])]), Thresh))
-                    } else {
-                      stop("incorect output supplied to overlap")
-                    }    
-                }               
-            }
+                  stop("incorect output supplied to overlap")
+                }    
+            }               
+            
         }
     })
     names(NEW) <- names(combine.code)
     tv <- ncol(DF)
     data.frame(DF[, -tv, drop=FALSE], do.call(cbind, NEW), DF[, tv, drop=FALSE])
 }
-
