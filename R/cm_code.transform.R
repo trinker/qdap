@@ -35,8 +35,9 @@
 #' cm_code.transform(x, combine.code.list = list(ALL=qcv(AA, BB, CC)))
 #' cm_code.transform(x, overlap.code.list=list(AB=qcv(AA, BB)), 
 #'     combine.code.list = list(ALL=qcv(AA, BB, CC)))
-#' cm_code.transform(z, overlaps, combine.code.list=NULL, "time")
-#' 
+#' cm_code.transform(z, overlaps, rm.var="time")
+#' cm_code.transform(z, overlaps, 
+#'    exclude.code.list=list(AABB_no_CC = qcv(AA, BB, CC)), rm.var="time")
 #' #WITH cm_time2long
 #' x <- list(
 #'     transcript_time_span = qcv(00:00 - 1:12:00),
@@ -54,10 +55,11 @@
 #' 
 #' dat <- cm_time2long(x, y)
 #' cm_code.transform(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)), 
-#'     list(S=qcv(A, B), T=qcv(B, C), U=qcv(A, B, C)), rm.var="variable")
+#'     list(S=qcv(A, B), T=qcv(B, C), U=qcv(A, B, C)), 
+#'     list(ABnoC = qcv(A, B, C)), rm.var="variable")
 cm_code.transform <- function(x2long.obj, overlap.code.list=NULL,
-    combine.code.list=NULL,  rm.var = NULL) {
-    A <- B <- NULL
+    combine.code.list=NULL,  exclude.code.list=NULL, rm.var = NULL) {
+    C <- A <- B <- NULL
     if (!is.null(overlap.code.list)){
         A <- cm_code.overlap(x2long.obj = x2long.obj, 
             overlap.code.list = overlap.code.list, rm.var = rm.var)
@@ -66,7 +68,11 @@ cm_code.transform <- function(x2long.obj, overlap.code.list=NULL,
         B <- cm_code.combine(x2long.obj = x2long.obj, 
             combine.code.list = combine.code.list, rm.var = rm.var)
     }
-    DF <- data.frame(rbind(A, B))
+    if (!is.null(exclude.code.list)){
+        C <- cm_code.exclude(x2long.obj = x2long.obj, 
+            exclude.code.list = exclude.code.list, rm.var = rm.var)
+    }
+    DF <- data.frame(rbind(A, B, C))
     DF <- DF[!duplicated(DF), ]
     rownames(DF) <- NULL
     if (!is.null(rm.var)) {
