@@ -10,10 +10,11 @@ export(character.count)
 #export(cm_df2long)             #export for now
 export(cm_dummy2long)           #maybe export but don't document
 export(cm_combine.dummy)         #maybe export but don't document
-#export(cm_d2l)              #don't export
+#export(cm_d2l)               #don't export
 export(cm_code.overlap)
 export(cm_code.combine)
 export(cm_code.transform)
+export(cm_code.blank)
 export(cm_distance)
 export(cm_df.temp)
 export(cm_df.transcript)
