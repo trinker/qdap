@@ -1,8 +1,6 @@
-#' Transcript Apply Removal of Specified Stopwords
+#' Reomove Stopwords
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-#' 
-#' %% ~~ If necessary, more details than the description above ~~
+#'  Transcript apply the remova of stopwords
 #' 
 #' @param textString
 #' @param stopwords
@@ -21,10 +19,16 @@
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
+#' stopwords(DATA$state)
+#' stopwords(DATA$state, tm::stopwords("english"))
+#' stopwords(DATA$state, Top200Words)
+#' stopwords(DATA$state, Top200Words, strip = TRUE)
+#' stopwords(DATA$state, Top200Words, bagowords=FALSE)
+#' stopwords(DATA$state, Top200Words, unlist = TRUE)
+#' stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
 stopwords<-
 function (textString, stopwords = Top25Words, unlist = FALSE, separate = TRUE, 
-          strip = FALSE, unique = FALSE, names = FALSE, char.keep = NULL) {
+          strip = FALSE, unique = FALSE, char.keep = NULL) {
     Stopwords <- if (is.null(stopwords)) {
         c(" ")
     } else {
