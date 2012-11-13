@@ -4,12 +4,14 @@
 #' 
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
-#' @param textString %% ~~Describe \code{textString} here~~
-#' @param stopwords %% ~~Describe \code{stopwords} here~~
-#' @param unlist %% ~~Describe \code{stopwords} here~~
-#' @param strip %% ~~Describe \code{stopwords} here~~
-#' @param unique %% ~~Describe \code{stopwords} here~~
-#' @param names %% ~~Describe \code{stopwords} here~~
+#' @param textString
+#' @param stopwords
+#' @param unlist
+#' @param separate
+#' @param strip
+#' @param unique
+#' @param names
+#' @param char.keep
 #' @return %% ~Describe the value returned %% If it is a LIST, use %%
 #' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 #' 'comp2'} %% ...
@@ -21,7 +23,7 @@
 #' @examples
 #' 
 stopwords<-
-function (textString, stopwords = Top25Words, unlist = FALSE, 
+function (textString, stopwords = Top25Words, unlist = FALSE, separate = TRUE, 
           strip = FALSE, unique = FALSE, names = FALSE, char.keep = NULL) {
     Stopwords <- if (is.null(stopwords)) {
         c(" ")
@@ -42,6 +44,10 @@ function (textString, stopwords = Top25Words, unlist = FALSE,
     }
     if (unique) {
         x <- unique(x)
+    }
+    if (!separate) {
+        x <- sapply(stopwords(dat1$dialogue), paste, 
+            collapse = " ", USE.NAMES = FALSE)
     }
     return(x)
 }
