@@ -27,7 +27,7 @@
 stopwords<-
 function (textString, stopwords = Top25Words, unlist = FALSE, separate = TRUE, 
     strip = FALSE, unique = FALSE, char.keep = NULL, names = FALSE, 
-    ignore.case = TRUE) {
+    ignore.case = TRUE, ...) {
     Stopwords <- if (is.null(stopwords)) {
         c(" ")
     } else {
@@ -46,7 +46,7 @@ function (textString, stopwords = Top25Words, unlist = FALSE, separate = TRUE,
         }
     }
     if (strip) {
-      textString <- strip(textString, char.keep = char.keep)
+      textString <- strip(textString, char.keep = char.keep, ...)
     }
     x <- sapply(textString, function(x) SW(x, Stopwords))
     if (unlist) {

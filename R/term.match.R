@@ -1,7 +1,7 @@
 term.match <-
-function(text.var, terms, return.list=TRUE) {
+function(text.var, terms, return.list=TRUE, apostrophe.remove=FALSE) {
     y <- stopwords(text.var, stopwords = NULL, 
-        unlist=TRUE, strip=TRUE, unique=TRUE)
+        unlist=TRUE, strip=TRUE, unique=TRUE, apostrophe.remove=apostrophe.remove)
     x <- lapply(unlist(terms), function(z) {
         v <- term.find(y, mat = z, logic=TRUE)
         y[v]

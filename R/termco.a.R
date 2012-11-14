@@ -11,6 +11,7 @@
 #' @param elim.old logical.  If TRUE eliminates the columns that are combined together by the named match.list.
 #' @param output Type of proportion output; either "proportion" (decimal format) or "percent".  Default is percent.
 #' @param digits integer indicating the number of decimal places (round) or significant digits (signif) to be used. Negative values are allowed
+#' @param apostrophe.remove logical.  If TRUE removes apostrophes from the text before examining.
 #' @param \ldots other argument supplied to strip
 #' @return Returns a list of data frames and information regarding word counts.
 #' \item{raw}{raw word counts by grouping variable} 
@@ -61,8 +62,9 @@
 #' with(dat2, termco.a(dialogue, person, match.list=ml, 
 #'     char.keep="@", output="proportion"))
 termco.a <-
-  function (text.var, grouping.var=NULL, match.list, short.term = TRUE,
-            ignore.case = TRUE, elim.old = TRUE, output = "percent", digits = 2, ...) {
+  function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
+    ignore.case = TRUE, elim.old = TRUE, output = "percent", digits = 2, 
+    apostrophe.remove = FALSE, ...) {
     lazy.term <- TRUE
     if(any(duplicated(unblanker(names(match.list))))) stop("Repeated vector name in match.list")
     if (is.list(a) & length(a) == 1 & is.null(names(a))) {
