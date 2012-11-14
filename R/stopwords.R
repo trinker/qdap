@@ -1,6 +1,6 @@
-#' Reomove Stopwords
+#' Remove Stopwords
 #' 
-#'  Transcript apply the remova of stopwords
+#' Transcript apply the remova of stopwords
 #' 
 #' @param textString
 #' @param stopwords
@@ -8,14 +8,11 @@
 #' @param separate
 #' @param strip
 #' @param unique
-#' @param names
 #' @param char.keep
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+#' @param names logical.  If TRUE will name the elements of the vector or list witht he original textString.
+#' @param ignore.case
+#' @return Returns a vector o word
+#' @seealso 
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
 #' @examples
@@ -23,12 +20,14 @@
 #' stopwords(DATA$state, tm::stopwords("english"))
 #' stopwords(DATA$state, Top200Words)
 #' stopwords(DATA$state, Top200Words, strip = TRUE)
-#' stopwords(DATA$state, Top200Words, bagowords=FALSE)
+#' stopwords(DATA$state, Top200Words, separate = FALSE)
+#' stopwords(DATA$state, Top200Words, separate = FALSE, ignore.case = FALSE)
 #' stopwords(DATA$state, Top200Words, unlist = TRUE)
 #' stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
 stopwords<-
 function (textString, stopwords = Top25Words, unlist = FALSE, separate = TRUE, 
-          strip = FALSE, unique = FALSE, char.keep = NULL) {
+    strip = FALSE, unique = FALSE, char.keep = NULL, names = FALSE, 
+    ignore.case = TRUE) {
     Stopwords <- if (is.null(stopwords)) {
         c(" ")
     } else {
@@ -36,13 +35,20 @@ function (textString, stopwords = Top25Words, unlist = FALSE, separate = TRUE,
     }
     SW <- function(textString, stopwords) {
         "%w/o%" <- function(x, y) x[!x %in% y]
-        unlist(strsplit(tolower(Trim(textString)), " ")) %w/o% 
-            tolower(Trim(stopwords))
+        breaker2 <- function(X) {
+            strsplit(X, "[[:space:]]|(?=[!#$%&,-./:;?@_])", perl=TRUE)
+        }  
+        if (ignore.case) {
+            unblanker(unlist(breaker2(tolower(Trim(textString)))) %w/o% 
+                tolower(Trim(stopwords)))
+        } else {
+            unblanker(unlist(breaker2(Trim(textString))) %w/o% Trim(stopwords))
+        }
     }
     if (strip) {
       textString <- strip(textString, char.keep = char.keep)
     }
-    x <- sapply(textString, function(x) SW(x, Stopwords), USE.NAMES = names)
+    x <- sapply(textString, function(x) SW(x, Stopwords))
     if (unlist) {
         x <- unlist(x)
     }
@@ -50,8 +56,11 @@ function (textString, stopwords = Top25Words, unlist = FALSE, separate = TRUE,
         x <- unique(x)
     }
     if (!separate) {
-        x <- sapply(stopwords(dat1$dialogue), paste, 
-            collapse = " ", USE.NAMES = FALSE)
+        x <- sapply(x, paste, collapse = " ", USE.NAMES = FALSE)
+        x <- mgsub(c(" .", " ?", " ,", " !"), c(".", "?", ",", "!"), x)
+    }
+    if (names) {
+        names(x) <- textString
     }
     return(x)
 }
