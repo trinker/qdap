@@ -33,7 +33,7 @@
 #' See Also as \code{\link[qdap]{termco2matrix}}
 #' @keywords word search
 #' @examples
-#' term.match(DATA$state, c("i", "the"))
+#' term.match(DATA$state, qcv(i, the))
 #' termco.d(DATA$state, DATA$person, c(" the", " i'"))
 #' termco.d(DATA$state, DATA$person, c(" the", " i'"), ignore.case=FALSE)
 #' termco.d(DATA$state, DATA$person, c(" the ", " i'"))
