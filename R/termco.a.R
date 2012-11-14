@@ -1,6 +1,6 @@
-#' Search for Terms
+#' Search for lists of Terms
 #' 
-#' Search a transcript by any numbe rof grouping variables for categories (themes) of grouped terms.  While there are other termco functions int he termco family termco.a is the function that will generally be used.
+#' Search a transcript by any number of grouping variables for categories (themes) of grouped root terms.  While there are other termco functions int he termco family termco.a is a wrapper for general use.
 #' 
 #' @aliases termco.d print.termco_d
 #' @param text.var text.var The text variable
@@ -13,14 +13,14 @@
 #' @param digits integer indicating the number of decimal places (round) or significant digits (signif) to be used. Negative values are allowed
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from the text before examining.
 #' @param \ldots other argument supplied to strip
-#' @return Returns a list of data frames and information regarding word counts.
+#' @return Returns a list, of class "termco.d", of data frames and information regarding word counts.
 #' \item{raw}{raw word counts by grouping variable} 
 #' \item{prop}{proportional word counts by grouping variable; proportional to each individual's word use} 
 #' \item{rnp}{a character combination data frame of raw and proportional}     
 #' \item{zero_replace}{value to replace zeros with; mostly internal use}   
 #' \item{output}{character value for outpur type (either" "proportion" or "percent"; mostly internal use}  
 #' \item{digits}{integer value od number of digits to display; mostly internal use}    
-#' @note The match.list is case and character sensitive.  Spacing is an important way to grab specific words and requires careful thought.  Using "read"will find the words "bread", "read" "reading", and "ready".  If you want to search fo just the word "read" you'd supply a vector of c(" read ", " reads", " reading", " reader").  
+#' @note The match.list is (optionally) case and character sensitive.  Spacing is an important way to grab specific words and requires careful thought.  Using "read"will find the words "bread", "read" "reading", and "ready".  If you want to search fo just the word "read" you'd supply a vector of c(" read ", " reads", " reading", " reader").  
 #' @seealso See Also as \code{\link[qdap]{termco.d}}
 #' See Also as \code{\link[qdap]{termco.c}}
 #' See Also as \code{\link[qdap]{termco.rnp}}

@@ -1,30 +1,46 @@
-#' Convienence Wrapper to Combine termco, termco.p and termco.rnp
+#' Search for Terms
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-#' 
-#' %% ~~ If necessary, more details than the description above ~~
+#' Search a transcript by any number of grouping variables for root terms.
 #' 
 #' @aliases termco.d print.termco_d
 #' @param text.var text.var The text variable
 #' @param grouping.var The grouping variables.  Default NULL generates one word list for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
-#' @param match.string a vector of word bases to search for
+#' @param match.string a vector of terms to search for.
+#' @param short.term logical.  If TRUE column names are trimmed versions of the match list, other wise the terms are wrapped with 'term(phrase)'
 #' @param ignore.case logical.  If TRUE case is ignored.
 #' @param zero.replace value to replace 0 values with
 #' @param output Type of proportion output; either "proportion" (decimal format) or "percent".  Default is percent.
+#' @param digits integer indicating the number of decimal places (round) or significant digits (signif) to be used. Negative values are allowed
+#' @param lazy.term legical.  If TRUE finds terms with the same root.
+#' @param apostrophe.remove logical.  If TRUE removes apostrophes from the text before examining.
+#' @param \ldots Other argument supplied to strip.
+#' @param zero.replace value to replace 0 values with
+#' @param output Type of proportion output; either "proportion" (decimal format) or "percent".  Default is percent.
 #' @param digits  integer indicating the number of decimal places (round) or significant digits (signif) to be used. Negative values are allowed
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @return Returns a list, of class "termco.d", of data frames and information regarding word counts.
+#' \item{raw}{raw word counts by grouping variable} 
+#' \item{prop}{proportional word counts by grouping variable; proportional to each individual's word use} 
+#' \item{rnp}{a character combination data frame of raw and proportional}     
+#' \item{zero_replace}{value to replace zeros with; mostly internal use}   
+#' \item{output}{character value for outpur type (either" "proportion" or "percent"; mostly internal use}  
+#' \item{digits}{integer value od number of digits to display; mostly internal use}    
+#' @note The match.list is (optionally) case and character sensitive.  Spacing is an important way to grab specific words and requires careful thought.  Using "read"will find the words "bread", "read" "reading", and "ready".  If you want to search fo just the word "read" you'd supply a vector of c(" read ", " reads", " reading", " reader").  
+#' @seealso See Also as \code{\link[qdap]{termco.d}}
+#' See Also as \code{\link[qdap]{termco.c}}
+#' See Also as \code{\link[qdap]{termco.rnp}}
+#' See Also as \code{\link[qdap]{termco}}
+#' See Also as \code{\link[qdap]{termcount}}
+#' See Also as \code{\link[qdap]{termco2matrix}}
+#' @keywords word search
 #' @examples
+#' term.match(DATA$state, c("i", "the"))
+#' termco.d(DATA$state, DATA$person, c(" the", " i'"))
+#' termco.d(DATA$state, DATA$person, c(" the", " i'"), ignore.case=FALSE)
+#' termco.d(DATA$state, DATA$person, c(" the ", " i'"))
 termco.d <-
   function (text.var, grouping.var=NULL, match.string, short.term = FALSE,
     ignore.case = TRUE, zero.replace = 0, output = "percent", digits = 2, 
-    lazy.term = TRUE, ...){
+    lazy.term = TRUE, apostrophe.remove = FALSE, ...){
   NAME <- if (is.null(grouping.var)) {
     "all"
   } else {
@@ -38,8 +54,9 @@ termco.d <-
       G[length(G)]
     }
   }
-  x <- termco(text.var = strip(text.var, lower.case = FALSE, ...), match.string = match.string, 
-              grouping.var = grouping.var, ignore.case = ignore.case)
+  x <- termco(text.var = strip(text.var, lower.case = FALSE, 
+     apostrophe.remove = apostrophe.remove, ...), match.string = match.string, 
+     grouping.var = grouping.var, ignore.case = ignore.case)
   names(x)[1] <- NAME
   y <- termco.p(tco = x, output = output, digits = digits)
   if (is.null(grouping.var) & y[1, 1] != "all"){
