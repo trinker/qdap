@@ -74,15 +74,15 @@ termco.a <-
     NAME <- if (is.null(grouping.var)) {
       "all"
     } else {
-      if (is.list(grouping.var)) {
-        m <- unlist(as.character(substitute(grouping.var))[-1])
-        m <- sapply(strsplit(m, "$", fixed = TRUE), 
-                    function(x) x[length(x)])
-        paste(m, collapse = "&")
-      } else {
-        G <- as.character(substitute(grouping.var))
-        G[length(G)]
-      }
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed = TRUE), 
+                function(x) x[length(x)])
+            paste(m, collapse = "&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G[length(G)]
+        }
     }
     preIND <- match.list
     IND <- unlist(lapply(preIND, length))
@@ -90,7 +90,8 @@ termco.a <-
     CC <- match.list[sapply(match.list, length) > 1]
     ML <- unlist(match.list) 
     TD <- termco.d(text.var = text.var, grouping.var = grouping.var, 
-                   match.string = ML, ignore.case = ignore.case,   output = output, digits = digits, ...)
+        match.string = ML, ignore.case = ignore.case, output = output, 
+        apostrophe.remove = apostrophe.remove, digits = digits, ...)
     if (is.list(preIND)) {
       if(length(IND) == sum(IND)){
         o <- TD
