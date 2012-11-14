@@ -1,17 +1,3 @@
-#' T
-#' 
-#' T
-#' 
-#' @param dataframe
-#' @param code.vars
-#' @param no.code
-#' @param add.start.end
-#' @param repeat.vars
-#' @param rev.code
-#' @return 
-#' @seealso 
-#' \code{\link[stats]{dist}}
-#' @examples
 cm_d2l <- function(dataframe, code.vars, no.code = NA, 
     add.start.end = TRUE, repeat.vars = NULL, rev.code = FALSE){
     if (is.numeric(code.vars)) {

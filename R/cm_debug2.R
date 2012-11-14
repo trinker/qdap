@@ -3,7 +3,9 @@
 #' Debug a list of range codes for cm_range2long
 #' 
 #' @param cm.list.obj an object being prepared for the cm_time2long function
-#' @return Returns possible bugs if any 
+#' @return Returns possible bugs if any. 
+#' @note Not intended for general use.  Used within cm_range2long.
+#' @seealso \code{\link[qdap]{cm_range2long}}
 #' @keywords debug
 #' @examples
 #' z <- list(

@@ -3,7 +3,9 @@
 #' Debug a list of time span codes for cm_time2long
 #' 
 #' @param cm.list.obj an object being prepared for the cm_time2long function
-#' @return Returns possible bugs if any 
+#' @return Returns possible bugs if any.
+#' @note Not intended for general use.  Used within cm_time2long.
+#' @seealso \code{\link[qdap]{cm_time2long}}
 #' @keywords debug
 #' @examples
 #' video3 <- list(
