@@ -67,7 +67,7 @@ termco.a <-
     apostrophe.remove = FALSE, ...) {
     lazy.term <- TRUE
     if(any(duplicated(unblanker(names(match.list))))) stop("Repeated vector name in match.list")
-    if (is.list(a) & length(a) == 1 & is.null(names(a))) {
+    if (is.list(match.list) & length(match.list) == 1 & is.null(names(match.list))) {
         match.list <- unlist(match.list)
     }
     mprot <- names(match.list) != "" & sapply(match.list, length) == 1
