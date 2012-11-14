@@ -2,19 +2,19 @@
 #' 
 #' Transcript apply the remova of stopwords
 #' 
-#' @param textString
-#' @param stopwords
-#' @param unlist
-#' @param separate
-#' @param strip
-#' @param unique
-#' @param char.keep
+#' @param textString A character string of text or a vector of character strings.
+#' @param stopwords A character vector of words to remove from the text.  qdap has a number of data sets that can be used as stopwords including: Top200Words, Top100Words, Top25Words.  For the tm package's traditional English stop words use tm::stopwords("english")
+#' @param unlist logical.  If TRUE unlists into one vector.  General use intended for when separate is FALSE.
+#' @param separate logical.  If TRUE separates sentences into words. If FALSE retains sentences.
+#' @param strip logical.  IF TURE strips the text of all punctuation except apostrophes.
+#' @param unique logical.  If TRUE keeps only unique words (if unlist is TURE) or sentences (if unlist is FALSE).  General use intended for when unlist is TRUE.
+#' @param char.keep If strip is TRUE this argument provides a means of retaining supplied character(s).
 #' @param names logical.  If TRUE will name the elements of the vector or list witht he original textString.
-#' @param ignore.case
-#' @return Returns a vector o word
-#' @seealso 
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param ignore.case logical.  If TRUE stop words will be removed regardless of case.  Additionally, case will be stripped from the text.  If FALSE stopwords removal is contingent upon case.  Additionally, case is not stripped.
+#' @return Returns a vector of sentences, vector of words, or (default) a list of vectors of words with stop words removed.  Output depends on supplied arguments.
+#' @seealso \code{\link[qdap]{strip}, 
+#' \code{\link[qdap]{bag.o.words}}
+#' @keywords stopwords
 #' @examples
 #' stopwords(DATA$state)
 #' stopwords(DATA$state, tm::stopwords("english"))
