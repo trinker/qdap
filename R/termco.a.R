@@ -65,6 +65,9 @@ termco.a <-
             ignore.case = TRUE, elim.old = TRUE, output = "percent", digits = 2, ...) {
     lazy.term <- TRUE
     if(any(duplicated(unblanker(names(match.list))))) stop("Repeated vector name in match.list")
+    if (is.list(a) & length(a) == 1 & is.null(names(a))) {
+        match.list <- unlist(match.list)
+    }
     mprot <- names(match.list) != "" & sapply(match.list, length) == 1
     NAME <- if (is.null(grouping.var)) {
       "all"
