@@ -61,9 +61,12 @@
 #' 
 #' with(dat2, termco.a(dialogue, person, match.list=ml, 
 #'     char.keep="@", output="proportion"))
-#'     
+#' 
+#' #Using with term.match and exclude    
 #' exclude(term.match(DATA$state, qcv(th), FALSE), "truth")
 #' termco.a(DATA$state, DATA$person, exclude(term.match(DATA$state, qcv(th), FALSE), "truth"))
+#' MTCH.LST <- exclude(term.match(DATA$state, qcv(th, i)), qcv(truth, stinks))
+#' termco.a(DATA$state, DATA$person, MTCH.LST)
 termco.a <-
   function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
     ignore.case = TRUE, elim.old = TRUE, output = "percent", digits = 2, 
