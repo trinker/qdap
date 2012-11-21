@@ -158,7 +158,7 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
         if (dev.interactive()) {
             dev.new()
         }
-        wordcloud::wordcloud(df2[, 1], df2[, 2], colors = COL, rot.per = rot.per, 
+        wordcloud(df2[, 1], df2[, 2], colors = COL, rot.per = rot.per, 
             min.freq = min.freq, ordered.colors = TRUE, vfont = font, 
             random.order = random.order, scale = c(Scale, word.size))
         if (title) {

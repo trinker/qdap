@@ -188,9 +188,7 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
         dat[, 1] <- factor(dat[, 1])                                                 
         FOR <- FOR[FOR[, "word.count"] > min.wrdcnt, ,drop = TRUE]                   
     }                                                                                
-    if (plot) {                                                                      
-        suppressWarnings(require(ggplot2))                                           
-        suppressWarnings(require(gridExtra))                                         
+    if (plot) {                                                                                                               
         YY <- ggplot(dat, aes(grouping,  fill=form.class)) +                         
             geom_bar(position='fill') +                                              
             coord_flip() +  labs(fill=NULL) +                                        
