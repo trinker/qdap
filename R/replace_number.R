@@ -4,9 +4,9 @@
 #' 
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param num.paste %% ~~Describe \code{num.paste} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
+#' @param text.var The text variable 
+#' @param num.paste A character string c("separate", "combine"); separate will treat each word section as separate, combine will lump thme sections together as one word.
+#' @seealso
 #' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 #' 'comp2'} %% ...
 #' @note %% ~~further notes~~
