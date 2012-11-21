@@ -22,12 +22,7 @@
 #' @seealso \url{https://github.com/trinker/qdap/wiki/Reading-Transcripts-into-R}
 #' @keywords transcript
 #' @examples
-#' require(RCurl);library(qdap)
-#' bin <- getBinaryURL("https://dl.dropbox.com/u/61803503/Test2.docx",
-#'                     ssl.verifypeer=FALSE)  
-#' con <- file("TEST5.docx", open = "wb")
-#' writeBin(bin, con)
-#' close(con)
+#' url_dl("TEST5.docx") #downloads a test file called "TEST5.docx" into your working directory.
 #' dat <- read.transcript("TEST5.docx") 
 #' dat    
 #' delete("TEST5")  #clean up and delete the file
