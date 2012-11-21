@@ -5,16 +5,22 @@
 #' analysis.  Care should taken with this function to ensure data 
 #' is properly formatted and complete.
 #' 
-#' @param \ldots name(s) of package(s)
-#' @param install logical.  If TRUE will attempt to install a package 
-#' not found in the library
-#' @param update logical.  If TRUE will attempt to update out of date packages
-#' @param require logical.  If TRUE will use require; FALSE will use library
-#' @keywords library require package update
+#' @param text.var The text variable    
+#' @param rm.dash logical logical.  If TRUE dashes will be removed.
+#' @param bracket The type of bracket (and encased text) to remove.  This is one of 
+#' the strings "curly", "square", "round", "angle" and "all".  
+#' These strings correspond to: {, [, (, < or all four types.
+#' @param missing Value to assign to empty cells.
+#' @param names logical.  If TRUE the sentences are given as the names of the counts.
+#' @param abbreviation A two column key of abbreviations (column 1) and long form replacements (column 2) or a vector of abbeviations.  Default is to use qdap's abbreviations data set.
+#' @param replace A vecotor of long form replacements if a data frame is not supplied to the abbreviation argument
+#' @param ignore.case logical.  If True replaces without regard to capitalization
+#' @param num.paste A character string c("separate", "combine"); separate will treat each word section as separate, combine will lump thme sections together as one word.
 #' @seealso 
-#' \code{\link[base]{library}},
-#' \code{\link[base]{require}},
-#' \code{\link[utils]{install.packages}}
+#' \code{\link[qdap]{bracketX}},
+#' \code{\link[qdap]{replace_number}},
+#' \code{\link[qdap]{replace_symbol}}
+#' @note Care should taken with this function to ensure data is properly formatted and complete.
 #' @examples
 #' x <- "I like 60 (laughter) #d-bot and $6 @ the store w/o 8p.m."
 #' qprep(x)

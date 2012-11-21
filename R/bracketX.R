@@ -8,7 +8,7 @@
 #' These strings correspond to: {, [, (, < or all four types.
 #' @param missing Value to assign to empty cells.
 #' @param names logical.  If TRUE the sentences are given as the names of the counts.
-#' @return Retruns a vector of text with brackets removed.
+#' @return Returns a vector of text with brackets removed.
 #' @seealso \code[qdap]{\link{bracketXtract}}
 #' @keywords bracket remove
 #' @examples
