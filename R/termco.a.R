@@ -63,7 +63,7 @@
 #'     char.keep="@", output="proportion"))
 #' 
 #' DATA$state[1] <- "12 4 rgfr  r0ffrg0"
-#' termco.a(DATA$state, DATA$person, '0', digit.remove=F)
+#' termco.a(DATA$state, DATA$person, '0', digit.remove=FALSE)
 #' 
 #' #Using with term.match and exclude    
 #' exclude(term.match(DATA$state, qcv(th), FALSE), "truth")
