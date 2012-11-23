@@ -20,7 +20,7 @@
 #' \item{zero_replace}{value to replace zeros with; mostly internal use}   
 #' \item{output}{character value for outpur type (either" "proportion" or "percent"; mostly internal use}  
 #' \item{digits}{integer value od number of digits to display; mostly internal use}    
-#' @note The match.list is (optionally) case and character sensitive.  Spacing is an important way to grab specific words and requires careful thought.  Using "read"will find the words "bread", "read" "reading", and "ready".  If you want to search fo just the word "read" you'd supply a vector of c(" read ", " reads", " reading", " reader").  
+#' @note The match.list is (optionally) case and character sensitive.  Spacing is an important way to grab specific words and requires careful thought.  Using "read"will find the words "bread", "read" "reading", and "ready".  If you want to search fo just the word "read" you'd supply a vector of c(" read ", " reads", " reading", " reader").  To search for non character arguments (i.e. numbers and symbols) additional arguments from strip must be passed.
 #' @seealso See Also as \code{\link[qdap]{termco.d}}
 #' See Also as \code{\link[qdap]{termco.c}}
 #' See Also as \code{\link[qdap]{termco.rnp}}
@@ -61,6 +61,9 @@
 #' 
 #' with(dat2, termco.a(dialogue, person, match.list=ml, 
 #'     char.keep="@", output="proportion"))
+#' 
+#' DATA$state[1] <- "12 4 rgfr  r0ffrg0"
+#' termco.a(DATA$state, DATA$person, '0', digit.remove=F)
 #' 
 #' #Using with term.match and exclude    
 #' exclude(term.match(DATA$state, qcv(th), FALSE), "truth")
