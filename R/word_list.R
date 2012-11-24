@@ -35,7 +35,7 @@
 word_list <- 
 function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
     cut.n = 20, cap = TRUE, cap.list=NULL, cap.I=TRUE, rm.bracket = TRUE,
-    char.keep = NULL) {
+    char.keep = NULL, apostrophe.remove = FALSE, ...) {
     upper <- function(x) paste(substring(x, 1, 1), 
         substring(x, 2, nchar(x)), sep="")
     Sw1 <- stopwords[!substring(stopwords, 1, 1) %in% LETTERS]
@@ -74,7 +74,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
         G[length(G)]
     }
     word.lists1 <- textLISTER(text.var = text.var, group.vars = group.var,
-        rm.bracket = rm.bracket, char.keep = char.keep)
+        rm.bracket = rm.bracket, char.keep = char.keep, apostrophe.remove = apostrophe.remove, ...)
     words.UNLISTED <- lapply(word.lists1, function(x) {
             y <- unlist(x)
             names(y) <- NULL
