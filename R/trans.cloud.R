@@ -1,31 +1,38 @@
 #' Generate Word Clouds by Grouping Variable
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' Produces word clouds with optional theme coloring by grouping variable
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param word.list %% ~~Describe \code{word.list} here~~
-#' @param stem %% ~~Describe \code{stem} here~~
-#' @param target.words %% ~~Describe \code{target.words} here~~
-#' @param stopwords %% ~~Describe \code{stopwords} here~~
-#' @param min.freq %% ~~Describe \code{min.freq} here~~
-#' @param caps %% ~~Describe \code{caps} here~~
-#' @param caps.list %% ~~Describe \code{caps.list} here~~
-#' @param random.order %% ~~Describe \code{random.order} here~~
-#' @param rot.per %% ~~Describe \code{rot.per} here~~
-#' @param cloud.colors %% ~~Describe \code{cloud.colors} here~~
-#' @param cloud.font %% ~~Describe \code{cloud.font} here~~
-#' @param title.font %% ~~Describe \code{title.font} here~~
-#' @param title.color %% ~~Describe \code{title.color} here~~
-#' @param title.padj %% ~~Describe \code{title.padj} here~~
-#' @param title.location %% ~~Describe \code{title.location} here~~
-#' @param title.cex %% ~~Describe \code{title.cex} here~~
-#' @param proportional %% ~~Describe \code{proportional} here~~
-#' @param max.word.size %% ~~Describe \code{max.word.size} here~~
-#' @param min.word.size %% ~~Describe \code{min.word.size} here~~
-#' @param legend %% ~~Describe \code{legend} here~~
-#' @param legend.cex %% ~~Describe \code{legend.cex} here~~
-#' @param legend.location %% ~~Describe \code{legend.location} here~~
+#' @param text.var
+#' @param grouping.var
+#' @param word.list
+#' @param stem
+#' @param target.words
+#' @param expand.target
+#' @param target.exclude
+#' @param stopwords
+#' @param min.freq
+#' @param caps
+#' @param caps.list
+#' @param random.order
+#' @param rot.per
+#' @param cloud.colors
+#' @param title
+#' @param cloud.font
+#' @param title.font
+#' @param title.color
+#' @param title.padj
+#' @param title.location
+#' @param title.cex
+#' @param title.names
+#' @param proportional
+#' @param max.word.size
+#' @param min.word.size
+#' @param legend
+#' @param legend.cex
+#' @param legend.location
+#' @param 1.03)
+#' @param char.keep
+#' @param char2space
 #' @return %% ~Describe the value returned %% If it is a LIST, use %%
 #' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 #' 'comp2'} %% ...
@@ -35,7 +42,23 @@
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
 #' @examples
+#' terms <- list(
+#'     I=c("i", "i'm"),
+#'     mal=qcv(stinks, dumb, distrust),
+#'     articles=qcv(the, a, an),
+#'     pronoun=qcv(we, you)
+#' )
+#' DATA <- qdap::DATA
 #' 
+#' with(DATA, trans.cloud(state, person, target.words=terms, 
+#'     cloud.colors=qcv(red, green, blue, black, gray65), 
+#'     expand.target=FALSE, proportional=TRUE))
+#' 
+#' with(DATA, trans.cloud(state, person, target.words=terms,
+#'     stopwords=exclude(with(DATA, unique(bag.o.words(state))), 
+#'         unique(unlist(terms))), 
+#'     cloud.colors=qcv(red, green, blue, black, gray65), 
+#'     expand.target=FALSE, proportional=TRUE))
 trans.cloud <-
 function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE, 
     target.words = NULL, expand.target = TRUE, target.exclude = NULL,
