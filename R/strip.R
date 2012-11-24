@@ -6,7 +6,8 @@
 #' 
 #' @param x %% ~~Describe \code{x} here~~
 #' @param digit.remove %% ~~Describe \code{digit.remove} here~~
-#' @param apostrophe.remove %% ~~Describe \code{apostrophe.remove} here~~
+#' @param apostrophe.remove logical.  If TRUE removes apostrophe's from the output.
+#' @param lower.case
 #' @return %% ~Describe the value returned %% If it is a LIST, use %%
 #' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 #' 'comp2'} %% ...

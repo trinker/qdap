@@ -11,6 +11,8 @@
 #' @param char.keep If strip is TRUE this argument provides a means of retaining supplied character(s).
 #' @param names logical.  If TRUE will name the elements of the vector or list witht he original textString.
 #' @param ignore.case logical.  If TRUE stop words will be removed regardless of case.  Additionally, case will be stripped from the text.  If FALSE stopwords removal is contingent upon case.  Additionally, case is not stripped.
+#' @param apostrophe.remove logical.  If TRUE removes apostrophe's from the output.
+#' @param \\ldots further arguments passed to strip function
 #' @return Returns a vector of sentences, vector of words, or (default) a list of vectors of words with stop words removed.  Output depends on supplied arguments.
 #' @seealso \code{\link[qdap]{strip}, 
 #' \code{\link[qdap]{bag.o.words}}
