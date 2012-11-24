@@ -1,10 +1,10 @@
-#' Stems a vector of text strings
+#' Stem Text
 #' 
 #' Stems a vector of text strings
 #' 
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
-#' @param text.var %% ~~Describe \code{text.var} here~~
+#' @param text.var  The text variable.
 #' @param rm.bracket %% ~~Describe \code{rm.bracket} here~~
 #' @param capitalize %% ~~Describe \code{capitalize} here~~
 #' @param warn %% ~~Describe \code{warn} here~~
@@ -18,6 +18,8 @@
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
 #' @examples
+#' stemmer(DATA$state)
+#' stemmer(raj$dialogue)
 stemmer <-
 function(text.var, rm.bracket = TRUE, capitalize = TRUE, 
     warn = TRUE, ...){
@@ -35,7 +37,7 @@ function(text.var, rm.bracket = TRUE, capitalize = TRUE,
     if (any(na.omit(bl)) & warn) {
         warning(paste(
             "The following row(s) do have standard qdap punctuation endmarks:\n", 
-            " rows:", which(bl), "\n"))
+            " rows:", paste(which(bl), collapse = ", "), "\n"))
     }
     LIST <- stopwords(txt, stopwords = NULL, strip = TRUE)
     LIST <- lapply(LIST, function(x) {
