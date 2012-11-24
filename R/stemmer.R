@@ -35,7 +35,7 @@ function(text.var, rm.bracket = TRUE, capitalize = TRUE,
     if (any(na.omit(bl)) & warn) {
         warning(paste(
             "The following row(s) do have standard qdap punctuation endmarks:\n", 
-            " rows:", which(bl)))
+            " rows:", which(bl), "\n"))
     }
     LIST <- stopwords(txt, stopwords = NULL, strip = TRUE)
     LIST <- lapply(LIST, function(x) {
