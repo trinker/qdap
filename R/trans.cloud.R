@@ -200,7 +200,7 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
     if (!is.null(target.exclude)) {
         target.words <- lapply(target.words, function(x) x[!x %in% target.exclude])
     }
-    lapply(seq_along(word.list), function(i) CLOUD(words = word.list[[i]], 
+    invisible(lapply(seq_along(word.list), function(i) CLOUD(words = word.list[[i]], 
         stem = stem, target.words = target.words, stopwords = stopwords,
         proportional = proportional, PRO = PRO, word.size2 = max.word.size, 
         min.freq = min.freq, word.size = min.word.size, random.order = random.order, 
@@ -208,6 +208,6 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
         font = cloud.font, title.font = title.font, title.cex = title.cex,
         title.color = title.color, side = title.location, legend = legend, 
         legend.cex = legend.cex, legend.location = legend.location, 
-        text = namers[i], char2space = char2space, ...)
+        text = namers[i], char2space = char2space, ...))
     )
 }
