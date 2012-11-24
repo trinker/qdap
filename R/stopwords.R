@@ -23,12 +23,12 @@
 #' stopwords(DATA$state, Top200Words, separate = FALSE)
 #' stopwords(DATA$state, Top200Words, separate = FALSE, ignore.case = FALSE)
 #' stopwords(DATA$state, Top200Words, unlist = TRUE)
-#' stopwords(DATA$state, Top200Words, unlist = TRUE, strip=TRUE, apostrophe.remove=FALSE)
+#' stopwords(DATA$state, Top200Words, unlist = TRUE, strip=TRUE)
 #' stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
 stopwords<-
 function (textString, stopwords = Top25Words, unlist = FALSE, separate = TRUE, 
     strip = FALSE, unique = FALSE, char.keep = NULL, names = FALSE, 
-    ignore.case = TRUE, ...) {
+    ignore.case = TRUE, apostrophe.remove = FALSE, ...) {
     Stopwords <- if (is.null(stopwords)) {
         c(" ")
     } else {
@@ -47,7 +47,8 @@ function (textString, stopwords = Top25Words, unlist = FALSE, separate = TRUE,
         }
     }
     if (strip) {
-      textString <- qdap::strip(textString, char.keep = char.keep, ...)
+        textString <- qdap::strip(textString, char.keep = char.keep, 
+            apostrophe.remove = apostrophe.remove, ...)
     }
     x <- sapply(textString, function(x) SW(x, Stopwords))
     if (unlist) {
