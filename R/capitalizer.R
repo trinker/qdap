@@ -14,17 +14,8 @@
 capitalizer <-
 function(text, caps.list = NULL, I.list = TRUE, apostrophe.remove = FALSE) {
     I_list <- c("I'm", "I'll", "I'd", "I've", "I")
-    IDF <- data.frame(from1 = sapply(I_list, function(x) strip(x, 
-        apostrophe.remove = FALSE)), from2 = sapply(I_list, strip), 
-        to = I_list)
-    if (apostrophe.remove) {
-        idf <- IDF[-1]
-    } else {
-        IDF2 <- IDF[-2]
-        names(IDF2) <- c("from2", "to")
-        idf <- data.frame(rbind(IDF[-1], IDF2))
-    }
-    names(idf) <- c("from", "to")
+    idf <- data.frame(from = sapply(I_list, function(x) strip(x, 
+        apostrophe.remove = FALSE)), to = I_list)
     rownames(idf) <- 1:nrow(idf)
     if (!I.list) {
         idf <- NULL
@@ -40,3 +31,4 @@ function(text, caps.list = NULL, I.list = TRUE, apostrophe.remove = FALSE) {
         idf$from), "to"], x)
     unlist(lapply(text, subber))
 }
+
