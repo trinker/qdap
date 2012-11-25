@@ -22,7 +22,7 @@ function(text, caps.list = NULL, I.list = TRUE, apostrophe.remove = FALSE) {
     } else {
         IDF2 <- IDF[-2]
         names(IDF2) <- c("from2", "to")
-        idf <- data.frame(rbind(IDF[-1], IDF2))
+        idf <- data.frame(rbind(IDF[-2], IDF2))
     }
     names(idf) <- c("from", "to")
     rownames(idf) <- 1:nrow(idf)
