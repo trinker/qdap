@@ -40,55 +40,72 @@
 termco.d <-
   function (text.var, grouping.var=NULL, match.string, short.term = FALSE,
     ignore.case = TRUE, zero.replace = 0, output = "percent", digits = 2, 
-    lazy.term = TRUE, apostrophe.remove = FALSE, ...){
-  NAME <- if (is.null(grouping.var)) {
-    "all"
-  } else {
-    if (is.list(grouping.var)) {
-      m <- unlist(as.character(substitute(grouping.var))[-1])
-      m <- sapply(strsplit(m, "$", fixed = TRUE), 
-                  function(x) x[length(x)])
-      paste(m, collapse = "&")
+    lazy.term = TRUE, apostrophe.remove = FALSE, char.keep = NULL, 
+    digit.remove = NULL, ...){
+    x <- unlist(match.string)
+    a <- grepl("[^a-zA-Z[:space:]]", x)
+    if (any(a)) {
+        b <- grepl("[0-9]", x)
+        if (any(b) & is.null(digit.remove)) {   
+            digit.remove <- FALSE  
+        } 
+        if (any(a + b == 1) & is.null(char.keep)) {  
+            char.keep = unlist(strsplit(paste(gsub("[a-zA-Z0-9[:space:]]", 
+                "", x), collapse=""), NULL)) 
+        }
+    }
+    NAME <- if (is.null(grouping.var)) {
+        "all"
     } else {
-      G <- as.character(substitute(grouping.var))
-      G[length(G)]
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed = TRUE), function(x) {
+                x[length(x)]
+            })
+            paste(m, collapse = "&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G[length(G)]
+        }
     }
-  }
-  x <- termco(text.var = strip(text.var, lower.case = FALSE, 
-     apostrophe.remove = apostrophe.remove, ...), match.string = match.string, 
-     grouping.var = grouping.var, ignore.case = ignore.case)
-  names(x)[1] <- NAME
-  y <- termco.p(tco = x, output = output, digits = digits)
-  if (is.null(grouping.var) & y[1, 1] != "all"){
-    z <- termco.rnp(x, y, output = output)
-    znull <- as.character(z$DF)
-    names(znull) <- rownames(z)
-    z <- t(as.data.frame(znull))
-    z <- replacer(z, "0(0)", with = zero.replace)
-    z <- replacer(z, "0(0.00)", with = zero.replace)
-    z <- noquote(z)
-    rownames(z) <- "all"
-    if (zero.replace != 0) {
-      x[, -c(1:2)] <- replacer(x[, -c(1:2)], 0, zero.replace)
-      y[, -c(1:2)] <- replacer(y[, -c(1:2)], 0, zero.replace)
+    x <- termco(text.var = strip(text.var, lower.case = FALSE, 
+       char.keep = char.keep, digit.remove = digit.remove,
+        apostrophe.remove = apostrophe.remove, ...), 
+        match.string = match.string, grouping.var = grouping.var, 
+        ignore.case = ignore.case)
+    names(x)[1] <- NAME
+    y <- termco.p(tco = x, output = output, digits = digits)
+    if (is.null(grouping.var) & y[1, 1] != "all"){
+        z <- termco.rnp(x, y, output = output)
+        znull <- as.character(z$DF)
+        names(znull) <- rownames(z)
+        z <- t(as.data.frame(znull))
+        z <- replacer(z, "0(0)", with = zero.replace)
+        z <- replacer(z, "0(0.00)", with = zero.replace)
+        z <- noquote(z)
+        rownames(z) <- "all"
+        if (zero.replace != 0) {
+            x[, -c(1:2)] <- replacer(x[, -c(1:2)], 0, zero.replace)
+            y[, -c(1:2)] <- replacer(y[, -c(1:2)], 0, zero.replace)
+        }
+    } else {
+        if (zero.replace != 0) {
+            x[, -c(1:2)] <- replacer(x[, -c(1:2), drop = FALSE], 
+                0, zero.replace)
+            y[, -c(1:2)] <- replacer(y[, -c(1:2), drop = FALSE], 
+                0, zero.replace)
+        }
+        z <- termco.rnp(x, y, output = output)
+        h <- paste(zero.replace, "(", zero.replace, ")", sep = "")
+        z[, -c(1:2)] <- lapply(z[, -c(1:2), drop = FALSE], function(x) {
+            replacer(x, h, zero.replace)
+        })
     }
-  } else {
-    if (zero.replace != 0) {
-      x[, -c(1:2)] <- replacer(x[, -c(1:2), drop = FALSE], 
-        0, zero.replace)
-      y[, -c(1:2)] <- replacer(y[, -c(1:2), drop = FALSE], 
-        0, zero.replace)
+    o <- list(raw = x, prop = y, rnp = z, zero_replace = zero.replace,
+        output = output, digits = digits)
+    class(o) <- "termco_d"
+    if (short.term) {
+        o <- termco2short.term(o)
     }
-    z <- termco.rnp(x, y, output = output)
-    h <- paste(zero.replace, "(", zero.replace, ")", sep = "")
-    z[, -c(1:2)] <- lapply(z[, -c(1:2), drop = FALSE], 
-      function(x) replacer(x, h, zero.replace))
-  }
-  o <- list(raw = x, prop = y, rnp = z, zero_replace = zero.replace,
-    output = output, digits = digits)
-  class(o) <- "termco_d"
-  if (short.term) {
-    o <- termco2short.term(o)
-  }
-  return(o) 
+    return(o) 
 }

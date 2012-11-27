@@ -73,9 +73,23 @@
 termco.a <-
   function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
     ignore.case = TRUE, elim.old = TRUE, output = "percent", digits = 2, 
-    apostrophe.remove = FALSE, ...) {
+    apostrophe.remove = FALSE, char.keep = NULL, digit.remove = NULL, ...) {
     lazy.term <- TRUE
-    if(any(duplicated(unblanker(names(match.list))))) stop("Repeated vector name in match.list")
+    x <- unlist(match.list)
+    a <- grepl("[^a-zA-Z[:space:]]", x)
+    if (any(a)) {
+        b <- grepl("[0-9]", x)
+        if (any(b) & is.null(digit.remove)) {   
+            digit.remove <- FALSE  
+        }
+        if (any(a + b == 1) & is.null(char.keep)) {  
+            char.keep = unlist(strsplit(paste(gsub("[a-zA-Z0-9[:space:]]", 
+                "", x), collapse=""), NULL)) 
+        }
+    }
+    if(any(duplicated(unblanker(names(match.list))))) {
+        stop("Repeated vector name in match.list")
+    }
     if (is.list(match.list) & length(match.list) == 1 & is.null(names(match.list))) {
         match.list <- unlist(match.list)
     }
@@ -100,7 +114,8 @@ termco.a <-
     ML <- unlist(match.list) 
     TD <- termco.d(text.var = text.var, grouping.var = grouping.var, 
         match.string = ML, ignore.case = ignore.case, output = output, 
-        apostrophe.remove = apostrophe.remove, digits = digits, ...)
+        apostrophe.remove = apostrophe.remove, char.keep = NULL, 
+        digit.remove = FALSE, digits = digits, ...)
     if (is.list(preIND)) {
       if(length(IND) == sum(IND)){
         o <- TD
