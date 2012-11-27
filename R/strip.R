@@ -1,30 +1,25 @@
-#' Transcript Apply Conversion of Text to Lower Case and Words Only
+#' Strip Text 
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-#' 
-#' %% ~~ If necessary, more details than the description above ~~
+#' Strip text of unwanted charcters.
 #' 
 #' @param x %% ~~Describe \code{x} here~~
-#' @param digit.remove %% ~~Describe \code{digit.remove} here~~
+#' @param char.keep A character vector of symbol character (i.e. punctioation) that strip should keep.  The default is to strip everything except apostophes.
+#' @param digit.remove logical.  If TRUE strips digits from the text.
 #' @param apostrophe.remove logical.  If TRUE removes apostrophe's from the output.
-#' @param lower.case
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param lower.case logical.  If TRUE forces all alpha characters to lower case.
+#' @return Retruns a vector of text that has been stripped of unwanted characters.
+#' @seealso \code[qdap]{\link{stopwords}}
 #' @examples
-#' 
+#' strip(DATA$state)
+#' strip(DATA$state, apostrophe.remove=FALSE)
+#' strip(DATA$state, char.keep = c("?", "."))
 strip <-
 function (x, char.keep = NULL, digit.remove = TRUE, apostrophe.remove = TRUE,
     lower.case = TRUE) {
     strp <- function(x, digit.remove, apostrophe.remove, char.keep, lower.case) {
         if (!is.null(char.keep)) {
             x2 <- Trim(gsub(paste0(".*?($|'|",
-            paste(char.keep, collapse = "|"),
+            paste(paste0("\\", char.keep), collapse = "|"),
             "|[^[:punct:]]).*?"), "\\1", 
                 as.character(x)))
         } else {
@@ -37,8 +32,7 @@ function (x, char.keep = NULL, digit.remove = TRUE, apostrophe.remove = TRUE,
         if (apostrophe.remove) {
             x2 <- gsub("'", "", x2)
         }
-        ifelse(digit.remove == TRUE, gsub("[[:digit:]]", "", 
-                                          x2), x2)
+        ifelse(digit.remove == TRUE, gsub("[[:digit:]]", "", x2), x2)
     }
     x <- clean(gsub("/", " ", gsub("-", " ", x))) 
     unlist(lapply(x, function(x) Trim(strp(x = x, digit.remove = digit.remove, 

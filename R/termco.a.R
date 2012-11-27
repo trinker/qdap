@@ -12,6 +12,8 @@
 #' @param output Type of proportion output; either "proportion" (decimal format) or "percent".  Default is percent.
 #' @param digits integer indicating the number of decimal places (round) or significant digits (signif) to be used. Negative values are allowed
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from the text before examining.
+#' @param char.keep A character vector of symbol character (i.e. punctioation) that strip should keep.  The default is to strip everything except apostophes.
+#' @param digit.remove logical.  If TRUE strips digits from the text.
 #' @param \ldots other argument supplied to strip
 #' @return Returns a list, of class "termco.d", of data frames and information regarding word counts.
 #' \item{raw}{raw word counts by grouping variable} 
