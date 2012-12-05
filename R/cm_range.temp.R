@@ -7,7 +7,7 @@
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding
 #' @seealso 
-#' \code{\link[qdap]{cm_time.temp}},
+#' \code{\link[qdap]{cm_time.temp}}
 #' @examples
 #' \dontrun{
 #' cm_range.temp(qcv(AA, BB, CC), file = "foo.txt")

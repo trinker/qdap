@@ -93,5 +93,6 @@ function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,
   }
   ans$EXTRA1x2 <- NULL; ans$EXTRA2x2 <- NULL
   rownames(ans) <- NULL
+  ans[, text.var] <- as.character(ans[, text.var])
   return(ans)
 }
