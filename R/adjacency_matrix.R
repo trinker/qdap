@@ -4,11 +4,13 @@
 #' matrix for use with igraph
 #' 
 #' @aliases adjacency_matrix adjmat
+#' @rdname adjacency_matrix
 #' @param matrix.obj A matrix object, preferably, of the class "termco_d" or "termco_c" generated from terco.a, termco.d or termco.c.
 #' @return Generates an adjacency matrix
 #' @seealso 
 #' \code{\link[stats]{dist}}
 #' @keywords adjacency matrix
+#' @export 
 #' @examples
 #' wordLIST <- c(" montague", " capulet", " court", " marry")
 #' (raj.termco <- with(raj.act.1, termco.a(dialogue, person, 
@@ -61,5 +63,23 @@ function(matrix.obj) {
     return(o)
 }
 
+#' @rdname adjacency_matrix
+#' @export
 adjmat <- adjacency_matrix
 
+#' Prints an adjacency_matrix
+#' 
+#' Prints an adjacency_matrix.
+#' 
+#' @param x The adjacency_matrix object
+#' @param \ldots ignored
+#' @method print adjacency_matrix
+#' @S3method print adjacency_matrix
+print.adjacency.matrix <-
+  function(x, ...) {
+    cat("Adjacency Matrix:\n\n")
+    print(x$shared, na.print="", quote=FALSE)
+    cat("\n\n")
+    cat("Summed occurrences:\n\n")
+    print(x$sum)
+  }
