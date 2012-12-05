@@ -94,5 +94,8 @@ function(dataframe, text.var, splitpoint = NULL, incomplete.sub = TRUE,
   ans$EXTRA1x2 <- NULL; ans$EXTRA2x2 <- NULL
   rownames(ans) <- NULL
   ans[, text.var] <- as.character(ans[, text.var])
+  if (stem.col) {
+    ans[, "stem.col"] <- as.character(ans[, "stem.col"])
+  }
   return(ans)
 }
