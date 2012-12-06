@@ -7,6 +7,7 @@
 #' @param sep The spearator(s) to search for and break on.  Default is: c(".", "_", ";")
 #' @param track.reps logical.  If TRUE leaves the row names of person variable celss that were repeated and stretched.
 #' @return Returns an expanded dataframe with person variable stretched and accompanying rows repeated.
+#' @export
 #' @examples
 #' DATA$person <- as.character(DATA$person)
 #' DATA$person[c(1, 4, 6)] <- c("greg, sally, & sam", 

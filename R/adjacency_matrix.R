@@ -5,7 +5,8 @@
 #' 
 #' @aliases adjacency_matrix adjmat
 #' @rdname adjacency_matrix
-#' @param matrix.obj A matrix object, preferably, of the class "termco_d" or "termco_c" generated from terco.a, termco.d or termco.c.
+#' @param matrix.obj A matrix object, preferably, of the class "termco_d" or 
+#' "termco_c" generated from \code{terco.a}, \code{termco.d} or \code{termco.c}.
 #' @return Generates an adjacency matrix
 #' @seealso 
 #' \code{\link[stats]{dist}}

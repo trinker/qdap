@@ -4,13 +4,18 @@
 #' 
 #' @aliases word_stats DF_word_stats print.word.stats
 #' @param text.var The text variable         
-#' @param grouping.var The grouping variables.  Default NULL generates one output for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.  
+#' @param grouping.var The grouping variables.  Default NULL generates one 
+#' output for all text.  Also takes a single grouping variable or a list of 1 
+#' or more grouping variables.  
 #' @param tot Optional toutn of talk variable.           
-#' @param rm.incomplete logical.  If TRUE incomplete statments are removed from calculating the output.   
-#' @param digit.remove logical.  If TRUE removes digits from calculating the output.       
-#' @param apostrophe.remove logical.  If TRUE removes apostophes from calculating the output.   
+#' @param rm.incomplete logical.  If TRUE incomplete statments are removed from 
+#' calculating the output.   
+#' @param digit.remove logical.  If TRUE removes digits from calculating the 
+#' output.       
+#' @param apostrophe.remove logical.  If TRUE removes apostophes from calculating 
+#' the output.   
 #' @param digits Number of dicimal places to round.                     
-#' @param \\ldots Any other arguments passed to endf     
+#' @param \ldots Any other arguments passed to endf     
 #' @return Returns a list of three descriptive word statistics:
 #' \item{ts}{A data frame of descriptive word statistics by row} 
 #' \item{gts}{A data frame of word statistics per grouping variable:

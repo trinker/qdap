@@ -8,6 +8,7 @@
 #' @return Returns a dataframe of various diversity related indices for Shannon, 
 #' collision, Berger Parker and Brillouin
 #' @keywords diversity
+#' @export
 #' @examples
 #' with(mraja1spl, diversity(dialogue, list(sex, died, fam.aff)))
 diversity <-
