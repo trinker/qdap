@@ -2,7 +2,6 @@
 #' 
 #' Generate a word frequency matrix by grouping variable
 #' 
-#' @aliases word.freq.matrix wfm
 #' @param text.var A text variable or word frequency matrix object.
 #' @param grouping.var The grouping variables.  Default NULL generates one word list for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
 #' @param wfdf a word frequency data frame. Default is null.
