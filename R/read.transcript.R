@@ -15,6 +15,7 @@
 #' @param na.strings a character vector of strings which are to be interpreted as NA values.
 #' @param sep the field separator character. Values on each line of the file are separated by this character.  The default of NULL instructs read.transcript to use a separator suitable for the file type being read in.
 #' @param skip integer: the number of lines of the data file to skip before beginning to read data.
+#' @param nontext2factor logical.  If TRUE attempts to convert any non text to a factor.
 #' @param \ldots Further arguments to be passed to read.table.
 #' @return Retruns a dataframe of dialogue and people
 #' @note If a transcript is a .docx file read transcript expects two columns (generally person and dialogue) with some sort of separator (default is colon separator).  .doc fils must be converted to .docx before reding in.
@@ -30,7 +31,7 @@ read.transcript <-
 function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE, 
     header = FALSE, dash = "", ellipsis = "...", quote2bracket = FALSE, 
     rm.empty.rows = TRUE, na.strings = c("999", "NA", "", " "), 
-    sep = NULL, skip = 0, ...) {
+    sep = NULL, skip = 0, nontext2factor = TRUE, ...) {
     y <- unlist(strsplit(file, "\\."))
     y <- y[[length(y)]]
     if (is.null(sep)) {
@@ -59,6 +60,9 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
         doc = stop("convert file to docx"),
         stop("invalid file extension:\n \bfile must be a .docx .csv .xls or .xlsx" )
     )
+    if (nontext2factor) {
+        x <- data.frame(sapply(x,  as.factor))
+    }
     if (!is.null(text.var) & !is.numeric(text.var)) {
         text.var <- which(colnames(x) == text.var)
     } else {
