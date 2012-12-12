@@ -93,8 +93,8 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     }
     ser <- c("<e2><80><9c>", "<e2><80><9d>", "<e2><80><98>", "<e2><80><99>", 
         "<e2><80><9b>", "<ef><bc><87>", "<e2><80><a6>", "<e2><80><93>", 
-        "<e2><80><94>", "<c3><a1>", "<c3><a9>")
-    reps <- c(lbrac, rbrac, "'", "'", "'", "'", ellipsis, dash, dash, "a", "e")
+        "<e2><80><94>", "<c3><a1>", "<c3><a9>", "<c2><bd>")
+    reps <- c(lbrac, rbrac, "'", "'", "'", "'", ellipsis, dash, dash, "a", "e", "half")
     Encoding(x[, text.var]) <-"latin1"
     x[, text.var] <- clean(mgsub(ser, reps, x[, text.var]))
     if(rm.empty.rows) {
