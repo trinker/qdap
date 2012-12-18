@@ -4,7 +4,7 @@
 #' used).  This procedure is usually done as part of the data read in and cleaing
 #' process.
 #' 
-#' @param dataframe A dataframe that contains the person and teact variable.
+#' @param dataframe A dataframe that contains the person and text variable.
 #' @param text.var The text variable.
 #' @param endmarks A character vector of endmarks to split turns of talk into 
 #' sentences.
