@@ -1,4 +1,4 @@
-#' Takes a matrix and generates an adjacency matrix
+#' Takes a Matrix and Generates an Adjacency Matrix
 #' 
 #' Takes a matrix (wfm) or termco object (.a, .c or .d) and generates an adjacency
 #' matrix for use with igraph
