@@ -23,10 +23,22 @@
 #' @seealso \url{https://github.com/trinker/qdap/wiki/Reading-Transcripts-into-R}
 #' @keywords transcript
 #' @examples
-#' url_dl("TEST5.docx") #downloads a test file called "TEST5.docx" into your working directory.
-#' dat <- read.transcript("TEST5.docx") 
-#' dat    
-#' delete("TEST5")  #clean up and delete the file
+#' doc1 <- system.file("extdata/trans1.docx", package = "qdap")
+#' doc2 <- system.file("extdata/trans2.docx", package = "qdap")
+#' doc3 <- system.file("extdata/trans3.docx", package = "qdap")
+#' 
+#' read.transcript(doc1)
+#' dat <- read.transcript(doc1, col.names = c("person", "dialogue"))
+#' dat
+#' rm_row(dat, "person", "[C") #remove bracket row
+#' 
+#' \dontrun{
+#' read.transcript(doc2) #throws an error
+#' } 
+#' read.transcript(doc2, skip = 1)
+#' 
+#' read.transcript(doc3, skip = 1) #wrong sep
+#' read.transcript(doc3, sep = "-", skip = 1)
 read.transcript <-
 function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE, 
     header = FALSE, dash = "", ellipsis = "...", quote2bracket = FALSE, 
