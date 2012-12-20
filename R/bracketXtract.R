@@ -12,6 +12,7 @@
 #' @seealso \code[qdap]{\link{bracketX}}
 #' @references \url{http://stackoverflow.com/questions/8621066/remove-text-inside-brackets-parens-and-or-braces}
 #' @keywords bracket extract
+#' @export
 #' @examples
 #' examp2 <- examp2 <- structure(list(person = structure(c(1L, 2L, 1L, 3L), 
 #'     .Label = c("bob", "greg", "sue"), class = "factor"), text = 

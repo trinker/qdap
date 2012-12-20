@@ -6,6 +6,7 @@
 #' @return Returns a vector of striped words and qdap recognized end marks (|.!?*-).
 #' @seealso \code{\link[qda]{bag.o.words}}
 #' @keywords bag of words
+#' @export
 #' @examples 
 #' DATA 
 #' breaker(DATA$state)

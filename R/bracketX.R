@@ -11,6 +11,7 @@
 #' @return Returns a vector of text with brackets removed.
 #' @seealso \code[qdap]{\link{bracketXtract}}
 #' @keywords bracket remove
+#' @export
 #' @examples
 #' examp2 <- examp2 <- structure(list(person = structure(c(1L, 2L, 1L, 3L), 
 #'     .Label = c("bob", "greg", "sue"), class = "factor"), text = 

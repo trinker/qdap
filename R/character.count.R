@@ -11,6 +11,7 @@
 #' @return Returns a character count by row or total.
 #' @seealso \code[qdap]{\link{word.count}}
 #' @keywords character count
+#' @export
 #' @examples
 #' character.count(DATA$state)
 #' character.count(DATA$state, by= "all")

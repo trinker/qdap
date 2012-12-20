@@ -6,6 +6,7 @@
 #' @param missing %% ~~Describe \code{missing} here~~
 #' @return Returns a dataframe with blank spaces replaced.
 #' @seealso \code{\link[qdap]{unblanker}}
+#' @export
 #' @examples
 #' dat <- data.frame(matrix(sample(c(1:4, ""), 50, TRUE), 
 #'     10, byrow = TRUE), stringsAsFactors = FALSE)
