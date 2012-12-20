@@ -1,0 +1,14 @@
+citHeader("To cite qdap in publications, please use:")
+
+
+citEntry(entry = "manual",
+    title = "{qdap}: {Q}uantitative Discourse Analysis Package",
+    author = "Tyler W. Rinker",
+    organization = "University at Buffalo/SUNY",
+    address = "Buffalo, New York",
+    note = "version 0.1.0",
+    year = "2012",
+    textVersion  = paste("Rinker, T. W. (2012).",
+        "qdap: Quantitative Discourse Analysis Package.",
+        "version 0.1.0. University at Buffalo. Buffalo, New York.")
+)
