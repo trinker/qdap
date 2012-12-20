@@ -5,6 +5,7 @@
 #' @param text.var The text variable
 #' @return Returns a vector of character strings with escaped characters removed.
 #' @keywords escaped character
+#' @export
 #' @examples
 #' x <- "I go \r
 #'     to the \tnext line"
