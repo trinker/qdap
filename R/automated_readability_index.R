@@ -7,6 +7,9 @@
 #' @param grouping.var The grouping variables.  Default NULL generates one word 
 #' list for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
+#' @param rm.incomplete logical.  If TRUE removes incomplete sentences from the 
+#' analysis.
+#' @param \ldots Other arguments passed to \code{endf}.
 #' @return Generates a dataframe with selected readability statistic by grouping 
 #' variable(s).  The \code{frey} function returns a graphic representation of 
 #' the readability.
@@ -15,20 +18,20 @@
 #' word difficulty (letters per word) and sentence difficulty 
 #' (words per sentence).  If you have not run the sentSplit function on your 
 #' data the results may not be accurate.
-#' @references Senter, R. J., & Smith, E. A.. (1967) Automated readability index. 
-#' Technical Report AMRLTR-66-220, University of Cincinnati, Cincinnati, Ohio.
-#' 
-#' Coleman, M. & Liau, T. L. (1975). A computer readability formula designed 
+#' @references Coleman, M., & Liau, T. L. (1975). A computer readability formula designed 
 #' for machine scoring. Journal of Applied Psychology, Vol. 60, pp. 283-284.
-#' 
-#' McLaughlin, G. H. (1969). SMOG Grading: A New Readability Formula. 
-#' Journal of Reading, Vol. 12(8), pp. 639-646. 
 #' 
 #' Flesch R. (1948). A new readability yardstick. Journal of Applied Psychology. 
 #' Vol. 32(3), pp. 221-233. doi: 10.1037/h0057532.
 #' 
 #' Gunning, T. G. (2003). Building Literacy in the Content Areas. Boston: Allyn 
 #' & Bacon.
+#' 
+#' McLaughlin, G. H. (1969). SMOG Grading: A New Readability Formula. 
+#' Journal of Reading, Vol. 12(8), pp. 639-646. 
+#' 
+#' Senter, R. J., & Smith, E. A.. (1967) Automated readability index. 
+#' Technical Report AMRLTR-66-220, University of Cincinnati, Cincinnati, Ohio.
 #' @keywords readability, Automated Readability Index, Coleman Liau, SMOG, 
 #' Flesch-Kincaid, Fry, Linsear Write
 #' @export
@@ -53,7 +56,7 @@
 #' with(rajSPLIT, linsear_write(dialogue, list(sex, fam.aff)))
 #' }
 automated_readability_index <-
-function(text.var, grouping.var = NULL) {
+function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     G <- if(is.null(grouping.var)) {
              "all"
          } else {
@@ -83,8 +86,10 @@ function(text.var, grouping.var = NULL) {
     text <- as.character(text.var)
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
+    if (rm.incomplete) {
+      DF <- endf(dataframe = DF, text.var = text.var, ...)
+    }    
     DF$word.count <- word.count(DF$text.var, missing = 0)
-
     i <- as.data.frame(table(DF$group))
 
     DF$group <- DF$group[ , drop=TRUE]
@@ -110,9 +115,6 @@ function(text.var, grouping.var = NULL) {
 #' more grouping variable(s).
 #' 
 #' @rdname Readability
-#' @param rm.incomplete logical.  If TRUE removes incomplete sentences from the 
-#' analysis.
-#' @param \ldots Other arguments passed to \code{endf}.
 #' @export
 coleman_liau <-
   function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
