@@ -26,6 +26,7 @@
 #' doc1 <- system.file("extdata/trans1.docx", package = "qdap")
 #' doc2 <- system.file("extdata/trans2.docx", package = "qdap")
 #' doc3 <- system.file("extdata/trans3.docx", package = "qdap")
+#' doc4 <- system.file("extdata/trans4.xlsx", package = "qdap")
 #' 
 #' read.transcript(doc1)
 #' dat <- read.transcript(doc1, col.names = c("person", "dialogue"))
@@ -39,6 +40,8 @@
 #' 
 #' read.transcript(doc3, skip = 1) #wrong sep
 #' read.transcript(doc3, sep = "-", skip = 1)
+#'
+#' read.transcript(doc4)
 read.transcript <-
 function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE, 
     header = FALSE, dash = "", ellipsis = "...", quote2bracket = FALSE, 
@@ -55,7 +58,7 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     }
     switch(y, 
         xlsx = {
-            x <-read.xls(file,  header = header, 
+            x <- read.xls(file,  header = header, 
                 sep = sep, as.is=FALSE, na.strings= na.strings, 
                 strip.white = TRUE, stringsAsFactors = FALSE, 
                 blank.lines.skip = rm.empty.rows, ...)
