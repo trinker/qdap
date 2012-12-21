@@ -1,28 +1,48 @@
 #' Search for lists of Terms
 #' 
-#' Search a transcript by any number of grouping variables for categories (themes) of grouped root terms.  While there are other termco functions int he termco family termco.a is a wrapper for general use.
+#' Search a transcript by any number of grouping variables for categories 
+#' (themes) of grouped root terms.  While there are other termco functions in 
+#' the termco family termco.a is a wrapper for general use.
 #' 
 #' @aliases termco.d print.termco_d
 #' @param text.var text.var The text variable
-#' @param grouping.var The grouping variables.  Default NULL generates one word list for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
+#' @param grouping.var The grouping variables.  Default NULL generates one word 
+#' list for all text.  Also takes a single grouping variable or a list of 1 or 
+#' more grouping variables.
 #' @param match.list a list of named character vectors
-#' @param short.term logical.  If TRUE column names are trimmed versions of the match list, other wise the terms are wrapped with 'term(phrase)'
+#' @param short.term logical.  If TRUE column names are trimmed versions of the 
+#' match list, other wise the terms are wrapped with 'term(phrase)'
 #' @param ignore.case logical.  If TRUE case is ignored.
-#' @param elim.old logical.  If TRUE eliminates the columns that are combined together by the named match.list.
-#' @param output Type of proportion output; either "proportion" (decimal format) or "percent".  Default is percent.
-#' @param digits integer indicating the number of decimal places (round) or significant digits (signif) to be used. Negative values are allowed
-#' @param apostrophe.remove logical.  If TRUE removes apostrophes from the text before examining.
-#' @param char.keep A character vector of symbol character (i.e. punctioation) that strip should keep.  The default is to strip everything except apostophes.
+#' @param elim.old logical.  If TRUE eliminates the columns that are combined 
+#' together by the named match.list.
+#' @param output Type of proportion output; either "proportion" (decimal format) 
+#' or "percent".  Default is percent.
+#' @param digits integer indicating the number of decimal places (round) or 
+#' significant digits (signif) to be used. Negative values are allowed.
+#' @param apostrophe.remove logical.  If TRUE removes apostrophes from the text 
+#' before examining.
+#' @param char.keep A character vector of symbol character (i.e. punctioation) 
+#' that strip should keep.  The default is to strip everything except apostophes.
 #' @param digit.remove logical.  If TRUE strips digits from the text.
-#' @param \ldots other argument supplied to strip
-#' @return Returns a list, of class "termco.d", of data frames and information regarding word counts.
+#' @param \ldots Other argument supplied to strip.
+#' @return Returns a list, of class "termco.d", of data frames and information 
+#' regarding word counts.
 #' \item{raw}{raw word counts by grouping variable} 
-#' \item{prop}{proportional word counts by grouping variable; proportional to each individual's word use} 
+#' \item{prop}{proportional word counts by grouping variable; proportional to 
+#' each individual's word use} 
 #' \item{rnp}{a character combination data frame of raw and proportional}     
 #' \item{zero_replace}{value to replace zeros with; mostly internal use}   
-#' \item{output}{character value for outpur type (either" "proportion" or "percent"; mostly internal use}  
-#' \item{digits}{integer value od number of digits to display; mostly internal use}    
-#' @note The match.list is (optionally) case and character sensitive.  Spacing is an important way to grab specific words and requires careful thought.  Using "read"will find the words "bread", "read" "reading", and "ready".  If you want to search fo just the word "read" you'd supply a vector of c(" read ", " reads", " reading", " reader").  To search for non character arguments (i.e. numbers and symbols) additional arguments from strip must be passed.
+#' \item{output}{character value for outpur type (either" "proportion" or 
+#' "percent"; mostly internal use}  
+#' \item{digits}{integer value od number of digits to display; mostly internal 
+#' use}    
+#' @note The match.list is (optionally) case and character sensitive.  Spacing 
+#' is an important way to grab specific words and requires careful thought.  
+#' Using "read"will find the words "bread", "read" "reading", and "ready".  If 
+#' you want to search fo just the word "read" you'd supply a vector of 
+#' c(" read ", " reads", " reading", " reader").  To search for non character 
+#' arguments (i.e. numbers and symbols) additional arguments from strip must be 
+#' passed.
 #' @seealso See Also as \code{\link[qdap]{termco.d}}
 #' See Also as \code{\link[qdap]{termco.c}}
 #' See Also as \code{\link[qdap]{termco.rnp}}
@@ -69,7 +89,8 @@
 #' 
 #' #Using with term.match and exclude    
 #' exclude(term.match(DATA$state, qcv(th), FALSE), "truth")
-#' termco.a(DATA$state, DATA$person, exclude(term.match(DATA$state, qcv(th), FALSE), "truth"))
+#' termco.a(DATA$state, DATA$person, exclude(term.match(DATA$state, qcv(th), 
+#' FALSE), "truth"))
 #' MTCH.LST <- exclude(term.match(DATA$state, qcv(th, i)), qcv(truth, stinks))
 #' termco.a(DATA$state, DATA$person, MTCH.LST)
 termco.a <-
