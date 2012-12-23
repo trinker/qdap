@@ -23,4 +23,4 @@ function(text.var, width=80, txt.file = NULL,
         sink()
     }
     options(width=OW)
-}
+} #used in cm_df.transcript

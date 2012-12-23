@@ -1,7 +1,7 @@
 #' Quick Preparation of Text
 #'
 #' Wrapper for bracketX, replace_number, replace_symbol, 
-#' replace_abbreviation and scrubber to quickly prepares text for 
+#' replace_abbreviation and scrubber to quickly prepare text for 
 #' analysis.  Care should taken with this function to ensure data 
 #' is properly formatted and complete.
 #' 

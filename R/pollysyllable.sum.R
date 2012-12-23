@@ -14,24 +14,6 @@
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (text) 
-#' {
-#'     Trim <- function(x) gsub("^\s+|\s+$", "", x)
-#'     counter <- function(x) {
-#'         y <- as.data.frame(table(syllable.count(Trim(x))["syllables"]))
-#'         z <- subset(y, as.numeric(as.character(Var1)) >= 3)
-#'         j <- sum(z$Freq)
-#'         return(j)
-#'     }
-#'     unlist(lapply(as.character(text), function(x) counter(x)))
-#'   }
-#' 
 pollysyllable.sum <-
 function(text) {
   Trim <- function(x) gsub("^\\s+|\\s+$", "", x)

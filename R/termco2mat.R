@@ -13,11 +13,6 @@
 #' @param transform logical.  If TRUE the matrix will be transformed.
 #' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
 termco2mat <-function (dataframe, drop.wc = TRUE, short.terms = TRUE, 
   rm.zerocol = FALSE, no.quote = TRUE, transform = TRUE, trim.terms = TRUE) {
   if (class(dataframe) %in% c("termco_d", "termco_c")) {
