@@ -290,7 +290,7 @@ termco.d <-
 #' 
 #' @param return.list logical.  If TRUE returns the output for multiple terms as 
 #' a list by term rather than a vector.
-#' @return term.match returns a list or vector of possible words that match a term.
+#' @return term.match returns a list or vector of possible words that match term(s).
 #' @rdname termco.a
 #' @export
 term.match <-
