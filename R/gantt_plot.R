@@ -4,9 +4,10 @@
 #'
 #' @param text.var The text variable    
 #' @param grouping.var The grouping variables. Also takes a single grouping variable or a list of 1 or more grouping variables.
-#' @param rm.var an optional single vector or list of 1 or 2 of repeated measures to facet by     
-#' @param units       
-#' @param col.sep     
+#' @param rm.var an optional single vector or list of 1 or 2 of repeated measures to facet by    
+#' @param fill.var an optional variable to fill the code stips by. 
+#' @param units The unit of measurement.      
+#' @param col.sep The column separator.
 #' @param \\ldots Other arguments passed to gantt_wrap 
 #' @return   
 #' @seealso
@@ -25,17 +26,17 @@
 #'     list(act, newb), size = 4))
 #' z + theme(panel.margin = unit(1, "lines")) + scale_colour_grey()
 #' z + scale_colour_brewer(palette="Dark2")
-gantt_plot <-
-function(text.var, grouping.var, rm.var = NULL, xlab = "duration (in words)", 
-    units = "words", col.sep = "_", ...) {
-    NAME <- if (is.list(grouping.var)) {
+gantt_plot <- 
+function(text.var, grouping.var, rm.var = NULL, fill.var = NULL, 
+    xlab = "duration (in words)", units = "words", col.sep = "_", ...) {
+    if (is.list(grouping.var)) {
         m <- unlist(as.character(substitute(grouping.var))[-1])
         m <- sapply(strsplit(m, "$", fixed=TRUE), 
             function(x) x[length(x)])
-        paste(m, collapse=col.sep)
+        NAME <- paste(m, collapse=col.sep)
     } else {
         G <- as.character(substitute(grouping.var))
-        G[length(G)]
+        NAME <- G[length(G)]
     }
     if (is.null(rm.var)) {
         x <- gantt(text.var = text.var, grouping.var = grouping.var, 
@@ -65,7 +66,51 @@ function(text.var, grouping.var, rm.var = NULL, xlab = "duration (in words)",
         rmNAME <- unlist(strsplit(rmNAME, col.sep, fixed=TRUE))
         colnames(x)[1:2] <- rmNAME
     }
+    if (!is.null(fill.var)){
+        if (is.list(fill.var)) {
+            m <- unlist(as.character(substitute(fill.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), 
+                function(x) x[length(x)])
+            fillNAME <- paste(m, collapse=col.sep)
+        } else {
+            G <- as.character(substitute(fill.var))
+            fillNAME <- G[length(G)]
+        }
+
+
+        if (!is.list(fill.var)){
+            fill.var <- list(fill.var)
+        }
+        if (length(fill.var) > 1) {
+            fill.var <- paste2(fill.var)
+        }
+        fv <- data.frame(fill.var=fill.var, text.var=text.var, 
+            grouping.var=grouping.var)
+        if (!is.null(rm.var)) {
+            fv$rm.var <- rm.var
+        }
+        colnames(fv)[1] <- "fill.var"
+        fv2 <- fv[!is.na(text.var), -2]
+        if (!is.null(rm.var)) {
+            fv2 <- data.frame(paste2(fv2[, 3:2]), fv2[, 1, drop=FALSE])
+        } else {
+            fv2 <- fv2[, 2:1]
+        }
+        names(fv2)[1] <- "key"
+        fv2 <- unique(fv2)
+        nx <- ncol(x)
+        kv <- x[, -c((nx-2):nx)]
+        if (ncol(kv) > 1) {
+            x[, "key"] <- paste2(kv)
+        } else {
+            x[, "key"] <- kv
+        }
+        x$fill_var <- lookup(x$key, fv2)
+        x[, "key"] <- NULL
+        colnames(x)[ncol(x)] <- fillNAME
+
+    }
     y <- gantt_wrap(dataframe = x, plot.var = NAME, facet.vars = rmNAME, 
-         xlab = xlab, ...)
+         fill.var = fillNAME, xlab = xlab, ...)
     invisible(y)
 }
