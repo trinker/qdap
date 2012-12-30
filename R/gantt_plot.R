@@ -1,6 +1,6 @@
 #' Gantt Plot
 #'
-#' A convenience that wraps gantt, gantt_rm and gantt_wrap into a single 
+#' A convenience function that wraps gantt, gantt_rm and gantt_wrap into a single 
 #' plotting function.
 #'
 #' @param text.var The text variable    
