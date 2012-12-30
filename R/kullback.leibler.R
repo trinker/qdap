@@ -1,21 +1,30 @@
 #' Kullback Leibler Statistic
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' A proximatey measure between two probability distributions applied to speech.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param x %% ~~Describe \code{x} here~~
-#' @param y %% ~~Describe \code{y} here~~
-#' @param digits %% ~~Describe \code{digits} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param x A numeric vector, matrix or data frame.
+#' @param y A second numeric vector if x is also a vector.  Default is NULL.
+#' @param digits Number of decimal places to round. 
+#' @return Returns a matrix of the Kullback Leibler measure between each vector 
+#' of probabiltiies.
+#' @details Uses Kullback & Leibler's (1951) formula:
+#' \deqn{D_{KL}(P||Q)=\sum_i{ln\left ( \frac{P_{i}}{Q_{i}} \right )}P_{i}}
+#' @references  Kullback, S., & Leibler, R.A. (1951). On Information and 
+#' sufficiency. Annals of Mathematical Statistics 22 (1): 79-86. 
+#' doi:10.1214/aoms/1177729694
+#' @keywords Kullback-Leibler
 #' @examples
+#' \dontrun{
+#' p.df <- word.freq.df(DATA$state, DATA$person)                    
+#' p.mat <- wfm(text.var = DATA$state, grouping.var = DATA$person)  
+#'                                                                 
+#' kullback.leibler(p.mat)                                         
+#' kullback.leibler(p.df)                                          
+#' kullback.leibler(p.df$greg, p.df$sam)  
+#' 
+#' p.df2 <- word.freq.df(raj$dialogue, raj$person)
+#' kullback.leibler(p.df2)
+#' }
 kullback.leibler <-
 function(x, y = NULL, digits = 3){
     kl <- function(x, y){
@@ -39,17 +48,10 @@ function(x, y = NULL, digits = 3){
     } else {
         x <- x
     }
-
     if (is.null(y)) { 
-        z <- outer (
-            colnames(x), 
-            colnames(x), 
-            Vectorize(function(i,j) kl(x[,i],x[,j]))
-        )
-        dimnames(z) <- list(colnames(x), colnames(x))
+        z <- v.outer(x, "kl", digits = digits)
     } else {
-        z <- kl(x = x, y = y)
+        z <- round(kl(x = x, y = y), digits = digits)
     }
-    z <- round(z, digits = digits)
-    return(z)
+    z
 }
