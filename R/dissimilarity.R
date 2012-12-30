@@ -12,6 +12,7 @@
 #' @return Returns a matrix of dissimilarity values (the agreement between text.
 #' @seealso \code{\link[stats]{dist}}
 #' @keywords correlation, dissimilarity
+#' @export
 #' @examples 
 #' with(DATA, dissimilarity(state, list(sex, adult)))
 #' with(DATA, dissimilarity(state, person, diag = TRUE))
@@ -24,7 +25,7 @@ function(text.var, grouping.var= NULL, method = "prop", diag = FALSE,
         wfm.object <- text.var
     }
     if (comment(wfm.object)!= "true.matrix") {
-        warning("not a matrix from word.freq.matrix function")
+        warning("not a matrix from wfm function")
     }
     if (comment(wfm.object)!= "true.matrix"){
         wfm.object <- wfm.object[-c(nrow(wfm.object)), -c(1, 

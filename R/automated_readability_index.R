@@ -14,7 +14,7 @@
 #' variable(s).  The \code{frey} function returns a graphic representation of 
 #' the readability.
 #' @rdname Readability
-#' @note Many of the indeices (e.g. Automated Readability Index) are derived from 
+#' @note Many of the indices (e.g. Automated Readability Index) are derived from 
 #' word difficulty (letters per word) and sentence difficulty 
 #' (words per sentence).  If you have not run the sentSplit function on your 
 #' data the results may not be accurate.

@@ -3,19 +3,22 @@
 #' Generate a word frequency data frame by grouping variable
 #' 
 #' @param text.var A text variable or word frequency matrix object.
-#' @param grouping.var The grouping variables.  Default NULL generates one word list for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
+#' @param grouping.var The grouping variables.  Default NULL generates one word 
+#' list for all text.  Also takes a single grouping variable or a list of 1 or 
+#' more grouping variables.
 #' @param stopwords A vector of stop words to remove.
-#' @param margins logical. If true provides grouping.var and word variable totals
-#' @param output output type (either "proportion", "proportion" or "percent")
-#' @param digits integer indicating the number of decimal places (round) or significant digits (signif) to be used. Negative values are allowed
+#' @param margins logical. If TRUE provides grouping.var and word variable totals.
+#' @param output Output type (either "proportion", "proportion" or "percent")
+#' @param digits Integer indicating the number of decimal places (round) or 
+#' significant digits (signif) to be used. Negative values are allowed
 #' @return Returns a word frequency of the class data.frame
-#' @seealso \code{\link[qdap]{word.freq.matrix}}
+#' @seealso \code{\link[qdap]{wfm}}
 #' @examples
 #' \dontrun{
 #' with(DATA, wfdf(state, list(sex, adult)))
 #' with(DATA, wfdf(state, person))
 #' }
-word.freq.df <-
+wfdf <-
 function(text.var, grouping.var = NULL, stopwords = NULL,
     margins = FALSE, output = "raw", digits = 2){
     grouping.var <- if (is.list(grouping.var) & length(grouping.var)>1) {
@@ -80,4 +83,4 @@ function(text.var, grouping.var = NULL, stopwords = NULL,
     return(DF)
 }
 
-wfdf <- word.freq.df
+

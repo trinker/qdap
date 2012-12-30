@@ -43,7 +43,7 @@ function(text.var, grouping.var = NULL, target.words = NULL, stopwords = Top100W
     if (class(text.var) == "adjacency.matrix") { #actually takes an adjaceny matrix   
        adj.mat.object <- text.var[["adjacency"]]                                      
     } else {                                                                          
-        z <- word.freq.matrix(text.var = text.var, grouping.var = grouping.var,       
+        z <- wfm(text.var = text.var, grouping.var = grouping.var,       
             stopwords = stopwords)                                                    
         adj.mat.object <- adjmat(t(z))[["adjacency"]]                                 
     }                                                                                 

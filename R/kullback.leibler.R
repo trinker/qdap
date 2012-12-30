@@ -9,20 +9,22 @@
 #' of probabiltiies.
 #' @details Uses Kullback & Leibler's (1951) formula:
 #' \deqn{D_{KL}(P||Q)=\sum_i{ln\left ( \frac{P_{i}}{Q_{i}} \right )}P_{i}}
+#' @note The \code{kullback.leibler} function generally recieves the output of
+#' either \code{wfm} or \code{wfdf} functions.
 #' @references  Kullback, S., & Leibler, R.A. (1951). On Information and 
 #' sufficiency. Annals of Mathematical Statistics 22 (1): 79-86. 
 #' doi:10.1214/aoms/1177729694
 #' @keywords Kullback-Leibler
 #' @examples
 #' \dontrun{
-#' p.df <- word.freq.df(DATA$state, DATA$person)                    
+#' p.df <- wfdf(DATA$state, DATA$person)                    
 #' p.mat <- wfm(text.var = DATA$state, grouping.var = DATA$person)  
 #'                                                                 
 #' kullback.leibler(p.mat)                                         
 #' kullback.leibler(p.df)                                          
 #' kullback.leibler(p.df$greg, p.df$sam)  
 #' 
-#' p.df2 <- word.freq.df(raj$dialogue, raj$person)
+#' p.df2 <- wfdf(raj$dialogue, raj$person)
 #' kullback.leibler(p.df2)
 #' }
 kullback.leibler <-
