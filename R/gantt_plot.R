@@ -1,6 +1,7 @@
 #' Gantt Plot
 #'
-#' A convenience that wraps gantt, gantt_rm and gantt_wrap into a single plotting function.
+#' A convenience that wraps gantt, gantt_rm and gantt_wrap into a single 
+#' plotting function.
 #'
 #' @param text.var The text variable    
 #' @param grouping.var The grouping variables. Also takes a single grouping variable or a list of 1 or more grouping variables.
@@ -9,11 +10,18 @@
 #' @param units The unit of measurement.      
 #' @param col.sep The column separator.
 #' @param \\ldots Other arguments passed to gantt_wrap 
-#' @return   
-#' @seealso
-#' @references\url{http://wiki.stdout.org/rcookbook/Graphs/Colors%20(ggplot2)/}
-#' @keywords ~kwd1 ~kwd2
+#' @return Returns a Gantt style visualization.
+#' @note For non repeated measures data/plotting use \code{gantt}; for repeated 
+#' measures data output use \code{gantt_rep}; and for a flexible gantt plot that 
+#' words with code matrix functions (cm) use \code{gantt_wrap}.
+#' @seealso \code{\link[qdap]{gantt}} 
+#' \code{\link[qdap]{gantt_rep}},
+#' \code{\link[qdap]{gantt_wrap}},
+#' @references Wallace Clark and Henry Gantt (1922) The Gantt chart, a working 
+#' tool of management. New York, Ronald Press.
+#' @keywords Gantt
 #' @examples
+#' \dontrun{
 #' with(rajSPLIT, gantt_plot(text.var = dialogue, grouping.var = person, size=4))
 #' with(rajSPLIT, gantt_plot(text.var = dialogue, grouping.var = 
 #'     list(fam.aff, sex), rm.var  = act, 
@@ -26,6 +34,7 @@
 #'     list(act, newb), size = 4))
 #' z + theme(panel.margin = unit(1, "lines")) + scale_colour_grey()
 #' z + scale_colour_brewer(palette="Dark2")
+#' }
 gantt_plot <- 
 function(text.var, grouping.var, rm.var = NULL, fill.var = NULL, 
     xlab = "duration (in words)", units = "words", col.sep = "_", ...) {

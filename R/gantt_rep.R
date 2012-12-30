@@ -1,23 +1,34 @@
-#' Generate Time Spans for Repeated Measures
+#' Generate Unit Spans for Repeated Measures
 #' 
-#' Produces start and end times for occurances for each repeated measure condition.
+#' Produces start and end times for occurances for each repeated measure 
+#' condition.
 #' 
-#' @param rm.var an optional single vector or list of 1 or 2 of repeated emasures to facet by   
+#' @param rm.var an optional single vector or list of 1 or 2 of repeated 
+#' measures to facet by   
 #' @param text.var The text variable    
-#' @param grouping.var The grouping variables. Also takes a single grouping variable or a list of 1 or more grouping variables.
-#' @param units %% ~~Describe \code{units} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param grouping.var The grouping variables. Also takes a single grouping 
+#' variable or a list of 1 or more grouping variables.
+#' @param units The unit of measurement to analyze.  One of the strings 
+#' \code{"character"}, \code{"syllable"}, \code{"word"}, or \code{"sentence"}.
+#' @return Returns a data frame of start and end times by repeated measure and 
+#' grouping variable(s)
+#' @note For non repeated measures data/plotting use \code{gantt}; for a 
+#' convientent wrapper that takes text and generates plots use 
+#' \code{gantt_plot}; and for a flexible gantt plot that words with code matrix 
+#' functions (cm) use \code{gantt_wrap}.
+#' @seealso \code{\link[qdap]{gantt}},
+#' \code{\link[qdap]{gantt_wrap}},
+#' \code{\link[qdap]{gantt_plot}} 
+#' @references Wallace Clark and Henry Gantt (1922) The Gantt chart, a working 
+#' tool of management. New York, Ronald Press.
+#' @keywords Gantt
 #' @examples
+#' \dontrun{
 #' (dat3 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex), units = "words",                
 #'    col.sep = "_")))    
 #' gantt_wrap(dat3, fam.aff_sex, facet.vars = "act", title = "Repeated MeasuresGantt Plot",
 #'    minor.line.freq = 25, major.line.freq = 100)
+#' }
 gantt_rep <-
 function(rm.var, text.var, grouping.var, units = "words", col.sep = "_"){
     g <- grouping.var

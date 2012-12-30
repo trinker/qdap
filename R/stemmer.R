@@ -73,7 +73,7 @@ function(text.var, rm.bracket = TRUE, capitalize = TRUE,
 }
 
 
-stem.words <- 
+stem.words <- #is this necessary?  Won't stememr already do this?
 function(...) {
   stemmer(c(...), capitalize = FALSE, warn = FALSE, ...)
 }
