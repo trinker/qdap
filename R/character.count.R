@@ -3,11 +3,12 @@
 #' Transcript Apply Character Counts
 #' 
 #' @param text.var The text variable
-#' @param by an optional character string giving a method for counting words.  
-#' This is one of the strings "row" or "all".
+#' @param byrow logical.  If TRUE counts by row, if FALSE counts all words.
 #' @param missing Value to insert for missing values (empty cells).
-#' @param apostrophe logical.  If TRUE apostrophes will be counted in the character count.
+#' @param apostrophe.remove = TRUE logical.  If TRUE apostrophes will be counted 
+#' in the character count.
 #' @param digit.remove logical.  If TRUE removes digits before counting words.
+#' @param count.space logical.  If TRUE spaces are counted as characters.
 #' @return Returns a character count by row or total.
 #' @seealso \code[qdap]{\link{word.count}}
 #' @keywords character count
@@ -16,23 +17,22 @@
 #' character.count(DATA$state)
 #' character.count(DATA$state, by= "all")
 #' sum(character.count(DATA$state))
-character.count <-
-function(text.var, by = "row", missing = NA, apostrophe = TRUE, 
-    digit.remove = TRUE) {
-    text2 <- if (apostrophe == TRUE) {
-      text.var
-    } else {
-        gsub("'", "", text.var, fixed = TRUE)
+character.count <- 
+function(text.var, byrow = TRUE, missing = NA, apostrophe.remove = TRUE,
+    digit.remove = TRUE, count.space = FALSE) {
+    len2 <- function(x, missing) {
+        len <- length(x)
+        ifelse((len == 0) | (is.na(x) | is.null(x)), missing, nchar(x))
     }
-    chara <- function(x) {
-        y <- unlist(strsplit(strip(x, digit.remove = digit.remove), 
-            NULL))
-        z <- subset(y, y != " ")
-        length(z)
+    txt <- stopwords(text.var, strip = TRUE,  separate =  FALSE,
+        digit.remove = digit.remove)
+    txt[txt %in% c("", "NA")] <- NA
+    if (!count.space) {
+        txt <- gsub("\\s+", "", txt)
     }
-    OP <- switch(by, 
-           all = chara(paste(unlist(text2), collapse = "  ")), 
-           row = unlist(lapply(text2, function(x) chara(x)))
-          )
-    ifelse(OP == 0, missing, OP)
+    z <- unlist(lapply(txt, len2, missing = missing))
+    if (!byrow) {
+        z <- sum(z, na.rm = TRUE)   
+    }
+    z
 }

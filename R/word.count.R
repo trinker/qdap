@@ -7,7 +7,8 @@
 #' @param byrow logical.  If TRUE counts by row, if FALSE counts all words.
 #' @param missing Value to insert for missing values (empty cells).
 #' @param digit.remove logical.  If TRUE removes digits before counting words.
-#' @param names logical.  If TRUE the sentences are given as the names of the counts.
+#' @param names logical.  If TRUE the sentences are given as the names of the 
+#' counts.
 #' @return Returns a word count by row or total.
 #' @note wc is a convienent short hand for word.count.
 #' @seealso \code{\link[qdap]{character.count}},
