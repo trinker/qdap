@@ -59,15 +59,13 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
         NA
     } else {
         q <- scrubber(text)
-        q <- if (remove.bracketed == TRUE) {
-            bracketX(q) 
-        } else {
-            q
-        }
+        if (remove.bracketed) {
+            q <- bracketX(q) 
+        } 
         q <- strip(q) 
-        q <- gsub('-', " ", q) 
-        q <- gsub('?', " ", q) 
-        q <- gsub(" +", " ", q)
+        q <- gsub("-", " ", q) 
+        q <- gsub("\\?", " ", q) 
+        q <- Trim(q)
         if (q=="") {
             return(NA)
         }
