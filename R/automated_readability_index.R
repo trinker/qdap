@@ -3,7 +3,7 @@
 #' \code{automated_readability_index} - Apply Automated Readability Index to 
 #' transcript(s) by zero or more grouping variable(s).
 #' 
-#' @param text.var The text variable
+#' @param text.var The text variable.
 #' @param grouping.var The grouping variables.  Default NULL generates one word 
 #' list for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.

@@ -10,8 +10,9 @@
 #' @param digit.remove logical.  If TRUE removes digits before counting words.
 #' @param count.space logical.  If TRUE spaces are counted as characters.
 #' @return Returns a character count by row or total.
-#' @seealso \code[qdap]{\link{word.count}}
-#' @keywords character count
+#' @seealso \code[qdap]{\link{word.count}},
+#' \code[qdap]{\link{character.table}}
+#' @keywords character, count
 #' @export
 #' @examples
 #' character.count(DATA$state)

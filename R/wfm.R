@@ -96,7 +96,7 @@ function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
   } else {
     if (!is.null(text.var)) {
       wfdf <- wfdf(text.var = text.var, grouping.var = grouping.var, 
-                           stopwords = stopwords, output = output, digits = digits) 
+        stopwords = stopwords, output = output, digits = digits) 
       x2 <- wfdf[, -1, drop = FALSE]
       rownames(x2) <- wfdf[, 1]
       x2 <- as.matrix(x2)
