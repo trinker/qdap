@@ -15,14 +15,20 @@
 #' @rdname syllabication
 #' @note The worker of all the syllable functions is \code{syllable.count} 
 #' though it is not intendeded for direct use on a transcript.  This function 
-#' relies on a a dual dictionary lookup (based on the Nettalk Corpus (Sejnowski 
+#' relies on a a combined dictionary lookup (based on the Nettalk Corpus (Sejnowski 
 #' & Rosenberg, 1987)) and backup algorithm method.
 #' @references Sejnowski, T.J., and Rosenberg, C.R. (1987). "Parallel networks 
 #' that learn to pronounce English text" in Complex Systems, 1, 145-168. 
 #' @keywords syllable, syllabication, polysyllable
 #' @export
 #' @examples
-#' 
+#' \dontrun{
+#' syllable.count("Robots like Dason lie.")
+#' syllable.count("Robots like Dason lie.", algorithm.report = TRUE)
+#' syllable.sum(DATA$state)
+#' polysyllable.sum(DATA$state)
+#' combo_syllable.sum(DATA$state)
+#' }
 syllable.sum <-
 function(text.var, parallel = FALSE) {
     if (!parallel) {
@@ -174,12 +180,12 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
 
 #' Transcript Apply Summing of Polysyllables
 #' 
-#' \code{pollysyllable.sum} - Count the number of polysyllables per row of text.
+#' \code{polysyllable.sum} - Count the number of polysyllables per row of text.
 #' 
-#' @return pollysyllable.sum returns a vector of pollysyllable counts per row. 
+#' @return polysyllable.sum returns a vector of polysyllable counts per row. 
 #' @rdname syllabication
 #' @export
-pollysyllable.sum <-
+polysyllable.sum <-
 function(text.var, parallel = FALSE) {
     counter <- function(x) {
         v <- table(syllable.count(Trim(x))["syllables"])
