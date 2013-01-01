@@ -216,10 +216,12 @@ function(text.var, grouping.var = NULL, output = "valid",
   }
   DF$word.count <- word.count(DF$text.var, missing = 0)
   i <- as.data.frame(table(DF$group))
-  DF <- switch(output,
-               valid = {subset(DF, group%in%as.character(i[i$Freq > 29, 
-                                                           ][,'Var1']))},
-               all = DF)
+  if (output == "valid") {
+    DF <- subset(DF, group%in%as.character(i[i$Freq > 29, ][,'Var1']))
+    if (nrow(DF) == 0) {
+      stop("Not enough sentences for valid output.")
+    }
+  }
   DF$group <- DF$group[ , drop=TRUE]
   DF$tot.n.sent <- 1:nrow(DF)
   DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
