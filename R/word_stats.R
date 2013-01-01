@@ -7,7 +7,10 @@
 #' @param grouping.var The grouping variables.  Default NULL generates one 
 #' output for all text.  Also takes a single grouping variable or a list of 1 
 #' or more grouping variables.  
-#' @param tot Optional toutn of talk variable.           
+#' @param tot Optional toutn of talk variable.    
+#' @param parallel logical.  If TRUE attempts to run the function on multiple 
+#' cores.  Note that this may not mean a spead boost if you have one core or if 
+#' the data set is smaller as the cluster takes time to create.       
 #' @param rm.incomplete logical.  If TRUE incomplete statments are removed from 
 #' calculating the output.   
 #' @param digit.remove logical.  If TRUE removes digits from calculating the 
@@ -34,6 +37,7 @@
 #' \item{spw}{syllables per word}
 #' \item{n.state}{number of statements}
 #' \item{n.quest}{number of questions}
+#' \item{n.exclm}{number of exclamations}
 #' \item{n.incom}{number of incomplete satetments}
 #' \item{n.hapax}{number of hapax legomenon}
 #' \item{n.dis}{number of dis legomenon}
@@ -51,8 +55,9 @@
 #' desc_wrds$pun 
 #' with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff))) 
 word_stats <-
-function(text.var, grouping.var = NULL, tot = NULL, rm.incomplete = FALSE,
-         digit.remove = FALSE, apostrophe.remove = FALSE, digits = 3, ...) {
+function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE, 
+    rm.incomplete = FALSE, digit.remove = FALSE, apostrophe.remove = FALSE, 
+    digits = 3, ...) {
     G <- if(is.null(grouping.var)) {
         "all"
     } else {
@@ -105,13 +110,12 @@ function(text.var, grouping.var = NULL, tot = NULL, rm.incomplete = FALSE,
         TOT = TOT(t.o.t.), text.var = Text, stringsAsFactors = FALSE))  
     if (rm.incomplete) {
         DF <- endf(dataframe = DF, text.var = text.var, ...)
-    }
-    
+    } 
     DF$group <- DF$group[ , drop = TRUE]
     DF$n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(DF$group, DF$n.sent)), ]
     M <- DF_word_stats(text.var = DF$text.var, digit.remove = digit.remove, 
-        apostrophe.remove = apostrophe.remove)
+        apostrophe.remove = apostrophe.remove, parallel = parallel)
     M <- M[, !names(M) %in% c("text.var", "n.sent")]
     DF <- data.frame(DF, M)
     DF$end.mark <- substring(DF$text.var, nchar(DF$text.var), 

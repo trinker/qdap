@@ -4,7 +4,10 @@
 #' 
 #' %% ~~ If necessary, more details than the description above ~~
 #' 
-#' @param text.var %% ~~Describe \code{text} here~~
+#' @param text.var The text variable
+#' @param parallel logical.  If TRUE attempts to run the function on multiple 
+#' cores.  Note that this may not mean a spead boost if you have one core or if 
+#' the data set is smaller as the cluster takes time to create.
 #' @return %% ~Describe the value returned %% If it is a LIST, use %%
 #' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 #' 'comp2'} %% ...
@@ -15,7 +18,7 @@
 #' @keywords ~kwd1 ~kwd2
 #' @examples
 combo_syllable.sum <-
-function(text.var) {
+function(text.var, parallel = FALSE) {
     Trim <- function(x) gsub("^\\s+|\\s+$", "", x)
     counter <- function(x) {
         w <- syllable.count(Trim(x))["syllables"]
@@ -25,7 +28,20 @@ function(text.var) {
         k <- sum(w)
         return(c(k, j))
     }
-    m <- unlist(lapply(as.character(text.var), function(x) counter(x)))
+    if (!parallel) {
+        m <- unlist(lapply(as.character(text.var), function(x) counter(x)))
+    } else {
+        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
+        clusterExport(cl=cl, varlist=c("text.var", "counter", "strip",
+            "syllable.count", "scrubber", "bracketX", "env.syl"), 
+            envir = environment())
+        m <- parLapply(cl, as.character(text.var), function(x) {
+                counter(x)
+            }
+        )
+        stopCluster(cl)
+        m <- unlist(m)
+    }
     n <- as.data.frame(t(matrix(m, 2, length(m)/2)))
     names(n) <- c("syllable.count", "polysyllable.count")
     return(n)

@@ -19,6 +19,7 @@
 #' 
 syllable.count <- 
 function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
+    if (length(text) > 1) stop("text must be length one")
     if (is.na(text)) {
         NA
     } else {
