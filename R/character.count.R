@@ -25,7 +25,7 @@ function(text.var, byrow = TRUE, missing = NA, apostrophe.remove = TRUE,
         ifelse((len == 0) | (is.na(x) | is.null(x)), missing, nchar(x))
     }
     txt <- stopwords(text.var, strip = TRUE,  separate =  FALSE,
-        digit.remove = digit.remove)
+        digit.remove = digit.remove, stopwords = NULL)
     txt[txt %in% c("", "NA")] <- NA
     if (!count.space) {
         txt <- gsub("\\s+", "", txt)

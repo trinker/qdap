@@ -27,7 +27,8 @@ function(text.var, byrow = TRUE, missing = NA, digit.remove = TRUE, names = FALS
         len <- length(x)
         ifelse((len == 0) | len == 1 && (is.na(x) | is.null(x)), missing, len)
     }
-    txt <- stopwords(text.var, strip = TRUE,  digit.remove = digit.remove)
+    txt <- stopwords(text.var, strip = TRUE,  digit.remove = digit.remove, 
+        stopwords = NULL)
     z <- sapply(txt, len2, missing = missing)
     if (!byrow) {
         z <- sum(z, na.rm = TRUE)   
