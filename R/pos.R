@@ -10,7 +10,7 @@
 #' @param digits integer indicating the number of decimal places (round) or 
 #' significant digits (signif) to be used. Negative values are allowed
 #' @param progress.bar logical.  If TRUE attempts to provide a OS appropriate 
-#' progress bar.  If parallel is TRUE this argument is ignored.  Nite that 
+#' progress bar.  If parallel is TRUE this argument is ignored.  Note that 
 #' setting this argument to TRUE may slow down the function.
 #' @param gc.rate An integer value.  This is a necessary argument because of a 
 #' problem with the garbage collection in the openNLP function that \code{pos} 

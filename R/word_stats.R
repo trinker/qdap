@@ -10,7 +10,8 @@
 #' @param tot Optional toutn of talk variable.    
 #' @param parallel logical.  If TRUE attempts to run the function on multiple 
 #' cores.  Note that this may not mean a spead boost if you have one core or if 
-#' the data set is smaller as the cluster takes time to create.       
+#' the data set is smaller as the cluster takes time to create (parallel is 
+#' slower until approximately 10,000 rows).       
 #' @param rm.incomplete logical.  If TRUE incomplete statments are removed from 
 #' calculating the output.   
 #' @param digit.remove logical.  If TRUE removes digits from calculating the 
@@ -47,6 +48,7 @@
 #' \item{mpun}{An account of sentences with improper end mark} 
 #' @keywords descriptive statistic
 #' @examples
+#' \dontrun{
 #' word_stats(mraja1spl$dialogue, mraja1spl$person)
 #' (desc_wrds <- with(mraja1spl, word_stats(dialogue, person, tot = tot)))
 #' names(desc_wrds)
@@ -54,6 +56,7 @@
 #' desc_wrds$gts
 #' desc_wrds$pun 
 #' with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff))) 
+#' }
 word_stats <-
 function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE, 
     rm.incomplete = FALSE, digit.remove = FALSE, apostrophe.remove = FALSE, 
@@ -131,7 +134,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
     comment(mpun) <- "These observations did not have a ! . | ? * endmark"
     if(any(is.na(DF$sent.type))) {
         warning("Some sentences do have standard qdap punctuation endmarks.",
-            "\n  Use $mpun for list of observations with missing endmarks.")
+            "\n  Use $mpun for a list of observations with missing endmarks.")
     }
     DF$end.mark2 <- NULL
     LIST <- split(DF, DF[, "group"])
@@ -234,4 +237,18 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
     o <- list(ts = DF3, gts = DF2, mpun = mpun )
     class(o) <- "word.stats"
     return(o)
+}
+
+
+#' Prints a word.stats object
+#' 
+#' Prints a word.stats object.
+#' 
+#' @param x The word.stats object
+#' @param \ldots ignored
+#' @method print word.stats
+#' @S3method print word.stats
+print.word.stats <-
+function(x, ...) {
+    print(x$gts)
 }
