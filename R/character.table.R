@@ -58,7 +58,7 @@ character.table <- function(text.var, grouping.var) {
     L3 <- do.call(rbind, lapply(L2, function(x){
        nots <- chars[!chars %in% names(x)]
        new <- rev(c(x, rep(0, length(nots))))
-       if (nots > 0) {
+       if (!identical(nots, character(0))) {
            names(new)[1:length(nots)] <- nots
        }
        new[order(names(new))]
