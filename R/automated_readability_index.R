@@ -223,14 +223,14 @@ function(text.var, grouping.var = NULL, output = "valid",
   DF$group <- DF$group[ , drop=TRUE]
   DF$tot.n.sent <- 1:nrow(DF)
   DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
-  DF$pollysyllable.count <- pollysyllable.sum(DF$text.var)
+  DF$polysyllable.count <- polysyllable.sum(DF$text.var)
   DF2 <- aggregate(word.count ~ group, DF, sum)
   DF2$sentence.count <- as.data.frame(table(DF$group))$Freq
-  DF2$pollysyllable.count <- aggregate(pollysyllable.count ~ 
-    group, DF, sum)$pollysyllable.count   
+  DF2$polysyllable.count <- aggregate(polysyllable.count ~ 
+    group, DF, sum)$polysyllable.count   
   smog <- function(tse, tpsy) 1.043 * sqrt(tpsy * (30/tse)) + 3.1291 
   DF2$SMOG <- round(with(DF2, smog(tse = sentence.count, 
-    tpsy = pollysyllable.count)), digits = 1)
+    tpsy = polysyllable.count)), digits = 1)
   DF2$validity <- ifelse(DF2$sentence.count < 30, "n < 30", 
                          "valid")
   if(output == "valid") DF2$validity <- NULL
