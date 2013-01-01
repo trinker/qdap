@@ -2,17 +2,21 @@
 #' 
 #' Transcript Apply Word Counts
 #' 
-#' @aliases word.count wc
+#' @rdname word.count
 #' @param text.var The text variable
 #' @param byrow logical.  If TRUE counts by row, if FALSE counts all words.
 #' @param missing Value to insert for missing values (empty cells).
 #' @param digit.remove logical.  If TRUE removes digits before counting words.
 #' @param names logical.  If TRUE the sentences are given as the names of the counts.
 #' @return Returns a word count by row or total.
-#' @seealso \code[qdap]{\link{character.count}}
+#' @note wc is a convienent short hand for word.count.
+#' @seealso \code{\link[qdap]{character.count}},
+#' \code{\link[qdap]{syllable.count}}
 #' @keywords word count
+#' @export 
 #' @examples
 #' word.count(DATA$state)
+#' wc(DATA$state)
 #' word.count(DATA$state, names = TRUE)
 #' word.count(DATA$state, by= "all", names = TRUE)
 #' sum(word.count(DATA$state))
@@ -33,4 +37,6 @@ function(text.var, byrow = TRUE, missing = NA, digit.remove = TRUE, names = FALS
     z
 }
 
+#' @rdname word.count
+#' @export
 wc <- word.count
