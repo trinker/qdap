@@ -49,7 +49,7 @@ common.list <-
 common.default <-
   function(..., overlap = "all", equal.or = "equal"){
     LIS <- list(...)
-    return(common.list(LIS, overlap))
+    return(common.list(LIS, overlap, equal.or))
 }
 
 #' Prints an common.list
