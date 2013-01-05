@@ -3,13 +3,15 @@
 #' A convenience function that wraps gantt, gantt_rm and gantt_wrap into a single 
 #' plotting function.
 #'
-#' @param text.var The text variable    
-#' @param grouping.var The grouping variables. Also takes a single grouping variable or a list of 1 or more grouping variables.
-#' @param rm.var an optional single vector or list of 1 or 2 of repeated measures to facet by    
-#' @param fill.var an optional variable to fill the code stips by. 
+#' @param text.var The text variable.    
+#' @param grouping.var The grouping variables. Also takes a single grouping 
+#' variable or a list of 1 or more grouping variables.
+#' @param rm.var An optional single vector or list of 1 or 2 of repeated 
+#' measures to facet by    
+#' @param fill.var An optional variable to fill the code stips by. 
 #' @param units The unit of measurement.      
 #' @param col.sep The column separator.
-#' @param \\ldots Other arguments passed to gantt_wrap 
+#' @param \ldots Other arguments passed to gantt_wrap.
 #' @return Returns a Gantt style visualization.
 #' @note For non repeated measures data/plotting use \code{gantt}; for repeated 
 #' measures data output use \code{gantt_rep}; and for a flexible gantt plot that 
@@ -20,6 +22,7 @@
 #' @references Wallace Clark and Henry Gantt (1922) The Gantt chart, a working 
 #' tool of management. New York, Ronald Press.
 #' @keywords Gantt
+#' @export
 #' @examples
 #' \dontrun{
 #' with(rajSPLIT, gantt_plot(text.var = dialogue, grouping.var = person, size=4))

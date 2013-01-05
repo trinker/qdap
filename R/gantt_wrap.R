@@ -2,46 +2,46 @@
 #' 
 #' A ggplot2 wrapper that produces a Gantt plot
 #' 
-#' @param dataframe a data frame with ploting variable(s) and a column of start 
+#' @param dataframe A data frame with ploting variable(s) and a column of start 
 #' and end times.
-#' @param plot.var a factor plotting variable (y axis)
-#' @param facet.vars an optional single vector or list of 1 or 2 to facet by
-#' @param fill.var an optional variable to fill the code stips by.
-#' @param title an optional title for the plot.
-#' @param ylab an optional y label.
-#' @param xlab an optional x label.
-#' @param rev.factor logical.  if TRUE reverse the current plotting order so the 
+#' @param plot.var A factor plotting variable (y axis)
+#' @param facet.vars An optional single vector or list of 1 or 2 to facet by
+#' @param fill.var An optional variable to fill the code stips by.
+#' @param title An optional title for the plot.
+#' @param ylab An optional y label.
+#' @param xlab An optional x label.
+#' @param rev.factor logical.  If TRUE reverse the current plotting order so the 
 #' first element in the plotting variable's levels is plotted on top.
 #' @param ncol if an integer value is passed to this gantt_wrap uses facet_wrap 
 #' rather than facet_grid
-#' @param transform logical.  if TRUE the repeated facets will be transformed 
+#' @param transform logical.  If TRUE the repeated facets will be transformed 
 #' from stacked to side by side.
-#' @param minor.line.freq a numeric value for frequency of minor grid lines.
-#' @param major.line.freq a numeric value for frequency of major grid lines.
+#' @param minor.line.freq A numeric value for frequency of minor grid lines.
+#' @param major.line.freq A numeric value for frequency of major grid lines.
 #' @param sig.dig.line.freq An internal rounding factor for minor and major line 
 #' freq.  Generally, default value of 1 suffices for larger range of x scale may 
 #' need to be set to -2..
 #' @param hms.scale logical.  If TURE converts scale to h:m:s format.  Default 
 #' NULL attempts to detect if object is a cm_time2long object
-#' @param scale should scales be fixed ("fixed", the default), free ("free"), or 
+#' @param scale Should scales be fixed ("fixed", the default), free ("free"), or 
 #' free in one dimension ("free_x", "free_y")
-#' @param space if "fixed", the default, all panels have the same size. If 
+#' @param space If "fixed", the default, all panels have the same size. If 
 #' "free_y" their height will be proportional to the length of the y scale; if 
 #' "free_x" their width will be proportional to the length of the x scale; or if 
 #' "free" both height and width will vary. This setting has no effect unless the 
 #' appropriate scales also vary.
-#' @param size the width of the plot bars.
-#' @param rm.horiz.lines logical.  if TRUE the horzontal lines will be removed
-#' @param x.ticks  logical.  if TRUE the x tixks will be displayed
-#' @param y.ticks  logical.  if TRUE the y tixks will be displayed
-#' @param legend.position the position of legends. ("left", "right", "bottom", 
-#' "top", or two-element numeric vector)
-#' @param bar.color optional color to constrain all bars
-#' @param border.color the color to plot border around Gantt bars (default is 
-#' NULL)
-#' @param border.size an integer value for the size to plot borders around Gantt 
+#' @param size The width of the plot bars.
+#' @param rm.horiz.lines logical.  If TRUE the horzontal lines will be removed.
+#' @param x.ticks  logical.  If TRUE the x ticks will be displayed.
+#' @param y.ticks  logical.  If TRUE the y ticks will be displayed.
+#' @param legend.position The position of legends. ("left", "right", "bottom", 
+#' "top", or two-element numeric vector).
+#' @param bar.color Optional color to constrain all bars.
+#' @param border.color The color to plot border around Gantt bars (default is 
+#' NULL).
+#' @param border.size An integer value for the size to plot borders around Gantt 
 #' bars. Controls length (width also controlled if not specified).
-#' @param border.width controls broder width around Gantt bars.  Use a numeric 
+#' @param border.width Controls broder width around Gantt bars.  Use a numeric 
 #' value in addition to border size if plot borders appear disproportional.
 #' @param constrain logical.  If TRUE the Gantt bars touch the edge of the graph.
 #' @return Returns a Gantt style visualization.
@@ -52,10 +52,13 @@
 #' @seealso 
 #' \code{\link[qdap]{gantt}},
 #' \code{\link[qdap]{gantt_plot}},
-#' \code{\link[qdap]{gantt_rep}}
+#' \code{\link[qdap]{gantt_rep}},
+#' \code{\link[ggplot2]{facet_grid}},
+#' \code{\link[ggplot2]{facet_wrap}}
 #' @references Wallace Clark and Henry Gantt (1922) The Gantt chart, a working 
 #' tool of management. New York, Ronald Press.
 #' @keywords Gantt
+#' @export
 #' @examples
 #' \dontrun{
 #' (dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 

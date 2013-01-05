@@ -3,9 +3,9 @@
 #' Produces start and end times for occurances for each repeated measure 
 #' condition.
 #' 
-#' @param rm.var an optional single vector or list of 1 or 2 of repeated 
-#' measures to facet by   
-#' @param text.var The text variable    
+#' @param rm.var An optional single vector or list of 1 or 2 of repeated 
+#' measures to facet by.   
+#' @param text.var The text variable.    
 #' @param grouping.var The grouping variables. Also takes a single grouping 
 #' variable or a list of 1 or more grouping variables.
 #' @param units The unit of measurement to analyze.  One of the strings 
@@ -22,6 +22,7 @@
 #' @references Wallace Clark and Henry Gantt (1922) The Gantt chart, a working 
 #' tool of management. New York, Ronald Press.
 #' @keywords Gantt
+#' @export
 #' @examples
 #' \dontrun{
 #' (dat3 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex), units = "words",                

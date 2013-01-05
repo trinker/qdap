@@ -29,6 +29,7 @@
 #' @references Wallace Clark and Henry Gantt (1922) The Gantt chart, a working 
 #' tool of management. New York, Ronald Press.
 #' @keywords Gantt
+#' @export
 #' @examples
 #' \dontrun{
 #' gantt(DATA$state, DATA$person)                                                        
