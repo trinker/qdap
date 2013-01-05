@@ -242,8 +242,8 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             scale_y_continuous(breaks = c(0, .25, .5, .75, 1),
                 labels=c("0", ".25", ".5", ".75", "1")) +
             ylab("proportion") + xlab(G)  +                                          
-            scale_fill_discrete(name = "", breaks=levels(dat2$pos),                   
-                labels = LAB2) +          
+            #scale_fill_discrete(name = "", breaks=levels(dat2$pos),                   
+            #    labels = LAB2) +          
             theme(legend.position = 'bottom') +
             ggtitle("Percent Parts of Speech By Contextual-Formal")                                         
             if (!is.null(bar.colors)) {  
@@ -256,7 +256,10 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
                         name = "", breaks=levels(dat2$pos),                               
                         labels = LAB2)  
                 }
-            }         
+            } else {
+                     XX <- XX + scale_fill_discrete(name = "", 
+                         breaks=levels(dat2$pos), labels = LAB2)
+            }
         names(FOR)[1] <- "grouping"                                                  
         buffer <- diff(range(FOR$formality))*.05                                     
         ZZ <- ggplot(data=FOR, aes(grouping,  formality, size=word.count)) +         
