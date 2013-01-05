@@ -8,7 +8,7 @@
 #' @param trailspace logical.  If TRUE inserts a trailing space in the terms.
 #' @return Returns a character vector with trailing and/or leading spaces.
 #' @export
-#' @example
+#' @examples
 #' \dontrun{
 #' spaste(Top25Words)
 #' spaste(Top25Words, FALSE)
