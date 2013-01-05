@@ -3,22 +3,27 @@
 #' Allows range coding of words for efficient coding.
 #' 
 #' @param dataframe A dataframe containing a text variable.
-#' @param ranges A named list of ranges to recode.  Names correspond to code names in dataframe.
-#' @param value The recode value.  Takes a vector of length one or a vector of length equal to the number of code columns.
+#' @param ranges A named list of ranges to recode.  Names correspond to code 
+#' names in dataframe.
+#' @param value The recode value.  Takes a vector of length one or a vector of 
+#' length equal to the number of code columns.
 #' @param text.var The name of the text variable.
 #' @param codes Optional vector of codes.
-#' @param transform logical.  If TRUE the words are located across the top of dataframe.
+#' @param transform logical.  If TRUE the words are located across the top of 
+#' dataframe.
 #' @return Generates a dummy coded dataframe.
 #' @seealso 
-#' \code{\link{cm_df.temp}}
+#' \code{\link{cm_df.temp}},
 #' \code{\link{cm_df2long}}
-#' \code{\link{cm_df.transform}}
-#' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
+#' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: 
+#' Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding
+#' @export
 #' @examples
 #' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
 #' X <- cm_df.temp(DATA, "state", codes)
-#' cm_df.fill(X, list(dc=c(1:3, 5),  sf=c(4, 6:9, 11), wes=0, pol=0, rejk=0, lk=0, azx=1:30, mmm=5))
+#' cm_df.fill(X, list(dc=c(1:3, 5),  sf=c(4, 6:9, 11), wes=0, pol=0, rejk=0, 
+#'     lk=0, azx=1:30, mmm=5))
 #' cm_df.fill(X, list(sf=c(4, 6:9, 11), dc=c(1:3, 5), azx=1:30, mmm=5))
 cm_df.fill <-
 function(dataframe, ranges, value = 1, text.var = NULL, code.vars = NULL, 

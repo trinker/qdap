@@ -1,3 +1,4 @@
+#helper function used in cm_distance(not for export) 
 cm_describe <-
 function(code, grouping.var = NULL) {
     if (!is.null(grouping.var)) {

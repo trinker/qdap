@@ -1,3 +1,4 @@
+#A helper function used for cm_df2long.R (not for export)
 cm_d2l <- function(dataframe, code.vars, no.code = NA, 
     add.start.end = TRUE, repeat.vars = NULL, rev.code = FALSE){
     if (is.numeric(code.vars)) {

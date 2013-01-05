@@ -1,22 +1,32 @@
 #' Transform Codes to Start-End Durations
 #' 
-#' Transforms the range coding structure(s) from cm_df.temp (in list format) into a data frame of start and end durations in long format.
+#' Transforms the range coding structure(s) from \code{cm_df.temp} (in list 
+#' format) into a data frame of start and end durations in long format.
 #' 
-#' @param df.temp.obj a character vector of names of object(s) created by cm_df.temp, a list of cm_df.temp cr4eated objects or a data frame created by cm_df.temp.
-#' @param v.name sn optional name for the column created for the list.var argument
-#' @param list.var logical.  If TRUE creates a column for the data frame created by each time.list passed to cm_t2l
-#' @param code.vars a character vector of code variables.  If NULL uses all variables from the first column after the column named word.num.
+#' @param df.temp.obj a character vector of names of object(s) created by 
+#' cm_df.temp, a list of cm_df.temp created objects or a data frame created by 
+#' cm_df.temp.
+#' @param v.name sn optional name for the column created for the list.var 
+#' argument
+#' @param list.var logical.  If TRUE creates a column for the data frame created 
+#' by each time.list passed to cm_t2l
+#' @param code.vars a character vector of code variables.  If NULL uses all 
+#' variables from the first column after the column named word.num.
 #' @param no.code the value to assign to no code; default is NA
 #' @param add.start.end logical.  If TURE adds a column for start and end times
-#' @param repeat.vars a character vector of repeated/stacked variables.  If NULL uses all non code.vars variables.
-#' @param rev.code logical.  If TRUE reverses the order of code.vars and no.code varaibles.
+#' @param repeat.vars a character vector of repeated/stacked variables.  If NULL 
+#' uses all non code.vars variables.
+#' @param rev.code logical.  If TRUE reverses the order of code.vars and no.code 
+#' varaibles.
 #' @return Generates a data frame of start and end times for each code.
 #' @seealso 
 #' \code{\link{cm_time2long}},
 #' \code{\link{cm_range2long}},
 #' \code{\link{cm_df.temp}}
-#' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
+#' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: 
+#' Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding, time span
+#' @export
 #' @examples
 cm_df2long <-
 function(df.temp.obj, v.name = "variable", list.var = TRUE, code.vars = NULL, 

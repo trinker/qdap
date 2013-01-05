@@ -1,3 +1,4 @@
+#helper function used in cm_distance(not for export) 
 cm_bidist <-
 function(code_x, code_y, grouping.var = NULL) {
     x <- cm_describe(code_x, grouping.var)

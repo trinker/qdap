@@ -1,3 +1,4 @@
+#currently not being exported
 #' Debug Time Span Coding
 #' 
 #' Debug a list of time span codes for cm_time2long
@@ -18,7 +19,7 @@
 #' )
 #' 
 #' cm_debug(video3)
-cm_debug <-
+cm_debug <- 
 function(cm.list.obj) {
     debug <- function(string){
         if (length(Trim(string)) == 1 && Trim(string)== "") {

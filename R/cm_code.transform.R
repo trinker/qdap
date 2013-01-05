@@ -3,18 +3,27 @@
 #' Transform co-occurences and/or combinations of codes into a new code(s).
 #' 
 #' @param x2long.obj An object from cm_range2long, cm_time2long or cm_df2long
-#' @param overlap.code.list A list of named character vertors of at least two code column names to aggregate co-occurences.
-#' @param combine.code.list A list of named character vertors of at least two code column names to combine
-#' @param exclude.code.list A list of named character vertors of at least two code column names to compare and exclude.  The last column name is the one that will be excluded.
+#' @param overlap.code.list A list of named character vertors of at least two 
+#' code column names to aggregate co-occurences.
+#' @param combine.code.list A list of named character vertors of at least two 
+#' code column names to combine
+#' @param exclude.code.list A list of named character vertors of at least two 
+#' code column names to compare and exclude.  The last column name is the one 
+#' that will be excluded.
 #' @param rm.var Name of the repeated measures column.  
-#' @return Returns a dataframe with overlapping, combined occurrences, and/or exclusion of supplied overlapping codes added.
-#' @note The code column must be named code and your start and end columns must be named "start" and "end".
+#' @return Returns a dataframe with overlapping, combined occurrences, and/or 
+#' exclusion of supplied overlapping codes added.
+#' @note The code column must be named code and your start and end columns must 
+#' be named \code{"start"} and \code{"end"}.
 #' @seealso \code{\link[qdap]{cm_range2long}},
 #' \code{\link[qdap]{cm_time2long}},
 #' \code{\link[qdap]{cm_df2long}},
+#' \code{\link[qdap]{cm_code.blank}},
 #' \code{\link[qdap]{cm_code.combine}},
+#' \code{\link[qdap]{cm_code.exclude}},
 #' \code{\link[qdap]{cm_code.overlap}}
 #' @keywords transform
+#' @export
 #' @examples
 #' foo <- list(
 #'     AA = qcv(terms='1:10'),

@@ -1,14 +1,4 @@
-#' T
-#' 
-#' T
-#' 
-#' @param dataframe
-#' @param text.var
-#' @param code.vars
-#' @return 
-#' @seealso 
-#' \code{\link[stats]{dist}}
-#' @examples
+#Used in sm_df.fill  not currently exported
 cm_df.transform <-
 function(dataframe, text.var, code.vars = NULL) {
     DF <- data.frame(t(dataframe), stringsAsFactors = FALSE)

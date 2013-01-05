@@ -3,16 +3,22 @@
 #' Combine all occurences of codes into a new code.
 #'
 #' @param x2long.obj An object from cm_range2long, cm_time2long or cm_df2long
-#' @param combine.code.list A list of named character vertors of at least two code column names to combine
+#' @param combine.code.list A list of named character vertors of at least two 
+#' code column names to combine
 #' @param rm.var Name of the repeated measures column. 
-#' @return Returns a dataframe with combined occurrences of supplied overlapping codes added.
-#' @note The code column must be named code and your start and end columns must be named "start" and "end".
+#' @return Returns a dataframe with combined occurrences of supplied overlapping 
+#' codes added.
+#' @note The code column must be named code and your start and end columns must 
+#' be named \code{"start"} and \code{"end"}.
 #' @seealso \code{\link[qdap]{cm_range2long}},
 #' \code{\link[qdap]{cm_time2long}},
 #' \code{\link[qdap]{cm_df2long}},
+#' \code{\link[qdap]{cm_code.blank}},
+#' \code{\link[qdap]{cm_code.exclude}},
 #' \code{\link[qdap]{cm_code.overlap}},
 #' \code{\link[qdap]{cm_code.transform}}
 #' @keywords co-occurence
+#' @export
 #' @examples
 #' foo <- list(
 #'     AA = qcv(terms='1:10'),
