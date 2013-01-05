@@ -8,7 +8,7 @@
 #' \code{"more"}, \code{"less"}).
 #' @param \dots In liu of word.list the user may input n  number of character 
 #' vectors.
-#' @rdname Common Words
+#' @rdname common_words
 #' @return Returns a dataframe of all words that match the criteria set by 
 #' \code{overlap} and \code{equal.or}.
 #' @export
@@ -31,7 +31,7 @@ common <-
 
 #' @return \code{NULL}
 #'
-#' @rdname Common Words
+#' @rdname common_words
 #' @method common default
 #' @S3method common default  
 common.default <-
@@ -42,7 +42,7 @@ common.default <-
 
 #' @return \code{NULL}
 #'
-#' @rdname Common Words
+#' @rdname common_words
 #' @method common list
 #' @S3method common list
 common.list <-

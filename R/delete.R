@@ -1,19 +1,25 @@
-#' Delete Files
+#' Easy File Handling
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' \code{delete} - Deletes files and directories.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param file %% ~~Describe \code{file} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param file The name of the file in the working directory or the path to the 
+#' file to be deleted.
+#' @param folder.name The name of the folder to be created.  Default NULL 
+#' creates a file in the working directory with the creation data and time stamp.
+#' @return \code{delete} permanently removes a file/directory.
+#' @seealso  \code{\link[base]{unlink}}, 
+#' \code{\link[base]{file.remove}}, 
+#' \code{\link[base]{dir.create}}
+#' @keywords file, delete, folder
+#' @rdname file_handling
+#' @export
 #' @examples
+#' \dontrun{
+#' (x <- folder("DELETE.ME"))
+#' which(dir() == "DELETE.ME")
+#' delete("DELETE.ME")
+#' which(dir() == "DELETE.ME")
+#' }
 delete <-
 function(file = NULL) {
     x <- if (is.null(file)) {
@@ -22,4 +28,28 @@ function(file = NULL) {
         file
     }
     unlink(x, recursive = TRUE, force = FALSE)
+}
+
+#' Create Folder
+#' 
+#' \code{folder} - Create a folder/directory.
+#' 
+#' @return \code{folder} creates a folder/directory.
+#' @rdname file_handling
+#' @export
+folder <-
+function(folder.name = NULL) {
+    if (is.null(folder.name)) {
+        SS <- gsub(":", ".", substr(Sys.time(), 1, 19))
+        FN <-paste(substr(SS, 1, 10), "  Time", substr(SS, 11, 19), sep = "")
+    } else {
+        FN <-folder.name
+    }
+    if (length(unlist(strsplit(FN, "/"))) == 1) {
+        x <- paste(getwd(), "/", FN, sep = "")
+    } else {
+        x <- FN
+    }
+    dir.create(x)
+    return(x)
 }
