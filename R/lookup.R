@@ -5,7 +5,7 @@
 #' @aliases lookup
 #' @param terms a vector of terms to undergo a lookup
 #' @param key.match either a two column data frame (if data frame supplied no 
-#' key reassign needed)  of a match key and reassignment column or a single 
+#' key reassign needed) of a match key and reassignment column or a single 
 #' vector match key.
 #' @param key.reassign a single reassingment vector supplied if key.match is 
 #' not a two column data frame
@@ -14,7 +14,9 @@
 #' @seealso 
 #' \code{\link[base]{new.env}}
 #' @keywords dictionary hash lookup
+#' @export
 #' @examples
+#' \dontrun{
 #' lookup(mtcars$carb, sort(unique(mtcars$carb)),        
 #'     c('one', 'two', 'three', 'four', 'six', 'eight')) 
 #' lookup(mtcars$carb, sort(unique(mtcars$carb)),        
@@ -26,6 +28,7 @@
 #' 
 #' lookup(1:5, data.frame(1:4, 11:14))
 #' lookup(LETTERS[1:5], data.frame(LETTERS[1:5], 100:104))
+#' }
 lookup <-
 function(terms, key.match, key.reassign=NULL, missing = NA) {
     hash <- function(x, mode.out) {

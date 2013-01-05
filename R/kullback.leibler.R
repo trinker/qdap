@@ -15,6 +15,7 @@
 #' sufficiency. Annals of Mathematical Statistics 22 (1): 79-86. 
 #' doi:10.1214/aoms/1177729694
 #' @keywords Kullback-Leibler
+#' @export
 #' @examples
 #' \dontrun{
 #' p.df <- wfdf(DATA$state, DATA$person)                    
