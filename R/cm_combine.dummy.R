@@ -3,9 +3,13 @@
 #' Combine code columns where they co-occur.
 #'
 #' @param cm.l2d.obj An object from cm_long2dummy
-#' @param combine.code A list of named character vertors of at least two code column names to combine
+#' @param combine.code A list of named character vertors of at least two code 
+#' column names to combine
 #' @param rm.var Name of the repeated measures column.  Default is "time".
-#' @param overlap logical, integer or character of binary operator + integer.  If TRUE finds the overlap.  If FALSE finds anywhere any of the codes occur.  If integer finds that exact combination of overlaps.  If character must be a logical vector c(>, <, =<, =>, ==, !=) followed by  an integer.
+#' @param overlap logical, integer or character of binary operator + integer.  
+#' If TRUE finds the overlap.  If FALSE finds anywhere any of the codes occur.  
+#' If integer finds that exact combination of overlaps.  If character must be a 
+#' logical vector c(>, <, =<, =>, ==, !=) followed by  an integer.
 #' @return Returns a dataframe with co-occurrences of provided code columns.
 #' @seealso \code{\link[qdap]{cm_long2dummy}}
 #' @keywords co-occurence

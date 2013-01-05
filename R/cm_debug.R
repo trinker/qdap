@@ -1,24 +1,24 @@
 #currently not being exported
-#' Debug Time Span Coding
-#' 
-#' Debug a list of time span codes for cm_time2long
-#' 
-#' @param cm.list.obj an object being prepared for the cm_time2long function
-#' @return Returns possible bugs if any.
-#' @note Not intended for general use.  Used within cm_time2long.
-#' @seealso \code{\link[qdap]{cm_time2long}}
-#' @keywords debug
-#' @examples
-#' video3 <- list(
-#'     transcript_time_span = qcv(terms='3:30 - 18:30'),
-#'     A2 = qcv(terms=''),
-#'     B1 = qcv(terms='3:33, 3.35, 3.39, 3.43:3.44, 3.50, 3.52:3.53, 
-#'         3.56, 4.12, 4.20, 4.30, 4.32, 4.35, 4.41, 4.52:4.53, 5.06'),
-#'     B2 = qcv(terms='3.46:3:47, 430, 8.36, 11.59:11.59, 14.22:14.27'),
-#'     B3 = qcv(terms='10.36, 9.12, 16.29')
-#' )
-#' 
-#' cm_debug(video3)
+# Debug Time Span Coding
+# 
+# Debug a list of time span codes for cm_time2long
+# 
+# @param cm.list.obj an object being prepared for the cm_time2long function
+# @return Returns possible bugs if any.
+# @note Not intended for general use.  Used within cm_time2long.
+# @seealso \code{\link[qdap]{cm_time2long}}
+# @keywords debug
+# @examples
+# video3 <- list(
+#     transcript_time_span = qcv(terms='3:30 - 18:30'),
+#     A2 = qcv(terms=''),
+#     B1 = qcv(terms='3:33, 3.35, 3.39, 3.43:3.44, 3.50, 3.52:3.53, 
+#         3.56, 4.12, 4.20, 4.30, 4.32, 4.35, 4.41, 4.52:4.53, 5.06'),
+#     B2 = qcv(terms='3.46:3:47, 430, 8.36, 11.59:11.59, 14.22:14.27'),
+#     B3 = qcv(terms='10.36, 9.12, 16.29')
+# )
+# 
+# cm_debug(video3)
 cm_debug <- 
 function(cm.list.obj) {
     debug <- function(string){

@@ -1,24 +1,24 @@
 #currently not being exported
-#' Debug Range Coding
-#' 
-#' Debug a list of range codes for cm_range2long
-#' 
-#' @param cm.list.obj an object being prepared for the cm_time2long function
-#' @return Returns possible bugs if any. 
-#' @note Not intended for general use.  Used within cm_range2long.
-#' @seealso \code{\link[qdap]{cm_range2long}}
-#' @keywords debug
-#' @examples
-#' z <- list(
-#'     A = qcv(terms='0:12, 15:22, 199:22'),
-#'     B = qcv(terms='12:18, 9:0:99'),
-#'     C = qcv(terms='12'),
-#'     D = qcv(terms='12, 14:19'),
-#'     E = qcv(terms='0, 1O:19'),
-#'     F = qcv(terms='')
-#' )
-#' 
-#' cm_debug2(z)
+# Debug Range Coding
+# 
+# Debug a list of range codes for cm_range2long
+# 
+# @param cm.list.obj an object being prepared for the cm_time2long function
+# @return Returns possible bugs if any. 
+# @note Not intended for general use.  Used within cm_range2long.
+# @seealso \code{\link[qdap]{cm_range2long}}
+# @keywords debug
+# @examples
+# z <- list(
+#     A = qcv(terms='0:12, 15:22, 199:22'),
+#     B = qcv(terms='12:18, 9:0:99'),
+#     C = qcv(terms='12'),
+#     D = qcv(terms='12, 14:19'),
+#     E = qcv(terms='0, 1O:19'),
+#     F = qcv(terms='')
+# )
+# 
+# cm_debug2(z)
 cm_debug2 <- function(cm.list.obj){
     debug2 <-
     function(cm.list.obj) {

@@ -1,4 +1,4 @@
-#' cm_combine.dummy back to long
+#' Convert cm_combine.dummy back to long
 #'
 #' cm_combine.dummy back to long
 #'
@@ -7,6 +7,7 @@
 #' @return Returns a dataframe with co-occurrences of provided code columns.
 #' @seealso \code{\link[qdap]{cm_long2dummy}},
 #' \code{\link[qdap]{cm_combine.dummy}}
+#' @export
 #' @examples
 #' foo <- list(
 #'     AA = qcv(terms='1:10'),

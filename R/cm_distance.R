@@ -29,6 +29,7 @@
 #' \item{standardized}{A matrix of standardized values of distances between 
 #' codes.  The closer a value is to zero the closer two codes relate.}
 #' @keywords distance
+#' @export
 #' @examples
 #' foo <- list(
 #'     AA = qcv(terms='02:03, 05'),

@@ -12,6 +12,7 @@
 #' \code{\link[qda]{cm_time2long}},
 #' \code{\link[qda]{cm_df2long}}
 #' @keywords dummy coded
+#' @export
 #' @examples
 #' foo <- list(
 #'     AA = qcv(terms='1'),
