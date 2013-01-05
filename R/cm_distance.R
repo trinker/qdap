@@ -57,7 +57,7 @@
 #' )
 #' dat <- cm_time2long(x)
 #' gantt_wrap(dat, "code", border.color = "black", border.size = 5, sig.dig.line.freq = -2)
-#' a <- cm_distance(dat)
+#' (a <- cm_distance(dat))
 #' names(a)
 #' names(a$dat)
 #' a$dat

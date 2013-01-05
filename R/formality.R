@@ -54,9 +54,12 @@
 #' with(raj, formality(rajPOS, person, plot=TRUE, bar.colors=c("Dark2", "Set1")))
 #' with(raj, formality(rajPOS, list(person, act), plot=TRUE, bar.colors="Set1"))
 #' with(rajDEM, formality(rajPOS, sex, plot=TRUE, bar.colors="RdBu"))
-#' with(rajDEM, formality(rajPOS, list(fam.aff, sex), plot=TRUE, bar.colors="RdBu"))
-#' with(rajDEM, formality(rajPOS, list(died, fam.aff), plot=TRUE, bar.colors="RdBu",  point.cex=2, point.pch = 3))
-#' raj.form <- with(rajDEM, formality(rajPOS, list(died, sex), plot=TRUE, bar.colors="RdBu",  point.cex=2, point.pch = "|"))
+#' with(rajDEM, formality(rajPOS, list(fam.aff, sex), plot=TRUE, 
+#'     bar.colors="RdBu"))
+#' with(rajDEM, formality(rajPOS, list(died, fam.aff), plot=TRUE, 
+#'     bar.colors="RdBu",  point.cex=2, point.pch = 3))
+#' raj.form <- with(rajDEM, formality(rajPOS, list(died, sex), plot=TRUE, 
+#'     bar.colors="RdBu",  point.cex=2, point.pch = "|"))
 #' names(raj.form)
 #' colsplit2df(raj.form$formality)
 #' }
@@ -216,19 +219,15 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
             theme(legend.position = 'bottom') +
             ggtitle("Percent Contextual-Formal") +
             scale_y_continuous(breaks = c(0, .25, .5, .75, 1),
-                labels=c("0", ".25", ".5", ".75", "1"))
-            if (!is.null(bar.colors)) {                                              
-                YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
-                    bar.colors))   
-            }     
+                labels=c("0", ".25", ".5", ".75", "1"))  
             if (!is.null(bar.colors)) {  
                 if (length(bar.colors) == 1) {
                     YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
                         bar.colors))
-          } else {
+                } else {
                     YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
                         bar.colors[2]))
-          }
+            }
         }        
         dat2 <- dat[dat[, "pos"] != "other", ] 
         dat2[, "pos"] <- factor(dat2[, "pos"])
