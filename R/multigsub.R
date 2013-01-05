@@ -11,7 +11,8 @@
 #' repalcements.
 #' @param trailspace logical.  If TRUE inserts a trailing space in the 
 #' repalcements.
-#' @param fixed 
+#' @param fixed logical. If TRUE, pattern is a string to be matched as is. 
+#' Overrides all conflicting arguments.
 #' @param \dots Additional arguments passed to \code{\link[base]{gsub}}.
 #' @rdname multigsub
 #' @return Returns a vector with the pattern replaced.
@@ -42,8 +43,8 @@ function(pattern, replacement = NULL, text.var, leadspace = FALSE,
        return(gsub(" +", " ", x))
     }
     x <- Trim(msubs(K=key, x=text.var, ...))
-    return(x
-
+    return(x)
+}
 #' @rdname multigsub
 #' @export
 mgsub <- multigsub
