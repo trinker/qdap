@@ -1,6 +1,6 @@
 # Transform Codes to Start-End Durations
 # 
-# A helper function for cm_range2long that transforms the range coding 
+# A helper function for \code{cm_range2long} that transforms the range coding 
 # structure from cm_range.temp (in list format) into a data frame of start and 
 # end times in long format.
 # 

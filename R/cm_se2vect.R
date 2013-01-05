@@ -1,3 +1,4 @@
+#currently used as a helper function in: cm_distance (not currently exported)
 cm_se2vect <- function(start, end, n.words = NULL, safety = TRUE) {
     dat <- data.frame(start =start, end = end)
     if (is.null(n.words)){

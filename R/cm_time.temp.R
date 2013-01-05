@@ -3,10 +3,13 @@
 #' Generates a time span coding sheet and coding format sheet.
 #' 
 #' @param codes List of codes.
-#' @param start A character string in the form of "00:00" indicating start time (default is ":00")
-#' @param end A character string in the form of "00:00" indicating end time
-#' @param file A connection, or a character string naming the file to print to (.txt is recommended).
-#' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
+#' @param start A character string in the form of "00:00" indicating start time 
+#' (default is ":00").
+#' @param end A character string in the form of "00:00" indicating end time.
+#' @param file A connection, or a character string naming the file to print to 
+#' (.txt is recommended).
+#' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: 
+#' Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding
 #' @seealso 
 #' \code{\link[qdap]{cm_range.temp}},
