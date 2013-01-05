@@ -1,3 +1,4 @@
+#Helper function used in read.transcript 
 combine_tot <- 
   function(dataframe, combine.var = 1, text.var = 2) {
     NAMES <- colnames(dataframe)
@@ -22,4 +23,4 @@ combine_tot <-
     h <- h[order(h$ID), ][, -3]
     rownames(h) <- NULL
     return(h)
-  }
+}

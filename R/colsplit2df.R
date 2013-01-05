@@ -1,49 +1,32 @@
-#' Wrapper for colSplit that Returns a Data Frame
+#' Wrapper for colSplit that Returns a Dataframe
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' Wrapper for \code{colSplit} that returns a dataframe.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param dataframe %% ~~Describe \code{dataframe} here~~
-#' @param column %% ~~Describe \code{column} here~~
-#' @param orig.keep %% ~~Describe \code{orig.keep} here~~
-#' @param \dots %% ~~Describe \code{\dots} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
-#' @examples
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (dataframe, column = 1, orig.keep = FALSE, ...) 
-#' {
-#'     nc <- if (!is.numeric(column)) {
-#'         match(column, names(dataframe))
-#'     }
-#'     else {
-#'         column
-#'     }
-#'     ncols <- colSplit(dataframe[, column, drop = FALSE], ...)
-#'     if (orig.keep) {
-#'         cbind(dataframe[, nc, drop = FALSE], ncols, dataframe[, 
-#'             -nc])
-#'     }
-#'     else {
-#'         cbind(ncols, dataframe[, -nc])
-#'     }
-#'   }
-#' 
+#' @param dataframe A dataframe with a column that has been pasted together.
+#' @param splitcol The name of the column that has been pasted together.
+#' @param new.names A character vector of new names to assign to the columns.  
+#' Default attempts to extract the original names before the paste.
+#' @param sep The character that used in \code{paste2} to paste the columns.
+#' @param orig.keep logical.  If TRUE the original pasted column will be 
+#' retained as well.
+#' @return Returns a dataframe with the pasted column cplit into new columns.
+#' @seealso \code{\link{colSplit}}, 
+#' \code{\link{paste2}}
+#' @keywords column-split
+#' @export
+#' @examples 
+#' \dontrun{
+#' CO2$`Plant&Type&Treatment` <- paste2(CO2[, 1:3])
+#' CO2 <- CO2[, -c(1:3)]
+#' head(colsplit2df(CO2, 3))
+#' head(colsplit2df(CO2, 3, qcv(A, B, C)))
+#' head(colsplit2df(CO2, 3, qcv(A, B, C), keep.orig=TRUE))
+#' head(colsplit2df(CO2, "Plant&Type&Treatment"))
+#' CO2 <- datasets::CO2
+#' }
 colsplit2df <- 
-function(dataframe, splitcol = 1, new.names=NULL, sep=".", 
-         orig.keep=FALSE, ...){
+function(dataframe, splitcol = 1, new.names = NULL, sep=".", 
+         keep.orig=FALSE){
     if (!is.data.frame(dataframe)){
         stop("Please supply a data.frame to colsplit2df")
     }
@@ -74,13 +57,13 @@ function(dataframe, splitcol = 1, new.names=NULL, sep=".",
             }
         }
     }
-    if (is.null(new.names) &"&" %in% unlist(strsplit(names(dataframe[, 
+    if (is.null(new.names) & "&" %in% unlist(strsplit(names(dataframe[, 
         splitcol, drop=FALSE]), split=NULL))) {
         nams <- unlist(strsplit(names(dataframe[, 
             splitcol, drop=FALSE]), split="&"))
-        colnames(w)[1:length(nams)] <- nams
+        colnames(w)[z:(z + length(nams) - 1)] <- nams
     }
-    if(orig.keep) {
+    if(keep.orig) {
         w <- cbind(dataframe[, splitcol, drop=FALSE], w)
     }
     return(w)
