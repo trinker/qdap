@@ -1,3 +1,19 @@
+#' Add Leading/Trailing Spaces
+#' 
+#' Adds trailing and/or leading spaces to a vector of terms.
+#' 
+#' @param terms A character vector of terms to instert trailing and/or leading 
+#' spaces.
+#' @param leadspace logical.  If TRUE inserts a leading space in the terms.
+#' @param trailspace logical.  If TRUE inserts a trailing space in the terms.
+#' @return Returns a character vector with trailing and/or leading spaces.
+#' @export
+#' @example
+#' \dontrun{
+#' spaste(Top25Words)
+#' spaste(Top25Words, FALSE)
+#' spaste(Top25Words, ,FALSE)
+#' }
 spaste <- 
 function(terms, trailing = TRUE, leading = TRUE){
     if (leading) {
