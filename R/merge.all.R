@@ -12,7 +12,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' #' #Create three dataframe                                                                     
+#' #Create three dataframe                                                                     
 #' Week_1_sheet <- read.table(text="ID Gender  DOB Absences Unexcused_Absences Lates           
 #' 1  1      M 1997        5                  1    14                                          
 #' 2  2      F 1998        4                  2     3", header=TRUE)                           
@@ -31,7 +31,8 @@
 #'                                                                                             
 #' names(WEEKlist) <- LETTERS[1:3]                                                             
 #'                                                                                             
-#' #change names of columns that may overlap with other data frame yet not have duplicate data 
+#' #change names of columns that may overlap with other data frame yet not have 
+#' #duplicate data 
 #' lapply(seq_along(WEEKlist), function(x) {                                                   
 #'     y <- names(WEEKlist[[x]]) #do this to avoid repeating this 3 times                      
 #'     names(WEEKlist[[x]]) <<- c(y[1:3], paste(y[4:length(y)], ".", x, sep=""))}              
