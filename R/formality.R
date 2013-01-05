@@ -19,7 +19,7 @@
 #' respectively.
 #' @param min.wrdcnt A minimum word count threshold that must be achieved to be 
 #' considered in the results.  Default includes all subgroups.
-#' @warning Heylighen & Dewaele(2002) say "At present, a sample would probably 
+#' @note Heylighen & Dewaele(2002) say "At present, a sample would probably 
 #' need to contain a few hundred words for the measure to be minimally reliable. 
 #' For single sentences, the F-value should only be computed for purposes of 
 #' illustration".
