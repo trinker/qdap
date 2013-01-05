@@ -24,6 +24,27 @@
 #' common(r, overlap=2)                                                                                            
 #'                                                                                                     
 #' common(word_list(DATA$state, DATA$person)$cwl, overlap = 2)  
+common <-
+  function(x, ...){
+    UseMethod("common")
+}
+
+#' @return \code{NULL}
+#'
+#' @rdname Common Words
+#' @method common default
+#' @S3method common default  
+common.default <-
+  function(..., overlap = "all", equal.or = "equal"){
+    LIS <- list(...)
+    return(common.list(LIS, overlap, equal.or))
+}
+
+#' @return \code{NULL}
+#'
+#' @rdname Common Words
+#' @method common list
+#' @S3method common list
 common.list <-
   function(word.list, overlap = "all", equal.or = "more"){
       if(overlap=="all") {
@@ -44,25 +65,5 @@ common.list <-
     return(DF)
 }
 
-#' @rdname Common Words
-#' @export
-common.default <-
-  function(..., overlap = "all", equal.or = "equal"){
-    LIS <- list(...)
-    return(common.list(LIS, overlap, equal.or))
-}
-
-#' Prints an common.list
-#' 
-#' Prints an common.list.
-#' 
-#' @param x The common.list object
-#' @param \ldots ignored
-#' @method print common.list
-#' @S3method print common.list
-common <-
-function(x, ...){
-	UseMethod("common")
-}
 
 
