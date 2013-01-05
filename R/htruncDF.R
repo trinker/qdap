@@ -1,37 +1,63 @@
-#' Head of Truncated Data Frame
+#' Dataframe Viewing
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' \code{htruncdf} - Convenience function to view the head of a truncated 
+#' dataframe.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param dataframe %% ~~Describe \code{dataframe} here~~
-#' @param n %% ~~Describe \code{n} here~~
-#' @param width %% ~~Describe \code{width} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param dataframe A data.frame object.
+#' @param n Number of rows to display.
+#' @param width The width of the columns to be displayed.
+#' @param end The last element to be displayed.
+#' @param begin The first element to be displayed.
+#' @param \ldots Other arguments passed to \code{\link[head]{head}}.
+#' @rdname data_viewing
+#' @return \code{htrundf} returns n number of rows of a truncated dataframe.
+#' @seealso \code{\link{head}}
+#' @export
 #' @examples
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (dataframe, n = 10, width = 10) 
-#' {
-#'     x <- head(truncDF(dataframe, width), n = n)
-#'     colnames(x) <- as.character(colnames(dataframe))
-#'     return(x)
-#'   }
-#' 
+#' \dontrun{
+#' htruncdf(raj)
+#' htruncdf(raj, 20)
+#' htruncdf(raj, ,20)
+#' truncdf(raj)
+#' truncdf(raj, 40)
+#' qview(raj)
+#' qview(CO2)
+#' }
 htruncdf <-
 function(dataframe, n=10, width=10) {
     x <- as.data.frame(dataframe)
     x <- head(truncdf(x, width),n=n)
     x
+}
+
+#' Truncated Dataframe Viewing
+#' 
+#' \code{truncdf} - Convenience function to view a truncated dataframe. 
+#' 
+#' @return \code{trundf} returns a truncated dataframe.
+#' @rdname data_viewing
+#' @export
+truncdf <- 
+function(dataframe, end=10, begin=1) {
+    x <- as.data.frame(dataframe)
+    DF <- data.frame(lapply(x, substr, begin, end), check.names=FALSE)
+    names(DF) <- substring(names(DF), begin, end)
+    DF
+}
+
+#' Summary Dataframe Viewing
+#' 
+#' \code{qview} - Convenience function to view a summary and head of a dataframe.
+#' 
+#' @return \code{qview} returns a dataframe head with summary statistics.
+#' @rdname data_viewing
+#' @export
+qview <-
+function(dataframe,...){
+    x<-as.character(substitute(dataframe))
+    cat(paste(rep("=", 72), collapse=""), "\n",  
+        "n = ",nrow(dataframe),"          # of vars = ",
+        ncol(dataframe), "           ", x, "\n",
+        "\b", paste(rep("=", 72), collapse=""), "\n"); 
+    return(head(dataframe, ...))
 }
