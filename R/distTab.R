@@ -2,20 +2,30 @@
 #' 
 #' Generates a dsitribution table for vectors, matrices and data.frames
 #' 
-#' @aliases distTab
-#' @param dataframe a vector or data.frame object
-#' @param breaks either a numeric vector of two or more cut points or a single number (greater than or equal to 2) giving the number of intervals into which x is to be cut 
-#' @param digits integer indicating the number of decimal places (round) or significant digits (signif) to be used. Negative values are allowed
-#' @param \lodots other variables passed to cut
-#' @return a list of data frames (or singular data frame for a vector) of frequencies, cumulative frequencies, percentages and cumalative percentages for each interval
+#' @param dataframe A vector or data.frame object.
+#' @param breaks Either a numeric vector of two or more cut points or a single 
+#' number (greater than or equal to 2) giving the number of intervals into which 
+#' x is to be cut.
+#' @param digits Integer indicating the number of decimal places (round) or 
+#' significant digits (signif) to be used. Negative values are allowed
+#' @param \lodots Other variables passed to cut.
+#' @return Returns a list of data frames (or singular data frame for a vector) of 
+#' frequencies, cumulative frequencies, percentages and cumalative percentages 
+#' for each interval.
 #' @seealso \code{\link[base]{cut}}
-#' @keywords distribution 
+#' @keywords distribution, frequency
+#' @export 
 #' @examples
+#' \dontrun{
 #' distTab(rnorm(10000), 10)
 #' distTab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 #' distTab(CO2, 4)
 #' distTab(mtcars)
 #' distTab(mtcars, 4)
+#' 
+#' wdst <- with(mraja1spl, word_stats(dialogue, list(sex, fam.aff, died)))
+#' distTab(wdst$gts)
+#' }
 distTab <-
 function(dataframe, breaks = NULL, digits = 2, ...){
     DF <- as.data.frame(dataframe)

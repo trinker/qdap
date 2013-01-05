@@ -1,32 +1,51 @@
-#' Formality score
+#' Formality Score
 #' 
 #' Transcript apply formality score by grouping variable(s)
 #' 
 #' @param text.var The text variable.
-#' @param group.vars The grouping variables.  Default NULL generates formality score for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
+#' @param group.vars The grouping variables.  Default NULL generates formality 
+#' score for all text.  Also takes a single grouping variable or a list of 1 or 
+#' more grouping variables.
 #' @param plot logical. Provides a visualization for the results
-#' @param sort.by.formality logical.  If TURE orders the results by formality score.
+#' @param sort.by.formality logical.  If TURE orders the results by formality 
+#' score.
 #' @param digits The number of digits displayed
 #' @param point.pch The plotting symbol.
 #' @param point.cex  The plotting symbol size.
-#' @param point.colors A vector of colors (length of two) to plot word count and formality score
-#' @param bar.colors A palette of colors to supply to the bars in the visualization.  If two palettes are provided to the two bar plots respectively.
-#' @param min.wrdcnt A minimum word count threshold that must be achieved to be considered in the results.  Default includes all subgroups.
-#' @warning Heylighen & Dewaele(2002) say "At present, a sample would probably need to contain a few hundred words for the measure to be minimally reliable. For single sentences, the F-value should only be computed for purposes of illustration".
+#' @param point.colors A vector of colors (length of two) to plot word count and 
+#' formality score
+#' @param bar.colors A palette of colors to supply to the bars in the 
+#' visualization.  If two palettes are provided to the two bar plots 
+#' respectively.
+#' @param min.wrdcnt A minimum word count threshold that must be achieved to be 
+#' considered in the results.  Default includes all subgroups.
+#' @warning Heylighen & Dewaele(2002) say "At present, a sample would probably 
+#' need to contain a few hundred words for the measure to be minimally reliable. 
+#' For single sentences, the F-value should only be computed for purposes of 
+#' illustration".
 #' @return A list containing at the following components: 
 #' \item{text}{The text variable} 
 #' \item{POStagged}{Raw part of speech for every word of the text variable} 
 #' \item{POSprop}{Part of speech proportion for every word of the text variable} 
 #' \item{POSfreq}{Part of speech count for every word of the text variable} 
-#' \item{pos.by.freq}{The part of speech count for every word of the text variable by grouping variable(s)} 
-#' \item{pos.by.prop}{The part of speech proportion for every word of the text variable by grouping variable(s)} 
-#' \item{form.freq.by}{The nine broad part of speech categories count for every word of the text variable by grouping variable(s)} 
-#' \item{form.prop.by}{The nine broad part of speech categories proportion for every word of the text variable by grouping variable(s)} 
+#' \item{pos.by.freq}{The part of speech count for every word of the text 
+#' variable by grouping variable(s)} 
+#' \item{pos.by.prop}{The part of speech proportion for every word of the text 
+#' variable by grouping variable(s)} 
+#' \item{form.freq.by}{The nine broad part of speech categories count for every 
+#' word of the text variable by grouping variable(s)} 
+#' \item{form.prop.by}{The nine broad part of speech categories proportion for 
+#' every word of the text variable by grouping variable(s)} 
 #' \item{formality}{Formality scores by grouping variable(s)} 
-#' \item{pos.reshaped}{An expanded formality scores output (grouping, word.count, pos & form.class) by word}
-#' @references Heylighen, F., & Dewaele, J.M. (2002). Variation in the contextuality of language: An empirical measure. Context in Context, Special issue of Foundations of Science, 7 (3), 293-340.
-#' @keywords formality explicit
+#' \item{pos.reshaped}{An expanded formality scores output (grouping, 
+#' word.count, pos & form.class) by word}
+#' @references Heylighen, F., & Dewaele, J.M. (2002). Variation in the 
+#' contextuality of language: An empirical measure. Context in Context, Special 
+#' issue of Foundations of Science, 7 (3), 293-340.
+#' @keywords formality, explicit
+#' @export
 #' @examples
+#' \dontrun{
 #' with(DATA, formality(state, person))
 #' with(DATA, formality(state, list(sex, adult), plot = TRUE))
 #' rajDEM <- key_merge(raj, raj.demographics, 'person')
@@ -40,6 +59,7 @@
 #' raj.form <- with(rajDEM, formality(rajPOS, list(died, sex), plot=TRUE, bar.colors="RdBu",  point.cex=2, point.pch = "|"))
 #' names(raj.form)
 #' colsplit2df(raj.form$formality)
+#' }
 formality <- function(text.var, grouping.var = NULL, plot = FALSE,                   
     sort.by.formality = TRUE, digits = 2, point.pch = 20, point.cex = .5,            
     point.colors = c("gray65", "red"), bar.colors = NULL, min.wrdcnt = NULL, ...){        
@@ -263,4 +283,17 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
     }                                                                                
     class(o) <- "formality.measure"                                                  
     return(o)                                                                        
+}
+
+#' Prints a formality.measure
+#' 
+#' Prints a formality.measure.
+#' 
+#' @param x The formality.measure object
+#' @param \ldots ignored
+#' @method print formality.measure
+#' @S3method print formality.measure
+print.formality.measure <-
+function(x, ...) {
+    print(x$formality)
 }

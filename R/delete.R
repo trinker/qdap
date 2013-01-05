@@ -3,7 +3,8 @@
 #' \code{delete} - Deletes files and directories.
 #' 
 #' @param file The name of the file in the working directory or the path to the 
-#' file to be deleted.
+#' file to be deleted.  If NULL provides a menu of files from the working 
+#' directory.
 #' @param folder.name The name of the folder to be created.  Default NULL 
 #' creates a file in the working directory with the creation data and time stamp.
 #' @return \code{delete} permanently removes a file/directory.

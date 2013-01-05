@@ -1,6 +1,6 @@
 #' Test for Incomplete Sentences
 #' 
-#' Test for incompelte sentences and optionally remove them.
+#' Test for incomplete sentences and optionally remove them.
 #' 
 #' @param dataframe A dataframe that contains the person and text variable.
 #' @param text.var The text variable.
@@ -13,11 +13,13 @@
 #' @keywords incomplete
 #' @export
 #' @examples
+#' \dontrun{
 #' dat <- sentSplit(DATA, "state", stem.col = FALSE)
 #' dat$state[c(2, 5)] <- paste(strip(dat$state[c(2, 5)]), "|")
 #' endf(dat, "state")
 #' endf(dat, "state", warning.report = FALSE)
 #' endf(dat, "state", which.mode = TRUE)
+#' }
 endf <-
 function(dataframe, text.var, warning.report=TRUE, which.mode = FALSE){
     tx <- scrubber(dataframe[, as.character(substitute(text.var))])

@@ -31,6 +31,7 @@
 #' @keywords distance
 #' @export
 #' @examples
+#' \dontrun{
 #' foo <- list(
 #'     AA = qcv(terms='02:03, 05'),
 #'     BB = qcv(terms='1:2, 3:10'),
@@ -60,6 +61,7 @@
 #' names(a)
 #' names(a$dat)
 #' a$dat
+#' }
 cm_distance <- 
 function(dataframe, time.var = NULL, parallel = FALSE, code.var = "code",
     causal = FALSE, start.var = "start", end.var = "end", mean.digits = 2, 
@@ -128,4 +130,29 @@ function(dataframe, time.var = NULL, parallel = FALSE, code.var = "code",
     }
     class(o) <- "cm.dist"
     return(o)
+}
+
+
+#' Prints a cm.dist
+#' 
+#' Prints a cm.dist.
+#' 
+#' @param x The cm.dist object
+#' @param \ldots ignored
+#' @method print cm.dist
+#' @S3method print cm.dist
+print.cm.dist <-
+function(x, ...){
+    x <- unlist(x, recursive=F)
+    y <- unlist(strsplit(names(x), "\\."))[c(FALSE, TRUE)]
+    z <- x[y == "standardized"]
+    invisible(lapply(seq_along(z), function(i) {
+        a <- strsplit(names(z)[i], "\\.")
+        if(length(unlist(a)) > 1) {
+            cat(paste0(a[[1]][1], "\n"))
+        } 
+        cat(paste0(a[[1]][length(a[[1]])], ":\n"))
+        print(z[[i]])
+        cat("\n")
+    }))
 }

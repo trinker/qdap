@@ -2,8 +2,9 @@
 #' 
 #' Converts a vector of seconds to h:m:s
 #' 
-#' @param x
-#' @param l1
+#' @param x A vector of times in seconds.
+#' @param l1 logical.  If TRUE returns only the first element (intended for 
+#' internal use).
 #' @return Returns a vector of times in h:m:s format.  Generally, this function 
 #' is for internal use.
 #' @keywords time, coversion

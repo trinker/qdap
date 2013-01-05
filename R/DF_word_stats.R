@@ -1,3 +1,4 @@
+#a helper function used in word_stats (not exported)
 DF_word_stats <-
 function(text.var, digit.remove = FALSE, apostrophe.remove = FALSE, 
     digits = 3, parallel = FALSE) {
