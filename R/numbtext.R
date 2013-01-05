@@ -1,3 +1,4 @@
+#helper function used in cm_df.transcript (not exported)
 numbtext <-
 function(text.var, width=80, txt.file = NULL, 
     indent = 4, lengths = NULL, name=NULL) {
@@ -23,4 +24,4 @@ function(text.var, width=80, txt.file = NULL,
         sink()
     }
     options(width=OW)
-} #used in cm_df.transcript
+} 

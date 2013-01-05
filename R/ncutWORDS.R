@@ -1,3 +1,4 @@
+#helper function for word_list (not exported)
 ncutWORDS <- 
 function(freqWORDSobj, cut.n = 15) {
     ncutWORDSa <- function(freqWORDS.DF, cut.ns) {
