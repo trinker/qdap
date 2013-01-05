@@ -1,42 +1,25 @@
-#' Takes a vector of search terms and a vector or single value of replacements
+#' Multiple gsub
 #' 
-#' Takes a vector of search terms and a vector or single value of replacements
+#' A wrapper for \code{\link[base]{gsub}} that takes a vector of search terms 
+#' and a vector or single value of replacements.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @aliases multigsub mgsub
-#' @param pattern %% ~~Describe \code{pattern} here~~
-#' @param replacement %% ~~Describe \code{replacement} here~~
-#' @param x %% ~~Describe \code{x} here~~
-#' @param \dots %% ~~Describe \code{\dots} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param pattern Character string to be matched in the given character vector. 
+#' @param replacement Character string equal in length to pattern or of length 
+#' one which are  a replacement for matched pattern. 
+#' @param text.var The text variable.
+#' @param \dots Additional arguments passed to \code{\link[base]{gsub}}.
+#' @rdname multigsub
+#' @return Returns a vector with the pattern replaced.
+#' @note The replacements occur sequentially rather than all at once.  This 
+#' means a previous (first in pattern string) sub could alter a later sub.
+#' @seealso \code{\link[base]{gsub}}
+#' @export
 #' @examples
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (pattern, replacement, x, ...) 
-#' {
-#'     key <- data.frame(pat = pattern, rep = replacement, stringsAsFactors = FALSE)
-#'     msubs <- function(K, x, ...) {
-#'         sapply(seq_len(nrow(K)), function(i) {
-#'             x <<- gsub(K[i, 1], K[i, 2], x, ...)
-#'         })
-#'         return(x)
-#'     }
-#'     x <- msubs(K = key, x = x, ...)
-#'     return(x)
-#'   }
-#' 
+#' \dontrun{
+#' multigsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
+#' mgsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
+#' mgsub("[:punct:]", "PUNC", DATA$state, fixed = FALSE)
+#' }
 multigsub <-
 function(pattern, replacement = NULL, text.var, leadspace = FALSE, 
     trailspace = FALSE, fixed = TRUE, ...){
@@ -57,4 +40,6 @@ function(pattern, replacement = NULL, text.var, leadspace = FALSE,
     return(x)
 }
 
+#' @rdname multigsub
+#' @export
 mgsub <- multigsub
