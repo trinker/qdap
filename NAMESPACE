@@ -101,7 +101,7 @@ export(print.word.stats)
 export(prop)                         
 export(qcv)    
 export(qda.handler)    #export for now
-export(qda.capitalizer)              
+#export(qda.capitalizer)  deleted            
 export(qprep)                        
 export(qview)
 export(rank_freq_plot)                                                  
