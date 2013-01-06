@@ -1,29 +1,54 @@
 #' Rank Frequency Plot
 #' 
-#' Plot word rank versus frequencies.
+#' \code{rank_freq_mplot} - Plot a faceted word rank versus frequencies by 
+#' grouping variable(s).
 #' 
-#' @param words A vector of words.
-#' @param frequencies A vector of frequencies corresponding to the words argument.
+#' @param text.var The text variable         
+#' @param grouping.var The grouping variables.  Default NULL generates one 
+#' output for all text.  Also takes a single grouping variable or a list of 1 
+#' or more grouping variables.  
+#' @param ncol integer value indicating the number of columns in the facet wrap.
+#' @param jitter Ammount of horizontal jitter to add to the points.
+#' @param log.freq logical.  If TURE plots the frequencies in the natural log 
+#' scale.
+#' @param log.rank logical.  If TURE plots the ranks in the natural log scale.
+#' @param hap.col Color of the hapax legomenon points.
+#' @param dis.col Color of the dis legomenon points.
+#' @param alpha Transparency level of points (ranges betweeon 0 and 1).
+#' @param title Optional plot title.
+#' @param digits Integer; number of dicimal places to round.  
 #' @param plot logical.  If TRUE provides a rank frequency plot.
+#' @param words A vector of words.
+#' @param frequencies A vector of frequencies corresponding to the words 
+#' argument.
 #' @param title.ext The title extension that extends: "Rank-Frequency Plot ..."
 #' @param jitter.ammount Ammount of horizontal jitter to add to the points.
 #' @param log.scale logical.  If TRUE plots the rank and frequency as a log 
 #' scale.
-#' @param hap.col Color of the hapax legomenon points.
-#' @param dis.col Color of the dis legomenon points.
 #' @return Returns a rank-frequency plot and a list of three dataframes:
-#' \item{ORIGINAL_DATA}{The word frquencies supplied to \code{rank_freq_plot}.}
+#' \item{WORD_COUNTS}{The word frquencies supplied to \code{rank_freq_plot}.}
 #' \item{RANK_AND_FREQUENCY_STATS}{A dataframe of rank and frequencies for the 
 #' words used in the text.}
 #' \item{LEGOMENA_STATS}{A dataframe displaying the percent_hapax_legomena and 
 #' percent_dis_legomena of the text.}
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+#' @rdname rank_freq_plot
+#' @seealso \code{\link[qdap]{rank_freq_plot}}
 #' @references Zipf, G. K. (1949). Human behavior and the principle of least 
 #' effort. Cambridge, Massachusetts: Addison-Wesley. p. 1.
 #' @keywords Zipf, rank-frequency
 #' @export
 #' @examples
 #' \dontrun{
+#' #rank_freq_mplot EXAMPLES:
+#' rank_freq_mplot(DATA$state, DATA$person, ncol = 2, jitter = 0)
+#' rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5, 
+#'     hap.col = "purple")
+#' rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5, 
+#'     log.freq = FALSE, log.rank = FALSE, jitter = .6)
+#' rank_freq_mplot(raj$dialogue, jitter = .5, alpha = 1/15)
+#' rank_freq_mplot(raj$dialogue, jitter = .5, shape = 19, alpha = 1/15)
+#' 
+#' #rank_freq_plot EXAMPLES:
 #' mod <- with(mraja1spl , word_list(dialogue, person, cut.n = 10, 
 #'     cap.list=unique(DF$person)))         
 #' rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo')  
@@ -38,6 +63,101 @@
 #'         title.ext = names(mod$fwl)[i], jitter.ammount = 0.5, log.scale=FALSE)
 #' }) 
 #' }
+rank_freq_mplot <-
+function(text.var, grouping.var = NULL, ncol =4, jitter = 0.2, log.freq = TRUE, 
+    log.rank = TRUE, hap.col = "red", dis.col = "blue", alpha = 1, shape = 1, 
+    title = "Rank-Frequency Plot", digits = 2, plot = TRUE) {
+    if(is.null(grouping.var)) {
+        G <- "all"
+    } else {
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
+    }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    } 
+    L1 <- word_list(text.var, grouping)
+    L2 <- lapply(seq_along(L1[["fwl"]]), function(i){
+        if (nrow(L1[["fwl"]][[i]]) == 1 & all(is.na(L1[["fwl"]][[i]][1, ]))) {
+            return(NULL)
+        } 
+        dat <- data.frame(group = names(L1[["fwl"]])[i], L1[["fwl"]][[i]]) 
+        names(dat)[2:3] <- c("word", "freq")
+        X <- tapply(dat$freq, dat$freq, length)
+        ZIPF <- data.frame(group = names(L1[["fwl"]])[i],
+            n.words = as.numeric(rev(X)), 
+            freq = as.numeric(rev(rownames(X))), 
+            rank = as.numeric(rev(nrow(X):1)))
+        list(ZIPF, dat)
+    })
+    DF1 <- do.call(rbind, unlist(lapply(L2, "[", 2), recursive = FALSE))
+    DF2 <- do.call(rbind, unlist(lapply(L2, "[", 1), recursive = FALSE))
+    DF3 <- DF2[rep(seq_len(dim(DF2)[1]), DF2[, "n.words"]), ]
+    DF3$cols <- text2color(DF3$freq, c(1, 2), c(hap.col, dis.col, "black"))
+    if (log.freq) {
+        DF3$plotfreq  <-  log(DF3$freq)
+    } else {
+        DF3$plotfreq  <- DF3$freq
+    }
+    if (log.rank) {
+        DF3$plotrank  <- log(DF3$rank) 
+    } else {
+        DF3$plotrank <- DF3$rank
+    }
+    gg <- ggplot(DF3, aes(x = plotrank, y = plotfreq)) + 
+        geom_point(aes(colour = cols), shape = shape, alpha = alpha,
+            position=position_jitter(width = jitter, height = 0)) +
+        facet_wrap(~group, ncol = ncol, scales = "free") + theme_bw() +
+        scale_color_manual(values = c("black", dis.col, hap.col),
+            breaks=c("black", dis.col, hap.col), 
+            labels=c("> 2", "Dis Legomenon", "Hapax Legomenon"),
+            name = "Use") +
+        theme(panel.grid.major = element_blank(),
+            panel.grid.minor = element_blank(),
+            strip.background = element_blank(),
+            panel.border = element_rect(colour = "black")) + 
+        guides(colour = guide_legend(override.aes = list(shape = 15)))
+    gg <- gg + xlab(ifelse(log.rank, "Rank (log scale)", "Rank")) + 
+        ylab(ifelse(log.freq, "Frequency (log scale)", "Frequency"))
+    if (!is.null(title)) {
+        gg <- gg + ggtitle(title)
+    }
+    if (plot) {
+        print(gg)
+    }
+    L3 <- invisible(lapply(split(DF2, DF2$group), function(x) {
+        hapax <- 100 * (x[x[, "freq"] == 1, "n.words"]/sum(x[, "n.words"]))
+        dis <- 100 * (x[x[, "freq"] == 2, "n.words"]/sum(x[, "n.words"]))
+        round(c(hapax_legomenon = hapax, dis_legomenon = dis), digits = digits)
+    }))
+    DF4 <- data.frame(group = levels(DF2$group), do.call(rbind, L3), 
+        row.names = NULL)
+    names(DF4)[1] <- G
+    list(WORD_COUNTS = DF1, RANK_AND_FREQUENCY_STATS = DF2, 
+        LEGOMENA_STATS = DF4)
+}
+
+#' Rank Frequency Plot
+#' 
+#' \code{rank_freq_plot} - Plot word rank versus frequencies.
+#' 
+#' @rdname rank_freq_plot
+#' @export
 rank_freq_plot <-
 function(words, frequencies, plot = TRUE, title.ext = NULL,
     jitter.ammount = 0.1, log.scale = TRUE, hap.col = "red", dis.col = "blue") {
@@ -74,7 +194,8 @@ function(words, frequencies, plot = TRUE, title.ext = NULL,
         "n.words"]/sum(ZIPF$n.words) * 100, digits = 3)
     percent_dis_legomena <- round(ZIPF[ZIPF$freq == 2, 
         "n.words"]/sum(ZIPF$n.words) * 100, digits = 3)
-    list(ORIGINAL_DATA = original.data, RANK_AND_FREQUENCY_STATS = ZIPF, 
+    list(WORD_COUNTS = original.data, RANK_AND_FREQUENCY_STATS = ZIPF, 
         LEGOMENA_STATS = c(percent_hapax_legomena = percent_hapax_legomena, 
         percent_dis_legomena = percent_dis_legomena))
 }
+

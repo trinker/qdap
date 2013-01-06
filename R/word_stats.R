@@ -2,7 +2,6 @@
 #' 
 #' Transcript apply descriptive word statistics
 #' 
-#' @aliases word_stats DF_word_stats print.word.stats
 #' @param text.var The text variable         
 #' @param grouping.var The grouping variables.  Default NULL generates one 
 #' output for all text.  Also takes a single grouping variable or a list of 1 
@@ -18,7 +17,7 @@
 #' output.       
 #' @param apostrophe.remove logical.  If TRUE removes apostophes from calculating 
 #' the output.   
-#' @param digits Integer; number of dicimal places to round.                     
+#' @param digits Integer; number of decimal places to round.                     
 #' @param \ldots Any other arguments passed to endf     
 #' @return Returns a list of three descriptive word statistics:
 #' \item{ts}{A data frame of descriptive word statistics by row} 
@@ -49,6 +48,7 @@
 #' } 
 #' \item{mpun}{An account of sentences with improper end mark} 
 #' @keywords descriptive statistic
+#' @export
 #' @examples
 #' \dontrun{
 #' word_stats(mraja1spl$dialogue, mraja1spl$person)

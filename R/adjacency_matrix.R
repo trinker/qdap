@@ -3,7 +3,6 @@
 #' Takes a matrix (wfm) or termco object (.a, .c or .d) and generates an adjacency
 #' matrix for use with igraph
 #' 
-#' @aliases adjacency_matrix adjmat
 #' @rdname adjacency_matrix
 #' @param matrix.obj A matrix object, preferably, of the class "termco_d" or 
 #' "termco_c" generated from \code{terco.a}, \code{termco.d} or \code{termco.c}.
