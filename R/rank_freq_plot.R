@@ -127,12 +127,12 @@ function(text.var, grouping.var = NULL, ncol =4, jitter = 0.2, log.freq = TRUE,
         scale_color_manual(values = c("black", dis.col, hap.col),
             breaks=c("black", dis.col, hap.col), 
             labels=c("> 2", "Dis Legomenon", "Hapax Legomenon"),
-            name = "Use") +
+            name = "Word Use") +
         theme(panel.grid.major = element_blank(),
             panel.grid.minor = element_blank(),
             strip.background = element_blank(),
             panel.border = element_rect(colour = "black")) + 
-        guides(colour = guide_legend(override.aes = list(shape = 15)))
+        guides(colour = guide_legend(override.aes = list(shape = 15, alpha = 1)))
     gg <- gg + xlab(ifelse(log.rank, "Rank (log scale)", "Rank")) + 
         ylab(ifelse(log.freq, "Frequency (log scale)", "Frequency"))
     if (!is.null(title)) {
