@@ -8,7 +8,7 @@
 #' or more grouping variables.  
 #' @param original_order logical.  IF TRUE orders by the original order.  If 
 #' FALSE orders by group.
-#' @param digits Integer; number of dicimal places to round.
+#' @param digits Integer; number of decimal places to round.
 #' @return Returns a list of two:
 #' \item{SCALED_OBSERVATIONS}{A dataframe of scaled observations at level one 
 #' and two of the nesting with possible outliers.} 
