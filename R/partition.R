@@ -1,3 +1,4 @@
+#helper function for readability statisitics (not exported)
 partition <-
 function(x, k = 100){
     n <- length(x)

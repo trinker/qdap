@@ -1,54 +1,32 @@
 #' Paste an Unspecified Number Of Text Columns
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' Paste unspecified columns or a list of vectors together.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param multi.columns %% ~~Describe \code{multi.columns} here~~
-#' @param sep %% ~~Describe \code{sep} here~~
-#' @param handle.na %% ~~Describe \code{handle.na} here~~
-#' @param trim %% ~~Describe \code{trim} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param multi.columns The multiple columns or a litst of vectors to paste 
+#' together.
+#' @param sep A character string to separate the terms. 
+#' @param handle.na logical.  If TRUE returns \code{NA} if any column/vector 
+#' contains a missing value.
+#' @param trim logical.  If TRUE leading/trailing white space is removed.
+#' @return Returns a vector with row-wise elements pasted together.
+#' @note \code[base]{\link{paste}} differs from \code[qdap]{\link{paste2}} 
+#' because \code{paste} does not allowed an unspecified number of columns to be 
+#' pasted.  This behavior can be convient for inside of functions when the 
+#' number of columns being pasted is unknown.
+#' @seealso \code[base]{\link{paste}}
+#' @keywords paste
+#' @export
 #' @examples
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (multi.columns, sep = ".", handle.na = TRUE, trim = TRUE) 
-#' {
-#'     if (trim) 
-#'         multi.columns <- lapply(multi.columns, function(x) {
-#'             gsub("^\s+|\s+$", "", x)
-#'         })
-#'     if (!is.data.frame(multi.columns) & is.list(multi.columns)) {
-#'         multi.columns <- do.call("cbind", multi.columns)
-#'     }
-#'     m <- if (handle.na) {
-#'         apply(multi.columns, 1, function(x) {
-#'             if (any(is.na(x))) {
-#'                 NA
-#'             }
-#'             else {
-#'                 paste(x, collapse = sep)
-#'             }
-#'         })
-#'     }
-#'     else {
-#'         apply(multi.columns, 1, paste, collapse = sep)
-#'     }
-#'     names(m) <- NULL
-#'     return(m)
-#'   }
-#' 
+#' \dontrun{
+#' v <- rep(list(state.abb,  state.name) , 5)
+#' n <- sample(5:10, 1)
+#' paste(v[1:n]) #odd looking return
+#' paste2(v[1:n]) 
+#' paste2(v[1:n], sep="|") 
+#' paste2(mtcars, sep="|") 
+#' paste(mtcars, sep="|") #odd looking return
+#' paste2(CO2, sep="|-|") 
+#' }
 paste2 <-
 function(multi.columns, sep=".", handle.na=TRUE, trim=TRUE){
     if (is.matrix(multi.columns)) {
