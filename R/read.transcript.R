@@ -42,6 +42,7 @@
 #' @author Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
 #' @seealso \url{https://github.com/trinker/qdap/wiki/Reading-Transcripts-into-R}
 #' @keywords transcript
+#' @export
 #' @examples
 #' #' \dontrun{
 #' doc1 <- system.file("extdata/trans1.docx", package = "qdap")

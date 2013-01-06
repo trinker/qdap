@@ -9,6 +9,7 @@
 #' output is proption.
 #' @return %Returns a matrix with proportionaly scaled values.
 #' @keywords proportion, percent, percentage
+#' @export
 #' @examples
 #' dontrun{
 #' y <- wfdf(DATA$state, DATA$person, stopwords = c("your", "yours"), margins = TRUE)

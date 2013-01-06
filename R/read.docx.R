@@ -1,3 +1,4 @@
+#helper function for read.transcript (not exported)
 read.docx <-
 function(file, skip = 0, sep = ":") {
     tmp <- tempfile()

@@ -31,6 +31,7 @@
 #' \code{\link[qdap]{replace_symbol}}
 #' @note Care should taken with this function to ensure data is properly 
 #' formatted and complete.
+#' @export
 #' @examples
 #' x <- "I like 60 (laughter) #d-bot and $6 @ the store w/o 8p.m."
 #' qprep(x)
