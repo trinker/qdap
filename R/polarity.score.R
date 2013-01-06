@@ -65,6 +65,7 @@
 #' 
 #' \url{http://www.slideshare.net/jeffreybreen/r-by-example-mining-twitter-for}
 #' @keywords sentiment, polarity
+#' @export
 #' @examples
 #' \dontrun{
 #' (poldat <- with(DATA, polarity.score(state, person)))

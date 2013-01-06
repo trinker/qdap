@@ -1,3 +1,4 @@
+#internal function used by trans.cloud and word.comp (not exportd)
 qda.handler <-
 function(x) {
     if (!is.null(comment(x))) {

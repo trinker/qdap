@@ -7,20 +7,30 @@
 #' 
 #' @param text.var The text variable    
 #' @param rm.dash logical logical.  If TRUE dashes will be removed.
-#' @param bracket The type of bracket (and encased text) to remove.  This is one of 
-#' the strings "curly", "square", "round", "angle" and "all".  
-#' These strings correspond to: {, [, (, < or all four types.
+#' @param bracket The type of bracket (and encased text) to remove.  This is one 
+#' of the strings \code{"curly"}, \code{"square"}, \code{"round"}, 
+#' \code{"angle"} and \code{"all"}.  These strings correspond to: {, [, (, < or 
+#' all four types.
 #' @param missing Value to assign to empty cells.
-#' @param names logical.  If TRUE the sentences are given as the names of the counts.
-#' @param abbreviation A two column key of abbreviations (column 1) and long form replacements (column 2) or a vector of abbeviations.  Default is to use qdap's abbreviations data set.
-#' @param replace A vecotor of long form replacements if a data frame is not supplied to the abbreviation argument
-#' @param ignore.case logical.  If True replaces without regard to capitalization
-#' @param num.paste A character string c("separate", "combine"); separate will treat each word section as separate, combine will lump thme sections together as one word.
+#' @param names logical.  If TRUE the sentences are given as the names of the 
+#' counts.
+#' @param abbreviation A two column key of abbreviations (column 1) and long 
+#' form replacements (column 2) or a vector of abbeviations.  Default is to use 
+#' qdap's abbreviations data set.
+#' @param replace A vecotor of long form replacements if a data frame is not 
+#' supplied to the abbreviation argument
+#' @param ignore.case logical.  If TRUE replaces without regard to 
+#' capitalization.
+#' @param num.paste A character string c(\code{"separate"}, \code{"combine"}); 
+#' \code{"separate"} will treat each word section as separate, \code{"combine"} 
+#' will lump the sections together as one word.
 #' @seealso 
 #' \code{\link[qdap]{bracketX}},
+#' \code{\link[qdap]{replace_abbreviation}},
 #' \code{\link[qdap]{replace_number}},
 #' \code{\link[qdap]{replace_symbol}}
-#' @note Care should taken with this function to ensure data is properly formatted and complete.
+#' @note Care should taken with this function to ensure data is properly 
+#' formatted and complete.
 #' @examples
 #' x <- "I like 60 (laughter) #d-bot and $6 @ the store w/o 8p.m."
 #' qprep(x)
