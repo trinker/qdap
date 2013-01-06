@@ -26,11 +26,12 @@
 #' @param log.scale logical.  If TRUE plots the rank and frequency as a log 
 #' scale.
 #' @return Returns a rank-frequency plot and a list of three dataframes:
-#' \item{WORD_COUNTS}{The word frquencies supplied to \code{rank_freq_plot}.}
+#' \item{WORD_COUNTS}{The word frquencies supplied to \code{rank_freq_plot} or 
+#' created by \code{rank_freq_mplot}.}
 #' \item{RANK_AND_FREQUENCY_STATS}{A dataframe of rank and frequencies for the 
 #' words used in the text.}
-#' \item{LEGOMENA_STATS}{A dataframe displaying the percent_hapax_legomena and 
-#' percent_dis_legomena of the text.}
+#' \item{LEGOMENA_STATS}{A dataframe displaying the percent hapax legomena and 
+#' percent dis legomena of the text.}
 #' @rdname rank_freq_plot
 #' @seealso \code{\link[qdap]{rank_freq_plot}}
 #' @references Zipf, G. K. (1949). Human behavior and the principle of least 

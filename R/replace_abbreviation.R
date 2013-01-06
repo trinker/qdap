@@ -2,12 +2,22 @@
 #'
 #' This function replaces abbreviations with long form.
 #' 
-#' @param text.var  The text variable
-#' @param abbreviation A two column key of abbreviations (column 1) and long form replacements (column 2) or a vector of abbeviations.  Default is to use qdap's abbreviations data set.
-#' @param replace A vecotor of long form replacements if a data frame is not supplied to the abbreviation argument
-#' @param ignore.case logical.  If True replaces without regard to capitalization
+#' @param text.var  The text variable.
+#' @param abbreviation A two column key of abbreviations (column 1) and long 
+#' form replacements (column 2) or a vector of abbeviations.  Default is to use 
+#' qdap's abbreviations data set.
+#' @param replace A vector of long form replacements if a data frame is not 
+#' supplied to the abbreviation argument.
+#' @param ignore.case logical.  If TRUE replaces without regard to capitalization.
+#' @return Returns a vector with abbreviations replaced.
 #' @keywords abbreviation
+#' \code{\link[qdap]{bracketX}},
+#' \code{\link[qdap]{qprep}},
+#' \code{\link[qdap]{replace_number}},
+#' \code{\link[qdap]{replace_symbol}}
+#' @export
 #' @examples
+#' \dontrun{
 #' x <- c("Mr. Jones is here at 7:30 p.m.",  
 #'     "Check it out at www.github.com/trinker/qdap",
 #'     "i.e. He's a sr. dr.; the best in 2012 A.D.",
@@ -23,8 +33,10 @@
 #' 
 #' KEY <- rbind(abbreviations, data.frame(abv = abv, rep = repl))
 #' replace_abbreviation(x, KEY)
+#' }
 replace_abbreviation <-
-function(text.var, abbreviation = qdap::abbreviations, replace = NULL, ignore.case=TRUE) {
+function(text.var, abbreviation = qdap::abbreviations, replace = NULL, 
+    ignore.case=TRUE) {
     if (!is.null(replace)) {
         ab <- data.frame(abv=abbreviation, repl=replace)
     } else {

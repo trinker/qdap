@@ -1,31 +1,34 @@
-#' Transcript Apply Change Symbols for Word Equivalents
+#' Replace Symbols With Word Equivalents
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' This function replaces symbols with word equivalents (e'g' \code{@@} becomes 
+#' \code{"at"}.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param dollar %% ~~Describe \code{dollar} here~~
-#' @param percent %% ~~Describe \code{percent} here~~
-#' @param pound %% ~~Describe \code{pound} here~~
-#' @param at %% ~~Describe \code{at} here~~
-#' @param and %% ~~Describe \code{and} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param text.var  The text variable.
+#' @param dollar logical.  If TRUE replaces dollar sign ($) with \code{"dollar"}.
+#' @param percent logical.  If TRUE replaces percent sign (%) with \code{"percent"}.
+#' @param pound logical.  If TRUE replaces pound sign (#) with \code{"number"}.
+#' @param atlogical.  If TRUE replaces at sign (@@) with \code{"at"}.
+#' @param and logical.  If TRUE replaces and sign (&) with \code{"and"}.
+#' @param with  logical.  If TRUE replaces with sign (w/) with \code{"with"}.
+#' @return Returns a character vector with symbols replaced..
+#' @keywords symbol-replace
+#' \code{\link[qdap]{bracketX}},
+#' \code{\link[qdap]{replace_abbreviation}},
+#' \code{\link[qdap]{replace_number}},
+#' \code{\link[qdap]{qprep}}
+#' @export
 #' @examples
-#' 
+#' \dontrun{
+#' x <- c("I am @ Jon's & Jim's w/ Marry", "I owe $41 for food", "two is 10% 
+#'     of a #")
+#' replace_symbol(x)
+#' }
 replace_symbol <-
 function(text.var, dollar = TRUE, percent = TRUE, 
          pound = TRUE, at = TRUE, and = TRUE, with = TRUE) {
   x <- c(dollar, percent, pound, at, and, with, with)
   scrubber(mgsub(pattern = c("%", "$", "#", "&", "@", "w/o", "w/")[x], 
-        replacement = spaste(c("percent", "dollar", "pound", "and", "at", 
+        replacement = spaste(c("percent", "dollar", "number", "and", "at", 
         "without", "with")[x]), text.var = text.var, fixed = TRUE,
          leadspace = FALSE, trailspace = FALSE))
 }

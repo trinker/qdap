@@ -1,21 +1,20 @@
-#' Replace Cells in a Matrix or DataFrame
+#' Replace Cells in a Matrix or Data Frame
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' Replace elements of a dataframe, matrix or vector with least restrictive 
+#' class.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param dat %% ~~Describe \code{dat} here~~
-#' @param replace %% ~~Describe \code{replace} here~~
-#' @param with %% ~~Describe \code{with} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param dat Data; either a dataframe, matrix or vector.
+#' @param replace Element to replace.
+#' @param with Replacement element.
+#' @return Returns a dataframe, matrix or vector with the element repalced. 
+#' @keywords replace
+#' @export
 #' @examples
+#' \dontrun{
+#' replacer(mtcars, 0, "REP")
+#' replacer(mtcars, 8, NA)
+#' replacer(c("a", "b"), "a", "foo")
+#' }
 replacer <- 
 function(dat, replace=0, with="-"){ 
   h <- is.vector(dat)

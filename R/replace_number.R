@@ -1,21 +1,30 @@
 #' Replace Numerbers With Text Representation
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' Replaces numeric represented numbers with words (e.g. 1001 becomes one 
+#' thousand one)
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param text.var The text variable 
-#' @param num.paste A character string c("separate", "combine"); separate will treat each word section as separate, combine will lump thme sections together as one word.
-#' @seealso
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param text.var  The text variable.
+#' @param num.paste A character vector of either \code{"separate"} or 
+#' \code{"combine"}.  Of \code{"separate"} is specified the elements of larger 
+#' numbers are separated with spaces.  If \code{"combine"} is selected the 
+#' elements will be joined without spaces.
+#' @return Returns a vector with abbreviations replaced.
+#' @references Fox, J. (2005). Programmer's niche: How do you spell that number? 
+#' R News. Vol. 5(1), pp. 51-55.
+#' @keywords number-to-word
+#' \code{\link[qdap]{bracketX}},
+#' \code{\link[qdap]{replace_abbreviation}},
+#' \code{\link[qdap]{qprep}},
+#' \code{\link[qdap]{replace_symbol}}
+#' @export
 #' @examples
-#' 
+#' \dontrun{
+#' x <- c("I like 346,457 ice cream cones.", "They are 99 percent good")
+#' y <- c("I like 346457 ice cream cones.", "They are 99 percent good")
+#' replace_number(x)
+#' replace_number(y)
+#' replace_number(x, "combine")
+#' }
 replace_number  <-
 function(text.var, num.paste = "separate") {
     numb2word <- function(x){ 
