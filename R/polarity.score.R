@@ -1,6 +1,6 @@
 #' Transcript Apply Polarity Score of Dialogue
 #' 
-#' Aproximate the sentimate (polarity) of a statement by grouping variable(s).
+#' Aproximate the sentiment (polarity) of a statement by grouping variable(s).
 #' 
 #' @param text.var The text variable.
 #' @param grouping.var The grouping variables.  Default NULL generates one word 
@@ -28,12 +28,15 @@
 #' \item{group}{A dataframe with the average polarity score by grouping variable.}
 #' @seealso \url{https://github.com/trestletech/Sermon-Sentiment-Analysis}
 #' @note The polarity score is dependant upon the polarity dictionary used.  
-#' This function defaults to Hu, M., & Liu, B. (2004), however, this may not be 
-#' appropriate for the context of children in a classroom.  The user may (is 
-#' encouraged) to provide/augment the doctionary.  For instance the word "sick" 
-#' in a high school setting may mean that something is good, where as "sick" 
-#' used by a typical adult indicates something is not right or negative 
-#' connotation.
+#' This function defaults to the word polarity word dictionary used by Hu, M., & 
+#' Liu, B. (2004), however, this may not be appropriate for the context of 
+#' children in a classroom.  The user may (is encouraged) to provide/augment the 
+#' dictionary.  For instance the word "sick" in a high school setting may mean 
+#' that something is good, where as "sick" used by a typical adult indicates 
+#' something is not right or negative connotation.
+#' 
+#' Also note that \code{\link[qdap]{polarity.score}} assumes you've run 
+#' \code{\link[qdap]{sentSplit}}.
 #' @details The equation used by the algorithm to assign value to polarity to 
 #' each sentence fist utilizes the sentiment dictionary (Hu and Liu, 2004) to 
 #' tag each word  as either positive (\eqn{x_i^{+}}), negative (\eqn{x_i^{-}}), 
@@ -41,8 +44,8 @@
 #' (\eqn{x_i^{\uparrow}}).  Neutral words hold no value in the equation but do 
 #' affect word count (\eqn{n}).  Each positive (\eqn{x_i^{+}}) and negative 
 #' (\eqn{x_i^{-}}) word is then weighted by the amplifiers (\eqn{x_i^{\uparrow}}) 
-#' directly proceeding the positive or negative word.  Next I consider 
-#' amplification value, adding the assigned value $1/n-1$ to increase the 
+#' directly proceeding the positive or negative word.  Next, I consider 
+#' amplification value, adding the assigned value \eqn{1/n-1} to increase the 
 #' polarity relative to sentence length while ensuring that the polarity scores 
 #' will remain between the values -1 and 1.  This weighted value for each 
 #' polarized word is then multiplied by -1 to the power of the number of negated 
@@ -53,7 +56,9 @@
 #' \deqn{\delta=\frac{\sum(x_i^{0},\quad x_i^{\uparrow} + 
 #' x_i^{+}\cdot(-1)^{\sum(x_i\neg)},\quad x_i^{\uparrow} + 
 #' x_i^{-}\cdot(-1)^{\sum(x_i\neg)})}{n}}
-#'       
+#'   
+#' Where:
+#'     
 #' \deqn{x_i^{\uparrow}=\frac{1}{n-1}}
 #' @references Hu, M., & Liu, B. (2004). Mining opinion features in customer 
 #' reviews. National Conference on Artificial Intellgience. 

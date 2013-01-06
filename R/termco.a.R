@@ -15,8 +15,8 @@
 #' @param ignore.case logical.  If TRUE case is ignored.
 #' @param elim.old logical.  If TRUE eliminates the columns that are combined 
 #' together by the named match.list.
-#' @param output Type of proportion output; either "proportion" (decimal format) 
-#' or "percent".  Default is percent.
+#' @param output Type of proportion output; either \code{"proportion"} (decimal 
+#' format) or \code{"percent"}.  Default is \code{"percent"}.
 #' @param digits integer indicating the number of decimal places (round) or 
 #' significant digits (signif) to be used. Negative values are allowed.
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from the text 
@@ -44,7 +44,8 @@
 #' c(" read ", " reads", " reading", " reader").  To search for non character 
 #' arguments (i.e. numbers and symbols) additional arguments from strip must be 
 #' passed.
-#' @keywords word search
+#' @seealso \code{\link[qdap]{termco_c}}
+#' @keywords word-search
 #' @examples
 #' \dontrun{
 #' #termco.a examples:

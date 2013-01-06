@@ -1,24 +1,4 @@
-#' Transcript Apply Count Occurances of Specified Terms
-#' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
-#' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param match.string %% ~~Describe \code{match.string} here~~
-#' @param grouping.var %% ~~Describe \code{grouping.var} here~~
-#' @param ignore.case %% ~~Describe \code{ignore.case} here~~
-#' @param zero.replace %% ~~Describe \code{zero.replace} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
-#' @examples
-#' 
+#helper function for termco_d and termco_a (not exported) 
 termco <-
 function (text.var, match.string, grouping.var = NULL, ignore.case = FALSE, 
           zero.replace = 0){

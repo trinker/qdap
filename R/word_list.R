@@ -1,24 +1,32 @@
-#' Generate Raw Word Lists and Word Frequency Counts
+#' Raw Word Lists/Frequency Counts
 #' 
-#' Transcript Apply Raw Word Lists and Frequency Counts by grouping variable(s)
+#' Transcript Apply Raw Word Lists and Frequency Counts by grouping variable(s).
 #' 
-#' @aliases word_list qda print.qda
 #' @param text.var The text variable.
-#' @param group.vars The grouping variables.  Default NULL generates one word list for all text.  Also takes a single grouping variable or a list of 1 or more grouping variables.
+#' @param group.vars The grouping variables.  Default NULL generates one word 
+#' list for all text.  Also takes a single grouping variable or a list of 1 or 
+#' more grouping variables.
 #' @param stopwords A vector of stop words to remove.
 #' @param cut.n Cut off point for reduced frequency stop word list (rfswl)
 #' @param cap logical. If TRUE capitalizes words from the cap.list
 #' @param cap.list Vector of words to capitalize.
-#' @param cap.I logical. If TRUE capitalizes words containing the personal pronoun I.
-#' @return An object of class "word.list" is a list containing at the following components: 
+#' @param cap.I logical. If TRUE capitalizes words containing the personal 
+#' pronoun I.
+#' @return An object of class \code{"word.list"} is a list containing at the 
+#' following components: 
 #' \item{cwl}{complete word list; raw words}
 #' \item{swl}{stop word list; same as rwl with stop words removed}
-#' \item{fwl}{frequency word list; a data frame of words and correspnding frequency counts}
-#' \item{fswl}{fequency stopword word list; same as fwl but with stopwords removed}
-#' \item{rfswl}{reduced frequency stopword word list; same as fswl but truncated to n rows}
+#' \item{fwl}{frequency word list; a data frame of words and correspnding 
+#' frequency counts}
+#' \item{fswl}{fequency stopword word list; same as fwl but with stopwords 
+#' removed}
+#' \item{rfswl}{reduced frequency stopword word list; same as fswl but truncated 
+#' to n rows}
 #' @references A matrix of standard deviations of distances between codes
 #' @keywords word list
+#' @export
 #' @examples
+#' \dontrun{
 #' XX <-word_list(raj.act.1$dialogue)
 #' names(XX)
 #' XX$cwl
@@ -31,7 +39,7 @@
 #' with(DATA, word_list(state, person))
 #' with(DATA, word_list(state, person, stopwords = Top25Words))
 #' with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))
-#' 
+#' }
 word_list <- 
 function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
     cut.n = 20, cap = TRUE, cap.list=NULL, cap.I=TRUE, rm.bracket = TRUE,
@@ -191,4 +199,15 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
     return(o)
 }
 
-qda <- word_list
+#' Prints a word.list object
+#' 
+#' Prints a word.list object.
+#' 
+#' @param x The word.list object
+#' @param \ldots ignored
+#' @method print word.list
+#' @S3method print word.list
+print.word.list <-
+function(x, ...) {
+    print(x$rfswl)
+}

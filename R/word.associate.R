@@ -1,6 +1,33 @@
 #' Find words associated with a given word(s) or a phrase(s).
 #' 
 #' Find words associated with a given word(s) or a phrase(s).  Results can be
+#' output as a network graph and/or wordcloud.
+#' 
+#' @param text.var %% ~~Describe \code{text.var} here~~
+#' @param grouping.var %% ~~Describe \code{grouping.var} here~~
+#' @param match.string %% ~~Describe \code{match.string} here~~
+#' @param stopwords %% ~~Describe \code{stopwords} here~~
+#' @param network.graph %% ~~Describe \code{network.graph} here~~
+#' @param wordcloud %% ~~Describe \code{wordcloud} here~~
+#' @param cloud.colors %% ~~Describe \code{cloud.colors} here~~
+#' @param nw.label.cex %% ~~Describe \code{nw.label.cex} here~~
+#' @param nw.label.colors %% ~~Describe \code{nw.label.colors} here~~
+#' @param nw.layout %% ~~Describe \code{nw.layout} here~~
+#' @param nw.edge.color %% ~~Describe \code{nw.edge.color} here~~
+#' @param \dots %% ~~Describe \code{\dots} here~~
+#' @return %% ~Describe the value returned %% If it is a LIST, use %%
+#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
+#' 'comp2'} %% ...
+#' @note %% ~~further notes~~
+#' @author %% ~~who you are~~
+#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+#' @references %% ~put references to the literature/web site here ~
+#' @keywords ~kwd1 ~kwd2
+#' @examples
+#' 
+#' Find words associated with a given word(s) or a phrase(s).
+#' 
+#' Find words associated with a given word(s) or a phrase(s).  Results can be
 #' outpur as a networrk graph and/or wordcloud.
 #' 
 #' %% ~~ If necessary, more details than the description above ~~
@@ -292,7 +319,7 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
             }
         )
         freqlist <- lapply(LIST, function(x) {
-            qda(x$text, stopwords = stopwords)
+            word_list(x$text, stopwords = stopwords)
         })
         o <- list(list = LISTb, search.terms = COLTERMS, freqlist = freqlist, 
             freqmat = mats, adjmat = mats2)
@@ -350,4 +377,37 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
     }
     class(o2) <- "word_associate"  
     return(o2)
+}
+
+#' Prints a word_associate object
+#' 
+#' Prints a word_associate object.
+#' 
+#' @param x The word_associate object
+#' @param \ldots ignored
+#' @method print word_associate
+#' @S3method print word_associate
+print.word_associate <-
+function(x, ...) {
+    y <- which(suppressWarnings(do.call("rbind", 
+        strsplit(names(x), ".", fixed=TRUE)))[, 3]=="obs")
+    word.associate2 <- lapply(y, function(xi) {
+        rownames(x[[xi]]) <- NULL
+        return(x[[xi]])
+    })
+    nms <- names(x)[y]
+    wid <- options()$width
+    options(width = 10000)
+    lapply(seq_along(word.associate2), 
+        function(x){ 
+            cat("\n")
+            print(noquote(nms[x]))
+            if (nrow(word.associate2[[x]]) > 1){
+                print(left.just(word.associate2[[x]], 2))
+            } else {
+                print(word.associate2[[x]])
+            }
+        }
+    )
+    options(width = wid)
 }

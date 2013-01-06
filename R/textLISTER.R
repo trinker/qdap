@@ -1,3 +1,4 @@
+#helper function for word_list (not exported)
 textLISTER <-
 function(text.var, group.vars, rm.bracket = TRUE, char.keep = NULL,  apostrophe.remove = FALSE, ...) {
     NAME <- if (is.list(group.vars)) {
