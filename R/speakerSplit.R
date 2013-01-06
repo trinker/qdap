@@ -4,9 +4,12 @@
 #' 
 #' @param dataframe A dataframe that contains the person variable.
 #' @param person.var The person variable to be stretched.
-#' @param sep The spearator(s) to search for and break on.  Default is: c(".", "_", ";")
-#' @param track.reps logical.  If TRUE leaves the row names of person variable celss that were repeated and stretched.
-#' @return Returns an expanded dataframe with person variable stretched and accompanying rows repeated.
+#' @param sep The spearator(s) to search for and break on.  Default is: 
+#' c(".", "_", ";")
+#' @param track.reps logical.  If TRUE leaves the row names of person variable 
+#' cells that were repeated and stretched.
+#' @return Returns an expanded dataframe with person variable stretched and 
+#' accompanying rows repeated.
 #' @export
 #' @examples
 #' DATA$person <- as.character(DATA$person)
