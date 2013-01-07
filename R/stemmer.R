@@ -1,28 +1,41 @@
 #' Stem Text
 #' 
-#' Stems a vector of text strings
+#' \code{stemmer} - Stems a vector of text strings.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param text.var  The text variable.
-#' @param rm.bracket %% ~~Describe \code{rm.bracket} here~~
-#' @param capitalize %% ~~Describe \code{capitalize} here~~
-#' @param warn %% ~~Describe \code{warn} here~~
-#' @param \dots %% ~~Describe \code{\dots} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param text.var  The text variable.  In \code{stemmer} this is a vector text 
+#' string. For \code{stem2df} this is a character vector of length one naming the 
+#' text column.  
+#' @param rm.bracket logical.  If TRUE brackets are removed from the text.
+#' @param capitalize logical.  If TRUE selected terms are capitalized
+#' @param warn logical.  If TRUE warns about rows not ending with standard qdap 
+#' punctuation endmarks.
+#' @param \dots Various: \cr
+#'     \emph{\code{stemmer} - Other arguments passed to 
+#'     \code{\link[qdap]{capitalizer}}} \cr
+#'     \emph{\code{stem.words} - Words or terms.} \cr
+#'     \emph{\code{stem2df} - Other arguments passed to 
+#'     \code{\link[qdap]{stemmer}}}
+#' @param dataframe A dataframe object.
+#' @param stem.name A character vector of length one for the stemmed column.  If 
+#' \code{NULL} defaults to \code{"stem.text"}.
+#' @return \code{stemmer } - Returns a character vector with stemmed text.
+#' @rdname stemmer
+#' @seealso \code{\link[qdap]{capitalizer}}
+#' @keywords stem
 #' @examples
+#' \dontrun{
+#' #stemmer EXAMPLE:
 #' stemmer(DATA$state)
 #' stemmer(raj$dialogue)
+#' 
+#' #stem.words EXAMPLE:
+#' stem.words(doggies, jumping, swims)
+#' 
+#' #stem2df EXAMPLE:
+#' stem2df(DATA, "state", "new")
+#' }
 stemmer <-
-function(text.var, rm.bracket = TRUE, capitalize = TRUE, 
-    warn = TRUE, ...){
+function(text.var, rm.bracket = TRUE, capitalize = TRUE, warn = TRUE, ...){
     txt <- as.character(text.var)
     if (rm.bracket){
         txt <- bracketX(txt)
@@ -72,8 +85,42 @@ function(text.var, rm.bracket = TRUE, capitalize = TRUE,
     return(txt2)
 }
 
-
-stem.words <- #is this necessary?  Won't stememr already do this?
+#' Stem Words
+#' 
+#' \code{stem.words} - Wrapper for stemmer that stems a vector of words.
+#' 
+#' @return \code{stem.words} - Returns a dataframe with a character vector with.
+#' 
+#' @rdname stemmer
+#' @export
+stem.words <- 
 function(...) {
-  stemmer(c(...), capitalize = FALSE, warn = FALSE, ...)
+    x <- substitute(...())
+    z <- unblanker(scrubber(unlist(lapply(x, function(y) as.character(y)))))
+    stemmer(z, capitalize = FALSE, warn = FALSE)
+}
+
+#' Stem Text
+#' 
+#' \code{stem2df} - - Wrapper for stemmer that stems a vector of text strings 
+#' and returns a dataframe with the vector added..
+#' 
+#' @return \code{stem2df} - Returns a dataframe with a character vector with 
+#' stemmed text.
+#' @rdname stemmer
+#' @export
+stem2df <-
+function (dataframe, text.var, stem.name = NULL, ...) {
+    if (!is.data.frame(dataframe)) {
+        stop("Please supply a data.frame to stem2df")
+    }
+    if (is.numeric(dataframe[, text.var])) {
+        stop("text.var can not be numeric")
+    }
+    new <- stemmer(dataframe[, text.var], ...)
+    DF <- data.frame(dataframe, stem.text = new, stringsAsFactors = FALSE)
+    if (!is.null(stem.name)) {
+        names(DF)[ncol(DF)] <- stem.name
+    } 
+    return(DF)
 }

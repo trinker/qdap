@@ -12,6 +12,7 @@
 #' accompanying rows repeated.
 #' @export
 #' @examples
+#' \dontrun{
 #' DATA$person <- as.character(DATA$person)
 #' DATA$person[c(1, 4, 6)] <- c("greg, sally, & sam", 
 #'     "greg, sally", "sam and sally")
@@ -25,6 +26,7 @@
 #' speakerSplit(DATA, sep = c(".", "_", ";"))
 #' 
 #' DATA <- qdap::DATA  #reset DATA
+#' }
 speakerSplit <- function(dataframe, person.var = 1, 
     sep=c("and", "&", ","), track.reps = FALSE) {
     if (!is.numeric(person.var)) {

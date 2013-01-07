@@ -12,9 +12,11 @@
 #' @seealso \code[qdap]{\link{stopwords}}
 #' @export
 #' @examples
+#' \dontrun{
 #' strip(DATA$state)
 #' strip(DATA$state, apostrophe.remove=FALSE)
 #' strip(DATA$state, char.keep = c("?", "."))
+#' }
 strip <-
 function (x, char.keep = NULL, digit.remove = TRUE, apostrophe.remove = TRUE,
     lower.case = TRUE) {

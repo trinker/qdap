@@ -1,40 +1,26 @@
-#' Wrapper for strwrap that Writes to the Windows Clipboard
+#' Wrap Character Strings to Format Paragraphs
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' A wrapper for \code{\link[base]{as.character}} that writes to the Mac/Windows 
+#' clipboard.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param text %% ~~Describe \code{text} here~~
-#' @param width %% ~~Describe \code{width} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param text  character vector, or an object which can be converted to a 
+#' character vector by \code{\link[base]{as.character}}.
+#' @param width A positive integer giving the target column for wrapping lines 
+#' in the output.
+#' @param copy2clip logical.  If TRUE attempts to copy the output to the 
+#' clipboard.
+#' @return Prints a wrapped text vector to the console and copies the wrapped 
+#' text to the clipboard on a Mac or Windows machine.
+#' @seealso \code{\link[base]{strwrap}}
+#' @keywords string-wrap
+#' @export
 #' @examples
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (text = "clipboard", width = 70) 
-#' {
-#'     x <- if (text == "clipboard") {
-#'         paste(readClipboard(), collapse = " ")
-#'     }
-#'     else {
-#'         text
-#'     }
-#'     x <- gsub("\s+", " ", gsub("\n|\t", " ", x))
-#'     x <- strwrap(x, width = width)
-#'     writeClipboard(x, format = 1)
-#'     writeLines(strwrap(x, width = width))
-#'   }
-#' 
+#' \dontrun{
+#' x <- paste2(DATA$state, sep = " " )
+#' strWrap(x)
+#' strWrap(x, 10)
+#' #should be copied to the clipboard on a Mac or Windows machine.
+#' }
 strWrap <-
 function(text = "clipboard", width = 70, copy2clip = TRUE) {
     if (text == "clipboard") {

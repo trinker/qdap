@@ -11,7 +11,7 @@
 #' analysis.
 #' @param algorithm.report logical.  If TRUE generates a report of words not 
 #' found in the dictionary (i.e. syllables were calculated with an algorithm).
-#' @return syllable.sum returns a vector of syllable counts per row. 
+#' @return \code{syllable.sum} - returns a vector of syllable counts per row. 
 #' @rdname syllabication
 #' @note The worker of all the syllable functions is \code{syllable.count} 
 #' though it is not intendeded for direct use on a transcript.  This function 
@@ -54,7 +54,7 @@ function(text.var, parallel = FALSE) {
 #' 
 #' \code{syllable.count} - Count the number of syllables in a single text string.
 #' 
-#' @return syllable.count returns a dataframe of syllable counts and 
+#' @return \code{syllable.count} - returns a dataframe of syllable counts and 
 #' algorithm/dictionary uses and, optionally, a report of words not found in the dictionary. 
 #' @rdname syllabication
 #' @export
@@ -182,7 +182,7 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
 #' 
 #' \code{polysyllable.sum} - Count the number of polysyllables per row of text.
 #' 
-#' @return polysyllable.sum returns a vector of polysyllable counts per row. 
+#' @return \code{polysyllable.sum} - returns a vector of polysyllable counts per row. 
 #' @rdname syllabication
 #' @export
 polysyllable.sum <-
@@ -219,7 +219,7 @@ function(text.var, parallel = FALSE) {
 #' \code{combo_syllable.sum} - Count the number of both syllables and 
 #' polysyllables per row of text.
 #' 
-#' @return combo_syllable.sum returns a dataframe of syllable and polysyllable 
+#' @return \code{combo_syllable.sum} - returns a dataframe of syllable and polysyllable 
 #' counts per row. 
 #' @rdname syllabication
 #' @export

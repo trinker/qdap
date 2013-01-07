@@ -1,6 +1,6 @@
 #' Remove Stopwords
 #' 
-#' Transcript apply the removal of stopwords
+#' Transcript apply the removal of stopwords.
 #' 
 #' @param textString A character string of text or a vector of character strings.
 #' @param stopwords A character vector of words to remove from the text.  qdap 
