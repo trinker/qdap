@@ -1,6 +1,6 @@
 #' Hash Table/ Dictionary Lookup
 #'  
-#' Useful for large vector lookups
+#' Everonment based hash table useful for large vector lookups.
 #' 
 #' @aliases lookup
 #' @param terms a vector of terms to undergo a lookup
@@ -36,8 +36,9 @@ function(terms, key.match, key.reassign=NULL, missing = NA) {
             parent = emptyenv())
         FUN <- paste0("as.", mode.out)
         FUN <- match.fun(FUN)
-        apply(x, 1, function(col) assign(col[1], 
-            FUN(col[2]), envir = e))
+        apply(x, 1, function(col) {
+            assign(col[1], FUN(col[2]), envir = e)
+        })
         return(e)
     }  
     if (is.null(key.reassign)) {
@@ -59,10 +60,13 @@ function(terms, key.match, key.reassign=NULL, missing = NA) {
     recoder <- function(x, env, missing){                               
         x <- as.character(x) #turn the numbers to character    
         rc <- function(x){                                    
-           if(exists(x, env = env))get(x, e = env) else missing     
+            if(exists(x, env = env)) {
+                get(x, e = env) 
+            } else {
+                missing     
+            }
         }                                                      
         sapply(x, rc, USE.NAMES = FALSE)                       
     }                                                              
-    x<- recoder(terms, KEY, missing = missing)     
-    return(x)
+    recoder(terms, KEY, missing = missing)     
 }

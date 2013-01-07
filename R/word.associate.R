@@ -7,49 +7,144 @@
 #' @param grouping.var The grouping variables.  Default NULL generates one 
 #' output for all text.  Also takes a single grouping variable or a list of 1 
 #' or more grouping variables.  
-#' @param text.unit The text unit (either \code{"sentence"} or \code{"tot"}.
-#' @param match.string A vector of terms to 
-#' @param extra.terms
-#' @param target.exclude
-#' @param stopwords
-#' @param network.plot
-#' @param wordcloud
-#' @param cloud.colors
-#' @param title.color
-#' @param nw.label.cex
-#' @param title.padj
-#' @param nw.label.colors
-#' @param nw.layout
-#' @param nw.edge.color
-#' @param nw.label.proportional
-#' @param nw.title.padj
-#' @param nw.title.location
-#' @param title.font
-#' @param title.cex
-#' @param nw.edge.curved
-#' @param cloud.legend
-#' @param cloud.legend.cex
-#' @param cloud.legend.location
-#' @param 1.03)
-#' @param nw.legend
-#' @param nw.legend.cex
-#' @param nw.legend.location
-#' @param 1.41)
-#' @param legend.overide
-#' @param char2space
-#' @param \dots  
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
+#' @param match.string A list of vectors or vector of terms to associate in the 
+#' text.
+#' @param text.unit The text unit (either \code{"sentence"} or \code{"tot"}.  
+#' This argument determines what unit to find the match string words within.  
+#' For example if \code{"sentence"} is chosen the function pulls all text for 
+#' sentences the match string terms are found in.
+#' @param extra.terms Other terms to color beyond the match string.
+#' @param target.exclude A vector of words to exclude from the 
+#' \code{match.string}.
+#' @param stopwords Words to exclude from the analysis.
+#' @param network.plot logical.  If TRUE plots a network plot of the words.
+#' @param wordcloud logical.  If TRUE plots a wordcloud plot of the words.
+#' @param cloud.colors A vector of colors equal to the length of 
+#' \code{match.string} +1.
+#' @param title.color A character vector of length one corresponding to the 
+#' color of the title.
+#' @param nw.label.cex The magnification to be used for network plot labels 
+#' relative to the current setting of cex.  Default is .8.
+#' @param title.padj Adjustment for the title. For strings parallel to the axes, 
+#' padj = 0 means right or top alignment, and padj = 1 means left or bottom 
+#' alignment.
+#' @param nw.label.colors A vector of colors equal to the length of 
+#' \code{match.string} +1.
+#' @param nw.layout layout types supported by igraph.  See 
+#' \code{\link[igraph]{layout}}.
+#' @param nw.edge.color A character vector of length one corresponding to the 
+#' color of the plot edges.
+#' @param nw.label.proportional logical.  If TRUE scales the network plots across 
+#' grouping.var to allow plot to plot comparisons.
+#' @param nw.title.padj Adjustment for the network plot title. For strings 
+#' parallel to the axes, padj = 0 means right or top alignment, and padj = 1 
+#' means left or bottom alignment.
+#' @param nw.title.location On which side of the network plot (1=bottom, 2=left, 
+#' 3=top, 4=right).
+#' @param title.font The font family of the cloud title. 
+#' @param title.cex Character expansion factor for the title. NULL and NA are 
+#' equivalent to 1.0.
+#' @param nw.edge.curved logical.  If TRUE edges will be curved rather than 
+#' straight paths.
+#' @param cloud.legend A character vector of names corresponding to the number of 
+#' vectors in \code{match.string}.  Both \code{nw.legend} and \code{cloud.legend}
+#' can be set separately; or one may be set and by default the other will assume 
+#' those legend labels.  If the user does not desire this behavior use the 
+#' \code{legend.override} argument.
+#' @param cloud.legend.cex Character expansion factor for the  wordcloud legend. 
+#' NULL and NA are equivalent to 1.0. 
+#' @param cloud.legend.location The x and y co-ordinates to be used to position the 
+#' wordcloud legend.  The location may also be specified by setting x to a 
+#' single keyword from the list \code{"bottomright"}, \code{"bottom"}, 
+#' \code{"bottomleft"}, \code{"left"}, \code{"topleft"}, \code{"top"}, 
+#' \code{"topright"}, \code{"right"} and \code{"center"}. This places the legend on 
+#' the inside of the plot frame at the given location. 
+#' @param nw.legend A character vector of names corresponding to the number of 
+#' vectors in \code{match.string}.  Both \code{nw.legend} and \code{cloud.legend}
+#' can be set separately; or one may be set and by default the other will assume 
+#' those legend labels.  If the user does not desire this behavior use the 
+#' \code{legend.override} argument.
+#' @param nw.legend.cex Character expansion factor for the  network plot legend. 
+#' NULL and NA are equivalent to 1.0. 
+#' @param nw.legend.location  The x and y co-ordinates to be used to position the 
+#' network plot legend.  The location may also be specified by setting x to a 
+#' single keyword from the list \code{"bottomright"}, \code{"bottom"}, 
+#' \code{"bottomleft"}, \code{"left"}, \code{"topleft"}, \code{"top"}, 
+#' \code{"topright"}, \code{"right"} and \code{"center"}. This places the legend on 
+#' the inside of the plot frame at the given location. 
+#' @param legend.override By default if legend labels are supplied to either 
+#' \code{cloud.legend} or \code{nw.legend} may be set and if the other remains 
+#' NULL it will assume the supplied vector to the previous legend argument.  If 
+#' this behavior is not desired \code{legend.override} should be set to TRUE.
+#' @param char2space Currently a rode to no where.  Eventually this will allow 
+#' the retention of characters as is allowed in \code{trans.cloud} already.
+#' @param \dots Other arguments supplied to \code{\link[qdap]{trans.cloud}}.
+#' @return Returns a list:
+#' \item{word frequency matrices}{Word frequency matrices for each grouping 
+#' variable.} 
+#' \item{dialogue}{A list of dataframes for each word list (each vector supplied 
+#' to \code{match.string}) and a final dataframe of all combined text units that 
+#' contain any match string.} 
+#' \item{match.terms}{A list of vectors of word lists (each vector supplied 
+#' to \code{match.string}).} 
+#' Optionally, returns a word cloud and/or a network plot of the text unit 
+#' containing the \code{match.string} terms.
+#' @seealso \code{\link[qdap]{trans.cloud}},
+#' \code{\link[qdap]{word.network.plot}},
+#' \code{\link[wordcloud]{wordcloud}},
+#' \code{\link[igraph]{graph.adjacency}}
 #' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
 #' @export
 #' @examples
+#' \dontrun{
+#' ms <- c(" I", "you")
+#' et <- c(" it", " no")
+#' word.associate(DATA2$state, DATA2$person, match.string = ms, 
+#'     wordcloud = TRUE,  proportional = TRUE, 
+#'     network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,  
+#'     cloud.legend =c("A", "B", "C", "D"),
+#'     title.color = "blue", cloud.colors = c("red", "blue", "purple", "gray70"))
+#' 
+#' #======================================
+#' #Note: You don't have to name the vectors in the lists but I do for clarity
+#' ms <- list(
+#'     list1 = c(" I ", " you"), 
+#'     list2 = c(" wh")          
+#' )
+#' 
+#' et <- list(
+#'     B = c(" the", " on"), 
+#'     C = c(" it", " no")
+#' )
+#' 
+#' word.associate(DATA2$state, DATA2$person, match.string = ms, 
+#'     wordcloud = TRUE,  proportional = TRUE, 
+#'     network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,  
+#'     cloud.legend =c("A", "B", "C", "D"),
+#'     title.color = "blue", cloud.colors = c("red", "blue", "purple", "gray70"))
+#' 
+#' word.associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = ms)
+#' 
+#' #======================================
+#' m <- list(
+#'     A1 = c("you", "in"), #list 1
+#'     A2 = c(" wh")        #list 2
+#' )
+#' 
+#' n <- list(
+#'     B = c(" the", " on"), 
+#'     C = c(" it", " no")
+#' )
+#' 
+#' word.associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = m)
+#' word.associate(raj.act.1$dialogue, list(raj.act.1$person), match.string = m)
+#' (out <- with(mraja1spl, word.associate(dialogue, list(fam.aff, sex), match.string = m)))
+#' names(out)
+#' lapply(out$dialogue, htruncdf, n = 20, w = 20)
+#' out$cap.f
+#' }
 word.associate <-
-function(text.var, grouping.var = NULL, text.unit = "sentence", match.string, 
+function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",  
     extra.terms = NULL, target.exclude = NULL, stopwords = NULL, 
     network.plot = FALSE, wordcloud = FALSE, cloud.colors = c("black", "gray55"), 
     title.color = "blue", nw.label.cex = .8, title.padj = -4.5, 
@@ -58,24 +153,26 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
     title.font = NULL, title.cex = NULL, nw.edge.curved = TRUE, 
     cloud.legend = NULL, cloud.legend.cex = .8, cloud.legend.location = c(-.03, 1.03), 
     nw.legend = NULL, nw.legend.cex = .8, nw.legend.location = c(-1.54, 1.41),
-    legend.overide = FALSE, char2space = NULL, ...){
+    legend.override = FALSE, char2space = NULL, ...){
 #currently char2space is a road to nowhere.  COnnect the road and add char.keep argument as well
-    if(is.null(nw.label.colors)) {
-        nw.label.colors <- cloud.colors
-    }
-    if(is.null(cloud.colors)) {
-        cloud.colors <- nw.label.colors
-    }
-    if(all(cloud.colors %in% c("black", "gray55")) &&
-        length(cloud.colors) != length(nw.label.colors)) {
-        cloud.colors <- nw.label.colors
-    }
-    if (!legend.overide) {
-        if(is.null(cloud.legend)) {
-            cloud.legend <- nw.legend
+    if (network.plot | wordcloud) {
+        if(is.null(nw.label.colors)) {
+            nw.label.colors <- cloud.colors
         }
-        if(is.null(nw.legend)) {
-            nw.legend <- cloud.legend
+        if(is.null(cloud.colors)) {
+            cloud.colors <- nw.label.colors
+        }
+        if(all(cloud.colors %in% c("black", "gray55")) &&
+            length(cloud.colors) != length(nw.label.colors)) {
+            cloud.colors <- nw.label.colors
+        }
+        if (!legend.override) {
+            if(is.null(cloud.legend)) {
+                cloud.legend <- nw.legend
+            }
+            if(is.null(nw.legend)) {
+                nw.legend <- cloud.legend
+            }
         }
     }
     G <- if(is.null(grouping.var)) {
@@ -213,6 +310,10 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
         }
     }
     ECOLTERMS <- NULL
+    if ((!wordcloud & !network.plot) & !is.null(extra.terms)) {
+        extra.terms <- NULL
+        warning("wordcloud and network.plot are FALSE; extra.terms ignored")
+    }
     if (!is.null(extra.terms)) {
         UET <- unlist(extra.terms, recursive = FALSE)
         ECOLTERMS <- lapply(UET, function(x) term.find(Terms, mat = x))
@@ -236,21 +337,24 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
         if (!is.null(target.exclude)) {
             WSEARCH <- lapply(WSEARCH, function(x) x[!x %in% target.exclude])
         }
+        if (!is.null(ECOLTERMS)) {
+            v <- (length(COLTERMS) + length(ECOLTERMS))/length(COLTERMS)
+        } else {
+            v <- length(WSEARCH)
+        }
     }
-    if (!is.null(ECOLTERMS)) {
-        v <- (length(COLTERMS) + length(ECOLTERMS))/length(COLTERMS)
-    } else {
-        v <- length(WSEARCH)
-    }
-    if(v != length(cloud.colors)-1) {
-        need <- (v - (length(cloud.colors)-1))
-        a1 <- ifelse(need > 0, "add", "subtract")
-        a2 <- ifelse(need > 0, "to", "from")
-        a3 <- ifelse(abs(need) > 1, "s ", " ")
-        stop(a1, " ", abs(need), " ", "color", a3, a2, " the length of cloud.colors/nw.label.colors")
-    }
-    if (length(cloud.colors) != length(nw.label.colors)) {
-        stop("the length of cloud.colors and nw.label.colors are not equal")
+    if (wordcloud | network.plot) {
+        if (v != length(cloud.colors)-1) {
+            need <- (v - (length(cloud.colors)-1))
+            a1 <- ifelse(need > 0, "add", "subtract")
+            a2 <- ifelse(need > 0, "to", "from")
+            a3 <- ifelse(abs(need) > 1, "s ", " ")
+            stop(a1, " ", abs(need), " ", "color", a3, a2, 
+                " the length of cloud.colors/nw.label.colors")
+        }
+        if (length(cloud.colors) != length(nw.label.colors)) {
+            stop("the length of cloud.colors and nw.label.colors are not equal")
+        }
     }
     word.as <- function(dat, stopwords, search_terms = WSEARCH,
         network.graph, wordcloud, cloud.colors, title.color, nw.label.cex, 
@@ -351,7 +455,7 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
         return(o)    
     }
     Zdat <- split(DF3, DF3$group)
-    lapply(seq_along(Zdat), function(i) {rownames(Zdat[[1]]) <<- NULL})
+    invisible(lapply(seq_along(Zdat), function(i) {rownames(Zdat[[1]]) <<- NULL}))
     o2 <- lapply(seq_along(Zdat), function(i) word.as(dat = Zdat[[i]],  
         stopwords = stopwords, network.graph = network.graph,  
         wordcloud = wordcloud, ECOLTERMS = ECOLTERMS,
@@ -364,7 +468,7 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
         nw.legend = nw.legend, nw.legend.cex = nw.legend.cex, 
         nw.legend.location = nw.legend.location, ...))
     names(o2) <- names(Zdat)
-    o2$DF <- DFsl
+    o2$dialogue <- DFsl
     o2$match.terms <- lapply(match.string, Trim)
     if (!is.null(extra.terms)) {
         o2$extra.terms <- lapply(TM3, Trim)
@@ -383,25 +487,15 @@ function(text.var, grouping.var = NULL, text.unit = "sentence", match.string,
 #' @S3method print word_associate
 print.word_associate <-
 function(x, ...) {
-    y <- which(suppressWarnings(do.call("rbind", 
-        strsplit(names(x), ".", fixed=TRUE)))[, 3]=="obs")
-    word.associate2 <- lapply(y, function(xi) {
-        rownames(x[[xi]]) <- NULL
-        return(x[[xi]])
-    })
-    nms <- names(x)[y]
+    elem <- unlist(x, recursive=FALSE)
     wid <- options()$width
     options(width = 10000)
-    lapply(seq_along(word.associate2), 
-        function(x){ 
-            cat("\n")
-            print(noquote(nms[x]))
-            if (nrow(word.associate2[[x]]) > 1){
-                print(left.just(word.associate2[[x]], 2))
-            } else {
-                print(word.associate2[[x]])
-            }
-        }
-    )
-    options(width = wid)
+    print(left.just(elem$dialogue.any, 4))
+    cat("\nMatch Terms\n===========")
+    invisible(lapply(seq_along(x$match.terms), function(i) {
+      cat(paste0("\n\n", "List ", i, ":\n", paste(x$match.terms[[i]], 
+          collapse = ", ")))
+    }))
+    cat("\n\n")
+    options(width = wid) 
 }

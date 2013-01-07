@@ -39,12 +39,12 @@
 #' equivalent to 1.0. 
 #' @param title.names Optional vector of title names equal in length to the 
 #' grouping.var that will overide the default use of the grouping.var names.  
-#' @param proportional logical.  If TRUE scales the word clouds acrodd 
+#' @param proportional logical.  If TRUE scales the word clouds across 
 #' grouping.var to allow cloud to cloud comparisons.
 #' @param max.word.size A size argument to control the minimum size of the words.
 #' @param min.word.size A size argument to control the maximum size of the words.
-#' @param legend logical.  If TRUE uses the names from the \code{target.words}
-#' list corresponding to cloud.colors. 
+#' @param legend A character vector of names corresponding to the number of 
+#' vectors in target.words.
 #' @param legend.cex Character expansion factor for the legend. NULL and NA are 
 #' equivalent to 1.0. 
 #' @param legend.location The x and y co-ordinates to be used to position the 

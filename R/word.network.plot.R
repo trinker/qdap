@@ -32,7 +32,15 @@
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
 #' @examples
-#' 
+#' \dontrun{
+#' word.network.plot(text.var=DATA$state, grouping.var=DATA$person)
+#' word.network.plot(text.var=DATA$state, grouping.var=list(DATA$sex, 
+#' DATA$adult))
+#' word.network.plot(text.var=DATA$state, grouping.var=DATA$person, 
+#'     title.name = "TITLE", log.labels=TRUE)
+#' word.network.plot(text.var=raj.act.1, grouping.var=raj.act.1$person, 
+#'   stopwords = Top200Words)
+#' }
 word.network.plot <-                                                                  
 function(text.var, grouping.var = NULL, target.words = NULL, stopwords = Top100Words, 
     label.cex = .8, label.size = .5, edge.curved = TRUE, vertex.shape = "circle",     
@@ -47,26 +55,26 @@ function(text.var, grouping.var = NULL, target.words = NULL, stopwords = Top100W
             stopwords = stopwords)                                                    
         adj.mat.object <- adjmat(t(z))[["adjacency"]]                                 
     }                                                                                 
-    g <- igraph::graph.adjacency(adj.mat.object, weighted=TRUE, mode ='undirected')   
-    g <- igraph::simplify(g)                                                          
-    igraph::V(g)$label <- igraph::V(g)$name                                           
-    igraph::V(g)$degree <- igraph::degree(g)                                          
+    g <- graph.adjacency(adj.mat.object, weighted=TRUE, mode ='undirected')   
+    g <- simplify(g)                                                          
+    V(g)$label <- V(g)$name                                           
+    V(g)$degree <- degree(g)                                          
     SUMS <- diag(adj.mat.object)                                                      
     if (!log.labels) {                                                                
-        igraph::V(g)$label.cex <- label.cex                                           
+        V(g)$label.cex <- label.cex                                           
     } else {                                                                          
-        igraph::V(g)$label.cex <- (log(SUMS)/max(log(SUMS))) + label.size             
+        V(g)$label.cex <- (log(SUMS)/max(log(SUMS))) + label.size             
     }                                                                                 
     if (!is.null(target.words)) {                                                     
         nwc <- length(label.colors)                                                   
         COLORS <- text2color(words = V(g)$label, recode.words = target.words,         
             colors = label.colors)                                                    
-        igraph::V(g)$label.color <- COLORS                                            
+        V(g)$label.color <- COLORS                                            
     } else {                                                                          
-        igraph::V(g)$label.color <- label.colors                                      
+        V(g)$label.color <- label.colors                                      
     }                                                                                 
-    igraph::V(g)$shape <- vertex.shape                                                
-    igraph::E(g)$color <- edge.color                                                  
+    V(g)$shape <- vertex.shape                                                
+    E(g)$color <- edge.color                                                  
     if (is.null(layout)) {                                                            
         layout <- igraph::layout.fruchterman.reingold(g)                              
     }                                                                                 
