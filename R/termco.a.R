@@ -46,6 +46,7 @@
 #' passed.
 #' @seealso \code{\link[qdap]{termco_c}}
 #' @keywords word-search
+#' @export
 #' @examples
 #' \dontrun{
 #' #termco.a examples:

@@ -18,6 +18,7 @@
 #' @param \ldots Additional options passed to \code{stem2df}.
 #' @param grouping.var The grouping variable (usually \code{"person"}).  Does 
 #' not take multiple vectors as most qdap functions do.
+#' @param tot A tot column from a \code{\link[qdap]{sentSplit}} output.
 #' @return \code{sentSplit} - returns a dataframe with turn of talk broken apart 
 #' into sentences.  Optionally a stemmed version of the text variable may be 
 #' returned as well.
@@ -26,22 +27,27 @@
 #' @seealso 
 #' \code{\link[qdap]{bracketX}}, 
 #' \code{\link[qdap]{incomplete.replace}},
-#' \code{\link[qdap]{stem2df}} 
-#' @keywords sentence split
+#' \code{\link[qdap]{stem2df}} ,
+#' \code{\link[qdap]{TOT}} 
+#' @keywords sentence, split, turn-of-talk
 #' @export
 #' @examples
 #' \dontrun{
-#' #sentSplit EXAMPLE
+#' #sentSplit EXAMPLE:
 #' sentSplit(DATA, "state")
 #' sentSplit(DATA, "state", stem.col = FALSE)
 #' sentSplit(DATA, "state", text.place = "left")
 #' sentSplit(DATA, "state", text.place = "original")
 #' sentSplit(raj, "dialogue")
 #' 
-#' #sentCombine EXAMPLE
+#' #sentCombine EXAMPLE:
 #' dat <- sentSplit(DATA, "state", stem.col = FALSE) 
 #' sentCombine(dat$state, dat$person)
 #' sentCombine(dat$state, dat$sex)
+#' 
+#' #TOT EXAMPLE:
+#' dat <- sentSplit(DATA, "state", stem.col = FALSE) 
+#' TOT(dat$tot)
 #' }
 sentSplit <-
 function(dataframe, text.var, endmarks = c("?", ".", "!", "|"), 
@@ -147,4 +153,21 @@ function(text.var, grouping.var = "person") {
     }))
     names(L1) <- group
     L1
+}
+
+#' Convert the tot Column to Turn of Talk
+#' 
+#' \code{TOT} - Convert the tot column from \code{\link[qdap]{sentSplit}} to turn of talk 
+#' index (no sub sentence).  Generally, for internal use.
+#' 
+#' @return \code{TOT} - returns a numeric vector of the turns of talk without 
+#' sentence sub indexing (e.g. 3.2 become 3).
+#' @rdname sentSplit
+#' @export
+TOT <-
+function(tot){
+    sapply(tot, function(x) {
+        as.numeric(as.character(unlist(strsplit(as.character(x), ".", 
+        fixed=TRUE))[[1]]))
+    })
 }
