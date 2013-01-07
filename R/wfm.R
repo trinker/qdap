@@ -21,7 +21,7 @@
 #' \code{wf.combine}
 #' @param matrix logical.  If TRUE returns the output as a \code{wfm} rather 
 #' than a \code{wfdf} object
-#' @return wfm returns a word frequency of the class matrix.
+#' @return \code{wfm} - returns a word frequency of the class matrix.
 #' @rdname Word_Frequency_Matrix
 #' @keywords word-frequency-matrix
 #' @export
@@ -114,7 +114,8 @@ function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
 #' \code{wfdf} - Generate a word frequency data frame by grouping variable.
 #' 
 #' @rdname Word_Frequency_Matrix
-#' @return wfdf returns a word frequency of the class data.frame with a words 
+#' @export
+#' @return \code{wfdf} - returns a word frequency of the class data.frame with a words 
 #' column and optional margin sums.
 wfdf <-
 function(text.var, grouping.var = NULL, stopwords = NULL,
@@ -188,7 +189,8 @@ function(text.var, grouping.var = NULL, stopwords = NULL,
 #' for each word.
 #' 
 #' @rdname Word_Frequency_Matrix
-#' @return wfm.expanded returns a matrix similar to a word frequency matrix (
+#' @export
+#' @return \code{wfm.expanded} - returns a matrix similar to a word frequency matrix (
 #' \code{wfm})but the rows are expanded to represent the maximum usages of the 
 #' word and cells are dummy coded to indicate that numer of uses.
 wfm.expanded <-
@@ -222,7 +224,8 @@ function(text.var, grouping.var = NULL, ...){
 #' together.
 #'
 #' @rdname Word_Frequency_Matrix
-#' @return \code{wf.combine} returns a word frequency matrix (\code{wfm}) or 
+#' @export
+#' @return \code{wf.combine} - returns a word frequency matrix (\code{wfm}) or 
 #' dataframe (\code{wfdf}) with counts for the combined word.lists merged and 
 #' remaining terms(else).
 wf.combine <-

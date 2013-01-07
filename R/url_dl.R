@@ -1,3 +1,28 @@
+#' Download Instructional Documents
+#' 
+#' This function enables downloading documents for future instructional training. 
+#' 
+#' @param \ldots Document names to download. 
+#' @param url The download url. 
+#' @return Places a copy of the downloaded document in the users wordking 
+#' directory.
+#' @note Not intended for general use.
+#' @export
+#' @examples
+#' \dontrun{
+#' # download transcript of the debate to working directory
+#' url_dl(pres.deb1.docx, pres.deb2.docx, pres.deb3.docx)   
+#' 
+#' # load multiple files with read transcript and assign to working directory
+#' dat1 <- read.transcript("pres.deb1.docx", c("person", "dialogue"))
+#' dat2 <- read.transcript("pres.deb2.docx", c("person", "dialogue"))
+#' dat3 <- read.transcript("pres.deb3.docx", c("person", "dialogue"))
+#' 
+#' docs <- qcv(pres.deb1.docx, pres.deb2.docx, pres.deb3.docx)
+#' dir() %in% docs
+#' delete(docs)    #remove the documents
+#' dir() %in% docs
+#' }
 url_dl <-
 function(..., url = "http://dl.dropbox.com/u/61803503/") {
     mf <- match.call(expand.dots = FALSE)

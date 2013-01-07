@@ -1,20 +1,43 @@
-#' Find words associated with a given word(s) or a phrase(s).
+#' Find Associated Words.
 #' 
 #' Find words associated with a given word(s) or a phrase(s).  Results can be
 #' output as a network graph and/or wordcloud.
 #' 
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param grouping.var %% ~~Describe \code{grouping.var} here~~
-#' @param match.string %% ~~Describe \code{match.string} here~~
-#' @param stopwords %% ~~Describe \code{stopwords} here~~
-#' @param network.graph %% ~~Describe \code{network.graph} here~~
-#' @param wordcloud %% ~~Describe \code{wordcloud} here~~
-#' @param cloud.colors %% ~~Describe \code{cloud.colors} here~~
-#' @param nw.label.cex %% ~~Describe \code{nw.label.cex} here~~
-#' @param nw.label.colors %% ~~Describe \code{nw.label.colors} here~~
-#' @param nw.layout %% ~~Describe \code{nw.layout} here~~
-#' @param nw.edge.color %% ~~Describe \code{nw.edge.color} here~~
-#' @param \dots %% ~~Describe \code{\dots} here~~
+#' @param text.var The text variable.         
+#' @param grouping.var The grouping variables.  Default NULL generates one 
+#' output for all text.  Also takes a single grouping variable or a list of 1 
+#' or more grouping variables.  
+#' @param text.unit The text unit (either \code{"sentence"} or \code{"tot"}.
+#' @param match.string A vector of terms to 
+#' @param extra.terms
+#' @param target.exclude
+#' @param stopwords
+#' @param network.plot
+#' @param wordcloud
+#' @param cloud.colors
+#' @param title.color
+#' @param nw.label.cex
+#' @param title.padj
+#' @param nw.label.colors
+#' @param nw.layout
+#' @param nw.edge.color
+#' @param nw.label.proportional
+#' @param nw.title.padj
+#' @param nw.title.location
+#' @param title.font
+#' @param title.cex
+#' @param nw.edge.curved
+#' @param cloud.legend
+#' @param cloud.legend.cex
+#' @param cloud.legend.location
+#' @param 1.03)
+#' @param nw.legend
+#' @param nw.legend.cex
+#' @param nw.legend.location
+#' @param 1.41)
+#' @param legend.overide
+#' @param char2space
+#' @param \dots  
 #' @return %% ~Describe the value returned %% If it is a LIST, use %%
 #' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
 #' 'comp2'} %% ...
@@ -23,37 +46,8 @@
 #' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
 #' @references %% ~put references to the literature/web site here ~
 #' @keywords ~kwd1 ~kwd2
+#' @export
 #' @examples
-#' 
-#' Find words associated with a given word(s) or a phrase(s).
-#' 
-#' Find words associated with a given word(s) or a phrase(s).  Results can be
-#' outpur as a networrk graph and/or wordcloud.
-#' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param grouping.var %% ~~Describe \code{grouping.var} here~~
-#' @param match.string %% ~~Describe \code{match.string} here~~
-#' @param stopwords %% ~~Describe \code{stopwords} here~~
-#' @param network.graph %% ~~Describe \code{network.graph} here~~
-#' @param wordcloud %% ~~Describe \code{wordcloud} here~~
-#' @param cloud.colors %% ~~Describe \code{cloud.colors} here~~
-#' @param nw.label.cex %% ~~Describe \code{nw.label.cex} here~~
-#' @param nw.label.colors %% ~~Describe \code{nw.label.colors} here~~
-#' @param nw.layout %% ~~Describe \code{nw.layout} here~~
-#' @param nw.edge.color %% ~~Describe \code{nw.edge.color} here~~
-#' @param \dots %% ~~Describe \code{\dots} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
-#' @examples
-#' 
 word.associate <-
 function(text.var, grouping.var = NULL, text.unit = "sentence", match.string, 
     extra.terms = NULL, target.exclude = NULL, stopwords = NULL, 

@@ -2,7 +2,7 @@
 #' 
 #' Transcript apply descriptive word statistics
 #' 
-#' @param text.var The text variable         
+#' @param text.var The text variable.         
 #' @param grouping.var The grouping variables.  Default NULL generates one 
 #' output for all text.  Also takes a single grouping variable or a list of 1 
 #' or more grouping variables.  

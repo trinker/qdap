@@ -1,4 +1,4 @@
-#helper function for word_list
+#helper function for word_list/trans.cloud
 freqTab2words <-
 function(word.list){
     if(is.data.frame(word.list)){

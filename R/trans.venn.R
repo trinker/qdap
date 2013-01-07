@@ -1,18 +1,50 @@
-#' @param text.var
-#' @param grouping.var
-#' @param stopwords
-#' @param rm.duplicates
-#' @param title
-#' @param title.font
-#' @param title.color
-#' @param title.cex
-#' @param title.name
-#' @param legend
-#' @param legend.cex
-#' @param legend.location
-#' @param legend.text.col
-#' @param legend.horiz
-#' @param \ldots
+#' Venn Diagram by Grouping Variable
+#' 
+#' Produce a venn diagram by grouping variable.
+#' 
+#' @param text.var The text variable.         
+#' @param grouping.var The grouping variables.  Default NULL generates one 
+#' output for all text.  Also takes a single grouping variable or a list of 1 
+#' or more grouping variables.  
+#' @param stopwords Words to exclude from the analysis.
+#' @param rm.duplicates logical.  IF TRUE removes the duplicated words from the 
+#' analysis (only single usage is considered).
+#' @param title logical.  IF TRUE adds a title corresponding to the 
+#' \code{grouping.var}.
+#' @param title.font The font family of the cloud title. 
+#' @param title.color A character vector of length one corresponding to the 
+#' color of the title.
+#' @param title.cex Character expansion factor for the title. NULL and NA are 
+#' equivalent to 1.0
+#' @param title.name A title for the plot.
+#' @param legend logical.  If TRUE uses the names from the \code{target.words}
+#' list corresponding to cloud.colors. 
+#' @param legend.cex Character expansion factor for the legend. NULL and NA are 
+#' equivalent to 1.0. 
+#' @param legend.location The x and y co-ordinates to be used to position the 
+#' legend.  The location may also be specified by setting x to a 
+#' single keyword from the list \code{"bottomright"}, \code{"bottom"}, 
+#' \code{"bottomleft"}, \code{"left"}, \code{"topleft"}, \code{"top"}, 
+#' \code{"topright"}, \code{"right"} and \code{"center"}. This places the legend on 
+#' the inside of the plot frame at the given location. 
+#' @param legend.text.col The color used for the legend text.
+#' @param legend.horiz logical; if TRUE, set the legend horizontally rather than 
+#' vertically.
+#' @param \dots Other arguments passed to plot.
+#' @return Returns a venn plot by grouping variable.
+#' @note The algorithm used to overlap the venn circles becomes increasingly 
+#' overburdened and less accurate with increased grouping variables. An 
+#' alternative is to use a network plot woth dissimilarity measures labeling the 
+#' edges between nodes (grouping variables).
+#' @seealso \code{\link[venneuler]{venneuler}}
+#' @keywords venn
+#' @export
+#' @examples
+#' \dontrun{
+#' with(DATA , trans.venn(state, person, legend.location = "topright"))
+#' #the plot below will take a considerable ammount of time to plot
+#' with(raj.act.1 , trans.venn(dialogue, person, legend.location = "topleft"))
+#' }
 trans.venn <-
 function(text.var, grouping.var, stopwords = NULL, 
     rm.duplicates = TRUE, title = TRUE, title.font = NULL, 
