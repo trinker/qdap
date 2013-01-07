@@ -1,8 +1,8 @@
-#' Split Sentences Into Individual Lines
+#' Sentence Splitting
 #' 
-#' Splits turns of talk into individual sentences (provided proper punctuation is
-#' used).  This procedure is usually done as part of the data read in and cleaing
-#' process.
+#' \code{sentSplit} - Splits turns of talk into individual sentences (provided 
+#' proper punctuation is used).  This procedure is usually done as part of the 
+#' data read in and cleaning process.
 #' 
 #' @param dataframe A dataframe that contains the person and text variable.
 #' @param text.var The text variable.
@@ -11,30 +11,42 @@
 #' @param incomplete.sub logical.  If TRUE detects incomplete sentences and 
 #' replaces with \code{"|"}.
 #' @param rm.bracket logical.  If TRUE removes brackets from the text.
-#' @param stem.col logical.  If TRUE stems the text.
+#' @param stem.col logical.  If TRUE stems the text as a new column.
 #' @param text.place A character string giving placement location of the text 
-#' column. This must be one of the strings \code{"original", "right"} or 
+#' column. This must be one of the strings \code{"original"}, \code{"right"} or 
 #' \code{"left"}.
 #' @param \ldots Additional options passed to \code{stem2df}.
-#' @return Returns a dataframe with turn of talk broken apart into sentences.  
-#' Optionally a stemmed version of the text variable may be returned as well.
-#' @author Dason Kurkiewicz and Tyler Rinker <tyler.rinker@gmail.com>.
+#' @param grouping.var The grouping variable (usually \code{"person"}).  Does 
+#' not take multiple vectors as most qdap functions do.
+#' @return \code{sentSplit} - returns a dataframe with turn of talk broken apart 
+#' into sentences.  Optionally a stemmed version of the text variable may be 
+#' returned as well.
+#' @rdname sentSplit
+#' @author Dason Kurkiewicz and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso 
 #' \code{\link[qdap]{bracketX}}, 
 #' \code{\link[qdap]{incomplete.replace}},
 #' \code{\link[qdap]{stem2df}} 
 #' @keywords sentence split
+#' @export
 #' @examples
-#' #' sentSplit(DATA, "state")
+#' \dontrun{
+#' #sentSplit EXAMPLE
+#' sentSplit(DATA, "state")
 #' sentSplit(DATA, "state", stem.col = FALSE)
 #' sentSplit(DATA, "state", text.place = "left")
 #' sentSplit(DATA, "state", text.place = "original")
-#' \dontrun{
 #' sentSplit(raj, "dialogue")
+#' 
+#' #sentCombine EXAMPLE
+#' dat <- sentSplit(DATA, "state", stem.col = FALSE) 
+#' sentCombine(dat$state, dat$person)
+#' sentCombine(dat$state, dat$sex)
 #' }
 sentSplit <-
-function(dataframe, text.var, endmarks = c("?", ".", "!", "|"), incomplete.sub = TRUE,  
-           rm.bracket = TRUE, stem.col = TRUE, text.place = "right", ...) {
+function(dataframe, text.var, endmarks = c("?", ".", "!", "|"), 
+    incomplete.sub = TRUE, rm.bracket = TRUE, stem.col = FALSE, 
+    text.place = "right", ...) {
     splitpoint <- paste0("[", paste("\\", endmarks, sep="", collapse=""), "]")
     if (is.numeric(text.var)) {
       text.var <- colnames(dataframe)[text.var]
@@ -111,4 +123,28 @@ function(dataframe, text.var, endmarks = c("?", ".", "!", "|"), incomplete.sub =
       ans[, "stem.text"] <- as.character(ans[, "stem.text"])
     }
     ans
+}
+
+#' Combine Sentences 
+#' 
+#' \code{sentCombine} - Combines sentences by the same grouping variable together.
+#' 
+#' @return \code{sentCombine} - returns a list of vectors with the continuous 
+#' sentences by grouping.var pasted together. 
+#' returned as well.
+#' @rdname sentSplit
+#' @export
+sentCombine <-
+function(text.var, grouping.var = "person") {
+    y <- rle(as.character(grouping.var))
+    lens <- y$lengths
+    group <- y$values
+    x <- cumsum(lens)
+    st <- c(1, x[-length(x)]+1)
+    end <- c(x)
+    L1 <- invisible(lapply(seq_along(st), function(i) {
+        paste2(text.var[st[i]:end[i]], sep=" ")
+    }))
+    names(L1) <- group
+    L1
 }

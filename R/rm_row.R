@@ -12,6 +12,7 @@
 #' @rdname rm_row
 #' @export
 #' @examples
+#' \dontrun{
 #' #rm_row EXAMPLE:
 #' rm_row(DATA, "person", c("sam", "greg"))
 #' rm_row(DATA, 1, c("sam", "greg"))

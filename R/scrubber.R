@@ -3,37 +3,28 @@
 #' Use to clean text variables when importing a new data set.  Removes extra
 #' white spaces other textual anomalies that may cause errors.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param num2word %% ~~Describe \code{num2word} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param text.var The text variable
+#' @param num2word logical If TRUE replaces a numbers with text representations.
+#' @param fix.comma logical If TRUE removes any spaces before a comma.
+#' @param rm.quote  logical If TRUE removes and \code{\"}.
+#' @param \ldots Other arduments passed to \code{replace_number}.
+#' @return Returns a parsed character vector.
+#' @seealso \code{\link[qdap]{strip}}
+#' @keywords parse, clean
+#' @export
 #' @examples
-#' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (text.var, num2word = FALSE) 
-#' {
-#'     reducer(Trim(clean(text.var)))
-#'   }
-#' 
+#' \dontrun{
+#' #' x <- c("I like 456 dogs  , don't you?\"")
+#' scrubber(x)
+#' scrubber(x, TRUE)
+#' }
 scrubber <-
-function(text.var, num2word = FALSE, rm.quote = TRUE, fixComma = TRUE, ...){
+function(text.var, num2word = FALSE, rm.quote = TRUE, fix.comma = TRUE, ...){
     x <- reducer(Trim(clean(text.var)))
     if (rm.quote) {
         x  <- gsub('\"', "", x)
     }
-    if (fixComma) {
+    if (fix.comma) {
         x <- gsub(" ,", ",", x)
     }
     ncx <- nchar(x)

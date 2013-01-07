@@ -1,44 +1,45 @@
-#' Search Terms for Colulmns of a Data Frame
+#' Search Colulmns of a Data Frame 
 #' 
-#' %% ~~ A concise (1-5 lines) description of what the function does. ~~
+#' Find terms located in columns of a data frame.
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param term %% ~~Describe \code{term} here~~
-#' @param dataframe %% ~~Describe \code{dataframe} here~~
-#' @param column.name %% ~~Describe \code{column.name} here~~
-#' @param variation %% ~~Describe \code{variation} here~~
-#' @param \dots %% ~~Describe \code{\dots} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param dataframe A dataframe object to search.
+#' @param term A character vector term to search for.
+#' @param column.name Optional column of the data frame to search (nome or 
+#' index).
+#' @param max.distance Maximum distance allowed for a match. Expressed either as 
+#' integer, or as a fraction of the pattern length times the maximal 
+#' transformation cost (will be replaced by the smallest integer not less than 
+#' the corresponding fraction).
+#' @param \ldots Other arguments passed to \code{agrep}.
+#' @return Returns the rows of the data frame that amtch the search term.
+#' @keywords search
+#' @export
 #' @examples
+#' \dontrun{
+#' SampDF <- data.frame("islands"=names(islands)[1:32],mtcars)
 #' 
-#' ##---- Should be DIRECTLY executable !! ----
-#' ##-- ==>  Define data, use random,
-#' ##--	or do  help(data=index)  for the standard data sets.
-#' 
-#' ## The function is currently defined as
-#' function (term, dataframe, column.name, variation = 0.02, ...) 
-#' {
-#'     te <- as.character(substitute(term))
-#'     cn <- as.character(substitute(column.name))
-#'     HUNT <- agrep(te, dataframe[, cn], ignore.case = TRUE, max.distance = variation, 
-#'         ...)
-#'     dataframe[c(HUNT), ]
-#'   }
-#' 
+#' Search(SampDF, "Cuba", "islands")
+#' Search(SampDF, "New", "islands")
+#' Search(SampDF, "Ho")
+#' Search(SampDF, "Ho", max.distance = 0)
+#' Search(SampDF, "Axel Heiberg")
+#' Search(SampDF, 19) #too much tolerance in max.distance
+#' Search(SampDF, 19, max.distance = 0)
+#' Search(SampDF, 19, "qsec", max.distance = 0)
+#' }
 Search <-
-function(term, dataframe, column.name, variation = 0.02, ...) {
-    te <- as.character(substitute(term))
-    cn <- as.character(substitute(column.name))
-    if(cn %in% as.character(1:10000)) cn <- as.numeric(cn)
-    HUNT <- agrep(te, dataframe[, cn], ignore.case = TRUE, 
-        max.distance = variation, ...)
-    dataframe[c(HUNT), ]
+function(dataframe, term, column.name = NULL, max.distance = 0.02, ...) {
+    cn <- column.name
+    if (!is.null(column.name)) {
+        HUNT <- agrep(term, dataframe[, cn], ignore.case = TRUE, 
+            max.distance = max.distance, ...)
+    } else {
+        ser <- invisible(lapply(dataframe, function(x) {
+            agrep(term, x, ignore.case = TRUE, max.distance = max.distance, ...)
+        }))
+        ser2 <- sort(unlist(ser))
+        names(ser2) <- NULL
+        HUNT <- unique(ser2)
+    }
+    dataframe[HUNT, ]
 }
