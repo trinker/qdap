@@ -1,13 +1,17 @@
-#' Capitalizes Select Words
+#' Capitalize Select Words
 #' 
-#' A helper function for word_list that allows the user to supply vectors of words to be capitalized.
+#' A helper function for word_list that allows the user to supply vectors of 
+#' words to be capitalized.
 #' 
 #' @param text A vector of words (generally from bag.o.words or breaker).
 #' @param caps.list A list of words to capitalize.
 #' @param I.list logical.  If TRUE capitalizes I words and contractions.
-#' @param no.apostrophe logical, asking if apostrophes have been removed.  If TRUE will try to insert apostrophe's back into words appropriately.
-#' @return Returns a vector of capitalized words based on supplied capitalization arguments.
-#' @note Not intended for general use.  Acts as a helper function to several qdap functions.
+#' @param no.apostrophe logical, asking if apostrophes have been removed.  If 
+#' TRUE will try to insert apostrophe's back into words appropriately.
+#' @return Returns a vector of capitalized words based on supplied 
+#' capitalization arguments.
+#' @note Not intended for general use.  Acts as a helper function to several 
+#' qdap functions.
 #' @export
 #' @examples
 #' \dontrun{

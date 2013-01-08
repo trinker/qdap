@@ -16,7 +16,10 @@
   \item{bracket}{The type of bracket (and encased text) to
   remove.  This is one of the strings \code{"curly"},
   \code{"square"}, \code{"round"}, \code{"angle"} and
-  \code{"all"}.}
+  \code{"all"}.  These strings correspond to: \{, [, (, <
+  or all four types.}
+
+  \item{missing}{Value to assign to empty cells.}
 
   \item{missing}{Value to assign to empty cells.}
 

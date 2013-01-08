@@ -9,7 +9,9 @@
 #' @param rm.dash logical logical.  If TRUE dashes will be removed.
 #' @param bracket The type of bracket (and encased text) to remove.  This is one 
 #' of the strings \code{"curly"}, \code{"square"}, \code{"round"}, 
-#' \code{"angle"} and \code{"all"}.
+#' \code{"angle"} and \code{"all"}.  These strings correspond to: \{, [, (, < 
+#' or all four types.
+#' @param missing Value to assign to empty cells.
 #' @param missing Value to assign to empty cells.
 #' @param names logical.  If TRUE the sentences are given as the names of the 
 #' counts.
