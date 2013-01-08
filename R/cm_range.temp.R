@@ -3,8 +3,10 @@
 #' Generates a range coding sheet for coding words.
 #' 
 #' @param codes List of codes.
-#' @param file A connection, or a character string naming the file to print to (.txt is recommended).
-#' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
+#' @param file A connection, or a character string naming the file to print to 
+#' (.txt is recommended).
+#' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: 
+#' Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding
 #' @seealso 
 #' \code{\link[qdap]{cm_time.temp}}

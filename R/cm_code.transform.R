@@ -25,6 +25,7 @@
 #' @keywords transform
 #' @export
 #' @examples
+#' \dontrun{
 #' foo <- list(
 #'     AA = qcv(terms='1:10'),
 #'     BB = qcv(terms='1:2, 3:10, 19'),
@@ -67,6 +68,7 @@
 #' cm_code.transform(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)), 
 #'     list(S=qcv(A, B), T=qcv(B, C), U=qcv(A, B, C)), 
 #'     list(ABnoC = qcv(A, B, C)), rm.var="variable")
+#' }
 cm_code.transform <- function(x2long.obj, overlap.code.list=NULL,
     combine.code.list=NULL,  exclude.code.list=NULL, rm.var = NULL) {
     C <- A <- B <- NULL

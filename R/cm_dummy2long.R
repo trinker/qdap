@@ -1,14 +1,15 @@
-#' Convert cm_combine.dummy back to long
+#' Convert cm_combine.dummy Back to Long
 #'
-#' cm_combine.dummy back to long
+#' \code{cm_combine.dummy} back to long.
 #'
 #' @param cm.comb.obj An object from cm_combine.dummy
-#' @param rm.var Name of the repeated measures column.  Default is "time".
+#' @param rm.var Name of the repeated measures column.  Default is \code{"time".}
 #' @return Returns a dataframe with co-occurrences of provided code columns.
 #' @seealso \code{\link[qdap]{cm_long2dummy}},
 #' \code{\link[qdap]{cm_combine.dummy}}
 #' @export
 #' @examples
+#' \dontrun{
 #' foo <- list(
 #'     AA = qcv(terms='1:10'),
 #'     BB = qcv(terms='1:2, 3:10, 19'),
@@ -36,6 +37,7 @@
 #' 
 #' cm_dummy2long(A)
 #' cm_dummy2long(B, "time")
+#' }
 cm_dummy2long <- function(cm.comb.obj, rm.var = "time") {
     L1 <- split(cm.comb.obj[, !colnames(cm.comb.obj) %in% rm.var], 
          cm.comb.obj[, rm.var])

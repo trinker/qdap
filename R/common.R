@@ -13,6 +13,7 @@
 #' \code{overlap} and \code{equal.or}.
 #' @export
 #' @examples
+#' \dontrun{
 #' a <- c("a", "cat", "dog", "the", "the")                                                              
 #' b <- c("corn", "a", "chicken", "the")                                                                
 #' d <- c("house", "feed", "a", "the", "chicken")                                                       
@@ -23,7 +24,8 @@
 #' common(r)                                                                                 
 #' common(r, overlap=2)                                                                                            
 #'                                                                                                     
-#' common(word_list(DATA$state, DATA$person)$cwl, overlap = 2)  
+#' common(word_list(DATA$state, DATA$person)$cwl, overlap = 2) 
+#' } 
 common <-
   function(x, ...){
     UseMethod("common")

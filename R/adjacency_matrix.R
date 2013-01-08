@@ -12,6 +12,7 @@
 #' @keywords adjacency matrix
 #' @export 
 #' @examples
+#' \dontrun{
 #' wordLIST <- c(" montague", " capulet", " court", " marry")
 #' (raj.termco <- with(raj.act.1, termco.a(dialogue, person, 
 #'     wordLIST, ignore.case = T)))
@@ -24,6 +25,7 @@
 #' V(g)$degree <- degree(g)
 #' layout1 <- layout.auto(g)
 #' plot(g, layout=layout1)
+#' }
 adjacency_matrix <-
 function(matrix.obj) {
     if(class(matrix.obj) %in% c("termco_d", "termco_c")){
@@ -67,14 +69,14 @@ function(matrix.obj) {
 #' @export
 adjmat <- adjacency_matrix
 
-#' Prints an adjacency_matrix
+#' Prints an adjacency.matrix
 #' 
-#' Prints an adjacency_matrix.
+#' Prints an adjacency.matrix.
 #' 
-#' @param x The adjacency_matrix object
+#' @param x The adjacency.matrix object
 #' @param \ldots ignored
-#' @method print adjacency_matrix
-#' @S3method print adjacency_matrix
+#' @method print adjacency.matrix
+#' @S3method print adjacency.matrix
 print.adjacency.matrix <-
   function(x, ...) {
     cat("Adjacency Matrix:\n\n")

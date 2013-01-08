@@ -10,8 +10,10 @@
 #' @note Not intended for general use.  Acts as a helper function to several qdap functions.
 #' @export
 #' @examples
+#' \dontrun{
 #' capitalizer(bag.o.words("i like it but i'm not certain"), "like")
 #' capitalizer(bag.o.words("i like it but i'm not certain"), "like", FALSE)
+#' }
 capitalizer <-
 function(text, caps.list = NULL, I.list = TRUE, apostrophe.remove = FALSE) {
     I_list <- c("I'm", "I'll", "I'd", "I've", "I")

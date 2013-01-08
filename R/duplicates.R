@@ -4,6 +4,7 @@
 #' @param string A character string.
 #' @param threshhold An interger of the minimal number of repeats.
 #' @return Returns a vector of all duplicated words/chunks.
+#' @export
 #' @examples
 #' \dontrun{
 #' duplicates(DATA$state)

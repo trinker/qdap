@@ -27,6 +27,7 @@
 #' @keywords co-occurence
 #' @export
 #' @examples
+#' \dontrun{
 #' foo <- list(
 #'     AA = qcv(terms='1:10'),
 #'     BB = qcv(terms='1:2, 3:10, 19'),
@@ -63,7 +64,9 @@
 #' )
 #' 
 #' dat <- cm_time2long(x, y)
-#' cm_code.blank(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)), "variable", overlap=TRUE)
+#' cm_code.blank(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)), 
+#'     "variable", overlap=TRUE)
+#' }
 cm_code.blank <- function(x2long.obj, combine.code.list, rm.var = NULL, overlap = TRUE) {
     NMS <- as.character(substitute(x2long.obj))
     if (!is.null(rm.var)) {

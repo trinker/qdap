@@ -28,11 +28,13 @@
 #' @keywords coding, time span
 #' @export
 #' @examples
+#' \dontrun{
 #' #' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
 #' x1 <- cm_df.temp(DATA, "state", codes)
 #' cm_df2long(x1,  code.vars = codes)
 #' x1[, 7:14] <- lapply(7:14,  function(i) sample(0:1, nrow(x1), TRUE))
 #' cm_df2long(x1,  code.vars = codes)
+#' }
 cm_df2long <-
 function(df.temp.obj, v.name = "variable", list.var = TRUE, code.vars = NULL, 
     no.code = NA, add.start.end = TRUE, repeat.vars = NULL, 

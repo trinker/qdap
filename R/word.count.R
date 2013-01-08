@@ -31,6 +31,23 @@
 #' character.count(DATA$state, byrow=FALSE)
 #' sum(character.count(DATA$state))
 #' 
+#' library(ggplot2)
+#' library(reshape2)
+#' dat <- character.table(DATA$state, list(DATA$sex, DATA$adult))
+#' (dat2 <- colsplit2df(melt(dat), keep.orig = TRUE))
+#' head(dat2)
+#' dat3 <- dat2[rep(seq_len(dim(dat2)[1]), dat2[, 5]), -5]
+#' 
+#' ggplot(data = dat2, aes(y = variable, x = value, colour=sex)) +
+#'     facet_grid(adult~.) +
+#'     geom_line(size=1, aes(group =variable), colour = "black") +
+#'     geom_point() 
+#'     
+#' ggplot(data = dat3, aes(x = variable, fill = variable)) +
+#'     geom_bar() + 
+#'     facet_grid(sex ~ adult, margins = TRUE) + 
+#'     theme(legend.position="none")
+#' 
 #' # CHARACTER TABLE
 #' character.table(DATA$state, DATA$person)
 #' char.table(DATA$state, DATA$person)

@@ -1,3 +1,4 @@
+# currently not exported
 # Transform Codes to Start-End Times
 # 
 # A helper function for \code{cm_time2long} that transforms the range coding 

@@ -3,17 +3,16 @@
 #' Converts a vector of seconds to h:m:s
 #' 
 #' @param x A vector of times in seconds.
-#' @param l1 logical.  If TRUE returns only the first element (intended for 
-#' internal use).
 #' @return Returns a vector of times in h:m:s format.  Generally, this function 
 #' is for internal use.
 #' @keywords time, coversion
 #' @export
 #' @examples 
+#' \dontrun{
 #' convert(c(256, 3456, 56565))
-#' convert(c(256, 3456, 56565), TRUE)
+#' }
 convert <-
-function(x, l1 = FALSE) {
+function(x) {
     if (length(x) == 1) {
         x <- c(x, 0)
         l1 <- TRUE
@@ -22,10 +21,15 @@ function(x, l1 = FALSE) {
     m <- floor((x-h*3600)/60)
     s <- x-(m*60 + h*3600)
     pad <- function(x) sprintf("%02d", as.numeric(x))
-    op <- times(paste2(data.frame(apply(data.frame(h=h, m=m, s=s), 2, pad)), sep=":"))
-    if (l1) {
-        op[1]
-    } else {
-        op
-    }
+    times(paste2(data.frame(apply(data.frame(h=h, m=m, s=s), 2, pad)), sep=":"))
 }
+#removed the second argument
+#op <- times(paste2(data.frame(apply(data.frame(h=h, m=m, s=s), 2, pad)), sep=":"))
+#if (element_1) {
+#    op[1]
+#} else {
+#    op
+#}
+# @param l1 logical.  If TRUE returns only the first element (intended for 
+# internal use).
+# #' convert(c(256, 3456, 56565), TRUE)

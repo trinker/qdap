@@ -21,7 +21,7 @@
 #' @param sig.dig.line.freq An internal rounding factor for minor and major line 
 #' freq.  Generally, default value of 1 suffices for larger range of x scale may 
 #' need to be set to -2..
-#' @param hms.scale logical.  If TURE converts scale to h:m:s format.  Default 
+#' @param hms.scale logical.  If TRUE converts scale to h:m:s format.  Default 
 #' NULL attempts to detect if object is a cm_time2long object
 #' @param scale Should scales be fixed ("fixed", the default), free ("free"), or 
 #' free in one dimension ("free_x", "free_y")

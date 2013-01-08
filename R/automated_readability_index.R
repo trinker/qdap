@@ -10,7 +10,7 @@
 #' @param rm.incomplete logical.  If TRUE removes incomplete sentences from the 
 #' analysis.
 #' @param \ldots Other arguments passed to \code{endf}.
-#' @return Generates a dataframe with selected readability statistic by grouping 
+#' @return Returns a dataframe with selected readability statistic by grouping 
 #' variable(s).  The \code{frey} function returns a graphic representation of 
 #' the readability.
 #' @rdname Readability

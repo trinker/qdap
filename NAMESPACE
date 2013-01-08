@@ -8,6 +8,7 @@ export(bracketX)
 export(bracketXtract)                                                               
 export(character.count)
 export(character.table)
+export(char.table)
 export(cm_df2long)             #export for now
 export(cm_dummy2long)           #maybe export but don't document
 export(cm_combine.dummy)         #maybe export but don't document

@@ -14,6 +14,7 @@
 #' @seealso \code{\link[qdap]{cm_long2dummy}}
 #' @keywords co-occurence
 #' @examples
+#' \dontrun{
 #' foo <- list(
 #'     AA = qcv(terms='1:10'),
 #'     BB = qcv(terms='1:2, 3:10, 19'),
@@ -41,6 +42,7 @@
 #' combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 #' cm_combine.dummy(D1, combine.code = combines)
 #' cm_combine.dummy(D2, combine.code = combines)
+#' }
 cm_combine.dummy <- function(cm.l2d.obj, combine.code, rm.var = "time", 
     overlap = TRUE) {
     if (is.data.frame(cm.l2d.obj)) {

@@ -8,12 +8,13 @@
 #' and \code{"all"}.  These strings correspond to: \{, [, (, < or all four types.
 #' @param missing Value to assign to empty cells.
 #' @param names logical.  If TRUE the sentences are given as the names of the counts.
-#' @return bracketX returns a vector of text with brackets removed.
+#' @return \code{bracketX} -  returns a vector of text with brackets removed.
 #' @rdname bracketX
 #' @references \url{http://stackoverflow.com/questions/8621066/remove-text-inside-brackets-parens-and-or-braces}
 #' @keywords bracket-remove, parenthesis, bracket, curly-braces
 #' @export
 #' @examples
+#' \dontrun{
 #' examp2 <- examp2 <- structure(list(person = structure(c(1L, 2L, 1L, 3L), 
 #'     .Label = c("bob", "greg", "sue"), class = "factor"), text = 
 #'     c("I love chicken [unintelligible]!", 
@@ -33,6 +34,7 @@
 #' bracketXtract(examp2$text, with = TRUE)
 #' 
 #' paste2(bracketXtract(examp2$text, 'curly'), " ")
+#' }
 bracketX <-
 function (text.var, bracket = "all", missing = NULL, names = FALSE) {
     X <- switch(bracket, 
@@ -62,7 +64,7 @@ function (text.var, bracket = "all", missing = NULL, names = FALSE) {
 #' 
 #' @rdname bracketX
 #' @param with logical.  If TRUE returns the brackets and the bracketted text.
-#' @return bracketXtract returns a list of vectors of bracketed text.
+#' @return \code{bracketXtract} -  returns a list of vectors of bracketed text.
 #' @author  Martin Morgan and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @export
 bracketXtract <-

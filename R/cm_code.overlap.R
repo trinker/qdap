@@ -14,6 +14,7 @@
 #' \code{\link[qdap]{cm_code.transform}}
 #' @keywords co-occurence
 #' @examples
+#' \dontrun{
 #' foo <- list(
 #'     AA = qcv(terms='1:10'),
 #'     BB = qcv(terms='1:2, 3:10, 19'),
@@ -51,6 +52,7 @@
 #' 
 #' dat <- cm_time2long(x, y)
 #' cm_code.overlap(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)), "variable")
+#' }
 cm_code.overlap <- function(x2long.obj, overlap.code.list, rm.var = NULL) {
     NMS <- as.character(substitute(x2long.obj))
     if (!is.null(rm.var)) {

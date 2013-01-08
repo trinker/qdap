@@ -7,10 +7,12 @@
 #' @keywords escaped character
 #' @export
 #' @examples
+#' \dontrun{
 #' x <- "I go \r
 #'     to the \tnext line"
 #' x
 #' clean(x)
+#' }
 clean <-
 function(text.var) {
     gsub("\\s+", " ", gsub("\r|\n|\t", " ", text.var))

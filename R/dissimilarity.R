@@ -19,8 +19,10 @@
 #' @keywords correlation, dissimilarity
 #' @export
 #' @examples 
+#' \dontrun{
 #' with(DATA, dissimilarity(state, list(sex, adult)))
 #' with(DATA, dissimilarity(state, person, diag = TRUE))
+#' }
 dissimilarity <-
 function(text.var, grouping.var= NULL, method = "prop", diag = FALSE, 
     upper = FALSE, p = 2, digits = 3){   

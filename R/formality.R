@@ -1,19 +1,19 @@
 #' Formality Score
 #' 
-#' Transcript apply formality score by grouping variable(s)
+#' Transcript apply formality score by grouping variable(s).
 #' 
 #' @param text.var The text variable.
 #' @param group.vars The grouping variables.  Default NULL generates formality 
 #' score for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
 #' @param plot logical. Provides a visualization for the results
-#' @param sort.by.formality logical.  If TURE orders the results by formality 
+#' @param sort.by.formality logical.  If TRUE orders the results by formality 
 #' score.
-#' @param digits The number of digits displayed
+#' @param digits The number of digits displayed.
 #' @param point.pch The plotting symbol.
 #' @param point.cex  The plotting symbol size.
 #' @param point.colors A vector of colors (length of two) to plot word count and 
-#' formality score
+#' formality score.
 #' @param bar.colors A palette of colors to supply to the bars in the 
 #' visualization.  If two palettes are provided to the two bar plots 
 #' respectively.
@@ -23,6 +23,13 @@
 #' need to contain a few hundred words for the measure to be minimally reliable. 
 #' For single sentences, the F-value should only be computed for purposes of 
 #' illustration".
+#' @details Heylighen & Dewaele(2002)'s formality score is calculated as:
+#' \deqn{F = 50(\frac{n_{f}-n_{c}}{N} + 1)}
+#'
+#' Where:
+#' \deqn{f = \left \{noun, \;adjective, \;preposition, \;article\right \}}
+#' \deqn{c = \left \{pronoun, \;verb, \;adverb, \;interjection\right \}}
+#' \deqn{N = \sum{(f \;+ \;c \;+ \;conjunctions)}}
 #' @return A list containing at the following components: 
 #' \item{text}{The text variable} 
 #' \item{POStagged}{Raw part of speech for every word of the text variable} 
@@ -285,9 +292,9 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
     return(o)                                                                        
 }
 
-#' Prints a formality.measure
+#' Prints a formality.measure object
 #' 
-#' Prints a formality.measure.
+#' Prints a formality.measure  object
 #' 
 #' @param x The formality.measure object
 #' @param \ldots ignored

@@ -1,6 +1,7 @@
 #' Gantt Plot
 #'
-#' A convenience function that wraps gantt, gantt_rm and gantt_wrap into a single 
+#' A convenience function that wraps \code{gantt}, \code{gantt_rm} and 
+#' \code{gantt_wrap} into a single 
 #' plotting function.
 #'
 #' @param text.var The text variable.    
@@ -19,7 +20,7 @@
 #' @seealso \code{\link[qdap]{gantt}} 
 #' \code{\link[qdap]{gantt_rep}},
 #' \code{\link[qdap]{gantt_wrap}},
-#' @references Wallace Clark and Henry Gantt (1922) The Gantt chart, a working 
+#' @references Clark, W. & Gantt, H. (1922) The Gantt chart, a working 
 #' tool of management. New York, Ronald Press.
 #' @keywords Gantt
 #' @export

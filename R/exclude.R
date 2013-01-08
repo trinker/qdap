@@ -8,6 +8,7 @@
 #' @return Returns a vector with the excluded terms removed.
 #' @export
 #' @examples
+#' \dontrun{
 #' Top25Words
 #' exclude(Top25Words, qcv(the, of, and))
 #' exclude(Top25Words, "the", "of", "an")
@@ -20,6 +21,7 @@
 #'     FALSE), "truth"))
 #' MTCH.LST <- exclude(term.match(DATA$state, qcv(th, i)), qcv(truth, stinks))
 #' termco.a(DATA$state, DATA$person, MTCH.LST)
+#' }
 exclude <-
 function(word.list, ...) {
     mes <- try(is.vector(...), TRUE)

@@ -8,7 +8,7 @@
 #' x is to be cut.
 #' @param digits Integer indicating the number of decimal places (round) or 
 #' significant digits (signif) to be used. Negative values are allowed
-#' @param \lodots Other variables passed to cut.
+#' @param \ldots Other variables passed to cut.
 #' @return Returns a list of data frames (or singular data frame for a vector) of 
 #' frequencies, cumulative frequencies, percentages and cumalative percentages 
 #' for each interval.

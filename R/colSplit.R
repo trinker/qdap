@@ -12,7 +12,7 @@
 #' @keywords column-split
 #' @export
 #' @examples 
-#' dontrun{
+#' \dontrun{
 #' (foo <- paste2(CO2[, 1:3]))
 #' colSplit(foo)
 #' (bar <- paste2(mtcars[, 1:3], sep="|"))
