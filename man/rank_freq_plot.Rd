@@ -1,116 +1,116 @@
-\name{rank_freq_plot}
+\name{rank_freq_mplot}
+\alias{rank_freq_mplot}
 \alias{rank_freq_plot}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Rank Frequency Plot 
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\title{Rank Frequency Plot}
 \usage{
-rank_freq_plot(words, frequencies, title.ext = NULL, plot = TRUE, jitter.ammount = 0.1, log.scale = TRUE, hap.col = "red", dis.col = "blue")
+  rank_freq_mplot(text.var, grouping.var = NULL, ncol = 4,
+    jitter = 0.2, log.freq = TRUE, log.rank = TRUE,
+    hap.col = "red", dis.col = "blue", alpha = 1,
+    shape = 1, title = "Rank-Frequency Plot", digits = 2,
+    plot = TRUE)
+
+  rank_freq_plot(words, frequencies, plot = TRUE,
+    title.ext = NULL, jitter.ammount = 0.1,
+    log.scale = TRUE, hap.col = "red", dis.col = "blue")
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{words}{
-%%     ~~Describe \code{words} here~~
-}
-  \item{frequencies}{
-%%     ~~Describe \code{frequencies} here~~
-}
-  \item{title.ext}{
-%%     ~~Describe \code{title.ext} here~~
-}
-  \item{plot}{
-%%     ~~Describe \code{plot} here~~
-}
-  \item{jitter.ammount}{
-%%     ~~Describe \code{jitter.ammount} here~~
-}
-  \item{log.scale}{
-%%     ~~Describe \code{log.scale} here~~
-}
-  \item{hap.col}{
-%%     ~~Describe \code{hap.col} here~~
-}
-  \item{dis.col}{
-%%     ~~Describe \code{dis.col} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{text.var}{The text variable.}
+
+  \item{grouping.var}{The grouping variables.  Default NULL
+  generates one output for all text.  Also takes a single
+  grouping variable or a list of 1 or more grouping
+  variables.}
+
+  \item{ncol}{integer value indicating the number of
+  columns in the facet wrap.}
+
+  \item{jitter}{Ammount of horizontal jitter to add to the
+  points.}
+
+  \item{log.freq}{logical.  If TURE plots the frequencies
+  in the natural log scale.}
+
+  \item{log.rank}{logical.  If TURE plots the ranks in the
+  natural log scale.}
+
+  \item{hap.col}{Color of the hapax legomenon points.}
+
+  \item{dis.col}{Color of the dis legomenon points.}
+
+  \item{alpha}{Transparency level of points (ranges
+  betweeon 0 and 1).}
+
+  \item{title}{Optional plot title.}
+
+  \item{digits}{Integer; number of dicimal places to
+  round.}
+
+  \item{plot}{logical.  If TRUE provides a rank frequency
+  plot.}
+
+  \item{words}{A vector of words.}
+
+  \item{frequencies}{A vector of frequencies corresponding
+  to the words argument.}
+
+  \item{title.ext}{The title extension that extends:
+  "Rank-Frequency Plot ..."}
+
+  \item{jitter.ammount}{Ammount of horizontal jitter to add
+  to the points.}
+
+  \item{log.scale}{logical.  If TRUE plots the rank and
+  frequency as a log scale.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a rank-frequency plot and a list of three
+  dataframes: \item{WORD_COUNTS}{The word frquencies
+  supplied to \code{rank_freq_plot} or created by
+  \code{rank_freq_mplot}.}
+  \item{RANK_AND_FREQUENCY_STATS}{A dataframe of rank and
+  frequencies for the words used in the text.}
+  \item{LEGOMENA_STATS}{A dataframe displaying the percent
+  hapax legomena and percent dis legomena of the text.}
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
+\description{
+  \code{rank_freq_mplot} - Plot a faceted word rank versus
+  frequencies by grouping variable(s).
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  \code{rank_freq_plot} - Plot word rank versus
+  frequencies.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+#rank_freq_mplot EXAMPLES:
+rank_freq_mplot(DATA$state, DATA$person, ncol = 2, jitter = 0)
+rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
+    hap.col = "purple")
+rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
+    log.freq = FALSE, log.rank = FALSE, jitter = .6)
+rank_freq_mplot(raj$dialogue, jitter = .5, alpha = 1/15)
+rank_freq_mplot(raj$dialogue, jitter = .5, shape = 19, alpha = 1/15)
 
-## The function is currently defined as
-function (words, frequencies, title.ext = NULL, plot = TRUE, 
-    jitter.ammount = 0.1, log.scale = TRUE, hap.col = "red", 
-    dis.col = "blue") 
-{
-    original.data <- data.frame(words = words, freq = frequencies)
-    X <- tapply(words, frequencies, function(x) length(x))
-    ZIPF <- data.frame(n.words = as.numeric(rev(X)), freq = as.numeric(rev(rownames(X))), 
-        rank = as.numeric(rev(nrow(X):1)))
-    rownames(ZIPF) <- 1:nrow(ZIPF)
-    title <- if (is.null(title.ext)) 
-        NULL
-    else paste(c("for", title.ext), collapse = " ")
-    ZIPF2 <- ZIPF[rep(seq(dim(ZIPF)[1]), ZIPF$n.words), ]
-    ZIPF <- transform(ZIPF, per.of.tot = round(freq/sum(ZIPF2$freq) * 
-        100, digits = 3))
-    if (plot) {
-        if (log.scale) {
-            with(ZIPF2, plot(jitter(log(rank), amount = jitter.ammount), 
-                log(freq), ylab = "Frequency (log scale)", xlab = "Rank (log scale)", 
-                main = paste("Rank-Frequency Plot", title, collapse = " "), 
-                col = ifelse(freq == 1, hap.col, ifelse(freq == 
-                  2, dis.col, "black"))))
-        }
-        else {
-            with(ZIPF2, plot(jitter(rank, amount = jitter.ammount), 
-                freq, ylab = "Frequency", xlab = "Rank", main = paste("Rank-Frequency Plot", 
-                  title, collapse = " "), col = ifelse(freq == 
-                  1, hap.col, ifelse(freq == 2, dis.col, "black"))))
-        }
-    }
-    else {
-        NULL
-    }
-    percent_hapax_legomena <- round(ZIPF[ZIPF$freq == 1, "n.words"]/sum(ZIPF$n.words) * 
-        100, digits = 3)
-    percent_dis_legomena <- round(ZIPF[ZIPF$freq == 2, "n.words"]/sum(ZIPF$n.words) * 
-        100, digits = 3)
-    list(ORIGINAL_DATA = original.data, RANK_AND_FREQUENCY_STATS = ZIPF, 
-        LEGOMENA_STATS = c(percent_hapax_legomena = percent_hapax_legomena, 
-            percent_dis_legomena = percent_dis_legomena))
-  }
+#rank_freq_plot EXAMPLES:
+mod <- with(mraja1spl , word_list(dialogue, person, cut.n = 10,
+    cap.list=unique(DF$person)))
+rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo')
+rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, plot = FALSE)
+rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo',
+    jitter.ammount = 0.15, hap.col = "darkgreen", dis.col = "purple")
+rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo',
+    jitter.ammount = 0.5, log.scale=FALSE)
+lapply(seq_along(mod$fwl), function(i){
+    dev.new()
+    rank_freq_plot(mod$fwl[[i]]$WORD, mod$fwl[[i]]$FREQ,
+        title.ext = names(mod$fwl)[i], jitter.ammount = 0.5, log.scale=FALSE)
+})
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\references{
+  Zipf, G. K. (1949). Human behavior and the principle of
+  least effort. Cambridge, Massachusetts: Addison-Wesley.
+  p. 1.
+}
+\keyword{rank-frequency}
+\keyword{Zipf,}
+

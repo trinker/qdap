@@ -1,62 +1,42 @@
 \name{scrubber}
 \alias{scrubber}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Use to clean text variables when importing a new data set.
-}
-\description{
-Use to clean text variables when importing a new data set.  Removes extra 
-white spaces other textual anomalies that may cause errors.
-}
+\title{Use to clean text variables when importing a new data set.}
 \usage{
-scrubber(text.var, num2word = FALSE)
+  scrubber(text.var, num2word = FALSE, rm.quote = TRUE,
+    fix.comma = TRUE, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{text.var}{
-%%     ~~Describe \code{text.var} here~~
-}
-  \item{num2word}{
-%%     ~~Describe \code{num2word} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{text.var}{The text variable}
+
+  \item{num2word}{logical If TRUE replaces a numbers with
+  text representations.}
+
+  \item{fix.comma}{logical If TRUE removes any spaces
+  before a comma.}
+
+  \item{rm.quote}{logical If TRUE removes and \code{\"}.}
+
+  \item{\ldots}{Other arduments passed to
+  \code{replace_number}.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a parsed character vector.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Use to clean text variables when importing a new data
+  set.  Removes extra white spaces other textual anomalies
+  that may cause errors.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (text.var, num2word = FALSE) 
-{
-    reducer(Trim(clean(text.var)))
-  }
+\dontrun{
+x <- c("I like 456 dogs  , don't you?\\"")
+scrubber(x)
+scrubber(x, TRUE)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\seealso{
+  \code{\link[qdap]{strip}}
+}
+\keyword{clean}
+\keyword{parse,}
+

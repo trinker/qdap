@@ -1,132 +1,103 @@
 \name{read.transcript}
 \alias{read.transcript}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Read In Microsoft Excel Transcript
-}
-\description{
-Reads in an Microsoft Excel Transcript and does some automatic cleaning.
-}
+\title{Read Transcripts Into R}
 \usage{
-read.transcript(file, text.var = NULL, header = TRUE, dash = "", ellipsis = "...", quote2bracket = FALSE, rm.empty.rows = TRUE, col.names = NULL, sep = ",")
+  read.transcript(file, col.names = NULL, text.var = NULL,
+    merge.broke.tot = TRUE, header = FALSE, dash = "",
+    ellipsis = "...", quote2bracket = FALSE,
+    rm.empty.rows = TRUE,
+    na.strings = c("999", "NA", "", " "), sep = NULL,
+    skip = 0, nontext2factor = TRUE, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{file}{
-%%     ~~Describe \code{file} here~~
-}
-  \item{text.var}{
-%%     ~~Describe \code{text.var} here~~
-}
-  \item{header}{
-%%     ~~Describe \code{header} here~~
-}
-  \item{dash}{
-%%     ~~Describe \code{dash} here~~
-}
-  \item{ellipsis}{
-%%     ~~Describe \code{ellipsis} here~~
-}
-  \item{quote2bracket}{
-%%     ~~Describe \code{quote2bracket} here~~
-}
-  \item{rm.empty.rows}{
-%%     ~~Describe \code{rm.empty.rows} here~~
-}
-  \item{col.names}{
-%%     ~~Describe \code{col.names} here~~
-}
-  \item{sep}{
-%%     ~~Describe \code{sep} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{file}{The name of the file which the data are to be
+  read from. Each row of the table appears as one line of
+  the file. If it does not contain an absolute path, the
+  file name is relative to the current working directory,
+  getwd().}
+
+  \item{col.names}{Supplies a vector of column names to the
+  transcript columns.}
+
+  \item{text.var}{specifying the name of the text variable
+  will ensure that variable is classed as character.  If
+  NULL read.transcript attempts to guess the text.variable
+  (dialogue).}
+
+  \item{merge.broke.tot}{If the file being read in is .docx
+  and the transcript if formated to have broken space
+  between a single turn of talk read.transcript will
+  attempt to merge these into a single turn of talk.}
+
+  \item{header}{logical.  If TRUE the file contains the
+  names of the variables as its first line.}
+
+  \item{dash}{Character to replace the en and em dashes
+  special characters (default is to remove).}
+
+  \item{ellipsis}{Character to replace the ellipsis special
+  characters (default is text ...).}
+
+  \item{quote2bracket}{logical If TRUE replaces curly
+  quotes with curly braces (default is FALSE).  If FALSE
+  curly quotes are removed.}
+
+  \item{rm.empty.rows}{logical.  If TURE read.transcript
+  attempts to remove empty rows.}
+
+  \item{na.strings}{A character vector of strings which are
+  to be interpreted as NA values.}
+
+  \item{sep}{The field separator character. Values on each
+  line of the file are separated by this character.  The
+  default of NULL instructs read.transcript to use a
+  separator suitable for the file type being read in.}
+
+  \item{skip}{Integer; the number of lines of the data file
+  to skip before beginning to read data.}
+
+  \item{nontext2factor}{logical.  If TRUE attempts to
+  convert any non text to a factor.}
+
+  \item{\ldots}{Further arguments to be passed to
+  read.table.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a dataframe of dialogue and people.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
+\description{
+  Read a .docx, .csv or .xlsx files into R.
 }
 \note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  If a transcript is a .docx file read transcript expects
+  two columns (generally person and dialogue) with some
+  sort of separator (default is colon separator).  .doc
+  fils must be converted to .docx before reding in.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+doc1 <- system.file("extdata/trans1.docx", package = "qdap")
+doc2 <- system.file("extdata/trans2.docx", package = "qdap")
+doc3 <- system.file("extdata/trans3.docx", package = "qdap")
+doc4 <- system.file("extdata/trans4.xlsx", package = "qdap")
 
-## The function is currently defined as
-function (file, text.var = NULL, header = TRUE, dash = "", ellipsis = "...", 
-    quote2bracket = FALSE, rm.empty.rows = TRUE, col.names = NULL, 
-    sep = ",") 
-{
-    require(gdata)
-    x <- gdata::read.xls(file, header = header, sep = sep, as.is = FALSE, 
-        na.strings = c("999", "NA", " "), strip.white = TRUE, 
-        stringsAsFactors = FALSE, blank.lines.skip = rm.empty.rows)
-    if (!is.null(text.var) & !is.numeric(text.var)) {
-        text.var <- which(colnames(x) == text.var)
-    }
-    else {
-        text.col <- function(dataframe) {
-            dial <- function(x) {
-                if (is.factor(x) | is.character(x)) {
-                  n <- max(nchar(as.character(x)))
-                }
-                else {
-                  n <- NA
-                }
-            }
-            which.max(unlist(lapply(dataframe, dial)))
-        }
-        text.var <- text.col(x)
-    }
-    x[, text.var] <- as.character(x[, text.var])
-    x[, text.var] <- Trim(iconv(x[, text.var], "", "ASCII", "byte"))
-    if (quote2bracket == TRUE) {
-        rbrac <- "}"
-        lbrac <- "{"
-    }
-    else {
-        if (length(quote2bracket) == 2) {
-            rbrac <- quote2bracket[2]
-            lbrac <- quote2bracket[1]
-        }
-        else {
-            lbrac <- rbrac <- ""
-        }
-    }
-    reps <- c(lbrac, rbrac, "'", "'", "'", ellipsis, dash, dash)
-    ser <- c("<e2><80><9c>", "<e2><80><9d>", "<e2><80><99>", 
-        "<e2><80><9b>", "<ef><bc><87>", "<e2><80><a6>", "<e2><80><93>", 
-        "<e2><80><94>")
-    Encoding(x[, text.var]) <- "latin1"
-    x[, text.var] <- clean(mgsub(ser, reps, x[, text.var]))
-    if (rm.empty.rows) {
-        x <- rm_empty_row(x)
-    }
-    if (!is.null(colnames)) {
-        colnames(x) <- col.names
-    }
-    return(x)
-  }
+read.transcript(doc1)
+dat <- read.transcript(doc1, col.names = c("person", "dialogue"))
+dat
+rm_row(dat, "person", "[C") #remove bracket row
+
+read.transcript(doc2) #throws an error
+read.transcript(doc2, skip = 1)
+read.transcript(doc3, skip = 1) #wrong sep
+read.transcript(doc3, sep = "-", skip = 1)
+read.transcript(doc4)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\author{
+  Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
+}
+\references{
+  \url{https://github.com/trinker/qdap/wiki/Reading-Transcripts-into-R}
+}
+\keyword{transcript}
+

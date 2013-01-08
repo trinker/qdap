@@ -1,74 +1,46 @@
 \name{Search}
 \alias{Search}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Search Terms for Colulmns of a Data Frame
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\title{Search Colulmns of a Data Frame}
 \usage{
-Search(term, dataframe, column.name, variation = 0.02, ...)
+  Search(dataframe, term, column.name = NULL,
+    max.distance = 0.02, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{term}{
-%%     ~~Describe \code{term} here~~
-}
-  \item{dataframe}{
-%%     ~~Describe \code{dataframe} here~~
-}
-  \item{column.name}{
-%%     ~~Describe \code{column.name} here~~
-}
-  \item{variation}{
-%%     ~~Describe \code{variation} here~~
-}
-  \item{\dots}{
-%%     ~~Describe \code{\dots} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{dataframe}{A dataframe object to search.}
+
+  \item{term}{A character vector term to search for.}
+
+  \item{column.name}{Optional column of the data frame to
+  search (nome or index).}
+
+  \item{max.distance}{Maximum distance allowed for a match.
+  Expressed either as integer, or as a fraction of the
+  pattern length times the maximal transformation cost
+  (will be replaced by the smallest integer not less than
+  the corresponding fraction).}
+
+  \item{\ldots}{Other arguments passed to \code{agrep}.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns the rows of the data frame that amtch the search
+  term.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Find terms located in columns of a data frame.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+SampDF <- data.frame("islands"=names(islands)[1:32],mtcars)
 
-## The function is currently defined as
-function (term, dataframe, column.name, variation = 0.02, ...) 
-{
-    te <- as.character(substitute(term))
-    cn <- as.character(substitute(column.name))
-    HUNT <- agrep(te, dataframe[, cn], ignore.case = TRUE, max.distance = variation, 
-        ...)
-    dataframe[c(HUNT), ]
-  }
+Search(SampDF, "Cuba", "islands")
+Search(SampDF, "New", "islands")
+Search(SampDF, "Ho")
+Search(SampDF, "Ho", max.distance = 0)
+Search(SampDF, "Axel Heiberg")
+Search(SampDF, 19) #too much tolerance in max.distance
+Search(SampDF, 19, max.distance = 0)
+Search(SampDF, 19, "qsec", max.distance = 0)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\keyword{search}
+

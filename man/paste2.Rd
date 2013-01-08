@@ -1,88 +1,49 @@
 \name{paste2}
 \alias{paste2}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Paste an Unspecified Number Of Text Columns
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\title{Paste an Unspecified Number Of Text Columns}
 \usage{
-paste2(multi.columns, sep = ".", handle.na = TRUE, trim = TRUE)
+  paste2(multi.columns, sep = ".", handle.na = TRUE,
+    trim = TRUE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{multi.columns}{
-%%     ~~Describe \code{multi.columns} here~~
-}
-  \item{sep}{
-%%     ~~Describe \code{sep} here~~
-}
-  \item{handle.na}{
-%%     ~~Describe \code{handle.na} here~~
-}
-  \item{trim}{
-%%     ~~Describe \code{trim} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{multi.columns}{The multiple columns or a litst of
+  vectors to paste together.}
+
+  \item{sep}{A character string to separate the terms.}
+
+  \item{handle.na}{logical.  If TRUE returns \code{NA} if
+  any column/vector contains a missing value.}
+
+  \item{trim}{logical.  If TRUE leading/trailing white
+  space is removed.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a vector with row-wise elements pasted together.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
+\description{
+  Paste unspecified columns or a list of vectors together.
 }
 \note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  \code{\link[base]{paste}} differs from
+  \code{\link[qdap]{paste2}} because \code{paste} does not
+  allowed an unspecified number of columns to be pasted.
+  This behavior can be convient for inside of functions
+  when the number of columns being pasted is unknown.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (multi.columns, sep = ".", handle.na = TRUE, trim = TRUE) 
-{
-    if (trim) 
-        multi.columns <- lapply(multi.columns, function(x) {
-            gsub("^\\s+|\\s+$", "", x)
-        })
-    if (!is.data.frame(multi.columns) & is.list(multi.columns)) {
-        multi.columns <- do.call("cbind", multi.columns)
-    }
-    m <- if (handle.na) {
-        apply(multi.columns, 1, function(x) {
-            if (any(is.na(x))) {
-                NA
-            }
-            else {
-                paste(x, collapse = sep)
-            }
-        })
-    }
-    else {
-        apply(multi.columns, 1, paste, collapse = sep)
-    }
-    names(m) <- NULL
-    return(m)
-  }
+\dontrun{
+v <- rep(list(state.abb,  state.name) , 5)
+n <- sample(5:10, 1)
+paste(v[1:n]) #odd looking return
+paste2(v[1:n])
+paste2(v[1:n], sep="|")
+paste2(mtcars, sep="|")
+paste(mtcars, sep="|") #odd looking return
+paste2(CO2, sep="|-|")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\seealso{
+  \code{\link[base]{paste}}
+}
+\keyword{paste}
+

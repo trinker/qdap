@@ -1,7 +1,7 @@
 #' qdap: Quantitative Discourse Analysis Package
 #'
 #' This package automates many of the tasks associated with quantitative 
-#' discourse analysis oftranscripts containing discourse including frequency 
+#' discourse analysis of transcripts containing discourse including frequency 
 #' counts of sentence types, words, sentence, turns of talk, syllable counts and 
 #' other assorted analyysis tasks.  The package provides parsing tools for 
 #' preparing transcript data.  Many functions enable the user to aggregate data 

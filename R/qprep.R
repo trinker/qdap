@@ -9,16 +9,15 @@
 #' @param rm.dash logical logical.  If TRUE dashes will be removed.
 #' @param bracket The type of bracket (and encased text) to remove.  This is one 
 #' of the strings \code{"curly"}, \code{"square"}, \code{"round"}, 
-#' \code{"angle"} and \code{"all"}.  These strings correspond to: {, [, (, < or 
-#' all four types.
+#' \code{"angle"} and \code{"all"}.
 #' @param missing Value to assign to empty cells.
 #' @param names logical.  If TRUE the sentences are given as the names of the 
 #' counts.
 #' @param abbreviation A two column key of abbreviations (column 1) and long 
 #' form replacements (column 2) or a vector of abbeviations.  Default is to use 
 #' qdap's abbreviations data set.
-#' @param replace A vecotor of long form replacements if a data frame is not 
-#' supplied to the abbreviation argument
+#' @param replace A vector of long form replacements if a data frame is not 
+#' supplied to the abbreviation argument.
 #' @param ignore.case logical.  If TRUE replaces without regard to 
 #' capitalization.
 #' @param num.paste A character string c(\code{"separate"}, \code{"combine"}); 
@@ -34,7 +33,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' x <- "I like 60 (laughter) #d-bot and $6 @ the store w/o 8p.m."
+#' x <- "I like 60 (laughter) #d-bot and $6 @@ the store w/o 8p.m."
 #' qprep(x)
 #' }
 qprep <-

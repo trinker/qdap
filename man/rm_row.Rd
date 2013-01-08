@@ -1,71 +1,50 @@
 \name{rm_row}
+\alias{rm_empty_row}
 \alias{rm_row}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Remove Rows Based On Supplied Terms
-}
-\description{
-Remove rows from a dataframe based on supplied terms/partial terms (must be an exact match)
-}
+\title{Remove Rows That Contain Markers}
 \usage{
-rm_row(dataframe, search.column, terms)
+  rm_row(dataframe, search.column, terms)
+
+  rm_empty_row(dataframe)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{dataframe}{
-%%     ~~Describe \code{dataframe} here~~
-}
-  \item{search.column}{
-%%     ~~Describe \code{search.column} here~~
-}
-  \item{terms}{
-%%     ~~Describe \code{terms} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{dataframe}{A dataframe object.}
+
+  \item{search.column}{Column name to search for
+  markers/terms.}
+
+  \item{terms}{Terms/markers of the rows that are to be
+  removed from the dataframe.  The term/marker must appear
+  at the begining of the string and is case sensitive.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
+  \code{rm_row} - returns a dataframe with the
+  termed/markered rows removed.
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+  \code{rm_empty_row} - returns a dataframe with empty rows
+  removed.
+}
+\description{
+  \code{rm_row} - Remove rows from a data set that contain
+  a given marker/term.
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  \code{rm_empty_row} - Removes the empty rows of a data
+  set that are common in reading in data (default method in
+  \code{read.transcript}).
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+#rm_row EXAMPLE:
+rm_row(DATA, "person", c("sam", "greg"))
+rm_row(DATA, 1, c("sam", "greg"))
+rm_row(DATA, "state", c("Comp"))
 
-## The function is currently defined as
-function (dataframe, search.column, terms) 
-{
-    FUN <- function(dat, sc, term) {
-        dat[substring(dat[, sc], 1, nchar(term)) != term, ]
-    }
-    DF <- dataframe
-    lapply(terms, function(x) {
-        DF <<- FUN(DF, search.column, x)
-    })
-    return(DF)
-  }
+#rm_empty_row EXAMPLE:
+x <- matrix(rep(" ", 4), ncol =2)
+dat <- DATA[, c(1, 4)]
+colnames(x) <- colnames(dat)
+(dat <- data.frame(rbind(dat, x)))
+rm_empty_row(dat)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+

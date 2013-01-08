@@ -1,56 +1,56 @@
 \name{bag.o.words}
 \alias{bag.o.words}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Text Column to a Bag of Stripped Words
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\alias{breaker}
+\alias{word.split}
+\title{Bag of Words}
 \usage{
-bag.o.words(text)
+  bag.o.words(text.var, apostrophe.remove = FALSE, ...)
+
+  breaker(text.var)
+
+  word.split(text.var)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{text}{
-%%     ~~Describe \code{text} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{text.var}{The text variable.}
+
+  \item{apostrophe.remove}{logical.  If TRUE removes
+  apostrophe's from the output.}
+
+  \item{\ldots}{further arguments passed to strip
+  function.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
+  Returns a vector of striped words.
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+  \code{breaker} - returns a vector of striped words and
+  qdap recognized endmarks (i.e. \code{".", "!", "?", "*",
+  "-"}).
+}
+\description{
+  \code{bag.o.words} - Reduces a text column to a bag of
+  words.
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  \code{breaker} - Reduces a text column to a bag of words
+  and qdap recognized end marks.
+
+  \code{word.split} - Reduces a text column to a list of
+  vectors of bag of words and qda recognized endmarks (i.e.
+  \code{".", "!", "?", "*", "-"}).
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+bag.o.words(DATA$state)
+by(DATA$state, DATA$person, bag.o.words)
+lapply(DATA$state,  bag.o.words)
+bag.o.words("I'm going home!", apostrophe.remove = FALSE)
 
-## The function is currently defined as
-function (text) 
-unblanker(words(strip(clean(text))))
+DATA
+breaker(DATA$state)
+by(DATA$state, DATA$person, breaker)
+lapply(DATA$state,  breaker)
+
+word.split(c(NA, DATA$state))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\keyword{bag-of-words}
+

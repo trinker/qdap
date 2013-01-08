@@ -1,101 +1,60 @@
 \name{cm_df.temp}
 \alias{cm_df.temp}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Breaks transcript dialogue into words while retaining the demographic factors associate with each word
-}
-\description{
-Breaks transcript dialogue into words while retaining the demographic factors associate with each word.  The codes argument provides a matrix of zeros that can serve as a dummy coded matrix of codes per word.
-}
+\title{Break Transcript Dialogue into Blank Code Matrix}
 \usage{
-wordSplit(dataframe, text.var, codes = NULL, csv = FALSE, file.name = NULL, strip = FALSE)
+  cm_df.temp(dataframe, text.var, codes = NULL, csv = TRUE,
+    file.name = NULL, transpose = FALSE, strip = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{dataframe}{
-%%     ~~Describe \code{dataframe} here~~
-}
-  \item{text.var}{
-%%     ~~Describe \code{text.var} here~~
-}
-  \item{codes}{
-%%     ~~Describe \code{codes} here~~
-}
-  \item{csv}{
-%%     ~~Describe \code{csv} here~~
-}
-  \item{file.name}{
-%%     ~~Describe \code{file.name} here~~
-}
-  \item{strip}{
-%%     ~~Describe \code{strip} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{dataframe}{A dataframe containing a text variable.}
+
+  \item{text.var}{The name of the text variable.}
+
+  \item{codes}{Optional list of codes.}
+
+  \item{csv}{logical.  If TRUE creates a csv in the working
+  directory.}
+
+  \item{file.name}{The name of the csv file.  If NULL
+  defaults to the dtaframe name.}
+
+  \item{transpose}{logical.  If TRUE transposes the
+  dataframe so that the text is across the top.}
+
+  \item{strip}{logical.  If TRUE all punctuation is
+  removed.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Generates a dataframe, and optional csv file, of
+  individual words while maintaing demgraphic information.
+  If a vector of codes is provided the outcome is a matrix
+  of words used by codes filled with zeros.  This dataframe
+  is useful for dummy coded (1-yes code exists; 2-no it
+  does not) representation of data and can be used for
+  visualizations and statistical analysis.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Breaks transcript dialogue into words while retaining the
+  demographic factors associate with each word.  The codes
+  argument provides a matrix of zeros that can serve as a
+  dummy coded matrix of codes per word.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (dataframe, text.var, codes = NULL, csv = FALSE, file.name = NULL, 
-    strip = FALSE) 
-{
-    tv <- as.character(dataframe[, text.var])
-    if (strip) {
-        tv <- strip(tv)
-    }
-    wrds <- lapply(tv, function(x) Trim(unlist(strsplit(x, " "))))
-    lens <- sapply(wrds, length)
-    leftover <- dataframe[, !colnames(dataframe) \%in\% text.var, 
-        drop = FALSE]
-    if (!is.null(codes)) {
-        lcodes <- length(codes)
-        lwrds <- length(unlist(wrds))
-        MAT <- matrix(rep(0, lcodes * lwrds), lwrds, lcodes)
-        colnames(MAT) <- codes
-        DF <- data.frame(leftover[rep(1:nrow(leftover), lens), 
-            , drop = FALSE], text = unlist(wrds), MAT)
-    }
-    else {
-        DF <- data.frame(leftover[rep(1:nrow(leftover), lens), 
-            , drop = FALSE], text = unlist(wrds))
-    }
-    if (csv) {
-        if (is.null(file.name)) {
-            file.name <- as.character(substitute(dataframe))
-        }
-        write.table(DF, file = paste0(file.name, ".csv"), sep = ",", 
-            col.names = T, row.names = F, qmethod = "double")
-    }
-    return(DF)
-  }
+\dontrun{
+codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
+cm_df.temp(DATA, "state", codes)
+cm_df.temp(DATA, "state", codes, transpose = TRUE)
+head(cm_df.temp(raj.act.1, "dialogue", codes))
+cm_df.temp(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\references{
+  Miles, M. B. & Huberman, A. M. (1994). An expanded
+  sourcebook: Qualitative data analysis. 2nd ed. Thousand
+  Oaks, CA: SAGE Publications.
+}
+\seealso{
+  \code{\link{cm_range2long}}, #' \code{\link{cm_df.fill}}
+}
+\keyword{coding}
+

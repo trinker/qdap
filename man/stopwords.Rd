@@ -1,84 +1,77 @@
 \name{stopwords}
 \alias{stopwords}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Transcript Apply Removal of Specified Stopwords
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\title{Remove Stopwords}
 \usage{
-stopwords(textString, stopwords = Top25Words)
+  stopwords(textString, stopwords = Top25Words,
+    unlist = FALSE, separate = TRUE, strip = FALSE,
+    unique = FALSE, char.keep = NULL, names = FALSE,
+    ignore.case = TRUE, apostrophe.remove = FALSE, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{textString}{
-%%     ~~Describe \code{textString} here~~
-}
-  \item{stopwords}{
-%%     ~~Describe \code{stopwords} here~~
-}
-  \item{unlist}{
-%%     ~~Describe \code{stopwords} here~~
-}
-  \item{strip}{
-%%     ~~Describe \code{stopwords} here~~
-}
-  \item{unique}{
-%%     ~~Describe \code{stopwords} here~~
-}
-  \item{names}{
-%%     ~~Describe \code{stopwords} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{textString}{A character string of text or a vector
+  of character strings.}
+
+  \item{stopwords}{A character vector of words to remove
+  from the text.  qdap has a number of data sets that can
+  be used as stopwords including: Top200Words, Top100Words,
+  Top25Words.  For the tm package's traditional English
+  stop words use \code{tm::stopwords("english")}}
+
+  \item{unlist}{logical.  If TRUE unlists into one vector.
+  General use intended for when separate is FALSE.}
+
+  \item{separate}{logical.  If TRUE separates sentences
+  into words. If FALSE retains sentences.}
+
+  \item{strip}{logical.  IF TURE strips the text of all
+  punctuation except apostrophes.}
+
+  \item{unique}{logical.  If TRUE keeps only unique words
+  (if unlist is TURE) or sentences (if unlist is FALSE).
+  General use intended for when unlist is TRUE.}
+
+  \item{char.keep}{If strip is TRUE this argument provides
+  a means of retaining supplied character(s).}
+
+  \item{names}{logical.  If TRUE will name the elements of
+  the vector or list with the original textString.}
+
+  \item{ignore.case}{logical.  If TRUE stop words will be
+  removed regardless of case.  Additionally, case will be
+  stripped from the text.  If FALSE stopwords removal is
+  contingent upon case.  Additionally, case is not
+  stripped.}
+
+  \item{apostrophe.remove}{logical.  If TRUE removes
+  apostrophe's from the output.}
+
+  \item{\ldots}{further arguments passed to strip function}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a vector of sentences, vector of words, or
+  (default) a list of vectors of words with stop words
+  removed.  Output depends on supplied arguments.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Transcript apply the removal of stopwords.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (textString, stopwords = Top25Words) 
-{
-    Stopwords <- if (is.null(stopwords)) {
-        c(" ")
-    }
-    else {
-        stopwords
-    }
-    SW <- function(textString, stopwords) {
-        "\%w/o\%" <- function(x, y) x[!x \%in\% y]
-        unlist(strsplit(tolower(Trim(textString)), " ")) \%w/o\% 
-            tolower(Trim(stopwords))
-    }
-    sapply(textString, function(x) SW(x, Stopwords))
-  }
+\dontrun{
+stopwords(DATA$state)
+stopwords(DATA$state, tm::stopwords("english"))
+stopwords(DATA$state, Top200Words)
+stopwords(DATA$state, Top200Words, strip = TRUE)
+stopwords(DATA$state, Top200Words, separate = FALSE)
+stopwords(DATA$state, Top200Words, separate = FALSE, ignore.case = FALSE)
+stopwords(DATA$state, Top200Words, unlist = TRUE)
+stopwords(DATA$state, Top200Words, unlist = TRUE, strip=TRUE)
+stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\seealso{
+  \code{\link[qdap]{strip}},
+  \code{\link[qdap]{bag.o.words}},
+  \code{\link[tm]{stopwords}}
+}
+\keyword{stopwords}
+

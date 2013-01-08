@@ -9,7 +9,7 @@
 #' @param apostrophe.remove logical.  If TRUE removes apostrophe's from the output.
 #' @param lower.case logical.  If TRUE forces all alpha characters to lower case.
 #' @return Retruns a vector of text that has been stripped of unwanted characters.
-#' @seealso \code[qdap]{\link{stopwords}}
+#' @seealso \code{\link[qdap]{stopwords}}
 #' @export
 #' @examples
 #' \dontrun{

@@ -1,87 +1,53 @@
 \name{dissimilarity}
 \alias{dissimilarity}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Dissimilarity Statistics
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\title{Dissimilarity Statistics}
 \usage{
-dissimilarity(wfm.object, method = "euclidean", diag = FALSE, upper = FALSE, p = 2, digits = 3)
+  dissimilarity(text.var, grouping.var = NULL,
+    method = "prop", diag = FALSE, upper = FALSE, p = 2,
+    digits = 3)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{wfm.object}{
-%%     ~~Describe \code{wfm.object} here~~
-}
-  \item{method}{
-%%     ~~Describe \code{method} here~~
-}
-  \item{diag}{
-%%     ~~Describe \code{diag} here~~
-}
-  \item{upper}{
-%%     ~~Describe \code{upper} here~~
-}
-  \item{p}{
-%%     ~~Describe \code{p} here~~
-}
-  \item{digits}{
-%%     ~~Describe \code{digits} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{text.var}{A text variable or word frequency matrix
+  object.}
+
+  \item{grouping.var}{The grouping variables.  Default NULL
+  generates one word list for all text.  Also takes a
+  single grouping variable or a list of 1 or more grouping
+  variables.}
+
+  \item{method}{Distance methods (see
+  \code{\link[stats]{dist}} function). If \code{"prop"}
+  (the default; the result is 1 - \code{"binary"}.}
+
+  \item{diag}{logical.  If True returns the diagonals of
+  the matrix}
+
+  \item{upper}{logical.  If True returns the upper triangle
+  of the matrix}
+
+  \item{p}{The power of the Minkowski distance}
+
+  \item{digits}{integer indicating the number of decimal
+  places (round) or significant digits (signif) to be used.
+  Negative values are allowed}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a matrix of dissimilarity values (the agreement
+  between text).
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Uses the distance function to calculate dissimilarity
+  statistics by grouping variables.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (wfm.object, method = "euclidean", diag = FALSE, upper = FALSE, 
-    p = 2, digits = 3) 
-{
-    if (comment(wfm.object) != "true.matrix") {
-        warning("not a matrix from word.freq.matrix function")
-    }
-    if (comment(wfm.object) != "true.matrix") {
-        wfm.object <- wfm.object[-c(nrow(wfm.object)), -c(1, 
-            ncol(wfm.object))]
-        wfm.object <- t(wfm.object)
-    }
-    else {
-        wfm.object <- t(wfm.object)
-    }
-    x <- stats::dist(wfm.object, method = method, diag = diag, 
-        upper = upper, p = p)
-    return(round(x, digits = digits))
-  }
+\dontrun{
+with(DATA, dissimilarity(state, list(sex, adult)))
+with(DATA, dissimilarity(state, person, diag = TRUE))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\seealso{
+  \code{\link[stats]{dist}}
+}
+\keyword{correlation,}
+\keyword{dissimilarity}
+

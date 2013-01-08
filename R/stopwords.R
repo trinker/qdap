@@ -29,7 +29,7 @@
 #' @return Returns a vector of sentences, vector of words, or (default) a list 
 #' of vectors of words with stop words removed.  Output depends on supplied 
 #' arguments.
-#' @seealso \code{\link[qdap]{strip}, 
+#' @seealso \code{\link[qdap]{strip}}, 
 #' \code{\link[qdap]{bag.o.words}},
 #' \code{\link[tm]{stopwords}}
 #' @keywords stopwords

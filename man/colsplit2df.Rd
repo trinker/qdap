@@ -1,80 +1,47 @@
 \name{colsplit2df}
 \alias{colsplit2df}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Wrapper for colSplit that Returns a Data Frame
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\title{Wrapper for colSplit that Returns a Dataframe}
 \usage{
-colsplit2df(dataframe, column = 1, orig.keep = FALSE, ...)
+  colsplit2df(dataframe, splitcol = 1, new.names = NULL,
+    sep = ".", keep.orig = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{dataframe}{
-%%     ~~Describe \code{dataframe} here~~
-}
-  \item{column}{
-%%     ~~Describe \code{column} here~~
-}
-  \item{orig.keep}{
-%%     ~~Describe \code{orig.keep} here~~
-}
-  \item{\dots}{
-%%     ~~Describe \code{\dots} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{dataframe}{A dataframe with a column that has been
+  pasted together.}
+
+  \item{splitcol}{The name of the column that has been
+  pasted together.}
+
+  \item{new.names}{A character vector of new names to
+  assign to the columns. Default attempts to extract the
+  original names before the paste.}
+
+  \item{sep}{The character that used in \code{paste2} to
+  paste the columns.}
+
+  \item{orig.keep}{logical.  If TRUE the original pasted
+  column will be retained as well.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a dataframe with the pasted column cplit into new
+  columns.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Wrapper for \code{colSplit} that returns a dataframe.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (dataframe, column = 1, orig.keep = FALSE, ...) 
-{
-    nc <- if (!is.numeric(column)) {
-        match(column, names(dataframe))
-    }
-    else {
-        column
-    }
-    ncols <- colSplit(dataframe[, column, drop = FALSE], ...)
-    if (orig.keep) {
-        cbind(dataframe[, nc, drop = FALSE], ncols, dataframe[, 
-            -nc])
-    }
-    else {
-        cbind(ncols, dataframe[, -nc])
-    }
-  }
+\dontrun{
+CO2$`Plant&Type&Treatment` <- paste2(CO2[, 1:3])
+CO2 <- CO2[, -c(1:3)]
+head(colsplit2df(CO2, 3))
+head(colsplit2df(CO2, 3, qcv(A, B, C)))
+head(colsplit2df(CO2, 3, qcv(A, B, C), keep.orig=TRUE))
+head(colsplit2df(CO2, "Plant&Type&Treatment"))
+CO2 <- datasets::CO2
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\seealso{
+  \code{\link{colSplit}}, \code{\link{paste2}}
+}
+\keyword{column-split}
+

@@ -1,72 +1,34 @@
 \name{colSplit}
 \alias{colSplit}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Separate a Column Pasted by paste2
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\title{Separate a Column Pasted by paste2}
 \usage{
-colSplit(column, name.sep = "&", col.sep = ".")
+  colSplit(column, col.sep = ".", name.sep = "&")
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{column}{
-%%     ~~Describe \code{column} here~~
-}
-  \item{name.sep}{
-%%     ~~Describe \code{name.sep} here~~
-}
-  \item{col.sep}{
-%%     ~~Describe \code{col.sep} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{column}{The pasted vector.}
+
+  \item{col.sep}{The column separator used in
+  \code{paste2}.}
+
+  \item{name.sep}{Name separator used in the column
+  (internal use within \code{colsplit2df}).}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a dataframe of split columns.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Separates a \code{paste2} column into separate columns.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (column, name.sep = "&", col.sep = ".") 
-{
-    column <- as.data.frame(column)
-    svar <- strsplit(as.character(column[, 1]), col.sep, fixed = TRUE)
-    svar <- data.frame(do.call("rbind", svar))
-    if (length(unlist(strsplit(names(column), name.sep, fixed = TRUE))) > 
-        1) {
-        cn <- strsplit(names(column)[1], name.sep, fixed = TRUE)[[1]]
-        names(svar) <- cn
-    }
-    return(svar)
-  }
+\dontrun{
+(foo <- paste2(CO2[, 1:3]))
+colSplit(foo)
+(bar <- paste2(mtcars[, 1:3], sep="|"))
+colSplit(bar, col.sep = "|")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\seealso{
+  \code{\link{colsplit2df}}, \code{\link{paste2}}
+}
+\keyword{column-split}
+

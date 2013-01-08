@@ -7,8 +7,8 @@
 #' list for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
 #' @param stopwords A vector of stop words to remove.
-#' @param cut.n Cut off point for reduced frequency stop word list (rfswl)
-#' @param cap logical. If TRUE capitalizes words from the cap.list
+#' @param cut.n Cut off point for reduced frequency stop word list (rfswl).
+#' @param cap logical. If TRUE capitalizes words from the cap.list.
 #' @param cap.list Vector of words to capitalize.
 #' @param cap.I logical. If TRUE capitalizes words containing the personal 
 #' pronoun I.
@@ -22,8 +22,7 @@
 #' removed}
 #' \item{rfswl}{reduced frequency stopword word list; same as fswl but truncated 
 #' to n rows}
-#' @references A matrix of standard deviations of distances between codes
-#' @keywords word list
+#' @keywords word-list
 #' @export
 #' @examples
 #' \dontrun{

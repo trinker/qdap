@@ -1,181 +1,64 @@
 \name{word_list}
-\alias{qda}
-\alias{qda}
-\alias{print.qda}
-
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Transcript Apply Raw Word Lists and Frequency Counts
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\alias{word_list}
+\title{Raw Word Lists/Frequency Counts}
 \usage{
-qda(text.var, group.vars, stopwords = NULL, cut.n = 20, cap = TRUE, cap.list = NULL, cap.I = TRUE)
+  word_list(text.var, grouping.var = NULL,
+    stopwords = NULL, alphabetical = FALSE, cut.n = 20,
+    cap = TRUE, cap.list = NULL, cap.I = TRUE,
+    rm.bracket = TRUE, char.keep = NULL,
+    apostrophe.remove = FALSE, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{text.var}{
-%%     ~~Describe \code{text.var} here~~
-}
-  \item{group.vars}{
-%%     ~~Describe \code{group.vars} here~~
-}
-  \item{stopwords}{
-%%     ~~Describe \code{stopwords} here~~
-}
-  \item{cut.n}{
-%%     ~~Describe \code{cut.n} here~~
-}
-  \item{cap}{
-%%     ~~Describe \code{cap} here~~
-}
-  \item{cap.list}{
-%%     ~~Describe \code{cap.list} here~~
-}
-  \item{cap.I}{
-%%     ~~Describe \code{cap.I} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{text.var}{The text variable.}
+
+  \item{group.vars}{The grouping variables.  Default NULL
+  generates one word list for all text.  Also takes a
+  single grouping variable or a list of 1 or more grouping
+  variables.}
+
+  \item{stopwords}{A vector of stop words to remove.}
+
+  \item{cut.n}{Cut off point for reduced frequency stop
+  word list (rfswl).}
+
+  \item{cap}{logical. If TRUE capitalizes words from the
+  cap.list.}
+
+  \item{cap.list}{Vector of words to capitalize.}
+
+  \item{cap.I}{logical. If TRUE capitalizes words
+  containing the personal pronoun I.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  An object of class \code{"word.list"} is a list
+  containing at the following components:
+  \item{cwl}{complete word list; raw words} \item{swl}{stop
+  word list; same as rwl with stop words removed}
+  \item{fwl}{frequency word list; a data frame of words and
+  correspnding frequency counts} \item{fswl}{fequency
+  stopword word list; same as fwl but with stopwords
+  removed} \item{rfswl}{reduced frequency stopword word
+  list; same as fswl but truncated to n rows}
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Transcript Apply Raw Word Lists and Frequency Counts by
+  grouping variable(s).
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+XX <-word_list(raj.act.1$dialogue)
+names(XX)
+XX$cwl
+XX$swl
+XX$fwl
+XX$fswl
+XX$rfswl
 
-## The function is currently defined as
-function (text.var, group.vars, stopwords = NULL, cut.n = 20, 
-    cap = TRUE, cap.list = NULL, cap.I = TRUE) 
-{
-    upper <- function(x) paste(substring(x, 1, 1), substring(x, 
-        2, nchar(x)), sep = "")
-    Sw1 <- stopwords[!substring(stopwords, 1, 1) \%in\% LETTERS]
-    Sw2 <- stopwords[substring(stopwords, 1, 1) \%in\% LETTERS]
-    Sw3 <- paste(Sw2, "'s", sep = "")
-    stopwords <- c(Sw1, upper(Sw2), Sw2, tolower(Sw2), Sw3, tolower(Sw3))
-    group.var <- if (is.list(group.vars) & length(group.vars) > 
-        1) {
-        apply(data.frame(group.vars), 1, function(x) {
-            if (any(is.na(x))) {
-                NA
-            }
-            else {
-                paste(x, collapse = ".")
-            }
-        })
-    }
-    else {
-        group.vars
-    }
-    NAME <- if (is.list(group.vars)) {
-        m <- unlist(as.character(substitute(group.vars))[-1])
-        m <- sapply(strsplit(m, "$", fixed = TRUE), function(x) x[length(x)], 
-            USE.NAMES = FALSE)
-        paste(m, collapse = "&")
-    }
-    else {
-        G <- as.character(substitute(group.vars))
-        G[length(G)]
-    }
-    word.lists1 <- textLISTER(text.var = text.var, group.vars = group.var)
-    words.UNLISTED <- lapply(word.lists1, function(x) {
-        y <- unlist(x)
-        names(y) <- NULL
-        return(y)
-    })
-    if (cap) {
-        word.lists2 <- lapply(word.lists1, function(x) {
-            y <- capitalizer(x, caps.list = cap.list)
-            names(y) <- NULL
-            return(y)
-        })
-    }
-    else {
-        word.lists2 <- lapply(word.lists1, function(x) {
-            y <- unlist(x)
-            names(y) <- NULL
-            return(y)
-        })
-    }
-    naomit <- function(x) x[!is.na(x)]
-    word.lists2 <- lapply(word.lists2, naomit)
-    stopped.word.list <- lapply(words.UNLISTED, function(x) {
-        x[!x \%in\% stopwords]
-    })
-    stopped.word.list <- lapply(stopped.word.list, naomit)
-    stopped.word.list <- lapply(stopped.word.list, function(x) {
-        capitalizer(x, caps.list = cap.list)
-    })
-    COUNT <- function(x) {
-        DF <- data.frame(table(x))
-        names(DF) <- c("WORD", "FREQ")
-        DF$WORD <- as.character(DF$WORD)
-        DF$FREQ <- as.numeric(DF$FREQ)
-        DF <- DF[rev(order(DF$FREQ)), ]
-        rownames(DF) <- NULL
-        return(DF)
-    }
-    freq.word.list <- lapply(word.lists2, COUNT)
-    freq.stop.word.list <- lapply(stopped.word.list, COUNT)
-    red.freq.stop.word.list <- ncutWORDS(freq.stop.word.list, 
-        cut.n = cut.n)
-    word.lists2 <- lapply(word.lists2, function(x) {
-        comment(x) <- "bagOwords"
-        return(x)
-    })
-    stopped.word.list <- lapply(stopped.word.list, function(x) {
-        comment(x) <- "bagOwords"
-        return(x)
-    })
-    freq.word.list <- lapply(freq.word.list, function(x) {
-        comment(x) <- "freqList"
-        return(x)
-    })
-    freq.stop.word.list <- lapply(freq.stop.word.list, function(x) {
-        comment(x) <- "freqList"
-        return(x)
-    })
-    red.freq.stop.word.list <- lapply(red.freq.stop.word.list, 
-        function(x) {
-            comment(x) <- "freqList"
-            return(x)
-        })
-    comment(word.lists2) <- "cwl"
-    comment(stopped.word.list) <- "swl"
-    comment(freq.word.list) <- "fwl"
-    comment(freq.stop.word.list) <- "fswl"
-    comment(red.freq.stop.word.list) <- "rfswl"
-    o <- list(cwl = word.lists2, swl = stopped.word.list, fwl = freq.word.list, 
-        fswl = freq.stop.word.list, rfswl = red.freq.stop.word.list)
-    class(o) <- "qda"
-    return(o)
-  }
+with(raj, word_list(text.var = dialogue, grouping.var = list(person, act)))
+with(DATA, word_list(state, person))
+with(DATA, word_list(state, person, stopwords = Top25Words))
+with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\keyword{word-list}
+

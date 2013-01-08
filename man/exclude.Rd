@@ -1,63 +1,35 @@
 \name{exclude}
 \alias{exclude}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Quickly exclude words from a word list
-}
-\description{
-Quickly exclude words from a word list
-}
+\title{Exclude Elements From a Vector}
 \usage{
-exclude(word.list, ...)
+  exclude(word.list, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{word.list}{
-%%     ~~Describe \code{word.list} here~~
-}
-  \item{\dots}{
-%%     ~~Describe \code{\dots} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{word.list}{A list of words/terms to exclude from.}
+
+  \item{\dots}{A vector or sinle length objects to be
+  excluded from the word.list.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a vector with the excluded terms removed.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Quickly exclude words from a word list
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+Top25Words
+exclude(Top25Words, qcv(the, of, and))
+exclude(Top25Words, "the", "of", "an")
+exclude(1:10, 3, 4)
+exclude(1:10, 3:4)
 
-## The function is currently defined as
-function (word.list, ...) 
-{
-    mf <- match.call(expand.dots = FALSE)
-    excluded <- as.character(mf[[3]])
-    word.list[!word.list \%in\% excluded]
-  }
+#Using with term.match and termco.a
+exclude(term.match(DATA$state, qcv(th), FALSE), "truth")
+termco.a(DATA$state, DATA$person, exclude(term.match(DATA$state, qcv(th),
+    FALSE), "truth"))
+MTCH.LST <- exclude(term.match(DATA$state, qcv(th, i)), qcv(truth, stinks))
+termco.a(DATA$state, DATA$person, MTCH.LST)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+

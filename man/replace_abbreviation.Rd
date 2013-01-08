@@ -1,117 +1,54 @@
 \name{replace_abbreviation}
 \alias{replace_abbreviation}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Replace Abbreviated Words
-}
-\description{
-Replaces abbreviated words in preparation for sentSplit.
-}
+\title{Replace Abbreviations}
 \usage{
-abbreviation_replace(text.var, abbreviation = NULL, replace = NULL, ignore.case = TRUE)
+  replace_abbreviation(text.var,
+    abbreviation = qdap::abbreviations, replace = NULL,
+    ignore.case = TRUE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{text.var}{
-%%     ~~Describe \code{text.var} here~~
-}
-  \item{abbreviation}{
-%%     ~~Describe \code{abbreviation} here~~
-}
-  \item{replace}{
-%%     ~~Describe \code{replace} here~~
-}
-  \item{ignore.case}{
-%%     ~~Describe \code{ignore.case} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{text.var}{The text variable.}
+
+  \item{abbreviation}{A two column key of abbreviations
+  (column 1) and long form replacements (column 2) or a
+  vector of abbeviations.  Default is to use qdap's
+  abbreviations data set.}
+
+  \item{replace}{A vector of long form replacements if a
+  data frame is not supplied to the abbreviation argument.}
+
+  \item{ignore.case}{logical.  If TRUE replaces without
+  regard to capitalization.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a vector with abbreviations replaced.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  This function replaces abbreviations with long form.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+x <- c("Mr. Jones is here at 7:30 p.m.",
+    "Check it out at www.github.com/trinker/qdap",
+    "i.e. He's a sr. dr.; the best in 2012 A.D.",
+    "the robot at t.s. is 10ft. 3in.")
 
-## The function is currently defined as
-function (text.var, abbreviation = NULL, replace = NULL, ignore.case = TRUE) 
-{
-    if (is.null(abbreviation)) {
-        abbreviation <- abbreviations
-    }
-    if (!is.null(replace)) {
-        ab <- data.frame(abv = abbreviation, repl = replace)
-    }
-    else {
-        if (is.list(abbreviation)) {
-            ab <- data.frame(abv = c("Mr.", "Mrs.", "Ms.", "www.", 
-                ".com", "i.e.", "A.D.", "B.C.", "A.M.", "P.M.", 
-                "et al."), rep = c("Mister", "Misses", "Miss", 
-                "dot com", "www dot", "ie", "AD", "BC", "AM", 
-                "PM", "et al"))
-        }
-        else {
-            stop("must supply vector of abbreviations and vector of replacements")
-        }
-    }
-    if (ignore.case) {
-        ab[, 1] <- tolower(ab[, 1])
-        caps <- function(string, all = FALSE) {
-            capit <- function(x) paste0(toupper(substring(x, 
-                1, 1)), substring(x, 2))
-            if (all) {
-                x <- paste(unlist(lapply(strsplit(string, " "), 
-                  capit)), collapse = " ")
-                y <- paste(unlist(lapply(strsplit(x, NULL), capit)), 
-                  collapse = "")
-                x <- c(x, y)
-            }
-            else {
-                x <- capit(string)
-            }
-            return(x)
-        }
-        ab2 <- do.call(rbind, list(ab, ab))
-        temp <- unlist(lapply(ab2[, 1], caps, TRUE))
-        ab2[, 1] <- temp[1:(length(temp)/2)]
-        ab <- data.frame(rbind(ab, ab2))
-        ab[, 2] <- spaste(ab[, 2])
-    }
-    text.var <- Trim(text.var)
-    pn <- which(substring(text.var, nchar(text.var)) == ".")
-    text.var <- mgsub(ab[, 1], ab[, 2], text.var)
-    x <- Trim(gsub("\\s+", " ", text.var))
-    x[pn] <- sapply(x[pn], function(z) {
-        if (substring(z, nchar(z)) != ".") {
-            paste(z, ".", sep = "")
-        }
-    }, USE.NAMES = FALSE)
-    return(scrubber(x))
-  }
+replace_abbreviation(x)
+
+#create abbreviation and replacement vectors
+abv <- c("in.", "ft.", "t.s.")
+repl <- c("inch", "feet", "talkstats")
+
+replace_abbreviation(x, abv, repl)
+
+KEY <- rbind(abbreviations, data.frame(abv = abv, rep = repl))
+replace_abbreviation(x, KEY)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\seealso{
+  \code{\link[qdap]{bracketX}}, \code{\link[qdap]{qprep}},
+  \code{\link[qdap]{replace_number}},
+  \code{\link[qdap]{replace_symbol}}
+}
+\keyword{abbreviation}
+

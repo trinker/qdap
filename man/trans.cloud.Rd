@@ -1,279 +1,147 @@
 \name{trans.cloud}
 \alias{trans.cloud}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Generate Word Clouds by Grouping Variable
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\title{Word Clouds by Grouping Variable}
 \usage{
-trans.cloud(word.list, stem = FALSE, target.words = NULL, stopwords = NULL, min.freq = 1, caps = TRUE, caps.list = NULL, random.order = FALSE, rot.per = 0.5, cloud.colors = NULL, cloud.font = NULL, title.font = NULL, title.color = NULL, title.padj = -4.5, title.location = 3, title.cex = NULL, proportional = FALSE, max.word.size = NULL, min.word.size = 0.5, legend = NULL, legend.cex = 0.8, legend.location = c(-0.03, 1.03))
+  trans.cloud(text.var = NULL, grouping.var = NULL,
+    word.list = NULL, stem = FALSE, target.words = NULL,
+    expand.target = TRUE, target.exclude = NULL,
+    stopwords = NULL, min.freq = 1, caps = TRUE,
+    caps.list = NULL, random.order = FALSE, rot.per = 0,
+    cloud.colors = NULL, title = TRUE, cloud.font = NULL,
+    title.font = NULL, title.color = "black",
+    title.padj = -4.5, title.location = 3,
+    title.cex = NULL, title.names = NULL,
+    proportional = FALSE, max.word.size = NULL,
+    min.word.size = 0.5, legend = NULL, legend.cex = 0.8,
+    legend.location = c(-0.03, 1.03), char.keep = NULL,
+    char2space = NULL, ...)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{word.list}{
-%%     ~~Describe \code{word.list} here~~
-}
-  \item{stem}{
-%%     ~~Describe \code{stem} here~~
-}
-  \item{target.words}{
-%%     ~~Describe \code{target.words} here~~
-}
-  \item{stopwords}{
-%%     ~~Describe \code{stopwords} here~~
-}
-  \item{min.freq}{
-%%     ~~Describe \code{min.freq} here~~
-}
-  \item{caps}{
-%%     ~~Describe \code{caps} here~~
-}
-  \item{caps.list}{
-%%     ~~Describe \code{caps.list} here~~
-}
-  \item{random.order}{
-%%     ~~Describe \code{random.order} here~~
-}
-  \item{rot.per}{
-%%     ~~Describe \code{rot.per} here~~
-}
-  \item{cloud.colors}{
-%%     ~~Describe \code{cloud.colors} here~~
-}
-  \item{cloud.font}{
-%%     ~~Describe \code{cloud.font} here~~
-}
-  \item{title.font}{
-%%     ~~Describe \code{title.font} here~~
-}
-  \item{title.color}{
-%%     ~~Describe \code{title.color} here~~
-}
-  \item{title.padj}{
-%%     ~~Describe \code{title.padj} here~~
-}
-  \item{title.location}{
-%%     ~~Describe \code{title.location} here~~
-}
-  \item{title.cex}{
-%%     ~~Describe \code{title.cex} here~~
-}
-  \item{proportional}{
-%%     ~~Describe \code{proportional} here~~
-}
-  \item{max.word.size}{
-%%     ~~Describe \code{max.word.size} here~~
-}
-  \item{min.word.size}{
-%%     ~~Describe \code{min.word.size} here~~
-}
-  \item{legend}{
-%%     ~~Describe \code{legend} here~~
-}
-  \item{legend.cex}{
-%%     ~~Describe \code{legend.cex} here~~
-}
-  \item{legend.location}{
-%%     ~~Describe \code{legend.location} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{text.var}{The text variable.}
+
+  \item{grouping.var}{The grouping variables.  Default NULL
+  generates one output for all text.  Also takes a single
+  grouping variable or a list of 1 or more grouping
+  variables.}
+
+  \item{word.list}{A frequency word list passed from
+  \code{\link[qdap]{word_list}}.}
+
+  \item{stem}{logical.  If TRUE the \code{text.var} will be
+  stemmed.}
+
+  \item{target.words}{A named list of vectors of words
+  whose length corresponds to \code{cloud.colors} (+1
+  length in cloud colors for non matched terms).}
+
+  \item{expand.target}{logical.  If TRUE agrep will be used
+  to expand the \code{target.words}.}
+
+  \item{target.exclude}{A vector of words to exclude from
+  the \code{target.words}.}
+
+  \item{stopwords}{Words to exclude from the cloud.}
+
+  \item{min.freq}{An integer value indicating the minimum
+  frequency a word must appear to be included.}
+
+  \item{caps}{logical.  If TRUE selected words will be
+  capitalized.}
+
+  \item{caps.list}{A vector of words to capitalize
+  (\code{caps} must be TRUE).}
+
+  \item{random.order}{Plot words in random order. If false,
+  they will be plotted in decreasing frequency.}
+
+  \item{rot.per}{Proportion words with 90 degree rotation.}
+
+  \item{cloud.colors}{A vector of colors equal to the
+  length of target words +1.}
+
+  \item{title}{logical.  IF TRUE adds a title corresponding
+  to the \code{grouping.var}.}
+
+  \item{cloud.font}{The font family of the cloud text.}
+
+  \item{title.font}{The font family of the cloud title.}
+
+  \item{title.color}{A character vector of length one
+  corresponding to the color of the title.}
+
+  \item{title.padj}{Adjustment for the title. For strings
+  parallel to the axes, padj = 0 means right or top
+  alignment, and padj = 1 means left or bottom alignment.}
+
+  \item{title.location}{On which side of the plot
+  (1=bottom, 2=left, 3=top, 4=right).}
+
+  \item{title.cex}{Character expansion factor for the
+  title. NULL and NA are equivalent to 1.0.}
+
+  \item{title.names}{Optional vector of title names equal
+  in length to the grouping.var that will overide the
+  default use of the grouping.var names.}
+
+  \item{proportional}{logical.  If TRUE scales the word
+  clouds across grouping.var to allow cloud to cloud
+  comparisons.}
+
+  \item{max.word.size}{A size argument to control the
+  minimum size of the words.}
+
+  \item{min.word.size}{A size argument to control the
+  maximum size of the words.}
+
+  \item{legend}{A character vector of names corresponding
+  to the number of vectors in target.words.}
+
+  \item{legend.cex}{Character expansion factor for the
+  legend. NULL and NA are equivalent to 1.0.}
+
+  \item{legend.location}{The x and y co-ordinates to be
+  used to position the legend.}
+
+  \item{char.keep}{A character vector of symbol character
+  (i.e. punctioation) that strip should keep.  The default
+  is to strip everything except apostophes. This enables
+  the use of special characters to be turned into spaces or
+  for characters to be retained.}
+
+  \item{char2space}{A vector of charaacters to be turned
+  into spaces.  If \code{char.keep} is NULL,
+  \code{char2space} will activate this argument.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a series of word cloud plots with target words
+  (themes) colored.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Produces word clouds with optional theme coloring by
+  grouping variable.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+terms <- list(
+    I=c("i", "i'm"),
+    mal=qcv(stinks, dumb, distrust),
+    articles=qcv(the, a, an),
+    pronoun=qcv(we, you)
+)
 
-## The function is currently defined as
-function (word.list, stem = FALSE, target.words = NULL, stopwords = NULL, 
-    min.freq = 1, caps = TRUE, caps.list = NULL, random.order = FALSE, 
-    rot.per = 0.5, cloud.colors = NULL, cloud.font = NULL, title.font = NULL, 
-    title.color = NULL, title.padj = -4.5, title.location = 3, 
-    title.cex = NULL, proportional = FALSE, max.word.size = NULL, 
-    min.word.size = 0.5, legend = NULL, legend.cex = 0.8, legend.location = c(-0.03, 
-        1.03)) 
-{
-    suppressWarnings(require(wordcloud))
-    PRO <- if (length(word.list) > 1) {
-        max(sapply(word.list, length))
-    }
-    else {
-        length(word.list)
-    }
-    word.list <- if (is.null(comment(word.list))) {
-        word.list
-    }
-    else {
-        if (comment(word.list) \%in\% "bagOwords") {
-            word.list
-        }
-        else {
-            if (comment(word.list) \%in\% "freqList") {
-                freqTab2words(word.list)
-            }
-            else {
-                lapply(word.list, qda.handler)
-            }
-        }
-    }
-    CLOUD <- function(words, stem, target.words, stopwords, min.freq, 
-        word.size, word.size2, random.order, cloud.colors, caps, 
-        caps.list, title.color, text, side, PRO, proportional, 
-        font, title.font, title.cex, legend, legend.cex, legend.location) {
-        target.words <- if (is.list(target.words) & length(target.words) == 
-            1) {
-            unlist(target.words)
-        }
-        else {
-            target.words
-        }
-        TWstatus <- is.vector(target.words) & !is.list(target.words)
-        target.words <- if (is.vector(target.words) & !is.list(target.words)) {
-            list(target.words)
-        }
-        else {
-            target.words
-        }
-        if ((length(target.words) + 1) != length(cloud.colors) & 
-            !is.null(cloud.colors)) {
-            stop("length(cloud.colors) should = length(target.words) + 1")
-        }
-        df <- if (stem) {
-            require(tm)
-            require(Snowball)
-            tm::stemDocument(words)
-        }
-        else {
-            words
-        }
-        df <- if (!is.null(stopwords)) 
-            df[!df \%in\% stopwords]
-        else df
-        df <- if (caps) 
-            capitalizer(df, caps.list)
-        else df
-        df2 <- as.data.frame(table(df), stringsAsFactors = FALSE)
-        names(df2) <- c("word", "freq")
-        df2$freq <- if (proportional) 
-            floor((PRO/length(words)) * df2$freq)
-        else df2$freq
-        COL1 <- if (stem & !is.null(target.words)) {
-            sapply(target.words, tm::stemDocument)
-        }
-        else {
-            if (!stem & !is.null(target.words)) {
-                target.words
-            }
-            else {
-                NULL
-            }
-        }
-        COL1 <- if (!is.null(target.words)) {
-            capitalize <- function(x) {
-                simpleCap <- function(x) {
-                  s <- strsplit(x, " ")[[1]]
-                  paste(toupper(substring(s, 1, 1)), substring(s, 
-                    2), sep = "", collapse = " ")
-                }
-                unlist(lapply(x, simpleCap))
-            }
-            FUN <- function(x) c(tolower(x), capitalize(x))
-            sapply(COL1, FUN)
-        }
-        else {
-            NULL
-        }
-        text2color <- function(text, words, colors, nomatch) {
-            lookup <- lapply(seq_along(words), function(n) cbind(words[[n]], 
-                colors[n]))
-            lookup <- do.call("rbind.data.frame", lookup)
-            lookup <- apply(lookup, 2, as.character)
-            recode <- lookup[match(text, lookup[, 1]), 2]
-            recode[is.na(recode)] <- nomatch
-            return(recode)
-        }
-        COL <- if (is.null(cloud.colors)) {
-            rep("black", length(df2$word))
-        }
-        else {
-            ncc <- length(cloud.colors)
-            if (TWstatus) {
-                text2color(text = df2$word, words = list(c(COL1)), 
-                  colors = cloud.colors[-ncc], nomatch = cloud.colors[ncc])
-            }
-            else {
-                text2color(text = df2$word, words = COL1, colors = cloud.colors[-ncc], 
-                  nomatch = cloud.colors[ncc])
-            }
-        }
-        Scale <- if (!is.null(word.size2)) {
-            word.size2
-        }
-        else {
-            if (is.null(word.size2) & proportional) {
-                3
-            }
-            else {
-                mean(df2[, 2] + 1)
-            }
-        }
-        if (dev.interactive()) 
-            dev.new()
-        wordcloud::wordcloud(df2[, 1], df2[, 2], colors = COL, 
-            rot.per = rot.per, min.freq = min.freq, ordered.colors = TRUE, 
-            vfont = font, random.order = random.order, scale = c(Scale, 
-                word.size))
-        if (!is.null(title.color)) {
-            mtext(text, side = side, padj = title.padj, col = title.color, 
-                family = title.font, cex = title.cex)
-        }
-        if (!is.null(legend)) {
-            par(mar = rep(0, 4), xpd = NA)
-            legend(x = legend.location[1], y = legend.location[2], 
-                cex = legend.cex, legend = legend, fill = cloud.colors[1:length(legend)])
-            par(mar = c(5, 4, 4, 2) + 0.1, xpd = TRUE)
-        }
-    }
-    word.list <- if (!is.list(word.list)) 
-        list(word.list)
-    else word.list
-    lapply(seq_along(word.list), function(i) CLOUD(words = word.list[[i]], 
-        stem = stem, target.words = target.words, stopwords = stopwords, 
-        proportional = proportional, PRO = PRO, word.size2 = max.word.size, 
-        min.freq = min.freq, word.size = min.word.size, random.order = random.order, 
-        cloud.colors = cloud.colors, caps = caps, caps.list = caps.list, 
-        font = cloud.font, title.font = title.font, title.cex = title.cex, 
-        title.color = title.color, side = title.location, legend = legend, 
-        legend.cex = legend.cex, legend.location = legend.location, 
-        text = names(word.list)[i]))
-  }
+with(DATA, trans.cloud(state, person, target.words=terms,
+    cloud.colors=qcv(red, green, blue, black, gray65),
+    expand.target=FALSE, proportional=TRUE))
+
+with(DATA, trans.cloud(state, person, target.words=terms,
+    stopwords=exclude(with(DATA, unique(bag.o.words(state))),
+        unique(unlist(terms))),
+    cloud.colors=qcv(red, green, blue, black, gray65),
+    expand.target=FALSE, proportional=TRUE))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\seealso{
+  \code{\link[wordcloud]{wordcloud}}
+}
+\keyword{wordcloud}
+

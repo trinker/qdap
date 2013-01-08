@@ -1,72 +1,35 @@
 \name{NAer}
 \alias{NAer}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Replace Missing Values (NA)
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\title{Replace Missing Values (NA)}
 \usage{
-NAer(x, replace = 0)
+  NAer(x, replace = 0)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{x}{
-%%     ~~Describe \code{x} here~~
-}
-  \item{replace}{
-%%     ~~Describe \code{replace} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{x}{A vector or dataframe with missing values
+  (\code{NA}).}
+
+  \item{replace}{The value to replace missing values
+  (\code{NA}) with.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a vector or dataframe with missing values
+  replaced.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Replace missing values (\code{NA}) in a vector or
+  dataframe.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+set.seed(10)
+x <- sample(c(rep(NA, 4), 1:10), 20, rep=T)
+y <- data.frame(matrix(x, 5, 4))
+names(y) <- paste('var', 1:4, sep="_")
 
-## The function is currently defined as
-function (x, replace = 0) 
-{
-    if (is.vector(x)) {
-        x[is.na(x)] <- replace
-        return(x)
-    }
-    else {
-        y <- apply(x, 1, function(x) {
-            x[is.na(x)] <- replace
-            return(x)
-        })
-        y <- data.frame(t(y))
-        return(y)
-    }
-  }
+NAer(x)
+NAer(y)
+NAer(y, "MISSING")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\keyword{missing-value}
+

@@ -1,82 +1,66 @@
 \name{cm_combine.dummy}
 \alias{cm_combine.dummy}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Find Co-occurrence Between Codes
-}
-\description{
-Combines code columns where they co-occur
-}
+\title{Find Co-occurrence Between Codes}
 \usage{
-cm_combine.dummy(cm.l2d.obj, combine.code, rm.var = "time")
+  cm_combine.dummy(cm.l2d.obj, combine.code,
+    rm.var = "time", overlap = TRUE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{cm.l2d.obj}{
-%%     ~~Describe \code{cm.l2d.obj} here~~
-}
-  \item{combine.code}{
-%%     ~~Describe \code{combine.code} here~~
-}
-  \item{rm.var}{
-%%     ~~Describe \code{rm.var} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{cm.l2d.obj}{An object from cm_long2dummy}
+
+  \item{combine.code}{A list of named character vertors of
+  at least two code column names to combine}
+
+  \item{rm.var}{Name of the repeated measures column.
+  Default is "time".}
+
+  \item{overlap}{logical, integer or character of binary
+  operator + integer. If TRUE finds the overlap.  If FALSE
+  finds anywhere any of the codes occur. If integer finds
+  that exact combination of overlaps.  If character must be
+  a logical vector c(>, <, =<, =>, ==, !=) followed by an
+  integer.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a dataframe with co-occurrences of provided code
+  columns.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Combine code columns where they co-occur.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+foo <- list(
+    AA = qcv(terms='1:10'),
+    BB = qcv(terms='1:2, 3:10, 19'),
+    CC = qcv(terms='1:3, 5:6')
+)
 
-## The function is currently defined as
-function (cm.l2d.obj, combine.code, rm.var = "time") 
-{
-    if (is.data.frame(cm.l2d.obj)) {
-        NMS <- as.character(substitute(cm.l2d.obj))
-        cm.l2d.obj <- list(cm.l2d.obj)
-        names(cm.l2d.obj) <- NMS
-    }
-    invisible(lapply(seq_along(cm.l2d.obj), function(i) {
-        cm.l2d.obj[[i]][, rm.var] <<- names(cm.l2d.obj)[i]
-    }))
-    DF <- data.frame(do.call(rbind, cm.l2d.obj), row.names = NULL)
-    if (!is.list(combine.code)) {
-        combine.code <- list(combine.code)
-    }
-    NEW <- lapply(seq_along(combine.code), function(i) {
-        as.numeric(rowSums(DF[, c(combine.code[[i]])]) == length(combine.code[[i]]))
-    })
-    names(NEW) <- names(combine.code)
-    tv <- ncol(DF)
-    data.frame(DF[, -tv, drop = FALSE], do.call(cbind, NEW), 
-        DF[, tv, drop = FALSE])
-  }
+foo2  <- list(
+    AA = qcv(terms='4:8'),
+    BB = qcv(terms='10:12'),
+    CC = qcv(terms='1, 11, 15:20'),
+    DD = qcv(terms='')
+)
+
+x <- cm_range2long(foo)
+D1 <- cm_long2dummy(x)
+
+z <- cm_range2long(foo, foo2, v.name="time")
+D2 <- cm_long2dummy(z, "time")
+cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)))
+cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)), overlap="==1")
+cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)), overlap="!=1")
+D1 <- cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)), overlap=0)
+D1 <- cm_combine.dummy(D1, combine.code = list(CAB=qcv(AB, CC)), overlap=FALSE)
+
+combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
+cm_combine.dummy(D1, combine.code = combines)
+cm_combine.dummy(D2, combine.code = combines)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\seealso{
+  \code{\link[qdap]{cm_long2dummy}}
+}
+\keyword{co-occurence}
+

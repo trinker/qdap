@@ -5,7 +5,7 @@
 #' 
 #' @param text.var  The text variable.
 #' @param dollar logical.  If TRUE replaces dollar sign ($) with \code{"dollar"}.
-#' @param percent logical.  If TRUE replaces percent sign (%) with \code{"percent"}.
+#' @param percent logical.  If TRUE replaces percent sign (\%) with \code{"percent"}.
 #' @param pound logical.  If TRUE replaces pound sign (#) with \code{"number"}.
 #' @param atlogical.  If TRUE replaces at sign (@@) with \code{"at"}.
 #' @param and logical.  If TRUE replaces and sign (&) with \code{"and"}.
@@ -20,7 +20,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' x <- c("I am @ Jon's & Jim's w/ Marry", "I owe $41 for food", "two is 10% 
+#' x <- c("I am @@ Jon's & Jim's w/ Marry", "I owe $41 for food", "two is 10% 
 #'     of a #")
 #' replace_symbol(x)
 #' }

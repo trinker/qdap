@@ -1,95 +1,49 @@
 \name{lookup}
 \alias{lookup}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-An environment based lookup 
-}
-\description{
-An fast environment based lookup (hash table)
-}
+\title{Hash Table/Dictionary Lookup}
 \usage{
-lookup(terms, key.match, key.reassign = NULL, missing = NA)
+  lookup(terms, key.match, key.reassign = NULL,
+    missing = NA)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{terms}{
-%%     ~~Describe \code{terms} here~~
-}
-  \item{key.match}{
-%%     ~~Describe \code{key.match} here~~
-}
-  \item{key.reassign}{
-%%     ~~Describe \code{key.reassign} here~~
-}
-  \item{missing}{
-%%     ~~Describe \code{missing} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{terms}{A vector of terms to undergo a lookup.}
+
+  \item{key.match}{Either a two column data frame (if data
+  frame supplied no key reassign needed) of a match key and
+  reassignment column or a single vector match key.}
+
+  \item{key.reassign}{A single reassingment vector supplied
+  if key.match is not a two column data frame.}
+
+  \item{missing}{Value to assign to terms not matching the
+  key.match.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Outputs A new vector with reassigned values.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Environment based hash table useful for large vector
+  lookups.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+lookup(mtcars$carb, sort(unique(mtcars$carb)),
+    c('one', 'two', 'three', 'four', 'six', 'eight'))
+lookup(mtcars$carb, sort(unique(mtcars$carb)),
+    seq(10, 60, by=10))
 
-## The function is currently defined as
-function (terms, key.match, key.reassign = NULL, missing = NA) 
-{
-    hash <- function(x, mode.out) {
-        e <- new.env(hash = TRUE, size = nrow(x), parent = emptyenv())
-        FUN <- paste0("as.", mode.out)
-        FUN <- match.fun(FUN)
-        apply(x, 1, function(col) assign(col[1], FUN(col[2]), 
-            envir = e))
-        return(e)
-    }
-    if (is.null(key.reassign)) {
-        mode.out <- mode(key.match[, 2])
-        DF <- key.match
-        DF[, 1] <- as.character(DF[, 1])
-    }
-    else {
-        mode.out <- mode(key.reassign)
-        DF <- data.frame(as.character(key.match), key.reassign)
-    }
-    KEY <- hash(DF, mode.out = mode.out)
-    recoder <- function(x, env, missing) {
-        x <- as.character(x)
-        rc <- function(x) {
-            if (exists(x, env = env)) 
-                get(x, e = env)
-            else missing
-        }
-        sapply(x, rc, USE.NAMES = FALSE)
-    }
-    x <- recoder(terms, KEY, missing = missing)
-    return(x)
-  }
+key <- data.frame(x=1:2, y=c("A", "B"))
+big.vec <- sample(1:2, 3000000, T)
+lookup(big.vec, key)
+
+lookup(1:5, data.frame(1:4, 11:14))
+lookup(LETTERS[1:5], data.frame(LETTERS[1:5], 100:104))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\seealso{
+  \code{\link[base]{new.env}}
+}
+\keyword{dictionary,}
+\keyword{hash,}
+\keyword{lookup}
+

@@ -1,100 +1,68 @@
 \name{cm_df2long}
 \alias{cm_df2long}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Transform Codes to Start-End Durations
-}
-\description{
-Transforms the range coding structure(s) from cm_df.temp (in list format) into a data frame of start and end durations in long format.
-}
+\title{Transform Codes to Start-End Durations}
 \usage{
-cm_df2long(df.temp.obj, v.name = "variable", list.var = TRUE, code.vars = NULL, no.code = NA, add.start.end = TRUE, repeat.vars = NULL, rev.code = FALSE)
+  cm_df2long(df.temp.obj, v.name = "variable",
+    list.var = TRUE, code.vars = NULL, no.code = NA,
+    add.start.end = TRUE, repeat.vars = NULL,
+    rev.code = FALSE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{df.temp.obj}{
-%%     ~~Describe \code{df.temp.obj} here~~
-}
-  \item{v.name}{
-%%     ~~Describe \code{v.name} here~~
-}
-  \item{list.var}{
-%%     ~~Describe \code{list.var} here~~
-}
-  \item{code.vars}{
-%%     ~~Describe \code{code.vars} here~~
-}
-  \item{no.code}{
-%%     ~~Describe \code{no.code} here~~
-}
-  \item{add.start.end}{
-%%     ~~Describe \code{add.start.end} here~~
-}
-  \item{repeat.vars}{
-%%     ~~Describe \code{repeat.vars} here~~
-}
-  \item{rev.code}{
-%%     ~~Describe \code{rev.code} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{df.temp.obj}{a character vector of names of
+  object(s) created by cm_df.temp, a list of cm_df.temp
+  created objects or a data frame created by cm_df.temp.}
+
+  \item{v.name}{sn optional name for the column created for
+  the list.var argument}
+
+  \item{list.var}{logical.  If TRUE creates a column for
+  the data frame created by each time.list passed to
+  cm_t2l}
+
+  \item{code.vars}{a character vector of code variables.
+  If NULL uses all variables from the first column after
+  the column named word.num.}
+
+  \item{no.code}{the value to assign to no code; default is
+  NA}
+
+  \item{add.start.end}{logical.  If TURE adds a column for
+  start and end times}
+
+  \item{repeat.vars}{a character vector of repeated/stacked
+  variables.  If NULL uses all non code.vars variables.}
+
+  \item{rev.code}{logical.  If TRUE reverses the order of
+  code.vars and no.code varaibles.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Generates a data frame of start and end times for each
+  code.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\description{
+  Transforms the range coding structure(s) from
+  \code{cm_df.temp} (in list format) into a data frame of
+  start and end durations in long format.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (df.temp.obj, v.name = "variable", list.var = TRUE, 
-    code.vars = NULL, no.code = NA, add.start.end = TRUE, repeat.vars = NULL, 
-    rev.code = FALSE) 
-{
-    objs <- df.temp.obj
-    L1 <- lapply(objs, get)
-    names(L1) <- objs
-    if (is.null(code.vars)) {
-        code.vars <- which(colnames(L1[[1]]) == "word.num"):ncol(L1[[1]])
-    }
-    L2 <- lapply(L1, function(x) {
-        cm_d2l(x, code.vars = code.vars, no.code = no.code, add.start.end = add.start.end, 
-            repeat.vars = repeat.vars, rev.code = rev.code)
-    })
-    if (list.var) {
-        L2 <- lapply(seq_along(L2), function(i) data.frame(L2[[i]], 
-            VAR = objs[i]))
-    }
-    DF <- data.frame(do.call(rbind, L2), row.names = NULL)
-    if (list.var) {
-        colnames(DF)[ncol(DF)] <- v.name
-    }
-    comment(DF) <- "cmrange"
-    DF
-  }
+\dontrun{
+#' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
+x1 <- cm_df.temp(DATA, "state", codes)
+cm_df2long(x1,  code.vars = codes)
+x1[, 7:14] <- lapply(7:14,  function(i) sample(0:1, nrow(x1), TRUE))
+cm_df2long(x1,  code.vars = codes)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\references{
+  Miles, M. B. & Huberman, A. M. (1994). An expanded
+  sourcebook: Qualitative data analysis. 2nd ed. Thousand
+  Oaks, CA: SAGE Publications.
+}
+\seealso{
+  \code{\link{cm_time2long}}, \code{\link{cm_range2long}},
+  \code{\link{cm_df.temp}}
+}
+\keyword{coding,}
+\keyword{span}
+\keyword{time}
+

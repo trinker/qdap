@@ -1,131 +1,105 @@
 \name{sentSplit}
+\alias{sentCombine}
 \alias{sentSplit}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-Split Sentences Into Individual Lines
-}
-\description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
-}
+\alias{TOT}
+\title{Sentence Splitting}
 \usage{
-sentSplit(dataframe, text.var, splitpoint = NULL, rnames = "numeric", text.place = "original")
+  sentSplit(dataframe, text.var,
+    endmarks = c("?", ".", "!", "|"),
+    incomplete.sub = TRUE, rm.bracket = TRUE,
+    stem.col = FALSE, text.place = "right", ...)
+
+  sentCombine(text.var, grouping.var = "person")
+
+  TOT(tot)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{dataframe}{
-%%     ~~Describe \code{dataframe} here~~
-}
-  \item{text.var}{
-%%     ~~Describe \code{text.var} here~~
-}
-  \item{splitpoint}{
-%%     ~~Describe \code{splitpoint} here~~
-}
-  \item{rnames}{
-%%     ~~Describe \code{rnames} here~~
-}
-  \item{text.place}{
-%%     ~~Describe \code{text.place} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{dataframe}{A dataframe that contains the person and
+  text variable.}
+
+  \item{text.var}{The text variable.}
+
+  \item{endmarks}{A character vector of endmarks to split
+  turns of talk into sentences.}
+
+  \item{incomplete.sub}{logical.  If TRUE detects
+  incomplete sentences and replaces with \code{"|"}.}
+
+  \item{rm.bracket}{logical.  If TRUE removes brackets from
+  the text.}
+
+  \item{stem.col}{logical.  If TRUE stems the text as a new
+  column.}
+
+  \item{text.place}{A character string giving placement
+  location of the text column. This must be one of the
+  strings \code{"original"}, \code{"right"} or
+  \code{"left"}.}
+
+  \item{\ldots}{Additional options passed to
+  \code{stem2df}.}
+
+  \item{grouping.var}{The grouping variable (usually
+  \code{"person"}).  Does not take multiple vectors as most
+  qdap functions do.}
+
+  \item{tot}{A tot column from a
+  \code{\link[qdap]{sentSplit}} output.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
-}
-\note{
-%%  ~~further notes~~
-}
+  \code{sentSplit} - returns a dataframe with turn of talk
+  broken apart into sentences.  Optionally a stemmed
+  version of the text variable may be returned as well.
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
+  \code{sentCombine} - returns a list of vectors with the
+  continuous sentences by grouping.var pasted together.
+  returned as well.
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  \code{TOT} - returns a numeric vector of the turns of
+  talk without sentence sub indexing (e.g. 3.2 become 3).
+}
+\description{
+  \code{sentSplit} - Splits turns of talk into individual
+  sentences (provided proper punctuation is used).  This
+  procedure is usually done as part of the data read in and
+  cleaning process.
+
+  \code{sentCombine} - Combines sentences by the same
+  grouping variable together.
+
+  \code{TOT} - Convert the tot column from
+  \code{\link[qdap]{sentSplit}} to turn of talk index (no
+  sub sentence).  Generally, for internal use.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+#sentSplit EXAMPLE:
+sentSplit(DATA, "state")
+sentSplit(DATA, "state", stem.col = FALSE)
+sentSplit(DATA, "state", text.place = "left")
+sentSplit(DATA, "state", text.place = "original")
+sentSplit(raj, "dialogue")
 
-## The function is currently defined as
-function (dataframe, text.var, splitpoint = NULL, rnames = "numeric", 
-    text.place = "original") 
-{
-    DF <- dataframe
-    if (length(DF) < 3) {
-        DF$EXTRA1x2 <- 1:nrow(DF)
-        DF$EXTRA2x2 <- 1:nrow(DF)
-    }
-    else {
-        DF
-    }
-    input <- as.character(substitute(text.var))
-    re <- ifelse(is.null(splitpoint), "[\\?\\.\\!]", as.character(substitute(splitpoint)))
-    RN <- as.character(substitute(rnames))
-    TP <- as.character(substitute(text.place))
-    TP <- "original"
-    breakinput <- function(input, re) {
-        j <- gregexpr(re, input)
-        lengths <- unlist(lapply(j, length))
-        spots <- lapply(j, as.numeric)
-        first <- unlist(lapply(spots, function(x) {
-            c(1, (x + 1)[-length(x)])
-        }))
-        last <- unlist(spots)
-        ans <- substring(rep(input, lengths), first, last)
-        return(list(text = ans, lengths = lengths))
-    }
-    j <- breakinput(DF[, input], re)
-    others <- DF[, -which(colnames(DF) \%in\% input), drop = FALSE]
-    idx <- rep(1:dim(others)[1], j$lengths)
-    ans <- data.frame(cbind(input = Trim(j$text), others[idx, 
-        ]))
-    colnames(ans)[1] <- input
-    x <- as.character(rownames(ans))
-    y <- strsplit(x, "\\.")
-    z <- sapply(y, function(x) as.numeric(x[2]))
-    z[is.na(z)] <- 0
-    z <- as.character(z + 1)
-    a <- sapply(y, function(x) x[1])
-    x <- paste(a, ".", z, sep = "")
-    rownames(ans) <- TOT <- x
-    if (RN == "numeric") {
-        rownames(ans) <- 1:nrow(ans)
-    }
-    if (TP == "original") {
-        ans <- ans[, colnames(DF)]
-    }
-    else {
-        if (TP == "right") {
-            ans <- data.frame(ans[, -1], ans[, 1])
-            colnames(ans) <- c(colnames(ans)[-ncol(ans)], input)
-        }
-        else {
-            if (TP == "left") {
-                ans
-            }
-        }
-    }
-    if (RN == "numeric") {
-        ans <- data.frame(tot = TOT, ans)
-    }
-    ans$EXTRA1x2 <- NULL
-    ans$EXTRA2x2 <- NULL
-    return(ans)
-  }
+#sentCombine EXAMPLE:
+dat <- sentSplit(DATA, "state", stem.col = FALSE)
+sentCombine(dat$state, dat$person)
+sentCombine(dat$state, dat$sex)
+
+#TOT EXAMPLE:
+dat <- sentSplit(DATA, "state", stem.col = FALSE)
+TOT(dat$tot)
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\author{
+  Dason Kurkiewicz and Tyler Rinker
+  <tyler.rinker@gmail.com>.
+}
+\seealso{
+  \code{\link[qdap]{bracketX}},
+  \code{\link[qdap]{incomplete.replace}},
+  \code{\link[qdap]{stem2df}} , \code{\link[qdap]{TOT}}
+}
+\keyword{sentence,}
+\keyword{split,}
+\keyword{turn-of-talk}
+

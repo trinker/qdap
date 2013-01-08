@@ -1,9 +1,9 @@
 #' Search For and Count Terms
 #' 
-#' \code{termco.a} - Search a transcript by any number of 
-#' grouping variables for categories (themes) of grouped root terms.  While 
-#' there are other termco functions in the termco family (i.e. \code{termco.d}) 
-#' \code{termco.a} is a wrapper for general use.
+#' \code{termco.a} - Search a transcript by any number of grouping variables for 
+#' categories (themes) of grouped root terms.  While there are other termco 
+#' functions in the termco family (i.e. \code{termco.d}) \code{termco.a} is a 
+#' wrapper for general use.
 #' 
 #' @param text.var The text variable.
 #' @param grouping.var The grouping variables.  Default NULL generates one word 
@@ -25,7 +25,7 @@
 #' that strip should keep.  The default is to strip everything except apostophes.
 #' @param digit.remove logical.  If TRUE strips digits from the text.
 #' @param \ldots Other argument supplied to strip.
-#' @return \code{termco.a} & \code{termco.d}} - both return a list, of class 
+#' @return \code{termco.a} & \code{termco.d} - both return a list, of class 
 #' "termco.d", of data frames and information regarding word counts:
 #' \item{raw}{raw word counts by grouping variable} 
 #' \item{prop}{proportional word counts by grouping variable; proportional to 
@@ -37,13 +37,13 @@
 #' \item{digits}{integer value od number of digits to display; mostly internal 
 #' use}  
 #' @rdname termco.a  
-#' @note The match.list/match.string is (optionally) case and character sensitive.  Spacing 
-#' is an important way to grab specific words and requires careful thought.  
-#' Using "read"will find the words "bread", "read" "reading", and "ready".  If 
-#' you want to search fo just the word "read" you'd supply a vector of 
-#' c(" read ", " reads", " reading", " reader").  To search for non character 
-#' arguments (i.e. numbers and symbols) additional arguments from strip must be 
-#' passed.
+#' @note The match.list/match.string is (optionally) case and character 
+#' sensitive.  Spacing is an important way to grab specific words and requires 
+#' careful thought.  Using "read"will find the words "bread", "read" "reading", 
+#' and "ready".  If you want to search fo just the word "read" you'd supply a 
+#' vector of c(" read ", " reads", " reading", " reader").  To search for non 
+#' character arguments (i.e. numbers and symbols) additional arguments from 
+#' strip must be passed.
 #' @seealso \code{\link[qdap]{termco_c}}
 #' @keywords word-search
 #' @export

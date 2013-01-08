@@ -1,131 +1,147 @@
 \name{gantt_wrap}
 \alias{gantt_wrap}
-%- Also NEED an '\alias' for EACH other topic documented here.
-\title{
-A ggplot2 Wrapper for Gantt Plots
-}
-\description{
-A ggplot2 wrapper for data frames produced from gantt and gantt_rep
-}
+\title{Gantt Plot}
 \usage{
-gantt.wrap(dataframe, plot.var, facet.vars = NULL, title = NULL, ylab = as.character(plot.var), xlab = "duration.defalut", rev.factor = TRUE, transform = FALSE, minor.line.freq = 5, major.line.freq = 25)
+  gantt_wrap(dataframe, plot.var, facet.vars = NULL,
+    fill.var = NULL, title = NULL,
+    ylab = as.character(plot.var),
+    xlab = "duration.default", rev.factor = TRUE,
+    transform = FALSE, ncol = NULL, minor.line.freq = NULL,
+    major.line.freq = NULL, sig.dig.line.freq = 1,
+    hms.scale = NULL, scale = NULL, space = NULL, size = 3,
+    rm.horiz.lines = FALSE, x.ticks = TRUE, y.ticks = TRUE,
+    legend.position = NULL, bar.color = NULL,
+    border.color = NULL, border.size = 2,
+    border.width = 0.1, constrain = TRUE)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{dataframe}{
-%%     ~~Describe \code{dataframe} here~~
-}
-  \item{plot.var}{
-%%     ~~Describe \code{plot.var} here~~
-}
-  \item{facet.vars}{
-%%     ~~Describe \code{facet.vars} here~~
-}
-  \item{title}{
-%%     ~~Describe \code{title} here~~
-}
-  \item{ylab}{
-%%     ~~Describe \code{ylab} here~~
-}
-  \item{xlab}{
-%%     ~~Describe \code{xlab} here~~
-}
-  \item{rev.factor}{
-%%     ~~Describe \code{rev.factor} here~~
-}
-  \item{transform}{
-%%     ~~Describe \code{transform} here~~
-}
-  \item{minor.line.freq}{
-%%     ~~Describe \code{minor.line.freq} here~~
-}
-  \item{major.line.freq}{
-%%     ~~Describe \code{major.line.freq} here~~
-}
-}
-\details{
-%%  ~~ If necessary, more details than the description above ~~
+  \item{dataframe}{A data frame with ploting variable(s)
+  and a column of start and end times.}
+
+  \item{plot.var}{A factor plotting variable (y axis)}
+
+  \item{facet.vars}{An optional single vector or list of 1
+  or 2 to facet by}
+
+  \item{fill.var}{An optional variable to fill the code
+  stips by.}
+
+  \item{title}{An optional title for the plot.}
+
+  \item{ylab}{An optional y label.}
+
+  \item{xlab}{An optional x label.}
+
+  \item{rev.factor}{logical.  If TRUE reverse the current
+  plotting order so the first element in the plotting
+  variable's levels is plotted on top.}
+
+  \item{ncol}{if an integer value is passed to this
+  gantt_wrap uses facet_wrap rather than facet_grid}
+
+  \item{transform}{logical.  If TRUE the repeated facets
+  will be transformed from stacked to side by side.}
+
+  \item{minor.line.freq}{A numeric value for frequency of
+  minor grid lines.}
+
+  \item{major.line.freq}{A numeric value for frequency of
+  major grid lines.}
+
+  \item{sig.dig.line.freq}{An internal rounding factor for
+  minor and major line freq.  Generally, default value of 1
+  suffices for larger range of x scale may need to be set
+  to -2..}
+
+  \item{hms.scale}{logical.  If TRUE converts scale to
+  h:m:s format.  Default NULL attempts to detect if object
+  is a cm_time2long object}
+
+  \item{scale}{Should scales be fixed ("fixed", the
+  default), free ("free"), or free in one dimension
+  ("free_x", "free_y")}
+
+  \item{space}{If "fixed", the default, all panels have the
+  same size. If "free_y" their height will be proportional
+  to the length of the y scale; if "free_x" their width
+  will be proportional to the length of the x scale; or if
+  "free" both height and width will vary. This setting has
+  no effect unless the appropriate scales also vary.}
+
+  \item{size}{The width of the plot bars.}
+
+  \item{rm.horiz.lines}{logical.  If TRUE the horzontal
+  lines will be removed.}
+
+  \item{x.ticks}{logical.  If TRUE the x ticks will be
+  displayed.}
+
+  \item{y.ticks}{logical.  If TRUE the y ticks will be
+  displayed.}
+
+  \item{legend.position}{The position of legends. ("left",
+  "right", "bottom", "top", or two-element numeric
+  vector).}
+
+  \item{bar.color}{Optional color to constrain all bars.}
+
+  \item{border.color}{The color to plot border around Gantt
+  bars (default is NULL).}
+
+  \item{border.size}{An integer value for the size to plot
+  borders around Gantt bars. Controls length (width also
+  controlled if not specified).}
+
+  \item{border.width}{Controls broder width around Gantt
+  bars.  Use a numeric value in addition to border size if
+  plot borders appear disproportional.}
+
+  \item{constrain}{logical.  If TRUE the Gantt bars touch
+  the edge of the graph.}
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  Returns a Gantt style visualization. Invisibly returns
+  the ggplot2 list object.
 }
-\references{
-%% ~put references to the literature/web site here ~
-}
-\author{
-%%  ~~who you are~~
+\description{
+  A ggplot2 wrapper that produces a Gantt plot
 }
 \note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+  For non repeated measures data/plotting use \code{gantt};
+  for repeated measures data output use \code{gantt_rep};
+  and for a convientent wrapper that takes text and
+  generates plots use \code{gantt_plot}.
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+\dontrun{
+(dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex),
+    units = "sentences", plot.colors = 'black', sums = TRUE,
+    col.sep = "_")$gantt.df)
+gantt_wrap(dat, fam.aff_sex, title = "Gantt Plot")
+dat$codes <- sample(LETTERS[1:3], nrow(dat), TRUE)
+gantt_wrap(dat, fam.aff_sex, fill.var = "codes", legend.position = "bottom")
 
-## The function is currently defined as
-function (dataframe, plot.var, facet.vars = NULL, title = NULL, 
-    ylab = as.character(plot.var), xlab = "duration.defalut", 
-    rev.factor = TRUE, transform = FALSE, minor.line.freq = 5, 
-    major.line.freq = 25) 
-{
-    plot.var <- as.character(substitute(plot.var))
-    if (rev.factor) {
-        dataframe[, "new"] <- factor(dataframe[, plot.var], levels = rev(levels(dataframe[, 
-            plot.var])))
-    }
-    if (xlab == "duration.defalut") {
-        if (!is.null(comment(dataframe))) {
-            xlab <- paste0("duration (", comment(dataframe), 
-                ")")
-        }
-        else {
-            xlab <- "duration"
-        }
-    }
-    if (!is.null(facet.vars)) {
-        dataframe[, "new2"] <- dataframe[, facet.vars[1]]
-        if (length(facet.vars) == 2) {
-            dataframe[, "new3"] <- dataframe[, facet.vars[2]]
-        }
-    }
-    theplot <- ggplot(dataframe, aes(colour = new)) + geom_vline(xintercept = seq(0, 
-        round(max(dataframe$end), -2), minor.line.freq), colour = "gray92", 
-        size = 0.025) + geom_vline(xintercept = seq(0, round(max(dataframe$end), 
-        -2), major.line.freq), colour = "gray50", size = 0.05) + 
-        geom_segment(aes(x = start, xend = end, y = new, yend = new), 
-            size = 2) + ylab(ylab) + xlab(xlab) + theme_bw() + 
-        scale_x_continuous(expand = c(0, 0)) + theme(panel.background = element_rect(fill = NA, 
-        color = "black"), legend.position = "none", legend.position = "none", 
-        panel.grid.major.y = element_blank(), panel.grid.minor.y = element_blank(), 
-        axis.ticks = element_blank()) + ggtitle(title)
-    if (!is.null(facet.vars)) {
-        if (length(facet.vars) == 1) {
-            if (transform) {
-                theplot <- theplot + facet_grid(. ~ new2)
-            }
-            else {
-                theplot <- theplot + facet_grid(new2 ~ .)
-            }
-        }
-        else {
-            theplot <- theplot + facet_grid(new2 ~ new3)
-        }
-    }
-    print(theplot)
-  }
+(dat3 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex),
+    units = "words", col.sep = "_")))
+x <- gantt_wrap(dat3, fam.aff_sex, facet.vars = "act",
+    title = "Repeated MeasuresGantt Plot")
+x + scale_color_manual(values=rep("black", length(levels(dat3$fam.aff_sex))))
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+}
+\author{
+  Andrie de Vries and and Tyler Rinker
+  <tyler.rinker@gmail.com>.
+}
+\references{
+  Clark, W. & Gantt, H. (1922) The Gantt chart, a working
+  tool of management. New York, Ronald Press.
+}
+\seealso{
+  \code{\link[qdap]{gantt}},
+  \code{\link[qdap]{gantt_plot}},
+  \code{\link[qdap]{gantt_rep}},
+  \code{\link[ggplot2]{facet_grid}},
+  \code{\link[ggplot2]{facet_wrap}}
+}
+\keyword{Gantt}
+
