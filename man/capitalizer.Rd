@@ -1,6 +1,6 @@
 \name{capitalizer}
 \alias{capitalizer}
-\title{Capitalizes Select Words}
+\title{Capitalize Select Words}
 \usage{
   capitalizer(text, caps.list = NULL, I.list = TRUE,
     apostrophe.remove = FALSE)

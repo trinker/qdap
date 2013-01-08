@@ -11,7 +11,7 @@
 #' @keywords proportion, percent, percentage
 #' @export
 #' @examples
-#' dontrun{
+#' \dontrun{
 #' y <- wfdf(DATA$state, DATA$person, stopwords = c("your", "yours"), margins = TRUE)
 #' prop(wfm(wfdf = y), 4)       #as a proportion
 #' prop(wfm(wfdf = y), 4, TRUE) #as a percentage
