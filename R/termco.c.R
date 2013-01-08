@@ -28,7 +28,7 @@
 #' "percent"; mostly internal use}  
 #' \item{digits}{integer value od number of digits to display; mostly internal 
 #' use}  
-#' @seealso \code{\link[qdap]{termco_a}}
+#' @seealso \code{\link[qdap]{termco.a}}
 #' @export
 termco.c <-
 function(termco.d.object, combined.columns, new.name, short.term = FALSE,

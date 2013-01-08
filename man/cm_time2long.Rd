@@ -16,7 +16,7 @@
   the data frame created by each time.list passed to
   \code{cm_t2l}.}
 
-  \item{star.end}{logical. If TRUE outputs stop and end
+  \item{start.end}{logical. If TRUE outputs stop and end
   times for each \code{cm_time.temp} list object.}
 
   \item{debug}{logical. If TRUE debugging mode is on.

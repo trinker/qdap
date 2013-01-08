@@ -21,7 +21,7 @@
 #' @details mcsv is short for "multiple csv" and the suffix c(_r, _w) stands for 
 #' "read" (r) or "write" (w).
 #' @seealso \code{\link[qdap]{cm_range2long}},
-#' \code{\link[qdap]{cm_csv.temp}}
+#' \code{\link[qdap]{cm_df.temp}}
 #' @export
 #' @examples
 #' \dontrun{

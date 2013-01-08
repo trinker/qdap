@@ -77,6 +77,6 @@ delete("foo")
 }
 \seealso{
   \code{\link[qdap]{cm_range2long}},
-  \code{\link[qdap]{cm_csv.temp}}
+  \code{\link[qdap]{cm_df.temp}}
 }
 

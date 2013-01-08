@@ -10,7 +10,7 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{group.vars}{The grouping variables.  Default NULL
+  \item{grouping.var}{The grouping variables.  Default NULL
   generates formality score for all text.  Also takes a
   single grouping variable or a list of 1 or more grouping
   variables.}

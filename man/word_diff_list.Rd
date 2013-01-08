@@ -9,8 +9,8 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{group.vars}{The grouping variables.  Takes a single
-  grouping variable or a list of 1 or more grouping
+  \item{grouping.var}{The grouping variables.  Takes a
+  single grouping variable or a list of 1 or more grouping
   variables.}
 
   \item{vs.all}{logical. If TRUE looks at each grouping

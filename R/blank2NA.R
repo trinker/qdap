@@ -5,7 +5,7 @@
 #' @param dataframe A dataframe with blank (empty) cells.
 #' @param missing Value to replace empty cells with.
 #' @return Returns a dataframe with blank spaces replaced.
-#' @seealso \code{\link[qdap]{unblanker}}
+#' @seealso \code{\link[qdap]{rm_row}}
 #' @export
 #' @examples
 #' \dontrun{

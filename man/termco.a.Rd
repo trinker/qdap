@@ -202,7 +202,7 @@ heatmap.2(dat, trace="none")
 }
 }
 \seealso{
-  \code{\link[qdap]{termco_c}}
+  \code{\link[qdap]{termco.c}}
 }
 \keyword{word-search}
 

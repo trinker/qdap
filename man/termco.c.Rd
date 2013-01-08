@@ -51,6 +51,6 @@
   completeness.
 }
 \seealso{
-  \code{\link[qdap]{termco_a}}
+  \code{\link[qdap]{termco.a}}
 }
 

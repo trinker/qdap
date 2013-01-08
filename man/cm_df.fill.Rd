@@ -17,7 +17,7 @@
 
   \item{text.var}{The name of the text variable.}
 
-  \item{codes}{Optional vector of codes.}
+  \item{code.vars}{Optional vector of codes.}
 
   \item{transform}{logical.  If TRUE the words are located
   across the top of dataframe.}

@@ -9,8 +9,8 @@
   \item{x2long.obj}{An object from cm_range2long,
   cm_time2long or cm_df2long}
 
-  \item{combin.code.list}{A list of named character vertors
-  of at least two code column names to combine}
+  \item{combine.code.list}{A list of named character
+  vertors of at least two code column names to combine}
 
   \item{rm.var}{Name of the repeated measures column.}
 

@@ -14,9 +14,9 @@
   \item{I.list}{logical.  If TRUE capitalizes I words and
   contractions.}
 
-  \item{no.apostrophe}{logical, asking if apostrophes have
-  been removed.  If TRUE will try to insert apostrophe's
-  back into words appropriately.}
+  \item{apostrophe.remove}{logical, asking if apostrophes
+  have been removed.  If TRUE will try to insert
+  apostrophe's back into words appropriately.}
 }
 \value{
   Returns a vector of capitalized words based on supplied

@@ -5,7 +5,7 @@
   blank2NA(dataframe, missing = NA)
 }
 \arguments{
-  \item{A}{dataframe with blank (empty) cells.}
+  \item{dataframe}{A dataframe with blank (empty) cells.}
 
   \item{missing}{Value to replace empty cells with.}
 }
@@ -25,6 +25,6 @@ blank2NA(dat)
 }
 }
 \seealso{
-  \code{\link[qdap]{unblanker}}
+  \code{\link[qdap]{rm_row}}
 }
 

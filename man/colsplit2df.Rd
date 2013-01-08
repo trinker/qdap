@@ -19,7 +19,7 @@
   \item{sep}{The character that used in \code{paste2} to
   paste the columns.}
 
-  \item{orig.keep}{logical.  If TRUE the original pasted
+  \item{keep.orig}{logical.  If TRUE the original pasted
   column will be retained as well.}
 }
 \value{

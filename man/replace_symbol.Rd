@@ -17,7 +17,7 @@
   \item{pound}{logical.  If TRUE replaces pound sign (#)
   with \code{"number"}.}
 
-  \item{atlogical.}{If TRUE replaces at sign (@) with
+  \item{at}{logical.  If TRUE replaces at sign (@) with
   \code{"at"}.}
 
   \item{and}{logical.  If TRUE replaces and sign (&) with
