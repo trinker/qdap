@@ -14,7 +14,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' #' x <- c("I like 456 dogs  , don't you?\"")
+#' x <- c("I like 456 dogs  , don't you?\"")
 #' scrubber(x)
 #' scrubber(x, TRUE)
 #' }

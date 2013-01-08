@@ -1,4 +1,4 @@
-#' Transcript Apply Detection Outliers in Text
+#' Detect Outliers in Text
 #' 
 #' Locate possible outliers for text variables given numeric word function.
 #' 
@@ -9,7 +9,7 @@
 #' @param FUN A word function with a numeric vector output (e.g. 
 #' \code{syllable.sum}, \code{character.count} or \code{word.count}).
 #' @param scale.by A character string indicating which dimensions to scale by. 
-#' One of \code{"all"}, \code{"grouping", or \code{"both"}.  Default NULL scales 
+#' One of \code{"all"}, \code{"grouping"}, or \code{"both"}.  Default NULL scales 
 #' by all.
 #' @return Returns a dataframe with possible outliers.
 #' @export
@@ -20,44 +20,35 @@
 #' with(DATA, outlier.detect(state, person, FUN = character.count))
 #' with(DATA, outlier.detect(state, list(sex, adult), FUN = character.count))
 #' with(DATA, outlier.detect(state, FUN = syllable.sum))
-#' htruncdf(with(raj, outlier.detect(dialogue, person)), 15, 15)
+#' htruncdf(with(raj, outlier.detect(dialogue, person)), 15, 45)
 #' }
 outlier.detect <-
 function(text.var, grouping.var = NULL, FUN = word.count, 
     scale.by="grouping") {
-    if (is.null(grouping.var)) scale.by <- "all"
-        G <- if(is.null(grouping.var)) {
-            "all"
-        } else {
-            if (is.list(grouping.var)) {
-                m <- unlist(as.character(substitute(grouping.var))[-1])
-                m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
-                        x[length(x)]
-                    }
-                )
-                paste(m, collapse="&")
-            } else {
-                G <- as.character(substitute(grouping.var))
-                G[length(G)]
-            }
-        }
-    grouping <- if(is.null(grouping.var)){
-        rep("all", length(text.var))
+    if(is.null(grouping.var)) {
+        G <- "all"
     } else {
-        if (is.list(grouping.var) & length(grouping.var)>1) {
-            apply(data.frame(grouping.var), 1, function(x){
-                    if (any(is.na(x))){
-                        NA
-                    } else {
-                        paste(x, collapse = ".")
-                    }
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
                 }
             )
+            G <- paste(m, collapse="&")
         } else {
-            unlist(grouping.var)
-        } 
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
     }
-
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    } 
     fun <- match.fun(FUN)
     z <- fun(text.var)
     names(z) <- NULL
@@ -70,8 +61,6 @@ function(text.var, grouping.var = NULL, FUN = word.count,
         z <- do.call("rbind", z)
         z <- z[order(z[, 1]), ]
         names(z)[2] <-"scale"
-        p <- which(tabulate(z[, 1])==0)
-        z <- rbind(data.frame(id=p, scale=NA), z)
         z <- z[order(z[, 1]), 2]
     }
     if ((!is.null(grouping.var) & scale.by %in% c("all", "both"))|

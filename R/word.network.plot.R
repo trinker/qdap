@@ -1,6 +1,7 @@
 #' Word Network Plot
 #' 
-#' A network plot of words
+#' A network plot of words.  Shows the interconnected and supporting use of 
+#' words between textual units containing key terms.
 #' 
 #' @param text.var The text variable.         
 #' @param grouping.var The grouping variables.  Default NULL generates one 

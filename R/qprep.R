@@ -1,11 +1,11 @@
 #' Quick Preparation of Text
 #'
-#' Wrapper for bracketX, replace_number, replace_symbol, 
-#' replace_abbreviation and scrubber to quickly prepare text for 
-#' analysis.  Care should taken with this function to ensure data 
-#' is properly formatted and complete.
+#' Wrapper for \code{bracketX}, \code{replace_number}, \code{replace_symbol}, 
+#' \code{replace_abbreviation} and \code{scrubber} to quickly prepare text for 
+#' analysis.  Care should taken with this function to ensure data is properly 
+#' formatted and complete.
 #' 
-#' @param text.var The text variable    
+#' @param text.var The text variable.    
 #' @param rm.dash logical logical.  If TRUE dashes will be removed.
 #' @param bracket The type of bracket (and encased text) to remove.  This is one 
 #' of the strings \code{"curly"}, \code{"square"}, \code{"round"}, 
@@ -33,8 +33,10 @@
 #' formatted and complete.
 #' @export
 #' @examples
+#' \dontrun{
 #' x <- "I like 60 (laughter) #d-bot and $6 @ the store w/o 8p.m."
 #' qprep(x)
+#' }
 qprep <-
 function(text.var, rm.dash = TRUE, bracket = "all", missing = NULL, 
     names = FALSE, abbreviation = qdap::abbreviations, 

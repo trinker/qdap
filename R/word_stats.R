@@ -1,6 +1,6 @@
 #' Descriptive Word Statistics
 #' 
-#' Transcript apply descriptive word statistics
+#' Transcript apply descriptive word statistics.
 #' 
 #' @param text.var The text variable.         
 #' @param grouping.var The grouping variables.  Default NULL generates one 

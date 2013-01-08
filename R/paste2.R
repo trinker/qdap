@@ -9,11 +9,11 @@
 #' contains a missing value.
 #' @param trim logical.  If TRUE leading/trailing white space is removed.
 #' @return Returns a vector with row-wise elements pasted together.
-#' @note \code[base]{\link{paste}} differs from \code[qdap]{\link{paste2}} 
+#' @note \code{\link[base]{paste}} differs from \code{\link[qdap]{paste2}} 
 #' because \code{paste} does not allowed an unspecified number of columns to be 
 #' pasted.  This behavior can be convient for inside of functions when the 
 #' number of columns being pasted is unknown.
-#' @seealso \code[base]{\link{paste}}
+#' @seealso \code{\link[base]{paste}}
 #' @keywords paste
 #' @export
 #' @examples

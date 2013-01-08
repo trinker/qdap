@@ -18,7 +18,7 @@
 #' @param dataframe A dataframe object.
 #' @param stem.name A character vector of length one for the stemmed column.  If 
 #' \code{NULL} defaults to \code{"stem.text"}.
-#' @return \code{stemmer } - Returns a character vector with stemmed text.
+#' @return \code{stemmer } - returns a character vector with stemmed text.
 #' @rdname stemmer
 #' @seealso \code{\link[qdap]{capitalizer}}
 #' @keywords stem
@@ -89,7 +89,7 @@ function(text.var, rm.bracket = TRUE, capitalize = TRUE, warn = TRUE, ...){
 #' 
 #' \code{stem.words} - Wrapper for stemmer that stems a vector of words.
 #' 
-#' @return \code{stem.words} - Returns a dataframe with a character vector with.
+#' @return \code{stem.words} - returns a dataframe with a character vector with.
 #' 
 #' @rdname stemmer
 #' @export
@@ -102,10 +102,10 @@ function(...) {
 
 #' Stem Text
 #' 
-#' \code{stem2df} - - Wrapper for stemmer that stems a vector of text strings 
+#' \code{stem2df} - Wrapper for stemmer that stems a vector of text strings 
 #' and returns a dataframe with the vector added..
 #' 
-#' @return \code{stem2df} - Returns a dataframe with a character vector with 
+#' @return \code{stem2df} - returns a dataframe with a character vector with 
 #' stemmed text.
 #' @rdname stemmer
 #' @export

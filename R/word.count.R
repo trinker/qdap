@@ -12,7 +12,7 @@
 #' @param apostrophe.remove = TRUE logical.  If TRUE apostrophes will be counted 
 #' in the character count.
 #' @param count.space logical.  If TRUE spaces are counted as characters.
-#' @return word.count returns a word count by row or total.
+#' @return \code{word.count} - returns a word count by row or total.
 #' @note wc is a convienent short hand for word.count.
 #' @seealso \code{\link[qdap]{syllable.count}}
 #' @keywords word-count, character-count
@@ -81,7 +81,7 @@ wc <- word.count
 #' 
 #' \code{character.count} - Transcript Apply Character Counts
 #' 
-#' @return character.count returns a character count by row or total.
+#' @return \code{character.count} - returns a character count by row or total.
 #' @rdname word.count
 #' @export
 character.count <- 
@@ -109,8 +109,8 @@ function(text.var, byrow = TRUE, missing = NA, apostrophe.remove = TRUE,
 #' \code{character.table} - Computes a table of character counts by grouping 
 #' variable(s).
 #' 
-#' @return character.table returns a dataframe of character counts by grouping 
-#' variable.
+#' @return \code{character.table} - returns a dataframe of character counts by 
+#' grouping variable.
 #' @rdname word.count
 #' @export
 character.table <- function(text.var, grouping.var) {

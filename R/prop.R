@@ -7,7 +7,7 @@
 #' @param digits Integer; number of decimal places to round.
 #' @param percent logical.  If TRUE output given as percent.  If FALSE the 
 #' output is proption.
-#' @return %Returns a matrix with proportionaly scaled values.
+#' @return Returns a matrix with proportionaly scaled values.
 #' @keywords proportion, percent, percentage
 #' @export
 #' @examples

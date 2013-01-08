@@ -25,7 +25,7 @@
 #' that strip should keep.  The default is to strip everything except apostophes.
 #' @param digit.remove logical.  If TRUE strips digits from the text.
 #' @param \ldots Other argument supplied to strip.
-#' @return both \code{termco.a} and \code{termco.d} return a list, of class 
+#' @return \code{termco.a} & \code{termco.d}} - both return a list, of class 
 #' "termco.d", of data frames and information regarding word counts:
 #' \item{raw}{raw word counts by grouping variable} 
 #' \item{prop}{proportional word counts by grouping variable; proportional to 
@@ -290,9 +290,10 @@ termco.d <-
 #' 
 #' \code{term.match} - Search a transcript for words that exactly match term(s).
 #' 
-#' @param return.list logical.  If TRUE returns the output for multiple terms as 
+#' @param \code{term.match} - return.list logical.  If TRUE returns the output for multiple terms as 
 #' a list by term rather than a vector.
-#' @return term.match returns a list or vector of possible words that match term(s).
+#' @return \code{term.match} -  returns a list or vector of possible words that 
+#' match term(s).
 #' @rdname termco.a
 #' @export
 term.match <-
@@ -323,7 +324,7 @@ function(text.var, terms, return.list=TRUE, apostrophe.remove=FALSE) {
 #' @param no.quote logical.  If TRUE the matrix will be printed without quotes
 #' if it's character.
 #' @param transform logical.  If TRUE the matrix will be transformed.
-#' @return termco2mat returns a matrix of term counts.
+#' @return \code{termco2mat} - returns a matrix of term counts.
 #' @rdname termco.a
 #' @export
 termco2mat <-function (dataframe, drop.wc = TRUE, short.terms = TRUE, 
@@ -368,9 +369,9 @@ termco2mat <-function (dataframe, drop.wc = TRUE, short.terms = TRUE,
   MAT
 }
 
-#' Prints an termco_d object.
+#' Prints a termco_d object.
 #' 
-#' Prints an termco_d object.
+#' Prints a termco_d object.
 #' 
 #' @param x The termco_d object
 #' @param \ldots ignored

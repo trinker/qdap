@@ -11,6 +11,7 @@
 #' @param ignore.case logical.  If TRUE replaces without regard to capitalization.
 #' @return Returns a vector with abbreviations replaced.
 #' @keywords abbreviation
+#' @seealso 
 #' \code{\link[qdap]{bracketX}},
 #' \code{\link[qdap]{qprep}},
 #' \code{\link[qdap]{replace_number}},

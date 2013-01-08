@@ -33,7 +33,6 @@
 #' \item{LEGOMENA_STATS}{A dataframe displaying the percent hapax legomena and 
 #' percent dis legomena of the text.}
 #' @rdname rank_freq_plot
-#' @seealso \code{\link[qdap]{rank_freq_plot}}
 #' @references Zipf, G. K. (1949). Human behavior and the principle of least 
 #' effort. Cambridge, Massachusetts: Addison-Wesley. p. 1.
 #' @keywords Zipf, rank-frequency
@@ -184,9 +183,9 @@ function(words, frequencies, plot = TRUE, title.ext = NULL,
         } else {
             with(ZIPF2, plot(jitter(rank, amount = jitter.ammount), 
                 freq, ylab = "Frequency", xlab = "Rank", 
-                main = paste("Rank-Frequency Plot", 
-                title, collapse = " "), col = ifelse(freq == 1, 
-                hap.col, ifelse(freq == 2, dis.col, "black"))))
+                main = paste("Rank-Frequency Plot", title, collapse = " "), 
+                col = ifelse(freq == 1, hap.col, ifelse(freq == 2, 
+                    dis.col, "black"))))
         }
     } else {
         NULL

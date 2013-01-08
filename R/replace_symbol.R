@@ -12,6 +12,7 @@
 #' @param with  logical.  If TRUE replaces with sign (w/) with \code{"with"}.
 #' @return Returns a character vector with symbols replaced..
 #' @keywords symbol-replace
+#' @seealso 
 #' \code{\link[qdap]{bracketX}},
 #' \code{\link[qdap]{replace_abbreviation}},
 #' \code{\link[qdap]{replace_number}},

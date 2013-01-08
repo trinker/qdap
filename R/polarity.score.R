@@ -1,6 +1,6 @@
-#' Transcript Apply Polarity Score of Dialogue
+#' Polarity Score (Sentiment Analysis)
 #' 
-#' Aproximate the sentiment (polarity) of a statement by grouping variable(s).
+#' Aproximate the sentiment (polarity) of text by grouping variable(s).
 #' 
 #' @param text.var The text variable.
 #' @param grouping.var The grouping variables.  Default NULL generates one word 
@@ -32,7 +32,7 @@
 #' Liu, B. (2004), however, this may not be appropriate for the context of 
 #' children in a classroom.  The user may (is encouraged) to provide/augment the 
 #' dictionary.  For instance the word "sick" in a high school setting may mean 
-#' that something is good, where as "sick" used by a typical adult indicates 
+#' that something is good, whereas "sick" used by a typical adult indicates 
 #' something is not right or negative connotation.
 #' 
 #' Also note that \code{\link[qdap]{polarity.score}} assumes you've run 

@@ -1,4 +1,4 @@
-#' Transcript Apply Parts of Speech Tagging
+#' Parts of Speech Tagging
 #' 
 #' \code{pos} - Apply part of speech tagger to transcript(s).
 #' 
@@ -38,7 +38,6 @@
 #' posdat$POSfreq    #frequency of parts of speech by row
 #' 
 #' pos(DATA$state, parallel = TRUE) # not always useful
-#' }
 #' 
 #' #use pos.tags to interpret part of speech tags used by pos & pos.by
 #' pos.tags()
@@ -47,12 +46,13 @@
 #' pos.tags("df")
 #' pos.tags("all")
 #' 
-#' \dontrun{
 #' posbydat <- with(DATA, pos.by(state, sex))
 #' names(posbydat)
 #' posbydat
 #' posbydat$pos.by.prop
 #' with(DATA, pos.by(state, list(adult, sex)))
+#' #or more quickly - reuse the output from before
+#' with(DATA, pos.by(posbydat, list(adult, sex)))
 #' }
 pos <-
 function(text.var, parallel = FALSE, na.omit = FALSE, digits = 2, 

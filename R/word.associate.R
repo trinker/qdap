@@ -70,8 +70,8 @@
 #' network plot legend.  The location may also be specified by setting x to a 
 #' single keyword from the list \code{"bottomright"}, \code{"bottom"}, 
 #' \code{"bottomleft"}, \code{"left"}, \code{"topleft"}, \code{"top"}, 
-#' \code{"topright"}, \code{"right"} and \code{"center"}. This places the legend on 
-#' the inside of the plot frame at the given location. 
+#' \code{"topright"}, \code{"right"} and \code{"center"}. This places the legend 
+#' on the inside of the plot frame at the given location. 
 #' @param legend.override By default if legend labels are supplied to either 
 #' \code{cloud.legend} or \code{nw.legend} may be set and if the other remains 
 #' NULL it will assume the supplied vector to the previous legend argument.  If 

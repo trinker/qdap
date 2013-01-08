@@ -1,7 +1,7 @@
 #' Replace Numerbers With Text Representation
 #' 
 #' Replaces numeric represented numbers with words (e.g. 1001 becomes one 
-#' thousand one)
+#' thousand one).
 #' 
 #' @param text.var  The text variable.
 #' @param num.paste A character vector of either \code{"separate"} or 
@@ -12,6 +12,7 @@
 #' @references Fox, J. (2005). Programmer's niche: How do you spell that number? 
 #' R News. Vol. 5(1), pp. 51-55.
 #' @keywords number-to-word
+#' @seealso 
 #' \code{\link[qdap]{bracketX}},
 #' \code{\link[qdap]{replace_abbreviation}},
 #' \code{\link[qdap]{qprep}},
