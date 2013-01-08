@@ -1,19 +1,18 @@
 #' Hash Table/Dictionary Lookup
 #'  
-#' Everonment based hash table useful for large vector lookups.
+#' Environment based hash table useful for large vector lookups.
 #' 
-#' @aliases lookup
-#' @param terms a vector of terms to undergo a lookup
-#' @param key.match either a two column data frame (if data frame supplied no 
+#' @param terms A vector of terms to undergo a lookup.
+#' @param key.match Either a two column data frame (if data frame supplied no 
 #' key reassign needed) of a match key and reassignment column or a single 
 #' vector match key.
-#' @param key.reassign a single reassingment vector supplied if key.match is 
-#' not a two column data frame
-#' @param missing value to assign to terms not matching the key.match
-#' @return Outputs a new vector with reassigned values.
+#' @param key.reassign A single reassingment vector supplied if key.match is 
+#' not a two column data frame.
+#' @param missing Value to assign to terms not matching the key.match.
+#' @return Outputs A new vector with reassigned values.
 #' @seealso 
 #' \code{\link[base]{new.env}}
-#' @keywords dictionary hash lookup
+#' @keywords dictionary, hash, lookup
 #' @export
 #' @examples
 #' \dontrun{

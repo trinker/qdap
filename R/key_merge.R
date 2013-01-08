@@ -1,6 +1,6 @@
 #' Merge Demogrphic Information with Person/Text Transcript
 #' 
-#' Wrapper function (\code{\link[base]{merge}}) for merging demogrphic 
+#' Wrapper function (\code{\link[base]{merge}}) for merging demographic 
 #' information with a person/text transcript.
 #' 
 #' @param transcript.df The text/person transcript dataframe
