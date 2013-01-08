@@ -8,7 +8,7 @@
 #' @param value The recode value.  Takes a vector of length one or a vector of 
 #' length equal to the number of code columns.
 #' @param text.var The name of the text variable.
-#' @param codes Optional vector of codes.
+#' @param code.vars Optional vector of codes.
 #' @param transform logical.  If TRUE the words are located across the top of 
 #' dataframe.
 #' @return Generates a dummy coded dataframe.

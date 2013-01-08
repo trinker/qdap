@@ -7,7 +7,7 @@
 #' @param dollar logical.  If TRUE replaces dollar sign ($) with \code{"dollar"}.
 #' @param percent logical.  If TRUE replaces percent sign (\%) with \code{"percent"}.
 #' @param pound logical.  If TRUE replaces pound sign (#) with \code{"number"}.
-#' @param atlogical.  If TRUE replaces at sign (@@) with \code{"at"}.
+#' @param at logical.  If TRUE replaces at sign (@@) with \code{"at"}.
 #' @param and logical.  If TRUE replaces and sign (&) with \code{"and"}.
 #' @param with  logical.  If TRUE replaces with sign (w/) with \code{"with"}.
 #' @return Returns a character vector with symbols replaced..

@@ -4,7 +4,7 @@
 #' all possible "a" vs. "b" combinations or "a" vs. all others.
 #' 
 #' @param text.var The text variable.
-#' @param group.vars The grouping variables.  Takes a single grouping variable 
+#' @param grouping.var The grouping variables.  Takes a single grouping variable 
 #' or a list of 1 or more grouping variables.
 #' @param vs.all logical. If TRUE looks at each grouping variable against all 
 #' others ("a" vs. all comparison).  If FALSE looks at each "a" vs. "b", 

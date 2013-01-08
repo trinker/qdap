@@ -3,7 +3,7 @@
 #' Transcript Apply Raw Word Lists and Frequency Counts by grouping variable(s).
 #' 
 #' @param text.var The text variable.
-#' @param group.vars The grouping variables.  Default NULL generates one word 
+#' @param grouping.var The grouping variables.  Default NULL generates one word 
 #' list for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
 #' @param stopwords A vector of stop words to remove.

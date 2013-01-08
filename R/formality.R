@@ -3,7 +3,7 @@
 #' Transcript apply formality score by grouping variable(s).
 #' 
 #' @param text.var The text variable.
-#' @param group.vars The grouping variables.  Default NULL generates formality 
+#' @param grouping.var The grouping variables.  Default NULL generates formality 
 #' score for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
 #' @param plot logical. Provides a visualization for the results
