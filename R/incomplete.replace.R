@@ -1,21 +1,23 @@
-#' Replaces incomplete sentence marks with a "|"
+#' Denote Incomplete End Marks With "|"
 #' 
-#' Replaces incomplete sentence marks (.., ..., .?, ..?, en \& em dash etc.
-#' with "|"
+#' Replaces incomplete sentence end marks (.., ..., .?, ..?, en \& em dash etc.)
+#' with \code{"|"}.
 #' 
-#' @aliases incomplete.replace incomp
 #' @rdname incomplete.replace
 #' @param text.var  The text variable.
 #' @param scan.mode logical.  If TRUE only scans and reports incomplete sentences.
 #' @return Returns a text variable (character sting) with incomplete sentence 
 #' marks (.., ..., .?, ..?, en \& em dash etc. replaced with "|".  If scan mode 
 #' is TRUE returns a data frame with incomplete sentence location.
-#' @keywords incomplete sentence
+#' @keywords incomplete-sentence
 #' @export
 #' @examples
+#' \dontrun{
 #' x <- c("the...",  "I.?", "you.", "threw..", "we?")
 #' incomplete.replace(x)
 #' incomp(x)
+#' incomp(x, TRUE)
+#' }
 incomplete.replace <-
 function(text.var, scan.mode = FALSE) {
   pat <- "\\?*\\?[.]+|[.?!]*\\? [.][.?!]+|[.?!]*\\. [.?!]+|

@@ -19,7 +19,7 @@
 #' @seealso \code{\link[qdap]{gantt}},
 #' \code{\link[qdap]{gantt_wrap}},
 #' \code{\link[qdap]{gantt_plot}} 
-#' @references Wallace Clark and Henry Gantt (1922) The Gantt chart, a working 
+#' @references Clark, W. & Gantt, H. (1922) The Gantt chart, a working 
 #' tool of management. New York, Ronald Press.
 #' @keywords Gantt
 #' @export

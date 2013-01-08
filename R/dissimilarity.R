@@ -14,7 +14,7 @@
 #' @param p The power of the Minkowski distance
 #' @param digits integer indicating the number of decimal places (round) or 
 #' significant digits (signif) to be used. Negative values are allowed
-#' @return Returns a matrix of dissimilarity values (the agreement between text.
+#' @return Returns a matrix of dissimilarity values (the agreement between text).
 #' @seealso \code{\link[stats]{dist}}
 #' @keywords correlation, dissimilarity
 #' @export

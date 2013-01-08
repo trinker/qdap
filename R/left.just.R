@@ -1,26 +1,25 @@
 #' Text Justification
 #' 
-#' \code{left.just} - Left justifies a character column.
+#' \code{left.just} - Left justifies a text/character column.
 #' 
 #' @param dataframe A data.frame object with the text column.
 #' @param column The column to be justified.  If NULL all columns are justified.
 #' @param keep.class logical.  If TRUE will attempt to keep the original classes 
 #' of the dataframe if the justification is not altered (i.e. numeric will not 
 #' be honored but factor may be).
-#' @return Generates a dataframe with selected readability statistic by grouping 
-#' variable(s).  The \code{frey} function returns a graphic representation of 
-#' the readability.
+#' @return Returns a dataframe with selected text column left/right justified.
 #' @rdname justification
 #' @note \code{left.just} inserts spaces to achieve the justification.  This 
 #' could interfere with analysis and therefore the output from \code{left.just} 
 #' should only be used for visualization purposes, not analysis.
-#' justify, justification
+#' @keywords justify, justification
 #' @export
 #' @examples
 #' \dontrun{
 #' left.just(DATA)
 #' left.just(DATA, "state")
 #' left.just(CO2)
+#' right.just(left.just(CO2))
 #' }
 left.just <-
 function(dataframe, column = NULL, keep.class = FALSE) {
@@ -96,10 +95,9 @@ function(dataframe, column = NULL, keep.class = FALSE) {
     return(DF3)
 }
 
-#' Righ Justify Text
+#' Right Justify Text
 #' 
-#' \code{right.just} - A means of undoing a left justification from 
-#' \code{left.just}.
+#' \code{right.just} - A means of undoing a left justification. 
 #' 
 #' @rdname justification
 #' @export

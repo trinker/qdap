@@ -1,4 +1,4 @@
-#' Hash Table/ Dictionary Lookup
+#' Hash Table/Dictionary Lookup
 #'  
 #' Everonment based hash table useful for large vector lookups.
 #' 

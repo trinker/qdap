@@ -5,8 +5,8 @@
 #' 
 #' @param transcript.df The text/person transcript dataframe
 #' @param key.df The demographic dataframe.
-#' @param common.column The column(s) shared by transcript.ef and key.df.  If 
-#' NULL function defaults to use any columns with the same name.
+#' @param common.column The column(s) shared by \code{transcript.df} and 
+#' \code{key.df}.  If NULL function defaults to use any columns with the same name.
 #' @param defualt.arrange logical.  If TRUE will arrange the columns with text 
 #' to the far right.
 #' @return Outputs a merged transcript dataframe with demographic information.
@@ -15,9 +15,11 @@
 #' @export
 #' @examples
 #' \dontrun{
-#'merged.raj <- key_merge(raj, raj.demographics)
-#'htruncdf(merged.raj, 10, 40)
-#'}
+#' #First view transcript dataframe and demographics dataframe.
+#' lapply(list(raj, raj.demographics), head) 
+#' merged.raj <- key_merge(raj, raj.demographics)
+#' htruncdf(merged.raj, 10, 40)
+#' }
 key_merge <-
 function(transcript.df, key.df, common.column = NULL, 
     defualt.arrange = TRUE) {

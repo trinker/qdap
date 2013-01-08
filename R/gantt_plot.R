@@ -12,8 +12,9 @@
 #' @param fill.var An optional variable to fill the code stips by. 
 #' @param units The unit of measurement.      
 #' @param col.sep The column separator.
-#' @param \ldots Other arguments passed to gantt_wrap.
-#' @return Returns a Gantt style visualization.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{gantt_wrap}}.
+#' @return Returns a Gantt style visualization.  Invisibly returns the ggplot2 
+#' list object.
 #' @note For non repeated measures data/plotting use \code{gantt}; for repeated 
 #' measures data output use \code{gantt_rep}; and for a flexible gantt plot that 
 #' words with code matrix functions (cm) use \code{gantt_wrap}.

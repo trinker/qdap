@@ -1,6 +1,6 @@
 #' SPSS Style Frequency Tables
 #' 
-#' Generates a dsitribution table for vectors, matrices and data.frames
+#' Generates a dsitribution table for vectors, matrices and dataframes.
 #' 
 #' @param dataframe A vector or data.frame object.
 #' @param breaks Either a numeric vector of two or more cut points or a single 

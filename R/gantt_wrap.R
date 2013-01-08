@@ -44,7 +44,8 @@
 #' @param border.width Controls broder width around Gantt bars.  Use a numeric 
 #' value in addition to border size if plot borders appear disproportional.
 #' @param constrain logical.  If TRUE the Gantt bars touch the edge of the graph.
-#' @return Returns a Gantt style visualization.
+#' @return Returns a Gantt style visualization. Invisibly returns the ggplot2 
+#' list object.
 #' @note For non repeated measures data/plotting use \code{gantt}; for repeated 
 #' measures data output use \code{gantt_rep}; and for a convientent wrapper that 
 #' takes text and generates plots use \code{gantt_plot}.
@@ -55,7 +56,7 @@
 #' \code{\link[qdap]{gantt_rep}},
 #' \code{\link[ggplot2]{facet_grid}},
 #' \code{\link[ggplot2]{facet_wrap}}
-#' @references Wallace Clark and Henry Gantt (1922) The Gantt chart, a working 
+#' @references Clark, W. & Gantt, H. (1922) The Gantt chart, a working 
 #' tool of management. New York, Ronald Press.
 #' @keywords Gantt
 #' @export

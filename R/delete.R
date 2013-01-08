@@ -6,7 +6,7 @@
 #' file to be deleted.  If NULL provides a menu of files from the working 
 #' directory.
 #' @param folder.name The name of the folder to be created.  Default NULL 
-#' creates a file in the working directory with the creation data and time stamp.
+#' creates a file in the working directory with the creation date and time stamp.
 #' @return \code{delete} permanently removes a file/directory.
 #' @seealso  \code{\link[base]{unlink}}, 
 #' \code{\link[base]{file.remove}}, 

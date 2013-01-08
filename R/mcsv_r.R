@@ -14,7 +14,7 @@
 #' @param dir optional directory names.  If NULL a directory will be created in 
 #' the working directory with the data and time stamp as the folder name.
 #' @param open logical.  If TURE opens the directory upon completion.
-#' @return \code{mcsv_r} reads in multiple csv files at once.
+#' @return \code{mcsv_r} - reads in multiple csv files at once.
 #' @rdname multicsv
 #' @note \code{mcsv_r} is useful for reading in multiple csv files from 
 #' \code{cm_csv.temp} for interaction with \code{cm_range2long}.
@@ -75,7 +75,8 @@ function(files, a.names = NULL, l.name = NULL, list = TRUE){
 #' 
 #' \code{mcsv_w} - Write multiple csv files into a file at the same time.
 #' 
-#' @return \code{mcsv_w} creates a directory with multiple csv files.  Silently returns the path of the directory.
+#' @return \code{mcsv_w} - creates a directory with multiple csv files.  
+#' Silently returns the path of the directory.
 #' @rdname multicsv
 #' @export
 mcsv_w <-

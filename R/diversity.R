@@ -1,6 +1,6 @@
 #' Diversity Statistics
 #' 
-#' Transcript apply diversity statistics
+#' Transcript apply diversity statistics.
 #' 
 #' @param text.var The text variable.         
 #' @param grouping.var The grouping variables.  Default NULL generates one 
@@ -8,7 +8,7 @@
 #' more grouping variables.    
 #' @param digits Number of decimal places to round.                        
 #' @return Returns a dataframe of various diversity related indices for Shannon, 
-#' collision, Berger Parker and Brillouin
+#' collision, Berger Parker and Brillouin.
 #' @keywords diversity
 #' @export
 #' @examples

@@ -2,7 +2,7 @@
 #' 
 #' Creates a new environemnt for quick hash style dictionary lookup.
 #' 
-#' @param A two column dataframe
+#' @param x A two column dataframe
 #' @return Creates a "hash table" or a two column data frame in its own evironment.  
 #' @author Bryan Goodrich and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso \code{\link[qdap]{lookup}},

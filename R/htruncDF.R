@@ -10,7 +10,7 @@
 #' @param begin The first element to be displayed.
 #' @param \ldots Other arguments passed to \code{\link[head]{head}}.
 #' @rdname data_viewing
-#' @return \code{htrundf} returns n number of rows of a truncated dataframe.
+#' @return \code{htrundf} - returns n number of rows of a truncated dataframe.
 #' @seealso \code{\link{head}}
 #' @export
 #' @examples
@@ -34,7 +34,7 @@ function(dataframe, n=10, width=10) {
 #' 
 #' \code{truncdf} - Convenience function to view a truncated dataframe. 
 #' 
-#' @return \code{trundf} returns a truncated dataframe.
+#' @return \code{trundf} - returns a truncated dataframe.
 #' @rdname data_viewing
 #' @export
 truncdf <- 
@@ -49,7 +49,7 @@ function(dataframe, end=10, begin=1) {
 #' 
 #' \code{qview} - Convenience function to view a summary and head of a dataframe.
 #' 
-#' @return \code{qview} returns a dataframe head with summary statistics.
+#' @return \code{qview} - returns a dataframe head with summary statistics.
 #' @rdname data_viewing
 #' @export
 qview <-
