@@ -93,7 +93,6 @@
 #' \code{\link[qdap]{word.network.plot}},
 #' \code{\link[wordcloud]{wordcloud}},
 #' \code{\link[igraph]{graph.adjacency}}
-#' @references %% ~put references to the literature/web site here ~
 #' @export
 #' @examples
 #' \dontrun{

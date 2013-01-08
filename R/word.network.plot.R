@@ -1,36 +1,58 @@
-#' A network plot of words
+#' Word Network Plot
 #' 
 #' A network plot of words
 #' 
-#' %% ~~ If necessary, more details than the description above ~~
-#' 
-#' @param text.var %% ~~Describe \code{text.var} here~~
-#' @param grouping.var %% ~~Describe \code{grouping.var} here~~
-#' @param target.words %% ~~Describe \code{target.words} here~~
-#' @param stopwords %% ~~Describe \code{stopwords} here~~
-#' @param label.cex %% ~~Describe \code{label.cex} here~~
-#' @param label.size %% ~~Describe \code{label.size} here~~
-#' @param edge.curved %% ~~Describe \code{edge.curved} here~~
-#' @param vertex.shape %% ~~Describe \code{vertex.shape} here~~
-#' @param edge.color %% ~~Describe \code{edge.color} here~~
-#' @param label.colors %% ~~Describe \code{label.colors} here~~
-#' @param layout %% ~~Describe \code{layout} here~~
-#' @param title.name %% ~~Describe \code{title.name} here~~
-#' @param title.padj %% ~~Describe \code{title.padj} here~~
-#' @param title.location %% ~~Describe \code{title.location} here~~
-#' @param title.font %% ~~Describe \code{title.font} here~~
-#' @param title.cex %% ~~Describe \code{title.cex} here~~
-#' @param log.labels %% ~~Describe \code{log.labels} here~~
-#' @param title.color %% ~~Describe \code{title.color} here~~
-#' @param plot %% ~~Describe \code{plot} here~~
-#' @return %% ~Describe the value returned %% If it is a LIST, use %%
-#' \item{comp1 }{Description of 'comp1'} %% \item{comp2 }{Description of
-#' 'comp2'} %% ...
-#' @note %% ~~further notes~~
-#' @author %% ~~who you are~~
-#' @seealso %% ~~objects to See Also as \code{\link{help}}, ~~~
-#' @references %% ~put references to the literature/web site here ~
-#' @keywords ~kwd1 ~kwd2
+#' @param text.var The text variable.         
+#' @param grouping.var The grouping variables.  Default NULL generates one 
+#' output for all text.  Also takes a single grouping variable or a list of 1 
+#' or more grouping variables.  
+#' @param target.words A named list of vectors of words whose length corresponds 
+#' to \code{label.colors} (+1 length in cloud colors for non matched terms).
+#' @param stopwords Words to exclude from the analysis (default is Top100Words).
+#' @param label.cex The magnification to be used for network plot labels 
+#' relative to the current setting of cex.  Default is .8.
+#' @param log.labels logical.  If TRUE uses a proportional log label for more 
+#' readable labels.  The formula is: \code{log(SUMS)/max(log(SUMS)))}. 
+#' \code{label.size} adds more control over the label sizes. 
+#' @param label.size An optional sizing constant to add to labels if log.labels 
+#' is TRUE.
+#' @param edge.curved  logical.  If TRUE edges will be curved rather than 
+#' straight paths.
+#' @param vertex.shape The shape of the vertices (see 
+#' \code{\link[igraph]{igraph.vertex.shapes}} for more).
+#' @param edge.color  A character vector of length one corresponding to the 
+#' color of the plot edges.
+#' @param label.colors A character vector of length one corresponding to the 
+#' color of the labels.
+#' @param layout  layout types supported by igraph.  See 
+#' \code{\link[igraph]{layout}}.
+#' @param title.name The title of the plot.
+#' @param title.padj Adjustment for the network plot title. For strings 
+#' parallel to the axes, padj = 0 means right or top alignment, and padj = 1 
+#' means left or bottom alignment.
+#' @param title.location On which side of the network plot (1=bottom, 2=left, 
+#' 3=top, 4=right).
+#' @param title.font The font family of the cloud title.
+#' @param title.cex Character expansion factor for the title. NULL and NA are 
+#' equivalent to 1.0.
+#' @param title.color A character vector of length one corresponding to the 
+#' color of the title.
+#' @param legend A character vector of names corresponding to the number of 
+#' vectors in \code{match.string}.
+#' @param legend.cex Character expansion factor for the  network plot legend. 
+#' NULL and NA are equivalent to 1.0. 
+#' @param legend.location The x and y co-ordinates to be used to position the 
+#' network plot legend.  The location may also be specified by setting x to a 
+#' single keyword from the list \code{"bottomright"}, \code{"bottom"}, 
+#' \code{"bottomleft"}, \code{"left"}, \code{"topleft"}, \code{"top"}, 
+#' \code{"topright"}, \code{"right"} and \code{"center"}. This places the legend on 
+#' the inside of the plot frame at the given location. 
+#' @param plot logical.  If TRUE plots a network plot of the words.
+#' @return Silently returns a list of igraph parameters.  Optionally, plots the 
+#' output.
+#' @seealso \code{\link[qdap]{word.network.plot}},
+#' \code{\link[igraph]{graph.adjacency}}
+#' @keywords network
 #' @examples
 #' \dontrun{
 #' word.network.plot(text.var=DATA$state, grouping.var=DATA$person)

@@ -18,6 +18,7 @@
 #' @keywords word-count, character-count
 #' @export 
 #' @examples
+#' \dontrun{
 #' # WORD COUNT
 #' word.count(DATA$state)
 #' wc(DATA$state)
@@ -35,8 +36,10 @@
 #' char.table(DATA$state, DATA$person)
 #' character.table(DATA$state, list(DATA$sex, DATA$adult))
 #' colsplit2df(character.table(DATA$state, list(DATA$sex, DATA$adult)))
+#' }
 word.count <- 
-function(text.var, byrow = TRUE, missing = NA, digit.remove = TRUE, names = FALSE) {
+function(text.var, byrow = TRUE, missing = NA, digit.remove = TRUE, 
+    names = FALSE) {
     len2 <- function(x, missing) {
         len <- length(x)
         ifelse((len == 0) | len == 1 && (is.na(x) | is.null(x)), missing, len)
