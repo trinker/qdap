@@ -13,6 +13,7 @@
 #' @return Returns a dataframe with co-occurrences of provided code columns.
 #' @seealso \code{\link[qdap]{cm_long2dummy}}
 #' @keywords co-occurence
+#' @export
 #' @examples
 #' \dontrun{
 #' foo <- list(

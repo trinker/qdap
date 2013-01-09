@@ -54,7 +54,7 @@ cm_df.temp(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
   Oaks, CA: SAGE Publications.
 }
 \seealso{
-  \code{\link{cm_range2long}}, #' \code{\link{cm_df.fill}}
+  \code{\link{cm_range2long}}, \code{\link{cm_df.fill}}
 }
 \keyword{coding}
 

@@ -10,6 +10,7 @@
 #' @keywords coding
 #' @seealso 
 #' \code{\link[qdap]{cm_time.temp}}
+#' @export
 #' @examples
 #' \dontrun{
 #' cm_range.temp(qcv(AA, BB, CC), file = "foo.txt")

@@ -50,7 +50,7 @@ with(mraja1spl, cm_df.transcript(dialogue, list(person), file="foo.doc"))
   <tyler.rinker@gmail.com>.
 }
 \seealso{
-  See Also as \code{\link[qdap]{cm_df2long}} See Also as
+  \code{\link[qdap]{cm_df2long}},
   \code{\link[qdap]{cm_df.temp}}
 }
 \keyword{transcript}

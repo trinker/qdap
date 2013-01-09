@@ -21,10 +21,11 @@
 #' analysis.
 #' @seealso 
 #' \code{\link{cm_range2long}},
-#' #' \code{\link{cm_df.fill}}
+#' \code{\link{cm_df.fill}}
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: 
 #' Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding
+#' @export
 #' @examples
 #' \dontrun{
 #' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)

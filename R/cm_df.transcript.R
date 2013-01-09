@@ -19,8 +19,8 @@
 #' from this file.  If a file already exists cm_df.transcript will append to 
 #' that file.
 #' @author DWin, Gavin Simpson and Tyler Rinker <tyler.rinker@@gmail.com>.
-#' @seealso See Also as \code{\link[qdap]{cm_df2long}}
-#' See Also as \code{\link[qdap]{cm_df.temp}}
+#' @seealso \code{\link[qdap]{cm_df2long}},
+#' \code{\link[qdap]{cm_df.temp}}
 #' @keywords transcript
 #' @export
 #' @examples
