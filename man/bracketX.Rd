@@ -41,25 +41,25 @@
 }
 \examples{
 \dontrun{
-examp2 <- examp2 <- structure(list(person = structure(c(1L, 2L, 1L, 3L),
+examp <- structure(list(person = structure(c(1L, 2L, 1L, 3L),
     .Label = c("bob", "greg", "sue"), class = "factor"), text =
     c("I love chicken [unintelligible]!",
     "Me too! (laughter) It's so good.[interupting]",
     "Yep it's awesome {reading}.", "Agreed. {is so much fun}")), .Names =
     c("person", "text"), row.names = c(NA, -4L), class = "data.frame")
 
-examp1
-bracketX(examp2$text, 'square')
-bracketX(examp2$text, 'curly')
-bracketX(examp2$text)
+examp
+bracketX(examp$text, "square")
+bracketX(examp$text, "curly")
+bracketX(examp$text)
 
-examp2
-bracketXtract(examp2$text, 'square')
-bracketXtract(examp2$text, 'curly')
-bracketXtract(examp2$text)
-bracketXtract(examp2$text, with = TRUE)
+examp
+bracketXtract(examp$text, "square")
+bracketXtract(examp$text, "curly")
+bracketXtract(examp$text)
+bracketXtract(examp$text, with = TRUE)
 
-paste2(bracketXtract(examp2$text, 'curly'), " ")
+paste2(bracketXtract(examp$text, "curly"), " ")
 }
 }
 \author{

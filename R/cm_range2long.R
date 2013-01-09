@@ -17,6 +17,7 @@
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: 
 #' Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding, time span
+#' @export
 #' @examples
 #' \dontrun{
 #' foo <- list(

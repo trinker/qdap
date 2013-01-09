@@ -27,7 +27,7 @@ wordLIST <- c(" montague", " capulet", " court", " marry")
 (raj.adjmat <- adjmat(raj.termco))
 names(raj.adjmat)  #see what's available from the adjacency_matrix object
 library(igraph)
-g <- graph.adjacency(raj.adjmat$adjacency, weighted=TRUE, mode ='undirected')
+g <- graph.adjacency(raj.adjmat$adjacency, weighted=TRUE, mode ="undirected")
 g <- simplify(g)
 V(g)$label <- V(g)$name
 V(g)$degree <- degree(g)

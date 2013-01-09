@@ -25,20 +25,23 @@
 #' }
 bag.o.words <-
 function(text.var, apostrophe.remove = FALSE, ...) {
-    unblanker(words(strip(clean(text.var), apostrophe.remove = apostrophe.remove, ...)))
+    unblanker(words(strip(clean(text.var), 
+        apostrophe.remove = apostrophe.remove, ...)))
 }
 
 #' Bag of Stripped Words and End Marks
 #' 
-#' \code{breaker} - Reduces a text column to a bag of words and qdap recognized end marks.
+#' \code{breaker} - Reduces a text column to a bag of words and qdap recognized 
+#' end marks.
 #' 
-#' @return \code{breaker} - returns a vector of striped words and qdap recognized endmarks (i.e. \code{".", "!", "?", "*", "-"}).
+#' @return \code{breaker} - returns a vector of striped words and qdap 
+#' recognized endmarks (i.e. \code{".", "!", "?", "*", "-"}).
 #' @rdname bag.o.words
 #' @export
 breaker <-
 function(text.var) {
-  unlist(strsplit(as.character(text.var), 
-      "[[:space:+]]|(?=[|.!?*-])", perl=TRUE))
+    unblanker(unlist(strsplit(as.character(text.var), 
+        "[[:space:]]|(?=[|.!?*-])", perl=TRUE)))
 }
 
 
