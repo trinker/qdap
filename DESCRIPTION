@@ -171,3 +171,4 @@ Collate:
     'words.R'
     'xnoy.R'
     'merge_all.R'
+    'question_type.R'

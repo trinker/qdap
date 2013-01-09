@@ -16,9 +16,11 @@
     apostrophe.remove = TRUE, digit.remove = TRUE,
     count.space = FALSE)
 
-  character.table(text.var, grouping.var)
+  character.table(text.var, grouping.var,
+    proportional = FALSE, prop.by.row = TRUE, ...)
 
-  char.table(text.var, grouping.var)
+  char.table(text.var, grouping.var, proportional = FALSE,
+    prop.by.row = TRUE, ...)
 }
 \arguments{
   \item{text.var}{The text variable}
@@ -45,6 +47,15 @@
 
   \item{count.space}{logical.  If TRUE spaces are counted
   as characters.}
+
+  \item{proportional}{logical.  If TRUE outputs the table
+  proportionally (see \code{\link[qdap]{prop}}).}
+
+  \item{prop.by.row}{logical.  If TRUE applies proportional
+  to the row.  If FALSE applies by column.}
+
+  \item{\ldots}{Other arguments passed to
+  \code{\link[qdap]{prop}}.}
 }
 \value{
   \code{word.count} - returns a word count by row or total.
@@ -56,13 +67,13 @@
   counts by grouping variable.
 }
 \description{
-  \code{word.count} - Transcript Apply Word Counts
+  \code{word.count} - Transcript apply word counts.
 
-  \code{character.count} - Transcript Apply Character
-  Counts
+  \code{character.count} - Transcript apply character
+  counts.
 
   \code{character.table} - Computes a table of character
-  counts by grouping variable(s).
+  counts by grouping . variable(s).
 }
 \note{
   wc is a convienent short hand for word.count.
@@ -101,12 +112,15 @@ ggplot(data = dat3, aes(x = variable, fill = variable)) +
 # CHARACTER TABLE
 character.table(DATA$state, DATA$person)
 char.table(DATA$state, DATA$person)
+char.table(DATA$state, DATA$person, proportianal = TRUE)
 character.table(DATA$state, list(DATA$sex, DATA$adult))
 colsplit2df(character.table(DATA$state, list(DATA$sex, DATA$adult)))
 }
 }
 \seealso{
   \code{\link[qdap]{syllable.count}}
+
+  \code{\link[qdap]{prop}}
 }
 \keyword{character-count}
 \keyword{word-count,}

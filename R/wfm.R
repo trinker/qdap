@@ -136,7 +136,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL,
         names(tabs[[x]]) <<- c("Words", names(tabs)[x])  
         }
     ) 
-    DF <- merge.all(tabs, by="Words", 0)
+    DF <- merge_all(tabs, by="Words", 0)
     DF <- DF[order(DF$Words), ]
     DF[, "Words"] <- as.character(DF[, "Words"])
     DF[, -1] <- sapply(DF[, -1], function(x) as.numeric(as.character(x)))
@@ -283,4 +283,3 @@ function(wf.obj, word.lists, matrix = FALSE){
     comment(DFF) <- ifelse(!matrix, "t.df", "true.matrix")
     DFF
 }
-

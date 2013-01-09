@@ -44,19 +44,20 @@ qprep <-
 function(text.var, rm.dash = TRUE, bracket = "all", missing = NULL, 
     names = FALSE, abbreviation = qdap::abbreviations, 
     replace = NULL, ignore.case = TRUE, num.paste = "separate") {
+  
     if (!is.null(bracket)) {
-        x <- bracketX(clean(text.var), bracket = bracket, 
+        text.var <- bracketX(clean(text.var), bracket = bracket, 
             missing = missing, names = names)
     }
     if (!is.null(abbreviation)) {
-        x <- replace_abbreviation(x, abbreviation = abbreviation, 
+        text.var <- replace_abbreviation(text.var, abbreviation = abbreviation, 
             replace = replace, ignore.case = ignore.case)
     }
     if (!is.null(num.paste)) {
-        x <- replace_number(x, num.paste = num.paste)
+        text.var <- replace_number(text.var, num.paste = num.paste)
     }
     if (rm.dash) {
-        x <- gsub("-", " ", x)
+        text.var <- gsub("-", " ", text.var)
     }
-    Trim(scrubber(replace_symbol(x)))
+    Trim(scrubber(replace_symbol(text.var)))
 }

@@ -1,6 +1,6 @@
 #' Word Counts
 #' 
-#' \code{word.count} - Transcript Apply Word Counts
+#' \code{word.count} - Transcript apply word counts.
 #' 
 #' @rdname word.count
 #' @param text.var The text variable
@@ -15,9 +15,15 @@
 #' @param apostrophe.remove = TRUE logical.  If TRUE apostrophes will be counted 
 #' in the character count.
 #' @param count.space logical.  If TRUE spaces are counted as characters.
+#' @param proportional logical.  If TRUE outputs the table proportionally 
+#' (see \code{\link[qdap]{prop}}).
+#' @param prop.by.row logical.  If TRUE applies proportional to the row.  If 
+#' FALSE applies by column.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{prop}}.
 #' @return \code{word.count} - returns a word count by row or total.
 #' @note wc is a convienent short hand for word.count.
 #' @seealso \code{\link[qdap]{syllable.count}}
+#' @seealso \code{\link[qdap]{prop}}
 #' @keywords word-count, character-count
 #' @export 
 #' @examples
@@ -54,6 +60,7 @@
 #' # CHARACTER TABLE
 #' character.table(DATA$state, DATA$person)
 #' char.table(DATA$state, DATA$person)
+#' char.table(DATA$state, DATA$person, proportianal = TRUE)
 #' character.table(DATA$state, list(DATA$sex, DATA$adult))
 #' colsplit2df(character.table(DATA$state, list(DATA$sex, DATA$adult)))
 #' }
@@ -82,7 +89,7 @@ wc <- word.count
 
 #' Count Number of Characters
 #' 
-#' \code{character.count} - Transcript Apply Character Counts
+#' \code{character.count} - Transcript apply character counts.
 #' 
 #' @return \code{character.count} - returns a character count by row or total.
 #' @rdname word.count
@@ -109,51 +116,46 @@ function(text.var, byrow = TRUE, missing = NA, apostrophe.remove = TRUE,
 
 #' Table of Character Counts
 #' 
-#' \code{character.table} - Computes a table of character counts by grouping 
+#' \code{character.table} - Computes a table of character counts by grouping .
 #' variable(s).
 #' 
 #' @return \code{character.table} - returns a dataframe of character counts by 
 #' grouping variable.
 #' @rdname word.count
 #' @export
-character.table <- function(text.var, grouping.var) {
-    G <- if(is.null(grouping.var)) {                                                 
-             gv <- TRUE                                                              
-             "all"                                                                   
-         } else {                                                                    
-             gv <- FALSE                                                             
-             if (is.list(grouping.var)) {                                            
-                 m <- unlist(as.character(substitute(grouping.var))[-1])             
-                 m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) x[length(x)]) 
-                     paste(m, collapse="&")                                          
-             } else {                                                                
-                  G <- as.character(substitute(grouping.var))                        
-                  G[length(G)]                                                       
-             }                                                                       
-         }                                                                           
-    grouping.var <- if(is.null(grouping.var)){                                       
-        rep("all", length(text.var))                                                 
-    } else {                                                                         
-    if(is.list(grouping.var) & length(grouping.var)>1) {                             
-         apply(data.frame(grouping.var), 1, function(x){                             
-                     if (any(is.na(x))){                                             
-                         NA                                                          
-                     }else{                                                          
-                         paste(x, collapse = ".")                                    
-                     }                                                               
-                 }                                                                   
-             )                                                                       
-        } else {                                                                     
-            unlist(grouping.var)                                                     
-        }                                                                            
-    }                        
+character.table <- function(text.var, grouping.var, proportional = FALSE, 
+    prop.by.row = TRUE, ...) {
+    if(is.null(grouping.var)) {
+        G <- "all"
+    } else {
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
+    }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    }                 
     ctab <- function(x) {
         table(unlist(strsplit(tolower(scrubber(paste2(x))), NULL)))
     }
     text.var <- as.character(text.var)
-    DF <- data.frame(grouping.var, text.var, check.names = FALSE, 
+    DF <- data.frame(grouping, text.var, check.names = FALSE, 
         stringsAsFactors = FALSE)
-    DF$grouping.var <- factor(DF$grouping.var)
+    DF$grouping <- factor(DF$grouping)
     L1 <- split(DF$text.var, DF$grouping)
     L2 <- lapply(L1, ctab)
     chars <- sort(unique(unlist(lapply(L2, names))))
@@ -168,6 +170,11 @@ character.table <- function(text.var, grouping.var) {
     DF2 <- data.frame(x = rownames(L3), L3, check.names=FALSE, 
         row.names = NULL)
     colnames(DF2)[1] <- G
+    if (proportional) {
+        DF2 <- data.frame(DF2[, 1, drop = FALSE], prop(DF2[-1], 
+            by.column = (1 - prop.by.row), ...), check.names = FALSE)
+        DF2[is.nan(DF2)] <- 0
+    }
     DF2
 }
 
