@@ -35,7 +35,7 @@
   \item{digits}{Integer; number of decimal places to
   round.}
 
-  \item{\ldots}{Any other arguments passed to endf}
+  \item{\ldots}{Any other arguments passed to endf.}
 }
 \value{
   Returns a list of three descriptive word statistics:

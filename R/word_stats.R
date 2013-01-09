@@ -18,7 +18,7 @@
 #' @param apostrophe.remove logical.  If TRUE removes apostophes from calculating 
 #' the output.   
 #' @param digits Integer; number of decimal places to round.                     
-#' @param \ldots Any other arguments passed to endf     
+#' @param \ldots Any other arguments passed to endf.     
 #' @return Returns a list of three descriptive word statistics:
 #' \item{ts}{A data frame of descriptive word statistics by row} 
 #' \item{gts}{A data frame of word statistics per grouping variable:
@@ -63,8 +63,8 @@ word_stats <-
 function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE, 
     rm.incomplete = FALSE, digit.remove = FALSE, apostrophe.remove = FALSE, 
     digits = 3, ...) {
-    G <- if(is.null(grouping.var)) {
-        "all"
+    if(is.null(grouping.var)) {
+        G <- "all"
     } else {
         if (is.list(grouping.var)) {
             m <- unlist(as.character(substitute(grouping.var))[-1])
@@ -72,26 +72,19 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
                     x[length(x)]
                 }
             )
-            paste(m, collapse="&")
+            G <- paste(m, collapse="&")
         } else {
             G <- as.character(substitute(grouping.var))
-            G[length(G)]
+            G <- G[length(G)]
         }
     }
-    grouping <- if(is.null(grouping.var)){
-        rep("all", length(text.var))
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
     } else {
         if (is.list(grouping.var) & length(grouping.var)>1) {
-            apply(data.frame(grouping.var), 1, function(x){
-                if (any(is.na(x))){
-                        NA
-                    } else {
-                        paste(x, collapse = ".")
-                    }
-                }
-            )
+            grouping <- paste2(grouping.var)
         } else {
-            unlist(grouping.var)
+            grouping <- unlist(grouping.var)
         } 
     } 
     t.o.t. <- if(is.null(tot)){

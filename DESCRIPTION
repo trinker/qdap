@@ -98,7 +98,7 @@ Collate:
     'gantt_rep.R'
     'gantt_wrap.R'
     'hash.R'
-    'htruncDF.R'
+    'htruncdf.R'
     'imperative.R'
     'incomplete.replace.R'
     'key_merge.R'

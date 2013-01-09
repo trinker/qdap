@@ -71,7 +71,7 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
         q <- strip(q) 
         q <- gsub("-", " ", q) 
         q <- gsub("\\?", " ", q) 
-        q <- Trim(q)
+        q <- reducer(Trim(q))
         if (q=="") {
             return(NA)
         }

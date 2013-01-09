@@ -17,7 +17,8 @@
   remove.  This is one of the strings \code{"curly"},
   \code{"square"}, \code{"round"}, \code{"angle"} and
   \code{"all"}.  These strings correspond to: \{, [, (, <
-  or all four types.}
+  or all four types.  Also takes the argument \code{NULL}
+  which turns off this parsing technique.}
 
   \item{missing}{Value to assign to empty cells.}
 
@@ -27,7 +28,8 @@
   \item{abbreviation}{A two column key of abbreviations
   (column 1) and long form replacements (column 2) or a
   vector of abbeviations.  Default is to use qdap's
-  abbreviations data set.}
+  abbreviations data set.  Also takes the argument
+  \code{NULL} which turns off this parsing technique.}
 
   \item{replace}{A vector of long form replacements if a
   data frame is not supplied to the abbreviation argument.}
@@ -38,7 +40,8 @@
   \item{num.paste}{A character string c(\code{"separate"},
   \code{"combine"}); \code{"separate"} will treat each word
   section as separate, \code{"combine"} will lump the
-  sections together as one word.}
+  sections together as one word.  Also takes the argument
+  \code{NULL} which turns off this parsing technique.}
 }
 \description{
   Wrapper for \code{bracketX}, \code{replace_number},
