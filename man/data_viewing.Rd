@@ -22,11 +22,11 @@
   \item{begin}{The first element to be displayed.}
 
   \item{\ldots}{Other arguments passed to
-  \code{\link[head]{head}}.}
+  \code{\link[utils]{head}}.}
 }
 \value{
-  \code{htrundf} - returns n number of rows of a truncated
-  dataframe.
+  \code{\link[utils]{htrundf}} - returns n number of rows
+  of a truncated dataframe.
 
   \code{trundf} - returns a truncated dataframe.
 
@@ -55,6 +55,6 @@ qview(CO2)
 }
 }
 \seealso{
-  \code{\link{head}}
+  \code{\link[utils]{head}}
 }
 

@@ -8,10 +8,10 @@
 #' @param width The width of the columns to be displayed.
 #' @param end The last element to be displayed.
 #' @param begin The first element to be displayed.
-#' @param \ldots Other arguments passed to \code{\link[head]{head}}.
+#' @param \ldots Other arguments passed to \code{\link[utils]{head}}.
 #' @rdname data_viewing
-#' @return \code{htrundf} - returns n number of rows of a truncated dataframe.
-#' @seealso \code{\link{head}}
+#' @return \code{\link[utils]{htrundf}} - returns n number of rows of a truncated dataframe.
+#' @seealso \code{\link[utils]{head}}
 #' @export
 #' @examples
 #' \dontrun{
