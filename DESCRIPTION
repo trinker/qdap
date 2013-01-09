@@ -31,7 +31,6 @@ Suggests:
     plyr,
     koRpus
 LazyData: TRUE
-ByteCompile: yes
 Description: This package automates many of the tasks associated with
     quantitative discourse analysis oftranscripts containing discourse
     including frequency counts of sentence types, words, sentence, turns of

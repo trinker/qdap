@@ -25,9 +25,7 @@
 #' }
 htruncdf <-
 function(dataframe, n=10, width=10) {
-    x <- as.data.frame(dataframe)
-    x <- head(truncdf(x, width),n=n)
-    x
+    head(truncdf(as.data.frame(dataframe), width), n = n)
 }
 
 #' Truncated Dataframe Viewing
