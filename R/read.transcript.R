@@ -75,7 +75,7 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     }
     switch(y, 
         xlsx = {
-            x <- gdata::read.xls(file,  header = header, 
+            x <- read.xls(file,  header = header, 
                 sep = sep, as.is=FALSE, na.strings= na.strings, 
                 strip.white = TRUE, stringsAsFactors = FALSE, 
                 blank.lines.skip = rm.empty.rows, ...)

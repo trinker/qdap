@@ -10,7 +10,7 @@
 #' @param begin The first element to be displayed.
 #' @param \ldots Other arguments passed to \code{\link[utils]{head}}.
 #' @rdname data_viewing
-#' @return \code{\link[utils]{htrundf}} - returns n number of rows of a truncated dataframe.
+#' @return \code{htrundf} - returns n number of rows of a truncated dataframe.
 #' @seealso \code{\link[utils]{head}}
 #' @export
 #' @examples

@@ -37,6 +37,9 @@
   \item{min.wrdcnt}{A minimum word count threshold that
   must be achieved to be considered in the results.
   Default includes all subgroups.}
+
+  \item{\ldots}{Other arguments passed to
+  \code{\link[qdap]{pos.by}}.}
 }
 \value{
   A list containing at the following components:

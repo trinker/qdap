@@ -6,9 +6,9 @@
 #' @param overlap Minimum/exact amount of overlap.
 #' @param equal.or A character vector of c(\code{"equal"}, \code{"greater"}, 
 #' \code{"more"}, \code{"less"}).
-#' @param \dots In liu of word.list the user may input n  number of character 
+#' @param \dots In liu of word.list the user may input n number of character 
 #' vectors.
-#' @rdname common_words
+#' @rdname common
 #' @return Returns a dataframe of all words that match the criteria set by 
 #' \code{overlap} and \code{equal.or}.
 #' @export
@@ -27,45 +27,43 @@
 #' common(word_list(DATA$state, DATA$person)$cwl, overlap = 2) 
 #' } 
 common <-
-  function(x, ...){
+function(word.list, ...){
     UseMethod("common")
 }
 
 #' @return \code{NULL}
 #'
-#' @rdname common_words
-#' @method common default
-#' @S3method common default  
-common.default <-
-  function(..., overlap = "all", equal.or = "equal"){
-    LIS <- list(...)
-    return(common.list(LIS, overlap, equal.or))
-}
-
-#' @return \code{NULL}
-#'
-#' @rdname common_words
+#' @rdname common
 #' @method common list
 #' @S3method common list
 common.list <-
-  function(word.list, overlap = "all", equal.or = "more"){
-      if(overlap=="all") {
+function(word.list, ..., overlap = "all", equal.or = "more"){
+    if(overlap=="all") {
         OL <- length(word.list) 
-      } else {
+    } else {
         OL <- overlap
-      }
+    }
     LIS <- sapply(word.list, unique)
-    DF <- as.data.frame(table(unlist(LIS)),  stringsAsFactors = FALSE)
+    DF <- as.data.frame(table(unlist(LIS)), stringsAsFactors = FALSE)
     names(DF) <- c("word", "freq")
     DF <- DF[order(-DF$freq, DF$word), ]
     DF <- switch(equal.or,
-                 equal = DF[DF$freq == OL, ],
-                 greater = DF[DF$freq > (OL - 1), ],
-                 more = DF[DF$freq > (OL - 1), ],
-                 less = DF[DF$freq < (OL + 1), ])
+        equal = DF[DF$freq == OL, ],
+        greater = DF[DF$freq > (OL - 1), ],
+        more = DF[DF$freq > (OL - 1), ],
+        less = DF[DF$freq < (OL + 1), ])
     rownames(DF) <- 1:nrow(DF)
     return(DF)
 }
 
-
+#' @return \code{NULL}
+#'
+#' @rdname common
+#' @method common default
+#' @S3method common default  
+common.default <-
+    function(..., overlap = "all", equal.or = "equal"){
+        LIS <- list(...)
+        return(common.list(LIS, overlap, equal.or))
+}
 

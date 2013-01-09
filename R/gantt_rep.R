@@ -10,6 +10,8 @@
 #' variable or a list of 1 or more grouping variables.
 #' @param units The unit of measurement to analyze.  One of the strings 
 #' \code{"character"}, \code{"syllable"}, \code{"word"}, or \code{"sentence"}.
+#' @param col.sep The character string to use to separate pasted variables in the 
+#' merged grouping variable header/name.
 #' @return Returns a data frame of start and end times by repeated measure and 
 #' grouping variable(s)
 #' @note For non repeated measures data/plotting use \code{gantt}; for a 

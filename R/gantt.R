@@ -14,6 +14,8 @@
 #' @param plot.colors The colors of the Gannt plot bars.  Either a single color 
 #' or a length equal to the number of grouping variable(s).
 #' @param box.color A single color of the box around the Gantt plot bars.
+#' @param col.sep The character string to use to separate pasted variables in the 
+#' merged grouping variable header/name.
 #' @return Returns a data frame of start and end times by grouping variable(s) 
 #' or optionally returns a list of two: (1) A data frame of the total units 
 #' used by grouping variable(s) and (2) a data frame of of start and end times 

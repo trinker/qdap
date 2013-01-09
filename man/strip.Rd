@@ -8,15 +8,15 @@
 \arguments{
   \item{x}{The text variable.}
 
-  \item{char.keep}{A character vector of symbol character
-  (i.e. punctioation) that strip should keep.  The default
-  is to strip everything except apostophes.}
+  \item{char.keep}{A character vector of symbols (i.e.
+  punctuation) that \code{strip} should keep.  The default
+  is to strip every symbol except apostophes.}
 
   \item{digit.remove}{logical.  If TRUE strips digits from
   the text.}
 
   \item{apostrophe.remove}{logical.  If TRUE removes
-  apostrophe's from the output.}
+  apostrophes from the output.}
 
   \item{lower.case}{logical.  If TRUE forces all alpha
   characters to lower case.}

@@ -1,8 +1,8 @@
-\name{merge.all}
-\alias{merge.all}
+\name{merge_all}
+\alias{merge_all}
 \title{Merge Multiple Data Sets}
 \usage{
-  merge.all(frames, by, na.replace = NA)
+  merge_all(frames, by, na.replace = NA)
 }
 \arguments{
   \item{frames}{Multiple dataframes to merge together.}
@@ -47,8 +47,8 @@ lapply(seq_along(WEEKlist), function(x) {
 )  #notice the assignment to the enviroment
 
 
-merge.all(frames=WEEKlist, by=c('ID', 'Gender', 'DOB'))
-merge.all(frames=WEEKlist, by=1:3, na.replace = 0)
+merge_all(frames=WEEKlist, by=c('ID', 'Gender', 'DOB'))
+merge_all(frames=WEEKlist, by=1:3, na.replace = 0)
 }
 }
 \references{

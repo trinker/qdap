@@ -29,6 +29,10 @@
 
   \item{box.color}{A single color of the box around the
   Gantt plot bars.}
+
+  \item{col.sep}{The character string to use to separate
+  pasted variables in the merged grouping variable
+  header/name.}
 }
 \value{
   Returns a data frame of start and end times by grouping

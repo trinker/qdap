@@ -107,7 +107,6 @@ Collate:
     'left.just.R'
     'lookup.R'
     'mcsv_r.R'
-    'merge.all.R'
     'multigsub.R'
     'multiscale.R'
     'NAer.R'
@@ -172,3 +171,4 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
+    'merge_all.R'

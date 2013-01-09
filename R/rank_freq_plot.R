@@ -15,6 +15,7 @@
 #' @param hap.col Color of the hapax legomenon points.
 #' @param dis.col Color of the dis legomenon points.
 #' @param alpha Transparency level of points (ranges betweeon 0 and 1).
+#' @param shape An integer specifying the symbol used to plot the points.
 #' @param title Optional plot title.
 #' @param digits Integer; number of dicimal places to round.  
 #' @param plot logical.  If TRUE provides a rank frequency plot.

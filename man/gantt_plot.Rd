@@ -19,6 +19,8 @@
   \item{fill.var}{An optional variable to fill the code
   stips by.}
 
+  \item{xlab}{The name of the x-axis label.}
+
   \item{units}{The unit of measurement.}
 
   \item{col.sep}{The column separator.}

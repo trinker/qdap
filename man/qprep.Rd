@@ -21,8 +21,6 @@
 
   \item{missing}{Value to assign to empty cells.}
 
-  \item{missing}{Value to assign to empty cells.}
-
   \item{names}{logical.  If TRUE the sentences are given as
   the names of the counts.}
 

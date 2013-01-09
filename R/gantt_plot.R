@@ -10,6 +10,7 @@
 #' @param rm.var An optional single vector or list of 1 or 2 of repeated 
 #' measures to facet by    
 #' @param fill.var An optional variable to fill the code stips by. 
+#' @param xlab The name of the x-axis label.
 #' @param units The unit of measurement.      
 #' @param col.sep The column separator.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{gantt_wrap}}.

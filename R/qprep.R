@@ -12,7 +12,6 @@
 #' \code{"angle"} and \code{"all"}.  These strings correspond to: \{, [, (, < 
 #' or all four types.
 #' @param missing Value to assign to empty cells.
-#' @param missing Value to assign to empty cells.
 #' @param names logical.  If TRUE the sentences are given as the names of the 
 #' counts.
 #' @param abbreviation A two column key of abbreviations (column 1) and long 

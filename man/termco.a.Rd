@@ -20,7 +20,7 @@
   term.match(text.var, terms, return.list = TRUE,
     apostrophe.remove = FALSE)
 
-  termco2mat(dataframe, drop.wc = TRUE, short.terms = TRUE,
+  termco2mat(dataframe, drop.wc = TRUE, short.term = TRUE,
     rm.zerocol = FALSE, no.quote = TRUE, transform = TRUE,
     trim.terms = TRUE)
 }
@@ -32,7 +32,7 @@
   single grouping variable or a list of 1 or more grouping
   variables.}
 
-  \item{match.list}{a list of named character vectors}
+  \item{match.list}{A list of named character vectors.}
 
   \item{short.term}{logical.  If TRUE column names are
   trimmed versions of the match list, other wise the terms
@@ -71,9 +71,14 @@
 
   \item{zero.replace}{Value to replace 0 values with.}
 
-  \item{\code{term.match}}{- return.list logical.  If TRUE
-  returns the output for multiple terms as a list by term
-  rather than a vector.}
+  \item{terms}{The terms to serach for in the
+  \code{text.var}.  Similar to \code{match.list} but these
+  terms must be words or partial words rather than multiple
+  words and symbols.}
+
+  \item{return.list}{logical.  If TRUE returns the output
+  for multiple terms as a list by term rather than a
+  vector.}
 
   \item{dataframe}{A termco.a (or termco.d) dataframe or
   object.}
@@ -81,14 +86,18 @@
   \item{drop.wc}{logical.  If TRUE the word count column
   will be dropped.}
 
-  \item{short.colnames}{logical.  If TRUE the ``term()''
-  portion of column names will be dropped.}
+  \item{rm.zerocol}{logical.  If TRUE any column containing
+  all zeros will be removed from the matrix.}
 
   \item{no.quote}{logical.  If TRUE the matrix will be
   printed without quotes if it's character.}
 
   \item{transform}{logical.  If TRUE the matrix will be
   transformed.}
+
+  \item{trim.terms}{logical.  If TRUE trims the column
+  header/names to ensure there is not a problem with
+  spacing when using in other R functions.}
 }
 \value{
   \code{termco.a} & \code{termco.d} - both return a list,

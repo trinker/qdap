@@ -8,11 +8,11 @@
     stan.digits = 2)
 }
 \arguments{
-  \item{dataframe}{a data frame from the cm_x2long family
+  \item{dataframe}{A data frame from the cm_x2long family
   (\code{cm_range2long}; \code{cm_df2long};
-  \code{cm_time2long})}
+  \code{cm_time2long}).}
 
-  \item{time.var}{an optional variable to split the
+  \item{time.var}{An optional variable to split the
   dataframe by (if you have data that is by various times
   this must be supplied).}
 
@@ -20,23 +20,26 @@
   multiple cores. This is effective with larger data sets
   but may actually be slower with smaller data sets.}
 
-  \item{code.var}{the name of the code variable column.
-  Defaults to "codes" as out putted by x2long family}
+  \item{code.var}{The name of the code variable column.
+  Defaults to "codes" as out putted by x2long family.}
 
   \item{causal}{logical.  If TRUE measures the distance
-  ebtween x and y given that x must procede y}
+  ebtween x and y given that x must procede y.}
 
-  \item{start.var}{the name of the start variable column.
-  Defaults to "start" as out putted by x2long family}
+  \item{start.var}{The name of the start variable column.
+  Defaults to "start" as out putted by x2long family.}
 
-  \item{end.var}{the name of the end variable column.
-  Defaults to "end" as out putted by x2long family}
+  \item{end.var}{The name of the end variable column.
+  Defaults to "end" as out putted by x2long family.}
 
-  \item{mean.digits}{the number of digits to be displayed
-  in the mean matrix}
+  \item{mean.digits}{The number of digits to be displayed
+  in the mean matrix.}
 
-  \item{sd.digits}{the number of digits to be displayed in
-  the sd matrix}
+  \item{sd.digits}{The number of digits to be displayed in
+  the sd (standard deviation) matrix.}
+
+  \item{stan.digits}{The number of dugits to use in the
+  standardized mean difference matrix.}
 }
 \value{
   An object of the class cm.dist.  This is a list of n

@@ -30,6 +30,10 @@
   that increases the intensity of a psoitive or negatibve
   word.}
 
+  \item{rm.incomplete}{logical.  If TRUE text rows ending
+  with qdap's incomplete sentence endmark (\code{|}) will
+  be removed from the analysis.}
+
   \item{digits}{Integer; number of decimal places to
   round.}
 

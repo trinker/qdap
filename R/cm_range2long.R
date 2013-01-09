@@ -8,8 +8,6 @@
 #' argument.
 #' @param list.var logical.  If TRUE creates a column for the data frame created 
 #' by each time.list passed to \code{cm_t2l}.
-#' @param star.end logical. If TRUE outputs stop and end times for each 
-#' \code{cm_time.temp} list object.
 #' @param debug logical. If TRUE debugging mode is on.  \code{cm_time2long} will 
 #' return possible errors in time span inputs.
 #' @return Generates a data frame of start and end times for each code.

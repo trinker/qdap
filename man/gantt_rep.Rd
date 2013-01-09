@@ -18,6 +18,10 @@
   \item{units}{The unit of measurement to analyze.  One of
   the strings \code{"character"}, \code{"syllable"},
   \code{"word"}, or \code{"sentence"}.}
+
+  \item{col.sep}{The character string to use to separate
+  pasted variables in the merged grouping variable
+  header/name.}
 }
 \value{
   Returns a data frame of start and end times by repeated

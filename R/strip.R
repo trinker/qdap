@@ -3,10 +3,12 @@
 #' Strip text of unwanted charcters.
 #' 
 #' @param x The text variable.
-#' @param char.keep A character vector of symbol character (i.e. punctioation) 
-#' that strip should keep.  The default is to strip everything except apostophes.
+#' @param char.keep A character vector of symbols (i.e. punctuation) that 
+#' \code{strip} should keep.  The default is to strip every symbol except 
+#' apostophes.
 #' @param digit.remove logical.  If TRUE strips digits from the text.
-#' @param apostrophe.remove logical.  If TRUE removes apostrophe's from the output.
+#' @param apostrophe.remove logical.  If TRUE removes apostrophes from the 
+#' output.
 #' @param lower.case logical.  If TRUE forces all alpha characters to lower case.
 #' @return Retruns a vector of text that has been stripped of unwanted characters.
 #' @seealso \code{\link[qdap]{stopwords}}

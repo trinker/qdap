@@ -4,13 +4,13 @@
 \alias{common.list}
 \title{Find Common Words Between Groups}
 \usage{
-  common(x, ...)
+  common(word.list, ...)
+
+  \method{common}{list} (word.list, ..., overlap = "all",
+    equal.or = "more")
 
   \method{common}{default} (..., overlap = "all",
     equal.or = "equal")
-
-  \method{common}{list} (word.list, overlap = "all",
-    equal.or = "more")
 }
 \arguments{
   \item{word.list}{A list of names chacter vectors.}

@@ -53,7 +53,7 @@ word.split <-
 function (text.var) {
     x <- reducer(Trim(clean(text.var)))
     sapply(x, function(x) {
-            unlist(strsplit(x, "[[:space:+]]|(?=[.!?*-])", perl = TRUE)) 
+            unblanker(unlist(strsplit(x, "[[:space:]]|(?=[.!?*-])", perl = TRUE)))
         }, simplify = FALSE
     )
 }

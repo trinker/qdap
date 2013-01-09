@@ -12,6 +12,8 @@
 #' positive or negative word.
 #' @param amplification.list  A character vector of terms that increases the 
 #' intensity of a psoitive or negatibve word.
+#' @param rm.incomplete logical.  If TRUE text rows ending with qdap's 
+#' incomplete sentence endmark (\code{|}) will be removed from the analysis.
 #' @param digits Integer; number of decimal places to round.
 #' @param \ldots Other arguments supplied to \code{endf}.
 #' @return Returns a list of two dataframes:

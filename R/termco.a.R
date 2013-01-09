@@ -9,7 +9,7 @@
 #' @param grouping.var The grouping variables.  Default NULL generates one word 
 #' list for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
-#' @param match.list a list of named character vectors
+#' @param match.list A list of named character vectors.
 #' @param short.term logical.  If TRUE column names are trimmed versions of the 
 #' match list, other wise the terms are wrapped with 'term(phrase)'
 #' @param ignore.case logical.  If TRUE case is ignored.
@@ -290,7 +290,10 @@ termco.d <-
 #' 
 #' \code{term.match} - Search a transcript for words that exactly match term(s).
 #' 
-#' @param \code{term.match} - return.list logical.  If TRUE returns the output for multiple terms as 
+#' @param terms The terms to serach for in the \code{text.var}.  Similar to 
+#' \code{match.list} but these terms must be words or partial words rather than 
+#' multiple words and symbols.
+#' @param return.list logical.  If TRUE returns the output for multiple terms as 
 #' a list by term rather than a vector.
 #' @return \code{term.match} -  returns a list or vector of possible words that 
 #' match term(s).
@@ -319,15 +322,17 @@ function(text.var, terms, return.list=TRUE, apostrophe.remove=FALSE) {
 #' 
 #' @param dataframe A termco.a (or termco.d) dataframe or object.
 #' @param drop.wc logical.  If TRUE the word count column will be dropped.
-#' @param short.colnames logical.  If TRUE the ``term()'' portion of column
-#' names will be dropped.
+#' @param rm.zerocol logical.  If TRUE any column containing all zeros will be 
+#' removed from the matrix.
 #' @param no.quote logical.  If TRUE the matrix will be printed without quotes
 #' if it's character.
 #' @param transform logical.  If TRUE the matrix will be transformed.
+#' @param trim.terms logical.  If TRUE trims the column header/names to ensure 
+#' there is not a problem with spacing when using in other R functions.
 #' @return \code{termco2mat} - returns a matrix of term counts.
 #' @rdname termco.a
 #' @export
-termco2mat <-function (dataframe, drop.wc = TRUE, short.terms = TRUE, 
+termco2mat <-function (dataframe, drop.wc = TRUE, short.term = TRUE, 
   rm.zerocol = FALSE, no.quote = TRUE, transform = TRUE, trim.terms = TRUE) {
   if (class(dataframe) %in% c("termco_d", "termco_c")) {
     dataframe <- dataframe[["raw"]]
@@ -342,7 +347,7 @@ termco2mat <-function (dataframe, drop.wc = TRUE, short.terms = TRUE,
   }
   MAT <- as.matrix(dataframe[, -c(ind), drop = FALSE])
   rownames(MAT) <- dataframe[, 1]
-  if (short.terms) {
+  if (short.term) {
     mn <- gsub("(.*)\\)([^\\)]*)", "\\1\\2", colnames(MAT))
     colnames(MAT) <- gsub("term(", "", mn, fixed=TRUE)
   }

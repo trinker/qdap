@@ -39,10 +39,10 @@
 #' )  #notice the assignment to the enviroment                                                 
 #'                                                                                             
 #'                                                                                             
-#' merge.all(frames=WEEKlist, by=c('ID', 'Gender', 'DOB'))                                     
-#' merge.all(frames=WEEKlist, by=1:3, na.replace = 0) 
+#' merge_all(frames=WEEKlist, by=c('ID', 'Gender', 'DOB'))                                     
+#' merge_all(frames=WEEKlist, by=1:3, na.replace = 0) 
 #' }
-merge.all <-
+merge_all <-
 function(frames, by, na.replace = NA) {
     DF <- Reduce(function(x, y) {merge(x, y, by = by, all = TRUE)}, frames)
     return(NAer(DF, replace = na.replace))

@@ -2,23 +2,26 @@
 #' 
 #' Generate distance measures to assertain a mean distance emasure between codes.
 #' 
-#' @param dataframe a data frame from the cm_x2long family 
-#' (\code{cm_range2long}; \code{cm_df2long}; \code{cm_time2long})
-#' @param time.var an optional variable to split the dataframe by (if you have 
+#' @param dataframe A data frame from the cm_x2long family 
+#' (\code{cm_range2long}; \code{cm_df2long}; \code{cm_time2long}).
+#' @param time.var An optional variable to split the dataframe by (if you have 
 #' data that is by various times this must be supplied).
 #' @param parallel logical.  If TRUE runs the cm_distance on multiple cores.  
 #' This is effective with larger data sets but may actually be slower with 
 #' smaller data sets.
-#' @param code.var the name of the code variable column.  Defaults to "codes" as 
-#' out putted by x2long family
+#' @param code.var The name of the code variable column.  Defaults to "codes" as 
+#' out putted by x2long family.
 #' @param causal logical.  If TRUE measures the distance ebtween x and y given 
-#' that x must procede y
-#' @param start.var the name of the start variable column.  Defaults to "start" 
-#' as out putted by x2long family
-#' @param end.var the name of the end variable column.  Defaults to "end" as out 
-#' putted by x2long family
-#' @param mean.digits the number of digits to be displayed in the mean matrix
-#' @param sd.digits the number of digits to be displayed in the sd matrix
+#' that x must procede y.
+#' @param start.var The name of the start variable column.  Defaults to "start" 
+#' as out putted by x2long family.
+#' @param end.var The name of the end variable column.  Defaults to "end" as out 
+#' putted by x2long family.
+#' @param mean.digits The number of digits to be displayed in the mean matrix.
+#' @param sd.digits The number of digits to be displayed in the sd (standard 
+#' deviation) matrix.
+#' @param stan.digits The number of dugits to use in the standardized mean 
+#' difference matrix.
 #' @return An object of the class cm.dist.  This is a list of n lists with the 
 #' following components per each list (time.var): 
 #' \item{mean}{A distance matrix of average distances between codes}
@@ -107,7 +110,8 @@ function(dataframe, time.var = NULL, parallel = FALSE, code.var = "code",
             stand <- round(scale.all(means)*scale.all(sds), 
                 digits=SD)
             stand[is.nan(stand)] <- NA
-            list(mean=means, sd=sds, n=ns, combined=noquote(comb), standardized=stand)
+            list(mean=means, sd=sds, n=ns, combined=noquote(comb), 
+                standardized=stand)
         }
         FUN(dat)
     }  

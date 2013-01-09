@@ -4,6 +4,9 @@
 #' 
 #' @rdname word.count
 #' @param text.var The text variable
+#' @param grouping.var The grouping variables.  Default NULL generates one
+#' output for all text.  Also takes a single grouping variable or a list of 1 or
+#' more grouping variables.
 #' @param byrow logical.  If TRUE counts by row, if FALSE counts all words.
 #' @param missing Value to insert for missing values (empty cells).
 #' @param digit.remove logical.  If TRUE removes digits before counting words.

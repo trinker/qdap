@@ -40,6 +40,9 @@
   \item{alpha}{Transparency level of points (ranges
   betweeon 0 and 1).}
 
+  \item{shape}{An integer specifying the symbol used to
+  plot the points.}
+
   \item{title}{Optional plot title.}
 
   \item{digits}{Integer; number of dicimal places to

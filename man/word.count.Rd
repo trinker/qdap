@@ -23,6 +23,11 @@
 \arguments{
   \item{text.var}{The text variable}
 
+  \item{grouping.var}{The grouping variables.  Default NULL
+  generates one output for all text.  Also takes a single
+  grouping variable or a list of 1 or more grouping
+  variables.}
+
   \item{byrow}{logical.  If TRUE counts by row, if FALSE
   counts all words.}
 

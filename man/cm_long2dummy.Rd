@@ -54,7 +54,7 @@ cm_long2dummy(z, "time")
 \seealso{
   \code{\link[qdap]{cm_range2long}},
   \code{\link[qdap]{cm_time2long}},
-  \code{\link[qda]{cm_df2long}}
+  \code{\link[qdap]{cm_df2long}}
 }
 \keyword{coded}
 \keyword{dummy}

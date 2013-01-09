@@ -87,7 +87,7 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
     title.padj = -4.5, title.location = 3, title.cex = NULL, title.names = NULL,
     proportional = FALSE, max.word.size = NULL, min.word.size = 0.5,
     legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03), 
-    char.keep = NULL, char2space = NULL, ...) {
+    char.keep = NULL, char2space = NULL) {
     if(!is.null(char2space) & is.null(char.keep)) {
         char.keep <- char2space
     }
@@ -150,7 +150,7 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
             df2$freq <- floor((PRO/length(words))*df2$freq) 
         }
         COL1 <- if (stem & !is.null(target.words)) {
-            sapply(target.words, tm::stemDocument)
+            sapply(target.words, stemDocument)
         } else {
             if (!stem & !is.null(target.words)) {
                 target.words
@@ -250,6 +250,6 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
         font = cloud.font, title.font = title.font, title.cex = title.cex,
         title.color = title.color, side = title.location, legend = legend, 
         legend.cex = legend.cex, legend.location = legend.location, 
-        text = namers[i], char2space = char2space, ...))
+        text = namers[i], char2space = char2space))
     )
 }

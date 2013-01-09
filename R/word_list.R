@@ -7,11 +7,21 @@
 #' list for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
 #' @param stopwords A vector of stop words to remove.
+#' @param alphabetical If TRUE the output of frequency lists is ordered 
+#' alphabetically.  If FALSE the list is ordered by frequency rank.
 #' @param cut.n Cut off point for reduced frequency stop word list (rfswl).
 #' @param cap logical. If TRUE capitalizes words from the cap.list.
 #' @param cap.list Vector of words to capitalize.
 #' @param cap.I logical. If TRUE capitalizes words containing the personal 
 #' pronoun I.
+#' @param rm.bracket logical If TRUE all brackets and bracketted text are 
+#' removed from analysis.
+#' @param char.keep A character vector of symbols (i.e. punctuation) that 
+#' \code{word_list} should keep.  THe default is to remove every symbol except 
+#' apostrophes.
+#' @param apostrophe.remove logical.  If TRUE removes apostrophes from the 
+#' output.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{strip}}.
 #' @return An object of class \code{"word.list"} is a list containing at the 
 #' following components: 
 #' \item{cwl}{complete word list; raw words}

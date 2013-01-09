@@ -25,8 +25,8 @@
   \code{\link[utils]{head}}.}
 }
 \value{
-  \code{\link[utils]{htrundf}} - returns n number of rows
-  of a truncated dataframe.
+  \code{htrundf} - returns n number of rows of a truncated
+  dataframe.
 
   \code{trundf} - returns a truncated dataframe.
 
