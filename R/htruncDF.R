@@ -24,8 +24,8 @@
 #' qview(CO2)
 #' }
 htruncdf <-
-function(dataframe, n=10, width=10) {
-    head(truncdf(as.data.frame(dataframe), width), n = n)
+function(dataframe, n=10, width=10, ...) {
+    head(truncdf(as.data.frame(dataframe), width), n = n, ...)
 }
 
 #' Truncated Dataframe Viewing
