@@ -51,7 +51,7 @@ function(dataframe, end=10, begin=1) {
 #' @rdname data_viewing
 #' @export
 qview <-
-function(dataframe,...){
+function(dataframe, ...){
     x<-as.character(substitute(dataframe))
     cat(paste(rep("=", 72), collapse=""), "\n",  
         "n = ",nrow(dataframe),"          # of vars = ",
