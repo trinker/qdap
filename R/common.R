@@ -35,9 +35,8 @@ function(word.list, ...){
 #'
 #' @rdname common
 #' @method common list
-#' @S3method common list
 common.list <-
-function(word.list, ..., overlap = "all", equal.or = "more"){
+function(word.list, overlap = "all", equal.or = "more", ...){
     if(overlap=="all") {
         OL <- length(word.list) 
     } else {
@@ -62,7 +61,7 @@ function(word.list, ..., overlap = "all", equal.or = "more"){
 #' @method common default
 #' @S3method common default  
 common.default <-
-    function(..., overlap = "all", equal.or = "equal"){
+    function(..., overlap = "all", equal.or = "more"){
         LIS <- list(...)
         return(common.list(LIS, overlap, equal.or))
 }

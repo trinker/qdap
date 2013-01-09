@@ -27,7 +27,7 @@ cm_time.temp(qcv(AA, BB, CC), ":30", "7:40", file = "foo.txt")
 # delete("foo.txt")
 x <- list(
     transcript_time_span = qcv(terms='00:00 - 1:12:00'),
-    A = qcv(terms='2.40:3.00, 5.01, 6.62:7.00, 9.00'),
+    A = qcv(terms='2.40:3.00, 5.01, 6.52:7.00, 9.00'),
     B = qcv(terms='2.40, 3.01:3.02, 5.01, 6.62:7.00, 9.00, 1.12.00:1.19.01'),
     C = qcv(terms='2.40:3.00, 5.01, 6.62:7.00, 9.00, 17.01')
 )
