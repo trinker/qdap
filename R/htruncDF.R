@@ -52,10 +52,10 @@ function(dataframe, end=10, begin=1) {
 #' @export
 qview <-
 function(dataframe, ...){
-    x<-as.character(substitute(dataframe))
-    cat(paste(rep("=", 72), collapse=""), "\n",  
-        "n = ",nrow(dataframe),"          # of vars = ",
-        ncol(dataframe), "           ", x, "\n",
-        "\b", paste(rep("=", 72), collapse=""), "\n"); 
+    x <- as.character(substitute(dataframe))
+    y <- paste(rep("=", 72), collapse="")   
+    z <- paste("nrow = ",nrow(dataframe), "          ncol = ",
+        ncol(dataframe), "           ", x, collapse="")
+    cat(paste(y, z, y, sep = "\n")); cat("\n")
     return(head(dataframe, ...))
 }
