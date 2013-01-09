@@ -1,0 +1,18 @@
+\docType{data}
+\name{DATA2}
+\alias{DATA2}
+\title{Fictitious Repeated Measures Classroom Dialogue}
+\format{A data frame with 74 rows and 7 variables}
+\description{
+  A repeated measures version of the
+  \code{\link[qdap]{DATA}} dataset.
+}
+\details{
+  \itemize{ \item day. Day of observation \item class.
+  Class period/subject of observation \item person. Speaker
+  \item sex. Gender \item adult. Dummy coded adult (0-no;
+  1-yes) \item state. Statement (dialogue) \item code.
+  Dialogue coding scheme }
+}
+\keyword{datasets}
+

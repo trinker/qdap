@@ -1,0 +1,46 @@
+\name{speakerSplit}
+\alias{speakerSplit}
+\title{Break and Stretch if Multiple Persons per Cell}
+\usage{
+  speakerSplit(dataframe, person.var = 1,
+    sep = c("and", "&", ","), track.reps = FALSE)
+}
+\arguments{
+  \item{dataframe}{A dataframe that contains the person
+  variable.}
+
+  \item{person.var}{The person variable to be stretched.}
+
+  \item{sep}{The spearator(s) to search for and break on.
+  Default is: c(".", "_", ";")}
+
+  \item{track.reps}{logical.  If TRUE leaves the row names
+  of person variable cells that were repeated and
+  stretched.}
+}
+\value{
+  Returns an expanded dataframe with person variable
+  stretched and accompanying rows repeated.
+}
+\description{
+  Look for cells with multiple perople and create separate
+  rows for each person.
+}
+\examples{
+\dontrun{
+DATA$person <- as.character(DATA$person)
+DATA$person[c(1, 4, 6)] <- c("greg, sally, & sam",
+    "greg, sally", "sam and sally")
+
+speakerSplit(DATA)
+speakerSplit(DATA, track.reps=TRUE)
+
+DATA$person[c(1, 4, 6)] <- c("greg_sally_sam",
+    "greg.sally", "sam; sally")
+
+speakerSplit(DATA, sep = c(".", "_", ";"))
+
+DATA <- qdap::DATA  #reset DATA
+}
+}
+

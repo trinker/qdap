@@ -1,0 +1,61 @@
+\name{cm_long2dummy}
+\alias{cm_long2dummy}
+\title{Stretch and Dummy Code cm_xxx2long}
+\usage{
+  cm_long2dummy(dataframe, rm.var = NULL, code = "code",
+    start = "start", end = "end")
+}
+\arguments{
+  \item{dataframe}{A dataframe that contains the person
+  variable.}
+
+  \item{rm.var}{An optional character argument of the name
+  of a repeated measures column.}
+
+  \item{code}{A character argument of the name of a
+  repeated measures column. Default is \code{"code"}.}
+
+  \item{start}{A character argument of the name of a
+  repeated measures column. Default is \code{"start"}.}
+
+  \item{end}{A character argument of the name of a repeated
+  measures column. Default is \code{"end"}.}
+}
+\value{
+  Returns a dataframe or a list of stretched and dummy
+  coded dataframe(s).
+}
+\description{
+  Stretches and dummy codes a cm_xxx2long dataframe to
+  allow for combining columns.
+}
+\examples{
+\dontrun{
+foo <- list(
+    AA = qcv(terms='1'),
+    BB = qcv(terms='1:2, 3:10, 19'),
+    CC = qcv(terms='1:3, 5:6')
+)
+
+foo2  <- list(
+    AA = qcv(terms='4'),
+    BB = qcv(terms='10:12'),
+    CC = qcv(terms='1, 11, 15:20'),
+    DD = qcv(terms='')
+)
+
+x <- cm_range2long(foo)
+cm_long2dummy(x)
+
+z <- cm_range2long(foo, foo2, v.name="time")
+cm_long2dummy(z, "time")
+}
+}
+\seealso{
+  \code{\link[qdap]{cm_range2long}},
+  \code{\link[qdap]{cm_time2long}},
+  \code{\link[qdap]{cm_df2long}}
+}
+\keyword{coded}
+\keyword{dummy}
+
