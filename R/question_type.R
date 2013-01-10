@@ -11,16 +11,16 @@
 #' @param prop.by.row logical.  If TRUE applies proportional to the row.  If 
 #' FALSE applies by column. 
 #' @param \ldots Other arguments passed to \code{\link[qdap]{prop}}.
-#' @return Returns a table of total questions (\code{tot.quest}) and counts of question 
-#' types (initial interagative word).
+#' @return Returns a table of total questions (\code{tot.quest}) and counts of 
+#' question types (initial interagative word).
 #' @details The algorith searchers for the following interrogative words: 
 #'  
 #' 1) whose 2) whom 3) who 4) where 5) what 6) which 7) why 8) when 9) were 
 #' 10) was 11) does 12) did 13) do 14) is 15) are 16) will 17) how 18) should 
 #' 19) could 20) would 21) shall 22) may 23) might 24) can
 #' 
-#' The interrogative word that is found first in the question determines the sentence 
-#' type. 
+#' The interrogative word that is found first in the question determines the 
+#' sentence type. 
 #' @keywords question, question-count
 #' @export 
 #' @examples
