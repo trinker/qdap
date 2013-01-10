@@ -17,10 +17,14 @@
 #'  
 #' 1) whose 2) whom 3) who 4) where 5) what 6) which 7) why 8) when 9) were 
 #' 10) was 11) does 12) did 13) do 14) is 15) are 16) will 17) how 18) should 
-#' 19) could 20) would 21) shall 22) may 23) might 24) can
+#' 19) could 20) would 21) shall 22) may 23) might 24) can 25) ok 26) right
+#' 27) correct
 #' 
-#' The interrogative word that is found first in the question determines the 
-#' sentence type. 
+#' The interrogative word that is found first (witht the exception of "ok", "right" 
+#' and "correct") in the question determines the sentence type. "ok", "right" and 
+#' "correct" sentence types are determined if the sentence is a question with no 
+#' other interogative words found and "ok", "right" or "correct" are the last 
+#' word of the sentence.  Those with unknow sentence type are labeled unknown.
 #' @keywords question, question-count
 #' @export 
 #' @examples
@@ -85,6 +89,16 @@ question_type <- function(text.var, grouping.var = NULL,
             "may", "might", "can"),
         y = paste0("XXXXX", sprintf("%02d", 1:24)), 
         stringsAsFactors = FALSE)  
+    L1 <- lapply(L1, function(x){
+        z <- x[, "stext.var"]
+        y <- nchar(z)
+        a1 <- (y-3) == sapply(gregexpr("okay", z), "[", 1) 
+        a2 <- (y-1) == sapply(gregexpr("ok", z), "[", 1)
+        x[, "ok"] <- a1 + a2   
+        x[, "right"] <- (y-4) == sapply(gregexpr("right", z), "[", 1)
+        x[, "correct"] <- (y-6) == sapply(gregexpr("correct", z), "[", 1)
+        x
+    })
     L2 <- invisible(lapply(L1, function(x) {
         subtext <- mgsub(key[, "x"], key[, "y"], x[, "stext.var"])
         gsub("\\s+", " ", (Trim(gsub("[^XXX[:digit:]]", " ", subtext))))
@@ -93,8 +107,15 @@ question_type <- function(text.var, grouping.var = NULL,
         sapply(stopwords(x, stopwords = NULL, ignore.case = FALSE), "[", 1) 
     }))   
     L2 <- lapply(L2, lookup, key.match = key[, 2:1], missing = "unknown")
-    WFM <- t(wfm(unlist(L2), rep(names(L2), sapply(L2, length))))
-    cols <- c(key[, "x"], "unknown")
+    L2 <- lapply(seq_along(L2), function(i) {
+         unels <- L2[[i]] == "unknown"
+         L2[[i]][unels & L1[[i]][, "ok"]] <- "ok"
+         L2[[i]][unels & L1[[i]][, "right"]] <- "right"
+         L2[[i]][unels & L1[[i]][, "correct"]] <- "correct"
+         L2[[i]]
+    })
+    WFM <- t(wfm(unlist(L2), rep(names(L1), sapply(L2, length))))
+    cols <- c(key[, "x"], "ok", "right", "correct", "unknown")
     cols2 <- cols[cols %in% colnames(WFM)]
     WFM <- WFM[, cols2]
     grvar <- levels(DF[, "grouping"])

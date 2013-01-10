@@ -6,10 +6,10 @@ function(file, skip = 0, sep = ":") {
       stop("Temporary directory could not be established.")
     unzip(file, exdir = tmp)  # Unzip to temporary directory
     xmlfile <- file.path(tmp, "word", "document.xml")  # Path to xml document
-    doc     <- xmlTreeParse(xmlfile, useInternalNodes=TRUE)  # Import XML
+    doc     <- XML::xmlTreeParse(xmlfile, useInternalNodes=TRUE)  # Import XML
     unlink(tmp, recursive = TRUE)  # Delete unzipped files; no longer needed
-    nodeSet <- getNodeSet(doc, "//w:p")  # Access all p-nodes in document
-    pvalues <- sapply(nodeSet, xmlValue)  # Return their (textual) values
+    nodeSet <- XML::getNodeSet(doc, "//w:p")  # Access all p-nodes in document
+    pvalues <- sapply(nodeSet, XML::xmlValue)  # Return their (textual) values
     pvalues <- pvalues[pvalues != ""]  # Remove empty lines
     if (skip > 0) pvalues <- pvalues[-seq(skip)]  # Ignore these many lines
     keys    <- sapply(gregexpr(paste0("^.*?", sep), pvalues), function(x) x > 0)

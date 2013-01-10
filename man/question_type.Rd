@@ -36,10 +36,16 @@
   1) whose 2) whom 3) who 4) where 5) what 6) which 7) why
   8) when 9) were 10) was 11) does 12) did 13) do 14) is
   15) are 16) will 17) how 18) should 19) could 20) would
-  21) shall 22) may 23) might 24) can
+  21) shall 22) may 23) might 24) can 25) ok 26) right 27)
+  correct
 
-  The interrogative word that is found first in the
-  question determines the sentence type.
+  The interrogative word that is found first (witht the
+  exception of "ok", "right" and "correct") in the question
+  determines the sentence type. "ok", "right" and "correct"
+  sentence types are determined if the sentence is a
+  question with no other interogative words found and "ok",
+  "right" or "correct" are the last word of the sentence.
+  Those with unknow sentence type are labeled unknown.
 }
 \examples{
 \dontrun{
