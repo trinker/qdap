@@ -1,0 +1,22 @@
+\docType{data}
+\name{rajSPLIT}
+\alias{rajSPLIT}
+\title{Romeo and Juliet (Complete & Split)}
+\format{A data frame with 2151 rows and 8 variables}
+\description{
+  A dataset containing the complete dialogue of Romeo and
+  Juliet with turns of talk split into sentences.
+}
+\details{
+  \itemize{ \item person. Character in the play \item sex.
+  Gender \item fam.aff. Family affiliation of character
+  \item died. Dummy coded death variable (0-no; 1-yes); if
+  yes the character dies in the play \item dialogue. The
+  spoken dialogue \item act. The act (akin to repeated
+  measures) \item stem.text. Text that has been stemmed }
+}
+\references{
+  \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
+}
+\keyword{datasets}
+

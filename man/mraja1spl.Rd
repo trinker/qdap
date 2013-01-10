@@ -1,0 +1,22 @@
+\docType{data}
+\name{mraja1spl}
+\alias{mraja1spl}
+\title{Romeo and Juliet: Act 1 Dialogue Merged with Demographics and Split}
+\format{A data frame with 508 rows and 7 variables}
+\description{
+  A dataset containing act 1 of Romeo and Juliet with
+  demographic information and turns of talk split into
+  sentences.
+}
+\details{
+  \itemize{ \item person. Character in the play \item tot.
+  \item sex. Gender \item fam.aff. Family affiliation of
+  character \item died. Dummy coded death variable (0-no;
+  1-yes); if yes the character dies in the play \item
+  dialogue. The spoken dialogue \item stem.text. }
+}
+\references{
+  \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
+}
+\keyword{datasets}
+

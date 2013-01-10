@@ -1,0 +1,20 @@
+\docType{data}
+\name{raj.demographics}
+\alias{raj.demographics}
+\title{Romeo and Juliet Demographics}
+\format{A data frame with 34 rows and 4 variables}
+\description{
+  A dataset containing Romeo and Juliet demographic
+  information for the characters.
+}
+\details{
+  \itemize{ \item person. Character in the play \item sex.
+  Gender \item fam.aff. Family affiliation of character
+  \item died. Dummy coded death variable (0-no; 1-yes); if
+  yes the character dies in the play }
+}
+\references{
+  \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
+}
+\keyword{datasets}
+
