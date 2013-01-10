@@ -15,9 +15,9 @@
 #' types (initial interagative word).
 #' @details The algorith searchers for the following interrogative words: 
 #'  
-#' (1)whose, (2)whom, (3)who, (4)where, (5)what, (6)which, (7)why, (8)when, (9)were, 
-#' (10)was, (11)do, (12)did, (13)does, (14)is, (15)are, (16)will, (17)how, (18)should, 
-#' (19)could, (20)would
+#' 1) whose 2) whom 3) who 4) where 5) what 6) which 7) why 8) when 9) were 
+#' 10) was 11) does 12) did 13) do 14) is 15) are 16) will 17) how 18) should 
+#' 19) could 20) would 21) shall 22) may 23) might 24) can
 #' 
 #' The interrogative word that is found first in the question determines the sentence 
 #' type. 
@@ -80,9 +80,10 @@ question_type <- function(text.var, grouping.var = NULL,
     missing <- names(L1)[sapply(L1, nrow) == 0]
     L1 <- L1[sapply(L1, nrow) != 0]
     key <- data.frame(x = c("whose", "whom", "who", "where", "what", 
-            "which", "why", "when", "were", "was", "do", "did", "does", 
-            "is", "are", "will", "how", "should", "could", "would"),
-        y = paste0("XXXXX", sprintf("%02d", 1:20)), 
+            "which", "why", "when", "were", "was", "does", "did", "do", 
+            "is", "are", "will", "how", "should", "could", "would", "shall",
+            "may", "might", "can"),
+        y = paste0("XXXXX", sprintf("%02d", 1:24)), 
         stringsAsFactors = FALSE)  
     L2 <- invisible(lapply(L1, function(x) {
         subtext <- mgsub(key[, "x"], key[, "y"], x[, "stext.var"])
