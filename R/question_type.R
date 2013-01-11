@@ -6,37 +6,47 @@
 #' @param grouping.var The grouping variables.  Default NULL generates one
 #' output for all text.  Also takes a single grouping variable or a list of 1 or
 #' more grouping variables.
+#' @param neg.cont logical.  IF TRUE provides separate counts for the negative 
+#' contraction forms of the interrogative words.
 #' @param proportional logical.  If TRUE outputs the table proportionally 
 #' (see \code{\link[qdap]{prop}}).
 #' @param prop.by.row logical.  If TRUE applies proportional to the row.  If 
 #' FALSE applies by column. 
 #' @param \ldots Other arguments passed to \code{\link[qdap]{prop}}.
 #' @return Returns a table of total questions (\code{tot.quest}) and counts of 
-#' question types (initial interagative word).
-#' @details The algorith searchers for the following interrogative words: 
+#' question types (initial interrogative word).
+#' @details The algorithm searchs for the following interrogative words (and 
+#' optionally, their negative contraction form as well): 
 #'  
 #' 1) whose 2) whom 3) who 4) where 5) what 6) which 7) why 8) when 9) were 
 #' 10) was 11) does 12) did 13) do 14) is 15) are 16) will 17) how 18) should 
-#' 19) could 20) would 21) shall 22) may 23) might 24) can 25) ok 26) right
-#' 27) correct
+#' 19) could 20) would 21) shall 22) may 23) might 24) must 25) can 26) has 
+#' 27) have 28) had 29) ok 30) right 31) correct 
 #' 
-#' The interrogative word that is found first (witht the exception of "ok", "right" 
+#' The interrogative word that is found first (with the exception of "ok", "right" 
 #' and "correct") in the question determines the sentence type. "ok", "right" and 
 #' "correct" sentence types are determined if the sentence is a question with no 
-#' other interogative words found and "ok", "right" or "correct" are the last 
-#' word of the sentence.  Those with unknow sentence type are labeled unknown.
+#' other interogative words found and "ok", "right" or "correct" is the last 
+#' word of the sentence.  Those with undetermined sentence type are labeled 
+#' unknown.
 #' @keywords question, question-count
 #' @export 
 #' @examples
 #' \dontrun{
 #' question_type(DATA$state, DATA$person)
 #' question_type(DATA$state, DATA$person, proportional = TRUE)
+#' DATA[8, 4] <- "Won't I distrust you?"
+#' question_type(DATA$state, DATA$person)
+#' DATA <- qdap::DATA
 #' with(DATA, question_type(state, list(sex, adult)))
-#' with(mraja1spl, question_type(dialogue, list(sex, fam.aff)))
+#'
 #' with(mraja1spl, question_type(dialogue, person))
+#' with(mraja1spl, question_type(dialogue, list(sex, fam.aff)))
+#' with(mraja1spl, question_type(dialogue, list(sex, fam.aff), 
+#'     proportional = TRUE))
 #' }
-question_type <- function(text.var, grouping.var = NULL, 
-    proportional = FALSE, prop.by.row = TRUE, ...) {
+question_type <- function(text.var, grouping.var = NULL,
+    neg.cont = FALSE, proportional = FALSE, prop.by.row = TRUE, ...) {
     if(is.null(grouping.var)) {
         G <- "all"
     } else {
@@ -65,30 +75,25 @@ question_type <- function(text.var, grouping.var = NULL,
     DF <- data.frame(grouping, text.var, check.names = FALSE, 
         stringsAsFactors = FALSE)
     DF$grouping <- factor(DF$grouping)
-    is.dp <- function(text.var) {
-      punct <- c(".", "?", "!", "|")
-      any(sapply(strsplit(text.var, NULL), function(x) {
-        sum(x %in% punct) > 1
-      }
-      ))
-    }
     if (is.dp(text.var=DF[, "text.var"])){
-      warning(paste0("\n  Some rows contain double punctuation.",
+        warning(paste0("\n  Some rows contain double punctuation.",
           "  Suggested use of sentSplit function."))
     }
     DF[, "end.mark"] <- substring(DF[, "text.var"], nchar(DF[, "text.var"]))
-    DF[, "stext.var"] <- strip(DF[, "text.var"])
+    DF[, "stext.var"] <- spaste(strip(DF[, "text.var"]))
     if (sum(DF$end.mark == "?", na.rm = TRUE) == 0) stop("No questions found") 
     DF <- DF[DF$end.mark == "?", ]
     L1 <- split(DF, DF[, "grouping"])
     missing <- names(L1)[sapply(L1, nrow) == 0]
     L1 <- L1[sapply(L1, nrow) != 0]
-    key <- data.frame(x = c("whose", "whom", "who", "where", "what", 
-            "which", "why", "when", "were", "was", "does", "did", "do", 
-            "is", "are", "will", "how", "should", "could", "would", "shall",
-            "may", "might", "can"),
-        y = paste0("XXXXX", sprintf("%02d", 1:24)), 
-        stringsAsFactors = FALSE)  
+    x <- c("whose", "whom", "who", "where", "what",  
+            "which", "why", "when", "werent", "were", "wasnt", "was", "doesnt", 
+            "does", "didnt", "did", "dont", "do", "isnt","is", "arent", "are",
+            "will", "wont", "how", "shouldnt", "should", "couldnt", "could", 
+            "wouldnt", "would", "shall", "may", "might", "must", "cant",  "can", 
+            "hasnt", "has", "havent", "have", "hadnt", "had")
+    y <- paste0(" XXXXX", sprintf("%02d", seq_along(x)), " ")
+    key <- data.frame(x = spaste(x), y = spaste(y), stringsAsFactors = FALSE)  
     L1 <- lapply(L1, function(x){
         z <- x[, "stext.var"]
         y <- nchar(z)
@@ -105,7 +110,8 @@ question_type <- function(text.var, grouping.var = NULL,
     }))
     L2 <- invisible(lapply(L2, function(x) {
         sapply(stopwords(x, stopwords = NULL, ignore.case = FALSE), "[", 1) 
-    }))   
+    }))
+    key <- apply(key, 2, Trim)
     L2 <- lapply(L2, lookup, key.match = key[, 2:1], missing = "unknown")
     L2 <- lapply(seq_along(L2), function(i) {
          unels <- L2[[i]] == "unknown"
@@ -124,6 +130,32 @@ question_type <- function(text.var, grouping.var = NULL,
     dimnames(mat) <- list(grvarNA, colnames(WFM))
     DF <- data.frame(rbind(WFM, mat))  
     tq <- rowSums(DF)
+    if(!neg.cont) {
+        ord <- c("whose", "whom", "who", "where", "what",  "which", 
+            "why", "when", "were", "was", "does", "did", "do", 
+            "is", "are", "will", "how", "should", "could", "would", 
+            "shall", "may", "might", "must", "can", "has", "have", "had")  
+        comdcol <- list(  
+            were = c("werent", "were"), 
+            was = c("wasnt", "was"), 
+            does = c("doesnt", "does"), 
+            did = c("didnt", "did"), 
+            do = c("dont", "do"), 
+            is = c("isnt","is"),
+            are = c("arent", "are"),
+            will = c("will", "wont"), 
+            should = c("shouldnt", "should"), 
+            could = c("couldnt", "could"), 
+            would = c("wouldnt", "would"), 
+            can = c("cant", "can"), 
+            has = c("hasnt", "has"), 
+            have = c("havent", "have"), 
+            had = c("hadnt", "had")
+        ) 
+        DF <- qcombine(DF, comdcol)
+        ord <- c(ord[ord %in% colnames(DF)], "unknown")
+        DF <- DF[, ord[ord %in% colnames(DF)]] 
+    }
     if (proportional) {
         DF <- prop(DF, by.column = (1 - prop.by.row), ...)
         DF[is.nan(DF)] <- 0
@@ -134,6 +166,3 @@ question_type <- function(text.var, grouping.var = NULL,
     rownames(DF) <- NULL
     DF
 }
-
-
-

@@ -6,7 +6,7 @@
 #' @param grouping.var The grouping variables.  Default NULL generates one 
 #' output for all text.  Also takes a single grouping variable or a list of 1 
 #' or more grouping variables.  
-#' @param tot Optional toutn of talk variable.    
+#' @param tot Optional turns of talk variable that yields turn of talk measures.    
 #' @param parallel logical.  If TRUE attempts to run the function on multiple 
 #' cores.  Note that this may not mean a spead boost if you have one core or if 
 #' the data set is smaller as the cluster takes time to create (parallel is 
@@ -15,8 +15,8 @@
 #' calculating the output.   
 #' @param digit.remove logical.  If TRUE removes digits from calculating the 
 #' output.       
-#' @param apostrophe.remove logical.  If TRUE removes apostophes from calculating 
-#' the output.   
+#' @param apostrophe.remove logical.  If TRUE removes apostophes from 
+#' calculating the output.   
 #' @param digits Integer; number of decimal places to round.                     
 #' @param \ldots Any other arguments passed to endf.     
 #' @return Returns a list of three descriptive word statistics:
@@ -30,6 +30,7 @@
 #'     \item{n.syl}{ - number of syllables}
 #'     \item{n.poly}{ - number of polysyllables}
 #'     \item{sptot}{ - syllables per turn of talk}
+#'     \item{wptot}{ - words per turn of talk}
 #'     \item{wps}{ - words per sentence}
 #'     \item{cps}{ - characters per sentemce}
 #'     \item{sps}{ - syllables per sentence}
@@ -105,7 +106,11 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
           "  Suggested use of sentSplit function."))
     }
     DF <- na.omit(data.frame(group = grouping, tot.sen = t.o.t., 
-        TOT = TOT(t.o.t.), text.var = Text, stringsAsFactors = FALSE))  
+        TOT = TOT(t.o.t.), text.var = Text, stringsAsFactors = FALSE)) 
+    if (is.dp(text.var=DF[, "text.var"])){
+        warning(paste0("\n  Some rows contain double punctuation.",
+          "  Suggested use of sentSplit function."))
+    }    
     if (rm.incomplete) {
         DF <- endf(dataframe = DF, text.var = text.var, ...)
     } 
@@ -153,7 +158,9 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
         return(x)
     }
     DF2 <- row2col(DF2, "group")
-    DF2 <- transform(DF2, sptot = round(n.sent/n.tot, digits=digits),
+    DF2 <- transform(DF2, 
+        sptot = round(n.sent/n.tot, digits=digits),
+        wptot = round(n.words/n.tot, digits=digits),
         wps = round(n.words/n.sent, digits=digits),
         cps = round(n.char/n.sent, digits=digits),
         sps = round(n.syl/n.sent, digits=digits),
@@ -212,15 +219,10 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
         DF3$TOT
     }
     DF2$n.tot <- if(is.null(tot)){
-        NULL
-    } else {
-        DF2$n.tot
+        DF2$n.tot <- NULL
+        DF2$sptot <- NULL
+        DF2$wptot <- NULL
     } 
-    DF2$sptot <- if(is.null(tot)){
-        NULL
-    } else {
-        DF2$sptot
-    }
     sum2 <- function(x){
         if(is.numeric(x)){
             sum(x, na.rm = TRUE)

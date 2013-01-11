@@ -59,20 +59,21 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 2,
     progress.bar = TRUE, gc.rate=10){
     ntv <- length(text.var)    
     pos1 <-  function(i) {
-        x <- tagPOS(qdap::strip(i))   
+        x <- openNLP::tagPOS(qdap::strip(i))   
         return(x)
     }
     if (parallel){
-        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
-        clusterExport(cl=cl, varlist=c("text.var", "ntv", "gc.rate", 
+        cl <- parallel::makeCluster(mc <- getOption("cl.cores", 
+            parallel::detectCores()))
+        parallel::clusterExport(cl=cl, varlist=c("text.var", "ntv", "gc.rate", 
             "pos1"), envir = environment())
-        m <- parLapply(cl, seq_len(ntv), function(i) {
+        m <- parallel::parLapply(cl, seq_len(ntv), function(i) {
                 x <- pos1(text.var[i])
                 if (i%%gc.rate==0) gc()
                 return(x)
             }
         )
-        stopCluster(cl)
+        parallel::stopCluster(cl)
         m <- unlist(m)
     } else {
         if (progress.bar != FALSE){

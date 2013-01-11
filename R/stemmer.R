@@ -52,12 +52,12 @@ function(text.var, rm.bracket = TRUE, capitalize = TRUE, warn = TRUE, ...){
             "The following row(s) do have standard qdap punctuation endmarks:\n", 
             " rows:", paste(which(bl), collapse = ", "), "\n"))
     }
-    LIST <- stopwords(txt, stopwords = NULL, strip = TRUE)
+    LIST <- qdap::stopwords(txt, stopwords = NULL, strip = TRUE)
     LIST <- lapply(LIST, function(x) {
         if(identical(x, character(0))) {
                 NA
             } else {
-                stemDocument(x)
+                tm::stemDocument(x)
             }
         }
     )

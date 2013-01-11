@@ -172,3 +172,6 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
+    'qcombine.R'
+    'end_mark.R'
+    'is.dp.R'

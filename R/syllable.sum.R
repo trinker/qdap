@@ -36,15 +36,16 @@ function(text.var, parallel = FALSE) {
             sum(syllable.count(Trim(x))['syllables'])
         }))
     } else {
-        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
-        clusterExport(cl=cl, varlist=c("text.var", "strip", "Trim",
+        cl <- parallel::makeCluster(mc <- getOption("cl.cores",  
+            parallel::detectCores()))
+        parallel::clusterExport(cl=cl, varlist=c("text.var", "strip", "Trim",
             "syllable.count", "scrubber", "bracketX", "env.syl"), 
             envir = environment())
-        m <- parLapply(cl, as.character(text.var), function(x) {
+        m <- parallel::parLapply(cl, as.character(text.var), function(x) {
                 sum(syllable.count(Trim(x))['syllables'])
             }
         )
-        stopCluster(cl)
+        parallel::stopCluster(cl)
         unlist(m)
     }
 }

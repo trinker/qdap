@@ -1,0 +1,54 @@
+#' Combine Columns
+#' 
+#' Quickly combine columns (summed) and rename.
+#' 
+#' @param mat A matrix or dataframe with numeric combine columns.
+#' @param combined.columns A list of named vectors of the colnames/indexes 
+#' of the numeric columns to be combined (summed).  If a vector is unnamed a 
+#' name will be assigned. 
+#' @param elim.old logical.  If TRUE eliminates the columns that are combined 
+#' together by the named match.list. TRUE outputs the table proportionally 
+#' (see \code{\link[qdap]{prop}}).
+#' @return Returns a dataframe with combines columns.
+#' @keywords combine, tranform
+#' @seealso \code{\link[base]{transform}}
+#' @export 
+#' @examples
+#' \dontrun{
+#' A <- list(
+#'     a = c(1, 2, 3),
+#'     b = qcv(mpg, hp),
+#'     c = c("disp", "am")
+#' )
+#' B <- list(
+#'     c(1, 2, 3),
+#'     d = qcv(mpg, hp),
+#'     c("disp", "am")
+#' )
+#' 
+#' qcombine(head(mtcars), A)
+#' qcombine(head(mtcars), B)
+#' qcombine(head(mtcars), B, elim.old = FALSE)
+#' }
+qcombine <- function(mat, combined.columns, elim.old = TRUE){
+    L1 <- lapply(combined.columns, function(x) {
+        if(all(x %in% colnames(mat))){
+            return(unlist(rowSums(mat[, x])))
+        }
+        if(all(!x %in% colnames(mat))){
+            return(unlist(rep(NA, nrow(mat))))
+        }
+        if(sum(x %in% colnames(mat)) == 1){
+            return(unlist(mat[colnames(mat) %in% x]))
+        }        
+        return(unlist(rowSums(mat[colnames(mat) %in% x])))
+    })
+    DF <- data.frame(do.call(cbind, L1))
+    DF <- DF[ !sapply(DF, function(x) all(is.na(x)))]
+    if(elim.old) {
+        mat <- mat[, !names(mat) %in% unique(unlist(combined.columns))]
+    }
+    data.frame(mat, DF, check.names = FALSE)
+}
+
+

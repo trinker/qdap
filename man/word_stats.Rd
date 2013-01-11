@@ -15,7 +15,8 @@
   grouping variable or a list of 1 or more grouping
   variables.}
 
-  \item{tot}{Optional toutn of talk variable.}
+  \item{tot}{Optional turns of talk variable that yields
+  turn of talk measures.}
 
   \item{parallel}{logical.  If TRUE attempts to run the
   function on multiple cores.  Note that this may not mean
@@ -46,11 +47,12 @@
   \item{n.words}{ - number of words} \item{n.char}{ -
   number of characters} \item{n.syl}{ - number of
   syllables} \item{n.poly}{ - number of polysyllables}
-  \item{sptot}{ - syllables per turn of talk} \item{wps}{ -
-  words per sentence} \item{cps}{ - characters per
-  sentemce} \item{sps}{ - syllables per sentence}
-  \item{psps}{ - polly syllables per sentence} \item{cpw}{
-  - characters per word} \item{spw}{ - syllables per word}
+  \item{sptot}{ - syllables per turn of talk} \item{wptot}{
+  - words per turn of talk} \item{wps}{ - words per
+  sentence} \item{cps}{ - characters per sentemce}
+  \item{sps}{ - syllables per sentence} \item{psps}{ -
+  polly syllables per sentence} \item{cpw}{ - characters
+  per word} \item{spw}{ - syllables per word}
   \item{n.state}{ - number of statements} \item{n.quest}{ -
   number of questions} \item{n.exclm}{ - vnumber of
   exclamations} \item{n.incom}{ - number of incomplete
