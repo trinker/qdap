@@ -41,6 +41,7 @@
 #' @references \url{https://github.com/trinker/qdap/wiki/Reading-Transcripts-into-R}
 #' @keywords transcript
 #' @export
+#' @import XML gdata RCurl
 #' @examples
 #' \dontrun{
 #' doc1 <- system.file("extdata/trans1.docx", package = "qdap")

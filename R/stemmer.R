@@ -22,6 +22,8 @@
 #' @rdname stemmer
 #' @seealso \code{\link[qdap]{capitalizer}}
 #' @keywords stem
+#' @export
+#' @import tm
 #' @examples
 #' \dontrun{
 #' #stemmer EXAMPLE:
@@ -57,7 +59,7 @@ function(text.var, rm.bracket = TRUE, capitalize = TRUE, warn = TRUE, ...){
         if(identical(x, character(0))) {
                 NA
             } else {
-                tm::stemDocument(x)
+                stemDocument(x)
             }
         }
     )

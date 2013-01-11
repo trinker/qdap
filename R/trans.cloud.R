@@ -59,6 +59,7 @@
 #' @seealso \code{\link[wordcloud]{wordcloud}}
 #' @keywords wordcloud
 #' @export
+#' @import wordcloud
 #' @examples
 #' \dontrun{
 #' terms <- list(

@@ -27,6 +27,7 @@
 #' @references openNLP \url{http:/opennlp.apache.org}
 #' @keywords parts-of-speech
 #' @export
+#' @import openNLP parallel openNLPmodels.en Snowball
 #' @examples 
 #' \dontrun{
 #' posdat <- pos(DATA$state)
@@ -63,17 +64,16 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 2,
         return(x)
     }
     if (parallel){
-        cl <- parallel::makeCluster(mc <- getOption("cl.cores", 
-            parallel::detectCores()))
-        parallel::clusterExport(cl=cl, varlist=c("text.var", "ntv", "gc.rate", 
+        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
+        clusterExport(cl=cl, varlist=c("text.var", "ntv", "gc.rate", 
             "pos1"), envir = environment())
-        m <- parallel::parLapply(cl, seq_len(ntv), function(i) {
+        m <- parLapply(cl, seq_len(ntv), function(i) {
                 x <- pos1(text.var[i])
                 if (i%%gc.rate==0) gc()
                 return(x)
             }
         )
-        parallel::stopCluster(cl)
+        stopCluster(cl)
         m <- unlist(m)
     } else {
         if (progress.bar != FALSE){

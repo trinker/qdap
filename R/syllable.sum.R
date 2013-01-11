@@ -21,6 +21,7 @@
 #' that learn to pronounce English text" in Complex Systems, 1, 145-168. 
 #' @keywords syllable, syllabication, polysyllable
 #' @export
+#' @import parallel
 #' @examples
 #' \dontrun{
 #' syllable.count("Robots like Dason lie.")
@@ -36,16 +37,15 @@ function(text.var, parallel = FALSE) {
             sum(syllable.count(Trim(x))['syllables'])
         }))
     } else {
-        cl <- parallel::makeCluster(mc <- getOption("cl.cores",  
-            parallel::detectCores()))
-        parallel::clusterExport(cl=cl, varlist=c("text.var", "strip", "Trim",
+        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
+        clusterExport(cl=cl, varlist=c("text.var", "strip", "Trim",
             "syllable.count", "scrubber", "bracketX", "env.syl"), 
             envir = environment())
-        m <- parallel::parLapply(cl, as.character(text.var), function(x) {
+        m <- parLapply(cl, as.character(text.var), function(x) {
                 sum(syllable.count(Trim(x))['syllables'])
             }
         )
-        parallel::stopCluster(cl)
+        stopCluster(cl)
         unlist(m)
     }
 }

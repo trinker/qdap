@@ -52,6 +52,7 @@
 #' issue of Foundations of Science, 7 (3), 293-340.
 #' @keywords formality, explicit
 #' @export
+#' @import ggplot2 gridExtra scales RColorBrewer
 #' @examples
 #' \dontrun{
 #' with(DATA, formality(state, person))

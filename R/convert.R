@@ -7,6 +7,7 @@
 #' is for internal use.
 #' @keywords time, coversion
 #' @export
+#' @import chron
 #' @examples 
 #' \dontrun{
 #' convert(c(256, 3456, 56565))

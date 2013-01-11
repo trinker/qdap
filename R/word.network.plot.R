@@ -54,6 +54,8 @@
 #' @seealso \code{\link[qdap]{word.network.plot}},
 #' \code{\link[igraph]{graph.adjacency}}
 #' @keywords network
+#' @export
+#' @import igraph
 #' @examples
 #' \dontrun{
 #' word.network.plot(text.var=DATA$state, grouping.var=DATA$person)
