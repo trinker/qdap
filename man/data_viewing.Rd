@@ -8,7 +8,7 @@
 
   truncdf(dataframe, end = 10, begin = 1)
 
-  qview(dataframe, width = 6, ...)
+  qview(dataframe, n = 10, width = 6, ...)
 }
 \arguments{
   \item{dataframe}{A data.frame object.}

@@ -52,11 +52,11 @@ function(dataframe, end=10, begin=1) {
 #' @rdname data_viewing
 #' @export
 qview <-
-function(dataframe, width = 6, ...){
+function(dataframe, n=10, width=6, ...){
     x <- as.character(substitute(dataframe))
     y <- paste(rep("=", 72), collapse="")   
-    z <- paste(x, "           ", "nrow = ",nrow(dataframe), 
+    z <- paste(x, "        ", "nrow = ",nrow(dataframe), 
         "          ncol = ", ncol(dataframe), collapse="")
     cat(paste(y, z, y, sep = "\n")); cat("\n")
-    htruncdf(dataframe, width = width, ...)
+    htruncdf(dataframe, width = width, n = n, ...)
 }
