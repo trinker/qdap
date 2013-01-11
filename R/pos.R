@@ -60,7 +60,7 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 2,
     progress.bar = TRUE, gc.rate=10){
     ntv <- length(text.var)    
     pos1 <-  function(i) {
-        x <- openNLP::tagPOS(qdap::strip(i))   
+        x <- tagPOS(strip(i))   
         return(x)
     }
     if (parallel){

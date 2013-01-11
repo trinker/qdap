@@ -101,7 +101,7 @@ function(text.var, grouping.var = NULL, target.words = NULL, stopwords = Top100W
     V(g)$shape <- vertex.shape                                                
     E(g)$color <- edge.color                                                  
     if (is.null(layout)) {                                                            
-        layout <- igraph::layout.fruchterman.reingold(g)                              
+        layout <- layout.fruchterman.reingold(g)                              
     }                                                                                 
     if (plot) {                                                                       
         if (dev.interactive()) dev.new()                                              
