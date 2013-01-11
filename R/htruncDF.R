@@ -47,15 +47,16 @@ function(dataframe, end=10, begin=1) {
 #' 
 #' \code{qview} - Convenience function to view a summary and head of a dataframe.
 #' 
-#' @return \code{qview} - returns a dataframe head with summary statistics.
+#' @return \code{qview} - returns a truncated dataframe head with summary 
+#' general statistics.
 #' @rdname data_viewing
 #' @export
 qview <-
-function(dataframe, ...){
+function(dataframe, width = 6, ...){
     x <- as.character(substitute(dataframe))
     y <- paste(rep("=", 72), collapse="")   
-    z <- paste("nrow = ",nrow(dataframe), "          ncol = ",
-        ncol(dataframe), "           ", x, collapse="")
+    z <- paste(x, "           ", "nrow = ",nrow(dataframe), 
+        "          ncol = ", ncol(dataframe), collapse="")
     cat(paste(y, z, y, sep = "\n")); cat("\n")
-    return(head(dataframe, ...))
+    htruncdf(dataframe, width = width, ...)
 }

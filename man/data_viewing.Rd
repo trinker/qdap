@@ -8,7 +8,7 @@
 
   truncdf(dataframe, end = 10, begin = 1)
 
-  qview(dataframe, ...)
+  qview(dataframe, width = 6, ...)
 }
 \arguments{
   \item{dataframe}{A data.frame object.}
@@ -30,8 +30,8 @@
 
   \code{trundf} - returns a truncated dataframe.
 
-  \code{qview} - returns a dataframe head with summary
-  statistics.
+  \code{qview} - returns a truncated dataframe head with
+  summary general statistics.
 }
 \description{
   \code{htruncdf} - Convenience function to view the head
