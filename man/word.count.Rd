@@ -110,11 +110,13 @@ ggplot(data = dat3, aes(x = variable, fill = variable)) +
     theme(legend.position="none")
 
 # CHARACTER TABLE
-character.table(DATA$state, DATA$person)
+(x <- character.table(DATA$state, DATA$person))
+plot(x)
 char.table(DATA$state, DATA$person)
 char.table(DATA$state, DATA$person, proportianal = TRUE)
 character.table(DATA$state, list(DATA$sex, DATA$adult))
 colsplit2df(character.table(DATA$state, list(DATA$sex, DATA$adult)))
+
 }
 }
 \seealso{

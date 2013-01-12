@@ -58,12 +58,14 @@
 #' desc_wrds$ts 
 #' desc_wrds$gts
 #' desc_wrds$pun 
+#' plot(desc_wrds)
 #' with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff))) 
 #' }
 word_stats <-
 function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE, 
     rm.incomplete = FALSE, digit.remove = FALSE, apostrophe.remove = FALSE, 
     digits = 3, ...) {
+    totin <- tot
     if(is.null(grouping.var)) {
         G <- "all"
     } else {
@@ -140,7 +142,8 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
     LIST <- split(DF, DF[, "group"])
     totter <- function(x) {length(unique(x))}
     stats <- function(x){
-        st <- c(n.tot = totter(x[, "TOT"]),
+        st <- c(
+            n.tot = totter(x[, "TOT"]),
             n.sent = nrow(x),
             n.words = sum(x[, "word.count"], na.rm = TRUE), 
             n.char = sum(x[, "character.count"], na.rm = TRUE),
@@ -218,7 +221,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
     } else {
         DF3$TOT
     }
-    DF2$n.tot <- if(is.null(tot)){
+    if(is.null(totin)){
         DF2$n.tot <- NULL
         DF2$sptot <- NULL
         DF2$wptot <- NULL
@@ -248,4 +251,17 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
 print.word.stats <-
 function(x, ...) {
     print(x$gts)
+}
+
+
+#' Plots a word.stats object
+#' 
+#' Plots a word.stats object.
+#' 
+#' @param x The word.stats object
+#' @param \ldots Other arguments passed to qheat
+#' @method plot word.stats
+#' @S3method plot word.stats
+plot.word.stats <- function(x, ...) {
+    qheat(x, ...)
 }

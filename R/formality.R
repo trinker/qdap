@@ -2,7 +2,9 @@
 #' 
 #' Transcript apply formality score by grouping variable(s).
 #' 
-#' @param text.var The text variable.
+#' @param text.var The text variable (or an object from \code{pos},\code{pos.by}
+#' or \code{formality}.  Passing the later three object will greatly reduce 
+#' run time.
 #' @param grouping.var The grouping variables.  Default NULL generates formality 
 #' score for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
@@ -71,6 +73,9 @@
 #'     bar.colors="RdBu",  point.cex=2, point.pch = "|"))
 #' names(raj.form)
 #' colsplit2df(raj.form$formality)
+#' 
+#' #pass an object from pos or pos.by
+#' with(raj, formality(rajPOS , list(act, person), plot = TRUE))
 #' }
 formality <- function(text.var, grouping.var = NULL, plot = FALSE,                   
     sort.by.formality = TRUE, digits = 2, point.pch = 20, point.cex = .5,            

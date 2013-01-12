@@ -8,7 +8,9 @@
     bar.colors = NULL, min.wrdcnt = NULL, ...)
 }
 \arguments{
-  \item{text.var}{The text variable.}
+  \item{text.var}{The text variable (or an object from
+  \code{pos},\code{pos.by} or \code{formality}.  Passing
+  the later three object will greatly reduce run time.}
 
   \item{grouping.var}{The grouping variables.  Default NULL
   generates formality score for all text.  Also takes a
@@ -99,6 +101,9 @@ raj.form <- with(rajDEM, formality(rajPOS, list(died, sex), plot=TRUE,
     bar.colors="RdBu",  point.cex=2, point.pch = "|"))
 names(raj.form)
 colsplit2df(raj.form$formality)
+
+#pass an object from pos or pos.by
+with(raj, formality(rajPOS , list(act, person), plot = TRUE))
 }
 }
 \references{

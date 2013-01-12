@@ -56,7 +56,10 @@
 }
 \examples{
 \dontrun{
-question_type(DATA$state, DATA$person)
+(x <- question_type(DATA$state, DATA$person))
+x$raw
+x$count
+plot(x)
 question_type(DATA$state, DATA$person, proportional = TRUE)
 DATA[8, 4] <- "Won't I distrust you?"
 question_type(DATA$state, DATA$person)

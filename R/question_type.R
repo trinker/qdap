@@ -33,7 +33,10 @@
 #' @export 
 #' @examples
 #' \dontrun{
-#' question_type(DATA$state, DATA$person)
+#' (x <- question_type(DATA$state, DATA$person))
+#' x$raw
+#' x$count
+#' plot(x)
 #' question_type(DATA$state, DATA$person, proportional = TRUE)
 #' DATA[8, 4] <- "Won't I distrust you?"
 #' question_type(DATA$state, DATA$person)
@@ -120,6 +123,8 @@ question_type <- function(text.var, grouping.var = NULL,
          L2[[i]][unels & L1[[i]][, "correct"]] <- "correct"
          L2[[i]]
     })
+    DF3 <- data.frame(DF, q.type = unlist(L2))
+    names(DF3) <- c(G, "raw.text", "endmark", "strip.text", "q.type")
     WFM <- t(wfm(unlist(L2), rep(names(L1), sapply(L2, length))))
     cols <- c(key[, "x"], "ok", "right", "correct", "unknown")
     cols2 <- cols[cols %in% colnames(WFM)]
@@ -162,7 +167,34 @@ question_type <- function(text.var, grouping.var = NULL,
     }
     DF <- data.frame(group=rownames(DF), tot.quest = tq, DF, row.names = NULL)
     DF <- DF[sort(DF[, "group"]), ]
-    colnames(DF)[1] <- G  
+    colnames(DF)[1] <-  G
     rownames(DF) <- NULL
-    DF
+    o <- list(raw = DF3, count = DF)
+    class(o) <- "q.type"
+    o
+}
+
+#' Prints a q.type object
+#' 
+#' Prints a q.type object
+#' 
+#' @param x The q.type object
+#' @param \ldots ignored
+#' @method print q.type
+#' @S3method print q.type
+print.q.type <-
+function(x, ...) {
+    print(x$count)
+}
+
+#' Plots a q.type object
+#' 
+#' Plots a q.type object.
+#' 
+#' @param x The word.statsq.type object
+#' @param \ldots Other arguments passed to qheat
+#' @method plot q.type
+#' @S3method plot q.type
+plot.q.type <- function(x, ...) {
+    qheat(x, ...)
 }

@@ -25,9 +25,9 @@ Imports:
     openNLP,
     XML,
     RCurl,
+    reshape2,
     parallel
 Suggests:
-    reshape2,
     plyr,
     koRpus
 LazyData: TRUE
@@ -175,3 +175,4 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
+    'qheat.R'

@@ -58,11 +58,13 @@
 #'     theme(legend.position="none")
 #' 
 #' # CHARACTER TABLE
-#' character.table(DATA$state, DATA$person)
+#' (x <- character.table(DATA$state, DATA$person))
+#' plot(x)
 #' char.table(DATA$state, DATA$person)
 #' char.table(DATA$state, DATA$person, proportianal = TRUE)
 #' character.table(DATA$state, list(DATA$sex, DATA$adult))
 #' colsplit2df(character.table(DATA$state, list(DATA$sex, DATA$adult)))
+#' 
 #' }
 word.count <- 
 function(text.var, byrow = TRUE, missing = NA, digit.remove = TRUE, 
@@ -175,8 +177,38 @@ character.table <- function(text.var, grouping.var, proportional = FALSE,
             by.column = (1 - prop.by.row), ...), check.names = FALSE)
         DF2[is.nan(DF2)] <- 0
     }
+    class(DF2) <- "char_tab"
     DF2
 }
+
+#' Prints a char_tab object
+#' 
+#' Prints a char_tab object.
+#' 
+#' @param x The char_tab object
+#' @param \ldots ignored
+#' @method print char_tab
+#' @S3method print char_tab
+print.char_tab <-
+function(x, ...) {
+    class(x) <- "data.frame"
+    print(x)
+}
+
+
+#' Plots a char_tab object
+#' 
+#' Plots a char_tab object.
+#' 
+#' @param x The char_tab object
+#' @param \ldots Other arguments passed to qheat
+#' @method plot char_tab
+#' @S3method plot char_tab
+plot.char_tab <- function(x, ...) {
+    class(x) <- "data.frame"
+    qheat(x, ...)
+}
+
 
 #' @rdname word.count
 #' @export

@@ -74,6 +74,7 @@ names(desc_wrds)
 desc_wrds$ts
 desc_wrds$gts
 desc_wrds$pun
+plot(desc_wrds)
 with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff)))
 }
 }
