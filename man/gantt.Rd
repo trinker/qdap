@@ -69,7 +69,8 @@ gantt(mraja1$dialogue, mraja1$person, units = "characters", box.color = "black")
 gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "characters")
 with(mraja1, gantt(dialogue, list(fam.aff, sex, died),
    units = "characters", sums = TRUE))
-gantt(mraja1$dialogue, mraja1$person, units = "syllables", box.color = "black", sums = TRUE)
+gantt(mraja1$dialogue, mraja1$person, units = "syllables",
+   box.color = "black", sums = TRUE)
 gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "syllables")
 
 (dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "sentences",

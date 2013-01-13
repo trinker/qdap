@@ -11,30 +11,30 @@
 #' collision, Berger Parker and Brillouin.
 #' @details These are the formulas used to calculate the indices:
 #' 
-#' Shannon index:
+#' \bold{Shannon index:}
 #' \deqn{H_1(X)=-\sum\limits_{i=1}^R{p_i};log;p_i}
 #' 
 #' Shannon, C. E. (1948). A mathematical theory of communication. Bell System \cr
 #' 
-#' Simpson index:
+#' \bold{Simpson index:}
 #' \deqn{D=\frac{\sum_{i=1}^R{p_i};n_i(n_i -1)}{N(N-1))}}
 #' 
 #' Simpson, E. H. (1949). Measurement of diversity. Nature 163, p. 688 \cr
 #' 
-#' Collision entropy:
+#' \bold{Collision entropy:}
 #' \deqn{H_2(X)=-log\sum_{i=1}^n{p_i}^2}
 #' 
 #' Renyi, A. (1961). On measures of information and entropy. Proceedings of the
 #' 4th Berkeley Symposium on Mathematics, Statistics and Probability, 1960.  
 #' pp. 547-5661. \cr
 #' 
-#' Berger Parker index:
+#' \bold{Berger Parker index:}
 #' \deqn{D_{BP}=\frac{N_{max}}{N}}
 #' 
 #' Berger, W. H., & Parker, F. L.(1970). Diversity of planktonic Foramenifera in 
 #' deep sea sediments. Science 168, pp. 1345-1347. \cr
 #' 
-#' Brillouin index:
+#' \bold{Brillouin index:}
 #' \deqn{H_B=\frac{ln(N!)-\sum{ln(n_1)!}}{N}}
 #' 
 #' Magurran, A. E. (2004). Measuring biological diversity. Blackwell.

@@ -4,7 +4,8 @@
 \usage{
   qheat(mat, low = "white", high = "darkblue",
     values = FALSE, digits = 1, text.size = 3,
-    text.color = "grey40", order.by = NULL, grid = "white",
+    text.color = "grey40", xaxis.col = "black",
+    yaxis.col = "black", order.by = NULL, grid = "white",
     by.column = TRUE, auto.size = FALSE)
 }
 \arguments{
@@ -30,6 +31,10 @@
 
   \item{text.color}{A character vector to plot the text if
   \code{values} is TRUE.}
+
+  \item{xaxis.col}{A single}
+
+  \item{yaxis.col}{}
 
   \item{order.by}{An optional character vector of a varable
   name to order the columns by.  To reverse use a negative
@@ -63,6 +68,8 @@
 dat <- sentSplit(DATA, "state")
 (ws.ob <- with(dat, word_stats(state, list(sex, adult), tot=tot)))
 qheat(ws.ob)
+qheat(ws.ob, order.by = "sptot",
+    xaxis.col = c("red", "black", "green", "blue"))
 qheat(ws.ob, order.by = "sptot")
 qheat(ws.ob, order.by = "-sptot")
 qheat(ws.ob, values = TRUE)

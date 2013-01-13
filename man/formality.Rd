@@ -2,10 +2,8 @@
 \alias{formality}
 \title{Formality Score}
 \usage{
-  formality(text.var, grouping.var = NULL, plot = FALSE,
-    sort.by.formality = TRUE, digits = 2, point.pch = 20,
-    point.cex = 0.5, point.colors = c("gray65", "red"),
-    bar.colors = NULL, min.wrdcnt = NULL, ...)
+  formality(text.var, grouping.var = NULL,
+    sort.by.formality = TRUE, digits = 2, ...)
 }
 \arguments{
   \item{text.var}{The text variable (or an object from
@@ -17,28 +15,7 @@
   single grouping variable or a list of 1 or more grouping
   variables.}
 
-  \item{plot}{logical. Provides a visualization for the
-  results}
-
-  \item{sort.by.formality}{logical.  If TRUE orders the
-  results by formality score.}
-
   \item{digits}{The number of digits displayed.}
-
-  \item{point.pch}{The plotting symbol.}
-
-  \item{point.cex}{The plotting symbol size.}
-
-  \item{point.colors}{A vector of colors (length of two) to
-  plot word count and formality score.}
-
-  \item{bar.colors}{A palette of colors to supply to the
-  bars in the visualization.  If two palettes are provided
-  to the two bar plots respectively.}
-
-  \item{min.wrdcnt}{A minimum word count threshold that
-  must be achieved to be considered in the results.
-  Default includes all subgroups.}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[qdap]{pos.by}}.}
@@ -65,7 +42,8 @@
   word}
 }
 \description{
-  Transcript apply formality score by grouping variable(s).
+  Transcript apply formality score by grouping variable(s)
+  and optionally plot the breakdown of the model.
 }
 \details{
   Heylighen & Dewaele(2002)'s formality score is calculated
@@ -86,24 +64,31 @@
 \examples{
 \dontrun{
 with(DATA, formality(state, person))
-with(DATA, formality(state, list(sex, adult), plot = TRUE))
-rajDEM <- key_merge(raj, raj.demographics, 'person')
-with(raj, formality(rajPOS, act, plot=TRUE))
-with(raj, formality(rajPOS, person, plot=TRUE, bar.colors="Dark2"))
-with(raj, formality(rajPOS, person, plot=TRUE, bar.colors=c("Dark2", "Set1")))
-with(raj, formality(rajPOS, list(person, act), plot=TRUE, bar.colors="Set1"))
-with(rajDEM, formality(rajPOS, sex, plot=TRUE, bar.colors="RdBu"))
-with(rajDEM, formality(rajPOS, list(fam.aff, sex), plot=TRUE,
-    bar.colors="RdBu"))
-with(rajDEM, formality(rajPOS, list(died, fam.aff), plot=TRUE,
-    bar.colors="RdBu",  point.cex=2, point.pch = 3))
-raj.form <- with(rajDEM, formality(rajPOS, list(died, sex), plot=TRUE,
-    bar.colors="RdBu",  point.cex=2, point.pch = "|"))
+(x1 <- with(DATA, formality(state, list(sex, adult))))
+plot(x1)
+plot(x1, short.names = TRUE)
+data(rajPOS) #A data set consisting of a pos list object
+x2 <- with(raj, formality(rajPOS, act))
+plot(x2)
+x3 <- with(raj, formality(rajPOS, person))
+plot(x3, bar.colors="Dark2")
+plot(x3, bar.colors=c("Dark2", "Set1"))
+x4 <- with(raj, formality(rajPOS, list(person, act)))
+plot(x4, bar.colors=c("Dark2", "Set1"))
+x5 <- with(rajDEM, formality(rajPOS, sex))
+plot(x5, bar.colors="RdBu")
+x6 <- with(rajDEM, formality(rajPOS, list(fam.aff, sex)))
+plot(x6, bar.colors="RdBu")
+x7 <- with(rajDEM, formality(rajPOS, list(died, fam.aff)))
+plot(x7, bar.colors="RdBu",  point.cex=2, point.pch = 3)
+x8 <- raj.form <- with(rajDEM, formality(rajPOS, list(died, sex)))
+plot(x8, bar.colors="RdBu",  point.cex=2, point.pch = "|")
+
 names(raj.form)
 colsplit2df(raj.form$formality)
 
 #pass an object from pos or pos.by
-with(raj, formality(rajPOS , list(act, person), plot = TRUE))
+with(raj, formality(x8 , list(act, person)))
 }
 }
 \references{
@@ -112,6 +97,8 @@ with(raj, formality(rajPOS , list(act, person), plot = TRUE))
   in Context, Special issue of Foundations of Science, 7
   (3), 293-340.
 }
-\keyword{explicit}
+\keyword{explicit,}
 \keyword{formality,}
+\keyword{parts-of-speech,}
+\keyword{pos}
 

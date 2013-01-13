@@ -15,6 +15,8 @@
 #' @param text.size A integer size to plot the text if \code{values} is TRUE.
 #' @param text.color A character vector to plot the text if \code{values} 
 #' is TRUE.
+#' @param xaxis.col A single 
+#' @param yaxis.col
 #' @param order.by An optional character vector of a varable name to order the 
 #' columns by.  To reverse use a negative (\code{-}) before the column name.
 #' @param grid The color of the grid (Use NULL to remove the grid).  
@@ -29,12 +31,14 @@
 #' usage.
 #' @keywords heatmap
 #' @export
-#' @import ggplot2 gridExtra scales RColorBrewer
+#' @import ggplot2 gridExtra scales RColorBrewer reshape2
 #' @examples
 #' \dontrun{
 #' dat <- sentSplit(DATA, "state")
 #' (ws.ob <- with(dat, word_stats(state, list(sex, adult), tot=tot)))
 #' qheat(ws.ob)
+#' qheat(ws.ob, order.by = "sptot", 
+#'     xaxis.col = c("red", "black", "green", "blue"))
 #' qheat(ws.ob, order.by = "sptot")
 #' qheat(ws.ob, order.by = "-sptot")
 #' qheat(ws.ob, values = TRUE)
@@ -42,8 +46,9 @@
 #' qheat(ws.ob, "yellow", "red", grid = FALSE)
 #' }
 qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
-    digits = 1, text.size = 3, text.color = "grey40", order.by = NULL, 
-    grid = "white", by.column = TRUE, auto.size = FALSE) {
+    digits = 1, text.size = 3, text.color = "grey40", xaxis.col = "black",
+    yaxis.col = "black", order.by = NULL, grid = "white", by.column = TRUE, 
+    auto.size = FALSE) {
     numformat <- function(val, digits) { 
         sub("^(-?)0.", "\\1.", sprintf(paste0("%.", digits, "f"), val)) 
     }
@@ -77,6 +82,22 @@ qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
         ws5 <- melt(ws5, id.var = "group")
         ws4$values2 <- numformat(ws5$value, digits = digits)
     }
+    if (length(xaxis.col) == 1) {
+        ws4[, "xaxis.col"] <- rep(xaxis.col, nrow(ws4))
+    } else {
+        if (length(xaxis.col) != nrow(mat)) {
+            warning("Length of colors not equal to number of grouping variables")
+        }
+        ws4[, "xaxis.col"] <- lookup(ws4[, "group"], mat[, 1], xaxis.col)         
+    }
+    if (length(yaxis.col) == 1) {
+        ws4[, "yaxis.col"] <- rep(yaxis.col, nrow(ws4))
+    } else {
+        if (length(yaxis.col) != (ncol(mat) - 1)) {
+            warning("Length of colors not equal to number of grouping variables")
+        }      
+        ws4[, "yaxis.col"] <- lookup(ws4[, "group"], mat[, 1], yaxis.col)         
+    }
     if (is.null(grid)) {
         if (values) {
             GP <- ggplot(ws4, aes(group, var, group=var)) +
@@ -104,8 +125,8 @@ qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
         scale_y_discrete(expand = c(0, 0)) + 
         theme(axis.ticks = element_blank(), 
             axis.text.x = element_text(angle = -90, 
-            hjust = -.1, vjust=.6, colour="black"), 
-            axis.text.y =element_text(colour="black")) +
+            hjust = -.1, vjust=.6, colour=xaxis.col), 
+            axis.text.y =element_text(colour=yaxis.col)) +
     xlab(gsub("\\&", " & ", colnames(mat)[1])) +
     ylab("")
     if (auto.size) {
@@ -113,5 +134,4 @@ qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
     }
     print(GP)
 }
-
 

@@ -1,6 +1,7 @@
 #' Formality Score
 #' 
-#' Transcript apply formality score by grouping variable(s).
+#' Transcript apply formality score by grouping variable(s) and optionally plot 
+#' the breakdown of the model.
 #' 
 #' @param text.var The text variable (or an object from \code{pos},\code{pos.by}
 #' or \code{formality}.  Passing the later three object will greatly reduce 
@@ -8,19 +9,7 @@
 #' @param grouping.var The grouping variables.  Default NULL generates formality 
 #' score for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
-#' @param plot logical. Provides a visualization for the results
-#' @param sort.by.formality logical.  If TRUE orders the results by formality 
-#' score.
 #' @param digits The number of digits displayed.
-#' @param point.pch The plotting symbol.
-#' @param point.cex  The plotting symbol size.
-#' @param point.colors A vector of colors (length of two) to plot word count and 
-#' formality score.
-#' @param bar.colors A palette of colors to supply to the bars in the 
-#' visualization.  If two palettes are provided to the two bar plots 
-#' respectively.
-#' @param min.wrdcnt A minimum word count threshold that must be achieved to be 
-#' considered in the results.  Default includes all subgroups.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{pos.by}}.
 #' @note Heylighen & Dewaele(2002) say "At present, a sample would probably 
 #' need to contain a few hundred words for the measure to be minimally reliable. 
@@ -52,34 +41,40 @@
 #' @references Heylighen, F., & Dewaele, J.M. (2002). Variation in the 
 #' contextuality of language: An empirical measure. Context in Context, Special 
 #' issue of Foundations of Science, 7 (3), 293-340.
-#' @keywords formality, explicit
+#' @keywords formality, explicit, parts-of-speech, pos
 #' @export
 #' @import ggplot2 gridExtra scales RColorBrewer
 #' @examples
 #' \dontrun{
 #' with(DATA, formality(state, person))
-#' with(DATA, formality(state, list(sex, adult), plot = TRUE))
-#' rajDEM <- key_merge(raj, raj.demographics, 'person')
-#' with(raj, formality(rajPOS, act, plot=TRUE))
-#' with(raj, formality(rajPOS, person, plot=TRUE, bar.colors="Dark2"))
-#' with(raj, formality(rajPOS, person, plot=TRUE, bar.colors=c("Dark2", "Set1")))
-#' with(raj, formality(rajPOS, list(person, act), plot=TRUE, bar.colors="Set1"))
-#' with(rajDEM, formality(rajPOS, sex, plot=TRUE, bar.colors="RdBu"))
-#' with(rajDEM, formality(rajPOS, list(fam.aff, sex), plot=TRUE, 
-#'     bar.colors="RdBu"))
-#' with(rajDEM, formality(rajPOS, list(died, fam.aff), plot=TRUE, 
-#'     bar.colors="RdBu",  point.cex=2, point.pch = 3))
-#' raj.form <- with(rajDEM, formality(rajPOS, list(died, sex), plot=TRUE, 
-#'     bar.colors="RdBu",  point.cex=2, point.pch = "|"))
+#' (x1 <- with(DATA, formality(state, list(sex, adult))))
+#' plot(x1)
+#' plot(x1, short.names = TRUE)
+#' data(rajPOS) #A data set consisting of a pos list object
+#' x2 <- with(raj, formality(rajPOS, act))
+#' plot(x2)
+#' x3 <- with(raj, formality(rajPOS, person))
+#' plot(x3, bar.colors="Dark2")
+#' plot(x3, bar.colors=c("Dark2", "Set1"))
+#' x4 <- with(raj, formality(rajPOS, list(person, act)))
+#' plot(x4, bar.colors=c("Dark2", "Set1"))
+#' x5 <- with(rajDEM, formality(rajPOS, sex))
+#' plot(x5, bar.colors="RdBu")
+#' x6 <- with(rajDEM, formality(rajPOS, list(fam.aff, sex)))
+#' plot(x6, bar.colors="RdBu")
+#' x7 <- with(rajDEM, formality(rajPOS, list(died, fam.aff)))
+#' plot(x7, bar.colors="RdBu",  point.cex=2, point.pch = 3)
+#' x8 <- raj.form <- with(rajDEM, formality(rajPOS, list(died, sex)))
+#' plot(x8, bar.colors="RdBu",  point.cex=2, point.pch = "|")
+#' 
 #' names(raj.form)
 #' colsplit2df(raj.form$formality)
 #' 
 #' #pass an object from pos or pos.by
-#' with(raj, formality(rajPOS , list(act, person), plot = TRUE))
+#' with(raj, formality(x8 , list(act, person)))
 #' }
-formality <- function(text.var, grouping.var = NULL, plot = FALSE,                   
-    sort.by.formality = TRUE, digits = 2, point.pch = 20, point.cex = .5,            
-    point.colors = c("gray65", "red"), bar.colors = NULL, min.wrdcnt = NULL, ...){        
+formality <- function(text.var, grouping.var = NULL,                    
+    sort.by.formality = TRUE, digits = 2, ...){        
     G <- if(is.null(grouping.var)) {                                                 
              gv <- TRUE                                                              
              "all"                                                                   
@@ -94,11 +89,11 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
                   G[length(G)]                                                       
              }                                                                       
          }                                                                           
-    grouping.var <- if(is.null(grouping.var)){                                       
-        rep("all", length(text.var))                                                 
+    if(is.null(grouping.var)){                                       
+        grouping.var <- rep("all", length(text.var))                                                 
     } else {                                                                         
-    if(is.list(grouping.var) & length(grouping.var)>1) {                             
-         apply(data.frame(grouping.var), 1, function(x){                             
+        if(is.list(grouping.var) & length(grouping.var)>1) {                             
+            grouping.var <- apply(data.frame(grouping.var), 1, function(x){                             
                      if (any(is.na(x))){                                             
                          NA                                                          
                      }else{                                                          
@@ -107,9 +102,9 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
                  }                                                                   
              )                                                                       
         } else {                                                                     
-            unlist(grouping.var)                                                     
+            grouping.var <-  unlist(grouping.var)                                                     
         }                                                                            
-    }                                                                                
+    }                                                                          
     if (!gv) {                                                                       
         pos.list <- pos.by(text.var = text.var,                                      
             grouping.var = grouping.var, digits = digits, ...)                            
@@ -219,84 +214,128 @@ formality <- function(text.var, grouping.var = NULL, plot = FALSE,
     dat[, "form.class"] <- factor(dat[, "form.class"],                               
         levels=unique(dat[, "form.class"]))                                          
     row.names(dat) <- NULL                                                           
-    o$pos.reshaped <- dat                                                            
+    o$pos.reshaped <- dat  
+    o$group <- G                                                                                                                                                                                                      
+    class(o) <- "formality.measure"                                                  
+    return(o)                                                                        
+}
+
+
+#' Plots a formality.measure object
+#' 
+#' Plots a formality.measure object including the parts of speech used to 
+#' calculate contectual/formal speech.
+#' 
+#' @param x The formality.measure object.
+#' @param sort.by.formality logical.  If TRUE orders the results by formality 
+#' score.
+#' @param point.pch The plotting symbol.
+#' @param point.cex  The plotting symbol size.
+#' @param point.colors A vector of colors (length of two) to plot word count and 
+#' formality score.
+#' @param bar.colors A palette of colors to supply to the bars in the 
+#' visualization.  If two palettes are provided to the two bar plots 
+#' respectively.
+#' @param short.names logical.  If TRUE shortens the length of legend and label 
+#' names for mor compact plot width.
+#' @param min.wrdcnt A minimum word count threshold that must be achieved to be 
+#' considered in the results.  Default includes all subgroups.
+#' @param \ldots ignored
+#' @return Invisibly returns the \code{ggplot2} objects that form the larger 
+#' plot.
+#' @method plot formality.measure
+#' @import ggplot2 gridExtra scales RColorBrewer
+#' @S3method plot formality.measure
+plot.formality.measure <- function(x, point.pch = 20, point.cex = .5,            
+    point.colors = c("gray65", "red"), bar.colors = NULL, 
+    short.names = FALSE, min.wrdcnt = NULL, ...) {
+    dat <- x$pos.reshaped   
+    FOR <- x$formality
+    G <- x$group
     if (!is.null(min.wrdcnt)){                                                       
         dat <- dat[dat[, "word.count"] > min.wrdcnt, ,drop = TRUE]                   
         dat[, 1] <- factor(dat[, 1])                                                 
         FOR <- FOR[FOR[, "word.count"] > min.wrdcnt, ,drop = TRUE]                   
-    }                                                                                
-    if (plot) {                                                                                                               
-        YY <- ggplot(dat, aes(grouping,  fill=form.class)) +                         
-            geom_bar(position='fill') +                                              
-            coord_flip() +  labs(fill=NULL) +                                        
-            ylab("proportion") + xlab(G)  +                                          
-            theme(legend.position = 'bottom') +
-            ggtitle("Percent Contextual-Formal") +
-            scale_y_continuous(breaks = c(0, .25, .5, .75, 1),
-                labels=c("0", ".25", ".5", ".75", "1"))  
-            if (!is.null(bar.colors)) {  
-                if (length(bar.colors) == 1) {
-                    YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
-                        bar.colors))
-                } else {
-                    YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
-                        bar.colors[2]))
-            }
-        }        
-        dat2 <- dat[dat[, "pos"] != "other", ] 
-        dat2[, "pos"] <- factor(dat2[, "pos"])
-        dat2[, "form.class"] <- factor(dat2[, "form.class"])
+    }   
+    if(short.names){
+        dat[, "form.class"] <- lookup(dat[, "form.class"], 
+            c("formal", "contectual", "other"),
+            c("form", "cont", "other"))
+    }                                                                                                                
+    YY <- ggplot(dat, aes(grouping,  fill=form.class)) +                         
+        geom_bar(position='fill') +                                              
+        coord_flip() +  labs(fill=NULL) +                                        
+        ylab("proportion") + xlab(G)  +                                          
+        theme(legend.position = 'bottom') +
+        ggtitle("Percent Contextual-Formal") +
+        scale_y_continuous(breaks = c(0, .25, .5, .75, 1),
+            labels=c("0", ".25", ".5", ".75", "1"))  
+        if (!is.null(bar.colors)) {  
+            if (length(bar.colors) == 1) {
+                YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
+                    bar.colors))
+            } else {
+                YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
+                    bar.colors[2]))
+        }
+    }        
+    dat2 <- dat[dat[, "pos"] != "other", ] 
+    dat2[, "pos"] <- factor(dat2[, "pos"])
+    dat2[, "form.class"] <- factor(dat2[, "form.class"])
+    if(short.names) {
+        LAB <- c("noun", "adj", "prep", "art", "pro", "verb", 
+            "adverb", "interj")
+    } else {
         LAB <- c("noun", "adjective", "preposition",                         
             "articles", "pronoun", "verb", "adverb", "interjection")  
-        LAB2 <- LAB[substring(LAB, 1, 3) %in% substring(levels(dat2$pos), 1, 3)]
-        XX <- ggplot(data=dat2, aes(grouping,  fill=pos)) +                           
-            geom_bar(position='fill') + coord_flip() +                               
-            facet_grid(~form.class, scales="free", margins = TRUE) +                 
-            scale_x_discrete(drop=F) +  labs(fill=NULL) +   
-            scale_y_continuous(breaks = c(0, .25, .5, .75, 1),
-                labels=c("0", ".25", ".5", ".75", "1")) +
-            ylab("proportion") + xlab(G)  +                                              
-            theme(legend.position = 'bottom') +
-            ggtitle("Percent Parts of Speech By Contextual-Formal")                                         
-            if (!is.null(bar.colors)) {  
-                if (length(bar.colors) == 1) {
-                    XX <- XX + scale_fill_brewer(palette=bar.colors,                     
-                        name = "", breaks=levels(dat2$pos),                               
-                        labels = LAB2) 
-                } else {
-                    XX <- XX + scale_fill_brewer(palette=bar.colors [2],                     
-                        name = "", breaks=levels(dat2$pos),                               
-                        labels = LAB2)  
-                }
-            } else {
-                     XX <- XX + scale_fill_discrete(name = "", 
-                         breaks=levels(dat2$pos), labels = LAB2)
-            }
-        names(FOR)[1] <- "grouping"                                                  
-        buffer <- diff(range(FOR$formality))*.05                                     
-        ZZ <- ggplot(data=FOR, aes(grouping,  formality, size=word.count)) +         
-            geom_point(colour=point.colors[1]) + coord_flip()+                       
-            geom_text(aes(label = word.count), vjust = 1.2, size = 3,                
-                position = "identity",colour = "grey30") +                           
-            labs(size="word count") +                                                
-            theme(legend.position = 'bottom') +      
-            ggtitle("F Measure (Formality)") +
-            scale_y_continuous(limits=c(min(FOR$formality)-buffer,                   
-                max(FOR$formality) + buffer)) +                                      
-            scale_size_continuous(range = c(1, 8)) + xlab(G)  +                      
-            if (point.pch == "|") {                                                  
-                geom_text(aes(label = "|"), colour=point.colors[2], 
-                    size=point.cex, position = "identity", hjust = .25, 
-                    vjust = .25)                 
-            } else {                                                                 
-                geom_point(colour=point.colors[2], shape=point.pch, 
-                    size=point.cex)  
-            }                                                                     
-            suppressWarnings(grid.arrange(YY, XX,                         
-                ZZ, widths=c(.24, .47, .29), ncol=3))                                 
-    }                                                                                
-    class(o) <- "formality.measure"                                                  
-    return(o)                                                                        
+    }
+    LAB2 <- LAB[substring(LAB, 1, 3) %in% substring(levels(dat2$pos), 1, 3)]
+    XX <- ggplot(data=dat2, aes(grouping,  fill=pos)) +                           
+        geom_bar(position='fill') + coord_flip() +                               
+        facet_grid(~form.class, scales="free", margins = TRUE) +                 
+        scale_x_discrete(drop=F) +  labs(fill=NULL) +   
+        scale_y_continuous(breaks = c(0, .25, .5, .75, 1),
+            labels=c("0", ".25", ".5", ".75", "1")) +
+        ylab("proportion") + xlab(G)  +                                              
+        theme(legend.position = 'bottom') +
+        ggtitle("Percent Parts of Speech By Contextual-Formal")                                         
+    if (!is.null(bar.colors)) {  
+        if (length(bar.colors) == 1) {
+            XX <- XX + scale_fill_brewer(palette=bar.colors,                     
+                name = "", breaks=levels(dat2$pos),                               
+                labels = LAB2) 
+        } else {
+            XX <- XX + scale_fill_brewer(palette=bar.colors [2],                     
+                name = "", breaks=levels(dat2$pos),                               
+                labels = LAB2)  
+        }
+    } else {
+             XX <- XX + scale_fill_discrete(name = "", 
+                 breaks=levels(dat2$pos), labels = LAB2)
+    }
+    names(FOR)[1] <- "grouping"                                                  
+    buffer <- diff(range(FOR$formality))*.05                                   
+    ZZ <- ggplot(data=FOR, aes(grouping,  formality, size=word.count)) +         
+        geom_point(colour=point.colors[1]) + coord_flip()+                       
+        geom_text(aes(label = word.count), vjust = 1.2, size = 3,                
+            position = "identity",colour = "grey30") +                           
+        labs(size="word count") +                                                
+        theme(legend.position = 'bottom') +      
+        ggtitle("F Measure (Formality)") +
+        scale_y_continuous(limits=c(min(FOR$formality)-buffer,                   
+            max(FOR$formality) + buffer)) +                                      
+        scale_size_continuous(range = c(1, 8)) + xlab(G)  +                      
+    if (point.pch == "|") {                                                  
+        geom_text(aes(label = "|"), colour=point.colors[2], 
+            size=point.cex, position = "identity", hjust = .25, 
+            vjust = .25)                 
+    } else {                                                                 
+        geom_point(colour=point.colors[2], shape=point.pch, 
+            size=point.cex)  
+    }                                                                     
+    suppressWarnings(grid.arrange(YY, XX,                         
+        ZZ, widths=c(.24, .47, .29), ncol=3))     
+    invisible(list(f1 = XX, f2 = YY, f3 = ZZ))
 }
 
 #' Prints a formality.measure object
