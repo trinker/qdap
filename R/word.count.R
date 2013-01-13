@@ -177,19 +177,19 @@ character.table <- function(text.var, grouping.var, proportional = FALSE,
             by.column = (1 - prop.by.row), ...), check.names = FALSE)
         DF2[is.nan(DF2)] <- 0
     }
-    class(DF2) <- "char_tab"
+    class(DF2) <- "character.table"
     DF2
 }
 
-#' Prints a char_tab object
+#' Prints a character.table object
 #' 
-#' Prints a char_tab object.
+#' Prints a character.table object.
 #' 
-#' @param x The char_tab object
+#' @param x The character.table object
 #' @param \ldots ignored
-#' @method print char_tab
-#' @S3method print char_tab
-print.char_tab <-
+#' @method print character.table
+#' @S3method print character.table 
+print.character.table <-
 function(x, ...) {
     class(x) <- "data.frame"
     print(x)

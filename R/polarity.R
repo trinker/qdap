@@ -37,7 +37,7 @@
 #' that something is good, whereas "sick" used by a typical adult indicates 
 #' something is not right or negative connotation.
 #' 
-#' Also note that \code{\link[qdap]{polarity.score}} assumes you've run 
+#' Also note that \code{\link[qdap]{polarity}} assumes you've run 
 #' \code{\link[qdap]{sentSplit}}.
 #' @details The equation used by the algorithm to assign value to polarity to 
 #' each sentence fist utilizes the sentiment dictionary (Hu and Liu, 2004) to 
@@ -70,15 +70,16 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' (poldat <- with(DATA, polarity.score(state, person)))
-#' with(DATA, polarity.score(state, list(sex, adult)))
+#' (poldat <- with(DATA, polarity(state, person)))
+#' with(DATA, polarity(state, list(sex, adult)))
 #' names(poldat)
 #' poldat$all
 #' poldat$group
-#' poldat2 <- with(mraja1spl, polarity.score(dialogue, list(sex, fam.aff, died)))
+#' poldat2 <- with(mraja1spl, polarity(dialogue, list(sex, fam.aff, died)))
 #' colsplit2df(poldat2$group)
+#' plot(poldat)
 #' }
-polarity.score <-
+polarity <-
 function (text.var, grouping.var = NULL, positive.list = positive.words, 
           negative.list = negative.words, negation.list = negation.words, 
           amplification.list = increase.amplification.words, 
@@ -204,21 +205,75 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
     DF2 <- DF2[, c(1, 3, 2, 4)]
     o <- list(all = x, group = DF2, POLARITY_FOR_ALL_SENTENCES = x, 
         POLARITY_BY_GROUP = DF2)
-    class(o) <- "polarity.score"
+    class(o) <- "polarity"
     return(o)
 }
 
-#' Prints a polarity.score object
+#' Prints a polarity Object
 #' 
-#' Prints a polarity.score object.
+#' Prints a polarity object.
 #' 
-#' @param x The polarity.score object
+#' @param x The polarity object.
 #' @param \ldots ignored
-#' @method print polarity.score
-#' @S3method print polarity.score
-print.polarity.score <-
+#' @method print polarity
+#' @S3method print polarity
+print.polarity <-
 function(x, ...) {
     cat("POLARITY BY GROUP\n=================\n")
     print(x$group)
 }
 
+#' Plots a polarity Object
+#' 
+#' Plots a polarity object as a heat map Gantt plot with polarity over 
+#' time (measured in words) and polarity scores per sentence.
+#' 
+#' @param x The polarity object.
+#' @param bar.size The size of the bars used in the Gantt plot.
+#' @param low The color to be used for lower values.
+#' @param high The color to be used for higher values.
+#' @param ave.polarity.shape The shape of the average polarity score used in the 
+#' dot plot.
+#' @param alpha Transparency level of points (ranges betweeon 0 and 1).
+#' @param shape The shape of the points used in the dot plot.
+#' @param point.size The size of the points used in the dot plot.
+#' @param jitter Ammount of vertical jitter to add to the points.
+#' @param nrow The number of rows in the dotplot legend (used when the number of 
+#' grouping variables amkes the legend too wide).
+#' @param \ldots ignored
+#' @return Invisibly returns the \code{ggplot2} objects that form the larger 
+#' plot.  
+#' @method plot polarity
+#' @import ggplot2 gridExtra scales RColorBrewer
+#' @S3method plot polarity
+plot.polarity <- function(x, bar.size = 5, low = "red", high = "blue", 
+    ave.polarity.shape = "+", alpha = 1/3, shape = 19, point.size = 2.5, 
+    jitter = .1, nrow = 1, ...){
+    dat <- x[["group"]]
+    dat2 <- x[["all"]]
+    G <- names(dat)[1]
+    nms <- c("group", "dialogue", "word_count", "Polarity")
+    names(dat)[c(1, 2)] <-  nms[1:2]
+    names(dat2)[1:4] <- nms
+    dat2 <- data.frame(dat2, with(dat2, 
+        gantt(dialogue, group, plot = FALSE))[, -1])
+    XX <- ggplot(dat2, aes(color = Polarity )) + 
+        geom_segment(aes(x=start, xend=end, y=group, yend=group), 
+            size=bar.size) +
+        xlab("Duration (words)") + ylab(gsub("\\&", " & ", G)) +
+        scale_color_gradient(low = low, high = high) +
+        theme(legend.position="bottom") +
+        guides(colour = guide_colorbar(barwidth = 9, barheight = .75))
+    YY <- ggplot(dat2, aes(y=group, x=Polarity, colour = group)) + 
+        geom_point(data = dat, aes(x=ave.polarity), shape = ave.polarity.shape, 
+            size = 6) +
+        geom_point(alpha = alpha, shape = shape, 
+            size = point.size, position = position_jitter(h = jitter)) +
+        ylab(gsub("\\&", " & ", G)) +
+        scale_color_discrete(name= G) +
+        theme(plot.margin = unit(c(-.25, 1, 1, 1), "lines"), 
+            legend.position="bottom")  +
+        guides(col = guide_legend(nrow = nrow, byrow = TRUE)) 
+    grid.arrange(XX, YY, nrow = 2)
+    invisible(list(p1 = XX, p2 = YY))
+}

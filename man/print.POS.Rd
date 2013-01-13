@@ -1,15 +1,15 @@
-\name{print.POS}
-\alias{print.POS}
-\title{Prints a POS object}
+\name{print.pos}
+\alias{print.pos}
+\title{Prints a pos Object.}
 \usage{
-  \method{print}{POS} (x, ...)
+  \method{print}{pos} (x, ...)
 }
 \arguments{
-  \item{x}{The POS object}
+  \item{x}{The pos object}
 
   \item{\ldots}{ignored}
 }
 \description{
-  Prints a POS object.
+  Prints a pos object.
 }
 

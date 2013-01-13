@@ -9,6 +9,8 @@
 #' @param grouping.var The grouping variables.  Default NULL generates formality 
 #' score for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
+#' @param sort.by.formality logical.  If TURE orders the results by formality 
+#' score.
 #' @param digits The number of digits displayed.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{pos.by}}.
 #' @note Heylighen & Dewaele(2002) say "At present, a sample would probably 
@@ -216,19 +218,17 @@ formality <- function(text.var, grouping.var = NULL,
     row.names(dat) <- NULL                                                           
     o$pos.reshaped <- dat  
     o$group <- G                                                                                                                                                                                                      
-    class(o) <- "formality.measure"                                                  
+    class(o) <- "formality"                                                  
     return(o)                                                                        
 }
 
 
-#' Plots a formality.measure object
+#' Plots a formality Object
 #' 
-#' Plots a formality.measure object including the parts of speech used to 
+#' Plots a formality object including the parts of speech used to 
 #' calculate contectual/formal speech.
 #' 
-#' @param x The formality.measure object.
-#' @param sort.by.formality logical.  If TRUE orders the results by formality 
-#' score.
+#' @param x The formality object.
 #' @param point.pch The plotting symbol.
 #' @param point.cex  The plotting symbol size.
 #' @param point.colors A vector of colors (length of two) to plot word count and 
@@ -243,10 +243,10 @@ formality <- function(text.var, grouping.var = NULL,
 #' @param \ldots ignored
 #' @return Invisibly returns the \code{ggplot2} objects that form the larger 
 #' plot.
-#' @method plot formality.measure
+#' @method plot formality
 #' @import ggplot2 gridExtra scales RColorBrewer
-#' @S3method plot formality.measure
-plot.formality.measure <- function(x, point.pch = 20, point.cex = .5,            
+#' @S3method plot formality
+plot.formality <- function(x, point.pch = 20, point.cex = .5,            
     point.colors = c("gray65", "red"), bar.colors = NULL, 
     short.names = FALSE, min.wrdcnt = NULL, ...) {
     dat <- x$pos.reshaped   
@@ -338,15 +338,15 @@ plot.formality.measure <- function(x, point.pch = 20, point.cex = .5,
     invisible(list(f1 = XX, f2 = YY, f3 = ZZ))
 }
 
-#' Prints a formality.measure object
+#' Prints a formality Object
 #' 
-#' Prints a formality.measure  object
+#' Prints a formality  object.
 #' 
-#' @param x The formality.measure object
+#' @param x The formality object.
 #' @param \ldots ignored
-#' @method print formality.measure
-#' @S3method print formality.measure
-print.formality.measure <-
+#' @method print formality
+#' @S3method print formality
+print.formality <-
 function(x, ...) {
     print(x$formality)
 }

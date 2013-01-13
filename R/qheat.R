@@ -15,8 +15,8 @@
 #' @param text.size A integer size to plot the text if \code{values} is TRUE.
 #' @param text.color A character vector to plot the text if \code{values} 
 #' is TRUE.
-#' @param xaxis.col A single 
-#' @param yaxis.col
+#' @param xaxis.col A single character vector color choice for the high values.
+#' @param yaxis.col  A single character vector color choice for the hlow values.
 #' @param order.by An optional character vector of a varable name to order the 
 #' columns by.  To reverse use a negative (\code{-}) before the column name.
 #' @param grid The color of the grid (Use NULL to remove the grid).  
@@ -24,6 +24,8 @@
 #' FALSE  applies scaling by row (use NULL to turn off scaling).
 #' @param auto.size logical.  IF TRUE the visual will be resized to create 
 #' square cells.
+#' @param mat2 A second matrix equal in dimensions to \code{mat} that will be used 
+#' for cell labels if \code{values} is TRUE.
 #' @details \code{qheat} is useful for finding patterns and anomalies in large
 #' qdap generated dataframes and matrices.
 #' @note \code{qheat} is a fast way of working with data formats produced by 
@@ -34,7 +36,7 @@
 #' @import ggplot2 gridExtra scales RColorBrewer reshape2
 #' @examples
 #' \dontrun{
-#' dat <- sentSplit(DATA, "state")
+#'  dat <- sentSplit(DATA, "state")
 #' (ws.ob <- with(dat, word_stats(state, list(sex, adult), tot=tot)))
 #' qheat(ws.ob)
 #' qheat(ws.ob, order.by = "sptot", 
@@ -44,20 +46,36 @@
 #' qheat(ws.ob, values = TRUE)
 #' qheat(ws.ob, values = TRUE, text.color = "red")
 #' qheat(ws.ob, "yellow", "red", grid = FALSE)
+#' 
+#' dat1 <- data.frame(G=LETTERS[1:5], matrix(rnorm(20), ncol = 4))
+#' dat2 <- data.frame(matrix(LETTERS[1:25], ncol=5))
+#' qheat(dat1, values=TRUE)
+#' qheat(dat1, values=TRUE, mat2=dat2)
 #' }
 qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
     digits = 1, text.size = 3, text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white", by.column = TRUE, 
-    auto.size = FALSE) {
+    auto.size = FALSE, mat2 = NULL) {
     numformat <- function(val, digits) { 
         sub("^(-?)0.", "\\1.", sprintf(paste0("%.", digits, "f"), val)) 
     }
+    classRdf <- c("diversity", "character.table", "pos.by")
+    if (class(mat) %in% classRdf) {
+        class(mat) <- "data.frame"
+    }     
     CLS <- class(mat)
-    if (CLS == "word.stats") {
+    if (CLS == "word_stats") {
         mat <- mat[["gts"]]
+        class(mat) <- "data.frame"
     }
-    if (CLS == "q.type") {
+    if (CLS == "termco") {
+        mat2 <- mat[["rnp"]]
+        mat <- data.frame(mat[["prop"]])
+        class(mat2) <- "data.frame"
+    }    
+    if (CLS == "question_type") {
         mat <- mat[["count"]]
+        class(mat) <- "data.frame"
     }
     dat2 <- as.matrix(mat[, -1])
     if (!is.null(by.column)){
@@ -74,13 +92,21 @@ qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
         mat[, 1] <- factor(mat[, 1], levels = ord)
     }
     ws4 <- data.frame(group = mat[, 1], dat2, check.names = FALSE)
+    colnames(ws4)[1] <- "group"
     ws4 <- melt(ws4, id.var = "group")
-    colnames(ws4)[1:2] <- qcv(group, var)
+    colnames(ws4)[1:2] <- c("group", "var")
     ws4$var <- factor(ws4$var, levels=rev(levels(ws4$var)))
     if (values) {
-        ws5 <- data.frame(group = mat[, 1], mat[, -1])
+        if (is.null(mat2)) {
+            mat2 <- mat
+        }      
+        ws5 <- data.frame(group = mat2[, 1], mat2[, -1])
         ws5 <- melt(ws5, id.var = "group")
-        ws4$values2 <- numformat(ws5$value, digits = digits)
+        if(is.numeric(ws5$value)) {
+            ws4$values2 <- numformat(ws5$value, digits = digits)
+        } else {
+            ws4$values2 <- ws5$value
+        }
     }
     if (length(xaxis.col) == 1) {
         ws4[, "xaxis.col"] <- rep(xaxis.col, nrow(ws4))
@@ -133,5 +159,5 @@ qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
         GP <- GP + coord_equal()
     }
     print(GP)
+    invisible(GP)
 }
-

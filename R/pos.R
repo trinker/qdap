@@ -51,7 +51,8 @@
 #' names(posbydat)
 #' posbydat
 #' posbydat$pos.by.prop
-#' with(DATA, pos.by(state, list(adult, sex)))
+#' (POSby <- with(DATA, pos.by(state, list(adult, sex))))
+#' plot(POSby, values = TRUE, digits = 2)
 #' #or more quickly - reuse the output from before
 #' with(DATA, pos.by(posbydat, list(adult, sex)))
 #' }
@@ -136,7 +137,7 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 2,
     }
     POS <- list(text = text.var, POStagged = m, POSprop = G5, POSfreq = G4)
     if(na.omit) POS <- lapply(POS, na.omit)
-    class(POS) <- "POS"
+    class(POS) <- "pos"
     return(POS)
 }
 
@@ -173,7 +174,7 @@ function(text.var, grouping.var = NULL, digits = 2, ...){
                   G[length(G)]
              }
          }
-    if (!class(text.var) %in% c("POS", "POSby", "formality.measure")) {
+    if (!class(text.var) %in% c("pos", "pos.by", "formality ")) {
         pos.list <- pos(text.var, digits = digits, ...)
         text.var <- pos.list[["POSfreq"]]
     } else {
@@ -206,7 +207,7 @@ function(text.var, grouping.var = NULL, digits = 2, ...){
     propby <- sapply(do.call(rbind, propby), round, digits = digits)
     propby[is.nan(propby)] <- 0
     o[["pos.by.prop"]] <- data.frame(DF2[, 1:2], propby, check.names = FALSE)
-    class(o) <- "POSby"
+    class(o) <- "pos.by"
     return(o)
 }
 
@@ -273,29 +274,40 @@ function(type = "pretty"){
 }
 
 
-#' Prints a POS object
+#' Prints a pos Object.
 #' 
-#' Prints a POS object.
+#' Prints a pos object.
 #' 
-#' @param x The POS object
+#' @param x The pos object
 #' @param \ldots ignored
-#' @method print POS
-#' @S3method print POS
-print.POS <-
+#' @method print pos
+#' @S3method print pos
+print.pos <-
 function(x, ...) {
     print(x$POSfreq)
 }
 
-
-#' Prints a POSby object
+#' Prints a pos.by Object.
 #' 
-#' Prints a POSby object.
+#' Prints a pos.by object.
 #' 
-#' @param x The POSby object
+#' @param x The pos.by object
 #' @param \ldots ignored
-#' @method print POSby
-#' @S3method print POSby
-print.POSby <-
+#' @method print pos.by
+#' @S3method print pos.by
+print.pos.by <-
 function(x, ...) {
     print(x$pos.by.freq)
+}
+
+#' Plots a pos.by Object
+#' 
+#' Plots a pos.by object.
+#' 
+#' @param x The pos.by object
+#' @param \ldots Other arguments passed to qheat.
+#' @method plot pos.by
+#' @S3method plot pos.by
+plot.pos.by <- function(x, ...) {
+    qheat(x$pos.by.prop, ...)
 }

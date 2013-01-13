@@ -235,33 +235,33 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
     }
     DF2 <- DF2[, unlist(lapply(DF2, sum2))!=0]
     o <- list(ts = DF3, gts = DF2, mpun = mpun )
-    class(o) <- "word.stats"
+    class(o) <- "word_stats"
     return(o)
 }
 
 
-#' Prints a word.stats object
+#' Prints a word_stats object
 #' 
-#' Prints a word.stats object.
+#' Prints a word_stats object.
 #' 
-#' @param x The word.stats object
+#' @param x The word_stats object
 #' @param \ldots ignored
-#' @method print word.stats
-#' @S3method print word.stats
-print.word.stats <-
+#' @method print word_stats
+#' @S3method print word_stats
+print.word_stats <-
 function(x, ...) {
     print(x$gts)
 }
 
 
-#' Plots a word.stats object
+#' Plots a word_stats object
 #' 
-#' Plots a word.stats object.
+#' Plots a word_stats object.
 #' 
-#' @param x The word.stats object
-#' @param \ldots Other arguments passed to qheat
-#' @method plot word.stats
-#' @S3method plot word.stats
-plot.word.stats <- function(x, ...) {
+#' @param x The word_stats object
+#' @param \ldots Other arguments passed to qheat.
+#' @method plot word_stats
+#' @S3method plot word_stats
+plot.word_stats <- function(x, ...) {
     qheat(x, ...)
 }

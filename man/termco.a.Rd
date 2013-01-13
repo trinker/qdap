@@ -203,11 +203,7 @@ termco.d(DATA$state, DATA$person, c(" the ", " i'"))
 MTCH.LST <- exclude(term.match(DATA$state, qcv(a, i)), qcv(is, it, am, shall))
 termco_obj <- termco.a(DATA$state, DATA$person, MTCH.LST)
 termco2mat(termco_obj)
-
-# as a visual
-dat <- termco2mat(termco_obj)
-library(gplots)
-heatmap.2(dat, trace="none")
+plot(terco_obj)
 }
 }
 \seealso{

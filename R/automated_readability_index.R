@@ -18,8 +18,9 @@
 #' word difficulty (letters per word) and sentence difficulty 
 #' (words per sentence).  If you have not run the sentSplit function on your 
 #' data the results may not be accurate.
-#' @references Coleman, M., & Liau, T. L. (1975). A computer readability formula designed 
-#' for machine scoring. Journal of Applied Psychology, Vol. 60, pp. 283-284.
+#' @references Coleman, M., & Liau, T. L. (1975). A computer readability formula 
+#' designed for machine scoring. Journal of Applied Psychology, Vol. 60, 
+#' pp. 283-284.
 #' 
 #' Flesch R. (1948). A new readability yardstick. Journal of Applied Psychology. 
 #' Vol. 32(3), pp. 221-233. doi: 10.1037/h0057532.

@@ -1,8 +1,8 @@
-\name{polarity.score}
-\alias{polarity.score}
+\name{polarity}
+\alias{polarity}
 \title{Polarity Score (Sentiment Analysis)}
 \usage{
-  polarity.score(text.var, grouping.var = NULL,
+  polarity(text.var, grouping.var = NULL,
     positive.list = positive.words,
     negative.list = negative.words,
     negation.list = negation.words,
@@ -97,18 +97,19 @@
   typical adult indicates something is not right or
   negative connotation.
 
-  Also note that \code{\link[qdap]{polarity.score}} assumes
+  Also note that \code{\link[qdap]{polarity}} assumes
   you've run \code{\link[qdap]{sentSplit}}.
 }
 \examples{
 \dontrun{
-(poldat <- with(DATA, polarity.score(state, person)))
-with(DATA, polarity.score(state, list(sex, adult)))
+(poldat <- with(DATA, polarity(state, person)))
+with(DATA, polarity(state, list(sex, adult)))
 names(poldat)
 poldat$all
 poldat$group
-poldat2 <- with(mraja1spl, polarity.score(dialogue, list(sex, fam.aff, died)))
+poldat2 <- with(mraja1spl, polarity(dialogue, list(sex, fam.aff, died)))
 colsplit2df(poldat2$group)
+plot(poldat)
 }
 }
 \references{

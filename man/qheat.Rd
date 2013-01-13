@@ -6,7 +6,7 @@
     values = FALSE, digits = 1, text.size = 3,
     text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white",
-    by.column = TRUE, auto.size = FALSE)
+    by.column = TRUE, auto.size = FALSE, mat2 = NULL)
 }
 \arguments{
   \item{mat}{A matrix or dataframe produced by many qdap
@@ -32,9 +32,11 @@
   \item{text.color}{A character vector to plot the text if
   \code{values} is TRUE.}
 
-  \item{xaxis.col}{A single}
+  \item{xaxis.col}{A single character vector color choice
+  for the high values.}
 
-  \item{yaxis.col}{}
+  \item{yaxis.col}{A single character vector color choice
+  for the hlow values.}
 
   \item{order.by}{An optional character vector of a varable
   name to order the columns by.  To reverse use a negative
@@ -49,6 +51,10 @@
 
   \item{auto.size}{logical.  IF TRUE the visual will be
   resized to create square cells.}
+
+  \item{mat2}{A second matrix equal in dimensions to
+  \code{mat} that will be used for cell labels if
+  \code{values} is TRUE.}
 }
 \description{
   A quick heatmap function for visualizing typical qdap
@@ -65,7 +71,7 @@
 }
 \examples{
 \dontrun{
-dat <- sentSplit(DATA, "state")
+ dat <- sentSplit(DATA, "state")
 (ws.ob <- with(dat, word_stats(state, list(sex, adult), tot=tot)))
 qheat(ws.ob)
 qheat(ws.ob, order.by = "sptot",
@@ -75,6 +81,11 @@ qheat(ws.ob, order.by = "-sptot")
 qheat(ws.ob, values = TRUE)
 qheat(ws.ob, values = TRUE, text.color = "red")
 qheat(ws.ob, "yellow", "red", grid = FALSE)
+
+dat1 <- data.frame(G=LETTERS[1:5], matrix(rnorm(20), ncol = 4))
+dat2 <- data.frame(matrix(LETTERS[1:25], ncol=5))
+qheat(dat1, values=TRUE)
+qheat(dat1, values=TRUE, mat2=dat2)
 }
 }
 \keyword{heatmap}

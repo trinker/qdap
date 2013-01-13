@@ -104,7 +104,8 @@ posbydat <- with(DATA, pos.by(state, sex))
 names(posbydat)
 posbydat
 posbydat$pos.by.prop
-with(DATA, pos.by(state, list(adult, sex)))
+(POSby <- with(DATA, pos.by(state, list(adult, sex))))
+plot(POSby, values = TRUE, digits = 2)
 #or more quickly - reuse the output from before
 with(DATA, pos.by(posbydat, list(adult, sex)))
 }

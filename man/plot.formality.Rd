@@ -1,17 +1,14 @@
-\name{plot.formality.measure}
-\alias{plot.formality.measure}
-\title{Plots a formality.measure object}
+\name{plot.formality}
+\alias{plot.formality}
+\title{Plots a formality Object}
 \usage{
-  \method{plot}{formality.measure} (x, point.pch = 20,
+  \method{plot}{formality} (x, point.pch = 20,
     point.cex = 0.5, point.colors = c("gray65", "red"),
     bar.colors = NULL, short.names = FALSE,
     min.wrdcnt = NULL, ...)
 }
 \arguments{
-  \item{x}{The formality.measure object.}
-
-  \item{sort.by.formality}{logical.  If TRUE orders the
-  results by formality score.}
+  \item{x}{The formality object.}
 
   \item{point.pch}{The plotting symbol.}
 
@@ -38,7 +35,7 @@
   the larger plot.
 }
 \description{
-  Plots a formality.measure object including the parts of
-  speech used to calculate contectual/formal speech.
+  Plots a formality object including the parts of speech
+  used to calculate contectual/formal speech.
 }
 

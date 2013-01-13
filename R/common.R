@@ -65,4 +65,3 @@ common.default <-
         LIS <- list(...)
         return(common.list(LIS, overlap, equal.or))
 }
-

@@ -27,6 +27,10 @@
 colsplit2df <- 
 function(dataframe, splitcol = 1, new.names = NULL, sep=".", 
          keep.orig=FALSE){
+    classRdf <- c("diversity", "character.table")
+    if (class(dataframe) %in% classRdf) {
+        class(dataframe) <- "data.frame"
+    }
     if (!is.data.frame(dataframe)){
         stop("Please supply a data.frame to colsplit2df")
     }

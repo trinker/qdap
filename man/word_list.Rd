@@ -47,7 +47,7 @@
   \code{\link[qdap]{strip}}.}
 }
 \value{
-  An object of class \code{"word.list"} is a list
+  An object of class \code{"word_list"} is a list
   containing at the following components:
   \item{cwl}{complete word list; raw words} \item{swl}{stop
   word list; same as rwl with stop words removed}

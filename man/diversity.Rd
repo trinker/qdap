@@ -58,7 +58,10 @@
 }
 \examples{
 \dontrun{
-colsplit2df(with(mraja1spl, diversity(dialogue, list(sex, died, fam.aff))))
+div.mod <- with(mraja1spl, diversity(dialogue, list(sex, died, fam.aff)))
+colsplit2df(div.mod)
+plot(div.mod, high = "red", low = "yellow")
+plot(div.mod, high = "red", low = "yellow", values = TRUE)
 }
 }
 \keyword{diversity}

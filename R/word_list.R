@@ -22,7 +22,7 @@
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from the 
 #' output.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{strip}}.
-#' @return An object of class \code{"word.list"} is a list containing at the 
+#' @return An object of class \code{"word_list"} is a list containing at the 
 #' following components: 
 #' \item{cwl}{complete word list; raw words}
 #' \item{swl}{stop word list; same as rwl with stop words removed}
@@ -90,23 +90,23 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
         G <- as.character(substitute(grouping.var))
         G[length(G)]
     }
-    word.lists1 <- textLISTER(text.var = text.var, group.vars = group.var,
+    word_lists1 <- textLISTER(text.var = text.var, group.vars = group.var,
         rm.bracket = rm.bracket, char.keep = char.keep, apostrophe.remove = apostrophe.remove, ...)
-    words.UNLISTED <- lapply(word.lists1, function(x) {
+    words.UNLISTED <- lapply(word_lists1, function(x) {
             y <- unlist(x)
             names(y) <- NULL
             return(y)
         }
     ) 
     if (cap) { 
-        word.lists2 <- lapply(word.lists1, function(x) {
+        word_lists2 <- lapply(word_lists1, function(x) {
                 y <- capitalizer(x, caps.list=cap.list)
                 names(y) <- NULL
                 return(y)
             }
         )    
     } else {
-        word.lists2 <- lapply(word.lists1, function(x) {
+        word_lists2 <- lapply(word_lists1, function(x) {
                 y <- unlist(x)
                 names(y) <- NULL
                 return(y)
@@ -114,13 +114,13 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
         ) 
     }
     naomit <- function(x) x[!is.na(x)]
-    word.lists2 <- lapply(word.lists2, naomit)
-    stopped.word.list <- lapply(words.UNLISTED, function(x) {
+    word_lists2 <- lapply(word_lists2, naomit)
+    stopped.word_list <- lapply(words.UNLISTED, function(x) {
             x[!x %in% stopwords]
         }
     )
-    stopped.word.list <- lapply(stopped.word.list, naomit)
-    stopped.word.list <- lapply(stopped.word.list, function(x){ 
+    stopped.word_list <- lapply(stopped.word_list, naomit)
+    stopped.word_list <- lapply(stopped.word_list, function(x){ 
             capitalizer(x, caps.list = cap.list)
         }
     )
@@ -138,10 +138,10 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
         }
         return(DF)
     }
-    freq.word.list <- lapply(word.lists2, COUNT)
-    freq.stop.word.list <- lapply(stopped.word.list, COUNT)
-    red.freq.stop.word.list <- ncutWORDS(freq.stop.word.list, cut.n = cut.n) 
-    word.lists2 <- lapply(word.lists2, function(x) {
+    freq.word_list <- lapply(word_lists2, COUNT)
+    freq.stop.word_list <- lapply(stopped.word_list, COUNT)
+    red.freq.stop.word_list <- ncutWORDS(freq.stop.word_list, cut.n = cut.n) 
+    word_lists2 <- lapply(word_lists2, function(x) {
             if (is.null(x)){
                 return(x)
             } else { 
@@ -150,7 +150,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
             }
         }
     )
-    stopped.word.list <- lapply(stopped.word.list, function(x) {
+    stopped.word_list <- lapply(stopped.word_list, function(x) {
         if (is.null(x)){
                 return(x)
         } else { 
@@ -159,7 +159,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
             }
         }
     )
-    freq.word.list <- lapply(freq.word.list, function(x) {
+    freq.word_list <- lapply(freq.word_list, function(x) {
             if (is.null(x)) {
                 return(x)
             } else { 
@@ -168,7 +168,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
             }
         }
     )
-    freq.stop.word.list <- lapply(freq.stop.word.list, function(x) {
+    freq.stop.word_list <- lapply(freq.stop.word_list, function(x) {
             if (is.null(x)) {
                 return(x)
             } else { 
@@ -177,7 +177,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
             }
         }
     )
-    red.freq.stop.word.list <- lapply(red.freq.stop.word.list, function(x) {
+    red.freq.stop.word_list <- lapply(red.freq.stop.word_list, function(x) {
             if (is.null(x)){
                 return(x)
             } else { 
@@ -186,37 +186,39 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
             }
         }
     )
-    comment(word.lists2) <- "cwl"    
-    comment(stopped.word.list) <- "swl"
-    comment(freq.word.list) <- "fwl" 
-    comment(freq.stop.word.list) <- "fswl"
-    comment(red.freq.stop.word.list) <- "rfswl"
+    comment(word_lists2) <- "cwl"    
+    comment(stopped.word_list) <- "swl"
+    comment(freq.word_list) <- "fwl" 
+    comment(freq.stop.word_list) <- "fswl"
+    comment(red.freq.stop.word_list) <- "rfswl"
     if (alphabetical) {
         asort <- function(dat, col=1) {
             dat2 <-dat[order(dat[, col]), ]
             rownames(dat2) <- NULL
             return(dat2)
         }
-        freq.word.list <- lapply(freq.word.list, asort)
-        freq.stop.word.list <- lapply(freq.stop.word.list, asort)
-        red.freq.stop.word.list <- lapply(red.freq.stop.word.list, asort)
+        freq.word_list <- lapply(freq.word_list, asort)
+        freq.stop.word_list <- lapply(freq.stop.word_list, asort)
+        red.freq.stop.word_list <- lapply(red.freq.stop.word_list, asort)
     } 
-    o <- list(cwl = word.lists2, swl = stopped.word.list, 
-        fwl = freq.word.list, fswl = freq.stop.word.list, 
-        rfswl = red.freq.stop.word.list)
-    class(o) <- "word.list"
+    o <- list(cwl = word_lists2, swl = stopped.word_list, 
+        fwl = freq.word_list, fswl = freq.stop.word_list, 
+        rfswl = red.freq.stop.word_list)
+    class(o) <- "word_list"
     return(o)
 }
 
-#' Prints a word.list object
+#' Prints a word_list Object
 #' 
-#' Prints a word.list object.
+#' Prints a word_list object.
 #' 
-#' @param x The word.list object
+#' @param x The word_list object
 #' @param \ldots ignored
-#' @method print word.list
-#' @S3method print word.list
-print.word.list <-
+#' @method print word_list
+#' @S3method print word_list
+print.word_list <-
 function(x, ...) {
     print(x$rfswl)
 }
+
+

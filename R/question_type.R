@@ -170,31 +170,31 @@ question_type <- function(text.var, grouping.var = NULL,
     colnames(DF)[1] <-  G
     rownames(DF) <- NULL
     o <- list(raw = DF3, count = DF)
-    class(o) <- "q.type"
+    class(o) <- "question_type"
     o
 }
 
-#' Prints a q.type object
+#' Prints a question_type object
 #' 
-#' Prints a q.type object
+#' Prints a question_type object
 #' 
-#' @param x The q.type object
+#' @param x The question_type object
 #' @param \ldots ignored
-#' @method print q.type
-#' @S3method print q.type
-print.q.type <-
+#' @method print question_type
+#' @S3method print question_type
+print.question_type <-
 function(x, ...) {
     print(x$count)
 }
 
-#' Plots a q.type object
+#' Plots a question_type Object
 #' 
-#' Plots a q.type object.
+#' Plots a question_type object.
 #' 
-#' @param x The word.statsq.type object
-#' @param \ldots Other arguments passed to qheat
-#' @method plot q.type
-#' @S3method plot q.type
-plot.q.type <- function(x, ...) {
-    qheat(x, ...)
+#' @param x The question_type object.
+#' @param \ldots Other arguments passed to qheat.
+#' @method plot question_type
+#' @S3method plot question_type
+plot.question_type <- function(x, ...) {
+    qheat(x$count, ...)
 }

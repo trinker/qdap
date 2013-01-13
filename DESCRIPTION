@@ -119,7 +119,6 @@ Collate:
     'outlier.labeler.R'
     'partition.R'
     'paste2.R'
-    'polarity.score.R'
     'pos.R'
     'potential_NA.R'
     'prop.R'
@@ -176,3 +175,4 @@ Collate:
     'words.R'
     'xnoy.R'
     'qheat.R'
+    'polarity.R'

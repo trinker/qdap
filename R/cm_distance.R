@@ -132,20 +132,20 @@ function(dataframe, time.var = NULL, parallel = FALSE, code.var = "code",
     } else { 
         o <- lapply(L1, DIST)
     }
-    class(o) <- "cm.distance"
+    class(o) <- "cm_distance"
     return(o)
 }
 
 
-#' Prints a cm.distance object
+#' Prints a cm_distance Object
 #' 
-#' Prints a cm.distance object
+#' Prints a cm_distance object.
 #' 
-#' @param x The cm.distance object
+#' @param x The cm_distance object.
 #' @param \ldots ignored
-#' @method print cm.distance
-#' @S3method print cm.distance
-print.cm.distance <-
+#' @method print cm_distance
+#' @S3method print cm_distance
+print.cm_distance <-
 function(x, ...){
     x <- unlist(x, recursive=F)
     y <- unlist(strsplit(names(x), "\\."))[c(FALSE, TRUE)]

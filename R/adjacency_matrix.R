@@ -61,7 +61,7 @@ function(matrix.obj) {
     Z2[!lower.tri(Z2)] <- NA
     Z2 <- Z2[-1, -ncol(Z2)]
     o <- list(boolean = Y, adjacency = Z, shared = Z2, sum = colSums(Y))
-    class(o) <- "adjacency.matrix"
+    class(o) <- "adjacency_matrix"
     return(o)
 }
 
@@ -69,19 +69,20 @@ function(matrix.obj) {
 #' @export
 adjmat <- adjacency_matrix
 
-#' Prints an adjacency.matrix
+#' Prints an adjacency_matrix Object
 #' 
-#' Prints an adjacency.matrix.
+#' Prints an adjacency_matrix object.
 #' 
-#' @param x The adjacency.matrix object
+#' @param x The adjacency_matrix object.
 #' @param \ldots ignored
-#' @method print adjacency.matrix
-#' @S3method print adjacency.matrix
-print.adjacency.matrix <-
+#' @method print adjacency_matrix
+#' @S3method print adjacency_matrix
+print.adjacency_matrix <-
   function(x, ...) {
     cat("Adjacency Matrix:\n\n")
     print(x$shared, na.print="", quote=FALSE)
     cat("\n\n")
     cat("Summed occurrences:\n\n")
     print(x$sum)
-  }
+}
+

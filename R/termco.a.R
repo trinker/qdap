@@ -104,11 +104,7 @@
 #' MTCH.LST <- exclude(term.match(DATA$state, qcv(a, i)), qcv(is, it, am, shall))
 #' termco_obj <- termco.a(DATA$state, DATA$person, MTCH.LST)
 #' termco2mat(termco_obj)
-#' 
-#' # as a visual
-#' dat <- termco2mat(termco_obj)
-#' library(gplots)
-#' heatmap.2(dat, trace="none")
+#' plot(terco_obj)
 #' }
 termco.a <-
   function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
@@ -161,18 +157,21 @@ termco.a <-
         o <- TD
       } else {
         o <- termco.c(TD, combined.columns = CC, new.name = new.names, 
-                      zero.replace = NULL, lazy.term = lazy.term, elim.old = elim.old,
-                      output = output)
+                      zero.replace = NULL, lazy.term = lazy.term, 
+                      elim.old = elim.old, output = output)
         if (elim.old) {
-          names(match.list)[names(match.list) == ""] <- unlist(match.list[names(match.list) == ""])
-          tailend <- paste0("term(", names(match.list)[names(match.list) != ""], ")")
+          names(match.list)[names(match.list) == ""] <- 
+            unlist(match.list[names(match.list) == ""])
+          tailend <- paste0("term(", names(match.list)[names(match.list) != ""], 
+            ")")
           subdf <- function(df, ii) {
-            do.call("data.frame", c(as.list(df)[ii, drop=FALSE], check.names=FALSE))
+            do.call("data.frame", c(as.list(df)[ii, drop=FALSE], 
+              check.names=FALSE))
           }
           INDS <- lapply(tailend, function(x) {
             inds <- which(colnames(o[["raw"]]) == x)
             if(identical(inds, integer(0))){
-              inds <- which(names(match.list) == bracketXtract(x)) + 1
+                inds <- which(names(match.list) == bracketXtract(x)) + 1
             }
             inds
           })
@@ -182,8 +181,7 @@ termco.a <-
             pv <- match.list[mprot]
             pv2 <- colnames(o[[i]]) %in% paste0("term(", pv, ")")
             colnames(o[[i]])[pv2] <<- names(match.list)[pv2[-c(1:2)]]
-          }
-          )
+          })
         }
       }
     } else {
@@ -197,6 +195,7 @@ termco.a <-
     if (short.term) {
       o <- termco2short.term(o)
     }
+    class(o) <- "termco"
     o
 }
 
@@ -282,6 +281,7 @@ termco.d <-
     if (short.term) {
         o <- termco2short.term(o)
     }
+    class(o) <- "termco"    
     o 
 }
 
@@ -334,7 +334,7 @@ function(text.var, terms, return.list=TRUE, apostrophe.remove=FALSE) {
 #' @export
 termco2mat <-function (dataframe, drop.wc = TRUE, short.term = TRUE, 
   rm.zerocol = FALSE, no.quote = TRUE, transform = TRUE, trim.terms = TRUE) {
-  if (class(dataframe) %in% c("termco_d", "termco_c")) {
+  if (class(dataframe) %in% c("termco")) {
     dataframe <- dataframe[["raw"]]
   }
   if (!is.data.frame(dataframe)) {
@@ -355,7 +355,6 @@ termco2mat <-function (dataframe, drop.wc = TRUE, short.term = TRUE,
     fun <- function(x) all(ifelse(x == 0, T, F))
     MAT <- MAT[, !apply(MAT, 2, fun)]
   }
-  
   OC <- length(grep("(", as.vector(unlist(MAT)), fixed = TRUE)) == 0
   if (OC) {
     z <- rownames(MAT)
@@ -374,15 +373,27 @@ termco2mat <-function (dataframe, drop.wc = TRUE, short.term = TRUE,
   MAT
 }
 
-#' Prints a termco_d object.
+#' Prints a termco object.
 #' 
-#' Prints a termco_d object.
+#' Prints a termco object.
 #' 
-#' @param x The termco_d object
+#' @param x The termco object
 #' @param \ldots ignored
-#' @method print termco_d
-#' @S3method print termco_d
-print.termco_d <-
+#' @method print termco
+#' @S3method print termco
+print.termco <-
 function(x, ...) {
     print(x$rnp)
+}
+
+#' Plots a termco object
+#' 
+#' Plots a termco object.
+#' 
+#' @param x The termco object
+#' @param \ldots Other arguments passed to qheat
+#' @method plot termco
+#' @S3method plot termco
+plot.termco <- function(x, ...) {
+    qheat(x, ...)
 }

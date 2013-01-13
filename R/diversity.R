@@ -42,7 +42,10 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' colsplit2df(with(mraja1spl, diversity(dialogue, list(sex, died, fam.aff))))
+#' div.mod <- with(mraja1spl, diversity(dialogue, list(sex, died, fam.aff)))
+#' colsplit2df(div.mod)
+#' plot(div.mod, high = "red", low = "yellow")
+#' plot(div.mod, high = "red", low = "yellow", values = TRUE)
 #' }
 diversity <-
 function (text.var, grouping.var=NULL, digits = 3){
@@ -122,5 +125,33 @@ function (text.var, grouping.var=NULL, digits = 3){
     o <- o[order(o[, 1]), ]
     rownames(o) <- NULL
     colnames(o)[1] <- NAME
+    class(o) <- "diversity"
     return(o)
+}
+
+#' Prints a diversity object
+#' 
+#' Prints a diversity object.
+#' 
+#' @param x The diversity object
+#' @param \ldots ignored
+#' @method print diversity
+#' @S3method print diversity
+print.diversity <-
+function(x, ...) {
+    class(x) <- "data.frame"
+    print(x)
+}
+
+#' Plots a diversity object
+#' 
+#' Plots a diversity object.
+#' 
+#' @param x The diversity object
+#' @param \ldots Other arguments passed to qheat
+#' @method plot diversity
+#' @S3method plot diversity
+plot.diversity <- function(x, ...) {
+    class(x) <- "data.frame"
+    qheat(x, ...)
 }
