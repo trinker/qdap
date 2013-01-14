@@ -8,7 +8,11 @@
 
   truncdf(dataframe, end = 10, begin = 1)
 
+<<<<<<< HEAD
   qview(dataframe, ...)
+=======
+  qview(dataframe, n = 10, width = 6, ...)
+>>>>>>> parent of 270dae3... deleted manual
 }
 \arguments{
   \item{dataframe}{A data.frame object.}
@@ -30,8 +34,13 @@
 
   \code{trundf} - returns a truncated dataframe.
 
+<<<<<<< HEAD
   \code{qview} - returns a dataframe head with summary
   statistics.
+=======
+  \code{qview} - returns a truncated dataframe head with
+  summary general statistics.
+>>>>>>> parent of 270dae3... deleted manual
 }
 \description{
   \code{htruncdf} - Convenience function to view the head
