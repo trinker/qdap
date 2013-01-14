@@ -14,7 +14,7 @@
 #' return possible errors in time span inputs.
 #' @return Generates a data frame of start and end times for each code.
 #' @seealso 
-#' \code{\link{cm_df2long}}
+#' \code{\link{cm_df2long}},
 #' \code{\link{cm_time.temp}}
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: 
 #' Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.

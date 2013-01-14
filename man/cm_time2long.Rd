@@ -50,7 +50,7 @@ gantt_wrap(dat, "code", border.color = "black", border.size = 5)
   Oaks, CA: SAGE Publications.
 }
 \seealso{
-  \code{\link{cm_df2long}} \code{\link{cm_time.temp}}
+  \code{\link{cm_df2long}}, \code{\link{cm_time.temp}}
 }
 \keyword{coding,}
 \keyword{span}

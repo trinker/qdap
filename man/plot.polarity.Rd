@@ -3,9 +3,9 @@
 \title{Plots a polarity Object}
 \usage{
   \method{plot}{polarity} (x, bar.size = 5, low = "red",
-    high = "blue", ave.polarity.shape = "+", alpha = 1/3,
-    shape = 19, point.size = 2.5, jitter = 0.1, nrow = 1,
-    ...)
+    mid = "grey99", high = "blue",
+    ave.polarity.shape = "+", alpha = 1/4, shape = 19,
+    point.size = 2.5, jitter = 0.1, nrow = 1, ...)
 }
 \arguments{
   \item{x}{The polarity object.}
@@ -14,6 +14,9 @@
   plot.}
 
   \item{low}{The color to be used for lower values.}
+
+  \item{low}{The color to be used for mid range values
+  (default is a low key colour).}
 
   \item{high}{The color to be used for higher values.}
 
@@ -34,7 +37,7 @@
 
   \item{nrow}{The number of rows in the dotplot legend
   (used when the number of grouping variables amkes the
-  legend too wide).}
+  legend too wide).  If NULL no legend if plotted.}
 
   \item{\ldots}{ignored}
 }
@@ -45,6 +48,7 @@
 \description{
   Plots a polarity object as a heat map Gantt plot with
   polarity over time (measured in words) and polarity
-  scores per sentence.
+  scores per sentence.  In the Ganntt plot the black dots
+  are the average polarity per grouping variable.
 }
 

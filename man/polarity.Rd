@@ -110,6 +110,15 @@ poldat$group
 poldat2 <- with(mraja1spl, polarity(dialogue, list(sex, fam.aff, died)))
 colsplit2df(poldat2$group)
 plot(poldat)
+
+(poldat2 <- with(rajSPLIT, polarity(dialogue, person)))
+poldat2[["group"]][, "OL"] <- outlier.labeler(poldat2[["group"]][, "ave.polarity"])
+poldat2[["all"]][, "OL"] <- outlier.labeler(poldat2[["all"]][, "polarity"])
+head(poldat2[["group"]], 10)
+truncdf(poldat2[["all"]], 20)
+plot(poldat2)
+plot(poldat2, nrow=4)
+plot(poldat2, nrow=NULL)
 }
 }
 \references{

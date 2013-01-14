@@ -78,6 +78,15 @@
 #' poldat2 <- with(mraja1spl, polarity(dialogue, list(sex, fam.aff, died)))
 #' colsplit2df(poldat2$group)
 #' plot(poldat)
+#' 
+#' (poldat2 <- with(rajSPLIT, polarity(dialogue, person)))
+#' poldat2[["group"]][, "OL"] <- outlier.labeler(poldat2[["group"]][, "ave.polarity"])
+#' poldat2[["all"]][, "OL"] <- outlier.labeler(poldat2[["all"]][, "polarity"])
+#' head(poldat2[["group"]], 10)
+#' truncdf(poldat2[["all"]], 20)
+#' plot(poldat2)
+#' plot(poldat2, nrow=4)
+#' plot(poldat2, nrow=NULL)
 #' }
 polarity <-
 function (text.var, grouping.var = NULL, positive.list = positive.words, 
@@ -226,11 +235,14 @@ function(x, ...) {
 #' Plots a polarity Object
 #' 
 #' Plots a polarity object as a heat map Gantt plot with polarity over 
-#' time (measured in words) and polarity scores per sentence.
+#' time (measured in words) and polarity scores per sentence.  In the Ganntt 
+#' plot the black dots are the average polarity per grouping variable.
 #' 
 #' @param x The polarity object.
 #' @param bar.size The size of the bars used in the Gantt plot.
 #' @param low The color to be used for lower values.
+#' @param low The color to be used for mid range values (default is a low key 
+#' colour).
 #' @param high The color to be used for higher values.
 #' @param ave.polarity.shape The shape of the average polarity score used in the 
 #' dot plot.
@@ -239,16 +251,16 @@ function(x, ...) {
 #' @param point.size The size of the points used in the dot plot.
 #' @param jitter Ammount of vertical jitter to add to the points.
 #' @param nrow The number of rows in the dotplot legend (used when the number of 
-#' grouping variables amkes the legend too wide).
+#' grouping variables amkes the legend too wide).  If NULL no legend if plotted.
 #' @param \ldots ignored
 #' @return Invisibly returns the \code{ggplot2} objects that form the larger 
 #' plot.  
 #' @method plot polarity
 #' @import ggplot2 gridExtra scales RColorBrewer
 #' @S3method plot polarity
-plot.polarity <- function(x, bar.size = 5, low = "red", high = "blue", 
-    ave.polarity.shape = "+", alpha = 1/3, shape = 19, point.size = 2.5, 
-    jitter = .1, nrow = 1, ...){
+plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99", 
+    high = "blue", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
+    point.size = 2.5,  jitter = .1, nrow = 1, ...){
     dat <- x[["group"]]
     dat2 <- x[["all"]]
     G <- names(dat)[1]
@@ -256,24 +268,38 @@ plot.polarity <- function(x, bar.size = 5, low = "red", high = "blue",
     names(dat)[c(1, 2)] <-  nms[1:2]
     names(dat2)[1:4] <- nms
     dat2 <- data.frame(dat2, with(dat2, 
-        gantt(dialogue, group, plot = FALSE))[, -1])
+        gantt(dialogue, list(group, seq_along(group)), plot = FALSE)))
+    if (is.null(nrow)) {
+        leg <- FALSE
+        nrow <- 1
+    } else {
+        leg <- TRUE
+    }
     XX <- ggplot(dat2, aes(color = Polarity )) + 
         geom_segment(aes(x=start, xend=end, y=group, yend=group), 
             size=bar.size) +
         xlab("Duration (words)") + ylab(gsub("\\&", " & ", G)) +
-        scale_color_gradient(low = low, high = high) +
-        theme(legend.position="bottom") +
+        scale_colour_gradientn(colours = c(low, mid, high)) +
+        theme_bw() + theme(legend.position="bottom") + 
         guides(colour = guide_colorbar(barwidth = 9, barheight = .75))
     YY <- ggplot(dat2, aes(y=group, x=Polarity, colour = group)) + 
         geom_point(data = dat, aes(x=ave.polarity), shape = ave.polarity.shape, 
-            size = 6) +
+            size = 6, show_guide=FALSE) +
         geom_point(alpha = alpha, shape = shape, 
             size = point.size, position = position_jitter(h = jitter)) +
+        geom_point(data = dat, aes(x=ave.polarity), shape = 19, 
+            size = 1.5, colour = "black", show_guide=FALSE) +
         ylab(gsub("\\&", " & ", G)) +
-        scale_color_discrete(name= G) +
-        theme(plot.margin = unit(c(-.25, 1, 1, 1), "lines"), 
+        scale_color_discrete(name= G) 
+    if (leg) {
+        YY <- YY + theme(plot.margin = unit(c(-.25, 1, 1, 1), "lines"), 
             legend.position="bottom")  +
-        guides(col = guide_legend(nrow = nrow, byrow = TRUE)) 
+            guides(col = guide_legend(nrow = nrow, byrow = TRUE, 
+                override.aes = list(shape = shape, alpha = 1)))
+    } else {
+        YY <- YY + theme(plot.margin = unit(c(-.25, 1, 1, 1), "lines"), 
+            legend.position="none")       
+    } 
     grid.arrange(XX, YY, nrow = 2)
     invisible(list(p1 = XX, p2 = YY))
 }
