@@ -28,8 +28,13 @@
   \code{\link[qdap]{prop}}.}
 }
 \value{
-  Returns a table of total questions (\code{tot.quest}) and
-  counts of question types (initial interrogative word).
+  Returns a list of: \item{raw}{A dataframe of the
+  questions used in the transcript and their type.}
+  \item{count}{A dataframe of total questions
+  (\code{tot.quest}) and counts of question types (initial
+  interrogative word) by grouping variable(s).}
+  \item{missing}{The row numbers of the missing data
+  (excluded from analysis).}
 }
 \description{
   Transcript apply question counts.

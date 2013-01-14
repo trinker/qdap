@@ -241,7 +241,7 @@ function(x, ...) {
 #' @param x The polarity object.
 #' @param bar.size The size of the bars used in the Gantt plot.
 #' @param low The color to be used for lower values.
-#' @param low The color to be used for mid range values (default is a low key 
+#' @param mid The color to be used for mid range values (default is a low key 
 #' colour).
 #' @param high The color to be used for higher values.
 #' @param ave.polarity.shape The shape of the average polarity score used in the 

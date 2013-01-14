@@ -15,7 +15,7 @@
 
   \item{low}{The color to be used for lower values.}
 
-  \item{low}{The color to be used for mid range values
+  \item{mid}{The color to be used for mid range values
   (default is a low key colour).}
 
   \item{high}{The color to be used for higher values.}

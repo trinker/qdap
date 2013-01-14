@@ -13,8 +13,12 @@
 #' @param prop.by.row logical.  If TRUE applies proportional to the row.  If 
 #' FALSE applies by column. 
 #' @param \ldots Other arguments passed to \code{\link[qdap]{prop}}.
-#' @return Returns a table of total questions (\code{tot.quest}) and counts of 
-#' question types (initial interrogative word).
+#' @return Returns a list of:
+#' \item{raw}{A dataframe of the questions used in the transcript and their 
+#' type.}
+#' \item{count}{A dataframe of total questions (\code{tot.quest}) and counts of 
+#' question types (initial interrogative word) by grouping variable(s).}
+#' \item{missing}{The row numbers of the missing data (excluded from analysis).}
 #' @details The algorithm searchs for the following interrogative words (and 
 #' optionally, their negative contraction form as well): 
 #'  
@@ -76,7 +80,7 @@ question_type <- function(text.var, grouping.var = NULL,
     } 
     text.var <- as.character(text.var)
     DF <- data.frame(grouping, text.var, check.names = FALSE, 
-        stringsAsFactors = FALSE)
+        stringsAsFactors = FALSE, orig.row.num = seq_len(length(text.var)))
     DF$grouping <- factor(DF$grouping)
     if (is.dp(text.var=DF[, "text.var"])){
         warning(paste0("\n  Some rows contain double punctuation.",
@@ -85,6 +89,8 @@ question_type <- function(text.var, grouping.var = NULL,
     DF[, "end.mark"] <- substring(DF[, "text.var"], nchar(DF[, "text.var"]))
     DF[, "stext.var"] <- spaste(strip(DF[, "text.var"]))
     if (sum(DF$end.mark == "?", na.rm = TRUE) == 0) stop("No questions found") 
+    rows.removed <- which(is.na(DF$end.mark))
+    DF <- DF[!is.na(DF$end.mark), ]
     DF <- DF[DF$end.mark == "?", ]
     L1 <- split(DF, DF[, "grouping"])
     missing <- names(L1)[sapply(L1, nrow) == 0]
@@ -169,11 +175,10 @@ question_type <- function(text.var, grouping.var = NULL,
     DF <- DF[sort(DF[, "group"]), ]
     colnames(DF)[1] <-  G
     rownames(DF) <- NULL
-    o <- list(raw = DF3, count = DF)
+    o <- list(raw = DF3, count = DF, missing = rows.removed)
     class(o) <- "question_type"
     o
 }
-
 #' Prints a question_type object
 #' 
 #' Prints a question_type object
