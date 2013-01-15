@@ -119,10 +119,7 @@ Collate:
     'outlier.labeler.R'
     'partition.R'
     'paste2.R'
-<<<<<<< HEAD
     'polarity.R'
-=======
->>>>>>> parent of 270dae3... deleted manual
     'pos.R'
     'potential_NA.R'
     'prop.R'
@@ -130,10 +127,7 @@ Collate:
     'qcv.R'
     'qda.handler.R'
     'qdap-package.R'
-<<<<<<< HEAD
     'qheat.R'
-=======
->>>>>>> parent of 270dae3... deleted manual
     'qprep.R'
     'question_type.R'
     'rank_freq_plot.R'
@@ -182,8 +176,3 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
-<<<<<<< HEAD
-=======
-    'qheat.R'
-    'polarity.R'
->>>>>>> parent of 270dae3... deleted manual

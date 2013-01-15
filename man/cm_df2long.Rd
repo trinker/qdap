@@ -1,0 +1,68 @@
+\name{cm_df2long}
+\alias{cm_df2long}
+\title{Transform Codes to Start-End Durations}
+\usage{
+  cm_df2long(df.temp.obj, v.name = "variable",
+    list.var = TRUE, code.vars = NULL, no.code = NA,
+    add.start.end = TRUE, repeat.vars = NULL,
+    rev.code = FALSE)
+}
+\arguments{
+  \item{df.temp.obj}{a character vector of names of
+  object(s) created by cm_df.temp, a list of cm_df.temp
+  created objects or a data frame created by cm_df.temp.}
+
+  \item{v.name}{sn optional name for the column created for
+  the list.var argument}
+
+  \item{list.var}{logical.  If TRUE creates a column for
+  the data frame created by each time.list passed to
+  cm_t2l}
+
+  \item{code.vars}{a character vector of code variables.
+  If NULL uses all variables from the first column after
+  the column named word.num.}
+
+  \item{no.code}{the value to assign to no code; default is
+  NA}
+
+  \item{add.start.end}{logical.  If TURE adds a column for
+  start and end times}
+
+  \item{repeat.vars}{a character vector of repeated/stacked
+  variables.  If NULL uses all non code.vars variables.}
+
+  \item{rev.code}{logical.  If TRUE reverses the order of
+  code.vars and no.code varaibles.}
+}
+\value{
+  Generates a data frame of start and end times for each
+  code.
+}
+\description{
+  Transforms the range coding structure(s) from
+  \code{cm_df.temp} (in list format) into a data frame of
+  start and end durations in long format.
+}
+\examples{
+\dontrun{
+#' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
+x1 <- cm_df.temp(DATA, "state", codes)
+cm_df2long(x1,  code.vars = codes)
+x1[, 7:14] <- lapply(7:14,  function(i) sample(0:1, nrow(x1), TRUE))
+cm_df2long(x1,  code.vars = codes)
+}
+}
+\references{
+  Miles, M. B. & Huberman, A. M. (1994). An expanded
+  sourcebook: Qualitative data analysis. 2nd ed. Thousand
+  Oaks, CA: SAGE Publications.
+}
+\seealso{
+  \code{\link{cm_time2long}}, \code{\link{cm_range2long}},
+  \code{\link{cm_df.temp}}
+}
+\keyword{coding,}
+\keyword{span}
+\keyword{time}
+
