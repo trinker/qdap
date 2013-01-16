@@ -56,16 +56,16 @@ function(terms, key.match, key.reassign=NULL, missing = NA) {
             stringsAsFactors = FALSE)   
     }
     KEY <- hash(DF, mode.out = mode.out)                                                               
-    recoder <- function(x, env, missing){                               
+    recoder <- function(x, envr, missing){                               
         x <- as.character(x) #turn the numbers to character    
-        rc <- function(x){                                    
-            if(exists(x, env = env)) {
-                get(x, e = env) 
+        rc <- function(x, envr){                                    
+            if(exists(x, envir = envr)) {
+                get(x, envir = envr) 
             } else {
                 missing     
             }
         }                                                      
-        sapply(x, rc, USE.NAMES = FALSE)                       
+        sapply(x, rc, USE.NAMES = FALSE, envr = envr)                       
     }                                                              
-    recoder(terms, KEY, missing = missing)     
+    recoder(terms, envr = KEY, missing = missing)     
 }

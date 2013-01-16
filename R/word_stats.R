@@ -2,7 +2,8 @@
 #' 
 #' Transcript apply descriptive word statistics.
 #' 
-#' @param text.var The text variable.         
+#' @param text.var The text variable or a  \code{"word_stats"} object (i.e. the 
+#' output of a \code{word_stats} function).       
 #' @param grouping.var The grouping variables.  Default NULL generates one 
 #' output for all text.  Also takes a single grouping variable or a list of 1 
 #' or more grouping variables.  
@@ -10,7 +11,8 @@
 #' @param parallel logical.  If TRUE attempts to run the function on multiple 
 #' cores.  Note that this may not mean a spead boost if you have one core or if 
 #' the data set is smaller as the cluster takes time to create (parallel is 
-#' slower until approximately 10,000 rows).       
+#' slower until approximately 10,000 rows).  To reduce run time pass a 
+#' \code{"word_stats"} object to the \code{word_stats} function.
 #' @param rm.incomplete logical.  If TRUE incomplete statments are removed from 
 #' calculating the output.   
 #' @param digit.remove logical.  If TRUE removes digits from calculating the 
@@ -21,7 +23,7 @@
 #' @param \ldots Any other arguments passed to endf.     
 #' @return Returns a list of three descriptive word statistics:
 #' \item{ts}{A data frame of descriptive word statistics by row} 
-#' \item{gts}{A data frame of word statistics per grouping variable:
+#' \item{gts}{A data frame of word/sentence statistics per grouping variable:
 #' \itemize{
 #'     \item{n.tot}{ - number of turns of talk}
 #'     \item{n.sent}{ - number of sentences}
@@ -39,25 +41,36 @@
 #'     \item{spw}{ - syllables per word}
 #'     \item{n.state}{ - number of statements}
 #'     \item{n.quest}{ - number of questions}
-#'     \item{n.exclm}{ - vnumber of exclamations}
+#'     \item{n.exclm}{ - number of exclamations}
 #'     \item{n.incom}{ - number of incomplete satetments}
+#'     \item{p.state}{ - proportion of statements}
+#'     \item{p.quest}{ - proportion of questions}
+#'     \item{p.exclm}{ - proportion of exclamations}
+#'     \item{p.incom}{ - proportion of incomplete satetments}
 #'     \item{n.hapax}{ - number of hapax legomenon}
 #'     \item{n.dis}{ - number of dis legomenon}
 #'     \item{grow.rate}{ - proportion of hapax legomenon to words}
 #'     \item{prop.dis}{ - proportion of dis legomenon to words}
 #'     }
 #' } 
-#' \item{mpun}{An account of sentences with improper end mark} 
+#' \item{mpun}{An account of sentences with an improper/missing end mark} 
+#' \item{word.elem}{A data frame with word element columns from gts}
+#' \item{sent.elem}{A data frame with sentence element columns from gts} 
+#' \item{omit}{Counter of omitted sentences for internal use (only included if 
+#' some rows contained missing values)} 
 #' @keywords descriptive statistic
 #' @export
 #' @examples
 #' \dontrun{
 #' word_stats(mraja1spl$dialogue, mraja1spl$person)
 #' (desc_wrds <- with(mraja1spl, word_stats(dialogue, person, tot = tot)))
+#' with(mraja1spl, word_stats(desc_wrds, person, tot = tot)) #speed boost
 #' names(desc_wrds)
 #' desc_wrds$ts 
 #' desc_wrds$gts
 #' desc_wrds$pun 
+#' desc_wrds$word.elem
+#' desc_wrds$sent.elem 
 #' plot(desc_wrds)
 #' with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff))) 
 #' }
@@ -90,48 +103,72 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
             grouping <- unlist(grouping.var)
         } 
     } 
-    t.o.t. <- if(is.null(tot)){
-        paste0(1:length(text.var), ".", 1)
+    if (class(text.var) != "word_stats"){
+        t.o.t. <- if(is.null(tot)){
+            paste0(1:length(text.var), ".", 1)
+        } else {
+            as.character(tot)
+        }
+        Text <- as.character(text.var)
+        is.dp <- function(text.var) {
+          punct <- c(".", "?", "!", "|")
+          any(sapply(strsplit(text.var, NULL), function(x) {
+            sum(x %in% punct) > 1
+          }
+          ))
+        }
+        if (any(is.na(text.var))) {
+            omit <- which(is.na(text.var))
+        } else {
+            omit <- NULL
+        }
+        DF <- na.omit(data.frame(group = grouping, tot.sen = t.o.t., 
+            TOT = TOT(t.o.t.), text.var = Text, stringsAsFactors = FALSE)) 
+        if (is.dp(text.var=DF[, "text.var"])){
+            warning(paste0("\n  Some rows contain double punctuation.",
+              "  Suggested use of sentSplit function."))
+        }    
+        if (rm.incomplete) {
+            DF <- endf(dataframe = DF, text.var = text.var, ...)
+        } 
+        DF$group <- DF$group[ , drop = TRUE]
+        DF$n.sent <- 1:nrow(DF)
+        DF <- DF[with(DF, order(DF$group, DF$n.sent)), ]
+        M <- DF_word_stats(text.var = DF$text.var, digit.remove = digit.remove, 
+            apostrophe.remove = apostrophe.remove, parallel = parallel)
+        M <- M[, !names(M) %in% c("text.var", "n.sent")]
+        DF <- data.frame(DF, M)
+        DF$end.mark <- substring(DF$text.var, nchar(DF$text.var), 
+            nchar(DF$text.var))
+        DF$end.mark2 <- substring(DF$text.var, nchar(DF$text.var)-1, 
+            nchar(DF$text.var))
+        DF$sent.type <- ifelse(DF$end.mark2%in%c("*.", "*?", "*!"), "n.imper",
+            ifelse(DF$end.mark==".", "n.state", 
+            ifelse(DF$end.mark=="?", "n.quest",
+            ifelse(DF$end.mark=="!", "n.exclm",
+            ifelse(DF$end.mark=="|", "n.incom", NA))))) 
     } else {
-        as.character(tot)
+        if(is.null(tot)){
+            t.o.t. <- paste0(1:nrow(text.var[["ts"]]), ".", 1)
+        } else {
+            t.o.t. <- as.character(tot)
+        }
+        if (!is.null(text.var[["omit"]])){
+            grouping <- grouping[-text.var[["omit"]]]
+            if(!is.null(tot)){
+                t.o.t. <- t.o.t.[-text.var[["omit"]]]
+            }
+            omit <- text.var[["omit"]]
+        } else {
+            omit <- NULL 
+        }
+        DF <- data.frame(group = grouping, tot.sen = t.o.t., 
+            TOT = TOT(t.o.t.), text.var$ts[, -1])
+        if (is.dp(text.var=DF[, "text.var"])){
+            warning(paste0("\n  Some rows contain double punctuation.",
+              "  Suggested use of sentSplit function."))
+        } 
     }
-    Text <- as.character(text.var)
-    is.dp <- function(text.var) {
-      punct <- c(".", "?", "!", "|")
-      any(sapply(strsplit(text.var, NULL), function(x) {
-        sum(x %in% punct) > 1
-      }
-      ))
-    }
-    if (is.dp(text.var=Text)){
-      warning(paste0("\n  Some rows contain double punctuation.",
-          "  Suggested use of sentSplit function."))
-    }
-    DF <- na.omit(data.frame(group = grouping, tot.sen = t.o.t., 
-        TOT = TOT(t.o.t.), text.var = Text, stringsAsFactors = FALSE)) 
-    if (is.dp(text.var=DF[, "text.var"])){
-        warning(paste0("\n  Some rows contain double punctuation.",
-          "  Suggested use of sentSplit function."))
-    }    
-    if (rm.incomplete) {
-        DF <- endf(dataframe = DF, text.var = text.var, ...)
-    } 
-    DF$group <- DF$group[ , drop = TRUE]
-    DF$n.sent <- 1:nrow(DF)
-    DF <- DF[with(DF, order(DF$group, DF$n.sent)), ]
-    M <- DF_word_stats(text.var = DF$text.var, digit.remove = digit.remove, 
-        apostrophe.remove = apostrophe.remove, parallel = parallel)
-    M <- M[, !names(M) %in% c("text.var", "n.sent")]
-    DF <- data.frame(DF, M)
-    DF$end.mark <- substring(DF$text.var, nchar(DF$text.var), 
-        nchar(DF$text.var))
-    DF$end.mark2 <- substring(DF$text.var, nchar(DF$text.var)-1, 
-        nchar(DF$text.var))
-    DF$sent.type <- ifelse(DF$end.mark2%in%c("*.", "*?", "*!"), "n.imper",
-        ifelse(DF$end.mark==".", "n.state", 
-        ifelse(DF$end.mark=="?", "n.quest",
-        ifelse(DF$end.mark=="!", "n.exclm",
-        ifelse(DF$end.mark=="|", "n.incom", NA))))) 
     mpun <- which(!DF$end.mark %in% c("!", ".", "|", "?", "*"))
     comment(mpun) <- "These observations did not have a ! . | ? * endmark"
     if(any(is.na(DF$sent.type))) {
@@ -207,7 +244,11 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
     DF2 <- DF2[order(-DF2$n.tot, -DF2$n.sent), ]
     rownames(DF2) <- NULL
     DF3 <- DF
-    DF3 <- DF3[order(DF3$n.sent), ]
+    if (class(text.var) != "word_stats") {
+        DF3 <- DF3[order(DF3$n.sent), ]
+    } else {
+        DF3 <- DF3[order(DF3$sent.num), ]
+    }
     rownames(DF3) <- NULL
     names(DF3) <- c(G, names(DF3)[c(2:3)], "text.var", 
         "sent.num", names(DF3)[-c(1:5)])
@@ -234,7 +275,18 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
         }
     }
     DF2 <- DF2[, unlist(lapply(DF2, sum2))!=0]
-    o <- list(ts = DF3, gts = DF2, mpun = mpun )
+    rng <- which(colnames(DF2) %in% c("pspw", "n.hapax"))
+    proDF2 <- lapply(DF2[, (rng[1]+1):(rng[2]-1)], function(x) {
+        round(x/DF2[, "n.sent"], digits = digits)
+    })
+    proDF2 <- do.call(cbind, proDF2)
+    class(proDF2) <- "matrix"
+    colnames(proDF2) <- gsub("n.", "p.", colnames(proDF2))
+    word.elem <- DF2[, -c((rng[1]+1):(rng[2]-1))]
+    sent.elem <- data.frame(DF2[, (rng[1]+1):(rng[2]-1)], proDF2)
+    DF2 <- data.frame(DF2[, 1:(rng[2] - 1)], proDF2, DF2[, rng[2]:ncol(DF2)])
+    o <- list(ts = DF3, gts = DF2, mpun = mpun, word.elem = word.elem, 
+        sent.elem = sent.elem, omit = omit)
     class(o) <- "word_stats"
     return(o)
 }
@@ -250,7 +302,10 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
 #' @S3method print word_stats
 print.word_stats <-
 function(x, ...) {
-    print(x$gts)
+    WD <- options()[["width"]]
+    options(width=3000)
+    print(left.just(x$gts, 1))
+    options(width=WD)
 }
 
 

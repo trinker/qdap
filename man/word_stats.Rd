@@ -8,7 +8,9 @@
     digits = 3, ...)
 }
 \arguments{
-  \item{text.var}{The text variable.}
+  \item{text.var}{The text variable or a
+  \code{"word_stats"} object (i.e. the output of a
+  \code{word_stats} function).}
 
   \item{grouping.var}{The grouping variables.  Default NULL
   generates one output for all text.  Also takes a single
@@ -22,7 +24,9 @@
   function on multiple cores.  Note that this may not mean
   a spead boost if you have one core or if the data set is
   smaller as the cluster takes time to create (parallel is
-  slower until approximately 10,000 rows).}
+  slower until approximately 10,000 rows).  To reduce run
+  time pass a \code{"word_stats"} object to the
+  \code{word_stats} function.}
 
   \item{rm.incomplete}{logical.  If TRUE incomplete
   statments are removed from calculating the output.}
@@ -41,9 +45,9 @@
 \value{
   Returns a list of three descriptive word statistics:
   \item{ts}{A data frame of descriptive word statistics by
-  row} \item{gts}{A data frame of word statistics per
-  grouping variable: \itemize{ \item{n.tot}{ - number of
-  turns of talk} \item{n.sent}{ - number of sentences}
+  row} \item{gts}{A data frame of word/sentence statistics
+  per grouping variable: \itemize{ \item{n.tot}{ - number
+  of turns of talk} \item{n.sent}{ - number of sentences}
   \item{n.words}{ - number of words} \item{n.char}{ -
   number of characters} \item{n.syl}{ - number of
   syllables} \item{n.poly}{ - number of polysyllables}
@@ -54,14 +58,22 @@
   polly syllables per sentence} \item{cpw}{ - characters
   per word} \item{spw}{ - syllables per word}
   \item{n.state}{ - number of statements} \item{n.quest}{ -
-  number of questions} \item{n.exclm}{ - vnumber of
+  number of questions} \item{n.exclm}{ - number of
   exclamations} \item{n.incom}{ - number of incomplete
-  satetments} \item{n.hapax}{ - number of hapax legomenon}
+  satetments} \item{p.state}{ - proportion of statements}
+  \item{p.quest}{ - proportion of questions}
+  \item{p.exclm}{ - proportion of exclamations}
+  \item{p.incom}{ - proportion of incomplete satetments}
+  \item{n.hapax}{ - number of hapax legomenon}
   \item{n.dis}{ - number of dis legomenon}
   \item{grow.rate}{ - proportion of hapax legomenon to
   words} \item{prop.dis}{ - proportion of dis legomenon to
-  words} } } \item{mpun}{An account of sentences with
-  improper end mark}
+  words} } } \item{mpun}{An account of sentences with an
+  improper/missing end mark} \item{word.elem}{A data frame
+  with word element columns from gts} \item{sent.elem}{A
+  data frame with sentence element columns from gts}
+  \item{omit}{Counter of omitted sentences for internal use
+  (only included if some rows contained missing values)}
 }
 \description{
   Transcript apply descriptive word statistics.
@@ -70,10 +82,13 @@
 \dontrun{
 word_stats(mraja1spl$dialogue, mraja1spl$person)
 (desc_wrds <- with(mraja1spl, word_stats(dialogue, person, tot = tot)))
+with(mraja1spl, word_stats(desc_wrds, person, tot = tot)) #speed boost
 names(desc_wrds)
 desc_wrds$ts
 desc_wrds$gts
 desc_wrds$pun
+desc_wrds$word.elem
+desc_wrds$sent.elem
 plot(desc_wrds)
 with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff)))
 }

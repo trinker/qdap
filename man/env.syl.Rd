@@ -2,7 +2,7 @@
 \name{env.syl}
 \alias{env.syl}
 \title{Syllable Lookup Environment}
-\format{A environment with}
+\format{A environment with the DICTIONARY data set.}
 \description{
   A dataset containing a syllable lookup environment (see
   \code{link[qdap]{DICTIONARY}}).

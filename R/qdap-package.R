@@ -274,7 +274,7 @@ NULL
 #' @keywords datasets 
 #' @name env.syl 
 #' @usage data(env.syl) 
-#' @format A environment with  
+#' @format A environment with the DICTIONARY data set.  
 #' @references 
 #' \href{http://archive.ics.uci.edu/ml/machine-learning-databases/undocumented/connectionist-bench/nettalk/}{UCI Machine Learning Repository website}
 NULL
@@ -655,3 +655,43 @@ NULL
 #' \url{http://www.plosone.org/article/fetchSingleRepresentation.action?uri=info:doi/10.1371/journal.pone.0026752.s001}
 NULL
  
+#' Synonyms Data Set
+#' 
+#' A dataset containing words and possible synonym matches.
+#' 
+#' @details 
+#' \itemize{ 
+#'   \item word. The look up word. 
+#'   \item match.string. A single string of possible matches.
+#' } 
+#' 
+#' @note Intended for itnernal use with the \code{\link[qdap]{synonyms}} function.
+#' @docType data 
+#' @keywords datasets 
+#' @name SYNONYM 
+#' @usage data(SYNONYM) 
+#' @format A data frame with 11050 rows and 2 variables 
+#' @references Scraped from:
+#' \href{http://dictionary.reverso.net/english-synonyms/}{Reverso Online Dictionary}.
+#' The word list fed to \href{http://dictionary.reverso.net/english-synonyms/}{Reverso} 
+#' is the unique words from the combination of \code{\link[qdap]{DICTIONARY}} and
+#' \code{\link[qdap]{labMT}}.
+NULL
+ 
+#' Syllable Lookup Environment
+#' 
+#' A dataset containing a synonym lookup environment (see 
+#' \code{link[qdap]{SYNONYM}}).
+#' 
+#' 
+#' @docType data 
+#' @keywords datasets 
+#' @name env.syn 
+#' @usage data(env.syn) 
+#' @format A environment with  
+#' @references Scraped from:
+#' \href{http://dictionary.reverso.net/english-synonyms/}{Reverso Online Dictionary}.
+#' The word list fed to \href{http://dictionary.reverso.net/english-synonyms/}{Reverso} 
+#' is the unique words from the combination of \code{\link[qdap]{DICTIONARY}} and
+#' \code{\link[qdap]{labMT}}.
+NULL

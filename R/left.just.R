@@ -39,7 +39,7 @@ function(dataframe, column = NULL, keep.class = FALSE) {
         if (is.null(column)) column <- colnames(DF2)
         Q <- max(nchar(c(as.character(DF2[, column]), names(DF2)[column])))
         DF2 <- data.frame(rbind(colnames(DF2), do.call(cbind,
-            lapply(DF2, as.character))))
+            lapply(DF2, as.character))), check.names = FALSE)
         DF2[, column] <- left.j(as.character(DF2[, column]))     
         if (is.character(column)) {
             col <- names(DF2)[which(names(DF2) == column)]
@@ -59,7 +59,7 @@ function(dataframe, column = NULL, keep.class = FALSE) {
     if (length(column)<2) {
         if (!is.data.frame(dataframe)) {
             y <- as.character(substitute(dataframe))
-            dataframe <- data.frame(dataframe)
+            dataframe <- data.frame(dataframe, check.names = FALSE)
             y <- if (y[1]%in%c("[", "$")) y[2] else y[1]
             names(dataframe) <- y
         }

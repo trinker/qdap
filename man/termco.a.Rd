@@ -193,6 +193,12 @@ termco.a(DATA$state, DATA$person, exclude(term.match(DATA$state, qcv(th),
 MTCH.LST <- exclude(term.match(DATA$state, qcv(th, i)), qcv(truth, stinks))
 termco.a(DATA$state, DATA$person, MTCH.LST)
 
+syns <- synonyms("doubt", FALSE)
+syns[1]
+termco.a(DATA$state, DATA$person, unlist(syns[1]))
+synonyms("doubt", FALSE)
+termco.a(DATA$state, DATA$person, list(doubt = synonyms("doubt", FALSE)))
+
 #termco.d examples:
 term.match(DATA$state, qcv(i, the))
 termco.d(DATA$state, DATA$person, c(" the", " i'"))
