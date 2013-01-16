@@ -16,11 +16,11 @@
     apostrophe.remove = TRUE, digit.remove = TRUE,
     count.space = FALSE)
 
-  character.table(text.var, grouping.var,
-    proportional = FALSE, prop.by.row = TRUE, ...)
+  character.table(text.var, grouping.var, percent = TRUE,
+    prop.by.row = TRUE, zero.replace = 0, ...)
 
-  char.table(text.var, grouping.var, proportional = FALSE,
-    prop.by.row = TRUE, ...)
+  char.table(text.var, grouping.var, percent = TRUE,
+    prop.by.row = TRUE, zero.replace = 0, ...)
 }
 \arguments{
   \item{text.var}{The text variable}
@@ -48,14 +48,16 @@
   \item{count.space}{logical.  If TRUE spaces are counted
   as characters.}
 
-  \item{proportional}{logical.  If TRUE outputs the table
-  proportionally (see \code{\link[qdap]{prop}}).}
-
   \item{prop.by.row}{logical.  If TRUE applies proportional
   to the row.  If FALSE applies by column.}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[qdap]{prop}}.}
+
+  \item{percent}{logical.  If TRUE output given as percent.
+  If FALSE the output is proption.}
+
+  \item{zero.replace}{Value to replace 0 values with.}
 }
 \value{
   \code{word.count} - returns a word count by row or total.
@@ -112,11 +114,16 @@ ggplot(data = dat3, aes(x = variable, fill = variable)) +
 # CHARACTER TABLE
 (x <- character.table(DATA$state, DATA$person))
 plot(x)
+plot(x, label = TRUE)
+plot(x, label = TRUE, text.color = "red")
+x$raw
+x$prop
+x$rnp
+
 char.table(DATA$state, DATA$person)
 char.table(DATA$state, DATA$person, proportianal = TRUE)
 character.table(DATA$state, list(DATA$sex, DATA$adult))
 colsplit2df(character.table(DATA$state, list(DATA$sex, DATA$adult)))
-
 }
 }
 \seealso{

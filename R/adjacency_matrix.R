@@ -1,7 +1,7 @@
 #' Takes a Matrix and Generates an Adjacency Matrix
 #' 
 #' Takes a matrix (wfm) or termco object (.a, .c or .d) and generates an adjacency
-#' matrix for use with igraph
+#' matrix for use with \code{igraph}.
 #' 
 #' @rdname adjacency_matrix
 #' @param matrix.obj A matrix object, preferably, of the class "termco_d" or 
@@ -28,7 +28,7 @@
 #' }
 adjacency_matrix <-
 function(matrix.obj) {
-    if(class(matrix.obj) %in% c("termco_d", "termco_c")){
+    if(class(matrix.obj) %in% c("termco")){
         info <- matrix.obj #for later use
         if (matrix.obj[["zero_replace"]] != 0){
             matrix.obj <- replacer(matrix.obj[["raw"]], 

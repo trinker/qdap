@@ -8,8 +8,9 @@
 #' more grouping variables.
 #' @param neg.cont logical.  IF TRUE provides separate counts for the negative 
 #' contraction forms of the interrogative words.
-#' @param proportional logical.  If TRUE outputs the table proportionally 
-#' (see \code{\link[qdap]{prop}}).
+#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
+#' output is proption.
+#' @param zero.replace Value to replace 0 values with.
 #' @param prop.by.row logical.  If TRUE applies proportional to the row.  If 
 #' FALSE applies by column. 
 #' @param \ldots Other arguments passed to \code{\link[qdap]{prop}}.
@@ -41,6 +42,8 @@
 #' x$raw
 #' x$count
 #' plot(x)
+#' plot(x, label = TRUE)
+#' plot(x, label = TRUE, text.color = "red")
 #' question_type(DATA$state, DATA$person, proportional = TRUE)
 #' DATA[8, 4] <- "Won't I distrust you?"
 #' question_type(DATA$state, DATA$person)
@@ -53,7 +56,8 @@
 #'     proportional = TRUE))
 #' }
 question_type <- function(text.var, grouping.var = NULL,
-    neg.cont = FALSE, proportional = FALSE, prop.by.row = TRUE, ...) {
+    neg.cont = FALSE, percent = TRUE, zero.replace = 0,
+    prop.by.row = TRUE, ...) {
     if(is.null(grouping.var)) {
         G <- "all"
     } else {
@@ -167,18 +171,22 @@ question_type <- function(text.var, grouping.var = NULL,
         ord <- c(ord[ord %in% colnames(DF)], "unknown")
         DF <- DF[, ord[ord %in% colnames(DF)]] 
     }
-    if (proportional) {
-        DF <- prop(DF, by.column = (1 - prop.by.row), ...)
-        DF[is.nan(DF)] <- 0
-    }
-    DF <- data.frame(group=rownames(DF), tot.quest = tq, DF, row.names = NULL)
+    DF <- data.frame(group=rownames(DF), tot.quest = tq, DF, row.names = NULL) 
     DF <- DF[sort(DF[, "group"]), ]
     colnames(DF)[1] <-  G
+    DF2 <- prop(DF[, -1], by.column = (1 - prop.by.row), ...)
+    DF2[is.nan(DF2)] <- 0  
+    DF2 <- data.frame(DF[, 1, drop = FALSE], DF2, check.names = FALSE)  
     rownames(DF) <- NULL
-    o <- list(raw = DF3, count = DF, missing = rows.removed)
+    rnp <- raw_pro_comb(DF[, -1], DF2[, -1], digitts = digits, 
+        percent = percent, zero.replace = zero.replace)  
+    rnp <- data.frame(DF2[, 1, drop = FALSE], rnp, check.names = FALSE) 
+    o <- list(raw = DF3, count = DF, prop = DF2, rnp = rnp, 
+        missing = rows.removed)
     class(o) <- "question_type"
     o
 }
+
 #' Prints a question_type object
 #' 
 #' Prints a question_type object
@@ -189,17 +197,25 @@ question_type <- function(text.var, grouping.var = NULL,
 #' @S3method print question_type
 print.question_type <-
 function(x, ...) {
-    print(x$count)
+    WD <- options()[["width"]]
+    options(width=3000)
+    print(x$rnp)
+    options(width=WD)
 }
-
 #' Plots a question_type Object
 #' 
 #' Plots a question_type object.
 #' 
 #' @param x The question_type object.
+#' @param label logical.  If TRUE the cells of the heat map plot will be labeled with 
+#' raw and proportional values.
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot question_type
 #' @S3method plot question_type
-plot.question_type <- function(x, ...) {
-    qheat(x$count, ...)
+plot.question_type <- function(x, label = FALSE, ...) {
+    if (label) {
+        qheat(x$prop, values=TRUE, mat2 = x$rnp, ...)
+    } else {
+        qheat(x$prop, ...)  
+    }
 }

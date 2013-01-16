@@ -286,7 +286,7 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
         geom_point(data = dat, aes(x=ave.polarity), shape = ave.polarity.shape, 
             size = 6, show_guide=FALSE) +
         geom_point(alpha = alpha, shape = shape, 
-            size = point.size, position = position_jitter(h = jitter)) +
+            size = point.size, position = position_jitter(height = jitter)) +
         geom_point(data = dat, aes(x=ave.polarity), shape = 19, 
             size = 1.5, colour = "black", show_guide=FALSE) +
         ylab(gsub("\\&", " & ", G)) +

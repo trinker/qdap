@@ -2,8 +2,11 @@
 #' 
 #' Creates a new environemnt for quick hash style dictionary lookup.
 #' 
-#' @param x A two column dataframe
-#' @return Creates a "hash table" or a two column data frame in its own evironment.  
+#' @param x A two column dataframe.
+#' @param mode.out The type of output (column 2) expected (e.g. \code{"character"}, 
+#' \code{"numeric"}, etc.)
+#' @return Creates a "hash table" or a two column data frame in its own 
+#' environment.  
 #' @author Bryan Goodrich and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso \code{\link[qdap]{lookup}},
 #' \code{\link[base]{environment}}
@@ -12,20 +15,39 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' new.hash <- hash(aggregate(conc~Plant, CO2, sum))
-#' new.hash <- hash(aggregate(conc~Plant, CO2, sum))
-#' sapply(as.character(CO2$Plant), function(x) {
+#' (DF <- aggregate(mpg~as.character(carb), mtcars, mean))
+#' 
+#' new.hash <- hash(DF)
+#' sapply(as.character(mtcars$carb), function(x) {
 #'         if(exists(x, env = new.hash)) {
-#'             get(x, e = new.hash) 
+#'             get(x, e = new.hash)
+#'         } else {
+#'             NA
+#'         }
+#'     }
+#' )
+#' 
+#' new.hash <- hash(DF, "character")
+#' sapply(as.character(mtcars$carb), function(x) {
+#'         if(exists(x, env = new.hash)) {
+#'             get(x, e = new.hash)
 #'         } else {
 #'             NA
 #'         }
 #'     }
 #' )
 #' }
-hash <-
-function(x) {
-    e <- new.env(hash = TRUE, size = nrow(x), parent = emptyenv())
-    apply(x, 1, function(col) assign(col[1], as.numeric(col[2]), envir = e))
-    return(e)
+hash <- 
+function(x, mode.out = "numeric") {
+    hash2 <- function(x, mode.out) {
+        evnt <- new.env(hash = TRUE, size = nrow(x), 
+            parent = emptyenv())
+        FUN <- paste0("as.", mode.out)
+        FUN <- match.fun(FUN)
+        apply(x, 1, function(col) {
+            assign(col[1], FUN(col[2]), envir = evnt)
+        })
+        return(evnt)
+    }  
+    hash2(x, mode.out = mode.out)                                                                   
 }

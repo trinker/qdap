@@ -1,9 +1,12 @@
 \name{colsplit2df}
 \alias{colsplit2df}
-\title{Wrapper for colSplit that Returns a Dataframe}
+\alias{lcolsplit2df}
+\title{Wrapper for colSplit that Returns Dataframe(s)}
 \usage{
   colsplit2df(dataframe, splitcol = 1, new.names = NULL,
     sep = ".", keep.orig = FALSE)
+
+  lcolsplit2df(qdap.list, keep.orig = FALSE)
 }
 \arguments{
   \item{dataframe}{A dataframe with a column that has been
@@ -21,13 +24,28 @@
 
   \item{keep.orig}{logical.  If TRUE the original pasted
   column will be retained as well.}
+
+  \item{qdap.list}{A qdap list object that contains
+  dataframes with a leading \code{paste2} column.}
 }
 \value{
-  Returns a dataframe with the pasted column cplit into new
-  columns.
+  \code{colsplit2df} - returns a dataframe with the
+  \code{paste2} column split into new columns.
+
+  \code{lcolsplit2df} - returns a list of dataframes with
+  the \code{paste2} column split into new columns.
 }
 \description{
-  Wrapper for \code{colSplit} that returns a dataframe.
+  \code{colsplit2df} - Wrapper for \code{colSplit} that
+  returns a dataframe.
+
+  \code{lcolsplit2df} - Wrapper for \code{colsplit2df}
+  designed for qdap lists that returns a list dataframes.
+}
+\note{
+  \code{lcolsplit2df} is a convenience function that is
+  less flexible than \code{colsplit2df} but operates on
+  multiple dataframes at once.
 }
 \examples{
 \dontrun{
@@ -38,6 +56,10 @@ head(colsplit2df(CO2, 3, qcv(A, B, C)))
 head(colsplit2df(CO2, 3, qcv(A, B, C), keep.orig=TRUE))
 head(colsplit2df(CO2, "Plant&Type&Treatment"))
 CO2 <- datasets::CO2
+
+(x <- question_type(DATA$state, list(DATA$sex, DATA$adult)))
+lapply(x, head)
+lcolsplit2df(x)
 }
 }
 \seealso{

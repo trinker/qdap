@@ -3,7 +3,7 @@
 \title{Count of Question Type}
 \usage{
   question_type(text.var, grouping.var = NULL,
-    neg.cont = FALSE, proportional = FALSE,
+    neg.cont = FALSE, percent = TRUE, zero.replace = 0,
     prop.by.row = TRUE, ...)
 }
 \arguments{
@@ -18,8 +18,10 @@
   counts for the negative contraction forms of the
   interrogative words.}
 
-  \item{proportional}{logical.  If TRUE outputs the table
-  proportionally (see \code{\link[qdap]{prop}}).}
+  \item{percent}{logical.  If TRUE output given as percent.
+  If FALSE the output is proption.}
+
+  \item{zero.replace}{Value to replace 0 values with.}
 
   \item{prop.by.row}{logical.  If TRUE applies proportional
   to the row.  If FALSE applies by column.}
@@ -65,6 +67,8 @@
 x$raw
 x$count
 plot(x)
+plot(x, label = TRUE)
+plot(x, label = TRUE, text.color = "red")
 question_type(DATA$state, DATA$person, proportional = TRUE)
 DATA[8, 4] <- "Won't I distrust you?"
 question_type(DATA$state, DATA$person)

@@ -15,8 +15,6 @@
 #' @param apostrophe.remove = TRUE logical.  If TRUE apostrophes will be counted 
 #' in the character count.
 #' @param count.space logical.  If TRUE spaces are counted as characters.
-#' @param proportional logical.  If TRUE outputs the table proportionally 
-#' (see \code{\link[qdap]{prop}}).
 #' @param prop.by.row logical.  If TRUE applies proportional to the row.  If 
 #' FALSE applies by column.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{prop}}.
@@ -60,11 +58,16 @@
 #' # CHARACTER TABLE
 #' (x <- character.table(DATA$state, DATA$person))
 #' plot(x)
+#' plot(x, label = TRUE)
+#' plot(x, label = TRUE, text.color = "red")
+#' x$raw
+#' x$prop
+#' x$rnp
+#' 
 #' char.table(DATA$state, DATA$person)
 #' char.table(DATA$state, DATA$person, proportianal = TRUE)
 #' character.table(DATA$state, list(DATA$sex, DATA$adult))
 #' colsplit2df(character.table(DATA$state, list(DATA$sex, DATA$adult)))
-#' 
 #' }
 word.count <- 
 function(text.var, byrow = TRUE, missing = NA, digit.remove = TRUE, 
@@ -121,12 +124,15 @@ function(text.var, byrow = TRUE, missing = NA, apostrophe.remove = TRUE,
 #' \code{character.table} - Computes a table of character counts by grouping .
 #' variable(s).
 #' 
+#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
+#' output is proption.
+#' @param zero.replace Value to replace 0 values with.
 #' @return \code{character.table} - returns a dataframe of character counts by 
 #' grouping variable.
 #' @rdname word.count
 #' @export
-character.table <- function(text.var, grouping.var, proportional = FALSE, 
-    prop.by.row = TRUE, ...) {
+character.table <- function(text.var, grouping.var, percent = TRUE, 
+    prop.by.row = TRUE, zero.replace = 0, ...) {
     if(is.null(grouping.var)) {
         G <- "all"
     } else {
@@ -172,13 +178,15 @@ character.table <- function(text.var, grouping.var, proportional = FALSE,
     DF2 <- data.frame(x = rownames(L3), L3, check.names=FALSE, 
         row.names = NULL)
     colnames(DF2)[1] <- G
-    if (proportional) {
-        DF2 <- data.frame(DF2[, 1, drop = FALSE], prop(DF2[-1], 
-            by.column = (1 - prop.by.row), ...), check.names = FALSE)
-        DF2[is.nan(DF2)] <- 0
-    }
-    class(DF2) <- "character.table"
-    DF2
+    DF3 <- prop(DF2[-1], by.column = (1 - prop.by.row), ...)
+    DF3[is.nan(DF3)] <- 0
+    DF3 <- data.frame(DF2[, 1, drop = FALSE], DF3, check.names = FALSE)
+    rnp <- raw_pro_comb(DF2[, -1], DF3[, -1], digitts = digits, 
+        percent = percent, zero.replace = zero.replace)  
+    rnp <- data.frame(DF2[, 1, drop = FALSE], rnp, check.names = FALSE)  
+    o <- list(raw = DF2, prop = DF3, rnp = rnp)  
+    class(o) <- "character.table"
+    o
 }
 
 #' Prints a character.table object
@@ -191,24 +199,30 @@ character.table <- function(text.var, grouping.var, proportional = FALSE,
 #' @S3method print character.table 
 print.character.table <-
 function(x, ...) {
-    class(x) <- "data.frame"
-    print(x)
+    WD <- options()[["width"]]
+    options(width=3000)
+    print(x$rnp)
+    options(width=WD)
 }
 
 
-#' Plots a char_tab object
+#' Plots a character.table Object
 #' 
-#' Plots a char_tab object.
+#' Plots a character.table  object.
 #' 
-#' @param x The char_tab object
+#' @param x The character.table  object
+#' @param label logical.  If TRUE the cells of the heat map plot will be labeled with 
+#' raw and proportional values.
 #' @param \ldots Other arguments passed to qheat
-#' @method plot char_tab
-#' @S3method plot char_tab
-plot.char_tab <- function(x, ...) {
-    class(x) <- "data.frame"
-    qheat(x, ...)
+#' @method plot character.table 
+#' @S3method plot character.table 
+plot.character.table <- function(x, label = FALSE, ...) {
+    if (label) {
+        qheat(x$prop, values=TRUE, mat2 = x$rnp, ...)
+    } else {
+        qheat(x$prop, ...)  
+    }
 }
-
 
 #' @rdname word.count
 #' @export

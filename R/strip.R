@@ -10,7 +10,7 @@
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from the 
 #' output.
 #' @param lower.case logical.  If TRUE forces all alpha characters to lower case.
-#' @return Retruns a vector of text that has been stripped of unwanted characters.
+#' @return Returns a vector of text that has been stripped of unwanted characters.
 #' @seealso \code{\link[qdap]{stopwords}}
 #' @export
 #' @examples

@@ -2,14 +2,17 @@
 \alias{hash}
 \title{Hash/Dictionary Lookup}
 \usage{
-  hash(x)
+  hash(x, mode.out = "numeric")
 }
 \arguments{
-  \item{x}{A two column dataframe}
+  \item{x}{A two column dataframe.}
+
+  \item{mode.out}{The type of output (column 2) expected
+  (e.g. \code{"character"}, \code{"numeric"}, etc.)}
 }
 \value{
   Creates a "hash table" or a two column data frame in its
-  own evironment.
+  own environment.
 }
 \description{
   Creates a new environemnt for quick hash style dictionary
@@ -17,9 +20,20 @@
 }
 \examples{
 \dontrun{
-new.hash <- hash(aggregate(conc~Plant, CO2, sum))
-new.hash <- hash(aggregate(conc~Plant, CO2, sum))
-sapply(as.character(CO2$Plant), function(x) {
+(DF <- aggregate(mpg~as.character(carb), mtcars, mean))
+
+new.hash <- hash(DF)
+sapply(as.character(mtcars$carb), function(x) {
+        if(exists(x, env = new.hash)) {
+            get(x, e = new.hash)
+        } else {
+            NA
+        }
+    }
+)
+
+new.hash <- hash(DF, "character")
+sapply(as.character(mtcars$carb), function(x) {
         if(exists(x, env = new.hash)) {
             get(x, e = new.hash)
         } else {

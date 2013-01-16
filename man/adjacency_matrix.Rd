@@ -17,7 +17,7 @@
 }
 \description{
   Takes a matrix (wfm) or termco object (.a, .c or .d) and
-  generates an adjacency matrix for use with igraph
+  generates an adjacency matrix for use with \code{igraph}.
 }
 \examples{
 \dontrun{

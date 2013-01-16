@@ -25,7 +25,7 @@ function(x, replace=0){
           return(x )
     } else {
           y <- apply(x, 1, function(x) {x[is.na(x)] <- replace; return(x)})
-          y <- data.frame(t(y))
+          y <- data.frame(t(y), check.names = FALSE)
           return(y)
     }
 }

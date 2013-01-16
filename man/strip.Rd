@@ -22,7 +22,7 @@
   characters to lower case.}
 }
 \value{
-  Retruns a vector of text that has been stripped of
+  Returns a vector of text that has been stripped of
   unwanted characters.
 }
 \description{

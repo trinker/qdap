@@ -185,6 +185,7 @@ with(dat2, termco.a(dialogue, person, match.list=ml,
 
 DATA$state[1] <- "12 4 rgfr  r0ffrg0"
 termco.a(DATA$state, DATA$person, '0', digit.remove=FALSE)
+DATA <- qdap::DATA
 
 #Using with term.match and exclude
 exclude(term.match(DATA$state, qcv(th), FALSE), "truth")
