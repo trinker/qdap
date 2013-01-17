@@ -27,11 +27,23 @@
 #' common(word_list(DATA$state, DATA$person)$cwl, overlap = 2) 
 #' } 
 common <-
-function(word.list, ...){
+function(word.list, overlap = "all", equal.or = "more", ...){
+    overlap
+    equal.or
     UseMethod("common")
 }
 
-#' @S3method common list
+
+#' list Method for coomon
+#' 
+#' @param word.list A list of names chacter vectors.
+#' @param overlap Minimum/exact amount of overlap.
+#' @param equal.or A character vector of c(\code{"equal"}, \code{"greater"}, 
+#' \code{"more"}, \code{"less"}).
+#' @param \dots In liu of word.list the user may input n number of character 
+#' vectors.
+#' @export
+#' @method common list
 common.list <-
 function(word.list, overlap = "all", equal.or = "more", ...){
     if(overlap=="all") {
@@ -48,6 +60,9 @@ function(word.list, overlap = "all", equal.or = "more", ...){
         greater = DF[DF$freq > (OL - 1), ],
         more = DF[DF$freq > (OL - 1), ],
         less = DF[DF$freq < (OL + 1), ])
+    if (nrow(DF) == 0) {
+        stop(paste(overlap, "groups do not have any words in common."))
+    }
     rownames(DF) <- 1:nrow(DF)
     return(DF)
 }
@@ -55,7 +70,7 @@ function(word.list, overlap = "all", equal.or = "more", ...){
 
 #' @S3method common default  
 common.default <-
-    function(...,  word.list){
+    function(..., overlap = "all", equal.or = "more", word.list){
         LIS <- list(...)
         return(common.list(LIS, overlap, equal.or))
 }

@@ -24,7 +24,7 @@
   \item{zero.replace}{Value to replace 0 values with.}
 
   \item{digits}{Integer; number of decimal places to round
-  in the display of the output.}
+  when printing.}
 }
 \value{
   Returns a list of: \item{raw}{A dataframe of the
@@ -32,11 +32,12 @@
   \item{count}{A dataframe of total questions
   (\code{tot.quest}) and counts of question types (initial
   interrogative word) by grouping variable(s).}
-  \item{missing}{The row numbers of the missing data
-  (excluded from analysis).} \item{percent}{The value of
-  percent used for plotting purposes.}
-  \item{zero.replace}{The value of zero.replace used for
-  plotting purposes.}
+  \item{rnp}{Dataframe of the frequency and proportions of
+  question types by grouping variable.} \item{missing}{The
+  row numbers of the missing data (excluded from
+  analysis).} \item{percent}{The value of percent used for
+  plotting purposes.} \item{zero.replace}{The value of
+  zero.replace used for plotting purposes.}
 }
 \description{
   Transcript apply question counts.

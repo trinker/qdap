@@ -31,7 +31,7 @@ raw_pro_comb <- function(raw, pro = NULL, digits = 2, percent = TRUE,
     zero.replace = 0, override = FALSE, ...) {
     if (is.null(pro)) {
         pro <- prop(raw, digits = digits, by.column = FALSE, percent = percent, 
-            ...)
+            round = TRUE, ...)
     }
     s.ymb <- ifelse(percent, "%", "")
     charp <- apply(pro, 2, paster, digits = digits, symbol = s.ymb, 
@@ -52,5 +52,6 @@ raw_pro_comb <- function(raw, pro = NULL, digits = 2, percent = TRUE,
         replacer(rnp, "0(0)", zero.replace)
     }
 }
+
 
 

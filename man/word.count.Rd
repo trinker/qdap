@@ -17,10 +17,10 @@
     count.space = FALSE)
 
   character.table(text.var, grouping.var, percent = TRUE,
-    prop.by.row = TRUE, zero.replace = 0, ...)
+    prop.by.row = TRUE, zero.replace = 0, digits = 2, ...)
 
   char.table(text.var, grouping.var, percent = TRUE,
-    prop.by.row = TRUE, zero.replace = 0, ...)
+    prop.by.row = TRUE, zero.replace = 0, digits = 2, ...)
 }
 \arguments{
   \item{text.var}{The text variable}
@@ -58,6 +58,9 @@
   If FALSE the output is proption.}
 
   \item{zero.replace}{Value to replace 0 values with.}
+
+  \item{digits}{Integer; number of decimal places to round
+  when printing.}
 }
 \value{
   \code{word.count} - returns a word count by row or total.
@@ -65,8 +68,16 @@
   \code{character.count} - returns a character count by row
   or total.
 
-  \code{character.table} - returns a dataframe of character
-  counts by grouping variable.
+  \code{character.table} - returns a list: dataframe of
+  character counts by grouping variable.
+  \item{raw}{Dataframe of the frequency of characters by
+  grouping variable.} \item{prop}{Dataframe of the
+  proportion of characters by grouping variable.}
+  \item{rnp}{Dataframe of the frequency and proportions of
+  characters by grouping variable.} \item{percent}{The
+  value of percent used for plotting purposes.}
+  \item{zero.replace}{The value of zero.replace used for
+  plotting purposes.}
 }
 \description{
   \code{word.count} - Transcript apply word counts.
@@ -116,6 +127,7 @@ ggplot(data = dat3, aes(x = variable, fill = variable)) +
 plot(x)
 plot(x, label = TRUE)
 plot(x, label = TRUE, text.color = "red")
+plot(x, label = TRUE, lab.digits = 1, zero.replace = "PP7")
 x$raw
 x$prop
 x$rnp
@@ -123,7 +135,6 @@ x$rnp
 char.table(DATA$state, DATA$person)
 char.table(DATA$state, DATA$person, proportianal = TRUE)
 character.table(DATA$state, list(DATA$sex, DATA$adult))
-colsplit2df(character.table(DATA$state, list(DATA$sex, DATA$adult)))
 }
 }
 \seealso{

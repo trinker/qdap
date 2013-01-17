@@ -11,13 +11,14 @@
 #' @param percent logical.  If TRUE output given as percent.  If FALSE the 
 #' output is proption.
 #' @param zero.replace Value to replace 0 values with.
-#' @param digits Integer; number of decimal places to round in the display of 
-#' the output.
+#' @param digits Integer; number of decimal places to round when printing.   
 #' @return Returns a list of:
 #' \item{raw}{A dataframe of the questions used in the transcript and their 
 #' type.}
 #' \item{count}{A dataframe of total questions (\code{tot.quest}) and counts of 
 #' question types (initial interrogative word) by grouping variable(s).}
+#' \item{rnp}{Dataframe of the frequency and proportions of question types by 
+#' grouping variable.} 
 #' \item{missing}{The row numbers of the missing data (excluded from analysis).}
 #' \item{percent}{The value of percent used for plotting purposes.}
 #' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
@@ -179,14 +180,11 @@ question_type <- function(text.var, grouping.var = NULL,
     yesap <- sapply(comdcol, "[", 1)
     noap <- gsub("'", "", sapply(comdcol, "[", 1))
     colnames(DF) <- mgsub(noap, yesap, colnames(DF))
+    DF2 <- as.matrix(DF[, -c(1:2)]/DF[, 2])
+    DF2[is.nan(DF2)] <- 0 
     if (percent) {
-        DF2 <- as.matrix(DF[, -c(1:2)]/DF[, 2])
-        DF2[is.nan(DF2)] <- 0 
         DF2 <- DF2*100
-    } else {
-        DF2 <- as.matrix(DF[, -c(1:2)]/DF[, 2])
-        DF2[is.nan(DF2)] <- 0 
-    }
+    } 
     DF2 <- data.frame(DF[, c(1:2)], as.data.frame(DF2), check.names = FALSE, 
         row.names = NULL) 
     rownames(DF) <- NULL
@@ -251,7 +249,7 @@ plot.question_type <- function(x, label = FALSE, lab.digits = 1, percent = NULL,
             zero.replace <- x$zero.replace
         }
         rnp <- raw_pro_comb(x$count[, -c(1:2)], x$prop[, -c(1:2)], 
-            digits = lab.digits, percent = percent, zero.replace = x$zero.replace)  
+            digits = lab.digits, percent = percent, zero.replace = zero.replace)  
         rnp <- data.frame(x$count[, 1:2], rnp, check.names = FALSE) 
         qheat(x$prop, values=TRUE, mat2 = rnp, ...)
     } else {

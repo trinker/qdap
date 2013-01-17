@@ -60,6 +60,7 @@
 #' plot(x)
 #' plot(x, label = TRUE)
 #' plot(x, label = TRUE, text.color = "red")
+#' plot(x, label = TRUE, lab.digits = 1, zero.replace = "PP7")
 #' x$raw
 #' x$prop
 #' x$rnp
@@ -67,7 +68,6 @@
 #' char.table(DATA$state, DATA$person)
 #' char.table(DATA$state, DATA$person, proportianal = TRUE)
 #' character.table(DATA$state, list(DATA$sex, DATA$adult))
-#' colsplit2df(character.table(DATA$state, list(DATA$sex, DATA$adult)))
 #' }
 word.count <- 
 function(text.var, byrow = TRUE, missing = NA, digit.remove = TRUE, 
@@ -127,12 +127,19 @@ function(text.var, byrow = TRUE, missing = NA, apostrophe.remove = TRUE,
 #' @param percent logical.  If TRUE output given as percent.  If FALSE the 
 #' output is proption.
 #' @param zero.replace Value to replace 0 values with.
-#' @return \code{character.table} - returns a dataframe of character counts by 
-#' grouping variable.
+#' @param digits Integer; number of decimal places to round when printing.   
+#' @return \code{character.table} - returns a list:
+#' dataframe of character counts by grouping variable.
+#' \item{raw}{Dataframe of the frequency of characters by grouping variable.} 
+#' \item{prop}{Dataframe of the proportion of characters by grouping variable.} 
+#' \item{rnp}{Dataframe of the frequency and proportions of characters by 
+#' grouping variable.} 
+#' \item{percent}{The value of percent used for plotting purposes.}
+#' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
 #' @rdname word.count
 #' @export
 character.table <- function(text.var, grouping.var, percent = TRUE, 
-    prop.by.row = TRUE, zero.replace = 0, ...) {
+    prop.by.row = TRUE, zero.replace = 0, digits = 2, ...) {
     if(is.null(grouping.var)) {
         G <- "all"
     } else {
@@ -178,13 +185,14 @@ character.table <- function(text.var, grouping.var, percent = TRUE,
     DF2 <- data.frame(x = rownames(L3), L3, check.names=FALSE, 
         row.names = NULL)
     colnames(DF2)[1] <- G
-    DF3 <- prop(DF2[-1], by.column = (1 - prop.by.row), ...)
+    DF3 <- prop(DF2[-1], percent = percent, by.column = (1 - prop.by.row), ...)
     DF3[is.nan(DF3)] <- 0
     DF3 <- data.frame(DF2[, 1, drop = FALSE], DF3, check.names = FALSE)
-    rnp <- raw_pro_comb(DF2[, -1], DF3[, -1], digitts = digits, 
+    rnp <- raw_pro_comb(DF2[, -1], DF3[, -1], digits = digits, 
         percent = percent, zero.replace = zero.replace)  
     rnp <- data.frame(DF2[, 1, drop = FALSE], rnp, check.names = FALSE)  
-    o <- list(raw = DF2, prop = DF3, rnp = rnp)  
+    o <- list(raw = DF2, prop = DF3, rnp = rnp, percent = percent, 
+        zero.replace = zero.replace)  
     class(o) <- "character.table"
     o
 }
@@ -211,14 +219,43 @@ function(x, ...) {
 #' Plots a character.table  object.
 #' 
 #' @param x The character.table  object
-#' @param label logical.  If TRUE the cells of the heat map plot will be labeled with 
-#' raw and proportional values.
+#' @param label logical.  If TRUE the cells of the heat map plot will be labeled 
+#' with count and proportional values.
+#' @param lab.digits Integer values specifying the number of digits to be 
+#' printed if \code{label} is TRUE.
+#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
+#' output is proption.  If NULL uses the value from 
+#' \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.
+#' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
+#' from \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.
 #' @param \ldots Other arguments passed to qheat
 #' @method plot character.table 
 #' @S3method plot character.table 
-plot.character.table <- function(x, label = FALSE, ...) {
+plot.character.table <- function(x, label = FALSE, lab.digits = 1, percent = NULL, 
+    zero.replace = NULL, ...) {
     if (label) {
-        qheat(x$prop, values=TRUE, mat2 = x$rnp, ...)
+        if (!is.null(percent)) {
+            if (percent != x$percent) {
+                DF <- as.matrix(x$prop[, -1])
+                if (percent) {
+                    DF <- DF*100    
+                } else {
+                    DF <-  DF/100
+                }
+                x$prop <- data.frame(x$prop[, 1, drop = FALSE], DF, 
+                    check.names = FALSE) 
+            }
+        } else {
+            percent <- x$percent 
+        }
+        if (is.null(zero.replace)) {
+            zero.replace <- x$zero.replace
+        }
+        rnp <- raw_pro_comb(x$raw[, -1], x$prop[, -1], 
+            digits = lab.digits, percent = percent, 
+                zero.replace = zero.replace)  
+        rnp <- data.frame(x$raw[, 1, drop = FALSE], rnp, check.names = FALSE) 
+        qheat(x$prop, values=TRUE, mat2 = rnp, ...)
     } else {
         qheat(x$prop, ...)  
     }

@@ -19,8 +19,7 @@
 #' output.       
 #' @param apostrophe.remove logical.  If TRUE removes apostophes from 
 #' calculating the output.   
-#' @param digits Integer; number of decimal places to round in the display of 
-#' the output.                    
+#' @param digits Integer; number of decimal places to round when printing.                    
 #' @param \ldots Any other arguments passed to endf.     
 #' @return Returns a list of three descriptive word statistics:
 #' \item{ts}{A data frame of descriptive word statistics by row} 
@@ -59,6 +58,8 @@
 #' \item{sent.elem}{A data frame with sentence element columns from gts} 
 #' \item{omit}{Counter of omitted sentences for internal use (only included if 
 #' some rows contained missing values)} 
+#' \item{percent}{The value of percent used for plotting purposes.}
+#' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
 #' @keywords descriptive statistic
 #' @export
 #' @examples

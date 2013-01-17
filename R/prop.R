@@ -9,6 +9,8 @@
 #' output is proption.
 #' @param by.column logical.  If TRUE applies to the column.  If FALSE 
 #' applies by row.
+#' @param round logical.  If TRUE rounds the returned values (controlled by 
+#' digits).
 #' @return Returns a matrix with proportionaly scaled values.
 #' @keywords proportion, percent, percentage
 #' @export
@@ -22,11 +24,14 @@
 #' wdstraj <- word_stats(rajSPLIT$dialogue, rajSPLIT$person)
 #' prop(wdstraj$gts[, -1], 5)
 #' }
-prop <- function(mat, digits = 2, percent = FALSE, by.column = TRUE) {
+prop <- function(mat, digits = 2, percent = FALSE, by.column = TRUE, 
+    round = FALSE) {
     by.column <- by.column + 1
     constant <- ifelse(percent, 100, 1)
-    out <- round(apply(mat, by.column, function(x) constant * (x/sum(x))), 
-        digits = digits)
+    out <- apply(mat, by.column, function(x) constant * (x/sum(x)))
+    if (round) {
+    out <- round(out, digits = digits)
+    }
     if (by.column == 1) {
         out <- t(out)
     }

@@ -7,8 +7,7 @@
 #' cores.  Note that this may not mean a spead boost if you have one core or if 
 #' the data set is smaller as the cluster takes time to create.
 #' @param na.omit logical.  If TRUE missing values (]code{NA}) will be omitted.
-#' @param digits Integer; number of decimal places to round in the display of 
-#' the output.
+#' @param digits Integer; number of decimal places to round when printing.
 #' @param progress.bar logical.  If TRUE attempts to provide a OS appropriate 
 #' progress bar.  If parallel is TRUE this argument is ignored.  Note that 
 #' setting this argument to TRUE may slow down the function.
@@ -24,6 +23,8 @@
 #' \item{POStagged}{The original words replaced with parts of speech in context.} 
 #' \item{POSprop}{Dataframe of the proportion of parts of speech by row.} 
 #' \item{POSfreq}{Dataframe of the frequency of parts of speech by row.} 
+#' \item{POSrnp}{Dataframe of the frequency and proportions of parts of speech 
+#' by row.} 
 #' \item{percent}{The value of percent used for plotting purposes.}
 #' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
 #' @rdname pos
@@ -166,8 +167,16 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 1,
 #' \item{POStagged}{The original words replaced with parts of speech in context.} 
 #' \item{POSprop}{Dataframe of the proportion of parts of speech by row.} 
 #' \item{POSfreq}{Dataframe of the frequency of parts of speech by row.} 
-#' \item{pos.by.prop}{Dataframe of the proportion of parts of speech by grouping variable.} 
-#' \item{pos.by.freq}{Dataframe of the frequency of parts of speech by grouping variable.} 
+#' \item{POSrnp}{Dataframe of the frequency and proportions of parts of speech 
+#' by row.} 
+#' \item{pos.by.prop}{Dataframe of the proportion of parts of speech by grouping 
+#' variable.} 
+#' \item{pos.by.freq}{Dataframe of the frequency of parts of speech by grouping 
+#' variable.} 
+#' \item{pos.by.rnp}{Dataframe of the frequency and proportions of parts of 
+#' speech by grouping variable.} 
+#' \item{percent}{The value of percent used for plotting purposes.}
+#' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
 #' @export
 pos.by <-
 function(text.var, grouping.var = NULL, digits = 1, percent = TRUE, 

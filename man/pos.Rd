@@ -25,7 +25,7 @@
   (]code{NA}) will be omitted.}
 
   \item{digits}{Integer; number of decimal places to round
-  in the display of the output.}
+  when printing.}
 
   \item{progress.bar}{logical.  If TRUE attempts to provide
   a OS appropriate progress bar.  If parallel is TRUE this
@@ -65,19 +65,27 @@
   of speech in context.} \item{POSprop}{Dataframe of the
   proportion of parts of speech by row.}
   \item{POSfreq}{Dataframe of the frequency of parts of
-  speech by row.} \item{percent}{The value of percent used
-  for plotting purposes.} \item{zero.replace}{The value of
-  zero.replace used for plotting purposes.}
+  speech by row.} \item{POSrnp}{Dataframe of the frequency
+  and proportions of parts of speech by row.}
+  \item{percent}{The value of percent used for plotting
+  purposes.} \item{zero.replace}{The value of zero.replace
+  used for plotting purposes.}
 
   pos.by returns a list of 6: \item{text}{The original
   text} \item{POStagged}{The original words replaced with
   parts of speech in context.} \item{POSprop}{Dataframe of
   the proportion of parts of speech by row.}
   \item{POSfreq}{Dataframe of the frequency of parts of
-  speech by row.} \item{pos.by.prop}{Dataframe of the
-  proportion of parts of speech by grouping variable.}
+  speech by row.} \item{POSrnp}{Dataframe of the frequency
+  and proportions of parts of speech by row.}
+  \item{pos.by.prop}{Dataframe of the proportion of parts
+  of speech by grouping variable.}
   \item{pos.by.freq}{Dataframe of the frequency of parts of
-  speech by grouping variable.}
+  speech by grouping variable.} \item{pos.by.rnp}{Dataframe
+  of the frequency and proportions of parts of speech by
+  grouping variable.} \item{percent}{The value of percent
+  used for plotting purposes.} \item{zero.replace}{The
+  value of zero.replace used for plotting purposes.}
 }
 \description{
   \code{pos} - Apply part of speech tagger to

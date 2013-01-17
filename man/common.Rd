@@ -2,7 +2,8 @@
 \alias{common}
 \title{Find Common Words Between Groups}
 \usage{
-  common(word.list, ...)
+  common(word.list, overlap = "all", equal.or = "more",
+    ...)
 }
 \arguments{
   \item{word.list}{A list of names chacter vectors.}

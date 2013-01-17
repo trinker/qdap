@@ -1,4 +1,4 @@
 #internal not exported
-#' @export
+#@export
 unblanker <-
 function(x)subset(x, nchar(x)>0)

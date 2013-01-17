@@ -38,7 +38,7 @@
   apostophes from calculating the output.}
 
   \item{digits}{Integer; number of decimal places to round
-  in the display of the output.}
+  when printing.}
 
   \item{\ldots}{Any other arguments passed to endf.}
 }
@@ -74,6 +74,9 @@
   data frame with sentence element columns from gts}
   \item{omit}{Counter of omitted sentences for internal use
   (only included if some rows contained missing values)}
+  \item{percent}{The value of percent used for plotting
+  purposes.} \item{zero.replace}{The value of zero.replace
+  used for plotting purposes.}
 }
 \description{
   Transcript apply descriptive word statistics.

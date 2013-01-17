@@ -2,7 +2,8 @@
 \alias{prop}
 \title{Convert Raw Numeric Matrix or Data Frame to Proportions}
 \usage{
-  prop(mat, digits = 2, percent = FALSE, by.column = TRUE)
+  prop(mat, digits = 2, percent = FALSE, by.column = TRUE,
+    round = FALSE)
 }
 \arguments{
   \item{mat}{A numeric matrix or dataframe.}
@@ -15,6 +16,9 @@
 
   \item{by.column}{logical.  If TRUE applies to the column.
   If FALSE applies by row.}
+
+  \item{round}{logical.  If TRUE rounds the returned values
+  (controlled by digits).}
 }
 \value{
   Returns a matrix with proportionaly scaled values.
