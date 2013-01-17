@@ -2,10 +2,13 @@
 \alias{print.word_stats}
 \title{Prints a word_stats object}
 \usage{
-  \method{print}{word_stats} (x, ...)
+  \method{print}{word_stats} (x, digits = NULL, ...)
 }
 \arguments{
   \item{x}{The word_stats object}
+
+  \item{digits}{Integer; number of decimal places to round
+  in the display of the output.}
 
   \item{\ldots}{ignored}
 }

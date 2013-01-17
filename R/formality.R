@@ -60,6 +60,8 @@
 #' plot(x3, bar.colors=c("Dark2", "Set1"))
 #' x4 <- with(raj, formality(rajPOS, list(person, act)))
 #' plot(x4, bar.colors=c("Dark2", "Set1"))
+#' 
+#' rajDEM <- key_merge(raj, raj.demographics) #merge domegraphics with transcript.
 #' x5 <- with(rajDEM, formality(rajPOS, sex))
 #' plot(x5, bar.colors="RdBu")
 #' x6 <- with(rajDEM, formality(rajPOS, list(fam.aff, sex)))

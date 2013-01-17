@@ -37,8 +37,8 @@
   \item{apostrophe.remove}{logical.  If TRUE removes
   apostophes from calculating the output.}
 
-  \item{digits}{Integer; number of decimal places to
-  round.}
+  \item{digits}{Integer; number of decimal places to round
+  in the display of the output.}
 
   \item{\ldots}{Any other arguments passed to endf.}
 }

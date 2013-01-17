@@ -19,7 +19,8 @@
 #' output.       
 #' @param apostrophe.remove logical.  If TRUE removes apostophes from 
 #' calculating the output.   
-#' @param digits Integer; number of decimal places to round.                     
+#' @param digits Integer; number of decimal places to round in the display of 
+#' the output.                    
 #' @param \ldots Any other arguments passed to endf.     
 #' @return Returns a list of three descriptive word statistics:
 #' \item{ts}{A data frame of descriptive word statistics by row} 
@@ -281,12 +282,13 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
     })
     proDF2 <- do.call(cbind, proDF2)
     class(proDF2) <- "matrix"
-    colnames(proDF2) <- gsub("n.", "p.", colnames(proDF2))
+    colnames(proDF2) <- gsub("n.", "p.", colnames(proDF2), fixed = TRUE)
     word.elem <- DF2[, -c((rng[1]+1):(rng[2]-1))]
     sent.elem <- data.frame(DF2[, (rng[1]+1):(rng[2]-1)], proDF2)
-    DF2 <- data.frame(DF2[, 1:(rng[2] - 1)], proDF2, DF2[, rng[2]:ncol(DF2)])
+    DF2 <- data.frame(DF2[, 1:(rng[2] - 1)], proDF2, DF2[, rng[2]:ncol(DF2)], 
+        check.names = FALSE)
     o <- list(ts = DF3, gts = DF2, mpun = mpun, word.elem = word.elem, 
-        sent.elem = sent.elem, omit = omit)
+        sent.elem = sent.elem, omit = omit, digits = digits)
     class(o) <- "word_stats"
     return(o)
 }
@@ -297,14 +299,19 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
 #' Prints a word_stats object.
 #' 
 #' @param x The word_stats object
+#' @param digits Integer; number of decimal places to round in the display of 
+#' the output. 
 #' @param \ldots ignored
 #' @method print word_stats
 #' @S3method print word_stats
 print.word_stats <-
-function(x, ...) {
+function(x, digits = NULL, ...) {
+    if (is.null(digits)) {
+        digits <- x$digits
+    }
     WD <- options()[["width"]]
     options(width=3000)
-    print(left.just(x$gts, 1))
+    print(left.just(dfnumfor(x$gts, digits = digits), 1))
     options(width=WD)
 }
 
@@ -314,9 +321,47 @@ function(x, ...) {
 #' Plots a word_stats object.
 #' 
 #' @param x The word_stats object
+#' @param label logical.  If TRUE the cells of the heat map plot will be labeled 
+#' with count and proportional values.
+#' @param lab.digits Integer values specifying the number of digits to be 
+#' printed if \code{label} is TRUE.
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot word_stats
 #' @S3method plot word_stats
-plot.word_stats <- function(x, ...) {
-    qheat(x, ...)
+plot.word_stats <- function(x, label = FALSE, lab.digits = NULL, ...) {
+    v <- x$gts
+    if (is.null(lab.digits)) {
+        lab.digits <- x$digits
+    }
+    if (!label) {
+        qheat(v,  ...)
+    } else {
+        mat2 <- dfnumfor(x$gts, digits = lab.digits)
+        qheat(v, values = label, mat2 = mat2, ...)    
+    }
+}
+
+#a helper function used in word_stats (not exported)
+DF_word_stats <-
+function(text.var, digit.remove = FALSE, apostrophe.remove = FALSE, 
+    digits = 3, parallel = FALSE) {
+    DF <- na.omit(data.frame(text.var = text.var, 
+        stringsAsFactors = FALSE))
+    DF$n.sent <- 1:nrow(DF)
+    DF$word.count <- word.count(DF$text.var, missing = 0, 
+        digit.remove = digit.remove)
+    DF$character.count <- character.count(DF$text.var, 
+        apostrophe = apostrophe.remove, digit.remove = digit.remove)
+    DF <- data.frame(DF, combo_syllable.sum(DF$text.var, parallel = parallel))
+    DF <- DF[, c("text.var", "n.sent", "word.count", "character.count",
+        "syllable.count",  "polysyllable.count") ]
+    DF <- transform(DF, char2word.ratio = 
+        round(character.count/word.count, digits=digits),
+        syl2word.ratio = round(syllable.count/word.count, digits=digits),
+        polysyl2word.ratio = round(polysyllable.count/word.count, digits=digits))
+    punctuation <- function(x) substr(x, nchar(x), nchar(x))
+    DF$end.mark <- unlist(lapply(DF$text.var, punctuation))
+    rownames(DF) <- 1:nrow(DF)
+    DF <- DF[order(DF$n.sent),]  
+    return(DF)
 }

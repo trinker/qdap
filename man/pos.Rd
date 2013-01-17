@@ -5,9 +5,11 @@
 \title{Parts of Speech Tagging}
 \usage{
   pos(text.var, parallel = FALSE, na.omit = FALSE,
-    digits = 2, progress.bar = TRUE, gc.rate = 10)
+    digits = 1, progress.bar = TRUE, percent = TRUE,
+    zero.replace = 0, gc.rate = 10)
 
-  pos.by(text.var, grouping.var = NULL, digits = 2, ...)
+  pos.by(text.var, grouping.var = NULL, digits = 1,
+    percent = TRUE, zero.replace = 0, ...)
 
   pos.tags(type = "pretty")
 }
@@ -22,14 +24,18 @@
   \item{na.omit}{logical.  If TRUE missing values
   (]code{NA}) will be omitted.}
 
-  \item{digits}{integer indicating the number of decimal
-  places (round) or significant digits (signif) to be used.
-  Negative values are allowed}
+  \item{digits}{Integer; number of decimal places to round
+  in the display of the output.}
 
   \item{progress.bar}{logical.  If TRUE attempts to provide
   a OS appropriate progress bar.  If parallel is TRUE this
   argument is ignored.  Note that setting this argument to
   TRUE may slow down the function.}
+
+  \item{percent}{logical.  If TRUE output given as percent.
+  If FALSE the output is proption.}
+
+  \item{zero.replace}{Value to replace 0 values with.}
 
   \item{gc.rate}{An integer value.  This is a necessary
   argument because of a problem with the garbage collection
@@ -59,7 +65,9 @@
   of speech in context.} \item{POSprop}{Dataframe of the
   proportion of parts of speech by row.}
   \item{POSfreq}{Dataframe of the frequency of parts of
-  speech by row.}
+  speech by row.} \item{percent}{The value of percent used
+  for plotting purposes.} \item{zero.replace}{The value of
+  zero.replace used for plotting purposes.}
 
   pos.by returns a list of 6: \item{text}{The original
   text} \item{POStagged}{The original words replaced with

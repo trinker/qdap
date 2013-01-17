@@ -1,16 +1,9 @@
 \name{common}
 \alias{common}
-\alias{common.default}
-\alias{common.list}
 \title{Find Common Words Between Groups}
 \usage{
-  common(word.list, ...)
-
-  \method{common}{list} (word.list, overlap = "all",
-    equal.or = "more", ...)
-
-  \method{common}{default} (..., overlap = "all",
-    equal.or = "more")
+  common(word.list, overlap = "all", equal.or = "more",
+    ...)
 }
 \arguments{
   \item{word.list}{A list of names chacter vectors.}
@@ -26,10 +19,6 @@
 \value{
   Returns a dataframe of all words that match the criteria
   set by \code{overlap} and \code{equal.or}.
-
-  \code{NULL}
-
-  \code{NULL}
 }
 \description{
   Find common words between grouping variables (e.g.

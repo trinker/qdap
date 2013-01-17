@@ -17,9 +17,10 @@
 
   \item{width}{The width of the columns to be displayed.}
 
-  \item{end}{The last element to be displayed.}
+  \item{end}{The last character to be displayed (width).}
 
-  \item{begin}{The first element to be displayed.}
+  \item{begin}{The first character to be displayed
+  (width).}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[utils]{head}}.}

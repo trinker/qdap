@@ -11,15 +11,16 @@
 #' @param percent logical.  If TRUE output given as percent.  If FALSE the 
 #' output is proption.
 #' @param zero.replace Value to replace 0 values with.
-#' @param prop.by.row logical.  If TRUE applies proportional to the row.  If 
-#' FALSE applies by column. 
-#' @param \ldots Other arguments passed to \code{\link[qdap]{prop}}.
+#' @param digits Integer; number of decimal places to round in the display of 
+#' the output.
 #' @return Returns a list of:
 #' \item{raw}{A dataframe of the questions used in the transcript and their 
 #' type.}
 #' \item{count}{A dataframe of total questions (\code{tot.quest}) and counts of 
 #' question types (initial interrogative word) by grouping variable(s).}
 #' \item{missing}{The row numbers of the missing data (excluded from analysis).}
+#' \item{percent}{The value of percent used for plotting purposes.}
+#' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
 #' @details The algorithm searchs for the following interrogative words (and 
 #' optionally, their negative contraction form as well): 
 #'  
@@ -56,8 +57,7 @@
 #'     proportional = TRUE))
 #' }
 question_type <- function(text.var, grouping.var = NULL,
-    neg.cont = FALSE, percent = TRUE, zero.replace = 0,
-    prop.by.row = TRUE, ...) {
+    neg.cont = FALSE, percent = TRUE, zero.replace = 0, digits = 2) {
     if(is.null(grouping.var)) {
         G <- "all"
     } else {
@@ -145,44 +145,56 @@ question_type <- function(text.var, grouping.var = NULL,
     dimnames(mat) <- list(grvarNA, colnames(WFM))
     DF <- data.frame(rbind(WFM, mat))  
     tq <- rowSums(DF)
+    comdcol <- list(  
+        were = c("weren't", "were"), 
+        was = c("wasn't", "was"), 
+        does = c("doesn't", "does"), 
+        did = c("didn't", "did"), 
+        do = c("don't", "do"), 
+        is = c("isn't","is"),
+        are = c("aren't", "are"),
+        will = c("won't", "will"), 
+        should = c("shouldn't", "should"), 
+        could = c("couldn't", "could"), 
+        would = c("wouldn't", "would"), 
+        can = c("can't", "can"), 
+        has = c("hasn't", "has"), 
+        have = c("haven't", "have"), 
+        had = c("hadn't", "had")
+    ) 
     if(!neg.cont) {
         ord <- c("whose", "whom", "who", "where", "what",  "which", 
             "why", "when", "were", "was", "does", "did", "do", 
             "is", "are", "will", "how", "should", "could", "would", 
             "shall", "may", "might", "must", "can", "has", "have", "had")  
-        comdcol <- list(  
-            were = c("werent", "were"), 
-            was = c("wasnt", "was"), 
-            does = c("doesnt", "does"), 
-            did = c("didnt", "did"), 
-            do = c("dont", "do"), 
-            is = c("isnt","is"),
-            are = c("arent", "are"),
-            will = c("will", "wont"), 
-            should = c("shouldnt", "should"), 
-            could = c("couldnt", "could"), 
-            would = c("wouldnt", "would"), 
-            can = c("cant", "can"), 
-            has = c("hasnt", "has"), 
-            have = c("havent", "have"), 
-            had = c("hadnt", "had")
-        ) 
+        comdcol <- lapply(comdcol, function(x) gsub("'", "", x)) 
         DF <- qcombine(DF, comdcol)
-        ord <- c(ord[ord %in% colnames(DF)], "unknown")
+        ord <- c(ord[ord %in% colnames(DF)], "ok", "right", "correct", "unknown")
         DF <- DF[, ord[ord %in% colnames(DF)]] 
     }
-    DF <- data.frame(group=rownames(DF), tot.quest = tq, DF, row.names = NULL) 
+    DF <- data.frame(group=rownames(DF), tot.quest = tq, DF, row.names = NULL, 
+        check.names = FALSE) 
     DF <- DF[sort(DF[, "group"]), ]
     colnames(DF)[1] <-  G
-    DF2 <- prop(DF[, -1], by.column = (1 - prop.by.row), ...)
-    DF2[is.nan(DF2)] <- 0  
-    DF2 <- data.frame(DF[, 1, drop = FALSE], DF2, check.names = FALSE)  
+    yesap <- sapply(comdcol, "[", 1)
+    noap <- gsub("'", "", sapply(comdcol, "[", 1))
+    colnames(DF) <- mgsub(noap, yesap, colnames(DF))
+    if (percent) {
+        DF2 <- as.matrix(DF[, -c(1:2)]/DF[, 2])
+        DF2[is.nan(DF2)] <- 0 
+        DF2 <- DF2*100
+    } else {
+        DF2 <- as.matrix(DF[, -c(1:2)]/DF[, 2])
+        DF2[is.nan(DF2)] <- 0 
+    }
+    DF2 <- data.frame(DF[, c(1:2)], as.data.frame(DF2), check.names = FALSE, 
+        row.names = NULL) 
     rownames(DF) <- NULL
-    rnp <- raw_pro_comb(DF[, -1], DF2[, -1], digitts = digits, 
+    rnp <- raw_pro_comb(DF[, -c(1:2)], DF2[, -c(1:2)], digits = digits, 
         percent = percent, zero.replace = zero.replace)  
-    rnp <- data.frame(DF2[, 1, drop = FALSE], rnp, check.names = FALSE) 
+    rnp <- data.frame(DF2[, 1:2], rnp, check.names = FALSE) 
     o <- list(raw = DF3, count = DF, prop = DF2, rnp = rnp, 
-        missing = rows.removed)
+        missing = rows.removed, percent = percent, zero.replace = zero.replace)
     class(o) <- "question_type"
     o
 }
@@ -207,14 +219,41 @@ function(x, ...) {
 #' Plots a question_type object.
 #' 
 #' @param x The question_type object.
-#' @param label logical.  If TRUE the cells of the heat map plot will be labeled with 
-#' raw and proportional values.
+#' @param label logical.  If TRUE the cells of the heat map plot will be labeled 
+#' with count and proportional values.
+#' @param lab.digits Integer values specifying the number of digits to be 
+#' printed if \code{label} is TRUE.
+#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
+#' output is proption.  If NULL uses the value from 
+#' \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.
+#' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
+#' from \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot question_type
 #' @S3method plot question_type
-plot.question_type <- function(x, label = FALSE, ...) {
+plot.question_type <- function(x, label = FALSE, lab.digits = 1, percent = NULL, 
+    zero.replace = NULL, ...) {
     if (label) {
-        qheat(x$prop, values=TRUE, mat2 = x$rnp, ...)
+        if (!is.null(percent)) {
+            if (percent != x$percent) {
+                DF <- as.matrix(x$prop[, -c(1:2)])
+                if (percent) {
+                    DF <- DF*100    
+                } else {
+                    DF <-  DF/100
+                }
+                x$prop <- data.frame(x$prop[, 1:2], DF, check.names = FALSE) 
+            }
+        } else {
+            percent <- x$percent 
+        }
+        if (is.null(zero.replace)) {
+            zero.replace <- x$zero.replace
+        }
+        rnp <- raw_pro_comb(x$count[, -c(1:2)], x$prop[, -c(1:2)], 
+            digits = lab.digits, percent = percent, zero.replace = x$zero.replace)  
+        rnp <- data.frame(x$count[, 1:2], rnp, check.names = FALSE) 
+        qheat(x$prop, values=TRUE, mat2 = rnp, ...)
     } else {
         qheat(x$prop, ...)  
     }

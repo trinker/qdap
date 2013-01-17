@@ -62,7 +62,7 @@ qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
     numformat <- function(val, digits) { 
         sub("^(-?)0.", "\\1.", sprintf(paste0("%.", digits, "f"), val)) 
     }
-    classRdf <- c("diversity", "pos.by")
+    classRdf <- c("diversity")
     if (class(mat) %in% classRdf) {
         class(mat) <- "data.frame"
     }     
@@ -71,17 +71,14 @@ qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
         mat <- mat[["gts"]]
         class(mat) <- "data.frame"
     }
-    if (CLS == "character.table") {
+    if (CLS %in% c("character.table", "question_type", "pos.by")) {
         mat <- mat[["prop"]]
     }
     if (CLS == "termco") {
         mat2 <- mat[["rnp"]]
         mat <- data.frame(mat[["prop"]])
         class(mat2) <- "data.frame"
-    }    
-    if (CLS == "question_type") {
-        mat <- mat[["prop"]]
-    }
+    }      
     dat2 <- as.matrix(mat[, -1])
     if (!is.null(by.column)){
         by.column <- by.column + 1

@@ -6,8 +6,8 @@
 #' @param dataframe A data.frame object.
 #' @param n Number of rows to display.
 #' @param width The width of the columns to be displayed.
-#' @param end The last element to be displayed.
-#' @param begin The first element to be displayed.
+#' @param end The last character to be displayed (width).
+#' @param begin The first character to be displayed (width).
 #' @param \ldots Other arguments passed to \code{\link[utils]{head}}.
 #' @rdname data_viewing
 #' @return \code{htrundf} - returns n number of rows of a truncated dataframe.

@@ -7,11 +7,14 @@
 #' cores.  Note that this may not mean a spead boost if you have one core or if 
 #' the data set is smaller as the cluster takes time to create.
 #' @param na.omit logical.  If TRUE missing values (]code{NA}) will be omitted.
-#' @param digits integer indicating the number of decimal places (round) or 
-#' significant digits (signif) to be used. Negative values are allowed
+#' @param digits Integer; number of decimal places to round in the display of 
+#' the output.
 #' @param progress.bar logical.  If TRUE attempts to provide a OS appropriate 
 #' progress bar.  If parallel is TRUE this argument is ignored.  Note that 
 #' setting this argument to TRUE may slow down the function.
+#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
+#' output is proption.
+#' @param zero.replace Value to replace 0 values with.
 #' @param gc.rate An integer value.  This is a necessary argument because of a 
 #' problem with the garbage collection in the openNLP function that \code{pos} 
 #' wraps.  Consider adjusting this argument upward if the error 
@@ -21,6 +24,8 @@
 #' \item{POStagged}{The original words replaced with parts of speech in context.} 
 #' \item{POSprop}{Dataframe of the proportion of parts of speech by row.} 
 #' \item{POSfreq}{Dataframe of the frequency of parts of speech by row.} 
+#' \item{percent}{The value of percent used for plotting purposes.}
+#' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
 #' @rdname pos
 #' @seealso 
 #' \code{\link[openNLP]{tagPOS}}
@@ -57,8 +62,8 @@
 #' with(DATA, pos.by(posbydat, list(adult, sex)))
 #' }
 pos <-
-function(text.var, parallel = FALSE, na.omit = FALSE, digits = 2, 
-    progress.bar = TRUE, gc.rate=10){
+function(text.var, parallel = FALSE, na.omit = FALSE, digits = 1, 
+    progress.bar = TRUE, percent = TRUE, zero.replace=0, gc.rate=10){
     ntv <- length(text.var)    
     pos1 <-  function(i) {
         x <- tagPOS(strip(i))   
@@ -125,8 +130,9 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 2,
     m <- data.frame(POStagged = m)
     m$POStags <- o 
     m$word.count <- word.count(text.var)
+    cons <- ifelse(percent, 100, 1)
     G5 <- sapply(data.frame(G4, check.names = FALSE), 
-        function(x) round(x/m$word.count, digits = digits)) 
+        function(x) cons*(x/m$word.count)) 
     colnames(G5) <- paste0("prop", colnames(G5))
     G4 <- data.frame(wrd.cnt = m$word.count, G4, check.names = FALSE)
     G5 <- data.frame(wrd.cnt = m$word.count, G5, check.names = FALSE)
@@ -135,7 +141,11 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 2,
         G4[nas, 2:ncol(G4)] <- NA
         m[nas, 1:ncol(m)] <- NA
     }
-    POS <- list(text = text.var, POStagged = m, POSprop = G5, POSfreq = G4)
+    rnp <- raw_pro_comb(G4[, -1], G5[, -1], digits = digits, 
+        percent = percent, zero.replace = zero.replace, override = TRUE)  
+    rnp <- data.frame(G4[, 1, drop = FALSE], rnp, check.names = FALSE)     
+    POS <- list(text = text.var, POStagged = m, POSprop = G5, POSfreq = G4,
+        POSrnp = rnp, percent = percent, zero.replace = zero.replace)
     if(na.omit) POS <- lapply(POS, na.omit)
     class(POS) <- "pos"
     return(POS)
@@ -160,40 +170,45 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 2,
 #' \item{pos.by.freq}{Dataframe of the frequency of parts of speech by grouping variable.} 
 #' @export
 pos.by <-
-function(text.var, grouping.var = NULL, digits = 2, ...){
-    G <- if(is.null(grouping.var)) {
-             "all"
-         } else {
-             if (is.list(grouping.var)) {
-                 m <- unlist(as.character(substitute(grouping.var))[-1])
-                 m <- sapply(strsplit(m, "$", fixed=TRUE), 
-                     function(x) x[length(x)])
-                 paste(m, collapse="&")
-             } else {
-                  G <- as.character(substitute(grouping.var))
-                  G[length(G)]
-             }
-         }
-    if (!class(text.var) %in% c("pos", "pos.by", "formality ")) {
-        pos.list <- pos(text.var, digits = digits, ...)
-        text.var <- pos.list[["POSfreq"]]
+function(text.var, grouping.var = NULL, digits = 1, percent = TRUE, 
+    zero.replace = 0, ...){
+    if(is.null(grouping.var)) {
+        G <- "all"
     } else {
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
+    }
+    check <- FALSE
+    if (class(text.var) %in% c("pos", "pos.by", "formality")) {
         pos.list <- text.var
         text.var <- text.var[["POSfreq"]]
+        check <- TRUE
+    } else {
+        pos.list <- pos(text.var, digits = digits, percent = percent, ...)
+        text.var <- pos.list[["POSfreq"]]
     }
-    grouping <- if(is.null(grouping.var)){
-                     rep("all", nrow(text.var))
-                 } else {
-                     if(is.list(grouping.var) & length(grouping.var)>1) {
-                         apply(data.frame(grouping.var), 1, function(x){
-                             if(any(is.na(x))){NA}else{paste(x, collapse = ".")
-                                 }
-                             }
-                         )
-                     } else {
-                        unlist(grouping.var)
-                     } 
-                 } 
+    if(is.null(grouping.var)){
+        if (check) {
+            grouping <- rep("all", nrow(text.var))  
+        } else {
+            grouping <- rep("all", length(text.var))
+        }
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    } 
     DF1 <- data.frame(grouping, text.var, check.names = FALSE)
     L1 <- split(DF1, DF1$grouping)
     L2 <- lapply(L1, function(x) colSums(x[, -1], na.rm = TRUE))
@@ -203,10 +218,19 @@ function(text.var, grouping.var = NULL, digits = 2, ...){
     colnames(DF2)[1] <- G
     o <- unclass(pos.list)
     o[["pos.by.freq"]] <- DF2
-    propby <- lapply(1:nrow(DF2), function(i) DF2[i, -c(1:2)]/rowSums(DF2[, -c(1:2)])[i])
-    propby <- sapply(do.call(rbind, propby), round, digits = digits)
+    cons <- ifelse(percent, 100, 1)    
+    propby <- lapply(1:nrow(DF2), function(i) {
+        cons*(DF2[i, -c(1:2)]/rowSums(DF2[, -c(1:2)])[i])
+    })
+    propby <- as.matrix(do.call(rbind, propby))
     propby[is.nan(propby)] <- 0
-    o[["pos.by.prop"]] <- data.frame(DF2[, 1:2], propby, check.names = FALSE)
+    o[["pos.by.prop"]] <- suppressWarnings(data.frame(DF2[, 1:2], propby, 
+        check.names = FALSE))
+    rnp2 <- raw_pro_comb(o[["pos.by.freq"]][, -c(1:2)], 
+        o[["pos.by.prop"]][, -c(1:2)], digits = digits, 
+        percent = percent, zero.replace = zero.replace, override = TRUE)  
+    o[["pos.by.rnp"]] <- data.frame(o[["pos.by.freq"]][, 1:2], 
+        rnp2, check.names = FALSE)     
     class(o) <- "pos.by"
     return(o)
 }
@@ -284,7 +308,10 @@ function(type = "pretty"){
 #' @S3method print pos
 print.pos <-
 function(x, ...) {
-    print(x$POSfreq)
+    WD <- options()[["width"]]
+    options(width=3000)
+    print(x$POSrnp)
+    options(width=WD)
 }
 
 #' Prints a pos.by Object.
@@ -297,7 +324,10 @@ function(x, ...) {
 #' @S3method print pos.by
 print.pos.by <-
 function(x, ...) {
-    print(x$pos.by.freq)
+    WD <- options()[["width"]]
+    options(width=3000)
+    print(x$pos.by.rnp)
+    options(width=WD)  
 }
 
 #' Plots a pos.by Object
@@ -305,9 +335,44 @@ function(x, ...) {
 #' Plots a pos.by object.
 #' 
 #' @param x The pos.by object
+#' @param label logical.  If TRUE the cells of the heat map plot will be labeled 
+#' with count and proportional values.
+#' @param lab.digits Integer values specifying the number of digits to be 
+#' printed if \code{label} is TRUE.
+#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
+#' output is proption.  If NULL uses the value from 
+#' \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.
+#' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
+#' from \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot pos.by
 #' @S3method plot pos.by
-plot.pos.by <- function(x, ...) {
-    qheat(x$pos.by.prop, ...)
+plot.pos.by <- function(x, label = FALSE, lab.digits = 1, percent = NULL, 
+    zero.replace = NULL, ...) {
+    if (label) {
+        if (!is.null(percent)) {
+            if (percent != x$percent) {
+                DF <- as.matrix(x$pos.by.prop[, -c(1:2)])
+                if (percent) {
+                    DF <- DF*100    
+                } else {
+                    DF <-  DF/100
+                }
+                x$pos.by.prop <- data.frame(x$pos.by.prop[, 1:2], DF, 
+                    check.names = FALSE) 
+            }
+        } else {
+            percent <- x$percent 
+        }
+        if (is.null(zero.replace)) {
+            zero.replace <- x$zero.replace
+        }
+        rnp <- raw_pro_comb(x$pos.by.freq[, -c(1:2)], x$pos.by.prop[, -c(1:2)], 
+            digits = lab.digits, percent = percent, , override = TRUE,
+            zero.replace = x$zero.replace)  
+        rnp <- data.frame(x$pos.by.freq[, 1:2], rnp, check.names = FALSE) 
+        qheat(x$pos.by.prop, values=TRUE, mat2 = rnp, ...)
+    } else {
+        qheat(x$pos.by.prop, ...)  
+    }  
 }

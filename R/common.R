@@ -31,10 +31,7 @@ function(word.list, ...){
     UseMethod("common")
 }
 
-#' @return \code{NULL}
-#'
-#' @rdname common
-#' @method common list
+#' @S3method common list
 common.list <-
 function(word.list, overlap = "all", equal.or = "more", ...){
     if(overlap=="all") {
@@ -55,13 +52,10 @@ function(word.list, overlap = "all", equal.or = "more", ...){
     return(DF)
 }
 
-#' @return \code{NULL}
-#'
-#' @rdname common
-#' @method common default
+
 #' @S3method common default  
 common.default <-
-    function(..., overlap = "all", equal.or = "more"){
+    function(...,  word.list){
         LIS <- list(...)
         return(common.list(LIS, overlap, equal.or))
 }

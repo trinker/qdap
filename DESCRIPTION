@@ -84,7 +84,6 @@ Collate:
     'common.R'
     'convert.R'
     'delete.R'
-    'DF_word_stats.R'
     'dissimilarity.R'
     'distTab.R'
     'diversity.R'
@@ -178,3 +177,4 @@ Collate:
     'words.R'
     'xnoy.R'
     'raw_pro_comb.R'
+    'numfor.R'

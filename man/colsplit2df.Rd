@@ -47,6 +47,9 @@
   less flexible than \code{colsplit2df} but operates on
   multiple dataframes at once.
 }
+\section{Warning}{
+  This wil strip the class of the qdap object.
+}
 \examples{
 \dontrun{
 CO2$`Plant&Type&Treatment` <- paste2(CO2[, 1:3])

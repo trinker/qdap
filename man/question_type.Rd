@@ -4,7 +4,7 @@
 \usage{
   question_type(text.var, grouping.var = NULL,
     neg.cont = FALSE, percent = TRUE, zero.replace = 0,
-    prop.by.row = TRUE, ...)
+    digits = 2)
 }
 \arguments{
   \item{text.var}{The text variable}
@@ -23,11 +23,8 @@
 
   \item{zero.replace}{Value to replace 0 values with.}
 
-  \item{prop.by.row}{logical.  If TRUE applies proportional
-  to the row.  If FALSE applies by column.}
-
-  \item{\ldots}{Other arguments passed to
-  \code{\link[qdap]{prop}}.}
+  \item{digits}{Integer; number of decimal places to round
+  in the display of the output.}
 }
 \value{
   Returns a list of: \item{raw}{A dataframe of the
@@ -36,7 +33,10 @@
   (\code{tot.quest}) and counts of question types (initial
   interrogative word) by grouping variable(s).}
   \item{missing}{The row numbers of the missing data
-  (excluded from analysis).}
+  (excluded from analysis).} \item{percent}{The value of
+  percent used for plotting purposes.}
+  \item{zero.replace}{The value of zero.replace used for
+  plotting purposes.}
 }
 \description{
   Transcript apply question counts.

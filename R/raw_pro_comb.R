@@ -1,4 +1,4 @@
-##Currently not exported but for internal use
+##Currently exported but for internal use and not documented
 # Combine Raw and Proportional Matrices
 # 
 # Combines raw matrices with proportional for better interpretation of 
@@ -28,22 +28,23 @@
 # raw_pro_comb(mtcars, percent = FALSE, zero.replace = "-")
 # }
 raw_pro_comb <- function(raw, pro = NULL, digits = 2, percent = TRUE, 
-    zero.replace = 0, ...) {
+    zero.replace = 0, override = FALSE, ...) {
     if (is.null(pro)) {
         pro <- prop(raw, digits = digits, by.column = FALSE, percent = percent, 
             ...)
     }
-    numformat <- function(val, digits) { 
-        sub("^(-?)0.", "\\1.", sprintf(paste0("%.", digits, "f"), val)) 
-    }
-    paster <- function(x, digs, symbol = symb) {
-        x <- ifelse(x == 0, "0", numformat(x, digits = digs))
-        paste0("(", x, symbol, ")")
-    }
     s.ymb <- ifelse(percent, "%", "")
-    charp <- apply(pro, 2, paster, dig = digits, symb = s.ymb)
-    out <- lapply(1:ncol(raw), function(i) paste0(raw[, i], charp[, i])) 
-    rnp <- data.frame(do.call(cbind, out), stringsAsFactors = FALSE)
+    charp <- apply(pro, 2, paster, digits = digits, symbol = s.ymb, 
+        override = override)
+    if (nrow(pro) == 1) {
+        out <- paste0(raw, charp)
+        rnp <- data.frame(matrix(out, nrow = 1), stringsAsFactors = FALSE, 
+            check.names = FALSE)
+    } else {
+        out <- lapply(1:ncol(raw), function(i) paste0(raw[, i], charp[, i])) 
+        rnp <- data.frame(do.call(cbind, out), stringsAsFactors = FALSE,
+            check.names = FALSE)
+    }
     colnames(rnp) <- colnames(raw)
     if (percent) {
         replacer(rnp, "0(0%)", zero.replace)
