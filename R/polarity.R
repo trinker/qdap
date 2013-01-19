@@ -14,7 +14,7 @@
 #' intensity of a psoitive or negatibve word.
 #' @param rm.incomplete logical.  If TRUE text rows ending with qdap's 
 #' incomplete sentence endmark (\code{|}) will be removed from the analysis.
-#' @param digits Integer; number of decimal places to round.
+#' @param digits Integer; number of decimal places to round when printing. 
 #' @param \ldots Other arguments supplied to \code{endf}.
 #' @return Returns a list of two dataframes:
 #' \item{all}{A dataframe of scores per row with:
@@ -150,8 +150,7 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
         x$neg.matchesNEG)
     x$amplification.adj.raw <- mapply(add, x$negation.adj.raw, 
         AMPneg, AMPpos)
-    x$polarity <- round(x$amplification.adj.raw/wc(x$words), 
-        digits = 3)
+    x$polarity <- x$amplification.adj.raw/wc(x$words)
     x <- x[, c("text.var", "wc", "polarity", "raw", "negation.adj.raw", 
         "amplification.adj.raw", "pos.words", "neg.words")]
     if (any(is.na(unlist(x)))) {
@@ -205,15 +204,15 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
     DF2 <- aggregate(wc ~ group, DF, sum)
     z <- na.instruct(DF, DF$group)
     DF2$total.sentences <- as.data.frame(table(na.omit(DF)$group))$Freq[z]
-    DF2$ave.polarity <- round(aggregate(polarity ~ group, DF, 
-        mean)$polarity, digits = digits)
+    DF2$ave.polarity <- aggregate(polarity ~ group, DF, 
+        mean)$polarity
     names(DF2)[names(DF2) == "wc"] <- "total.words"
     names(DF2)[1] <- NAME
     DF2 <- DF2[order(-DF2$ave.polarity), ]
     rownames(DF2) <- 1:nrow(DF2)
     DF2 <- DF2[, c(1, 3, 2, 4)]
     o <- list(all = x, group = DF2, POLARITY_FOR_ALL_SENTENCES = x, 
-        POLARITY_BY_GROUP = DF2)
+        POLARITY_BY_GROUP = DF2, digits = digits)
     class(o) <- "polarity"
     return(o)
 }
@@ -229,7 +228,12 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
 print.polarity <-
 function(x, ...) {
     cat("POLARITY BY GROUP\n=================\n")
-    print(x$group)
+    WD <- options()[["width"]]
+    options(width=3000)
+    y <- x$group
+    y[, "ave.polarity"] <- round(y[, "ave.polarity"], digits = x$digits)
+    print(y)
+    options(width=WD)
 }
 
 #' Plots a polarity Object
@@ -260,7 +264,7 @@ function(x, ...) {
 #' @S3method plot polarity
 plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99", 
     high = "blue", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
-    point.size = 2.5,  jitter = .1, nrow = 1, ...){
+    point.size = 2.5,  jitter = .1, nrow = NULL, ...){
     dat <- x[["group"]]
     dat2 <- x[["all"]]
     G <- names(dat)[1]

@@ -5,7 +5,7 @@
   \method{plot}{polarity} (x, bar.size = 5, low = "red",
     mid = "grey99", high = "blue",
     ave.polarity.shape = "+", alpha = 1/4, shape = 19,
-    point.size = 2.5, jitter = 0.1, nrow = 1, ...)
+    point.size = 2.5, jitter = 0.1, nrow = NULL, ...)
 }
 \arguments{
   \item{x}{The polarity object.}

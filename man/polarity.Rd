@@ -34,8 +34,8 @@
   with qdap's incomplete sentence endmark (\code{|}) will
   be removed from the analysis.}
 
-  \item{digits}{Integer; number of decimal places to
-  round.}
+  \item{digits}{Integer; number of decimal places to round
+  when printing.}
 
   \item{\ldots}{Other arguments supplied to \code{endf}.}
 }
