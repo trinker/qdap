@@ -49,35 +49,30 @@
 #' }
 diversity <-
 function (text.var, grouping.var=NULL, digits = 3){
-    NAME <- if (is.null(grouping.var)) {
-        "all"
+ if(is.null(grouping.var)) {
+        G <- "all"
     } else {
         if (is.list(grouping.var)) {
             m <- unlist(as.character(substitute(grouping.var))[-1])
-            m <- sapply(strsplit(m, "$", fixed = TRUE), 
-                function(x) x[length(x)])
-            paste(m, collapse = "&")
-        } else {
-            G <- as.character(substitute(grouping.var))
-            G[length(G)]
-        }
-    }
-    grouping <- if(is.null(grouping.var)){
-        rep("all", length(text.var))
-    } else {
-        if (is.list(grouping.var) & length(grouping.var)>1) {
-            apply(data.frame(grouping.var), 1, function(x){
-                if (any(is.na(x))){
-                        NA
-                    } else {
-                        paste(x, collapse = ".")
-                    }
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
                 }
             )
+            G <- paste(m, collapse="&")
         } else {
-            unlist(grouping.var)
-        } 
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
     }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    } 
     DF <- na.omit(data.frame(group = grouping,
         text.var = as.character(text.var), stringsAsFactors = FALSE))
     shannon <- function(num.var, digits = 3){
@@ -124,7 +119,7 @@ function (text.var, grouping.var=NULL, digits = 3){
     o <- data.frame(rownames(v), v)
     o <- o[order(o[, 1]), ]
     rownames(o) <- NULL
-    colnames(o)[1] <- NAME
+    colnames(o)[1] <- G
     class(o) <- "diversity"
     return(o)
 }
