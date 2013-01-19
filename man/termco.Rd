@@ -1,19 +1,19 @@
-\name{termco.a}
+\name{termco}
 \alias{term.match}
-\alias{termco.a}
+\alias{termco}
 \alias{termco.d}
 \alias{termco2mat}
 \title{Search For and Count Terms}
 \usage{
-  termco.a(text.var, grouping.var = NULL, match.list,
+  termco(text.var, grouping.var = NULL, match.list,
     short.term = TRUE, ignore.case = TRUE, elim.old = TRUE,
-    output = "percent", digits = 2,
-    apostrophe.remove = FALSE, char.keep = NULL,
-    digit.remove = NULL, ...)
+    percent = TRUE, digits = 2, apostrophe.remove = FALSE,
+    char.keep = NULL, digit.remove = NULL,
+    zero.replace = 0, ...)
 
   termco.d(text.var, grouping.var = NULL, match.string,
     short.term = FALSE, ignore.case = TRUE,
-    zero.replace = 0, output = "percent", digits = 2,
+    zero.replace = 0, percent = TRUE, digits = 2,
     apostrophe.remove = FALSE, char.keep = NULL,
     digit.remove = TRUE, ...)
 
@@ -43,13 +43,11 @@
   \item{elim.old}{logical.  If TRUE eliminates the columns
   that are combined together by the named match.list.}
 
-  \item{output}{Type of proportion output; either
-  \code{"proportion"} (decimal format) or \code{"percent"}.
-  Default is \code{"percent"}.}
+  \item{percent}{logical.  If TRUE output given as percent.
+  If FALSE the output is proption.}
 
-  \item{digits}{integer indicating the number of decimal
-  places (round) or significant digits (signif) to be used.
-  Negative values are allowed.}
+  \item{digits}{Integer; number of decimal places to round
+  when printing.}
 
   \item{apostrophe.remove}{logical.  If TRUE removes
   apostrophes from the text before examining.}
@@ -61,6 +59,8 @@
   \item{digit.remove}{logical.  If TRUE strips digits from
   the text.}
 
+  \item{zero.replace}{Value to replace 0 values with.}
+
   \item{\ldots}{Other argument supplied to strip.}
 
   \item{match.string}{A vector of terms to search for.
@@ -68,8 +68,6 @@
   be words or partial words but do not have to be when
   using \code{termco.d} (i.e. they can be phrases, symbols
   etc.).}
-
-  \item{zero.replace}{Value to replace 0 values with.}
 
   \item{terms}{The terms to serach for in the
   \code{text.var}.  Similar to \code{match.list} but these
@@ -80,7 +78,7 @@
   for multiple terms as a list by term rather than a
   vector.}
 
-  \item{dataframe}{A termco.a (or termco.d) dataframe or
+  \item{dataframe}{A termco (or termco.d) dataframe or
   object.}
 
   \item{drop.wc}{logical.  If TRUE the word count column
@@ -100,8 +98,8 @@
   spacing when using in other R functions.}
 }
 \value{
-  \code{termco.a} & \code{termco.d} - both return a list,
-  of class "termco.d", of data frames and information
+  \code{termco} & \code{termco.d} - both return a list, of
+  class "termco.d", of data frames and information
   regarding word counts: \item{raw}{raw word counts by
   grouping variable} \item{prop}{proportional word counts
   by grouping variable; proportional to each individual's
@@ -119,11 +117,11 @@
   \code{termco2mat} - returns a matrix of term counts.
 }
 \description{
-  \code{termco.a} - Search a transcript by any number of
+  \code{termco} - Search a transcript by any number of
   grouping variables for categories (themes) of grouped
   root terms.  While there are other termco functions in
-  the termco family (i.e. \code{termco.d}) \code{termco.a}
-  is a wrapper for general use.
+  the termco family (i.e. \code{termco.d}) \code{termco} is
+  a wrapper for general use.
 
   \code{termco.d} - Search a transcript by any number of
   grouping variables for root terms.
@@ -148,7 +146,7 @@
 }
 \examples{
 \dontrun{
-#termco.a examples:
+#termco examples:
 
 # General form for match.list
 #
@@ -165,12 +163,12 @@ ml <- list(
     the = c("the", " the ", " the", "the")
 )
 
-(dat <- with(raj.act.1,  termco.a(dialogue, person, ml)))
+(dat <- with(raj.act.1,  termco(dialogue, person, ml)))
 names(dat)
 dat$rnp  #useful for presenting in tables
 dat$raw  #prop and raw are useful for performing calculations
 dat$prop
-dat <- with(raj.act.1,  termco.a(dialogue, person, ml,
+dat <- with(raj.act.1,  termco(dialogue, person, ml,
     short.term = FALSE, elim.old=FALSE))
 
 dat2 <- data.frame(dialogue=c("@bryan is bryan good @br",
@@ -178,27 +176,27 @@ dat2 <- data.frame(dialogue=c("@bryan is bryan good @br",
 
 ml <- list(wrds=c("bryan", "indeed"), bryan=c("bryan", "@ br", "@br"))
 
-with(dat2, termco.a(dialogue, person, match.list=ml, char.keep="@"))
+with(dat2, termco(dialogue, person, match.list=ml))
 
-with(dat2, termco.a(dialogue, person, match.list=ml,
-    char.keep="@", output="proportion"))
+with(dat2, termco(dialogue, person, match.list=ml, percent = FALSE))
 
 DATA$state[1] <- "12 4 rgfr  r0ffrg0"
-termco.a(DATA$state, DATA$person, '0', digit.remove=FALSE)
+termco(DATA$state, DATA$person, '0', digit.remove=FALSE)
 DATA <- qdap::DATA
 
 #Using with term.match and exclude
 exclude(term.match(DATA$state, qcv(th), FALSE), "truth")
-termco.a(DATA$state, DATA$person, exclude(term.match(DATA$state, qcv(th),
+termco(DATA$state, DATA$person, exclude(term.match(DATA$state, qcv(th),
     FALSE), "truth"))
 MTCH.LST <- exclude(term.match(DATA$state, qcv(th, i)), qcv(truth, stinks))
-termco.a(DATA$state, DATA$person, MTCH.LST)
+termco(DATA$state, DATA$person, MTCH.LST)
 
-syns <- synonyms("doubt", FALSE)
+syns <- synonyms("doubt")
 syns[1]
-termco.a(DATA$state, DATA$person, unlist(syns[1]))
+termco(DATA$state, DATA$person, unlist(syns[1]))
 synonyms("doubt", FALSE)
-termco.a(DATA$state, DATA$person, list(doubt = synonyms("doubt", FALSE)))
+termco(DATA$state, DATA$person, list(doubt = synonyms("doubt", FALSE)))
+termco(DATA$state, DATA$person, syns)
 
 #termco.d examples:
 term.match(DATA$state, qcv(i, the))
@@ -208,9 +206,12 @@ termco.d(DATA$state, DATA$person, c(" the ", " i'"))
 
 # termco2mat example:
 MTCH.LST <- exclude(term.match(DATA$state, qcv(a, i)), qcv(is, it, am, shall))
-termco_obj <- termco.a(DATA$state, DATA$person, MTCH.LST)
+termco_obj <- termco(DATA$state, DATA$person, MTCH.LST)
 termco2mat(termco_obj)
-plot(terco_obj)
+plot(termco_obj)
+plot(termco_obj, label = TRUE)
+plot(termco_obj, label = TRUE, text.color = "red")
+plot(termco_obj, label = TRUE, text.color="red", lab.digits=3)
 }
 }
 \seealso{

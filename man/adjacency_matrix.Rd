@@ -9,8 +9,8 @@
 }
 \arguments{
   \item{matrix.obj}{A matrix object, preferably, of the
-  class "termco_d" or "termco_c" generated from
-  \code{terco.a}, \code{termco.d} or \code{termco.c}.}
+  class "termco" or generated from \code{termco},
+  \code{termco.d} or \code{termco.c}.}
 }
 \value{
   Generates an adjacency matrix
@@ -22,7 +22,7 @@
 \examples{
 \dontrun{
 wordLIST <- c(" montague", " capulet", " court", " marry")
-(raj.termco <- with(raj.act.1, termco.a(dialogue, person,
+(raj.termco <- with(raj.act.1, termco(dialogue, person,
     wordLIST, ignore.case = T)))
 (raj.adjmat <- adjmat(raj.termco))
 names(raj.adjmat)  #see what's available from the adjacency_matrix object

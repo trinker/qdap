@@ -11,13 +11,12 @@
 #' @param short.term logical.  If TRUE column names are trimmed versions of the 
 #' match list, other wise the terms are wrapped with 'term(phrase)'
 #' @param zero.replace Value to replace zeros with.
-#' @param lazy.term logical.  If TRUE is approximate amtching (generally for 
-#' internal use).
 #' @param elim.old logical.  If TRUE eliminates the columns that are combined 
 #' together by the named match.list.
-#' @param output Type of proportion output; either \code{"proportion"} (decimal 
-#' format) or \code{"percent"}.  Default is \code{"percent"}.
-#' @return Returns a return a list, of class "termco.c", of data frames and 
+#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
+#' output is proption.
+#' @param digits Integer; number of decimal places to round when printing.   
+#' @return Returns a return a list, of class \code{"termco"}, of data frames and 
 #' information regarding word counts:
 #' \item{raw}{raw word counts by grouping variable} 
 #' \item{prop}{proportional word counts by grouping variable; proportional to 
@@ -28,138 +27,53 @@
 #' "percent"; mostly internal use}  
 #' \item{digits}{integer value od number of digits to display; mostly internal 
 #' use}  
-#' @seealso \code{\link[qdap]{termco.a}}
+#' @seealso \code{\link[qdap]{termco}}
 #' @export
 termco.c <-
-function(termco.object, combined.columns, new.name, short.term = FALSE,
-         zero.replace = NULL, lazy.term = TRUE, elim.old = TRUE, 
-         output = "percent") { 
-  if (!class(termco.object) %in% c("termco")) {
-    stop("termco.object must be a termco object")
-  }
-  subdf <- function(df, ii) {
-    do.call("data.frame", c(as.list(df)[ii, drop=FALSE], check.names=FALSE))
-  }
-  x <- termco.object$raw
-  if (termco.object$zero_replace != 0){
-    x <- replacer(x, termco.object$zero_replace, 0)
-    x <- data.frame(x[, 1, drop =FALSE], 
-      sapply(x[, -1, drop =FALSE], function(x) 
-        as.numeric(as.character((x)))),
-        check.names = FALSE)
-  }
-  if (is.null(zero.replace)) {
-    zero.replace <- termco.object$zero_replace
-  }
-  xcheck <- names(x)
-  y <- termco.object$prop
-  if (!is.numeric(unlist(combined.columns))) {
-    cc <- function(X, Y) {
-      ZZ <- which(names(Y) %in% X)
-      ZZ[!ZZ %in% which(duplicated(names(Y)))]
+function(termco.object, combined.columns, new.name, short.term = TRUE,
+    zero.replace = NULL, elim.old = TRUE, percent = NULL, digits = 2) { 
+    if (!class(termco.object) %in% c("termco")) {
+        stop("termco.object must be a termco object")
     }
-    paster <- function(x) {
-      paste0("term(", x, ")")
+    subdf <- function(df, ii) {
+        do.call("data.frame", c(as.list(df)[ii, drop=FALSE], check.names=FALSE))
     }
-    if (lazy.term) {
-      if (!is.list(combined.columns)){
-        if (substring(combined.columns[[1]][1], 1, 5)!= "term(") {
-          combined.columns <- paster(combined.columns, x)
-        }
-      } else {
-        if(substring(combined.columns[[1]][1], 1, 5)!= "term(") {
-          combined.columns <- lapply(combined.columns, paster) 
-        }
-      }
+    if (is.null(percent))  {
+        percent <- termco.object[["percent"]]
     }
-    if (!is.list(combined.columns)){
-      combined.columns2 <- cc(combined.columns, x)
-    } else {
-      combined.columns2 <- lapply(combined.columns, function(x2) 
-        cc(X=x2, Y=x)) 
+    if (is.null(zero.replace)) {
+        zero.replace <- termco.object$zero_replace
     }
-  } else {
-    combined.columns2 <- combined.columns
-    cc <- function(X, Y) names(Y)[X]
-    if (!is.list(combined.columns)) {
-      combined.columns <- cc(combined.columns, x)            
-    } else {
-      combined.columns <- lapply(combined.columns, function(x2) 
-        cc(X=x2, x)) 
+    if (is.null(digits)) {
+        digits <- termco.object$digits
     }
-  }
-  if (is.list(combined.columns)){
-    trx <- function(i) { 
-      x <- transform(x, new.name2 = rowSums(x[, combined.columns[[i]]]), 
-        check.names=FALSE)
-      names(x)[ncol(x)] <- new.name[i]
-      return(x)
+    x <- termco.object$raw
+    nms <- gsub("term(", "", colnames(x), fixed = TRUE)
+    lens <- sapply(nms[-c(1:2)], nchar)
+    nms[-c(1:2)] <- substring(nms[-c(1:2)], 1, lens - 1)
+    colnames(x) <- nms 
+    x2 <- qcombine(x, combined.columns = combined.columns, elim.old = elim.old)
+    y2 <- x2[, -c(1:2), drop = FALSE]/x[, 2]
+    if (percent){
+        y2 <- y2*100
     }
-    invisible(lapply(seq_along(combined.columns), function(inp) {
-        x <<- trx(inp)
-      }
-    )) 
-  } else {
-    x <- transform(x, new.name = rowSums(x[, combined.columns]), 
-                   check.names=FALSE)
-    names(x) [length(x)] <- new.name
-  } 
-  if (elim.old) {
-    NMS <- colnames(x)[!seq_along(x) %in% unlist(combined.columns2)]
-    x <- x[, seq_along(x)[!seq_along(x) %in% unlist(combined.columns2)]]
-    colnames(x)<- NMS
-  } 
-  x2 <- replacer(x, with = zero.replace)
-  y2 <- termco.p(x, output = termco.object$output, 
-    digits=termco.object$digits)
-  if (any(new.name %in% xcheck) & elim.old){
-    names(x2)[(ncol(x2) - length(new.name) + 1):ncol(x2)] <- new.name
-    names(y2)[(ncol(y2) - length(new.name) + 1):ncol(y2)] <- new.name
-  } else {
-    if (any(new.name %in% xcheck) & !elim.old){
-      new.name <- paste0(new.name, ".2")
-      names(x2)[(ncol(x2) - length(new.name) + 1):ncol(x2)] <- new.name
-      names(y2)[(ncol(y2) - length(new.name) + 1):ncol(y2)] <- new.name
+    y2 <- data.frame(x2[, 1:2], y2, check.names = FALSE)
+    rnp <- raw_pro_comb(x2[, -c(1:2), drop = FALSE], 
+        y2[, -c(1:2), drop = FALSE], digits = digits, 
+        percent = percent, zero.replace = zero.replace)  
+    rnp <- data.frame(x2[, 1:2], rnp, check.names = FALSE) 
+    o <- list(raw = x2, prop = y2, rnp = rnp, zero.replace = zero.replace,
+        percent = percent, digits = termco.object$digits)
+    if (!short.term) {
+        nms <- colnames(o[["raw"]])
+        nms[-c(1:2)] <- paste0("term(", nms[-c(1:2)], ")")
+        o[1:3] <- lapply(o[1:3], function(x){
+            colnames(x) <- nms
+            x
+        })
     }
-  }
-  if (is.numeric(zero.replace)){
-    if (nrow(x2) > 1) {
-      p <- data.frame(sapply(subdf(x2, -1), function(x) 
-        as.numeric(as.character(x))), check.names=FALSE)
-      x2 <- data.frame(x2[, 1, drop=FALSE], p, check.names=FALSE)
-    } else {
-
-      p <- sapply(subdf(x2, -1), function(x) as.numeric(as.character(x)))
-      x2 <- data.frame(c(x2[, 1, drop=FALSE], p), check.names=FALSE)
-
-    }
-    if (nrow(y2) > 1) {
-      p <- data.frame(sapply(subdf(y2, -1), function(x) 
-        as.numeric(as.character(x))), check.names=FALSE)
-      y2 <- data.frame(y2[, 1, drop=FALSE], p, check.names=FALSE)
-    } else {
-
-      p <- sapply(subdf(y2, -1), function(x) as.numeric(as.character(x)))
-      y2 <- data.frame(c(y2[, 1, drop=FALSE], p), check.names=FALSE)
-
-    }
-  } 
-  trnp <- termco.rnp(x, y2, output = output, digits = termco.object$digits)
-  if (!is.numeric(zero.replace)) {
-    y2 <- y
-  }
-  if (nrow(trnp) < 2) {
-    DF <- trnp
-  } else {
-    DF <- data.frame(sapply(trnp, Trim), check.names=FALSE)
-  }
-  DF <- replacer(DF, "0(0)", with = zero.replace)
-  DF <- replacer(DF, "0(0.00)", with = zero.replace)
-  o <- list(raw = x2, prop = y2, rnp = DF, zero_replace = zero.replace,
-    output = termco.object$output, digits = termco.object$digits)
-  class(o) <- "termco"
-  if (short.term) {
-    o <- termco2short.term(o)
-  }
-  return(o)
+    class(o) <- "termco"
+    return(o)
 }
+
+

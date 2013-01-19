@@ -24,12 +24,12 @@ exclude(Top25Words, "the", "of", "an")
 exclude(1:10, 3, 4)
 exclude(1:10, 3:4)
 
-#Using with term.match and termco.a
+#Using with term.match and termco
 exclude(term.match(DATA$state, qcv(th), FALSE), "truth")
-termco.a(DATA$state, DATA$person, exclude(term.match(DATA$state, qcv(th),
+termco(DATA$state, DATA$person, exclude(term.match(DATA$state, qcv(th),
     FALSE), "truth"))
 MTCH.LST <- exclude(term.match(DATA$state, qcv(th, i)), qcv(truth, stinks))
-termco.a(DATA$state, DATA$person, MTCH.LST)
+termco(DATA$state, DATA$person, MTCH.LST)
 }
 }
 

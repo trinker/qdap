@@ -32,7 +32,7 @@ speakerSplit <- function(dataframe, person.var = 1,
     if (!is.numeric(person.var)) {
         person.var <- which(colnames(dataframe) %in% person.var)
     } 
-    locs <- which(rowSums(termco.a(dataframe[, person.var], 
+    locs <- which(rowSums(termco(dataframe[, person.var], 
         seq_along(dataframe[, person.var]), sep, 
         char.keep =sep)[[1]][, -c(1:2)]) > 0)
     ps <- ifelse(gsub("[[:punct:]]", "", sep) == "", "\\", "")

@@ -92,7 +92,7 @@ question_type <- function(text.var, grouping.var = NULL,
           "  Suggested use of sentSplit function."))
     }
     DF[, "end.mark"] <- substring(DF[, "text.var"], nchar(DF[, "text.var"]))
-    DF[, "stext.var"] <- spaste(strip(DF[, "text.var"]))
+    DF[, "stext.var"] <- spaste(strip(gsub("'s ", " ", DF[, "text.var"])))
     if (sum(DF$end.mark == "?", na.rm = TRUE) == 0) stop("No questions found") 
     rows.removed <- which(is.na(DF$end.mark))
     DF <- DF[!is.na(DF$end.mark), ]
@@ -107,15 +107,17 @@ question_type <- function(text.var, grouping.var = NULL,
             "wouldnt", "would", "shall", "may", "might", "must", "cant",  "can", 
             "hasnt", "has", "havent", "have", "hadnt", "had")
     y <- paste0(" XXXXX", sprintf("%02d", seq_along(x)), " ")
-    key <- data.frame(x = spaste(x), y = spaste(y), stringsAsFactors = FALSE)  
+    key <- data.frame(x = spaste(x), y = y, stringsAsFactors = FALSE)  
     L1 <- lapply(L1, function(x){
         z <- x[, "stext.var"]
         y <- nchar(z)
-        a1 <- (y-3) == sapply(gregexpr("okay", z), "[", 1) 
-        a2 <- (y-1) == sapply(gregexpr("ok", z), "[", 1)
-        x[, "ok"] <- a1 + a2   
-        x[, "right"] <- (y-4) == sapply(gregexpr("right", z), "[", 1)
-        x[, "correct"] <- (y-6) == sapply(gregexpr("correct", z), "[", 1)
+        a1 <- (y-4) == sapply(gregexpr("okay", z), "[", 1) 
+        a2 <- (y-2) == sapply(gregexpr("ok", z), "[", 1)
+        x[, "ok"] <- a1 + a2  
+        x[, "alright"] <- (y-7) == sapply(gregexpr("alright", z), "[", 1)
+        x[, " right"] <- (y-6) == sapply(gregexpr("right", z), "[", 1)
+        x[, "correct"] <- (y-7) == sapply(gregexpr("correct", z), "[", 1)
+        x[, "huh"] <- (y-3) == sapply(gregexpr("huh", z), "[", 1)
         x
     })
     L2 <- invisible(lapply(L1, function(x) {
@@ -130,21 +132,31 @@ question_type <- function(text.var, grouping.var = NULL,
     L2 <- lapply(seq_along(L2), function(i) {
          unels <- L2[[i]] == "unknown"
          L2[[i]][unels & L1[[i]][, "ok"]] <- "ok"
-         L2[[i]][unels & L1[[i]][, "right"]] <- "right"
+         L2[[i]][unels & L1[[i]][, "alright"]] <- "alright"
+         L2[[i]][unels & L1[[i]][, " right"]] <- "right"
          L2[[i]][unels & L1[[i]][, "correct"]] <- "correct"
+         L2[[i]][unels & L1[[i]][, "huh"]] <- "huh"
          L2[[i]]
     })
-    DF3 <- data.frame(DF, q.type = unlist(L2))
-    names(DF3) <- c(G, "raw.text", "endmark", "strip.text", "q.type")
+    DF3a <- data.frame(ords = unlist(lapply(L1, "[", "orig.row.num")), 
+        q.type = unlist(L2))
+    DF3 <- data.frame(DF, q.type = DF3a[order(DF3a[, "ords"]), 2])
+    names(DF3) <- c(G, "raw.text", "n.row", "endmark", "strip.text", "q.type")
     WFM <- t(wfm(unlist(L2), rep(names(L1), sapply(L2, length))))
-    cols <- c(key[, "x"], "ok", "right", "correct", "unknown")
+    cols <- c(key[, "x"], "ok", "alright", "right", "correct", "huh", "unknown")
     cols2 <- cols[cols %in% colnames(WFM)]
     WFM <- WFM[, cols2]
-    grvar <- levels(DF[, "grouping"])
-    grvarNA <- grvar[!grvar %in% rownames(WFM)]
-    mat <- matrix(rep(0, length(grvarNA)*ncol(WFM)), ncol = ncol(WFM))     
-    dimnames(mat) <- list(grvarNA, colnames(WFM))
-    DF <- data.frame(rbind(WFM, mat))  
+    if (all(grouping %in% "all")) {
+        DF <- as.data.frame(matrix(WFM, nrow = 1))
+        colnames(DF) <- names(WFM)
+        rownames(DF) <- "all"          
+    } else {
+        grvar <- levels(DF[, "grouping"])
+        grvarNA <- grvar[!grvar %in% rownames(WFM)]
+        mat <- matrix(rep(0, length(grvarNA)*ncol(WFM)), ncol = ncol(WFM))   
+        dimnames(mat) <- list(grvarNA, colnames(WFM))
+        DF <- data.frame(rbind(WFM, mat))  
+    }
     tq <- rowSums(DF)
     comdcol <- list(  
         were = c("weren't", "were"), 
@@ -170,7 +182,8 @@ question_type <- function(text.var, grouping.var = NULL,
             "shall", "may", "might", "must", "can", "has", "have", "had")  
         comdcol <- lapply(comdcol, function(x) gsub("'", "", x)) 
         DF <- qcombine(DF, comdcol)
-        ord <- c(ord[ord %in% colnames(DF)], "ok", "right", "correct", "unknown")
+        ord <- c(ord[ord %in% colnames(DF)], "ok", "alright", "right", 
+            "correct", "huh", "unknown")
         DF <- DF[, ord[ord %in% colnames(DF)]] 
     }
     DF <- data.frame(group=rownames(DF), tot.quest = tq, DF, row.names = NULL, 
@@ -203,8 +216,8 @@ question_type <- function(text.var, grouping.var = NULL,
 #' 
 #' @param x The question_type object
 #' @param \ldots ignored
-#' @method print question_type
 #' @S3method print question_type
+#' @method print question_type
 print.question_type <-
 function(x, ...) {
     WD <- options()[["width"]]
@@ -212,6 +225,7 @@ function(x, ...) {
     print(x$rnp)
     options(width=WD)
 }
+
 #' Plots a question_type Object
 #' 
 #' Plots a question_type object.
@@ -228,7 +242,7 @@ function(x, ...) {
 #' from \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot question_type
-#' @S3method plot question_type
+#' @export
 plot.question_type <- function(x, label = FALSE, lab.digits = 1, percent = NULL, 
     zero.replace = NULL, ...) {
     if (label) {
@@ -248,8 +262,9 @@ plot.question_type <- function(x, label = FALSE, lab.digits = 1, percent = NULL,
         if (is.null(zero.replace)) {
             zero.replace <- x$zero.replace
         }
-        rnp <- raw_pro_comb(x$count[, -c(1:2)], x$prop[, -c(1:2)], 
-            digits = lab.digits, percent = percent, zero.replace = zero.replace)  
+        rnp <- raw_pro_comb(x$count[, -c(1:2), drop = FALSE], 
+            x$prop[, -c(1:2), drop = FALSE], digits = lab.digits, 
+            percent = percent, zero.replace = zero.replace)  
         rnp <- data.frame(x$count[, 1:2], rnp, check.names = FALSE) 
         qheat(x$prop, values=TRUE, mat2 = rnp, ...)
     } else {
