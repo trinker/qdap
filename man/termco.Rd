@@ -53,11 +53,16 @@
   apostrophes from the text before examining.}
 
   \item{char.keep}{A character vector of symbol character
-  (i.e. punctioation) that strip should keep.  The default
-  is to strip everything except apostophes.}
+  (i.e. punctuation) that strip should keep.  The default
+  is to strip everything except apostophes.
+  \code{\link[qdap]{termco}} attempts to auto detect
+  characters to keep based on the elements in
+  \code{match.list}.}
 
   \item{digit.remove}{logical.  If TRUE strips digits from
-  the text.}
+  the text before counting. \code{\link[qdap]{termco}}
+  attempts to auto detect if digits should be retained
+  based on the elements in \code{match.list}.}
 
   \item{zero.replace}{Value to replace 0 values with.}
 
@@ -108,7 +113,7 @@
   replace zeros with; mostly internal use}
   \item{output}{character value for outpur type (either"
   "proportion" or "percent"; mostly internal use}
-  \item{digits}{integer value od number of digits to
+  \item{digits}{integer value of number of digits to
   display; mostly internal use}
 
   \code{term.match} - returns a list or vector of possible
@@ -144,6 +149,13 @@
   arguments (i.e. numbers and symbols) additional arguments
   from strip must be passed.
 }
+\section{Warning}{
+  Percentages are calulated as a ratio of counts of
+  \code{match.list} elements to word counts.  Word counts
+  do not contain symbols or digits.  Using symbols, digits
+  or small segements of full words (e.g. "to") could total
+  more than 100\%.
+}
 \examples{
 \dontrun{
 #termco examples:
@@ -174,7 +186,7 @@ dat <- with(raj.act.1,  termco(dialogue, person, ml,
 dat2 <- data.frame(dialogue=c("@bryan is bryan good @br",
     "indeed", "@ brian"), person=qcv(A, B, A))
 
-ml <- list(wrds=c("bryan", "indeed"), bryan=c("bryan", "@ br", "@br"))
+ml <- list(wrds=c("bryan", "indeed"), "@", bryan=c("bryan", "@ br", "@br"))
 
 with(dat2, termco(dialogue, person, match.list=ml))
 

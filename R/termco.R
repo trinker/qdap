@@ -20,10 +20,13 @@
 #' @param digits Integer; number of decimal places to round when printing.   
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from the text 
 #' before examining.
-#' @param char.keep A character vector of symbol character (i.e. punctioation) 
+#' @param char.keep A character vector of symbol character (i.e. punctuation) 
 #' that strip should keep.  The default is to strip everything except 
-#' apostophes.  
-#' @param digit.remove logical.  If TRUE strips digits from the text.
+#' apostophes. \code{\link[qdap]{termco}} attempts to auto detect characters to 
+#' keep based on the elements in \code{match.list}. 
+#' @param digit.remove logical.  If TRUE strips digits from the text before 
+#' counting. \code{\link[qdap]{termco}} attempts to auto detect if digits should 
+#' be retained based on the elements in \code{match.list}. 
 #' @param zero.replace Value to replace 0 values with.
 #' @param \ldots Other argument supplied to strip.
 #' @return \code{termco} & \code{termco.d} - both return a list, of class 
@@ -35,8 +38,12 @@
 #' \item{zero_replace}{value to replace zeros with; mostly internal use}   
 #' \item{output}{character value for outpur type (either" "proportion" or 
 #' "percent"; mostly internal use}  
-#' \item{digits}{integer value od number of digits to display; mostly internal 
+#' \item{digits}{integer value of number of digits to display; mostly internal 
 #' use}  
+#' @section Warning: Percentages are calulated as a ratio of counts of 
+#' \code{match.list} elements to word counts.  Word counts do not contain 
+#' symbols or digits.  Using symbols, digits or small segements of full words 
+#' (e.g. "to") could total more than 100\%.
 #' @rdname termco  
 #' @note The match.list/match.string is (optionally) case and character 
 #' sensitive.  Spacing is an important way to grab specific words and requires 
@@ -78,7 +85,7 @@
 #' dat2 <- data.frame(dialogue=c("@@bryan is bryan good @@br", 
 #'     "indeed", "@@ brian"), person=qcv(A, B, A))
 #' 
-#' ml <- list(wrds=c("bryan", "indeed"), bryan=c("bryan", "@@ br", "@@br"))
+#' ml <- list(wrds=c("bryan", "indeed"), "@@", bryan=c("bryan", "@@ br", "@@br"))
 #' 
 #' with(dat2, termco(dialogue, person, match.list=ml))
 #' 
