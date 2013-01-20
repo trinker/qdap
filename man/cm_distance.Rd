@@ -24,7 +24,7 @@
   Defaults to "codes" as out putted by x2long family.}
 
   \item{causal}{logical.  If TRUE measures the distance
-  ebtween x and y given that x must procede y.}
+  between x and y given that x must proceed y.}
 
   \item{start.var}{The name of the start variable column.
   Defaults to "start" as out putted by x2long family.}
@@ -38,7 +38,7 @@
   \item{sd.digits}{The number of digits to be displayed in
   the sd (standard deviation) matrix.}
 
-  \item{stan.digits}{The number of dugits to use in the
+  \item{stan.digits}{The number of digits to use in the
   standardized mean difference matrix.}
 }
 \value{
@@ -54,8 +54,8 @@
   to zero the closer two codes relate.}
 }
 \description{
-  Generate distance measures to assertain a mean distance
-  emasure between codes.
+  Generate distance measures to ascertain a mean distance
+  measure between codes.
 }
 \examples{
 \dontrun{

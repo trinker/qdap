@@ -33,7 +33,7 @@
   variables.  If NULL uses all non code.vars variables.}
 
   \item{rev.code}{logical.  If TRUE reverses the order of
-  code.vars and no.code varaibles.}
+  code.vars and no.code variables.}
 }
 \value{
   Generates a data frame of start and end times for each

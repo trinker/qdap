@@ -6,9 +6,9 @@
     rm.var = "time", overlap = TRUE)
 }
 \arguments{
-  \item{cm.l2d.obj}{An object from cm_long2dummy}
+  \item{cm.l2d.obj}{An object from \code{cm_long2dummy}.}
 
-  \item{combine.code}{A list of named character vertors of
+  \item{combine.code}{A list of named character vectors of
   at least two code column names to combine}
 
   \item{rm.var}{Name of the repeated measures column.

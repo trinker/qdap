@@ -48,7 +48,7 @@
   multiple dataframes at once.
 }
 \section{Warning}{
-  This wil strip the class of the qdap object.
+  This will strip the class of the qdap object.
 }
 \examples{
 \dontrun{

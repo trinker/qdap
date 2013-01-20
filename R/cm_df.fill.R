@@ -24,7 +24,7 @@
 #' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
 #' X <- cm_df.temp(DATA, "state", codes)
 #' 
-#' #recomended structure
+#' #recommended structure
 #' cds1 <- list(
 #'      dc=c(1:3, 5), 
 #'      sf=c(4, 6:9, 11), 
@@ -37,7 +37,7 @@
 #' )
 #' cm_df.fill(X, cds1)
 #' 
-#' #recomended structure
+#' #recommended structure
 #' cds2 <- list(
 #'     sf=c(4, 6:9, 11), 
 #'     dc=c(1:3, 5), 

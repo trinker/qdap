@@ -10,10 +10,10 @@
   \item{missing}{Value to replace empty cells with.}
 }
 \value{
-  Returns a dataframe with blank spaces replaced.
+  Returns a data frame with blank spaces replaced.
 }
 \description{
-  Replaces blank (empty) cells in a dataframe.  generally,
+  Replaces blank (empty) cells in a dataframe.  Generally,
   for internal use.
 }
 \examples{

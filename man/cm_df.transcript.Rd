@@ -6,7 +6,7 @@
     indent = 4, width = 70)
 }
 \arguments{
-  \item{text.var}{text.var The text variable}
+  \item{text.var}{The text variable.}
 
   \item{grouping.var}{The grouping variables.  Default NULL
   generates one word list for all text.  Also takes a
@@ -29,13 +29,13 @@
   a transcript with the numeric word index already.
 }
 \description{
-  Out put a transcript with word number/index above for
-  easy input back into qdap after coding.
+  Output a transcript with word number/index above for easy
+  input back into qdap after coding.
 }
 \note{
   It is recommended that the researcher actually codes on
-  the out put from this file.  If a file already exists
-  cm_df.transcript will append to that file.
+  the output from this file.  If a file already exists
+  \code{cm_df.transcript} will append to that file.
 }
 \examples{
 \dontrun{

@@ -1,22 +1,22 @@
 \name{common.list}
 \alias{common.list}
-\title{list Method for coomon}
+\title{list Method for common}
 \usage{
   \method{common}{list} (word.list, overlap = "all",
     equal.or = "more", ...)
 }
 \arguments{
-  \item{word.list}{A list of names chacter vectors.}
+  \item{word.list}{A list of names character vectors.}
 
   \item{overlap}{Minimum/exact amount of overlap.}
 
   \item{equal.or}{A character vector of c(\code{"equal"},
   \code{"greater"}, \code{"more"}, \code{"less"}).}
 
-  \item{\dots}{In liu of word.list the user may input n
+  \item{\dots}{In lieu of word.list the user may input n
   number of character vectors.}
 }
 \description{
-  list Method for coomon
+  list Method for common
 }
 

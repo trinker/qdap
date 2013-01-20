@@ -6,11 +6,11 @@
     rm.var = NULL)
 }
 \arguments{
-  \item{x2long.obj}{An object from cm_range2long,
-  cm_time2long or cm_df2long}
+  \item{x2long.obj}{An object from \code{cm_range2long},
+  \code{cm_time2long} or \code{cm_df2long}.}
 
   \item{exclude.code.list}{A list of named character
-  vertors of at least two code column names to compare and
+  vectors of at least two code column names to compare and
   exclude.  The last column name is the one that will be
   excluded.}
 
@@ -20,7 +20,7 @@
   Returns a dataframe with n codes excluding the nth code.
 }
 \description{
-  Find the occurences of n codes excluding the nth code.
+  Find the occurrences of n codes excluding the nth code.
   e.g.  You have times/words coded for a teacher and you
   also have times/words coded for happiness.  You can find
   all the happiness times excluding the teacher times or

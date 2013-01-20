@@ -6,12 +6,12 @@
     rm.var = NULL)
 }
 \arguments{
-  \item{x2long.obj}{An object from cm_range2long,
-  cm_time2long or cm_df2long}
+  \item{x2long.obj}{An object from \code{cm_range2long},
+  \code{cm_time2long} or \code{cm_df2long}.}
 
   \item{overlap.code.list}{A list of named character
-  vertors of at least two code column names to aggregate
-  co-occurences.}
+  vectors of at least two code column names to aggregate
+  co-occurrences.}
 
   \item{rm.var}{Name of the repeated measures column.}
 }
@@ -20,11 +20,11 @@
   overlapping codes added.
 }
 \description{
-  Combine co-occurances of codes into a new code.
+  Combine co-occurrences of codes into a new code.
 }
 \note{
   The code column must be named code and your start and end
-  columns must be named "start" and "end".
+  columns must be named \code{"start"} and \code{"end"}.
 }
 \examples{
 \dontrun{

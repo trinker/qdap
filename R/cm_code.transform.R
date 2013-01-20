@@ -1,13 +1,14 @@
 #' Transform Codes
 #' 
-#' Transform co-occurences and/or combinations of codes into a new code(s).
+#' Transform co-occurrences and/or combinations of codes into a new code(s).
 #' 
-#' @param x2long.obj An object from cm_range2long, cm_time2long or cm_df2long
-#' @param overlap.code.list A list of named character vertors of at least two 
+#' @param x2long.obj An object from \code{cm_range2long}, \code{cm_time2long} or 
+#' \code{cm_df2long}.
+#' @param overlap.code.list A list of named character vectors of at least two 
 #' code column names to aggregate co-occurences.
-#' @param combine.code.list A list of named character vertors of at least two 
+#' @param combine.code.list A list of named character vectors of at least two 
 #' code column names to combine
-#' @param exclude.code.list A list of named character vertors of at least two 
+#' @param exclude.code.list A list of named character vectors of at least two 
 #' code column names to compare and exclude.  The last column name is the one 
 #' that will be excluded.
 #' @param rm.var Name of the repeated measures column.  

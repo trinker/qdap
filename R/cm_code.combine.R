@@ -1,9 +1,10 @@
 #' Combine Codes
 #'
-#' Combine all occurences of codes into a new code.
+#' Combine all occurrences of codes into a new code.
 #'
-#' @param x2long.obj An object from cm_range2long, cm_time2long or cm_df2long
-#' @param combine.code.list A list of named character vertors of at least two 
+#' @param x2long.obj An object from \code{cm_range2long}, \code{cm_time2long} or 
+#' \code{cm_df2long}.
+#' @param combine.code.list A list of named character vectors of at least two 
 #' code column names to combine
 #' @param rm.var Name of the repeated measures column. 
 #' @return Returns a dataframe with combined occurrences of supplied overlapping 

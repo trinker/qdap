@@ -87,7 +87,7 @@ function(dataframe, splitcol = 1, new.names = NULL, sep=".",
 #' \code{paste2} column.
 #' @note \code{lcolsplit2df} is a convenience function that is less flexible 
 #' than \code{colsplit2df} but operates on multiple dataframes at once.
-#' @section Warning: This wil strip the class of the qdap object.
+#' @section Warning: This will strip the class of the qdap object.
 #' @return \code{lcolsplit2df} - returns a list of dataframes with the 
 #' \code{paste2} column split into new columns.
 #' @rdname colsplit2df

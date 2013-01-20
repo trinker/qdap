@@ -5,7 +5,7 @@
 \alias{fry}
 \alias{linsear_write}
 \alias{SMOG}
-\title{Readabilitiy Measures}
+\title{Readability Measures}
 \usage{
   automated_readability_index(text.var,
     grouping.var = NULL, rm.incomplete = FALSE, ...)

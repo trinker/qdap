@@ -2,9 +2,10 @@
 #' 
 #' Transform codes with any binary operator combination.
 #' 
-#' @param x2long.obj An object from cm_range2long, cm_time2long or cm_df2long
-#' @param combine.code.list A list of named character vertors of at least two 
-#' code column names to combine
+#' @param x2long.obj An object from \code{cm_range2long}, \code{cm_time2long} or 
+#' \code{cm_df2long}.
+#' @param combine.code.list A list of named character vectors of at least two 
+#' code column names to combine.
 #' @param rm.var Name of the repeated measures column. 
 #' @param overlap logical, integer or character of binary operator + integer.  
 #' If TRUE finds the overlap.  If FALSE finds anywhere any of the codes occur.  
@@ -13,8 +14,8 @@
 #' with quotes.
 #' @return Returns a dataframe with transformed occurrences of supplied 
 #' overlapping codes added.
-#' @note For most jobs cm_code.transform will work.  This adds a bit of 
-#' flexibility in excludsion and partial matching.  The code column must be 
+#' @note For most jobs \code{cm_code.transform} will work.  This adds a bit of 
+#' flexibility in exclusion and partial matching.  The code column must be 
 #' named code and your start and end columns must be named \code{"start"} and 
 #' \code{"end"}.
 #' @seealso \code{\link[qdap]{cm_range2long}},

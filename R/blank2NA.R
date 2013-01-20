@@ -1,10 +1,10 @@
 #' Replace Blanks in Data Frame
 #' 
-#' Replaces blank (empty) cells in a dataframe.  generally, for internal use.
+#' Replaces blank (empty) cells in a dataframe.  Generally, for internal use.
 #' 
 #' @param dataframe A dataframe with blank (empty) cells.
 #' @param missing Value to replace empty cells with.
-#' @return Returns a dataframe with blank spaces replaced.
+#' @return Returns a data frame with blank spaces replaced.
 #' @seealso \code{\link[qdap]{rm_row}}
 #' @export
 #' @examples

@@ -32,9 +32,9 @@ Suggests:
     koRpus
 LazyData: TRUE
 Description: This package automates many of the tasks associated with
-    quantitative discourse analysis oftranscripts containing discourse
+    quantitative discourse analysis of transcripts containing discourse
     including frequency counts of sentence types, words, sentence, turns of
-    talk, syllable counts and other assorted analyysis tasks.  The package
+    talk, syllable counts and other assorted analysis tasks.  The package
     provides parsing tools for preparing transcript data.  Many functions
     enable the user to aggregate data by any number of grouping variables
     providing analysis and seamless integration with other R packages that
@@ -177,3 +177,4 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
+    'dir_map.R'

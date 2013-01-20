@@ -18,7 +18,7 @@
 #' examp <- structure(list(person = structure(c(1L, 2L, 1L, 3L), 
 #'     .Label = c("bob", "greg", "sue"), class = "factor"), text = 
 #'     c("I love chicken [unintelligible]!", 
-#'     "Me too! (laughter) It's so good.[interupting]", 
+#'     "Me too! (laughter) It's so good.[interrupting]", 
 #'     "Yep it's awesome {reading}.", "Agreed. {is so much fun}")), .Names = 
 #'     c("person", "text"), row.names = c(NA, -4L), class = "data.frame")    
 #' 
@@ -63,7 +63,7 @@ function (text.var, bracket = "all", missing = NULL, names = FALSE) {
 #' \code{bracketXtract} - Apply bracket extraction to character vectors.
 #' 
 #' @rdname bracketX
-#' @param with logical.  If TRUE returns the brackets and the bracketted text.
+#' @param with logical.  If TRUE returns the brackets and the bracketed text.
 #' @return \code{bracketXtract} -  returns a list of vectors of bracketed text.
 #' @author  Martin Morgan and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @export

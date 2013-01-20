@@ -6,14 +6,14 @@
     ...)
 }
 \arguments{
-  \item{word.list}{A list of names chacter vectors.}
+  \item{word.list}{A list of names character vectors.}
 
   \item{overlap}{Minimum/exact amount of overlap.}
 
   \item{equal.or}{A character vector of c(\code{"equal"},
   \code{"greater"}, \code{"more"}, \code{"less"}).}
 
-  \item{\dots}{In liu of word.list the user may input n
+  \item{\dots}{In lieu of word.list the user may input n
   number of character vectors.}
 }
 \value{

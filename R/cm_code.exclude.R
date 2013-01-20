@@ -1,12 +1,13 @@
 #' Exclude Codes
 #'
-#' Find the occurences of n codes excluding the nth code.  e.g.  You have 
+#' Find the occurrences of n codes excluding the nth code.  e.g.  You have 
 #' times/words coded for a teacher and you also have times/words coded for 
 #' happiness.  You can find all the happiness times excluding the teacher times 
 #' or vise versa.
 #'
-#' @param x2long.obj An object from cm_range2long, cm_time2long or cm_df2long
-#' @param exclude.code.list A list of named character vertors of at least two 
+#' @param x2long.obj An object from \code{cm_range2long}, \code{cm_time2long} or 
+#' \code{cm_df2long}.
+#' @param exclude.code.list A list of named character vectors of at least two 
 #' code column names to compare and exclude.  The last column name is the one 
 #' that will be excluded.
 #' @param rm.var Name of the repeated measures column. 

@@ -17,7 +17,7 @@
 #' @param repeat.vars a character vector of repeated/stacked variables.  If NULL 
 #' uses all non code.vars variables.
 #' @param rev.code logical.  If TRUE reverses the order of code.vars and no.code 
-#' varaibles.
+#' variables.
 #' @return Generates a data frame of start and end times for each code.
 #' @seealso 
 #' \code{\link{cm_time2long}},

@@ -34,8 +34,8 @@
   and qdap recognized end marks.
 
   \code{word.split} - Reduces a text column to a list of
-  vectors of bag of words and qda recognized endmarks (i.e.
-  \code{".", "!", "?", "*", "-"}).
+  vectors of bag of words and qdap recognized end marks
+  (i.e. \code{".", "!", "?", "*", "-"}).
 }
 \examples{
 \dontrun{

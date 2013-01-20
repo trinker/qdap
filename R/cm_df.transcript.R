@@ -1,9 +1,9 @@
 #' Transcript With Word Number
 #' 
-#' Out put a transcript with word  number/index above for easy input back into 
+#' Output a transcript with word  number/index above for easy input back into 
 #' qdap after coding.
 #' 
-#' @param text.var text.var The text variable
+#' @param text.var The text variable.
 #' @param grouping.var The grouping variables.  Default NULL generates one word 
 #' list for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
@@ -15,9 +15,9 @@
 #' @return Returns a transcript by grouping variable with word number above each 
 #' word.  This makes use with cm_df2long transfer/usage easier because the 
 #' researcher has coded on a transcript with the numeric word index already.
-#' @note It is recommended that the researcher actually codes on the out put 
-#' from this file.  If a file already exists cm_df.transcript will append to 
-#' that file.
+#' @note It is recommended that the researcher actually codes on the output 
+#' from this file.  If a file already exists \code{cm_df.transcript} will append 
+#' to that file.
 #' @author DWin, Gavin Simpson and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso \code{\link[qdap]{cm_df2long}},
 #' \code{\link[qdap]{cm_df.temp}}

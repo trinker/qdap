@@ -48,7 +48,7 @@ function(text.var) {
 #' Bag of Words & Endmarks by Row
 #' 
 #' \code{word.split} - Reduces a text column to a list of vectors of bag of 
-#' words and qda recognized endmarks (i.e. \code{".", "!", "?", "*", "-"}).
+#' words and qdap recognized end marks (i.e. \code{".", "!", "?", "*", "-"}).
 #' 
 #' @rdname bag.o.words
 #' @export

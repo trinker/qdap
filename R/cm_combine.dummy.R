@@ -2,8 +2,8 @@
 #'
 #' Combine code columns where they co-occur.
 #'
-#' @param cm.l2d.obj An object from cm_long2dummy
-#' @param combine.code A list of named character vertors of at least two code 
+#' @param cm.l2d.obj An object from \code{cm_long2dummy}.
+#' @param combine.code A list of named character vectors of at least two code 
 #' column names to combine
 #' @param rm.var Name of the repeated measures column.  Default is "time".
 #' @param overlap logical, integer or character of binary operator + integer.  

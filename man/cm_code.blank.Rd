@@ -6,11 +6,11 @@
     rm.var = NULL, overlap = TRUE)
 }
 \arguments{
-  \item{x2long.obj}{An object from cm_range2long,
-  cm_time2long or cm_df2long}
+  \item{x2long.obj}{An object from \code{cm_range2long},
+  \code{cm_time2long} or \code{cm_df2long}.}
 
   \item{combine.code.list}{A list of named character
-  vertors of at least two code column names to combine}
+  vectors of at least two code column names to combine.}
 
   \item{rm.var}{Name of the repeated measures column.}
 
@@ -29,10 +29,11 @@
   Transform codes with any binary operator combination.
 }
 \note{
-  For most jobs cm_code.transform will work.  This adds a
-  bit of flexibility in excludsion and partial matching.
-  The code column must be named code and your start and end
-  columns must be named \code{"start"} and \code{"end"}.
+  For most jobs \code{cm_code.transform} will work.  This
+  adds a bit of flexibility in exclusion and partial
+  matching.  The code column must be named code and your
+  start and end columns must be named \code{"start"} and
+  \code{"end"}.
 }
 \examples{
 \dontrun{

@@ -5,40 +5,46 @@
 #' @param file The name of the file which the data are to be read from. Each row 
 #' of the table appears as one line of the file. If it does not contain an 
 #' absolute path, the file name is relative to the current working directory, 
-#' getwd().
-#' @param col.names Supplies a vector of column names to the transcript columns.
-#' @param text.var specifying the name of the text variable will ensure that 
-#' variable is classed as character.  If NULL read.transcript attempts to guess 
-#' the text.variable (dialogue).
-#' @param merge.broke.tot If the file being read in is .docx and the transcript 
-#' if formated to have broken space between a single turn of talk read.transcript 
+#' \code{getwd()}.
+#' @param col.names  A character vector specifying the column names of the 
+#' transcript columns.
+#' @param text.var A character string specifying the name of the text variable 
+#' will ensure that variable is classed as character.  If NULL 
+#' \code{\link[qdap]{read.transcript}} attempts to guess the text.variable 
+#' (dialogue).
+#' @param merge.broke.tot logical.  If TRUE and if the file being read in is 
+#' .docx with broken space between a single turn of talk read.transcript 
 #' will attempt to merge these into a single turn of talk.
 #' @param header logical.  If TRUE the file contains the names of the variables 
 #' as its first line.
-#' @param dash Character to replace the en and em dashes special characters 
-#' (default is to remove).
-#' @param ellipsis Character to replace the ellipsis special characters 
+#' @param dash A character string to replace the en and em dashes special 
+#' characters (default is to remove).
+#' @param ellipsis A character string to replace the ellipsis special characters 
 #' (default is text ...).
-#' @param quote2bracket logical If TRUE replaces curly quotes with curly braces 
+#' @param quote2bracket logical. If TRUE replaces curly quotes with curly braces 
 #' (default is FALSE).  If FALSE curly quotes are removed.
-#' @param rm.empty.rows logical.  If TURE read.transcript attempts to remove 
-#' empty rows.
-#' @param na.strings A character vector of strings which are to be interpreted 
+#' @param rm.empty.rows logical.  If TURE \code{\link[qdap]{read.transcript}}  
+#' attempts to remove empty rows.
+#' @param na.strings A vector of character strings which are to be interpreted 
 #' as NA values.
 #' @param sep The field separator character. Values on each line of the file are 
-#' separated by this character.  The default of NULL instructs read.transcript to 
-#' use a separator suitable for the file type being read in.
+#' separated by this character.  The default of NULL instructs 
+#' \code{\link[qdap]{read.transcript}} to use a separator suitable for the file 
+#' type being read in.
 #' @param skip Integer; the number of lines of the data file to skip before 
 #' beginning to read data.
 #' @param nontext2factor logical.  If TRUE attempts to convert any non text to a 
 #' factor.
-#' @param \ldots Further arguments to be passed to read.table.
+#' @param \ldots Further arguments to be passed to \code{\link[utils]{read.table}}.
 #' @return Returns a dataframe of dialogue and people.
 #' @note If a transcript is a .docx file read transcript expects two columns 
 #' (generally person and dialogue) with some sort of separator (default is colon 
 #' separator).  .doc fils must be converted to .docx before reding in.
+#' @Section Warning: {\link[qdap]{read.transcript}} may contain errors if the 
+#' file being read in is .docx.  The researcher should carefully investigate 
+#' each transcript for errors before further parsing the data.
 #' @author Bryan Goodrich and Tyler Rinker <tyler.rinker@@gmail.com>.
-#' @references \url{https://github.com/trinker/qdap/wiki/Reading-Transcripts-into-R}
+#' @references \url{https://github.com/trinker/qdap/wiki/Reading-.docx-\%5BMS-Word\%5D-Transcripts-into-R}
 #' @keywords transcript
 #' @export
 #' @import XML gdata RCurl

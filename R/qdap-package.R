@@ -181,14 +181,14 @@ NULL
 #' Contemporary Books.
 NULL
  
-#' Small Abrreviations Data Set
+#' Small Abbrreviations Data Set
 #' 
 #' A dataset containing abbreviations and their qdap friendly form.
 #' 
 #' @details 
 #' \itemize{ 
 #'   \item abv. Common transcript abbreviations
-#'   \item rep. qdap representation of those abbraviations
+#'   \item rep. qdap representation of those abbreviations
 #' } 
 #' 
 #' @docType data 

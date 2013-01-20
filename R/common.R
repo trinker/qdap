@@ -2,11 +2,11 @@
 #' 
 #' Find common words between grouping variables (e.g. people).
 #' 
-#' @param word.list A list of names chacter vectors.
+#' @param word.list A list of names character vectors.
 #' @param overlap Minimum/exact amount of overlap.
 #' @param equal.or A character vector of c(\code{"equal"}, \code{"greater"}, 
 #' \code{"more"}, \code{"less"}).
-#' @param \dots In liu of word.list the user may input n number of character 
+#' @param \dots In lieu of word.list the user may input n number of character 
 #' vectors.
 #' @rdname common
 #' @return Returns a dataframe of all words that match the criteria set by 
@@ -34,13 +34,13 @@ function(word.list, overlap = "all", equal.or = "more", ...){
 }
 
 
-#' list Method for coomon
+#' list Method for common
 #' 
-#' @param word.list A list of names chacter vectors.
+#' @param word.list A list of names character vectors.
 #' @param overlap Minimum/exact amount of overlap.
 #' @param equal.or A character vector of c(\code{"equal"}, \code{"greater"}, 
 #' \code{"more"}, \code{"less"}).
-#' @param \dots In liu of word.list the user may input n number of character 
+#' @param \dots In lieu of word.list the user may input n number of character 
 #' vectors.
 #' @export
 #' @method common list

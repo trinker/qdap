@@ -14,44 +14,46 @@
   read from. Each row of the table appears as one line of
   the file. If it does not contain an absolute path, the
   file name is relative to the current working directory,
-  getwd().}
+  \code{getwd()}.}
 
-  \item{col.names}{Supplies a vector of column names to the
-  transcript columns.}
+  \item{col.names}{A character vector specifying the column
+  names of the transcript columns.}
 
-  \item{text.var}{specifying the name of the text variable
-  will ensure that variable is classed as character.  If
-  NULL read.transcript attempts to guess the text.variable
-  (dialogue).}
+  \item{text.var}{A character string specifying the name of
+  the text variable will ensure that variable is classed as
+  character.  If NULL \code{\link[qdap]{read.transcript}}
+  attempts to guess the text.variable (dialogue).}
 
-  \item{merge.broke.tot}{If the file being read in is .docx
-  and the transcript if formated to have broken space
-  between a single turn of talk read.transcript will
-  attempt to merge these into a single turn of talk.}
+  \item{merge.broke.tot}{logical.  If TRUE and if the file
+  being read in is .docx with broken space between a single
+  turn of talk read.transcript will attempt to merge these
+  into a single turn of talk.}
 
   \item{header}{logical.  If TRUE the file contains the
   names of the variables as its first line.}
 
-  \item{dash}{Character to replace the en and em dashes
-  special characters (default is to remove).}
+  \item{dash}{A character string to replace the en and em
+  dashes special characters (default is to remove).}
 
-  \item{ellipsis}{Character to replace the ellipsis special
-  characters (default is text ...).}
+  \item{ellipsis}{A character string to replace the
+  ellipsis special characters (default is text ...).}
 
-  \item{quote2bracket}{logical If TRUE replaces curly
+  \item{quote2bracket}{logical. If TRUE replaces curly
   quotes with curly braces (default is FALSE).  If FALSE
   curly quotes are removed.}
 
-  \item{rm.empty.rows}{logical.  If TURE read.transcript
-  attempts to remove empty rows.}
+  \item{rm.empty.rows}{logical.  If TURE
+  \code{\link[qdap]{read.transcript}} attempts to remove
+  empty rows.}
 
-  \item{na.strings}{A character vector of strings which are
+  \item{na.strings}{A vector of character strings which are
   to be interpreted as NA values.}
 
   \item{sep}{The field separator character. Values on each
   line of the file are separated by this character.  The
-  default of NULL instructs read.transcript to use a
-  separator suitable for the file type being read in.}
+  default of NULL instructs
+  \code{\link[qdap]{read.transcript}} to use a separator
+  suitable for the file type being read in.}
 
   \item{skip}{Integer; the number of lines of the data file
   to skip before beginning to read data.}
@@ -60,7 +62,7 @@
   convert any non text to a factor.}
 
   \item{\ldots}{Further arguments to be passed to
-  read.table.}
+  \code{\link[utils]{read.table}}.}
 }
 \value{
   Returns a dataframe of dialogue and people.
@@ -97,7 +99,7 @@ read.transcript(doc4)
   Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
 }
 \references{
-  \url{https://github.com/trinker/qdap/wiki/Reading-Transcripts-into-R}
+  \url{https://github.com/trinker/qdap/wiki/Reading-.docx-\%5BMS-Word\%5D-Transcripts-into-R}
 }
 \keyword{transcript}
 

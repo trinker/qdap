@@ -14,7 +14,7 @@
 #' is across the top. 
 #' @param strip logical.  If TRUE all punctuation is removed.
 #' @return Generates a dataframe, and optional csv file, of individual words 
-#' while maintaing demgraphic information.  If a vector of codes is provided the 
+#' while maintaining demographic information.  If a vector of codes is provided the 
 #' outcome is a matrix of words used by codes filled with zeros.  This dataframe 
 #' is useful for dummy coded (1-yes code exists; 2-no it does not) 
 #' representation of data and can be used for visualizations and statistical 

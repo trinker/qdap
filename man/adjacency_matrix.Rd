@@ -13,11 +13,11 @@
   \code{termco.d} or \code{termco.c}.}
 }
 \value{
-  Generates an adjacency matrix
+  Returns an adjacency matrix.
 }
 \description{
-  Takes a matrix (wfm) or termco object (.a, .c or .d) and
-  generates an adjacency matrix for use with \code{igraph}.
+  Takes a matrix (wfm) or termco object and generates an
+  adjacency matrix for use with \code{igraph}.
 }
 \examples{
 \dontrun{

@@ -1,7 +1,7 @@
 \docType{data}
 \name{abbreviations}
 \alias{abbreviations}
-\title{Small Abrreviations Data Set}
+\title{Small Abbrreviations Data Set}
 \format{A data frame with 14 rows and 2 variables}
 \description{
   A dataset containing abbreviations and their qdap
@@ -9,7 +9,7 @@
 }
 \details{
   \itemize{ \item abv. Common transcript abbreviations
-  \item rep. qdap representation of those abbraviations }
+  \item rep. qdap representation of those abbreviations }
 }
 \keyword{datasets}
 

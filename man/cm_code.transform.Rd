@@ -7,18 +7,18 @@
     rm.var = NULL)
 }
 \arguments{
-  \item{x2long.obj}{An object from cm_range2long,
-  cm_time2long or cm_df2long}
+  \item{x2long.obj}{An object from \code{cm_range2long},
+  \code{cm_time2long} or \code{cm_df2long}.}
 
   \item{overlap.code.list}{A list of named character
-  vertors of at least two code column names to aggregate
+  vectors of at least two code column names to aggregate
   co-occurences.}
 
   \item{combine.code.list}{A list of named character
-  vertors of at least two code column names to combine}
+  vectors of at least two code column names to combine}
 
   \item{exclude.code.list}{A list of named character
-  vertors of at least two code column names to compare and
+  vectors of at least two code column names to compare and
   exclude.  The last column name is the one that will be
   excluded.}
 
@@ -30,8 +30,8 @@
   codes added.
 }
 \description{
-  Transform co-occurences and/or combinations of codes into
-  a new code(s).
+  Transform co-occurrences and/or combinations of codes
+  into a new code(s).
 }
 \note{
   The code column must be named code and your start and end

@@ -1,4 +1,4 @@
-#' Readabilitiy Measures
+#' Readability Measures
 #' 
 #' \code{automated_readability_index} - Apply Automated Readability Index to 
 #' transcript(s) by zero or more grouping variable(s).

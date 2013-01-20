@@ -6,11 +6,11 @@
     alphabetical = TRUE)
 }
 \arguments{
-  \item{text.var}{The text variable}
+  \item{text.var}{The text variable.}
 
   \item{begins.with}{This argument takes a word chunk.
   Default is NULL. Use this if searching for a word
-  begining with the word chunk.}
+  beginning with the word chunk.}
 
   \item{contains}{This argument takes a word chunk.
   Default is NULL. Use this if searching for a word
@@ -21,7 +21,7 @@
 }
 \value{
   Returns a dataframe with frequency counts of words that
-  begin with or containt he provided word chunk.
+  begin with or contain the provided word chunk.
 }
 \description{
   A convenience function to find words that begin with or
