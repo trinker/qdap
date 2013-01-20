@@ -34,11 +34,11 @@
 }
 \value{
   An list of word data frames comparing grouping variables
-  word use against one another. Eachdata frame contains
+  word use against one another. Each dataframe contains
   three columns: \item{word}{The words unique to that
   group} \item{freq}{The number of times that group used
   that word} \item{prop}{The proportion of that group's
-  over all word use dedicated to that particular word}
+  overall word use dedicated to that particular word}
 }
 \description{
   Look at the differences in word uses between grouping

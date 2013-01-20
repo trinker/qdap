@@ -13,7 +13,7 @@
 }
 \value{
   Returns a dataframe, matrix or vector with the element
-  repalced.
+  replaced.
 }
 \description{
   Replace elements of a dataframe, matrix or vector with

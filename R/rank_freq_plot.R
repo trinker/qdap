@@ -8,26 +8,26 @@
 #' output for all text.  Also takes a single grouping variable or a list of 1 
 #' or more grouping variables.  
 #' @param ncol integer value indicating the number of columns in the facet wrap.
-#' @param jitter Ammount of horizontal jitter to add to the points.
+#' @param jitter Amount of horizontal jitter to add to the points.
 #' @param log.freq logical.  If TURE plots the frequencies in the natural log 
 #' scale.
 #' @param log.rank logical.  If TURE plots the ranks in the natural log scale.
 #' @param hap.col Color of the hapax legomenon points.
 #' @param dis.col Color of the dis legomenon points.
-#' @param alpha Transparency level of points (ranges betweeon 0 and 1).
+#' @param alpha Transparency level of points (ranges between 0 and 1).
 #' @param shape An integer specifying the symbol used to plot the points.
 #' @param title Optional plot title.
-#' @param digits Integer; number of dicimal places to round.  
+#' @param digits Integer; number of decimal places to round.  
 #' @param plot logical.  If TRUE provides a rank frequency plot.
 #' @param words A vector of words.
 #' @param frequencies A vector of frequencies corresponding to the words 
 #' argument.
 #' @param title.ext The title extension that extends: "Rank-Frequency Plot ..."
-#' @param jitter.ammount Ammount of horizontal jitter to add to the points.
+#' @param jitter.ammount Amount of horizontal jitter to add to the points.
 #' @param log.scale logical.  If TRUE plots the rank and frequency as a log 
 #' scale.
 #' @return Returns a rank-frequency plot and a list of three dataframes:
-#' \item{WORD_COUNTS}{The word frquencies supplied to \code{rank_freq_plot} or 
+#' \item{WORD_COUNTS}{The word frequencies supplied to \code{rank_freq_plot} or 
 #' created by \code{rank_freq_mplot}.}
 #' \item{RANK_AND_FREQUENCY_STATS}{A dataframe of rank and frequencies for the 
 #' words used in the text.}

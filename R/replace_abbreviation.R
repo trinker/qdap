@@ -4,7 +4,7 @@
 #' 
 #' @param text.var  The text variable.
 #' @param abbreviation A two column key of abbreviations (column 1) and long 
-#' form replacements (column 2) or a vector of abbeviations.  Default is to use 
+#' form replacements (column 2) or a vector of abbreviations.  Default is to use 
 #' qdap's abbreviations data set.
 #' @param replace A vector of long form replacements if a data frame is not 
 #' supplied to the abbreviation argument.

@@ -2,7 +2,7 @@
 #' 
 #' Adds trailing and/or leading spaces to a vector of terms.
 #' 
-#' @param terms A character vector of terms to instert trailing and/or leading 
+#' @param terms A character vector of terms to insert trailing and/or leading 
 #' spaces.
 #' @param leading logical.  If TRUE inserts a leading space in the terms.
 #' @param trailing logical.  If TRUE inserts a trailing space in the terms.

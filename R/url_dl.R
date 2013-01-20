@@ -4,7 +4,7 @@
 #' 
 #' @param \ldots Document names to download. 
 #' @param url The download url. 
-#' @return Places a copy of the downloaded document in the users wordking 
+#' @return Places a copy of the downloaded document in the users working 
 #' directory.
 #' @note Not intended for general use.
 #' @export

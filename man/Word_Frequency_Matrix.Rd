@@ -3,7 +3,7 @@
 \alias{wfdf}
 \alias{wfm}
 \alias{wfm.expanded}
-\title{Word Frequencty Matrix}
+\title{Word Frequency Matrix}
 \usage{
   wfm(text.var = NULL, grouping.var = NULL, wfdf = NULL,
     output = "raw", stopwords = NULL, digits = 2)
@@ -28,8 +28,8 @@
   converts a word frequency dataframe (wfdf) to a word
   frequency matrix (\code{wfm}).  Default is NULL.}
 
-  \item{output}{Output type (either \code{"proportion"},
-  \code{"proportion"} or \code{"percent"}).}
+  \item{output}{Output type (either \code{"proportion"} or
+  \code{"percent"}).}
 
   \item{stopwords}{A vector of stop words to remove.}
 
@@ -58,9 +58,9 @@
   data.frame with a words column and optional margin sums.
 
   \code{wfm.expanded} - returns a matrix similar to a word
-  frequency matrix ( \code{wfm})but the rows are expanded
+  frequency matrix (\code{wfm}) but the rows are expanded
   to represent the maximum usages of the word and cells are
-  dummy coded to indicate that numer of uses.
+  dummy coded to indicate that number of uses.
 
   \code{wf.combine} - returns a word frequency matrix
   (\code{wfm}) or dataframe (\code{wfdf}) with counts for
@@ -102,12 +102,12 @@ x <- wfm(DATA$state, DATA$person)
 #raw with margin (will work)
 y <- wfdf(DATA$state, DATA$person, margins = TRUE)
 
-#porportion (will not work)
+#proportion (will not work)
 z <- wfdf(DATA$state, DATA$person, output = "proportion")
 
 WL1 <- c(y[, 1])
 WL2 <- list(c("read", "the", "a"), c("you", "your", "your're"))
-WL3 <- list(bob = c("read", "the", "a"), yous = c("you", "your", "your're"))
+WL3 <- list(bob = c("read", "the", "a"), yous = c("you", "your", "you're"))
 WL4 <- list(bob = c("read", "the", "a"), yous = c("a", "you", "your", "your're"))
 WL5 <- list(yous = c("you", "your", "your're"))
 WL6 <- list(c("you", "your", "your're"))  #no name so will be called words 1

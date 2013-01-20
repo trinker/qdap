@@ -14,10 +14,10 @@
 #' @param cap.list Vector of words to capitalize.
 #' @param cap.I logical. If TRUE capitalizes words containing the personal 
 #' pronoun I.
-#' @param rm.bracket logical If TRUE all brackets and bracketted text are 
+#' @param rm.bracket logical If TRUE all brackets and bracketed text are 
 #' removed from analysis.
 #' @param char.keep A character vector of symbols (i.e. punctuation) that 
-#' \code{word_list} should keep.  THe default is to remove every symbol except 
+#' \code{word_list} should keep.  The default is to remove every symbol except 
 #' apostrophes.
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from the 
 #' output.
@@ -26,9 +26,9 @@
 #' following components: 
 #' \item{cwl}{complete word list; raw words}
 #' \item{swl}{stop word list; same as rwl with stop words removed}
-#' \item{fwl}{frequency word list; a data frame of words and correspnding 
+#' \item{fwl}{frequency word list; a data frame of words and corresponding 
 #' frequency counts}
-#' \item{fswl}{fequency stopword word list; same as fwl but with stopwords 
+#' \item{fswl}{frequency stopword word list; same as fwl but with stopwords 
 #' removed}
 #' \item{rfswl}{reduced frequency stopword word list; same as fswl but truncated 
 #' to n rows}

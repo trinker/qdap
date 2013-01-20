@@ -18,7 +18,7 @@
 
   \item{parallel}{logical.  If TRUE attempts to run the
   function on multiple cores.  Note that this may not mean
-  a spead boost if you have one core or if the data set is
+  a speed boost if you have one core or if the data set is
   smaller as the cluster takes time to create.}
 
   \item{na.omit}{logical.  If TRUE missing values
@@ -33,7 +33,7 @@
   TRUE may slow down the function.}
 
   \item{percent}{logical.  If TRUE output given as percent.
-  If FALSE the output is proption.}
+  If FALSE the output is proportion.}
 
   \item{zero.replace}{Value to replace 0 values with.}
 
@@ -55,7 +55,7 @@
   \code{"pretty"} (a left justified version of the output
   optimized for viewing but not good for export),
   \code{"matrix"} (a matrix version of the output),
-  \code{"dataframe"}\\ \code{"df"} (a dataframe varseion of
+  \code{"dataframe"}\\ \code{"df"} (a dataframe version of
   the output), \code{"all"} (a list of all three of the
   previous output types).}
 }
@@ -127,7 +127,7 @@ with(DATA, pos.by(posbydat, list(adult, sex)))
 }
 }
 \references{
-  openNLP \url{http:/opennlp.apache.org}
+  \href{openNLP}{http:/opennlp.apache.org}
 }
 \seealso{
   \code{\link[openNLP]{tagPOS}}

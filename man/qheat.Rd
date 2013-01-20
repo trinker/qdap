@@ -36,11 +36,11 @@
   for the high values.}
 
   \item{yaxis.col}{A single character vector color choice
-  for the hlow values.}
+  for the low values.}
 
-  \item{order.by}{An optional character vector of a varable
-  name to order the columns by.  To reverse use a negative
-  (\code{-}) before the column name.}
+  \item{order.by}{An optional character vector of a
+  variable name to order the columns by.  To reverse use a
+  negative (\code{-}) before the column name.}
 
   \item{grid}{The color of the grid (Use NULL to remove the
   grid).}

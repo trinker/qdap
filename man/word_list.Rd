@@ -34,10 +34,10 @@
   containing the personal pronoun I.}
 
   \item{rm.bracket}{logical If TRUE all brackets and
-  bracketted text are removed from analysis.}
+  bracketed text are removed from analysis.}
 
   \item{char.keep}{A character vector of symbols (i.e.
-  punctuation) that \code{word_list} should keep.  THe
+  punctuation) that \code{word_list} should keep.  The
   default is to remove every symbol except apostrophes.}
 
   \item{apostrophe.remove}{logical.  If TRUE removes
@@ -52,7 +52,7 @@
   \item{cwl}{complete word list; raw words} \item{swl}{stop
   word list; same as rwl with stop words removed}
   \item{fwl}{frequency word list; a data frame of words and
-  correspnding frequency counts} \item{fswl}{fequency
+  corresponding frequency counts} \item{fswl}{frequency
   stopword word list; same as fwl but with stopwords
   removed} \item{rfswl}{reduced frequency stopword word
   list; same as fswl but truncated to n rows}

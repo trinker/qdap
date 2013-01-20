@@ -19,7 +19,7 @@
   interrogative words.}
 
   \item{percent}{logical.  If TRUE output given as percent.
-  If FALSE the output is proption.}
+  If FALSE the output is proportion.}
 
   \item{zero.replace}{Value to replace 0 values with.}
 
@@ -43,7 +43,7 @@
   Transcript apply question counts.
 }
 \details{
-  The algorithm searchs for the following interrogative
+  The algorithm searches for the following interrogative
   words (and optionally, their negative contraction form as
   well):
 
@@ -57,10 +57,10 @@
   exception of "ok", "right" and "correct") in the question
   determines the sentence type. "ok", "right" and "correct"
   sentence types are determined if the sentence is a
-  question with no other interogative words found and "ok",
-  "right" or "correct" is the last word of the sentence.
-  Those with undetermined sentence type are labeled
-  unknown.
+  question with no other interrogative words found and
+  "ok", "right" or "correct" is the last word of the
+  sentence.  Those with undetermined sentence type are
+  labeled unknown.
 }
 \examples{
 \dontrun{

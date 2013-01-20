@@ -84,6 +84,7 @@ Collate:
     'common.R'
     'convert.R'
     'delete.R'
+    'dir_map.R'
     'dissimilarity.R'
     'distTab.R'
     'diversity.R'
@@ -177,4 +178,3 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
-    'dir_map.R'

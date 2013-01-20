@@ -5,7 +5,7 @@
 #' @param dataframe A dataframe object.
 #' @param search.column Column name to search for markers/terms.
 #' @param terms Terms/markers of the rows that are to be removed from the 
-#' dataframe.  The term/marker must appear at the begining of the string and is 
+#' dataframe.  The term/marker must appear at the beginning of the string and is 
 #' case sensitive.
 #' @return \code{rm_row} - returns a dataframe with the termed/markered rows 
 #' removed.

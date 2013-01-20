@@ -11,18 +11,18 @@
 #' more grouping variables.
 #' @param match.list A list of named character vectors.
 #' @param short.term logical.  If TRUE column names are trimmed versions of the 
-#' match list, other wise the terms are wrapped with 'term(phrase)'
+#' match list, otherwise the terms are wrapped with 'term(phrase)'
 #' @param ignore.case logical.  If TRUE case is ignored.
 #' @param elim.old logical.  If TRUE eliminates the columns that are combined 
 #' together by the named match.list.
 #' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proption.
+#' output is proportion.
 #' @param digits Integer; number of decimal places to round when printing.   
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from the text 
 #' before examining.
 #' @param char.keep A character vector of symbol character (i.e. punctuation) 
 #' that strip should keep.  The default is to strip everything except 
-#' apostophes. \code{\link[qdap]{termco}} attempts to auto detect characters to 
+#' apostrophes. \code{\link[qdap]{termco}} attempts to auto detect characters to 
 #' keep based on the elements in \code{match.list}. 
 #' @param digit.remove logical.  If TRUE strips digits from the text before 
 #' counting. \code{\link[qdap]{termco}} attempts to auto detect if digits should 
@@ -36,19 +36,18 @@
 #' each individual's word use} 
 #' \item{rnp}{a character combination data frame of raw and proportional}     
 #' \item{zero_replace}{value to replace zeros with; mostly internal use}   
-#' \item{output}{character value for outpur type (either" "proportion" or 
-#' "percent"; mostly internal use}  
+#' \item{percent}{The value of percent used for plotting purposes.}
 #' \item{digits}{integer value of number of digits to display; mostly internal 
 #' use}  
-#' @section Warning: Percentages are calulated as a ratio of counts of 
+#' @section Warning: Percentages are calculated as a ratio of counts of 
 #' \code{match.list} elements to word counts.  Word counts do not contain 
-#' symbols or digits.  Using symbols, digits or small segements of full words 
+#' symbols or digits.  Using symbols, digits or small segments of full words 
 #' (e.g. "to") could total more than 100\%.
 #' @rdname termco  
 #' @note The match.list/match.string is (optionally) case and character 
 #' sensitive.  Spacing is an important way to grab specific words and requires 
-#' careful thought.  Using "read"will find the words "bread", "read" "reading", 
-#' and "ready".  If you want to search fo just the word "read" you'd supply a 
+#' careful thought.  Using "read" will find the words "bread", "read" "reading", 
+#' and "ready".  If you want to search for just the word "read" you'd supply a 
 #' vector of c(" read ", " reads", " reading", " reader").  To search for non 
 #' character arguments (i.e. numbers and symbols) additional arguments from 
 #' strip must be passed.
@@ -261,7 +260,7 @@ termco.d <-
 #' 
 #' \code{term.match} - Search a transcript for words that exactly match term(s).
 #' 
-#' @param terms The terms to serach for in the \code{text.var}.  Similar to 
+#' @param terms The terms to search for in the \code{text.var}.  Similar to 
 #' \code{match.list} but these terms must be words or partial words rather than 
 #' multiple words and symbols.
 #' @param return.list logical.  If TRUE returns the output for multiple terms as 
@@ -370,7 +369,7 @@ function(x, ...) {
 #' @param lab.digits Integer values specifying the number of digits to be 
 #' printed if \code{label} is TRUE.
 #' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proption.  If NULL uses the value from 
+#' output is proportion.  If NULL uses the value from 
 #' \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
 #' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
 #' from \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.

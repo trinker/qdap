@@ -1,11 +1,11 @@
 #' Strip Text 
 #' 
-#' Strip text of unwanted charcters.
+#' Strip text of unwanted characters.
 #' 
 #' @param x The text variable.
 #' @param char.keep A character vector of symbols (i.e. punctuation) that 
 #' \code{strip} should keep.  The default is to strip every symbol except 
-#' apostophes.
+#' apostrophes.
 #' @param digit.remove logical.  If TRUE strips digits from the text.
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from the 
 #' output.

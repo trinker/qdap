@@ -140,7 +140,7 @@
   argument.  If this behavior is not desired
   \code{legend.override} should be set to TRUE.}
 
-  \item{char2space}{Currently a rode to no where.
+  \item{char2space}{Currently a road to nowhere.
   Eventually this will allow the retention of characters as
   is allowed in \code{trans.cloud} already.}
 

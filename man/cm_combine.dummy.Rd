@@ -62,5 +62,5 @@ cm_combine.dummy(D2, combine.code = combines)
 \seealso{
   \code{\link[qdap]{cm_long2dummy}}
 }
-\keyword{co-occurence}
+\keyword{co-occurrence}
 

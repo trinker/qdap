@@ -35,7 +35,7 @@
   \item{match.list}{A list of named character vectors.}
 
   \item{short.term}{logical.  If TRUE column names are
-  trimmed versions of the match list, other wise the terms
+  trimmed versions of the match list, otherwise the terms
   are wrapped with 'term(phrase)'}
 
   \item{ignore.case}{logical.  If TRUE case is ignored.}
@@ -44,7 +44,7 @@
   that are combined together by the named match.list.}
 
   \item{percent}{logical.  If TRUE output given as percent.
-  If FALSE the output is proption.}
+  If FALSE the output is proportion.}
 
   \item{digits}{Integer; number of decimal places to round
   when printing.}
@@ -54,7 +54,7 @@
 
   \item{char.keep}{A character vector of symbol character
   (i.e. punctuation) that strip should keep.  The default
-  is to strip everything except apostophes.
+  is to strip everything except apostrophes.
   \code{\link[qdap]{termco}} attempts to auto detect
   characters to keep based on the elements in
   \code{match.list}.}
@@ -74,7 +74,7 @@
   using \code{termco.d} (i.e. they can be phrases, symbols
   etc.).}
 
-  \item{terms}{The terms to serach for in the
+  \item{terms}{The terms to search for in the
   \code{text.var}.  Similar to \code{match.list} but these
   terms must be words or partial words rather than multiple
   words and symbols.}
@@ -111,10 +111,9 @@
   word use} \item{rnp}{a character combination data frame
   of raw and proportional} \item{zero_replace}{value to
   replace zeros with; mostly internal use}
-  \item{output}{character value for outpur type (either"
-  "proportion" or "percent"; mostly internal use}
-  \item{digits}{integer value of number of digits to
-  display; mostly internal use}
+  \item{percent}{The value of percent used for plotting
+  purposes.} \item{digits}{integer value of number of
+  digits to display; mostly internal use}
 
   \code{term.match} - returns a list or vector of possible
   words that match term(s).
@@ -142,18 +141,18 @@
   The match.list/match.string is (optionally) case and
   character sensitive.  Spacing is an important way to grab
   specific words and requires careful thought.  Using
-  "read"will find the words "bread", "read" "reading", and
-  "ready".  If you want to search fo just the word "read"
+  "read" will find the words "bread", "read" "reading", and
+  "ready".  If you want to search for just the word "read"
   you'd supply a vector of c(" read ", " reads", "
   reading", " reader").  To search for non character
   arguments (i.e. numbers and symbols) additional arguments
   from strip must be passed.
 }
 \section{Warning}{
-  Percentages are calulated as a ratio of counts of
+  Percentages are calculated as a ratio of counts of
   \code{match.list} elements to word counts.  Word counts
   do not contain symbols or digits.  Using symbols, digits
-  or small segements of full words (e.g. "to") could total
+  or small segments of full words (e.g. "to") could total
   more than 100\%.
 }
 \examples{

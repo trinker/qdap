@@ -12,7 +12,7 @@
 #' logical vector c(>, <, =<, =>, ==, !=) followed by  an integer.
 #' @return Returns a dataframe with co-occurrences of provided code columns.
 #' @seealso \code{\link[qdap]{cm_long2dummy}}
-#' @keywords co-occurence
+#' @keywords co-occurrence
 #' @export
 #' @examples
 #' \dontrun{

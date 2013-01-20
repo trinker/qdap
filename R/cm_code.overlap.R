@@ -16,7 +16,7 @@
 #' \code{\link[qdap]{cm_df2long}},
 #' \code{\link[qdap]{cm_code.combine}},
 #' \code{\link[qdap]{cm_code.transform}}
-#' @keywords co-occurence
+#' @keywords co-occurrence
 #' @export
 #' @examples
 #' \dontrun{

@@ -15,16 +15,16 @@
 
   \item{low}{The color to be used for lower values.}
 
-  \item{mid}{The color to be used for mid range values
-  (default is a low key colour).}
+  \item{mid}{The color to be used for mid-range values
+  (default is a less striking color).}
 
   \item{high}{The color to be used for higher values.}
 
   \item{ave.polarity.shape}{The shape of the average
   polarity score used in the dot plot.}
 
-  \item{alpha}{Transparency level of points (ranges
-  betweeon 0 and 1).}
+  \item{alpha}{Transparency level of points (ranges between
+  0 and 1).}
 
   \item{shape}{The shape of the points used in the dot
   plot.}
@@ -32,11 +32,11 @@
   \item{point.size}{The size of the points used in the dot
   plot.}
 
-  \item{jitter}{Ammount of vertical jitter to add to the
+  \item{jitter}{Amount of vertical jitter to add to the
   points.}
 
   \item{nrow}{The number of rows in the dotplot legend
-  (used when the number of grouping variables amkes the
+  (used when the number of grouping variables makes the
   legend too wide).  If NULL no legend if plotted.}
 
   \item{\ldots}{ignored}
@@ -48,7 +48,7 @@
 \description{
   Plots a polarity object as a heat map Gantt plot with
   polarity over time (measured in words) and polarity
-  scores per sentence.  In the Ganntt plot the black dots
+  scores per sentence.  In the Gantt plot the black dots
   are the average polarity per grouping variable.
 }
 

@@ -228,7 +228,7 @@ formality <- function(text.var, grouping.var = NULL,
 #' Plots a formality Object
 #' 
 #' Plots a formality object including the parts of speech used to 
-#' calculate contectual/formal speech.
+#' calculate contextual/formal speech.
 #' 
 #' @param x The formality object.
 #' @param point.pch The plotting symbol.
@@ -239,7 +239,7 @@ formality <- function(text.var, grouping.var = NULL,
 #' visualization.  If two palettes are provided to the two bar plots 
 #' respectively.
 #' @param short.names logical.  If TRUE shortens the length of legend and label 
-#' names for mor compact plot width.
+#' names for more compact plot width.
 #' @param min.wrdcnt A minimum word count threshold that must be achieved to be 
 #' considered in the results.  Default includes all subgroups.
 #' @param \ldots ignored

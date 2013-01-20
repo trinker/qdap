@@ -38,7 +38,7 @@
 #' @param title.cex Character expansion factor for the title. NULL and NA are 
 #' equivalent to 1.0. 
 #' @param title.names Optional vector of title names equal in length to the 
-#' grouping.var that will overide the default use of the grouping.var names.  
+#' grouping.var that will override the default use of the grouping.var names.  
 #' @param proportional logical.  If TRUE scales the word clouds across 
 #' grouping.var to allow cloud to cloud comparisons.
 #' @param max.word.size A size argument to control the minimum size of the words.
@@ -49,11 +49,11 @@
 #' equivalent to 1.0. 
 #' @param legend.location The x and y co-ordinates to be used to position the 
 #' legend.
-#' @param char.keep A character vector of symbol character (i.e. punctioation) 
-#' that strip should keep.  The default is to strip everything except apostophes.  
+#' @param char.keep A character vector of symbol character (i.e. punctuation) 
+#' that strip should keep.  The default is to strip everything except apostrophes.  
 #' This enables the use of special characters to be turned into spaces or for 
 #' characters to be retained.
-#' @param char2space A vector of charaacters to be turned into spaces.  If 
+#' @param char2space A vector of characters to be turned into spaces.  If 
 #' \code{char.keep} is NULL, \code{char2space} will activate this argument.
 #' @return Returns a series of word cloud plots with target words (themes) colored.
 #' @seealso \code{\link[wordcloud]{wordcloud}}

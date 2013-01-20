@@ -8,7 +8,7 @@
   This package automates many of the tasks associated with
   quantitative discourse analysis of transcripts containing
   discourse.  The package provides parsing tools for
-  preparing transcript data, coding tools and anlalysis
+  preparing transcript data, coding tools and analysis
   tools for richer understanding of the data.  Many
   functions allow the user to aggregate data by any number
   of grouping variables, providing analysis and seamless

@@ -16,7 +16,7 @@
 
   \item{rm.quote}{logical If TRUE removes and \code{\"}.}
 
-  \item{\ldots}{Other arduments passed to
+  \item{\ldots}{Other arguments passed to
   \code{replace_number}.}
 }
 \value{

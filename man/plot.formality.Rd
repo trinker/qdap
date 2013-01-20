@@ -22,7 +22,7 @@
   to the two bar plots respectively.}
 
   \item{short.names}{logical.  If TRUE shortens the length
-  of legend and label names for mor compact plot width.}
+  of legend and label names for more compact plot width.}
 
   \item{min.wrdcnt}{A minimum word count threshold that
   must be achieved to be considered in the results.
@@ -36,6 +36,6 @@
 }
 \description{
   Plots a formality object including the parts of speech
-  used to calculate contectual/formal speech.
+  used to calculate contextual/formal speech.
 }
 

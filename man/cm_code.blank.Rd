@@ -86,5 +86,5 @@ cm_code.blank(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)),
   \code{\link[qdap]{cm_code.exclude}},
   \code{\link[qdap]{cm_code.transform}}
 }
-\keyword{co-occurence}
+\keyword{co-occurrence}
 

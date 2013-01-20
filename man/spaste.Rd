@@ -5,7 +5,7 @@
   spaste(terms, trailing = TRUE, leading = TRUE)
 }
 \arguments{
-  \item{terms}{A character vector of terms to instert
+  \item{terms}{A character vector of terms to insert
   trailing and/or leading spaces.}
 
   \item{leading}{logical.  If TRUE inserts a leading space

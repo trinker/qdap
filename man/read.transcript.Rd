@@ -74,7 +74,7 @@
   If a transcript is a .docx file read transcript expects
   two columns (generally person and dialogue) with some
   sort of separator (default is colon separator).  .doc
-  fils must be converted to .docx before reding in.
+  files must be converted to .docx before reading in.
 }
 \examples{
 \dontrun{

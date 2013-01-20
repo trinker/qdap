@@ -1,17 +1,17 @@
-#' Search Colulmns of a Data Frame 
+#' Search Columns of a Data Frame 
 #' 
 #' Find terms located in columns of a data frame.
 #' 
 #' @param dataframe A dataframe object to search.
 #' @param term A character vector term to search for.
-#' @param column.name Optional column of the data frame to search (nome or 
-#' index).
+#' @param column.name Optional column of the data frame to search (character 
+#' name or or integer index).
 #' @param max.distance Maximum distance allowed for a match. Expressed either as 
 #' integer, or as a fraction of the pattern length times the maximal 
 #' transformation cost (will be replaced by the smallest integer not less than 
 #' the corresponding fraction).
 #' @param \ldots Other arguments passed to \code{agrep}.
-#' @return Returns the rows of the data frame that amtch the search term.
+#' @return Returns the rows of the data frame that match the search term.
 #' @keywords search
 #' @export
 #' @examples

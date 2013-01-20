@@ -19,7 +19,7 @@
 #' FALSE applies by column.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{prop}}.
 #' @return \code{word.count} - returns a word count by row or total.
-#' @note wc is a convienent short hand for word.count.
+#' @note wc is a convenient short hand for word.count.
 #' @seealso \code{\link[qdap]{syllable.count}}
 #' @seealso \code{\link[qdap]{prop}}
 #' @keywords word-count, character-count
@@ -125,7 +125,7 @@ function(text.var, byrow = TRUE, missing = NA, apostrophe.remove = TRUE,
 #' variable(s).
 #' 
 #' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proption.
+#' output is proportion.
 #' @param zero.replace Value to replace 0 values with.
 #' @param digits Integer; number of decimal places to round when printing.   
 #' @return \code{character.table} - returns a list:
@@ -224,7 +224,7 @@ function(x, ...) {
 #' @param lab.digits Integer values specifying the number of digits to be 
 #' printed if \code{label} is TRUE.
 #' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proption.  If NULL uses the value from 
+#' output is proportion.  If NULL uses the value from 
 #' \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.
 #' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
 #' from \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.

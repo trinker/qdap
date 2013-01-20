@@ -4,7 +4,7 @@
 #' 
 #' @param text.var The text variable
 #' @param parallel logical.  If TRUE attempts to run the function on multiple 
-#' cores.  Note that this may not mean a spead boost if you have one core or if 
+#' cores.  Note that this may not mean a speed boost if you have one core or if 
 #' the data set is smaller as the cluster takes time to create.
 #' @param na.omit logical.  If TRUE missing values (]code{NA}) will be omitted.
 #' @param digits Integer; number of decimal places to round when printing.
@@ -12,7 +12,7 @@
 #' progress bar.  If parallel is TRUE this argument is ignored.  Note that 
 #' setting this argument to TRUE may slow down the function.
 #' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proption.
+#' output is proportion.
 #' @param zero.replace Value to replace 0 values with.
 #' @param gc.rate An integer value.  This is a necessary argument because of a 
 #' problem with the garbage collection in the openNLP function that \code{pos} 
@@ -30,7 +30,7 @@
 #' @rdname pos
 #' @seealso 
 #' \code{\link[openNLP]{tagPOS}}
-#' @references openNLP \url{http:/opennlp.apache.org}
+#' @references \href{openNLP}{http:/opennlp.apache.org}
 #' @keywords parts-of-speech
 #' @export
 #' @import openNLP parallel openNLPmodels.en Snowball
@@ -254,7 +254,7 @@ function(text.var, grouping.var = NULL, digits = 1, percent = TRUE,
 #' This must be one of the strings \code{"pretty"} (a left justified version of 
 #' the output optimized for viewing but not good for export),  \code{"matrix"} 
 #' (a matrix version of the output), \code{"dataframe"}\\ \code{"df"} (a 
-#' dataframe varseion of the output), \code{"all"} (a list of all three of the 
+#' dataframe version of the output), \code{"all"} (a list of all three of the 
 #' previous output types).
 #' @export
 pos.tags <-
@@ -349,7 +349,7 @@ function(x, ...) {
 #' @param lab.digits Integer values specifying the number of digits to be 
 #' printed if \code{label} is TRUE.
 #' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proption.  If NULL uses the value from 
+#' output is proportion.  If NULL uses the value from 
 #' \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.
 #' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
 #' from \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.

@@ -22,10 +22,10 @@
   \item{text.var}{The text variable.}
 
   \item{leadspace}{logical.  If TRUE inserts a leading
-  space in the repalcements.}
+  space in the replacements.}
 
   \item{trailspace}{logical.  If TRUE inserts a trailing
-  space in the repalcements.}
+  space in the replacements.}
 
   \item{fixed}{logical. If TRUE, pattern is a string to be
   matched as is. Overrides all conflicting arguments.}

@@ -1,7 +1,7 @@
 \name{synonyms}
 \alias{syn}
 \alias{synonyms}
-\title{Search For Synnonyms}
+\title{Search For Synonyms}
 \usage{
   synonyms(terms, return.list = TRUE, multiwords = TRUE,
     report.null = TRUE)
@@ -28,7 +28,7 @@
   that match term(s).
 }
 \description{
-  Search for synnonyms that match term(s).
+  Search for synonyms that match term(s).
 }
 \examples{
 \dontrun{

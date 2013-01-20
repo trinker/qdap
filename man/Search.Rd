@@ -1,6 +1,6 @@
 \name{Search}
 \alias{Search}
-\title{Search Colulmns of a Data Frame}
+\title{Search Columns of a Data Frame}
 \usage{
   Search(dataframe, term, column.name = NULL,
     max.distance = 0.02, ...)
@@ -11,7 +11,7 @@
   \item{term}{A character vector term to search for.}
 
   \item{column.name}{Optional column of the data frame to
-  search (nome or index).}
+  search (character name or or integer index).}
 
   \item{max.distance}{Maximum distance allowed for a match.
   Expressed either as integer, or as a fraction of the
@@ -22,7 +22,7 @@
   \item{\ldots}{Other arguments passed to \code{agrep}.}
 }
 \value{
-  Returns the rows of the data frame that amtch the search
+  Returns the rows of the data frame that match the search
   term.
 }
 \description{

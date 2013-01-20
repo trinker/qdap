@@ -21,7 +21,7 @@
 #' \code{\link[qdap]{cm_code.combine}},
 #' \code{\link[qdap]{cm_code.overlap}},
 #' \code{\link[qdap]{cm_code.transform}}
-#' @keywords co-occurence
+#' @keywords co-occurrence
 #' @export
 #' @examples
 #' \dontrun{

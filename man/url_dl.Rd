@@ -11,7 +11,7 @@
 }
 \value{
   Places a copy of the downloaded document in the users
-  wordking directory.
+  working directory.
 }
 \description{
   This function enables downloading documents for future

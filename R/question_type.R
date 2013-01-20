@@ -9,7 +9,7 @@
 #' @param neg.cont logical.  IF TRUE provides separate counts for the negative 
 #' contraction forms of the interrogative words.
 #' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proption.
+#' output is proportion.
 #' @param zero.replace Value to replace 0 values with.
 #' @param digits Integer; number of decimal places to round when printing.   
 #' @return Returns a list of:
@@ -22,7 +22,7 @@
 #' \item{missing}{The row numbers of the missing data (excluded from analysis).}
 #' \item{percent}{The value of percent used for plotting purposes.}
 #' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
-#' @details The algorithm searchs for the following interrogative words (and 
+#' @details The algorithm searches for the following interrogative words (and 
 #' optionally, their negative contraction form as well): 
 #'  
 #' 1) whose 2) whom 3) who 4) where 5) what 6) which 7) why 8) when 9) were 
@@ -33,7 +33,7 @@
 #' The interrogative word that is found first (with the exception of "ok", "right" 
 #' and "correct") in the question determines the sentence type. "ok", "right" and 
 #' "correct" sentence types are determined if the sentence is a question with no 
-#' other interogative words found and "ok", "right" or "correct" is the last 
+#' other interrogative words found and "ok", "right" or "correct" is the last 
 #' word of the sentence.  Those with undetermined sentence type are labeled 
 #' unknown.
 #' @keywords question, question-count
@@ -236,7 +236,7 @@ function(x, ...) {
 #' @param lab.digits Integer values specifying the number of digits to be 
 #' printed if \code{label} is TRUE.
 #' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proption.  If NULL uses the value from 
+#' output is proportion.  If NULL uses the value from 
 #' \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.
 #' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
 #' from \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.

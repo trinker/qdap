@@ -4,7 +4,7 @@
 #' 
 #' @param files csv file(s) to read.   
 #' @param a.names object names to assign the csv file(s) to.  If NULL assigns 
-#' the csv to the name(s) of the csv file(s) in the global enviroment.
+#' the csv to the name(s) of the csv file(s) in the global environment.
 #' @param l.name A character vector of names to assign to the csv files 
 #' (dataframes) being read in.  Default (NULL) uses the names of the files in 
 #' the directory without the file extension.

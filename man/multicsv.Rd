@@ -12,7 +12,7 @@
 
   \item{a.names}{object names to assign the csv file(s) to.
   If NULL assigns the csv to the name(s) of the csv file(s)
-  in the global enviroment.}
+  in the global environment.}
 
   \item{l.name}{A character vector of names to assign to
   the csv files (dataframes) being read in.  Default (NULL)

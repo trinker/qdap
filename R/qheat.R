@@ -16,8 +16,8 @@
 #' @param text.color A character vector to plot the text if \code{values} 
 #' is TRUE.
 #' @param xaxis.col A single character vector color choice for the high values.
-#' @param yaxis.col  A single character vector color choice for the hlow values.
-#' @param order.by An optional character vector of a varable name to order the 
+#' @param yaxis.col  A single character vector color choice for the low values.
+#' @param order.by An optional character vector of a variable name to order the 
 #' columns by.  To reverse use a negative (\code{-}) before the column name.
 #' @param grid The color of the grid (Use NULL to remove the grid).  
 #' @param by.column logical.  If TRUE applies scaling to the column.  If 

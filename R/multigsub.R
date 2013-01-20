@@ -8,9 +8,9 @@
 #' one which are  a replacement for matched pattern. 
 #' @param text.var The text variable.
 #' @param leadspace logical.  If TRUE inserts a leading space in the 
-#' repalcements.
+#' replacements.
 #' @param trailspace logical.  If TRUE inserts a trailing space in the 
-#' repalcements.
+#' replacements.
 #' @param fixed logical. If TRUE, pattern is a string to be matched as is. 
 #' Overrides all conflicting arguments.
 #' @param \dots Additional arguments passed to \code{\link[base]{gsub}}.

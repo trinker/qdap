@@ -11,7 +11,7 @@
 
   \item{person.var}{The person variable to be stretched.}
 
-  \item{sep}{The spearator(s) to search for and break on.
+  \item{sep}{The separator(s) to search for and break on.
   Default is: c(".", "_", ";")}
 
   \item{track.reps}{logical.  If TRUE leaves the row names
@@ -23,7 +23,7 @@
   stretched and accompanying rows repeated.
 }
 \description{
-  Look for cells with multiple perople and create separate
+  Look for cells with multiple people and create separate
   rows for each person.
 }
 \examples{

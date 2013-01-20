@@ -80,7 +80,7 @@
   title. NULL and NA are equivalent to 1.0.}
 
   \item{title.names}{Optional vector of title names equal
-  in length to the grouping.var that will overide the
+  in length to the grouping.var that will override the
   default use of the grouping.var names.}
 
   \item{proportional}{logical.  If TRUE scales the word
@@ -103,12 +103,12 @@
   used to position the legend.}
 
   \item{char.keep}{A character vector of symbol character
-  (i.e. punctioation) that strip should keep.  The default
-  is to strip everything except apostophes. This enables
+  (i.e. punctuation) that strip should keep.  The default
+  is to strip everything except apostrophes. This enables
   the use of special characters to be turned into spaces or
   for characters to be retained.}
 
-  \item{char2space}{A vector of charaacters to be turned
+  \item{char2space}{A vector of characters to be turned
   into spaces.  If \code{char.keep} is NULL,
   \code{char2space} will activate this argument.}
 }

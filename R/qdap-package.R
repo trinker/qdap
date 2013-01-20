@@ -3,7 +3,7 @@
 #' This package automates many of the tasks associated with quantitative 
 #' discourse analysis of transcripts containing discourse.  The package 
 #' provides parsing tools for preparing transcript data, coding tools and 
-#' anlalysis tools for richer understanding of the data.  Many functions 
+#' analysis tools for richer understanding of the data.  Many functions 
 #' allow the user to aggregate data by any number of grouping variables, 
 #' providing analysis and seamless integration with other R packages which 
 #' enable higher level analysis and visualization of text.  This empowers 
@@ -130,8 +130,8 @@ NULL
 #' A stopword list containing a character vector of stopwords. 
 #' 
 #' @details Fry's Word List: The first 25 make up about one-third of all printed 
-#' material in English. The first 100 makem up about one-half of all printed 
-#' material in English. The first 300 makem up about 65\% of all printed 
+#' material in English. The first 100 make up about one-half of all printed 
+#' material in English. The first 300 make up about 65\% of all printed 
 #' material in English."
 #' 
 #' 
@@ -149,8 +149,8 @@ NULL
 #' A stopword list containing a character vector of stopwords. 
 #' 
 #' @details Fry's Word List: The first 25 make up about one-third of all printed 
-#' material in English. The first 100 makem up about one-half of all printed 
-#' material in English. The first 300 makem up about 65\% of all printed 
+#' material in English. The first 100 make up about one-half of all printed 
+#' material in English. The first 300 make up about 65\% of all printed 
 #' material in English."
 #' 
 #' 
@@ -168,8 +168,8 @@ NULL
 #' A stopword list containing a character vector of stopwords. 
 #' 
 #' @details Fry's Word List: The first 25 make up about one-third of all printed 
-#' material in English. The first 100 makem up about one-half of all printed 
-#' material in English. The first 300 makem up about 65\% of all printed 
+#' material in English. The first 100 make up about one-half of all printed 
+#' material in English. The first 300 make up about 65\% of all printed 
 #' material in English."
 #' 
 #' @docType data 
@@ -398,7 +398,7 @@ NULL
 #' @usage data(negative.words) 
 #' @format A vector with 4783 elements 
 #' @references Hu, M., & Liu, B. (2004). Mining opinion features in customer 
-#' reviews. National Conference on Artificial Intellgience. 
+#' reviews. National Conference on Artificial Intelligence. 
 #' 
 #' \url{http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html}
 NULL
@@ -417,7 +417,7 @@ NULL
 #' @usage data(positive.words) 
 #' @format A vector with 2006 elements 
 #' @references Hu, M., & Liu, B. (2004). Mining opinion features in customer 
-#' reviews. National Conference on Artificial Intellgience. 
+#' reviews. National Conference on Artificial Intelligence. 
 #' 
 #' \url{http://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html}
 NULL
@@ -665,7 +665,7 @@ NULL
 #'   \item match.string. A single string of possible matches.
 #' } 
 #' 
-#' @note Intended for itnernal use with the \code{\link[qdap]{synonyms}} function.
+#' @note Intended for internal use with the \code{\link[qdap]{synonyms}} function.
 #' @docType data 
 #' @keywords datasets 
 #' @name SYNONYM 

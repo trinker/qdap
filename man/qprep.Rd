@@ -10,8 +10,7 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{rm.dash}{logical logical.  If TRUE dashes will be
-  removed.}
+  \item{rm.dash}{logical.  If TRUE dashes will be removed.}
 
   \item{bracket}{The type of bracket (and encased text) to
   remove.  This is one of the strings \code{"curly"},
@@ -27,7 +26,7 @@
 
   \item{abbreviation}{A two column key of abbreviations
   (column 1) and long form replacements (column 2) or a
-  vector of abbeviations.  Default is to use qdap's
+  vector of abbreviations.  Default is to use qdap's
   abbreviations data set.  Also takes the argument
   \code{NULL} which turns off this parsing technique.}
 

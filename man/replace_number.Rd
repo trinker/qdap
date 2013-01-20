@@ -1,6 +1,6 @@
 \name{replace_number}
 \alias{replace_number}
-\title{Replace Numerbers With Text Representation}
+\title{Replace Numbers With Text Representation}
 \usage{
   replace_number(text.var, num.paste = "separate")
 }

@@ -39,7 +39,7 @@
 #' @return Returns a dataframe of dialogue and people.
 #' @note If a transcript is a .docx file read transcript expects two columns 
 #' (generally person and dialogue) with some sort of separator (default is colon 
-#' separator).  .doc fils must be converted to .docx before reding in.
+#' separator).  .doc files must be converted to .docx before reading in.
 #' @Section Warning: {\link[qdap]{read.transcript}} may contain errors if the 
 #' file being read in is .docx.  The researcher should carefully investigate 
 #' each transcript for errors before further parsing the data.

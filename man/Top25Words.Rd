@@ -9,9 +9,9 @@
 }
 \details{
   Fry's Word List: The first 25 make up about one-third of
-  all printed material in English. The first 100 makem up
+  all printed material in English. The first 100 make up
   about one-half of all printed material in English. The
-  first 300 makem up about 65\% of all printed material in
+  first 300 make up about 65\% of all printed material in
   English."
 }
 \references{

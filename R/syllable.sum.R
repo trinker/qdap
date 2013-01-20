@@ -4,7 +4,7 @@
 #' 
 #' @param text.var The text variable
 #' @param parallel logical.  If TRUE attempts to run the function on multiple 
-#' cores.  Note that this may not mean a spead boost if you have one core or if 
+#' cores.  Note that this may not mean a speed boost if you have one core or if 
 #' the data set is smaller as the cluster takes time to create.
 #' @param text A single character vector of text.
 #' @param remove.bracketed logical.  If TRUE brackets are removed from the 
@@ -13,10 +13,11 @@
 #' found in the dictionary (i.e. syllables were calculated with an algorithm).
 #' @return \code{syllable.sum} - returns a vector of syllable counts per row. 
 #' @rdname syllabication
-#' @note The worker of all the syllable functions is \code{syllable.count} 
-#' though it is not intendeded for direct use on a transcript.  This function 
-#' relies on a a combined dictionary lookup (based on the Nettalk Corpus (Sejnowski 
-#' & Rosenberg, 1987)) and backup algorithm method.
+#' @details The worker function of all the syllable functions is 
+#' \code{\link[qdap]{syllable.count}}, though it is not intended for direct 
+#' use on a transcript.  This function relies on a combined dictionary lookup 
+#' (based on the Nettalk Corpus (Sejnowski & Rosenberg, 1987)) and backup 
+#' algorithm method.
 #' @references Sejnowski, T.J., and Rosenberg, C.R. (1987). "Parallel networks 
 #' that learn to pronounce English text" in Complex Systems, 1, 145-168. 
 #' @keywords syllable, syllabication, polysyllable

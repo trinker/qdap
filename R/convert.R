@@ -5,7 +5,7 @@
 #' @param x A vector of times in seconds.
 #' @return Returns a vector of times in h:m:s format.  Generally, this function 
 #' is for internal use.
-#' @keywords time, coversion
+#' @keywords time, conversion
 #' @seealso \code{\link[chron]{times}}
 #' @export
 #' @import chron

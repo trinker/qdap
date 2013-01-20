@@ -11,7 +11,7 @@
   match.string. A single string of possible matches. }
 }
 \note{
-  Intended for itnernal use with the
+  Intended for internal use with the
   \code{\link[qdap]{synonyms}} function.
 }
 \references{

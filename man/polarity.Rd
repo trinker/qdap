@@ -27,11 +27,11 @@
   reversing the intent of a positive or negative word.}
 
   \item{amplification.list}{A character vector of terms
-  that increases the intensity of a psoitive or negatibve
+  that increases the intensity of a positive or negative
   word.}
 
   \item{rm.incomplete}{logical.  If TRUE text rows ending
-  with qdap's incomplete sentence endmark (\code{|}) will
+  with qdap's incomplete sentence end mark (\code{|}) will
   be removed from the analysis.}
 
   \item{digits}{Integer; number of decimal places to round
@@ -43,7 +43,7 @@
   Returns a list of two dataframes: \item{all}{A dataframe
   of scores per row with: \itemize{ \item wc - word count
   \item polarity - sentence polarity score \item raw - raw
-  polarity score (considering only positive and nagtive
+  polarity score (considering only positive and negative
   words) \item negation.adj.raw - raw adjusted for negation
   words \item amplification.adj.raw - raw adjusted for
   amplification words \item pos.words - words considered
@@ -52,7 +52,7 @@
   by grouping variable.}
 }
 \description{
-  Aproximate the sentiment (polarity) of text by grouping
+  Approximate the sentiment (polarity) of text by grouping
   variable(s).
 }
 \details{
@@ -86,7 +86,7 @@
   \deqn{x_i^{\uparrow}=\frac{1}{n-1}}
 }
 \note{
-  The polarity score is dependant upon the polarity
+  The polarity score is dependent upon the polarity
   dictionary used. This function defaults to the word
   polarity word dictionary used by Hu, M., & Liu, B.
   (2004), however, this may not be appropriate for the
@@ -124,7 +124,7 @@ plot(poldat2, nrow=NULL)
 \references{
   Hu, M., & Liu, B. (2004). Mining opinion features in
   customer reviews. National Conference on Artificial
-  Intellgience.
+  Intelligence.
 
   \url{http://www.slideshare.net/jeffreybreen/r-by-example-mining-twitter-for}
 }

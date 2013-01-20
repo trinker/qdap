@@ -6,7 +6,7 @@
 #' @param dat Data; either a dataframe, matrix or vector.
 #' @param replace Element to replace.
 #' @param with Replacement element.
-#' @return Returns a dataframe, matrix or vector with the element repalced. 
+#' @return Returns a dataframe, matrix or vector with the element replaced. 
 #' @keywords replace
 #' @export
 #' @examples

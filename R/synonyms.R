@@ -1,6 +1,6 @@
-#' Search For Synnonyms
+#' Search For Synonyms
 #' 
-#' Search for synnonyms that match term(s).
+#' Search for synonyms that match term(s).
 #' 
 #' @param terms The terms to find synonyms for.  
 #' @param return.list logical.  If TRUE returns the output for multiple synonyms 

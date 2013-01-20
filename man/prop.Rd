@@ -12,7 +12,7 @@
   round.}
 
   \item{percent}{logical.  If TRUE output given as percent.
-  If FALSE the output is proption.}
+  If FALSE the output is proportion.}
 
   \item{by.column}{logical.  If TRUE applies to the column.
   If FALSE applies by row.}
@@ -21,11 +21,12 @@
   (controlled by digits).}
 }
 \value{
-  Returns a matrix with proportionaly scaled values.
+  Returns a matrix with proportionally scaled values.
 }
 \description{
-  Convert a raw matrix or dataframe to proprtions/percents.
-  Divides each element of a column by the column sum.
+  Convert a raw matrix or dataframe to
+  proportions/percents.  Divides each element of a column
+  by the column sum.
 }
 \examples{
 \dontrun{

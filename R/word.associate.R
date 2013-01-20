@@ -76,7 +76,7 @@
 #' \code{cloud.legend} or \code{nw.legend} may be set and if the other remains 
 #' NULL it will assume the supplied vector to the previous legend argument.  If 
 #' this behavior is not desired \code{legend.override} should be set to TRUE.
-#' @param char2space Currently a rode to no where.  Eventually this will allow 
+#' @param char2space Currently a road to nowhere.  Eventually this will allow 
 #' the retention of characters as is allowed in \code{trans.cloud} already.
 #' @param \dots Other arguments supplied to \code{\link[qdap]{trans.cloud}}.
 #' @return Returns a list:

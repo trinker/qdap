@@ -2,7 +2,7 @@
 #' 
 #' Search for potential missing values (i.e. sentences that are merely a 
 #' punctuation mark) and optionally replace with missing value (\code{NA}).  
-#' Useful in the intial cleaning process.
+#' Useful in the initial cleaning process.
 #' 
 #' @param text.var  The text variable.
 #' @param n Number of characters to consider for missing (default is 3).

@@ -1,6 +1,6 @@
 #' Polarity Score (Sentiment Analysis)
 #' 
-#' Aproximate the sentiment (polarity) of text by grouping variable(s).
+#' Approximate the sentiment (polarity) of text by grouping variable(s).
 #' 
 #' @param text.var The text variable.
 #' @param grouping.var The grouping variables.  Default NULL generates one word 
@@ -11,9 +11,9 @@
 #' @param negation.list  A character vector of terms reversing the intent of a 
 #' positive or negative word.
 #' @param amplification.list  A character vector of terms that increases the 
-#' intensity of a psoitive or negatibve word.
+#' intensity of a positive or negative word.
 #' @param rm.incomplete logical.  If TRUE text rows ending with qdap's 
-#' incomplete sentence endmark (\code{|}) will be removed from the analysis.
+#' incomplete sentence end mark (\code{|}) will be removed from the analysis.
 #' @param digits Integer; number of decimal places to round when printing. 
 #' @param \ldots Other arguments supplied to \code{endf}.
 #' @return Returns a list of two dataframes:
@@ -21,7 +21,8 @@
 #' \itemize{
 #'   \item  wc - word count
 #'   \item  polarity - sentence polarity score
-#'   \item  raw - raw polarity score (considering only positive and nagtive words)
+#'   \item  raw - raw polarity score (considering only positive and negative 
+#'   words)
 #'   \item  negation.adj.raw - raw adjusted for negation words
 #'   \item  amplification.adj.raw - raw adjusted for amplification words
 #'   \item  pos.words - words considered positive
@@ -29,7 +30,7 @@
 #' }
 #' \item{group}{A dataframe with the average polarity score by grouping variable.}
 #' @seealso \url{https://github.com/trestletech/Sermon-Sentiment-Analysis}
-#' @note The polarity score is dependant upon the polarity dictionary used.  
+#' @note The polarity score is dependent upon the polarity dictionary used.  
 #' This function defaults to the word polarity word dictionary used by Hu, M., & 
 #' Liu, B. (2004), however, this may not be appropriate for the context of 
 #' children in a classroom.  The user may (is encouraged) to provide/augment the 
@@ -63,7 +64,7 @@
 #'     
 #' \deqn{x_i^{\uparrow}=\frac{1}{n-1}}
 #' @references Hu, M., & Liu, B. (2004). Mining opinion features in customer 
-#' reviews. National Conference on Artificial Intellgience. 
+#' reviews. National Conference on Artificial Intelligence. 
 #' 
 #' \url{http://www.slideshare.net/jeffreybreen/r-by-example-mining-twitter-for}
 #' @keywords sentiment, polarity
@@ -239,23 +240,23 @@ function(x, ...) {
 #' Plots a polarity Object
 #' 
 #' Plots a polarity object as a heat map Gantt plot with polarity over 
-#' time (measured in words) and polarity scores per sentence.  In the Ganntt 
+#' time (measured in words) and polarity scores per sentence.  In the Gantt 
 #' plot the black dots are the average polarity per grouping variable.
 #' 
 #' @param x The polarity object.
 #' @param bar.size The size of the bars used in the Gantt plot.
 #' @param low The color to be used for lower values.
-#' @param mid The color to be used for mid range values (default is a low key 
-#' colour).
+#' @param mid The color to be used for mid-range values (default is a less 
+#' striking color).
 #' @param high The color to be used for higher values.
 #' @param ave.polarity.shape The shape of the average polarity score used in the 
 #' dot plot.
-#' @param alpha Transparency level of points (ranges betweeon 0 and 1).
+#' @param alpha Transparency level of points (ranges between 0 and 1).
 #' @param shape The shape of the points used in the dot plot.
 #' @param point.size The size of the points used in the dot plot.
-#' @param jitter Ammount of vertical jitter to add to the points.
+#' @param jitter Amount of vertical jitter to add to the points.
 #' @param nrow The number of rows in the dotplot legend (used when the number of 
-#' grouping variables amkes the legend too wide).  If NULL no legend if plotted.
+#' grouping variables makes the legend too wide).  If NULL no legend if plotted.
 #' @param \ldots ignored
 #' @return Invisibly returns the \code{ggplot2} objects that form the larger 
 #' plot.  

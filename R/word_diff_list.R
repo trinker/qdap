@@ -18,10 +18,10 @@
 #' @param digits the number of digits to be displayed in the proportion column 
 #' (default is 3).
 #' @return An list of word data frames comparing grouping variables word use 
-#' against one another. Eachdata frame contains three columns:
+#' against one another. Each dataframe contains three columns:
 #' \item{word}{The words unique to that group} 
 #' \item{freq}{The number of times that group used that word}
-#' \item{prop}{The proportion of that group's over all word use dedicated to that 
+#' \item{prop}{The proportion of that group's overall word use dedicated to that 
 #' particular word}
 #' @keywords word-list
 #' @export

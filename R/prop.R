@@ -1,17 +1,17 @@
 #' Convert Raw Numeric Matrix or Data Frame to Proportions
 #' 
-#' Convert a raw matrix or dataframe to proprtions/percents.  Divides each 
+#' Convert a raw matrix or dataframe to proportions/percents.  Divides each 
 #' element of a column by the column sum.
 #' 
 #' @param mat A numeric matrix or dataframe.
 #' @param digits Integer; number of decimal places to round.
 #' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proption.
+#' output is proportion.
 #' @param by.column logical.  If TRUE applies to the column.  If FALSE 
 #' applies by row.
 #' @param round logical.  If TRUE rounds the returned values (controlled by 
 #' digits).
-#' @return Returns a matrix with proportionaly scaled values.
+#' @return Returns a matrix with proportionally scaled values.
 #' @keywords proportion, percent, percentage
 #' @export
 #' @examples

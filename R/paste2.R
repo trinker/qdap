@@ -2,7 +2,7 @@
 #' 
 #' Paste unspecified columns or a list of vectors together.
 #' 
-#' @param multi.columns The multiple columns or a litst of vectors to paste 
+#' @param multi.columns The multiple columns or a list of vectors to paste 
 #' together.
 #' @param sep A character string to separate the terms. 
 #' @param handle.na logical.  If TRUE returns \code{NA} if any column/vector 
@@ -11,7 +11,7 @@
 #' @return Returns a vector with row-wise elements pasted together.
 #' @note \code{\link[base]{paste}} differs from \code{\link[qdap]{paste2}} 
 #' because \code{paste} does not allowed an unspecified number of columns to be 
-#' pasted.  This behavior can be convient for inside of functions when the 
+#' pasted.  This behavior can be convenient for inside of functions when the 
 #' number of columns being pasted is unknown.
 #' @seealso \code{\link[base]{paste}}
 #' @keywords paste

@@ -10,7 +10,7 @@
 
   \item{char.keep}{A character vector of symbols (i.e.
   punctuation) that \code{strip} should keep.  The default
-  is to strip every symbol except apostophes.}
+  is to strip every symbol except apostrophes.}
 
   \item{digit.remove}{logical.  If TRUE strips digits from
   the text.}
@@ -26,7 +26,7 @@
   unwanted characters.
 }
 \description{
-  Strip text of unwanted charcters.
+  Strip text of unwanted characters.
 }
 \examples{
 \dontrun{

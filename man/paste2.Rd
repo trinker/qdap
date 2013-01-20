@@ -6,7 +6,7 @@
     trim = TRUE)
 }
 \arguments{
-  \item{multi.columns}{The multiple columns or a litst of
+  \item{multi.columns}{The multiple columns or a list of
   vectors to paste together.}
 
   \item{sep}{A character string to separate the terms.}
@@ -27,7 +27,7 @@
   \code{\link[base]{paste}} differs from
   \code{\link[qdap]{paste2}} because \code{paste} does not
   allowed an unspecified number of columns to be pasted.
-  This behavior can be convient for inside of functions
+  This behavior can be convenient for inside of functions
   when the number of columns being pasted is unknown.
 }
 \examples{

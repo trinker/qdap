@@ -79,5 +79,5 @@ cm_code.exclude(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)), "variable")
   \code{\link[qdap]{cm_code.overlap}},
   \code{\link[qdap]{cm_code.transform}}
 }
-\keyword{co-occurence}
+\keyword{co-occurrence}
 

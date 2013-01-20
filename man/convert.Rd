@@ -22,6 +22,6 @@ convert(c(256, 3456, 56565))
 \seealso{
   \code{\link[chron]{times}}
 }
-\keyword{coversion}
+\keyword{conversion}
 \keyword{time,}
 

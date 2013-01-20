@@ -7,7 +7,7 @@
 #' @param num2word logical If TRUE replaces a numbers with text representations.
 #' @param fix.comma logical If TRUE removes any spaces before a comma.
 #' @param rm.quote  logical If TRUE removes and \code{\"}.
-#' @param \ldots Other arduments passed to \code{replace_number}.
+#' @param \ldots Other arguments passed to \code{replace_number}.
 #' @return Returns a parsed character vector.
 #' @seealso \code{\link[qdap]{strip}}
 #' @keywords parse, clean

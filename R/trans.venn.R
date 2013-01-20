@@ -1,6 +1,6 @@
 #' Venn Diagram by Grouping Variable
 #' 
-#' Produce a venn diagram by grouping variable.
+#' Produce a Venn diagram by grouping variable.
 #' 
 #' @param text.var The text variable.         
 #' @param grouping.var The grouping variables.  Default NULL generates one 
@@ -31,11 +31,11 @@
 #' @param legend.horiz logical; if TRUE, set the legend horizontally rather than 
 #' vertically.
 #' @param \dots Other arguments passed to plot.
-#' @return Returns a venn plot by grouping variable.
-#' @note The algorithm used to overlap the venn circles becomes increasingly 
-#' overburdened and less accurate with increased grouping variables. An 
-#' alternative is to use a network plot woth dissimilarity measures labeling the 
-#' edges between nodes (grouping variables).
+#' @return Returns a Venn plot by grouping variable(s).
+#' @section Warning: The algorithm used to overlap the Venn circles becomes 
+#' increasingly overburdened and less accurate with increased grouping 
+#' variables. An alternative is to use a network plot with dissimilarity 
+#' measures labeling the edges between nodes (grouping variables).
 #' @seealso \code{\link[venneuler]{venneuler}}
 #' @keywords venn
 #' @export
@@ -43,7 +43,7 @@
 #' @examples
 #' \dontrun{
 #' with(DATA , trans.venn(state, person, legend.location = "topright"))
-#' #the plot below will take a considerable ammount of time to plot
+#' #the plot below will take a considerable amount of time to plot
 #' with(raj.act.1 , trans.venn(dialogue, person, legend.location = "topleft"))
 #' }
 trans.venn <-

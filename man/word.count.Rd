@@ -55,7 +55,7 @@
   \code{\link[qdap]{prop}}.}
 
   \item{percent}{logical.  If TRUE output given as percent.
-  If FALSE the output is proption.}
+  If FALSE the output is proportion.}
 
   \item{zero.replace}{Value to replace 0 values with.}
 
@@ -89,7 +89,7 @@
   counts by grouping . variable(s).
 }
 \note{
-  wc is a convienent short hand for word.count.
+  wc is a convenient short hand for word.count.
 }
 \examples{
 \dontrun{

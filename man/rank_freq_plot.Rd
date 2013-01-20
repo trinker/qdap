@@ -24,7 +24,7 @@
   \item{ncol}{integer value indicating the number of
   columns in the facet wrap.}
 
-  \item{jitter}{Ammount of horizontal jitter to add to the
+  \item{jitter}{Amount of horizontal jitter to add to the
   points.}
 
   \item{log.freq}{logical.  If TURE plots the frequencies
@@ -37,15 +37,15 @@
 
   \item{dis.col}{Color of the dis legomenon points.}
 
-  \item{alpha}{Transparency level of points (ranges
-  betweeon 0 and 1).}
+  \item{alpha}{Transparency level of points (ranges between
+  0 and 1).}
 
   \item{shape}{An integer specifying the symbol used to
   plot the points.}
 
   \item{title}{Optional plot title.}
 
-  \item{digits}{Integer; number of dicimal places to
+  \item{digits}{Integer; number of decimal places to
   round.}
 
   \item{plot}{logical.  If TRUE provides a rank frequency
@@ -59,7 +59,7 @@
   \item{title.ext}{The title extension that extends:
   "Rank-Frequency Plot ..."}
 
-  \item{jitter.ammount}{Ammount of horizontal jitter to add
+  \item{jitter.ammount}{Amount of horizontal jitter to add
   to the points.}
 
   \item{log.scale}{logical.  If TRUE plots the rank and
@@ -67,7 +67,7 @@
 }
 \value{
   Returns a rank-frequency plot and a list of three
-  dataframes: \item{WORD_COUNTS}{The word frquencies
+  dataframes: \item{WORD_COUNTS}{The word frequencies
   supplied to \code{rank_freq_plot} or created by
   \code{rank_freq_mplot}.}
   \item{RANK_AND_FREQUENCY_STATS}{A dataframe of rank and

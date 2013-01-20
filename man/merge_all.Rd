@@ -44,7 +44,7 @@ names(WEEKlist) <- LETTERS[1:3]
 lapply(seq_along(WEEKlist), function(x) {
     y <- names(WEEKlist[[x]]) #do this to avoid repeating this 3 times
     names(WEEKlist[[x]]) <<- c(y[1:3], paste(y[4:length(y)], ".", x, sep=""))}
-)  #notice the assignment to the enviroment
+)  #notice the assignment to the environment
 
 
 merge_all(frames=WEEKlist, by=c('ID', 'Gender', 'DOB'))

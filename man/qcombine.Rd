@@ -46,5 +46,5 @@ qcombine(head(mtcars), B, elim.old = FALSE)
   \code{\link[base]{transform}}
 }
 \keyword{combine,}
-\keyword{tranform}
+\keyword{transform}
 

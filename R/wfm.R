@@ -1,4 +1,4 @@
-#' Word Frequencty Matrix
+#' Word Frequency Matrix
 #' 
 #' \code{wfm} - Generate a word frequency matrix by grouping variable(s).
 #' 
@@ -9,8 +9,7 @@
 #' @param wfdf A word frequency data frame given instead of raw text.var and 
 #' optional grouping.var. Basically converts a word frequency dataframe (wfdf) 
 #' to a word frequency matrix (\code{wfm}).  Default is NULL.
-#' @param output Output type (either \code{"proportion"}, \code{"proportion"} or 
-#' \code{"percent"}).
+#' @param output Output type (either \code{"proportion"} or \code{"percent"}).
 #' @param stopwords A vector of stop words to remove.
 #' @param digits An integer indicating the number of decimal places (round) or 
 #' significant digits (signif) to be used. Negative values are allowed
@@ -48,12 +47,12 @@
 #' #raw with margin (will work) 
 #' y <- wfdf(DATA$state, DATA$person, margins = TRUE) 
 #'   
-#' #porportion (will not work) 
+#' #proportion (will not work) 
 #' z <- wfdf(DATA$state, DATA$person, output = "proportion")  
 #' 
 #' WL1 <- c(y[, 1])                                                                      
 #' WL2 <- list(c("read", "the", "a"), c("you", "your", "your're"))                       
-#' WL3 <- list(bob = c("read", "the", "a"), yous = c("you", "your", "your're"))          
+#' WL3 <- list(bob = c("read", "the", "a"), yous = c("you", "your", "you're"))          
 #' WL4 <- list(bob = c("read", "the", "a"), yous = c("a", "you", "your", "your're"))     
 #' WL5 <- list(yous = c("you", "your", "your're"))                                       
 #' WL6 <- list(c("you", "your", "your're"))  #no name so will be called words 1          
@@ -190,9 +189,9 @@ function(text.var, grouping.var = NULL, stopwords = NULL,
 #' 
 #' @rdname Word_Frequency_Matrix
 #' @export
-#' @return \code{wfm.expanded} - returns a matrix similar to a word frequency matrix (
-#' \code{wfm})but the rows are expanded to represent the maximum usages of the 
-#' word and cells are dummy coded to indicate that numer of uses.
+#' @return \code{wfm.expanded} - returns a matrix similar to a word frequency 
+#' matrix (\code{wfm}) but the rows are expanded to represent the maximum usages 
+#' of the word and cells are dummy coded to indicate that number of uses.
 wfm.expanded <-
 function(text.var, grouping.var = NULL, ...){
     if(is.null(comment(text.var))) {

@@ -60,22 +60,22 @@
   \item{\dots}{Other arguments passed to plot.}
 }
 \value{
-  Returns a venn plot by grouping variable.
+  Returns a Venn plot by grouping variable(s).
 }
 \description{
-  Produce a venn diagram by grouping variable.
+  Produce a Venn diagram by grouping variable.
 }
-\note{
-  The algorithm used to overlap the venn circles becomes
+\section{Warning}{
+  The algorithm used to overlap the Venn circles becomes
   increasingly overburdened and less accurate with
   increased grouping variables. An alternative is to use a
-  network plot woth dissimilarity measures labeling the
+  network plot with dissimilarity measures labeling the
   edges between nodes (grouping variables).
 }
 \examples{
 \dontrun{
 with(DATA , trans.venn(state, person, legend.location = "topright"))
-#the plot below will take a considerable ammount of time to plot
+#the plot below will take a considerable amount of time to plot
 with(raj.act.1 , trans.venn(dialogue, person, legend.location = "topleft"))
 }
 }

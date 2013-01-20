@@ -9,15 +9,15 @@
 #' or more grouping variables.  
 #' @param tot Optional turns of talk variable that yields turn of talk measures.    
 #' @param parallel logical.  If TRUE attempts to run the function on multiple 
-#' cores.  Note that this may not mean a spead boost if you have one core or if 
+#' cores.  Note that this may not mean a speed boost if you have one core or if 
 #' the data set is smaller as the cluster takes time to create (parallel is 
 #' slower until approximately 10,000 rows).  To reduce run time pass a 
 #' \code{"word_stats"} object to the \code{word_stats} function.
-#' @param rm.incomplete logical.  If TRUE incomplete statments are removed from 
-#' calculating the output.   
+#' @param rm.incomplete logical.  If TRUE incomplete statements are removed from 
+#' calculations in the output.   
 #' @param digit.remove logical.  If TRUE removes digits from calculating the 
 #' output.       
-#' @param apostrophe.remove logical.  If TRUE removes apostophes from 
+#' @param apostrophe.remove logical.  If TRUE removes apostrophes from 
 #' calculating the output.   
 #' @param digits Integer; number of decimal places to round when printing.                    
 #' @param \ldots Any other arguments passed to endf.     
@@ -34,7 +34,7 @@
 #'     \item{sptot}{ - syllables per turn of talk}
 #'     \item{wptot}{ - words per turn of talk}
 #'     \item{wps}{ - words per sentence}
-#'     \item{cps}{ - characters per sentemce}
+#'     \item{cps}{ - characters per sentence}
 #'     \item{sps}{ - syllables per sentence}
 #'     \item{psps}{ - polly syllables per sentence}
 #'     \item{cpw}{ - characters per word}
@@ -42,11 +42,11 @@
 #'     \item{n.state}{ - number of statements}
 #'     \item{n.quest}{ - number of questions}
 #'     \item{n.exclm}{ - number of exclamations}
-#'     \item{n.incom}{ - number of incomplete satetments}
+#'     \item{n.incom}{ - number of incomplete statements}
 #'     \item{p.state}{ - proportion of statements}
 #'     \item{p.quest}{ - proportion of questions}
 #'     \item{p.exclm}{ - proportion of exclamations}
-#'     \item{p.incom}{ - proportion of incomplete satetments}
+#'     \item{p.incom}{ - proportion of incomplete statements}
 #'     \item{n.hapax}{ - number of hapax legomenon}
 #'     \item{n.dis}{ - number of dis legomenon}
 #'     \item{grow.rate}{ - proportion of hapax legomenon to words}
@@ -60,6 +60,8 @@
 #' some rows contained missing values)} 
 #' \item{percent}{The value of percent used for plotting purposes.}
 #' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
+#' \item{digits}{integer value od number of digits to display; mostly internal 
+#' use}  
 #' @keywords descriptive statistic
 #' @export
 #' @examples

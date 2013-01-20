@@ -19,7 +19,7 @@
 
   \item{parallel}{logical.  If TRUE attempts to run the
   function on multiple cores.  Note that this may not mean
-  a spead boost if you have one core or if the data set is
+  a speed boost if you have one core or if the data set is
   smaller as the cluster takes time to create.}
 
   \item{text}{A single character vector of text.}
@@ -58,13 +58,13 @@
   \code{combo_syllable.sum} - Count the number of both
   syllables and polysyllables per row of text.
 }
-\note{
-  The worker of all the syllable functions is
-  \code{syllable.count} though it is not intendeded for
-  direct use on a transcript.  This function relies on a a
-  combined dictionary lookup (based on the Nettalk Corpus
-  (Sejnowski & Rosenberg, 1987)) and backup algorithm
-  method.
+\details{
+  The worker function of all the syllable functions is
+  \code{\link[qdap]{syllable.count}}, though it is not
+  intended for direct use on a transcript.  This function
+  relies on a combined dictionary lookup (based on the
+  Nettalk Corpus (Sejnowski & Rosenberg, 1987)) and backup
+  algorithm method.
 }
 \examples{
 \dontrun{
