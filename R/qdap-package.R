@@ -281,7 +281,7 @@ NULL
  
 #' Amplifying Words
 #' 
-#' A dataset containing a vector of words that amplifly word meaning.
+#' A dataset containing a vector of words that amplify word meaning.
 #' 
 #' @details 
 #' Valence shifters are words that alter or intensify the meaning of the polarized

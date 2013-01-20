@@ -4,7 +4,7 @@
 \title{Amplifying Words}
 \format{A vector with 32 elements}
 \description{
-  A dataset containing a vector of words that amplifly word
+  A dataset containing a vector of words that amplify word
   meaning.
 }
 \details{

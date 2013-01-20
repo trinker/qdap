@@ -14,11 +14,11 @@
 }
 \value{
   Returns a matrix of the Kullback Leibler measure between
-  each vector of probabiltiies.
+  each vector of probabilities.
 }
 \description{
-  A proximatey measure between two probability
-  distributions applied to speech.
+  A proximity measure between two probability distributions
+  applied to speech.
 }
 \details{
   Uses Kullback & Leibler's (1951) formula:
@@ -26,7 +26,7 @@
   \right )}P_{i}}
 }
 \note{
-  The \code{kullback.leibler} function generally recieves
+  The \code{kullback.leibler} function generally receives
   the output of either \code{wfm} or \code{wfdf} functions.
 }
 \examples{

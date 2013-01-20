@@ -1,15 +1,15 @@
 #' Kullback Leibler Statistic
 #' 
-#' A proximatey measure between two probability distributions applied to speech.
+#' A proximity measure between two probability distributions applied to speech.
 #' 
 #' @param x A numeric vector, matrix or data frame.
 #' @param y A second numeric vector if x is also a vector.  Default is NULL.
 #' @param digits Number of decimal places to round. 
 #' @return Returns a matrix of the Kullback Leibler measure between each vector 
-#' of probabiltiies.
+#' of probabilities.
 #' @details Uses Kullback & Leibler's (1951) formula:
 #' \deqn{D_{KL}(P||Q)=\sum_i{ln\left ( \frac{P_{i}}{Q_{i}} \right )}P_{i}}
-#' @note The \code{kullback.leibler} function generally recieves the output of
+#' @note The \code{kullback.leibler} function generally receives the output of
 #' either \code{wfm} or \code{wfdf} functions.
 #' @references  Kullback, S., & Leibler, R.A. (1951). On Information and 
 #' sufficiency. Annals of Mathematical Statistics 22 (1): 79-86. 

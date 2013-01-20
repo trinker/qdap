@@ -6,7 +6,7 @@
 #' @param key.match Either a two column data frame (if data frame supplied no 
 #' key reassign needed) of a match key and reassignment column or a single 
 #' vector match key.
-#' @param key.reassign A single reassingment vector supplied if key.match is 
+#' @param key.reassign A single reassignment vector supplied if key.match is 
 #' not a two column data frame.
 #' @param missing Value to assign to terms not matching the key.match.
 #' @return Outputs A new vector with reassigned values.

@@ -1,6 +1,6 @@
 \name{key_merge}
 \alias{key_merge}
-\title{Merge Demogrphic Information with Person/Text Transcript}
+\title{Merge Demographic Information with Person/Text Transcript}
 \usage{
   key_merge(transcript.df, key.df, common.column = NULL,
     defualt.arrange = TRUE)

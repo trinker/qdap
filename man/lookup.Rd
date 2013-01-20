@@ -12,7 +12,7 @@
   frame supplied no key reassign needed) of a match key and
   reassignment column or a single vector match key.}
 
-  \item{key.reassign}{A single reassingment vector supplied
+  \item{key.reassign}{A single reassignment vector supplied
   if key.match is not a two column data frame.}
 
   \item{missing}{Value to assign to terms not matching the
