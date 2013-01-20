@@ -23,7 +23,7 @@
   \item{sums}{logical.  If TRUE reports and optionally
   plots the total units used by grouping variable(s).}
 
-  \item{plot.colors}{The colors of the Gannt plot bars.
+  \item{plot.colors}{The colors of the Gantt plot bars.
   Either a single color or a length equal to the number of
   grouping variable(s).}
 
@@ -38,9 +38,9 @@
   Returns a data frame of start and end times by grouping
   variable(s) or optionally returns a list of two: (1) A
   data frame of the total units used by grouping
-  variable(s) and (2) a data frame of of start and end
-  times by grouping variable(s).  Optionally plots a gantt
-  plot of the returned data.
+  variable(s) and (2) a data frame of start and end times
+  by grouping variable(s).  Optionally plots a Gantt plot
+  of the returned data.
 }
 \description{
   Generates start and end times of supplied text selections
@@ -49,7 +49,7 @@
 }
 \note{
   For repeated measures data output use \code{gantt_rep};
-  for a convientent wrapper that takes text and generates
+  for a conventient wrapper that takes text and generates
   plots use \code{gantt_plot}; and for a flexible gantt
   plot that words with code matrix functions (cm) use
   \code{gantt_wrap}.

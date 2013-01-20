@@ -12,11 +12,11 @@
 #' @param warning logical.  If TRUE provides comma warnings (sentences that 
 #' contain numerous commas that may be handled incorrectly by the algorithm).
 #' @return Returns a dataframe with a text variable indicating imperative 
-#' senteces.  Imperative sentences are marked with * followed by the original 
+#' sentences.  Imperative sentences are marked with * followed by the original 
 #' end mark.
-#' @note The algorithm used by \code{imperative} is sentive to English language 
-#' dialects and types.  Commas can indicate a choppy sentence and may indicate a 
-#' false postive.
+#' @section Warning: The algorithm used by \code{imperative} is sensitive to 
+#' English language dialects and types.  Commas can indicate a choppy sentence 
+#' and may indicate a false positive.
 #' @export
 #' @examples
 #' \dontrun{

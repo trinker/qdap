@@ -15,7 +15,7 @@
   own environment.
 }
 \description{
-  Creates a new environemnt for quick hash style dictionary
+  Creates a new environment for quick hash style dictionary
   lookup.
 }
 \examples{

@@ -15,7 +15,7 @@
     border.width = 0.1, constrain = TRUE)
 }
 \arguments{
-  \item{dataframe}{A data frame with ploting variable(s)
+  \item{dataframe}{A data frame with plotting variable(s)
   and a column of start and end times.}
 
   \item{plot.var}{A factor plotting variable (y axis)}
@@ -24,7 +24,7 @@
   or 2 to facet by}
 
   \item{fill.var}{An optional variable to fill the code
-  stips by.}
+  strips by.}
 
   \item{title}{An optional title for the plot.}
 
@@ -70,7 +70,7 @@
 
   \item{size}{The width of the plot bars.}
 
-  \item{rm.horiz.lines}{logical.  If TRUE the horzontal
+  \item{rm.horiz.lines}{logical.  If TRUE the horizontal
   lines will be removed.}
 
   \item{x.ticks}{logical.  If TRUE the x ticks will be
@@ -92,7 +92,7 @@
   borders around Gantt bars. Controls length (width also
   controlled if not specified).}
 
-  \item{border.width}{Controls broder width around Gantt
+  \item{border.width}{Controls border width around Gantt
   bars.  Use a numeric value in addition to border size if
   plot borders appear disproportional.}
 
@@ -109,7 +109,7 @@
 \note{
   For non repeated measures data/plotting use \code{gantt};
   for repeated measures data output use \code{gantt_rep};
-  and for a convientent wrapper that takes text and
+  and for a conventient wrapper that takes text and
   generates plots use \code{gantt_plot}.
 }
 \examples{
@@ -124,12 +124,12 @@ gantt_wrap(dat, fam.aff_sex, fill.var = "codes", legend.position = "bottom")
 (dat3 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex),
     units = "words", col.sep = "_")))
 x <- gantt_wrap(dat3, fam.aff_sex, facet.vars = "act",
-    title = "Repeated MeasuresGantt Plot")
+    title = "Repeated Measures Gantt Plot")
 x + scale_color_manual(values=rep("black", length(levels(dat3$fam.aff_sex))))
 }
 }
 \author{
-  Andrie de Vries and and Tyler Rinker
+  Andrie de Vries and Tyler Rinker
   <tyler.rinker@gmail.com>.
 }
 \references{

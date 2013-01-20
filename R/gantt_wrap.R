@@ -2,11 +2,11 @@
 #' 
 #' A ggplot2 wrapper that produces a Gantt plot
 #' 
-#' @param dataframe A data frame with ploting variable(s) and a column of start 
+#' @param dataframe A data frame with plotting variable(s) and a column of start 
 #' and end times.
 #' @param plot.var A factor plotting variable (y axis)
 #' @param facet.vars An optional single vector or list of 1 or 2 to facet by
-#' @param fill.var An optional variable to fill the code stips by.
+#' @param fill.var An optional variable to fill the code strips by.
 #' @param title An optional title for the plot.
 #' @param ylab An optional y label.
 #' @param xlab An optional x label.
@@ -31,7 +31,7 @@
 #' "free" both height and width will vary. This setting has no effect unless the 
 #' appropriate scales also vary.
 #' @param size The width of the plot bars.
-#' @param rm.horiz.lines logical.  If TRUE the horzontal lines will be removed.
+#' @param rm.horiz.lines logical.  If TRUE the horizontal lines will be removed.
 #' @param x.ticks  logical.  If TRUE the x ticks will be displayed.
 #' @param y.ticks  logical.  If TRUE the y ticks will be displayed.
 #' @param legend.position The position of legends. ("left", "right", "bottom", 
@@ -41,16 +41,16 @@
 #' NULL).
 #' @param border.size An integer value for the size to plot borders around Gantt 
 #' bars. Controls length (width also controlled if not specified).
-#' @param border.width Controls broder width around Gantt bars.  Use a numeric 
+#' @param border.width Controls border width around Gantt bars.  Use a numeric 
 #' value in addition to border size if plot borders appear disproportional.
 #' @param constrain logical.  If TRUE the Gantt bars touch the edge of the graph.
 #' @return Returns a Gantt style visualization. Invisibly returns the ggplot2 
 #' list object.
 #' @note For non repeated measures data/plotting use \code{gantt}; for repeated 
-#' measures data output use \code{gantt_rep}; and for a convientent wrapper that 
+#' measures data output use \code{gantt_rep}; and for a conventient wrapper that 
 #' takes text and generates plots use \code{gantt_plot}.
 #' @import ggplot2 scales RColorBrewer
-#' @author Andrie de Vries and and Tyler Rinker <tyler.rinker@@gmail.com>.
+#' @author Andrie de Vries and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso 
 #' \code{\link[qdap]{gantt}},
 #' \code{\link[qdap]{gantt_plot}},
@@ -73,7 +73,7 @@
 #' (dat3 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex), 
 #'     units = "words", col.sep = "_")))    
 #' x <- gantt_wrap(dat3, fam.aff_sex, facet.vars = "act", 
-#'     title = "Repeated MeasuresGantt Plot")
+#'     title = "Repeated Measures Gantt Plot")
 #' x + scale_color_manual(values=rep("black", length(levels(dat3$fam.aff_sex)))) 
 #' }
 gantt_wrap <-

@@ -28,22 +28,23 @@
   measure and grouping variable(s)
 }
 \description{
-  Produces start and end times for occurances for each
+  Produces start and end times for occurrences for each
   repeated measure condition.
 }
 \note{
   For non repeated measures data/plotting use \code{gantt};
-  for a convientent wrapper that takes text and generates
+  for a conventient wrapper that takes text and generates
   plots use \code{gantt_plot}; and for a flexible gantt
   plot that words with code matrix functions (cm) use
   \code{gantt_wrap}.
 }
 \examples{
 \dontrun{
-(dat3 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex), units = "words",
-   col.sep = "_")))
-gantt_wrap(dat3, fam.aff_sex, facet.vars = "act", title = "Repeated MeasuresGantt Plot",
-   minor.line.freq = 25, major.line.freq = 100)
+(dat3 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex),
+    units = "words", col.sep = "_")))
+gantt_wrap(dat3, fam.aff_sex, facet.vars = "act",
+    title = "Repeated Measures Gantt Plot",
+    minor.line.freq = 25, major.line.freq = 100)
 }
 }
 \references{

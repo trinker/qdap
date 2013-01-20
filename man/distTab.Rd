@@ -13,18 +13,18 @@
   cut.}
 
   \item{digits}{Integer indicating the number of decimal
-  places (round) or significant digits (signif) to be used.
-  Negative values are allowed}
+  places (round) or significant digits (signif.) to be
+  used. Negative values are allowed}
 
   \item{\ldots}{Other variables passed to cut.}
 }
 \value{
   Returns a list of data frames (or singular data frame for
   a vector) of frequencies, cumulative frequencies,
-  percentages and cumalative percentages for each interval.
+  percentages and cumulative percentages for each interval.
 }
 \description{
-  Generates a dsitribution table for vectors, matrices and
+  Generates a distribution table for vectors, matrices and
   dataframes.
 }
 \examples{

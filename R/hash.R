@@ -1,6 +1,6 @@
 #' Hash/Dictionary Lookup
 #' 
-#' Creates a new environemnt for quick hash style dictionary lookup.
+#' Creates a new environment for quick hash style dictionary lookup.
 #' 
 #' @param x A two column dataframe.
 #' @param mode.out The type of output (column 2) expected (e.g. \code{"character"}, 

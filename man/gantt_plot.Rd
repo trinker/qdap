@@ -17,7 +17,7 @@
   of repeated measures to facet by}
 
   \item{fill.var}{An optional variable to fill the code
-  stips by.}
+  strips by.}
 
   \item{xlab}{The name of the x-axis label.}
 

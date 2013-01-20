@@ -9,7 +9,7 @@
 #' variable or a list of 1 or more grouping variables.
 #' @param rm.var An optional single vector or list of 1 or 2 of repeated 
 #' measures to facet by    
-#' @param fill.var An optional variable to fill the code stips by. 
+#' @param fill.var An optional variable to fill the code strips by. 
 #' @param xlab The name of the x-axis label.
 #' @param units The unit of measurement.      
 #' @param col.sep The column separator.

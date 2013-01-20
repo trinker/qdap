@@ -2,12 +2,12 @@
 \alias{duplicates}
 \title{Find Duplicated Words in a Text String}
 \usage{
-  duplicates(string, threshhold = 1)
+  duplicates(string, threshold = 1)
 }
 \arguments{
   \item{string}{A character string.}
 
-  \item{threshhold}{An interger of the minimal number of
+  \item{threshold}{An integer of the minimal number of
   repeats.}
 }
 \value{

@@ -1,10 +1,11 @@
-#' Sentence Endmarks
+#' Sentence End marks
 #' 
-#' Grab the sentence endmarks for a transcript.  This can be useful to 
+#' Grab the sentence end marks for a transcript.  This can be useful to 
+#' categorize based on sentence type.
 #' 
 #' @param text.var The text variable.        
-#' @return Returns a character vector of qdap endmarks for each sentence.  
-#' Endmarks include:
+#' @return Returns a character vector of qdap end marks for each sentence.  
+#' End marks include:
 #' \item{"."}{Declarative sentence.} 
 #' \item{"?"}{Question sentence.} 
 #' \item{"!"}{Exclamatory sentence.} 
@@ -13,9 +14,9 @@
 #' \item{"*?"}{Imperative-question sentence (unlikely to occur)} 
 #' \item{"*!"}{Imperative-exclamatory sentence.} 
 #' \item{"*|"}{Imperative-incomplete sentence.} 
-#' \item{"no.em"}{No endmark.}
+#' \item{"no.em"}{No end mark.}
 #' \item{"blank"}{Empty cell/NA.} 
-#' @keywords endmark
+#' @keywords end-mark
 #' @export
 #' @examples
 #' \dontrun{

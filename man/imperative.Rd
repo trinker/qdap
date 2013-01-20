@@ -26,16 +26,16 @@
 }
 \value{
   Returns a dataframe with a text variable indicating
-  imperative senteces.  Imperative sentences are marked
+  imperative sentences.  Imperative sentences are marked
   with * followed by the original end mark.
 }
 \description{
   Automatic imperative remarking.
 }
-\note{
-  The algorithm used by \code{imperative} is sentive to
+\section{Warning}{
+  The algorithm used by \code{imperative} is sensitive to
   English language dialects and types.  Commas can indicate
-  a choppy sentence and may indicate a false postive.
+  a choppy sentence and may indicate a false positive.
 }
 \examples{
 \dontrun{

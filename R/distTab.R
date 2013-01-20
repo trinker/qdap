@@ -1,16 +1,16 @@
 #' SPSS Style Frequency Tables
 #' 
-#' Generates a dsitribution table for vectors, matrices and dataframes.
+#' Generates a distribution table for vectors, matrices and dataframes.
 #' 
 #' @param dataframe A vector or data.frame object.
 #' @param breaks Either a numeric vector of two or more cut points or a single 
 #' number (greater than or equal to 2) giving the number of intervals into which 
 #' x is to be cut.
 #' @param digits Integer indicating the number of decimal places (round) or 
-#' significant digits (signif) to be used. Negative values are allowed
+#' significant digits (signif.) to be used. Negative values are allowed
 #' @param \ldots Other variables passed to cut.
 #' @return Returns a list of data frames (or singular data frame for a vector) of 
-#' frequencies, cumulative frequencies, percentages and cumalative percentages 
+#' frequencies, cumulative frequencies, percentages and cumulative percentages 
 #' for each interval.
 #' @seealso \code{\link[base]{cut}}
 #' @keywords distribution, frequency
