@@ -79,13 +79,13 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
         q <- c(sapply(q, function(x) as.vector(unlist(strsplit(x, " ")))))
         y <- tolower(q)
         SYLL <- function(x) {
-            if(exists(x, env = env.syl)){
-                return(get(x, e = env.syl))   
+            if(exists(x, envir = env.syl)){
+                return(get(x, envir = env.syl))   
             } else {  
                 x2 <- as.character(substring(x, 1, nchar(x) - 1))
                 if(substring(x, nchar(x), nchar(x)) == "s" &  
-                    exists(x2, env = env.syl)){
-                    return(get(x2, e = env.syl))
+                    exists(x2, envir = env.syl)){
+                    return(get(x2, envir = env.syl))
                 } else {
                     m <- gsub("eeing", "XX", x)
                     m <- gsub("eing", "XX", m)
@@ -161,10 +161,10 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
         }  
         n <- sapply(y, function(x) SYLL(x))
         InDic <- function(x) {
-            ifelse(exists(x, env = env.syl), "-", 
+            ifelse(exists(x, envir = env.syl), "-", 
                 ifelse(substring(x, nchar(x), nchar(x)) == "s" &&  
                     exists(substring(x, nchar(x), nchar(x)), 
-                    env = env.syl), "-", "NF"))
+                    envir = env.syl), "-", "NF"))
         }
         k <- sapply(y, InDic)
         DF <- data.frame(words = q, syllables = n, in.dictionary = k)
@@ -188,6 +188,7 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
 #' @export
 polysyllable.sum <-
 function(text.var, parallel = FALSE) {
+    Var1 <- NULL
     counter <- function(x) {
         v <- table(syllable.count(Trim(x))["syllables"])
         if (identical(c(v), integer(0))){

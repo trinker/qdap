@@ -69,6 +69,7 @@ rank_freq_mplot <-
 function(text.var, grouping.var = NULL, ncol =4, jitter = 0.2, log.freq = TRUE, 
     log.rank = TRUE, hap.col = "red", dis.col = "blue", alpha = 1, shape = 1, 
     title = "Rank-Frequency Plot", digits = 2, plot = TRUE) {
+    plotrank <- plotfreq <- cols <- freq <- NULL
     if(is.null(grouping.var)) {
         G <- "all"
     } else {
@@ -163,6 +164,7 @@ function(text.var, grouping.var = NULL, ncol =4, jitter = 0.2, log.freq = TRUE,
 rank_freq_plot <-
 function(words, frequencies, plot = TRUE, title.ext = NULL,
     jitter.ammount = 0.1, log.scale = TRUE, hap.col = "red", dis.col = "blue") {
+    freq <- NULL
     original.data <- data.frame(words = words, freq = frequencies)
     X <- tapply(words, frequencies, function(x) length(x))
     ZIPF <- data.frame(n.words = as.numeric(rev(X)), 
@@ -200,4 +202,3 @@ function(words, frequencies, plot = TRUE, title.ext = NULL,
         LEGOMENA_STATS = c(percent_hapax_legomena = percent_hapax_legomena, 
         percent_dis_legomena = percent_dis_legomena))
 }
-

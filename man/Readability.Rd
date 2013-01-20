@@ -43,8 +43,9 @@
   congruent with McLaughlin's intent) or "all".}
 
   \item{labels}{A character vector character string
-  indicating output type. One of "automatic" (default; adds
-  labels automatically) or "click" (interactive).}
+  indicating output type. One of \code{"automatic"}
+  (default; adds labels automatically) or \code{"click"}
+  (interactive).}
 }
 \value{
   Returns a dataframe with selected readability statistic
@@ -93,6 +94,7 @@ with(rajSPLIT, flesch_kincaid(dialogue, list(person, act)))
 with(rajSPLIT, flesch_kincaid(dialogue, list(sex, fam.aff)))
 
 (x <- with(rajSPLIT, fry(dialogue, list(sex, fam.aff))))
+names(x)
 with(rajSPLIT, fry(dialogue, list(sex, fam.aff), labels = "click"))
 
 with(rajSPLIT, linsear_write(dialogue, list(person, act)))

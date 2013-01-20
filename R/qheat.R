@@ -56,6 +56,7 @@ qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
     digits = 1, text.size = 3, text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white", by.column = TRUE, 
     auto.size = FALSE, mat2 = NULL) {
+    group <- value <- values2 <- NULL
     if (!is.null(mat2) & !values) {
         values <- TRUE 
     }

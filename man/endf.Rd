@@ -9,7 +9,7 @@
   \item{dataframe}{A dataframe that contains the person and
   text variable.}
 
-  \item{text.var}{The text variable.}
+  \item{text.var}{A character string of the text variable.}
 
   \item{warning.report}{logical.  If TRUE prints a warning
   of regarding removal of incomplete sentences.}

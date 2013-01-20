@@ -12,15 +12,16 @@ function(str, mat, logic = FALSE){
     sapply(string, function(x) paste0(" ", x, " "), USE.NAMES = FALSE)
   }
   str <- spacer(strip(str, lower.case = FALSE))
+  findit1 <- function(x, logic = TRUE) {
+      sapply(x, function(z) tester(z, str, logic))
+  }
+  findit2 <- function(x, logic = FALSE) {
+      sort(unique(c(unlist(sapply(x, function(z) tester(z, str, logic))))))
+  }
   if (logic) {
-      findit <- function(x, logic = TRUE) {
-        sapply(x, function(z) tester(z, str, logic))
-      }
+      findit <- findit1
   } else {
-      findit <- function(x, logic = FALSE) {
-        sort(unique(c(unlist(sapply(x, 
-          function(z) tester(z, str, logic))))))
-      }
+      findit <- findit1
   }
   if (is.list(mat)) {
     a <- lapply(mat, findit, logic = logic)

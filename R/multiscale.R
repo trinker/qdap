@@ -27,6 +27,7 @@
 #' }
 multiscale <-
 function(numeric.var, grouping.var, original_order = TRUE, digits = 2) {
+    text.var <- NULL
     G <- if(is.null(grouping.var)) {
         "all"
     } else {

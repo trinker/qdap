@@ -74,6 +74,7 @@
 #' desc_wrds$word.elem
 #' desc_wrds$sent.elem 
 #' plot(desc_wrds)
+#' plot(desc_wrds, label=TRUE, lab.digits = 1)
 #' with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff))) 
 #' }
 word_stats <-
@@ -81,6 +82,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
     rm.incomplete = FALSE, digit.remove = FALSE, apostrophe.remove = FALSE, 
     digits = 3, ...) {
     totin <- tot
+    n.sent <- n.tot <- n.words <- n.char <- n.syl <- n.poly <- NULL
     if(is.null(grouping.var)) {
         G <- "all"
     } else {
@@ -137,7 +139,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
         DF$n.sent <- 1:nrow(DF)
         DF <- DF[with(DF, order(DF$group, DF$n.sent)), ]
         M <- DF_word_stats(text.var = DF$text.var, digit.remove = digit.remove, 
-            apostrophe.remove = apostrophe.remove, parallel = parallel)
+            apos_rm = apostrophe.remove, parallel = parallel)
         M <- M[, !names(M) %in% c("text.var", "n.sent")]
         DF <- data.frame(DF, M)
         DF$end.mark <- substring(DF$text.var, nchar(DF$text.var), 
@@ -343,16 +345,31 @@ plot.word_stats <- function(x, label = FALSE, lab.digits = NULL, ...) {
 }
 
 #a helper function used in word_stats (not exported)
+plot.word_stats <- function(x, label = FALSE, lab.digits = NULL, ...) {
+    v <- x$gts
+    if (is.null(lab.digits)) {
+        lab.digits <- x$digits
+    }
+    if (!label) {
+        qheat(v,  ...)
+    } else {
+        mat2 <- dfnumfor(x$gts, digits = lab.digits)
+        qheat(v, values = label, mat2 = mat2, ...)    
+    }
+}
+
+#a helper function used in word_stats (not exported)
 DF_word_stats <-
-function(text.var, digit.remove = FALSE, apostrophe.remove = FALSE, 
+function(text.var, digit.remove = FALSE, apos_rm = FALSE, 
     digits = 3, parallel = FALSE) {
+    polysyllable.count <- NULL
     DF <- na.omit(data.frame(text.var = text.var, 
         stringsAsFactors = FALSE))
     DF$n.sent <- 1:nrow(DF)
     DF$word.count <- word.count(DF$text.var, missing = 0, 
         digit.remove = digit.remove)
     DF$character.count <- character.count(DF$text.var, 
-        apostrophe = apostrophe.remove, digit.remove = digit.remove)
+        apostrophe.remove = apos_rm, digit.remove = digit.remove)
     DF <- data.frame(DF, combo_syllable.sum(DF$text.var, parallel = parallel))
     DF <- DF[, c("text.var", "n.sent", "word.count", "character.count",
         "syllable.count",  "polysyllable.count") ]
@@ -366,3 +383,5 @@ function(text.var, digit.remove = FALSE, apostrophe.remove = FALSE,
     DF <- DF[order(DF$n.sent),]  
     return(DF)
 }
+
+

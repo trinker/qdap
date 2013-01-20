@@ -3,7 +3,7 @@
 #' Test for incomplete sentences and optionally remove them.
 #' 
 #' @param dataframe A dataframe that contains the person and text variable.
-#' @param text.var The text variable.
+#' @param text.var A character string of the text variable.
 #' @param warning.report logical.  If TRUE prints a warning of regarding 
 #' removal of incomplete sentences.
 #' @param which.mode logical.  If TRUE outputs two logical vectors: NOT (logical 

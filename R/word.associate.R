@@ -153,7 +153,9 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
     cloud.legend = NULL, cloud.legend.cex = .8, cloud.legend.location = c(-.03, 1.03), 
     nw.legend = NULL, nw.legend.cex = .8, nw.legend.location = c(-1.54, 1.41),
     legend.override = FALSE, char2space = NULL, ...){
-#currently char2space is a road to nowhere.  COnnect the road and add char.keep argument as well
+#currently char2space is a road to nowhere.  Connect the road and add char.keep 
+#argument as well
+    network.graph <- NULL
     if (network.plot | wordcloud) {
         if(is.null(nw.label.colors)) {
             nw.label.colors <- cloud.colors
@@ -174,40 +176,35 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
             }
         }
     }
-    G <- if(is.null(grouping.var)) {
-        "all"
+    if(is.null(grouping.var)) {
+        G <- "all"
     } else {
         if (is.list(grouping.var)) {
             m <- unlist(as.character(substitute(grouping.var))[-1])
-            m <- sapply(strsplit(m, "$", fixed=TRUE), 
-                function(x) x[length(x)])
-                paste(m, collapse="&")
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
         } else {
             G <- as.character(substitute(grouping.var))
-            G[length(G)]
+            G <- G[length(G)]
         }
     }
-    grouping <- if(is.null(grouping.var)){
-        rep("all", length(text.var))
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
     } else {
-    if(is.list(grouping.var) & length(grouping.var)>1) {
-         apply(data.frame(grouping.var), 1, function(x){
-                     if (any(is.na(x))){
-                         NA
-                     }else{
-                         paste(x, collapse = ".")
-                     }
-                 }
-             )
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
         } else {
-            unlist(grouping.var)
+            grouping <- unlist(grouping.var)
         } 
-    }
+    } 
     if (!is.list(match.string)) {
         match.string <- list(match.string)
     }
     Terms2 <- qdap::stopwords(text.var, stopwords = NULL, unlist = TRUE, 
-          strip = TRUE, unique = TRUE, names = FALSE, char.keep = char2space)  
+        strip = TRUE, unique = TRUE, names = FALSE, char.keep = char2space)  
     if (!is.null(char2space)) {
         Terms2 <- mgsub(char2space, " ", Terms2)
     }  
@@ -255,9 +252,8 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
                     NA
                 }else{
                     paste(x, collapse = ".")
-                     }
                 }
-            )
+            })
         } else {
             if (TU == "tot") {
                 sapply(strsplit(as.character(text.unit), ".", 

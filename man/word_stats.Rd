@@ -93,6 +93,7 @@ desc_wrds$pun
 desc_wrds$word.elem
 desc_wrds$sent.elem
 plot(desc_wrds)
+plot(desc_wrds, label=TRUE, lab.digits = 1)
 with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff)))
 }
 }

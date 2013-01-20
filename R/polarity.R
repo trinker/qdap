@@ -90,9 +90,9 @@
 #' }
 polarity <-
 function (text.var, grouping.var = NULL, positive.list = positive.words, 
-          negative.list = negative.words, negation.list = negation.words, 
-          amplification.list = increase.amplification.words, 
-          rm.incomplete = FALSE, digits = 3, ...) {
+    negative.list = negative.words, negation.list = negation.words, 
+    amplification.list = increase.amplification.words, 
+    rm.incomplete = FALSE, digits = 3, ...) {
     grouping.vars <- grouping.var
     unblank <- function(x) {
         return(x[x != ""])
@@ -265,6 +265,7 @@ function(x, ...) {
 plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99", 
     high = "blue", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
     point.size = 2.5,  jitter = .1, nrow = NULL, ...){
+    Polarity <- group <- ave.polarity <- unit <- NULL
     dat <- x[["group"]]
     dat2 <- x[["all"]]
     G <- names(dat)[1]

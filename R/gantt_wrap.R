@@ -84,6 +84,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     scale = NULL, space = NULL, size = 3, rm.horiz.lines = FALSE, x.ticks = TRUE, 
     y.ticks = TRUE, legend.position = NULL, bar.color = NULL,
     border.color = NULL, border.size = 2, border.width = .1, constrain = TRUE) { 
+    new4 <- startp <- endp <- NULL
     if (is.null(hms.scale)) {
         if (!is.null(comment(dataframe)) && comment(dataframe) == "cmtime") {
             hms.scale <- TRUE

@@ -51,6 +51,7 @@
 #' with(rajSPLIT, flesch_kincaid(dialogue, list(sex, fam.aff)))
 #' 
 #' (x <- with(rajSPLIT, fry(dialogue, list(sex, fam.aff))))
+#' names(x)
 #' with(rajSPLIT, fry(dialogue, list(sex, fam.aff), labels = "click"))
 #' 
 #' with(rajSPLIT, linsear_write(dialogue, list(person, act)))
@@ -58,46 +59,42 @@
 #' }
 automated_readability_index <-
 function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
-    G <- if(is.null(grouping.var)) {
-             "all"
-         } else {
-             if (is.list(grouping.var)) {
-                 m <- unlist(as.character(substitute(grouping.var))[-1])
-                 m <- sapply(strsplit(m, "$", fixed=TRUE), 
-                     function(x) x[length(x)])
-                 paste(m, collapse="&")
-             } else {
-                  G <- as.character(substitute(grouping.var))
-                  G[length(G)]
-             }
-         }
-    grouping <- if(is.null(grouping.var)){
-                     rep("all", length(text.var))
-                 } else {
-                     if(is.list(grouping.var) & length(grouping.var)>1) {
-                         apply(data.frame(grouping.var), 1, function(x){
-                             if(any(is.na(x))){NA}else{paste(x, collapse = ".")
-                                 }
-                             }
-                         )
-                     } else {
-                        unlist(grouping.var)
-                     } 
-                 } 
+    if(is.null(grouping.var)) {
+        G <- "all"
+    } else {
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
+    }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    } 
     text <- as.character(text.var)
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
-      DF <- endf(dataframe = DF, text.var = text.var, ...)
+        DF <- endf(dataframe = DF, text.var = text.var, ...)
     }    
     DF$word.count <- word.count(DF$text.var, missing = 0)
     i <- as.data.frame(table(DF$group))
-
     DF$group <- DF$group[ , drop=TRUE]
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
     DF$character.count <- character.count(DF$text.var)
-
     DF2 <- aggregate(word.count ~ group, DF, sum)
     DF2$sentence.count <- as.data.frame(table(DF$group))$Freq
     DF2$character.count <- aggregate(character.count ~ 
@@ -106,8 +103,8 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF2$Automated_Readability_Index <- round(with(DF2, 
         ari(tse = sentence.count, tc = character.count, tw = word.count)), 
         digits = 1)
-    names(DF2) <- c(G, names(DF2)[-1])
-    return(DF2)
+    names(DF2)[1] <- G
+   DF2
 }
 
 #' Coleman Liau Readability
@@ -118,57 +115,54 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
 #' @rdname Readability
 #' @export
 coleman_liau <-
-  function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
-    G <- if(is.null(grouping.var)) {
-      "all"
+function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
+    if(is.null(grouping.var)) {
+        G <- "all"
     } else {
-      if (is.list(grouping.var)) {
-        m <- unlist(as.character(substitute(grouping.var))[-1])
-        m <- sapply(strsplit(m, "$", fixed=TRUE), 
-                    function(x) x[length(x)])
-        paste(m, collapse="&")
-      } else {
-        G <- as.character(substitute(grouping.var))
-        G[length(G)]
-      }
-    }
-    grouping <- if(is.null(grouping.var)){
-      rep("all", length(text.var))
-    } else {
-      if(is.list(grouping.var) & length(grouping.var)>1) {
-        apply(data.frame(grouping.var), 1, function(x){
-          if(any(is.na(x))){NA}else{paste(x, collapse = ".")
-          }
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
         }
-        )
-      } else {
-        unlist(grouping.var)
-      } 
+    }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
     } 
     text <- as.character(text.var)
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
-                             stringsAsFactors = FALSE))
+        stringsAsFactors = FALSE))
     if (rm.incomplete) {
-      DF <- endf(dataframe = DF, text.var = text.var, ...)
+        DF <- endf(dataframe = DF, text.var = text.var, ...)
     }
-    DF$word.count <- word.count(DF$text.var, missing = 0, 
-                                digit.remove = FALSE)
+    DF$word.count <- word.count(DF$text.var, missing = 0, digit.remove = FALSE)
     i <- as.data.frame(table(DF$group))
     DF$group <- DF$group[ , drop=TRUE]
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
-    DF$character.count <- character.count(DF$text.var, apostrophe = FALSE, 
-                                          digit.remove = FALSE)
+    DF$character.count <- character.count(DF$text.var, 
+        apostrophe.remove = FALSE, digit.remove = FALSE)
     DF2 <- aggregate(word.count ~ group, DF, sum)
     DF2$sentence.count <- as.data.frame(table(DF$group))$Freq
     DF2$character.count <- aggregate(character.count ~ 
-                                       group, DF, sum)$character.count 
+        group, DF, sum)$character.count 
     clf <- function(tse, tw, tc) (.0588*((100*tc)/tw)) - 
       (.296*((100*tse)/tw) ) - 15.8
     DF2$Coleman_Liau <- round(with(DF2, clf(tse = sentence.count, 
-                                            tc = character.count, tw = word.count)), digits = 1)
-    names(DF2) <- c(G, names(DF2)[-1])
-    return(DF2)
+        tc = character.count, tw = word.count)), digits = 1)
+    names(DF2)[1] <- G
+    DF2
 }
 
 
@@ -182,63 +176,61 @@ coleman_liau <-
 #' @export
 SMOG <-
 function(text.var, grouping.var = NULL, output = "valid", 
-         rm.incomplete = FALSE, ...) {
-  G <- if(is.null(grouping.var)) {
-    "all"
-  } else {
-    if (is.list(grouping.var)) {
-      m <- unlist(as.character(substitute(grouping.var))[-1])
-      m <- sapply(strsplit(m, "$", fixed=TRUE), 
-                  function(x) x[length(x)])
-      paste(m, collapse="&")
+    rm.incomplete = FALSE, ...) {
+    group <- NULL
+    if(is.null(grouping.var)) {
+        G <- "all"
     } else {
-      G <- as.character(substitute(grouping.var))
-      G[length(G)]
-    }
-  }
-  grouping <- if(is.null(grouping.var)){
-    rep("all", length(text.var))
-  } else {
-    if(is.list(grouping.var) & length(grouping.var)>1) {
-      apply(data.frame(grouping.var), 1, function(x){
-        if(any(is.na(x))){NA}else{paste(x, collapse = ".")
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
         }
-      }
-      )
-    } else {
-      unlist(grouping.var)
-    } 
-  } 
-  text <- as.character(text.var)
-  DF <- na.omit(data.frame(group = grouping, text.var = text, 
-                           stringsAsFactors = FALSE))
-  if (rm.incomplete) {
-    DF <- endf(dataframe = DF, text.var = text.var, ...)
-  }
-  DF$word.count <- word.count(DF$text.var, missing = 0)
-  i <- as.data.frame(table(DF$group))
-  if (output == "valid") {
-    DF <- subset(DF, group%in%as.character(i[i$Freq > 29, ][,'Var1']))
-    if (nrow(DF) == 0) {
-      stop("Not enough sentences for valid output.")
     }
-  }
-  DF$group <- DF$group[ , drop=TRUE]
-  DF$tot.n.sent <- 1:nrow(DF)
-  DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
-  DF$polysyllable.count <- polysyllable.sum(DF$text.var)
-  DF2 <- aggregate(word.count ~ group, DF, sum)
-  DF2$sentence.count <- as.data.frame(table(DF$group))$Freq
-  DF2$polysyllable.count <- aggregate(polysyllable.count ~ 
-    group, DF, sum)$polysyllable.count   
-  smog <- function(tse, tpsy) 1.043 * sqrt(tpsy * (30/tse)) + 3.1291 
-  DF2$SMOG <- round(with(DF2, smog(tse = sentence.count, 
-    tpsy = polysyllable.count)), digits = 1)
-  DF2$validity <- ifelse(DF2$sentence.count < 30, "n < 30", 
-                         "valid")
-  if(output == "valid") DF2$validity <- NULL
-  names(DF2) <- c(G, names(DF2)[-1])
-  return(DF2)
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    } 
+    text <- as.character(text.var)
+    DF <- na.omit(data.frame(group = grouping, text.var = text, 
+        stringsAsFactors = FALSE))
+    if (rm.incomplete) {
+        DF <- endf(dataframe = DF, text.var = text.var, ...)
+    }
+    DF$word.count <- word.count(DF$text.var, missing = 0)
+    i <- as.data.frame(table(DF$group))
+    if (output == "valid") {
+        DF <- subset(DF, group%in%as.character(i[i$Freq > 29, ][,'Var1']))
+        if (nrow(DF) == 0) {
+            stop("Not enough sentences for valid output.")
+        }
+    }
+    DF$group <- DF$group[ , drop=TRUE]
+    DF$tot.n.sent <- 1:nrow(DF)
+    DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
+    DF$polysyllable.count <- polysyllable.sum(DF$text.var)
+    DF2 <- aggregate(word.count ~ group, DF, sum)
+    DF2$sentence.count <- as.data.frame(table(DF$group))$Freq
+    DF2$polysyllable.count <- aggregate(polysyllable.count ~ 
+        group, DF, sum)$polysyllable.count   
+    smog <- function(tse, tpsy) 1.043 * sqrt(tpsy * (30/tse)) + 3.1291 
+    DF2$SMOG <- round(with(DF2, smog(tse = sentence.count, 
+        tpsy = polysyllable.count)), digits = 1)
+    DF2$validity <- ifelse(DF2$sentence.count < 30, "n < 30", "valid")
+    if(output == "valid") DF2$validity <- NULL
+    names(DF2)[1] <- G
+    DF2
 }
 
 
@@ -251,37 +243,35 @@ function(text.var, grouping.var = NULL, output = "valid",
 #' @export
 flesch_kincaid <-
 function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
-    G <- if(is.null(grouping.var)) {
-      "all"
+      if(is.null(grouping.var)) {
+        G <- "all"
     } else {
-      if (is.list(grouping.var)) {
-        m <- unlist(as.character(substitute(grouping.var))[-1])
-        m <- sapply(strsplit(m, "$", fixed=TRUE), 
-                    function(x) x[length(x)])
-        paste(m, collapse="&")
-      } else {
-        G <- as.character(substitute(grouping.var))
-        G[length(G)]
-      }
-    }
-    grouping <- if(is.null(grouping.var)){
-      rep("all", length(text.var))
-    } else {
-      if(is.list(grouping.var) & length(grouping.var)>1) {
-        apply(data.frame(grouping.var), 1, function(x){
-          if(any(is.na(x))){NA}else{paste(x, collapse = ".")
-          }
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
         }
-        )
-      } else {
-        unlist(grouping.var)
-      } 
+    }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
     } 
     text <- as.character(text.var)
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
-                             stringsAsFactors = FALSE))
+        stringsAsFactors = FALSE))
     if (rm.incomplete) {
-      DF <- endf(dataframe = DF, text.var = text.var, ...)
+        DF <- endf(dataframe = DF, text.var = text.var, ...)
     }
     DF$word.count <- word.count(DF$text.var, missing = 0)
     DF$syllable.count <- syllable.sum(DF$text.var)
@@ -290,15 +280,15 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF2 <- aggregate(word.count ~ group, DF, sum)
     DF2$sentence.count <- as.data.frame(table(DF$group))$Freq
     DF2$syllable.count <- aggregate(syllable.count ~ group, DF, 
-                                    sum)$syllable.count  
+        sum)$syllable.count  
     fkgl <- function(tw, tse, tsy) 0.39 * (tw/tse) + 11.8 * (tsy/tw) - 15.59
     fre <- function(tw, tse, tsy) 206.835 - 1.015 * (tw/tse) - 84.6 * (tsy/tw)
     DF2$FK_grd.lvl <- round(with(DF2, fkgl(tw = word.count, 
-                                           tse = sentence.count, tsy = syllable.count)), digits = 1)
+        tse = sentence.count, tsy = syllable.count)), digits = 1)
     DF2$FK_read.ease <- round(with(DF2, fre(tw = word.count, 
-                                            tse = sentence.count, tsy = syllable.count)), digits = 3)
-    names(DF2) <- c(G, names(DF2)[-1])
-    return(DF2)
+        tse = sentence.count, tsy = syllable.count)), digits = 3)
+    names(DF2)[1] <- G
+    DF2
 }
 
 
@@ -309,79 +299,77 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
 #' 
 #' @rdname Readability
 #' @param labels  A character vector character string indicating output type. 
-#' One of "automatic" (default; adds labels automatically) or "click" (interactive). 
+#' One of \code{"automatic"} (default; adds labels automatically) or 
+#' \code{"click"} (interactive). 
 #' @export
 fry <-
 function(text.var, grouping.var = NULL, labels = "automatic", 
-           rm.incomplete = FALSE, ...) {
-    G <- if(is.null(grouping.var)) {
-      "all"
+    rm.incomplete = FALSE, ...) {
+    read.gr <- group <- NULL  
+    if(is.null(grouping.var)) {
+        G <- "all"
     } else {
-      if (is.list(grouping.var)) {
-        m <- unlist(as.character(substitute(grouping.var))[-1])
-        m <- sapply(strsplit(m, "$", fixed=TRUE), 
-                    function(x) x[length(x)])
-        paste(m, collapse="&")
-      } else {
-        G <- as.character(substitute(grouping.var))
-        G[length(G)]
-      }
-    }
-    grouping <- if(is.null(grouping.var)){
-      rep("all", length(text.var))
-    } else {
-      if(is.list(grouping.var) & length(grouping.var)>1) {
-        apply(data.frame(grouping.var), 1, function(x){
-          if(any(is.na(x))){NA}else{paste(x, collapse = ".")
-          }
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
         }
-        )
-      } else {
-        unlist(grouping.var)
-      } 
+    }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
     } 
     text <- as.character(text.var)
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
-                             stringsAsFactors = FALSE))
+        stringsAsFactors = FALSE))
     if (rm.incomplete) {
-      DF <- endf(dataframe = DF, text.var = text.var, ...)
+        DF <- endf(dataframe = DF, text.var = text.var, ...)
     }
     DF$word.count <- word.count(DF$text.var, missing = 0)
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
     DF$read.gr <- unlist(by(DF$word.count, DF$group, partition))
     LIST <- names(which(tapply(DF$word.count, DF$group, function(x) {
-      max(cumsum(x))
+        max(cumsum(x))
     }) >= 300))
     DF2 <- subset(DF, group %in% LIST & read.gr != "NA")
     DF2$group <- DF2$group[, drop = TRUE]
     DF2$sub <- with(DF2, paste(group, read.gr, sep = "_"))
     DF2b <- DF2[order(DF2$sub), ]
-    DF2b$cumsum.gr <- unlist(tapply(DF2$word.count, DF2$sub, 
-                                    cumsum))
+    DF2b$cumsum.gr <- unlist(tapply(DF2$word.count, DF2$sub, cumsum))
     DF2 <- DF2b[order(DF2b$group, DF2b$tot.n.sent), ]
     DF2$wo.last <- DF2$cumsum.gr - DF2$word.count
     DF2$hun.word <- 100 - DF2$wo.last
     DF2$frac.sent <- ifelse(DF2$hun.word/DF2$word.count > 1, 
-                            1, round(DF2$hun.word/DF2$word.count, digits = 3))   
+        1, round(DF2$hun.word/DF2$word.count, digits = 3))   
     DF3b <- unique(data.frame(sub = DF2$sub, group = DF2$group))
     DF3 <- data.frame(sub = DF2$sub, group = DF2$group, 
-                      text.var = DF2$text.var, frac.sent = DF2$frac.sent)
+        text.var = DF2$text.var, frac.sent = DF2$frac.sent)
     CHOICES <- tapply(as.character(DF3b$sub), DF3b$group, function(x) {
-      sample(x, 3, replace = FALSE)
-    }
+            sample(x, 3, replace = FALSE)
+        }
     )
     CHOICES <- as.character(unlist(CHOICES))
     DF4 <- DF3[which(DF3$sub %in% CHOICES), ]
     DF4$sub <- DF4$sub[, drop = TRUE]
     FUN <- function(x) paste(as.character(unlist(x)), collapse = " ")
     DF5 <- aggregate(text.var ~ sub + group, DF4, FUN)
-    sent.per.100 <- as.data.frame(tapply(DF2$frac.sent, DF2$sub, 
-                                         sum))
+    sent.per.100 <- as.data.frame(tapply(DF2$frac.sent, DF2$sub, sum))
     names(sent.per.100) <- "x"
     DF5$sent.per.100 <- sent.per.100[as.character(DF5$sub), "x"] 
     hun.grab <- function(x) paste(unblanker(unlist(word.split(
-      reducer(unlist(strip(x))))))[1:100], collapse = " ")
+        reducer(unlist(strip(x))))))[1:100], collapse = " ")
     DF5$syll.count <- syllable.sum(lapply(DF5$text.var, hun.grab))
     DF6 <- aggregate(syll.count ~ group, DF5, mean)
     DF6$ave.sent.per.100 <- aggregate(sent.per.100 ~ group, DF5, mean)[, 2]
@@ -417,10 +405,8 @@ function(text.var, grouping.var = NULL, labels = "automatic",
     x1 <- c(108, 108, 128)
     y1 <- c(4.2, 2, 2)
     polygon(x1, y1, col = "darkblue", border = "darkblue")
-    x2 <- c(143, 145, 150, 152, 155, 158, 162, 166, 172, 180, 
-            181, 182, 182)
-    y2 <- c(25, 18.3, 14.3, 12.5, 11.1, 10, 9.1, 8.3, 7.7, 7.55, 
-            7.5, 7.5, 25)
+    x2 <- c(143, 145, 150, 152, 155, 158, 162, 166, 172, 180, 181, 182, 182)
+    y2 <- c(25, 18.3, 14.3, 12.5, 11.1, 10, 9.1, 8.3, 7.7, 7.55, 7.5, 7.5, 25)
     polygon(x2, y2, col = "darkblue", border = "darkblue")  
     text(120, 22.2, 1, col = "darkgreen", cex = 1.25)
     text(124, 17.9, 2, col = "darkgreen", cex = 1.25)
@@ -439,15 +425,14 @@ function(text.var, grouping.var = NULL, labels = "automatic",
     text(171, 3.5, 15, col = "darkgreen", cex = 1.25)
     text(176.7, 3.5, 16, col = "darkgreen", cex = 1.25)
     text(180.7, 3.5, 17, col = "darkgreen", cex = 1.25)
-    with(DF6, points(syll.count, ave.sent.per.100, pch = 19, 
-                     cex = 1, col = "red"))
+    with(DF6, points(syll.count, ave.sent.per.100, pch = 19, cex = 1, 
+        col = "red"))
     with(DF6, points(syll.count, ave.sent.per.100, pch = 3, cex = 3, 
-                     col = "black"))   
+        col = "black"))   
     switch(labels, 
-           click = {with(DF6, identify(syll.count, ave.sent.per.100, 
-                                       group))}, 
-           automatic = {with(DF6, text(syll.count, ave.sent.per.100, 
-                                       labels = group, adj = c(1, -0.5)))}
+        click = {with(DF6, identify(syll.count, ave.sent.per.100, group))}, 
+        automatic = {with(DF6, text(syll.count, ave.sent.per.100, 
+        labels = group, adj = c(1, -0.5)))}
     )      
     names(DF6) <- c(G, "ave.syll.per.100", "ave.sent.per.100")
     invisible(list(SENTENCES_USED = DF5, SENTENCE_AVERAGES = DF6))
@@ -462,45 +447,44 @@ function(text.var, grouping.var = NULL, labels = "automatic",
 #' @export 
 linsear_write <-
 function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
-    G <- if(is.null(grouping.var)) {
-      "all"
+    read.gr <- group <- NULL
+    if(is.null(grouping.var)) {
+        G <- "all"
     } else {
-      if (is.list(grouping.var)) {
-        m <- unlist(as.character(substitute(grouping.var))[-1])
-        m <- sapply(strsplit(m, "$", fixed=TRUE), 
-                    function(x) x[length(x)])
-        paste(m, collapse="&")
-      } else {
-        G <- as.character(substitute(grouping.var))
-        G[length(G)]
-      }
-    }
-    grouping <- if(is.null(grouping.var)){
-      rep("all", length(text.var))
-    } else {
-      if(is.list(grouping.var) & length(grouping.var)>1) {
-        apply(data.frame(grouping.var), 1, function(x){
-          if(any(is.na(x))){NA}else{paste(x, collapse = ".")
-          }
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
         }
-        )
-      } else {
-        unlist(grouping.var)
-      } 
+    }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
     } 
     text <- as.character(text.var)
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
-                             stringsAsFactors = FALSE))
+        stringsAsFactors = FALSE))
     if (rm.incomplete) {
-      DF <- endf(dataframe = DF, text.var = text.var, ...)
+        DF <- endf(dataframe = DF, text.var = text.var, ...)
     }
     DF$word.count <- word.count(DF$text.var)
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
     DF$read.gr <- unlist(by(DF$word.count, DF$group, partition))
     LIST <- names(which(tapply(DF$word.count, DF$group, function(x) {
-      max(cumsum(x))
-    }
+            max(cumsum(x))
+        }
     ) >= 100))
     DF2 <- subset(DF, group %in% LIST & read.gr != "NA")
     DF2$group <- DF2$group[, drop = TRUE]
@@ -511,34 +495,34 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF2$wo.last <- DF2$cumsum.gr - DF2$word.count
     DF2$hun.word <- 100 - DF2$wo.last
     DF2$frac.sent <- ifelse(DF2$hun.word/DF2$word.count > 1, 1, 
-                            round(DF2$hun.word/DF2$word.count, digits = 3))  
+        round(DF2$hun.word/DF2$word.count, digits = 3))  
     DF3b <- unique(data.frame(sub = DF2$sub, group = DF2$group))
     DF3 <- data.frame(sub = DF2$sub, group = DF2$group, text.var = 
-                        DF2$text.var, frac.sent = DF2$frac.sent)
+        DF2$text.var, frac.sent = DF2$frac.sent)
     CHOICES <- tapply(as.character(DF3b$sub), DF3b$group, function(x) {
-      sample(x, 1, replace = FALSE)
-    }
+            sample(x, 1, replace = FALSE)
+        }
     )
     CHOICES <- as.character(unlist(CHOICES))
     DF4 <- DF3[which(DF3$sub %in% CHOICES), ]
     DF4$sub <- DF4$sub[, drop = TRUE]
     FUN <- function(x) paste(as.character(unlist(x)), collapse = " ")
     DF5 <- aggregate(text.var ~ sub + group, DF4, FUN)
-    sent.per.100 <- as.data.frame(tapply(DF2$frac.sent, DF2$sub, 
-                                         sum))
+    sent.per.100 <- as.data.frame(tapply(DF2$frac.sent, DF2$sub, sum))
     names(sent.per.100) <- "x"
     DF5$sent.per.100 <- sent.per.100[as.character(DF5$sub), "x"]
     hun.grab <- function(x) paste(unblanker(unlist(word.split(reducer(
-      unlist(strip(x))))))[1:100], collapse = " ")
+        unlist(strip(x))))))[1:100], collapse = " ")
     DF5$SYL.LIST <- lapply(DF5$text.var, function(x) unlist(syllable.count(
-      hun.grab(x))$syllables))
-    DF5$hard_easy_sum <- unlist(lapply(DF5$SYL.LIST, function(x) sum(ifelse(x >= 
-      3, 3, 1))))
+        hun.grab(x))$syllables))
+    DF5$hard_easy_sum <- unlist(lapply(DF5$SYL.LIST, function(x) {
+          sum(ifelse(x >= 3, 3, 1))
+    }))
     DF5$HE_tsent_ratio <- unlist(DF5$hard_easy_sum)/DF5$sent.per.100
     DF5$Linsear_Write <- ifelse(DF5$sent.per.100 > 20, 
-                                round(DF5$HE_tsent_ratio/2, digits = 2), 
-                                round((DF5$HE_tsent_ratio - 2)/2, digits = 2))
+        round(DF5$HE_tsent_ratio/2, digits = 2), 
+        round((DF5$HE_tsent_ratio - 2)/2, digits = 2))
     DF5 <- DF5[, c(2, 4, 6, 8)]
     names(DF5) <- c(G, "sent.per.100", "hard_easy_sum", "Linsear_Write")
-    return(DF5)
+    DF5
 }

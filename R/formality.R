@@ -251,6 +251,7 @@ formality <- function(text.var, grouping.var = NULL,
 plot.formality <- function(x, point.pch = 20, point.cex = .5,            
     point.colors = c("gray65", "red"), bar.colors = NULL, 
     short.names = FALSE, min.wrdcnt = NULL, ...) {
+    grouping <- form.class <- NULL
     dat <- x$pos.reshaped   
     FOR <- x$formality
     G <- x$group
