@@ -72,7 +72,7 @@
 #' names(desc_wrds)
 #' desc_wrds$ts 
 #' desc_wrds$gts
-#' desc_wrds$pun 
+#' desc_wrds$mpun 
 #' desc_wrds$word.elem
 #' desc_wrds$sent.elem 
 #' plot(desc_wrds)
@@ -333,20 +333,6 @@ function(x, digits = NULL, ...) {
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot word_stats
 #' @S3method plot word_stats
-plot.word_stats <- function(x, label = FALSE, lab.digits = NULL, ...) {
-    v <- x$gts
-    if (is.null(lab.digits)) {
-        lab.digits <- x$digits
-    }
-    if (!label) {
-        qheat(v,  ...)
-    } else {
-        mat2 <- dfnumfor(x$gts, digits = lab.digits)
-        qheat(v, values = label, mat2 = mat2, ...)    
-    }
-}
-
-#a helper function used in word_stats (not exported)
 plot.word_stats <- function(x, label = FALSE, lab.digits = NULL, ...) {
     v <- x$gts
     if (is.null(lab.digits)) {

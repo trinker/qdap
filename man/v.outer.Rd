@@ -2,16 +2,13 @@
 \alias{v.outer}
 \title{Vectorized Version of outer}
 \usage{
-  v.outer(x, FUN, digits = 3, ...)
+  v.outer(x, FUN, ...)
 }
 \arguments{
   \item{x}{A \code{matrix}, \code{dataframe} or equal
   length \code{list} of vectors.}
 
   \item{FUN}{A vectorized function.}
-
-  \item{digits}{Integer; number of decimal places to
-  round.}
 
   \item{\ldots}{Other arguments passed to the function
   supplied to \code{FUN}.}
@@ -42,16 +39,20 @@ v.outer(mtcars, euc.dist)
 v.outer(mtcars, sum2)
 
 
-mtcars2 <- lapply(mtcars, function(x) x)
+mtcars2 <- lapply(mtcars, "[")
 v.outer(mtcars2, cor)
 v.outer(mtcars2, cor,  method = "spearman")
 v.outer(mtcars2, pooled.sd)
+print(v.outer(mtcars, pooled.sd), digits = 1)
+print(v.outer(mtcars, pooled.sd), digits = NULL)
 v.outer(mtcars2, euc.dist)
 v.outer(mtcars2, sum2)
 
 wc3 <- function(x, y) sum(sapply(list(x, y), wc, byrow = FALSE))
-L1 <- word_list(DATA$state, DATA$person)$cwl
-v.outer(L1, wc3)
+(L1 <- word_list(DATA$state, DATA$person)$cwl)
+(x <- v.outer(L1, wc3))
+diag(x) <- (sapply(L1, length))
+x
 }
 }
 \seealso{

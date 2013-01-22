@@ -5,8 +5,7 @@
 #' @param text.var The text variable.         
 #' @param grouping.var The grouping variables.  Default NULL generates one 
 #' output for all text.  Also takes a single grouping variable or a list of 1 or 
-#' more grouping variables.    
-#' @param digits Number of decimal places to round.                        
+#' more grouping variables.                         
 #' @return Returns a dataframe of various diversity related indices for Shannon, 
 #' collision, Berger Parker and Brillouin.
 #' @details These are the formulas used to calculate the indices:
@@ -48,7 +47,7 @@
 #' plot(div.mod, high = "red", low = "yellow", values = TRUE)
 #' }
 diversity <-
-function (text.var, grouping.var=NULL, digits = 3){
+function (text.var, grouping.var=NULL){
  if(is.null(grouping.var)) {
         G <- "all"
     } else {
@@ -79,37 +78,35 @@ function (text.var, grouping.var=NULL, digits = 3){
         N <- sum(num.var)
         P <- num.var/N
         logP <- log(P)
-        return(round(sum(-(P * logP)), digits = digits))
+        sum(-(P * logP))
     }
     simpson <- function(num.var, digits = 3){
         N <- sum(num.var)
         FUN <- function(x) x*(x-1)  
         n.sum <- sum(FUN(num.var))
-        sim <- 1 - (n.sum/(N*(N-1)))
-        return(round(sim, digits = digits))
+        1 - (n.sum/(N*(N-1)))
     }
     collision <- function(num.var, digits=3){
         N <- sum(num.var)
         P <- num.var/N
         Epi2 <- sum(P^2)
-        return(round((-log(Epi2)), digits = digits))
+        -log(Epi2)
     }
     berger_parker <- function(num.var, digits=3){
         N <- sum(num.var)
         Nm <- max(num.var)
-        return(round(Nm/N, digits = digits))
+        Nm/N
     }
     brillouin <- function(num.var, digits=3){
         N <- sum(num.var)
-        br <- (lfactorial(N) - sum(lfactorial(num.var)))/N
-        return(round(br, digits = digits))
+        (lfactorial(N) - sum(lfactorial(num.var)))/N
     }
     RICH <- function(x){
-        c(wc=sum(x), simpson=simpson(x, digits = digits), 
-            shannon = shannon(x, digits = digits), 
-            collision = collision(x, digits = digits),
-            berger_parker = berger_parker(x, digits = digits),
-            brillouin = brillouin(x, digits = digits)
+        c(wc=sum(x), simpson=simpson(x), 
+            shannon = shannon(x), 
+            collision = collision(x),
+            berger_parker = berger_parker(x),
+            brillouin = brillouin(x)
         )
     }
     z <- split(DF[, "text.var"], DF[, "group"])
@@ -120,7 +117,7 @@ function (text.var, grouping.var=NULL, digits = 3){
     o <- o[order(o[, 1]), ]
     rownames(o) <- NULL
     colnames(o)[1] <- G
-    class(o) <- "diversity"
+    class(o) <- c("diversity", "data.frame")
     return(o)
 }
 
@@ -129,13 +126,20 @@ function (text.var, grouping.var=NULL, digits = 3){
 #' Prints a diversity object.
 #' 
 #' @param x The diversity object
+#' @param digits Number of decimal places to print. 
 #' @param \ldots ignored
 #' @method print diversity
 #' @S3method print diversity
 print.diversity <-
-function(x, ...) {
+function(x, digits = 3, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
     class(x) <- "data.frame"
+    if (!is.null(digits)) {
+        x[, -c(1:2)] <- lapply(x[, -c(1:2)], round, digits = digits) 
+    }
     print(x)
+    options(width=WD)  
 }
 
 #' Plots a diversity object

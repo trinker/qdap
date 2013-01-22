@@ -11,10 +11,10 @@
 #' \dontrun{
 #' set.seed(10)              
 #' x <- sample(c(rep(NA, 4), 1:10), 20, rep=T)
-#' y <- data.frame(matrix(x, 5, 4))  
-#' names(y) <- paste('var', 1:4, sep="_")
-#'                                             
-#' NAer(x)                         
+#' NAer(x)
+#' 
+#' set.seed(10)
+#' y <- data.frame(matrix(x, 5, 4))                           
 #' NAer(y)
 #' NAer(y, "MISSING")   
 #' }

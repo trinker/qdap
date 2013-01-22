@@ -78,11 +78,11 @@
 #' dat$rnp  #useful for presenting in tables
 #' dat$raw  #prop and raw are useful for performing calculations
 #' dat$prop
-#' dat <- with(raj.act.1,  termco(dialogue, person, ml, 
-#'     short.term = FALSE, elim.old=FALSE))
+#' (dat <- with(raj.act.1, termco(dialogue, person, ml,
+#'     short.term = FALSE, elim.old=FALSE)))
 #'     
-#' dat2 <- data.frame(dialogue=c("@@bryan is bryan good @@br", 
-#'     "indeed", "@@ brian"), person=qcv(A, B, A))
+#' (dat2 <- data.frame(dialogue=c("@@bryan is bryan good @@br",
+#'     "indeed", "@@ brian"), person=qcv(A, B, A)))
 #' 
 #' ml <- list(wrds=c("bryan", "indeed"), "@@", bryan=c("bryan", "@@ br", "@@br"))
 #' 
@@ -140,7 +140,8 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
                 "", x), collapse=""), NULL)) 
         }
     }
-    if(any(duplicated(unblanker(names(match.list))))) {
+    if(!all(is.null(names(match.list))) && 
+        any(duplicated(unblanker(names(match.list))))) {
         stop("Repeated vector name in match.list")
     }
     if (is.list(match.list) & length(match.list) == 1 & is.null(names(match.list))) {
@@ -191,7 +192,6 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
     class(o) <- "termco"
     o
 }
-
 
 
 #' Search for Terms
@@ -245,7 +245,7 @@ termco.d <-
         pro = y[, -c(1:2), drop =FALSE], digits = digits, 
         percent = percent, zero.replace = 0, override = TRUE)
     rnp  <- data.frame(x[, 1:2], rnp, check.names = FALSE)
-    o <- list(raw = x, prop = y, rnp = rnp, zero_replace = zero.replace,
+    o <- list(raw = x, prop = y, rnp = rnp, zero.replace = zero.replace,
         percent = percent, digits = digits)
     class(o) <- "termco"
     if (short.term) {
@@ -348,14 +348,44 @@ termco2mat <-function (dataframe, drop.wc = TRUE, short.term = TRUE,
 #' Prints a termco object.
 #' 
 #' @param x The termco object
+#' @param digits Integer values specifying the number of digits to be 
+#' printed.
+#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
+#' output is proportion.  If NULL uses the value from 
+#' \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
+#' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
+#' from \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
 #' @param \ldots ignored
 #' @S3method print termco
 #' @method print termco
 print.termco <-
-function(x, ...) {
+function(x, digits = NULL, percent = NULL, zero.replace = NULL, ...) {
     WD <- options()[["width"]]
     options(width=3000)
-    print(x$rnp)
+    if (!is.null(percent)) {
+        if (percent != x$percent) {
+            DF <- as.matrix(x$prop[, -c(1:2)])
+            if (percent) {
+                DF <- DF*100    
+            } else {
+                DF <-  DF/100
+            }
+            x$prop <- data.frame(x$prop[, 1:2], DF, check.names = FALSE) 
+        }
+    } else {
+        percent <- x$percent 
+    }
+    if (is.null(zero.replace)) {
+        zero.replace <- x$zero.replace
+    }
+    if (is.null(digits)) {
+        digits <- x$digits
+    }    
+    rnp <- raw_pro_comb(x$raw[, -c(1:2), drop = FALSE], 
+        x$prop[, -c(1:2), drop = FALSE], digits = digits, percent = percent, 
+        zero.replace = zero.replace, override = TRUE)  
+    rnp <- data.frame(x$raw[, 1:2], rnp, check.names = FALSE)     
+    print(rnp)
     options(width=WD)
 }
 
@@ -395,8 +425,9 @@ plot.termco <- function(x, label = FALSE, lab.digits = 1, percent = NULL,
         if (is.null(zero.replace)) {
             zero.replace <- x$zero.replace
         }
-        rnp <- raw_pro_comb(x$raw[, -c(1:2)], x$prop[, -c(1:2)], 
-            digits = lab.digits, percent = percent, zero.replace = zero.replace)  
+    rnp <- raw_pro_comb(x$raw[, -c(1:2), drop = FALSE], 
+        x$prop[, -c(1:2), drop = FALSE], digits = lab.digits, percent = percent, 
+        zero.replace = zero.replace) 
         rnp <- data.frame(x$raw[, 1:2], rnp, check.names = FALSE) 
         qheat(x$prop, values=TRUE, mat2 = rnp, ...)
     } else {

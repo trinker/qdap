@@ -90,7 +90,7 @@ with(mraja1spl, word_stats(desc_wrds, person, tot = tot)) #speed boost
 names(desc_wrds)
 desc_wrds$ts
 desc_wrds$gts
-desc_wrds$pun
+desc_wrds$mpun
 desc_wrds$word.elem
 desc_wrds$sent.elem
 plot(desc_wrds)

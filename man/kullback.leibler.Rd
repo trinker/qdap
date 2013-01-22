@@ -2,15 +2,13 @@
 \alias{kullback.leibler}
 \title{Kullback Leibler Statistic}
 \usage{
-  kullback.leibler(x, y = NULL, digits = 3)
+  kullback.leibler(x, y = NULL)
 }
 \arguments{
   \item{x}{A numeric vector, matrix or data frame.}
 
   \item{y}{A second numeric vector if x is also a vector.
   Default is NULL.}
-
-  \item{digits}{Number of decimal places to round.}
 }
 \value{
   Returns a matrix of the Kullback Leibler measure between
@@ -33,13 +31,12 @@
 \dontrun{
 p.df <- wfdf(DATA$state, DATA$person)
 p.mat <- wfm(text.var = DATA$state, grouping.var = DATA$person)
-
 kullback.leibler(p.mat)
 kullback.leibler(p.df)
 kullback.leibler(p.df$greg, p.df$sam)
-
 p.df2 <- wfdf(raj$dialogue, raj$person)
-kullback.leibler(p.df2)
+(x <- kullback.leibler(p.df2))
+print(x, digits = 4)
 }
 }
 \references{

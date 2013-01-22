@@ -33,12 +33,12 @@
 colsplit2df <- 
 function(dataframe, splitcol = 1, new.names = NULL, sep=".", 
          keep.orig=FALSE){
+    WD <- options()$width
+    options(width=10000)
+    on.exit(options(width=WD))
     classRdf <- c("diversity")
-    if (class(dataframe) %in% classRdf) {
-        class(dataframe) <- "data.frame"
-    }
     if (!is.data.frame(dataframe)){
-        stop("Please supply a data.frame to colsplit2df")
+        warning("dataframe object is not of the class data.frame")
     }
     if (is.numeric(dataframe[, splitcol])) {
         stop("splitcol can not be numeric")
@@ -76,9 +76,9 @@ function(dataframe, splitcol = 1, new.names = NULL, sep=".",
     if(keep.orig) {
         w <- cbind(dataframe[, splitcol, drop=FALSE], w)
     }
-    return(w)
+    class(w) <- c("colsplit2df", "data.frame")
+    w
 }
-
 #' Wrapper for qdap lists that Returns Dataframes
 #' 
 #' \code{lcolsplit2df} - Wrapper for \code{colsplit2df} designed for qdap lists 
@@ -98,4 +98,21 @@ function(qdap.list, keep.orig=FALSE){
     nms <- unlist(strsplit(colnames(qdap.list[[1]])[1], "\\&"))
     w <- lapply(qdap.list[apps], colsplit2df)
     return(unlist(list(w, qdap.list[!apps]), recursive = FALSE))
+}
+
+#' Prints a colsplit2df Object.
+#' 
+#' Prints a colsplit2df object.
+#' 
+#' @param x The colsplit2df object 
+#' @param \ldots ignored
+#' @method print colsplit2df
+#' @S3method print colsplit2df
+print.colsplit2df <-
+function(x,  ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+    class(x) <- "data.frame"
+    print(x)
+    options(width=WD)  
 }

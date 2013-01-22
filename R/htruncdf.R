@@ -8,7 +8,7 @@
 #' @param width The width of the columns to be displayed.
 #' @param end The last character to be displayed (width).
 #' @param begin The first character to be displayed (width).
-#' @param \ldots Other arguments passed to \code{\link[utils]{head}}.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{htruncdf}}.
 #' @rdname data_viewing
 #' @return \code{htrundf} - returns n number of rows of a truncated dataframe.
 #' @seealso \code{\link[utils]{head}}
@@ -57,5 +57,5 @@ function(dataframe, ...){
     z <- paste("nrow = ",nrow(dataframe), "          ncol = ",
         ncol(dataframe), "           ", x, collapse="")
     cat(paste(y, z, y, sep = "\n")); cat("\n")
-    return(head(dataframe, ...))
+    return(htruncdf(dataframe, ...))
 }

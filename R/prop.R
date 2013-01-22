@@ -30,7 +30,7 @@ prop <- function(mat, digits = 2, percent = FALSE, by.column = TRUE,
     constant <- ifelse(percent, 100, 1)
     out <- apply(mat, by.column, function(x) constant * (x/sum(x)))
     if (round) {
-    out <- round(out, digits = digits)
+        out <- round(out, digits = digits)
     }
     if (by.column == 1) {
         out <- t(out)

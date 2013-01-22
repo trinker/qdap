@@ -16,26 +16,23 @@
 #' @examples
 #' \dontrun{
 #' (DF <- aggregate(mpg~as.character(carb), mtcars, mean))
-#' 
-#' new.hash <- hash(DF)
+#' new.hash <- hash(DF)  #numeric outcome
 #' sapply(as.character(mtcars$carb), function(x) {
-#'         if(exists(x, env = new.hash)) {
-#'             get(x, e = new.hash)
-#'         } else {
-#'             NA
-#'         }
+#'     if(exists(x, envir = new.hash)) {
+#'         get(x, envir = new.hash)
+#'     } else {
+#'         NA
 #'     }
-#' )
+#' })
 #' 
-#' new.hash <- hash(DF, "character")
+#' new.hash <- hash(DF, "character") #character outcome
 #' sapply(as.character(mtcars$carb), function(x) {
-#'         if(exists(x, env = new.hash)) {
-#'             get(x, e = new.hash)
-#'         } else {
-#'             NA
-#'         }
+#'     if(exists(x, envir = new.hash)) {
+#'         get(x, envir = new.hash)
+#'     } else {
+#'         NA
 #'     }
-#' )
+#' })
 #' }
 hash <- 
 function(x, mode.out = "numeric") {

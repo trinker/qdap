@@ -3,8 +3,7 @@
 \title{Dissimilarity Statistics}
 \usage{
   dissimilarity(text.var, grouping.var = NULL,
-    method = "prop", diag = FALSE, upper = FALSE, p = 2,
-    digits = 3)
+    method = "prop", diag = FALSE, upper = FALSE, p = 2)
 }
 \arguments{
   \item{text.var}{A text variable or word frequency matrix
@@ -26,10 +25,6 @@
   of the matrix}
 
   \item{p}{The power of the Minkowski distance}
-
-  \item{digits}{integer indicating the number of decimal
-  places (round) or significant digits (signif) to be used.
-  Negative values are allowed}
 }
 \value{
   Returns a matrix of dissimilarity values (the agreement

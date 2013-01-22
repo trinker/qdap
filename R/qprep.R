@@ -27,6 +27,7 @@
 #' \code{"separate"} will treat each word section as separate, \code{"combine"} 
 #' will lump the sections together as one word.  Also takes the argument 
 #' \code{NULL} which turns off this parsing technique.
+#' @param \ldots Other arguments passed to \code{link[qdap]{replace_symbol}}.
 #' @seealso 
 #' \code{\link[qdap]{bracketX}},
 #' \code{\link[qdap]{replace_abbreviation}},
@@ -43,7 +44,7 @@
 qprep <-
 function(text.var, rm.dash = TRUE, bracket = "all", missing = NULL, 
     names = FALSE, abbreviation = qdap::abbreviations, 
-    replace = NULL, ignore.case = TRUE, num.paste = "separate") {
+    replace = NULL, ignore.case = TRUE, num.paste = "separate", ...) {
   
     if (!is.null(bracket)) {
         text.var <- bracketX(clean(text.var), bracket = bracket, 
@@ -59,5 +60,5 @@ function(text.var, rm.dash = TRUE, bracket = "all", missing = NULL,
     if (rm.dash) {
         text.var <- gsub("-", " ", text.var)
     }
-    Trim(scrubber(replace_symbol(text.var)))
+    Trim(scrubber(replace_symbol(text.var, ...)))
 }

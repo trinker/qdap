@@ -1,4 +1,4 @@
-#helper function for termco_d and termco_a (not exported) 
+#helper function for termco_d and termco (not exported) 
 termco.p <-
 function(tco, percent = TRUE, short.term = FALSE){
     subdf <- function(df, ii) {

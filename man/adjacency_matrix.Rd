@@ -23,7 +23,7 @@
 \dontrun{
 wordLIST <- c(" montague", " capulet", " court", " marry")
 (raj.termco <- with(raj.act.1, termco(dialogue, person,
-    wordLIST, ignore.case = T)))
+    wordLIST, ignore.case = TRUE)))
 (raj.adjmat <- adjmat(raj.termco))
 names(raj.adjmat)  #see what's available from the adjacency_matrix object
 library(igraph)

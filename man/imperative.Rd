@@ -4,7 +4,7 @@
 \usage{
   imperative(dataframe, person.var, text.var,
     lock.incomplete = FALSE, additional.names = NULL,
-    warning = FALSE)
+    parallel = FALSE, warning = FALSE)
 }
 \arguments{
   \item{dataframe}{A data.frame object.}
@@ -19,6 +19,13 @@
 
   \item{additional.names}{Additional names that may be used
   in a command (people in the context that do not speak).}
+
+  \item{parallel}{logical.  If TRUE attempts to run the
+  function on multiple cores.  Note that this may not mean
+  a speed boost if you have one core or if the data set is
+  smaller as the cluster takes time to create.  With the
+  \code{mraja1spl} data set, with an 8 core machine,
+  \code{imperative} had 1/3 the running time.}
 
   \item{warning}{logical.  If TRUE provides comma warnings
   (sentences that contain numerous commas that may be
@@ -46,7 +53,8 @@ DATA3 <- data.frame(name=c('sue', rep(c('greg', 'tyler', 'phil', 'sue'), 2)),
 imperative(DATA3, 'name', 'statement', , c('Alex'))
 imperative(DATA3, 'name', 'statement', lock.incomplete = TRUE, c('Alex'))
 imperative(DATA3, 'name', 'statement', , c('Alex'), warning=TRUE)
-X <- imperative(mraja1spl, 'person', 'dialogue', warning=FALSE)
+imperative(mraja1spl, 'person', 'dialogue', warning=FALSE)
+X <- imperative(mraja1spl, 'person', 'dialogue', warning=FALSE, parallel = TRUE)
 truncdf(X[, -7], 60)
 strwrap(X$dialogue)
 }

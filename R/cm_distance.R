@@ -47,7 +47,7 @@
 #'     DD = qcv(terms='')
 #' )
 #' (dat <- cm_range2long(foo, foo2, v.name = "time"))
-#' (out <- cm_distance(dat, time.var = "time", causal=T))
+#' (out <- cm_distance(dat, time.var = "time", causal=TRUE))
 #' names(out)
 #' names(out$foo2)
 #' out$foo2
@@ -90,9 +90,9 @@ function(dataframe, time.var = NULL, parallel = FALSE, code.var = "code",
         disn <- function(x, y) {cm_bidist(x, y)[[inds]][3]}
         FUN <- function(dat, mdigs=MD, sdigs=SDD){
             dat <- data.frame(dat)
-            means <- v.outer(dat, dism, digits=mdigs)
-            sds <- v.outer(dat, dissd, digits=sdigs)
-            ns <- v.outer(dat, disn, digits=0)
+            means <- round(v.outer(dat, dism), digits=mdigs)
+            sds <- round(v.outer(dat, dissd), digits=sdigs)
+            ns <- v.outer(dat, disn)
             DIM <- dim(means)
             pfun <- function(x, y, z) paste0(x, "(", y, ")", "n=", z)
             comb <- mgsub(c("(NA)", "NA;n=0"), c(";", NA), 

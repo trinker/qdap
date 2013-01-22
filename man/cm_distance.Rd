@@ -71,7 +71,7 @@ foo2  <- list(
     DD = qcv(terms='')
 )
 (dat <- cm_range2long(foo, foo2, v.name = "time"))
-(out <- cm_distance(dat, time.var = "time", causal=T))
+(out <- cm_distance(dat, time.var = "time", causal=TRUE))
 names(out)
 names(out$foo2)
 out$foo2

@@ -12,7 +12,8 @@
 #' \dontrun{
 #' spaste(Top25Words)
 #' spaste(Top25Words, FALSE)
-#' spaste(Top25Words, ,FALSE)
+#' spaste(Top25Words, trailing = TRUE, leading = FALSE) #or
+#' spaste(Top25Words, , FALSE)
 #' }
 spaste <- 
 function(terms, trailing = TRUE, leading = TRUE){

@@ -48,8 +48,9 @@ function(loc, obj.prefix = "dat", col.names = c("person", "dialogue"),
     len <- length(fls)
     digs <- nchar(as.character(max(len))) 
     vals <- lead(1:length(fls), digs)
-    x <- paste0(obj.prefix, vals, " <- ", "read.transcript('", dir, "/", fls, 
-        "', col.names = c('", paste(col.names, collapse = "', '"), "'), skip = 0", ")")
+    x <- paste0(obj.prefix, vals, " <- ", "read.transcript('", loc, "/", fls, 
+        "', col.names = c('", paste(col.names, collapse = "', '"), 
+        "'), skip = 0", ")")
     if(copy2clip){
         if (Sys.info()["sysname"] == "Windows") {
             writeClipboard(x, format = 1)

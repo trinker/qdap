@@ -126,9 +126,9 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
         }
     } 
     if (!is.null(fill.var)) {
-         dataframe[, "new4"] <- dataframe[, fill.var]
+        dataframe[, "new4"] <- dataframe[, fill.var]
     } else {
-    dataframe[, "new4"] <- dataframe[, "new"] 
+        dataframe[, "new4"] <- dataframe[, "new"] 
     }
     if (rm.horiz.lines) {
         cond <- element_blank()

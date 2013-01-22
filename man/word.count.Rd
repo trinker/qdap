@@ -108,7 +108,7 @@ sum(character.count(DATA$state))
 library(ggplot2)
 library(reshape2)
 dat <- character.table(DATA$state, list(DATA$sex, DATA$adult))
-(dat2 <- colsplit2df(melt(dat), keep.orig = TRUE))
+(dat2 <- colsplit2df(melt(dat$raw), keep.orig = TRUE))
 head(dat2)
 dat3 <- dat2[rep(seq_len(dim(dat2)[1]), dat2[, 5]), -5]
 
@@ -133,7 +133,7 @@ x$prop
 x$rnp
 
 char.table(DATA$state, DATA$person)
-char.table(DATA$state, DATA$person, proportianal = TRUE)
+char.table(DATA$state, DATA$person, percent = TRUE)
 character.table(DATA$state, list(DATA$sex, DATA$adult))
 }
 }

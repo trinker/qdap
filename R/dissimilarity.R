@@ -12,8 +12,6 @@
 #' @param diag logical.  If True returns the diagonals of the matrix
 #' @param upper logical.  If True returns the upper triangle of the matrix
 #' @param p The power of the Minkowski distance
-#' @param digits integer indicating the number of decimal places (round) or 
-#' significant digits (signif) to be used. Negative values are allowed
 #' @return Returns a matrix of dissimilarity values (the agreement between text).
 #' @seealso \code{\link[stats]{dist}}
 #' @keywords correlation, dissimilarity
@@ -25,7 +23,7 @@
 #' }
 dissimilarity <-
 function(text.var, grouping.var= NULL, method = "prop", diag = FALSE, 
-    upper = FALSE, p = 2, digits = 3){   
+    upper = FALSE, p = 2){   
     if(is.null(comment(text.var))){ 
         wfm.object <- wfm(text.var = text.var, grouping.var = grouping.var)
     } else {
@@ -47,9 +45,32 @@ function(text.var, grouping.var= NULL, method = "prop", diag = FALSE,
         meth.check <- TRUE
     }
     #leave this stats::dist b/c other packages use dist
-    x <- stats::dist(wfm.object, method = method, diag = diag, upper = upper, p = p)
+    x <- stats::dist(wfm.object, method = method, diag = diag, upper = upper, 
+        p = p)
     if (meth.check) {
       x <- 1 - x
-    }    
-    return(round(x, digits = digits))
+    }   
+    class(x) <- c("dissimilarity", "dist")    
+    x
+}
+
+#' Prints a dissimilarity object
+#' 
+#' Prints a dissimilarity object.
+#' 
+#' @param x The dissimilarity object
+#' @param digits Number of decimal places to print. 
+#' @param \ldots ignored
+#' @method print dissimilarity
+#' @S3method print dissimilarity
+print.dissimilarity <-
+function(x, digits = 3, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+    class(x) <- "dist"
+    if (!is.null(digits)) {
+        x <- round(x, digits = digits)
+    }
+    print(x)
+    options(width=WD)  
 }

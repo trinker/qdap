@@ -312,14 +312,41 @@ function(type = "pretty"){
 #' Prints a pos object.
 #' 
 #' @param x The pos object
+#' @param digits Integer values specifying the number of digits to be 
+#' printed.
+#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
+#' output is proportion.  If NULL uses the value from 
+#' \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
+#' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
+#' from \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
 #' @param \ldots ignored
 #' @method print pos
 #' @S3method print pos
 print.pos <-
-function(x, ...) {
+function(x, digits = 1, percent = NULL, zero.replace = NULL, ...) {
     WD <- options()[["width"]]
     options(width=3000)
-    print(x$POSrnp)
+    if (!is.null(percent)) {
+        if (percent != x$percent) {
+            DF <- as.matrix(x$POSprop[, -c(1:2)])
+            if (percent) {
+                DF <- DF*100    
+            } else {
+                DF <-  DF/100
+            }
+            x$POSprop <- data.frame(x$POSprop[, 1:2], DF, check.names = FALSE) 
+        }
+    } else {
+        percent <- x$percent 
+    }
+    if (is.null(zero.replace)) {
+        zero.replace <- x$zero.replace
+    }
+    rnp <- raw_pro_comb(x$POSfreq[, -1, drop = FALSE], 
+        x$POSprop[, -1, drop = FALSE], digits = digits, percent = percent, 
+        zero.replace = zero.replace)  
+    rnp <- data.frame(x$POSfreq[, 1, drop = FALSE], rnp, check.names = FALSE)     
+    print(rnp)
     options(width=WD)
 }
 
@@ -328,16 +355,47 @@ function(x, ...) {
 #' Prints a pos.by object.
 #' 
 #' @param x The pos.by object
+#' @param digits Integer values specifying the number of digits to be 
+#' printed.
+#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
+#' output is proportion.  If NULL uses the value from 
+#' \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
+#' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
+#' from \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
 #' @param \ldots ignored
 #' @method print pos.by
 #' @S3method print pos.by
 print.pos.by <-
-function(x, ...) {
+function(x, digits = 1, percent = NULL, zero.replace = NULL, ...) {
     WD <- options()[["width"]]
     options(width=3000)
-    print(x$pos.by.rnp)
-    options(width=WD)  
+    if (!is.null(percent)) {
+        if (percent != x$percent) {
+            DF <- as.matrix(x$Pos.by.prop[, -c(1:2)])
+            if (percent) {
+                DF <- DF*100    
+            } else {
+                DF <-  DF/100
+            }
+            x$pos.by.prop <- data.frame(x$pos.by.prop[, 1:2], DF, 
+                check.names = FALSE) 
+        }
+    } else {
+        percent <- x$percent 
+    }
+    if (is.null(zero.replace)) {
+        zero.replace <- x$zero.replace
+    }
+    rnp <- raw_pro_comb(x$pos.by.freq[, -c(1:2), drop = FALSE], 
+        x$pos.by.prop[, -c(1:2), drop = FALSE], digits = digits, 
+        percent = percent, zero.replace = zero.replace)  
+    rnp <- data.frame(x$pos.by.freq[, 1:2, drop = FALSE], rnp, 
+        check.names = FALSE)     
+    print(rnp)
+    options(width=WD)
 }
+
+
 
 #' Plots a pos.by Object
 #' 

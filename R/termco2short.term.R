@@ -1,4 +1,4 @@
-#helper function for termco_d and termco_a (not exported)
+#helper function for termco_d and termco (not exported)
 termco2short.term <- 
 function(termco.object, trim.terms = TRUE){
   CLASS <- class(termco.object)

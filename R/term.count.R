@@ -1,4 +1,4 @@
-#helper function for termco_d and termco_a (not exported)
+#helper function for termco_d and termco (not exported)
 term.count <-
 function(str, mat){
     tester <- function(x, y){

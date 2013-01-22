@@ -5,7 +5,6 @@
 #' @param x A \code{matrix}, \code{dataframe} or equal length \code{list} of 
 #' vectors.
 #' @param FUN A vectorized function.
-#' @param digits Integer; number of decimal places to round. 
 #' @param \ldots Other arguments passed to the function supplied to \code{FUN}.
 #' @return Returns a matrix with the vectorized \code{\link[base]{outer}} 
 #' function.
@@ -31,19 +30,23 @@
 #' v.outer(mtcars, sum2)
 #' 
 #' 
-#' mtcars2 <- lapply(mtcars, function(x) x)
+#' mtcars2 <- lapply(mtcars, "[")
 #' v.outer(mtcars2, cor)
 #' v.outer(mtcars2, cor,  method = "spearman")
 #' v.outer(mtcars2, pooled.sd)
+#' print(v.outer(mtcars, pooled.sd), digits = 1)
+#' print(v.outer(mtcars, pooled.sd), digits = NULL)
 #' v.outer(mtcars2, euc.dist)
 #' v.outer(mtcars2, sum2)
 #' 
 #' wc3 <- function(x, y) sum(sapply(list(x, y), wc, byrow = FALSE))
-#' L1 <- word_list(DATA$state, DATA$person)$cwl
-#' v.outer(L1, wc3)
+#' (L1 <- word_list(DATA$state, DATA$person)$cwl)
+#' (x <- v.outer(L1, wc3))
+#' diag(x) <- (sapply(L1, length))
+#' x
 #' }
 v.outer <- 
-function(x, FUN, digits = 3, ...){
+function(x, FUN, ...){
     FUN <- match.fun(FUN)
     if (is.matrix(x)) {
         x <- as.data.frame(x)
@@ -62,8 +65,27 @@ function(x, FUN, digits = 3, ...){
       Vectorize(function(i,j) FUN(unlist(x[[i]]), unlist(x[[j]]), ...))
     )
     dimnames(z) <- list(nms, nms)
-    if (is.numeric(z)) {
-        z <- round(z, digits = digits)
-    }
+    class(z) <- "v.outer"
     z
+}
+
+#' Prints a v.outer Object.
+#' 
+#' Prints a v.outer object.
+#' 
+#' @param x The v.outer object
+#' @param digits Number of decimal places to print. 
+#' @param \ldots ignored
+#' @method print v.outer
+#' @S3method print v.outer
+print.v.outer <-
+function(x, digits = 3, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+    y <- unclass(x)
+    if (is.numeric(y) & !is.null(digits)) {
+        y <- round(y, digits = digits)
+    }    
+    print(y)
+    options(width=WD)  
 }

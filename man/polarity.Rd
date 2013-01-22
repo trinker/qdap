@@ -40,16 +40,19 @@
   \item{\ldots}{Other arguments supplied to \code{endf}.}
 }
 \value{
-  Returns a list of two dataframes: \item{all}{A dataframe
-  of scores per row with: \itemize{ \item wc - word count
-  \item polarity - sentence polarity score \item raw - raw
-  polarity score (considering only positive and negative
-  words) \item negation.adj.raw - raw adjusted for negation
-  words \item amplification.adj.raw - raw adjusted for
-  amplification words \item pos.words - words considered
-  positive \item neg.words - words considered negative} }
-  \item{group}{A dataframe with the average polarity score
-  by grouping variable.}
+  Returns a list of: \item{all}{A dataframe of scores per
+  row with: \itemize{ \item group.var - the grouping
+  variable \item text.var - the text variable \item wc -
+  word count \item polarity - sentence polarity score \item
+  raw - raw polarity score (considering only positive and
+  negative words) \item negation.adj.raw - raw adjusted for
+  negation words \item amplification.adj.raw - raw adjusted
+  for amplification words \item pos.words - words
+  considered positive \item neg.words - words considered
+  negative} } \item{group}{A dataframe with the average
+  polarity score by grouping variable.}
+  \item{digits}{integer value od number of digits to
+  display; mostly internal use}
 }
 \description{
   Approximate the sentiment (polarity) of text by grouping
@@ -118,7 +121,6 @@ head(poldat2[["group"]], 10)
 truncdf(poldat2[["all"]], 20)
 plot(poldat2)
 plot(poldat2, nrow=4)
-plot(poldat2, nrow=NULL)
 }
 }
 \references{

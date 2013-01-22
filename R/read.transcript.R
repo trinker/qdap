@@ -40,7 +40,7 @@
 #' @note If a transcript is a .docx file read transcript expects two columns 
 #' (generally person and dialogue) with some sort of separator (default is colon 
 #' separator).  .doc files must be converted to .docx before reading in.
-#' @Section Warning: {\link[qdap]{read.transcript}} may contain errors if the 
+#' @section Warning: {\link[qdap]{read.transcript}} may contain errors if the 
 #' file being read in is .docx.  The researcher should carefully investigate 
 #' each transcript for errors before further parsing the data.
 #' @author Bryan Goodrich and Tyler Rinker <tyler.rinker@@gmail.com>.
@@ -50,6 +50,8 @@
 #' @import XML gdata RCurl
 #' @examples
 #' \dontrun{
+#' #Note: to view the document below use the path:
+#' gsub("trans1.docx", "", system.file("extdata/trans1.docx", package = "qdap"))
 #' doc1 <- system.file("extdata/trans1.docx", package = "qdap")
 #' doc2 <- system.file("extdata/trans2.docx", package = "qdap")
 #' doc3 <- system.file("extdata/trans3.docx", package = "qdap")

@@ -23,7 +23,7 @@
   (width).}
 
   \item{\ldots}{Other arguments passed to
-  \code{\link[utils]{head}}.}
+  \code{\link[qdap]{htruncdf}}.}
 }
 \value{
   \code{htrundf} - returns n number of rows of a truncated

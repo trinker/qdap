@@ -41,7 +41,7 @@
 #' library(ggplot2)
 #' library(reshape2)
 #' dat <- character.table(DATA$state, list(DATA$sex, DATA$adult))
-#' (dat2 <- colsplit2df(melt(dat), keep.orig = TRUE))
+#' (dat2 <- colsplit2df(melt(dat$raw), keep.orig = TRUE))
 #' head(dat2)
 #' dat3 <- dat2[rep(seq_len(dim(dat2)[1]), dat2[, 5]), -5]
 #' 
@@ -66,7 +66,7 @@
 #' x$rnp
 #' 
 #' char.table(DATA$state, DATA$person)
-#' char.table(DATA$state, DATA$person, proportianal = TRUE)
+#' char.table(DATA$state, DATA$person, percent = TRUE)
 #' character.table(DATA$state, list(DATA$sex, DATA$adult))
 #' }
 word.count <- 
@@ -80,7 +80,7 @@ function(text.var, byrow = TRUE, missing = NA, digit.remove = TRUE,
         stopwords = NULL)
     z <- sapply(txt, len2, missing = missing)
     if (!byrow) {
-        z <- sum(z, na.rm = TRUE)   
+        return(sum(z, na.rm = TRUE)   )
     }
     if(names) {
         names(z) <- text.var
@@ -202,17 +202,43 @@ character.table <- function(text.var, grouping.var, percent = TRUE,
 #' Prints a character.table object.
 #' 
 #' @param x The character.table object
+#' @param digits Integer values specifying the number of digits to be 
+#' printed.
+#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
+#' output is proportion.  If NULL uses the value from 
+#' \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
+#' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
+#' from \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
 #' @param \ldots ignored
 #' @method print character.table
 #' @S3method print character.table 
 print.character.table <-
-function(x, ...) {
+function(x, digits = 2, percent = NULL, zero.replace = NULL, ...) {
     WD <- options()[["width"]]
     options(width=3000)
-    print(x$rnp)
+    if (!is.null(percent)) {
+        if (percent != x$percent) {
+            DF <- as.matrix(x$prop[, -c(1:2)])
+            if (percent) {
+                DF <- DF*100    
+            } else {
+                DF <-  DF/100
+            }
+            x$prop <- data.frame(x$prop[, 1:2], DF, check.names = FALSE) 
+        }
+    } else {
+        percent <- x$percent 
+    }
+    if (is.null(zero.replace)) {
+        zero.replace <- x$zero.replace
+    }
+    rnp <- raw_pro_comb(x$raw[, -1, drop = FALSE], 
+        x$prop[, -1, drop = FALSE], digits = digits, percent = percent, 
+        zero.replace = zero.replace, override = TRUE)  
+    rnp <- data.frame(x$raw[, 1, drop = FALSE], rnp, check.names = FALSE)     
+    print(rnp)
     options(width=WD)
 }
-
 
 #' Plots a character.table Object
 #' 

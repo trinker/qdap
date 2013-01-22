@@ -52,7 +52,7 @@
 #' 
 #' #rank_freq_plot EXAMPLES:
 #' mod <- with(mraja1spl , word_list(dialogue, person, cut.n = 10, 
-#'     cap.list=unique(DF$person)))         
+#'     cap.list=unique(mraja1spl$person)))         
 #' rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo')  
 #' rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, plot = FALSE)           
 #' rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo',     

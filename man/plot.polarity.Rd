@@ -5,7 +5,8 @@
   \method{plot}{polarity} (x, bar.size = 5, low = "red",
     mid = "grey99", high = "blue",
     ave.polarity.shape = "+", alpha = 1/4, shape = 19,
-    point.size = 2.5, jitter = 0.1, nrow = NULL, ...)
+    point.size = 2.5, jitter = 0.1, nrow = NULL,
+    na.rm = TRUE, ...)
 }
 \arguments{
   \item{x}{The polarity object.}
@@ -38,6 +39,8 @@
   \item{nrow}{The number of rows in the dotplot legend
   (used when the number of grouping variables makes the
   legend too wide).  If NULL no legend if plotted.}
+
+  \item{na.rm}{logical. Should missing values be removed?}
 
   \item{\ldots}{ignored}
 }

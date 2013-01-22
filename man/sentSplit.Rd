@@ -75,18 +75,18 @@
 \dontrun{
 #sentSplit EXAMPLE:
 sentSplit(DATA, "state")
-sentSplit(DATA, "state", stem.col = FALSE)
+sentSplit(DATA, "state", stem.col = TRUE)
 sentSplit(DATA, "state", text.place = "left")
 sentSplit(DATA, "state", text.place = "original")
 sentSplit(raj, "dialogue")
 
 #sentCombine EXAMPLE:
-dat <- sentSplit(DATA, "state", stem.col = FALSE)
+dat <- sentSplit(DATA, "state")
 sentCombine(dat$state, dat$person)
 sentCombine(dat$state, dat$sex)
 
 #TOT EXAMPLE:
-dat <- sentSplit(DATA, "state", stem.col = FALSE)
+dat <- sentSplit(DATA, "state")
 TOT(dat$tot)
 }
 }

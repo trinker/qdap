@@ -24,7 +24,7 @@
 #' \dontrun{
 #' multigsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
 #' mgsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
-#' mgsub("[:punct:]", "PUNC", DATA$state, fixed = FALSE)
+#' mgsub("[[:punct:]]", "PUNC", DATA$state, fixed = FALSE)
 #' }
 multigsub <-
 function(pattern, replacement = NULL, text.var, leadspace = FALSE, 

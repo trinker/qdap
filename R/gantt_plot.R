@@ -91,8 +91,6 @@ function(text.var, grouping.var, rm.var = NULL, fill.var = NULL,
             G <- as.character(substitute(fill.var))
             fillNAME <- G[length(G)]
         }
-
-
         if (!is.list(fill.var)){
             fill.var <- list(fill.var)
         }
@@ -123,7 +121,8 @@ function(text.var, grouping.var, rm.var = NULL, fill.var = NULL,
         x$fill_var <- lookup(x$key, fv2)
         x[, "key"] <- NULL
         colnames(x)[ncol(x)] <- fillNAME
-
+    } else {
+        fillNAME <- NULL
     }
     y <- gantt_wrap(dataframe = x, plot.var = NAME, facet.vars = rmNAME, 
          fill.var = fillNAME, xlab = xlab, ...)

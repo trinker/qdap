@@ -9,6 +9,11 @@
 #' (sentences ending with "|") from being marked as imperative.
 #' @param additional.names Additional names that may be used in a command 
 #' (people in the context that do not speak).
+#' @param parallel logical.  If TRUE attempts to run the function on multiple 
+#' cores.  Note that this may not mean a speed boost if you have one core or if 
+#' the data set is smaller as the cluster takes time to create.  With the 
+#' \code{mraja1spl} data set, with an 8 core machine, \code{imperative} had
+#' 1/3 the running time.
 #' @param warning logical.  If TRUE provides comma warnings (sentences that 
 #' contain numerous commas that may be handled incorrectly by the algorithm).
 #' @return Returns a dataframe with a text variable indicating imperative 
@@ -20,20 +25,21 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' DATA3 <- data.frame(name=c('sue', rep(c('greg', 'tyler', 'phil', 'sue'), 2)),      
-#'     statement=c('go get it|', 'I hate to read.', 'Stop running!', 'I like it!',        
-#'     'You are terrible!', "Don't!", 'Greg, go to the red, brick office.', 
-#'     'Tyler go to the gym.', "Alex don't run."), stringsAsFactors = FALSE)                       
-#' imperative(DATA3, 'name', 'statement', , c('Alex'))  
-#' imperative(DATA3, 'name', 'statement', lock.incomplete = TRUE, c('Alex'))                        
-#' imperative(DATA3, 'name', 'statement', , c('Alex'), warning=TRUE)          
-#' X <- imperative(mraja1spl, 'person', 'dialogue', warning=FALSE)                    
-#' truncdf(X[, -7], 60)                                                               
-#' strwrap(X$dialogue) 
+#' DATA3 <- data.frame(name=c('sue', rep(c('greg', 'tyler', 'phil', 'sue'), 2)),
+#'     statement=c('go get it|', 'I hate to read.', 'Stop running!', 'I like it!',
+#'     'You are terrible!', "Don't!", 'Greg, go to the red, brick office.',
+#'     'Tyler go to the gym.', "Alex don't run."), stringsAsFactors = FALSE)
+#' imperative(DATA3, 'name', 'statement', , c('Alex'))
+#' imperative(DATA3, 'name', 'statement', lock.incomplete = TRUE, c('Alex'))
+#' imperative(DATA3, 'name', 'statement', , c('Alex'), warning=TRUE)
+#' imperative(mraja1spl, 'person', 'dialogue', warning=FALSE)
+#' X <- imperative(mraja1spl, 'person', 'dialogue', warning=FALSE, parallel = TRUE)
+#' truncdf(X[, -7], 60)
+#' strwrap(X$dialogue)
 #' }
 imperative <-
 function(dataframe, person.var, text.var, lock.incomplete = FALSE, 
-    additional.names = NULL, warning=FALSE){
+    additional.names = NULL, parallel = FALSE, warning=FALSE){
     TV <- as.character(substitute(text.var))
     original <- names(dataframe)
     text <- as.character(dataframe[, c(text.var)])
@@ -154,13 +160,30 @@ function(dataframe, person.var, text.var, lock.incomplete = FALSE,
         }
         return(y)
     }
-    DF2$text <- invisible(lapply(as.character(text), function(x) {
-        if (lock.incomplete & endf2(x)){
-            x
-        } else {
-            IMP(x)
-        }
-    }))
+    if (parallel){
+        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
+        clusterExport(cl=cl, varlist=c("text", "lock.incomplete", "endf2", 
+            "IMP", "DF2", "breaker", "action.verbs", "preposition",
+            "adverb"), envir = environment())
+        m <- parLapply(cl, text, function(x) {
+                if (lock.incomplete & endf2(x)){
+                    x
+                } else {
+                    IMP(x)
+                }
+            }
+        )
+        stopCluster(cl)
+        DF2$text <- unlist(m)
+    } else {
+        DF2$text <- invisible(unlist(lapply(as.character(text), function(x) {
+            if (lock.incomplete & endf2(x)){
+                x
+            } else {
+                IMP(x)
+            }
+        })))
+    }    
     names(DF2)[which(names(DF2)%in%"text")] <- TV
     DF2$a <- NULL; DF2$b <- NULL
     DF2 <- DF2[, original]

@@ -4,7 +4,6 @@
 #' 
 #' @param x A numeric vector, matrix or data frame.
 #' @param y A second numeric vector if x is also a vector.  Default is NULL.
-#' @param digits Number of decimal places to round. 
 #' @return Returns a matrix of the Kullback Leibler measure between each vector 
 #' of probabilities.
 #' @details Uses Kullback & Leibler's (1951) formula:
@@ -18,18 +17,17 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' p.df <- wfdf(DATA$state, DATA$person)                    
-#' p.mat <- wfm(text.var = DATA$state, grouping.var = DATA$person)  
-#'                                                                 
-#' kullback.leibler(p.mat)                                         
-#' kullback.leibler(p.df)                                          
-#' kullback.leibler(p.df$greg, p.df$sam)  
-#' 
+#' p.df <- wfdf(DATA$state, DATA$person)
+#' p.mat <- wfm(text.var = DATA$state, grouping.var = DATA$person)
+#' kullback.leibler(p.mat)
+#' kullback.leibler(p.df)
+#' kullback.leibler(p.df$greg, p.df$sam)
 #' p.df2 <- wfdf(raj$dialogue, raj$person)
-#' kullback.leibler(p.df2)
+#' (x <- kullback.leibler(p.df2))
+#' print(x, digits = 4)
 #' }
 kullback.leibler <-
-function(x, y = NULL, digits = 3){
+function(x, y = NULL){
     kl <- function(x, y){
         x1 <- x/sum(x)
         y1 <- y/sum(y)
@@ -52,9 +50,31 @@ function(x, y = NULL, digits = 3){
         x <- x
     }
     if (is.null(y)) { 
-        z <- v.outer(x, "kl", digits = digits)
+        z <- v.outer(x, "kl")
     } else {
-        z <- round(kl(x = x, y = y), digits = digits)
+        z <- kl(x = x, y = y)
     }
+    class(z) <- c("kullback.leibler", "data.frame")
     z
+}
+
+#' Prints a kullback.leibler Object.
+#' 
+#' Prints a kullback.leibler object.
+#' 
+#' @param x The kullback.leibler object
+#' @param digits Number of decimal places to print. 
+#' @param \ldots ignored
+#' @method print kullback.leibler
+#' @S3method print kullback.leibler
+print.kullback.leibler <-
+function(x, digits = 3, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+    class(x) <- "matrix"
+    if (!is.null(digits)) {
+        x <- round(x, digits = digits)
+    }
+    print(x)
+    options(width=WD)  
 }

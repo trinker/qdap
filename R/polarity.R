@@ -16,9 +16,11 @@
 #' incomplete sentence end mark (\code{|}) will be removed from the analysis.
 #' @param digits Integer; number of decimal places to round when printing. 
 #' @param \ldots Other arguments supplied to \code{endf}.
-#' @return Returns a list of two dataframes:
+#' @return Returns a list of:
 #' \item{all}{A dataframe of scores per row with:
 #' \itemize{
+#'   \item  group.var - the grouping variable
+#'   \item  text.var - the text variable
 #'   \item  wc - word count
 #'   \item  polarity - sentence polarity score
 #'   \item  raw - raw polarity score (considering only positive and negative 
@@ -28,7 +30,10 @@
 #'   \item  pos.words - words considered positive
 #'   \item  neg.words - words considered negative}
 #' }
-#' \item{group}{A dataframe with the average polarity score by grouping variable.}
+#' \item{group}{A dataframe with the average polarity score by grouping 
+#' variable.}
+#' \item{digits}{integer value od number of digits to display; mostly internal 
+#' use} 
 #' @seealso \url{https://github.com/trestletech/Sermon-Sentiment-Analysis}
 #' @note The polarity score is dependent upon the polarity dictionary used.  
 #' This function defaults to the word polarity word dictionary used by Hu, M., & 
@@ -87,16 +92,44 @@
 #' truncdf(poldat2[["all"]], 20)
 #' plot(poldat2)
 #' plot(poldat2, nrow=4)
-#' plot(poldat2, nrow=NULL)
 #' }
 polarity <-
 function (text.var, grouping.var = NULL, positive.list = positive.words, 
     negative.list = negative.words, negation.list = negation.words, 
     amplification.list = increase.amplification.words, 
     rm.incomplete = FALSE, digits = 3, ...) {
-    grouping.vars <- grouping.var
+    if(is.null(grouping.var)) {
+        G <- "all"
+    } else {
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
+    }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    }
     unblank <- function(x) {
         return(x[x != ""])
+    }
+    if (sum(grepl("a+", tolower(text.var), fixed = TRUE)) > 0) {
+        text.var <- mgsub(c("A+", "a+"), "aplus", text.var, 
+            fixed = TRUE)
+        positive.list <- mgsub(c("A+", "a+"), "aplus", positive.list, 
+            fixed = TRUE)
     }
     no.na <- function(x) !is.na(x)
     truer <- function(x) which(!is.na(x) == TRUE)
@@ -157,41 +190,7 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
     if (any(is.na(unlist(x)))) {
         x[NAfill, 1:8] <- NA
     }
-    x2 <- x
-    TX <- as.character(substitute(text.var))
-    TX <- TX[length(TX)]
-    if (is.null(grouping.var)) {
-        grouping.var <- rep("all", length(text.var))
-    }
-    grouping.vars <- if (is.list(grouping.var) & length(grouping.var) > 
-        1) {
-        apply(data.frame(grouping.var), 1, function(x) {
-            if (any(is.na(x))) {
-                NA
-            } else {
-                paste(x, collapse = ".")
-            }
-        })
-    } else {
-        grouping.var
-    }
-    NAME <- if (is.list(grouping.var)) {
-        m <- unlist(as.character(substitute(grouping.var))[-1])
-        m <- sapply(strsplit(m, "$", fixed = TRUE), function(x) x[length(x)])
-        paste(m, collapse = "&")
-    } else {
-        G <- as.character(substitute(grouping.var))
-        G[length(G)]
-    }
-    x <- if (is.null(grouping.var)) {
-        names(x)[1] <- c(TX)
-        x
-    } else {
-        x <- data.frame(grouping.vars, x)
-        names(x)[1:2] <- c(NAME, TX)
-        x
-    }
-    DF <- data.frame(group = grouping.vars, x2[, c("text.var", 
+    DF <- data.frame(group = grouping, x[, c("text.var", 
         "wc", "polarity")])
     if (rm.incomplete) {
         DF <- endf(dataframe = DF, text.var = text.var, ...)
@@ -202,18 +201,24 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
             USE.NAMES = FALSE))
         return(z)
     }
-    DF2 <- aggregate(wc ~ group, DF, sum)
-    z <- na.instruct(DF, DF$group)
-    DF2$total.sentences <- as.data.frame(table(na.omit(DF)$group))$Freq[z]
-    DF2$ave.polarity <- aggregate(polarity ~ group, DF, 
-        mean)$polarity
-    names(DF2)[names(DF2) == "wc"] <- "total.words"
-    names(DF2)[1] <- NAME
-    DF2 <- DF2[order(-DF2$ave.polarity), ]
-    rownames(DF2) <- 1:nrow(DF2)
-    DF2 <- DF2[, c(1, 3, 2, 4)]
-    o <- list(all = x, group = DF2, POLARITY_FOR_ALL_SENTENCES = x, 
-        POLARITY_BY_GROUP = DF2, digits = digits)
+    L2 <- lapply(split(DF, DF[, "group"]), function(x) {
+        if (nrow(x)==1 && is.na(x[, "text.var"])) {
+            return(data.frame(group=as.character(x[1, 1]),
+                total.sentences=NA, 
+                total.words=NA,
+                ave.polarity=NA))
+        } 
+        x <- na.omit(x)
+        data.frame(group=as.character(x[1, 1]),
+            total.sentences=nrow(x), 
+            total.words=sum(x[, "wc"]),
+            ave.polarity=mean(x[, "polarity"]))
+    })
+    DF2 <- data.frame(do.call(rbind, L2), row.names = NULL)
+    DF2 <- DF2[order(DF2[, "ave.polarity"]), ]
+    x <- data.frame(group=grouping, x, row.names=NULL)
+    names(x)[1] <- names(DF2)[1] <- G
+    o <- list(all = x, group = DF2, digits = digits)
     class(o) <- "polarity"
     return(o)
 }
@@ -223,16 +228,20 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
 #' Prints a polarity object.
 #' 
 #' @param x The polarity object.
+#' @param digits Number of decimal places to print. 
 #' @param \ldots ignored
 #' @method print polarity
 #' @S3method print polarity
 print.polarity <-
-function(x, ...) {
+function(x, digits = NULL, ...) {
     cat("POLARITY BY GROUP\n=================\n")
     WD <- options()[["width"]]
     options(width=3000)
     y <- x$group
-    y[, "ave.polarity"] <- round(y[, "ave.polarity"], digits = x$digits)
+    if (is.null(digits)) {
+        digits <- x$digits
+    }
+    y[, "ave.polarity"] <- round(y[, "ave.polarity"], digits = digits)
     print(y)
     options(width=WD)
 }
@@ -257,6 +266,7 @@ function(x, ...) {
 #' @param jitter Amount of vertical jitter to add to the points.
 #' @param nrow The number of rows in the dotplot legend (used when the number of 
 #' grouping variables makes the legend too wide).  If NULL no legend if plotted.
+#' @param na.rm logical. Should missing values be removed?
 #' @param \ldots ignored
 #' @return Invisibly returns the \code{ggplot2} objects that form the larger 
 #' plot.  
@@ -265,10 +275,14 @@ function(x, ...) {
 #' @S3method plot polarity
 plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99", 
     high = "blue", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
-    point.size = 2.5,  jitter = .1, nrow = NULL, ...){
+    point.size = 2.5,  jitter = .1, nrow = NULL, na.rm = TRUE, ...){
     Polarity <- group <- ave.polarity <- unit <- NULL
     dat <- x[["group"]]
     dat2 <- x[["all"]]
+    if (na.rm) {
+       dat <- na.omit(dat)
+       dat2 <- na.omit(dat2)
+    }
     G <- names(dat)[1]
     nms <- c("group", "dialogue", "word_count", "Polarity")
     names(dat)[c(1, 2)] <-  nms[1:2]

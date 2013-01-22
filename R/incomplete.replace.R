@@ -16,7 +16,7 @@
 #' x <- c("the...",  "I.?", "you.", "threw..", "we?")
 #' incomplete.replace(x)
 #' incomp(x)
-#' incomp(x, TRUE)
+#' incomp(x, scan.mode = TRUE)
 #' }
 incomplete.replace <-
 function(text.var, scan.mode = FALSE) {

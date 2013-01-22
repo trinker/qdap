@@ -5,7 +5,7 @@
   qprep(text.var, rm.dash = TRUE, bracket = "all",
     missing = NULL, names = FALSE,
     abbreviation = qdap::abbreviations, replace = NULL,
-    ignore.case = TRUE, num.paste = "separate")
+    ignore.case = TRUE, num.paste = "separate", ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -41,6 +41,9 @@
   section as separate, \code{"combine"} will lump the
   sections together as one word.  Also takes the argument
   \code{NULL} which turns off this parsing technique.}
+
+  \item{\ldots}{Other arguments passed to
+  \code{link[qdap]{replace_symbol}}.}
 }
 \description{
   Wrapper for \code{bracketX}, \code{replace_number},

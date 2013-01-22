@@ -179,11 +179,11 @@ names(dat)
 dat$rnp  #useful for presenting in tables
 dat$raw  #prop and raw are useful for performing calculations
 dat$prop
-dat <- with(raj.act.1,  termco(dialogue, person, ml,
-    short.term = FALSE, elim.old=FALSE))
+(dat <- with(raj.act.1, termco(dialogue, person, ml,
+    short.term = FALSE, elim.old=FALSE)))
 
-dat2 <- data.frame(dialogue=c("@bryan is bryan good @br",
-    "indeed", "@ brian"), person=qcv(A, B, A))
+(dat2 <- data.frame(dialogue=c("@bryan is bryan good @br",
+    "indeed", "@ brian"), person=qcv(A, B, A)))
 
 ml <- list(wrds=c("bryan", "indeed"), "@", bryan=c("bryan", "@ br", "@br"))
 

@@ -46,7 +46,7 @@
 #' plot(x)
 #' plot(x, label = TRUE)
 #' plot(x, label = TRUE, text.color = "red")
-#' question_type(DATA$state, DATA$person, proportional = TRUE)
+#' question_type(DATA$state, DATA$person, percent = FALSE)
 #' DATA[8, 4] <- "Won't I distrust you?"
 #' question_type(DATA$state, DATA$person)
 #' DATA <- qdap::DATA
@@ -54,8 +54,8 @@
 #'
 #' with(mraja1spl, question_type(dialogue, person))
 #' with(mraja1spl, question_type(dialogue, list(sex, fam.aff)))
-#' with(mraja1spl, question_type(dialogue, list(sex, fam.aff), 
-#'     proportional = TRUE))
+#' with(mraja1spl, question_type(dialogue, list(sex, fam.aff),
+#'    percent = FALSE))
 #' }
 question_type <- function(text.var, grouping.var = NULL,
     neg.cont = FALSE, percent = TRUE, zero.replace = 0, digits = 2) {

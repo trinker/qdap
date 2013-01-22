@@ -70,7 +70,7 @@ x$count
 plot(x)
 plot(x, label = TRUE)
 plot(x, label = TRUE, text.color = "red")
-question_type(DATA$state, DATA$person, proportional = TRUE)
+question_type(DATA$state, DATA$person, percent = FALSE)
 DATA[8, 4] <- "Won't I distrust you?"
 question_type(DATA$state, DATA$person)
 DATA <- qdap::DATA
@@ -79,7 +79,7 @@ with(DATA, question_type(state, list(sex, adult)))
 with(mraja1spl, question_type(dialogue, person))
 with(mraja1spl, question_type(dialogue, list(sex, fam.aff)))
 with(mraja1spl, question_type(dialogue, list(sex, fam.aff),
-    proportional = TRUE))
+   percent = FALSE))
 }
 }
 \keyword{question-count}

@@ -59,7 +59,7 @@ function(termco.object, combined.columns, new.name, short.term = TRUE,
     y2 <- data.frame(x2[, 1:2], y2, check.names = FALSE)
     rnp <- raw_pro_comb(x2[, -c(1:2), drop = FALSE], 
         y2[, -c(1:2), drop = FALSE], digits = digits, 
-        percent = percent, zero.replace = zero.replace)  
+        percent = percent, zero.replace = zero.replace, override = TRUE)  
     rnp <- data.frame(x2[, 1:2], rnp, check.names = FALSE) 
     o <- list(raw = x2, prop = y2, rnp = rnp, zero.replace = zero.replace,
         percent = percent, digits = termco.object$digits)
