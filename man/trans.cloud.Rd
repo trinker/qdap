@@ -13,7 +13,7 @@
     title.cex = NULL, title.names = NULL,
     proportional = FALSE, max.word.size = NULL,
     min.word.size = 0.5, legend = NULL, legend.cex = 0.8,
-    legend.location = c(-0.03, 1.03), char.keep = NULL,
+    legend.location = c(-0.03, 1.03), char.keep = "~~",
     char2space = NULL)
 }
 \arguments{

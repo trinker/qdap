@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>gantt. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+  DigEmAll (&lt;a href = 'stackoverflow.com'&gt;stackoverflow.com&lt;/a&gt;) and Tyler Rinker
+  &lt;tyler.rinker@gmail.com&gt;.
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Generate Unit Spans</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>gantt(text.var, grouping.var, plot = TRUE, units = "words", sums = FALSE, plot.colors = NULL, 
+  box.color = NULL, col.sep = "_")</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>text.var</dt>
+      <dd>The text variable</dd>
+      <dt>grouping.var</dt>
+      <dd>The grouping variables. Also takes a
+  single grouping variable or a list of 1 or more grouping
+  variables.</dd>
+      <dt>plot</dt>
+      <dd>logical.  If TRUE plots the start-end times
+  as a gantt plot.</dd>
+      <dt>units</dt>
+      <dd>The unit of measurement to analyze.  One of
+  the strings <code>"character"</code>, <code>"syllable"</code>,
+  <code>"word"</code>, or <code>"sentence"</code>.</dd>
+      <dt>sums</dt>
+      <dd>logical.  If TRUE reports and optionally
+  plots the total units used by grouping variable(s).</dd>
+      <dt>plot.colors</dt>
+      <dd>The colors of the Gantt plot bars.
+  Either a single color or a length equal to the number of
+  grouping variable(s).</dd>
+      <dt>box.color</dt>
+      <dd>A single color of the box around the
+  Gantt plot bars.</dd>
+      <dt>col.sep</dt>
+      <dd>The character string to use to separate
+  pasted variables in the merged grouping variable
+  header/name.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>Returns a data frame of start and end times by grouping
+  variable(s) or optionally returns a list of two: (1) A
+  data frame of the total units used by grouping
+  variable(s) and (2) a data frame of start and end times
+  by grouping variable(s).  Optionally plots a Gantt plot
+  of the returned data.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>Generates start and end times of supplied text selections
+  (i.e. text selections are determined by any number of
+  grouping variables).</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+      
+      <p>For repeated measures data output use <code>gantt_rep</code>;
+  for a conventient wrapper that takes text and generates
+  plots use <code>gantt_plot</code>; and for a flexible gantt
+  plot that words with code matrix functions (cm) use
+  <code>gantt_wrap</code>.</p>
+  
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+      
+      <p>Clark, W. & Gantt, H. (1922) The Gantt chart, a working
+  tool of management. New York, Ronald Press.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # gantt(DATA$state, DATA$person)# gantt(DATA$state, DATA$person, sums = TRUE)# gantt(DATA$state, list(DATA$sex, DATA$adult))# gantt(mraja1$dialogue, mraja1$person) #hard to see without box color# gantt(mraja1$dialogue, mraja1$sex)# gantt(mraja1$dialogue, mraja1$person, box.col = "black")# gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), plot.colors = NULL)# gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), plot.colors = "black")# gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), plot = FALSE)# gantt(mraja1$dialogue, mraja1$person, units = "characters", box.color = "black")# gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "characters")# with(mraja1, gantt(dialogue, list(fam.aff, sex, died),#    units = "characters", sums = TRUE))# gantt(mraja1$dialogue, mraja1$person, units = "syllables",#    box.color = "black", sums = TRUE)# gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "syllables")# # (dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "sentences",#      plot.colors = 'black', sums = TRUE, col.sep = "_")$gantt.df)# gantt_wrap(dat, fam.aff_sex, title = "Gantt Plot")# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>gantt</li>
+    </ul>
+    <ul>
+      <li>Gantt</li>
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+  <code>gantt_rep</code>,
+  <code>gantt_wrap</code>,
+  <code>gantt_plot</code>
+
+    
+    <h2>Author</h2>
+    
+  DigEmAll (<a href = 'stackoverflow.com'>stackoverflow.com</a>) and Tyler Rinker
+  <tyler.rinker@gmail.com>.
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

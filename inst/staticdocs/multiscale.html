@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>multiscale. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Nested Standardization</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>multiscale(numeric.var, grouping.var, original_order = TRUE, digits = 2)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>numeric.var</dt>
+      <dd>A numeric variable.</dd>
+      <dt>grouping.var</dt>
+      <dd>The grouping variables.  Default NULL
+  generates one output for all text.  Also takes a single
+  grouping variable or a list of 1 or more grouping
+  variables.</dd>
+      <dt>original_order</dt>
+      <dd>logical.  IF TRUE orders by the
+  original order.  If FALSE orders by group.</dd>
+      <dt>digits</dt>
+      <dd>Integer; number of decimal places to
+  round.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>Returns a list of two: SCALED_OBSERVATIONSA
+  dataframe of scaled observations at level one and two of
+  the nesting with possible outliers.
+  DESCRIPTIVES_BY_GROUPA data frame of descriptives
+  by group.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>Standardize within a subgroup and then within a group.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # dat <- with(mraja1spl, word_stats(dialogue, list(person, sex, fam.aff)))# head(colsplit2df(dat$ts))# with(colsplit2df(dat$ts), multiscale(word.count, person))# with(colsplit2df(dat$ts), multiscale(word.count, list(fam.aff, sex)))# with(colsplit2df(dat$ts), multiscale(word.count, list(fam.aff, sex),#     original_order = FALSE))# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>multiscale</li>
+    </ul>
+    <ul>
+      <li>scale</li>
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+  <code><a href='http://www.inside-r.org/r-doc/base/scale'>scale</a></code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

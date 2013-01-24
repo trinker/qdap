@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>question_type. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Count of Question Type</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>question_type(text.var, grouping.var = NULL, neg.cont = FALSE, percent = TRUE, zero.replace = 0, 
+  digits = 2)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>text.var</dt>
+      <dd>The text variable</dd>
+      <dt>grouping.var</dt>
+      <dd>The grouping variables.  Default NULL
+  generates one output for all text.  Also takes a single
+  grouping variable or a list of 1 or more grouping
+  variables.</dd>
+      <dt>neg.cont</dt>
+      <dd>logical.  IF TRUE provides separate
+  counts for the negative contraction forms of the
+  interrogative words.</dd>
+      <dt>percent</dt>
+      <dd>logical.  If TRUE output given as percent.
+  If FALSE the output is proportion.</dd>
+      <dt>zero.replace</dt>
+      <dd>Value to replace 0 values with.</dd>
+      <dt>digits</dt>
+      <dd>Integer; number of decimal places to round
+  when printing.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>Returns a list of: rawA dataframe of the
+  questions used in the transcript and their type.
+  countA dataframe of total questions
+  (<code>tot.quest</code>) and counts of question types (initial
+  interrogative word) by grouping variable(s).
+  rnpDataframe of the frequency and proportions of
+  question types by grouping variable. missingThe
+  row numbers of the missing data (excluded from
+  analysis). percentThe value of percent used for
+  plotting purposes. zero.replaceThe value of
+  zero.replace used for plotting purposes.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>Transcript apply question counts.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+      
+      <p>The algorithm searches for the following interrogative
+  words (and optionally, their negative contraction form as
+  well):</p>
+  
+      <p>1) whose 2) whom 3) who 4) where 5) what 6) which 7) why
+  8) when 9) were 10) was 11) does 12) did 13) do 14) is
+  15) are 16) will 17) how 18) should 19) could 20) would
+  21) shall 22) may 23) might 24) must 25) can 26) has 27)
+  have 28) had 29) ok 30) right 31) correct 32) implied
+  do/does</p>
+  
+      <p>The interrogative word that is found first (with the
+  exception of "ok", "right" and "correct") in the question
+  determines the sentence type. "ok", "right" and "correct"
+  sentence types are determined if the sentence is a
+  question with no other interrogative words found and
+  "ok", "right" or "correct" is the last word of the
+  sentence.  Those interrogative sentences beginning with
+  the word "you" are categorized as implying do or does
+  question type, though the use of do/does is not explicit.
+  Those with undetermined sentence type are labeled
+  unknown.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # (x <- question_type(DATA$state, DATA$person))# x$raw# x$count# plot(x)# plot(x, label = TRUE)# plot(x, label = TRUE, text.color = "red")# question_type(DATA$state, DATA$person, percent = FALSE)# DATA[8, 4] <- "Won't I distrust you?"# question_type(DATA$state, DATA$person)# DATA <- qdap::DATA# with(DATA, question_type(state, list(sex, adult)))# # with(mraja1spl, question_type(dialogue, person))# with(mraja1spl, question_type(dialogue, list(sex, fam.aff)))# (x <- with(mraja1spl, question_type(dialogue, list(sex, fam.aff),#    percent = FALSE)))# plot(x)# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>question_type</li>
+    </ul>
+    <ul>
+      <li>question-count</li><li>question,</li>
+    </ul> -->
+      
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

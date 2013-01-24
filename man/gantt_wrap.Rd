@@ -125,6 +125,8 @@ gantt_wrap(dat, fam.aff_sex, fill.var = "codes", legend.position = "bottom")
     units = "words", col.sep = "_")))
 x <- gantt_wrap(dat3, fam.aff_sex, facet.vars = "act",
     title = "Repeated Measures Gantt Plot")
+
+library(ggplot2); library(scales); library(RColorBrewer)
 x + scale_color_manual(values=rep("black", length(levels(dat3$fam.aff_sex))))
 }
 }

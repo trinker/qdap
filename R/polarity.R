@@ -122,6 +122,28 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
             grouping <- unlist(grouping.var)
         } 
     }
+    allwrds <- c(positive.list, negative.list, negation.list, amplification.list)
+    ps <- grepl("\\s", positive.list)
+    ns <- grepl("\\s", negative.list)
+    ngs <- grepl("\\s", negation.list)
+    as <- grepl("\\s", amplification.list)
+    spcs <- c(ps, ns, ngs, as)
+    if (any(spcs)) {
+        dbls <- allwrds[spcs]
+        text.var <- mgsub(dbls, gsub("\\s", "~~", dbls), reducer(text.var))
+        if (any(ps)) {
+            positive.list <- gsub("\\s", "~~", positive.list)
+        }
+        if (any(ns)) {
+            negative.list <- gsub("\\s", "~~", negative.list)
+        }
+        if (any(ngs)) {
+            negation.list <- gsub("\\s", "~~", negation.list)
+        }
+        if (any(as)) {
+            amplification.list <- gsub("\\s", "~~", amplification.list)
+        }
+    }
     unblank <- function(x) {
         return(x[x != ""])
     }
@@ -142,7 +164,7 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
     amplification <- strip(amplification.list)
     x <- as.data.frame(text.var)
     x$words <- unblank(word.split(strip(text.var)))
-    x$wc <- word.count(text.var)
+    x$wc <- word.count(gsub("~~", " ", text.var))
     pos.matchesPOS <- lapply(x$words, function(x) match(x, positive.list))
     neg.matchesPOS <- lapply(x$words, function(x) match(x, negative.list))
     pos <- lapply(pos.matchesPOS, no.na)

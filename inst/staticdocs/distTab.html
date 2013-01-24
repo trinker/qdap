@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>distTab. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>SPSS Style Frequency Tables</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>distTab(dataframe, breaks = NULL, digits = 2, ...)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>dataframe</dt>
+      <dd>A vector or data.frame object.</dd>
+      <dt>breaks</dt>
+      <dd>Either a numeric vector of two or more cut
+  points or a single number (greater than or equal to 2)
+  giving the number of intervals into which x is to be
+  cut.</dd>
+      <dt>digits</dt>
+      <dd>Integer indicating the number of decimal
+  places (round) or significant digits (signif.) to be
+  used. Negative values are allowed</dd>
+      <dt>...</dt>
+      <dd>Other variables passed to cut.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>Returns a list of data frames (or singular data frame for
+  a vector) of frequencies, cumulative frequencies,
+  percentages and cumulative percentages for each interval.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>Generates a distribution table for vectors, matrices and
+  dataframes.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # distTab(rnorm(10000), 10)# distTab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)# distTab(CO2, 4)# distTab(mtcars)# distTab(mtcars, 4)# # wdst <- with(mraja1spl, word_stats(dialogue, list(sex, fam.aff, died)))# distTab(wdst$gts)# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>distTab</li>
+    </ul>
+    <ul>
+      <li>distribution,</li><li>frequency</li>
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+  <code><a href='http://www.inside-r.org/r-doc/base/cut'>cut</a></code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

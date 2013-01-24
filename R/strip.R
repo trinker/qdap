@@ -5,7 +5,9 @@
 #' @param x The text variable.
 #' @param char.keep A character vector of symbols (i.e. punctuation) that 
 #' \code{strip} should keep.  The default is to strip every symbol except 
-#' apostrophes.
+#' apostrophes and a double tilde \code{"~~"}.  The double tilde \code{"~~"} is 
+#' included for a convenient means of keeping word groups together in functions
+#' that split text apart based on spaces.
 #' @param digit.remove logical.  If TRUE strips digits from the text.
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from the 
 #' output.
@@ -20,7 +22,7 @@
 #' strip(DATA$state, char.keep = c("?", "."))
 #' }
 strip <-
-function (x, char.keep = NULL, digit.remove = TRUE, apostrophe.remove = TRUE,
+function (x, char.keep = "~~", digit.remove = TRUE, apostrophe.remove = TRUE,
     lower.case = TRUE) {
     strp <- function(x, digit.remove, apostrophe.remove, char.keep, lower.case) {
         if (!is.null(char.keep)) {

@@ -243,7 +243,25 @@ NULL
 #' @references 
 #' \url{http://icon.shef.ac.uk/Moby/mpos.html}
 NULL
- 
+
+#' Contraction Conversions
+#' 
+#' A dataset containing common contrctions and their expanded form.
+#' 
+#' @details 
+#' \itemize{ 
+#'   \item contraction. The contraction word.
+#'   \item expanded. The expanded form of the contraction.
+#' } 
+#' 
+#' @docType data 
+#' @keywords datasets 
+#' @name contractions 
+#' @usage data(contractions) 
+#' @format A data frame with 65 rows and 2 variables 
+NULL
+
+
 #' Emoticons Data Set
 #' 
 #' A dataset containing common emoticons (adapted from 

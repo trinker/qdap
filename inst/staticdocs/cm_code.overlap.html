@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>cm_code.overlap. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Find Co-occurrence Between Codes</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>cm_code.overlap(x2long.obj, overlap.code.list, rm.var = NULL)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>x2long.obj</dt>
+      <dd>An object from <code>cm_range2long</code>,
+  <code>cm_time2long</code> or <code>cm_df2long</code>.</dd>
+      <dt>overlap.code.list</dt>
+      <dd>A list of named character
+  vectors of at least two code column names to aggregate
+  co-occurrences.</dd>
+      <dt>rm.var</dt>
+      <dd>Name of the repeated measures column.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>Returns a dataframe with co-occurrences of supplied
+  overlapping codes added.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>Combine co-occurrences of codes into a new code.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+      
+      <p>The code column must be named code and your start and end
+  columns must be named <code>"start"</code> and <code>"end"</code>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # foo <- list(#     AA = qcv(terms='1:10'),#     BB = qcv(terms='1:2, 3:10, 19'),#     CC = qcv(terms='1:3, 5:6')# )# # foo2  <- list(#     AA = qcv(terms='4:8'),#     BB = qcv(terms='1:4, 10:12'),#     CC = qcv(terms='1, 11, 15:20'),#     DD = qcv(terms='')# )# # x <- cm_range2long(foo)# z <- cm_range2long(foo, foo2, v.name="time")# combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))# cm_code.overlap(x, list(AB=qcv(AA, BB)))# cm_code.overlap(x, list(ALL=qcv(AA, BB, CC)))# cm_code.overlap(z, combines, "time")# # #WITH cm_time2long# x <- list(#     transcript_time_span = qcv(00:00 - 1:12:00),#     A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),#     B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00, 1.12.00:1.19.01"),#     C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")# )# # y <- list(#     transcript_time_span = qcv(00:00 - 1:12:00),#     A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),#     B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00, 1.12.00:1.19.01"),#     C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")# )# # dat <- cm_time2long(x, y)# cm_code.overlap(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)), "variable")# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>cm_code.overlap</li>
+    </ul>
+    <ul>
+      <li>co-occurrence</li>
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+  <code>cm_range2long</code>,
+  <code>cm_time2long</code>,
+  <code>cm_df2long</code>,
+  <code>cm_code.combine</code>,
+  <code>cm_code.transform</code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

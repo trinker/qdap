@@ -13,6 +13,7 @@
 #' @param transpose logical.  If TRUE transposes the dataframe so that the text 
 #' is across the top. 
 #' @param strip logical.  If TRUE all punctuation is removed.
+#' @param \ldots Other arguments passed to strip.
 #' @return Generates a dataframe, and optional csv file, of individual words 
 #' while maintaining demographic information.  If a vector of codes is provided the 
 #' outcome is a matrix of words used by codes filled with zeros.  This dataframe 
@@ -35,10 +36,10 @@
 #' cm_df.temp(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
 #' }
 cm_df.temp <- function(dataframe, text.var, codes = NULL, csv = TRUE, 
-    file.name = NULL, transpose = FALSE, strip =FALSE){
+    file.name = NULL, transpose = FALSE, strip =FALSE, ...){
     tv <- as.character(dataframe[, text.var])
     if (strip) {
-        tv <- strip(tv)
+        tv <- strip(tv, ...)
     }
     wrds <- lapply(tv, function(x) Trim(unlist(strsplit(x, " "))))
     lens <- sapply(wrds, length) 

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>endf. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Test for Incomplete Sentences</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>endf(dataframe, text.var, warning.report = TRUE, which.mode = FALSE)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>dataframe</dt>
+      <dd>A dataframe that contains the person and
+  text variable.</dd>
+      <dt>text.var</dt>
+      <dd>A character string of the text variable.</dd>
+      <dt>warning.report</dt>
+      <dd>logical.  If TRUE prints a warning
+  of regarding removal of incomplete sentences.</dd>
+      <dt>which.mode</dt>
+      <dd>logical.  If TRUE outputs two logical
+  vectors: NOT (logical test of not being an incomplete
+  sentence) and INC (logical test of being an incomplete
+  sentence)</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>Generates a dataframe with incomplete sentences removed.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>Test for incomplete sentences and optionally remove them.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # dat <- sentSplit(DATA, "state", stem.col = FALSE)# dat$state[c(2, 5)] <- paste(strip(dat$state[c(2, 5)]), "|")# endf(dat, "state")# endf(dat, "state", warning.report = FALSE)# endf(dat, "state", which.mode = TRUE)# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>endf</li>
+    </ul>
+    <ul>
+      <li>incomplete</li>
+    </ul> -->
+      
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -6,10 +6,12 @@
 \title{Word Frequency Matrix}
 \usage{
   wfm(text.var = NULL, grouping.var = NULL, wfdf = NULL,
-    output = "raw", stopwords = NULL, digits = 2)
+    output = "raw", stopwords = NULL, digits = 2,
+    char2space = "~~", ...)
 
   wfdf(text.var, grouping.var = NULL, stopwords = NULL,
-    margins = FALSE, output = "raw", digits = 2)
+    margins = FALSE, output = "raw", digits = 2,
+    char2space = "~~", ...)
 
   wfm.expanded(text.var, grouping.var = NULL, ...)
 
@@ -40,7 +42,8 @@
   \item{margins}{logical. If TRUE provides grouping.var and
   word variable totals.}
 
-  \item{\ldots}{Other arguments supplied to \code{wfm}.}
+  \item{\ldots}{Other arguments supplied to
+  \code{\link[qdap]{strip}}.}
 
   \item{wf.obj}{A \code{wfm} or \code{wfdf} object.}
 
@@ -49,6 +52,10 @@
 
   \item{matrix}{logical.  If TRUE returns the output as a
   \code{wfm} rather than a \code{wfdf} object}
+
+  \item{char2space}{A vector of characters to be turned
+  into spaces.  If \code{char.keep} is NULL,
+  \code{char2space} will activate this argument.}
 }
 \value{
   \code{wfm} - returns a word frequency of the class
@@ -79,15 +86,31 @@
   \code{wf.combine} - Combines words (rows) of a word
   frequency data frame (\code{wfdf}) together.
 }
+\note{
+  Words can be kept as one by inserting a double tilde
+  (\code{"~~"}), or other character strings passed to
+  char2space, as a single word/entry. This is useful for
+  keeping proper names as a single unit.
+}
 \examples{
 \dontrun{
 #word frequency matrix (wfm) example:
 with(DATA, wfm(state, list(sex, adult)))
 dat <- with(DATA, wfm(state, person))
 
+#inset double tilde ("~~") to keep dual words (e.i. first last name)
+alts <- c(" fun", "I ")
+state2 <- mgsub(alts, gsub("\\\\s", "~~", alts), DATA$state)
+with(DATA, wfm(state2, list(sex, adult)))
+
 #word frequency dataframe (wfdf) example:
 with(DATA, wfdf(state, list(sex, adult)))
 with(DATA, wfdf(state, person))
+
+#inset double tilde ("~~") to keep dual words (e.i. first last name)
+alts <- c(" fun", "I ")
+state2 <- mgsub(alts, gsub("\\\\s", "~~", alts), DATA$state)
+with(DATA, wfdf(state2, list(sex, adult)))
 
 #wfm.expanded example:
 z <- wfm(DATA$state, DATA$person)

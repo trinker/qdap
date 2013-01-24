@@ -6,17 +6,17 @@ function(x) {
             return(freqTab2words(x))
         } else {
             if (!comment(x) %in% "bagOwords") {
-                stop("Must be a qdap object or a vector of raw words")
+                stop("Must be a word_list object or a vector of raw words")
             } else {
                 return(x)
             }
         }
     } else {
         if (is.vector(x)) {
-            warning ("Not a qdap object.")
+            warning ("Not a word_listobject.")
             return(x)
         } else {
-            stop("Must be a qdap object or a vector of raw words")
+            stop("Must be a word_list object or a vector of raw words")
         }
     }
 }

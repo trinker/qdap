@@ -3,7 +3,7 @@
 \title{Transcript With Word Number}
 \usage{
   cm_df.transcript(text.var, grouping.var, file = NULL,
-    indent = 4, width = 70)
+    indent = 4, width = 70, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -21,6 +21,8 @@
   \item{width}{Width to output the file (defaults to 70;
   this is generally a good width and indent for a .docx
   file).}
+
+  \item{\ldots}{Other arguments passed to strip.}
 }
 \value{
   Returns a transcript by grouping variable with word
@@ -39,6 +41,16 @@
 }
 \examples{
 \dontrun{
+with(DATA, cm_df.transcript(state, person))
+with(DATA, cm_df.transcript(state, list(sex, adult)))
+#use it with nested variables just to keep track of demographic info
+with(DATA, cm_df.transcript(state, list(person, sex, adult)))
+
+#use double tilde "~~" to keep word group as one word
+DATA$state <- mgsub("be certain", "be~~certain", DATA$state, fixed = TRUE)
+with(DATA, cm_df.transcript(state, person))
+DATA <- qdap::DATA
+
 with(mraja1spl, cm_df.transcript(dialogue, list(person)))
 with(mraja1spl, cm_df.transcript(dialogue, list(sex, fam.aff, died)))
 with(mraja1spl, cm_df.transcript(dialogue, list(person), file="foo.doc"))

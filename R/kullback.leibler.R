@@ -69,12 +69,17 @@ function(x, y = NULL){
 #' @S3method print kullback.leibler
 print.kullback.leibler <-
 function(x, digits = 3, ...) {
-    WD <- options()[["width"]]
-    options(width=3000)
-    class(x) <- "matrix"
-    if (!is.null(digits)) {
-        x <- round(x, digits = digits)
+    if (length(x) == 1) {
+        y <- unclass(x)
+        print(y)
+    } else {
+        WD <- options()[["width"]]
+        options(width=3000)
+        class(x) <- "matrix"
+        if (!is.null(digits)) {
+            x <- round(x, digits = digits)
+        }
+        print(x)
+        options(width=WD)  
     }
-    print(x)
-    options(width=WD)  
 }

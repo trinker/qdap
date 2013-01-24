@@ -98,7 +98,7 @@
 #' \dontrun{
 #' ms <- c(" I", "you")
 #' et <- c(" it", " no")
-#' word.associate(DATA2$state, DATA2$person, match.string = ms, 
+#' word_associate(DATA2$state, DATA2$person, match.string = ms, 
 #'     wordcloud = TRUE,  proportional = TRUE, 
 #'     network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,  
 #'     cloud.legend =c("A", "B", "C", "D"),
@@ -116,13 +116,13 @@
 #'     C = c(" it", " no")
 #' )
 #' 
-#' word.associate(DATA2$state, DATA2$person, match.string = ms, 
+#' word_associate(DATA2$state, DATA2$person, match.string = ms, 
 #'     wordcloud = TRUE,  proportional = TRUE, 
 #'     network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,  
 #'     cloud.legend =c("A", "B", "C", "D"),
 #'     title.color = "blue", cloud.colors = c("red", "blue", "purple", "gray70"))
 #' 
-#' word.associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = ms)
+#' word_associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = ms)
 #' 
 #' #======================================
 #' m <- list(
@@ -135,14 +135,35 @@
 #'     C = c(" it", " no")
 #' )
 #' 
-#' word.associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = m)
-#' word.associate(raj.act.1$dialogue, list(raj.act.1$person), match.string = m)
-#' (out <- with(mraja1spl, word.associate(dialogue, list(fam.aff, sex), match.string = m)))
+#' word_associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = m)
+#' word_associate(raj.act.1$dialogue, list(raj.act.1$person), match.string = m)
+#' (out <- with(mraja1spl, word_associate(dialogue, list(fam.aff, sex), match.string = m)))
 #' names(out)
 #' lapply(out$dialogue, htruncdf, n = 20, w = 20)
 #' out$cap.f
+#' 
+#' #======================================
+#' DATA2$state2 <- space_fill(DATA2$state, c("is fun", "too fun"))
+#' 
+#' ms <- list(
+#'     list1 = c(" I ", " you", "is fun", "too fun"), 
+#'     list2 = c(" wh")      
+#' )
+#' 
+#' et <- list(
+#'     B = c(" the", " on"), 
+#'     C = c(" it", " no")
+#' )
+#' 
+#' word_associate(DATA2$state2, DATA2$person, match.string = ms, 
+#'     wordcloud = TRUE,  proportional = TRUE, 
+#'     network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,  
+#'     cloud.legend =c("A", "B", "C", "D"),
+#'     title.color = "blue", cloud.colors = c("red", "blue", "purple", "gray70"))
+#'     
+#' DATA2 <- qdap::DATA2
 #' }
-word.associate <-
+word_associate <-
 function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",  
     extra.terms = NULL, target.exclude = NULL, stopwords = NULL, 
     network.plot = FALSE, wordcloud = FALSE, cloud.colors = c("black", "gray55"), 
@@ -152,9 +173,7 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
     title.font = NULL, title.cex = NULL, nw.edge.curved = TRUE, 
     cloud.legend = NULL, cloud.legend.cex = .8, cloud.legend.location = c(-.03, 1.03), 
     nw.legend = NULL, nw.legend.cex = .8, nw.legend.location = c(-1.54, 1.41),
-    legend.override = FALSE, char2space = NULL, ...){
-#currently char2space is a road to nowhere.  Connect the road and add char.keep 
-#argument as well
+    legend.override = FALSE, char2space = "~~", ...){
     network.graph <- NULL
     if (network.plot | wordcloud) {
         if(is.null(nw.label.colors)) {
@@ -207,47 +226,49 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
         strip = TRUE, unique = TRUE, names = FALSE, char.keep = char2space)  
     if (!is.null(char2space)) {
         Terms2 <- mgsub(char2space, " ", Terms2)
-    }  
-    TM2 <- lapply(match.string, function(x) term.find(Terms2, 
-        mat = tolower(x)))
+    } 
+    TM2 <- lapply(match.string, function(x) {
+        term.find(Terms2, mat = tolower(x), unlist = TRUE)
+    })
     match.string <- lapply(TM2, function(i) Terms2[i])
     if (!is.null(target.exclude)) {
         match.string <- lapply(match.string, function(x) 
             x[!x %in% unlist(tolower(target.exclude))])
     }
-    match.string <- lapply(match.string, function(x) paste0(" ", x, " "))
+    match.string <- spaste(match.string)
     if (!is.null(extra.terms)) {
-        TM3 <- lapply(extra.terms, function(x) term.find(Terms2, 
-            mat = tolower(x)))
+        TM3 <- lapply(extra.terms, function(x) {
+            term.find(Terms2, mat = tolower(x), unlist = TRUE)
+        })
         TM3 <- lapply(TM3, function(i) Terms2[i])
         if (!is.null(target.exclude)) {
             TM3 <- lapply(TM3, function(x) 
                 x[!x %in% unlist(tolower(target.exclude))])
         }
     }
-    TU <- suppressWarnings(if(is.null(text.unit)) {
-        "row"
+    suppressWarnings(if(is.null(text.unit)) {
+        TU <- "row"
     } else {
         if (is.list(text.unit)) {
             m <- unlist(as.character(substitute(text.unit))[-1])
             m <- sapply(strsplit(m, "$", fixed=TRUE), 
                 function(x) x[length(x)])
-                paste(m, collapse="&")
+                TU <- paste(m, collapse="&")
         } else {
             if (is.vector(text.unit) & length(text.unit) == 1 & 
                 text.unit == "sentence") {
-                    "sentence"
+                    TU <- "sentence"
             } else {
                 TU <- as.character(substitute(text.unit))
-                TU[length(TU)]
+                TU <- TU[length(TU)]
             }
         }
     })
-    texting <- if(is.null(text.unit)){
-        as.factor(1:length(text.var))
+    if(is.null(text.unit)){
+        texting <- as.factor(1:length(text.var))
     } else {
         if(is.list(text.unit) & length(text.unit)>1) {
-            apply(data.frame(text.unit), 1, function(x){
+            texting <- apply(data.frame(text.unit), 1, function(x){
                 if(any(is.na(x))){
                     NA
                 }else{
@@ -256,17 +277,21 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
             })
         } else {
             if (TU == "tot") {
-                sapply(strsplit(as.character(text.unit), ".", 
+                texting <- sapply(strsplit(as.character(text.unit), ".", 
                     fixed=TRUE), function(x) x[[1]])
             } else {
                 if (TU %in% c("sentence", "sent")) {
-                    as.factor(1:length(text.var))
+                    texting <- as.factor(1:length(text.var))
                 } else {
-                    unlist(text.unit)
+                    texting <- unlist(text.unit)
                 }
             }
         } 
     } 
+    text.var2 <- text.var
+    if (!is.null(char2space)) {
+        text.var <- mgsub(char2space, " ", text.var)
+    }
     DF <- data.frame(row = seq_along(text.var), group = grouping, unit = texting,
         text = as.character(text.var), stringsAsFactors = FALSE)    
     LOG <- lapply(match.string, function(x) {
@@ -288,10 +313,13 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
     }
     DFsl <- lapply(ALN, function(i) na.omit(DF3[shortDF(DF3, i), 1:4]))
     names(DFsl) <- colnames(DF3)[-c(1:4)]
-    Terms <- qdap::stopwords(text.var, stopwords = NULL, unlist = TRUE, 
-          strip = TRUE, unique = TRUE, names = FALSE)     
+    Terms <- qdap::stopwords(text.var2, stopwords = NULL, unlist = TRUE, 
+          strip = TRUE, unique = TRUE, names = FALSE, char.keep = char2space)
+    if (!is.null(char2space)) {
+        Terms <- mgsub(char2space, " ", Terms)
+    }       
     TM <- lapply(match.string, function(x) term.find(Terms, 
-        mat = x))
+        mat = x, unlist = TRUE))
     COLTERMS <- lapply(TM, function(i) Terms[i])
     if (!is.null(target.exclude)) {
         COLTERMS <- lapply(COLTERMS, function(x) x[!x %in% target.exclude])
@@ -311,12 +339,14 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
     }
     if (!is.null(extra.terms)) {
         UET <- unlist(extra.terms, recursive = FALSE)
-        ECOLTERMS <- lapply(UET, function(x) term.find(Terms, mat = x))
+        ECOLTERMS <- lapply(UET, function(x) term.find(Terms, mat = x, ))
         ECOLTERMS <- lapply(ECOLTERMS, function(i) Terms[i])
         if (!is.null(target.exclude)) {
             ECOLTERMS <- lapply(ECOLTERMS, function(x) x[!x %in% target.exclude])
         }
     }
+    DF4 <- DF3
+    DF4$text <- text.var2
     if (wordcloud | network.plot) {
         if (!is.null(extra.terms)) {
             nm <- length(match.string)
@@ -355,7 +385,7 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
         network.graph, wordcloud, cloud.colors, title.color, nw.label.cex, 
         nw.label.colors, nw.layout, nw.edge.color, LN, nw.label.proportional,
         ECOLTERMS, cloud.legend, cloud.legend.cex, cloud.legend.location, 
-        nw.legend, nw.legend.cex, nw.legend.location, ...){  
+        nw.legend, nw.legend.cex, nw.legend.location, char.keep, char2space, ...){  
         LIST <- lapply(LN, function(x) dat[dat[, x], 2:4])
         FUN <- function(x) {
             (nrow(x) > 1) & !is.null(x)
@@ -404,7 +434,7 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
         LIST2 <- LIST2[!sapply(LIST2, is.null)]
         mats <- lapply(LIST2, function(x) {
                wfm(grouping.var = Trim(x[, "unit"]), text.var = x[, "text"],
-                    stopwords = stopwords)
+                    stopwords = stopwords, char2space = char2space)
             }
         )
         mats2 <- lapply(mats, function(x) {
@@ -412,7 +442,7 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
             }
         )
         freqlist <- lapply(LIST, function(x) {
-            word_list(x$text, stopwords = stopwords)
+            word_list(x$text, stopwords = stopwords, char.keep = char2space)
         })
         o <- list(list = LISTb, search.terms = COLTERMS, freqlist = freqlist, 
             freqmat = mats, adjmat = mats2)
@@ -421,7 +451,7 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
         }
         o <- unlist(o, recursive = FALSE)
         if (network.plot) {
-            an <-  which(substring(names(o), 1, 6) == "adjmat")
+            an <-  grep("adjmat", names(o))
             ads <- lapply(an, function(i) o[[i]])
             lapply(seq_along(ads), function(i) {
                 word.network.plot(ads[[i]], label.cex = nw.label.cex, 
@@ -434,28 +464,32 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
                 title.font = title.font, title.cex = title.cex,
                 legend = nw.legend, legend.cex = nw.legend.cex, 
                 legend.location = nw.legend.location, 
+                char2space = char2space, 
                 target.words = WSEARCH[choosennames][[i]])
              })
         }
         if (wordcloud) {
             lapply(seq_along(freqlist), function(i) {
-               suppressWarnings(trans.cloud(word.list = freqlist[[i]]$swl, 
-               target.words = WSEARCH[choosennames2][[i]], stopwords = stopwords, 
+               suppressWarnings(trans.cloud(
+               word.list = freqlist[[i]]$swl, 
+               target.words = WSEARCH[choosennames2][[i]], 
+               stopwords = stopwords, 
                cloud.colors = cloud.colors, expand.target = FALSE,
                title.color = title.color, title.names = namesL1[[i]], 
                legend = cloud.legend, legend.cex = cloud.legend.cex, 
+               char2space = char2space, char.keep = char2space, 
                legend.location = cloud.legend.location, ...))
             })
         }
         return(o)    
     }
-    Zdat <- split(DF3, DF3$group)
+    Zdat <- split(DF4, DF3$group)
     invisible(lapply(seq_along(Zdat), function(i) {rownames(Zdat[[1]]) <<- NULL}))
     o2 <- lapply(seq_along(Zdat), function(i) word.as(dat = Zdat[[i]],  
         stopwords = stopwords, network.graph = network.graph,  
         wordcloud = wordcloud, ECOLTERMS = ECOLTERMS,
         cloud.colors = cloud.colors, title.color =title.color,
-        nw.label.proportional = nw.label.proportional,  
+        nw.label.proportional = nw.label.proportional, char2space = char2space,  
         nw.label.cex = nw.label.cex, nw.label.colors = nw.label.colors,  
         nw.layout = nw.layout, nw.edge.color = nw.edge.color, 
         LN = LN, cloud.legend = cloud.legend, cloud.legend.cex = cloud.legend.cex, 

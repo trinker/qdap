@@ -28,13 +28,15 @@
 #' 1) whose 2) whom 3) who 4) where 5) what 6) which 7) why 8) when 9) were 
 #' 10) was 11) does 12) did 13) do 14) is 15) are 16) will 17) how 18) should 
 #' 19) could 20) would 21) shall 22) may 23) might 24) must 25) can 26) has 
-#' 27) have 28) had 29) ok 30) right 31) correct 
+#' 27) have 28) had 29) ok 30) right 31) correct 32) implied do/does
 #' 
 #' The interrogative word that is found first (with the exception of "ok", "right" 
 #' and "correct") in the question determines the sentence type. "ok", "right" and 
 #' "correct" sentence types are determined if the sentence is a question with no 
 #' other interrogative words found and "ok", "right" or "correct" is the last 
-#' word of the sentence.  Those with undetermined sentence type are labeled 
+#' word of the sentence.  Those interrogative sentences beginning with the word 
+#' "you" are categorized as implying do or does question type, though the use of 
+#' do/does is not explicit.  Those with undetermined sentence type are labeled 
 #' unknown.
 #' @keywords question, question-count
 #' @export 
@@ -54,8 +56,9 @@
 #'
 #' with(mraja1spl, question_type(dialogue, person))
 #' with(mraja1spl, question_type(dialogue, list(sex, fam.aff)))
-#' with(mraja1spl, question_type(dialogue, list(sex, fam.aff),
-#'    percent = FALSE))
+#' (x <- with(mraja1spl, question_type(dialogue, list(sex, fam.aff),
+#'    percent = FALSE)))
+#' plot(x)
 #' }
 question_type <- function(text.var, grouping.var = NULL,
     neg.cont = FALSE, percent = TRUE, zero.replace = 0, digits = 2) {
@@ -83,7 +86,8 @@ question_type <- function(text.var, grouping.var = NULL,
             grouping <- unlist(grouping.var)
         } 
     } 
-    text.var <- as.character(text.var)
+    text.var <- replace_contraction(as.character(text.var), 
+        qdap::contractions[grepl("you", qdap::contractions[, 1]), ])
     DF <- data.frame(grouping, text.var, check.names = FALSE, 
         stringsAsFactors = FALSE, orig.row.num = seq_len(length(text.var)))
     DF$grouping <- factor(DF$grouping)
@@ -118,6 +122,7 @@ question_type <- function(text.var, grouping.var = NULL,
         x[, " right"] <- (y-6) == sapply(gregexpr("right", z), "[", 1)
         x[, "correct"] <- (y-7) == sapply(gregexpr("correct", z), "[", 1)
         x[, "huh"] <- (y-3) == sapply(gregexpr("huh", z), "[", 1)
+        x[, "implied_do/does"] <- sapply(gregexpr("you", z), "[", 1) == 2 
         x
     })
     L2 <- invisible(lapply(L1, function(x) {
@@ -139,16 +144,19 @@ question_type <- function(text.var, grouping.var = NULL,
          L2[[i]]
     })
     DF3a <- data.frame(ords = unlist(lapply(L1, "[", "orig.row.num")), 
-        q.type = unlist(L2))
+        q.type = unlist(L2), stringsAsFactors = FALSE)
+    DF3a[unlist(lapply(L1, "[", "implied_do/does")),  2] <- "implied_do/does"
     DF3 <- data.frame(DF, q.type = DF3a[order(DF3a[, "ords"]), 2])
     names(DF3) <- c(G, "raw.text", "n.row", "endmark", "strip.text", "q.type")
-    WFM <- t(wfm(unlist(L2), rep(names(L1), sapply(L2, length))))
-    cols <- c(key[, "x"], "ok", "alright", "right", "correct", "huh", "unknown")
+    unL2 <- unlist(L2)
+    unL2[unlist(lapply(L1, "[", "implied_do/does"))] <- "idd"
+    WFM <- t(wfm(unL2, rep(names(L1), sapply(L2, length))))
+    cols <- c(key[, "x"], "ok", "alright", "right", "correct", "huh", "idd", "unknown")
     cols2 <- cols[cols %in% colnames(WFM)]
-    WFM <- WFM[, cols2]
+    WFM <- WFM[, cols2, drop = FALSE]
     if (all(grouping %in% "all")) {
         DF <- as.data.frame(matrix(WFM, nrow = 1))
-        colnames(DF) <- names(WFM)
+        colnames(DF) <- colnames(WFM)
         rownames(DF) <- "all"          
     } else {
         grvar <- levels(DF[, "grouping"])
@@ -175,7 +183,7 @@ question_type <- function(text.var, grouping.var = NULL,
         have = c("haven't", "have"), 
         had = c("hadn't", "had")
     ) 
-    if(!neg.cont) {
+    if(!neg.cont & ncol(DF) > 1) {
         ord <- c("whose", "whom", "who", "where", "what",  "which", 
             "why", "when", "were", "was", "does", "did", "do", 
             "is", "are", "will", "how", "should", "could", "would", 
@@ -183,11 +191,18 @@ question_type <- function(text.var, grouping.var = NULL,
         comdcol <- lapply(comdcol, function(x) gsub("'", "", x)) 
         DF <- qcombine(DF, comdcol)
         ord <- c(ord[ord %in% colnames(DF)], "ok", "alright", "right", 
-            "correct", "huh", "unknown")
+            "correct", "huh", "idd", "unknown")
         DF <- DF[, ord[ord %in% colnames(DF)]] 
     }
+    colnames(DF)[colnames(DF) == "idd"] <- "implied_do/does"
     DF <- data.frame(group=rownames(DF), tot.quest = tq, DF, row.names = NULL, 
         check.names = FALSE) 
+    if(ncol(DF) == 3) {
+        warning(paste0("Text does not contain enough questions to give", 
+            "an output of the class \"question_type\":\n", 
+            " ...only counts are returned"))
+        return(DF)
+    }
     DF <- DF[sort(DF[, "group"]), ]
     colnames(DF)[1] <-  G
     yesap <- sapply(comdcol, "[", 1)

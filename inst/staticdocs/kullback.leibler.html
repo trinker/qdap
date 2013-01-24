@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>kullback.leibler. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Kullback Leibler Statistic</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>kullback.leibler(x, y = NULL)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>x</dt>
+      <dd>A numeric vector, matrix or data frame.</dd>
+      <dt>y</dt>
+      <dd>A second numeric vector if x is also a vector.
+  Default is NULL.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>Returns a matrix of the Kullback Leibler measure between
+  each vector of probabilities.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>A proximity measure between two probability distributions
+  applied to speech.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+      
+      <p>Uses Kullback & Leibler's (1951) formula:
+  <pre class = 'eq'>D_{KL}(P||Q)=\sum_i{ln\left ( \frac{P_{i}}{Q_{i}}
+  \right )}P_{i}</code></p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+      
+      <p>The <code>kullback.leibler</code> function generally receives
+  the output of either <code>wfm</code> or <code>wfdf</code> functions.</p>
+  
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+      
+      <p>Kullback, S., & Leibler, R.A. (1951). On Information and
+  sufficiency. Annals of Mathematical Statistics 22 (1):
+  79-86. doi:10.1214/aoms/1177729694</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # p.df <- wfdf(DATA$state, DATA$person)# p.mat <- wfm(text.var = DATA$state, grouping.var = DATA$person)# kullback.leibler(p.mat)# kullback.leibler(p.df)# kullback.leibler(p.df$greg, p.df$sam)# p.df2 <- wfdf(raj$dialogue, raj$person)# (x <- kullback.leibler(p.df2))# print(x, digits = 4)# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>kullback.leibler</li>
+    </ul>
+    <ul>
+      <li>Kullback-Leibler</li>
+    </ul> -->
+      
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

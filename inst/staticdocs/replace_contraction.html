@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>replace_contraction. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Replace COntractions</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>replace_contraction(text.var, contraction = qdap::contractions, replace = NULL, ignore.case = TRUE, 
+  sent.cap = TRUE)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>text.var</dt>
+      <dd>The text variable.</dd>
+      <dt>contraction</dt>
+      <dd>A two column key of contractions
+  (column 1) and expanded form replacements (column 2) or a
+  vector of contractions.  Default is to use qdap's
+  contractions data set.</dd>
+      <dt>replace</dt>
+      <dd>A vector of expanded form replacements if
+  a data frame is not supplied to the contraction
+  argument.</dd>
+      <dt>ignore.case</dt>
+      <dd>logical.  If TRUE replaces without
+  regard to capitalization.</dd>
+      <dt>sent.cap</dt>
+      <dd>logical.  If TRUE capitalizes the
+  begining of every sentence.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>Returns a vector with contractions replaced.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>This function replaces contractions with long form.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # x <- c("Mr. Jones isn't going.",#     "Check it out what's going on.",#     "He's here but didn't go.",#     "the robot at t.s. wasn't nice",#     "he'd like it if i'd go away")# # replace_contraction(x)# # #create abbreviation and replacement vectors# abv <- c("isn't", "I'd")# repl <- c("is not", "I would")# # replace_abbreviation(x, abv, repl)# # KEY <- rbind(abbreviations, data.frame(abv = abv, rep = repl))# replace_abbreviation(x, KEY)# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>replace_contraction</li>
+    </ul>
+    <ul>
+      <li>contraction</li>
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+  <code>bracketX</code>, <code>qprep</code>,
+  <code>replace_abbreviation</code>,
+  <code>replace_number</code>,
+  <code>replace_symbol</code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

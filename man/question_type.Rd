@@ -51,7 +51,8 @@
   8) when 9) were 10) was 11) does 12) did 13) do 14) is
   15) are 16) will 17) how 18) should 19) could 20) would
   21) shall 22) may 23) might 24) must 25) can 26) has 27)
-  have 28) had 29) ok 30) right 31) correct
+  have 28) had 29) ok 30) right 31) correct 32) implied
+  do/does
 
   The interrogative word that is found first (with the
   exception of "ok", "right" and "correct") in the question
@@ -59,8 +60,11 @@
   sentence types are determined if the sentence is a
   question with no other interrogative words found and
   "ok", "right" or "correct" is the last word of the
-  sentence.  Those with undetermined sentence type are
-  labeled unknown.
+  sentence.  Those interrogative sentences beginning with
+  the word "you" are categorized as implying do or does
+  question type, though the use of do/does is not explicit.
+  Those with undetermined sentence type are labeled
+  unknown.
 }
 \examples{
 \dontrun{
@@ -78,10 +82,11 @@ with(DATA, question_type(state, list(sex, adult)))
 
 with(mraja1spl, question_type(dialogue, person))
 with(mraja1spl, question_type(dialogue, list(sex, fam.aff)))
-with(mraja1spl, question_type(dialogue, list(sex, fam.aff),
-   percent = FALSE))
+(x <- with(mraja1spl, question_type(dialogue, list(sex, fam.aff),
+   percent = FALSE)))
+plot(x)
 }
 }
-\keyword{question-count}
 \keyword{question,}
+\keyword{question-count}
 

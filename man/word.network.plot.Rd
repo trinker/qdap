@@ -11,7 +11,8 @@
     title.location = 3, title.font = NULL, title.cex = 0.8,
     log.labels = FALSE, title.color = "black",
     legend = NULL, legend.cex = 0.8,
-    legend.location = c(-1.54, 1.41), plot = TRUE)
+    legend.location = c(-1.54, 1.41), plot = TRUE,
+    char2space = "~~", ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -90,25 +91,39 @@
 
   \item{plot}{logical.  If TRUE plots a network plot of the
   words.}
-}
-\value{
-  Silently returns a list of igraph parameters.
-  Optionally, plots the output.
+
+  \item{char2space}{A vector of characters to be turned
+  into spaces.  If \code{char.keep} is NULL,
+  \code{char2space} will activate this argument.}
+
+  \item{\ldots}{Other arguments passed to
+  \code{\link[qdap]{strip}}.}
 }
 \description{
   A network plot of words.  Shows the interconnected and
   supporting use of words between textual units containing
   key terms.
 }
+\note{
+  Words can be kept as one by inserting a double tilde
+  (\code{"~~"}), or other character strings passed to
+  char2space, as a single word/entry. This is useful for
+  keeping proper names as a single unit.
+}
 \examples{
 \dontrun{
 word.network.plot(text.var=DATA$state, grouping.var=DATA$person)
 word.network.plot(text.var=DATA$state, grouping.var=list(DATA$sex,
-DATA$adult))
+    DATA$adult))
 word.network.plot(text.var=DATA$state, grouping.var=DATA$person,
     title.name = "TITLE", log.labels=TRUE)
 word.network.plot(text.var=raj.act.1, grouping.var=raj.act.1$person,
   stopwords = Top200Words)
+
+#inset double tilde ("~~") to keep dual words (e.i. first last name)
+alts <- c(" fun", "I ")
+state2 <- mgsub(alts, gsub("\\\\s", "~~", alts), DATA$state)
+word.network.plot(text.var=state2, grouping.var=DATA$person)
 }
 }
 \seealso{

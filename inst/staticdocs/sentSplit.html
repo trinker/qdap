@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>sentSplit. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+  Dason Kurkiewicz and Tyler Rinker
+  &lt;tyler.rinker@gmail.com&gt;.
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Sentence Splitting</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>sentSplit(dataframe, text.var, endmarks = c("?", ".", "!", "|"), incomplete.sub = TRUE, 
+  rm.bracket = TRUE, stem.col = FALSE, text.place = "right", ...)
+
+sentCombine(text.var, grouping.var = "person")
+
+TOT(tot)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>dataframe</dt>
+      <dd>A dataframe that contains the person and
+  text variable.</dd>
+      <dt>text.var</dt>
+      <dd>The text variable.</dd>
+      <dt>endmarks</dt>
+      <dd>A character vector of endmarks to split
+  turns of talk into sentences.</dd>
+      <dt>incomplete.sub</dt>
+      <dd>logical.  If TRUE detects
+  incomplete sentences and replaces with <code>"|"</code>.</dd>
+      <dt>rm.bracket</dt>
+      <dd>logical.  If TRUE removes brackets from
+  the text.</dd>
+      <dt>stem.col</dt>
+      <dd>logical.  If TRUE stems the text as a new
+  column.</dd>
+      <dt>text.place</dt>
+      <dd>A character string giving placement
+  location of the text column. This must be one of the
+  strings <code>"original"</code>, <code>"right"</code> or
+  <code>"left"</code>.</dd>
+      <dt>...</dt>
+      <dd>Additional options passed to
+  <code>stem2df</code>.</dd>
+      <dt>grouping.var</dt>
+      <dd>The grouping variable (usually
+  <code>"person"</code>).  Does not take multiple vectors as most
+  qdap functions do.</dd>
+      <dt>tot</dt>
+      <dd>A tot column from a
+  <code>sentSplit</code> output.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p><code>sentSplit</code> - returns a dataframe with turn of talk
+  broken apart into sentences.  Optionally a stemmed
+  version of the text variable may be returned as well.</p>
+  
+      <p><code>sentCombine</code> - returns a list of vectors with the
+  continuous sentences by grouping.var pasted together.
+  returned as well.</p>
+  
+      <p><code>TOT</code> - returns a numeric vector of the turns of
+  talk without sentence sub indexing (e.g. 3.2 become 3).</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p><code>sentSplit</code> - Splits turns of talk into individual
+  sentences (provided proper punctuation is used).  This
+  procedure is usually done as part of the data read in and
+  cleaning process.</p>
+  
+      <p><code>sentCombine</code> - Combines sentences by the same
+  grouping variable together.</p>
+  
+      <p><code>TOT</code> - Convert the tot column from
+  <code>sentSplit</code> to turn of talk index (no
+  sub sentence).  Generally, for internal use.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # #sentSplit EXAMPLE:# sentSplit(DATA, "state")# sentSplit(DATA, "state", stem.col = TRUE)# sentSplit(DATA, "state", text.place = "left")# sentSplit(DATA, "state", text.place = "original")# sentSplit(raj, "dialogue")# # #sentCombine EXAMPLE:# dat <- sentSplit(DATA, "state")# sentCombine(dat$state, dat$person)# sentCombine(dat$state, dat$sex)# # #TOT EXAMPLE:# dat <- sentSplit(DATA, "state")# TOT(dat$tot)# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>sentCombine</li><li>sentSplit</li><li>TOT</li>
+    </ul>
+    <ul>
+      <li>sentence,</li><li>split,</li><li>turn-of-talk</li>
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+  <code>bracketX</code>,
+  <code>incomplete.replace</code>,
+  <code>stem2df</code> , <code>TOT</code>
+
+    
+    <h2>Author</h2>
+    
+  Dason Kurkiewicz and Tyler Rinker
+  <tyler.rinker@gmail.com>.
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>stopwords. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Remove Stopwords</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>stopwords(textString, stopwords = Top25Words, unlist = FALSE, separate = TRUE, strip = FALSE, 
+  unique = FALSE, char.keep = NULL, names = FALSE, ignore.case = TRUE, apostrophe.remove = FALSE, 
+      ...)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>textString</dt>
+      <dd>A character string of text or a vector
+  of character strings.</dd>
+      <dt>stopwords</dt>
+      <dd>A character vector of words to remove
+  from the text.  qdap has a number of data sets that can
+  be used as stopwords including: Top200Words, Top100Words,
+  Top25Words.  For the tm package's traditional English
+  stop words use <code>tm::stopwords("english")</code></dd>
+      <dt>unlist</dt>
+      <dd>logical.  If TRUE unlists into one vector.
+  General use intended for when separate is FALSE.</dd>
+      <dt>separate</dt>
+      <dd>logical.  If TRUE separates sentences
+  into words. If FALSE retains sentences.</dd>
+      <dt>strip</dt>
+      <dd>logical.  IF TURE strips the text of all
+  punctuation except apostrophes.</dd>
+      <dt>unique</dt>
+      <dd>logical.  If TRUE keeps only unique words
+  (if unlist is TURE) or sentences (if unlist is FALSE).
+  General use intended for when unlist is TRUE.</dd>
+      <dt>char.keep</dt>
+      <dd>If strip is TRUE this argument provides
+  a means of retaining supplied character(s).</dd>
+      <dt>names</dt>
+      <dd>logical.  If TRUE will name the elements of
+  the vector or list with the original textString.</dd>
+      <dt>ignore.case</dt>
+      <dd>logical.  If TRUE stop words will be
+  removed regardless of case.  Additionally, case will be
+  stripped from the text.  If FALSE stopwords removal is
+  contingent upon case.  Additionally, case is not
+  stripped.</dd>
+      <dt>apostrophe.remove</dt>
+      <dd>logical.  If TRUE removes
+  apostrophe's from the output.</dd>
+      <dt>...</dt>
+      <dd>further arguments passed to strip function</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>Returns a vector of sentences, vector of words, or
+  (default) a list of vectors of words with stop words
+  removed.  Output depends on supplied arguments.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>Transcript apply the removal of stopwords.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # stopwords(DATA$state)# stopwords(DATA$state, tm::stopwords("english"))# stopwords(DATA$state, Top200Words)# stopwords(DATA$state, Top200Words, strip = TRUE)# stopwords(DATA$state, Top200Words, separate = FALSE)# stopwords(DATA$state, Top200Words, separate = FALSE, ignore.case = FALSE)# stopwords(DATA$state, Top200Words, unlist = TRUE)# stopwords(DATA$state, Top200Words, unlist = TRUE, strip=TRUE)# stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>stopwords</li>
+    </ul>
+    <ul>
+      <li>stopwords</li>
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+  <code>strip</code>,
+  <code>bag.o.words</code>,
+  <code><a href='http://www.inside-r.org/r-doc/tm/stopwords'>stopwords</a></code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

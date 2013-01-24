@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>cm_df.temp. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Break Transcript Dialogue into Blank Code Matrix</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>cm_df.temp(dataframe, text.var, codes = NULL, csv = TRUE, file.name = NULL, transpose = FALSE, 
+  strip = FALSE, ...)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>dataframe</dt>
+      <dd>A dataframe containing a text variable.</dd>
+      <dt>text.var</dt>
+      <dd>The name of the text variable.</dd>
+      <dt>codes</dt>
+      <dd>Optional list of codes.</dd>
+      <dt>csv</dt>
+      <dd>logical.  If TRUE creates a csv in the working
+  directory.</dd>
+      <dt>file.name</dt>
+      <dd>The name of the csv file.  If NULL
+  defaults to the dtaframe name.</dd>
+      <dt>transpose</dt>
+      <dd>logical.  If TRUE transposes the
+  dataframe so that the text is across the top.</dd>
+      <dt>strip</dt>
+      <dd>logical.  If TRUE all punctuation is
+  removed.</dd>
+      <dt>...</dt>
+      <dd>Other arguments passed to strip.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>Generates a dataframe, and optional csv file, of
+  individual words while maintaining demographic
+  information.  If a vector of codes is provided the
+  outcome is a matrix of words used by codes filled with
+  zeros.  This dataframe is useful for dummy coded (1-yes
+  code exists; 2-no it does not) representation of data and
+  can be used for visualizations and statistical analysis.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>Breaks transcript dialogue into words while retaining the
+  demographic factors associate with each word.  The codes
+  argument provides a matrix of zeros that can serve as a
+  dummy coded matrix of codes per word.</p>
+  
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+      
+      <p>Miles, M. B. & Huberman, A. M. (1994). An expanded
+  sourcebook: Qualitative data analysis. 2nd ed. Thousand
+  Oaks, CA: SAGE Publications.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)# cm_df.temp(DATA, "state", codes)# cm_df.temp(DATA, "state", codes, transpose = TRUE)# head(cm_df.temp(raj.act.1, "dialogue", codes))# cm_df.temp(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>cm_df.temp</li>
+    </ul>
+    <ul>
+      <li>coding</li>
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+  <code><a href='cm_range2long.html'>cm_range2long</a></code>, <code><a href='cm_df.fill.html'>cm_df.fill</a></code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

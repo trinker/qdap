@@ -2,3 +2,6 @@
 ^.*\.Rproj$
 .Rbuildignore
 qdap.Rproj
+.gitignore
+.gitattributes
+tools.R

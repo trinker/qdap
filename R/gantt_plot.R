@@ -38,6 +38,8 @@
 #'     replace=TRUE))
 #' z <- with(rajSPLIT2, gantt_plot(dialogue, list(fam.aff, sex), 
 #'     list(act, newb), size = 4))
+#'     
+#' library(ggplot2); library(scales); library(RColorBrewer); library(grid)
 #' z + theme(panel.margin = unit(1, "lines")) + scale_colour_grey()
 #' z + scale_colour_brewer(palette="Dark2")
 #' }

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>qheat. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Quick Heatmap</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>qheat(mat, low = "white", high = "darkblue", values = FALSE, digits = 1, text.size = 3, 
+  text.color = "grey40", xaxis.col = "black", yaxis.col = "black", order.by = NULL, 
+      grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>mat</dt>
+      <dd>A matrix or dataframe produced by many qdap
+  functions in which the first column is the grouping
+  variable and the rest of the matrix is numeric.  Also
+  accepts objects directly from
+  <code>word_stats</code> and
+  <code>question_type</code>.</dd>
+      <dt>low</dt>
+      <dd>The color to be used for lower values.</dd>
+      <dt>high</dt>
+      <dd>The color to be used for higher values.</dd>
+      <dt>values</dt>
+      <dd>logical.  If TRUE the cell values will be
+  included on the heatmap.</dd>
+      <dt>digits</dt>
+      <dd>The number of digits displayed if
+  <code>values</code> is TRUE.</dd>
+      <dt>text.size</dt>
+      <dd>A integer size to plot the text if
+  <code>values</code> is TRUE.</dd>
+      <dt>text.color</dt>
+      <dd>A character vector to plot the text if
+  <code>values</code> is TRUE.</dd>
+      <dt>xaxis.col</dt>
+      <dd>A single character vector color choice
+  for the high values.</dd>
+      <dt>yaxis.col</dt>
+      <dd>A single character vector color choice
+  for the low values.</dd>
+      <dt>order.by</dt>
+      <dd>An optional character vector of a
+  variable name to order the columns by.  To reverse use a
+  negative (<code>-</code>) before the column name.</dd>
+      <dt>grid</dt>
+      <dd>The color of the grid (Use NULL to remove the
+  grid).</dd>
+      <dt>by.column</dt>
+      <dd>logical.  If TRUE applies scaling to the
+  column.  If FALSE applies scaling by row (use NULL to
+  turn off scaling).</dd>
+      <dt>auto.size</dt>
+      <dd>logical.  IF TRUE the visual will be
+  resized to create square cells.</dd>
+      <dt>mat2</dt>
+      <dd>A second matrix equal in dimensions to
+  <code>mat</code> that will be used for cell labels if
+  <code>values</code> is TRUE.</dd>
+    </dl>
+    
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>A quick heatmap function for visualizing typical qdap
+  dataframe/matrix outputs.</p>
+  
+    </div>
+
+    <div class="Details">
+      <h2>Details</h2>
+      
+      <p><code>qheat</code> is useful for finding patterns and anomalies
+  in large qdap generated dataframes and matrices.</p>
+  
+    </div>
+
+    <div class="Note">
+      <h2>Note</h2>
+      
+      <p><code>qheat</code> is a fast way of working with data formats
+  produced by qdap.  The function isn't designed to be
+  extended beyond exploratory qdap usage.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: #  dat <- sentSplit(DATA, "state")# (ws.ob <- with(dat, word_stats(state, list(sex, adult), tot=tot)))# qheat(ws.ob)# qheat(ws.ob, order.by = "sptot",#     xaxis.col = c("red", "black", "green", "blue"))# qheat(ws.ob, order.by = "sptot")# qheat(ws.ob, order.by = "-sptot")# qheat(ws.ob, values = TRUE)# qheat(ws.ob, values = TRUE, text.color = "red")# qheat(ws.ob, "yellow", "red", grid = FALSE)# # dat1 <- data.frame(G=LETTERS[1:5], matrix(rnorm(20), ncol = 4))# dat2 <- data.frame(matrix(LETTERS[1:25], ncol=5))# qheat(dat1, values=TRUE)# qheat(dat1, values=TRUE, mat2=dat2)# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>qheat</li>
+    </ul>
+    <ul>
+      <li>heatmap</li>
+    </ul> -->
+      
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

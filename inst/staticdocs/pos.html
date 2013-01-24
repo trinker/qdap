@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>pos. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Parts of Speech Tagging</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>pos(text.var, parallel = FALSE, na.omit = FALSE, digits = 1, progress.bar = TRUE, 
+  percent = TRUE, zero.replace = 0, gc.rate = 10)
+
+pos.by(text.var, grouping.var = NULL, digits = 1, percent = TRUE, zero.replace = 0, 
+      ...)
+
+pos.tags(type = "pretty")</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>text.var</dt>
+      <dd>The text variable</dd>
+      <dt>parallel</dt>
+      <dd>logical.  If TRUE attempts to run the
+  function on multiple cores.  Note that this may not mean
+  a speed boost if you have one core or if the data set is
+  smaller as the cluster takes time to create.</dd>
+      <dt>na.omit</dt>
+      <dd>logical.  If TRUE missing values
+  (]codeNA) will be omitted.</dd>
+      <dt>digits</dt>
+      <dd>Integer; number of decimal places to round
+  when printing.</dd>
+      <dt>progress.bar</dt>
+      <dd>logical.  If TRUE attempts to provide
+  a OS appropriate progress bar.  If parallel is TRUE this
+  argument is ignored.  Note that setting this argument to
+  TRUE may slow down the function.</dd>
+      <dt>percent</dt>
+      <dd>logical.  If TRUE output given as percent.
+  If FALSE the output is proportion.</dd>
+      <dt>zero.replace</dt>
+      <dd>Value to replace 0 values with.</dd>
+      <dt>gc.rate</dt>
+      <dd>An integer value.  This is a necessary
+  argument because of a problem with the garbage collection
+  in the openNLP function that <code>pos</code> wraps.  Consider
+  adjusting this argument upward if the error
+  <code>java.lang.OutOfMemoryError</code> occurs.</dd>
+      <dt>grouping.var</dt>
+      <dd>The grouping variables.  Default NULL
+  generates one word list for all text.  Also takes a
+  single grouping variable or a list of 1 or more grouping
+  variables.</dd>
+      <dt>...</dt>
+      <dd>Other argument supplied to <code>pos</code>.</dd>
+      <dt>type</dt>
+      <dd>An optional character string giving the
+  output of the pos tags. This must be one of the strings
+  <code>"pretty"</code> (a left justified version of the output
+  optimized for viewing but not good for export),
+  <code>"matrix"</code> (a matrix version of the output),
+  <code>"dataframe"</code>\ <code>"df"</code> (a dataframe version of
+  the output), <code>"all"</code> (a list of all three of the
+  previous output types).</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>pos returns a list of 4: textThe original text
+  POStaggedThe original words replaced with parts
+  of speech in context. POSpropDataframe of the
+  proportion of parts of speech by row.
+  POSfreqDataframe of the frequency of parts of
+  speech by row. POSrnpDataframe of the frequency
+  and proportions of parts of speech by row.
+  percentThe value of percent used for plotting
+  purposes. zero.replaceThe value of zero.replace
+  used for plotting purposes.</p>
+  
+      <p>pos.by returns a list of 6: textThe original
+  text POStaggedThe original words replaced with
+  parts of speech in context. POSpropDataframe of
+  the proportion of parts of speech by row.
+  POSfreqDataframe of the frequency of parts of
+  speech by row. POSrnpDataframe of the frequency
+  and proportions of parts of speech by row.
+  pos.by.propDataframe of the proportion of parts
+  of speech by grouping variable.
+  pos.by.freqDataframe of the frequency of parts of
+  speech by grouping variable. pos.by.rnpDataframe
+  of the frequency and proportions of parts of speech by
+  grouping variable. percentThe value of percent
+  used for plotting purposes. zero.replaceThe
+  value of zero.replace used for plotting purposes.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p><code>pos</code> - Apply part of speech tagger to
+  transcript(s).</p>
+  
+      <p><code>pos.by</code> - Apply part of speech tagger to
+  transcript(s) by zero or more grouping variable(s).</p>
+  
+      <p><code>pos.tags</code> - Useful for interpreting the parts of
+  speech tags created by pos and pos.by.</p>
+  
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+      
+      <p><a href = 'openNLP'>http:/opennlp.apache.org</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # posdat <- pos(DATA$state)# str(posdat)# names(posdat)# posdat$text       #original text# posdat$POStagged  #words replaced with parts of speech# posdat$POSprop    #proportion of parts of speech by row# posdat$POSfreq    #frequency of parts of speech by row# # pos(DATA$state, parallel = TRUE) # not always useful# # #use pos.tags to interpret part of speech tags used by pos & pos.by# pos.tags()# pos.tags("matrix")# pos.tags("dataframe")# pos.tags("df")# pos.tags("all")# # posbydat <- with(DATA, pos.by(state, sex))# names(posbydat)# posbydat# posbydat$pos.by.prop# (POSby <- with(DATA, pos.by(state, list(adult, sex))))# plot(POSby, values = TRUE, digits = 2)# #or more quickly - reuse the output from before# with(DATA, pos.by(posbydat, list(adult, sex)))# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>pos</li><li>pos.by</li><li>pos.tags</li>
+    </ul>
+    <ul>
+      <li>parts-of-speech</li>
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+  <code><a href='http://www.inside-r.org/r-doc/openNLP/tagPOS'>tagPOS</a></code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

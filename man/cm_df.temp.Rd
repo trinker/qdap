@@ -3,7 +3,8 @@
 \title{Break Transcript Dialogue into Blank Code Matrix}
 \usage{
   cm_df.temp(dataframe, text.var, codes = NULL, csv = TRUE,
-    file.name = NULL, transpose = FALSE, strip = FALSE)
+    file.name = NULL, transpose = FALSE, strip = FALSE,
+    ...)
 }
 \arguments{
   \item{dataframe}{A dataframe containing a text variable.}
@@ -23,6 +24,8 @@
 
   \item{strip}{logical.  If TRUE all punctuation is
   removed.}
+
+  \item{\ldots}{Other arguments passed to strip.}
 }
 \value{
   Generates a dataframe, and optional csv file, of

@@ -88,7 +88,7 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
     title.padj = -4.5, title.location = 3, title.cex = NULL, title.names = NULL,
     proportional = FALSE, max.word.size = NULL, min.word.size = 0.5,
     legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03), 
-    char.keep = NULL, char2space = NULL) {
+    char.keep = "~~", char2space = NULL) {
     if(!is.null(char2space) & is.null(char.keep)) {
         char.keep <- char2space
     }

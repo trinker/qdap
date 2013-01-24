@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>replace_symbol. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Replace Symbols With Word Equivalents</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>replace_symbol(text.var, dollar = TRUE, percent = TRUE, pound = TRUE, at = TRUE, 
+  and = TRUE, with = TRUE)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>text.var</dt>
+      <dd>The text variable.</dd>
+      <dt>dollar</dt>
+      <dd>logical.  If TRUE replaces dollar sign ($)
+  with <code>"dollar"</code>.</dd>
+      <dt>percent</dt>
+      <dd>logical.  If TRUE replaces percent sign
+  (%) with <code>"percent"</code>.</dd>
+      <dt>pound</dt>
+      <dd>logical.  If TRUE replaces pound sign (#)
+  with <code>"number"</code>.</dd>
+      <dt>at</dt>
+      <dd>logical.  If TRUE replaces at sign (@) with
+  <code>"at"</code>.</dd>
+      <dt>and</dt>
+      <dd>logical.  If TRUE replaces and sign (&) with
+  <code>"and"</code>.</dd>
+      <dt>with</dt>
+      <dd>logical.  If TRUE replaces with sign (w/)
+  with <code>"with"</code>.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>Returns a character vector with symbols replaced..</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>This function replaces symbols with word equivalents
+  (e.g. <code>@</code> becomes <code>"at"</code>.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # x <- c("I am @ Jon's & Jim's w/ Marry", "I owe $41 for food", "two is 10%#     of a #")# replace_symbol(x)# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>replace_symbol</li>
+    </ul>
+    <ul>
+      <li>symbol-replace</li>
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+  <code>bracketX</code>,
+  <code>replace_abbreviation</code>,
+  <code>replace_number</code>,
+  <code>qprep</code>
+
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

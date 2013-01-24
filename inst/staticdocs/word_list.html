@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>word_list. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Raw Word Lists/Frequency Counts</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>word_list(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE, 
+  cut.n = 20, cap = TRUE, cap.list = NULL, cap.I = TRUE, rm.bracket = TRUE, char.keep = NULL, 
+      apostrophe.remove = FALSE, ...)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>text.var</dt>
+      <dd>The text variable.</dd>
+      <dt>grouping.var</dt>
+      <dd>The grouping variables.  Default NULL
+  generates one word list for all text.  Also takes a
+  single grouping variable or a list of 1 or more grouping
+  variables.</dd>
+      <dt>stopwords</dt>
+      <dd>A vector of stop words to remove.</dd>
+      <dt>alphabetical</dt>
+      <dd>If TRUE the output of frequency lists
+  is ordered alphabetically.  If FALSE the list is ordered
+  by frequency rank.</dd>
+      <dt>cut.n</dt>
+      <dd>Cut off point for reduced frequency stop
+  word list (rfswl).</dd>
+      <dt>cap</dt>
+      <dd>logical. If TRUE capitalizes words from the
+  cap.list.</dd>
+      <dt>cap.list</dt>
+      <dd>Vector of words to capitalize.</dd>
+      <dt>cap.I</dt>
+      <dd>logical. If TRUE capitalizes words
+  containing the personal pronoun I.</dd>
+      <dt>rm.bracket</dt>
+      <dd>logical If TRUE all brackets and
+  bracketed text are removed from analysis.</dd>
+      <dt>char.keep</dt>
+      <dd>A character vector of symbols (i.e.
+  punctuation) that <code>word_list</code> should keep.  The
+  default is to remove every symbol except apostrophes.</dd>
+      <dt>apostrophe.remove</dt>
+      <dd>logical.  If TRUE removes
+  apostrophes from the output.</dd>
+      <dt>...</dt>
+      <dd>Other arguments passed to
+  <code>strip</code>.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>An object of class <code>"word_list"</code> is a list
+  containing at the following components:
+  cwlcomplete word list; raw words swlstop
+  word list; same as rwl with stop words removed
+  fwlfrequency word list; a data frame of words and
+  corresponding frequency counts fswlfrequency
+  stopword word list; same as fwl but with stopwords
+  removed rfswlreduced frequency stopword word
+  list; same as fswl but truncated to n rows</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>Transcript Apply Raw Word Lists and Frequency Counts by
+  grouping variable(s).</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # XX <-word_list(raj.act.1$dialogue)# names(XX)# XX$cwl# XX$swl# XX$fwl# XX$fswl# XX$rfswl# # with(raj, word_list(text.var = dialogue, grouping.var = list(person, act)))# with(DATA, word_list(state, person))# with(DATA, word_list(state, person, stopwords = Top25Words))# with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>word_list</li>
+    </ul>
+    <ul>
+      <li>word-list</li>
+    </ul> -->
+      
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

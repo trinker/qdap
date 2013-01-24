@@ -14,14 +14,19 @@
 #' @param digits An integer indicating the number of decimal places (round) or 
 #' significant digits (signif) to be used. Negative values are allowed
 #' @param margins logical. If TRUE provides grouping.var and word variable totals.
-#' @param \ldots Other arguments supplied to \code{wfm}.
+#' @param \ldots Other arguments supplied to \code{\link[qdap]{strip}}.
 #' @param wf.obj A \code{wfm} or \code{wfdf} object.
 #' @param word.lists A list of character vectors of words to pass to 
 #' \code{wf.combine}
 #' @param matrix logical.  If TRUE returns the output as a \code{wfm} rather 
 #' than a \code{wfdf} object
+#' @param char2space A vector of characters to be turned into spaces.  If 
+#' \code{char.keep} is NULL, \code{char2space} will activate this argument.
 #' @return \code{wfm} - returns a word frequency of the class matrix.
 #' @rdname Word_Frequency_Matrix
+#' @note Words can be kept as one by inserting a double tilde (\code{"~~"}), or 
+#' other character strings passed to char2space, as a single word/entry. This is 
+#' useful for keeping proper names as a single unit.
 #' @keywords word-frequency-matrix
 #' @export
 #' @examples
@@ -29,10 +34,20 @@
 #' #word frequency matrix (wfm) example:
 #' with(DATA, wfm(state, list(sex, adult)))
 #' dat <- with(DATA, wfm(state, person))
+#'
+#' #inset double tilde ("~~") to keep dual words (e.i. first last name)
+#' alts <- c(" fun", "I ")
+#' state2 <- mgsub(alts, gsub("\\s", "~~", alts), DATA$state) 
+#' with(DATA, wfm(state2, list(sex, adult)))
 #' 
 #' #word frequency dataframe (wfdf) example:
 #' with(DATA, wfdf(state, list(sex, adult)))
 #' with(DATA, wfdf(state, person))
+#' 
+#' #inset double tilde ("~~") to keep dual words (e.i. first last name)
+#' alts <- c(" fun", "I ")
+#' state2 <- mgsub(alts, gsub("\\s", "~~", alts), DATA$state)
+#' with(DATA, wfdf(state2, list(sex, adult)))
 #' 
 #' #wfm.expanded example:
 #' z <- wfm(DATA$state, DATA$person)
@@ -78,7 +93,7 @@
 #' }
 wfm <-
 function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
-         output = "raw", stopwords = NULL, digits = 2){
+         output = "raw", stopwords = NULL, digits = 2, char2space = "~~", ...){
   if (!is.null(wfdf)) {
     if (comment(wfdf) == "t.df") {
       wfdf <- wfdf
@@ -95,12 +110,13 @@ function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
   } else {
     if (!is.null(text.var)) {
       wfdf <- wfdf(text.var = text.var, grouping.var = grouping.var, 
-        stopwords = stopwords, output = output, digits = digits) 
+        stopwords = stopwords, output = output, digits = digits, 
+        char2space = char2space, ...) 
       x2 <- wfdf[, -1, drop = FALSE]
       rownames(x2) <- wfdf[, 1]
       x2 <- as.matrix(x2)
     } else {
-      stop ("must specify both text.var & grouping var or wfdf")
+      stop ("must specify both text.var or wfdf")
     }
   }
   comment(x2) <- "true.matrix"
@@ -118,17 +134,18 @@ function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
 #' column and optional margin sums.
 wfdf <-
 function(text.var, grouping.var = NULL, stopwords = NULL,
-    margins = FALSE, output = "raw", digits = 2){
-    grouping.var <- if (is.list(grouping.var) & length(grouping.var)>1) {
-        apply(data.frame(grouping.var), 1, function(x){
-            if (any(is.na(x)))NA else paste(x, collapse = ".")
-            }
-        )
+    margins = FALSE, output = "raw", digits = 2, char2space = "~~", ...){
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
     } else {
-        grouping.var
-    }
-    bl <- split(text.var, grouping.var)
-    x <- lapply(bl, bag.o.words)
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    } 
+    bl <- split(text.var, grouping)
+    x <- lapply(bl, bag.o.words, char.keep = char2space, ...)
     tabs <- lapply(x, function(x) as.data.frame(table(x)))
     tabs <- tabs[sapply(tabs, nrow)!=0]
     lapply(seq_along(tabs), function(x) {
@@ -178,9 +195,11 @@ function(text.var, grouping.var = NULL, stopwords = NULL,
                 comment(DF) <- "f.df"
         }
     }
-    return(DF)
+    if (!is.null(char2space)) {
+        DF[, "Words"] <- mgsub(char2space, " ", DF[, "Words"])
+    }
+    DF
 }
-
 
 #' Expanded Word Frequency Matrix
 #' 

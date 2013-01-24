@@ -1,8 +1,8 @@
-\name{word.associate}
-\alias{word.associate}
+\name{word_associate}
+\alias{word_associate}
 \title{Find Associated Words.}
 \usage{
-  word.associate(text.var, grouping.var = NULL,
+  word_associate(text.var, grouping.var = NULL,
     match.string, text.unit = "sentence",
     extra.terms = NULL, target.exclude = NULL,
     stopwords = NULL, network.plot = FALSE,
@@ -17,7 +17,7 @@
     cloud.legend.location = c(-0.03, 1.03),
     nw.legend = NULL, nw.legend.cex = 0.8,
     nw.legend.location = c(-1.54, 1.41),
-    legend.override = FALSE, char2space = NULL, ...)
+    legend.override = FALSE, char2space = "~~", ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -168,7 +168,7 @@
 \dontrun{
 ms <- c(" I", "you")
 et <- c(" it", " no")
-word.associate(DATA2$state, DATA2$person, match.string = ms,
+word_associate(DATA2$state, DATA2$person, match.string = ms,
     wordcloud = TRUE,  proportional = TRUE,
     network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,
     cloud.legend =c("A", "B", "C", "D"),
@@ -186,13 +186,13 @@ et <- list(
     C = c(" it", " no")
 )
 
-word.associate(DATA2$state, DATA2$person, match.string = ms,
+word_associate(DATA2$state, DATA2$person, match.string = ms,
     wordcloud = TRUE,  proportional = TRUE,
     network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,
     cloud.legend =c("A", "B", "C", "D"),
     title.color = "blue", cloud.colors = c("red", "blue", "purple", "gray70"))
 
-word.associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = ms)
+word_associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = ms)
 
 #======================================
 m <- list(
@@ -205,12 +205,33 @@ n <- list(
     C = c(" it", " no")
 )
 
-word.associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = m)
-word.associate(raj.act.1$dialogue, list(raj.act.1$person), match.string = m)
-(out <- with(mraja1spl, word.associate(dialogue, list(fam.aff, sex), match.string = m)))
+word_associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = m)
+word_associate(raj.act.1$dialogue, list(raj.act.1$person), match.string = m)
+(out <- with(mraja1spl, word_associate(dialogue, list(fam.aff, sex), match.string = m)))
 names(out)
 lapply(out$dialogue, htruncdf, n = 20, w = 20)
 out$cap.f
+
+#======================================
+DATA2$state2 <- space_fill(DATA2$state, c("is fun", "too fun"))
+
+ms <- list(
+    list1 = c(" I ", " you", "is fun", "too fun"),
+    list2 = c(" wh")
+)
+
+et <- list(
+    B = c(" the", " on"),
+    C = c(" it", " no")
+)
+
+word_associate(DATA2$state2, DATA2$person, match.string = ms,
+    wordcloud = TRUE,  proportional = TRUE,
+    network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,
+    cloud.legend =c("A", "B", "C", "D"),
+    title.color = "blue", cloud.colors = c("red", "blue", "purple", "gray70"))
+
+DATA2 <- qdap::DATA2
 }
 }
 \seealso{

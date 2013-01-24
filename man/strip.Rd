@@ -2,7 +2,7 @@
 \alias{strip}
 \title{Strip Text}
 \usage{
-  strip(x, char.keep = NULL, digit.remove = TRUE,
+  strip(x, char.keep = "~~", digit.remove = TRUE,
     apostrophe.remove = TRUE, lower.case = TRUE)
 }
 \arguments{
@@ -10,7 +10,11 @@
 
   \item{char.keep}{A character vector of symbols (i.e.
   punctuation) that \code{strip} should keep.  The default
-  is to strip every symbol except apostrophes.}
+  is to strip every symbol except apostrophes and a double
+  tilde \code{"~~"}.  The double tilde \code{"~~"} is
+  included for a convenient means of keeping word groups
+  together in functions that split text apart based on
+  spaces.}
 
   \item{digit.remove}{logical.  If TRUE strips digits from
   the text.}

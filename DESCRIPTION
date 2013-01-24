@@ -7,11 +7,13 @@ Author: Tyler Rinker
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Depends:
     R (>= 2.15),
-    ggplot2 (>= 0.9.2)
+    gdata,
+    ggplot2 (>= 0.9.2),
+    grid,
+    scales
 Imports:
     gridExtra,
     chron,
-    scales,
     RColorBrewer,
     igraph,
     tm,
@@ -145,6 +147,7 @@ Collate:
     'scrubber.R'
     'Search.R'
     'sentSplit.R'
+    'space_fill.R'
     'spaste.R'
     'speakerSplit.R'
     'stemmer.R'
@@ -170,7 +173,6 @@ Collate:
     'url_dl.R'
     'v.outer.R'
     'wfm.R'
-    'word.associate.R'
     'word.count.R'
     'word.network.plot.R'
     'word_diff_list.R'
@@ -178,3 +180,5 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
+    'word_associate.R'
+    'replace_contraction.R'

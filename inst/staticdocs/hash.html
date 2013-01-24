@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>hash. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="
+  Bryan Goodrich and Tyler Rinker &lt;tyler.rinker@gmail.com&gt;.
+">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Hash/Dictionary Lookup</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>hash(x, mode.out = "numeric")</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>x</dt>
+      <dd>A two column dataframe.</dd>
+      <dt>mode.out</dt>
+      <dd>The type of output (column 2) expected
+  (e.g. <code>"character"</code>, <code>"numeric"</code>, etc.)</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>Creates a "hash table" or a two column data frame in its
+  own environment.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>Creates a new environment for quick hash style dictionary
+  lookup.</p>
+  
+    </div>
+
+    <div class="References">
+      <h2>References</h2>
+      
+      <p><a href = 'http://www.talkstats.com/showthread.php/22754-Create-a-fast-dictionary'>http://www.talkstats.com/showthread.php/22754-Create-a-fast-dictionary</a></p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # (DF <- aggregate(mpg~as.character(carb), mtcars, mean))# new.hash <- hash(DF)  #numeric outcome# sapply(as.character(mtcars$carb), function(x) {#     if(exists(x, envir = new.hash)) {#         get(x, envir = new.hash)#     } else {#         NA#     }# })# # new.hash <- hash(DF, "character") #character outcome# sapply(as.character(mtcars$carb), function(x) {#     if(exists(x, envir = new.hash)) {#         get(x, envir = new.hash)#     } else {#         NA#     }# })# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>hash</li>
+    </ul>
+    <ul>
+      <li>dictionary,</li><li>hash,</li><li>lookup</li>
+    </ul> -->
+      
+    <h2>See also</h2>
+    
+  <code>lookup</code>,
+  <code><a href='http://www.inside-r.org/r-doc/base/environment'>environment</a></code>
+
+    
+    <h2>Author</h2>
+    
+  Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
+
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>cm_distance. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <h1>Distance Matrix Between Codes</h1>
+
+<div class="row">
+  <div class="span8">
+    <h2>Usage</h2>
+    <pre>cm_distance(dataframe, time.var = NULL, parallel = FALSE, code.var = "code", causal = FALSE, 
+  start.var = "start", end.var = "end", mean.digits = 2, sd.digits = 2, stan.digits = 2)</pre>
+    
+    <h2>Arguments</h2>
+    <dl>
+      <dt>dataframe</dt>
+      <dd>A data frame from the cm_x2long family
+  (<code>cm_range2long</code>; <code>cm_df2long</code>;
+  <code>cm_time2long</code>).</dd>
+      <dt>time.var</dt>
+      <dd>An optional variable to split the
+  dataframe by (if you have data that is by various times
+  this must be supplied).</dd>
+      <dt>parallel</dt>
+      <dd>logical.  If TRUE runs the cm_distance on
+  multiple cores. This is effective with larger data sets
+  but may actually be slower with smaller data sets.</dd>
+      <dt>code.var</dt>
+      <dd>The name of the code variable column.
+  Defaults to "codes" as out putted by x2long family.</dd>
+      <dt>causal</dt>
+      <dd>logical.  If TRUE measures the distance
+  between x and y given that x must proceed y.</dd>
+      <dt>start.var</dt>
+      <dd>The name of the start variable column.
+  Defaults to "start" as out putted by x2long family.</dd>
+      <dt>end.var</dt>
+      <dd>The name of the end variable column.
+  Defaults to "end" as out putted by x2long family.</dd>
+      <dt>mean.digits</dt>
+      <dd>The number of digits to be displayed
+  in the mean matrix.</dd>
+      <dt>sd.digits</dt>
+      <dd>The number of digits to be displayed in
+  the sd (standard deviation) matrix.</dd>
+      <dt>stan.digits</dt>
+      <dd>The number of digits to use in the
+  standardized mean difference matrix.</dd>
+    </dl>
+    
+    <div class="Value">
+      <h2>Value</h2>
+      
+      <p>An object of the class cm.dist.  This is a list of n
+  lists with the following components per each list
+  (time.var): meanA distance matrix of average
+  distances between codes sdA matrix of standard
+  deviations of distances between codes nA matrix
+  of counts of distances between codes combinedA
+  matrix of combined mean, sd and n of distances between
+  codes standardizedA matrix of standardized
+  values of distances between codes.  The closer a value is
+  to zero the closer two codes relate.</p>
+  
+    </div>
+
+    <div class="Description">
+      <h2>Description</h2>
+      
+      <p>Generate distance measures to ascertain a mean distance
+  measure between codes.</p>
+  
+    </div>
+    
+    <h2 id="examples">Examples</h2>
+    <pre class="examples"><div class='input'>## <strong>Not run</strong>: # foo <- list(#     AA = qcv(terms='02:03, 05'),#     BB = qcv(terms='1:2, 3:10'),#     CC = qcv(terms='1:9, 100:150')# )# foo2  <- list(#     AA = qcv(terms='40'),#     BB = qcv(terms='50:90'),#     CC = qcv(terms='60:90, 100:120, 150'),#     DD = qcv(terms='')# )# (dat <- cm_range2long(foo, foo2, v.name = "time"))# (out <- cm_distance(dat, time.var = "time", causal=TRUE))# names(out)# names(out$foo2)# out$foo2# #========================================# x <- list(#     transcript_time_span = qcv(00:00 - 1:12:00),#     A = qcv(terms = "2.40:3.00, 6.32:7.00, 9.00, 10.00:11.00, 59.56"),#     B = qcv(terms = "3.01:3.02, 5.01,  19.00, 1.12.00:1.19.01"),#     C = qcv(terms = "2.40:3.00, 5.01, 6.32:7.00, 9.00, 17.01")# )# dat <- cm_time2long(x)# gantt_wrap(dat, "code", border.color = "black", border.size = 5, sig.dig.line.freq = -2)# (a <- cm_distance(dat))# names(a)# names(a$dat)# a$dat# ## <strong>End(Not run)</strong></div></pre>
+  </div>
+  <div class="span4">
+    <!-- <ul>
+      <li>cm_distance</li>
+    </ul>
+    <ul>
+      <li>distance</li>
+    </ul> -->
+      
+        
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>

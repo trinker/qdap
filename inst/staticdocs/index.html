@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+<title>Index. qdap 0.1.0</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="author" content="Tyler Rinker">
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="css/bootstrap-responsive.css" rel="stylesheet">
+<link href="css/highlight.css" rel="stylesheet">
+<link href="css/staticdocs.css" rel="stylesheet">
+
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  </head>
+
+  <body>
+    <div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class="brand" href="#">qdap 0.1.0</a>
+      <div class="nav">
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Index</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+    <div class="container">
+      <header>
+        
+      </header>
+      
+      <div class="row">
+  <div class="span8">
+    <h1>qdap</h1>
+
+<h1></h1>
+
+<p><img src="https://dl.dropbox.com/u/61803503/qdapicon.png" alt="qdapicon"/><br/>
+qdap (Quantitative Discourse Analysis Package) is an R package designed to assist in quantitative discourse analysis.  The package stands as a bridge between qualitative transcripts of dialogue and statistical analysis and visualization.</p>
+
+<h2>Installation</h2>
+
+<p>Currently there isn&#39;t a release on <a href="http://cran.r-project.org/">CRAN</a>.</p>
+
+<p>You can, however, download the <a href="https://github.com/trinker/qdap/zipball/master">zip ball</a> or <a href="https://github.com/trinker/qdap/tarball/master">tar ball</a>, decompress and run <code>R CMD INSTALL</code> on it, or use the <strong>devtools</strong> package to install the development version:</p>
+
+<pre><code class="r"># install.packages(&quot;devtools&quot;)
+
+library(devtools)
+install_github(&quot;qdap&quot;, &quot;trinker&quot;)
+</code></pre>
+
+<p>Note: Windows users need <a href="http://www.murdoch-sutherland.com/Rtools/">Rtools</a> and <a href="http://CRAN.R-project.org/package=devtools">devtools</a> to install this way.</p>
+
+<p>Additionally, Windows users currently must install <code>XML</code> and <code>RCurl</code> before installing qdap.  Use the following short script:</p>
+
+<pre><code class="r">URL &lt;- &quot;http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/2.15/&quot;
+install.packages(&quot;XML&quot;, contriburl = URL)
+install.packages(&quot;RCurl&quot;, contriburl = URL)
+</code></pre>
+
+<p>Note: Mac users must install <code>openNLP</code> before attempting to install <code>qdap</code></p>
+
+<pre><code class="r">install.packages(&quot;openNLP&quot;, type = &quot;source&quot;)
+</code></pre>
+
+<h2>Help</h2>
+
+<p>For a variety of qdap help files and videos <a href="https://github.com/trinker/qdap/wiki">click here</a>.<br/>
+For the package help manual <a href="https://dl.dropbox.com/u/61803503/qdap.pdf">click here</a>.</p>
+
+
+    <h2>Help topics</h2>
+
+    <h3></h3>
+    
+    
+    <ul class="index">
+        
+      <li>
+        <code><a href="abbreviations.html">abbreviations</a></code><br />Small Abbrreviations Data Set</li>
+            
+      <li>
+        <code><a href="action.verbs.html">action.verbs</a></code><br />Action Word List</li>
+            
+      <li>
+        <code><a href="adjacency_matrix.html">adjacency_matrix</a></code>(adjmat)<br />Takes a Matrix and Generates an Adjacency Matrix</li>
+            
+      <li>
+        <code><a href="adverb.html">adverb</a></code><br />Adverb Word List</li>
+            
+      <li>
+        <code><a href="all_words.html">all_words</a></code><br />Searches Text Column for Words</li>
+            
+      <li>
+        <code><a href="Readability.html">automated_readability_index</a></code>(coleman_liau, flesch_kincaid, fry, linsear_write, SMOG)<br />Readability Measures</li>
+            
+      <li>
+        <code><a href="bag.o.words.html">bag.o.words</a></code>(breaker, word.split)<br />Bag of Words</li>
+            
+      <li>
+        <code><a href="blank2NA.html">blank2NA</a></code><br />Replace Blanks in Data Frame</li>
+            
+      <li>
+        <code><a href="bracketX.html">bracketX</a></code>(bracketXtract, genX, genXtract)<br />Bracket Parsing</li>
+            
+      <li>
+        <code><a href="BuckleySaltonSWL.html">BuckleySaltonSWL</a></code><br />Buckley & Salton Stopword List</li>
+            
+      <li>
+        <code><a href="capitalizer.html">capitalizer</a></code><br />Capitalize Select Words</li>
+            
+      <li>
+        <code><a href="clean.html">clean</a></code><br />Remove Escaped Characters</li>
+            
+      <li>
+        <code><a href="cm_code.blank.html">cm_code.blank</a></code><br />Blank Code Transformation</li>
+            
+      <li>
+        <code><a href="cm_code.combine.html">cm_code.combine</a></code><br />Combine Codes</li>
+            
+      <li>
+        <code><a href="cm_code.exclude.html">cm_code.exclude</a></code><br />Exclude Codes</li>
+            
+      <li>
+        <code><a href="cm_code.overlap.html">cm_code.overlap</a></code><br />Find Co-occurrence Between Codes</li>
+            
+      <li>
+        <code><a href="cm_code.transform.html">cm_code.transform</a></code><br />Transform Codes</li>
+            
+      <li>
+        <code><a href="cm_combine.dummy.html">cm_combine.dummy</a></code><br />Find Co-occurrence Between Codes</li>
+            
+      <li>
+        <code><a href="cm_df.fill.html">cm_df.fill</a></code><br />Range Coding of a Code Matrix</li>
+            
+      <li>
+        <code><a href="cm_df.temp.html">cm_df.temp</a></code><br />Break Transcript Dialogue into Blank Code Matrix</li>
+            
+      <li>
+        <code><a href="cm_df.transcript.html">cm_df.transcript</a></code><br />Transcript With Word Number</li>
+            
+      <li>
+        <code><a href="cm_df2long.html">cm_df2long</a></code><br />Transform Codes to Start-End Durations</li>
+            
+      <li>
+        <code><a href="cm_distance.html">cm_distance</a></code><br />Distance Matrix Between Codes</li>
+            
+      <li>
+        <code><a href="cm_dummy2long.html">cm_dummy2long</a></code><br />Convert cm_combine.dummy Back to Long</li>
+            
+      <li>
+        <code><a href="cm_long2dummy.html">cm_long2dummy</a></code><br />Stretch and Dummy Code cm_xxx2long</li>
+            
+      <li>
+        <code><a href="cm_range.temp.html">cm_range.temp</a></code><br />Range Code Sheet</li>
+            
+      <li>
+        <code><a href="cm_range2long.html">cm_range2long</a></code><br />Transform Codes to Start-End Durations</li>
+            
+      <li>
+        <code><a href="cm_time.temp.html">cm_time.temp</a></code><br />Time Span Code Sheet</li>
+            
+      <li>
+        <code><a href="cm_time2long.html">cm_time2long</a></code><br />Transform Codes to Start-End Times</li>
+            
+      <li>
+        <code><a href="colSplit.html">colSplit</a></code><br />Separate a Column Pasted by paste2</li>
+            
+      <li>
+        <code><a href="colsplit2df.html">colsplit2df</a></code>(lcolsplit2df)<br />Wrapper for colSplit that Returns Dataframe(s)</li>
+            
+      <li>
+        <code><a href="common.html">common</a></code><br />Find Common Words Between Groups</li>
+            
+      <li>
+        <code><a href="common.list.html">common.list</a></code><br />list Method for common</li>
+            
+      <li>
+        <code><a href="contractions.html">contractions</a></code><br />Contraction Conversions</li>
+            
+      <li>
+        <code><a href="convert.html">convert</a></code><br />Convert Seconds to h:m:s</li>
+            
+      <li>
+        <code><a href="DATA.html">DATA</a></code><br />Fictitious Classroom Dialogue</li>
+            
+      <li>
+        <code><a href="DATA2.html">DATA2</a></code><br />Fictitious Repeated Measures Classroom Dialogue</li>
+            
+      <li>
+        <code><a href="file_handling.html">delete</a></code>(folder)<br />Easy File Handling</li>
+            
+      <li>
+        <code><a href="DICTIONARY.html">DICTIONARY</a></code><br />Nettalk Corpus Syllable Data Set</li>
+            
+      <li>
+        <code><a href="dir_map.html">dir_map</a></code><br />Map Transcript Files from a Directory to a Script</li>
+            
+      <li>
+        <code><a href="dissimilarity.html">dissimilarity</a></code><br />Dissimilarity Statistics</li>
+            
+      <li>
+        <code><a href="distTab.html">distTab</a></code><br />SPSS Style Frequency Tables</li>
+            
+      <li>
+        <code><a href="diversity.html">diversity</a></code><br />Diversity Statistics</li>
+            
+      <li>
+        <code><a href="duplicates.html">duplicates</a></code><br />Find Duplicated Words in a Text String</li>
+            
+      <li>
+        <code><a href="emoticon.html">emoticon</a></code><br />Emoticons Data Set</li>
+            
+      <li>
+        <code><a href="end_mark.html">end_mark</a></code><br />Sentence End marks</li>
+            
+      <li>
+        <code><a href="endf.html">endf</a></code><br />Test for Incomplete Sentences</li>
+            
+      <li>
+        <code><a href="env.syl.html">env.syl</a></code><br />Syllable Lookup Environment</li>
+            
+      <li>
+        <code><a href="env.syn.html">env.syn</a></code><br />Syllable Lookup Environment</li>
+            
+      <li>
+        <code><a href="exclude.html">exclude</a></code><br />Exclude Elements From a Vector</li>
+            
+      <li>
+        <code><a href="formality.html">formality</a></code><br />Formality Score</li>
+            
+      <li>
+        <code><a href="gantt.html">gantt</a></code><br />Generate Unit Spans</li>
+            
+      <li>
+        <code><a href="gantt_plot.html">gantt_plot</a></code><br />Gantt Plot</li>
+            
+      <li>
+        <code><a href="gantt_rep.html">gantt_rep</a></code><br />Generate Unit Spans for Repeated Measures</li>
+            
+      <li>
+        <code><a href="gantt_wrap.html">gantt_wrap</a></code><br />Gantt Plot</li>
+            
+      <li>
+        <code><a href="hash.html">hash</a></code><br />Hash/Dictionary Lookup</li>
+            
+      <li>
+        <code><a href="data_viewing.html">htruncdf</a></code>(qview, truncdf)<br />Dataframe Viewing</li>
+            
+      <li>
+        <code><a href="imperative.html">imperative</a></code><br />Intuitively Remark Sentences as Imperative</li>
+            
+      <li>
+        <code><a href="incomplete.replace.html">incomplete.replace</a></code>(incomp)<br />Denote Incomplete End Marks With "|"</li>
+            
+      <li>
+        <code><a href="increase.amplification.words.html">increase.amplification.words</a></code><br />Amplifying Words</li>
+            
+      <li>
+        <code><a href="interjections.html">interjections</a></code><br />Interjections</li>
+            
+      <li>
+        <code><a href="key_merge.html">key_merge</a></code><br />Merge Demographic Information with Person/Text Transcript</li>
+            
+      <li>
+        <code><a href="kullback.leibler.html">kullback.leibler</a></code><br />Kullback Leibler Statistic</li>
+            
+      <li>
+        <code><a href="labMT.html">labMT</a></code><br />Language Assessment by Mechanical Turk (labMT) Sentiment Words</li>
+            
+      <li>
+        <code><a href="justification.html">left.just</a></code>(right.just)<br />Text Justification</li>
+            
+      <li>
+        <code><a href="lookup.html">lookup</a></code><br />Hash Table/Dictionary Lookup</li>
+            
+      <li>
+        <code><a href="multicsv.html">mcsv_r</a></code>(mcsv_w)<br />Read/Write Multiple csv Files at a Time</li>
+            
+      <li>
+        <code><a href="merge_all.html">merge_all</a></code><br />Merge Multiple Data Sets</li>
+            
+      <li>
+        <code><a href="mraja1.html">mraja1</a></code><br />Romeo and Juliet: Act 1 Dialogue Merged with Demographics</li>
+            
+      <li>
+        <code><a href="mraja1spl.html">mraja1spl</a></code><br />Romeo and Juliet: Act 1 Dialogue Merged with Demographics and Split</li>
+            
+      <li>
+        <code><a href="multigsub.html">multigsub</a></code>(mgsub)<br />Multiple gsub</li>
+            
+      <li>
+        <code><a href="multiscale.html">multiscale</a></code><br />Nested Standardization</li>
+            
+      <li>
+        <code><a href="NAer.html">NAer</a></code><br />Replace Missing Values (NA)</li>
+            
+      <li>
+        <code><a href="negation.words.html">negation.words</a></code><br />Negating Words</li>
+            
+      <li>
+        <code><a href="negative.words.html">negative.words</a></code><br />Negative Words</li>
+            
+      <li>
+        <code><a href="OnixTxtRetToolkitSWL1.html">OnixTxtRetToolkitSWL1</a></code><br />Onix Text Retrieval Toolkit Stopword List 1</li>
+            
+      <li>
+        <code><a href="outlier.detect.html">outlier.detect</a></code><br />Detect Outliers in Text</li>
+            
+      <li>
+        <code><a href="outlier.labeler.html">outlier.labeler</a></code><br />Locate Outliers in Numeric String</li>
+            
+      <li>
+        <code><a href="paste2.html">paste2</a></code><br />Paste an Unspecified Number Of Text Columns</li>
+            
+      <li>
+        <code><a href="plot.character.table.html">plot.character.table</a></code><br />Plots a character.table Object</li>
+            
+      <li>
+        <code><a href="plot.diversity.html">plot.diversity</a></code><br />Plots a diversity object</li>
+            
+      <li>
+        <code><a href="plot.formality.html">plot.formality</a></code><br />Plots a formality Object</li>
+            
+      <li>
+        <code><a href="plot.polarity.html">plot.polarity</a></code><br />Plots a polarity Object</li>
+            
+      <li>
+        <code><a href="plot.pos.by.html">plot.pos.by</a></code><br />Plots a pos.by Object</li>
+            
+      <li>
+        <code><a href="plot.question_type.html">plot.question_type</a></code><br />Plots a question_type Object</li>
+            
+      <li>
+        <code><a href="plot.termco.html">plot.termco</a></code><br />Plots a termco object</li>
+            
+      <li>
+        <code><a href="plot.word_stats.html">plot.word_stats</a></code><br />Plots a word_stats object</li>
+            
+      <li>
+        <code><a href="polarity.html">polarity</a></code><br />Polarity Score (Sentiment Analysis)</li>
+            
+      <li>
+        <code><a href="pos.html">pos</a></code>(pos.by, pos.tags)<br />Parts of Speech Tagging</li>
+            
+      <li>
+        <code><a href="positive.words.html">positive.words</a></code><br />Positive Words</li>
+            
+      <li>
+        <code><a href="potential_NA.html">potential_NA</a></code><br />Search for Potential Missing Values</li>
+            
+      <li>
+        <code><a href="preposition.html">preposition</a></code><br />Preposition Words</li>
+            
+      <li>
+        <code><a href="print.adjacency_matrix.html">print.adjacency_matrix</a></code><br />Prints an adjacency_matrix Object</li>
+            
+      <li>
+        <code><a href="print.character.table.html">print.character.table</a></code><br />Prints a character.table object</li>
+            
+      <li>
+        <code><a href="print.cm_distance.html">print.cm_distance</a></code><br />Prints a cm_distance Object</li>
+            
+      <li>
+        <code><a href="print.colsplit2df.html">print.colsplit2df</a></code><br />Prints a colsplit2df Object.</li>
+            
+      <li>
+        <code><a href="print.dissimilarity.html">print.dissimilarity</a></code><br />Prints a dissimilarity object</li>
+            
+      <li>
+        <code><a href="print.diversity.html">print.diversity</a></code><br />Prints a diversity object</li>
+            
+      <li>
+        <code><a href="print.formality.html">print.formality</a></code><br />Prints a formality Object</li>
+            
+      <li>
+        <code><a href="print.kullback.leibler.html">print.kullback.leibler</a></code><br />Prints a kullback.leibler Object.</li>
+            
+      <li>
+        <code><a href="print.polarity.html">print.polarity</a></code><br />Prints a polarity Object</li>
+            
+      <li>
+        <code><a href="print.pos.html">print.pos</a></code><br />Prints a pos Object.</li>
+            
+      <li>
+        <code><a href="print.pos.by.html">print.pos.by</a></code><br />Prints a pos.by Object.</li>
+            
+      <li>
+        <code><a href="print.question_type.html">print.question_type</a></code><br />Prints a question_type object</li>
+            
+      <li>
+        <code><a href="print.termco.html">print.termco</a></code><br />Prints a termco object.</li>
+            
+      <li>
+        <code><a href="print.v.outer.html">print.v.outer</a></code><br />Prints a v.outer Object.</li>
+            
+      <li>
+        <code><a href="print.word_associate.html">print.word_associate</a></code><br />Prints a word_associate object</li>
+            
+      <li>
+        <code><a href="print.word_list.html">print.word_list</a></code><br />Prints a word_list Object</li>
+            
+      <li>
+        <code><a href="print.word_stats.html">print.word_stats</a></code><br />Prints a word_stats object</li>
+            
+      <li>
+        <code><a href="prop.html">prop</a></code><br />Convert Raw Numeric Matrix or Data Frame to Proportions</li>
+            
+      <li>
+        <code><a href="qcombine.html">qcombine</a></code><br />Combine Columns</li>
+            
+      <li>
+        <code><a href="qcv.html">qcv</a></code><br />Quick Character Vector</li>
+            
+      <li>
+        <code><a href="qdap.html">qdap</a></code>(package-qdap, qdap-package)<br />qdap: Quantitative Discourse Analysis Package</li>
+            
+      <li>
+        <code><a href="qheat.html">qheat</a></code><br />Quick Heatmap</li>
+            
+      <li>
+        <code><a href="qprep.html">qprep</a></code><br />Quick Preparation of Text</li>
+            
+      <li>
+        <code><a href="question_type.html">question_type</a></code><br />Count of Question Type</li>
+            
+      <li>
+        <code><a href="raj.html">raj</a></code><br />Romeo and Juliet (Unchanged & Complete)</li>
+            
+      <li>
+        <code><a href="raj.act.1.html">raj.act.1</a></code><br />Romeo and Juliet: Act 1</li>
+            
+      <li>
+        <code><a href="raj.act.2.html">raj.act.2</a></code><br />Romeo and Juliet: Act 2</li>
+            
+      <li>
+        <code><a href="raj.act.3.html">raj.act.3</a></code><br />Romeo and Juliet: Act 3</li>
+            
+      <li>
+        <code><a href="raj.act.4.html">raj.act.4</a></code><br />Romeo and Juliet: Act 4</li>
+            
+      <li>
+        <code><a href="raj.act.5.html">raj.act.5</a></code><br />Romeo and Juliet: Act 5</li>
+            
+      <li>
+        <code><a href="raj.demographics.html">raj.demographics</a></code><br />Romeo and Juliet Demographics</li>
+            
+      <li>
+        <code><a href="rajPOS.html">rajPOS</a></code><br />Romeo and Juliet Split in Parts of Speech</li>
+            
+      <li>
+        <code><a href="rajSPLIT.html">rajSPLIT</a></code><br />Romeo and Juliet (Complete & Split)</li>
+            
+      <li>
+        <code><a href="rank_freq_plot.html">rank_freq_mplot</a></code>(rank_freq_plot)<br />Rank Frequency Plot</li>
+            
+      <li>
+        <code><a href="read.transcript.html">read.transcript</a></code><br />Read Transcripts Into R</li>
+            
+      <li>
+        <code><a href="replace_abbreviation.html">replace_abbreviation</a></code><br />Replace Abbreviations</li>
+            
+      <li>
+        <code><a href="replace_contraction.html">replace_contraction</a></code><br />Replace COntractions</li>
+            
+      <li>
+        <code><a href="replace_number.html">replace_number</a></code><br />Replace Numbers With Text Representation</li>
+            
+      <li>
+        <code><a href="replace_symbol.html">replace_symbol</a></code><br />Replace Symbols With Word Equivalents</li>
+            
+      <li>
+        <code><a href="replacer.html">replacer</a></code><br />Replace Cells in a Matrix or Data Frame</li>
+            
+      <li>
+        <code><a href="rm_row.html">rm_row</a></code>(rm_empty_row)<br />Remove Rows That Contain Markers</li>
+            
+      <li>
+        <code><a href="scrubber.html">scrubber</a></code><br />Use to clean text variables when importing a new data set.</li>
+            
+      <li>
+        <code><a href="Search.html">Search</a></code><br />Search Columns of a Data Frame</li>
+            
+      <li>
+        <code><a href="sentSplit.html">sentSplit</a></code>(sentCombine, TOT)<br />Sentence Splitting</li>
+            
+      <li>
+        <code><a href="space_fill.html">space_fill</a></code><br />Replace Spaces</li>
+            
+      <li>
+        <code><a href="spaste.html">spaste</a></code><br />Add Leading/Trailing Spaces</li>
+            
+      <li>
+        <code><a href="speakerSplit.html">speakerSplit</a></code><br />Break and Stretch if Multiple Persons per Cell</li>
+            
+      <li>
+        <code><a href="stemmer.html">stemmer</a></code>(stem.words, stem2df)<br />Stem Text</li>
+            
+      <li>
+        <code><a href="stopwords.html">stopwords</a></code><br />Remove Stopwords</li>
+            
+      <li>
+        <code><a href="strip.html">strip</a></code><br />Strip Text</li>
+            
+      <li>
+        <code><a href="strWrap.html">strWrap</a></code><br />Wrap Character Strings to Format Paragraphs</li>
+            
+      <li>
+        <code><a href="syllabication.html">syllable.sum</a></code>(combo_syllable.sum, polysyllable.sum, syllable.count)<br />Syllabication</li>
+            
+      <li>
+        <code><a href="SYNONYM.html">SYNONYM</a></code><br />Synonyms Data Set</li>
+            
+      <li>
+        <code><a href="synonyms.html">synonyms</a></code>(syn)<br />Search For Synonyms</li>
+            
+      <li>
+        <code><a href="termco.html">termco</a></code>(term.match, termco.d, termco2mat)<br />Search For and Count Terms</li>
+            
+      <li>
+        <code><a href="termco.c.html">termco.c</a></code><br />Combine Columns from a termco Object</li>
+            
+      <li>
+        <code><a href="text2color.html">text2color</a></code><br />Map Words to Colors</li>
+            
+      <li>
+        <code><a href="Top100Words.html">Top100Words</a></code><br />Fry's  100 Most Commonly Used English Words</li>
+            
+      <li>
+        <code><a href="Top200Words.html">Top200Words</a></code><br />Fry's 200 Most Commonly Used English Words</li>
+            
+      <li>
+        <code><a href="Top25Words.html">Top25Words</a></code><br />Fry's 25 Most Commonly Used English Words</li>
+            
+      <li>
+        <code><a href="trans.cloud.html">trans.cloud</a></code><br />Word Clouds by Grouping Variable</li>
+            
+      <li>
+        <code><a href="trans.venn.html">trans.venn</a></code><br />Venn Diagram by Grouping Variable</li>
+            
+      <li>
+        <code><a href="Trim.html">Trim</a></code><br />Remove Leading/Trailing White Space</li>
+            
+      <li>
+        <code><a href="url_dl.html">url_dl</a></code><br />Download Instructional Documents</li>
+            
+      <li>
+        <code><a href="v.outer.html">v.outer</a></code><br />Vectorized Version of outer</li>
+            
+      <li>
+        <code><a href="Word_Frequency_Matrix.html">wfm</a></code>(wf.combine, wfdf, wfm.expanded)<br />Word Frequency Matrix</li>
+            
+      <li>
+        <code><a href="word.count.html">word.count</a></code>(char.table, character.count, character.table, wc)<br />Word Counts</li>
+            
+      <li>
+        <code><a href="word.network.plot.html">word.network.plot</a></code><br />Word Network Plot</li>
+            
+      <li>
+        <code><a href="word_associate.html">word_associate</a></code><br />Find Associated Words.</li>
+            
+      <li>
+        <code><a href="word_diff_list.html">word_diff_list</a></code><br />Differences In Word Use Between Groups</li>
+            
+      <li>
+        <code><a href="word_list.html">word_list</a></code><br />Raw Word Lists/Frequency Counts</li>
+            
+      <li>
+        <code><a href="word_stats.html">word_stats</a></code><br />Descriptive Word Statistics</li>
+    
+    </ul>
+  </div>
+  
+  <div class="span3 offset1">
+        
+    <h2>Dependencies</h2>
+    <ul>
+      <li><strong>Depends</strong>: gdata, ggplot2, grid, scales</li>
+      <li><strong>Imports</strong>: gridExtra, chron, RColorBrewer, igraph, tm, wordcloud, venneuler, openNLPmodels.en, Snowball, gplots, gridExtra, gdata, openNLP, XML, RCurl, reshape2, parallel</li>
+      <li><strong>Suggests</strong>: plyr, koRpus</li>
+      <li><strong>Extends</strong>: </li>
+    </ul>
+     
+    
+  </div>
+</div>
+      
+      <footer>
+      <p class="pull-right"><a href="#">Back to top</a></p>
+<p>Built by <a href="https://github.com/hadley/staticdocs">staticdocs</a>. Styled with <a href="http://twitter.github.com/bootstrap">bootstrap</a>.</p>
+      </footer>
+    </div>
+  </body>
+</html>
