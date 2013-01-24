@@ -131,3 +131,5 @@ pip-log.txt
 .DS_Store
 .Rproj.user
 tools.R
+.gitattributes
+qdap.Rproj
