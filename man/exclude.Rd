@@ -7,8 +7,8 @@
 \arguments{
   \item{word.list}{A list of words/terms to exclude from.}
 
-  \item{\dots}{A vector (character/numric) if element(s) to
-  be excluded from the \code{word.list}.}
+  \item{\dots}{A vector (character/numeric) if element(s)
+  to be excluded from the \code{word.list}.}
 }
 \value{
   Returns a vector with the excluded terms removed.

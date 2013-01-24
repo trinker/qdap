@@ -25,7 +25,7 @@
 #' color of the plot edges.
 #' @param label.colors A character vector of length one corresponding to the 
 #' color of the labels.
-#' @param layout  layout types supported by igraph.  See 
+#' @param layout Layout types supported by igraph.  See 
 #' \code{\link[igraph]{layout}}.
 #' @param title.name The title of the plot.
 #' @param title.padj Adjustment for the network plot title. For strings 

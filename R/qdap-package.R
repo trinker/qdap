@@ -181,7 +181,7 @@ NULL
 #' Contemporary Books.
 NULL
  
-#' Small Abbrreviations Data Set
+#' Small Abbreviations Data Set
 #' 
 #' A dataset containing abbreviations and their qdap friendly form.
 #' 
@@ -246,7 +246,7 @@ NULL
 
 #' Contraction Conversions
 #' 
-#' A dataset containing common contrctions and their expanded form.
+#' A dataset containing common contractions and their expanded form.
 #' 
 #' @details 
 #' \itemize{ 

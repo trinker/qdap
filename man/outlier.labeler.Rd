@@ -16,7 +16,7 @@
 \value{
   Returns a matrix (one column) of possible outliers coded
   as \code{"3sd"}, \code{"2sd"} and \code{"1.5sd"},
-  corrsponding to >= to 3, 2, or 1.5 standard deviations.
+  corresponding to >= to 3, 2, or 1.5 standard deviations.
 }
 \description{
   Locate and label possible outliers in a string.

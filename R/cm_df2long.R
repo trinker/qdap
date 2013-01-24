@@ -3,18 +3,18 @@
 #' Transforms the range coding structure(s) from \code{cm_df.temp} (in list 
 #' format) into a data frame of start and end durations in long format.
 #' 
-#' @param df.temp.obj a character vector of names of object(s) created by 
+#' @param df.temp.obj A character vector of names of object(s) created by 
 #' cm_df.temp, a list of cm_df.temp created objects or a data frame created by 
 #' cm_df.temp.
-#' @param v.name sn optional name for the column created for the list.var 
+#' @param v.name An optional name for the column created for the list.var 
 #' argument
 #' @param list.var logical.  If TRUE creates a column for the data frame created 
 #' by each time.list passed to cm_t2l
-#' @param code.vars a character vector of code variables.  If NULL uses all 
+#' @param code.vars A character vector of code variables.  If NULL uses all 
 #' variables from the first column after the column named word.num.
-#' @param no.code the value to assign to no code; default is NA
+#' @param no.code The value to assign to no code; default is NA
 #' @param add.start.end logical.  If TURE adds a column for start and end times
-#' @param repeat.vars a character vector of repeated/stacked variables.  If NULL 
+#' @param repeat.vars A character vector of repeated/stacked variables.  If NULL 
 #' uses all non code.vars variables.
 #' @param rev.code logical.  If TRUE reverses the order of code.vars and no.code 
 #' variables.

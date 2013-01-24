@@ -1,6 +1,6 @@
 \name{replace_contraction}
 \alias{replace_contraction}
-\title{Replace COntractions}
+\title{Replace Contractions}
 \usage{
   replace_contraction(text.var,
     contraction = qdap::contractions, replace = NULL,
@@ -22,7 +22,7 @@
   regard to capitalization.}
 
   \item{sent.cap}{logical.  If TRUE capitalizes the
-  begining of every sentence.}
+  beginning of every sentence.}
 }
 \value{
   Returns a vector with contractions replaced.

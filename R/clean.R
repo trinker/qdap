@@ -1,6 +1,6 @@
 #' Remove Escaped Characters
 #' 
-#' Pre process data to remove escaped characters
+#' Preprocess data to remove escaped characters
 #' 
 #' @param text.var The text variable
 #' @return Returns a vector of character strings with escaped characters removed.

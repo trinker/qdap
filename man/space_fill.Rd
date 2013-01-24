@@ -20,7 +20,7 @@
   matching is case sensitive and if TRUE, case is ignored
   during matching.}
 
-  \item{fixed}{ogical. If TRUE, pattern is a string to be
+  \item{fixed}{logical. If TRUE, pattern is a string to be
   matched as is. Overrides all conflicting arguments.}
 
   \item{\ldots}{Other arguments passed to
@@ -35,7 +35,7 @@
   together.
 }
 \details{
-  \code{link[qdap]{space_fill}} ise useful for keeping
+  \code{link[qdap]{space_fill}} is useful for keeping
   grouped words together.  Many functions in qdap take a
   \code{char.keep} or \code{char2space} argument.  This can
   be used to prepare multi word phrases (e.g. proper nouns)

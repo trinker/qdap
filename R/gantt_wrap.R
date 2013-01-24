@@ -47,7 +47,7 @@
 #' @return Returns a Gantt style visualization. Invisibly returns the ggplot2 
 #' list object.
 #' @note For non repeated measures data/plotting use \code{gantt}; for repeated 
-#' measures data output use \code{gantt_rep}; and for a conventient wrapper that 
+#' measures data output use \code{gantt_rep}; and for a convenient wrapper that 
 #' takes text and generates plots use \code{gantt_plot}.
 #' @import ggplot2 scales RColorBrewer
 #' @author Andrie de Vries and Tyler Rinker <tyler.rinker@@gmail.com>.

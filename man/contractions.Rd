@@ -4,7 +4,7 @@
 \title{Contraction Conversions}
 \format{A data frame with 65 rows and 2 variables}
 \description{
-  A dataset containing common contrctions and their
+  A dataset containing common contractions and their
   expanded form.
 }
 \details{

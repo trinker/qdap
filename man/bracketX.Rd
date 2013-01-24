@@ -39,10 +39,10 @@
   named list of lists of vectors of bracketed text per
   bracket type.}
 
-  \item{left}{A vector of charcter or numeric symbols as
+  \item{left}{A vector of character or numeric symbols as
   the left edge to extract.}
 
-  \item{right}{A vector of charcter or numeric symbols as
+  \item{right}{A vector of character or numeric symbols as
   the right edge to extract.}
 }
 \value{
@@ -72,7 +72,7 @@
 }
 \section{Warning}{
   the \code{gen} functions are more flexible than the
-  \code{bracket} functions but are not compatable with
+  \code{bracket} functions but are not compatible with
   special \code{\link[base]{regex}} characters.  It is
   recommended that the researcher use the \code{bracket}
   functions.
@@ -120,8 +120,8 @@ genX(DATA$state, c("is", "we"), c("too", "on"))
 \seealso{
   \code{\link[base]{regex}}
 }
-\keyword{bracket-remove,}
 \keyword{bracket,}
+\keyword{bracket-remove,}
 \keyword{curly-braces}
 \keyword{parenthesis,}
 

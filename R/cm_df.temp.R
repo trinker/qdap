@@ -8,7 +8,7 @@
 #' @param text.var The name of the text variable.
 #' @param codes Optional list of codes.
 #' @param csv logical.  If TRUE creates a csv in the working directory.
-#' @param file.name The name of the csv file.  If NULL defaults to the dtaframe 
+#' @param file.name The name of the csv file.  If NULL defaults to the dataframe 
 #' name.
 #' @param transpose logical.  If TRUE transposes the dataframe so that the text 
 #' is across the top. 

@@ -8,28 +8,28 @@
     rev.code = FALSE)
 }
 \arguments{
-  \item{df.temp.obj}{a character vector of names of
+  \item{df.temp.obj}{A character vector of names of
   object(s) created by cm_df.temp, a list of cm_df.temp
   created objects or a data frame created by cm_df.temp.}
 
-  \item{v.name}{sn optional name for the column created for
+  \item{v.name}{An optional name for the column created for
   the list.var argument}
 
   \item{list.var}{logical.  If TRUE creates a column for
   the data frame created by each time.list passed to
   cm_t2l}
 
-  \item{code.vars}{a character vector of code variables.
+  \item{code.vars}{A character vector of code variables.
   If NULL uses all variables from the first column after
   the column named word.num.}
 
-  \item{no.code}{the value to assign to no code; default is
+  \item{no.code}{The value to assign to no code; default is
   NA}
 
   \item{add.start.end}{logical.  If TURE adds a column for
   start and end times}
 
-  \item{repeat.vars}{a character vector of repeated/stacked
+  \item{repeat.vars}{A character vector of repeated/stacked
   variables.  If NULL uses all non code.vars variables.}
 
   \item{rev.code}{logical.  If TRUE reverses the order of

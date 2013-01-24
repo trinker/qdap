@@ -12,7 +12,7 @@
 
   \item{overlap.code.list}{A list of named character
   vectors of at least two code column names to aggregate
-  co-occurences.}
+  co-occurrences.}
 
   \item{combine.code.list}{A list of named character
   vectors of at least two code column names to combine}

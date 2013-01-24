@@ -20,7 +20,7 @@
 #' or optionally returns a list of two: (1) A data frame of the total units 
 #' used by grouping variable(s) and (2) a data frame of start and end times 
 #' by grouping variable(s).  Optionally plots a Gantt plot of the returned data.
-#' @note For repeated measures data output use \code{gantt_rep}; for a conventient 
+#' @note For repeated measures data output use \code{gantt_rep}; for a convenient 
 #' wrapper that takes text and generates plots use \code{gantt_plot}; and for a 
 #' flexible gantt plot that words with code matrix functions (cm) use 
 #' \code{gantt_wrap}.

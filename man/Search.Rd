@@ -11,7 +11,7 @@
   \item{term}{A character vector term to search for.}
 
   \item{column.name}{Optional column of the data frame to
-  search (character name or or integer index).}
+  search (character name or integer index).}
 
   \item{max.distance}{Maximum distance allowed for a match.
   Expressed either as integer, or as a fraction of the

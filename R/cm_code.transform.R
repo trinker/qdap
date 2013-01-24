@@ -5,7 +5,7 @@
 #' @param x2long.obj An object from \code{cm_range2long}, \code{cm_time2long} or 
 #' \code{cm_df2long}.
 #' @param overlap.code.list A list of named character vectors of at least two 
-#' code column names to aggregate co-occurences.
+#' code column names to aggregate co-occurrences.
 #' @param combine.code.list A list of named character vectors of at least two 
 #' code column names to combine
 #' @param exclude.code.list A list of named character vectors of at least two 

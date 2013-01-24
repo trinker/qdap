@@ -35,7 +35,7 @@
 #' with(DATA, wfm(state, list(sex, adult)))
 #' dat <- with(DATA, wfm(state, person))
 #'
-#' #inset double tilde ("~~") to keep dual words (e.i. first last name)
+#' #insert double tilde ("~~") to keep dual words (i.e. first last name)
 #' alts <- c(" fun", "I ")
 #' state2 <- mgsub(alts, gsub("\\s", "~~", alts), DATA$state) 
 #' with(DATA, wfm(state2, list(sex, adult)))
@@ -66,7 +66,7 @@
 #' z <- wfdf(DATA$state, DATA$person, output = "proportion")  
 #' 
 #' WL1 <- c(y[, 1])                                                                      
-#' WL2 <- list(c("read", "the", "a"), c("you", "your", "your're"))                       
+#' WL2 <- list(c("read", "the", "a"), c("you", "your", "you're"))                       
 #' WL3 <- list(bob = c("read", "the", "a"), yous = c("you", "your", "you're"))          
 #' WL4 <- list(bob = c("read", "the", "a"), yous = c("a", "you", "your", "your're"))     
 #' WL5 <- list(yous = c("you", "your", "your're"))                                       
@@ -236,7 +236,7 @@ function(text.var, grouping.var = NULL, ...){
 }
 
 
-#' Combined Word Frequecny Data Frame
+#' Combined Word Frequency Data Frame
 #' 
 #' \code{wf.combine} - Combines words (rows) of a word frequency data frame (\code{wfdf}) 
 #' together.

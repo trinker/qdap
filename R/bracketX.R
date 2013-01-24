@@ -12,7 +12,7 @@
 #' counts.
 #' @return \code{bracketX} -  returns a vector of text with brackets removed.
 #' @section Warning: the \code{gen} functions are more flexible than the 
-#' \code{bracket} functions but are not compatable with special 
+#' \code{bracket} functions but are not compatible with special 
 #' \code{\link[base]{regex}} characters.  It is recommended that the researcher 
 #' use the \code{bracket} functions.
 #' @rdname bracketX
@@ -148,9 +148,9 @@ function(text.var, bracket = "all", with = FALSE, merge = TRUE){
 #' 
 #' \code{genX} - Apply general chunk extraction to character vectors.
 #' 
-#' @param left A vector of charcter or numeric symbols as the left edge to 
+#' @param left A vector of character or numeric symbols as the left edge to 
 #' extract.
-#' @param right A vector of charcter or numeric symbols as the right edge to 
+#' @param right A vector of character or numeric symbols as the right edge to 
 #' extract.
 #' @rdname bracketX
 #' @return \code{genXtract} - returns a vector of text with checks removed.

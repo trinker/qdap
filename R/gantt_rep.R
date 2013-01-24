@@ -15,7 +15,7 @@
 #' @return Returns a data frame of start and end times by repeated measure and 
 #' grouping variable(s)
 #' @note For non repeated measures data/plotting use \code{gantt}; for a 
-#' conventient wrapper that takes text and generates plots use 
+#' convenient wrapper that takes text and generates plots use 
 #' \code{gantt_plot}; and for a flexible gantt plot that words with code matrix 
 #' functions (cm) use \code{gantt_wrap}.
 #' @seealso \code{\link[qdap]{gantt}},

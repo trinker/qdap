@@ -109,7 +109,7 @@
 \note{
   For non repeated measures data/plotting use \code{gantt};
   for repeated measures data output use \code{gantt_rep};
-  and for a conventient wrapper that takes text and
+  and for a convenient wrapper that takes text and
   generates plots use \code{gantt_plot}.
 }
 \examples{

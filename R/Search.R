@@ -5,7 +5,7 @@
 #' @param dataframe A dataframe object to search.
 #' @param term A character vector term to search for.
 #' @param column.name Optional column of the data frame to search (character 
-#' name or or integer index).
+#' name or integer index).
 #' @param max.distance Maximum distance allowed for a match. Expressed either as 
 #' integer, or as a fraction of the pattern length times the maximal 
 #' transformation cost (will be replaced by the smallest integer not less than 

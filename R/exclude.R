@@ -3,7 +3,7 @@
 #' Quickly exclude words from a word list
 #' 
 #' @param word.list A list of words/terms to exclude from.
-#' @param \dots A vector (character/numric) if element(s) to be excluded from 
+#' @param \dots A vector (character/numeric) if element(s) to be excluded from 
 #' the \code{word.list}.
 #' @return Returns a vector with the excluded terms removed.
 #' @export

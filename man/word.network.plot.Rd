@@ -53,7 +53,7 @@
   \item{label.colors}{A character vector of length one
   corresponding to the color of the labels.}
 
-  \item{layout}{layout types supported by igraph.  See
+  \item{layout}{Layout types supported by igraph.  See
   \code{\link[igraph]{layout}}.}
 
   \item{title.name}{The title of the plot.}

@@ -12,7 +12,7 @@
   characters removed.
 }
 \description{
-  Pre process data to remove escaped characters
+  Preprocess data to remove escaped characters
 }
 \examples{
 \dontrun{

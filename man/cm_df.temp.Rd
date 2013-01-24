@@ -17,7 +17,7 @@
   directory.}
 
   \item{file.name}{The name of the csv file.  If NULL
-  defaults to the dtaframe name.}
+  defaults to the dataframe name.}
 
   \item{transpose}{logical.  If TRUE transposes the
   dataframe so that the text is across the top.}
