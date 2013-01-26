@@ -20,10 +20,13 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' all_words(raj$dialogue, begins.with="re")
-#' all_words(raj$dialogue, "q")
+#' x1 <- all_words(raj$dialogue, begins.with="re")
+#' head(x1, 10)
+#' x2 <- all_words(raj$dialogue, "q")
+#' head(x2, 10)
 #' all_words(raj$dialogue, contains="conc")
-#' all_words(raj$dialogue)
+#' x3 <- all_words(raj$dialogue)
+#' head(x3, 10)
 #' }
 all_words <-
 function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE){

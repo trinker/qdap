@@ -92,7 +92,7 @@ bracketX(examp$text, "curly")
 bracketX(examp$text, c("square", "round"))
 bracketX(examp$text)
 
-examp
+
 bracketXtract(examp$text, "square")
 bracketXtract(examp$text, "curly")
 bracketXtract(examp$text, c("square", "round"))
@@ -102,12 +102,15 @@ bracketXtract(examp$text, with = TRUE)
 
 paste2(bracketXtract(examp$text, "curly"), " ")
 
-x <- c("Where is the /big dog#?", "I think he's @arunning@b with /little cat#.")
+x <- c("Where is the /big dog#?",
+    "I think he's @arunning@b with /little cat#.")
 genXtract(x, c("/", "@a"), c("#", "@b"))
-x <- c("Where is the L1big dogL2?", "I think he's 98running99 with L1little catL2.")
+
+x <- c("Where is the L1big dogL2?",
+    "I think he's 98running99 with L1little catL2.")
 genXtract(x, c("L1", 98), c("L2", 99))
 
-DATA$state
+DATA$state  #notice number 1 and 10
 genX(DATA$state, c("is", "we"), c("too", "on"))
 }
 }
@@ -120,8 +123,8 @@ genX(DATA$state, c("is", "we"), c("too", "on"))
 \seealso{
   \code{\link[base]{regex}}
 }
-\keyword{bracket,}
 \keyword{bracket-remove,}
+\keyword{bracket,}
 \keyword{curly-braces}
 \keyword{parenthesis,}
 

@@ -18,8 +18,10 @@
 }
 \examples{
 \dontrun{
-dat <- data.frame(matrix(sample(c(1:4, ""), 50, TRUE),
+set.seed(15)
+dat <- data.frame(matrix(sample(c(month.abb[1:4], ""), 50, TRUE),
     10, byrow = TRUE), stringsAsFactors = FALSE)
+
 dat
 blank2NA(dat)
 }

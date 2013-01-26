@@ -11,16 +11,17 @@
 #' @export
 #' @examples
 #' \dontrun{
+#' bag.o.words("I'm going home!")
+#' bag.o.words("I'm going home!", apostrophe.remove = TRUE)
+#' 
 #' bag.o.words(DATA$state)
 #' by(DATA$state, DATA$person, bag.o.words)
 #' lapply(DATA$state,  bag.o.words)
-#' bag.o.words("I'm going home!", apostrophe.remove = FALSE)
 #' 
-#' DATA 
 #' breaker(DATA$state)
 #' by(DATA$state, DATA$person, breaker)
 #' lapply(DATA$state,  breaker)
-#'
+#' 
 #' word.split(c(NA, DATA$state))
 #' }
 bag.o.words <-

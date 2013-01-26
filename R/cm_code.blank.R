@@ -29,44 +29,51 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' foo <- list(
-#'     AA = qcv(terms='1:10'),
-#'     BB = qcv(terms='1:2, 3:10, 19'),
-#'     CC = qcv(terms='1:3, 5:6')
+##' foo <- list(
+#'     AA = qcv(terms="1:10"),
+#'     BB = qcv(terms="1:2, 3:10, 19"),
+#'     CC = qcv(terms="1:3, 5:6")
 #' )
 #' foo2  <- list(
-#'     AA = qcv(terms='4:8'),
-#'     BB = qcv(terms='1:4, 10:12'),
-#'     CC = qcv(terms='1, 11, 15:20'),
-#'     DD = qcv(terms='')
+#'     AA = qcv(terms="4:8"),
+#'     BB = qcv(terms="1:4, 10:12"),
+#'     CC = qcv(terms="1, 11, 15:20"),
+#'     DD = qcv(terms="")
 #' )
 #' 
-#' x <- cm_range2long(foo)
-#' z <- cm_range2long(foo, foo2, v.name="time")
-#' nots <- list(notAABB=qcv(AA, BB), notAACC=qcv(AA, CC), notBBCC=qcv(BB, CC))
-#' z <- cm_code.blank(z, nots, "time", overlap=0)
-#' z <- cm_code.blank(z, list(atleastAABBCC=qcv(AA, BB, CC)), "time", overlap=1)
-#' z <- cm_code.blank(z, list(AACC=qcv(AA, CC)), "time", overlap=FALSE)  #combined
-#' cm_code.blank(z, list(AACCnoAA=qcv(AACC, AA)), "time", overlap=1)     #remove the AA part
+#' (x <- cm_range2long(foo))
+#' (z <- cm_range2long(foo, foo2, v.name="time"))
+#' nots <- list(notAABB=qcv(AA, BB), notAACC=qcv(AA, CC), 
+#'     notBBCC=qcv(BB, CC))
+#' (z <- cm_code.blank(z, nots, "time", overlap=0))
+#' (z <- cm_code.blank(z, list(atleastAABBCC=qcv(AA, BB, CC)), 
+#'     "time", overlap=1))
+#' (z <- cm_code.blank(z, list(AACC=qcv(AA, CC)), "time", 
+#'     overlap=FALSE))  #combined
+#' cm_code.blank(z, list(AACCnoAA=qcv(AACC, AA)), "time", 
+#'     overlap=1)  #remove the AA part
 #' 
 #' #WITH cm_time2long
 #' x <- list(
 #'     transcript_time_span = qcv(00:00 - 1:12:00),
 #'     A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),
-#'     B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00, 1.12.00:1.19.01"),
+#'     B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00, 
+#'         1.12.00:1.19.01"),
 #'     C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
 #' )
 #' 
 #' y <- list(
 #'     transcript_time_span = qcv(00:00 - 1:12:00),
 #'     A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),
-#'     B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00, 1.12.00:1.19.01"),
+#'     B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00, 
+#'         1.12.00:1.19.01"),
 #'     C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
 #' )
 #' 
-#' dat <- cm_time2long(x, y)
-#' cm_code.blank(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)), 
+#' (dat <- cm_time2long(x, y))
+#' out <- cm_code.blank(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)), 
 #'     "variable", overlap=TRUE)
+#' head(out, 10)
 #' }
 cm_code.blank <- function(x2long.obj, combine.code.list, rm.var = NULL, overlap = TRUE) {
     NMS <- as.character(substitute(x2long.obj))

@@ -87,6 +87,6 @@ with(mraja1spl, question_type(dialogue, list(sex, fam.aff)))
 plot(x)
 }
 }
-\keyword{question,}
 \keyword{question-count}
+\keyword{question,}
 

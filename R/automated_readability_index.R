@@ -4,18 +4,19 @@
 #' transcript(s) by zero or more grouping variable(s).
 #' 
 #' @param text.var The text variable.
-#' @param grouping.var The grouping variables.  Default NULL generates one word 
-#' list for all text.  Also takes a single grouping variable or a list of 1 or 
-#' more grouping variables.
+#' @param grouping.var The grouping variables.  Default NULL generates one 
+#' output for all text.  Also takes a single grouping variable or a list of 1 
+#' or more grouping variables.
 #' @param rm.incomplete logical.  If TRUE removes incomplete sentences from the 
 #' analysis.
-#' @param \ldots Other arguments passed to \code{endf}.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{endf}}.
 #' @return Returns a dataframe with selected readability statistic by grouping 
-#' variable(s).  The \code{frey} function returns a graphic representation of 
-#' the readability.
+#' variable(s).  The \code{\link[qdap]{frey}} function returns a graphic representation of 
+#' the readability as well as a list of two dataframe: 1) \code{SENTENCES_USED} 
+#' and 2) \code{SENTENCE_AVERAGES}.
 #' @rdname Readability
-#' @note Many of the indices (e.g. Automated Readability Index) are derived from 
-#' word difficulty (letters per word) and sentence difficulty 
+#' @section Warning: Many of the indices (e.g. Automated Readability Index) 
+#' are derived from word difficulty (letters per word) and sentence difficulty 
 #' (words per sentence).  If you have not run the sentSplit function on your 
 #' data the results may not be accurate.
 #' @references Coleman, M., & Liau, T. L. (1975). A computer readability formula 
@@ -37,26 +38,34 @@
 #' Flesch-Kincaid, Fry, Linsear Write
 #' @export
 #' @examples
-#' \dontrun{
-#' with(rajSPLIT, automated_readability_index(dialogue, list(person, act)))
-#' with(rajSPLIT, automated_readability_index(dialogue, list(sex, fam.aff)))
+#' AR1 <- with(rajSPLIT, automated_readability_index(dialogue, list(person, act)))
+#' htruncdf(AR1,, 15)
+#' AR2 <- with(rajSPLIT, automated_readability_index(dialogue, list(sex, fam.aff)))
+#' htruncdf(AR2,, 15)
 #' 
-#' with(rajSPLIT, coleman_liau(dialogue, list(person, act)))
-#' with(rajSPLIT, coleman_liau(dialogue, list(sex, fam.aff)))
+#' CL1 <- with(rajSPLIT, coleman_liau(dialogue, list(person, act)))
+#' head(CL1)
+#' CL2 <- with(rajSPLIT, coleman_liau(dialogue, list(sex, fam.aff)))
+#' head(CL2)
 #' 
-#' with(rajSPLIT, SMOG(dialogue, list(person, act)))
-#' with(rajSPLIT, SMOG(dialogue, list(sex, fam.aff)))
+#' SM1 <- with(rajSPLIT, SMOG(dialogue, list(person, act)))
+#' head(SM1)
+#' SM2 <- with(rajSPLIT, SMOG(dialogue, list(sex, fam.aff)))
+#' head(SM2)
 #' 
-#' with(rajSPLIT, flesch_kincaid(dialogue, list(person, act)))
-#' with(rajSPLIT, flesch_kincaid(dialogue, list(sex, fam.aff)))
+#' FL1 <- with(rajSPLIT, flesch_kincaid(dialogue, list(person, act)))
+#' head(FL1)
+#' FL2 <-  with(rajSPLIT, flesch_kincaid(dialogue, list(sex, fam.aff)))
+#' head(FL2)
 #' 
-#' (x <- with(rajSPLIT, fry(dialogue, list(sex, fam.aff))))
-#' names(x)
-#' with(rajSPLIT, fry(dialogue, list(sex, fam.aff), labels = "click"))
+#' FR <- with(rajSPLIT, fry(dialogue, list(sex, fam.aff)))
+#' htruncdf(FR$SENTENCES_USED)
+#' head(FR$SENTENCE_AVERAGES)
 #' 
-#' with(rajSPLIT, linsear_write(dialogue, list(person, act)))
-#' with(rajSPLIT, linsear_write(dialogue, list(sex, fam.aff)))
-#' }
+#' LW1 <- with(rajSPLIT, linsear_write(dialogue, list(person, act)))
+#' head(LW1)
+#' LW2 <- with(rajSPLIT, linsear_write(dialogue, list(sex, fam.aff)))
+#' head(LW2)
 automated_readability_index <-
 function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     if(is.null(grouping.var)) {
@@ -104,7 +113,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         ari(tse = sentence.count, tc = character.count, tw = word.count)), 
         digits = 1)
     names(DF2)[1] <- G
-   DF2
+    DF2
 }
 
 #' Coleman Liau Readability

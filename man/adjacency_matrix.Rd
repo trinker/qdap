@@ -9,7 +9,7 @@
 }
 \arguments{
   \item{matrix.obj}{A matrix object, preferably, of the
-  class "termco" or generated from \code{termco},
+  class "termco" generated from \code{termco},
   \code{termco.d} or \code{termco.c}.}
 }
 \value{
@@ -17,22 +17,26 @@
 }
 \description{
   Takes a matrix (wfm) or termco object and generates an
-  adjacency matrix for use with \code{igraph}.
+  adjacency matrix for use with the
+  \href{http://igraph.sourceforge.net/}{igraph} package.
 }
 \examples{
 \dontrun{
+words <- c(" you", " the", "it", "oo")
+Terms <- with(DATA, termco(state, list(sex, adult), words))
+Terms
+adjacency_matrix(Terms)
+
 wordLIST <- c(" montague", " capulet", " court", " marry")
-(raj.termco <- with(raj.act.1, termco(dialogue, person,
-    wordLIST, ignore.case = TRUE)))
-(raj.adjmat <- adjmat(raj.termco))
+raj.termco <- with(raj.act.1, termco(dialogue, person, wordLIST))
+raj.adjmat <- adjmat(raj.termco)
 names(raj.adjmat)  #see what's available from the adjacency_matrix object
 library(igraph)
 g <- graph.adjacency(raj.adjmat$adjacency, weighted=TRUE, mode ="undirected")
 g <- simplify(g)
 V(g)$label <- V(g)$name
 V(g)$degree <- degree(g)
-layout1 <- layout.auto(g)
-plot(g, layout=layout1)
+plot(g, layout=layout.auto(g))
 }
 }
 \seealso{
