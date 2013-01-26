@@ -9,11 +9,18 @@
 }
 \arguments{
   \item{matrix.obj}{A matrix object, preferably, of the
-  class "termco" generated from \code{termco},
-  \code{termco.d} or \code{termco.c}.}
+  class "termco" generated from \code{\link[qdap]{termco}},
+  \code{\link[qdap]{termco.d}} or
+  \code{\link[qdap]{termco.c}}.}
 }
 \value{
-  Returns an adjacency matrix.
+  Returns list: \item{boolean}{A boolean matrix}
+  \item{adjacency}{An adjacency matrix.  Diagonals are the
+  total (sum) number of occurrences a variable had}
+  \item{shared}{An adjacency matrix with no diagonal and
+  the upper triangle replaced with NA} \item{sum}{The
+  diagonal of the adjacency matrix; the total (sum) number
+  of occurrences a variable had}
 }
 \description{
   Takes a matrix (wfm) or termco object and generates an
@@ -42,6 +49,6 @@ plot(g, layout=layout.auto(g))
 \seealso{
   \code{\link[stats]{dist}}
 }
-\keyword{adjacency}
-\keyword{matrix}
+\keyword{adjacency-matrix,}
+\keyword{boolean-matrix}
 

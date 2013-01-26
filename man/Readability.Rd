@@ -36,7 +36,8 @@
   \item{rm.incomplete}{logical.  If TRUE removes incomplete
   sentences from the analysis.}
 
-  \item{\ldots}{Other arguments passed to \code{endf}.}
+  \item{\ldots}{Other arguments passed to
+  \code{\link[qdap]{endf}}.}
 
   \item{output}{A character vector character string
   indicating output type. One of "valid" (default and
@@ -49,10 +50,10 @@
 }
 \value{
   Returns a dataframe with selected readability statistic
-  by grouping variable(s).  The \code{frey} function
-  returns a graphic representation of the readability as
-  well as a list of two dataframe: 1) \code{SENTENCES_USED}
-  and 2) \code{SENTENCE_AVERAGES}.
+  by grouping variable(s).  The \code{\link[qdap]{frey}}
+  function returns a graphic representation of the
+  readability as well as a list of two dataframe: 1)
+  \code{SENTENCES_USED} and 2) \code{SENTENCE_AVERAGES}.
 }
 \description{
   \code{automated_readability_index} - Apply Automated

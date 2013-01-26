@@ -9,7 +9,7 @@
 #'  \code{\link[qdap]{termco.c}}.
 #' @return Returns list:
 #' \item{boolean}{A boolean matrix}
-#' \item{adjacency{An adjacency matrix.  Diagonals are the total (sum) number of 
+#' \item{adjacency}{An adjacency matrix.  Diagonals are the total (sum) number of 
 #' occurrences a variable had}
 #' \item{shared}{An adjacency matrix with no diagonal and the upper triangle 
 #' replaced with NA}

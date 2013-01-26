@@ -23,7 +23,9 @@
   (width).}
 
   \item{\ldots}{Other arguments passed to
-  \code{\link[qdap]{htruncdf}}.}
+  \code{\link[qdap]{htruncdf}} (\code{\link[qdap]{qview}})
+  or \code{\link[utils]{head}}
+  (\code{\link[qdap]{htruncdf}}).}
 }
 \value{
   \code{htrundf} - returns n number of rows of a truncated

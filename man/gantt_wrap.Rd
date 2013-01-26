@@ -107,27 +107,30 @@
   A ggplot2 wrapper that produces a Gantt plot
 }
 \note{
-  For non repeated measures data/plotting use \code{gantt};
-  for repeated measures data output use \code{gantt_rep};
-  and for a convenient wrapper that takes text and
-  generates plots use \code{gantt_plot}.
+  For non repeated measures data/plotting use
+  \code{\link[qdap]{gantt}}; for repeated measures data
+  output use \code{\link[qdap]{gantt_rep}}; and for a
+  convenient wrapper that takes text and generates plots
+  use \code{\link[qdap]{gantt_plot}}.
 }
 \examples{
 \dontrun{
-(dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex),
+dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex),
     units = "sentences", plot.colors = 'black', sums = TRUE,
-    col.sep = "_")$gantt.df)
+    col.sep = "_")$gantt.df
+htruncdf(dat)
 gantt_wrap(dat, fam.aff_sex, title = "Gantt Plot")
 dat$codes <- sample(LETTERS[1:3], nrow(dat), TRUE)
 gantt_wrap(dat, fam.aff_sex, fill.var = "codes", legend.position = "bottom")
 
-(dat3 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex),
-    units = "words", col.sep = "_")))
-x <- gantt_wrap(dat3, fam.aff_sex, facet.vars = "act",
+dat2 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex),
+    units = "words", col.sep = "_"))
+htruncdf(dat2)
+x <- gantt_wrap(dat2, fam.aff_sex, facet.vars = "act",
     title = "Repeated Measures Gantt Plot")
 
 library(ggplot2); library(scales); library(RColorBrewer)
-x + scale_color_manual(values=rep("black", length(levels(dat3$fam.aff_sex))))
+x + scale_color_manual(values=rep("black", length(levels(dat2$fam.aff_sex))))
 }
 }
 \author{
