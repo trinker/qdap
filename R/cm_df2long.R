@@ -1,7 +1,7 @@
 #' Transform Codes to Start-End Durations
 #' 
-#' Transforms the range coding structure(s) from \code{cm_df.temp} (in list 
-#' format) into a data frame of start and end durations in long format.
+#' Transforms the range coding structure(s) from \code{\link[qdap]{cm_df.temp}}
+#' (in list format) into a data frame of start and end durations in long format.
 #' 
 #' @param df.temp.obj A character vector of names of object(s) created by 
 #' cm_df.temp, a list of cm_df.temp created objects or a data frame created by 
@@ -29,11 +29,18 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' #' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
+#' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
 #' x1 <- cm_df.temp(DATA, "state", codes)
-#' cm_df2long(x1,  code.vars = codes)
+#' head(x1)
+#' 
+#' #empty code matrix
+#' out1 <- cm_df2long(x1,  code.vars = codes)
+#' head(out1, 15)
+#' 
+#' #fill it randomly
 #' x1[, 7:14] <- lapply(7:14,  function(i) sample(0:1, nrow(x1), TRUE))
-#' cm_df2long(x1,  code.vars = codes)
+#' out2 <- cm_df2long(x1,  code.vars = codes)
+#' head(out2, 15)
 #' }
 cm_df2long <-
 function(df.temp.obj, v.name = "variable", list.var = TRUE, code.vars = NULL, 

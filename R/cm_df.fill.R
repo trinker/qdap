@@ -1,4 +1,4 @@
-#' Range Coding of a Code Matrix
+#' Range Coding
 #' 
 #' Allows range coding of words for efficient coding.
 #' 
@@ -12,8 +12,16 @@
 #' @param transform logical.  If TRUE the words are located across the top of 
 #' dataframe.
 #' @return Generates a dummy coded dataframe.
+#' @details After ranging coding transcripts via (\code{\link{cm_df.temp}}) or 
+#' the blank code matrix via (\code{\link{cm_df.transcript}}),\code{cm_df.fill} 
+#' is used to create a matrix of what codes occured at what words (a filled code 
+#' matrix).  A list of range codes (word number spans) is fed to 
+#' \code{cm_df.fill}.  A single number indicates a single word with that coding 
+#' scheme where as the colon is used as a separator that indicates the range of 
+#' words from x to y are that particular code.
 #' @seealso 
 #' \code{\link{cm_df.temp}},
+#' \code{\link{cm_df.transcript}},
 #' \code{\link{cm_df2long}}
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: 
 #' Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
@@ -23,6 +31,7 @@
 #' \dontrun{
 #' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
 #' X <- cm_df.temp(DATA, "state", codes)
+#' head(X, 10)
 #' 
 #' #recommended structure
 #' cds1 <- list(
@@ -35,7 +44,9 @@
 #'      azx=1:30, 
 #'      mmm=5
 #' )
-#' cm_df.fill(X, cds1)
+#' 
+#' out1 <- cm_df.fill(X, cds1)
+#' head(out1)
 #' 
 #' #recommended structure
 #' cds2 <- list(
@@ -44,7 +55,8 @@
 #'     azx=1:30, 
 #'     mmm=5
 #' )
-#' cm_df.fill(X, cds2)
+#' out2 <- cm_df.fill(X, cds2)
+#' head(out2)
 #' }
 cm_df.fill <-
 function(dataframe, ranges, value = 1, text.var = NULL, code.vars = NULL, 

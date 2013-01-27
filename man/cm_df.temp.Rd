@@ -45,10 +45,14 @@
 \examples{
 \dontrun{
 codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
-cm_df.temp(DATA, "state", codes)
-cm_df.temp(DATA, "state", codes, transpose = TRUE)
-head(cm_df.temp(raj.act.1, "dialogue", codes))
-cm_df.temp(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
+out1 <- cm_df.temp(DATA, "state", codes)
+head(out1, 15)
+out2 <- cm_df.temp(DATA, "state", codes, transpose = TRUE)
+out2[, 1:10]
+out3 <- cm_df.temp(raj.act.1, "dialogue", codes)
+head(out3, 15)
+out4 <- cm_df.temp(raj.act.1, "dialogue", codes, transpose = TRUE)
+out4 [, 1:8]
 }
 }
 \references{
@@ -57,7 +61,8 @@ cm_df.temp(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
   Oaks, CA: SAGE Publications.
 }
 \seealso{
-  \code{\link{cm_range2long}}, \code{\link{cm_df.fill}}
+  \code{\link{cm_range2long}},
+  \code{\link{cm_df.transcript}}, \code{\link{cm_df.fill}}
 }
 \keyword{coding}
 

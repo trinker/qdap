@@ -15,13 +15,14 @@
 #' @param strip logical.  If TRUE all punctuation is removed.
 #' @param \ldots Other arguments passed to strip.
 #' @return Generates a dataframe, and optional csv file, of individual words 
-#' while maintaining demographic information.  If a vector of codes is provided the 
-#' outcome is a matrix of words used by codes filled with zeros.  This dataframe 
-#' is useful for dummy coded (1-yes code exists; 2-no it does not) 
+#' while maintaining demographic information.  If a vector of codes is provided 
+#' the outcome is a matrix of words used by codes filled with zeros.  This 
+#' dataframe is useful for dummy coded (1-yes code exists; 2-no it does not) 
 #' representation of data and can be used for visualizations and statistical 
 #' analysis.
 #' @seealso 
 #' \code{\link{cm_range2long}},
+#' \code{\link{cm_df.transcript}},
 #' \code{\link{cm_df.fill}}
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: 
 #' Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
@@ -30,10 +31,14 @@
 #' @examples
 #' \dontrun{
 #' codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
-#' cm_df.temp(DATA, "state", codes)
-#' cm_df.temp(DATA, "state", codes, transpose = TRUE)
-#' head(cm_df.temp(raj.act.1, "dialogue", codes))
-#' cm_df.temp(raj.act.1, "dialogue", codes, transpose = TRUE)[, 1:9]
+#' out1 <- cm_df.temp(DATA, "state", codes)
+#' head(out1, 15)
+#' out2 <- cm_df.temp(DATA, "state", codes, transpose = TRUE)
+#' out2[, 1:10]
+#' out3 <- cm_df.temp(raj.act.1, "dialogue", codes)
+#' head(out3, 15)
+#' out4 <- cm_df.temp(raj.act.1, "dialogue", codes, transpose = TRUE)
+#' out4 [, 1:8]
 #' }
 cm_df.temp <- function(dataframe, text.var, codes = NULL, csv = TRUE, 
     file.name = NULL, transpose = FALSE, strip =FALSE, ...){

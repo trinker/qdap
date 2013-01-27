@@ -32,23 +32,24 @@
 \examples{
 \dontrun{
 foo <- list(
-    AA = qcv(terms='1'),
-    BB = qcv(terms='1:2, 3:10, 19'),
-    CC = qcv(terms='1:3, 5:6')
+    AA = qcv(terms="1:10"),
+    BB = qcv(terms="1:2, 3:10, 19"),
+    CC = qcv(terms="1:3, 5:6")
 )
 
 foo2  <- list(
-    AA = qcv(terms='4'),
-    BB = qcv(terms='10:12'),
-    CC = qcv(terms='1, 11, 15:20'),
-    DD = qcv(terms='')
+    AA = qcv(terms="4:8"),
+    BB = qcv(terms="1:4, 10:12"),
+    CC = qcv(terms="1, 11, 15:20"),
+    DD = qcv(terms="")
 )
 
-x <- cm_range2long(foo)
+(x <- cm_range2long(foo))
 cm_long2dummy(x)
 
-z <- cm_range2long(foo, foo2, v.name="time")
-cm_long2dummy(z, "time")
+(z <- cm_range2long(foo, foo2, v.name="time"))
+out <- cm_long2dummy(z, "time")
+lapply(out, head)
 }
 }
 \seealso{

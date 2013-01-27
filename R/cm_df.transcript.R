@@ -1,7 +1,7 @@
 #' Transcript With Word Number
 #' 
 #' Output a transcript with word  number/index above for easy input back into 
-#' qdap after coding.
+#' \href{http://trinker.github.com/qdap/}{qdap after coding.}
 #' 
 #' @param text.var The text variable.
 #' @param grouping.var The grouping variables.  Default NULL generates one word 
@@ -36,10 +36,10 @@
 #' with(DATA, cm_df.transcript(state, person))
 #' DATA <- qdap::DATA
 #' 
-#' with(mraja1spl, cm_df.transcript(dialogue, list(person)))
-#' with(mraja1spl, cm_df.transcript(dialogue, list(sex, fam.aff, died)))
-#' with(mraja1spl, cm_df.transcript(dialogue, list(person), file="foo.doc"))
-#' # delete("foo.doc")   #delete the file just created
+#' ##  with(mraja1spl, cm_df.transcript(dialogue, list(person)))
+#' ##  with(mraja1spl, cm_df.transcript(dialogue, list(sex, fam.aff, died)))
+#' ##  with(mraja1spl, cm_df.transcript(dialogue, list(person), file="foo.doc"))
+#' ##  delete("foo.doc")   #delete the file just created
 #' }
 cm_df.transcript <-
 function(text.var, grouping.var, file = NULL, indent = 4, width = 70, ...){

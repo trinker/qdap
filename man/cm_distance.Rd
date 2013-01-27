@@ -60,16 +60,18 @@
 \examples{
 \dontrun{
 foo <- list(
-    AA = qcv(terms='02:03, 05'),
-    BB = qcv(terms='1:2, 3:10'),
-    CC = qcv(terms='1:9, 100:150')
+    AA = qcv(terms="02:03, 05"),
+    BB = qcv(terms="1:2, 3:10"),
+    CC = qcv(terms="1:9, 100:150")
 )
+
 foo2  <- list(
-    AA = qcv(terms='40'),
-    BB = qcv(terms='50:90'),
-    CC = qcv(terms='60:90, 100:120, 150'),
-    DD = qcv(terms='')
+    AA = qcv(terms="40"),
+    BB = qcv(terms="50:90"),
+    CC = qcv(terms="60:90, 100:120, 150"),
+    DD = qcv(terms="")
 )
+
 (dat <- cm_range2long(foo, foo2, v.name = "time"))
 (out <- cm_distance(dat, time.var = "time", causal=TRUE))
 names(out)
@@ -78,12 +80,14 @@ out$foo2
 #========================================
 x <- list(
     transcript_time_span = qcv(00:00 - 1:12:00),
-    A = qcv(terms = "2.40:3.00, 6.32:7.00, 9.00, 10.00:11.00, 59.56"),
+    A = qcv(terms = "2.40:3.00, 6.32:7.00, 9.00,
+        10.00:11.00, 59.56"),
     B = qcv(terms = "3.01:3.02, 5.01,  19.00, 1.12.00:1.19.01"),
     C = qcv(terms = "2.40:3.00, 5.01, 6.32:7.00, 9.00, 17.01")
 )
-dat <- cm_time2long(x)
-gantt_wrap(dat, "code", border.color = "black", border.size = 5, sig.dig.line.freq = -2)
+(dat <- cm_time2long(x))
+gantt_wrap(dat, "code", border.color = "black", border.size = 5,
+    sig.dig.line.freq = -2)
 (a <- cm_distance(dat))
 names(a)
 names(a$dat)

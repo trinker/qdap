@@ -1,4 +1,4 @@
-#currently not being exported
+##currently not being exported
 # Debug Range Coding
 # 
 # Debug a list of range codes for cm_range2long

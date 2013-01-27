@@ -1,6 +1,6 @@
 \name{cm_df.fill}
 \alias{cm_df.fill}
-\title{Range Coding of a Code Matrix}
+\title{Range Coding}
 \usage{
   cm_df.fill(dataframe, ranges, value = 1, text.var = NULL,
     code.vars = NULL, transform = FALSE)
@@ -28,10 +28,23 @@
 \description{
   Allows range coding of words for efficient coding.
 }
+\details{
+  After ranging coding transcripts via
+  (\code{\link{cm_df.temp}}) or the blank code matrix via
+  (\code{\link{cm_df.transcript}}),\code{cm_df.fill} is
+  used to create a matrix of what codes occured at what
+  words (a filled code matrix).  A list of range codes
+  (word number spans) is fed to \code{cm_df.fill}.  A
+  single number indicates a single word with that coding
+  scheme where as the colon is used as a separator that
+  indicates the range of words from x to y are that
+  particular code.
+}
 \examples{
 \dontrun{
 codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
 X <- cm_df.temp(DATA, "state", codes)
+head(X, 10)
 
 #recommended structure
 cds1 <- list(
@@ -44,7 +57,9 @@ cds1 <- list(
      azx=1:30,
      mmm=5
 )
-cm_df.fill(X, cds1)
+
+out1 <- cm_df.fill(X, cds1)
+head(out1)
 
 #recommended structure
 cds2 <- list(
@@ -53,7 +68,8 @@ cds2 <- list(
     azx=1:30,
     mmm=5
 )
-cm_df.fill(X, cds2)
+out2 <- cm_df.fill(X, cds2)
+head(out2)
 }
 }
 \references{
@@ -62,7 +78,8 @@ cm_df.fill(X, cds2)
   Oaks, CA: SAGE Publications.
 }
 \seealso{
-  \code{\link{cm_df.temp}}, \code{\link{cm_df2long}}
+  \code{\link{cm_df.temp}}, \code{\link{cm_df.transcript}},
+  \code{\link{cm_df2long}}
 }
 \keyword{coding}
 

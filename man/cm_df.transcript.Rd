@@ -32,7 +32,9 @@
 }
 \description{
   Output a transcript with word number/index above for easy
-  input back into qdap after coding.
+  input back into
+  \href{http://trinker.github.com/qdap/}{qdap after
+  coding.}
 }
 \note{
   It is recommended that the researcher actually codes on
@@ -51,10 +53,10 @@ DATA$state <- mgsub("be certain", "be~~certain", DATA$state, fixed = TRUE)
 with(DATA, cm_df.transcript(state, person))
 DATA <- qdap::DATA
 
-with(mraja1spl, cm_df.transcript(dialogue, list(person)))
-with(mraja1spl, cm_df.transcript(dialogue, list(sex, fam.aff, died)))
-with(mraja1spl, cm_df.transcript(dialogue, list(person), file="foo.doc"))
-# delete("foo.doc")   #delete the file just created
+##  with(mraja1spl, cm_df.transcript(dialogue, list(person)))
+##  with(mraja1spl, cm_df.transcript(dialogue, list(sex, fam.aff, died)))
+##  with(mraja1spl, cm_df.transcript(dialogue, list(person), file="foo.doc"))
+##  delete("foo.doc")   #delete the file just created
 }
 }
 \author{
