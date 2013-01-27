@@ -8,10 +8,10 @@
 #' @param \ldots The name(s) of the folder to be created.  If both \ldots and
 #' \code{folder.name} are NULL creates a file in the working directory with the 
 #' creation date and time stamp.
-#' @param folder.name The name(s) of the folder to be created.  Default NULL 
-#' (if \ldots is NULL too) creates a file in the working directory with the 
-#' creation date and time stamp.  Use this argument only if the directory names 
-#' have spaces within them.
+#' @param folder.name A character vector of the name(s) of the folder to be 
+#' created.  Default NULL (if \ldots is NULL too) creates a file in the working 
+#' directory with the creation date and time stamp.  Use this argument only if 
+#' the directory names contain spaces.
 #' @return \code{delete} permanently removes a file/directory.
 #' @seealso  \code{\link[base]{unlink}}, 
 #' \code{\link[base]{file.remove}}, 
@@ -50,7 +50,7 @@ folder <- function(..., folder.name = NULL) {
     if (!is.null(folder.name)) {
         x <- strsplit(terms, split = split)
     } else {
-        x <- substitute(...())
+        x <- folder.name
     }
     x <- unblanker(scrubber(unlist(lapply(x, function(y) {
         as.character(y)}))))

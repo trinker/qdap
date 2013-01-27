@@ -15,7 +15,7 @@
   indicating end time.}
 
   \item{file}{A connection, or a character string naming
-  the file to print to (.txt is recommended).}
+  the file to print to (.txt or .doc is recommended).}
 }
 \description{
   Generates a time span coding sheet and coding format
@@ -23,13 +23,15 @@
 }
 \examples{
 \dontrun{
-cm_time.temp(qcv(AA, BB, CC), ":30", "7:40", file = "foo.txt")
-# delete("foo.txt")
+## cm_time.temp2(qcv(AA, BB, CC), ":30", "7:40", file = "foo.txt")
+## delete("foo.txt")
+cm_time.temp2(qcv(AA, BB, CC), ":30", "7:40")
+
 x <- list(
-    transcript_time_span = qcv(terms='00:00 - 1:12:00'),
-    A = qcv(terms='2.40:3.00, 5.01, 6.52:7.00, 9.00'),
-    B = qcv(terms='2.40, 3.01:3.02, 5.01, 6.52:7.00, 9.00, 1.12.00:1.19.01'),
-    C = qcv(terms='2.40:3.00, 5.01, 6.52:7.00, 9.00, 17.01')
+    transcript_time_span = qcv(terms="00:00 - 1:12:00"),
+    A = qcv(terms="2.40:3.00, 5.01, 6.52:7.00, 9.00"),
+    B = qcv(terms="2.40, 3.01:3.02, 5.01, 6.52:7.00, 9.00, 1.12.00:1.19.01"),
+    C = qcv(terms="2.40:3.00, 5.01, 6.52:7.00, 9.00, 17.01")
 )
 cm_time2long(x)
 cm_time.temp(qcv(AA, BB, CC))

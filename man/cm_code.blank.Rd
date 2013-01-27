@@ -31,11 +31,11 @@
   Transform codes with any binary operator combination.
 }
 \note{
-  For most jobs \code{cm_code.transform} will work.  This
-  adds a bit of flexibility in exclusion and partial
-  matching.  The code column must be named \code{"code"}
-  and your start and end columns must be named
-  \code{"start"} and \code{"end"}.
+  For most jobs \code{\link[qdap]{cm_code.transform}} will
+  work.  This adds a bit of flexibility in exclusion and
+  partial matching.  The code column must be named
+  \code{"code"} and your start and end columns must be
+  named \code{"start"} and \code{"end"}.
 }
 \examples{
 \dontrun{

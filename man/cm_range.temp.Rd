@@ -5,10 +5,10 @@
   cm_range.temp(codes, file = NULL)
 }
 \arguments{
-  \item{codes}{List of codes.}
+  \item{codes}{Character vector of codes.}
 
   \item{file}{A connection, or a character string naming
-  the file to print to (.txt is recommended).}
+  the file to print to (.txt or .doc is recommended).}
 }
 \description{
   Generates a range coding sheet for coding words.
