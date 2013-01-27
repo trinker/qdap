@@ -11,24 +11,32 @@
   \code{paste2}.}
 
   \item{name.sep}{Name separator used in the column
-  (internal use within \code{colsplit2df}).}
+  (generally for internal use with
+  \code{\link[qdap]{colsplit2df}}).}
 }
 \value{
   Returns a dataframe of split columns.
 }
 \description{
-  Separates a \code{paste2} column into separate columns.
+  Separates a \code{\link[qdap]{paste2}} column into
+  separate columns.
 }
 \examples{
 \dontrun{
-(foo <- paste2(CO2[, 1:3]))
-colSplit(foo)
-(bar <- paste2(mtcars[, 1:3], sep="|"))
-colSplit(bar, col.sep = "|")
+foo1 <- paste2(CO2[, 1:3])
+head(foo1, 12)
+bar1 <- colSplit(foo1)
+head(bar1, 10)
+
+foo2  <- paste2(mtcars[, 1:3], sep="|")
+head(foo2, 12)
+bar2 <- colSplit(foo2, col.sep = "|")
+head(bar2, 10)
 }
 }
 \seealso{
-  \code{\link{colsplit2df}}, \code{\link{paste2}}
+  \code{\link[qdap]{colsplit2df}},
+  \code{\link[qdap]{paste2}}
 }
 \keyword{column-split}
 

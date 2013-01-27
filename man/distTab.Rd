@@ -32,11 +32,16 @@
 distTab(rnorm(10000), 10)
 distTab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 distTab(CO2, 4)
-distTab(mtcars)
-distTab(mtcars, 4)
+
+out1 <- distTab(mtcars[, 1:3])
+ltruncdf(out1, 4)
+
+out2 <- distTab(mtcars[, 1:3], 4)
+ltruncdf(out2, 4)
 
 wdst <- with(mraja1spl, word_stats(dialogue, list(sex, fam.aff, died)))
-distTab(wdst$gts)
+out3 <- distTab(wdst$gts[1:4])
+ltruncdf(out3, 4)
 }
 }
 \seealso{

@@ -9,12 +9,13 @@
 #' more grouping variables.
 #' @param method Distance methods (see \code{\link[stats]{dist}} function).  
 #' If \code{"prop"} (the default; the result is 1 - \code{"binary"}.
-#' @param diag logical.  If True returns the diagonals of the matrix
-#' @param upper logical.  If True returns the upper triangle of the matrix
+#' @param diag logical.  If TRUE returns the diagonals of the matrix.  If 
+#' \code{method = "prop"} diagonals will not be returned.
+#' @param upper logical.  If TRUE returns the upper triangle of the matrix.
 #' @param p The power of the Minkowski distance
 #' @return Returns a matrix of dissimilarity values (the agreement between text).
 #' @seealso \code{\link[stats]{dist}}
-#' @keywords correlation, dissimilarity
+#' @keywords dissimilarity
 #' @export
 #' @examples 
 #' \dontrun{
@@ -45,6 +46,9 @@ function(text.var, grouping.var= NULL, method = "prop", diag = FALSE,
         meth.check <- TRUE
     }
     #leave this stats::dist b/c other packages use dist
+    if (meth.check) {
+        diag <- FALSE
+    }
     x <- stats::dist(wfm.object, method = method, diag = diag, upper = upper, 
         p = p)
     if (meth.check) {

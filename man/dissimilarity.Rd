@@ -18,11 +18,12 @@
   \code{\link[stats]{dist}} function). If \code{"prop"}
   (the default; the result is 1 - \code{"binary"}.}
 
-  \item{diag}{logical.  If True returns the diagonals of
-  the matrix}
+  \item{diag}{logical.  If TRUE returns the diagonals of
+  the matrix.  If \code{method = "prop"} diagonals will not
+  be returned.}
 
-  \item{upper}{logical.  If True returns the upper triangle
-  of the matrix}
+  \item{upper}{logical.  If TRUE returns the upper triangle
+  of the matrix.}
 
   \item{p}{The power of the Minkowski distance}
 }
@@ -43,6 +44,5 @@ with(DATA, dissimilarity(state, person, diag = TRUE))
 \seealso{
   \code{\link[stats]{dist}}
 }
-\keyword{correlation,}
 \keyword{dissimilarity}
 

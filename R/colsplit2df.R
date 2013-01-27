@@ -1,6 +1,7 @@
 #' Wrapper for colSplit that Returns Dataframe(s)
 #' 
-#' \code{colsplit2df} - Wrapper for \code{colSplit} that returns a dataframe.
+#' \code{colsplit2df} - Wrapper for \code{\link[qdap]{colSplit}} that returns a 
+#' dataframe.
 #' 
 #' @param dataframe A dataframe with a column that has been pasted together.
 #' @param splitcol The name of the column that has been pasted together.
@@ -11,7 +12,7 @@
 #' retained as well.
 #' @return \code{colsplit2df} - returns a dataframe with the \code{paste2} 
 #' column split into new columns.
-#' @seealso \code{\link{colSplit}}, 
+#' @seealso \code{\link[qdap]{colSplit}}, 
 #' \code{\link{paste2}}
 #' @rdname colsplit2df
 #' @keywords column-split
@@ -20,6 +21,7 @@
 #' \dontrun{
 #' CO2$`Plant&Type&Treatment` <- paste2(CO2[, 1:3])
 #' CO2 <- CO2[, -c(1:3)]
+#' head(CO2)
 #' head(colsplit2df(CO2, 3))
 #' head(colsplit2df(CO2, 3, qcv(A, B, C)))
 #' head(colsplit2df(CO2, 3, qcv(A, B, C), keep.orig=TRUE))
@@ -27,8 +29,9 @@
 #' CO2 <- datasets::CO2
 #' 
 #' (x <- question_type(DATA$state, list(DATA$sex, DATA$adult)))
-#' lapply(x, head)
-#' lcolsplit2df(x)
+#' ltruncdf(x)
+#' z <- lcolsplit2df(x)
+#' ltruncdf(z)
 #' }
 colsplit2df <- 
 function(dataframe, splitcol = 1, new.names = NULL, sep=".", 
@@ -84,12 +87,13 @@ function(dataframe, splitcol = 1, new.names = NULL, sep=".",
 #' \code{lcolsplit2df} - Wrapper for \code{colsplit2df} designed for qdap lists 
 #' that returns a list dataframes.
 #' @param qdap.list A qdap list object that contains dataframes with a leading 
-#' \code{paste2} column.
-#' @note \code{lcolsplit2df} is a convenience function that is less flexible 
-#' than \code{colsplit2df} but operates on multiple dataframes at once.
+#' \code{\link[qdap]{paste2}} column.
+#' @note \code{\link[qdap]{lcolsplit2df}} is a convenience function that is less 
+#' flexible than \code{\link[qdap]{colsplit2df}} but operates on multiple 
+#' dataframes at once.
 #' @section Warning: This will strip the class of the qdap object.
 #' @return \code{lcolsplit2df} - returns a list of dataframes with the 
-#' \code{paste2} column split into new columns.
+#' \code{\link[qdap]{paste2}} column split into new columns.
 #' @rdname colsplit2df
 #' @export
 lcolsplit2df <- 

@@ -9,9 +9,9 @@
 #' \code{folder.name} are NULL creates a file in the working directory with the 
 #' creation date and time stamp.
 #' @param folder.name A character vector of the name(s) of the folder to be 
-#' created.  Default NULL (if \ldots is NULL too) creates a file in the working 
-#' directory with the creation date and time stamp.  Use this argument only if 
-#' the directory names contain spaces.
+#' created.  Default NULL (if the \ldots  is NULL too) creates a file in the 
+#' working directory with the creation date and time stamp.  Use this argument 
+#' only if the directory names contain spaces.
 #' @return \code{delete} permanently removes a file/directory.
 #' @seealso  \code{\link[base]{unlink}}, 
 #' \code{\link[base]{file.remove}}, 

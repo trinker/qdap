@@ -18,7 +18,7 @@
   time stamp.}
 
   \item{folder.name}{A character vector of the name(s) of
-  the folder to be created.  Default NULL (if \ldots is
+  the folder to be created.  Default NULL (if the \ldots is
   NULL too) creates a file in the working directory with
   the creation date and time stamp.  Use this argument only
   if the directory names contain spaces.}

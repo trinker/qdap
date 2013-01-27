@@ -1,4 +1,4 @@
-#Used in sm_df.fill  not currently exported
+#Used in cm_df.fill  not currently exported
 cm_df.transform <-
 function(dataframe, text.var, code.vars = NULL) {
     DF <- data.frame(t(dataframe), stringsAsFactors = FALSE)
