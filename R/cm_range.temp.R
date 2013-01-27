@@ -13,8 +13,9 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' cm_range.temp(qcv(AA, BB, CC), file = "foo.txt")
-#' # delete("foo.txt")
+#' cm_range.temp(qcv(AA, BB, CC))
+#' ## cm_range.temp(qcv(AA, BB, CC), file = "foo.txt")
+#' ## delete("foo.txt")
 #' }
 cm_range.temp <-
 function(codes, file=NULL) {

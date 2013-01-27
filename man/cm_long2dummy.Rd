@@ -49,7 +49,7 @@ cm_long2dummy(x)
 
 (z <- cm_range2long(foo, foo2, v.name="time"))
 out <- cm_long2dummy(z, "time")
-lapply(out, head)
+ltruncdf(out)
 }
 }
 \seealso{

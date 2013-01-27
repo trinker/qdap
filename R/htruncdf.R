@@ -9,8 +9,8 @@
 #' @param end The last character to be displayed (width).
 #' @param begin The first character to be displayed (width).
 #' @param \ldots Other arguments passed to \code{\link[qdap]{htruncdf}} 
-#' (\code{\link[qdap]{qview}}) or \code{\link[utils]{head}} 
-#' (\code{\link[qdap]{htruncdf}}).
+#' (\code{\link[qdap]{qview}}; \code{\link[qdap]{ltruncdf}}) or 
+#' \code{\link[utils]{head}} (\code{\link[qdap]{htruncdf}}).
 #' @rdname data_viewing
 #' @return \code{htrundf} - returns n number of rows of a truncated dataframe.
 #' @seealso \code{\link[utils]{head}}
@@ -45,6 +45,20 @@ function(dataframe, end=10, begin=1) {
     DF
 }
 
+#' List of Dataframes Viewing
+#' 
+#' \code{ltruncdf} - Convenience function to view the head of a list of 
+#' truncated dataframes.
+#' 
+#' @param dat.list A list of data.frame objects.
+#' @return \code{ltruncdf} - returns a list of n number of rows of a truncated 
+#' dataframes.
+#' @rdname data_viewing
+#' @export
+ltruncdf <- function(dat.list, n = 6, width = 10, ...) {
+    lapply(dat.list, htruncdf, n = n, width = width, ...)
+}
+
 #' Summary Dataframe Viewing
 #' 
 #' \code{qview} - Convenience function to view a summary and head of a dataframe.
@@ -61,3 +75,4 @@ function(dataframe, ...){
     cat(paste(y, z, y, sep = "\n")); cat("\n")
     return(htruncdf(dataframe, ...))
 }
+

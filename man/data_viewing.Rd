@@ -1,5 +1,6 @@
 \name{htruncdf}
 \alias{htruncdf}
+\alias{ltruncdf}
 \alias{qview}
 \alias{truncdf}
 \title{Dataframe Viewing}
@@ -7,6 +8,8 @@
   htruncdf(dataframe, n = 10, width = 10, ...)
 
   truncdf(dataframe, end = 10, begin = 1)
+
+  ltruncdf(dat.list, n = 6, width = 10, ...)
 
   qview(dataframe, ...)
 }
@@ -23,15 +26,21 @@
   (width).}
 
   \item{\ldots}{Other arguments passed to
-  \code{\link[qdap]{htruncdf}} (\code{\link[qdap]{qview}})
-  or \code{\link[utils]{head}}
+  \code{\link[qdap]{htruncdf}} (\code{\link[qdap]{qview}};
+  \code{\link[qdap]{ltruncdf}}) or
+  \code{\link[utils]{head}}
   (\code{\link[qdap]{htruncdf}}).}
+
+  \item{dat.list}{A list of data.frame objects.}
 }
 \value{
   \code{htrundf} - returns n number of rows of a truncated
   dataframe.
 
   \code{trundf} - returns a truncated dataframe.
+
+  \code{ltruncdf} - returns a list of n number of rows of a
+  truncated dataframes.
 
   \code{qview} - returns a dataframe head with summary
   statistics.
@@ -42,6 +51,9 @@
 
   \code{truncdf} - Convenience function to view a truncated
   dataframe.
+
+  \code{ltruncdf} - Convenience function to view the head
+  of a list of truncated dataframes.
 
   \code{qview} - Convenience function to view a summary and
   head of a dataframe.
