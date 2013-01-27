@@ -6,8 +6,10 @@
     rm.var = NULL, overlap = TRUE)
 }
 \arguments{
-  \item{x2long.obj}{An object from \code{cm_range2long},
-  \code{cm_time2long} or \code{cm_df2long}.}
+  \item{x2long.obj}{An object from
+  \code{\link[qdap]{cm_range2long}},
+  \code{\link[qdap]{cm_time2long}} or
+  \code{\link[qdap]{cm_df2long}}.}
 
   \item{combine.code.list}{A list of named character
   vectors of at least two code column names to combine.}
@@ -31,9 +33,9 @@
 \note{
   For most jobs \code{cm_code.transform} will work.  This
   adds a bit of flexibility in exclusion and partial
-  matching.  The code column must be named code and your
-  start and end columns must be named \code{"start"} and
-  \code{"end"}.
+  matching.  The code column must be named \code{"code"}
+  and your start and end columns must be named
+  \code{"start"} and \code{"end"}.
 }
 \examples{
 \dontrun{
@@ -42,6 +44,7 @@ foo <- list(
     BB = qcv(terms="1:2, 3:10, 19"),
     CC = qcv(terms="1:3, 5:6")
 )
+
 foo2  <- list(
     AA = qcv(terms="4:8"),
     BB = qcv(terms="1:4, 10:12"),
@@ -49,18 +52,18 @@ foo2  <- list(
     DD = qcv(terms="")
 )
 
+
 (x <- cm_range2long(foo))
 (z <- cm_range2long(foo, foo2, v.name="time"))
-nots <- list(notAABB=qcv(AA, BB), notAACC=qcv(AA, CC),
-    notBBCC=qcv(BB, CC))
-(z <- cm_code.blank(z, nots, "time", overlap=0))
-(z <- cm_code.blank(z, list(atleastAABBCC=qcv(AA, BB, CC)),
-    "time", overlap=1))
-(z <- cm_code.blank(z, list(AACC=qcv(AA, CC)), "time",
-    overlap=FALSE))  #combined
-cm_code.blank(z, list(AACCnoAA=qcv(AACC, AA)), "time",
-    overlap=1)  #remove the AA part
-
+cm_code.transform(x, overlap.code.list=list(AB=qcv(AA, BB)))
+cm_code.transform(x, combine.code.list = list(ALL=qcv(AA, BB, CC)))
+cm_code.transform(x, overlap.code.list=list(AB=qcv(AA, BB)),
+    combine.code.list = list(ALL=qcv(AA, BB, CC)))
+overlaps <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
+cm_code.transform(z, overlaps, rm.var="time")
+out1 <- cm_code.transform(z, overlaps,
+   exclude.code.list=list(AABB_no_CC = qcv(AA, BB, CC)), rm.var="time")
+head(out1, 10)
 #WITH cm_time2long
 x <- list(
     transcript_time_span = qcv(00:00 - 1:12:00),
@@ -78,10 +81,12 @@ y <- list(
     C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
 )
 
-(dat <- cm_time2long(x, y))
-out <- cm_code.blank(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)),
-    "variable", overlap=TRUE)
-head(out, 10)
+dat <- cm_time2long(x, y)
+head(dat, 10)
+out2 <- cm_code.transform(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)),
+    list(S=qcv(A, B), T=qcv(B, C), U=qcv(A, B, C)),
+    list(ABnoC = qcv(A, B, C)), rm.var="variable")
+head(out2, 10)
 }
 }
 \seealso{

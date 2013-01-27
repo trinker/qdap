@@ -11,7 +11,7 @@
 #' analysis.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{endf}}.
 #' @return Returns a dataframe with selected readability statistic by grouping 
-#' variable(s).  The \code{\link[qdap]{frey}} function returns a graphic representation of 
+#' variable(s).  The \code{frey} function returns a graphic representation of 
 #' the readability as well as a list of two dataframe: 1) \code{SENTENCES_USED} 
 #' and 2) \code{SENTENCE_AVERAGES}.
 #' @rdname Readability

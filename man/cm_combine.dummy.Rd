@@ -6,7 +6,8 @@
     rm.var = "time", overlap = TRUE)
 }
 \arguments{
-  \item{cm.l2d.obj}{An object from \code{cm_long2dummy}.}
+  \item{cm.l2d.obj}{An object from
+  \code{\link[qdap]{cm_long2dummy}}.}
 
   \item{combine.code}{A list of named character vectors of
   at least two code column names to combine}
@@ -31,23 +32,24 @@
 \examples{
 \dontrun{
 foo <- list(
-    AA = qcv(terms='1:10'),
-    BB = qcv(terms='1:2, 3:10, 19'),
-    CC = qcv(terms='1:3, 5:6')
+    AA = qcv(terms="1:10"),
+    BB = qcv(terms="1:2, 3:10, 19"),
+    CC = qcv(terms="1:3, 5:6")
 )
 
 foo2  <- list(
-    AA = qcv(terms='4:8'),
-    BB = qcv(terms='10:12'),
-    CC = qcv(terms='1, 11, 15:20'),
-    DD = qcv(terms='')
+    AA = qcv(terms="4:8"),
+    BB = qcv(terms="1:4, 10:12"),
+    CC = qcv(terms="1, 11, 15:20"),
+    DD = qcv(terms="")
 )
 
-x <- cm_range2long(foo)
-D1 <- cm_long2dummy(x)
 
-z <- cm_range2long(foo, foo2, v.name="time")
-D2 <- cm_long2dummy(z, "time")
+(x <- cm_range2long(foo))
+(D1 <- cm_long2dummy(x))
+
+(z <- cm_range2long(foo, foo2, v.name="time"))
+(D2 <- cm_long2dummy(z, "time"))
 cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)))
 cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)), overlap="==1")
 cm_combine.dummy(D1, combine.code = list(AB=qcv(AA, BB)), overlap="!=1")

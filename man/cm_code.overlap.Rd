@@ -6,8 +6,10 @@
     rm.var = NULL)
 }
 \arguments{
-  \item{x2long.obj}{An object from \code{cm_range2long},
-  \code{cm_time2long} or \code{cm_df2long}.}
+  \item{x2long.obj}{An object from
+  \code{\link[qdap]{cm_range2long}},
+  \code{\link[qdap]{cm_time2long}} or
+  \code{\link[qdap]{cm_df2long}}.}
 
   \item{overlap.code.list}{A list of named character
   vectors of at least two code column names to aggregate
@@ -29,42 +31,48 @@
 \examples{
 \dontrun{
 foo <- list(
-    AA = qcv(terms='1:10'),
-    BB = qcv(terms='1:2, 3:10, 19'),
-    CC = qcv(terms='1:3, 5:6')
+    AA = qcv(terms="1:10"),
+    BB = qcv(terms="1:2, 3:10, 19"),
+    CC = qcv(terms="1:3, 5:6")
 )
 
 foo2  <- list(
-    AA = qcv(terms='4:8'),
-    BB = qcv(terms='1:4, 10:12'),
-    CC = qcv(terms='1, 11, 15:20'),
-    DD = qcv(terms='')
+    AA = qcv(terms="4:8"),
+    BB = qcv(terms="1:4, 10:12"),
+    CC = qcv(terms="1, 11, 15:20"),
+    DD = qcv(terms="")
 )
 
-x <- cm_range2long(foo)
-z <- cm_range2long(foo, foo2, v.name="time")
-combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
+
+(x <- cm_range2long(foo))
+(z <- cm_range2long(foo, foo2, v.name="time"))
 cm_code.overlap(x, list(AB=qcv(AA, BB)))
 cm_code.overlap(x, list(ALL=qcv(AA, BB, CC)))
+combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 cm_code.overlap(z, combines, "time")
 
 #WITH cm_time2long
 x <- list(
     transcript_time_span = qcv(00:00 - 1:12:00),
     A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),
-    B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00, 1.12.00:1.19.01"),
+    B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00,
+        1.12.00:1.19.01"),
     C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
 )
 
 y <- list(
     transcript_time_span = qcv(00:00 - 1:12:00),
     A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),
-    B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00, 1.12.00:1.19.01"),
+    B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00,
+        1.12.00:1.19.01"),
     C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
 )
 
 dat <- cm_time2long(x, y)
-cm_code.overlap(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)), "variable")
+head(dat, 10)
+out <- cm_code.overlap(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)),
+    rm.var="variable")
+head(out, 10)
 }
 }
 \seealso{
