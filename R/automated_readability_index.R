@@ -9,7 +9,7 @@
 #' or more grouping variables.
 #' @param rm.incomplete logical.  If TRUE removes incomplete sentences from the 
 #' analysis.
-#' @param \ldots Other arguments passed to \code{\link[qdap]{endf}}.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{end_inc}}.
 #' @return Returns a dataframe with selected readability statistic by grouping 
 #' variable(s).  The \code{frey} function returns a graphic representation of 
 #' the readability as well as a list of two dataframe: 1) \code{SENTENCES_USED} 
@@ -96,7 +96,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
-        DF <- endf(dataframe = DF, text.var = text.var, ...)
+        DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }    
     DF$word.count <- word.count(DF$text.var, missing = 0)
     i <- as.data.frame(table(DF$group))
@@ -153,7 +153,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
-        DF <- endf(dataframe = DF, text.var = text.var, ...)
+        DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
     DF$word.count <- word.count(DF$text.var, missing = 0, digit.remove = FALSE)
     i <- as.data.frame(table(DF$group))
@@ -215,7 +215,7 @@ function(text.var, grouping.var = NULL, output = "valid",
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
-        DF <- endf(dataframe = DF, text.var = text.var, ...)
+        DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
     DF$word.count <- word.count(DF$text.var, missing = 0)
     i <- as.data.frame(table(DF$group))
@@ -280,7 +280,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
-        DF <- endf(dataframe = DF, text.var = text.var, ...)
+        DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
     DF$word.count <- word.count(DF$text.var, missing = 0)
     DF$syllable.count <- syllable.sum(DF$text.var)
@@ -343,7 +343,7 @@ function(text.var, grouping.var = NULL, labels = "automatic",
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
-        DF <- endf(dataframe = DF, text.var = text.var, ...)
+        DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
     DF$word.count <- word.count(DF$text.var, missing = 0)
     DF$tot.n.sent <- 1:nrow(DF)
@@ -485,7 +485,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF <- na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
-        DF <- endf(dataframe = DF, text.var = text.var, ...)
+        DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
     DF$word.count <- word.count(DF$text.var)
     DF$tot.n.sent <- 1:nrow(DF)

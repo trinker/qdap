@@ -3,20 +3,20 @@
 #' Transcript apply formality score by grouping variable(s) and optionally plot 
 #' the breakdown of the model.
 #' 
-#' @param text.var The text variable (or an object from \code{pos},\code{pos.by}
-#' or \code{formality}.  Passing the later three object will greatly reduce 
-#' run time.
+#' @param text.var The text variable (or an object from \code{\link[qdap]{pos}},
+#' \code{\link[qdap]{pos.by}} or \code{\link[qdap]{formality}}.  Passing the 
+#' later three object will greatly reduce run time.
 #' @param grouping.var The grouping variables.  Default NULL generates formality 
 #' score for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
-#' @param sort.by.formality logical.  If TURE orders the results by formality 
+#' @param sort.by.formality logical.  If TRUE orders the results by formality 
 #' score.
 #' @param digits The number of digits displayed.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{pos.by}}.
-#' @note Heylighen & Dewaele(2002) say "At present, a sample would probably 
-#' need to contain a few hundred words for the measure to be minimally reliable. 
-#' For single sentences, the F-value should only be computed for purposes of 
-#' illustration".
+#' @section Warning: Heylighen & Dewaele(2002) state, "At present, a sample would 
+#' probably need to contain a few hundred words for the measure to be minimally 
+#' reliable. For single sentences, the F-value should only be computed for 
+#' purposes of illustration".
 #' @details Heylighen & Dewaele(2002)'s formality score is calculated as:
 #' \deqn{F = 50(\frac{n_{f}-n_{c}}{N} + 1)}
 #'
@@ -68,14 +68,14 @@
 #' plot(x6, bar.colors="RdBu")
 #' x7 <- with(rajDEM, formality(rajPOS, list(died, fam.aff)))
 #' plot(x7, bar.colors="RdBu",  point.cex=2, point.pch = 3)
-#' x8 <- raj.form <- with(rajDEM, formality(rajPOS, list(died, sex)))
+#' x8 <- with(rajDEM, formality(rajPOS, list(died, sex)))
 #' plot(x8, bar.colors="RdBu",  point.cex=2, point.pch = "|")
 #' 
-#' names(raj.form)
-#' colsplit2df(raj.form$formality)
+#' names(x8)
+#' colsplit2df(x8$formality)
 #' 
 #' #pass an object from pos or pos.by
-#' with(raj, formality(x8 , list(act, person)))
+#' ltruncdf(with(raj, formality(x8 , list(act, person))), 6, 4)
 #' }
 formality <- function(text.var, grouping.var = NULL,                    
     sort.by.formality = TRUE, digits = 2, ...){        

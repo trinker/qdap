@@ -37,7 +37,7 @@
   sentences from the analysis.}
 
   \item{\ldots}{Other arguments passed to
-  \code{\link[qdap]{endf}}.}
+  \code{\link[qdap]{end_inc}}.}
 
   \item{output}{A character vector character string
   indicating output type. One of "valid" (default and

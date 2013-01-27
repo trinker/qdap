@@ -1,8 +1,8 @@
-\name{endf}
-\alias{endf}
+\name{end_inc}
+\alias{end_inc}
 \title{Test for Incomplete Sentences}
 \usage{
-  endf(dataframe, text.var, warning.report = TRUE,
+  end_inc(dataframe, text.var, warning.report = TRUE,
     which.mode = FALSE)
 }
 \arguments{
@@ -29,9 +29,9 @@
 \dontrun{
 dat <- sentSplit(DATA, "state", stem.col = FALSE)
 dat$state[c(2, 5)] <- paste(strip(dat$state[c(2, 5)]), "|")
-endf(dat, "state")
-endf(dat, "state", warning.report = FALSE)
-endf(dat, "state", which.mode = TRUE)
+end_inc(dat, "state")
+end_inc(dat, "state", warning.report = FALSE)
+end_inc(dat, "state", which.mode = TRUE)
 }
 }
 \keyword{incomplete}

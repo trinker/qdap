@@ -152,7 +152,7 @@ function(dataframe, person.var, text.var, lock.incomplete = FALSE,
         d <- ifelse(substring(x, SL, SL)=="?", "-", d)
         return(d)
     } 
-    endf2 <- function(tx){
+    end_inc2 <- function(tx){
         nc <- nchar(tx)
         y <- substring(tx, nc, nc) == "|"
         if (is.na(y)) {
@@ -162,11 +162,11 @@ function(dataframe, person.var, text.var, lock.incomplete = FALSE,
     }
     if (parallel){
         cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
-        clusterExport(cl=cl, varlist=c("text", "lock.incomplete", "endf2", 
+        clusterExport(cl=cl, varlist=c("text", "lock.incomplete", "end_inc2", 
             "IMP", "DF2", "breaker", "action.verbs", "preposition",
             "adverb"), envir = environment())
         m <- parLapply(cl, text, function(x) {
-                if (lock.incomplete & endf2(x)){
+                if (lock.incomplete & end_inc2(x)){
                     x
                 } else {
                     IMP(x)
@@ -177,7 +177,7 @@ function(dataframe, person.var, text.var, lock.incomplete = FALSE,
         DF2$text <- unlist(m)
     } else {
         DF2$text <- invisible(unlist(lapply(as.character(text), function(x) {
-            if (lock.incomplete & endf2(x)){
+            if (lock.incomplete & end_inc2(x)){
                 x
             } else {
                 IMP(x)

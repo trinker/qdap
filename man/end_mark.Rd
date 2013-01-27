@@ -27,9 +27,12 @@
 \dontrun{
 end_mark(DATA$state)
 end_mark(mraja1spl$dialogue)
-mraja1spl[end_mark(mraja1spl$dialogue) == "?", ] #grab questions
-mraja1spl[end_mark(mraja1spl$dialogue) != "?", ] #non questions
-mraja1spl[end_mark(mraja1spl$dialogue) \%in\% c(".", "?"), ] #grab ? and .
+ques <- mraja1spl[end_mark(mraja1spl$dialogue) == "?", ] #grab questions
+htruncdf(ques)
+non.ques <- mraja1spl[end_mark(mraja1spl$dialogue) != "?", ] #non questions
+htruncdf(non.ques, 20)
+ques.per <- mraja1spl[end_mark(mraja1spl$dialogue) \%in\% c(".", "?"), ] #grab ? and .
+htruncdf(ques.per, 20)
 }
 }
 \keyword{end-mark}

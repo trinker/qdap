@@ -15,7 +15,7 @@
 #' @param rm.incomplete logical.  If TRUE text rows ending with qdap's 
 #' incomplete sentence end mark (\code{|}) will be removed from the analysis.
 #' @param digits Integer; number of decimal places to round when printing. 
-#' @param \ldots Other arguments supplied to \code{endf}.
+#' @param \ldots Other arguments supplied to \code{end_inc}.
 #' @return Returns a list of:
 #' \item{all}{A dataframe of scores per row with:
 #' \itemize{
@@ -215,7 +215,7 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
     DF <- data.frame(group = grouping, x[, c("text.var", 
         "wc", "polarity")])
     if (rm.incomplete) {
-        DF <- endf(dataframe = DF, text.var = text.var, ...)
+        DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
     na.instruct <- function(x, y) {
         LIST <- split(x, y)

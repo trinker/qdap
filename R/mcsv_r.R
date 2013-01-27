@@ -26,9 +26,8 @@
 #' @examples
 #' \dontrun{
 #' #mcsv_r EXAMPLE:
-#' mtcarsb <- mtcars; CO2b <- CO2
-#' a <- mcsv_w(mtcarsb, CO2b, dir="foo")
-#' a
+#' mtcarsb <- mtcars[1:5, ]; CO2b <- CO2[1:5, ]
+#' (a <- mcsv_w(mtcarsb, CO2b, dir="foo"))
 #' rm("mtcarsb", "CO2b")  # gone from .GlobalEnv
 #' (nms <- dir(a))
 #' mcsv_r(paste(a, nms, sep="/"))
@@ -38,10 +37,9 @@
 #' foo.dat1; foo.dat2
 #' rm("foo.dat1", "foo.dat2")  # gone from .GlobalEnv
 #' delete("foo")
-#'
+#' 
 #' #mcsv_w EXAMPLE:
-#' a <- mcsv_w(mtcars, CO2, dir="foo")
-#' a
+#' (a <- mcsv_w(mtcars, CO2, dir="foo"))
 #' delete("foo")
 #' }
 mcsv_r <-

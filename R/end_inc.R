@@ -16,11 +16,11 @@
 #' \dontrun{
 #' dat <- sentSplit(DATA, "state", stem.col = FALSE)
 #' dat$state[c(2, 5)] <- paste(strip(dat$state[c(2, 5)]), "|")
-#' endf(dat, "state")
-#' endf(dat, "state", warning.report = FALSE)
-#' endf(dat, "state", which.mode = TRUE)
+#' end_inc(dat, "state")
+#' end_inc(dat, "state", warning.report = FALSE)
+#' end_inc(dat, "state", which.mode = TRUE)
 #' }
-endf <-
+end_inc <-
 function(dataframe, text.var, warning.report=TRUE, which.mode = FALSE){
     tx <- scrubber(dataframe[, as.character(substitute(text.var))])
     nc <- nchar(tx)

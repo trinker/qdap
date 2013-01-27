@@ -20,7 +20,7 @@
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from 
 #' calculating the output.   
 #' @param digits Integer; number of decimal places to round when printing.                    
-#' @param \ldots Any other arguments passed to endf.     
+#' @param \ldots Any other arguments passed to end_inc.     
 #' @return Returns a list of three descriptive word statistics:
 #' \item{ts}{A data frame of descriptive word statistics by row} 
 #' \item{gts}{A data frame of word/sentence statistics per grouping variable:
@@ -135,7 +135,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
               "  Suggested use of sentSplit function."))
         }    
         if (rm.incomplete) {
-            DF <- endf(dataframe = DF, text.var = text.var, ...)
+            DF <- end_inc(dataframe = DF, text.var = text.var, ...)
         } 
         DF$group <- DF$group[ , drop = TRUE]
         DF$n.sent <- 1:nrow(DF)
@@ -371,5 +371,4 @@ function(text.var, digit.remove = FALSE, apos_rm = FALSE,
     DF <- DF[order(DF$n.sent),]  
     return(DF)
 }
-
 

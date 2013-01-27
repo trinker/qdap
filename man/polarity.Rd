@@ -37,7 +37,8 @@
   \item{digits}{Integer; number of decimal places to round
   when printing.}
 
-  \item{\ldots}{Other arguments supplied to \code{endf}.}
+  \item{\ldots}{Other arguments supplied to
+  \code{end_inc}.}
 }
 \value{
   Returns a list of: \item{all}{A dataframe of scores per

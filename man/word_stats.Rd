@@ -40,7 +40,7 @@
   \item{digits}{Integer; number of decimal places to round
   when printing.}
 
-  \item{\ldots}{Any other arguments passed to endf.}
+  \item{\ldots}{Any other arguments passed to end_inc.}
 }
 \value{
   Returns a list of three descriptive word statistics:

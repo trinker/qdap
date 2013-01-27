@@ -48,7 +48,7 @@ function(file = NULL) {
 #' @export
 folder <- function(..., folder.name = NULL) {
     if (!is.null(folder.name)) {
-        x <- strsplit(terms, split = split)
+        x <- strsplit(folder.name, split = ", ")
     } else {
         x <- folder.name
     }
