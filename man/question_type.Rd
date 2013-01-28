@@ -69,7 +69,7 @@
 \examples{
 \dontrun{
 (x <- question_type(DATA$state, DATA$person))
-x$raw
+truncdf(x$raw, 15)
 x$count
 plot(x)
 plot(x, label = TRUE)
@@ -80,11 +80,13 @@ question_type(DATA$state, DATA$person)
 DATA <- qdap::DATA
 with(DATA, question_type(state, list(sex, adult)))
 
-with(mraja1spl, question_type(dialogue, person))
-with(mraja1spl, question_type(dialogue, list(sex, fam.aff)))
-(x <- with(mraja1spl, question_type(dialogue, list(sex, fam.aff),
-   percent = FALSE)))
-plot(x)
+out1 <- with(mraja1spl, question_type(dialogue, person))
+## out1
+out2 <- with(mraja1spl, question_type(dialogue, list(sex, fam.aff)))
+## out2
+out3 <- with(mraja1spl, question_type(dialogue, list(sex, fam.aff),
+   percent = FALSE))
+plot(out3, label = TRUE, lab.digits = 3)
 }
 }
 \keyword{question-count}

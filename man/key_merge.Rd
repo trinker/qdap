@@ -29,7 +29,7 @@
 \examples{
 \dontrun{
 #First view transcript dataframe and demographics dataframe.
-lapply(list(raj, raj.demographics), head)
+ltruncdf(list(raj, raj.demographics), 10, 50)
 merged.raj <- key_merge(raj, raj.demographics)
 htruncdf(merged.raj, 10, 40)
 }

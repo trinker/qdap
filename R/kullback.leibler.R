@@ -20,11 +20,12 @@
 #' p.df <- wfdf(DATA$state, DATA$person)
 #' p.mat <- wfm(text.var = DATA$state, grouping.var = DATA$person)
 #' kullback.leibler(p.mat)
-#' kullback.leibler(p.df)
+#' (x <- kullback.leibler(p.df))
+#' print(x, digits = 5)
 #' kullback.leibler(p.df$greg, p.df$sam)
-#' p.df2 <- wfdf(raj$dialogue, raj$person)
-#' (x <- kullback.leibler(p.df2))
-#' print(x, digits = 4)
+#' 
+#' ## p.df2 <- wfdf(raj$dialogue, raj$person)
+#' ## x <- kullback.leibler(p.df2)
 #' }
 kullback.leibler <-
 function(x, y = NULL){

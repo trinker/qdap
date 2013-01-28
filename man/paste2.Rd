@@ -32,14 +32,14 @@
 }
 \examples{
 \dontrun{
-v <- rep(list(state.abb,  state.name) , 5)
+v <- rep(list(state.abb[1:8],  month.abb[1:8]) , 5)
 n <- sample(5:10, 1)
 paste(v[1:n]) #odd looking return
 paste2(v[1:n])
 paste2(v[1:n], sep="|")
-paste2(mtcars, sep="|")
-paste(mtcars, sep="|") #odd looking return
-paste2(CO2, sep="|-|")
+paste2(mtcars[1:10,], sep="|")
+paste(mtcars[1:10,], sep="|") #odd looking return
+paste2(CO2[1:10,], sep="|-|")
 }
 }
 \seealso{

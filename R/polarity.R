@@ -15,7 +15,7 @@
 #' @param rm.incomplete logical.  If TRUE text rows ending with qdap's 
 #' incomplete sentence end mark (\code{|}) will be removed from the analysis.
 #' @param digits Integer; number of decimal places to round when printing. 
-#' @param \ldots Other arguments supplied to \code{end_inc}.
+#' @param \ldots Other arguments supplied to \code{\link[qdap]{end_inc}}.
 #' @return Returns a list of:
 #' \item{all}{A dataframe of scores per row with:
 #' \itemize{
@@ -79,19 +79,22 @@
 #' (poldat <- with(DATA, polarity(state, person)))
 #' with(DATA, polarity(state, list(sex, adult)))
 #' names(poldat)
-#' poldat$all
+#' truncdf(poldat$all, 8)
 #' poldat$group
-#' poldat2 <- with(mraja1spl, polarity(dialogue, list(sex, fam.aff, died)))
+#' poldat2 <- with(mraja1spl, polarity(dialogue, 
+#'     list(sex, fam.aff, died)))
 #' colsplit2df(poldat2$group)
 #' plot(poldat)
 #' 
-#' (poldat2 <- with(rajSPLIT, polarity(dialogue, person)))
-#' poldat2[["group"]][, "OL"] <- outlier.labeler(poldat2[["group"]][, "ave.polarity"])
-#' poldat2[["all"]][, "OL"] <- outlier.labeler(poldat2[["all"]][, "polarity"])
-#' head(poldat2[["group"]], 10)
-#' truncdf(poldat2[["all"]], 20)
-#' plot(poldat2)
-#' plot(poldat2, nrow=4)
+#' poldat3 <- with(rajSPLIT, polarity(dialogue, person))
+#' poldat3[["group"]][, "OL"] <- outlier.labeler(poldat3[["group"]][, 
+#'     "ave.polarity"])
+#' poldat3[["all"]][, "OL"] <- outlier.labeler(poldat3[["all"]][, 
+#'     "polarity"])
+#' head(poldat3[["group"]], 10)
+#' htruncdf(poldat3[["all"]], 15, 8)
+#' plot(poldat3)
+#' plot(poldat3, nrow=4)
 #' }
 polarity <-
 function (text.var, grouping.var = NULL, positive.list = positive.words, 

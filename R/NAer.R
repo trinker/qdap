@@ -10,13 +10,13 @@
 #' @examples
 #' \dontrun{
 #' set.seed(10)              
-#' x <- sample(c(rep(NA, 4), 1:10), 20, rep=T)
+#' (x <- sample(c(rep(NA, 4), 1:10), 20, rep=T))
 #' NAer(x)
 #' 
 #' set.seed(10)
-#' y <- data.frame(matrix(x, 5, 4))                           
+#' (y <- data.frame(matrix(x, 5, 4))                           )
 #' NAer(y)
-#' NAer(y, "MISSING")   
+#' NAer(y, "MISSING")  
 #' }
 NAer <-
 function(x, replace=0){

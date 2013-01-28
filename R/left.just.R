@@ -9,17 +9,18 @@
 #' be honored but factor may be).
 #' @return Returns a dataframe with selected text column left/right justified.
 #' @rdname justification
-#' @note \code{left.just} inserts spaces to achieve the justification.  This 
-#' could interfere with analysis and therefore the output from \code{left.just} 
-#' should only be used for visualization purposes, not analysis.
+#' @note \code{\link[qdap]{left.just}} inserts spaces to achieve the 
+#' justification.  This could interfere with analysis and therefore the output 
+#' from \code{\link[qdap]{left.just}} should only be used for visualization 
+#' purposes, not analysis.
 #' @keywords justify, justification
 #' @export
 #' @examples
 #' \dontrun{
 #' left.just(DATA)
 #' left.just(DATA, "state")
-#' left.just(CO2)
-#' right.just(left.just(CO2))
+#' left.just(CO2[1:15,])
+#' right.just(left.just(CO2[1:15,]))
 #' }
 left.just <-
 function(dataframe, column = NULL, keep.class = FALSE) {

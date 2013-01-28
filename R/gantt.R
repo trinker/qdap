@@ -20,10 +20,10 @@
 #' or optionally returns a list of two: (1) A data frame of the total units 
 #' used by grouping variable(s) and (2) a data frame of start and end times 
 #' by grouping variable(s).  Optionally plots a Gantt plot of the returned data.
-#' @note For repeated measures data output use \code{gantt_rep}; for a convenient 
-#' wrapper that takes text and generates plots use \code{gantt_plot}; and for a 
-#' flexible gantt plot that words with code matrix functions (cm) use 
-#' \code{gantt_wrap}.
+#' @note For repeated measures data output use \code{\link[qdap]{gantt_rep}}; 
+#' for a convenient wrapper that takes text and generates plots use 
+#' \code{\link[qdap]{gantt_plot}}; and for a flexible gantt plot that words with 
+#' code matrix functions (cm) use \code{\link[qdap]{gantt_wrap}}.
 #' @author DigEmAll (\url{stackoverflow.com}) and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso \code{\link[qdap]{gantt_rep}},
 #' \code{\link[qdap]{gantt_wrap}},
@@ -37,22 +37,29 @@
 #' gantt(DATA$state, DATA$person)                                                        
 #' gantt(DATA$state, DATA$person, sums = TRUE)                                           
 #' gantt(DATA$state, list(DATA$sex, DATA$adult))                                                           
-#' gantt(mraja1$dialogue, mraja1$person) #hard to see without box color   
-#' gantt(mraja1$dialogue, mraja1$sex)                       
-#' gantt(mraja1$dialogue, mraja1$person, box.col = "black")                                      
-#' gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), plot.colors = NULL)                         
-#' gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), plot.colors = "black")                      
-#' gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), plot = FALSE)                                                                                                                       
-#' gantt(mraja1$dialogue, mraja1$person, units = "characters", box.color = "black")              
-#' gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "characters")                       
-#' with(mraja1, gantt(dialogue, list(fam.aff, sex, died), 
+#' x <- gantt(mraja1$dialogue, mraja1$person) #hard to see without box color                        
+#' y <- gantt(mraja1$dialogue, mraja1$person, box.col = "black") 
+#' z <- gantt(mraja1$dialogue, mraja1$sex)                                                                          
+#' m <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
+#'     plot.colors = NULL)                         
+#' n <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
+#'     plot.colors = "black")                      
+#' o <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
+#'     plot = FALSE)                                                                                                                       
+#' p <- gantt(mraja1$dialogue, mraja1$person, units = "characters", 
+#'     box.color = "black")              
+#' d <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
+#'     units = "characters")                       
+#' e <- with(mraja1, gantt(dialogue, list(fam.aff, sex, died), 
 #'    units = "characters", sums = TRUE))       
-#' gantt(mraja1$dialogue, mraja1$person, units = "syllables", 
+#' f <- gantt(mraja1$dialogue, mraja1$person, units = "syllables", 
 #'    box.color = "black", sums = TRUE)  
-#' gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "syllables")                        
+#' g <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
+#'     units = "syllables")                        
 #' 
-#' (dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), units = "sentences",                
-#'      plot.colors = 'black', sums = TRUE, col.sep = "_")$gantt.df)     
+#' dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
+#'     units = "sentences", plot.colors = 'black', sums = TRUE, 
+#'     col.sep = "_")$gantt.df     
 #' gantt_wrap(dat, fam.aff_sex, title = "Gantt Plot")  
 #' }
 gantt <-

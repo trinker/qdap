@@ -28,16 +28,16 @@
 #' for cell labels if \code{values} is TRUE.
 #' @details \code{qheat} is useful for finding patterns and anomalies in large
 #' qdap generated dataframes and matrices.
-#' @note \code{qheat} is a fast way of working with data formats produced by 
-#' qdap.  The function isn't designed to be extended beyond exploratory qdap 
-#' usage.
+#' @note \code{\link[qdap]{qheat}} is a fast way of working with data formats 
+#' produced by qdap.  The function isn't designed to be extended beyond 
+#' exploratory qdap usage.
 #' @keywords heatmap
 #' @export
 #' @import ggplot2 gridExtra scales RColorBrewer reshape2
 #' @examples
 #' \dontrun{
-#'  dat <- sentSplit(DATA, "state")
-#' (ws.ob <- with(dat, word_stats(state, list(sex, adult), tot=tot)))
+#' dat <- sentSplit(DATA, "state")
+#' ws.ob <- with(dat, word_stats(state, list(sex, adult), tot=tot))
 #' qheat(ws.ob)
 #' qheat(ws.ob, order.by = "sptot", 
 #'     xaxis.col = c("red", "black", "green", "blue"))

@@ -25,7 +25,7 @@
   a speed boost if you have one core or if the data set is
   smaller as the cluster takes time to create.  With the
   \code{mraja1spl} data set, with an 8 core machine,
-  \code{imperative} had 1/3 the running time.}
+  \code{\link[qdap]{imperative}} had 1/3 the running time.}
 
   \item{warning}{logical.  If TRUE provides comma warnings
   (sentences that contain numerous commas that may be
@@ -40,23 +40,24 @@
   Automatic imperative remarking.
 }
 \section{Warning}{
-  The algorithm used by \code{imperative} is sensitive to
-  English language dialects and types.  Commas can indicate
-  a choppy sentence and may indicate a false positive.
+  The algorithm used by \code{\link[qdap]{imperative}} is
+  sensitive to English language dialects and types.  Commas
+  can indicate a choppy sentence and may indicate a false
+  positive.
 }
 \examples{
 \dontrun{
-DATA3 <- data.frame(name=c('sue', rep(c('greg', 'tyler', 'phil', 'sue'), 2)),
-    statement=c('go get it|', 'I hate to read.', 'Stop running!', 'I like it!',
-    'You are terrible!', "Don't!", 'Greg, go to the red, brick office.',
-    'Tyler go to the gym.', "Alex don't run."), stringsAsFactors = FALSE)
-imperative(DATA3, 'name', 'statement', , c('Alex'))
-imperative(DATA3, 'name', 'statement', lock.incomplete = TRUE, c('Alex'))
-imperative(DATA3, 'name', 'statement', , c('Alex'), warning=TRUE)
-imperative(mraja1spl, 'person', 'dialogue', warning=FALSE)
-X <- imperative(mraja1spl, 'person', 'dialogue', warning=FALSE, parallel = TRUE)
-truncdf(X[, -7], 60)
-strwrap(X$dialogue)
+dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
+    "sue"), 2)), statement=c("go get it|", "I hate to read.",
+    "Stop running!", "I like it!", "You are terrible!", "Don't!",
+    "Greg, go to the red, brick office.", "Tyler go to the gym.",
+    "Alex don't run."), stringsAsFactors = FALSE)
+
+imperative(dat, "name", "statement", , c("Alex"))
+imperative(dat, "name", "statement", lock.incomplete = TRUE, c("Alex"))
+imperative(dat, "name", "statement", , c("Alex"), warning=TRUE)
+imperative(dat, "name", "statement", , c("Alex"), warning=TRUE,
+    parallel = TRUE)
 }
 }
 

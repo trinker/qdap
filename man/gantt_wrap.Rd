@@ -18,10 +18,10 @@
   \item{dataframe}{A data frame with plotting variable(s)
   and a column of start and end times.}
 
-  \item{plot.var}{A factor plotting variable (y axis)}
+  \item{plot.var}{A factor plotting variable (y axis).}
 
   \item{facet.vars}{An optional single vector or list of 1
-  or 2 to facet by}
+  or 2 to facet by.}
 
   \item{fill.var}{An optional variable to fill the code
   strips by.}
@@ -37,7 +37,9 @@
   variable's levels is plotted on top.}
 
   \item{ncol}{if an integer value is passed to this
-  gantt_wrap uses facet_wrap rather than facet_grid}
+  \code{\link[qdap]{gantt_wrap}} uses
+  \code{\link[ggplot2]{facet_wrap}} rather than
+  \code{\link[ggplot2]{facet_grid}}.}
 
   \item{transform}{logical.  If TRUE the repeated facets
   will be transformed from stacked to side by side.}
@@ -57,16 +59,17 @@
   h:m:s format.  Default NULL attempts to detect if object
   is a cm_time2long object}
 
-  \item{scale}{Should scales be fixed ("fixed", the
-  default), free ("free"), or free in one dimension
-  ("free_x", "free_y")}
+  \item{scale}{Should scales be fixed (\code{"fixed"}, the
+  default), free (\code{"free"}), or free in one dimension
+  (\code{"free_x"}, \code{"free_y"})}
 
-  \item{space}{If "fixed", the default, all panels have the
-  same size. If "free_y" their height will be proportional
-  to the length of the y scale; if "free_x" their width
-  will be proportional to the length of the x scale; or if
-  "free" both height and width will vary. This setting has
-  no effect unless the appropriate scales also vary.}
+  \item{space}{If \code{"fixed"}, the default, all panels
+  have the same size. If \code{"free_y"} their height will
+  be proportional to the length of the y scale; if
+  \code{"free_x"} their width will be proportional to the
+  length of the x scale; or if \code{"free"} both height
+  and width will vary. This setting has no effect unless
+  the appropriate scales also vary.}
 
   \item{size}{The width of the plot bars.}
 
@@ -79,9 +82,9 @@
   \item{y.ticks}{logical.  If TRUE the y ticks will be
   displayed.}
 
-  \item{legend.position}{The position of legends. ("left",
-  "right", "bottom", "top", or two-element numeric
-  vector).}
+  \item{legend.position}{The position of legends.
+  (\code{"left"}, \code{"right"}, \code{"bottom"},
+  \code{"top"}, or two-element numeric vector).}
 
   \item{bar.color}{Optional color to constrain all bars.}
 
@@ -104,7 +107,8 @@
   the ggplot2 list object.
 }
 \description{
-  A ggplot2 wrapper that produces a Gantt plot
+  A \href{http://docs.ggplot2.org/current/}{ggplot2}
+  wrapper that produces a Gantt plot.
 }
 \note{
   For non repeated measures data/plotting use
@@ -121,16 +125,18 @@ dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex),
 htruncdf(dat)
 gantt_wrap(dat, fam.aff_sex, title = "Gantt Plot")
 dat$codes <- sample(LETTERS[1:3], nrow(dat), TRUE)
-gantt_wrap(dat, fam.aff_sex, fill.var = "codes", legend.position = "bottom")
+gantt_wrap(dat, fam.aff_sex, fill.var = "codes",
+    legend.position = "bottom")
 
-dat2 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex),
-    units = "words", col.sep = "_"))
+dat2 <- with(rajSPLIT, gantt_rep(act, dialogue,
+    list(fam.aff, sex), units = "words", col.sep = "_"))
 htruncdf(dat2)
 x <- gantt_wrap(dat2, fam.aff_sex, facet.vars = "act",
     title = "Repeated Measures Gantt Plot")
 
 library(ggplot2); library(scales); library(RColorBrewer)
-x + scale_color_manual(values=rep("black", length(levels(dat2$fam.aff_sex))))
+x + scale_color_manual(values=rep("black",
+    length(levels(dat2$fam.aff_sex))))
 }
 }
 \author{

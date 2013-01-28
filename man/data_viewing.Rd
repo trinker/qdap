@@ -63,8 +63,8 @@
 htruncdf(raj)
 htruncdf(raj, 20)
 htruncdf(raj, ,20)
-truncdf(raj)
-truncdf(raj, 40)
+truncdf(raj[1:10, ])
+truncdf(raj[1:10, ], 40)
 qview(raj)
 qview(CO2)
 }

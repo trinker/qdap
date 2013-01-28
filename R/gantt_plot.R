@@ -1,7 +1,7 @@
 #' Gantt Plot
 #'
-#' A convenience function that wraps \code{gantt}, \code{gantt_rm} and 
-#' \code{gantt_wrap} into a single 
+#' A convenience function that wraps \code{\link[qdap]{gantt}}, 
+#' \code{\link[qdap]{gantt_rep}} and \code{\link[qdap]{gantt_wrap}} into a single 
 #' plotting function.
 #'
 #' @param text.var The text variable.    
@@ -16,23 +16,26 @@
 #' @param \ldots Other arguments passed to \code{\link[qdap]{gantt_wrap}}.
 #' @return Returns a Gantt style visualization.  Invisibly returns the ggplot2 
 #' list object.
-#' @note For non repeated measures data/plotting use \code{gantt}; for repeated 
-#' measures data output use \code{gantt_rep}; and for a flexible gantt plot that 
-#' words with code matrix functions (cm) use \code{gantt_wrap}.
-#' @seealso \code{\link[qdap]{gantt}} 
+#' @note For non repeated measures data/plotting use \code{\link[qdap]{gantt}}; 
+#' for repeated measures data output use \code{\link[qdap]{gantt_rep}}; and for 
+#' a flexible gantt plot that words with code matrix functions (cm) use 
+#' \code{\link[qdap]{gantt_wrap}}.
+#' @seealso \code{\link[qdap]{gantt}}, 
 #' \code{\link[qdap]{gantt_rep}},
-#' \code{\link[qdap]{gantt_wrap}},
+#' \code{\link[qdap]{gantt_wrap}}
 #' @references Clark, W. & Gantt, H. (1922) The Gantt chart, a working 
 #' tool of management. New York, Ronald Press.
 #' @keywords Gantt
 #' @export
 #' @examples
 #' \dontrun{
-#' with(rajSPLIT, gantt_plot(text.var = dialogue, grouping.var = person, size=4))
-#' with(rajSPLIT, gantt_plot(text.var = dialogue, grouping.var = 
-#'     list(fam.aff, sex), rm.var  = act, 
+#' with(rajSPLIT, gantt_plot(text.var = dialogue, 
+#'     grouping.var = person, size=4))
+#' with(rajSPLIT, gantt_plot(text.var = dialogue, 
+#'     grouping.var = list(fam.aff, sex), rm.var  = act, 
 #'     title = "Romeo and Juliet's dialogue"))
-#' with(rajSPLIT, gantt_plot(dialogue, list(fam.aff, sex), act, transform=T))
+#' with(rajSPLIT, gantt_plot(dialogue, list(fam.aff, sex), act, 
+#'     transform=T))
 #' rajSPLIT2 <- rajSPLIT
 #' rajSPLIT2$newb <- as.factor(sample(LETTERS[1:2], nrow(rajSPLIT2), 
 #'     replace=TRUE))

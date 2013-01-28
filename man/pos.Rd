@@ -22,7 +22,7 @@
   smaller as the cluster takes time to create.}
 
   \item{na.omit}{logical.  If TRUE missing values
-  (]code{NA}) will be omitted.}
+  (\code{NA}) will be omitted.}
 
   \item{digits}{Integer; number of decimal places to round
   when printing.}
@@ -39,9 +39,9 @@
 
   \item{gc.rate}{An integer value.  This is a necessary
   argument because of a problem with the garbage collection
-  in the openNLP function that \code{pos} wraps.  Consider
-  adjusting this argument upward if the error
-  \code{java.lang.OutOfMemoryError} occurs.}
+  in the openNLP function that \code{\link[qdap]{pos}}
+  wraps.  Consider adjusting this argument upward if the
+  error \code{java.lang.OutOfMemoryError} occurs.}
 
   \item{grouping.var}{The grouping variables.  Default NULL
   generates one word list for all text.  Also takes a
@@ -100,30 +100,33 @@
 \examples{
 \dontrun{
 posdat <- pos(DATA$state)
-str(posdat)
+ltruncdf(posdat, 7, 4)
+## str(posdat)
 names(posdat)
-posdat$text       #original text
-posdat$POStagged  #words replaced with parts of speech
-posdat$POSprop    #proportion of parts of speech by row
-posdat$POSfreq    #frequency of parts of speech by row
+posdat$text           #original text
+posdat$POStagged      #words replaced with parts of speech
+posdat$POSprop[, 1:8] #proportion of parts of speech by row
+posdat$POSfreq        #frequency of parts of speech by row
 
-pos(DATA$state, parallel = TRUE) # not always useful
+out1 <- pos(DATA$state, parallel = TRUE) # not always useful
+ltruncdf(out1, 7, 4)
 
 #use pos.tags to interpret part of speech tags used by pos & pos.by
-pos.tags()
-pos.tags("matrix")
-pos.tags("dataframe")
-pos.tags("df")
-pos.tags("all")
+pos.tags()[1:10, ]
+pos.tags("matrix")[1:10, ]
+pos.tags("dataframe")[1:10, ]
+pos.tags("df")[1:10, ]
+ltruncdf(pos.tags("all"), 3)
 
 posbydat <- with(DATA, pos.by(state, sex))
 names(posbydat)
-posbydat
-posbydat$pos.by.prop
-(POSby <- with(DATA, pos.by(state, list(adult, sex))))
+ltruncdf(posbydat, 7, 4)
+truncdf(posbydat$pos.by.prop, 4)
+
+POSby <- with(DATA, pos.by(state, list(adult, sex)))
 plot(POSby, values = TRUE, digits = 2)
 #or more quickly - reuse the output from before
-with(DATA, pos.by(posbydat, list(adult, sex)))
+out2 <- with(DATA, pos.by(posbydat, list(adult, sex)))
 }
 }
 \references{

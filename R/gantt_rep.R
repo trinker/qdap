@@ -14,10 +14,10 @@
 #' merged grouping variable header/name.
 #' @return Returns a data frame of start and end times by repeated measure and 
 #' grouping variable(s)
-#' @note For non repeated measures data/plotting use \code{gantt}; for a 
-#' convenient wrapper that takes text and generates plots use 
-#' \code{gantt_plot}; and for a flexible gantt plot that words with code matrix 
-#' functions (cm) use \code{gantt_wrap}.
+#' @note For non repeated measures data/plotting use \code{\link[qdap]{gantt}}; 
+#' for a convenient wrapper that takes text and generates plots use 
+#' \code{\link[qdap]{gantt_plot}}; and for a flexible gantt plot that words with 
+#' code matrix functions (cm) use \code{\link[qdap]{gantt_wrap}}.
 #' @seealso \code{\link[qdap]{gantt}},
 #' \code{\link[qdap]{gantt_wrap}},
 #' \code{\link[qdap]{gantt_plot}} 
@@ -27,9 +27,10 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' (dat3 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex), 
-#'     units = "words", col.sep = "_")))    
-#' gantt_wrap(dat3, fam.aff_sex, facet.vars = "act", 
+#' dat <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex), 
+#'     units = "words", col.sep = "_"))
+#' head(dat, 20)   
+#' gantt_wrap(dat, fam.aff_sex, facet.vars = "act", 
 #'     title = "Repeated Measures Gantt Plot",
 #'     minor.line.freq = 25, major.line.freq = 100)
 #' }

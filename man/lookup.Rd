@@ -32,12 +32,13 @@ lookup(mtcars$carb, sort(unique(mtcars$carb)),
 lookup(mtcars$carb, sort(unique(mtcars$carb)),
     seq(10, 60, by=10))
 
-key <- data.frame(x=1:2, y=c("A", "B"))
-big.vec <- sample(1:2, 3000000, T)
-lookup(big.vec, key)
-
 lookup(1:5, data.frame(1:4, 11:14))
 lookup(LETTERS[1:5], data.frame(LETTERS[1:5], 100:104))
+
+key <- data.frame(x=1:2, y=c("A", "B"))
+big.vec <- sample(1:2, 3000000, T)
+out <- lookup(big.vec, key)
+out[1:20]
 }
 }
 \seealso{

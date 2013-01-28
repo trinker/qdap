@@ -32,15 +32,19 @@
 \examples{
 \dontrun{
 dat <- with(mraja1spl, word_stats(dialogue, list(person, sex, fam.aff)))
-head(colsplit2df(dat$ts))
-with(colsplit2df(dat$ts), multiscale(word.count, person))
-with(colsplit2df(dat$ts), multiscale(word.count, list(fam.aff, sex)))
-with(colsplit2df(dat$ts), multiscale(word.count, list(fam.aff, sex),
-    original_order = FALSE))
+htruncdf(colsplit2df(dat$ts), ,4)
+out1 <- with(colsplit2df(dat$ts), multiscale(word.count, person))
+ltruncdf(out1, 10)
+out2 <- with(colsplit2df(dat$ts), multiscale(word.count,
+    list(fam.aff, sex)))
+ltruncdf(out2, 10)
+out3 <- with(colsplit2df(dat$ts), multiscale(word.count,
+    list(fam.aff, sex), original_order = FALSE))
+ltruncdf(out3, 10)
 }
 }
 \seealso{
-  \code{\link{scale}}
+  \code{\link[base]{scale}}
 }
 \keyword{scale}
 

@@ -23,7 +23,7 @@
 }
 \examples{
 \dontrun{
-outlier.labeler(mtcars$hp)
+outlier.labeler(mtcars$hp)[20:32]
 by(mtcars$mpg, mtcars$cyl, outlier.labeler)
 tapply(mtcars$mpg, mtcars$cyl, outlier.labeler)
 }

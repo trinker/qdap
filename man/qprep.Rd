@@ -46,11 +46,13 @@
   \code{link[qdap]{replace_symbol}}.}
 }
 \description{
-  Wrapper for \code{bracketX}, \code{replace_number},
-  \code{replace_symbol}, \code{replace_abbreviation} and
-  \code{scrubber} to quickly prepare text for analysis.
-  Care should taken with this function to ensure data is
-  properly formatted and complete.
+  Wrapper for \code{\link[qdap]{bracketX}},
+  \code{\link[qdap]{replace_number}},
+  \code{\link[qdap]{replace_symbol}},
+  \code{\link[qdap]{replace_abbreviation}} and
+  \code{\link[qdap]{scrubber}} to quickly prepare text for
+  analysis.  Care should taken with this function to ensure
+  data is properly formatted and complete.
 }
 \note{
   Care should taken with this function to ensure data is
