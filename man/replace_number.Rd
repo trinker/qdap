@@ -34,9 +34,9 @@ replace_number(x, "combine")
   number? R News. Vol. 5(1), pp. 51-55.
 }
 \seealso{
-  \code{\link[qdap]{bracketX}},
+  \code{\link[qdap]{bracketX}}, \code{\link[qdap]{qprep}},
   \code{\link[qdap]{replace_abbreviation}},
-  \code{\link[qdap]{qprep}},
+  \code{\link[qdap]{replace_contraction}},
   \code{\link[qdap]{replace_symbol}}
 }
 \keyword{number-to-word}

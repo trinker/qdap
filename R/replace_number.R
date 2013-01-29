@@ -14,8 +14,9 @@
 #' @keywords number-to-word
 #' @seealso 
 #' \code{\link[qdap]{bracketX}},
-#' \code{\link[qdap]{replace_abbreviation}},
 #' \code{\link[qdap]{qprep}},
+#' \code{\link[qdap]{replace_abbreviation}},
+#' \code{\link[qdap]{replace_contraction}},
 #' \code{\link[qdap]{replace_symbol}}
 #' @export
 #' @examples

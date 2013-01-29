@@ -1,12 +1,12 @@
 \name{scrubber}
 \alias{scrubber}
-\title{Use to clean text variables when importing a new data set.}
+\title{Clean Imported Text}
 \usage{
   scrubber(text.var, num2word = FALSE, rm.quote = TRUE,
     fix.comma = TRUE, ...)
 }
 \arguments{
-  \item{text.var}{The text variable}
+  \item{text.var}{The text variable.}
 
   \item{num2word}{logical If TRUE replaces a numbers with
   text representations.}
@@ -17,7 +17,7 @@
   \item{rm.quote}{logical If TRUE removes and \code{\"}.}
 
   \item{\ldots}{Other arguments passed to
-  \code{replace_number}.}
+  \code{\link[qdap]{replace_number}}.}
 }
 \value{
   Returns a parsed character vector.

@@ -26,21 +26,21 @@
 #' 
 #' v.outer(mtcars, cor)
 #' v.outer(mtcars, pooled.sd)
-#' v.outer(mtcars, euc.dist)
-#' v.outer(mtcars, sum2)
+#' v.outer(mtcars[, 1:7], euc.dist)
+#' v.outer(mtcars[, 1:7], sum2)
 #' 
-#' 
-#' mtcars2 <- lapply(mtcars, "[")
+#' #mtcars as a list
+#' mtcars2 <- lapply(mtcars[, 1:7], "[")
 #' v.outer(mtcars2, cor)
 #' v.outer(mtcars2, cor,  method = "spearman")
 #' v.outer(mtcars2, pooled.sd)
-#' print(v.outer(mtcars, pooled.sd), digits = 1)
-#' print(v.outer(mtcars, pooled.sd), digits = NULL)
+#' print(v.outer(mtcars[, 1:7], pooled.sd), digits = 1)
+#' print(v.outer(mtcars[, 1:7], pooled.sd), digits = NULL)
 #' v.outer(mtcars2, euc.dist)
 #' v.outer(mtcars2, sum2)
 #' 
 #' wc3 <- function(x, y) sum(sapply(list(x, y), wc, byrow = FALSE))
-#' (L1 <- word_list(DATA$state, DATA$person)$cwl)
+#' L1 <- word_list(DATA$state, DATA$person)$cwl
 #' (x <- v.outer(L1, wc3))
 #' diag(x) <- (sapply(L1, length))
 #' x

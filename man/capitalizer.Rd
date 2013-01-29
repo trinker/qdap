@@ -23,8 +23,9 @@
   capitalization arguments.
 }
 \description{
-  A helper function for word_list that allows the user to
-  supply vectors of words to be capitalized.
+  A helper function for \code{\link[qdap]{word_list}} that
+  allows the user to supply vectors of words to be
+  capitalized.
 }
 \note{
   Not intended for general use.  Acts as a helper function

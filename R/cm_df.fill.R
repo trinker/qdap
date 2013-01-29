@@ -14,10 +14,10 @@
 #' @return Generates a dummy coded dataframe.
 #' @details After ranging coding transcripts via (\code{\link{cm_df.temp}}) or 
 #' the blank code matrix via (\code{\link{cm_df.transcript}}),\code{cm_df.fill} 
-#' is used to create a matrix of what codes occured at what words (a filled code 
+#' is used to create a matrix of what codes occurred at what words (a filled code 
 #' matrix).  A list of range codes (word number spans) is fed to 
 #' \code{cm_df.fill}.  A single number indicates a single word with that coding 
-#' scheme where as the colon is used as a separator that indicates the range of 
+#' scheme whereas the colon is used as a separator that indicates the range of 
 #' words from x to y are that particular code.
 #' @seealso 
 #' \code{\link{cm_df.temp}},

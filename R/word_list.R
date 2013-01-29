@@ -22,8 +22,8 @@
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from the 
 #' output.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{strip}}.
-#' @return An object of class \code{"word_list"} is a list containing at the 
-#' following components: 
+#' @return An object of class \code{"word_list"} is a list of lists of verctors 
+#' or dataframes containing the following components: 
 #' \item{cwl}{complete word list; raw words}
 #' \item{swl}{stop word list; same as rwl with stop words removed}
 #' \item{fwl}{frequency word list; a data frame of words and corresponding 
@@ -36,15 +36,13 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' XX <-word_list(raj.act.1$dialogue)
-#' names(XX)
-#' XX$cwl
-#' XX$swl
-#' XX$fwl 
-#' XX$fswl 
-#' XX$rfswl 
+#' word_list(raj.act.1$dialogue)
 #' 
-#' with(raj, word_list(text.var = dialogue, grouping.var = list(person, act)))
+#' out1 <- with(raj, word_list(text.var = dialogue, 
+#'     grouping.var = list(person, act)))
+#' names(out1)
+#' lapply(out1$cwl, "[", 1:5)
+#' 
 #' with(DATA, word_list(state, person))
 #' with(DATA, word_list(state, person, stopwords = Top25Words))
 #' with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))
@@ -204,7 +202,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
     o <- list(cwl = word_lists2, swl = stopped.word_list, 
         fwl = freq.word_list, fswl = freq.stop.word_list, 
         rfswl = red.freq.stop.word_list)
-    class(o) <- "word_list"
+    class(o) <- c("word_list", "data.frame")
     return(o)
 }
 

@@ -1,4 +1,4 @@
-##Currently exported but for internal use and not documented
+##Currently not exported
 # Combine Raw and Proportional Matrices
 # 
 # Combines raw matrices with proportional for better interpretation of 

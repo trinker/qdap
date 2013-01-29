@@ -1,7 +1,7 @@
 #' Capitalize Select Words
 #' 
-#' A helper function for word_list that allows the user to supply vectors of 
-#' words to be capitalized.
+#' A helper function for \code{\link[qdap]{word_list}} that allows the user to 
+#' supply vectors of words to be capitalized.
 #' 
 #' @param text A vector of words (generally from bag.o.words or breaker).
 #' @param caps.list A list of words to capitalize.

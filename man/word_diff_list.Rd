@@ -47,16 +47,27 @@
 }
 \examples{
 \dontrun{
-with(DATA, word_diff_list(text.var = state, grouping.var = list(sex, adult)))
-with(DATA, word_diff_list(state, person))
-with(DATA, word_diff_list(state, grouping.var = list(sex, adult),
+out1 <- with(DATA, word_diff_list(text.var = state,
+    grouping.var = list(sex, adult)))
+lapply(unlist(out1, recursive = FALSE), head, n=3)
+
+out2 <- with(DATA, word_diff_list(state, person))
+lapply(unlist(out2, recursive = FALSE), head, n=3)
+
+out3 <- with(DATA, word_diff_list(state, grouping.var = list(sex, adult),
     vs.all=TRUE, vs.all.cut=2))
 
-with(mraja1, word_diff_list(text.var = dialogue,
+
+out4 <- with(mraja1, word_diff_list(text.var = dialogue,
     grouping.var = list(mraja1$sex, mraja1$fam.aff)))
-word_diff_list(mraja1$dialogue, mraja1$person)
-word_diff_list(mraja1$dialogue, mraja1$fam.aff, stopwords = Top25Words)
-word_diff_list(mraja1$dialogue, mraja1$fam.aff, vs.all=TRUE, vs.all.cut=2)
+
+
+out5 <- word_diff_list(mraja1$dialogue, mraja1$person)
+
+out6 <- word_diff_list(mraja1$dialogue, mraja1$fam.aff, stopwords = Top25Words)
+
+out7 <- word_diff_list(mraja1$dialogue, mraja1$fam.aff, vs.all=TRUE, vs.all.cut=2)
+lapply(out7, head, n=3)
 }
 }
 \keyword{word-list}

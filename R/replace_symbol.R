@@ -14,14 +14,16 @@
 #' @keywords symbol-replace
 #' @seealso 
 #' \code{\link[qdap]{bracketX}},
+#' \code{\link[qdap]{qprep}},
 #' \code{\link[qdap]{replace_abbreviation}},
+#' \code{\link[qdap]{replace_contraction}},
 #' \code{\link[qdap]{replace_number}},
-#' \code{\link[qdap]{qprep}}
 #' @export
 #' @examples
 #' \dontrun{
-#' x <- c("I am @@ Jon's & Jim's w/ Marry", "I owe $41 for food", "two is 10% 
-#'     of a #")
+#' x <- c("I am @@ Jon's & Jim's w/ Marry", 
+#'     "I owe $41 for food", 
+#'     "two is 10% of a #")
 #' replace_symbol(x)
 #' }
 replace_symbol <-

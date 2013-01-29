@@ -15,9 +15,10 @@
 #' @param text.place A character string giving placement location of the text 
 #' column. This must be one of the strings \code{"original"}, \code{"right"} or 
 #' \code{"left"}.
-#' @param \ldots Additional options passed to \code{stem2df}.
-#' @param grouping.var The grouping variable (usually \code{"person"}).  Does 
-#' not take multiple vectors as most qdap functions do.
+#' @param \ldots Additional options passed to \code{\link[qdap]{stem2df}}.
+#' @param grouping.var The grouping variables.  Default NULL generates one 
+#' output for all text.  Also takes a single grouping variable or a list of 1 
+#' or more grouping variables.
 #' @param tot A tot column from a \code{\link[qdap]{sentSplit}} output.
 #' @return \code{sentSplit} - returns a dataframe with turn of talk broken apart 
 #' into sentences.  Optionally a stemmed version of the text variable may be 
@@ -38,12 +39,12 @@
 #' sentSplit(DATA, "state", stem.col = TRUE)
 #' sentSplit(DATA, "state", text.place = "left")
 #' sentSplit(DATA, "state", text.place = "original")
-#' sentSplit(raj, "dialogue")
+#' sentSplit(raj, "dialogue")[1:20, ]
 #' 
 #' #sentCombine EXAMPLE:
 #' dat <- sentSplit(DATA, "state") 
 #' sentCombine(dat$state, dat$person)
-#' sentCombine(dat$state, dat$sex)
+#' truncdf(sentCombine(dat$state, dat$sex), 50)
 #' 
 #' #TOT EXAMPLE:
 #' dat <- sentSplit(DATA, "state") 
@@ -135,14 +136,40 @@ function(dataframe, text.var, endmarks = c("?", ".", "!", "|"),
 #' 
 #' \code{sentCombine} - Combines sentences by the same grouping variable together.
 #' 
+#' @param as.list logical.  If TRUE returns the output as a list. If false the 
+#' output is returned as a dataframe.
 #' @return \code{sentCombine} - returns a list of vectors with the continuous 
 #' sentences by grouping.var pasted together. 
 #' returned as well.
 #' @rdname sentSplit
 #' @export
 sentCombine <-
-function(text.var, grouping.var = "person") {
-    y <- rle(as.character(grouping.var))
+function(text.var, grouping.var = NULL, as.list = FALSE) {
+    if(is.null(grouping.var)) {
+        G <- "all"
+    } else {
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
+    }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    } 
+    y <- rle(as.character(grouping))
     lens <- y$lengths
     group <- y$values
     x <- cumsum(lens)
@@ -152,8 +179,14 @@ function(text.var, grouping.var = "person") {
         paste2(text.var[st[i]:end[i]], sep=" ")
     }))
     names(L1) <- group
-    L1
+    if (as.list) {
+        return(L1)
+    }
+    DF <- data.frame(x=names(L1), text.var=unlist(L1))
+    names(DF)[1] <- G
+    DF
 }
+
 
 #' Convert the tot Column to Turn of Talk
 #' 

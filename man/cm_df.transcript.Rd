@@ -26,9 +26,10 @@
 }
 \value{
   Returns a transcript by grouping variable with word
-  number above each word.  This makes use with cm_df2long
-  transfer/usage easier because the researcher has coded on
-  a transcript with the numeric word index already.
+  number above each word.  This makes use with
+  \code{\link[qdap]{cm_df2long}} transfer/usage easier
+  because the researcher has coded on a transcript with the
+  numeric word index already.
 }
 \description{
   Output a transcript with word number/index above for easy
@@ -38,7 +39,8 @@
 }
 \note{
   It is recommended that the researcher actually codes on
-  the output from this file.  If a file already exists
+  the output from this file.  The codes can then be
+  transferred to via a list.  If a file already exists
   \code{cm_df.transcript} will append to that file.
 }
 \examples{

@@ -12,7 +12,7 @@
 #' cores.  Note that this may not mean a speed boost if you have one core or if 
 #' the data set is smaller as the cluster takes time to create (parallel is 
 #' slower until approximately 10,000 rows).  To reduce run time pass a 
-#' \code{"word_stats"} object to the \code{word_stats} function.
+#' \code{"word_stats"} object to the \code{\link[qdap]{word_stats}} function.
 #' @param rm.incomplete logical.  If TRUE incomplete statements are removed from 
 #' calculations in the output.   
 #' @param digit.remove logical.  If TRUE removes digits from calculating the 
@@ -36,7 +36,7 @@
 #'     \item{wps}{ - words per sentence}
 #'     \item{cps}{ - characters per sentence}
 #'     \item{sps}{ - syllables per sentence}
-#'     \item{psps}{ - polly syllables per sentence}
+#'     \item{psps}{ - poly-syllables per sentence}
 #'     \item{cpw}{ - characters per word}
 #'     \item{spw}{ - syllables per word}
 #'     \item{n.state}{ - number of statements}
@@ -70,8 +70,8 @@
 #' (desc_wrds <- with(mraja1spl, word_stats(dialogue, person, tot = tot)))
 #' with(mraja1spl, word_stats(desc_wrds, person, tot = tot)) #speed boost
 #' names(desc_wrds)
-#' desc_wrds$ts 
-#' desc_wrds$gts
+#' htruncdf(desc_wrds$ts, 15, 5)
+#' htruncdf(desc_wrds$gts, 15, 6)
 #' desc_wrds$mpun 
 #' desc_wrds$word.elem
 #' desc_wrds$sent.elem 

@@ -33,8 +33,8 @@
 \examples{
 \dontrun{
 synonyms(c("the", "cat", "job", "environment", "read", "teach"))
-syn(c("the", "cat", "job", "environment", "read", "teach"))
-syn(c("the", "cat", "job", "environment", "read", "teach"), return.list = FALSE)
+head(syn(c("the", "cat", "job", "environment", "read", "teach"),
+    return.list = FALSE), 30)
 syn(c("the", "cat", "job", "environment", "read", "teach"), multiwords = FALSE)
 }
 }

@@ -1,13 +1,13 @@
-#' Use to clean text variables when importing a new data set.
+#' Clean Imported Text
 #' 
 #' Use to clean text variables when importing a new data set.  Removes extra
 #' white spaces other textual anomalies that may cause errors.
 #' 
-#' @param text.var The text variable
+#' @param text.var The text variable.
 #' @param num2word logical If TRUE replaces a numbers with text representations.
 #' @param fix.comma logical If TRUE removes any spaces before a comma.
 #' @param rm.quote  logical If TRUE removes and \code{\"}.
-#' @param \ldots Other arguments passed to \code{replace_number}.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{replace_number}}.
 #' @return Returns a parsed character vector.
 #' @seealso \code{\link[qdap]{strip}}
 #' @keywords parse, clean

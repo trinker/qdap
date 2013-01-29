@@ -12,7 +12,7 @@
 #' @param digit.remove logical.  If TRUE removes digits before counting words.
 #' @param names logical.  If TRUE the sentences are given as the names of the 
 #' counts.
-#' @param apostrophe.remove = TRUE logical.  If TRUE apostrophes will be counted 
+#' @param apostrophe.remove logical.  If TRUE apostrophes will be counted 
 #' in the character count.
 #' @param count.space logical.  If TRUE spaces are counted as characters.
 #' @param prop.by.row logical.  If TRUE applies proportional to the row.  If 
@@ -38,12 +38,26 @@
 #' character.count(DATA$state, byrow=FALSE)
 #' sum(character.count(DATA$state))
 #' 
-#' library(ggplot2)
-#' library(reshape2)
+#' # CHARACTER TABLE
+#' x <- character.table(DATA$state, DATA$person)
+#' plot(x)
+#' plot(x, label = TRUE)
+#' plot(x, label = TRUE, text.color = "red")
+#' plot(x, label = TRUE, lab.digits = 1, zero.replace = "PP7")
+#' x$raw[, 1:20]
+#' x$prop[, 1:8]
+#' x$rnp[, 1:8]
+#' 
+#' ## char.table(DATA$state, DATA$person)
+#' ## char.table(DATA$state, DATA$person, percent = TRUE)
+#' ## character.table(DATA$state, list(DATA$sex, DATA$adult))
+#' 
+#' library(ggplot2);library(reshape2)
 #' dat <- character.table(DATA$state, list(DATA$sex, DATA$adult))
-#' (dat2 <- colsplit2df(melt(dat$raw), keep.orig = TRUE))
-#' head(dat2)
+#' dat2 <- colsplit2df(melt(dat$raw), keep.orig = TRUE)
+#' head(dat2, 15)
 #' dat3 <- dat2[rep(seq_len(dim(dat2)[1]), dat2[, 5]), -5]
+#' 
 #' 
 #' ggplot(data = dat2, aes(y = variable, x = value, colour=sex)) +
 #'     facet_grid(adult~.) +
@@ -54,20 +68,6 @@
 #'     geom_bar() + 
 #'     facet_grid(sex ~ adult, margins = TRUE) + 
 #'     theme(legend.position="none")
-#' 
-#' # CHARACTER TABLE
-#' (x <- character.table(DATA$state, DATA$person))
-#' plot(x)
-#' plot(x, label = TRUE)
-#' plot(x, label = TRUE, text.color = "red")
-#' plot(x, label = TRUE, lab.digits = 1, zero.replace = "PP7")
-#' x$raw
-#' x$prop
-#' x$rnp
-#' 
-#' char.table(DATA$state, DATA$person)
-#' char.table(DATA$state, DATA$person, percent = TRUE)
-#' character.table(DATA$state, list(DATA$sex, DATA$adult))
 #' }
 word.count <- 
 function(text.var, byrow = TRUE, missing = NA, digit.remove = TRUE, 

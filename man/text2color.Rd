@@ -25,10 +25,12 @@
 \dontrun{
 set.seed(10)
 x <- data.frame(X1 = sample(Top25Words[1:10], 20, TRUE))
-text2color(x$X1, qcv(the, and, is), qcv(red, green, blue)) #blue was recycled
+
+#blue was recycled
+text2color(x$X1, qcv(the, and, is), qcv(red, green, blue))
 text2color(x$X1, qcv(the, and, is), qcv(red, green, blue, white))
-x$X2 <- text2color(x$X1, list(qcv(the, and, is), "that"), qcv(red, green,
-    white))
+x$X2 <- text2color(x$X1, list(qcv(the, and, is), "that"),
+    qcv(red, green, white))
 x
 }
 }

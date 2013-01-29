@@ -2,11 +2,11 @@
 #' 
 #' \code{stemmer} - Stems a vector of text strings.
 #' 
-#' @param text.var  The text variable.  In \code{stemmer} this is a vector text 
-#' string. For \code{stem2df} this is a character vector of length one naming the 
-#' text column.  
+#' @param text.var  The text variable.  In \code{\link[qdap]{stemmer}} this is a 
+#' vector text string. For \code{\link[qdap]{stem2df}} this is a character 
+#' vector of length one naming the text column.  
 #' @param rm.bracket logical.  If TRUE brackets are removed from the text.
-#' @param capitalize logical.  If TRUE selected terms are capitalized
+#' @param capitalize logical.  If TRUE selected terms are capitalized.
 #' @param warn logical.  If TRUE warns about rows not ending with standard qdap 
 #' punctuation endmarks.
 #' @param \dots Various: \cr
@@ -18,7 +18,7 @@
 #' @param dataframe A dataframe object.
 #' @param stem.name A character vector of length one for the stemmed column.  If 
 #' \code{NULL} defaults to \code{"stem.text"}.
-#' @return \code{stemmer } - returns a character vector with stemmed text.
+#' @return \code{stemmer} - returns a character vector with stemmed text.
 #' @rdname stemmer
 #' @seealso \code{\link[qdap]{capitalizer}}
 #' @keywords stem
@@ -28,13 +28,15 @@
 #' \dontrun{
 #' #stemmer EXAMPLE:
 #' stemmer(DATA$state)
-#' stemmer(raj$dialogue)
+#' out1 <- stemmer(raj$dialogue)
+#' htruncdf(out1, 20, 60)
 #' 
 #' #stem.words EXAMPLE:
 #' stem.words(doggies, jumping, swims)
 #' 
 #' #stem2df EXAMPLE:
-#' stem2df(DATA, "state", "new")
+#' out2 <- stem2df(DATA, "state", "new")
+#' truncdf(out2, 30)
 #' }
 stemmer <-
 function(text.var, rm.bracket = TRUE, capitalize = TRUE, warn = TRUE, ...){

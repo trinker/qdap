@@ -21,8 +21,8 @@
 }
 \examples{
 \dontrun{
-replacer(mtcars, 0, "REP")
-replacer(mtcars, 8, NA)
+replacer(mtcars[1:10, ], 0, "REP")
+replacer(mtcars[1:10, ], 4, NA)
 replacer(c("a", "b"), "a", "foo")
 #replace missing values (NA)
 dat <- data.frame(matrix(sample(c(1:3, NA), 25, TRUE), ncol=5))

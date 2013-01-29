@@ -9,7 +9,8 @@
     incomplete.sub = TRUE, rm.bracket = TRUE,
     stem.col = FALSE, text.place = "right", ...)
 
-  sentCombine(text.var, grouping.var = "person")
+  sentCombine(text.var, grouping.var = NULL,
+    as.list = FALSE)
 
   TOT(tot)
 }
@@ -37,14 +38,18 @@
   \code{"left"}.}
 
   \item{\ldots}{Additional options passed to
-  \code{stem2df}.}
+  \code{\link[qdap]{stem2df}}.}
 
-  \item{grouping.var}{The grouping variable (usually
-  \code{"person"}).  Does not take multiple vectors as most
-  qdap functions do.}
+  \item{grouping.var}{The grouping variables.  Default NULL
+  generates one output for all text.  Also takes a single
+  grouping variable or a list of 1 or more grouping
+  variables.}
 
   \item{tot}{A tot column from a
   \code{\link[qdap]{sentSplit}} output.}
+
+  \item{as.list}{logical.  If TRUE returns the output as a
+  list. If false the output is returned as a dataframe.}
 }
 \value{
   \code{sentSplit} - returns a dataframe with turn of talk
@@ -78,12 +83,12 @@ sentSplit(DATA, "state")
 sentSplit(DATA, "state", stem.col = TRUE)
 sentSplit(DATA, "state", text.place = "left")
 sentSplit(DATA, "state", text.place = "original")
-sentSplit(raj, "dialogue")
+sentSplit(raj, "dialogue")[1:20, ]
 
 #sentCombine EXAMPLE:
 dat <- sentSplit(DATA, "state")
 sentCombine(dat$state, dat$person)
-sentCombine(dat$state, dat$sex)
+truncdf(sentCombine(dat$state, dat$sex), 50)
 
 #TOT EXAMPLE:
 dat <- sentSplit(DATA, "state")

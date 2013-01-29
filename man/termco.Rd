@@ -71,8 +71,8 @@
   \item{match.string}{A vector of terms to search for.
   When using inside of \code{term.match} the term(s) must
   be words or partial words but do not have to be when
-  using \code{termco.d} (i.e. they can be phrases, symbols
-  etc.).}
+  using \code{\link[qdap]{termco.d}} (i.e. they can be
+  phrases, symbols etc.).}
 
   \item{terms}{The terms to search for in the
   \code{text.var}.  Similar to \code{match.list} but these
@@ -124,8 +124,9 @@
   \code{termco} - Search a transcript by any number of
   grouping variables for categories (themes) of grouped
   root terms.  While there are other termco functions in
-  the termco family (i.e. \code{termco.d}) \code{termco} is
-  a wrapper for general use.
+  the termco family (e.g. \code{\link[qdap]{termco.d}})
+  \code{termco} is a more powerful and flexible wrapper
+  intended for general use.
 
   \code{termco.d} - Search a transcript by any number of
   grouping variables for root terms.
@@ -179,17 +180,18 @@ names(dat)
 dat$rnp  #useful for presenting in tables
 dat$raw  #prop and raw are useful for performing calculations
 dat$prop
-(dat <- with(raj.act.1, termco(dialogue, person, ml,
-    short.term = FALSE, elim.old=FALSE)))
+datb <- with(raj.act.1, termco(dialogue, person, ml,
+    short.term = FALSE, elim.old=FALSE))
+ltruncdf(datb, 20, 6)
 
 (dat2 <- data.frame(dialogue=c("@bryan is bryan good @br",
     "indeed", "@ brian"), person=qcv(A, B, A)))
 
-ml <- list(wrds=c("bryan", "indeed"), "@", bryan=c("bryan", "@ br", "@br"))
+ml2 <- list(wrds=c("bryan", "indeed"), "@", bryan=c("bryan", "@ br", "@br"))
 
-with(dat2, termco(dialogue, person, match.list=ml))
+with(dat2, termco(dialogue, person, match.list=ml2))
 
-with(dat2, termco(dialogue, person, match.list=ml, percent = FALSE))
+with(dat2, termco(dialogue, person, match.list=ml2, percent = FALSE))
 
 DATA$state[1] <- "12 4 rgfr  r0ffrg0"
 termco(DATA$state, DATA$person, '0', digit.remove=FALSE)

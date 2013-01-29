@@ -12,15 +12,16 @@
   stem2df(dataframe, text.var, stem.name = NULL, ...)
 }
 \arguments{
-  \item{text.var}{The text variable.  In \code{stemmer}
-  this is a vector text string. For \code{stem2df} this is
-  a character vector of length one naming the text column.}
+  \item{text.var}{The text variable.  In
+  \code{\link[qdap]{stemmer}} this is a vector text string.
+  For \code{\link[qdap]{stem2df}} this is a character
+  vector of length one naming the text column.}
 
   \item{rm.bracket}{logical.  If TRUE brackets are removed
   from the text.}
 
   \item{capitalize}{logical.  If TRUE selected terms are
-  capitalized}
+  capitalized.}
 
   \item{warn}{logical.  If TRUE warns about rows not ending
   with standard qdap punctuation endmarks.}
@@ -38,7 +39,7 @@
   \code{"stem.text"}.}
 }
 \value{
-  \code{stemmer } - returns a character vector with stemmed
+  \code{stemmer} - returns a character vector with stemmed
   text.
 
   \code{stem.words} - returns a dataframe with a character
@@ -61,13 +62,15 @@
 \dontrun{
 #stemmer EXAMPLE:
 stemmer(DATA$state)
-stemmer(raj$dialogue)
+out1 <- stemmer(raj$dialogue)
+htruncdf(out1, 20, 60)
 
 #stem.words EXAMPLE:
 stem.words(doggies, jumping, swims)
 
 #stem2df EXAMPLE:
-stem2df(DATA, "state", "new")
+out2 <- stem2df(DATA, "state", "new")
+truncdf(out2, 30)
 }
 }
 \seealso{

@@ -41,12 +41,13 @@ repl <- c("inch", "feet", "talkstats")
 
 replace_abbreviation(x, abv, repl)
 
-KEY <- rbind(abbreviations, data.frame(abv = abv, rep = repl))
+(KEY <- rbind(abbreviations, data.frame(abv = abv, rep = repl)))
 replace_abbreviation(x, KEY)
 }
 }
 \seealso{
   \code{\link[qdap]{bracketX}}, \code{\link[qdap]{qprep}},
+  \code{\link[qdap]{replace_contraction}},
   \code{\link[qdap]{replace_number}},
   \code{\link[qdap]{replace_symbol}}
 }

@@ -30,7 +30,7 @@
 
   \code{rm_empty_row} - Removes the empty rows of a data
   set that are common in reading in data (default method in
-  \code{read.transcript}).
+  \code{\link[qdap]{read.transcript}}).
 }
 \examples{
 \dontrun{

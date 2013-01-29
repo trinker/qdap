@@ -68,8 +68,8 @@
 \value{
   Returns a rank-frequency plot and a list of three
   dataframes: \item{WORD_COUNTS}{The word frequencies
-  supplied to \code{rank_freq_plot} or created by
-  \code{rank_freq_mplot}.}
+  supplied to \code{\link[qdap]{rank_freq_plot}} or created
+  by \code{\link[qdap]{rank_freq_mplot}}.}
   \item{RANK_AND_FREQUENCY_STATS}{A dataframe of rank and
   frequencies for the words used in the text.}
   \item{LEGOMENA_STATS}{A dataframe displaying the percent
@@ -85,28 +85,31 @@
 \examples{
 \dontrun{
 #rank_freq_mplot EXAMPLES:
-rank_freq_mplot(DATA$state, DATA$person, ncol = 2, jitter = 0)
-rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
+x1 <- rank_freq_mplot(DATA$state, DATA$person, ncol = 2, jitter = 0)
+ltruncdf(x1, 10)
+x2 <- rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
     hap.col = "purple")
-rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
-    log.freq = FALSE, log.rank = FALSE, jitter = .6)
-rank_freq_mplot(raj$dialogue, jitter = .5, alpha = 1/15)
-rank_freq_mplot(raj$dialogue, jitter = .5, shape = 19, alpha = 1/15)
+ltruncdf(x2, 10)
+invisible(rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
+    log.freq = FALSE, log.rank = FALSE, jitter = .6))
+invisible(rank_freq_mplot(raj$dialogue, jitter = .5, alpha = 1/15))
+invisible(rank_freq_mplot(raj$dialogue, jitter = .5, shape = 19, alpha = 1/15))
 
 #rank_freq_plot EXAMPLES:
 mod <- with(mraja1spl , word_list(dialogue, person, cut.n = 10,
     cap.list=unique(mraja1spl$person)))
-rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo')
-rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, plot = FALSE)
-rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo',
-    jitter.ammount = 0.15, hap.col = "darkgreen", dis.col = "purple")
-rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo',
-    jitter.ammount = 0.5, log.scale=FALSE)
-lapply(seq_along(mod$fwl), function(i){
+x3 <- rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo')
+ltruncdf(x2, 10)
+ltruncdf(rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, plot = FALSE)           , 10)
+invisible(rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo',
+    jitter.ammount = 0.15, hap.col = "darkgreen", dis.col = "purple"))
+invisible(rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo',
+    jitter.ammount = 0.5, log.scale=FALSE))
+invisible(lapply(seq_along(mod$fwl), function(i){
     dev.new()
     rank_freq_plot(mod$fwl[[i]]$WORD, mod$fwl[[i]]$FREQ,
         title.ext = names(mod$fwl)[i], jitter.ammount = 0.5, log.scale=FALSE)
-})
+}))
 }
 }
 \references{

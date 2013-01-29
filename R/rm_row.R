@@ -42,7 +42,7 @@ function(dataframe, search.column, terms) {
 #' Remove Empty Rows in a Data Frame
 #' 
 #' \code{rm_empty_row} - Removes the empty rows of a data set that are common in 
-#' reading in data (default method in \code{read.transcript}).
+#' reading in data (default method in \code{\link[qdap]{read.transcript}}).
 #' 
 #' @return \code{rm_empty_row} - returns a dataframe with empty rows removed.
 #' @rdname rm_row

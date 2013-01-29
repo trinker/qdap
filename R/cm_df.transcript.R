@@ -14,11 +14,12 @@
 #' good width and indent for a .docx file).
 #' @param \ldots Other arguments passed to strip.
 #' @return Returns a transcript by grouping variable with word number above each 
-#' word.  This makes use with cm_df2long transfer/usage easier because the 
-#' researcher has coded on a transcript with the numeric word index already.
+#' word.  This makes use with \code{\link[qdap]{cm_df2long}} transfer/usage 
+#' easier because the researcher has coded on a transcript with the numeric word 
+#' index already.
 #' @note It is recommended that the researcher actually codes on the output 
-#' from this file.  If a file already exists \code{cm_df.transcript} will append 
-#' to that file.
+#' from this file.  The codes can then be transferred to via a list.  If a file 
+#' already exists \code{cm_df.transcript} will append to that file.
 #' @author DWin, Gavin Simpson and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso \code{\link[qdap]{cm_df2long}},
 #' \code{\link[qdap]{cm_df.temp}}

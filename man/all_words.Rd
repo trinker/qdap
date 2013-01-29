@@ -29,7 +29,7 @@
   of the number of occurrences of each word.
 }
 \note{
-  Can not provide both \code{begins.with} and
+  Cannot provide both \code{begins.with} and
   \code{contains} arguments at once.  If both begins.with
   and contains are NULL all.words returns a frequency count
   for all words.

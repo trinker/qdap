@@ -47,15 +47,15 @@
   \code{\link[qdap]{strip}}.}
 }
 \value{
-  An object of class \code{"word_list"} is a list
-  containing at the following components:
-  \item{cwl}{complete word list; raw words} \item{swl}{stop
-  word list; same as rwl with stop words removed}
-  \item{fwl}{frequency word list; a data frame of words and
-  corresponding frequency counts} \item{fswl}{frequency
-  stopword word list; same as fwl but with stopwords
-  removed} \item{rfswl}{reduced frequency stopword word
-  list; same as fswl but truncated to n rows}
+  An object of class \code{"word_list"} is a list of lists
+  of verctors or dataframes containing the following
+  components: \item{cwl}{complete word list; raw words}
+  \item{swl}{stop word list; same as rwl with stop words
+  removed} \item{fwl}{frequency word list; a data frame of
+  words and corresponding frequency counts}
+  \item{fswl}{frequency stopword word list; same as fwl but
+  with stopwords removed} \item{rfswl}{reduced frequency
+  stopword word list; same as fswl but truncated to n rows}
 }
 \description{
   Transcript Apply Raw Word Lists and Frequency Counts by
@@ -63,15 +63,13 @@
 }
 \examples{
 \dontrun{
-XX <-word_list(raj.act.1$dialogue)
-names(XX)
-XX$cwl
-XX$swl
-XX$fwl
-XX$fswl
-XX$rfswl
+word_list(raj.act.1$dialogue)
 
-with(raj, word_list(text.var = dialogue, grouping.var = list(person, act)))
+out1 <- with(raj, word_list(text.var = dialogue,
+    grouping.var = list(person, act)))
+names(out1)
+lapply(out1$cwl, "[", 1:5)
+
 with(DATA, word_list(state, person))
 with(DATA, word_list(state, person, stopwords = Top25Words))
 with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))

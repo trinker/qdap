@@ -46,7 +46,7 @@ repl <- c("is not", "I would")
 
 replace_abbreviation(x, abv, repl)
 
-KEY <- rbind(abbreviations, data.frame(abv = abv, rep = repl))
+(KEY <- rbind(abbreviations, data.frame(abv = abv, rep = repl)))
 replace_abbreviation(x, KEY)
 }
 }

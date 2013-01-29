@@ -12,7 +12,7 @@
 #' orders the rows by frequency.
 #' @return Returns a dataframe with frequency counts of words that begin with or 
 #' contain the provided word chunk.
-#' @note Can not provide both \code{begins.with} and \code{contains} arguments 
+#' @note Cannot provide both \code{begins.with} and \code{contains} arguments 
 #' at once.  If both begins.with and contains are NULL all.words returns a 
 #' frequency count for all words.
 #' @seealso 

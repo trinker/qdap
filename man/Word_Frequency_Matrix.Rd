@@ -28,7 +28,8 @@
   \item{wfdf}{A word frequency data frame given instead of
   raw text.var and optional grouping.var. Basically
   converts a word frequency dataframe (wfdf) to a word
-  frequency matrix (\code{wfm}).  Default is NULL.}
+  frequency matrix (\code{\link[qdap]{wfm}}).  Default is
+  NULL.}
 
   \item{output}{Output type (either \code{"proportion"} or
   \code{"percent"}).}
@@ -51,7 +52,8 @@
   pass to \code{wf.combine}}
 
   \item{matrix}{logical.  If TRUE returns the output as a
-  \code{wfm} rather than a \code{wfdf} object}
+  \code{\link[qdap]{wfm}} rather than a
+  \code{\link[qdap]{wfdf}} object.}
 
   \item{char2space}{A vector of characters to be turned
   into spaces.  If \code{char.keep} is NULL,
@@ -95,38 +97,34 @@
 \examples{
 \dontrun{
 #word frequency matrix (wfm) example:
-with(DATA, wfm(state, list(sex, adult)))
-dat <- with(DATA, wfm(state, person))
+with(DATA, wfm(state, list(sex, adult)))[1:15, ]
+with(DATA, wfm(state, person))[1:15, ]
 
-#insert double tilde ("~~") to keep dual words (i.e. first last name)
+#insert double tilde ("~~") to keep phrases(i.e. first last name)
 alts <- c(" fun", "I ")
 state2 <- mgsub(alts, gsub("\\\\s", "~~", alts), DATA$state)
-with(DATA, wfm(state2, list(sex, adult)))
+with(DATA, wfm(state2, list(sex, adult)))[1:18, ]
 
 #word frequency dataframe (wfdf) example:
-with(DATA, wfdf(state, list(sex, adult)))
-with(DATA, wfdf(state, person))
+with(DATA, wfdf(state, list(sex, adult)))[1:15, ]
+with(DATA, wfdf(state, person))[1:15, ]
 
 #inset double tilde ("~~") to keep dual words (e.i. first last name)
 alts <- c(" fun", "I ")
 state2 <- mgsub(alts, gsub("\\\\s", "~~", alts), DATA$state)
-with(DATA, wfdf(state2, list(sex, adult)))
+with(DATA, wfdf(state2, list(sex, adult)))[1:18, ]
 
 #wfm.expanded example:
 z <- wfm(DATA$state, DATA$person)
-wfm.expanded(z)
-wfm.expanded(DATA$state, DATA$person)
-wfm.expanded(DATA$state, list(DATA$sex, DATA$adult))
+wfm.expanded(z)[30:45, ] #two "you"s
 
-#wf.combine example:
+#wf.combine examples:
+#===================
 #raw no margins (will work)
 x <- wfm(DATA$state, DATA$person)
 
 #raw with margin (will work)
 y <- wfdf(DATA$state, DATA$person, margins = TRUE)
-
-#proportion (will not work)
-z <- wfdf(DATA$state, DATA$person, output = "proportion")
 
 WL1 <- c(y[, 1])
 WL2 <- list(c("read", "the", "a"), c("you", "your", "you're"))
@@ -142,7 +140,7 @@ wf.combine(y, WL2) #Works (raw with margins)
 wf.combine(y, c("you", "your", "your're"))
 wf.combine(y, WL1)
 wf.combine(y, WL3)
-wf.combine(y, WL4) #Error b/c there's overlapping words in the word lists
+## wf.combine(y, WL4) #Error
 wf.combine(y, WL5)
 wf.combine(y, WL6)
 wf.combine(y, WL7)

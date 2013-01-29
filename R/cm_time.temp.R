@@ -18,7 +18,7 @@
 #' \dontrun{
 #' ## cm_time.temp(qcv(AA, BB, CC), ":30", "7:40", file = "foo.txt")
 #' ## delete("foo.txt")
-#' cm_time.temp2(qcv(AA, BB, CC), ":30", "7:40")
+#' cm_time.temp(qcv(AA, BB, CC), ":30", "7:40")
 #' 
 #' x <- list(
 #'     transcript_time_span = qcv(terms="00:00 - 1:12:00"),
