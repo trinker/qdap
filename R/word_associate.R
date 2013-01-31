@@ -96,33 +96,33 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' ms <- c(" I", "you")
-#' et <- c(" it", " no")
-#' word_associate(DATA2$state, DATA2$person, match.string = ms, 
+#' ms <- c(" I ", "you")
+#' et <- c(" it", " tell", "tru")
+#' out1 <- word_associate(DATA2$state, DATA2$person, match.string = ms, 
 #'     wordcloud = TRUE,  proportional = TRUE, 
 #'     network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,  
-#'     cloud.legend =c("A", "B", "C", "D"),
-#'     title.color = "blue", cloud.colors = c("red", "blue", "purple", "gray70"))
+#'     cloud.legend =c("A", "B", "C"),
+#'     title.color = "blue", cloud.colors = c("red", "purple", "gray70"))
 #' 
 #' #======================================
 #' #Note: You don't have to name the vectors in the lists but I do for clarity
 #' ms <- list(
-#'     list1 = c(" I ", " you"), 
+#'     list1 = c(" I ", " you", "not"), 
 #'     list2 = c(" wh")          
 #' )
 #' 
 #' et <- list(
-#'     B = c(" the", " on"), 
-#'     C = c(" it", " no")
+#'     B = c(" the", "do", "tru"), 
+#'     C = c(" it", " already", "we")
 #' )
 #' 
-#' word_associate(DATA2$state, DATA2$person, match.string = ms, 
+#' out2 <- word_associate(DATA2$state, DATA2$person, match.string = ms, 
 #'     wordcloud = TRUE,  proportional = TRUE, 
 #'     network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,  
 #'     cloud.legend =c("A", "B", "C", "D"),
 #'     title.color = "blue", cloud.colors = c("red", "blue", "purple", "gray70"))
 #' 
-#' word_associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = ms)
+#' out3 <- word_associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = ms)
 #' 
 #' #======================================
 #' m <- list(
@@ -135,12 +135,14 @@
 #'     C = c(" it", " no")
 #' )
 #' 
-#' word_associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = m)
-#' word_associate(raj.act.1$dialogue, list(raj.act.1$person), match.string = m)
-#' (out <- with(mraja1spl, word_associate(dialogue, list(fam.aff, sex), match.string = m)))
-#' names(out)
-#' lapply(out$dialogue, htruncdf, n = 20, w = 20)
-#' out$cap.f
+#' out4 <- word_associate(DATA2$state, list(DATA2$day, DATA2$person), 
+#'     match.string = m)
+#' out5 <- word_associate(raj.act.1$dialogue, list(raj.act.1$person), 
+#'     match.string = m)
+#' out6 <- with(mraja1spl, word_associate(dialogue, list(fam.aff, sex), 
+#'      match.string = m))
+#' names(out6)
+#' lapply(out6$dialogue, htruncdf, n = 20, w = 20)
 #' 
 #' #======================================
 #' DATA2$state2 <- space_fill(DATA2$state, c("is fun", "too fun"))
@@ -155,7 +157,7 @@
 #'     C = c(" it", " no")
 #' )
 #' 
-#' word_associate(DATA2$state2, DATA2$person, match.string = ms, 
+#' out7 <- word_associate(DATA2$state2, DATA2$person, match.string = ms, 
 #'     wordcloud = TRUE,  proportional = TRUE, 
 #'     network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,  
 #'     cloud.legend =c("A", "B", "C", "D"),
@@ -175,6 +177,13 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
     nw.legend = NULL, nw.legend.cex = .8, nw.legend.location = c(-1.54, 1.41),
     legend.override = FALSE, char2space = "~~", ...){
     network.graph <- NULL
+    if (is.list(match.string) & length(match.string) == 1) {
+        match.string <- unlist(match.string)
+    }
+    if (!is.null(extra.terms) && 
+        is.list(extra.terms) & length(extra.terms) == 1) {
+        extra.terms <- unlist(extra.terms)
+    }    
     if (network.plot | wordcloud) {
         if(is.null(nw.label.colors)) {
             nw.label.colors <- cloud.colors
@@ -344,6 +353,17 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
         if (!is.null(target.exclude)) {
             ECOLTERMS <- lapply(ECOLTERMS, function(x) x[!x %in% target.exclude])
         }
+        if (is.list(extra.terms) & length(extra.terms) > 1){
+            ECOLTERMS <- lapply(names(extra.terms), function(x) {
+                z <- unlist(ECOLTERMS[grepl(x, names(ECOLTERMS), fixed = TRUE)])
+                names(z) <- NULL
+                z
+            })
+            names(ECOLTERMS) <- names(extra.terms)
+        }
+        if (!is.list(extra.terms)) {
+             ECOLTERMS <- list(unlist(ECOLTERMS))
+        }
     }
     DF4 <- DF3
     DF4$text <- text.var2
@@ -353,9 +373,10 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
             enm <- length(UET)
             ratio <- enm/nm
             snm <- 1:nm
-            WSEARCH <- lapply(1:nm , function(i) unlist(list(COLTERMS[i], 
-                ECOLTERMS[seq(ratio-1, enm, by=ratio)[i]:seq(ratio, enm, 
-                by=ratio)[i]]), recursive=F))
+            WSEARCH <- lapply(1:nm , function(i) {
+                z <- list(COLTERMS[i], ECOLTERMS)
+                unlist(z, recursive=F)
+            })
         } else {
             WSEARCH <- COLTERMS
         }
@@ -363,9 +384,9 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
             WSEARCH <- lapply(WSEARCH, function(x) x[!x %in% target.exclude])
         }
         if (!is.null(ECOLTERMS)) {
-            v <- (length(COLTERMS) + length(ECOLTERMS))/length(COLTERMS)
+            v <- 1 + length(ECOLTERMS)
         } else {
-            v <- length(WSEARCH)
+            v <- 1
         }
     }
     if (wordcloud | network.plot) {
@@ -453,7 +474,7 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
         if (network.plot) {
             an <-  grep("adjmat", names(o))
             ads <- lapply(an, function(i) o[[i]])
-            lapply(seq_along(ads), function(i) {
+            invisible(lapply(seq_along(ads), function(i) {
                 word.network.plot(ads[[i]], label.cex = nw.label.cex, 
                 title.name = namesL2[[i]], layout = nw.layout, 
                 edge.color = nw.edge.color, title.color =title.color,
@@ -466,10 +487,10 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
                 legend.location = nw.legend.location, 
                 char2space = char2space, 
                 target.words = WSEARCH[choosennames][[i]])
-             })
+             }))
         }
         if (wordcloud) {
-            lapply(seq_along(freqlist), function(i) {
+            invisible(lapply(seq_along(freqlist), function(i) {
                suppressWarnings(trans.cloud(
                word.list = freqlist[[i]]$swl, 
                target.words = WSEARCH[choosennames2][[i]], 
@@ -479,7 +500,7 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
                legend = cloud.legend, legend.cex = cloud.legend.cex, 
                char2space = char2space, char.keep = char2space, 
                legend.location = cloud.legend.location, ...))
-            })
+            }))
         }
         return(o)    
     }

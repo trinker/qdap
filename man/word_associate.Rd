@@ -166,33 +166,33 @@
 }
 \examples{
 \dontrun{
-ms <- c(" I", "you")
-et <- c(" it", " no")
-word_associate(DATA2$state, DATA2$person, match.string = ms,
+ms <- c(" I ", "you")
+et <- c(" it", " tell", "tru")
+out1 <- word_associate(DATA2$state, DATA2$person, match.string = ms,
     wordcloud = TRUE,  proportional = TRUE,
     network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,
-    cloud.legend =c("A", "B", "C", "D"),
-    title.color = "blue", cloud.colors = c("red", "blue", "purple", "gray70"))
+    cloud.legend =c("A", "B", "C"),
+    title.color = "blue", cloud.colors = c("red", "purple", "gray70"))
 
 #======================================
 #Note: You don't have to name the vectors in the lists but I do for clarity
 ms <- list(
-    list1 = c(" I ", " you"),
+    list1 = c(" I ", " you", "not"),
     list2 = c(" wh")
 )
 
 et <- list(
-    B = c(" the", " on"),
-    C = c(" it", " no")
+    B = c(" the", "do", "tru"),
+    C = c(" it", " already", "we")
 )
 
-word_associate(DATA2$state, DATA2$person, match.string = ms,
+out2 <- word_associate(DATA2$state, DATA2$person, match.string = ms,
     wordcloud = TRUE,  proportional = TRUE,
     network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,
     cloud.legend =c("A", "B", "C", "D"),
     title.color = "blue", cloud.colors = c("red", "blue", "purple", "gray70"))
 
-word_associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = ms)
+out3 <- word_associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = ms)
 
 #======================================
 m <- list(
@@ -205,12 +205,14 @@ n <- list(
     C = c(" it", " no")
 )
 
-word_associate(DATA2$state, list(DATA2$day, DATA2$person), match.string = m)
-word_associate(raj.act.1$dialogue, list(raj.act.1$person), match.string = m)
-(out <- with(mraja1spl, word_associate(dialogue, list(fam.aff, sex), match.string = m)))
-names(out)
-lapply(out$dialogue, htruncdf, n = 20, w = 20)
-out$cap.f
+out4 <- word_associate(DATA2$state, list(DATA2$day, DATA2$person),
+    match.string = m)
+out5 <- word_associate(raj.act.1$dialogue, list(raj.act.1$person),
+    match.string = m)
+out6 <- with(mraja1spl, word_associate(dialogue, list(fam.aff, sex),
+     match.string = m))
+names(out6)
+lapply(out6$dialogue, htruncdf, n = 20, w = 20)
 
 #======================================
 DATA2$state2 <- space_fill(DATA2$state, c("is fun", "too fun"))
@@ -225,7 +227,7 @@ et <- list(
     C = c(" it", " no")
 )
 
-word_associate(DATA2$state2, DATA2$person, match.string = ms,
+out7 <- word_associate(DATA2$state2, DATA2$person, match.string = ms,
     wordcloud = TRUE,  proportional = TRUE,
     network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,
     cloud.legend =c("A", "B", "C", "D"),
