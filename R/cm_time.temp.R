@@ -31,6 +31,9 @@
 #' }
 cm_time.temp <-
 function(codes, start = ":00", end = NULL, file=NULL) {
+    if (Sys.info()["sysname"] != "Windows") {
+        writeClipboard <- NULL
+    }  
     if (!is.null(end)) {
         wid <- options()$width
         options(width=1000)

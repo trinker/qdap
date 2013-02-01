@@ -23,6 +23,9 @@
 #' }
 strWrap <-
 function(text = "clipboard", width = 70, copy2clip = TRUE) {
+    if (Sys.info()["sysname"] != "Windows") {
+        writeClipboard <- NULL
+    }  
     if (text == "clipboard") {
         if (Sys.info()["sysname"] == "Darwin") {        
             pcon <- pipe("pbpaste")

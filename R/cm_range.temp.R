@@ -19,6 +19,9 @@
 #' }
 cm_range.temp <-
 function(codes, file=NULL) {
+    if (Sys.info()["sysname"] != "Windows") {
+        writeClipboard <- NULL
+    }  
     x1 <- matrix(c("list(", 
         paste0("    ", codes[1:(length(codes)-1)], " = qcv(terms=''),"),
         paste0("    ", codes[length(codes)], " = qcv(terms='')"),

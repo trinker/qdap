@@ -31,6 +31,9 @@
 dir_map <- 
 function(loc, obj.prefix = "dat", col.names = c("person", "dialogue"), 
     file = NULL, copy2clip = TRUE) {
+    if (Sys.info()["sysname"] != "Windows") {
+        writeClipboard <- NULL
+    }    
     WD <- getwd()
     setwd(loc)
     fls <- dir()
