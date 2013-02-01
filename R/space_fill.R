@@ -19,7 +19,7 @@
 #' @details \code{link[qdap]{space_fill}} is useful for keeping grouped words 
 #' together.  Many functions in qdap take a \code{char.keep} or 
 #' \code{char2space} argument.  This can be used to prepare multi word phrases 
-#' (e.g. proper nouns) as a single unit.
+#' (e.g., proper nouns) as a single unit.
 #' @export
 #' @examples
 #' \dontrun{

@@ -15,11 +15,12 @@
 #' @param \dots data.frame object(s) to write to a file
 #' @param dir optional directory names.  If NULL a directory will be created in 
 #' the working directory with the data and time stamp as the folder name.
-#' @param open logical.  If TURE opens the directory upon completion.
+#' @param open logical.  If TRUE opens the directory upon completion.
 #' @return \code{mcsv_r} - reads in multiple csv files at once.
 #' @rdname multicsv
-#' @note \code{mcsv_r} is useful for reading in multiple csv files from 
-#' \code{cm_csv.temp} for interaction with \code{cm_range2long}.
+#' @note \code{\link[qdap]{mcsv_r}} is useful for reading in multiple csv files 
+#' from \code{\link[qdap]{cm_df.temp}} for interaction with 
+#' \code{\link[qdap]{cm_range2long}}.
 #' @details mcsv is short for "multiple csv" and the suffix c(_r, _w) stands for 
 #' "read" (r) or "write" (w).
 #' @seealso \code{\link[qdap]{cm_range2long}},

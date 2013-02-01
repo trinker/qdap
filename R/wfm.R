@@ -35,7 +35,7 @@
 #' with(DATA, wfm(state, list(sex, adult)))[1:15, ]
 #' with(DATA, wfm(state, person))[1:15, ]
 #' 
-#' #insert double tilde ("~~") to keep phrases(i.e. first last name)
+#' #insert double tilde ("~~") to keep phrases(i.e., first last name)
 #' alts <- c(" fun", "I ")
 #' state2 <- mgsub(alts, gsub("\\s", "~~", alts), DATA$state) 
 #' with(DATA, wfm(state2, list(sex, adult)))[1:18, ]
@@ -234,14 +234,14 @@ function(text.var, grouping.var = NULL, ...){
 
 #' Combined Word Frequency Data Frame
 #' 
-#' \code{wf.combine} - Combines words (rows) of a word frequency data frame (\code{wfdf}) 
-#' together.
+#' \code{wf.combine} - Combines words (rows) of a word frequency dataframe 
+#' (\code{wfdf}) together.
 #'
 #' @rdname Word_Frequency_Matrix
 #' @export
 #' @return \code{wf.combine} - returns a word frequency matrix (\code{wfm}) or 
 #' dataframe (\code{wfdf}) with counts for the combined word.lists merged and 
-#' remaining terms(else).
+#' remaining terms (\code{else}).
 wf.combine <-
 function(wf.obj, word.lists, matrix = FALSE){
     suppressWarnings(if (is.list(word.lists) & length(word.lists) > 1 & 

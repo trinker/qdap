@@ -1,6 +1,6 @@
 #' Generate Unit Spans 
 #' 
-#' Generates start and end times of supplied text selections (i.e. text 
+#' Generates start and end times of supplied text selections (i.e., text 
 #' selections are determined by any number of grouping variables).
 #' 
 #' @param text.var The text variable    

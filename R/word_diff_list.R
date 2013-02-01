@@ -8,7 +8,7 @@
 #' or a list of 1 or more grouping variables.
 #' @param vs.all logical. If TRUE looks at each grouping variable against all 
 #' others ("a" vs. all comparison).  If FALSE looks at each "a" vs. "b", 
-#' comparison (e.g. for groups "a", "b", and "c"; "a" vs. "b", "a" vs. "c" and
+#' comparison (e.g., for groups "a", "b", and "c"; "a" vs. "b", "a" vs. "c" and
 #' "b" vs. "c" will be considered).
 #' @param vs.all.cut If vs.all.cut = TRUE this argument controls the number of 
 #' other groups that may share a word (default is 1).

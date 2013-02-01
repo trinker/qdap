@@ -36,7 +36,7 @@ function(text.var, apostrophe.remove = FALSE, ...) {
 #' end marks.
 #' 
 #' @return \code{breaker} - returns a vector of striped words and qdap 
-#' recognized endmarks (i.e. \code{".", "!", "?", "*", "-"}).
+#' recognized endmarks (i.e., \code{".", "!", "?", "*", "-"}).
 #' @rdname bag.o.words
 #' @export
 breaker <-
@@ -49,7 +49,7 @@ function(text.var) {
 #' Bag of Words & Endmarks by Row
 #' 
 #' \code{word.split} - Reduces a text column to a list of vectors of bag of 
-#' words and qdap recognized end marks (i.e. \code{".", "!", "?", "*", "-"}).
+#' words and qdap recognized end marks (i.e., \code{".", "!", "?", "*", "-"}).
 #' 
 #' @rdname bag.o.words
 #' @export

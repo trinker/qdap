@@ -49,13 +49,14 @@
 #' equivalent to 1.0. 
 #' @param legend.location The x and y co-ordinates to be used to position the 
 #' legend.
-#' @param char.keep A character vector of symbol character (i.e. punctuation) 
+#' @param char.keep A character vector of symbol character (i.e., punctuation) 
 #' that strip should keep.  The default is to strip everything except apostrophes.  
 #' This enables the use of special characters to be turned into spaces or for 
 #' characters to be retained.
 #' @param char2space A vector of characters to be turned into spaces.  If 
 #' \code{char.keep} is NULL, \code{char2space} will activate this argument.
-#' @return Returns a series of word cloud plots with target words (themes) colored.
+#' @return Returns a series of word cloud plots with target words (themes) 
+#' colored.
 #' @seealso \code{\link[wordcloud]{wordcloud}}
 #' @keywords wordcloud
 #' @export

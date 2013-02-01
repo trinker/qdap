@@ -6,7 +6,7 @@
 #' @param grouping.var The grouping variables.  Default NULL generates one word 
 #' list for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
-#' @param FUN A word function with a numeric vector output (e.g. 
+#' @param FUN A word function with a numeric vector output (e.g., 
 #' \code{syllable.sum}, \code{character.count} or \code{word.count}).
 #' @param scale.by A character string indicating which dimensions to scale by. 
 #' One of \code{"all"}, \code{"grouping"}, or \code{"both"}.  Default NULL scales 

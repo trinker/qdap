@@ -3,7 +3,7 @@
 #' Strip text of unwanted characters.
 #' 
 #' @param x The text variable.
-#' @param char.keep A character vector of symbols (i.e. punctuation) that 
+#' @param char.keep A character vector of symbols (i.e., punctuation) that 
 #' \code{\link[qdap]{strip}} should keep.  The default is to strip every symbol 
 #' except apostrophes and a double tilde \code{"~~"}.  The double tilde 
 #' \code{"~~"} is included for a convenient means of keeping word groups 

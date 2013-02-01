@@ -5,7 +5,7 @@
 #' @param \ldots Character objects. Either \ldots or \code{terms} argument must 
 #' be utilized.
 #' @param terms An optional argument to present the terms as one long character 
-#' string.  This is useful if the split (separator) is not a comma (e.g. spaces 
+#' string.  This is useful if the split (separator) is not a comma (e.g., spaces 
 #' are the term separators).
 #' @param space.wrap logical.  If TRUE wraps the vector of terms with a 
 #' leading/trailing space. 
@@ -13,7 +13,7 @@
 #' trailing space. 
 #' @param leading logical.  If TRUE wraps the vector of terms with a 
 #' leading space. 
-#' @param split Character vector of length one to use for splitting (i.e. the 
+#' @param split Character vector of length one to use for splitting (i.e., the 
 #' separator used in the vector).  For use with the argument \code{terms}.
 #' @param rm.blank logical.  If TRUE removes all blank spaces from the vector.
 #' @return Returns a character vector.

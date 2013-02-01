@@ -1,6 +1,6 @@
 #' Search for Potential Missing Values
 #' 
-#' Search for potential missing values (i.e. sentences that are merely a 
+#' Search for potential missing values (i.e., sentences that are merely a 
 #' punctuation mark) and optionally replace with missing value (\code{NA}).  
 #' Useful in the initial cleaning process.
 #' 

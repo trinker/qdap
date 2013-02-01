@@ -2,7 +2,7 @@
 #' 
 #' \code{termco} - Search a transcript by any number of grouping variables for 
 #' categories (themes) of grouped root terms.  While there are other termco 
-#' functions in the termco family (e.g. \code{\link[qdap]{termco.d}}) 
+#' functions in the termco family (e.g., \code{\link[qdap]{termco.d}}) 
 #' \code{termco} is a more powerful and flexible wrapper intended for general 
 #' use.
 #' 
@@ -21,7 +21,7 @@
 #' @param digits Integer; number of decimal places to round when printing.   
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from the text 
 #' before examining.
-#' @param char.keep A character vector of symbol character (i.e. punctuation) 
+#' @param char.keep A character vector of symbol character (i.e., punctuation) 
 #' that strip should keep.  The default is to strip everything except 
 #' apostrophes. \code{\link[qdap]{termco}} attempts to auto detect characters to 
 #' keep based on the elements in \code{match.list}. 
@@ -43,14 +43,14 @@
 #' @section Warning: Percentages are calculated as a ratio of counts of 
 #' \code{match.list} elements to word counts.  Word counts do not contain 
 #' symbols or digits.  Using symbols, digits or small segments of full words 
-#' (e.g. "to") could total more than 100\%.
+#' (e.g., "to") could total more than 100\%.
 #' @rdname termco  
 #' @note The match.list/match.string is (optionally) case and character 
 #' sensitive.  Spacing is an important way to grab specific words and requires 
 #' careful thought.  Using "read" will find the words "bread", "read" "reading", 
 #' and "ready".  If you want to search for just the word "read" you'd supply a 
 #' vector of c(" read ", " reads", " reading", " reader").  To search for non 
-#' character arguments (i.e. numbers and symbols) additional arguments from 
+#' character arguments (i.e., numbers and symbols) additional arguments from 
 #' strip must be passed.
 #' @seealso \code{\link[qdap]{termco.c}}
 #' @keywords word-search
@@ -203,7 +203,7 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
 #' 
 #' @param match.string A vector of terms to search for.  When using inside of 
 #' \code{term.match} the term(s) must be words or partial words but do not have 
-#' to be when using \code{\link[qdap]{termco.d}} (i.e. they can be phrases, 
+#' to be when using \code{\link[qdap]{termco.d}} (i.e., they can be phrases, 
 #' symbols etc.).
 #' @rdname termco
 #' @export
@@ -291,7 +291,7 @@ function(text.var, terms, return.list=TRUE, apostrophe.remove=FALSE) {
 #' Convert a termco dataframe to a matrix
 #' 
 #' \code{termco2mat} - Convert a termco dataframe to a matrix for use with 
-#' visualization functions (e.g. heatmap2 of the gplots package).
+#' visualization functions (e.g., \code{\link[gplots]{heatmap2}}).
 #' 
 #' @param dataframe A termco (or termco.d) dataframe or object.
 #' @param drop.wc logical.  If TRUE the word count column will be dropped.

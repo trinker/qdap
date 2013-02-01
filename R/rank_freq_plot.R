@@ -9,9 +9,9 @@
 #' or more grouping variables.  
 #' @param ncol integer value indicating the number of columns in the facet wrap.
 #' @param jitter Amount of horizontal jitter to add to the points.
-#' @param log.freq logical.  If TURE plots the frequencies in the natural log 
+#' @param log.freq logical.  If TRUE plots the frequencies in the natural log 
 #' scale.
-#' @param log.rank logical.  If TURE plots the ranks in the natural log scale.
+#' @param log.rank logical.  If TRUE plots the ranks in the natural log scale.
 #' @param hap.col Color of the hapax legomenon points.
 #' @param dis.col Color of the dis legomenon points.
 #' @param alpha Transparency level of points (ranges between 0 and 1).

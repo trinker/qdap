@@ -11,9 +11,9 @@
 #' intended for when separate is FALSE.
 #' @param separate logical.  If TRUE separates sentences into words. If FALSE 
 #' retains sentences.
-#' @param strip logical.  IF TURE strips the text of all punctuation except 
+#' @param strip logical.  IF TRUE strips the text of all punctuation except 
 #' apostrophes.
-#' @param unique logical.  If TRUE keeps only unique words (if unlist is TURE) 
+#' @param unique logical.  If TRUE keeps only unique words (if unlist is TRUE) 
 #' or sentences (if unlist is FALSE).  General use intended for when unlist is 
 #' TRUE.
 #' @param char.keep If strip is TRUE this argument provides a means of retaining 

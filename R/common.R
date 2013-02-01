@@ -1,13 +1,13 @@
 #' Find Common Words Between Groups
 #' 
-#' Find common words between grouping variables (e.g. people).
+#' Find common words between grouping variables (e.g., people).
 #' 
 #' @param word.list A list of names character vectors.
 #' @param overlap Minimum/exact amount of overlap.
 #' @param equal.or A character vector of c(\code{"equal"}, \code{"greater"}, 
 #' \code{"more"}, \code{"less"}).
-#' @param \dots In lieu of word.list the user may input n number of character 
-#' vectors.
+#' @param \dots In lieu of \code{word.list} the user may input n number of 
+#' character vectors.
 #' @rdname common
 #' @return Returns a dataframe of all words that match the criteria set by 
 #' \code{overlap} and \code{equal.or}.

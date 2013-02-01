@@ -10,7 +10,7 @@
 #' @param remove.bracketed logical.  If TRUE brackets are removed from the 
 #' analysis.
 #' @param algorithm.report logical.  If TRUE generates a report of words not 
-#' found in the dictionary (i.e. syllables were calculated with an algorithm).
+#' found in the dictionary (i.e., syllables were calculated with an algorithm).
 #' @return \code{syllable.sum} - returns a vector of syllable counts per row. 
 #' @rdname syllabication
 #' @details The worker function of all the syllable functions is 

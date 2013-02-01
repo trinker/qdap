@@ -1,6 +1,6 @@
 #' Exclude Codes
 #'
-#' Find the occurrences of n codes excluding the nth code.  e.g.  You have 
+#' Find the occurrences of n codes excluding the nth code.  For example you have 
 #' times/words coded for a teacher and you also have times/words coded for 
 #' happiness.  You can find all the happiness times excluding the teacher times 
 #' or vise versa.

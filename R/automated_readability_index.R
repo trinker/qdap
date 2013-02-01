@@ -15,7 +15,7 @@
 #' the readability as well as a list of two dataframe: 1) \code{SENTENCES_USED} 
 #' and 2) \code{SENTENCE_AVERAGES}.
 #' @rdname Readability
-#' @section Warning: Many of the indices (e.g. Automated Readability Index) 
+#' @section Warning: Many of the indices (e.g., Automated Readability Index) 
 #' are derived from word difficulty (letters per word) and sentence difficulty 
 #' (words per sentence).  If you have not run the sentSplit function on your 
 #' data the results may not be accurate.

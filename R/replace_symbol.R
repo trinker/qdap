@@ -1,6 +1,6 @@
 #' Replace Symbols With Word Equivalents
 #' 
-#' This function replaces symbols with word equivalents (e.g. \code{@@} becomes 
+#' This function replaces symbols with word equivalents (e.g., \code{@@} becomes 
 #' \code{"at"}.
 #' 
 #' @param text.var  The text variable.

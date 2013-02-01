@@ -16,7 +16,7 @@
 #' pronoun I.
 #' @param rm.bracket logical If TRUE all brackets and bracketed text are 
 #' removed from analysis.
-#' @param char.keep A character vector of symbols (i.e. punctuation) that 
+#' @param char.keep A character vector of symbols (i.e., punctuation) that 
 #' \code{word_list} should keep.  The default is to remove every symbol except 
 #' apostrophes.
 #' @param apostrophe.remove logical.  If TRUE removes apostrophes from the 

@@ -3,8 +3,8 @@
 #' Creates a new environment for quick hash style dictionary lookup.
 #' 
 #' @param x A two column dataframe.
-#' @param mode.out The type of output (column 2) expected (e.g. \code{"character"}, 
-#' \code{"numeric"}, etc.)
+#' @param mode.out The type of output (column 2) expected (e.g.,
+#' \code{"character"}, \code{"numeric"}, etc.)
 #' @return Creates a "hash table" or a two column data frame in its own 
 #' environment.  
 #' @author Bryan Goodrich and Tyler Rinker <tyler.rinker@@gmail.com>.

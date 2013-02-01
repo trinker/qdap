@@ -23,7 +23,7 @@
 #' (default is text ...).
 #' @param quote2bracket logical. If TRUE replaces curly quotes with curly braces 
 #' (default is FALSE).  If FALSE curly quotes are removed.
-#' @param rm.empty.rows logical.  If TURE \code{\link[qdap]{read.transcript}}  
+#' @param rm.empty.rows logical.  If TRUE \code{\link[qdap]{read.transcript}}  
 #' attempts to remove empty rows.
 #' @param na.strings A vector of character strings which are to be interpreted 
 #' as NA values.

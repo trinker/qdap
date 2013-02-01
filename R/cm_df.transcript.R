@@ -8,7 +8,7 @@
 #' list for all text.  Also takes a single grouping variable or a list of 1 or 
 #' more grouping variables.
 #' @param file A connection, or a character string naming the file to print to 
-#' (e.g. .doc, .txt).
+#' (e.g., .doc, .txt).
 #' @param indent Number of spaces to indent.
 #' @param width Width to output the file (defaults to 70; this is generally a 
 #' good width and indent for a .docx file).

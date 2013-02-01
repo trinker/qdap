@@ -5,7 +5,7 @@
 #' @param dataframe A data.frame object with the text column.
 #' @param column The column to be justified.  If NULL all columns are justified.
 #' @param keep.class logical.  If TRUE will attempt to keep the original classes 
-#' of the dataframe if the justification is not altered (i.e. numeric will not 
+#' of the dataframe if the justification is not altered (i.e., numeric will not 
 #' be honored but factor may be).
 #' @return Returns a dataframe with selected text column left/right justified.
 #' @rdname justification
