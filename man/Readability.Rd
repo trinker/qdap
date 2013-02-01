@@ -83,6 +83,7 @@
   may not be accurate.
 }
 \examples{
+\dontrun{
 AR1 <- with(rajSPLIT, automated_readability_index(dialogue, list(person, act)))
 htruncdf(AR1,, 15)
 AR2 <- with(rajSPLIT, automated_readability_index(dialogue, list(sex, fam.aff)))
@@ -111,6 +112,7 @@ LW1 <- with(rajSPLIT, linsear_write(dialogue, list(person, act)))
 head(LW1)
 LW2 <- with(rajSPLIT, linsear_write(dialogue, list(sex, fam.aff)))
 head(LW2)
+}
 }
 \references{
   Coleman, M., & Liau, T. L. (1975). A computer readability

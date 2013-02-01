@@ -38,6 +38,7 @@
 #' Flesch-Kincaid, Fry, Linsear Write
 #' @export
 #' @examples
+#' \dontrun{
 #' AR1 <- with(rajSPLIT, automated_readability_index(dialogue, list(person, act)))
 #' htruncdf(AR1,, 15)
 #' AR2 <- with(rajSPLIT, automated_readability_index(dialogue, list(sex, fam.aff)))
@@ -66,6 +67,7 @@
 #' head(LW1)
 #' LW2 <- with(rajSPLIT, linsear_write(dialogue, list(sex, fam.aff)))
 #' head(LW2)
+#' }
 automated_readability_index <-
 function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     if(is.null(grouping.var)) {

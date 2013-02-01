@@ -10,6 +10,8 @@
 #' the directory without the file extension.
 #' @param list A character vector of length one to name the list being read in.  
 #' Default is \code{"L1"}.
+#' @param pos where to do the removal. By default, uses the current environment. 
+#' @param envir the environment to use. 
 #' @param \dots data.frame object(s) to write to a file
 #' @param dir optional directory names.  If NULL a directory will be created in 
 #' the working directory with the data and time stamp as the folder name.
@@ -21,7 +23,8 @@
 #' @details mcsv is short for "multiple csv" and the suffix c(_r, _w) stands for 
 #' "read" (r) or "write" (w).
 #' @seealso \code{\link[qdap]{cm_range2long}},
-#' \code{\link[qdap]{cm_df.temp}}
+#' \code{\link[qdap]{cm_df.temp}},
+#' \code{\link[base]{assign}}
 #' @export
 #' @examples
 #' \dontrun{
@@ -43,7 +46,8 @@
 #' delete("foo")
 #' }
 mcsv_r <-
-function(files, a.names = NULL, l.name = NULL, list = TRUE){
+function(files, a.names = NULL, l.name = NULL, list = TRUE, pos = 1,
+    envir = as.environment(pos)){
     if (is.null(a.names)){
         a.names <- unlist(lapply(files, function(x){
             v <- unlist(strsplit(x, "/|\\\\"))
@@ -52,7 +56,7 @@ function(files, a.names = NULL, l.name = NULL, list = TRUE){
         }))
     }
     invisible(lapply(seq_along(files), function(i) {
-        assign(a.names[i], read.csv(files[i]), envir = .GlobalEnv)
+        assign(a.names[i], read.csv(files[i]), envir = envir)
     }))
     if (list) {
         L1 <- lapply(a.names, function(x){
@@ -62,7 +66,7 @@ function(files, a.names = NULL, l.name = NULL, list = TRUE){
         if (is.null(l.name)){
             l.name <- "L1"
         }
-        assign(l.name, L1, envir = .GlobalEnv)
+        assign(l.name, L1, envir = envir)
     }
     assi <- paste(c(l.name, a.names), collapse=", ")
     message(paste0("objects assigned: ", assi))

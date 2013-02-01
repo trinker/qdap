@@ -3,7 +3,8 @@
 \alias{mcsv_w}
 \title{Read/Write Multiple csv Files at a Time}
 \usage{
-  mcsv_r(files, a.names = NULL, l.name = NULL, list = TRUE)
+  mcsv_r(files, a.names = NULL, l.name = NULL, list = TRUE,
+    pos = 1, envir = as.environment(pos))
 
   mcsv_w(..., dir = NULL, open = FALSE)
 }
@@ -21,6 +22,11 @@
 
   \item{list}{A character vector of length one to name the
   list being read in. Default is \code{"L1"}.}
+
+  \item{pos}{where to do the removal. By default, uses the
+  current environment.}
+
+  \item{envir}{the environment to use.}
 
   \item{\dots}{data.frame object(s) to write to a file}
 
@@ -75,6 +81,7 @@ delete("foo")
 }
 \seealso{
   \code{\link[qdap]{cm_range2long}},
-  \code{\link[qdap]{cm_df.temp}}
+  \code{\link[qdap]{cm_df.temp}},
+  \code{\link[base]{assign}}
 }
 

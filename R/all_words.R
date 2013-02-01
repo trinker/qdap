@@ -8,12 +8,13 @@
 #' this if searching for a word beginning with the word chunk.
 #' @param contains This argument takes a word chunk.  Default is NULL. Use this 
 #' if searching for a word containing the word chunk.
-#' @param alphabetical logical.  If True orders rows alphabetically, if false 
+#' @param alphabetical logical.  If TRUE orders rows alphabetically, if FALSE 
 #' orders the rows by frequency.
 #' @return Returns a dataframe with frequency counts of words that begin with or 
 #' contain the provided word chunk.
 #' @note Cannot provide both \code{begins.with} and \code{contains} arguments 
-#' at once.  If both begins.with and contains are NULL all.words returns a 
+#' at once.  If both begins.with and contains are NULL 
+#' \code{\link[qdap]{all_words}} returns a 
 #' frequency count for all words.
 #' @seealso 
 #' \code{\link[qdap]{term.match}}
