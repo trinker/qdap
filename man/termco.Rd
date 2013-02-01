@@ -53,7 +53,7 @@
   apostrophes from the text before examining.}
 
   \item{char.keep}{A character vector of symbol character
-  (i.e. punctuation) that strip should keep.  The default
+  (i.e., punctuation) that strip should keep.  The default
   is to strip everything except apostrophes.
   \code{\link[qdap]{termco}} attempts to auto detect
   characters to keep based on the elements in
@@ -71,7 +71,7 @@
   \item{match.string}{A vector of terms to search for.
   When using inside of \code{term.match} the term(s) must
   be words or partial words but do not have to be when
-  using \code{\link[qdap]{termco.d}} (i.e. they can be
+  using \code{\link[qdap]{termco.d}} (i.e., they can be
   phrases, symbols etc.).}
 
   \item{terms}{The terms to search for in the
@@ -124,7 +124,7 @@
   \code{termco} - Search a transcript by any number of
   grouping variables for categories (themes) of grouped
   root terms.  While there are other termco functions in
-  the termco family (e.g. \code{\link[qdap]{termco.d}})
+  the termco family (e.g., \code{\link[qdap]{termco.d}})
   \code{termco} is a more powerful and flexible wrapper
   intended for general use.
 
@@ -135,8 +135,8 @@
   exactly match term(s).
 
   \code{termco2mat} - Convert a termco dataframe to a
-  matrix for use with visualization functions (e.g.
-  heatmap2 of the gplots package).
+  matrix for use with visualization functions (e.g.,
+  \code{\link[gplots]{heatmap2}}).
 }
 \note{
   The match.list/match.string is (optionally) case and
@@ -146,14 +146,14 @@
   "ready".  If you want to search for just the word "read"
   you'd supply a vector of c(" read ", " reads", "
   reading", " reader").  To search for non character
-  arguments (i.e. numbers and symbols) additional arguments
-  from strip must be passed.
+  arguments (i.e., numbers and symbols) additional
+  arguments from strip must be passed.
 }
 \section{Warning}{
   Percentages are calculated as a ratio of counts of
   \code{match.list} elements to word counts.  Word counts
   do not contain symbols or digits.  Using symbols, digits
-  or small segments of full words (e.g. "to") could total
+  or small segments of full words (e.g., "to") could total
   more than 100\%.
 }
 \examples{

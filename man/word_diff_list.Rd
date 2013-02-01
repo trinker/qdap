@@ -15,7 +15,7 @@
 
   \item{vs.all}{logical. If TRUE looks at each grouping
   variable against all others ("a" vs. all comparison).  If
-  FALSE looks at each "a" vs. "b", comparison (e.g. for
+  FALSE looks at each "a" vs. "b", comparison (e.g., for
   groups "a", "b", and "c"; "a" vs. "b", "a" vs. "c" and
   "b" vs. "c" will be considered).}
 

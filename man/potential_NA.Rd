@@ -15,7 +15,7 @@
   numbers and text.
 }
 \description{
-  Search for potential missing values (i.e. sentences that
+  Search for potential missing values (i.e., sentences that
   are merely a punctuation mark) and optionally replace
   with missing value (\code{NA}). Useful in the initial
   cleaning process.

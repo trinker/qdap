@@ -76,7 +76,7 @@
   transcript(s) by zero or more grouping variable(s).
 }
 \section{Warning}{
-  Many of the indices (e.g. Automated Readability Index)
+  Many of the indices (e.g., Automated Readability Index)
   are derived from word difficulty (letters per word) and
   sentence difficulty (words per sentence).  If you have
   not run the sentSplit function on your data the results

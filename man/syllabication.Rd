@@ -28,7 +28,7 @@
   removed from the analysis.}
 
   \item{algorithm.report}{logical.  If TRUE generates a
-  report of words not found in the dictionary (i.e.
+  report of words not found in the dictionary (i.e.,
   syllables were calculated with an algorithm).}
 }
 \value{

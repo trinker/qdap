@@ -23,11 +23,11 @@
   \item{separate}{logical.  If TRUE separates sentences
   into words. If FALSE retains sentences.}
 
-  \item{strip}{logical.  IF TURE strips the text of all
+  \item{strip}{logical.  IF TRUE strips the text of all
   punctuation except apostrophes.}
 
   \item{unique}{logical.  If TRUE keeps only unique words
-  (if unlist is TURE) or sentences (if unlist is FALSE).
+  (if unlist is TRUE) or sentences (if unlist is FALSE).
   General use intended for when unlist is TRUE.}
 
   \item{char.keep}{If strip is TRUE this argument provides

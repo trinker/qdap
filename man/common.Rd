@@ -13,15 +13,15 @@
   \item{equal.or}{A character vector of c(\code{"equal"},
   \code{"greater"}, \code{"more"}, \code{"less"}).}
 
-  \item{\dots}{In lieu of word.list the user may input n
-  number of character vectors.}
+  \item{\dots}{In lieu of \code{word.list} the user may
+  input n number of character vectors.}
 }
 \value{
   Returns a dataframe of all words that match the criteria
   set by \code{overlap} and \code{equal.or}.
 }
 \description{
-  Find common words between grouping variables (e.g.
+  Find common words between grouping variables (e.g.,
   people).
 }
 \examples{

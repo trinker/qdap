@@ -16,7 +16,7 @@
 
   \item{keep.class}{logical.  If TRUE will attempt to keep
   the original classes of the dataframe if the
-  justification is not altered (i.e. numeric will not be
+  justification is not altered (i.e., numeric will not be
   honored but factor may be).}
 }
 \value{

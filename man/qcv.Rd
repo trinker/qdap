@@ -12,7 +12,7 @@
 
   \item{terms}{An optional argument to present the terms as
   one long character string.  This is useful if the split
-  (separator) is not a comma (e.g. spaces are the term
+  (separator) is not a comma (e.g., spaces are the term
   separators).}
 
   \item{space.wrap}{logical.  If TRUE wraps the vector of
@@ -25,7 +25,7 @@
   terms with a leading space.}
 
   \item{split}{Character vector of length one to use for
-  splitting (i.e. the separator used in the vector).  For
+  splitting (i.e., the separator used in the vector).  For
   use with the argument \code{terms}.}
 
   \item{rm.blank}{logical.  If TRUE removes all blank

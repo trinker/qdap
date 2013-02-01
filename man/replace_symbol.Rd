@@ -31,7 +31,7 @@
 }
 \description{
   This function replaces symbols with word equivalents
-  (e.g. \code{@} becomes \code{"at"}.
+  (e.g., \code{@} becomes \code{"at"}.
 }
 \examples{
 \dontrun{

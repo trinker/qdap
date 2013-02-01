@@ -16,8 +16,7 @@
   the list.var argument}
 
   \item{list.var}{logical.  If TRUE creates a column for
-  the data frame created by each time.list passed to
-  cm_t2l}
+  the data frame created by each time.list.}
 
   \item{code.vars}{A character vector of code variables.
   If NULL uses all variables from the first column after
@@ -26,7 +25,7 @@
   \item{no.code}{The value to assign to no code; default is
   NA}
 
-  \item{add.start.end}{logical.  If TURE adds a column for
+  \item{add.start.end}{logical.  If TRUE adds a column for
   start and end times}
 
   \item{repeat.vars}{A character vector of repeated/stacked

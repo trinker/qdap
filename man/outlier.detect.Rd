@@ -14,7 +14,7 @@
   variables.}
 
   \item{FUN}{A word function with a numeric vector output
-  (e.g. \code{syllable.sum}, \code{character.count} or
+  (e.g., \code{syllable.sum}, \code{character.count} or
   \code{word.count}).}
 
   \item{scale.by}{A character string indicating which

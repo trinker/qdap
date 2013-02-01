@@ -34,7 +34,7 @@
   will be created in the working directory with the data
   and time stamp as the folder name.}
 
-  \item{open}{logical.  If TURE opens the directory upon
+  \item{open}{logical.  If TRUE opens the directory upon
   completion.}
 }
 \value{
@@ -55,9 +55,9 @@
   stands for "read" (r) or "write" (w).
 }
 \note{
-  \code{mcsv_r} is useful for reading in multiple csv files
-  from \code{cm_csv.temp} for interaction with
-  \code{cm_range2long}.
+  \code{\link[qdap]{mcsv_r}} is useful for reading in
+  multiple csv files from \code{\link[qdap]{cm_df.temp}}
+  for interaction with \code{\link[qdap]{cm_range2long}}.
 }
 \examples{
 \dontrun{

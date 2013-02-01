@@ -23,7 +23,6 @@ Imports:
     Snowball,
     gplots,
     gridExtra,
-    gdata,
     openNLP,
     XML,
     RCurl,

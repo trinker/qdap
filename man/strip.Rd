@@ -8,7 +8,7 @@
 \arguments{
   \item{x}{The text variable.}
 
-  \item{char.keep}{A character vector of symbols (i.e.
+  \item{char.keep}{A character vector of symbols (i.e.,
   punctuation) that \code{\link[qdap]{strip}} should keep.
   The default is to strip every symbol except apostrophes
   and a double tilde \code{"~~"}.  The double tilde

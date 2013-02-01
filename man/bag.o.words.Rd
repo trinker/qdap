@@ -23,7 +23,7 @@
   Returns a vector of striped words.
 
   \code{breaker} - returns a vector of striped words and
-  qdap recognized endmarks (i.e. \code{".", "!", "?", "*",
+  qdap recognized endmarks (i.e., \code{".", "!", "?", "*",
   "-"}).
 }
 \description{
@@ -35,7 +35,7 @@
 
   \code{word.split} - Reduces a text column to a list of
   vectors of bag of words and qdap recognized end marks
-  (i.e. \code{".", "!", "?", "*", "-"}).
+  (i.e., \code{".", "!", "?", "*", "-"}).
 }
 \examples{
 \dontrun{

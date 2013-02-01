@@ -44,7 +44,7 @@
 }
 \description{
   Generates start and end times of supplied text selections
-  (i.e. text selections are determined by any number of
+  (i.e., text selections are determined by any number of
   grouping variables).
 }
 \note{

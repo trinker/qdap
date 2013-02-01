@@ -17,7 +17,7 @@
   Returns a vector with abbreviations replaced.
 }
 \description{
-  Replaces numeric represented numbers with words (e.g.
+  Replaces numeric represented numbers with words (e.g.,
   1001 becomes one thousand one).
 }
 \examples{

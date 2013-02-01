@@ -27,10 +27,10 @@
   \item{jitter}{Amount of horizontal jitter to add to the
   points.}
 
-  \item{log.freq}{logical.  If TURE plots the frequencies
+  \item{log.freq}{logical.  If TRUE plots the frequencies
   in the natural log scale.}
 
-  \item{log.rank}{logical.  If TURE plots the ranks in the
+  \item{log.rank}{logical.  If TRUE plots the ranks in the
   natural log scale.}
 
   \item{hap.col}{Color of the hapax legomenon points.}

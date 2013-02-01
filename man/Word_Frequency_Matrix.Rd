@@ -73,7 +73,8 @@
 
   \code{wf.combine} - returns a word frequency matrix
   (\code{wfm}) or dataframe (\code{wfdf}) with counts for
-  the combined word.lists merged and remaining terms(else).
+  the combined word.lists merged and remaining terms
+  (\code{else}).
 }
 \description{
   \code{wfm} - Generate a word frequency matrix by grouping
@@ -86,7 +87,7 @@
   have multiple rows for each word.
 
   \code{wf.combine} - Combines words (rows) of a word
-  frequency data frame (\code{wfdf}) together.
+  frequency dataframe (\code{wfdf}) together.
 }
 \note{
   Words can be kept as one by inserting a double tilde
@@ -100,7 +101,7 @@
 with(DATA, wfm(state, list(sex, adult)))[1:15, ]
 with(DATA, wfm(state, person))[1:15, ]
 
-#insert double tilde ("~~") to keep phrases(i.e. first last name)
+#insert double tilde ("~~") to keep phrases(i.e., first last name)
 alts <- c(" fun", "I ")
 state2 <- mgsub(alts, gsub("\\\\s", "~~", alts), DATA$state)
 with(DATA, wfm(state2, list(sex, adult)))[1:18, ]

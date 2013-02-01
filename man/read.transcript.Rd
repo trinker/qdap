@@ -42,7 +42,7 @@
   quotes with curly braces (default is FALSE).  If FALSE
   curly quotes are removed.}
 
-  \item{rm.empty.rows}{logical.  If TURE
+  \item{rm.empty.rows}{logical.  If TRUE
   \code{\link[qdap]{read.transcript}} attempts to remove
   empty rows.}
 

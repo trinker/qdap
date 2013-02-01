@@ -8,7 +8,7 @@
   \item{x}{A two column dataframe.}
 
   \item{mode.out}{The type of output (column 2) expected
-  (e.g. \code{"character"}, \code{"numeric"}, etc.)}
+  (e.g., \code{"character"}, \code{"numeric"}, etc.)}
 }
 \value{
   Creates a "hash table" or a two column data frame in its

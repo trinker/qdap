@@ -36,7 +36,7 @@
   \item{rm.bracket}{logical If TRUE all brackets and
   bracketed text are removed from analysis.}
 
-  \item{char.keep}{A character vector of symbols (i.e.
+  \item{char.keep}{A character vector of symbols (i.e.,
   punctuation) that \code{word_list} should keep.  The
   default is to remove every symbol except apostrophes.}
 

@@ -38,8 +38,8 @@
   \code{link[qdap]{space_fill}} is useful for keeping
   grouped words together.  Many functions in qdap take a
   \code{char.keep} or \code{char2space} argument.  This can
-  be used to prepare multi word phrases (e.g. proper nouns)
-  as a single unit.
+  be used to prepare multi word phrases (e.g., proper
+  nouns) as a single unit.
 }
 \note{
   \code{link[qdap]{strip}} by default does not remove the

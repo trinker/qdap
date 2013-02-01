@@ -103,7 +103,7 @@
   used to position the legend.}
 
   \item{char.keep}{A character vector of symbol character
-  (i.e. punctuation) that strip should keep.  The default
+  (i.e., punctuation) that strip should keep.  The default
   is to strip everything except apostrophes. This enables
   the use of special characters to be turned into spaces or
   for characters to be retained.}

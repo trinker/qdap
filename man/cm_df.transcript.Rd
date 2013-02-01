@@ -14,7 +14,7 @@
   variables.}
 
   \item{file}{A connection, or a character string naming
-  the file to print to (e.g. .doc, .txt).}
+  the file to print to (e.g., .doc, .txt).}
 
   \item{indent}{Number of spaces to indent.}
 
