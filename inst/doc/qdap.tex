@@ -1,0 +1,45 @@
+\documentclass[a4paper]{article}
+
+\usepackage[margin=2cm]{geometry}
+\usepackage[round]{natbib}
+\usepackage{url}
+
+\newcommand{\acronym}[1]{\textsc{#1}}
+\newcommand{\class}[1]{\mbox{\textsf{#1}}}
+\newcommand{\code}[1]{\mbox{\texttt{#1}}}
+\newcommand{\pkg}[1]{{\normalfont\fontseries{b}\selectfont #1}}
+\newcommand{\proglang}[1]{\textsf{#1}}
+
+\usepackage{Sweave}
+\begin{document}
+\input{qdap-concordance}
+
+
+\title{Introduction to \pkg{qdap}: Quantitative Discourse Analysis Package}
+\author{Tyler W. Rinker}
+\maketitle
+
+
+\section*{Introduction}
+This vignette gives a short introduction to basic workflow and function usage
+for \pkg{qdap}. \pkg{qdap} is an \proglang{R} package designed
+to assist in quantitative discourse analysis. The package stands as a bridge
+between qualitative transcripts of dialogue and statistical analysis and
+visualization.
+
+The qdap package automates many of the tasks associated with quantitative 
+discourse analysis of transcripts containing discourse including frequency 
+counts of sentence types, words, sentence, turns of talk, syllable counts and 
+other assorted analysis tasks. The package provides parsing tools for preparing 
+transcript data. Many functions enable the user to aggregate data by any number 
+of grouping variables providing analysis and seamless integration with other R 
+packages that undertake higher level analysis and visualization of text. This 
+provides the user with a more efficient and targeted analysis.
+
+\section*{Work Flow}
+\section*{Reading in Data}
+
+\begin{Schunk}
+\begin{Sinput}
+> doc1 <- system.file("extdata/trans1.docx", package = "qdap")
+> dat1 <- read.transcript(doc1)
