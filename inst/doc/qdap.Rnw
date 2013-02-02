@@ -1,8 +1,28 @@
 \documentclass[a4paper]{article}
-
-\usepackage[margin=2cm]{geometry}
-\usepackage[round]{natbib}
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\usepackage{scrextend}
+\usepackage{amsmath}
+\usepackage[sc]{mathpazo}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
 \usepackage{url}
+\usepackage[unicode=true,pdfusetitle,
+ bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,
+ breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]
+ {hyperref}
+
+\usepackage{hyperref}
+\usepackage{here}
+\usepackage{tcolorbox}
+\usepackage{ulem}
+
+
+\usepackage{listings}
+\usepackage{inconsolata}
+
 
 \newcommand{\acronym}[1]{\textsc{#1}}
 \newcommand{\class}[1]{\mbox{\textsf{#1}}}
@@ -11,51 +31,114 @@
 \newcommand{\proglang}[1]{\textsf{#1}}
 
 \begin{document}
-\SweaveOpts{concordance=TRUE}
 
-
-\title{Introduction to \pkg{qdap}: Quantitative Discourse Analysis Package}
+\title{Introduction to \pkg{qdap}:\\Quantitative Discourse Analysis Package}
 \author{Tyler W. Rinker}
 \maketitle
 
-<<Init,echo=FALSE,results=hide>>=
-library(qdap)
+<<setup, include=FALSE, cache=FALSE>>=
+library(qdap); library(gdata); library(pacman)
 @
 
 \section*{Introduction}
-This vignette gives a short introduction to basic workflow and function usage
-for \pkg{qdap}. \pkg{qdap} is an \proglang{R} package designed
+\hspace{.4cm} This vignette gives an introduction to basic workflow and function 
+usage for \pkg{qdap}. \pkg{qdap} is an \proglang{R} package designed
 to assist in quantitative discourse analysis. The package stands as a bridge
 between qualitative transcripts of dialogue and statistical analysis and
 visualization.
+\vspace{.5cm}
 
-The qdap package automates many of the tasks associated with quantitative 
+\pkg{qdap} automates many of the tasks associated with quantitative 
 discourse analysis of transcripts containing discourse including frequency 
 counts of sentence types, words, sentence, turns of talk, syllable counts and 
 other assorted analysis tasks. The package provides parsing tools for preparing 
 transcript data. Many functions enable the user to aggregate data by any number 
-of grouping variables providing analysis and seamless integration with other R 
-packages that undertake higher level analysis and visualization of text. This 
-provides the user with a more efficient and targeted analysis.
+of grouping variables providing analysis and seamless integration with other 
+\proglang{R} packages that undertake higher level analysis and visualization of 
+text. This provides the user with a more efficient and targeted analysis.
 
 \section*{Work Flow}
-\section*{Reading in Data}
+\begin{enumerate}
+  \item Transcribing and Initial Coding
+  \item Basic qdap Tools  
+  \item Reading In Transcripts
+  \item Viewing
+  \item Cleaning and Parsing text
+  \item Formating Text
+  \item Shaping   %key_merge sentSplit
+  \item Coding (range and time stamp) %output, coding, input, reshaping  all under transcript range and time (ment 
+  \item Code Transformations
+  \item Quantifying (counts, indices and scores)%  \item Counts  \item Text Scores
+  \item Visualizations   %ggplot2, base, grid, lattice
+  \item Export Tables, Plots and Data  %save after long parse
+  \item Linking to Other Packages  %mention reshape2, plyr, lmer/SEM/lavan/stats/base/
+\end{enumerate}
 
-<<Readin,keep.source=TRUE>>=
+\section*{Transcribing and Coding}
+\section*{Reading in Transcripts}
+
+\subsection*{Read a Single Transcript}
+<<Readin1a,  include=TRUE, eval=FALSE>>=
 doc1 <- system.file("extdata/trans1.docx", package = "qdap")
 dat1 <- read.transcript(doc1)
 truncdf(dat1, 40)
+@
 
+<<Readin1b, echo = FALSE, results ='markup'>>=
+doc1 <- "C:/R/R-2.15.1/library/qdap/extdata/trans1.docx"
+dat1 <- read.transcript(doc1)
+truncdf(dat1, 40)
+@
+
+<<Readin2a,  include=TRUE, eval=FALSE>>=
 dat2 <- read.transcript(doc1, col.names = c("person", "dialogue"))
 truncdf(dat2, 40)
+@
 
+<<Readin2b, echo = FALSE, results ='markup' >>=
+dat2 <- read.transcript(doc1, col.names = c("person", "dialogue"))
+truncdf(dat2, 40)
+@
+
+<<Readin3a, include=TRUE, eval=FALSE>>=
 doc3 <- system.file("extdata/trans4.xlsx", package = "qdap")
 dat3 <- read.transcript(doc3)
 truncdf(dat3, 40)
 @
 
-\bibliographystyle{jss}
-\bibliography{refs}
+<<Readin3b, echo = FALSE, results ='markup'>>=
+doc3 <- "C:/R/R-2.15.1/library/qdap/extdata/trans4.xlsx"
+dat3 <- read.transcript(doc3)
+truncdf(dat3, 40)
+@
 
+\subsection*{Reading Many Transcripts}
+
+<<Mreadinga, include=TRUE, eval=FALSE>>=
+DIR <- gsub("trans1.docx", "", system.file("extdata/trans1.docx", package = "qdap"))
+dir_map(DIR, col.names = c("per", "text"))
+@
+
+<<setup2, include=FALSE, cache=FALSE>>=
+options(width=62)
+
+  listing <- function(x, options) {
+    paste("\\begin{lstlisting}[basicstyle=\\ttfamily,breaklines=true]\n",
+      x, "\\end{lstlisting}\n", sep = "")
+  }
+  knit_hooks$set(source=listing, output=listing)
+@
+
+
+<<Mreadingb, echo = FALSE, results ='markup', tidy=TRUE>>=
+DIR <- "C:/R/R-2.15.1/library/qdap/extdata/"
+dir_map(DIR, col.names = c("per", "text"))
+@
+
+
+\section*{Cleaning and Parsing}
+
+\bibliographystyle{abbrvnat}
+\bibliography{refs}
 
 \end{document}

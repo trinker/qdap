@@ -46,6 +46,7 @@
 #' @author Bryan Goodrich and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @references \url{https://github.com/trinker/qdap/wiki/Reading-.docx-\%5BMS-Word\%5D-Transcripts-into-R}
 #' @keywords transcript
+#' @seealso \code{\link[qdap]{dir_map}}
 #' @export
 #' @import XML gdata RCurl
 #' @examples

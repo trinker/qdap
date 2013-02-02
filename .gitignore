@@ -133,3 +133,4 @@ pip-log.txt
 tools.R
 .gitattributes
 qdap.Rproj
+.Rprofile
