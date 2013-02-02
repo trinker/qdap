@@ -183,7 +183,20 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
     } else {
         o <- TD
     }
+    if (is.list(match.list) && length(CC) != length(match.list)){
+        lens <- sapply(match.list, length)
+        if(any(names(match.list) %in% "")) {
+            blanks <- names(match.list) %in% ""
+            if (any(lens[blanks] > 1)) {
+                stop("Vectors in match.list must be named or of length one")
+            }
+            names(match.list)[blanks] <- unlist(match.list[blanks])
+        }
+    }
     o[1:3] <- lapply(o[1:3], function(x) {
+        mat <- x[, !colnames(x) %in% names(match.list), drop=FALSE]
+        mat2 <- x[, names(match.list), drop=FALSE]
+        x <- data.frame(mat, mat2, check.names = FALSE)
         colnames(x)[1] <- NAME
         rownames(x) <- NULL
         x
@@ -194,7 +207,6 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
     class(o) <- "termco"
     o
 }
-
 
 #' Search for Terms
 #' 

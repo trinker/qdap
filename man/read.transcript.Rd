@@ -113,5 +113,8 @@ dat5 <- read.transcript(doc4); truncdf(dat5, 40) #an .xlsx file
 \references{
   \url{https://github.com/trinker/qdap/wiki/Reading-.docx-\%5BMS-Word\%5D-Transcripts-into-R}
 }
+\seealso{
+  \code{\link[qdap]{dir_map}}
+}
 \keyword{transcript}
 
