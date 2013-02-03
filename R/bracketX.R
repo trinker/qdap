@@ -149,7 +149,7 @@ function(text.var, bracket = "all", with = FALSE, merge = TRUE){
 
 #' genX
 #' 
-#' \code{genX} - Apply general chunk extraction to character vectors.
+#' \code{genX} - Apply general chunk removal to character vectors.
 #' 
 #' @param left A vector of character or numeric symbols as the left edge to 
 #' extract.
@@ -182,7 +182,7 @@ function (text.var, left, right, missing = NULL, names = FALSE) {
 
 #' genXtract
 #' 
-#' \code{genXtract} - Apply general chunk removal to character vectors.
+#' \code{genXtract} - Apply general chunk extraction to character vectors.
 #' 
 #' @rdname bracketX
 #' @return \code{genX} -  returns a list of vectors of removed text.

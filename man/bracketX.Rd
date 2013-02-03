@@ -64,10 +64,10 @@
   \code{bracketXtract} - Apply bracket extraction to
   character vectors.
 
-  \code{genX} - Apply general chunk extraction to character
+  \code{genX} - Apply general chunk removal to character
   vectors.
 
-  \code{genXtract} - Apply general chunk removal to
+  \code{genXtract} - Apply general chunk extraction to
   character vectors.
 }
 \section{Warning}{

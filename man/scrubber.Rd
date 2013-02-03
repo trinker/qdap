@@ -14,7 +14,7 @@
   \item{fix.comma}{logical If TRUE removes any spaces
   before a comma.}
 
-  \item{rm.quote}{logical If TRUE removes and \code{\"}.}
+  \item{rm.quote}{logical If TRUE removes any \code{\"}.}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[qdap]{replace_number}}.}

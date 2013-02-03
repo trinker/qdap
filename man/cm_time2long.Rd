@@ -30,8 +30,8 @@
 }
 \description{
   Transforms the range coding structure(s) from
-  cm_time.temp (in list format) into a data frame of start
-  and end times in long format.
+  \code{\link[qdap]{cm_time.temp}} (in list format) into a
+  data frame of start and end times in long format.
 }
 \examples{
 \dontrun{
