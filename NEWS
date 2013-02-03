@@ -1,6 +1,17 @@
-qdap 0.1.0
+qdap 0.2.1
+----------------------------------------------------------------
+
+BUG FIXES
+
+* word_associate colors the word cloud appropriately and deals with the error 
+caused by a grouping variable not containing any words from 1 or more of the 
+vectors of a list supplied to match string
+
+
+qdap 0.2.0
 ----------------------------------------------------------------
 
 * The first installation of the qdap package
+
 * Package designed to bridge the gap between qualitative data and quantitative 
 analysis

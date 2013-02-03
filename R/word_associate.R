@@ -349,7 +349,10 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
     if (!is.null(extra.terms)) {
         UET <- unlist(extra.terms, recursive = FALSE)
         ECOLTERMS <- lapply(UET, function(x) term.find(Terms, mat = x, ))
-        ECOLTERMS <- lapply(ECOLTERMS, function(i) Terms[i])
+        ECOLTERMS <- lapply(ECOLTERMS, function(i) {
+            if (identical(unlist(i), integer(0))) return(NULL)         
+            Terms[i]
+        })
         if (!is.null(target.exclude)) {
             ECOLTERMS <- lapply(ECOLTERMS, function(x) x[!x %in% target.exclude])
         }
@@ -492,14 +495,14 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
         if (wordcloud) {
             invisible(lapply(seq_along(freqlist), function(i) {
                suppressWarnings(trans.cloud(
-               word.list = freqlist[[i]]$swl, 
-               target.words = WSEARCH[choosennames2][[i]], 
-               stopwords = stopwords, 
-               cloud.colors = cloud.colors, expand.target = FALSE,
-               title.color = title.color, title.names = namesL1[[i]], 
-               legend = cloud.legend, legend.cex = cloud.legend.cex, 
-               char2space = char2space, char.keep = char2space, 
-               legend.location = cloud.legend.location, ...))
+                   word.list = freqlist[[i]]$swl, 
+                   target.words = WSEARCH[choosennames2][[i]], 
+                   stopwords = stopwords, 
+                   cloud.colors = cloud.colors, expand.target = FALSE,
+                   title.color = title.color, title.names = namesL1[[i]], 
+                   legend = cloud.legend, legend.cex = cloud.legend.cex, 
+                   char2space = char2space, char.keep = char2space, 
+                   legend.location = cloud.legend.location, ...))
             }))
         }
         return(o)    

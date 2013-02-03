@@ -72,13 +72,14 @@
 #' 
 #' with(DATA, trans.cloud(state, person, target.words=terms, 
 #'     cloud.colors=qcv(red, green, blue, black, gray65), 
-#'     expand.target=FALSE, proportional=TRUE))
+#'     expand.target=FALSE, proportional=TRUE, legend=c(names(terms), 
+#'     "other")))
 #' 
 #' with(DATA, trans.cloud(state, person, target.words=terms,
 #'     stopwords=exclude(with(DATA, unique(bag.o.words(state))), 
 #'         unique(unlist(terms))), 
 #'     cloud.colors=qcv(red, green, blue, black, gray65), 
-#'     expand.target=FALSE, proportional=TRUE))
+#'     expand.target=FALSE, proportional=TRUE, legend=names(terms)))
 #' }
 trans.cloud <-
 function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE, 
@@ -89,13 +90,13 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
     title.padj = -4.5, title.location = 3, title.cex = NULL, title.names = NULL,
     proportional = FALSE, max.word.size = NULL, min.word.size = 0.5,
     legend = NULL, legend.cex = .8, legend.location = c(-.03, 1.03), 
-    char.keep = "~~", char2space = NULL) {
+    char.keep = "~~", char2space = "~~") {
     if(!is.null(char2space) & is.null(char.keep)) {
         char.keep <- char2space
     }
     if (!is.null(text.var)){
         word.list <- word_list(text.var = text.var, 
-            grouping.var = grouping.var, char.keep = char.keep)[["cwl"]]
+            grouping.var = grouping.var, char.keep = char.keep)[["swl"]]
     }
     if(is.list(word.list)) {
         PRO <- max(sapply(word.list, length))
@@ -151,19 +152,19 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
         if(proportional) {
             df2$freq <- floor((PRO/length(words))*df2$freq) 
         }
-        COL1 <- if (stem & !is.null(target.words)) {
-            sapply(target.words, stemDocument)
+        if (stem & !is.null(target.words)) {
+            COL1 <- sapply(target.words, stemDocument)
         } else {
             if (!stem & !is.null(target.words)) {
-                target.words
+                COL1 <- target.words
             } else {
-                NULL
+                COL1 <- NULL
             }
         }   
         if (!is.null(char2space)) {
             COL1 <- lapply(COL1, function(x) gsub(char2space, " ", x))
         }   
-        COL1 <- if(!is.null(target.words)){ 
+        if(!is.null(target.words)){ 
             capitalize <- function(x) {
                 simpleCap <- function(x) {
                     s <- strsplit(x, " ")[[1]]
@@ -173,19 +174,19 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
                 unlist(lapply(x, simpleCap)) 
             }
             FUN <- function(x) c(tolower(x), capitalize(x))
-            sapply(COL1, FUN)
+            COL1 <- lapply(COL1, FUN)
         } else {
-            NULL
+            COL1 <- NULL
         }
-        COL <- if (is.null(cloud.colors)) {
-            rep("black", length(df2$word))
+        if (is.null(cloud.colors)) {
+            COL <- rep("black", length(df2$word))
         } else {
             ncc <- length(cloud.colors)
-           if (TWstatus) {
-                text2color(words = df2$word, recode.words = list(c(COL1)), 
+            if (TWstatus) {
+                COL <- text2color(words = df2$word, recode.words = list(c(COL1)), 
                     colors = cloud.colors)
             } else {
-                text2color(words = df2$word, recode.words = COL1, 
+                COL <- text2color(words = df2$word, recode.words = COL1, 
                     colors = cloud.colors)
             }
         }
@@ -239,7 +240,9 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
                 }
             }
         )
-        target.words <- lapply(TF, function(i) uni[i])
+        target.words <- lapply(TF, function(i) {
+            uni[unlist(i)]
+        })
     }
     if (!is.null(target.exclude)) {
         target.words <- lapply(target.words, function(x) x[!x %in% target.exclude])

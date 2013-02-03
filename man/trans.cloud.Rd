@@ -14,7 +14,7 @@
     proportional = FALSE, max.word.size = NULL,
     min.word.size = 0.5, legend = NULL, legend.cex = 0.8,
     legend.location = c(-0.03, 1.03), char.keep = "~~",
-    char2space = NULL)
+    char2space = "~~")
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -131,13 +131,14 @@ terms <- list(
 
 with(DATA, trans.cloud(state, person, target.words=terms,
     cloud.colors=qcv(red, green, blue, black, gray65),
-    expand.target=FALSE, proportional=TRUE))
+    expand.target=FALSE, proportional=TRUE, legend=c(names(terms),
+    "other")))
 
 with(DATA, trans.cloud(state, person, target.words=terms,
     stopwords=exclude(with(DATA, unique(bag.o.words(state))),
         unique(unlist(terms))),
     cloud.colors=qcv(red, green, blue, black, gray65),
-    expand.target=FALSE, proportional=TRUE))
+    expand.target=FALSE, proportional=TRUE, legend=names(terms)))
 }
 }
 \seealso{
