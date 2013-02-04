@@ -18,11 +18,10 @@ install_github("qdap", "trinker")
 
 Note: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](http://CRAN.R-project.org/package=devtools) to install this way.
 
-Additionally, Windows users currently must install `XML` and `RCurl` before installing qdap development version.  Use the following short script:
+Additionally, Windows users currently must install `RCurl` before installing qdap development version.  Use the following short script:
 
 ```r
 URL <- "http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/2.15/"
-install.packages("XML", contriburl = URL)
 install.packages("RCurl", contriburl = URL)
 ```
 
