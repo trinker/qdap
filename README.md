@@ -16,7 +16,7 @@ library(devtools)
 install_github("qdap", "trinker")
 ```
 
-Note: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](http://CRAN.R-project.org/package=devtools) to install this way.
+**Note**: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](http://CRAN.R-project.org/package=devtools) to install this way.
 
 Additionally, Windows users currently must install `RCurl` before installing qdap development version.  Use the following short script:
 
@@ -25,7 +25,7 @@ URL <- "http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/2.15/"
 install.packages("RCurl", contriburl = URL)
 ```
 
-Note: Mac users must install `openNLP` before attempting to install `qdap`
+**Note**: Mac users must install `openNLP` before attempting to install `qdap`
 ```r
 install.packages("openNLP", type = "source")
 ```
