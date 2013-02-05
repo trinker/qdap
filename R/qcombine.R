@@ -34,9 +34,9 @@ qcombine <- function(mat, combined.columns, elim.old = TRUE){
     L1 <- lapply(combined.columns, function(x) {
         if (is.numeric(x)) {
             x <- names(mat)[x]
-        }      
+        }    
         if(all(x %in% colnames(mat))){
-            return(unlist(rowSums(mat[, x])))
+            return(unlist(rowSums(mat[, x, drop = FALSE])))
         }
         if(all(!x %in% colnames(mat))){
             return(unlist(rep(NA, nrow(mat))))

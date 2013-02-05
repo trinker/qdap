@@ -160,7 +160,9 @@
 \dontrun{
 #termco examples:
 
-# General form for match.list
+term <- c("the ", "she", " wh")
+with(raj.act.1,  termco(dialogue, person, term))
+# General form for match.list as themes
 #
 # ml <- list(
 #     cat1 = c(),
@@ -212,7 +214,6 @@ termco(DATA$state, DATA$person, list(doubt = synonyms("doubt", FALSE)))
 termco(DATA$state, DATA$person, syns)
 
 #termco.d examples:
-term.match(DATA$state, qcv(i, the))
 termco.d(DATA$state, DATA$person, c(" the", " i'"))
 termco.d(DATA$state, DATA$person, c(" the", " i'"), ignore.case=FALSE)
 termco.d(DATA$state, DATA$person, c(" the ", " i'"))

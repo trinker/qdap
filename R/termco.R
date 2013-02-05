@@ -59,7 +59,9 @@
 #' \dontrun{
 #' #termco examples:
 #' 
-#' # General form for match.list
+#' term <- c("the ", "she", " wh")
+#' with(raj.act.1,  termco(dialogue, person, term))
+#' # General form for match.list as themes
 #' #
 #' # ml <- list(
 #' #     cat1 = c(),
@@ -111,7 +113,6 @@
 #' termco(DATA$state, DATA$person, syns)
 #' 
 #' #termco.d examples:
-#' term.match(DATA$state, qcv(i, the))
 #' termco.d(DATA$state, DATA$person, c(" the", " i'"))
 #' termco.d(DATA$state, DATA$person, c(" the", " i'"), ignore.case=FALSE)
 #' termco.d(DATA$state, DATA$person, c(" the ", " i'"))
@@ -130,6 +131,9 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
     ignore.case = TRUE, elim.old = TRUE, percent = TRUE, digits = 2, 
     apostrophe.remove = FALSE, char.keep = NULL, digit.remove = NULL, 
     zero.replace = 0, ...) {
+    if (!is.list(match.list)) {
+        names(match.list) <- NULL
+    }  
     x <- unlist(match.list)
     a <- grepl("[^a-zA-Z[:space:]]", x)
     if (any(a)) {
@@ -166,23 +170,25 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
     preIND <- match.list
     IND <- unlist(lapply(preIND, length))
     new.names <- paste0("term(", names(IND)[IND != 1], ")")
-    CC <- match.list[sapply(match.list, length) > 1]
+    CC <- match.list[names(match.list) != ""]
     ML <- unlist(match.list)
     TD <- termco.d(text.var = text.var, grouping.var = grouping.var, 
         match.string = ML, ignore.case = ignore.case, percent = percent, 
         apostrophe.remove = apostrophe.remove, char.keep = NULL, 
         digit.remove = FALSE, digits = digits, zero.replace = zero.replace, ...)
+    colnames(TD[[3]]) <- colnames(TD[[1]])
     if (is.list(preIND)) {
         if(length(IND) == sum(IND)){
             o <- TD
         } else {
             o <- termco.c(TD, combined.columns = CC, new.name = new.names, 
-                zero.replace = zero.replace, short.term = short.term, 
+                zero.replace = zero.replace, short.term = TRUE, 
                 elim.old = elim.old, percent = percent, digits = digits)
         }
     } else {
         o <- TD
     }
+    colnames(o[[3]]) <- colnames(o[[2]]) <- colnames(o[[1]])
     if (is.list(match.list) && length(CC) != length(match.list)){
         lens <- sapply(match.list, length)
         if(any(names(match.list) %in% "")) {
@@ -194,15 +200,23 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
         }
     }
     o[1:3] <- lapply(o[1:3], function(x) {
+        nms2 <- colnames(x)[!colnames(x) %in% names(match.list)]
         mat <- x[, !colnames(x) %in% names(match.list), drop=FALSE]
+        colnames(mat) <- nms2
         mat2 <- x[, names(match.list), drop=FALSE]
         x <- data.frame(mat, mat2, check.names = FALSE)
         colnames(x)[1] <- NAME
         rownames(x) <- NULL
         x
     })
+    if (!short.term & is.list(match.list)) {
+        o[1:3] <- lapply(o[1:3], function(x) {
+            colnames(x)[-c(1:2)] <- paste0("term(", colnames(x)[-c(1:2)], ")")
+            return(x)
+        })
+    }
     if (short.term) {
-      o <- termco2short.term(o)
+        o <- termco2short.term(o)
     }
     class(o) <- "termco"
     o
@@ -399,7 +413,8 @@ function(x, digits = NULL, percent = NULL, zero.replace = NULL, ...) {
     rnp <- raw_pro_comb(x$raw[, -c(1:2), drop = FALSE], 
         x$prop[, -c(1:2), drop = FALSE], digits = digits, percent = percent, 
         zero.replace = zero.replace, override = TRUE)  
-    rnp <- data.frame(x$raw[, 1:2], rnp, check.names = FALSE)     
+    rnp <- data.frame(x$raw[, 1:2], rnp, check.names = FALSE)  
+    colnames(rnp) <- colnames(x[[1]])   
     print(rnp)
     options(width=WD)
 }
