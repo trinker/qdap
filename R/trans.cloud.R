@@ -80,6 +80,12 @@
 #'         unique(unlist(terms))), 
 #'     cloud.colors=qcv(red, green, blue, black, gray65), 
 #'     expand.target=FALSE, proportional=TRUE, legend=names(terms)))
+#'     
+#' with(mraja1, trans.cloud(dialogue, person, 
+#'     target.words=list(positive=positive.words, negative=negative.words,
+#'          negator=negation.words, amplifier=increase.amplification.words),
+#'     cloud.colors=qcv(green, red, black, yellow, gray65), 
+#'     expand.target=FALSE, proportional=TRUE, legend=names(terms)))
 #' }
 trans.cloud <-
 function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE, 

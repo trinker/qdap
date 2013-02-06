@@ -317,7 +317,7 @@ function(text.var, terms, return.list=TRUE, apostrophe.remove=FALSE) {
 #' Convert a termco dataframe to a matrix
 #' 
 #' \code{termco2mat} - Convert a termco dataframe to a matrix for use with 
-#' visualization functions (e.g., \code{\link[gplots]{heatmap2}}).
+#' visualization functions (e.g., \code{\link[gplots]{heatmap.2}}).
 #' 
 #' @param dataframe A termco (or termco.d) dataframe or object.
 #' @param drop.wc logical.  If TRUE the word count column will be dropped.

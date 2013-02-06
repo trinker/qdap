@@ -136,7 +136,7 @@
 
   \code{termco2mat} - Convert a termco dataframe to a
   matrix for use with visualization functions (e.g.,
-  \code{\link[gplots]{heatmap2}}).
+  \code{\link[gplots]{heatmap.2}}).
 }
 \note{
   The match.list/match.string is (optionally) case and

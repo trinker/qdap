@@ -9,6 +9,8 @@
 #' @param capitalize logical.  If TRUE selected terms are capitalized.
 #' @param warn logical.  If TRUE warns about rows not ending with standard qdap 
 #' punctuation endmarks.
+#' @param char.keep A character vector of symbols that should be kept withing 
+#' sentences.
 #' @param \dots Various: \cr
 #'     \emph{\code{stemmer} - Other arguments passed to 
 #'     \code{\link[qdap]{capitalizer}}} \cr
@@ -38,8 +40,9 @@
 #' out2 <- stem2df(DATA, "state", "new")
 #' truncdf(out2, 30)
 #' }
-stemmer <-
-function(text.var, rm.bracket = TRUE, capitalize = TRUE, warn = TRUE, ...){
+stemmer <- 
+function(text.var, rm.bracket = TRUE, capitalize = TRUE, warn = TRUE, 
+    char.keep = "~~", ...){
     txt <- as.character(text.var)
     if (rm.bracket){
         txt <- bracketX(txt)
@@ -56,7 +59,8 @@ function(text.var, rm.bracket = TRUE, capitalize = TRUE, warn = TRUE, ...){
             "The following row(s) do have standard qdap punctuation endmarks:\n", 
             " rows:", paste(which(bl), collapse = ", "), "\n"))
     }
-    LIST <- qdap::stopwords(txt, stopwords = NULL, strip = TRUE)
+    LIST <- qdap::stopwords(txt, stopwords = NULL, strip = TRUE, 
+        char.keep = char.keep)
     LIST <- lapply(LIST, function(x) {
         if(identical(x, character(0))) {
                 NA
@@ -89,11 +93,12 @@ function(text.var, rm.bracket = TRUE, capitalize = TRUE, warn = TRUE, ...){
     return(txt2)
 }
 
+
 #' Stem Words
 #' 
 #' \code{stem.words} - Wrapper for stemmer that stems a vector of words.
 #' 
-#' @return \code{stem.words} - returns a dataframe with a character vector with.
+#' @return \code{stem.words} - returns a vector of individually stemmed words.
 #' 
 #' @rdname stemmer
 #' @export

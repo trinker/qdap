@@ -14,6 +14,7 @@ Depends:
 Imports:
     gridExtra,
     chron,
+    grDevices,
     RColorBrewer,
     igraph,
     tm,
@@ -24,6 +25,7 @@ Imports:
     gplots,
     gridExtra,
     openNLP,
+    plotrix,
     XML,
     RCurl,
     reshape2,
@@ -181,3 +183,4 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
+    'bivar_gradcloud.R'

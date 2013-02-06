@@ -5,7 +5,7 @@
 \title{Stem Text}
 \usage{
   stemmer(text.var, rm.bracket = TRUE, capitalize = TRUE,
-    warn = TRUE, ...)
+    warn = TRUE, char.keep = "~~", ...)
 
   stem.words(...)
 
@@ -26,6 +26,9 @@
   \item{warn}{logical.  If TRUE warns about rows not ending
   with standard qdap punctuation endmarks.}
 
+  \item{char.keep}{A character vector of symbols that
+  should be kept withing sentences.}
+
   \item{\dots}{Various: \cr \emph{\code{stemmer} - Other
   arguments passed to \code{\link[qdap]{capitalizer}}} \cr
   \emph{\code{stem.words} - Words or terms.} \cr
@@ -42,8 +45,8 @@
   \code{stemmer} - returns a character vector with stemmed
   text.
 
-  \code{stem.words} - returns a dataframe with a character
-  vector with.
+  \code{stem.words} - returns a vector of individually
+  stemmed words.
 
   \code{stem2df} - returns a dataframe with a character
   vector with stemmed text.
