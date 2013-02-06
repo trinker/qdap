@@ -31,6 +31,6 @@ install.packages("openNLP", type = "source")
 ```
 
 ## Help
-For the qdap web page click [trinker.github.com/qdap](http://trinker.github.com/qdap/) [improvements to come]
+For the qdap web page click [trinker.github.com/qdap](http://trinker.github.com/qdap/) [improvements to come]   
 For a variety of qdap help files and videos [click here](https://github.com/trinker/qdap/wiki).   
 For the package pdf help manual [click here](https://dl.dropbox.com/u/61803503/qdap.pdf).
