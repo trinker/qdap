@@ -59,7 +59,7 @@
 #'     min.word.size = .025)
 #'     
 #' with(mraja1, bivar_gradcloud(dialogue, died, stopwords = Top25Words, 
-#'     rot.per = .5, title="Heatcloud", title.color="orange", title.cex=5))    
+#'     rot.per = .5, title="Heatcloud", title.color="orange", title.cex=1.75))    
 #' x <- with(subset(mraja1, fam.aff %in% qcv(cap, mont)), 
 #'     bivar_gradcloud(dialogue, fam.aff))
 #' head(x)     

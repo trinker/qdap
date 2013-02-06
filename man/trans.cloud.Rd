@@ -143,8 +143,32 @@ with(DATA, trans.cloud(state, person, target.words=terms,
 with(mraja1, trans.cloud(dialogue, person,
     target.words=list(positive=positive.words, negative=negative.words,
          negator=negation.words, amplifier=increase.amplification.words),
-    cloud.colors=qcv(green, red, black, yellow, gray65),
+    cloud.colors=qcv(green, red, black, orange, gray65),
     expand.target=FALSE, proportional=TRUE, legend=names(terms)))
+
+#color the negated phrases opposite:
+DATA <- qdap::DATA
+DATA[1, 4] <- "This is not good!"
+DATA[8, 4] <- "I don't distrust you."
+
+DATA$state <- space_fill(DATA$state, paste0(negation.words, " "),
+    rm.extra = FALSE)
+
+txt <- gsub("~~", " ", breaker(DATA$state))
+rev.neg <- sapply(negation.words, paste, negative.words)
+rev.pos <- sapply(negation.words, paste, positive.words)
+
+
+tw <- list(
+    positive=c(positive.words, rev.neg[rev.neg \%in\% txt]),
+    negative=c(negative.words, rev.pos[rev.pos \%in\% txt])
+)
+
+
+with(DATA, trans.cloud(state, person,
+    target.words=tw,
+    cloud.colors=qcv(darkgreen, red, gray65),
+    expand.target=FALSE, proportional=TRUE, legend=names(tw)))
 }
 }
 \seealso{
