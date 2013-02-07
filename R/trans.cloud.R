@@ -57,7 +57,8 @@
 #' \code{char.keep} is NULL, \code{char2space} will activate this argument.
 #' @return Returns a series of word cloud plots with target words (themes) 
 #' colored.
-#' @seealso \code{\link[wordcloud]{wordcloud}}
+#' @seealso \code{\link[wordcloud]{wordcloud}},
+#' \code{\link[qdap]{gradient_cloud}}
 #' @keywords wordcloud
 #' @export
 #' @import wordcloud

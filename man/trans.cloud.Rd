@@ -172,7 +172,8 @@ with(DATA, trans.cloud(state, person,
 }
 }
 \seealso{
-  \code{\link[wordcloud]{wordcloud}}
+  \code{\link[wordcloud]{wordcloud}},
+  \code{\link[qdap]{gradient_cloud}}
 }
 \keyword{wordcloud}
 

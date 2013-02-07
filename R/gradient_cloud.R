@@ -1,14 +1,16 @@
-#' Bi-variate Gradient Word Cloud
+#' Gradient Word Cloud
 #' 
-#' Produces a gradient word cloud colored by a bi-variate grouping variable.
+#' Produces a gradient word cloud colored by a binary grouping variable.
 #' 
 #' @param text.var The text variable.
-#' @param bigroup.var A bi-variate grouping variable.
-#' @param rev.bivar logical.  If TRUE the ordering of the bi-variate levels is reversed.
+#' @param bigroup.var A binary grouping variable.
+#' @param rev.bivar logical.  If TRUE the ordering of the bi-variate levels is 
+#' reversed.
 #' @param X The first gradient color for variable X.
 #' @param Y The second gradient color for variable Y.
 #' @param stem logical.  If TRUE the \code{text.var} will be stemmed.
-#' @param stopwords Words to exclude from the cloud.  Words will be removed after determing proportional word usage.
+#' @param stopwords Words to exclude from the cloud.  Words will be removed 
+#' after determing proportional word usage.
 #' @param caps logical.  If TRUE selected words will be capitalized.
 #' @param caps.list A vector of words to capitalize (\code{caps} must be TRUE).
 #' @param I.list logical.  If TRUE capitalizes I words and contractions.
@@ -53,18 +55,18 @@
 #' \dontrun{
 #' DATA$state <- space_fill(DATA$state, c("is fun", "too fun", "you liar"))
 #' 
-#' bivar_gradcloud(DATA$state, DATA$sex, title="fun")
-#' bivar_gradcloud(DATA$state, DATA$sex, title="fun", rev.bivar = TRUE)
-#' bivar_gradcloud(DATA$state, DATA$sex, title="fun", max.word.size = 5,
+#' gradient_cloud(DATA$state, DATA$sex, title="fun")
+#' gradient_cloud(DATA$state, DATA$sex, title="fun", rev.bivar = TRUE)
+#' gradient_cloud(DATA$state, DATA$sex, title="fun", max.word.size = 5,
 #'     min.word.size = .025)
 #'     
-#' with(mraja1, bivar_gradcloud(dialogue, died, stopwords = Top25Words, 
+#' with(mraja1, gradient_cloud(dialogue, died, stopwords = Top25Words, 
 #'     rot.per = .5, title="Heatcloud", title.color="orange", title.cex=1.75))    
 #' x <- with(subset(mraja1, fam.aff %in% qcv(cap, mont)), 
-#'     bivar_gradcloud(dialogue, fam.aff))
+#'     gradient_cloud(dialogue, fam.aff))
 #' head(x)     
 #' }
-bivar_gradcloud <- function(text.var, bigroup.var, rev.bivar = FALSE, X = "red", 
+gradient_cloud <- function(text.var, bigroup.var, rev.bivar = FALSE, X = "red", 
     Y = "blue", stem = FALSE, stopwords = NULL, caps = TRUE, caps.list = NULL, 
     I.list = TRUE, random.order = FALSE, rot.per = 0.0, min.freq = 1, 
     max.word.size = NULL, min.word.size = 0.5, breaks = 10, cloud.font = NULL, 

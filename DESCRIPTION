@@ -101,6 +101,7 @@ Collate:
     'gantt_plot.R'
     'gantt_rep.R'
     'gantt_wrap.R'
+    'gradient_cloud.R'
     'hash.R'
     'htruncdf.R'
     'imperative.R'
@@ -183,4 +184,3 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
-    'bivar_gradcloud.R'

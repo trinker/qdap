@@ -1,8 +1,8 @@
-\name{bivar_gradcloud}
-\alias{bivar_gradcloud}
-\title{Bi-variate Gradient Word Cloud}
+\name{gradient_cloud}
+\alias{gradient_cloud}
+\title{Gradient Word Cloud}
 \usage{
-  bivar_gradcloud(text.var, bigroup.var, rev.bivar = FALSE,
+  gradient_cloud(text.var, bigroup.var, rev.bivar = FALSE,
     X = "red", Y = "blue", stem = FALSE, stopwords = NULL,
     caps = TRUE, caps.list = NULL, I.list = TRUE,
     random.order = FALSE, rot.per = 0, min.freq = 1,
@@ -16,7 +16,7 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{bigroup.var}{A bi-variate grouping variable.}
+  \item{bigroup.var}{A binary grouping variable.}
 
   \item{rev.bivar}{logical.  If TRUE the ordering of the
   bi-variate levels is reversed.}
@@ -92,7 +92,7 @@
   dataframe used to make the cloud.
 }
 \description{
-  Produces a gradient word cloud colored by a bi-variate
+  Produces a gradient word cloud colored by a binary
   grouping variable.
 }
 \details{
@@ -104,15 +104,15 @@
 \dontrun{
 DATA$state <- space_fill(DATA$state, c("is fun", "too fun", "you liar"))
 
-bivar_gradcloud(DATA$state, DATA$sex, title="fun")
-bivar_gradcloud(DATA$state, DATA$sex, title="fun", rev.bivar = TRUE)
-bivar_gradcloud(DATA$state, DATA$sex, title="fun", max.word.size = 5,
+gradient_cloud(DATA$state, DATA$sex, title="fun")
+gradient_cloud(DATA$state, DATA$sex, title="fun", rev.bivar = TRUE)
+gradient_cloud(DATA$state, DATA$sex, title="fun", max.word.size = 5,
     min.word.size = .025)
 
-with(mraja1, bivar_gradcloud(dialogue, died, stopwords = Top25Words,
+with(mraja1, gradient_cloud(dialogue, died, stopwords = Top25Words,
     rot.per = .5, title="Heatcloud", title.color="orange", title.cex=1.75))
 x <- with(subset(mraja1, fam.aff \%in\% qcv(cap, mont)),
-    bivar_gradcloud(dialogue, fam.aff))
+    gradient_cloud(dialogue, fam.aff))
 head(x)
 }
 }
