@@ -164,8 +164,8 @@ function(time.list, list.var.name = "variable", list.var = TRUE,
     DF <- do.call(rbind, x3)
 #DF[, 3] <- DF[, 3] + 1            #REMOVE LATER IF NO PROLEMS ARISE
     DF[, 2] <- DF[, 2] - 1
-    DF$Start <- convert(DF$start)
-    DF$End <- convert(DF$end)
+    DF$Start <- sec2hms(DF$start)
+    DF$End <- sec2hms(DF$end)
     if (list.var) {
         DF <- data.frame(DF, VAR = rep(lv, nrow(DF)))
         colnames(DF)[ncol(DF)] <- list.var.name

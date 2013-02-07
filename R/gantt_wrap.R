@@ -151,9 +151,9 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
         dataframe$endp <- c((dataframe$end + border.size[1]))
         if (hms.scale) {
             dataframe$startp[dataframe$startp <= 0] <- 0
-            dataframe$startp <- as.numeric(convert(dataframe$startp +5))- 
-                as.numeric(convert(border.size[1]))
-            dataframe$endp <- as.numeric(convert(dataframe$endp))
+            dataframe$startp <- as.numeric(sec2hms(dataframe$startp +5))- 
+                as.numeric(sec2hms(border.size[1]))
+            dataframe$endp <- as.numeric(sec2hms(dataframe$endp))
         }
     } 
     if (hms.scale) {
@@ -161,8 +161,8 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
             dataframe$start <- dataframe$Start
             dataframe$end <- dataframe$End
         } else {
-            dataframe$start <- convert(dataframe$start)
-            dataframe$end <- convert(dataframe$end)
+            dataframe$start <- sec2hms(dataframe$start)
+            dataframe$end <- sec2hms(dataframe$end)
         }
     }
     theplot <- ggplot(dataframe, aes(colour=new4)) 

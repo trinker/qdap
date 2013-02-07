@@ -87,8 +87,8 @@ cm_code.overlap <- function(x2long.obj, overlap.code.list, rm.var = NULL) {
     DF <- cm_dummy2long(x2, rm.var = rm.var)
     if (comment(x2long.obj) == "cmtime") {
         DF$start <- DF$start + 1
-        DF$Start <- convert(DF$start)
-        DF$End <- convert(DF$end) 
+        DF$Start <- sec2hms(DF$start)
+        DF$End <- sec2hms(DF$end) 
         DF <- data.frame(DF[, -4, drop=FALSE], DF[, 4, drop=FALSE])
     }
     comment(DF) <- comment(x2long.obj)
@@ -97,3 +97,4 @@ cm_code.overlap <- function(x2long.obj, overlap.code.list, rm.var = NULL) {
     }
     DF
 }
+

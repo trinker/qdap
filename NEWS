@@ -16,15 +16,21 @@ BUG FIXES
 
 NEW FEATURES
 
-* `bivar_gradcloud`: Bi-variate gradient Word Cloud - A new plotting function 
-  that plots and colors words for a bi-variate variable based on which group of 
-  the bi-variate variable uses the term more frequently.
+* `bivar_gradcloud`: Binary gradient Word Cloud - A new plotting function 
+  that plots and colors words for a binary variable based on which group of 
+  the binary variable uses the term more frequently.
 
 MINOR FEATURES
 
 * `stemmer`, `stem2df` and `stem.words` now explicitally have the argument 
   char.keep set to "~~" to enable retaining special character formerly stripped 
   away.
+
+* `hms2sec`: A function to convert from h:m:s format to seconds.
+
+CHANGES
+
+* `sec2hms` is the new name for `convert` 
 
 qdap 0.2.0
 ----------------------------------------------------------------

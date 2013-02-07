@@ -1,19 +1,20 @@
 #' Convert Seconds to h:m:s
 #' 
-#' Converts a vector of seconds to h:m:s
+#' Converts a vector of seconds to h:m:s.
 #' 
 #' @param x A vector of times in seconds.
 #' @return Returns a vector of times in h:m:s format.  Generally, this function 
 #' is for internal use.
 #' @keywords time, conversion
-#' @seealso \code{\link[chron]{times}}
+#' @seealso \code{\link[chron]{times}},
+#' \code{\link[qdap]{hms2sec}}
 #' @export
 #' @import chron
 #' @examples 
 #' \dontrun{
-#' convert(c(256, 3456, 56565))
+#' sec2hms(c(256, 3456, 56565))
 #' }
-convert <-
+sec2hms <-
 function(x) {
     l1 <- FALSE
     if (length(x) == 1) {
@@ -44,4 +45,4 @@ function(x) {
 #}
 # @param l1 logical.  If TRUE returns only the first element (intended for 
 # internal use).
-# #' convert(c(256, 3456, 56565), TRUE)
+# #' sec2hms(c(256, 3456, 56565), TRUE)
