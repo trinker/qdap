@@ -10,6 +10,7 @@
 #' function.
 #' @seealso \code{\link[base]{outer}},
 #' \code{\link[stats]{cor}}
+#' @author Vincent Zoonekynd and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @export
 #' @examples
 #' \dontrun{

@@ -6,13 +6,13 @@
 \title{Bracket Parsing}
 \usage{
   bracketX(text.var, bracket = "all", missing = NULL,
-    names = FALSE)
+    names = FALSE, scrub = TRUE)
 
   bracketXtract(text.var, bracket = "all", with = FALSE,
     merge = TRUE)
 
   genX(text.var, left, right, missing = NULL,
-    names = FALSE)
+    names = FALSE, scrub = TRUE)
 
   genXtract(text.var, left, right, with = FALSE,
     merge = TRUE)
@@ -30,6 +30,9 @@
 
   \item{names}{logical.  If TRUE the sentences are given as
   the names of the counts.}
+
+  \item{scrub}{logical.  If TRUE
+  \code{\link[qdap]{scrubber}} will clean the text.}
 
   \item{with}{logical.  If TRUE returns the brackets and
   the bracketed text.}
@@ -69,13 +72,6 @@
 
   \code{genXtract} - Apply general chunk extraction to
   character vectors.
-}
-\section{Warning}{
-  the \code{gen} functions are more flexible than the
-  \code{bracket} functions but are not compatible with
-  special \code{\link[base]{regex}} characters.  It is
-  recommended that the researcher use the \code{bracket}
-  functions.
 }
 \examples{
 \dontrun{

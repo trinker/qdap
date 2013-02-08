@@ -10,11 +10,9 @@
 #' @param missing Value to assign to empty cells.
 #' @param names logical.  If TRUE the sentences are given as the names of the 
 #' counts.
+#' @param scrub logical.  If TRUE \code{\link[qdap]{scrubber}} will clean the 
+#' text.
 #' @return \code{bracketX} -  returns a vector of text with brackets removed.
-#' @section Warning: the \code{gen} functions are more flexible than the 
-#' \code{bracket} functions but are not compatible with special 
-#' \code{\link[base]{regex}} characters.  It is recommended that the researcher 
-#' use the \code{bracket} functions.
 #' @rdname bracketX
 #' @references \url{http://stackoverflow.com/questions/8621066/remove-text-inside-brackets-parens-and-or-braces}
 #' @keywords bracket-remove, parenthesis, bracket, curly-braces
@@ -58,7 +56,8 @@
 #' genX(DATA$state, c("is", "we"), c("too", "on"))
 #' }
 bracketX <- 
-function (text.var, bracket = "all", missing = NULL, names = FALSE) {
+function (text.var, bracket = "all", missing = NULL, names = FALSE, 
+    scrub = TRUE) {
     FUN <- function(bracket, text.var, missing, names) {
         X <- switch(bracket, 
             html = sapply(text.var, function(x) gsub("<.+?>", "", x)),
@@ -73,7 +72,9 @@ function (text.var, bracket = "all", missing = NULL, names = FALSE) {
                 sapply(P1, function(x) gsub("\\{.+?\\}", "", x))
             }
         )
-        X <- scrubber(gsub(" +", " ", X))
+        if (scrub) {
+            X <- scrubber(gsub(" +", " ", X))
+        }
         if (!is.null(missing)) {
             X[X == ""] <- missing
         }
@@ -159,13 +160,18 @@ function(text.var, bracket = "all", with = FALSE, merge = TRUE){
 #' @return \code{genXtract} - returns a vector of text with checks removed.
 #' @export
 genX <- 
-function (text.var, left, right, missing = NULL, names = FALSE) {
+function (text.var, left, right, missing = NULL, names = FALSE, scrub = TRUE) {
     if (length(left) != length(right)) {
         stop("left and right must be equal length") 
     }
+    specchar <- c(".", "|", "(", ")", "[", "{", "^", "$", "*", "+", "?")
+    left <- mgsub(specchar, paste0("\\", specchar), left, fixed = TRUE)
+    right <- mgsub(specchar, paste0("\\", specchar), right, fixed = TRUE)
     FUN <- function(left, right, text.var, missing, names) {
         X <- sapply(text.var, function(x) gsub(paste0(left, ".+?", right), "", x))
-        X <- scrubber(gsub(" +", " ", X))
+        if (scrub) {
+            X <- scrubber(gsub(" +", " ", X))
+        }
         if (!is.null(missing)) {
             X[X == ""] <- missing
         }
@@ -192,6 +198,9 @@ function(text.var, left, right, with = FALSE, merge = TRUE){
     if (length(left) != length(right)) {
         stop("left and right must be equal length") 
     }
+    specchar <- c(".", "|", "(", ")", "[", "{", "^", "$", "*", "+", "?")
+    left <- mgsub(specchar, paste0("\\", specchar), left, fixed = TRUE)
+    right <- mgsub(specchar, paste0("\\", specchar), right, fixed = TRUE)
     FUN <- function(left, right, text.var, with){   
         fmt <- if (with==TRUE) {
             "(%s).*?(%s)"

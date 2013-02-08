@@ -55,6 +55,10 @@ diag(x) <- (sapply(L1, length))
 x
 }
 }
+\author{
+  Vincent Zoonekynd and Tyler Rinker
+  <tyler.rinker@gmail.com>.
+}
 \seealso{
   \code{\link[base]{outer}}, \code{\link[stats]{cor}}
 }

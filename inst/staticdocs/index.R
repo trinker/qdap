@@ -172,7 +172,6 @@ list(
     sd_section("Print Functions", "",
       c(
         "print.adjacency_matrix",
-        "print.adjacency_matrix",
         "print.character.table",
         "print.cm_distance",
         "print.colsplit2df",
