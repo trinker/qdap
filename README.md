@@ -22,7 +22,7 @@ install_github("qdap", "trinker")
 Additionally, Windows users currently must install `RCurl` before installing qdap.  Use the following short script:
 
 ```r
-URL <- "http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/2.15/"
+URL <- "http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/3.0/"
 install.packages("RCurl", contriburl = URL)
 ```
 
