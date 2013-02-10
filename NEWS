@@ -14,6 +14,9 @@ BUG FIXES
   in a second vector of match.list.  termco now counts repeated terms multiple 
   times.
 
+* `folder` would not generate a directory with the time/date stamp if no 
+  directory name was given.
+
 NEW FEATURES
 
 * `bivar_gradcloud`: Binary gradient Word Cloud - A new plotting function 
@@ -27,6 +30,8 @@ MINOR FEATURES
   away.
 
 * `hms2sec`: A function to convert from h:m:s format to seconds.
+
+* `mcsv_w` now takes a list of data.frames.
 
 CHANGES
 
