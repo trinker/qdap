@@ -44,7 +44,7 @@ Description: This package automates many of the tasks associated with
     undertake higher level analysis and visualization of text.  This provides
     the user with a more efficient and targeted analysis.
 License: GPL-2
-URL: https://github.com/trinker/qdap
+URL: http://trinker.github.com/qdap/
 Collate:
     'adjacency_matrix.R'
     'all_words.R'

@@ -16,8 +16,8 @@ path <- "C:/Users/trinker/Desktop/qdap"
 path2 <- paste0(path, "/index.html")
 rdme <- "C:/Users/trinker/GitHub/qdap/inst/extra_statdoc/readme.R"
 extras <- qcv(right.just, coleman_liau, flesch_kincaid, fry, 
-    linsear_write, SMOG, syn, mgsub, adjmat, wc, char.table, wfdf)
-expand_statdoc(path2, to.icon = extras, readme = rdme)
+    linsear_write, SMOG, syn, mgsub, adjmat, wc, wfdf)
+expand_statdoc(path2, to.icon = extras, readme = rdme, drop = "char.table")
 
 #STEP 3: move to trinker.guthub
 file <- "C:/Users/trinker/GitHub/trinker.github.com/"
