@@ -12,7 +12,8 @@
 #' Default is \code{"L1"}.
 #' @param pos where to do the removal. By default, uses the current environment. 
 #' @param envir the environment to use. 
-#' @param \dots data.frame object(s) to write to a file
+#' @param \dots data.frame object(s) to write to a file or a list of data.frame 
+#' objects.  If the objects in a list are unnamed V + digit will be assigned.
 #' @param dir optional directory names.  If NULL a directory will be created in 
 #' the working directory with the data and time stamp as the folder name.
 #' @param open logical.  If TRUE opens the directory upon completion.
@@ -87,7 +88,15 @@ function(..., dir = NULL, open = FALSE){
     x <- match.call(expand.dots = FALSE)
     z <- as.character(x[[2]])
     x2 <- list(...)
+    if (length(x2) == 1 && !sapply(x2, is.data.frame)) {
+        x2 <- unlist(x2, recursive = FALSE)
+        z <- names(x2)
+        z[z == ""] <- paste0("V", which(z == ""))
+    }
     names(x2) <- z
+    if (is.null(dir)) {
+        
+    }
     y <- folder(folder.name = dir)
     files <- paste0(y, "/", z, ".csv")
     invisible(lapply(seq_along(x2), function(i){

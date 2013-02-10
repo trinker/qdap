@@ -28,7 +28,9 @@
 
   \item{envir}{the environment to use.}
 
-  \item{\dots}{data.frame object(s) to write to a file}
+  \item{\dots}{data.frame object(s) to write to a file or a
+  list of data.frame objects.  If the objects in a list are
+  unnamed V + digit will be assigned.}
 
   \item{dir}{optional directory names.  If NULL a directory
   will be created in the working directory with the data

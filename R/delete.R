@@ -50,10 +50,12 @@ folder <- function(..., folder.name = NULL) {
     if (!is.null(folder.name)) {
         x <- strsplit(folder.name, split = ", ")
     } else {
-        x <- folder.name
+        x <- substitute(...())
     }
-    x <- unblanker(scrubber(unlist(lapply(x, function(y) {
-        as.character(y)}))))
+    if (!is.null(x)) {
+        x <- unblanker(scrubber(unlist(lapply(x, function(y) {
+            as.character(y)}))))
+    }
     hfolder <- function(folder.name = NULL) {
         if (is.null(folder.name)) {
             FN <- mgsub(c(":", " "), c(".", "_"), 
