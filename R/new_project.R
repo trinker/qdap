@@ -27,7 +27,12 @@
 #' \item{DOCUMENTS}{ - A directory to store documents related tot he project}
 #' \item{PLOTS}{ - A directory to store plots}
 #' \item{RAW_TRANSCRIPTS}{ - A directory to store the raw transcripts}
-#' \item{REPORTS}{ - A directory to house reports}
+#' \item{REPORTS}{ - A directory to house reports; contains:
+#' \itemize{
+#'     \item{report_1.rnw}{ * A latex rnw file for use with \href{http://yihui.name/knitr/}{knitr}}
+#'     \item{project.bib}{ * A latex bibtex file}
+#'     }
+#' }
 #' \item{TABLES}{ - A directory to export tables to}  
 #' \item{WORD_LISTS}{ - A directory to store word lists that can be sourced and 
 #'     supplied to functions}
@@ -52,7 +57,7 @@ new_project <- function(project = "new", path = getwd()) {
             delete(paste0(path, "/", project))
         }
     }
-    x <- invisible(folder(folder.name=paste0(path, "/", project)))
+    x <- suppressWarnings(invisible(folder(folder.name=paste0(path, "/", project))))
     setwd(x)
     y <- invisible(folder(ANALYSIS, CODEBOOK, DATA_CLEANED, 
         DATA_FOR_REVIEW, RAW_TRANSCRIPTS, PLOTS, TABLES, CM_DATA, 
@@ -72,12 +77,99 @@ new_project <- function(project = "new", path = getwd()) {
         "01_clean_data.R"))
     cat(paste0("library(qdap, ggplot2, grid, scales)\nsource(\"",
         paste0(x, "/", "extra_functions.R"), "\")\n",
-        "load(\"", paste0(y[[1]], "/", "01_clean_data.R"), 
-        "\")\n"), file=paste0(y[[1]], "/", "02_analysis_I.R"))
+        paste0("load(\"", y[[3]], "/cleaned.RData", "\")")),
+        file=paste0(y[[1]], "/", "02_analysis_I.R"))
     cat(paste0("library(qdap, ggplot2, grid, scales)\nsource(\"",
         paste0(x, "/", "extra_functions.R"), "\")\n",
-        "load(\"", paste0(y[[1]], "/", "01_clean_data.R"), 
-        "\")\n"), file=paste0(y[[1]], "/", "03_plots.R"))
+        paste0("load(\"", y[[3]], "/cleaned.RData", "\")\n"),
+        paste0("setwd(\"", y[[6]], "\")\n")),
+        file=paste0(y[[1]], "/", "03_plots.R"))
     cat(paste0("Project \"", project, "\" created:\n",
         x, "\n"))
+    rnw <- c("\\documentclass{scrartcl}",                                                     
+        "\\usepackage[american]{babel}",                                                  
+        "\\usepackage{csquotes}",                                                         
+        "\\usepackage{scrextend}",                                                        
+        "\\usepackage[style=apa, backend=biber]{biblatex}",                               
+        "\\addbibresource{project.bib}",                                                  
+        "\\DeclareLanguageMapping{american}{american-apa}",                               
+        "\\usepackage{amsmath}",                                                          
+        "\\usepackage[sc]{mathpazo}",                                                     
+        "\\usepackage{geometry}",                                                         
+        "\\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}",    
+        "\\setcounter{secnumdepth}{2}",                                                   
+        "\\setcounter{tocdepth}{2}",                                                      
+        "\\usepackage{url}",                                                              
+        "\\usepackage[unicode=true,pdfusetitle,",                                         
+        " bookmarks=true,bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=2,",
+        " breaklinks=false,pdfborder={0 0 1},backref=false,colorlinks=false]",            
+        " {hyperref}",                                                                    
+        "\\hypersetup{pdfstartview={XYZ null null 1}}",                                   
+        "\\usepackage{enumerate}",                                                        
+        "\\usepackage{booktabs}",                                                         
+        "\\usepackage{siunitx}",                                                          
+        "\\usepackage[justification=justified,singlelinecheck=false]{caption}",           
+        "\\usepackage{hyperref}",                                                         
+        "\\usepackage{here}",                                                             
+        "\\usepackage{tcolorbox}",                                                        
+        "\\usepackage{ulem}",                                                             
+        "\\usepackage[T1]{fontenc}",                                                      
+        "\\usepackage{caption}",                                                          
+        "\\usepackage{threeparttable}",                                                   
+        "",                                                                               
+        "\\captionsetup{%",                                                               
+        "  font=small,",                                                                  
+        "  labelfont=bf,",                                                                
+        "  singlelinecheck=false,",                                                       
+        "  tableposition=top",                                                            
+        "}",                                                                              
+        "\\defbibheading{center}{%",                                                      
+        "  \\phantomsection",                                                             
+        "  \\section*{\\centering\\normalfont\\refname}",                                 
+        "  \\pdfbookmark{\\refname}{References}",                                         
+        "}",                                                                              
+        "",                                                                               
+        "\\newenvironment{my_enumerate}{",                                                
+        "\\begin{enumerate}",                                                             
+        "  \\setlength{\\itemsep}{1pt}",                                                  
+        "  \\setlength{\\parskip}{0pt}",                                                  
+        "  \\setlength{\\parsep}{0pt}}{\\end{enumerate}",                                 
+        "}",                                                                              
+        "",                                                                               
+        "",                                                                               
+        "\\begin{document}",                                                                                                              
+        "",                                                                               
+        "%load packages that will be invisible on slides",                                
+        "<<setup, include=FALSE, cache=FALSE>>=",                                         
+        "libs <- c(\"qdap\", \"ggplot2\", \"reshape2\", \"gridExtra\", \"tables\", \"xtable\")",
+        "lapply(libs, library, character = TRUE)",                                                                                                                                  
+        "save <- booktabs()",                                                            
+        "",                                                                               
+        "opts_chunk$set(fig.path='figure', fig.align='center', fig.show='hold')",         
+        "options(replace.assign=TRUE,width=90)",                                          
+        "@",                                                                              
+        "",                                                                               
+        "",                                                                               
+        "\\title{}",                                                                      
+        "\\subtitle{}",                                                                   
+        "\\author{}",                                                                     
+        "\\date{}",                                                                       
+        "\\maketitle",                                                                    
+        "",                                                                               
+        "\\section{}",                                                                    
+        "",                                                                               
+        "\\printbibliography[heading=center]",                                            
+        "\\end{document}\n"
+    ) 
+    rnw <- paste(rnw, collapse="\n")
+    cat(rnw, file = paste0(y[[10]], "/report_1.rnw"))
+    doc1 <- system.file("CITATION", package = "qdap")
+    cite <- readLines(doc1)
+    cite2 <- cite[4:10]
+    cite2 <- gsub("= \"", "= {", cite2)
+    cite2 <- gsub("\",", "},", cite2)
+    cite2[1] <- "@MANUAL{Rinker,"
+    cite2[8] <- "}\n"
+    cite2 <- paste(cite2, collapse="\n")
+    cat(rnw, file = paste0(y[[10]], "/project.bib"))
 }

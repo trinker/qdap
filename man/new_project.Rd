@@ -36,9 +36,13 @@
   \item{PLOTS}{ - A directory to store plots}
   \item{RAW_TRANSCRIPTS}{ - A directory to store the raw
   transcripts} \item{REPORTS}{ - A directory to house
-  reports} \item{TABLES}{ - A directory to export tables
-  to} \item{WORD_LISTS}{ - A directory to store word lists
-  that can be sourced and supplied to functions}
+  reports; contains: \itemize{ \item{report_1.rnw}{ * A
+  latex rnw file for use with
+  \href{http://yihui.name/knitr/}{knitr}}
+  \item{project.bib}{ * A latex bibtex file} } }
+  \item{TABLES}{ - A directory to export tables to}
+  \item{WORD_LISTS}{ - A directory to store word lists that
+  can be sourced and supplied to functions}
   \item{extra_functions.R}{ - A script to store user made
   functions related to the project} \item{LOG.txt}{ - A
   text file documenting project changes/needs etc.}
