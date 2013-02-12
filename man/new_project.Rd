@@ -39,15 +39,16 @@
   reports; contains: \itemize{ \item{report_1.rnw}{ * A
   latex rnw file for use with
   \href{http://yihui.name/knitr/}{knitr}}
-  \item{project.bib}{ * A latex bibtex file} } }
-  \item{TABLES}{ - A directory to export tables to}
-  \item{WORD_LISTS}{ - A directory to store word lists that
-  can be sourced and supplied to functions}
-  \item{extra_functions.R}{ - A script to store user made
-  functions related to the project} \item{LOG.txt}{ - A
-  text file documenting project changes/needs etc.}
-  \item{TO_DO.txt}{ - A text file documenting project
-  tasks} }
+  \item{project.bib}{ * A latex bibtex file}
+  \item{preamble.tex}{ * A tex file that \code{report_1.rnw
+  references} to generate the preamble} } } \item{TABLES}{
+  - A directory to export tables to} \item{WORD_LISTS}{ - A
+  directory to store word lists that can be sourced and
+  supplied to functions} \item{extra_functions.R}{ - A
+  script to store user made functions related to the
+  project} \item{LOG.txt}{ - A text file documenting
+  project changes/needs etc.} \item{TO_DO.txt}{ - A text
+  file documenting project tasks} }
 }
 \keyword{replace}
 
