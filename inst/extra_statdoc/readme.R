@@ -21,4 +21,4 @@ install.packages(&quot;qdap&quot;, type = &quot;source&quot;)
 </code></pre>
 
 
-<p>Download the development version <a href="https://github.com/trinker/qdap/">here</a> 
+<p>Download the development version of qdap <a href="https://github.com/trinker/qdap/">here</a> 
