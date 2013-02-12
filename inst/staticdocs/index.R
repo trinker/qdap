@@ -7,9 +7,10 @@ list(
         "delete",
         "dir_map",
         "mcsv_r",
+        "new_project",
         "read.transcript"
       )
-    ), 
+    ),
     sd_section("Cleaning/Parsing",
       "Function to clean and parse text data.",
       c(

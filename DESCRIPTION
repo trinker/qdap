@@ -118,6 +118,7 @@ Collate:
     'NAer.R'
     'ncutWORD.R'
     'ncutWORDS.R'
+    'new_project.R'
     'numbtext.R'
     'numfor.R'
     'outlier.detect.R'

@@ -23,6 +23,9 @@ NEW FEATURES
   that plots and colors words for a binary variable based on which group of 
   the binary variable uses the term more frequently.
 
+* `new_project`: A project template generating function designed to increase 
+  efficiency and standardize work flow.
+
 MINOR FEATURES
 
 * `stemmer`, `stem2df` and `stem.words` now explicitally have the argument 
