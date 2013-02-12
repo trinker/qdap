@@ -26,20 +26,24 @@
   - A directory to export/import scripts for cm_xxx family
   of functions} \item{CODEBOOK}{ - A directory to store
   coding conventions or demographics data}
+  \item{CORRESPONDENCE}{ - A directory to store
+  correspondence and agreements with the client}
   \item{DATA_CLEANED}{ - A directory to store cleaned data
   (generally .RData format)} \item{DATA_FOR_REVIEW}{ - A
   directory to put data that may need to be altered or
-  needs to be inspected more closely} \item{PLOTS}{ - A
-  directory to store plots} \item{RAW_TRANSCRIPTS}{ - A
-  directory to store the raw transcripts} \item{REPORTS}{ -
-  A directory to house reports} \item{TABLES}{ - A
-  directory to export tables to} \item{WORD_LISTS}{ - A
-  directory to store word lists that can be sourced and
-  supplied to functions} \item{extra_functions.R}{ - A
-  script to store user made functions related to the
-  project} \item{LOG.txt}{ - A text file documenting
-  project changes/needs etc.} \item{TO_DO.txt}{ - A text
-  file documenting project tasks} }
+  needs to be inspected more closely} \item{DOCUMENTS}{ - A
+  directory to store documents related tot he project}
+  \item{PLOTS}{ - A directory to store plots}
+  \item{RAW_TRANSCRIPTS}{ - A directory to store the raw
+  transcripts} \item{REPORTS}{ - A directory to house
+  reports} \item{TABLES}{ - A directory to export tables
+  to} \item{WORD_LISTS}{ - A directory to store word lists
+  that can be sourced and supplied to functions}
+  \item{extra_functions.R}{ - A script to store user made
+  functions related to the project} \item{LOG.txt}{ - A
+  text file documenting project changes/needs etc.}
+  \item{TO_DO.txt}{ - A text file documenting project
+  tasks} }
 }
 \keyword{replace}
 

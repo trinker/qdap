@@ -18,10 +18,13 @@
 #'     functions}
 #' \item{CODEBOOK}{ - A directory to store coding conventions or demographics 
 #'    data}
+#' \item{CORRESPONDENCE}{ - A directory to store correspondence and agreements 
+#'     with the client}
 #' \item{DATA_CLEANED}{ - A directory to store cleaned data (generally .RData 
 #'     format)}
 #' \item{DATA_FOR_REVIEW}{ - A directory to put data that may need to be altered 
 #'     or needs to be inspected more closely}
+#' \item{DOCUMENTS}{ - A directory to store documents related tot he project}
 #' \item{PLOTS}{ - A directory to store plots}
 #' \item{RAW_TRANSCRIPTS}{ - A directory to store the raw transcripts}
 #' \item{REPORTS}{ - A directory to house reports}
@@ -39,24 +42,24 @@
 new_project <- function(project = "new", path = getwd()) {
     WD <- getwd()
     on.exit(setwd(WD))
-    if(file.exists(paste0(path, "/", job.title))) {
-        cat(paste0("\"", paste0(path, "/", job.title), 
+    if(file.exists(paste0(path, "/", project))) {
+        cat(paste0("\"", paste0(path, "/", project), 
             "\" already exists:\nDo you want to overwrite?\n\n"))
         ans <- menu(c("Yes", "No")) 
         if (ans == "2") {
             stop("q_workflow aborted")
         } else {
-            delete(paste0(path, "/", job.title))
+            delete(paste0(path, "/", project))
         }
     }
-    x <- invisible(folder(folder.name=paste0(path, "/", job.title)))
+    x <- invisible(folder(folder.name=paste0(path, "/", project)))
     setwd(x)
     y <- invisible(folder(ANALYSIS, CODEBOOK, DATA_CLEANED, 
         DATA_FOR_REVIEW, RAW_TRANSCRIPTS, PLOTS, TABLES, CM_DATA, 
-        WORD_LISTS, REPORTS))
+        WORD_LISTS, REPORTS, CORRESPONDENCE, DOCUMENTS))
     cat(file=paste0(x, "/", "extra_functions.R"))
     cat(file=paste0(x, "/", "TO_DO.txt"))
-    cat(paste0("Project \"", job.title, "\" created: ", Sys.time(), "\n"), 
+    cat(paste0("Project \"", project, "\" created: ", Sys.time(), "\n"), 
         file=paste0(x, "/", "LOG.txt"))
     invisible(folder(folder.name=paste0(y[[4]], "/", "ALREADY_REVIEWED")))
     cat(paste0("library(qdap)\ndir_map(\"", 
@@ -75,6 +78,6 @@ new_project <- function(project = "new", path = getwd()) {
         paste0(x, "/", "extra_functions.R"), "\")\n",
         "load(\"", paste0(y[[1]], "/", "01_clean_data.R"), 
         "\")\n"), file=paste0(y[[1]], "/", "03_plots.R"))
-    cat(paste0("Project \"", job.title, "\" created:\n",
+    cat(paste0("Project \"", project, "\" created:\n",
         x, "\n"))
 }
