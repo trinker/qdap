@@ -31,7 +31,7 @@
 #' \itemize{
 #'     \item{report_1.rnw}{ * A latex rnw file for use with \href{http://yihui.name/knitr/}{knitr}}
 #'     \item{project.bib}{ * A latex bibtex file}
-#'     \item{preamble.tex}{ * A tex file that \code{report_1.rnw references} to 
+#'     \item{preamble.tex}{ * A tex file that \code{report_1.rnw} references to 
 #'     generate the preamble}
 #'     }
 #' }
@@ -61,6 +61,9 @@ new_project <- function(project = "new", path = getwd()) {
     }
     x <- suppressWarnings(invisible(folder(folder.name=paste0(path, "/", project))))
     setwd(x)
+    ANALYSIS <- CODEBOOK <- DATA_CLEANED <- DATA_FOR_REVIEW <- NULL
+    RAW_TRANSCRIPTS <- PLOTS <- TABLES <- CM_DATA <- WORD_LISTS <- NULL
+    REPORTS <- CORRESPONDENCE <- DOCUMENTS <- NULL
     y <- invisible(folder(ANALYSIS, CODEBOOK, DATA_CLEANED, 
         DATA_FOR_REVIEW, RAW_TRANSCRIPTS, PLOTS, TABLES, CM_DATA, 
         WORD_LISTS, REPORTS, CORRESPONDENCE, DOCUMENTS))

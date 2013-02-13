@@ -1,13 +1,18 @@
 library(staticdocs)
 list(
   index = list(
+    sd_section("Project Template",
+      "Functions for importing data and exporting output.",  
+      c(
+        "new_project"
+      )
+    ),
     sd_section("Import/Export Data",
       "Functions for importing data and exporting output.",  
       c(
         "delete",
         "dir_map",
         "mcsv_r",
-        "new_project",
         "read.transcript"
       )
     ),
