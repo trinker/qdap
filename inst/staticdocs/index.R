@@ -2,7 +2,7 @@ library(staticdocs)
 list(
   index = list(
     sd_section("Project Template",
-      "Functions for importing data and exporting output.",  
+      "A function to generate a project template of folders, scripts and documents.",  
       c(
         "new_project"
       )
