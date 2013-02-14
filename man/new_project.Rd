@@ -26,10 +26,10 @@
   \item{CLEANED_TRANSCRIPTS}{ - A directory to store the
   cleaned transcripts (If the transcripts are already
   cleaned you may choose to not utilize the RAW_TRANSCRIPTS
-  directory}} \item{CM_DATA}{ - A directory to
+  directory)} \item{CM_DATA}{ - A directory to
   export/import scripts for cm_xxx family of functions}
   \item{CODEBOOK}{ - A directory to store coding
-  conventions or demographics data \itemize{
+  conventions or demographics data: \itemize{
   \item{KEY.csv}{ * A blank template for demographic
   information} } } \item{CORRESPONDENCE}{ - A directory to
   store correspondence and agreements with the client
@@ -63,6 +63,15 @@
   \href{http://www.rstudio.com/}{RStudio}}
   \item{TO_DO.txt}{ - A text file documenting project
   tasks} }
+
+  The template comes with a .Rproj file and .Rstudio file.
+  This makes operating in
+  \href{http://www.rstudio.com/}{RStudio} very easy.  The
+  file can be kept on the desktop or a git application such
+  as \href{https://github.com/}{github},
+  \href{https://bitbucket.org/}{bitbucket} or
+  \href{https://www.dropbox.com/}{dropbox}, depending on
+  what the client/research team is comfortable utilizing.
 }
 \keyword{replace}
 
