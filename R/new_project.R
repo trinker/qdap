@@ -9,22 +9,33 @@
 #' \itemize{
 #' \item{ANALYSIS}{ - A directory containing the following analysis scripts:
 #' \itemize{
-#'     \item{01_clean_data.R}{ * intial cleaning of raw transcripts}
-#'     \item{02_analysis_I.R}{ * intial analysis}
+#'     \item{01_clean_data.R}{ * initial cleaning of raw transcripts}
+#'     \item{02_analysis_I.R}{ * initial analysis}
 #'     \item{03_plots.R}{ * plotting script}
 #'     }
 #' }
 #' \item{CM_DATA}{ - A directory to export/import scripts for cm_xxx family of 
 #'     functions}
 #' \item{CODEBOOK}{ - A directory to store coding conventions or demographics 
-#'    data}
+#'    data
+#' \itemize{
+#'     \item{KEY.csv}{ * A blank template for demographic information}
+#'     }  
+#' }
 #' \item{CORRESPONDENCE}{ - A directory to store correspondence and agreements 
-#'     with the client}
+#'     with the client
+#' \itemize{
+#'     \item{CONTACT_INFO.txt}{ * A txt file to put research team members' 
+#'       contact information}     
+#'     \item{project_directions.pdf}{ * A pdf explaining the structure of the 
+#'       project template}
+#'     } 
+#' }
 #' \item{DATA_CLEANED}{ - A directory to store cleaned data (generally .RData 
 #'     format)}
 #' \item{DATA_FOR_REVIEW}{ - A directory to put data that may need to be altered 
 #'     or needs to be inspected more closely}
-#' \item{DOCUMENTS}{ - A directory to store documents related tot he project}
+#' \item{DOCUMENTS}{ - A directory to store documents related to the project}
 #' \item{PLOTS}{ - A directory to store plots}
 #' \item{RAW_TRANSCRIPTS}{ - A directory to store the raw transcripts}
 #' \item{REPORTS}{ - A directory to house reports; contains:
@@ -181,4 +192,17 @@ new_project <- function(project = "new", path = getwd()) {
     cite2[8] <- "}\n"
     cite2 <- paste(cite2, collapse="\n")
     cat(cite2, file = paste0(y[[10]], "/project.bib"))
+    info <- c("PROJECT NAME: Project", 
+        "ANALYST: analyst_name<analyst@email> 555-555-5555[skype: analyst_guy12]",
+        paste0("PROJECT MEMBERS:\n    john doe<j.doe@email> 555-555-5555[skype: jd156]\n",
+        "    jane doe<jane@email> 555-555-5555[skype: jd157]\n", 
+        "    nth_member<member_nth@email> 555-555-5555[skype: nmem123]\n"),
+        paste("PROJECT CREATED:", Sys.time())
+    )
+    info <- paste(info, collapse = "\n\n")
+    cat(info, file=paste0(y[[11]], "/", "CONTACT_INFO.txt"))
+    write.csv(data.frame(person=""), file=paste0(y[[2]], "/", "KEY.csv"), 
+        row.names = FALSE)
+    pdfloc <- system.file("extdata/docs/project_directions.pdf", package = "qdap")
+    invisible(file.copy(pdfloc, y[[11]]))
 }

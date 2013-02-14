@@ -17,6 +17,8 @@ BUG FIXES
 * `folder` would not generate a directory with the time/date stamp if no 
   directory name was given.
 
+* `cm_df.transcript` did not give the correct speaker labels (fixed).
+
 NEW FEATURES
 
 * `bivar_gradcloud`: Binary gradient Word Cloud - A new plotting function 
@@ -35,6 +37,9 @@ MINOR FEATURES
 * `hms2sec`: A function to convert from h:m:s format to seconds.
 
 * `mcsv_w` now takes a list of data.frames.
+
+* `cm_range.temp` now takes the arguments text.var and grouping.var that will 
+  automatically output these (grouping.var) columns as range coded indices.
 
 CHANGES
 

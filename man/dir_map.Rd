@@ -47,8 +47,7 @@
 }
 \examples{
 \dontrun{
-(DIR <- gsub("trans1.docx", "", system.file("extdata/trans1.docx",
-    package = "qdap")))
+(DIR <- system.file("extdata", package = "qdap"))
 dir_map(DIR)
 }
 }

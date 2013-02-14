@@ -43,21 +43,19 @@
 #' ##  delete("foo.doc")   #delete the file just created
 #' }
 cm_df.transcript <-
-function(text.var, grouping.var, file = NULL, indent = 4, width = 70, ...){
+function (text.var, grouping.var, file = NULL, indent = 4, width = 70, ...) {
     if (is.list(grouping.var)) {
         grouping.var <- paste2(grouping.var)
     }
-    L2 <- sentCombine(text.var, grouping.var)
-    DF <- data.frame(group = names(L2), text=unlist(L2))
-    DF2 <- cm_df.temp(DF, "text", ...)
+    DF <- sentCombine(text.var, grouping.var)
+    DF2 <- cm_df.temp(DF, "text.var", ...)
     y <- rle(as.character(DF2$group))
     lens <- y$lengths
     group <- y$values
     x <- cumsum(lens)
     L3 <- split(DF2, as.factor(rep(seq_along(x), lens)))
-    invisible(lapply(seq_along(L3), function(i){
-        numbtext(L3[[i]][, "text"], width = width, 
-        lengths = L3[[i]][, "word.num"], txt.file=file, 
-        name=group[i], indent=indent)
+    invisible(lapply(seq_along(L3), function(i) {
+        numbtext(L3[[i]][, "text"], width = width, lengths = L3[[i]][, 
+            "word.num"], txt.file = file, name = group[i], indent = indent)
     }))
 }

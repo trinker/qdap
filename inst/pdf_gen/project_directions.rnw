@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage[sc]{mathpazo}
+\usepackage{geometry}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\usepackage{url}
+\usepackage{hyperref}
+
+\begin{document}
+
+\title{Project Directory and Work Flow}
+\author{Tyler W. Rinker}
+\date{}
+\maketitle
+
+The project template includes these main directories and scripts:
+
+\begin{enumerate}
+  \item \textbf{ANALYSIS} - A directory containing the following analysis scripts:
+  \begin{enumerate}
+    \item \textbf{01\_clean\_data.R} initial cleaning of raw transcripts
+    \item \textbf{02\_analysis\_I.R} initial analysis
+    \item \textbf{03\_plots.R} plotting script
+  \end{enumerate}
+  \item \textbf{CM\_DATA} - A directory to export/import scripts for cm\_xxx family of functions
+  \item \textbf{CODEBOOK} - A directory to store coding conventions or demographics data
+  \begin{enumerate}
+    \item \textbf{KEY.csv} A blank template for demographic information
+  \end{enumerate}  
+  \item \textbf{CORRESPONDENCE} - A directory to store correspondence and agreements 
+     with the client
+  \begin{enumerate}
+     \item \textbf{CONTACT\_INFO.txt} A txt file to put research team members' 
+       contact information
+     \item \textbf{project\_directions.pdf} A pdf explaining the structure of the project directory
+  \end{enumerate}  
+  \item \textbf{DATA\_CLEANED} - A directory to store cleaned data (generally .RData 
+     format)
+  \item \textbf{DATA\_FOR\_REVIEW} - A directory to put data that may need to be altered or needs to be inspected more closely
+  \item \textbf{DOCUMENTS} - A directory to store documents related to the project
+  \item \textbf{PLOTS} - A directory to store plots
+  \item \textbf{RAW\_TRANSCRIPTS} - A directory to store the raw transcripts
+  \item \textbf{REPORTS} - A directory to house reports; contains:
+  \begin{enumerate}
+     \item \textbf{report\_1.rnw} - A latex rnw file for use with \href{http://yihui.name/knitr/}{knitr}
+     \item \textbf{project.bib} - A latex bibtex file
+     \item \textbf{preamble.tex} - A tex file that report\_1.rnw references to generate the preamble 
+  \end{enumerate}  
+  \item \textbf{TABLES} - A directory to export tables to 
+  \item \textbf{WORD\_LISTS} - A directory to store word lists that can be sourced and supplied to functions
+  \item \textbf{extra\_functions.R} - A script to store user made functions related to the project
+  \item \textbf{LOG.txt} - A text file documenting project changes/needs etc.
+  \item \textbf{TO\_DO.txt} - A text file documenting project tasks 
+\end{enumerate}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
