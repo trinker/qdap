@@ -32,12 +32,26 @@
 \examples{
 \dontrun{
 foo <- list(
+    person_greg = qcv(terms='7:11, 20:24, 30:33, 49:56'),
+    person_researcher = qcv(terms='42:48'),
+    person_sally = qcv(terms='25:29, 37:41'),
+    person_sam = qcv(terms='1:6, 16:19, 34:36'),
+    person_teacher = qcv(terms='12:15'),
+    adult_0 = qcv(terms='1:11, 16:41, 49:56'),
+    adult_1 = qcv(terms='12:15, 42:48'),
     AA = qcv(terms="1"),
     BB = qcv(terms="1:2, 3:10, 19"),
     CC = qcv(terms="1:9, 100:150")
 )
 
 foo2  <- list(
+    person_greg = qcv(terms='7:11, 20:24, 30:33, 49:56'),
+    person_researcher = qcv(terms='42:48'),
+    person_sally = qcv(terms='25:29, 37:41'),
+    person_sam = qcv(terms='1:6, 16:19, 34:36'),
+    person_teacher = qcv(terms='12:15'),
+    adult_0 = qcv(terms='1:11, 16:41, 49:56'),
+    adult_1 = qcv(terms='12:15, 42:48'),
     AA = qcv(terms="40"),
     BB = qcv(terms="50:90"),
     CC = qcv(terms="60:90, 100:120, 150"),

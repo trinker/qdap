@@ -1,0 +1,29 @@
+%NOTE: The user will need to re-run biber on files after compiling in RStudio
+\input{preamble}
+\begin{document}
+%load packages that will be invisible on slides
+<<setup, include=FALSE, cache=FALSE>>=
+libs <- c("qdap", "ggplot2", "reshape2", "gridExtra", "tables", "xtable")
+lapply(libs, library, character = TRUE)
+save <- booktabs()
+
+opts_chunk$set(fig.path='figure', fig.align='center', fig.show='hold')
+options(replace.assign=TRUE,width=90)
+@
+
+\title{Report}
+\shorttitle{}
+\author{}
+\date{\today}
+\maketitle
+
+\section{}
+
+
+\nocite{Rinker}
+%=======================
+%  Bibliography
+%=======================
+\clearpage
+\printbibliography
+\end{document}

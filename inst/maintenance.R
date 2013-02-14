@@ -51,6 +51,9 @@ delete(paste0(file, "qdap"))
 file.copy(path, file, TRUE, TRUE)
 delete(path)
 
+#==========================
+#move project directions
+#==========================
 outpdf <- "C:/Users/trinker/GitHub/qdap/inst/extdata/docs/"
 inpdf <- "C:/Users/trinker/GitHub/qdap/inst/pdf_gen/project_directions.pdf"
 file.copy(inpdf, outpdf)

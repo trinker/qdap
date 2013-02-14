@@ -22,27 +22,30 @@
   containing the following analysis scripts: \itemize{
   \item{01_clean_data.R}{ * initial cleaning of raw
   transcripts} \item{02_analysis_I.R}{ * initial analysis}
-  \item{03_plots.R}{ * plotting script} } } \item{CM_DATA}{
-  - A directory to export/import scripts for cm_xxx family
-  of functions} \item{CODEBOOK}{ - A directory to store
-  coding conventions or demographics data \itemize{
+  \item{03_plots.R}{ * plotting script} } }
+  \item{CLEANED_TRANSCRIPTS}{ - A directory to store the
+  cleaned transcripts (If the transcripts are already
+  cleaned you may choose to not utilize the RAW_TRANSCRIPTS
+  directory}} \item{CM_DATA}{ - A directory to
+  export/import scripts for cm_xxx family of functions}
+  \item{CODEBOOK}{ - A directory to store coding
+  conventions or demographics data \itemize{
   \item{KEY.csv}{ * A blank template for demographic
   information} } } \item{CORRESPONDENCE}{ - A directory to
   store correspondence and agreements with the client
   \itemize{ \item{CONTACT_INFO.txt}{ * A txt file to put
   research team members' contact information}
   \item{project_directions.pdf}{ * A pdf explaining the
-  structure of the project template} } }
-  \item{DATA_CLEANED}{ - A directory to store cleaned data
-  (generally .RData format)} \item{DATA_FOR_REVIEW}{ - A
-  directory to put data that may need to be altered or
-  needs to be inspected more closely} \item{DOCUMENTS}{ - A
-  directory to store documents related to the project}
-  \item{PLOTS}{ - A directory to store plots}
-  \item{RAW_TRANSCRIPTS}{ - A directory to store the raw
-  transcripts} \item{REPORTS}{ - A directory to house
-  reports; contains: \itemize{ \item{report_1.rnw}{ * A
-  latex rnw file for use with
+  structure of the project template} } } \item{DATA}{ - A
+  directory to store cleaned data (generally .RData
+  format)} \item{DATA_FOR_REVIEW}{ - A directory to put
+  data that may need to be altered or needs to be inspected
+  more closely} \item{DOCUMENTS}{ - A directory to store
+  documents related to the project} \item{PLOTS}{ - A
+  directory to store plots} \item{RAW_TRANSCRIPTS}{ - A
+  directory to store the raw transcripts} \item{REPORTS}{ -
+  A directory to house reports; contains: \itemize{
+  \item{report_1.rnw}{ * A latex rnw file for use with
   \href{http://yihui.name/knitr/}{knitr}}
   \item{project.bib}{ * A latex bibtex file}
   \item{preamble.tex}{ * A tex file that
@@ -50,9 +53,14 @@
   } } \item{TABLES}{ - A directory to export tables to}
   \item{WORD_LISTS}{ - A directory to store word lists that
   can be sourced and supplied to functions}
+  \item{.Rprofile}{ - Performs certan tasks such as loading
+  libraries, data and sourcing functions upon startup in
+  \href{http://www.rstudio.com/}{RStudio}}
   \item{extra_functions.R}{ - A script to store user made
   functions related to the project} \item{LOG.txt}{ - A
   text file documenting project changes/needs etc.}
+  \item{xxx.Rproj}{ - A project file used by
+  \href{http://www.rstudio.com/}{RStudio}}
   \item{TO_DO.txt}{ - A text file documenting project
   tasks} }
 }

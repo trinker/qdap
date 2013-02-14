@@ -1,0 +1,46 @@
+\documentclass[leavefloats]{apa6e}
+\usepackage[american]{babel}
+\usepackage{csquotes}
+\usepackage[style=apa,backend=biber,bibencoding=latin1]{biblatex}
+\addbibresource{project.bib}
+\DeclareLanguageMapping{american}{american-apa}
+\usepackage{enumerate}
+\usepackage{hyperref}
+\usepackage{rotating}
+\usepackage{graphicx}
+\usepackage{mdwlist}
+\usepackage{ragged2e}
+\usepackage{textcomp}
+\usepackage{etoolbox}
+\usepackage{geometry}
+\usepackage{float}
+\restylefloat{figure}
+\usepackage{microtype}
+\DisableLigatures{encoding = *, family = *}
+
+\makeatletter
+\renewcommand{\maketitle}{%
+\thispagestyle{titlepage}%
+\vspace*{1in}%
+\Centering\@title\\\@author%
+\vfill%
+\ifdefined%
+\apaSIXe@leavefloats{}
+\fi
+\RaggedRight%
+\mspart{\@title}%
+}
+\makeatother
+
+\newcommand\posscite[1]{\citeauthor{#1}'s (\citeyear{#1})}
+\newcommand\poscite[1]{\citeauthor{#1}' (\citeyear{#1})}
+
+\defbibheading{bibliography}{%
+\section{\normalfont\refname}}
+
+\newenvironment{my_enumerate}{
+\begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}

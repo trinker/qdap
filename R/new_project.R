@@ -14,6 +14,9 @@
 #'     \item{03_plots.R}{ * plotting script}
 #'     }
 #' }
+#' \item{CLEANED_TRANSCRIPTS}{ - A directory to store the cleaned transcripts 
+#'     (If the transcripts are already cleaned you may choose to not utilize the 
+#'     RAW_TRANSCRIPTS directory}}
 #' \item{CM_DATA}{ - A directory to export/import scripts for cm_xxx family of 
 #'     functions}
 #' \item{CODEBOOK}{ - A directory to store coding conventions or demographics 
@@ -31,7 +34,7 @@
 #'       project template}
 #'     } 
 #' }
-#' \item{DATA_CLEANED}{ - A directory to store cleaned data (generally .RData 
+#' \item{DATA}{ - A directory to store cleaned data (generally .RData 
 #'     format)}
 #' \item{DATA_FOR_REVIEW}{ - A directory to put data that may need to be altered 
 #'     or needs to be inspected more closely}
@@ -49,9 +52,12 @@
 #' \item{TABLES}{ - A directory to export tables to}  
 #' \item{WORD_LISTS}{ - A directory to store word lists that can be sourced and 
 #'     supplied to functions}
+#' \item{.Rprofile}{ - Performs certan tasks such as loading libraries, data and 
+#'     sourcing functions upon startup in \href{http://www.rstudio.com/}{RStudio}} 
 #' \item{extra_functions.R}{ - A script to store user made functions related to the 
 #'     project}
 #' \item{LOG.txt}{ - A text file documenting project changes/needs etc.}
+#' \item{xxx.Rproj}{ - A project file used by \href{http://www.rstudio.com/}{RStudio}} 
 #' \item{TO_DO.txt}{ - A text file documenting project tasks}
 #' }
 #' @return Creates a project template.
@@ -72,20 +78,20 @@ new_project <- function(project = "new", path = getwd()) {
     }
     x <- suppressWarnings(invisible(folder(folder.name=paste0(path, "/", project))))
     setwd(x)
-    ANALYSIS <- CODEBOOK <- DATA_CLEANED <- DATA_FOR_REVIEW <- NULL
+    ANALYSIS <- CODEBOOK <- DATA <- DATA_FOR_REVIEW <- NULL
     RAW_TRANSCRIPTS <- PLOTS <- TABLES <- CM_DATA <- WORD_LISTS <- NULL
-    REPORTS <- CORRESPONDENCE <- DOCUMENTS <- NULL
-    y <- invisible(folder(ANALYSIS, CODEBOOK, DATA_CLEANED, 
+    REPORTS <- CORRESPONDENCE <- DOCUMENTS <- CLEANED_TRANSCRIPTS <- NULL
+    y <- invisible(folder(ANALYSIS, CODEBOOK, DATA, 
         DATA_FOR_REVIEW, RAW_TRANSCRIPTS, PLOTS, TABLES, CM_DATA, 
-        WORD_LISTS, REPORTS, CORRESPONDENCE, DOCUMENTS))
+        WORD_LISTS, REPORTS, CORRESPONDENCE, DOCUMENTS, CLEANED_TRANSCRIPTS))
     cat(file=paste0(x, "/", "extra_functions.R"))
     cat(file=paste0(x, "/", "TO_DO.txt"))
     cat(paste0("Project \"", project, "\" created: ", Sys.time(), "\n"), 
         file=paste0(x, "/", "LOG.txt"))
     invisible(folder(folder.name=paste0(y[[4]], "/", "ALREADY_REVIEWED")))
     cat(paste0("library(qdap)\ndir_map(\"", 
-        y[[5]], "\")\n\n\n\n", 
-    "len <- length(dir(\"", y[[5]], "\"))\n",
+        y[[13]], "\")\n\n\n\n", 
+    "len <- length(dir(\"", y[[13]], "\"))\n",
     "L1 <- lapply(paste0(\"dat\", 1:len), function(x) get(x))\n", 
     "names(L1) <- paste0(\"dat\", 1:len)\n",
     "\n\n\n\nsave( , file = \"", y[[3]], 
@@ -100,89 +106,17 @@ new_project <- function(project = "new", path = getwd()) {
         paste0("load(\"", y[[3]], "/cleaned.RData", "\")\n"),
         paste0("setwd(\"", y[[6]], "\")\n")),
         file=paste0(y[[1]], "/", "03_plots.R"))
-    cat(paste0("Project \"", project, "\" created:\n",
-        x, "\n"))
-    rnw <- c("%NOTE: The user will need to re-run biber on files after compiling in RStudio",
-        "\\input{preamble}",
-        "\\begin{document}",
-        "%load packages that will be invisible on slides",
-        "<<setup, include=FALSE, cache=FALSE>>=",
-        "libs <- c(\"qdap\", \"ggplot2\", \"reshape2\", \"gridExtra\", \"tables\", \"xtable\")",
-        "lapply(libs, library, character = TRUE)",
-        "save <- booktabs()",
-        "",
-        "opts_chunk$set(fig.path='figure', fig.align='center', fig.show='hold')",
-        "options(replace.assign=TRUE,width=90)",
-        "@",
-        "",        
-        "\\title{Report}",
-        "\\shorttitle{}",
-        "\\author{}",
-        "\\date{\\today}",
-        "\\maketitle",
-        "",
-        "\\section{}",
-        "",
-        "",
-        "\\nocite{Rinker}",
-        "%=======================",
-        "%  Bibliography",
-        "%=======================",
-        "\\clearpage",
-        "\\printbibliography",
-        "\\end{document}\n"
-    ) 
-    rnw <- paste(rnw, collapse="\n")
-    cat(rnw, file = paste0(y[[10]], "/report_1.rnw"))
-    pre <- c( "\\documentclass[leavefloats]{apa6e}",
-        "\\usepackage[american]{babel}",
-        "\\usepackage{csquotes}",
-        "\\usepackage[style=apa,backend=biber,bibencoding=latin1]{biblatex}",
-        "\\addbibresource{project.bib}",
-        "\\DeclareLanguageMapping{american}{american-apa}",
-        "\\usepackage{enumerate}",
-        "\\usepackage{hyperref}",
-        "\\usepackage{rotating}",
-        "\\usepackage{graphicx}",
-        "\\usepackage{mdwlist}",
-        "\\usepackage{ragged2e}",
-        "\\usepackage{textcomp}",
-        "\\usepackage{etoolbox}",
-        "\\usepackage{geometry}",
-        "\\usepackage{float}",
-        "\\restylefloat{figure}",
-        "\\usepackage{microtype}",
-        "\\DisableLigatures{encoding = *, family = *}",
-        "",
-        "\\makeatletter",
-        "\\renewcommand{\\maketitle}{%",
-        "\\thispagestyle{titlepage}%",
-        "\\vspace*{1in}%",
-        "\\Centering\\@title\\\\\\@author%",
-        "\\vfill%",
-        "\\ifdefined%",
-        "\\apaSIXe@leavefloats{}",
-        "\\fi",
-        "\\RaggedRight%",
-        "\\mspart{\\@title}%",
-        "}",
-        "\\makeatother",
-        "",
-        "\\newcommand\\posscite[1]{\\citeauthor{#1}'s (\\citeyear{#1})}",
-        "\\newcommand\\poscite[1]{\\citeauthor{#1}' (\\citeyear{#1})}",
-        "",
-        "\\defbibheading{bibliography}{%",
-        "\\section{\\normalfont\\refname}}",
-        "",
-        "\\newenvironment{my_enumerate}{",
-        "\\begin{enumerate}",
-        "  \\setlength{\\itemsep}{1pt}",
-        "  \\setlength{\\parskip}{0pt}",
-        "  \\setlength{\\parsep}{0pt}}{\\end{enumerate}",
-        "}\n"
-    )
-    pre <- paste(pre, collapse="\n")
-    cat(pre, file = paste0(y[[10]], "/preamble.tex"))
+    root <- system.file("extdata/docs", package = "qdap")
+    pdfloc <- paste0(root, "/project_directions.pdf")
+    invisible(file.copy(pdfloc, y[[11]]))
+    pdfloc2 <- paste0(root, "/report_1.rnw")
+    invisible(file.copy(pdfloc2, y[[10]]))
+    pdfloc3 <- paste0(root, "/preamble.tex")
+    invisible(file.copy(pdfloc3, y[[10]]))
+    pdfloc4 <- paste0(root, "/TEMP.txt")
+    invisible(file.copy(pdfloc4, x))
+    invisible(file.rename(paste0(x, "/TEMP.txt"), 
+        paste0(x, "/",  project, ".Rproj")))
     doc1 <- system.file("CITATION", package = "qdap")
     cite <- readLines(doc1)
     cite2 <- cite[4:10]
@@ -203,6 +137,31 @@ new_project <- function(project = "new", path = getwd()) {
     cat(info, file=paste0(y[[11]], "/", "CONTACT_INFO.txt"))
     write.csv(data.frame(person=""), file=paste0(y[[2]], "/", "KEY.csv"), 
         row.names = FALSE)
-    pdfloc <- system.file("extdata/docs/project_directions.pdf", package = "qdap")
-    invisible(file.copy(pdfloc, y[[11]]))
+    rpro <- c("#load the packages used",
+        "library(ggplot2)",
+        "library(reshape2)",
+        "library(plyr)",
+        "library(grid)",
+        "library(scales)",
+        "library(RColorBrewer)",
+        "library(qdap)",
+        "",
+        "WD <- getwd()",
+        "",
+        "#load functions into workspace",
+        "source(paste0(WD, \"/extra_functions.R\"))",
+        "",
+        "#load data into work space",
+        "dat <- paste0(WD, \"/DATA/\", dir(paste0(WD, \"/DATA/\")))",
+        "dat2 <- dat[tools::file_ext(dat) %in% c(\"txt\", \"R\", \"r\")]",
+        "if (!identical(dat2, character(0))) {",              
+        "try(lapply(dat2, source))",
+        "}",              
+        "dat <- dat[tools::file_ext(dat) == \"RData\"]",
+        "if (!identical(dat, character(0))) {",
+        "    lapply(dat, load)",
+        "}")
+    cat(paste(rpro, collapse = "\n"), file = paste0(x, "/.Rprofile"))
+    cat(paste0("Project \"", project, "\" created:\n",
+        x, "\n"))    
 }
