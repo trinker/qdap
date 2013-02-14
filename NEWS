@@ -26,7 +26,9 @@ NEW FEATURES
   the binary variable uses the term more frequently.
 
 * `new_project`: A project template generating function designed to increase 
-  efficiency and standardize work flow.
+  efficiency and standardize work flow.  The project comes with a .Rproj file 
+  for easy use with RStudio as well as a .Rprofile that makes loading and sourcing 
+  of packages, data and project functions.
 
 MINOR FEATURES
 
