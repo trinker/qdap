@@ -78,7 +78,28 @@ new_project <- function(project = "new", path = getwd()) {
     y <- invisible(folder(ANALYSIS, CODEBOOK, DATA, 
         DATA_FOR_REVIEW, RAW_TRANSCRIPTS, PLOTS, TABLES, CM_DATA, 
         WORD_LISTS, REPORTS, CORRESPONDENCE, DOCUMENTS, CLEANED_TRANSCRIPTS))
-    cat(file=paste0(x, "/", "extra_functions.R"))
+    fun <- c(
+       "#get the emails of project members",
+        paste0("loc <- \"", y[[11]], "/CONTACT_INFO.txt\""),
+ 
+        "p_email <- function(x = loc, , copy2clip = TRUE) {",
+        "    info <- suppressWarnings(readLines(x))",
+        "    emails <- unique(unlist(bracketXtract(info, bracket = \"angle\")))",
+        "    emails <- paste(emails[grepl(\"@\", emails)], collapse = \"; \")",
+        "    if(copy2clip){",
+        "        if (Sys.info()[\"sysname\"] == \"Windows\") {",
+        "            writeClipboard(emails, format = 1)",
+        "        }",
+        "        if (Sys.info()[\"sysname\"] == \"Darwin\") {",           
+        "            j <- pipe(\"pbcopy\", \"w\")",                       
+        "            writeLines(emails, con = j)",                               
+        "            close(j)",                                    
+        "        }",            
+        "    }",
+        "    cat(c(emails, \"\\n\"))",
+        "}"
+    ) 
+    cat(paste(fun, collapse = "\n"),file=paste0(x, "/", "extra_functions.R"))
     cat(file=paste0(x, "/", "TO_DO.txt"))
     cat(paste0("Project \"", project, "\" created: ", Sys.time(), "\n"), 
         file=paste0(x, "/", "LOG.txt"))
