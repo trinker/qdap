@@ -54,7 +54,7 @@ delete(path)
 #==========================
 #move project directions
 #==========================
-outpdf <- "C:/Users/trinker/GitHub/qdap/inst/extdata/docs/"
-inpdf <- "C:/Users/trinker/GitHub/qdap/inst/pdf_gen/project_directions.pdf"
-file.copy(inpdf, outpdf)
+outpdf <- paste0(getwd(), "/inst/extdata/docs/")
+inpdf <- paste0(getwd(), "/inst/pdf_gen/project_directions.pdf")
+file.copy(inpdf, outpdf,, TRUE)
 
