@@ -29,7 +29,8 @@ Imports:
     XML,
     RCurl,
     reshape2,
-    parallel
+    parallel,
+    tools
 Suggests:
     plyr,
     koRpus
@@ -43,8 +44,12 @@ Description: This package automates many of the tasks associated with
     providing analysis and seamless integration with other R packages that
     undertake higher level analysis and visualization of text.  This provides
     the user with a more efficient and targeted analysis.
+Note: qdap is not compiled for Mac users.  Installation instructions for Mac
+    user or other OS users having difficulty installing qdap please visit:
+    http://trinker.github.com/qdap_install/installation
 License: GPL-2
 URL: http://trinker.github.com/qdap/
+BugReports: http://github.com/trinker/qdap/issues
 Collate:
     'adjacency_matrix.R'
     'all_words.R'
