@@ -79,10 +79,9 @@ new_project <- function(project = "new", path = getwd()) {
         DATA_FOR_REVIEW, RAW_TRANSCRIPTS, PLOTS, TABLES, CM_DATA, 
         WORD_LISTS, REPORTS, CORRESPONDENCE, DOCUMENTS, CLEANED_TRANSCRIPTS))
     fun <- c(
-       "#get the emails of project members",
-        paste0("loc <- \"", y[[11]], "/CONTACT_INFO.txt\""),
- 
-        "p_email <- function(x = loc, , copy2clip = TRUE) {",
+        "#get the email adresses of project members",
+        paste0("loc <- paste0(getwd(),", "\"/CORRESPONDENCE/CONTACT_INFO.txt\")"),
+        "p_email <- function(x = loc, copy2clip = TRUE) {",
         "    info <- suppressWarnings(readLines(x))",
         "    emails <- unique(unlist(bracketXtract(info, bracket = \"angle\")))",
         "    emails <- paste(emails[grepl(\"@\", emails)], collapse = \"; \")",
