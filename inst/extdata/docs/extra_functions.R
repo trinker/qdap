@@ -3,9 +3,9 @@
 #' @param all logical. If TRUE emails the lead and members
 #' @param cc logical. If TRUE carbon copy to the analyst/repo owner.
 #' @param copy2clip logical. If TRUE attempts to copy the output to the clipboard.
-loc1 <- paste0(getwd(),"/CORRESPONDENCE/CONTACT_INFO.txt")
+.loc1 <- paste0(getwd(),"/CORRESPONDENCE/CONTACT_INFO.txt")
 
-email <- function(x = loc1, all = TRUE, cc = TRUE, copy2clip = TRUE) {
+email <- function(x = .loc1, all = TRUE, cc = TRUE, copy2clip = TRUE) {
     info <- suppressWarnings(readLines(x))
     analyst <- which(grepl("ANALYST:", info))
     sel <- which(grepl("CLIENT/LEAD RESEARCHER:", info))
@@ -37,9 +37,9 @@ email <- function(x = loc1, all = TRUE, cc = TRUE, copy2clip = TRUE) {
 #' @param x Path to CONTACT_INFO.
 #' @param report.completed logical. If FALSE completed tasks are not completed.
 #' @param copy2clip logical. If TRUE attempts to copy the to do tasks to the clipboard.
-loc2 <- paste0(getwd(),"/TO_DO.txt")
+.loc2 <- paste0(getwd(),"/TO_DO.txt")
 
-todo <- function(x = loc2, report.completed = FALSE, copy2clip = TRUE) {
+todo <- function(x = .loc2, report.completed = FALSE, copy2clip = TRUE) {
     info <- suppressWarnings(readLines(x))
     info <- info[!grepl("#", info)]
     info <- info[info != ""]
