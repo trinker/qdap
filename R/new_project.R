@@ -78,28 +78,10 @@ new_project <- function(project = "new", path = getwd()) {
     y <- invisible(folder(ANALYSIS, CODEBOOK, DATA, 
         DATA_FOR_REVIEW, RAW_TRANSCRIPTS, PLOTS, TABLES, CM_DATA, 
         WORD_LISTS, REPORTS, CORRESPONDENCE, DOCUMENTS, CLEANED_TRANSCRIPTS))
-    fun <- c(
-        "#get the email adresses of project members",
-        paste0("loc <- paste0(getwd(),", "\"/CORRESPONDENCE/CONTACT_INFO.txt\")"),
-        "p_email <- function(x = loc, copy2clip = TRUE) {",
-        "    info <- suppressWarnings(readLines(x))",
-        "    emails <- unique(unlist(bracketXtract(info, bracket = \"angle\")))",
-        "    emails <- paste(emails[grepl(\"@\", emails)], collapse = \"; \")",
-        "    if(copy2clip){",
-        "        if (Sys.info()[\"sysname\"] == \"Windows\") {",
-        "            writeClipboard(emails, format = 1)",
-        "        }",
-        "        if (Sys.info()[\"sysname\"] == \"Darwin\") {",           
-        "            j <- pipe(\"pbcopy\", \"w\")",                       
-        "            writeLines(emails, con = j)",                               
-        "            close(j)",                                    
-        "        }",            
-        "    }",
-        "    cat(c(emails, \"\\n\"))",
-        "}"
-    ) 
-    cat(paste(fun, collapse = "\n"),file=paste0(x, "/", "extra_functions.R"))
-    cat(file=paste0(x, "/", "TO_DO.txt"))
+    todo <- paste("#when a task is complete put - in front of the item",
+        "#Use hanging indent",
+        "1. Task 1", sep = "\n")
+    cat(todo, file=paste0(x, "/", "TO_DO.txt"))
     cat(paste0("Project \"", project, "\" created: ", Sys.time(), "\n"), 
         file=paste0(x, "/", "LOG.txt"))
     invisible(folder(folder.name=paste0(y[[4]], "/", "ALREADY_REVIEWED")))
@@ -131,6 +113,8 @@ new_project <- function(project = "new", path = getwd()) {
     invisible(file.copy(pdfloc4, x))
     invisible(file.rename(paste0(x, "/TEMP.txt"), 
         paste0(x, "/",  project, ".Rproj")))
+    pdfloc5 <- paste0(root, "/extra_functions.R")
+    invisible(file.copy(pdfloc5, x))
     doc1 <- system.file("CITATION", package = "qdap")
     cite <- readLines(doc1)
     cite2 <- cite[4:10]
@@ -141,6 +125,7 @@ new_project <- function(project = "new", path = getwd()) {
     cite2 <- paste(cite2, collapse="\n")
     cat(cite2, file = paste0(y[[10]], "/project.bib"))
     info <- c("PROJECT NAME: Project", 
+        "CLIENT/LEAD RESEARCHER: lead_researcher<numero_uno@email> 555-555-5555[skype: num1]",
         "ANALYST: analyst_name<analyst@email> 555-555-5555[skype: analyst_guy12]",
         paste0("PROJECT MEMBERS:\n    john doe<j.doe@email> 555-555-5555[skype: jd156]\n",
         "    jane doe<jane@email> 555-555-5555[skype: jd157]\n", 
