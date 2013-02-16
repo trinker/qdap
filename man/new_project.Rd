@@ -74,9 +74,9 @@
   non-completed tasks from the \code{TO_DO.txt} file} } }
   \item{LOG.txt}{ - A text file documenting project
   changes/needs etc.} \item{xxx.Rproj}{ - A project file
-  used by \href{http://www.rstudio.com/}{RStudio}}
-  \item{TO_DO.txt}{ - A text file documenting project
-  tasks} }
+  used by \href{http://www.rstudio.com/}{RStudio}; clicking
+  this will open the project in RStudio.} \item{TO_DO.txt}{
+  - A text file documenting project tasks} }
 
   The template comes with a .Rproj file and .Rstudio file.
   This makes operating in

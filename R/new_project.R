@@ -58,7 +58,7 @@
 #'     }
 #' }
 #' \item{LOG.txt}{ - A text file documenting project changes/needs etc.}
-#' \item{xxx.Rproj}{ - A project file used by \href{http://www.rstudio.com/}{RStudio}} 
+#' \item{xxx.Rproj}{ - A project file used by \href{http://www.rstudio.com/}{RStudio}; clicking this will open the project in RStudio.} 
 #' \item{TO_DO.txt}{ - A text file documenting project tasks}
 #' }
 #' 
