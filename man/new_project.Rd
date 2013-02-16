@@ -32,17 +32,25 @@
   conventions or demographics data: \itemize{
   \item{KEY.csv}{ * A blank template for demographic
   information} } } \item{CORRESPONDENCE}{ - A directory to
-  store correspondence and agreements with the client
+  store correspondence and agreements with the client:
   \itemize{ \item{CONTACT_INFO.txt}{ * A txt file to put
-  research team members' contact information}
-  \item{project_directions.pdf}{ * A pdf explaining the
-  structure of the project template} } } \item{DATA}{ - A
-  directory to store cleaned data (generally .RData
-  format)} \item{DATA_FOR_REVIEW}{ - A directory to put
-  data that may need to be altered or needs to be inspected
-  more closely} \item{DOCUMENTS}{ - A directory to store
-  documents related to the project} \item{PLOTS}{ - A
-  directory to store plots} \item{RAW_TRANSCRIPTS}{ - A
+  research team members' contact information} } }
+  \item{DATA}{ - A directory to store cleaned data
+  (generally .RData format)} \item{DATA_FOR_REVIEW}{ - A
+  directory to put data that may need to be altered or
+  needs to be inspected more closely} \item{DOCUMENTS}{ - A
+  directory to store documents related to the project}
+  \item{PLOTS}{ - A directory to store plots}
+  \item{PROJECT_WORKFLOW_GUIDE.pdf}{ * A pdf explaining the
+  structure of the project template} \item{RAW_DATA}{ - A
+  directory to store non-transcript data related to the
+  project: \itemize{ \item{AUDIO}{ * A directory to put
+  audio files (or shortcuts)} \item{FIELD_NOTES}{ * A
+  directory to put audio files (or shortcuts)}
+  \item{PAPER_ARTIFACTS}{ * A dirrectory to put paper
+  artifacts} \item{PHOTOGRAPHS}{ * A directory to put
+  photographs} \item{VIDEO}{ * A directory to put video
+  files (or shortcuts)} } } \item{RAW_TRANSCRIPTS}{ - A
   directory to store the raw transcripts} \item{REPORTS}{ -
   A directory to house reports; contains: \itemize{
   \item{report_1.rnw}{ * A latex rnw file for use with
@@ -57,10 +65,16 @@
   libraries, data and sourcing functions upon startup in
   \href{http://www.rstudio.com/}{RStudio}}
   \item{extra_functions.R}{ - A script to store user made
-  functions related to the project} \item{LOG.txt}{ - A
-  text file documenting project changes/needs etc.}
-  \item{xxx.Rproj}{ - A project file used by
-  \href{http://www.rstudio.com/}{RStudio}}
+  functions related to the project \itemize{ \item{email}{
+  * A function to view, and optionally copy to the
+  clipboard, emails for the client/lead researcher, analyst
+  and/or other project members (information taking from
+  ~/CORRESPONDENCE/CONTACT_INFO.txt file)} \item{todo}{ * A
+  function to view, and optionally copy to the clipboard,
+  non-completed tasks from the \code{TO_DO.txt} file} } }
+  \item{LOG.txt}{ - A text file documenting project
+  changes/needs etc.} \item{xxx.Rproj}{ - A project file
+  used by \href{http://www.rstudio.com/}{RStudio}}
   \item{TO_DO.txt}{ - A text file documenting project
   tasks} }
 

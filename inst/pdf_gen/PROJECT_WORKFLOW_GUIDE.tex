@@ -84,17 +84,25 @@ The project template includes these main directories and scripts:
     \item \textbf{KEY.csv} A blank template for demographic information
   \end{enumerate}  
   \item \textbf{CORRESPONDENCE} - A directory to store correspondence and agreements 
-     with the client
+     with the client:
   \begin{enumerate}
      \item \textbf{CONTACT\_INFO.txt} A txt file to put research team members' 
        contact information
-     \item \textbf{project\_directions.pdf} A pdf explaining the structure of the project directory
   \end{enumerate}  
   \item \textbf{DATA} - A directory to store cleaned data (generally .RData 
      format)
-  \item \textbf{DATA\_FOR\_REVIEW} - A directory to put data that may need to be altered or needs to be inspected more closely
+  \item \textbf{DATA\_FOR\_REVIEW} - A directory to put data that may need to be altered or needs to be inspected more closely:
   \item \textbf{DOCUMENTS} - A directory to store documents related to the project
   \item \textbf{PLOTS} - A directory to store plots
+  \item \textbf{PROJECT\_WORKFLOW\_GUIDE.pdf} A pdf explaining the structure of the project directory (this document) 
+  \item \textbf{RAW\_DATA} - A directory to store non-transcript data related to the project:
+  \begin{enumerate}
+     \item \textbf{AUDIO} - A directory to put audio files (or shortcuts)
+     \item \textbf{FIELD\_NOTES} - A directory to put audio files (or shortcuts)
+     \item \textbf{PAPER\_ARTIFACTS} - A dirrectory to put paper artifacts 
+     \item \textbf{PHOTOGRAPHS} - directory to put photographs
+     \item \textbf{VIDEO} - A directory to put video files (or shortcuts)
+  \end{enumerate}  
   \item \textbf{RAW\_TRANSCRIPTS} - A directory to store the raw transcripts
   \item \textbf{REPORTS} - A directory to house reports; contains:
   \begin{enumerate}
@@ -106,7 +114,11 @@ The project template includes these main directories and scripts:
   \item \textbf{WORD\_LISTS} - A directory to store word lists that can be sourced and supplied to functions
   \item \textbf{.Rprofile} - Performs certan tasks such as loading libraries, 
       data and sourcing functions upon startup in \href{http://www.rstudio.com/}{RStudio}
-  \item \textbf{extra\_functions.R} - A script to store user made functions related to the project
+  \item \textbf{extra\_functions.R} - A script to store user made functions related to the project; already contains:
+  \begin{enumerate}
+     \item \textbf{email} - A function to view, and optionally copy to the clipboard, emails for the client/lead researcher, analyst and/or other project members (information taking from ~/CORRESPONDENCE/CONTACT\_INFO.txt file)
+     \item \textbf{todo} - A function to view, and optionally copy to the clipboard, non-completed tasks from the TO\_DO.txt file
+  \end{enumerate}   
   \item \textbf{LOG.txt} - A text file documenting project changes/needs etc.
   \item \textbf{xxx.Rproj} - A project file used by \href{http://www.rstudio.com/}{RStudio}
   \item \textbf{TO\_DO.txt} - A text file documenting project tasks 

@@ -21,16 +21,25 @@
 #'     \item{KEY.csv}{ * A blank template for demographic information}
 #'     }  
 #' }
-#' \item{CORRESPONDENCE}{ - A directory to store correspondence and agreements with the client
+#' \item{CORRESPONDENCE}{ - A directory to store correspondence and agreements with the client:
 #' \itemize{
 #'     \item{CONTACT_INFO.txt}{ * A txt file to put research team members' contact information}     
-#'     \item{project_directions.pdf}{ * A pdf explaining the structure of the project template}
 #'     } 
 #' }
 #' \item{DATA}{ - A directory to store cleaned data (generally .RData format)}
 #' \item{DATA_FOR_REVIEW}{ - A directory to put data that may need to be altered or needs to be inspected more closely}
 #' \item{DOCUMENTS}{ - A directory to store documents related to the project}
 #' \item{PLOTS}{ - A directory to store plots}
+#' \item{PROJECT_WORKFLOW_GUIDE.pdf}{ * A pdf explaining the structure of the project template}
+#' \item{RAW_DATA}{ - A directory to store non-transcript data related to the project:
+#' \itemize{
+#'     \item{AUDIO}{ * A directory to put audio files (or shortcuts)}     
+#'     \item{FIELD_NOTES}{ * A directory to put audio files (or shortcuts)}   
+#'     \item{PAPER_ARTIFACTS}{ * A dirrectory to put paper artifacts}  
+#'     \item{PHOTOGRAPHS}{ * A directory to put photographs}  
+#'     \item{VIDEO}{ * A directory to put video files (or shortcuts)}  
+#'     } 
+#' }
 #' \item{RAW_TRANSCRIPTS}{ - A directory to store the raw transcripts}
 #' \item{REPORTS}{ - A directory to house reports; contains:
 #' \itemize{
@@ -42,7 +51,12 @@
 #' \item{TABLES}{ - A directory to export tables to}  
 #' \item{WORD_LISTS}{ - A directory to store word lists that can be sourced and supplied to functions}
 #' \item{.Rprofile}{ - Performs certan tasks such as loading libraries, data and sourcing functions upon startup in \href{http://www.rstudio.com/}{RStudio}} 
-#' \item{extra_functions.R}{ - A script to store user made functions related to the project}
+#' \item{extra_functions.R}{ - A script to store user made functions related to the project
+#' \itemize{
+#'     \item{email}{ * A function to view, and optionally copy to the clipboard, emails for the client/lead researcher, analyst and/or other project members (information taking from ~/CORRESPONDENCE/CONTACT_INFO.txt file)}
+#'     \item{todo}{ * A function to view, and optionally copy to the clipboard, non-completed tasks from the \code{TO_DO.txt} file}
+#'     }
+#' }
 #' \item{LOG.txt}{ - A text file documenting project changes/needs etc.}
 #' \item{xxx.Rproj}{ - A project file used by \href{http://www.rstudio.com/}{RStudio}} 
 #' \item{TO_DO.txt}{ - A text file documenting project tasks}
@@ -72,12 +86,12 @@ new_project <- function(project = "new", path = getwd()) {
     }
     x <- suppressWarnings(invisible(folder(folder.name=paste0(path, "/", project))))
     setwd(x)
-    ANALYSIS <- CODEBOOK <- DATA <- DATA_FOR_REVIEW <- NULL
+    ANALYSIS <- CODEBOOK <- DATA <- DATA_FOR_REVIEW <- RAW_DATA <- NULL
     RAW_TRANSCRIPTS <- PLOTS <- TABLES <- CM_DATA <- WORD_LISTS <- NULL
     REPORTS <- CORRESPONDENCE <- DOCUMENTS <- CLEANED_TRANSCRIPTS <- NULL
-    y <- invisible(folder(ANALYSIS, CODEBOOK, DATA, 
-        DATA_FOR_REVIEW, RAW_TRANSCRIPTS, PLOTS, TABLES, CM_DATA, 
-        WORD_LISTS, REPORTS, CORRESPONDENCE, DOCUMENTS, CLEANED_TRANSCRIPTS))
+    y <- invisible(folder(ANALYSIS, CODEBOOK, DATA, DATA_FOR_REVIEW, 
+        RAW_TRANSCRIPTS, PLOTS, TABLES, CM_DATA, WORD_LISTS, REPORTS, 
+        CORRESPONDENCE, DOCUMENTS, CLEANED_TRANSCRIPTS, RAW_DATA))
     todo <- paste("#when a task is complete put - in front of the item",
         "#Use hanging indent",
         "1. Task 1", sep = "\n")
@@ -85,6 +99,9 @@ new_project <- function(project = "new", path = getwd()) {
     cat(paste0("Project \"", project, "\" created: ", Sys.time(), "\n"), 
         file=paste0(x, "/", "LOG.txt"))
     invisible(folder(folder.name=paste0(y[[4]], "/", "ALREADY_REVIEWED")))
+    dats <- c("AUDIO", "VIDEO", "FIELD_NOTES", "INTERVIEWS", "PAPER_ARTIFACTS", 
+        "PHOTOGRAPHS")
+    invisible(folder(folder.name=paste0(y[[14]], "/", dats)))
     cat(paste0("library(qdap)\ndir_map(\"", 
         y[[13]], "\")\n\n\n\n", 
     "len <- length(dir(\"", y[[13]], "\"))\n",
@@ -103,8 +120,8 @@ new_project <- function(project = "new", path = getwd()) {
         paste0("setwd(\"", y[[6]], "\")\n")),
         file=paste0(y[[1]], "/", "03_plots.R"))
     root <- system.file("extdata/docs", package = "qdap")
-    pdfloc <- paste0(root, "/project_directions.pdf")
-    invisible(file.copy(pdfloc, y[[11]]))
+    pdfloc <- paste0(root, "/PROJECT_WORKFLOW_GUIDE.pdf")
+    invisible(file.copy(pdfloc, x))
     pdfloc2 <- paste0(root, "/report_1.rnw")
     invisible(file.copy(pdfloc2, y[[10]]))
     pdfloc3 <- paste0(root, "/preamble.tex")
