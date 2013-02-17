@@ -43,6 +43,8 @@ MINOR FEATURES
 * `cm_range.temp` now takes the arguments text.var and grouping.var that will 
   automatically output these (grouping.var) columns as range coded indices.
 
+* `wfm` gets as speed boost as the code has been re-written to be faster.
+
 CHANGES
 
 * `sec2hms` is the new name for `convert` 

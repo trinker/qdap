@@ -6,8 +6,8 @@
 \title{Word Frequency Matrix}
 \usage{
   wfm(text.var = NULL, grouping.var = NULL, wfdf = NULL,
-    output = "raw", stopwords = NULL, digits = 2,
-    char2space = "~~", ...)
+    output = "raw", stopwords = NULL, char2space = "~~",
+    ...)
 
   wfdf(text.var, grouping.var = NULL, stopwords = NULL,
     margins = FALSE, output = "raw", digits = 2,
@@ -36,17 +36,19 @@
 
   \item{stopwords}{A vector of stop words to remove.}
 
-  \item{digits}{An integer indicating the number of decimal
-  places (round) or significant digits (signif) to be used.
-  Negative values are allowed}
-
-  \item{margins}{logical. If TRUE provides grouping.var and
-  word variable totals.}
+  \item{char2space}{A vector of characters to be turned
+  into spaces.  If \code{char.keep} is NULL,
+  \code{char2space} will activate this argument.}
 
   \item{\ldots}{Other arguments supplied to
   \code{\link[qdap]{strip}}.}
 
-  \item{wf.obj}{A \code{wfm} or \code{wfdf} object.}
+  \item{digits}{An integer indicating the number of decimal
+  places (round) or significant digits (signif) to be used.
+  Negative values are allowed.}
+
+  \item{margins}{logical. If TRUE provides grouping.var and
+  word variable totals.}
 
   \item{word.lists}{A list of character vectors of words to
   pass to \code{wf.combine}}
@@ -55,9 +57,7 @@
   \code{\link[qdap]{wfm}} rather than a
   \code{\link[qdap]{wfdf}} object.}
 
-  \item{char2space}{A vector of characters to be turned
-  into spaces.  If \code{char.keep} is NULL,
-  \code{char2space} will activate this argument.}
+  \item{wf.obj}{A \code{wfm} or \code{wfdf} object.}
 }
 \value{
   \code{wfm} - returns a word frequency of the class

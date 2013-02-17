@@ -11,17 +11,16 @@
 #' to a word frequency matrix (\code{\link[qdap]{wfm}}).  Default is NULL.
 #' @param output Output type (either \code{"proportion"} or \code{"percent"}).
 #' @param stopwords A vector of stop words to remove.
-#' @param digits An integer indicating the number of decimal places (round) or 
-#' significant digits (signif) to be used. Negative values are allowed
-#' @param margins logical. If TRUE provides grouping.var and word variable totals.
+#' @param char2space A vector of characters to be turned into spaces.  If 
+#' \code{char.keep} is NULL, \code{char2space} will activate this argument.
 #' @param \ldots Other arguments supplied to \code{\link[qdap]{strip}}.
-#' @param wf.obj A \code{wfm} or \code{wfdf} object.
+#' @param digits An integer indicating the number of decimal places (round) or 
+#' significant digits (signif) to be used. Negative values are allowed.
+#' @param margins logical. If TRUE provides grouping.var and word variable totals.
 #' @param word.lists A list of character vectors of words to pass to 
 #' \code{wf.combine}
 #' @param matrix logical.  If TRUE returns the output as a 
 #' \code{\link[qdap]{wfm}} rather than a \code{\link[qdap]{wfdf}} object.
-#' @param char2space A vector of characters to be turned into spaces.  If 
-#' \code{char.keep} is NULL, \code{char2space} will activate this argument.
 #' @return \code{wfm} - returns a word frequency of the class matrix.
 #' @rdname Word_Frequency_Matrix
 #' @note Words can be kept as one by inserting a double tilde (\code{"~~"}), or 
@@ -89,34 +88,65 @@
 #' }
 wfm <-
 function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
-         output = "raw", stopwords = NULL, digits = 2, char2space = "~~", ...){
-  if (!is.null(wfdf)) {
-    if (comment(wfdf) == "t.df") {
-      wfdf <- wfdf
+         output = "raw", stopwords = NULL, char2space = "~~", ...){
+    if (!is.null(wfdf)) {
+        if (comment(wfdf) == "t.df") {
+            wfdf <- wfdf
+        } else {
+            if (comment(wfdf) == "m.df") { 
+                wfdf <- wfdf[-nrow(wfdf), -ncol(wfdf)]
+            } else {
+                stop("Object must be a raw word frequency data frame")
+            }
+        }
+        x2 <- wfdf[, -1, drop = FALSE]
+        rownames(x2) <- wfdf[, 1]
+        x2 <- as.matrix(x2)
     } else {
-      if (comment(wfdf) == "m.df") { 
-        wfdf <- wfdf[-nrow(wfdf), -ncol(wfdf)]
-      } else {
-        stop("Object must be a raw word frequency data frame")
-      }
+        if (!is.null(text.var)) {
+            if(is.null(grouping.var)){
+                grouping <- rep("all", length(text.var))
+            } else {
+                if (is.list(grouping.var) & length(grouping.var)>1) {
+                    grouping <- paste2(grouping.var)
+                } else {
+                    grouping <- unlist(grouping.var)
+                } 
+            } 
+            txt <- strip(text.var, char.keep = char2space, 
+                apostrophe.remove = FALSE, ...)
+            txtL <- lapply(split(txt, grouping), function(x) {
+                  table(unlist(strsplit(x, "\\s+")))
+            })
+            rnms <- sort(unique(unlist(lapply(txtL, names))))
+            txtL <- lapply(txtL, data.frame)
+            txtL <- lapply(txtL, function(x) {
+                new <- rnms[!rnms %in% x[, "Var1"]]
+                DF <- rbind.data.frame(x, data.frame(Var1 = new, 
+                    Freq = rep(0, length(new))))
+                DF[order(as.character(DF$Var1)), 2]
+            })
+            x2 <- do.call(cbind, txtL)
+            if (!is.null(char2space)) {
+                rownames(x2) <- mgsub(char2space, " ", rnms)
+            } else {
+                rownames(x2) <- rnms
+            }
+            if (!is.null(stopwords)){
+                x2 <- x2[!rownames(x2) %in% stopwords, ]
+            }
+            if (output != "raw"){
+                x2 <- x2/colSums(x2)
+                if (output == "percent") {
+                    x2 <- x2*100
+                }
+            }
+        } else {
+            stop ("must specify either text.var or wfdf")
+        }
     }
-    x2 <- wfdf[, -1, drop = FALSE]
-    rownames(x2) <- wfdf[, 1]
-    x2 <- as.matrix(x2)
-  } else {
-    if (!is.null(text.var)) {
-      wfdf <- wfdf(text.var = text.var, grouping.var = grouping.var, 
-        stopwords = stopwords, output = output, digits = digits, 
-        char2space = char2space, ...) 
-      x2 <- wfdf[, -1, drop = FALSE]
-      rownames(x2) <- wfdf[, 1]
-      x2 <- as.matrix(x2)
-    } else {
-      stop ("must specify both text.var or wfdf")
-    }
-  }
-  comment(x2) <- "true.matrix"
-  return(x2)
+    comment(x2) <- "true.matrix"
+    return(x2)
 }
 
 
@@ -237,6 +267,7 @@ function(text.var, grouping.var = NULL, ...){
 #' \code{wf.combine} - Combines words (rows) of a word frequency dataframe 
 #' (\code{wfdf}) together.
 #'
+#' @param wf.obj A \code{wfm} or \code{wfdf} object.
 #' @rdname Word_Frequency_Matrix
 #' @export
 #' @return \code{wf.combine} - returns a word frequency matrix (\code{wfm}) or 
