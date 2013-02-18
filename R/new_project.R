@@ -139,7 +139,20 @@ new_project <- function(project = "new", path = getwd()) {
     cite2 <- gsub("\",", "},", cite2)
     cite2[1] <- "@MANUAL{Rinker,"
     cite2[8] <- "}\n"
-    cite2 <- paste(cite2, collapse="\n")
+    doc2 <- system.file("CITATION")
+    citeb <- readLines(doc2)
+    cite2b <- citeb[1:8]
+    cite2b <- gsub("= \"", "= {", cite2b)
+    cite2b <- gsub("\",", "},", cite2b)
+    cite2b <- gsub(" person(\"", " {{", cite2b, fixed = TRUE)
+    cite2b <- gsub("\"),", "}},", cite2b, fixed = TRUE)
+    cite2b <- gsub(": A", ": {A}", cite2b)
+    Rinf <- R.Version()
+    cite2b <- gsub("version$year,", paste0("{", Rinf$year, "},"), cite2b, fixed = TRUE)
+    cite2b[grepl("ISBN", cite2b)] <- paste0("         note         = {", Rinf$version.string, "},")
+    cite2b[1] <- "@MANUAL{R,"
+    cite2b[8] <- "}\n"
+    cite2 <- paste(c(cite2b, "", cite2), collapse="\n")
     cat(cite2, file = paste0(y[[10]], "/project.bib"))
     info <- c("PROJECT NAME: Project", 
         "CLIENT/LEAD RESEARCHER: lead_researcher<numero_uno@email> 555-555-5555[skype: num1]",

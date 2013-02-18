@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2012.8.16)  16 FEB 2013 17:08
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.2.18)  18 FEB 2013 11:26
 entering extended mode
 **PROJECT_WORKFLOW_GUIDE.tex
 (C:\Users\trinker\GitHub\qdap\inst\pdf_gen\PROJECT_WORKFLOW_GUIDE.tex
@@ -70,11 +70,11 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
-(C:\Users\trinker\AppData\Roaming\MiKTeX\2.9\tex\latex\upquote\upquote.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\upquote\upquote.sty"
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-(C:\Users\trinker\AppData\Roaming\MiKTeX\2.9\tex\latex\framed\framed.sty
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\framed\framed.sty"
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 \OuterFrameSep=\skip43
 \fb@frw=\dimen105
@@ -122,7 +122,7 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\hyperref.sty"
-Package: hyperref 2012/08/03 v6.82y Hypertext links for LaTeX
+Package: hyperref 2012/11/06 v6.83m Hypertext links for LaTeX
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\hobsub-hyperref.sty"
 Package: hobsub-hyperref 2012/04/25 v1.12 Bundle oberdiek, subset hyperref (HO)
@@ -178,34 +178,35 @@ Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
 \Hy@pagecounter=\count92
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\pd1enc.def"
-File: pd1enc.def 2012/08/03 v6.82y Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2012/11/06 v6.83m Hyperref: PDFDocEncoding definition (HO)
 )
 \Hy@SavedSpaceFactor=\count93
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\hyperref.cfg"
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
-Package hyperref Info: Hyper figures OFF on input line 4204.
-Package hyperref Info: Link nesting OFF on input line 4209.
-Package hyperref Info: Hyper index ON on input line 4212.
-Package hyperref Info: Plain pages OFF on input line 4219.
-Package hyperref Info: Backreferencing OFF on input line 4224.
+Package hyperref Info: Hyper figures OFF on input line 4443.
+Package hyperref Info: Link nesting OFF on input line 4448.
+Package hyperref Info: Hyper index ON on input line 4451.
+Package hyperref Info: Plain pages OFF on input line 4458.
+Package hyperref Info: Backreferencing OFF on input line 4463.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4442.
+Package hyperref Info: Bookmarks ON on input line 4688.
 \c@Hy@tempcnt=\count94
-LaTeX Info: Redefining \url on input line 4795.
+LaTeX Info: Redefining \url on input line 5041.
+\XeTeXLinkMargin=\dimen118
 \Fld@menulength=\count95
-\Field@Width=\dimen118
-\Fld@charsize=\dimen119
-Package hyperref Info: Hyper figures OFF on input line 5985.
-Package hyperref Info: Link nesting OFF on input line 5990.
-Package hyperref Info: Hyper index ON on input line 5993.
-Package hyperref Info: backreferencing OFF on input line 6000.
-Package hyperref Info: Link coloring OFF on input line 6005.
-Package hyperref Info: Link coloring with OCG OFF on input line 6010.
-Package hyperref Info: PDF/A mode OFF on input line 6015.
-LaTeX Info: Redefining \ref on input line 6055.
-LaTeX Info: Redefining \pageref on input line 6059.
+\Field@Width=\dimen119
+\Fld@charsize=\dimen120
+Package hyperref Info: Hyper figures OFF on input line 6295.
+Package hyperref Info: Link nesting OFF on input line 6300.
+Package hyperref Info: Hyper index ON on input line 6303.
+Package hyperref Info: backreferencing OFF on input line 6310.
+Package hyperref Info: Link coloring OFF on input line 6315.
+Package hyperref Info: Link coloring with OCG OFF on input line 6320.
+Package hyperref Info: PDF/A mode OFF on input line 6325.
+LaTeX Info: Redefining \ref on input line 6365.
+LaTeX Info: Redefining \pageref on input line 6369.
 \Hy@abspage=\count96
 \c@Item=\count97
 \c@Hfootnote=\count98
@@ -214,7 +215,7 @@ LaTeX Info: Redefining \pageref on input line 6059.
 Package hyperref Message: Driver (autodetected): hpdftex.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\hpdftex.def"
-File: hpdftex.def 2012/08/03 v6.82y Hyperref driver for pdfTeX
+File: hpdftex.def 2012/11/06 v6.83m Hyperref driver for pdfTeX
 \Fld@listcount=\count99
 \c@bookmark@seq@number=\count100
 
@@ -246,21 +247,21 @@ LaTeX Font Info:    Try loading font information for OT1+pplx on input line 65.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1pplx.fd"
 File: ot1pplx.fd 2004/09/06 font definitions for OT1/pplx.
 )
-(C:\Users\trinker\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count101
-\scratchdimen=\dimen120
+\scratchdimen=\dimen121
 \scratchbox=\box26
 \nofMPsegments=\count102
 \nofMParguments=\count103
 \everyMPshowfont=\toks16
 \MPscratchCnt=\count104
-\MPscratchDim=\dimen121
+\MPscratchDim=\dimen122
 \MPnumerator=\count105
 \makeMPintoPDFobject=\count106
 \everyMPtoPDFconversion=\toks17
 )
-\big@size=\dimen122
+\big@size=\dimen123
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -303,7 +304,7 @@ Package geometry Warning: The marginal notes overrun the paper.
 \AtBeginShipoutBox=\box27
 Package hyperref Info: Link coloring OFF on input line 65.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\hyperref\nameref.sty"
-Package: nameref 2012/07/31 v2.42 Cross-referencing by name of section
+Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\gettitlestring.sty"
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
@@ -345,7 +346,7 @@ LaTeX Font Info:    Font shape `OT1/pplx/bx/n' in size <10> not available
 (Font)              Font shape `OT1/pplx/b/n' tried instead on input line 75.
  [1
 
-{C:/Users/trinker/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+{C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 127.
  [2]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 127.
@@ -359,10 +360,10 @@ Package rerunfilecheck Info: File `PROJECT_WORKFLOW_GUIDE.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 127.
  ) 
 Here is how much of TeX's memory you used:
- 5661 strings out of 493921
- 84650 string characters out of 3144870
- 171951 words of memory out of 3000000
- 8867 multiletter control sequences out of 15000+200000
+ 5695 strings out of 493921
+ 85173 string characters out of 3144870
+ 174147 words of memory out of 3000000
+ 8901 multiletter control sequences out of 15000+200000
  13920 words of font info for 38 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  29i,5n,19p,275b,483s stack positions out of 5000i,500n,10000p,200000b,50000s

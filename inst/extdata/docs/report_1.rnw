@@ -21,6 +21,7 @@ options(replace.assign=TRUE,width=90)
 
 
 \nocite{Rinker}
+\nocite{R}
 %=======================
 %  Bibliography
 %=======================
