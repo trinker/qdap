@@ -79,7 +79,7 @@ new_project <- function(project = "new", path = getwd()) {
             "\" already exists:\nDo you want to overwrite?\n\n"))
         ans <- menu(c("Yes", "No")) 
         if (ans == "2") {
-            stop("q_workflow aborted")
+            stop("new_project aborted")
         } else {
             delete(paste0(path, "/", project))
         }
