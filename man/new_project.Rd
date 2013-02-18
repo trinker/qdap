@@ -87,5 +87,6 @@
   \href{https://www.dropbox.com/}{dropbox}, depending on
   what the client/research team is comfortable utilizing.
 }
-\keyword{replace}
+\keyword{project,}
+\keyword{workflow}
 

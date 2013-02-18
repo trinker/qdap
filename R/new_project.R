@@ -69,7 +69,7 @@
 #' depending on what the client/research team is comfortable utilizing. 
 #' 
 #' @return Creates a project template.
-#' @keywords replace
+#' @keywords project, workflow
 #' @export
 new_project <- function(project = "new", path = getwd()) {
     WD <- getwd()
