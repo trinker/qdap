@@ -1,0 +1,31 @@
+For a web version of this document see: http://trinker.github.com/qdap_install/installation
+
+Mac Users
+=========
+Mac users must install openNLP from source before attempting to install qdap.
+
+This may require installing the appropriate version XTools from the Apple Developer site (https://developer.apple.com/xcode/). You may need to register as an Apple developer (https://developer.apple.com/programs/register/). An older version of XTools may also be required.
+
+    install.packages("openNLP", type = "source")
+    install.packages("qdap", type = "source")
+
+
+
+Windows Users
+=============
+Windows users may need to install RCurl before installing qdap. Use the following short script:
+
+    URL <- "http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/3.0/"
+    install.packages("RCurl", contriburl = URL)
+    install.packages("qdap")
+
+Additionally, if there is a discrepency between the R and Java architectures (https://dl.dropbox.com/u/61803503/rjava_warning.txt) you will have to download the appropriate version of Java compatable with the version of R you're using (http://www.java.com/en/download/manual.jsp).
+
+
+
+
+Development Version
+===================
+Download the development version of qdap here:
+
+    https://github.com/trinker/qdap/
