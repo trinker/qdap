@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.2.18)  18 FEB 2013 11:26
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.2.18)  1 MAR 2013 16:54
 entering extended mode
 **PROJECT_WORKFLOW_GUIDE.tex
 (C:\Users\trinker\GitHub\qdap\inst\pdf_gen\PROJECT_WORKFLOW_GUIDE.tex
@@ -347,21 +347,21 @@ LaTeX Font Info:    Font shape `OT1/pplx/bx/n' in size <10> not available
  [1
 
 {C:/ProgramData/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 127.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 122.
  [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 127.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 122.
 
 (C:\Users\trinker\GitHub\qdap\inst\pdf_gen\PROJECT_WORKFLOW_GUIDE.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 127.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 127.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 122.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 122.
 Package rerunfilecheck Info: File `PROJECT_WORKFLOW_GUIDE.out' has not changed.
 
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 127.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 122.
  ) 
 Here is how much of TeX's memory you used:
- 5695 strings out of 493921
- 85173 string characters out of 3144870
+ 5692 strings out of 493921
+ 85152 string characters out of 3144870
  174147 words of memory out of 3000000
  8901 multiletter control sequences out of 15000+200000
  13920 words of font info for 38 fonts, out of 3000000 for 9000
@@ -370,9 +370,9 @@ Here is how much of TeX's memory you used:
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Progra
 m Files (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program Files 
 (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb>
-Output written on PROJECT_WORKFLOW_GUIDE.pdf (2 pages, 51251 bytes).
+Output written on PROJECT_WORKFLOW_GUIDE.pdf (2 pages, 51035 bytes).
 PDF statistics:
- 70 PDF objects out of 1000 (max. 8388607)
- 37 named destinations out of 1000 (max. 500000)
+ 64 PDF objects out of 1000 (max. 8388607)
+ 34 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

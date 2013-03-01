@@ -49,12 +49,7 @@ The project template includes these main directories and scripts:
      \item \textbf{VIDEO} - A directory to put video files (or shortcuts)
   \end{enumerate}  
   \item \textbf{RAW\_TRANSCRIPTS} - A directory to store the raw transcripts
-  \item \textbf{REPORTS} - A directory to house reports; contains:
-  \begin{enumerate}
-     \item \textbf{report\_1.rnw} - A latex rnw file for use with \href{http://yihui.name/knitr/}{knitr}
-     \item \textbf{project.bib} - A latex bibtex file
-     \item \textbf{preamble.tex} - A tex file that report\_1.rnw references to generate the preamble 
-  \end{enumerate}  
+  \item \textbf{REPORTS} - A directory relatede reports and presentations; see \href{https://dl.dropbox.com/u/61803503/packages/REPORT_WORKFLOW_GUIDE.pdf}{REPORT\_WORKFLOW\_GUIDE.pdf} for details
   \item \textbf{TABLES} - A directory to export tables to 
   \item \textbf{WORD\_LISTS} - A directory to store word lists that can be sourced and supplied to functions
   \item \textbf{.Rprofile} - Performs certan tasks such as loading libraries, 
