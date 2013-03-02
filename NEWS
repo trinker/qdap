@@ -14,9 +14,6 @@ BUG FIXES
   in a second vector of match.list.  termco now counts repeated terms multiple 
   times.
 
-* `folder` would not generate a directory with the time/date stamp if no 
-  directory name was given.
-
 * `cm_df.transcript` did not give the correct speaker labels (fixed).
 
 NEW FEATURES
@@ -28,7 +25,8 @@ NEW FEATURES
 * `new_project`: A project template generating function designed to increase 
   efficiency and standardize work flow.  The project comes with a .Rproj file 
   for easy use with RStudio as well as a .Rprofile that makes loading and sourcing 
-  of packages, data and project functions.
+  of packages, data and project functions.  This function uses the reprots package
+  to generate an extensive reports folder.
 
 MINOR FEATURES
 
@@ -48,6 +46,11 @@ MINOR FEATURES
 CHANGES
 
 * `sec2hms` is the new name for `convert` 
+
+* `folder` and `delete` have been moved to the reports package which is imported 
+  by qdap.  Previously `folder` would not generate a directory with the 
+  time/date stamp if no directory name was given; this has been fixed, though 
+  the function now resides in the reprots package.
 
 qdap 0.2.0
 ----------------------------------------------------------------

@@ -90,7 +90,6 @@ Collate:
     'colsplit2df.R'
     'combine_tot.R'
     'common.R'
-    'delete.R'
     'dir_map.R'
     'dissimilarity.R'
     'distTab.R'
