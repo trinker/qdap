@@ -10,3 +10,4 @@ staticdocs
 maintenance.R
 extra_statdoc
 pdf_gen
+.Rprofile

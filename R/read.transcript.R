@@ -35,6 +35,9 @@
 #' beginning to read data.
 #' @param nontext2factor logical.  If TRUE attempts to convert any non text to a 
 #' factor.
+#' @param text Character string: if file is not supplied and this is, then data 
+#' are read from the value of text. Notice that a literal string can be used to 
+#' include (small) data sets within R code.
 #' @param \ldots Further arguments to be passed to \code{\link[utils]{read.table}}.
 #' @return Returns a dataframe of dialogue and people.
 #' @note If a transcript is a .docx file read transcript expects two columns 
@@ -72,16 +75,27 @@
 #' dat4 <- read.transcript(doc3, sep = "-", skip = 1); truncdf(dat4, 40)
 #' 
 #' dat5 <- read.transcript(doc4); truncdf(dat5, 40) #an .xlsx file
+#' trans <- "sam: Computer is fun. Not too fun.
+#' greg: No it's not, it's dumb.
+#' teacher: What should we do?
+#' sam: You liar, it stinks!"
+#' 
+#' read.transcript(text=trans)
 #' }
 read.transcript <-
 function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE, 
     header = FALSE, dash = "", ellipsis = "...", quote2bracket = FALSE, 
     rm.empty.rows = TRUE, na.strings = c("999", "NA", "", " "), 
-    sep = NULL, skip = 0, nontext2factor = TRUE, ...) {
-    y <- unlist(strsplit(file, "\\."))
-    y <- y[[length(y)]]
+    sep = NULL, skip = 0, nontext2factor = TRUE, text, ...) {
+    if (missing(file) && !missing(text)) {
+        file <- textConnection(text)
+        on.exit(close(file))
+        y <- "text"
+    } else {
+        y <- tools::file_ext(file)
+    }
     if (is.null(sep)) {
-        if (y == "docx") {
+        if (y %in% c("docx", "txt", "text")) {
             sep <- ":"
         } else {
             sep <- ","
@@ -104,6 +118,12 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
                 blank.lines.skip = rm.empty.rows, ...)
             },
         doc = stop("convert file to docx"),
+        txt = {
+            x <- read.table(file=file, header = header, sep = sep, skip=skip)
+        },
+        text = {
+            x <- read.table(text=text, header = header, sep = sep, skip=skip)
+        },
         stop("invalid file extension:\n \bfile must be a .docx .csv .xls or .xlsx" )
     )
     if (nontext2factor) {

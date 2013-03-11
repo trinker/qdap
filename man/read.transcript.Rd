@@ -7,7 +7,7 @@
     ellipsis = "...", quote2bracket = FALSE,
     rm.empty.rows = TRUE,
     na.strings = c("999", "NA", "", " "), sep = NULL,
-    skip = 0, nontext2factor = TRUE, ...)
+    skip = 0, nontext2factor = TRUE, text, ...)
 }
 \arguments{
   \item{file}{The name of the file which the data are to be
@@ -61,6 +61,11 @@
   \item{nontext2factor}{logical.  If TRUE attempts to
   convert any non text to a factor.}
 
+  \item{text}{Character string: if file is not supplied and
+  this is, then data are read from the value of text.
+  Notice that a literal string can be used to include
+  (small) data sets within R code.}
+
   \item{\ldots}{Further arguments to be passed to
   \code{\link[utils]{read.table}}.}
 }
@@ -105,6 +110,12 @@ dat3 <- read.transcript(doc2, skip = 1); truncdf(dat3, 40)
 dat4 <- read.transcript(doc3, sep = "-", skip = 1); truncdf(dat4, 40)
 
 dat5 <- read.transcript(doc4); truncdf(dat5, 40) #an .xlsx file
+trans <- "sam: Computer is fun. Not too fun.
+greg: No it's not, it's dumb.
+teacher: What should we do?
+sam: You liar, it stinks!"
+
+read.transcript(text=trans)
 }
 }
 \author{

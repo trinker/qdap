@@ -43,6 +43,8 @@ MINOR FEATURES
 
 * `wfm` gets as speed boost as the code has been re-written to be faster.
 
+* `read.transcript` now reads .txt files as well as text similar to read.table.
+
 CHANGES
 
 * `sec2hms` is the new name for `convert` 

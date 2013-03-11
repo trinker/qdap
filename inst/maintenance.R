@@ -57,4 +57,15 @@ delete(path)
 outpdf <- paste0(getwd(), "/inst/extdata/docs/")
 inpdf <- paste0(getwd(), "/inst/pdf_gen/PROJECT_WORKFLOW_GUIDE.pdf")
 file.copy(inpdf, outpdf,, TRUE)
+file.copy(inpdf, "C:/Users/trinker/Dropbox/Public/packages",, TRUE)
 
+#==========================
+#Check spelling
+#==========================
+path <- file.path(getwd(), "R")
+txt <- lapply(file.path(path, dir(path)), readLines)
+new <- lapply(1:length(txt), function(i){
+    c("\n", dir(path)[i], "=========", txt[[i]])
+})
+out <- paste(unlist(new), collapse="\n")
+cat(out, file=file.path(path.expand("C:/Users/trinker/Desktop"), "spelling.doc"))
