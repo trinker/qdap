@@ -14,7 +14,7 @@
   \code{\link[qdap]{termco.c}}.}
 }
 \value{
-  Returns list: \item{boolean}{A boolean matrix}
+  Returns list: \item{Boolean}{A Boolean matrix}
   \item{adjacency}{An adjacency matrix.  Diagonals are the
   total (sum) number of occurrences a variable had}
   \item{shared}{An adjacency matrix with no diagonal and
@@ -50,5 +50,5 @@ plot(g, layout=layout.auto(g))
   \code{\link[stats]{dist}}
 }
 \keyword{adjacency-matrix,}
-\keyword{boolean-matrix}
+\keyword{Boolean-matrix}
 

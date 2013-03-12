@@ -54,7 +54,7 @@ function(text.var, grouping.var, vs.all = FALSE,
     vs.all.cut = 1, stopwords = NULL, alphabetical = FALSE, digits = 2){
     x <- wfm(text.var, grouping.var, stopwords=stopwords)
     x2 <- wfm(text.var, grouping.var,  output = "prop", 
-       stopwords=stopwords, digits = 3)
+       stopwords=stopwords)
     if (!vs.all) {
         list_help <- function(i, j) {
             w <- x[, i]

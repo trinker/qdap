@@ -48,7 +48,7 @@
 }
 \value{
   An object of class \code{"word_list"} is a list of lists
-  of verctors or dataframes containing the following
+  of vectors or dataframes containing the following
   components: \item{cwl}{complete word list; raw words}
   \item{swl}{stop word list; same as rwl with stop words
   removed} \item{fwl}{frequency word list; a data frame of

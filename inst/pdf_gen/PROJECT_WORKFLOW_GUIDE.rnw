@@ -44,7 +44,7 @@ The project template includes these main directories and scripts:
   \begin{enumerate}
      \item \textbf{AUDIO} - A directory to put audio files (or shortcuts)
      \item \textbf{FIELD\_NOTES} - A directory to put audio files (or shortcuts)
-     \item \textbf{PAPER\_ARTIFACTS} - A dirrectory to put paper artifacts 
+     \item \textbf{PAPER\_ARTIFACTS} - A directory to put paper artifacts 
      \item \textbf{PHOTOGRAPHS} - directory to put photographs
      \item \textbf{VIDEO} - A directory to put video files (or shortcuts)
   \end{enumerate}  
@@ -52,7 +52,7 @@ The project template includes these main directories and scripts:
   \item \textbf{REPORTS} - A directory relatede reports and presentations; see \href{https://dl.dropbox.com/u/61803503/packages/REPORT_WORKFLOW_GUIDE.pdf}{REPORT\_WORKFLOW\_GUIDE.pdf} for details
   \item \textbf{TABLES} - A directory to export tables to 
   \item \textbf{WORD\_LISTS} - A directory to store word lists that can be sourced and supplied to functions
-  \item \textbf{.Rprofile} - Performs certan tasks such as loading libraries, 
+  \item \textbf{.Rprofile} - Performs certain tasks such as loading libraries, 
       data and sourcing functions upon startup in \href{http://www.rstudio.com/}{RStudio}
   \item \textbf{extra\_functions.R} - A script to store user made functions related to the project; already contains:
   \begin{enumerate}

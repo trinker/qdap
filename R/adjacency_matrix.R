@@ -8,7 +8,7 @@
 #'  generated from \code{\link[qdap]{termco}}, \code{\link[qdap]{termco.d}} or 
 #'  \code{\link[qdap]{termco.c}}.
 #' @return Returns list:
-#' \item{boolean}{A boolean matrix}
+#' \item{Boolean}{A Boolean matrix}
 #' \item{adjacency}{An adjacency matrix.  Diagonals are the total (sum) number of 
 #' occurrences a variable had}
 #' \item{shared}{An adjacency matrix with no diagonal and the upper triangle 
@@ -17,7 +17,7 @@
 #' occurrences a variable had}
 #' @seealso 
 #' \code{\link[stats]{dist}}
-#' @keywords adjacency-matrix, boolean-matrix
+#' @keywords adjacency-matrix, Boolean-matrix
 #' @export 
 #' @examples
 #' \dontrun{

@@ -51,11 +51,11 @@
   \code{\link[qdap]{replace_symbol}},
   \code{\link[qdap]{replace_abbreviation}} and
   \code{\link[qdap]{scrubber}} to quickly prepare text for
-  analysis.  Care should taken with this function to ensure
-  data is properly formatted and complete.
+  analysis.  Care should be taken with this function to
+  ensure data is properly formatted and complete.
 }
 \note{
-  Care should taken with this function to ensure data is
+  Care should be taken with this function to ensure data is
   properly formatted and complete.
 }
 \examples{

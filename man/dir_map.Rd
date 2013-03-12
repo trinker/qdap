@@ -47,7 +47,7 @@
 }
 \examples{
 \dontrun{
-(DIR <- system.file("extdata", package = "qdap"))
+(DIR <- system.file("extdata/transcripts", package = "qdap"))
 dir_map(DIR)
 }
 }

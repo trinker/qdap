@@ -24,7 +24,7 @@
 
   \item{target.words}{A named list of vectors of words
   whose length corresponds to \code{label.colors} (+1
-  length in cloud colors for non matched terms).}
+  length in cloud colors for non-matched terms).}
 
   \item{stopwords}{Words to exclude from the analysis
   (default is Top100Words).}
@@ -117,7 +117,7 @@ word.network.plot(text.var=DATA$state, grouping.var=list(DATA$sex,
     DATA$adult))
 word.network.plot(text.var=DATA$state, grouping.var=DATA$person,
     title.name = "TITLE", log.labels=TRUE)
-word.network.plot(text.var=raj.act.1, grouping.var=raj.act.1$person,
+word.network.plot(text.var=raj.act.1$dialogue, grouping.var=raj.act.1$person,
   stopwords = Top200Words)
 
 #inset double tilde ("~~") to keep dual words (e.i. first last name)

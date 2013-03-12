@@ -2,7 +2,7 @@
 \alias{gradient_cloud}
 \title{Gradient Word Cloud}
 \usage{
-  gradient_cloud(text.var, bigroup.var, rev.bivar = FALSE,
+  gradient_cloud(text.var, bigroup.var, rev.binary = FALSE,
     X = "red", Y = "blue", stem = FALSE, stopwords = NULL,
     caps = TRUE, caps.list = NULL, I.list = TRUE,
     random.order = FALSE, rot.per = 0, min.freq = 1,
@@ -18,8 +18,8 @@
 
   \item{bigroup.var}{A binary grouping variable.}
 
-  \item{rev.bivar}{logical.  If TRUE the ordering of the
-  bi-variate levels is reversed.}
+  \item{rev.binary}{logical.  If TRUE the ordering of the
+  binary levels of bigroup.var is reversed.}
 
   \item{X}{The first gradient color for variable X.}
 
@@ -81,7 +81,7 @@
 
   \item{legend.location}{A vector of length 4 denoting the
   lower left (x and y left) and upper right (x and y right)
-  coordinates of the rectange of colors in user
+  coordinates of the rectangle of colors in user
   coordinates.}
 
   \item{char2space}{A vector of characters to be turned
@@ -105,7 +105,7 @@
 DATA$state <- space_fill(DATA$state, c("is fun", "too fun", "you liar"))
 
 gradient_cloud(DATA$state, DATA$sex, title="fun")
-gradient_cloud(DATA$state, DATA$sex, title="fun", rev.bivar = TRUE)
+gradient_cloud(DATA$state, DATA$sex, title="fun", rev.binary = TRUE)
 gradient_cloud(DATA$state, DATA$sex, title="fun", max.word.size = 5,
     min.word.size = .025)
 

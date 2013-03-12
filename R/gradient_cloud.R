@@ -4,8 +4,8 @@
 #' 
 #' @param text.var The text variable.
 #' @param bigroup.var A binary grouping variable.
-#' @param rev.bivar logical.  If TRUE the ordering of the bi-variate levels is 
-#' reversed.
+#' @param rev.binary logical.  If TRUE the ordering of the binary levels of 
+#' bigroup.var is reversed.
 #' @param X The first gradient color for variable X.
 #' @param Y The second gradient color for variable Y.
 #' @param stem logical.  If TRUE the \code{text.var} will be stemmed.
@@ -38,7 +38,7 @@
 #' @param legend.cex Character expansion factor for the legend. NULL and NA are 
 #' equivalent to 1.0. 
 #' @param legend.location A vector of length 4 denoting the lower left (x and y 
-#' left) and upper right (x and y right) coordinates of the rectange of colors 
+#' left) and upper right (x and y right) coordinates of the rectangle of colors 
 #' in user coordinates.
 #' @param char2space A vector of characters to be turned into spaces.  
 #' @return Plots a gradient word cloud and invisibly returns the dataframe used 
@@ -56,7 +56,7 @@
 #' DATA$state <- space_fill(DATA$state, c("is fun", "too fun", "you liar"))
 #' 
 #' gradient_cloud(DATA$state, DATA$sex, title="fun")
-#' gradient_cloud(DATA$state, DATA$sex, title="fun", rev.bivar = TRUE)
+#' gradient_cloud(DATA$state, DATA$sex, title="fun", rev.binary = TRUE)
 #' gradient_cloud(DATA$state, DATA$sex, title="fun", max.word.size = 5,
 #'     min.word.size = .025)
 #'     
@@ -66,7 +66,7 @@
 #'     gradient_cloud(dialogue, fam.aff))
 #' head(x)     
 #' }
-gradient_cloud <- function(text.var, bigroup.var, rev.bivar = FALSE, X = "red", 
+gradient_cloud <- function(text.var, bigroup.var, rev.binary = FALSE, X = "red", 
     Y = "blue", stem = FALSE, stopwords = NULL, caps = TRUE, caps.list = NULL, 
     I.list = TRUE, random.order = FALSE, rot.per = 0.0, min.freq = 1, 
     max.word.size = NULL, min.word.size = 0.5, breaks = 10, cloud.font = NULL, 
@@ -78,7 +78,7 @@ gradient_cloud <- function(text.var, bigroup.var, rev.bivar = FALSE, X = "red",
     if (length(unique(bigroup.var)) != 2) {
         stop("bigroup.var must contain exactly 2 levels")
     }
-    if (rev.bivar) {
+    if (rev.binary) {
         bigroup.var <- factor(bigroup.var, levels = rev(levels(bigroup.var)))
     }
     if (stem) {

@@ -36,7 +36,7 @@
 #' \itemize{
 #'     \item{AUDIO}{ * A directory to put audio files (or shortcuts)}     
 #'     \item{FIELD_NOTES}{ * A directory to put audio files (or shortcuts)}   
-#'     \item{PAPER_ARTIFACTS}{ * A dirrectory to put paper artifacts}  
+#'     \item{PAPER_ARTIFACTS}{ * A directory to put paper artifacts}  
 #'     \item{PHOTOGRAPHS}{ * A directory to put photographs}  
 #'     \item{VIDEO}{ * A directory to put video files (or shortcuts)}  
 #'     } 
@@ -45,7 +45,7 @@
 #' \item{REPORTS}{ - A directory with report and presentation related tools.  Please see the \cr \href{https://dl.dropbox.com/u/61803503/packages/REPORT_WORKFLOW_GUIDE.pdf}{REPORT_WORKFLOW_GUIDE.pdf} for more details}
 #' \item{TABLES}{ - A directory to export tables to}  
 #' \item{WORD_LISTS}{ - A directory to store word lists that can be sourced and supplied to functions}
-#' \item{.Rprofile}{ - Performs certan tasks such as loading libraries, data and sourcing functions upon startup in \href{http://www.rstudio.com/}{RStudio}} 
+#' \item{.Rprofile}{ - Performs certain tasks such as loading libraries, data and sourcing functions upon startup in \href{http://www.rstudio.com/}{RStudio}} 
 #' \item{extra_functions.R}{ - A script to store user made functions related to the project
 #' \itemize{
 #'     \item{email}{ * A function to view, and optionally copy to the clipboard, emails for the client/lead researcher, analyst and/or other project members (information taking from ~/CORRESPONDENCE/CONTACT_INFO.txt file)}
@@ -57,9 +57,9 @@
 #' \item{TO_DO.txt}{ - A text file documenting project tasks}
 #' }
 #' 
-#' The template comes with a .Rproj file and .Rstudio file.  This makes 
-#' operating in \href{http://www.rstudio.com/}{RStudio} very easy.  The file can 
-#' be kept on the desktop or a git application such as \href{https://github.com/}{github},
+#' The template comes with a .Rproj file.  This makes operating in 
+#' \href{http://www.rstudio.com/}{RStudio} very easy.  The file can be kept on 
+#' the desktop or a git application such as \href{https://github.com/}{github},
 #' \href{https://bitbucket.org/}{bitbucket} or \href{https://www.dropbox.com/}{dropbox}, 
 #' depending on what the client/research team is comfortable utilizing. 
 #' 

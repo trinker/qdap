@@ -27,7 +27,7 @@
   with standard qdap punctuation endmarks.}
 
   \item{char.keep}{A character vector of symbols that
-  should be kept withing sentences.}
+  should be kept within sentences.}
 
   \item{\dots}{Various: \cr \emph{\code{stemmer} - Other
   arguments passed to \code{\link[qdap]{capitalizer}}} \cr

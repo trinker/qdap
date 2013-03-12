@@ -55,11 +55,11 @@
 #' @examples
 #' \dontrun{
 #' #Note: to view the document below use the path:
-#' gsub("trans1.docx", "", system.file("extdata/trans1.docx", package = "qdap"))
-#' (doc1 <- system.file("extdata/trans1.docx", package = "qdap"))
-#' (doc2 <- system.file("extdata/trans2.docx", package = "qdap"))
-#' (doc3 <- system.file("extdata/trans3.docx", package = "qdap"))
-#' (doc4 <- system.file("extdata/trans4.xlsx", package = "qdap"))
+#' gsub("trans1.docx", "", system.file("extdata/transcripts/trans1.docx", package = "qdap"))
+#' (doc1 <- system.file("extdata/transcripts/trans1.docx", package = "qdap"))
+#' (doc2 <- system.file("extdata/transcripts/trans2.docx", package = "qdap"))
+#' (doc3 <- system.file("extdata/transcripts/trans3.docx", package = "qdap"))
+#' (doc4 <- system.file("extdata/transcripts/trans4.xlsx", package = "qdap"))
 #' 
 #' dat1 <- read.transcript(doc1)
 #' truncdf(dat1, 40)
@@ -71,7 +71,7 @@
 #' ## read.transcript(doc2) #throws an error (need skip)
 #' dat3 <- read.transcript(doc2, skip = 1); truncdf(dat3, 40)
 #' 
-#' ## read.transcript(doc3, skip = 1) #throws an error; wrong sep
+#' ## read.transcript(doc3, skip = 1) #incorrect read; wrong sep
 #' dat4 <- read.transcript(doc3, sep = "-", skip = 1); truncdf(dat4, 40)
 #' 
 #' dat5 <- read.transcript(doc4); truncdf(dat5, 40) #an .xlsx file

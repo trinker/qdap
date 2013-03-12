@@ -3,7 +3,7 @@
 #' Find the occurrences of n codes excluding the nth code.  For example you have 
 #' times/words coded for a teacher and you also have times/words coded for 
 #' happiness.  You can find all the happiness times excluding the teacher times 
-#' or vise versa.
+#' or vice versa.
 #'
 #' @param x2long.obj An object from \code{\link[qdap]{cm_range2long}}, 
 #' \code{\link[qdap]{cm_time2long}} or \code{\link[qdap]{cm_df2long}}.

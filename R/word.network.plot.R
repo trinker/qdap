@@ -8,7 +8,7 @@
 #' output for all text.  Also takes a single grouping variable or a list of 1 
 #' or more grouping variables.  
 #' @param target.words A named list of vectors of words whose length corresponds 
-#' to \code{label.colors} (+1 length in cloud colors for non matched terms).
+#' to \code{label.colors} (+1 length in cloud colors for non-matched terms).
 #' @param stopwords Words to exclude from the analysis (default is Top100Words).
 #' @param label.cex The magnification to be used for network plot labels 
 #' relative to the current setting of cex.  Default is .8.
@@ -67,7 +67,7 @@
 #'     DATA$adult))
 #' word.network.plot(text.var=DATA$state, grouping.var=DATA$person, 
 #'     title.name = "TITLE", log.labels=TRUE)
-#' word.network.plot(text.var=raj.act.1, grouping.var=raj.act.1$person, 
+#' word.network.plot(text.var=raj.act.1$dialogue, grouping.var=raj.act.1$person, 
 #'   stopwords = Top200Words)
 #'
 #' #inset double tilde ("~~") to keep dual words (e.i. first last name)

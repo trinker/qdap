@@ -26,7 +26,7 @@
   For example you have times/words coded for a teacher and
   you also have times/words coded for happiness.  You can
   find all the happiness times excluding the teacher times
-  or vise versa.
+  or vice versa.
 }
 \note{
   The code column must be named \code{"code"} and your

@@ -3,7 +3,7 @@
 #' Wrapper for \code{\link[qdap]{bracketX}}, \code{\link[qdap]{replace_number}}, 
 #' \code{\link[qdap]{replace_symbol}}, \code{\link[qdap]{replace_abbreviation}} 
 #' and \code{\link[qdap]{scrubber}} to quickly prepare text for analysis.  Care 
-#' should taken with this function to ensure data is properly formatted and 
+#' should be taken with this function to ensure data is properly formatted and 
 #' complete.
 #' 
 #' @param text.var The text variable.    
@@ -34,7 +34,7 @@
 #' \code{\link[qdap]{replace_abbreviation}},
 #' \code{\link[qdap]{replace_number}},
 #' \code{\link[qdap]{replace_symbol}}
-#' @note Care should taken with this function to ensure data is properly 
+#' @note Care should be taken with this function to ensure data is properly 
 #' formatted and complete.
 #' @export
 #' @examples

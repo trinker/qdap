@@ -9,7 +9,7 @@
 #' @param capitalize logical.  If TRUE selected terms are capitalized.
 #' @param warn logical.  If TRUE warns about rows not ending with standard qdap 
 #' punctuation endmarks.
-#' @param char.keep A character vector of symbols that should be kept withing 
+#' @param char.keep A character vector of symbols that should be kept within 
 #' sentences.
 #' @param \dots Various: \cr
 #'     \emph{\code{stemmer} - Other arguments passed to 
