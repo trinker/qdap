@@ -18,7 +18,7 @@ BUG FIXES
 
 NEW FEATURES
 
-* `bivar_gradcloud`: Binary gradient Word Cloud - A new plotting function 
+* `gradient_cloud`: Binary gradient Word Cloud - A new plotting function 
   that plots and colors words for a binary variable based on which group of 
   the binary variable uses the term more frequently.
 
