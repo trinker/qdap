@@ -20,6 +20,7 @@ expand_statdoc(path2, to.icon = extras, readme = rdme,
     combine = qcv(character.table, char.table))
 
 #STEP 3: move to trinker.guthub
+library(reports)
 file <- "C:/Users/trinker/GitHub/trinker.github.com/"
 delete(paste0(file, "qdap_dev"))
 file.copy(path, file, TRUE, TRUE)
@@ -46,6 +47,7 @@ expand_statdoc(path2, to.icon = extras, readme = rdme,
     combine = qcv(character.table, char.table))
 
 #STEP 3: move to trinker.guthub
+library(reports)
 file <- "C:/Users/trinker/GitHub/trinker.github.com/"
 delete(paste0(file, "qdap"))
 file.copy(path, file, TRUE, TRUE)
