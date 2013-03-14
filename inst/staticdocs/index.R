@@ -10,7 +10,6 @@ list(
     sd_section("Import/Export Data",
       "Functions for importing data and exporting output.",  
       c(
-        "delete",
         "dir_map",
         "mcsv_r",
         "read.transcript"
