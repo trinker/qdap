@@ -198,6 +198,8 @@ function(text.var, left, right, with = FALSE, merge = TRUE){
     if (length(left) != length(right)) {
         stop("left and right must be equal length") 
     }
+    LN <- left
+    RN <- right
     specchar <- c(".", "|", "(", ")", "[", "{", "^", "$", "*", "+", "?")
     left <- mgsub(specchar, paste0("\\", specchar), left, fixed = TRUE)
     right <- mgsub(specchar, paste0("\\", specchar), right, fixed = TRUE)
@@ -217,7 +219,7 @@ function(text.var, left, right, with = FALSE, merge = TRUE){
     out <- invisible(lapply(seq_along(left), function(i) {
         FUN(left[i], right[i], text.var = text.var, with = with)
     }))
-    names(out) <- paste(left, " : ", "right")
+    names(out) <- paste(LN, " : ", RN)
     if (length(left) == 1) {
         return(unlist(out, recursive = FALSE))
     } else {

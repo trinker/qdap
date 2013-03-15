@@ -1,6 +1,18 @@
 qdap 0.2.2
 ----------------------------------------------------------------
 
+BUG FIXES
+
+* `genXtract` labels returned the word "right" rather than the right edge string.
+  See http://stackoverflow.com/a/15423439/1000343 for an example of the old 
+  behavior.
+
+NEW FEATURES
+
+MINOR FEATURES
+
+CHANGES
+
 qdap 0.2.1
 ----------------------------------------------------------------
 
