@@ -1,5 +1,5 @@
 #========================
-#staticdocs build version
+#staticdocs dev version
 #========================
 #packages
 library(highlight); library(qdap); library(staticdocs); library(acc.roxygen2)

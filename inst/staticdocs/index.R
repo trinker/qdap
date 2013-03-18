@@ -169,6 +169,7 @@ list(
         "plot.word_stats",
         "qheat",
         "rank_freq_mplot",
+        "tot_plot",
         "trans.cloud",
         "trans.venn",
         "word.network.plot"

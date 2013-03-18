@@ -9,6 +9,9 @@ BUG FIXES
 
 NEW FEATURES
 
+* `tot_plot` a visualizing function that uses a bar graph to visualize patterns 
+  in sentence length and grouping variables by turn of talk.
+
 MINOR FEATURES
 
 CHANGES
