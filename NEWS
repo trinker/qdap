@@ -16,6 +16,9 @@ MINOR FEATURES
 
 CHANGES
 
+* qdap is now compiled for mac users (as openNLP now passes CRAN checks with no
+  Errors on Mac).
+
 qdap 0.2.1
 ----------------------------------------------------------------
 
