@@ -60,16 +60,16 @@ function (text.var, bracket = "all", missing = NULL, names = FALSE,
     scrub = TRUE) {
     FUN <- function(bracket, text.var, missing, names) {
         X <- switch(bracket, 
-            html = sapply(text.var, function(x) gsub("<.+?>", "", x)),
-            angle = sapply(text.var, function(x) gsub("<.+?>", "", x)),
-            square = sapply(text.var, function(x) gsub("\\[.+?\\]", "", x)), 
-            round = sapply(text.var, function(x) gsub("\\(.+?\\)", "", x)), 
-            curly = sapply(text.var, function(x) gsub("\\{.+?\\}", "", x)), 
+            html = sapply(text.var, function(x) gsub("[ ]*<.+?>[ ]*", "", x)),
+            angle = sapply(text.var, function(x) gsub("[ ]*<.+?>[ ]*", "", x)),
+            square = sapply(text.var, function(x) gsub("[ ]*\\[.+?\\][ ]*", "", x)), 
+            round = sapply(text.var, function(x) gsub("[ ]*\\(.+?\\)[ ]*", "", x)), 
+            curly = sapply(text.var, function(x) gsub("[ ]*\\{.+?\\}[ ]*", "", x)), 
             all = {
-                P1 <- sapply(text.var, function(x) gsub("\\[.+?\\]", "", x))
-                P1 <- sapply(P1, function(x) gsub("\\(.+?\\)", "", x))
-                P1 <- sapply(P1, function(x) gsub("<.+?>", "", x))
-                sapply(P1, function(x) gsub("\\{.+?\\}", "", x))
+                P1 <- sapply(text.var, function(x) gsub("[ ]*\\[.+?\\][ ]*", "", x))
+                P1 <- sapply(P1, function(x) gsub("[ ]*\\(.+?\\)[ ]*", "", x))
+                P1 <- sapply(P1, function(x) gsub("[ ]*<.+?>[ ]*", "", x))
+                sapply(P1, function(x) gsub("[ ]*\\{.+?\\}[ ]*", "", x))
             }
         )
         if (scrub) {
@@ -168,7 +168,7 @@ function (text.var, left, right, missing = NULL, names = FALSE, scrub = TRUE) {
     left <- mgsub(specchar, paste0("\\", specchar), left, fixed = TRUE)
     right <- mgsub(specchar, paste0("\\", specchar), right, fixed = TRUE)
     FUN <- function(left, right, text.var, missing, names) {
-        X <- sapply(text.var, function(x) gsub(paste0(left, ".+?", right), "", x))
+        X <- sapply(text.var, function(x) gsub(paste0("[ ]*", left, ".+?", right, "[ ]*"), "", x))
         if (scrub) {
             X <- scrubber(gsub(" +", " ", X))
         }

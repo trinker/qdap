@@ -14,6 +14,8 @@ NEW FEATURES
 
 MINOR FEATURES
 
+* `genX` and `bracketX` now remove extra spaces left over from their removal.
+
 CHANGES
 
 * qdap is now compiled for mac users (as openNLP now passes CRAN checks with no
