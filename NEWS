@@ -14,7 +14,8 @@ NEW FEATURES
 
 MINOR FEATURES
 
-* `genX` and `bracketX` now remove extra spaces left over from their removal.
+* `genX` and `bracketX` gain an extra argument `space.fix` to remove extra 
+  spaces left over from bracket removal.
 
 CHANGES
 
