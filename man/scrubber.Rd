@@ -3,7 +3,7 @@
 \title{Clean Imported Text}
 \usage{
   scrubber(text.var, num2word = FALSE, rm.quote = TRUE,
-    fix.comma = TRUE, ...)
+    fix.comma = TRUE, fix.space = TRUE, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -13,6 +13,9 @@
 
   \item{fix.comma}{logical If TRUE removes any spaces
   before a comma.}
+
+  \item{fix.space}{logical.  If TRUE extra spaces before
+  endmarks are removed.}
 
   \item{rm.quote}{logical If TRUE removes any \code{\"}.}
 

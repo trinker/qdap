@@ -6,6 +6,7 @@
 #' @param text.var The text variable.
 #' @param num2word logical If TRUE replaces a numbers with text representations.
 #' @param fix.comma logical If TRUE removes any spaces before a comma.
+#' @param fix.space logical.  If TRUE extra spaces before endmarks are removed.
 #' @param rm.quote  logical If TRUE removes any \code{\"}.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{replace_number}}.
 #' @return Returns a parsed character vector.
@@ -19,7 +20,8 @@
 #' scrubber(x, TRUE)
 #' }
 scrubber <-
-function(text.var, num2word = FALSE, rm.quote = TRUE, fix.comma = TRUE, ...){
+function(text.var, num2word = FALSE, rm.quote = TRUE, fix.comma = TRUE, 
+    fix.space = TRUE, ...){
     x <- reducer(Trim(clean(text.var)))
     if (rm.quote) {
         x  <- gsub('\"', "", x)
@@ -28,7 +30,9 @@ function(text.var, num2word = FALSE, rm.quote = TRUE, fix.comma = TRUE, ...){
         x <- gsub(" ,", ",", x)
     }
     ncx <- nchar(x)
-    x <- paste0(Trim(substring(x, 1, ncx - 1)), substring(x, ncx))
+    if (fix.space) {
+        x <- paste0(Trim(substring(x, 1, ncx - 1)), substring(x, ncx))
+    }
     x[is.na(text.var)] <- NA
     if (num2word) {
         x <- replace_number(x, ...)

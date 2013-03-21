@@ -6,13 +6,13 @@
 \title{Bracket Parsing}
 \usage{
   bracketX(text.var, bracket = "all", missing = NULL,
-    names = FALSE, space.fix = TRUE, scrub = TRUE)
+    names = FALSE, fix.space = TRUE, scrub = TRUE)
 
   bracketXtract(text.var, bracket = "all", with = FALSE,
     merge = TRUE)
 
   genX(text.var, left, right, missing = NULL,
-    names = FALSE, space.fix = TRUE, scrub = TRUE)
+    names = FALSE, fix.space = TRUE, scrub = TRUE)
 
   genXtract(text.var, left, right, with = FALSE,
     merge = TRUE)
@@ -31,7 +31,7 @@
   \item{names}{logical.  If TRUE the sentences are given as
   the names of the counts.}
 
-  \item{space.fix}{logical.  If TRUE extra spaces left
+  \item{fix.space}{logical.  If TRUE extra spaces left
   behind from an extraction will be eliminated.}
 
   \item{scrub}{logical.  If TRUE
@@ -117,7 +117,7 @@ genX(DATA$state, c("is", "we"), c("too", "on"))
   Martin Morgan and Tyler Rinker <tyler.rinker@gmail.com>.
 }
 \references{
-  \url{http://stackoverflow.com/questions/8621066/remove-text-inside-brackets-parens-and-or-braces}
+  \url{http://stackoverflow.com/q/8621066/1000343}
 }
 \seealso{
   \code{\link[base]{regex}}

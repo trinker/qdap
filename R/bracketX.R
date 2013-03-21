@@ -10,13 +10,13 @@
 #' @param missing Value to assign to empty cells.
 #' @param names logical.  If TRUE the sentences are given as the names of the 
 #' counts.
-#' @param space.fix logical.  If TRUE extra spaces left behind from an 
+#' @param fix.space logical.  If TRUE extra spaces left behind from an 
 #' extraction will be eliminated.
 #' @param scrub logical.  If TRUE \code{\link[qdap]{scrubber}} will clean the 
 #' text.
 #' @return \code{bracketX} -  returns a vector of text with brackets removed.
 #' @rdname bracketX
-#' @references \url{http://stackoverflow.com/questions/8621066/remove-text-inside-brackets-parens-and-or-braces}
+#' @references \url{http://stackoverflow.com/q/8621066/1000343}
 #' @keywords bracket-remove, parenthesis, bracket, curly-braces
 #' @export
 #' @seealso 
@@ -59,11 +59,10 @@
 #' }
 bracketX <- 
 function (text.var, bracket = "all", missing = NULL, names = FALSE, 
-    space.fix = TRUE, scrub = TRUE) {
+    fix.space = TRUE, scrub = TRUE) {
     lside <- rside <- ""
-    if (space.fix) {
-        lside <- "[ ]*"
-        rside <- "[ ]*"
+    if (fix.space) {
+        lside <- rside <- "[ ]*"
     }
     FUN <- function(bracket, text.var, missing, names) {
         X <- switch(bracket, 
@@ -80,7 +79,7 @@ function (text.var, bracket = "all", missing = NULL, names = FALSE,
             }
         )
         if (scrub) {
-            X <- scrubber(gsub(" +", " ", X))
+            X <- scrubber(gsub(" +", " ", X), fix.space = FALSE)
         }
         if (!is.null(missing)) {
             X[X == ""] <- missing
@@ -167,13 +166,13 @@ function(text.var, bracket = "all", with = FALSE, merge = TRUE){
 #' @return \code{genXtract} - returns a vector of text with checks removed.
 #' @export
 genX <- 
-function (text.var, left, right, missing = NULL, names = FALSE, space.fix = TRUE, 
+function (text.var, left, right, missing = NULL, names = FALSE, fix.space = TRUE, 
     scrub = TRUE) {
     if (length(left) != length(right)) {
         stop("left and right must be equal length") 
     }
     lside <- rside <- ""
-    if (space.fix) {
+    if (fix.space) {
         lside <- rside <- "[ ]*"
     }
     specchar <- c(".", "|", "(", ")", "[", "{", "^", "$", "*", "+", "?")
