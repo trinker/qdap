@@ -7,6 +7,9 @@ BUG FIXES
   See http://stackoverflow.com/a/15423439/1000343 for an example of the old 
   behavior.
 
+* `gradient_cloud`'s `min.freq ` locked at 1.  This has been fixed. (Manuel 
+  Fdez-Moya)
+
 NEW FEATURES
 
 * `tot_plot` a visualizing function that uses a bar graph to visualize patterns 

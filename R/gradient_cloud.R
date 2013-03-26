@@ -114,8 +114,8 @@ gradient_cloud <- function(text.var, bigroup.var, rev.binary = FALSE, X = "red",
     OP <- par()[["mar"]]
     on.exit(par(mar = OP))
     par(mar=c(7,1,1,1))
-    wordcloud(WF[, 1], WF[, "total"], min.freq = 1, colors = WF[, "colors"],
-        rot.per = rot.per, random.order = random.order, 
+    wordcloud(WF[, 1], WF[, "total"], min.freq = min.freq, 
+        colors = WF[, "colors"], rot.per = rot.per, random.order = random.order, 
         ordered.colors = TRUE, vfont = cloud.font, 
         scale = c(max.word.size , min.word.size))
     if (!is.null(title)) {
