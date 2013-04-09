@@ -189,3 +189,4 @@ Collate:
     'words.R'
     'xnoy.R'
     'tot_plot.R'
+    'beg2char.R'

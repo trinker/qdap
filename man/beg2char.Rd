@@ -1,0 +1,55 @@
+\name{beg2char}
+\alias{beg2char}
+\alias{char2end}
+\title{Grab Begin/End of Sting to Character}
+\usage{
+  beg2char(text.var, char = " ", noc = 1, include = FALSE)
+
+  char2end(text.var, char = " ", noc = 1, include = FALSE)
+}
+\arguments{
+  \item{text.var,}{A character string}
+
+  \item{char}{The character from which to grab until/from.}
+
+  \item{noc}{Number of times the character appears before
+  the grab.}
+
+  \item{include}{logical.  If TRUE includes the character
+  in the grab.}
+}
+\value{
+  returns a vector of text with char on/forwar removed.
+}
+\description{
+  \code{beg2char} - Grab from beginning of string to a
+  character(s).
+
+  \code{beg2char} - Grab from character(s) to end of
+  string.
+}
+\examples{
+\dontrun{
+x <- c("a_b_c_d", "1_2_3_4", "<_?_._:")
+beg2char(x, "_")
+beg2char(x, "_", 2)
+beg2char(x, "_", 3)
+beg2char(x, "_", 4)
+beg2char(x, "_", 3, include=TRUE)
+
+char2end(x, "_")
+char2end(x, "_", 2)
+char2end(x, "_", 3)
+char2end(x, "_", 4)
+char2end(x, "_", 3, include=TRUE)
+
+x2 <- gsub("_", " ", x)
+char2end(x2, 2)
+beg2char(x2, 2)
+
+x3 <- gsub("_", "\\\\^", x)
+char2end(x3, "^", 2)
+beg2char(x3, "^", 2)
+}
+}
+
