@@ -25,7 +25,7 @@
 #' }
 url_dl <-
 function(..., url = 61803503) {
-    if (grepl("http|www\\.", url)){
+    if (!grepl("http|www\\.", url)){
         url <- tail(unlist(strsplit(as.character(url), "/", 
             fixed = TRUE)), 1)
         url <- paste0("http://dl.dropboxusercontent.com/u/", url, "/")
