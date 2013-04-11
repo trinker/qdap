@@ -23,6 +23,9 @@ MINOR FEATURES
 * `genX` and `bracketX` gain an extra argument `space.fix` to remove extra 
   spaces left over from bracket removal.
 
+* Updated out of date dropbox url download in `url_dl`.  `url_dl` also takes the 
+  dropbox key as well.
+
 CHANGES
 
 * qdap is now compiled for mac users (as openNLP now passes CRAN checks with no

@@ -3,7 +3,7 @@
 #' This function enables downloading documents for future instructional training. 
 #' 
 #' @param \ldots Document names to download. 
-#' @param url The download url. 
+#' @param url The download url or dropbox key. 
 #' @return Places a copy of the downloaded document in the users working 
 #' directory.
 #' @note Not intended for general use.
@@ -24,7 +24,12 @@
 #' dir() %in% docs
 #' }
 url_dl <-
-function(..., url = "http://dl.dropbox.com/u/61803503/") {
+function(..., url = 61803503) {
+    if (grepl("http|www\\.", url)){
+        url <- tail(unlist(strsplit(as.character(url), "/", 
+            fixed = TRUE)), 1)
+        url <- paste0("http://dl.dropboxusercontent.com/u/", url, "/")
+    }
     mf <- match.call(expand.dots = FALSE)
     payload <- as.character(mf[[2]])
     FUN <- function(x, url) {

@@ -2,6 +2,7 @@
 #staticdocs dev version
 #========================
 #packages
+# library(devtools); install_github("parser", "halpo"); install_github("highlight", "Dasonk")
 library(highlight); library(qdap); library(staticdocs); library(acc.roxygen2)
 
 #STEP 1: create static doc  

@@ -2,12 +2,12 @@
 \alias{url_dl}
 \title{Download Instructional Documents}
 \usage{
-  url_dl(..., url = "http://dl.dropbox.com/u/61803503/")
+  url_dl(..., url = 61803503)
 }
 \arguments{
   \item{\ldots}{Document names to download.}
 
-  \item{url}{The download url.}
+  \item{url}{The download url or dropbox key.}
 }
 \value{
   Places a copy of the downloaded document in the users
