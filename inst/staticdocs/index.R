@@ -19,6 +19,7 @@ list(
       "Function to clean and parse text data.",
       c(
         "bracketX",
+        "beg2char",
         "clean",
         "incomplete.replace",
         "multigsub",
