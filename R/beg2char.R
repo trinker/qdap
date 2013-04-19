@@ -46,7 +46,7 @@ beg2char <- function(text.var, char = " ", noc = 1, include = FALSE) {
 
 #' Grab Begin/End of Sting to Character
 #' 
-#' \code{beg2char} - Grab from character(s) to end of string.
+#' \code{char2end} - Grab from character(s) to end of string.
 #' 
 #' @rdname beg2char
 #' @export
