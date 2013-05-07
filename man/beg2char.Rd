@@ -25,7 +25,7 @@
   \code{beg2char} - Grab from beginning of string to a
   character(s).
 
-  \code{beg2char} - Grab from character(s) to end of
+  \code{char2end} - Grab from character(s) to end of
   string.
 }
 \examples{
@@ -44,8 +44,8 @@ char2end(x, "_", 4)
 char2end(x, "_", 3, include=TRUE)
 
 x2 <- gsub("_", " ", x)
-char2end(x2, 2)
-beg2char(x2, 2)
+char2end(x2, " ", 2)
+beg2char(x2, " ", 2)
 
 x3 <- gsub("_", "\\\\^", x)
 char2end(x3, "^", 2)

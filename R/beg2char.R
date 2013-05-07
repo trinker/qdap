@@ -25,8 +25,8 @@
 #' char2end(x, "_", 3, include=TRUE)
 #' 
 #' x2 <- gsub("_", " ", x)
-#' char2end(x2, 2)
-#' beg2char(x2, 2)
+#' char2end(x2, " ", 2)
+#' beg2char(x2, " ", 2)
 #' 
 #' x3 <- gsub("_", "\\^", x)
 #' char2end(x3, "^", 2)
@@ -40,7 +40,10 @@ beg2char <- function(text.var, char = " ", noc = 1, include = FALSE) {
     }
     ins <- paste(rep(paste0(char, ".+"), noc - 1), collapse="")
     rep <- paste0("^(.+", ins, inc, ").*$")
-    gsub(rep, "\\1", text)
+    if (noc == 1) {
+        rep <- paste0(char, ".*$")
+    }
+    gsub(rep, "\\1", text.var)
 }
 
 
@@ -58,5 +61,5 @@ char2end <- function(text.var, char = " ", noc = 1, include = FALSE) {
     }
     ins <- paste(rep(paste0(char, ".*"), noc - 1), collapse="")
     rep <- paste0("^.*", ins, paste0("?", char), "(.*)$")
-    paste0(inc, gsub(rep, "\\1", text))
+    paste0(inc, gsub(rep, "\\1", text.var))
 }

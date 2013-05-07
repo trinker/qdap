@@ -57,7 +57,7 @@ function(dataframe, column = NULL, keep.class = FALSE) {
         rownames(DF2) <- NULL
         return(DF2)
     }
-    if (length(column)<2) {
+    if (length(column) < 2) {
         if (!is.data.frame(dataframe)) {
             y <- as.character(substitute(dataframe))
             dataframe <- data.frame(dataframe, check.names = FALSE)
@@ -67,7 +67,7 @@ function(dataframe, column = NULL, keep.class = FALSE) {
         DF3 <- lj(DF2=dataframe, column=column)
     } else { 
         if (!is.numeric(column)) column <- match(column, names(dataframe))
-        dat <- dataframe[, -c(column)]
+        dat <- dataframe[, -c(column), drop=FALSE]
         ndf <- colnames(dataframe)
         LIST <- lapply(column, function(x) {
             lj(DF2=dataframe[, x, drop=FALSE], column = NULL)
