@@ -24,8 +24,8 @@
   in alphabetical order.} \item{group_n}{A list of a list
   of vectors of ngrams per grouping.var & n (not pasted).}
   \item{all}{A single vector of pasted ngrams sorted
-  alphabetically.} \item{all_n}{A single vector of ngrams
-  sorted alphabetically (not pasted).}
+  alphabetically.} \item{all_n}{A list of lists a single
+  vectors of ngrams sorted alphabetically (not pasted).}
 }
 \description{
   Transcript apply ngrams.
