@@ -68,6 +68,7 @@ list(
         "bag.o.words",
         "common",
         "exclude",
+        "ngrams",
         "stopwords",
         "strip",
         "synonyms",
@@ -128,7 +129,7 @@ list(
       )
     ),
     sd_section("qdap Tools", 
-      "Tools toassist in transcript/discourse analysis.",
+      "Tools to assist in transcript/discourse analysis.",
       c(
         "blank2NA",
         "capitalizer",
@@ -186,6 +187,7 @@ list(
         "print.diversity",
         "print.formality",
         "print.kullback.leibler",
+        "print.ngrams",
         "print.polarity",
         "print.pos",
         "print.pos.by",

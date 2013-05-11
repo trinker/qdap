@@ -18,6 +18,8 @@ NEW FEATURES
 * `beg2char` and `cahr2end` functions to grab text from begining of string to a
   character or from a character to the end of a string.
 
+* `ngrams` function to calculate ngrams by grouping variable.
+
 MINOR FEATURES
 
 * `genX` and `bracketX` gain an extra argument `space.fix` to remove extra 
