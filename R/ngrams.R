@@ -1,4 +1,4 @@
-#' Generate a ngrams
+#' Generate ngrams
 #' 
 #' Transcript apply ngrams.
 #' 
@@ -14,7 +14,7 @@
 #' \item{unlist2}{A list of a single vector of pasted ngrams per grouping.var in alphabetical order.}
 #' \item{group_n}{A list of a list of vectors of ngrams per grouping.var & n (not pasted).}
 #' \item{all}{A single vector of pasted ngrams sorted alphabetically.}
-#' \item{all_n}{A single vector of ngrams sorted alphabetically (not pasted.}
+#' \item{all_n}{A single vector of ngrams sorted alphabetically (not pasted).}
 #' @keywords ngram
 #' @export 
 #' @examples

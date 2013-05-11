@@ -190,3 +190,4 @@ Collate:
     'xnoy.R'
     'tot_plot.R'
     'beg2char.R'
+    'ngrams.R'
