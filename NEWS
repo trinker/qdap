@@ -47,7 +47,7 @@ BUG FIXES
   caused by a grouping variable not containing any words from 1 or more of the 
   vectors of a list supplied to match string
 
-* `trans.cloud` produced an error when expand.target was TRUE.  This error ha 
+* `trans.cloud` produced an error when expand.target was TRUE.  This error has 
   been eliminated.
 
 * `termco` would eliminate > 1 columns matching an identical search.term found 
