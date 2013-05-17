@@ -10,6 +10,11 @@ BUG FIXES
 * `gradient_cloud`'s `min.freq ` locked at 1.  This has been fixed. (Manuel 
   Fdez-Moya)
 
+* `termco` would produce an error if single length named vectors were passed to 
+  match.list and no multilength vectors were supplied.  Also an error was thrown 
+  if an unnamed multilength vector was passed to match.list.  This behavior has 
+  been fixed.
+
 NEW FEATURES
 
 * `tot_plot` a visualizing function that uses a bar graph to visualize patterns 

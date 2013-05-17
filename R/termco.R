@@ -134,6 +134,27 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
     if (!is.list(match.list)) {
         names(match.list) <- NULL
     }  
+
+    ## Fix unnamed vectors of length > 1
+    lens <- sapply(match.list, length)
+    ncheck <- names(match.list)
+    res1 <- (is.null(ncheck) && any(lens > 1))
+    noname <- lens > 1 & ncheck == ""
+    res2 <- sum(noname) > 0
+    if(res1 | res2) {
+        if (res1) {
+            names(match.list) <- rep("", length(match.list))
+            names(match.list)[lens > 1] <- paste0("list_", seq_len(sum(lens > 1)))
+        } else {
+            if (any(names(match.list) %in% paste0("X_", seq_len(sum(noname))))) {
+                 stop("unnamed vector in match.list")        
+            } 
+
+            names(match.list)[noname] <- paste0("list_", seq_len(sum(noname)))
+        }
+    }
+    ## End of Fix unnamed vectors of length > 1
+
     x <- unlist(match.list)
     a <- grepl("[^a-zA-Z[:space:]]", x)
     if (any(a)) {
@@ -200,11 +221,25 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
         }
     }
     o[1:3] <- lapply(o[1:3], function(x) {
+        ## Handling named single length vector (see reordering below)
+        if (sum(mprot) > 0 && sum(lens > 1) < 1) {
+            matches <- colnames(x) %in% paste0("term(", match.list, ")")[mprot]
+            subs <- gsub("term(", "", colnames(x)[matches], fixed=TRUE)
+            colnames(x)[matches] <- names(match.list)[match.list %in% substring(subs, 1, nchar(subs) - 1)]
+        }
         nms2 <- colnames(x)[!colnames(x) %in% names(match.list)]
+
         mat <- x[, !colnames(x) %in% names(match.list), drop=FALSE]
-        colnames(mat) <- nms2
-        mat2 <- x[, names(match.list), drop=FALSE]
+        colnames(mat) <- nms2 
+
+        mat2 <- x[, colnames(x)[colnames(x) %in% names(match.list)], drop=FALSE]
         x <- data.frame(mat, mat2, check.names = FALSE)
+        if (sum(mprot) > 0 && sum(lens > 1) < 1) { #reorder if named single length vector
+            reord <- x[, -c(1:2), drop = FALSE]
+            ML <- paste0("term(", match.list, ")")
+            ML[mprot] <- names(match.list)[mprot]
+            x <- data.frame(x[, 1:2], reord[, ML], check.names= FALSE)
+        }
         colnames(x)[1] <- NAME
         rownames(x) <- NULL
         x
