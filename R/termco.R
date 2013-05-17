@@ -163,9 +163,12 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
             digit.remove <- FALSE  
         }
         if (any(a + b == 1) & is.null(char.keep)) {  
-            char.keep = unlist(strsplit(paste(gsub("[a-zA-Z0-9[:space:]]", 
+            char.keep <- unlist(strsplit(paste(gsub("[a-zA-Z0-9[:space:]]", 
                 "", x), collapse=""), NULL)) 
         }
+        if (any(gsub("[0-9a-zA-Z[:space:]]", "", x) != "")) {  
+            char.keep <- unique(c(char.keep, gsub("[0-9a-zA-Z[:space:]]", "", paste(x, collapse=""))))
+        }   
     }
     if(!all(is.null(names(match.list))) && 
         any(duplicated(unblanker(names(match.list))))) {
@@ -195,7 +198,7 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
     ML <- unlist(match.list)
     TD <- termco.d(text.var = text.var, grouping.var = grouping.var, 
         match.string = ML, ignore.case = ignore.case, percent = percent, 
-        apostrophe.remove = apostrophe.remove, char.keep = NULL, 
+        apostrophe.remove = apostrophe.remove, char.keep = char.keep, 
         digit.remove = FALSE, digits = digits, zero.replace = zero.replace, ...)
     colnames(TD[[3]]) <- colnames(TD[[1]])
     if (is.list(preIND)) {
@@ -227,19 +230,25 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
             subs <- gsub("term(", "", colnames(x)[matches], fixed=TRUE)
             colnames(x)[matches] <- names(match.list)[match.list %in% substring(subs, 1, nchar(subs) - 1)]
         }
+
         nms2 <- colnames(x)[!colnames(x) %in% names(match.list)]
-
         mat <- x[, !colnames(x) %in% names(match.list), drop=FALSE]
-        colnames(mat) <- nms2 
-
-        mat2 <- x[, colnames(x)[colnames(x) %in% names(match.list)], drop=FALSE]
+        colnames(mat) <- nms2
+        if (sum(mprot) > 0 && sum(lens > 1) < 1) {
+            mat2 <- x[, colnames(x)[colnames(x) %in% names(match.list)], drop=FALSE]
+        } else {
+            mat2 <- x[, names(match.list), drop=FALSE]
+        }
         x <- data.frame(mat, mat2, check.names = FALSE)
+
         if (sum(mprot) > 0 && sum(lens > 1) < 1) { #reorder if named single length vector
             reord <- x[, -c(1:2), drop = FALSE]
             ML <- paste0("term(", match.list, ")")
             ML[mprot] <- names(match.list)[mprot]
             x <- data.frame(x[, 1:2], reord[, ML], check.names= FALSE)
         }
+
+
         colnames(x)[1] <- NAME
         rownames(x) <- NULL
         x
