@@ -5,7 +5,7 @@ BUG FIXES
 
 * `genXtract` labels returned the word "right" rather than the right edge string.
   See http://stackoverflow.com/a/15423439/1000343 for an example of the old 
-  behavior.
+  behavior.  This behavior has been fixed.
 
 * `gradient_cloud`'s `min.freq ` locked at 1.  This has been fixed. (Manuel 
   Fdez-Moya)
