@@ -8,7 +8,8 @@ Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Acknowledgments: I would like to thank the many folks at talkstats.com and
     stackoverflow.com for their help in answering many R questions related to
     qdap.  I'd like to particularly thank Dason Kurkiewicz for his constant
-    assistance in learning the R language, GitHub and package development.
+    mentoring/assistance in learning the R language, GitHub and package
+    development.
 Depends:
     R (>= 2.15),
     gdata,
