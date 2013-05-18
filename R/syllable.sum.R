@@ -7,9 +7,9 @@
 #' cores.  Note that this may not mean a speed boost if you have one core or if 
 #' the data set is smaller as the cluster takes time to create.
 #' @param text A single character vector of text.
-#' @param remove.bracketed logical.  If TRUE brackets are removed from the 
+#' @param remove.bracketed logical.  If \code{TRUE} brackets are removed from the 
 #' analysis.
-#' @param algorithm.report logical.  If TRUE generates a report of words not 
+#' @param algorithm.report logical.  If \code{TRUE} generates a report of words not 
 #' found in the dictionary (i.e., syllables were calculated with an algorithm).
 #' @return \code{syllable.sum} - returns a vector of syllable counts per row. 
 #' @rdname syllabication

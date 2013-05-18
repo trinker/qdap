@@ -18,30 +18,32 @@
 
   \item{bigroup.var}{A binary grouping variable.}
 
-  \item{rev.binary}{logical.  If TRUE the ordering of the
-  binary levels of bigroup.var is reversed.}
+  \item{rev.binary}{logical.  If \code{TRUE} the ordering
+  of the binary levels of bigroup.var is reversed.}
 
   \item{X}{The first gradient color for variable X.}
 
   \item{Y}{The second gradient color for variable Y.}
 
-  \item{stem}{logical.  If TRUE the \code{text.var} will be
-  stemmed.}
+  \item{stem}{logical.  If \code{TRUE} the \code{text.var}
+  will be stemmed.}
 
   \item{stopwords}{Words to exclude from the cloud.  Words
-  will be removed after determing proportional word usage.}
+  will be removed after determining proportional word
+  usage.}
 
-  \item{caps}{logical.  If TRUE selected words will be
-  capitalized.}
+  \item{caps}{logical.  If \code{TRUE} selected words will
+  be capitalized.}
 
   \item{caps.list}{A vector of words to capitalize
-  (\code{caps} must be TRUE).}
+  (\code{caps} must be \code{TRUE}).}
 
-  \item{I.list}{logical.  If TRUE capitalizes I words and
-  contractions.}
+  \item{I.list}{logical.  If \code{TRUE} capitalizes I
+  words and contractions.}
 
-  \item{random.order}{Plot words in random order. If false,
-  they will be plotted in decreasing frequency.}
+  \item{random.order}{Plot words in random order. If
+  \code{FALSE}, they will be plotted in decreasing
+  frequency.}
 
   \item{rot.per}{Proportion words with 90 degree rotation.}
 

@@ -6,7 +6,7 @@
 #' @param char The character from which to grab until/from.
 #' @param noc Number of times the character appears before the grab.
 #' @param include logical.  If TRUE includes the character in the grab.
-#' @return returns a vector of text with char on/forwar removed.
+#' @return returns a vector of text with char on/forward removed.
 #' @rdname beg2char
 #' @export
 #' @examples

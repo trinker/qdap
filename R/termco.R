@@ -149,7 +149,6 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
             if (any(names(match.list) %in% paste0("X_", seq_len(sum(noname))))) {
                  stop("unnamed vector in match.list")        
             } 
-
             names(match.list)[noname] <- paste0("list_", seq_len(sum(noname)))
         }
     }
@@ -255,14 +254,22 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
     })
     perm <- TRUE
     if (!elim.old & !short.term) {
-        warning("Both elim.old and short.term can not be set to FALSE:\n  short.term is ignored.")
         perm <- FALSE
     }
-    if (!short.term & is.list(match.list) & perm) {
+    if (!short.term & is.list(match.list) & perm) {#when elim.old = T & short.term = F
         o[1:3] <- lapply(o[1:3], function(x) {
             indices <- !grepl("term(", colnames(x), fixed=TRUE)
             indices[-c(1:2)][named] <- FALSE
             indices[1:2] <- c(FALSE, FALSE)
+            colnames(x)[indices] <- paste0("term(", colnames(x)[indices], ")")
+            return(x)
+        })
+    }
+    if (!perm & is.list(match.list)) {#when elim.old and short.term are both FALSE
+        o[1:3] <- lapply(o[1:3], function(x) {
+            named2 <- sapply(names(mprot)[named], function(y) which(colnames(x) %in% y)[1])
+            indices <- !grepl("term(", colnames(x), fixed=TRUE)
+            indices[c(1:2, named2)] <- FALSE
             colnames(x)[indices] <- paste0("term(", colnames(x)[indices], ")")
             return(x)
         })

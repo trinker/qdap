@@ -13,15 +13,16 @@
   single grouping variable or a list of 1 or more grouping
   variables.}
 
-  \item{plot}{logical.  If TRUE plots the start-end times
-  as a gantt plot.}
+  \item{plot}{logical.  If \code{TRUE} plots the start-end
+  times as a Gantt plot.}
 
   \item{units}{The unit of measurement to analyze.  One of
   the strings \code{"character"}, \code{"syllable"},
   \code{"word"}, or \code{"sentence"}.}
 
-  \item{sums}{logical.  If TRUE reports and optionally
-  plots the total units used by grouping variable(s).}
+  \item{sums}{logical.  If \code{TRUE} reports and
+  optionally plots the total units used by grouping
+  variable(s).}
 
   \item{plot.colors}{The colors of the Gantt plot bars.
   Either a single color or a length equal to the number of

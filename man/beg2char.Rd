@@ -19,7 +19,7 @@
   in the grab.}
 }
 \value{
-  returns a vector of text with char on/forwar removed.
+  returns a vector of text with char on/forward removed.
 }
 \description{
   \code{beg2char} - Grab from beginning of string to a

@@ -6,10 +6,10 @@
 #' @param text.var The text variable    
 #' @param grouping.var The grouping variables. Also takes a single grouping 
 #' variable or a list of 1 or more grouping variables.
-#' @param plot logical.  If TRUE plots the start-end times as a gantt plot.
+#' @param plot logical.  If \code{TRUE} plots the start-end times as a Gantt plot.
 #' @param units The unit of measurement to analyze.  One of the strings 
 #' \code{"character"}, \code{"syllable"}, \code{"word"}, or \code{"sentence"}.
-#' @param sums logical.  If TRUE reports and optionally plots the total units 
+#' @param sums logical.  If \code{TRUE} reports and optionally plots the total units 
 #' used by grouping variable(s).
 #' @param plot.colors The colors of the Gantt plot bars.  Either a single color 
 #' or a length equal to the number of grouping variable(s).

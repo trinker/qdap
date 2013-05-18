@@ -24,12 +24,12 @@
 
   \item{text}{A single character vector of text.}
 
-  \item{remove.bracketed}{logical.  If TRUE brackets are
-  removed from the analysis.}
+  \item{remove.bracketed}{logical.  If \code{TRUE} brackets
+  are removed from the analysis.}
 
-  \item{algorithm.report}{logical.  If TRUE generates a
-  report of words not found in the dictionary (i.e.,
-  syllables were calculated with an algorithm).}
+  \item{algorithm.report}{logical.  If \code{TRUE}
+  generates a report of words not found in the dictionary
+  (i.e., syllables were calculated with an algorithm).}
 }
 \value{
   \code{syllable.sum} - returns a vector of syllable counts
