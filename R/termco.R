@@ -177,6 +177,7 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
     if (is.list(match.list) & length(match.list) == 1 & is.null(names(match.list))) {
         match.list <- unlist(match.list)
     }
+    named <- names(match.list) != ""
     mprot <- names(match.list) != "" & sapply(match.list, length) == 1
     if (is.null(grouping.var)) {
         NAME <- "all"
@@ -248,14 +249,21 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
             x <- data.frame(x[, 1:2], reord[, ML], check.names= FALSE)
         }
 
-
         colnames(x)[1] <- NAME
         rownames(x) <- NULL
         x
     })
-    if (!short.term & is.list(match.list)) {
+    perm <- TRUE
+    if (!elim.old & !short.term) {
+        warning("Both elim.old and short.term can not be set to FALSE:\n  short.term is ignored.")
+        perm <- FALSE
+    }
+    if (!short.term & is.list(match.list) & perm) {
         o[1:3] <- lapply(o[1:3], function(x) {
-            colnames(x)[-c(1:2)] <- paste0("term(", colnames(x)[-c(1:2)], ")")
+            indices <- !grepl("term(", colnames(x), fixed=TRUE)
+            indices[-c(1:2)][named] <- FALSE
+            indices[1:2] <- c(FALSE, FALSE)
+            colnames(x)[indices] <- paste0("term(", colnames(x)[indices], ")")
             return(x)
         })
     }
