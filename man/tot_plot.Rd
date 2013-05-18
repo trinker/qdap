@@ -67,7 +67,13 @@ tot_plot(DATA, "state", tot=FALSE)
 tot_plot(dataframe, "state", space=.03)
 tot_plot(dataframe, "state", "sex")
 tot_plot(mraja1, "dialogue", "fam.aff", tot=FALSE)
-tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)
+tot_plot(mraja1, "dialogue", "died", tot=FALSE)
+tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE) +
+    scale_fill_hue(l=40)
+tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
+    scale_fill_brewer(palette="Spectral")
+tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
+    scale_fill_brewer(palette="Set1")
 }
 }
 \keyword{sentence,}

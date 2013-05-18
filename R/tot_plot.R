@@ -38,11 +38,18 @@
 #' tot_plot(dataframe, "state", space=.03)
 #' tot_plot(dataframe, "state", "sex")
 #' tot_plot(mraja1, "dialogue", "fam.aff", tot=FALSE)
-#' tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)
+#' tot_plot(mraja1, "dialogue", "died", tot=FALSE)
+#' tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE) + 
+#'     scale_fill_hue(l=40) 
+#' tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+ 
+#'     scale_fill_brewer(palette="Spectral")
+#' tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+ 
+#'     scale_fill_brewer(palette="Set1")
 #' }
 tot_plot <- function(dataframe, text.var, grouping.var = NULL, facet.vars = NULL, 
     tot = TRUE, transform = FALSE, ncol = NULL, ylab=NULL, xlab=NULL, bar.space=0, 
     scale = NULL, space = NULL) {
+    group <- caps <- NULL
     DF <- dataframe
     if (isTRUE(tot)) {
         if(!any(colnames(dataframe) %in% "tot")) {
@@ -146,6 +153,5 @@ tot_plot <- function(dataframe, text.var, grouping.var = NULL, facet.vars = NULL
             }
         }
     }  
-    print(theplot)
-    invisible(theplot) 
+    return(theplot) 
 }
