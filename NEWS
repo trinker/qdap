@@ -24,7 +24,7 @@ NEW FEATURES
 * `tot_plot` a visualizing function that uses a bar graph to visualize patterns 
   in sentence length and grouping variables by turn of talk.
 
-* `beg2char` and `cahr2end` functions to grab text from begining of string to a
+* `beg2char` and `cahr2end` functions to grab text from beginning of string to a
   character or from a character to the end of a string.
 
 * `ngrams` function to calculate ngrams by grouping variable.
