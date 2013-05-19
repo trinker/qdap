@@ -1,19 +1,14 @@
 Package: qdap
 Type: Package
 Title: Bridging the gap between qualitative data and quantitative analysis
-Version: 0.2.2
-Date: 2012-05-09
+Version: 0.2.3
+Date: 2013-05-18
 Author: Tyler Rinker
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
-Acknowledgments: I would like to thank the many folks at talkstats.com and
-    stackoverflow.com for their help in answering many R questions related to
-    qdap.  I'd like to particularly thank Dason Kurkiewicz for his constant
-    mentoring/assistance in learning the R language, GitHub and package
-    development.
 Depends:
-    R (>= 2.15),
+    R (>= 3.0.0),
     gdata,
-    ggplot2 (>= 0.9.2),
+    ggplot2 (>= 0.9.3.1),
     grid,
     reports,
     scales
@@ -50,6 +45,11 @@ Description: This package automates many of the tasks associated with
     providing analysis and seamless integration with other R packages that
     undertake higher level analysis and visualization of text.  This affords
     the user a more efficient and targeted analysis.
+Acknowledgments: I would like to thank the many folks at talkstats.com and
+    stackoverflow.com for their help in answering many R questions related to
+    qdap.  I'd like to particularly thank Dason Kurkiewicz for his constant
+    mentoring/assistance in learning the R language, GitHub and package
+    development.
 License: GPL-2
 URL: http://trinker.github.com/qdap/
 BugReports: http://github.com/trinker/qdap/issues
