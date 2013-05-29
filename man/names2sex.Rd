@@ -10,7 +10,8 @@
 
   \item{pred.sex}{logical.  If \code{TRUE} overlapping M/F
   names will be predicted based on highest cummulative
-  frequency.}
+  frequency.  If \code{FALSE} the overlapping names will be
+  denoted with a \code{"B"}.}
 }
 \value{
   Returns a vector of predicted gender (M/F) based on first
