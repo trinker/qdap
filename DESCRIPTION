@@ -196,3 +196,4 @@ Collate:
     'tot_plot.R'
     'beg2char.R'
     'ngrams.R'
+    'names2sex.R'
