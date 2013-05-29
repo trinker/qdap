@@ -10,7 +10,7 @@ NEW FEATURES
 
 * `names2sex` a function for predicting gender from name.
 
-* The `NAMES` and `NAMES_GENDER` datasets, based on 1990 U.S. census data.
+* The `NAMES` and `NAMES_SEX` datasets, based on 1990 U.S. census data.
 
 MINOR FEATURES
 
