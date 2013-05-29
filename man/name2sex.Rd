@@ -3,7 +3,7 @@
 \title{Names to Gender Prediction}
 \usage{
   name2sex(names.list, pred.sex = TRUE,
-    fuzzy.match = pred.sex, USE.NAMES = TRUE)
+    fuzzy.match = pred.sex, USE.NAMES = FALSE)
 }
 \arguments{
   \item{names.list}{Character vector containing first

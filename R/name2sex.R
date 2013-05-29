@@ -38,7 +38,7 @@
 #'     tyler, jamie, JAMES, tyrone, cheryl, drew), TRUE, FALSE)
 #' }
 name2sex <- 
-function(names.list, pred.sex = TRUE, fuzzy.match = pred.sex, USE.NAMES = TRUE) {
+function(names.list, pred.sex = TRUE, fuzzy.match = pred.sex, USE.NAMES = FALSE) {
     if(pred.sex) {
         dat <- NAMES_SEX[, -2]
     } else {
