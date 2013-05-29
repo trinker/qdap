@@ -221,6 +221,7 @@ list(
         "mraja1spl",
         "NAMES",
         "NAMES_SEX",
+        "NAMES_LIST",        
         "negation.words",
         "negative.words",
         "OnixTxtRetToolkitSWL1",
