@@ -72,11 +72,11 @@
   ~/CORRESPONDENCE/CONTACT_INFO.txt file)} \item{todo}{ * A
   function to view, and optionally copy to the clipboard,
   non-completed tasks from the \code{TO_DO.txt} file} } }
-  \item{LOG.txt}{ - A text file documenting project
+  \item{LOG}{ - A text file documenting project
   changes/needs etc.} \item{xxx.Rproj}{ - A project file
   used by \href{http://www.rstudio.com/}{RStudio}; clicking
-  this will open the project in RStudio.} \item{TO_DO.txt}{
-  - A text file documenting project tasks} }
+  this will open the project in RStudio.} \item{TO_DO}{ - A
+  text file documenting project tasks} }
 
   The template comes with a .Rproj file.  This makes
   operating in \href{http://www.rstudio.com/}{RStudio} very

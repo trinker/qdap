@@ -31,7 +31,7 @@ The project template includes these main directories and scripts:
   \item \textbf{CORRESPONDENCE} - A directory to store correspondence and agreements 
      with the client:
   \begin{enumerate}
-     \item \textbf{CONTACT\_INFO.txt} A txt file to put research team members' 
+     \item \textbf{CONTACT\_INFO} A text file to put research team members' 
        contact information
   \end{enumerate}  
   \item \textbf{DATA} - A directory to store cleaned data (generally .RData 
@@ -59,9 +59,9 @@ The project template includes these main directories and scripts:
      \item \textbf{email} - A function to view, and optionally copy to the clipboard, emails for the client/lead researcher, analyst and/or other project members (information taking from ~/CORRESPONDENCE/CONTACT\_INFO.txt file)
      \item \textbf{todo} - A function to view, and optionally copy to the clipboard, non-completed tasks from the TO\_DO.txt file
   \end{enumerate}   
-  \item \textbf{LOG.txt} - A text file documenting project changes/needs etc.
+  \item \textbf{LOG} - A text file documenting project changes/needs etc.
   \item \textbf{xxx.Rproj} - A project file used by \href{http://www.rstudio.com/}{RStudio}; clicking this will open the project in RStudio
-  \item \textbf{TO\_DO.txt} - A text file documenting project tasks 
+  \item \textbf{TO\_DO} - A text file documenting project tasks 
 \end{enumerate}
 
 \end{document}

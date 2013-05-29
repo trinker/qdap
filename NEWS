@@ -1,6 +1,16 @@
 qdap 0.2.3
 ----------------------------------------------------------------
 
+BUG FIXES
+
+* `new_project` placed a report in the CORRESPONDENCE directory rather than 
+  CONTACT_INFO
+
+CHANGES
+
+* `new_project` directory can now be transfered without breaking paths (i.e.,
+  `file.path(getwd(), "DIR/file.ext")` is used rather than the full file path).
+
 
 qdap 0.2.2
 ----------------------------------------------------------------

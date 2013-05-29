@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.2.18)  12 MAR 2013 02:58
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.2.18)  28 MAY 2013 20:57
 entering extended mode
 **PROJECT_WORKFLOW_GUIDE.tex
 (C:\Users\trinker\GitHub\qdap\inst\pdf_gen\PROJECT_WORKFLOW_GUIDE.tex
@@ -69,10 +69,6 @@ Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
-)
-("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\upquote\upquote.sty"
-Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
-tim
 )
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\framed\framed.sty"
 Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
@@ -225,6 +221,10 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
 \Hy@SectionHShift=\skip44
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\upquote\upquote.sty"
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
+tim
 )
 (C:\Users\trinker\GitHub\qdap\inst\pdf_gen\PROJECT_WORKFLOW_GUIDE.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.

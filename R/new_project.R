@@ -52,9 +52,9 @@
 #'     \item{todo}{ * A function to view, and optionally copy to the clipboard, non-completed tasks from the \code{TO_DO.txt} file}
 #'     }
 #' }
-#' \item{LOG.txt}{ - A text file documenting project changes/needs etc.}
+#' \item{LOG}{ - A text file documenting project changes/needs etc.}
 #' \item{xxx.Rproj}{ - A project file used by \href{http://www.rstudio.com/}{RStudio}; clicking this will open the project in RStudio.} 
-#' \item{TO_DO.txt}{ - A text file documenting project tasks}
+#' \item{TO_DO}{ - A text file documenting project tasks}
 #' }
 #' 
 #' The template comes with a .Rproj file.  This makes operating in 
@@ -91,37 +91,32 @@ new_project <- function(project = "new", path = getwd(), ...) {
     todo <- paste("#when a task is complete put - in front of the item",
         "#Use hanging indent",
         "1. Task 1", sep = "\n")
-    cat(todo, file=paste0(x, "/", "TO_DO.txt"))
+    cat(todo, file=paste0(x, "/", "TO_DO"))
     cat(paste0("Project \"", project, "\" created: ", Sys.time(), "\n"), 
-        file=paste0(x, "/", "LOG.txt"))
+        file=paste0(x, "/", "LOG"))
     invisible(folder(folder.name=paste0(y[[4]], "/", "ALREADY_REVIEWED")))
     dats <- c("AUDIO", "VIDEO", "FIELD_NOTES", "INTERVIEWS", "PAPER_ARTIFACTS", 
         "PHOTOGRAPHS")
     invisible(folder(folder.name=paste0(y[[13]], "/", dats)))
-    cat(paste0("library(qdap)\ndir_map(\"", 
-        y[[12]], "\")\n\n\n\n", 
-    "len <- length(dir(\"", y[[12]], "\"))\n",
-    "L1 <- lapply(paste0(\"dat\", 1:len), function(x) get(x))\n", 
-    "names(L1) <- paste0(\"dat\", 1:len)\n",
-    "\n\n\n\nsave( , file = \"", y[[3]], 
-        "/cleaned.RData\")\n"), file=paste0(y[[1]], "/", 
-        "01_clean_data.R"))
-    cat(paste0("library(qdap, ggplot2, grid, scales)\nsource(\"",
-        paste0(x, "/", "extra_functions.R"), "\")\n",
-        paste0("load(\"", y[[3]], "/cleaned.RData", "\")")),
+    cat(paste0("library(qdap)\n",
+        "dir_map(file.path(getwd(), \"CLEANED_TRANSCRIPTS\")\n\n\n\n", 
+        "len <- length(dir(file.path(getwd(), \"CLEANED_TRANSCRIPTS\")))\n",
+        "L1 <- lapply(paste0(\"dat\", 1:len), function(x) get(x))\n", 
+        "names(L1) <- paste0(\"dat\", 1:len)\n",
+        "\n\n\n\nsave( , file = file.path(getwd(), \"DATA/cleaned.RData\"))\n"), 
+        file=paste0(y[[1]], "/", "01_clean_data.R"))
+    cat(paste0("library(qdap, ggplot2, grid, scales)\n", 
+        "source(file.path(getwd(), \"extra_functions.R\"))\n",
+        "load(file.path(getwd(), \"DATA/cleaned.RData\"))\n"),
         file=paste0(y[[1]], "/", "02_analysis_I.R"))
-    cat(paste0("library(qdap, ggplot2, grid, scales)\nsource(\"",
-        paste0(x, "/", "extra_functions.R"), "\")\n",
-        paste0("load(\"", y[[3]], "/cleaned.RData", "\")\n"),
-        paste0("setwd(\"", y[[6]], "\")\n")),
+    cat(paste0("library(qdap, ggplot2, grid, scales)\n",
+        "source(file.path(getwd(), \"extra_functions.R\"))\n",
+        "load(file.path(getwd(), \"DATA/cleaned.RData\"))\n",
+        "setwd(file.path(getwd(), \"PLOTS\"))\n"),
         file=paste0(y[[1]], "/", "03_plots.R"))
     root <- system.file("extdata/docs", package = "qdap")
     pdfloc <- paste0(root, "/PROJECT_WORKFLOW_GUIDE.pdf")
     invisible(file.copy(pdfloc, x))
-    pdfloc2 <- paste0(root, "/report_1.rnw")
-    invisible(file.copy(pdfloc2, y[[10]]))
-    pdfloc3 <- paste0(root, "/preamble.tex")
-    invisible(file.copy(pdfloc3, y[[10]]))
     pdfloc4 <- paste0(root, "/TEMP.txt")
     invisible(file.copy(pdfloc4, x))
     invisible(file.rename(paste0(x, "/TEMP.txt"), 
@@ -137,6 +132,7 @@ new_project <- function(project = "new", path = getwd(), ...) {
         paste("PROJECT CREATED:", Sys.time())
     )
     info <- paste(info, collapse = "\n\n")
+    cat(info, file=paste0(y[[10]], "/", "CONTACT_INFO"))
     write.csv(data.frame(person=""), file=paste0(y[[2]], "/", "KEY.csv"), 
         row.names = FALSE)
     rpro <- c("#load the packages used",
@@ -158,7 +154,7 @@ new_project <- function(project = "new", path = getwd(), ...) {
         "dat <- paste0(WD, \"/DATA/\", dir(paste0(WD, \"/DATA/\")))",
         "dat2 <- dat[tools::file_ext(dat) %in% c(\"txt\", \"R\", \"r\")]",
         "if (!identical(dat2, character(0))) {",              
-        "try(lapply(dat2, source))",
+        "    try(lapply(dat2, source))",
         "}",              
         "dat <- dat[tools::file_ext(dat) == \"RData\"]",
         "if (!identical(dat, character(0))) {",
