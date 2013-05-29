@@ -10,6 +10,8 @@
 #' from \code{\link[base]{agrep}} to predict gender from the closest name match 
 #' starting with the same letter.  This is computationally intensive and should 
 #' not be used on larger vectors.  Defaults to \code{pred.sex}.
+#' @param USE.NAMES logical.  If \code{TRUE} names.list is used to name the 
+#' gender vector.
 #' @return Returns a vector of predicted gender (M/F) based on first name.
 #' @author Dason Kurkiewicz and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @keywords name gender
@@ -35,20 +37,29 @@
 #' name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, 
 #'     tyler, jamie, JAMES, tyrone, cheryl, drew), TRUE, FALSE)
 #' }
-name2sex <- function(names.list, pred.sex = TRUE, fuzzy.match = pred.sex) {
+name2sex <- 
+function(names.list, pred.sex = TRUE, fuzzy.match = pred.sex, USE.NAMES = TRUE) {
     if(pred.sex) {
         dat <- NAMES_SEX[, -2]
     } else {
         dat <- NAMES_SEX[, -3]
     }
     nms <- toupper(names.list)
-    out <- factor(lookup(nms, dat))
+    out <- lookup(nms, dat)
     if (fuzzy.match) {
         FUN <- function(pattern, pred.sex2 = ifelse(pred.sex, 3, 2)) {
             sector <- NAMES_LIST[names(NAMES_LIST) %in% substring(pattern, 1, 1)][[1]]
             sector[which.min(Ldist(pattern, sector[, 1]))[1], pred.sex2]
         }
-        out[is.na(out)] <-         sapply(nms[is.na(out)], FUN)
+        if (length(out) == 1 && is.na(out)) {
+            out <- FUN(nms)
+        } else {
+            out[is.na(out)] <- as.character(sapply(nms[is.na(out)], FUN))
+        }
+    }
+    out <- factor(out)
+    if (USE.NAMES) {
+        names(out) <- names.list
     }
     out
 }

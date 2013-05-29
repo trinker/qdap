@@ -3,7 +3,7 @@
 \title{Names to Gender Prediction}
 \usage{
   name2sex(names.list, pred.sex = TRUE,
-    fuzzy.match = pred.sex)
+    fuzzy.match = pred.sex, USE.NAMES = TRUE)
 }
 \arguments{
   \item{names.list}{Character vector containing first
@@ -20,6 +20,9 @@
   with the same letter.  This is computationally intensive
   and should not be used on larger vectors.  Defaults to
   \code{pred.sex}.}
+
+  \item{USE.NAMES}{logical.  If \code{TRUE} names.list is
+  used to name the gender vector.}
 }
 \value{
   Returns a vector of predicted gender (M/F) based on first
