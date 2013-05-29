@@ -9,7 +9,7 @@
   names.}
 
   \item{pred.sex}{logical.  If \code{TRUE} overlapping M/F
-  names will be predicted based on highes cummulative
+  names will be predicted based on highest cummulative
   frequency.}
 }
 \value{

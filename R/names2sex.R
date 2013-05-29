@@ -4,7 +4,7 @@
 #' 
 #' @param names.list Character vector containing first names.
 #' @param pred.sex logical.  If \code{TRUE} overlapping M/F names will be 
-#' predicted based on highes cummulative frequency.
+#' predicted based on highest cummulative frequency.
 #' @return Returns a vector of predicted gender (M/F) based on first name.
 #' @keywords name gender
 #' @references
