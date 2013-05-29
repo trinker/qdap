@@ -118,3 +118,9 @@ str(nms)
 
 NAMES <- nms
 NAMES_SEX <- unique(nms[, qcv(name, gender2, pred.sex)])
+
+y <- NAMES_SEX[order(NAMES_SEX[, 1]), ]
+NAMES_LIST <- lapply(LETTERS, function(x){
+    na.omit(y[x == substring(y[, 1], 1, 1), ])
+})
+names(NAMES_LIST) <- LETTERS

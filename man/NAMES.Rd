@@ -1,7 +1,7 @@
 \docType{data}
 \name{NAMES}
 \alias{NAMES}
-\title{First Names and Gender(U.S.)}
+\title{First Names and Gender (U.S.)}
 \format{A data frame with 5494 rows and 7 variables}
 \description{
   A dataset containing 1990 U.S. census data on first

@@ -714,7 +714,7 @@ NULL
 #' \code{\link[qdap]{labMT}}.
 NULL
 
-#' First Names and Gender(U.S.)
+#' First Names and Gender (U.S.)
 #' 
 #' A dataset containing 1990 U.S. census data on first names.
 #' 
@@ -757,5 +757,27 @@ NULL
 #' @name NAMES_SEX 
 #' @usage data(NAMES_SEX) 
 #' @format A data frame with 5163 rows and 3 variables 
+#' @references \url{http://www.census.gov/genealogy/www/data/1990surnames/names_files.html}
+NULL
+
+#' First Names and Predictive Gender (U.S.) List
+#' 
+#' A list version of the \code{link[qdap]{NAMES_SEX}}) dataset broken down by 
+#' first letter.
+#' 
+#' @details Alphabetical list of dataframes with the following variables:
+#' \itemize{ 
+#'   \item name. A first name. 
+#'   \item gender2. Gender of the combined male/female list with "B" in place of 
+#'   overlapping (M/F) names.
+#'   \item pred.sex. Predicted gender of the names with B's in \code{gender2} 
+#'   repalced with the gender that had a higher \code{per.freq}.
+#' } 
+#' 
+#' @docType data 
+#' @keywords datasets 
+#' @name NAMES_LIST 
+#' @usage data(NAMES_LIST) 
+#' @format A list with 26 elements 
 #' @references \url{http://www.census.gov/genealogy/www/data/1990surnames/names_files.html}
 NULL
