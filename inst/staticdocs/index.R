@@ -23,7 +23,7 @@ list(
         "clean",
         "incomplete.replace",
         "multigsub",
-        "names2sex",
+        "name2sex",
         "potential_NA",
         "qprep",
         "replace_abbreviation",
