@@ -24,6 +24,9 @@
 \dontrun{
 names2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA,
     tyler, jamie, JAMES, tyrone))
+
+names2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA,
+    tyler, jamie, JAMES, tyrone, cheryl, drew), FALSE)
 }
 }
 \references{

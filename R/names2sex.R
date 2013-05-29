@@ -16,6 +16,9 @@
 #' \dontrun{
 #' names2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, 
 #'     tyler, jamie, JAMES, tyrone))
+#'     
+#' names2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, 
+#'     tyler, jamie, JAMES, tyrone, cheryl, drew), FALSE)
 #' }
 names2sex <- function(names.list, pred.sex = TRUE) {
     if(pred.sex) {
