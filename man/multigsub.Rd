@@ -5,11 +5,11 @@
 \usage{
   multigsub(pattern, replacement = NULL, text.var,
     leadspace = FALSE, trailspace = FALSE, fixed = TRUE,
-    ...)
+    trim = TRUE, ...)
 
   mgsub(pattern, replacement = NULL, text.var,
     leadspace = FALSE, trailspace = FALSE, fixed = TRUE,
-    ...)
+    trim = TRUE, ...)
 }
 \arguments{
   \item{pattern}{Character string to be matched in the
@@ -21,14 +21,18 @@
 
   \item{text.var}{The text variable.}
 
-  \item{leadspace}{logical.  If TRUE inserts a leading
-  space in the replacements.}
+  \item{leadspace}{logical.  If \code{TRUE} inserts a
+  leading space in the replacements.}
 
-  \item{trailspace}{logical.  If TRUE inserts a trailing
-  space in the replacements.}
+  \item{trailspace}{logical.  If \code{TRUE}TRUE inserts a
+  trailing space in the replacements.}
 
-  \item{fixed}{logical. If TRUE, pattern is a string to be
-  matched as is. Overrides all conflicting arguments.}
+  \item{fixed}{logical. If \code{TRUE}, pattern is a string
+  to be matched as is. Overrides all conflicting
+  arguments.}
+
+  \item{trim}{logical.  If \code{TRUE} leading and trailing
+  white spaces are removed.}
 
   \item{\dots}{Additional arguments passed to
   \code{\link[base]{gsub}}.}

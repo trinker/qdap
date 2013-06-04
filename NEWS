@@ -14,7 +14,8 @@ NEW FEATURES
 
 MINOR FEATURES
 
-*
+* `mgsub` now gets a `trim` argument that optionally reomves trailing leading 
+  white spaces.
 
 CHANGES
 
