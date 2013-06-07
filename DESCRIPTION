@@ -33,6 +33,7 @@ Imports:
     parallel,
     tools
 Suggests:
+    lsa,
     plyr,
     koRpus
 LazyData: TRUE
@@ -198,3 +199,4 @@ Collate:
     'ngrams.R'
     'Ldist.R'
     'name2sex.R'
+    'tdm.R'

@@ -113,6 +113,7 @@ list(
         "syllable.sum",
         "termco",
         "termco.c",
+        "tfm",
         "wfm",
         "word.count",
         "word_stats"

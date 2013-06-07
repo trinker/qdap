@@ -12,6 +12,9 @@ NEW FEATURES
 
 * The `NAMES` and `NAMES_SEX` datasets, based on 1990 U.S. census data.
 
+* `tdm` added as an equivalent to TermDocumentMatrix from the tm package.  This 
+  allows for portability across text analysis packages.
+
 MINOR FEATURES
 
 * `mgsub` now gets a `trim` argument that optionally reomves trailing leading 
