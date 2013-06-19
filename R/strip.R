@@ -43,8 +43,8 @@ function (x, char.keep = "~~", digit.remove = TRUE, apostrophe.remove = TRUE,
             x2 <- gsub("'", "", x2)
         }
         ifelse(digit.remove == TRUE, gsub("[[:digit:]]", "", x2), x2)
-    }
-    x <- clean(gsub("/", " ", gsub("-", " ", x))) 
+    }  
+    x <- clean(x) 
     unlist(lapply(x, function(x) Trim(strp(x = x, digit.remove = digit.remove, 
        apostrophe.remove = apostrophe.remove, char.keep = char.keep, 
        lower.case = lower.case))))
