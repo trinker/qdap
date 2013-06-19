@@ -53,8 +53,8 @@ beg2char(x3, "^", 2)
 }
 }
 \author{
-  Josh O'Brien, Justin (\url{stackoverflow.com}) and Tyler
-  Rinker <tyler.rinker@gmail.com>.
+  Josh O'Brien, Justin Haynes and Tyler Rinker
+  <tyler.rinker@gmail.com>.
 }
 \references{
   \url{http://stackoverflow.com/q/15909626/1000343}
