@@ -9,7 +9,7 @@
 #' by a unique digit) as the assignment object.
 #' @param col.names Supplies a vector of column names to the transcript columns.
 #' @param file A connection, or a character string naming the file to print to.
-#' @param copy2clip logical.  If TRUE attempts to copy the output to the 
+#' @param copy2clip logical.  If \code{TRUE} attempts to copy the output to the 
 #' clipboard.
 #' @details Generally, the researcher will want to read in and parse every 
 #' transcript document separately.  The task of writing the script for multiple 

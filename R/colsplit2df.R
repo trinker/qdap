@@ -8,7 +8,7 @@
 #' @param new.names A character vector of new names to assign to the columns.  
 #' Default attempts to extract the original names before the paste.
 #' @param sep The character that used in \code{paste2} to paste the columns.
-#' @param keep.orig logical.  If TRUE the original pasted column will be 
+#' @param keep.orig logical.  If \code{TRUE} the original pasted column will be 
 #' retained as well.
 #' @return \code{colsplit2df} - returns a dataframe with the \code{paste2} 
 #' column split into new columns.

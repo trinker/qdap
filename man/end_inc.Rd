@@ -11,13 +11,13 @@
 
   \item{text.var}{A character string of the text variable.}
 
-  \item{warning.report}{logical.  If TRUE prints a warning
-  of regarding removal of incomplete sentences.}
+  \item{warning.report}{logical.  If \code{TRUE} prints a
+  warning of regarding removal of incomplete sentences.}
 
-  \item{which.mode}{logical.  If TRUE outputs two logical
-  vectors: NOT (logical test of not being an incomplete
-  sentence) and INC (logical test of being an incomplete
-  sentence)}
+  \item{which.mode}{logical.  If \code{TRUE} outputs two
+  logical vectors: `NOT` (logical test of not being an
+  incomplete sentence) and `INC` (logical test of being an
+  incomplete sentence)}
 }
 \value{
   Generates a dataframe with incomplete sentences removed.

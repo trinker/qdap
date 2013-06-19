@@ -28,13 +28,13 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one output for all text.  Also takes a single
-  grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one output for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
-  \item{rm.incomplete}{logical.  If TRUE removes incomplete
-  sentences from the analysis.}
+  \item{rm.incomplete}{logical.  If \code{TRUE} removes
+  incomplete sentences from the analysis.}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[qdap]{end_inc}}.}

@@ -9,8 +9,8 @@
 #' length equal to the number of code columns.
 #' @param text.var The name of the text variable.
 #' @param code.vars Optional vector of codes.
-#' @param transform logical.  If TRUE the words are located across the top of 
-#' dataframe.
+#' @param transform logical.  If \code{TRUE} the words are located across the 
+#' top of dataframe.
 #' @return Generates a dummy coded dataframe.
 #' @details After ranging coding transcripts via (\code{\link{cm_df.temp}}) or 
 #' the blank code matrix via (\code{\link{cm_df.transcript}}),\code{cm_df.fill} 

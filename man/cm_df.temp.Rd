@@ -13,16 +13,16 @@
 
   \item{codes}{Optional list of codes.}
 
-  \item{csv}{logical.  If TRUE creates a csv in the working
-  directory.}
+  \item{csv}{logical.  If \code{TRUE} creates a csv in the
+  working directory.}
 
-  \item{file.name}{The name of the csv file.  If NULL
-  defaults to the dataframe name.}
+  \item{file.name}{The name of the csv file.  If
+  \code{NULL} defaults to the dataframe name.}
 
-  \item{transpose}{logical.  If TRUE transposes the
+  \item{transpose}{logical.  If \code{TRUE} transposes the
   dataframe so that the text is across the top.}
 
-  \item{strip}{logical.  If TRUE all punctuation is
+  \item{strip}{logical.  If \code{TRUE} all punctuation is
   removed.}
 
   \item{\ldots}{Other arguments passed to strip.}

@@ -7,9 +7,11 @@
 #' column names to combine
 #' @param rm.var Name of the repeated measures column.  Default is "time".
 #' @param overlap logical, integer or character of binary operator + integer.  
-#' If TRUE finds the overlap.  If FALSE finds anywhere any of the codes occur.  
-#' If integer finds that exact combination of overlaps.  If character must be a 
-#' logical vector c(>, <, =<, =>, ==, !=) followed by  an integer.
+#' If \code{TRUE} finds the overlap.  If \code{FALSE} finds anywhere any of the 
+#' codes occur.  If integer finds that exact combination of overlaps.  If 
+#' character must be a logical vector 
+#' c(\code{>}, \code{<}, \code{=<}, \code{=>}, \code{==}, \code{!=}) followed by 
+#' an integer and wrapped with quotes.
 #' @return Returns a dataframe with co-occurrences of provided code columns.
 #' @seealso \code{\link[qdap]{cm_long2dummy}}
 #' @keywords co-occurrence

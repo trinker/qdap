@@ -22,8 +22,8 @@
   \item{sep}{The character that used in \code{paste2} to
   paste the columns.}
 
-  \item{keep.orig}{logical.  If TRUE the original pasted
-  column will be retained as well.}
+  \item{keep.orig}{logical.  If \code{TRUE} the original
+  pasted column will be retained as well.}
 
   \item{qdap.list}{A qdap list object that contains
   dataframes with a leading \code{\link[qdap]{paste2}}

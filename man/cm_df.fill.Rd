@@ -19,8 +19,8 @@
 
   \item{code.vars}{Optional vector of codes.}
 
-  \item{transform}{logical.  If TRUE the words are located
-  across the top of dataframe.}
+  \item{transform}{logical.  If \code{TRUE} the words are
+  located across the top of dataframe.}
 }
 \value{
   Generates a dummy coded dataframe.

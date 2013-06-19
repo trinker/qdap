@@ -7,10 +7,10 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one output for all text.  Also takes a single
-  grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 }
 \value{
   Returns a dataframe of various diversity related indices

@@ -1,4 +1,4 @@
-#' Replace Blanks in Data Frame
+#' Replace Blanks in a dataframe
 #' 
 #' Replaces blank (empty) cells in a dataframe.  Generally, for internal use.
 #' 

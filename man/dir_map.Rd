@@ -20,8 +20,8 @@
   \item{file}{A connection, or a character string naming
   the file to print to.}
 
-  \item{copy2clip}{logical.  If TRUE attempts to copy the
-  output to the clipboard.}
+  \item{copy2clip}{logical.  If \code{TRUE} attempts to
+  copy the output to the clipboard.}
 }
 \value{
   Prints a read in script text to the console, optionally

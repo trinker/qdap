@@ -16,11 +16,12 @@
   Default is "time".}
 
   \item{overlap}{logical, integer or character of binary
-  operator + integer. If TRUE finds the overlap.  If FALSE
-  finds anywhere any of the codes occur. If integer finds
-  that exact combination of overlaps.  If character must be
-  a logical vector c(>, <, =<, =>, ==, !=) followed by an
-  integer.}
+  operator + integer. If \code{TRUE} finds the overlap.  If
+  \code{FALSE} finds anywhere any of the codes occur.  If
+  integer finds that exact combination of overlaps.  If
+  character must be a logical vector c(\code{>}, \code{<},
+  \code{=<}, \code{=>}, \code{==}, \code{!=}) followed by
+  an integer and wrapped with quotes.}
 }
 \value{
   Returns a dataframe with co-occurrences of provided code

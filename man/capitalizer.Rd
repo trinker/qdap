@@ -11,11 +11,11 @@
 
   \item{caps.list}{A list of words to capitalize.}
 
-  \item{I.list}{logical.  If TRUE capitalizes I words and
-  contractions.}
+  \item{I.list}{logical.  If \code{TRUE} capitalizes I
+  words and contractions.}
 
   \item{apostrophe.remove}{logical, asking if apostrophes
-  have been removed.  If TRUE will try to insert
+  have been removed. If \code{TRUE} will try to insert
   apostrophe's back into words appropriately.}
 }
 \value{

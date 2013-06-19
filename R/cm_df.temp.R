@@ -7,12 +7,12 @@
 #' @param dataframe A dataframe containing a text variable.
 #' @param text.var The name of the text variable.
 #' @param codes Optional list of codes.
-#' @param csv logical.  If TRUE creates a csv in the working directory.
-#' @param file.name The name of the csv file.  If NULL defaults to the dataframe 
-#' name.
-#' @param transpose logical.  If TRUE transposes the dataframe so that the text 
-#' is across the top. 
-#' @param strip logical.  If TRUE all punctuation is removed.
+#' @param csv logical.  If \code{TRUE} creates a csv in the working directory.
+#' @param file.name The name of the csv file.  If \code{NULL} defaults to the 
+#' dataframe name.
+#' @param transpose logical.  If \code{TRUE} transposes the dataframe so that 
+#' the text is across the top. 
+#' @param strip logical.  If \code{TRUE} all punctuation is removed.
 #' @param \ldots Other arguments passed to strip.
 #' @return Generates a dataframe, and optional csv file, of individual words 
 #' while maintaining demographic information.  If a vector of codes is provided 
@@ -25,7 +25,7 @@
 #' \code{\link{cm_df.transcript}},
 #' \code{\link{cm_df.fill}}
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: 
-#' Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
+#' Qualitative data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding
 #' @export
 #' @examples

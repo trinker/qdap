@@ -8,9 +8,9 @@
 #' \code{"angle"} and \code{"all"}.  These strings correspond 
 #' to: \{, [, (, < or all four types.
 #' @param missing Value to assign to empty cells.
-#' @param names logical.  If TRUE the sentences are given as the names of the 
-#' counts.
-#' @param fix.space logical.  If TRUE extra spaces left behind from an 
+#' @param names logical.  If \code{TRUE} the sentences are given as the names of 
+#' the counts.
+#' @param fix.space logical.  If \code{TRUE} extra spaces left behind from an 
 #' extraction will be eliminated.
 #' @param scrub logical.  If TRUE \code{\link[qdap]{scrubber}} will clean the 
 #' text.

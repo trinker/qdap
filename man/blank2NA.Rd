@@ -1,6 +1,6 @@
 \name{blank2NA}
 \alias{blank2NA}
-\title{Replace Blanks in Data Frame}
+\title{Replace Blanks in a dataframe}
 \usage{
   blank2NA(dataframe, missing = NA)
 }

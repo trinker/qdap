@@ -16,15 +16,16 @@
   dataframe by (if you have data that is by various times
   this must be supplied).}
 
-  \item{parallel}{logical.  If TRUE runs the cm_distance on
-  multiple cores. This is effective with larger data sets
-  but may actually be slower with smaller data sets.}
+  \item{parallel}{logical.  If \code{TRUE} runs the
+  \code{cm_distance} on multiple cores. This is effective
+  with larger data sets but may actually be slower with
+  smaller data sets.}
 
   \item{code.var}{The name of the code variable column.
   Defaults to "codes" as out putted by x2long family.}
 
-  \item{causal}{logical.  If TRUE measures the distance
-  between x and y given that x must proceed y.}
+  \item{causal}{logical.  If \code{TRUE} measures the
+  distance between x and y given that x must proceed y.}
 
   \item{start.var}{The name of the start variable column.
   Defaults to "start" as out putted by x2long family.}

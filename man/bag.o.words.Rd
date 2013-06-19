@@ -13,7 +13,7 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{apostrophe.remove}{logical.  If TRUE removes
+  \item{apostrophe.remove}{logical.  If \code{TRUE} removes
   apostrophe's from the output.}
 
   \item{\ldots}{further arguments passed to strip

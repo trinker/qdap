@@ -8,7 +8,7 @@
   \item{cm.comb.obj}{An object from cm_combine.dummy}
 
   \item{rm.var}{Name of the repeated measures column.
-  Default is \code{"time".}}
+  Default is \code{"time"}.}
 }
 \value{
   Returns a dataframe with co-occurrences of provided code

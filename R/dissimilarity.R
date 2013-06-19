@@ -4,14 +4,15 @@
 #' variables.
 #' 
 #' @param text.var A text variable or word frequency matrix object.
-#' @param grouping.var The grouping variables.  Default NULL generates one word 
-#' list for all text.  Also takes a single grouping variable or a list of 1 or 
-#' more grouping variables.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
 #' @param method Distance methods (see \code{\link[stats]{dist}} function).  
-#' If \code{"prop"} (the default; the result is 1 - \code{"binary"}.
-#' @param diag logical.  If TRUE returns the diagonals of the matrix.  If 
+#' If \code{"prop"} (the default) the result is 1 - \code{"binary"}.
+#' @param diag logical.  If \code{TRUE} returns the diagonals of the matrix.  If 
 #' \code{method = "prop"} diagonals will not be returned.
-#' @param upper logical.  If TRUE returns the upper triangle of the matrix.
+#' @param upper logical.  If \code{TRUE} returns the upper triangle of the 
+#' matrix.
 #' @param p The power of the Minkowski distance
 #' @return Returns a matrix of dissimilarity values (the agreement between text).
 #' @seealso \code{\link[stats]{dist}}

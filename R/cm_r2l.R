@@ -9,7 +9,7 @@
 # \code{cm_range.temp}.
 # @param v.name sn optional name for the column created for the list.var 
 # argument.
-# @param list.var logical.  If TRUE creates a column for the data frame created 
+# @param list.var logical.  If \code{TRUE} creates a column for the data frame created 
 # by each range.list passed to \code{cm_r2l}.
 # @return Generates a data frame of start and end times for each code.
 # @seealso 

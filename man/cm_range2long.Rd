@@ -12,12 +12,12 @@
   \item{v.name}{sn optional name for the column created for
   the list.var argument.}
 
-  \item{list.var}{logical.  If TRUE creates a column for
-  the data frame created by each time.list passed to
+  \item{list.var}{logical.  If \code{TRUE} creates a column
+  for the data frame created by each time.list passed to
   \code{cm_t2l}.}
 
-  \item{debug}{logical. If TRUE debugging mode is on.
-  \code{\link[qdap]{cm_time2long}} will return possible
+  \item{debug}{logical. If \code{TRUE} debugging mode is
+  on. \code{\link[qdap]{cm_time2long}} will return possible
   errors in time span inputs.}
 }
 \value{

@@ -4,20 +4,21 @@
 #' (in list format) into a data frame of start and end durations in long format.
 #' 
 #' @param df.temp.obj A character vector of names of object(s) created by 
-#' cm_df.temp, a list of cm_df.temp created objects or a data frame created by 
-#' cm_df.temp.
+#' \code{\link{cm_df.temp}}, a list of \code{\link{cm_df.temp}} created objects 
+#' or a data frame created by \code{\link{cm_df.temp}}.
 #' @param v.name An optional name for the column created for the list.var 
-#' argument
-#' @param list.var logical.  If TRUE creates a column for the data frame created 
-#' by each time.list.
-#' @param code.vars A character vector of code variables.  If NULL uses all 
-#' variables from the first column after the column named word.num.
-#' @param no.code The value to assign to no code; default is NA
-#' @param add.start.end logical.  If TRUE adds a column for start and end times
-#' @param repeat.vars A character vector of repeated/stacked variables.  If NULL 
-#' uses all non code.vars variables.
-#' @param rev.code logical.  If TRUE reverses the order of code.vars and no.code 
-#' variables.
+#' argument.
+#' @param list.var logical.  If \code{TRUE} creates a column for the data frame 
+#' created by each time.list.
+#' @param code.vars A character vector of code variables.  If \code{NULL} uses 
+#' all variables from the first column after the column named word.num.
+#' @param no.code The value to assign to no code; default is \code{NA}.
+#' @param add.start.end logical.  If \code{TRUE} adds a column for start and end 
+#' times.
+#' @param repeat.vars A character vector of repeated/stacked variables.  If 
+#' \code{NULL} uses all non code.vars variables.
+#' @param rev.code logical.  If \code{TRUE} reverses the order of 
+#' \code{code.vars} and \code{no.code} variables.
 #' @return Generates a data frame of start and end times for each code.
 #' @seealso 
 #' \code{\link{cm_time2long}},

@@ -4,9 +4,9 @@
 #' \href{http://trinker.github.com/qdap/}{qdap after coding.}
 #' 
 #' @param text.var The text variable.
-#' @param grouping.var The grouping variables.  Default NULL generates one word 
-#' list for all text.  Also takes a single grouping variable or a list of 1 or 
-#' more grouping variables.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
 #' @param file A connection, or a character string naming the file to print to 
 #' (e.g., .doc, .txt).
 #' @param indent Number of spaces to indent.

@@ -3,7 +3,8 @@
 #' \code{bag.o.words} - Reduces a text column to a bag of words.
 #' 
 #' @param text.var The text variable.
-#' @param apostrophe.remove logical.  If TRUE removes apostrophe's from the output.
+#' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophe's from 
+#' the output.
 #' @param \ldots further arguments passed to strip function.
 #' @return Returns a vector of striped words.
 #' @keywords bag-of-words
