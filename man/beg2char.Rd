@@ -15,8 +15,8 @@
   \item{noc}{Number of times the character appears before
   the grab.}
 
-  \item{include}{logical.  If TRUE includes the character
-  in the grab.}
+  \item{include}{logical.  If \code{TRUE} includes the
+  character in the grab.}
 }
 \value{
   returns a vector of text with char on/forward removed.
@@ -51,5 +51,12 @@ x3 <- gsub("_", "\\\\^", x)
 char2end(x3, "^", 2)
 beg2char(x3, "^", 2)
 }
+}
+\author{
+  Josh O'Brien, Justin (\url{stackoverflow.com}) and Tyler
+  Rinker <tyler.rinker@gmail.com>.
+}
+\references{
+  \url{http://stackoverflow.com/q/15909626/1000343}
 }
 
