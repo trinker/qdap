@@ -22,6 +22,7 @@ Imports:
     wordcloud,
     venneuler,
     openNLPmodels.en,
+    Snowball,
     SnowballC,
     gplots,
     gridExtra,
