@@ -7,7 +7,7 @@ BUG FIXES
   CONTACT_INFO
 
 * `strip` would not allow the characters "/" and "-" to be passed to 
-  `char.keep`.  This has been fixed. (user1738753 of stackoverflow.com)
+  `char.keep`.  This has been fixed. (Jens Engelmann)
 
 * `beg2end` would only grab first character of a string after n -1 occurrences of 
   the character.  For example: 
