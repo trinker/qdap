@@ -23,8 +23,8 @@
 #' @param sig.dig.line.freq An internal rounding factor for minor and major line 
 #' freq.  Generally, default value of 1 suffices for larger range of x scale may 
 #' need to be set to -2.
-#' @param hms.scale logical.  If TRUE converts scale to h:m:s format.  Default 
-#' \code{NULL} attempts to detect if object is a cm_time2long object
+#' @param hms.scale logical.  If \code{TRUE} converts scale to h:m:s format.  
+#' Default \code{NULL} attempts to detect if object is a cm_time2long object
 #' @param scale Should scales be fixed (\code{"fixed"}, the default), free 
 #' (\code{"free"}), or free in one dimension (\code{"free_x"}, \code{"free_y"})
 #' @param space If \code{"fixed"}, the default, all panels have the same size. 

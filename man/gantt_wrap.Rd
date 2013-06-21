@@ -55,9 +55,9 @@
   suffices for larger range of x scale may need to be set
   to -2.}
 
-  \item{hms.scale}{logical.  If TRUE converts scale to
-  h:m:s format.  Default \code{NULL} attempts to detect if
-  object is a cm_time2long object}
+  \item{hms.scale}{logical.  If \code{TRUE} converts scale
+  to h:m:s format. Default \code{NULL} attempts to detect
+  if object is a cm_time2long object}
 
   \item{scale}{Should scales be fixed (\code{"fixed"}, the
   default), free (\code{"free"}), or free in one dimension
