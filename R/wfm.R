@@ -3,23 +3,26 @@
 #' \code{wfm} - Generate a word frequency matrix by grouping variable(s).
 #' 
 #' @param text.var The text variable
-#' @param grouping.var The grouping variables.  Default NULL generates one word 
-#' list for all text.  Also takes a single grouping variable or a list of 1 or 
-#' more grouping variables.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
 #' @param wfdf A word frequency data frame given instead of raw text.var and 
 #' optional grouping.var. Basically converts a word frequency dataframe (wfdf) 
-#' to a word frequency matrix (\code{\link[qdap]{wfm}}).  Default is NULL.
+#' to a word frequency matrix (\code{\link[qdap]{wfm}}).  Default is 
+#' \code{NULL}.
 #' @param output Output type (either \code{"proportion"} or \code{"percent"}).
 #' @param stopwords A vector of stop words to remove.
 #' @param char2space A vector of characters to be turned into spaces.  If 
-#' \code{char.keep} is NULL, \code{char2space} will activate this argument.
+#' \code{char.keep} is \code{NULL}, \code{char2space} will activate this 
+#' argument.
 #' @param \ldots Other arguments supplied to \code{\link[qdap]{strip}}.
 #' @param digits An integer indicating the number of decimal places (round) or 
 #' significant digits (signif) to be used. Negative values are allowed.
-#' @param margins logical. If TRUE provides grouping.var and word variable totals.
+#' @param margins logical. If \code{TRUE} provides grouping.var and word 
+#' variable totals.
 #' @param word.lists A list of character vectors of words to pass to 
 #' \code{wf.combine}
-#' @param matrix logical.  If TRUE returns the output as a 
+#' @param matrix logical.  If \code{TRUE} returns the output as a 
 #' \code{\link[qdap]{wfm}} rather than a \code{\link[qdap]{wfdf}} object.
 #' @return \code{wfm} - returns a word frequency of the class matrix.
 #' @rdname Word_Frequency_Matrix
@@ -156,8 +159,8 @@ function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
 #' 
 #' @rdname Word_Frequency_Matrix
 #' @export
-#' @return \code{wfdf} - returns a word frequency of the class data.frame with a words 
-#' column and optional margin sums.
+#' @return \code{wfdf} - returns a word frequency of the class data.frame with 
+#' a words column and optional margin sums.
 wfdf <-
 function(text.var, grouping.var = NULL, stopwords = NULL,
     margins = FALSE, output = "raw", digits = 2, char2space = "~~", ...){

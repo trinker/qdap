@@ -9,7 +9,7 @@
 #' @param text.var The text variable.
 #' @param leadspace logical.  If \code{TRUE} inserts a leading space in the 
 #' replacements.
-#' @param trailspace logical.  If \code{TRUE}TRUE inserts a trailing space in the 
+#' @param trailspace logical.  If \code{TRUE} inserts a trailing space in the 
 #' replacements.
 #' @param fixed logical. If \code{TRUE}, pattern is a string to be matched as is. 
 #' Overrides all conflicting arguments.

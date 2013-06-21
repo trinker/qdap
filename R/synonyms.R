@@ -3,12 +3,13 @@
 #' Search for synonyms that match term(s).
 #' 
 #' @param terms The terms to find synonyms for.  
-#' @param return.list logical.  If TRUE returns the output for multiple synonyms 
-#' as a list by search term rather than a vector.
-#' @param multiwords logical.  IF TRUE retains vector elements that contain 
-#' phrases (defined as having one or more spaces) rather than a single word.
-#' @param report.null logical.  If TRUE reports the words that no match was 
-#' found at the head of the output.
+#' @param return.list logical.  If \code{TRUE} returns the output for multiple 
+#' synonyms as a list by search term rather than a vector.
+#' @param multiwords logical.  IF \code{TRUE} retains vector elements that 
+#' contain phrases (defined as having one or more spaces) rather than a single 
+#' word.
+#' @param report.null logical.  If \code{TRUE} reports the words that no match 
+#' was found at the head of the output.
 #' @return Returns a list of vectors or vector of possible words that match 
 #' term(s).
 #' @rdname synonyms

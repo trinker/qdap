@@ -3,11 +3,11 @@
 #' Standardize within a subgroup and then within a group.
 #' 
 #' @param numeric.var A numeric variable.
-#' @param grouping.var The grouping variables.  Default NULL generates one 
-#' output for all text.  Also takes a single grouping variable or a list of 1 
-#' or more grouping variables.  
-#' @param original_order logical.  IF TRUE orders by the original order.  If 
-#' FALSE orders by group.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
+#' @param original_order logical.  IF \code{TRUE} orders by the original order.  
+#' If \code{FALSE} orders by group.
 #' @param digits Integer; number of decimal places to round.
 #' @return Returns a list of two:
 #' \item{SCALED_OBSERVATIONS}{A dataframe of scaled observations at level one 

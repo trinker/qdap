@@ -10,14 +10,14 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{scan.mode}{logical.  If TRUE only scans and reports
-  incomplete sentences.}
+  \item{scan.mode}{logical.  If \code{TRUE} only scans and
+  reports incomplete sentences.}
 }
 \value{
   Returns a text variable (character sting) with incomplete
   sentence marks (.., ..., .?, ..?, en \& em dash etc.
-  replaced with "|".  If scan mode is TRUE returns a data
-  frame with incomplete sentence location.
+  replaced with "|".  If scan mode is \code{TRUE} returns a
+  data frame with incomplete sentence location.
 }
 \description{
   Replaces incomplete sentence end marks (.., ..., .?, ..?,

@@ -4,9 +4,9 @@
 #' text analysis packages.
 #'
 #' @param text.var The text variable or a \code{wfm} object.
-#' @param grouping.var The grouping variables.  Default NULL generates one word 
-#' list for all text.  Also takes a single grouping variable or a list of 1 or 
-#' more grouping variables.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
 #' @param \ldots Other arguments passed to \code{wfm}.
 #' @details Similar to the \code{tm} package's \code{\link[tm]{TermDocumentMatrix}} 
 #' though not identical.

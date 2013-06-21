@@ -27,29 +27,31 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one word list for all text.  Also takes a
-  single grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
   \item{match.list}{A list of named character vectors.}
 
-  \item{short.term}{logical.  If TRUE column names are
-  trimmed versions of the match list, otherwise the terms
-  are wrapped with 'term(phrase)'}
+  \item{short.term}{logical.  If \code{TRUE} column names
+  are trimmed versions of the match list, otherwise the
+  terms are wrapped with 'term(phrase)'}
 
-  \item{ignore.case}{logical.  If TRUE case is ignored.}
+  \item{ignore.case}{logical.  If \code{TRUE} case is
+  ignored.}
 
-  \item{elim.old}{logical.  If TRUE eliminates the columns
-  that are combined together by the named match.list.}
+  \item{elim.old}{logical.  If \code{TRUE} eliminates the
+  columns that are combined together by the named
+  match.list.}
 
-  \item{percent}{logical.  If TRUE output given as percent.
-  If FALSE the output is proportion.}
+  \item{percent}{logical.  If \code{TRUE} output given as
+  percent.  If \code{FALSE} the output is proportion.}
 
   \item{digits}{Integer; number of decimal places to round
   when printing.}
 
-  \item{apostrophe.remove}{logical.  If TRUE removes
+  \item{apostrophe.remove}{logical.  If \code{TRUE} removes
   apostrophes from the text before examining.}
 
   \item{char.keep}{A character vector of symbol character
@@ -59,14 +61,16 @@
   characters to keep based on the elements in
   \code{match.list}.}
 
-  \item{digit.remove}{logical.  If TRUE strips digits from
-  the text before counting. \code{\link[qdap]{termco}}
-  attempts to auto detect if digits should be retained
-  based on the elements in \code{match.list}.}
+  \item{digit.remove}{logical.  If \code{TRUE} strips
+  digits from the text before counting.
+  \code{\link[qdap]{termco}} attempts to auto detect if
+  digits should be retained based on the elements in
+  \code{match.list}.}
 
   \item{zero.replace}{Value to replace 0 values with.}
 
-  \item{\ldots}{Other argument supplied to strip.}
+  \item{\ldots}{Other argument supplied to
+  \code{\link[qdap]{strip}}.}
 
   \item{match.string}{A vector of terms to search for.
   When using inside of \code{term.match} the term(s) must

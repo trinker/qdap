@@ -4,17 +4,19 @@
 #' all possible "a" vs. "b" combinations or "a" vs. all others.
 #' 
 #' @param text.var The text variable.
-#' @param grouping.var The grouping variables.  Takes a single grouping variable 
-#' or a list of 1 or more grouping variables.
-#' @param vs.all logical. If TRUE looks at each grouping variable against all 
-#' others ("a" vs. all comparison).  If FALSE looks at each "a" vs. "b", 
-#' comparison (e.g., for groups "a", "b", and "c"; "a" vs. "b", "a" vs. "c" and
-#' "b" vs. "c" will be considered).
-#' @param vs.all.cut If vs.all.cut = TRUE this argument controls the number of 
-#' other groups that may share a word (default is 1).
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
+#' @param vs.all logical. If \code{TRUE} looks at each grouping variable against 
+#' all others ("a" vs. all comparison).  If \code{FALSE} looks at each "a" vs. 
+#' "b", comparison (e.g., for groups "a", "b", and "c"; "a" vs. "b", "a" vs. "c" 
+#' and "b" vs. "c" will be considered).
+#' @param vs.all.cut Controls the number of other groups that may share a word 
+#' (default is 1).
 #' @param stopwords A vector of stop words to remove.
-#' @param alphabetical logical. If TRUE orders the word lists alphabetized by 
-#' word.  If FALSE order first by frequency and then by word.
+#' @param alphabetical logical. If \code{TRUE} orders the word lists 
+#' alphabetized by word.  If \code{FALSE} order first by frequency and then by 
+#' word.
 #' @param digits the number of digits to be displayed in the proportion column 
 #' (default is 3).
 #' @return An list of word data frames comparing grouping variables word use 

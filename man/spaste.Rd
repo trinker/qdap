@@ -8,11 +8,11 @@
   \item{terms}{A character vector of terms to insert
   trailing and/or leading spaces.}
 
-  \item{leading}{logical.  If TRUE inserts a leading space
-  in the terms.}
-
-  \item{trailing}{logical.  If TRUE inserts a trailing
+  \item{leading}{logical.  If \code{TRUE} inserts a leading
   space in the terms.}
+
+  \item{trailing}{logical.  If \code{TRUE} inserts a
+  trailing space in the terms.}
 }
 \value{
   Returns a character vector with trailing and/or leading

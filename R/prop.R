@@ -5,12 +5,12 @@
 #' 
 #' @param mat A numeric matrix or dataframe.
 #' @param digits Integer; number of decimal places to round.
-#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proportion.
-#' @param by.column logical.  If TRUE applies to the column.  If FALSE 
-#' applies by row.
-#' @param round logical.  If TRUE rounds the returned values (controlled by 
-#' digits).
+#' @param percent logical.  If \code{TRUE} output given as percent.  If 
+#' \code{FALSE} the output is proportion.
+#' @param by.column logical.  If \code{TRUE} applies to the column.  If 
+#' \code{FALSE} applies by row.
+#' @param round logical.  If \code{TRUE} rounds the returned values (controlled 
+#' by digits).
 #' @return Returns a matrix with proportionally scaled values.
 #' @keywords proportion, percent, percentage
 #' @export

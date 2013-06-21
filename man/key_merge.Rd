@@ -12,11 +12,11 @@
   \item{key.df}{The demographic dataframe.}
 
   \item{common.column}{The column(s) shared by
-  \code{transcript.df} and \code{key.df}.  If NULL function
-  defaults to use any columns with the same name.}
+  \code{transcript.df} and \code{key.df}.  If \code{NULL}
+  function defaults to use any columns with the same name.}
 
-  \item{defualt.arrange}{logical.  If TRUE will arrange the
-  columns with text to the far right.}
+  \item{defualt.arrange}{logical.  If \code{TRUE} will
+  arrange the columns with text to the far right.}
 }
 \value{
   Outputs a merged transcript dataframe with demographic

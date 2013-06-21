@@ -17,10 +17,10 @@
 \arguments{
   \item{text.var}{The text variable}
 
-  \item{parallel}{logical.  If TRUE attempts to run the
-  function on multiple cores.  Note that this may not mean
-  a speed boost if you have one core or if the data set is
-  smaller as the cluster takes time to create.}
+  \item{parallel}{logical.  If \code{TRUE} attempts to run
+  the function on multiple cores.  Note that this may not
+  mean a speed boost if you have one core or if the data
+  set is smaller as the cluster takes time to create.}
 
   \item{text}{A single character vector of text.}
 

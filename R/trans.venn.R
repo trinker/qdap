@@ -3,33 +3,34 @@
 #' Produce a Venn diagram by grouping variable.
 #' 
 #' @param text.var The text variable.         
-#' @param grouping.var The grouping variables.  Default NULL generates one 
-#' output for all text.  Also takes a single grouping variable or a list of 1 
-#' or more grouping variables.  
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables. 
 #' @param stopwords Words to exclude from the analysis.
-#' @param rm.duplicates logical.  IF TRUE removes the duplicated words from the 
-#' analysis (only single usage is considered).
-#' @param title logical.  IF TRUE adds a title corresponding to the 
+#' @param rm.duplicates logical.  If \code{TRUE} removes the duplicated words 
+#' from the analysis (only single usage is considered).
+#' @param title logical.  IF \code{TRUE} adds a title corresponding to the 
 #' \code{grouping.var}.
 #' @param title.font The font family of the cloud title. 
 #' @param title.color A character vector of length one corresponding to the 
 #' color of the title.
-#' @param title.cex Character expansion factor for the title. NULL and NA are 
-#' equivalent to 1.0
+#' @param title.cex Character expansion factor for the title. \code{NULL} and 
+#' \code{NA} are equivalent to 1.0
 #' @param title.name A title for the plot.
-#' @param legend logical.  If TRUE uses the names from the \code{target.words}
+#' @param legend logical.  If \code{TRUE} uses the names from the 
+#' \code{target.words}
 #' list corresponding to cloud.colors. 
-#' @param legend.cex Character expansion factor for the legend. NULL and NA are 
-#' equivalent to 1.0. 
+#' @param legend.cex Character expansion factor for the legend. \code{NULL} and 
+#' \code{NA} are equivalent to 1.0. 
 #' @param legend.location The x and y co-ordinates to be used to position the 
 #' legend.  The location may also be specified by setting x to a 
 #' single keyword from the list \code{"bottomright"}, \code{"bottom"}, 
 #' \code{"bottomleft"}, \code{"left"}, \code{"topleft"}, \code{"top"}, 
-#' \code{"topright"}, \code{"right"} and \code{"center"}. This places the legend on 
-#' the inside of the plot frame at the given location. 
+#' \code{"topright"}, \code{"right"} and \code{"center"}. This places the legend 
+#' on the inside of the plot frame at the given location. 
 #' @param legend.text.col The color used for the legend text.
-#' @param legend.horiz logical; if TRUE, set the legend horizontally rather than 
-#' vertically.
+#' @param legend.horiz logical; if \code{TRUE}, set the legend horizontally 
+#' rather than vertically.
 #' @param \dots Other arguments passed to plot.
 #' @return Returns a Venn plot by grouping variable(s).
 #' @section Warning: The algorithm used to overlap the Venn circles becomes 

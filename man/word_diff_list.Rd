@@ -9,25 +9,25 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{grouping.var}{The grouping variables.  Takes a
-  single grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
-  \item{vs.all}{logical. If TRUE looks at each grouping
-  variable against all others ("a" vs. all comparison).  If
-  FALSE looks at each "a" vs. "b", comparison (e.g., for
-  groups "a", "b", and "c"; "a" vs. "b", "a" vs. "c" and
-  "b" vs. "c" will be considered).}
+  \item{vs.all}{logical. If \code{TRUE} looks at each
+  grouping variable against all others ("a" vs. all
+  comparison).  If \code{FALSE} looks at each "a" vs. "b",
+  comparison (e.g., for groups "a", "b", and "c"; "a" vs.
+  "b", "a" vs. "c" and "b" vs. "c" will be considered).}
 
-  \item{vs.all.cut}{If vs.all.cut = TRUE this argument
-  controls the number of other groups that may share a word
-  (default is 1).}
+  \item{vs.all.cut}{Controls the number of other groups
+  that may share a word (default is 1).}
 
   \item{stopwords}{A vector of stop words to remove.}
 
-  \item{alphabetical}{logical. If TRUE orders the word
-  lists alphabetized by word.  If FALSE order first by
-  frequency and then by word.}
+  \item{alphabetical}{logical. If \code{TRUE} orders the
+  word lists alphabetized by word.  If \code{FALSE} order
+  first by frequency and then by word.}
 
   \item{digits}{the number of digits to be displayed in the
   proportion column (default is 3).}

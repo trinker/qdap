@@ -8,16 +8,17 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{num2word}{logical If TRUE replaces a numbers with
-  text representations.}
+  \item{num2word}{logical If \code{TRUE} replaces a numbers
+  with text representations.}
 
-  \item{fix.comma}{logical If TRUE removes any spaces
-  before a comma.}
+  \item{fix.comma}{logical If \code{TRUE} removes any
+  spaces before a comma.}
 
-  \item{fix.space}{logical.  If TRUE extra spaces before
-  endmarks are removed.}
+  \item{fix.space}{logical.  If \code{TRUE} extra spaces
+  before endmarks are removed.}
 
-  \item{rm.quote}{logical If TRUE removes any \code{\"}.}
+  \item{rm.quote}{logical If \code{TRUE} removes any
+  \code{\"}.}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[qdap]{replace_number}}.}

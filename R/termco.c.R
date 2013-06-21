@@ -8,12 +8,13 @@
 #' @param combined.columns The names/indexes of the columns to be combined.
 #' @param new.name A character vector of length one to name the new combined 
 #' column.
-#' @param short.term logical.  If TRUE column names are trimmed versions of the 
-#' match list, otherwise the terms are wrapped with 'term(phrase)'
+#' @param short.term logical.  If \code{TRUE} column names are trimmed versions 
+#' of the match list, otherwise the terms are wrapped with 'term(phrase)'
 #' @param zero.replace Value to replace zeros with.
-#' @param elim.old logical.  If TRUE eliminates the columns that are combined 
-#' together by the named match.list.
-#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
+#' @param elim.old logical.  If \code{TRUE} eliminates the columns that are 
+#' combined together by the named match.list.
+#' @param percent logical.  If \code{TRUE} output given as percent.  If 
+#' \code{FALSE} the 
 #' output is proportion.
 #' @param digits Integer; number of decimal places to round when printing.   
 #' @return Returns a return a list, of class \code{"termco"}, of data frames and 

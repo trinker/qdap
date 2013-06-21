@@ -4,19 +4,21 @@
 #' 
 #' @rdname word.count
 #' @param text.var The text variable
-#' @param grouping.var The grouping variables.  Default NULL generates one
-#' output for all text.  Also takes a single grouping variable or a list of 1 or
-#' more grouping variables.
-#' @param byrow logical.  If TRUE counts by row, if FALSE counts all words.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
+#' @param byrow logical.  If \code{TRUE} counts by row, if \code{FALSE} counts 
+#' all words.
 #' @param missing Value to insert for missing values (empty cells).
-#' @param digit.remove logical.  If TRUE removes digits before counting words.
-#' @param names logical.  If TRUE the sentences are given as the names of the 
-#' counts.
-#' @param apostrophe.remove logical.  If TRUE apostrophes will be counted 
+#' @param digit.remove logical.  If \code{TRUE} removes digits before counting 
+#' words.
+#' @param names logical.  If \code{TRUE} the sentences are given as the names of 
+#' the counts.
+#' @param apostrophe.remove logical.  If \code{TRUE} apostrophes will be counted 
 #' in the character count.
-#' @param count.space logical.  If TRUE spaces are counted as characters.
-#' @param prop.by.row logical.  If TRUE applies proportional to the row.  If 
-#' FALSE applies by column.
+#' @param count.space logical.  If \code{TRUE} spaces are counted as characters.
+#' @param prop.by.row logical.  If \code{TRUE} applies proportional to the row.  
+#' If \code{FALSE} applies by column.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{prop}}.
 #' @return \code{word.count} - returns a word count by row or total.
 #' @note wc is a convenient short hand for word.count.
@@ -124,8 +126,8 @@ function(text.var, byrow = TRUE, missing = NA, apostrophe.remove = TRUE,
 #' \code{character.table} - Computes a table of character counts by grouping .
 #' variable(s).
 #' 
-#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proportion.
+#' @param percent logical.  If \code{TRUE} output given as percent.  If 
+#' \code{FALSE} the output is proportion.
 #' @param zero.replace Value to replace 0 values with.
 #' @param digits Integer; number of decimal places to round when printing.   
 #' @return \code{character.table} - returns a list:
@@ -204,11 +206,12 @@ character.table <- function(text.var, grouping.var, percent = TRUE,
 #' @param x The character.table object
 #' @param digits Integer values specifying the number of digits to be 
 #' printed.
-#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proportion.  If NULL uses the value from 
-#' \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
-#' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
-#' from \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
+#' @param percent logical.  If \code{TRUE} output given as percent.  If 
+#' \code{FALSE} the output is proportion.  If \code{NULL} uses the value from 
+#' \code{\link[qdap]{termco}}.  Only used if \code{label} is \code{TRUE}.
+#' @param zero.replace Value to replace 0 values with.  If \code{NULL} uses the 
+#' value from \code{\link[qdap]{termco}}.  Only used if \code{label} is 
+#' \code{TRUE}.
 #' @param \ldots ignored
 #' @method print character.table
 #' @S3method print character.table 
@@ -245,16 +248,17 @@ function(x, digits = 2, percent = NULL, zero.replace = NULL, ...) {
 #' Plots a character.table  object.
 #' 
 #' @param x The character.table  object
-#' @param label logical.  If TRUE the cells of the heat map plot will be labeled 
-#' with count and proportional values.
+#' @param label logical.  If \code{TRUE} the cells of the heat map plot will be 
+#' labeled with count and proportional values.
 #' @param lab.digits Integer values specifying the number of digits to be 
-#' printed if \code{label} is TRUE.
-#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proportion.  If NULL uses the value from 
-#' \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.
-#' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
-#' from \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.
-#' @param \ldots Other arguments passed to qheat
+#' printed if \code{label} is \code{TRUE}.
+#' @param percent logical.  If \code{TRUE} output given as percent.  If 
+#' \code{FALSE} the output is proportion.  If \code{NULL} uses the value from 
+#' \code{\link[qdap]{question_type}}.  Only used if \code{label} is \code{TRUE}.
+#' @param zero.replace Value to replace 0 values with.  If \code{NULL} uses the 
+#' value from \code{\link[qdap]{question_type}}.  Only used if \code{label} is 
+#' \code{TRUE}.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{qheat}}
 #' @method plot character.table 
 #' @S3method plot character.table 
 plot.character.table <- function(x, label = FALSE, lab.digits = 1, percent = NULL, 

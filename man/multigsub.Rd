@@ -24,7 +24,7 @@
   \item{leadspace}{logical.  If \code{TRUE} inserts a
   leading space in the replacements.}
 
-  \item{trailspace}{logical.  If \code{TRUE}TRUE inserts a
+  \item{trailspace}{logical.  If \code{TRUE} inserts a
   trailing space in the replacements.}
 
   \item{fixed}{logical. If \code{TRUE}, pattern is a string

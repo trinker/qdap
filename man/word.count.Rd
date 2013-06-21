@@ -25,37 +25,38 @@
 \arguments{
   \item{text.var}{The text variable}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one output for all text.  Also takes a single
-  grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
-  \item{byrow}{logical.  If TRUE counts by row, if FALSE
-  counts all words.}
+  \item{byrow}{logical.  If \code{TRUE} counts by row, if
+  \code{FALSE} counts all words.}
 
   \item{missing}{Value to insert for missing values (empty
   cells).}
 
-  \item{digit.remove}{logical.  If TRUE removes digits
-  before counting words.}
+  \item{digit.remove}{logical.  If \code{TRUE} removes
+  digits before counting words.}
 
-  \item{names}{logical.  If TRUE the sentences are given as
-  the names of the counts.}
+  \item{names}{logical.  If \code{TRUE} the sentences are
+  given as the names of the counts.}
 
-  \item{apostrophe.remove}{logical.  If TRUE apostrophes
-  will be counted in the character count.}
+  \item{apostrophe.remove}{logical.  If \code{TRUE}
+  apostrophes will be counted in the character count.}
 
-  \item{count.space}{logical.  If TRUE spaces are counted
-  as characters.}
+  \item{count.space}{logical.  If \code{TRUE} spaces are
+  counted as characters.}
 
-  \item{prop.by.row}{logical.  If TRUE applies proportional
-  to the row.  If FALSE applies by column.}
+  \item{prop.by.row}{logical.  If \code{TRUE} applies
+  proportional to the row. If \code{FALSE} applies by
+  column.}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[qdap]{prop}}.}
 
-  \item{percent}{logical.  If TRUE output given as percent.
-  If FALSE the output is proportion.}
+  \item{percent}{logical.  If \code{TRUE} output given as
+  percent.  If \code{FALSE} the output is proportion.}
 
   \item{zero.replace}{Value to replace 0 values with.}
 

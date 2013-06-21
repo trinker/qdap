@@ -13,23 +13,23 @@
 
   \item{text.var}{The text variable.}
 
-  \item{lock.incomplete}{logical.  If TRUE locks incomplete
-  sentences (sentences ending with "|") from being marked
-  as imperative.}
+  \item{lock.incomplete}{logical.  If \code{TRUE} locks
+  incomplete sentences (sentences ending with "|") from
+  being marked as imperative.}
 
   \item{additional.names}{Additional names that may be used
   in a command (people in the context that do not speak).}
 
-  \item{parallel}{logical.  If TRUE attempts to run the
-  function on multiple cores.  Note that this may not mean
-  a speed boost if you have one core or if the data set is
-  smaller as the cluster takes time to create.  With the
-  \code{mraja1spl} data set, with an 8 core machine,
+  \item{parallel}{logical.  If \code{TRUE} attempts to run
+  the function on multiple cores.  Note that this may not
+  mean a speed boost if you have one core or if the data
+  set is smaller as the cluster takes time to create.  With
+  the \code{mraja1spl} data set, with an 8 core machine,
   \code{\link[qdap]{imperative}} had 1/3 the running time.}
 
-  \item{warning}{logical.  If TRUE provides comma warnings
-  (sentences that contain numerous commas that may be
-  handled incorrectly by the algorithm).}
+  \item{warning}{logical.  If \code{TRUE} provides comma
+  warnings (sentences that contain numerous commas that may
+  be handled incorrectly by the algorithm).}
 }
 \value{
   Returns a dataframe with a text variable indicating

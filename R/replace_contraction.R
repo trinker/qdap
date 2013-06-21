@@ -8,8 +8,10 @@
 #' qdap's contractions data set.
 #' @param replace A vector of expanded form replacements if a data frame is not 
 #' supplied to the contraction argument.
-#' @param ignore.case logical.  If TRUE replaces without regard to capitalization.
-#' @param sent.cap logical.  If TRUE capitalizes the beginning of every sentence.
+#' @param ignore.case logical.  If \code{TRUE} replaces without regard to 
+#' capitalization.
+#' @param sent.cap logical.  If \code{TRUE} capitalizes the beginning of every 
+#' sentence.
 #' @return Returns a vector with contractions replaced.
 #' @keywords contraction
 #' @seealso 

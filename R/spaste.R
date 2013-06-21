@@ -4,8 +4,9 @@
 #' 
 #' @param terms A character vector of terms to insert trailing and/or leading 
 #' spaces.
-#' @param leading logical.  If TRUE inserts a leading space in the terms.
-#' @param trailing logical.  If TRUE inserts a trailing space in the terms.
+#' @param leading logical.  If \code{TRUE} inserts a leading space in the terms.
+#' @param trailing logical.  If \code{TRUE} inserts a trailing space in the 
+#' terms.
 #' @return Returns a character vector with trailing and/or leading spaces.
 #' @export
 #' @examples

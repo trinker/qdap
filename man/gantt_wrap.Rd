@@ -32,17 +32,17 @@
 
   \item{xlab}{An optional x label.}
 
-  \item{rev.factor}{logical.  If TRUE reverse the current
-  plotting order so the first element in the plotting
-  variable's levels is plotted on top.}
+  \item{rev.factor}{logical.  If \code{TRUE} reverse the
+  current plotting order so the first element in the
+  plotting variable's levels is plotted on top.}
 
   \item{ncol}{if an integer value is passed to this
   \code{\link[qdap]{gantt_wrap}} uses
   \code{\link[ggplot2]{facet_wrap}} rather than
   \code{\link[ggplot2]{facet_grid}}.}
 
-  \item{transform}{logical.  If TRUE the repeated facets
-  will be transformed from stacked to side by side.}
+  \item{transform}{logical.  If \code{TRUE} the repeated
+  facets will be transformed from stacked to side by side.}
 
   \item{minor.line.freq}{A numeric value for frequency of
   minor grid lines.}
@@ -53,11 +53,11 @@
   \item{sig.dig.line.freq}{An internal rounding factor for
   minor and major line freq.  Generally, default value of 1
   suffices for larger range of x scale may need to be set
-  to -2..}
+  to -2.}
 
   \item{hms.scale}{logical.  If TRUE converts scale to
-  h:m:s format.  Default NULL attempts to detect if object
-  is a cm_time2long object}
+  h:m:s format.  Default \code{NULL} attempts to detect if
+  object is a cm_time2long object}
 
   \item{scale}{Should scales be fixed (\code{"fixed"}, the
   default), free (\code{"free"}), or free in one dimension
@@ -73,14 +73,14 @@
 
   \item{size}{The width of the plot bars.}
 
-  \item{rm.horiz.lines}{logical.  If TRUE the horizontal
-  lines will be removed.}
+  \item{rm.horiz.lines}{logical.  If \code{TRUE} the
+  horizontal lines will be removed.}
 
-  \item{x.ticks}{logical.  If TRUE the x ticks will be
-  displayed.}
+  \item{x.ticks}{logical.  If \code{TRUE} the x ticks will
+  be displayed.}
 
-  \item{y.ticks}{logical.  If TRUE the y ticks will be
-  displayed.}
+  \item{y.ticks}{logical.  If \code{TRUE} the y ticks will
+  be displayed.}
 
   \item{legend.position}{The position of legends.
   (\code{"left"}, \code{"right"}, \code{"bottom"},
@@ -89,7 +89,7 @@
   \item{bar.color}{Optional color to constrain all bars.}
 
   \item{border.color}{The color to plot border around Gantt
-  bars (default is NULL).}
+  bars (default is \code{NULL}).}
 
   \item{border.size}{An integer value for the size to plot
   borders around Gantt bars. Controls length (width also
@@ -99,8 +99,8 @@
   bars.  Use a numeric value in addition to border size if
   plot borders appear disproportional.}
 
-  \item{constrain}{logical.  If TRUE the Gantt bars touch
-  the edge of the graph.}
+  \item{constrain}{logical.  If \code{TRUE} the Gantt bars
+  touch the edge of the graph.}
 }
 \value{
   Returns a Gantt style visualization. Invisibly returns

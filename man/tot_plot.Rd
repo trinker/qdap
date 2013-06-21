@@ -14,24 +14,26 @@
 
   \item{text.var}{The text variable (character string).}
 
-  \item{grouping.var}{The grouping variables (character
-  string).}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
   \item{facet.vars}{An optional single vector or list of 1
   or 2 to facet by.}
 
   \item{tot}{The turn of talk variable (character string).
-  May be TRUE (assumes "tot" is the variable name), FALSE
-  (use row numbers), or a character string of the turn of
-  talk column.}
+  May be \code{TRUE} (assumes "tot" is the variable name),
+  \code{FALSE} (use row numbers), or a character string of
+  the turn of talk column.}
 
   \item{ncol}{if an integer value is passed to this
   \code{\link[qdap]{gantt_wrap}} uses
   \code{\link[ggplot2]{facet_wrap}} rather than
   \code{\link[ggplot2]{facet_grid}}.}
 
-  \item{transform}{logical.  If TRUE the repeated facets
-  will be transformed from stacked to side by side.}
+  \item{transform}{logical.  If \code{TRUE} the repeated
+  facets will be transformed from stacked to side by side.}
 
   \item{ylab}{Optional y label.}
 

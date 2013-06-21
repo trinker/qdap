@@ -2,22 +2,23 @@
 #' 
 #' Transcript apply descriptive word statistics.
 #' 
-#' @param text.var The text variable or a  \code{"word_stats"} object (i.e. the 
+#' @param text.var The text variable or a  \code{"word_stats"} object (i.e., the 
 #' output of a \code{word_stats} function).       
-#' @param grouping.var The grouping variables.  Default NULL generates one 
-#' output for all text.  Also takes a single grouping variable or a list of 1 
-#' or more grouping variables.  
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.  
 #' @param tot Optional turns of talk variable that yields turn of talk measures.    
-#' @param parallel logical.  If TRUE attempts to run the function on multiple 
-#' cores.  Note that this may not mean a speed boost if you have one core or if 
-#' the data set is smaller as the cluster takes time to create (parallel is 
-#' slower until approximately 10,000 rows).  To reduce run time pass a 
-#' \code{"word_stats"} object to the \code{\link[qdap]{word_stats}} function.
-#' @param rm.incomplete logical.  If TRUE incomplete statements are removed from 
-#' calculations in the output.   
-#' @param digit.remove logical.  If TRUE removes digits from calculating the 
-#' output.       
-#' @param apostrophe.remove logical.  If TRUE removes apostrophes from 
+#' @param parallel logical.  If \code{TRUE} attempts to run the function on 
+#' multiple cores.  Note that this may not mean a speed boost if you have one 
+#' core or if the data set is smaller as the cluster takes time to create 
+#' (parallel is slower until approximately 10,000 rows).  To reduce run time 
+#' pass a \code{"word_stats"} object to the \code{\link[qdap]{word_stats}} 
+#' function.
+#' @param rm.incomplete logical.  If \code{TRUE} incomplete statements are 
+#' removed from calculations in the output.   
+#' @param digit.remove logical.  If \code{TRUE} removes digits from calculating 
+#' the output.       
+#' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophes from 
 #' calculating the output.   
 #' @param digits Integer; number of decimal places to round when printing.                    
 #' @param \ldots Any other arguments passed to end_inc.     

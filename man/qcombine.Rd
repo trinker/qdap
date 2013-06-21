@@ -13,10 +13,10 @@
   (summed).  If a vector is unnamed a name will be
   assigned.}
 
-  \item{elim.old}{logical.  If TRUE eliminates the columns
-  that are combined together by the named match.list. TRUE
-  outputs the table proportionally (see
-  \code{\link[qdap]{prop}}).}
+  \item{elim.old}{logical.  If \code{TRUE} eliminates the
+  columns that are combined together by the named
+  match.list. \code{TRUE} outputs the table proportionally
+  (see \code{\link[qdap]{prop}}).}
 }
 \value{
   Returns a dataframe with combines columns.

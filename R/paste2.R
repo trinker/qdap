@@ -5,9 +5,9 @@
 #' @param multi.columns The multiple columns or a list of vectors to paste 
 #' together.
 #' @param sep A character string to separate the terms. 
-#' @param handle.na logical.  If TRUE returns \code{NA} if any column/vector 
-#' contains a missing value.
-#' @param trim logical.  If TRUE leading/trailing white space is removed.
+#' @param handle.na logical.  If \code{TRUE} returns \code{NA} if any 
+#' column/vector contains a missing value.
+#' @param trim logical.  If \code{TRUE} leading/trailing white space is removed.
 #' @return Returns a vector with row-wise elements pasted together.
 #' @note \code{\link[base]{paste}} differs from \code{\link[qdap]{paste2}} 
 #' because \code{paste} does not allowed an unspecified number of columns to be 

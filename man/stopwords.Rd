@@ -17,32 +17,35 @@
   Top25Words.  For the tm package's traditional English
   stop words use \code{tm::stopwords("english")}}
 
-  \item{unlist}{logical.  If TRUE unlists into one vector.
-  General use intended for when separate is FALSE.}
+  \item{unlist}{logical.  If \code{TRUE} unlists into one
+  vector.  General use intended for when separate is
+  \code{FALSE}.}
 
-  \item{separate}{logical.  If TRUE separates sentences
-  into words. If FALSE retains sentences.}
+  \item{separate}{logical.  If \code{TRUE} separates
+  sentences into words. If \code{FALSE} retains sentences.}
 
-  \item{strip}{logical.  IF TRUE strips the text of all
-  punctuation except apostrophes.}
+  \item{strip}{logical.  IF \code{TRUE} strips the text of
+  all punctuation except apostrophes.}
 
-  \item{unique}{logical.  If TRUE keeps only unique words
-  (if unlist is TRUE) or sentences (if unlist is FALSE).
-  General use intended for when unlist is TRUE.}
+  \item{unique}{logical.  If \code{TRUE} keeps only unique
+  words (if unlist is \code{TRUE}) or sentences (if unlist
+  is \code{FALSE}).  General use intended for when unlist
+  is \code{TRUE}.}
 
-  \item{char.keep}{If strip is TRUE this argument provides
-  a means of retaining supplied character(s).}
+  \item{char.keep}{If strip is \code{TRUE} this argument
+  provides a means of retaining supplied character(s).}
 
-  \item{names}{logical.  If TRUE will name the elements of
-  the vector or list with the original textString.}
+  \item{names}{logical.  If \code{TRUE} will name the
+  elements of the vector or list with the original
+  \code{textString}.}
 
-  \item{ignore.case}{logical.  If TRUE stop words will be
-  removed regardless of case.  Additionally, case will be
-  stripped from the text.  If FALSE stopwords removal is
-  contingent upon case.  Additionally, case is not
-  stripped.}
+  \item{ignore.case}{logical.  If \code{TRUE} stop words
+  will be removed regardless of case.  Additionally, case
+  will be stripped from the text.  If \code{FALSE}
+  stopwords removal is contingent upon case.  Additionally,
+  case is not stripped.}
 
-  \item{apostrophe.remove}{logical.  If TRUE removes
+  \item{apostrophe.remove}{logical.  If \code{TRUE} removes
   apostrophe's from the output.}
 
   \item{\ldots}{further arguments passed to strip function}

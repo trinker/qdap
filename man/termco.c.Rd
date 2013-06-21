@@ -17,17 +17,18 @@
   \item{new.name}{A character vector of length one to name
   the new combined column.}
 
-  \item{short.term}{logical.  If TRUE column names are
-  trimmed versions of the match list, otherwise the terms
-  are wrapped with 'term(phrase)'}
+  \item{short.term}{logical.  If \code{TRUE} column names
+  are trimmed versions of the match list, otherwise the
+  terms are wrapped with 'term(phrase)'}
 
   \item{zero.replace}{Value to replace zeros with.}
 
-  \item{elim.old}{logical.  If TRUE eliminates the columns
-  that are combined together by the named match.list.}
+  \item{elim.old}{logical.  If \code{TRUE} eliminates the
+  columns that are combined together by the named
+  match.list.}
 
-  \item{percent}{logical.  If TRUE output given as percent.
-  If FALSE the output is proportion.}
+  \item{percent}{logical.  If \code{TRUE} output given as
+  percent.  If \code{FALSE} the output is proportion.}
 
   \item{digits}{Integer; number of decimal places to round
   when printing.}

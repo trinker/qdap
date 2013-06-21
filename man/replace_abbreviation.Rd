@@ -17,8 +17,8 @@
   \item{replace}{A vector of long form replacements if a
   data frame is not supplied to the abbreviation argument.}
 
-  \item{ignore.case}{logical.  If TRUE replaces without
-  regard to capitalization.}
+  \item{ignore.case}{logical.  If \code{TRUE} replaces
+  without regard to capitalization.}
 }
 \value{
   Returns a vector with abbreviations replaced.

@@ -3,11 +3,11 @@
 #' Locate and label possible outliers in a string.
 #' 
 #' @param x A numeric vector.
-#' @param standardize logical.  If TRUE scales the vector first.
+#' @param standardize logical.  If \code{TRUE} scales the vector first.
 #' @param \ldots Other arguments passed to \code{\link[base]{scale}}.
 #' @return Returns a matrix (one column) of possible outliers coded as 
-#' \code{"3sd"}, \code{"2sd"} and \code{"1.5sd"}, corresponding to >= to 3, 2, or 
-#' 1.5 standard deviations.
+#' \code{"3sd"}, \code{"2sd"} and \code{"1.5sd"}, corresponding to >= to 3, 2, 
+#' or 1.5 standard deviations.
 #' @seealso \code{\link[base]{scale}}
 #' @keywords scale, standardize
 #' @export

@@ -12,16 +12,16 @@
 \arguments{
   \item{terms}{The terms to find synonyms for.}
 
-  \item{return.list}{logical.  If TRUE returns the output
-  for multiple synonyms as a list by search term rather
-  than a vector.}
+  \item{return.list}{logical.  If \code{TRUE} returns the
+  output for multiple synonyms as a list by search term
+  rather than a vector.}
 
-  \item{multiwords}{logical.  IF TRUE retains vector
+  \item{multiwords}{logical.  IF \code{TRUE} retains vector
   elements that contain phrases (defined as having one or
   more spaces) rather than a single word.}
 
-  \item{report.null}{logical.  If TRUE reports the words
-  that no match was found at the head of the output.}
+  \item{report.null}{logical.  If \code{TRUE} reports the
+  words that no match was found at the head of the output.}
 }
 \value{
   Returns a list of vectors or vector of possible words

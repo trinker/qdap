@@ -17,10 +17,10 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one output for all text.  Also takes a single
-  grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
   \item{target.words}{A named list of vectors of words
   whose length corresponds to \code{label.colors} (+1
@@ -33,16 +33,17 @@
   plot labels relative to the current setting of cex.
   Default is .8.}
 
-  \item{log.labels}{logical.  If TRUE uses a proportional
-  log label for more readable labels.  The formula is:
-  \code{log(SUMS)/max(log(SUMS)))}. \code{label.size} adds
-  more control over the label sizes.}
+  \item{log.labels}{logical.  If \code{TRUE} uses a
+  proportional log label for more readable labels.  The
+  formula is: \code{log(SUMS)/max(log(SUMS)))}.
+  \code{label.size} adds more control over the label
+  sizes.}
 
   \item{label.size}{An optional sizing constant to add to
-  labels if log.labels is TRUE.}
+  labels if log.labels is \code{TRUE}.}
 
-  \item{edge.curved}{logical.  If TRUE edges will be curved
-  rather than straight paths.}
+  \item{edge.curved}{logical.  If \code{TRUE} edges will be
+  curved rather than straight paths.}
 
   \item{vertex.shape}{The shape of the vertices (see
   \code{\link[igraph]{igraph.vertex.shapes}} for more).}
@@ -69,7 +70,7 @@
   \item{title.font}{The font family of the cloud title.}
 
   \item{title.cex}{Character expansion factor for the
-  title. NULL and NA are equivalent to 1.0.}
+  title. \code{NULL} and \code{NA} are equivalent to 1.0.}
 
   \item{title.color}{A character vector of length one
   corresponding to the color of the title.}
@@ -78,7 +79,8 @@
   to the number of vectors in \code{match.string}.}
 
   \item{legend.cex}{Character expansion factor for the
-  network plot legend. NULL and NA are equivalent to 1.0.}
+  network plot legend. \code{NULL} and \code{NA} are
+  equivalent to 1.0.}
 
   \item{legend.location}{The x and y co-ordinates to be
   used to position the network plot legend.  The location
@@ -89,11 +91,11 @@
   \code{"center"}. This places the legend on the inside of
   the plot frame at the given location.}
 
-  \item{plot}{logical.  If TRUE plots a network plot of the
-  words.}
+  \item{plot}{logical.  If \code{TRUE} plots a network plot
+  of the words.}
 
   \item{char2space}{A vector of characters to be turned
-  into spaces.  If \code{char.keep} is NULL,
+  into spaces.  If \code{char.keep} is \code{NULL},
   \code{char2space} will activate this argument.}
 
   \item{\ldots}{Other arguments passed to

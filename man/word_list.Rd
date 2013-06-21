@@ -11,36 +11,36 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one word list for all text.  Also takes a
-  single grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
   \item{stopwords}{A vector of stop words to remove.}
 
-  \item{alphabetical}{If TRUE the output of frequency lists
-  is ordered alphabetically.  If FALSE the list is ordered
-  by frequency rank.}
+  \item{alphabetical}{If \code{TRUE} the output of
+  frequency lists is ordered alphabetically.  If FALSE the
+  list is ordered by frequency rank.}
 
   \item{cut.n}{Cut off point for reduced frequency stop
   word list (rfswl).}
 
-  \item{cap}{logical. If TRUE capitalizes words from the
-  cap.list.}
+  \item{cap}{logical. If \code{TRUE} capitalizes words from
+  the cap.list.}
 
   \item{cap.list}{Vector of words to capitalize.}
 
-  \item{cap.I}{logical. If TRUE capitalizes words
+  \item{cap.I}{logical. If \code{TRUE} capitalizes words
   containing the personal pronoun I.}
 
-  \item{rm.bracket}{logical If TRUE all brackets and
+  \item{rm.bracket}{logical If \code{TRUE} all brackets and
   bracketed text are removed from analysis.}
 
   \item{char.keep}{A character vector of symbols (i.e.,
   punctuation) that \code{word_list} should keep.  The
   default is to remove every symbol except apostrophes.}
 
-  \item{apostrophe.remove}{logical.  If TRUE removes
+  \item{apostrophe.remove}{logical.  If \code{TRUE} removes
   apostrophes from the output.}
 
   \item{\ldots}{Other arguments passed to

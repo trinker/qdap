@@ -6,17 +6,18 @@
 #' @param a.names object names to assign the csv file(s) to.  If NULL assigns 
 #' the csv to the name(s) of the csv file(s) in the global environment.
 #' @param l.name A character vector of names to assign to the csv files 
-#' (dataframes) being read in.  Default (NULL) uses the names of the files in 
-#' the directory without the file extension.
+#' (dataframes) being read in.  Default (\code{NULL}) uses the names of the 
+#' files in the directory without the file extension.
 #' @param list A character vector of length one to name the list being read in.  
 #' Default is \code{"L1"}.
 #' @param pos where to do the removal. By default, uses the current environment. 
 #' @param envir the environment to use. 
 #' @param \dots data.frame object(s) to write to a file or a list of data.frame 
 #' objects.  If the objects in a list are unnamed V + digit will be assigned.
-#' @param dir optional directory names.  If NULL a directory will be created in 
-#' the working directory with the data and time stamp as the folder name.
-#' @param open logical.  If TRUE opens the directory upon completion.
+#' @param dir optional directory names.  If \code{NULL} a directory will be 
+#' created in the working directory with the data and time stamp as the folder 
+#' name.
+#' @param open logical.  If \code{TRUE} opens the directory upon completion.
 #' @return \code{mcsv_r} - reads in multiple csv files at once.
 #' @rdname multicsv
 #' @note \code{\link[qdap]{mcsv_r}} is useful for reading in multiple csv files 

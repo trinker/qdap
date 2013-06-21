@@ -6,17 +6,17 @@
 # 
 # @param raw A matrix/data frame of raw numeric counts.
 # @param pro An optional matrix/dataframe of proportional information 
-# that corresponds to the raw argument.  If NULL the proportions will be 
+# that corresponds to the raw argument.  If \code{NULL} the proportions will be 
 # calculated using \code\link[qdap](prop}}
 # @param digits Integer; number of decimal places to round.
-# @param percent logical.  If TRUE output given as percent.  If FALSE the 
-# output is proption.
+# @param percent logical.  If \code{TRUE} output given as percent.  If 
+# \code{FALSE} the output is proption.
 # @param zero.replace Value to replace 0 values with.
 # @param \ldots Other arguments passed to \code{prop}.
 # \code{strip} should keep.  The default is to strip every symbol except 
 # apostophes.
-# @param digit.remove logical.  If TRUE strips digits from the text.
-# @param apostrophe.remove logical.  If TRUE removes apostrophes from the 
+# @param digit.remove logical.  If \code{TRUE} strips digits from the text.
+# @param apostrophe.remove logical.  If \code{TRUE} removes apostrophes from the 
 # output.
 # @return Returns a dataframe of combined raw and proportional information.
 # @export

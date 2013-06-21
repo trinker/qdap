@@ -22,10 +22,10 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one output for all text.  Also takes a single
-  grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
   \item{match.string}{A list of vectors or vector of terms
   to associate in the text.}
@@ -44,11 +44,11 @@
 
   \item{stopwords}{Words to exclude from the analysis.}
 
-  \item{network.plot}{logical.  If TRUE plots a network
-  plot of the words.}
+  \item{network.plot}{logical.  If \code{TRUE} plots a
+  network plot of the words.}
 
-  \item{wordcloud}{logical.  If TRUE plots a wordcloud plot
-  of the words.}
+  \item{wordcloud}{logical.  If \code{TRUE} plots a
+  wordcloud plot of the words.}
 
   \item{cloud.colors}{A vector of colors equal to the
   length of \code{match.string} +1.}
@@ -73,9 +73,9 @@
   \item{nw.edge.color}{A character vector of length one
   corresponding to the color of the plot edges.}
 
-  \item{nw.label.proportional}{logical.  If TRUE scales the
-  network plots across grouping.var to allow plot to plot
-  comparisons.}
+  \item{nw.label.proportional}{logical.  If \code{TRUE}
+  scales the network plots across grouping.var to allow
+  plot to plot comparisons.}
 
   \item{nw.title.padj}{Adjustment for the network plot
   title. For strings parallel to the axes, padj = 0 means
@@ -88,10 +88,10 @@
   \item{title.font}{The font family of the cloud title.}
 
   \item{title.cex}{Character expansion factor for the
-  title. NULL and NA are equivalent to 1.0.}
+  title. \code{NULL} and \code{NA} are equivalent to 1.0.}
 
-  \item{nw.edge.curved}{logical.  If TRUE edges will be
-  curved rather than straight paths.}
+  \item{nw.edge.curved}{logical.  If \code{TRUE} edges will
+  be curved rather than straight paths.}
 
   \item{cloud.legend}{A character vector of names
   corresponding to the number of vectors in
@@ -102,7 +102,8 @@
   the \code{legend.override} argument.}
 
   \item{cloud.legend.cex}{Character expansion factor for
-  the wordcloud legend. NULL and NA are equivalent to 1.0.}
+  the wordcloud legend. \code{NULL} and \code{NA} are
+  equivalent to 1.0.}
 
   \item{cloud.legend.location}{The x and y co-ordinates to
   be used to position the wordcloud legend.  The location
@@ -122,7 +123,8 @@
   the \code{legend.override} argument.}
 
   \item{nw.legend.cex}{Character expansion factor for the
-  network plot legend. NULL and NA are equivalent to 1.0.}
+  network plot legend. \code{NULL} and \code{NA} are
+  equivalent to 1.0.}
 
   \item{nw.legend.location}{The x and y co-ordinates to be
   used to position the network plot legend.  The location
@@ -135,10 +137,11 @@
 
   \item{legend.override}{By default if legend labels are
   supplied to either \code{cloud.legend} or
-  \code{nw.legend} may be set and if the other remains NULL
-  it will assume the supplied vector to the previous legend
-  argument.  If this behavior is not desired
-  \code{legend.override} should be set to TRUE.}
+  \code{nw.legend} may be set and if the other remains
+  \code{NULL} it will assume the supplied vector to the
+  previous legend argument.  If this behavior is not
+  desired \code{legend.override} should be set to
+  \code{TRUE}.}
 
   \item{char2space}{Currently a road to nowhere.
   Eventually this will allow the retention of characters as

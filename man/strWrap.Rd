@@ -12,8 +12,8 @@
   \item{width}{A positive integer giving the target column
   for wrapping lines in the output.}
 
-  \item{copy2clip}{logical.  If TRUE attempts to copy the
-  output to the clipboard.}
+  \item{copy2clip}{logical.  If \code{TRUE} attempts to
+  copy the output to the clipboard.}
 }
 \value{
   Prints a wrapped text vector to the console and copies

@@ -11,20 +11,20 @@
 #' @param title An optional title for the plot.
 #' @param ylab An optional y label.
 #' @param xlab An optional x label.
-#' @param rev.factor logical.  If TRUE reverse the current plotting order so the 
-#' first element in the plotting variable's levels is plotted on top.
+#' @param rev.factor logical.  If \code{TRUE} reverse the current plotting order 
+#' so the first element in the plotting variable's levels is plotted on top.
 #' @param ncol if an integer value is passed to this 
 #' \code{\link[qdap]{gantt_wrap}} uses \code{\link[ggplot2]{facet_wrap}} 
 #' rather than \code{\link[ggplot2]{facet_grid}}.
-#' @param transform logical.  If TRUE the repeated facets will be transformed 
-#' from stacked to side by side.
+#' @param transform logical.  If \code{TRUE} the repeated facets will be 
+#' transformed from stacked to side by side.
 #' @param minor.line.freq A numeric value for frequency of minor grid lines.
 #' @param major.line.freq A numeric value for frequency of major grid lines.
 #' @param sig.dig.line.freq An internal rounding factor for minor and major line 
 #' freq.  Generally, default value of 1 suffices for larger range of x scale may 
-#' need to be set to -2..
+#' need to be set to -2.
 #' @param hms.scale logical.  If TRUE converts scale to h:m:s format.  Default 
-#' NULL attempts to detect if object is a cm_time2long object
+#' \code{NULL} attempts to detect if object is a cm_time2long object
 #' @param scale Should scales be fixed (\code{"fixed"}, the default), free 
 #' (\code{"free"}), or free in one dimension (\code{"free_x"}, \code{"free_y"})
 #' @param space If \code{"fixed"}, the default, all panels have the same size. 
@@ -33,20 +33,22 @@
 #' the x scale; or if \code{"free"} both height and width will vary. This 
 #' setting has no effect unless the appropriate scales also vary.
 #' @param size The width of the plot bars.
-#' @param rm.horiz.lines logical.  If TRUE the horizontal lines will be removed.
-#' @param x.ticks  logical.  If TRUE the x ticks will be displayed.
-#' @param y.ticks  logical.  If TRUE the y ticks will be displayed.
+#' @param rm.horiz.lines logical.  If \code{TRUE} the horizontal lines will be 
+#' removed.
+#' @param x.ticks  logical.  If \code{TRUE} the x ticks will be displayed.
+#' @param y.ticks  logical.  If \code{TRUE} the y ticks will be displayed.
 #' @param legend.position The position of legends. (\code{"left"}, 
 #' \code{"right"}, \code{"bottom"}, \code{"top"}, or two-element numeric 
 #' vector).
 #' @param bar.color Optional color to constrain all bars.
 #' @param border.color The color to plot border around Gantt bars (default is 
-#' NULL).
+#' \code{NULL}).
 #' @param border.size An integer value for the size to plot borders around Gantt 
 #' bars. Controls length (width also controlled if not specified).
 #' @param border.width Controls border width around Gantt bars.  Use a numeric 
 #' value in addition to border size if plot borders appear disproportional.
-#' @param constrain logical.  If TRUE the Gantt bars touch the edge of the graph.
+#' @param constrain logical.  If \code{TRUE} the Gantt bars touch the edge of 
+#' the graph. 
 #' @return Returns a Gantt style visualization. Invisibly returns the ggplot2 
 #' list object.
 #' @note For non repeated measures data/plotting use \code{\link[qdap]{gantt}}; 

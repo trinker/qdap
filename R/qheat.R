@@ -9,23 +9,24 @@
 #' and \code{\link[qdap]{question_type}}.
 #' @param low The color to be used for lower values.
 #' @param high The color to be used for higher values.
-#' @param values logical.  If TRUE the cell values will be included on 
+#' @param values logical.  If \code{TRUE} the cell values will be included on 
 #' the heatmap.
-#' @param digits The number of digits displayed if \code{values} is TRUE.
-#' @param text.size A integer size to plot the text if \code{values} is TRUE.
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
+#' @param text.size A integer size to plot the text if \code{values} is 
+#' \code{TRUE}.
 #' @param text.color A character vector to plot the text if \code{values} 
-#' is TRUE.
+#' is \code{TRUE}.
 #' @param xaxis.col A single character vector color choice for the high values.
 #' @param yaxis.col  A single character vector color choice for the low values.
 #' @param order.by An optional character vector of a variable name to order the 
 #' columns by.  To reverse use a negative (\code{-}) before the column name.
 #' @param grid The color of the grid (Use NULL to remove the grid).  
-#' @param by.column logical.  If TRUE applies scaling to the column.  If 
-#' FALSE  applies scaling by row (use NULL to turn off scaling).
-#' @param auto.size logical.  IF TRUE the visual will be resized to create 
-#' square cells.
-#' @param mat2 A second matrix equal in dimensions to \code{mat} that will be used 
-#' for cell labels if \code{values} is TRUE.
+#' @param by.column logical.  If \code{TRUE} applies scaling to the column.  If 
+#' FALSE  applies scaling by row (use \code{NULL} to turn off scaling).
+#' @param auto.size logical.  IF \code{TRUE} the visual will be resized to 
+#' create square cells.
+#' @param mat2 A second matrix equal in dimensions to \code{mat} that will be 
+#' used for cell labels if \code{values} is \code{TRUE}.
 #' @details \code{qheat} is useful for finding patterns and anomalies in large
 #' qdap generated dataframes and matrices.
 #' @note \code{\link[qdap]{qheat}} is a fast way of working with data formats 

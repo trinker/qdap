@@ -4,10 +4,12 @@
 #' white spaces other textual anomalies that may cause errors.
 #' 
 #' @param text.var The text variable.
-#' @param num2word logical If TRUE replaces a numbers with text representations.
-#' @param fix.comma logical If TRUE removes any spaces before a comma.
-#' @param fix.space logical.  If TRUE extra spaces before endmarks are removed.
-#' @param rm.quote  logical If TRUE removes any \code{\"}.
+#' @param num2word logical If \code{TRUE} replaces a numbers with text 
+#' representations.
+#' @param fix.comma logical If \code{TRUE} removes any spaces before a comma.
+#' @param fix.space logical.  If \code{TRUE} extra spaces before endmarks are 
+#' removed.
+#' @param rm.quote  logical If \code{TRUE} removes any \code{\"}.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{replace_number}}.
 #' @return Returns a parsed character vector.
 #' @seealso \code{\link[qdap]{strip}}

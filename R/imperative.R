@@ -5,17 +5,18 @@
 #' @param dataframe A data.frame object.
 #' @param person.var The person variable.
 #' @param text.var The text variable.
-#' @param lock.incomplete logical.  If TRUE locks incomplete sentences 
+#' @param lock.incomplete logical.  If \code{TRUE} locks incomplete sentences 
 #' (sentences ending with "|") from being marked as imperative.
 #' @param additional.names Additional names that may be used in a command 
 #' (people in the context that do not speak).
-#' @param parallel logical.  If TRUE attempts to run the function on multiple 
-#' cores.  Note that this may not mean a speed boost if you have one core or if 
-#' the data set is smaller as the cluster takes time to create.  With the 
-#' \code{mraja1spl} data set, with an 8 core machine, 
+#' @param parallel logical.  If \code{TRUE} attempts to run the function on 
+#' multiple cores.  Note that this may not mean a speed boost if you have one 
+#' core or if the data set is smaller as the cluster takes time to create.  With 
+#' the \code{mraja1spl} data set, with an 8 core machine, 
 #' \code{\link[qdap]{imperative}} had 1/3 the running time.
-#' @param warning logical.  If TRUE provides comma warnings (sentences that 
-#' contain numerous commas that may be handled incorrectly by the algorithm).
+#' @param warning logical.  If \code{TRUE} provides comma warnings (sentences 
+#' that contain numerous commas that may be handled incorrectly by the 
+#' algorithm).
 #' @return Returns a dataframe with a text variable indicating imperative 
 #' sentences.  Imperative sentences are marked with * followed by the original 
 #' end mark.

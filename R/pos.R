@@ -3,16 +3,17 @@
 #' \code{pos} - Apply part of speech tagger to transcript(s).
 #' 
 #' @param text.var The text variable
-#' @param parallel logical.  If TRUE attempts to run the function on multiple 
-#' cores.  Note that this may not mean a speed boost if you have one core or if 
-#' the data set is smaller as the cluster takes time to create.
-#' @param na.omit logical.  If TRUE missing values (\code{NA}) will be omitted.
+#' @param parallel logical.  If \code{TRUE} attempts to run the function on 
+#' multiple cores.  Note that this may not mean a speed boost if you have one 
+#' core or if the data set is smaller as the cluster takes time to create.
+#' @param na.omit logical.  If \code{TRUE} missing values (\code{NA}) will be 
+#' omitted.
 #' @param digits Integer; number of decimal places to round when printing.
-#' @param progress.bar logical.  If TRUE attempts to provide a OS appropriate 
-#' progress bar.  If parallel is TRUE this argument is ignored.  Note that 
-#' setting this argument to TRUE may slow down the function.
-#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proportion.
+#' @param progress.bar logical.  If \code{TRUE} attempts to provide a OS 
+#' appropriate progress bar.  If parallel is TRUE this argument is ignored.  
+#' Note that setting this argument to \code{TRUE} may slow down the function.
+#' @param percent logical.  If \code{TRUE} output given as percent.  If 
+#' \code{FALSE} the output is proportion.
 #' @param zero.replace Value to replace 0 values with.
 #' @param gc.rate An integer value.  This is a necessary argument because of a 
 #' problem with the garbage collection in the openNLP function that 
@@ -161,9 +162,9 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 1,
 #' grouping variable(s).
 #' 
 #' @rdname pos
-#' @param grouping.var The grouping variables.  Default NULL generates one word 
-#' list for all text.  Also takes a single grouping variable or a list of 1 or 
-#' more grouping variables.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
 #' @param \ldots Other argument supplied to \code{pos}.
 #' @return pos.by returns a list of 6: 
 #' \item{text}{The original text} 

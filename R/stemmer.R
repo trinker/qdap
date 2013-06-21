@@ -5,10 +5,10 @@
 #' @param text.var  The text variable.  In \code{\link[qdap]{stemmer}} this is a 
 #' vector text string. For \code{\link[qdap]{stem2df}} this is a character 
 #' vector of length one naming the text column.  
-#' @param rm.bracket logical.  If TRUE brackets are removed from the text.
-#' @param capitalize logical.  If TRUE selected terms are capitalized.
-#' @param warn logical.  If TRUE warns about rows not ending with standard qdap 
-#' punctuation endmarks.
+#' @param rm.bracket logical.  If \code{TRUE} brackets are removed from the text.
+#' @param capitalize logical.  If \code{TRUE} selected terms are capitalized.
+#' @param warn logical.  If \code{TRUE} warns about rows not ending with 
+#' standard qdap punctuation endmarks.
 #' @param char.keep A character vector of symbols that should be kept within 
 #' sentences.
 #' @param \dots Various: \cr

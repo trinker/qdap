@@ -8,10 +8,10 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one word list for all text.  Also takes a
-  single grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
   \item{FUN}{A word function with a numeric vector output
   (e.g., \code{syllable.sum}, \code{character.count} or

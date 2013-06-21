@@ -19,23 +19,24 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one output for all text.  Also takes a single
-  grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
   \item{word.list}{A frequency word list passed from
   \code{\link[qdap]{word_list}}.}
 
-  \item{stem}{logical.  If TRUE the \code{text.var} will be
-  stemmed.}
+  \item{stem}{logical.  If \code{TRUE} the \code{text.var}
+  will be stemmed.}
 
   \item{target.words}{A named list of vectors of words
   whose length corresponds to \code{cloud.colors} (+1
   length in cloud colors for non matched terms).}
 
-  \item{expand.target}{logical.  If TRUE agrep will be used
-  to expand the \code{target.words}.}
+  \item{expand.target}{logical.  If \code{TRUE}
+  \code{\link[base]{agrep}} will be used to expand the
+  \code{target.words}.}
 
   \item{target.exclude}{A vector of words to exclude from
   the \code{target.words}.}
@@ -45,11 +46,11 @@
   \item{min.freq}{An integer value indicating the minimum
   frequency a word must appear to be included.}
 
-  \item{caps}{logical.  If TRUE selected words will be
-  capitalized.}
+  \item{caps}{logical.  If \code{TRUE} selected words will
+  be capitalized.}
 
   \item{caps.list}{A vector of words to capitalize
-  (\code{caps} must be TRUE).}
+  (\code{caps} must be \code{TRUE}).}
 
   \item{random.order}{Plot words in random order. If false,
   they will be plotted in decreasing frequency.}
@@ -59,8 +60,8 @@
   \item{cloud.colors}{A vector of colors equal to the
   length of target words +1.}
 
-  \item{title}{logical.  IF TRUE adds a title corresponding
-  to the \code{grouping.var}.}
+  \item{title}{logical.  If \code{TRUE} adds a title
+  corresponding to the \code{grouping.var}.}
 
   \item{cloud.font}{The font family of the cloud text.}
 
@@ -77,14 +78,14 @@
   (1=bottom, 2=left, 3=top, 4=right).}
 
   \item{title.cex}{Character expansion factor for the
-  title. NULL and NA are equivalent to 1.0.}
+  title. \code{NULL} and \code{NA} are equivalent to 1.0.}
 
   \item{title.names}{Optional vector of title names equal
   in length to the grouping.var that will override the
   default use of the grouping.var names.}
 
-  \item{proportional}{logical.  If TRUE scales the word
-  clouds across grouping.var to allow cloud to cloud
+  \item{proportional}{logical.  If \code{TRUE} scales the
+  word clouds across grouping.var to allow cloud to cloud
   comparisons.}
 
   \item{max.word.size}{A size argument to control the
@@ -97,19 +98,19 @@
   to the number of vectors in target.words.}
 
   \item{legend.cex}{Character expansion factor for the
-  legend. NULL and NA are equivalent to 1.0.}
+  legend. \code{NULL} and \code{NA} are equivalent to 1.0.}
 
   \item{legend.location}{The x and y co-ordinates to be
   used to position the legend.}
 
   \item{char.keep}{A character vector of symbol character
   (i.e., punctuation) that strip should keep.  The default
-  is to strip everything except apostrophes. This enables
+  is to strip everything except apostrophes.  This enables
   the use of special characters to be turned into spaces or
   for characters to be retained.}
 
   \item{char2space}{A vector of characters to be turned
-  into spaces.  If \code{char.keep} is NULL,
+  into spaces.  If \code{char.keep} is \code{NULL},
   \code{char2space} will activate this argument.}
 }
 \value{

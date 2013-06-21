@@ -15,16 +15,16 @@
   \code{"~~"} is included for a convenient means of keeping
   word groups together in functions that split text apart
   based on spaces.  To remove double tildes \code{"~~"} set
-  \code{char.keep} to NULL.}
+  \code{char.keep} to \code{NULL}.}
 
-  \item{digit.remove}{logical.  If TRUE strips digits from
-  the text.}
+  \item{digit.remove}{logical.  If \code{TRUE} strips
+  digits from the text.}
 
-  \item{apostrophe.remove}{logical.  If TRUE removes
+  \item{apostrophe.remove}{logical.  If \code{TRUE} removes
   apostrophes from the output.}
 
-  \item{lower.case}{logical.  If TRUE forces all alpha
-  characters to lower case.}
+  \item{lower.case}{logical.  If \code{TRUE} forces all
+  alpha characters to lower case.}
 }
 \value{
   Returns a vector of text that has been stripped of

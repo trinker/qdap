@@ -7,22 +7,22 @@
 #' complete.
 #' 
 #' @param text.var The text variable.    
-#' @param rm.dash logical.  If TRUE dashes will be removed.
+#' @param rm.dash logical.  If \code{TRUE} dashes will be removed.
 #' @param bracket The type of bracket (and encased text) to remove.  This is one 
 #' of the strings \code{"curly"}, \code{"square"}, \code{"round"}, 
 #' \code{"angle"} and \code{"all"}.  These strings correspond to: \{, [, (, < 
 #' or all four types.  Also takes the argument \code{NULL} which turns off this 
 #' parsing technique.
 #' @param missing Value to assign to empty cells.
-#' @param names logical.  If TRUE the sentences are given as the names of the 
-#' counts.
+#' @param names logical.  If \code{TRUE} the sentences are given as the names of 
+#' the counts.
 #' @param abbreviation A two column key of abbreviations (column 1) and long 
 #' form replacements (column 2) or a vector of abbreviations.  Default is to use 
 #' qdap's abbreviations data set.  Also takes the argument \code{NULL} which 
 #' turns off this parsing technique.
 #' @param replace A vector of long form replacements if a data frame is not 
 #' supplied to the abbreviation argument.
-#' @param ignore.case logical.  If TRUE replaces without regard to 
+#' @param ignore.case logical.  If \code{TRUE} replaces without regard to 
 #' capitalization.
 #' @param num.paste A character string c(\code{"separate"}, \code{"combine"}); 
 #' \code{"separate"} will treat each word section as separate, \code{"combine"} 

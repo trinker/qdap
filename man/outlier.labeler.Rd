@@ -7,8 +7,8 @@
 \arguments{
   \item{x}{A numeric vector.}
 
-  \item{standardize}{logical.  If TRUE scales the vector
-  first.}
+  \item{standardize}{logical.  If \code{TRUE} scales the
+  vector first.}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[base]{scale}}.}

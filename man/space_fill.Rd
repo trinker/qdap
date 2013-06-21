@@ -16,12 +16,13 @@
   \item{rm.extra}{logical.  Should trailing, leading and >
   1 continuous white spaces be removed?}
 
-  \item{ignore.case}{logical.  If FALSE, the pattern
-  matching is case sensitive and if TRUE, case is ignored
-  during matching.}
+  \item{ignore.case}{logical.  If \code{FALSE}, the pattern
+  matching is case sensitive and if \code{TRUE}, case is
+  ignored during matching.}
 
-  \item{fixed}{logical. If TRUE, pattern is a string to be
-  matched as is. Overrides all conflicting arguments.}
+  \item{fixed}{logical. If \code{TRUE}, pattern is a string
+  to be matched as is. Overrides all conflicting
+  arguments.}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[base]{gsub}}.}

@@ -3,28 +3,29 @@
 #' Produces word clouds with optional theme coloring by grouping variable.
 #' 
 #' @param text.var The text variable.         
-#' @param grouping.var The grouping variables.  Default NULL generates one 
-#' output for all text.  Also takes a single grouping variable or a list of 1 
-#' or more grouping variables.  
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.  
 #' @param word.list A frequency word list passed from 
 #' \code{\link[qdap]{word_list}}.
-#' @param stem logical.  If TRUE the \code{text.var} will be stemmed.
+#' @param stem logical.  If \code{TRUE} the \code{text.var} will be stemmed.
 #' @param target.words A named list of vectors of words whose length corresponds 
 #' to \code{cloud.colors} (+1 length in cloud colors for non matched terms).
-#' @param expand.target logical.  If TRUE agrep will be used to expand the 
-#' \code{target.words}.
+#' @param expand.target logical.  If \code{TRUE} \code{\link[base]{agrep}}  
+#' will be used to expand the \code{target.words}.
 #' @param target.exclude A vector of words to exclude from the 
 #' \code{target.words}.
 #' @param stopwords Words to exclude from the cloud.
 #' @param min.freq An integer value indicating the minimum frequency a word must 
 #' appear to be included.
-#' @param caps logical.  If TRUE selected words will be capitalized.
-#' @param caps.list A vector of words to capitalize (\code{caps} must be TRUE).
+#' @param caps logical.  If \code{TRUE} selected words will be capitalized.
+#' @param caps.list A vector of words to capitalize (\code{caps} must be 
+#' \code{TRUE}).
 #' @param random.order Plot words in random order. If false, they will be 
 #' plotted in decreasing frequency.
 #' @param rot.per Proportion words with 90 degree rotation.
 #' @param cloud.colors A vector of colors equal to the length of target words +1.
-#' @param title logical.  IF TRUE adds a title corresponding to the 
+#' @param title logical.  If \code{TRUE} adds a title corresponding to the 
 #' \code{grouping.var}.
 #' @param cloud.font The font family of the cloud text.
 #' @param title.font The font family of the cloud title. 
@@ -35,26 +36,27 @@
 #' alignment.
 #' @param title.location On which side of the plot (1=bottom, 2=left, 3=top, 
 #' 4=right).
-#' @param title.cex Character expansion factor for the title. NULL and NA are 
-#' equivalent to 1.0. 
+#' @param title.cex Character expansion factor for the title. \code{NULL} and 
+#' \code{NA} are equivalent to 1.0. 
 #' @param title.names Optional vector of title names equal in length to the 
 #' grouping.var that will override the default use of the grouping.var names.  
-#' @param proportional logical.  If TRUE scales the word clouds across 
+#' @param proportional logical.  If \code{TRUE} scales the word clouds across 
 #' grouping.var to allow cloud to cloud comparisons.
 #' @param max.word.size A size argument to control the minimum size of the words.
 #' @param min.word.size A size argument to control the maximum size of the words.
 #' @param legend A character vector of names corresponding to the number of 
 #' vectors in target.words.
-#' @param legend.cex Character expansion factor for the legend. NULL and NA are 
-#' equivalent to 1.0. 
+#' @param legend.cex Character expansion factor for the legend. \code{NULL} and 
+#' \code{NA} are equivalent to 1.0. 
 #' @param legend.location The x and y co-ordinates to be used to position the 
 #' legend.
 #' @param char.keep A character vector of symbol character (i.e., punctuation) 
-#' that strip should keep.  The default is to strip everything except apostrophes.  
-#' This enables the use of special characters to be turned into spaces or for 
-#' characters to be retained.
+#' that strip should keep.  The default is to strip everything except 
+#' apostrophes.  This enables the use of special characters to be turned into 
+#' spaces or for characters to be retained.
 #' @param char2space A vector of characters to be turned into spaces.  If 
-#' \code{char.keep} is NULL, \code{char2space} will activate this argument.
+#' \code{char.keep} is \code{NULL}, \code{char2space} will activate this 
+#' argument.
 #' @return Returns a series of word cloud plots with target words (themes) 
 #' colored.
 #' @seealso \code{\link[wordcloud]{wordcloud}},

@@ -8,17 +8,17 @@
 #' @param text.var The text variable.
 #' @param endmarks A character vector of endmarks to split turns of talk into 
 #' sentences.
-#' @param incomplete.sub logical.  If TRUE detects incomplete sentences and 
-#' replaces with \code{"|"}.
-#' @param rm.bracket logical.  If TRUE removes brackets from the text.
-#' @param stem.col logical.  If TRUE stems the text as a new column.
+#' @param incomplete.sub logical.  If \code{TRUE} detects incomplete sentences 
+#' and replaces with \code{"|"}.
+#' @param rm.bracket logical.  If \code{TRUE} removes brackets from the text.
+#' @param stem.col logical.  If \code{TRUE} stems the text as a new column.
 #' @param text.place A character string giving placement location of the text 
 #' column. This must be one of the strings \code{"original"}, \code{"right"} or 
 #' \code{"left"}.
 #' @param \ldots Additional options passed to \code{\link[qdap]{stem2df}}.
-#' @param grouping.var The grouping variables.  Default NULL generates one 
-#' output for all text.  Also takes a single grouping variable or a list of 1 
-#' or more grouping variables.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
 #' @param tot A tot column from a \code{\link[qdap]{sentSplit}} output.
 #' @return \code{sentSplit} - returns a dataframe with turn of talk broken apart 
 #' into sentences.  Optionally a stemmed version of the text variable may be 
@@ -136,8 +136,8 @@ function(dataframe, text.var, endmarks = c("?", ".", "!", "|"),
 #' 
 #' \code{sentCombine} - Combines sentences by the same grouping variable together.
 #' 
-#' @param as.list logical.  If TRUE returns the output as a list. If false the 
-#' output is returned as a dataframe.
+#' @param as.list logical.  If \code{TRUE} returns the output as a list. If 
+#' \code{FALSE} the output is returned as a dataframe.
 #' @return \code{sentCombine} - returns a list of vectors with the continuous 
 #' sentences by grouping.var pasted together. 
 #' returned as well.

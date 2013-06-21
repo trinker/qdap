@@ -9,17 +9,17 @@
 \arguments{
   \item{text.var}{The text variable}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one output for all text.  Also takes a single
-  grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
-  \item{neg.cont}{logical.  IF TRUE provides separate
-  counts for the negative contraction forms of the
+  \item{neg.cont}{logical.  IF \code{TRUE} provides
+  separate counts for the negative contraction forms of the
   interrogative words.}
 
-  \item{percent}{logical.  If TRUE output given as percent.
-  If FALSE the output is proportion.}
+  \item{percent}{logical.  If \code{TRUE} output given as
+  percent.  If \code{FALSE} the output is proportion.}
 
   \item{zero.replace}{Value to replace 0 values with.}
 

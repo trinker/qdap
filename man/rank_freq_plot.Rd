@@ -16,10 +16,10 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one output for all text.  Also takes a single
-  grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
   \item{ncol}{integer value indicating the number of
   columns in the facet wrap.}
@@ -27,11 +27,11 @@
   \item{jitter}{Amount of horizontal jitter to add to the
   points.}
 
-  \item{log.freq}{logical.  If TRUE plots the frequencies
-  in the natural log scale.}
+  \item{log.freq}{logical.  If \code{TRUE} plots the
+  frequencies in the natural log scale.}
 
-  \item{log.rank}{logical.  If TRUE plots the ranks in the
-  natural log scale.}
+  \item{log.rank}{logical.  If \code{TRUE} plots the ranks
+  in the natural log scale.}
 
   \item{hap.col}{Color of the hapax legomenon points.}
 
@@ -48,8 +48,8 @@
   \item{digits}{Integer; number of decimal places to
   round.}
 
-  \item{plot}{logical.  If TRUE provides a rank frequency
-  plot.}
+  \item{plot}{logical.  If \code{TRUE} provides a rank
+  frequency plot.}
 
   \item{words}{A vector of words.}
 
@@ -62,8 +62,8 @@
   \item{jitter.ammount}{Amount of horizontal jitter to add
   to the points.}
 
-  \item{log.scale}{logical.  If TRUE plots the rank and
-  frequency as a log scale.}
+  \item{log.scale}{logical.  If \code{TRUE} plots the rank
+  and frequency as a log scale.}
 }
 \value{
   Returns a rank-frequency plot and a list of three

@@ -23,14 +23,14 @@
   \item{endmarks}{A character vector of endmarks to split
   turns of talk into sentences.}
 
-  \item{incomplete.sub}{logical.  If TRUE detects
+  \item{incomplete.sub}{logical.  If \code{TRUE} detects
   incomplete sentences and replaces with \code{"|"}.}
 
-  \item{rm.bracket}{logical.  If TRUE removes brackets from
-  the text.}
+  \item{rm.bracket}{logical.  If \code{TRUE} removes
+  brackets from the text.}
 
-  \item{stem.col}{logical.  If TRUE stems the text as a new
-  column.}
+  \item{stem.col}{logical.  If \code{TRUE} stems the text
+  as a new column.}
 
   \item{text.place}{A character string giving placement
   location of the text column. This must be one of the
@@ -40,16 +40,17 @@
   \item{\ldots}{Additional options passed to
   \code{\link[qdap]{stem2df}}.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one output for all text.  Also takes a single
-  grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
   \item{tot}{A tot column from a
   \code{\link[qdap]{sentSplit}} output.}
 
-  \item{as.list}{logical.  If TRUE returns the output as a
-  list. If false the output is returned as a dataframe.}
+  \item{as.list}{logical.  If \code{TRUE} returns the
+  output as a list. If \code{FALSE} the output is returned
+  as a dataframe.}
 }
 \value{
   \code{sentSplit} - returns a dataframe with turn of talk

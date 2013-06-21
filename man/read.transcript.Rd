@@ -21,16 +21,17 @@
 
   \item{text.var}{A character string specifying the name of
   the text variable will ensure that variable is classed as
-  character.  If NULL \code{\link[qdap]{read.transcript}}
-  attempts to guess the text.variable (dialogue).}
+  character.  If \code{NULL}
+  \code{\link[qdap]{read.transcript}} attempts to guess the
+  text.variable (dialogue).}
 
-  \item{merge.broke.tot}{logical.  If TRUE and if the file
-  being read in is .docx with broken space between a single
-  turn of talk read.transcript will attempt to merge these
-  into a single turn of talk.}
+  \item{merge.broke.tot}{logical.  If \code{TRUE} and if
+  the file being read in is .docx with broken space between
+  a single turn of talk read.transcript will attempt to
+  merge these into a single turn of talk.}
 
-  \item{header}{logical.  If TRUE the file contains the
-  names of the variables as its first line.}
+  \item{header}{logical.  If \code{TRUE} the file contains
+  the names of the variables as its first line.}
 
   \item{dash}{A character string to replace the en and em
   dashes special characters (default is to remove).}
@@ -38,11 +39,11 @@
   \item{ellipsis}{A character string to replace the
   ellipsis special characters (default is text ...).}
 
-  \item{quote2bracket}{logical. If TRUE replaces curly
-  quotes with curly braces (default is FALSE).  If FALSE
-  curly quotes are removed.}
+  \item{quote2bracket}{logical. If \code{TRUE} replaces
+  curly quotes with curly braces (default is \code{FALSE}).
+  If \code{FALSE} curly quotes are removed.}
 
-  \item{rm.empty.rows}{logical.  If TRUE
+  \item{rm.empty.rows}{logical.  If \code{TRUE}
   \code{\link[qdap]{read.transcript}} attempts to remove
   empty rows.}
 
@@ -58,8 +59,8 @@
   \item{skip}{Integer; the number of lines of the data file
   to skip before beginning to read data.}
 
-  \item{nontext2factor}{logical.  If TRUE attempts to
-  convert any non text to a factor.}
+  \item{nontext2factor}{logical.  If \code{TRUE} attempts
+  to convert any non text to a factor.}
 
   \item{text}{Character string: if file is not supplied and
   this is, then data are read from the value of text.

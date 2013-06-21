@@ -4,12 +4,16 @@
 #' \code{"at"}.
 #' 
 #' @param text.var  The text variable.
-#' @param dollar logical.  If TRUE replaces dollar sign ($) with \code{"dollar"}.
-#' @param percent logical.  If TRUE replaces percent sign (\%) with \code{"percent"}.
-#' @param pound logical.  If TRUE replaces pound sign (#) with \code{"number"}.
-#' @param at logical.  If TRUE replaces at sign (@@) with \code{"at"}.
-#' @param and logical.  If TRUE replaces and sign (&) with \code{"and"}.
-#' @param with  logical.  If TRUE replaces with sign (w/) with \code{"with"}.
+#' @param dollar logical.  If \code{TRUE} replaces dollar sign ($) with 
+#' \code{"dollar"}.
+#' @param percent logical.  If \code{TRUE} replaces percent sign (\%) with 
+#' \code{"percent"}.
+#' @param pound logical.  If \code{TRUE} replaces pound sign (#) with 
+#' \code{"number"}.
+#' @param at logical.  If \code{TRUE} replaces at sign (@@) with \code{"at"}.
+#' @param and logical.  If \code{TRUE} replaces and sign (&) with \code{"and"}.
+#' @param with  logical.  If \code{TRUE} replaces with sign (w/) with 
+#' \code{"with"}.
 #' @return Returns a character vector with symbols replaced..
 #' @keywords symbol-replace
 #' @seealso 

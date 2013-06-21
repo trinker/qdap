@@ -8,13 +8,13 @@
 \arguments{
   \item{numeric.var}{A numeric variable.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one output for all text.  Also takes a single
-  grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
-  \item{original_order}{logical.  IF TRUE orders by the
-  original order.  If FALSE orders by group.}
+  \item{original_order}{logical.  IF \code{TRUE} orders by
+  the original order. If \code{FALSE} orders by group.}
 
   \item{digits}{Integer; number of decimal places to
   round.}

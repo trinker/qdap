@@ -3,16 +3,16 @@
 #' Approximate the sentiment (polarity) of text by grouping variable(s).
 #' 
 #' @param text.var The text variable.
-#' @param grouping.var The grouping variables.  Default NULL generates one word 
-#' list for all text.  Also takes a single grouping variable or a list of 1 or 
-#' more grouping variables.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
 #' @param positive.list A character vector of terms indicating positive reaction.
 #' @param negative.list A character vector of terms indicating negative reaction.
 #' @param negation.list  A character vector of terms reversing the intent of a 
 #' positive or negative word.
 #' @param amplification.list  A character vector of terms that increases the 
 #' intensity of a positive or negative word.
-#' @param rm.incomplete logical.  If TRUE text rows ending with qdap's 
+#' @param rm.incomplete logical.  If \code{TRUE} text rows ending with qdap's 
 #' incomplete sentence end mark (\code{|}) will be removed from the analysis.
 #' @param digits Integer; number of decimal places to round when printing. 
 #' @param \ldots Other arguments supplied to \code{\link[qdap]{end_inc}}.

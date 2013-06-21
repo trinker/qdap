@@ -6,8 +6,8 @@
 #' @param person.var The person variable to be stretched.
 #' @param sep The separator(s) to search for and break on.  Default is: 
 #' c(".", "_", ";")
-#' @param track.reps logical.  If TRUE leaves the row names of person variable 
-#' cells that were repeated and stretched.
+#' @param track.reps logical.  If \code{TRUE} leaves the row names of person 
+#' variable cells that were repeated and stretched.
 #' @return Returns an expanded dataframe with person variable stretched and 
 #' accompanying rows repeated.
 #' @export

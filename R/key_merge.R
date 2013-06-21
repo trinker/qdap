@@ -6,10 +6,10 @@
 #' @param transcript.df The text/person transcript dataframe
 #' @param key.df The demographic dataframe.
 #' @param common.column The column(s) shared by \code{transcript.df} and 
-#' \code{key.df}.  If NULL function defaults to use any columns with the 
+#' \code{key.df}.  If \code{NULL} function defaults to use any columns with the 
 #' same name.
-#' @param defualt.arrange logical.  If TRUE will arrange the columns with text 
-#' to the far right.
+#' @param defualt.arrange logical.  If \code{TRUE} will arrange the columns with 
+#' text to the far right.
 #' @return Outputs a merged transcript dataframe with demographic information.
 #' @keywords merge, demographic
 #' @seealso \code{\link[base]{merge}}

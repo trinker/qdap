@@ -3,14 +3,15 @@
 #' \code{syllable.sum} - Count the number of syllables per row of text.
 #' 
 #' @param text.var The text variable
-#' @param parallel logical.  If TRUE attempts to run the function on multiple 
-#' cores.  Note that this may not mean a speed boost if you have one core or if 
-#' the data set is smaller as the cluster takes time to create.
+#' @param parallel logical.  If \code{TRUE} attempts to run the function on 
+#' multiple cores.  Note that this may not mean a speed boost if you have one 
+#' core or if the data set is smaller as the cluster takes time to create.
 #' @param text A single character vector of text.
-#' @param remove.bracketed logical.  If \code{TRUE} brackets are removed from the 
-#' analysis.
-#' @param algorithm.report logical.  If \code{TRUE} generates a report of words not 
-#' found in the dictionary (i.e., syllables were calculated with an algorithm).
+#' @param remove.bracketed logical.  If \code{TRUE} brackets are removed from 
+#' the analysis.
+#' @param algorithm.report logical.  If \code{TRUE} generates a report of words 
+#' not found in the dictionary (i.e., syllables were calculated with an 
+#' algorithm).
 #' @return \code{syllable.sum} - returns a vector of syllable counts per row. 
 #' @rdname syllabication
 #' @details The worker function of all the syllable functions is 

@@ -11,13 +11,13 @@
   \code{\link[qdap]{formality}}.  Passing the later three
   object will greatly reduce run time.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates formality score for all text.  Also takes a
-  single grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
-  \item{sort.by.formality}{logical.  If TRUE orders the
-  results by formality score.}
+  \item{sort.by.formality}{logical.  If \code{TRUE} orders
+  the results by formality score.}
 
   \item{digits}{The number of digits displayed.}
 

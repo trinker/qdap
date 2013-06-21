@@ -3,7 +3,8 @@
 #' A proximity measure between two probability distributions applied to speech.
 #' 
 #' @param x A numeric vector, matrix or data frame.
-#' @param y A second numeric vector if x is also a vector.  Default is NULL.
+#' @param y A second numeric vector if x is also a vector.  Default is 
+#' \code{NULL}.
 #' @return Returns a matrix of the Kullback Leibler measure between each vector 
 #' of probabilities.
 #' @details Uses Kullback & Leibler's (1951) formula:

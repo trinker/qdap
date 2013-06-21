@@ -14,8 +14,8 @@
   \item{sep}{The separator(s) to search for and break on.
   Default is: c(".", "_", ";")}
 
-  \item{track.reps}{logical.  If TRUE leaves the row names
-  of person variable cells that were repeated and
+  \item{track.reps}{logical.  If \code{TRUE} leaves the row
+  names of person variable cells that were repeated and
   stretched.}
 }
 \value{

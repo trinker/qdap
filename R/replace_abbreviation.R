@@ -8,7 +8,7 @@
 #' qdap's abbreviations data set.
 #' @param replace A vector of long form replacements if a data frame is not 
 #' supplied to the abbreviation argument.
-#' @param ignore.case logical.  If TRUE replaces without regard to capitalization.
+#' @param ignore.case logical.  If \code{TRUE} replaces without regard to capitalization.
 #' @return Returns a vector with abbreviations replaced.
 #' @keywords abbreviation
 #' @seealso 

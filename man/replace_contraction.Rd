@@ -18,10 +18,10 @@
   a data frame is not supplied to the contraction
   argument.}
 
-  \item{ignore.case}{logical.  If TRUE replaces without
-  regard to capitalization.}
+  \item{ignore.case}{logical.  If \code{TRUE} replaces
+  without regard to capitalization.}
 
-  \item{sent.cap}{logical.  If TRUE capitalizes the
+  \item{sent.cap}{logical.  If \code{TRUE} capitalizes the
   beginning of every sentence.}
 }
 \value{

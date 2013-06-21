@@ -16,9 +16,9 @@
   in the global environment.}
 
   \item{l.name}{A character vector of names to assign to
-  the csv files (dataframes) being read in.  Default (NULL)
-  uses the names of the files in the directory without the
-  file extension.}
+  the csv files (dataframes) being read in.  Default
+  (\code{NULL}) uses the names of the files in the
+  directory without the file extension.}
 
   \item{list}{A character vector of length one to name the
   list being read in. Default is \code{"L1"}.}
@@ -32,12 +32,12 @@
   list of data.frame objects.  If the objects in a list are
   unnamed V + digit will be assigned.}
 
-  \item{dir}{optional directory names.  If NULL a directory
-  will be created in the working directory with the data
-  and time stamp as the folder name.}
+  \item{dir}{optional directory names.  If \code{NULL} a
+  directory will be created in the working directory with
+  the data and time stamp as the folder name.}
 
-  \item{open}{logical.  If TRUE opens the directory upon
-  completion.}
+  \item{open}{logical.  If \code{TRUE} opens the directory
+  upon completion.}
 }
 \value{
   \code{mcsv_r} - reads in multiple csv files at once.

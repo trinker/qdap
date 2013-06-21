@@ -11,11 +11,11 @@
 
   \item{sep}{A character string to separate the terms.}
 
-  \item{handle.na}{logical.  If TRUE returns \code{NA} if
-  any column/vector contains a missing value.}
+  \item{handle.na}{logical.  If \code{TRUE} returns
+  \code{NA} if any column/vector contains a missing value.}
 
-  \item{trim}{logical.  If TRUE leading/trailing white
-  space is removed.}
+  \item{trim}{logical.  If \code{TRUE} leading/trailing
+  white space is removed.}
 }
 \value{
   Returns a vector with row-wise elements pasted together.

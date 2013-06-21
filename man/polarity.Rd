@@ -12,10 +12,10 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one word list for all text.  Also takes a
-  single grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
   \item{positive.list}{A character vector of terms
   indicating positive reaction.}
@@ -30,9 +30,9 @@
   that increases the intensity of a positive or negative
   word.}
 
-  \item{rm.incomplete}{logical.  If TRUE text rows ending
-  with qdap's incomplete sentence end mark (\code{|}) will
-  be removed from the analysis.}
+  \item{rm.incomplete}{logical.  If \code{TRUE} text rows
+  ending with qdap's incomplete sentence end mark
+  (\code{|}) will be removed from the analysis.}
 
   \item{digits}{Integer; number of decimal places to round
   when printing.}

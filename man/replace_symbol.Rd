@@ -8,23 +8,23 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{dollar}{logical.  If TRUE replaces dollar sign ($)
-  with \code{"dollar"}.}
+  \item{dollar}{logical.  If \code{TRUE} replaces dollar
+  sign ($) with \code{"dollar"}.}
 
-  \item{percent}{logical.  If TRUE replaces percent sign
-  (\%) with \code{"percent"}.}
+  \item{percent}{logical.  If \code{TRUE} replaces percent
+  sign (\%) with \code{"percent"}.}
 
-  \item{pound}{logical.  If TRUE replaces pound sign (#)
-  with \code{"number"}.}
+  \item{pound}{logical.  If \code{TRUE} replaces pound sign
+  (#) with \code{"number"}.}
 
-  \item{at}{logical.  If TRUE replaces at sign (@) with
-  \code{"at"}.}
+  \item{at}{logical.  If \code{TRUE} replaces at sign (@)
+  with \code{"at"}.}
 
-  \item{and}{logical.  If TRUE replaces and sign (&) with
-  \code{"and"}.}
+  \item{and}{logical.  If \code{TRUE} replaces and sign (&)
+  with \code{"and"}.}
 
-  \item{with}{logical.  If TRUE replaces with sign (w/)
-  with \code{"with"}.}
+  \item{with}{logical.  If \code{TRUE} replaces with sign
+  (w/) with \code{"with"}.}
 }
 \value{
   Returns a character vector with symbols replaced..

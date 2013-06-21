@@ -11,14 +11,14 @@
   \item{digits}{Integer; number of decimal places to
   round.}
 
-  \item{percent}{logical.  If TRUE output given as percent.
-  If FALSE the output is proportion.}
+  \item{percent}{logical.  If \code{TRUE} output given as
+  percent.  If \code{FALSE} the output is proportion.}
 
-  \item{by.column}{logical.  If TRUE applies to the column.
-  If FALSE applies by row.}
+  \item{by.column}{logical.  If \code{TRUE} applies to the
+  column.  If \code{FALSE} applies by row.}
 
-  \item{round}{logical.  If TRUE rounds the returned values
-  (controlled by digits).}
+  \item{round}{logical.  If \code{TRUE} rounds the returned
+  values (controlled by digits).}
 }
 \value{
   Returns a matrix with proportionally scaled values.

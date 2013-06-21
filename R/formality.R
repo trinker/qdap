@@ -6,11 +6,11 @@
 #' @param text.var The text variable (or an object from \code{\link[qdap]{pos}},
 #' \code{\link[qdap]{pos.by}} or \code{\link[qdap]{formality}}.  Passing the 
 #' later three object will greatly reduce run time.
-#' @param grouping.var The grouping variables.  Default NULL generates formality 
-#' score for all text.  Also takes a single grouping variable or a list of 1 or 
-#' more grouping variables.
-#' @param sort.by.formality logical.  If TRUE orders the results by formality 
-#' score.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
+#' @param sort.by.formality logical.  If \code{TRUE} orders the results by 
+#' formality score.
 #' @param digits The number of digits displayed.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{pos.by}}.
 #' @section Warning: Heylighen & Dewaele(2002) state, "At present, a sample would 

@@ -11,14 +11,16 @@
   \item{digits}{Integer values specifying the number of
   digits to be printed.}
 
-  \item{percent}{logical.  If TRUE output given as percent.
-  If FALSE the output is proportion.  If NULL uses the
-  value from \code{\link[qdap]{termco}}.  Only used if
-  \code{label} is TRUE.}
+  \item{percent}{logical.  If \code{TRUE} output given as
+  percent.  If \code{FALSE} the output is proportion.  If
+  \code{NULL} uses the value from
+  \code{\link[qdap]{termco}}.  Only used if \code{label} is
+  \code{TRUE}.}
 
   \item{zero.replace}{Value to replace 0 values with.  If
-  NULL uses the value from \code{\link[qdap]{termco}}.
-  Only used if \code{label} is TRUE.}
+  \code{NULL} uses the value from
+  \code{\link[qdap]{termco}}.  Only used if \code{label} is
+  \code{TRUE}.}
 
   \item{\ldots}{ignored}
 }

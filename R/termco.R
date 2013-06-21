@@ -7,29 +7,29 @@
 #' use.
 #' 
 #' @param text.var The text variable.
-#' @param grouping.var The grouping variables.  Default NULL generates one word 
-#' list for all text.  Also takes a single grouping variable or a list of 1 or 
-#' more grouping variables.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
 #' @param match.list A list of named character vectors.
-#' @param short.term logical.  If TRUE column names are trimmed versions of the 
-#' match list, otherwise the terms are wrapped with 'term(phrase)'
-#' @param ignore.case logical.  If TRUE case is ignored.
-#' @param elim.old logical.  If TRUE eliminates the columns that are combined 
-#' together by the named match.list.
-#' @param percent logical.  If TRUE output given as percent.  If FALSE the 
-#' output is proportion.
+#' @param short.term logical.  If \code{TRUE} column names are trimmed versions 
+#' of the match list, otherwise the terms are wrapped with 'term(phrase)'
+#' @param ignore.case logical.  If \code{TRUE} case is ignored.
+#' @param elim.old logical.  If \code{TRUE} eliminates the columns that are 
+#' combined together by the named match.list.
+#' @param percent logical.  If \code{TRUE} output given as percent.  If 
+#' \code{FALSE} the output is proportion.
 #' @param digits Integer; number of decimal places to round when printing.   
-#' @param apostrophe.remove logical.  If TRUE removes apostrophes from the text 
+#' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophes from the text 
 #' before examining.
 #' @param char.keep A character vector of symbol character (i.e., punctuation) 
 #' that strip should keep.  The default is to strip everything except 
 #' apostrophes. \code{\link[qdap]{termco}} attempts to auto detect characters to 
 #' keep based on the elements in \code{match.list}. 
-#' @param digit.remove logical.  If TRUE strips digits from the text before 
-#' counting. \code{\link[qdap]{termco}} attempts to auto detect if digits should 
-#' be retained based on the elements in \code{match.list}. 
+#' @param digit.remove logical.  If \code{TRUE} strips digits from the text 
+#' before counting. \code{\link[qdap]{termco}} attempts to auto detect if digits 
+#' should be retained based on the elements in \code{match.list}. 
 #' @param zero.replace Value to replace 0 values with.
-#' @param \ldots Other argument supplied to strip.
+#' @param \ldots Other argument supplied to \code{\link[qdap]{strip}}.
 #' @return \code{termco} & \code{termco.d} - both return a list, of class 
 #' "termco.d", of data frames and information regarding word counts:
 #' \item{raw}{raw word counts by grouping variable} 

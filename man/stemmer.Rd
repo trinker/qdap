@@ -17,14 +17,14 @@
   For \code{\link[qdap]{stem2df}} this is a character
   vector of length one naming the text column.}
 
-  \item{rm.bracket}{logical.  If TRUE brackets are removed
-  from the text.}
+  \item{rm.bracket}{logical.  If \code{TRUE} brackets are
+  removed from the text.}
 
-  \item{capitalize}{logical.  If TRUE selected terms are
-  capitalized.}
+  \item{capitalize}{logical.  If \code{TRUE} selected terms
+  are capitalized.}
 
-  \item{warn}{logical.  If TRUE warns about rows not ending
-  with standard qdap punctuation endmarks.}
+  \item{warn}{logical.  If \code{TRUE} warns about rows not
+  ending with standard qdap punctuation endmarks.}
 
   \item{char.keep}{A character vector of symbols that
   should be kept within sentences.}

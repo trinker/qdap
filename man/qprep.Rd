@@ -10,7 +10,8 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{rm.dash}{logical.  If TRUE dashes will be removed.}
+  \item{rm.dash}{logical.  If \code{TRUE} dashes will be
+  removed.}
 
   \item{bracket}{The type of bracket (and encased text) to
   remove.  This is one of the strings \code{"curly"},
@@ -21,8 +22,8 @@
 
   \item{missing}{Value to assign to empty cells.}
 
-  \item{names}{logical.  If TRUE the sentences are given as
-  the names of the counts.}
+  \item{names}{logical.  If \code{TRUE} the sentences are
+  given as the names of the counts.}
 
   \item{abbreviation}{A two column key of abbreviations
   (column 1) and long form replacements (column 2) or a
@@ -33,8 +34,8 @@
   \item{replace}{A vector of long form replacements if a
   data frame is not supplied to the abbreviation argument.}
 
-  \item{ignore.case}{logical.  If TRUE replaces without
-  regard to capitalization.}
+  \item{ignore.case}{logical.  If \code{TRUE} replaces
+  without regard to capitalization.}
 
   \item{num.paste}{A character string c(\code{"separate"},
   \code{"combine"}); \code{"separate"} will treat each word

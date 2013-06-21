@@ -9,22 +9,22 @@
 #' @param col.names  A character vector specifying the column names of the 
 #' transcript columns.
 #' @param text.var A character string specifying the name of the text variable 
-#' will ensure that variable is classed as character.  If NULL 
+#' will ensure that variable is classed as character.  If \code{NULL} 
 #' \code{\link[qdap]{read.transcript}} attempts to guess the text.variable 
 #' (dialogue).
-#' @param merge.broke.tot logical.  If TRUE and if the file being read in is 
-#' .docx with broken space between a single turn of talk read.transcript 
+#' @param merge.broke.tot logical.  If \code{TRUE} and if the file being read in 
+#' is .docx with broken space between a single turn of talk read.transcript 
 #' will attempt to merge these into a single turn of talk.
-#' @param header logical.  If TRUE the file contains the names of the variables 
-#' as its first line.
+#' @param header logical.  If \code{TRUE} the file contains the names of the 
+#' variables as its first line.
 #' @param dash A character string to replace the en and em dashes special 
 #' characters (default is to remove).
 #' @param ellipsis A character string to replace the ellipsis special characters 
 #' (default is text ...).
-#' @param quote2bracket logical. If TRUE replaces curly quotes with curly braces 
-#' (default is FALSE).  If FALSE curly quotes are removed.
-#' @param rm.empty.rows logical.  If TRUE \code{\link[qdap]{read.transcript}}  
-#' attempts to remove empty rows.
+#' @param quote2bracket logical. If \code{TRUE} replaces curly quotes with curly 
+#' braces (default is \code{FALSE}).  If \code{FALSE} curly quotes are removed.
+#' @param rm.empty.rows logical.  If \code{TRUE} 
+#' \code{\link[qdap]{read.transcript}}  attempts to remove empty rows.
 #' @param na.strings A vector of character strings which are to be interpreted 
 #' as NA values.
 #' @param sep The field separator character. Values on each line of the file are 
@@ -33,7 +33,7 @@
 #' type being read in.
 #' @param skip Integer; the number of lines of the data file to skip before 
 #' beginning to read data.
-#' @param nontext2factor logical.  If TRUE attempts to convert any non text to a 
+#' @param nontext2factor logical.  If \code{TRUE} attempts to convert any non text to a 
 #' factor.
 #' @param text Character string: if file is not supplied and this is, then data 
 #' are read from the value of text. Notice that a literal string can be used to 

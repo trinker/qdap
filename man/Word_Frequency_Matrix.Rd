@@ -20,16 +20,16 @@
 \arguments{
   \item{text.var}{The text variable}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one word list for all text.  Also takes a
-  single grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
   \item{wfdf}{A word frequency data frame given instead of
   raw text.var and optional grouping.var. Basically
   converts a word frequency dataframe (wfdf) to a word
   frequency matrix (\code{\link[qdap]{wfm}}).  Default is
-  NULL.}
+  \code{NULL}.}
 
   \item{output}{Output type (either \code{"proportion"} or
   \code{"percent"}).}
@@ -37,7 +37,7 @@
   \item{stopwords}{A vector of stop words to remove.}
 
   \item{char2space}{A vector of characters to be turned
-  into spaces.  If \code{char.keep} is NULL,
+  into spaces.  If \code{char.keep} is \code{NULL},
   \code{char2space} will activate this argument.}
 
   \item{\ldots}{Other arguments supplied to
@@ -47,14 +47,14 @@
   places (round) or significant digits (signif) to be used.
   Negative values are allowed.}
 
-  \item{margins}{logical. If TRUE provides grouping.var and
-  word variable totals.}
+  \item{margins}{logical. If \code{TRUE} provides
+  grouping.var and word variable totals.}
 
   \item{word.lists}{A list of character vectors of words to
   pass to \code{wf.combine}}
 
-  \item{matrix}{logical.  If TRUE returns the output as a
-  \code{\link[qdap]{wfm}} rather than a
+  \item{matrix}{logical.  If \code{TRUE} returns the output
+  as a \code{\link[qdap]{wfm}} rather than a
   \code{\link[qdap]{wfdf}} object.}
 
   \item{wf.obj}{A \code{wfm} or \code{wfdf} object.}

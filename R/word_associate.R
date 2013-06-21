@@ -4,9 +4,9 @@
 #' output as a network graph and/or wordcloud.
 #' 
 #' @param text.var The text variable.         
-#' @param grouping.var The grouping variables.  Default NULL generates one 
-#' output for all text.  Also takes a single grouping variable or a list of 1 
-#' or more grouping variables.  
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
 #' @param match.string A list of vectors or vector of terms to associate in the 
 #' text.
 #' @param text.unit The text unit (either \code{"sentence"} or \code{"tot"}.  
@@ -17,8 +17,10 @@
 #' @param target.exclude A vector of words to exclude from the 
 #' \code{match.string}.
 #' @param stopwords Words to exclude from the analysis.
-#' @param network.plot logical.  If TRUE plots a network plot of the words.
-#' @param wordcloud logical.  If TRUE plots a wordcloud plot of the words.
+#' @param network.plot logical.  If \code{TRUE} plots a network plot of the 
+#' words.
+#' @param wordcloud logical.  If \code{TRUE} plots a wordcloud plot of the 
+#' words.
 #' @param cloud.colors A vector of colors equal to the length of 
 #' \code{match.string} +1.
 #' @param title.color A character vector of length one corresponding to the 
@@ -34,17 +36,17 @@
 #' \code{\link[igraph]{layout}}.
 #' @param nw.edge.color A character vector of length one corresponding to the 
 #' color of the plot edges.
-#' @param nw.label.proportional logical.  If TRUE scales the network plots across 
-#' grouping.var to allow plot to plot comparisons.
+#' @param nw.label.proportional logical.  If \code{TRUE} scales the network 
+#' plots across grouping.var to allow plot to plot comparisons.
 #' @param nw.title.padj Adjustment for the network plot title. For strings 
 #' parallel to the axes, padj = 0 means right or top alignment, and padj = 1 
 #' means left or bottom alignment.
 #' @param nw.title.location On which side of the network plot (1=bottom, 2=left, 
 #' 3=top, 4=right).
 #' @param title.font The font family of the cloud title. 
-#' @param title.cex Character expansion factor for the title. NULL and NA are 
-#' equivalent to 1.0.
-#' @param nw.edge.curved logical.  If TRUE edges will be curved rather than 
+#' @param title.cex Character expansion factor for the title. \code{NULL} and 
+#' \code{NA} are equivalent to 1.0.
+#' @param nw.edge.curved logical.  If \code{TRUE} edges will be curved rather than 
 #' straight paths.
 #' @param cloud.legend A character vector of names corresponding to the number of 
 #' vectors in \code{match.string}.  Both \code{nw.legend} and \code{cloud.legend}
@@ -52,7 +54,7 @@
 #' those legend labels.  If the user does not desire this behavior use the 
 #' \code{legend.override} argument.
 #' @param cloud.legend.cex Character expansion factor for the  wordcloud legend. 
-#' NULL and NA are equivalent to 1.0. 
+#' \code{NULL} and \code{NA} are equivalent to 1.0. 
 #' @param cloud.legend.location The x and y co-ordinates to be used to position the 
 #' wordcloud legend.  The location may also be specified by setting x to a 
 #' single keyword from the list \code{"bottomright"}, \code{"bottom"}, 
@@ -65,7 +67,7 @@
 #' those legend labels.  If the user does not desire this behavior use the 
 #' \code{legend.override} argument.
 #' @param nw.legend.cex Character expansion factor for the  network plot legend. 
-#' NULL and NA are equivalent to 1.0. 
+#' \code{NULL} and \code{NA} are equivalent to 1.0. 
 #' @param nw.legend.location  The x and y co-ordinates to be used to position the 
 #' network plot legend.  The location may also be specified by setting x to a 
 #' single keyword from the list \code{"bottomright"}, \code{"bottom"}, 
@@ -74,8 +76,9 @@
 #' on the inside of the plot frame at the given location. 
 #' @param legend.override By default if legend labels are supplied to either 
 #' \code{cloud.legend} or \code{nw.legend} may be set and if the other remains 
-#' NULL it will assume the supplied vector to the previous legend argument.  If 
-#' this behavior is not desired \code{legend.override} should be set to TRUE.
+#' \code{NULL} it will assume the supplied vector to the previous legend 
+#' argument.  If this behavior is not desired \code{legend.override} should be 
+#' set to \code{TRUE}.
 #' @param char2space Currently a road to nowhere.  Eventually this will allow 
 #' the retention of characters as is allowed in \code{trans.cloud} already.
 #' @param \dots Other arguments supplied to \code{\link[qdap]{trans.cloud}}.

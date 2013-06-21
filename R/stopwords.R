@@ -7,24 +7,25 @@
 #' has a number of data sets that can be used as stopwords including: 
 #' Top200Words, Top100Words, Top25Words.  For the tm package's traditional 
 #' English stop words use \code{tm::stopwords("english")}
-#' @param unlist logical.  If TRUE unlists into one vector.  General use 
-#' intended for when separate is FALSE.
-#' @param separate logical.  If TRUE separates sentences into words. If FALSE 
-#' retains sentences.
-#' @param strip logical.  IF TRUE strips the text of all punctuation except 
-#' apostrophes.
-#' @param unique logical.  If TRUE keeps only unique words (if unlist is TRUE) 
-#' or sentences (if unlist is FALSE).  General use intended for when unlist is 
-#' TRUE.
-#' @param char.keep If strip is TRUE this argument provides a means of retaining 
-#' supplied character(s).
-#' @param names logical.  If TRUE will name the elements of the vector or list 
-#' with the original textString.
-#' @param ignore.case logical.  If TRUE stop words will be removed regardless of 
-#' case.  Additionally, case will be stripped from the text.  If FALSE stopwords 
-#' removal is contingent upon case.  Additionally, case is not stripped.
-#' @param apostrophe.remove logical.  If TRUE removes apostrophe's from the 
-#' output.
+#' @param unlist logical.  If \code{TRUE} unlists into one vector.  General use 
+#' intended for when separate is \code{FALSE}.
+#' @param separate logical.  If \code{TRUE} separates sentences into words. If 
+#' \code{FALSE} retains sentences.
+#' @param strip logical.  IF \code{TRUE} strips the text of all punctuation 
+#' except apostrophes.
+#' @param unique logical.  If \code{TRUE} keeps only unique words (if unlist is 
+#' \code{TRUE}) or sentences (if unlist is \code{FALSE}).  General use intended 
+#' for when unlist is \code{TRUE}.
+#' @param char.keep If strip is \code{TRUE} this argument provides a means of 
+#' retaining supplied character(s).
+#' @param names logical.  If \code{TRUE} will name the elements of the vector or 
+#' list with the original \code{textString}.
+#' @param ignore.case logical.  If \code{TRUE} stop words will be removed 
+#' regardless of case.  Additionally, case will be stripped from the text.  If 
+#' \code{FALSE} stopwords removal is contingent upon case.  Additionally, case 
+#' is not stripped.
+#' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophe's from 
+#' the output.
 #' @param \ldots further arguments passed to strip function
 #' @return Returns a vector of sentences, vector of words, or (default) a list 
 #' of vectors of words with stop words removed.  Output depends on supplied 

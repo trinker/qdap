@@ -20,17 +20,17 @@
 
   \item{high}{The color to be used for higher values.}
 
-  \item{values}{logical.  If TRUE the cell values will be
-  included on the heatmap.}
+  \item{values}{logical.  If \code{TRUE} the cell values
+  will be included on the heatmap.}
 
   \item{digits}{The number of digits displayed if
-  \code{values} is TRUE.}
+  \code{values} is \code{TRUE}.}
 
   \item{text.size}{A integer size to plot the text if
-  \code{values} is TRUE.}
+  \code{values} is \code{TRUE}.}
 
   \item{text.color}{A character vector to plot the text if
-  \code{values} is TRUE.}
+  \code{values} is \code{TRUE}.}
 
   \item{xaxis.col}{A single character vector color choice
   for the high values.}
@@ -45,16 +45,16 @@
   \item{grid}{The color of the grid (Use NULL to remove the
   grid).}
 
-  \item{by.column}{logical.  If TRUE applies scaling to the
-  column.  If FALSE applies scaling by row (use NULL to
-  turn off scaling).}
+  \item{by.column}{logical.  If \code{TRUE} applies scaling
+  to the column.  If FALSE applies scaling by row (use
+  \code{NULL} to turn off scaling).}
 
-  \item{auto.size}{logical.  IF TRUE the visual will be
-  resized to create square cells.}
+  \item{auto.size}{logical.  IF \code{TRUE} the visual will
+  be resized to create square cells.}
 
   \item{mat2}{A second matrix equal in dimensions to
   \code{mat} that will be used for cell labels if
-  \code{values} is TRUE.}
+  \code{values} is \code{TRUE}.}
 }
 \description{
   A quick heatmap function for visualizing typical qdap

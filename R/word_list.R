@@ -3,24 +3,24 @@
 #' Transcript Apply Raw Word Lists and Frequency Counts by grouping variable(s).
 #' 
 #' @param text.var The text variable.
-#' @param grouping.var The grouping variables.  Default NULL generates one word 
-#' list for all text.  Also takes a single grouping variable or a list of 1 or 
-#' more grouping variables.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
 #' @param stopwords A vector of stop words to remove.
-#' @param alphabetical If TRUE the output of frequency lists is ordered 
+#' @param alphabetical If \code{TRUE} the output of frequency lists is ordered 
 #' alphabetically.  If FALSE the list is ordered by frequency rank.
 #' @param cut.n Cut off point for reduced frequency stop word list (rfswl).
-#' @param cap logical. If TRUE capitalizes words from the cap.list.
+#' @param cap logical. If \code{TRUE} capitalizes words from the cap.list.
 #' @param cap.list Vector of words to capitalize.
-#' @param cap.I logical. If TRUE capitalizes words containing the personal 
-#' pronoun I.
-#' @param rm.bracket logical If TRUE all brackets and bracketed text are 
+#' @param cap.I logical. If \code{TRUE} capitalizes words containing the 
+#' personal pronoun I.
+#' @param rm.bracket logical If \code{TRUE} all brackets and bracketed text are 
 #' removed from analysis.
 #' @param char.keep A character vector of symbols (i.e., punctuation) that 
 #' \code{word_list} should keep.  The default is to remove every symbol except 
 #' apostrophes.
-#' @param apostrophe.remove logical.  If TRUE removes apostrophes from the 
-#' output.
+#' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophes from 
+#' the output.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{strip}}.
 #' @return An object of class \code{"word_list"} is a list of lists of vectors 
 #' or dataframes containing the following components: 

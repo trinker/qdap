@@ -8,10 +8,10 @@
 #' @param sep A character string to separate the terms.
 #' @param rm.extra logical.  Should trailing, leading and > 1 continuous white 
 #' spaces be removed?
-#' @param ignore.case logical.  If FALSE, the pattern matching is case sensitive 
-#' and if TRUE, case is ignored during matching.
-#' @param fixed logical. If TRUE, pattern is a string to be matched as is. 
-#' Overrides all conflicting arguments.
+#' @param ignore.case logical.  If \code{FALSE}, the pattern matching is case sensitive 
+#' and if \code{TRUE}, case is ignored during matching.
+#' @param fixed logical. If \code{TRUE}, pattern is a string to be matched as 
+#' is. Overrides all conflicting arguments.
 #' @param \ldots Other arguments passed to \code{\link[base]{gsub}}.
 #' @return Returns a character vector with trailing and/or leading spaces.
 #' @note \code{link[qdap]{strip}} by default does not remove the double tilde 

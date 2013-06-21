@@ -4,20 +4,20 @@
 #' words between textual units containing key terms.
 #' 
 #' @param text.var The text variable.         
-#' @param grouping.var The grouping variables.  Default NULL generates one 
-#' output for all text.  Also takes a single grouping variable or a list of 1 
-#' or more grouping variables.  
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
 #' @param target.words A named list of vectors of words whose length corresponds 
 #' to \code{label.colors} (+1 length in cloud colors for non-matched terms).
 #' @param stopwords Words to exclude from the analysis (default is Top100Words).
 #' @param label.cex The magnification to be used for network plot labels 
 #' relative to the current setting of cex.  Default is .8.
-#' @param log.labels logical.  If TRUE uses a proportional log label for more 
-#' readable labels.  The formula is: \code{log(SUMS)/max(log(SUMS)))}. 
+#' @param log.labels logical.  If \code{TRUE} uses a proportional log label for 
+#' more readable labels.  The formula is: \code{log(SUMS)/max(log(SUMS)))}. 
 #' \code{label.size} adds more control over the label sizes. 
 #' @param label.size An optional sizing constant to add to labels if log.labels 
-#' is TRUE.
-#' @param edge.curved  logical.  If TRUE edges will be curved rather than 
+#' is \code{TRUE}.
+#' @param edge.curved  logical.  If \code{TRUE} edges will be curved rather than 
 #' straight paths.
 #' @param vertex.shape The shape of the vertices (see 
 #' \code{\link[igraph]{igraph.vertex.shapes}} for more).
@@ -34,23 +34,24 @@
 #' @param title.location On which side of the network plot (1=bottom, 2=left, 
 #' 3=top, 4=right).
 #' @param title.font The font family of the cloud title.
-#' @param title.cex Character expansion factor for the title. NULL and NA are 
-#' equivalent to 1.0.
+#' @param title.cex Character expansion factor for the title. \code{NULL} and 
+#' \code{NA} are equivalent to 1.0.
 #' @param title.color A character vector of length one corresponding to the 
 #' color of the title.
 #' @param legend A character vector of names corresponding to the number of 
 #' vectors in \code{match.string}.
 #' @param legend.cex Character expansion factor for the  network plot legend. 
-#' NULL and NA are equivalent to 1.0. 
+#' \code{NULL} and \code{NA} are equivalent to 1.0. 
 #' @param legend.location The x and y co-ordinates to be used to position the 
 #' network plot legend.  The location may also be specified by setting x to a 
 #' single keyword from the list \code{"bottomright"}, \code{"bottom"}, 
 #' \code{"bottomleft"}, \code{"left"}, \code{"topleft"}, \code{"top"}, 
-#' \code{"topright"}, \code{"right"} and \code{"center"}. This places the legend on 
-#' the inside of the plot frame at the given location. 
-#' @param plot logical.  If TRUE plots a network plot of the words.
+#' \code{"topright"}, \code{"right"} and \code{"center"}. This places the legend 
+#' on the inside of the plot frame at the given location. 
+#' @param plot logical.  If \code{TRUE} plots a network plot of the words.
 #' @param char2space A vector of characters to be turned into spaces.  If 
-#' \code{char.keep} is NULL, \code{char2space} will activate this argument.
+#' \code{char.keep} is \code{NULL}, \code{char2space} will activate this 
+#' argument.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{strip}}.
 #' @note Words can be kept as one by inserting a double tilde (\code{"~~"}), or 
 #' other character strings passed to char2space, as a single word/entry. This is 

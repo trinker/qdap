@@ -7,7 +7,7 @@
 #' character vector by \code{\link[base]{as.character}}.
 #' @param width A positive integer giving the target column for wrapping lines 
 #' in the output.
-#' @param copy2clip logical.  If TRUE attempts to copy the output to the 
+#' @param copy2clip logical.  If \code{TRUE} attempts to copy the output to the 
 #' clipboard.
 #' @return Prints a wrapped text vector to the console and copies the wrapped 
 #' text to the clipboard on a Mac or Windows machine.

@@ -7,15 +7,16 @@
 #' @param terms An optional argument to present the terms as one long character 
 #' string.  This is useful if the split (separator) is not a comma (e.g., spaces 
 #' are the term separators).
-#' @param space.wrap logical.  If TRUE wraps the vector of terms with a 
+#' @param space.wrap logical.  If \code{TRUE} wraps the vector of terms with a 
 #' leading/trailing space. 
-#' @param trailing logical.  If TRUE wraps the vector of terms with a 
+#' @param trailing logical.  If \code{TRUE} wraps the vector of terms with a 
 #' trailing space. 
-#' @param leading logical.  If TRUE wraps the vector of terms with a 
+#' @param leading logical.  If \code{TRUE} wraps the vector of terms with a 
 #' leading space. 
 #' @param split Character vector of length one to use for splitting (i.e., the 
 #' separator used in the vector).  For use with the argument \code{terms}.
-#' @param rm.blank logical.  If TRUE removes all blank spaces from the vector.
+#' @param rm.blank logical.  If \code{TRUE} removes all blank spaces from the 
+#' vector.
 #' @return Returns a character vector.
 #' @seealso \code{\link[base]{c}}
 #' @keywords character

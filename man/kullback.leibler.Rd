@@ -8,7 +8,7 @@
   \item{x}{A numeric vector, matrix or data frame.}
 
   \item{y}{A second numeric vector if x is also a vector.
-  Default is NULL.}
+  Default is \code{NULL}.}
 }
 \value{
   Returns a matrix of the Kullback Leibler measure between

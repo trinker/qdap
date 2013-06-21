@@ -16,24 +16,24 @@
 \arguments{
   \item{text.var}{The text variable}
 
-  \item{parallel}{logical.  If TRUE attempts to run the
-  function on multiple cores.  Note that this may not mean
-  a speed boost if you have one core or if the data set is
-  smaller as the cluster takes time to create.}
+  \item{parallel}{logical.  If \code{TRUE} attempts to run
+  the function on multiple cores.  Note that this may not
+  mean a speed boost if you have one core or if the data
+  set is smaller as the cluster takes time to create.}
 
-  \item{na.omit}{logical.  If TRUE missing values
+  \item{na.omit}{logical.  If \code{TRUE} missing values
   (\code{NA}) will be omitted.}
 
   \item{digits}{Integer; number of decimal places to round
   when printing.}
 
-  \item{progress.bar}{logical.  If TRUE attempts to provide
-  a OS appropriate progress bar.  If parallel is TRUE this
-  argument is ignored.  Note that setting this argument to
-  TRUE may slow down the function.}
+  \item{progress.bar}{logical.  If \code{TRUE} attempts to
+  provide a OS appropriate progress bar.  If parallel is
+  TRUE this argument is ignored. Note that setting this
+  argument to \code{TRUE} may slow down the function.}
 
-  \item{percent}{logical.  If TRUE output given as percent.
-  If FALSE the output is proportion.}
+  \item{percent}{logical.  If \code{TRUE} output given as
+  percent.  If \code{FALSE} the output is proportion.}
 
   \item{zero.replace}{Value to replace 0 values with.}
 
@@ -43,10 +43,10 @@
   wraps.  Consider adjusting this argument upward if the
   error \code{java.lang.OutOfMemoryError} occurs.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one word list for all text.  Also takes a
-  single grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
   \item{\ldots}{Other argument supplied to \code{pos}.}
 

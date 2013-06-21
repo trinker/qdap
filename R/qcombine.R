@@ -6,9 +6,9 @@
 #' @param combined.columns A list of named vectors of the colnames/indexes 
 #' of the numeric columns to be combined (summed).  If a vector is unnamed a 
 #' name will be assigned. 
-#' @param elim.old logical.  If TRUE eliminates the columns that are combined 
-#' together by the named match.list. TRUE outputs the table proportionally 
-#' (see \code{\link[qdap]{prop}}).
+#' @param elim.old logical.  If \code{TRUE} eliminates the columns that are 
+#' combined together by the named match.list. \code{TRUE} outputs the table 
+#' proportionally (see \code{\link[qdap]{prop}}).
 #' @return Returns a dataframe with combines columns.
 #' @keywords combine, transform
 #' @seealso \code{\link[base]{transform}}

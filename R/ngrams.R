@@ -3,9 +3,9 @@
 #' Transcript apply ngrams.
 #' 
 #' @param text.var The text variable
-#' @param grouping.var The grouping variables.  Default NULL generates one
-#' output for all text.  Also takes a single grouping variable or a list of 1 or
-#' more grouping variables.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
 #' @param n The max number of grams calculate. 
 #' @return Returns a list of:
 #' \item{raw}{A list of pasted single vectors of the ngrams per row.}

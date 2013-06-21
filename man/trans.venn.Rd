@@ -12,19 +12,19 @@
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{grouping.var}{The grouping variables.  Default NULL
-  generates one output for all text.  Also takes a single
-  grouping variable or a list of 1 or more grouping
-  variables.}
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
 
   \item{stopwords}{Words to exclude from the analysis.}
 
-  \item{rm.duplicates}{logical.  IF TRUE removes the
+  \item{rm.duplicates}{logical.  If \code{TRUE} removes the
   duplicated words from the analysis (only single usage is
   considered).}
 
-  \item{title}{logical.  IF TRUE adds a title corresponding
-  to the \code{grouping.var}.}
+  \item{title}{logical.  IF \code{TRUE} adds a title
+  corresponding to the \code{grouping.var}.}
 
   \item{title.font}{The font family of the cloud title.}
 
@@ -32,15 +32,16 @@
   corresponding to the color of the title.}
 
   \item{title.cex}{Character expansion factor for the
-  title. NULL and NA are equivalent to 1.0}
+  title. \code{NULL} and \code{NA} are equivalent to 1.0}
 
   \item{title.name}{A title for the plot.}
 
-  \item{legend}{logical.  If TRUE uses the names from the
-  \code{target.words} list corresponding to cloud.colors.}
+  \item{legend}{logical.  If \code{TRUE} uses the names
+  from the \code{target.words} list corresponding to
+  cloud.colors.}
 
   \item{legend.cex}{Character expansion factor for the
-  legend. NULL and NA are equivalent to 1.0.}
+  legend. \code{NULL} and \code{NA} are equivalent to 1.0.}
 
   \item{legend.location}{The x and y co-ordinates to be
   used to position the legend.  The location may also be
@@ -54,8 +55,8 @@
   \item{legend.text.col}{The color used for the legend
   text.}
 
-  \item{legend.horiz}{logical; if TRUE, set the legend
-  horizontally rather than vertically.}
+  \item{legend.horiz}{logical; if \code{TRUE}, set the
+  legend horizontally rather than vertically.}
 
   \item{\dots}{Other arguments passed to plot.}
 }

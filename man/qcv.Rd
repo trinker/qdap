@@ -15,21 +15,21 @@
   (separator) is not a comma (e.g., spaces are the term
   separators).}
 
-  \item{space.wrap}{logical.  If TRUE wraps the vector of
-  terms with a leading/trailing space.}
+  \item{space.wrap}{logical.  If \code{TRUE} wraps the
+  vector of terms with a leading/trailing space.}
 
-  \item{trailing}{logical.  If TRUE wraps the vector of
-  terms with a trailing space.}
+  \item{trailing}{logical.  If \code{TRUE} wraps the vector
+  of terms with a trailing space.}
 
-  \item{leading}{logical.  If TRUE wraps the vector of
-  terms with a leading space.}
+  \item{leading}{logical.  If \code{TRUE} wraps the vector
+  of terms with a leading space.}
 
   \item{split}{Character vector of length one to use for
   splitting (i.e., the separator used in the vector).  For
   use with the argument \code{terms}.}
 
-  \item{rm.blank}{logical.  If TRUE removes all blank
-  spaces from the vector.}
+  \item{rm.blank}{logical.  If \code{TRUE} removes all
+  blank spaces from the vector.}
 }
 \value{
   Returns a character vector.
