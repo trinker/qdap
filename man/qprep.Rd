@@ -44,7 +44,7 @@
   \code{NULL} which turns off this parsing technique.}
 
   \item{\ldots}{Other arguments passed to
-  \code{link[qdap]{replace_symbol}}.}
+  \code{\link[qdap]{replace_symbol}}.}
 }
 \description{
   Wrapper for \code{\link[qdap]{bracketX}},

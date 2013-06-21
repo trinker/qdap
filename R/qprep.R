@@ -28,7 +28,7 @@
 #' \code{"separate"} will treat each word section as separate, \code{"combine"} 
 #' will lump the sections together as one word.  Also takes the argument 
 #' \code{NULL} which turns off this parsing technique.
-#' @param \ldots Other arguments passed to \code{link[qdap]{replace_symbol}}.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{replace_symbol}}.
 #' @seealso 
 #' \code{\link[qdap]{bracketX}},
 #' \code{\link[qdap]{replace_abbreviation}},
