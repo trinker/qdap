@@ -6,11 +6,11 @@ citEntry(entry = "manual",
     author = "Tyler W. Rinker",
     organization = "University at Buffalo/SUNY",
     address = "Buffalo, New York",
-    note = "version 0.2.3",
+    note = "version 0.2.4",
     year = "2013",
     url = "http://github.com/trinker/qdap", 
     textVersion  = paste("Rinker, T. W. (2013).",
         "qdap: Quantitative Discourse Analysis Package.",
-        "version 0.2.3. University at Buffalo. Buffalo, New York.",
+        "version 0.2.4. University at Buffalo. Buffalo, New York.",
         "http://github.com/trinker/qdap")
 )
