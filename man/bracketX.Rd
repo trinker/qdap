@@ -34,16 +34,16 @@
   \item{fix.space}{logical.  If \code{TRUE} extra spaces
   left behind from an extraction will be eliminated.}
 
-  \item{scrub}{logical.  If TRUE
+  \item{scrub}{logical.  If \code{TRUE}
   \code{\link[qdap]{scrubber}} will clean the text.}
 
-  \item{with}{logical.  If TRUE returns the brackets and
-  the bracketed text.}
+  \item{with}{logical.  If \code{TRUE} returns the brackets
+  and the bracketed text.}
 
-  \item{merge}{logical.  If TRUE the results of each
-  bracket type will be merged by sentence.  FALSE returns a
-  named list of lists of vectors of bracketed text per
-  bracket type.}
+  \item{merge}{logical.  If \code{TRUE} the results of each
+  bracket type will be merged by sentence.  \code{FALSE}
+  returns a named list of lists of vectors of bracketed
+  text per bracket type.}
 
   \item{left}{A vector of character or numeric symbols as
   the left edge to extract.}

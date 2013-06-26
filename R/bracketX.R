@@ -12,8 +12,8 @@
 #' the counts.
 #' @param fix.space logical.  If \code{TRUE} extra spaces left behind from an 
 #' extraction will be eliminated.
-#' @param scrub logical.  If TRUE \code{\link[qdap]{scrubber}} will clean the 
-#' text.
+#' @param scrub logical.  If \code{TRUE} \code{\link[qdap]{scrubber}} will clean 
+#' the text.
 #' @return \code{bracketX} -  returns a vector of text with brackets removed.
 #' @rdname bracketX
 #' @references \url{http://stackoverflow.com/q/8621066/1000343}
@@ -100,10 +100,11 @@ function (text.var, bracket = "all", missing = NULL, names = FALSE,
 #' \code{bracketXtract} - Apply bracket extraction to character vectors.
 #' 
 #' @rdname bracketX
-#' @param with logical.  If TRUE returns the brackets and the bracketed text.
-#' @param merge logical.  If TRUE the results of each bracket type will be 
-#' merged by sentence.  FALSE returns a named list of lists of vectors of 
-#' bracketed text per bracket type.  
+#' @param with logical.  If \code{TRUE} returns the brackets and the bracketed 
+#' text.
+#' @param merge logical.  If \code{TRUE} the results of each bracket type will 
+#' be merged by sentence.  \code{FALSE} returns a named list of lists of vectors 
+#' of bracketed text per bracket type.  
 #' @return \code{bracketXtract} -  returns a list of vectors of bracketed text.
 #' @author  Martin Morgan and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @export

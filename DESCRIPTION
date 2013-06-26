@@ -2,7 +2,7 @@ Package: qdap
 Type: Package
 Title: Bridging the gap between qualitative data and quantitative analysis
 Version: 0.2.4
-Date: 2013-05-18
+Date: 2013-06-26
 Author: Tyler Rinker
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Depends:
