@@ -3,11 +3,11 @@
 #' Environment based hash table useful for large vector lookups.
 #' 
 #' @param terms A vector of terms to undergo a lookup.
-#' @param key.match Either a two column data frame (if data frame supplied no 
-#' key reassign needed) of a match key and reassignment column or a single 
-#' vector match key.
+#' @param key.match Takes (1) a two column data.frame of a match key and 
+#' reassignment column, (2) a named list of vectors(if data.frame/named list 
+#' supplied no key reassign needed) or (3) a single vector match key.
 #' @param key.reassign A single reassignment vector supplied if key.match is 
-#' not a two column data frame.
+#' not a two column data.frame/named list.
 #' @param missing Value to assign to terms not matching the key.match.
 #' @return Outputs A new vector with reassigned values.
 #' @seealso 
@@ -16,18 +16,33 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' lookup(mtcars$carb, sort(unique(mtcars$carb)),        
-#'     c('one', 'two', 'three', 'four', 'six', 'eight')) 
-#' lookup(mtcars$carb, sort(unique(mtcars$carb)),        
-#'     seq(10, 60, by=10))
+#' ## Supply a dataframe to key.match
 #' 
 #' lookup(1:5, data.frame(1:4, 11:14))
+#' 
 #' lookup(LETTERS[1:5], data.frame(LETTERS[1:5], 100:104))
 #' 
 #' key <- data.frame(x=1:2, y=c("A", "B"))
 #' big.vec <- sample(1:2, 3000000, T)
 #' out <- lookup(big.vec, key)
 #' out[1:20]
+#' 
+#' ## Supply a named list of vectors to key.match
+#' 
+#' codes <- list(A=c(1, 2, 4), 
+#'     B = c(3, 5),
+#'     C = 7,
+#'     D = c(6, 8:10))
+#' 
+#' lookup(1:10, codes)
+#' 
+#' ## Supply a single vector to key.match and key.assign
+#' 
+#' lookup(mtcars$carb, sort(unique(mtcars$carb)),        
+#'     c('one', 'two', 'three', 'four', 'six', 'eight')) 
+#'     
+#' lookup(mtcars$carb, sort(unique(mtcars$carb)),        
+#'     seq(10, 60, by=10))
 #' }
 lookup <-
 function(terms, key.match, key.reassign=NULL, missing = NA) {
@@ -41,7 +56,10 @@ function(terms, key.match, key.reassign=NULL, missing = NA) {
         })
         return(e)
     }  
-    if (is.null(key.reassign)) {
+    if (is.list(key.match)) {
+        if (!is.data.frame(key.match)) {
+            key.match <- list2df(key.match) 
+        }
         if (is.factor(key.match[, 2])) {
             key.match[, 2] <- as.character(key.match[, 2])
         }

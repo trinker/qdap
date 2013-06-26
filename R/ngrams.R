@@ -67,20 +67,20 @@ ngrams <- function(text.var, grouping.var = NULL, n = 2) {
     names(out6) <- paste0("n_", sort(unique(lens)))
     o <- list(raw = out, group = out2, unlist1 = out3, unlist2 = out4, 
         group_n = out5, all = unname(sort(unlist(out3))), all_n = out6)
-    class(o) <- "ngram"
+    class(o) <- "ngrams"
     o
 
 }
 
-#' Prints an ngram object
+#' Prints an ngrams object
 #' 
-#' Prints an ngram object
+#' Prints an ngrams object
 #' 
-#' @param x The ngram object
+#' @param x The ngrams object
 #' @param \ldots ignored
-#' @S3method print ngram
-#' @method print ngram
-print.ngram <-
+#' @S3method print ngrams
+#' @method print ngrams
+print.ngrams <-
 function(x, ...) {
     print(x$all_n)
 }

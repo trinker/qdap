@@ -28,6 +28,8 @@ MINOR FEATURES
 * `mgsub` now gets a `trim` argument that optionally reomves trailing leading 
   white spaces.
 
+* `lookup` now takes a list of named vectors for the key.match argument.
+
 CHANGES
 
 * `new_project` directory can now be transfered without breaking paths (i.e.,

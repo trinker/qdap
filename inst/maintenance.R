@@ -1,4 +1,9 @@
 #========================
+# Delete manuals Rd files
+#========================
+mans <- file.path(getwd(), "man")
+delete(file.path(mans, dir(mans)))
+#========================
 #staticdocs dev version
 #========================
 #packages
