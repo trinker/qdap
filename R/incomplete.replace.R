@@ -8,7 +8,7 @@
 #' @param scan.mode logical.  If \code{TRUE} only scans and reports incomplete 
 #' sentences.
 #' @return Returns a text variable (character sting) with incomplete sentence 
-#' marks (.., ..., .?, ..?, en \& em dash etc. replaced with "|".  If scan mode 
+#' marks (.., ..., .?, ..?, en \& em dash etc.) replaced with "|".  If scan mode 
 #' is \code{TRUE} returns a data frame with incomplete sentence location.
 #' @keywords incomplete-sentence
 #' @export
