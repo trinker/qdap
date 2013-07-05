@@ -5,7 +5,9 @@
   url_dl(..., url = 61803503)
 }
 \arguments{
-  \item{\ldots}{Document names to download.}
+  \item{\ldots}{Document names to download. Quoted strings
+  (complete urls) can also be supplied (if so no url
+  argument is supplied).}
 
   \item{url}{The download url or dropbox key.}
 }
@@ -22,6 +24,7 @@
 }
 \examples{
 \dontrun{
+## Example 1 (download from dropbox)
 # download transcript of the debate to working directory
 url_dl(pres.deb1.docx, pres.deb2.docx, pres.deb3.docx)
 
@@ -34,6 +37,12 @@ docs <- qcv(pres.deb1.docx, pres.deb2.docx, pres.deb3.docx)
 dir() \%in\% docs
 delete(docs)    #remove the documents
 dir() \%in\% docs
+
+## Example 2 (quoted string urls)
+url_dl("https://dl.dropboxusercontent.com/u/61803503/qdap.pdf",
+   "http://www.cran.r-project.org/doc/manuals/R-intro.pdf")
+
+delete(qcv(qdap.pdf, R-intro.pdf))
 }
 }
 

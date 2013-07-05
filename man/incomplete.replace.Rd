@@ -15,7 +15,7 @@
 }
 \value{
   Returns a text variable (character sting) with incomplete
-  sentence marks (.., ..., .?, ..?, en \& em dash etc.
+  sentence marks (.., ..., .?, ..?, en \& em dash etc.)
   replaced with "|".  If scan mode is \code{TRUE} returns a
   data frame with incomplete sentence location.
 }
