@@ -31,7 +31,7 @@
 #' @param zero.replace Value to replace 0 values with.
 #' @param \ldots Other argument supplied to \code{\link[qdap]{strip}}.
 #' @return \code{termco} & \code{termco.d} - both return a list, of class 
-#' "termco.d", of data frames and information regarding word counts:
+#' "termco", of data frames and information regarding word counts:
 #' \item{raw}{raw word counts by grouping variable} 
 #' \item{prop}{proportional word counts by grouping variable; proportional to 
 #' each individual's word use} 

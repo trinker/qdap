@@ -108,16 +108,16 @@
 }
 \value{
   \code{termco} & \code{termco.d} - both return a list, of
-  class "termco.d", of data frames and information
-  regarding word counts: \item{raw}{raw word counts by
-  grouping variable} \item{prop}{proportional word counts
-  by grouping variable; proportional to each individual's
-  word use} \item{rnp}{a character combination data frame
-  of raw and proportional} \item{zero_replace}{value to
-  replace zeros with; mostly internal use}
-  \item{percent}{The value of percent used for plotting
-  purposes.} \item{digits}{integer value of number of
-  digits to display; mostly internal use}
+  class "termco", of data frames and information regarding
+  word counts: \item{raw}{raw word counts by grouping
+  variable} \item{prop}{proportional word counts by
+  grouping variable; proportional to each individual's word
+  use} \item{rnp}{a character combination data frame of raw
+  and proportional} \item{zero_replace}{value to replace
+  zeros with; mostly internal use} \item{percent}{The value
+  of percent used for plotting purposes.}
+  \item{digits}{integer value of number of digits to
+  display; mostly internal use}
 
   \code{term.match} - returns a list or vector of possible
   words that match term(s).
