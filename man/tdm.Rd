@@ -1,6 +1,6 @@
 \name{tdm}
 \alias{tdm}
-\title{Convert/Generate Term Document Matrix}
+\title{Convert/Generate Term Document Matrix or Document Term Matrix}
 \usage{
   tdm(text.var, grouping.var = NULL, ...)
 }
@@ -28,6 +28,7 @@
 \dontrun{
 x <- wfm(DATA$state, DATA$person)
 tdm(x)
+dtm(x)
 library(lsa)
 lsa(tdm(x), dims=dimcalc_share())
 lsa(tdm(DATA$state, DATA$person), dims=dimcalc_share())

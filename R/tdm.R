@@ -1,4 +1,4 @@
-#' Convert/Generate Term Document Matrix
+#' Convert/Generate Term Document Matrix or Document Term Matrix
 #' 
 #' Create term document matrices from raw text or \code{wfm} for use with other 
 #' text analysis packages.
@@ -16,6 +16,7 @@
 #' \dontrun{
 #' x <- wfm(DATA$state, DATA$person)
 #' tdm(x)
+#' dtm(x)
 #' library(lsa)
 #' lsa(tdm(x), dims=dimcalc_share())
 #' lsa(tdm(DATA$state, DATA$person), dims=dimcalc_share())
@@ -29,3 +30,14 @@ tdm <- function(text.var, grouping.var = NULL, ...) {
     colnames(d)[1:2] <- c("Terms", "Docs")
     xtabs(value ~ Terms + Docs, d)
 }
+
+#' Convert/Generate Term Document Matrix or Document Term Matrix
+#' 
+#' Create document term matrices from raw text or \code{wfm} for use with other 
+#' text analysis packages.
+#' 
+#' @export
+dtm <- function(text.var, grouping.var = NULL, ...) {
+    t(tdm(text.var = text.var, grouping.var = grouping.var, ...))
+}
+
