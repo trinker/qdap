@@ -12,6 +12,7 @@
 #' though not identical.
 #' @export
 #' @import reshape2
+#' @rdname tdm
 #' @examples
 #' \dontrun{
 #' x <- wfm(DATA$state, DATA$person)
@@ -36,6 +37,7 @@ tdm <- function(text.var, grouping.var = NULL, ...) {
 #' Create document term matrices from raw text or \code{wfm} for use with other 
 #' text analysis packages.
 #' 
+#' @rdname tdm
 #' @export
 dtm <- function(text.var, grouping.var = NULL, ...) {
     t(tdm(text.var = text.var, grouping.var = grouping.var, ...))
