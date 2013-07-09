@@ -8,7 +8,8 @@
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
 #' @param \ldots Other arguments passed to \code{wfm}.
-#' @details Similar to the \code{tm} package's \code{\link[tm]{TermDocumentMatrix}} 
+#' @details Similar to the \code{tm} package's 
+#' \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}} 
 #' though not identical.
 #' @export
 #' @import reshape2

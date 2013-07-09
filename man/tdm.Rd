@@ -27,8 +27,8 @@
 }
 \details{
   Similar to the \code{tm} package's
-  \code{\link[tm]{TermDocumentMatrix}} though not
-  identical.
+  \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}
+  though not identical.
 }
 \examples{
 \dontrun{
