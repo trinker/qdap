@@ -19,11 +19,11 @@
   \item{\ldots}{Other arguments passed to \code{wfm}.}
 }
 \description{
-  Create term document matrices from raw text or \code{wfm}
-  for use with other text analysis packages.
+  \code{tdm} - Create term document matrices from raw text
+  or \code{wfm} for use with other text analysis packages.
 
-  Create document term matrices from raw text or \code{wfm}
-  for use with other text analysis packages.
+  \code{dtm} - Create document term matrices from raw text
+  or \code{wfm} for use with other text analysis packages.
 }
 \details{
   Similar to the \code{tm} package's

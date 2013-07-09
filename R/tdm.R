@@ -1,7 +1,7 @@
 #' Convert/Generate Term Document Matrix or Document Term Matrix
 #' 
-#' Create term document matrices from raw text or \code{wfm} for use with other 
-#' text analysis packages.
+#' \code{tdm} - Create term document matrices from raw text or \code{wfm} for 
+#' use with other text analysis packages.
 #'
 #' @param text.var The text variable or a \code{wfm} object.
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
@@ -34,8 +34,8 @@ tdm <- function(text.var, grouping.var = NULL, ...) {
 
 #' Convert/Generate Term Document Matrix or Document Term Matrix
 #' 
-#' Create document term matrices from raw text or \code{wfm} for use with other 
-#' text analysis packages.
+#' \code{dtm} - Create document term matrices from raw text or \code{wfm} for 
+#' use with other text analysis packages.
 #' 
 #' @rdname tdm
 #' @export
