@@ -40,6 +40,7 @@
 #' dat <- sentSplit(DATA, "state")
 #' ws.ob <- with(dat, word_stats(state, list(sex, adult), tot=tot))
 #' qheat(ws.ob)
+#' qheat(ws.ob) + coord_flip()
 #' qheat(ws.ob, order.by = "sptot", 
 #'     xaxis.col = c("red", "black", "green", "blue"))
 #' qheat(ws.ob, order.by = "sptot")
@@ -82,9 +83,14 @@ qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
         class(mat2) <- "data.frame"
     }      
     dat2 <- as.matrix(mat[, -1])
+    NMS <- colnames(dat2)
     if (!is.null(by.column)){
         by.column <- by.column + 1
         dat2 <- apply(dat2, by.column, scale)
+        if (by.column == 1) {
+            dat2 <- t(dat2)
+            colnames(dat2) <- NMS
+        }
     }
     if (!is.null(order.by)) {
         if(substring(order.by, 1, 1) != "-") {

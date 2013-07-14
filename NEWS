@@ -23,6 +23,9 @@ qdap 0.2.4
 
 BUG FIXES
 
+* `qheat` the argument `by.column = FALSE` resulted in an error.  This behavior 
+  has been fixed.
+
 NEW FEATURES
 
 MINOR FEATURES
