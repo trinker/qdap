@@ -33,6 +33,10 @@ MINOR FEATURES
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 
   supplied)
 
+* `condense` is a function that condense dataframe columns that are a list of 
+  vectors to a single vector of strings.  This outputs a dataframe with 
+  condensed columns that can be wrote to csv/xlsx.
+
 CHANGES
 
 qdap 0.2.3
