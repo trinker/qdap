@@ -18,6 +18,7 @@
 #' created in the working directory with the data and time stamp as the folder 
 #' name.
 #' @param open logical.  If \code{TRUE} opens the directory upon completion.
+#' @param sep A character string to separate the terms.
 #' @return \code{mcsv_r} - reads in multiple csv files at once.
 #' @rdname multicsv
 #' @note \code{\link[qdap]{mcsv_r}} is useful for reading in multiple csv files 
@@ -27,6 +28,7 @@
 #' "read" (r) or "write" (w).
 #' @seealso \code{\link[qdap]{cm_range2long}},
 #' \code{\link[qdap]{cm_df.temp}},
+#' \code{\link[qdap]{condense}},
 #' \code{\link[base]{assign}}
 #' @export
 #' @examples
@@ -85,7 +87,7 @@ function(files, a.names = NULL, l.name = NULL, list = TRUE, pos = 1,
 #' @rdname multicsv
 #' @export
 mcsv_w <-
-function(..., dir = NULL, open = FALSE){
+function(..., dir = NULL, open = FALSE, sep = ", "){
     x <- match.call(expand.dots = FALSE)
     z <- as.character(x[[2]])
     x2 <- list(...)
@@ -102,6 +104,8 @@ function(..., dir = NULL, open = FALSE){
     files <- paste0(y, "/", z, ".csv")
     invisible(lapply(seq_along(x2), function(i){
         x3 <-x2[i]
+        x3 <- x3[[1]]
+        x3 <- condense(x3, sep = sep)
         names(x3) <- gsub(names(x2)[i], "", names(x3))
         write.table(x3, file = files[i],  sep = ",", col.names = TRUE, 
             row.names=F, qmethod = "double")
@@ -114,5 +118,6 @@ function(..., dir = NULL, open = FALSE){
             system(paste(Sys.getenv("R_BROWSER"), y))
         }
     }
+    message(paste("files written to:\n", y))
     invisible(y)
 }

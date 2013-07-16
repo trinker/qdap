@@ -6,7 +6,7 @@
   mcsv_r(files, a.names = NULL, l.name = NULL, list = TRUE,
     pos = 1, envir = as.environment(pos))
 
-  mcsv_w(..., dir = NULL, open = FALSE)
+  mcsv_w(..., dir = NULL, open = FALSE, sep = ", ")
 }
 \arguments{
   \item{files}{csv file(s) to read.}
@@ -38,6 +38,8 @@
 
   \item{open}{logical.  If \code{TRUE} opens the directory
   upon completion.}
+
+  \item{sep}{A character string to separate the terms.}
 }
 \value{
   \code{mcsv_r} - reads in multiple csv files at once.
@@ -84,6 +86,6 @@ delete("foo")
 \seealso{
   \code{\link[qdap]{cm_range2long}},
   \code{\link[qdap]{cm_df.temp}},
-  \code{\link[base]{assign}}
+  \code{\link[qdap]{condense}}, \code{\link[base]{assign}}
 }
 

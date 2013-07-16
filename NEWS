@@ -37,6 +37,10 @@ MINOR FEATURES
   vectors to a single vector of strings.  This outputs a dataframe with 
   condensed columns that can be wrote to csv/xlsx.
 
+* `mcsv_w` now uses `condese` to attempt to attempt to condense columns that are 
+  lists of vectors to a single vector of strings.  This adds flexiblity to 
+  `mcsv_w` with more data sets.
+
 CHANGES
 
 qdap 0.2.3
