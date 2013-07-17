@@ -20,9 +20,9 @@
 #' @param yaxis.col  A single character vector color choice for the low values.
 #' @param order.by An optional character vector of a variable name to order the 
 #' columns by.  To reverse use a negative (\code{-}) before the column name.
-#' @param grid The color of the grid (Use NULL to remove the grid).  
+#' @param grid The color of the grid (Use \code{NULL} to remove the grid).  
 #' @param by.column logical.  If \code{TRUE} applies scaling to the column.  If 
-#' FALSE  applies scaling by row (use \code{NULL} to turn off scaling).
+#' \code{FALSE}  applies scaling by row (use \code{NULL} to turn off scaling).
 #' @param auto.size logical.  IF \code{TRUE} the visual will be resized to 
 #' create square cells.
 #' @param mat2 A second matrix equal in dimensions to \code{mat} that will be 

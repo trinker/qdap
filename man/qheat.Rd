@@ -42,12 +42,12 @@
   variable name to order the columns by.  To reverse use a
   negative (\code{-}) before the column name.}
 
-  \item{grid}{The color of the grid (Use NULL to remove the
-  grid).}
+  \item{grid}{The color of the grid (Use \code{NULL} to
+  remove the grid).}
 
   \item{by.column}{logical.  If \code{TRUE} applies scaling
-  to the column.  If FALSE applies scaling by row (use
-  \code{NULL} to turn off scaling).}
+  to the column.  If \code{FALSE} applies scaling by row
+  (use \code{NULL} to turn off scaling).}
 
   \item{auto.size}{logical.  IF \code{TRUE} the visual will
   be resized to create square cells.}
