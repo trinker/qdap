@@ -13,9 +13,10 @@
 
   \item{stopwords}{A character vector of words to remove
   from the text.  qdap has a number of data sets that can
-  be used as stopwords including: Top200Words, Top100Words,
-  Top25Words.  For the tm package's traditional English
-  stop words use \code{tm::stopwords("english")}}
+  be used as stopwords including: \code{Top200Words},
+  \code{Top100Words}, \code{Top25Words}.  For the tm
+  package's traditional English stop words use
+  \code{tm::stopwords("english")}.}
 
   \item{unlist}{logical.  If \code{TRUE} unlists into one
   vector.  General use intended for when separate is
@@ -48,7 +49,8 @@
   \item{apostrophe.remove}{logical.  If \code{TRUE} removes
   apostrophe's from the output.}
 
-  \item{\ldots}{further arguments passed to strip function}
+  \item{\ldots}{further arguments passed to
+  \code{\link[qdap]{strip}} function.}
 }
 \value{
   Returns a vector of sentences, vector of words, or
