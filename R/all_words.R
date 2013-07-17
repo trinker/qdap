@@ -1,19 +1,20 @@
 #' Searches Text Column for Words
 #' 
 #' A convenience function to find words that begin with or contain a letter 
-#' chunk and returns the frequency counts of the number of occurrences of each word.
+#' chunk and returns the frequency counts of the number of occurrences of each 
+#' word.
 #' 
 #' @param text.var The text variable.
-#' @param begins.with This argument takes a word chunk.  Default is NULL. Use 
-#' this if searching for a word beginning with the word chunk.
-#' @param contains This argument takes a word chunk.  Default is NULL. Use this 
-#' if searching for a word containing the word chunk.
-#' @param alphabetical logical.  If TRUE orders rows alphabetically, if FALSE 
-#' orders the rows by frequency.
+#' @param begins.with This argument takes a word chunk.  Default is \code{NULL}. 
+#' Use this if searching for a word beginning with the word chunk.
+#' @param contains This argument takes a word chunk.  Default is \code{NULL}. 
+#' Use this if searching for a word containing the word chunk.
+#' @param alphabetical logical.  If \code{TRUE} orders rows alphabetically, if 
+#' \code{FALSE} orders the rows by frequency.
 #' @return Returns a dataframe with frequency counts of words that begin with or 
 #' contain the provided word chunk.
 #' @note Cannot provide both \code{begins.with} and \code{contains} arguments 
-#' at once.  If both begins.with and contains are NULL 
+#' at once.  If both begins.with and contains are \code{NULL}.
 #' \code{\link[qdap]{all_words}} returns a 
 #' frequency count for all words.
 #' @seealso 

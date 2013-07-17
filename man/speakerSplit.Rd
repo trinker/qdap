@@ -12,7 +12,7 @@
   \item{person.var}{The person variable to be stretched.}
 
   \item{sep}{The separator(s) to search for and break on.
-  Default is: c(".", "_", ";")}
+  Default is: c("and", "&", ",")}
 
   \item{track.reps}{logical.  If \code{TRUE} leaves the row
   names of person variable cells that were repeated and

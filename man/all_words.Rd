@@ -9,15 +9,16 @@
   \item{text.var}{The text variable.}
 
   \item{begins.with}{This argument takes a word chunk.
-  Default is NULL. Use this if searching for a word
+  Default is \code{NULL}. Use this if searching for a word
   beginning with the word chunk.}
 
   \item{contains}{This argument takes a word chunk.
-  Default is NULL. Use this if searching for a word
+  Default is \code{NULL}. Use this if searching for a word
   containing the word chunk.}
 
-  \item{alphabetical}{logical.  If TRUE orders rows
-  alphabetically, if FALSE orders the rows by frequency.}
+  \item{alphabetical}{logical.  If \code{TRUE} orders rows
+  alphabetically, if \code{FALSE} orders the rows by
+  frequency.}
 }
 \value{
   Returns a dataframe with frequency counts of words that
@@ -31,8 +32,9 @@
 \note{
   Cannot provide both \code{begins.with} and
   \code{contains} arguments at once.  If both begins.with
-  and contains are NULL \code{\link[qdap]{all_words}}
-  returns a frequency count for all words.
+  and contains are \code{NULL}.
+  \code{\link[qdap]{all_words}} returns a frequency count
+  for all words.
 }
 \examples{
 \dontrun{

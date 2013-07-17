@@ -5,7 +5,7 @@
 #' @param dataframe A dataframe that contains the person variable.
 #' @param person.var The person variable to be stretched.
 #' @param sep The separator(s) to search for and break on.  Default is: 
-#' c(".", "_", ";")
+#' c("and", "&", ",")
 #' @param track.reps logical.  If \code{TRUE} leaves the row names of person 
 #' variable cells that were repeated and stretched.
 #' @return Returns an expanded dataframe with person variable stretched and 
