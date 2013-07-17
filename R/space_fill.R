@@ -13,10 +13,11 @@
 #' @param fixed logical. If \code{TRUE}, pattern is a string to be matched as 
 #' is. Overrides all conflicting arguments.
 #' @param \ldots Other arguments passed to \code{\link[base]{gsub}}.
-#' @return Returns a character vector with trailing and/or leading spaces.
+#' @return Returns a character vector with extra, trailing and/or leading spaces
+#' removed.
 #' @note \code{link[qdap]{strip}} by default does not remove the double tilde 
 #' \code{"~~"} character.
-#' @details \code{link[qdap]{space_fill}} is useful for keeping grouped words 
+#' @details \code{\link[qdap]{space_fill}} is useful for keeping grouped words 
 #' together.  Many functions in qdap take a \code{char.keep} or 
 #' \code{char2space} argument.  This can be used to prepare multi word phrases 
 #' (e.g., proper nouns) as a single unit.

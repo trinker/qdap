@@ -28,15 +28,15 @@
   \code{\link[base]{gsub}}.}
 }
 \value{
-  Returns a character vector with trailing and/or leading
-  spaces.
+  Returns a character vector with extra, trailing and/or
+  leading spaces removed.
 }
 \description{
   Replace spaces in words groups that should be grouped
   together.
 }
 \details{
-  \code{link[qdap]{space_fill}} is useful for keeping
+  \code{\link[qdap]{space_fill}} is useful for keeping
   grouped words together.  Many functions in qdap take a
   \code{char.keep} or \code{char2space} argument.  This can
   be used to prepare multi word phrases (e.g., proper
