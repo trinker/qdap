@@ -19,8 +19,8 @@
   \item{stopwords}{A vector of stop words to remove.}
 
   \item{alphabetical}{If \code{TRUE} the output of
-  frequency lists is ordered alphabetically.  If FALSE the
-  list is ordered by frequency rank.}
+  frequency lists is ordered alphabetically.  If
+  \code{FALSE} the list is ordered by frequency rank.}
 
   \item{cut.n}{Cut off point for reduced frequency stop
   word list (rfswl).}

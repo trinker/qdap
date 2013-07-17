@@ -8,7 +8,7 @@
 #' of 1 or more grouping variables.
 #' @param stopwords A vector of stop words to remove.
 #' @param alphabetical If \code{TRUE} the output of frequency lists is ordered 
-#' alphabetically.  If FALSE the list is ordered by frequency rank.
+#' alphabetically.  If \code{FALSE} the list is ordered by frequency rank.
 #' @param cut.n Cut off point for reduced frequency stop word list (rfswl).
 #' @param cap logical. If \code{TRUE} capitalizes words from the cap.list.
 #' @param cap.list Vector of words to capitalize.
