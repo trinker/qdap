@@ -14,7 +14,7 @@
   frequency.  If \code{FALSE} the overlapping names will be
   denoted with a \code{"B"}.}
 
-  \item{fuzzy.match}{ligical.  If \code{TRUE} uses
+  \item{fuzzy.match}{logical.  If \code{TRUE} uses
   Levenshtein edit distance from \code{\link[base]{agrep}}
   to predict gender from the closest name match starting
   with the same letter.  This is computationally intensive

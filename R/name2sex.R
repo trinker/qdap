@@ -6,7 +6,7 @@
 #' @param pred.sex logical.  If \code{TRUE} overlapping M/F names will be 
 #' predicted based on highest cummulative frequency.  If \code{FALSE} the 
 #' overlapping names will be denoted with a \code{"B"}.
-#' @param fuzzy.match ligical.  If \code{TRUE} uses Levenshtein edit distance 
+#' @param fuzzy.match logical.  If \code{TRUE} uses Levenshtein edit distance 
 #' from \code{\link[base]{agrep}} to predict gender from the closest name match 
 #' starting with the same letter.  This is computationally intensive and should 
 #' not be used on larger vectors.  Defaults to \code{pred.sex}.

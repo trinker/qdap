@@ -26,7 +26,7 @@
 #' @param rm.empty.rows logical.  If \code{TRUE} 
 #' \code{\link[qdap]{read.transcript}}  attempts to remove empty rows.
 #' @param na.strings A vector of character strings which are to be interpreted 
-#' as NA values.
+#' as \code{NA} values.
 #' @param sep The field separator character. Values on each line of the file are 
 #' separated by this character.  The default of \code{NULL} instructs 
 #' \code{\link[qdap]{read.transcript}} to use a separator suitable for the file 

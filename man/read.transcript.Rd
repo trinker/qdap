@@ -48,7 +48,7 @@
   empty rows.}
 
   \item{na.strings}{A vector of character strings which are
-  to be interpreted as NA values.}
+  to be interpreted as \code{NA} values.}
 
   \item{sep}{The field separator character. Values on each
   line of the file are separated by this character.  The
