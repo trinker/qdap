@@ -12,7 +12,8 @@
 #' @param stopwords Words to exclude from the cloud.  Words will be removed 
 #' after determining proportional word usage.
 #' @param caps logical.  If \code{TRUE} selected words will be capitalized.
-#' @param caps.list A vector of words to capitalize (\code{caps} must be \code{TRUE}).
+#' @param caps.list A vector of words to capitalize (\code{caps} must be 
+#' \code{TRUE}).
 #' @param I.list logical.  If \code{TRUE} capitalizes I words and contractions.
 #' @param random.order Plot words in random order. If \code{FALSE}, they will be 
 #' plotted in decreasing frequency.
@@ -33,10 +34,10 @@
 #' alignment.
 #' @param title.location On which side of the plot (1=bottom, 2=left, 3=top, 
 #' 4=right).
-#' @param title.cex Character expansion factor for the title. NULL and NA are 
-#' equivalent to 1.0. 
-#' @param legend.cex Character expansion factor for the legend. NULL and NA are 
-#' equivalent to 1.0. 
+#' @param title.cex Character expansion factor for the title. \code{NULL} and 
+#' \code{NA} are equivalent to 1.0. 
+#' @param legend.cex Character expansion factor for the legend. \code{NULL} and 
+#' \code{NA} are equivalent to 1.0. 
 #' @param legend.location A vector of length 4 denoting the lower left (x and y 
 #' left) and upper right (x and y right) coordinates of the rectangle of colors 
 #' in user coordinates.

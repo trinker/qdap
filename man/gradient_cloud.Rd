@@ -76,10 +76,10 @@
   (1=bottom, 2=left, 3=top, 4=right).}
 
   \item{title.cex}{Character expansion factor for the
-  title. NULL and NA are equivalent to 1.0.}
+  title. \code{NULL} and \code{NA} are equivalent to 1.0.}
 
   \item{legend.cex}{Character expansion factor for the
-  legend. NULL and NA are equivalent to 1.0.}
+  legend. \code{NULL} and \code{NA} are equivalent to 1.0.}
 
   \item{legend.location}{A vector of length 4 denoting the
   lower left (x and y left) and upper right (x and y right)
