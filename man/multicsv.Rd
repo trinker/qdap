@@ -12,8 +12,8 @@
   \item{files}{csv file(s) to read.}
 
   \item{a.names}{object names to assign the csv file(s) to.
-  If NULL assigns the csv to the name(s) of the csv file(s)
-  in the global environment.}
+  If \code{NULL} assigns the csv to the name(s) of the csv
+  file(s) in the global environment.}
 
   \item{l.name}{A character vector of names to assign to
   the csv files (dataframes) being read in.  Default
@@ -31,8 +31,8 @@
   \item{\dots}{data.frame object(s) to write to a file or a
   list of data.frame objects.  If the objects in a list are
   unnamed V + digit will be assigned. Lists of dataframes
-  (e.g., the output from `termco` or `polarity`) can be
-  passed as well.}
+  (e.g., the output from \code{\link[qdap]{termco}} or
+  \code{\link[qdap]{polarity}}) can be passed as well.}
 
   \item{dir}{optional directory names.  If \code{NULL} a
   directory will be created in the working directory with
