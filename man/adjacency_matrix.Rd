@@ -14,7 +14,7 @@
   \code{\link[qdap]{termco.c}}.}
 }
 \value{
-  Returns list: \item{Boolean}{A Boolean matrix}
+  Returns list: \item{boolean}{A Boolean matrix}
   \item{adjacency}{An adjacency matrix.  Diagonals are the
   total (sum) number of occurrences a variable had}
   \item{shared}{An adjacency matrix with no diagonal and
