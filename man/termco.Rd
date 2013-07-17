@@ -83,27 +83,27 @@
   terms must be words or partial words rather than multiple
   words and symbols.}
 
-  \item{return.list}{logical.  If TRUE returns the output
-  for multiple terms as a list by term rather than a
+  \item{return.list}{logical.  If \code{TRUE} returns the
+  output for multiple terms as a list by term rather than a
   vector.}
 
   \item{dataframe}{A termco (or termco.d) dataframe or
   object.}
 
-  \item{drop.wc}{logical.  If TRUE the word count column
-  will be dropped.}
+  \item{drop.wc}{logical.  If \code{TRUE} the word count
+  column will be dropped.}
 
-  \item{rm.zerocol}{logical.  If TRUE any column containing
-  all zeros will be removed from the matrix.}
+  \item{rm.zerocol}{logical.  If \code{TRUE} any column
+  containing all zeros will be removed from the matrix.}
 
-  \item{no.quote}{logical.  If TRUE the matrix will be
-  printed without quotes if it's character.}
+  \item{no.quote}{logical.  If \code{TRUE} the matrix will
+  be printed without quotes if it's character.}
 
-  \item{transform}{logical.  If TRUE the matrix will be
-  transformed.}
+  \item{transform}{logical.  If \code{TRUE} the matrix will
+  be transformed.}
 
-  \item{trim.terms}{logical.  If TRUE trims the column
-  header/names to ensure there is not a problem with
+  \item{trim.terms}{logical.  If \code{TRUE} trims the
+  column header/names to ensure there is not a problem with
   spacing when using in other R functions.}
 }
 \value{

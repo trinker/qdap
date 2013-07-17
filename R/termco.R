@@ -351,8 +351,8 @@ termco.d <-
 #' @param terms The terms to search for in the \code{text.var}.  Similar to 
 #' \code{match.list} but these terms must be words or partial words rather than 
 #' multiple words and symbols.
-#' @param return.list logical.  If TRUE returns the output for multiple terms as 
-#' a list by term rather than a vector.
+#' @param return.list logical.  If \code{TRUE} returns the output for multiple 
+#' terms as a list by term rather than a vector.
 #' @return \code{term.match} -  returns a list or vector of possible words that 
 #' match term(s).
 #' @rdname termco
@@ -379,14 +379,15 @@ function(text.var, terms, return.list=TRUE, apostrophe.remove=FALSE) {
 #' visualization functions (e.g., \code{\link[gplots]{heatmap.2}}).
 #' 
 #' @param dataframe A termco (or termco.d) dataframe or object.
-#' @param drop.wc logical.  If TRUE the word count column will be dropped.
-#' @param rm.zerocol logical.  If TRUE any column containing all zeros will be 
-#' removed from the matrix.
-#' @param no.quote logical.  If TRUE the matrix will be printed without quotes
-#' if it's character.
-#' @param transform logical.  If TRUE the matrix will be transformed.
-#' @param trim.terms logical.  If TRUE trims the column header/names to ensure 
-#' there is not a problem with spacing when using in other R functions.
+#' @param drop.wc logical.  If \code{TRUE} the word count column will be 
+#' dropped.
+#' @param rm.zerocol logical.  If \code{TRUE} any column containing all zeros 
+#' will be removed from the matrix.
+#' @param no.quote logical.  If \code{TRUE} the matrix will be printed without 
+#' quotes if it's character.
+#' @param transform logical.  If \code{TRUE} the matrix will be transformed.
+#' @param trim.terms logical.  If \code{TRUE} trims the column header/names to 
+#' ensure there is not a problem with spacing when using in other R functions.
 #' @return \code{termco2mat} - returns a matrix of term counts.
 #' @rdname termco
 #' @export
