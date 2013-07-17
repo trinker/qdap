@@ -28,7 +28,7 @@
 #' @param na.strings A vector of character strings which are to be interpreted 
 #' as NA values.
 #' @param sep The field separator character. Values on each line of the file are 
-#' separated by this character.  The default of NULL instructs 
+#' separated by this character.  The default of \code{NULL} instructs 
 #' \code{\link[qdap]{read.transcript}} to use a separator suitable for the file 
 #' type being read in.
 #' @param skip Integer; the number of lines of the data file to skip before 

@@ -52,7 +52,7 @@
 
   \item{sep}{The field separator character. Values on each
   line of the file are separated by this character.  The
-  default of NULL instructs
+  default of \code{NULL} instructs
   \code{\link[qdap]{read.transcript}} to use a separator
   suitable for the file type being read in.}
 
