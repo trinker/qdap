@@ -30,7 +30,9 @@
 
   \item{\dots}{data.frame object(s) to write to a file or a
   list of data.frame objects.  If the objects in a list are
-  unnamed V + digit will be assigned.}
+  unnamed V + digit will be assigned. Lists of dataframes
+  (e.g., the output from `termco` or `polarity`) can be
+  passed as well.}
 
   \item{dir}{optional directory names.  If \code{NULL} a
   directory will be created in the working directory with
@@ -65,7 +67,7 @@
 }
 \examples{
 \dontrun{
-#mcsv_r EXAMPLE:
+## mcsv_r EXAMPLE:
 mtcarsb <- mtcars[1:5, ]; CO2b <- CO2[1:5, ]
 (a <- mcsv_w(mtcarsb, CO2b, dir="foo"))
 rm("mtcarsb", "CO2b")  # gone from .GlobalEnv
@@ -78,9 +80,16 @@ foo.dat1; foo.dat2
 rm("foo.dat1", "foo.dat2")  # gone from .GlobalEnv
 delete("foo")
 
-#mcsv_w EXAMPLE:
+## mcsv_w EXAMPLES:
 (a <- mcsv_w(mtcars, CO2, dir="foo"))
 delete("foo")
+
+## Write lists of dataframes as well
+poldat <- with(DATA, polarity(state, person))
+term <- c("the ", "she", " wh")
+termdat <- with(raj.act.1,  termco(dialogue, person, term))
+mcsv_w(poldat, termdat, mtcars, CO2, dir="foo2")
+delete("foo2")
 }
 }
 \seealso{

@@ -39,7 +39,8 @@ MINOR FEATURES
 
 * `mcsv_w` now uses `condese` to attempt to attempt to condense columns that are 
   lists of vectors to a single vector of strings.  This adds flexiblity to 
-  `mcsv_w` with more data sets.
+  `mcsv_w` with more data sets.  Additionally, `mcsv_w` now writes lists of 
+  dataframes to multiple csvs (e.g., the output from `termco` or `polarity`).
 
 CHANGES
 

@@ -13,7 +13,9 @@
 #' @param pos where to do the removal. By default, uses the current environment. 
 #' @param envir the environment to use. 
 #' @param \dots data.frame object(s) to write to a file or a list of data.frame 
-#' objects.  If the objects in a list are unnamed V + digit will be assigned.
+#' objects.  If the objects in a list are unnamed V + digit will be assigned.  
+#' Lists of dataframes (e.g., the output from `termco` or `polarity`) can be 
+#' passed as well.
 #' @param dir optional directory names.  If \code{NULL} a directory will be 
 #' created in the working directory with the data and time stamp as the folder 
 #' name.
@@ -33,7 +35,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' #mcsv_r EXAMPLE:
+#' ## mcsv_r EXAMPLE:
 #' mtcarsb <- mtcars[1:5, ]; CO2b <- CO2[1:5, ]
 #' (a <- mcsv_w(mtcarsb, CO2b, dir="foo"))
 #' rm("mtcarsb", "CO2b")  # gone from .GlobalEnv
@@ -46,9 +48,16 @@
 #' rm("foo.dat1", "foo.dat2")  # gone from .GlobalEnv
 #' delete("foo")
 #' 
-#' #mcsv_w EXAMPLE:
+#' ## mcsv_w EXAMPLES:
 #' (a <- mcsv_w(mtcars, CO2, dir="foo"))
 #' delete("foo")
+#' 
+#' ## Write lists of dataframes as well
+#' poldat <- with(DATA, polarity(state, person))
+#' term <- c("the ", "she", " wh")
+#' termdat <- with(raj.act.1,  termco(dialogue, person, term))
+#' mcsv_w(poldat, termdat, mtcars, CO2, dir="foo2")
+#' delete("foo2")
 #' }
 mcsv_r <-
 function(files, a.names = NULL, l.name = NULL, list = TRUE, pos = 1,
@@ -97,11 +106,18 @@ function(..., dir = NULL, open = FALSE, sep = ", "){
         z[z == ""] <- paste0("V", which(z == ""))
     }
     names(x2) <- z
-    if (is.null(dir)) {
-        
-    }
     y <- folder(folder.name = dir)
-    files <- paste0(y, "/", z, ".csv")
+    Is.list <- function(x) is.list(x) & !is.data.frame(x)
+    lists.x2 <- sapply(x2, Is.list)
+    unlisted.x2 <- unlist(unclass(x2[lists.x2]), recursive = FALSE)
+    x2 <- x2[!lists.x2]
+    len1 <- length(x2)
+    len2 <- length(unlisted.x2)
+    x2[(len1 + 1):(len1 + len2)] <- unlisted.x2
+    names(x2)[(len1 + 1):(len1 + len2)] <- names(unlisted.x2)
+    files <- paste0(y, "/", names(x2), ".csv")
+    which.df <- sapply(x2, function(x) {!is.data.frame(x) & !is.list(x)})
+    x2[which.df] <- lapply(x2[which.df], data.frame)
     invisible(lapply(seq_along(x2), function(i){
         x3 <-x2[i]
         x3 <- x3[[1]]
