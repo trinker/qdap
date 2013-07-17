@@ -21,7 +21,7 @@
 #' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophes from 
 #' calculating the output.   
 #' @param digits Integer; number of decimal places to round when printing.                    
-#' @param \ldots Any other arguments passed to end_inc.     
+#' @param \ldots Any other arguments passed to \code{\link[qdap]{end_inc}}.     
 #' @return Returns a list of three descriptive word statistics:
 #' \item{ts}{A data frame of descriptive word statistics by row} 
 #' \item{gts}{A data frame of word/sentence statistics per grouping variable:
@@ -65,6 +65,8 @@
 #' use}  
 #' @keywords descriptive statistic
 #' @export
+#' @seealso 
+#' \code{\link[qdap]{end_inc}}
 #' @examples
 #' \dontrun{
 #' word_stats(mraja1spl$dialogue, mraja1spl$person)

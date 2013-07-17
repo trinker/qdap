@@ -40,7 +40,8 @@
   \item{digits}{Integer; number of decimal places to round
   when printing.}
 
-  \item{\ldots}{Any other arguments passed to end_inc.}
+  \item{\ldots}{Any other arguments passed to
+  \code{\link[qdap]{end_inc}}.}
 }
 \value{
   Returns a list of three descriptive word statistics:
@@ -97,6 +98,9 @@ plot(desc_wrds)
 plot(desc_wrds, label=TRUE, lab.digits = 1)
 with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff)))
 }
+}
+\seealso{
+  \code{\link[qdap]{end_inc}}
 }
 \keyword{descriptive}
 \keyword{statistic}
