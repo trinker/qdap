@@ -135,6 +135,7 @@ list(
       c(
         "blank2NA",
         "capitalizer",
+        "condense",
         "duplicates",
         "hash",
         "hms2sec",
