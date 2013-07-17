@@ -10,8 +10,9 @@
 #' omitted.
 #' @param digits Integer; number of decimal places to round when printing.
 #' @param progress.bar logical.  If \code{TRUE} attempts to provide a OS 
-#' appropriate progress bar.  If parallel is TRUE this argument is ignored.  
-#' Note that setting this argument to \code{TRUE} may slow down the function.
+#' appropriate progress bar.  If parallel is \code{TRUE} this argument is 
+#' ignored. Note that setting this argument to \code{TRUE} may slow down the 
+#' function.
 #' @param percent logical.  If \code{TRUE} output given as percent.  If 
 #' \code{FALSE} the output is proportion.
 #' @param zero.replace Value to replace 0 values with.

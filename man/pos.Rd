@@ -29,8 +29,8 @@
 
   \item{progress.bar}{logical.  If \code{TRUE} attempts to
   provide a OS appropriate progress bar.  If parallel is
-  TRUE this argument is ignored. Note that setting this
-  argument to \code{TRUE} may slow down the function.}
+  \code{TRUE} this argument is ignored. Note that setting
+  this argument to \code{TRUE} may slow down the function.}
 
   \item{percent}{logical.  If \code{TRUE} output given as
   percent.  If \code{FALSE} the output is proportion.}
