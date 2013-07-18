@@ -26,6 +26,9 @@ BUG FIXES
 * `qheat` the argument `by.column = FALSE` resulted in an error.  This behavior 
   has been fixed.
 
+* `question_type` did not work because of changes to `lookup` that did not 
+  accept a two column matrix for `key.match`.  See GitHub issue #127 for more.
+
 NEW FEATURES
 
 MINOR FEATURES

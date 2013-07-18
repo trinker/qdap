@@ -25,4 +25,7 @@ poldat <- with(DATA, polarity(state, person))
 write.csv(x = condense(poldat$all), file = "foo.csv")
 }
 }
+\seealso{
+  \code{\link[qdap]{mcsv_w}}
+}
 

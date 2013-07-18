@@ -7,6 +7,7 @@
 #' @param sep A character string to separate the terms.
 #' @return Returns a dataframe with condensed columns that can be wrote to 
 #' csv/xlsx.
+#' @seealso \code{\link[qdap]{mcsv_w}}
 #' @export 
 #' @examples
 #' \dontrun{

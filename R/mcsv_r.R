@@ -117,6 +117,11 @@ function(..., dir = NULL, open = FALSE, sep = ", "){
         x2[(len1 + 1):(len1 + len2)] <- unlisted.x2
         names(x2)[(len1 + 1):(len1 + len2)] <- names(unlisted.x2)
     }
+#browser()
+    removes <- sapply(x2, function(x) {
+        identical(x, integer(0)) | identical(x, character(0))
+    })
+    x2 <- x2[!removes]
     x2 <- lapply(x2, condense)
     files <- paste0(y, "/", names(x2), ".csv")
     which.df <- sapply(x2, function(x) {!is.data.frame(x) & !is.list(x)})
