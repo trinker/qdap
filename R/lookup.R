@@ -56,6 +56,9 @@ function(terms, key.match, key.reassign=NULL, missing = NA) {
         })
         return(e)
     }  
+    if (is.matrix(key.match)) {
+        key.match <- data.frame(key.match)
+    }
     if (is.list(key.match)) {
         if (!is.data.frame(key.match)) {
             key.match <- list2df(key.match) 
