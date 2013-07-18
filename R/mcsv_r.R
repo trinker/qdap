@@ -109,12 +109,14 @@ function(..., dir = NULL, open = FALSE, sep = ", "){
     y <- folder(folder.name = dir)
     Is.list <- function(x) is.list(x) & !is.data.frame(x)
     lists.x2 <- sapply(x2, Is.list)
-    unlisted.x2 <- unlist(unclass(x2[lists.x2]), recursive = FALSE)
-    x2 <- x2[!lists.x2]
-    len1 <- length(x2)
-    len2 <- length(unlisted.x2)
-    x2[(len1 + 1):(len1 + len2)] <- unlisted.x2
-    names(x2)[(len1 + 1):(len1 + len2)] <- names(unlisted.x2)
+    if (sum(lists.x2) > 0) {
+        unlisted.x2 <- unlist(unclass(x2[lists.x2]), recursive = FALSE)
+        x2 <- x2[!lists.x2]
+        len1 <- length(x2)
+        len2 <- length(unlisted.x2)
+        x2[(len1 + 1):(len1 + len2)] <- unlisted.x2
+        names(x2)[(len1 + 1):(len1 + len2)] <- names(unlisted.x2)
+    }
     files <- paste0(y, "/", names(x2), ".csv")
     which.df <- sapply(x2, function(x) {!is.data.frame(x) & !is.list(x)})
     x2[which.df] <- lapply(x2[which.df], data.frame)
