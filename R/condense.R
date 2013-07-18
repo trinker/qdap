@@ -14,13 +14,17 @@
 #' poldat <- with(DATA, polarity(state, person))
 #' write.csv(x = condense(poldat$all), file = "foo.csv")
 #' }
-condense <- function(dataframe, sep = ", ") {
+condense <- 
+function(dataframe, sep = ", ") {
     whichlist <- sapply(dataframe, is.list)
-    dataframe[, whichlist] <- sapply(dataframe[, whichlist], paste3, sep = sep)
+    if (sum(whichlist) > 0) {
+        dataframe[, whichlist] <- sapply(dataframe[, whichlist], paste3, sep = sep)
+    }
     dataframe
 }
 
-paste3 <- function(x, sep = ", "){
-    sapply(x, paste, collapse = sep)
+paste3 <-
+function(x, sep = ", "){
+    paste(sapply(x, paste, collapse = sep), collapse = sep)
 }
 

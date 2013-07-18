@@ -117,6 +117,7 @@ function(..., dir = NULL, open = FALSE, sep = ", "){
         x2[(len1 + 1):(len1 + len2)] <- unlisted.x2
         names(x2)[(len1 + 1):(len1 + len2)] <- names(unlisted.x2)
     }
+    x2 <- lapply(x2, condense)
     files <- paste0(y, "/", names(x2), ".csv")
     which.df <- sapply(x2, function(x) {!is.data.frame(x) & !is.list(x)})
     x2[which.df] <- lapply(x2[which.df], data.frame)
