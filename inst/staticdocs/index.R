@@ -111,9 +111,9 @@ list(
         "pos",
         "question_type",
         "syllable.sum",
+        "tdm",        
         "termco",
         "termco.c",
-        "tdm",
         "wfm",
         "word.count",
         "word_stats"
