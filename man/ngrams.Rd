@@ -2,7 +2,7 @@
 \alias{ngrams}
 \title{Generate ngrams}
 \usage{
-  ngrams(text.var, grouping.var = NULL, n = 2)
+  ngrams(text.var, grouping.var = NULL, n = 2, ...)
 }
 \arguments{
   \item{text.var}{The text variable}
@@ -12,7 +12,9 @@
   takes a single grouping variable or a list of 1 or more
   grouping variables.}
 
-  \item{n}{The max number of grams calculate.}
+  \item{n}{The max number of grams calculate}
+
+  \item{\dots}{Further arguments passed to strip function.}
 }
 \value{
   Returns a list of: \item{raw}{A list of pasted single

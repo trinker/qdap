@@ -6,7 +6,8 @@
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
-#' @param n The max number of grams calculate. 
+#' @param n The max number of grams calculate
+#' @param \dots Further arguments passed to strip function.
 #' @return Returns a list of:
 #' \item{raw}{A list of pasted single vectors of the ngrams per row.}
 #' \item{group}{A list of pasted vectors of ngrams grouped by grouping.var.}
@@ -24,7 +25,7 @@
 #' ngrams(DATA$state, , 3)
 #' with(mraja1, ngrams(dialogue, list(sex, fam.aff), 3))
 #' }
-ngrams <- function(text.var, grouping.var = NULL, n = 2) {
+ngrams <- function(text.var, grouping.var = NULL, n = 2, ...) {
     if(is.null(grouping.var)){
         grouping <- paste("row", 1:length(text.var))
     } else {
@@ -39,7 +40,7 @@ ngrams <- function(text.var, grouping.var = NULL, n = 2) {
         if (is.na(x)) {
             return(NA)
         }
-        ngram_helper(x, ns = n)
+        ngram_helper(x, ns = n, ...)
     })
 
     names(out) <- grouping
@@ -86,8 +87,8 @@ function(x, ...) {
 }
 
 
-ngram_helper <- function(text, ns = 2, as.list = FALSE) {
-    x <- bag.o.words(text)
+ngram_helper <- function(text, ns = 2, as.list = FALSE, ...) {
+    x <- bag.o.words(text, ...)
     if (ns == 1) {
         return(x)
     }

@@ -23,7 +23,7 @@ qdap 0.2.4
 
 BUG FIXES
 
-* `qheat` the argument `by.column = FALSE` resulted in an error.  This behavior 
+* `qheat`'s  argument `by.column = FALSE` resulted in an error.  This behavior 
   has been fixed.
 
 * `question_type` did not work because of changes to `lookup` that did not 
@@ -44,6 +44,12 @@ MINOR FEATURES
   lists of vectors to a single vector of strings.  This adds flexiblity to 
   `mcsv_w` with more data sets.  Additionally, `mcsv_w` now writes lists of 
   dataframes to multiple csvs (e.g., the output from `termco` or `polarity`).
+
+* `ngrams` now has an argument ellipsis that passes further arguments supplied 
+  to `strip`
+
+* `dtm` added to compliment `tdm`, allowing for easier integration with other R 
+  packages that utilize tdm/dtm.
 
 CHANGES
 
