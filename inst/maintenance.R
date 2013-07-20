@@ -130,3 +130,18 @@ NAMES_LIST <- lapply(LETTERS, function(x){
     na.omit(y[x == substring(y[, 1], 1, 1), ])
 })
 names(NAMES_LIST) <- LETTERS
+
+#==========================
+# Vignette copy
+#==========================
+path <- file.path("C:/Users/trinker/GitHub", "qdap_0.2.4.tar.gz")
+install.packages(path,  repos = NULL, type="source")
+
+##  browseVignettes(package = 'qdap')
+# shut down and reopen RStuio before next step
+
+root <- system.file("doc/qdap_vignette.html", package = "qdap")
+new <- "C:/Users/trinker/Dropbox/Public/packages"
+file.copy(root, new, TRUE, TRUE)
+
+#==========================

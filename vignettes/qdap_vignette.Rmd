@@ -1,0 +1,78 @@
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{A Markdown Vignette with knitr}
+-->
+
+```{r setup, include=FALSE}
+# set global chunk options
+library(knitr)
+opts_chunk$set(cache=FALSE)
+library(knitcitations); library(reports)
+bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
+
+BU <- "http://trinker.github.io/qdap/" 
+LN <- function(fun, base=BU) paste0(BU, fun, ".html")
+FUN <- function(fun, base=BU) HR2(LN(fun), paste0("<code>", fun,"</code>"))
+yt <- function(url) {
+  paste0("<a href=\"", url, "\" target=\"_blank\" style=\"text-decoration: none\"><b><font size=\"5\" color=\"#B22222\">[YT]</font></b></a>\n")
+}
+#cite in text using `r citet(bib[1])`
+```
+# qdap (Quantitative Discourse Analysis Package): Package Vignette
+# Tyler Rinker
+
+qdap `r citep(bib[["Rinker2013a"]])` is an R package designed to assist in quantitative discourse analysis. The package stands as a bridge between qualitative transcripts of dialogue and statistical analysis and visualization.
+
+qdap was born out of a frustration with current discourse analysis programs. Packaged programs are a closed system, meaning the researcher using the method has little, if any, influence on the program applied to his data.
+
+R already has thousands of excellent packages for statistics and visualization. qdap is designed to stand as a bridge between the qualitative discourse of a transcript and the computational power and freedom that R offers. As qdap returns the power to the researcher it will also allow the researcher to be more efficient and thus effective and productive in data analysis.
+
+The qdap package is born as a means of providing researchers with the tools to analyze data and more importantly as a dynamic system governed by the data, shaped by theory and continuously refined by the field.
+
+...if you can dream up an analysis then qdap and R can help get you there.
+
+`r IM("https://dl.dropbox.com/u/61803503/qdap_logo.png", width=350, height=250)`
+
+<hr>
+<h3 id="toc">Select from sections below:</h3>
+
+<div style="float: left; width: 50%;">
+<ul>
+<div>1.  `r HR("#project", "Starting a New Project")`    </div> 
+<div>2.  `r HR("#import_export", "Import/Export Discourse Data")`  </div>  
+<div>3.  `r HR("#tools", "Generic qdap Tools")`    </div> 
+<div>4.  `r HR("#cleaning", "Cleaning/Preparing the Data")`    </div> 
+<div>5.  `r HR("#viewing", "View the Data")`    </div> 
+<div>6.  `r HR("#reshaping", "Reshaping the Data")`    </div> 
+<div>7.  `r HR("#word", "Extract/Analyze Words")`    </div> 
+<div>8.  `r HR("#coding", "Qualitative Coding System")`    </div> 
+<div>9.  `r HR("#counts", "Word Counts and Descriptive Statistics.")`    </div> 
+<div>10.  `r HR("#measures", "Word Measures and Scoring")`    </div> 
+<div>11.  `r HR("#visualization", "Visualizing Discourse Data")`    </div> 
+<div>12.  `r HR("#id", "ID Sentences")`    </div> 
+
+
+</ul>
+</div>
+<div style="float: right; width: 50%;">
+<ul>
+<div><b>Symbol Conventions:</b></div>  
+<div>`r FT(gold, 5, text="&diams;")` = Example (R code)    </div> 
+<div><b>`r FT(firebrick, 5, text="[YT]")`</b> = Video Demo (click to watch)    </div> 
+</ul>
+</div>
+<br style="clear:both;"/>
+
+
+<hr>
+<h3 id="project">Starting a New Project</h3>
+
+
+```{r css, echo = FALSE}
+options(markdown.HTML.stylesheet = "css/style.css")
+```
+
+## References
+```{r, echo=FALSE, results='asis'}
+#bibliography("html") 
+```

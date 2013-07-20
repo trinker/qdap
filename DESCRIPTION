@@ -3,6 +3,7 @@ Type: Package
 Title: Bridging the gap between qualitative data and quantitative analysis
 Version: 0.2.4
 Date: 2013-06-26
+VignetteBuilder: knitr
 Author: Tyler Rinker
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Depends:
@@ -10,6 +11,8 @@ Depends:
     gdata,
     ggplot2 (>= 0.9.3.1),
     grid,
+    knitcitations, 
+    knitr,
     reports,
     scales
 Imports:

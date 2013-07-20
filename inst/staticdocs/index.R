@@ -10,9 +10,10 @@ list(
     sd_section("Import/Export Data",
       "Functions for importing data and exporting output.",  
       c(
+        "condense",        
         "dir_map",
         "mcsv_r",
-        "read.transcript"
+        "read.transcript"      
       )
     ),
     sd_section("Cleaning/Parsing",
@@ -120,7 +121,7 @@ list(
       )
     ),
     sd_section("Measures",
-      "Word measures and Scoring.",
+      "Word measures and scoring.",
       c(
         "automated_readability_index",
         "dissimilarity",
@@ -135,7 +136,6 @@ list(
       c(
         "blank2NA",
         "capitalizer",
-        "condense",
         "duplicates",
         "hash",
         "hms2sec",
