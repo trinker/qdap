@@ -138,7 +138,6 @@ path <- file.path("C:/Users/trinker/GitHub", "qdap_0.2.4.tar.gz")
 install.packages(path,  repos = NULL, type="source")
 
 ##  browseVignettes(package = 'qdap')
-# shut down and reopen RStuio before next step
 
 root <- system.file("doc/qdap_vignette.html", package = "qdap")
 new <- "C:/Users/trinker/Dropbox/Public/packages"
