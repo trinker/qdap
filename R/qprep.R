@@ -44,7 +44,7 @@
 #' }
 qprep <-
 function(text.var, rm.dash = TRUE, bracket = "all", missing = NULL, 
-    names = FALSE, abbreviation = qdap::abbreviations, 
+    names = FALSE, abbreviation = qdapDictionaries::abbreviations, 
     replace = NULL, ignore.case = TRUE, num.paste = "separate", ...) {
   
     if (!is.null(bracket)) {

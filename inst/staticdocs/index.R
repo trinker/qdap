@@ -207,6 +207,8 @@ list(
       c( 
         "DATA",
         "DATA2",
+        "pres_debates2012",
+        "pres_debate_raw2012",
         "mraja1",
         "mraja1spl",
         "raj.act.1",

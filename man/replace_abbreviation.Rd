@@ -3,8 +3,8 @@
 \title{Replace Abbreviations}
 \usage{
   replace_abbreviation(text.var,
-    abbreviation = qdap::abbreviations, replace = NULL,
-    ignore.case = TRUE)
+    abbreviation = qdapDictionaries::abbreviations,
+    replace = NULL, ignore.case = TRUE)
 }
 \arguments{
   \item{text.var}{The text variable.}

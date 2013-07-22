@@ -78,7 +78,44 @@ NULL
 #' @references 
 #' \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
 NULL
+
+#' 2012 U.S. Presidential Debates
+#' 
+#' A dataset containing a clenaed version of all three presidential debates for 
+#' the 2012 election. 
+#' 
+#' @details 
+#' \itemize{ 
+#'   \item person. The speaker
+#'   \item tot. Turn of talk
+#'   \item dialogue. The words spoken
+#'   \item time. Variable indicating which of the three debates the dialogue is from
+#' } 
+#' 
+#' @docType data 
+#' @keywords datasets 
+#' @name pres_debates2012 
+#' @usage data(pres_debates2012) 
+#' @format A data frame with 2912 rows and 4 variables 
+NULL
  
+#' First 2012 U.S. Presidential Debate
+#' 
+#' A dataset containing the raw version of the first presidential debate.
+#' 
+#' @details 
+#' \itemize{ 
+#'   \item person. The speaker
+#'   \item dialogue. The words spoken 
+#' } 
+#' 
+#' @docType data 
+#' @keywords datasets 
+#' @name pres_debate_raw2012 
+#' @usage data(pres_debate_raw2012) 
+#' @format A data frame with 94 rows and 2 variables 
+NULL
+
 #' Romeo and Juliet: Act 1 Dialogue Merged with Demographics and Split
 #' 
 #' A dataset containing act 1 of Romeo and Juliet with demographic information 

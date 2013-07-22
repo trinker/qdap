@@ -37,7 +37,7 @@
 #' replace_abbreviation(x, KEY)
 #' }
 replace_abbreviation <-
-function(text.var, abbreviation = qdap::abbreviations, replace = NULL, 
+function(text.var, abbreviation = qdapDictionaries::abbreviations, replace = NULL, 
     ignore.case=TRUE) {
     if (!is.null(replace)) {
         ab <- data.frame(abv=abbreviation, repl=replace)

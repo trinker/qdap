@@ -4,8 +4,9 @@
 \usage{
   qprep(text.var, rm.dash = TRUE, bracket = "all",
     missing = NULL, names = FALSE,
-    abbreviation = qdap::abbreviations, replace = NULL,
-    ignore.case = TRUE, num.paste = "separate", ...)
+    abbreviation = qdapDictionaries::abbreviations,
+    replace = NULL, ignore.case = TRUE,
+    num.paste = "separate", ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
