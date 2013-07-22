@@ -232,6 +232,7 @@ function(text.var, parallel = FALSE) {
     Trim <- function(x) gsub("^\\s+|\\s+$", "", x)
     counter <- function(x) {
         w <- syllable.count(Trim(x))["syllables"]
+        if (length(w) ==1 && is.na(w)) return(c(NA, NA))     
         y <- as.data.frame(table(w))
         z <- subset(y, as.numeric(as.character(w)) >= 3)
         j <- sum(z$Freq)
