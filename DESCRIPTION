@@ -11,7 +11,7 @@ Depends:
     gdata,
     ggplot2 (>= 0.9.3.1),
     grid,
-    knitcitations, 
+    knitcitations,
     knitr,
     qdapDictionaries,
     reports,
@@ -102,6 +102,7 @@ Collate:
     'colsplit2df.R'
     'combine_tot.R'
     'common.R'
+    'condense.R'
     'dir_map.R'
     'dissimilarity.R'
     'distTab.R'
@@ -127,6 +128,7 @@ Collate:
     'kullback.leibler.R'
     'Ldist.R'
     'left.just.R'
+    'list2df.R'
     'lookup.R'
     'mcsv_r.R'
     'merge_all.R'
@@ -207,5 +209,3 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
-    'list2df.R'
-    'condense.R'
