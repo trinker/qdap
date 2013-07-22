@@ -205,30 +205,10 @@ list(
     sd_section("Data", 
       "Data sets included in qdap and used in examples.",
       c( 
-        "abbreviations",
-        "action.verbs",
-        "adverb",
-        "BuckleySaltonSWL",
-        "contractions",
         "DATA",
         "DATA2",
-        "DICTIONARY",
-        "emoticon",
-        "env.syl",
-        "env.syn",
-        "increase.amplification.words",
-        "interjections",
-        "labMT",
         "mraja1",
         "mraja1spl",
-        "NAMES",
-        "NAMES_SEX",
-        "NAMES_LIST",        
-        "negation.words",
-        "negative.words",
-        "OnixTxtRetToolkitSWL1",
-        "positive.words",
-        "preposition",
         "raj.act.1",
         "raj.act.2",
         "raj.act.3",
@@ -237,11 +217,7 @@ list(
         "raj.demographics",
         "raj",
         "rajPOS",
-        "rajSPLIT",
-        "SYNONYM",
-        "Top100Words",
-        "Top200Words",
-        "Top25Words"
+        "rajSPLIT"
       )
     )
 

@@ -18,7 +18,7 @@ And constructed with the following guidelines:
 
 
 
-qdap 0.2.4
+qdap 1.0.0
 ----------------------------------------------------------------
 
 BUG FIXES
@@ -52,6 +52,15 @@ MINOR FEATURES
   packages that utilize tdm/dtm.
 
 CHANGES
+
+* The dictionaries and word lists for qdap have been moved tot heir own package, 
+  `qdapDictionaries`.  THis will allow easier access to these resources beyond 
+  the qdap package as well as redcuing the overall size of the qdap package.  
+  Because this is a major change that make break the code of some users the 
+  major release number has been upped to 1.
+
+* qdap gains an HTML package vignette to better explain the intended work flow 
+  and function use for the package.
 
 qdap 0.2.3
 ----------------------------------------------------------------

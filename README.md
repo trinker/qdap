@@ -13,17 +13,11 @@ Download the [zip ball](https://github.com/trinker/qdap/zipball/master) or [tar 
 # install.packages("devtools")
 
 library(devtools)
+install_github("qdapDictionaries", "trinker")
 install_github("qdap", "trinker")
 ```
 
 **Note**: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](http://CRAN.R-project.org/package=devtools) to install this way.
-
-Additionally, Windows users currently must install `RCurl` before installing qdap.  Use the following short script:
-
-```r
-URL <- "http://www.stats.ox.ac.uk/pub/RWin/bin/windows/contrib/3.0/"
-install.packages("RCurl", contriburl = URL)
-```
 
 **Note**: Mac users might be required to install the appropriate version [XTools](https://developer.apple.com/xcode/) from the [Apple Developer site](https://developer.apple.com/) in order to install the development version.  You may need to [register as an Apple developer](https://developer.apple.com/programs/register/).  An older version of XTools may also be required.
 
@@ -34,4 +28,4 @@ install.packages("openNLP", type = "source")
 ## Help
 [Web Page](http://trinker.github.com/qdap/)  [improvements to come]   
 [Package Vignette](https://dl.dropboxusercontent.com/u/61803503/packages/qdap_vignette.html) *Note: Incomplete*   
-[Package PDF Help Manual](https://dl.dropbox.com/u/61803503/qdap.pdf).
+[Package PDF Help Manual](https://dl.dropbox.com/u/61803503/qdap.pdf)

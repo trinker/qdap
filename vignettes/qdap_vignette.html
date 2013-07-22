@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>qdap Package Vignette</title>
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 12px;
+   margin: 8px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 { 
+   font-size:2.2em; 
+}
+
+h2 { 
+   font-size:1.8em; 
+}
+
+h3 { 
+   font-size:1.4em; 
+}
+
+h4 { 
+   font-size:1.0em; 
+}
+
+h5 { 
+   font-size:0.9em; 
+}
+
+h6 { 
+   font-size:0.8em; 
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre {	
+   margin-top: 0;
+   max-width: 95%;
+   border: 1px solid #ccc;
+   white-space: pre-wrap;
+}
+
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code.r, code.cpp {
+   background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * { 
+      background: transparent !important; 
+      color: black !important; 
+      filter:none !important; 
+      -ms-filter: none !important; 
+   }
+
+   body { 
+      font-size:12pt; 
+      max-width:100%; 
+   }
+       
+   a, a:visited { 
+      text-decoration: underline; 
+   }
+
+   hr { 
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote { 
+      padding-right: 1em; 
+      page-break-inside: avoid; 
+   }
+
+   tr, img { 
+      page-break-inside: avoid; 
+   }
+
+   img { 
+      max-width: 100% !important; 
+   }
+
+   @page :left { 
+      margin: 15mm 20mm 15mm 10mm; 
+   }
+     
+   @page :right { 
+      margin: 15mm 10mm 15mm 20mm; 
+   }
+
+   p, h2, h3 { 
+      orphans: 3; widows: 3; 
+   }
+
+   h2, h3 { 
+      page-break-after: avoid; 
+   }
+}
+
+</style>
+
+
+
+
+
+</head>
+
+<body>
+<!--
+%\VignetteEngine{knitr}
+%\VignetteIndexEntry{A Markdown Vignette with knitr}
+-->
+
+<h1>qdap Package Vignette</h1>
+
+<h1>Tyler Rinker</h1>
+
+<p>qdap (<a href="http://github.com/trinker/qdap">Rinker, 2013</a>) is an R package designed to assist in quantitative discourse analysis. The package stands as a bridge between qualitative transcripts of dialogue and statistical analysis and visualization.  qdap was born out of a frustration with current discourse analysis programs. Packaged programs are a closed system, meaning the researcher using the method has little, if any, influence on the program applied to her data.</p>
+
+<p>R already has thousands of excellent packages for statistics and visualization. qdap is designed to stand as a bridge between the qualitative discourse of a transcript and the computational power and freedom that R offers. As qdap returns the power to the researcher it will also allow the researcher to be more efficient and thus effective and productive in data analysis.  The qdap package provides researchers with the tools to analyze data and more importantly is a dynamic system governed by the data, shaped by theory, and continuously refined by the field.</p>
+
+<p>&hellip;if you can dream up an analysis then qdap and R can help get you there.</p>
+
+<div style="width:367.5px;margin:auto;">
+    <p><img src="https://dl.dropbox.com/u/61803503/qdap_logo.png" width="350" height="250"></p>
+</div>
+
+<p>The following vignette is a loose road map for utilizing the tools provided by qdap.</p>
+
+<hr>
+
+<h3 id="toc">Select from sections below:</h3>
+
+<div style="float: left; width: 50%;">
+<ul>
+<div>1.  <a href="#project">Starting a New Project</a>
+    </div> 
+<div>2.  <a href="#import_export">Import/Export Discourse Data</a>
+  </div>  
+<div>3.  <a href="#tools">Generic qdap Tools</a>
+    </div> 
+<div>4.  <a href="#cleaning">Cleaning/Preparing the Data</a>
+    </div> 
+<div>5.  <a href="#viewing">View the Data</a>
+    </div> 
+<div>6.  <a href="#reshaping">Reshaping the Data</a>
+    </div> 
+<div>7.  <a href="#word">Extract/Analyze Words</a>
+    </div> 
+<div>8.  <a href="#coding">Qualitative Coding System</a>
+    </div> 
+<div>9.  <a href="#counts">Word Counts and Descriptive Statistics</a>
+    </div> 
+<div>10.  <a href="#measures">Word Measures and Scoring</a>
+    </div> 
+<div>11.  <a href="#visualization">Visualizing Discourse Data</a>
+    </div> 
+<div>12.  <a href="#id">ID Sentences</a>
+    </div> 
+
+
+</ul>
+</div>
+
+<div style="float: right; width: 50%;">
+<ul>
+<div><b>Symbol Conventions:</b></div>  
+<div><font size="5" color="gold">&diams;</font> = Example (R code)    </div> 
+<div><b><font size="5" color="firebrick">[YT]</font></b> = Video Demo (click to watch)    </div> 
+</ul>
+</div>
+
+<p><br style="clear:both;"/></p>
+
+<hr>
+
+<h3 id="project">Starting a New Project</h3>
+
+<h3 id="import_export">Import/Export Discourse Data</h3>
+
+<h3 id="tools">Generic qdap Tools</h3>
+
+<h3 id="cleaning">Cleaning/Preparing the Data</h3>
+
+<h3 id="viewing">View the Data</h3>
+
+<h3 id="reshaping">Reshaping the Data</h3>
+
+<h3 id="word">Extract/Analyze Words</h3>
+
+<h3 id="coding">Qualitative Coding System</h3>
+
+<h3 id="counts">Word Counts and Descriptive Statistics</h3>
+
+<h3 id="measures">Word Measures and Scoring</h3>
+
+<h3 id="visualization">Visualizing Discourse Data</h3>
+
+<h3 id="id">ID Sentences</h3>
+
+<hr>
+
+<h2>Acknowledgements</h2>
+
+<p>The qdap package was my first R package and a learning process.  Several people contributed imensely to my learning.  I’d like to particularly thank <a href="https://github.com/Dasonk/" target="_blank">Dason Kurkiewicz</a>
+ for his constant mentoring/assistance in learning the R language, GitHub and package developmentas well as collaboration on numerous qdap functions.  Thank you to <a href="https://twitter.com/bryangoodrich" target="_blank">Bryan Goodrich</a>
+ for his teaching, feedback and collaboration on serveral qdap functions.  Thank you to <a href="https://github.com/hadley" target="_blank">Dr. Hadley Wickham</a>
+ for roxygen2, ggplot2, devtools and GitHub repos which I referenced often.  I&#39;d also like to thank the many folks at <a href="http://www.talkstats.com/" target="_blank">talkstats.com</a>
+ and <a href="http://stackoverflow.com/questions/tagged/r" target="_blank">stackover<U+FB02>ow.com</a>
+ for their help in answering many R questions related to qdap.</p>
+
+<h2>Improvements</h2>
+
+<p>If the reader spots an error in this Vignette or would like to suggest an improvement please contact me Tyler Rinker&lt;<a href="mailto:tyler.rinker@gmail.com" target="_blank"><a href="mailto:tyler.rinker@gmail.com">tyler.rinker@gmail.com</a></a>
+&gt;.  To submit bug reports and feature requests related to the qdap package please visit <a href="https://github.com/trinker/qdap/issues?state=open" target="_blank">qdap&#39;s GitHub issues page</a>
+.</p>
+
+<hr> 
+
+<p>*<em><font size="3">Vignette created with the reports package (<a href="http://github.com/trinker/reports">Rinker, 2013b</a>)</font><em></p>
+
+<h2>References</h2>
+
+</body>
+
+</html>
+
