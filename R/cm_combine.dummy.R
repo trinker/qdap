@@ -1,4 +1,4 @@
-#' Find Co-occurrence Between Codes
+#' Find Co-occurrence Between Dummy Codes
 #'
 #' Combine code columns where they co-occur.
 #'

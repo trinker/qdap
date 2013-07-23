@@ -6,7 +6,9 @@
   mcsv_r(files, a.names = NULL, l.name = NULL, list = TRUE,
     pos = 1, envir = as.environment(pos))
 
-  mcsv_w(..., dir = NULL, open = FALSE, sep = ", ")
+  mcsv_w(..., dir = NULL, open = FALSE, sep = ", ",
+    dataframes = NULL, pos = 1,
+    envir = as.environment(pos))
 }
 \arguments{
   \item{files}{csv file(s) to read.}
@@ -42,6 +44,9 @@
   upon completion.}
 
   \item{sep}{A character string to separate the terms.}
+
+  \item{dataframes}{An optional character vector of
+  dataframes in lieu of \dots argument.}
 }
 \value{
   \code{mcsv_r} - reads in multiple csv files at once.

@@ -1,4 +1,4 @@
-#' Find Associated Words.
+#' Find Associated Words
 #' 
 #' Find words associated with a given word(s) or a phrase(s).  Results can be
 #' output as a network graph and/or wordcloud.

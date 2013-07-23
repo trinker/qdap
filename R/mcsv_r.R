@@ -21,6 +21,8 @@
 #' name.
 #' @param open logical.  If \code{TRUE} opens the directory upon completion.
 #' @param sep A character string to separate the terms.
+#' @param dataframes An optional character vector of dataframes in lieu of \dots 
+#' argument.
 #' @return \code{mcsv_r} - reads in multiple csv files at once.
 #' @rdname multicsv
 #' @note \code{\link[qdap]{mcsv_r}} is useful for reading in multiple csv files 
@@ -95,11 +97,16 @@ function(files, a.names = NULL, l.name = NULL, list = TRUE, pos = 1,
 #' Silently returns the path of the directory.
 #' @rdname multicsv
 #' @export
-mcsv_w <-
-function(..., dir = NULL, open = FALSE, sep = ", "){
+mcsv_w <- 
+function(..., dir = NULL, open = FALSE, sep = ", ", dataframes = NULL, pos = 1,
+    envir = as.environment(pos)){
     x <- match.call(expand.dots = FALSE)
     z <- as.character(x[[2]])
     x2 <- list(...)
+    if (identical(x2, list())) {
+        z <- dataframes
+        x2 <- lapply(z, get, envir = envir)
+    }
     if (length(x2) == 1 && !sapply(x2, is.data.frame)) {
         x2 <- unlist(x2, recursive = FALSE)
         z <- names(x2)
@@ -144,3 +151,4 @@ function(..., dir = NULL, open = FALSE, sep = ", "){
     message(paste("files written to:\n", y))
     invisible(y)
 }
+

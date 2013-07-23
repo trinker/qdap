@@ -29,7 +29,7 @@ R already has thousands of excellent packages for statistics and visualization. 
 
 `r IM("https://dl.dropbox.com/u/61803503/qdap_logo.png", width=350, height=250)`
 
-The following vignette is a loose road map for utilizing the tools provided by qdap.
+The following vignette is a loose road map for utilizing the tools provided by qdap.  
 
 <hr>
 <h3 id="toc">Select from sections below:</h3>
@@ -37,7 +37,7 @@ The following vignette is a loose road map for utilizing the tools provided by q
 <div style="float: left; width: 50%;">
 <ul>
 <div>1.  `r HR("#project", "Starting a New Project")`    </div> 
-<div>2.  `r HR("#import_export", "Import/Export Discourse Data")`  </div>  
+<div>2.  `r HR("#import_export", "Import/Export Discourse Data")`    </div> 
 <div>3.  `r HR("#tools", "Generic qdap Tools")`    </div> 
 <div>4.  `r HR("#cleaning", "Cleaning/Preparing the Data")`    </div> 
 <div>5.  `r HR("#viewing", "View the Data")`    </div> 
@@ -48,6 +48,9 @@ The following vignette is a loose road map for utilizing the tools provided by q
 <div>10.  `r HR("#measures", "Word Measures and Scoring")`    </div> 
 <div>11.  `r HR("#visualization", "Visualizing Discourse Data")`    </div> 
 <div>12.  `r HR("#id", "ID Sentences")`    </div> 
+<div>13.  `r HR("#data", "Data Sets")`    </div> 
+<div>14.  `r HR("#dict", "Dictionaries and Word Lists")`    </div> 
+<div>15.  `r HR("#install", "Installation Issues")`    </div> 
 
 
 </ul>
@@ -62,49 +65,651 @@ The following vignette is a loose road map for utilizing the tools provided by q
 <br style="clear:both;"/>
 
 ```{r, echo=FALSE, eval=FALSE}
-x <- readLines(n=12)
-<div>1.  `r HR("#project", "Starting a New Project")`    </div> 
-<div>2.  `r HR("#import_export", "Import/Export Discourse Data")`  </div>  
-<div>3.  `r HR("#tools", "Generic qdap Tools")`    </div> 
-<div>4.  `r HR("#cleaning", "Cleaning/Preparing the Data")`    </div> 
-<div>5.  `r HR("#viewing", "View the Data")`    </div> 
-<div>6.  `r HR("#reshaping", "Reshaping the Data")`    </div> 
-<div>7.  `r HR("#word", "Extract/Analyze Words")`    </div> 
-<div>8.  `r HR("#coding", "Qualitative Coding System")`    </div> 
-<div>9.  `r HR("#counts", "Word Counts and Descriptive Statistics")`    </div> 
-<div>10.  `r HR("#measures", "Word Measures and Scoring")`    </div> 
-<div>11.  `r HR("#visualization", "Visualizing Discourse Data")`    </div> 
-<div>12.  `r HR("#id", "ID Sentences")`    </div> 
-
 library(qdap)
-x2 <- bracketXtract(gsub("#", "", x), "round")
+dat <- data.frame(
+    x = c("project", "import_export", "tools", "cleaning", "viewing", 
+        "reshaping", "word", "coding", "counts", "measures", "visualization", 
+        "id", "data", "dict", "install"),
+    
+    y = c("Starting a New Project", "Import/Export Discourse Data", 
+        "Generic qdap Tools", "Cleaning/Preparing the Data", "View the Data", 
+        "Reshaping the Data", "Extract/Analyze Words", "Qualitative Coding System", 
+        "Word Counts and Descriptive Statistics", "Word Measures and Scoring", 
+        "Visualizing Discourse Data", "ID Sentences", 
+        "Data Sets", "Dictionaries and Word Lists", "Installation Issues")
+)
 
-m <- sapply(x2, function(x) {
-    paste0("<h3 id=", beg2char(x, ","), ">", Trim(gsub("\"", "", char2end(x, ","))), "</h3>")
-})
+FUN <- function(x, y) {
+    cat("\n\n")
+    m <- paste0("<div>", 1:length(x), ".  `r HR(\"#", x, "\", \"", y, "\")`    </div> ")
+    cat(paste(m, collapse="\n")); cat("\n")
+    cat("\n\n")
+    n <- paste0("<h3 id=\"", x, "\">", y, "</h3>")
+    cat(paste(n, collapse="\n")); cat("\n")
+}
 
-cat(paste(m, collapse="\n")); cat("\n")
+FUN(dat[, 1], dat[, 2])
+
+path <- "C:/Users/trinker/GitHub/trinker.github.com/qdap_dev"
+#  path <- "C:/Users/trinker/GitHub/trinker.github.com/qdap"
+URL <- "http://trinker.github.io/qdap_dev/"
+#  url <- "http://trinker.github.io/qdap"
+
+inds <- readLines(file.path(path, "index.html"))
+h3s <- grep("<h3", inds)
+h2s <- grep("<h2", inds)
+
+inds <- inds[head(h3s, 1):(tail(h2s, 1) - 1)]
+inds <- inds[12: tail(grep("</ul>", inds), 1)]
+h3s <- grep("<h3", inds)
+dat2 <- data.frame(start = h3s + 4, end = c(tail(h3s, -1) - 1, length(inds)))
+
+inds <- substring(inds, 5)
+
+
+
+invisible(lapply(1:nrow(dat2), function(i) {
+    rws <- inds[dat2[i, 1]:dat2[i, 2]]
+    
+    funs <- unlist(genXtract(rws, ".html\">", "</a>"))
+    descripts <- unlist(genXtract(rws, "<br />", "</li>"))
+    
+    rws <- rws[grepl("<code>", rws)]
+    rws <- paste0("<form action=\"", file.path(URL, paste0(funs, ".html")), " target=\"_blank\" \">
+    <input type=\"submit\" value=\"", funs, "\"> - ", descripts, "\n</form>", "\n") 
+    
+    
+    cat(paste0("============\nfun group", i, "\n============\n"))
+    cat(paste0("The following functions will be utilized in this section (click to view more):    \n\n"))
+    cat(paste(rws, collapse = "\n")); cat("\n")
+}))
+
 ```
 
-<hr>
 <h3 id="project">Starting a New Project</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/new_project.html" target="_blank">
+    <input type="submit" value="new_project"> - Project Template
+</form>
+
+
 <h3 id="import_export">Import/Export Discourse Data</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/condense.html" target="_blank">
+    <input type="submit" value="condense"> - Condense Dataframe Columns
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank">
+    <input type="submit" value="dir_map"> - Map Transcript Files from a Directory to a Script
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank">
+    <input type="submit" value="mcsv_r"><input type="submit" value="mcsv_w"> - Read/Write Multiple csv Files at a Time
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank">
+    <input type="submit" value="read.transcript"> - Read Transcripts Into R
+</form>
+
 <h3 id="tools">Generic qdap Tools</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/blank2NA.html" target="_blank">
+    <input type="submit" value="blank2NA"> - Replace Blanks in a dataframe
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/capitalizer.html" target="_blank">
+    <input type="submit" value="capitalizer"> - Capitalize Select Words
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/duplicates.html" target="_blank">
+    <input type="submit" value="duplicates"> - Find Duplicated Words in a Text String
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/hash.html" target="_blank">
+    <input type="submit" value="hash"> - Hash/Dictionary Lookup
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank">
+    <input type="submit" value="hms2sec"> - Convert h:m:s to Seconds
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/sec2hms.html" target="_blank">
+    <input type="submit" value="sec2hms"> - Convert Seconds to h:m:s
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/lookup.html" target="_blank">
+    <input type="submit" value="lookup"> - Hash Table/Dictionary Lookup
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/qcv.html" target="_blank">
+    <input type="submit" value="qcv"> - Quick Character Vector
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/replacer.html" target="_blank">
+    <input type="submit" value="replacer"> - Replace Cells in a Matrix or Data Frame
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/Search.html" target="_blank">
+    <input type="submit" value="Search"> - Search Columns of a Data Frame
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/text2color.html" target="_blank">
+    <input type="submit" value="text2color"> - Map Words to Colors
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/url_dl.html" target="_blank">
+    <input type="submit" value="url_dl"> - Download Instructional Documents
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/v.outer.html" target="_blank">
+    <input type="submit" value="v.outer"> - Vectorized Version of outer
+</form>
+
+
+
 <h3 id="cleaning">Cleaning/Preparing the Data</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/bracketX.html" target="_blank">
+    <input type="submit" value="bracketX"><input type="submit" value="bracketXtract"><input type="submit" value="genX"><input type="submit" value="genXtract"> - Bracket Parsing
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/beg2char.html" target="_blank">
+    <input type="submit" value="beg2char"><input type="submit" value="char2end"> - Grab Begin/End of Sting to Character
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/clean.html" target="_blank">
+    <input type="submit" value="clean"> - Remove Escaped Characters
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/incomplete.replace.html" target="_blank">
+    <input type="submit" value="incomplete.replace"><input type="submit" value="incomp"> - Denote Incomplete End Marks With "|"
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/multigsub.html" target="_blank">
+    <input type="submit" value="multigsub"><input type="submit" value="mgsub"> - Multiple gsub
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/name2sex.html" target="_blank">
+    <input type="submit" value="name2sex"> - Names to Gender Prediction
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/potential_NA.html" target="_blank">
+    <input type="submit" value="potential_NA"> - Search for Potential Missing Values
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/qprep.html" target="_blank">
+    <input type="submit" value="qprep"> - Quick Preparation of Text
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/replace_abbreviation.html" target="_blank">
+    <input type="submit" value="replace_abbreviation"> - Replace Abbreviations
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/replace_contraction.html" target="_blank">
+    <input type="submit" value="replace_contraction"> - Replace Contractions
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/replace_number.html" target="_blank">
+    <input type="submit" value="replace_number"> - Replace Numbers With Text Representation
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/replace_symbol.html" target="_blank">
+    <input type="submit" value="replace_symbol"> - Replace Symbols With Word Equivalents
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/rm_row.html" target="_blank">
+    <input type="submit" value="rm_row"><input type="submit" value="rm_empty_row"> - Remove Rows That Contain Markers
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/scrubber.html" target="_blank">
+    <input type="submit" value="scrubber"> - Clean Imported Text
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/space_fill.html" target="_blank">
+    <input type="submit" value="space_fill"> - Replace Spaces
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/spaste.html" target="_blank">
+    <input type="submit" value="spaste"> - Add Leading/Trailing Spaces
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/stemmer.html" target="_blank">
+    <input type="submit" value="stemmer"><input type="submit" value="stem.words"><input type="submit" value="stem2df"> - Stem Text
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/Trim.html" target="_blank">
+    <input type="submit" value="Trim"> - Remove Leading/Trailing White Space
+</form>
+
 <h3 id="viewing">View the Data</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank">
+    <input type="submit" value="truncdf"><input type="submit" value="htruncdf"><input type="submit" value="ltruncdf"> - Dataframe Viewing
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/qview.html" target="_blank">
+    <input type="submit" value="qview"> - Quick View Dataframe View
+</form>
+
+
+<form action="http://trinker.github.io/qdap_dev/left.just.html" target="_blank">
+    <input type="submit" value="left.just"><input type="submit" value="right.just"> - Text Justification
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/strWrap.html" target="_blank">
+    <input type="submit" value="strWrap"> - Wrap Character Strings to Format Paragraphs
+</form>
+
 <h3 id="reshaping">Reshaping the Data</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/adjacency_matrix.html" target="_blank">
+    <input type="submit" value="adjacency_matrix"><input type="submit" value="adjmat"> - Takes a Matrix and Generates an Adjacency Matrix
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/colSplit.html" target="_blank">
+    <input type="submit" value="colSplit"> - Separate a Column Pasted by `paste2`
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/colsplit2df.html" target="_blank">
+    <input type="submit" value="colsplit2df"><input type="submit" value="lcolsplit2df">  - Wrapper for colSplit that Returns Dataframe(s)
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/gantt.html" target="_blank">
+    <input type="submit" value="gantt"> - Generate Unit Spans 
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank">
+    <input type="submit" value="gantt_rep"> - Generate Unit Spans for Repeated Measures
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/key_merge.html" target="_blank">
+    <input type="submit" value="key_merge"> - Merge Demographic Information with Person/Text Transcript
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/paste2.html" target="_blank">
+    <input type="submit" value="paste2"> - Paste an Unspecified Number Of Text Columns
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/prop.html" target="_blank">
+    <input type="submit" value="prop"> - Convert Raw Numeric Matrix or Data Frame to Proportions
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/qcombine.html" target="_blank">
+    <input type="submit" value="qcombine"> - Combine Columns
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank">
+    <input type="submit" value="sentSplit"><input type="submit" value="sentCombine"> - Sentence Splitting
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/TOT.html" target="_blank">
+    <input type="submit" value="TOT"> - Turns of Talk Labelling
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/speakerSplit.html" target="_blank">
+    <input type="submit" value="speakerSplit"> - Break and Stretch if Multiple Persons per Cell
+</form>
+
 <h3 id="word">Extract/Analyze Words</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/all_words.html" target="_blank">
+    <input type="submit" value="all_words"> - Searches Text Column for Words
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/bag.o.words.html" target="_blank">
+    <input type="submit" value="bag.o.words"><input type="submit" value="breaker"><input type="submit" value="word.split"> - Bag of Words
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/common.html" target="_blank">
+    <input type="submit" value="common"> - Find Common Words Between Groups
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/exclude.html" target="_blank">
+    <input type="submit" value="exclude"> - Exclude Elements From a Vector
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/ngrams.html" target="_blank">
+    <input type="submit" value="ngrams"> - Generate ngrams
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/stopwords.html" target="_blank">
+    <input type="submit" value="stopwords"> - Remove Stopwords
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/strip.html" target="_blank">
+    <input type="submit" value="strip"> - Strip Text
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank">
+    <input type="submit" value="synonyms"><input type="submit" value="syn"> - Search For Synonyms
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/word_associate.html" target="_blank">
+    <input type="submit" value="word_associate"> - Find Associated Words
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/word_diff_list.html" target="_blank">
+    <input type="submit" value="word_diff_list"> - Differences In Word Use Between Groups
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/word_list.html" target="_blank">
+    <input type="submit" value="word_list"> - Raw Word Lists/Frequency Counts
+</form>
+
 <h3 id="coding">Qualitative Coding System</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank">
+    <input type="submit" value="cm_code.blank"> - Blank Code Transformation
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank">
+    <input type="submit" value="cm_code.combine"> - Combine Codes
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank">
+    <input type="submit" value="cm_code.exclude"> - Exclude Codes
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank">
+    <input type="submit" value="cm_code.overlap"> - Find Co-occurrence Between Codes
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank">
+    <input type="submit" value="cm_code.transform"> - Transform Codes
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_combine.dummy.html" target="_blank">
+    <input type="submit" value="cm_combine.dummy"> - Find Co-occurrence Between Dummy Codes
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_df.fill.html" target="_blank">
+    <input type="submit" value="cm_df.fill"> - Range Coding
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_df.temp.html" target="_blank">
+    <input type="submit" value="cm_df.temp"> - Break Transcript Dialogue into Blank Code Matrix
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_df.transcript.html" target="_blank">
+    <input type="submit" value="cm_df.transcript"> - Transcript With Word Number
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_df2long.html" target="_blank">
+    <input type="submit" value="cm_df2long"> - Transform Codes to Start-End Durations
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank">
+    <input type="submit" value="cm_distance"> - Distance Matrix Between Codes
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_dummy2long.html" target="_blank">
+    <input type="submit" value="cm_dummy2long"> - Convert cm_combine.dummy Back to Long
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_long2dummy.html" target="_blank">
+    <input type="submit" value="cm_long2dummy"> - Stretch and Dummy Code cm_xxx2long
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_range.temp.html" target="_blank">
+    <input type="submit" value="cm_range.temp"> - Range Code Sheet
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_range2long.html" target="_blank">
+    <input type="submit" value="cm_range2long"> - Transform Codes to Start-End Durations
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_time.temp.html" target="_blank">
+    <input type="submit" value="cm_time.temp"> - Time Span Code Sheet
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_time2long.html" target="_blank">
+    <input type="submit" value="cm_time2long"> - Transform Codes to Start-End Times
+</form>
+
+
 <h3 id="counts">Word Counts and Descriptive Statistics</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/distTab.html" target="_blank">
+    <input type="submit" value="distTab"> - SPSS Style Frequency Tables
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/multiscale.html" target="_blank">
+    <input type="submit" value="multiscale"> - Nested Standardization
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/outlier.detect.html" target="_blank">
+    <input type="submit" value="outlier.detect"> - Detect Outliers in Text
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/outlier.labeler.html" target="_blank">
+    <input type="submit" value="outlier.labeler"> - Locate Outliers in Numeric String
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/pos.html" target="_blank">
+    <input type="submit" value="pos"><input type="submit" value="pos.by"><input type="submit" value="pos.tags"> - Parts of Speech Tagging
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/question_type.html" target="_blank">
+    <input type="submit" value="question_type"> - Count of Question Type
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/syllable.sum.html" target="_blank">
+    <input type="submit" value="syllable.sum"><input type="submit" value="combo_syllable.sum"><input type="submit" value="polysyllable.sum"><input type="submit" value="syllable.count"> - Syllabication
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
+    <input type="submit" value="tdm"><input type="submit" value="dtm"> - Convert/Generate Term Document Matrix or Document Term Matrix
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/termco.html" target="_blank">
+    <input type="submit" value="termco"><input type="submit" value="term.match"><input type="submit" value="termco.d"><input type="submit" value="termco2mat"> - Search For and Count Terms
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/termco.c.html" target="_blank">
+    <input type="submit" value="termco.c"> - Combine Columns from a termco Object
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/wfm.html" target="_blank">
+    <input type="submit" value="wfm"><input type="submit" value="wfdf"><input type="submit" value="wf.combine"><input type="submit" value="wfm.expanded"> - Word Frequency Matrix
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/word.count.html" target="_blank">
+    <input type="submit" value="word.count"><input type="submit" value="wc"> - Word Counts
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/character.count.html" target="_blank">
+    <input type="submit" value="character.count"><input type="submit" value="character.table"><input type="submit" value="char.table"> - Character Counts
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank">
+    <input type="submit" value="word_stats"> - Descriptive Word Statistics
+</form>
+
+
 <h3 id="measures">Word Measures and Scoring</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/automated_readability_index.html" target="_blank">
+    <input type="submit" value="automated_readability_index"><input type="submit" value="coleman_liau"><input type="submit" value="flesch_kincaid"><input type="submit" value="fry"><input type="submit" value="linsear_write"><input type="submit" value="SMOG"> - Readability Measures
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank">
+    <input type="submit" value="dissimilarity"> - Dissimilarity Statistics
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/diversity.html" target="_blank">
+    <input type="submit" value="diversity"> - Diversity Statistics
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/formality.html" target="_blank">
+    <input type="submit" value="formality"> - Formality Score
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/kullback.leibler.html" target="_blank">
+    <input type="submit" value="kullback.leibler"> - Kullback Leibler Statistic
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/polarity.html" target="_blank">
+    <input type="submit" value="polarity"> - Polarity Score (Sentiment Analysis)
+</form>
+
+
 <h3 id="visualization">Visualizing Discourse Data</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/gradient_cloud.html" target="_blank">
+    <input type="submit" value="gradient_cloud"> - Gradient Word Cloud
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank">
+    <input type="submit" value="gantt_plot"><input type="submit" value="gantt_wrap">  - Gantt Plot
+</form>
+
+
+<form action="http://trinker.github.io/qdap_dev/qheat.html" target="_blank">
+    <input type="submit" value="qheat"> - Quick Heatmap
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank">
+    <input type="submit" value="rank_freq_mplot"><input type="submit" value="rank_freq_plot"> - Rank Frequency Plot
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank">
+    <input type="submit" value="tot_plot"> - Visualize Word Length by Turn of Talk
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/trans.cloud.html" target="_blank">
+    <input type="submit" value="trans.cloud"> - Word Clouds by Grouping Variable
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/trans.venn.html" target="_blank">
+    <input type="submit" value="trans.venn"> - Venn Diagram by Grouping Variable
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/word.network.plot.html" target="_blank">
+    <input type="submit" value="word.network.plot"> - Word Network Plot
+</form>
+
+
 <h3 id="id">ID Sentences</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/end_inc.html" target="_blank">
+    <input type="submit" value="end_inc"> - Test for Incomplete Sentences
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/end_mark.html" target="_blank">
+    <input type="submit" value="end_mark"> - Sentence End marks
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/imperative.html" target="_blank">
+    <input type="submit" value="imperative"> - Intuitively Remark Sentences as Imperative
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/NAer.html" target="_blank">
+    <input type="submit" value="NAer"> - Replace Missing Values (NA)
+</form>
+
+<h3 id="data">Data Sets</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/DATA.html" target="_blank">
+    <input type="submit" value="DATA"> - Fictitious Classroom Dialogue
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/DATA2.html" target="_blank">
+    <input type="submit" value="DATA2"> - Fictitious Repeated Measures Classroom Dialogue
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/pres_debates2012.html" target="_blank">
+    <input type="submit" value="pres_debates2012"> - 2012 U.S. Presidential Debates
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/pres_debate_raw2012.html" target="_blank">
+    <input type="submit" value="pres_debate_raw2012"> - First 2012 U.S. Presidential Debate
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/mraja1.html" target="_blank">
+    <input type="submit" value="mraja1"> - Romeo and Juliet: Act 1 Dialogue Merged with Demographics
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/mraja1spl.html" target="_blank">
+    <input type="submit" value="mraja1spl"> - Romeo and Juliet: Act 1 Dialogue Merged with Demographics and Split
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/raj.act.1.html" target="_blank">
+    <input type="submit" value="raj.act.1"> - Romeo and Juliet: Act 1
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/raj.act.2.html" target="_blank">
+    <input type="submit" value="raj.act.2"> - Romeo and Juliet: Act 2
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/raj.act.3.html" target="_blank">
+    <input type="submit" value="raj.act.3"> - Romeo and Juliet: Act 3
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/raj.act.4.html" target="_blank">
+    <input type="submit" value="raj.act.4"> - Romeo and Juliet: Act 4
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/raj.act.5.html" target="_blank">
+    <input type="submit" value="raj.act.5"> - Romeo and Juliet: Act 5
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/raj.demographics.html" target="_blank">
+    <input type="submit" value="raj.demographics"> - Romeo and Juliet Demographics
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/raj.html" target="_blank">
+    <input type="submit" value="raj"> - Romeo and Juliet (Unchanged & Complete)
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/rajPOS.html" target="_blank">
+    <input type="submit" value="rajPOS"> - Romeo and Juliet Split in Parts of Speech
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/rajSPLIT.html" target="_blank">
+    <input type="submit" value="rajSPLIT"> - Romeo and Juliet (Complete & Split)
+</form>
+
+
+<h3 id="dict">Dictionaries and Word Lists</h3>
+<h3 id="install">Installation Issues</h3>
+
+<h4>Java Issues</h3>
+  
+<p>If there is a discrepancy between the <a href="https://dl.dropbox.com/u/61803503/rjava_warning.txt">R and Java architectures</a> you will have to <a href="http://www.java.com/en/download/manual.jsp">download</a> the appropriate version of Java compatible with the version of R you're using.    
+
+For more see <a href="http://www.r-statistics.com/2012/08/how-to-load-the-rjava-package-after-the-error-java_home-cannot-be-determined-from-the-registry/" target="_blank">Tal Galili's blog post</a> regarding rJava issues.
 
 
 <hr>
 ## Acknowledgements
 
-The qdap package was my first R package and a learning process. Several people contributed imensely to my learning. I'd like to particularly thank `r HR2("https://github.com/Dasonk/", "Dason Kurkiewicz")` for his constant mentoring/assistance in learning the R language, GitHub and package development as well as collaboration on numerous qdap functions. Thank you to `r HR2("https://twitter.com/bryangoodrich", "Bryan Goodrich")` for his teaching, feedback and collaboration on serveral qdap functions. Thank you to `r HR2("https://github.com/hadley", "Dr. Hadley Wickham")` for roxygen2, ggplot2, devtools and GitHub repos which I referenced often. I'd also like to thank the many folks at `r HR2("http://www.talkstats.com/", "talkstats.com")` and `r HR2("http://stackoverflow.com/questions/tagged/r", "stackoverflow.com")` for their help in answering many R questions related to qdap.
+The qdap package was my first R package and a learning process. Several people contributed immensely to my learning. I'd like to particularly thank `r HR2("https://github.com/Dasonk/", "Dason Kurkiewicz")` for his constant mentoring/assistance in learning the R language, GitHub and package development as well as collaboration on numerous qdap functions. Thank you to `r HR2("https://twitter.com/bryangoodrich", "Bryan Goodrich")` for his teaching, feedback and collaboration on serveral qdap functions. Thank you to `r HR2("https://github.com/hadley", "Dr. Hadley Wickham")` for roxygen2, ggplot2, devtools and GitHub repos which I referenced often. I'd also like to thank the many folks at `r HR2("http://www.talkstats.com/", "talkstats.com")` and `r HR2("http://stackoverflow.com/questions/tagged/r", "stackoverflow.com")` for their help in answering many R questions related to qdap.
 
 
 ## Improvements

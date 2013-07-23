@@ -1,6 +1,6 @@
 \name{cm_combine.dummy}
 \alias{cm_combine.dummy}
-\title{Find Co-occurrence Between Codes}
+\title{Find Co-occurrence Between Dummy Codes}
 \usage{
   cm_combine.dummy(cm.l2d.obj, combine.code,
     rm.var = "time", overlap = TRUE)

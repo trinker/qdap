@@ -43,10 +43,13 @@ MINOR FEATURES
   vectors to a single vector of strings.  This outputs a dataframe with 
   condensed columns that can be wrote to csv/xlsx.
 
-* `mcsv_w` now uses `condese` to attempt to attempt to condense columns that are 
-  lists of vectors to a single vector of strings.  This adds flexiblity to 
-  `mcsv_w` with more data sets.  Additionally, `mcsv_w` now writes lists of 
-  dataframes to multiple csvs (e.g., the output from `termco` or `polarity`).
+* `mcsv_w` now uses `condense` to attempt to attempt to condense columns that are 
+  lists of vectors to a single vector of strings.  This adds flexibility to 
+  `mcsv_w` with more data sets.  `mcsv_w` now writes lists of dataframes to 
+  multiple csvs (e.g., the output from `termco` or `polarity`).  `mcsv_w` picks
+  up a dataframes argument, an optional character vector supplied in lieu of 
+  \ldots that grabs the dataframes from an environment (default id the Global
+  environment).
 
 * `ngrams` now has an argument ellipsis that passes further arguments supplied 
   to `strip`
@@ -56,14 +59,15 @@ MINOR FEATURES
 
 CHANGES
 
-* The dictionaries and word lists for qdap have been moved tot heir own package, 
-  `qdapDictionaries`.  THis will allow easier access to these resources beyond 
-  the qdap package as well as redcuing the overall size of the qdap package.  
+* The dictionaries and word lists for qdap have been moved to their own package, 
+  `qdapDictionaries`.  This will allow easier access to these resources beyond 
+  the qdap package as well as reducing the overall size of the qdap package.  
   Because this is a major change that make break the code of some users the 
   major release number has been upped to 1.
 
 * qdap gains an HTML package vignette to better explain the intended work flow 
   and function use for the package.
+
 
 qdap 0.2.3
 ----------------------------------------------------------------
