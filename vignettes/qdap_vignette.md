@@ -5,46 +5,6 @@
 
 
 
-
-<style>
-table tr:nth-child(even) td{ 
-    background: #EEEEEE;
-}
-table tr:nth-child(odd) td { 
-    background: #FFFFFF;}
-
-table{
-border-collapse:collapse;
-border:1px solid #AAAAAA;
-}
-
-table td{
-border:1px solid #AAAAAA;
-}
-
-.tex sub, .latex sub, .latex sup {
-  text-transform: uppercase;
-}
-
-.tex sub, .latex sub {
-  vertical-align: -0.5ex;
-  margin-left: -0.1667em;
-  margin-right: -0.125em;
-}
-
-.tex, .latex, .tex sub, .latex sub {
-  font-size: 1em;
-}
-
-.latex sup {
-  font-size: 0.85em;
-  vertical-align: 0.15em;
-  margin-left: -0.36em;
-  margin-right: -0.15em;
-}
-
-</style>
-
 # qdap Package Vignette
 # Tyler Rinker
 
@@ -66,21 +26,36 @@ The following vignette is a loose road map for utilizing the tools provided by q
 
 <div style="float: left; width: 50%;">
 <ul>
-<div>1.  <a href="#project">Starting a New Project</a>    </div> 
-<div>2.  <a href="#import_export">Import/Export Discourse Data</a>    </div> 
-<div>3.  <a href="#tools">Generic qdap Tools</a>    </div> 
-<div>4.  <a href="#cleaning">Cleaning/Preparing the Data</a>    </div> 
-<div>5.  <a href="#viewing">View the Data</a>    </div> 
-<div>6.  <a href="#reshaping">Reshaping the Data</a>    </div> 
-<div>7.  <a href="#word">Extract/Analyze Words</a>    </div> 
-<div>8.  <a href="#coding">Qualitative Coding System</a>    </div> 
-<div>9.  <a href="#counts">Word Counts and Descriptive Statistics</a>    </div> 
-<div>10.  <a href="#measures">Word Measures and Scoring</a>    </div> 
-<div>11.  <a href="#visualization">Visualizing Discourse Data</a>    </div> 
-<div>12.  <a href="#id">ID Sentences</a>    </div> 
-<div>13.  <a href="#data">Data Sets</a>    </div> 
-<div>14.  <a href="#dict">Dictionaries and Word Lists</a>    </div> 
-<div>15.  <a href="#install">Installation Issues</a>    </div> 
+<div>1.  <a href="#project">Starting a New Project</a>
+    </div> 
+<div>2.  <a href="#import_export">Import/Export Discourse Data</a>
+    </div> 
+<div>3.  <a href="#tools">Generic qdap Tools</a>
+    </div> 
+<div>4.  <a href="#cleaning">Cleaning/Preparing the Data</a>
+    </div> 
+<div>5.  <a href="#viewing">View the Data</a>
+    </div> 
+<div>6.  <a href="#reshaping">Reshaping the Data</a>
+    </div> 
+<div>7.  <a href="#word">Extract/Analyze Words</a>
+    </div> 
+<div>8.  <a href="#coding">Qualitative Coding System</a>
+    </div> 
+<div>9.  <a href="#counts">Word Counts and Descriptive Statistics</a>
+    </div> 
+<div>10.  <a href="#measures">Word Measures and Scoring</a>
+    </div> 
+<div>11.  <a href="#visualization">Visualizing Discourse Data</a>
+    </div> 
+<div>12.  <a href="#id">ID Sentences</a>
+    </div> 
+<div>13.  <a href="#data">Data Sets</a>
+    </div> 
+<div>14.  <a href="#dict">Dictionaries and Word Lists</a>
+    </div> 
+<div>15.  <a href="#install">Installation Issues</a>
+    </div> 
 
 
 </ul>
@@ -97,7 +72,9 @@ The following vignette is a loose road map for utilizing the tools provided by q
 
 
 
-<h3 id="project">Starting a New Project</h3>
+<h3 id="project">Starting a New Project <a href="http://youtu.be/u8AJiyMffmc" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
+</h3>
+
 
 The following functions will be utilized in this section (click to view more):    
 
@@ -105,37 +82,43 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="new_project"> - Project Template
 </form>
 
-The function <a href="http://trinker.github.io/qdap_dev/new_project.html" target="_blank"><code>new_project</code></a> is designed to generate project template of multiple nested directories that organize and guide the researcher through a qualitative study, from data collection to analysis and report/presentation generation.  This workflow framework will enable the researcher to be better organized and more efficient in all stages of the research process.  <a href="http://trinker.github.io/qdap_dev/new_project.html" target="_blank"><code>new_project</code></a> utilizes the <a href="http://cran.r-project.org/web/packages/reports/reports.pdf" target="_blank">reports package</a> (<a href="http://github.com/trinker/reports">Rinker, 2013b</a>)
+<hr>
 
-Please see the following links for PDF descriptions of the contents of the <a href="http://trinker.github.io/qdap_dev/new_project.html" target="_blank"><code>new_project</code></a> and the reports directory. </br></br>
+The function <a href="http://trinker.github.io/qdap_dev/new_project.html" target="_blank"><code>new_project</code></a>
+ is designed to generate project template of multiple nested directories that organize and guide the researcher through a qualitative study, from data collection to analysis and report/presentation generation.  This workflow framework will enable the researcher to be better organized and more efficient in all stages of the research process.  <a href="http://trinker.github.io/qdap_dev/new_project.html" target="_blank"><code>new_project</code></a>
+ utilizes the <a href="http://cran.r-project.org/web/packages/reports/reports.pdf" target="_blank">reports package</a>
+ (<a href="http://github.com/trinker/reports">Rinker, 2013b</a>) 
 
+Please see the following links for PDF descriptions of the contents of the <a href="http://trinker.github.io/qdap_dev/new_project.html" target="_blank"><code>new_project</code></a>
+ and the reports directory. </br></br>
+
+<div style="text-align: center;">
 <table width="30%" style="text-align: center;margin: 0px auto;">
 <colgroup>
 <col width="110" />
 <col width="110" />
 </colgroup>
 <tr>
-<tr>
-<td>Project<br> Workflow</td>
-<td>Report<br> Workflow</td>
+<tr style="text-align: center;">
+<td style="text-align: center;">Project<br> Workflow</td>
+<td style="text-align: center;">Report<br> Workflow</td>
 </tr>
 <tr>
-
-<td style="text-align: center; onClick="https://copy.com/4VekuLlUqix0CfSw/PROJECT_WORKFLOW_GUIDE.pdf?download=1';">
-<a href="https://copy.com/4VekuLlUqix0CfSw/PROJECT_WORKFLOW_GUIDE.pdf?download=1"><img src="http://drupal.org/files/project-images/Download%20Views%20PDF_2.png" width="50" height="75"><br></a>
+<td style="text-align: center; onClick="document.location.href='https://copy.com/4VekuLlUqix0CfSw/PROJECT_WORKFLOW_GUIDE.pdf?download=1';">
+<a href="https://copy.com/4VekuLlUqix0CfSw/PROJECT_WORKFLOW_GUIDE.pdf?download=1';"><img src="http://drupal.org/files/project-images/Download%20Views%20PDF_2.png" width="50" height="75"><br></a>
 <a href="https://copy.com/4VekuLlUqix0CfSw/PROJECT_WORKFLOW_GUIDE.pdf?download=1" target="_blank">click here</a>
-
-<td style="text-align: center; onClick="https://copy.com/eJjCUcE0N9fWO6Eu/REPORT_WORKFLOW_GUIDE.pdf?download=1';">
-<a href="https://copy.com/eJjCUcE0N9fWO6Eu/REPORT_WORKFLOW_GUIDE.pdf?download=1"><img src="http://drupal.org/files/project-images/Download%20Views%20PDF_2.png" width="50" height="75"><br></a>
-<a href="https://copy.com/eJjCUcE0N9fWO6Eu/REPORT_WORKFLOW_GUIDE.pdf?download=1" target="_blank">click here</a>
-
-
-</p></td>
+<td style="text-align: center; onClick="https://copy.com/csVvdAm2vikGlkIU/REPORT_WORKFLOW_GUIDE.pdf?download=1';">
+<p><a href="https://copy.com/csVvdAm2vikGlkIU/REPORT_WORKFLOW_GUIDE.pdf?download=1';"  target="_blank"><img src="http://drupal.org/files/project-images/Download%20Views%20PDF_2.png" width="50" height="75"><br></a>
+<a href="https://copy.com/csVvdAm2vikGlkIU/REPORT_WORKFLOW_GUIDE.pdf?download=1" target="_blank">click here</a></p></td>
 </tr>
 </table>
+</div>
 
-
-https://dl.dropboxusercontent.com/u/61803503/packages/qdap/PROJECT_WORKFLOW_GUIDE.pdf
+**extra_functions** <a href="http://youtu.be/yuFyz7IW0Us" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
+ </br>    
+The <a href="http://trinker.github.io/qdap_dev/new_project.html" target="_blank"><code>new_project</code></a>
+ template is designed to be utilized with <a href="http://www.rstudio.com/ide/download/" target="_blank">RStudio</a>
+.  Upon clicking the `xxx.Rproj` file the template will be loaded into RStudio.  The .Rprofile script will be sourced upon start up, allowing the user to automatically load packages, functions, etc. related to the project.  The file `extra_functions.R` is sourced, loading custom functions.  Already included are two functions, `email` and `todo`, used to generate project member emails and track project tasks.  This auto sourcing greatly enhances efficiency in workflow.
 
 
 <h3 id="import_export">Import/Export Discourse Data</h3>
@@ -712,12 +695,18 @@ For more see <a href="http://www.r-statistics.com/2012/08/how-to-load-the-rjava-
 <hr>
 ## Acknowledgements
 
-The qdap package was my first R package and a learning process. Several people contributed immensely to my learning. I'd like to particularly thank <a href="https://github.com/Dasonk/" target="_blank">Dason Kurkiewicz</a> for his constant mentoring/assistance in learning the R language, GitHub and package development as well as collaboration on numerous qdap functions. Thank you to <a href="https://twitter.com/bryangoodrich" target="_blank">Bryan Goodrich</a> for his teaching, feedback and collaboration on serveral qdap functions. Thank you to <a href="https://github.com/hadley" target="_blank">Dr. Hadley Wickham</a> for roxygen2, ggplot2, devtools and GitHub repos which I referenced often. I'd also like to thank the many folks at <a href="http://www.talkstats.com/" target="_blank">talkstats.com</a> and <a href="http://stackoverflow.com/questions/tagged/r" target="_blank">stackoverflow.com</a> for their help in answering many R questions related to qdap.
+The qdap package was my first R package and a learning process. Several people contributed immensely to my learning. I'd like to particularly thank <a href="https://github.com/Dasonk/" target="_blank">Dason Kurkiewicz</a>
+ for his constant mentoring/assistance in learning the R language, GitHub and package development as well as collaboration on numerous qdap functions. Thank you to <a href="https://twitter.com/bryangoodrich" target="_blank">Bryan Goodrich</a>
+ for his teaching, feedback and collaboration on serveral qdap functions. Thank you to <a href="https://github.com/hadley" target="_blank">Dr. Hadley Wickham</a>
+ for roxygen2, ggplot2, devtools and GitHub repos which I referenced often. I'd also like to thank the many folks at <a href="http://www.talkstats.com/" target="_blank">talkstats.com</a>
+ and <a href="http://stackoverflow.com/questions/tagged/r" target="_blank">stackoverflow.com</a>
+ for their help in answering many R questions related to qdap.
 
 
 ## Improvements
 
-If the reader spots an error in this Vignette or would like to suggest an improvement please contact me @ Tyler Rinker&lt;<a href="mailto:tyler.rinker@gmail.com" target="_blank">tyler.rinker@gmail.com</a>&gt;.  To submit bug reports and feature requests related to the qdap package please visit <a href="https://github.com/trinker/qdap/issues?state=open" target="_blank">qdap's GitHub issues page</a>.
+If the reader spots an error in this Vignette or would like to suggest an improvement please contact me @ Tyler Rinker&lt;<a href="mailto:tyler.rinker@gmail.com" target="_blank">tyler.rinker@gmail.com</a>&gt;.  To submit bug reports and feature requests related to the qdap package please visit <a href="https://github.com/trinker/qdap/issues?state=open" target="_blank">qdap's GitHub issues page</a>
+.
 
 <hr> 
 

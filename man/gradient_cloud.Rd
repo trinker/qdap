@@ -116,6 +116,20 @@ with(mraja1, gradient_cloud(dialogue, died, stopwords = Top25Words,
 x <- with(subset(mraja1, fam.aff \%in\% qcv(cap, mont)),
     gradient_cloud(dialogue, fam.aff))
 head(x)
+
+## 2012 U.S. Presidential Debates
+invisible(lapply(split(pres_debates2012, pres_debates2012$time), function(x) {
+    x <- x[x$person \%in\% qcv(ROMNEY, OBAMA), ]
+    dev.new()
+    gradient_cloud(x$dialogue, x$person,
+        title = paste("Debate", char2end(x$time[1])),
+        stopwords = BuckleySaltonSWL,
+        X = "blue", Y = "red",
+        max.word.size = 2.2,
+        min.word.size = 0.55
+    )
+}))
+
 }
 }
 \seealso{

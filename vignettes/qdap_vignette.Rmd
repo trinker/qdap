@@ -138,7 +138,7 @@ The following functions will be utilized in this section (click to view more):
 
 <hr>
 
-The function `r FUN("new_project")` is designed to generate project template of multiple nested directories that organize and guide the researcher through a qualitative study, from data collection to analysis and report/presentation generation.  This workflow framework will enable the researcher to be better organized and more efficient in all stages of the research process.  `r FUN("new_project")` utilizes the `r HR2("http://cran.r-project.org/web/packages/reports/reports.pdf", "reports package")` `r citep(bib[["Rinker2013b"]])`
+The function `r FUN("new_project")` is designed to generate project template of multiple nested directories that organize and guide the researcher through a qualitative study, from data collection to analysis and report/presentation generation.  This workflow framework will enable the researcher to be better organized and more efficient in all stages of the research process.  `r FUN("new_project")` utilizes the `r HR2("http://cran.r-project.org/web/packages/reports/reports.pdf", "reports package")` `r citep(bib[["Rinker2013b"]])` 
 
 Please see the following links for PDF descriptions of the contents of the `r FUN("new_project")` and the reports directory. `r VS(2)`
 
@@ -163,6 +163,9 @@ Please see the following links for PDF descriptions of the contents of the `r FU
 </tr>
 </table>
 </div>
+
+**extra_functions** `r yt("http://youtu.be/yuFyz7IW0Us")` `r VS(1)`    
+The `r FUN("new_project")` template is designed to be utilized with `r HR2("http://www.rstudio.com/ide/download/", "RStudio")`.  Upon clicking the `xxx.Rproj` file the template will be loaded into RStudio.  The .Rprofile script will be sourced upon start up, allowing the user to automatically load packages, functions, etc. related to the project.  The file `extra_functions.R` is sourced, loading custom functions.  Already included are two functions, `email` and `todo`, used to generate project member emails and track project tasks.  This auto sourcing greatly enhances efficiency in workflow.
 
 
 <h3 id="import_export">Import/Export Discourse Data</h3>
