@@ -10,7 +10,8 @@ opts_chunk$set(cache=FALSE)
 library(knitcitations); library(reports)
 bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
 
-BU <- "http://trinker.github.io/qdap/" 
+#  BU <- "http://trinker.github.io/qdap/" 
+BU <- "http://trinker.github.io/qdap_dev/" #switch before upload
 LN <- function(fun, base=BU) paste0(BU, fun, ".html")
 FUN <- function(fun, base=BU) HR2(LN(fun), paste0("<code>", fun,"</code>"))
 yt <- function(url) {
@@ -126,13 +127,42 @@ invisible(lapply(1:nrow(dat2), function(i) {
 
 ```
 
-<h3 id="project">Starting a New Project</h3>
+<h3 id="project">Starting a New Project `r yt("http://youtu.be/u8AJiyMffmc")`</h3>
+
 
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/new_project.html" target="_blank">
     <input type="submit" value="new_project"> - Project Template
 </form>
+
+<hr>
+
+The function `r FUN("new_project")` is designed to generate project template of multiple nested directories that organize and guide the researcher through a qualitative study, from data collection to analysis and report/presentation generation.  This workflow framework will enable the researcher to be better organized and more efficient in all stages of the research process.  `r FUN("new_project")` utilizes the `r HR2("http://cran.r-project.org/web/packages/reports/reports.pdf", "reports package")` `r citep(bib[["Rinker2013b"]])`
+
+Please see the following links for PDF descriptions of the contents of the `r FUN("new_project")` and the reports directory. `r VS(2)`
+
+<div style="text-align: center;">
+<table width="30%" style="text-align: center;margin: 0px auto;">
+<colgroup>
+<col width="110" />
+<col width="110" />
+</colgroup>
+<tr>
+<tr style="text-align: center;">
+<td style="text-align: center;">Project<br> Workflow</td>
+<td style="text-align: center;">Report<br> Workflow</td>
+</tr>
+<tr>
+<td style="text-align: center; onClick="document.location.href='https://copy.com/4VekuLlUqix0CfSw/PROJECT_WORKFLOW_GUIDE.pdf?download=1';">
+<a href="https://copy.com/4VekuLlUqix0CfSw/PROJECT_WORKFLOW_GUIDE.pdf?download=1';"><img src="http://drupal.org/files/project-images/Download%20Views%20PDF_2.png" width="50" height="75"><br></a>
+<a href="https://copy.com/4VekuLlUqix0CfSw/PROJECT_WORKFLOW_GUIDE.pdf?download=1" target="_blank">click here</a>
+<td style="text-align: center; onClick="https://copy.com/csVvdAm2vikGlkIU/REPORT_WORKFLOW_GUIDE.pdf?download=1';">
+<p><a href="https://copy.com/csVvdAm2vikGlkIU/REPORT_WORKFLOW_GUIDE.pdf?download=1';"  target="_blank"><img src="http://drupal.org/files/project-images/Download%20Views%20PDF_2.png" width="50" height="75"><br></a>
+<a href="https://copy.com/csVvdAm2vikGlkIU/REPORT_WORKFLOW_GUIDE.pdf?download=1" target="_blank">click here</a></p></td>
+</tr>
+</table>
+</div>
 
 
 <h3 id="import_export">Import/Export Discourse Data</h3>

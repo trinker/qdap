@@ -53,7 +53,7 @@ todo <- function(x = .loc2, report.completed = FALSE, copy2clip = TRUE) {
         cat(paste(x, collapse = "\n"))
         cat("\n\n")
     }))
-    if (report.completed && identical(comp, integer(0))) {
+    if (report.completed && !identical(comp, integer(0))) {
         cat("COMPLETED:\n\n")
         spt2 <- lapply(spt[comp], function(x) {
             x[1] <- substring(x[1], 2)

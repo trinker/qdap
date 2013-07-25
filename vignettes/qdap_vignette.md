@@ -5,6 +5,46 @@
 
 
 
+
+<style>
+table tr:nth-child(even) td{ 
+    background: #EEEEEE;
+}
+table tr:nth-child(odd) td { 
+    background: #FFFFFF;}
+
+table{
+border-collapse:collapse;
+border:1px solid #AAAAAA;
+}
+
+table td{
+border:1px solid #AAAAAA;
+}
+
+.tex sub, .latex sub, .latex sup {
+  text-transform: uppercase;
+}
+
+.tex sub, .latex sub {
+  vertical-align: -0.5ex;
+  margin-left: -0.1667em;
+  margin-right: -0.125em;
+}
+
+.tex, .latex, .tex sub, .latex sub {
+  font-size: 1em;
+}
+
+.latex sup {
+  font-size: 0.85em;
+  vertical-align: 0.15em;
+  margin-left: -0.36em;
+  margin-right: -0.15em;
+}
+
+</style>
+
 # qdap Package Vignette
 # Tyler Rinker
 
@@ -64,6 +104,38 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/new_project.html" target="_blank">
     <input type="submit" value="new_project"> - Project Template
 </form>
+
+The function <a href="http://trinker.github.io/qdap_dev/new_project.html" target="_blank"><code>new_project</code></a> is designed to generate project template of multiple nested directories that organize and guide the researcher through a qualitative study, from data collection to analysis and report/presentation generation.  This workflow framework will enable the researcher to be better organized and more efficient in all stages of the research process.  <a href="http://trinker.github.io/qdap_dev/new_project.html" target="_blank"><code>new_project</code></a> utilizes the <a href="http://cran.r-project.org/web/packages/reports/reports.pdf" target="_blank">reports package</a> (<a href="http://github.com/trinker/reports">Rinker, 2013b</a>)
+
+Please see the following links for PDF descriptions of the contents of the <a href="http://trinker.github.io/qdap_dev/new_project.html" target="_blank"><code>new_project</code></a> and the reports directory. </br></br>
+
+<table width="30%" style="text-align: center;margin: 0px auto;">
+<colgroup>
+<col width="110" />
+<col width="110" />
+</colgroup>
+<tr>
+<tr>
+<td>Project<br> Workflow</td>
+<td>Report<br> Workflow</td>
+</tr>
+<tr>
+
+<td style="text-align: center; onClick="https://copy.com/4VekuLlUqix0CfSw/PROJECT_WORKFLOW_GUIDE.pdf?download=1';">
+<a href="https://copy.com/4VekuLlUqix0CfSw/PROJECT_WORKFLOW_GUIDE.pdf?download=1"><img src="http://drupal.org/files/project-images/Download%20Views%20PDF_2.png" width="50" height="75"><br></a>
+<a href="https://copy.com/4VekuLlUqix0CfSw/PROJECT_WORKFLOW_GUIDE.pdf?download=1" target="_blank">click here</a>
+
+<td style="text-align: center; onClick="https://copy.com/eJjCUcE0N9fWO6Eu/REPORT_WORKFLOW_GUIDE.pdf?download=1';">
+<a href="https://copy.com/eJjCUcE0N9fWO6Eu/REPORT_WORKFLOW_GUIDE.pdf?download=1"><img src="http://drupal.org/files/project-images/Download%20Views%20PDF_2.png" width="50" height="75"><br></a>
+<a href="https://copy.com/eJjCUcE0N9fWO6Eu/REPORT_WORKFLOW_GUIDE.pdf?download=1" target="_blank">click here</a>
+
+
+</p></td>
+</tr>
+</table>
+
+
+https://dl.dropboxusercontent.com/u/61803503/packages/qdap/PROJECT_WORKFLOW_GUIDE.pdf
 
 
 <h3 id="import_export">Import/Export Discourse Data</h3>

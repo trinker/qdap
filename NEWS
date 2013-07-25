@@ -32,6 +32,9 @@ BUG FIXES
 * `combo_syllable.sum` threw an error if the text.var contained a cell with an 
   all non-character ([a-z]) string.  This behavior has been fixed.
 
+* `todo` function created by `new_project` would not report completed tasks if 
+  `report.completed = TRUE`.
+
 NEW FEATURES
 
 MINOR FEATURES

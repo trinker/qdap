@@ -1,6 +1,6 @@
 \name{word_associate}
 \alias{word_associate}
-\title{Find Associated Words.}
+\title{Find Associated Words}
 \usage{
   word_associate(text.var, grouping.var = NULL,
     match.string, text.unit = "sentence",
