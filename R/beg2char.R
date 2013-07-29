@@ -1,4 +1,4 @@
-#' Grab Begin/End of Sting to Character
+#' Grab Begin/End of String to Character
 #' 
 #' \code{beg2char} - Grab from beginning of string to a character(s).
 #' 

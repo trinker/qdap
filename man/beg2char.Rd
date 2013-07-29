@@ -1,7 +1,7 @@
 \name{beg2char}
 \alias{beg2char}
 \alias{char2end}
-\title{Grab Begin/End of Sting to Character}
+\title{Grab Begin/End of String to Character}
 \usage{
   beg2char(text.var, char = " ", noc = 1, include = FALSE)
 

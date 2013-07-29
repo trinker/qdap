@@ -5,7 +5,7 @@
 
 ```{r setup, include=FALSE}
 # set global chunk options
-library(knitr)
+library(knitr); library(qdap)
 opts_chunk$set(cache=FALSE)
 library(knitcitations); library(reports)
 bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
@@ -164,7 +164,7 @@ Please see the following links for PDF descriptions of the contents of the `r FU
 </table>
 </div>
 
-**extra_functions** `r yt("http://youtu.be/yuFyz7IW0Us")` `r VS(1)`    
+<h4 id="extra">extra_functions `r yt("http://youtu.be/yuFyz7IW0Us")`</h4>    
 The `r FUN("new_project")` template is designed to be utilized with `r HR2("http://www.rstudio.com/ide/download/", "RStudio")`.  Upon clicking the `xxx.Rproj` file the template will be loaded into RStudio.  The .Rprofile script will be sourced upon start up, allowing the user to automatically load packages, functions, etc. related to the project.  The file `extra_functions.R` is sourced, loading custom functions.  Already included are two functions, `email` and `todo`, used to generate project member emails and track project tasks.  This auto sourcing greatly enhances efficiency in workflow.
 
 
@@ -177,7 +177,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank">
-    <input type="submit" value="dir_map"> - Map Transcript Files from a Directory to a Script
+    <input type="submit" value="dir_map"> - `r HR("#readin", "Map Transcript Files from a Directory to a Script")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank">
@@ -185,8 +185,62 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank">
-    <input type="submit" value="read.transcript"> - Read Transcripts Into R
+    <input type="submit" value="read.transcript"> - `r HR("#readin", "Read Transcripts Into R")`
 </form>
+
+<h4 id="bracket">Reading In Transcript Data `r yt("http://youtu.be/UxgOScggLBg")`</h4>
+`r FT(gold, 5, text="&diams;")` **Reading In Data**- *read.transcipt* `r FT(gold, 5, text="&diams;")`
+```{r}
+## Location of sample transcripts from the qdap package
+(doc1 <- system.file("extdata/transcripts/trans1.docx", package = "qdap"))
+(doc2 <- system.file("extdata/transcripts/trans2.docx", package = "qdap"))
+(doc3 <- system.file("extdata/transcripts/trans3.docx", package = "qdap"))
+(doc4 <- system.file("extdata/transcripts/trans4.xlsx", package = "qdap"))
+
+dat1 <- read.transcript(doc1)
+truncdf(dat1, 40)
+dat2 <- read.transcript(doc1, col.names = c("person", "dialogue"))
+truncdf(dat2, 40)
+dat2b <- rm_row(dat2, "person", "[C") #remove bracket row
+truncdf(dat2b, 40)
+
+## Be aware of the need to skip non transcript lines
+## Incorrect read; need skip
+
+## read.transcript(doc2)
+
+## Correct: Used skip
+dat3 <- read.transcript(doc2, skip = 1)
+truncdf(dat3, 40)
+
+## Be aware of the sep used
+## Incorrect read; wrong sep
+
+## read.transcript(doc3, skip = 1)
+
+## Correct sep
+dat4 <- read.transcript(doc3, sep = "-", skip = 1)
+
+## .xlsx data
+dat5 <- read.transcript(doc4)
+truncdf(dat5, 40)
+
+## Reading in text
+trans <- "sam: Computer is fun. Not too fun.
+greg: No it's not, it's dumb.
+teacher: What should we do?
+sam: You liar, it stinks!"
+
+read.transcript(text=trans)
+```
+
+`r FT(gold, 5, text="&diams;")` **Reading In Data**- *dir_map* `r FT(gold, 5, text="&diams;")`
+```{r}
+(DIR <- system.file("extdata/transcripts", package = "qdap"))
+dir_map(DIR)
+```
+
+
 
 <h3 id="tools">Generic qdap Tools</h3>
 
@@ -251,11 +305,11 @@ The following functions will be utilized in this section (click to view more):
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/bracketX.html" target="_blank">
-    <input type="submit" value="bracketX"><input type="submit" value="bracketXtract"><input type="submit" value="genX"><input type="submit" value="genXtract"> - Bracket Parsing
+    <input type="submit" value="bracketX"><input type="submit" value="bracketXtract"><input type="submit" value="genX"><input type="submit" value="genXtract"> - `r HR("#bracket", "Bracket/General Chunk Extraction")`     
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/beg2char.html" target="_blank">
-    <input type="submit" value="beg2char"><input type="submit" value="char2end"> - Grab Begin/End of Sting to Character
+    <input type="submit" value="beg2char"><input type="submit" value="char2end"> - Grab Begin/End of String to Character
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/clean.html" target="_blank">
@@ -321,6 +375,59 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/Trim.html" target="_blank">
     <input type="submit" value="Trim"> - Remove Leading/Trailing White Space
 </form>
+<hr>
+
+<h4 id="bracket">Bracket/General Chunk Extraction `r yt("http://youtu.be/B4lvZGo_6bA")`</h4>
+`r FT(gold, 5, text="&diams;")` **Extracting Chunks 1**- *bracketX/bracketXtract* `r FT(gold, 5, text="&diams;")`
+```{r}
+## A fake data set
+examp <- structure(list(person = structure(c(1L, 2L, 1L, 3L),
+    .Label = c("bob", "greg", "sue"), class = "factor"), text =
+    c("I love chicken [unintelligible]!",
+    "Me too! (laughter) It's so good.[interrupting]",
+    "Yep it's awesome {reading}.", "Agreed. {is so much fun}")), .Names =
+    c("person", "text"), row.names = c(NA, -4L), class = "data.frame")
+
+examp
+bracketX(examp$text, "square")
+bracketX(examp$text, "curly")
+bracketX(examp$text, c("square", "round"))
+bracketX(examp$text)
+
+
+bracketXtract(examp$text, "square")
+bracketXtract(examp$text, "curly")
+bracketXtract(examp$text, c("square", "round"))
+bracketXtract(examp$text, c("square", "round"), merge = FALSE)
+bracketXtract(examp$text)
+bracketXtract(examp$text, with = TRUE)
+
+paste2(bracketXtract(examp$text, "curly"), " ")
+```
+
+The researcher may need a more general extraction method that allows for any left/right boundaries to be specified.  This is useful in that many qualitative transciption/coding programs have specific syntax for various dialogue markup for events that must be parsed from the data set.  The `r FUN("genX")` and `r FUN("genXtract")` functions have such capabilities.
+
+`r FT(gold, 5, text="&diams;")` **Extracting Chunks 2**- *genX/genXtract* `r FT(gold, 5, text="&diams;")`
+```{r}
+DATA$state  ## Look at the difference in number 1 and 10
+
+genX(DATA$state, c("is", "we"), c("too", "on"))
+
+## A fake data set
+x <- c("Where is the /big dog#?",
+    "I think he's @arunning@b with /little cat#.")
+x
+
+genXtract(x, c("/", "@a"), c("#", "@b"))
+
+## A fake data set
+x2 <- c("Where is the L1big dogL2?",
+    "I think he's 98running99 with L1little catL2.")
+x2
+
+genXtract(x2, c("L1", 98), c("L2", 99))
+```
+
 
 <h3 id="viewing">View the Data</h3>
 

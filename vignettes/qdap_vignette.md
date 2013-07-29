@@ -204,7 +204,8 @@ The following functions will be utilized in this section (click to view more):
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/bracketX.html" target="_blank">
-    <input type="submit" value="bracketX"><input type="submit" value="bracketXtract"><input type="submit" value="genX"><input type="submit" value="genXtract"> - Bracket Parsing
+    <input type="submit" value="bracketX"><input type="submit" value="bracketXtract"><input type="submit" value="genX"><input type="submit" value="genXtract"> - <a href="#bracket">Bracket/General Chunk Extraction</a>
+     
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/beg2char.html" target="_blank">
@@ -274,6 +275,297 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/Trim.html" target="_blank">
     <input type="submit" value="Trim"> - Remove Leading/Trailing White Space
 </form>
+<hr>
+
+<h4 id="bracket">Bracket/General Chunk Extraction</h4>
+<font size="5" color="gold">&diams;</font> **Extracting Chunks 1**- *bracketX/bracketXtract* <font size="5" color="gold">&diams;</font>
+
+```r
+## A fake data set
+examp <- structure(list(person = structure(c(1L, 2L, 1L, 3L), .Label = c("bob", 
+    "greg", "sue"), class = "factor"), text = c("I love chicken [unintelligible]!", 
+    "Me too! (laughter) It's so good.[interrupting]", "Yep it's awesome {reading}.", 
+    "Agreed. {is so much fun}")), .Names = c("person", "text"), row.names = c(NA, 
+    -4L), class = "data.frame")
+
+examp
+```
+
+```
+##   person                                           text
+## 1    bob               I love chicken [unintelligible]!
+## 2   greg Me too! (laughter) It's so good.[interrupting]
+## 3    bob                    Yep it's awesome {reading}.
+## 4    sue                       Agreed. {is so much fun}
+```
+
+```r
+bracketX(examp$text, "square")
+```
+
+```
+## [1] "I love chicken!"                  "Me too! (laughter) It's so good."
+## [3] "Yep it's awesome {reading}."      "Agreed. {is so much fun}"
+```
+
+```r
+bracketX(examp$text, "curly")
+```
+
+```
+## [1] "I love chicken [unintelligible]!"              
+## [2] "Me too! (laughter) It's so good.[interrupting]"
+## [3] "Yep it's awesome."                             
+## [4] "Agreed."
+```
+
+```r
+bracketX(examp$text, c("square", "round"))
+```
+
+```
+## [1] "I love chicken!"             "Me too! It's so good."      
+## [3] "Yep it's awesome {reading}." "Agreed. {is so much fun}"
+```
+
+```r
+bracketX(examp$text)
+```
+
+```
+## [1] "I love chicken!"       "Me too! It's so good." "Yep it's awesome."    
+## [4] "Agreed."
+```
+
+```r
+
+
+bracketXtract(examp$text, "square")
+```
+
+```
+## $square1
+## [1] "unintelligible"
+## 
+## $square2
+## [1] "interrupting"
+## 
+## $square3
+## character(0)
+## 
+## $square4
+## character(0)
+```
+
+```r
+bracketXtract(examp$text, "curly")
+```
+
+```
+## $curly1
+## character(0)
+## 
+## $curly2
+## character(0)
+## 
+## $curly3
+## [1] "reading"
+## 
+## $curly4
+## [1] "is so much fun"
+```
+
+```r
+bracketXtract(examp$text, c("square", "round"))
+```
+
+```
+## [[1]]
+## [1] "unintelligible"
+## 
+## [[2]]
+## [1] "interrupting" "laughter"    
+## 
+## [[3]]
+## character(0)
+## 
+## [[4]]
+## character(0)
+```
+
+```r
+bracketXtract(examp$text, c("square", "round"), merge = FALSE)
+```
+
+```
+## $square
+## $square[[1]]
+## [1] "unintelligible"
+## 
+## $square[[2]]
+## [1] "interrupting"
+## 
+## $square[[3]]
+## character(0)
+## 
+## $square[[4]]
+## character(0)
+## 
+## 
+## $round
+## $round[[1]]
+## character(0)
+## 
+## $round[[2]]
+## [1] "laughter"
+## 
+## $round[[3]]
+## character(0)
+## 
+## $round[[4]]
+## character(0)
+```
+
+```r
+bracketXtract(examp$text)
+```
+
+```
+## $all1
+## [1] "unintelligible"
+## 
+## $all2
+## [1] "laughter"     "interrupting"
+## 
+## $all3
+## [1] "reading"
+## 
+## $all4
+## [1] "is so much fun"
+```
+
+```r
+bracketXtract(examp$text, with = TRUE)
+```
+
+```
+## $all1
+## [1] "[unintelligible]"
+## 
+## $all2
+## [1] "(laughter)"     "[interrupting]"
+## 
+## $all3
+## [1] "{reading}"
+## 
+## $all4
+## [1] "{is so much fun}"
+```
+
+```r
+
+paste2(bracketXtract(examp$text, "curly"), " ")
+```
+
+```
+## [1] "reading is so much fun"
+```
+
+
+The researcher may need a more general extraction method that allows for any left/right boundaries to be specified.  This is useful in that many qualitative transciption/coding programs have specific syntax for various dialogue markup for events that must be parsed from the data set.  The <a href="http://trinker.github.io/qdap_dev/genX.html" target="_blank"><code>genX</code></a>
+ and <a href="http://trinker.github.io/qdap_dev/genXtract.html" target="_blank"><code>genXtract</code></a>
+ functions have such capabilities.
+
+<font size="5" color="gold">&diams;</font> **Extracting Chunks 2**- *genX/genXtract* <font size="5" color="gold">&diams;</font>
+
+```r
+DATA$state  ## Look at the difference in number 1 and 10
+```
+
+```
+##  [1] "Computer is fun. Not too fun."        
+##  [2] "No it's not, it's dumb."              
+##  [3] "What should we do?"                   
+##  [4] "You liar, it stinks!"                 
+##  [5] "I am telling the truth!"              
+##  [6] "How can we be certain?"               
+##  [7] "There is no way."                     
+##  [8] "I distrust you."                      
+##  [9] "What are you talking about?"          
+## [10] "Shall we move on?  Good then."        
+## [11] "I'm hungry.  Let's eat.  You already?"
+```
+
+```r
+
+genX(DATA$state, c("is", "we"), c("too", "on"))
+```
+
+```
+##  [1] "Computer fun."                      
+##  [2] "No it's not, it's dumb."            
+##  [3] "What should we do?"                 
+##  [4] "You liar, it stinks!"               
+##  [5] "I am telling the truth!"            
+##  [6] "How can we be certain?"             
+##  [7] "There is no way."                   
+##  [8] "I distrust you."                    
+##  [9] "What are you talking about?"        
+## [10] "Shall? Good then."                  
+## [11] "I'm hungry. Let's eat. You already?"
+```
+
+```r
+
+## A fake data set
+x <- c("Where is the /big dog#?", "I think he's @arunning@b with /little cat#.")
+x
+```
+
+```
+## [1] "Where is the /big dog#?"                    
+## [2] "I think he's @arunning@b with /little cat#."
+```
+
+```r
+
+genXtract(x, c("/", "@a"), c("#", "@b"))
+```
+
+```
+## [[1]]
+## [1] "big dog"
+## 
+## [[2]]
+## [1] "little cat" "running"
+```
+
+```r
+
+## A fake data set
+x2 <- c("Where is the L1big dogL2?", "I think he's 98running99 with L1little catL2.")
+x2
+```
+
+```
+## [1] "Where is the L1big dogL2?"                    
+## [2] "I think he's 98running99 with L1little catL2."
+```
+
+```r
+
+genXtract(x2, c("L1", 98), c("L2", 99))
+```
+
+```
+## [[1]]
+## [1] "big dog"
+## 
+## [[2]]
+## [1] "little cat" "running"
+```
+
+
 
 <h3 id="viewing">View the Data</h3>
 
