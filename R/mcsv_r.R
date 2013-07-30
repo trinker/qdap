@@ -42,10 +42,10 @@
 #' (a <- mcsv_w(mtcarsb, CO2b, dir="foo"))
 #' rm("mtcarsb", "CO2b")  # gone from .GlobalEnv
 #' (nms <- dir(a))
-#' mcsv_r(paste(a, nms, sep="/"))
+#' mcsv_r(file.path(a, nms))
 #' mtcarsb; CO2b
 #' rm("mtcarsb", "CO2b")  # gone from .GlobalEnv
-#' mcsv_r(paste(a, nms, sep="/"), paste0("foo.dat", 1:2))
+#' mcsv_r(file.path(a, nms), paste0("foo.dat", 1:2))
 #' foo.dat1; foo.dat2
 #' rm("foo.dat1", "foo.dat2")  # gone from .GlobalEnv
 #' delete("foo")

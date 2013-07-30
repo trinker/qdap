@@ -6,7 +6,7 @@
 ```{r setup, include=FALSE}
 # set global chunk options
 library(knitr); library(qdap)
-opts_chunk$set(cache=FALSE)
+opts_chunk$set(cache=FALSE, tidy=FALSE)
 library(knitcitations); library(reports)
 bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
 
@@ -356,6 +356,52 @@ dat4 <- read.transcript('~/extdata/transcripts/trans4.xlsx', col.names = c('pers
 The `r CN("mcsv_x")` family of functions are utilized to read (`r FUN("mcsv_r")`) and write (`r FUN("mcsv_w")`) multiple csv files at once.  `r FUN("mcsv_w")` takes an arbitrary number of data frames and outputs them to the supplied directory( `r CN("dir = ?")`).  An attempt will be made to output the data frames qdap functions that output lists of data frames.  Note that data frames that contain columns that are lists must be condensed prior to writing with other R data frame writing functions (e.g., `write.csv`) using the `r FUN("condense")` function.  By default `r FUN("mcsv_w")` attempts utilize `r FUN("condense")`.
 
 The `r FUN("mcsv_r")` function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the data frames that are read in are also assigned to an inclusive list (name `L1` by defualt).
+
+`r FT(gold, 5, text="&diams;")` **Reading and Writing Multiple csvs** `r FT(gold, 5, text="&diams;")`
+
+```{r, eval=FALSE}
+## Make new minimal data sets
+mtcarsb <- mtcars[1:5, ]; CO2b <- CO2[1:5, ]
+
+## Write multiple csvs and assign the directory path to `a`
+a <- mcsv_w(mtcarsb, CO2b, dir="foo")
+
+## New data sets gone from .GlobalEnv
+rm("mtcarsb", "CO2b")  
+
+## View the files in `a` and assign to `nms`
+(nms <- dir(a))
+
+## Read in and notice the dataframes have been assigned in .GlobalEnv
+mcsv_r(file.path(a, nms))
+mtcarsb; CO2b
+L1
+
+## The dataframe anmes and list of dataframe can be altered
+mcsv_r(file.path(a, nms), a.names = paste0("bot", 1:2), l.names = "bots_stink")
+bot1; bot2
+bots_stink
+
+## Clean up
+delete("foo")
+```
+
+`r FT(gold, 5, text="&diams;")` **Writing Lists of Dataframes to csvs** `r FT(gold, 5, text="&diams;")`
+```{r, eval=FALSE}
+## poldat and termco produce lists of dataframes
+poldat <- with(DATA, polarity(state, person))
+term <- c("the ", "she", " wh")
+termdat <- with(raj.act.1,  termco(dialogue, person, term))
+
+## View the lists of dataframes
+str(poldat); str(termdat)
+
+## Write the lists of dataframes to csv
+mcsv_w(poldat, termdat, mtcars, CO2, dir="foo2")
+
+## Clean up
+delete("foo2")
+```
 
 <h3 id="tools">Generic qdap Tools</h3>
 

@@ -291,6 +291,56 @@ The <font face="courier">mcsv_x</font> family of functions are utilized to read 
 
 The <a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a> function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the data frames that are read in are also assigned to an inclusive list (name `L1` by defualt).
 
+<font size="5" color="gold">&diams;</font> **Reading and Writing Multiple csvs** <font size="5" color="gold">&diams;</font>
+
+
+```r
+## Make new minimal data sets
+mtcarsb <- mtcars[1:5, ]; CO2b <- CO2[1:5, ]
+
+## Write multiple csvs and assign the directory path to `a`
+a <- mcsv_w(mtcarsb, CO2b, dir="foo")
+
+## New data sets gone from .GlobalEnv
+rm("mtcarsb", "CO2b")  
+
+## View the files in `a` and assign to `nms`
+(nms <- dir(a))
+
+## Read in and notice the dataframes have been assigned in .GlobalEnv
+mcsv_r(file.path(a, nms))
+mtcarsb; CO2b
+L1
+
+## The dataframe anmes and list of dataframe can be altered
+mcsv_r(file.path(a, nms), a.names = paste0("bot", 1:2), l.names = "bots_stink")
+bot1; bot2
+bots_stink
+
+## Clean up
+delete("foo")
+```
+
+
+<font size="5" color="gold">&diams;</font> **Writing Lists of Dataframes to csvs** <font size="5" color="gold">&diams;</font>
+
+```r
+## poldat and termco produce lists of dataframes
+poldat <- with(DATA, polarity(state, person))
+term <- c("the ", "she", " wh")
+termdat <- with(raj.act.1,  termco(dialogue, person, term))
+
+## View the lists of dataframes
+str(poldat); str(termdat)
+
+## Write the lists of dataframes to csv
+mcsv_w(poldat, termdat, mtcars, CO2, dir="foo2")
+
+## Clean up
+delete("foo2")
+```
+
+
 <h3 id="tools">Generic qdap Tools</h3>
 
 The following functions will be utilized in this section (click to view more):    
@@ -432,11 +482,12 @@ The following functions will be utilized in this section (click to view more):
 
 ```r
 ## A fake data set
-examp <- structure(list(person = structure(c(1L, 2L, 1L, 3L), .Label = c("bob", 
-    "greg", "sue"), class = "factor"), text = c("I love chicken [unintelligible]!", 
-    "Me too! (laughter) It's so good.[interrupting]", "Yep it's awesome {reading}.", 
-    "Agreed. {is so much fun}")), .Names = c("person", "text"), row.names = c(NA, 
-    -4L), class = "data.frame")
+examp <- structure(list(person = structure(c(1L, 2L, 1L, 3L),
+    .Label = c("bob", "greg", "sue"), class = "factor"), text =
+    c("I love chicken [unintelligible]!",
+    "Me too! (laughter) It's so good.[interrupting]",
+    "Yep it's awesome {reading}.", "Agreed. {is so much fun}")), .Names =
+    c("person", "text"), row.names = c(NA, -4L), class = "data.frame")
 
 examp
 ```
@@ -666,7 +717,8 @@ genX(DATA$state, c("is", "we"), c("too", "on"))
 ```r
 
 ## A fake data set
-x <- c("Where is the /big dog#?", "I think he's @arunning@b with /little cat#.")
+x <- c("Where is the /big dog#?",
+    "I think he's @arunning@b with /little cat#.")
 x
 ```
 
@@ -691,7 +743,8 @@ genXtract(x, c("/", "@a"), c("#", "@b"))
 ```r
 
 ## A fake data set
-x2 <- c("Where is the L1big dogL2?", "I think he's 98running99 with L1little catL2.")
+x2 <- c("Where is the L1big dogL2?",
+    "I think he's 98running99 with L1little catL2.")
 x2
 ```
 
