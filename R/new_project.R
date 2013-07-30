@@ -105,11 +105,11 @@ new_project <- function(project = "new", path = getwd(), ...) {
         "names(L1) <- paste0(\"dat\", 1:len)\n",
         "\n\n\n\nsave( , file = file.path(getwd(), \"DATA/cleaned.RData\"))\n"), 
         file=paste0(y[[1]], "/", "01_clean_data.R"))
-    cat(paste0("library(qdap, ggplot2, grid, scales)\n", 
+    cat(paste0("lapply(c(\"qdap\", \"ggplot2\", \"grid\", \"scales\"), require, character.only = T)\n", 
         "source(file.path(getwd(), \"extra_functions.R\"))\n",
         "load(file.path(getwd(), \"DATA/cleaned.RData\"))\n"),
         file=paste0(y[[1]], "/", "02_analysis_I.R"))
-    cat(paste0("library(qdap, ggplot2, grid, scales)\n",
+    cat(paste0("lapply(c(\"qdap\", \"ggplot2\", \"grid\", \"scales\"), require, character.only = T)\n",
         "source(file.path(getwd(), \"extra_functions.R\"))\n",
         "load(file.path(getwd(), \"DATA/cleaned.RData\"))\n",
         "setwd(file.path(getwd(), \"PLOTS\"))\n"),

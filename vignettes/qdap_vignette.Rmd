@@ -173,7 +173,7 @@ The `r FUN("new_project")` template is designed to be utilized with `r HR2("http
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/condense.html" target="_blank">
-    <input type="submit" value="condense"> - Condense Dataframe Columns
+    <input type="submit" value="condense"> - `r HR("#mcsv", "Condense Dataframe Columns")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank">
@@ -181,66 +181,181 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank">
-    <input type="submit" value="mcsv_r"><input type="submit" value="mcsv_w"> - Read/Write Multiple csv Files at a Time
+    <input type="submit" value="mcsv_r"><input type="submit" value="mcsv_w"> - `r HR("#mcsv", "Read/Write Multiple csv Files at a Time")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank">
     <input type="submit" value="read.transcript"> - `r HR("#readin", "Read Transcripts Into R")`
 </form>
 
-<h4 id="bracket">Reading In Transcript Data `r yt("http://youtu.be/UxgOScggLBg")`</h4>
-`r FT(gold, 5, text="&diams;")` **Reading In Data**- *read.transcipt* `r FT(gold, 5, text="&diams;")`
-```{r}
-## Location of sample transcripts from the qdap package
+<h4 id="readin">Reading In Transcript Data `r yt("http://youtu.be/UxgOScggLBg")`</h4>    
+
+This subsection covers how to read in transcript data.  Generally the researcher will have data stores as a .docx (Microsoft Word or Open/Libre Office) or .xlsx/.csv (spreadsheet format).  Two functions are useful for reading in data, `r FUN("read.transcript")` and `r FUN("dir_map")`.  `r FUN("read.transcript")` detects file type (.docx/.csv/.xlsx) and reads in a single transcipt whereas `r FUN("dir_map")` generates code that utilizes `r FUN("read.transcript")` for each of the multiple transcripts in a single directory.  Note that `r FUN("read.transcript")` expects a two column formatted transcript (usually with person on the left and dialogue on the right).
+
+Five arguments are of particular importance to read.transcript: 
+
+<table>
+<tr><td><code>file</code></td>
+<td><p>The name of the file which the data are to be
+read from. Each row of the table appears as one line of
+the file. If it does not contain an absolute path, the
+file name is relative to the current working directory,
+<code>getwd()</code>.</p></td></tr>
+<tr><td><code>col.names</code></td>
+<td>
+<p>A character vector specifying the column
+names of the transcript columns.</p>
+</td></tr>
+<tr><td><code>header</code></td>
+<td>
+<p>logical.  If <code>TRUE</code> the file contains
+the names of the variables as its first line.</p>
+</td></tr>
+<tr><td><code>sep</code></td>
+<td>
+<p>The field separator character. Values on each
+line of the file are separated by this character.  The
+default of <code>NULL</code> instructs
+<code><a href="read.transcript.html">read.transcript</a></code> to use a separator
+suitable for the file type being read in.</p>
+</td></tr>
+<tr><td><code>skip</code></td>
+<td>
+<p>Integer; the number of lines of the data file
+to skip before beginning to read data.</p>
+</td></tr>
+</table>
+
+Often transcripts contain extraneous material at the top and the argument `r CN("skip = ?")` must be used to skip these extra lines.  Some sort of unique separator must also be used to separate the person column from the text column.  By defualt `r CN('sep = ":"')` is assumed.  If your transcripts do no contain a separator one must be inserted manually.  Also note that the researcher may want to prepare the transcripts with brackets to denote non spoken annotations as well dialogue that is read rather than spoken.  For more on bracket parsing see `r HR("#bracket", "Bracket/General Chunk Extraction")`.
+
+`r FT(gold, 5, text="&diams;")` **Reading In Data**- *read.transcript* `r FT(gold, 5, text="&diams;")`
+<pre><code class="r">## Location of sample transcripts from the qdap package
 (doc1 <- system.file("extdata/transcripts/trans1.docx", package = "qdap"))
 (doc2 <- system.file("extdata/transcripts/trans2.docx", package = "qdap"))
 (doc3 <- system.file("extdata/transcripts/trans3.docx", package = "qdap"))
-(doc4 <- system.file("extdata/transcripts/trans4.xlsx", package = "qdap"))
+(doc4 <- system.file("extdata/transcripts/trans4.xlsx", package = "qdap"))</code></pre>
 
-dat1 <- read.transcript(doc1)
-truncdf(dat1, 40)
-dat2 <- read.transcript(doc1, col.names = c("person", "dialogue"))
-truncdf(dat2, 40)
-dat2b <- rm_row(dat2, "person", "[C") #remove bracket row
-truncdf(dat2b, 40)
+<pre><code class="r">dat1 <- read.transcript(doc1)
+truncdf(dat1, 40)</code></pre>
 
-## Be aware of the need to skip non transcript lines
-## Incorrect read; need skip
+<pre><code>##                  X1                                       X2
+## 1      Researcher 2                         October 7, 1892.
+## 2         Teacher 4 Students it's time to learn. [Student di
+## 3 Multiple Students        Yes teacher we're ready to learn.
+## 4     [Cross Talk 3                                      00]
+## 5         Teacher 4 Let's read this terrific book together. </code></pre>
 
-## read.transcript(doc2)
 
-## Correct: Used skip
+<pre><code class="r">dat2 <- read.transcript(doc1, col.names = c("person", "dialogue"))
+truncdf(dat2, 40)</code></pre>
+
+<pre><code>##              person                                 dialogue
+## 1      Researcher 2                         October 7, 1892.
+## 2         Teacher 4 Students it's time to learn. [Student di
+## 3 Multiple Students        Yes teacher we're ready to learn.
+## 4     [Cross Talk 3                                      00]
+## 5         Teacher 4 Let's read this terrific book together. </code></pre>
+
+<pre><code class="r">dat2b <- rm_row(dat2, "person", "[C") #remove bracket row
+truncdf(dat2b, 40)</code></pre>
+
+<pre><code>##              person                                 dialogue
+## 1      Researcher 2                         October 7, 1892.
+## 2         Teacher 4 Students it's time to learn. [Student di
+## 3 Multiple Students        Yes teacher we're ready to learn.
+## 4         Teacher 4 Let's read this terrific book together. </code></pre>
+
+
+<pre><code class="r">## Be aware of the need to `skip` non transcript lines
+## Incorrect read; Needed to use `skip`
+read.transcript(doc2)</code></pre>
+
+<pre><code>Error in data.frame(X1 = speaker, X2 = pvalues, stringsAsFactors = FALSE) : 
+  arguments imply differing number of rows: 7, 8</code></pre>
+
+
+<pre><code class="r">## Correct: Used `skip`
 dat3 <- read.transcript(doc2, skip = 1)
-truncdf(dat3, 40)
+truncdf(dat3, 40)</code></pre>
 
-## Be aware of the sep used
-## Incorrect read; wrong sep
+<pre><code>##                  X1                                       X2
+## 1      Researcher 2                         October 7, 1892.
+## 2         Teacher 4 Students it's time to learn. [Student di
+## 3 Multiple Students        Yes teacher we're ready to learn.
+## 4     [Cross Talk 3                                      00]
+## 5         Teacher 4 Let's read this terrific book together. 
+</code></pre>
 
-## read.transcript(doc3, skip = 1)
+<pre><code class="r">## Be Aware of the `sep` Used
+## Incorrect Read; Wrong `sep` Provided (used defualt `:`)
+read.transcript(doc3, skip = 1)</code></pre>
 
-## Correct sep
+<pre><code>##Dialogue and Person Columns Mixed Inappropriately
+## X1
+## 1 [Cross Talk 3
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              X2
+## 1 Teacher 4-Students it's time to learn. [Student discussion; unintelligible] Multiple Students-Yes teacher we're ready to learn. 00] Teacher 4-Let's read this terrific book together. It's called Moo Baa La La La and what was I going to ... Oh yes The story is by Sandra Boynton. A cow says Moo. A Sheep says Baa. Three singing pigs say LA LA LA! "No, no!" you say, that isn't right. The pigs say oink all day and night. Rhinoceroses snort and snuff. And little dogs go ruff ruff ruff! Some other dogs go bow wow wow! And cats and kittens say Meow! Quack! Says the duck. A horse says neigh. It's quiet now. What do you say?
+</code></pre>
+
+
+<pre><code class="r">## Correct `sep` Used
 dat4 <- read.transcript(doc3, sep = "-", skip = 1)
+truncdf(dat4, 40)</code></pre>
 
-## .xlsx data
+<pre><code>##                  X1                                       X2
+## 1         Teacher 4 Students it's time to learn. [Student di
+## 2 Multiple Students Yes teacher we're ready to learn. [Cross
+## 3         Teacher 4 Let's read this terrific book together. </code></pre>
+
+
+<pre><code class="r">## Read In .xlsx Data
 dat5 <- read.transcript(doc4)
-truncdf(dat5, 40)
+truncdf(dat5, 40)</code></pre>
 
-## Reading in text
+<pre><code>##                   V1                                       V2
+## 1      Researcher 2:                         October 7, 1892.
+## 2         Teacher 4:             Students it's time to learn.
+## 3               <NA>                                     <NA>
+## 4 Multiple Students:        Yes teacher we're ready to learn.
+## 5               <NA>                                     <NA>
+## 6         Teacher 4: Let's read this terrific book together. 
+</code></pre>
+
+<pre><code class="r">## Reading In Text
 trans <- "sam: Computer is fun. Not too fun.
 greg: No it's not, it's dumb.
 teacher: What should we do?
 sam: You liar, it stinks!"
 
-read.transcript(text=trans)
-```
+read.transcript(text=trans)</code></pre>
+
+<pre><code>##        V1                            V2
+## 1     sam Computer is fun. Not too fun.
+## 2    greg         No its not, its dumb.
+## 3 teacher            What should we do?
+## 4     sam          You liar, it stinks!
+</code></pre>
+
+The `r FUN("dir_map")` function enables the researcher to produce multiple lines of code, one line with `r FUN("read.transcript")` for each file in a directory, which is then optionally copied to the clipboard for easy insertion into a script.  Note that wetting the argument `r CN("use.path = FALSE")` may allow the code to be more portable in that a static path is not suppplied the the `r FUN("read.transcript")` scripts.
 
 `r FT(gold, 5, text="&diams;")` **Reading In Data**- *dir_map* `r FT(gold, 5, text="&diams;")`
-```{r}
-(DIR <- system.file("extdata/transcripts", package = "qdap"))
-dir_map(DIR)
-```
+
+<pre><code class="r">(DIR <- system.file("extdata/transcripts", package = "qdap"))
+dir_map(DIR)</code></pre>
+
+...will produce...
+
+<pre><code>dat1 <- read.transcript('~/extdata/transcripts/trans1.docx', col.names = c('person', 'dialogue'), skip = 0)
+dat2 <- read.transcript('~/extdata/transcripts/trans2.docx', col.names = c('person', 'dialogue'), skip = 0)
+dat3 <- read.transcript('~/extdata/transcripts/trans3.docx', col.names = c('person', 'dialogue'), skip = 0)
+dat4 <- read.transcript('~/extdata/transcripts/trans4.xlsx', col.names = c('person', 'dialogue'), skip = 0)</code></pre>
 
 
+<h4 id="mcsv">Reading/Writing Multiple .csv Files `r yt("http://youtu.be/aeZKJGEfD7U")`</h4>    
+
+The `r CN("mcsv_x")` family of functions are utilized to read (`r FUN("mcsv_r")`) and write (`r FUN("mcsv_w")`) multiple csv files at once.  `r FUN("mcsv_w")` takes an arbitrary number of data frames and outputs them to the supplied directory( `r CN("dir = ?")`).  An attempt will be made to output the data frames qdap functions that output lists of data frames.  Note that data frames that contain columns that are lists must be condensed prior to writing with other R data frame writing functions (e.g., `write.csv`) using the `r FUN("condense")` function.  By default `r FUN("mcsv_w")` attempts utilize `r FUN("condense")`.
+
+The `r FUN("mcsv_r")` function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the data frames that are read in are also assigned to an inclusive list (name `L1` by defualt).
 
 <h3 id="tools">Generic qdap Tools</h3>
 
@@ -377,7 +492,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 <hr>
 
-<h4 id="bracket">Bracket/General Chunk Extraction `r yt("http://youtu.be/B4lvZGo_6bA")`</h4>
+<h4 id="bracket">Bracket/General Chunk Extraction `r yt("http://youtu.be/B4lvZGo_6bA")`</h4>    
 `r FT(gold, 5, text="&diams;")` **Extracting Chunks 1**- *bracketX/bracketXtract* `r FT(gold, 5, text="&diams;")`
 ```{r}
 ## A fake data set

@@ -7,6 +7,10 @@
 #' @param loc The path/location of the transcript data files.
 #' @param obj.prefix A character string that will be used as the prefix (followed 
 #' by a unique digit) as the assignment object.
+#' @param use.path logical.  If \code{TRUE} use the actual path to the 
+#' \code{loc} argument.  If \code{FALSE}, the  code may be more portable in that 
+#' the actual input to \code{loc} is supplied to the 
+#' \code{\link[qdap]{read.transcript}}.
 #' @param col.names Supplies a vector of column names to the transcript columns.
 #' @param file A connection, or a character string naming the file to print to.
 #' @param copy2clip logical.  If \code{TRUE} attempts to copy the output to the 
@@ -28,14 +32,12 @@
 #' dir_map(DIR)
 #' }
 dir_map <- 
-function(loc, obj.prefix = "dat", col.names = c("person", "dialogue"), 
-    file = NULL, copy2clip = TRUE) {
+function(loc, obj.prefix = "dat", use.path = TRUE,
+    col.names = c("person", "dialogue"), file = NULL, copy2clip = TRUE) {
     if (Sys.info()["sysname"] != "Windows") {
         writeClipboard <- NULL
     }    
-    WD <- getwd()
-    setwd(loc)
-    fls <- dir()
+    fls <- dir(loc)
     file_ext <- function(x){
         pos <- regexpr("\\.([[:alnum:]]+)$", x)
         ifelse(pos > -1L, substring(x, pos + 1L), "")
@@ -50,9 +52,15 @@ function(loc, obj.prefix = "dat", col.names = c("person", "dialogue"),
     len <- length(fls)
     digs <- nchar(as.character(max(len))) 
     vals <- lead(1:length(fls), digs)
-    x <- paste0(obj.prefix, vals, " <- ", "read.transcript('", loc, "/", fls, 
-        "', col.names = c('", paste(col.names, collapse = "', '"), 
-        "'), skip = 0", ")")
+    if (use.path) {
+        string <- paste0("\"", file.path(loc, fls), "\"")
+    } else {
+        basic <- capture.output(substitute(loc))
+        string <- paste0("file.path(", basic, ", \"", fls, "\")")
+    }
+    x <- paste0(obj.prefix, vals, " <- ", "read.transcript(",  
+        string, ", col.names = c(\"", paste(col.names, collapse = "\", \""), 
+        "\"), skip = 0", ")")
     if(copy2clip){
         if (Sys.info()["sysname"] == "Windows") {
             writeClipboard(x, format = 1)
@@ -63,7 +71,6 @@ function(loc, obj.prefix = "dat", col.names = c("person", "dialogue"),
             close(j)                                    
         }             
     }
-    setwd(WD)
     writeLines(x)
     if (!is.null(file)) {
         cat(paste(x, collapse = "\n"), file = file)

@@ -60,6 +60,11 @@ MINOR FEATURES
 * `dtm` added to compliment `tdm`, allowing for easier integration with other R 
   packages that utilize tdm/dtm.
 
+* `dir_map` picks up a `use.path` argument that allows the user to specify a 
+  more flexible path to the created pre-formed `read.transcript` scripts based 
+  on something like `file.path(getwd(), )`.  This mean portability of code on 
+  different machines.
+
 CHANGES
 
 * The dictionaries and word lists for qdap have been moved to their own package, 

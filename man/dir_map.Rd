@@ -2,7 +2,7 @@
 \alias{dir_map}
 \title{Map Transcript Files from a Directory to a Script}
 \usage{
-  dir_map(loc, obj.prefix = "dat",
+  dir_map(loc, obj.prefix = "dat", use.path = TRUE,
     col.names = c("person", "dialogue"), file = NULL,
     copy2clip = TRUE)
 }
@@ -13,6 +13,12 @@
   \item{obj.prefix}{A character string that will be used as
   the prefix (followed by a unique digit) as the assignment
   object.}
+
+  \item{use.path}{logical.  If \code{TRUE} use the actual
+  path to the \code{loc} argument.  If \code{FALSE}, the
+  code may be more portable in that the actual input to
+  \code{loc} is supplied to the
+  \code{\link[qdap]{read.transcript}}.}
 
   \item{col.names}{Supplies a vector of column names to the
   transcript columns.}
