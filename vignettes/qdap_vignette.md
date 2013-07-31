@@ -123,7 +123,7 @@ The following functions will be utilized in this section (click to view more):
 <h4 id="readin">Reading In Transcript Data <a href="http://youtu.be/UxgOScggLBg" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
 </h4>    
 
-This subsection covers how to read in transcript data.  Generally the researcher will have data stores as a .docx (Microsoft Word or Open/Libre Office) or .xlsx/.csv (spreadsheet format).  Two functions are useful for reading in data, <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> and <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a>.  <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> detects file type (.docx/.csv/.xlsx) and reads in a single transcipt whereas <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a> generates code that utilizes <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> for each of the multiple transcripts in a single directory.  Note that <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> expects a two column formatted transcript (usually with person on the left and dialogue on the right).
+This subsection covers how to read in transcript data.  Generally the researcher will have data stored as a .docx (Microsoft Word or Open/Libre Office) or .xlsx/.csv (spreadsheet format).  Two functions are useful for reading in data, <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> and <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a>.  <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> detects file type (.docx/.csv/.xlsx) and reads in a single transcipt whereas <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a> generates code that utilizes <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> for each of the multiple transcripts in a single directory.  Note that <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> expects a two column formatted transcript (usually with person on the left and dialogue on the right).
 
 Five arguments are of particular importance to read.transcript: 
 
@@ -269,7 +269,7 @@ read.transcript(text=trans)</code></pre>
 ## 4     sam          You liar, it stinks!
 </code></pre>
 
-The <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a> function enables the researcher to produce multiple lines of code, one line with <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> for each file in a directory, which is then optionally copied to the clipboard for easy insertion into a script.  Note that wetting the argument <font face="courier">use.path = FALSE</font> may allow the code to be more portable in that a static path is not suppplied the the <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> scripts.
+The <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a> function enables the researcher to produce multiple lines of code, one line with <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> for each file in a directory, which is then optionally copied to the clipboard for easy insertion into a script.  Note that setting the argument <font face="courier">use.path = FALSE</font> may allow the code to be more portable in that a static path is not suppplied the the <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> scripts.
 
 <font size="5" color="gold">&diams;</font> **Reading In Data**- *dir_map* <font size="5" color="gold">&diams;</font>
 
@@ -287,9 +287,9 @@ dat4 <- read.transcript('~/extdata/transcripts/trans4.xlsx', col.names = c('pers
 <h4 id="mcsv">Reading/Writing Multiple .csv Files <a href="http://youtu.be/aeZKJGEfD7U" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
 </h4>    
 
-The <font face="courier">mcsv_x</font> family of functions are utilized to read (<a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a>) and write (<a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a>) multiple csv files at once.  <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> takes an arbitrary number of data frames and outputs them to the supplied directory( <font face="courier">dir = ?</font>).  An attempt will be made to output the data frames qdap functions that output lists of data frames.  Note that data frames that contain columns that are lists must be condensed prior to writing with other R data frame writing functions (e.g., `write.csv`) using the <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a> function.  By default <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> attempts utilize <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a>.
+The <font face="courier">mcsv_x</font> family of functions are utilized to read (<a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a>) and write (<a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a>) multiple csv files at once.  <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> takes an arbitrary number of dataframes and outputs them to the supplied directory( <font face="courier">dir = ?</font>).  An attempt will be made to output the dataframes qdap functions that output lists of dataframes.  Note that dataframes that contain columns that are lists must be condensed prior to writing with other R dataframe writing functions (e.g., `write.csv`) using the <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a> function.  By default <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> attempts to utilize <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a>.
 
-The <a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a> function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the data frames that are read in are also assigned to an inclusive list (name `L1` by defualt).
+The <a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a> function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the dataframes that are read in are also assigned to an inclusive list (name `L1` by defualt).
 
 <font size="5" color="gold">&diams;</font> **Reading and Writing Multiple csvs** <font size="5" color="gold">&diams;</font>
 
@@ -313,7 +313,7 @@ mtcarsb; CO2b
 L1
 
 ## The dataframe anmes and list of dataframe can be altered
-mcsv_r(file.path(a, nms), a.names = paste0("bot", 1:2), l.names = "bots_stink")
+mcsv_r(file.path(a, nms), a.name = paste0("bot", 1:2), l.name = "bots_stink")
 bot1; bot2
 bots_stink
 
@@ -342,6 +342,8 @@ delete("foo2")
 
 
 <h3 id="tools">Generic qdap Tools</h3>
+
+This manual arranges functions into categories in the order a researcher is likely to use them.  The Generic qdap Tools section does not fit this convention, however, because these tools may be used throughout all stages of analysis it is important that the reader is familiar with them.  It is important to note that after reading in transcript data the researcher will likelt need to parse the dataframe utilizing the techniques found ing the <a href="#cleaning">Cleaning/Preparing the Data</a> section.
 
 The following functions will be utilized in this section (click to view more):    
 
@@ -378,11 +380,11 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/replacer.html" target="_blank">
-    <input type="submit" value="replacer"> - Replace Cells in a Matrix or Data Frame
+    <input type="submit" value="replacer"> - Replace Cells in a Matrix or Dataframe
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/Search.html" target="_blank">
-    <input type="submit" value="Search"> - Search Columns of a Data Frame
+    <input type="submit" value="Search"> - Search Columns of a Dataframe
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/text2color.html" target="_blank">
@@ -822,7 +824,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/prop.html" target="_blank">
-    <input type="submit" value="prop"> - Convert Raw Numeric Matrix or Data Frame to Proportions
+    <input type="submit" value="prop"> - Convert Raw Numeric Matrix or Dataframe to Proportions
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/qcombine.html" target="_blank">

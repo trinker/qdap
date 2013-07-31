@@ -21,6 +21,7 @@ list(
       c(
         "bracketX",
         "beg2char",
+        "capitalizer",        
         "clean",
         "incomplete.replace",
         "multigsub",
@@ -44,6 +45,7 @@ list(
       c(
         "htruncdf",
         "left.just",
+        "Search",        
         "strWrap"
       )
     ),
@@ -135,14 +137,12 @@ list(
       "Tools to assist in transcript/discourse analysis.",
       c(
         "blank2NA",
-        "capitalizer",
         "duplicates",
         "hash",
         "hms2sec",
         "lookup",
         "qcv",
         "replacer",
-        "Search",
         "sec2hms",        
         "text2color",
         "url_dl",
