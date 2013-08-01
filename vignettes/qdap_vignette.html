@@ -1,10 +1,52 @@
 <!DOCTYPE html>
-<!-- saved from url=(0014)about:internet -->
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 <title>qdap Package Vignette</title>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: rgb(88, 72, 246)
+   }
+
+   pre .number {
+     color: rgb(0, 0, 205);
+   }
+
+   pre .comment {
+     color: rgb(76, 136, 107);
+   }
+
+   pre .keyword {
+     color: rgb(0, 0, 255);
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: rgb(3, 106, 7);
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+<!-- MathJax scripts -->
+<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/2.0-latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
 
 <style type="text/css">
 body, td {
@@ -131,47 +173,7 @@ hr {
       page-break-after: avoid; 
    }
 }
-
 </style>
-
-<!-- Styles for R syntax highlighter -->
-<style type="text/css">
-   pre .operator,
-   pre .paren {
-     color: rgb(104, 118, 135)
-   }
-
-   pre .literal {
-     color: rgb(88, 72, 246)
-   }
-
-   pre .number {
-     color: rgb(0, 0, 205);
-   }
-
-   pre .comment {
-     color: rgb(76, 136, 107);
-   }
-
-   pre .keyword {
-     color: rgb(0, 0, 255);
-   }
-
-   pre .identifier {
-     color: rgb(0, 0, 0);
-   }
-
-   pre .string {
-     color: rgb(3, 106, 7);
-   }
-</style>
-
-<!-- R syntax highlighter -->
-<script type="text/javascript">
-var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
-hljs.initHighlightingOnLoad();
-</script>
-
 
 
 
@@ -197,7 +199,7 @@ hljs.initHighlightingOnLoad();
     <p><img src="https://dl.dropbox.com/u/61803503/qdap_logo.png" width="350" height="250"></p>
 </div>
 
-<p>The following vignette is a loose road map for utilizing the tools provided by qdap.  </p>
+<p>The following vignette is a loose chronological road map for utilizing the tools provided by qdap.  </p>
 
 <hr>
 
@@ -207,9 +209,9 @@ hljs.initHighlightingOnLoad();
 <ul>
 <div>1.  <a href="#project">Starting a New Project</a>    </div> 
 <div>2.  <a href="#import_export">Import/Export Discourse Data</a>    </div> 
-<div>3.  <a href="#tools">Generic qdap Tools</a>    </div> 
-<div>4.  <a href="#cleaning">Cleaning/Preparing the Data</a>    </div> 
-<div>5.  <a href="#viewing">View the Data</a>    </div> 
+<div>3.  <a href="#viewing">View the Data</a>    </div> 
+<div>4.  <a href="#tools">Generic qdap Tools</a>    </div> 
+<div>5.  <a href="#cleaning">Cleaning/Preparing the Data</a>    </div> 
 <div>6.  <a href="#reshaping">Reshaping the Data</a>    </div> 
 <div>7.  <a href="#word">Extract/Analyze Words</a>    </div> 
 <div>8.  <a href="#coding">Qualitative Coding System</a>    </div> 
@@ -459,7 +461,7 @@ dat4 <- read.transcript('~/extdata/transcripts/trans4.xlsx', col.names = c('pers
 <h4 id="mcsv">Reading/Writing Multiple .csv Files <a href="http://youtu.be/aeZKJGEfD7U" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
 </h4>    
 
-<p>The <font face="courier">mcsv_x</font> family of functions are utilized to read (<a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a>) and write (<a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a>) multiple csv files at once.  <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> takes an arbitrary number of dataframes and outputs them to the supplied directory( <font face="courier">dir = ?</font>).  An attempt will be made to output the dataframes qdap functions that output lists of dataframes.  Note that dataframes that contain columns that are lists must be condensed prior to writing with other R dataframe writing functions (e.g., <code>write.csv</code>) using the <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a> function.  By default <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> attempts to utilize <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a>.</p>
+<p>The <font face="courier">mcsv_x</font> family of functions are utilized to read (<a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a>) and write (<a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a>) multiple csv files at once.  <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> takes an arbitrary number of dataframes and outputs them to the supplied directory( <font face="courier">dir = ?</font>).  An attempt will be made to output the dataframes from qdap functions that output lists of dataframes.  Note that dataframes that contain columns that are lists must be condensed prior to writing with other R dataframe writing functions (e.g., <code>write.csv</code>) using the <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a> function.  By default <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> attempts to utilize <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a>.</p>
 
 <p>The <a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a> function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the dataframes that are read in are also assigned to an inclusive list (name <code>L1</code> by defualt).</p>
 
@@ -508,63 +510,663 @@ mcsv_w(poldat, termdat, mtcars, CO2, dir=&quot;foo2&quot;)
 delete(&quot;foo2&quot;)
 </code></pre>
 
-<h3 id="tools">Generic qdap Tools</h3>
-
-<p>This manual arranges functions into categories in the order a researcher is likely to use them.  The Generic qdap Tools section does not fit this convention, however, because these tools may be used throughout all stages of analysis it is important that the reader is familiar with them.  It is important to note that after reading in transcript data the researcher will likelt need to parse the dataframe utilizing the techniques found ing the <a href="#cleaning">Cleaning/Preparing the Data</a> section.</p>
+<h3 id="viewing">View the Data</h3>
 
 <p>The following functions will be utilized in this section (click to view more):    </p>
 
-<form action="http://trinker.github.io/qdap_dev/blank2NA.html" target="_blank">
-    <input type="submit" value="blank2NA"> - Replace Blanks in a dataframe
+<form action="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank">
+    <input type="submit" value="truncdf"><input type="submit" value="htruncdf"><input type="submit" value="ltruncdf"><input type="submit" value="qview"> - <a href="#trunc">Truncated Dataframe Viewing</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/capitalizer.html" target="_blank">
-    <input type="submit" value="capitalizer"> - Capitalize Select Words
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/duplicates.html" target="_blank">
-    <input type="submit" value="duplicates"> - Find Duplicated Words in a Text String
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/hash.html" target="_blank">
-    <input type="submit" value="hash"> - Hash/Dictionary Lookup
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank">
-    <input type="submit" value="hms2sec"> - Convert h:m:s to Seconds
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/sec2hms.html" target="_blank">
-    <input type="submit" value="sec2hms"> - Convert Seconds to h:m:s
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/lookup.html" target="_blank">
-    <input type="submit" value="lookup"> - Hash Table/Dictionary Lookup
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/qcv.html" target="_blank">
-    <input type="submit" value="qcv"> - Quick Character Vector
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/replacer.html" target="_blank">
-    <input type="submit" value="replacer"> - Replace Cells in a Matrix or Dataframe
+<form action="http://trinker.github.io/qdap_dev/left.just.html" target="_blank">
+    <input type="submit" value="left.just"><input type="submit" value="right.just"> - <a href="#just">Text Justification</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/Search.html" target="_blank">
-    <input type="submit" value="Search"> - Search Columns of a Dataframe
+    <input type="submit" value="Search"> - <a href="#search">Search Columns of a Dataframe</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/text2color.html" target="_blank">
-    <input type="submit" value="text2color"> - Map Words to Colors
+<p>The nature of dialogue data makes it large and cumbersome to view in R.  This section explores qdap tools designed for more comfortable viewing of R dialogue oriented text dataframes.  </p>
+
+<h4 id="trunc">Truncated Dataframe Viewing</h4> 
+
+<p>The <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions (trunc + dataframe = <a href="http://trinker.github.io/qdap_dev/truncdf.html" target="_blank"><code>truncdf</code></a>) are designed to truncate the width of columns and number of rows in dataframes and lists of dataframes.  The <font face="courier">l</font> and <font face="courier">h</font> in front of <font face="courier">trunc</font> stands for <b><font color="blue">l</font>ist</b> and <b><font color="blue">h</font>ead</b> and are extensions of <a href="http://trinker.github.io/qdap_dev/truncdf.html" target="_blank"><code>truncdf</code></a>.  <a href="http://trinker.github.io/qdap_dev/qview.html" target="_blank"><code>qview</code></a> is a wrapper for <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>htruncdf</code></a> that also displays number of rows,columns, and the dataframe name.</p>
+
+<p><font size="5" color="gold">&diams;</font> <strong>Truncated Data Viewing</strong> <font size="5" color="gold">&diams;</font></p>
+
+<pre><code class="r">truncdf(raj[1:10, ])
+</code></pre>
+
+<pre><code>##     person   dialogue act
+## 1  Sampson Gregory, o   1
+## 2  Gregory No, for th   1
+## 3  Sampson I mean, an   1
+## 4  Gregory Ay, while    1
+## 5  Sampson I strike q   1
+## 6  Gregory But thou a   1
+## 7  Sampson A dog of t   1
+## 8  Gregory To move is   1
+## 9  Sampson A dog of t   1
+## 10 Gregory That shows   1
+</code></pre>
+
+<pre><code class="r">truncdf(raj[1:10, ], 40)
+</code></pre>
+
+<pre><code>##     person                                 dialogue act
+## 1  Sampson Gregory, o my word, we&#39;ll not carry coal   1
+## 2  Gregory      No, for then we should be colliers.   1
+## 3  Sampson  I mean, an we be in choler, we&#39;ll draw.   1
+## 4  Gregory Ay, while you live, draw your neck out o   1
+## 5  Sampson           I strike quickly, being moved.   1
+## 6  Gregory But thou art not quickly moved to strike   1
+## 7  Sampson A dog of the house of Montague moves me.   1
+## 8  Gregory To move is to stir; and to be valiant is   1
+## 9  Sampson A dog of that house shall move me to sta   1
+## 10 Gregory That shows thee a weak slave; for the we   1
+</code></pre>
+
+<pre><code class="r">htruncdf(raj)
+</code></pre>
+
+<pre><code>##     person   dialogue act
+## 1  Sampson Gregory, o   1
+## 2  Gregory No, for th   1
+## 3  Sampson I mean, an   1
+## 4  Gregory Ay, while    1
+## 5  Sampson I strike q   1
+## 6  Gregory But thou a   1
+## 7  Sampson A dog of t   1
+## 8  Gregory To move is   1
+## 9  Sampson A dog of t   1
+## 10 Gregory That shows   1
+</code></pre>
+
+<pre><code class="r">htruncdf(raj, 20)
+</code></pre>
+
+<pre><code>##     person   dialogue act
+## 1  Sampson Gregory, o   1
+## 2  Gregory No, for th   1
+## 3  Sampson I mean, an   1
+## 4  Gregory Ay, while    1
+## 5  Sampson I strike q   1
+## 6  Gregory But thou a   1
+## 7  Sampson A dog of t   1
+## 8  Gregory To move is   1
+## 9  Sampson A dog of t   1
+## 10 Gregory That shows   1
+## 11 Sampson True; and    1
+## 12 Gregory The quarre   1
+## 13 Sampson &#39;Tis all o   1
+## 14 Gregory The heads    1
+## 15 Sampson Ay, the he   1
+## 16 Gregory They must    1
+## 17 Sampson Me they sh   1
+## 18 Gregory &#39;Tis well    1
+## 19 Sampson My naked w   1
+## 20 Gregory How! turn    1
+</code></pre>
+
+<pre><code class="r">htruncdf(raj, ,20)
+</code></pre>
+
+<pre><code>##     person             dialogue act
+## 1  Sampson Gregory, o my word,    1
+## 2  Gregory No, for then we shou   1
+## 3  Sampson I mean, an we be in    1
+## 4  Gregory Ay, while you live,    1
+## 5  Sampson I strike quickly, be   1
+## 6  Gregory But thou art not qui   1
+## 7  Sampson A dog of the house o   1
+## 8  Gregory To move is to stir;    1
+## 9  Sampson A dog of that house    1
+## 10 Gregory That shows thee a we   1
+</code></pre>
+
+<pre><code class="r">ltruncdf(rajPOS, width = 4)
+</code></pre>
+
+<pre><code>## $text
+##   data
+## 1 Greg
+## 2 No, 
+## 3 I me
+## 4 Ay, 
+## 5 I st
+## 6 But 
+## 
+## $POStagged
+##   POSt POSt word
+## 1 greg c(&quot;N    8
+## 2 no/D c(&quot;D    7
+## 3 i/PR c(&quot;P    9
+## 4 ay/N c(&quot;N   11
+## 5 i/VB c(&quot;V    5
+## 6 but/ c(&quot;C    8
+## 
+## $POSprop
+##   wrd. prop prop prop prop prop prop prop prop prop prop prop prop prop
+## 1    8    0    0    0    0    0    0    0 0.12    0    0    0    0 0.25
+## 2    7    0    0    0    0 0.14    0    0 0.14    0    0    0 0.14    0
+## 3    9    0    0    0    0 0.11    0    0 0.11    0    0    0    0 0.33
+## 4   11    0    0    0    0 0.09    0    0 0.27    0    0    0    0 0.27
+## 5    5    0    0    0    0    0    0    0    0    0    0    0    0  0.2
+## 6    8    0    0 0.12    0 0.12    0    0    0    0    0    0    0 0.12
+##   prop prop prop prop prop prop prop prop prop prop prop prop prop prop
+## 1    0    0 0.12    0    0    0 0.12 0.12    0    0    0    0    0 0.12
+## 2    0    0 0.14    0    0 0.14    0 0.14    0    0    0    0    0 0.14
+## 3    0    0    0    0    0 0.22    0    0    0    0    0    0    0 0.11
+## 4    0    0    0    0    0 0.09 0.09    0    0    0    0    0    0 0.09
+## 5    0    0    0    0    0    0    0  0.2    0    0    0    0    0    0
+## 6    0    0    0    0    0    0    0 0.25    0    0    0 0.12    0 0.12
+##   prop prop prop prop prop prop prop prop prop
+## 1 0.12    0    0    0    0    0    0    0    0
+## 2    0    0    0    0    0    0    0    0    0
+## 3    0    0    0 0.11    0    0    0    0    0
+## 4    0    0    0 0.09    0    0    0    0    0
+## 5    0  0.2  0.4    0    0    0    0    0    0
+## 6 0.12    0    0    0    0    0    0    0    0
+## 
+## $POSfreq
+##   wrd. , . CC CD DT EX FW IN JJ JJR JJS MD NN NNP NNPS NNS PDT POS PRP
+## 1    8 0 0  0  0  0  0  0  1  0   0   0  0  2   0    0   1   0   0   0
+## 2    7 0 0  0  0  1  0  0  1  0   0   0  1  0   0    0   1   0   0   1
+## 3    9 0 0  0  0  1  0  0  1  0   0   0  0  3   0    0   0   0   0   2
+## 4   11 0 0  0  0  1  0  0  3  0   0   0  0  3   0    0   0   0   0   1
+## 5    5 0 0  0  0  0  0  0  0  0   0   0  0  1   0    0   0   0   0   0
+## 6    8 0 0  1  0  1  0  0  0  0   0   0  0  1   0    0   0   0   0   0
+##   PRP$ RB RBR RBS RP TO UH VB VBD VBG VBN VBP VBZ WDT WP WP$ WRB
+## 1    1  1   0   0  0  0  0  1   1   0   0   0   0   0  0   0   0
+## 2    0  1   0   0  0  0  0  1   0   0   0   0   0   0  0   0   0
+## 3    0  0   0   0  0  0  0  1   0   0   0   1   0   0  0   0   0
+## 4    1  0   0   0  0  0  0  1   0   0   0   1   0   0  0   0   0
+## 5    0  1   0   0  0  0  0  0   0   1   2   0   0   0  0   0   0
+## 6    0  2   0   0  0  1  0  1   1   0   0   0   0   0  0   0   0
+</code></pre>
+
+<pre><code class="r">qview(raj)
+</code></pre>
+
+<pre><code>## ========================================================================
+## nrow =  840           ncol =  3             raj
+## ========================================================================
+</code></pre>
+
+<pre><code>##     person   dialogue act
+## 1  Sampson Gregory, o   1
+## 2  Gregory No, for th   1
+## 3  Sampson I mean, an   1
+## 4  Gregory Ay, while    1
+## 5  Sampson I strike q   1
+## 6  Gregory But thou a   1
+## 7  Sampson A dog of t   1
+## 8  Gregory To move is   1
+## 9  Sampson A dog of t   1
+## 10 Gregory That shows   1
+</code></pre>
+
+<pre><code class="r">qview(CO2)
+</code></pre>
+
+<pre><code>## ========================================================================
+## nrow =  84           ncol =  5             CO2
+## ========================================================================
+</code></pre>
+
+<pre><code>##    Plant   Type  Treatment conc uptake
+## 1    Qn1 Quebec nonchilled   95     16
+## 2    Qn1 Quebec nonchilled  175   30.4
+## 3    Qn1 Quebec nonchilled  250   34.8
+## 4    Qn1 Quebec nonchilled  350   37.2
+## 5    Qn1 Quebec nonchilled  500   35.3
+## 6    Qn1 Quebec nonchilled  675   39.2
+## 7    Qn1 Quebec nonchilled 1000   39.7
+## 8    Qn2 Quebec nonchilled   95   13.6
+## 9    Qn2 Quebec nonchilled  175   27.3
+## 10   Qn2 Quebec nonchilled  250   37.1
+</code></pre>
+
+<h4 id="just">Text Justification</h4> 
+
+<p>By defualt text data (character vectors) are displayed as right justified in R.  This can be difficult and unnatural to read, particularly as the length of the sentences increase.  The <a href="http://trinker.github.io/qdap_dev/left.just.html" target="_blank"><code>left.just</code></a> function creates a more natural left justification of text.  Note that <a href="http://trinker.github.io/qdap_dev/left.just.html" target="_blank"><code>left.just</code></a> inserts spaces to achieve the justification. This could interfere with analysis and therefore the output from <a href="http://trinker.github.io/qdap_dev/left.just.html" target="_blank"><code>left.just</code></a> should only be used for visualization purposes, not analysis.</p>
+
+<p><font size="5" color="gold">&diams;</font> <strong>Justified Data Viewing</strong> <font size="5" color="gold">&diams;</font></p>
+
+<pre><code class="r">## The unnatural state of R text data
+DATA
+</code></pre>
+
+<pre><code>##        person sex adult                                 state code
+## 1         sam   m     0         Computer is fun. Not too fun.   K1
+## 2        greg   m     0               No it&#39;s not, it&#39;s dumb.   K2
+## 3     teacher   m     1                    What should we do?   K3
+## 4         sam   m     0                  You liar, it stinks!   K4
+## 5        greg   m     0               I am telling the truth!   K5
+## 6       sally   f     0                How can we be certain?   K6
+## 7        greg   m     0                      There is no way.   K7
+## 8         sam   m     0                       I distrust you.   K8
+## 9       sally   f     0           What are you talking about?   K9
+## 10 researcher   f     1         Shall we move on?  Good then.  K10
+## 11       greg   m     0 I&#39;m hungry.  Let&#39;s eat.  You already?  K11
+</code></pre>
+
+<pre><code class="r">## left jsut to the rescue
+left.just(DATA)
+</code></pre>
+
+<pre><code>##    person     sex adult state                                 code
+## 1  sam        m   0     Computer is fun. Not too fun.         K1  
+## 2  greg       m   0     No it&#39;s not, it&#39;s dumb.               K2  
+## 3  teacher    m   1     What should we do?                    K3  
+## 4  sam        m   0     You liar, it stinks!                  K4  
+## 5  greg       m   0     I am telling the truth!               K5  
+## 6  sally      f   0     How can we be certain?                K6  
+## 7  greg       m   0     There is no way.                      K7  
+## 8  sam        m   0     I distrust you.                       K8  
+## 9  sally      f   0     What are you talking about?           K9  
+## 10 researcher f   1     Shall we move on?  Good then.         K10 
+## 11 greg       m   0     I&#39;m hungry.  Let&#39;s eat.  You already? K11
+</code></pre>
+
+<pre><code class="r">## Left just select column(s)
+left.just(DATA, c(&quot;sex&quot;, &quot;state&quot;))
+</code></pre>
+
+<pre><code>##        person sex adult state                                 code
+## 1         sam m       0 Computer is fun. Not too fun.           K1
+## 2        greg m       0 No it&#39;s not, it&#39;s dumb.                 K2
+## 3     teacher m       1 What should we do?                      K3
+## 4         sam m       0 You liar, it stinks!                    K4
+## 5        greg m       0 I am telling the truth!                 K5
+## 6       sally f       0 How can we be certain?                  K6
+## 7        greg m       0 There is no way.                        K7
+## 8         sam m       0 I distrust you.                         K8
+## 9       sally f       0 What are you talking about?             K9
+## 10 researcher f       1 Shall we move on?  Good then.          K10
+## 11       greg m       0 I&#39;m hungry.  Let&#39;s eat.  You already?  K11
+</code></pre>
+
+<pre><code class="r">left.just(CO2[1:15,])
+</code></pre>
+
+<pre><code>##    Plant Type   Treatment  conc uptake
+## 1  Qn1   Quebec nonchilled 95   16    
+## 2  Qn1   Quebec nonchilled 175  30.4  
+## 3  Qn1   Quebec nonchilled 250  34.8  
+## 4  Qn1   Quebec nonchilled 350  37.2  
+## 5  Qn1   Quebec nonchilled 500  35.3  
+## 6  Qn1   Quebec nonchilled 675  39.2  
+## 7  Qn1   Quebec nonchilled 1000 39.7  
+## 8  Qn2   Quebec nonchilled 95   13.6  
+## 9  Qn2   Quebec nonchilled 175  27.3  
+## 10 Qn2   Quebec nonchilled 250  37.1  
+## 11 Qn2   Quebec nonchilled 350  41.8  
+## 12 Qn2   Quebec nonchilled 500  40.6  
+## 13 Qn2   Quebec nonchilled 675  41.4  
+## 14 Qn2   Quebec nonchilled 1000 44.3  
+## 15 Qn3   Quebec nonchilled 95   16.2
+</code></pre>
+
+<pre><code class="r">right.just(left.just(CO2[1:15,]))
+</code></pre>
+
+<pre><code>##    Plant   Type  Treatment conc uptake
+## 1    Qn1 Quebec nonchilled   95     16
+## 2    Qn1 Quebec nonchilled  175   30.4
+## 3    Qn1 Quebec nonchilled  250   34.8
+## 4    Qn1 Quebec nonchilled  350   37.2
+## 5    Qn1 Quebec nonchilled  500   35.3
+## 6    Qn1 Quebec nonchilled  675   39.2
+## 7    Qn1 Quebec nonchilled 1000   39.7
+## 8    Qn2 Quebec nonchilled   95   13.6
+## 9    Qn2 Quebec nonchilled  175   27.3
+## 10   Qn2 Quebec nonchilled  250   37.1
+## 11   Qn2 Quebec nonchilled  350   41.8
+## 12   Qn2 Quebec nonchilled  500   40.6
+## 13   Qn2 Quebec nonchilled  675   41.4
+## 14   Qn2 Quebec nonchilled 1000   44.3
+## 15   Qn3 Quebec nonchilled   95   16.2
+</code></pre>
+
+<h4 id="search">Search Columns of a Dataframe</h4> 
+
+<p>A task of many analyses is to search a dataframe for a particular phrase and return those rows/observations that contain that term.  The researcher may optionally choose to specify a particular column to search (<font face="courier">column.name</font>) or search the entire dataframe.</p>
+
+<p><font size="5" color="gold">&diams;</font> <strong>Search Dataframes</strong> <font size="5" color="gold">&diams;</font></p>
+
+<pre><code class="r">(SampDF &lt;- data.frame(&quot;islands&quot;=names(islands)[1:32],mtcars, row.names=NULL))
+</code></pre>
+
+<pre><code>##            islands  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1           Africa 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## 2       Antarctica 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## 3             Asia 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 4        Australia 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 5     Axel Heiberg 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## 6           Baffin 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## 7            Banks 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## 8           Borneo 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 9          Britain 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 10         Celebes 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 11           Celon 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## 12            Cuba 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## 13           Devon 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## 14       Ellesmere 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## 15          Europe 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## 16       Greenland 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## 17          Hainan 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## 18      Hispaniola 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 19        Hokkaido 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 20          Honshu 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 21         Iceland 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## 22         Ireland 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## 23            Java 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## 24          Kyushu 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## 25           Luzon 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## 26      Madagascar 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 27        Melville 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 28        Mindanao 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 29        Moluccas 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## 30     New Britain 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## 31      New Guinea 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## 32 New Zealand (N) 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+</code></pre>
+
+<pre><code class="r">Search(SampDF, &quot;Cuba&quot;, &quot;islands&quot;)
+</code></pre>
+
+<pre><code>##    islands  mpg cyl  disp  hp drat   wt qsec vs am gear carb
+## 12    Cuba 16.4   8 275.8 180 3.07 4.07 17.4  0  0    3    3
+</code></pre>
+
+<pre><code class="r">Search(SampDF, &quot;New&quot;, &quot;islands&quot;)
+</code></pre>
+
+<pre><code>##            islands  mpg cyl  disp  hp drat   wt qsec vs am gear carb
+## 8           Borneo 24.4   4 146.7  62 3.69 3.19 20.0  1  0    4    2
+## 30     New Britain 19.7   6 145.0 175 3.62 2.77 15.5  0  1    5    6
+## 31      New Guinea 15.0   8 301.0 335 3.54 3.57 14.6  0  1    5    8
+## 32 New Zealand (N) 21.4   4 121.0 109 4.11 2.78 18.6  1  1    4    2
+</code></pre>
+
+<pre><code class="r">Search(SampDF, &quot;Ho&quot;)
+</code></pre>
+
+<pre><code>##         islands  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 5  Axel Heiberg 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## 8        Borneo 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 11        Celon 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## 13        Devon 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## 15       Europe 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## 17       Hainan 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## 18   Hispaniola 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 19     Hokkaido 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 20       Honshu 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 24       Kyushu 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## 25        Luzon 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## 28     Mindanao 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 29     Moluccas 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+</code></pre>
+
+<pre><code class="r">Search(SampDF, &quot;Ho&quot;, max.distance = 0)
+</code></pre>
+
+<pre><code>##     islands  mpg cyl disp hp drat    wt  qsec vs am gear carb
+## 19 Hokkaido 30.4   4 75.7 52 4.93 1.615 18.52  1  1    4    2
+## 20   Honshu 33.9   4 71.1 65 4.22 1.835 19.90  1  1    4    1
+</code></pre>
+
+<pre><code class="r">Search(SampDF, &quot;Axel Heiberg&quot;)
+</code></pre>
+
+<pre><code>##        islands  mpg cyl disp  hp drat   wt  qsec vs am gear carb
+## 5 Axel Heiberg 18.7   8  360 175 3.15 3.44 17.02  0  0    3    2
+</code></pre>
+
+<pre><code class="r">Search(SampDF, 19) #too much tolerance in max.distance
+</code></pre>
+
+<pre><code>##            islands  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1           Africa 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## 2       Antarctica 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## 3             Asia 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 4        Australia 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 5     Axel Heiberg 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## 6           Baffin 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## 7            Banks 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## 8           Borneo 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 9          Britain 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 10         Celebes 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 11           Celon 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## 12            Cuba 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## 13           Devon 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## 14       Ellesmere 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## 15          Europe 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## 16       Greenland 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## 17          Hainan 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## 18      Hispaniola 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 19        Hokkaido 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 20          Honshu 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 21         Iceland 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## 22         Ireland 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## 23            Java 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## 24          Kyushu 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## 25           Luzon 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## 26      Madagascar 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 27        Melville 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 28        Mindanao 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 29        Moluccas 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## 30     New Britain 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## 31      New Guinea 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## 32 New Zealand (N) 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+</code></pre>
+
+<pre><code class="r">Search(SampDF, 19, max.distance = 0)
+</code></pre>
+
+<pre><code>##        islands  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 4    Australia 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 8       Borneo 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 10     Celebes 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 18  Hispaniola 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 20      Honshu 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 25       Luzon 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## 30 New Britain 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+</code></pre>
+
+<pre><code class="r">Search(SampDF, 19, &quot;qsec&quot;, max.distance = 0)
+</code></pre>
+
+<pre><code>##       islands  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 4   Australia 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 18 Hispaniola 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 20     Honshu 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+</code></pre>
+
+<h3 id="tools">Generic qdap Tools</h3>
+
+<p>This manual arranges functions into categories in the order a researcher is likely to use them.  The Generic qdap Tools section does not fit this convention, however, because these tools may be used throughout all stages of analysis it is important that the reader is familiar with them.  It is important to note that after reading in transcript data the researcher will likely that the next step is the need to parse the dataframe utilizing the techniques found in the <a href="#cleaning">Cleaning/Preparing the Data</a> section.</p>
+
+<p>The following functions will be utilized in this section (click to view more):    </p>
+
+<form action="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank">
+    <input type="submit" value="hms2sec"> - <a href="#time">Convert h:m:s to Seconds</a> 
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/sec2hms.html" target="_blank">
+    <input type="submit" value="sec2hms"> - <a href="#time">Convert Seconds to h:m:s</a> 
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/lookup.html" target="_blank">
+    <input type="submit" value="lookup"> - <a href="#hash">Hash Table/Dictionary Lookup</a>
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/qcv.html" target="_blank">
+    <input type="submit" value="qcv"> - <a href="#qcv">Quick Character Vector</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/url_dl.html" target="_blank">
-    <input type="submit" value="url_dl"> - Download Instructional Documents
+    <input type="submit" value="url_dl"> - <a href="#urldl">Download Instructional Documents</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/v.outer.html" target="_blank">
-    <input type="submit" value="v.outer"> - Vectorized Version of outer
-</form>
+<h4 id="qcv">Quick Character Vector</h4> 
+
+<p>Often it can be tedious to supply quotes to character vectors when dealing with large vectors.  <a href="http://trinker.github.io/qdap_dev/qcv.html" target="_blank"><code>qcv</code></a> replaces the typical <font face="courier">c(&ldquo;A&rdquo;, &ldquo;B&rdquo;, &ldquo;C&rdquo;, &ldquo;&hellip;&rdquo;)</font> approach to creating character vectors.  Instead the user supplies <font face="courier">qcv(A, B, C, &hellip;)</font>.  This format assumes single words separated by commas.  If your data/string does not fit this approach the combined <code>terms</code> and <code>split</code> argument can be utilized.</p>
+
+<p><font size="5" color="gold">&diams;</font> <strong>Quick Character Vector</strong> <font size="5" color="gold">&diams;</font></p>
+
+<pre><code class="r">qcv(I, like, dogs)
+</code></pre>
+
+<pre><code>## [1] &quot;I&quot;    &quot;like&quot; &quot;dogs&quot;
+</code></pre>
+
+<pre><code class="r">qcv(terms = &quot;I like, big dogs&quot;, split = &quot;,&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;I like&quot;   &quot;big dogs&quot;
+</code></pre>
+
+<pre><code class="r">qcv(I, like, dogs, space.wrap = TRUE)
+</code></pre>
+
+<pre><code>## [1] &quot; I &quot;    &quot; like &quot; &quot; dogs &quot;
+</code></pre>
+
+<pre><code class="r">qcv(I, like, dogs, trailing = TRUE)
+</code></pre>
+
+<pre><code>## [1] &quot;I &quot;    &quot;like &quot; &quot;dogs &quot;
+</code></pre>
+
+<pre><code class="r">qcv(I, like, dogs, leading = TRUE)
+</code></pre>
+
+<pre><code>## [1] &quot; I&quot;    &quot; like&quot; &quot; dogs&quot;
+</code></pre>
+
+<pre><code class="r">qcv(terms = &quot;mpg cyl  disp  hp drat    wt  qsec vs am gear carb&quot;)
+</code></pre>
+
+<pre><code>##  [1] &quot;mpg&quot;  &quot;cyl&quot;  &quot;disp&quot; &quot;hp&quot;   &quot;drat&quot; &quot;wt&quot;   &quot;qsec&quot; &quot;vs&quot;   &quot;am&quot;   &quot;gear&quot;
+## [11] &quot;carb&quot;
+</code></pre>
+
+<h4 id="hash">Dictionary/Lookup</h4>  
+
+<p>Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The <a href="http://trinker.github.io/qdap_dev/lookup.html" target="_blank"><code>lookup</code></a> function provides a fast enviroment lookup for this type of usage.</p>
+
+<p><font size="5" color="gold">&diams;</font> <strong>Dictionary/Look Up Examples</strong> <font size="5" color="gold">&diams;</font></p>
+
+<pre><code class="r">lookup(1:5, data.frame(1:4, 11:14))
+</code></pre>
+
+<pre><code>## [1] 11 12 13 14 NA
+</code></pre>
+
+<pre><code class="r">
+lookup(LETTERS[1:5], data.frame(LETTERS[1:5], 100:104))
+</code></pre>
+
+<pre><code>## [1] 100 101 102 103 104
+</code></pre>
+
+<pre><code class="r">## Fast with very large vectors
+key <- data.frame(x=1:2, y=c("A", "B"))
+set.seed(10)
+big.vec <- sample(1:2, 3000000, T)
+out <- lookup(big.vec, key)
+out[1:20]</code></pre>
+
+<pre><code>##  [1] "B" "A" "A" "B" "A" "A" "A" "A" "B" "A" "B" "B" "A"
+## [14] "B" "A" "A" "A" "A" "A" "B"</code></pre>
+
+<pre><code class="r">## Supply a named list of vectors to key.match
+
+codes &lt;- list(A=c(1, 2, 4),
+    B = c(3, 5),
+    C = 7,
+    D = c(6, 8:10))
+
+lookup(1:10, codes)
+</code></pre>
+
+<pre><code>##  [1] &quot;A&quot; &quot;A&quot; &quot;B&quot; &quot;A&quot; &quot;B&quot; &quot;D&quot; &quot;C&quot; &quot;D&quot; &quot;D&quot; &quot;D&quot;
+</code></pre>
+
+<pre><code class="r">## Supply a single vector to key.match and key.assign
+
+lookup(mtcars$carb, sort(unique(mtcars$carb)),
+    c(&#39;one&#39;, &#39;two&#39;, &#39;three&#39;, &#39;four&#39;, &#39;six&#39;, &#39;eight&#39;))
+</code></pre>
+
+<pre><code>##  [1] &quot;four&quot;  &quot;four&quot;  &quot;one&quot;   &quot;one&quot;   &quot;two&quot;   &quot;one&quot;   &quot;four&quot;  &quot;two&quot;  
+##  [9] &quot;two&quot;   &quot;four&quot;  &quot;four&quot;  &quot;three&quot; &quot;three&quot; &quot;three&quot; &quot;four&quot;  &quot;four&quot; 
+## [17] &quot;four&quot;  &quot;one&quot;   &quot;two&quot;   &quot;one&quot;   &quot;one&quot;   &quot;two&quot;   &quot;two&quot;   &quot;four&quot; 
+## [25] &quot;two&quot;   &quot;one&quot;   &quot;two&quot;   &quot;two&quot;   &quot;four&quot;  &quot;six&quot;   &quot;eight&quot; &quot;two&quot;
+</code></pre>
+
+<pre><code class="r">
+lookup(mtcars$carb, sort(unique(mtcars$carb)),
+    seq(10, 60, by=10))
+</code></pre>
+
+<pre><code>##  [1] 40 40 10 10 20 10 40 20 20 40 40 30 30 30 40 40 40 10 20 10 10 20 20
+## [24] 40 20 10 20 20 40 50 60 20
+</code></pre>
+
+<h4 id="time">Time Conversion</h4>  
+
+<p>Researchers dealing with transcripts may have the need to convert between traditional Hours:Minutes:Seconds format and seconds.  <a href="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank"><code>hms2sec</code></a> and <a href="http://trinker.github.io/qdap_dev/sec2hms.html" target="_blank"><code>sec2hms</code></a> such functionalit.</p>
+
+<p><font size="5" color="gold">&diams;</font> <strong>Time Conversion Examples</strong> <font size="5" color="gold">&diams;</font></p>
+
+<pre><code class="r">hms2sec(c(&quot;02:00:03&quot;, &quot;04:03:01&quot;))
+</code></pre>
+
+<pre><code>## [1]  7203 14581
+</code></pre>
+
+<pre><code class="r">hms2sec(sec2hms(c(222, 1234, 55)))
+</code></pre>
+
+<pre><code>## [1]  222 1234   55
+</code></pre>
+
+<pre><code class="r">sec2hms(c(256, 3456, 56565))
+</code></pre>
+
+<pre><code>## [1] 00:04:16 00:57:36 15:42:45
+</code></pre>
+
+<h4 id="urldl">Download Documents</h4>  
+ 
+
+<p><a href="http://trinker.github.io/qdap_dev/url_dl.html" target="_blank"><code>url_dl</code></a> is a function used to provide qdap users with examples taken from the Internet.  It is useful for most document downloads from the Internet.</p>
+
+<p><font size="5" color="gold">&diams;</font> <strong>url_dl Examples</strong> <font size="5" color="gold">&diams;</font></p>
+
+<pre><code class="r">## Example 1 (download from dropbox)
+# download transcript of the debate to working directory
+url_dl(pres.deb1.docx, pres.deb2.docx, pres.deb3.docx)
+
+# load multiple files with read transcript and assign to working directory
+dat1 <- read.transcript("pres.deb1.docx", c("person", "dialogue"))
+dat2 <- read.transcript("pres.deb2.docx", c("person", "dialogue"))
+dat3 <- read.transcript("pres.deb3.docx", c("person", "dialogue"))
+
+docs <- qcv(pres.deb1.docx, pres.deb2.docx, pres.deb3.docx)
+dir() %in% docs
+delete(docs)    #remove the documents
+dir() %in% docs
+
+## Example 2 (quoted string urls)
+url_dl("https://dl.dropboxusercontent.com/u/61803503/qdap.pdf",
+   "http://www.cran.r-project.org/doc/manuals/R-intro.pdf")
+
+## Clean up
+delete(qcv(qdap.pdf, R-intro.pdf))</code></pre>
 
 <h3 id="cleaning">Cleaning/Preparing the Data</h3>
 
@@ -576,6 +1178,10 @@ delete(&quot;foo2&quot;)
 
 <form action="http://trinker.github.io/qdap_dev/beg2char.html" target="_blank">
     <input type="submit" value="beg2char"><input type="submit" value="char2end"> - Grab Begin/End of String to Character
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/capitalizer.html" target="_blank">
+    <input type="submit" value="capitalizer"> - Capitalize Select Words
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/clean.html" target="_blank">
@@ -897,26 +1503,6 @@ genXtract(x2, c(&quot;L1&quot;, 98), c(&quot;L2&quot;, 99))
 ## [[2]]
 ## [1] &quot;little cat&quot; &quot;running&quot;
 </code></pre>
-
-<h3 id="viewing">View the Data</h3>
-
-<p>The following functions will be utilized in this section (click to view more):    </p>
-
-<form action="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank">
-    <input type="submit" value="truncdf"><input type="submit" value="htruncdf"><input type="submit" value="ltruncdf"> - Dataframe Viewing
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/qview.html" target="_blank">
-    <input type="submit" value="qview"> - Quick View Dataframe View
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/left.just.html" target="_blank">
-    <input type="submit" value="left.just"><input type="submit" value="right.just"> - Text Justification
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/strWrap.html" target="_blank">
-    <input type="submit" value="strWrap"> - Wrap Character Strings to Format Paragraphs
-</form>
 
 <h3 id="reshaping">Reshaping the Data</h3>
 
@@ -1332,4 +1918,3 @@ genXtract(x2, c(&quot;L1&quot;, 98), c(&quot;L2&quot;, 99))
 </body>
 
 </html>
-

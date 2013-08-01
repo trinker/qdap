@@ -30,7 +30,7 @@ R already has thousands of excellent packages for statistics and visualization. 
 
 `r IM("https://dl.dropbox.com/u/61803503/qdap_logo.png", width=350, height=250)`
 
-The following vignette is a loose road map for utilizing the tools provided by qdap.  
+The following vignette is a loose chronological road map for utilizing the tools provided by qdap.  
 
 <hr>
 <h3 id="toc">Select from sections below:</h3>
@@ -39,9 +39,9 @@ The following vignette is a loose road map for utilizing the tools provided by q
 <ul>
 <div>1.  `r HR("#project", "Starting a New Project")`    </div> 
 <div>2.  `r HR("#import_export", "Import/Export Discourse Data")`    </div> 
-<div>3.  `r HR("#tools", "Generic qdap Tools")`    </div> 
-<div>4.  `r HR("#cleaning", "Cleaning/Preparing the Data")`    </div> 
-<div>5.  `r HR("#viewing", "View the Data")`    </div> 
+<div>3.  `r HR("#viewing", "View the Data")`    </div> 
+<div>4.  `r HR("#tools", "Generic qdap Tools")`    </div> 
+<div>5.  `r HR("#cleaning", "Cleaning/Preparing the Data")`    </div> 
 <div>6.  `r HR("#reshaping", "Reshaping the Data")`    </div> 
 <div>7.  `r HR("#word", "Extract/Analyze Words")`    </div> 
 <div>8.  `r HR("#coding", "Qualitative Coding System")`    </div> 
@@ -353,7 +353,7 @@ dat4 <- read.transcript('~/extdata/transcripts/trans4.xlsx', col.names = c('pers
 
 <h4 id="mcsv">Reading/Writing Multiple .csv Files `r yt("http://youtu.be/aeZKJGEfD7U")`</h4>    
 
-The `r CN("mcsv_x")` family of functions are utilized to read (`r FUN("mcsv_r")`) and write (`r FUN("mcsv_w")`) multiple csv files at once.  `r FUN("mcsv_w")` takes an arbitrary number of dataframes and outputs them to the supplied directory( `r CN("dir = ?")`).  An attempt will be made to output the dataframes qdap functions that output lists of dataframes.  Note that dataframes that contain columns that are lists must be condensed prior to writing with other R dataframe writing functions (e.g., `write.csv`) using the `r FUN("condense")` function.  By default `r FUN("mcsv_w")` attempts to utilize `r FUN("condense")`.
+The `r CN("mcsv_x")` family of functions are utilized to read (`r FUN("mcsv_r")`) and write (`r FUN("mcsv_w")`) multiple csv files at once.  `r FUN("mcsv_w")` takes an arbitrary number of dataframes and outputs them to the supplied directory( `r CN("dir = ?")`).  An attempt will be made to output the dataframes from qdap functions that output lists of dataframes.  Note that dataframes that contain columns that are lists must be condensed prior to writing with other R dataframe writing functions (e.g., `write.csv`) using the `r FUN("condense")` function.  By default `r FUN("mcsv_w")` attempts to utilize `r FUN("condense")`.
 
 The `r FUN("mcsv_r")` function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the dataframes that are read in are also assigned to an inclusive list (name `L1` by defualt).
 
@@ -403,9 +403,81 @@ mcsv_w(poldat, termdat, mtcars, CO2, dir="foo2")
 delete("foo2")
 ```
 
+<h3 id="viewing">View the Data</h3>
+
+The following functions will be utilized in this section (click to view more):    
+
+<form action="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank">
+    <input type="submit" value="truncdf"><input type="submit" value="htruncdf"><input type="submit" value="ltruncdf"><input type="submit" value="qview"> - `r HR("#trunc", "Truncated Dataframe Viewing")`
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/left.just.html" target="_blank">
+    <input type="submit" value="left.just"><input type="submit" value="right.just"> - `r HR("#just", "Text Justification")`
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/Search.html" target="_blank">
+    <input type="submit" value="Search"> - `r HR("#search", "Search Columns of a Dataframe")`
+</form>
+
+The nature of dialogue data makes it large and cumbersome to view in R.  This section explores qdap tools designed for more comfortable viewing of R dialogue oriented text dataframes.  
+<h4 id="trunc">Truncated Dataframe Viewing</h4> 
+
+The <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions (trunc + dataframe = `r FUN("truncdf")`) are designed to truncate the width of columns and number of rows in dataframes and lists of dataframes.  The `r CN("l")` and `r CN("h")` in front of `r CN("trunc")` stands for <b><font color="blue">l</font>ist</b> and <b><font color="blue">h</font>ead</b> and are extensions of `r FUN("truncdf")`.  `r FUN("qview")` is a wrapper for `r FUN("htruncdf")` that also displays number of rows,columns, and the dataframe name.
+
+
+`r FT(gold, 5, text="&diams;")` **Truncated Data Viewing** `r FT(gold, 5, text="&diams;")`
+
+```{r}
+truncdf(raj[1:10, ])
+truncdf(raj[1:10, ], 40)
+htruncdf(raj)
+htruncdf(raj, 20)
+htruncdf(raj, ,20)
+ltruncdf(rajPOS, width = 4)
+qview(raj)
+qview(CO2)
+```
+
+
+<h4 id="just">Text Justification</h4> 
+
+By defualt text data (character vectors) are displayed as right justified in R.  This can be difficult and unnatural to read, particularly as the length of the sentences increase.  The `r FUN("left.just")` function creates a more natural left justification of text.  Note that `r FUN("left.just")` inserts spaces to achieve the justification. This could interfere with analysis and therefore the output from `r FUN("left.just")` should only be used for visualization purposes, not analysis.
+
+`r FT(gold, 5, text="&diams;")` **Justified Data Viewing** `r FT(gold, 5, text="&diams;")`
+
+```{r}
+## The unnatural state of R text data
+DATA
+## left jsut to the rescue
+left.just(DATA)
+## Left just select column(s)
+left.just(DATA, c("sex", "state"))
+left.just(CO2[1:15,])
+right.just(left.just(CO2[1:15,]))
+```
+
+<h4 id="search">Search Columns of a Dataframe</h4> 
+
+A task of many analyses is to search a dataframe for a particular phrase and return those rows/observations that contain that term.  The researcher may optionally choose to specify a particular column to search (`r CN("column.name")`) or search the entire dataframe.
+
+`r FT(gold, 5, text="&diams;")` **Search Dataframes** `r FT(gold, 5, text="&diams;")`
+
+```{r}
+(SampDF <- data.frame("islands"=names(islands)[1:32],mtcars, row.names=NULL))
+Search(SampDF, "Cuba", "islands")
+Search(SampDF, "New", "islands")
+Search(SampDF, "Ho")
+Search(SampDF, "Ho", max.distance = 0)
+Search(SampDF, "Axel Heiberg")
+Search(SampDF, 19) #too much tolerance in max.distance
+Search(SampDF, 19, max.distance = 0)
+Search(SampDF, 19, "qsec", max.distance = 0)
+```
+
+
 <h3 id="tools">Generic qdap Tools</h3>
 
-This manual arranges functions into categories in the order a researcher is likely to use them.  The Generic qdap Tools section does not fit this convention, however, because these tools may be used throughout all stages of analysis it is important that the reader is familiar with them.  It is important to note that after reading in transcript data the researcher will likelt need to parse the dataframe utilizing the techniques found ing the `r HR("#cleaning", "Cleaning/Preparing the Data")` section.
+This manual arranges functions into categories in the order a researcher is likely to use them.  The Generic qdap Tools section does not fit this convention, however, because these tools may be used throughout all stages of analysis it is important that the reader is familiar with them.  It is important to note that after reading in transcript data the researcher will likely that the next step is the need to parse the dataframe utilizing the techniques found in the `r HR("#cleaning", "Cleaning/Preparing the Data")` section.
 
 The following functions will be utilized in this section (click to view more):    
 
@@ -433,7 +505,7 @@ The following functions will be utilized in this section (click to view more):
 
 <h4 id="qcv">Quick Character Vector</h4> 
 
-Often it can be tedious to supply quotes to character vectors when dealing with large vectors.  `r FUN("qcv")` replaces the typical `c("A", "B", "C", "...")` approach to creating character vectors.  Instead the user supplies `c(A, B, C, ...)`.  This format assumes single words separated by commas.  If your data/string does not fit this approach the combined `terms` and `split` argument can be utilized.
+Often it can be tedious to supply quotes to character vectors when dealing with large vectors.  `r FUN("qcv")` replaces the typical `r  CN('c("A", "B", "C", "...")')` approach to creating character vectors.  Instead the user supplies `r CN("qcv(A, B, C, ...)")`.  This format assumes single words separated by commas.  If your data/string does not fit this approach the combined `terms` and `split` argument can be utilized.
 
 `r FT(gold, 5, text="&diams;")` **Quick Character Vector** `r FT(gold, 5, text="&diams;")`
 
@@ -494,9 +566,9 @@ lookup(mtcars$carb, sort(unique(mtcars$carb)),
 
 Researchers dealing with transcripts may have the need to convert between traditional Hours:Minutes:Seconds format and seconds.  `r FUN("hms2sec")` and `r FUN("sec2hms")` such functionalit.
 
-r FT(gold, 5, text="&diams;")` **Time Conversion Examples** `r FT(gold, 5, text="&diams;")`
+`r FT(gold, 5, text="&diams;")` **Time Conversion Examples** `r FT(gold, 5, text="&diams;")`
 
-``{r}
+```{r}
 hms2sec(c("02:00:03", "04:03:01"))
 hms2sec(sec2hms(c(222, 1234, 55)))
 sec2hms(c(256, 3456, 56565))
@@ -504,9 +576,9 @@ sec2hms(c(256, 3456, 56565))
 
 <h4 id="urldl">Download Documents</h4>  
  
- `r FUN("url_dl")` is a function used to provide qdap users with examples taken from the Internet.  It is useful for most document downloads from the Internet.
+`r FUN("url_dl")` is a function used to provide qdap users with examples taken from the Internet.  It is useful for most document downloads from the Internet.
 
-r FT(gold, 5, text="&diams;")` **url_dl Examples** `r FT(gold, 5, text="&diams;")`
+`r FT(gold, 5, text="&diams;")` **url_dl Examples** `r FT(gold, 5, text="&diams;")`
 
 <pre><code class="r">## Example 1 (download from dropbox)
 # download transcript of the debate to working directory
@@ -662,32 +734,6 @@ x2
 genXtract(x2, c("L1", 98), c("L2", 99))
 ```
 
-
-<h3 id="viewing">View the Data</h3>
-
-The following functions will be utilized in this section (click to view more):    
-
-<form action="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank">
-    <input type="submit" value="truncdf"><input type="submit" value="htruncdf"><input type="submit" value="ltruncdf"> - Dataframe Viewing
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/qview.html" target="_blank">
-    <input type="submit" value="qview"> - Quick View Dataframe
-</form>
-
-
-<form action="http://trinker.github.io/qdap_dev/left.just.html" target="_blank">
-    <input type="submit" value="left.just"><input type="submit" value="right.just"> - Text Justification
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/Search.html" target="_blank">
-    <input type="submit" value="Search"> - Search Columns of a Dataframe
-</form>
-
-
-<form action="http://trinker.github.io/qdap_dev/strWrap.html" target="_blank">
-    <input type="submit" value="strWrap"> - Wrap Character Strings to Format Paragraphs
-</form>
 
 <h3 id="reshaping">Reshaping the Data</h3>
 

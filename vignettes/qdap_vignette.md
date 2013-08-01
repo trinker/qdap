@@ -19,7 +19,7 @@ R already has thousands of excellent packages for statistics and visualization. 
 </div>
 
 
-The following vignette is a loose road map for utilizing the tools provided by qdap.  
+The following vignette is a loose chronological road map for utilizing the tools provided by qdap.  
 
 <hr>
 <h3 id="toc">Select from sections below:</h3>
@@ -28,9 +28,9 @@ The following vignette is a loose road map for utilizing the tools provided by q
 <ul>
 <div>1.  <a href="#project">Starting a New Project</a>    </div> 
 <div>2.  <a href="#import_export">Import/Export Discourse Data</a>    </div> 
-<div>3.  <a href="#tools">Generic qdap Tools</a>    </div> 
-<div>4.  <a href="#cleaning">Cleaning/Preparing the Data</a>    </div> 
-<div>5.  <a href="#viewing">View the Data</a>    </div> 
+<div>3.  <a href="#viewing">View the Data</a>    </div> 
+<div>4.  <a href="#tools">Generic qdap Tools</a>    </div> 
+<div>5.  <a href="#cleaning">Cleaning/Preparing the Data</a>    </div> 
 <div>6.  <a href="#reshaping">Reshaping the Data</a>    </div> 
 <div>7.  <a href="#word">Extract/Analyze Words</a>    </div> 
 <div>8.  <a href="#coding">Qualitative Coding System</a>    </div> 
@@ -287,7 +287,7 @@ dat4 <- read.transcript('~/extdata/transcripts/trans4.xlsx', col.names = c('pers
 <h4 id="mcsv">Reading/Writing Multiple .csv Files <a href="http://youtu.be/aeZKJGEfD7U" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
 </h4>    
 
-The <font face="courier">mcsv_x</font> family of functions are utilized to read (<a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a>) and write (<a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a>) multiple csv files at once.  <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> takes an arbitrary number of dataframes and outputs them to the supplied directory( <font face="courier">dir = ?</font>).  An attempt will be made to output the dataframes qdap functions that output lists of dataframes.  Note that dataframes that contain columns that are lists must be condensed prior to writing with other R dataframe writing functions (e.g., `write.csv`) using the <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a> function.  By default <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> attempts to utilize <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a>.
+The <font face="courier">mcsv_x</font> family of functions are utilized to read (<a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a>) and write (<a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a>) multiple csv files at once.  <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> takes an arbitrary number of dataframes and outputs them to the supplied directory( <font face="courier">dir = ?</font>).  An attempt will be made to output the dataframes from qdap functions that output lists of dataframes.  Note that dataframes that contain columns that are lists must be condensed prior to writing with other R dataframe writing functions (e.g., `write.csv`) using the <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a> function.  By default <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> attempts to utilize <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a>.
 
 The <a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a> function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the dataframes that are read in are also assigned to an inclusive list (name `L1` by defualt).
 
@@ -341,64 +341,757 @@ delete("foo2")
 ```
 
 
-<h3 id="tools">Generic qdap Tools</h3>
-
-This manual arranges functions into categories in the order a researcher is likely to use them.  The Generic qdap Tools section does not fit this convention, however, because these tools may be used throughout all stages of analysis it is important that the reader is familiar with them.  It is important to note that after reading in transcript data the researcher will likelt need to parse the dataframe utilizing the techniques found ing the <a href="#cleaning">Cleaning/Preparing the Data</a> section.
+<h3 id="viewing">View the Data</h3>
 
 The following functions will be utilized in this section (click to view more):    
 
-<form action="http://trinker.github.io/qdap_dev/blank2NA.html" target="_blank">
-    <input type="submit" value="blank2NA"> - Replace Blanks in a dataframe
+<form action="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank">
+    <input type="submit" value="truncdf"><input type="submit" value="htruncdf"><input type="submit" value="ltruncdf"><input type="submit" value="qview"> - <a href="#trunc">Truncated Dataframe Viewing</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/capitalizer.html" target="_blank">
-    <input type="submit" value="capitalizer"> - Capitalize Select Words
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/duplicates.html" target="_blank">
-    <input type="submit" value="duplicates"> - Find Duplicated Words in a Text String
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/hash.html" target="_blank">
-    <input type="submit" value="hash"> - Hash/Dictionary Lookup
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank">
-    <input type="submit" value="hms2sec"> - Convert h:m:s to Seconds
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/sec2hms.html" target="_blank">
-    <input type="submit" value="sec2hms"> - Convert Seconds to h:m:s
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/lookup.html" target="_blank">
-    <input type="submit" value="lookup"> - Hash Table/Dictionary Lookup
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/qcv.html" target="_blank">
-    <input type="submit" value="qcv"> - Quick Character Vector
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/replacer.html" target="_blank">
-    <input type="submit" value="replacer"> - Replace Cells in a Matrix or Dataframe
+<form action="http://trinker.github.io/qdap_dev/left.just.html" target="_blank">
+    <input type="submit" value="left.just"><input type="submit" value="right.just"> - <a href="#just">Text Justification</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/Search.html" target="_blank">
-    <input type="submit" value="Search"> - Search Columns of a Dataframe
+    <input type="submit" value="Search"> - <a href="#search">Search Columns of a Dataframe</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/text2color.html" target="_blank">
-    <input type="submit" value="text2color"> - Map Words to Colors
+The nature of dialogue data makes it large and cumbersome to view in R.  This section explores qdap tools designed for more comfortable viewing of R dialogue oriented text dataframes.  
+<h4 id="trunc">Truncated Dataframe Viewing</h4> 
+
+The <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions (trunc + dataframe = <a href="http://trinker.github.io/qdap_dev/truncdf.html" target="_blank"><code>truncdf</code></a>) are designed to truncate the width of columns and number of rows in dataframes and lists of dataframes.  The <font face="courier">l</font> and <font face="courier">h</font> in front of <font face="courier">trunc</font> stands for <b><font color="blue">l</font>ist</b> and <b><font color="blue">h</font>ead</b> and are extensions of <a href="http://trinker.github.io/qdap_dev/truncdf.html" target="_blank"><code>truncdf</code></a>.  <a href="http://trinker.github.io/qdap_dev/qview.html" target="_blank"><code>qview</code></a> is a wrapper for <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>htruncdf</code></a> that also displays number of rows,columns, and the dataframe name.
+
+
+<font size="5" color="gold">&diams;</font> **Truncated Data Viewing** <font size="5" color="gold">&diams;</font>
+
+
+```r
+truncdf(raj[1:10, ])
+```
+
+```
+##     person   dialogue act
+## 1  Sampson Gregory, o   1
+## 2  Gregory No, for th   1
+## 3  Sampson I mean, an   1
+## 4  Gregory Ay, while    1
+## 5  Sampson I strike q   1
+## 6  Gregory But thou a   1
+## 7  Sampson A dog of t   1
+## 8  Gregory To move is   1
+## 9  Sampson A dog of t   1
+## 10 Gregory That shows   1
+```
+
+```r
+truncdf(raj[1:10, ], 40)
+```
+
+```
+##     person                                 dialogue act
+## 1  Sampson Gregory, o my word, we'll not carry coal   1
+## 2  Gregory      No, for then we should be colliers.   1
+## 3  Sampson  I mean, an we be in choler, we'll draw.   1
+## 4  Gregory Ay, while you live, draw your neck out o   1
+## 5  Sampson           I strike quickly, being moved.   1
+## 6  Gregory But thou art not quickly moved to strike   1
+## 7  Sampson A dog of the house of Montague moves me.   1
+## 8  Gregory To move is to stir; and to be valiant is   1
+## 9  Sampson A dog of that house shall move me to sta   1
+## 10 Gregory That shows thee a weak slave; for the we   1
+```
+
+```r
+htruncdf(raj)
+```
+
+```
+##     person   dialogue act
+## 1  Sampson Gregory, o   1
+## 2  Gregory No, for th   1
+## 3  Sampson I mean, an   1
+## 4  Gregory Ay, while    1
+## 5  Sampson I strike q   1
+## 6  Gregory But thou a   1
+## 7  Sampson A dog of t   1
+## 8  Gregory To move is   1
+## 9  Sampson A dog of t   1
+## 10 Gregory That shows   1
+```
+
+```r
+htruncdf(raj, 20)
+```
+
+```
+##     person   dialogue act
+## 1  Sampson Gregory, o   1
+## 2  Gregory No, for th   1
+## 3  Sampson I mean, an   1
+## 4  Gregory Ay, while    1
+## 5  Sampson I strike q   1
+## 6  Gregory But thou a   1
+## 7  Sampson A dog of t   1
+## 8  Gregory To move is   1
+## 9  Sampson A dog of t   1
+## 10 Gregory That shows   1
+## 11 Sampson True; and    1
+## 12 Gregory The quarre   1
+## 13 Sampson 'Tis all o   1
+## 14 Gregory The heads    1
+## 15 Sampson Ay, the he   1
+## 16 Gregory They must    1
+## 17 Sampson Me they sh   1
+## 18 Gregory 'Tis well    1
+## 19 Sampson My naked w   1
+## 20 Gregory How! turn    1
+```
+
+```r
+htruncdf(raj, ,20)
+```
+
+```
+##     person             dialogue act
+## 1  Sampson Gregory, o my word,    1
+## 2  Gregory No, for then we shou   1
+## 3  Sampson I mean, an we be in    1
+## 4  Gregory Ay, while you live,    1
+## 5  Sampson I strike quickly, be   1
+## 6  Gregory But thou art not qui   1
+## 7  Sampson A dog of the house o   1
+## 8  Gregory To move is to stir;    1
+## 9  Sampson A dog of that house    1
+## 10 Gregory That shows thee a we   1
+```
+
+```r
+ltruncdf(rajPOS, width = 4)
+```
+
+```
+## $text
+##   data
+## 1 Greg
+## 2 No, 
+## 3 I me
+## 4 Ay, 
+## 5 I st
+## 6 But 
+## 
+## $POStagged
+##   POSt POSt word
+## 1 greg c("N    8
+## 2 no/D c("D    7
+## 3 i/PR c("P    9
+## 4 ay/N c("N   11
+## 5 i/VB c("V    5
+## 6 but/ c("C    8
+## 
+## $POSprop
+##   wrd. prop prop prop prop prop prop prop prop prop prop prop prop prop
+## 1    8    0    0    0    0    0    0    0 0.12    0    0    0    0 0.25
+## 2    7    0    0    0    0 0.14    0    0 0.14    0    0    0 0.14    0
+## 3    9    0    0    0    0 0.11    0    0 0.11    0    0    0    0 0.33
+## 4   11    0    0    0    0 0.09    0    0 0.27    0    0    0    0 0.27
+## 5    5    0    0    0    0    0    0    0    0    0    0    0    0  0.2
+## 6    8    0    0 0.12    0 0.12    0    0    0    0    0    0    0 0.12
+##   prop prop prop prop prop prop prop prop prop prop prop prop prop prop
+## 1    0    0 0.12    0    0    0 0.12 0.12    0    0    0    0    0 0.12
+## 2    0    0 0.14    0    0 0.14    0 0.14    0    0    0    0    0 0.14
+## 3    0    0    0    0    0 0.22    0    0    0    0    0    0    0 0.11
+## 4    0    0    0    0    0 0.09 0.09    0    0    0    0    0    0 0.09
+## 5    0    0    0    0    0    0    0  0.2    0    0    0    0    0    0
+## 6    0    0    0    0    0    0    0 0.25    0    0    0 0.12    0 0.12
+##   prop prop prop prop prop prop prop prop prop
+## 1 0.12    0    0    0    0    0    0    0    0
+## 2    0    0    0    0    0    0    0    0    0
+## 3    0    0    0 0.11    0    0    0    0    0
+## 4    0    0    0 0.09    0    0    0    0    0
+## 5    0  0.2  0.4    0    0    0    0    0    0
+## 6 0.12    0    0    0    0    0    0    0    0
+## 
+## $POSfreq
+##   wrd. , . CC CD DT EX FW IN JJ JJR JJS MD NN NNP NNPS NNS PDT POS PRP
+## 1    8 0 0  0  0  0  0  0  1  0   0   0  0  2   0    0   1   0   0   0
+## 2    7 0 0  0  0  1  0  0  1  0   0   0  1  0   0    0   1   0   0   1
+## 3    9 0 0  0  0  1  0  0  1  0   0   0  0  3   0    0   0   0   0   2
+## 4   11 0 0  0  0  1  0  0  3  0   0   0  0  3   0    0   0   0   0   1
+## 5    5 0 0  0  0  0  0  0  0  0   0   0  0  1   0    0   0   0   0   0
+## 6    8 0 0  1  0  1  0  0  0  0   0   0  0  1   0    0   0   0   0   0
+##   PRP$ RB RBR RBS RP TO UH VB VBD VBG VBN VBP VBZ WDT WP WP$ WRB
+## 1    1  1   0   0  0  0  0  1   1   0   0   0   0   0  0   0   0
+## 2    0  1   0   0  0  0  0  1   0   0   0   0   0   0  0   0   0
+## 3    0  0   0   0  0  0  0  1   0   0   0   1   0   0  0   0   0
+## 4    1  0   0   0  0  0  0  1   0   0   0   1   0   0  0   0   0
+## 5    0  1   0   0  0  0  0  0   0   1   2   0   0   0  0   0   0
+## 6    0  2   0   0  0  1  0  1   1   0   0   0   0   0  0   0   0
+```
+
+```r
+qview(raj)
+```
+
+```
+## ========================================================================
+## nrow =  840           ncol =  3             raj
+## ========================================================================
+```
+
+```
+##     person   dialogue act
+## 1  Sampson Gregory, o   1
+## 2  Gregory No, for th   1
+## 3  Sampson I mean, an   1
+## 4  Gregory Ay, while    1
+## 5  Sampson I strike q   1
+## 6  Gregory But thou a   1
+## 7  Sampson A dog of t   1
+## 8  Gregory To move is   1
+## 9  Sampson A dog of t   1
+## 10 Gregory That shows   1
+```
+
+```r
+qview(CO2)
+```
+
+```
+## ========================================================================
+## nrow =  84           ncol =  5             CO2
+## ========================================================================
+```
+
+```
+##    Plant   Type  Treatment conc uptake
+## 1    Qn1 Quebec nonchilled   95     16
+## 2    Qn1 Quebec nonchilled  175   30.4
+## 3    Qn1 Quebec nonchilled  250   34.8
+## 4    Qn1 Quebec nonchilled  350   37.2
+## 5    Qn1 Quebec nonchilled  500   35.3
+## 6    Qn1 Quebec nonchilled  675   39.2
+## 7    Qn1 Quebec nonchilled 1000   39.7
+## 8    Qn2 Quebec nonchilled   95   13.6
+## 9    Qn2 Quebec nonchilled  175   27.3
+## 10   Qn2 Quebec nonchilled  250   37.1
+```
+
+
+
+<h4 id="just">Text Justification</h4> 
+
+By defualt text data (character vectors) are displayed as right justified in R.  This can be difficult and unnatural to read, particularly as the length of the sentences increase.  The <a href="http://trinker.github.io/qdap_dev/left.just.html" target="_blank"><code>left.just</code></a> function creates a more natural left justification of text.  Note that <a href="http://trinker.github.io/qdap_dev/left.just.html" target="_blank"><code>left.just</code></a> inserts spaces to achieve the justification. This could interfere with analysis and therefore the output from <a href="http://trinker.github.io/qdap_dev/left.just.html" target="_blank"><code>left.just</code></a> should only be used for visualization purposes, not analysis.
+
+<font size="5" color="gold">&diams;</font> **Justified Data Viewing** <font size="5" color="gold">&diams;</font>
+
+
+```r
+## The unnatural state of R text data
+DATA
+```
+
+```
+##        person sex adult                                 state code
+## 1         sam   m     0         Computer is fun. Not too fun.   K1
+## 2        greg   m     0               No it's not, it's dumb.   K2
+## 3     teacher   m     1                    What should we do?   K3
+## 4         sam   m     0                  You liar, it stinks!   K4
+## 5        greg   m     0               I am telling the truth!   K5
+## 6       sally   f     0                How can we be certain?   K6
+## 7        greg   m     0                      There is no way.   K7
+## 8         sam   m     0                       I distrust you.   K8
+## 9       sally   f     0           What are you talking about?   K9
+## 10 researcher   f     1         Shall we move on?  Good then.  K10
+## 11       greg   m     0 I'm hungry.  Let's eat.  You already?  K11
+```
+
+```r
+## left jsut to the rescue
+left.just(DATA)
+```
+
+```
+##    person     sex adult state                                 code
+## 1  sam        m   0     Computer is fun. Not too fun.         K1  
+## 2  greg       m   0     No it's not, it's dumb.               K2  
+## 3  teacher    m   1     What should we do?                    K3  
+## 4  sam        m   0     You liar, it stinks!                  K4  
+## 5  greg       m   0     I am telling the truth!               K5  
+## 6  sally      f   0     How can we be certain?                K6  
+## 7  greg       m   0     There is no way.                      K7  
+## 8  sam        m   0     I distrust you.                       K8  
+## 9  sally      f   0     What are you talking about?           K9  
+## 10 researcher f   1     Shall we move on?  Good then.         K10 
+## 11 greg       m   0     I'm hungry.  Let's eat.  You already? K11
+```
+
+```r
+## Left just select column(s)
+left.just(DATA, c("sex", "state"))
+```
+
+```
+##        person sex adult state                                 code
+## 1         sam m       0 Computer is fun. Not too fun.           K1
+## 2        greg m       0 No it's not, it's dumb.                 K2
+## 3     teacher m       1 What should we do?                      K3
+## 4         sam m       0 You liar, it stinks!                    K4
+## 5        greg m       0 I am telling the truth!                 K5
+## 6       sally f       0 How can we be certain?                  K6
+## 7        greg m       0 There is no way.                        K7
+## 8         sam m       0 I distrust you.                         K8
+## 9       sally f       0 What are you talking about?             K9
+## 10 researcher f       1 Shall we move on?  Good then.          K10
+## 11       greg m       0 I'm hungry.  Let's eat.  You already?  K11
+```
+
+```r
+left.just(CO2[1:15,])
+```
+
+```
+##    Plant Type   Treatment  conc uptake
+## 1  Qn1   Quebec nonchilled 95   16    
+## 2  Qn1   Quebec nonchilled 175  30.4  
+## 3  Qn1   Quebec nonchilled 250  34.8  
+## 4  Qn1   Quebec nonchilled 350  37.2  
+## 5  Qn1   Quebec nonchilled 500  35.3  
+## 6  Qn1   Quebec nonchilled 675  39.2  
+## 7  Qn1   Quebec nonchilled 1000 39.7  
+## 8  Qn2   Quebec nonchilled 95   13.6  
+## 9  Qn2   Quebec nonchilled 175  27.3  
+## 10 Qn2   Quebec nonchilled 250  37.1  
+## 11 Qn2   Quebec nonchilled 350  41.8  
+## 12 Qn2   Quebec nonchilled 500  40.6  
+## 13 Qn2   Quebec nonchilled 675  41.4  
+## 14 Qn2   Quebec nonchilled 1000 44.3  
+## 15 Qn3   Quebec nonchilled 95   16.2
+```
+
+```r
+right.just(left.just(CO2[1:15,]))
+```
+
+```
+##    Plant   Type  Treatment conc uptake
+## 1    Qn1 Quebec nonchilled   95     16
+## 2    Qn1 Quebec nonchilled  175   30.4
+## 3    Qn1 Quebec nonchilled  250   34.8
+## 4    Qn1 Quebec nonchilled  350   37.2
+## 5    Qn1 Quebec nonchilled  500   35.3
+## 6    Qn1 Quebec nonchilled  675   39.2
+## 7    Qn1 Quebec nonchilled 1000   39.7
+## 8    Qn2 Quebec nonchilled   95   13.6
+## 9    Qn2 Quebec nonchilled  175   27.3
+## 10   Qn2 Quebec nonchilled  250   37.1
+## 11   Qn2 Quebec nonchilled  350   41.8
+## 12   Qn2 Quebec nonchilled  500   40.6
+## 13   Qn2 Quebec nonchilled  675   41.4
+## 14   Qn2 Quebec nonchilled 1000   44.3
+## 15   Qn3 Quebec nonchilled   95   16.2
+```
+
+
+<h4 id="search">Search Columns of a Dataframe</h4> 
+
+A task of many analyses is to search a dataframe for a particular phrase and return those rows/observations that contain that term.  The researcher may optionally choose to specify a particular column to search (<font face="courier">column.name</font>) or search the entire dataframe.
+
+<font size="5" color="gold">&diams;</font> **Search Dataframes** <font size="5" color="gold">&diams;</font>
+
+
+```r
+(SampDF <- data.frame("islands"=names(islands)[1:32],mtcars, row.names=NULL))
+```
+
+```
+##            islands  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1           Africa 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## 2       Antarctica 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## 3             Asia 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 4        Australia 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 5     Axel Heiberg 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## 6           Baffin 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## 7            Banks 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## 8           Borneo 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 9          Britain 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 10         Celebes 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 11           Celon 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## 12            Cuba 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## 13           Devon 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## 14       Ellesmere 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## 15          Europe 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## 16       Greenland 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## 17          Hainan 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## 18      Hispaniola 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 19        Hokkaido 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 20          Honshu 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 21         Iceland 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## 22         Ireland 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## 23            Java 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## 24          Kyushu 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## 25           Luzon 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## 26      Madagascar 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 27        Melville 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 28        Mindanao 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 29        Moluccas 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## 30     New Britain 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## 31      New Guinea 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## 32 New Zealand (N) 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+```
+
+```r
+Search(SampDF, "Cuba", "islands")
+```
+
+```
+##    islands  mpg cyl  disp  hp drat   wt qsec vs am gear carb
+## 12    Cuba 16.4   8 275.8 180 3.07 4.07 17.4  0  0    3    3
+```
+
+```r
+Search(SampDF, "New", "islands")
+```
+
+```
+##            islands  mpg cyl  disp  hp drat   wt qsec vs am gear carb
+## 8           Borneo 24.4   4 146.7  62 3.69 3.19 20.0  1  0    4    2
+## 30     New Britain 19.7   6 145.0 175 3.62 2.77 15.5  0  1    5    6
+## 31      New Guinea 15.0   8 301.0 335 3.54 3.57 14.6  0  1    5    8
+## 32 New Zealand (N) 21.4   4 121.0 109 4.11 2.78 18.6  1  1    4    2
+```
+
+```r
+Search(SampDF, "Ho")
+```
+
+```
+##         islands  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 5  Axel Heiberg 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## 8        Borneo 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 11        Celon 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## 13        Devon 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## 15       Europe 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## 17       Hainan 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## 18   Hispaniola 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 19     Hokkaido 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 20       Honshu 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 24       Kyushu 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## 25        Luzon 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## 28     Mindanao 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 29     Moluccas 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+```
+
+```r
+Search(SampDF, "Ho", max.distance = 0)
+```
+
+```
+##     islands  mpg cyl disp hp drat    wt  qsec vs am gear carb
+## 19 Hokkaido 30.4   4 75.7 52 4.93 1.615 18.52  1  1    4    2
+## 20   Honshu 33.9   4 71.1 65 4.22 1.835 19.90  1  1    4    1
+```
+
+```r
+Search(SampDF, "Axel Heiberg")
+```
+
+```
+##        islands  mpg cyl disp  hp drat   wt  qsec vs am gear carb
+## 5 Axel Heiberg 18.7   8  360 175 3.15 3.44 17.02  0  0    3    2
+```
+
+```r
+Search(SampDF, 19) #too much tolerance in max.distance
+```
+
+```
+##            islands  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 1           Africa 21.0   6 160.0 110 3.90 2.620 16.46  0  1    4    4
+## 2       Antarctica 21.0   6 160.0 110 3.90 2.875 17.02  0  1    4    4
+## 3             Asia 22.8   4 108.0  93 3.85 2.320 18.61  1  1    4    1
+## 4        Australia 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 5     Axel Heiberg 18.7   8 360.0 175 3.15 3.440 17.02  0  0    3    2
+## 6           Baffin 18.1   6 225.0 105 2.76 3.460 20.22  1  0    3    1
+## 7            Banks 14.3   8 360.0 245 3.21 3.570 15.84  0  0    3    4
+## 8           Borneo 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 9          Britain 22.8   4 140.8  95 3.92 3.150 22.90  1  0    4    2
+## 10         Celebes 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 11           Celon 17.8   6 167.6 123 3.92 3.440 18.90  1  0    4    4
+## 12            Cuba 16.4   8 275.8 180 3.07 4.070 17.40  0  0    3    3
+## 13           Devon 17.3   8 275.8 180 3.07 3.730 17.60  0  0    3    3
+## 14       Ellesmere 15.2   8 275.8 180 3.07 3.780 18.00  0  0    3    3
+## 15          Europe 10.4   8 472.0 205 2.93 5.250 17.98  0  0    3    4
+## 16       Greenland 10.4   8 460.0 215 3.00 5.424 17.82  0  0    3    4
+## 17          Hainan 14.7   8 440.0 230 3.23 5.345 17.42  0  0    3    4
+## 18      Hispaniola 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 19        Hokkaido 30.4   4  75.7  52 4.93 1.615 18.52  1  1    4    2
+## 20          Honshu 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 21         Iceland 21.5   4 120.1  97 3.70 2.465 20.01  1  0    3    1
+## 22         Ireland 15.5   8 318.0 150 2.76 3.520 16.87  0  0    3    2
+## 23            Java 15.2   8 304.0 150 3.15 3.435 17.30  0  0    3    2
+## 24          Kyushu 13.3   8 350.0 245 3.73 3.840 15.41  0  0    3    4
+## 25           Luzon 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## 26      Madagascar 27.3   4  79.0  66 4.08 1.935 18.90  1  1    4    1
+## 27        Melville 26.0   4 120.3  91 4.43 2.140 16.70  0  1    5    2
+## 28        Mindanao 30.4   4  95.1 113 3.77 1.513 16.90  1  1    5    2
+## 29        Moluccas 15.8   8 351.0 264 4.22 3.170 14.50  0  1    5    4
+## 30     New Britain 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+## 31      New Guinea 15.0   8 301.0 335 3.54 3.570 14.60  0  1    5    8
+## 32 New Zealand (N) 21.4   4 121.0 109 4.11 2.780 18.60  1  1    4    2
+```
+
+```r
+Search(SampDF, 19, max.distance = 0)
+```
+
+```
+##        islands  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 4    Australia 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 8       Borneo 24.4   4 146.7  62 3.69 3.190 20.00  1  0    4    2
+## 10     Celebes 19.2   6 167.6 123 3.92 3.440 18.30  1  0    4    4
+## 18  Hispaniola 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 20      Honshu 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+## 25       Luzon 19.2   8 400.0 175 3.08 3.845 17.05  0  0    3    2
+## 30 New Britain 19.7   6 145.0 175 3.62 2.770 15.50  0  1    5    6
+```
+
+```r
+Search(SampDF, 19, "qsec", max.distance = 0)
+```
+
+```
+##       islands  mpg cyl  disp  hp drat    wt  qsec vs am gear carb
+## 4   Australia 21.4   6 258.0 110 3.08 3.215 19.44  1  0    3    1
+## 18 Hispaniola 32.4   4  78.7  66 4.08 2.200 19.47  1  1    4    1
+## 20     Honshu 33.9   4  71.1  65 4.22 1.835 19.90  1  1    4    1
+```
+
+
+
+<h3 id="tools">Generic qdap Tools</h3>
+
+This manual arranges functions into categories in the order a researcher is likely to use them.  The Generic qdap Tools section does not fit this convention, however, because these tools may be used throughout all stages of analysis it is important that the reader is familiar with them.  It is important to note that after reading in transcript data the researcher will likely that the next step is the need to parse the dataframe utilizing the techniques found in the <a href="#cleaning">Cleaning/Preparing the Data</a> section.
+
+The following functions will be utilized in this section (click to view more):    
+
+
+<form action="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank">
+    <input type="submit" value="hms2sec"> - <a href="#time">Convert h:m:s to Seconds</a> 
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/sec2hms.html" target="_blank">
+    <input type="submit" value="sec2hms"> - <a href="#time">Convert Seconds to h:m:s</a> 
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/lookup.html" target="_blank">
+    <input type="submit" value="lookup"> - <a href="#hash">Hash Table/Dictionary Lookup</a>
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/qcv.html" target="_blank">
+    <input type="submit" value="qcv"> - <a href="#qcv">Quick Character Vector</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/url_dl.html" target="_blank">
-    <input type="submit" value="url_dl"> - Download Instructional Documents
+    <input type="submit" value="url_dl"> - <a href="#urldl">Download Instructional Documents</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/v.outer.html" target="_blank">
-    <input type="submit" value="v.outer"> - Vectorized Version of outer
-</form>
 
+<h4 id="qcv">Quick Character Vector</h4> 
+
+Often it can be tedious to supply quotes to character vectors when dealing with large vectors.  <a href="http://trinker.github.io/qdap_dev/qcv.html" target="_blank"><code>qcv</code></a> replaces the typical <font face="courier">c("A", "B", "C", "...")</font> approach to creating character vectors.  Instead the user supplies <font face="courier">qcv(A, B, C, ...)</font>.  This format assumes single words separated by commas.  If your data/string does not fit this approach the combined `terms` and `split` argument can be utilized.
+
+<font size="5" color="gold">&diams;</font> **Quick Character Vector** <font size="5" color="gold">&diams;</font>
+
+
+```r
+qcv(I, like, dogs)
+```
+
+```
+## [1] "I"    "like" "dogs"
+```
+
+```r
+qcv(terms = "I like, big dogs", split = ",")
+```
+
+```
+## [1] "I like"   "big dogs"
+```
+
+```r
+qcv(I, like, dogs, space.wrap = TRUE)
+```
+
+```
+## [1] " I "    " like " " dogs "
+```
+
+```r
+qcv(I, like, dogs, trailing = TRUE)
+```
+
+```
+## [1] "I "    "like " "dogs "
+```
+
+```r
+qcv(I, like, dogs, leading = TRUE)
+```
+
+```
+## [1] " I"    " like" " dogs"
+```
+
+```r
+qcv(terms = "mpg cyl  disp  hp drat    wt  qsec vs am gear carb")
+```
+
+```
+##  [1] "mpg"  "cyl"  "disp" "hp"   "drat" "wt"   "qsec" "vs"   "am"   "gear"
+## [11] "carb"
+```
+
+
+<h4 id="hash">Dictionary/Lookup</h4>  
+
+Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The <a href="http://trinker.github.io/qdap_dev/lookup.html" target="_blank"><code>lookup</code></a> function provides a fast enviroment lookup for this type of usage.
+
+<font size="5" color="gold">&diams;</font> **Dictionary/Look Up Examples** <font size="5" color="gold">&diams;</font>
+
+
+```r
+lookup(1:5, data.frame(1:4, 11:14))
+```
+
+```
+## [1] 11 12 13 14 NA
+```
+
+```r
+
+lookup(LETTERS[1:5], data.frame(LETTERS[1:5], 100:104))
+```
+
+```
+## [1] 100 101 102 103 104
+```
+
+
+<pre><code class="r">## Fast with very large vectors
+key <- data.frame(x=1:2, y=c("A", "B"))
+set.seed(10)
+big.vec <- sample(1:2, 3000000, T)
+out <- lookup(big.vec, key)
+out[1:20]</code></pre>
+
+
+<pre><code>##  [1] "B" "A" "A" "B" "A" "A" "A" "A" "B" "A" "B" "B" "A"
+## [14] "B" "A" "A" "A" "A" "A" "B"</code></pre>
+
+
+```r
+## Supply a named list of vectors to key.match
+
+codes <- list(A=c(1, 2, 4),
+    B = c(3, 5),
+    C = 7,
+    D = c(6, 8:10))
+
+lookup(1:10, codes)
+```
+
+```
+##  [1] "A" "A" "B" "A" "B" "D" "C" "D" "D" "D"
+```
+
+
+
+```r
+## Supply a single vector to key.match and key.assign
+
+lookup(mtcars$carb, sort(unique(mtcars$carb)),
+    c('one', 'two', 'three', 'four', 'six', 'eight'))
+```
+
+```
+##  [1] "four"  "four"  "one"   "one"   "two"   "one"   "four"  "two"  
+##  [9] "two"   "four"  "four"  "three" "three" "three" "four"  "four" 
+## [17] "four"  "one"   "two"   "one"   "one"   "two"   "two"   "four" 
+## [25] "two"   "one"   "two"   "two"   "four"  "six"   "eight" "two"
+```
+
+```r
+
+lookup(mtcars$carb, sort(unique(mtcars$carb)),
+    seq(10, 60, by=10))
+```
+
+```
+##  [1] 40 40 10 10 20 10 40 20 20 40 40 30 30 30 40 40 40 10 20 10 10 20 20
+## [24] 40 20 10 20 20 40 50 60 20
+```
+
+
+<h4 id="time">Time Conversion</h4>  
+
+Researchers dealing with transcripts may have the need to convert between traditional Hours:Minutes:Seconds format and seconds.  <a href="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank"><code>hms2sec</code></a> and <a href="http://trinker.github.io/qdap_dev/sec2hms.html" target="_blank"><code>sec2hms</code></a> such functionalit.
+
+<font size="5" color="gold">&diams;</font> **Time Conversion Examples** <font size="5" color="gold">&diams;</font>
+
+
+```r
+hms2sec(c("02:00:03", "04:03:01"))
+```
+
+```
+## [1]  7203 14581
+```
+
+```r
+hms2sec(sec2hms(c(222, 1234, 55)))
+```
+
+```
+## [1]  222 1234   55
+```
+
+```r
+sec2hms(c(256, 3456, 56565))
+```
+
+```
+## [1] 00:04:16 00:57:36 15:42:45
+```
+
+
+<h4 id="urldl">Download Documents</h4>  
+ 
+<a href="http://trinker.github.io/qdap_dev/url_dl.html" target="_blank"><code>url_dl</code></a> is a function used to provide qdap users with examples taken from the Internet.  It is useful for most document downloads from the Internet.
+
+<font size="5" color="gold">&diams;</font> **url_dl Examples** <font size="5" color="gold">&diams;</font>
+
+<pre><code class="r">## Example 1 (download from dropbox)
+# download transcript of the debate to working directory
+url_dl(pres.deb1.docx, pres.deb2.docx, pres.deb3.docx)
+
+# load multiple files with read transcript and assign to working directory
+dat1 <- read.transcript("pres.deb1.docx", c("person", "dialogue"))
+dat2 <- read.transcript("pres.deb2.docx", c("person", "dialogue"))
+dat3 <- read.transcript("pres.deb3.docx", c("person", "dialogue"))
+
+docs <- qcv(pres.deb1.docx, pres.deb2.docx, pres.deb3.docx)
+dir() %in% docs
+delete(docs)    #remove the documents
+dir() %in% docs
+
+## Example 2 (quoted string urls)
+url_dl("https://dl.dropboxusercontent.com/u/61803503/qdap.pdf",
+   "http://www.cran.r-project.org/doc/manuals/R-intro.pdf")
+
+## Clean up
+delete(qcv(qdap.pdf, R-intro.pdf))</code></pre>
 
 
 <h3 id="cleaning">Cleaning/Preparing the Data</h3>
@@ -411,6 +1104,10 @@ The following functions will be utilized in this section (click to view more):
 
 <form action="http://trinker.github.io/qdap_dev/beg2char.html" target="_blank">
     <input type="submit" value="beg2char"><input type="submit" value="char2end"> - Grab Begin/End of String to Character
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/capitalizer.html" target="_blank">
+    <input type="submit" value="capitalizer"> - Capitalize Select Words
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/clean.html" target="_blank">
@@ -769,27 +1466,6 @@ genXtract(x2, c("L1", 98), c("L2", 99))
 ```
 
 
-
-<h3 id="viewing">View the Data</h3>
-
-The following functions will be utilized in this section (click to view more):    
-
-<form action="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank">
-    <input type="submit" value="truncdf"><input type="submit" value="htruncdf"><input type="submit" value="ltruncdf"> - Dataframe Viewing
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/qview.html" target="_blank">
-    <input type="submit" value="qview"> - Quick View Dataframe View
-</form>
-
-
-<form action="http://trinker.github.io/qdap_dev/left.just.html" target="_blank">
-    <input type="submit" value="left.just"><input type="submit" value="right.just"> - Text Justification
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/strWrap.html" target="_blank">
-    <input type="submit" value="strWrap"> - Wrap Character Strings to Format Paragraphs
-</form>
 
 <h3 id="reshaping">Reshaping the Data</h3>
 

@@ -17,11 +17,12 @@
 #' @export
 #' @examples
 #' \dontrun{
+#' truncdf(raj[1:10, ])
+#' truncdf(raj[1:10, ], 40)
 #' htruncdf(raj)
 #' htruncdf(raj, 20)
 #' htruncdf(raj, ,20)
-#' truncdf(raj[1:10, ])
-#' truncdf(raj[1:10, ], 40)
+#' ltruncdf(rajPOS, width = 4)
 #' qview(raj)
 #' qview(CO2)
 #' }
