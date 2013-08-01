@@ -652,7 +652,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/clean.html" target="_blank">
-    <input type="submit" value="clean"> - `r HR("#esc", "Remove Escaped Characters")`
+    <input type="submit" value="clean"> - `r HR("#clean", "Remove Escaped Characters")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/incomplete.replace.html" target="_blank">
@@ -799,6 +799,7 @@ genXtract(x2, c("L1", 98), c("L2", 99))
 ```
 
 <h4 id="grab">Grab Begin/End of String to Character</h4>
+<h4 id="inc">Denote Incomplete End Marks With “|”</h4> 
 
 <h3 id="reshaping">Reshaping the Data</h3>
 
