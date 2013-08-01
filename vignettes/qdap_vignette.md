@@ -358,6 +358,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 The nature of dialogue data makes it large and cumbersome to view in R.  This section explores qdap tools designed for more comfortable viewing of R dialogue oriented text dataframes.  
+
 <h4 id="trunc">Truncated Dataframe Viewing</h4> 
 
 The <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions (trunc + dataframe = <a href="http://trinker.github.io/qdap_dev/truncdf.html" target="_blank"><code>truncdf</code></a>) are designed to truncate the width of columns and number of rows in dataframes and lists of dataframes.  The <font face="courier">l</font> and <font face="courier">h</font> in front of <font face="courier">trunc</font> stands for <b><font color="blue">l</font>ist</b> and <b><font color="blue">h</font>ead</b> and are extensions of <a href="http://trinker.github.io/qdap_dev/truncdf.html" target="_blank"><code>truncdf</code></a>.  <a href="http://trinker.github.io/qdap_dev/qview.html" target="_blank"><code>qview</code></a> is a wrapper for <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>htruncdf</code></a> that also displays number of rows,columns, and the dataframe name.
@@ -529,17 +530,12 @@ ltruncdf(rajPOS, width = 4)
 ## 6    0  2   0   0  0  1  0  1   1   0   0   0   0   0  0   0   0
 ```
 
-```r
-qview(raj)
-```
 
-```
-## ========================================================================
+<pre><code class="r">qview(raj)</code></pre>
+
+<pre><code>## ========================================================================
 ## nrow =  840           ncol =  3             raj
 ## ========================================================================
-```
-
-```
 ##     person   dialogue act
 ## 1  Sampson Gregory, o   1
 ## 2  Gregory No, for th   1
@@ -550,20 +546,13 @@ qview(raj)
 ## 7  Sampson A dog of t   1
 ## 8  Gregory To move is   1
 ## 9  Sampson A dog of t   1
-## 10 Gregory That shows   1
-```
+## 10 Gregory That shows   1</code></pre>
 
-```r
-qview(CO2)
-```
+<pre><code class="r">qview(CO2)</code></pre>
 
-```
-## ========================================================================
+<pre><code>## ========================================================================
 ## nrow =  84           ncol =  5             CO2
 ## ========================================================================
-```
-
-```
 ##    Plant   Type  Treatment conc uptake
 ## 1    Qn1 Quebec nonchilled   95     16
 ## 2    Qn1 Quebec nonchilled  175   30.4
@@ -574,16 +563,14 @@ qview(CO2)
 ## 7    Qn1 Quebec nonchilled 1000   39.7
 ## 8    Qn2 Quebec nonchilled   95   13.6
 ## 9    Qn2 Quebec nonchilled  175   27.3
-## 10   Qn2 Quebec nonchilled  250   37.1
-```
-
+## 10   Qn2 Quebec nonchilled  250   37.1</code></pre>
 
 
 <h4 id="just">Text Justification</h4> 
 
 By defualt text data (character vectors) are displayed as right justified in R.  This can be difficult and unnatural to read, particularly as the length of the sentences increase.  The <a href="http://trinker.github.io/qdap_dev/left.just.html" target="_blank"><code>left.just</code></a> function creates a more natural left justification of text.  Note that <a href="http://trinker.github.io/qdap_dev/left.just.html" target="_blank"><code>left.just</code></a> inserts spaces to achieve the justification. This could interfere with analysis and therefore the output from <a href="http://trinker.github.io/qdap_dev/left.just.html" target="_blank"><code>left.just</code></a> should only be used for visualization purposes, not analysis.
 
-<font size="5" color="gold">&diams;</font> **Justified Data Viewing** <font size="5" color="gold">&diams;</font>
+<font size="5" color="gold">&diams;</font> **Justified Data Viewing** <font size="5" color="gold">&diams;</font>    
 
 
 ```r
@@ -1103,77 +1090,142 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/beg2char.html" target="_blank">
-    <input type="submit" value="beg2char"><input type="submit" value="char2end"> - Grab Begin/End of String to Character
+    <input type="submit" value="beg2char"><input type="submit" value="char2end"> - <a href="#grab">Grab Begin/End of String to Character</a> 
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/capitalizer.html" target="_blank">
-    <input type="submit" value="capitalizer"> - Capitalize Select Words
+    <input type="submit" value="capitalizer"> - <a href="#caps">Capitalize Select Words</a> 
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/clean.html" target="_blank">
-    <input type="submit" value="clean"> - Remove Escaped Characters
+    <input type="submit" value="clean"> - <a href="#esc">Remove Escaped Characters</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/incomplete.replace.html" target="_blank">
-    <input type="submit" value="incomplete.replace"><input type="submit" value="incomp"> - Denote Incomplete End Marks With "|"
+    <input type="submit" value="incomplete.replace"><input type="submit" value="incomp"> - <a href="#inc">Denote Incomplete End Marks With "|"</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/multigsub.html" target="_blank">
-    <input type="submit" value="multigsub"><input type="submit" value="mgsub"> - Multiple gsub
+    <input type="submit" value="multigsub"><input type="submit" value="mgsub"> - <a href="#mgsub">Multiple gsub</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/name2sex.html" target="_blank">
-    <input type="submit" value="name2sex"> - Names to Gender Prediction
+    <input type="submit" value="name2sex"> - <a href="#nms">Names to Gender Prediction</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/potential_NA.html" target="_blank">
-    <input type="submit" value="potential_NA"> - Search for Potential Missing Values
+    <input type="submit" value="potential_NA"> - <a href="#na">Search for Potential Missing Values</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/qprep.html" target="_blank">
-    <input type="submit" value="qprep"> - Quick Preparation of Text
+    <input type="submit" value="qprep"> - <a href="#qprep">Quick Preparation of Text</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/replace_abbreviation.html" target="_blank">
-    <input type="submit" value="replace_abbreviation"> - Replace Abbreviations
+    <input type="submit" value="replace_abbreviation"> - <a href="#abr">Replace Abbreviations</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/replace_contraction.html" target="_blank">
-    <input type="submit" value="replace_contraction"> - Replace Contractions
+    <input type="submit" value="replace_contraction"> - <a href="#cons">Replace Contractions</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/replace_number.html" target="_blank">
-    <input type="submit" value="replace_number"> - Replace Numbers With Text Representation
+    <input type="submit" value="replace_number"> - <a href="#num">Replace Numbers With Text Representation</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/replace_symbol.html" target="_blank">
-    <input type="submit" value="replace_symbol"> - Replace Symbols With Word Equivalents
+    <input type="submit" value="replace_symbol"> - <a href="#symb">Replace Symbols With Word Equivalents</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/rm_row.html" target="_blank">
-    <input type="submit" value="rm_row"><input type="submit" value="rm_empty_row"> - Remove Rows That Contain Markers
+    <input type="submit" value="rm_row"><input type="submit" value="rm_empty_row"> - <a href="#mark">Remove Rows That Contain Markers</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/scrubber.html" target="_blank">
-    <input type="submit" value="scrubber"> - Clean Imported Text
+    <input type="submit" value="scrubber"> - <a href="#clean">Clean Imported Text</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/space_fill.html" target="_blank">
-    <input type="submit" value="space_fill"> - Replace Spaces
+    <input type="submit" value="space_fill"> - <a href="#fill">Replace Spaces</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/spaste.html" target="_blank">
-    <input type="submit" value="spaste"> - Add Leading/Trailing Spaces
+    <input type="submit" value="spaste"> - <a href="#spaste">Add Leading/Trailing Spaces</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/stemmer.html" target="_blank">
-    <input type="submit" value="stemmer"><input type="submit" value="stem.words"><input type="submit" value="stem2df"> - Stem Text
+    <input type="submit" value="stemmer"><input type="submit" value="stem.words"><input type="submit" value="stem2df"> - <a href="#stem">Stem Text</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/Trim.html" target="_blank">
-    <input type="submit" value="Trim"> - Remove Leading/Trailing White Space
+    <input type="submit" value="Trim"> - <a href="#clean">Remove Leading/Trailing White Space</a>
 </form>
 <hr>
+
+
+<h4 id="na">Search for Potential Missing Values</h4>
+<h4 id="mark">Remove Rows That Contain Markers</h4>
+<h4 id="clean">Remove Spaces and Escaped Characters</h4> 
+
+<font size="5" color="gold">&diams;</font> **Cleaning Spaces and Escaped Characters**<font size="5" color="gold">&diams;</font>
+
+```r
+x1 <- "I go \r
+    to the \tnext line"
+x1
+```
+
+```
+## [1] "I go \r\n    to the \tnext line"
+```
+
+```r
+clean(x1)
+```
+
+```
+## [1] "I go to the next line"
+```
+
+```r
+x2 <- c("  talkstats.com ", "   really? ", " yeah")
+Trim(x2)
+```
+
+```
+## [1] "talkstats.com" "really?"       "yeah"
+```
+
+```r
+x3 <- c("I like 456 dogs\t  , don't you?\"")
+scrubber(x3)
+```
+
+```
+## [1] "I like 456 dogs, don't you?"
+```
+
+```r
+scrubber(x3, TRUE)
+```
+
+```
+## [1] "I like four hundred fifty six dogs, don't you?"
+```
+
+
+<h4 id="abr">Replace Abbreviations</h4>
+<h4 id="cons">Replace Contractions</h4>
+<h4 id="num">Replace Numbers With Text Representation</h4>
+<h4 id="symb">Replace Symbols With Word Equivalents</h4>
+<h4 id="qprep">Quick Preparation of Text</h4>
+<h4 id="spaste">Add Leading/Trailing Spaces</h4>
+<h4 id="fill">Replace Spaces</h4>
+<h4 id="mgsub">Multiple gsub</h4>
+<h4 id="caps">Capitalize Select Words</h4>
+<h4 id="nms">Names to Gender Prediction</h4>
+<h4 id="stem">Stem Text</h4>
+
 
 <h4 id="bracket">Bracket/General Chunk Extraction <a href="http://youtu.be/B4lvZGo_6bA" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
 </h4>    
@@ -1466,6 +1518,7 @@ genXtract(x2, c("L1", 98), c("L2", 99))
 ```
 
 
+<h4 id="grab">Grab Begin/End of String to Character</h4>
 
 <h3 id="reshaping">Reshaping the Data</h3>
 
