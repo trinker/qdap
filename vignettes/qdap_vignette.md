@@ -48,7 +48,7 @@ The following vignette is a loose chronological road map for utilizing the tools
 <div style="float: right; width: 50%;">
 <ul>
 <div><b>Symbol Conventions:</b></div>  
-<div><font size="5" color="gold">&diams;</font> = Example (R code)    </div> 
+<div><font size="5" color="orange">&diams;</font> = Example (R code)    </div> 
 <div><b><font size="5" color="firebrick">[YT]</font></b> = Video Demo (click to watch)    </div> 
 </ul>
 </div>
@@ -60,14 +60,14 @@ The following vignette is a loose chronological road map for utilizing the tools
 <h3 id="project">Starting a New Project <a href="http://youtu.be/u8AJiyMffmc" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
 </h3>
 
-
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/new_project.html" target="_blank">
     <input type="submit" value="new_project"> - Project Template
 </form>
+</div>
 
-<hr>
 
 The function <a href="http://trinker.github.io/qdap_dev/new_project.html" target="_blank"><code>new_project</code></a> is designed to generate project template of multiple nested directories that organize and guide the researcher through a qualitative study, from data collection to analysis and report/presentation generation.  This workflow framework will enable the researcher to be better organized and more efficient in all stages of the research process.  <a href="http://trinker.github.io/qdap_dev/new_project.html" target="_blank"><code>new_project</code></a> utilizes the <a href="http://cran.r-project.org/web/packages/reports/reports.pdf" target="_blank">reports package</a> (<a href="http://github.com/trinker/reports">Rinker, 2013b</a>) 
 
@@ -102,6 +102,7 @@ The <a href="http://trinker.github.io/qdap_dev/new_project.html" target="_blank"
 
 <h3 id="import_export">Import/Export Discourse Data</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/condense.html" target="_blank">
@@ -119,11 +120,12 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank">
     <input type="submit" value="read.transcript"> - <a href="#readin">Read Transcripts Into R</a>
 </form>
+</div>
 
 <h4 id="readin">Reading In Transcript Data <a href="http://youtu.be/UxgOScggLBg" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
 </h4>    
 
-This subsection covers how to read in transcript data.  Generally the researcher will have data stored as a .docx (Microsoft Word or Open/Libre Office) or .xlsx/.csv (spreadsheet format).  Two functions are useful for reading in data, <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> and <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a>.  <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> detects file type (.docx/.csv/.xlsx) and reads in a single transcipt whereas <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a> generates code that utilizes <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> for each of the multiple transcripts in a single directory.  Note that <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> expects a two column formatted transcript (usually with person on the left and dialogue on the right).
+This subsection covers how to read in transcript data.  Generally the researcher will have data stored as a .docx (Microsoft Word or Open/Libre Office) or .xlsx/.csv (spreadsheet format).  It is of great importance that the researcher manually writes/parses their transcripts to avoid potential analysis problems later.  All sentences should contain appropriate qdap punctuation (declarative = ., interrogative = ?, exclamatory = !, interupted = | or <a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a> = *., *?, *!, *|).  Additionally, if a sentence contains an endmark/punctuation it should have accompanying text/dialogue.  Two functions are useful for reading in data, <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> and <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a>.  <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> detects file type (.docx/.csv/.xlsx) and reads in a single transcipt whereas <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a> generates code that utilizes <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> for each of the multiple transcripts in a single directory.  Note that <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> expects a two column formatted transcript (usually with person on the left and dialogue on the right).
 
 Five arguments are of particular importance to read.transcript: 
 
@@ -161,7 +163,11 @@ to skip before beginning to read data.</p>
 
 Often transcripts contain extraneous material at the top and the argument <font face="courier">skip = ?</font> must be used to skip these extra lines.  Some sort of unique separator must also be used to separate the person column from the text column.  By defualt <font face="courier">sep = ":"</font> is assumed.  If your transcripts do no contain a separator one must be inserted manually.  Also note that the researcher may want to prepare the transcripts with brackets to denote non spoken annotations as well dialogue that is read rather than spoken.  For more on bracket parsing see <a href="#bracket">Bracket/General Chunk Extraction</a>.
 
-<font size="5" color="gold">&diams;</font> **Reading In Data**- *read.transcript* <font size="5" color="gold">&diams;</font>
+<div class="middleDiv">
+<b><font size="4" color="red">Note: It is important that all sentences contain valid qdap punctuation (<font face="courier">.</font>, <font face="courier">?</font>, <font face="courier">!</font>, <font face="courier">|</font>) in your transcripts. Many qdap functions are dependant upon this assumption.</font></b>
+</div>
+
+<font size="5" color="orange">&diams;</font> **Reading In Data**- *read.transcript* <font size="5" color="orange">&diams;</font>
 <pre><code class="r">## Location of sample transcripts from the qdap package
 (doc1 <- system.file("extdata/transcripts/trans1.docx", package = "qdap"))
 (doc2 <- system.file("extdata/transcripts/trans2.docx", package = "qdap"))
@@ -271,7 +277,7 @@ read.transcript(text=trans)</code></pre>
 
 The <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a> function enables the researcher to produce multiple lines of code, one line with <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> for each file in a directory, which is then optionally copied to the clipboard for easy insertion into a script.  Note that setting the argument <font face="courier">use.path = FALSE</font> may allow the code to be more portable in that a static path is not suppplied the the <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> scripts.
 
-<font size="5" color="gold">&diams;</font> **Reading In Data**- *dir_map* <font size="5" color="gold">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Reading In Data**- *dir_map* <font size="5" color="orange">&diams;</font>
 
 <pre><code class="r">(DIR <- system.file("extdata/transcripts", package = "qdap"))
 dir_map(DIR)</code></pre>
@@ -291,7 +297,7 @@ The <font face="courier">mcsv_x</font> family of functions are utilized to read 
 
 The <a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a> function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the dataframes that are read in are also assigned to an inclusive list (name `L1` by defualt).
 
-<font size="5" color="gold">&diams;</font> **Reading and Writing Multiple csvs** <font size="5" color="gold">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Reading and Writing Multiple csvs** <font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -322,7 +328,7 @@ delete("foo")
 ```
 
 
-<font size="5" color="gold">&diams;</font> **Writing Lists of Dataframes to csvs** <font size="5" color="gold">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Writing Lists of Dataframes to csvs** <font size="5" color="orange">&diams;</font>
 
 ```r
 ## poldat and termco produce lists of dataframes
@@ -343,6 +349,7 @@ delete("foo2")
 
 <h3 id="viewing">View the Data</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank">
@@ -356,6 +363,7 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/Search.html" target="_blank">
     <input type="submit" value="Search"> - <a href="#search">Search Columns of a Dataframe</a>
 </form>
+</div>
 
 The nature of dialogue data makes it large and cumbersome to view in R.  This section explores qdap tools designed for more comfortable viewing of R dialogue oriented text dataframes.  
 
@@ -364,7 +372,7 @@ The nature of dialogue data makes it large and cumbersome to view in R.  This se
 The <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions (trunc + dataframe = <a href="http://trinker.github.io/qdap_dev/truncdf.html" target="_blank"><code>truncdf</code></a>) are designed to truncate the width of columns and number of rows in dataframes and lists of dataframes.  The <font face="courier">l</font> and <font face="courier">h</font> in front of <font face="courier">trunc</font> stands for <b><font color="blue">l</font>ist</b> and <b><font color="blue">h</font>ead</b> and are extensions of <a href="http://trinker.github.io/qdap_dev/truncdf.html" target="_blank"><code>truncdf</code></a>.  <a href="http://trinker.github.io/qdap_dev/qview.html" target="_blank"><code>qview</code></a> is a wrapper for <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>htruncdf</code></a> that also displays number of rows,columns, and the dataframe name.
 
 
-<font size="5" color="gold">&diams;</font> **Truncated Data Viewing** <font size="5" color="gold">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Truncated Data Viewing** <font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -570,7 +578,7 @@ ltruncdf(rajPOS, width = 4)
 
 By defualt text data (character vectors) are displayed as right justified in R.  This can be difficult and unnatural to read, particularly as the length of the sentences increase.  The <a href="http://trinker.github.io/qdap_dev/left.just.html" target="_blank"><code>left.just</code></a> function creates a more natural left justification of text.  Note that <a href="http://trinker.github.io/qdap_dev/left.just.html" target="_blank"><code>left.just</code></a> inserts spaces to achieve the justification. This could interfere with analysis and therefore the output from <a href="http://trinker.github.io/qdap_dev/left.just.html" target="_blank"><code>left.just</code></a> should only be used for visualization purposes, not analysis.
 
-<font size="5" color="gold">&diams;</font> **Justified Data Viewing** <font size="5" color="gold">&diams;</font>    
+<font size="5" color="orange">&diams;</font> **Justified Data Viewing** <font size="5" color="orange">&diams;</font>    
 
 
 ```r
@@ -684,7 +692,7 @@ right.just(left.just(CO2[1:15,]))
 
 A task of many analyses is to search a dataframe for a particular phrase and return those rows/observations that contain that term.  The researcher may optionally choose to specify a particular column to search (<font face="courier">column.name</font>) or search the entire dataframe.
 
-<font size="5" color="gold">&diams;</font> **Search Dataframes** <font size="5" color="gold">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Search Dataframes** <font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -860,8 +868,8 @@ Search(SampDF, 19, "qsec", max.distance = 0)
 
 This manual arranges functions into categories in the order a researcher is likely to use them.  The Generic qdap Tools section does not fit this convention, however, because these tools may be used throughout all stages of analysis it is important that the reader is familiar with them.  It is important to note that after reading in transcript data the researcher will likely that the next step is the need to parse the dataframe utilizing the techniques found in the <a href="#cleaning">Cleaning/Preparing the Data</a> section.
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
-
 
 <form action="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank">
     <input type="submit" value="hms2sec"> - <a href="#time">Convert h:m:s to Seconds</a> 
@@ -882,13 +890,13 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/url_dl.html" target="_blank">
     <input type="submit" value="url_dl"> - <a href="#urldl">Download Instructional Documents</a>
 </form>
-
+</div>
 
 <h4 id="qcv">Quick Character Vector</h4> 
 
 Often it can be tedious to supply quotes to character vectors when dealing with large vectors.  <a href="http://trinker.github.io/qdap_dev/qcv.html" target="_blank"><code>qcv</code></a> replaces the typical <font face="courier">c("A", "B", "C", "...")</font> approach to creating character vectors.  Instead the user supplies <font face="courier">qcv(A, B, C, ...)</font>.  This format assumes single words separated by commas.  If your data/string does not fit this approach the combined `terms` and `split` argument can be utilized.
 
-<font size="5" color="gold">&diams;</font> **Quick Character Vector** <font size="5" color="gold">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Quick Character Vector** <font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -945,7 +953,7 @@ qcv(terms = "mpg cyl  disp  hp drat    wt  qsec vs am gear carb")
 
 Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The <a href="http://trinker.github.io/qdap_dev/lookup.html" target="_blank"><code>lookup</code></a> function provides a fast enviroment lookup for this type of usage.
 
-<font size="5" color="gold">&diams;</font> **Dictionary/Look Up Examples** <font size="5" color="gold">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Dictionary/Look Up Examples** <font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -1025,7 +1033,7 @@ lookup(mtcars$carb, sort(unique(mtcars$carb)),
 
 Researchers dealing with transcripts may have the need to convert between traditional Hours:Minutes:Seconds format and seconds.  <a href="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank"><code>hms2sec</code></a> and <a href="http://trinker.github.io/qdap_dev/sec2hms.html" target="_blank"><code>sec2hms</code></a> such functionalit.
 
-<font size="5" color="gold">&diams;</font> **Time Conversion Examples** <font size="5" color="gold">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Time Conversion Examples** <font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -1057,7 +1065,7 @@ sec2hms(c(256, 3456, 56565))
  
 <a href="http://trinker.github.io/qdap_dev/url_dl.html" target="_blank"><code>url_dl</code></a> is a function used to provide qdap users with examples taken from the Internet.  It is useful for most document downloads from the Internet.
 
-<font size="5" color="gold">&diams;</font> **url_dl Examples** <font size="5" color="gold">&diams;</font>
+<font size="5" color="orange">&diams;</font> **url_dl Examples** <font size="5" color="orange">&diams;</font>
 
 <pre><code class="r">## Example 1 (download from dropbox)
 # download transcript of the debate to working directory
@@ -1083,6 +1091,7 @@ delete(qcv(qdap.pdf, R-intro.pdf))</code></pre>
 
 <h3 id="cleaning">Cleaning/Preparing the Data</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/bracketX.html" target="_blank">
@@ -1098,7 +1107,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/clean.html" target="_blank">
-    <input type="submit" value="clean"> - <a href="#esc">Remove Escaped Characters</a>
+    <input type="submit" value="clean"> - <a href="#clean">Remove Escaped Characters</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/incomplete.replace.html" target="_blank">
@@ -1160,14 +1169,87 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/Trim.html" target="_blank">
     <input type="submit" value="Trim"> - <a href="#clean">Remove Leading/Trailing White Space</a>
 </form>
-<hr>
+</div>
 
 
 <h4 id="na">Search for Potential Missing Values</h4>
-<h4 id="mark">Remove Rows That Contain Markers</h4>
-<h4 id="clean">Remove Spaces and Escaped Characters</h4> 
 
-<font size="5" color="gold">&diams;</font> **Cleaning Spaces and Escaped Characters**<font size="5" color="gold">&diams;</font>
+After reading in data and viewing it the researcher will want to find text rows that do not contain proper punctuation and or that contain punctuation and no text.  This is accomplished with the <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions and <a href="http://trinker.github.io/qdap_dev/potential_NA.html" target="_blank"><code>potential_NA</code></a> functions as the researcher manually parses the original transcripts, makes alterations and re-reads the data back into qdap.  This important procedure is not an automatic process, requiring that the researcher give attention to detail.
+
+
+```r
+## Create a data set with punctuation and no text
+DATA$state[c(3, 7, 10)] <- c(".", ".", NA)
+DATA
+```
+
+```
+##        person sex adult                                 state code
+## 1         sam   m     0         Computer is fun. Not too fun.   K1
+## 2        greg   m     0               No it's not, it's dumb.   K2
+## 3     teacher   m     1                                     .   K3
+## 4         sam   m     0                  You liar, it stinks!   K4
+## 5        greg   m     0               I am telling the truth!   K5
+## 6       sally   f     0                How can we be certain?   K6
+## 7        greg   m     0                                     .   K7
+## 8         sam   m     0                       I distrust you.   K8
+## 9       sally   f     0           What are you talking about?   K9
+## 10 researcher   f     1                                  <NA>  K10
+## 11       greg   m     0 I'm hungry.  Let's eat.  You already?  K11
+```
+
+```r
+potential_NA(DATA$state, 20)
+```
+
+```
+##   row            text
+## 1   3               .
+## 2   7               .
+## 3   8 I distrust you.
+```
+
+```r
+potential_NA(DATA$state)
+```
+
+```
+##   row text
+## 1   3    .
+## 2   7    .
+```
+
+```r
+# USE TO SELCTIVELY REPLACE CELLS WITH MISSING VALUES
+DATA$state[potential_NA(DATA$state, 20)$row[-c(3)]] <- NA
+DATA
+```
+
+```
+##        person sex adult                                 state code
+## 1         sam   m     0         Computer is fun. Not too fun.   K1
+## 2        greg   m     0               No it's not, it's dumb.   K2
+## 3     teacher   m     1                                  <NA>   K3
+## 4         sam   m     0                  You liar, it stinks!   K4
+## 5        greg   m     0               I am telling the truth!   K5
+## 6       sally   f     0                How can we be certain?   K6
+## 7        greg   m     0                                  <NA>   K7
+## 8         sam   m     0                       I distrust you.   K8
+## 9       sally   f     0           What are you talking about?   K9
+## 10 researcher   f     1                                  <NA>  K10
+## 11       greg   m     0 I'm hungry.  Let's eat.  You already?  K11
+```
+
+```r
+## Reset DATA
+DATA <- qdap::DATA
+```
+
+
+<h4 id="mark">Remove Rows That Contain Markers</h4>
+<h4 id="clean">Remove Extra Spaces and Escaped Characters</h4> 
+
+<font size="5" color="orange">&diams;</font> **Remove Extra Spaces and Escaped Characters**<font size="5" color="orange">&diams;</font>
 
 ```r
 x1 <- "I go \r
@@ -1229,7 +1311,7 @@ scrubber(x3, TRUE)
 
 <h4 id="bracket">Bracket/General Chunk Extraction <a href="http://youtu.be/B4lvZGo_6bA" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
 </h4>    
-<font size="5" color="gold">&diams;</font> **Extracting Chunks 1**- *bracketX/bracketXtract* <font size="5" color="gold">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Extracting Chunks 1**- *bracketX/bracketXtract* <font size="5" color="orange">&diams;</font>
 
 ```r
 ## A fake data set
@@ -1426,7 +1508,7 @@ paste2(bracketXtract(examp$text, "curly"), " ")
 
 The researcher may need a more general extraction method that allows for any left/right boundaries to be specified.  This is useful in that many qualitative transciption/coding programs have specific syntax for various dialogue markup for events that must be parsed from the data set.  The <a href="http://trinker.github.io/qdap_dev/genX.html" target="_blank"><code>genX</code></a> and <a href="http://trinker.github.io/qdap_dev/genXtract.html" target="_blank"><code>genXtract</code></a> functions have such capabilities.
 
-<font size="5" color="gold">&diams;</font> **Extracting Chunks 2**- *genX/genXtract* <font size="5" color="gold">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Extracting Chunks 2**- *genX/genXtract* <font size="5" color="orange">&diams;</font>
 
 ```r
 DATA$state  ## Look at the difference in number 1 and 10
@@ -1519,9 +1601,11 @@ genXtract(x2, c("L1", 98), c("L2", 99))
 
 
 <h4 id="grab">Grab Begin/End of String to Character</h4>
+<h4 id="inc">Denote Incomplete End Marks With "|"</h4> 
 
 <h3 id="reshaping">Reshaping the Data</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/adjacency_matrix.html" target="_blank">
@@ -1571,9 +1655,11 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/speakerSplit.html" target="_blank">
     <input type="submit" value="speakerSplit"> - Break and Stretch if Multiple Persons per Cell
 </form>
+</div>
 
 <h3 id="word">Extract/Analyze Words</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/all_words.html" target="_blank">
@@ -1619,9 +1705,11 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/word_list.html" target="_blank">
     <input type="submit" value="word_list"> - Raw Word Lists/Frequency Counts
 </form>
+</div>
 
 <h3 id="coding">Qualitative Coding System</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank">
@@ -1691,10 +1779,11 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/cm_time2long.html" target="_blank">
     <input type="submit" value="cm_time2long"> - Transform Codes to Start-End Times
 </form>
-
+</div>
 
 <h3 id="counts">Word Counts and Descriptive Statistics</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/distTab.html" target="_blank">
@@ -1752,10 +1841,11 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank">
     <input type="submit" value="word_stats"> - Descriptive Word Statistics
 </form>
-
+</div>
 
 <h3 id="measures">Word Measures and Scoring</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/automated_readability_index.html" target="_blank">
@@ -1781,10 +1871,11 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/polarity.html" target="_blank">
     <input type="submit" value="polarity"> - Polarity Score (Sentiment Analysis)
 </form>
-
+</div>
 
 <h3 id="visualization">Visualizing Discourse Data</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/gradient_cloud.html" target="_blank">
@@ -1819,10 +1910,11 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/word.network.plot.html" target="_blank">
     <input type="submit" value="word.network.plot"> - Word Network Plot
 </form>
-
+</div>
 
 <h3 id="id">ID Sentences</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/end_inc.html" target="_blank">
@@ -1840,11 +1932,12 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/NAer.html" target="_blank">
     <input type="submit" value="NAer"> - Replace Missing Values (NA)
 </form>
+</div>
 
 <h3 id="data">Data Sets</h3>
 
-The following functions will be utilized in this section (click to view more):    
-
+<div class="textbox", style="background-color: #D6EFD6;"> 
+The following data sets are included with qdap (click to view more)
 <form action="http://trinker.github.io/qdap_dev/DATA.html" target="_blank">
     <input type="submit" value="DATA"> - Fictitious Classroom Dialogue
 </form>
@@ -1904,9 +1997,113 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/rajSPLIT.html" target="_blank">
     <input type="submit" value="rajSPLIT"> - Romeo and Juliet (Complete & Split)
 </form>
+</div>
+
+
 
 
 <h3 id="dict">Dictionaries and Word Lists</h3>
+
+<div class="textbox", style="background-color: #D6EFD6;"> 
+The following dictionaries/word lists are utilized by qdap (click to view more)
+
+<form action="http://trinker.github.io/qdapDictionaries//abbreviations.html" target="_blank" ">
+    <input type="submit" value="abbreviations"> - Small Abbreviations Data Set
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//action.verbs.html" target="_blank" ">
+    <input type="submit" value="action.verbs"> - Action Word List
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//adverb.html" target="_blank" ">
+    <input type="submit" value="adverb"> - Adverb Word List
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//BuckleySaltonSWL.html" target="_blank" ">
+    <input type="submit" value="BuckleySaltonSWL"> - Buckley & Salton Stopword List
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//contractions.html" target="_blank" ">
+    <input type="submit" value="contractions"> - Contraction Conversions
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//DICTIONARY.html" target="_blank" ">
+    <input type="submit" value="DICTIONARY"> - Nettalk Corpus Syllable Data Set
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//emoticon.html" target="_blank" ">
+    <input type="submit" value="emoticon"> - Emoticons Data Set
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//env.syl.html" target="_blank" ">
+    <input type="submit" value="env.syl"> - Syllable Lookup Environment
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//env.syn.html" target="_blank" ">
+    <input type="submit" value="env.syn"> - Syllable Lookup Environment
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//increase.amplification.words.html" target="_blank" ">
+    <input type="submit" value="increase.amplification.words"> - Amplifying Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//interjections.html" target="_blank" ">
+    <input type="submit" value="interjections"> - Interjections
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//labMT.html" target="_blank" ">
+    <input type="submit" value="labMT"> - Language Assessment by Mechanical Turk (labMT) Sentiment Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//NAMES.html" target="_blank" ">
+    <input type="submit" value="NAMES"> - First Names and Gender (U.S.)
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//NAMES_SEX.html" target="_blank" ">
+    <input type="submit" value="NAMES_SEX"> - First Names and Predictive Gender (U.S.)
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//NAMES_LIST.html" target="_blank" ">
+    <input type="submit" value="NAMES_LIST"> - First Names and Predictive Gender (U.S.) List
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//negation.words.html" target="_blank" ">
+    <input type="submit" value="negation.words"> - Negating Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//negative.words.html" target="_blank" ">
+    <input type="submit" value="negative.words"> - Negative Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//OnixTxtRetToolkitSWL1.html" target="_blank" ">
+    <input type="submit" value="OnixTxtRetToolkitSWL1"> - Onix Text Retrieval Toolkit Stopword List 1
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//positive.words.html" target="_blank" ">
+    <input type="submit" value="positive.words"> - Positive Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//preposition.html" target="_blank" ">
+    <input type="submit" value="preposition"> - Preposition Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//SYNONYM.html" target="_blank" ">
+    <input type="submit" value="SYNONYM"> - Synonyms Data Set
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//Top100Words.html" target="_blank" ">
+    <input type="submit" value="Top100Words"> - Fry's  100 Most Commonly Used English Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//Top200Words.html" target="_blank" ">
+    <input type="submit" value="Top200Words"> - Fry's 200 Most Commonly Used English Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//Top25Words.html" target="_blank" ">
+    <input type="submit" value="Top25Words"> - Fry's 25 Most Commonly Used English Words
+</form>
+</div>
+
 <h3 id="install">Installation Issues</h3>
 
 <h4>Java Issues</h3>
@@ -1921,6 +2118,7 @@ For more see <a href="http://www.r-statistics.com/2012/08/how-to-load-the-rjava-
 
 The qdap package was my first R package and a learning process. Several people contributed immensely to my learning. I'd like to particularly thank <a href="https://github.com/Dasonk/" target="_blank">Dason Kurkiewicz</a> for his constant mentoring/assistance in learning the R language, GitHub and package development as well as collaboration on numerous qdap functions. Thank you to <a href="https://twitter.com/bryangoodrich" target="_blank">Bryan Goodrich</a> for his teaching, feedback and collaboration on serveral qdap functions. Thank you to <a href="https://github.com/hadley" target="_blank">Dr. Hadley Wickham</a> for roxygen2, ggplot2, devtools and GitHub repos which I referenced often. I'd also like to thank the many folks at <a href="http://www.talkstats.com/" target="_blank">talkstats.com</a> and <a href="http://stackoverflow.com/questions/tagged/r" target="_blank">stackoverflow.com</a> for their help in answering many R questions related to qdap.
 
+<hr> 
 
 ## Improvements
 

@@ -234,3 +234,24 @@ body {
     margin: 5em auto auto 7em;
 }
 
+.middleDiv {
+    text-align: center;
+    width: 70%;
+    margin: auto;
+    background-color: #F5F5F5;
+    border-radius: 5px; 
+    padding:10px; 
+    border: 1px solid black;
+}
+.funs {
+    background-color: #FFFFCC;
+    border-radius: 5px; 
+    padding:10px; 
+    border: 1px solid black;
+}
+
+.textbox {
+    border-radius: 5px; 
+    padding:10px; 
+    border: 1px solid black;
+}

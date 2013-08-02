@@ -134,12 +134,13 @@ names(NAMES_LIST) <- LETTERS
 #==========================
 # Vignette copy
 #==========================
-path <- file.path("C:/Users/trinker/GitHub", "qdap_1.0.0.tar.gz")
-install.packages(path,  repos = NULL, type="source")
+#path <- file.path("C:/Users/trinker/GitHub", "qdap_1.0.0.tar.gz")
+#install.packages(path,  repos = NULL, type="source")
 
 ##  browseVignettes(package = 'qdap')
 
-root <- system.file("doc/qdap_vignette.html", package = "qdap")
+#root <- system.file("doc/qdap_vignette.html", package = "qdap")
+root <- "C:/Users/trinker/GitHub/qdap/vignettes/qdap_vignette.html"
 new <- "C:/Users/trinker/Dropbox/Public/packages"
 file.copy(root, new, TRUE, TRUE)
 

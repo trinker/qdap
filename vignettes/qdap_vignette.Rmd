@@ -59,7 +59,7 @@ The following vignette is a loose chronological road map for utilizing the tools
 <div style="float: right; width: 50%;">
 <ul>
 <div><b>Symbol Conventions:</b></div>  
-<div>`r FT(gold, 5, text="&diams;")` = Example (R code)    </div> 
+<div>`r FT(orange, 5, text="&diams;")` = Example (R code)    </div> 
 <div><b>`r FT(firebrick, 5, text="[YT]")`</b> = Video Demo (click to watch)    </div> 
 </ul>
 </div>
@@ -129,14 +129,14 @@ invisible(lapply(1:nrow(dat2), function(i) {
 
 <h3 id="project">Starting a New Project `r yt("http://youtu.be/u8AJiyMffmc")`</h3>
 
-
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/new_project.html" target="_blank">
     <input type="submit" value="new_project"> - Project Template
 </form>
+</div>
 
-<hr>
 
 The function `r FUN("new_project")` is designed to generate project template of multiple nested directories that organize and guide the researcher through a qualitative study, from data collection to analysis and report/presentation generation.  This workflow framework will enable the researcher to be better organized and more efficient in all stages of the research process.  `r FUN("new_project")` utilizes the `r HR2("http://cran.r-project.org/web/packages/reports/reports.pdf", "reports package")` `r citep(bib[["Rinker2013b"]])` 
 
@@ -170,6 +170,7 @@ The `r FUN("new_project")` template is designed to be utilized with `r HR2("http
 
 <h3 id="import_export">Import/Export Discourse Data</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/condense.html" target="_blank">
@@ -187,10 +188,11 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank">
     <input type="submit" value="read.transcript"> - `r HR("#readin", "Read Transcripts Into R")`
 </form>
+</div>
 
 <h4 id="readin">Reading In Transcript Data `r yt("http://youtu.be/UxgOScggLBg")`</h4>    
 
-This subsection covers how to read in transcript data.  Generally the researcher will have data stored as a .docx (Microsoft Word or Open/Libre Office) or .xlsx/.csv (spreadsheet format).  Two functions are useful for reading in data, `r FUN("read.transcript")` and `r FUN("dir_map")`.  `r FUN("read.transcript")` detects file type (.docx/.csv/.xlsx) and reads in a single transcipt whereas `r FUN("dir_map")` generates code that utilizes `r FUN("read.transcript")` for each of the multiple transcripts in a single directory.  Note that `r FUN("read.transcript")` expects a two column formatted transcript (usually with person on the left and dialogue on the right).
+This subsection covers how to read in transcript data.  Generally the researcher will have data stored as a .docx (Microsoft Word or Open/Libre Office) or .xlsx/.csv (spreadsheet format).  It is of great importance that the researcher manually writes/parses their transcripts to avoid potential analysis problems later.  All sentences should contain appropriate qdap punctuation (declarative = ., interrogative = ?, exclamatory = !, interupted = | or `r FUN("imperative")` = *., *?, *!, *|).  Additionally, if a sentence contains an endmark/punctuation it should have accompanying text/dialogue.  Two functions are useful for reading in data, `r FUN("read.transcript")` and `r FUN("dir_map")`.  `r FUN("read.transcript")` detects file type (.docx/.csv/.xlsx) and reads in a single transcipt whereas `r FUN("dir_map")` generates code that utilizes `r FUN("read.transcript")` for each of the multiple transcripts in a single directory.  Note that `r FUN("read.transcript")` expects a two column formatted transcript (usually with person on the left and dialogue on the right).
 
 Five arguments are of particular importance to read.transcript: 
 
@@ -228,7 +230,11 @@ to skip before beginning to read data.</p>
 
 Often transcripts contain extraneous material at the top and the argument `r CN("skip = ?")` must be used to skip these extra lines.  Some sort of unique separator must also be used to separate the person column from the text column.  By defualt `r CN('sep = ":"')` is assumed.  If your transcripts do no contain a separator one must be inserted manually.  Also note that the researcher may want to prepare the transcripts with brackets to denote non spoken annotations as well dialogue that is read rather than spoken.  For more on bracket parsing see `r HR("#bracket", "Bracket/General Chunk Extraction")`.
 
-`r FT(gold, 5, text="&diams;")` **Reading In Data**- *read.transcript* `r FT(gold, 5, text="&diams;")`
+<div class="middleDiv">
+<b>`r FT(red, 4, text="Note: It is important that all sentences contain valid qdap punctuation (<font face=\"courier\">.</font>, <font face=\"courier\">?</font>, <font face=\"courier\">!</font>, <font face=\"courier\">|</font>) in your transcripts.  Many qdap functions are dependant upon this assumption.")`</b>
+</div>
+
+`r FT(orange, 5, text="&diams;")` **Reading In Data**- *read.transcript* `r FT(orange, 5, text="&diams;")`
 <pre><code class="r">## Location of sample transcripts from the qdap package
 (doc1 <- system.file("extdata/transcripts/trans1.docx", package = "qdap"))
 (doc2 <- system.file("extdata/transcripts/trans2.docx", package = "qdap"))
@@ -338,7 +344,7 @@ read.transcript(text=trans)</code></pre>
 
 The `r FUN("dir_map")` function enables the researcher to produce multiple lines of code, one line with `r FUN("read.transcript")` for each file in a directory, which is then optionally copied to the clipboard for easy insertion into a script.  Note that setting the argument `r CN("use.path = FALSE")` may allow the code to be more portable in that a static path is not suppplied the the `r FUN("read.transcript")` scripts.
 
-`r FT(gold, 5, text="&diams;")` **Reading In Data**- *dir_map* `r FT(gold, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Reading In Data**- *dir_map* `r FT(orange, 5, text="&diams;")`
 
 <pre><code class="r">(DIR <- system.file("extdata/transcripts", package = "qdap"))
 dir_map(DIR)</code></pre>
@@ -357,7 +363,7 @@ The `r CN("mcsv_x")` family of functions are utilized to read (`r FUN("mcsv_r")`
 
 The `r FUN("mcsv_r")` function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the dataframes that are read in are also assigned to an inclusive list (name `L1` by defualt).
 
-`r FT(gold, 5, text="&diams;")` **Reading and Writing Multiple csvs** `r FT(gold, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Reading and Writing Multiple csvs** `r FT(orange, 5, text="&diams;")`
 
 ```{r, eval=FALSE}
 ## Make new minimal data sets
@@ -386,7 +392,7 @@ bots_stink
 delete("foo")
 ```
 
-`r FT(gold, 5, text="&diams;")` **Writing Lists of Dataframes to csvs** `r FT(gold, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Writing Lists of Dataframes to csvs** `r FT(orange, 5, text="&diams;")`
 ```{r, eval=FALSE}
 ## poldat and termco produce lists of dataframes
 poldat <- with(DATA, polarity(state, person))
@@ -405,6 +411,7 @@ delete("foo2")
 
 <h3 id="viewing">View the Data</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank">
@@ -418,6 +425,7 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/Search.html" target="_blank">
     <input type="submit" value="Search"> - `r HR("#search", "Search Columns of a Dataframe")`
 </form>
+</div>
 
 The nature of dialogue data makes it large and cumbersome to view in R.  This section explores qdap tools designed for more comfortable viewing of R dialogue oriented text dataframes.  
 
@@ -426,7 +434,7 @@ The nature of dialogue data makes it large and cumbersome to view in R.  This se
 The <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions (trunc + dataframe = `r FUN("truncdf")`) are designed to truncate the width of columns and number of rows in dataframes and lists of dataframes.  The `r CN("l")` and `r CN("h")` in front of `r CN("trunc")` stands for <b><font color="blue">l</font>ist</b> and <b><font color="blue">h</font>ead</b> and are extensions of `r FUN("truncdf")`.  `r FUN("qview")` is a wrapper for `r FUN("htruncdf")` that also displays number of rows,columns, and the dataframe name.
 
 
-`r FT(gold, 5, text="&diams;")` **Truncated Data Viewing** `r FT(gold, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Truncated Data Viewing** `r FT(orange, 5, text="&diams;")`
 
 ```{r}
 truncdf(raj[1:10, ])
@@ -476,7 +484,7 @@ ltruncdf(rajPOS, width = 4)
 
 By defualt text data (character vectors) are displayed as right justified in R.  This can be difficult and unnatural to read, particularly as the length of the sentences increase.  The `r FUN("left.just")` function creates a more natural left justification of text.  Note that `r FUN("left.just")` inserts spaces to achieve the justification. This could interfere with analysis and therefore the output from `r FUN("left.just")` should only be used for visualization purposes, not analysis.
 
-`r FT(gold, 5, text="&diams;")` **Justified Data Viewing** `r FT(gold, 5, text="&diams;")`    
+`r FT(orange, 5, text="&diams;")` **Justified Data Viewing** `r FT(orange, 5, text="&diams;")`    
 
 ```{r}
 ## The unnatural state of R text data
@@ -493,7 +501,7 @@ right.just(left.just(CO2[1:15,]))
 
 A task of many analyses is to search a dataframe for a particular phrase and return those rows/observations that contain that term.  The researcher may optionally choose to specify a particular column to search (`r CN("column.name")`) or search the entire dataframe.
 
-`r FT(gold, 5, text="&diams;")` **Search Dataframes** `r FT(gold, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Search Dataframes** `r FT(orange, 5, text="&diams;")`
 
 ```{r}
 (SampDF <- data.frame("islands"=names(islands)[1:32],mtcars, row.names=NULL))
@@ -512,8 +520,8 @@ Search(SampDF, 19, "qsec", max.distance = 0)
 
 This manual arranges functions into categories in the order a researcher is likely to use them.  The Generic qdap Tools section does not fit this convention, however, because these tools may be used throughout all stages of analysis it is important that the reader is familiar with them.  It is important to note that after reading in transcript data the researcher will likely that the next step is the need to parse the dataframe utilizing the techniques found in the `r HR("#cleaning", "Cleaning/Preparing the Data")` section.
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
-
 
 <form action="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank">
     <input type="submit" value="hms2sec"> - `r HR("#time", "Convert h:m:s to Seconds")` 
@@ -534,13 +542,13 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/url_dl.html" target="_blank">
     <input type="submit" value="url_dl"> - `r HR("#urldl", "Download Instructional Documents")`
 </form>
-
+</div>
 
 <h4 id="qcv">Quick Character Vector</h4> 
 
 Often it can be tedious to supply quotes to character vectors when dealing with large vectors.  `r FUN("qcv")` replaces the typical `r  CN('c("A", "B", "C", "...")')` approach to creating character vectors.  Instead the user supplies `r CN("qcv(A, B, C, ...)")`.  This format assumes single words separated by commas.  If your data/string does not fit this approach the combined `terms` and `split` argument can be utilized.
 
-`r FT(gold, 5, text="&diams;")` **Quick Character Vector** `r FT(gold, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Quick Character Vector** `r FT(orange, 5, text="&diams;")`
 
 ```{r}
 qcv(I, like, dogs)
@@ -555,7 +563,7 @@ qcv(terms = "mpg cyl  disp  hp drat    wt  qsec vs am gear carb")
 
 Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The `r FUN("lookup")` function provides a fast enviroment lookup for this type of usage.
 
-`r FT(gold, 5, text="&diams;")` **Dictionary/Look Up Examples** `r FT(gold, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Dictionary/Look Up Examples** `r FT(orange, 5, text="&diams;")`
 
 ```{r}
 lookup(1:5, data.frame(1:4, 11:14))
@@ -599,7 +607,7 @@ lookup(mtcars$carb, sort(unique(mtcars$carb)),
 
 Researchers dealing with transcripts may have the need to convert between traditional Hours:Minutes:Seconds format and seconds.  `r FUN("hms2sec")` and `r FUN("sec2hms")` such functionalit.
 
-`r FT(gold, 5, text="&diams;")` **Time Conversion Examples** `r FT(gold, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Time Conversion Examples** `r FT(orange, 5, text="&diams;")`
 
 ```{r}
 hms2sec(c("02:00:03", "04:03:01"))
@@ -611,7 +619,7 @@ sec2hms(c(256, 3456, 56565))
  
 `r FUN("url_dl")` is a function used to provide qdap users with examples taken from the Internet.  It is useful for most document downloads from the Internet.
 
-`r FT(gold, 5, text="&diams;")` **url_dl Examples** `r FT(gold, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **url_dl Examples** `r FT(orange, 5, text="&diams;")`
 
 <pre><code class="r">## Example 1 (download from dropbox)
 # download transcript of the debate to working directory
@@ -637,6 +645,7 @@ delete(qcv(qdap.pdf, R-intro.pdf))</code></pre>
 
 <h3 id="cleaning">Cleaning/Preparing the Data</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/bracketX.html" target="_blank">
@@ -714,14 +723,30 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/Trim.html" target="_blank">
     <input type="submit" value="Trim"> - `r HR("#clean", "Remove Leading/Trailing White Space")`
 </form>
-<hr>
+</div>
 
 
 <h4 id="na">Search for Potential Missing Values</h4>
-<h4 id="mark">Remove Rows That Contain Markers</h4>
-<h4 id="clean">Remove Spaces and Escaped Characters</h4> 
 
-`r FT(gold, 5, text="&diams;")` **Cleaning Spaces and Escaped Characters**`r FT(gold, 5, text="&diams;")`
+After reading in data and viewing it the researcher will want to find text rows that do not contain proper punctuation and or that contain punctuation and no text.  This is accomplished with the <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions and `r FUN("potential_NA")` functions as the researcher manually parses the original transcripts, makes alterations and re-reads the data back into qdap.  This important procedure is not an automatic process, requiring that the researcher give attention to detail.
+
+```{r}
+## Create a data set with punctuation and no text
+DATA$state[c(3, 7, 10)] <- c(".", ".", NA)
+DATA
+potential_NA(DATA$state, 20)
+potential_NA(DATA$state)
+# USE TO SELCTIVELY REPLACE CELLS WITH MISSING VALUES
+DATA$state[potential_NA(DATA$state, 20)$row[-c(3)]] <- NA
+DATA
+## Reset DATA
+DATA <- qdap::DATA
+```
+
+<h4 id="mark">Remove Rows That Contain Markers</h4>
+<h4 id="clean">Remove Extra Spaces and Escaped Characters</h4> 
+
+`r FT(orange, 5, text="&diams;")` **Remove Extra Spaces and Escaped Characters**`r FT(orange, 5, text="&diams;")`
 ```{r}
 x1 <- "I go \r
     to the \tnext line"
@@ -748,7 +773,7 @@ scrubber(x3, TRUE)
 
 
 <h4 id="bracket">Bracket/General Chunk Extraction `r yt("http://youtu.be/B4lvZGo_6bA")`</h4>    
-`r FT(gold, 5, text="&diams;")` **Extracting Chunks 1**- *bracketX/bracketXtract* `r FT(gold, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Extracting Chunks 1**- *bracketX/bracketXtract* `r FT(orange, 5, text="&diams;")`
 ```{r}
 ## A fake data set
 examp <- structure(list(person = structure(c(1L, 2L, 1L, 3L),
@@ -777,7 +802,7 @@ paste2(bracketXtract(examp$text, "curly"), " ")
 
 The researcher may need a more general extraction method that allows for any left/right boundaries to be specified.  This is useful in that many qualitative transciption/coding programs have specific syntax for various dialogue markup for events that must be parsed from the data set.  The `r FUN("genX")` and `r FUN("genXtract")` functions have such capabilities.
 
-`r FT(gold, 5, text="&diams;")` **Extracting Chunks 2**- *genX/genXtract* `r FT(gold, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Extracting Chunks 2**- *genX/genXtract* `r FT(orange, 5, text="&diams;")`
 ```{r}
 DATA$state  ## Look at the difference in number 1 and 10
 
@@ -799,10 +824,11 @@ genXtract(x2, c("L1", 98), c("L2", 99))
 ```
 
 <h4 id="grab">Grab Begin/End of String to Character</h4>
-<h4 id="inc">Denote Incomplete End Marks With “|”</h4> 
+<h4 id="inc">Denote Incomplete End Marks With "|"</h4> 
 
 <h3 id="reshaping">Reshaping the Data</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/adjacency_matrix.html" target="_blank">
@@ -852,9 +878,11 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/speakerSplit.html" target="_blank">
     <input type="submit" value="speakerSplit"> - Break and Stretch if Multiple Persons per Cell
 </form>
+</div>
 
 <h3 id="word">Extract/Analyze Words</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/all_words.html" target="_blank">
@@ -900,9 +928,11 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/word_list.html" target="_blank">
     <input type="submit" value="word_list"> - Raw Word Lists/Frequency Counts
 </form>
+</div>
 
 <h3 id="coding">Qualitative Coding System</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank">
@@ -972,10 +1002,11 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/cm_time2long.html" target="_blank">
     <input type="submit" value="cm_time2long"> - Transform Codes to Start-End Times
 </form>
-
+</div>
 
 <h3 id="counts">Word Counts and Descriptive Statistics</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/distTab.html" target="_blank">
@@ -1033,10 +1064,11 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank">
     <input type="submit" value="word_stats"> - Descriptive Word Statistics
 </form>
-
+</div>
 
 <h3 id="measures">Word Measures and Scoring</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/automated_readability_index.html" target="_blank">
@@ -1062,10 +1094,11 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/polarity.html" target="_blank">
     <input type="submit" value="polarity"> - Polarity Score (Sentiment Analysis)
 </form>
-
+</div>
 
 <h3 id="visualization">Visualizing Discourse Data</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/gradient_cloud.html" target="_blank">
@@ -1100,10 +1133,11 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/word.network.plot.html" target="_blank">
     <input type="submit" value="word.network.plot"> - Word Network Plot
 </form>
-
+</div>
 
 <h3 id="id">ID Sentences</h3>
 
+<div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/end_inc.html" target="_blank">
@@ -1121,11 +1155,12 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/NAer.html" target="_blank">
     <input type="submit" value="NAer"> - Replace Missing Values (NA)
 </form>
+</div>
 
 <h3 id="data">Data Sets</h3>
 
-The following functions will be utilized in this section (click to view more):    
-
+<div class="textbox", style="background-color: #D6EFD6;"> 
+The following data sets are included with qdap (click to view more)
 <form action="http://trinker.github.io/qdap_dev/DATA.html" target="_blank">
     <input type="submit" value="DATA"> - Fictitious Classroom Dialogue
 </form>
@@ -1185,9 +1220,143 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/rajSPLIT.html" target="_blank">
     <input type="submit" value="rajSPLIT"> - Romeo and Juliet (Complete & Split)
 </form>
+</div>
 
+```{r eval=FALSE, echo = FALSE}
+path <- "C:/Users/trinker/GitHub/trinker.github.com/qdapDictionaries"
+#  path <- "C:/Users/trinker/GitHub/trinker.github.com/qdap"
+URL <- "http://trinker.github.io/qdapDictionaries/"
+
+
+inds <- readLines(file.path(path, "index.html"))
+h3s <- grep("<h3", inds)
+h2s <- grep("<h2", inds)
+
+inds <- inds[head(h3s, 1):(tail(h2s, 1) - 1)]
+inds <- inds[7: tail(grep("</ul>", inds), 1)]
+#h3s <- grep("<h3", inds)
+#dat2 <- data.frame(start = h3s + 4, end = c(tail(h3s, -1) - 1, length(inds)))
+
+inds <- inds[grep("<code>", inds)]
+inds <- substring(inds, 9)
+
+library(qdap)
+
+dat <- data.frame(x = unlist(genXtract(inds, ".html\">", "</a>")),
+    y = unlist(genXtract(inds, "<br />", "</li>")), row.names = NULL)
+
+m <- lapply(1:nrow(dat), function(i) dat[i, ])
+
+rws <-  lapply(m, function(x) {
+  paste0("<form action=\"", file.path(URL, paste0(x[[1]], ".html\"")), 
+    " target=\"_blank\" \">\n", "    <input type=\"submit\" value=\"", x[[1]], "\"> - ", x[[2]], "\n</form>", "\n")
+})
+
+cat(paste(unlist(rws), collapse="\n"))
+```
 
 <h3 id="dict">Dictionaries and Word Lists</h3>
+
+<div class="textbox", style="background-color: #D6EFD6;"> 
+The following dictionaries/word lists are utilized by qdap (click to view more)
+
+<form action="http://trinker.github.io/qdapDictionaries//abbreviations.html" target="_blank" ">
+    <input type="submit" value="abbreviations"> - Small Abbreviations Data Set
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//action.verbs.html" target="_blank" ">
+    <input type="submit" value="action.verbs"> - Action Word List
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//adverb.html" target="_blank" ">
+    <input type="submit" value="adverb"> - Adverb Word List
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//BuckleySaltonSWL.html" target="_blank" ">
+    <input type="submit" value="BuckleySaltonSWL"> - Buckley & Salton Stopword List
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//contractions.html" target="_blank" ">
+    <input type="submit" value="contractions"> - Contraction Conversions
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//DICTIONARY.html" target="_blank" ">
+    <input type="submit" value="DICTIONARY"> - Nettalk Corpus Syllable Data Set
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//emoticon.html" target="_blank" ">
+    <input type="submit" value="emoticon"> - Emoticons Data Set
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//env.syl.html" target="_blank" ">
+    <input type="submit" value="env.syl"> - Syllable Lookup Environment
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//env.syn.html" target="_blank" ">
+    <input type="submit" value="env.syn"> - Syllable Lookup Environment
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//increase.amplification.words.html" target="_blank" ">
+    <input type="submit" value="increase.amplification.words"> - Amplifying Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//interjections.html" target="_blank" ">
+    <input type="submit" value="interjections"> - Interjections
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//labMT.html" target="_blank" ">
+    <input type="submit" value="labMT"> - Language Assessment by Mechanical Turk (labMT) Sentiment Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//NAMES.html" target="_blank" ">
+    <input type="submit" value="NAMES"> - First Names and Gender (U.S.)
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//NAMES_SEX.html" target="_blank" ">
+    <input type="submit" value="NAMES_SEX"> - First Names and Predictive Gender (U.S.)
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//NAMES_LIST.html" target="_blank" ">
+    <input type="submit" value="NAMES_LIST"> - First Names and Predictive Gender (U.S.) List
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//negation.words.html" target="_blank" ">
+    <input type="submit" value="negation.words"> - Negating Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//negative.words.html" target="_blank" ">
+    <input type="submit" value="negative.words"> - Negative Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//OnixTxtRetToolkitSWL1.html" target="_blank" ">
+    <input type="submit" value="OnixTxtRetToolkitSWL1"> - Onix Text Retrieval Toolkit Stopword List 1
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//positive.words.html" target="_blank" ">
+    <input type="submit" value="positive.words"> - Positive Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//preposition.html" target="_blank" ">
+    <input type="submit" value="preposition"> - Preposition Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//SYNONYM.html" target="_blank" ">
+    <input type="submit" value="SYNONYM"> - Synonyms Data Set
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//Top100Words.html" target="_blank" ">
+    <input type="submit" value="Top100Words"> - Fry's  100 Most Commonly Used English Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//Top200Words.html" target="_blank" ">
+    <input type="submit" value="Top200Words"> - Fry's 200 Most Commonly Used English Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries//Top25Words.html" target="_blank" ">
+    <input type="submit" value="Top25Words"> - Fry's 25 Most Commonly Used English Words
+</form>
+</div>
+
 <h3 id="install">Installation Issues</h3>
 
 <h4>Java Issues</h3>
@@ -1202,6 +1371,7 @@ For more see <a href="http://www.r-statistics.com/2012/08/how-to-load-the-rjava-
 
 The qdap package was my first R package and a learning process. Several people contributed immensely to my learning. I'd like to particularly thank `r HR2("https://github.com/Dasonk/", "Dason Kurkiewicz")` for his constant mentoring/assistance in learning the R language, GitHub and package development as well as collaboration on numerous qdap functions. Thank you to `r HR2("https://twitter.com/bryangoodrich", "Bryan Goodrich")` for his teaching, feedback and collaboration on serveral qdap functions. Thank you to `r HR2("https://github.com/hadley", "Dr. Hadley Wickham")` for roxygen2, ggplot2, devtools and GitHub repos which I referenced often. I'd also like to thank the many folks at `r HR2("http://www.talkstats.com/", "talkstats.com")` and `r HR2("http://stackoverflow.com/questions/tagged/r", "stackoverflow.com")` for their help in answering many R questions related to qdap.
 
+<hr> 
 
 ## Improvements
 

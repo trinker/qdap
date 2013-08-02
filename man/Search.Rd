@@ -30,7 +30,7 @@
 }
 \examples{
 \dontrun{
-(SampDF <- data.frame("islands"=names(islands)[1:32],mtcars))
+(SampDF <- data.frame("islands"=names(islands)[1:32],mtcars, row.names=NULL))
 
 Search(SampDF, "Cuba", "islands")
 Search(SampDF, "New", "islands")
