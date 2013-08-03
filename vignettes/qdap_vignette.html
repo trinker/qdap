@@ -1385,133 +1385,12 @@ The following functions will be utilized in this section (click to view more):
 </form>
 </div>
 
-<h4 id="na">Search for Potential Missing Values</h4>
-
-<p>After reading in data and viewing it the researcher will want to find text rows that do not contain proper punctuation and or that contain punctuation and no text.  This is accomplished with the <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions and <a href="http://trinker.github.io/qdap_dev/potential_NA.html" target="_blank"><code>potential_NA</code></a> functions as the researcher manually parses the original transcripts, makes alterations and re-reads the data back into qdap.  This important procedure is not an automatic process, requiring that the researcher give attention to detail.</p>
-
-<pre><code class="r">## Create a data set with punctuation and no text
-DATA$state[c(3, 7, 10)] &lt;- c(&quot;.&quot;, &quot;.&quot;, NA)
-DATA
-</code></pre>
-
-<pre><code>##        person sex adult                                 state code
-## 1         sam   m     0         Computer is fun. Not too fun.   K1
-## 2        greg   m     0               No it&#39;s not, it&#39;s dumb.   K2
-## 3     teacher   m     1                                     .   K3
-## 4         sam   m     0                  You liar, it stinks!   K4
-## 5        greg   m     0               I am telling the truth!   K5
-## 6       sally   f     0                How can we be certain?   K6
-## 7        greg   m     0                                     .   K7
-## 8         sam   m     0                       I distrust you.   K8
-## 9       sally   f     0           What are you talking about?   K9
-## 10 researcher   f     1                                  &lt;NA&gt;  K10
-## 11       greg   m     0 I&#39;m hungry.  Let&#39;s eat.  You already?  K11
-</code></pre>
-
-<pre><code class="r">potential_NA(DATA$state, 20)
-</code></pre>
-
-<pre><code>##   row            text
-## 1   3               .
-## 2   7               .
-## 3   8 I distrust you.
-</code></pre>
-
-<pre><code class="r">potential_NA(DATA$state)
-</code></pre>
-
-<pre><code>##   row text
-## 1   3    .
-## 2   7    .
-</code></pre>
-
-<pre><code class="r"># USE TO SELCTIVELY REPLACE CELLS WITH MISSING VALUES
-DATA$state[potential_NA(DATA$state, 20)$row[-c(3)]] &lt;- NA
-DATA
-</code></pre>
-
-<pre><code>##        person sex adult                                 state code
-## 1         sam   m     0         Computer is fun. Not too fun.   K1
-## 2        greg   m     0               No it&#39;s not, it&#39;s dumb.   K2
-## 3     teacher   m     1                                  &lt;NA&gt;   K3
-## 4         sam   m     0                  You liar, it stinks!   K4
-## 5        greg   m     0               I am telling the truth!   K5
-## 6       sally   f     0                How can we be certain?   K6
-## 7        greg   m     0                                  &lt;NA&gt;   K7
-## 8         sam   m     0                       I distrust you.   K8
-## 9       sally   f     0           What are you talking about?   K9
-## 10 researcher   f     1                                  &lt;NA&gt;  K10
-## 11       greg   m     0 I&#39;m hungry.  Let&#39;s eat.  You already?  K11
-</code></pre>
-
-<pre><code class="r">## Reset DATA
-DATA &lt;- qdap::DATA
-</code></pre>
-
-<h4 id="mark">Remove Rows That Contain Markers</h4>
-
-<h4 id="clean">Remove Extra Spaces and Escaped Characters</h4> 
-
-<p><font size="5" color="orange">&diams;</font> <strong>Remove Extra Spaces and Escaped Characters</strong><font size="5" color="orange">&diams;</font></p>
-
-<pre><code class="r">x1 &lt;- &quot;I go \r
-    to the \tnext line&quot;
-x1
-</code></pre>
-
-<pre><code>## [1] &quot;I go \r\n    to the \tnext line&quot;
-</code></pre>
-
-<pre><code class="r">clean(x1)
-</code></pre>
-
-<pre><code>## [1] &quot;I go to the next line&quot;
-</code></pre>
-
-<pre><code class="r">x2 &lt;- c(&quot;  talkstats.com &quot;, &quot;   really? &quot;, &quot; yeah&quot;)
-Trim(x2)
-</code></pre>
-
-<pre><code>## [1] &quot;talkstats.com&quot; &quot;really?&quot;       &quot;yeah&quot;
-</code></pre>
-
-<pre><code class="r">x3 &lt;- c(&quot;I like 456 dogs\t  , don&#39;t you?\&quot;&quot;)
-scrubber(x3)
-</code></pre>
-
-<pre><code>## [1] &quot;I like 456 dogs, don&#39;t you?&quot;
-</code></pre>
-
-<pre><code class="r">scrubber(x3, TRUE)
-</code></pre>
-
-<pre><code>## [1] &quot;I like four hundred fifty six dogs, don&#39;t you?&quot;
-</code></pre>
-
-<h4 id="abr">Replace Abbreviations</h4>
-
-<h4 id="cons">Replace Contractions</h4>
-
-<h4 id="num">Replace Numbers With Text Representation</h4>
-
-<h4 id="symb">Replace Symbols With Word Equivalents</h4>
-
-<h4 id="qprep">Quick Preparation of Text</h4>
-
-<h4 id="spaste">Add Leading/Trailing Spaces</h4>
-
-<h4 id="fill">Replace Spaces</h4>
-
-<h4 id="mgsub">Multiple gsub</h4>
-
-<h4 id="caps">Capitalize Select Words</h4>
-
-<h4 id="nms">Names to Gender Prediction</h4>
-
-<h4 id="stem">Stem Text</h4>
-
 <h4 id="bracket">Bracket/General Chunk Extraction <a href="http://youtu.be/B4lvZGo_6bA" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
-</h4>    
+</h4>   
+
+<p>After reading in the data the researcher may want to remove all non-dialogue text from the transcript dataframe such as transcriber annotations.  This can be accomplished with the <a href="http://trinker.github.io/qdap_dev/bracketX.html" target="_blank"><code>bracketX</code></a> family of functions, which removes text found between two brackets (<font face="courier">( )</font>, <font face="courier">{ }</font>, <font face="courier">[ ]</font>, <font face="courier">&lt; &gt;</font>) or more generally using <a href="http://trinker.github.io/qdap_dev/genX.html" target="_blank"><code>genX</code></a> and <a href="http://trinker.github.io/qdap_dev/genXtract.html" target="_blank"><code>genXtract</code></a> to remove text between two character reference points. </p>
+
+<p>If the bracketed text is useful to analysis it is recommended that the researcher assigns the un-bracketed text to a new column.</p>
 
 <p><font size="5" color="orange">&diams;</font> <strong>Extracting Chunks 1</strong>- <em>bracketX/bracketXtract</em> <font size="5" color="orange">&diams;</font></p>
 
@@ -1522,7 +1401,6 @@ examp &lt;- structure(list(person = structure(c(1L, 2L, 1L, 3L),
     &quot;Me too! (laughter) It&#39;s so good.[interrupting]&quot;,
     &quot;Yep it&#39;s awesome {reading}.&quot;, &quot;Agreed. {is so much fun}&quot;)), .Names =
     c(&quot;person&quot;, &quot;text&quot;), row.names = c(NA, -4L), class = &quot;data.frame&quot;)
-
 examp
 </code></pre>
 
@@ -1563,9 +1441,7 @@ examp
 ## [4] &quot;Agreed.&quot;
 </code></pre>
 
-<pre><code class="r">
-
-bracketXtract(examp$text, &quot;square&quot;)
+<pre><code class="r">bracketXtract(examp$text, &quot;square&quot;)
 </code></pre>
 
 <pre><code>## $square1
@@ -1676,8 +1552,11 @@ bracketXtract(examp$text, &quot;square&quot;)
 ## [1] &quot;{is so much fun}&quot;
 </code></pre>
 
-<pre><code class="r">
-paste2(bracketXtract(examp$text, &quot;curly&quot;), &quot; &quot;)
+<p>Often a researcher will want to extract some text from the transcript and put it back together.  One example is the reconstructing of material read from a book, poem, play or other text.  This information is generally dispersed throughout the dialogue (within classroom/teaching procedures).   If this text is denoted with a particular identifying bracket such as curly braces this text can be extracted and then pasted back together.</p>
+
+<p><font size="5" color="orange">&diams;</font> <strong>Extracting Chunks 2</strong>- <em>Recombining Chunks</em> <font size="5" color="orange">&diams;</font></p>
+
+<pre><code class="r">paste2(bracketXtract(examp$text, &quot;curly&quot;), &quot; &quot;)
 </code></pre>
 
 <pre><code>## [1] &quot;reading is so much fun&quot;
@@ -1685,9 +1564,9 @@ paste2(bracketXtract(examp$text, &quot;curly&quot;), &quot; &quot;)
 
 <p>The researcher may need a more general extraction method that allows for any left/right boundaries to be specified.  This is useful in that many qualitative transciption/coding programs have specific syntax for various dialogue markup for events that must be parsed from the data set.  The <a href="http://trinker.github.io/qdap_dev/genX.html" target="_blank"><code>genX</code></a> and <a href="http://trinker.github.io/qdap_dev/genXtract.html" target="_blank"><code>genXtract</code></a> functions have such capabilities.</p>
 
-<p><font size="5" color="orange">&diams;</font> <strong>Extracting Chunks 2</strong>- <em>genX/genXtract</em> <font size="5" color="orange">&diams;</font></p>
+<p><font size="5" color="orange">&diams;</font> <strong>Extracting Chunks 3</strong>- <em>genX/genXtract</em> <font size="5" color="orange">&diams;</font></p>
 
-<pre><code class="r">DATA$state  ## Look at the difference in number 1 and 10
+<pre><code class="r">DATA$state  
 </code></pre>
 
 <pre><code>##  [1] &quot;Computer is fun. Not too fun.&quot;        
@@ -1703,7 +1582,7 @@ paste2(bracketXtract(examp$text, &quot;curly&quot;), &quot; &quot;)
 ## [11] &quot;I&#39;m hungry.  Let&#39;s eat.  You already?&quot;
 </code></pre>
 
-<pre><code class="r">
+<pre><code class="r">## Look at the difference in number 1 and 10 from above
 genX(DATA$state, c(&quot;is&quot;, &quot;we&quot;), c(&quot;too&quot;, &quot;on&quot;))
 </code></pre>
 
@@ -1720,8 +1599,7 @@ genX(DATA$state, c(&quot;is&quot;, &quot;we&quot;), c(&quot;too&quot;, &quot;on&
 ## [11] &quot;I&#39;m hungry. Let&#39;s eat. You already?&quot;
 </code></pre>
 
-<pre><code class="r">
-## A fake data set
+<pre><code class="r">## A fake data set
 x &lt;- c(&quot;Where is the /big dog#?&quot;,
     &quot;I think he&#39;s @arunning@b with /little cat#.&quot;)
 x
@@ -1731,8 +1609,7 @@ x
 ## [2] &quot;I think he&#39;s @arunning@b with /little cat#.&quot;
 </code></pre>
 
-<pre><code class="r">
-genXtract(x, c(&quot;/&quot;, &quot;@a&quot;), c(&quot;#&quot;, &quot;@b&quot;))
+<pre><code class="r">genXtract(x, c(&quot;/&quot;, &quot;@a&quot;), c(&quot;#&quot;, &quot;@b&quot;))
 </code></pre>
 
 <pre><code>## [[1]]
@@ -1742,8 +1619,7 @@ genXtract(x, c(&quot;/&quot;, &quot;@a&quot;), c(&quot;#&quot;, &quot;@b&quot;))
 ## [1] &quot;little cat&quot; &quot;running&quot;
 </code></pre>
 
-<pre><code class="r">
-## A fake data set
+<pre><code class="r">## A fake data set
 x2 &lt;- c(&quot;Where is the L1big dogL2?&quot;,
     &quot;I think he&#39;s 98running99 with L1little catL2.&quot;)
 x2
@@ -1753,8 +1629,7 @@ x2
 ## [2] &quot;I think he&#39;s 98running99 with L1little catL2.&quot;
 </code></pre>
 
-<pre><code class="r">
-genXtract(x2, c(&quot;L1&quot;, 98), c(&quot;L2&quot;, 99))
+<pre><code class="r">genXtract(x2, c(&quot;L1&quot;, 98), c(&quot;L2&quot;, 99))
 </code></pre>
 
 <pre><code>## [[1]]
@@ -1763,6 +1638,226 @@ genXtract(x2, c(&quot;L1&quot;, 98), c(&quot;L2&quot;, 99))
 ## [[2]]
 ## [1] &quot;little cat&quot; &quot;running&quot;
 </code></pre>
+
+<h4 id="na">Search for Potential Missing Values</h4>
+
+<p>After reading in data, removing non-dialogue (via <a href="http://trinker.github.io/qdap_dev/bracketX.html" target="_blank"><code>bracketX</code></a>), and viewing it the researcher will want to find text rows that do not contain proper punctuation and or that contain punctuation and no text.  This is accomplished with the <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions and <a href="http://trinker.github.io/qdap_dev/potential_NA.html" target="_blank"><code>potential_NA</code></a> functions as the researcher manually parses the original transcripts, makes alterations and re-reads the data back into qdap.  This important procedure is not an automatic process, requiring that the researcher give attention to detail in comparing the R dataframe with the original transcript.</p>
+
+<p><font size="5" color="orange">&diams;</font> <strong>Identifying and Coding Missing Values</strong> <font size="5" color="orange">&diams;</font></p>
+
+<pre><code class="r">## Create a data set with punctuation and no text
+DATA$state[c(3, 7, 10)] &lt;- c(&quot;.&quot;, &quot;.&quot;, NA)
+DATA
+</code></pre>
+
+<pre><code>##        person sex adult                                 state code
+## 1         sam   m     0         Computer is fun. Not too fun.   K1
+## 2        greg   m     0               No it&#39;s not, it&#39;s dumb.   K2
+## 3     teacher   m     1                                     .   K3
+## 4         sam   m     0                  You liar, it stinks!   K4
+## 5        greg   m     0               I am telling the truth!   K5
+## 6       sally   f     0                How can we be certain?   K6
+## 7        greg   m     0                                     .   K7
+## 8         sam   m     0                       I distrust you.   K8
+## 9       sally   f     0           What are you talking about?   K9
+## 10 researcher   f     1                                  &lt;NA&gt;  K10
+## 11       greg   m     0 I&#39;m hungry.  Let&#39;s eat.  You already?  K11
+</code></pre>
+
+<pre><code class="r">potential_NA(DATA$state, 20)
+</code></pre>
+
+<pre><code>##   row            text
+## 1   3               .
+## 2   7               .
+## 3   8 I distrust you.
+</code></pre>
+
+<pre><code class="r">potential_NA(DATA$state)
+</code></pre>
+
+<pre><code>##   row text
+## 1   3    .
+## 2   7    .
+</code></pre>
+
+<pre><code class="r"># USE TO SELCTIVELY REPLACE CELLS WITH MISSING VALUES
+DATA$state[potential_NA(DATA$state, 20)$row[-c(3)]] &lt;- NA
+DATA
+</code></pre>
+
+<pre><code>##        person sex adult                                 state code
+## 1         sam   m     0         Computer is fun. Not too fun.   K1
+## 2        greg   m     0               No it&#39;s not, it&#39;s dumb.   K2
+## 3     teacher   m     1                                  &lt;NA&gt;   K3
+## 4         sam   m     0                  You liar, it stinks!   K4
+## 5        greg   m     0               I am telling the truth!   K5
+## 6       sally   f     0                How can we be certain?   K6
+## 7        greg   m     0                                  &lt;NA&gt;   K7
+## 8         sam   m     0                       I distrust you.   K8
+## 9       sally   f     0           What are you talking about?   K9
+## 10 researcher   f     1                                  &lt;NA&gt;  K10
+## 11       greg   m     0 I&#39;m hungry.  Let&#39;s eat.  You already?  K11
+</code></pre>
+
+<pre><code class="r">## Reset DATA
+DATA &lt;- qdap::DATA
+</code></pre>
+
+<h4 id="mark">Remove Rows That Contain Markers</h4>
+
+<p>The researcher may wish to remove empty rows (using <a href="http://trinker.github.io/qdap_dev/rm_empty_row.html" target="_blank"><code>rm_empty_row</code></a>) and/or rows that contain certain markers (using <a href="http://trinker.github.io/qdap_dev/rm_row.html" target="_blank"><code>rm_row</code></a>).  Sometimes empty rows are read into the dataframe from the transcript.  These rows should be completely removed from the data set rather than denoting with <code>NA</code>.  The <a href="http://trinker.github.io/qdap_dev/rm_empty_row.html" target="_blank"><code>rm_empty_row</code></a> removes completely empty rows (those rows with only 1 or more blank spaces) from the dataframe.</p>
+
+<p><font size="5" color="orange">&diams;</font> <strong>Remove Empty Rows</strong><font size="5" color="orange">&diams;</font></p>
+
+<pre><code class="r">(dat &lt;- rbind.data.frame(DATA[, c(1, 4)], matrix(rep(&quot; &quot;, 4),
+   ncol =2, dimnames=list(12:13, colnames(DATA)[c(1, 4)]))))
+</code></pre>
+
+<pre><code>##        person                                 state
+## 1         sam         Computer is fun. Not too fun.
+## 2        greg               No it&#39;s not, it&#39;s dumb.
+## 3     teacher                    What should we do?
+## 4         sam                  You liar, it stinks!
+## 5        greg               I am telling the truth!
+## 6       sally                How can we be certain?
+## 7        greg                      There is no way.
+## 8         sam                       I distrust you.
+## 9       sally           What are you talking about?
+## 10 researcher         Shall we move on?  Good then.
+## 11       greg I&#39;m hungry.  Let&#39;s eat.  You already?
+## 12                                                 
+## 13
+</code></pre>
+
+<pre><code class="r">rm_empty_row(dat)
+</code></pre>
+
+<pre><code>##        person                                 state
+## 1         sam         Computer is fun. Not too fun.
+## 2        greg               No it&#39;s not, it&#39;s dumb.
+## 3     teacher                    What should we do?
+## 4         sam                  You liar, it stinks!
+## 5        greg               I am telling the truth!
+## 6       sally                How can we be certain?
+## 7        greg                      There is no way.
+## 8         sam                       I distrust you.
+## 9       sally           What are you talking about?
+## 10 researcher         Shall we move on?  Good then.
+## 11       greg I&#39;m hungry.  Let&#39;s eat.  You already?
+</code></pre>
+
+<p>Other times the researcher may wish to use <a href="http://trinker.github.io/qdap_dev/rm_row.html" target="_blank"><code>rm_row</code></a> to remove rows from the dataframe/analysis based on transcription conventions or to remove demographic characteristics.  For example, in the example below the transcript is read in with <b>[Cross Talk 3</b>.  This is a transcription convention and we would want to parse these rows from the transcript.  A second example shows the removal of people from the dataframe.</p>
+
+<p><font size="5" color="orange">&diams;</font> <strong>Remove Selected Rows</strong><font size="5" color="orange">&diams;</font></p>
+
+<pre><code class="r">## Read in transcript
+dat2 &lt;- read.transcript(system.file(&quot;extdata/transcripts/trans1.docx&quot;, 
+    package = &quot;qdap&quot;))
+truncdf(dat2, 40)
+</code></pre>
+
+<pre><code>##                  X1                                       X2
+## 1      Researcher 2                         October 7, 1892.
+## 2         Teacher 4 Students it&#39;s time to learn. [Student di
+## 3 Multiple Students        Yes teacher we&#39;re ready to learn.
+## 4     [Cross Talk 3                                      00]
+## 5         Teacher 4 Let&#39;s read this terrific book together.
+</code></pre>
+
+<pre><code class="r">## Use column names to remove rows
+truncdf(rm_row(dat2, &quot;X1&quot;, &quot;[C&quot;), 40)
+</code></pre>
+
+<pre><code>##                  X1                                       X2
+## 1      Researcher 2                         October 7, 1892.
+## 2         Teacher 4 Students it&#39;s time to learn. [Student di
+## 3 Multiple Students        Yes teacher we&#39;re ready to learn.
+## 4         Teacher 4 Let&#39;s read this terrific book together.
+</code></pre>
+
+<pre><code class="r">## Use column numbers to remove rows
+truncdf(rm_row(dat2, 2, &quot;[C&quot;), 40)
+</code></pre>
+
+<pre><code>##                  X1                                       X2
+## 1      Researcher 2                         October 7, 1892.
+## 2         Teacher 4 Students it&#39;s time to learn. [Student di
+## 3 Multiple Students        Yes teacher we&#39;re ready to learn.
+## 4     [Cross Talk 3                                      00]
+## 5         Teacher 4 Let&#39;s read this terrific book together.
+</code></pre>
+
+<pre><code class="r">## Also remove people ect. from the analysis
+rm_row(DATA, 1, c(&quot;sam&quot;, &quot;greg&quot;))
+</code></pre>
+
+<pre><code>##       person sex adult                         state code
+## 1    teacher   m     1            What should we do?   K3
+## 2      sally   f     0        How can we be certain?   K6
+## 3      sally   f     0   What are you talking about?   K9
+## 4 researcher   f     1 Shall we move on?  Good then.  K10
+</code></pre>
+
+<h4 id="clean">Remove Extra Spaces and Escaped Characters</h4> 
+
+<p><font size="5" color="orange">&diams;</font> <strong>Remove Extra Spaces and Escaped Characters</strong><font size="5" color="orange">&diams;</font></p>
+
+<pre><code class="r">x1 &lt;- &quot;I go \r
+    to the \tnext line&quot;
+x1
+</code></pre>
+
+<pre><code>## [1] &quot;I go \r\n    to the \tnext line&quot;
+</code></pre>
+
+<pre><code class="r">clean(x1)
+</code></pre>
+
+<pre><code>## [1] &quot;I go to the next line&quot;
+</code></pre>
+
+<pre><code class="r">x2 &lt;- c(&quot;  talkstats.com &quot;, &quot;   really? &quot;, &quot; yeah&quot;)
+Trim(x2)
+</code></pre>
+
+<pre><code>## [1] &quot;talkstats.com&quot; &quot;really?&quot;       &quot;yeah&quot;
+</code></pre>
+
+<pre><code class="r">x3 &lt;- c(&quot;I like 456 dogs\t  , don&#39;t you?\&quot;&quot;)
+scrubber(x3)
+</code></pre>
+
+<pre><code>## [1] &quot;I like 456 dogs, don&#39;t you?&quot;
+</code></pre>
+
+<pre><code class="r">scrubber(x3, TRUE)
+</code></pre>
+
+<pre><code>## [1] &quot;I like four hundred fifty six dogs, don&#39;t you?&quot;
+</code></pre>
+
+<h4 id="abr">Replace Abbreviations</h4>
+
+<h4 id="cons">Replace Contractions</h4>
+
+<h4 id="num">Replace Numbers With Text Representation</h4>
+
+<h4 id="symb">Replace Symbols With Word Equivalents</h4>
+
+<h4 id="qprep">Quick Preparation of Text</h4>
+
+<h4 id="spaste">Add Leading/Trailing Spaces</h4>
+
+<h4 id="fill">Replace Spaces</h4>
+
+<h4 id="mgsub">Multiple gsub</h4>
+
+<h4 id="caps">Capitalize Select Words</h4>
+
+<h4 id="nms">Names to Gender Prediction</h4>
+
+<h4 id="stem">Stem Text</h4>
 
 <h4 id="grab">Grab Begin/End of String to Character</h4>
 

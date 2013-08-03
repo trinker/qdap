@@ -725,11 +725,68 @@ The following functions will be utilized in this section (click to view more):
 </form>
 </div>
 
+<h4 id="bracket">Bracket/General Chunk Extraction `r yt("http://youtu.be/B4lvZGo_6bA")`</h4>   
+
+After reading in the data the researcher may want to remove all non-dialogue text from the transcript dataframe such as transcriber annotations.  This can be accomplished with the `r FUN("bracketX")` family of functions, which removes text found between two brackets (`r CN("( )")`, `r CN("{ }")`, `r CN("[ ]")`, `r CN("< >")`) or more generally using `r FUN("genX")` and `r FUN("genXtract")` to remove text between two character reference points. 
+
+If the bracketed text is useful to analysis it is recommended that the researcher assigns the un-bracketed text to a new column.
+
+
+`r FT(orange, 5, text="&diams;")` **Extracting Chunks 1**- *bracketX/bracketXtract* `r FT(orange, 5, text="&diams;")`
+
+```{r}
+## A fake data set
+examp <- structure(list(person = structure(c(1L, 2L, 1L, 3L),
+    .Label = c("bob", "greg", "sue"), class = "factor"), text =
+    c("I love chicken [unintelligible]!",
+    "Me too! (laughter) It's so good.[interrupting]",
+    "Yep it's awesome {reading}.", "Agreed. {is so much fun}")), .Names =
+    c("person", "text"), row.names = c(NA, -4L), class = "data.frame")
+examp
+bracketX(examp$text, "square")
+bracketX(examp$text, "curly")
+bracketX(examp$text, c("square", "round"))
+bracketX(examp$text)
+bracketXtract(examp$text, "square")
+bracketXtract(examp$text, "curly")
+bracketXtract(examp$text, c("square", "round"))
+bracketXtract(examp$text, c("square", "round"), merge = FALSE)
+bracketXtract(examp$text)
+bracketXtract(examp$text, with = TRUE)
+```
+
+Often a researcher will want to extract some text from the transcript and put it back together.  One example is the reconstructing of material read from a book, poem, play or other text.  This information is generally dispersed throughout the dialogue (within classroom/teaching procedures).   If this text is denoted with a particular identifying bracket such as curly braces this text can be extracted and then pasted back together.
+
+`r FT(orange, 5, text="&diams;")` **Extracting Chunks 2**- *Recombining Chunks* `r FT(orange, 5, text="&diams;")`
+
+```{r}
+paste2(bracketXtract(examp$text, "curly"), " ")
+```
+
+The researcher may need a more general extraction method that allows for any left/right boundaries to be specified.  This is useful in that many qualitative transciption/coding programs have specific syntax for various dialogue markup for events that must be parsed from the data set.  The `r FUN("genX")` and `r FUN("genXtract")` functions have such capabilities.
+
+`r FT(orange, 5, text="&diams;")` **Extracting Chunks 3**- *genX/genXtract* `r FT(orange, 5, text="&diams;")`
+```{r}
+DATA$state  
+## Look at the difference in number 1 and 10 from above
+genX(DATA$state, c("is", "we"), c("too", "on"))
+## A fake data set
+x <- c("Where is the /big dog#?",
+    "I think he's @arunning@b with /little cat#.")
+x
+genXtract(x, c("/", "@a"), c("#", "@b"))
+## A fake data set
+x2 <- c("Where is the L1big dogL2?",
+    "I think he's 98running99 with L1little catL2.")
+x2
+genXtract(x2, c("L1", 98), c("L2", 99))
+```
 
 <h4 id="na">Search for Potential Missing Values</h4>
 
-After reading in data and viewing it the researcher will want to find text rows that do not contain proper punctuation and or that contain punctuation and no text.  This is accomplished with the <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions and `r FUN("potential_NA")` functions as the researcher manually parses the original transcripts, makes alterations and re-reads the data back into qdap.  This important procedure is not an automatic process, requiring that the researcher give attention to detail.
+After reading in data, removing non-dialogue (via `r FUN("bracketX")`), and viewing it the researcher will want to find text rows that do not contain proper punctuation and or that contain punctuation and no text.  This is accomplished with the <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions and `r FUN("potential_NA")` functions as the researcher manually parses the original transcripts, makes alterations and re-reads the data back into qdap.  This important procedure is not an automatic process, requiring that the researcher give attention to detail in comparing the R dataframe with the original transcript.
 
+`r FT(orange, 5, text="&diams;")` **Identifying and Coding Missing Values** `r FT(orange, 5, text="&diams;")`
 ```{r}
 ## Create a data set with punctuation and no text
 DATA$state[c(3, 7, 10)] <- c(".", ".", NA)
@@ -744,6 +801,33 @@ DATA <- qdap::DATA
 ```
 
 <h4 id="mark">Remove Rows That Contain Markers</h4>
+
+The researcher may wish to remove empty rows (using `r FUN("rm_empty_row")`) and/or rows that contain certain markers (using `r FUN("rm_row")`).  Sometimes empty rows are read into the dataframe from the transcript.  These rows should be completely removed from the data set rather than denoting with `NA`.  The `r FUN("rm_empty_row")` removes completely empty rows (those rows with only 1 or more blank spaces) from the dataframe.
+
+`r FT(orange, 5, text="&diams;")` **Remove Empty Rows**`r FT(orange, 5, text="&diams;")`
+```{r}
+(dat <- rbind.data.frame(DATA[, c(1, 4)], matrix(rep(" ", 4),
+   ncol =2, dimnames=list(12:13, colnames(DATA)[c(1, 4)]))))
+rm_empty_row(dat)
+```
+
+Other times the researcher may wish to use `r FUN("rm_row")` to remove rows from the dataframe/analysis based on transcription conventions or to remove demographic characteristics.  For example, in the example below the transcript is read in with <b>[Cross Talk 3</b>.  This is a transcription convention and we would want to parse these rows from the transcript.  A second example shows the removal of people from the dataframe.
+
+`r FT(orange, 5, text="&diams;")` **Remove Selected Rows**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Read in transcript
+dat2 <- read.transcript(system.file("extdata/transcripts/trans1.docx", 
+    package = "qdap"))
+truncdf(dat2, 40)
+## Use column names to remove rows
+truncdf(rm_row(dat2, "X1", "[C"), 40)
+## Use column numbers to remove rows
+truncdf(rm_row(dat2, 2, "[C"), 40)
+## Also remove people ect. from the analysis
+rm_row(DATA, 1, c("sam", "greg"))
+```
+
 <h4 id="clean">Remove Extra Spaces and Escaped Characters</h4> 
 
 `r FT(orange, 5, text="&diams;")` **Remove Extra Spaces and Escaped Characters**`r FT(orange, 5, text="&diams;")`
@@ -770,59 +854,6 @@ scrubber(x3, TRUE)
 <h4 id="caps">Capitalize Select Words</h4>
 <h4 id="nms">Names to Gender Prediction</h4>
 <h4 id="stem">Stem Text</h4>
-
-
-<h4 id="bracket">Bracket/General Chunk Extraction `r yt("http://youtu.be/B4lvZGo_6bA")`</h4>    
-`r FT(orange, 5, text="&diams;")` **Extracting Chunks 1**- *bracketX/bracketXtract* `r FT(orange, 5, text="&diams;")`
-```{r}
-## A fake data set
-examp <- structure(list(person = structure(c(1L, 2L, 1L, 3L),
-    .Label = c("bob", "greg", "sue"), class = "factor"), text =
-    c("I love chicken [unintelligible]!",
-    "Me too! (laughter) It's so good.[interrupting]",
-    "Yep it's awesome {reading}.", "Agreed. {is so much fun}")), .Names =
-    c("person", "text"), row.names = c(NA, -4L), class = "data.frame")
-
-examp
-bracketX(examp$text, "square")
-bracketX(examp$text, "curly")
-bracketX(examp$text, c("square", "round"))
-bracketX(examp$text)
-
-
-bracketXtract(examp$text, "square")
-bracketXtract(examp$text, "curly")
-bracketXtract(examp$text, c("square", "round"))
-bracketXtract(examp$text, c("square", "round"), merge = FALSE)
-bracketXtract(examp$text)
-bracketXtract(examp$text, with = TRUE)
-
-paste2(bracketXtract(examp$text, "curly"), " ")
-```
-
-The researcher may need a more general extraction method that allows for any left/right boundaries to be specified.  This is useful in that many qualitative transciption/coding programs have specific syntax for various dialogue markup for events that must be parsed from the data set.  The `r FUN("genX")` and `r FUN("genXtract")` functions have such capabilities.
-
-`r FT(orange, 5, text="&diams;")` **Extracting Chunks 2**- *genX/genXtract* `r FT(orange, 5, text="&diams;")`
-```{r}
-DATA$state  ## Look at the difference in number 1 and 10
-
-genX(DATA$state, c("is", "we"), c("too", "on"))
-
-## A fake data set
-x <- c("Where is the /big dog#?",
-    "I think he's @arunning@b with /little cat#.")
-x
-
-genXtract(x, c("/", "@a"), c("#", "@b"))
-
-## A fake data set
-x2 <- c("Where is the L1big dogL2?",
-    "I think he's 98running99 with L1little catL2.")
-x2
-
-genXtract(x2, c("L1", 98), c("L2", 99))
-```
-
 <h4 id="grab">Grab Begin/End of String to Character</h4>
 <h4 id="inc">Denote Incomplete End Marks With "|"</h4> 
 

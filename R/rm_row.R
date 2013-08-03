@@ -7,6 +7,8 @@
 #' @param terms Terms/markers of the rows that are to be removed from the 
 #' dataframe.  The term/marker must appear at the beginning of the string and is 
 #' case sensitive.
+#' @param keep.rownames logical.  If \code{TRUE} the original, non-sequential, 
+#' rownames will be used. 
 #' @return \code{rm_row} - returns a dataframe with the termed/markered rows 
 #' removed.
 #' @rdname rm_row
@@ -19,14 +21,12 @@
 #' rm_row(DATA, "state", c("Comp"))
 #' 
 #' #rm_empty_row EXAMPLE:
-#' x <- matrix(rep(" ", 4), ncol =2)
-#' dat <- DATA[, c(1, 4)]
-#' colnames(x) <- colnames(dat)
-#' (dat <- data.frame(rbind(dat, x)))
+#' (dat <- rbind.data.frame(DATA[, c(1, 4)], matrix(rep(" ", 4), 
+#'    ncol =2, dimnames=list(12:13, colnames(DATA)[c(1, 4)]))))
 #' rm_empty_row(dat)
 #' }
 rm_row <-
-function(dataframe, search.column, terms) {
+function(dataframe, search.column, terms, keep.rownames = FALSE) {
     FUN <- function(dat, sc, term) {
         dat[substring(dat[, sc], 1, nchar(term)) != term, ]
         
@@ -36,8 +36,12 @@ function(dataframe, search.column, terms) {
             DF <<- FUN(DF, search.column, x)
         }
     )
+    if (!keep.rownames) {
+        DF <- data.frame(DF, row.names = NULL, stringsAsFactors = FALSE)
+    }
     return(DF)
 }
+
 
 #' Remove Empty Rows in a Data Frame
 #' 

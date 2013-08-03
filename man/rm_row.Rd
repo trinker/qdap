@@ -3,7 +3,8 @@
 \alias{rm_row}
 \title{Remove Rows That Contain Markers}
 \usage{
-  rm_row(dataframe, search.column, terms)
+  rm_row(dataframe, search.column, terms,
+    keep.rownames = FALSE)
 
   rm_empty_row(dataframe)
 }
@@ -16,6 +17,9 @@
   \item{terms}{Terms/markers of the rows that are to be
   removed from the dataframe.  The term/marker must appear
   at the beginning of the string and is case sensitive.}
+
+  \item{keep.rownames}{logical.  If \code{TRUE} the
+  original, non-sequential, rownames will be used.}
 }
 \value{
   \code{rm_row} - returns a dataframe with the
@@ -40,10 +44,8 @@ rm_row(DATA, 1, c("sam", "greg"))
 rm_row(DATA, "state", c("Comp"))
 
 #rm_empty_row EXAMPLE:
-x <- matrix(rep(" ", 4), ncol =2)
-dat <- DATA[, c(1, 4)]
-colnames(x) <- colnames(dat)
-(dat <- data.frame(rbind(dat, x)))
+(dat <- rbind.data.frame(DATA[, c(1, 4)], matrix(rep(" ", 4),
+   ncol =2, dimnames=list(12:13, colnames(DATA)[c(1, 4)]))))
 rm_empty_row(dat)
 }
 }
