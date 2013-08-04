@@ -1127,23 +1127,23 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/qprep.html" target="_blank">
-    <input type="submit" value="qprep"> - <a href="#qprep">Quick Preparation of Text</a>
+    <input type="submit" value="qprep"> - <a href="#replace">Quick Preparation of Text</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/replace_abbreviation.html" target="_blank">
-    <input type="submit" value="replace_abbreviation"> - <a href="#abr">Replace Abbreviations</a>
+    <input type="submit" value="replace_abbreviation"> - <a href="#replace">Replace Abbreviations</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/replace_contraction.html" target="_blank">
-    <input type="submit" value="replace_contraction"> - <a href="#cons">Replace Contractions</a>
+    <input type="submit" value="replace_contraction"> - <a href="#replace">Replace Contractions</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/replace_number.html" target="_blank">
-    <input type="submit" value="replace_number"> - <a href="#num">Replace Numbers With Text Representation</a>
+    <input type="submit" value="replace_number"> - <a href="#replace">Replace Numbers With Text Representation</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/replace_symbol.html" target="_blank">
-    <input type="submit" value="replace_symbol"> - <a href="#symb">Replace Symbols With Word Equivalents</a>
+    <input type="submit" value="replace_symbol"> - <a href="#replace">Replace Symbols With Word Equivalents</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/rm_row.html" target="_blank">
@@ -1654,6 +1654,8 @@ rm_row(DATA, 1, c("sam", "greg"))
 
 <h4 id="clean">Remove Extra Spaces and Escaped Characters</h4> 
 
+Another step in the cleaning process is the removal of extra white spaces (use <a href="http://trinker.github.io/qdap_dev/Trim.html" target="_blank"><code>Trim</code></a>) and <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/Quotes.html" target="_blank">escaped characters</a> (use <a href="http://trinker.github.io/qdap_dev/clean.html" target="_blank"><code>clean</code></a>).  The <a href="http://trinker.github.io/qdap_dev/scrubber.html" target="_blank"><code>scrubber</code></a> function wraps both <a href="http://trinker.github.io/qdap_dev/Trim.html" target="_blank"><code>Trim</code></a> and <a href="http://trinker.github.io/qdap_dev/clean.html" target="_blank"><code>clean</code></a> and adds in the functionality of some of the <font face="courier">replace_</font> family of functions.
+
 <font size="5" color="orange">&diams;</font> **Remove Extra Spaces and Escaped Characters**<font size="5" color="orange">&diams;</font>
 
 ```r
@@ -1676,6 +1678,14 @@ clean(x1)
 
 ```r
 x2 <- c("  talkstats.com ", "   really? ", " yeah")
+x2
+```
+
+```
+## [1] "  talkstats.com " "   really? "      " yeah"
+```
+
+```r
 Trim(x2)
 ```
 
@@ -1685,6 +1695,14 @@ Trim(x2)
 
 ```r
 x3 <- c("I like 456 dogs\t  , don't you?\"")
+x3
+```
+
+```
+## [1] "I like 456 dogs\t  , don't you?\""
+```
+
+```r
 scrubber(x3)
 ```
 
@@ -1701,11 +1719,213 @@ scrubber(x3, TRUE)
 ```
 
 
-<h4 id="abr">Replace Abbreviations</h4>
-<h4 id="cons">Replace Contractions</h4>
-<h4 id="num">Replace Numbers With Text Representation</h4>
-<h4 id="symb">Replace Symbols With Word Equivalents</h4>
-<h4 id="qprep">Quick Preparation of Text</h4>
+<h4 id="replace">Replacement Functions</h4>
+"replace_abbreviation"
+"replace_contraction"         
+"replace_number"             
+"replace_symbol"  
+"qprep"
+
+<font size="5" color="orange">&diams;</font> **Replace Abbreviations**<font size="5" color="orange">&diams;</font>
+
+```r
+## Use the standard contractions dictionary
+x <- c("Mr. Jones is here at 7:30 p.m.",
+    "Check it out at www.github.com/trinker/qdap",
+    "i.e. He's a sr. dr.; the best in 2012 A.D.",
+    "the robot at t.s. is 10ft. 3in.")
+x
+```
+
+```
+## [1] "Mr. Jones is here at 7:30 p.m."             
+## [2] "Check it out at www.github.com/trinker/qdap"
+## [3] "i.e. He's a sr. dr.; the best in 2012 A.D." 
+## [4] "the robot at t.s. is 10ft. 3in."
+```
+
+```r
+replace_abbreviation(x)
+```
+
+```
+## [1] "Mister Jones is here at 7:30 PM."                    
+## [2] "Check it out at www dot github dot com /trinker/qdap"
+## [3] "ie He's a Senior Doctor ; the best in 2012 AD."      
+## [4] "the robot at t.s. is 10ft. 3in."
+```
+
+```r
+## Augment the standard dictionary with replacement vectors
+abv <- c("in.", "ft.", "t.s.")
+repl <- c("inch", "feet", "talkstats")
+replace_abbreviation(x, abv, repl)
+```
+
+```
+## [1] "Mr. Jones is here at 7:30 p.m."             
+## [2] "Check it out at www.github.com/trinker/qdap"
+## [3] "i.e. He's a sr. dr.; the best in 2012 A.D." 
+## [4] "the robot at talkstats is 10 feet 3 inch."
+```
+
+```r
+## Augment the standard dictionary with a replacement dataframe
+(KEY <- rbind(abbreviations, data.frame(abv = abv, rep = repl)))
+```
+
+```
+##       abv       rep
+## 1     Mr.    Mister
+## 2    Mrs.    Misses
+## 3     Ms.      Miss
+## 4    .com   dot com
+## 5    www.   www dot
+## 6    i.e.        ie
+## 7    A.D.        AD
+## 8    B.C.        BC
+## 9    A.M.        AM
+## 10   P.M.        PM
+## 11 et al.     et al
+## 12    Jr.    Junior
+## 13    Dr.    Doctor
+## 14    Sr.    Senior
+## 15    in.      inch
+## 16    ft.      feet
+## 17   t.s. talkstats
+```
+
+```r
+replace_abbreviation(x, KEY)
+```
+
+```
+## [1] "Mister Jones is here at 7:30 PM."                    
+## [2] "Check it out at www dot github dot com /trinker/qdap"
+## [3] "ie He's a Senior Doctor ; the best in 2012 AD."      
+## [4] "the robot at talkstats is 10 feet 3 inch."
+```
+
+
+<font size="5" color="orange">&diams;</font> **Replace Contractions**<font size="5" color="orange">&diams;</font>
+
+```r
+x <- c("Mr. Jones isn't going.",
+    "Check it out what's going on.",
+    "He's here but didn't go.",
+    "the robot at t.s. wasn't nice",
+    "he'd like it if i'd go away")
+x
+```
+
+```
+## [1] "Mr. Jones isn't going."        "Check it out what's going on."
+## [3] "He's here but didn't go."      "the robot at t.s. wasn't nice"
+## [5] "he'd like it if i'd go away"
+```
+
+```r
+replace_contraction(x)
+```
+
+```
+## [1] "Mr. Jones is not going."            
+## [2] "Check it out what is going on."     
+## [3] "He is here but did not go."         
+## [4] "The robot at t.s. was not nice"     
+## [5] "He would like it if I would go away"
+```
+
+
+<font size="5" color="orange">&diams;</font> **Replace Numbers**-*Numeral Representation*<font size="5" color="orange">&diams;</font>
+
+```r
+x <- c("I like 346457 ice cream cones.", "They are 99 percent good")
+replace_number(x)
+```
+
+```
+## [1] "I like three hundred forty six thousand four hundred fifty seven ice cream cones."
+## [2] "They are ninety nine percent good"
+```
+
+```r
+## Replace numbers that contain commas as well
+y <- c("I like 346,457 ice cream cones.", "They are 99 percent good")
+replace_number(y)
+```
+
+```
+## [1] "I like three hundred forty six thousand four hundred fifty seven ice cream cones."
+## [2] "They are ninety nine percent good"
+```
+
+```r
+## Combine numbers as one word/string
+replace_number(x, "combine")
+```
+
+```
+## [1] "I like threehundredfortysixthousandfourhundredfiftyseven ice cream cones."
+## [2] "They are ninetynine percent good"
+```
+
+
+<font size="5" color="orange">&diams;</font> **Replace Symbols**<font size="5" color="orange">&diams;</font>
+
+```r
+x <- c("I am @ Jon's & Jim's w/ Marry",
+    "I owe $41 for food",
+    "two is 10% of a #")
+x
+```
+
+```
+## [1] "I am @ Jon's & Jim's w/ Marry" "I owe $41 for food"           
+## [3] "two is 10% of a #"
+```
+
+```r
+replace_symbol(x)
+```
+
+```
+## [1] "I am at Jon's and Jim's with Marry"
+## [2] "I owe dollar 41 for food"          
+## [3] "two is 10 percent of a number"
+```
+
+```r
+replace_number(replace_symbol(x))
+```
+
+```
+## [1] "I am at Jon's and Jim's with Marry"
+## [2] "I owe dollar forty one for food"   
+## [3] "two is ten percent of a number"
+```
+
+
+<font size="5" color="orange">&diams;</font> **General Replacement (Quick Preparation)**<font size="5" color="orange">&diams;</font>
+
+```r
+x <- "I like 60 (laughter) #d-bot and $6 @ the store w/o 8p.m."
+x
+```
+
+```
+## [1] "I like 60 (laughter) #d-bot and $6 @ the store w/o 8p.m."
+```
+
+```r
+qprep(x)
+```
+
+```
+## [1] "I like sixty number d bot and dollar six at the store without eight PM."
+```
+
+
 <h4 id="spaste">Add Leading/Trailing Spaces</h4>
 <h4 id="fill">Replace Spaces</h4>
 <h4 id="mgsub">Multiple gsub</h4>

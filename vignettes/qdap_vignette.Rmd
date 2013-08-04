@@ -681,23 +681,23 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/qprep.html" target="_blank">
-    <input type="submit" value="qprep"> - `r HR("#qprep", "Quick Preparation of Text")`
+    <input type="submit" value="qprep"> - `r HR("#replace", "Quick Preparation of Text")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/replace_abbreviation.html" target="_blank">
-    <input type="submit" value="replace_abbreviation"> - `r HR("#abr", "Replace Abbreviations")`
+    <input type="submit" value="replace_abbreviation"> - `r HR("#replace", "Replace Abbreviations")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/replace_contraction.html" target="_blank">
-    <input type="submit" value="replace_contraction"> - `r HR("#cons", "Replace Contractions")`
+    <input type="submit" value="replace_contraction"> - `r HR("#replace", "Replace Contractions")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/replace_number.html" target="_blank">
-    <input type="submit" value="replace_number"> - `r HR("#num", "Replace Numbers With Text Representation")`
+    <input type="submit" value="replace_number"> - `r HR("#replace", "Replace Numbers With Text Representation")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/replace_symbol.html" target="_blank">
-    <input type="submit" value="replace_symbol"> - `r HR("#symb", "Replace Symbols With Word Equivalents")`
+    <input type="submit" value="replace_symbol"> - `r HR("#replace", "Replace Symbols With Word Equivalents")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/rm_row.html" target="_blank">
@@ -830,6 +830,8 @@ rm_row(DATA, 1, c("sam", "greg"))
 
 <h4 id="clean">Remove Extra Spaces and Escaped Characters</h4> 
 
+Another step in the cleaning process is the removal of extra white spaces (use `r FUN("Trim")`) and `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/Quotes.html", "escaped characters")` (use `r FUN("clean")`).  The `r FUN("scrubber")` function wraps both `r FUN("Trim")` and `r FUN("clean")` and adds in the functionality of some of the `r CN("replace_")` family of functions.
+
 `r FT(orange, 5, text="&diams;")` **Remove Extra Spaces and Escaped Characters**`r FT(orange, 5, text="&diams;")`
 ```{r}
 x1 <- "I go \r
@@ -837,17 +839,78 @@ x1 <- "I go \r
 x1
 clean(x1)
 x2 <- c("  talkstats.com ", "   really? ", " yeah")
+x2
 Trim(x2)
 x3 <- c("I like 456 dogs\t  , don't you?\"")
+x3
 scrubber(x3)
 scrubber(x3, TRUE)
 ```
 
-<h4 id="abr">Replace Abbreviations</h4>
-<h4 id="cons">Replace Contractions</h4>
-<h4 id="num">Replace Numbers With Text Representation</h4>
-<h4 id="symb">Replace Symbols With Word Equivalents</h4>
-<h4 id="qprep">Quick Preparation of Text</h4>
+<h4 id="replace">Replacement Functions</h4>
+"replace_abbreviation"     
+"replace_contraction"         
+"replace_number"             
+"replace_symbol"  
+"qprep"
+
+`r FT(orange, 5, text="&diams;")` **Replace Abbreviations**`r FT(orange, 5, text="&diams;")`
+```{r}
+## Use the standard contractions dictionary
+x <- c("Mr. Jones is here at 7:30 p.m.",
+    "Check it out at www.github.com/trinker/qdap",
+    "i.e. He's a sr. dr.; the best in 2012 A.D.",
+    "the robot at t.s. is 10ft. 3in.")
+x
+replace_abbreviation(x)
+## Augment the standard dictionary with replacement vectors
+abv <- c("in.", "ft.", "t.s.")
+repl <- c("inch", "feet", "talkstats")
+replace_abbreviation(x, abv, repl)
+## Augment the standard dictionary with a replacement dataframe
+(KEY <- rbind(abbreviations, data.frame(abv = abv, rep = repl)))
+replace_abbreviation(x, KEY)
+```
+
+`r FT(orange, 5, text="&diams;")` **Replace Contractions**`r FT(orange, 5, text="&diams;")`
+```{r}
+x <- c("Mr. Jones isn't going.",
+    "Check it out what's going on.",
+    "He's here but didn't go.",
+    "the robot at t.s. wasn't nice",
+    "he'd like it if i'd go away")
+x
+replace_contraction(x)
+```
+
+`r FT(orange, 5, text="&diams;")` **Replace Numbers**-*Numeral Representation*`r FT(orange, 5, text="&diams;")`
+```{r}
+x <- c("I like 346457 ice cream cones.", "They are 99 percent good")
+replace_number(x)
+## Replace numbers that contain commas as well
+y <- c("I like 346,457 ice cream cones.", "They are 99 percent good")
+replace_number(y)
+## Combine numbers as one word/string
+replace_number(x, "combine")
+```
+
+`r FT(orange, 5, text="&diams;")` **Replace Symbols**`r FT(orange, 5, text="&diams;")`
+```{r}
+x <- c("I am @ Jon's & Jim's w/ Marry",
+    "I owe $41 for food",
+    "two is 10% of a #")
+x
+replace_symbol(x)
+replace_number(replace_symbol(x))
+```
+
+`r FT(orange, 5, text="&diams;")` **General Replacement (Quick Preparation)**`r FT(orange, 5, text="&diams;")`
+```{r}
+x <- "I like 60 (laughter) #d-bot and $6 @ the store w/o 8p.m."
+x
+qprep(x)
+```
+
 <h4 id="spaste">Add Leading/Trailing Spaces</h4>
 <h4 id="fill">Replace Spaces</h4>
 <h4 id="mgsub">Multiple gsub</h4>

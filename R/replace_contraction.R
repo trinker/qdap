@@ -30,18 +30,9 @@
 #'     "he'd like it if i'd go away")
 #' 
 #' replace_contraction(x)
-#' 
-#' #create abbreviation and replacement vectors
-#' abv <- c("isn't", "I'd")
-#' repl <- c("is not", "I would")
-#' 
-#' replace_abbreviation(x, abv, repl)
-#' 
-#' (KEY <- rbind(abbreviations, data.frame(abv = abv, rep = repl)))
-#' replace_abbreviation(x, KEY)
 #' }
 replace_contraction <- 
-function(text.var, contraction = qdap::contractions, replace = NULL, 
+function(text.var, contraction = qdapDictionaries::contractions, replace = NULL, 
     ignore.case=TRUE, sent.cap = TRUE) {
     if (!is.null(replace)) {
         ab <- data.frame(abv=contraction, repl=replace)

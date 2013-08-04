@@ -3,8 +3,8 @@
 \title{Replace Contractions}
 \usage{
   replace_contraction(text.var,
-    contraction = qdap::contractions, replace = NULL,
-    ignore.case = TRUE, sent.cap = TRUE)
+    contraction = qdapDictionaries::contractions,
+    replace = NULL, ignore.case = TRUE, sent.cap = TRUE)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -39,15 +39,6 @@ x <- c("Mr. Jones isn't going.",
     "he'd like it if i'd go away")
 
 replace_contraction(x)
-
-#create abbreviation and replacement vectors
-abv <- c("isn't", "I'd")
-repl <- c("is not", "I would")
-
-replace_abbreviation(x, abv, repl)
-
-(KEY <- rbind(abbreviations, data.frame(abv = abv, rep = repl)))
-replace_abbreviation(x, KEY)
 }
 }
 \seealso{
