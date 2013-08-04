@@ -156,17 +156,20 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
 
     x <- unlist(match.list)
     a <- grepl("[^a-zA-Z[:space:]]", x)
+
     if (any(a)) {
         b <- grepl("[0-9]", x)
         if (any(b) & is.null(digit.remove)) {   
             digit.remove <- FALSE  
         }
         if (any(a + b == 1) & is.null(char.keep)) {  
-            char.keep <- unlist(strsplit(paste(gsub("[a-zA-Z0-9[:space:]]", 
-                "", x), collapse=""), NULL)) 
+            char.keep <- unique(unlist(strsplit(paste(gsub("[a-zA-Z0-9[:space:]]", 
+                "", x), collapse=""), NULL))) 
         }
-        if (any(gsub("[0-9a-zA-Z[:space:]]", "", x) != "")) {  
-            char.keep <- unique(c(char.keep, gsub("[0-9a-zA-Z[:space:]]", "", paste(x, collapse=""))))
+        if (any(gsub("[0-9a-zA-Z[:space:]]", "", x) != "")) { 
+            specials <- unique(unlist(strsplit(gsub("[0-9a-zA-Z[:space:]]", "", 
+                paste(paste("$",x), collapse="")), NULL)))
+            char.keep <- unique(c(char.keep, specials))
         }   
     }
     if(!all(is.null(names(match.list))) && 
@@ -304,8 +307,9 @@ termco.d <-
             digit.remove <- FALSE  
         } 
         if (any(a + b == 1) & is.null(char.keep)) {  
-            char.keep = unlist(strsplit(paste(gsub("[a-zA-Z0-9[:space:]]", 
-                "", x), collapse=""), NULL)) 
+            specials <- unique(unlist(strsplit(gsub("[0-9a-zA-Z[:space:]]", "", 
+                paste(paste("$",x), collapse="")), NULL)))
+            char.keep <- unique(c(char.keep, specials))
         }
     }
     if (is.null(grouping.var)) {
@@ -342,6 +346,7 @@ termco.d <-
     class(o) <- "termco"    
     o 
 }
+
 
 
 #' Search a Transcript for Terms

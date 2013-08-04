@@ -35,6 +35,10 @@ BUG FIXES
 * `todo` function created by `new_project` would not report completed tasks if 
   `report.completed = TRUE`.
 
+* `termco` and `termco.d` threw an error if more than one consecutive regex 
+  special character was passed to `match.list` or `match.string`.  See GitHub 
+  issue #128 for more. 
+
 NEW FEATURES
 
 MINOR FEATURES
