@@ -225,16 +225,22 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
     DF2 <- data.frame(DF2, do.call("rbind", lapply(LIST, typer)))   
     DF2 <- DF2[order(-DF2$n.words), ]
     rownames(DF2) <- NULL
+#browser()
     qdaMOD <- suppressWarnings(lapply(LIST, function(x) {
+#browser()
         A <- stopwords(x[, "text.var"], stopwords="", strip=TRUE, unlist=TRUE)
-            if (A=="") {
+            if (identical(A, character(0))) {
                 return (c(DIS=0, HAPAX=0, ALL=0))
             } else {
-                B <- data.frame(table(unblanker(A)))
-                HAPAX <- sum(B[,2]==1, na.rm = TRUE)
-                DIS <- sum(B[,2]==2, na.rm = TRUE)
-                ALL <- sum(B[,2], na.rm = TRUE)
-                return(c(DIS=DIS, HAPAX=HAPAX, ALL=ALL))
+                if (A=="") {
+                    return (c(DIS=0, HAPAX=0, ALL=0))
+                } else {
+                    B <- data.frame(table(unblanker(A)))
+                    HAPAX <- sum(B[,2]==1, na.rm = TRUE)
+                    DIS <- sum(B[,2]==2, na.rm = TRUE)
+                    ALL <- sum(B[,2], na.rm = TRUE)
+                    return(c(DIS=DIS, HAPAX=HAPAX, ALL=ALL))
+                }
             }
         }
     ))
