@@ -89,7 +89,7 @@ question_type <- function(text.var, grouping.var = NULL,
         } 
     } 
     text.var <- replace_contraction(as.character(text.var), 
-        qdap::contractions[grepl("you", qdap::contractions[, 1]), ])
+        qdapDictionaries::contractions[grepl("you", qdapDictionaries::contractions[, 1]), ])
     DF <- data.frame(grouping, text.var, check.names = FALSE, 
         stringsAsFactors = FALSE, orig.row.num = seq_len(length(text.var)))
     DF$grouping <- factor(DF$grouping)
