@@ -1720,11 +1720,10 @@ scrubber(x3, TRUE)
 
 
 <h4 id="replace">Replacement Functions</h4>
-"replace_abbreviation"
-"replace_contraction"         
-"replace_number"             
-"replace_symbol"  
-"qprep"
+
+The replacement family of functions replace various text elements within the transcripts with alphabetic versions that are more suited to analysis.  These alterations may affect word counts and other alphabetic dependent forms of analysis.
+
+The <a href="http://trinker.github.io/qdap_dev/replace_abbreviation.html" target="_blank"><code>replace_abbreviation</code></a> replaces standard abbreviations that utilize periods with forms that do not rely on periods.  This is necessary in that many sentence specific functions (e.g., <a href="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank"><code>sentSplit</code></a> and <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a>) rely on period usage acting as sentence endmarks.  The researcher may augment the standard <a href="http://trinker.github.io/qdapDictionaries/abbreviations.html" target="_blank"><code>abbreviations</code></a> dictionary from qdapDictionaries with field specific abbreviations.
 
 <font size="5" color="orange">&diams;</font> **Replace Abbreviations**<font size="5" color="orange">&diams;</font>
 
@@ -1807,6 +1806,8 @@ replace_abbreviation(x, KEY)
 ```
 
 
+The <a href="http://trinker.github.io/qdap_dev/replace_contraction.html" target="_blank"><code>replace_contraction</code></a> replaces contractions with equivalent mult word forms.  This is useful for some word/sentence statistics.  The researcher may augment the <a href="http://trinker.github.io/qdapDictionaries/contractions.html" target="_blank"><code>contractions</code></a> dictionary supplied by qdapDictionaries, however, the word list is exhaustive.
+
 <font size="5" color="orange">&diams;</font> **Replace Contractions**<font size="5" color="orange">&diams;</font>
 
 ```r
@@ -1836,6 +1837,10 @@ replace_contraction(x)
 ## [5] "He would like it if I would go away"
 ```
 
+
+Fox, J. (2005). Programmer's niche: How do you spell that number? R News. Vol. 5(1), pp. 51-55.
+
+The <a href="http://trinker.github.io/qdap_dev/replace_number.html" target="_blank"><code>replace_number</code></a> function utilizes The work of John <a href="">Fox (2005)</a> to turn numeric representations of numbers into their textual equivalents.  This is udeful for word statistics that require the text version of dialogue.
 
 <font size="5" color="orange">&diams;</font> **Replace Numbers**-*Numeral Representation*<font size="5" color="orange">&diams;</font>
 
@@ -1871,6 +1876,9 @@ replace_number(x, "combine")
 ```
 
 
+
+The <a href="http://trinker.github.io/qdap_dev/replace_symbol.html" target="_blank"><code>replace_symbol</code></a> converts ($) to "dollar", (%) to "percent", (#) to "number", (@) to "at", (&) to "and", (w/) to "with".  Additional substitutions can be undertaken with the <a href="http://trinker.github.io/qdap_dev/multigsub.html" target="_blank"><code>multigsub</code></a> function. 
+
 <font size="5" color="orange">&diams;</font> **Replace Symbols**<font size="5" color="orange">&diams;</font>
 
 ```r
@@ -1905,6 +1913,8 @@ replace_number(replace_symbol(x))
 ## [3] "two is ten percent of a number"
 ```
 
+
+The <a href="http://trinker.github.io/qdap_dev/qprep.html" target="_blank"><code>qprep</code></a> function is a wrapper for several other replcement family function that allows for more speedy cleaning of the text.  This approach, while speedy, reduces the flexiblity and care that is undertaken by the researcher when the individual replacment functions are utilized.  The function is intended for analysis that requires less care.
 
 <font size="5" color="orange">&diams;</font> **General Replacement (Quick Preparation)**<font size="5" color="orange">&diams;</font>
 
@@ -2466,6 +2476,7 @@ If the reader spots an error in this Vignette or would like to suggest an improv
 
 ## References
 
+- J. Fox,   (2005) Programmer's niche: How do you spell that number?.  <em>R News</em>  <strong>5</strong>  (1)   51-55-NA
 - Tyler Rinker,   (2013) qdap: Quantitative Discourse Analysis Package.  <a href="http://github.com/trinker/qdap">http://github.com/trinker/qdap</a>
 - Tyler Rinker,   (2013) reports: Package to asssist in report writing.  <a href="http://github.com/trinker/reports">http://github.com/trinker/reports</a>
 

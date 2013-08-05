@@ -1853,11 +1853,9 @@ x3
 
 <h4 id="replace">Replacement Functions</h4>
 
-<p>&ldquo;replace_abbreviation&rdquo;
-&ldquo;replace_contraction&rdquo;<br/>
-&ldquo;replace_number&rdquo;<br/>
-&ldquo;replace_symbol&rdquo;<br/>
-&ldquo;qprep&rdquo;</p>
+<p>The replacement family of functions replace various text elements within the transcripts with alphabetic versions that are more suited to analysis.  These alterations may affect word counts and other alphabetic dependent forms of analysis.</p>
+
+<p>The <a href="http://trinker.github.io/qdap_dev/replace_abbreviation.html" target="_blank"><code>replace_abbreviation</code></a> replaces standard abbreviations that utilize periods with forms that do not rely on periods.  This is necessary in that many sentence specific functions (e.g., <a href="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank"><code>sentSplit</code></a> and <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a>) rely on period usage acting as sentence endmarks.  The researcher may augment the standard <a href="http://trinker.github.io/qdapDictionaries/abbreviations.html" target="_blank"><code>abbreviations</code></a> dictionary from qdapDictionaries with field specific abbreviations.</p>
 
 <p><font size="5" color="orange">&diams;</font> <strong>Replace Abbreviations</strong><font size="5" color="orange">&diams;</font></p>
 
@@ -1929,6 +1927,8 @@ replace_abbreviation(x, abv, repl)
 ## [4] &quot;the robot at talkstats is 10 feet 3 inch.&quot;
 </code></pre>
 
+<p>The <a href="http://trinker.github.io/qdap_dev/replace_contraction.html" target="_blank"><code>replace_contraction</code></a> replaces contractions with equivalent mult word forms.  This is useful for some word/sentence statistics.  The researcher may augment the <a href="http://trinker.github.io/qdapDictionaries/contractions.html" target="_blank"><code>contractions</code></a> dictionary supplied by qdapDictionaries, however, the word list is exhaustive.</p>
+
 <p><font size="5" color="orange">&diams;</font> <strong>Replace Contractions</strong><font size="5" color="orange">&diams;</font></p>
 
 <pre><code class="r">x &lt;- c(&quot;Mr. Jones isn&#39;t going.&quot;,
@@ -1953,6 +1953,10 @@ x
 ## [4] &quot;The robot at t.s. was not nice&quot;     
 ## [5] &quot;He would like it if I would go away&quot;
 </code></pre>
+
+<p>Fox, J. (2005). Programmer&#39;s niche: How do you spell that number? R News. Vol. 5(1), pp. 51-55.</p>
+
+<p>The <a href="http://trinker.github.io/qdap_dev/replace_number.html" target="_blank"><code>replace_number</code></a> function utilizes The work of John <a href="">Fox (2005)</a> to turn numeric representations of numbers into their textual equivalents.  This is udeful for word statistics that require the text version of dialogue.</p>
 
 <p><font size="5" color="orange">&diams;</font> <strong>Replace Numbers</strong>-<em>Numeral Representation</em><font size="5" color="orange">&diams;</font></p>
 
@@ -1981,6 +1985,8 @@ replace_number(x, &quot;combine&quot;)
 ## [2] &quot;They are ninetynine percent good&quot;
 </code></pre>
 
+<p>The <a href="http://trinker.github.io/qdap_dev/replace_symbol.html" target="_blank"><code>replace_symbol</code></a> converts ($) to &ldquo;dollar&rdquo;, (%) to &ldquo;percent&rdquo;, (#) to &ldquo;number&rdquo;, (@) to &ldquo;at&rdquo;, (&amp;) to &ldquo;and&rdquo;, (w/) to &ldquo;with&rdquo;.  Additional substitutions can be undertaken with the <a href="http://trinker.github.io/qdap_dev/multigsub.html" target="_blank"><code>multigsub</code></a> function. </p>
+
 <p><font size="5" color="orange">&diams;</font> <strong>Replace Symbols</strong><font size="5" color="orange">&diams;</font></p>
 
 <pre><code class="r">x &lt;- c(&quot;I am @ Jon&#39;s &amp; Jim&#39;s w/ Marry&quot;,
@@ -2008,6 +2014,8 @@ x
 ## [2] &quot;I owe dollar forty one for food&quot;   
 ## [3] &quot;two is ten percent of a number&quot;
 </code></pre>
+
+<p>The <a href="http://trinker.github.io/qdap_dev/qprep.html" target="_blank"><code>qprep</code></a> function is a wrapper for several other replcement family function that allows for more speedy cleaning of the text.  This approach, while speedy, reduces the flexiblity and care that is undertaken by the researcher when the individual replacment functions are utilized.  The function is intended for analysis that requires less care.</p>
 
 <p><font size="5" color="orange">&diams;</font> <strong>General Replacement (Quick Preparation)</strong><font size="5" color="orange">&diams;</font></p>
 
@@ -2565,6 +2573,7 @@ The following dictionaries/word lists are utilized by qdap (click to view more)
 <h2>References</h2>
 
 <ul>
+<li>J. Fox,   (2005) Programmer&#39;s niche: How do you spell that number?.  <em>R News</em>  <strong>5</strong>  (1)   51-55-NA</li>
 <li>Tyler Rinker,   (2013) qdap: Quantitative Discourse Analysis Package.  <a href="http://github.com/trinker/qdap"><a href="http://github.com/trinker/qdap">http://github.com/trinker/qdap</a></a></li>
 <li>Tyler Rinker,   (2013) reports: Package to asssist in report writing.  <a href="http://github.com/trinker/reports"><a href="http://github.com/trinker/reports">http://github.com/trinker/reports</a></a></li>
 </ul>

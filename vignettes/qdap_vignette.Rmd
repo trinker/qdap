@@ -14,6 +14,9 @@ bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
 BU <- "http://trinker.github.io/qdap_dev/" #switch before upload
 LN <- function(fun, base=BU) paste0(BU, fun, ".html")
 FUN <- function(fun, base=BU) HR2(LN(fun), paste0("<code>", fun,"</code>"))
+BU2 <- "http://trinker.github.io/qdapDictionaries/" #switch before upload
+LN2 <- function(fun, base=BU2) paste0(BU2, fun, ".html")
+FUN2 <- function(fun, base=BU2) HR2(LN2(fun), paste0("<code>", fun,"</code>"))
 yt <- function(url) {
   paste0("<a href=\"", url, "\" target=\"_blank\" style=\"text-decoration: none\"><b><font size=\"5\" color=\"#B22222\">[YT]</font></b></a>\n")
 }
@@ -848,11 +851,10 @@ scrubber(x3, TRUE)
 ```
 
 <h4 id="replace">Replacement Functions</h4>
-"replace_abbreviation"     
-"replace_contraction"         
-"replace_number"             
-"replace_symbol"  
-"qprep"
+
+The replacement family of functions replace various text elements within the transcripts with alphabetic versions that are more suited to analysis.  These alterations may affect word counts and other alphabetic dependent forms of analysis.
+
+The `r FUN("replace_abbreviation")` replaces standard abbreviations that utilize periods with forms that do not rely on periods.  This is necessary in that many sentence specific functions (e.g., `r FUN("sentSplit")` and `r FUN("word_stats")`) rely on period usage acting as sentence endmarks.  The researcher may augment the standard `r FUN2("abbreviations")` dictionary from qdapDictionaries with field specific abbreviations.
 
 `r FT(orange, 5, text="&diams;")` **Replace Abbreviations**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -872,6 +874,8 @@ replace_abbreviation(x, abv, repl)
 replace_abbreviation(x, KEY)
 ```
 
+The `r FUN("replace_contraction")` replaces contractions with equivalent mult word forms.  This is useful for some word/sentence statistics.  The researcher may augment the `r FUN2("contractions")` dictionary supplied by qdapDictionaries, however, the word list is exhaustive.
+
 `r FT(orange, 5, text="&diams;")` **Replace Contractions**`r FT(orange, 5, text="&diams;")`
 ```{r}
 x <- c("Mr. Jones isn't going.",
@@ -882,6 +886,10 @@ x <- c("Mr. Jones isn't going.",
 x
 replace_contraction(x)
 ```
+
+Fox, J. (2005). Programmer's niche: How do you spell that number? R News. Vol. 5(1), pp. 51-55.
+
+The `r FUN("replace_number")` function utilizes The work of John `r citet(bib["Fox2005"])` to turn numeric representations of numbers into their textual equivalents.  This is udeful for word statistics that require the text version of dialogue.
 
 `r FT(orange, 5, text="&diams;")` **Replace Numbers**-*Numeral Representation*`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -894,6 +902,9 @@ replace_number(y)
 replace_number(x, "combine")
 ```
 
+
+The `r FUN("replace_symbol")` converts ($) to "dollar", (%) to "percent", (#) to "number", (@) to "at", (&) to "and", (w/) to "with".  Additional substitutions can be undertaken with the `r FUN("multigsub")` function. 
+
 `r FT(orange, 5, text="&diams;")` **Replace Symbols**`r FT(orange, 5, text="&diams;")`
 ```{r}
 x <- c("I am @ Jon's & Jim's w/ Marry",
@@ -903,6 +914,8 @@ x
 replace_symbol(x)
 replace_number(replace_symbol(x))
 ```
+
+The `r FUN("qprep")` function is a wrapper for several other replcement family function that allows for more speedy cleaning of the text.  This approach, while speedy, reduces the flexiblity and care that is undertaken by the researcher when the individual replacment functions are utilized.  The function is intended for analysis that requires less care.
 
 `r FT(orange, 5, text="&diams;")` **General Replacement (Quick Preparation)**`r FT(orange, 5, text="&diams;")`
 ```{r}
