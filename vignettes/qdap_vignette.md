@@ -1934,14 +1934,105 @@ qprep(x)
 ```
 
 
-<h4 id="spaste">Add Leading/Trailing Spaces</h4>
+
 <h4 id="fill">Replace Spaces</h4>
+
+Many qdap functions break sentences up into words based on the spaces between words.  Often the researcher will want to keep a group of words as a single unit.  The <a href="http://trinker.github.io/qdap_dev/space_fill.html" target="_blank"><code>space_fill</code></a> allows the researcher to replace spaces between selected phrases with <font face="courier">~~</font>.  By defualt <font face="courier">~~</font> is recognized by many qdap functions as a space separator.
+
+<font size="5" color="orange">&diams;</font> **Space Fill Examples**<font size="5" color="orange">&diams;</font>
+
+```r
+## Fake Data
+x <- c("I want to hear the Dr. Martin Luther King Jr. speech.",
+    "I also want to go to the white House to see President Obama speak.")
+x
+```
+
+```
+## [1] "I want to hear the Dr. Martin Luther King Jr. speech."             
+## [2] "I also want to go to the white House to see President Obama speak."
+```
+
+```r
+## Words to keep as a single unit
+keeps <- c("Dr. Martin Luther King Jr.", "The White House", "President Obama")
+text <- space_fill(x, keeps)
+text
+```
+
+```
+## [1] "I want to hear the Dr.~~Martin~~Luther~~King~~Jr. speech."            
+## [2] "I also want to go to The~~White~~House to see President~~Obama speak."
+```
+
+```r
+## strip Example
+strip(text, lower=FALSE)
+```
+
+```
+## [1] "I want to hear the Dr~~Martin~~Luther~~King~~Jr speech"              
+## [2] "I also want to go to The~~White~~House to see President~~Obama speak"
+```
+
+```r
+## bag.o.words Example
+bag.o.words(text, lower=FALSE)
+```
+
+```
+##  [1] "I"                            "want"                        
+##  [3] "to"                           "hear"                        
+##  [5] "the"                          "Dr~~Martin~~Luther~~King~~Jr"
+##  [7] "speech"                       "I"                           
+##  [9] "also"                         "want"                        
+## [11] "to"                           "go"                          
+## [13] "to"                           "The~~White~~House"           
+## [15] "to"                           "see"                         
+## [17] "President~~Obama"             "speak"
+```
+
+```r
+## wfm Example
+wfm(text, c("greg", "bob"))
+```
+
+```
+##                          bob greg
+## also                       1    0
+## dr martin luther king jr   0    1
+## go                         1    0
+## hear                       0    1
+## i                          1    1
+## president obama            1    0
+## see                        1    0
+## speak                      1    0
+## speech                     0    1
+## the                        0    1
+## the white house            1    0
+## to                         3    1
+## want                       1    1
+```
+
+```r
+## trans.cloud Example
+obs <- strip(space_fill(keeps, keeps), lower=FALSE)
+trans.cloud(text, c("greg", "bob"), target.words=list(obs), caps.list=obs, 
+    cloud.colors=qcv(red, gray65), expand.target = FALSE, title.padj = .7,
+    legend = c("space_filled", "other"), title.cex = 2, title.color = "blue", 
+    max.word.size = 3)
+```
+
+![plot of chunk unnamed-chunk-24](figure/unnamed-chunk-241.png) ![plot of chunk unnamed-chunk-24](figure/unnamed-chunk-242.png) 
+
+
 <h4 id="mgsub">Multiple gsub</h4>
 <h4 id="caps">Capitalize Select Words</h4>
 <h4 id="nms">Names to Gender Prediction</h4>
 <h4 id="stem">Stem Text</h4>
 <h4 id="grab">Grab Begin/End of String to Character</h4>
 <h4 id="inc">Denote Incomplete End Marks With "|"</h4> 
+<h4 id="spaste">Add Leading/Trailing Spaces</h4>
 
 <h3 id="reshaping">Reshaping the Data</h3>
 

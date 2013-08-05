@@ -2030,9 +2030,84 @@ x
 <pre><code>## [1] &quot;I like sixty number d bot and dollar six at the store without eight PM.&quot;
 </code></pre>
 
-<h4 id="spaste">Add Leading/Trailing Spaces</h4>
-
 <h4 id="fill">Replace Spaces</h4>
+
+<p>Many qdap functions break sentences up into words based on the spaces between words.  Often the researcher will want to keep a group of words as a single unit.  The <a href="http://trinker.github.io/qdap_dev/space_fill.html" target="_blank"><code>space_fill</code></a> allows the researcher to replace spaces between selected phrases with <font face="courier"><del></font>.  By defualt <font face="courier"></del></font> is recognized by many qdap functions as a space separator.</p>
+
+<p><font size="5" color="orange">&diams;</font> <strong>Space Fill Examples</strong><font size="5" color="orange">&diams;</font></p>
+
+<pre><code class="r">## Fake Data
+x &lt;- c(&quot;I want to hear the Dr. Martin Luther King Jr. speech.&quot;,
+    &quot;I also want to go to the white House to see President Obama speak.&quot;)
+x
+</code></pre>
+
+<pre><code>## [1] &quot;I want to hear the Dr. Martin Luther King Jr. speech.&quot;             
+## [2] &quot;I also want to go to the white House to see President Obama speak.&quot;
+</code></pre>
+
+<pre><code class="r">## Words to keep as a single unit
+keeps &lt;- c(&quot;Dr. Martin Luther King Jr.&quot;, &quot;The White House&quot;, &quot;President Obama&quot;)
+text &lt;- space_fill(x, keeps)
+text
+</code></pre>
+
+<pre><code>## [1] &quot;I want to hear the Dr.~~Martin~~Luther~~King~~Jr. speech.&quot;            
+## [2] &quot;I also want to go to The~~White~~House to see President~~Obama speak.&quot;
+</code></pre>
+
+<pre><code class="r">## strip Example
+strip(text, lower=FALSE)
+</code></pre>
+
+<pre><code>## [1] &quot;I want to hear the Dr~~Martin~~Luther~~King~~Jr speech&quot;              
+## [2] &quot;I also want to go to The~~White~~House to see President~~Obama speak&quot;
+</code></pre>
+
+<pre><code class="r">## bag.o.words Example
+bag.o.words(text, lower=FALSE)
+</code></pre>
+
+<pre><code>##  [1] &quot;I&quot;                            &quot;want&quot;                        
+##  [3] &quot;to&quot;                           &quot;hear&quot;                        
+##  [5] &quot;the&quot;                          &quot;Dr~~Martin~~Luther~~King~~Jr&quot;
+##  [7] &quot;speech&quot;                       &quot;I&quot;                           
+##  [9] &quot;also&quot;                         &quot;want&quot;                        
+## [11] &quot;to&quot;                           &quot;go&quot;                          
+## [13] &quot;to&quot;                           &quot;The~~White~~House&quot;           
+## [15] &quot;to&quot;                           &quot;see&quot;                         
+## [17] &quot;President~~Obama&quot;             &quot;speak&quot;
+</code></pre>
+
+<pre><code class="r">## wfm Example
+wfm(text, c(&quot;greg&quot;, &quot;bob&quot;))
+</code></pre>
+
+<pre><code>##                          bob greg
+## also                       1    0
+## dr martin luther king jr   0    1
+## go                         1    0
+## hear                       0    1
+## i                          1    1
+## president obama            1    0
+## see                        1    0
+## speak                      1    0
+## speech                     0    1
+## the                        0    1
+## the white house            1    0
+## to                         3    1
+## want                       1    1
+</code></pre>
+
+<pre><code class="r">## trans.cloud Example
+obs &lt;- strip(space_fill(keeps, keeps), lower=FALSE)
+trans.cloud(text, c(&quot;greg&quot;, &quot;bob&quot;), target.words=list(obs), caps.list=obs, 
+    cloud.colors=qcv(red, gray65), expand.target = FALSE, title.padj = .7,
+    legend = c(&quot;space_filled&quot;, &quot;other&quot;), title.cex = 2, title.color = &quot;blue&quot;, 
+    max.word.size = 3)
+</code></pre>
+
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAABR1BMVEX9/v0AAAAAADkAAGUAAP4AAP8AOY8AOf4AZrUAZv45AAA5AGU5AP85OTk5OY85ZmU5ZrU5j9o5j/1lAABlADllAGVlAP9lOY9lOf9lZjlltf2POTmPOf+P27WP2/2mpqamprWmpsSmtbWmtdOmxOG1ZgC1Zjm1Zv+1j4+1pqa1prW1psS1tbW1tdO10+G10++1/rW1/v3EpqbEprXExKbExMTE09PE4eHE4f3TtabT08TT4dPT8P3ajzna24/a29ra/v3hxKbh07Xh4cTh8NPh/v3v07Xv/uHv/v39jzn9tWX9tf7924/92/794cT98NP9/rX9/tr9/uH9/u/9/v39/v7+AAD+ADn+OQD+ZgD+ZmX+j2X+j4/+tY/+tbX+tf3+24/+2/3+/rX+/v3/AAD/ADn/AGX/OTn/OWX/OY//Zo//ZrX/j9q/Zy+FAAAAbXRSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////////////8A////////////////////////////////HNGXIQAAAAlwSFlzAAALEgAACxIB0t1+/AAADVpJREFUeJzt3ft/W2UBgHE6KIJcdOCNMZvhNnCizg0vRTZcVSqLoc1GLKsgFSnTuf7/P/vezsk5aZYO3NbmfZ7nM9r0nNPQfb55z+Vtkj01MWRPHfcPYMeT8NCEh5bgVx55x/3XsqPK8I/6XoU/8QkPTXhowkMTHprw0ISHJjy0Pvyjmn8R/sQ3A7+feni3i6d+/P0r4/RnuvDNNeFPfP8ffPYWfglbCD9cWTkz+s6rK8+Fob0SP15fWXn2Rrh5umxwceXpX7UjPi8Pi14T/uS3EP7NtckfRi8E0jOj705uvb42evnG5PpL8QFwJm8wbtTDn2FaHj6Ovyf8yW8h/OjbK6cD+WR4Oo71U2vDONKvx7O/MuS78Hl5fEi4q1+CjjirH738fhrx1083I37Y7ucnMyM+LQ8jPmwo/Ilv4XX8xfYYH8b+qdfOxNH+9JWwdGXOrn6Sl19cOfWS8Ce/Iydw4q7+ayf8ie8bwoc9wEo86j/gm4Q/8TllC80pW2gz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" alt="plot of chunk unnamed-chunk-24"/> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAABNVBMVEX9/v0AAAAAADkAAGUAAP4AAP8AOY8AOf4AZrUAZv45AAA5AGU5AP85OTk5OY85ZmU5ZrU5Zv45j9o5j/1lAABlADllAGVlAP9lOY9lZjllZv9ltf2POTmPOf+PZv+P27WP2/2mpqamprWmpsSmtdOmxOG1ZgC1Zjm1Zv+1j4+1pqa1tbW109O10++1/rW1/v3EpqbExKbE4eHE4f3TtabT08TT8P3ajznaj//a24/a29ra/v3hxKbh07Xh/uHh/v3v07Xv4cTv/v39jzn9tWX9tf7924/92/794cT98NP9/rX9/tr9/uH9/u/9/v39/v7+AAD+OQD+ZgD+Zjn+jzn+j4/+tWX+tdr+tf3+2/3+/tr+/v3/AAD/ADn/AGX/OQD/OTn/OWX/OY//Zo//ZrX/j4//j9qc/0p0AAAAZ3RSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////8A////////////////////////////////JXH5EgAAAAlwSFlzAAALEgAACxIB0t1+/AAAEeNJREFUeJztnQmb20Ydh+u024OmBdJylG1gt80FZUlhgbTEgIsV1yTFUHNtqVtKWPr9PwKa+z/SSJa9dizN7/c+eRJnPB6N9GpOSaPnFgSS5w6dAXIYKB4UigdFix/tnEPvFlmHEb/rVCm+91A8KBQPCsWDQvGgUDwoFA8KxYMSi9/V/AvF956K+JWmu7c713703fuP9Z8QePeE4nvP1cQb3xQ/QFrFF6PR8eybb45eLov2SP39YDR68WH58YaNcGf0/M98iTfhZdBbFN9/WsXfPVn8ZvZqqfR49q3Fk7dPZq8/XDx4TZ0AxybCY2e9/FPo8PLvx9+h+P7TKn72jdGNUvmiuKHK+rWTQpX0B6r3Z4u8FG/C1SnBqn4ArOnVz17/UJf4BzdciS98Pb+olHgdXpb4MiLF957Wcfwd38aXZf/aW8eqtD9/vwwdJar6hQm/M7r2GsX3n7UTOKqq3xiK7z1bii9rgJFq9Rt+RPG9h1O2oHDKFpSK+FNNxduPH27a0FN87+kg/vH3KT4/2sXrido7o5fV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" alt="plot of chunk unnamed-chunk-24"/> </p>
 
 <h4 id="mgsub">Multiple gsub</h4>
 
@@ -2045,6 +2120,8 @@ x
 <h4 id="grab">Grab Begin/End of String to Character</h4>
 
 <h4 id="inc">Denote Incomplete End Marks With &ldquo;|&rdquo;</h4> 
+
+<h4 id="spaste">Add Leading/Trailing Spaces</h4>
 
 <h3 id="reshaping">Reshaping the Data</h3>
 

@@ -159,14 +159,14 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
         if(is.list(target.words) & length(target.words)==1) {
             target.words <- unlist(target.words)
         }
-        TWstatus <- is.vector(target.words) & !is.list(target.words)
         if (is.vector(target.words) & !is.list(target.words)) {
             target.words <- list(target.words)
         } 
         if ((length(target.words) + 1) != length(cloud.colors) & 
             !is.null(cloud.colors)) {
                 warning("length(cloud.colors) should = length(target.words) + 1")
-        }       
+        }  
+        TWstatus <- is.vector(target.words) & !is.list(target.words)     
         if (stem) {
              df <- stemDocument(words)
         }  else {
@@ -293,3 +293,4 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
         text = namers[i], char2space = char2space))
     )
 }
+

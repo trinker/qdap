@@ -39,6 +39,9 @@ BUG FIXES
   special character was passed to `match.list` or `match.string`.  See GitHub 
   issue #128 for more. 
 
+* `trans.cloud` threw an error if a single list with a named vector was passed 
+  to `target.words`.  Thes behavior has been fixed.
+
 NEW FEATURES
 
 MINOR FEATURES
