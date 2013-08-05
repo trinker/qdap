@@ -1838,9 +1838,7 @@ replace_contraction(x)
 ```
 
 
-Fox, J. (2005). Programmer's niche: How do you spell that number? R News. Vol. 5(1), pp. 51-55.
-
-The <a href="http://trinker.github.io/qdap_dev/replace_number.html" target="_blank"><code>replace_number</code></a> function utilizes The work of John <a href="">Fox (2005)</a> to turn numeric representations of numbers into their textual equivalents.  This is udeful for word statistics that require the text version of dialogue.
+The <a href="http://trinker.github.io/qdap_dev/replace_number.html" target="_blank"><code>replace_number</code></a> function utilizes The work of John <a href="">Fox (2005)</a> to turn numeric representations of numbers into their textual equivalents.  This is useful for word statistics that require the text version of dialogue.
 
 <font size="5" color="orange">&diams;</font> **Replace Numbers**-*Numeral Representation*<font size="5" color="orange">&diams;</font>
 

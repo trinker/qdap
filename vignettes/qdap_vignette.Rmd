@@ -887,9 +887,7 @@ x
 replace_contraction(x)
 ```
 
-Fox, J. (2005). Programmer's niche: How do you spell that number? R News. Vol. 5(1), pp. 51-55.
-
-The `r FUN("replace_number")` function utilizes The work of John `r citet(bib["Fox2005"])` to turn numeric representations of numbers into their textual equivalents.  This is udeful for word statistics that require the text version of dialogue.
+The `r FUN("replace_number")` function utilizes The work of John `r citet(bib["Fox2005"])` to turn numeric representations of numbers into their textual equivalents.  This is useful for word statistics that require the text version of dialogue.
 
 `r FT(orange, 5, text="&diams;")` **Replace Numbers**-*Numeral Representation*`r FT(orange, 5, text="&diams;")`
 ```{r}
