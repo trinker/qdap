@@ -1937,7 +1937,7 @@ qprep(x)
 
 <h4 id="fill">Replace Spaces</h4>
 
-Many qdap functions break sentences up into words based on the spaces between words.  Often the researcher will want to keep a group of words as a single unit.  The <a href="http://trinker.github.io/qdap_dev/space_fill.html" target="_blank"><code>space_fill</code></a> allows the researcher to replace spaces between selected phrases with <font face="courier">~~</font>.  By defualt <font face="courier">~~</font> is recognized by many qdap functions as a space separator.
+Many qdap functions break sentences up into words based on the spaces between words.  Often the researcher will want to keep a group of words as a single unit.  The <a href="http://trinker.github.io/qdap_dev/space_fill.html" target="_blank"><code>space_fill</code></a> allows the researcher to replace spaces between selected phrases with <b><font color="blue" face="courier">&#126;&#126;</font></b>.  By defualt <b><font color="blue" face="courier">&#126;&#126;</font></b> is recognized by many qdap functions as a space separator.
 
 <font size="5" color="orange">&diams;</font> **Space Fill Examples**<font size="5" color="orange">&diams;</font>
 
@@ -2027,12 +2027,199 @@ trans.cloud(text, c("greg", "bob"), target.words=list(obs), caps.list=obs,
 
 
 <h4 id="mgsub">Multiple gsub</h4>
-<h4 id="caps">Capitalize Select Words</h4>
+
+The researcher may have the need to make multiple substitutions in a text.  An example of when this is needed is when a transcript is marked up with transctiption coding convention specific to a particular transcription method.  These codes, while useful in some contexts, may lead to inaccurate word statisitcs.  The base R function <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/grep.html" target="_blank">gsub</a> makes a single replacement of these types of coding conventions. The <a href="http://trinker.github.io/qdap_dev/multigsub.html" target="_blank"><code>multigsub</code></a> (alias <a href="http://trinker.github.io/qdap_dev/mgsub.html" target="_blank"><code>mgsub</code></a>) takes a vector of patterns to search for as well as a vector of replacments.  Note that the replacements occur sequentially rather than all at once. This means a previous (first in pattern string) sub could alter or be altered by a later sub.  <a href="http://trinker.github.io/qdap_dev/mgsub.html" target="_blank"><code>mgsub</code></a> is useful throughout multiple stages of the research process.
+
+<font size="5" color="orange">&diams;</font> **Multiple Substitutions**<font size="5" color="orange">&diams;</font>
+
+```r
+left.just(DATA[, c(1, 4)])
+```
+
+```
+##    person     state                                
+## 1  sam        Computer is fun. Not too fun.        
+## 2  greg       No it's not, it's dumb.              
+## 3  teacher    What should we do?                   
+## 4  sam        You liar, it stinks!                 
+## 5  greg       I am telling the truth!              
+## 6  sally      How can we be certain?               
+## 7  greg       There is no way.                     
+## 8  sam        I distrust you.                      
+## 9  sally      What are you talking about?          
+## 10 researcher Shall we move on?  Good then.        
+## 11 greg       I'm hungry.  Let's eat.  You already?
+```
+
+```r
+multigsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
+```
+
+```
+##  [1] "Computer is fun. Not too fun."       
+##  [2] "No it is not, it is dumb."           
+##  [3] "What should we do?"                  
+##  [4] "You liar, it stinks!"                
+##  [5] "I am telling the truth!"             
+##  [6] "How can we be certain?"              
+##  [7] "There is no way."                    
+##  [8] "I distrust you."                     
+##  [9] "What are you talking about?"         
+## [10] "Shall we move on? Good then."        
+## [11] "I am hungry. Let's eat. You already?"
+```
+
+```r
+mgsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
+```
+
+```
+##  [1] "Computer is fun. Not too fun."       
+##  [2] "No it is not, it is dumb."           
+##  [3] "What should we do?"                  
+##  [4] "You liar, it stinks!"                
+##  [5] "I am telling the truth!"             
+##  [6] "How can we be certain?"              
+##  [7] "There is no way."                    
+##  [8] "I distrust you."                     
+##  [9] "What are you talking about?"         
+## [10] "Shall we move on? Good then."        
+## [11] "I am hungry. Let's eat. You already?"
+```
+
+```r
+mgsub(c("it's", "I'm"), "SINGLE REPLACEMENT", DATA$state)
+```
+
+```
+##  [1] "Computer is fun. Not too fun."                      
+##  [2] "No SINGLE REPLACEMENT not, SINGLE REPLACEMENT dumb."
+##  [3] "What should we do?"                                 
+##  [4] "You liar, it stinks!"                               
+##  [5] "I am telling the truth!"                            
+##  [6] "How can we be certain?"                             
+##  [7] "There is no way."                                   
+##  [8] "I distrust you."                                    
+##  [9] "What are you talking about?"                        
+## [10] "Shall we move on? Good then."                       
+## [11] "SINGLE REPLACEMENT hungry. Let's eat. You already?"
+```
+
+```r
+mgsub("[[:punct:]]", "PUNC", DATA$state, fixed = FALSE)
+```
+
+```
+##  [1] "Computer is funPUNC Not too funPUNC"               
+##  [2] "No itPUNCs notPUNC itPUNCs dumbPUNC"               
+##  [3] "What should we doPUNC"                             
+##  [4] "You liarPUNC it stinksPUNC"                        
+##  [5] "I am telling the truthPUNC"                        
+##  [6] "How can we be certainPUNC"                         
+##  [7] "There is no wayPUNC"                               
+##  [8] "I distrust youPUNC"                                
+##  [9] "What are you talking aboutPUNC"                    
+## [10] "Shall we move onPUNC Good thenPUNC"                
+## [11] "IPUNCm hungryPUNC LetPUNCs eatPUNC You alreadyPUNC"
+```
+
+```r
+## Iterative "I'm" converts to "I am" which converts to "INTERATIVE"
+mgsub(c("it's", "I'm", "I am"), c("it is", "I am", "ITERATIVE"), DATA$state)
+```
+
+```
+##  [1] "Computer is fun. Not too fun."            
+##  [2] "No it is not, it is dumb."                
+##  [3] "What should we do?"                       
+##  [4] "You liar, it stinks!"                     
+##  [5] "ITERATIVE telling the truth!"             
+##  [6] "How can we be certain?"                   
+##  [7] "There is no way."                         
+##  [8] "I distrust you."                          
+##  [9] "What are you talking about?"              
+## [10] "Shall we move on? Good then."             
+## [11] "ITERATIVE hungry. Let's eat. You already?"
+```
+
+
+
 <h4 id="nms">Names to Gender Prediction</h4>
+
+A researcher may face a list of names and be uncertain about gender of the participants.  The <a href="http://trinker.github.io/qdap_dev/name2sex.html" target="_blank"><code>name2sex</code></a> function utilizes the <a href="http://trinker.github.io/qdapDictionaries/NAMES_LIST.html" target="_blank"><code>NAMES_LIST</code></a> dictionary based on the 1990 U.S. census data.  For gender neutral names the gender with the higher assignment rate is assumed if <font face="courier">pred.sex</font> is set to <font face="courier">TRUE</font>, otherwise a <font color="blue">B</font> is assigned to indicate "both" genders.  For names not matching the <a href="http://trinker.github.io/qdapDictionaries/NAMES_LIST.html" target="_blank"><code>NAMES_LIST</code></a> optional fuzzy matching can be utilized via the <font face="courier">fuzzy.match</font> argument based on the use of <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/agrep.html" target="_blank">agrep</a>.  Both of these argument increase accuracy but act at the cost of speed.  The use of <font face="courier">fuzzy.match = TRUE</font> is particularly computationaly costly.
+
+<font size="5" color="orange">&diams;</font> **Name to Gender Prediction**<font size="5" color="orange">&diams;</font>
+
+```r
+name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
+    tyrone, cheryl, drew), pred.sex = TRUE, fuzzy.match = TRUE)
+```
+
+```
+##  [1] F F F M M F M F M M F M
+## Levels: F M
+```
+
+```r
+name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
+    tyrone, cheryl, drew), pred.sex = FALSE, fuzzy.match = FALSE)
+```
+
+```
+##  [1] B    <NA> F    B    B    F    B    B    B    M    F    B   
+## Levels: B F M
+```
+
+```r
+name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
+    tyrone, cheryl, drew), pred.sex = FALSE, fuzzy.match = TRUE)
+```
+
+```
+##  [1] B F F B B F B B B M F B
+## Levels: B F M
+```
+
+```r
+name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
+    tyrone, cheryl, drew), pred.sex = TRUE, fuzzy.match = FALSE)
+```
+
+```
+##  [1] F    <NA> F    M    M    F    M    F    M    M    F    M   
+## Levels: F M
+```
+
+
+
+
 <h4 id="stem">Stem Text</h4>
 <h4 id="grab">Grab Begin/End of String to Character</h4>
 <h4 id="inc">Denote Incomplete End Marks With "|"</h4> 
 <h4 id="spaste">Add Leading/Trailing Spaces</h4>
+
+<h4 id="caps">Capitalize Select Words</h4>
+
+The <a href="http://trinker.github.io/qdap_dev/capitalizer.html" target="_blank"><code>capitalizer</code></a> functions allows the researcher to specify words within a vector to be capitalized.  By defualt <font color="blue">I</font>, and contractions containing <font color="blue">I</font>, are capitalized.  Additional words can be specified through the <font face="courier">caps.list</font> argument.  To capitalize words within strings the <a href="http://trinker.github.io/qdap_dev/mgsub.html" target="_blank"><code>mgsub</code></a> can be used.
+
+<font size="5" color="orange">&diams;</font> **Word Capitalization**<font size="5" color="orange">&diams;</font>
+
+```r
+capitalizer(bag.o.words("i like it but i'm not certain"), "like")
+```
+
+```
+## [1] "I"       "Like"    "it"      "but"     "I'm"     "not"     "certain"
+```
+
+```r
+capitalizer(bag.o.words("i like it but i'm not certain"), "like", FALSE)
+```
+
+```
+## [1] "i"       "Like"    "it"      "but"     "i'm"     "not"     "certain"
+```
+
 
 <h3 id="reshaping">Reshaping the Data</h3>
 

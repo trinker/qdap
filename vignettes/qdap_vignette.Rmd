@@ -925,7 +925,7 @@ qprep(x)
 
 <h4 id="fill">Replace Spaces</h4>
 
-Many qdap functions break sentences up into words based on the spaces between words.  Often the researcher will want to keep a group of words as a single unit.  The `r FUN("space_fill")` allows the researcher to replace spaces between selected phrases with `r CN("~~")`.  By defualt `r CN("~~")` is recognized by many qdap functions as a space separator.
+Many qdap functions break sentences up into words based on the spaces between words.  Often the researcher will want to keep a group of words as a single unit.  The `r FUN("space_fill")` allows the researcher to replace spaces between selected phrases with <b><font color="blue" face="courier">&#126;&#126;</font></b>.  By defualt <b><font color="blue" face="courier">&#126;&#126;</font></b> is recognized by many qdap functions as a space separator.
 
 `r FT(orange, 5, text="&diams;")` **Space Fill Examples**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -952,12 +952,53 @@ trans.cloud(text, c("greg", "bob"), target.words=list(obs), caps.list=obs,
 ```
 
 <h4 id="mgsub">Multiple gsub</h4>
-<h4 id="caps">Capitalize Select Words</h4>
+
+The researcher may have the need to make multiple substitutions in a text.  An example of when this is needed is when a transcript is marked up with transctiption coding convention specific to a particular transcription method.  These codes, while useful in some contexts, may lead to inaccurate word statisitcs.  The base R function `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/grep.html", "gsub")` makes a single replacement of these types of coding conventions. The `r FUN("multigsub")` (alias `r FUN("mgsub")`) takes a vector of patterns to search for as well as a vector of replacments.  Note that the replacements occur sequentially rather than all at once. This means a previous (first in pattern string) sub could alter or be altered by a later sub.  `r FUN("mgsub")` is useful throughout multiple stages of the research process.
+
+`r FT(orange, 5, text="&diams;")` **Multiple Substitutions**`r FT(orange, 5, text="&diams;")`
+```{r}
+left.just(DATA[, c(1, 4)])
+multigsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
+mgsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
+mgsub(c("it's", "I'm"), "SINGLE REPLACEMENT", DATA$state)
+mgsub("[[:punct:]]", "PUNC", DATA$state, fixed = FALSE)
+## Iterative "I'm" converts to "I am" which converts to "INTERATIVE"
+mgsub(c("it's", "I'm", "I am"), c("it is", "I am", "ITERATIVE"), DATA$state)
+```
+
+
 <h4 id="nms">Names to Gender Prediction</h4>
+
+A researcher may face a list of names and be uncertain about gender of the participants.  The `r FUN("name2sex")` function utilizes the `r FUN2("NAMES_LIST")` dictionary based on the 1990 U.S. census data.  For gender neutral names the gender with the higher assignment rate is assumed if `r CN("pred.sex")` is set to `r CN("TRUE")`, otherwise a `r FT(blue, text="B")` is assigned to indicate "both" genders.  For names not matching the `r FUN2("NAMES_LIST")` optional fuzzy matching can be utilized via the `r CN("fuzzy.match")` argument based on the use of `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/agrep.html", "agrep")`.  Both of these argument increase accuracy but act at the cost of speed.  The use of `r CN("fuzzy.match = TRUE")` is particularly computationaly costly.
+
+`r FT(orange, 5, text="&diams;")` **Name to Gender Prediction**`r FT(orange, 5, text="&diams;")`
+```{r}
+name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
+    tyrone, cheryl, drew), pred.sex = TRUE, fuzzy.match = TRUE)
+name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
+    tyrone, cheryl, drew), pred.sex = FALSE, fuzzy.match = FALSE)
+name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
+    tyrone, cheryl, drew), pred.sex = FALSE, fuzzy.match = TRUE)
+name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
+    tyrone, cheryl, drew), pred.sex = TRUE, fuzzy.match = FALSE)
+```
+
+
+
 <h4 id="stem">Stem Text</h4>
 <h4 id="grab">Grab Begin/End of String to Character</h4>
 <h4 id="inc">Denote Incomplete End Marks With "|"</h4> 
 <h4 id="spaste">Add Leading/Trailing Spaces</h4>
+
+<h4 id="caps">Capitalize Select Words</h4>
+
+The `r FUN("capitalizer")` functions allows the researcher to specify words within a vector to be capitalized.  By defualt `r FT(blue, text="I")`, and contractions containing `r FT(blue, text="I")`, are capitalized.  Additional words can be specified through the `r CN("caps.list")` argument.  To capitalize words within strings the `r FUN("mgsub")` can be used.
+
+`r FT(orange, 5, text="&diams;")` **Word Capitalization**`r FT(orange, 5, text="&diams;")`
+```{r}
+capitalizer(bag.o.words("i like it but i'm not certain"), "like")
+capitalizer(bag.o.words("i like it but i'm not certain"), "like", FALSE)
+```
 
 <h3 id="reshaping">Reshaping the Data</h3>
 

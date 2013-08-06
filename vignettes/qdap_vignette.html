@@ -2032,7 +2032,7 @@ x
 
 <h4 id="fill">Replace Spaces</h4>
 
-<p>Many qdap functions break sentences up into words based on the spaces between words.  Often the researcher will want to keep a group of words as a single unit.  The <a href="http://trinker.github.io/qdap_dev/space_fill.html" target="_blank"><code>space_fill</code></a> allows the researcher to replace spaces between selected phrases with <font face="courier"><del></font>.  By defualt <font face="courier"></del></font> is recognized by many qdap functions as a space separator.</p>
+<p>Many qdap functions break sentences up into words based on the spaces between words.  Often the researcher will want to keep a group of words as a single unit.  The <a href="http://trinker.github.io/qdap_dev/space_fill.html" target="_blank"><code>space_fill</code></a> allows the researcher to replace spaces between selected phrases with <b><font color="blue" face="courier">&#126;&#126;</font></b>.  By defualt <b><font color="blue" face="courier">&#126;&#126;</font></b> is recognized by many qdap functions as a space separator.</p>
 
 <p><font size="5" color="orange">&diams;</font> <strong>Space Fill Examples</strong><font size="5" color="orange">&diams;</font></p>
 
@@ -2107,13 +2107,149 @@ trans.cloud(text, c(&quot;greg&quot;, &quot;bob&quot;), target.words=list(obs), 
     max.word.size = 3)
 </code></pre>
 
-<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAABR1BMVEX9/v0AAAAAADkAAGUAAP4AAP8AOY8AOf4AZrUAZv45AAA5AGU5AP85OTk5OY85ZmU5ZrU5j9o5j/1lAABlADllAGVlAP9lOY9lOf9lZjlltf2POTmPOf+P27WP2/2mpqamprWmpsSmtbWmtdOmxOG1ZgC1Zjm1Zv+1j4+1pqa1prW1psS1tbW1tdO10+G10++1/rW1/v3EpqbEprXExKbExMTE09PE4eHE4f3TtabT08TT4dPT8P3ajzna24/a29ra/v3hxKbh07Xh4cTh8NPh/v3v07Xv/uHv/v39jzn9tWX9tf7924/92/794cT98NP9/rX9/tr9/uH9/u/9/v39/v7+AAD+ADn+OQD+ZgD+ZmX+j2X+j4/+tY/+tbX+tf3+24/+2/3+/rX+/v3/AAD/ADn/AGX/OTn/OWX/OY//Zo//ZrX/j9q/Zy+FAAAAbXRSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////////////8A////////////////////////////////HNGXIQAAAAlwSFlzAAALEgAACxIB0t1+/AAADVpJREFUeJzt3ft/W2UBgHE6KIJcdOCNMZvhNnCizg0vRTZcVSqLoc1GLKsgFSnTuf7/P/vezsk5aZYO3NbmfZ7nM9r0nNPQfb55z+Vtkj01MWRPHfcPYMeT8NCEh5bgVx55x/3XsqPK8I/6XoU/8QkPTXhowkMTHprw0ISHJjy0Pvyjmn8R/sQ3A7+feni3i6d+/P0r4/RnuvDNNeFPfP8ffPYWfglbCD9cWTkz+s6rK8+Fob0SP15fWXn2Rrh5umxwceXpX7UjPi8Pi14T/uS3EP7NtckfRi8E0jOj705uvb42evnG5PpL8QFwJm8wbtTDn2FaHj6Ovyf8yW8h/OjbK6cD+WR4Oo71U2vDONKvx7O/MuS78Hl5fEi4q1+CjjirH738fhrx1083I37Y7ucnMyM+LQ8jPmwo/Ilv4XX8xfYYH8b+qdfOxNH+9JWwdGXOrn6Sl19cOfWS8Ce/Iydw4q7+ayf8ie8bwoc9wEo86j/gm4Q/8TllC80pW2gz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" alt="plot of chunk unnamed-chunk-24"/> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAABNVBMVEX9/v0AAAAAADkAAGUAAP4AAP8AOY8AOf4AZrUAZv45AAA5AGU5AP85OTk5OY85ZmU5ZrU5Zv45j9o5j/1lAABlADllAGVlAP9lOY9lZjllZv9ltf2POTmPOf+PZv+P27WP2/2mpqamprWmpsSmtdOmxOG1ZgC1Zjm1Zv+1j4+1pqa1tbW109O10++1/rW1/v3EpqbExKbE4eHE4f3TtabT08TT8P3ajznaj//a24/a29ra/v3hxKbh07Xh/uHh/v3v07Xv4cTv/v39jzn9tWX9tf7924/92/794cT98NP9/rX9/tr9/uH9/u/9/v39/v7+AAD+OQD+ZgD+Zjn+jzn+j4/+tWX+tdr+tf3+2/3+/tr+/v3/AAD/ADn/AGX/OQD/OTn/OWX/OY//Zo//ZrX/j4//j9qc/0p0AAAAZ3RSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////8A////////////////////////////////JXH5EgAAAAlwSFlzAAALEgAACxIB0t1+/AAAEeNJREFUeJztnQmb20Ydh+u024OmBdJylG1gt80FZUlhgbTEgIsV1yTFUHNtqVtKWPr9PwKa+z/SSJa9dizN7/c+eRJnPB6N9GpOSaPnFgSS5w6dAXIYKB4UigdFix/tnEPvFlmHEb/rVCm+91A8KBQPCsWDQvGgUDwoFA8KxYMSi9/V/AvF956K+JWmu7c713703fuP9Z8QePeE4nvP1cQb3xQ/QFrFF6PR8eybb45eLov2SP39YDR68WH58YaNcGf0/M98iTfhZdBbFN9/WsXfPVn8ZvZqqfR49q3Fk7dPZq8/XDx4TZ0AxybCY2e9/FPo8PLvx9+h+P7TKn72jdGNUvmiuKHK+rWTQpX0B6r3Z4u8FG/C1SnBqn4ArOnVz17/UJf4BzdciS98Pb+olHgdXpb4MiLF957Wcfwd38aXZf/aW8eqtD9/vwwdJar6hQm/M7r2GsX3n7UTOKqq3xiK7z1bii9rgJFq9Rt+RPG9h1O2oHDKFpSK+FNNxduPH27a0FN87+kg/vH3KT4/2sXrido7o5fV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" alt="plot of chunk unnamed-chunk-24"/> </p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAABR1BMVEX9/v0AAAAAADkAAGUAAP4AAP8AOY8AOf4AZrUAZv45AAA5AGU5AP85OTk5OY85ZmU5ZrU5j9o5j/1lAABlADllAGVlAP9lOY9lOf9lZjlltf2POTmPOf+P27WP2/2mpqamprWmpsSmtbWmtdOmxOG1ZgC1Zjm1Zv+1j4+1pqa1prW1psS1tbW1tdO10+G10++1/rW1/v3EpqbEprXExKbExMTE09PE4eHE4f3TtabT08TT4dPT8P3ajzna24/a29ra/v3hxKbh07Xh4cTh8NPh/v3v07Xv/uHv/v39jzn9tWX9tf7924/92/794cT98NP9/rX9/tr9/uH9/u/9/v39/v7+AAD+ADn+OQD+ZgD+ZmX+j2X+j4/+tY/+tbX+tf3+24/+2/3+/rX+/v3/AAD/ADn/AGX/OTn/OWX/OY//Zo//ZrX/j9q/Zy+FAAAAbXRSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////////////8A////////////////////////////////HNGXIQAAAAlwSFlzAAALEgAACxIB0t1+/AAADXhJREFUeJzt3fubG1UBgGG2sAhy0YI3Cm5a24IFtbZ4WWSLjcpKY9hNS1y6gqxIqNbu//+zcy4zmUmylwIPm5zv+56ym83Mxvq8c+aSZmaeGBuyJ876L2Bnk/DQhIcW4de+8c76/5adVIL/pl9V+KVPeGjCQxMemvDQhIcmPDThoXXhv6n3X4Rf+mbgJ7HTu10999Mf3hjFP9MnX98Qfun7evDJW/gV7Fj4wdraheH3Xl57phraa+HrrbW1p29XD8/nGa6uPfnrZsSn56unXhF++TsW/vWN8R+Hz1WkF4bfH999dWP44u3xrRfCAnAhzTCq1as/g/h89XX0A+GXv2Phh99dO1+Rjwfnw1g/tzEII/1W2PvLQ74Nn54Pi4Sr+hXohL364YvvxRF/63w94gfNen48M+Lj89WIr2YUfuk79jj+arONr8b+uVcuhNH+5I3q2bUFq/pxev7q2rkXhF/+TnwDJ6zqHzvhl76vCF+tAdbCVv+IXxJ+6fMtW2i+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" alt="plot of chunk unnamed-chunk-24"/> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAH4CAMAAACR9g9NAAABNVBMVEX9/v0AAAAAADkAAGUAAP4AAP8AOY8AOf4AZrUAZv45AAA5AGU5AP85OTk5OY85ZmU5ZrU5Zv45j9o5j/1lAABlADllAGVlAP9lOY9lZjllZv9ltf2POTmPOf+PZv+P27WP2/2mpqamprWmpsSmtdOmxOG1ZgC1Zjm1Zv+1j4+1pqa1tbW109O10++1/rW1/v3EpqbExKbE4eHE4f3TtabT08TT8P3ajznaj//a24/a29ra/v3hxKbh07Xh/uHh/v3v07Xv4cTv/v39jzn9tWX9tf7924/92/794cT98NP9/rX9/tr9/uH9/u/9/v39/v7+AAD+OQD+ZgD+Zjn+jzn+j4/+tWX+tdr+tf3+2/3+/tr+/v3/AAD/ADn/AGX/OQD/OTn/OWX/OY//Zo//ZrX/j4//j9qc/0p0AAAAZ3RSTlP///////////////////////////////////////////////////////////////////////////////////////////////////////8A////////////////////////////////JXH5EgAAAAlwSFlzAAALEgAACxIB0t1+/AAAEa5JREFUeJztnQmb20Ydh9m2W1poOVLuUMiWJi1HSCFAgBgwrOMuCRgwVwrbAmHp9/8IaGY0lzSStY53ben3vs8+u97ReCzp1Vx/SdYnViDJJ/a9ArAfEC8K4kWx4o92zr43CzbhxO+6VMQfPIgXBfGiIF4UxIuCeFEQLwriRcnF7yr+gviDpyH+3DLc250Xvvmle4/tT0x85xbiD57nE+98I36E9IpfHB3dXH72C0evVFX7yPx+cHT08sPq5Y06w52jF78farxLr5K+ivjDp1f8O7dWP19+ulJ6c/m51ZOv31p+5uHqwevmALjpMjz21qufhU2vfj/+IuIPn17xy08d3aiUrxY3TF1/4dbC1PQHZvRXV/lUvEs3hwRN/QjYMKpffuZntsY/uOFr/CK086tGjbfpVY2vMiL+4Omdx98JfXxV91/46k1T21+8V6UeFZr6lUu/c/TC64g/fDYGcExTf2kQf/BsKb5qAY5Mr9/xJsQfPIRsRSFkK0pD/Iml4e3bDy/b0SP+4Bkg/vFXED89+sXbQO2d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" alt="plot of chunk unnamed-chunk-24"/> </p>
 
 <h4 id="mgsub">Multiple gsub</h4>
 
-<h4 id="caps">Capitalize Select Words</h4>
+<p>The researcher may have the need to make multiple substitutions in a text.  An example of when this is needed is when a transcript is marked up with transctiption coding convention specific to a particular transcription method.  These codes, while useful in some contexts, may lead to inaccurate word statisitcs.  The base R function <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/grep.html" target="_blank">gsub</a> makes a single replacement of these types of coding conventions. The <a href="http://trinker.github.io/qdap_dev/multigsub.html" target="_blank"><code>multigsub</code></a> (alias <a href="http://trinker.github.io/qdap_dev/mgsub.html" target="_blank"><code>mgsub</code></a>) takes a vector of patterns to search for as well as a vector of replacments.  Note that the replacements occur sequentially rather than all at once. This means a previous (first in pattern string) sub could alter or be altered by a later sub.  <a href="http://trinker.github.io/qdap_dev/mgsub.html" target="_blank"><code>mgsub</code></a> is useful throughout multiple stages of the research process.</p>
+
+<p><font size="5" color="orange">&diams;</font> <strong>Multiple Substitutions</strong><font size="5" color="orange">&diams;</font></p>
+
+<pre><code class="r">left.just(DATA[, c(1, 4)])
+</code></pre>
+
+<pre><code>##    person     state                                
+## 1  sam        Computer is fun. Not too fun.        
+## 2  greg       No it&#39;s not, it&#39;s dumb.              
+## 3  teacher    What should we do?                   
+## 4  sam        You liar, it stinks!                 
+## 5  greg       I am telling the truth!              
+## 6  sally      How can we be certain?               
+## 7  greg       There is no way.                     
+## 8  sam        I distrust you.                      
+## 9  sally      What are you talking about?          
+## 10 researcher Shall we move on?  Good then.        
+## 11 greg       I&#39;m hungry.  Let&#39;s eat.  You already?
+</code></pre>
+
+<pre><code class="r">multigsub(c(&quot;it&#39;s&quot;, &quot;I&#39;m&quot;), c(&quot;it is&quot;, &quot;I am&quot;), DATA$state)
+</code></pre>
+
+<pre><code>##  [1] &quot;Computer is fun. Not too fun.&quot;       
+##  [2] &quot;No it is not, it is dumb.&quot;           
+##  [3] &quot;What should we do?&quot;                  
+##  [4] &quot;You liar, it stinks!&quot;                
+##  [5] &quot;I am telling the truth!&quot;             
+##  [6] &quot;How can we be certain?&quot;              
+##  [7] &quot;There is no way.&quot;                    
+##  [8] &quot;I distrust you.&quot;                     
+##  [9] &quot;What are you talking about?&quot;         
+## [10] &quot;Shall we move on? Good then.&quot;        
+## [11] &quot;I am hungry. Let&#39;s eat. You already?&quot;
+</code></pre>
+
+<pre><code class="r">mgsub(c(&quot;it&#39;s&quot;, &quot;I&#39;m&quot;), c(&quot;it is&quot;, &quot;I am&quot;), DATA$state)
+</code></pre>
+
+<pre><code>##  [1] &quot;Computer is fun. Not too fun.&quot;       
+##  [2] &quot;No it is not, it is dumb.&quot;           
+##  [3] &quot;What should we do?&quot;                  
+##  [4] &quot;You liar, it stinks!&quot;                
+##  [5] &quot;I am telling the truth!&quot;             
+##  [6] &quot;How can we be certain?&quot;              
+##  [7] &quot;There is no way.&quot;                    
+##  [8] &quot;I distrust you.&quot;                     
+##  [9] &quot;What are you talking about?&quot;         
+## [10] &quot;Shall we move on? Good then.&quot;        
+## [11] &quot;I am hungry. Let&#39;s eat. You already?&quot;
+</code></pre>
+
+<pre><code class="r">mgsub(c(&quot;it&#39;s&quot;, &quot;I&#39;m&quot;), &quot;SINGLE REPLACEMENT&quot;, DATA$state)
+</code></pre>
+
+<pre><code>##  [1] &quot;Computer is fun. Not too fun.&quot;                      
+##  [2] &quot;No SINGLE REPLACEMENT not, SINGLE REPLACEMENT dumb.&quot;
+##  [3] &quot;What should we do?&quot;                                 
+##  [4] &quot;You liar, it stinks!&quot;                               
+##  [5] &quot;I am telling the truth!&quot;                            
+##  [6] &quot;How can we be certain?&quot;                             
+##  [7] &quot;There is no way.&quot;                                   
+##  [8] &quot;I distrust you.&quot;                                    
+##  [9] &quot;What are you talking about?&quot;                        
+## [10] &quot;Shall we move on? Good then.&quot;                       
+## [11] &quot;SINGLE REPLACEMENT hungry. Let&#39;s eat. You already?&quot;
+</code></pre>
+
+<pre><code class="r">mgsub(&quot;[[:punct:]]&quot;, &quot;PUNC&quot;, DATA$state, fixed = FALSE)
+</code></pre>
+
+<pre><code>##  [1] &quot;Computer is funPUNC Not too funPUNC&quot;               
+##  [2] &quot;No itPUNCs notPUNC itPUNCs dumbPUNC&quot;               
+##  [3] &quot;What should we doPUNC&quot;                             
+##  [4] &quot;You liarPUNC it stinksPUNC&quot;                        
+##  [5] &quot;I am telling the truthPUNC&quot;                        
+##  [6] &quot;How can we be certainPUNC&quot;                         
+##  [7] &quot;There is no wayPUNC&quot;                               
+##  [8] &quot;I distrust youPUNC&quot;                                
+##  [9] &quot;What are you talking aboutPUNC&quot;                    
+## [10] &quot;Shall we move onPUNC Good thenPUNC&quot;                
+## [11] &quot;IPUNCm hungryPUNC LetPUNCs eatPUNC You alreadyPUNC&quot;
+</code></pre>
+
+<pre><code class="r">## Iterative &quot;I&#39;m&quot; converts to &quot;I am&quot; which converts to &quot;INTERATIVE&quot;
+mgsub(c(&quot;it&#39;s&quot;, &quot;I&#39;m&quot;, &quot;I am&quot;), c(&quot;it is&quot;, &quot;I am&quot;, &quot;ITERATIVE&quot;), DATA$state)
+</code></pre>
+
+<pre><code>##  [1] &quot;Computer is fun. Not too fun.&quot;            
+##  [2] &quot;No it is not, it is dumb.&quot;                
+##  [3] &quot;What should we do?&quot;                       
+##  [4] &quot;You liar, it stinks!&quot;                     
+##  [5] &quot;ITERATIVE telling the truth!&quot;             
+##  [6] &quot;How can we be certain?&quot;                   
+##  [7] &quot;There is no way.&quot;                         
+##  [8] &quot;I distrust you.&quot;                          
+##  [9] &quot;What are you talking about?&quot;              
+## [10] &quot;Shall we move on? Good then.&quot;             
+## [11] &quot;ITERATIVE hungry. Let&#39;s eat. You already?&quot;
+</code></pre>
 
 <h4 id="nms">Names to Gender Prediction</h4>
+
+<p>A researcher may face a list of names and be uncertain about gender of the participants.  The <a href="http://trinker.github.io/qdap_dev/name2sex.html" target="_blank"><code>name2sex</code></a> function utilizes the <a href="http://trinker.github.io/qdapDictionaries/NAMES_LIST.html" target="_blank"><code>NAMES_LIST</code></a> dictionary based on the 1990 U.S. census data.  For gender neutral names the gender with the higher assignment rate is assumed if <font face="courier">pred.sex</font> is set to <font face="courier">TRUE</font>, otherwise a <font color="blue">B</font> is assigned to indicate &ldquo;both&rdquo; genders.  For names not matching the <a href="http://trinker.github.io/qdapDictionaries/NAMES_LIST.html" target="_blank"><code>NAMES_LIST</code></a> optional fuzzy matching can be utilized via the <font face="courier">fuzzy.match</font> argument based on the use of <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/agrep.html" target="_blank">agrep</a>.  Both of these argument increase accuracy but act at the cost of speed.  The use of <font face="courier">fuzzy.match = TRUE</font> is particularly computationaly costly.</p>
+
+<p><font size="5" color="orange">&diams;</font> <strong>Name to Gender Prediction</strong><font size="5" color="orange">&diams;</font></p>
+
+<pre><code class="r">name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
+    tyrone, cheryl, drew), pred.sex = TRUE, fuzzy.match = TRUE)
+</code></pre>
+
+<pre><code>##  [1] F F F M M F M F M M F M
+## Levels: F M
+</code></pre>
+
+<pre><code class="r">name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
+    tyrone, cheryl, drew), pred.sex = FALSE, fuzzy.match = FALSE)
+</code></pre>
+
+<pre><code>##  [1] B    &lt;NA&gt; F    B    B    F    B    B    B    M    F    B   
+## Levels: B F M
+</code></pre>
+
+<pre><code class="r">name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
+    tyrone, cheryl, drew), pred.sex = FALSE, fuzzy.match = TRUE)
+</code></pre>
+
+<pre><code>##  [1] B F F B B F B B B M F B
+## Levels: B F M
+</code></pre>
+
+<pre><code class="r">name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
+    tyrone, cheryl, drew), pred.sex = TRUE, fuzzy.match = FALSE)
+</code></pre>
+
+<pre><code>##  [1] F    &lt;NA&gt; F    M    M    F    M    F    M    M    F    M   
+## Levels: F M
+</code></pre>
 
 <h4 id="stem">Stem Text</h4>
 
@@ -2122,6 +2258,24 @@ trans.cloud(text, c(&quot;greg&quot;, &quot;bob&quot;), target.words=list(obs), 
 <h4 id="inc">Denote Incomplete End Marks With &ldquo;|&rdquo;</h4> 
 
 <h4 id="spaste">Add Leading/Trailing Spaces</h4>
+
+<h4 id="caps">Capitalize Select Words</h4>
+
+<p>The <a href="http://trinker.github.io/qdap_dev/capitalizer.html" target="_blank"><code>capitalizer</code></a> functions allows the researcher to specify words within a vector to be capitalized.  By defualt <font color="blue">I</font>, and contractions containing <font color="blue">I</font>, are capitalized.  Additional words can be specified through the <font face="courier">caps.list</font> argument.  To capitalize words within strings the <a href="http://trinker.github.io/qdap_dev/mgsub.html" target="_blank"><code>mgsub</code></a> can be used.</p>
+
+<p><font size="5" color="orange">&diams;</font> <strong>Word Capitalization</strong><font size="5" color="orange">&diams;</font></p>
+
+<pre><code class="r">capitalizer(bag.o.words(&quot;i like it but i&#39;m not certain&quot;), &quot;like&quot;)
+</code></pre>
+
+<pre><code>## [1] &quot;I&quot;       &quot;Like&quot;    &quot;it&quot;      &quot;but&quot;     &quot;I&#39;m&quot;     &quot;not&quot;     &quot;certain&quot;
+</code></pre>
+
+<pre><code class="r">capitalizer(bag.o.words(&quot;i like it but i&#39;m not certain&quot;), &quot;like&quot;, FALSE)
+</code></pre>
+
+<pre><code>## [1] &quot;i&quot;       &quot;Like&quot;    &quot;it&quot;      &quot;but&quot;     &quot;i&#39;m&quot;     &quot;not&quot;     &quot;certain&quot;
+</code></pre>
 
 <h3 id="reshaping">Reshaping the Data</h3>
 
