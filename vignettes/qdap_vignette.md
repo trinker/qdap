@@ -2191,9 +2191,76 @@ name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES,
 ```
 
 
-
-
 <h4 id="stem">Stem Text</h4>
+
+During the initial cleaning stage of analysis the researcher may chose to create a stemmed verion of the dialogue, that is words are reduced to their root words.  The <a href="http://trinker.github.io/qdap_dev/stemmer.html" target="_blank"><code>stemmer</code></a> family of functions allow the researcher to create stemmed text.  The <a href="http://trinker.github.io/qdap_dev/stem2df.html" target="_blank"><code>stem2df</code></a> function wraps <a href="http://trinker.github.io/qdap_dev/stemmer.html" target="_blank"><code>stemmer</code></a> to quickly create a dataframe with the stemmed column added.
+
+<font size="5" color="orange">&diams;</font> **Stemming**<font size="5" color="orange">&diams;</font>
+
+```r
+## stem2df EXAMPLE:
+stem2df(DATA, "state", "new")
+```
+
+```
+##        person sex adult                                 state code
+## 1         sam   m     0         Computer is fun. Not too fun.   K1
+## 2        greg   m     0               No it's not, it's dumb.   K2
+## 3     teacher   m     1                    What should we do?   K3
+## 4         sam   m     0                  You liar, it stinks!   K4
+## 5        greg   m     0               I am telling the truth!   K5
+## 6       sally   f     0                How can we be certain?   K6
+## 7        greg   m     0                      There is no way.   K7
+## 8         sam   m     0                       I distrust you.   K8
+## 9       sally   f     0           What are you talking about?   K9
+## 10 researcher   f     1         Shall we move on?  Good then.  K10
+## 11       greg   m     0 I'm hungry.  Let's eat.  You already?  K11
+##                                new
+## 1       Comput is fun not too fun.
+## 2               No it not it dumb.
+## 3               What should we do?
+## 4               You liar it stink!
+## 5             I am tell the truth!
+## 6           How can we be certain?
+## 7                 There is no way.
+## 8                  I distrust you.
+## 9         What are you talk about?
+## 10     Shall we move on good then.
+## 11 I'm hungri let eat you alreadi?
+```
+
+```r
+with(stem2df(DATA, "state", "new"), trans.cloud(new, sex, title.cex = 2.5, 
+    title.color = "blue", max.word.size = 5, title.padj = .7))
+```
+
+![plot of chunk unnamed-chunk-27](figure/unnamed-chunk-271.png) ![plot of chunk unnamed-chunk-27](figure/unnamed-chunk-272.png) 
+
+```r
+## stemmer EXAMPLE:
+stemmer(DATA$state)
+```
+
+```
+##  [1] "Comput is fun not too fun."      "No it not it dumb."             
+##  [3] "What should we do?"              "You liar it stink!"             
+##  [5] "I am tell the truth!"            "How can we be certain?"         
+##  [7] "There is no way."                "I distrust you."                
+##  [9] "What are you talk about?"        "Shall we move on good then."    
+## [11] "I'm hungri let eat you alreadi?"
+```
+
+```r
+## stem.words EXAMPLE:
+stem.words(doggies, jumping, swims)
+```
+
+```
+## [1] "doggi" "jump"  "swim"
+```
+
+
+
 <h4 id="grab">Grab Begin/End of String to Character</h4>
 <h4 id="inc">Denote Incomplete End Marks With "|"</h4> 
 <h4 id="spaste">Add Leading/Trailing Spaces</h4>
