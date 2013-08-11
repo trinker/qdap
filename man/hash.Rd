@@ -1,43 +1,50 @@
 \name{hash}
+\alias{\%ha\%}
 \alias{hash}
+\alias{hash_look}
 \title{Hash/Dictionary Lookup}
 \usage{
   hash(x, mode.out = "numeric")
+
+  hash_look(terms, envir, missing = NA)
+
+  %ha%(terms, envir, missing = NA)
 }
 \arguments{
   \item{x}{A two column dataframe.}
 
   \item{mode.out}{The type of output (column 2) expected
   (e.g., \code{"character"}, \code{"numeric"}, etc.)}
+
+  \item{terms}{A vector of terms to undergo a lookup.}
+
+  \item{envir}{The hash environment to use.}
+
+  \item{missing}{Value to assign to terms not found in the
+  hash table.}
 }
 \value{
-  Creates a "hash table" or a two column data frame in its
+  Creates a "hash table", a two column data frame in its
   own environment.
 }
 \description{
-  Creates a new environment for quick hash style dictionary
-  lookup.
+  \code{hash} - Creates a new environment for quick hash
+  style dictionary lookup.
+
+  \code{hash_look} - Works with a hash table such as is
+  returned from \code{hash}, to lookup values.
+
+  \code{terms \%ha\% envir} - A binary operator version of
+  \code{hash_look}.
 }
 \examples{
 \dontrun{
 (DF <- aggregate(mpg~as.character(carb), mtcars, mean))
-new.hash <- hash(DF)  #numeric outcome
-sapply(as.character(mtcars$carb), function(x) {
-    if(exists(x, envir = new.hash)) {
-        get(x, envir = new.hash)
-    } else {
-        NA
-    }
-})
+new.hash1 <- hash(DF)  #numeric outcome
+hash_look(x, new.hash1)
 
-new.hash <- hash(DF, "character") #character outcome
-sapply(as.character(mtcars$carb), function(x) {
-    if(exists(x, envir = new.hash)) {
-        get(x, envir = new.hash)
-    } else {
-        NA
-    }
-})
+new.hash2 <- hash(DF, "character") #character outcome
+x \%ha\% new.hash2
 }
 }
 \author{
