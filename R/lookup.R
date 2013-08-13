@@ -15,6 +15,7 @@
 #' \code{\link[base]{new.env}}
 #' @keywords dictionary, hash, lookup
 #' @export
+#' @rdname lookup
 #' @examples
 #' \dontrun{
 #' ## Supply a dataframe to key.match
@@ -44,6 +45,10 @@
 #'     
 #' lookup(mtcars$carb, sort(unique(mtcars$carb)),        
 #'     seq(10, 60, by=10))
+#'     
+#' ## %l%, a binarary operator version of lookup
+#' 1:5 %l% data.frame(1:4, 11:14)
+#' 1:10 %l% codes
 #' }
 lookup <-
 function(terms, key.match, key.reassign=NULL, missing = NA) {
@@ -92,3 +97,12 @@ function(terms, key.match, key.reassign=NULL, missing = NA) {
     }                                                              
     recoder(terms, envr = KEY, missing = missing)     
 }
+
+#' Hash/Dictionary Lookup
+#' 
+#' \code{terms \%l\% key.match} - A binary operator version of \code{lookup} 
+#' for when \code{key.match} is a data.frame or named list.
+#'
+#' @export
+#' @rdname lookup
+`%l%` <- lookup

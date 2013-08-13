@@ -72,13 +72,25 @@ MINOR FEATURES
   on something like `file.path(getwd(), )`.  This mean portability of code on 
   different machines.
 
+* `hash_look` a counterpart to `hash` added to allow quick access to a hash 
+  table.  Intended for use within functions as lookup is more conveinent though 
+  could be slower.
+
+* `polarity_frame` a function to make a hash environment lookup for use with the 
+  `polarity` function.
+
 CHANGES
 
 * The dictionaries and word lists for qdap have been moved to their own package, 
   `qdapDictionaries`.  This will allow easier access to these resources beyond 
   the qdap package as well as reducing the overall size of the qdap package.  
   Because this is a major change that make break the code of some users the 
-  major release number has been upped to 1.
+  major release number has been upped to 1.  The following name changes have 
+  occurred:
+      increase.amplification.words -> became -> amplification.words
+
+  The deamplification.words and env.pol wordlist and dictionary were added as 
+  well.
 
 * qdap gains an HTML package vignette to better explain the intended work flow 
   and function use for the package.

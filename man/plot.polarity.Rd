@@ -6,7 +6,7 @@
     mid = "grey99", high = "blue",
     ave.polarity.shape = "+", alpha = 1/4, shape = 19,
     point.size = 2.5, jitter = 0.1, nrow = NULL,
-    na.rm = TRUE, ...)
+    na.rm = TRUE, order.by.polarity = TRUE, ...)
 }
 \arguments{
   \item{x}{The polarity object.}
@@ -38,9 +38,13 @@
 
   \item{nrow}{The number of rows in the dotplot legend
   (used when the number of grouping variables makes the
-  legend too wide).  If NULL no legend if plotted.}
+  legend too wide).  If \code{NULL} no legend if plotted.}
 
   \item{na.rm}{logical. Should missing values be removed?}
+
+  \item{order.by.polarity}{logical.  If \code{TRUE} the
+  group polarity plot will be ordered by average polarity
+  score, otherwise alphabetical order is assumed.}
 
   \item{\ldots}{ignored}
 }

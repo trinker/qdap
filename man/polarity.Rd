@@ -1,13 +1,19 @@
 \name{polarity}
 \alias{polarity}
+\alias{polarity_frame}
 \title{Polarity Score (Sentiment Analysis)}
 \usage{
   polarity(text.var, grouping.var = NULL,
-    positive.list = positive.words,
-    negative.list = negative.words,
-    negation.list = negation.words,
-    amplification.list = increase.amplification.words,
-    rm.incomplete = FALSE, digits = 3, ...)
+    polarity.frame = qdapDictionaries::env.pol,
+    negators = qdapDictionaries::negation.words,
+    amplifiers = qdapDictionaries::amplification.words,
+    deamplifiers = qdapDictionaries::deamplification.words,
+    question.weight = 0, amplifier.weight = 0.8,
+    n.before = 4, n.after = 2, rm.incomplete = FALSE,
+    digits = 3, ...)
+
+  polarity_frame(positives, negatives, pos.weights = 1,
+    neg.weights = -1, envir = TRUE)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -17,18 +23,34 @@
   takes a single grouping variable or a list of 1 or more
   grouping variables.}
 
-  \item{positive.list}{A character vector of terms
-  indicating positive reaction.}
+  \item{polarity.frame}{A dataframe or environment
+  containing a dataframe of positive/negative words and
+  weights.}
 
-  \item{negative.list}{A character vector of terms
-  indicating negative reaction.}
+  \item{negators}{A character vector of terms reversing the
+  intent of a positive or negative word.}
 
-  \item{negation.list}{A character vector of terms
-  reversing the intent of a positive or negative word.}
+  \item{amplifiers}{A character vector of terms that
+  increase the intensity of a positive or negative word.}
 
-  \item{amplification.list}{A character vector of terms
-  that increases the intensity of a positive or negative
-  word.}
+  \item{deamplifiers}{A character vector of terms that
+  decrease the intensity of a positive or negative word.}
+
+  \item{question.weight}{The weighting of questions (values
+  from 0 to 1). Defualt 0 corresponds with the belief that
+  questions (pure questions) are not polarized.  A weight
+  may be applied based on the evidence that the questions
+  function with polarity.}
+
+  \item{amplifier.weight}{The weight to apply to
+  amplifiers/demplifiers (values from 0 to 1).  This value
+  will multiply the the polarized terms by 1 + this value.}
+
+  \item{n.before}{The number of words to consider as
+  valence shifters before the polarized word.}
+
+  \item{n.after}{The number of words to consider as valence
+  shifters after the polarized word.}
 
   \item{rm.incomplete}{logical.  If \code{TRUE} text rows
   ending with qdap's incomplete sentence end mark
@@ -38,56 +60,82 @@
   when printing.}
 
   \item{\ldots}{Other arguments supplied to
-  \code{\link[qdap]{end_inc}}.}
+  \code{\link[qdap]{strip}}.}
+
+  \item{positives}{A character vector of positive words.}
+
+  \item{negatives}{A character vector of negative words.}
+
+  \item{pos.weights}{A vector of weights to weight each
+  positive word by. Length must be equal to length of
+  \code{postives} or 1 (if 1 weight will be recycled).}
+
+  \item{neg.weights}{A vector of weights to weight each
+  negative word by. Length must be equal to length of
+  \code{negatives} or 1 (if 1 weight will be recycled).}
+
+  \item{envir}{logical.  If \code{TRUE} a an lookup table
+  (a dataframe within an environment) is produces rather
+  than a data.frame.}
 }
 \value{
   Returns a list of: \item{all}{A dataframe of scores per
   row with: \itemize{ \item group.var - the grouping
-  variable \item text.var - the text variable \item wc -
-  word count \item polarity - sentence polarity score \item
-  raw - raw polarity score (considering only positive and
-  negative words) \item negation.adj.raw - raw adjusted for
-  negation words \item amplification.adj.raw - raw adjusted
-  for amplification words \item pos.words - words
-  considered positive \item neg.words - words considered
-  negative} } \item{group}{A dataframe with the average
-  polarity score by grouping variable.}
-  \item{digits}{integer value od number of digits to
-  display; mostly internal use}
+  variable \item wc - word count \item polarity - sentence
+  polarity score \item pos.words - words considered
+  positive \item neg.words - words considered negative
+  \item text.var - the text variable} } \item{group}{A
+  dataframe with the average polarity score by grouping
+  variable.} \item{digits}{integer value od number of
+  digits to display; mostly internal use}
 }
 \description{
-  Approximate the sentiment (polarity) of text by grouping
-  variable(s).
+  \code{polarity} - Approximate the sentiment (polarity) of
+  text by grouping variable(s).
+
+  \code{polarity_frame} - Generate a polarity lookup
+  environment or data.frame for use with the
+  \code{polarity.frame} argument in the \code{polarity}
+  function.
 }
 \details{
   The equation used by the algorithm to assign value to
   polarity to each sentence fist utilizes the sentiment
-  dictionary (Hu and Liu, 2004) to tag each word as either
-  positive (\eqn{x_i^{+}}), negative (\eqn{x_i^{-}}),
-  neutral (\eqn{x_i^{0}}), negator(\eqn{x_i\neg}), or
-  amplifier (\eqn{x_i^{\uparrow}}).  Neutral words hold no
-  value in the equation but do affect word count (\eqn{n}).
-  Each positive (\eqn{x_i^{+}}) and negative
-  (\eqn{x_i^{-}}) word is then weighted by the amplifiers
-  (\eqn{x_i^{\uparrow}}) directly proceeding the positive
-  or negative word.  Next, I consider amplification value,
-  adding the assigned value \eqn{1/n-1} to increase the
-  polarity relative to sentence length while ensuring that
-  the polarity scores will remain between the values -1 and
-  1.  This weighted value for each polarized word is then
-  multiplied by -1 to the power of the number of negated
-  (\eqn{x_i\neg}) words directly proceeding the positive or
-  negative word. Last, these values are then summed and
-  divided by the word count (\eqn{n}) yielding a polarity
-  score (\eqn{\delta}) between -1 and 1.
+  dictionary (Hu and Liu, 2004) to tag polarized words.  A
+  context cluster of words is pulled from around this
+  polarized word (defualt 4 words before and two words
+  after) to be considered as valence shifters.  The words
+  in this context cluster are tagged as neutral
+  (\eqn{x_i^{0}}), negator (\eqn{x_i^{N}}), amplifier
+  (\eqn{x_i^{a}}), or de-amplifier (\eqn{x_i^{d}}). Neutral
+  words hold no value in the equation but do affect word
+  count (\eqn{n}).  Each polarized word is then weighted
+  \eqn{w} based on the weigths from the
+  \code{polarity.frame} argument and then further weighted
+  by the number and position of the valence shifters
+  directly surrounding the positive or negative word.  The
+  researcher may provide a weight \eqn{c} to be utilized
+  with amplifiers/de-amplifiers (default is .8; deamplifier
+  weight is constrained to -1 lowe bound).  Last, these
+  values are then summed and divided by the word count
+  (\eqn{n}) yielding an unbounded polarity score
+  (\eqn{\delta}).  Note that context clusters containing a
+  comma before the polarized word will only consider words
+  found after the comma.
 
-  \deqn{\delta=\frac{\sum(x_i^{0},\quad x_i^{\uparrow} +
-  x_i^{+}\cdot(-1)^{\sum(x_i\neg)},\quad x_i^{\uparrow} +
-  x_i^{-}\cdot(-1)^{\sum(x_i\neg)})}{n}}
+  \deqn{\delta=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot
+  w(-1)^{(2 + \sum{(x_i^{N}}))})}}{n}}
 
   Where:
 
-  \deqn{x_i^{\uparrow}=\frac{1}{n-1}}
+  \deqn{x_i^{A}=\sum{(w_{neg}\cdot x_i^{a})}}
+
+  \deqn{x_i^{D}=\sum{((1 - w_{neg})\cdot x_i^{a} +
+  x_i^{d})}}
+
+  \deqn{w_{neg}=\left\{\begin{array}{cc} 1 &
+  \sum{(X_i^{N})}>0 \\ 0 & \sum{(X_i^{N}})=0
+  \end{array}\right.}
 }
 \note{
   The polarity score is dependent upon the polarity
@@ -95,19 +143,19 @@
   polarity word dictionary used by Hu, M., & Liu, B.
   (2004), however, this may not be appropriate for the
   context of children in a classroom.  The user may (is
-  encouraged) to provide/augment the dictionary.  For
-  instance the word "sick" in a high school setting may
-  mean that something is good, whereas "sick" used by a
-  typical adult indicates something is not right or
-  negative connotation.
+  encouraged) to provide/augment the dictionary (see the
+  \code{polarity_frame} function).  For instance the word
+  "sick" in a high school setting may mean that something
+  is good, whereas "sick" used by a typical adult indicates
+  something is not right or negative connotation.
 
   Also note that \code{\link[qdap]{polarity}} assumes
   you've run \code{\link[qdap]{sentSplit}}.
 }
 \examples{
 \dontrun{
-(poldat <- with(DATA, polarity(state, person)))
 with(DATA, polarity(state, list(sex, adult)))
+(poldat <- with(sentSplit(DATA, 4), polarity(state, person)))
 names(poldat)
 truncdf(poldat$all, 8)
 poldat$group

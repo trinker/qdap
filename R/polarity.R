@@ -1,34 +1,45 @@
 #' Polarity Score (Sentiment Analysis)
 #' 
-#' Approximate the sentiment (polarity) of text by grouping variable(s).
+#' \code{polarity} - Approximate the sentiment (polarity) of text by grouping 
+#' variable(s).
 #' 
 #' @param text.var The text variable.
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
-#' @param positive.list A character vector of terms indicating positive reaction.
-#' @param negative.list A character vector of terms indicating negative reaction.
-#' @param negation.list  A character vector of terms reversing the intent of a 
+#' @param polarity.frame A dataframe or environment containing a dataframe of 
+#' positive/negative words and weights.
+#' @param negators A character vector of terms reversing the intent of a 
 #' positive or negative word.
-#' @param amplification.list  A character vector of terms that increases the 
+#' @param amplifiers A character vector of terms that increase the 
 #' intensity of a positive or negative word.
+#' @param deamplifiers A character vector of terms that decrease the 
+#' intensity of a positive or negative word.
+#' @param question.weight The weighting of questions (values from 0 to 1).  
+#' Defualt 0 corresponds with the belief that questions (pure questions) are not 
+#' polarized.  A weight may be applied based on the evidence that the questions 
+#' function with 
+#' polarity.
+#' @param amplifier.weight The weight to apply to amplifiers/demplifiers (values 
+#' from 0 to 1).  This value will multiply the the polarized terms by 1 + this 
+#' value.
+#' @param n.before The number of words to consider as valence shifters before 
+#' the polarized word.
+#' @param n.after The number of words to consider as valence shifters after 
+#' the polarized word.
 #' @param rm.incomplete logical.  If \code{TRUE} text rows ending with qdap's 
 #' incomplete sentence end mark (\code{|}) will be removed from the analysis.
 #' @param digits Integer; number of decimal places to round when printing. 
-#' @param \ldots Other arguments supplied to \code{\link[qdap]{end_inc}}.
+#' @param \ldots Other arguments supplied to \code{\link[qdap]{strip}}.
 #' @return Returns a list of:
 #' \item{all}{A dataframe of scores per row with:
 #' \itemize{
 #'   \item  group.var - the grouping variable
-#'   \item  text.var - the text variable
 #'   \item  wc - word count
 #'   \item  polarity - sentence polarity score
-#'   \item  raw - raw polarity score (considering only positive and negative 
-#'   words)
-#'   \item  negation.adj.raw - raw adjusted for negation words
-#'   \item  amplification.adj.raw - raw adjusted for amplification words
 #'   \item  pos.words - words considered positive
-#'   \item  neg.words - words considered negative}
+#'   \item  neg.words - words considered negative
+#'   \item  text.var - the text variable}
 #' }
 #' \item{group}{A dataframe with the average polarity score by grouping 
 #' variable.}
@@ -39,45 +50,54 @@
 #' This function defaults to the word polarity word dictionary used by Hu, M., & 
 #' Liu, B. (2004), however, this may not be appropriate for the context of 
 #' children in a classroom.  The user may (is encouraged) to provide/augment the 
-#' dictionary.  For instance the word "sick" in a high school setting may mean 
-#' that something is good, whereas "sick" used by a typical adult indicates 
-#' something is not right or negative connotation.
+#' dictionary (see the \code{polarity_frame} function).  For instance the word 
+#' "sick" in a high school setting may mean that something is good, whereas 
+#' "sick" used by a typical adult indicates something is not right or negative 
+#' connotation.
 #' 
 #' Also note that \code{\link[qdap]{polarity}} assumes you've run 
 #' \code{\link[qdap]{sentSplit}}.
 #' @details The equation used by the algorithm to assign value to polarity to 
 #' each sentence fist utilizes the sentiment dictionary (Hu and Liu, 2004) to 
-#' tag each word  as either positive (\eqn{x_i^{+}}), negative (\eqn{x_i^{-}}), 
-#' neutral (\eqn{x_i^{0}}), negator(\eqn{x_i\neg}), or amplifier 
-#' (\eqn{x_i^{\uparrow}}).  Neutral words hold no value in the equation but do 
-#' affect word count (\eqn{n}).  Each positive (\eqn{x_i^{+}}) and negative 
-#' (\eqn{x_i^{-}}) word is then weighted by the amplifiers (\eqn{x_i^{\uparrow}}) 
-#' directly proceeding the positive or negative word.  Next, I consider 
-#' amplification value, adding the assigned value \eqn{1/n-1} to increase the 
-#' polarity relative to sentence length while ensuring that the polarity scores 
-#' will remain between the values -1 and 1.  This weighted value for each 
-#' polarized word is then multiplied by -1 to the power of the number of negated 
-#' (\eqn{x_i\neg}) words directly proceeding the positive or negative word.  
-#' Last, these values are then summed and divided by the word count (\eqn{n}) 
-#' yielding a polarity score (\eqn{\delta}) between -1 and 1.
+#' tag polarized words.  A context cluster of words is pulled from around this 
+#' polarized word (defualt 4 words before and two words after) to be considered 
+#' as valence shifters.  The words in this context cluster are tagged as 
+#' neutral (\eqn{x_i^{0}}), negator (\eqn{x_i^{N}}), amplifier (\eqn{x_i^{a}}), 
+#' or de-amplifier (\eqn{x_i^{d}}). Neutral words hold no value in the equation 
+#' but do affect word count (\eqn{n}).  Each polarized word is then weighted 
+#' \eqn{w} based on the weigths from the \code{polarity.frame} argument and then 
+#' further weighted by the number and position of the valence shifters directly 
+#' surrounding the positive or negative word.  The researcher may provide a 
+#' weight \eqn{c} to be utilized with amplifiers/de-amplifiers (default is .8; 
+#' deamplifier weight is constrained to -1 lowe bound).  Last, these values are 
+#' then summed and divided by the word count (\eqn{n}) yielding an unbounded 
+#' polarity score (\eqn{\delta}).  Note that context clusters containing a comma 
+#' before the polarized word will only consider words found after the comma.
 #' 
-#' \deqn{\delta=\frac{\sum(x_i^{0},\quad x_i^{\uparrow} + 
-#' x_i^{+}\cdot(-1)^{\sum(x_i\neg)},\quad x_i^{\uparrow} + 
-#' x_i^{-}\cdot(-1)^{\sum(x_i\neg)})}{n}}
+#' \deqn{\delta=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot w(-1)^{(2 + \sum{(x_i^{N}}))})}}{n}}
 #'   
 #' Where:
+#' 
+#' \deqn{x_i^{A}=\sum{(w_{neg}\cdot x_i^{a})}}
+#' 
+#' \deqn{x_i^{D}=\sum{((1 - w_{neg})\cdot x_i^{a} + x_i^{d})}}
+#' 
+#' \deqn{w_{neg}=\left\{\begin{array}{cc}
+#' 1 & \sum{(X_i^{N})}>0         \\ 
+#' 0 & \sum{(X_i^{N}})=0
+#' \end{array}\right.}
 #'     
-#' \deqn{x_i^{\uparrow}=\frac{1}{n-1}}
 #' @references Hu, M., & Liu, B. (2004). Mining opinion features in customer 
 #' reviews. National Conference on Artificial Intelligence. 
 #' 
 #' \url{http://www.slideshare.net/jeffreybreen/r-by-example-mining-twitter-for}
 #' @keywords sentiment, polarity
 #' @export
+#' @rdname polarity
 #' @examples
 #' \dontrun{
-#' (poldat <- with(DATA, polarity(state, person)))
 #' with(DATA, polarity(state, list(sex, adult)))
+#' (poldat <- with(sentSplit(DATA, 4), polarity(state, person)))
 #' names(poldat)
 #' truncdf(poldat$all, 8)
 #' poldat$group
@@ -96,11 +116,15 @@
 #' plot(poldat3)
 #' plot(poldat3, nrow=4)
 #' }
-polarity <-
-function (text.var, grouping.var = NULL, positive.list = positive.words, 
-    negative.list = negative.words, negation.list = negation.words, 
-    amplification.list = increase.amplification.words, 
-    rm.incomplete = FALSE, digits = 3, ...) {
+polarity <- function (text.var, grouping.var = NULL, 
+    polarity.frame = qdapDictionaries::env.pol, 
+    negators = qdapDictionaries::negation.words, 
+    amplifiers = qdapDictionaries::amplification.words, 
+    deamplifiers = qdapDictionaries::deamplification.words, question.weight = 0, 
+    amplifier.weight = .8, n.before = 4, n.after = 2, rm.incomplete = FALSE, 
+    digits = 3, ...) {
+
+    ## Save name of group vars column(s)
     if(is.null(grouping.var)) {
         G <- "all"
     } else {
@@ -116,138 +140,328 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
             G <- G[length(G)]
         }
     }
+
+    ## create group vars
     if(is.null(grouping.var)){
         grouping <- rep("all", length(text.var))
     } else {
-        if (is.list(grouping.var) & length(grouping.var)>1) {
+        if (is.list(grouping.var) & length(grouping.var) > 1) {
             grouping <- paste2(grouping.var)
         } else {
             grouping <- unlist(grouping.var)
         } 
-    }
-    allwrds <- c(positive.list, negative.list, negation.list, amplification.list)
-    ps <- grepl("\\s", positive.list)
-    ns <- grepl("\\s", negative.list)
-    ngs <- grepl("\\s", negation.list)
-    as <- grepl("\\s", amplification.list)
-    spcs <- c(ps, ns, ngs, as)
-    if (any(spcs)) {
-        dbls <- allwrds[spcs]
-        text.var <- mgsub(dbls, gsub("\\s", "~~", dbls), reducer(text.var))
-        if (any(ps)) {
-            positive.list <- gsub("\\s", "~~", positive.list)
-        }
-        if (any(ns)) {
-            negative.list <- gsub("\\s", "~~", negative.list)
-        }
-        if (any(ngs)) {
-            negation.list <- gsub("\\s", "~~", negation.list)
-        }
-        if (any(as)) {
-            amplification.list <- gsub("\\s", "~~", amplification.list)
-        }
-    }
-    unblank <- function(x) {
-        return(x[x != ""])
-    }
-    if (sum(grepl("a+", tolower(text.var), fixed = TRUE)) > 0) {
-        text.var <- mgsub(c("A+", "a+"), "aplus", text.var, 
-            fixed = TRUE)
-        positive.list <- mgsub(c("A+", "a+"), "aplus", positive.list, 
-            fixed = TRUE)
-    }
-    no.na <- function(x) !is.na(x)
-    truer <- function(x) which(!is.na(x) == TRUE)
-    SEL <- function(x, y) x[y]
-    score <- function(x, y) length(x) - length(y)
-    add <- function(x, y, z) x + y + z
-    miss <- function(x) ifelse(is.na(x), 0, x)
-    NAfill <- which(is.na(text.var))
-    negation <- strip(negation.list)
-    amplification <- strip(amplification.list)
-    x <- as.data.frame(text.var)
-    x$words <- unblank(word.split(strip(text.var)))
-    x$wc <- word.count(gsub("~~", " ", text.var))
-    pos.matchesPOS <- lapply(x$words, function(x) match(x, positive.list))
-    neg.matchesPOS <- lapply(x$words, function(x) match(x, negative.list))
-    pos <- lapply(pos.matchesPOS, no.na)
-    neg <- lapply(neg.matchesPOS, no.na)
-    pos1 <- lapply(pos.matchesPOS, truer)
-    neg1 <- lapply(neg.matchesPOS, truer)
-    x$raw <- unlist(mapply(score, pos1, neg1, SIMPLIFY = FALSE))
-    x$pos.words <- mapply(SEL, x$words, pos1, SIMPLIFY = FALSE)
-    x$neg.words <- mapply(SEL, x$words, neg1, SIMPLIFY = FALSE)
-    L1 <- mapply(function(x, y) x[y - 1], x$words, pos1, SIMPLIFY = FALSE)
-    L2 <- mapply(function(x, y) x[y - 1], x$words, neg1, SIMPLIFY = FALSE)
-    x$pos.matchesNEG <- lapply(L1, function(x) sum(no.na(match(x, 
-        negation))) * (-2))
-    x$neg.matchesNEG <- lapply(L2, function(x) sum(no.na(match(x, 
-        negation)) * 2))
-    x$pos.matchesAMP <- lapply(L1, function(x) no.na(match(x, 
-        amplification)))
-    x$neg.matchesAMP <- lapply(L2, function(x) no.na(match(x, 
-        amplification)))
-    ans <- list()
-    for (i in 1:nrow(x)) {
-        ans[[i]] <- numeric(0)
-        for (j in 1:length(x[[i, "neg.matchesAMP"]])) {
-            ans[[i]][j] <- ifelse(x$neg.matchesAMP[[i]][j], as.numeric(1/(x[i, 
-                "wc"] - 1)), 0)
-        }
-    }
-    AMPneg <- lapply(ans, function(x) sum(miss(x)) * -1)
-    ans2 <- list()
-    for (i in 1:dim(x)[1]) {
-        ans2[[i]] <- numeric(0)
-        for (j in 1:length(x[[i, "pos.matchesAMP"]])) {
-            ans2[[i]][j] <- ifelse(x$pos.matchesAMP[[i]][j], 
-                as.numeric(1/(x[i, "wc"] - 1)), 0)
-        }
-    }
-    AMPpos <- lapply(ans2, function(x) sum(miss(x)))
-    x$negation.adj.raw <- mapply(add, x$raw, x$pos.matchesNEG, 
-        x$neg.matchesNEG)
-    x$amplification.adj.raw <- mapply(add, x$negation.adj.raw, 
-        AMPneg, AMPpos)
-    x$polarity <- x$amplification.adj.raw/wc(x$words)
-    x <- x[, c("text.var", "wc", "polarity", "raw", "negation.adj.raw", 
-        "amplification.adj.raw", "pos.words", "neg.words")]
-    if (any(is.na(unlist(x)))) {
-        x[NAfill, 1:8] <- NA
-    }
-    DF <- data.frame(group = grouping, x[, c("text.var", 
-        "wc", "polarity")])
+    } 
+
+    ## wrap groupvars and text var together into data.frame
+    text.var <- as.character(text.var)
+    DF <- data.frame(grouping, text.var, check.names = FALSE, 
+        stringsAsFactors = FALSE)
+    DF[, "text.var2"] <- DF[, "text.var"]
+
+    ## remove incomplete sentences
     if (rm.incomplete) {
-        DF <- end_inc(dataframe = DF, text.var = text.var, ...)
+        DF <- end_inc(dataframe = DF, text.var = text.var, warning.report = FALSE)
     }
-    na.instruct <- function(x, y) {
-        LIST <- split(x, y)
-        z <- unlist(sapply(LIST, function(x) !all(is.na(x[, "text.var"])), 
-            USE.NAMES = FALSE))
-        return(z)
+
+    ## warning about double punctuation
+    if (is.dp(text.var=text.var)){
+        warning(paste0("\n  Some rows contain double punctuation.",
+          "  Suggested use of `sentSplit` function."))
     }
-    L2 <- lapply(split(DF, DF[, "group"]), function(x) {
-        if (nrow(x)==1 && is.na(x[, "text.var"])) {
-            return(data.frame(group=as.character(x[1, 1]),
-                total.sentences=NA, 
-                total.words=NA,
-                ave.polarity=NA))
-        } 
-        x <- na.omit(x)
-        data.frame(group=as.character(x[1, 1]),
-            total.sentences=nrow(x), 
-            total.words=sum(x[, "wc"]),
-            ave.polarity=mean(x[, "polarity"]))
+
+    ## replace commas for later consideration
+    DF[, "text.var"] <- gsub(",", " longreplacementbreakoff ", DF[, "text.var"])
+
+    ## An environment to look up polarized words
+    if (!is.environment(polarity.frame)) {
+        if (!is.data.frame(polarity.frame)) {
+            stop(paste("Please supply a dataframe or environment", 
+               "(see `polarity_frame`) to polarity.frame"))
+        }
+        polarity.frame <- hash(polarity.frame)
+    }
+
+    ## create environment to lookup amps, de-amps and negators
+    alter <- alter_env(negators, amplifiers, deamplifiers)
+
+    ## grab the polarized/alter words to search for spaces and insert into textvar
+    posneg <- ls(polarity.frame)
+    words <- c(posneg, ls(alter))
+
+    ## create sentence lengths
+    counts <- unlist(lapply(DF[, "text.var"], function(x) length(bag.o.words(x))))
+    DF[, "text.var"] <- space_fill(text.var = strip(DF[, "text.var"], ...), 
+        terms = words[grep("\\s", words)], sep = "~~")
+
+    ## split into bag of words per sentence
+    TV <- lapply(lapply(DF[, "text.var"], bag.o.words, ...), function(x) {
+        gsub("~~", " ", x)
     })
-    DF2 <- data.frame(do.call(rbind, L2), row.names = NULL)
-    DF2 <- DF2[order(DF2[, "ave.polarity"]), ]
-    x <- data.frame(group=grouping, x, row.names=NULL)
-    names(x)[1] <- names(DF2)[1] <- G
-    o <- list(all = x, group = DF2, digits = digits)
+
+    ## Get position of polarized word (hits)
+    hits <- lapply(TV, function(x) which(x %in% posneg))
+
+    ## loop over the hits per sentence (nested loop) and apply the polarity_helper
+    pols <- list()
+    output <- list()
+    polwords <- list()
+    for (i in seq_along(hits)) {
+        vlen <- ifelse(identical(hits[[i]], integer(0)), 1, length(hits[[i]]))
+        pols[[i]] <- rep(0, vlen)
+        output[[i]] <- rep(0, vlen)
+        polwords[[i]] <- rep(NA, vlen)
+        for(j in seq_along(hits[[i]])) {
+            theoutputs <- polarity_helper(tv = TV[[i]], hit=hits[[i]][[j]], 
+                polenv = polarity.frame, altenv = alter, count = counts[i],
+                n.before = n.before, n.after = n.after, 
+                amp.weight = amplifier.weight)
+            output[[i]][j] <- theoutputs[[1]]
+            pols[[i]][j] <- theoutputs[[2]]
+            polwords[[i]][j] <- theoutputs[[3]]
+        }
+    }
+
+    ## Construct sentence data.frame
+    scores <- sapply(output, sum)/counts
+    all <- data.frame(group.var =  DF[, "grouping"], wc = counts, 
+        polarity = scores)
+
+    ## Functions to grab pos and neg words and then add to all data.frame
+    pwords <- function(x, y) {
+        out <- y[x > 0]
+        if (identical(out, character(0)) | identical(out, logical(0))) {
+            return("-")
+        }        
+        out
+    }
+    nwords <- function(x, y) {
+        out <- y[x < 0]
+        if (identical(out, character(0)) | identical(out, logical(0))) {
+            return("-")
+        }
+        out
+    }
+    all$pos.words <- mapply(pwords, pols, polwords)
+    all$neg.words <-mapply(nwords, pols, polwords)
+    all[, "text.var"] <- DF[, "text.var2"]
+   
+    ## Multiple polarity by question weights
+    qweight <- ifelse(suppressWarnings(end_mark(all[, "text.var"])) %in% c("?", 
+        "*?"), question.weight, 1)
+    all[, "polarity"] <- qweight * all[, "polarity"]
+
+    ## Create average polarity data.frame (group) from all data.frame
+    sall <- split(all, all[, "group.var"])
+    lall <- lapply(sall, function(x) {
+        data.frame(total.words = sum(x[, "wc"]), 
+            ave.polarity = mean(x[, "polarity"]),
+            sd.polarity = sd(x[, "polarity"]), 
+            stan.mean.polarity = mean(x[, "polarity"])/sd(x[, "polarity"]))
+    })
+    group <- data.frame(group = names(lall), 
+        total.sentences = sapply(sall, nrow),
+        do.call(rbind, lall), row.names = NULL)
+    colnames(group)[1] <- colnames(all)[1] <- G
+    o <- list(all = all, group = group, digits = digits)
     class(o) <- "polarity"
     return(o)
 }
 
+## Former version (keep for now)
+## polarity <-
+## function (text.var, grouping.var = NULL, positive.list = positive.words, 
+##     negative.list = negative.words, negation.list = negation.words, 
+##     amplification.list = increase.amplification.words, 
+##     rm.incomplete = FALSE, digits = 3, ...) {
+##     if(is.null(grouping.var)) {
+##         G <- "all"
+##     } else {
+##         if (is.list(grouping.var)) {
+##             m <- unlist(as.character(substitute(grouping.var))[-1])
+##             m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+##                     x[length(x)]
+##                 }
+##             )
+##             G <- paste(m, collapse="&")
+##         } else {
+##             G <- as.character(substitute(grouping.var))
+##             G <- G[length(G)]
+##         }
+##     }
+##     if(is.null(grouping.var)){
+##         grouping <- rep("all", length(text.var))
+##     } else {
+##         if (is.list(grouping.var) & length(grouping.var)>1) {
+##             grouping <- paste2(grouping.var)
+##         } else {
+##             grouping <- unlist(grouping.var)
+##         } 
+##     }
+##     allwrds <- c(positive.list, negative.list, negation.list, amplification.list)
+##     ps <- grepl("\\s", positive.list)
+##     ns <- grepl("\\s", negative.list)
+##     ngs <- grepl("\\s", negation.list)
+##     as <- grepl("\\s", amplification.list)
+##     spcs <- c(ps, ns, ngs, as)
+##     if (any(spcs)) {
+##         dbls <- allwrds[spcs]
+##         text.var <- mgsub(dbls, gsub("\\s", "~~", dbls), reducer(text.var))
+##         if (any(ps)) {
+##             positive.list <- gsub("\\s", "~~", positive.list)
+##         }
+##         if (any(ns)) {
+##             negative.list <- gsub("\\s", "~~", negative.list)
+##         }
+##         if (any(ngs)) {
+##             negation.list <- gsub("\\s", "~~", negation.list)
+##         }
+##         if (any(as)) {
+##             amplification.list <- gsub("\\s", "~~", amplification.list)
+##         }
+##     }
+##     unblank <- function(x) {
+##         return(x[x != ""])
+##     }
+##     if (sum(grepl("a+", tolower(text.var), fixed = TRUE)) > 0) {
+##         text.var <- mgsub(c("A+", "a+"), "aplus", text.var, 
+##             fixed = TRUE)
+##         positive.list <- mgsub(c("A+", "a+"), "aplus", positive.list, 
+##             fixed = TRUE)
+##     }
+##     no.na <- function(x) !is.na(x)
+##     truer <- function(x) which(!is.na(x) == TRUE)
+##     SEL <- function(x, y) x[y]
+##     score <- function(x, y) length(x) - length(y)
+##     add <- function(x, y, z) x + y + z
+##     miss <- function(x) ifelse(is.na(x), 0, x)
+##     NAfill <- which(is.na(text.var))
+##     negation <- strip(negation.list)
+##     amplification <- strip(amplification.list)
+##     x <- as.data.frame(text.var)
+##     x$words <- unblank(word.split(strip(text.var)))
+##     x$wc <- word.count(gsub("~~", " ", text.var))
+##     pos.matchesPOS <- lapply(x$words, function(x) match(x, positive.list))
+##     neg.matchesPOS <- lapply(x$words, function(x) match(x, negative.list))
+##     pos <- lapply(pos.matchesPOS, no.na)
+##     neg <- lapply(neg.matchesPOS, no.na)
+##     pos1 <- lapply(pos.matchesPOS, truer)
+##     neg1 <- lapply(neg.matchesPOS, truer)
+##     x$raw <- unlist(mapply(score, pos1, neg1, SIMPLIFY = FALSE))
+##     x$pos.words <- mapply(SEL, x$words, pos1, SIMPLIFY = FALSE)
+##     x$neg.words <- mapply(SEL, x$words, neg1, SIMPLIFY = FALSE)
+##     L1 <- mapply(function(x, y) x[y - 1], x$words, pos1, SIMPLIFY = FALSE)
+##     L2 <- mapply(function(x, y) x[y - 1], x$words, neg1, SIMPLIFY = FALSE)
+##     x$pos.matchesNEG <- lapply(L1, function(x) sum(no.na(match(x, 
+##         negation))) * (-2))
+##     x$neg.matchesNEG <- lapply(L2, function(x) sum(no.na(match(x, 
+##         negation)) * 2))
+##     x$pos.matchesAMP <- lapply(L1, function(x) no.na(match(x, 
+##         amplification)))
+##     x$neg.matchesAMP <- lapply(L2, function(x) no.na(match(x, 
+##         amplification)))
+##     ans <- list()
+##     for (i in 1:nrow(x)) {
+##         ans[[i]] <- numeric(0)
+##         for (j in 1:length(x[[i, "neg.matchesAMP"]])) {
+##             ans[[i]][j] <- ifelse(x$neg.matchesAMP[[i]][j], as.numeric(1/(x[i, 
+##                 "wc"] - 1)), 0)
+##         }
+##     }
+##     AMPneg <- lapply(ans, function(x) sum(miss(x)) * -1)
+##     ans2 <- list()
+##     for (i in 1:dim(x)[1]) {
+##         ans2[[i]] <- numeric(0)
+##         for (j in 1:length(x[[i, "pos.matchesAMP"]])) {
+##             ans2[[i]][j] <- ifelse(x$pos.matchesAMP[[i]][j], 
+##                 as.numeric(1/(x[i, "wc"] - 1)), 0)
+##         }
+##     }
+##     AMPpos <- lapply(ans2, function(x) sum(miss(x)))
+##     x$negation.adj.raw <- mapply(add, x$raw, x$pos.matchesNEG, 
+##         x$neg.matchesNEG)
+##     x$amplification.adj.raw <- mapply(add, x$negation.adj.raw, 
+##         AMPneg, AMPpos)
+##     x$polarity <- x$amplification.adj.raw/wc(x$words)
+##     x <- x[, c("text.var", "wc", "polarity", "raw", "negation.adj.raw", 
+##         "amplification.adj.raw", "pos.words", "neg.words")]
+##     if (any(is.na(unlist(x)))) {
+##         x[NAfill, 1:8] <- NA
+##     }
+##     DF <- data.frame(group = grouping, x[, c("text.var", 
+##         "wc", "polarity")])
+##     if (rm.incomplete) {
+##         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
+##     }
+##     na.instruct <- function(x, y) {
+##         LIST <- split(x, y)
+##         z <- unlist(sapply(LIST, function(x) !all(is.na(x[, "text.var"])), 
+##             USE.NAMES = FALSE))
+##         return(z)
+##     }
+##     L2 <- lapply(split(DF, DF[, "group"]), function(x) {
+##         if (nrow(x)==1 && is.na(x[, "text.var"])) {
+##             return(data.frame(group=as.character(x[1, 1]),
+##                 total.sentences=NA, 
+##                 total.words=NA,
+##                 ave.polarity=NA))
+##         } 
+##         x <- na.omit(x)
+##         data.frame(group=as.character(x[1, 1]),
+##             total.sentences=nrow(x), 
+##             total.words=sum(x[, "wc"]),
+##             ave.polarity=mean(x[, "polarity"]))
+##     })
+##     DF2 <- data.frame(do.call(rbind, L2), row.names = NULL)
+##     DF2 <- DF2[order(DF2[, "ave.polarity"]), ]
+##     x <- data.frame(group=grouping, x, row.names=NULL)
+##     names(x)[1] <- names(DF2)[1] <- G
+##     o <- list(all = x, group = DF2, digits = digits)
+##     class(o) <- "polarity"
+##     return(o)
+## }
+
+#' Polarity Score (Sentiment Analysis)
+#' 
+#' \code{polarity_frame} - Generate a polarity lookup environment or data.frame 
+#' for use with the \code{polarity.frame} argument in the \code{polarity} 
+#' function.
+#' 
+#' @param positives A character vector of positive words.
+#' @param negatives A character vector of negative words.
+#' @param pos.weights A vector of weights to weight each positive word by.  
+#' Length must be equal to length of \code{postives} or 1 (if 1 weight will be 
+#' recycled). 
+#' @param neg.weights A vector of weights to weight each negative word by.  
+#' Length must be equal to length of \code{negatives} or 1 (if 1 weight will be 
+#' recycled). 
+#' @param envir logical.  If \code{TRUE} a an lookup table (a dataframe within 
+#' an environment) is produces rather than a data.frame.
+#' @export
+#' @rdname polarity
+polarity_frame <- function(positives, negatives, pos.weights = 1, 
+    neg.weights = -1, envir = TRUE) {
+    plen <- length(positives)
+    nlen <- length(negatives)
+    if (!length(plen) %in% c(length(positives), 1)) {
+        stop("The length of positives and pos.weights must be equal")
+    }
+    if (!length(nlen) %in% c(length(negatives), 1)) {
+        stop("The length of negatives and negative weights must be equal")
+    }
+    if (length(pos.weights) == 1) {
+        pos.weights <- rep(pos.weights, plen)
+    }
+    if (length(neg.weights) == 1) {
+        neg.weights <- rep(neg.weights, nlen)
+    }
+    dat <- data.frame(words = c(positives, negatives), polarity = c(pos.weights, 
+        neg.weights))
+    if (envir) {
+        hash(dat)
+    } else {
+        dat
+    }
+}
 #' Prints a polarity Object
 #' 
 #' Prints a polarity object.
@@ -257,7 +471,7 @@ function (text.var, grouping.var = NULL, positive.list = positive.words,
 #' @param \ldots ignored
 #' @method print polarity
 #' @S3method print polarity
-print.polarity <-
+print.polarity <- 
 function(x, digits = NULL, ...) {
     cat("POLARITY BY GROUP\n=================\n")
     WD <- options()[["width"]]
@@ -267,6 +481,9 @@ function(x, digits = NULL, ...) {
         digits <- x$digits
     }
     y[, "ave.polarity"] <- round(y[, "ave.polarity"], digits = digits)
+    y[, "sd.polarity"] <- round(y[, "sd.polarity"], digits = digits)
+    y[, "stan.mean.polarity"] <- round(y[, "stan.mean.polarity"], 
+        digits = digits)
     print(y)
     options(width=WD)
 }
@@ -290,8 +507,12 @@ function(x, digits = NULL, ...) {
 #' @param point.size The size of the points used in the dot plot.
 #' @param jitter Amount of vertical jitter to add to the points.
 #' @param nrow The number of rows in the dotplot legend (used when the number of 
-#' grouping variables makes the legend too wide).  If NULL no legend if plotted.
+#' grouping variables makes the legend too wide).  If \code{NULL} no legend if 
+#' plotted.
 #' @param na.rm logical. Should missing values be removed?
+#' @param order.by.polarity logical.  If \code{TRUE} the group polarity plot 
+#' will be ordered by average polarity score, otherwise alphabetical order is 
+#' assumed.
 #' @param \ldots ignored
 #' @return Invisibly returns the \code{ggplot2} objects that form the larger 
 #' plot.  
@@ -300,9 +521,12 @@ function(x, digits = NULL, ...) {
 #' @S3method plot polarity
 plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99", 
     high = "blue", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
-    point.size = 2.5,  jitter = .1, nrow = NULL, na.rm = TRUE, ...){
+    point.size = 2.5,  jitter = .1, nrow = NULL, na.rm = TRUE, 
+    order.by.polarity = TRUE, ...){
+  
     Polarity <- group <- ave.polarity <- unit <- NULL
-    dat <- x[["group"]]
+    dat <- x[["group"]][, c("person", "total.sentences", "total.words", 
+        "ave.polarity")]
     dat2 <- x[["all"]]
     if (na.rm) {
        dat <- na.omit(dat)
@@ -310,8 +534,8 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
     }
     G <- names(dat)[1]
     nms <- c("group", "dialogue", "word_count", "Polarity")
-    names(dat)[c(1, 2)] <-  nms[1:2]
-    names(dat2)[1:4] <- nms
+    names(dat)[c(1)] <-  nms[1]
+    names(dat2)[c(1, 6, 2, 3)] <- nms
     dat2 <- data.frame(dat2, with(dat2, 
         gantt(dialogue, list(group, seq_along(group)), plot = FALSE)))
     if (is.null(nrow)) {
@@ -320,6 +544,9 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
     } else {
         leg <- TRUE
     }
+ 
+    dat2$group <- factor(dat2$group, levels = rev(levels(dat2$group)))
+
     XX <- ggplot(dat2, aes(color = Polarity )) + 
         geom_segment(aes(x=start, xend=end, y=group, yend=group), 
             size=bar.size) +
@@ -327,6 +554,18 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
         scale_colour_gradientn(colours = c(low, mid, high)) +
         theme_bw() + theme(legend.position="bottom") + 
         guides(colour = guide_colorbar(barwidth = 9, barheight = .75))
+
+    if (order.by.polarity) {
+        dat$group <- factor(dat$group, levels = rev(dat[order(dat$ave.polarity), 
+            "group"]))
+        dat2$group <- factor(dat2$group, 
+            levels = rev(dat[order(dat$ave.polarity), "group"]))
+    }
+    if (na.rm) {
+       dat2 <- na.omit(dat2)
+       dat <- na.omit(dat)
+    }
+
     YY <- ggplot(dat2, aes(y=group, x=Polarity, colour = group)) + 
         geom_point(data = dat, aes(x=ave.polarity), shape = ave.polarity.shape, 
             size = 6, show_guide=FALSE) +
@@ -348,3 +587,64 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
     grid.arrange(XX, YY, nrow = 2)
     invisible(list(p1 = XX, p2 = YY))
 }
+
+## Helper functions
+alter_env <- function(negators, amplifiers, deamplifiers) {
+    n <- rep(1, length(negators))
+    a <- rep(2, length(amplifiers))
+    d <- rep(3, length(deamplifiers)) 
+    hash(data.frame(words=c(negators, amplifiers, deamplifiers), 
+        value=c(n, a, d)))
+}
+
+polarity_helper <- function(tv, hit, polenv, altenv, count, amp.weight, 
+    n.before, n.after) {
+
+    if (identical(hit, integer(0))) {
+        return(list(0, 0))
+    }
+   
+    ## Mark location of polarized word
+    target <- ifelse((hit - n.before) < 1, hit, n.before + 1)
+ 
+    ## Comma checks to remove polarized words preceeded by comma
+    comma.check <- tv %in% "longreplacementbreakoff"
+    if (sum(comma.check) > 0) {
+        comma.loc <- which(comma.check)
+        if (sum(comma.loc < target) > 0) {
+            final.comma <- tail(comma.loc[comma.loc < target], 1)
+            n.before <- hit - final.comma
+            target <- ifelse((hit - n.before) < 1, hit, n.before + 1)
+        }
+    }
+
+    ## Grab n1 words before polarized word and n2 after
+    lower <- ifelse((hit - n.before) < 1, 1, hit - n.before)
+    upper <- ifelse((hit + n.after) > count, count, hit + n.after)
+    inds <- lower:upper
+    words <- tv[inds]
+
+    ## look in the hashtable at the polarity weights
+    targ <- words[target]
+    p <- hash_look(targ, polenv)
+
+    ## determine contextual valence shifters (negators, deamplifiers and amplifiers)
+    context <- hash_look(words[-target], altenv)
+    if (!is.null(context)) {
+        context <- unlist(lapply(split(context, context), length))
+        ident <- function(x, y) if (!x %in% names(y)) 0 else y[names(y) == x]
+        n <- ident("1", context)
+        a <- ident("2", context)
+        d <- ident("3", context)
+        D <- (d + ifelse(n %% 2 != 0, 1, 0) * a) * ((-1) * amp.weight)
+        D <- ifelse(D < -1, -1, D)        
+        A <- (ifelse(n %% 2 == 0, 1, 0) * a * amp.weight)
+    } else {
+        D <- A <- n <- 0
+    }   
+
+    ## return the word group score and the polarity of the the polarized word
+    list(x = (1 + (D + A)) * (p * (-1)^(2 + n)), y = p, z = targ)
+}
+
+

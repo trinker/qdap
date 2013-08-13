@@ -1,9 +1,12 @@
 \name{lookup}
+\alias{\%l\%}
 \alias{lookup}
 \title{Hash Table/Dictionary Lookup}
 \usage{
   lookup(terms, key.match, key.reassign = NULL,
     missing = NA)
+
+  %l%(terms, key.match, key.reassign = NULL, missing = NA)
 }
 \arguments{
   \item{terms}{A vector of terms to undergo a lookup.}
@@ -26,6 +29,10 @@
 \description{
   Environment based hash table useful for large vector
   lookups.
+
+  \code{terms \%l\% key.match} - A binary operator version
+  of \code{lookup} for when \code{key.match} is a
+  data.frame or named list.
 }
 \examples{
 \dontrun{
@@ -56,6 +63,10 @@ lookup(mtcars$carb, sort(unique(mtcars$carb)),
 
 lookup(mtcars$carb, sort(unique(mtcars$carb)),
     seq(10, 60, by=10))
+
+## \%l\%, a binarary operator version of lookup
+1:5 \%l\% data.frame(1:4, 11:14)
+1:10 \%l\% codes
 }
 }
 \seealso{
