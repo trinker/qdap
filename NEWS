@@ -95,6 +95,9 @@ CHANGES
 * qdap gains an HTML package vignette to better explain the intended work flow 
   and function use for the package.
 
+* `polarity` utilizes a new, unbounded algorith based on weighting to determine 
+  polarity.
+
 
 qdap 0.2.3
 ----------------------------------------------------------------
