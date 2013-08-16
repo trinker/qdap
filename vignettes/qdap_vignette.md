@@ -1158,10 +1158,6 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="space_fill"> - <a href="#fill">Replace Spaces</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/spaste.html" target="_blank">
-    <input type="submit" value="spaste"> - <a href="#spaste">Add Leading/Trailing Spaces</a>
-</form>
-
 <form action="http://trinker.github.io/qdap_dev/stemmer.html" target="_blank">
     <input type="submit" value="stemmer"><input type="submit" value="stem.words"><input type="submit" value="stem2df"> - <a href="#stem">Stem Text</a>
 </form>
@@ -2262,8 +2258,120 @@ stem.words(doggies, jumping, swims)
 
 
 <h4 id="grab">Grab Begin/End of String to Character</h4>
+
+At times it is handy to be able to grab from the begining or enf of a string to a specific character.  The <a href="http://trinker.github.io/qdap_dev/beg2char.html" target="_blank"><code>beg2char</code></a> function allows you to grab from the begining of a string to the n<sup>th</sup> occurenece of a character.  The counterpart function, <a href="http://trinker.github.io/qdap_dev/char2end.html" target="_blank"><code>char2end</code></a>, grab from the n<sup>th</sup> occurenece of a character to the end of a string to. This behavior is useful if the transcript contains annotations at the begining or end of a line that should beliminated.
+
+<font size="5" color="orange">&diams;</font> **Grab From Character to Beginning/End of String**<font size="5" color="orange">&diams;</font>
+
+```r
+x <- c("a_b_c_d", "1_2_3_4", "<_?_._:")
+beg2char(x, "_")
+```
+
+```
+## [1] "a" "1" "<"
+```
+
+```r
+beg2char(x, "_", 4)
+```
+
+```
+## [1] "a_b_c_d" "1_2_3_4" "<_?_._:"
+```
+
+```r
+char2end(x, "_")
+```
+
+```
+## [1] "b_c_d" "2_3_4" "?_._:"
+```
+
+```r
+char2end(x, "_", 2)
+```
+
+```
+## [1] "c_d" "3_4" "._:"
+```
+
+```r
+char2end(x, "_", 3, include=TRUE)
+```
+
+```
+## [1] "_d" "_4" "_:"
+```
+
+```r
+(x2 <- gsub("_", " ", x))
+```
+
+```
+## [1] "a b c d" "1 2 3 4" "< ? . :"
+```
+
+```r
+beg2char(x2, " ", 2)
+```
+
+```
+## [1] "a b" "1 2" "< ?"
+```
+
+```r
+(x3 <- gsub("_", "\\^", x))
+```
+
+```
+## [1] "a^b^c^d" "1^2^3^4" "<^?^.^:"
+```
+
+```r
+char2end(x3, "^", 2)
+```
+
+```
+## [1] "c^d" "3^4" ".^:"
+```
+
+
 <h4 id="inc">Denote Incomplete End Marks With "|"</h4> 
-<h4 id="spaste">Add Leading/Trailing Spaces</h4>
+
+Often incomplete sentences have a different function than complete sentences.  The researcher may want to denote incomplete sentences for consideration in later analysis.  Traditionally, incomplete sentence are denoted with the following end marks (.., ..., .?, ..?, en & em).  The <a href="http://trinker.github.io/qdap_dev/incomplete.replace.html" target="_blank"><code>incomplete.replace</code></a> can identify and replace the traditional endmarks with a standard form <font color="blue">"|"</font>.
+
+<font size="5" color="orange">&diams;</font> **Incomplete Sentence Identification**<font size="5" color="orange">&diams;</font>
+
+```r
+x <- c("the...",  "I.?", "you.", "threw..", "we?")
+incomplete.replace(x)
+```
+
+```
+## [1] "the|"   "I|"     "you."   "threw|" "we?"
+```
+
+```r
+incomp(x)
+```
+
+```
+## [1] "the|"   "I|"     "you."   "threw|" "we?"
+```
+
+```r
+incomp(x, scan.mode = TRUE)
+```
+
+```
+##   row.num text   
+## 1       1 the... 
+## 2       2 I.?    
+## 3       4 threw..
+```
+
+
 
 <h4 id="caps">Capitalize Select Words</h4>
 
@@ -2341,6 +2449,9 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="speakerSplit"> - Break and Stretch if Multiple Persons per Cell
 </form>
 </div>
+
+NOTE show spaste w/ termco
+
 
 <h3 id="word">Extract/Analyze Words</h3>
 

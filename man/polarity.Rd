@@ -124,7 +124,7 @@
   found after the comma.
 
   \deqn{\delta=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot
-  w(-1)^{(2 + \sum{(x_i^{N}}))})}}{n}}
+  w(-1)^{(2 + \sum{x_i^{N}})})}}{n}}
 
   Where:
 
@@ -173,6 +173,12 @@ head(poldat3[["group"]], 10)
 htruncdf(poldat3[["all"]], 15, 8)
 plot(poldat3)
 plot(poldat3, nrow=4)
+qheat(poldat3[["group"]], high="red", order.b="ave.polarity")
+
+## Create researcher defined polarity.frame
+POLENV <- polarity_frame(positive.words, negative.words)
+POLENV
+ls(POLENV)[1:20]
 }
 }
 \references{

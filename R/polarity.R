@@ -74,7 +74,7 @@
 #' polarity score (\eqn{\delta}).  Note that context clusters containing a comma 
 #' before the polarized word will only consider words found after the comma.
 #' 
-#' \deqn{\delta=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot w(-1)^{(2 + \sum{(x_i^{N}}))})}}{n}}
+#' \deqn{\delta=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot w(-1)^{(2 + \sum{x_i^{N}})})}}{n}}
 #'   
 #' Where:
 #' 
@@ -115,6 +115,12 @@
 #' htruncdf(poldat3[["all"]], 15, 8)
 #' plot(poldat3)
 #' plot(poldat3, nrow=4)
+#' qheat(poldat3[["group"]], high="red", order.b="ave.polarity")
+#' 
+#' ## Create researcher defined polarity.frame
+#' POLENV <- polarity_frame(positive.words, negative.words)
+#' POLENV
+#' ls(POLENV)[1:20]
 #' }
 polarity <- function (text.var, grouping.var = NULL, 
     polarity.frame = qdapDictionaries::env.pol, 
@@ -525,8 +531,7 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
     order.by.polarity = TRUE, ...){
   
     Polarity <- group <- ave.polarity <- unit <- NULL
-    dat <- x[["group"]][, c("person", "total.sentences", "total.words", 
-        "ave.polarity")]
+    dat <- x[["group"]][, 1:4]
     dat2 <- x[["all"]]
     if (na.rm) {
        dat <- na.omit(dat)
