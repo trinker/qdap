@@ -2405,29 +2405,34 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="adjacency_matrix"><input type="submit" value="adjmat"> - Takes a Matrix and Generates an Adjacency Matrix
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/colSplit.html" target="_blank">
-    <input type="submit" value="colSplit"> - Separate a Column Pasted by `paste2`
-</form>
 
+<form class="form_left" action="http://trinker.github.io/qdap_dev/paste2.html" target="_blank">
+    <input type="submit" value="paste2"/>
+</form>
+<form class="form_left" action="http://trinker.github.io/qdap_dev/colSplit.html" target="_blank">
+    <input type="submit" value="colSplit"/>
+</form>
+<form class="form_left" action="http://trinker.github.io/qdap_dev/colsplit2df.html" target="_blank">
+    <input type="submit" value="colsplit2df"/>
+</form>
 <form action="http://trinker.github.io/qdap_dev/colsplit2df.html" target="_blank">
-    <input type="submit" value="colsplit2df"><input type="submit" value="lcolsplit2df">  - Wrapper for colSplit that Returns Dataframe(s)
+    <input type="submit" value="lcolsplit2df"/>- <a href="#paste2">Paste and separate Columns</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/gantt.html" target="_blank">
-    <input type="submit" value="gantt"> - Generate Unit Spans 
+
+<form class="form_left" action="http://trinker.github.io/qdap_dev/gantt.html" target="_blank">
+    <input type="submit" value="gantt">
+</form>
+<form action="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank">    
+    <input type="submit" value="gantt_rep">- Generate Unit Spans 
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank">
-    <input type="submit" value="gantt_rep"> - Generate Unit Spans for Repeated Measures
-</form>
+
 
 <form action="http://trinker.github.io/qdap_dev/key_merge.html" target="_blank">
     <input type="submit" value="key_merge"> - Merge Demographic Information with Person/Text Transcript
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/paste2.html" target="_blank">
-    <input type="submit" value="paste2"> - Paste an Unspecified Number Of Text Columns
-</form>
 
 <form action="http://trinker.github.io/qdap_dev/prop.html" target="_blank">
     <input type="submit" value="prop"> - Convert Raw Numeric Matrix or Dataframe to Proportions
@@ -2450,7 +2455,14 @@ The following functions will be utilized in this section (click to view more):
 </form>
 </div>
 
-NOTE show spaste w/ termco
+<h4 id="merge">Capitalize Select Words</h4>
+<h4 id="sentsplit">Capitalize Select Words</h4>
+<h4 id="paste2">Join and Split Columns</h4>
+<h4 id="caps">Capitalize Select Words</h4>
+<h4 id="caps">Capitalize Select Words</h4>
+<h4 id="caps">Capitalize Select Words</h4>
+<h4 id="caps">Capitalize Select Words</h4>
+<h4 id="caps">Capitalize Select Words</h4>
 
 
 <h3 id="word">Extract/Analyze Words</h3>
@@ -2578,6 +2590,9 @@ The following functions will be utilized in this section (click to view more):
 </div>
 
 <h3 id="counts">Word Counts and Descriptive Statistics</h3>
+
+NOTE show spaste w/ termco
+
 
 <div class="funs">
 The following functions will be utilized in this section (click to view more):    

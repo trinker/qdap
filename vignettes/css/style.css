@@ -255,3 +255,7 @@ body {
     padding:10px; 
     border: 1px solid black;
 }
+
+.form_left {
+    float:left;
+}

@@ -9,7 +9,7 @@
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
-#' @param sort.by.formality logical.  If \code{TRUE} orders the results by 
+#' @param order.by.formality logical.  If \code{TRUE} orders the results by 
 #' formality score.
 #' @param digits The number of digits displayed.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{pos.by}}.
@@ -78,7 +78,7 @@
 #' ltruncdf(with(raj, formality(x8 , list(act, person))), 6, 4)
 #' }
 formality <- function(text.var, grouping.var = NULL,                    
-    sort.by.formality = TRUE, digits = 2, ...){        
+    order.by.formality = TRUE, digits = 2, ...){        
     G <- if(is.null(grouping.var)) {                                                 
              gv <- TRUE                                                              
              "all"                                                                   
@@ -180,7 +180,7 @@ formality <- function(text.var, grouping.var = NULL,
         colnames(FOR)[1] <- G                                                        
     }                                                                                
     FOR[, "formality"] <- round(FOR[, "formality"], digits = digits)                 
-    if (!gv & sort.by.formality) {                                                   
+    if (!gv & order.by.formality) {                                                   
         FOR <- FOR[order(-FOR$formality), ]                                          
         rownames(FOR) <- NULL                                                        
     }                                                                                
@@ -242,6 +242,9 @@ formality <- function(text.var, grouping.var = NULL,
 #' names for more compact plot width.
 #' @param min.wrdcnt A minimum word count threshold that must be achieved to be 
 #' considered in the results.  Default includes all subgroups.
+#' @param order.by.formality logical.  If \code{TRUE} the group polarity plot 
+#' will be ordered by average polarity score, otherwise alphabetical order is 
+#' assumed.
 #' @param \ldots ignored
 #' @return Invisibly returns the \code{ggplot2} objects that form the larger 
 #' plot.
@@ -250,7 +253,8 @@ formality <- function(text.var, grouping.var = NULL,
 #' @S3method plot formality
 plot.formality <- function(x, point.pch = 20, point.cex = .5,            
     point.colors = c("gray65", "red"), bar.colors = NULL, 
-    short.names = FALSE, min.wrdcnt = NULL, ...) {
+    short.names = FALSE, min.wrdcnt = NULL, order.by.formality = TRUE, 
+    ...) {
     grouping <- form.class <- NULL
     dat <- x$pos.reshaped   
     FOR <- x$formality
@@ -264,7 +268,13 @@ plot.formality <- function(x, point.pch = 20, point.cex = .5,
         dat[, "form.class"] <- lookup(dat[, "form.class"], 
             c("formal", "contectual", "other"),
             c("form", "cont", "other"))
-    }                                                                                                                
+    }       
+
+    if (order.by.formality) {
+        dat[, "grouping"] <- factor(dat[, "grouping"], levels=rev(FOR[, 1]))
+        FOR[, 1] <- factor(FOR[, 1], levels=rev(FOR[, 1]))
+    }
+                                                                                                         
     YY <- ggplot(dat, aes(grouping,  fill=form.class)) +                         
         geom_bar(position='fill') +                                              
         coord_flip() +  labs(fill=NULL) +                                        
@@ -340,6 +350,7 @@ plot.formality <- function(x, point.pch = 20, point.cex = .5,
         ZZ, widths=c(.24, .47, .29), ncol=3))     
     invisible(list(f1 = XX, f2 = YY, f3 = ZZ))
 }
+
 
 #' Prints a formality Object
 #' 

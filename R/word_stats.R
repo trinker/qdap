@@ -225,9 +225,8 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
     DF2 <- data.frame(DF2, do.call("rbind", lapply(LIST, typer)))   
     DF2 <- DF2[order(-DF2$n.words), ]
     rownames(DF2) <- NULL
-#browser()
+
     qdaMOD <- suppressWarnings(lapply(LIST, function(x) {
-#browser()
         A <- stopwords(x[, "text.var"], stopwords="", strip=TRUE, unlist=TRUE)
             if (identical(A, character(0))) {
                 return (c(DIS=0, HAPAX=0, ALL=0))

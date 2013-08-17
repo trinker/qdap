@@ -5,7 +5,7 @@
   \method{plot}{formality} (x, point.pch = 20,
     point.cex = 0.5, point.colors = c("gray65", "red"),
     bar.colors = NULL, short.names = FALSE,
-    min.wrdcnt = NULL, ...)
+    min.wrdcnt = NULL, order.by.formality = TRUE, ...)
 }
 \arguments{
   \item{x}{The formality object.}
@@ -27,6 +27,10 @@
   \item{min.wrdcnt}{A minimum word count threshold that
   must be achieved to be considered in the results.
   Default includes all subgroups.}
+
+  \item{order.by.formality}{logical.  If \code{TRUE} the
+  group polarity plot will be ordered by average polarity
+  score, otherwise alphabetical order is assumed.}
 
   \item{\ldots}{ignored}
 }

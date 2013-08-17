@@ -3,7 +3,7 @@
 \title{Formality Score}
 \usage{
   formality(text.var, grouping.var = NULL,
-    sort.by.formality = TRUE, digits = 2, ...)
+    order.by.formality = TRUE, digits = 2, ...)
 }
 \arguments{
   \item{text.var}{The text variable (or an object from
@@ -16,7 +16,7 @@
   takes a single grouping variable or a list of 1 or more
   grouping variables.}
 
-  \item{sort.by.formality}{logical.  If \code{TRUE} orders
+  \item{order.by.formality}{logical.  If \code{TRUE} orders
   the results by formality score.}
 
   \item{digits}{The number of digits displayed.}

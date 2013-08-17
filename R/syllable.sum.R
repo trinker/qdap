@@ -39,7 +39,7 @@ function(text.var, parallel = FALSE) {
             sum(syllable.count(Trim(x))['syllables'])
         }))
     } else {
-        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
+        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()/2))
         clusterExport(cl=cl, varlist=c("text.var", "strip", "Trim",
             "syllable.count", "scrubber", "bracketX", "env.syl"), 
             envir = environment())
@@ -204,7 +204,7 @@ function(text.var, parallel = FALSE) {
     if (!parallel) {
         unlist(lapply(as.character(text.var), function(x) counter(x)))
     } else {
-        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
+        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()/2))
         clusterExport(cl=cl, varlist=c("text.var", "counter", "strip",
             "Trim", "syllable.count", "scrubber", "bracketX", "env.syl"), 
             envir = environment())

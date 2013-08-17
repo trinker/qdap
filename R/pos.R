@@ -76,7 +76,7 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 1,
         return(x)
     }
     if (parallel){
-        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
+        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()/2))
         clusterExport(cl=cl, varlist=c("text.var", "ntv", "gc.rate", 
             "pos1"), envir = environment())
         m <- parLapply(cl, seq_len(ntv), function(i) {
