@@ -29,3 +29,10 @@ install.packages("openNLP", type = "source")
 [Web Page](http://trinker.github.com/qdap/)  [improvements to come]   
 [Package Vignette](https://dl.dropboxusercontent.com/u/61803503/packages/qdap_vignette.html) *Note: Incomplete*   
 [Package PDF Help Manual](https://dl.dropbox.com/u/61803503/qdap.pdf)
+
+## Contact
+
+You are welcome to:
+* submit suggestions and bug-reports at: <https://github.com/trinker/qdap/issues>
+* send a pull request on: <https://github.com/trinker/qdap/>
+* compose a friendly e-mail to: <tyler.rinker@gmail.com>

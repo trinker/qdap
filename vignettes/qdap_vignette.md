@@ -900,14 +900,14 @@ Search(SampDF, 19, "qsec", max.distance = 0)
 This manual arranges functions into categories in the order a researcher is likely to use them.  The Generic qdap Tools section does not fit this convention, however, because these tools may be used throughout all stages of analysis it is important that the reader is familiar with them.  It is important to note that after reading in transcript data the researcher will likely that the next step is the need to parse the dataframe utilizing the techniques found in the <a href="#cleaning">Cleaning/Preparing the Data</a> section.
 
 <div class="funs">
-The following functions will be utilized in this section (click to view more):    
+The following functions will be utilized in this section (click to view more):<br>    
 
-<form action="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank">
-    <input type="submit" value="hms2sec"> - <a href="#time">Convert h:m:s to Seconds</a> 
+<form class="form_left" action="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank">
+    <input type="submit" value="hms2sec"> 
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/sec2hms.html" target="_blank">
-    <input type="submit" value="sec2hms"> - <a href="#time">Convert Seconds to h:m:s</a> 
+    <input type="submit" value="sec2hms"> - <a href="#time">Time Conversion</a> 
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/lookup.html" target="_blank">
@@ -1062,7 +1062,7 @@ lookup(mtcars$carb, sort(unique(mtcars$carb)),
 
 <h4 id="time">Time Conversion</h4>  
 
-Researchers dealing with transcripts may have the need to convert between traditional Hours:Minutes:Seconds format and seconds.  <a href="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank"><code>hms2sec</code></a> and <a href="http://trinker.github.io/qdap_dev/sec2hms.html" target="_blank"><code>sec2hms</code></a> such functionalit.
+Researchers dealing with transcripts may have the need to convert between traditional Hours:Minutes:Seconds format and seconds.  The <a href="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank"><code>hms2sec</code></a> and <a href="http://trinker.github.io/qdap_dev/sec2hms.html" target="_blank"><code>sec2hms</code></a> functions offer this type of time conversion.
 
 <font size="5" color="orange">&diams;</font> **Time Conversion Examples** <font size="5" color="orange">&diams;</font>
 
