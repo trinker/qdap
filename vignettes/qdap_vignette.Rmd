@@ -1365,12 +1365,12 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="tdm"><input type="submit" value="dtm"> - Convert/Generate Term Document Matrix or Document Term Matrix
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/termco.html" target="_blank">
-    <input type="submit" value="termco"><input type="submit" value="term.match"><input type="submit" value="termco.d"><input type="submit" value="termco2mat"> - Search For and Count Terms
+<form class="form_left" action="http://trinker.github.io/qdap_dev/termco.html" target="_blank">
+    <input type="submit" value="termco"><input type="submit" value="term.match"><input type="submit" value="termco.d"><input type="submit" value="termco2mat">
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/termco.c.html" target="_blank">
-    <input type="submit" value="termco.c"> - Combine Columns from a termco Object
+    <input type="submit" value="termco.c"> - Search For and Count Terms
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/wfm.html" target="_blank">

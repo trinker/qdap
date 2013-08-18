@@ -134,3 +134,4 @@ tools.R
 .gitattributes
 qdap.Rproj
 .Rprofile
+vignettes/figure
