@@ -56,33 +56,31 @@ function(dataframe, text.var, endmarks = c("?", ".", "!", "|"),
     text.place = "right", ...) {
     splitpoint <- paste0("[", paste("\\", endmarks, sep="", collapse=""), "]")
     if (is.numeric(text.var)) {
-      text.var <- colnames(dataframe)[text.var]
+        text.var <- colnames(dataframe)[text.var]
     }
     if (incomplete.sub) {
-      dataframe [, text.var] <- incomplete.replace(dataframe [, text.var])
+        dataframe [, text.var] <- incomplete.replace(dataframe [, text.var])
     }
     if (rm.bracket) {
-      dataframe [, text.var] <- bracketX(dataframe [, text.var])
+        dataframe [, text.var] <- bracketX(dataframe [, text.var])
     }
     if(length(dataframe) < 3) {
-      dataframe $EXTRA1x2 <-  1:nrow(dataframe)
-      dataframe $EXTRA2x2 <-  1:nrow(dataframe)
+        dataframe $EXTRA1x2 <-  1:nrow(dataframe)
+        dataframe $EXTRA2x2 <-  1:nrow(dataframe)
     } else {
-      dataframe
+        dataframe
     }
     input <- text.var
     breakinput <- function(input, splitpoint) {
-      j <- gregexpr(splitpoint, input)
-      lengths <- unlist(lapply(j, length))
-      spots <- lapply(j, as.numeric)
-      first <- unlist(lapply(spots, function(x) {
-        c(1, (x + 1)[-length(x)])
-      }
-      )
-      )
-      last <- unlist(spots)
-      ans <- substring(rep(input, lengths), first, last)
-      list(text = ans, lengths = lengths)
+        j <- gregexpr(splitpoint, input)
+        lengths <- unlist(lapply(j, length))
+        spots <- lapply(j, as.numeric)
+        first <- unlist(lapply(spots, function(x) {
+          c(1, (x + 1)[-length(x)])
+        }))
+        last <- unlist(spots)
+        ans <- substring(rep(input, lengths), first, last)
+        list(text = ans, lengths = lengths)
     }
     j <- breakinput(dataframe [, input], splitpoint)
     others <- dataframe [, -which(colnames(dataframe) %in% input), drop=FALSE]
@@ -92,42 +90,42 @@ function(dataframe, text.var, endmarks = c("?", ".", "!", "|"),
     vlen <- sapply(j$lengths, seq_len)
     ans$tot <- unlist(lapply(seq_along(vlen), function(i) paste0(i, ".", vlen[[i]])))
     if(any(na.omit(ans[, input]==""))){
-      NAdet <- ans[, input]==""
-      NAdet[is.na(NAdet)] <- FALSE
-      ans[NAdet, input] <- NA
+        NAdet <- ans[, input]==""
+        NAdet[is.na(NAdet)] <- FALSE
+        ans[NAdet, input] <- NA
     }
     if (text.place == "original") {
-      ans <- ans[, colnames(dataframe)]
-      if (stem.col) {
-        ans <- stem2df(ans, which(colnames(ans) %in% text.var), ...)
-      } 
-    } else {
-      if (text.place == "right") {
-        ans <- data.frame(ans[, -1], ans[, 1])
-        totn <- which(names(ans)=="tot")
-        ans <- data.frame(ans[, 1, drop= FALSE], ans[, totn, drop = FALSE],
-                          ans[, -c(1, totn), drop = FALSE])
-        colnames(ans) <- c(colnames(ans)[-ncol(ans)], input)
+        ans <- ans[, c(colnames(dataframe), "tot")]
         if (stem.col) {
-          ans <- stem2df(ans, ncol(ans), warn = FALSE, ...)
-        }   
-      } else {
-        if (text.place == "left") {
-          ans <- ans
-          if (stem.col) {
-            ans <- stem2df(ans, 1, ...)
-          }             
+            ans <- stem2df(ans, which(colnames(ans) %in% text.var), ...)
+        } 
+    } else {
+        if (text.place == "right") {
+            ans <- data.frame(ans[, -1], ans[, 1])
+            totn <- which(names(ans)=="tot")
+            ans <- data.frame(ans[, 1, drop= FALSE], ans[, totn, drop = FALSE],
+                ans[, -c(1, totn), drop = FALSE])
+            colnames(ans) <- c(colnames(ans)[-ncol(ans)], input)
+            if (stem.col) {
+                ans <- stem2df(ans, ncol(ans), warn = FALSE, ...)
+            }   
         } else {
-          warning("incorrect text.place argument")
+            if (text.place == "left") {
+                ans <- ans
+                if (stem.col) {
+                    ans <- stem2df(ans, 1, ...)
+                }             
+            } else {
+                warning("incorrect text.place argument")
+            }
         }
-      }
     }
     ans$EXTRA1x2 <- NULL
     ans$EXTRA2x2 <- NULL
     rownames(ans) <- NULL
     ans[, text.var] <- as.character(ans[, text.var])
     if (stem.col) {
-      ans[, "stem.text"] <- as.character(ans[, "stem.text"])
+        ans[, "stem.text"] <- as.character(ans[, "stem.text"])
     }
     ans
 }

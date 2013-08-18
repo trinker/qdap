@@ -1043,7 +1043,20 @@ capitalizer(bag.o.words("i like it but i'm not certain"), "like", FALSE)
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/adjacency_matrix.html" target="_blank">
-    <input type="submit" value="adjacency_matrix"><input type="submit" value="adjmat"> - Takes a Matrix and Generates an Adjacency Matrix
+    <input type="submit" value="adjacency_matrix"><input type="submit" value="adjmat"> - `r HR("#adj", "Create Adjacency Matrix")`
+</form>
+
+
+<form class="form_left" action="http://trinker.github.io/qdap_dev/gantt.html" target="_blank">
+    <input type="submit" value="gantt">
+</form>
+<form action="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank">    
+    <input type="submit" value="gantt_rep">- `r HR("#ganttspan", "Generate Unit Spans")`
+</form>
+
+
+<form action="http://trinker.github.io/qdap_dev/key_merge.html" target="_blank">
+    <input type="submit" value="key_merge"> - `r HR("#merge", "Merge Demographic Information with Person/Text Transcript")`
 </form>
 
 
@@ -1057,53 +1070,79 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="colsplit2df"/>
 </form>
 <form action="http://trinker.github.io/qdap_dev/colsplit2df.html" target="_blank">
-    <input type="submit" value="lcolsplit2df"/>- `r HR("#paste2", "Paste and separate Columns")`
+    <input type="submit" value="lcolsplit2df"/>- `r HR("#paste2", "Paste and Separate Columns")`
 </form>
 
 
-<form class="form_left" action="http://trinker.github.io/qdap_dev/gantt.html" target="_blank">
-    <input type="submit" value="gantt">
-</form>
-<form action="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank">    
-    <input type="submit" value="gantt_rep">- Generate Unit Spans 
-</form>
-
-
-
-<form action="http://trinker.github.io/qdap_dev/key_merge.html" target="_blank">
-    <input type="submit" value="key_merge"> - Merge Demographic Information with Person/Text Transcript
-</form>
-
-
-<form action="http://trinker.github.io/qdap_dev/prop.html" target="_blank">
-    <input type="submit" value="prop"> - Convert Raw Numeric Matrix or Dataframe to Proportions
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/qcombine.html" target="_blank">
-    <input type="submit" value="qcombine"> - Combine Columns
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank">
-    <input type="submit" value="sentSplit"><input type="submit" value="sentCombine"> - Sentence Splitting
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/TOT.html" target="_blank">
-    <input type="submit" value="TOT"> - Turns of Talk Labelling
+<form class="form_left" action="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank">
+    <input type="submit" value="sentSplit"><input type="submit" value="sentCombine">
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/speakerSplit.html" target="_blank">
-    <input type="submit" value="speakerSplit"> - Break and Stretch if Multiple Persons per Cell
+    <input type="submit" value="speakerSplit"> - `r HR("#sentsplit", "Sentence Splitting/Combining")`
 </form>
+
+<form action="http://trinker.github.io/qdap_dev/TOT.html" target="_blank">
+    <input type="submit" value="TOT"> - `r HR("#tot", "Turns of Talk Labelling")`
+</form>
+
 </div>
 
-<h4 id="merge">Capitalize Select Words</h4>
-<h4 id="sentsplit">Capitalize Select Words</h4>
-<h4 id="paste2">Join and Split Columns</h4>
-<h4 id="caps">Capitalize Select Words</h4>
-<h4 id="caps">Capitalize Select Words</h4>
-<h4 id="caps">Capitalize Select Words</h4>
-<h4 id="caps">Capitalize Select Words</h4>
-<h4 id="caps">Capitalize Select Words</h4>
+<h4 id="sentsplit">Sentence Splitting/Combining</h4>
+
+Many functions in the qdap package require that the dialogue is broken apart into individual sentences, failure to do so may invalidate many of the outputs from the analysis and will lead to lead to warnings.  After reading in and cleaning the data the next step should be to split the text variable into individual sentences.  The `r FUN("sentSplit")` function outputs a dataframe with the text variable split into individual sentences and repeats the demographic variables as necessary.  Additionally, a turn of talk (`r FT(red, text="tot column")`) variable is added that keeps track of the original turn of talk (row number) and the sentence number per turn of talk.  The researcher may also want to create a second text column that has benn stemmed for future analysis by setting `r CN("stem.col = TRUE")`, though this is more time intensive.
+
+`r FT(orange, 5, text="&diams;")` **Sentence Splitting**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+sentSplit(DATA, "state")
+sentSplit(DATA, "state", stem.col = TRUE)
+sentSplit(raj, "dialogue")[1:11, ]
+```
+
+Within dialogue (particularly classroom dialogue) several speakers may say the same speech at the same.  The transcripts may lump this speech together in the form of: 
+
+<TABLE>
+    <TR> <TD align="right"><b>Person</b></TD> <TD align="right"><b>Dialogue</b></TD> </TR>
+    <TR> <TD align="right"> John, Josh & Imani `r HS(8)`</TD> <TD align="right"> Yes Mrs. Smith. `r HS(8)`</TD> </TR>
+</TABLE>
+
+The `r FUN("speakerSplit")` function attributes this text to each of the people as separate entries.  The default behavior is the search for the person separators of <font face="courier">sep = c("and", "&", ",")</font>, though other separators may be specified.
+
+`r FT(orange, 5, text="&diams;")` **Break and Stretch if Multiple Persons per Cell**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Create data set with multiple speakers per turn of talk
+DATA$person <- as.character(DATA$person)
+DATA$person[c(1, 4, 6)] <- c("greg, sally, & sam",
+    "greg, sally", "sam and sally")
+speakerSplit(DATA)
+## Change the separator
+DATA$person[c(1, 4, 6)] <- c("greg_sally_sam",
+    "greg.sally", "sam; sally")
+speakerSplit(DATA, sep = c(".", "_", ";"))
+## Reset DATA
+DATA <- qdap::DATA  
+```
+
+The `r FUN("sentCombine")` function is the opposite of the `r FUN("sentSplit")`, combining sentences into a single turn of talk per grouping variable.
+
+`r FT(orange, 5, text="&diams;")` **Sentence Combining**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+dat <- sentSplit(DATA, "state")
+## Combine by person
+sentCombine(dat$state, dat$person)
+## Combine by sex
+truncdf(sentCombine(dat$state, dat$sex), 65)
+```
+
+<h4 id="merge">Merge Demographic Information with Person/Text Transcript</h4>
+<h4 id="paste2">Paste and Split Columns</h4>
+<h4 id="ganttspan">Generate Unit Spans</h4>
+<h4 id="adj">Create Adjacency Matrix</h4>
+<h4 id="tot">Turns of Talk Labelling</h4>
+
 
 
 <h3 id="word">Extract/Analyze Words</h3>

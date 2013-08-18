@@ -42,6 +42,8 @@ BUG FIXES
 * `trans.cloud` threw an error if a single list with a named vector was passed 
   to `target.words`.  Thes behavior has been fixed.
 
+* `sentSplit` now returns the "tot" column when `text.place = "original"`.  
+
 NEW FEATURES
 
 MINOR FEATURES

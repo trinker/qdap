@@ -78,21 +78,25 @@
 #' ltruncdf(with(raj, formality(x8 , list(act, person))), 6, 4)
 #' }
 formality <- function(text.var, grouping.var = NULL,                    
-    order.by.formality = TRUE, digits = 2, ...){        
-    G <- if(is.null(grouping.var)) {                                                 
-             gv <- TRUE                                                              
-             "all"                                                                   
-         } else {                                                                    
-             gv <- FALSE                                                             
-             if (is.list(grouping.var)) {                                            
-                 m <- unlist(as.character(substitute(grouping.var))[-1])             
-                 m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) x[length(x)]) 
-                     paste(m, collapse="&")                                          
-             } else {                                                                
-                  G <- as.character(substitute(grouping.var))                        
-                  G[length(G)]                                                       
-             }                                                                       
-         }                                                                           
+    order.by.formality = TRUE, digits = 2, ...){  
+  
+    if(is.null(grouping.var)) {
+        gv <- TRUE 
+        G <- "all"
+    } else {
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            gv <- FALSE
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
+    }                                                                          
     if(is.null(grouping.var)){                                       
         grouping.var <- rep("all", length(text.var))                                                 
     } else {                                                                         

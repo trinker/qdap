@@ -500,42 +500,73 @@ ltruncdf(rajPOS, width = 4)
 ## 
 ## $POSprop
 ##   wrd. prop prop prop prop prop prop prop prop prop prop prop prop prop
-## 1    8    0    0    0    0    0    0    0 0.12    0    0    0    0 0.25
-## 2    7    0    0    0    0 0.14    0    0 0.14    0    0    0 0.14    0
-## 3    9    0    0    0    0 0.11    0    0 0.11    0    0    0    0 0.33
-## 4   11    0    0    0    0 0.09    0    0 0.27    0    0    0    0 0.27
-## 5    5    0    0    0    0    0    0    0    0    0    0    0    0  0.2
-## 6    8    0    0 0.12    0 0.12    0    0    0    0    0    0    0 0.12
+## 1    8    0    0    0    0    0    0    0 12.5    0    0    0    0   25
+## 2    7    0    0    0    0 14.2    0    0 14.2    0    0    0 14.2    0
+## 3    9    0    0    0    0 11.1    0    0 11.1    0    0    0    0 11.1
+## 4   11    0    0    0    0 9.09    0    0 27.2    0    0    0    0 27.2
+## 5    5    0    0    0    0    0    0    0    0    0    0    0    0   20
+## 6    8    0    0 12.5    0 12.5    0    0    0    0    0    0    0 12.5
 ##   prop prop prop prop prop prop prop prop prop prop prop prop prop prop
-## 1    0    0 0.12    0    0    0 0.12 0.12    0    0    0    0    0 0.12
-## 2    0    0 0.14    0    0 0.14    0 0.14    0    0    0    0    0 0.14
-## 3    0    0    0    0    0 0.22    0    0    0    0    0    0    0 0.11
-## 4    0    0    0    0    0 0.09 0.09    0    0    0    0    0    0 0.09
-## 5    0    0    0    0    0    0    0  0.2    0    0    0    0    0    0
-## 6    0    0    0    0    0    0    0 0.25    0    0    0 0.12    0 0.12
+## 1    0    0 12.5    0    0    0 12.5   25    0    0    0    0    0 12.5
+## 2    0    0 14.2    0    0 14.2    0 14.2    0    0    0    0    0 14.2
+## 3    0    0    0    0    0 22.2    0 11.1    0    0    0    0    0 22.2
+## 4    0    0    0    0    0 9.09 9.09    0    0    0    0    0    0 9.09
+## 5    0    0    0    0    0    0    0   20    0    0    0    0    0    0
+## 6    0    0    0    0    0    0    0   25    0    0    0 12.5    0 12.5
 ##   prop prop prop prop prop prop prop prop prop
-## 1 0.12    0    0    0    0    0    0    0    0
+## 1    0    0    0    0    0    0    0    0    0
 ## 2    0    0    0    0    0    0    0    0    0
-## 3    0    0    0 0.11    0    0    0    0    0
-## 4    0    0    0 0.09    0    0    0    0    0
-## 5    0  0.2  0.4    0    0    0    0    0    0
-## 6 0.12    0    0    0    0    0    0    0    0
+## 3    0    0    0 11.1    0    0    0    0    0
+## 4    0    0    0 9.09    0    0    0    0    0
+## 5    0   20   40    0    0    0    0    0    0
+## 6 12.5    0    0    0    0    0    0    0    0
 ## 
 ## $POSfreq
 ##   wrd. , . CC CD DT EX FW IN JJ JJR JJS MD NN NNP NNPS NNS PDT POS PRP
 ## 1    8 0 0  0  0  0  0  0  1  0   0   0  0  2   0    0   1   0   0   0
 ## 2    7 0 0  0  0  1  0  0  1  0   0   0  1  0   0    0   1   0   0   1
-## 3    9 0 0  0  0  1  0  0  1  0   0   0  0  3   0    0   0   0   0   2
+## 3    9 0 0  0  0  1  0  0  1  0   0   0  0  1   0    0   0   0   0   2
 ## 4   11 0 0  0  0  1  0  0  3  0   0   0  0  3   0    0   0   0   0   1
 ## 5    5 0 0  0  0  0  0  0  0  0   0   0  0  1   0    0   0   0   0   0
 ## 6    8 0 0  1  0  1  0  0  0  0   0   0  0  1   0    0   0   0   0   0
 ##   PRP$ RB RBR RBS RP TO UH VB VBD VBG VBN VBP VBZ WDT WP WP$ WRB
-## 1    1  1   0   0  0  0  0  1   1   0   0   0   0   0  0   0   0
+## 1    1  2   0   0  0  0  0  1   0   0   0   0   0   0  0   0   0
 ## 2    0  1   0   0  0  0  0  1   0   0   0   0   0   0  0   0   0
-## 3    0  0   0   0  0  0  0  1   0   0   0   1   0   0  0   0   0
+## 3    0  1   0   0  0  0  0  2   0   0   0   1   0   0  0   0   0
 ## 4    1  0   0   0  0  0  0  1   0   0   0   1   0   0  0   0   0
 ## 5    0  1   0   0  0  0  0  0   0   1   2   0   0   0  0   0   0
 ## 6    0  2   0   0  0  1  0  1   1   0   0   0   0   0  0   0   0
+## 
+## $POSrnp
+##   wrd. , .   CC CD   DT EX FW   IN JJ JJR JJS   MD   NN NNP NNPS  NNS PDT
+## 1    8 0 0    0  0    0  0  0 1(12  0   0   0    0 2(25   0    0 1(12   0
+## 2    7 0 0    0  0 1(14  0  0 1(14  0   0   0 1(14    0   0    0 1(14   0
+## 3    9 0 0    0  0 1(11  0  0 1(11  0   0   0    0 1(11   0    0    0   0
+## 4   11 0 0    0  0 1(9.  0  0 3(27  0   0   0    0 3(27   0    0    0   0
+## 5    5 0 0    0  0    0  0  0    0  0   0   0    0 1(20   0    0    0   0
+## 6    8 0 0 1(12  0 1(12  0  0    0  0   0   0    0 1(12   0    0    0   0
+##   POS  PRP PRP$   RB RBR RBS RP   TO UH   VB  VBD  VBG  VBN  VBP VBZ WDT
+## 1   0    0 1(12 2(25   0   0  0    0  0 1(12    0    0    0    0   0   0
+## 2   0 1(14    0 1(14   0   0  0    0  0 1(14    0    0    0    0   0   0
+## 3   0 2(22    0 1(11   0   0  0    0  0 2(22    0    0    0 1(11   0   0
+## 4   0 1(9. 1(9.    0   0   0  0    0  0 1(9.    0    0    0 1(9.   0   0
+## 5   0    0    0 1(20   0   0  0    0  0    0    0 1(20 2(40    0   0   0
+## 6   0    0    0 2(25   0   0  0 1(12  0 1(12 1(12    0    0    0   0   0
+##   WP WP$ WRB
+## 1  0   0   0
+## 2  0   0   0
+## 3  0   0   0
+## 4  0   0   0
+## 5  0   0   0
+## 6  0   0   0
+## 
+## $percent
+##   data
+## 1 TRUE
+## 
+## $zero.replace
+##   data
+## 1    0
 ```
 
 
@@ -2402,7 +2433,20 @@ capitalizer(bag.o.words("i like it but i'm not certain"), "like", FALSE)
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/adjacency_matrix.html" target="_blank">
-    <input type="submit" value="adjacency_matrix"><input type="submit" value="adjmat"> - Takes a Matrix and Generates an Adjacency Matrix
+    <input type="submit" value="adjacency_matrix"><input type="submit" value="adjmat"> - <a href="#adj">Create Adjacency Matrix</a>
+</form>
+
+
+<form class="form_left" action="http://trinker.github.io/qdap_dev/gantt.html" target="_blank">
+    <input type="submit" value="gantt">
+</form>
+<form action="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank">    
+    <input type="submit" value="gantt_rep">- <a href="#ganttspan">Generate Unit Spans</a>
+</form>
+
+
+<form action="http://trinker.github.io/qdap_dev/key_merge.html" target="_blank">
+    <input type="submit" value="key_merge"> - <a href="#merge">Merge Demographic Information with Person/Text Transcript</a>
 </form>
 
 
@@ -2416,53 +2460,231 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="colsplit2df"/>
 </form>
 <form action="http://trinker.github.io/qdap_dev/colsplit2df.html" target="_blank">
-    <input type="submit" value="lcolsplit2df"/>- <a href="#paste2">Paste and separate Columns</a>
+    <input type="submit" value="lcolsplit2df"/>- <a href="#paste2">Paste and Separate Columns</a>
 </form>
 
 
-<form class="form_left" action="http://trinker.github.io/qdap_dev/gantt.html" target="_blank">
-    <input type="submit" value="gantt">
-</form>
-<form action="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank">    
-    <input type="submit" value="gantt_rep">- Generate Unit Spans 
-</form>
-
-
-
-<form action="http://trinker.github.io/qdap_dev/key_merge.html" target="_blank">
-    <input type="submit" value="key_merge"> - Merge Demographic Information with Person/Text Transcript
-</form>
-
-
-<form action="http://trinker.github.io/qdap_dev/prop.html" target="_blank">
-    <input type="submit" value="prop"> - Convert Raw Numeric Matrix or Dataframe to Proportions
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/qcombine.html" target="_blank">
-    <input type="submit" value="qcombine"> - Combine Columns
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank">
-    <input type="submit" value="sentSplit"><input type="submit" value="sentCombine"> - Sentence Splitting
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/TOT.html" target="_blank">
-    <input type="submit" value="TOT"> - Turns of Talk Labelling
+<form class="form_left" action="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank">
+    <input type="submit" value="sentSplit"><input type="submit" value="sentCombine">
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/speakerSplit.html" target="_blank">
-    <input type="submit" value="speakerSplit"> - Break and Stretch if Multiple Persons per Cell
+    <input type="submit" value="speakerSplit"> - <a href="#sentsplit">Sentence Splitting/Combining</a>
 </form>
+
+<form action="http://trinker.github.io/qdap_dev/TOT.html" target="_blank">
+    <input type="submit" value="TOT"> - <a href="#tot">Turns of Talk Labelling</a>
+</form>
+
 </div>
 
-<h4 id="merge">Capitalize Select Words</h4>
-<h4 id="sentsplit">Capitalize Select Words</h4>
-<h4 id="paste2">Join and Split Columns</h4>
-<h4 id="caps">Capitalize Select Words</h4>
-<h4 id="caps">Capitalize Select Words</h4>
-<h4 id="caps">Capitalize Select Words</h4>
-<h4 id="caps">Capitalize Select Words</h4>
-<h4 id="caps">Capitalize Select Words</h4>
+<h4 id="sentsplit">Sentence Splitting/Combining</h4>
+
+Many functions in the qdap package require that the dialogue is broken apart into individual sentences, failure to do so may invalidate many of the outputs from the analysis and will lead to lead to warnings.  After reading in and cleaning the data the next step should be to split the text variable into individual sentences.  The <a href="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank"><code>sentSplit</code></a> function outputs a dataframe with the text variable split into individual sentences and repeats the demographic variables as necessary.  Additionally, a turn of talk (<font color="red">tot column</font>) variable is added that keeps track of the original turn of talk (row number) and the sentence number per turn of talk.  The researcher may also want to create a second text column that has benn stemmed for future analysis by setting <font face="courier">stem.col = TRUE</font>, though this is more time intensive.
+
+<font size="5" color="orange">&diams;</font> **Sentence Splitting**<font size="5" color="orange">&diams;</font>
+
+
+```r
+sentSplit(DATA, "state")
+```
+
+```
+##        person  tot sex adult code                       state
+## 1         sam  1.1   m     0   K1            Computer is fun.
+## 2         sam  1.2   m     0   K1                Not too fun.
+## 3        greg  2.1   m     0   K2     No it's not, it's dumb.
+## 4     teacher  3.1   m     1   K3          What should we do?
+## 5         sam  4.1   m     0   K4        You liar, it stinks!
+## 6        greg  5.1   m     0   K5     I am telling the truth!
+## 7       sally  6.1   f     0   K6      How can we be certain?
+## 8        greg  7.1   m     0   K7            There is no way.
+## 9         sam  8.1   m     0   K8             I distrust you.
+## 10      sally  9.1   f     0   K9 What are you talking about?
+## 11 researcher 10.1   f     1  K10           Shall we move on?
+## 12 researcher 10.2   f     1  K10                  Good then.
+## 13       greg 11.1   m     0  K11                 I'm hungry.
+## 14       greg 11.2   m     0  K11                  Let's eat.
+## 15       greg 11.3   m     0  K11                You already?
+```
+
+```r
+sentSplit(DATA, "state", stem.col = TRUE)
+```
+
+```
+##        person  tot sex adult code                       state
+## 1         sam  1.1   m     0   K1            Computer is fun.
+## 2         sam  1.2   m     0   K1                Not too fun.
+## 3        greg  2.1   m     0   K2     No it's not, it's dumb.
+## 4     teacher  3.1   m     1   K3          What should we do?
+## 5         sam  4.1   m     0   K4        You liar, it stinks!
+## 6        greg  5.1   m     0   K5     I am telling the truth!
+## 7       sally  6.1   f     0   K6      How can we be certain?
+## 8        greg  7.1   m     0   K7            There is no way.
+## 9         sam  8.1   m     0   K8             I distrust you.
+## 10      sally  9.1   f     0   K9 What are you talking about?
+## 11 researcher 10.1   f     1  K10           Shall we move on?
+## 12 researcher 10.2   f     1  K10                  Good then.
+## 13       greg 11.1   m     0  K11                 I'm hungry.
+## 14       greg 11.2   m     0  K11                  Let's eat.
+## 15       greg 11.3   m     0  K11                You already?
+##                   stem.text
+## 1            Comput is fun.
+## 2              Not too fun.
+## 3        No it not it dumb.
+## 4        What should we do?
+## 5        You liar it stink!
+## 6      I am tell the truth!
+## 7    How can we be certain?
+## 8          There is no way.
+## 9           I distrust you.
+## 10 What are you talk about?
+## 11        Shall we move on?
+## 12               Good then.
+## 13              I'm hungri.
+## 14                 Let eat.
+## 15             You alreadi?
+```
+
+```r
+sentSplit(raj, "dialogue")[1:11, ]
+```
+
+```
+##     person tot act                                               dialogue
+## 1  Sampson 1.1   1             Gregory, o my word, we'll not carry coals.
+## 2  Gregory 2.1   1                    No, for then we should be colliers.
+## 3  Sampson 3.1   1                I mean, an we be in choler, we'll draw.
+## 4  Gregory 4.1   1   Ay, while you live, draw your neck out o the collar.
+## 5  Sampson 5.1   1                         I strike quickly, being moved.
+## 6  Gregory 6.1   1              But thou art not quickly moved to strike.
+## 7  Sampson 7.1   1               A dog of the house of Montague moves me.
+## 8  Gregory 8.1   1     To move is to stir; and to be valiant is to stand.
+## 9  Gregory 8.2   1       therefore, if thou art moved, thou runn'st away.
+## 10 Sampson 9.1   1            A dog of that house shall move me to stand.
+## 11 Sampson 9.2   1 I will take the wall of any man or maid of Montague's.
+```
+
+
+Within dialogue (particularly classroom dialogue) several speakers may say the same speech at the same.  The transcripts may lump this speech together in the form of: 
+
+<TABLE>
+    <TR> <TD align="right"><b>Person</b></TD> <TD align="right"><b>Dialogue</b></TD> </TR>
+    <TR> <TD align="right"> John, Josh & Imani &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD> <TD align="right"> Yes Mrs. Smith. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD> </TR>
+</TABLE>
+
+The <a href="http://trinker.github.io/qdap_dev/speakerSplit.html" target="_blank"><code>speakerSplit</code></a> function attributes this text to each of the people as separate entries.  The default behavior is the search for the person separators of <font face="courier">sep = c("and", "&", ",")</font>, though other separators may be specified.
+
+<font size="5" color="orange">&diams;</font> **Break and Stretch if Multiple Persons per Cell**<font size="5" color="orange">&diams;</font>
+
+
+```r
+## Create data set with multiple speakers per turn of talk
+DATA$person <- as.character(DATA$person)
+DATA$person[c(1, 4, 6)] <- c("greg, sally, & sam",
+    "greg, sally", "sam and sally")
+speakerSplit(DATA)
+```
+
+```
+##        person sex adult                                 state code
+## 1        greg   m     0         Computer is fun. Not too fun.   K1
+## 2       sally   m     0         Computer is fun. Not too fun.   K1
+## 3         sam   m     0         Computer is fun. Not too fun.   K1
+## 4        greg   m     0               No it's not, it's dumb.   K2
+## 5     teacher   m     1                    What should we do?   K3
+## 6        greg   m     0                  You liar, it stinks!   K4
+## 7       sally   m     0                  You liar, it stinks!   K4
+## 8        greg   m     0               I am telling the truth!   K5
+## 9         sam   f     0                How can we be certain?   K6
+## 10      sally   f     0                How can we be certain?   K6
+## 11       greg   m     0                      There is no way.   K7
+## 12        sam   m     0                       I distrust you.   K8
+## 13      sally   f     0           What are you talking about?   K9
+## 14 researcher   f     1         Shall we move on?  Good then.  K10
+## 15       greg   m     0 I'm hungry.  Let's eat.  You already?  K11
+```
+
+```r
+## Change the separator
+DATA$person[c(1, 4, 6)] <- c("greg_sally_sam",
+    "greg.sally", "sam; sally")
+speakerSplit(DATA, sep = c(".", "_", ";"))
+```
+
+```
+##        person sex adult                                 state code
+## 1        greg   m     0         Computer is fun. Not too fun.   K1
+## 2       sally   m     0         Computer is fun. Not too fun.   K1
+## 3         sam   m     0         Computer is fun. Not too fun.   K1
+## 4        greg   m     0               No it's not, it's dumb.   K2
+## 5     teacher   m     1                    What should we do?   K3
+## 6        greg   m     0                  You liar, it stinks!   K4
+## 7       sally   m     0                  You liar, it stinks!   K4
+## 8        greg   m     0               I am telling the truth!   K5
+## 9         sam   f     0                How can we be certain?   K6
+## 10      sally   f     0                How can we be certain?   K6
+## 11       greg   m     0                      There is no way.   K7
+## 12        sam   m     0                       I distrust you.   K8
+## 13      sally   f     0           What are you talking about?   K9
+## 14 researcher   f     1         Shall we move on?  Good then.  K10
+## 15       greg   m     0 I'm hungry.  Let's eat.  You already?  K11
+```
+
+```r
+## Reset DATA
+DATA <- qdap::DATA  
+```
+
+
+The <a href="http://trinker.github.io/qdap_dev/sentCombine.html" target="_blank"><code>sentCombine</code></a> function is the opposite of the <a href="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank"><code>sentSplit</code></a>, combining sentences into a single turn of talk per grouping variable.
+
+<font size="5" color="orange">&diams;</font> **Sentence Combining**<font size="5" color="orange">&diams;</font>
+
+
+```r
+dat <- sentSplit(DATA, "state")
+## Combine by person
+sentCombine(dat$state, dat$person)
+```
+
+```
+##        person                            text.var
+## 1         sam       Computer is fun. Not too fun.
+## 2        greg             No it's not, it's dumb.
+## 3     teacher                  What should we do?
+## 4         sam                You liar, it stinks!
+## 5        greg             I am telling the truth!
+## 6       sally              How can we be certain?
+## 7        greg                    There is no way.
+## 8         sam                     I distrust you.
+## 9       sally         What are you talking about?
+## 10 researcher        Shall we move on? Good then.
+## 11       greg I'm hungry. Let's eat. You already?
+```
+
+```r
+## Combine by sex
+truncdf(sentCombine(dat$state, dat$sex), 65)
+```
+
+```
+##   sex                                                          text.var
+## 1   m Computer is fun. Not too fun. No it's not, it's dumb. What should
+## 2   f                                            How can we be certain?
+## 3   m                                  There is no way. I distrust you.
+## 4   f          What are you talking about? Shall we move on? Good then.
+## 5   m                               I'm hungry. Let's eat. You already?
+```
+
+
+<h4 id="merge">Merge Demographic Information with Person/Text Transcript</h4>
+<h4 id="paste2">Paste and Split Columns</h4>
+<h4 id="ganttspan">Generate Unit Spans</h4>
+<h4 id="adj">Create Adjacency Matrix</h4>
+<h4 id="tot">Turns of Talk Labelling</h4>
+
 
 
 <h3 id="word">Extract/Analyze Words</h3>
