@@ -1137,9 +1137,18 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="capitalizer"> - <a href="#caps">Capitalize Select Words</a> 
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/clean.html" target="_blank">
-    <input type="submit" value="clean"> - <a href="#clean">Remove Escaped Characters</a>
+<form class="form_left" action="http://trinker.github.io/qdap_dev/clean.html" target="_blank">
+    <input type="submit" value="clean">
 </form>
+
+<form class="form_left" action="http://trinker.github.io/qdap_dev/scrubber.html" target="_blank">
+    <input type="submit" value="scrubber">
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/Trim.html" target="_blank">
+    <input type="submit" value="Trim">- <a href="#clean">Clean Imported Text: Remove Escaped Characters & Leading/Trailing White Space</a>
+</form> 
+ 
 
 <form action="http://trinker.github.io/qdap_dev/incomplete.replace.html" target="_blank">
     <input type="submit" value="incomplete.replace"><input type="submit" value="incomp"> - <a href="#inc">Denote Incomplete End Marks With "|"</a>
@@ -1181,10 +1190,6 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="rm_row"><input type="submit" value="rm_empty_row"> - <a href="#mark">Remove Rows That Contain Markers</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/scrubber.html" target="_blank">
-    <input type="submit" value="scrubber"> - <a href="#clean">Clean Imported Text</a>
-</form>
-
 <form action="http://trinker.github.io/qdap_dev/space_fill.html" target="_blank">
     <input type="submit" value="space_fill"> - <a href="#fill">Replace Spaces</a>
 </form>
@@ -1192,10 +1197,7 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/stemmer.html" target="_blank">
     <input type="submit" value="stemmer"><input type="submit" value="stem.words"><input type="submit" value="stem2df"> - <a href="#stem">Stem Text</a>
 </form>
-
-<form action="http://trinker.github.io/qdap_dev/Trim.html" target="_blank">
-    <input type="submit" value="Trim"> - <a href="#clean">Remove Leading/Trailing White Space</a>
-</form>
+ 
 </div>
 
 <h4 id="bracket">Bracket/General Chunk Extraction <a href="http://youtu.be/B4lvZGo_6bA" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
@@ -1681,7 +1683,7 @@ rm_row(DATA, 1, c("sam", "greg"))
 
 <h4 id="clean">Remove Extra Spaces and Escaped Characters</h4> 
 
-Another step in the cleaning process is the removal of extra white spaces (use <a href="http://trinker.github.io/qdap_dev/Trim.html" target="_blank"><code>Trim</code></a>) and <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/Quotes.html" target="_blank">escaped characters</a> (use <a href="http://trinker.github.io/qdap_dev/clean.html" target="_blank"><code>clean</code></a>).  The <a href="http://trinker.github.io/qdap_dev/scrubber.html" target="_blank"><code>scrubber</code></a> function wraps both <a href="http://trinker.github.io/qdap_dev/Trim.html" target="_blank"><code>Trim</code></a> and <a href="http://trinker.github.io/qdap_dev/clean.html" target="_blank"><code>clean</code></a> and adds in the functionality of some of the <font face="courier">replace_</font> family of functions.
+An important step in the cleaning process is the removal of extra white spaces (use <a href="http://trinker.github.io/qdap_dev/Trim.html" target="_blank"><code>Trim</code></a>) and <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/Quotes.html" target="_blank">escaped characters</a> (use <a href="http://trinker.github.io/qdap_dev/clean.html" target="_blank"><code>clean</code></a>).  The <a href="http://trinker.github.io/qdap_dev/scrubber.html" target="_blank"><code>scrubber</code></a> function wraps both <a href="http://trinker.github.io/qdap_dev/Trim.html" target="_blank"><code>Trim</code></a> and <a href="http://trinker.github.io/qdap_dev/clean.html" target="_blank"><code>clean</code></a> and adds in the functionality of some of the <font face="courier">replace_</font> family of functions.
 
 <font size="5" color="orange">&diams;</font> **Remove Extra Spaces and Escaped Characters**<font size="5" color="orange">&diams;</font>
 
@@ -2680,7 +2682,278 @@ truncdf(sentCombine(dat$state, dat$sex), 65)
 
 
 <h4 id="merge">Merge Demographic Information with Person/Text Transcript</h4>
+
+It is more efficient to maintain a dialogue dataframe (consisting of a column for people and a column for dialogue) and a separate demographics dataframe (a person column and demographic column(s)) and then merge the two during analysis.  The <a href="http://trinker.github.io/qdap_dev/key_merge.html" target="_blank"><code>key_merge</code></a> function is a wrapper for the <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/merge.html" target="_blank">merge</a> function from R's base install that merges the dialogue and demographics dataframe. <a href="http://trinker.github.io/qdap_dev/key_merge.html" target="_blank"><code>key_merge</code></a> attempts to guess the person column and outputs a qdap friendly dataframe.
+
+<font size="5" color="orange">&diams;</font> **Merging Demographic Information**<font size="5" color="orange">&diams;</font>
+
+
+```r
+## A dialogue dataframe and a demographocs dataframe
+ltruncdf(list(dialogue=raj, demographics=raj.demographics), 10, 50)
+```
+
+```
+## $dialogue
+##     person                                           dialogue act
+## 1  Sampson         Gregory, o my word, we'll not carry coals.   1
+## 2  Gregory                No, for then we should be colliers.   1
+## 3  Sampson            I mean, an we be in choler, we'll draw.   1
+## 4  Gregory Ay, while you live, draw your neck out o the colla   1
+## 5  Sampson                     I strike quickly, being moved.   1
+## 6  Gregory          But thou art not quickly moved to strike.   1
+## 7  Sampson           A dog of the house of Montague moves me.   1
+## 8  Gregory To move is to stir; and to be valiant is to stand.   1
+## 9  Sampson A dog of that house shall move me to stand. I will   1
+## 10 Gregory That shows thee a weak slave; for the weakest goes   1
+## 
+## $demographics
+##            person  sex fam.aff  died
+## 1         Abraham    m    mont FALSE
+## 2      Apothecary    m    none FALSE
+## 3       Balthasar    m    mont FALSE
+## 4        Benvolio    m    mont FALSE
+## 5         Capulet    f     cap FALSE
+## 6          Chorus none    none FALSE
+## 7   First Citizen none    none FALSE
+## 8  First Musician    m    none FALSE
+## 9   First Servant    m    none FALSE
+## 10 First Watchman    m    none FALSE
+```
+
+```r
+## Merge the two
+merged.raj <- key_merge(raj, raj.demographics)
+htruncdf(merged.raj, 10, 40)
+```
+
+```
+##     person act sex fam.aff  died                                 dialogue
+## 1  Sampson   1   m     cap FALSE Gregory, o my word, we'll not carry coal
+## 2  Gregory   1   m     cap FALSE      No, for then we should be colliers.
+## 3  Sampson   1   m     cap FALSE  I mean, an we be in choler, we'll draw.
+## 4  Gregory   1   m     cap FALSE Ay, while you live, draw your neck out o
+## 5  Sampson   1   m     cap FALSE           I strike quickly, being moved.
+## 6  Gregory   1   m     cap FALSE But thou art not quickly moved to strike
+## 7  Sampson   1   m     cap FALSE A dog of the house of Montague moves me.
+## 8  Gregory   1   m     cap FALSE To move is to stir; and to be valiant is
+## 9  Sampson   1   m     cap FALSE A dog of that house shall move me to sta
+## 10 Gregory   1   m     cap FALSE That shows thee a weak slave; for the we
+```
+
+
 <h4 id="paste2">Paste and Split Columns</h4>
+
+Many functions in qdap utilize the <a href="http://trinker.github.io/qdap_dev/paste2.html" target="_blank"><code>paste2</code></a> function, which pastes multiple columns/lists of vectors.  <a href="http://trinker.github.io/qdap_dev/paste2.html" target="_blank"><code>paste2</code></a> differs from base R's <a href="http://127.0.0.1:16084/library/base/html/paste.html" target="_blank">paste</a> function in that <a href="http://trinker.github.io/qdap_dev/paste2.html" target="_blank"><code>paste2</code></a> can paste unspecified columns or a list of vectors together.  The <a href="http://trinker.github.io/qdap_dev/colsplit2df.html" target="_blank"><code>colsplit2df</code></a> and <a href="http://trinker.github.io/qdap_dev/lcolsplit2df.html" target="_blank"><code>lcolsplit2df</code></a> are useful because they can split the output from qdap functions that contain dataframes with pasted columns.
+
+<font size="5" color="orange">&diams;</font> **Using <a href="http://trinker.github.io/qdap_dev/paste2.html" target="_blank"><code>paste2</code></a> and <a href="http://trinker.github.io/qdap_dev/colSplit.html" target="_blank"><code>colSplit</code></a>**: *Pasting & Splitting Vectors and Dataframes*<font size="5" color="orange">&diams;</font>
+
+
+```r
+## Pasting a list of vectors
+paste2(rep(list(state.abb[1:8],  month.abb[1:8]) , 2), sep = "|_|")
+```
+
+```
+## [1] "AL|_|Jan|_|AL|_|Jan" "AK|_|Feb|_|AK|_|Feb" "AZ|_|Mar|_|AZ|_|Mar"
+## [4] "AR|_|Apr|_|AR|_|Apr" "CA|_|May|_|CA|_|May" "CO|_|Jun|_|CO|_|Jun"
+## [7] "CT|_|Jul|_|CT|_|Jul" "DE|_|Aug|_|DE|_|Aug"
+```
+
+```r
+## Pasting a dataframe
+foo1 <- paste2(CO2[, 1:3])
+head(foo1, 12)
+```
+
+```
+##  [1] "Qn1.Quebec.nonchilled" "Qn1.Quebec.nonchilled"
+##  [3] "Qn1.Quebec.nonchilled" "Qn1.Quebec.nonchilled"
+##  [5] "Qn1.Quebec.nonchilled" "Qn1.Quebec.nonchilled"
+##  [7] "Qn1.Quebec.nonchilled" "Qn2.Quebec.nonchilled"
+##  [9] "Qn2.Quebec.nonchilled" "Qn2.Quebec.nonchilled"
+## [11] "Qn2.Quebec.nonchilled" "Qn2.Quebec.nonchilled"
+```
+
+```r
+## Splitting a pasted column
+bar1 <- colSplit(foo1)
+head(bar1, 10)
+```
+
+```
+##     X1     X2         X3
+## 1  Qn1 Quebec nonchilled
+## 2  Qn1 Quebec nonchilled
+## 3  Qn1 Quebec nonchilled
+## 4  Qn1 Quebec nonchilled
+## 5  Qn1 Quebec nonchilled
+## 6  Qn1 Quebec nonchilled
+## 7  Qn1 Quebec nonchilled
+## 8  Qn2 Quebec nonchilled
+## 9  Qn2 Quebec nonchilled
+## 10 Qn2 Quebec nonchilled
+```
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/colsplit2df.html" target="_blank"><code>colsplit2df</code></a>**: *Splitting Columns in Dataframes*<font size="5" color="orange">&diams;</font>
+
+
+```r
+## Create a dataset with a pasted column
+dat <- data.frame(`Plant&Type&Treatment` = paste2(CO2[, 1:3]), 
+    CO2[, 4:5], check.names = FALSE)[1:9, ]
+head(dat)
+```
+
+```
+##    Plant&Type&Treatment conc uptake
+## 1 Qn1.Quebec.nonchilled   95   16.0
+## 2 Qn1.Quebec.nonchilled  175   30.4
+## 3 Qn1.Quebec.nonchilled  250   34.8
+## 4 Qn1.Quebec.nonchilled  350   37.2
+## 5 Qn1.Quebec.nonchilled  500   35.3
+## 6 Qn1.Quebec.nonchilled  675   39.2
+```
+
+```r
+## Split column
+colsplit2df(dat)
+```
+
+```
+##   Plant   Type  Treatment conc uptake
+## 1   Qn1 Quebec nonchilled   95   16.0
+## 2   Qn1 Quebec nonchilled  175   30.4
+## 3   Qn1 Quebec nonchilled  250   34.8
+## 4   Qn1 Quebec nonchilled  350   37.2
+## 5   Qn1 Quebec nonchilled  500   35.3
+## 6   Qn1 Quebec nonchilled  675   39.2
+## 7   Qn1 Quebec nonchilled 1000   39.7
+## 8   Qn2 Quebec nonchilled   95   13.6
+## 9   Qn2 Quebec nonchilled  175   27.3
+```
+
+```r
+## Specify names
+colsplit2df(dat, new.names = qcv(A, B, C))
+```
+
+```
+##     A      B          C conc uptake
+## 1 Qn1 Quebec nonchilled   95   16.0
+## 2 Qn1 Quebec nonchilled  175   30.4
+## 3 Qn1 Quebec nonchilled  250   34.8
+## 4 Qn1 Quebec nonchilled  350   37.2
+## 5 Qn1 Quebec nonchilled  500   35.3
+## 6 Qn1 Quebec nonchilled  675   39.2
+## 7 Qn1 Quebec nonchilled 1000   39.7
+## 8 Qn2 Quebec nonchilled   95   13.6
+## 9 Qn2 Quebec nonchilled  175   27.3
+```
+
+```r
+## Keep the original pasted column
+colsplit2df(dat, new.names = qcv(A, B, C), keep.orig = TRUE)
+```
+
+```
+##    Plant&Type&Treatment   A      B          C conc uptake
+## 1 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled   95   16.0
+## 2 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  175   30.4
+## 3 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  250   34.8
+## 4 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  350   37.2
+## 5 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  500   35.3
+## 6 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  675   39.2
+## 7 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled 1000   39.7
+## 8 Qn2.Quebec.nonchilled Qn2 Quebec nonchilled   95   13.6
+## 9 Qn2.Quebec.nonchilled Qn2 Quebec nonchilled  175   27.3
+```
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/lcolsplit2df.html" target="_blank"><code>lcolsplit2df</code></a>**: *Splitting Columns in Lists of Dataframes*<font size="5" color="orange">&diams;</font>
+
+
+```r
+## A list with dataframes that contain pasted columns
+x <- question_type(DATA$state, list(DATA$sex, DATA$adult))
+```
+
+```
+## Warning: Some rows contain double punctuation.  Suggested use of sentSplit
+## function.
+```
+
+```r
+ltruncdf(x[1:4])
+```
+
+```
+## $raw
+##   sex&adult   raw.text n.row endmark strip.text  q.type
+## 1       m.1 What shoul     3       ?  what shou    what
+## 2       f.0 How can we     6       ?  how can w     how
+## 3       f.0 What are y     9       ?  what are     what
+## 4       m.0 I'm hungry    11       ?  im hungry unknown
+## 
+## $count
+##   sex&adult tot.quest what how unknown
+## 1       f.0         2    1   1       0
+## 2       m.0         1    0   0       1
+## 3       m.1         1    1   0       0
+## 4       f.1         0    0   0       0
+## 
+## $prop
+##   sex&adult tot.quest what how unknown
+## 1       f.0         2   50  50       0
+## 2       m.0         1    0   0     100
+## 3       m.1         1  100   0       0
+## 4       f.1         0    0   0       0
+## 
+## $rnp
+##   sex&adult tot.quest    what    how unknown
+## 1       f.0         2  1(50%) 1(50%)       0
+## 2       m.0         1       0      0 1(100%)
+## 3       m.1         1 1(100%)      0       0
+## 4       f.1         0       0      0       0
+```
+
+```r
+z <- lcolsplit2df(x)
+ltruncdf(z[1:4])
+```
+
+```
+## $raw
+##   sex adult   raw.text n.row endmark strip.text  q.type
+## 1   m     1 What shoul     3       ?  what shou    what
+## 2   f     0 How can we     6       ?  how can w     how
+## 3   f     0 What are y     9       ?  what are     what
+## 4   m     0 I'm hungry    11       ?  im hungry unknown
+## 
+## $count
+##   sex adult tot.quest what how unknown
+## 1   f     0         2    1   1       0
+## 2   m     0         1    0   0       1
+## 3   m     1         1    1   0       0
+## 4   f     1         0    0   0       0
+## 
+## $prop
+##   sex adult tot.quest what how unknown
+## 1   f     0         2   50  50       0
+## 2   m     0         1    0   0     100
+## 3   m     1         1  100   0       0
+## 4   f     1         0    0   0       0
+## 
+## $rnp
+##   sex adult tot.quest    what    how unknown
+## 1   f     0         2  1(50%) 1(50%)       0
+## 2   m     0         1       0      0 1(100%)
+## 3   m     1         1 1(100%)      0       0
+## 4   f     1         0       0      0       0
+```
+
+
 <h4 id="ganttspan">Generate Unit Spans</h4>
 <h4 id="adj">Create Adjacency Matrix</h4>
 <h4 id="tot">Turns of Talk Labelling</h4>

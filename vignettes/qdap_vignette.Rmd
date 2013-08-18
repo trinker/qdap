@@ -663,9 +663,18 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="capitalizer"> - `r HR("#caps", "Capitalize Select Words")` 
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/clean.html" target="_blank">
-    <input type="submit" value="clean"> - `r HR("#clean", "Remove Escaped Characters")`
+<form class="form_left" action="http://trinker.github.io/qdap_dev/clean.html" target="_blank">
+    <input type="submit" value="clean">
 </form>
+
+<form class="form_left" action="http://trinker.github.io/qdap_dev/scrubber.html" target="_blank">
+    <input type="submit" value="scrubber">
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/Trim.html" target="_blank">
+    <input type="submit" value="Trim">- `r HR("#clean", "Clean Imported Text: Remove Escaped Characters & Leading/Trailing White Space")`
+</form> 
+ 
 
 <form action="http://trinker.github.io/qdap_dev/incomplete.replace.html" target="_blank">
     <input type="submit" value="incomplete.replace"><input type="submit" value="incomp"> - `r HR("#inc", "Denote Incomplete End Marks With \"|\"")`
@@ -707,10 +716,6 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="rm_row"><input type="submit" value="rm_empty_row"> - `r HR("#mark", "Remove Rows That Contain Markers")`
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/scrubber.html" target="_blank">
-    <input type="submit" value="scrubber"> - `r HR("#clean", "Clean Imported Text")`
-</form>
-
 <form action="http://trinker.github.io/qdap_dev/space_fill.html" target="_blank">
     <input type="submit" value="space_fill"> - `r HR("#fill", "Replace Spaces")`
 </form>
@@ -718,10 +723,7 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/stemmer.html" target="_blank">
     <input type="submit" value="stemmer"><input type="submit" value="stem.words"><input type="submit" value="stem2df"> - `r HR("#stem", "Stem Text")`
 </form>
-
-<form action="http://trinker.github.io/qdap_dev/Trim.html" target="_blank">
-    <input type="submit" value="Trim"> - `r HR("#clean", "Remove Leading/Trailing White Space")`
-</form>
+ 
 </div>
 
 <h4 id="bracket">Bracket/General Chunk Extraction `r yt("http://youtu.be/B4lvZGo_6bA")`</h4>   
@@ -829,7 +831,7 @@ rm_row(DATA, 1, c("sam", "greg"))
 
 <h4 id="clean">Remove Extra Spaces and Escaped Characters</h4> 
 
-Another step in the cleaning process is the removal of extra white spaces (use `r FUN("Trim")`) and `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/Quotes.html", "escaped characters")` (use `r FUN("clean")`).  The `r FUN("scrubber")` function wraps both `r FUN("Trim")` and `r FUN("clean")` and adds in the functionality of some of the `r CN("replace_")` family of functions.
+An important step in the cleaning process is the removal of extra white spaces (use `r FUN("Trim")`) and `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/Quotes.html", "escaped characters")` (use `r FUN("clean")`).  The `r FUN("scrubber")` function wraps both `r FUN("Trim")` and `r FUN("clean")` and adds in the functionality of some of the `r CN("replace_")` family of functions.
 
 `r FT(orange, 5, text="&diams;")` **Remove Extra Spaces and Escaped Characters**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -1138,7 +1140,61 @@ truncdf(sentCombine(dat$state, dat$sex), 65)
 ```
 
 <h4 id="merge">Merge Demographic Information with Person/Text Transcript</h4>
+
+It is more efficient to maintain a dialogue dataframe (consisting of a column for people and a column for dialogue) and a separate demographics dataframe (a person column and demographic column(s)) and then merge the two during analysis.  The `r FUN("key_merge")` function is a wrapper for the `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/merge.html", "merge")` function from R's base install that merges the dialogue and demographics dataframe. `r FUN("key_merge")` attempts to guess the person column and outputs a qdap friendly dataframe.
+
+`r FT(orange, 5, text="&diams;")` **Merging Demographic Information**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+## A dialogue dataframe and a demographocs dataframe
+ltruncdf(list(dialogue=raj, demographics=raj.demographics), 10, 50)
+## Merge the two
+merged.raj <- key_merge(raj, raj.demographics)
+htruncdf(merged.raj, 10, 40)
+```
+
 <h4 id="paste2">Paste and Split Columns</h4>
+
+Many functions in qdap utilize the `r FUN("paste2")` function, which pastes multiple columns/lists of vectors.  `r FUN("paste2")` differs from base R's `r HR2("http://127.0.0.1:16084/library/base/html/paste.html", "paste")` function in that `r FUN("paste2")` can paste unspecified columns or a list of vectors together.  The `r FUN("colsplit2df")` and `r FUN("lcolsplit2df")` are useful because they can split the output from qdap functions that contain dataframes with pasted columns.
+
+`r FT(orange, 5, text="&diams;")` **Using `r FUN("paste2")` and `r FUN("colSplit")`**: *Pasting & Splitting Vectors and Dataframes*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Pasting a list of vectors
+paste2(rep(list(state.abb[1:8],  month.abb[1:8]) , 2), sep = "|_|")
+## Pasting a dataframe
+foo1 <- paste2(CO2[, 1:3])
+head(foo1, 12)
+## Splitting a pasted column
+bar1 <- colSplit(foo1)
+head(bar1, 10)
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("colsplit2df")`**: *Splitting Columns in Dataframes*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Create a dataset with a pasted column
+dat <- data.frame(`Plant&Type&Treatment` = paste2(CO2[, 1:3]), 
+    CO2[, 4:5], check.names = FALSE)[1:9, ]
+head(dat)
+## Split column
+colsplit2df(dat)
+## Specify names
+colsplit2df(dat, new.names = qcv(A, B, C))
+## Keep the original pasted column
+colsplit2df(dat, new.names = qcv(A, B, C), keep.orig = TRUE)
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("lcolsplit2df")`**: *Splitting Columns in Lists of Dataframes*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+## A list with dataframes that contain pasted columns
+x <- question_type(DATA$state, list(DATA$sex, DATA$adult))
+ltruncdf(x[1:4])
+z <- lcolsplit2df(x)
+ltruncdf(z[1:4])
+```
+
 <h4 id="ganttspan">Generate Unit Spans</h4>
 <h4 id="adj">Create Adjacency Matrix</h4>
 <h4 id="tot">Turns of Talk Labelling</h4>
