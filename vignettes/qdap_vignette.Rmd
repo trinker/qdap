@@ -1077,15 +1077,11 @@ The following functions will be utilized in this section (click to view more):
 
 
 <form class="form_left" action="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank">
-    <input type="submit" value="sentSplit"><input type="submit" value="sentCombine">
+    <input type="submit" value="sentSplit"><input type="submit" value="sentCombine"><input type="submit" value="TOT">
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/speakerSplit.html" target="_blank">
     <input type="submit" value="speakerSplit"> - `r HR("#sentsplit", "Sentence Splitting/Combining")`
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/TOT.html" target="_blank">
-    <input type="submit" value="TOT"> - `r HR("#tot", "Turns of Talk Labelling")`
 </form>
 
 </div>
@@ -1100,6 +1096,9 @@ Many functions in the qdap package require that the dialogue is broken apart int
 sentSplit(DATA, "state")
 sentSplit(DATA, "state", stem.col = TRUE)
 sentSplit(raj, "dialogue")[1:11, ]
+## Convert tot column wirh sub sentences to turns of talk
+dat <- sentSplit(DATA, "state")
+TOT(dat$tot)
 ```
 
 Within dialogue (particularly classroom dialogue) several speakers may say the same speech at the same.  The transcripts may lump this speech together in the form of: 
@@ -1196,8 +1195,64 @@ ltruncdf(z[1:4])
 ```
 
 <h4 id="ganttspan">Generate Unit Spans</h4>
+
+Often a researcher will want to view the patterns of the discourse by grouping variables over time.  THis requires the data to have start and end times based on units (sentence, turn of talk, or word).  The `r FUN("gantt")` function provides the user with unit spans (start and end times) with the `r FUN("gantt_rep")` extending this capability to repeated measures.  The `r FUN("gantt")` function has basic plotting capabilities to allow visualization of the unit span data, however, the `r FUN("gantt_wrap")` function extends the `r FUN("gantt")` and `r FUN("gantt_rep")` functions to plot precise depictions (Gantt plots) of the unit span data.  Note that if the researcher is only interested in the plotting the data as a Gantt plot, the `r FUN("gantt_plot")` function combines the `r FUN("gantt")`/`r FUN("gantt_rep")` functions with the `r FUN("gantt")` function  
+
+`r FT(orange, 5, text="&diams;")` **Unit Spans**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Unit Span Dataframe
+dat <- gantt(mraja1$dialogue, mraja1$person, plot = FALSE) 
+head(dat, 12)
+## Plotting Unit Span Dataframe
+with(mraja1, invisible(gantt(dialogue, person, box.color = "black")))
+## Plotting Unit Span Dataframe with gantt_wrap
+gantt_wrap(dat, person, title = "Gantt Plot")
+```
+
+`r FT(orange, 5, text="&diams;")` **Repeated Measures Unit Spans**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Repeated Measures Unit Span Dataframe
+dat2 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex)))
+head(dat2, 12)
+## Plotting Repeated Measures Unit Span Dataframe
+gantt_wrap(dat2, fam.aff_sex, facet.vars = "act",
+    title = "Repeated Measures Gantt Plot")
+```
+
 <h4 id="adj">Create Adjacency Matrix</h4>
-<h4 id="tot">Turns of Talk Labelling</h4>
+
+It is useful to convert data to an adjaceny matrix for examing relationships between grouping variables in word usage.  The `r FUN("adjaceny_matrix")` (aka: `r FUN("adjmat")`) provide this capability, interacting with a `r FUN("termco")` or `r FUN("wfm")` object.  In the first example below Sam and Greg share 4 words in common, whereas, the Teacher and Greg share no words.  The adjaceny matrix can be passed to a network graphing package such as the `r HR2("http://igraph.sourceforge.net/", "igraph")` package for visulaization of the data structure as seen in Example 3.
+
+
+`r FT(orange, 5, text="&diams;")` **Adjaceny Matrix**: *Example 1*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+adjacency_matrix(wfm(DATA$state, DATA$person))
+```
+
+`r FT(orange, 5, text="&diams;")` **Adjaceny Matrix**: *Example 2*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+words <- c(" education", " war ", " econom", " job", "governor ")
+Terms <- with(pres_debates2012, termco(dialogue, person, words))
+Terms
+adjmat(Terms)
+```
+
+`r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Example 3*`r FT(orange, 5, text="&diams;")`
+
+
+```{r}
+library(igraph)
+dat <- adjacency_matrix(wfm(DATA$state, DATA$person, stopword = Top25Words))
+g <- graph.adjacency(dat$adjacency, weighted=TRUE, mode ="undirected")
+g <- simplify(g)
+V(g)$label <- V(g)$name
+V(g)$degree <- degree(g)
+plot(g, layout=layout.auto(g))
+```
 
 
 

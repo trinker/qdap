@@ -2467,15 +2467,11 @@ The following functions will be utilized in this section (click to view more):
 
 
 <form class="form_left" action="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank">
-    <input type="submit" value="sentSplit"><input type="submit" value="sentCombine">
+    <input type="submit" value="sentSplit"><input type="submit" value="sentCombine"><input type="submit" value="TOT">
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/speakerSplit.html" target="_blank">
     <input type="submit" value="speakerSplit"> - <a href="#sentsplit">Sentence Splitting/Combining</a>
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/TOT.html" target="_blank">
-    <input type="submit" value="TOT"> - <a href="#tot">Turns of Talk Labelling</a>
 </form>
 
 </div>
@@ -2566,6 +2562,17 @@ sentSplit(raj, "dialogue")[1:11, ]
 ## 9  Gregory 8.2   1       therefore, if thou art moved, thou runn'st away.
 ## 10 Sampson 9.1   1            A dog of that house shall move me to stand.
 ## 11 Sampson 9.2   1 I will take the wall of any man or maid of Montague's.
+```
+
+```r
+## Convert tot column wirh sub sentences to turns of talk
+dat <- sentSplit(DATA, "state")
+TOT(dat$tot)
+```
+
+```
+##  1.1  1.2  2.1  3.1  4.1  5.1  6.1  7.1  8.1  9.1 10.1 10.2 11.1 11.2 11.3 
+##    1    1    2    3    4    5    6    7    8    9   10   10   11   11   11
 ```
 
 
@@ -2955,8 +2962,169 @@ ltruncdf(z[1:4])
 
 
 <h4 id="ganttspan">Generate Unit Spans</h4>
+
+Often a researcher will want to view the patterns of the discourse by grouping variables over time.  THis requires the data to have start and end times based on units (sentence, turn of talk, or word).  The <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a> function provides the user with unit spans (start and end times) with the <a href="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank"><code>gantt_rep</code></a> extending this capability to repeated measures.  The <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a> function has basic plotting capabilities to allow visualization of the unit span data, however, the <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a> function extends the <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a> and <a href="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank"><code>gantt_rep</code></a> functions to plot precise depictions (Gantt plots) of the unit span data.  Note that if the researcher is only interested in the plotting the data as a Gantt plot, the <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> function combines the <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a>/<a href="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank"><code>gantt_rep</code></a> functions with the <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a> function  
+
+<font size="5" color="orange">&diams;</font> **Unit Spans**<font size="5" color="orange">&diams;</font>
+
+
+```r
+## Unit Span Dataframe
+dat <- gantt(mraja1$dialogue, mraja1$person, plot = FALSE) 
+head(dat, 12)
+```
+
+```
+##     person  n start end
+## 1  Sampson  8     0   8
+## 2  Gregory  7     8  15
+## 3  Sampson  9    15  24
+## 4  Gregory 11    24  35
+## 5  Sampson  5    35  40
+## 6  Gregory  8    40  48
+## 7  Sampson  9    48  57
+## 8  Gregory 20    57  77
+## 9  Sampson 22    77  99
+## 10 Gregory 13    99 112
+## 11 Sampson 30   112 142
+## 12 Gregory 10   142 152
+```
+
+```r
+## Plotting Unit Span Dataframe
+with(mraja1, invisible(gantt(dialogue, person, box.color = "black")))
+```
+
+![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-381.png) 
+
+```r
+## Plotting Unit Span Dataframe with gantt_wrap
+gantt_wrap(dat, person, title = "Gantt Plot")
+```
+
+![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-382.png) 
+
+
+<font size="5" color="orange">&diams;</font> **Repeated Measures Unit Spans**<font size="5" color="orange">&diams;</font>
+
+
+```r
+## Repeated Measures Unit Span Dataframe
+dat2 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex)))
+head(dat2, 12)
+```
+
+```
+##    act fam.aff_sex   n start end
+## 1    1       cap.m 327     0 327
+## 2    1      mont.m   8   327 335
+## 3    1       cap.m   6   335 341
+## 4    1      mont.m   8   341 349
+## 5    1       cap.m  32   349 381
+## 6    1      mont.m   4   381 385
+## 7    1       cap.m  16   385 401
+## 8    1      mont.m   2   401 403
+## 9    1       cap.m  14   403 417
+## 10   1      mont.m   2   417 419
+## 11   1       cap.m  10   419 429
+## 12   1      mont.m  12   429 441
+```
+
+```r
+## Plotting Repeated Measures Unit Span Dataframe
+gantt_wrap(dat2, fam.aff_sex, facet.vars = "act",
+    title = "Repeated Measures Gantt Plot")
+```
+
+![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-39.png) 
+
+
 <h4 id="adj">Create Adjacency Matrix</h4>
-<h4 id="tot">Turns of Talk Labelling</h4>
+
+It is useful to convert data to an adjaceny matrix for examing relationships between grouping variables in word usage.  The <a href="http://trinker.github.io/qdap_dev/adjaceny_matrix.html" target="_blank"><code>adjaceny_matrix</code></a> (aka: <a href="http://trinker.github.io/qdap_dev/adjmat.html" target="_blank"><code>adjmat</code></a>) provide this capability, interacting with a <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> or <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> object.  In the first example below Sam and Greg share 4 words in common, whereas, the Teacher and Greg share no words.  The adjaceny matrix can be passed to a network graphing package such as the <a href="http://igraph.sourceforge.net/" target="_blank">igraph</a> package for visulaization of the data structure as seen in Example 3.
+
+
+<font size="5" color="orange">&diams;</font> **Adjaceny Matrix**: *Example 1*<font size="5" color="orange">&diams;</font>
+
+
+```r
+adjacency_matrix(wfm(DATA$state, DATA$person))
+```
+
+```
+## Adjacency Matrix:
+## 
+##            greg researcher sally sam
+## researcher    0                     
+## sally         1          1          
+## sam           4          0     1    
+## teacher       0          1     2   0
+## 
+## 
+## Summed occurrences:
+## 
+##       greg researcher      sally        sam    teacher 
+##         18          6         10         11          4
+```
+
+
+<font size="5" color="orange">&diams;</font> **Adjaceny Matrix**: *Example 2*<font size="5" color="orange">&diams;</font>
+
+
+```r
+words <- c(" education", " war ", " econom", " job", "governor ")
+Terms <- with(pres_debates2012, termco(dialogue, person, words))
+Terms
+```
+
+```
+##      person word.count education      war   econom      job  governor
+## 1     OBAMA      18028  25(.14%) 17(.09%) 41(.23%) 67(.37%) 118(.65%)
+## 2    ROMNEY      20215  12(.06%)  4(.02%) 47(.23%) 86(.43%)  17(.08%)
+## 3   CROWLEY       1670         0        0        0  1(.06%) 32(1.92%)
+## 4    LEHRER        765   4(.52%)        0  3(.39%)  1(.13%) 14(1.83%)
+## 5  QUESTION        583   1(.17%)        0  2(.34%)  3(.51%)   4(.69%)
+## 6 SCHIEFFER       1445         0  5(.35%)        0        0 19(1.31%)
+```
+
+```r
+adjmat(Terms)
+```
+
+```
+## Adjacency Matrix:
+## 
+##           OBAMA ROMNEY CROWLEY LEHRER QUESTION
+## ROMNEY        5                               
+## CROWLEY       2      2                        
+## LEHRER        4      4       2                
+## QUESTION      4      4       2      4         
+## SCHIEFFER     2      2       1      1        1
+## 
+## 
+## Summed occurrences:
+## 
+##     OBAMA    ROMNEY   CROWLEY    LEHRER  QUESTION SCHIEFFER 
+##         5         5         2         4         4         2
+```
+
+
+<font size="5" color="orange">&diams;</font> **Plotting an Adjaceny Matrix**: *Example 3*<font size="5" color="orange">&diams;</font>
+
+
+
+```r
+library(igraph)
+dat <- adjacency_matrix(wfm(DATA$state, DATA$person, stopword = Top25Words))
+g <- graph.adjacency(dat$adjacency, weighted=TRUE, mode ="undirected")
+g <- simplify(g)
+V(g)$label <- V(g)$name
+V(g)$degree <- degree(g)
+plot(g, layout=layout.auto(g))
+```
+
+![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42.png) 
+
 
 
 
