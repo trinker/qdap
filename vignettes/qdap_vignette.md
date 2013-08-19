@@ -2884,14 +2884,6 @@ colsplit2df(dat, new.names = qcv(A, B, C), keep.orig = TRUE)
 ```r
 ## A list with dataframes that contain pasted columns
 x <- question_type(DATA$state, list(DATA$sex, DATA$adult))
-```
-
-```
-## Warning: Some rows contain double punctuation.  Suggested use of sentSplit
-## function.
-```
-
-```r
 ltruncdf(x[1:4])
 ```
 
@@ -3073,8 +3065,7 @@ adjacency_matrix(wfm(DATA$state, DATA$person))
 
 ```r
 words <- c(" education", " war ", " econom", " job", "governor ")
-Terms <- with(pres_debates2012, termco(dialogue, person, words))
-Terms
+(terms <- with(pres_debates2012, termco(dialogue, person, words)))
 ```
 
 ```
@@ -3088,7 +3079,7 @@ Terms
 ```
 
 ```r
-adjmat(Terms)
+adjmat(terms)
 ```
 
 ```

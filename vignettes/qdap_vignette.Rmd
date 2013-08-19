@@ -6,7 +6,7 @@
 ```{r setup, include=FALSE}
 # set global chunk options
 library(knitr); library(qdap)
-opts_chunk$set(cache=FALSE, tidy=FALSE)
+opts_chunk$set(cache=FALSE, tidy=FALSE, warning=FALSE)
 library(knitcitations); library(reports)
 bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
 
@@ -1236,9 +1236,8 @@ adjacency_matrix(wfm(DATA$state, DATA$person))
 
 ```{r}
 words <- c(" education", " war ", " econom", " job", "governor ")
-Terms <- with(pres_debates2012, termco(dialogue, person, words))
-Terms
-adjmat(Terms)
+(terms <- with(pres_debates2012, termco(dialogue, person, words)))
+adjmat(terms)
 ```
 
 `r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Example 3*`r FT(orange, 5, text="&diams;")`

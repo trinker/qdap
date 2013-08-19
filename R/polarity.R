@@ -16,12 +16,12 @@
 #' @param deamplifiers A character vector of terms that decrease the 
 #' intensity of a positive or negative word.
 #' @param question.weight The weighting of questions (values from 0 to 1).  
-#' Defualt 0 corresponds with the belief that questions (pure questions) are not 
+#' Default 0 corresponds with the belief that questions (pure questions) are not 
 #' polarized.  A weight may be applied based on the evidence that the questions 
 #' function with 
 #' polarity.
-#' @param amplifier.weight The weight to apply to amplifiers/demplifiers (values 
-#' from 0 to 1).  This value will multiply the the polarized terms by 1 + this 
+#' @param amplifier.weight The weight to apply to amplifiers/deamplifiers (values 
+#' from 0 to 1).  This value will multiply the polarized terms by 1 + this 
 #' value.
 #' @param n.before The number of words to consider as valence shifters before 
 #' the polarized word.
@@ -60,16 +60,16 @@
 #' @details The equation used by the algorithm to assign value to polarity to 
 #' each sentence fist utilizes the sentiment dictionary (Hu and Liu, 2004) to 
 #' tag polarized words.  A context cluster of words is pulled from around this 
-#' polarized word (defualt 4 words before and two words after) to be considered 
+#' polarized word (default 4 words before and two words after) to be considered 
 #' as valence shifters.  The words in this context cluster are tagged as 
 #' neutral (\eqn{x_i^{0}}), negator (\eqn{x_i^{N}}), amplifier (\eqn{x_i^{a}}), 
 #' or de-amplifier (\eqn{x_i^{d}}). Neutral words hold no value in the equation 
 #' but do affect word count (\eqn{n}).  Each polarized word is then weighted 
-#' \eqn{w} based on the weigths from the \code{polarity.frame} argument and then 
+#' \eqn{w} based on the weights from the \code{polarity.frame} argument and then 
 #' further weighted by the number and position of the valence shifters directly 
 #' surrounding the positive or negative word.  The researcher may provide a 
 #' weight \eqn{c} to be utilized with amplifiers/de-amplifiers (default is .8; 
-#' deamplifier weight is constrained to -1 lowe bound).  Last, these values are 
+#' deamplifier weight is constrained to -1 lower bound).  Last, these values are 
 #' then summed and divided by the word count (\eqn{n}) yielding an unbounded 
 #' polarity score (\eqn{\delta}).  Note that context clusters containing a comma 
 #' before the polarized word will only consider words found after the comma.
