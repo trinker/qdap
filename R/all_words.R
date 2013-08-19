@@ -10,7 +10,7 @@
 #' @param contains This argument takes a word chunk.  Default is \code{NULL}. 
 #' Use this if searching for a word containing the word chunk.
 #' @param alphabetical logical.  If \code{TRUE} orders rows alphabetically, if 
-#' \code{FALSE} orders the rows by frequency.
+#' \code{FALSE} orders the rows by descending frequency.
 #' @return Returns a dataframe with frequency counts of words that begin with or 
 #' contain the provided word chunk.
 #' @note Cannot provide both \code{begins.with} and \code{contains} arguments 
@@ -42,6 +42,7 @@ function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE){
     y <- data.frame(table(WORDS), stringsAsFactors = FALSE)
     names(y) <- c("WORD", "FREQ")
     y$WORD <- as.character(y$WORD)
+    y[, "FREQ"] <- as.numeric(as.character(y[, "FREQ"]))
     if (!is.null(begins.with)) {
         y <- y[substring(y[, 1], 1, nchar(begins.with)) %in% begins.with, ]
         if(nrow(y)==0) stop("No words match")
@@ -51,7 +52,7 @@ function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE){
         if(nrow(y)==0) stop("No words match")
     }
     if (!alphabetical) {
-        y <- y[order(y$FREQ, y$WORD), ]
+        y <- y[order(-y$FREQ, y$WORD), ]
     }
     rownames(y) <- NULL
     left.just(y, "WORD")

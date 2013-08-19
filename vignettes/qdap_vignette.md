@@ -32,7 +32,7 @@ The following vignette is a loose chronological road map for utilizing the tools
 <div>4.  <a href="#tools">Generic qdap Tools</a>    </div> 
 <div>5.  <a href="#cleaning">Cleaning/Preparing the Data</a>    </div> 
 <div>6.  <a href="#reshaping">Reshaping the Data</a>    </div> 
-<div>7.  <a href="#word">Extract/Analyze Words</a>    </div> 
+<div>7.  <a href="#word">Extract Words</a>    </div> 
 <div>8.  <a href="#coding">Qualitative Coding System</a>    </div> 
 <div>9.  <a href="#counts">Word Counts and Descriptive Statistics</a>    </div> 
 <div>10.  <a href="#measures">Word Measures and Scoring</a>    </div> 
@@ -3119,13 +3119,15 @@ plot(g, layout=layout.auto(g))
 
 
 
-<h3 id="word">Extract/Analyze Words</h3>
+<h3 id="word">Extract Words</h3>
+
+This section overviews functions that can extract words and word lists from dialogue text.  The subsections describing function use are in alphabetical order as ther eis no set chronology for use.
 
 <div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/all_words.html" target="_blank">
-    <input type="submit" value="all_words"> - Searches Text Column for Words
+    <input type="submit" value="all_words"> - <a href="#all_words">Searches Text Column for Words</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/bag.o.words.html" target="_blank">
@@ -3168,6 +3170,69 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="word_list"> - Raw Word Lists/Frequency Counts
 </form>
 </div>
+
+<h4 id="all_words">Searches Text Column for Words</h4>
+
+The <a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a> breaks the dialogue into a bag of words and searches based on the criteria arguments <font face="courier">begins.with</font> and <font face="courier">contains</font>.  The resulting word list can be useful for analysis or to pass to qdap functions that deal with <a href="#counts">Word Counts and Descriptive Statistics</a>.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a>**<font size="5" color="orange">&diams;</font>
+
+
+
+```r
+## Words starting with `re`
+x1 <- all_words(raj$dialogue, begins.with="re")
+head(x1, 10)
+```
+
+```
+##    WORD        FREQ
+## 1  re             2
+## 2  reach          1
+## 3  read           6
+## 4  ready          5
+## 5  rearward       1
+## 6  reason         5
+## 7  reasons        1
+## 8  rebeck         1
+## 9  rebellious     1
+## 10 receipt        1
+```
+
+```r
+## Words containing with `conc`
+all_words(raj$dialogue, contains = "conc")
+```
+
+```
+##   WORD      FREQ
+## 1 conceald     1
+## 2 conceit      2
+## 3 conceive     1
+## 4 concludes    1
+## 5 reconcile    1
+```
+
+```r
+## All words ordered by frequency
+x2 <- all_words(raj$dialogue, alphabetical = FALSE)
+head(x2, 10)
+```
+
+```
+##    WORD             FREQ
+## 1  and               666
+## 2  the               656
+## 3  i                 574
+## 4  to                517
+## 5  a                 446
+## 6  of                378
+## 7  my                358
+## 8  is                344
+## 9  that              344
+## 10 in                312
+```
+
 
 <h3 id="coding">Qualitative Coding System</h3>
 

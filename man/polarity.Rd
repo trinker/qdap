@@ -124,7 +124,7 @@
   found after the comma.
 
   \deqn{\delta=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot
-  w(-1)^{(2 + \sum{x_i^{N}})})}}{n}}
+  w(-1)^{\sum{x_i^{N}}})}}{n}}
 
   Where:
 
@@ -134,7 +134,7 @@
   x_i^{d})}}
 
   \deqn{w_{neg}=\left\{\begin{array}{cc} 1 &
-  \sum{(X_i^{N})}>0 \\ 0 & \sum{(X_i^{N}})=0
+  \sum{x_i^{N}}>0 \\ 0 & \sum{x_i^{N}}=0
   \end{array}\right.}
 }
 \note{

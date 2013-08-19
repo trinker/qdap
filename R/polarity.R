@@ -74,7 +74,7 @@
 #' polarity score (\eqn{\delta}).  Note that context clusters containing a comma 
 #' before the polarized word will only consider words found after the comma.
 #' 
-#' \deqn{\delta=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot w(-1)^{(2 + \sum{x_i^{N}})})}}{n}}
+#' \deqn{\delta=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot w(-1)^{\sum{x_i^{N}}})}}{n}}
 #'   
 #' Where:
 #' 
@@ -83,8 +83,8 @@
 #' \deqn{x_i^{D}=\sum{((1 - w_{neg})\cdot x_i^{a} + x_i^{d})}}
 #' 
 #' \deqn{w_{neg}=\left\{\begin{array}{cc}
-#' 1 & \sum{(X_i^{N})}>0         \\ 
-#' 0 & \sum{(X_i^{N}})=0
+#' 1 & \sum{x_i^{N}}>0         \\ 
+#' 0 & \sum{x_i^{N}}=0
 #' \end{array}\right.}
 #'     
 #' @references Hu, M., & Liu, B. (2004). Mining opinion features in customer 

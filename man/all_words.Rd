@@ -18,7 +18,7 @@
 
   \item{alphabetical}{logical.  If \code{TRUE} orders rows
   alphabetically, if \code{FALSE} orders the rows by
-  frequency.}
+  descending frequency.}
 }
 \value{
   Returns a dataframe with frequency counts of words that

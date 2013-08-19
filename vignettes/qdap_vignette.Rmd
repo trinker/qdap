@@ -46,7 +46,7 @@ The following vignette is a loose chronological road map for utilizing the tools
 <div>4.  `r HR("#tools", "Generic qdap Tools")`    </div> 
 <div>5.  `r HR("#cleaning", "Cleaning/Preparing the Data")`    </div> 
 <div>6.  `r HR("#reshaping", "Reshaping the Data")`    </div> 
-<div>7.  `r HR("#word", "Extract/Analyze Words")`    </div> 
+<div>7.  `r HR("#word", "Extract Words")`    </div> 
 <div>8.  `r HR("#coding", "Qualitative Coding System")`    </div> 
 <div>9.  `r HR("#counts", "Word Counts and Descriptive Statistics")`    </div> 
 <div>10.  `r HR("#measures", "Word Measures and Scoring")`    </div> 
@@ -1255,13 +1255,15 @@ plot(g, layout=layout.auto(g))
 
 
 
-<h3 id="word">Extract/Analyze Words</h3>
+<h3 id="word">Extract Words</h3>
+
+This section overviews functions that can extract words and word lists from dialogue text.  The subsections describing function use are in alphabetical order as ther eis no set chronology for use.
 
 <div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/all_words.html" target="_blank">
-    <input type="submit" value="all_words"> - Searches Text Column for Words
+    <input type="submit" value="all_words"> - `r HR("#all_words", "Searches Text Column for Words")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/bag.o.words.html" target="_blank">
@@ -1304,6 +1306,24 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="word_list"> - Raw Word Lists/Frequency Counts
 </form>
 </div>
+
+<h4 id="all_words">Searches Text Column for Words</h4>
+
+The `r FUN("all_words")` breaks the dialogue into a bag of words and searches based on the criteria arguments `r CN("begins.with")` and `r CN("contains")`.  The resulting word list can be useful for analysis or to pass to qdap functions that deal with `r HR("#counts", "Word Counts and Descriptive Statistics")`.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("all_words")`**`r FT(orange, 5, text="&diams;")`
+
+
+```{r}
+## Words starting with `re`
+x1 <- all_words(raj$dialogue, begins.with="re")
+head(x1, 10)
+## Words containing with `conc`
+all_words(raj$dialogue, contains = "conc")
+## All words ordered by frequency
+x2 <- all_words(raj$dialogue, alphabetical = FALSE)
+head(x2, 10)
+```
 
 <h3 id="coding">Qualitative Coding System</h3>
 
