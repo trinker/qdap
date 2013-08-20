@@ -6,7 +6,7 @@
 \usage{
   pos(text.var, parallel = FALSE, na.omit = FALSE,
     digits = 1, progress.bar = TRUE, percent = TRUE,
-    zero.replace = 0, gc.rate = 10)
+    zero.replace = 0)
 
   pos.by(text.var, grouping.var = NULL, digits = 1,
     percent = TRUE, zero.replace = 0, ...)
@@ -36,12 +36,6 @@
   percent.  If \code{FALSE} the output is proportion.}
 
   \item{zero.replace}{Value to replace 0 values with.}
-
-  \item{gc.rate}{An integer value.  This is a necessary
-  argument because of a problem with the garbage collection
-  in the openNLP function that \code{\link[qdap]{pos}}
-  wraps.  Consider adjusting this argument upward if the
-  error \code{java.lang.OutOfMemoryError} occurs.}
 
   \item{grouping.var}{The grouping variables.  Default
   \code{NULL} generates one word list for all text.  Also
@@ -131,9 +125,6 @@ out2 <- with(DATA, pos.by(posbydat, list(adult, sex)))
 }
 \references{
   \href{openNLP}{http:/opennlp.apache.org}
-}
-\seealso{
-  \code{\link[openNLP]{tagPOS}}
 }
 \keyword{parts-of-speech}
 

@@ -84,6 +84,7 @@ formality <- function(text.var, grouping.var = NULL,
         gv <- TRUE 
         G <- "all"
     } else {
+        gv <- FALSE
         if (is.list(grouping.var)) {
             m <- unlist(as.character(substitute(grouping.var))[-1])
             m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
@@ -92,7 +93,6 @@ formality <- function(text.var, grouping.var = NULL,
             )
             G <- paste(m, collapse="&")
         } else {
-            gv <- FALSE
             G <- as.character(substitute(grouping.var))
             G <- G[length(G)]
         }

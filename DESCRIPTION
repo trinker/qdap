@@ -3,9 +3,9 @@ Type: Package
 Title: Bridging the gap between qualitative data and quantitative analysis
 Version: 1.0.0
 Date: 2013-06-26
-VignetteBuilder: knitr
 Author: Tyler Rinker
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
+VignetteBuilder: knitr
 Depends:
     R (>= 3.0.0),
     gdata,
@@ -23,6 +23,7 @@ Imports:
     data.table,
     grDevices,
     igraph,
+    NLP,
     openNLP,
     openNLPmodels.en,
     parallel,
@@ -38,6 +39,7 @@ Imports:
     wordcloud,
     XML
 Suggests:
+    lda,
     lsa,
     plyr,
     koRpus
