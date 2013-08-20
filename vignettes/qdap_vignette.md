@@ -3131,7 +3131,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/bag.o.words.html" target="_blank">
-    <input type="submit" value="bag.o.words"><input type="submit" value="breaker"><input type="submit" value="word.split"> - Bag of Words
+    <input type="submit" value="bag.o.words"><input type="submit" value="breaker"><input type="submit" value="word.split"> - <a href="#bag">Bag of Words</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/common.html" target="_blank">
@@ -3232,6 +3232,99 @@ head(x2, 10)
 ## 9  that              344
 ## 10 in                312
 ```
+
+
+<h4 id="bag">Bag of Words</h4>
+
+The qdap package utilizes the following functions to turn text into a bag of words (order is perserved):
+
+
+<TABLE>
+    <TR> <TD align="right"><font face="courier"><b>bag.o.words</b></font></TD> <TD align="right">Reduces a text column to a <b>single</b> vector bag of words.</TD> </TR>
+    <TR> <TD align="right"><font face="courier"><b> breaker</b></font></TD> <TD align="right"> Reduces a text column to a <b>single</b> vector bag of words and qdap recognized end marks.</TD> </TR>
+    <TR> <TD align="right"><font face="courier"><b> word.split</b></font></TD> <TD align="right"> Reduces a text column to a <b>list</b> of vectors of bag of words and qdap recognized end marks (i.e., ".", "!", "?", "*", "-").</TD> </TR>
+</TABLE>
+
+
+
+```r
+library(qdap)
+dat<- qdap:::list2df(list(x = x, y=y))
+dat[, "stemmed"] <- stemmer(dat[, 1])
+x <- unique(bag.o.words(dat[, 3]))
+SW <- x[nchar(x) < 3]
+wfdf(dat[, 3], dat[,2], stopwords = SW, margins = TRUE)
+```
+
+FIND ME
+<font size="5" color="orange">&diams;</font> ** **<font size="5" color="orange">&diams;</font>
+
+
+<h4 id=""></h4>
+The <a href="http://trinker.github.io/qdap_dev/.html" target="_blank"><code></code></a> 
+
+breaker
+word.split
+bag.o.words
+
+<font size="5" color="orange">&diams;</font> ** **<font size="5" color="orange">&diams;</font>
+
+
+
+```r
+## Words starting with `re`
+x1 <- all_words(raj$dialogue, begins.with="re")
+head(x1, 10)
+```
+
+```
+##    WORD        FREQ
+## 1  re             2
+## 2  reach          1
+## 3  read           6
+## 4  ready          5
+## 5  rearward       1
+## 6  reason         5
+## 7  reasons        1
+## 8  rebeck         1
+## 9  rebellious     1
+## 10 receipt        1
+```
+
+```r
+## Words containing with `conc`
+all_words(raj$dialogue, contains = "conc")
+```
+
+```
+##   WORD      FREQ
+## 1 conceald     1
+## 2 conceit      2
+## 3 conceive     1
+## 4 concludes    1
+## 5 reconcile    1
+```
+
+```r
+## All words ordered by frequency
+x2 <- all_words(raj$dialogue, alphabetical = FALSE)
+head(x2, 10)
+```
+
+```
+##    WORD             FREQ
+## 1  and               666
+## 2  the               656
+## 3  i                 574
+## 4  to                517
+## 5  a                 446
+## 6  of                378
+## 7  my                358
+## 8  is                344
+## 9  that              344
+## 10 in                312
+```
+
 
 
 <h3 id="coding">Qualitative Coding System</h3>

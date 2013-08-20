@@ -39,7 +39,7 @@ function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE){
     if(!is.null(contains)) contains <- tolower(contains)
     WORDS <- unlist(word.split(reducer(strip(text.var))))
     names(WORDS) <- NULL
-    y <- data.frame(table(WORDS), stringsAsFactors = FALSE)
+    y <- data.frame(table(WORDS), stringsAsFactors = FALSE, row.names=NULL)
     names(y) <- c("WORD", "FREQ")
     y$WORD <- as.character(y$WORD)
     y[, "FREQ"] <- as.numeric(as.character(y[, "FREQ"]))
@@ -54,6 +54,20 @@ function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE){
     if (!alphabetical) {
         y <- y[order(-y$FREQ, y$WORD), ]
     }
-    rownames(y) <- NULL
-    left.just(y, "WORD")
+    p <- class(y)
+    class(y) <- c("all_words", p)
+    y
+}
+
+#' Prints an all_words Object
+#' 
+#' Prints an all_words object.
+#' 
+#' @param x The all_words object.
+#' @param \ldots ignored
+#' @method print all_words
+#' @S3method print all_words
+print.all_words <- function(x, ...) {
+    class(x) <- "data.frame"
+    print(left.just(x, "WORD"))
 }
