@@ -11,6 +11,9 @@
 #' Use this if searching for a word containing the word chunk.
 #' @param alphabetical logical.  If \code{TRUE} orders rows alphabetically, if 
 #' \code{FALSE} orders the rows by descending frequency.
+#' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophes from 
+#' the text before examining.
+#' @param \ldots Other argument supplied to \code{\link[qdap]{strip}}.
 #' @return Returns a dataframe with frequency counts of words that begin with or 
 #' contain the provided word chunk.
 #' @note Cannot provide both \code{begins.with} and \code{contains} arguments 
@@ -30,14 +33,14 @@
 #' x3 <- all_words(raj$dialogue)
 #' head(x3, 10)
 #' }
-all_words <-
-function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE){
+all_words <- 
+function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE, apostrophe.remove = FALSE, ...){
     if (!is.null(begins.with) & !is.null(contains)) {
         stop("Can not use both 'begins.with' & 'contains' arguments")
     }
     if(!is.null(begins.with)) begins.with <- tolower(begins.with)
     if(!is.null(contains)) contains <- tolower(contains)
-    WORDS <- unlist(word.split(reducer(strip(text.var))))
+    WORDS <- unlist(bag.o.words(strip(text.var, apostrophe.remove = apostrophe.remove, ...)))
     names(WORDS) <- NULL
     y <- data.frame(table(WORDS), stringsAsFactors = FALSE, row.names=NULL)
     names(y) <- c("WORD", "FREQ")

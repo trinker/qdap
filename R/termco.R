@@ -19,8 +19,8 @@
 #' @param percent logical.  If \code{TRUE} output given as percent.  If 
 #' \code{FALSE} the output is proportion.
 #' @param digits Integer; number of decimal places to round when printing.   
-#' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophes from the text 
-#' before examining.
+#' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophes from 
+#' the text before examining.
 #' @param char.keep A character vector of symbol character (i.e., punctuation) 
 #' that strip should keep.  The default is to strip everything except 
 #' apostrophes. \code{\link[qdap]{termco}} attempts to auto detect characters to 

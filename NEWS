@@ -45,7 +45,9 @@ BUG FIXES
 * `sentSplit` now returns the "tot" column when `text.place = "original"`.  
 
 * `all_words` output dataframe FREQ column class has been changed from factor to 
-  numeric.
+  numeric.  Additionally, the WORDS column prints using `left.just` but retains
+  traditional character properties (print class added).  `all_words` also picks
+  up apostrophe.remove and ldots (for `strip`) arguments.
 
 NEW FEATURES
 

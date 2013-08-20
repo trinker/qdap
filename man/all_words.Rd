@@ -3,7 +3,7 @@
 \title{Searches Text Column for Words}
 \usage{
   all_words(text.var, begins.with = NULL, contains = NULL,
-    alphabetical = TRUE)
+    alphabetical = TRUE, apostrophe.remove = FALSE, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -19,6 +19,12 @@
   \item{alphabetical}{logical.  If \code{TRUE} orders rows
   alphabetically, if \code{FALSE} orders the rows by
   descending frequency.}
+
+  \item{apostrophe.remove}{logical.  If \code{TRUE} removes
+  apostrophes from the text before examining.}
+
+  \item{\ldots}{Other argument supplied to
+  \code{\link[qdap]{strip}}.}
 }
 \value{
   Returns a dataframe with frequency counts of words that
