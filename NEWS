@@ -94,6 +94,7 @@ CHANGES
   Because this is a major change that make break the code of some users the 
   major release number has been upped to 1.  The following name changes have 
   occurred:
+
       increase.amplification.words -> became -> amplification.words
 
   The deamplification.words and env.pol wordlist and dictionary were added as 

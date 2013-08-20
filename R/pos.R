@@ -29,7 +29,9 @@
 #' @references \href{openNLP}{http:/opennlp.apache.org}
 #' @keywords parts-of-speech
 #' @export
-#' @import NLP openNLP openNLPmodels.en parallel Snowball 
+#' @import parallel
+#' @importFrom NLP annotate Annotation as.String
+#' @importFrom openNLP Maxent_POS_Tag_Annotator Maxent_Word_Token_Annotator
 #' @examples 
 #' \dontrun{
 #' posdat <- pos(DATA$state)
@@ -66,9 +68,30 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 1,
     progress.bar = TRUE, percent = TRUE, zero.replace=0){
     ntv <- length(text.var)   
     PTA <- Maxent_POS_Tag_Annotator()
-    pos1 <-  function(var, pta = PTA) {
-        tagPOS(strip(var), pos_tag_annotator = pta)   
-    }
+#    pos1 <-  function(var, pta) {
+#        tagPOS(strip(var), pta)   
+#    }
+    
+pos1 <-  function(x, pos_tag_annotator) {
+    s <- as.String(strip(x))
+
+    ## Need sentence and word token annotations.
+    word_token_annotator <- Maxent_Word_Token_Annotator()
+    a2 <- Annotation(1L, "sentence", 1L, nchar(s))
+    a2 <- annotate(s, word_token_annotator)
+    a3 <- annotate(s, pos_tag_annotator, a2)
+
+
+    ## Determine the distribution of POS tags for word tokens.
+    a3w <- a3[a3$type == "word"]
+    POStags <- unlist(lapply(a3w$features, `[[`, "POS"))
+    word.count <- wc(x)
+
+    ## Extract token/POS pairs (all of them): easy.
+    POStagged <- paste(sprintf("%s/%s", s[a3w], POStags), collapse = " ")
+    list(POStagged = POStagged, POStags = POStags, word.count = word.count)
+}
+    
     if (parallel){
         cl <- makeCluster(mc <- getOption("cl.cores", detectCores()/2))
         clusterExport(cl=cl, varlist=c("text.var", "ntv", 
@@ -86,7 +109,7 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 1,
                 pb <- winProgressBar(title = "progress bar", min = 0,
                     max = ntv, width = 300)
                 m <- lapply(seq_len(ntv), function(i) {
-                        x <- pos1(text.var[i], pta = PTA)
+                        x <- pos1(text.var[i], PTA)
                         setWinProgressBar(pb, i, title = paste(round(i/ntv*100, 0),
                             "% done"))
                         x
@@ -96,7 +119,7 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 1,
             } else {
                 pb <- txtProgressBar(min = 0, max = ntv, style = 3)
                 m <- lapply(seq_len(ntv), function(i) {
-                        x <- pos1(text.var[i])
+                        x <- pos1(text.var[i], PTA)
                         setTxtProgressBar(pb, i)
                         x
                     }
@@ -105,7 +128,7 @@ function(text.var, parallel = FALSE, na.omit = FALSE, digits = 1,
             }
         } else {
             m <- lapply(seq_len(ntv), function(i) {
-                    pos1(text.var[i])
+                    pos1(text.var[i], PTA)
                 }
             )
         }
@@ -432,24 +455,3 @@ plot.pos.by <- function(x, label = FALSE, lab.digits = 1, percent = NULL,
     }  
 }
 
-
-tagPOS <- function(x, pos_tag_annotator) {
-    s <- as.String(x)
-
-    ## Need sentence and word token annotations.
-    sent_token_annotator <- Maxent_Sent_Token_Annotator()
-    word_token_annotator <- Maxent_Word_Token_Annotator()
-    a2 <- Annotation(1L, "sentence", 1L, nchar(s))
-    a2 <- annotate(s, list(sent_token_annotator, word_token_annotator))
-    a3 <- annotate(s, pos_tag_annotator, a2)
-
-
-    ## Determine the distribution of POS tags for word tokens.
-    a3w <- a3[a3$type == "word"]
-    POStags <- unlist(lapply(a3w$features, `[[`, "POS"))
-    word.count <- wc(x)
-
-    ## Extract token/POS pairs (all of them): easy.
-    POStagged <- paste(sprintf("%s/%s", s[a3w], POStags), collapse = " ")
-    list(POStagged = POStagged, POStags = POStags, word.count = word.count)
-}

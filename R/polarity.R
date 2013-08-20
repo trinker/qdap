@@ -370,7 +370,8 @@ function(x, digits = NULL, ...) {
 #' @return Invisibly returns the \code{ggplot2} objects that form the larger 
 #' plot.  
 #' @method plot polarity
-#' @import ggplot2 gridExtra scales RColorBrewer
+#' @import ggplot2 gridExtra RColorBrewer
+#' @importFrom scales alpha
 #' @S3method plot polarity
 plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99", 
     high = "blue", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 

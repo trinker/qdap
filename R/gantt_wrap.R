@@ -55,7 +55,8 @@
 #' for repeated measures data output use \code{\link[qdap]{gantt_rep}}; and for 
 #' a convenient wrapper that takes text and generates plots use 
 #' \code{\link[qdap]{gantt_plot}}.
-#' @import ggplot2 scales RColorBrewer
+#' @import ggplot2 gridExtra RColorBrewer
+#' @importFrom scales alpha
 #' @author Andrie de Vries and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso 
 #' \code{\link[qdap]{gantt}},
