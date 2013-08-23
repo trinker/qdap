@@ -9,7 +9,7 @@
 #' @seealso \code{\link[chron]{times}},
 #' \code{\link[qdap]{hms2sec}}
 #' @export
-#' @import chron
+#' @importFrom chron times
 #' @examples 
 #' \dontrun{
 #' sec2hms(c(256, 3456, 56565))

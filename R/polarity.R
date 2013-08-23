@@ -114,7 +114,7 @@
 #' htruncdf(poldat3[["all"]], 15, 8)
 #' plot(poldat3)
 #' plot(poldat3, nrow=4)
-#' qheat(poldat3[["group"]], high="red", order.b="ave.polarity")
+#' qheat(poldat3[["group"]][, -7], high="red", order.b="ave.polarity")
 #' 
 #' ## Create researcher defined polarity.frame
 #' POLENV <- polarity_frame(positive.words, negative.words)
@@ -370,7 +370,7 @@ function(x, digits = NULL, ...) {
 #' @return Invisibly returns the \code{ggplot2} objects that form the larger 
 #' plot.  
 #' @method plot polarity
-#' @import ggplot2 gridExtra RColorBrewer
+#' @import gridExtra
 #' @importFrom scales alpha
 #' @S3method plot polarity
 plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99", 

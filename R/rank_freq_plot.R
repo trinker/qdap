@@ -43,7 +43,7 @@
 #' effort. Cambridge, Massachusetts: Addison-Wesley. p. 1.
 #' @keywords Zipf, rank-frequency
 #' @export
-#' @import ggplot2 gridExtra RColorBrewer
+#' @import gridExtra RColorBrewer
 #' @importFrom scales alpha
 #' @examples
 #' \dontrun{

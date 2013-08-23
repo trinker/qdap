@@ -63,7 +63,7 @@
 #' \code{\link[qdap]{gradient_cloud}}
 #' @keywords wordcloud
 #' @export
-#' @import wordcloud
+#' @importFrom wordcloud wordcloud
 #' @examples
 #' \dontrun{
 #' terms <- list(
@@ -84,11 +84,15 @@
 #'     cloud.colors=qcv(red, green, blue, black, gray65), 
 #'     expand.target=FALSE, proportional=TRUE, legend=names(terms)))
 #'     
-#' with(mraja1, trans.cloud(dialogue, person, 
-#'     target.words=list(positive=positive.words, negative=negative.words,
-#'          negator=negation.words, amplifier=increase.amplification.words),
-#'     cloud.colors=qcv(green, red, black, orange, gray65), 
-#'     expand.target=FALSE, proportional=TRUE, legend=names(terms)))
+## with(mraja1, trans.cloud(dialogue, person,
+##     target.words=list(
+##         positive=qdapDictionaries::positive.words, 
+##         negative=qdapDictionaries::negative.words,
+##         negator=qdapDictionaries::negation.words, 
+##         amplifier=qdapDictionaries::amplification.words,
+##         deamplifier=qdapDictionaries::deamplification.words),
+##     cloud.colors=qcv(green, red2, black, orange, turquoise3, gray85),
+##     expand.target=FALSE, proportional=TRUE, legend=names(terms)))
 #'     
 #' #color the negated phrases opposite:
 #' DATA <- qdap::DATA

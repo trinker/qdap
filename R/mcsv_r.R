@@ -55,7 +55,7 @@
 #' delete("foo")
 #' 
 #' ## Write lists of dataframes as well
-#' poldat <- with(DATA, polarity(state, person))
+#' poldat <- with(DATA.SPLIT, polarity(state, person))
 #' term <- c("the ", "she", " wh")
 #' termdat <- with(raj.act.1,  termco(dialogue, person, term))
 #' mcsv_w(poldat, termdat, mtcars, CO2, dir="foo2")

@@ -12,7 +12,7 @@
 #' @examples
 #' \dontrun{
 #' library(qdap)
-#' poldat <- with(DATA, polarity(state, person))
+#' poldat <- with(DATA.SPLIT, polarity(state, person))
 #' write.csv(x = condense(poldat$all), file = "foo.csv")
 #' }
 condense <- 

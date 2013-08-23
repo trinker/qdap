@@ -34,7 +34,8 @@
 #' exploratory qdap usage.
 #' @keywords heatmap
 #' @export
-#' @import ggplot2 gridExtra RColorBrewer reshape2
+#' @import gridExtra RColorBrewer 
+#' @importFrom reshape2 melt 
 #' @importFrom scales alpha 
 #' @examples
 #' \dontrun{

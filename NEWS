@@ -86,6 +86,9 @@ MINOR FEATURES
 * `polarity_frame` a function to make a hash environment lookup for use with the 
   `polarity` function.
 
+* `DATA.SPLIT` a `sentSplit` version of the `DATA` dataset has been added to 
+  qdap.
+
 CHANGES
 
 * The dictionaries and word lists for qdap have been moved to their own package, 

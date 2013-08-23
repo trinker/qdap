@@ -56,6 +56,31 @@ NULL
 #' @format A data frame with 74 rows and 7 variables 
 NULL
  
+#' Fictitious Split Sentence Classroom Dialogue
+#' 
+#' A \code{\link[qdap]{sentSplit}} version of the \code{\link[qdap]{DATA}} 
+#' dataset.
+#' 
+#' @details 
+#' \itemize{ 
+#'   \item person. Speaker
+#'   \item tot. Turn of talk with sub sentences
+#'   \item TOT. Turn of talk
+#'   \item sex. Gender
+#'   \item adult. Dummy coded adult (0-no; 1-yes)
+#'   \item code. Dialogue coding scheme 
+#'   \item state. Statement (dialogue)
+#'   \item stem.text. A stemmed version of the text.var
+#' } 
+#' 
+#' @docType data 
+#' @keywords datasets 
+#' @name DATA.SPLIT 
+#' @usage data(DATA.SPLIT) 
+#' @format A data frame with 15 rows and 8 variables 
+NULL
+
+
 #' Romeo and Juliet: Act 1 Dialogue Merged with Demographics
 #' 
 #' A dataset containing act 1 of Romeo and Juliet with demographic information.

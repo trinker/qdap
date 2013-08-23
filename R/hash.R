@@ -21,6 +21,7 @@
 #' \dontrun{
 #' (DF <- aggregate(mpg~as.character(carb), mtcars, mean))
 #' new.hash1 <- hash(DF)  #numeric outcome
+#' x <- sample(DF[, 1], 20, TRUE)
 #' hash_look(x, new.hash1)
 #' 
 #' new.hash2 <- hash(DF, "character") #character outcome

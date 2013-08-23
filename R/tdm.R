@@ -12,7 +12,7 @@
 #' \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}} 
 #' though not identical.
 #' @export
-#' @import reshape2
+#' @importFrom reshape2 melt
 #' @rdname tdm
 #' @examples
 #' \dontrun{

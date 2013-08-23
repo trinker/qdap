@@ -66,7 +66,7 @@
 #' @return Creates a project template.
 #' @keywords project, workflow
 #' @export
-#' @import reports
+#' @importFrom reports new_report
 new_project <- function(project = "new", path = getwd(), ...) {
     WD <- getwd()
     on.exit(setwd(WD))

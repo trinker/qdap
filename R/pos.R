@@ -2,17 +2,19 @@
 #' 
 #' \code{pos} - Apply part of speech tagger to transcript(s).
 #' 
-#' @param text.var The text variable
+#' @param text.var The text variable.
 #' @param parallel logical.  If \code{TRUE} attempts to run the function on 
 #' multiple cores.  Note that this may not mean a speed boost if you have one 
 #' core or if the data set is smaller as the cluster takes time to create.
+#' @param cores The number of cores to use if \code{parallel = TRUE}.  Default 
+#' is half the number of available cores.
 #' @param na.omit logical.  If \code{TRUE} missing values (\code{NA}) will be 
 #' omitted.
-#' @param digits Integer; number of decimal places to round when printing.
 #' @param progress.bar logical.  If \code{TRUE} attempts to provide a OS 
 #' appropriate progress bar.  If parallel is \code{TRUE} this argument is 
 #' ignored. Note that setting this argument to \code{TRUE} may slow down the 
 #' function.
+#' @param digits Integer; number of decimal places to round when printing.
 #' @param percent logical.  If \code{TRUE} output given as percent.  If 
 #' \code{FALSE} the output is proportion.
 #' @param zero.replace Value to replace 0 values with.
@@ -26,12 +28,13 @@
 #' \item{percent}{The value of percent used for plotting purposes.}
 #' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
 #' @rdname pos
+#' @seealso \code{\link[openNLP]{Maxent_POS_Tag_Annotator}}
 #' @references \href{openNLP}{http:/opennlp.apache.org}
 #' @keywords parts-of-speech
 #' @export
-#' @import parallel
-#' @importFrom NLP annotate Annotation as.String
+#' @importFrom parallel parApply makeCluster detectCores stopCluster clusterEvalQ
 #' @importFrom openNLP Maxent_POS_Tag_Annotator Maxent_Word_Token_Annotator
+#' @importFrom NLP as.String annotate Annotation
 #' @examples 
 #' \dontrun{
 #' posdat <- pos(DATA$state)
@@ -64,52 +67,25 @@
 #' out2 <- with(DATA, pos.by(posbydat, list(adult, sex)))
 #' }
 pos <-
-function(text.var, parallel = FALSE, na.omit = FALSE, digits = 1, 
-    progress.bar = TRUE, percent = TRUE, zero.replace=0){
-    ntv <- length(text.var)   
-    PTA <- Maxent_POS_Tag_Annotator()
-#    pos1 <-  function(var, pta) {
-#        tagPOS(strip(var), pta)   
-#    }
-    
-pos1 <-  function(x, pos_tag_annotator) {
-    s <- as.String(strip(x))
-
-    ## Need sentence and word token annotations.
-    word_token_annotator <- Maxent_Word_Token_Annotator()
-    a2 <- Annotation(1L, "sentence", 1L, nchar(s))
-    a2 <- annotate(s, word_token_annotator)
-    a3 <- annotate(s, pos_tag_annotator, a2)
-
-
-    ## Determine the distribution of POS tags for word tokens.
-    a3w <- a3[a3$type == "word"]
-    POStags <- unlist(lapply(a3w$features, `[[`, "POS"))
-    word.count <- wc(x)
-
-    ## Extract token/POS pairs (all of them): easy.
-    POStagged <- paste(sprintf("%s/%s", s[a3w], POStags), collapse = " ")
-    list(POStagged = POStagged, POStags = POStags, word.count = word.count)
-}
-    
+function(text.var, parallel = FALSE, cores = detectCores()/2, 
+    progress.bar = TRUE, na.omit = FALSE, digits = 1, percent = TRUE, 
+    zero.replace=0, ...){
+        
+    text.var <- strip(text.var, ...)
     if (parallel){
-        cl <- makeCluster(mc <- getOption("cl.cores", detectCores()/2))
-        clusterExport(cl=cl, varlist=c("text.var", "ntv", 
-            "pos1", "PTA"), envir = environment())
-        m <- parLapply(cl, seq_len(ntv), function(i) {
-                x <- pos1(text.var[i], PTA)
-                return(x)
-            }
-        )
+        cl <- makeCluster(mc <- getOption("cl.cores", cores))
+        clusterEvalQ(cl, {require(NLP); require(openNLP)})
+        m <- parLapply(cl, text.var, tagPOS)  
         stopCluster(cl)
-        m <- unlist(m)
-    } else {
+    } else { 
+        PTA <- Maxent_POS_Tag_Annotator()
         if (progress.bar){
+            ntv <- length(text.var)
             if (Sys.info()[['sysname']] == "Windows" & progress.bar != "text"){
                 pb <- winProgressBar(title = "progress bar", min = 0,
                     max = ntv, width = 300)
                 m <- lapply(seq_len(ntv), function(i) {
-                        x <- pos1(text.var[i], PTA)
+                        x <- tagPOS(text.var[i], PTA)
                         setWinProgressBar(pb, i, title = paste(round(i/ntv*100, 0),
                             "% done"))
                         x
@@ -119,7 +95,7 @@ pos1 <-  function(x, pos_tag_annotator) {
             } else {
                 pb <- txtProgressBar(min = 0, max = ntv, style = 3)
                 m <- lapply(seq_len(ntv), function(i) {
-                        x <- pos1(text.var[i], PTA)
+                        x <- tagPOS(text.var[i], PTA)
                         setTxtProgressBar(pb, i)
                         x
                     }
@@ -127,10 +103,7 @@ pos1 <-  function(x, pos_tag_annotator) {
                 close(pb)
             }
         } else {
-            m <- lapply(seq_len(ntv), function(i) {
-                    pos1(text.var[i], PTA)
-                }
-            )
+            m <- lapply(text.var, tagPOS, PTA) 
         }
     }
     o <- lapply(m, "[[", 2)
@@ -141,7 +114,7 @@ pos1 <-  function(x, pos_tag_annotator) {
     colnames(G4) <-sort(lev)
     m2 <- data.frame(POStagged = unlist(lapply(m, "[[", 1)))
     m2$POStags <- o 
-    m2$word.count <- unlist(lapply(m, "[[", 3))
+    m2$word.count <- wc(text.var)
     cons <- ifelse(percent, 100, 1)
     G5 <- sapply(data.frame(G4, check.names = FALSE), 
         function(x) cons*(x/m2$word.count)) 
@@ -161,6 +134,29 @@ pos1 <-  function(x, pos_tag_annotator) {
     if(na.omit) POS <- lapply(POS, na.omit)
     class(POS) <- "pos"
     POS
+}
+
+tagPOS <-  function(text.var, PTA, ...) {
+    s <- as.String(text.var)
+
+    ## Set up the POS annotator if missing (for parallel)
+    if (missing(PTA)) {
+        PTA <- Maxent_POS_Tag_Annotator()
+    }
+
+    ## Need sentence and word token annotations.
+    word_token_annotator <- Maxent_Word_Token_Annotator()
+    a2 <- Annotation(1L, "sentence", 1L, nchar(s))
+    a2 <- annotate(s, word_token_annotator, a2)
+    a3 <- annotate(s, PTA, a2)
+
+    ## Determine the distribution of POS tags for word tokens.
+    a3w <- a3[a3$type == "word"]
+    POStags <- unlist(lapply(a3w$features, "[[", "POS"))
+
+    ## Extract token/POS pairs (all of them): easy.
+    POStagged <- paste(sprintf("%s/%s", s[a3w], POStags), collapse = " ")
+    list(POStagged = POStagged, POStags = POStags)
 }
 
 #' Parts of Speech by Grouping Variable(s)

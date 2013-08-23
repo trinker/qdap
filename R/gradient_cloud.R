@@ -51,7 +51,9 @@
 #' \code{\link[plotrix]{color.legend}}
 #' @keywords heatcloud
 #' @export
-#' @import tm plotrix wordcloud grDevices
+#' @importFrom plotrix color.legend
+#' @importFrom wordcloud wordcloud
+#' @importFrom gdata drop.levels
 #' @examples
 #' \dontrun{
 #' DATA$state <- space_fill(DATA$state, c("is fun", "too fun", "you liar"))

@@ -25,7 +25,7 @@
 #' @seealso \code{\link[qdap]{capitalizer}}
 #' @keywords stem
 #' @export
-#' @import tm
+#' @importFrom tm stemDocument
 #' @examples
 #' \dontrun{
 #' #stemmer EXAMPLE:

@@ -68,17 +68,17 @@
 }
 \examples{
 \dontrun{
-(x <- question_type(DATA$state, DATA$person))
+(x <- question_type(DATA.SPLIT$state, DATA.SPLIT$person))
 truncdf(x$raw, 15)
 x$count
 plot(x)
 plot(x, label = TRUE)
 plot(x, label = TRUE, text.color = "red")
-question_type(DATA$state, DATA$person, percent = FALSE)
+question_type(DATA.SPLIT$state, DATA.SPLIT$person, percent = FALSE)
 DATA[8, 4] <- "Won't I distrust you?"
-question_type(DATA$state, DATA$person)
+question_type(DATA.SPLIT$state, DATA.SPLIT$person)
 DATA <- qdap::DATA
-with(DATA, question_type(state, list(sex, adult)))
+with(DATA.SPLIT, question_type(state, list(sex, adult)))
 
 out1 <- with(mraja1spl, question_type(dialogue, person))
 ## out1

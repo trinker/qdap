@@ -51,7 +51,8 @@
 #' @keywords transcript
 #' @seealso \code{\link[qdap]{dir_map}}
 #' @export
-#' @import XML gdata RCurl
+#' @import XML RCurl
+#' @importFrom gdata read.xls
 #' @examples
 #' \dontrun{
 #' #Note: to view the document below use the path:

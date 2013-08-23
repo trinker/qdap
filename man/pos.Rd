@@ -4,9 +4,9 @@
 \alias{pos.tags}
 \title{Parts of Speech Tagging}
 \usage{
-  pos(text.var, parallel = FALSE, na.omit = FALSE,
-    digits = 1, progress.bar = TRUE, percent = TRUE,
-    zero.replace = 0)
+  pos(text.var, parallel = FALSE, cores = detectCores()/2,
+    progress.bar = TRUE, na.omit = FALSE, digits = 1,
+    percent = TRUE, zero.replace = 0, ...)
 
   pos.by(text.var, grouping.var = NULL, digits = 1,
     percent = TRUE, zero.replace = 0, ...)
@@ -14,23 +14,26 @@
   pos.tags(type = "pretty")
 }
 \arguments{
-  \item{text.var}{The text variable}
+  \item{text.var}{The text variable.}
 
   \item{parallel}{logical.  If \code{TRUE} attempts to run
   the function on multiple cores.  Note that this may not
   mean a speed boost if you have one core or if the data
   set is smaller as the cluster takes time to create.}
 
+  \item{cores}{The number of cores to use if \code{parallel
+  = TRUE}.  Default is half the number of available cores.}
+
   \item{na.omit}{logical.  If \code{TRUE} missing values
   (\code{NA}) will be omitted.}
-
-  \item{digits}{Integer; number of decimal places to round
-  when printing.}
 
   \item{progress.bar}{logical.  If \code{TRUE} attempts to
   provide a OS appropriate progress bar.  If parallel is
   \code{TRUE} this argument is ignored. Note that setting
   this argument to \code{TRUE} may slow down the function.}
+
+  \item{digits}{Integer; number of decimal places to round
+  when printing.}
 
   \item{percent}{logical.  If \code{TRUE} output given as
   percent.  If \code{FALSE} the output is proportion.}
@@ -125,6 +128,9 @@ out2 <- with(DATA, pos.by(posbydat, list(adult, sex)))
 }
 \references{
   \href{openNLP}{http:/opennlp.apache.org}
+}
+\seealso{
+  \code{\link[openNLP]{Maxent_POS_Tag_Annotator}}
 }
 \keyword{parts-of-speech}
 

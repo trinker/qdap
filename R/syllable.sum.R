@@ -23,7 +23,7 @@
 #' that learn to pronounce English text" in Complex Systems, 1, 145-168. 
 #' @keywords syllable, syllabication, polysyllable
 #' @export
-#' @import parallel
+#' @importFrom parallel parLapply clusterExport makeCluster detectCores stopCluster
 #' @examples
 #' \dontrun{
 #' syllable.count("Robots like Dason lie.")

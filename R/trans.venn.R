@@ -40,7 +40,7 @@
 #' @seealso \code{\link[venneuler]{venneuler}}
 #' @keywords venn
 #' @export
-#' @import venneuler gdata
+#' @importFrom venneuler venneuler
 #' @examples
 #' \dontrun{
 #' with(DATA , trans.venn(state, person, legend.location = "topright"))

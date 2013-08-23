@@ -173,7 +173,7 @@ head(poldat3[["group"]], 10)
 htruncdf(poldat3[["all"]], 15, 8)
 plot(poldat3)
 plot(poldat3, nrow=4)
-qheat(poldat3[["group"]], high="red", order.b="ave.polarity")
+qheat(poldat3[["group"]][, -7], high="red", order.b="ave.polarity")
 
 ## Create researcher defined polarity.frame
 POLENV <- polarity_frame(positive.words, negative.words)

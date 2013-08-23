@@ -45,7 +45,7 @@
 #' issue of Foundations of Science, 7 (3), 293-340.
 #' @keywords formality, explicit, parts-of-speech, pos
 #' @export
-#' @import ggplot2 gridExtra RColorBrewer
+#' @import gridExtra RColorBrewer
 #' @importFrom scales alpha
 #' @examples
 #' \dontrun{
@@ -254,7 +254,7 @@ formality <- function(text.var, grouping.var = NULL,
 #' @return Invisibly returns the \code{ggplot2} objects that form the larger 
 #' plot.
 #' @method plot formality
-#' @import ggplot2 gridExtra scales RColorBrewer
+#' @import gridExtra RColorBrewer
 #' @S3method plot formality
 plot.formality <- function(x, point.pch = 20, point.cex = .5,            
     point.colors = c("gray65", "red"), bar.colors = NULL, 
