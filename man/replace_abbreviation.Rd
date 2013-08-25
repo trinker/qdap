@@ -11,8 +11,9 @@
 
   \item{abbreviation}{A two column key of abbreviations
   (column 1) and long form replacements (column 2) or a
-  vector of abbreviations.  Default is to use qdap's
-  abbreviations data set.}
+  vector of abbreviations.  Default is to use
+  qdapDictionaries's
+  \code{\link[qdapDictionaries]{abbreviations}} data set.}
 
   \item{replace}{A vector of long form replacements if a
   data frame is not supplied to the abbreviation argument.}

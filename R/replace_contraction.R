@@ -5,7 +5,7 @@
 #' @param text.var  The text variable.
 #' @param contraction A two column key of contractions (column 1) and expanded 
 #' form replacements (column 2) or a vector of contractions.  Default is to use 
-#' qdap's contractions data set.
+#' qdapDictionaries's \code{\link[qdapDictionaries]{contractions}} data set.
 #' @param replace A vector of expanded form replacements if a data frame is not 
 #' supplied to the contraction argument.
 #' @param ignore.case logical.  If \code{TRUE} replaces without regard to 

@@ -111,9 +111,15 @@ CHANGES
   polarity.
 
 
-qdap 0.2.3
+qdap 0.2.5
 ----------------------------------------------------------------
 
+Patch release.  This version deals with the changes in the `openNLP` package 
+  that effect qdap.  Next major release scheduled after `slidify` package is 
+  pushed to CRAN.
+
+qdap 0.2.3
+----------------------------------------------------------------
 BUG FIXES
 
 * `new_project` placed a report in the CORRESPONDENCE directory rather than 

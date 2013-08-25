@@ -2,7 +2,8 @@
 \alias{stopwords}
 \title{Remove Stopwords}
 \usage{
-  stopwords(textString, stopwords = Top25Words,
+  stopwords(textString,
+    stopwords = qdapDictionaries::Top25Words,
     unlist = FALSE, separate = TRUE, strip = FALSE,
     unique = FALSE, char.keep = NULL, names = FALSE,
     ignore.case = TRUE, apostrophe.remove = FALSE, ...)

@@ -34,7 +34,8 @@
 #' exploratory qdap usage.
 #' @keywords heatmap
 #' @export
-#' @import gridExtra RColorBrewer 
+#' @import RColorBrewer 
+#' @importFrom gridExtra grid.arrange
 #' @importFrom reshape2 melt 
 #' @importFrom scales alpha 
 #' @examples

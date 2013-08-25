@@ -10,8 +10,6 @@ Depends:
     R (>= 3.0.0),
     ggplot2 (>= 0.9.3.1),
     grid,
-    knitcitations,
-    knitr,
     qdapDictionaries,
     RColorBrewer,
     reports
@@ -34,6 +32,8 @@ Imports:
     XML
 Suggests:
     koRpus,
+    knitcitations,
+    knitr,
     lda,
     lsa,
     plyr

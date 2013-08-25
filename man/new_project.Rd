@@ -2,13 +2,17 @@
 \alias{new_project}
 \title{Project Template}
 \usage{
-  new_project(project = "new", path = getwd(), ...)
+  new_project(project = "new", path = getwd(),
+    open = FALSE, ...)
 }
 \arguments{
   \item{project}{A character vector of the project name.}
 
   \item{path}{The path to where the project should be
   created.  Default is the current working directory.}
+
+  \item{open}{logical.  If \code{TRUE} the project will be
+  opened in RStudio.}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[reports]{new_report}}.}

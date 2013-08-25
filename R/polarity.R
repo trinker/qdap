@@ -370,8 +370,9 @@ function(x, digits = NULL, ...) {
 #' @return Invisibly returns the \code{ggplot2} objects that form the larger 
 #' plot.  
 #' @method plot polarity
-#' @import gridExtra
+#' @importFrom gridExtra grid.arrange
 #' @importFrom scales alpha
+#' @importFrom ggplot2 ggplot aes geom_segment xlab ylab scale_colour_gradientn theme_bw guides geom_point guide_colorbar scale_color_discrete guide_legend
 #' @S3method plot polarity
 plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99", 
     high = "blue", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 

@@ -5,10 +5,11 @@
 #' @param text.var  The text variable.
 #' @param abbreviation A two column key of abbreviations (column 1) and long 
 #' form replacements (column 2) or a vector of abbreviations.  Default is to use 
-#' qdap's abbreviations data set.
+#' qdapDictionaries's \code{\link[qdapDictionaries]{abbreviations}} data set.
 #' @param replace A vector of long form replacements if a data frame is not 
 #' supplied to the abbreviation argument.
-#' @param ignore.case logical.  If \code{TRUE} replaces without regard to capitalization.
+#' @param ignore.case logical.  If \code{TRUE} replaces without regard to 
+#' capitalization.
 #' @return Returns a vector with abbreviations replaced.
 #' @keywords abbreviation
 #' @seealso 

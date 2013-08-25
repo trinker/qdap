@@ -48,9 +48,9 @@
 #' stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
 #' }
 stopwords<-
-function (textString, stopwords = Top25Words, unlist = FALSE, separate = TRUE, 
-    strip = FALSE, unique = FALSE, char.keep = NULL, names = FALSE, 
-    ignore.case = TRUE, apostrophe.remove = FALSE, ...) {
+function (textString, stopwords = qdapDictionaries::Top25Words, unlist = FALSE, 
+    separate = TRUE, strip = FALSE, unique = FALSE, char.keep = NULL, 
+    names = FALSE, ignore.case = TRUE, apostrophe.remove = FALSE, ...) {
     Stopwords <- if (is.null(stopwords)) {
         c(" ")
     } else {

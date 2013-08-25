@@ -30,7 +30,8 @@
 #' setting has no effect unless the appropriate scales also vary.
 #' @return Invisibly returns the ggplot2 object.
 #' @keywords sentence, split, turn-of-talk
-#' @import gridExtra RColorBrewer
+#' @import RColorBrewer
+#' @importFrom gridExtra grid.arrange
 #' @importFrom scales alpha
 #' @export
 #' @examples

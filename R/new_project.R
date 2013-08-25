@@ -5,6 +5,7 @@
 #' @param project A character vector of the project name.
 #' @param path The path to where the project should be created.  Default is the 
 #' current working directory.
+#' @param open logical.  If \code{TRUE} the project will be opened in RStudio.
 #' @param \ldots Other arguments passed to \code{\link[reports]{new_report}}.
 #' @details The project template includes these main directories and scripts:
 #' \itemize{
@@ -66,8 +67,8 @@
 #' @return Creates a project template.
 #' @keywords project, workflow
 #' @export
-#' @importFrom reports new_report
-new_project <- function(project = "new", path = getwd(), ...) {
+#' @importFrom reports new_report folder
+new_project <- function(project = "new", path = getwd(), open = FALSE, ...) {
     WD <- getwd()
     on.exit(setwd(WD))
     if(file.exists(paste0(path, "/", project))) {
@@ -80,7 +81,7 @@ new_project <- function(project = "new", path = getwd(), ...) {
             delete(paste0(path, "/", project))
         }
     }
-    x <- suppressWarnings(invisible(folder(folder.name=paste0(path, "/", project))))
+    x <- suppressWarnings(invisible(folder(folder.name=file.path(path, project))))
     setwd(x)
     ANALYSIS <- CODEBOOK <- DATA <- DATA_FOR_REVIEW <- RAW_DATA <- NULL
     RAW_TRANSCRIPTS <- PLOTS <- TABLES <- CM_DATA <- WORD_LISTS <- NULL
@@ -165,6 +166,9 @@ new_project <- function(project = "new", path = getwd(), ...) {
     invisible(new_report(c("REPORTS", project), ...))
     o <- paste0("Project \"", project, "\" created:\n", x, "\n") 
     class(o) <- "qdapProj"
+    if (open) {
+        open_project(file.path(x, project, paste0(project, ".Rproj")))
+    }    
     return(o) 
 }
 
@@ -180,4 +184,31 @@ print.qdapProj <-
 function(x, ...) {
     class(x) <- NULL
     cat(x)
+}
+
+wheresRstudio <- 
+function() {
+    myPaths <- c("rstudio",  "~/.cabal/bin/rstudio", 
+        "~/Library/Haskell/bin/rstudio", "C:\\PROGRA~1\\RStudio\\bin\\rstudio.exe",
+        "C:\\RStudio\\bin\\rstudio.exe")
+    panloc <- Sys.which(myPaths)
+    temp <- panloc[panloc != ""]
+    if (identical(names(temp), character(0))) {
+        ans <- readline("RStudio not installed in one of the typical locations.\n 
+            Do you know where RStudio is installed? (y/n) ")
+        if (ans == "y") {
+                temp <- readline("Enter the (unquoted) path to RStudio: ")
+        } else {
+            if (ans == "n") {
+                stop("RStudio not installed or not found.")
+            }
+        }
+    } 
+    temp
+}
+
+open_project <- function(Rproj.loc) {
+    action <- paste(wheresRstudio(), Rproj.loc)
+    message("Preparing to open project!")
+    system(action, wait = FALSE, ignore.stderr = TRUE)
 }
