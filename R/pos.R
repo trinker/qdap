@@ -22,7 +22,6 @@
 #' problem with the garbage collection in the openNLP function that 
 #' \code{\link[qdap]{pos}} wraps.  Consider adjusting this argument upward if 
 #' the error \code{java.lang.OutOfMemoryError} occurs.
-#' @param \ldots Other arguments passed to \code{sentSplit}.
 #' @return pos returns a list of 4: 
 #' \item{text}{The original text} 
 #' \item{POStagged}{The original words replaced with parts of speech in context.} 
@@ -74,9 +73,9 @@
 pos <-
 function(text.var, parallel = FALSE, cores = detectCores()/2, 
     progress.bar = TRUE, na.omit = FALSE, digits = 1, percent = TRUE, 
-    zero.replace=0, gc.rate=10, ...){
+    zero.replace=0, gc.rate=10){
         
-    text.var <- strip(text.var, ...)
+    text.var <- strip(text.var)
     if (parallel){
         ntv <- length(text.var)
         cl <- makeCluster(mc <- getOption("cl.cores", cores))
@@ -122,15 +121,7 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
     
     m2 <- data.frame(POStagged = unlist(lapply(m, "[[", 1)))
     m2$POStags <- lapply(m, "[[", 2)
-    
     G4 <- mtabulate(m2$POStags)
-    
-    #lev <- sort(unique(unlist(m2$POStags)))
-    #G4 <- do.call(rbind,lapply(m2$POStags,function(x,lev){ 
-    #    tabulate(factor(x,levels = lev, ordered = TRUE),
-    #    nbins = length(lev))},lev = lev))
-    #colnames(G4) <-sort(lev)
-
     m2$word.count <- wc(text.var)
     cons <- ifelse(percent, 100, 1)
     G5 <- sapply(data.frame(G4, check.names = FALSE), 

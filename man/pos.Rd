@@ -6,7 +6,7 @@
 \usage{
   pos(text.var, parallel = FALSE, cores = detectCores()/2,
     progress.bar = TRUE, na.omit = FALSE, digits = 1,
-    percent = TRUE, zero.replace = 0, gc.rate = 10, ...)
+    percent = TRUE, zero.replace = 0, gc.rate = 10)
 
   pos.by(text.var, grouping.var = NULL, digits = 1,
     percent = TRUE, zero.replace = 0, ...)
@@ -45,9 +45,6 @@
   in the openNLP function that \code{\link[qdap]{pos}}
   wraps.  Consider adjusting this argument upward if the
   error \code{java.lang.OutOfMemoryError} occurs.}
-
-  \item{\ldots}{Other arguments passed to
-  \code{sentSplit}.}
 
   \item{grouping.var}{The grouping variables.  Default
   \code{NULL} generates one word list for all text.  Also
