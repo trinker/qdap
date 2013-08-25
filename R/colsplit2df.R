@@ -28,7 +28,7 @@
 #' head(colsplit2df(CO2, "Plant&Type&Treatment"))
 #' CO2 <- datasets::CO2
 #' 
-#' (x <- question_type(DATA.SPLIT$state, list(DATA.SPLIT$sex, DATA.SPLIT$adult)))
+#' (x <- with(DATA.SPLIT, question_type(state, list(sex, adult))))
 #' ltruncdf(x)
 #' z <- lcolsplit2df(x)
 #' ltruncdf(z)

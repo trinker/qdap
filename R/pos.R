@@ -18,6 +18,11 @@
 #' @param percent logical.  If \code{TRUE} output given as percent.  If 
 #' \code{FALSE} the output is proportion.
 #' @param zero.replace Value to replace 0 values with.
+#' @param gc.rate An integer value.  This is a necessary argument because of a 
+#' problem with the garbage collection in the openNLP function that 
+#' \code{\link[qdap]{pos}} wraps.  Consider adjusting this argument upward if 
+#' the error \code{java.lang.OutOfMemoryError} occurs.
+#' @param \ldots Other arguments passed to \code{sentSplit}.
 #' @return pos returns a list of 4: 
 #' \item{text}{The original text} 
 #' \item{POStagged}{The original words replaced with parts of speech in context.} 
@@ -69,23 +74,31 @@
 pos <-
 function(text.var, parallel = FALSE, cores = detectCores()/2, 
     progress.bar = TRUE, na.omit = FALSE, digits = 1, percent = TRUE, 
-    zero.replace=0, ...){
+    zero.replace=0, gc.rate=10, ...){
         
     text.var <- strip(text.var, ...)
     if (parallel){
+        ntv <- length(text.var)
         cl <- makeCluster(mc <- getOption("cl.cores", cores))
-        clusterEvalQ(cl, {require(NLP); require(openNLP)})
-        m <- parLapply(cl, text.var, tagPOS)  
+        clusterExport(cl=cl, varlist=c("text.var", "ntv", "gc.rate", 
+            "tagPOS"), envir = environment())        
+        ## clusterEvalQ(cl, {require(NLP); require(openNLP)})
+        m <- parLapply(cl, seq_len(ntv), function(i) {
+                x <- tagPOS(text.var[i])
+                if (i%%gc.rate==0) gc()
+                return(x)
+            }
+        ) 
         stopCluster(cl)
     } else { 
-        PTA <- Maxent_POS_Tag_Annotator()
+        pta <- Maxent_POS_Tag_Annotator()
         if (progress.bar){
             ntv <- length(text.var)
             if (Sys.info()[['sysname']] == "Windows" & progress.bar != "text"){
                 pb <- winProgressBar(title = "progress bar", min = 0,
                     max = ntv, width = 300)
                 m <- lapply(seq_len(ntv), function(i) {
-                        x <- tagPOS(text.var[i], PTA)
+                        x <- tagPOS(text.var[i], pta)
                         setWinProgressBar(pb, i, title = paste(round(i/ntv*100, 0),
                             "% done"))
                         x
@@ -95,7 +108,7 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
             } else {
                 pb <- txtProgressBar(min = 0, max = ntv, style = 3)
                 m <- lapply(seq_len(ntv), function(i) {
-                        x <- tagPOS(text.var[i], PTA)
+                        x <- tagPOS(text.var[i], pta)
                         setTxtProgressBar(pb, i)
                         x
                     }
@@ -103,17 +116,21 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
                 close(pb)
             }
         } else {
-            m <- lapply(text.var, tagPOS, PTA) 
+            m <- lapply(text.var, tagPOS, pta) 
         }
     }
-    o <- lapply(m, "[[", 2)
-    lev <- sort(unique(unlist(o)))
-    G4 <- do.call(rbind,lapply(o,function(x,lev){ 
-        tabulate(factor(x,levels = lev, ordered = TRUE),
-        nbins = length(lev))},lev = lev))
-    colnames(G4) <-sort(lev)
+    
     m2 <- data.frame(POStagged = unlist(lapply(m, "[[", 1)))
-    m2$POStags <- o 
+    m2$POStags <- lapply(m, "[[", 2)
+    
+    G4 <- mtabulate(m2$POStags)
+    
+    #lev <- sort(unique(unlist(m2$POStags)))
+    #G4 <- do.call(rbind,lapply(m2$POStags,function(x,lev){ 
+    #    tabulate(factor(x,levels = lev, ordered = TRUE),
+    #    nbins = length(lev))},lev = lev))
+    #colnames(G4) <-sort(lev)
+
     m2$word.count <- wc(text.var)
     cons <- ifelse(percent, 100, 1)
     G5 <- sapply(data.frame(G4, check.names = FALSE), 
@@ -124,7 +141,7 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
     if (any(is.na(G4$wrd.cnt))) {
         nas <- which(is.na(G4$wrd.cnt))
         G4[nas, 2:ncol(G4)] <- NA
-        m2[nas, 1:ncol(m)] <- NA
+        m2[nas, 1:ncol(m2)] <- NA
     }
     rnp <- raw_pro_comb(G4[, -1], G5[, -1], digits = digits, 
         percent = percent, zero.replace = zero.replace, override = TRUE)  
@@ -134,6 +151,15 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
     if(na.omit) POS <- lapply(POS, na.omit)
     class(POS) <- "pos"
     POS
+}
+
+mtabulate <- function(vects) {
+    lev <- sort(unique(unlist(vects)))
+    dat <- do.call(rbind, lapply(vects, function(x, lev){ 
+        tabulate(factor(x, levels = lev, ordered = TRUE),
+        nbins = length(lev))}, lev = lev))
+    colnames(dat) <- sort(lev) 
+    data.frame(dat, check.names = FALSE)
 }
 
 tagPOS <-  function(text.var, PTA, ...) {

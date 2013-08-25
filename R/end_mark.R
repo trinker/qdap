@@ -20,7 +20,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' end_mark(DATA$state)
+#' end_mark(DATA.SPLIT$state)
 #' end_mark(mraja1spl$dialogue)
 #' ques <- mraja1spl[end_mark(mraja1spl$dialogue) == "?", ] #grab questions
 #' htruncdf(ques)

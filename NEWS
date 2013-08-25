@@ -79,9 +79,10 @@ MINOR FEATURES
   on something like `file.path(getwd(), )`.  This mean portability of code on 
   different machines.
 
-* `hash_look` a counterpart to `hash` added to allow quick access to a hash 
-  table.  Intended for use within functions as lookup is more conveinent though 
-  could be slower.
+* `hash_look` (and `%ha%`) a counterpart to `hash` added to allow quick access 
+  to a hash table.  Intended for use within functions or multiple uses of the 
+  same hash table, whereas lookup is intended fo a single external (non 
+  function) use which is more conveinent though could be slower.
 
 * `polarity_frame` a function to make a hash environment lookup for use with the 
   `polarity` function.

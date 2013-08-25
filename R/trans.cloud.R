@@ -117,9 +117,9 @@
 #'     target.words=tw,
 #'     cloud.colors=qcv(darkgreen, red, gray65),
 #'     expand.target=FALSE, proportional=TRUE, legend=names(tw)))
-#' }
 #'
-#' #' DATA <- qdap::DATA  ## Reset DATA
+#' DATA <- qdap::DATA  ## Reset DATA
+#' }
 trans.cloud <-
 function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE, 
     target.words = NULL, expand.target = TRUE, target.exclude = NULL,

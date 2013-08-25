@@ -165,9 +165,9 @@ with(DATA, trans.cloud(state, person,
     target.words=tw,
     cloud.colors=qcv(darkgreen, red, gray65),
     expand.target=FALSE, proportional=TRUE, legend=names(tw)))
-}
 
-#' DATA <- qdap::DATA  ## Reset DATA
+DATA <- qdap::DATA  ## Reset DATA
+}
 }
 \seealso{
   \code{\link[wordcloud]{wordcloud}},
