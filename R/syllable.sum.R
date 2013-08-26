@@ -24,6 +24,7 @@
 #' @keywords syllable, syllabication, polysyllable
 #' @export
 #' @importFrom parallel parLapply clusterExport makeCluster detectCores stopCluster
+#' @importFrom qdapDictionaries view_data
 #' @examples
 #' \dontrun{
 #' syllable.count("Robots like Dason lie.")

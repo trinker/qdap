@@ -12,7 +12,7 @@ Depends:
     grid,
     qdapDictionaries,
     RColorBrewer,
-    reports
+    reports (>= 0.2.0)
 Imports:
     chron,
     gdata,

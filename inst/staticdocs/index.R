@@ -207,6 +207,7 @@ list(
       c( 
         "DATA",
         "DATA2",
+        "DATA.SPLIT",
         "pres_debates2012",
         "pres_debate_raw2012",
         "mraja1",
