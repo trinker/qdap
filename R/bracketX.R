@@ -124,7 +124,7 @@ function(text.var, bracket = "all", with = FALSE, merge = TRUE){
         }
         map <- c(`\\(`="\\)", `\\[`="\\]", `\\{`="\\}",
                  `\\<`="\\>", `\\(|\\{|<|\\[`="\\)|\\}|\\>|\\]")
-        fmt <- if (with==TRUE) {
+        fmt <- if (with) {
             "(%s).*?(%s)"
         } else {
             "(?<=%s).*?(?=%s)"
@@ -216,7 +216,7 @@ function(text.var, left, right, with = FALSE, merge = TRUE){
     left <- mgsub(specchar, paste0("\\", specchar), left, fixed = TRUE)
     right <- mgsub(specchar, paste0("\\", specchar), right, fixed = TRUE)
     FUN <- function(left, right, text.var, with){   
-        fmt <- if (with==TRUE) {
+        fmt <- if (with) {
             "(%s).*?(%s)"
         } else {
             "(?<=%s).*?(?=%s)"
