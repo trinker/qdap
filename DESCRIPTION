@@ -29,7 +29,6 @@ Imports:
     tools,
     venneuler,
     wordcloud,
-    tools,
     XML
 Suggests:
     koRpus,
