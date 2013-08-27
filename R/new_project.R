@@ -68,6 +68,7 @@
 #' @keywords project, workflow
 #' @export
 #' @importFrom reports new_report folder
+#' @importFrom tools file_ext
 new_project <- function(project = "new", path = getwd(), open = FALSE, ...) {
     WD <- getwd()
     on.exit(setwd(WD))
@@ -153,11 +154,11 @@ new_project <- function(project = "new", path = getwd(), open = FALSE, ...) {
         "",
         "#load data into work space",
         "dat <- paste0(WD, \"/DATA/\", dir(paste0(WD, \"/DATA/\")))",
-        "dat2 <- dat[tools::file_ext(dat) %in% c(\"txt\", \"R\", \"r\")]",
+        "dat2 <- dat[file_ext(dat) %in% c(\"txt\", \"R\", \"r\")]",
         "if (!identical(dat2, character(0))) {",              
         "    try(lapply(dat2, source))",
         "}",              
-        "dat <- dat[tools::file_ext(dat) == \"RData\"]",
+        "dat <- dat[file_ext(dat) == \"RData\"]",
         "if (!identical(dat, character(0))) {",
         "    lapply(dat, load)",
         "}")

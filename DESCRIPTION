@@ -26,6 +26,7 @@ Imports:
     reshape2,
     scales,
     tm,
+    tools,
     venneuler,
     wordcloud,
     tools,

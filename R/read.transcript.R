@@ -53,6 +53,7 @@
 #' @export
 #' @import XML RCurl
 #' @importFrom gdata read.xls
+#' @importFrom tools file_ext
 #' @examples
 #' \dontrun{
 #' #Note: to view the document below use the path:
@@ -93,7 +94,7 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
         on.exit(close(file))
         y <- "text"
     } else {
-        y <- tools::file_ext(file)
+        y <- file_ext(file)
     }
     if (is.null(sep)) {
         if (y %in% c("docx", "txt", "text")) {
