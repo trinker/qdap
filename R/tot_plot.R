@@ -13,7 +13,7 @@
 #' @param tot The turn of talk variable (character string). May be \code{TRUE} 
 #' (assumes "tot" is the variable name), \code{FALSE} (use row numbers), or a 
 #' character string of the turn of talk column.
-#' @param ncol if an integer value is passed to this 
+#' @param ncol number of columns. 
 #' \code{\link[qdap]{gantt_wrap}} uses \code{\link[ggplot2]{facet_wrap}} 
 #' rather than \code{\link[ggplot2]{facet_grid}}.
 #' @param transform logical.  If \code{TRUE} the repeated facets will be 

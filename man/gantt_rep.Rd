@@ -44,7 +44,7 @@
 dat <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex),
     units = "words", col.sep = "_"))
 head(dat, 20)
-gantt_wrap(dat, fam.aff_sex, facet.vars = "act",
+gantt_wrap(dat,  "fam.aff_sex",  facet.vars = "act",
     title = "Repeated Measures Gantt Plot",
     minor.line.freq = 25, major.line.freq = 100)
 }

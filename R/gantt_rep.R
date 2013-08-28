@@ -30,7 +30,7 @@
 #' dat <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex), 
 #'     units = "words", col.sep = "_"))
 #' head(dat, 20)   
-#' gantt_wrap(dat, fam.aff_sex, facet.vars = "act", 
+#' gantt_wrap(dat,  "fam.aff_sex",  facet.vars = "act", 
 #'     title = "Repeated Measures Gantt Plot",
 #'     minor.line.freq = 25, major.line.freq = 100)
 #' }
@@ -38,46 +38,61 @@ gantt_rep <-
 function(rm.var, text.var, grouping.var, units = "words", col.sep = "_"){
     g <- grouping.var
     r <- rm.var
-    NAME <- if (is.list(grouping.var)) {
+    if (is.list(grouping.var)) {
         m <- unlist(as.character(substitute(grouping.var))[-1])
         m <- sapply(strsplit(m, "$", fixed=TRUE), 
             function(x) x[length(x)])
         #m <- gsub(".", "", m, fixed = TRUE)
-        paste(m, collapse="&")
+        NAME <- paste(m, collapse="&")
     } else {
         G1 <- as.character(substitute(grouping.var))
-        G1[length(G1)]
+        NAME <- G1[length(G1)]
     }
-    NAME2 <- if (is.list(rm.var)) {
+    if (is.list(rm.var)) {
         m2 <- unlist(as.character(substitute(rm.var))[-1])
         m2 <- sapply(strsplit(m2, "$", fixed=TRUE), 
             function(x) x[length(x)])
         #m2 <- gsub(".", "", m2, fixed = TRUE)
-        paste(m2, collapse="&")
+        NAME2 <- paste(m2, collapse="&")
     } else {
         G2 <- as.character(substitute(rm.var))
-        G2[length(G2)]
+        NAME2 <- G2[length(G2)]
     }
-    rm.var <- if (is.list(rm.var) & length(rm.var)>1) {
-        apply(data.frame(rm.var), 1, function(x){
-                if (any(is.na(x))) {
-                    NA 
-                } else {
-                    paste(x, collapse = ".")
-                }
-            }
-        )
+    
+##     rm.var <- if (is.list(rm.var) & length(rm.var)>1) {
+##         apply(data.frame(rm.var), 1, function(x){
+##                 if (any(is.na(x))) {
+##                     NA 
+##                 } else {
+##                     paste(x, collapse = ".")
+##                 }
+##             }
+##         )
+##     } else {
+##         rm.var
+##     }  
+    
+    if (is.list(rm.var) & length(rm.var)>1) {
+        rm.var <- paste2(rm.var, sep = col.sep)
     } else {
-        rm.var
-    }  
-    grouping.var <- if (is.list(grouping.var) & length(grouping.var)>1) {
-        apply(data.frame(grouping.var), 1, function(x){
-            if (any(is.na(x)))NA else paste(x, collapse = ".")
-            }
-        )
+        rm.var <- unlist(rm.var)
+    }     
+    
+##     grouping.var <- if (is.list(grouping.var) & length(grouping.var)>1) {
+##         apply(data.frame(grouping.var), 1, function(x){
+##             if (any(is.na(x)))NA else paste(x, collapse = ".")
+##             }
+##         )
+##     } else {
+##         grouping.var
+##     } 
+    
+    if (is.list(grouping.var) & length(grouping.var)>1) {
+        grouping.var <- paste2(grouping.var, sep = col.sep)
     } else {
-        grouping.var
+        grouping.var <- unlist(grouping.var)
     } 
+    
     DAT <- data.frame(rm.var, grouping.var, text.var)
     DAT2 <- split(DAT, rm.var)
 

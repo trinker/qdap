@@ -27,7 +27,7 @@
   \code{FALSE} (use row numbers), or a character string of
   the turn of talk column.}
 
-  \item{ncol}{if an integer value is passed to this
+  \item{ncol}{number of columns.
   \code{\link[qdap]{gantt_wrap}} uses
   \code{\link[ggplot2]{facet_wrap}} rather than
   \code{\link[ggplot2]{facet_grid}}.}

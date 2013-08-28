@@ -49,6 +49,10 @@ BUG FIXES
   traditional character properties (print class added).  `all_words` also picks
   up apostrophe.remove and ldots (for `strip`) arguments.
 
+* `gantt_plot` did not handle `fill.vars`, particlarly if the fill was nested 
+  withing the `grouping.vars`.  This behavior has been fixed with corresponding 
+  examples added.
+
 NEW FEATURES
 
 MINOR FEATURES
@@ -109,6 +113,8 @@ CHANGES
 
 * `polarity` utilizes a new, unbounded algorith based on weighting to determine 
   polarity.
+
+* `gantt_wrap` no longer accepts unquoted strings to the `plot.var` argument.
 
 
 qdap 0.2.5

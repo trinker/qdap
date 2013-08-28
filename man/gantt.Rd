@@ -84,7 +84,7 @@ g <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex),
 dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex),
     units = "sentences", plot.colors = 'black', sums = TRUE,
     col.sep = "_")$gantt.df
-gantt_wrap(dat, fam.aff_sex, title = "Gantt Plot")
+gantt_wrap(dat, "fam.aff_sex", title = "Gantt Plot")
 }
 }
 \author{

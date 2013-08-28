@@ -4,7 +4,7 @@
 \usage{
   gantt_plot(text.var, grouping.var, rm.var = NULL,
     fill.var = NULL, xlab = "duration (in words)",
-    units = "words", col.sep = "_", ...)
+    units = "words", col.sep = "__", ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -49,20 +49,47 @@
 \dontrun{
 with(rajSPLIT, gantt_plot(text.var = dialogue,
     grouping.var = person, size=4))
+
 with(rajSPLIT, gantt_plot(text.var = dialogue,
     grouping.var = list(fam.aff, sex), rm.var  = act,
     title = "Romeo and Juliet's dialogue"))
+
 with(rajSPLIT, gantt_plot(dialogue, list(fam.aff, sex), act,
     transform=T))
+
 rajSPLIT2 <- rajSPLIT
+
 rajSPLIT2$newb <- as.factor(sample(LETTERS[1:2], nrow(rajSPLIT2),
     replace=TRUE))
+
 z <- with(rajSPLIT2, gantt_plot(dialogue, list(fam.aff, sex),
     list(act, newb), size = 4))
 
 library(ggplot2); library(scales); library(RColorBrewer); library(grid)
 z + theme(panel.margin = unit(1, "lines")) + scale_colour_grey()
 z + scale_colour_brewer(palette="Dark2")
+
+## Fill Variable Example
+dat <- rajSPLIT[rajSPLIT$act == 1, ]
+dat$end_mark <- factor(end_mark(dat$dialogue))
+
+with(dat, gantt_plot(text.var = dialogue, grouping.var = list(person, sex),
+    fill.var=end_mark))
+
+## Repeated Measures with Fill Example
+rajSPLIT$end_mark <- end_mark(rajSPLIT$dialogue)
+
+with(rajSPLIT, gantt_plot(text.var = dialogue,
+    grouping.var = list(fam.aff), rm.var  = list(act),
+    fill.var=end_mark, title = "Romeo and Juliet's dialogue"))
+
+## Repeated Measures Sentence Type Example
+with(rajSPLIT, gantt_plot(text.var = dialogue,
+    grouping.var = list(fam.aff, sex), rm.var  = list(end_mark, act),
+    title = "Romeo and Juliet's dialogue"))
+
+## Reset rajSPLIT
+rajSPLIT <- qdap::rajSPLIT
 }
 }
 \references{

@@ -60,7 +60,7 @@
 #' dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
 #'     units = "sentences", plot.colors = 'black', sums = TRUE, 
 #'     col.sep = "_")$gantt.df     
-#' gantt_wrap(dat, fam.aff_sex, title = "Gantt Plot")  
+#' gantt_wrap(dat, "fam.aff_sex", title = "Gantt Plot")  
 #' }
 gantt <-
 function(text.var, grouping.var, plot = TRUE, units = "words", 
@@ -74,18 +74,29 @@ function(text.var, grouping.var, plot = TRUE, units = "words",
         G <- as.character(substitute(grouping.var))
         NAME <- G[length(G)]
     }
+    
+
     if (is.list(grouping.var) & length(grouping.var)>1) {
-        grouping.var <- apply(data.frame(grouping.var), 1, function(x){
-                if (any(is.na(x))) {
-                    NA 
-                } else {
-                    paste(x, collapse = ".") 
-                }
-            }
-        )
+        grouping.var <- paste2(grouping.var, sep = col.sep)
     } else {
-        grouping.var <- grouping.var
-    }
+        grouping.var <- unlist(grouping.var)
+    } 
+
+    
+    
+##     if (is.list(grouping.var) & length(grouping.var)>1) {
+##         grouping.var <- apply(data.frame(grouping.var), 1, function(x){
+##                 if (any(is.na(x))) {
+##                     NA 
+##                 } else {
+##                     paste(x, collapse = ".") 
+##                 }
+##             }
+##         )
+##     } else {
+##         grouping.var <- grouping.var
+##     }
+
     g <- factor(grouping.var)
     grouping.var <- factor(grouping.var)
     if (is.list(grouping.var)) {

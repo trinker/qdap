@@ -3,8 +3,7 @@
 \title{Gantt Plot}
 \usage{
   gantt_wrap(dataframe, plot.var, facet.vars = NULL,
-    fill.var = NULL, title = NULL,
-    ylab = as.character(plot.var),
+    fill.var = NULL, title = NULL, ylab = plot.var,
     xlab = "duration.default", rev.factor = TRUE,
     transform = FALSE, ncol = NULL, minor.line.freq = NULL,
     major.line.freq = NULL, sig.dig.line.freq = 1,
@@ -123,15 +122,15 @@ dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex),
     units = "sentences", plot.colors = 'black', sums = TRUE,
     col.sep = "_")$gantt.df
 htruncdf(dat)
-gantt_wrap(dat, fam.aff_sex, title = "Gantt Plot")
+gantt_wrap(dat, "fam.aff_sex", title = "Gantt Plot")
 dat$codes <- sample(LETTERS[1:3], nrow(dat), TRUE)
-gantt_wrap(dat, fam.aff_sex, fill.var = "codes",
+gantt_wrap(dat, "fam.aff_sex", fill.var = "codes",
     legend.position = "bottom")
 
 dat2 <- with(rajSPLIT, gantt_rep(act, dialogue,
     list(fam.aff, sex), units = "words", col.sep = "_"))
 htruncdf(dat2)
-x <- gantt_wrap(dat2, fam.aff_sex, facet.vars = "act",
+x <- gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
     title = "Repeated Measures Gantt Plot")
 
 library(ggplot2); library(scales); library(RColorBrewer)
