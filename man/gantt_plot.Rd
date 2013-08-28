@@ -2,7 +2,7 @@
 \alias{gantt_plot}
 \title{Gantt Plot}
 \usage{
-  gantt_plot(text.var, grouping.var, rm.var = NULL,
+  gantt_plot(text.var, grouping.var = NULL, rm.var = NULL,
     fill.var = NULL, xlab = "duration (in words)",
     units = "words", col.sep = "__", ...)
 }

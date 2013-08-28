@@ -94,6 +94,9 @@ MINOR FEATURES
 * `DATA.SPLIT` a `sentSplit` version of the `DATA` dataset has been added to 
   qdap.
 
+* `gantt_plot` accepts NULL for `grouping.var` and figures for "all" rows as a 
+  single grouping var.
+
 CHANGES
 
 * The dictionaries and word lists for qdap have been moved to their own package, 

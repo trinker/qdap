@@ -74,18 +74,27 @@
 #' rajSPLIT <- qdap::rajSPLIT
 #' }
 gantt_plot <- 
-function(text.var, grouping.var, rm.var = NULL, fill.var = NULL, 
+function(text.var, grouping.var = NULL, rm.var = NULL, fill.var = NULL, 
     xlab = "duration (in words)", units = "words", col.sep = "__", ...) {
 
-    if (is.list(grouping.var)) {
-        m <- unlist(as.character(substitute(grouping.var))[-1])
-        PNAMES <- ANAMES <- m <- sapply(strsplit(m, "$", fixed=TRUE), 
-            function(x) x[length(x)])
-        NAME <- paste(m, collapse=col.sep)
+    if(is.null(grouping.var)) {
+        PNAMES <- ANAMES <- NAME <- "all"
     } else {
-        G <- as.character(substitute(grouping.var))
-        PNAMES <- ANAMES <- NAME <- G[length(G)]
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            PNAMES <- ANAMES <- m <- sapply(strsplit(m, "$", fixed=TRUE), 
+                function(x) x[length(x)])
+            NAME <- paste(m, collapse=col.sep)
+        } else {
+            G <- as.character(substitute(grouping.var))
+            PNAMES <- ANAMES <- NAME <- G[length(G)]
+        }
     }
+
+
+    if(is.null(grouping.var)){
+        grouping.var <- rep("all", length(text.var))
+    } 
 
     if (!is.null(fill.var)) {
         if (is.list(fill.var)) {
