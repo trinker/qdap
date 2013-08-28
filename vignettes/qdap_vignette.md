@@ -2883,38 +2883,39 @@ colsplit2df(dat, new.names = qcv(A, B, C), keep.orig = TRUE)
 
 ```r
 ## A list with dataframes that contain pasted columns
-x <- question_type(DATA$state, list(DATA$sex, DATA$adult))
+x <- question_type(DATA.SPLIT$state, list(DATA.SPLIT$sex, DATA.SPLIT$adult))
 ltruncdf(x[1:4])
 ```
 
 ```
 ## $raw
-##   sex&adult   raw.text n.row endmark strip.text  q.type
-## 1       m.1 What shoul     3       ?  what shou    what
-## 2       f.0 How can we     6       ?  how can w     how
-## 3       f.0 What are y     9       ?  what are     what
-## 4       m.0 I'm hungry    11       ?  im hungry unknown
+##   sex&adult   raw.text n.row endmark strip.text     q.type
+## 1       m.1 What shoul     4       ?  what shou       what
+## 2       f.0 How can we     7       ?  how can w        how
+## 3       f.0 What are y    10       ?  what are        what
+## 4       f.1 Shall we m    11       ?  shall we       shall
+## 5       m.0 You alread    15       ?  you alrea implied_do
 ## 
 ## $count
-##   sex&adult tot.quest what how unknown
-## 1       f.0         2    1   1       0
-## 2       m.0         1    0   0       1
-## 3       m.1         1    1   0       0
-## 4       f.1         0    0   0       0
+##   sex&adult tot.quest what how shall implied_do
+## 1       f.0         2    1   1     0          0
+## 2       f.1         1    0   0     1          0
+## 3       m.0         1    0   0     0          1
+## 4       m.1         1    1   0     0          0
 ## 
 ## $prop
-##   sex&adult tot.quest what how unknown
-## 1       f.0         2   50  50       0
-## 2       m.0         1    0   0     100
-## 3       m.1         1  100   0       0
-## 4       f.1         0    0   0       0
+##   sex&adult tot.quest what how shall implied_do
+## 1       f.0         2   50  50     0          0
+## 2       f.1         1    0   0   100          0
+## 3       m.0         1    0   0     0        100
+## 4       m.1         1  100   0     0          0
 ## 
 ## $rnp
-##   sex&adult tot.quest    what    how unknown
-## 1       f.0         2  1(50%) 1(50%)       0
-## 2       m.0         1       0      0 1(100%)
-## 3       m.1         1 1(100%)      0       0
-## 4       f.1         0       0      0       0
+##   sex&adult tot.quest    what    how   shall implied_do
+## 1       f.0         2  1(50%) 1(50%)       0          0
+## 2       f.1         1       0      0 1(100%)          0
+## 3       m.0         1       0      0       0    1(100%)
+## 4       m.1         1 1(100%)      0       0          0
 ```
 
 ```r
@@ -2924,32 +2925,33 @@ ltruncdf(z[1:4])
 
 ```
 ## $raw
-##   sex adult   raw.text n.row endmark strip.text  q.type
-## 1   m     1 What shoul     3       ?  what shou    what
-## 2   f     0 How can we     6       ?  how can w     how
-## 3   f     0 What are y     9       ?  what are     what
-## 4   m     0 I'm hungry    11       ?  im hungry unknown
+##   sex adult   raw.text n.row endmark strip.text     q.type
+## 1   m     1 What shoul     4       ?  what shou       what
+## 2   f     0 How can we     7       ?  how can w        how
+## 3   f     0 What are y    10       ?  what are        what
+## 4   f     1 Shall we m    11       ?  shall we       shall
+## 5   m     0 You alread    15       ?  you alrea implied_do
 ## 
 ## $count
-##   sex adult tot.quest what how unknown
-## 1   f     0         2    1   1       0
-## 2   m     0         1    0   0       1
-## 3   m     1         1    1   0       0
-## 4   f     1         0    0   0       0
+##   sex adult tot.quest what how shall implied_do
+## 1   f     0         2    1   1     0          0
+## 2   f     1         1    0   0     1          0
+## 3   m     0         1    0   0     0          1
+## 4   m     1         1    1   0     0          0
 ## 
 ## $prop
-##   sex adult tot.quest what how unknown
-## 1   f     0         2   50  50       0
-## 2   m     0         1    0   0     100
-## 3   m     1         1  100   0       0
-## 4   f     1         0    0   0       0
+##   sex adult tot.quest what how shall implied_do
+## 1   f     0         2   50  50     0          0
+## 2   f     1         1    0   0   100          0
+## 3   m     0         1    0   0     0        100
+## 4   m     1         1  100   0     0          0
 ## 
 ## $rnp
-##   sex adult tot.quest    what    how unknown
-## 1   f     0         2  1(50%) 1(50%)       0
-## 2   m     0         1       0      0 1(100%)
-## 3   m     1         1 1(100%)      0       0
-## 4   f     1         0       0      0       0
+##   sex adult tot.quest    what    how   shall implied_do
+## 1   f     0         2  1(50%) 1(50%)       0          0
+## 2   f     1         1       0      0 1(100%)          0
+## 3   m     0         1       0      0       0    1(100%)
+## 4   m     1         1 1(100%)      0       0          0
 ```
 
 
@@ -2991,7 +2993,7 @@ with(mraja1, invisible(gantt(dialogue, person, box.color = "black")))
 
 ```r
 ## Plotting Unit Span Dataframe with gantt_wrap
-gantt_wrap(dat, person, title = "Gantt Plot")
+gantt_wrap(dat, "person", title = "Gantt Plot")
 ```
 
 ![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-382.png) 
@@ -3024,7 +3026,7 @@ head(dat2, 12)
 
 ```r
 ## Plotting Repeated Measures Unit Span Dataframe
-gantt_wrap(dat2, fam.aff_sex, facet.vars = "act",
+gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
     title = "Repeated Measures Gantt Plot")
 ```
 
@@ -3186,17 +3188,17 @@ head(x1, 10)
 ```
 
 ```
-##    WORD        FREQ
-## 1  re             2
-## 2  reach          1
-## 3  read           6
-## 4  ready          5
-## 5  rearward       1
-## 6  reason         5
-## 7  reasons        1
-## 8  rebeck         1
-## 9  rebellious     1
-## 10 receipt        1
+##    WORD       FREQ
+## 1  re            2
+## 2  reach         1
+## 3  read          6
+## 4  ready         5
+## 5  rearward      1
+## 6  reason        5
+## 7  reason's      1
+## 8  rebeck        1
+## 9  rebellious    1
+## 10 receipt       1
 ```
 
 ```r
@@ -3206,7 +3208,7 @@ all_words(raj$dialogue, contains = "conc")
 
 ```
 ##   WORD      FREQ
-## 1 conceald     1
+## 1 conceal'd    1
 ## 2 conceit      2
 ## 3 conceive     1
 ## 4 concludes    1
@@ -3220,17 +3222,17 @@ head(x2, 10)
 ```
 
 ```
-##    WORD             FREQ
-## 1  and               666
-## 2  the               656
-## 3  i                 574
-## 4  to                517
-## 5  a                 446
-## 6  of                378
-## 7  my                358
-## 8  is                344
-## 9  that              344
-## 10 in                312
+##    WORD FREQ
+## 1  and   666
+## 2  the   656
+## 3  i     573
+## 4  to    517
+## 5  a     445
+## 6  of    378
+## 7  my    358
+## 8  is    344
+## 9  that  344
+## 10 in    312
 ```
 
 
@@ -3278,17 +3280,17 @@ head(x1, 10)
 ```
 
 ```
-##    WORD        FREQ
-## 1  re             2
-## 2  reach          1
-## 3  read           6
-## 4  ready          5
-## 5  rearward       1
-## 6  reason         5
-## 7  reasons        1
-## 8  rebeck         1
-## 9  rebellious     1
-## 10 receipt        1
+##    WORD       FREQ
+## 1  re            2
+## 2  reach         1
+## 3  read          6
+## 4  ready         5
+## 5  rearward      1
+## 6  reason        5
+## 7  reason's      1
+## 8  rebeck        1
+## 9  rebellious    1
+## 10 receipt       1
 ```
 
 ```r
@@ -3298,7 +3300,7 @@ all_words(raj$dialogue, contains = "conc")
 
 ```
 ##   WORD      FREQ
-## 1 conceald     1
+## 1 conceal'd    1
 ## 2 conceit      2
 ## 3 conceive     1
 ## 4 concludes    1
@@ -3312,17 +3314,17 @@ head(x2, 10)
 ```
 
 ```
-##    WORD             FREQ
-## 1  and               666
-## 2  the               656
-## 3  i                 574
-## 4  to                517
-## 5  a                 446
-## 6  of                378
-## 7  my                358
-## 8  is                344
-## 9  that              344
-## 10 in                312
+##    WORD FREQ
+## 1  and   666
+## 2  the   656
+## 3  i     573
+## 4  to    517
+## 5  a     445
+## 6  of    378
+## 7  my    358
+## 8  is    344
+## 9  that  344
+## 10 in    312
 ```
 
 

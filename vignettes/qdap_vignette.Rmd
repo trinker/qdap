@@ -1188,7 +1188,7 @@ colsplit2df(dat, new.names = qcv(A, B, C), keep.orig = TRUE)
 
 ```{r}
 ## A list with dataframes that contain pasted columns
-x <- question_type(DATA$state, list(DATA$sex, DATA$adult))
+x <- question_type(DATA.SPLIT$state, list(DATA.SPLIT$sex, DATA.SPLIT$adult))
 ltruncdf(x[1:4])
 z <- lcolsplit2df(x)
 ltruncdf(z[1:4])
@@ -1207,7 +1207,7 @@ head(dat, 12)
 ## Plotting Unit Span Dataframe
 with(mraja1, invisible(gantt(dialogue, person, box.color = "black")))
 ## Plotting Unit Span Dataframe with gantt_wrap
-gantt_wrap(dat, person, title = "Gantt Plot")
+gantt_wrap(dat, "person", title = "Gantt Plot")
 ```
 
 `r FT(orange, 5, text="&diams;")` **Repeated Measures Unit Spans**`r FT(orange, 5, text="&diams;")`
@@ -1217,7 +1217,7 @@ gantt_wrap(dat, person, title = "Gantt Plot")
 dat2 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex)))
 head(dat2, 12)
 ## Plotting Repeated Measures Unit Span Dataframe
-gantt_wrap(dat2, fam.aff_sex, facet.vars = "act",
+gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
     title = "Repeated Measures Gantt Plot")
 ```
 
