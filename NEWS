@@ -18,7 +18,7 @@ And constructed with the following guidelines:
 
 
 
-qdap 1.0.0
+CHANGES IN qdap VERSION 1.0.0
 ----------------------------------------------------------------
 
 BUG FIXES
@@ -120,7 +120,7 @@ CHANGES
 * `gantt_wrap` no longer accepts unquoted strings to the `plot.var` argument.
 
 
-qdap 0.2.5
+CHANGES IN qdap VERSION 0.2.5
 ----------------------------------------------------------------
 
 Patch release.  This version deals with the changes in the `openNLP` package 
@@ -164,7 +164,7 @@ CHANGES
   `file.path(getwd(), "DIR/file.ext")` is used rather than the full file path).
 
 
-qdap 0.2.2
+CHANGES IN qdap VERSION 0.2.2
 ----------------------------------------------------------------
 
 BUG FIXES
@@ -204,7 +204,7 @@ CHANGES
 * qdap is now compiled for mac users (as openNLP now passes CRAN checks with no
   Errors on Mac).
 
-qdap 0.2.1
+CHANGES IN qdap VERSION 0.2.1
 ----------------------------------------------------------------
 
 BUG FIXES
@@ -260,7 +260,7 @@ CHANGES
   time/date stamp if no directory name was given; this has been fixed, though 
   the function now resides in the reprots package.
 
-qdap 0.2.0
+CHANGES IN qdap VERSION 0.2.0
 ----------------------------------------------------------------
 
 * The first installation of the qdap package
