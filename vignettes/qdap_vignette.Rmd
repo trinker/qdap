@@ -1278,7 +1278,7 @@ plot(g, layout=layout.auto(g))
 
 <h3 id="word">Extract Words</h3>
 
-This section overviews functions that can extract words and word lists from dialogue text.  The subsections describing function use are in alphabetical order as ther eis no set chronology for use.
+This section overviews functions that can extract words and word lists from dialogue text.  The subsections describing function use are in alphabetical order as there is no set chronology for use.
 
 <div class="funs">
 The following functions will be utilized in this section (click to view more):    
