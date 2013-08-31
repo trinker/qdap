@@ -150,7 +150,9 @@ file.copy(root, new, TRUE, TRUE)
 #==========================
 News <- readLines("NEWS")
 library(qdap)
-News <- mgsub(c("<", ">"), c("&lt;", "&gt;"), News)
+News <- mgsub(
+    c("<", ">", "&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;"), 
+    c("&lt;", "&gt;", "<b>&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</b>"), News)
 cat(paste(News, collapse = "\n"), file = "NEWS.md")
 
 #==========================
