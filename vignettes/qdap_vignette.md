@@ -910,9 +910,14 @@ The following functions will be utilized in this section (click to view more):<b
     <input type="submit" value="sec2hms"> - <a href="#time">Time Conversion</a> 
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/lookup.html" target="_blank">
-    <input type="submit" value="lookup"> - <a href="#hash">Hash Table/Dictionary Lookup</a>
+<form class="form_left" action="http://trinker.github.io/qdap_dev/lookup.html" target="_blank">
+    <input type="submit" value="lookup"><input type="submit" value="%l%"> 
 </form>
+
+<form ction="http://trinker.github.io/qdap_dev/hash.html" target="_blank">
+    <input type="submit" value="hash"><input type="submit" value="hash_look"><input type="submit" value="%ha%"> - <a href="#hash">Hash Table/Dictionary Lookup</a>
+</form>
+
 
 <form action="http://trinker.github.io/qdap_dev/qcv.html" target="_blank">
     <input type="submit" value="qcv"> - <a href="#qcv">Quick Character Vector</a>
@@ -982,9 +987,9 @@ qcv(terms = "mpg cyl  disp  hp drat    wt  qsec vs am gear carb")
 
 <h4 id="hash">Dictionary/Lookup</h4>  
 
-Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The <a href="http://trinker.github.io/qdap_dev/lookup.html" target="_blank"><code>lookup</code></a> function provides a fast enviroment lookup for this type of usage.
+Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The <a href="http://trinker.github.io/qdap_dev/lookup.html" target="_blank"><code>lookup</code></a> & <a href="%l%" target="_blank">%l%</a> functions provide a fast enviroment lookup for single usage. The <a href="http://trinker.github.io/qdap_dev/hash.html" target="_blank"><code>hash</code></a> & <a href="http://trinker.github.io/qdap_dev/hash.html" target="_blank">hash_lookup</a>/<a href="http://trinker.github.io/qdap_dev/hash.html" target="_blank">%ha%</a> functions provide a fast enviroment lookup for multiple uses of the same hash table.
 
-<font size="5" color="orange">&diams;</font> **Dictionary/Look Up Examples** <font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/lookup.html" target="_blank"><code>lookup</code></a>**- *Dictionary/Look Up Examples* <font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -1025,7 +1030,15 @@ codes <- list(A=c(1, 2, 4),
     C = 7,
     D = c(6, 8:10))
 
-lookup(1:10, codes)
+lookup(1:10, codes) #or
+```
+
+```
+##  [1] "A" "A" "B" "A" "B" "D" "C" "D" "D" "D"
+```
+
+```r
+1:10 %l% codes
 ```
 
 ```
@@ -1060,9 +1073,52 @@ lookup(mtcars$carb, sort(unique(mtcars$carb)),
 ```
 
 
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/hash.html" target="_blank"><code>hash</code></a>/<a href="http://trinker.github.io/qdap_dev/hash_look.html" target="_blank"><code>hash_look</code></a>**- *Dictionary/Look Up Examples* <font size="5" color="orange">&diams;</font>
+
+
+```r
+## Create a fake data set of hash values
+(DF <- aggregate(mpg~as.character(carb), mtcars, mean))
+```
+
+```
+##   as.character(carb)   mpg
+## 1                  1 25.34
+## 2                  2 22.40
+## 3                  3 16.30
+## 4                  4 15.79
+## 5                  6 19.70
+## 6                  8 15.00
+```
+
+```r
+## Use `hash` to create a lookup environment
+hashTab <- hash(DF)  
+## Create a vector to lookup
+x <- sample(DF[, 1], 20, TRUE)
+## Lookup x in the hash with `hash_look` or `%ha%`
+hash_look(x, hashTab)
+```
+
+```
+##  [1] 25.34 15.00 16.30 16.30 16.30 16.30 15.00 25.34 15.79 19.70 19.70
+## [12] 25.34 15.79 16.30 16.30 25.34 15.79 25.34 16.30 15.79
+```
+
+```r
+x %ha% hashTab
+```
+
+```
+##  [1] 25.34 15.00 16.30 16.30 16.30 16.30 15.00 25.34 15.79 19.70 19.70
+## [12] 25.34 15.79 16.30 16.30 25.34 15.79 25.34 16.30 15.79
+```
+
+
 <h4 id="time">Time Conversion</h4>  
 
 Researchers dealing with transcripts may have the need to convert between traditional Hours:Minutes:Seconds format and seconds.  The <a href="http://trinker.github.io/qdap_dev/hms2sec.html" target="_blank"><code>hms2sec</code></a> and <a href="http://trinker.github.io/qdap_dev/sec2hms.html" target="_blank"><code>sec2hms</code></a> functions offer this type of time conversion.
+
 
 <font size="5" color="orange">&diams;</font> **Time Conversion Examples** <font size="5" color="orange">&diams;</font>
 
@@ -2052,7 +2108,7 @@ trans.cloud(text, c("greg", "bob"), target.words=list(obs), caps.list=obs,
     max.word.size = 3)
 ```
 
-![plot of chunk unnamed-chunk-24](figure/unnamed-chunk-241.png) ![plot of chunk unnamed-chunk-24](figure/unnamed-chunk-242.png) 
+![plot of chunk unnamed-chunk-25](figure/unnamed-chunk-251.png) ![plot of chunk unnamed-chunk-25](figure/unnamed-chunk-252.png) 
 
 
 <h4 id="mgsub">Multiple gsub</h4>
@@ -2263,7 +2319,7 @@ with(stem2df(DATA, "state", "new"), trans.cloud(new, sex, title.cex = 2.5,
     title.color = "blue", max.word.size = 5, title.padj = .7))
 ```
 
-![plot of chunk unnamed-chunk-27](figure/unnamed-chunk-271.png) ![plot of chunk unnamed-chunk-27](figure/unnamed-chunk-272.png) 
+![plot of chunk unnamed-chunk-28](figure/unnamed-chunk-281.png) ![plot of chunk unnamed-chunk-28](figure/unnamed-chunk-282.png) 
 
 ```r
 ## stemmer EXAMPLE:
@@ -2989,14 +3045,14 @@ head(dat, 12)
 with(mraja1, invisible(gantt(dialogue, person, box.color = "black")))
 ```
 
-![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-381.png) 
+![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-391.png) 
 
 ```r
 ## Plotting Unit Span Dataframe with gantt_wrap
 gantt_wrap(dat, "person", title = "Gantt Plot")
 ```
 
-![plot of chunk unnamed-chunk-38](figure/unnamed-chunk-382.png) 
+![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-392.png) 
 
 
 <font size="5" color="orange">&diams;</font> **Repeated Measures Unit Spans**<font size="5" color="orange">&diams;</font>
@@ -3030,7 +3086,7 @@ gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
     title = "Repeated Measures Gantt Plot")
 ```
 
-![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-39.png) 
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40.png) 
 
 
 <h4 id="adj">Create Adjacency Matrix</h4>
@@ -3116,7 +3172,7 @@ V(g)$degree <- degree(g)
 plot(g, layout=layout.auto(g))
 ```
 
-![plot of chunk unnamed-chunk-42](figure/unnamed-chunk-42.png) 
+![plot of chunk unnamed-chunk-43](figure/unnamed-chunk-43.png) 
 
 
 
@@ -3137,39 +3193,39 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/common.html" target="_blank">
-    <input type="submit" value="common"> - Find Common Words Between Groups
+    <input type="submit" value="common"> - <a href="#common">Find Common Words Between Groups</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/exclude.html" target="_blank">
-    <input type="submit" value="exclude"> - Exclude Elements From a Vector
+    <input type="submit" value="exclude"> - <a href="#exclude">Exclude Elements From a Vector</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/ngrams.html" target="_blank">
-    <input type="submit" value="ngrams"> - Generate ngrams
+    <input type="submit" value="ngrams"> - <a href="#ngram">Generate ngrams</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/stopwords.html" target="_blank">
-    <input type="submit" value="stopwords"> - Remove Stopwords
+    <input type="submit" value="stopwords"> - <a href="#stopwords">Remove Stopwords</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/strip.html" target="_blank">
-    <input type="submit" value="strip"> - Strip Text
+    <input type="submit" value="strip"> - <a href="#strip">Strip Text of Unwanted Characters/Capitalization</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank">
-    <input type="submit" value="synonyms"><input type="submit" value="syn"> - Search For Synonyms
+    <input type="submit" value="synonyms"><input type="submit" value="syn"> - <a href="#syn">Search For Synonyms</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_associate.html" target="_blank">
-    <input type="submit" value="word_associate"> - Find Associated Words
+    <input type="submit" value="word_associate"> - <a href="#assoc">Find Associated Words</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_diff_list.html" target="_blank">
-    <input type="submit" value="word_diff_list"> - Differences In Word Use Between Groups
+    <input type="submit" value="word_diff_list"> - <a href="#diffs">Differences In Word Use Between Groups</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_list.html" target="_blank">
-    <input type="submit" value="word_list"> - Raw Word Lists/Frequency Counts
+    <input type="submit" value="word_list"> - <a href="#word_list">Raw Word Lists/Frequency Counts</a>
 </form>
 </div>
 
@@ -3236,99 +3292,1128 @@ head(x2, 10)
 ```
 
 
-<h4 id="bag">Bag of Words</h4>
+<h4 id="bag">Word Splitting (Bag of Words)</h4>
 
-The qdap package utilizes the following functions to turn text into a bag of words (order is perserved):
+The qdap package utilizes the following functions to turn text into a bag of words (word order is perserved):
 
 
 <TABLE>
-    <TR> <TD align="right"><font face="courier"><b>bag.o.words</b></font></TD> <TD align="right">Reduces a text column to a <b>single</b> vector bag of words.</TD> </TR>
-    <TR> <TD align="right"><font face="courier"><b> breaker</b></font></TD> <TD align="right"> Reduces a text column to a <b>single</b> vector bag of words and qdap recognized end marks.</TD> </TR>
-    <TR> <TD align="right"><font face="courier"><b> word.split</b></font></TD> <TD align="right"> Reduces a text column to a <b>list</b> of vectors of bag of words and qdap recognized end marks (i.e., ".", "!", "?", "*", "-").</TD> </TR>
+    <TR> <TD align="right"><font face="courier"><b><a href="http://trinker.github.io/qdap_dev/bag.o.words.html">bag.o.words</a> </b></font></TD> <TD align="right">Reduces a text column to a <b>single</b> vector bag of words.</TD> </TR>
+    <TR> <TD align="right"><font face="courier"><b><a href="http://trinker.github.io/qdap_dev/bag.o.words.html">breaker</a></b></font></TD> <TD align="right"> Reduces a text column to a <b>single</b> vector bag of words and qdap recognized end marks.</TD> </TR>
+    <TR> <TD align="right"><font face="courier"><b><a href="http://trinker.github.io/qdap_dev/bag.o.words.html">word.split</a></b></font></TD> <TD align="right"> Reduces a text column to a <b>list</b> of vectors of bag of words and qdap recognized end marks (i.e., ".", "!", "?", "*", "-").</TD> </TR>
 </TABLE>
 
+Bag of words can be useful for any number of reasons within the scope of analyzing discourse.  Many other qdap functions employ or mention these three functions as seen in the following counts for the three word splitting functions functions.
+
+
+
+
+<TABLE border=1>
+ <TR> <TD align="right">  </TD> <TD><b>Function</b> </TD> <TD> <b>bag.o.words</b> </TD> <TD> <b>breaker</b></TD> <TD> <b>word.split</b></TD> </TR>
+ 
+ 
+  <TR> <TD align="right"> 1 </TD> <TD> all_words.R                   </TD> <TD> 1 </TD> <TD> - </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 2 </TD> <TD> automated_readability_index.R </TD> <TD> - </TD> <TD> - </TD> <TD> 2 </TD> </TR>
+  <TR> <TD align="right"> 3 </TD> <TD> bag.o.words.R                 </TD> <TD> 10 </TD> <TD> 6 </TD> <TD> 3 </TD> </TR>
+  <TR> <TD align="right"> 4 </TD> <TD> capitalizer.R                 </TD> <TD> 3 </TD> <TD> 1 </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 5 </TD> <TD> imperative.R                  </TD> <TD> - </TD> <TD> 3 </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 6 </TD> <TD> ngrams.R                      </TD> <TD> 1 </TD> <TD> - </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 7 </TD> <TD> polarity.R                    </TD> <TD> 2 </TD> <TD> - </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 8 </TD> <TD> stopwords.R                   </TD> <TD> 1 </TD> <TD> 3 </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 9 </TD> <TD> textLISTER.R                  </TD> <TD> - </TD> <TD> - </TD> <TD> 2 </TD> </TR>
+  <TR> <TD align="right"> 10 </TD> <TD> trans.cloud.R                 </TD> <TD> 1 </TD> <TD> 1 </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 11 </TD> <TD> wfm.R                         </TD> <TD> 1 </TD> <TD> - </TD> <TD> - </TD> </TR>
+   </TABLE>
+<br>
+
+<font size="5" color="orange">&diams;</font> **Word Splitting Examples**<font size="5" color="orange">&diams;</font>
 
 
 ```r
-library(qdap)
-dat<- qdap:::list2df(list(x = x, y=y))
-dat[, "stemmed"] <- stemmer(dat[, 1])
-x <- unique(bag.o.words(dat[, 3]))
-SW <- x[nchar(x) < 3]
-wfdf(dat[, 3], dat[,2], stopwords = SW, margins = TRUE)
-```
-
-FIND ME
-<font size="5" color="orange">&diams;</font> ** **<font size="5" color="orange">&diams;</font>
-
-
-<h4 id=""></h4>
-The <a href="http://trinker.github.io/qdap_dev/.html" target="_blank"><code></code></a> 
-
-breaker
-word.split
-bag.o.words
-
-<font size="5" color="orange">&diams;</font> ** **<font size="5" color="orange">&diams;</font>
-
-
-
-```r
-## Words starting with `re`
-x1 <- all_words(raj$dialogue, begins.with="re")
-head(x1, 10)
+bag.o.words("I'm going home!")
 ```
 
 ```
-##    WORD       FREQ
-## 1  re            2
-## 2  reach         1
-## 3  read          6
-## 4  ready         5
-## 5  rearward      1
-## 6  reason        5
-## 7  reason's      1
-## 8  rebeck        1
-## 9  rebellious    1
-## 10 receipt       1
+## [1] "i'm"   "going" "home"
 ```
 
 ```r
-## Words containing with `conc`
-all_words(raj$dialogue, contains = "conc")
+bag.o.words("I'm going home!", apostrophe.remove = TRUE)
 ```
 
 ```
-##   WORD      FREQ
-## 1 conceal'd    1
-## 2 conceit      2
-## 3 conceive     1
-## 4 concludes    1
-## 5 reconcile    1
+## [1] "im"    "going" "home"
 ```
 
 ```r
-## All words ordered by frequency
-x2 <- all_words(raj$dialogue, alphabetical = FALSE)
-head(x2, 10)
+bag.o.words(DATA$state)
 ```
 
 ```
+##  [1] "computer" "is"       "fun"      "not"      "too"      "fun"     
+##  [7] "no"       "it's"     "not"      "it's"     "dumb"     "what"    
+## [13] "should"   "we"       "do"       "you"      "liar"     "it"      
+## [19] "stinks"   "i"        "am"       "telling"  "the"      "truth"   
+## [25] "how"      "can"      "we"       "be"       "certain"  "there"   
+## [31] "is"       "no"       "way"      "i"        "distrust" "you"     
+## [37] "what"     "are"      "you"      "talking"  "about"    "shall"   
+## [43] "we"       "move"     "on"       "good"     "then"     "i'm"     
+## [49] "hungry"   "let's"    "eat"      "you"      "already"
+```
+
+```r
+by(DATA$state, DATA$person, bag.o.words)
+```
+
+```
+## DATA$person: greg
+##  [1] "no"      "it's"    "not"     "it's"    "dumb"    "i"       "am"     
+##  [8] "telling" "the"     "truth"   "there"   "is"      "no"      "way"    
+## [15] "i'm"     "hungry"  "let's"   "eat"     "you"     "already"
+## -------------------------------------------------------- 
+## DATA$person: researcher
+## [1] "shall" "we"    "move"  "on"    "good"  "then" 
+## -------------------------------------------------------- 
+## DATA$person: sally
+##  [1] "how"     "can"     "we"      "be"      "certain" "what"    "are"    
+##  [8] "you"     "talking" "about"  
+## -------------------------------------------------------- 
+## DATA$person: sam
+##  [1] "computer" "is"       "fun"      "not"      "too"      "fun"     
+##  [7] "you"      "liar"     "it"       "stinks"   "i"        "distrust"
+## [13] "you"     
+## -------------------------------------------------------- 
+## DATA$person: teacher
+## [1] "what"   "should" "we"     "do"
+```
+
+```r
+lapply(DATA$state,  bag.o.words)
+```
+
+```
+## [[1]]
+## [1] "computer" "is"       "fun"      "not"      "too"      "fun"     
+## 
+## [[2]]
+## [1] "no"   "it's" "not"  "it's" "dumb"
+## 
+## [[3]]
+## [1] "what"   "should" "we"     "do"    
+## 
+## [[4]]
+## [1] "you"    "liar"   "it"     "stinks"
+## 
+## [[5]]
+## [1] "i"       "am"      "telling" "the"     "truth"  
+## 
+## [[6]]
+## [1] "how"     "can"     "we"      "be"      "certain"
+## 
+## [[7]]
+## [1] "there" "is"    "no"    "way"  
+## 
+## [[8]]
+## [1] "i"        "distrust" "you"     
+## 
+## [[9]]
+## [1] "what"    "are"     "you"     "talking" "about"  
+## 
+## [[10]]
+## [1] "shall" "we"    "move"  "on"    "good"  "then" 
+## 
+## [[11]]
+## [1] "i'm"     "hungry"  "let's"   "eat"     "you"     "already"
+```
+
+```r
+breaker(DATA$state)
+```
+
+```
+##  [1] "Computer" "is"       "fun"      "."        "Not"      "too"     
+##  [7] "fun"      "."        "No"       "it's"     "not,"     "it's"    
+## [13] "dumb"     "."        "What"     "should"   "we"       "do"      
+## [19] "?"        "You"      "liar,"    "it"       "stinks"   "!"       
+## [25] "I"        "am"       "telling"  "the"      "truth"    "!"       
+## [31] "How"      "can"      "we"       "be"       "certain"  "?"       
+## [37] "There"    "is"       "no"       "way"      "."        "I"       
+## [43] "distrust" "you"      "."        "What"     "are"      "you"     
+## [49] "talking"  "about"    "?"        "Shall"    "we"       "move"    
+## [55] "on"       "?"        "Good"     "then"     "."        "I'm"     
+## [61] "hungry"   "."        "Let's"    "eat"      "."        "You"     
+## [67] "already"  "?"
+```
+
+```r
+by(DATA$state, DATA$person, breaker)
+```
+
+```
+## DATA$person: greg
+##  [1] "No"      "it's"    "not,"    "it's"    "dumb"    "."       "I"      
+##  [8] "am"      "telling" "the"     "truth"   "!"       "There"   "is"     
+## [15] "no"      "way"     "."       "I'm"     "hungry"  "."       "Let's"  
+## [22] "eat"     "."       "You"     "already" "?"      
+## -------------------------------------------------------- 
+## DATA$person: researcher
+## [1] "Shall" "we"    "move"  "on"    "?"     "Good"  "then"  "."    
+## -------------------------------------------------------- 
+## DATA$person: sally
+##  [1] "How"     "can"     "we"      "be"      "certain" "?"       "What"   
+##  [8] "are"     "you"     "talking" "about"   "?"      
+## -------------------------------------------------------- 
+## DATA$person: sam
+##  [1] "Computer" "is"       "fun"      "."        "Not"      "too"     
+##  [7] "fun"      "."        "You"      "liar,"    "it"       "stinks"  
+## [13] "!"        "I"        "distrust" "you"      "."       
+## -------------------------------------------------------- 
+## DATA$person: teacher
+## [1] "What"   "should" "we"     "do"     "?"
+```
+
+```r
+lapply(DATA$state,  breaker)
+```
+
+```
+## [[1]]
+## [1] "Computer" "is"       "fun"      "."        "Not"      "too"     
+## [7] "fun"      "."       
+## 
+## [[2]]
+## [1] "No"   "it's" "not," "it's" "dumb" "."   
+## 
+## [[3]]
+## [1] "What"   "should" "we"     "do"     "?"     
+## 
+## [[4]]
+## [1] "You"    "liar,"  "it"     "stinks" "!"     
+## 
+## [[5]]
+## [1] "I"       "am"      "telling" "the"     "truth"   "!"      
+## 
+## [[6]]
+## [1] "How"     "can"     "we"      "be"      "certain" "?"      
+## 
+## [[7]]
+## [1] "There" "is"    "no"    "way"   "."    
+## 
+## [[8]]
+## [1] "I"        "distrust" "you"      "."       
+## 
+## [[9]]
+## [1] "What"    "are"     "you"     "talking" "about"   "?"      
+## 
+## [[10]]
+## [1] "Shall" "we"    "move"  "on"    "?"     "Good"  "then"  "."    
+## 
+## [[11]]
+## [1] "I'm"     "hungry"  "."       "Let's"   "eat"     "."       "You"    
+## [8] "already" "?"
+```
+
+```r
+word.split(c(NA, DATA$state))
+```
+
+```
+## $<NA>
+## [1] NA
+## 
+## $`Computer is fun. Not too fun.`
+## [1] "Computer" "is"       "fun"      "."        "Not"      "too"     
+## [7] "fun"      "."       
+## 
+## $`No it's not, it's dumb.`
+## [1] "No"   "it's" "not," "it's" "dumb" "."   
+## 
+## $`What should we do?`
+## [1] "What"   "should" "we"     "do"     "?"     
+## 
+## $`You liar, it stinks!`
+## [1] "You"    "liar,"  "it"     "stinks" "!"     
+## 
+## $`I am telling the truth!`
+## [1] "I"       "am"      "telling" "the"     "truth"   "!"      
+## 
+## $`How can we be certain?`
+## [1] "How"     "can"     "we"      "be"      "certain" "?"      
+## 
+## $`There is no way.`
+## [1] "There" "is"    "no"    "way"   "."    
+## 
+## $`I distrust you.`
+## [1] "I"        "distrust" "you"      "."       
+## 
+## $`What are you talking about?`
+## [1] "What"    "are"     "you"     "talking" "about"   "?"      
+## 
+## $`Shall we move on? Good then.`
+## [1] "Shall" "we"    "move"  "on"    "?"     "Good"  "then"  "."    
+## 
+## $`I'm hungry. Let's eat. You already?`
+## [1] "I'm"     "hungry"  "."       "Let's"   "eat"     "."       "You"    
+## [8] "already" "?"
+```
+
+
+
+<h4 id="common">Find Common Words Between Groups</h4>
+
+The <a href="http://trinker.github.io/qdap_dev/common.html" target="_blank"><code>common</code></a> function finds items that are common between n vectors 
+(i.e., subjects or grouping variables).  This is useful for determining common language choices shared across participants in a conversation.
+
+<font size="5" color="orange">&diams;</font> **Words in Common Examples**<font size="5" color="orange">&diams;</font>
+
+
+```r
+## Create vectors of words
+a <- c("a", "cat", "dog", "the", "the")
+b <- c("corn", "a", "chicken", "the")
+d <- c("house", "feed", "a", "the", "chicken")
+
+## Supply individual vectors
+common(a, b, d, overlap=2)
+```
+
+```
+##      word freq
+## 1       a    3
+## 2     the    3
+## 3 chicken    2
+```
+
+```r
+common(a, b, d, overlap=3)
+```
+
+```
+##   word freq
+## 1    a    3
+## 2  the    3
+```
+
+```r
+## Supply a lsit of vectors
+common(list(a, b, d))
+```
+
+```
+##   word freq
+## 1    a    3
+## 2  the    3
+```
+
+```r
+## Using to find common words between subjects
+common(word_list(DATA$state, DATA$person)$cwl, overlap = 2)
+```
+
+```
+##   word freq
+## 1   we    3
+## 2  you    3
+## 3    I    2
+## 4   is    2
+## 5  not    2
+## 6 what    2
+```
+
+
+
+<h4 id="exclude">Exclude Elements From a Vector</h4>
+
+It is often useful and more efficient to start with a preset vector of words and eliminate or <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a> the words you do not wish to include.  Examples could range from excluding an individual(s) from a column of participant names or excluding a few select word(s) from a pre defined qdap word list.  THis is particlarly useful for passsing terms or stopwords to word counting functions like <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> or <a href="http://trinker.github.io/qdap_dev/trans.cloud.html" target="_blank"><code>trans.cloud</code></a>.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a> Examples**<font size="5" color="orange">&diams;</font>
+
+```r
+exclude(1:10, 3, 4)
+```
+
+```
+## [1]  1  2  5  6  7  8  9 10
+```
+
+```r
+exclude(Top25Words, qcv(the, of, and))
+```
+
+```
+##  [1] "a"    "to"   "in"   "is"   "you"  "that" "it"   "he"   "was"  "for" 
+## [11] "on"   "are"  "as"   "with" "his"  "they" "I"    "at"   "be"   "this"
+## [21] "have" "from"
+```
+
+```r
+exclude(Top25Words, "the", "of", "an")
+```
+
+```
+##  [1] "and"  "a"    "to"   "in"   "is"   "you"  "that" "it"   "he"   "was" 
+## [11] "for"  "on"   "are"  "as"   "with" "his"  "they" "I"    "at"   "be"  
+## [21] "this" "have" "from"
+```
+
+```r
+#Using with `term.match` and `termco`
+MTCH.LST <- exclude(term.match(DATA$state, qcv(th, i)), qcv(truth, stinks))
+termco(DATA$state, DATA$person, MTCH.LST)
+```
+
+```
+##       person word.count        th          i
+## 1       greg         20 3(15.00%) 13(65.00%)
+## 2 researcher          6 2(33.33%)          0
+## 3      sally         10         0  4(40.00%)
+## 4        sam         13         0 11(84.62%)
+## 5    teacher          4         0          0
+```
+
+
+<h4 id="ngramn">Generate ngrams</h4>
+
+Utilizing <a href="http://en.wikipedia.org/wiki/N-gram" target="_blank">ngrams</a> can be useful for gaining a sense of what terms are used in conjunction with other terms.  This is particularly useful in the analysis of dialogue when the combination of a particular vocabulary is meaningful.  The <a href="http://trinker.github.io/qdap_dev/ngrams.html" target="_blank"><code>ngrams</code></a> function provides a list of ngram related output that can be utilize in various analyses.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/ngrams.html" target="_blank"><code>ngrams</code></a> Example** *note that the out put is only partial*<font size="5" color="orange">&diams;</font>
+
+
+```r
+out <- ngrams(DATA$state, DATA$person, 2)
+lapply(out[["all_n"]], function(x) sapply(x, paste, collapse = " "))
+```
+
+```
+## $n_1
+##  [1] "about"    "already"  "am"       "are"      "be"       "can"     
+##  [7] "certain"  "computer" "distrust" "do"       "dumb"     "eat"     
+## [13] "fun"      "fun"      "good"     "how"      "hungry"   "i"       
+## [19] "i"        "i'm"      "is"       "is"       "it"       "it's"    
+## [25] "it's"     "let's"    "liar"     "move"     "no"       "no"      
+## [31] "not"      "not"      "on"       "shall"    "should"   "stinks"  
+## [37] "talking"  "telling"  "the"      "then"     "there"    "too"     
+## [43] "truth"    "way"      "we"       "we"       "we"       "what"    
+## [49] "what"     "you"      "you"      "you"      "you"     
+## 
+## $n_2
+##  [1] "am telling"    "are you"       "be certain"    "can we"       
+##  [5] "computer is"   "distrust you"  "eat you"       "fun not"      
+##  [9] "good then"     "how can"       "hungry let's"  "i'm hungry"   
+## [13] "i am"          "i distrust"    "is fun"        "is no"        
+## [17] "it's dumb"     "it's not"      "it stinks"     "let's eat"    
+## [21] "liar it"       "move on"       "no it's"       "no way"       
+## [25] "not it's"      "not too"       "on good"       "shall we"     
+## [29] "should we"     "talking about" "telling the"   "the truth"    
+## [33] "there is"      "too fun"       "we be"         "we do"        
+## [37] "we move"       "what are"      "what should"   "you already"  
+## [41] "you liar"      "you talking"
+```
+
+
+<h4 id="stopwords">Remove Stopwords</h4>
+
+In analyzing discourse it may be helpful to remove certain words from the analysis as the words may not be meaningful or may overshadow the impact of other words.  The <a href="http://trinker.github.io/qdap_dev/stopwords.html" target="_blank"><code>stopwords</code></a> function can be utilized to remove <a href="http://nlp.stanford.edu/IR-book/html/htmledition/dropping-common-terms-stop-words-1.html" target="_blank">stopwords</a> from the dialogue before passing to further analysis.  It should be noted that many functions have a stopwords argument that allows for the remval of the stopwords within the function environment rather than altering the text in the primary discourse dataframe.  Careful researcher consideration must be given as to the functional impact of removing words from an analysis.
+
+<font size="5" color="orange">&diams;</font> **Stopword Removal Examples**<font size="5" color="orange">&diams;</font>
+
+
+```r
+## The data
+DATA$state
+```
+
+```
+##  [1] "Computer is fun. Not too fun."        
+##  [2] "No it's not, it's dumb."              
+##  [3] "What should we do?"                   
+##  [4] "You liar, it stinks!"                 
+##  [5] "I am telling the truth!"              
+##  [6] "How can we be certain?"               
+##  [7] "There is no way."                     
+##  [8] "I distrust you."                      
+##  [9] "What are you talking about?"          
+## [10] "Shall we move on?  Good then."        
+## [11] "I'm hungry.  Let's eat.  You already?"
+```
+
+```r
+stopwords(DATA$state, Top200Words)
+```
+
+```
+## [[1]]
+## [1] "computer" "fun"      "."        "fun"      "."       
+## 
+## [[2]]
+## [1] "it's" ","    "it's" "dumb" "."   
+## 
+## [[3]]
+## [1] "?"
+## 
+## [[4]]
+## [1] "liar"   ","      "stinks" "!"     
+## 
+## [[5]]
+## [1] "am"      "telling" "truth"   "!"      
+## 
+## [[6]]
+## [1] "certain" "?"      
+## 
+## [[7]]
+## [1] "."
+## 
+## [[8]]
+## [1] "distrust" "."       
+## 
+## [[9]]
+## [1] "talking" "?"      
+## 
+## [[10]]
+## [1] "shall" "?"     "."    
+## 
+## [[11]]
+## [1] "i'm"     "hungry"  "."       "let's"   "eat"     "."       "already"
+## [8] "?"
+```
+
+```r
+stopwords(DATA$state, Top200Words, strip = TRUE)
+```
+
+```
+## [[1]]
+## [1] "computer" "fun"      "fun"     
+## 
+## [[2]]
+## [1] "it's" "it's" "dumb"
+## 
+## [[3]]
+## character(0)
+## 
+## [[4]]
+## [1] "liar"   "stinks"
+## 
+## [[5]]
+## [1] "am"      "telling" "truth"  
+## 
+## [[6]]
+## [1] "certain"
+## 
+## [[7]]
+## character(0)
+## 
+## [[8]]
+## [1] "distrust"
+## 
+## [[9]]
+## [1] "talking"
+## 
+## [[10]]
+## [1] "shall"
+## 
+## [[11]]
+## [1] "i'm"     "hungry"  "let's"   "eat"     "already"
+```
+
+```r
+stopwords(DATA$state, Top200Words, separate = FALSE)
+```
+
+```
+##  [1] "computer fun. fun."              "it's, it's dumb."               
+##  [3] "?"                               "liar, stinks!"                  
+##  [5] "am telling truth!"               "certain?"                       
+##  [7] "."                               "distrust."                      
+##  [9] "talking?"                        "shall?."                        
+## [11] "i'm hungry. let's eat. already?"
+```
+
+```r
+stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
+```
+
+```
+##  [1] "computer" "fun"      "."        "it's"     ","        "dumb"    
+##  [7] "?"        "liar"     "stinks"   "!"        "am"       "telling" 
+## [13] "truth"    "certain"  "distrust" "talking"  "shall"    "i'm"     
+## [19] "hungry"   "let's"    "eat"      "already"
+```
+
+
+<h4 id="strip">Strip Text of Unwanted Characters/Capitalization</h4>
+
+It is often useful to remove capitalization and puntuation from the dialogue in order to standardize the text.  R is case sensitive.  By removing capital letters and extra punctuation with the <a href="http://trinker.github.io/qdap_dev/strip.html" target="_blank"><code>strip</code></a> function the text is more comparable.  In the following output we can see, through the <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html" target="_blank">==</a> comparison operator and <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html" target="_blank">outer</a> function that the use of <a href="http://trinker.github.io/qdap_dev/strip.html" target="_blank"><code>strip</code></a> makes the differnet forms of <font color="blue">Dan</font> comparable.
+
+
+```r
+x <- c("Dan", "dan", "dan.", "DAN")
+y <- outer(x, x, "==")
+dimnames(y) <- list(x, x); y
+```
+
+```
+##        Dan   dan  dan.   DAN
+## Dan   TRUE FALSE FALSE FALSE
+## dan  FALSE  TRUE FALSE FALSE
+## dan. FALSE FALSE  TRUE FALSE
+## DAN  FALSE FALSE FALSE  TRUE
+```
+
+```r
+x <- strip(c("Dan", "dan", "dan.", "DAN"))
+y <- outer(x, x, "==")
+dimnames(y) <- list(x, x); y
+```
+
+```
+##      dan  dan  dan  dan
+## dan TRUE TRUE TRUE TRUE
+## dan TRUE TRUE TRUE TRUE
+## dan TRUE TRUE TRUE TRUE
+## dan TRUE TRUE TRUE TRUE
+```
+
+
+As seen in the examples below, <a href="http://trinker.github.io/qdap_dev/strip.html" target="_blank"><code>strip</code></a> comes with multiple arguments to adjust the flexiblity of the degree of text standardization.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/strip.html" target="_blank"><code>strip</code></a> Examples**<font size="5" color="orange">&diams;</font>
+
+
+```r
+## Demonstrating the standardization of 
+## The data
+DATA$state
+```
+
+```
+##  [1] "Computer is fun. Not too fun."        
+##  [2] "No it's not, it's dumb."              
+##  [3] "What should we do?"                   
+##  [4] "You liar, it stinks!"                 
+##  [5] "I am telling the truth!"              
+##  [6] "How can we be certain?"               
+##  [7] "There is no way."                     
+##  [8] "I distrust you."                      
+##  [9] "What are you talking about?"          
+## [10] "Shall we move on?  Good then."        
+## [11] "I'm hungry.  Let's eat.  You already?"
+```
+
+```r
+strip(DATA$state)
+```
+
+```
+##  [1] "computer is fun not too fun"    "no its not its dumb"           
+##  [3] "what should we do"              "you liar it stinks"            
+##  [5] "i am telling the truth"         "how can we be certain"         
+##  [7] "there is no way"                "i distrust you"                
+##  [9] "what are you talking about"     "shall we move on good then"    
+## [11] "im hungry lets eat you already"
+```
+
+```r
+strip(DATA$state, apostrophe.remove=FALSE)
+```
+
+```
+##  [1] "computer is fun not too fun"      "no it's not it's dumb"           
+##  [3] "what should we do"                "you liar it stinks"              
+##  [5] "i am telling the truth"           "how can we be certain"           
+##  [7] "there is no way"                  "i distrust you"                  
+##  [9] "what are you talking about"       "shall we move on good then"      
+## [11] "i'm hungry let's eat you already"
+```
+
+```r
+strip(DATA$state, char.keep = c("?", "."))
+```
+
+```
+##  [1] "computer is fun. not too fun."    
+##  [2] "no its not its dumb."             
+##  [3] "what should we do?"               
+##  [4] "you liar it stinks"               
+##  [5] "i am telling the truth"           
+##  [6] "how can we be certain?"           
+##  [7] "there is no way."                 
+##  [8] "i distrust you."                  
+##  [9] "what are you talking about?"      
+## [10] "shall we move on? good then."     
+## [11] "im hungry. lets eat. you already?"
+```
+
+
+<h4 id="syn">Search For Synonyms</h4>
+
+It is useful in discourse analysis to analyze vocabularly use.  This may mean searching for words similar to your initial word list.  The <a href="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank"><code>synonyms</code></a> (aka <a href="http://trinker.github.io/qdap_dev/syn.html" target="_blank"><code>syn</code></a>) function generates synonyms from the <a href="http://trinker.github.io/qdapDictionaries/" target="_blank">qdapDictionaries'</a> <a href="http://trinker.github.io/qdapDictionaries/SYNONYM.html" target="_blank">SYNONYM</a> dictionary.  These synonyms can be returned as a list or a vector that can then be passed to other qdap functions.
+
+<font size="5" color="orange">&diams;</font> **Synonyms Examples**<font size="5" color="orange">&diams;</font>
+
+
+```r
+synonyms(c("the", "cat", "teach"))
+```
+
+```
+## no match for the following:
+## 
+## the
+## ========================
+```
+
+```
+## $cat.def_1
+## [1] "feline"    "gib"       "grimalkin" "kitty"     "malkin"   
+## 
+## $cat.def_2
+## [1] "moggy"
+## 
+## $cat.def_3
+## [1] "mouser" "puss"  
+## 
+## $cat.def_4
+## [1] "pussy"
+## 
+## $cat.def_5
+## [1] "tabby"
+## 
+## $teach.def_1
+##  [1] "advise"          "coach"           "demonstrate"    
+##  [4] "direct"          "discipline"      "drill"          
+##  [7] "edify"           "educate"         "enlighten"      
+## [10] "give lessons in" "guide"           "impart"         
+## [13] "implant"         "inculcate"       "inform"         
+## [16] "instil"          "instruct"        "school"         
+## [19] "show"            "train"           "tutor"
+```
+
+```r
+syn(c("the", "cat", "teach"), return.list = FALSE)
+```
+
+```
+## no match for the following:
+## 
+## the
+## ========================
+```
+
+```
+##  [1] "feline"          "gib"             "grimalkin"      
+##  [4] "kitty"           "malkin"          "moggy"          
+##  [7] "mouser"          "puss"            "pussy"          
+## [10] "tabby"           "advise"          "coach"          
+## [13] "demonstrate"     "direct"          "discipline"     
+## [16] "drill"           "edify"           "educate"        
+## [19] "enlighten"       "give lessons in" "guide"          
+## [22] "impart"          "implant"         "inculcate"      
+## [25] "inform"          "instil"          "instruct"       
+## [28] "school"          "show"            "train"          
+## [31] "tutor"
+```
+
+```r
+syn(c("the", "cat", "teach"), multiwords = FALSE)
+```
+
+```
+## no match for the following:
+## 
+## the
+## ========================
+```
+
+```
+## $cat.def_1
+## [1] "feline"    "gib"       "grimalkin" "kitty"     "malkin"   
+## 
+## $cat.def_2
+## [1] "moggy"
+## 
+## $cat.def_3
+## [1] "mouser" "puss"  
+## 
+## $cat.def_4
+## [1] "pussy"
+## 
+## $cat.def_5
+## [1] "tabby"
+## 
+## $teach.def_1
+##  [1] "advise"      "coach"       "demonstrate" "direct"      "discipline" 
+##  [6] "drill"       "edify"       "educate"     "enlighten"   "guide"      
+## [11] "impart"      "implant"     "inculcate"   "inform"      "instil"     
+## [16] "instruct"    "school"      "show"        "train"       "tutor"
+```
+
+
+<h4 id="assoc">Find Associated Words</h4>
+
+<font size="5" color="orange">&diams;</font> **Word Association Examples**<font size="5" color="orange">&diams;</font>
+
+
+```r
+ms <- c(" I ", "you")
+et <- c(" it", " tell", "tru")
+word_associate(DATA2$state, DATA2$person, match.string = ms,
+    wordcloud = TRUE,  proportional = TRUE,
+    network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,
+    cloud.legend =c("A", "B", "C"),
+    title.color = "blue", cloud.colors = c("red", "purple", "gray70"))
+```
+
+![plot of chunk unnamed-chunk-54](figure/unnamed-chunk-541.png) ![plot of chunk unnamed-chunk-54](figure/unnamed-chunk-542.png) ![plot of chunk unnamed-chunk-54](figure/unnamed-chunk-543.png) ![plot of chunk unnamed-chunk-54](figure/unnamed-chunk-544.png) ![plot of chunk unnamed-chunk-54](figure/unnamed-chunk-545.png) ![plot of chunk unnamed-chunk-54](figure/unnamed-chunk-546.png) 
+
+```
+##    row group unit text                             
+## 1    4   sam    4 You liar, it stinks!             
+## 2    5  greg    5 I am telling the truth!          
+## 3    8   sam    8 I distrust you.                  
+## 4    9 sally    9 What are you talking about?      
+## 5   11  greg   11 Im hungry. Lets eat. You already?
+## 6   12   sam   12 I distrust you.                  
+## 7   15  greg   15 I am telling the truth!          
+## 8   18  greg   18 Im hungry. Lets eat. You already?
+## 9   19 sally   19 What are you talking about?      
+## 10  20   sam   20 You liar, it stinks!             
+## 11  21  greg   21 I am telling the truth!          
+## 12  22   sam   22 You liar, it stinks!             
+## 13  24  greg   24 Im hungry. Lets eat. You already?
+## 14  25  greg   25 I am telling the truth!          
+## 15  30   sam   30 I distrust you.                  
+## 16  31  greg   31 Im hungry. Lets eat. You already?
+## 17  33   sam   33 I distrust you.                  
+## 18  36   sam   36 You liar, it stinks!             
+## 19  40  greg   40 I am telling the truth!          
+## 20  41   sam   41 You liar, it stinks!             
+## 21  42  greg   42 I am telling the truth!          
+## 22  44   sam   44 You liar, it stinks!             
+## 23  47   sam   47 I distrust you.                  
+## 24  49   sam   49 You liar, it stinks!             
+## 25  52 sally   52 What are you talking about?      
+## 26  53 sally   53 What are you talking about?      
+## 27  54  greg   54 I am telling the truth!          
+## 28  55   sam   55 I distrust you.                  
+## 29  56  greg   56 Im hungry. Lets eat. You already?
+## 30  57  greg   57 I am telling the truth!          
+## 31  58  greg   58 I am telling the truth!          
+## 32  59  greg   59 Im hungry. Lets eat. You already?
+## 33  62   sam   62 You liar, it stinks!             
+## 34  63 sally   63 What are you talking about?      
+## 35  65   sam   65 I distrust you.                  
+## 36  67 sally   67 What are you talking about?      
+## 37  68   sam   68 I distrust you.                  
+## 
+## Match Terms
+## ===========
+## 
+## List 1:
+## i, you
+```
+
+
+<h4 id="diffs">Differences In Word Use Between Groups</h4>
+
+<font size="5" color="orange">&diams;</font> **Word Difference Examples**<font size="5" color="orange">&diams;</font>
+
+
+```r
+out <- with(DATA, word_diff_list(text.var = state,
+    grouping.var = list(sex, adult)))
+
+ltruncdf(unlist(out, recursive = FALSE), n=4)
+```
+
+```
+## $f.0_vs_f.1.unique_to_f.0
+##    word freq       prop
+## 1 about    1        0.1
+## 2   are    1       0.25
+## 3    be    1        0.1
+## 4   can    1 0.16666666
+## 
+## $f.0_vs_f.1.unique_to_f.1
+##    word freq       prop
+## 1  good    1 0.03030303
+## 2  move    1        0.1
+## 3    on    1       0.25
+## 4 shall    1        0.1
+## 
+## $f.0_vs_m.0.unique_to_f.0
+##    word freq       prop
+## 1 about    1        0.1
+## 2   are    1       0.25
+## 3    be    1        0.1
+## 4   can    1 0.16666666
+## 
+## $f.0_vs_m.0.unique_to_m.0
+##   word freq       prop
+## 1  fun    2 0.06060606
+## 2    i    2 0.06060606
+## 3   is    2        0.2
+## 4 it's    2 0.06060606
+## 
+## $f.1_vs_m.0.unique_to_f.1
+##    word freq       prop
+## 1  good    1 0.03030303
+## 2  move    1        0.1
+## 3    on    1       0.25
+## 4 shall    1        0.1
+## 
+## $f.1_vs_m.0.unique_to_m.0
+##   word freq       prop
+## 1  you    3 0.09090909
+## 2  fun    2 0.06060606
+## 3    i    2 0.06060606
+## 4   is    2        0.2
+## 
+## $f.0_vs_m.1.unique_to_f.0
+##    word freq       prop
+## 1 about    1        0.1
+## 2   are    1       0.25
+## 3    be    1        0.1
+## 4   can    1 0.16666666
+## 
+## $f.0_vs_m.1.unique_to_m.1
+##     word freq prop
+## 1     do    1  0.1
+## 2 should    1 0.25
+## 
+## $f.1_vs_m.1.unique_to_f.1
+##    word freq       prop
+## 1  good    1 0.03030303
+## 2  move    1        0.1
+## 3    on    1       0.25
+## 4 shall    1        0.1
+## 
+## $f.1_vs_m.1.unique_to_m.1
+##     word freq       prop
+## 1     do    1        0.1
+## 2 should    1       0.25
+## 3   what    1 0.03030303
+## 
+## $m.0_vs_m.1.unique_to_m.0
+##   word freq       prop
+## 1  you    3 0.09090909
+## 2  fun    2 0.06060606
+## 3    i    2 0.06060606
+## 4   is    2        0.2
+## 
+## $m.0_vs_m.1.unique_to_m.1
+##     word freq       prop
+## 1     do    1        0.1
+## 2 should    1       0.25
+## 3     we    1 0.16666666
+## 4   what    1 0.03030303
+```
+
+
+<h4 id="word_list">Raw Word Lists/Frequency Counts</h4>
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_list.html" target="_blank"><code>word_list</code></a> Examples**<font size="5" color="orange">&diams;</font>
+
+
+```r
+with(DATA, word_list(state, person))
+```
+
+```
+## $greg
+##       WORD FREQ
+## 1     it's    2
+## 2       no    2
+## 3  already    1
+## 4       am    1
+## 5     dumb    1
+## 6      eat    1
+## 7   hungry    1
+## 8        I    1
+## 9      I'm    1
+## 10      is    1
+## 11   let's    1
+## 12     not    1
+## 13 telling    1
+## 14     the    1
+## 15   there    1
+## 16   truth    1
+## 17     way    1
+## 18     you    1
+## 
+## $researcher
 ##    WORD FREQ
-## 1  and   666
-## 2  the   656
-## 3  i     573
-## 4  to    517
-## 5  a     445
-## 6  of    378
-## 7  my    358
-## 8  is    344
-## 9  that  344
-## 10 in    312
+## 1  good    1
+## 2  move    1
+## 3    on    1
+## 4 shall    1
+## 5  then    1
+## 6    we    1
+## 
+## $sally
+##       WORD FREQ
+## 1    about    1
+## 2      are    1
+## 3       be    1
+## 4      can    1
+## 5  certain    1
+## 6      how    1
+## 7  talking    1
+## 8       we    1
+## 9     what    1
+## 10     you    1
+## 
+## $sam
+##        WORD FREQ
+## 1       fun    2
+## 2       you    2
+## 3  computer    1
+## 4  distrust    1
+## 5         I    1
+## 6        is    1
+## 7        it    1
+## 8      liar    1
+## 9       not    1
+## 10   stinks    1
+## 11      too    1
+## 
+## $teacher
+##     WORD FREQ
+## 1     do    1
+## 2 should    1
+## 3     we    1
+## 4   what    1
 ```
 
+```r
+with(DATA, word_list(state, person, stopwords = Top25Words))
+```
 
+```
+## $greg
+##       WORD FREQ
+## 1     it's    2
+## 2       no    2
+## 3  already    1
+## 4       am    1
+## 5     dumb    1
+## 6      eat    1
+## 7   hungry    1
+## 8      I'm    1
+## 9    let's    1
+## 10     not    1
+## 11 telling    1
+## 12   there    1
+## 13   truth    1
+## 14     way    1
+## 
+## $researcher
+##    WORD FREQ
+## 1  good    1
+## 2  move    1
+## 3 shall    1
+## 4  then    1
+## 5    we    1
+## 
+## $sally
+##      WORD FREQ
+## 1   about    1
+## 2     can    1
+## 3 certain    1
+## 4     how    1
+## 5 talking    1
+## 6      we    1
+## 7    what    1
+## 
+## $sam
+##       WORD FREQ
+## 1      fun    2
+## 2 computer    1
+## 3 distrust    1
+## 4     liar    1
+## 5      not    1
+## 6   stinks    1
+## 7      too    1
+## 
+## $teacher
+##     WORD FREQ
+## 1     do    1
+## 2 should    1
+## 3     we    1
+## 4   what    1
+```
 
+```r
+with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))
+```
+
+```
+## $greg
+##       WORD FREQ
+## 1     it's    2
+## 2       no    2
+## 3  already    1
+## 4       am    1
+## 5     dumb    1
+## 6      eat    1
+## 7   hungry    1
+## 8        I    1
+## 9      I'm    1
+## 10      is    1
+## 11   let's    1
+## 12     not    1
+## 13 telling    1
+## 14     the    1
+## 15   there    1
+## 16   truth    1
+## 17     way    1
+## 18     you    1
+## 
+## $researcher
+##    WORD FREQ
+## 1  good    1
+## 2  move    1
+## 3    on    1
+## 4 shall    1
+## 5  then    1
+## 6    We    1
+## 
+## $sally
+##       WORD FREQ
+## 1    about    1
+## 2      are    1
+## 3       be    1
+## 4      can    1
+## 5  certain    1
+## 6      how    1
+## 7  talking    1
+## 8       We    1
+## 9     what    1
+## 10     you    1
+## 
+## $sam
+##        WORD FREQ
+## 1       fun    2
+## 2       you    2
+## 3  computer    1
+## 4  distrust    1
+## 5         I    1
+## 6        is    1
+## 7        it    1
+## 8      liar    1
+## 9       not    1
+## 10   stinks    1
+## 11      too    1
+## 
+## $teacher
+##     WORD FREQ
+## 1     Do    1
+## 2 should    1
+## 3     We    1
+## 4   what    1
+```
+
+   
 <h3 id="coding">Qualitative Coding System</h3>
 
 <div class="funs">

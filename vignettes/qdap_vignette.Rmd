@@ -534,9 +534,14 @@ The following functions will be utilized in this section (click to view more):<b
     <input type="submit" value="sec2hms"> - `r HR("#time", "Time Conversion")` 
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/lookup.html" target="_blank">
-    <input type="submit" value="lookup"> - `r HR("#hash", "Hash Table/Dictionary Lookup")`
+<form class="form_left" action="http://trinker.github.io/qdap_dev/lookup.html" target="_blank">
+    <input type="submit" value="lookup"><input type="submit" value="%l%"> 
 </form>
+
+<form ction="http://trinker.github.io/qdap_dev/hash.html" target="_blank">
+    <input type="submit" value="hash"><input type="submit" value="hash_look"><input type="submit" value="%ha%"> - `r HR("#hash", "Hash Table/Dictionary Lookup")`
+</form>
+
 
 <form action="http://trinker.github.io/qdap_dev/qcv.html" target="_blank">
     <input type="submit" value="qcv"> - `r HR("#qcv", "Quick Character Vector")`
@@ -564,9 +569,9 @@ qcv(terms = "mpg cyl  disp  hp drat    wt  qsec vs am gear carb")
 
 <h4 id="hash">Dictionary/Lookup</h4>  
 
-Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The `r FUN("lookup")` function provides a fast enviroment lookup for this type of usage.
+Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The `r FUN("lookup")` & `r HR2("%l%")` functions provide a fast enviroment lookup for single usage. The `r FUN("hash")` & `r HR2("http://trinker.github.io/qdap_dev/hash.html", "hash_lookup")`/`r HR2("http://trinker.github.io/qdap_dev/hash.html", "%ha%")` functions provide a fast enviroment lookup for multiple uses of the same hash table.
 
-`r FT(orange, 5, text="&diams;")` **Dictionary/Look Up Examples** `r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **`r FUN("lookup")`**- *Dictionary/Look Up Examples* `r FT(orange, 5, text="&diams;")`
 
 ```{r}
 lookup(1:5, data.frame(1:4, 11:14))
@@ -593,7 +598,8 @@ codes <- list(A=c(1, 2, 4),
     C = 7,
     D = c(6, 8:10))
 
-lookup(1:10, codes)
+lookup(1:10, codes) #or
+1:10 %l% codes
 ```
 
 ```{r}
@@ -606,9 +612,24 @@ lookup(mtcars$carb, sort(unique(mtcars$carb)),
     seq(10, 60, by=10))
 ```
 
+`r FT(orange, 5, text="&diams;")` **`r FUN("hash")`/`r FUN("hash_look")`**- *Dictionary/Look Up Examples* `r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Create a fake data set of hash values
+(DF <- aggregate(mpg~as.character(carb), mtcars, mean))
+## Use `hash` to create a lookup environment
+hashTab <- hash(DF)  
+## Create a vector to lookup
+x <- sample(DF[, 1], 20, TRUE)
+## Lookup x in the hash with `hash_look` or `%ha%`
+hash_look(x, hashTab)
+x %ha% hashTab
+```
+
 <h4 id="time">Time Conversion</h4>  
 
 Researchers dealing with transcripts may have the need to convert between traditional Hours:Minutes:Seconds format and seconds.  The `r FUN("hms2sec")` and `r FUN("sec2hms")` functions offer this type of time conversion.
+
 
 `r FT(orange, 5, text="&diams;")` **Time Conversion Examples** `r FT(orange, 5, text="&diams;")`
 
@@ -1271,39 +1292,39 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/common.html" target="_blank">
-    <input type="submit" value="common"> - Find Common Words Between Groups
+    <input type="submit" value="common"> - `r HR("#common", "Find Common Words Between Groups")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/exclude.html" target="_blank">
-    <input type="submit" value="exclude"> - Exclude Elements From a Vector
+    <input type="submit" value="exclude"> - `r HR("#exclude", "Exclude Elements From a Vector")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/ngrams.html" target="_blank">
-    <input type="submit" value="ngrams"> - Generate ngrams
+    <input type="submit" value="ngrams"> - `r HR("#ngram", "Generate ngrams")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/stopwords.html" target="_blank">
-    <input type="submit" value="stopwords"> - Remove Stopwords
+    <input type="submit" value="stopwords"> - `r HR("#stopwords", "Remove Stopwords")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/strip.html" target="_blank">
-    <input type="submit" value="strip"> - Strip Text
+    <input type="submit" value="strip"> - `r HR("#strip", "Strip Text of Unwanted Characters/Capitalization")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank">
-    <input type="submit" value="synonyms"><input type="submit" value="syn"> - Search For Synonyms
+    <input type="submit" value="synonyms"><input type="submit" value="syn"> - `r HR("#syn", "Search For Synonyms")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_associate.html" target="_blank">
-    <input type="submit" value="word_associate"> - Find Associated Words
+    <input type="submit" value="word_associate"> - `r HR("#assoc", "Find Associated Words")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_diff_list.html" target="_blank">
-    <input type="submit" value="word_diff_list"> - Differences In Word Use Between Groups
+    <input type="submit" value="word_diff_list"> - `r HR("#diffs", "Differences In Word Use Between Groups")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_list.html" target="_blank">
-    <input type="submit" value="word_list"> - Raw Word Lists/Frequency Counts
+    <input type="submit" value="word_list"> - `r HR("#word_list", "Raw Word Lists/Frequency Counts")`
 </form>
 </div>
 
@@ -1325,52 +1346,195 @@ x2 <- all_words(raj$dialogue, alphabetical = FALSE)
 head(x2, 10)
 ```
 
-<h4 id="bag">Bag of Words</h4>
+<h4 id="bag">Word Splitting (Bag of Words)</h4>
 
-The qdap package utilizes the following functions to turn text into a bag of words (order is perserved):
+The qdap package utilizes the following functions to turn text into a bag of words (word order is perserved):
 
 
 <TABLE>
-    <TR> <TD align="right"><font face="courier"><b>bag.o.words</b></font></TD> <TD align="right">Reduces a text column to a <b>single</b> vector bag of words.</TD> </TR>
-    <TR> <TD align="right"><font face="courier"><b> breaker</b></font></TD> <TD align="right"> Reduces a text column to a <b>single</b> vector bag of words and qdap recognized end marks.</TD> </TR>
-    <TR> <TD align="right"><font face="courier"><b> word.split</b></font></TD> <TD align="right"> Reduces a text column to a <b>list</b> of vectors of bag of words and qdap recognized end marks (i.e., ".", "!", "?", "*", "-").</TD> </TR>
+    <TR> <TD align="right"><font face="courier"><b>`r HR("http://trinker.github.io/qdap_dev/bag.o.words.html", "bag.o.words")` </b></font></TD> <TD align="right">Reduces a text column to a <b>single</b> vector bag of words.</TD> </TR>
+    <TR> <TD align="right"><font face="courier"><b>`r HR("http://trinker.github.io/qdap_dev/bag.o.words.html", "breaker")`</b></font></TD> <TD align="right"> Reduces a text column to a <b>single</b> vector bag of words and qdap recognized end marks.</TD> </TR>
+    <TR> <TD align="right"><font face="courier"><b>`r HR("http://trinker.github.io/qdap_dev/bag.o.words.html", "word.split")`</b></font></TD> <TD align="right"> Reduces a text column to a <b>list</b> of vectors of bag of words and qdap recognized end marks (i.e., ".", "!", "?", "*", "-").</TD> </TR>
 </TABLE>
 
+Bag of words can be useful for any number of reasons within the scope of analyzing discourse.  Many other qdap functions employ or mention these three functions as seen in the following counts for the three word splitting functions functions.
 
-```{r, eval=FALSE}
-library(qdap)
-dat<- qdap:::list2df(list(x = x, y=y))
-dat[, "stemmed"] <- stemmer(dat[, 1])
-x <- unique(bag.o.words(dat[, 3]))
-SW <- x[nchar(x) < 3]
-wfdf(dat[, 3], dat[,2], stopwords = SW, margins = TRUE)
+```{r, eval=FALSE, echo=FALSE, include = FALSE}
+library(acc.roxygen2)
+x <- search_repo(bag.o.words, breaker, word.split)
+print(xtable(x), type="html")
 ```
-FIND ME
-`r FT(orange, 5, text="&diams;")` ** **`r FT(orange, 5, text="&diams;")`
 
+<TABLE border=1>
+ <TR> <TD align="right">  </TD> <TD><b>Function</b> </TD> <TD> <b>bag.o.words</b> </TD> <TD> <b>breaker</b></TD> <TD> <b>word.split</b></TD> </TR>
+ 
+ 
+  <TR> <TD align="right"> 1 </TD> <TD> all_words.R                   </TD> <TD> 1 </TD> <TD> - </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 2 </TD> <TD> automated_readability_index.R </TD> <TD> - </TD> <TD> - </TD> <TD> 2 </TD> </TR>
+  <TR> <TD align="right"> 3 </TD> <TD> bag.o.words.R                 </TD> <TD> 10 </TD> <TD> 6 </TD> <TD> 3 </TD> </TR>
+  <TR> <TD align="right"> 4 </TD> <TD> capitalizer.R                 </TD> <TD> 3 </TD> <TD> 1 </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 5 </TD> <TD> imperative.R                  </TD> <TD> - </TD> <TD> 3 </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 6 </TD> <TD> ngrams.R                      </TD> <TD> 1 </TD> <TD> - </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 7 </TD> <TD> polarity.R                    </TD> <TD> 2 </TD> <TD> - </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 8 </TD> <TD> stopwords.R                   </TD> <TD> 1 </TD> <TD> 3 </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 9 </TD> <TD> textLISTER.R                  </TD> <TD> - </TD> <TD> - </TD> <TD> 2 </TD> </TR>
+  <TR> <TD align="right"> 10 </TD> <TD> trans.cloud.R                 </TD> <TD> 1 </TD> <TD> 1 </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 11 </TD> <TD> wfm.R                         </TD> <TD> 1 </TD> <TD> - </TD> <TD> - </TD> </TR>
+   </TABLE>
+<br>
 
-<h4 id=""></h4>
-The `r FUN("")` 
-
-breaker
-word.split
-bag.o.words
-
-`r FT(orange, 5, text="&diams;")` ** **`r FT(orange, 5, text="&diams;")`
-
+`r FT(orange, 5, text="&diams;")` **Word Splitting Examples**`r FT(orange, 5, text="&diams;")`
 
 ```{r}
-## Words starting with `re`
-x1 <- all_words(raj$dialogue, begins.with="re")
-head(x1, 10)
-## Words containing with `conc`
-all_words(raj$dialogue, contains = "conc")
-## All words ordered by frequency
-x2 <- all_words(raj$dialogue, alphabetical = FALSE)
-head(x2, 10)
+bag.o.words("I'm going home!")
+bag.o.words("I'm going home!", apostrophe.remove = TRUE)
+bag.o.words(DATA$state)
+by(DATA$state, DATA$person, bag.o.words)
+lapply(DATA$state,  bag.o.words)
+breaker(DATA$state)
+by(DATA$state, DATA$person, breaker)
+lapply(DATA$state,  breaker)
+word.split(c(NA, DATA$state))
 ```
 
 
+<h4 id="common">Find Common Words Between Groups</h4>
+
+The `r FUN("common")` function finds items that are common between n vectors 
+(i.e., subjects or grouping variables).  This is useful for determining common language choices shared across participants in a conversation.
+
+`r FT(orange, 5, text="&diams;")` **Words in Common Examples**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Create vectors of words
+a <- c("a", "cat", "dog", "the", "the")
+b <- c("corn", "a", "chicken", "the")
+d <- c("house", "feed", "a", "the", "chicken")
+
+## Supply individual vectors
+common(a, b, d, overlap=2)
+common(a, b, d, overlap=3)
+## Supply a lsit of vectors
+common(list(a, b, d))
+## Using to find common words between subjects
+common(word_list(DATA$state, DATA$person)$cwl, overlap = 2)
+```
+
+
+<h4 id="exclude">Exclude Elements From a Vector</h4>
+
+It is often useful and more efficient to start with a preset vector of words and eliminate or `r FUN("exclude")` the words you do not wish to include.  Examples could range from excluding an individual(s) from a column of participant names or excluding a few select word(s) from a pre defined qdap word list.  THis is particlarly useful for passsing terms or stopwords to word counting functions like `r FUN("termco")` or `r FUN("trans.cloud")`.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("exclude")` Examples**`r FT(orange, 5, text="&diams;")`
+```{r}
+exclude(1:10, 3, 4)
+exclude(Top25Words, qcv(the, of, and))
+exclude(Top25Words, "the", "of", "an")
+#Using with `term.match` and `termco`
+MTCH.LST <- exclude(term.match(DATA$state, qcv(th, i)), qcv(truth, stinks))
+termco(DATA$state, DATA$person, MTCH.LST)
+```
+
+<h4 id="ngramn">Generate ngrams</h4>
+
+Utilizing `r HR2("http://en.wikipedia.org/wiki/N-gram", "ngrams")` can be useful for gaining a sense of what terms are used in conjunction with other terms.  This is particularly useful in the analysis of dialogue when the combination of a particular vocabulary is meaningful.  The `r FUN("ngrams")` function provides a list of ngram related output that can be utilize in various analyses.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("ngrams")` Example** *note that the out put is only partial*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+out <- ngrams(DATA$state, DATA$person, 2)
+lapply(out[["all_n"]], function(x) sapply(x, paste, collapse = " "))
+```
+
+<h4 id="stopwords">Remove Stopwords</h4>
+
+In analyzing discourse it may be helpful to remove certain words from the analysis as the words may not be meaningful or may overshadow the impact of other words.  The `r FUN("stopwords")` function can be utilized to remove `r HR2("http://nlp.stanford.edu/IR-book/html/htmledition/dropping-common-terms-stop-words-1.html", "stopwords")` from the dialogue before passing to further analysis.  It should be noted that many functions have a stopwords argument that allows for the remval of the stopwords within the function environment rather than altering the text in the primary discourse dataframe.  Careful researcher consideration must be given as to the functional impact of removing words from an analysis.
+
+`r FT(orange, 5, text="&diams;")` **Stopword Removal Examples**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+## The data
+DATA$state
+stopwords(DATA$state, Top200Words)
+stopwords(DATA$state, Top200Words, strip = TRUE)
+stopwords(DATA$state, Top200Words, separate = FALSE)
+stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
+```
+
+<h4 id="strip">Strip Text of Unwanted Characters/Capitalization</h4>
+
+It is often useful to remove capitalization and puntuation from the dialogue in order to standardize the text.  R is case sensitive.  By removing capital letters and extra punctuation with the `r FUN("strip")` function the text is more comparable.  In the following output we can see, through the `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html", "==")` comparison operator and `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html", "outer")` function that the use of `r FUN("strip")` makes the differnet forms of `r FT(blue, text="Dan")` comparable.
+
+```{r}
+x <- c("Dan", "dan", "dan.", "DAN")
+y <- outer(x, x, "==")
+dimnames(y) <- list(x, x); y
+x <- strip(c("Dan", "dan", "dan.", "DAN"))
+y <- outer(x, x, "==")
+dimnames(y) <- list(x, x); y
+```
+
+As seen in the examples below, `r FUN("strip")` comes with multiple arguments to adjust the flexiblity of the degree of text standardization.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("strip")` Examples**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Demonstrating the standardization of 
+## The data
+DATA$state
+strip(DATA$state)
+strip(DATA$state, apostrophe.remove=FALSE)
+strip(DATA$state, char.keep = c("?", "."))
+```
+
+<h4 id="syn">Search For Synonyms</h4>
+
+It is useful in discourse analysis to analyze vocabularly use.  This may mean searching for words similar to your initial word list.  The `r FUN("synonyms")` (aka `r FUN("syn")`) function generates synonyms from the `r HR2("http://trinker.github.io/qdapDictionaries/", "qdapDictionaries'")` `r HR2("http://trinker.github.io/qdapDictionaries/SYNONYM.html", "SYNONYM")` dictionary.  These synonyms can be returned as a list or a vector that can then be passed to other qdap functions.
+
+`r FT(orange, 5, text="&diams;")` **Synonyms Examples**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+synonyms(c("the", "cat", "teach"))
+syn(c("the", "cat", "teach"), return.list = FALSE)
+syn(c("the", "cat", "teach"), multiwords = FALSE)
+```
+
+<h4 id="assoc">Find Associated Words</h4>
+
+`r FT(orange, 5, text="&diams;")` **Word Association Examples**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+ms <- c(" I ", "you")
+et <- c(" it", " tell", "tru")
+word_associate(DATA2$state, DATA2$person, match.string = ms,
+    wordcloud = TRUE,  proportional = TRUE,
+    network.plot = TRUE,  nw.label.proportional = TRUE, extra.terms = et,
+    cloud.legend =c("A", "B", "C"),
+    title.color = "blue", cloud.colors = c("red", "purple", "gray70"))
+
+```
+
+<h4 id="diffs">Differences In Word Use Between Groups</h4>
+
+`r FT(orange, 5, text="&diams;")` **Word Difference Examples**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+out <- with(DATA, word_diff_list(text.var = state,
+    grouping.var = list(sex, adult)))
+
+ltruncdf(unlist(out, recursive = FALSE), n=4)
+```
+
+<h4 id="word_list">Raw Word Lists/Frequency Counts</h4>
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("word_list")` Examples**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+with(DATA, word_list(state, person))
+with(DATA, word_list(state, person, stopwords = Top25Words))
+with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))
+```
+   
 <h3 id="coding">Qualitative Coding System</h3>
 
 <div class="funs">
