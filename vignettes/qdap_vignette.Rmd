@@ -1967,7 +1967,7 @@ The following dictionaries/word lists are utilized by qdap (click to view more)
 
 <h3 id="install">Installation Issues</h3>
 
-<h4>Java Issues</h3>
+<h4 id="java">Java Issues</h3>
   
 <p>If there is a discrepancy between the <a href="https://dl.dropbox.com/u/61803503/rjava_warning.txt">R and Java architectures</a> you will have to <a href="http://www.java.com/en/download/manual.jsp">download</a> the appropriate version of Java compatible with the version of R you're using.    
 

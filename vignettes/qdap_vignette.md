@@ -1101,8 +1101,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 25.34 15.00 16.30 16.30 16.30 16.30 15.00 25.34 15.79 19.70 19.70
-## [12] 25.34 15.79 16.30 16.30 25.34 15.79 25.34 16.30 15.79
+##  [1] 25.34 15.00 15.00 25.34 15.00 25.34 22.40 22.40 22.40 25.34 19.70
+## [12] 15.00 19.70 16.30 15.79 15.00 25.34 19.70 19.70 15.00
 ```
 
 ```r
@@ -1110,8 +1110,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 25.34 15.00 16.30 16.30 16.30 16.30 15.00 25.34 15.79 19.70 19.70
-## [12] 25.34 15.79 16.30 16.30 25.34 15.79 25.34 16.30 15.79
+##  [1] 25.34 15.00 15.00 25.34 15.00 25.34 22.40 22.40 22.40 25.34 19.70
+## [12] 15.00 19.70 16.30 15.79 15.00 25.34 19.70 19.70 15.00
 ```
 
 
@@ -3066,18 +3066,18 @@ head(dat2, 12)
 
 ```
 ##    act fam.aff_sex   n start end
-## 1    1       cap.m 327     0 327
-## 2    1      mont.m   8   327 335
-## 3    1       cap.m   6   335 341
-## 4    1      mont.m   8   341 349
-## 5    1       cap.m  32   349 381
-## 6    1      mont.m   4   381 385
-## 7    1       cap.m  16   385 401
-## 8    1      mont.m   2   401 403
-## 9    1       cap.m  14   403 417
-## 10   1      mont.m   2   417 419
-## 11   1       cap.m  10   419 429
-## 12   1      mont.m  12   429 441
+## 1    1       cap_m 327     0 327
+## 2    1      mont_m   8   327 335
+## 3    1       cap_m   6   335 341
+## 4    1      mont_m   8   341 349
+## 5    1       cap_m  32   349 381
+## 6    1      mont_m   4   381 385
+## 7    1       cap_m  16   385 401
+## 8    1      mont_m   2   401 403
+## 9    1       cap_m  14   403 417
+## 10   1      mont_m   2   417 419
+## 11   1       cap_m  10   419 429
+## 12   1      mont_m  12   429 441
 ```
 
 ```r
@@ -3179,7 +3179,7 @@ plot(g, layout=layout.auto(g))
 
 <h3 id="word">Extract Words</h3>
 
-This section overviews functions that can extract words and word lists from dialogue text.  The subsections describing function use are in alphabetical order as ther eis no set chronology for use.
+This section overviews functions that can extract words and word lists from dialogue text.  The subsections describing function use are in alphabetical order as there is no set chronology for use.
 
 <div class="funs">
 The following functions will be utilized in this section (click to view more):    
@@ -4816,7 +4816,7 @@ The following dictionaries/word lists are utilized by qdap (click to view more)
 
 <h3 id="install">Installation Issues</h3>
 
-<h4>Java Issues</h3>
+<h4 id="java">Java Issues</h3>
   
 <p>If there is a discrepancy between the <a href="https://dl.dropbox.com/u/61803503/rjava_warning.txt">R and Java architectures</a> you will have to <a href="http://www.java.com/en/download/manual.jsp">download</a> the appropriate version of Java compatible with the version of R you're using.    
 
