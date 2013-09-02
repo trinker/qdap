@@ -45,9 +45,6 @@
 #' issue of Foundations of Science, 7 (3), 293-340.
 #' @keywords formality, explicit, parts-of-speech, pos
 #' @export
-#' @import RColorBrewer
-#' @importFrom gridExtra grid.arrange
-#' @importFrom scales alpha
 #' @examples
 #' \dontrun{
 #' with(DATA, formality(state, person))

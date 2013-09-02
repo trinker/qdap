@@ -9,13 +9,12 @@ VignetteBuilder: knitr
 Depends:
     R (>= 3.0.0),
     ggplot2 (>= 0.9.3.1),
-    grid,
     qdapDictionaries,
-    RColorBrewer,
-    reports (>= 0.2.0)
+    RColorBrewer
 Imports:
     chron,
     gdata,
+    grid,
     gridExtra,
     igraph,
     RCurl,
@@ -23,6 +22,7 @@ Imports:
     NLP,
     parallel,
     plotrix,
+    reports (>= 0.2.0),
     reshape2,
     scales,
     tm,

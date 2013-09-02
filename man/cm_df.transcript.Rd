@@ -58,7 +58,7 @@ DATA <- qdap::DATA
 ##  with(mraja1spl, cm_df.transcript(dialogue, list(person)))
 ##  with(mraja1spl, cm_df.transcript(dialogue, list(sex, fam.aff, died)))
 ##  with(mraja1spl, cm_df.transcript(dialogue, list(person), file="foo.doc"))
-##  delete("foo.doc")   #delete the file just created
+##  library(reports); delete("foo.doc")   #delete the file just created
 }
 }
 \author{

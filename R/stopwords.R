@@ -69,7 +69,7 @@ function (textString, stopwords = qdapDictionaries::Top25Words, unlist = FALSE,
         }
     }
     if (strip) {
-        textString <- qdap::strip(textString, char.keep = char.keep, 
+        textString <- strip(textString, char.keep = char.keep, 
             apostrophe.remove = apostrophe.remove, ...)
     }
     x <- lapply(textString, function(x) SW(x, Stopwords))

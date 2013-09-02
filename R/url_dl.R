@@ -22,7 +22,7 @@
 #' 
 #' docs <- qcv(pres.deb1.docx, pres.deb2.docx, pres.deb3.docx)
 #' dir() %in% docs
-#' delete(docs)    #remove the documents
+#' library(reports); delete(docs)    #remove the documents
 #' dir() %in% docs
 #' 
 #' ## Example 2 (quoted string urls)

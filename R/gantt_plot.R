@@ -27,6 +27,7 @@
 #' tool of management. New York, Ronald Press.
 #' @keywords Gantt
 #' @export
+#' @importFrom grid unit
 #' @examples
 #' \dontrun{
 #' with(rajSPLIT, gantt_plot(text.var = dialogue,

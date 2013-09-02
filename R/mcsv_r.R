@@ -48,7 +48,7 @@
 #' mcsv_r(file.path(a, nms), paste0("foo.dat", 1:2))
 #' foo.dat1; foo.dat2
 #' rm("foo.dat1", "foo.dat2")  # gone from .GlobalEnv
-#' delete("foo")
+#' library(reports); delete("foo")
 #' 
 #' ## mcsv_w EXAMPLES:
 #' (a <- mcsv_w(mtcars, CO2, dir="foo"))
@@ -97,6 +97,7 @@ function(files, a.names = NULL, l.name = NULL, list = TRUE, pos = 1,
 #' Silently returns the path of the directory.
 #' @rdname multicsv
 #' @export
+#' @importFrom reports folder
 mcsv_w <- 
 function(..., dir = NULL, open = FALSE, sep = ", ", dataframes = NULL, pos = 1,
     envir = as.environment(pos)){
@@ -151,4 +152,3 @@ function(..., dir = NULL, open = FALSE, sep = ", ", dataframes = NULL, pos = 1,
     message(paste("files written to:\n", y))
     invisible(y)
 }
-

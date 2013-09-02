@@ -25,7 +25,7 @@
 cm_range.temp(qcv(AA, BB, CC))
 with(DATA, cm_range.temp(qcv(AA, BB, CC), , state, list(person, adult)))
 ## cm_range.temp(qcv(AA, BB, CC), file = "foo.txt")
-## delete("foo.txt")
+## library(reports); delete("foo.txt")
 }
 }
 \references{

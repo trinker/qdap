@@ -17,7 +17,7 @@
 #' @examples
 #' \dontrun{
 #' ## cm_time.temp(qcv(AA, BB, CC), ":30", "7:40", file = "foo.txt")
-#' ## delete("foo.txt")
+#' ## library(reports); delete("foo.txt")
 #' cm_time.temp(qcv(AA, BB, CC), ":30", "7:40")
 #' 
 #' x <- list(
