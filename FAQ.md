@@ -8,7 +8,7 @@ This FAQ is compiled from the [issues](https://github.com/trinker/qdap/issues) a
   - If this still does not fix the problem please file an [issue](https://github.com/trinker/qdap/issues) report
 1. What is the best place to ask questions when the [package website](http://trinker.github.io/qdap/) or [vignette](https://dl.dropboxusercontent.com/u/61803503/packages/qdap_vignette.html) is not helpful?
   - Depending what you want to ask, you may use these tools:
-      - [StackOverflow](http://stackoverflow.com/questions/tagged/qdap)(Recommended): general questions (more experts and quicker answers there).
+      - [StackOverflow](http://stackoverflow.com/questions/tagged/qdap) (Recommended): general questions (more experts and quicker answers there).
       - [Github issues](https://github.com/trinker/qdap/issues): bug reports and feature requests.
       - Email me at <a href="mailto:tyler.rinker@gmail.com" target="_blank">tyler.rinker@gmail.com</a> - this is the least recommended way unless this is really private issue.
 1. How should I get started?
