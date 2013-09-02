@@ -18,6 +18,6 @@ This FAQ is compiled from the [issues](https://github.com/trinker/qdap/issues) a
 1. How can I submit a documentation fix or other minor change?
   - Navigate to the file within the [repo](https://github.com/trinker/qdap)
   - Click on the **edit** button
-  - Make the necessary changes.
+  - Make the necessary changes
   - Add a descriptive commit summary and click on **propose file change**
   - Submit the pull request
