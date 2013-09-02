@@ -14,7 +14,7 @@ This FAQ is compiled from the [issues](https://github.com/trinker/qdap/issues) a
 1. How should I get started?
   - Read the [vignette](https://dl.dropboxusercontent.com/u/61803503/packages/qdap_vignette.html) on the [GitHub homepage](https://github.com/trinker/qdap).
 1. Do you recommend an editor for working with R and qdap?
-  - HAnds down [RStudio](http://www.rstudio.com/ide/)
+  - Hands down [RStudio](http://www.rstudio.com/ide/)
 1. How can I submit a documentation fix or other minor change?
   - Navigate to the file within the [repo](https://github.com/trinker/qdap)
   - Click on the **edit** button
