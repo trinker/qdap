@@ -21,6 +21,10 @@ And constructed with the following guidelines:
 CHANGES IN qdap VERSION 1.0.0
 ----------------------------------------------------------------
 
+The word lists and dictionaries in `qdap` have been moved to `qdapDictionaries`. 
+This may break backward compatibility.  Thus this is a **major** release 
+(ver. 1.0.0).
+
 BUG FIXES
 
 * `qheat`'s  argument `by.column = FALSE` resulted in an error.  This behavior 
@@ -49,9 +53,12 @@ BUG FIXES
   traditional character properties (print class added).  `all_words` also picks
   up apostrophe.remove and ldots (for `strip`) arguments.
 
-* `gantt_plot` did not handle `fill.vars`, particlarly if the fill was nested 
-  withing the `grouping.vars`.  This behavior has been fixed with corresponding 
+* `gantt_plot` did not handle `fill.vars`, particularly if the fill was nested 
+  within the `grouping.vars`.  This behavior has been fixed with corresponding 
   examples added.
+
+* `url_dl` - Downloaded an empty file when not using a dropbox key.  This 
+  behavior has been fixed.
 
 NEW FEATURES
 
@@ -85,8 +92,8 @@ MINOR FEATURES
 
 * `hash_look` (and `%ha%`) a counterpart to `hash` added to allow quick access 
   to a hash table.  Intended for use within functions or multiple uses of the 
-  same hash table, whereas lookup is intended fo a single external (non 
-  function) use which is more conveinent though could be slower.
+  same hash table, whereas lookup is intended for a single external (non 
+  function) use which is more convenient though could be slower.
 
 * `polarity_frame` a function to make a hash environment lookup for use with the 
   `polarity` function.
@@ -106,15 +113,15 @@ CHANGES
   major release number has been upped to 1.  The following name changes have 
   occurred:
 
-      increase.amplification.words -> became -> amplification.words
+    - increase.amplification.words -> became -> amplification.words
 
-  The deamplification.words and env.pol wordlist and dictionary were added as 
-  well.
+    - The deamplification.words and env.pol wordlist and dictionary were added as 
+        well.
 
 * qdap gains an HTML package vignette to better explain the intended work flow 
   and function use for the package.
 
-* `polarity` utilizes a new, unbounded algorith based on weighting to determine 
+* `polarity` utilizes a new, unbounded algorithm based on weighting to determine 
   polarity.
 
 * `gantt_wrap` no longer accepts unquoted strings to the `plot.var` argument.
@@ -153,14 +160,14 @@ NEW FEATURES
 
 MINOR FEATURES
 
-* `mgsub` now gets a `trim` argument that optionally reomves trailing leading 
+* `mgsub` now gets a `trim` argument that optionally removes trailing leading 
   white spaces.
 
 * `lookup` now takes a list of named vectors for the key.match argument.
 
 CHANGES
 
-* `new_project` directory can now be transfered without breaking paths (i.e.,
+* `new_project` directory can now be transferred without breaking paths (i.e.,
   `file.path(getwd(), "DIR/file.ext")` is used rather than the full file path).
 
 
@@ -177,8 +184,8 @@ BUG FIXES
   Fdez-Moya)
 
 * `termco` would produce an error if single length named vectors were passed to 
-  match.list and no multilength vectors were supplied.  Also an error was thrown 
-  if an unnamed multilength vector was passed to match.list.  This behavior has 
+  match.list and no multi-length vectors were supplied.  Also an error was thrown 
+  if an unnamed multi-length vector was passed to match.list.  This behavior has 
   been fixed.
 
 NEW FEATURES
@@ -231,12 +238,12 @@ NEW FEATURES
 * `new_project`: A project template generating function designed to increase 
   efficiency and standardize work flow.  The project comes with a .Rproj file 
   for easy use with RStudio as well as a .Rprofile that makes loading and sourcing 
-  of packages, data and project functions.  This function uses the reprots package
+  of packages, data and project functions.  This function uses the reports package
   to generate an extensive reports folder.
 
 MINOR FEATURES
 
-* `stemmer`, `stem2df` and `stem.words` now explicitally have the argument 
+* `stemmer`, `stem2df` and `stem.words` now explicitly have the argument 
   char.keep set to "~~" to enable retaining special character formerly stripped 
   away.
 
@@ -258,7 +265,7 @@ CHANGES
 * `folder` and `delete` have been moved to the reports package which is imported 
   by qdap.  Previously `folder` would not generate a directory with the 
   time/date stamp if no directory name was given; this has been fixed, though 
-  the function now resides in the reprots package.
+  the function now resides in the reports package.
 
 CHANGES IN qdap VERSION 0.2.0
 ----------------------------------------------------------------
