@@ -152,10 +152,19 @@ News <- readLines("NEWS")
 library(qdap)
 News <- mgsub(
     c("<", ">", "&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;"), 
-    c("&lt;", "&gt;", "<b>&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</b>"), News)
+    c("&lt;", "&gt;", "<b>&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</b>"), 
+    News, trim = FALSE)
 cat(paste(News, collapse = "\n"), file = "NEWS.md")
 
-#==========================
+#==============================
+# Copy from Current R to R_dev
+#==============================
+cur <- "C:/R/R-3.0.1/library/qdap"
+dev <- "C:/R/R-devel/library"
+if (file.exists(file.path(dev, "qdap"))) {
+    unlink(file.path(dev, "qdap"), recursive = TRUE, force = FALSE)
+}
+file.copy(cur, dev, recursive = TRUE)
 
 
 
