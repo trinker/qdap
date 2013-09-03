@@ -31,9 +31,9 @@
 #'
 #' delete(qcv(qdap.pdf, R-intro.pdf))
 #' }
-url_dl <-
+url_dl <- 
 function(..., url = 61803503) {
-    if (!grepl("http|www\\.", url)) {
+    if (!is.null(url) && !grepl("http|www\\.", url)) {
         url <- tail(unlist(strsplit(as.character(url), "/", fixed = TRUE)), 
             1)
         url <- paste0("http://dl.dropboxusercontent.com/u/", 
@@ -42,7 +42,7 @@ function(..., url = 61803503) {
     mf <- match.call(expand.dots = FALSE)
     payload <- as.character(mf[[2]])
     FUN <- function(x, url) {
-        bin <- getBinaryURL(paste0(url, x), ssl.verifypeer = FALSE)
+        bin <- getBinaryURL(file.path(url, x), ssl.verifypeer = FALSE)
         con <- file(x, open = "wb")
         writeBin(bin, con)
         close(con)
