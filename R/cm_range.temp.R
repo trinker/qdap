@@ -79,7 +79,7 @@ function(codes, file=NULL, text.var = NULL, grouping.var = NULL) {
             paste0("    ", names(colcodes), " = qcv(terms='", colcodes, "'),"), 
             x1[-1, ]), ncol = 1)
     }
-    cat(paste(x1, collapse="\n")); cat("\n")
+    message(paste(x1, collapse="\n"))
     dimnames(x1) <- list(c(rep("", nrow(x1))), c(""))
     if (Sys.info()["sysname"] == "Windows") {
         writeClipboard(noquote(x1), format = 1)                        

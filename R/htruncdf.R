@@ -73,7 +73,7 @@ function(dataframe, ...){
     y <- paste(rep("=", 72), collapse="")   
     z <- paste("nrow = ",nrow(dataframe), "          ncol = ",
         ncol(dataframe), "           ", x, collapse="")
-    cat(paste(y, z, y, sep = "\n")); cat("\n")
+    message(paste(y, z, y, sep = "\n"))
     return(htruncdf(dataframe, ...))
 }
 

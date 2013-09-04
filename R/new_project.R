@@ -73,7 +73,7 @@ new_project <- function(project = "new", path = getwd(), open = FALSE, ...) {
     WD <- getwd()
     on.exit(setwd(WD))
     if(file.exists(paste0(path, "/", project))) {
-        cat(paste0("\"", paste0(path, "/", project), 
+        message(paste0("\"", paste0(path, "/", project), 
             "\" already exists:\nDo you want to overwrite?\n\n"))
         ans <- menu(c("Yes", "No")) 
         if (ans == "2") {
@@ -185,7 +185,7 @@ new_project <- function(project = "new", path = getwd(), open = FALSE, ...) {
 print.qdapProj <-
 function(x, ...) {
     class(x) <- NULL
-    cat(x)
+    message(x)
 }
 
 wheresRstudio <- 

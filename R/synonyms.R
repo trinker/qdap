@@ -68,9 +68,9 @@ synonyms <- function(terms, return.list = TRUE,
     })
     names(out) <- terms
     if (report.null & any(sapply(out, is.null))) {
-        cat("no match for the following:\n\n")
-        cat(paste(names(out)[sapply(out, is.null)], collapse = ", "))
-        cat("\n========================\n\n")
+        message("no match for the following:\n")
+        message(paste(names(out)[sapply(out, is.null)], collapse = ", "))
+        message("========================\n")
     }
     if (return.list) {
         unlist(out, recursive = FALSE)

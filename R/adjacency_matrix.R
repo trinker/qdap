@@ -90,9 +90,9 @@ adjmat <- adjacency_matrix
 #' @S3method print adjacency_matrix
 print.adjacency_matrix <-
   function(x, ...) {
-    cat("Adjacency Matrix:\n\n")
+    message("Adjacency Matrix:\n")
     print(x$shared, na.print="", quote=FALSE)
-    cat("\n\n")
-    cat("Summed occurrences:\n\n")
+    message("\n")
+    message("Summed occurrences:\n")
     print(x$sum)
 }

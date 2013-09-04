@@ -326,7 +326,7 @@ polarity_frame <- function(positives, negatives, pos.weights = 1,
 #' @S3method print polarity
 print.polarity <- 
 function(x, digits = NULL, ...) {
-    cat("POLARITY BY GROUP\n=================\n")
+    message("POLARITY BY GROUP\n=================\n")
     WD <- options()[["width"]]
     options(width=3000)
     y <- x$group

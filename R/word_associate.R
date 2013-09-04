@@ -547,11 +547,11 @@ function(x, ...) {
     wid <- options()$width
     options(width = 10000)
     print(left.just(elem$dialogue.any, 4))
-    cat("\nMatch Terms\n===========")
+    message("\nMatch Terms\n===========")
     invisible(lapply(seq_along(x$match.terms), function(i) {
-      cat(paste0("\n\n", "List ", i, ":\n", paste(x$match.terms[[i]], 
+      message(paste0("\n", "List ", i, ":\n", paste(x$match.terms[[i]], 
           collapse = ", ")))
     }))
-    cat("\n\n")
+     message("\n")
     options(width = wid) 
 }

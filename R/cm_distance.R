@@ -158,10 +158,10 @@ function(x, ...){
     invisible(lapply(seq_along(z), function(i) {
         a <- strsplit(names(z)[i], "\\.")
         if(length(unlist(a)) > 1) {
-            cat(paste0(a[[1]][1], "\n"))
+            message(paste0(a[[1]][1], "\n"))
         } 
-        cat(paste0(a[[1]][length(a[[1]])], ":\n"))
+        message(paste0(a[[1]][length(a[[1]])], ":"))
         print(z[[i]])
-        cat("\n")
+        message("\n")
     }))
 }
