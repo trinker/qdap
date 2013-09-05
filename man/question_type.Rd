@@ -4,7 +4,8 @@
 \usage{
   question_type(text.var, grouping.var = NULL,
     neg.cont = FALSE, percent = TRUE, zero.replace = 0,
-    digits = 2)
+    digits = 2,
+    contraction = qdapDictionaries::contractions)
 }
 \arguments{
   \item{text.var}{The text variable}
@@ -25,6 +26,12 @@
 
   \item{digits}{Integer; number of decimal places to round
   when printing.}
+
+  \item{contraction}{A two column key of contractions
+  (column 1) and expanded form replacements (column 2) or a
+  vector of contractions.  Default is to use
+  qdapDictionaries's
+  \code{\link[qdapDictionaries]{contractions}} data set.}
 }
 \value{
   Returns a list of: \item{raw}{A dataframe of the

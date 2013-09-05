@@ -65,7 +65,10 @@ function(text.var, num.paste = "separate") {
             "ninety") 
         names(tens) <- 2:9 
         x <- round(x) 
-        suffixes <- c("thousand", "million", "billion", "trillion") 
+        suffixes <- c("thousand", "million", "billion", "trillion", "quadrillion",
+            "quintillion", "sextillion", "septillion", "octillion", "nonillion",
+            "decillion", "undecillion", "duodecillion", "tredecillion", 
+            "quattuordecillion") 
         if (length(x) > 1) return(sapply(x, helper)) 
         helper(x) 
     }  

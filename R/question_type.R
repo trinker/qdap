@@ -12,6 +12,9 @@
 #' \code{FALSE} the output is proportion.
 #' @param zero.replace Value to replace 0 values with.
 #' @param digits Integer; number of decimal places to round when printing.   
+#' @param contraction A two column key of contractions (column 1) and expanded 
+#' form replacements (column 2) or a vector of contractions.  Default is to use 
+#' qdapDictionaries's \code{\link[qdapDictionaries]{contractions}} data set. 
 #' @return Returns a list of:
 #' \item{raw}{A dataframe of the questions used in the transcript and their 
 #' type.}
@@ -63,7 +66,8 @@
 #' plot(out3, label = TRUE, lab.digits = 3)
 #' }
 question_type <- function(text.var, grouping.var = NULL,
-    neg.cont = FALSE, percent = TRUE, zero.replace = 0, digits = 2) {
+    neg.cont = FALSE, percent = TRUE, zero.replace = 0, digits = 2, 
+    contraction = qdapDictionaries::contractions) {
     if(is.null(grouping.var)) {
         G <- "all"
     } else {
@@ -89,7 +93,7 @@ question_type <- function(text.var, grouping.var = NULL,
         } 
     } 
     text.var <- replace_contraction(as.character(text.var), 
-        qdapDictionaries::contractions[grepl("you", qdapDictionaries::contractions[, 1]), ])
+        contraction[grepl("you", contraction[, 1]), ])
     DF <- data.frame(grouping, text.var, check.names = FALSE, 
         stringsAsFactors = FALSE, orig.row.num = seq_len(length(text.var)))
     DF$grouping <- factor(DF$grouping)

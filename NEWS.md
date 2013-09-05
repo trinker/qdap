@@ -104,6 +104,8 @@ MINOR FEATURES
 * `gantt_plot` accepts NULL for `grouping.var` and figures for "all" rows as a 
   single grouping var.
 
+* `replace_number` now handles 10^47 digits compared to 10^14 previously.
+
 CHANGES
 
 * The dictionaries and word lists for qdap have been moved to their own package, 
