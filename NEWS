@@ -87,7 +87,7 @@ MINOR FEATURES
 
 * `dir_map` picks up a `use.path` argument that allows the user to specify a 
   more flexible path to the created pre-formed `read.transcript` scripts based 
-  on something like `file.path(getwd(), )`.  This mean portability of code on 
+  on something like `file.path(getwd(), )`.  This means portability of code on 
   different machines.
 
 * `hash_look` (and `%ha%`) a counterpart to `hash` added to allow quick access 
@@ -187,7 +187,7 @@ BUG FIXES
 
 * `termco` would produce an error if single length named vectors were passed to 
   match.list and no multi-length vectors were supplied.  Also an error was thrown 
-  if an unnamed multi-length vector was passed to match.list.  This behavior has 
+  if an unnamed multi-length vector was passed to `match.list`.  This behavior has 
   been fixed.
 
 NEW FEATURES
@@ -195,7 +195,7 @@ NEW FEATURES
 * `tot_plot` a visualizing function that uses a bar graph to visualize patterns 
   in sentence length and grouping variables by turn of talk.
 
-* `beg2char` and `cahr2end` functions to grab text from beginning of string to a
+* `beg2char` and `char2end` functions to grab text from beginning of string to a
   character or from a character to the end of a string.
 
 * `ngrams` function to calculate ngrams by grouping variable.

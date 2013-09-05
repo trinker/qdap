@@ -27,7 +27,7 @@ This may break backward compatibility.  Thus this is a **major** release
 
 <b>BUG FIXES</b>
 
-* `qheat`'s  argument `by.column = FALSE` resulted in an error.  This behavior 
+* `qheat`'s  argument `by.column = `FALSE`` resulted in an error.  This behavior 
   has been fixed.
 
 * `question_type` did not work because of changes to `lookup` that did not 
@@ -37,7 +37,7 @@ This may break backward compatibility.  Thus this is a **major** release
   all non-character ([a-z]) string.  This behavior has been fixed.
 
 * `todo` function created by `new_project` would not report completed tasks if 
-  `report.completed = TRUE`.
+  `report.completed = `TRUE``.
 
 * `termco` and `termco.d` threw an error if more than one consecutive regex 
   special character was passed to `match.list` or `match.string`.  See GitHub 
@@ -87,7 +87,7 @@ This may break backward compatibility.  Thus this is a **major** release
 
 * `dir_map` picks up a `use.path` argument that allows the user to specify a 
   more flexible path to the created pre-formed `read.transcript` scripts based 
-  on something like `file.path(getwd(), )`.  This mean portability of code on 
+  on something like `file.path(getwd(), )`.  This means portability of code on 
   different machines.
 
 * `hash_look` (and `%ha%`) a counterpart to `hash` added to allow quick access 
@@ -187,7 +187,7 @@ qdap 0.2.3
 
 * `termco` would produce an error if single length named vectors were passed to 
   match.list and no multi-length vectors were supplied.  Also an error was thrown 
-  if an unnamed multi-length vector was passed to match.list.  This behavior has 
+  if an unnamed multi-length vector was passed to `match.list`.  This behavior has 
   been fixed.
 
 <b>NEW FEATURES</b>
@@ -195,7 +195,7 @@ qdap 0.2.3
 * `tot_plot` a visualizing function that uses a bar graph to visualize patterns 
   in sentence length and grouping variables by turn of talk.
 
-* `beg2char` and `cahr2end` functions to grab text from beginning of string to a
+* `beg2char` and `char2end` functions to grab text from beginning of string to a
   character or from a character to the end of a string.
 
 * `ngrams` function to calculate ngrams by grouping variable.
@@ -222,7 +222,7 @@ qdap 0.2.3
   caused by a grouping variable not containing any words from 1 or more of the 
   vectors of a list supplied to match string
 
-* `trans.cloud` produced an error when expand.target was TRUE.  This error has 
+* `trans.cloud` produced an error when expand.target was `TRUE`.  This error has 
   been eliminated.
 
 * `termco` would eliminate &gt; 1 columns matching an identical search.term found 
