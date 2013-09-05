@@ -150,7 +150,7 @@ file.copy(root, new, TRUE, TRUE)
 #==========================
 News <- readLines("NEWS")
 library(qdap)
-url <- "https://github.com/trinker/qdap/issues/"
+
 News <- mgsub(
     c("<", ">", "&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;", "BUG FIXES", 
         "NEW FEATURES", "MINOR FEATURES", "CHANGES", " TRUE ", " FALSE ", 
@@ -160,12 +160,11 @@ News <- mgsub(
         "<b>CHANGES</b>", " `TRUE` ", " `FALSE` ", " `NULL` "), 
     News, trim = FALSE)
 
-News <- paste(News, collapse = "\n")
 News <- sub(pattern="issue *# *([0-9]+)", 
     replacement="<a href=\"https://github.com/trinker/qdap/issues/\\1\">issue #\\1</a>", 
     x=News)
 
-cat(News, file = "NEWS.md")
+cat(paste(News, collapse = "\n"), file = "NEWS.md")
 
 
 #==========================

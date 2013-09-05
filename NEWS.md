@@ -41,7 +41,7 @@ This may break backward compatibility.  Thus this is a **major** release
 
 * `termco` and `termco.d` threw an error if more than one consecutive regex 
   special character was passed to `match.list` or `match.string`.  See GitHub 
-  issue #128 for more. 
+  <a href="https://github.com/trinker/qdap/issues/128">issue #128</a> for more. 
 
 * `trans.cloud` threw an error if a single list with a named vector was passed 
   to `target.words`.  Thes behavior has been fixed.
