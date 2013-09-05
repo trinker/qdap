@@ -153,15 +153,17 @@ library(qdap)
 url <- "https://github.com/trinker/qdap/issues/"
 News <- mgsub(
     c("<", ">", "&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;", "BUG FIXES", 
-        "NEW FEATURES", "MINOR FEATURES", "CHANGES"), 
+        "NEW FEATURES", "MINOR FEATURES", "CHANGES", " TRUE ", " FALSE ", 
+        " NULL "), 
     c("&lt;", "&gt;", "<b>&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</b>", 
         "<b>BUG FIXES</b>", "<b>NEW FEATURES</b>", "<b>MINOR FEATURES</b>", 
-        "<b>CHANGES</b>"), 
+        "<b>CHANGES</b>", " `TRUE` ", " `FALSE` ", " `NULL` "), 
     News, trim = FALSE)
 
 News <- paste(News, collapse = "\n")
-
-News <- sub(pattern="issue *# *([0-9]+)", replacement="<a href=\"https://github.com/trinker/qdap/issues/\\1\">issue #\\1</a>", x=News)
+News <- sub(pattern="issue *# *([0-9]+)", 
+    replacement="<a href=\"https://github.com/trinker/qdap/issues/\\1\">issue #\\1</a>", 
+    x=News)
 
 cat(News, file = "NEWS.md")
 

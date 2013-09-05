@@ -101,7 +101,7 @@ MINOR FEATURES
 * `DATA.SPLIT` a `sentSplit` version of the `DATA` dataset has been added to 
   qdap.
 
-* `gantt_plot` accepts `NULL` for `grouping.var` and figures for "all" rows as a 
+* `gantt_plot` accepts NULL for `grouping.var` and figures for "all" rows as a 
   single grouping var.
 
 * `replace_number` now handles 10^47 digits compared to 10^14 previously.
