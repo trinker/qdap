@@ -249,7 +249,7 @@ qdap 0.2.3
   char.keep set to "~~" to enable retaining special character formerly stripped 
   away.
 
-* `hms2sec`: A function to convert from h&#58;m&#58;s format to seconds.
+* `hms2sec`: A function to convert from h&#58;&#77;&#58;s format to seconds.
 
 * `mcsv_w` now takes a list of data.frames.
 
