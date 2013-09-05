@@ -18,14 +18,14 @@ And constructed with the following guidelines:
 
 
 
-CHANGES IN qdap VERSION 1.0.0
+<b>CHANGES</b> IN qdap VERSION 1.0.0
 ----------------------------------------------------------------
 
 The word lists and dictionaries in `qdap` have been moved to `qdapDictionaries`. 
 This may break backward compatibility.  Thus this is a **major** release 
 (ver. 1.0.0).
 
-BUG FIXES
+<b>BUG FIXES</b>
 
 * `qheat`'s  argument `by.column = FALSE` resulted in an error.  This behavior 
   has been fixed.
@@ -60,9 +60,9 @@ BUG FIXES
 * `url_dl` - Downloaded an empty file when not using a dropbox key.  This 
   behavior has been fixed.
 
-NEW FEATURES
+<b>NEW FEATURES</b>
 
-MINOR FEATURES
+<b>MINOR FEATURES</b>
 
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 
   supplied)
@@ -106,7 +106,7 @@ MINOR FEATURES
 
 * `replace_number` now handles 10^47 digits compared to 10^14 previously.
 
-CHANGES
+<b>CHANGES</b>
 
 * The dictionaries and word lists for qdap have been moved to their own package, 
   `qdapDictionaries`.  This will allow easier access to these resources beyond 
@@ -129,7 +129,7 @@ CHANGES
 * `gantt_wrap` no longer accepts unquoted strings to the `plot.var` argument.
 
 
-CHANGES IN qdap VERSION 0.2.5
+<b>CHANGES</b> IN qdap VERSION 0.2.5
 ----------------------------------------------------------------
 
 Patch release.  This version deals with the changes in the `openNLP` package 
@@ -138,7 +138,7 @@ Patch release.  This version deals with the changes in the `openNLP` package
 
 qdap 0.2.3
 ----------------------------------------------------------------
-BUG FIXES
+<b>BUG FIXES</b>
 
 * `new_project` placed a report in the CORRESPONDENCE directory rather than 
   CONTACT_INFO
@@ -151,7 +151,7 @@ BUG FIXES
   `beg2char(c("abc-edw-www", "nmn-ggg", "rer-qqq-fdf"), "-", 2)` resulted in
   "abc-e" "nmn-g" "rer-q" rather than "abc-edw" "nmn-ggg" "rer-qqq"
 
-NEW FEATURES
+<b>NEW FEATURES</b>
 
 * `names2sex` a function for predicting gender from name.
 
@@ -160,23 +160,23 @@ NEW FEATURES
 * `tdm` added as an equivalent to TermDocumentMatrix from the tm package.  This 
   allows for portability across text analysis packages.
 
-MINOR FEATURES
+<b>MINOR FEATURES</b>
 
 * `mgsub` now gets a `trim` argument that optionally removes trailing leading 
   white spaces.
 
 * `lookup` now takes a list of named vectors for the key.match argument.
 
-CHANGES
+<b>CHANGES</b>
 
 * `new_project` directory can now be transferred without breaking paths (i.e.,
   `file.path(getwd(), "DIR/file.ext")` is used rather than the full file path).
 
 
-CHANGES IN qdap VERSION 0.2.2
+<b>CHANGES</b> IN qdap VERSION 0.2.2
 ----------------------------------------------------------------
 
-BUG FIXES
+<b>BUG FIXES</b>
 
 * `genXtract` labels returned the word "right" rather than the right edge string.
   See http://stackoverflow.com/a/15423439/1000343 for an example of the old 
@@ -190,7 +190,7 @@ BUG FIXES
   if an unnamed multi-length vector was passed to match.list.  This behavior has 
   been fixed.
 
-NEW FEATURES
+<b>NEW FEATURES</b>
 
 * `tot_plot` a visualizing function that uses a bar graph to visualize patterns 
   in sentence length and grouping variables by turn of talk.
@@ -200,7 +200,7 @@ NEW FEATURES
 
 * `ngrams` function to calculate ngrams by grouping variable.
 
-MINOR FEATURES
+<b>MINOR FEATURES</b>
 
 * `genX` and `bracketX` gain an extra argument `space.fix` to remove extra 
   spaces left over from bracket removal.
@@ -208,15 +208,15 @@ MINOR FEATURES
 * Updated out of date dropbox url download in `url_dl`.  `url_dl` also takes the 
   dropbox key as well.
 
-CHANGES
+<b>CHANGES</b>
 
 * qdap is now compiled for mac users (as openNLP now passes CRAN checks with no
   Errors on Mac).
 
-CHANGES IN qdap VERSION 0.2.1
+<b>CHANGES</b> IN qdap VERSION 0.2.1
 ----------------------------------------------------------------
 
-BUG FIXES
+<b>BUG FIXES</b>
 
 * `word_associate` colors the word cloud appropriately and deals with the error 
   caused by a grouping variable not containing any words from 1 or more of the 
@@ -231,7 +231,7 @@ BUG FIXES
 
 * `cm_df.transcript` did not give the correct speaker labels (fixed).
 
-NEW FEATURES
+<b>NEW FEATURES</b>
 
 * `gradient_cloud`: Binary gradient Word Cloud - A new plotting function 
   that plots and colors words for a binary variable based on which group of 
@@ -243,7 +243,7 @@ NEW FEATURES
   of packages, data and project functions.  This function uses the reports package
   to generate an extensive reports folder.
 
-MINOR FEATURES
+<b>MINOR FEATURES</b>
 
 * `stemmer`, `stem2df` and `stem.words` now explicitly have the argument 
   char.keep set to "~~" to enable retaining special character formerly stripped 
@@ -260,7 +260,7 @@ MINOR FEATURES
 
 * `read.transcript` now reads .txt files as well as text similar to read.table.
 
-CHANGES
+<b>CHANGES</b>
 
 * `sec2hms` is the new name for `convert` 
 
@@ -269,7 +269,7 @@ CHANGES
   time/date stamp if no directory name was given; this has been fixed, though 
   the function now resides in the reports package.
 
-CHANGES IN qdap VERSION 0.2.0
+<b>CHANGES</b> IN qdap VERSION 0.2.0
 ----------------------------------------------------------------
 
 * The first installation of the qdap package

@@ -151,10 +151,20 @@ file.copy(root, new, TRUE, TRUE)
 News <- readLines("NEWS")
 library(qdap)
 News <- mgsub(
-    c("<", ">", "&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;"), 
-    c("&lt;", "&gt;", "<b>&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</b>"), 
+    c("<", ">", "&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;", "BUG FIXES", 
+        "NEW FEATURES", "MINOR FEATURES", "CHANGES"), 
+    c("&lt;", "&gt;", "<b>&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</b>", 
+        "<b>BUG FIXES</b>", "<b>NEW FEATURES</b>", "<b>MINOR FEATURES</b>", 
+        "<b>CHANGES</b>"), 
     News, trim = FALSE)
 cat(paste(News, collapse = "\n"), file = "NEWS.md")
+
+
+#==========================
+# NEWS new version
+#==========================
+x <- c("BUG FIXES", "NEW FEATURES", "MINOR FEATURES", "CHANGES")
+cat(paste(x, collapse = "\n\n"), file="clipboard")
 
 #==============================
 # Copy from Current R to R_dev
