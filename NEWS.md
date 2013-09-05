@@ -246,7 +246,7 @@ qdap 0.2.3
 <b>MINOR FEATURES</b>
 
 * `stemmer`, `stem2df` and `stem.words` now explicitly have the argument 
-  char.keep set to "~~" to enable retaining special character formerly stripped 
+  `char.keep` set to "~~" to enable retaining special character formerly stripped 
   away.
 
 * `hms2sec`: A function to convert from h : m : s format to seconds.
