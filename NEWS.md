@@ -31,7 +31,7 @@ This may break backward compatibility.  Thus this is a **major** release
   has been fixed.
 
 * `question_type` did not work because of changes to `lookup` that did not 
-  accept a two column matrix for `key.match`.  See GitHub issue #127 for more.
+  accept a two column matrix for `key.match`.  See GitHub <a href="https://github.com/trinker/qdap/issues/127">issue #127</a> for more.
 
 * `combo_syllable.sum` threw an error if the text.var contained a cell with an 
   all non-character ([a-z]) string.  This behavior has been fixed.
