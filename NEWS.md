@@ -27,7 +27,7 @@ This may break backward compatibility.  Thus this is a **major** release
 
 <b>BUG FIXES</b>
 
-* `qheat`'s  argument `by.column = `FALSE`` resulted in an error.  This behavior 
+* `qheat`'s  argument `by.column = FALSE` resulted in an error.  This behavior 
   has been fixed.
 
 * `question_type` did not work because of changes to `lookup` that did not 
@@ -37,7 +37,7 @@ This may break backward compatibility.  Thus this is a **major** release
   all non-character ([a-z]) string.  This behavior has been fixed.
 
 * `todo` function created by `new_project` would not report completed tasks if 
-  `report.completed = `TRUE``.
+  `report.completed = TRUE`.
 
 * `termco` and `termco.d` threw an error if more than one consecutive regex 
   special character was passed to `match.list` or `match.string`.  See GitHub 
@@ -101,7 +101,7 @@ This may break backward compatibility.  Thus this is a **major** release
 * `DATA.SPLIT` a `sentSplit` version of the `DATA` dataset has been added to 
   qdap.
 
-* `gantt_plot` accepts `NULL` for `grouping.var` and figures for "all" rows as a 
+* `gantt_plot` accepts`NULL`.for `grouping.var` and figures for "all" rows as a 
   single grouping var.
 
 * `replace_number` now handles 10^47 digits compared to 10^14 previously.
