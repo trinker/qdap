@@ -158,7 +158,7 @@ News <- mgsub(
     c("&lt;", "&gt;", "<b>&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</b>", 
         "<b>BUG FIXES</b>", "<b>NEW FEATURES</b>", "<b>MINOR FEATURES</b>", 
         "<b>CHANGES</b>", " `TRUE` ", " `FALSE` ", " `NULL` ", 
-        "&#58;&#77;&#58;"), 
+        "&#58;&#109;&#58;"), 
     News, trim = FALSE)
 
 News <- sub(pattern="issue *# *([0-9]+)", 
