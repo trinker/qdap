@@ -154,12 +154,12 @@ library(qdap)
 News <- mgsub(
     c("<", ">", "&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;", "BUG FIXES", 
         "NEW FEATURES", "MINOR FEATURES", "CHANGES", " TRUE ", " FALSE ", 
-        " NULL ", "TRUE.", "FALSE.", "NULL."":m:"), 
+        " NULL ", "TRUE.", "FALSE.", "NULL.", ":m:"), 
     c("&lt;", "&gt;", "<b>&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</b>", 
         "<b>BUG FIXES</b>", "<b>NEW FEATURES</b>", "<b>MINOR FEATURES</b>", 
         "<b>CHANGES</b>", " `TRUE` ", "`FALSE`.", "`NULL`.", "`TRUE`.", 
-        " `FALSE` ", " `NULL` " " : m : "), 
-    News, trim = FALSE)
+        " `FALSE` ", " `NULL` ", " : m : "), 
+    News, trim = FALSE, fixed=TRUE)
 
 News <- sub(pattern="issue *# *([0-9]+)", 
     replacement="<a href=\"https://github.com/trinker/qdap/issues/\\1\">issue #\\1</a>", 
