@@ -5,7 +5,9 @@
 #' @param project A character vector of the project name.
 #' @param path The path to where the project should be created.  Default is the 
 #' current working directory.
-#' @param open logical.  If \code{TRUE} the project will be opened in RStudio.
+#' @param open logical.  If \code{TRUE} the project will be opened in RStudio.  
+#' The default is to test if \code{new_project} is being used in the global 
+#' environment, if it is then the project directory will be opened.  
 #' @param \ldots Other arguments passed to \code{\link[reports]{new_report}}.
 #' @details The project template includes these main directories and scripts:
 #' \itemize{
@@ -65,11 +67,12 @@
 #' depending on what the client/research team is comfortable utilizing. 
 #' 
 #' @return Creates a project template.
-#' @keywords project, workflow
+#' @keywords project, workflow, is.global
 #' @export
 #' @importFrom reports delete folder new_report
 #' @importFrom tools file_ext
-new_project <- function(project = "new", path = getwd(), open = FALSE, ...) {
+new_project <- function(project = "new", path = getwd(), open = is.global(), 
+    ...) {
     WD <- getwd()
     on.exit(setwd(WD))
     if(file.exists(paste0(path, "/", project))) {

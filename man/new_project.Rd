@@ -3,7 +3,7 @@
 \title{Project Template}
 \usage{
   new_project(project = "new", path = getwd(),
-    open = FALSE, ...)
+    open = is.global(), ...)
 }
 \arguments{
   \item{project}{A character vector of the project name.}
@@ -12,7 +12,10 @@
   created.  Default is the current working directory.}
 
   \item{open}{logical.  If \code{TRUE} the project will be
-  opened in RStudio.}
+  opened in RStudio. The default is to test if
+  \code{new_project} is being used in the global
+  environment, if it is then the project directory will be
+  opened.}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[reports]{new_report}}.}
@@ -90,6 +93,7 @@
   \href{https://www.dropbox.com/}{dropbox}, depending on
   what the client/research team is comfortable utilizing.
 }
+\keyword{is.global}
 \keyword{project,}
-\keyword{workflow}
+\keyword{workflow,}
 
