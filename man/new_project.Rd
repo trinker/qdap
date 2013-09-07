@@ -3,7 +3,7 @@
 \title{Project Template}
 \usage{
   new_project(project = "new", path = getwd(),
-    open = is.global(), ...)
+    open = reports::is.global(), ...)
 }
 \arguments{
   \item{project}{A character vector of the project name.}

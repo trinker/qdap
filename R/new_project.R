@@ -71,8 +71,8 @@
 #' @export
 #' @importFrom reports delete folder new_report
 #' @importFrom tools file_ext
-new_project <- function(project = "new", path = getwd(), open = is.global(), 
-    ...) {
+new_project <- function(project = "new", path = getwd(), 
+    open = reports::is.global(), ...) {
     WD <- getwd()
     on.exit(setwd(WD))
     if(file.exists(paste0(path, "/", project))) {
