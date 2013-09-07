@@ -171,7 +171,7 @@ cat(paste(News, collapse = "\n"), file = "NEWS.md")
 #==========================
 # NEWS new version
 #==========================
-x <- c("BUG FIXES", "NEW FEATURES", "MINOR FEATURES", "CHANGES")
+x <- c("BUG FIXES", "NEW FEATURES", "MINOR FEATURES", "IMPROVEMENTS", "CHANGES")
 cat(paste(x, collapse = "\n\n"), file="clipboard")
 
 #==============================
