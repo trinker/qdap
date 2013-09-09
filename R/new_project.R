@@ -75,7 +75,7 @@ new_project <- function(project = "new", path = getwd(),
     open = reports::is.global(2), ...) {
     WD <- getwd()
     on.exit(setwd(WD))
-    if(file.exists(paste0(path, "/", project))) {
+    if(file.exists(file.path(path, project))) {
         message(paste0("\"", paste0(path, "/", project), 
             "\" already exists:\nDo you want to overwrite?\n"))
         ans <- menu(c("Yes", "No")) 
@@ -99,17 +99,17 @@ new_project <- function(project = "new", path = getwd(),
     cat(todo, file=paste0(x, "/", "TO_DO"))
     cat(paste0("Project \"", project, "\" created: ", Sys.time(), "\n"), 
         file=paste0(x, "/", "LOG"))
-    invisible(folder(folder.name=paste0(y[[4]], "/", "ALREADY_REVIEWED")))
+    invisible(folder(folder.name=file.path(y[[4]], "ALREADY_REVIEWED")))
     dats <- c("AUDIO", "VIDEO", "FIELD_NOTES", "INTERVIEWS", "PAPER_ARTIFACTS", 
         "PHOTOGRAPHS")
-    invisible(folder(folder.name=paste0(y[[13]], "/", dats)))
+    invisible(folder(folder.name=file.path(y[[13]], dats)))
     cat(paste0("library(qdap)\n",
         "dir_map(file.path(getwd(), \"CLEANED_TRANSCRIPTS\")\n\n\n\n", 
         "len <- length(dir(file.path(getwd(), \"CLEANED_TRANSCRIPTS\")))\n",
         "L1 <- lapply(paste0(\"dat\", 1:len), function(x) get(x))\n", 
         "names(L1) <- paste0(\"dat\", 1:len)\n",
         "\n\n\n\nsave( , file = file.path(getwd(), \"DATA/cleaned.RData\"))\n"), 
-        file=paste0(y[[1]], "/", "01_clean_data.R"))
+        file=file.path(y[[1]], "01_clean_data.R"))
     cat(paste0("lapply(c(\"qdap\", \"ggplot2\", \"grid\", \"scales\"), require, character.only = T)\n", 
         "source(file.path(getwd(), \"extra_functions.R\"))\n",
         "load(file.path(getwd(), \"DATA/cleaned.RData\"))\n"),
@@ -120,13 +120,13 @@ new_project <- function(project = "new", path = getwd(),
         "setwd(file.path(getwd(), \"PLOTS\"))\n"),
         file=paste0(y[[1]], "/", "03_plots.R"))
     root <- system.file("extdata/docs", package = "qdap")
-    pdfloc <- paste0(root, "/PROJECT_WORKFLOW_GUIDE.pdf")
+    pdfloc <- file.path(root, "PROJECT_WORKFLOW_GUIDE.pdf")
     invisible(file.copy(pdfloc, x))
-    pdfloc4 <- paste0(root, "/TEMP.txt")
+    pdfloc4 <- file.path(root, "TEMP.txt")
     invisible(file.copy(pdfloc4, x))
-    invisible(file.rename(paste0(x, "/TEMP.txt"), 
-        paste0(x, "/",  project, ".Rproj")))
-    pdfloc5 <- paste0(root, "/extra_functions.R")
+    invisible(file.rename(file.path(x, "TEMP.txt"), 
+        file.path(x, paste0(project, ".Rproj"))))
+    pdfloc5 <- file.path(root, "extra_functions.R")
     invisible(file.copy(pdfloc5, x))
     info <- c("PROJECT NAME: Project", 
         "CLIENT/LEAD RESEARCHER: lead_researcher<numero_uno@email> 555-555-5555[skype: num1]",
@@ -166,8 +166,8 @@ new_project <- function(project = "new", path = getwd(),
         "if (!identical(dat, character(0))) {",
         "    lapply(dat, load)",
         "}")
-    cat(paste(rpro, collapse = "\n"), file = paste0(x, "/.Rprofile"))
-        cat(paste(rpro, collapse = "\n"), file = paste0(x, "/.Rprofile"))
+    cat(paste(rpro, collapse = "\n"), file = file.path(x, ".Rprofile"))
+        cat(paste(rpro, collapse = "\n"), file = file.path(x, ".Rprofile"))
     invisible(new_report(c("REPORTS", project), ...))
     o <- paste0("Project \"", project, "\" created:\n", x, "\n") 
     class(o) <- "qdapProj"

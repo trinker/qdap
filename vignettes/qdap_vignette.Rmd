@@ -13,7 +13,7 @@ bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
 #  BU <- "http://trinker.github.io/qdap/" 
 BU <- "http://trinker.github.io/qdap_dev/" #switch before upload
 LN <- function(fun, base=BU) paste0(BU, fun, ".html")
-FUN <- function(fun, base=BU) HR2(LN(fun), paste0("<code>", fun,"</code>"))
+FUN <- function(fun, fun2 = fun, base=BU) HR2(LN(fun2), paste0("<code>", fun,"</code>"))
 BU2 <- "http://trinker.github.io/qdapDictionaries/" #switch before upload
 LN2 <- function(fun, base=BU2) paste0(BU2, fun, ".html")
 FUN2 <- function(fun, base=BU2) HR2(LN2(fun), paste0("<code>", fun,"</code>"))
