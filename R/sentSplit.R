@@ -23,6 +23,14 @@
 #' @return \code{sentSplit} - returns a dataframe with turn of talk broken apart 
 #' into sentences.  Optionally a stemmed version of the text variable may be 
 #' returned as well.
+#' @section Warning: \code{\link[qdap]{sentSplit}} requires the dialogue (text) 
+#' column to be cleaned in a particular way.  The data should contain qdap
+#' punctuation marks (\code{c("?", ".", "!", "|")}) at the end of each sentence.
+#' Additionally, extraneous punctuation such as abbreviations should be removed
+#' (see \code{\link[qdap]{replace_abbreviation}}).
+#' Training sentences such as \bold{I thought I...} will be treated as 
+#' incomplete and marked with \code{"|"} to denote an incomplete/trailing 
+#' sentence.
 #' @rdname sentSplit
 #' @author Dason Kurkiewicz and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso 

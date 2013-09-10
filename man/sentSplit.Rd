@@ -77,6 +77,18 @@
   \code{\link[qdap]{sentSplit}} to turn of talk index (no
   sub sentence).  Generally, for internal use.
 }
+\section{Warning}{
+  \code{\link[qdap]{sentSplit}} requires the dialogue
+  (text) column to be cleaned in a particular way.  The
+  data should contain qdap punctuation marks (\code{c("?",
+  ".", "!", "|")}) at the end of each sentence.
+  Additionally, extraneous punctuation such as
+  abbreviations should be removed (see
+  \code{\link[qdap]{replace_abbreviation}}). Training
+  sentences such as \bold{I thought I...} will be treated
+  as incomplete and marked with \code{"|"} to denote an
+  incomplete/trailing sentence.
+}
 \examples{
 \dontrun{
 #sentSplit EXAMPLE:
