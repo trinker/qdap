@@ -106,6 +106,9 @@ This may break backward compatibility.  Thus this is a **major** release
 
 * `replace_number` now handles 10^47 digits compared to 10^14 previously.
 
+* The `new_project` function gains a `github` argument that optionally sends the 
+  repo to GitHub public account upon creation.
+
 <b>CHANGES</b>
 
 * The dictionaries and word lists for qdap have been moved to their own package, 

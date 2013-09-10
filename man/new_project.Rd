@@ -3,7 +3,7 @@
 \title{Project Template}
 \usage{
   new_project(project = "new", path = getwd(),
-    open = reports::is.global(2), ...)
+    open = reports::is.global(2), github = FALSE, ...)
 }
 \arguments{
   \item{project}{A character vector of the project name.}
@@ -16,6 +16,10 @@
   \code{new_project} is being used in the global
   environment, if it is then the project directory will be
   opened.}
+
+  \item{github}{logical.  If \code{TRUE} the repo will be
+  sent to public \href{https://github.com/}{GitHub}
+  account.}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[reports]{new_report}}.}
