@@ -28,7 +28,7 @@
 #' punctuation marks (\code{c("?", ".", "!", "|")}) at the end of each sentence.
 #' Additionally, extraneous punctuation such as abbreviations should be removed
 #' (see \code{\link[qdap]{replace_abbreviation}}).
-#' Training sentences such as \bold{I thought I...} will be treated as 
+#' Trailing sentences such as \bold{I thought I...} will be treated as 
 #' incomplete and marked with \code{"|"} to denote an incomplete/trailing 
 #' sentence.
 #' @rdname sentSplit
