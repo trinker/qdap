@@ -204,7 +204,7 @@ question_type <- function(text.var, grouping.var = NULL,
     DF <- data.frame(group=rownames(DF), tot.quest = tq, DF, row.names = NULL, 
         check.names = FALSE) 
     if(ncol(DF) == 3) {
-        warning(paste0("Text does not contain enough questions to give", 
+        warning(paste0("Text does not contain enough questions to give ", 
             "an output of the class \"question_type\":\n", 
             " ...only counts are returned"))
         return(DF)

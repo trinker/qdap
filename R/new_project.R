@@ -204,7 +204,7 @@ wheresRstudio <-
 function() {
     myPaths <- c("rstudio",  "~/.cabal/bin/rstudio", 
         "~/Library/Haskell/bin/rstudio", "C:\\PROGRA~1\\RStudio\\bin\\rstudio.exe",
-        "C:\\RStudio\\bin\\rstudio.exe")
+        "C:\\RStudio\\bin\\rstudio.exe", "/Applications/RStudio.app/Contents/MacOS/RStudio")
     panloc <- Sys.which(myPaths)
     temp <- panloc[panloc != ""]
     if (identical(names(temp), character(0))) {
@@ -218,11 +218,12 @@ function() {
             }
         }
     } 
-    temp
+    short.path <- which.min(unlist(lapply(gregexpr("RStudio", temp), "[[", 1)))
+    temp[short.path] 
 }
 
 open_project <- function(Rproj.loc) {
     action <- paste(wheresRstudio(), Rproj.loc)
     message("Preparing to open project!")
-    system(action, wait = FALSE, ignore.stderr = TRUE)
+    try(system(action, wait = FALSE, ignore.stderr = TRUE))
 }
