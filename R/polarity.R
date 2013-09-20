@@ -366,6 +366,9 @@ function(x, digits = NULL, ...) {
 #' @param order.by.polarity logical.  If \code{TRUE} the group polarity plot 
 #' will be ordered by average polarity score, otherwise alphabetical order is 
 #' assumed.
+#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
+#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
+#' to add additional plot layers.
 #' @param \ldots ignored
 #' @return Invisibly returns the \code{ggplot2} objects that form the larger 
 #' plot.  
@@ -377,7 +380,7 @@ function(x, digits = NULL, ...) {
 plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99", 
     high = "blue", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
     point.size = 2.5,  jitter = .1, nrow = NULL, na.rm = TRUE, 
-    order.by.polarity = TRUE, ...){
+    order.by.polarity = TRUE, plot = TRUE, ...){
   
     Polarity <- group <- ave.polarity <- unit <- NULL
     dat <- x[["group"]][, 1:4]
@@ -438,7 +441,9 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
         YY <- YY + theme(plot.margin = unit(c(-.25, 1, 1, 1), "lines"), 
             legend.position="none")       
     } 
-    grid.arrange(XX, YY, nrow = 2)
+    if (plot) {
+        grid.arrange(XX, YY, nrow = 2)
+    }
     invisible(list(p1 = XX, p2 = YY))
 }
 

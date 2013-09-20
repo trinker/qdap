@@ -27,6 +27,9 @@
 #' create square cells.
 #' @param mat2 A second matrix equal in dimensions to \code{mat} that will be 
 #' used for cell labels if \code{values} is \code{TRUE}.
+#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
+#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
+#' to add additional plot layers.
 #' @details \code{qheat} is useful for finding patterns and anomalies in large
 #' qdap generated dataframes and matrices.
 #' @note \code{\link[qdap]{qheat}} is a fast way of working with data formats 
@@ -60,7 +63,7 @@
 qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
     digits = 1, text.size = 3, text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white", by.column = TRUE, 
-    auto.size = FALSE, mat2 = NULL) {
+    auto.size = FALSE, mat2 = NULL, plot = TRUE) {
     group <- value <- values2 <- NULL
     if (!is.null(mat2) & !values) {
         values <- TRUE 
@@ -171,6 +174,8 @@ qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
     if (auto.size) {
         GP <- GP + coord_equal()
     }
-    print(GP)
+    if (plot) {
+        print(GP)
+    }
     invisible(GP)
 }

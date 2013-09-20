@@ -6,7 +6,8 @@
     values = FALSE, digits = 1, text.size = 3,
     text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white",
-    by.column = TRUE, auto.size = FALSE, mat2 = NULL)
+    by.column = TRUE, auto.size = FALSE, mat2 = NULL,
+    plot = TRUE)
 }
 \arguments{
   \item{mat}{A matrix or dataframe produced by many qdap
@@ -55,6 +56,11 @@
   \item{mat2}{A second matrix equal in dimensions to
   \code{mat} that will be used for cell labels if
   \code{values} is \code{TRUE}.}
+
+  \item{plot}{logical.  If \code{TRUE} the plot will
+  automatically plot. The user may wish to set to
+  \code{FALSE} for use in knitr, sweave, etc. to add
+  additional plot layers.}
 }
 \description{
   A quick heatmap function for visualizing typical qdap

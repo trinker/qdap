@@ -1001,7 +1001,14 @@ lookup(1:5, data.frame(1:4, 11:14))
 ```
 
 ```r
+lookup(LETTERS[1:5], data.frame(LETTERS[1:4], 11:14), missing = NULL)
+```
 
+```
+## [1] "11" "12" "13" "14" "E"
+```
+
+```r
 lookup(LETTERS[1:5], data.frame(LETTERS[1:5], 100:104))
 ```
 
@@ -1101,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 25.34 15.00 15.00 25.34 15.00 25.34 22.40 22.40 22.40 25.34 19.70
-## [12] 15.00 19.70 16.30 15.79 15.00 25.34 19.70 19.70 15.00
+##  [1] 16.30 22.40 15.00 22.40 16.30 22.40 19.70 19.70 22.40 15.79 19.70
+## [12] 19.70 15.79 15.79 15.00 16.30 15.79 15.00 16.30 25.34
 ```
 
 ```r
@@ -1110,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 25.34 15.00 15.00 25.34 15.00 25.34 22.40 22.40 22.40 25.34 19.70
-## [12] 15.00 19.70 16.30 15.79 15.00 25.34 19.70 19.70 15.00
+##  [1] 16.30 22.40 15.00 22.40 16.30 22.40 19.70 19.70 22.40 15.79 19.70
+## [12] 19.70 15.79 15.79 15.00 16.30 15.79 15.00 16.30 25.34
 ```
 
 
@@ -3103,16 +3110,23 @@ adjacency_matrix(wfm(DATA$state, DATA$person))
 
 ```
 ## Adjacency Matrix:
-## 
+```
+
+```
 ##            greg researcher sally sam
 ## researcher    0                     
 ## sally         1          1          
 ## sam           4          0     1    
 ## teacher       0          1     2   0
+```
+
+```
 ## 
 ## 
 ## Summed occurrences:
-## 
+```
+
+```
 ##       greg researcher      sally        sam    teacher 
 ##         18          6         10         11          4
 ```
@@ -3142,17 +3156,24 @@ adjmat(terms)
 
 ```
 ## Adjacency Matrix:
-## 
+```
+
+```
 ##           OBAMA ROMNEY CROWLEY LEHRER QUESTION
 ## ROMNEY        5                               
 ## CROWLEY       2      2                        
 ## LEHRER        4      4       2                
 ## QUESTION      4      4       2      4         
 ## SCHIEFFER     2      2       1      1        1
+```
+
+```
 ## 
 ## 
 ## Summed occurrences:
-## 
+```
+
+```
 ##     OBAMA    ROMNEY   CROWLEY    LEHRER  QUESTION SCHIEFFER 
 ##         5         5         2         4         4         2
 ```
@@ -3959,8 +3980,7 @@ synonyms(c("the", "cat", "teach"))
 ```
 ## no match for the following:
 ## 
-## the
-## ========================
+## the ========================
 ```
 
 ```
@@ -3996,8 +4016,7 @@ syn(c("the", "cat", "teach"), return.list = FALSE)
 ```
 ## no match for the following:
 ## 
-## the
-## ========================
+## the ========================
 ```
 
 ```
@@ -4021,8 +4040,7 @@ syn(c("the", "cat", "teach"), multiwords = FALSE)
 ```
 ## no match for the following:
 ## 
-## the
-## ========================
+## the ========================
 ```
 
 ```
@@ -4104,13 +4122,13 @@ word_associate(DATA2$state, DATA2$person, match.string = ms,
 ## 34  63 sally   63 What are you talking about?      
 ## 35  65   sam   65 I distrust you.                  
 ## 36  67 sally   67 What are you talking about?      
-## 37  68   sam   68 I distrust you.                  
+## 37  68   sam   68 I distrust you.
+```
+
+```
+## Match Terms ===========
 ## 
-## Match Terms
-## ===========
-## 
-## List 1:
-## i, you
+## List 1: i, you
 ```
 
 
@@ -4416,11 +4434,12 @@ with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))
    
 <h3 id="coding">Qualitative Coding System</h3>
 
+
 <div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank">
-    <input type="submit" value="cm_code.blank"> - Blank Code Transformation
+    <input type="submit" value="cm_code.blank"> - <a href="#code.blank">Blank Code Transformation</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank">
@@ -4487,6 +4506,176 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="cm_time2long"> - Transform Codes to Start-End Times
 </form>
 </div>
+
+A major task in qualitative work is coding either time or words with selected coding structures.  For example a researcher may code the teacher's dialogue as related to the resulting behavior of a student in a classroom as "high", "medium" or "low" engagement. The researcher may choose to apply the coding to:
+
+- The dialogue
+- The time spans
+
+The coding process in qdap starts with decison of whether to code the dialogue and/or the time spans.  After that the researcher may follow the sequential subsections in the <a href="#coding">Qualitative Coding System</a> section outlined in these steps:
+
+1. Making a template for coding dialogue/time spans
+2. The actual coding  dialogue/time spans
+3. Reading in the dialogue/time spans
+4. Merging/reshaping/combining the read in dialogue/time spans
+5. Initial analysis
+
+If you choose the route of coding words qdap gives two approaches.  Each has distinct benefits and disadvantages dependant upon the situation.  If you chose the coding of time spans qdap provides one option. 
+
+If you chose the coding of words you may chose to code a csv file or to code the transcript directly (perhaps with markers or other forms of markup), record the ranges in a text list and then read in the data.  Both approaches can result in the same data being read back into qdap.  The csv approach may allow for extended capabilties (beyond the scope of this vignette) while the transcript approach is generally more efficient and takes the approach many qualitative researchers typically utilize in qualitative coding (it also has the added benefit of producing a hard copy).
+
+The next three subsections will walk the reader through how to make a template, code in the template, and read the data back into R/qdap.  Subsections 4-5 will cover reshaping and initial analysis after the data has been read in (this approach is generally the same for all three coded data types).
+
+1. <a href="#wordcsv">Coding Words - The .csv Approach</a> - How to template, code, read in the data
+2. <a href="#wordtrans">Coding Words - The Transcript Approach</a> - How to template, code, read in the data
+3. <a href="#timespan">Coding Time Spans</a> - How to template, code, read in the data
+4. <a href="#reshape">Reshaping, Merging, and Combining cm Dataframes</a>
+5. <a href="#analysis">Initial Coding Analysis</a>
+
+<h4 id="wordcsv">Coding Words - The .csv Approach</h4>
+
+To produce the csv template approach use simply supply the dataframe, specify the text variable and provide a list of anticipated codes.  
+ 
+
+<font size="5" color="orange">&diams;</font> **Coding Template** - *Coding Words (csv approach)*<font size="5" color="orange">&diams;</font>
+
+
+```r
+codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
+X <- cm_df.temp(DATA, "state", codes)
+head(X, 10)
+```
+
+
+
+```
+##    person sex adult code     text word.num dc sf wes pol rejk lk azx mmm
+## 1     sam   m     0   K1 Computer        1  0  0   0   0    0  0   0   0
+## 2     sam   m     0   K1       is        2  0  0   0   0    0  0   0   0
+## 3     sam   m     0   K1     fun.        3  0  0   0   0    0  0   0   0
+## 4     sam   m     0   K1      Not        4  0  0   0   0    0  0   0   0
+## 5     sam   m     0   K1      too        5  0  0   0   0    0  0   0   0
+## 6     sam   m     0   K1     fun.        6  0  0   0   0    0  0   0   0
+## 7    greg   m     0   K2       No        7  0  0   0   0    0  0   0   0
+## 8    greg   m     0   K2     it's        8  0  0   0   0    0  0   0   0
+## 9    greg   m     0   K2     not,        9  0  0   0   0    0  0   0   0
+## 10   greg   m     0   K2     it's       10  0  0   0   0    0  0   0   0
+```
+
+
+<h4 id="wordtrans">Coding Words - The Transcript Approach</h4>
+
+
+```r
+with(DATA[1:4, ], cm_df.transcript(state, person))
+```
+
+
+<pre><code>sam:
+
+                                  
+     1        2  3    4   5   6   
+     Computer is fun. Not too fun.
+
+greg:
+
+                            
+     7  8    9    10   11   
+     No it's not, it's dumb.
+
+teacher:
+
+                       
+     12   13     14 15 
+     What should we do?
+
+sam:
+
+                         
+     16  17    18 19     
+     You liar, it stinks!
+</code></pre>
+
+
+```r
+cm_range.temp(qcv(AA, BB, CC))
+```
+
+
+<pre><code>list(
+    AA = qcv(terms=''),
+    BB = qcv(terms=''),
+    CC = qcv(terms='')
+)
+</code></pre>
+
+
+```r
+with(DATA, cm_range.temp(qcv(AA, BB, CC), , state, list(person, adult)))
+```
+
+
+<pre><code>list(
+    person_greg = qcv(terms='7:11, 20:24, 30:33, 49:56'),
+    person_researcher = qcv(terms='42:48'),
+    person_sally = qcv(terms='25:29, 37:41'),
+    person_sam = qcv(terms='1:6, 16:19, 34:36'),
+    person_teacher = qcv(terms='12:15'),
+    adult_0 = qcv(terms='1:11, 16:41, 49:56'),
+    adult_1 = qcv(terms='12:15, 42:48'),
+    AA = qcv(terms=''),
+    BB = qcv(terms=''),
+    CC = qcv(terms='')
+)
+</code></pre>
+
+<h4 id="timespan">Coding Time Spans</h4>
+
+
+```r
+cm_time.temp(qcv(AA, BB, CC), ":14", "7:40", file="foo.txt")
+```
+
+
+
+<pre><code>[0]                                14 15 16 ... 51 52 53 54 55 56 57 58 59
+[1]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
+[2]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
+[3]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
+[4]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
+[5]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
+[6]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
+[7]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59                                                 
+
+
+list(
+    transcript_time_span = qcv(terms="00:00 - 00:00"),
+    AA = qcv(terms=""),
+    BB = qcv(terms=""),
+    CC = qcv(terms="")
+)
+</code></pre>
+
+
+```r
+cm_time.temp(qcv(AA, BB, CC))
+```
+
+```
+##                                                        
+##  list(                                                 
+##      transcript_time_span = qcv(terms="00:00 - 00:00"),
+##      AA = qcv(terms=""),                               
+##      BB = qcv(terms=""),                               
+##      CC = qcv(terms="")                                
+##  )
+```
+
+
+<h4 id="reshape">Merging, Reshaping, and Combining the Codes</h4>
+<h4 id="analysis">Initial Coding Analysis</h4>
+
+
 
 <h3 id="counts">Word Counts and Descriptive Statistics</h3>
 

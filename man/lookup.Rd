@@ -21,7 +21,9 @@
   if key.match is not a two column data.frame/named list.}
 
   \item{missing}{Value to assign to terms not matching the
-  key.match.}
+  key.match.  If set to \code{NULL} the original values in
+  \code{terms} corresponding to the missing elements are
+  retained.}
 }
 \value{
   Outputs A new vector with reassigned values.
@@ -39,6 +41,9 @@
 ## Supply a dataframe to key.match
 
 lookup(1:5, data.frame(1:4, 11:14))
+
+## Retain original values for missing
+lookup(1:5, data.frame(1:4, 11:14), missing=NULL)
 
 lookup(LETTERS[1:5], data.frame(LETTERS[1:5], 100:104))
 

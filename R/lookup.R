@@ -9,7 +9,9 @@
 #' vector match key.
 #' @param key.reassign A single reassignment vector supplied if key.match is 
 #' not a two column data.frame/named list.
-#' @param missing Value to assign to terms not matching the key.match.
+#' @param missing Value to assign to terms not matching the key.match.  If set 
+#' to \code{NULL} the original values in \code{terms} corresponding to the 
+#' missing elements are retained.
 #' @return Outputs A new vector with reassigned values.
 #' @seealso 
 #' \code{\link[base]{new.env}}
@@ -21,6 +23,9 @@
 #' ## Supply a dataframe to key.match
 #' 
 #' lookup(1:5, data.frame(1:4, 11:14))
+#' 
+#' ## Retain original values for missing 
+#' lookup(1:5, data.frame(1:4, 11:14), missing=NULL) 
 #' 
 #' lookup(LETTERS[1:5], data.frame(LETTERS[1:5], 100:104))
 #' 
@@ -94,9 +99,16 @@ function(terms, key.match, key.reassign=NULL, missing = NA) {
             }
         }                                                      
         sapply(x, rc, USE.NAMES = FALSE, envr = envr)                       
-    }                                                              
-    recoder(terms, envr = KEY, missing = missing)     
+    }    
+    if (is.null(missing)) {
+        x <- recoder(terms, envr = KEY, missing = NA) 
+        x[is.na(x)] <- terms[is.na(x)]
+        x
+    } else {                                                         
+        recoder(terms, envr = KEY, missing = missing)     
+    }
 }
+
 
 #' Hash/Dictionary Lookup
 #' 

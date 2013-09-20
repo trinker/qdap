@@ -50,7 +50,7 @@ function (text.var, grouping.var, file = NULL, indent = 4, width = 70, ...) {
     }
     DF <- sentCombine(text.var, grouping.var)
     DF2 <- cm_df.temp(DF, "text.var", ...)
-    y <- rle(as.character(DF2$group))
+    y <- rle(as.character(DF2[, "grouping.var"]))
     lens <- y$lengths
     group <- y$values
     x <- cumsum(lens)

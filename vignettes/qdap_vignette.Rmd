@@ -575,7 +575,7 @@ Often the researcher who deals with text data will have the need to lookup value
 
 ```{r}
 lookup(1:5, data.frame(1:4, 11:14))
-
+lookup(LETTERS[1:5], data.frame(LETTERS[1:4], 11:14), missing = NULL)
 lookup(LETTERS[1:5], data.frame(LETTERS[1:5], 100:104))
 ```
 
@@ -1537,11 +1537,12 @@ with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))
    
 <h3 id="coding">Qualitative Coding System</h3>
 
+
 <div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank">
-    <input type="submit" value="cm_code.blank"> - Blank Code Transformation
+    <input type="submit" value="cm_code.blank"> - `r HR("#code.blank", "Blank Code Transformation")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank">
@@ -1608,6 +1609,144 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="cm_time2long"> - Transform Codes to Start-End Times
 </form>
 </div>
+
+A major task in qualitative work is coding either time or words with selected coding structures.  For example a researcher may code the teacher's dialogue as related to the resulting behavior of a student in a classroom as "high", "medium" or "low" engagement. The researcher may choose to apply the coding to:
+
+- The dialogue
+- The time spans
+
+The coding process in qdap starts with decison of whether to code the dialogue and/or the time spans.  After that the researcher may follow the sequential subsections in the `r HR("#coding", "Qualitative Coding System")` section outlined in these steps:
+
+1. Making a template for coding dialogue/time spans
+2. The actual coding  dialogue/time spans
+3. Reading in the dialogue/time spans
+4. Merging/reshaping/combining the read in dialogue/time spans
+5. Initial analysis
+
+If you choose the route of coding words qdap gives two approaches.  Each has distinct benefits and disadvantages dependant upon the situation.  If you chose the coding of time spans qdap provides one option. 
+
+If you chose the coding of words you may chose to code a csv file or to code the transcript directly (perhaps with markers or other forms of markup), record the ranges in a text list and then read in the data.  Both approaches can result in the same data being read back into qdap.  The csv approach may allow for extended capabilties (beyond the scope of this vignette) while the transcript approach is generally more efficient and takes the approach many qualitative researchers typically utilize in qualitative coding (it also has the added benefit of producing a hard copy).
+
+The next three subsections will walk the reader through how to make a template, code in the template, and read the data back into R/qdap.  Subsections 4-5 will cover reshaping and initial analysis after the data has been read in (this approach is generally the same for all three coded data types).
+
+1. `r HR("#wordcsv", "Coding Words - The .csv Approach")` - How to template, code, read in the data
+2. `r HR("#wordtrans", "Coding Words - The Transcript Approach")` - How to template, code, read in the data
+3. `r HR("#timespan", "Coding Time Spans")` - How to template, code, read in the data
+4. `r HR("#reshape", "Reshaping, Merging, and Combining cm Dataframes")`
+5. `r HR("#analysis", "Initial Coding Analysis")`
+
+<h4 id="wordcsv">Coding Words - The .csv Approach</h4>
+
+To produce the csv template approach use simply supply the dataframe, specify the text variable and provide a list of anticipated codes.  
+ 
+
+`r FT(orange, 5, text="&diams;")` **Coding Template** - *Coding Words (csv approach)*`r FT(orange, 5, text="&diams;")`
+
+```{r eval= FALSE}
+codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
+X <- cm_df.temp(DATA, "state", codes, csv=TRUE)
+head(X, 10)
+```
+
+```{r echo = FALSE}
+codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
+X <- cm_df.temp(DATA, "state", codes)
+head(X, 10)
+```
+
+<h4 id="wordtrans">Coding Words - The Transcript Approach</h4>
+
+```{r eval=FALSE}
+with(DATA[1:4, ], cm_df.transcript(state, person))
+```
+
+<pre><code>sam:
+
+                                  
+     1        2  3    4   5   6   
+     Computer is fun. Not too fun.
+
+greg:
+
+                            
+     7  8    9    10   11   
+     No it's not, it's dumb.
+
+teacher:
+
+                       
+     12   13     14 15 
+     What should we do?
+
+sam:
+
+                         
+     16  17    18 19     
+     You liar, it stinks!
+</code></pre>
+
+```{r eval=FALSE}
+cm_range.temp(qcv(AA, BB, CC))
+```
+
+<pre><code>list(
+    AA = qcv(terms=''),
+    BB = qcv(terms=''),
+    CC = qcv(terms='')
+)
+</code></pre>
+
+```{r eval=FALSE}
+with(DATA, cm_range.temp(qcv(AA, BB, CC), , state, list(person, adult)))
+```
+
+<pre><code>list(
+    person_greg = qcv(terms='7:11, 20:24, 30:33, 49:56'),
+    person_researcher = qcv(terms='42:48'),
+    person_sally = qcv(terms='25:29, 37:41'),
+    person_sam = qcv(terms='1:6, 16:19, 34:36'),
+    person_teacher = qcv(terms='12:15'),
+    adult_0 = qcv(terms='1:11, 16:41, 49:56'),
+    adult_1 = qcv(terms='12:15, 42:48'),
+    AA = qcv(terms=''),
+    BB = qcv(terms=''),
+    CC = qcv(terms='')
+)
+</code></pre>
+
+<h4 id="timespan">Coding Time Spans</h4>
+
+```{r eval= FALSE}
+cm_time.temp(qcv(AA, BB, CC), ":14", "7:40", file="foo.txt")
+```
+
+
+<pre><code>[0]                                14 15 16 ... 51 52 53 54 55 56 57 58 59
+[1]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
+[2]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
+[3]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
+[4]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
+[5]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
+[6]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
+[7]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59                                                 
+
+
+list(
+    transcript_time_span = qcv(terms="00:00 - 00:00"),
+    AA = qcv(terms=""),
+    BB = qcv(terms=""),
+    CC = qcv(terms="")
+)
+</code></pre>
+
+```{r}
+cm_time.temp(qcv(AA, BB, CC))
+```
+
+<h4 id="reshape">Merging, Reshaping, and Combining the Codes</h4>
+<h4 id="analysis">Initial Coding Analysis</h4>
+
+
 
 <h3 id="counts">Word Counts and Descriptive Statistics</h3>
 

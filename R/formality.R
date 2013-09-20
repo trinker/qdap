@@ -248,6 +248,9 @@ formality <- function(text.var, grouping.var = NULL,
 #' @param order.by.formality logical.  If \code{TRUE} the group polarity plot 
 #' will be ordered by average polarity score, otherwise alphabetical order is 
 #' assumed.
+#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
+#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
+#' to add additional plot layers.
 #' @param \ldots ignored
 #' @return Invisibly returns the \code{ggplot2} objects that form the larger 
 #' plot.
@@ -258,7 +261,7 @@ formality <- function(text.var, grouping.var = NULL,
 plot.formality <- function(x, point.pch = 20, point.cex = .5,            
     point.colors = c("gray65", "red"), bar.colors = NULL, 
     short.names = FALSE, min.wrdcnt = NULL, order.by.formality = TRUE, 
-    ...) {
+    plot, ...) {
     grouping <- form.class <- NULL
     dat <- x$pos.reshaped   
     FOR <- x$formality
@@ -349,9 +352,11 @@ plot.formality <- function(x, point.pch = 20, point.cex = .5,
     } else {                                                                 
         geom_point(colour=point.colors[2], shape=point.pch, 
             size=point.cex)  
-    }                                                                     
-    suppressWarnings(grid.arrange(YY, XX,                         
-        ZZ, widths=c(.24, .47, .29), ncol=3))     
+    }   
+    if (plot) {
+        suppressWarnings(grid.arrange(YY, XX,                         
+            ZZ, widths=c(.24, .47, .29), ncol=3))   
+    }
     invisible(list(f1 = XX, f2 = YY, f3 = ZZ))
 }
 

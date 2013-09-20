@@ -6,7 +6,8 @@
     mid = "grey99", high = "blue",
     ave.polarity.shape = "+", alpha = 1/4, shape = 19,
     point.size = 2.5, jitter = 0.1, nrow = NULL,
-    na.rm = TRUE, order.by.polarity = TRUE, ...)
+    na.rm = TRUE, order.by.polarity = TRUE, plot = TRUE,
+    ...)
 }
 \arguments{
   \item{x}{The polarity object.}
@@ -45,6 +46,11 @@
   \item{order.by.polarity}{logical.  If \code{TRUE} the
   group polarity plot will be ordered by average polarity
   score, otherwise alphabetical order is assumed.}
+
+  \item{plot}{logical.  If \code{TRUE} the plot will
+  automatically plot. The user may wish to set to
+  \code{FALSE} for use in knitr, sweave, etc. to add
+  additional plot layers.}
 
   \item{\ldots}{ignored}
 }

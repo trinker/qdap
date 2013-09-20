@@ -109,6 +109,13 @@ This may break backward compatibility.  Thus this is a **major** release
 * The `new_project` function gains a `github` argument that optionally sends the 
   repo to GitHub public account upon creation.
 
+* `qheat`, `polarity.plot` and `formality.plot` pick up the argument `plot` 
+  which suppresses the plotting.  This is useful if the user is operating in 
+  knitr, sewave, etc. and wishes to alter/add onto the plot.
+
+* `lookup` now takes `missing = NULL`.  This results in the original values in
+  `terms` corresponding to the missing elements are retained.
+
 <b>CHANGES</b>
 
 * The dictionaries and word lists for qdap have been moved to their own package, 

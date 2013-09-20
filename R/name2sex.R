@@ -36,6 +36,26 @@
 #' 
 #' name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, 
 #'     tyler, jamie, JAMES, tyrone, cheryl, drew), TRUE, FALSE)
+#'
+#' ## Get rank percent frequency ratio of being a gender
+#' library(qdapDictionaries)
+#' 
+#' orig_nms <- qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA,
+#'     tyler, jamie, JAMES, tyrone, cheryl, drew)
+#' 
+#' sex <- name2sex(orig_nms, FALSE, TRUE)
+#' 
+#' names(sex) <- rep("", length(sex))
+#' names(sex)[sex == "B"] <- sapply(toupper(orig_nms[sex == "B"]), function(x) {
+#'         y <- NAMES[NAMES[, 1] %in% x, ]
+#'         round(Reduce("/", y[ order(y[, "gender"]), "per.freq"]), 3)
+#'     })
+#' 
+#' ## The likelihood of being a female name
+#' sex
+#' orig_nms 
+#' data.frame(name = orig_nms, sex = sex, `ratio_F:M` = names(sex), 
+#'     check.names=FALSE)
 #' }
 name2sex <- 
 function(names.list, pred.sex = TRUE, fuzzy.match = pred.sex, USE.NAMES = FALSE) {

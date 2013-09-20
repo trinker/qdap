@@ -5,7 +5,8 @@
   \method{plot}{formality} (x, point.pch = 20,
     point.cex = 0.5, point.colors = c("gray65", "red"),
     bar.colors = NULL, short.names = FALSE,
-    min.wrdcnt = NULL, order.by.formality = TRUE, ...)
+    min.wrdcnt = NULL, order.by.formality = TRUE, plot,
+    ...)
 }
 \arguments{
   \item{x}{The formality object.}
@@ -31,6 +32,11 @@
   \item{order.by.formality}{logical.  If \code{TRUE} the
   group polarity plot will be ordered by average polarity
   score, otherwise alphabetical order is assumed.}
+
+  \item{plot}{logical.  If \code{TRUE} the plot will
+  automatically plot. The user may wish to set to
+  \code{FALSE} for use in knitr, sweave, etc. to add
+  additional plot layers.}
 
   \item{\ldots}{ignored}
 }

@@ -55,10 +55,11 @@ cm_df.temp <- function(dataframe, text.var, codes = NULL, csv = TRUE,
         MAT <- matrix(rep(0, lcodes*lwrds), lwrds, lcodes)
         colnames(MAT) <- codes      
         DF <- data.frame(leftover[rep(1:nrow(leftover), lens), , 
-            drop = FALSE], text=unlist(wrds), word.num = 1:lwrds, MAT)  
+            drop = FALSE], text=unlist(wrds), word.num = 1:lwrds, MAT, 
+            check.names = FALSE)  
     } else {
         DF <- data.frame(leftover[rep(1:nrow(leftover), lens), , 
-            drop = FALSE], text=unlist(wrds)) 
+            drop = FALSE], text=unlist(wrds), check.names = FALSE) 
     }
     DF[, "word.num"] <- 1:nrow(DF)
     if (transpose) {
