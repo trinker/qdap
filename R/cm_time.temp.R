@@ -41,12 +41,22 @@ function(codes, start = ":00", end = NULL, file=NULL, coding = FALSE,
     }  
     if (!is.null(end)) {
         wid <- options()$width
+        wdth <- options()[["width"]]
+        on.exit(options(width = wdth))
         options(width=1000)
-        x1 <- matrix(c("list(", 
-            "    transcript_time_span = qcv(terms=\"00:00 - 00:00\"),", 
-            paste0("    ", codes[1:(length(codes)-1)], " = qcv(terms=\"\"),"),
-            paste0("    ", codes[length(codes)], " = qcv(terms=\"\")"),
-            ")"), ncol = 1)
+
+        if (!missing(codes)) {
+
+            x1 <- matrix(c("list(", 
+                "    transcript_time_span = qcv(terms=\"00:00 - 00:00\"),", 
+                paste0("    ", codes[1:(length(codes)-1)], " = qcv(terms=\"\"),"),
+                paste0("    ", codes[length(codes)], " = qcv(terms=\"\")"),
+                ")"), ncol = 1)
+
+        } else {
+            x1 <- NULL
+        }
+
         st <- unlist(strsplit(start, ":"))
         en <- as.numeric(unlist(strsplit(end, ":")))
         st[1] <- ifelse(st[1]=="", "0", st[1])

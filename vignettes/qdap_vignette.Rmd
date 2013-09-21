@@ -1815,11 +1815,9 @@ The Time Span approach utilizes the `r FUN("cm_time.temp")` and `r FUN("cm_time2
 `r FT(orange, 5, text="&diams;")` **Coding Times Spans**: Time Span Template `r FT(orange, 5, text="&diams;")`
 
 <pre><code class="r">## Codes
-codes <- qcv(AA, BB, CC)
-
 ## Time span template
-X <- cm_time.temp(codes = codes, start = ":14", end = "7:40", file="timespans.txt")
-X <- cm_time.temp(codes, start = ":14", end = "7:40", file="timespans.doc")
+X <- cm_time.temp(start = ":14", end = "7:40", file="timespans.txt")
+X <- cm_time.temp(start = ":14", end = "7:40", file="timespans.doc")
 </code></pre>
 
 
@@ -1837,6 +1835,7 @@ X <- cm_time.temp(codes, start = ":14", end = "7:40", file="timespans.doc")
 `r FT(orange, 5, text="&diams;")` **Coding Times Spans**: List Template`r FT(orange, 5, text="&diams;")`
 
 <pre><code class="r">### List template
+codes <- qcv(AA, BB, CC)
 cm_time.temp(codes, file = "codelist.txt")
 </code></pre>
 

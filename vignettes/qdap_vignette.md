@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.79 22.40 25.34 19.70 19.70 22.40 15.79 19.70 15.00 15.79 25.34
-## [12] 15.79 15.00 19.70 25.34 19.70 16.30 22.40 22.40 22.40
+##  [1] 16.30 25.34 25.34 22.40 16.30 22.40 16.30 22.40 22.40 15.79 16.30
+## [12] 15.00 15.79 19.70 16.30 22.40 22.40 15.00 15.79 15.00
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.79 22.40 25.34 19.70 19.70 22.40 15.79 19.70 15.00 15.79 25.34
-## [12] 15.79 15.00 19.70 25.34 19.70 16.30 22.40 22.40 22.40
+##  [1] 16.30 25.34 25.34 22.40 16.30 22.40 16.30 22.40 22.40 15.79 16.30
+## [12] 15.00 15.79 19.70 16.30 22.40 22.40 15.00 15.79 15.00
 ```
 
 
@@ -4715,11 +4715,9 @@ The Time Span approach utilizes the <a href="http://trinker.github.io/qdap_dev/c
 <font size="5" color="orange">&diams;</font> **Coding Times Spans**: Time Span Template <font size="5" color="orange">&diams;</font>
 
 <pre><code class="r">## Codes
-codes <- qcv(AA, BB, CC)
-
 ## Time span template
-X <- cm_time.temp(codes = codes, start = ":14", end = "7:40", file="timespans.txt")
-X <- cm_time.temp(codes, start = ":14", end = "7:40", file="timespans.doc")
+X <- cm_time.temp(start = ":14", end = "7:40", file="timespans.txt")
+X <- cm_time.temp(start = ":14", end = "7:40", file="timespans.doc")
 </code></pre>
 
 
@@ -4737,6 +4735,7 @@ X <- cm_time.temp(codes, start = ":14", end = "7:40", file="timespans.doc")
 <font size="5" color="orange">&diams;</font> **Coding Times Spans**: List Template<font size="5" color="orange">&diams;</font>
 
 <pre><code class="r">### List template
+codes <- qcv(AA, BB, CC)
 cm_time.temp(codes, file = "codelist.txt")
 </code></pre>
 
