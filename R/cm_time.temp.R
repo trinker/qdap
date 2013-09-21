@@ -41,6 +41,33 @@ function(codes, grouping.var = NULL, start = ":00", end = NULL, file=NULL, codin
     if (Sys.info()["sysname"] != "Windows") {
         writeClipboard <- NULL
     }  
+
+    if (!is.null(end)) {
+        start <- hms2ms(start)
+        end <- hms2ms(end)
+    }
+
+    if (!is.null(grouping.var)) {
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            G <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
+
+        lvs <- lapply(grouping.var, unique)
+        if (missing(codes)) {
+            codes <- NULL
+        }
+        codes <- c(unlist(lapply(seq_along(G), function(i) {
+            paste(G[i], lvs[[i]], sep="_")
+        })), codes)
+    }
+
     if (!is.null(end)) {
         wid <- options()$width
         wdth <- options()[["width"]]
@@ -129,4 +156,46 @@ function(codes, grouping.var = NULL, start = ":00", end = NULL, file=NULL, codin
                 "\n)\n"), file = file, append = TRUE) 
         } 
     }
+}
+
+hms2ms <- 
+function(x) {
+    hms <- as.character(x)
+    op <- FALSE
+    if (length(hms) == 1) {
+        hms <- c(hms, "00:00:00")
+        op <- TRUE  
+    }
+    spl <- strsplit(hms, ":")
+    spl2 <- lapply(spl, function(x) {
+       if (length(x) == 1) {
+           if (x[1] == "") {
+               stop("An element is blank")
+           } 
+           x <- c(rep("00", 2), x[1])
+       }        
+       if (length(x) == 2) {
+           if (x[1] == "") {
+               x <- c(rep("00", 2), x[2])
+           } else {
+               x <- c(rep("00", 1), x[1:2])
+           }
+       }
+       if (x[1] == "") {
+           x <- c(rep("00", 1), x[1:2])
+       } 
+       x
+    })
+
+    DF <- sapply(data.frame(do.call(rbind, spl2)), function(x){
+        as.numeric(as.character(x))
+    })
+
+    cmb <- apply(cbind(DF[, 1]*60 + DF[, 2], DF[, 3]), 2, pad, 2, sort=FALSE)
+    
+    out <- paste2(cmb, sep=":")
+    if (op) {
+        out <- out[1]
+    }
+    out
 }
