@@ -21,7 +21,7 @@ And constructed with the following guidelines:
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.0.0
 ----------------------------------------------------------------
 
-The word lists and dictionaries in `<a href="https://github.com/trinker/qdap" target="_blank">qdap</a>` have been moved to `<a href="https://github.com/trinker/qdap" target="_blank">qdap</a>Dictionaries`. 
+The word lists and dictionaries in `qdap` have been moved to `qdapDictionaries`. 
 This may break backward compatibility.  Thus this is a **major** release 
 (ver. 1.0.0).
 
@@ -31,7 +31,7 @@ This may break backward compatibility.  Thus this is a **major** release
   has been fixed.
 
 * `question_type` did not work because of changes to `lookup` that did not 
-  accept a two column matrix for `key.match`.  See GitHub <a href="https://github.com/trinker/<a href="https://github.com/trinker/qdap" target="_blank">qdap</a>/issues/127">issue #127</a> for more.
+  accept a two column matrix for `key.match`.  See GitHub <a href="https://github.com/trinker/qdap/issues/127">issue #127</a> for more.
 
 * `combo_syllable.sum` threw an error if the text.var contained a cell with an 
   all non-character ([a-z]) string.  This behavior has been fixed.
@@ -41,7 +41,7 @@ This may break backward compatibility.  Thus this is a **major** release
 
 * `termco` and `termco.d` threw an error if more than one consecutive regex 
   special character was passed to `match.list` or `match.string`.  See GitHub 
-  <a href="https://github.com/trinker/<a href="https://github.com/trinker/qdap" target="_blank">qdap</a>/issues/128">issue #128</a> for more. 
+  <a href="https://github.com/trinker/qdap/issues/128">issue #128</a> for more. 
 
 * `trans.cloud` threw an error if a single list with a named vector was passed 
   to `target.words`.  Thes behavior has been fixed.
@@ -119,7 +119,7 @@ This may break backward compatibility.  Thus this is a **major** release
 <b>CHANGES</b>
 
 * The dictionaries and word lists for <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> have been moved to their own package, 
-  `<a href="https://github.com/trinker/qdap" target="_blank">qdap</a>Dictionaries`.  This will allow easier access to these resources beyond 
+  `qdapDictionaries`.  This will allow easier access to these resources beyond 
   the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package as well as reducing the overall size of the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package.  
   Because this is a major change that make break the code of some users the 
   major release number has been upped to 1.  The following name changes have 
@@ -149,7 +149,7 @@ Patch release.  This version deals with the changes in the `openNLP` package
   that effect <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>.  Next major release scheduled after `slidify` package is 
   pushed to CRAN.
 
-<a href="https://github.com/trinker/qdap" target="_blank">qdap</a> 0.2.3
+qdap 0.2.3
 ----------------------------------------------------------------
 <b>BUG FIXES</b>
 
