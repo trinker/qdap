@@ -92,7 +92,7 @@ This may break backward compatibility.  Thus this is a **major** release
 
 * `hash_look` (and `%ha%`) a counterpart to `hash` added to allow quick access 
   to a hash table.  Intended for use within functions or multiple uses of the 
-  same hash table, whereas lookup is intended for a single external (non 
+  same hash table, whereas `lookup` is intended for a single external (non 
   function) use which is more convenient though could be slower.
 
 * `polarity_frame` a function to make a hash environment lookup for use with the 

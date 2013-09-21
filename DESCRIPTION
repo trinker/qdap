@@ -3,6 +3,9 @@ Type: Package
 Title: Bridging the gap between qualitative data and quantitative analysis
 Version: 1.0.0
 Date: 2013-06-26
+Authors@R: c(person("Bryan", "Goodrich", role = "ctb"), person("Dason",
+    "Kurkiewicz", role = "ctb"), person("Tyler", "Rinker", email =
+    "tyler.rinker@gmail.com", role = c("aut", "cre")))
 Author: Tyler Rinker
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 VignetteBuilder: knitr
@@ -49,11 +52,6 @@ Description: This package automates many of the tasks associated with
     the user a more efficient and targeted analysis.  qdap is designed for
     transcript analysis, however, many functions are applicable to other areas
     of Text Mining/Natural Language Processing
-Acknowledgments: I would like to thank the many folks at talkstats.com and
-    stackoverflow.com for their help in answering many R questions related to
-    qdap.  I'd like to particularly thank Dason Kurkiewicz for his constant
-    mentoring/assistance in learning the R language, GitHub and package
-    development.
 License: GPL-2
 URL: http://trinker.github.com/qdap/
 BugReports: http://github.com/trinker/qdap/issues
