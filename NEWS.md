@@ -18,10 +18,10 @@ And constructed with the following guidelines:
 
 
 
-<b>CHANGES</b> IN qdap VERSION 1.0.0
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.0.0
 ----------------------------------------------------------------
 
-The word lists and dictionaries in `qdap` have been moved to `qdapDictionaries`. 
+The word lists and dictionaries in `<a href="https://github.com/trinker/qdap" target="_blank">qdap</a>` have been moved to `<a href="https://github.com/trinker/qdap" target="_blank">qdap</a>Dictionaries`. 
 This may break backward compatibility.  Thus this is a **major** release 
 (ver. 1.0.0).
 
@@ -31,7 +31,7 @@ This may break backward compatibility.  Thus this is a **major** release
   has been fixed.
 
 * `question_type` did not work because of changes to `lookup` that did not 
-  accept a two column matrix for `key.match`.  See GitHub <a href="https://github.com/trinker/qdap/issues/127">issue #127</a> for more.
+  accept a two column matrix for `key.match`.  See GitHub <a href="https://github.com/trinker/<a href="https://github.com/trinker/qdap" target="_blank">qdap</a>/issues/127">issue #127</a> for more.
 
 * `combo_syllable.sum` threw an error if the text.var contained a cell with an 
   all non-character ([a-z]) string.  This behavior has been fixed.
@@ -41,7 +41,7 @@ This may break backward compatibility.  Thus this is a **major** release
 
 * `termco` and `termco.d` threw an error if more than one consecutive regex 
   special character was passed to `match.list` or `match.string`.  See GitHub 
-  <a href="https://github.com/trinker/qdap/issues/128">issue #128</a> for more. 
+  <a href="https://github.com/trinker/<a href="https://github.com/trinker/qdap" target="_blank">qdap</a>/issues/128">issue #128</a> for more. 
 
 * `trans.cloud` threw an error if a single list with a named vector was passed 
   to `target.words`.  Thes behavior has been fixed.
@@ -99,7 +99,7 @@ This may break backward compatibility.  Thus this is a **major** release
   `polarity` function.
 
 * `DATA.SPLIT` a `sentSplit` version of the `DATA` dataset has been added to 
-  qdap.
+  <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>.
 
 * `gantt_plot` accepts`NULL`.for `grouping.var` and figures for "all" rows as a 
   single grouping var.
@@ -118,9 +118,9 @@ This may break backward compatibility.  Thus this is a **major** release
 
 <b>CHANGES</b>
 
-* The dictionaries and word lists for qdap have been moved to their own package, 
-  `qdapDictionaries`.  This will allow easier access to these resources beyond 
-  the qdap package as well as reducing the overall size of the qdap package.  
+* The dictionaries and word lists for <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> have been moved to their own package, 
+  `<a href="https://github.com/trinker/qdap" target="_blank">qdap</a>Dictionaries`.  This will allow easier access to these resources beyond 
+  the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package as well as reducing the overall size of the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package.  
   Because this is a major change that make break the code of some users the 
   major release number has been upped to 1.  The following name changes have 
   occurred:
@@ -130,7 +130,7 @@ This may break backward compatibility.  Thus this is a **major** release
     - The deamplification.words and env.pol wordlist and dictionary were added as 
         well.
 
-* qdap gains an HTML package vignette to better explain the intended work flow 
+* <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> gains an HTML package vignette to better explain the intended work flow 
   and function use for the package.
 
 * `polarity` utilizes a new, unbounded algorithm based on weighting to determine 
@@ -142,14 +142,14 @@ This may break backward compatibility.  Thus this is a **major** release
   with `file` to fit conventional R naming schemes.
 
 
-<b>CHANGES</b> IN qdap VERSION 0.2.5
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5
 ----------------------------------------------------------------
 
 Patch release.  This version deals with the changes in the `openNLP` package 
-  that effect qdap.  Next major release scheduled after `slidify` package is 
+  that effect <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>.  Next major release scheduled after `slidify` package is 
   pushed to CRAN.
 
-qdap 0.2.3
+<a href="https://github.com/trinker/qdap" target="_blank">qdap</a> 0.2.3
 ----------------------------------------------------------------
 <b>BUG FIXES</b>
 
@@ -186,7 +186,7 @@ qdap 0.2.3
   `file.path(getwd(), "DIR/file.ext")` is used rather than the full file path).
 
 
-<b>CHANGES</b> IN qdap VERSION 0.2.2
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.2
 ----------------------------------------------------------------
 
 <b>BUG FIXES</b>
@@ -223,10 +223,10 @@ qdap 0.2.3
 
 <b>CHANGES</b>
 
-* qdap is now compiled for mac users (as openNLP now passes CRAN checks with no
+* <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> is now compiled for mac users (as openNLP now passes CRAN checks with no
   Errors on Mac).
 
-<b>CHANGES</b> IN qdap VERSION 0.2.1
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.1
 ----------------------------------------------------------------
 
 <b>BUG FIXES</b>
@@ -278,14 +278,14 @@ qdap 0.2.3
 * `sec2hms` is the new name for `convert` 
 
 * `folder` and `delete` have been moved to the reports package which is imported 
-  by qdap.  Previously `folder` would not generate a directory with the 
+  by <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>.  Previously `folder` would not generate a directory with the 
   time/date stamp if no directory name was given; this has been fixed, though 
   the function now resides in the reports package.
 
-<b>CHANGES</b> IN qdap VERSION 0.2.0
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.0
 ----------------------------------------------------------------
 
-* The first installation of the qdap package
+* The first installation of the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package
 
 * Package designed to bridge the gap between qualitative data and quantitative 
   analysis
