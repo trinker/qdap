@@ -114,7 +114,7 @@ This may break backward compatibility.  Thus this is a **major** release
   knitr, sewave, etc. and wishes to alter/add onto the plot.
 
 * `lookup` now takes `missing = NULL`.  This results in the original values in
-  `terms` corresponding to the missing elements are retained.
+  `terms` corresponding to the missing elements being retained.
 
 <b>CHANGES</b>
 
@@ -137,6 +137,9 @@ This may break backward compatibility.  Thus this is a **major** release
   polarity.
 
 * `gantt_wrap` no longer accepts unquoted strings to the `plot.var` argument.
+
+* `cm_df.temp` loses the logical `csv` argument.  `file.name` have been replaced 
+  with `file` to fit conventional R naming schemes.
 
 
 <b>CHANGES</b> IN qdap VERSION 0.2.5

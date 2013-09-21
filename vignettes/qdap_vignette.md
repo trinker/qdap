@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 22.40 15.00 22.40 16.30 22.40 19.70 19.70 22.40 15.79 19.70
-## [12] 19.70 15.79 15.79 15.00 16.30 15.79 15.00 16.30 25.34
+##  [1] 15.79 22.40 25.34 19.70 19.70 22.40 15.79 19.70 15.00 15.79 25.34
+## [12] 15.79 15.00 19.70 25.34 19.70 16.30 22.40 22.40 22.40
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 22.40 15.00 22.40 16.30 22.40 19.70 19.70 22.40 15.79 19.70
-## [12] 19.70 15.79 15.79 15.00 16.30 15.79 15.00 16.30 25.34
+##  [1] 15.79 22.40 25.34 19.70 19.70 22.40 15.79 19.70 15.00 15.79 25.34
+## [12] 15.79 15.00 19.70 25.34 19.70 16.30 22.40 22.40 22.40
 ```
 
 
@@ -4522,54 +4522,90 @@ The coding process in qdap starts with decison of whether to code the dialogue a
 
 If you choose the route of coding words qdap gives two approaches.  Each has distinct benefits and disadvantages dependant upon the situation.  If you chose the coding of time spans qdap provides one option. 
 
-If you chose the coding of words you may chose to code a csv file or to code the transcript directly (perhaps with markers or other forms of markup), record the ranges in a text list and then read in the data.  Both approaches can result in the same data being read back into qdap.  The csv approach may allow for extended capabilties (beyond the scope of this vignette) while the transcript approach is generally more efficient and takes the approach many qualitative researchers typically utilize in qualitative coding (it also has the added benefit of producing a hard copy).
+If you chose the coding of words you may chose to code a csv file or to code the transcript directly (perhaps with markers or other forms of markup), record the ranges in a text list and then read in the data.  Both approaches can result in the same data being read back into qdap.  The csv approach may allow for extended capabilties (beyond the scope of this vignette) while the transcript/list approach is generally more efficient and takes the approach many qualitative researchers typically utilize in qualitative coding (it also has the added benefit of producing a hard copy).
 
 The next three subsections will walk the reader through how to make a template, code in the template, and read the data back into R/qdap.  Subsections 4-5 will cover reshaping and initial analysis after the data has been read in (this approach is generally the same for all three coded data types).
 
-1. <a href="#wordcsv">Coding Words - The .csv Approach</a> - How to template, code, read in the data
-2. <a href="#wordtrans">Coding Words - The Transcript Approach</a> - How to template, code, read in the data
-3. <a href="#timespan">Coding Time Spans</a> - How to template, code, read in the data
+1. <a href="#wordcsv">Coding Words - The .csv Approach</a> - How to template, code, read in and reshape the data
+2. <a href="#wordtrans">Coding Words - The Transcript/List Approach</a> - How to template, code, read in  and reshape the data
+3. <a href="#timespan">Coding Time Spans</a> - How to template, code, read in and reshape the data
 4. <a href="#reshape">Reshaping, Merging, and Combining cm Dataframes</a>
 5. <a href="#analysis">Initial Coding Analysis</a>
 
-<h4 id="wordcsv">Coding Words - The .csv Approach</h4>
+<h4 id="wordcsv">Coding Words - The .csv Approach <a href="http://www.youtube.com/watch?v=tH242SIESIs" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
+</h4>
 
-To produce the csv template approach use simply supply the dataframe, specify the text variable and provide a list of anticipated codes.  
- 
+The csv approach utilizes <a href="http://trinker.github.io/qdap_dev/cm_df.temp.html" target="_blank"><code>cm_df.temp</code></a> and <a href="http://trinker.github.io/qdap_dev/cm_df2long.html" target="_blank"><code>cm_df2long</code></a> functions.  To utilize the csv template approach simply supply the dataframe, specify the text variable and provide a list of anticipated codes.  
 
-<font size="5" color="orange">&diams;</font> **Coding Template** - *Coding Words (csv approach)*<font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Coding Words (csv approach)**: The Template <font size="5" color="orange">&diams;</font>
 
-
-```r
+<pre><code class="r">## Codes
 codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
-X <- cm_df.temp(DATA, "state", codes)
-head(X, 10)
-```
+
+## The csv template
+X <- cm_df.temp(DATA, text.var = "state", codes = codes, file = "DATA.csv")
+qview(X)
+</code></pre>
+
+<pre><code>========================================================================
+nrow =  56           ncol =  14             X
+========================================================================
+   person sex adult code     text word.num dc sf wes pol rejk lk azx mmm
+1     sam   m     0   K1 Computer        1  0  0   0   0    0  0   0   0
+2     sam   m     0   K1       is        2  0  0   0   0    0  0   0   0
+3     sam   m     0   K1     fun.        3  0  0   0   0    0  0   0   0
+4     sam   m     0   K1      Not        4  0  0   0   0    0  0   0   0
+5     sam   m     0   K1      too        5  0  0   0   0    0  0   0   0
+6     sam   m     0   K1     fun.        6  0  0   0   0    0  0   0   0
+7    greg   m     0   K2       No        7  0  0   0   0    0  0   0   0
+8    greg   m     0   K2     it's        8  0  0   0   0    0  0   0   0
+9    greg   m     0   K2     not,        9  0  0   0   0    0  0   0   0
+10   greg   m     0   K2     it's       10  0  0   0   0    0  0   0   0
+</code></pre>
+
+After coding the data (see the <a href="http://www.youtube.com/watch?v=tH242SIESIs" target="_blank">YouTube video</a> the data can be read back in with <a href="http://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html" target="_blank">read.csv</a>.
 
 
+<font size="5" color="orange">&diams;</font> **Coding Words (csv approach)**: Read In and Reshape <font size="5" color="orange">&diams;</font>
 
-```
-##    person sex adult code     text word.num dc sf wes pol rejk lk azx mmm
-## 1     sam   m     0   K1 Computer        1  0  0   0   0    0  0   0   0
-## 2     sam   m     0   K1       is        2  0  0   0   0    0  0   0   0
-## 3     sam   m     0   K1     fun.        3  0  0   0   0    0  0   0   0
-## 4     sam   m     0   K1      Not        4  0  0   0   0    0  0   0   0
-## 5     sam   m     0   K1      too        5  0  0   0   0    0  0   0   0
-## 6     sam   m     0   K1     fun.        6  0  0   0   0    0  0   0   0
-## 7    greg   m     0   K2       No        7  0  0   0   0    0  0   0   0
-## 8    greg   m     0   K2     it's        8  0  0   0   0    0  0   0   0
-## 9    greg   m     0   K2     not,        9  0  0   0   0    0  0   0   0
-## 10   greg   m     0   K2     it's       10  0  0   0   0    0  0   0   0
-```
+<pre><code class="r">## Read in the data
+dat <- read.csv("DATA.csv")
+
+## Reshape to long format with word durations
+cm_df2long(dat)
+</code></pre>
+
+<pre><code>    code     person sex adult code.1     text word.num start end variable
+1     dc        sam   m     0     K1 Computer        1     0   1      dat
+2    wes        sam   m     0     K1 Computer        1     0   1      dat
+3   rejk        sam   m     0     K1 Computer        1     0   1      dat
+4    mmm        sam   m     0     K1 Computer        1     0   1      dat
+5     lk        sam   m     0     K1       is        2     1   2      dat
+6    azx        sam   m     0     K1       is        2     1   2      dat
+.
+.
+.
+198  wes       greg   m     0    K11 already?       56    55  56      dat
+199 rejk       greg   m     0    K11 already?       56    55  56      dat
+200   lk       greg   m     0    K11 already?       56    55  56      dat
+201  azx       greg   m     0    K11 already?       56    55  56      dat
+202  mmm       greg   m     0    K11 already?       56    55  56      dat
+</code></pre>
 
 
-<h4 id="wordtrans">Coding Words - The Transcript Approach</h4>
+<h4 id="wordtrans">Coding Words - The Transcript/List Approach <a href="http://www.youtube.com/watch?v=cxcD-j0iI2U" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
+</h4>
 
+The Transcript/List approach utilizes <a href="http://trinker.github.io/qdap_dev/cm_df.transcript.html" target="_blank"><code>cm_df.transcript</code></a>,  <a href="http://trinker.github.io/qdap_dev/cm_range.temp.html" target="_blank"><code>cm_range.temp</code></a> and <a href="http://trinker.github.io/qdap_dev/cm_range2long.html" target="_blank"><code>cm_range2long</code></a> functions.  To use the transcript template simply supply the dataframe, specify the text variable and provide a list of anticipated codes.  
 
-```r
-with(DATA[1:4, ], cm_df.transcript(state, person))
-```
+<font size="5" color="orange">&diams;</font> **Coding Words (Transcript/List approach)**: Transcript Template <font size="5" color="orange">&diams;</font>
 
+<pre><code class="r">## Codes
+codes <- qcv(AA, BB, CC)
+
+## Transcript template
+X <- cm_df.transcript(DATA$state, DATA$person, file="DATA.txt")
+</code></pre>
 
 <pre><code>sam:
 
@@ -4596,11 +4632,11 @@ sam:
      You liar, it stinks!
 </code></pre>
 
+<font size="5" color="orange">&diams;</font> **Coding Words (Transcript/List approach)**: List Template 1<font size="5" color="orange">&diams;</font>
 
-```r
-cm_range.temp(qcv(AA, BB, CC))
-```
-
+<pre><code class="r">### List template
+cm_range.temp(codes, file = "foo1.txt")
+</code></pre>
 
 <pre><code>list(
     AA = qcv(terms=''),
@@ -4609,11 +4645,13 @@ cm_range.temp(qcv(AA, BB, CC))
 )
 </code></pre>
 
+This list contains demographic variables.  If the researcher has demographic variables it is recomended that they supply them at this point.  The demographic variables will be generated with durations automatically.
 
-```r
-with(DATA, cm_range.temp(qcv(AA, BB, CC), , state, list(person, adult)))
-```
+<font size="5" color="orange">&diams;</font> **Coding Words (Transcript/List approach)**: List Template 2<font size="5" color="orange">&diams;</font>
 
+<pre><code class="r">### List template with demographic variables
+with(DATA, cm_range.temp(codes, "foo2.txt", state, list(person, adult)))
+</code></pre>
 
 <pre><code>list(
     person_greg = qcv(terms='7:11, 20:24, 30:33, 49:56'),
@@ -4629,13 +4667,60 @@ with(DATA, cm_range.temp(qcv(AA, BB, CC), , state, list(person, adult)))
 )
 </code></pre>
 
-<h4 id="timespan">Coding Time Spans</h4>
+After coding the data (see the <a href="http://www.youtube.com/watch?v=cxcD-j0iI2U" target="_blank">YouTube video</a> the data can be read back in with <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html" target="_blank">source</a>.  Be sure to assign list to an object (e.g., `dat <- list()`).
+
+<font size="5" color="orange">&diams;</font> **Coding Words (Transcript/List approach)**: Read in the data<font size="5" color="orange">&diams;</font>
+
+<pre><code class="r">## Read it in
+source("foo1.txt")
+
+### View it
+Time1
+</code></pre>
+
+<pre><code>$AA
+[1] "1"
+
+$BB
+[1] "1:2,"  "3:10," "19"   
+
+$CC
+[1] "1:9,"    "100:150"
+</code></pre>
+
+This format is not particularly useful.  The data can be reshaped to long format with durations via <a href="http://trinker.github.io/qdap_dev/cm_range2long.html" target="_blank"><code>cm_range2long</code></a>:
+
+<font size="5" color="orange">&diams;</font> **Coding Words (Transcript/List approach)**: Long format<font size="5" color="orange">&diams;</font>
+
+<pre><code class="r">## Long format with durations
+datL <- cm_range2long(Time1)
+datL
+</code></pre>
+
+<pre><code>  code start end variable
+1   AA     0   1    Time1
+2   BB     0   2    Time1
+3   BB     2  10    Time1
+4   BB    18  19    Time1
+5   CC     0   9    Time1
+6   CC    99 150    Time1
+</code></pre>
+
+<h4 id="timespan">Coding Time Spans <a href="http://youtu.be/XC-RXeY63bM" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
+</h4>
+
+The Time Span approach utilizes the <a href="http://trinker.github.io/qdap_dev/cm_time.temp.html" target="_blank"><code>cm_time.temp</code></a> and <a href="http://trinker.github.io/qdap_dev/cm_time2long.html" target="_blank"><code>cm_time2long</code></a> functions.  To generate the timespan template approach simply supply the list of anticipated codes and a start/end time.  
 
 
-```r
-cm_time.temp(qcv(AA, BB, CC), ":14", "7:40", file="foo.txt")
-```
+<font size="5" color="orange">&diams;</font> **Coding Times Spans**: Time Span Template <font size="5" color="orange">&diams;</font>
 
+<pre><code class="r">## Codes
+codes <- qcv(AA, BB, CC)
+
+## Time span template
+X <- cm_time.temp(codes = codes, start = ":14", end = "7:40", file="timespans.txt")
+X <- cm_time.temp(codes, start = ":14", end = "7:40", file="timespans.doc")
+</code></pre>
 
 
 <pre><code>[0]                                14 15 16 ... 51 52 53 54 55 56 57 58 59
@@ -4645,31 +4730,74 @@ cm_time.temp(qcv(AA, BB, CC), ":14", "7:40", file="foo.txt")
 [4]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
 [5]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
 [6]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59
-[7]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53 54 55 56 57 58 59                                                 
-
-
-list(
-    transcript_time_span = qcv(terms="00:00 - 00:00"),
-    AA = qcv(terms=""),
-    BB = qcv(terms=""),
-    CC = qcv(terms="")
-)
+[7]0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ... 51 52 53                                                
 </code></pre>
 
 
-```r
-cm_time.temp(qcv(AA, BB, CC))
-```
+<font size="5" color="orange">&diams;</font> **Coding Times Spans**: List Template<font size="5" color="orange">&diams;</font>
 
-```
-##                                                        
-##  list(                                                 
-##      transcript_time_span = qcv(terms="00:00 - 00:00"),
-##      AA = qcv(terms=""),                               
-##      BB = qcv(terms=""),                               
-##      CC = qcv(terms="")                                
-##  )
-```
+<pre><code class="r">### List template
+cm_time.temp(codes, file = "codelist.txt")
+</code></pre>
+
+<pre><code> list(                                                 
+     transcript_time_span = qcv(terms="00:00 - 00:00"),
+     AA = qcv(terms=""),                               
+     BB = qcv(terms=""),                               
+     CC = qcv(terms="")                                
+ )  
+</code></pre>
+
+After coding the data (see the <a href="http://www.youtube.com/watch?v=XC-RXeY63bM&feature=youtu.be" target="_blank">YouTube video</a> the data can be read back in with <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html" target="_blank">source</a>.  Be sure to assign list to an object (e.g., `dat <- list()`).
+
+<font size="5" color="orange">&diams;</font> **Coding Times Spans**: Read in the data<font size="5" color="orange">&diams;</font>
+
+
+<pre><code class="r">## Read it in
+source("codelist.txt")
+
+### View it
+Time1
+</code></pre>
+
+<pre><code>$transcript_time_span
+[1] "00:00"   "-"       "1:12:00"
+
+$A
+[1] "2.40:3.00," "5.01,"      "6.52:7.00," "9.00"      
+
+$B
+[1] "2.40,"      "3.01:3.40," "5.01,"      "6.52:7.00," "9.00"      
+
+$C
+[1] "2.40:4.00,"  "5.01,"       "6.52:7.00,"  "9.00,"       "13.00:17.01"
+</code></pre>
+
+This format is not particularly useful.  The data can be reshaped to long format with durations via <a href="http://trinker.github.io/qdap_dev/cm_time2long.html" target="_blank"><code>cm_time2long</code></a>:
+
+<font size="5" color="orange">&diams;</font> **Coding Times Spans**: Long format<font size="5" color="orange">&diams;</font>
+
+<pre><code class="r">## Long format with durations
+datL <- cm_time2long(Time1, v.name = "time")
+datL
+</code></pre>
+
+<pre><code>   code start  end    Start      End variable
+1     A   159  180 00:02:39 00:03:00    Time1
+2     A   300  301 00:05:00 00:05:01    Time1
+3     A   411  420 00:06:51 00:07:00    Time1
+4     A   539  540 00:08:59 00:09:00    Time1
+5     B   159  160 00:02:39 00:02:40    Time1
+6     B   180  220 00:03:00 00:03:40    Time1
+7     B   300  301 00:05:00 00:05:01    Time1
+8     B   411  420 00:06:51 00:07:00    Time1
+9     B   539  540 00:08:59 00:09:00    Time1
+10    C   159  240 00:02:39 00:04:00    Time1
+11    C   300  301 00:05:00 00:05:01    Time1
+12    C   411  420 00:06:51 00:07:00    Time1
+13    C   539  540 00:08:59 00:09:00    Time1
+14    C   779 1021 00:12:59 00:17:01    Time1
+</code></pre>
 
 
 <h4 id="reshape">Merging, Reshaping, and Combining the Codes</h4>

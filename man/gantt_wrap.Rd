@@ -11,7 +11,7 @@
     rm.horiz.lines = FALSE, x.ticks = TRUE, y.ticks = TRUE,
     legend.position = NULL, bar.color = NULL,
     border.color = NULL, border.size = 2,
-    border.width = 0.1, constrain = TRUE)
+    border.width = 0.1, constrain = TRUE, plot = TRUE)
 }
 \arguments{
   \item{dataframe}{A data frame with plotting variable(s)
@@ -100,6 +100,11 @@
 
   \item{constrain}{logical.  If \code{TRUE} the Gantt bars
   touch the edge of the graph.}
+
+  \item{plot}{logical.  If \code{TRUE} the plot will
+  automatically plot. The user may wish to set to
+  \code{FALSE} for use in knitr, sweave, etc. to add
+  additional plot layers.}
 }
 \value{
   Returns a Gantt style visualization. Invisibly returns

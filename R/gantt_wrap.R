@@ -49,6 +49,9 @@
 #' value in addition to border size if plot borders appear disproportional.
 #' @param constrain logical.  If \code{TRUE} the Gantt bars touch the edge of 
 #' the graph. 
+#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
+#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
+#' to add additional plot layers.
 #' @return Returns a Gantt style visualization. Invisibly returns the ggplot2 
 #' list object.
 #' @note For non repeated measures data/plotting use \code{\link[qdap]{gantt}}; 
@@ -96,8 +99,9 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     transform = FALSE, ncol = NULL, minor.line.freq = NULL, 
     major.line.freq = NULL, sig.dig.line.freq = 1, hms.scale = NULL, 
     scale = NULL, space = NULL, size = 3, rm.horiz.lines = FALSE, x.ticks = TRUE, 
-    y.ticks = TRUE, legend.position = NULL, bar.color = NULL,
-    border.color = NULL, border.size = 2, border.width = .1, constrain = TRUE) { 
+    y.ticks = TRUE, legend.position = NULL, bar.color = NULL, 
+    border.color = NULL, border.size = 2, border.width = .1, constrain = TRUE, 
+    plot = TRUE) { 
     new4 <- startp <- endp <- NULL
     if (is.null(hms.scale)) {
         if (!is.null(comment(dataframe)) && comment(dataframe) == "cmtime") {
@@ -258,6 +262,8 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     if (!is.null(fill.var)){
         theplot <- theplot + guides(colour = guide_legend(fill.var))
     }
-    print(theplot)
+    if (plot) {
+        print(theplot)
+    }
     invisible(theplot)
 }

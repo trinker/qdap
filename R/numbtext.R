@@ -17,7 +17,7 @@ function(text.var, width=80, txt.file = NULL,
     print(zz, quote = FALSE)
     if (!is.null(txt.file)){
         if(!is.null(name)) {
-            message(paste0("\n", name, ":\n"), file=txt.file, append = TRUE)
+            cat(paste0("\n", name, ":\n"), file=txt.file, append = TRUE)
         }
         sink(file=txt.file, append = TRUE)
         print(zz, quote = FALSE)

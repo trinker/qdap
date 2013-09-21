@@ -3,7 +3,7 @@
 \title{Time Span Code Sheet}
 \usage{
   cm_time.temp(codes, start = ":00", end = NULL,
-    file = NULL)
+    file = NULL, coding = FALSE)
 }
 \arguments{
   \item{codes}{List of codes.}
@@ -16,6 +16,10 @@
 
   \item{file}{A connection, or a character string naming
   the file to print to (.txt or .doc is recommended).}
+
+  \item{coding}{logical.  If \code{TRUE} a coding list is
+  provided with the time span coding sheet.  \code{coding}
+  is ignoted if \code{end = NULL}.}
 }
 \description{
   Generates a time span coding sheet and coding format

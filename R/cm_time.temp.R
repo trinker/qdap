@@ -8,6 +8,10 @@
 #' @param end A character string in the form of "00:00" indicating end time.
 #' @param file A connection, or a character string naming the file to print to 
 #' (.txt or .doc is recommended).
+#' @param coding logical.  If \code{TRUE} a coding list is provided with the 
+#' time span coding sheet.  \code{coding} is ignoted if \code{end = NULL}.
+#' @param print logical.  If \code{TRUE} the time spans are printed to the 
+#' console.
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: 
 #' Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding
@@ -30,7 +34,8 @@
 #' cm_time.temp(qcv(AA, BB, CC))
 #' }
 cm_time.temp <-
-function(codes, start = ":00", end = NULL, file=NULL) {
+function(codes, start = ":00", end = NULL, file=NULL, coding = FALSE,
+    print = TRUE) {
     if (Sys.info()["sysname"] != "Windows") {
         writeClipboard <- NULL
     }  
@@ -57,11 +62,15 @@ function(codes, start = ":00", end = NULL, file=NULL) {
             z[x, (en[2] + 2):60] <- NA
         }
         zz <- matrix(capture.output(print(z, na.print=""))[-1], ncol =1)
-        print(z, na.print=""); message("\n")
-        message(paste0("list(\n",
-            "    transcript_time_span = qcv(terms=\"00:00 - 00:00\"),\n",
-            paste0("    ", paste0(paste(codes, 
-            collapse = " = qcv(terms=\"\"),\n    "), " = qcv(terms=\"\")")), "\n)"))
+        if (print){
+            print(z, na.print=""); message("\n")
+        }
+        if (coding) {
+            message(paste0("list(\n",
+                "    transcript_time_span = qcv(terms=\"00:00 - 00:00\"),\n",
+                paste0("    ", paste0(paste(codes, 
+                collapse = " = qcv(terms=\"\"),\n    "), " = qcv(terms=\"\")")), "\n)"))
+        }
         dimnames(zz) <- list(c(rep("", x)), c(""))
         if (Sys.info()["sysname"] == "Windows") {
             writeClipboard(noquote(rbind(zz, "", "", x1)), format = 1)                        
@@ -74,12 +83,14 @@ function(codes, start = ":00", end = NULL, file=NULL) {
         if (!is.null(file)) { 
             v <- paste0(zz, "\n")
             cat(v[1], file=file)   
-            lapply(2:x, function(i) cat(v[i], file=file, append = TRUE))                                     
-            cat(paste0("list(\n",
-                "    transcript_time_span = qcv(terms=\"00:00 - 00:00\"),\n",
-                paste0("    ", paste0(paste(codes, 
-                    collapse = " = qcv(terms=\"\"),\n    "), " = qcv(terms=\"\")")), 
-                    "\n)\n"), file = file, append = TRUE) 
+            lapply(2:x, function(i) cat(v[i], file=file, append = TRUE)) 
+            if (coding) {
+                cat(paste0("\nlist(\n",
+                    "    transcript_time_span = qcv(terms=\"00:00 - 00:00\"),\n",
+                    paste0("    ", paste0(paste(codes, 
+                        collapse = " = qcv(terms=\"\"),\n    "), " = qcv(terms=\"\")")), 
+                        "\n)\n"), file = file, append = TRUE) 
+            }
         }   
         options(width=wid)
     } else {
