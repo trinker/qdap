@@ -116,6 +116,10 @@ This may break backward compatibility.  Thus this is a **major** release
 * `lookup` now takes `missing = NULL`.  This results in the original values in
   `terms` corresponding to the missing elements being retained.
 
+* `cm_time.temp` picks up a `grouping.var` argument that works similarly to 
+  `cm_range.temp`'s `grouping.var`.  `cm_time.temp` also takes hour values for
+  ``start` and `end` as in `end = "01:22:03"`.
+
 <b>CHANGES</b>
 
 * The dictionaries and word lists for <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> have been moved to their own package, 

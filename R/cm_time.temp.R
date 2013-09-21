@@ -3,6 +3,8 @@
 #' Generates a time span coding sheet and coding format sheet.
 #' 
 #' @param codes List of codes.
+#' @param grouping.var The grouping variables.  Also takes a single grouping 
+#' variable or a list of 1 or more grouping variables. 
 #' @param start A character string in the form of "00:00" indicating start time 
 #' (default is ":00").
 #' @param end A character string in the form of "00:00" indicating end time.
@@ -34,7 +36,7 @@
 #' cm_time.temp(qcv(AA, BB, CC))
 #' }
 cm_time.temp <-
-function(codes, start = ":00", end = NULL, file=NULL, coding = FALSE,
+function(codes, grouping.var = NULL, start = ":00", end = NULL, file=NULL, coding = FALSE,
     print = TRUE) {
     if (Sys.info()["sysname"] != "Windows") {
         writeClipboard <- NULL
