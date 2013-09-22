@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 25.34 25.34 22.40 16.30 22.40 16.30 22.40 22.40 15.79 16.30
-## [12] 15.00 15.79 19.70 16.30 22.40 22.40 15.00 15.79 15.00
+##  [1] 16.30 25.34 15.00 15.79 15.00 22.40 22.40 15.00 16.30 22.40 15.79
+## [12] 25.34 19.70 19.70 25.34 25.34 19.70 15.00 22.40 25.34
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 25.34 25.34 22.40 16.30 22.40 16.30 22.40 22.40 15.79 16.30
-## [12] 15.00 15.79 19.70 16.30 22.40 22.40 15.00 15.79 15.00
+##  [1] 16.30 25.34 15.00 15.79 15.00 22.40 22.40 15.00 16.30 22.40 15.79
+## [12] 25.34 19.70 19.70 25.34 25.34 19.70 15.00 22.40 25.34
 ```
 
 
@@ -4458,14 +4458,6 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="cm_code.transform"> - Transform Codes
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/cm_combine.dummy.html" target="_blank">
-    <input type="submit" value="cm_combine.dummy"> - Find Co-occurrence Between Dummy Codes
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/cm_df.fill.html" target="_blank">
-    <input type="submit" value="cm_df.fill"> - Range Coding
-</form>
-
 <form action="http://trinker.github.io/qdap_dev/cm_df.temp.html" target="_blank">
     <input type="submit" value="cm_df.temp"> - Break Transcript Dialogue into Blank Code Matrix
 </form>
@@ -4480,14 +4472,6 @@ The following functions will be utilized in this section (click to view more):
 
 <form action="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank">
     <input type="submit" value="cm_distance"> - Distance Matrix Between Codes
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/cm_dummy2long.html" target="_blank">
-    <input type="submit" value="cm_dummy2long"> - Convert cm_combine.dummy Back to Long
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/cm_long2dummy.html" target="_blank">
-    <input type="submit" value="cm_long2dummy"> - Stretch and Dummy Code cm_xxx2long
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/cm_range.temp.html" target="_blank">
@@ -4517,7 +4501,7 @@ The coding process in qdap starts with decison of whether to code the dialogue a
 1. Making a template for coding dialogue/time spans
 2. The actual coding  dialogue/time spans
 3. Reading in the dialogue/time spans
-4. Merging/reshaping/combining the read in dialogue/time spans
+4. Transforming codes (finding overlap and/or differences between word span/time span of codes)
 5. Initial analysis
 
 If you choose the route of coding words qdap gives two approaches.  Each has distinct benefits and disadvantages dependant upon the situation.  If you chose the coding of time spans qdap provides one option. 
@@ -4529,8 +4513,10 @@ The next three subsections will walk the reader through how to make a template, 
 1. <a href="#wordcsv">Coding Words - The .csv Approach</a> - How to template, code, read in and reshape the data
 2. <a href="#wordtrans">Coding Words - The Transcript/List Approach</a> - How to template, code, read in  and reshape the data
 3. <a href="#timespan">Coding Time Spans</a> - How to template, code, read in and reshape the data
-4. <a href="#reshape">Reshaping, Merging, and Combining cm Dataframes</a>
+4. <a href="#reshape">Transforming Codes</a>
 5. <a href="#analysis">Initial Coding Analysis</a>
+
+Before getting started with subsections 1-3 the reader will want to know the naming scheme of the code matrix (<font color="red">cm&#95;</font>) functions used.  The initial <font color="red">cm&#95;</font> is utilized for any code matrix family of functions.  The functions containing <font color="red">cm&#95;temp</font> are template functions.  The <font color="red">df</font>, <font color="red">range</font>, or <font color="red">time</font> determine whether the csv (<font color="red">df</font>), Transcript/List (<font color="red">range</font>), or Time Span (<font color="red">time</font>) approach is being utilized.  <font color="red">cm&#95;</font> functions that bear <font color="red">2long</font> transform a read in list to a usable long format.
 
 <h4 id="wordcsv">Coding Words - The .csv Approach <a href="http://www.youtube.com/watch?v=tH242SIESIs" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
 </h4>
@@ -4645,12 +4631,13 @@ cm_range.temp(codes, file = "foo1.txt")
 )
 </code></pre>
 
-This list contains demographic variables.  If the researcher has demographic variables it is recomended that they supply them at this point.  The demographic variables will be generated with durations automatically.
+This list below contains demographic variables.  If the researcher has demographic variables it is recomended to supply them at this point.  The demographic variables will be generated with durations automatically.
 
 <font size="5" color="orange">&diams;</font> **Coding Words (Transcript/List approach)**: List Template 2<font size="5" color="orange">&diams;</font>
 
 <pre><code class="r">### List template with demographic variables
-with(DATA, cm_range.temp(codes, "foo2.txt", state, list(person, adult)))
+with(DATA, cm_range.temp(codes = codes, text.var = state, 
+    grouping.var = list(person, adult), file = "foo2.txt"))
 </code></pre>
 
 <pre><code>list(
@@ -4732,7 +4719,7 @@ X <- cm_time.temp(start = ":14", end = "7:40", file="timespans.doc")
 </code></pre>
 
 
-<font size="5" color="orange">&diams;</font> **Coding Times Spans**: List Template<font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Coding Times Spans**: List Template 1<font size="5" color="orange">&diams;</font>
 
 <pre><code class="r">### List template
 codes <- qcv(AA, BB, CC)
@@ -4745,6 +4732,29 @@ cm_time.temp(codes, file = "codelist.txt")
      BB = qcv(terms=""),                               
      CC = qcv(terms="")                                
  )  
+</code></pre>
+
+This list below contains demographic variables.  If the researcher has demographic variables it is recomended to supply them at this point.  
+
+<font size="5" color="orange">&diams;</font> **Coding Times Spans**: List Template 2<font size="5" color="orange">&diams;</font>
+
+<pre><code class="r">### List template with demographic variables
+with(DATA, cm_time.temp(codes, list(person, adult), file = "codelist.txt"))
+</code></pre>
+
+<pre><code>list(
+    transcript_time_span = qcv(terms="00:00 - 00:00"),
+    person_sam = qcv(terms=""),
+    person_greg = qcv(terms=""),
+    person_teacher = qcv(terms=""),
+    person_sally = qcv(terms=""),
+    person_researcher = qcv(terms=""),
+    adult_0 = qcv(terms=""),
+    adult_1 = qcv(terms=""),
+    AA = qcv(terms=""),
+    BB = qcv(terms=""),
+    CC = qcv(terms="")
+)
 </code></pre>
 
 After coding the data (see the <a href="http://www.youtube.com/watch?v=XC-RXeY63bM&feature=youtu.be" target="_blank">YouTube video</a> the data can be read back in with <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html" target="_blank">source</a>.  Be sure to assign list to an object (e.g., `dat <- list()`).
@@ -4799,7 +4809,283 @@ datL
 </code></pre>
 
 
-<h4 id="reshape">Merging, Reshaping, and Combining the Codes</h4>
+<h4 id="reshape">Transforming Codes</h4>
+
+The researcher may want to determine where codes do and do not overlap with one other.  The <font color="red">cm_</font> family of functions bearing (<font color="red">cm_code.</font>) perform various transformative functions.  <a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> will merge the spans (time or word) for given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> will give provide spans that exclude given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> will yield the spans where any occurences of the given codes occur.  <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> is a wrapper for the previous three functions that produces one dataframe in a single call.  Lastly, <a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a> proveds a more flexible framework that allows for the introduction of multiple lofical operators between codes.  Most tasks can be handled with the <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> function.
+
+For the sake of simplicity the uses of these functions will be demonstrated via a gantt plot for a visual comparison of the data sets.
+
+The reader should note that all of the above functions utilize two helper functions (<a href="http://trinker.github.io/qdap_dev/cm_long2dummy.html" target="_blank"><code>cm_long2dummy</code></a> and <a href="http://trinker.github.io/qdap_dev/cm_dummy2long.html" target="_blank"><code>cm_dummy2long</code></a>) to stretch the spans into single units of measure (word or second) perform a calculation and then condense back to spans.  More advanced needs may require the explicit use of these functions, though they are beyond the scope of this vignette.  
+
+The following data sets will be utilized through out the demonstrations of the <font color="red">cm_code.</font> family of functions:
+
+<font size="5" color="orange">&diams;</font> **Common Data Sets** - Word Approach<font size="5" color="orange">&diams;</font>
+
+
+```r
+foo <- list(
+    AA = qcv(terms="1:10"),
+    BB = qcv(terms="1:2, 3:10, 19"),
+    CC = qcv(terms="1:3, 5:6")
+)
+
+foo2  <- list(
+    AA = qcv(terms="4:8"),
+    BB = qcv(terms="1:4, 10:12"),
+    CC = qcv(terms="1, 11, 15:20"),
+    DD = qcv(terms="")
+)
+```
+
+
+
+```r
+## Single time, long word approach
+(x <- cm_range2long(foo))
+```
+
+```
+##   code start end variable
+## 1   AA     0  10      foo
+## 2   BB     0   2      foo
+## 3   BB     2  10      foo
+## 4   BB    18  19      foo
+## 5   CC     0   3      foo
+## 6   CC     4   6      foo
+```
+
+
+![plot of chunk unnamed-chunk-59](figure/unnamed-chunk-59.png) 
+
+
+
+```r
+## Repeated measures, long word approach
+(z <- cm_range2long(foo, foo2, v.name="time"))
+```
+
+```
+##    code start end time
+## 1    AA     0  10  foo
+## 2    BB     0   2  foo
+## 3    BB     2  10  foo
+## 4    BB    18  19  foo
+## 5    CC     0   3  foo
+## 6    CC     4   6  foo
+## 7    AA     3   8 foo2
+## 8    BB     0   4 foo2
+## 9    BB     9  12 foo2
+## 10   CC     0   1 foo2
+## 11   CC    10  11 foo2
+## 12   CC    14  20 foo2
+```
+
+
+![plot of chunk unnamed-chunk-61](figure/unnamed-chunk-61.png) 
+
+
+
+<font size="5" color="orange">&diams;</font> **Common Data Sets** - Time Span Approach<font size="5" color="orange">&diams;</font>
+
+
+```r
+bar1 <- list(
+    transcript_time_span = qcv(00:00 - 1:12:00),
+    A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),
+    B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00,
+        1.12.00:1.19.01"),
+    C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
+)
+
+bar2 <- list(
+    transcript_time_span = qcv(00:00 - 1:12:00),
+    A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),
+    B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00,
+        1.12.00:1.19.01"),
+    C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
+)
+```
+
+
+
+```r
+## Single time, long time approach
+(dat <- cm_time2long(bar1))
+```
+
+```
+##    code start  end    Start      End variable
+## 1     A   159  180 00:02:39 00:03:00     bar1
+## 2     A   300  301 00:05:00 00:05:01     bar1
+## 3     A   361  420 00:06:01 00:07:00     bar1
+## 4     A   539  540 00:08:59 00:09:00     bar1
+## 5     B   159  160 00:02:39 00:02:40     bar1
+## 6     B   180  182 00:03:00 00:03:02     bar1
+## 7     B   300  301 00:05:00 00:05:01     bar1
+## 8     B   361  420 00:06:01 00:07:00     bar1
+## 9     B   539  540 00:08:59 00:09:00     bar1
+## 10    B  4319 4741 01:11:59 01:19:01     bar1
+## 11    C   159  180 00:02:39 00:03:00     bar1
+## 12    C   300  301 00:05:00 00:05:01     bar1
+## 13    C   361  420 00:06:01 00:07:00     bar1
+## 14    C   539  540 00:08:59 00:09:00     bar1
+## 15    C  1020 1021 00:17:00 00:17:01     bar1
+```
+
+
+![plot of chunk unnamed-chunk-64](figure/unnamed-chunk-64.png) 
+
+
+
+```r
+## Repeated measures, long time approach
+(dats <- cm_time2long(bar1, bar2, v.name = "time"))
+```
+
+```
+##    code start  end    Start      End time
+## 1     A   159  180 00:02:39 00:03:00 bar1
+## 2     A   300  301 00:05:00 00:05:01 bar1
+## 3     A   361  420 00:06:01 00:07:00 bar1
+## 4     A   539  540 00:08:59 00:09:00 bar1
+## 5     B   159  160 00:02:39 00:02:40 bar1
+## 6     B   180  182 00:03:00 00:03:02 bar1
+## 7     B   300  301 00:05:00 00:05:01 bar1
+## 8     B   361  420 00:06:01 00:07:00 bar1
+## 9     B   539  540 00:08:59 00:09:00 bar1
+## 10    B  4319 4741 01:11:59 01:19:01 bar1
+## 11    C   159  180 00:02:39 00:03:00 bar1
+## 12    C   300  301 00:05:00 00:05:01 bar1
+## 13    C   361  420 00:06:01 00:07:00 bar1
+## 14    C   539  540 00:08:59 00:09:00 bar1
+## 15    C  1020 1021 00:17:00 00:17:01 bar1
+## 16    A   159  180 00:02:39 00:03:00 bar2
+## 17    A   300  301 00:05:00 00:05:01 bar2
+## 18    A   361  420 00:06:01 00:07:00 bar2
+## 19    A   539  540 00:08:59 00:09:00 bar2
+## 20    B   159  160 00:02:39 00:02:40 bar2
+## 21    B   180  182 00:03:00 00:03:02 bar2
+## 22    B   300  301 00:05:00 00:05:01 bar2
+## 23    B   361  420 00:06:01 00:07:00 bar2
+## 24    B   539  540 00:08:59 00:09:00 bar2
+## 25    B  4319 4741 01:11:59 01:19:01 bar2
+## 26    C   159  180 00:02:39 00:03:00 bar2
+## 27    C   300  301 00:05:00 00:05:01 bar2
+## 28    C   361  420 00:06:01 00:07:00 bar2
+## 29    C   539  540 00:08:59 00:09:00 bar2
+## 30    C  1020 1021 00:17:00 00:17:01 bar2
+```
+
+
+![plot of chunk unnamed-chunk-66](figure/unnamed-chunk-66.png) 
+
+
+<h5 id="cm_code.combine"><font color="green">cm_code.combine Examples</font></h5>
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> Single Time** *Word Example*<font size="5" color="orange">&diams;</font>
+
+
+```r
+(cc1 <- cm_code.combine(x, list(ALL=qcv(AA, BB, CC))))
+```
+
+```
+##   code start end
+## 1   AA     0  10
+## 2   BB     0  10
+## 3   BB    18  19
+## 4  ALL     0  10
+## 5  ALL    18  19
+## 6   CC     0   6
+```
+
+
+![plot of chunk unnamed-chunk-68](figure/unnamed-chunk-68.png) 
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> Repeated Measures** *Word Example*<font size="5" color="orange">&diams;</font>
+
+
+```r
+combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
+(cc2 <- cm_code.combine(z, combines, rm.var = "time"))
+```
+
+```
+##    code start end time
+## 1    AA     0  10  foo
+## 2    BB     0  10  foo
+## 3    BB    18  19  foo
+## 4    CC     0   6  foo
+## 5    AB     0  10  foo
+## 6    AB    18  19  foo
+## 7   ABC     0  10  foo
+## 8   ABC    18  19  foo
+## 9    AA     3   8 foo2
+## 10   BB     0   4 foo2
+## 11   BB     9  12 foo2
+## 12   CC     0   1 foo2
+## 13   CC    10  11 foo2
+## 14   CC    14  20 foo2
+## 15   AB     0  12 foo2
+## 16  ABC     0  12 foo2
+## 17  ABC    14  20 foo2
+```
+
+
+![plot of chunk unnamed-chunk-70](figure/unnamed-chunk-70.png) 
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> Single Time** *Time Span Example*<font size="5" color="orange">&diams;</font>
+
+
+```r
+combines <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
+(cc3 <- cm_code.combine(dat, combines))
+```
+
+```
+##    code start  end    Start      End
+## 1     A   160  180 00:02:40 00:03:00
+## 2     A   301  301 00:05:01 00:05:01
+## 3     A   362  420 00:06:02 00:07:00
+## 4     A   540  540 00:09:00 00:09:00
+## 5     B   160  160 00:02:40 00:02:40
+## 6     B   181  182 00:03:01 00:03:02
+## 7     B   301  301 00:05:01 00:05:01
+## 8     B   362  420 00:06:02 00:07:00
+## 9     B   540  540 00:09:00 00:09:00
+## 10    B  4320 4741 01:12:00 01:19:01
+## 11   AB   160  182 00:02:40 00:03:02
+## 12   AB   301  301 00:05:01 00:05:01
+## 13   AB   362  420 00:06:02 00:07:00
+## 14   AB   540  540 00:09:00 00:09:00
+## 15   AB  4320 4741 01:12:00 01:19:01
+## 16   BC   160  182 00:02:40 00:03:02
+## 17   BC   301  301 00:05:01 00:05:01
+## 18   BC   362  420 00:06:02 00:07:00
+## 19   BC   540  540 00:09:00 00:09:00
+## 20   BC  1021 1021 00:17:01 00:17:01
+## 21   BC  4320 4741 01:12:00 01:19:01
+## 22  ABC   160  182 00:02:40 00:03:02
+## 23  ABC   301  301 00:05:01 00:05:01
+## 24  ABC   362  420 00:06:02 00:07:00
+## 25  ABC   540  540 00:09:00 00:09:00
+## 26  ABC  1021 1021 00:17:01 00:17:01
+## 27  ABC  4320 4741 01:12:00 01:19:01
+## 28    C   160  180 00:02:40 00:03:00
+## 29    C   301  301 00:05:01 00:05:01
+## 30    C   362  420 00:06:02 00:07:00
+## 31    C   540  540 00:09:00 00:09:00
+## 32    C  1021 1021 00:17:01 00:17:01
+```
+
+
+![plot of chunk unnamed-chunk-72](figure/unnamed-chunk-72.png) 
+
+
+
 <h4 id="analysis">Initial Coding Analysis</h4>
 
 

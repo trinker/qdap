@@ -1561,14 +1561,6 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="cm_code.transform"> - Transform Codes
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/cm_combine.dummy.html" target="_blank">
-    <input type="submit" value="cm_combine.dummy"> - Find Co-occurrence Between Dummy Codes
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/cm_df.fill.html" target="_blank">
-    <input type="submit" value="cm_df.fill"> - Range Coding
-</form>
-
 <form action="http://trinker.github.io/qdap_dev/cm_df.temp.html" target="_blank">
     <input type="submit" value="cm_df.temp"> - Break Transcript Dialogue into Blank Code Matrix
 </form>
@@ -1583,14 +1575,6 @@ The following functions will be utilized in this section (click to view more):
 
 <form action="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank">
     <input type="submit" value="cm_distance"> - Distance Matrix Between Codes
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/cm_dummy2long.html" target="_blank">
-    <input type="submit" value="cm_dummy2long"> - Convert cm_combine.dummy Back to Long
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/cm_long2dummy.html" target="_blank">
-    <input type="submit" value="cm_long2dummy"> - Stretch and Dummy Code cm_xxx2long
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/cm_range.temp.html" target="_blank">
@@ -1620,7 +1604,7 @@ The coding process in qdap starts with decison of whether to code the dialogue a
 1. Making a template for coding dialogue/time spans
 2. The actual coding  dialogue/time spans
 3. Reading in the dialogue/time spans
-4. Merging/reshaping/combining the read in dialogue/time spans
+4. Transforming codes (finding overlap and/or differences between word span/time span of codes)
 5. Initial analysis
 
 If you choose the route of coding words qdap gives two approaches.  Each has distinct benefits and disadvantages dependant upon the situation.  If you chose the coding of time spans qdap provides one option. 
@@ -1632,8 +1616,10 @@ The next three subsections will walk the reader through how to make a template, 
 1. `r HR("#wordcsv", "Coding Words - The .csv Approach")` - How to template, code, read in and reshape the data
 2. `r HR("#wordtrans", "Coding Words - The Transcript/List Approach")` - How to template, code, read in  and reshape the data
 3. `r HR("#timespan", "Coding Time Spans")` - How to template, code, read in and reshape the data
-4. `r HR("#reshape", "Reshaping, Merging, and Combining cm Dataframes")`
+4. `r HR("#reshape", "Transforming Codes")`
 5. `r HR("#analysis", "Initial Coding Analysis")`
+
+Before getting started with subsections 1-3 the reader will want to know the naming scheme of the code matrix (`r FT(red, text="cm&#95;")`) functions used.  The initial `r FT(red, text="cm&#95;")` is utilized for any code matrix family of functions.  The functions containing `r FT(red, text="cm&#95;temp")` are template functions.  The `r FT(red, text="df")`, `r FT(red, text="range")`, or `r FT(red, text="time")` determine whether the csv (`r FT(red, text="df")`), Transcript/List (`r FT(red, text="range")`), or Time Span (`r FT(red, text="time")`) approach is being utilized.  `r FT(red, text="cm&#95;")` functions that bear `r FT(red, text="2long")` transform a read in list to a usable long format.
 
 <h4 id="wordcsv">Coding Words - The .csv Approach `r yt("http://www.youtube.com/watch?v=tH242SIESIs")`</h4>
 
@@ -1746,12 +1732,13 @@ cm_range.temp(codes, file = "foo1.txt")
 )
 </code></pre>
 
-This list contains demographic variables.  If the researcher has demographic variables it is recomended that they supply them at this point.  The demographic variables will be generated with durations automatically.
+This list below contains demographic variables.  If the researcher has demographic variables it is recomended to supply them at this point.  The demographic variables will be generated with durations automatically.
 
 `r FT(orange, 5, text="&diams;")` **Coding Words (Transcript/List approach)**: List Template 2`r FT(orange, 5, text="&diams;")`
 
 <pre><code class="r">### List template with demographic variables
-with(DATA, cm_range.temp(codes, "foo2.txt", state, list(person, adult)))
+with(DATA, cm_range.temp(codes = codes, text.var = state, 
+    grouping.var = list(person, adult), file = "foo2.txt"))
 </code></pre>
 
 <pre><code>list(
@@ -1832,7 +1819,7 @@ X <- cm_time.temp(start = ":14", end = "7:40", file="timespans.doc")
 </code></pre>
 
 
-`r FT(orange, 5, text="&diams;")` **Coding Times Spans**: List Template`r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Coding Times Spans**: List Template 1`r FT(orange, 5, text="&diams;")`
 
 <pre><code class="r">### List template
 codes <- qcv(AA, BB, CC)
@@ -1845,6 +1832,29 @@ cm_time.temp(codes, file = "codelist.txt")
      BB = qcv(terms=""),                               
      CC = qcv(terms="")                                
  )  
+</code></pre>
+
+This list below contains demographic variables.  If the researcher has demographic variables it is recomended to supply them at this point.  
+
+`r FT(orange, 5, text="&diams;")` **Coding Times Spans**: List Template 2`r FT(orange, 5, text="&diams;")`
+
+<pre><code class="r">### List template with demographic variables
+with(DATA, cm_time.temp(codes, list(person, adult), file = "codelist.txt"))
+</code></pre>
+
+<pre><code>list(
+    transcript_time_span = qcv(terms="00:00 - 00:00"),
+    person_sam = qcv(terms=""),
+    person_greg = qcv(terms=""),
+    person_teacher = qcv(terms=""),
+    person_sally = qcv(terms=""),
+    person_researcher = qcv(terms=""),
+    adult_0 = qcv(terms=""),
+    adult_1 = qcv(terms=""),
+    AA = qcv(terms=""),
+    BB = qcv(terms=""),
+    CC = qcv(terms="")
+)
 </code></pre>
 
 After coding the data (see the `r HR2("http://www.youtube.com/watch?v=XC-RXeY63bM&feature=youtu.be", "YouTube video")` the data can be read back in with `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html", "source")`.  Be sure to assign list to an object (e.g., `dat <- list()`).
@@ -1899,7 +1909,144 @@ datL
 </code></pre>
 
 
-<h4 id="reshape">Merging, Reshaping, and Combining the Codes</h4>
+<h4 id="reshape">Transforming Codes</h4>
+
+The researcher may want to determine where codes do and do not overlap with one other.  The `r FT(red, text="cm_")` family of functions bearing (`r FT(red, text="cm_code.")`) perform various transformative functions.  `r FUN("cm_code.combine")` will merge the spans (time or word) for given codes.  `r FUN("cm_code.exclude")` will give provide spans that exclude given codes.  `r FUN("cm_code.overlap")` will yield the spans where any occurences of the given codes occur.  `r FUN("cm_code.transform")` is a wrapper for the previous three functions that produces one dataframe in a single call.  Lastly, `r FUN("cm_code.blank")` proveds a more flexible framework that allows for the introduction of multiple lofical operators between codes.  Most tasks can be handled with the `r FUN("cm_code.transform")` function.
+
+For Examples of each click the links below:
+1. `r HR("#cm_code.combine", "cm_code.combine Examples")`     
+2. `r HR("#cm_code.exclude", "cm_code.exclude Examples")`  
+3. `r HR("#cm_code.overlap", "cm_code.overlap Examples")`       
+4. `r HR("#cm_code.transform", "cm_code.transform Examples")`    
+5. `r HR("#cm_code.blank", "cm_code.blank Examples")`    
+
+For the sake of simplicity the uses of these functions will be demonstrated via a gantt plot for a visual comparison of the data sets.
+
+The reader should note that all of the above functions utilize two helper functions (`r FUN("cm_long2dummy")` and `r FUN("cm_dummy2long")`) to stretch the spans into single units of measure (word or second) perform a calculation and then condense back to spans.  More advanced needs may require the explicit use of these functions, though they are beyond the scope of this vignette.  
+
+The following data sets will be utilized through out the demonstrations of the `r FT(red, text="cm_code.")` family of functions:
+
+`r FT(orange, 5, text="&diams;")` **Common Data Sets** - Word Approach`r FT(orange, 5, text="&diams;")`
+
+```{r}
+foo <- list(
+    AA = qcv(terms="1:10"),
+    BB = qcv(terms="1:2, 3:10, 19"),
+    CC = qcv(terms="1:3, 5:6")
+)
+
+foo2  <- list(
+    AA = qcv(terms="4:8"),
+    BB = qcv(terms="1:4, 10:12"),
+    CC = qcv(terms="1, 11, 15:20"),
+    DD = qcv(terms="")
+)
+```
+
+```{r}
+## Single time, long word approach
+(x <- cm_range2long(foo))
+```
+
+```{r echo=FALSE, fig.height = 2.5}
+gantt_wrap(x, "code")
+```
+
+```{r}
+## Repeated measures, long word approach
+(z <- cm_range2long(foo, foo2, v.name="time"))
+```
+
+```{r echo=FALSE, fig.height = 5}
+gantt_wrap(z, "code", "time")
+```
+
+
+`r FT(orange, 5, text="&diams;")` **Common Data Sets** - Time Span Approach`r FT(orange, 5, text="&diams;")`
+
+```{r}
+bar1 <- list(
+    transcript_time_span = qcv(00:00 - 1:12:00),
+    A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),
+    B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00,
+        1.12.00:1.19.01"),
+    C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
+)
+
+bar2 <- list(
+    transcript_time_span = qcv(00:00 - 1:12:00),
+    A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),
+    B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00,
+        1.12.00:1.19.01"),
+    C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
+)
+```
+
+```{r}
+## Single time, long time approach
+(dat <- cm_time2long(bar1))
+```
+
+```{r echo=FALSE, fig.height = 2.5}
+gantt_wrap(dat, "code")
+```
+
+```{r}
+## Repeated measures, long time approach
+(dats <- cm_time2long(bar1, bar2, v.name = "time"))
+```
+
+```{r echo=FALSE, fig.height = 5}
+gantt_wrap(dats, "code", "time")
+```
+
+<h5 id="cm_code.combine"><font color="green">cm_code.combine Examples</font></h5>
+
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.combine")` Single Time** *Word Example*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+(cc1 <- cm_code.combine(x, list(ALL=qcv(AA, BB, CC))))
+```
+
+```{r, echo = FALSE, fig.height = 2.5}
+gantt_wrap(cc1, "code")
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.combine")` Repeated Measures** *Word Example*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
+(cc2 <- cm_code.combine(z, combines, rm.var = "time"))
+```
+
+```{r, echo = FALSE, fig.height = 5}
+gantt_wrap(cc2, "code", "time")
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.combine")` Single Time** *Time Span Example*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+combines <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
+(cc3 <- cm_code.combine(dat, combines))
+```
+
+```{r, echo = FALSE, fig.height = 2.5}
+gantt_wrap(cc3, "code")
+```
+
+<h5 id="cm_code.exclude"><font color="green">cm_code.exclude Examples</font></h5>
+
+
+
+<h5 id="cm_code.overlap"><font color="green">cm_code.overlap Examples</font></h5>
+
+<h5 id="cm_code.transform"><font color="green">cm_code.transform Examples</font></h5>
+
+<h5 id="cm_code.blank"><font color="green">cm_code.blank Examples</font></h5>
+
+
+
 <h4 id="analysis">Initial Coding Analysis</h4>
 
 

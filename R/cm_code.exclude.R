@@ -67,7 +67,8 @@
 #' cm_code.exclude(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)), 
 #'     rm.var = "variable")
 #' }
-cm_code.exclude <- function(x2long.obj, exclude.code.list, rm.var = NULL) {
+cm_code.exclude <- 
+function(x2long.obj, exclude.code.list, rm.var = NULL) {
     if (!is.null(rm.var)) {
         if(!rm.var %in% colnames(x2long.obj)) {
             stop("rm.var does not match a column")
@@ -81,16 +82,40 @@ cm_code.exclude <- function(x2long.obj, exclude.code.list, rm.var = NULL) {
     }))
     names(exclude.code.list2) <- names(exclude.code.list)
     w <- cm_code.combine(x2long.obj, exclude.code.list1, rm.var=rm.var)
-    z <- cm_code.blank(w, exclude.code.list2, overlap=1, rm.var=rm.var)
-    if (ncol(x2long.obj) != ncol(z)){
-        v <- x2long.obj[!colnames(x2long.obj) %in% colnames(z)]
-        z$newname1234 <- rep(v[1, 1], nrow(z))
-        colnames(z)[colnames(z) == "newname1234"] <- colnames(v)
-    }
-    dat <- data.frame(rbind(x2long.obj, z[z$code %in% names(exclude.code.list),]), row.names=NULL)
-    if (!is.null(rm.var)) {
-        dat[order(dat[rm.var]), ]
+
+    rmv <- cm_long2dummy(w, rm.var = rm.var)
+    if (is.data.frame(rmv)) {
+        colnames(rmv) <- gsub("w\\.", "", colnames(rmv))
     } else {
-        dat
+        for(i in 1:length(rmv)) {
+            colnames(rmv[[i]]) <- gsub("w\\.", "", colnames(rmv[[i]]))
+        }
     }
+    if (is.data.frame(rmv)) {
+        rmv <- list(rmv)
+        names(rmv) <- "time1"
+    }
+    out2 <- lapply(rmv, function(x) {
+        out <- lapply(1:length(exclude.code.list2), function(i, x2 = x) {
+            y <- x2[, exclude.code.list2[[i]]]
+            z <- y[, 1, drop = FALSE] - y[, 2, drop = FALSE]
+            colnames(z)[1] <- gsub("_rmvme123", "", colnames(z)[1])
+            z
+        })
+        cbind(x[, !colnames(x) %in% sapply(exclude.code.list2, "[[", 1)],
+            do.call(cbind, out))
+    })
+
+    out3 <- lapply(1:length(out2), function(i) {
+        cm_dummy2long(data.frame(out2[[i]], time=rep(names(out2)[i], nrow(out2[[i]]))))
+    })
+
+    out3 <- do.call(rbind, out3)
+    if (comment(x2long.obj) == "cmtime") {
+        out3$Start <- sec2hms(out3$start)
+        out3$End <- sec2hms(out3$end)
+        out3 <- out3[, c(1:3, 5:6, 4)]
+    }
+    colnames(out3) <- colnames(x2long.obj)
+    out3
 }

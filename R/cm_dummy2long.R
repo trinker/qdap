@@ -33,9 +33,9 @@
 #' cm_combine.dummy(out1, combine.code = list(AB=qcv(AA, BB)))
 #' 
 #' combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
-#' A <- cm_combine.dummy(D2, combine.code = combines)
+#' A <- cm_combine.dummy(out2, combine.code = combines)
 #' head(A, 10)
-#' B <- cm_combine.dummy(D1, combine.code = combines)
+#' B <- cm_combine.dummy(out1, combine.code = combines)
 #' head(B, 10)
 #' 
 #' cm_dummy2long(A)
@@ -49,6 +49,7 @@ cm_dummy2long <- function(cm.comb.obj, rm.var = "time") {
         lens <- a[[1]]
         ends <- cumsum(lens)[as.logical(a[[2]])]
         starts <- ends - lens[(as.logical(a[[2]]))]
+        #starts <- ifelse(starts == 0, 0, starts + 1)         
         data.frame(start=starts, end=ends)
     }
     spanner <- function(A) {lapply(A, lng)}

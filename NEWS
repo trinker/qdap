@@ -60,6 +60,9 @@ BUG FIXES
 * `url_dl` - Downloaded an empty file when not using a dropbox key.  This 
   behavior has been fixed.
 
+* `cm_code.exclude` did not output the correct excluded spans.  This behavior
+  has been corrected.
+
 NEW FEATURES
 
 MINOR FEATURES

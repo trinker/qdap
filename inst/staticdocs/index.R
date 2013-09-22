@@ -101,7 +101,6 @@ list(
         "cm_range2long",
         "cm_time.temp",
         "cm_time2long"
-
       )
     ),
     sd_section("Counts/Descriptives",

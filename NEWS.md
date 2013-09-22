@@ -60,6 +60,9 @@ This may break backward compatibility.  Thus this is a **major** release
 * `url_dl` - Downloaded an empty file when not using a dropbox key.  This 
   behavior has been fixed.
 
+* `cm_code.exclude` did not output the correct excluded spans.  This behavior
+  has been corrected.
+
 <b>NEW FEATURES</b>
 
 <b>MINOR FEATURES</b>
