@@ -58,11 +58,12 @@
   \item{PROJECT_WORKFLOW_GUIDE.pdf}{ * A pdf explaining the
   structure of the project template} \item{RAW_DATA}{ - A
   directory to store non-transcript data related to the
-  project: \itemize{ \item{AUDIO}{ * A directory to put
-  audio files (or shortcuts)} \item{FIELD_NOTES}{ * A
+  project: \itemize{ \item{ANALYTIC_MEMOS}{ * A directory
+  to put audio files (or shortcuts)} \item{AUDIO}{ * A
   directory to put audio files (or shortcuts)}
-  \item{PAPER_ARTIFACTS}{ * A directory to put paper
-  artifacts} \item{PHOTOGRAPHS}{ * A directory to put
+  \item{FIELD_NOTES}{ * A directory to put audio files (or
+  shortcuts)} \item{PAPER_ARTIFACTS}{ * A directory to put
+  paper artifacts} \item{PHOTOGRAPHS}{ * A directory to put
   photographs} \item{VIDEO}{ * A directory to put video
   files (or shortcuts)} } } \item{RAW_TRANSCRIPTS}{ - A
   directory to store the raw transcripts} \item{REPORTS}{ -
