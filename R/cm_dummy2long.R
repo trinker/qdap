@@ -41,33 +41,43 @@
 #' cm_dummy2long(A)
 #' cm_dummy2long(B, "time")
 #' }
-cm_dummy2long <- function(cm.comb.obj, rm.var = "time") {
-    L1 <- split(cm.comb.obj[, !colnames(cm.comb.obj) %in% rm.var], 
-         cm.comb.obj[, rm.var])
-    lng <- function(x) {
-        a <- rle(x)
-        lens <- a[[1]]
-        ends <- cumsum(lens)[as.logical(a[[2]])]
-        starts <- ends - lens[(as.logical(a[[2]]))]
-        #starts <- ifelse(starts == 0, 0, starts + 1)         
-        data.frame(start=starts, end=ends)
+cm_dummy2long <-
+function(cm_long2dummy_obj, rm.var = "time") {
+
+    ## Grab the comment from cm_long2dummy_obj
+    com <- gsub("l2d_", "", comment(cm_long2dummy_obj))
+
+    ## If the cm_long2dummy_obj isn't a list make it so and named 
+    if (is.matrix(cm_long2dummy_obj) | is.data.frame(cm_long2dummy_obj)) {
+        nms <- tail(as.character(substitute(cm_long2dummy_obj)), 1)
+        cm_long2dummy_obj <- list(cm_long2dummy_obj)
+        names(cm_long2dummy_obj) <- nms
     }
-    spanner <- function(A) {lapply(A, lng)}
-    L2 <- lapply(L1, spanner)
-    invisible(lapply(seq_along(L2), function(i) {
-        tnms <- names(L2)[i]
-        cnms <- names(L2[[i]])
-        invisible(lapply(seq_along(L2[[i]]), function(j) {
-            if (nrow(L2[[i]][[j]]) == 0) {
-                return()
-            }
-            L2[[i]][[j]][, "code"] <<- cnms[j] 
-            L2[[i]][[j]][, rm.var] <<- names(L2)[i]
-        }))     
-    }))
-    L2 <- unlist(L2, recursive = FALSE)
-    L2 <- L2[sapply(L2, function(x) nrow(x) != 0)]
-    dat <- data.frame(do.call(rbind, L2), row.names=NULL)
-    data.frame(dat[, 3, drop=FALSE], dat[, -3, drop=FALSE])
+
+    outs <- lapply(cm_long2dummy_obj, function(x) {
+        out <- lapply(1:ncol(x), function(i) {
+            dummy2span(x[, i])
+        })
+        data.frame(code = rep(colnames(x), sapply(out, nrow)),
+            do.call(rbind, out))
+    })
+
+    DF <- data.frame(do.call(rbind, outs), 
+        rmvar = rep(names(outs), sapply(outs, nrow)), row.names = NULL)
+
+    colnames(DF)[4] <- rm.var
+    comment(DF) <- com
+    DF
 }
+
+## Helper functions with `cm_dummy2long`
+dummy2span <- function(cl){
+    runs <- rle(unname(cl))
+    ones <- runs[["values"]] == 1
+    cums <- cumsum(runs[["lengths"]])
+    e <- cums[ones]
+    s <- e - runs[["lengths"]][ones]
+    data.frame(start = s, end = e)
+}
+
 

@@ -163,7 +163,7 @@ function(time.list, list.var.name = "variable", list.var = TRUE,
     })
     DF <- do.call(rbind, x3)
 #DF[, 3] <- DF[, 3] + 1            #REMOVE LATER IF NO PROLEMS ARISE
-    DF[, 2] <- DF[, 2] - 1
+    DF[, 2] <- ifelse(DF[, 2] == 0, 0, DF[, 2] - 1) ## added 9-23-13
     DF$Start <- sec2hms(DF$start)
     DF$End <- sec2hms(DF$end)
     if (list.var) {

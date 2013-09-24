@@ -41,40 +41,65 @@
 #' out <- cm_long2dummy(z, "time")
 #' ltruncdf(out)
 #' }
-cm_long2dummy <-
+cm_long2dummy <- 
 function(dataframe, rm.var = NULL, 
     code = "code", start = "start", end = "end") {
+
+    com <- comment(dataframe)
+    if (is.null(com) | (!any(com %in% c("cmtime", "cmrange")))){
+        stop("Please supply an object from `cm_range2long`, `cm_time2long`, or `cm_df2long`.")
+    }
+      
     if (!is.null(rm.var)) {
         L1 <- split(dataframe, dataframe[, rm.var])
     } else {
         L1 <- list(dataframe)
         names(L1) <- as.character(substitute(dataframe))
     }
-    dummy <- function(dat, code, start, end){
-        L2 <- split(dat, dat[, code])
-        inc <- function(dataframe, start, end) {
-            any(diff(c(apply(dataframe[, c(start, end)], 1, c))) < 0)
-        }
-        if(any(sapply(L2, function(x) inc(x, start = start, end = end)))) {
-            stop("Code values not increasing.  Possible missing rm.var argument.")
-        }
-        nr <- max(sapply(L2, function(x) max(x[, end])))
-        nc <- length(L2)
-        mat <- matrix(rep(0, nr*nc), ncol=nc)
-        colnames(mat) <- names(L2)
-        yes <- lapply(L2, function(x) {
-            c(unique(unlist(sapply(1:nrow(x), 
-                function(i) x[i, start]:x[i, end]))))
-        })
-        invisible(lapply(seq_along(yes), function(i){
-            mat[yes[[i]], i] <<- 1
-        }))
-        data.frame(mat)
-    }
-    L5 <- lapply(L1, function(x) dummy(dat=x, code = code, start = start, end = end))
+    L2 <- lapply(L1, function(x) dummy(dat=x, code = code, start = start, end = end)) 
     if (is.null(rm.var)) {
-        L5 <- data.frame(L5)
-        colnames(L5) <- gsub("x.", "", colnames(L5) )
+        L2 <- L2[[1]]
     }
-    return(L5)
+    comment(L2) <- sprintf("l2d_%s", comment(dataframe))
+    L2
 }
+
+## Helper functions with `cm_long2dummy`
+span2dummy <- function(s, e, n=(1 + max(e))) {
+    x <- rep(0, n)
+    spans <- e-s
+    ones <- unique(unlist(lapply(seq_along(s), function(i) {
+        (s[i] + 1):(s[i] + spans[i])
+    })))
+    x[ones] <- 1
+    x 
+}
+
+dummymatrix <- function(x, group.var = "code", end.var = "end") {
+    cn <- unique(x[, group.var])
+    nc <- length(cn)
+    nr <- max(x[, end.var] + 1)
+    matrix(rep(0, nc * nr), ncol = nc)
+    mat <- matrix(rep(0, nc * nr), ncol = nc) 
+    rownames(mat) <- 0:max(x[, end.var])#maybe remove later
+    colnames(mat) <- cn
+    mat 
+}
+
+dummy <- function(dat, code, start, end){
+    L2 <- split(dat, dat[, code])
+    inc <- function(dataframe, start, end) {
+        any(diff(c(apply(dataframe[, c(start, end)], 1, c))) < 0)
+    }
+    if(any(sapply(L2, function(x) inc(x, start = start, end = end)))) {
+        stop("Code values not increasing.  Possible missing rm.var argument.")
+    }
+    mat <- dummymatrix(dat, group.var = code, end.var = end)
+    nr <- nrow(mat) 
+    for (i in seq_along(L2)) {
+        sect <- L2[[i]]
+        mat[, names(L2)[i]] <- span2dummy(s = sect[, start], sect[, end], nr)
+    }
+    mat
+}
+

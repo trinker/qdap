@@ -60,6 +60,10 @@ BUG FIXES
 * `url_dl` - Downloaded an empty file when not using a dropbox key.  This 
   behavior has been fixed.
 
+* The `cm_code.` family of functions had a bug in the output due to 
+  `cm_long2dummy` and `cm_dummy2long`'s handling of stretching spans.  This has 
+  been corrected.
+
 * `cm_code.exclude` did not output the correct excluded spans.  This behavior
   has been corrected.
 

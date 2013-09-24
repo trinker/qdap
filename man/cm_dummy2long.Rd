@@ -2,7 +2,7 @@
 \alias{cm_dummy2long}
 \title{Convert cm_combine.dummy Back to Long}
 \usage{
-  cm_dummy2long(cm.comb.obj, rm.var = "time")
+  cm_dummy2long(cm_long2dummy_obj, rm.var = "time")
 }
 \arguments{
   \item{cm.comb.obj}{An object from cm_combine.dummy}

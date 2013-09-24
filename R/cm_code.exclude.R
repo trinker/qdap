@@ -82,9 +82,11 @@ function(x2long.obj, exclude.code.list, rm.var = NULL) {
     }))
     names(exclude.code.list2) <- names(exclude.code.list)
     w <- cm_code.combine(x2long.obj, exclude.code.list1, rm.var=rm.var)
-
     rmv <- cm_long2dummy(w, rm.var = rm.var)
-    if (is.data.frame(rmv)) {
+    if (is.data.frame(rmv) | is.matrix(rmv)) {
+        if (is.matrix(rmv)) {
+            rmv <- data.frame(rmv)
+        }
         colnames(rmv) <- gsub("w\\.", "", colnames(rmv))
     } else {
         for(i in 1:length(rmv)) {
@@ -95,6 +97,7 @@ function(x2long.obj, exclude.code.list, rm.var = NULL) {
         rmv <- list(rmv)
         names(rmv) <- "time1"
     }
+
     out2 <- lapply(rmv, function(x) {
         out <- lapply(1:length(exclude.code.list2), function(i, x2 = x) {
             y <- x2[, exclude.code.list2[[i]]]
@@ -107,10 +110,15 @@ function(x2long.obj, exclude.code.list, rm.var = NULL) {
     })
 
     out3 <- lapply(1:length(out2), function(i) {
-        cm_dummy2long(data.frame(out2[[i]], time=rep(names(out2)[i], nrow(out2[[i]]))))
+        cm_dummy2long(out2[[i]])
     })
-
+    nms <- rep(names(out2), sapply(out3, nrow))
     out3 <- do.call(rbind, out3)
+    out3[, 4] <- nms
+
+    newnames <- gsub("w\\.", "", names(exclude.code.list2))
+    delete1 <- out3[, "code"] %in% newnames
+
     if (comment(x2long.obj) == "cmtime") {
         out3$Start <- sec2hms(out3$start)
         out3$End <- sec2hms(out3$end)

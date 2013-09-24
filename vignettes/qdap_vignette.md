@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 25.34 15.00 15.79 15.00 22.40 22.40 15.00 16.30 22.40 15.79
-## [12] 25.34 19.70 19.70 25.34 25.34 19.70 15.00 22.40 25.34
+##  [1] 15.79 19.70 19.70 15.00 16.30 16.30 16.30 16.30 19.70 22.40 15.79
+## [12] 16.30 19.70 19.70 19.70 15.79 16.30 16.30 22.40 19.70
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 25.34 15.00 15.79 15.00 22.40 22.40 15.00 16.30 22.40 15.79
-## [12] 25.34 19.70 19.70 25.34 25.34 19.70 15.00 22.40 25.34
+##  [1] 15.79 19.70 19.70 15.00 16.30 16.30 16.30 16.30 19.70 22.40 15.79
+## [12] 16.30 19.70 19.70 19.70 15.79 16.30 16.30 22.40 19.70
 ```
 
 
@@ -4811,7 +4811,14 @@ datL
 
 <h4 id="reshape">Transforming Codes</h4>
 
-The researcher may want to determine where codes do and do not overlap with one other.  The <font color="red">cm_</font> family of functions bearing (<font color="red">cm_code.</font>) perform various transformative functions.  <a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> will merge the spans (time or word) for given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> will give provide spans that exclude given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> will yield the spans where any occurences of the given codes occur.  <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> is a wrapper for the previous three functions that produces one dataframe in a single call.  Lastly, <a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a> proveds a more flexible framework that allows for the introduction of multiple lofical operators between codes.  Most tasks can be handled with the <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> function.
+The researcher may want to determine where codes do and do not overlap with one other.  The <font color="red">cm_</font> family of functions bearing (<font color="red">cm_code.</font>) perform various transformative functions.  <a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> will merge the spans (time or word) for given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> will give provide spans that exclude given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> will yield the spans where all of the given codes co-occur.  <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> is a wrapper for the previous three functions that produces one dataframe in a single call.  Lastly, <a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a> proveds a more flexible framework that allows for the introduction of multiple lofical operators between codes.  Most tasks can be handled with the <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> function.
+
+For Examples of each click the links below:    
+1. <a href="#cm_code.combine">cm_code.combine Examples</a>     
+2. <a href="#cm_code.exclude">cm_code.exclude Examples</a>  
+3. <a href="#cm_code.overlap">cm_code.overlap Examples</a>       
+4. <a href="#cm_code.transform">cm_code.transform Examples</a>    
+5. <a href="#cm_code.blank">cm_code.blank Examples</a>    
 
 For the sake of simplicity the uses of these functions will be demonstrated via a gantt plot for a visual comparison of the data sets.
 
@@ -4894,7 +4901,7 @@ bar1 <- list(
     A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),
     B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00,
         1.12.00:1.19.01"),
-    C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
+    C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 16.25:17.01")
 )
 
 bar2 <- list(
@@ -4929,7 +4936,7 @@ bar2 <- list(
 ## 12    C   300  301 00:05:00 00:05:01     bar1
 ## 13    C   361  420 00:06:01 00:07:00     bar1
 ## 14    C   539  540 00:08:59 00:09:00     bar1
-## 15    C  1020 1021 00:17:00 00:17:01     bar1
+## 15    C   984 1021 00:16:24 00:17:01     bar1
 ```
 
 
@@ -4958,7 +4965,7 @@ bar2 <- list(
 ## 12    C   300  301 00:05:00 00:05:01 bar1
 ## 13    C   361  420 00:06:01 00:07:00 bar1
 ## 14    C   539  540 00:08:59 00:09:00 bar1
-## 15    C  1020 1021 00:17:00 00:17:01 bar1
+## 15    C   984 1021 00:16:24 00:17:01 bar1
 ## 16    A   159  180 00:02:39 00:03:00 bar2
 ## 17    A   300  301 00:05:00 00:05:01 bar2
 ## 18    A   361  420 00:06:01 00:07:00 bar2
@@ -4995,9 +5002,10 @@ bar2 <- list(
 ## 1   AA     0  10
 ## 2   BB     0  10
 ## 3   BB    18  19
-## 4  ALL     0  10
-## 5  ALL    18  19
-## 6   CC     0   6
+## 4   CC     0   3
+## 5   CC     4   6
+## 6  ALL     0  10
+## 7  ALL    18  19
 ```
 
 
@@ -5017,20 +5025,23 @@ combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 ## 1    AA     0  10  foo
 ## 2    BB     0  10  foo
 ## 3    BB    18  19  foo
-## 4    CC     0   6  foo
-## 5    AB     0  10  foo
-## 6    AB    18  19  foo
-## 7   ABC     0  10  foo
-## 8   ABC    18  19  foo
-## 9    AA     3   8 foo2
-## 10   BB     0   4 foo2
-## 11   BB     9  12 foo2
-## 12   CC     0   1 foo2
-## 13   CC    10  11 foo2
-## 14   CC    14  20 foo2
-## 15   AB     0  12 foo2
-## 16  ABC     0  12 foo2
-## 17  ABC    14  20 foo2
+## 4    CC     0   3  foo
+## 5    CC     4   6  foo
+## 6    AB     0  10  foo
+## 7    AB    18  19  foo
+## 8   ABC     0  10  foo
+## 9   ABC    18  19  foo
+## 10   AA     3   8 foo2
+## 11   BB     0   4 foo2
+## 12   BB     9  12 foo2
+## 13   CC     0   1 foo2
+## 14   CC    10  11 foo2
+## 15   CC    14  20 foo2
+## 16   AB     0   8 foo2
+## 17   AB     9  12 foo2
+## 18  ABC     0   8 foo2
+## 19  ABC     9  12 foo2
+## 20  ABC    14  20 foo2
 ```
 
 
@@ -5041,48 +5052,235 @@ combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 
 
 ```r
-combines <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
-(cc3 <- cm_code.combine(dat, combines))
+combines2 <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
+(cc3 <- cm_code.combine(dat, combines2))
 ```
 
 ```
 ##    code start  end    Start      End
-## 1     A   160  180 00:02:40 00:03:00
-## 2     A   301  301 00:05:01 00:05:01
-## 3     A   362  420 00:06:02 00:07:00
-## 4     A   540  540 00:09:00 00:09:00
-## 5     B   160  160 00:02:40 00:02:40
-## 6     B   181  182 00:03:01 00:03:02
-## 7     B   301  301 00:05:01 00:05:01
-## 8     B   362  420 00:06:02 00:07:00
-## 9     B   540  540 00:09:00 00:09:00
-## 10    B  4320 4741 01:12:00 01:19:01
-## 11   AB   160  182 00:02:40 00:03:02
-## 12   AB   301  301 00:05:01 00:05:01
-## 13   AB   362  420 00:06:02 00:07:00
-## 14   AB   540  540 00:09:00 00:09:00
-## 15   AB  4320 4741 01:12:00 01:19:01
-## 16   BC   160  182 00:02:40 00:03:02
-## 17   BC   301  301 00:05:01 00:05:01
-## 18   BC   362  420 00:06:02 00:07:00
-## 19   BC   540  540 00:09:00 00:09:00
-## 20   BC  1021 1021 00:17:01 00:17:01
-## 21   BC  4320 4741 01:12:00 01:19:01
-## 22  ABC   160  182 00:02:40 00:03:02
-## 23  ABC   301  301 00:05:01 00:05:01
-## 24  ABC   362  420 00:06:02 00:07:00
-## 25  ABC   540  540 00:09:00 00:09:00
-## 26  ABC  1021 1021 00:17:01 00:17:01
-## 27  ABC  4320 4741 01:12:00 01:19:01
-## 28    C   160  180 00:02:40 00:03:00
-## 29    C   301  301 00:05:01 00:05:01
-## 30    C   362  420 00:06:02 00:07:00
-## 31    C   540  540 00:09:00 00:09:00
-## 32    C  1021 1021 00:17:01 00:17:01
+## 1     A   159  180 00:02:39 00:03:00
+## 2     A   300  301 00:05:00 00:05:01
+## 3     A   361  420 00:06:01 00:07:00
+## 4     A   539  540 00:08:59 00:09:00
+## 5     B   159  160 00:02:39 00:02:40
+## 6     B   180  182 00:03:00 00:03:02
+## 7     B   300  301 00:05:00 00:05:01
+## 8     B   361  420 00:06:01 00:07:00
+## 9     B   539  540 00:08:59 00:09:00
+## 10    B  4319 4741 01:11:59 01:19:01
+## 11    C   159  180 00:02:39 00:03:00
+## 12    C   300  301 00:05:00 00:05:01
+## 13    C   361  420 00:06:01 00:07:00
+## 14    C   539  540 00:08:59 00:09:00
+## 15    C   984 1021 00:16:24 00:17:01
+## 16   AB   159  182 00:02:39 00:03:02
+## 17   AB   300  301 00:05:00 00:05:01
+## 18   AB   361  420 00:06:01 00:07:00
+## 19   AB   539  540 00:08:59 00:09:00
+## 20   AB  4319 4741 01:11:59 01:19:01
+## 21   BC   159  182 00:02:39 00:03:02
+## 22   BC   300  301 00:05:00 00:05:01
+## 23   BC   361  420 00:06:01 00:07:00
+## 24   BC   539  540 00:08:59 00:09:00
+## 25   BC   984 1021 00:16:24 00:17:01
+## 26   BC  4319 4741 01:11:59 01:19:01
+## 27  ABC   159  182 00:02:39 00:03:02
+## 28  ABC   300  301 00:05:00 00:05:01
+## 29  ABC   361  420 00:06:01 00:07:00
+## 30  ABC   539  540 00:08:59 00:09:00
+## 31  ABC   984 1021 00:16:24 00:17:01
+## 32  ABC  4319 4741 01:11:59 01:19:01
 ```
 
 
 ![plot of chunk unnamed-chunk-72](figure/unnamed-chunk-72.png) 
+
+
+<h5 id="cm_code.exclude"><font color="green">cm_code.exclude Examples</font></h5>
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> Single Time** *Word Example*<font size="5" color="orange">&diams;</font>
+
+
+```r
+(ce1 <- cm_code.exclude(x, list(BnoC=qcv(BB, CC))))
+```
+
+```
+##   code start end variable
+## 1   AA     0  10    time1
+## 2   BB     0  10    time1
+## 3   BB    18  19    time1
+## 4   CC     0   3    time1
+## 5   CC     4   6    time1
+## 6 BnoC     3   4    time1
+## 7 BnoC     6  10    time1
+## 8 BnoC    18  19    time1
+```
+
+
+![plot of chunk unnamed-chunk-74](figure/unnamed-chunk-74.png) 
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> Repeated Measures** *Word Example*<font size="5" color="orange">&diams;</font>
+
+
+```r
+exlist <- list(AnoB=qcv(AA, BB), ABnoC=qcv(AA, BB, CC))
+(ce2 <- cm_code.exclude(z, exlist, rm.var = "time"))
+```
+
+```
+##     code start end time
+## 1     AA     0  10  foo
+## 2     BB     0  10  foo
+## 3     BB    18  19  foo
+## 4     CC     0   3  foo
+## 5     CC     4   6  foo
+## 6  ABnoC     3   4  foo
+## 7  ABnoC     6  10  foo
+## 8  ABnoC    18  19  foo
+## 9     AA     3   8 foo2
+## 10    BB     0   4 foo2
+## 11    BB     9  12 foo2
+## 12    CC     0   1 foo2
+## 13    CC    10  11 foo2
+## 14    CC    14  20 foo2
+## 15  AnoB     4   8 foo2
+## 16 ABnoC     1   8 foo2
+## 17 ABnoC     9  10 foo2
+## 18 ABnoC    11  12 foo2
+```
+
+
+![plot of chunk unnamed-chunk-76](figure/unnamed-chunk-76.png) 
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> Repeated Measures** *Time Span Example*<font size="5" color="orange">&diams;</font>
+
+
+```r
+exlist2 <- list(AnoB=qcv(A, B), BnoC=qcv(B, C), ABnoC=qcv(A, B, C))
+(ce3 <- cm_code.exclude(dats, exlist2, "time"))
+```
+
+```
+##     code start  end    Start      End time
+## 1      A   159  180 00:02:39 00:03:00 bar1
+## 2      A   300  301 00:05:00 00:05:01 bar1
+## 3      A   361  420 00:06:01 00:07:00 bar1
+## 4      A   539  540 00:08:59 00:09:00 bar1
+## 5      B   159  160 00:02:39 00:02:40 bar1
+## 6      B   180  182 00:03:00 00:03:02 bar1
+## 7      B   300  301 00:05:00 00:05:01 bar1
+## 8      B   361  420 00:06:01 00:07:00 bar1
+## 9      B   539  540 00:08:59 00:09:00 bar1
+## 10     B  4319 4741 01:11:59 01:19:01 bar1
+## 11     C   159  180 00:02:39 00:03:00 bar1
+## 12     C   300  301 00:05:00 00:05:01 bar1
+## 13     C   361  420 00:06:01 00:07:00 bar1
+## 14     C   539  540 00:08:59 00:09:00 bar1
+## 15     C   984 1021 00:16:24 00:17:01 bar1
+## 16  AnoB   160  180 00:02:40 00:03:00 bar1
+## 17  BnoC   180  182 00:03:00 00:03:02 bar1
+## 18  BnoC  4319 4741 01:11:59 01:19:01 bar1
+## 19 ABnoC   180  182 00:03:00 00:03:02 bar1
+## 20 ABnoC  4319 4741 01:11:59 01:19:01 bar1
+## 21     A   159  180 00:02:39 00:03:00 bar2
+## 22     A   300  301 00:05:00 00:05:01 bar2
+## 23     A   361  420 00:06:01 00:07:00 bar2
+## 24     A   539  540 00:08:59 00:09:00 bar2
+## 25     B   159  160 00:02:39 00:02:40 bar2
+## 26     B   180  182 00:03:00 00:03:02 bar2
+## 27     B   300  301 00:05:00 00:05:01 bar2
+## 28     B   361  420 00:06:01 00:07:00 bar2
+## 29     B   539  540 00:08:59 00:09:00 bar2
+## 30     B  4319 4741 01:11:59 01:19:01 bar2
+## 31     C   159  180 00:02:39 00:03:00 bar2
+## 32     C   300  301 00:05:00 00:05:01 bar2
+## 33     C   361  420 00:06:01 00:07:00 bar2
+## 34     C   539  540 00:08:59 00:09:00 bar2
+## 35     C  1020 1021 00:17:00 00:17:01 bar2
+## 36  AnoB   160  180 00:02:40 00:03:00 bar2
+## 37  BnoC   180  182 00:03:00 00:03:02 bar2
+## 38  BnoC  4319 4741 01:11:59 01:19:01 bar2
+## 39 ABnoC   180  182 00:03:00 00:03:02 bar2
+## 40 ABnoC  4319 4741 01:11:59 01:19:01 bar2
+```
+
+
+![plot of chunk unnamed-chunk-78](figure/unnamed-chunk-78.png) 
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> Single TIme** *Time Span Combined Exclude Example*<font size="5" color="orange">&diams;</font>
+
+
+```r
+(ce4.1 <- cm_code.combine(dat, list(AB = qcv(A, B))))
+```
+
+```
+##    code start  end    Start      End
+## 1     A   159  180 00:02:39 00:03:00
+## 2     A   300  301 00:05:00 00:05:01
+## 3     A   361  420 00:06:01 00:07:00
+## 4     A   539  540 00:08:59 00:09:00
+## 5     B   159  160 00:02:39 00:02:40
+## 6     B   180  182 00:03:00 00:03:02
+## 7     B   300  301 00:05:00 00:05:01
+## 8     B   361  420 00:06:01 00:07:00
+## 9     B   539  540 00:08:59 00:09:00
+## 10    B  4319 4741 01:11:59 01:19:01
+## 11    C   159  180 00:02:39 00:03:00
+## 12    C   300  301 00:05:00 00:05:01
+## 13    C   361  420 00:06:01 00:07:00
+## 14    C   539  540 00:08:59 00:09:00
+## 15    C   984 1021 00:16:24 00:17:01
+## 16   AB   159  182 00:02:39 00:03:02
+## 17   AB   300  301 00:05:00 00:05:01
+## 18   AB   361  420 00:06:01 00:07:00
+## 19   AB   539  540 00:08:59 00:09:00
+## 20   AB  4319 4741 01:11:59 01:19:01
+```
+
+```r
+(ce4.2 <- cm_code.exclude(ce4.1, list(CnoAB = qcv(C, AB))))
+```
+
+```
+##     code start  end    Start      End    NA
+## 1      A   159  180 00:02:39 00:03:00 time1
+## 2      A   300  301 00:05:00 00:05:01 time1
+## 3      A   361  420 00:06:01 00:07:00 time1
+## 4      A   539  540 00:08:59 00:09:00 time1
+## 5      B   159  160 00:02:39 00:02:40 time1
+## 6      B   180  182 00:03:00 00:03:02 time1
+## 7      B   300  301 00:05:00 00:05:01 time1
+## 8      B   361  420 00:06:01 00:07:00 time1
+## 9      B   539  540 00:08:59 00:09:00 time1
+## 10     B  4319 4741 01:11:59 01:19:01 time1
+## 11     C   159  180 00:02:39 00:03:00 time1
+## 12     C   300  301 00:05:00 00:05:01 time1
+## 13     C   361  420 00:06:01 00:07:00 time1
+## 14     C   539  540 00:08:59 00:09:00 time1
+## 15     C   984 1021 00:16:24 00:17:01 time1
+## 16    AB   159  182 00:02:39 00:03:02 time1
+## 17    AB   300  301 00:05:00 00:05:01 time1
+## 18    AB   361  420 00:06:01 00:07:00 time1
+## 19    AB   539  540 00:08:59 00:09:00 time1
+## 20    AB  4319 4741 01:11:59 01:19:01 time1
+## 21 CnoAB   984 1021 00:16:24 00:17:01 time1
+```
+
+
+![plot of chunk unnamed-chunk-80](figure/unnamed-chunk-80.png) 
+
+
+<h5 id="cm_code.overlap"><font color="green">cm_code.overlap Examples</font></h5>
+
+<h5 id="cm_code.transform"><font color="green">cm_code.transform Examples</font></h5>
+
+<h5 id="cm_code.blank"><font color="green">cm_code.blank Examples</font></h5>
 
 
 
