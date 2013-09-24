@@ -71,10 +71,11 @@
 #' @return Creates a project template.
 #' @keywords project, workflow, is.global
 #' @export
-#' @importFrom reports delete folder new_report repo2github
+#' @importFrom reports delete folder new_report repo2github UF
 #' @importFrom tools file_ext
 new_project <- function(project = "new", path = getwd(), 
     open = reports::is.global(2), github = FALSE, ...) {
+    project <- UF(project)
     WD <- getwd()
     on.exit(setwd(WD))
     if(file.exists(file.path(path, project))) {
