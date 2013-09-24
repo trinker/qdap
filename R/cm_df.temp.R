@@ -7,7 +7,6 @@
 #' @param dataframe A dataframe containing a text variable.
 #' @param text.var The name of the text variable.
 #' @param codes Optional list of codes.
-#' @param csv logical.  If \code{TRUE} creates a csv in the working directory.
 #' @param file The name of the file (csv is recommended).  If \code{NULL} no file 
 #' is written.
 #' @param transpose logical.  If \code{TRUE} transposes the dataframe so that 

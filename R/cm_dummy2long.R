@@ -2,7 +2,7 @@
 #'
 #' \code{cm_combine.dummy} back to long.
 #'
-#' @param cm.comb.obj An object from cm_combine.dummy
+#' @param cm_long2dummy_obj An object from cm_combine.dummy
 #' @param rm.var Name of the repeated measures column.  Default is 
 #' \code{"time"}.
 #' @return Returns a dataframe with co-occurrences of provided code columns.

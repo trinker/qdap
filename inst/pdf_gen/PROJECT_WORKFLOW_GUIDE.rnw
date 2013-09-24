@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage[sc]{mathpazo}
 \usepackage{geometry}
+\usepackage{courier}
 \geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
 \setcounter{secnumdepth}{2}
 \setcounter{tocdepth}{2}
@@ -23,7 +24,7 @@ The project template includes these main directories and scripts:
     \item \textbf{02\_analysis\_I.R} initial analysis
     \item \textbf{03\_plots.R} plotting script
   \end{enumerate}
-  \item \textbf{CM\_DATA} - A directory to export/import scripts for cm\_xxx family of functions
+  \item \textbf{CM\_DATA} - A directory to export/import scripts for \texttt{cm\_xxx} family of functions
   \item \textbf{CODEBOOK} - A directory to store coding conventions or demographics data
   \begin{enumerate}
     \item \textbf{KEY.csv} A blank template for demographic information
@@ -42,6 +43,7 @@ The project template includes these main directories and scripts:
   \item \textbf{PROJECT\_WORKFLOW\_GUIDE.pdf} A pdf explaining the structure of the project directory (this document) 
   \item \textbf{RAW\_DATA} - A directory to store non-transcript data related to the project:
   \begin{enumerate}
+     \item \textbf{ANALYTIC\_MEMOS} - A directory to put analytic memos
      \item \textbf{AUDIO} - A directory to put audio files (or shortcuts)
      \item \textbf{FIELD\_NOTES} - A directory to put audio files (or shortcuts)
      \item \textbf{PAPER\_ARTIFACTS} - A directory to put paper artifacts 
@@ -49,15 +51,15 @@ The project template includes these main directories and scripts:
      \item \textbf{VIDEO} - A directory to put video files (or shortcuts)
   \end{enumerate}  
   \item \textbf{RAW\_TRANSCRIPTS} - A directory to store the raw transcripts
-  \item \textbf{REPORTS} - A directory relatede reports and presentations; see \href{https://dl.dropbox.com/u/61803503/packages/REPORT_WORKFLOW_GUIDE.pdf}{REPORT\_WORKFLOW\_GUIDE.pdf} for details
+  \item \textbf{REPORTS} - A directory related to reports and presentations; see \href{https://dl.dropbox.com/u/61803503/packages/REPORT_WORKFLOW_GUIDE.pdf}{REPORT\_WORKFLOW\_GUIDE.pdf} for details
   \item \textbf{TABLES} - A directory to export tables to 
   \item \textbf{WORD\_LISTS} - A directory to store word lists that can be sourced and supplied to functions
   \item \textbf{.Rprofile} - Performs certain tasks such as loading libraries, 
       data and sourcing functions upon startup in \href{http://www.rstudio.com/}{RStudio}
   \item \textbf{extra\_functions.R} - A script to store user made functions related to the project; already contains:
   \begin{enumerate}
-     \item \textbf{email} - A function to view, and optionally copy to the clipboard, emails for the client/lead researcher, analyst and/or other project members (information taking from ~/CORRESPONDENCE/CONTACT\_INFO.txt file)
-     \item \textbf{todo} - A function to view, and optionally copy to the clipboard, non-completed tasks from the TO\_DO.txt file
+     \item \textbf{email} - A function to view, and optionally copy to the clipboard, emails for the client/lead researcher, analyst and/or other project members (information taking from \newline$\sim$/CORRESPONDENCE/CONTACT\_INFO file)
+     \item \textbf{todo} - A function to view, and optionally copy to the clipboard, non-completed tasks from the TO\_DO file
   \end{enumerate}   
   \item \textbf{LOG} - A text file documenting project changes/needs etc.
   \item \textbf{xxx.Rproj} - A project file used by \href{http://www.rstudio.com/}{RStudio}; clicking this will open the project in RStudio

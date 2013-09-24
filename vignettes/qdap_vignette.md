@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.79 19.70 19.70 15.00 16.30 16.30 16.30 16.30 19.70 22.40 15.79
-## [12] 16.30 19.70 19.70 19.70 15.79 16.30 16.30 22.40 19.70
+##  [1] 16.30 19.70 16.30 15.00 16.30 15.79 15.79 25.34 15.79 19.70 22.40
+## [12] 25.34 15.79 19.70 15.00 15.00 22.40 19.70 25.34 25.34
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.79 19.70 19.70 15.00 16.30 16.30 16.30 16.30 19.70 22.40 15.79
-## [12] 16.30 19.70 19.70 19.70 15.79 16.30 16.30 22.40 19.70
+##  [1] 16.30 19.70 16.30 15.00 16.30 15.79 15.79 25.34 15.79 19.70 22.40
+## [12] 25.34 15.79 19.70 15.00 15.00 22.40 19.70 25.34 25.34
 ```
 
 
@@ -4757,7 +4757,7 @@ with(DATA, cm_time.temp(codes, list(person, adult), file = "codelist.txt"))
 )
 </code></pre>
 
-After coding the data (see the <a href="http://www.youtube.com/watch?v=XC-RXeY63bM&feature=youtu.be" target="_blank">YouTube video</a> the data can be read back in with <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html" target="_blank">source</a>.  Be sure to assign list to an object (e.g., `dat <- list()`).
+After coding the data (see the <a href="http://www.youtube.com/watch?v=XC-RXeY63bM&feature=youtu.be" target="_blank">YouTube video</a> the data can be read back in with <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html" target="_blank">source</a>.  Be sure to assign list to an object (e.g., `dat <- list()`).  Also be aware that the end times must be greater than 0.
 
 <font size="5" color="orange">&diams;</font> **Coding Times Spans**: Read in the data<font size="5" color="orange">&diams;</font>
 
@@ -4811,7 +4811,7 @@ datL
 
 <h4 id="reshape">Transforming Codes</h4>
 
-The researcher may want to determine where codes do and do not overlap with one other.  The <font color="red">cm_</font> family of functions bearing (<font color="red">cm_code.</font>) perform various transformative functions.  <a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> will merge the spans (time or word) for given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> will give provide spans that exclude given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> will yield the spans where all of the given codes co-occur.  <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> is a wrapper for the previous three functions that produces one dataframe in a single call.  Lastly, <a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a> proveds a more flexible framework that allows for the introduction of multiple lofical operators between codes.  Most tasks can be handled with the <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> function.
+The researcher may want to determine where codes do and do not overlap with one other.  The <font color="red">cm_</font> family of functions bearing (<font color="red">cm_code.</font>) perform various transformative functions (Boolean search).  <a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> will merge the spans (time or word) for given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> will give provide spans that exclude given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> will yield the spans where all of the given codes co-occur.  <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> is a wrapper for the previous three functions that produces one dataframe in a single call.  Lastly, <a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a> proveds a more flexible framework that allows for the introduction of multiple lofical operators between codes.  Most tasks can be handled with the <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> function.
 
 For Examples of each click the links below:    
 1. <a href="#cm_code.combine">cm_code.combine Examples</a>     
@@ -4989,6 +4989,7 @@ bar2 <- list(
 
 <h5 id="cm_code.combine"><font color="green">cm_code.combine Examples</font></h5>
 
+<a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> provides all the spans (time/words) that are occupied by one or more of the combined codes.  For example, if we utilized <a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> on code list X and Y the result would be any span where X or Y is located. This is the OR of the Boolean search.  Note that `combine.code.list` must be supplied as a list of named character vectors.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> Single Time** *Word Example*<font size="5" color="orange">&diams;</font>
 
@@ -5097,6 +5098,8 @@ combines2 <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
 
 
 <h5 id="cm_code.exclude"><font color="green">cm_code.exclude Examples</font></h5>
+
+<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> provides all the spans (time/words) that are occupied by one or more of the combined codes with the exclusion of another code.  For example, if we utilized <a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> on code list X and Y the result would be any span where X is located but Y is not. This is the NOT of the Boolean search.  The last term supplied to exclude.code.list is the excluded term.  All other terms are combined and the final code term is partitioned out.  Note that `exclude.code.list` must be supplied as a list of named character vectors.
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> Single Time** *Word Example*<font size="5" color="orange">&diams;</font>
@@ -5277,6 +5280,131 @@ exlist2 <- list(AnoB=qcv(A, B), BnoC=qcv(B, C), ABnoC=qcv(A, B, C))
 
 
 <h5 id="cm_code.overlap"><font color="green">cm_code.overlap Examples</font></h5>
+
+<a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> provides all the spans (time/words) that are occupied by all of the given codes.  For example, if we utilized <a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> on code list X and Y the result would be any span where X and Y are both located. This is the AND of the Boolean search.  Note that `overlap.code.list` must be supplied as a list of named character vectors.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> Single Time** *Word Example*<font size="5" color="orange">&diams;</font>
+
+
+```r
+(co1 <- cm_code.overlap(x, list(BC=qcv(BB, CC))))
+```
+
+```
+##   code start end
+## 1   AA     0  10
+## 2   BB     0  10
+## 3   BB    18  19
+## 4   CC     0   3
+## 5   CC     4   6
+## 6   BC     0   3
+## 7   BC     4   6
+```
+
+
+![plot of chunk unnamed-chunk-82](figure/unnamed-chunk-82.png) 
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> Repeated Measures** *Word Example*<font size="5" color="orange">&diams;</font>
+
+
+```r
+overlist <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
+(co2 <- cm_code.overlap(z, overlist, rm.var = "time"))
+```
+
+```
+##    code start end time
+## 1    AA     0  10  foo
+## 2    BB     0  10  foo
+## 3    BB    18  19  foo
+## 4    CC     0   3  foo
+## 5    CC     4   6  foo
+## 6    AB     0  10  foo
+## 7   ABC     0   3  foo
+## 8   ABC     4   6  foo
+## 9    AA     3   8 foo2
+## 10   BB     0   4 foo2
+## 11   BB     9  12 foo2
+## 12   CC     0   1 foo2
+## 13   CC    10  11 foo2
+## 14   CC    14  20 foo2
+## 15   AB     3   4 foo2
+```
+
+
+![plot of chunk unnamed-chunk-84](figure/unnamed-chunk-84.png) 
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> Repeated Measures** *Time Span Example*<font size="5" color="orange">&diams;</font>
+
+
+```r
+overlist2 <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
+(co3 <- cm_code.overlap(dats, overlist2, "time"))
+```
+
+```
+##    code start  end    Start      End time
+## 1     A   160  180 00:02:40 00:03:00 bar1
+## 2     A   301  301 00:05:01 00:05:01 bar1
+## 3     A   362  420 00:06:02 00:07:00 bar1
+## 4     A   540  540 00:09:00 00:09:00 bar1
+## 5     B   160  160 00:02:40 00:02:40 bar1
+## 6     B   181  182 00:03:01 00:03:02 bar1
+## 7     B   301  301 00:05:01 00:05:01 bar1
+## 8     B   362  420 00:06:02 00:07:00 bar1
+## 9     B   540  540 00:09:00 00:09:00 bar1
+## 10    B  4320 4741 01:12:00 01:19:01 bar1
+## 11    C   160  180 00:02:40 00:03:00 bar1
+## 12    C   301  301 00:05:01 00:05:01 bar1
+## 13    C   362  420 00:06:02 00:07:00 bar1
+## 14    C   540  540 00:09:00 00:09:00 bar1
+## 15    C   985 1021 00:16:25 00:17:01 bar1
+## 16   AB   160  160 00:02:40 00:02:40 bar1
+## 17   AB   301  301 00:05:01 00:05:01 bar1
+## 18   AB   362  420 00:06:02 00:07:00 bar1
+## 19   AB   540  540 00:09:00 00:09:00 bar1
+## 20   BC   160  160 00:02:40 00:02:40 bar1
+## 21   BC   301  301 00:05:01 00:05:01 bar1
+## 22   BC   362  420 00:06:02 00:07:00 bar1
+## 23   BC   540  540 00:09:00 00:09:00 bar1
+## 24  ABC   160  160 00:02:40 00:02:40 bar1
+## 25  ABC   301  301 00:05:01 00:05:01 bar1
+## 26  ABC   362  420 00:06:02 00:07:00 bar1
+## 27  ABC   540  540 00:09:00 00:09:00 bar1
+## 28    A   160  180 00:02:40 00:03:00 bar2
+## 29    A   301  301 00:05:01 00:05:01 bar2
+## 30    A   362  420 00:06:02 00:07:00 bar2
+## 31    A   540  540 00:09:00 00:09:00 bar2
+## 32    B   160  160 00:02:40 00:02:40 bar2
+## 33    B   181  182 00:03:01 00:03:02 bar2
+## 34    B   301  301 00:05:01 00:05:01 bar2
+## 35    B   362  420 00:06:02 00:07:00 bar2
+## 36    B   540  540 00:09:00 00:09:00 bar2
+## 37    B  4320 4741 01:12:00 01:19:01 bar2
+## 38    C   160  180 00:02:40 00:03:00 bar2
+## 39    C   301  301 00:05:01 00:05:01 bar2
+## 40    C   362  420 00:06:02 00:07:00 bar2
+## 41    C   540  540 00:09:00 00:09:00 bar2
+## 42    C  1021 1021 00:17:01 00:17:01 bar2
+## 43   AB   160  160 00:02:40 00:02:40 bar2
+## 44   AB   301  301 00:05:01 00:05:01 bar2
+## 45   AB   362  420 00:06:02 00:07:00 bar2
+## 46   AB   540  540 00:09:00 00:09:00 bar2
+## 47   BC   160  160 00:02:40 00:02:40 bar2
+## 48   BC   301  301 00:05:01 00:05:01 bar2
+## 49   BC   362  420 00:06:02 00:07:00 bar2
+## 50   BC   540  540 00:09:00 00:09:00 bar2
+## 51  ABC   160  160 00:02:40 00:02:40 bar2
+## 52  ABC   301  301 00:05:01 00:05:01 bar2
+## 53  ABC   362  420 00:06:02 00:07:00 bar2
+## 54  ABC   540  540 00:09:00 00:09:00 bar2
+```
+
+
+![plot of chunk unnamed-chunk-86](figure/unnamed-chunk-86.png) 
+
 
 <h5 id="cm_code.transform"><font color="green">cm_code.transform Examples</font></h5>
 

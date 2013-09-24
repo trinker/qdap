@@ -1857,7 +1857,7 @@ with(DATA, cm_time.temp(codes, list(person, adult), file = "codelist.txt"))
 )
 </code></pre>
 
-After coding the data (see the `r HR2("http://www.youtube.com/watch?v=XC-RXeY63bM&feature=youtu.be", "YouTube video")` the data can be read back in with `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html", "source")`.  Be sure to assign list to an object (e.g., `dat <- list()`).
+After coding the data (see the `r HR2("http://www.youtube.com/watch?v=XC-RXeY63bM&feature=youtu.be", "YouTube video")` the data can be read back in with `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html", "source")`.  Be sure to assign list to an object (e.g., `dat <- list()`).  Also be aware that the end times must be greater than 0.
 
 `r FT(orange, 5, text="&diams;")` **Coding Times Spans**: Read in the data`r FT(orange, 5, text="&diams;")`
 
@@ -1911,7 +1911,7 @@ datL
 
 <h4 id="reshape">Transforming Codes</h4>
 
-The researcher may want to determine where codes do and do not overlap with one other.  The `r FT(red, text="cm_")` family of functions bearing (`r FT(red, text="cm_code.")`) perform various transformative functions.  `r FUN("cm_code.combine")` will merge the spans (time or word) for given codes.  `r FUN("cm_code.exclude")` will give provide spans that exclude given codes.  `r FUN("cm_code.overlap")` will yield the spans where all of the given codes co-occur.  `r FUN("cm_code.transform")` is a wrapper for the previous three functions that produces one dataframe in a single call.  Lastly, `r FUN("cm_code.blank")` proveds a more flexible framework that allows for the introduction of multiple lofical operators between codes.  Most tasks can be handled with the `r FUN("cm_code.transform")` function.
+The researcher may want to determine where codes do and do not overlap with one other.  The `r FT(red, text="cm_")` family of functions bearing (`r FT(red, text="cm_code.")`) perform various transformative functions (Boolean search).  `r FUN("cm_code.combine")` will merge the spans (time or word) for given codes.  `r FUN("cm_code.exclude")` will give provide spans that exclude given codes.  `r FUN("cm_code.overlap")` will yield the spans where all of the given codes co-occur.  `r FUN("cm_code.transform")` is a wrapper for the previous three functions that produces one dataframe in a single call.  Lastly, `r FUN("cm_code.blank")` proveds a more flexible framework that allows for the introduction of multiple lofical operators between codes.  Most tasks can be handled with the `r FUN("cm_code.transform")` function.
 
 For Examples of each click the links below:    
 1. `r HR("#cm_code.combine", "cm_code.combine Examples")`     
@@ -2002,6 +2002,7 @@ gantt_wrap(dats, "code", "time")
 
 <h5 id="cm_code.combine"><font color="green">cm_code.combine Examples</font></h5>
 
+`r FUN("cm_code.combine")` provides all the spans (time/words) that are occupied by one or more of the combined codes.  For example, if we utilized `r FUN("cm_code.combine")` on code list X and Y the result would be any span where X or Y is located. This is the OR of the Boolean search.  Note that `combine.code.list` must be supplied as a list of named character vectors.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.combine")` Single Time** *Word Example*`r FT(orange, 5, text="&diams;")`
 
@@ -2036,6 +2037,8 @@ gantt_wrap(cc3, "code")
 ```
 
 <h5 id="cm_code.exclude"><font color="green">cm_code.exclude Examples</font></h5>
+
+`r FUN("cm_code.exclude")` provides all the spans (time/words) that are occupied by one or more of the combined codes with the exclusion of another code.  For example, if we utilized `r FUN("cm_code.combine")` on code list X and Y the result would be any span where X is located but Y is not. This is the NOT of the Boolean search.  The last term supplied to exclude.code.list is the excluded term.  All other terms are combined and the final code term is partitioned out.  Note that `exclude.code.list` must be supplied as a list of named character vectors.
 
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.exclude")` Single Time** *Word Example*`r FT(orange, 5, text="&diams;")`
@@ -2082,6 +2085,40 @@ gantt_wrap(ce4.2, "code")
 ```
 
 <h5 id="cm_code.overlap"><font color="green">cm_code.overlap Examples</font></h5>
+
+`r FUN("cm_code.overlap")` provides all the spans (time/words) that are occupied by all of the given codes.  For example, if we utilized `r FUN("cm_code.overlap")` on code list X and Y the result would be any span where X and Y are both located. This is the AND of the Boolean search.  Note that `overlap.code.list` must be supplied as a list of named character vectors.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.overlap")` Single Time** *Word Example*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+(co1 <- cm_code.overlap(x, list(BC=qcv(BB, CC))))
+```
+
+```{r, echo = FALSE, fig.height = 2.5}
+gantt_wrap(co1, "code")
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.overlap")` Repeated Measures** *Word Example*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+overlist <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
+(co2 <- cm_code.overlap(z, overlist, rm.var = "time"))
+```
+
+```{r, echo = FALSE, fig.height = 5}
+gantt_wrap(co2, "code", "time")
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.overlap")` Repeated Measures** *Time Span Example*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+overlist2 <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
+(co3 <- cm_code.overlap(dats, overlist2, "time"))
+```
+
+```{r, echo = FALSE, fig.height = 2.5}
+gantt_wrap(co3, "code")
+```
 
 <h5 id="cm_code.transform"><font color="green">cm_code.transform Examples</font></h5>
 

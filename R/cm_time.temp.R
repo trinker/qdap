@@ -20,6 +20,7 @@
 #' @seealso 
 #' \code{\link[qdap]{cm_range.temp}},
 #' @export
+#' @importFrom reports pad
 #' @examples
 #' \dontrun{
 #' ## cm_time.temp(qcv(AA, BB, CC), ":30", "7:40", file = "foo.txt")
@@ -36,8 +37,8 @@
 #' cm_time.temp(qcv(AA, BB, CC))
 #' }
 cm_time.temp <-
-function(codes, grouping.var = NULL, start = ":00", end = NULL, file=NULL, coding = FALSE,
-    print = TRUE) {
+function(codes, grouping.var = NULL, start = ":00", end = NULL, file=NULL, 
+    coding = FALSE, print = TRUE) {
     if (Sys.info()["sysname"] != "Windows") {
         writeClipboard <- NULL
     }  

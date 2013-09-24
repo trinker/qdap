@@ -5,7 +5,7 @@
   cm_dummy2long(cm_long2dummy_obj, rm.var = "time")
 }
 \arguments{
-  \item{cm.comb.obj}{An object from cm_combine.dummy}
+  \item{cm_long2dummy_obj}{An object from cm_combine.dummy}
 
   \item{rm.var}{Name of the repeated measures column.
   Default is \code{"time"}.}

@@ -12,9 +12,6 @@
 
   \item{codes}{Optional list of codes.}
 
-  \item{csv}{logical.  If \code{TRUE} creates a csv in the
-  working directory.}
-
   \item{file}{The name of the file (csv is recommended).
   If \code{NULL} no file is written.}
 

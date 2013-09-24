@@ -39,6 +39,7 @@
 #' \item{PROJECT_WORKFLOW_GUIDE.pdf}{ * A pdf explaining the structure of the project template}
 #' \item{RAW_DATA}{ - A directory to store non-transcript data related to the project:
 #' \itemize{
+#'     \item{ANALYTIC_MEMOS}{ * A directory to put audio files (or shortcuts)}     
 #'     \item{AUDIO}{ * A directory to put audio files (or shortcuts)}     
 #'     \item{FIELD_NOTES}{ * A directory to put audio files (or shortcuts)}   
 #'     \item{PAPER_ARTIFACTS}{ * A directory to put paper artifacts}  
@@ -103,8 +104,8 @@ new_project <- function(project = "new", path = getwd(),
     cat(paste0("Project \"", project, "\" created: ", Sys.time(), "\n"), 
         file=paste0(x, "/", "LOG"))
     invisible(folder(folder.name=file.path(y[[4]], "ALREADY_REVIEWED")))
-    dats <- c("AUDIO", "VIDEO", "FIELD_NOTES", "INTERVIEWS", "PAPER_ARTIFACTS", 
-        "PHOTOGRAPHS")
+    dats <- c("ANALYTIC_MEMOS", "AUDIO", "VIDEO", "FIELD_NOTES", "INTERVIEWS", 
+        "PAPER_ARTIFACTS", "PHOTOGRAPHS")
     invisible(folder(folder.name=file.path(y[[13]], dats)))
     cat(paste0("library(qdap)\n",
         "dir_map(file.path(getwd(), \"CLEANED_TRANSCRIPTS\")\n\n\n\n", 
