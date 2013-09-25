@@ -49,14 +49,10 @@ function(matrix.obj) {
         }
         matrix.obj <- termco2mat(matrix.obj)
     } else {    
-        if (class(matrix.obj) =="matrix") {
-            if (is.null(comment(matrix.obj))){
-                warning("Not a termco or wfm object; results may not be correct.")
-            } else {
-                if(comment(matrix.obj)!="true.matrix"){
-                    warning(paste("Not a termco.d, termco.c or wfm object;",
-                    "results may not be correct."))
-                }
+        if (is(matrix.obj, "matrix")) {
+            if(is(matrix.obj, "true.matrix")){
+                 warning(paste("Not a termco.d, termco.c or wfm object;",
+                     "results may not be correct."))
             }
         } else {
              warning("Not a matrix object; results may not be correct.")
