@@ -26,21 +26,12 @@
 dissimilarity <-
 function(text.var, grouping.var= NULL, method = "prop", diag = FALSE, 
     upper = FALSE, p = 2){   
-    if(is.null(comment(text.var))){ 
+    if(!is(text.var, "true.matrix")){ 
         wfm.object <- wfm(text.var = text.var, grouping.var = grouping.var)
     } else {
         wfm.object <- text.var
     }
-    if (comment(wfm.object)!= "true.matrix") {
-        warning("not a matrix from wfm function")
-    }
-    if (comment(wfm.object)!= "true.matrix"){
-        wfm.object <- wfm.object[-c(nrow(wfm.object)), -c(1, 
-            ncol(wfm.object))]
-        wfm.object <- t(wfm.object)
-    } else {
-        wfm.object <- t(wfm.object)
-    }
+    wfm.object <- t(wfm.object)
     meth.check <- FALSE
     if (method == "prop") {
         method <- "binary" 
@@ -55,7 +46,7 @@ function(text.var, grouping.var= NULL, method = "prop", diag = FALSE,
     if (meth.check) {
       x <- 1 - x
     }   
-    class(x) <- c("dissimilarity", "dist")    
+    class(x) <- c("dissimilarity", class(x))    
     x
 }
 
