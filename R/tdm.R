@@ -24,8 +24,7 @@
 #' lsa(tdm(DATA$state, DATA$person), dims=dimcalc_share())
 #' }
 tdm <- function(text.var, grouping.var = NULL, ...) {
-    CM <- comment(text.var)
-    if (is.null(CM) || CM != "true.matrix") {
+    if (!is(text.var, "true.matrix")) {
         text.var <- wfm(text.var = text.var, grouping.var = grouping.var, output = "raw", ...)
     }
     d <- melt(text.var)
@@ -43,4 +42,3 @@ tdm <- function(text.var, grouping.var = NULL, ...) {
 dtm <- function(text.var, grouping.var = NULL, ...) {
     t(tdm(text.var = text.var, grouping.var = grouping.var, ...))
 }
-
