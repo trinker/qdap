@@ -6,10 +6,6 @@
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
-#' @param wfdf A word frequency data frame given instead of raw text.var and 
-#' optional grouping.var. Basically converts a word frequency dataframe (wfdf) 
-#' to a word frequency matrix (\code{\link[qdap]{wfm}}).  Default is 
-#' \code{NULL}.
 #' @param output Output type (either \code{"proportion"} or \code{"percent"}).
 #' @param stopwords A vector of stop words to remove.
 #' @param char2space A vector of characters to be turned into spaces.  If 
@@ -33,36 +29,39 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' #word frequency matrix (wfm) example:
+#' ## word frequency matrix (wfm) example:
 #' with(DATA, wfm(state, list(sex, adult)))[1:15, ]
 #' with(DATA, wfm(state, person))[1:15, ]
 #' 
-#' #insert double tilde ("~~") to keep phrases(i.e., first last name)
+#' ## insert double tilde ("~~") to keep phrases(i.e., first last name)
 #' alts <- c(" fun", "I ")
 #' state2 <- mgsub(alts, gsub("\\s", "~~", alts), DATA$state) 
 #' with(DATA, wfm(state2, list(sex, adult)))[1:18, ]
 #' 
-#' #word frequency dataframe (wfdf) example:
+#' ## word frequency dataframe (wfdf) example:
 #' with(DATA, wfdf(state, list(sex, adult)))[1:15, ]
 #' with(DATA, wfdf(state, person))[1:15, ]
 #' 
-#' #insert double tilde ("~~") to keep dual words (i.e., first last name)
+#' ## insert double tilde ("~~") to keep dual words (i.e., first last name)
 #' alts <- c(" fun", "I ")
 #' state2 <- mgsub(alts, gsub("\\s", "~~", alts), DATA$state)
 #' with(DATA, wfdf(state2, list(sex, adult)))[1:18, ]
 #' 
-#' #wfm.expanded example:
+#' ## wfm.expanded example:
 #' z <- wfm(DATA$state, DATA$person)
 #' wfm.expanded(z)[30:45, ] #two "you"s
 #' 
-#' #wf.combine examples:
+#' ## wf.combine examples:
 #' #===================
-#' #raw no margins (will work) 
+#' ## raw no margins (will work) 
 #' x <- wfm(DATA$state, DATA$person) 
 #'                     
-#' #raw with margin (will work) 
+#' ## raw with margin (will work) 
 #' y <- wfdf(DATA$state, DATA$person, margins = TRUE) 
 #' 
+#' ## Proportion matrix
+#' z2 <- wfm(DATA$state, DATA$person, output="proportion")
+#'
 #' WL1 <- c(y[, 1])                                                                      
 #' WL2 <- list(c("read", "the", "a"), c("you", "your", "you're"))                       
 #' WL3 <- list(bob = c("read", "the", "a"), yous = c("you", "your", "you're"))          
@@ -90,14 +89,15 @@
 #' chisq.test(wfm(wfdf = y)) 
 #' }
 wfm <-
-function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
+function(text.var = NULL, grouping.var = NULL, 
          output = "raw", stopwords = NULL, char2space = "~~", ...){
-    if (!is.null(wfdf)) {
-        if (comment(wfdf) == "t.df") {
-            wfdf <- wfdf
+
+    if (is(text.var, "wfdf")) {
+        if (is(text.var, "t.df")) {
+            wfdf <- text.var
         } else {
-            if (comment(wfdf) == "m.df") { 
-                wfdf <- wfdf[-nrow(wfdf), -ncol(wfdf)]
+            if (is(text.var, "m.df")) { 
+                wfdf <- text.var[-nrow(text.var), -ncol(text.var)]
             } else {
                 stop("Object must be a raw word frequency data frame")
             }
@@ -106,50 +106,62 @@ function(text.var = NULL, grouping.var = NULL, wfdf = NULL,
         rownames(x2) <- wfdf[, 1]
         x2 <- as.matrix(x2)
     } else {
-        if (!is.null(text.var)) {
-            if(is.null(grouping.var)){
-                grouping <- rep("all", length(text.var))
-            } else {
-                if (is.list(grouping.var) & length(grouping.var)>1) {
-                    grouping <- paste2(grouping.var)
-                } else {
-                    grouping <- unlist(grouping.var)
-                } 
-            } 
-            txt <- strip(text.var, char.keep = char2space, 
-                apostrophe.remove = FALSE, ...)
-            txtL <- lapply(split(txt, grouping), function(x) {
-                  table(unlist(strsplit(x, "\\s+")))
-            })
-            rnms <- sort(unique(unlist(lapply(txtL, names))))
-            txtL <- lapply(txtL, data.frame)
-            txtL <- lapply(txtL, function(x) {
-                new <- rnms[!rnms %in% x[, "Var1"]]
-                DF <- rbind.data.frame(x, data.frame(Var1 = new, 
-                    Freq = rep(0, length(new))))
-                DF[order(as.character(DF$Var1)), 2]
-            })
-            x2 <- do.call(cbind, txtL)
-            if (!is.null(char2space)) {
-                rownames(x2) <- mgsub(char2space, " ", rnms)
-            } else {
-                rownames(x2) <- rnms
-            }
-            if (!is.null(stopwords)){
-                x2 <- x2[!rownames(x2) %in% stopwords, ]
-            }
-            if (output != "raw"){
-                x2 <- x2/colSums(x2)
-                if (output == "percent") {
-                    x2 <- x2*100
-                }
-            }
+        if(is.null(grouping.var)){
+            grouping <- rep("all", length(text.var))
         } else {
-            stop ("must specify either text.var or wfdf")
+            if (is.list(grouping.var) & length(grouping.var)>1) {
+                grouping <- paste2(grouping.var)
+            } else {
+                grouping <- unlist(grouping.var)
+            } 
+        } 
+        txt <- strip(text.var, char.keep = char2space, 
+            apostrophe.remove = FALSE, ...)
+        txtL <- lapply(split(txt, grouping), function(x) {
+              table(unlist(strsplit(x, "\\s+")))
+        })
+        rnms <- sort(unique(unlist(lapply(txtL, names))))
+        txtL <- lapply(txtL, data.frame)
+        txtL <- lapply(txtL, function(x) {
+            new <- rnms[!rnms %in% x[, "Var1"]]
+            DF <- rbind.data.frame(x, data.frame(Var1 = new, 
+                Freq = rep(0, length(new))))
+            DF[order(as.character(DF$Var1)), 2]
+        })
+        x2 <- do.call(cbind, txtL)
+        if (!is.null(char2space)) {
+            rownames(x2) <- mgsub(char2space, " ", rnms)
+        } else {
+            rownames(x2) <- rnms
+        }
+        if (!is.null(stopwords)){
+            x2 <- x2[!rownames(x2) %in% stopwords, ]
+        }
+        if (output != "raw"){
+            x2 <- x2/colSums(x2)
+            if (output == "percent") {
+                x2 <- x2*100
+            }
+            class(x2) <- c("wfm", "prop.matrix", class(x2))
+            return(x2)
         }
     }
-    comment(x2) <- "true.matrix"
-    return(x2)
+    class(x2) <- c("wfm", "true.matrix", class(x2))
+    x2
+}
+
+#' Prints an wfm Object
+#' 
+#' Prints an wfm object.
+#' 
+#' @param x The wfm object.
+#' @param \ldots ignored
+#' @method print wfm
+#' @S3method print wfm
+print.wfm <-
+  function(x, digits = 2, ...) {
+    class(x) <- "matrix"
+    print(round(x, digits = digits))
 }
 
 
@@ -179,8 +191,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL,
     tabs <- tabs[sapply(tabs, nrow)!=0]
     lapply(seq_along(tabs), function(x) {
         names(tabs[[x]]) <<- c("Words", names(tabs)[x])  
-        }
-    ) 
+    }) 
     DF <- merge_all(tabs, by="Words", 0)
     DF <- DF[order(DF$Words), ]
     DF[, "Words"] <- as.character(DF[, "Words"])
@@ -216,17 +227,18 @@ function(text.var, grouping.var = NULL, stopwords = NULL,
         DF <- data.frame(DF[, 1, drop = FALSE], DF2)
     }
     if (!margins & output == "raw") {
-        comment(DF) <- "t.df" 
+        class(DF) <- c("t.df", class(DF)) 
     } else {
             if (margins & output == "raw") {
-                comment(DF) <- "m.df"
+                class(DF) <- c("m.df", class(DF))
             } else {
-                comment(DF) <- "f.df"
+                class(DF) <- c("f.df", class(DF))
         }
     }
     if (!is.null(char2space)) {
         DF[, "Words"] <- mgsub(char2space, " ", DF[, "Words"])
     }
+    class(DF) <- c("wfdf", class(DF))
     DF
 }
 
@@ -242,13 +254,13 @@ function(text.var, grouping.var = NULL, stopwords = NULL,
 #' of the word and cells are dummy coded to indicate that number of uses.
 wfm.expanded <-
 function(text.var, grouping.var = NULL, ...){
-    if(is.null(comment(text.var))) {
-        z <- wfm(text.var, grouping.var, ...)
+    if(is(text.var, "true.matrix")) {
+        z <- text.var
     } else {
-        if (comment(text.var)== "true.matrix") {
-            z <- text.var
+        if(is(text.var, "m.df")){
+            z <- wfm(text.var)
         } else {
-            stop("Must supply a text variable or a word frequency matrix")
+            z <- wfm(text.var, grouping.var, ...)
         }
     }
     rows <-lapply(1:nrow(z), function(i) z[i, ])
@@ -282,13 +294,16 @@ function(wf.obj, word.lists, matrix = FALSE){
         any(Reduce("%in%", word.lists))) {
         stop("overlapping words in word.lists")
     })
-    if (comment(wf.obj) == "t.df") {
+    if (is(wf.obj, "t.df")) {
         wf.obj <- wf.obj
     } else {
-        if (comment(wf.obj) %in% c("true.matrix", "m.df")) { 
+   
+        if (is(wf.obj, "m.df")) { 
             wf.obj <- wf.obj [-nrow(wf.obj), -ncol(wf.obj)]
         } else {
-            stop("Object must be a raw word frequency data frame")
+            if (!is(wf.obj, "true.matrix")) {
+                stop("Object must be a raw word frequency matrix/data.frame")
+            }
         }
     }
     if (is.list(word.lists) & is.null(names(word.lists))){
@@ -327,7 +342,9 @@ function(wf.obj, word.lists, matrix = FALSE){
         DFF2 <- as.matrix(DFF[, -1])
         rownames(DFF2) <- as.character(DFF[, 1])
         DFF <- DFF2
+        class(DFF) <- c("wfm", "true.matrix", class(DFF))
+        return(DFF)
     }
-    comment(DFF) <- ifelse(!matrix, "t.df", "true.matrix")
+    class(DFF) <- c("wfdf", class(DFF))
     DFF
 }
