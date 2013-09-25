@@ -2120,11 +2120,136 @@ overlist2 <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
 gantt_wrap(co3, "code")
 ```
 
-<h5 id="cm_code.transform"><font color="green">cm_code.transform Examples</font></h5>
+<h5 id="cm_code.transform"><font color="green">`r FUN("cm_code.transform")` Examples</font></h5>
+
+`r FUN("cm_code.transform")` is merely a wrapper for `r FUN("cm_code.combine")`, `r FUN("cm_code.exclude")`, and `r FUN("cm_code.overlap")`.
+
+
+`r FT(orange, 5, text="&diams;")` <b>`r FUN("cm_code.transform")`</b> - Example 1`r FT(orange, 5, text="&diams;")`
+
+```{r}
+ct1 <- cm_code.transform(x, 
+    overlap.code.list = list(oABC=qcv(AA, BB, CC)),
+    combine.code.list = list(ABC=qcv(AA, BB, CC)), 
+    exclude.code.list = list(ABnoC=qcv(AA, BB, CC))
+)
+ct1
+```
+
+```{r, echo = FALSE, fig.height = 2.5}
+gantt_wrap(ct1, "code")
+```
+
+`r FT(orange, 5, text="&diams;")` <b>`r FUN("cm_code.transform")`</b> - Example 2`r FT(orange, 5, text="&diams;")`
+
+```{r}
+ct2 <-cm_code.transform(z, 
+    overlap.code.list = list(oABC=qcv(AA, BB, CC)),
+    combine.code.list = list(ABC=qcv(AA, BB, CC)), 
+    exclude.code.list = list(ABnoC=qcv(AA, BB, CC)), "time"
+)
+ct2
+```
+
+```{r, echo = FALSE, fig.height = 2.5}
+gantt_wrap(ct2, "code")
+```
+
+`r FT(orange, 5, text="&diams;")` <b>`r FUN("cm_code.transform")`</b> - Example 3`r FT(orange, 5, text="&diams;")`
+
+```{r}
+ct3 <-cm_code.transform(dat, 
+    overlap.code.list = list(oABC=qcv(A, B, C)),
+    combine.code.list = list(ABC=qcv(A, B, C)), 
+    exclude.code.list = list(ABnoC=qcv(A, B, C))
+)
+ct3
+```
+
+```{r, echo = FALSE, fig.height = 2.5}
+gantt_wrap(ct3, "code")
+```
+
 
 <h5 id="cm_code.blank"><font color="green">cm_code.blank Examples</font></h5>
 
+`r FUN("cm_code.blank")` provides flexible Boolean comparisons between word.time spans.  The `overlap` argument takes a logical value, an integer or a character string of binary operator couple with an integer.  It is important to understand how the function operates.  This initial step calls `r FUN("cm_long2dummy")` as seen below (stretching the spans to dummy coded columns), the comparison is conduted between columns, and then the columns are reverted back to spans via the `r FUN("cm)dummy2long")`.  This first example illustates the stretching to dummy and reverting back to spans.
 
+`r FT(orange, 5, text="&diams;")` **Long to dummy and dummy to long** `r FT(orange, 5, text="&diams;")`
+
+```{r comment=NA}
+long2dummy <- cm_long2dummy(x, "variable")
+list(original =x,
+    long_2_dummy_format = long2dummy[[1]],
+    dummy_back_2_long = cm_dummy2long(long2dummy, "variable")
+)
+```
+
+Now let's examine a few uses of `r FUN("cm_code.blank")`.  The first is to set `overlap = TRUE` (the default behavior).  This defualt behavior is identical to `r FUN("cm_code.overlap")` as seen below.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.blank")`** - `overlap = TRUE` `r FT(orange, 5, text="&diams;")`
+
+```{r}
+(cb1 <- cm_code.blank(x, list(ABC=qcv(AA, BB, CC))))
+```
+
+```{r, echo = FALSE, fig.height = 5}
+gantt_wrap(cb1, "code")
+```
+
+Next we'll set `overlap = FALSE` and see that it is identical to `r FUN("cm_code.combine")`.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.blank")`** - `overlap = FALSE` `r FT(orange, 5, text="&diams;")`
+
+```{r}
+(cb2 <- cm_code.blank(x, list(ABC=qcv(AA, BB, CC)), overlap = FALSE))
+```
+
+```{r, echo = FALSE, fig.height = 5}
+gantt_wrap(cb2, "code")
+```
+
+
+By first combining all codes (see `cb2` above) and then excluding the final code by setting
+`overlap = 1` the behavior of `r FUN("cm_code.exclude")` can be mimicked. 
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.blank")`** - *mimicking `r FUN("cm_code.exclude")`* `r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Using the output from `cb2` above.
+(cb3 <- cm_code.blank(cb2, list(ABnoC=qcv(ABC, CC)), overlap = 1))
+```
+
+```{r, echo = FALSE, fig.height = 5}
+gantt_wrap(cb3, "code")
+```
+
+Next we shall find when at least two codes overlap by setting `overlap = ">1"`.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.blank")`** - *At least 2 codes overlap* `r FT(orange, 5, text="&diams;")`
+
+
+```{r}
+blanklist <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
+(cb4 <- cm_code.blank(z, blanklist, rm.var = "time", overlap = ">1"))
+```
+
+```{r, echo = FALSE, fig.height = 5}
+gantt_wrap(cb4, "code", "time")
+```
+
+Last, we will find spans where not one of the codes occurred by setting `overlap = "==0"`.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.blank")`** - *Spans where no code occurs* `r FT(orange, 5, text="&diams;")`
+
+```{r}
+blanklist2 <- list(noAB=qcv(AA, BB), noABC=qcv(AA, BB, CC))
+(cb5 <- cm_code.blank(z, blanklist2, rm.var = "time", overlap = "==0"))
+```
+
+```{r, echo = FALSE, fig.height = 5}
+gantt_wrap(cb5, "code", "time")
+```
 
 <h4 id="analysis">Initial Coding Analysis</h4>
 

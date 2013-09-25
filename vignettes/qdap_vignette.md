@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 19.70 16.30 15.00 16.30 15.79 15.79 25.34 15.79 19.70 22.40
-## [12] 25.34 15.79 19.70 15.00 15.00 22.40 19.70 25.34 25.34
+##  [1] 22.40 19.70 15.00 15.79 19.70 15.00 22.40 25.34 15.00 25.34 19.70
+## [12] 25.34 16.30 15.00 22.40 16.30 15.79 25.34 22.40 15.79
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 19.70 16.30 15.00 16.30 15.79 15.79 25.34 15.79 19.70 22.40
-## [12] 25.34 15.79 19.70 15.00 15.00 22.40 19.70 25.34 25.34
+##  [1] 22.40 19.70 15.00 15.79 19.70 15.00 22.40 25.34 15.00 25.34 19.70
+## [12] 25.34 16.30 15.00 22.40 16.30 15.79 25.34 22.40 15.79
 ```
 
 
@@ -5110,15 +5110,15 @@ combines2 <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
 ```
 
 ```
-##   code start end variable
-## 1   AA     0  10    time1
-## 2   BB     0  10    time1
-## 3   BB    18  19    time1
-## 4   CC     0   3    time1
-## 5   CC     4   6    time1
-## 6 BnoC     3   4    time1
-## 7 BnoC     6  10    time1
-## 8 BnoC    18  19    time1
+##   code start end
+## 1   AA     0  10
+## 2   BB     0  10
+## 3   BB    18  19
+## 4   CC     0   3
+## 5   CC     4   6
+## 6 BnoC     3   4
+## 7 BnoC     6  10
+## 8 BnoC    18  19
 ```
 
 
@@ -5251,28 +5251,28 @@ exlist2 <- list(AnoB=qcv(A, B), BnoC=qcv(B, C), ABnoC=qcv(A, B, C))
 ```
 
 ```
-##     code start  end    Start      End    NA
-## 1      A   159  180 00:02:39 00:03:00 time1
-## 2      A   300  301 00:05:00 00:05:01 time1
-## 3      A   361  420 00:06:01 00:07:00 time1
-## 4      A   539  540 00:08:59 00:09:00 time1
-## 5      B   159  160 00:02:39 00:02:40 time1
-## 6      B   180  182 00:03:00 00:03:02 time1
-## 7      B   300  301 00:05:00 00:05:01 time1
-## 8      B   361  420 00:06:01 00:07:00 time1
-## 9      B   539  540 00:08:59 00:09:00 time1
-## 10     B  4319 4741 01:11:59 01:19:01 time1
-## 11     C   159  180 00:02:39 00:03:00 time1
-## 12     C   300  301 00:05:00 00:05:01 time1
-## 13     C   361  420 00:06:01 00:07:00 time1
-## 14     C   539  540 00:08:59 00:09:00 time1
-## 15     C   984 1021 00:16:24 00:17:01 time1
-## 16    AB   159  182 00:02:39 00:03:02 time1
-## 17    AB   300  301 00:05:00 00:05:01 time1
-## 18    AB   361  420 00:06:01 00:07:00 time1
-## 19    AB   539  540 00:08:59 00:09:00 time1
-## 20    AB  4319 4741 01:11:59 01:19:01 time1
-## 21 CnoAB   984 1021 00:16:24 00:17:01 time1
+##     code start  end    Start      End
+## 1      A   159  180 00:02:39 00:03:00
+## 2      A   300  301 00:05:00 00:05:01
+## 3      A   361  420 00:06:01 00:07:00
+## 4      A   539  540 00:08:59 00:09:00
+## 5      B   159  160 00:02:39 00:02:40
+## 6      B   180  182 00:03:00 00:03:02
+## 7      B   300  301 00:05:00 00:05:01
+## 8      B   361  420 00:06:01 00:07:00
+## 9      B   539  540 00:08:59 00:09:00
+## 10     B  4319 4741 01:11:59 01:19:01
+## 11     C   159  180 00:02:39 00:03:00
+## 12     C   300  301 00:05:00 00:05:01
+## 13     C   361  420 00:06:01 00:07:00
+## 14     C   539  540 00:08:59 00:09:00
+## 15     C   984 1021 00:16:24 00:17:01
+## 16    AB   159  182 00:02:39 00:03:02
+## 17    AB   300  301 00:05:00 00:05:01
+## 18    AB   361  420 00:06:01 00:07:00
+## 19    AB   539  540 00:08:59 00:09:00
+## 20    AB  4319 4741 01:11:59 01:19:01
+## 21 CnoAB   984 1021 00:16:24 00:17:01
 ```
 
 
@@ -5346,70 +5346,403 @@ overlist2 <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
 
 ```
 ##    code start  end    Start      End time
-## 1     A   160  180 00:02:40 00:03:00 bar1
-## 2     A   301  301 00:05:01 00:05:01 bar1
-## 3     A   362  420 00:06:02 00:07:00 bar1
-## 4     A   540  540 00:09:00 00:09:00 bar1
-## 5     B   160  160 00:02:40 00:02:40 bar1
-## 6     B   181  182 00:03:01 00:03:02 bar1
-## 7     B   301  301 00:05:01 00:05:01 bar1
-## 8     B   362  420 00:06:02 00:07:00 bar1
-## 9     B   540  540 00:09:00 00:09:00 bar1
-## 10    B  4320 4741 01:12:00 01:19:01 bar1
-## 11    C   160  180 00:02:40 00:03:00 bar1
-## 12    C   301  301 00:05:01 00:05:01 bar1
-## 13    C   362  420 00:06:02 00:07:00 bar1
-## 14    C   540  540 00:09:00 00:09:00 bar1
-## 15    C   985 1021 00:16:25 00:17:01 bar1
-## 16   AB   160  160 00:02:40 00:02:40 bar1
-## 17   AB   301  301 00:05:01 00:05:01 bar1
-## 18   AB   362  420 00:06:02 00:07:00 bar1
-## 19   AB   540  540 00:09:00 00:09:00 bar1
-## 20   BC   160  160 00:02:40 00:02:40 bar1
-## 21   BC   301  301 00:05:01 00:05:01 bar1
-## 22   BC   362  420 00:06:02 00:07:00 bar1
-## 23   BC   540  540 00:09:00 00:09:00 bar1
-## 24  ABC   160  160 00:02:40 00:02:40 bar1
-## 25  ABC   301  301 00:05:01 00:05:01 bar1
-## 26  ABC   362  420 00:06:02 00:07:00 bar1
-## 27  ABC   540  540 00:09:00 00:09:00 bar1
-## 28    A   160  180 00:02:40 00:03:00 bar2
-## 29    A   301  301 00:05:01 00:05:01 bar2
-## 30    A   362  420 00:06:02 00:07:00 bar2
-## 31    A   540  540 00:09:00 00:09:00 bar2
-## 32    B   160  160 00:02:40 00:02:40 bar2
-## 33    B   181  182 00:03:01 00:03:02 bar2
-## 34    B   301  301 00:05:01 00:05:01 bar2
-## 35    B   362  420 00:06:02 00:07:00 bar2
-## 36    B   540  540 00:09:00 00:09:00 bar2
-## 37    B  4320 4741 01:12:00 01:19:01 bar2
-## 38    C   160  180 00:02:40 00:03:00 bar2
-## 39    C   301  301 00:05:01 00:05:01 bar2
-## 40    C   362  420 00:06:02 00:07:00 bar2
-## 41    C   540  540 00:09:00 00:09:00 bar2
-## 42    C  1021 1021 00:17:01 00:17:01 bar2
-## 43   AB   160  160 00:02:40 00:02:40 bar2
-## 44   AB   301  301 00:05:01 00:05:01 bar2
-## 45   AB   362  420 00:06:02 00:07:00 bar2
-## 46   AB   540  540 00:09:00 00:09:00 bar2
-## 47   BC   160  160 00:02:40 00:02:40 bar2
-## 48   BC   301  301 00:05:01 00:05:01 bar2
-## 49   BC   362  420 00:06:02 00:07:00 bar2
-## 50   BC   540  540 00:09:00 00:09:00 bar2
-## 51  ABC   160  160 00:02:40 00:02:40 bar2
-## 52  ABC   301  301 00:05:01 00:05:01 bar2
-## 53  ABC   362  420 00:06:02 00:07:00 bar2
-## 54  ABC   540  540 00:09:00 00:09:00 bar2
+## 1     A   159  180 00:02:39 00:03:00 bar1
+## 2     A   300  301 00:05:00 00:05:01 bar1
+## 3     A   361  420 00:06:01 00:07:00 bar1
+## 4     A   539  540 00:08:59 00:09:00 bar1
+## 5     B   159  160 00:02:39 00:02:40 bar1
+## 6     B   180  182 00:03:00 00:03:02 bar1
+## 7     B   300  301 00:05:00 00:05:01 bar1
+## 8     B   361  420 00:06:01 00:07:00 bar1
+## 9     B   539  540 00:08:59 00:09:00 bar1
+## 10    B  4319 4741 01:11:59 01:19:01 bar1
+## 11    C   159  180 00:02:39 00:03:00 bar1
+## 12    C   300  301 00:05:00 00:05:01 bar1
+## 13    C   361  420 00:06:01 00:07:00 bar1
+## 14    C   539  540 00:08:59 00:09:00 bar1
+## 15    C   984 1021 00:16:24 00:17:01 bar1
+## 16   AB   159  160 00:02:39 00:02:40 bar1
+## 17   AB   300  301 00:05:00 00:05:01 bar1
+## 18   AB   361  420 00:06:01 00:07:00 bar1
+## 19   AB   539  540 00:08:59 00:09:00 bar1
+## 20   BC   159  160 00:02:39 00:02:40 bar1
+## 21   BC   300  301 00:05:00 00:05:01 bar1
+## 22   BC   361  420 00:06:01 00:07:00 bar1
+## 23   BC   539  540 00:08:59 00:09:00 bar1
+## 24  ABC   159  160 00:02:39 00:02:40 bar1
+## 25  ABC   300  301 00:05:00 00:05:01 bar1
+## 26  ABC   361  420 00:06:01 00:07:00 bar1
+## 27  ABC   539  540 00:08:59 00:09:00 bar1
+## 28    A   159  180 00:02:39 00:03:00 bar2
+## 29    A   300  301 00:05:00 00:05:01 bar2
+## 30    A   361  420 00:06:01 00:07:00 bar2
+## 31    A   539  540 00:08:59 00:09:00 bar2
+## 32    B   159  160 00:02:39 00:02:40 bar2
+## 33    B   180  182 00:03:00 00:03:02 bar2
+## 34    B   300  301 00:05:00 00:05:01 bar2
+## 35    B   361  420 00:06:01 00:07:00 bar2
+## 36    B   539  540 00:08:59 00:09:00 bar2
+## 37    B  4319 4741 01:11:59 01:19:01 bar2
+## 38    C   159  180 00:02:39 00:03:00 bar2
+## 39    C   300  301 00:05:00 00:05:01 bar2
+## 40    C   361  420 00:06:01 00:07:00 bar2
+## 41    C   539  540 00:08:59 00:09:00 bar2
+## 42    C  1020 1021 00:17:00 00:17:01 bar2
+## 43   AB   159  160 00:02:39 00:02:40 bar2
+## 44   AB   300  301 00:05:00 00:05:01 bar2
+## 45   AB   361  420 00:06:01 00:07:00 bar2
+## 46   AB   539  540 00:08:59 00:09:00 bar2
+## 47   BC   159  160 00:02:39 00:02:40 bar2
+## 48   BC   300  301 00:05:00 00:05:01 bar2
+## 49   BC   361  420 00:06:01 00:07:00 bar2
+## 50   BC   539  540 00:08:59 00:09:00 bar2
+## 51  ABC   159  160 00:02:39 00:02:40 bar2
+## 52  ABC   300  301 00:05:00 00:05:01 bar2
+## 53  ABC   361  420 00:06:01 00:07:00 bar2
+## 54  ABC   539  540 00:08:59 00:09:00 bar2
 ```
 
 
 ![plot of chunk unnamed-chunk-86](figure/unnamed-chunk-86.png) 
 
 
-<h5 id="cm_code.transform"><font color="green">cm_code.transform Examples</font></h5>
+<h5 id="cm_code.transform"><font color="green"><a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> Examples</font></h5>
+
+<a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> is merely a wrapper for <a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a>, <a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a>, and <a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a>.
+
+
+<font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a></b> - Example 1<font size="5" color="orange">&diams;</font>
+
+
+```r
+ct1 <- cm_code.transform(x, 
+    overlap.code.list = list(oABC=qcv(AA, BB, CC)),
+    combine.code.list = list(ABC=qcv(AA, BB, CC)), 
+    exclude.code.list = list(ABnoC=qcv(AA, BB, CC))
+)
+ct1
+```
+
+```
+##     code start end
+## 1     AA     0  10
+## 2     BB     0  10
+## 3     BB    18  19
+## 4     CC     0   3
+## 5     CC     4   6
+## 6   oABC     0   3
+## 7   oABC     4   6
+## 8    ABC     0  10
+## 9    ABC    18  19
+## 10 ABnoC     3   4
+## 11 ABnoC     6  10
+## 12 ABnoC    18  19
+```
+
+
+![plot of chunk unnamed-chunk-88](figure/unnamed-chunk-88.png) 
+
+
+<font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a></b> - Example 2<font size="5" color="orange">&diams;</font>
+
+
+```r
+ct2 <-cm_code.transform(z, 
+    overlap.code.list = list(oABC=qcv(AA, BB, CC)),
+    combine.code.list = list(ABC=qcv(AA, BB, CC)), 
+    exclude.code.list = list(ABnoC=qcv(AA, BB, CC)), "time"
+)
+ct2
+```
+
+```
+##     code start end time
+## 1     AA     0  10  foo
+## 2     BB     0  10  foo
+## 3     BB    18  19  foo
+## 4     CC     0   3  foo
+## 5     CC     4   6  foo
+## 6   oABC     0   3  foo
+## 7   oABC     4   6  foo
+## 14   ABC     0  10  foo
+## 15   ABC    18  19  foo
+## 19 ABnoC     3   4  foo
+## 20 ABnoC     6  10  foo
+## 21 ABnoC    18  19  foo
+## 8     AA     3   8 foo2
+## 9     BB     0   4 foo2
+## 10    BB     9  12 foo2
+## 11    CC     0   1 foo2
+## 12    CC    10  11 foo2
+## 13    CC    14  20 foo2
+## 16   ABC     0   8 foo2
+## 17   ABC     9  12 foo2
+## 18   ABC    14  20 foo2
+## 22 ABnoC     1   8 foo2
+## 23 ABnoC     9  10 foo2
+## 24 ABnoC    11  12 foo2
+```
+
+
+![plot of chunk unnamed-chunk-90](figure/unnamed-chunk-90.png) 
+
+
+<font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a></b> - Example 3<font size="5" color="orange">&diams;</font>
+
+
+```r
+ct3 <-cm_code.transform(dat, 
+    overlap.code.list = list(oABC=qcv(A, B, C)),
+    combine.code.list = list(ABC=qcv(A, B, C)), 
+    exclude.code.list = list(ABnoC=qcv(A, B, C))
+)
+ct3
+```
+
+```
+##     code start  end    Start      End
+## 1      A   159  180 00:02:39 00:03:00
+## 2      A   300  301 00:05:00 00:05:01
+## 3      A   361  420 00:06:01 00:07:00
+## 4      A   539  540 00:08:59 00:09:00
+## 5      B   159  160 00:02:39 00:02:40
+## 6      B   180  182 00:03:00 00:03:02
+## 7      B   300  301 00:05:00 00:05:01
+## 8      B   361  420 00:06:01 00:07:00
+## 9      B   539  540 00:08:59 00:09:00
+## 10     B  4319 4741 01:11:59 01:19:01
+## 11     C   159  180 00:02:39 00:03:00
+## 12     C   300  301 00:05:00 00:05:01
+## 13     C   361  420 00:06:01 00:07:00
+## 14     C   539  540 00:08:59 00:09:00
+## 15     C   984 1021 00:16:24 00:17:01
+## 16  oABC   159  160 00:02:39 00:02:40
+## 17  oABC   300  301 00:05:00 00:05:01
+## 18  oABC   361  420 00:06:01 00:07:00
+## 19  oABC   539  540 00:08:59 00:09:00
+## 20   ABC   159  182 00:02:39 00:03:02
+## 21   ABC   300  301 00:05:00 00:05:01
+## 22   ABC   361  420 00:06:01 00:07:00
+## 23   ABC   539  540 00:08:59 00:09:00
+## 24   ABC   984 1021 00:16:24 00:17:01
+## 25   ABC  4319 4741 01:11:59 01:19:01
+## 26 ABnoC   180  182 00:03:00 00:03:02
+## 27 ABnoC  4319 4741 01:11:59 01:19:01
+```
+
+
+![plot of chunk unnamed-chunk-92](figure/unnamed-chunk-92.png) 
+
+
 
 <h5 id="cm_code.blank"><font color="green">cm_code.blank Examples</font></h5>
 
+<a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a> provides flexible Boolean comparisons between word.time spans.  The `overlap` argument takes a logical value, an integer or a character string of binary operator couple with an integer.  It is important to understand how the function operates.  This initial step calls <a href="http://trinker.github.io/qdap_dev/cm_long2dummy.html" target="_blank"><code>cm_long2dummy</code></a> as seen below (stretching the spans to dummy coded columns), the comparison is conduted between columns, and then the columns are reverted back to spans via the <a href="http://trinker.github.io/qdap_dev/cm)dummy2long.html" target="_blank"><code>cm)dummy2long</code></a>.  This first example illustates the stretching to dummy and reverting back to spans.
+
+<font size="5" color="orange">&diams;</font> **Long to dummy and dummy to long** <font size="5" color="orange">&diams;</font>
+
+
+```r
+long2dummy <- cm_long2dummy(x, "variable")
+list(original =x,
+    long_2_dummy_format = long2dummy[[1]],
+    dummy_back_2_long = cm_dummy2long(long2dummy, "variable")
+)
+```
+
+```
+$original
+  code start end variable
+1   AA     0  10      foo
+2   BB     0   2      foo
+3   BB     2  10      foo
+4   BB    18  19      foo
+5   CC     0   3      foo
+6   CC     4   6      foo
+
+$long_2_dummy_format
+   AA BB CC
+0   1  1  1
+1   1  1  1
+2   1  1  1
+3   1  1  0
+4   1  1  1
+5   1  1  1
+6   1  1  0
+7   1  1  0
+8   1  1  0
+9   1  1  0
+10  0  0  0
+11  0  0  0
+12  0  0  0
+13  0  0  0
+14  0  0  0
+15  0  0  0
+16  0  0  0
+17  0  0  0
+18  0  1  0
+19  0  0  0
+
+$dummy_back_2_long
+  code start end variable
+1   AA     0  10      foo
+2   BB     0  10      foo
+3   BB    18  19      foo
+4   CC     0   3      foo
+5   CC     4   6      foo
+```
+
+
+Now let's examine a few uses of <a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a>.  The first is to set `overlap = TRUE` (the default behavior).  This defualt behavior is identical to <a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> as seen below.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a>** - `overlap = TRUE` <font size="5" color="orange">&diams;</font>
+
+
+```r
+(cb1 <- cm_code.blank(x, list(ABC=qcv(AA, BB, CC))))
+```
+
+```
+##   code start end
+## 1   AA     0  10
+## 2   BB     0  10
+## 3   BB    18  19
+## 4   CC     0   3
+## 5   CC     4   6
+## 6  ABC     0   3
+## 7  ABC     4   6
+```
+
+
+![plot of chunk unnamed-chunk-95](figure/unnamed-chunk-95.png) 
+
+
+Next we'll set `overlap = FALSE` and see that it is identical to <a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a>.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a>** - `overlap = FALSE` <font size="5" color="orange">&diams;</font>
+
+
+```r
+(cb2 <- cm_code.blank(x, list(ABC=qcv(AA, BB, CC)), overlap = FALSE))
+```
+
+```
+##   code start end
+## 1   AA     0  10
+## 2   BB     0  10
+## 3   BB    18  19
+## 4   CC     0   3
+## 5   CC     4   6
+## 6  ABC     0  10
+## 7  ABC    18  19
+```
+
+
+![plot of chunk unnamed-chunk-97](figure/unnamed-chunk-97.png) 
+
+
+
+By first combining all codes (see `cb2` above) and then excluding the final code by setting
+`overlap = 1` the behavior of <a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> can be mimicked. 
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a>** - *mimicking <a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a>* <font size="5" color="orange">&diams;</font>
+
+
+```r
+## Using the output from `cb2` above.
+(cb3 <- cm_code.blank(cb2, list(ABnoC=qcv(ABC, CC)), overlap = 1))
+```
+
+```
+##     code start end
+## 1     AA     0  10
+## 2     BB     0  10
+## 3     BB    18  19
+## 4     CC     0   3
+## 5     CC     4   6
+## 6    ABC     0  10
+## 7    ABC    18  19
+## 8  ABnoC     3   4
+## 9  ABnoC     6  10
+## 10 ABnoC    18  19
+```
+
+
+![plot of chunk unnamed-chunk-99](figure/unnamed-chunk-99.png) 
+
+
+Next we shall find when at least two codes overlap by setting `overlap = ">1"`.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a>** - *At least 2 codes overlap* <font size="5" color="orange">&diams;</font>
+
+
+
+```r
+blanklist <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
+(cb4 <- cm_code.blank(z, blanklist, rm.var = "time", overlap = ">1"))
+```
+
+```
+##    code start end time
+## 1    AA     0  10  foo
+## 2    BB     0  10  foo
+## 3    BB    18  19  foo
+## 4    CC     0   3  foo
+## 5    CC     4   6  foo
+## 6    AB     0  10  foo
+## 7   ABC     0  10  foo
+## 8    AA     3   8 foo2
+## 9    BB     0   4 foo2
+## 10   BB     9  12 foo2
+## 11   CC     0   1 foo2
+## 12   CC    10  11 foo2
+## 13   CC    14  20 foo2
+## 14   AB     3   4 foo2
+## 15  ABC     0   1 foo2
+## 16  ABC     3   4 foo2
+## 17  ABC    10  11 foo2
+```
+
+
+![plot of chunk unnamed-chunk-101](figure/unnamed-chunk-101.png) 
+
+
+Last, we will find spans where not one of the codes occurred by setting `overlap = "==0"`.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a>** - *Spans where no code occurs* <font size="5" color="orange">&diams;</font>
+
+
+```r
+blanklist2 <- list(noAB=qcv(AA, BB), noABC=qcv(AA, BB, CC))
+(cb5 <- cm_code.blank(z, blanklist2, rm.var = "time", overlap = "==0"))
+```
+
+```
+##     code start end time
+## 1     AA     0  10  foo
+## 2     BB     0  10  foo
+## 3     BB    18  19  foo
+## 4     CC     0   3  foo
+## 5     CC     4   6  foo
+## 6   noAB    10  18  foo
+## 7   noAB    19  20  foo
+## 8  noABC    10  18  foo
+## 9  noABC    19  20  foo
+## 10    AA     3   8 foo2
+## 11    BB     0   4 foo2
+## 12    BB     9  12 foo2
+## 13    CC     0   1 foo2
+## 14    CC    10  11 foo2
+## 15    CC    14  20 foo2
+## 16  noAB     8   9 foo2
+## 17  noAB    12  21 foo2
+## 18 noABC     8   9 foo2
+## 19 noABC    12  14 foo2
+## 20 noABC    20  21 foo2
+```
+
+
+![plot of chunk unnamed-chunk-103](figure/unnamed-chunk-103.png) 
 
 
 <h4 id="analysis">Initial Coding Analysis</h4>

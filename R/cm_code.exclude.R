@@ -74,6 +74,7 @@ function(x2long.obj, exclude.code.list, rm.var = NULL) {
             stop("rm.var does not match a column")
         }
     }
+
     exclude.code.list1 <- exclude.code.list
     names(exclude.code.list1) <- paste0(names(exclude.code.list), "_rmvme123")
     exclude.code.list2 <- invisible(lapply(seq_along(exclude.code.list), function(i) {
@@ -124,6 +125,21 @@ function(x2long.obj, exclude.code.list, rm.var = NULL) {
         out3$End <- sec2hms(out3$end)
         out3 <- out3[, c(1:3, 5:6, 4)]
     }
-    colnames(out3) <- colnames(x2long.obj)
+
+    if (is.null(rm.var)) {
+        out3 <- out3[, -ncol(out3)]
+    }
+
+    cn <- colnames(x2long.obj)
+    if (is.null(rm.var)) {
+        if (comment(x2long.obj) == "cmrange") {
+            cn <- colnames(x2long.obj)[1:3]
+        } else {
+            cn <- colnames(x2long.obj)[1:5]
+        }
+    }
+    colnames(out3) <- cn
+
+    comment(out3) <- comment(x2long.obj)
     out3
 }
