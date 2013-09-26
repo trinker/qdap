@@ -39,13 +39,14 @@
 #' head(B, 10)
 #' 
 #' cm_dummy2long(A)
-#' cm_dummy2long(B, "time")
+#' cm_dummy2long(B)
+#' plot(cm_dummy2long(A))
 #' }
 cm_dummy2long <-
 function(cm_long2dummy_obj, rm.var = "time") {
 
     ## Grab the comment from cm_long2dummy_obj
-    com <- gsub("l2d_", "", comment(cm_long2dummy_obj))
+    com <- gsub("l2d_", "", which.cm(cm_long2dummy_obj))
 
     ## If the cm_long2dummy_obj isn't a list make it so and named 
     if (is.matrix(cm_long2dummy_obj) | is.data.frame(cm_long2dummy_obj)) {
@@ -66,7 +67,8 @@ function(cm_long2dummy_obj, rm.var = "time") {
         rmvar = rep(names(outs), sapply(outs, nrow)), row.names = NULL)
 
     colnames(DF)[4] <- rm.var
-    comment(DF) <- com
+    class(DF) <- c("cmspans", com, "cmdf2long", paste0("vname_", rm.var), 
+        class(DF))
     DF
 }
 
@@ -79,5 +81,4 @@ dummy2span <- function(cl){
     s <- e - runs[["lengths"]][ones]
     data.frame(start = s, end = e)
 }
-
 

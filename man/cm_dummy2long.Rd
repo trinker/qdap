@@ -47,7 +47,8 @@ B <- cm_combine.dummy(out1, combine.code = combines)
 head(B, 10)
 
 cm_dummy2long(A)
-cm_dummy2long(B, "time")
+cm_dummy2long(B)
+plot(cm_dummy2long(A))
 }
 }
 \seealso{

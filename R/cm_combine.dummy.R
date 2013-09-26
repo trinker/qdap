@@ -51,8 +51,8 @@ cm_combine.dummy <-
 function(cm.l2d.obj, combine.code, rm.var = "time", 
     overlap = TRUE) {
 
-    ## Grab the comment from cm.l2d.obj
-    com <- comment(cm.l2d.obj)
+    ## Grab the cmclass from cm.l2d.obj
+    com <- which.cm(cm.l2d.obj)
 
     if (is.data.frame(cm.l2d.obj) | is.matrix(cm.l2d.obj)) {
         NMS <- as.character(substitute(cm.l2d.obj))
@@ -109,7 +109,6 @@ function(cm.l2d.obj, combine.code, rm.var = "time",
     if (length(unique(DF[, rm.var])) > 1) {
         DF <- split(DF, DF[, rm.var])
     }
-    comment(DF) <- com
+    class(DF) <- c(com, class(DF))
     DF
 }
-

@@ -45,8 +45,8 @@ cm_long2dummy <-
 function(dataframe, rm.var = NULL, 
     code = "code", start = "start", end = "end") {
 
-    com <- comment(dataframe)
-    if (is.null(com) | (!any(com %in% c("cmtime", "cmrange")))){
+    com <- which.cm(dataframe)
+    if (is.null(com)){
         stop("Please supply an object from `cm_range2long`, `cm_time2long`, or `cm_df2long`.")
     }
       
@@ -60,7 +60,7 @@ function(dataframe, rm.var = NULL,
     if (is.null(rm.var)) {
         L2 <- L2[[1]]
     }
-    comment(L2) <- sprintf("l2d_%s", comment(dataframe))
+    class(L2) <- c(sprintf("l2d_%s", com), class(L2))
     L2
 }
 
@@ -102,4 +102,3 @@ dummy <- function(dat, code, start, end){
     }
     mat
 }
-
