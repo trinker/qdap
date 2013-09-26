@@ -159,7 +159,7 @@ function(text.var = NULL, grouping.var = NULL,
 #' @method print wfm
 #' @S3method print wfm
 print.wfm <-
-  function(x, digits = 2, ...) {
+  function(x, digits = 3, ...) {
     class(x) <- "matrix"
     print(round(x, digits = digits))
 }

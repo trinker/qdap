@@ -30,23 +30,13 @@
 #' }
 kullback.leibler <-
 function(x, y = NULL){
-    kl <- function(x, y){
-        x1 <- x/sum(x)
-        y1 <- y/sum(y)
-        x1[x1==0] <- NA
-        y1[y1==0] <- NA
-        z <- na.omit(data.frame(x1, y1))
-        sum(z[, 1] * log(z[, 1]/z[, 2]))
-    }
-    if(is.null(y) & !is.null(comment(x))){
-        if (comment(x) %in% c("t.df")) {
+    if(is(x, "wfdf")){
+        if (is(x, "t.df")) {
             x <- x[, -c(1)]
         } else {
-             if (is.null(y) & comment(x) %in% c("m.df")) { 
+             if (is(x, "m.df")) { 
                  x <- x[-nrow(x), -c(1, ncol(x))]
-             } else { 
-                 x <- x
-             }
+             } 
         }
     } else {
         x <- x
@@ -84,4 +74,15 @@ function(x, digits = 3, ...) {
         print(x)
         options(width=WD)  
     }
+}
+
+
+## Helper function:
+kl <- function(x, y){
+    x1 <- x/sum(x)
+    y1 <- y/sum(y)
+    x1[x1==0] <- NA
+    y1[y1==0] <- NA
+    z <- na.omit(data.frame(x1, y1))
+    sum(z[, 1] * log(z[, 1]/z[, 2]))
 }
