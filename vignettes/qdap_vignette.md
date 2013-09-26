@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 22.40 25.34 16.30 16.30 19.70 25.34 25.34 15.00 25.34 15.79 19.70
-## [12] 25.34 19.70 19.70 15.79 22.40 15.79 19.70 25.34 25.34
+##  [1] 15.79 15.79 25.34 15.00 22.40 22.40 25.34 15.00 15.79 15.00 16.30
+## [12] 15.00 15.00 25.34 15.00 15.79 16.30 25.34 22.40 15.00
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 22.40 25.34 16.30 16.30 19.70 25.34 25.34 15.00 25.34 15.79 19.70
-## [12] 25.34 19.70 19.70 15.79 22.40 15.79 19.70 25.34 25.34
+##  [1] 15.79 15.79 25.34 15.00 22.40 22.40 25.34 15.00 15.79 15.00 16.30
+## [12] 15.00 15.00 25.34 15.00 15.79 16.30 25.34 22.40 15.00
 ```
 
 
@@ -3070,7 +3070,7 @@ head(dat2, 12)
 ```
 
 ```
-##    act fam.aff&sex   n start end
+##    act fam.aff_sex   n start end
 ## 1    1       cap_m 327     0 327
 ## 2    1      mont_m   8   327 335
 ## 3    1       cap_m   6   335 341
@@ -3090,16 +3090,14 @@ head(dat2, 12)
 plot(dat2)
 ```
 
-![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40.png) 
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-401.png) 
 
 ```r
 gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
     title = "Repeated Measures Gantt Plot")
 ```
 
-```
-## Error: undefined columns selected
-```
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-402.png) 
 
 
 <h4 id="adj">Create Adjacency Matrix</h4>

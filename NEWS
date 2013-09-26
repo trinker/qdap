@@ -132,6 +132,9 @@ MINOR FEATURES
 
 * `gantt_rep` picks up a generic `plot` method.
 
+* Functions in the `cm_code.xxx` and `cm_xxx2long` pick up a generic plot method
+  that utilizes `gantt_wrap` to plot a Gantt plot of the span data.
+
 CHANGES
 
 * The dictionaries and word lists for qdap have been moved to their own package, 
