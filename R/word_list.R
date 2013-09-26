@@ -143,7 +143,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
             if (is.null(x)){
                 return(x)
             } else { 
-                comment(x) <- "bagOwords"
+                class(x) <- c("bagOwords", class(x))
                 return(x)
             }
         }
@@ -152,7 +152,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
         if (is.null(x)){
                 return(x)
         } else { 
-                comment(x) <- "bagOwords"
+                class(x) <- c("bagOwords", class(x))                
                 return(x)
             }
         }
@@ -161,7 +161,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
             if (is.null(x)) {
                 return(x)
             } else { 
-                comment(x) <- "freqList"
+                class(x) <- c("freqList", class(x))
                 return(x)
             }
         }
@@ -170,7 +170,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
             if (is.null(x)) {
                 return(x)
             } else { 
-                comment(x) <- "freqList"
+                class(x) <- c("freqList", class(x))
                 return(x)
             }
         }
@@ -179,16 +179,16 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
             if (is.null(x)){
                 return(x)
             } else { 
-                comment(x) <- "freqList"
+                class(x) <- c("freqList", class(x))
                 return(x)
             }
         }
     )
-    comment(word_lists2) <- "cwl"    
-    comment(stopped.word_list) <- "swl"
-    comment(freq.word_list) <- "fwl" 
-    comment(freq.stop.word_list) <- "fswl"
-    comment(red.freq.stop.word_list) <- "rfswl"
+    class(word_lists2) <- c("cwl", class(word_lists2))
+    class(stopped.word_list) <- c("swl", class(stopped.word_list))
+    class(freq.word_list) <- c("fwl" , class(freq.word_list))
+    class(freq.stop.word_list) <- c("fswl", class(freq.stop.word_list))
+    class(red.freq.stop.word_list) <- c("rfswl", class(red.freq.stop.word_list))
     if (alphabetical) {
         asort <- function(dat, col=1) {
             dat2 <-dat[order(dat[, col]), ]
@@ -216,7 +216,9 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
 #' @S3method print word_list
 print.word_list <-
 function(x, ...) {
-    print(x$rfswl)
+    class(x) <- "list"
+    y <- x[["rfswl"]]
+    class(y) <- "list"
+    print(y)
 }
-
 
