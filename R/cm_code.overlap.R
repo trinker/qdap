@@ -39,7 +39,8 @@
 #' cm_code.overlap(x, list(AB=qcv(AA, BB)))
 #' cm_code.overlap(x, list(ALL=qcv(AA, BB, CC)))
 #' combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
-#' cm_code.overlap(z, combines, "time")
+#' (a <- cm_code.overlap(z, combines, "time"))
+#' plot(a)
 #' 
 #' #WITH cm_time2long
 #' x <- list(
@@ -85,16 +86,18 @@ cm_code.overlap <- function(x2long.obj, overlap.code.list, rm.var = NULL) {
         rm.var <- "time"
     }
     DF <- cm_dummy2long(x2, rm.var = rm.var)
-    if (comment(x2long.obj) == "cmtime") {
+    if (which.cm(x2long.obj) == "cmtime") {
         ## DF$start <- DF$start + 1  #removed 9-25-2013
         DF$Start <- sec2hms(DF$start)
         DF$End <- sec2hms(DF$end) 
         DF <- data.frame(DF[, -4, drop=FALSE], DF[, 4, drop=FALSE])
+        class(DF) <- class(DF)[!grepl("vname_", class(DF))]
+        class(DF) <- c("cmspans", paste0("vname_", rm.var), class(DF))
     }
-    comment(DF) <- comment(x2long.obj)
+    class(DF) <- c(class(DF), which.cm(x2long.obj))
     if (rmv) {
         DF$time <- NULL
+        class(DF) <- class(DF)[!grepl("vname_", class(DF))]
     }
     DF
 }
-

@@ -78,7 +78,7 @@ function(..., v.name = "variable", list.var = TRUE, debug = TRUE){
     if (list.var) {
         colnames(DF)[ncol(DF)] <- v.name
     }
-    class(DF) <- c("cmspans", "cmrange", "cmdf2long", paste0("vname_", v.name), 
+    class(DF) <- c("cmspans", "cmrange", "cmrange2long", paste0("vname_", v.name), 
         class(DF))
     DF
 }

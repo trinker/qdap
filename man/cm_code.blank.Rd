@@ -105,6 +105,7 @@ out <- cm_code.blank(dat, combine.code.list = list(ABC=qcv(A, B, C)),
     rm.var = "time", overlap = "!=1")
 
 head(out)
+plot(out)
 }
 }
 \seealso{

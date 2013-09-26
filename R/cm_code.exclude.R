@@ -44,7 +44,9 @@
 #' cm_code.exclude(x, list(ABnoC=qcv(AA, BB, CC)))
 #' cm_code.exclude(z, list(ABnoC=qcv(AA, BB, CC)), rm.var="time")
 #' excludes <- list(AnoB=qcv(AA, BB), ABnoC=qcv(AA, BB, CC))
-#' cm_code.exclude(z, excludes, rm.var="time")
+#' (a <- cm_code.exclude(z, excludes, rm.var="time"))
+#' plot(a)
+#' 
 #' #WITH cm_time2long
 #' x <- list(
 #'     transcript_time_span = qcv(00:00 - 1:12:00),
@@ -120,26 +122,28 @@ function(x2long.obj, exclude.code.list, rm.var = NULL) {
     newnames <- gsub("w\\.", "", names(exclude.code.list2))
     delete1 <- out3[, "code"] %in% newnames
 
-    if (comment(x2long.obj) == "cmtime") {
+    if (which.cm(x2long.obj) == "cmtime") {
         out3$Start <- sec2hms(out3$start)
         out3$End <- sec2hms(out3$end)
         out3 <- out3[, c(1:3, 5:6, 4)]
+        class(out3) <- class(out3)[!grepl("vname_", class(out3))]
+        class(out3) <- c("cmspans", paste0("vname_", rm.var), class(out3))
     }
 
     if (is.null(rm.var)) {
         out3 <- out3[, -ncol(out3)]
+        class(out3) <- class(out3)[!grepl("vname_", class(out3))]
     }
 
     cn <- colnames(x2long.obj)
     if (is.null(rm.var)) {
-        if (comment(x2long.obj) == "cmrange") {
+        if (which.cm(x2long.obj) == "cmrange") {
             cn <- colnames(x2long.obj)[1:3]
         } else {
             cn <- colnames(x2long.obj)[1:5]
         }
     }
     colnames(out3) <- cn
-
-    comment(out3) <- comment(x2long.obj)
+    class(out3) <- c(class(out3), which.cm(x2long.obj))
     out3
 }

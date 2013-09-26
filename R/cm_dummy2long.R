@@ -67,7 +67,7 @@ function(cm_long2dummy_obj, rm.var = "time") {
         rmvar = rep(names(outs), sapply(outs, nrow)), row.names = NULL)
 
     colnames(DF)[4] <- rm.var
-    class(DF) <- c("cmspans", com, "cmdf2long", paste0("vname_", rm.var), 
+    class(DF) <- c("cmspans", com, paste0("vname_", rm.var), 
         class(DF))
     DF
 }

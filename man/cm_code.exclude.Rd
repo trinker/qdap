@@ -54,7 +54,9 @@ foo2  <- list(
 cm_code.exclude(x, list(ABnoC=qcv(AA, BB, CC)))
 cm_code.exclude(z, list(ABnoC=qcv(AA, BB, CC)), rm.var="time")
 excludes <- list(AnoB=qcv(AA, BB), ABnoC=qcv(AA, BB, CC))
-cm_code.exclude(z, excludes, rm.var="time")
+(a <- cm_code.exclude(z, excludes, rm.var="time"))
+plot(a)
+
 #WITH cm_time2long
 x <- list(
     transcript_time_span = qcv(00:00 - 1:12:00),

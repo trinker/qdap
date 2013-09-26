@@ -49,7 +49,8 @@ foo2  <- list(
 cm_code.overlap(x, list(AB=qcv(AA, BB)))
 cm_code.overlap(x, list(ALL=qcv(AA, BB, CC)))
 combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
-cm_code.overlap(z, combines, "time")
+(a <- cm_code.overlap(z, combines, "time"))
+plot(a)
 
 #WITH cm_time2long
 x <- list(

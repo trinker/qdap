@@ -90,15 +90,17 @@ function(x2long.obj, combine.code.list, rm.var = NULL) {
     }  
 
     DF <- cm_dummy2long(x2, rm.var = rm.var)
-    if (comment(x2long.obj) == "cmtime") {
+    if (which.cm(x2long.obj) == "cmtime") {
         ## DF$start <- DF$start + 1  ## removed 9-22-2013
         DF$Start <- sec2hms(DF$start)
         DF$End <- sec2hms(DF$end) 
         DF <- data.frame(DF[, -4, drop=FALSE], DF[, 4, drop=FALSE])
+        class(DF) <- c("cmspans", paste0("vname_", rm.var), class(DF))
     }
-    comment(DF) <- comment(x2long.obj)
+    class(DF) <- c(class(DF), which.cm(x2long.obj))
     if (rmv) {
         DF$time <- NULL
-    }
+        class(DF) <- class(DF)[!grepl("vname_", class(DF))]
+    }    
     DF
 }

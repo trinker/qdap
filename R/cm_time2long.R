@@ -60,7 +60,7 @@ function(..., v.name = "variable", list.var = TRUE,
     if (list.var) {
         colnames(DF)[ncol(DF)] <- v.name
     }
-    class(DF) <- c("cmspans", "cmtime", "cmdf2long", paste0("vname_", v.name), 
+    class(DF) <- c("cmspans", "cmtime", "cmtime2long", paste0("vname_", v.name), 
         class(DF))
     DF
 }
