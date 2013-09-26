@@ -5,9 +5,8 @@
 \alias{wfm.expanded}
 \title{Word Frequency Matrix}
 \usage{
-  wfm(text.var = NULL, grouping.var = NULL, wfdf = NULL,
-    output = "raw", stopwords = NULL, char2space = "~~",
-    ...)
+  wfm(text.var = NULL, grouping.var = NULL, output = "raw",
+    stopwords = NULL, char2space = "~~", ...)
 
   wfdf(text.var, grouping.var = NULL, stopwords = NULL,
     margins = FALSE, output = "raw", digits = 2,
@@ -24,12 +23,6 @@
   \code{NULL} generates one word list for all text.  Also
   takes a single grouping variable or a list of 1 or more
   grouping variables.}
-
-  \item{wfdf}{A word frequency data frame given instead of
-  raw text.var and optional grouping.var. Basically
-  converts a word frequency dataframe (wfdf) to a word
-  frequency matrix (\code{\link[qdap]{wfm}}).  Default is
-  \code{NULL}.}
 
   \item{output}{Output type (either \code{"proportion"} or
   \code{"percent"}).}
@@ -97,35 +90,38 @@
 }
 \examples{
 \dontrun{
-#word frequency matrix (wfm) example:
+## word frequency matrix (wfm) example:
 with(DATA, wfm(state, list(sex, adult)))[1:15, ]
 with(DATA, wfm(state, person))[1:15, ]
 
-#insert double tilde ("~~") to keep phrases(i.e., first last name)
+## insert double tilde ("~~") to keep phrases(i.e., first last name)
 alts <- c(" fun", "I ")
 state2 <- mgsub(alts, gsub("\\\\s", "~~", alts), DATA$state)
 with(DATA, wfm(state2, list(sex, adult)))[1:18, ]
 
-#word frequency dataframe (wfdf) example:
+## word frequency dataframe (wfdf) example:
 with(DATA, wfdf(state, list(sex, adult)))[1:15, ]
 with(DATA, wfdf(state, person))[1:15, ]
 
-#insert double tilde ("~~") to keep dual words (i.e., first last name)
+## insert double tilde ("~~") to keep dual words (i.e., first last name)
 alts <- c(" fun", "I ")
 state2 <- mgsub(alts, gsub("\\\\s", "~~", alts), DATA$state)
 with(DATA, wfdf(state2, list(sex, adult)))[1:18, ]
 
-#wfm.expanded example:
+## wfm.expanded example:
 z <- wfm(DATA$state, DATA$person)
 wfm.expanded(z)[30:45, ] #two "you"s
 
-#wf.combine examples:
+## wf.combine examples:
 #===================
-#raw no margins (will work)
+## raw no margins (will work)
 x <- wfm(DATA$state, DATA$person)
 
-#raw with margin (will work)
+## raw with margin (will work)
 y <- wfdf(DATA$state, DATA$person, margins = TRUE)
+
+## Proportion matrix
+z2 <- wfm(DATA$state, DATA$person, output="proportion")
 
 WL1 <- c(y[, 1])
 WL2 <- list(c("read", "the", "a"), c("you", "your", "you're"))
