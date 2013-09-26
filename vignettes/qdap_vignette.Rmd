@@ -1622,7 +1622,7 @@ Before getting started with subsections 1-3 the reader will want to know the nam
 
 <h4 id="wordcsv">Coding Words - The .csv Approach `r yt("http://www.youtube.com/watch?v=tH242SIESIs")`</h4>
 
-The csv approach utilizes `r FUN("cm_df.temp")` and `r FUN("cm_df2long")` functions.  To utilize the csv template approach simply supply the dataframe, specify the text variable and provide a list of anticipated codes.  
+The csv approach utilizes `r FUN("cm_df.temp")` and `r FUN("cm_2long")` functions.  To utilize the csv template approach simply supply the dataframe, specify the text variable and provide a list of anticipated codes.  
 
 `r FT(orange, 5, text="&diams;")` **Coding Words (csv approach)**: The Template `r FT(orange, 5, text="&diams;")`
 
@@ -1650,7 +1650,7 @@ nrow =  56           ncol =  14             X
 10   greg   m     0   K2     it's       10  0  0   0   0    0  0   0   0
 </code></pre>
 
-After coding the data (see the `r HR2("http://www.youtube.com/watch?v=tH242SIESIs", "YouTube video")` the data can be read back in with `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html", "read.csv")`.
+After coding the data (see the `r HR2("http://www.youtube.com/watch?v=tH242SIESIs", "YouTube video")`) the data can be read back in with `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html", "read.csv")`.
 
 
 `r FT(orange, 5, text="&diams;")` **Coding Words (csv approach)**: Read In and Reshape `r FT(orange, 5, text="&diams;")`
@@ -1659,7 +1659,7 @@ After coding the data (see the `r HR2("http://www.youtube.com/watch?v=tH242SIESI
 dat <- read.csv("DATA.csv")
 
 ## Reshape to long format with word durations
-cm_df2long(dat)
+cm_2long(dat)
 </code></pre>
 
 <pre><code>    code     person sex adult code.1     text word.num start end variable
@@ -1682,7 +1682,7 @@ cm_df2long(dat)
 
 <h4 id="wordtrans">Coding Words - The Transcript/List Approach `r yt("http://www.youtube.com/watch?v=cxcD-j0iI2U")`</h4>
 
-The Transcript/List approach utilizes `r FUN("cm_df.transcript")`,  `r FUN("cm_range.temp")` and `r FUN("cm_range2long")` functions.  To use the transcript template simply supply the dataframe, specify the text variable and provide a list of anticipated codes.  
+The Transcript/List approach utilizes `r FUN("cm_df.transcript")`,  `r FUN("cm_range.temp")` and `r FUN("cm_2long")` functions.  To use the transcript template simply supply the dataframe, specify the text variable and provide a list of anticipated codes.  
 
 `r FT(orange, 5, text="&diams;")` **Coding Words (Transcript/List approach)**: Transcript Template `r FT(orange, 5, text="&diams;")`
 
@@ -1754,7 +1754,7 @@ with(DATA, cm_range.temp(codes = codes, text.var = state,
 )
 </code></pre>
 
-After coding the data (see the `r HR2("http://www.youtube.com/watch?v=cxcD-j0iI2U", "YouTube video")` the data can be read back in with `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html", "source")`.  Be sure to assign list to an object (e.g., `dat <- list()`).
+After coding the data (see the `r HR2("http://www.youtube.com/watch?v=cxcD-j0iI2U", "YouTube video")`) the data can be read back in with `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html", "source")`.  Be sure to assign list to an object (e.g., `dat <- list()`).
 
 `r FT(orange, 5, text="&diams;")` **Coding Words (Transcript/List approach)**: Read in the data`r FT(orange, 5, text="&diams;")`
 
@@ -1775,12 +1775,12 @@ $CC
 [1] "1:9,"    "100:150"
 </code></pre>
 
-This format is not particularly useful.  The data can be reshaped to long format with durations via `r FUN("cm_range2long")`:
+This format is not particularly useful.  The data can be reshaped to long format with durations via `r FUN("cm_2long")`:
 
 `r FT(orange, 5, text="&diams;")` **Coding Words (Transcript/List approach)**: Long format`r FT(orange, 5, text="&diams;")`
 
 <pre><code class="r">## Long format with durations
-datL <- cm_range2long(Time1)
+datL <- cm_2long(Time1)
 datL
 </code></pre>
 
@@ -1795,7 +1795,7 @@ datL
 
 <h4 id="timespan">Coding Time Spans `r yt("http://youtu.be/XC-RXeY63bM")`</h4>
 
-The Time Span approach utilizes the `r FUN("cm_time.temp")` and `r FUN("cm_time2long")` functions.  To generate the timespan template approach simply supply the list of anticipated codes and a start/end time.  
+The Time Span approach utilizes the `r FUN("cm_time.temp")` and `r FUN("cm_2long")` functions.  To generate the timespan template approach simply supply the list of anticipated codes and a start/end time.  
 
 
 `r FT(orange, 5, text="&diams;")` **Coding Times Spans**: Time Span Template `r FT(orange, 5, text="&diams;")`
@@ -1856,7 +1856,7 @@ with(DATA, cm_time.temp(codes, list(person, adult), file = "codelist.txt"))
 )
 </code></pre>
 
-After coding the data (see the `r HR2("http://www.youtube.com/watch?v=XC-RXeY63bM&feature=youtu.be", "YouTube video")` the data can be read back in with `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html", "source")`.  Be sure to assign list to an object (e.g., `dat <- list()`).  Also be aware that the end times must be greater than 0.
+After coding the data (see the `r HR2("http://www.youtube.com/watch?v=XC-RXeY63bM&feature=youtu.be", "YouTube video")`) the data can be read back in with `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html", "source")`.  Be sure to assign list to an object (e.g., `dat <- list()`).  
 
 `r FT(orange, 5, text="&diams;")` **Coding Times Spans**: Read in the data`r FT(orange, 5, text="&diams;")`
 
@@ -1881,12 +1881,12 @@ $C
 [1] "2.40:4.00,"  "5.01,"       "6.52:7.00,"  "9.00,"       "13.00:17.01"
 </code></pre>
 
-This format is not particularly useful.  The data can be reshaped to long format with durations via `r FUN("cm_time2long")`:
+This format is not particularly useful.  The data can be reshaped to long format with durations via `r FUN("cm_2long")`:
 
 `r FT(orange, 5, text="&diams;")` **Coding Times Spans**: Long format`r FT(orange, 5, text="&diams;")`
 
 <pre><code class="r">## Long format with durations
-datL <- cm_time2long(Time1, v.name = "time")
+datL <- cm_2long(Time1, v.name = "time")
 datL
 </code></pre>
 
@@ -1944,7 +1944,7 @@ foo2  <- list(
 
 ```{r}
 ## Single time, long word approach
-(x <- cm_range2long(foo))
+(x <- cm_2long(foo))
 ```
 
 ```{r echo=FALSE, fig.height = 2.5}
@@ -1953,7 +1953,7 @@ gantt_wrap(x, "code")
 
 ```{r}
 ## Repeated measures, long word approach
-(z <- cm_range2long(foo, foo2, v.name="time"))
+(z <- cm_2long(foo, foo2, v.name="time"))
 ```
 
 ```{r echo=FALSE, fig.height = 5}
@@ -1983,7 +1983,7 @@ bar2 <- list(
 
 ```{r}
 ## Single time, long time approach
-(dat <- cm_time2long(bar1))
+(dat <- cm_2long(bar1))
 ```
 
 ```{r echo=FALSE, fig.height = 2.5}
@@ -1992,7 +1992,7 @@ gantt_wrap(dat, "code")
 
 ```{r}
 ## Repeated measures, long time approach
-(dats <- cm_time2long(bar1, bar2, v.name = "time"))
+(dats <- cm_2long(bar1, bar2, v.name = "time"))
 ```
 
 ```{r echo=FALSE, fig.height = 5}

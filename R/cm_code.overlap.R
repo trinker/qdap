@@ -92,9 +92,9 @@ cm_code.overlap <- function(x2long.obj, overlap.code.list, rm.var = NULL) {
         DF$End <- sec2hms(DF$end) 
         DF <- data.frame(DF[, -4, drop=FALSE], DF[, 4, drop=FALSE])
         class(DF) <- class(DF)[!grepl("vname_", class(DF))]
-        class(DF) <- c("cmspans", paste0("vname_", rm.var), class(DF))
+        class(DF) <- c("cmspans", which.cm(x2long.obj), 
+            paste0("vname_", rm.var), class(DF))
     }
-    class(DF) <- c(class(DF), which.cm(x2long.obj))
     if (rmv) {
         DF$time <- NULL
         class(DF) <- class(DF)[!grepl("vname_", class(DF))]

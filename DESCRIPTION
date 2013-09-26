@@ -204,3 +204,4 @@ Collate:
     'words.R'
     'xnoy.R'
     'plot.cmspans.R'
+    'cm_2long.R'

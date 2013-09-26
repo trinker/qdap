@@ -72,6 +72,10 @@ This may break backward compatibility.  Thus this is a **major** release
 
 <b>NEW FEATURES</b>
 
+*  The `cm_xxx2long` family of functions (`cm_df2long`, `cm_range2long` and 
+  `cm_time2long`) now have a generic wrapper, `cm_2long`, to generate the long
+  formats.
+
 <b>MINOR FEATURES</b>
 
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 
@@ -164,6 +168,8 @@ This may break backward compatibility.  Thus this is a **major** release
   added.  The user can plot the output from `gantt` in `base` or `ggplot2` 
   graphics.
 
+* `cm_time2long` loses the argument `start.end` to ensure that the `cmspans` 
+  class produced would operate as expected.
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5
 ----------------------------------------------------------------

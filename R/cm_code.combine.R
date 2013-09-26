@@ -71,7 +71,6 @@ function(x2long.obj, combine.code.list, rm.var = NULL) {
             stop("rm.var does not match a column")
         }
     }
-
     x1 <- cm_long2dummy(x2long.obj, rm.var = rm.var)
     if (is.null(rm.var)) {  ## I don't think this is needed anymore
         colnames(x1) <- gsub("long.obj.", "", colnames(x1))
@@ -95,9 +94,9 @@ function(x2long.obj, combine.code.list, rm.var = NULL) {
         DF$Start <- sec2hms(DF$start)
         DF$End <- sec2hms(DF$end) 
         DF <- data.frame(DF[, -4, drop=FALSE], DF[, 4, drop=FALSE])
-        class(DF) <- c("cmspans", paste0("vname_", rm.var), class(DF))
+        class(DF) <- c("cmspans", which.cm(x2long.obj), 
+            paste0("vname_", rm.var), class(DF))
     }
-    class(DF) <- c(class(DF), which.cm(x2long.obj))
     if (rmv) {
         DF$time <- NULL
         class(DF) <- class(DF)[!grepl("vname_", class(DF))]

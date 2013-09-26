@@ -90,6 +90,7 @@ cm_code.transform <- function(x2long.obj, overlap.code.list=NULL,
     rownames(DF) <- NULL
     if (!is.null(rm.var)) {
         DF <- DF[order(DF[, rm.var]), ]
+        class(DF) <- c(class(DF),  paste0("vname_", rm.var))
     }
     class(DF) <- c("cmspans", which.cm(x2long.obj), class(DF))
     DF

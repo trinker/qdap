@@ -127,7 +127,7 @@ function(x2long.obj, exclude.code.list, rm.var = NULL) {
         out3$End <- sec2hms(out3$end)
         out3 <- out3[, c(1:3, 5:6, 4)]
         class(out3) <- class(out3)[!grepl("vname_", class(out3))]
-        class(out3) <- c("cmspans", paste0("vname_", rm.var), class(out3))
+        class(out3) <- c(class(out3), paste0("vname_", rm.var))
     }
 
     if (is.null(rm.var)) {

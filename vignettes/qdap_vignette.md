@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.79 15.79 25.34 15.00 22.40 22.40 25.34 15.00 15.79 15.00 16.30
-## [12] 15.00 15.00 25.34 15.00 15.79 16.30 25.34 22.40 15.00
+##  [1] 15.79 19.70 22.40 19.70 15.00 15.00 22.40 22.40 15.00 22.40 19.70
+## [12] 15.00 19.70 16.30 16.30 19.70 15.79 15.79 25.34 15.79
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.79 15.79 25.34 15.00 22.40 22.40 25.34 15.00 15.79 15.00 16.30
-## [12] 15.00 15.00 25.34 15.00 15.79 16.30 25.34 22.40 15.00
+##  [1] 15.79 19.70 22.40 19.70 15.00 15.00 22.40 22.40 15.00 22.40 19.70
+## [12] 15.00 19.70 16.30 16.30 19.70 15.79 15.79 25.34 15.79
 ```
 
 
@@ -4562,7 +4562,7 @@ After coding the data (see the <a href="http://www.youtube.com/watch?v=tH242SIES
 dat <- read.csv("DATA.csv")
 
 ## Reshape to long format with word durations
-cm_df2long(dat)
+cm_2long(dat)
 </code></pre>
 
 <pre><code>    code     person sex adult code.1     text word.num start end variable
@@ -4679,12 +4679,12 @@ $CC
 [1] "1:9,"    "100:150"
 </code></pre>
 
-This format is not particularly useful.  The data can be reshaped to long format with durations via <a href="http://trinker.github.io/qdap_dev/cm_range2long.html" target="_blank"><code>cm_range2long</code></a>:
+This format is not particularly useful.  The data can be reshaped to long format with durations via <a href="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank"><code>cm_2long</code></a>:
 
 <font size="5" color="orange">&diams;</font> **Coding Words (Transcript/List approach)**: Long format<font size="5" color="orange">&diams;</font>
 
 <pre><code class="r">## Long format with durations
-datL <- cm_range2long(Time1)
+datL <- cm_2long(Time1)
 datL
 </code></pre>
 
@@ -4786,12 +4786,12 @@ $C
 [1] "2.40:4.00,"  "5.01,"       "6.52:7.00,"  "9.00,"       "13.00:17.01"
 </code></pre>
 
-This format is not particularly useful.  The data can be reshaped to long format with durations via <a href="http://trinker.github.io/qdap_dev/cm_time2long.html" target="_blank"><code>cm_time2long</code></a>:
+This format is not particularly useful.  The data can be reshaped to long format with durations via <a href="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank"><code>cm_2long</code></a>:
 
 <font size="5" color="orange">&diams;</font> **Coding Times Spans**: Long format<font size="5" color="orange">&diams;</font>
 
 <pre><code class="r">## Long format with durations
-datL <- cm_time2long(Time1, v.name = "time")
+datL <- cm_2long(Time1, v.name = "time")
 datL
 </code></pre>
 
@@ -4852,7 +4852,7 @@ foo2  <- list(
 
 ```r
 ## Single time, long word approach
-(x <- cm_range2long(foo))
+(x <- cm_2long(foo))
 ```
 
 ```
@@ -4872,7 +4872,7 @@ foo2  <- list(
 
 ```r
 ## Repeated measures, long word approach
-(z <- cm_range2long(foo, foo2, v.name="time"))
+(z <- cm_2long(foo, foo2, v.name="time"))
 ```
 
 ```
@@ -4921,7 +4921,11 @@ bar2 <- list(
 
 ```r
 ## Single time, long time approach
-(dat <- cm_time2long(bar1))
+(dat <- cm_2long(bar1))
+```
+
+```
+## start time = 0; end time = 4321
 ```
 
 ```
@@ -4950,7 +4954,11 @@ bar2 <- list(
 
 ```r
 ## Repeated measures, long time approach
-(dats <- cm_time2long(bar1, bar2, v.name = "time"))
+(dats <- cm_2long(bar1, bar2, v.name = "time"))
+```
+
+```
+## start time = 0; end time = 4321 start time = 0; end time = 4321
 ```
 
 ```
