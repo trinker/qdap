@@ -130,6 +130,8 @@ This may break backward compatibility.  Thus this is a **major** release
   `cm_range.temp`'s `grouping.var`.  `cm_time.temp` also takes hour values for
   `start` and `end` as in `end = "01:22:03"`.
 
+* `gantt_rep` picks up a generic `plot` method.
+
 <b>CHANGES</b>
 
 * The dictionaries and word lists for <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> have been moved to their own package, 
@@ -158,8 +160,6 @@ This may break backward compatibility.  Thus this is a **major** release
 * The plotting feature of `gantt` has been removed and a `plot` method has been 
   added.  The user can plot the output from `gantt` in `base` or `ggplot2` 
   graphics.
-
-* `gantt_rep` picks up a generic `plot` method.
 
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5

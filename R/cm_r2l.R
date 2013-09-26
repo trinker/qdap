@@ -108,6 +108,7 @@ function(range.list, v.name = "variable", list.var = TRUE){
     } else {
         DF[, ncol(DF)] <- NULL
     }
-    comment(DF) <- "cmrange"
+    class(DF) <- c("cmrange", class(DF))
     DF
 }
+

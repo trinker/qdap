@@ -43,7 +43,7 @@ x <- list(
     C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
 )
 (dat <- cm_time2long(x))
-gantt_wrap(dat, "code", border.color = "black", border.size = 5)
+plot(dat)
 }
 }
 \references{

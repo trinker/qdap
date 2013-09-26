@@ -130,6 +130,8 @@ MINOR FEATURES
   `cm_range.temp`'s `grouping.var`.  `cm_time.temp` also takes hour values for
   `start` and `end` as in `end = "01:22:03"`.
 
+* `gantt_rep` picks up a generic `plot` method.
+
 CHANGES
 
 * The dictionaries and word lists for qdap have been moved to their own package, 
@@ -158,8 +160,6 @@ CHANGES
 * The plotting feature of `gantt` has been removed and a `plot` method has been 
   added.  The user can plot the output from `gantt` in `base` or `ggplot2` 
   graphics.
-
-* `gantt_rep` picks up a generic `plot` method.
 
 
 CHANGES IN qdap VERSION 0.2.5

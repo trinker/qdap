@@ -32,7 +32,7 @@
 #'     C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
 #' )
 #' (dat <- cm_time2long(x))
-#' gantt_wrap(dat, "code", border.color = "black", border.size = 5)
+#' plot(dat)
 #' }
 cm_time2long <-
 function(..., v.name = "variable", list.var = TRUE, 
@@ -60,6 +60,7 @@ function(..., v.name = "variable", list.var = TRUE,
     if (list.var) {
         colnames(DF)[ncol(DF)] <- v.name
     }
-    comment(DF) <- "cmtime"
+    class(DF) <- c("cmspans", "cmtime", "cmdf2long", paste0("vname_", v.name), 
+        class(DF))
     DF
 }

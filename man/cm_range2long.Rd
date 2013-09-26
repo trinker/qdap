@@ -59,7 +59,7 @@ foo2  <- list(
 )
 
 (dat <- cm_range2long(foo, foo2, v.name = "time"))
-gantt_wrap(dat, "code", "time")
+plot(dat)
 }
 }
 \references{

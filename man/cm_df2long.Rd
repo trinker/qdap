@@ -59,6 +59,7 @@ head(out1, 15)
 x1[, 7:14] <- lapply(7:14,  function(i) sample(0:1, nrow(x1), TRUE))
 out2 <- cm_df2long(x1,  code.vars = codes)
 head(out2, 15)
+plot(out2)
 }
 }
 \references{

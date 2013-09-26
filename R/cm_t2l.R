@@ -170,6 +170,6 @@ function(time.list, list.var.name = "variable", list.var = TRUE,
         DF <- data.frame(DF, VAR = rep(lv, nrow(DF)))
         colnames(DF)[ncol(DF)] <- list.var.name
     }
-    comment(DF) <- "cmtime"
-    return(DF)
+    class(DF) <- c("cmtime", class(DF))
+    DF
 }

@@ -1,0 +1,24 @@
+\name{plot.cmspans}
+\alias{plot.cmspans}
+\title{Plots a cmspans object}
+\usage{
+  \method{plot}{cmspans} (x, plot.var = NULL,
+    facet.vars = NULL, title = "Gantt Plot", ...)
+}
+\arguments{
+  \item{x}{The sums_cmspans object}
+
+  \item{plot.var}{A factor plotting variable (y axis).}
+
+  \item{facet.vars}{An optional single vector or list of 1
+  or 2 to facet by.}
+
+  \item{title}{An optional title.}
+
+  \item{\ldots}{Other arguments passed to
+  \code{gantt_wrap}.}
+}
+\description{
+  Plots a cmspans object.
+}
+

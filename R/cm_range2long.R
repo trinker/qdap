@@ -51,7 +51,7 @@
 #' )
 #' 
 #' (dat <- cm_range2long(foo, foo2, v.name = "time"))
-#' gantt_wrap(dat, "code", "time")
+#' plot(dat)
 #' }
 cm_range2long <-
 function(..., v.name = "variable", list.var = TRUE, debug = TRUE){
@@ -78,6 +78,7 @@ function(..., v.name = "variable", list.var = TRUE, debug = TRUE){
     if (list.var) {
         colnames(DF)[ncol(DF)] <- v.name
     }
-    comment(DF) <- "cmrange"
+    class(DF) <- c("cmspans", "cmrange", "cmdf2long", paste0("vname_", v.name), 
+        class(DF))
     DF
 }
