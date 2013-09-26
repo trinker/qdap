@@ -46,7 +46,7 @@ cm_dummy2long <-
 function(cm_long2dummy_obj, rm.var = "time") {
 
     ## Grab the comment from cm_long2dummy_obj
-    com <- gsub("l2d_", "", which.cm(cm_long2dummy_obj))
+    com <- gsub("l2d_", "", which.lcm(cm_long2dummy_obj))
 
     ## If the cm_long2dummy_obj isn't a list make it so and named 
     if (is.matrix(cm_long2dummy_obj) | is.data.frame(cm_long2dummy_obj)) {
@@ -81,4 +81,3 @@ dummy2span <- function(cl){
     s <- e - runs[["lengths"]][ones]
     data.frame(start = s, end = e)
 }
-

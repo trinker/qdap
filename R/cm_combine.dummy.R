@@ -52,7 +52,7 @@ function(cm.l2d.obj, combine.code, rm.var = "time",
     overlap = TRUE) {
 
     ## Grab the cmclass from cm.l2d.obj
-    com <- which.cm(cm.l2d.obj)
+    com <- which.lcm(cm.l2d.obj)
 
     if (is.data.frame(cm.l2d.obj) | is.matrix(cm.l2d.obj)) {
         NMS <- as.character(substitute(cm.l2d.obj))

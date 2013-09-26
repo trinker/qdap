@@ -286,3 +286,13 @@ which.unit <- function(x) {
     NULL
 }
 
+## Helper function to find out which cm type is used
+which.lcm <- function(x) {
+    if(is(x, "l2d_cmtime")) {
+        return("l2d_cmtime")
+    }
+    if(is(x, "l2d_cmrange")) {
+        return("l2d_cmrange")
+    }
+    NULL
+}
