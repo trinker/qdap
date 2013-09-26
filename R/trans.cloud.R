@@ -142,13 +142,13 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
     } else {
         PRO <- length(word.list)
     }
-    if(is.null(comment(word.list))){
+    if(is(word.list, "word_list")){
         word.list <- word.list
     } else {
-        if (comment(word.list) %in% "bagOwords"){
+        if (is(word.list, "bagOwords")){
             word.list <- word.list
         } else {
-            if (comment(word.list) %in% "freqList") {
+            if (is(word.list, "freqList")) {
                 word.list <- freqTab2words(word.list)
             } else {
                 word.list <- lapply(word.list, qda.handler)
@@ -297,4 +297,3 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
         text = namers[i], char2space = char2space))
     )
 }
-
