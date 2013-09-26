@@ -7,6 +7,9 @@
 \arguments{
   \item{x}{The wfm object.}
 
+  \item{digits}{The number of digits displayed if
+  \code{values} is \code{TRUE}.}
+
   \item{\ldots}{ignored}
 }
 \description{

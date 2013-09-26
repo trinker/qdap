@@ -155,6 +155,7 @@ function(text.var = NULL, grouping.var = NULL,
 #' Prints an wfm object.
 #' 
 #' @param x The wfm object.
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param \ldots ignored
 #' @method print wfm
 #' @S3method print wfm
