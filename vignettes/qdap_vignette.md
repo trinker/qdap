@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 22.40 19.70 15.00 15.79 19.70 15.00 22.40 25.34 15.00 25.34 19.70
-## [12] 25.34 16.30 15.00 22.40 16.30 15.79 25.34 22.40 15.79
+##  [1] 15.79 25.34 25.34 25.34 15.79 25.34 19.70 25.34 22.40 16.30 15.79
+## [12] 22.40 15.79 15.79 15.00 15.00 19.70 15.00 22.40 19.70
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 22.40 19.70 15.00 15.79 19.70 15.00 22.40 25.34 15.00 25.34 19.70
-## [12] 25.34 16.30 15.00 22.40 16.30 15.79 25.34 22.40 15.79
+##  [1] 15.79 25.34 25.34 25.34 15.79 25.34 19.70 25.34 22.40 16.30 15.79
+## [12] 22.40 15.79 15.79 15.00 15.00 19.70 15.00 22.40 19.70
 ```
 
 
@@ -3027,7 +3027,7 @@ Often a researcher will want to view the patterns of the discourse by grouping v
 
 ```r
 ## Unit Span Dataframe
-dat <- gantt(mraja1$dialogue, mraja1$person, plot = FALSE) 
+dat <- gantt(mraja1$dialogue, mraja1$person) 
 head(dat, 12)
 ```
 
@@ -3048,15 +3048,13 @@ head(dat, 12)
 ```
 
 ```r
-## Plotting Unit Span Dataframe
-with(mraja1, invisible(gantt(dialogue, person, box.color = "black")))
+plot(dat)
 ```
 
 ![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-391.png) 
 
 ```r
-## Plotting Unit Span Dataframe with gantt_wrap
-gantt_wrap(dat, "person", title = "Gantt Plot")
+plot(dat, base = TRUE)
 ```
 
 ![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-392.png) 
@@ -3068,23 +3066,29 @@ gantt_wrap(dat, "person", title = "Gantt Plot")
 ```r
 ## Repeated Measures Unit Span Dataframe
 dat2 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex)))
+```
+
+```
+## Error: unused argument (plot = FALSE)
+```
+
+```r
 head(dat2, 12)
 ```
 
 ```
-##    act fam.aff_sex   n start end
-## 1    1       cap_m 327     0 327
-## 2    1      mont_m   8   327 335
-## 3    1       cap_m   6   335 341
-## 4    1      mont_m   8   341 349
-## 5    1       cap_m  32   349 381
-## 6    1      mont_m   4   381 385
-## 7    1       cap_m  16   385 401
-## 8    1      mont_m   2   401 403
-## 9    1       cap_m  14   403 417
-## 10   1      mont_m   2   417 419
-## 11   1       cap_m  10   419 429
-## 12   1      mont_m  12   429 441
+##                  X1
+## 1      Researcher 2
+## 2         Teacher 4
+## 3 Multiple Students
+## 4     [Cross Talk 3
+## 5         Teacher 4
+##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                X2
+## 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                October 7, 1892.
+## 2                                                                                                                                                                                                                                                                                                                                                                                                                               Students it's time to learn. [Student discussion; unintelligible]
+## 3                                                                                                                                                                                                                                                                                                                                                                                                                                                               Yes teacher we're ready to learn.
+## 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             00]
+## 5 Let's read this terrific book together. It's called Moo Baa La La La and what was I going to ... Oh yes The story is by Sandra Boynton. A cow says Moo. A Sheep says Baa. Three singing pigs say LA LA LA! "No, no!" you say, that isn't right. The pigs say oink all day and night. Rhinoceroses snort and snuff. And little dogs go ruff ruff ruff! Some other dogs go bow wow wow! And cats and kittens say Meow! Quack! Says the duck. A horse says neigh. It's quiet now. What do you say?
 ```
 
 ```r
@@ -3093,7 +3097,9 @@ gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
     title = "Repeated Measures Gantt Plot")
 ```
 
-![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40.png) 
+```
+## Error: undefined columns selected
+```
 
 
 <h4 id="adj">Create Adjacency Matrix</h4>

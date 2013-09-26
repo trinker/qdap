@@ -67,6 +67,9 @@ BUG FIXES
 * `cm_code.exclude` did not output the correct excluded spans.  This behavior
   has been corrected.
 
+* The use of `comment` to convey object characteristics has been replaced with 
+  the use of `class`.
+
 NEW FEATURES
 
 MINOR FEATURES
@@ -151,6 +154,10 @@ CHANGES
 
 * `cm_df.temp` loses the logical `csv` argument.  `file.name` have been replaced 
   with `file` to fit conventional R naming schemes.
+
+* The plotting feature of `gantt` has been removed and a `plot` method has been 
+  added.  The user can plot the output from `gantt` in `base` or `ggplot2` 
+  graphics.
 
 
 CHANGES IN qdap VERSION 0.2.5

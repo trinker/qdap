@@ -6,24 +6,19 @@
 #' @param text.var The text variable    
 #' @param grouping.var The grouping variables. Also takes a single grouping 
 #' variable or a list of 1 or more grouping variables.
-#' @param plot logical.  If \code{TRUE} plots the start-end times as a Gantt plot.
 #' @param units The unit of measurement to analyze.  One of the strings 
 #' \code{"character"}, \code{"syllable"}, \code{"word"}, or \code{"sentence"}.
-#' @param sums logical.  If \code{TRUE} reports and optionally plots the total units 
-#' used by grouping variable(s).
-#' @param plot.colors The colors of the Gantt plot bars.  Either a single color 
-#' or a length equal to the number of grouping variable(s).
-#' @param box.color A single color of the box around the Gantt plot bars.
-#' @param col.sep The character string to use to separate pasted variables in the 
-#' merged grouping variable header/name.
+#' @param sums logical.  If \code{TRUE} reports and (optionally (or plots) the 
+#' total units used by grouping variable(s).
+#' @param col.sep The character string to use to separate pasted variables in 
+#' the merged grouping variable header/name.
 #' @return Returns a data frame of start and end times by grouping variable(s) 
 #' or optionally returns a list of two: (1) A data frame of the total units 
 #' used by grouping variable(s) and (2) a data frame of start and end times 
-#' by grouping variable(s).  Optionally plots a Gantt plot of the returned data.
-#' @note For repeated measures data output use \code{\link[qdap]{gantt_rep}}; 
-#' for a convenient wrapper that takes text and generates plots use 
-#' \code{\link[qdap]{gantt_plot}}; and for a flexible gantt plot that words with 
-#' code matrix functions (cm) use \code{\link[qdap]{gantt_wrap}}.
+#' by grouping variable(s).  
+#' @note For non repeated measures data use \code{\link[qdap]{gantt}}; for a 
+#' flexible gantt plot that words with code matrix functions (cm) use 
+#' \code{\link[qdap]{gantt_wrap}}.
 #' @author DigEmAll (\url{stackoverflow.com}) and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso \code{\link[qdap]{gantt_rep}},
 #' \code{\link[qdap]{gantt_wrap}},
@@ -32,39 +27,41 @@
 #' tool of management. New York, Ronald Press.
 #' @keywords Gantt
 #' @export
+#' @rdname gantt
 #' @examples
 #' \dontrun{
-#' gantt(DATA$state, DATA$person)                                                        
-#' gantt(DATA$state, DATA$person, sums = TRUE)                                           
-#' gantt(DATA$state, list(DATA$sex, DATA$adult))                                                           
-#' x <- gantt(mraja1$dialogue, mraja1$person) #hard to see without box color                        
-#' y <- gantt(mraja1$dialogue, mraja1$person, box.col = "black") 
-#' z <- gantt(mraja1$dialogue, mraja1$sex)                                                                          
-#' m <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
-#'     plot.colors = NULL)                         
-#' n <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
-#'     plot.colors = "black")                      
-#' o <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
-#'     plot = FALSE)                                                                                                                       
-#' p <- gantt(mraja1$dialogue, mraja1$person, units = "characters", 
-#'     box.color = "black")              
-#' d <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
-#'     units = "characters")                       
+#' (a <- gantt(DATA$state, DATA$person))  
+#' plot(a)
+#' plot(a, base = TRUE)
+#' 
+#' (b <- gantt(DATA$state, DATA$person, sums = TRUE)) 
+#' plot(b)
+#' plot(b, base = FALSE) 
+#' 
+#' (d <- gantt(DATA$state, list(DATA$sex, DATA$adult)))        
+#' plot(d)
+#' 
+#' x <- gantt(mraja1$dialogue, mraja1$person) 
+#' plot(x, base = TRUE)
+#' plot(x, , base = TRUE, box.color = "black") 
+#' 
+#' z <- gantt(mraja1$dialogue, mraja1$sex)  
+#' plot(z)  
+#'                                                           
 #' e <- with(mraja1, gantt(dialogue, list(fam.aff, sex, died), 
-#'    units = "characters", sums = TRUE))       
+#'    units = "characters", sums = TRUE))
+#' plot(e)  
+#'      
 #' f <- gantt(mraja1$dialogue, mraja1$person, units = "syllables", 
-#'    box.color = "black", sums = TRUE)  
-#' g <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
-#'     units = "syllables")                        
+#'    box.color = "black", sums = TRUE)
+#' plot(f)  
 #' 
 #' dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
-#'     units = "sentences", plot.colors = 'black', sums = TRUE, 
-#'     col.sep = "_")$gantt.df     
-#' gantt_wrap(dat, "fam.aff_sex", title = "Gantt Plot")  
+#'     units = "sentences", plot.colors = 'black', col.sep = "_")    
+#' plot(dat)
 #' }
 gantt <-
-function(text.var, grouping.var, plot = TRUE, units = "words", 
-    sums = FALSE, plot.colors = NULL, box.color = NULL, col.sep = "_"){
+function(text.var, grouping.var, units = "words", sums = FALSE, col.sep = "_"){
     if (is.list(grouping.var)) {
         m <- unlist(as.character(substitute(grouping.var))[-1])
         m <- sapply(strsplit(m, "$", fixed=TRUE), 
@@ -80,9 +77,7 @@ function(text.var, grouping.var, plot = TRUE, units = "words",
         grouping.var <- paste2(grouping.var, sep = col.sep)
     } else {
         grouping.var <- unlist(grouping.var)
-    } 
-
-    
+    }     
     
 ##     if (is.list(grouping.var) & length(grouping.var)>1) {
 ##         grouping.var <- apply(data.frame(grouping.var), 1, function(x){
@@ -134,22 +129,7 @@ function(text.var, grouping.var, plot = TRUE, units = "words",
     names(z)[1] <- NAME
     z <- z[order(z[, 1]), ]
     rownames(z) <- NULL
-    if (plot) {
-        if (is.null(box.color)) box.color <- "white" 
-        y2 <- NULL
-        if(sums) y2 <- z[, 2] 
-        if (is.null(plot.colors)) {
-            plot.colors <- rainbow(10 + length(levels(ans[, 1]))) 
-        }
-        helper(ans, res.col = names(ans)[1], 
-            start.col = 'start', end.col='end', 
-            res.colors = plot.colors, 
-            xlab = units, box.color = box.color,
-            title = paste("Speech Duration (", units, ")", 
-                sep = ""), y2 = y2) 
-        mtext(names(ans)[1], side = 2, padj = -4.5)
-        if (sums) mtext("sums", side = 4, padj = 1)
-    }
+
     if (is.list(g) & length(g)>1){     
         X <- as.data.frame(ans[, 1], drop = FALSE)   
         names(X) <- names(ans)[1]      
@@ -164,16 +144,125 @@ function(text.var, grouping.var, plot = TRUE, units = "words",
     }
     la <- length(ans)
     ans[, (la-2):la] <- lapply(ans[, (la-2):la], as.numeric)
-    comment(ans) <- units
     ans[, c(ncol(ans)-3)] <- factor(ans[, c(ncol(ans)-3)], levels=LEVS2)
     z[, 1] <- factor(z[, 1], levels=LEVS2)
     if (col.sep != "&") {
         colnames(ans) <- gsub("&", col.sep, colnames(ans), fixed = TRUE)
     }
+    class(ans) <- c("gantt", paste0("unit_", units), class(ans))
     if (sums) {
-        list("sums" = z, "gantt.df" = ans) 
+        ans <- list("sums" = z, "gantt.df" = ans) 
+        class(ans) <- c("sums_gantt", class(ans))
+        ans
     } else {
         ans
+    }
+}
+
+#' Prints a sums_gantt object
+#' 
+#' Prints a sums_gantt object.
+#' 
+#' @param x The sums_gantt object 
+#' @param \ldots ignored
+#' @method print sums_gantt
+#' @S3method print sums_gantt
+print.sums_gantt <- function(x, ...) {
+   class(x) <- "list"
+   print(x)
+}
+
+
+#' Generate Unit Spans 
+#' 
+#' \code{plot_gantt_base} - For internal use.
+#' 
+#' @param x  n object of the class "gantt".
+#' @param fill.colors The colors of the Gantt plot bars.  Either a single color 
+#' or a length equal to the number of grouping variable(s).  If \code{NULL}, 
+#' \code{rainbow} is used.
+#' @param box.color A color to wrap the boxes with.
+#' @param title An optional title.
+#' @rdname gantt
+#' @export
+plot_gantt_base <- function(x, sums = NULL, fill.colors = NULL, box.color = "white", 
+    title = NULL){
+    if(is(x, "sums_gantt")) {
+        sums <- x[["sums"]][, 2]
+        x <- x[["gantt.df"]]        
+    } 
+    units <- gsub("unit_", "", class(x)[grepl("unit_", class(x))])
+    if (is.null(fill.colors)) {
+        fill.colors <- rainbow(10 + length(levels(x[, 1]))) 
+    }
+    helper(data = x, res.col = colnames(x)[1], 
+        start.col = 'start', end.col='end', 
+        res.colors = fill.colors, 
+        xlab = Caps(units), box.color = box.color,
+        title = title, 
+        y2 = sums) 
+    mtext(Caps(colnames(x)[1]), side = 2, padj = -4.5)
+    if (!is.null(sums)) {
+        mtext("Sums", side = 4, padj = 1)
+    }
+}
+
+
+#' Plots a gantt object
+#' 
+#' Plots a gantt object.
+#' 
+#' @param x The sums_gantt object
+#' @param base logical.  If \code{TRUE} prints in base graphics system.  
+#' If \code{FALSE} prints in ggplot graphics system.
+#' @param title An optional title.
+#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
+#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
+#' to add additional plot layers.
+#' @param \ldots Other arguments passed to \code{sums_gantt_wrap} or 
+#' \code{plot_gantt_base}
+#' @method plot gantt
+#' @S3method plot gantt
+plot.gantt <- function(x, base = FALSE, title = NULL, plot= TRUE, ...) {
+
+    units <- gsub("unit_", "", class(x)[grepl("unit_", class(x))])
+    if (is.null(title)) {
+        title <- sprintf("Speech Duration (%s)", Caps(units))
+    }
+    if (base) {
+        plot_gantt_base(x, title = title, ...)
+    } else {
+        gantt_wrap(x, colnames(x)[1], title = title, ...)  
+    }
+
+}
+
+#' Plots a sums_gantt object
+#' 
+#' Plots a sums_gantt object.
+#' 
+#' @param x The sums_gantt object
+#' @param base logical.  If \code{TRUE} prints in base graphics system.  
+#' If \code{FALSE} prints in ggplot graphics system.
+#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
+#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
+#' to add additional plot layers.
+#' @param title An optional title.
+#' @param \ldots Other arguments passed to \code{sums_gantt_wrap} or 
+#' \code{plot_gantt_base}
+#' @method plot sums_gantt
+#' @S3method plot sums_gantt
+plot.sums_gantt <- function(x, base = TRUE, title = NULL, ...) {
+    units <- gsub("unit_", "", class(x[["gantt.df"]])[grepl("unit_", 
+        class(x[["gantt.df"]]))])
+    if (is.null(title)) {
+        title <- sprintf("Speech Duration (%s)", Caps(units))
+    }
+    if (base) {
+        plot_gantt_base(x, title = title, ...)
+    } else {
+        x <- x[["gantt.df"]]
+        gantt_wrap(x, colnames(x)[1], title = title, ...)  
     }
 }
 
@@ -213,3 +302,14 @@ function(data, res.col = "person", start.col = "start",
         }
     }
 }
+
+
+## Internal helper function to capitalize words
+Caps <- function(x, all = FALSE) { 
+    if (all) {    
+        x <- strsplit(x, " ")[[1]]
+    } 
+    paste(toupper(substring(x, 1,1)), substring(x, 2), sep="", collapse=" ") 
+}
+
+

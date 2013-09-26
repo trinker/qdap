@@ -112,7 +112,7 @@ function(x, digits = 3, ...) {
 #' Plots a diversity object.
 #' 
 #' @param x The diversity object
-#' @param \ldots Other arguments passed to qheat
+#' @param \ldots Other arguments passed to \code{qheat}
 #' @method plot diversity
 #' @S3method plot diversity
 plot.diversity <- function(x, ...) {

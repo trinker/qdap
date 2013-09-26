@@ -1217,18 +1217,16 @@ ltruncdf(z[1:4])
 
 <h4 id="ganttspan">Generate Unit Spans</h4>
 
-Often a researcher will want to view the patterns of the discourse by grouping variables over time.  THis requires the data to have start and end times based on units (sentence, turn of talk, or word).  The `r FUN("gantt")` function provides the user with unit spans (start and end times) with the `r FUN("gantt_rep")` extending this capability to repeated measures.  The `r FUN("gantt")` function has basic plotting capabilities to allow visualization of the unit span data, however, the `r FUN("gantt_wrap")` function extends the `r FUN("gantt")` and `r FUN("gantt_rep")` functions to plot precise depictions (Gantt plots) of the unit span data.  Note that if the researcher is only interested in the plotting the data as a Gantt plot, the `r FUN("gantt_plot")` function combines the `r FUN("gantt")`/`r FUN("gantt_rep")` functions with the `r FUN("gantt")` function  
+Often a researcher will want to view the patterns of the discourse by grouping variables over time.  This requires the data to have start and end times based on units (sentence, turn of talk, or word).  The `r FUN("gantt")` function provides the user with unit spans (start and end times) with the `r FUN("gantt_rep")` extending this capability to repeated measures.  The `r FUN("gantt")` function has a basic plotting method to allow visualization of the unit span data, however, the `r FUN("gantt_wrap")` function extends the `r FUN("gantt")` and `r FUN("gantt_rep")` functions to plot precise depictions (Gantt plots) of the unit span data.  Note that if the researcher is only interested in the plotting the data as a Gantt plot, the `r FUN("gantt_plot")` function combines the `r FUN("gantt")`/`r FUN("gantt_rep")` functions with the `r FUN("gantt")` function  
 
 `r FT(orange, 5, text="&diams;")` **Unit Spans**`r FT(orange, 5, text="&diams;")`
 
 ```{r}
 ## Unit Span Dataframe
-dat <- gantt(mraja1$dialogue, mraja1$person, plot = FALSE) 
+dat <- gantt(mraja1$dialogue, mraja1$person) 
 head(dat, 12)
-## Plotting Unit Span Dataframe
-with(mraja1, invisible(gantt(dialogue, person, box.color = "black")))
-## Plotting Unit Span Dataframe with gantt_wrap
-gantt_wrap(dat, "person", title = "Gantt Plot")
+plot(dat)
+plot(dat, base = TRUE)
 ```
 
 `r FT(orange, 5, text="&diams;")` **Repeated Measures Unit Spans**`r FT(orange, 5, text="&diams;")`

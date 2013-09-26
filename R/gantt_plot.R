@@ -139,7 +139,7 @@ function(text.var, grouping.var = NULL, rm.var = NULL, fill.var = NULL,
     if (is.null(rm.var)) {
         ## getting the start end times for non-repeated measures
         x <- gantt(text.var = text.var, grouping.var = vars, 
-            plot = FALSE, units =units, col.sep = "%%%%")
+            units =units, col.sep = "%%%%")
         x <- colsplit2df(x, new.names = ANAMES, sep="%%%%")
         repNAMES <- rmNAME <- NULL
         rlen <- 0

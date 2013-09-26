@@ -32,11 +32,9 @@
   repeated measure condition.
 }
 \note{
-  For non repeated measures data/plotting use
-  \code{\link[qdap]{gantt}}; for a convenient wrapper that
-  takes text and generates plots use
-  \code{\link[qdap]{gantt_plot}}; and for a flexible gantt
-  plot that words with code matrix functions (cm) use
+  For non repeated measures data use
+  \code{\link[qdap]{gantt}}; for a flexible gantt plot that
+  words with code matrix functions (cm) use
   \code{\link[qdap]{gantt_wrap}}.
 }
 \examples{

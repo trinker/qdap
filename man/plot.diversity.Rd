@@ -7,7 +7,7 @@
 \arguments{
   \item{x}{The diversity object}
 
-  \item{\ldots}{Other arguments passed to qheat}
+  \item{\ldots}{Other arguments passed to \code{qheat}}
 }
 \description{
   Plots a diversity object.

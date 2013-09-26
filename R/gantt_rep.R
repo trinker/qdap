@@ -14,10 +14,9 @@
 #' merged grouping variable header/name.
 #' @return Returns a data frame of start and end times by repeated measure and 
 #' grouping variable(s)
-#' @note For non repeated measures data/plotting use \code{\link[qdap]{gantt}}; 
-#' for a convenient wrapper that takes text and generates plots use 
-#' \code{\link[qdap]{gantt_plot}}; and for a flexible gantt plot that words with 
-#' code matrix functions (cm) use \code{\link[qdap]{gantt_wrap}}.
+#' @note For non repeated measures data use \code{\link[qdap]{gantt}}; for a 
+#' flexible gantt plot that words with code matrix functions (cm) use 
+#' \code{\link[qdap]{gantt_wrap}}.
 #' @seealso \code{\link[qdap]{gantt}},
 #' \code{\link[qdap]{gantt_wrap}},
 #' \code{\link[qdap]{gantt_plot}} 
@@ -99,8 +98,7 @@ function(rm.var, text.var, grouping.var, units = "words", col.sep = "_"){
     DAT3 <- lapply(seq_along(DAT2), function(i) {
             rm1 <- DAT2[[i]][, 1]
             gn <- DAT2[[i]][, -1]
-            gn2 <- gantt(gn[, "text.var"], gn[, "grouping.var"], 
-                plot = FALSE, units = units)
+            gn2 <- gantt(gn[, "text.var"], gn[, "grouping.var"], units = units)
             gn3 <- data.frame(rm.var = rm1[nrow(gn2)], gn2)
             return(gn3)
         }
