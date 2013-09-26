@@ -74,24 +74,23 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
-#'     units = "sentences", plot.colors = 'black', sums = TRUE, 
-#'     col.sep = "_")$gantt.df
-#' htruncdf(dat)     
-#' gantt_wrap(dat, "fam.aff_sex", title = "Gantt Plot")  
+#' dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex),
+#'     units = "sentences", col.sep = "_")
+#' htruncdf(dat)
+#' gantt_wrap(dat, "fam.aff_sex", title = "Gantt Plot")
 #' dat$codes <- sample(LETTERS[1:3], nrow(dat), TRUE)
-#' gantt_wrap(dat, "fam.aff_sex", fill.var = "codes", 
+#' gantt_wrap(dat, "fam.aff_sex", fill.var = "codes",
 #'     legend.position = "bottom")
 #' 
-#' dat2 <- with(rajSPLIT, gantt_rep(act, dialogue, 
+#' dat2 <- with(rajSPLIT, gantt_rep(act, dialogue,
 #'     list(fam.aff, sex), units = "words", col.sep = "_"))
-#' htruncdf(dat2)  
-#' x <- gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act", 
+#' htruncdf(dat2)
+#' x <- gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
 #'     title = "Repeated Measures Gantt Plot")
-#'     
+#' 
 #' library(ggplot2); library(scales); library(RColorBrewer)
-#' x + scale_color_manual(values=rep("black", 
-#'     length(levels(dat2$fam.aff_sex)))) 
+#' x + scale_color_manual(values=rep("black",
+#'     length(levels(dat2$fam.aff_sex))))
 #' }
 gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL, 
@@ -104,14 +103,12 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     plot = TRUE) { 
     new4 <- startp <- endp <- NULL
     if (is.null(hms.scale)) {
-        if (!is.null(comment(dataframe)) && comment(dataframe) == "cmtime") {
+        if (is(dataframe, "cmtime")) {
             hms.scale <- TRUE
         } else {
             hms.scale <- FALSE
-            if(!is.null(comment(dataframe))) {
-                if (comment(dataframe) == "cmrange" & xlab == "duration.default"){
-                    xlab <- "Duration (words)"
-                }
+            if (is(dataframe, "cmrange") & xlab == "duration.default"){
+                xlab <- "Duration (words)"
             }
         }
     }
@@ -127,8 +124,8 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
         if (hms.scale) {
                 xlab <- "Duration (hours:minutes:seconds)"
         } else {
-            if (!is.null(comment(dataframe))) {
-                xlab <- paste0("Duration (", comment(dataframe), ")")
+            if (!is.null(which.unit(dataframe))) {
+                xlab <- paste0("Duration (", which.unit(dataframe), ")")
             } else {
                 xlab <- "Duration"
             }
@@ -267,3 +264,25 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     }
     invisible(theplot)
 }
+
+## Helper function to find out which cm type is used
+which.cm <- function(x) {
+    if(is(x, "cmtime")) {
+        return("cmtime")
+    }
+    if(is(x, "cmrange")) {
+        return("cmrange")
+    }
+    NULL
+}
+
+## helper function to determine unit span used
+which.unit <- function(x) {
+    x <- gsub("unit_", "", class(x)[grepl("unit_", class(x))])
+    poss <- c("character", "syllable", "words", "sentence")
+    if(any(x %in% poss)) {
+        return(x)
+    }
+    NULL
+}
+

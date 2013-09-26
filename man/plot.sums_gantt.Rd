@@ -12,15 +12,10 @@
   graphics system. If \code{FALSE} prints in ggplot
   graphics system.}
 
-  \item{plot}{logical.  If \code{TRUE} the plot will
-  automatically plot. The user may wish to set to
-  \code{FALSE} for use in knitr, sweave, etc. to add
-  additional plot layers.}
-
   \item{title}{An optional title.}
 
-  \item{\ldots}{Other arguments passed to
-  \code{sums_gantt_wrap} or \code{plot_gantt_base}}
+  \item{\ldots}{Other arguments passed to \code{gantt_wrap}
+  or \code{plot_gantt_base}}
 }
 \description{
   Plots a sums_gantt object.

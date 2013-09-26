@@ -124,8 +124,7 @@
 \examples{
 \dontrun{
 dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex),
-    units = "sentences", plot.colors = 'black', sums = TRUE,
-    col.sep = "_")$gantt.df
+    units = "sentences", col.sep = "_")
 htruncdf(dat)
 gantt_wrap(dat, "fam.aff_sex", title = "Gantt Plot")
 dat$codes <- sample(LETTERS[1:3], nrow(dat), TRUE)

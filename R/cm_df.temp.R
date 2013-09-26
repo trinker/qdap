@@ -7,8 +7,8 @@
 #' @param dataframe A dataframe containing a text variable.
 #' @param text.var The name of the text variable.
 #' @param codes Optional list of codes.
-#' @param file The name of the file (csv is recommended).  If \code{NULL} no file 
-#' is written.
+#' @param file The name of the file (csv is recommended file type).  If 
+#' \code{NULL} no file is written.
 #' @param transpose logical.  If \code{TRUE} transposes the dataframe so that 
 #' the text is across the top. 
 #' @param strip logical.  If \code{TRUE} all punctuation is removed.

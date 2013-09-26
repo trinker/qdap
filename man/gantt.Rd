@@ -55,9 +55,9 @@
 }
 \note{
   For non repeated measures data use
-  \code{\link[qdap]{gantt}}; for a flexible gantt plot that
-  words with code matrix functions (cm) use
-  \code{\link[qdap]{gantt_wrap}}.
+  \code{\link[qdap]{gantt}}.  For more flexible plotting
+  needs use \code{\link[qdap]{gantt_wrap}} over the generic
+  plotting method.
 }
 \examples{
 \dontrun{
@@ -84,12 +84,12 @@ e <- with(mraja1, gantt(dialogue, list(fam.aff, sex, died),
 plot(e)
 
 f <- gantt(mraja1$dialogue, mraja1$person, units = "syllables",
-   box.color = "black", sums = TRUE)
-plot(f)
+    sums = TRUE)
+plot(f, box.color = "red")
+plot(f, base = FALSE)
 
 dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex),
-    units = "sentences", plot.colors = 'black', col.sep = "_")
-plot(dat)
+    units = "sentences", col.sep = "_")
 }
 }
 \author{

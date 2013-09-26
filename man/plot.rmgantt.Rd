@@ -1,0 +1,21 @@
+\name{plot.rmgantt}
+\alias{plot.rmgantt}
+\title{Plots a rmgantt object}
+\usage{
+  \method{plot}{rmgantt} (x, title, transform = FALSE, ...)
+}
+\arguments{
+  \item{x}{The sums_rmgantt object}
+
+  \item{title}{An optional title.}
+
+  \item{transform}{logical.  If \code{TRUE} and there are
+  two repeated mesures the faceting is reversed.}
+
+  \item{\ldots}{Other arguments passed to
+  \code{gantt_wrap}}
+}
+\description{
+  Plots a rmgantt object.
+}
+

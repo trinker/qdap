@@ -67,6 +67,9 @@ This may break backward compatibility.  Thus this is a **major** release
 * `cm_code.exclude` did not output the correct excluded spans.  This behavior
   has been corrected.
 
+* The use of `comment` to convey object characteristics has been replaced with 
+  the use of `class`.
+
 <b>NEW FEATURES</b>
 
 <b>MINOR FEATURES</b>
@@ -151,6 +154,12 @@ This may break backward compatibility.  Thus this is a **major** release
 
 * `cm_df.temp` loses the logical `csv` argument.  `file.name` have been replaced 
   with `file` to fit conventional R naming schemes.
+
+* The plotting feature of `gantt` has been removed and a `plot` method has been 
+  added.  The user can plot the output from `gantt` in `base` or `ggplot2` 
+  graphics.
+
+* `gantt_rep` picks up a generic `plot` method.
 
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5

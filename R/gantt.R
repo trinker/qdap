@@ -16,9 +16,9 @@
 #' or optionally returns a list of two: (1) A data frame of the total units 
 #' used by grouping variable(s) and (2) a data frame of start and end times 
 #' by grouping variable(s).  
-#' @note For non repeated measures data use \code{\link[qdap]{gantt}}; for a 
-#' flexible gantt plot that words with code matrix functions (cm) use 
-#' \code{\link[qdap]{gantt_wrap}}.
+#' @note For non repeated measures data use \code{\link[qdap]{gantt}}.  For
+#' more flexible plotting needs use \code{\link[qdap]{gantt_wrap}} over the 
+#' generic plotting method.
 #' @author DigEmAll (\url{stackoverflow.com}) and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso \code{\link[qdap]{gantt_rep}},
 #' \code{\link[qdap]{gantt_wrap}},
@@ -52,13 +52,13 @@
 #'    units = "characters", sums = TRUE))
 #' plot(e)  
 #'      
-#' f <- gantt(mraja1$dialogue, mraja1$person, units = "syllables", 
-#'    box.color = "black", sums = TRUE)
-#' plot(f)  
+#' f <- gantt(mraja1$dialogue, mraja1$person, units = "syllables",
+#'     sums = TRUE)
+#' plot(f, box.color = "red")
+#' plot(f, base = FALSE)
 #' 
-#' dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex), 
-#'     units = "sentences", plot.colors = 'black', col.sep = "_")    
-#' plot(dat)
+#' dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex),
+#'     units = "sentences", col.sep = "_")
 #' }
 gantt <-
 function(text.var, grouping.var, units = "words", sums = FALSE, col.sep = "_"){
@@ -185,8 +185,8 @@ print.sums_gantt <- function(x, ...) {
 #' @param title An optional title.
 #' @rdname gantt
 #' @export
-plot_gantt_base <- function(x, sums = NULL, fill.colors = NULL, box.color = "white", 
-    title = NULL){
+plot_gantt_base <- function(x, sums = NULL, fill.colors = NULL, 
+    box.color = "white", title = NULL){
     if(is(x, "sums_gantt")) {
         sums <- x[["sums"]][, 2]
         x <- x[["gantt.df"]]        
@@ -216,14 +216,11 @@ plot_gantt_base <- function(x, sums = NULL, fill.colors = NULL, box.color = "whi
 #' @param base logical.  If \code{TRUE} prints in base graphics system.  
 #' If \code{FALSE} prints in ggplot graphics system.
 #' @param title An optional title.
-#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
-#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
-#' to add additional plot layers.
-#' @param \ldots Other arguments passed to \code{sums_gantt_wrap} or 
+#' @param \ldots Other arguments passed to \code{gantt_wrap} or 
 #' \code{plot_gantt_base}
 #' @method plot gantt
 #' @S3method plot gantt
-plot.gantt <- function(x, base = FALSE, title = NULL, plot= TRUE, ...) {
+plot.gantt <- function(x, base = FALSE, title = NULL, ...) {
 
     units <- gsub("unit_", "", class(x)[grepl("unit_", class(x))])
     if (is.null(title)) {
@@ -244,11 +241,8 @@ plot.gantt <- function(x, base = FALSE, title = NULL, plot= TRUE, ...) {
 #' @param x The sums_gantt object
 #' @param base logical.  If \code{TRUE} prints in base graphics system.  
 #' If \code{FALSE} prints in ggplot graphics system.
-#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
-#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
-#' to add additional plot layers.
 #' @param title An optional title.
-#' @param \ldots Other arguments passed to \code{sums_gantt_wrap} or 
+#' @param \ldots Other arguments passed to \code{gantt_wrap} or 
 #' \code{plot_gantt_base}
 #' @method plot sums_gantt
 #' @S3method plot sums_gantt

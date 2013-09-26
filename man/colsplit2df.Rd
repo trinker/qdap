@@ -4,7 +4,7 @@
 \title{Wrapper for colSplit that Returns Dataframe(s)}
 \usage{
   colsplit2df(dataframe, splitcol = 1, new.names = NULL,
-    sep = ".", keep.orig = FALSE)
+    sep = ".", keep.orig = FALSE, name.sep = "&")
 
   lcolsplit2df(qdap.list, keep.orig = FALSE)
 }
@@ -19,11 +19,14 @@
   assign to the columns. Default attempts to extract the
   original names before the paste.}
 
-  \item{sep}{The character that used in \code{paste2} to
-  paste the columns.}
+  \item{sep}{The character that was used in \code{paste2}
+  to paste the columns.}
 
   \item{keep.orig}{logical.  If \code{TRUE} the original
   pasted column will be retained as well.}
+
+  \item{name.sep}{The character that was used to paste the
+  column names.}
 
   \item{qdap.list}{A qdap list object that contains
   dataframes with a leading \code{\link[qdap]{paste2}}

@@ -7,9 +7,10 @@
 #' @param splitcol The name of the column that has been pasted together.
 #' @param new.names A character vector of new names to assign to the columns.  
 #' Default attempts to extract the original names before the paste.
-#' @param sep The character that used in \code{paste2} to paste the columns.
+#' @param sep The character that was used in \code{paste2} to paste the columns.
 #' @param keep.orig logical.  If \code{TRUE} the original pasted column will be 
 #' retained as well.
+#' @param name.sep The character that was used to paste the column names.
 #' @return \code{colsplit2df} - returns a dataframe with the \code{paste2} 
 #' column split into new columns.
 #' @seealso \code{\link[qdap]{colSplit}}, 
@@ -35,7 +36,7 @@
 #' }
 colsplit2df <- 
 function(dataframe, splitcol = 1, new.names = NULL, sep=".", 
-         keep.orig=FALSE){
+         keep.orig=FALSE, name.sep = "&"){
     WD <- options()$width
     options(width=10000)
     on.exit(options(width=WD))
@@ -70,10 +71,10 @@ function(dataframe, splitcol = 1, new.names = NULL, sep=".",
             }
         }
     }
-    if (is.null(new.names) & "&" %in% unlist(strsplit(names(dataframe[, 
-        splitcol, drop=FALSE]), split=NULL))) {
+    if (is.null(new.names) & (name.sep %in% unlist(strsplit(names(dataframe[, 
+        splitcol, drop=FALSE]), split=NULL)))) {
         nams <- unlist(strsplit(names(dataframe[, 
-            splitcol, drop=FALSE]), split="&"))
+            splitcol, drop=FALSE]), split=name.sep))
         colnames(w)[z:(z + length(nams) - 1)] <- nams
     }
     if(keep.orig) {
@@ -82,6 +83,7 @@ function(dataframe, splitcol = 1, new.names = NULL, sep=".",
     class(w) <- c("colsplit2df", "data.frame")
     w
 }
+
 #' Wrapper for qdap lists that Returns Dataframes
 #' 
 #' \code{lcolsplit2df} - Wrapper for \code{colsplit2df} designed for qdap lists 

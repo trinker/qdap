@@ -1236,6 +1236,7 @@ plot(dat, base = TRUE)
 dat2 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex)))
 head(dat2, 12)
 ## Plotting Repeated Measures Unit Span Dataframe
+plot(dat2)
 gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
     title = "Repeated Measures Gantt Plot")
 ```

@@ -159,6 +159,8 @@ CHANGES
   added.  The user can plot the output from `gantt` in `base` or `ggplot2` 
   graphics.
 
+* `gantt_rep` picks up a generic `plot` method.
+
 
 CHANGES IN qdap VERSION 0.2.5
 ----------------------------------------------------------------

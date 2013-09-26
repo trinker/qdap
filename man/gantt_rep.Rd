@@ -2,8 +2,8 @@
 \alias{gantt_rep}
 \title{Generate Unit Spans for Repeated Measures}
 \usage{
-  gantt_rep(rm.var, text.var, grouping.var,
-    units = "words", col.sep = "_")
+  gantt_rep(rm.var, text.var, grouping.var = NULL,
+    units = "words", col.sep = "_", name.sep = "_")
 }
 \arguments{
   \item{rm.var}{An optional single vector or list of 1 or 2
@@ -20,8 +20,10 @@
   \code{"word"}, or \code{"sentence"}.}
 
   \item{col.sep}{The character string to use to separate
-  pasted variables in the merged grouping variable
-  header/name.}
+  pasted variables in the pasted columns.}
+
+  \item{name.sep}{The character string to use to separate
+  column names of the pasted columns.}
 }
 \value{
   Returns a data frame of start and end times by repeated
@@ -33,18 +35,26 @@
 }
 \note{
   For non repeated measures data use
-  \code{\link[qdap]{gantt}}; for a flexible gantt plot that
-  words with code matrix functions (cm) use
-  \code{\link[qdap]{gantt_wrap}}.
+  \code{\link[qdap]{gantt}}.  For more flexible plotting
+  needs use \code{\link[qdap]{gantt_wrap}} over the generic
+  plotting method.
 }
 \examples{
 \dontrun{
 dat <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex),
     units = "words", col.sep = "_"))
 head(dat, 20)
+plot(dat)
+
 gantt_wrap(dat,  "fam.aff_sex",  facet.vars = "act",
     title = "Repeated Measures Gantt Plot",
     minor.line.freq = 25, major.line.freq = 100)
+
+## Two facets variables
+dat2 <- with(DATA2, gantt_rep(list(day, class), state, person,
+    units = "words", col.sep = "_"))
+head(dat2, 20)
+plot(dat2)
 }
 }
 \references{

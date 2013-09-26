@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.79 25.34 25.34 25.34 15.79 25.34 19.70 25.34 22.40 16.30 15.79
-## [12] 22.40 15.79 15.79 15.00 15.00 19.70 15.00 22.40 19.70
+##  [1] 22.40 25.34 16.30 16.30 19.70 25.34 25.34 15.00 25.34 15.79 19.70
+## [12] 25.34 19.70 19.70 15.79 22.40 15.79 19.70 25.34 25.34
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.79 25.34 25.34 25.34 15.79 25.34 19.70 25.34 22.40 16.30 15.79
-## [12] 22.40 15.79 15.79 15.00 15.00 19.70 15.00 22.40 19.70
+##  [1] 22.40 25.34 16.30 16.30 19.70 25.34 25.34 15.00 25.34 15.79 19.70
+## [12] 25.34 19.70 19.70 15.79 22.40 15.79 19.70 25.34 25.34
 ```
 
 
@@ -3020,7 +3020,7 @@ ltruncdf(z[1:4])
 
 <h4 id="ganttspan">Generate Unit Spans</h4>
 
-Often a researcher will want to view the patterns of the discourse by grouping variables over time.  THis requires the data to have start and end times based on units (sentence, turn of talk, or word).  The <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a> function provides the user with unit spans (start and end times) with the <a href="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank"><code>gantt_rep</code></a> extending this capability to repeated measures.  The <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a> function has basic plotting capabilities to allow visualization of the unit span data, however, the <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a> function extends the <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a> and <a href="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank"><code>gantt_rep</code></a> functions to plot precise depictions (Gantt plots) of the unit span data.  Note that if the researcher is only interested in the plotting the data as a Gantt plot, the <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> function combines the <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a>/<a href="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank"><code>gantt_rep</code></a> functions with the <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a> function  
+Often a researcher will want to view the patterns of the discourse by grouping variables over time.  This requires the data to have start and end times based on units (sentence, turn of talk, or word).  The <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a> function provides the user with unit spans (start and end times) with the <a href="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank"><code>gantt_rep</code></a> extending this capability to repeated measures.  The <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a> function has a basic plotting method to allow visualization of the unit span data, however, the <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a> function extends the <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a> and <a href="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank"><code>gantt_rep</code></a> functions to plot precise depictions (Gantt plots) of the unit span data.  Note that if the researcher is only interested in the plotting the data as a Gantt plot, the <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> function combines the <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a>/<a href="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank"><code>gantt_rep</code></a> functions with the <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a> function  
 
 <font size="5" color="orange">&diams;</font> **Unit Spans**<font size="5" color="orange">&diams;</font>
 
@@ -3066,33 +3066,33 @@ plot(dat, base = TRUE)
 ```r
 ## Repeated Measures Unit Span Dataframe
 dat2 <- with(rajSPLIT, gantt_rep(act, dialogue, list(fam.aff, sex)))
-```
-
-```
-## Error: unused argument (plot = FALSE)
-```
-
-```r
 head(dat2, 12)
 ```
 
 ```
-##                  X1
-## 1      Researcher 2
-## 2         Teacher 4
-## 3 Multiple Students
-## 4     [Cross Talk 3
-## 5         Teacher 4
-##                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                X2
-## 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                October 7, 1892.
-## 2                                                                                                                                                                                                                                                                                                                                                                                                                               Students it's time to learn. [Student discussion; unintelligible]
-## 3                                                                                                                                                                                                                                                                                                                                                                                                                                                               Yes teacher we're ready to learn.
-## 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             00]
-## 5 Let's read this terrific book together. It's called Moo Baa La La La and what was I going to ... Oh yes The story is by Sandra Boynton. A cow says Moo. A Sheep says Baa. Three singing pigs say LA LA LA! "No, no!" you say, that isn't right. The pigs say oink all day and night. Rhinoceroses snort and snuff. And little dogs go ruff ruff ruff! Some other dogs go bow wow wow! And cats and kittens say Meow! Quack! Says the duck. A horse says neigh. It's quiet now. What do you say?
+##    act fam.aff&sex   n start end
+## 1    1       cap_m 327     0 327
+## 2    1      mont_m   8   327 335
+## 3    1       cap_m   6   335 341
+## 4    1      mont_m   8   341 349
+## 5    1       cap_m  32   349 381
+## 6    1      mont_m   4   381 385
+## 7    1       cap_m  16   385 401
+## 8    1      mont_m   2   401 403
+## 9    1       cap_m  14   403 417
+## 10   1      mont_m   2   417 419
+## 11   1       cap_m  10   419 429
+## 12   1      mont_m  12   429 441
 ```
 
 ```r
 ## Plotting Repeated Measures Unit Span Dataframe
+plot(dat2)
+```
+
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-40.png) 
+
+```r
 gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
     title = "Repeated Measures Gantt Plot")
 ```

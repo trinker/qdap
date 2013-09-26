@@ -12,8 +12,8 @@
 
   \item{codes}{Optional list of codes.}
 
-  \item{file}{The name of the file (csv is recommended).
-  If \code{NULL} no file is written.}
+  \item{file}{The name of the file (csv is recommended file
+  type).  If \code{NULL} no file is written.}
 
   \item{transpose}{logical.  If \code{TRUE} transposes the
   dataframe so that the text is across the top.}
