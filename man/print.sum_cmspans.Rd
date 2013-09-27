@@ -1,0 +1,18 @@
+\name{print.sum_cmspans}
+\alias{print.sum_cmspans}
+\title{Prints a sum_cmspans object}
+\usage{
+  \method{print}{sum_cmspans} (x, digits = NULL, ...)
+}
+\arguments{
+  \item{x}{The sum_cmspans object}
+
+  \item{digits}{Integer; number of decimal places to round
+  in the display of the output.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+  Prints a sum_cmspans object.
+}
+

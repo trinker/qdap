@@ -33,6 +33,7 @@
   class.
 }
 \examples{
+\dontrun{
 ## cm_range2long use:
 foo <- list(
     person_greg = qcv(terms='7:11, 20:24, 30:33, 49:56'),
@@ -72,6 +73,16 @@ x <- list(
     C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
 )
 cm_2long(x)
+
+## cm_df2long use:
+codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
+x1 <- cm_df.temp(DATA, "state", codes)
+#fill it randomly
+x1[, 7:14] <- lapply(7:14,  function(i) sample(0:1, nrow(x1), TRUE))
+out2 <- cm_2long(x1)
+head(out2, 15)
+plot(out2)
+}
 }
 \seealso{
   \code{\link[qdap]{cm_df2long}},

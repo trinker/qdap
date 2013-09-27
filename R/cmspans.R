@@ -1,0 +1,273 @@
+#' Summarize a cmspans object
+#' 
+#' \code{summary.cmspans} - Summarize a cmspans object
+#' 
+#' @param object The cmspans object 
+#' @param grouping.var The grouping variables. Also takes a single grouping 
+#' variable or a list of 1 or more grouping variables.
+#' @param rm.var An optional single vector or list of 1 or 2 of repeated 
+#' measures to aggregate by.
+#' @param percent logical.  If \code{TRUE} output given as percent.  If 
+#' \code{FALSE} the output is proportion.
+#' @param digits Integer; number of decimal places to round when printing.  
+#' @param \ldots Other argument passed to \code{qheat} in plot (ignored in 
+#' summary).
+#' @method summary cmspans
+#' @export
+#' @rdname cmspans
+#' @examples
+#' \dontrun{
+#' ## Example 1
+#' foo <- list(
+#'     person_greg = qcv(terms='7:11, 20:24, 30:33, 49:56'),
+#'     person_researcher = qcv(terms='42:48'),
+#'     person_sally = qcv(terms='25:29, 37:41'),
+#'     person_sam = qcv(terms='1:6, 16:19, 34:36'),
+#'     person_teacher = qcv(terms='12:15'),
+#'     adult_0 = qcv(terms='1:11, 16:41, 49:56'),
+#'     adult_1 = qcv(terms='12:15, 42:48'),
+#'     AA = qcv(terms="1"),
+#'     BB = qcv(terms="1:2, 3:10, 19"),
+#'     CC = qcv(terms="1:9, 100:150")
+#' )
+#' 
+#' foo2  <- list(
+#'     person_greg = qcv(terms='7:11, 20:24, 30:33, 49:56'),
+#'     person_researcher = qcv(terms='42:48'),
+#'     person_sally = qcv(terms='25:29, 37:41'),
+#'     person_sam = qcv(terms='1:6, 16:19, 34:36'),
+#'     person_teacher = qcv(terms='12:15'),
+#'     adult_0 = qcv(terms='1:11, 16:41, 49:56'),
+#'     adult_1 = qcv(terms='12:15, 42:48'),
+#'     AA = qcv(terms="40"),
+#'     BB = qcv(terms="50:90"),
+#'     CC = qcv(terms="60:90, 100:120, 150"),
+#'     DD = qcv(terms="")
+#' )
+#' 
+#' v <- cm_2long(foo, foo2, v.name = "time")
+#' plot(v)
+#' summary(v)
+#' plot(summary(v))
+#' 
+#' ## Example 2
+#' x <- list(
+#'     transcript_time_span = qcv(00:00 - 1:12:00),
+#'     A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),
+#'     B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00,
+#'         9.00, 1.12.00:1.19.01"),
+#'     C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
+#' )
+#' z <-cm_2long(x)
+#' 
+#' summary(z)
+#' plot(summary(z))
+#' 
+#' ## suppress printing measurement units
+#' suppressMessages(print(summary(z)))
+#' 
+#' ## remove print method
+#' z_unclass <- summary(z)
+#' class(z_unclass) <- "data.frame"
+#' z_unclass
+#' }
+summary.cmspans <- function(object, grouping.var = NULL, rm.var = NULL, 
+    percent = TRUE, digits = 2, ...) {
+
+    class(object) <- class(object)[!class(object) %in% "cmspans"]
+
+    ## denote the grouping variables
+    if(is.null(rm.var)) {
+        rm.var <- R <- which.cmrm(object)
+        if (is.null(R) || length(unique(object[, rm.var])) < 2) {
+            R <- rm.var <- "time"
+            object[, "time"] <- rep("all", nrow(object))
+        }
+    } else {
+        if (length(rm.var) > 1) {
+            R <- paste(rm.var, collapse="&")
+        } else {
+            R <- rm.var
+        }
+    }
+
+    ## denote the grouping measures variable
+    if(is.null(grouping.var)) {
+        G <- group <- colnames(object)[1]
+    } else {
+        group <- grouping.var
+        if (length(grouping.var) > 1) {
+            G <- paste(grouping.var, collapse="&")
+        } else {
+            G <- grouping.var
+        }
+    }
+
+    ## get column names for percent/proportion
+    per <- ifelse(percent, "percent", "proportion")
+    pt <- sprintf("%s_total", per)
+    pn <- sprintf("%s_n", per)
+
+    L1 <- split(object, object[, rm.var])
+    output <- lapply(L1, function(a) {
+        L2 <- split(a, a[, group])
+        output2 <- lapply(L2, function(b) {      
+            diffs <- b[, "end"] - b[, "start"] 
+            data.frame(total = sum(diffs), n = length(diffs), ave = mean(diffs), 
+                sd = ifelse(is.na(sd(diffs)), 0, sd(diffs)), min = min(diffs),
+                max = max(diffs))
+        }) 
+        out2 <- do.call(rbind, output2)
+        out2 <- data.frame(code = names(L2), out2, row.names = NULL)
+        tot <- sum(out2[, "total"])
+        out2[, pt] <- (out2[, "total"]/tot) * ifelse(percent, 100, 1)
+        out2[, pn] <- (out2[, "n"]/sum(out2[, "n"])) * ifelse(percent, 100, 1)
+        out2[, c("code", "total", pt, "n", pn, "ave", "sd", "min", "max")]
+    })
+    out1 <- data.frame(do.call(rbind, output), row.names = NULL)
+   
+    if(which.cm(object) == "cmtime") {
+        out1[, "total"] <- sec2hms(out1[, "total"])
+    }
+
+    units <- ifelse(which.cm(object) == "cmrange", "words", "time")
+
+    ## If a repeated measures add this column
+    if(length(unique(object[, rm.var])) > 1) {
+        out1 <- data.frame(time = rep(names(L1), sapply(output, nrow)),
+            out1, row.names = NULL, check.names = FALSE) 
+    }
+    class(out1) <- c("sum_cmspans", paste0("units_", units), 
+        paste0("digits_", digits), which.cm(object), 
+        paste0("percent_", per), class(out1))
+    out1
+}
+
+#' Prints a sum_cmspans object
+#' 
+#' Prints a sum_cmspans object.
+#' 
+#' @param x The sum_cmspans object
+#' @param digits Integer; number of decimal places to round in the display of 
+#' the output. 
+#' @param \ldots ignored
+#' @method print sum_cmspans
+#' @S3method print sum_cmspans
+print.sum_cmspans <- function(x, digits = NULL, ...) {
+    class(x) <- c(class(x)[!class(x) %in% "sum_cmspans"], sprintf("digits_%s", digits)) 
+
+    wdt <- options()[["width"]]
+    options(width = 10000)
+    on.exit(options(width = wdt))
+    
+    nums <- function(x) is.numeric(x) && !is(x, "times")
+    if (is.null(digits)) {
+        digits <- as.numeric(gsub("digits_", "", class(x)[grepl("digits_", class(x))]))
+    }
+    locs <- sapply(x, nums)
+
+    locs[names(locs) %in% c("min", "max", "total", "n")] <- FALSE
+    x[, locs] <- lapply(x[, locs], round, digits = digits)
+    x[, locs] <- lapply(x[, locs], function(a) {
+        numbformat(a, digits =digits)
+    })
+
+    x[, "mean(sd)"] <- sprintf("%s(%s)", x[, "ave"], x[, "sd"])
+    x[, "sd"] <- NULL
+
+    if(which.class(x, "percent_") == "percent") {
+        cn <- colnames(x)
+        tot <- grepl("_total", cn) 
+        n <- grepl("_n", cn) 
+        x[, n] <- paste0(x[, n], "%")
+        x[, tot] <- paste0(x[, tot], "%")
+    }
+
+    if(which.cm(x) == "cmtime") {   
+        locs2 <- sapply(colnames(x), function(z) z %in% c("total"))
+        x[, locs2] <- lapply(x[, locs2, drop = FALSE], tred)
+    }
+    print(x)
+    message(paste(rep("====", 7), collapse = ""))
+    message(sprintf("Unit of measure: %s", ifelse(which.cm(x)== "cmtime", "time", "words")))
+    if (which.cm(x)== "cmtime") {
+          message("Columns measured in seconds unless in the form hh:mm:ss")
+    }
+    invisible(x)
+}
+
+tred <- function(tmv) {
+    tdat <- do.call(rbind, strsplit(as.character(tmv), "\\:"))
+    remv <- !apply(tdat, 2, function(z) all(z == "00"))
+    if (sum(remv) == 1) {
+        paste0(":", tdat[, 3])
+    } else {
+        paste2(tdat[, remv, drop = FALSE], sep = ":")
+    }
+}
+
+numbformat <- function(b, digits) {
+        numformat <- function(val) { 
+            sub("^(-?)0.", "\\1.", sprintf(paste0("%.", digits, "f"), val)) 
+        }
+    b2 <- sprintf(paste0("%.", digits, "f"), b)
+    b3 <- numformat(as.numeric(b2))
+    ifelse(as.numeric(b3) == 0, "0", as.character(b3))
+}
+
+
+#' Plot Summary Stats for a Summary of a cmspans Object
+#' 
+#' \code{plot.sum_cmspans} - Plots a heat map of summary statistics for 
+#' sum_cmspans objects (the object produced by calling \code{summary} on a 
+#' cmspans object).
+#' 
+#' @param x The sum_cmspans object (the object produced by calling 
+#' \code{summary} on a cmspans object)
+#' @param sep The character that was used in \code{paste2} to paste the columns.
+#' @param name.sep The character that was used to paste the column names.
+#' @param values logical.  If \code{TRUE} the cell values will be included on 
+#' the heatmap.
+#' @param high The color to be used for higher values.
+#' @param transform logical.  If \code{TRUE} the dataframe is rotated 90 degrees.
+#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
+#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
+#' to add additional plot layers.
+#' @rdname cmspans
+#' @export
+#' @method plot sum_cmspans
+#' @S3method plot sum_cmspans
+plot.sum_cmspans <- function(x, digits = NULL, sep = ".", 
+    name.sep = "&", values = TRUE, high = "red", transform = TRUE, 
+    plot =  TRUE, ...) {
+
+    class(x) <- c(class(x)[!class(x) %in% "sum_cmspans"]) 
+    nvars <- sapply(x, is.numeric)
+    if (sum(!nvars) > 1) {
+        chars <- paste2(x[, !nvars], sep = sep)
+        G <- paste(colnames(x)[!nvars], collapse = name.sep)
+    } else {
+        chars <- x[, !nvars]
+        G <- colnames(x)[!nvars]
+    }
+    x2 <- data.frame(delete_me=chars, x[, nvars, drop = FALSE])
+    colnames(x2)[1] <- G
+
+    if(is.null(digits)) {
+        digits <-  as.numeric(which.class(x, "digits_"))
+    }    
+    if (transform) {
+        x2 <- data.frame(x2[, 1, drop = FALSE], x2[, ncol(x2):2, drop = FALSE])
+        out <- qheat(x2, digits = digits, high = high, values = values, 
+            plot = FALSE, ...) +
+            coord_flip()
+    } else {
+        out <- qheat(x2, digits = digits, high = high, values = values, 
+            plot = FALSE, ...)
+    }
+    if (plot) {
+        print(out)
+    }
+    invisible(out)
+}
+

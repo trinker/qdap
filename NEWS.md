@@ -139,6 +139,11 @@ This may break backward compatibility.  Thus this is a **major** release
 * Functions in the `cm_code.xxx` and `cm_xxx2long` pick up a generic plot method
   that utilizes `gantt_wrap` to plot a Gantt plot of the span data.
 
+* Functions in the `cm_code.xxx` and `cm_xxx2long` pick up a generic summary 
+  method.  This summary method has its own plot method that utilizes `qheat` to 
+  plot a heatmap of the summary statistics.  The generic print method 
+  (`print.sum_cmspans`) is useful for out put intended for publication.
+
 <b>CHANGES</b>
 
 * The dictionaries and word lists for <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> have been moved to their own package, 
