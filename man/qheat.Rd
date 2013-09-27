@@ -95,6 +95,8 @@ qheat(ws.ob, order.by = "-sptot")
 qheat(ws.ob, values = TRUE)
 qheat(ws.ob, values = TRUE, text.color = "red")
 qheat(ws.ob, "yellow", "red", grid = FALSE)
+qheat(data.frame(names=rownames(mtcars), mtcars), facet.vars = "cyl")
+qheat(data.frame(names=rownames(mtcars), mtcars), facet.vars = c("gear", "cyl"))
 
 dat1 <- data.frame(G=LETTERS[1:5], matrix(rnorm(20), ncol = 4))
 dat2 <- data.frame(matrix(LETTERS[1:25], ncol=5))

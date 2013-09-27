@@ -1,14 +1,9 @@
 \name{summary.cmspans}
-\alias{plot.sum_cmspans}
 \alias{summary.cmspans}
 \title{Summarize a cmspans object}
 \usage{
   \method{summary}{cmspans} (object, grouping.var = NULL,
     rm.var = NULL, percent = TRUE, digits = 2, ...)
-
-  \method{plot}{sum_cmspans} (x, digits = NULL, sep = ".",
-    name.sep = "&", values = TRUE, high = "red",
-    transform = TRUE, plot = TRUE, facet.vars = NULL, ...)
 }
 \arguments{
   \item{object}{The cmspans object}
@@ -28,38 +23,9 @@
 
   \item{\ldots}{Other argument passed to \code{qheat} in
   plot (ignored in summary).}
-
-  \item{x}{The sum_cmspans object (the object produced by
-  calling \code{summary} on a cmspans object)}
-
-  \item{sep}{The character that was used in \code{paste2}
-  to paste the columns.}
-
-  \item{name.sep}{The character that was used to paste the
-  column names.}
-
-  \item{values}{logical.  If \code{TRUE} the cell values
-  will be included on the heatmap.}
-
-  \item{high}{The color to be used for higher values.}
-
-  \item{transform}{logical.  If \code{TRUE} the dataframe
-  is rotated 90 degrees.}
-
-  \item{plot}{logical.  If \code{TRUE} the plot will
-  automatically plot. The user may wish to set to
-  \code{FALSE} for use in knitr, sweave, etc. to add
-  additional plot layers.}
-
-  \item{facet.vars}{A character vector of names to facet
-  by.}
 }
 \description{
-  \code{summary.cmspans} - Summarize a cmspans object
-
-  \code{plot.sum_cmspans} - Plots a heat map of summary
-  statistics for sum_cmspans objects (the object produced
-  by calling \code{summary} on a cmspans object).
+  Summarize a cmspans object
 }
 \examples{
 \dontrun{
@@ -118,5 +84,8 @@ z_unclass <- summary(z)
 class(z_unclass) <- "data.frame"
 z_unclass
 }
+}
+\seealso{
+  \code{\link[qdap]{plot.sum_cmspans}}
 }
 

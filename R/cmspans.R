@@ -1,6 +1,6 @@
 #' Summarize a cmspans object
 #' 
-#' \code{summary.cmspans} - Summarize a cmspans object
+#' Summarize a cmspans object
 #' 
 #' @param object The cmspans object 
 #' @param grouping.var The grouping variables. Also takes a single grouping 
@@ -13,8 +13,8 @@
 #' @param \ldots Other argument passed to \code{qheat} in plot (ignored in 
 #' summary).
 #' @method summary cmspans
+#' @seealso \code{\link[qdap]{plot.sum_cmspans}}
 #' @export
-#' @rdname cmspans
 #' @examples
 #' \dontrun{
 #' ## Example 1
@@ -219,7 +219,7 @@ numbformat <- function(b, digits) {
 
 #' Plot Summary Stats for a Summary of a cmspans Object
 #' 
-#' \code{plot.sum_cmspans} - Plots a heat map of summary statistics for 
+#' Plots a heat map of summary statistics for 
 #' sum_cmspans objects (the object produced by calling \code{summary} on a 
 #' cmspans object).
 #' 
@@ -235,8 +235,8 @@ numbformat <- function(b, digits) {
 #' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
 #' to add additional plot layers.
 #' @param facet.vars A character vector of names to facet by. 
-#' @rdname cmspans
 #' @export
+#' @seealso \code{\link[qdap]{summary.cmspans}}
 #' @importFrom ggplot2 coord_flip
 #' @method plot sum_cmspans
 #' @S3method plot sum_cmspans
