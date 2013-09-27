@@ -8,7 +8,7 @@
 
   \method{plot}{sum_cmspans} (x, digits = NULL, sep = ".",
     name.sep = "&", values = TRUE, high = "red",
-    transform = TRUE, plot = TRUE, ...)
+    transform = TRUE, plot = TRUE, facet.vars = NULL, ...)
 }
 \arguments{
   \item{object}{The cmspans object}
@@ -50,6 +50,9 @@
   automatically plot. The user may wish to set to
   \code{FALSE} for use in knitr, sweave, etc. to add
   additional plot layers.}
+
+  \item{facet.vars}{A character vector of names to facet
+  by.}
 }
 \description{
   \code{summary.cmspans} - Summarize a cmspans object
@@ -92,6 +95,7 @@ v <- cm_2long(foo, foo2, v.name = "time")
 plot(v)
 summary(v)
 plot(summary(v))
+plot(summary(v), facet.vars = "time")
 
 ## Example 2
 x <- list(

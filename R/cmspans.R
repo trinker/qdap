@@ -49,6 +49,7 @@
 #' plot(v)
 #' summary(v)
 #' plot(summary(v))
+#' plot(summary(v), facet.vars = "time")
 #' 
 #' ## Example 2
 #' x <- list(
@@ -233,37 +234,57 @@ numbformat <- function(b, digits) {
 #' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
 #' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
 #' to add additional plot layers.
+#' @param facet.vars A character vector of names to facet by. 
 #' @rdname cmspans
 #' @export
+#' @importFrom ggplot2 coord_flip
 #' @method plot sum_cmspans
 #' @S3method plot sum_cmspans
 plot.sum_cmspans <- function(x, digits = NULL, sep = ".", 
     name.sep = "&", values = TRUE, high = "red", transform = TRUE, 
-    plot =  TRUE, ...) {
+    plot =  TRUE, facet.vars = NULL, ...) {
 
     class(x) <- c(class(x)[!class(x) %in% "sum_cmspans"]) 
     nvars <- sapply(x, is.numeric)
-    if (sum(!nvars) > 1) {
+    if (is.null(facet.vars) && sum(!nvars) > 1) {
         chars <- paste2(x[, !nvars], sep = sep)
         G <- paste(colnames(x)[!nvars], collapse = name.sep)
+        facet.vars <- NULL
     } else {
-        chars <- x[, !nvars]
-        G <- colnames(x)[!nvars]
-    }
-    x2 <- data.frame(delete_me=chars, x[, nvars, drop = FALSE])
-    colnames(x2)[1] <- G
+        chars <- data.frame(x)[, !nvars, drop = FALSE]
+        if (!is.null(facet.vars) && sum(!nvars) > 1) {
+            if (is.numeric(facet.vars)) {
+                facet.vars <- colnames(x)[facet.vars]
+            } 
+            G <- colnames(x)[!nvars]
+            G <- G[!G %in% facet.vars]
 
+            if (length(G) > 1) {
+                chars <- data.frame(x[, facet.vars], x = paste2(x[, G], sep = sep))
+                G <- paste(G,  collapse = name.sep)
+            } else {
+                chars <- chars[, c(facet.vars, G)]
+            }
+
+        } else {
+            G <- colnames(x)[!nvars]
+            facet.vars <- NULL
+        }
+    }
+    x2 <- data.frame(chars, x[, nvars, drop = FALSE])
+    nms <- c(facet.vars, G)
+    colnames(x2)[1:length(nms)] <- nms
     if(is.null(digits)) {
         digits <-  as.numeric(which.class(x, "digits_"))
     }    
     if (transform) {
-        x2 <- data.frame(x2[, 1, drop = FALSE], x2[, ncol(x2):2, drop = FALSE])
+       # x2 <- data.frame(x2[, 1, drop = FALSE], x2[, ncol(x2):2, drop = FALSE])
         out <- qheat(x2, digits = digits, high = high, values = values, 
-            plot = FALSE, ...) +
+            plot = FALSE, facet.vars = facet.vars, ...) +
             coord_flip()
     } else {
         out <- qheat(x2, digits = digits, high = high, values = values, 
-            plot = FALSE, ...)
+            plot = FALSE, facet.vars = facet.vars, ...)
     }
     if (plot) {
         print(out)

@@ -124,8 +124,8 @@ This may break backward compatibility.  Thus this is a **major** release
   repo to GitHub public account upon creation.
 
 * `qheat`, `polarity.plot` and `formality.plot` pick up the argument `plot` 
-  which suppresses the plotting.  This is useful if the user is operating in 
-  knitr, sewave, etc. and wishes to alter/add onto the plot.
+  which optionally suppresses the plotting.  This is useful if the user is 
+  operating in knitr, sewave, etc. and wishes to alter/add onto the plot.
 
 * `lookup` now takes `missing = NULL`.  This results in the original values in
   `terms` corresponding to the missing elements being retained.
@@ -143,6 +143,9 @@ This may break backward compatibility.  Thus this is a **major** release
   method.  This summary method has its own plot method that utilizes `qheat` to 
   plot a heatmap of the summary statistics.  The generic print method 
   (`print.sum_cmspans`) is useful for out put intended for publication.
+
+* `qheat` picks up a `facet.var` argument that allows a character vector of 
+  length 1 or 2 to facet by.
 
 <b>CHANGES</b>
 

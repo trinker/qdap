@@ -30,6 +30,9 @@
 #' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
 #' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
 #' to add additional plot layers.
+#' @param facet.vars A character vector of of 1 or 2 column names to facet by.
+#' @param facet.transform logical If \code{TRUE} the direction of the faceting 
+#' is reversed.
 #' @details \code{qheat} is useful for finding patterns and anomalies in large
 #' qdap generated dataframes and matrices.
 #' @note \code{\link[qdap]{qheat}} is a fast way of working with data formats 
@@ -38,9 +41,10 @@
 #' @keywords heatmap
 #' @export
 #' @import RColorBrewer 
-#' @importFrom gridExtra grid.arrange
+#' @importFrom gridExtra grid.arrange 
 #' @importFrom reshape2 melt 
 #' @importFrom scales alpha 
+#' @importFrom ggplot2 ggplot facet_grid geom_tile geom_text aes scale_fill_gradient theme_grey scale_x_discrete scale_y_discrete theme element_text coord_equal
 #' @examples
 #' \dontrun{
 #' dat <- sentSplit(DATA, "state")
@@ -60,22 +64,30 @@
 #' qheat(dat1, values=TRUE)
 #' qheat(dat1, values=TRUE, mat2=dat2)
 #' }
-qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
+qheat <-
+function(mat, low = "white", high ="darkblue", values = FALSE,
     digits = 1, text.size = 3, text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white", by.column = TRUE, 
-    auto.size = FALSE, mat2 = NULL, plot = TRUE) {
+    auto.size = FALSE, mat2 = NULL, plot = TRUE, facet.vars = NULL, 
+    facet.transform = FALSE) {
     group <- value <- values2 <- NULL
     if (!is.null(mat2) & !values) {
         values <- TRUE 
+    }
+
+    if (!is.null(facet.vars)) {
+        f.vars <- data.frame(mat)[, facet.vars, drop = FALSE]
+        keeps <- colnames(mat)[!colnames(mat) %in% colnames(f.vars)]
+        mat <- mat[, keeps]
     }
     numformat <- function(val, digits) { 
         sub("^(-?)0.", "\\1.", sprintf(paste0("%.", digits, "f"), val)) 
     }
     classRdf <- c("diversity")
-    if (class(mat) %in% classRdf) {
+    if (any(class(mat) %in% classRdf)) {
         class(mat) <- "data.frame"
     }     
-    CLS <- class(mat)
+    CLS <- class(mat)[1]
     if (CLS == "word_stats") {
         mat <- mat[["gts"]]
         class(mat) <- "data.frame"
@@ -88,8 +100,8 @@ qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
         mat <- data.frame(mat[["prop"]])
         class(mat2) <- "data.frame"
     }      
-    dat2 <- as.matrix(mat[, -1])
-    NMS <- colnames(dat2)
+    dat2 <- as.matrix(mat[, -1, drop = FALSE])
+
     if (!is.null(by.column)){
         by.column <- by.column + 1
         dat2 <- apply(dat2, by.column, scale)
@@ -109,14 +121,26 @@ qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
     }
     ws4 <- data.frame(group = mat[, 1], dat2, check.names = FALSE)
     colnames(ws4)[1] <- "group"
-    ws4 <- melt(ws4, id.var = "group")
-    colnames(ws4)[1:2] <- c("group", "var")
-    ws4$var <- factor(ws4$var, levels=rev(levels(ws4$var)))
+
+    if (!is.null(facet.vars)) {
+        rmnames <- colnames(f.vars)
+        ws4 <- data.frame(f.vars, ws4)
+        LRM <- seq_along(rmnames)
+        colnames(ws4)[LRM] <- paste0("facet_", LRM)
+        ws4 <- melt(ws4, id.var = c(colnames(ws4)[LRM], "group"))
+    } else {
+        ws4 <- melt(ws4, id.var = "group")
+        colnames(ws4)[1:2] <- c("group", "var")
+    }
+
+    ws4[, "var"] <- factor(ws4$var, levels=rev(levels(ws4$var)))
+
     if (values) {
         if (is.null(mat2)) {
             mat2 <- mat
         }      
-        ws5 <- data.frame(group = mat2[, 1], mat2[, -1])
+        ws5 <- data.frame(group = mat2[, 1], mat2[, -1, drop = FALSE])
+
         ws5 <- melt(ws5, id.var = "group")
         if(is.numeric(ws5$value)) {
             ws4$values2 <- numformat(ws5$value, digits = digits)
@@ -174,6 +198,22 @@ qheat <- function(mat, low = "white", high ="darkblue", values = FALSE,
     if (auto.size) {
         GP <- GP + coord_equal()
     }
+    if(!is.null(facet.vars)) {
+        if(length(LRM) == 1) {
+            if (!facet.transform) {
+                GP <- GP + facet_grid(facet_1~.)
+            } else {        
+                GP <- GP + facet_grid(.~facet_1)
+            }
+        } else {
+            if (!facet.transform) {
+                GP <- GP + facet_grid(facet_1~facet_2)
+            } else {        
+                GP <- GP + facet_grid(facet_2~facet_1)
+            }
+        }
+    }
+    
     if (plot) {
         print(GP)
     }

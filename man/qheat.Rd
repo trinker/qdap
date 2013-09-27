@@ -7,7 +7,8 @@
     text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white",
     by.column = TRUE, auto.size = FALSE, mat2 = NULL,
-    plot = TRUE)
+    plot = TRUE, facet.vars = NULL,
+    facet.transform = FALSE)
 }
 \arguments{
   \item{mat}{A matrix or dataframe produced by many qdap
@@ -61,6 +62,12 @@
   automatically plot. The user may wish to set to
   \code{FALSE} for use in knitr, sweave, etc. to add
   additional plot layers.}
+
+  \item{facet.vars}{A character vector of of 1 or 2 column
+  names to facet by.}
+
+  \item{facet.transform}{logical If \code{TRUE} the
+  direction of the faceting is reversed.}
 }
 \description{
   A quick heatmap function for visualizing typical qdap
