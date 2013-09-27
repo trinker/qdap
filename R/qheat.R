@@ -103,7 +103,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
         class(mat2) <- "data.frame"
     }      
     dat2 <- as.matrix(mat[, -1, drop = FALSE])
-
+    NMS <- colnames(dat2)
     if (!is.null(by.column)){
         by.column <- by.column + 1
         dat2 <- apply(dat2, by.column, scale)

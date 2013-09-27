@@ -225,6 +225,7 @@ numbformat <- function(b, digits) {
 #' 
 #' @param x The sum_cmspans object (the object produced by calling 
 #' \code{summary} on a cmspans object)
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param sep The character that was used in \code{paste2} to paste the columns.
 #' @param name.sep The character that was used to paste the column names.
 #' @param values logical.  If \code{TRUE} the cell values will be included on 

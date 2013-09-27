@@ -10,6 +10,9 @@
   \item{x}{The sum_cmspans object (the object produced by
   calling \code{summary} on a cmspans object)}
 
+  \item{digits}{The number of digits displayed if
+  \code{values} is \code{TRUE}.}
+
   \item{sep}{The character that was used in \code{paste2}
   to paste the columns.}
 
