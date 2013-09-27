@@ -144,7 +144,7 @@ This may break backward compatibility.  Thus this is a **major** release
   plot a heatmap of the summary statistics.  The generic print method 
   (`print.sum_cmspans`) is useful for out put intended for publication.
 
-* `qheat` picks up a `facet.var` argument that allows a character vector of 
+* `qheat` picks up a `facet.vars` argument that allows a character vector of 
   length 1 or 2 to facet by.
 
 <b>CHANGES</b>
