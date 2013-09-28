@@ -147,6 +147,9 @@ This may break backward compatibility.  Thus this is a **major** release
 * `qheat` picks up a `facet.vars` argument that allows a character vector of 
   length 1 or 2 to facet by.
 
+* `theme_qdap` an extension of `theme_bw` with option to remove horizontal or
+  vertical gridlines.
+
 <b>CHANGES</b>
 
 * The dictionaries and word lists for <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> have been moved to their own package, 

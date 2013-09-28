@@ -176,6 +176,7 @@ list(
         "plot.word_stats",
         "qheat",
         "rank_freq_mplot",
+        "theme_qdap", 
         "tot_plot",
         "trans.cloud",
         "trans.venn",

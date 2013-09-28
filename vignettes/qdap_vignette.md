@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.79 19.70 22.40 19.70 15.00 15.00 22.40 22.40 15.00 22.40 19.70
-## [12] 15.00 19.70 16.30 16.30 19.70 15.79 15.79 25.34 15.79
+##  [1] 25.34 25.34 25.34 15.00 15.00 15.00 25.34 25.34 25.34 19.70 25.34
+## [12] 15.00 22.40 22.40 22.40 16.30 16.30 16.30 15.79 15.00
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.79 19.70 22.40 19.70 15.00 15.00 22.40 22.40 15.00 22.40 19.70
-## [12] 15.00 19.70 16.30 16.30 19.70 15.79 15.79 25.34 15.79
+##  [1] 25.34 25.34 25.34 15.00 15.00 15.00 25.34 25.34 25.34 19.70 25.34
+## [12] 15.00 22.40 22.40 22.40 16.30 16.30 16.30 15.79 15.00
 ```
 
 
@@ -4525,7 +4525,7 @@ Before getting started with subsections 1-3 the reader will want to know the nam
 <h4 id="wordcsv">Coding Words - The .csv Approach <a href="http://www.youtube.com/watch?v=tH242SIESIs" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
 </h4>
 
-The csv approach utilizes <a href="http://trinker.github.io/qdap_dev/cm_df.temp.html" target="_blank"><code>cm_df.temp</code></a> and <a href="http://trinker.github.io/qdap_dev/cm_df2long.html" target="_blank"><code>cm_df2long</code></a> functions.  To utilize the csv template approach simply supply the dataframe, specify the text variable and provide a list of anticipated codes.  
+The csv approach utilizes <a href="http://trinker.github.io/qdap_dev/cm_df.temp.html" target="_blank"><code>cm_df.temp</code></a> and <a href="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank"><code>cm_2long</code></a> functions.  To utilize the csv template approach simply supply the dataframe, specify the text variable and provide a list of anticipated codes.  
 
 <font size="5" color="orange">&diams;</font> **Coding Words (csv approach)**: The Template <font size="5" color="orange">&diams;</font>
 
@@ -4553,7 +4553,7 @@ nrow =  56           ncol =  14             X
 10   greg   m     0   K2     it's       10  0  0   0   0    0  0   0   0
 </code></pre>
 
-After coding the data (see the <a href="http://www.youtube.com/watch?v=tH242SIESIs" target="_blank">YouTube video</a> the data can be read back in with <a href="http://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html" target="_blank">read.csv</a>.
+After coding the data (see the <a href="http://www.youtube.com/watch?v=tH242SIESIs" target="_blank">YouTube video</a>) the data can be read back in with <a href="http://stat.ethz.ch/R-manual/R-devel/library/utils/html/read.table.html" target="_blank">read.csv</a>.
 
 
 <font size="5" color="orange">&diams;</font> **Coding Words (csv approach)**: Read In and Reshape <font size="5" color="orange">&diams;</font>
@@ -4586,7 +4586,7 @@ cm_2long(dat)
 <h4 id="wordtrans">Coding Words - The Transcript/List Approach <a href="http://www.youtube.com/watch?v=cxcD-j0iI2U" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
 </h4>
 
-The Transcript/List approach utilizes <a href="http://trinker.github.io/qdap_dev/cm_df.transcript.html" target="_blank"><code>cm_df.transcript</code></a>,  <a href="http://trinker.github.io/qdap_dev/cm_range.temp.html" target="_blank"><code>cm_range.temp</code></a> and <a href="http://trinker.github.io/qdap_dev/cm_range2long.html" target="_blank"><code>cm_range2long</code></a> functions.  To use the transcript template simply supply the dataframe, specify the text variable and provide a list of anticipated codes.  
+The Transcript/List approach utilizes <a href="http://trinker.github.io/qdap_dev/cm_df.transcript.html" target="_blank"><code>cm_df.transcript</code></a>,  <a href="http://trinker.github.io/qdap_dev/cm_range.temp.html" target="_blank"><code>cm_range.temp</code></a> and <a href="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank"><code>cm_2long</code></a> functions.  To use the transcript template simply supply the dataframe, specify the text variable and provide a list of anticipated codes.  
 
 <font size="5" color="orange">&diams;</font> **Coding Words (Transcript/List approach)**: Transcript Template <font size="5" color="orange">&diams;</font>
 
@@ -4658,7 +4658,7 @@ with(DATA, cm_range.temp(codes = codes, text.var = state,
 )
 </code></pre>
 
-After coding the data (see the <a href="http://www.youtube.com/watch?v=cxcD-j0iI2U" target="_blank">YouTube video</a> the data can be read back in with <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html" target="_blank">source</a>.  Be sure to assign list to an object (e.g., `dat <- list()`).
+After coding the data (see the <a href="http://www.youtube.com/watch?v=cxcD-j0iI2U" target="_blank">YouTube video</a>) the data can be read back in with <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html" target="_blank">source</a>.  Be sure to assign list to an object (e.g., `dat <- list()`).
 
 <font size="5" color="orange">&diams;</font> **Coding Words (Transcript/List approach)**: Read in the data<font size="5" color="orange">&diams;</font>
 
@@ -4700,7 +4700,7 @@ datL
 <h4 id="timespan">Coding Time Spans <a href="http://youtu.be/XC-RXeY63bM" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
 </h4>
 
-The Time Span approach utilizes the <a href="http://trinker.github.io/qdap_dev/cm_time.temp.html" target="_blank"><code>cm_time.temp</code></a> and <a href="http://trinker.github.io/qdap_dev/cm_time2long.html" target="_blank"><code>cm_time2long</code></a> functions.  To generate the timespan template approach simply supply the list of anticipated codes and a start/end time.  
+The Time Span approach utilizes the <a href="http://trinker.github.io/qdap_dev/cm_time.temp.html" target="_blank"><code>cm_time.temp</code></a> and <a href="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank"><code>cm_2long</code></a> functions.  To generate the timespan template approach simply supply the list of anticipated codes and a start/end time.  
 
 
 <font size="5" color="orange">&diams;</font> **Coding Times Spans**: Time Span Template <font size="5" color="orange">&diams;</font>
@@ -4761,7 +4761,7 @@ with(DATA, cm_time.temp(codes, list(person, adult), file = "codelist.txt"))
 )
 </code></pre>
 
-After coding the data (see the <a href="http://www.youtube.com/watch?v=XC-RXeY63bM&feature=youtu.be" target="_blank">YouTube video</a> the data can be read back in with <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html" target="_blank">source</a>.  Be sure to assign list to an object (e.g., `dat <- list()`).  Also be aware that the end times must be greater than 0.
+After coding the data (see the <a href="http://www.youtube.com/watch?v=XC-RXeY63bM&feature=youtu.be" target="_blank">YouTube video</a>) the data can be read back in with <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/source.html" target="_blank">source</a>.  Be sure to assign list to an object (e.g., `dat <- list()`).  
 
 <font size="5" color="orange">&diams;</font> **Coding Times Spans**: Read in the data<font size="5" color="orange">&diams;</font>
 

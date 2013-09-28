@@ -231,20 +231,25 @@ numbformat <- function(b, digits) {
 #' @param values logical.  If \code{TRUE} the cell values will be included on 
 #' the heatmap.
 #' @param high The color to be used for higher values.
-#' @param transform logical.  If \code{TRUE} the dataframe is rotated 90 degrees.
+#' @param transpose logical.  If \code{TRUE} the dataframe is rotated 90 degrees.
 #' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
 #' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
 #' to add additional plot layers.
-#' @param facet.vars A character vector of names to facet by. 
+#' @param facet.vars A character vector of names to facet by.
+#' @param rev.codes logical If \code{TRUE} the plotting order of the code 
+#' groups is reversed.
+#' @param rev.stats logical If \code{TRUE} the plotting order of the code 
+#' descriptive statistics is reversed.
 #' @param \dots Other arguments passed to qheat.
 #' @export
 #' @seealso \code{\link[qdap]{summary.cmspans}}
 #' @importFrom ggplot2 coord_flip
 #' @method plot sum_cmspans
 #' @S3method plot sum_cmspans
-plot.sum_cmspans <- function(x, digits = NULL, sep = ".", 
-    name.sep = "&", values = TRUE, high = "red", transform = TRUE, 
-    plot =  TRUE, facet.vars = NULL, ...) {
+plot.sum_cmspans <- function(x, digits = 3, sep = ".", 
+    name.sep = "&", values = TRUE, high = "red", transpose = TRUE, 
+    plot =  TRUE, facet.vars = NULL, rev.codes = !transpose, 
+    rev.stats = !transpose, ...) {
 
     class(x) <- c(class(x)[!class(x) %in% "sum_cmspans"]) 
     nvars <- sapply(x, is.numeric)
@@ -278,19 +283,29 @@ plot.sum_cmspans <- function(x, digits = NULL, sep = ".",
     colnames(x2)[1:length(nms)] <- nms
     if(is.null(digits)) {
         digits <-  as.numeric(which.class(x, "digits_"))
-    }    
-    if (transform) {
+    }   
+
+    ## reverse the codes and stat vars
+    if (!rev.stats) {
+        num.cols <- sapply(x2, is.numeric)
+        x2 <- x2[, c(which(!num.cols), rev(which(num.cols)))]
+    }
+    
+    if (!rev.codes) {
+        x2[, G] <- factor(x2[, G], levels =rev(levels(x2[, G])))
+    }
+
+    if (transpose) {
        # x2 <- data.frame(x2[, 1, drop = FALSE], x2[, ncol(x2):2, drop = FALSE])
         out <- qheat(x2, digits = digits, high = high, values = values, 
-            plot = FALSE, facet.vars = facet.vars, ...) +
+            plot = FALSE, facet.vars = facet.vars,  ...) +
             coord_flip()
     } else {
         out <- qheat(x2, digits = digits, high = high, values = values, 
-            plot = FALSE, facet.vars = facet.vars, ...)
+            plot = FALSE, facet.vars = facet.vars,  ...)
     }
     if (plot) {
         print(out)
     }
     invisible(out)
 }
-

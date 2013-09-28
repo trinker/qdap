@@ -73,6 +73,17 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
     auto.size = FALSE, mat2 = NULL, plot = TRUE, facet.vars = NULL, 
     facet.flip = FALSE) {
     group <- value <- values2 <- NULL
+    
+    ## convert all numeric matrices
+    if (all(sapply(mat, is.numeric))) {
+        if (is.matrix(mat)) {
+            mat <- data.frame(dat, check.names = FALSE) 
+        }
+        nms <- rownames(mat)        
+        mat <- data.frame(group=factor(nms), mat, row.names = NULL)
+        mat[, "group"] <- factor(mat[, "group"], levels = nms)
+    }
+    
     if (!is.null(mat2) & !values) {
         values <- TRUE 
     }

@@ -207,3 +207,4 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
+    'theme_qdap.R'

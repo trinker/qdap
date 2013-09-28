@@ -2,9 +2,10 @@
 \alias{plot.sum_cmspans}
 \title{Plot Summary Stats for a Summary of a cmspans Object}
 \usage{
-  \method{plot}{sum_cmspans} (x, digits = NULL, sep = ".",
+  \method{plot}{sum_cmspans} (x, digits = 3, sep = ".",
     name.sep = "&", values = TRUE, high = "red",
-    transform = TRUE, plot = TRUE, facet.vars = NULL, ...)
+    transpose = TRUE, plot = TRUE, facet.vars = NULL,
+    rev.codes = !transpose, rev.stats = !transpose, ...)
 }
 \arguments{
   \item{x}{The sum_cmspans object (the object produced by
@@ -24,7 +25,7 @@
 
   \item{high}{The color to be used for higher values.}
 
-  \item{transform}{logical.  If \code{TRUE} the dataframe
+  \item{transpose}{logical.  If \code{TRUE} the dataframe
   is rotated 90 degrees.}
 
   \item{plot}{logical.  If \code{TRUE} the plot will
@@ -34,6 +35,12 @@
 
   \item{facet.vars}{A character vector of names to facet
   by.}
+
+  \item{rev.codes}{logical If \code{TRUE} the plotting
+  order of the code groups is reversed.}
+
+  \item{rev.stats}{logical If \code{TRUE} the plotting
+  order of the code descriptive statistics is reversed.}
 
   \item{\dots}{Other arguments passed to qheat.}
 }
