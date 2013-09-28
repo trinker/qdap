@@ -31,7 +31,7 @@
 #' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
 #' to add additional plot layers.
 #' @param facet.vars A character vector of of 1 or 2 column names to facet by.
-#' @param facet.transform logical If \code{TRUE} the direction of the faceting 
+#' @param facet.flip logical If \code{TRUE} the direction of the faceting 
 #' is reversed.
 #' @details \code{qheat} is useful for finding patterns and anomalies in large
 #' qdap generated dataframes and matrices.
@@ -202,13 +202,13 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
     }
     if(!is.null(facet.vars)) {
         if(length(LRM) == 1) {
-            if (!facet.transform) {
+            if (!facet.flip) {
                 GP <- GP + facet_grid(facet_1~.)
             } else {        
                 GP <- GP + facet_grid(.~facet_1)
             }
         } else {
-            if (!facet.transform) {
+            if (!facet.flip) {
                 GP <- GP + facet_grid(facet_1~facet_2)
             } else {        
                 GP <- GP + facet_grid(facet_2~facet_1)

@@ -34,6 +34,8 @@
 
   \item{facet.vars}{A character vector of names to facet
   by.}
+
+  \item{\dots}{Other arguments passed to qheat.}
 }
 \description{
   Plots a heat map of summary statistics for sum_cmspans

@@ -236,6 +236,7 @@ numbformat <- function(b, digits) {
 #' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
 #' to add additional plot layers.
 #' @param facet.vars A character vector of names to facet by. 
+#' @param \dots Other arguments passed to qheat.
 #' @export
 #' @seealso \code{\link[qdap]{summary.cmspans}}
 #' @importFrom ggplot2 coord_flip

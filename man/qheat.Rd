@@ -66,8 +66,8 @@
   \item{facet.vars}{A character vector of of 1 or 2 column
   names to facet by.}
 
-  \item{facet.transform}{logical If \code{TRUE} the
-  direction of the faceting is reversed.}
+  \item{facet.flip}{logical If \code{TRUE} the direction of
+  the faceting is reversed.}
 }
 \description{
   A quick heatmap function for visualizing typical qdap
