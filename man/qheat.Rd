@@ -7,8 +7,7 @@
     text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white",
     by.column = TRUE, auto.size = FALSE, mat2 = NULL,
-    plot = TRUE, facet.vars = NULL,
-    facet.transform = FALSE)
+    plot = TRUE, facet.vars = NULL, facet.flip = FALSE)
 }
 \arguments{
   \item{mat}{A matrix or dataframe produced by many qdap
