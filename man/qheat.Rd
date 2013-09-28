@@ -50,7 +50,7 @@
   to the column.  If \code{FALSE} applies scaling by row
   (use \code{NULL} to turn off scaling).}
 
-  \item{auto.size}{logical.  IF \code{TRUE} the visual will
+  \item{auto.size}{logical.  If \code{TRUE} the visual will
   be resized to create square cells.}
 
   \item{mat2}{A second matrix equal in dimensions to
