@@ -147,9 +147,6 @@ MINOR FEATURES
 * `qheat` picks up a `facet.vars` argument that allows a character vector of 
   length 1 or 2 to facet by.
 
-* `theme_qdap` an extension of `theme_bw` with option to remove horizontal or
-  vertical gridlines.
-
 CHANGES
 
 * The dictionaries and word lists for qdap have been moved to their own package, 
