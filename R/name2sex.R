@@ -48,10 +48,10 @@
 #' names(sex) <- rep("", length(sex))
 #' names(sex)[sex == "B"] <- sapply(toupper(orig_nms[sex == "B"]), function(x) {
 #'         y <- NAMES[NAMES[, 1] %in% x, ]
-#'         round(Reduce("/", y[ order(y[, "gender"]), "per.freq"]), 3)
+#'         round(log(Reduce("/", y[ order(y[, "gender"]), "per.freq"])), 2)
 #'     })
 #' 
-#' ## The likelihood of being a female name
+#' ## The log likelihood of being a female name
 #' sex
 #' orig_nms 
 #' data.frame(name = orig_nms, sex = sex, `ratio_F:M` = names(sex), 
