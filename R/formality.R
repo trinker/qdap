@@ -257,6 +257,7 @@ formality <- function(text.var, grouping.var = NULL,
 #' @method plot formality
 #' @import RColorBrewer
 #' @importFrom gridExtra grid.arrange
+#' @importFrom ggplot2 ggplot geom_bar coord_flip aes ylab xlab theme ggtitle scale_y_continuous scale_fill_brewer facet_grid scale_x_discrete scale_fill_discrete geom_point geom_text labs scale_size_continuous 
 #' @S3method plot formality
 plot.formality <- function(x, point.pch = 20, point.cex = .5,            
     point.colors = c("gray65", "red"), bar.colors = NULL, 

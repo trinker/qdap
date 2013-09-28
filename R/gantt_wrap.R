@@ -61,7 +61,7 @@
 #' @import RColorBrewer 
 #' @importFrom gridExtra grid.arrange
 #' @importFrom scales alpha trans_new pretty_breaks
-#' @importFrom ggplot2 ggplot aes geom_segment geom_vline scale_x_continuous element_rect ggtitle theme element_blank facet_wrap facet_grid guides guide_legend 
+#' @importFrom ggplot2 ggplot aes geom_segment geom_vline scale_x_continuous element_rect ggtitle theme element_blank facet_wrap facet_grid guides guide_legend ylab xlab
 #' @author Andrie de Vries and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso 
 #' \code{\link[qdap]{gantt}},

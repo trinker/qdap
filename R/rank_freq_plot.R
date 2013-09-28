@@ -46,6 +46,7 @@
 #' @import RColorBrewer
 #' @importFrom gridExtra grid.arrange
 #' @importFrom scales alpha
+#' @importFrom ggplot2 ggplot aes geom_point facet_wrap position_jitter theme_bw scale_color_manual theme element_blank guides guide_legend xlab ylab 
 #' @examples
 #' \dontrun{
 #' #rank_freq_mplot EXAMPLES:

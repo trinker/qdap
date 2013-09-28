@@ -33,6 +33,7 @@
 #' @import RColorBrewer
 #' @importFrom gridExtra grid.arrange
 #' @importFrom scales alpha
+#' @importFrom ggplot2 ggplot aes scale_y_continuous geom_bar theme element_blank facet_wrap facet_grid xlab ylab
 #' @export
 #' @examples
 #' \dontrun{
