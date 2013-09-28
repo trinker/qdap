@@ -190,6 +190,7 @@ Collate:
     'tester.R'
     'text2color.R'
     'textLISTER.R'
+    'theme_qdap.R'
     'tot_plot.R'
     'trans.cloud.R'
     'trans.venn.R'
@@ -207,4 +208,3 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
-    'theme_qdap.R'
