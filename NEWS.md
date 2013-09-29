@@ -76,6 +76,14 @@ This may break backward compatibility.  Thus this is a **major** release
   `cm_time2long`) now have a generic wrapper, `cm_2long`, to generate the long
   formats.
 
+* `hash_look` (and `%ha%`) a counterpart to `hash` added to allow quick access 
+  to a hash table.  Intended for use within functions or multiple uses of the 
+  same hash table, whereas `lookup` is intended for a single external (non 
+  function) use which is more convenient though could be slower.
+
+* `search_repo`. a Boolean term search function, added to allow for indexed 
+  searches of Boolean terms.
+
 <b>MINOR FEATURES</b>
 
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 
@@ -103,11 +111,6 @@ This may break backward compatibility.  Thus this is a **major** release
   more flexible path to the created pre-formed `read.transcript` scripts based 
   on something like `file.path(getwd(), )`.  This means portability of code on 
   different machines.
-
-* `hash_look` (and `%ha%`) a counterpart to `hash` added to allow quick access 
-  to a hash table.  Intended for use within functions or multiple uses of the 
-  same hash table, whereas `lookup` is intended for a single external (non 
-  function) use which is more convenient though could be slower.
 
 * `polarity_frame` a function to make a hash environment lookup for use with the 
   `polarity` function.

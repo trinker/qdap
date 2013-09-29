@@ -1,14 +1,20 @@
 \name{Search}
+\alias{boolean_search}
 \alias{Search}
 \title{Search Columns of a Data Frame}
 \usage{
   Search(dataframe, term, column.name = NULL,
     max.distance = 0.02, ...)
+
+  boolean_search(text.var, terms, ignore.case = TRUE,
+    values = TRUE, exclude = NULL,
+    apostrophe.remove = FALSE, char.keep = NULL,
+    digit.remove = FALSE)
 }
 \arguments{
   \item{dataframe}{A dataframe object to search.}
 
-  \item{term}{A character vector term to search for.}
+  \item{term}{A character string to search for.}
 
   \item{column.name}{Optional column of the data frame to
   search (character name or integer index).}
@@ -20,16 +26,66 @@
   the corresponding fraction).}
 
   \item{\ldots}{Other arguments passed to \code{agrep}.}
+
+  \item{text.var}{The text variable.}
+
+  \item{terms}{A character string(s) to search for.}
+
+  \item{ignore.case}{logical.  If \code{TRUE} case is
+  ignored.}
+
+  \item{values}{logical.  Should the values be returned or
+  the index of the values.}
+
+  \item{exclude}{Terms to exclude from the search.  If one
+  of these terms is found in the sentence it can not be
+  returned.  The terms are aranged in a single string with
+  AND (use \code{AND} or \code{&&} to connect terms
+  together) and OR (use \code{OR} or \code{||} to to allow
+  for searches of either set of terms.  Spaces amy be used
+  to control what is searched for.}
+
+  \item{apostrophe.remove}{logical.  If \code{TRUE} removes
+  apostrophes from the text before examining.}
+
+  \item{char.keep}{A character vector of symbol character
+  (i.e., punctuation) that strip should keep.  The default
+  is to strip everything except apostrophes.
+  \code{\link[qdap]{termco}} attempts to auto detect
+  characters to keep based on the elements in
+  \code{match.list}.}
+
+  \item{digit.remove}{logical.  If \code{TRUE} strips
+  digits from the text before counting.
+  \code{\link[qdap]{termco}} attempts to auto detect if
+  digits should be retained based on the elements in
+  \code{match.list}.}
 }
 \value{
-  Returns the rows of the data frame that match the search
-  term.
+  \code{Search} - Returns the rows of the data frame that
+  match the search term.
+
+  \code{boolean_search} - Returns the values (or indices)
+  of a vector of strings that match given terms.
 }
 \description{
-  Find terms located in columns of a data frame.
+  \code{Search} - Find terms located in columns of a data
+  frame.
+
+  \code{boolean_search} - Conducts a Boolean search for
+  terms/strings within a character vector.
+}
+\details{
+  The terms string is first split by the OR separators into
+  a list. Next the list of vectors is split on the AND
+  separator to produce a list of vectors of seach terms.
+  Each sentence is matched agains the terms.  For a
+  sentence to be counted it must fit all of the terms in an
+  AND Boolean or one of the conditions in an OR Boolean.
 }
 \examples{
 \dontrun{
+## Dataframe search:
 (SampDF <- data.frame("islands"=names(islands)[1:32],mtcars, row.names=NULL))
 
 Search(SampDF, "Cuba", "islands")
@@ -40,7 +96,19 @@ Search(SampDF, "Axel Heiberg")
 Search(SampDF, 19) #too much tolerance in max.distance
 Search(SampDF, 19, max.distance = 0)
 Search(SampDF, 19, "qsec", max.distance = 0)
+
+##Boolean search:
+boolean_search(DATA$state, " I ORtruth&&telling", values=FALSE)
+boolean_search(DATA$state, " I &&.")
+boolean_search(DATA$state, " I OR.")
+boolean_search(DATA$state, " I &&.", values=FALSE)
+
+## Exclusion:
+boolean_search(DATA$state, " I ||.")
+boolean_search(DATA$state, " I ||.", exclude = c("way", "truth"))
 }
 }
-\keyword{search}
+\seealso{
+  \code{\link[qdap]{termco}}
+}
 
