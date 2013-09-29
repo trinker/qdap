@@ -186,7 +186,7 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
     if (!is.null(extra.terms) && 
         is.list(extra.terms) & length(extra.terms) == 1) {
         extra.terms <- unlist(extra.terms)
-    }    
+    }  
     if (network.plot | wordcloud) {
         if(is.null(nw.label.colors)) {
             nw.label.colors <- cloud.colors

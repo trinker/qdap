@@ -39,7 +39,8 @@
 #' }
 adjacency_matrix <-
 function(matrix.obj) {
-    if(class(matrix.obj) %in% c("termco")){
+
+    if(any(class(matrix.obj) %in% c("termco"))){
         info <- matrix.obj #for later use
         if (matrix.obj[["zero.replace"]] != 0){
             matrix.obj <- replacer(matrix.obj[["raw"]], 
@@ -50,7 +51,7 @@ function(matrix.obj) {
         matrix.obj <- termco2mat(matrix.obj)
     } else {    
         if (is(matrix.obj, "matrix")) {
-            if(is(matrix.obj, "true.matrix")){
+            if(!is(matrix.obj, "true.matrix")){
                  warning(paste("Not a termco.d, termco.c or wfm object;",
                      "results may not be correct."))
             }
