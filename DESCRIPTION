@@ -32,6 +32,7 @@ Imports:
     tools,
     venneuler,
     wordcloud,
+    xlsx,
     XML
 Suggests:
     koRpus,
@@ -208,3 +209,4 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
+    'trans_context.R'

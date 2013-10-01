@@ -14,6 +14,7 @@
 #' @return \code{Search} - Returns the rows of the data frame that match the 
 #' search term.
 #' @rdname Search
+#' @seealso \code{\link[qdap]{trans_context}}
 #' @export
 #' @examples
 #' \dontrun{
@@ -30,14 +31,18 @@
 #' Search(SampDF, 19, "qsec", max.distance = 0)
 #' 
 #' ##Boolean search:
-#' boolean_search(DATA$state, " I ORtruth&&telling", values=FALSE)
+#' boolean_search(DATA$state, " I ORliar&&stinks")
+#' boolean_search(DATA$state, " I &&.", values=TRUE)
+#' boolean_search(DATA$state, " I OR.", values=TRUE)
 #' boolean_search(DATA$state, " I &&.")
-#' boolean_search(DATA$state, " I OR.")
-#' boolean_search(DATA$state, " I &&.", values=FALSE)
 #' 
 #' ## Exclusion:
-#' boolean_search(DATA$state, " I ||.")
-#' boolean_search(DATA$state, " I ||.", exclude = c("way", "truth"))
+#' boolean_search(DATA$state, " I ||.", values=TRUE)
+#' boolean_search(DATA$state, " I ||.", exclude = c("way", "truth"), values=TRUE)
+#' 
+#' ## Passing to `trans_context`
+#' inds <- boolean_search(DATA.SPLIT$state, " I&&.|| I&&!", ignore.case = FALSE)
+#' with(DATA.SPLIT, trans_context(state, person, inds=inds))
 #' }
 Search <-
 function(dataframe, term, column.name = NULL, max.distance = 0.02, ...) {
@@ -91,7 +96,7 @@ function(dataframe, term, column.name = NULL, max.distance = 0.02, ...) {
 #' @seealso \code{\link[qdap]{termco}}
 #' @rdname Search
 #' @export
-boolean_search <- function(text.var, terms, ignore.case = TRUE, values = TRUE, 
+boolean_search <- function(text.var, terms, ignore.case = TRUE, values = FALSE, 
     exclude=NULL, apostrophe.remove = FALSE, char.keep = NULL, 
     digit.remove = FALSE) {
 
@@ -143,13 +148,32 @@ boolean_search <- function(text.var, terms, ignore.case = TRUE, values = TRUE,
         message("No elements meet the search criteria")
         return(invisible(rnumb))
     }
-    message("The following elements meet the criteria:")
+
     if (values) {
-        text.var[rnumb]
+        out <- text.var[rnumb]
     } else { 
-        rnumb
+        out <- rnumb
     }
+    
+    class(out) <- c("boolean_qdap", class(out))
+    out
 } 
+
+#' Prints a boolean_qdap object
+#' 
+#' Prints a boolean_qdap object
+#' 
+#' @param x The boolean_qdap object
+#' @param \ldots ignored
+#' @S3method print boolean_qdap
+#' @method print boolean_qdap
+print.boolean_qdap <-
+function(x, ...) {
+    class(x) <-  class(x)[!class(x) %in% "boolean_qdap"]
+    message("The following elements meet the criteria:")
+    print(x)
+}
+
 
 ## Helper function to split terms
 ## splitting("3AND4AND5OR4OR6AND7")

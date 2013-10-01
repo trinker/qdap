@@ -7,7 +7,7 @@
     max.distance = 0.02, ...)
 
   boolean_search(text.var, terms, ignore.case = TRUE,
-    values = TRUE, exclude = NULL,
+    values = FALSE, exclude = NULL,
     apostrophe.remove = FALSE, char.keep = NULL,
     digit.remove = FALSE)
 }
@@ -98,17 +98,23 @@ Search(SampDF, 19, max.distance = 0)
 Search(SampDF, 19, "qsec", max.distance = 0)
 
 ##Boolean search:
-boolean_search(DATA$state, " I ORtruth&&telling", values=FALSE)
+boolean_search(DATA$state, " I ORliar&&stinks")
+boolean_search(DATA$state, " I &&.", values=TRUE)
+boolean_search(DATA$state, " I OR.", values=TRUE)
 boolean_search(DATA$state, " I &&.")
-boolean_search(DATA$state, " I OR.")
-boolean_search(DATA$state, " I &&.", values=FALSE)
 
 ## Exclusion:
-boolean_search(DATA$state, " I ||.")
-boolean_search(DATA$state, " I ||.", exclude = c("way", "truth"))
+boolean_search(DATA$state, " I ||.", values=TRUE)
+boolean_search(DATA$state, " I ||.", exclude = c("way", "truth"), values=TRUE)
+
+## Passing to `trans_context`
+inds <- boolean_search(DATA.SPLIT$state, " I&&.|| I&&!", ignore.case = FALSE)
+with(DATA.SPLIT, trans_context(state, person, inds=inds))
 }
 }
 \seealso{
+  \code{\link[qdap]{trans_context}}
+
   \code{\link[qdap]{termco}}
 }
 

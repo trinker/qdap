@@ -60,6 +60,7 @@
 #' qheat(ws.ob, "yellow", "red", grid = FALSE)
 #' qheat(mtcars, facet.vars = "cyl")
 #' qheat(mtcars, facet.vars = c("gear", "cyl"))
+#' qheat(t(mtcars), by.column=FALSE)
 #' 
 #' dat1 <- data.frame(G=LETTERS[1:5], matrix(rnorm(20), ncol = 4))
 #' dat2 <- data.frame(matrix(LETTERS[1:25], ncol=5))
@@ -77,7 +78,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
     ## convert all numeric matrices
     if (all(sapply(mat, is.numeric))) {
         if (is.matrix(mat)) {
-            mat <- data.frame(dat, check.names = FALSE) 
+            mat <- data.frame(mat, check.names = FALSE) 
         }
         nms <- rownames(mat)        
         mat <- data.frame(group=factor(nms), mat, row.names = NULL)

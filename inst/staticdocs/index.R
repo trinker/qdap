@@ -62,7 +62,8 @@ list(
         "prop",
         "qcombine",
         "sentSplit",
-        "speakerSplit"
+        "speakerSplit",
+        "trans_context"
       )
     ),
     sd_section("Word Extraction/Comparison", 

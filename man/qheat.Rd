@@ -96,6 +96,7 @@ qheat(ws.ob, values = TRUE, text.color = "red")
 qheat(ws.ob, "yellow", "red", grid = FALSE)
 qheat(mtcars, facet.vars = "cyl")
 qheat(mtcars, facet.vars = c("gear", "cyl"))
+qheat(t(mtcars), by.column=FALSE)
 
 dat1 <- data.frame(G=LETTERS[1:5], matrix(rnorm(20), ncol = 4))
 dat2 <- data.frame(matrix(LETTERS[1:25], ncol=5))

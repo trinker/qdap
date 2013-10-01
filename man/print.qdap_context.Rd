@@ -1,0 +1,36 @@
+\name{print.qdap_context}
+\alias{print.qdap_context}
+\title{Prints a qdap_context object}
+\usage{
+  \method{print}{qdap_context} (x, file = NULL,
+    pretty = TRUE, width = 70, sep.block = TRUE,
+    double_space = TRUE, ...)
+}
+\arguments{
+  \item{x}{The qdap_context object}
+
+  \item{file}{The name of the file (can print csv, xlsx,
+  txt, doc and other text based files).  If \code{NULL}
+  file prints to the console.}
+
+  \item{pretty}{logical.  If \code{TRUE} generates a
+  prettier text version of the output (can not be used with
+  csv/xlsx file types).  If \code{FALSE} a semi-structured
+  dataframe is generated.}
+
+  \item{width}{A positive integer giving the target column
+  for wrapping lines in the output.}
+
+  \item{sep.block}{logical.  If \code{TRUE} the blocked
+  events are separated with text lines.}
+
+  \item{double_space}{logical.  If \code{TRUE} and
+  \code{pretty = TRUE} double spacing between speech chunks
+  (speakers) is used.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+  Prints a qdap_context object
+}
+

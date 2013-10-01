@@ -81,8 +81,13 @@ This may break backward compatibility.  Thus this is a **major** release
   same hash table, whereas `lookup` is intended for a single external (non 
   function) use which is more convenient though could be slower.
 
-* `search_repo`. a Boolean term search function, added to allow for indexed 
+* `boolean_search`, a Boolean term search function, added to allow for indexed 
   searches of Boolean terms.
+
+* `trans_context` is a printing function desired to grab the context (n rows 
+  before and after) an event (an index from a vector of indices).  The function 
+  prints the indices around the episode from a transcript to the console or a 
+  .csv, .xlsx, .txt, or .doc file. 
 
 <b>MINOR FEATURES</b>
 

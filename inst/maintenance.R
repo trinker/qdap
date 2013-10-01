@@ -23,7 +23,7 @@ path2 <- paste0(path, "/index.html")
 rdme <- "C:/Users/trinker/GitHub/qdap/inst/extra_statdoc/readme.R"
 extras <- qcv(right.just, coleman_liau, flesch_kincaid, fry, 
     linsear_write, SMOG, syn, mgsub, adjmat, wc, wfdf, mcsv_w, dtm, "%ha%", 
-    "hash_look", "%l%", "polarity_frame")
+    "hash_look", "%l%", "polarity_frame", "boolean_search")
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character.table, char.table))
 
@@ -50,7 +50,8 @@ path <- "C:/Users/trinker/Desktop/qdap"
 path2 <- paste0(path, "/index.html")
 rdme <- "C:/Users/trinker/GitHub/qdap/inst/extra_statdoc/readme.R"
 extras <- qcv(right.just, coleman_liau, flesch_kincaid, fry, 
-    linsear_write, SMOG, syn, mgsub, adjmat, wc, wfdf, mcsv_w, dtm)
+    linsear_write, SMOG, syn, mgsub, adjmat, wc, wfdf, mcsv_w, dtm, "%ha%", 
+    "hash_look", "%l%", "polarity_frame", "boolean_search")
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character.table, char.table))
 
