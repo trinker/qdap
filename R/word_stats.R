@@ -324,7 +324,7 @@ function(x, digits = NULL, ...) {
     }
     WD <- options()[["width"]]
     options(width=3000)
-    print(left.just(dfnumfor(x$gts, digits = digits), 1))
+    print(left_just(dfnumfor(x$gts, digits = digits), 1))
     options(width=WD)
 }
 
@@ -358,15 +358,16 @@ plot.word_stats <- function(x, label = FALSE, lab.digits = NULL, ...) {
 DF_word_stats <-
 function(text.var, digit.remove = FALSE, apos_rm = FALSE, 
     digits = 3, parallel = FALSE) {
+    syllable.count <- character.count <- word.count <- NULL
     polysyllable.count <- NULL
     DF <- na.omit(data.frame(text.var = text.var, 
         stringsAsFactors = FALSE))
     DF$n.sent <- 1:nrow(DF)
-    DF$word.count <- word.count(DF$text.var, missing = 0, 
+    DF[, "word.count"] <- word_count(DF$text.var, missing = 0, 
         digit.remove = digit.remove)
-    DF$character.count <- character.count(DF$text.var, 
+    DF[, "character.count"] <- character_count(DF$text.var, 
         apostrophe.remove = apos_rm, digit.remove = digit.remove)
-    DF <- data.frame(DF, combo_syllable.sum(DF$text.var, parallel = parallel))
+    DF <- data.frame(DF, combo_syllable_sum(DF$text.var, parallel = parallel))
     DF <- DF[, c("text.var", "n.sent", "word.count", "character.count",
         "syllable.count",  "polysyllable.count") ]
     DF <- transform(DF, char2word.ratio = 
@@ -379,4 +380,3 @@ function(text.var, digit.remove = FALSE, apos_rm = FALSE,
     DF <- DF[order(DF$n.sent),]  
     return(DF)
 }
-

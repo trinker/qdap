@@ -1,5 +1,3 @@
-#' Generate Unit Spans 
-#' 
 #' Generates start and end times of supplied text selections (i.e., text 
 #' selections are determined by any number of grouping variables).
 #' 
@@ -111,7 +109,7 @@ function(text.var, grouping.var, units = "words", sums = FALSE, col.sep = "_"){
     switch(units,
         words = ner <- function(x)   length(unblanker(words(strip(x)))),
         characters = ner <- function(x) nchar(gsub(" ", "", x)),
-        syllables = ner <- function(x) syllable.sum(x), 
+        syllables = ner <- function(x) syllable_sum(x), 
         sentences = {ner <- function(x) {
             p <- sum(gregexpr("[.?!*_]", x)[[1]] > 0)
             if (p==0)1 else p
@@ -305,5 +303,4 @@ Caps <- function(x, all = FALSE) {
     } 
     paste(toupper(substring(x, 1,1)), substring(x, 2), sep="", collapse=" ") 
 }
-
 

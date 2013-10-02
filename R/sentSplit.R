@@ -35,7 +35,7 @@
 #' @author Dason Kurkiewicz and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso 
 #' \code{\link[qdap]{bracketX}}, 
-#' \code{\link[qdap]{incomplete.replace}},
+#' \code{\link[qdap]{incomplete_replace}},
 #' \code{\link[qdap]{stem2df}} ,
 #' \code{\link[qdap]{TOT}} 
 #' @keywords sentence, split, turn-of-talk
@@ -67,7 +67,7 @@ function(dataframe, text.var, endmarks = c("?", ".", "!", "|"),
         text.var <- colnames(dataframe)[text.var]
     }
     if (incomplete.sub) {
-        dataframe [, text.var] <- incomplete.replace(dataframe [, text.var])
+        dataframe [, text.var] <- incomplete_replace(dataframe [, text.var])
     }
     if (rm.bracket) {
         dataframe [, text.var] <- bracketX(dataframe [, text.var])

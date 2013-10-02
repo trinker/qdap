@@ -1,7 +1,8 @@
 \name{gantt}
 \alias{gantt}
 \alias{plot_gantt_base}
-\title{Generate Unit Spans}
+\title{Generates start and end times of supplied text selections (i.e., text
+selections are determined by any number of grouping variables).}
 \usage{
   gantt(text.var, grouping.var, units = "words",
     sums = FALSE, col.sep = "_")

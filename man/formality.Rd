@@ -7,7 +7,7 @@
 }
 \arguments{
   \item{text.var}{The text variable (or an object from
-  \code{\link[qdap]{pos}}, \code{\link[qdap]{pos.by}} or
+  \code{\link[qdap]{pos}}, \code{\link[qdap]{pos_by}} or
   \code{\link[qdap]{formality}}.  Passing the later three
   object will greatly reduce run time.}
 
@@ -22,7 +22,7 @@
   \item{digits}{The number of digits displayed.}
 
   \item{\ldots}{Other arguments passed to
-  \code{\link[qdap]{pos.by}}.}
+  \code{\link[qdap]{pos_by}}.}
 }
 \value{
   A list containing at the following components:
@@ -93,7 +93,7 @@ plot(x8, bar.colors="RdBu",  point.cex=2, point.pch = "|")
 names(x8)
 colsplit2df(x8$formality)
 
-#pass an object from pos or pos.by
+#pass an object from pos or pos_by
 ltruncdf(with(raj, formality(x8 , list(act, person))), 6, 4)
 }
 }

@@ -5,8 +5,8 @@
 #' 
 #' @rdname adjacency_matrix
 #' @param matrix.obj A matrix object, preferably, of the class "termco"  
-#'  generated from \code{\link[qdap]{termco}}, \code{\link[qdap]{termco.d}} or 
-#'  \code{\link[qdap]{termco.c}}.
+#'  generated from \code{\link[qdap]{termco}}, \code{\link[qdap]{termco_d}} or 
+#'  \code{\link[qdap]{termco_c}}.
 #' @return Returns list:
 #' \item{boolean}{A Boolean matrix}
 #' \item{adjacency}{An adjacency matrix.  Diagonals are the total (sum) number of 
@@ -52,7 +52,7 @@ function(matrix.obj) {
     } else {    
         if (is(matrix.obj, "matrix")) {
             if(!is(matrix.obj, "true.matrix")){
-                 warning(paste("Not a termco.d, termco.c or wfm object;",
+                 warning(paste("Not a termco_d, termco_c or wfm object;",
                      "results may not be correct."))
             }
         } else {
@@ -87,9 +87,9 @@ adjmat <- adjacency_matrix
 #' @S3method print adjacency_matrix
 print.adjacency_matrix <-
   function(x, ...) {
-    message("Adjacency Matrix:\n")
+    cat("Adjacency Matrix:\n\n")
     print(x$shared, na.print="", quote=FALSE)
-    message("\n")
-    message("Summed occurrences:\n")
+    cat("\n\n")
+    cat("Summed occurrences:\n\n")
     print(x$sum)
 }

@@ -110,6 +110,10 @@ boolean_search(DATA$state, " I ||.", exclude = c("way", "truth"), values=TRUE)
 ## Passing to `trans_context`
 inds <- boolean_search(DATA.SPLIT$state, " I&&.|| I&&!", ignore.case = FALSE)
 with(DATA.SPLIT, trans_context(state, person, inds=inds))
+
+(inds2 <- boolean_search(raj$dialogue, spaste(paste(negation.words,
+    collapse = " || "))))
+trans_context(raj$dialogue, raj$person, inds2)
 }
 }
 \seealso{

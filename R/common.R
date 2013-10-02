@@ -8,7 +8,6 @@
 #' \code{"more"}, \code{"less"}).
 #' @param \dots In lieu of \code{word.list} the user may input n number of 
 #' character vectors.
-#' @rdname common
 #' @return Returns a dataframe of all words that match the criteria set by 
 #' \code{overlap} and \code{equal.or}.
 #' @export

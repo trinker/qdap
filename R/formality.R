@@ -4,7 +4,7 @@
 #' the breakdown of the model.
 #' 
 #' @param text.var The text variable (or an object from \code{\link[qdap]{pos}},
-#' \code{\link[qdap]{pos.by}} or \code{\link[qdap]{formality}}.  Passing the 
+#' \code{\link[qdap]{pos_by}} or \code{\link[qdap]{formality}}.  Passing the 
 #' later three object will greatly reduce run time.
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
@@ -12,7 +12,7 @@
 #' @param order.by.formality logical.  If \code{TRUE} orders the results by 
 #' formality score.
 #' @param digits The number of digits displayed.
-#' @param \ldots Other arguments passed to \code{\link[qdap]{pos.by}}.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{pos_by}}.
 #' @section Warning: Heylighen & Dewaele(2002) state, "At present, a sample would 
 #' probably need to contain a few hundred words for the measure to be minimally 
 #' reliable. For single sentences, the F-value should only be computed for 
@@ -73,7 +73,7 @@
 #' names(x8)
 #' colsplit2df(x8$formality)
 #' 
-#' #pass an object from pos or pos.by
+#' #pass an object from pos or pos_by
 #' ltruncdf(with(raj, formality(x8 , list(act, person))), 6, 4)
 #' }
 formality <- function(text.var, grouping.var = NULL,                    
@@ -113,14 +113,14 @@ formality <- function(text.var, grouping.var = NULL,
         }                                                                            
     }                                                                          
     if (!gv) {                                                                       
-        pos.list <- pos.by(text.var = text.var,                                      
+        pos.list <- pos_by(text.var = text.var,                                      
             grouping.var = grouping.var, digits = digits, ...)                            
     } else {                                                                         
-        pos.list <- suppressWarnings(pos.by(text.var = text.var,                     
+        pos.list <- suppressWarnings(pos_by(text.var = text.var,                     
             grouping.var = NULL, digits = digits, ...))                                   
-    }                                                                                
+    }                                                                              
     text.var <- pos.list$text                                                        
-    WOR <- word.count(text.var)                                                      
+    WOR <- word_count(text.var)                                                      
     X <- pos.list[["pos.by.freq"]]                                                   
     nameX <- rownames(X)                                                             
     X <- data.frame(X)                                                               
@@ -262,7 +262,8 @@ formality <- function(text.var, grouping.var = NULL,
 plot.formality <- function(x, point.pch = 20, point.cex = .5,            
     point.colors = c("gray65", "red"), bar.colors = NULL, 
     short.names = FALSE, min.wrdcnt = NULL, order.by.formality = TRUE, 
-    plot, ...) {
+    plot = TRUE, ...) {
+    word.count <- NULL
     grouping <- form.class <- NULL
     dat <- x$pos.reshaped   
     FOR <- x$formality

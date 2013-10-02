@@ -100,12 +100,12 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }    
-    DF$word.count <- word.count(DF$text.var, missing = 0)
+    DF$word.count <- word_count(DF$text.var, missing = 0)
     i <- as.data.frame(table(DF$group))
     DF$group <- DF$group[ , drop=TRUE]
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
-    DF$character.count <- character.count(DF$text.var)
+    DF$character.count <- character_count(DF$text.var)
     DF2 <- aggregate(word.count ~ group, DF, sum)
     DF2$sentence.count <- as.data.frame(table(DF$group))$Freq
     DF2$character.count <- aggregate(character.count ~ 
@@ -157,12 +157,12 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
-    DF$word.count <- word.count(DF$text.var, missing = 0, digit.remove = FALSE)
+    DF$word.count <- word_count(DF$text.var, missing = 0, digit.remove = FALSE)
     i <- as.data.frame(table(DF$group))
     DF$group <- DF$group[ , drop=TRUE]
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
-    DF$character.count <- character.count(DF$text.var, 
+    DF$character.count <- character_count(DF$text.var, 
         apostrophe.remove = FALSE, digit.remove = FALSE)
     DF2 <- aggregate(word.count ~ group, DF, sum)
     DF2$sentence.count <- as.data.frame(table(DF$group))$Freq
@@ -219,7 +219,7 @@ function(text.var, grouping.var = NULL, output = "valid",
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
-    DF$word.count <- word.count(DF$text.var, missing = 0)
+    DF$word.count <- word_count(DF$text.var, missing = 0)
     i <- as.data.frame(table(DF$group))
     if (output == "valid") {
         DF <- subset(DF, group%in%as.character(i[i$Freq > 29, ][,'Var1']))
@@ -230,7 +230,7 @@ function(text.var, grouping.var = NULL, output = "valid",
     DF$group <- DF$group[ , drop=TRUE]
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
-    DF$polysyllable.count <- polysyllable.sum(DF$text.var)
+    DF$polysyllable.count <- polysyllable_sum(DF$text.var)
     DF2 <- aggregate(word.count ~ group, DF, sum)
     DF2$sentence.count <- as.data.frame(table(DF$group))$Freq
     DF2$polysyllable.count <- aggregate(polysyllable.count ~ 
@@ -284,8 +284,8 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
-    DF$word.count <- word.count(DF$text.var, missing = 0)
-    DF$syllable.count <- syllable.sum(DF$text.var)
+    DF$word.count <- word_count(DF$text.var, missing = 0)
+    DF$syllable.count <- syllable_sum(DF$text.var)
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
     DF2 <- aggregate(word.count ~ group, DF, sum)
@@ -347,7 +347,7 @@ function(text.var, grouping.var = NULL, labels = "automatic",
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
-    DF$word.count <- word.count(DF$text.var, missing = 0)
+    DF$word.count <- word_count(DF$text.var, missing = 0)
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
     DF$read.gr <- unlist(by(DF$word.count, DF$group, partition))
@@ -379,9 +379,9 @@ function(text.var, grouping.var = NULL, labels = "automatic",
     sent.per.100 <- as.data.frame(tapply(DF2$frac.sent, DF2$sub, sum))
     names(sent.per.100) <- "x"
     DF5$sent.per.100 <- sent.per.100[as.character(DF5$sub), "x"] 
-    hun.grab <- function(x) paste(unblanker(unlist(word.split(
+    hun.grab <- function(x) paste(unblanker(unlist(word_split(
         reducer(unlist(strip(x))))))[1:100], collapse = " ")
-    DF5$syll.count <- syllable.sum(lapply(DF5$text.var, hun.grab))
+    DF5$syll.count <- syllable_sum(lapply(DF5$text.var, hun.grab))
     DF6 <- aggregate(syll.count ~ group, DF5, mean)
     DF6$ave.sent.per.100 <- aggregate(sent.per.100 ~ group, DF5, mean)[, 2]
     suppressWarnings(plot(1, 1, xlim = c(108, 182), ylim = c(2, 
@@ -489,7 +489,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
-    DF$word.count <- word.count(DF$text.var)
+    DF$word.count <- word_count(DF$text.var)
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
     DF$read.gr <- unlist(by(DF$word.count, DF$group, partition))
@@ -522,9 +522,9 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     sent.per.100 <- as.data.frame(tapply(DF2$frac.sent, DF2$sub, sum))
     names(sent.per.100) <- "x"
     DF5$sent.per.100 <- sent.per.100[as.character(DF5$sub), "x"]
-    hun.grab <- function(x) paste(unblanker(unlist(word.split(reducer(
+    hun.grab <- function(x) paste(unblanker(unlist(word_split(reducer(
         unlist(strip(x))))))[1:100], collapse = " ")
-    DF5$SYL.LIST <- lapply(DF5$text.var, function(x) unlist(syllable.count(
+    DF5$SYL.LIST <- lapply(DF5$text.var, function(x) unlist(syllable_count(
         hun.grab(x))$syllables))
     DF5$hard_easy_sum <- unlist(lapply(DF5$SYL.LIST, function(x) {
           sum(ifelse(x >= 3, 3, 1))

@@ -1,11 +1,11 @@
-\name{left.just}
-\alias{left.just}
-\alias{right.just}
+\name{left_just}
+\alias{left_just}
+\alias{right_just}
 \title{Text Justification}
 \usage{
-  left.just(dataframe, column = NULL, keep.class = FALSE)
+  left_just(dataframe, column = NULL, keep.class = FALSE)
 
-  right.just(dataframe)
+  right_just(dataframe)
 }
 \arguments{
   \item{dataframe}{A data.frame object with the text
@@ -24,25 +24,25 @@
   justified.
 }
 \description{
-  \code{left.just} - Left justifies a text/character
+  \code{left_just} - Left justifies a text/character
   column.
 
-  \code{right.just} - A means of undoing a left
+  \code{right_just} - A means of undoing a left
   justification.
 }
 \note{
-  \code{\link[qdap]{left.just}} inserts spaces to achieve
+  \code{\link[qdap]{left_just}} inserts spaces to achieve
   the justification.  This could interfere with analysis
   and therefore the output from
-  \code{\link[qdap]{left.just}} should only be used for
+  \code{\link[qdap]{left_just}} should only be used for
   visualization purposes, not analysis.
 }
 \examples{
 \dontrun{
-left.just(DATA)
-left.just(DATA, "state")
-left.just(CO2[1:15,])
-right.just(left.just(CO2[1:15,]))
+left_just(DATA)
+left_just(DATA, "state")
+left_just(CO2[1:15,])
+right_just(left_just(CO2[1:15,]))
 }
 }
 \keyword{justification}

@@ -12,6 +12,9 @@
 #' @param indent Number of spaces to indent.
 #' @param width Width to output the file (defaults to 70; this is generally a 
 #' good width and indent for a .docx file).
+#' @param space An integer value denoting the vertical spacing between the 
+#' \code{grouping.var} and the numbered text (alow more spce for more coding 
+#' room) in the output of a text file.
 #' @param \ldots Other arguments passed to strip.
 #' @return Returns a transcript by grouping variable with word number above each 
 #' word.  This makes use with \code{\link[qdap]{cm_df2long}} transfer/usage 
@@ -44,11 +47,14 @@
 #' ##  library(reports); delete("foo.doc")   #delete the file just created
 #' }
 cm_df.transcript <-
-function (text.var, grouping.var, file = NULL, indent = 4, width = 70, ...) {
+function (text.var, grouping.var, file = NULL, indent = 4, width = 70, 
+    space = 2, ...) {
     if (is.list(grouping.var)) {
         grouping.var <- paste2(grouping.var)
     }
     DF <- sentCombine(text.var, grouping.var)
+    DF[, "text.var"] <- clean(DF[, "text.var"])
+
     DF2 <- cm_df.temp(DF, "text.var", ...)
     y <- rle(as.character(DF2[, "grouping.var"]))
     lens <- y$lengths
@@ -57,6 +63,7 @@ function (text.var, grouping.var, file = NULL, indent = 4, width = 70, ...) {
     L3 <- split(DF2, as.factor(rep(seq_along(x), lens)))
     invisible(lapply(seq_along(L3), function(i) {
         numbtext(L3[[i]][, "text"], width = width, lengths = L3[[i]][, 
-            "word.num"], txt.file = file, name = group[i], indent = indent)
+            "word.num"], txt.file = file, name = group[i], 
+            indent = indent, skip = i > 1, space = space)
     }))
 }

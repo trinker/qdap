@@ -54,6 +54,6 @@ head(x3, 10)
 }
 }
 \seealso{
-  \code{\link[qdap]{term.match}}
+  \code{\link[qdap]{term_match}}
 }
 

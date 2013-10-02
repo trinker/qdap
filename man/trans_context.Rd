@@ -3,7 +3,7 @@
 \title{Print Context Around Indices}
 \usage{
   trans_context(text.var, grouping.var, inds, n.before = 3,
-    tot = TRUE, n.after = n.before)
+    tot = TRUE, n.after = n.before, ord.inds = TRUE)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -24,6 +24,9 @@
 
   \item{n.after}{The number of rows after the indexed
   occurence.}
+
+  \item{ord.inds}{logical.  If \code{TRUE} inds is ordered
+  least to greatest.}
 }
 \value{
   Returns a dataframe of the class "qdap_context" that can
@@ -61,12 +64,15 @@ with(DATA.SPLIT, trans_context(state, person, inds=inds3))
 with(DATA.SPLIT, trans_context(state, list(person, sex), inds=inds3))
 with(DATA.SPLIT, trans_context(state, list(sex, adult), inds=inds3))
 
+inds4 <- boolean_search(raj$dialogue, spaste(paste(negation.words, collapse = " || ")))
+trans_context(raj$dialogue, raj$person, inds4)
+
 ## With `question_type`
 (x <- question_type(DATA.SPLIT$state, DATA.SPLIT$person))
 y <- x[["raw"]]
-inds4 <- y[y[, "q.type"] \%in\% qcv(what, how), "n.row"]
-with(DATA.SPLIT, trans_context(state, person, inds=inds4))
-with(DATA.SPLIT, trans_context(state, person, inds=inds4, tot=F))
+inds5 <- y[y[, "q.type"] \%in\% qcv(what, how), "n.row"]
+with(DATA.SPLIT, trans_context(state, person, inds=inds5))
+with(DATA.SPLIT, trans_context(state, person, inds=inds5, tot=F))
 }
 }
 \seealso{

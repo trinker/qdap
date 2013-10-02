@@ -3,7 +3,8 @@
 #' A helper function for \code{\link[qdap]{word_list}} that allows the user to 
 #' supply vectors of words to be capitalized.
 #' 
-#' @param text A vector of words (generally from bag.o.words or breaker).
+#' @param text A vector of words (generally from \code{bag_o_words} or 
+#' \code{breaker}).
 #' @param caps.list A list of words to capitalize.
 #' @param I.list logical.  If \code{TRUE} capitalizes I words and contractions.
 #' @param apostrophe.remove logical, asking if apostrophes have been removed.  
@@ -15,8 +16,8 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' capitalizer(bag.o.words("i like it but i'm not certain"), "like")
-#' capitalizer(bag.o.words("i like it but i'm not certain"), "like", FALSE)
+#' capitalizer(bag_o_words("i like it but i'm not certain"), "like")
+#' capitalizer(bag_o_words("i like it but i'm not certain"), "like", FALSE)
 #' }
 capitalizer <-
 function(text, caps.list = NULL, I.list = TRUE, apostrophe.remove = FALSE) {

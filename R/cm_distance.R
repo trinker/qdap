@@ -94,9 +94,9 @@ function(dataframe, time.var = NULL, parallel = FALSE, code.var = "code",
         disn <- function(x, y) {cm_bidist(x, y)[[inds]][3]}
         FUN <- function(dat, mdigs=MD, sdigs=SDD){
             dat <- data.frame(dat)
-            means <- round(v.outer(dat, dism), digits=mdigs)
-            sds <- round(v.outer(dat, dissd), digits=sdigs)
-            ns <- v.outer(dat, disn)
+            means <- round(v_outer(dat, dism), digits=mdigs)
+            sds <- round(v_outer(dat, dissd), digits=sdigs)
+            ns <- v_outer(dat, disn)
             DIM <- dim(means)
             pfun <- function(x, y, z) paste0(x, "(", y, ")", "n=", z)
             comb <- mgsub(c("(NA)", "NA;n=0"), c(";", NA), 
@@ -129,7 +129,7 @@ function(dataframe, time.var = NULL, parallel = FALSE, code.var = "code",
         cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
         clusterExport(cl=cl, varlist=c("dataframe", "time.var", "code.var",
         "causal", "start.var", "end.var", "mean.digits", "sd.digits", 
-        "stan.digits", "cm_se2vect", "v.outer", "cm_bidist", "mgsub"), 
+        "stan.digits", "cm_se2vect", "v_outer", "cm_bidist", "mgsub"), 
         envir = environment())
         o <- parLapply(cl, L1, DIST)
         stopCluster(cl)

@@ -421,8 +421,8 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="truncdf"><input type="submit" value="htruncdf"><input type="submit" value="ltruncdf"><input type="submit" value="qview"> - `r HR("#trunc", "Truncated Dataframe Viewing")`
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/left.just.html" target="_blank">
-    <input type="submit" value="left.just"><input type="submit" value="right.just"> - `r HR("#just", "Text Justification")`
+<form action="http://trinker.github.io/qdap_dev/left_just.html" target="_blank">
+    <input type="submit" value="left_just"><input type="submit" value="right_just"> - `r HR("#just", "Text Justification")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/Search.html" target="_blank">
@@ -485,7 +485,7 @@ ltruncdf(rajPOS, width = 4)
 
 <h4 id="just">Text Justification</h4> 
 
-By defualt text data (character vectors) are displayed as right justified in R.  This can be difficult and unnatural to read, particularly as the length of the sentences increase.  The `r FUN("left.just")` function creates a more natural left justification of text.  Note that `r FUN("left.just")` inserts spaces to achieve the justification. This could interfere with analysis and therefore the output from `r FUN("left.just")` should only be used for visualization purposes, not analysis.
+By defualt text data (character vectors) are displayed as right justified in R.  This can be difficult and unnatural to read, particularly as the length of the sentences increase.  The `r FUN("left_just")` function creates a more natural left justification of text.  Note that `r FUN("left_just")` inserts spaces to achieve the justification. This could interfere with analysis and therefore the output from `r FUN("left_just")` should only be used for visualization purposes, not analysis.
 
 `r FT(orange, 5, text="&diams;")` **Justified Data Viewing** `r FT(orange, 5, text="&diams;")`    
 
@@ -493,11 +493,11 @@ By defualt text data (character vectors) are displayed as right justified in R. 
 ## The unnatural state of R text data
 DATA
 ## left jsut to the rescue
-left.just(DATA)
+left_just(DATA)
 ## Left just select column(s)
-left.just(DATA, c("sex", "state"))
-left.just(CO2[1:15,])
-right.just(left.just(CO2[1:15,]))
+left_just(DATA, c("sex", "state"))
+left_just(CO2[1:15,])
+right_just(left_just(CO2[1:15,]))
 ```
 
 <h4 id="search">Search Columns of a Dataframe</h4> 
@@ -697,8 +697,8 @@ The following functions will be utilized in this section (click to view more):
 </form> 
  
 
-<form action="http://trinker.github.io/qdap_dev/incomplete.replace.html" target="_blank">
-    <input type="submit" value="incomplete.replace"><input type="submit" value="incomp"> - `r HR("#inc", "Denote Incomplete End Marks With \"|\"")`
+<form action="http://trinker.github.io/qdap_dev/incomplete_replace.html" target="_blank">
+    <input type="submit" value="incomplete_replace"><input type="submit" value="incomp"> - `r HR("#inc", "Denote Incomplete End Marks With \"|\"")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/multigsub.html" target="_blank">
@@ -742,7 +742,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/stemmer.html" target="_blank">
-    <input type="submit" value="stemmer"><input type="submit" value="stem.words"><input type="submit" value="stem2df"> - `r HR("#stem", "Stem Text")`
+    <input type="submit" value="stemmer"><input type="submit" value="stem_words"><input type="submit" value="stem2df"> - `r HR("#stem", "Stem Text")`
 </form>
  
 </div>
@@ -958,13 +958,13 @@ text <- space_fill(x, keeps)
 text
 ## strip Example
 strip(text, lower=FALSE)
-## bag.o.words Example
-bag.o.words(text, lower=FALSE)
+## bag_o_words Example
+bag_o_words(text, lower=FALSE)
 ## wfm Example
 wfm(text, c("greg", "bob"))
-## trans.cloud Example
+## trans_cloud Example
 obs <- strip(space_fill(keeps, keeps), lower=FALSE)
-trans.cloud(text, c("greg", "bob"), target.words=list(obs), caps.list=obs, 
+trans_cloud(text, c("greg", "bob"), target.words=list(obs), caps.list=obs, 
     cloud.colors=qcv(red, gray65), expand.target = FALSE, title.padj = .7,
     legend = c("space_filled", "other"), title.cex = 2, title.color = "blue", 
     max.word.size = 3)
@@ -976,7 +976,7 @@ The researcher may have the need to make multiple substitutions in a text.  An e
 
 `r FT(orange, 5, text="&diams;")` **Multiple Substitutions**`r FT(orange, 5, text="&diams;")`
 ```{r}
-left.just(DATA[, c(1, 4)])
+left_just(DATA[, c(1, 4)])
 multigsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
 mgsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
 mgsub(c("it's", "I'm"), "SINGLE REPLACEMENT", DATA$state)
@@ -1000,6 +1000,22 @@ name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES,
     tyrone, cheryl, drew), pred.sex = FALSE, fuzzy.match = TRUE)
 name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
     tyrone, cheryl, drew), pred.sex = TRUE, fuzzy.match = FALSE)
+## Get rank percent frequency ratio of being a gender
+library(qdapDictionaries)
+orig_nms <- qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA,
+    tyler, jamie, JAMES, tyrone, cheryl, drew)
+
+sex <- name2sex(orig_nms, FALSE, TRUE)
+
+names(sex) <- rep("", length(sex))
+names(sex)[sex == "B"] <- sapply(toupper(orig_nms[sex == "B"]), function(x) {
+        y <- NAMES[NAMES[, 1] %in% x, ]
+        round(log(Reduce("/", y[ order(y[, "gender"]), "per.freq"])), 2)
+    })
+
+## The log ratio of being a female name
+data.frame(name = orig_nms, sex = sex, `ratio_F:M` = names(sex),
+    check.names=FALSE)
 ```
 
 <h4 id="stem">Stem Text</h4>
@@ -1010,12 +1026,12 @@ During the initial cleaning stage of analysis the researcher may chose to create
 ```{r}
 ## stem2df EXAMPLE:
 stem2df(DATA, "state", "new")
-with(stem2df(DATA, "state", "new"), trans.cloud(new, sex, title.cex = 2.5, 
+with(stem2df(DATA, "state", "new"), trans_cloud(new, sex, title.cex = 2.5, 
     title.color = "blue", max.word.size = 5, title.padj = .7))
 ## stemmer EXAMPLE:
 stemmer(DATA$state)
-## stem.words EXAMPLE:
-stem.words(doggies, jumping, swims)
+## stem_words EXAMPLE:
+stem_words(doggies, jumping, swims)
 ```
 
 
@@ -1039,12 +1055,12 @@ char2end(x3, "^", 2)
 
 <h4 id="inc">Denote Incomplete End Marks With "|"</h4> 
 
-Often incomplete sentences have a different function than complete sentences.  The researcher may want to denote incomplete sentences for consideration in later analysis.  Traditionally, incomplete sentence are denoted with the following end marks (.., ..., .?, ..?, en & em).  The `r FUN("incomplete.replace")` can identify and replace the traditional endmarks with a standard form `r FT(blue, text="\"|\"")`.
+Often incomplete sentences have a different function than complete sentences.  The researcher may want to denote incomplete sentences for consideration in later analysis.  Traditionally, incomplete sentence are denoted with the following end marks (.., ..., .?, ..?, en & em).  The `r FUN("incomplete_replace")` can identify and replace the traditional endmarks with a standard form `r FT(blue, text="\"|\"")`.
 
 `r FT(orange, 5, text="&diams;")` **Incomplete Sentence Identification**`r FT(orange, 5, text="&diams;")`
 ```{r}
 x <- c("the...",  "I.?", "you.", "threw..", "we?")
-incomplete.replace(x)
+incomplete_replace(x)
 incomp(x)
 incomp(x, scan.mode = TRUE)
 ```
@@ -1056,8 +1072,8 @@ The `r FUN("capitalizer")` functions allows the researcher to specify words with
 
 `r FT(orange, 5, text="&diams;")` **Word Capitalization**`r FT(orange, 5, text="&diams;")`
 ```{r}
-capitalizer(bag.o.words("i like it but i'm not certain"), "like")
-capitalizer(bag.o.words("i like it but i'm not certain"), "like", FALSE)
+capitalizer(bag_o_words("i like it but i'm not certain"), "like")
+capitalizer(bag_o_words("i like it but i'm not certain"), "like", FALSE)
 ```
 
 <h3 id="reshaping">Reshaping the Data</h3>
@@ -1248,17 +1264,48 @@ It is useful to convert data to an adjaceny matrix for examing relationships bet
 
 `r FT(orange, 5, text="&diams;")` **Adjaceny Matrix**: *Example 1*`r FT(orange, 5, text="&diams;")`
 
-```{r}
+```{r, eval=FALSE}
 adjacency_matrix(wfm(DATA$state, DATA$person))
 ```
 
+<pre><code>## Adjacency Matrix:
+## 
+##            greg researcher sally sam
+## researcher    0                     
+## sally         1          1          
+## sam           4          0     1    
+## teacher       0          1     2   0
+## 
+## 
+## Summed occurrences:
+## 
+##       greg researcher      sally        sam    teacher 
+##         18          6         10         11          4 
+</code></pre>
+
 `r FT(orange, 5, text="&diams;")` **Adjaceny Matrix**: *Example 2*`r FT(orange, 5, text="&diams;")`
 
-```{r}
+```{r, eval=FALSE}
 words <- c(" education", " war ", " econom", " job", "governor ")
 (terms <- with(pres_debates2012, termco(dialogue, person, words)))
 adjmat(terms)
 ```
+
+<pre><code>## Adjacency Matrix:
+## 
+##           OBAMA ROMNEY CROWLEY LEHRER QUESTION
+## ROMNEY        5                               
+## CROWLEY       2      2                        
+## LEHRER        4      4       2                
+## QUESTION      4      4       2      4         
+## SCHIEFFER     2      2       1      1        1
+## 
+## 
+## Summed occurrences:
+## 
+##     OBAMA    ROMNEY   CROWLEY    LEHRER  QUESTION SCHIEFFER 
+##         5         5         2         4         4         2 
+</code></pre>
 
 `r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Example 3*`r FT(orange, 5, text="&diams;")`
 
@@ -1286,8 +1333,8 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="all_words"> - `r HR("#all_words", "Searches Text Column for Words")`
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/bag.o.words.html" target="_blank">
-    <input type="submit" value="bag.o.words"><input type="submit" value="breaker"><input type="submit" value="word.split"> - `r HR("#bag", "Bag of Words")`
+<form action="http://trinker.github.io/qdap_dev/bag_o_words.html" target="_blank">
+    <input type="submit" value="bag_o_words"><input type="submit" value="breaker"><input type="submit" value="word.split"> - `r HR("#bag", "Bag of Words")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/common.html" target="_blank">
@@ -1351,33 +1398,33 @@ The qdap package utilizes the following functions to turn text into a bag of wor
 
 
 <TABLE>
-    <TR> <TD align="right"><font face="courier"><b>`r HR("http://trinker.github.io/qdap_dev/bag.o.words.html", "bag.o.words")` </b></font></TD> <TD align="right">Reduces a text column to a <b>single</b> vector bag of words.</TD> </TR>
-    <TR> <TD align="right"><font face="courier"><b>`r HR("http://trinker.github.io/qdap_dev/bag.o.words.html", "breaker")`</b></font></TD> <TD align="right"> Reduces a text column to a <b>single</b> vector bag of words and qdap recognized end marks.</TD> </TR>
-    <TR> <TD align="right"><font face="courier"><b>`r HR("http://trinker.github.io/qdap_dev/bag.o.words.html", "word.split")`</b></font></TD> <TD align="right"> Reduces a text column to a <b>list</b> of vectors of bag of words and qdap recognized end marks (i.e., ".", "!", "?", "*", "-").</TD> </TR>
+    <TR> <TD align="right"><font face="courier"><b>`r HR("http://trinker.github.io/qdap_dev/bag_o_words.html", "bag_o_words")` </b></font></TD> <TD align="right">Reduces a text column to a <b>single</b> vector bag of words.</TD> </TR>
+    <TR> <TD align="right"><font face="courier"><b>`r HR("http://trinker.github.io/qdap_dev/bag_o_words.html", "breaker")`</b></font></TD> <TD align="right"> Reduces a text column to a <b>single</b> vector bag of words and qdap recognized end marks.</TD> </TR>
+    <TR> <TD align="right"><font face="courier"><b>`r HR("http://trinker.github.io/qdap_dev/bag_o_words.html", "word.split")`</b></font></TD> <TD align="right"> Reduces a text column to a <b>list</b> of vectors of bag of words and qdap recognized end marks (i.e., ".", "!", "?", "*", "-").</TD> </TR>
 </TABLE>
 
 Bag of words can be useful for any number of reasons within the scope of analyzing discourse.  Many other qdap functions employ or mention these three functions as seen in the following counts for the three word splitting functions functions.
 
 ```{r, eval=FALSE, echo=FALSE, include = FALSE}
 library(acc.roxygen2)
-x <- search_repo(bag.o.words, breaker, word.split)
+x <- search_repo(bag_o_words, breaker, word.split)
 print(xtable(x), type="html")
 ```
 
 <TABLE border=1>
- <TR> <TD align="right">  </TD> <TD><b>Function</b> </TD> <TD> <b>bag.o.words</b> </TD> <TD> <b>breaker</b></TD> <TD> <b>word.split</b></TD> </TR>
+ <TR> <TD align="right">  </TD> <TD><b>Function</b> </TD> <TD> <b>bag_o_words</b> </TD> <TD> <b>breaker</b></TD> <TD> <b>word.split</b></TD> </TR>
  
  
   <TR> <TD align="right"> 1 </TD> <TD> all_words.R                   </TD> <TD> 1 </TD> <TD> - </TD> <TD> - </TD> </TR>
   <TR> <TD align="right"> 2 </TD> <TD> automated_readability_index.R </TD> <TD> - </TD> <TD> - </TD> <TD> 2 </TD> </TR>
-  <TR> <TD align="right"> 3 </TD> <TD> bag.o.words.R                 </TD> <TD> 10 </TD> <TD> 6 </TD> <TD> 3 </TD> </TR>
+  <TR> <TD align="right"> 3 </TD> <TD> bag_o_words.R                 </TD> <TD> 10 </TD> <TD> 6 </TD> <TD> 3 </TD> </TR>
   <TR> <TD align="right"> 4 </TD> <TD> capitalizer.R                 </TD> <TD> 3 </TD> <TD> 1 </TD> <TD> - </TD> </TR>
   <TR> <TD align="right"> 5 </TD> <TD> imperative.R                  </TD> <TD> - </TD> <TD> 3 </TD> <TD> - </TD> </TR>
   <TR> <TD align="right"> 6 </TD> <TD> ngrams.R                      </TD> <TD> 1 </TD> <TD> - </TD> <TD> - </TD> </TR>
   <TR> <TD align="right"> 7 </TD> <TD> polarity.R                    </TD> <TD> 2 </TD> <TD> - </TD> <TD> - </TD> </TR>
   <TR> <TD align="right"> 8 </TD> <TD> stopwords.R                   </TD> <TD> 1 </TD> <TD> 3 </TD> <TD> - </TD> </TR>
   <TR> <TD align="right"> 9 </TD> <TD> textLISTER.R                  </TD> <TD> - </TD> <TD> - </TD> <TD> 2 </TD> </TR>
-  <TR> <TD align="right"> 10 </TD> <TD> trans.cloud.R                 </TD> <TD> 1 </TD> <TD> 1 </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 10 </TD> <TD> trans_cloud.R                 </TD> <TD> 1 </TD> <TD> 1 </TD> <TD> - </TD> </TR>
   <TR> <TD align="right"> 11 </TD> <TD> wfm.R                         </TD> <TD> 1 </TD> <TD> - </TD> <TD> - </TD> </TR>
    </TABLE>
 <br>
@@ -1385,15 +1432,15 @@ print(xtable(x), type="html")
 `r FT(orange, 5, text="&diams;")` **Word Splitting Examples**`r FT(orange, 5, text="&diams;")`
 
 ```{r}
-bag.o.words("I'm going home!")
-bag.o.words("I'm going home!", apostrophe.remove = TRUE)
-bag.o.words(DATA$state)
-by(DATA$state, DATA$person, bag.o.words)
-lapply(DATA$state,  bag.o.words)
+bag_o_words("I'm going home!")
+bag_o_words("I'm going home!", apostrophe.remove = TRUE)
+bag_o_words(DATA$state)
+by(DATA$state, DATA$person, bag_o_words)
+lapply(DATA$state,  bag_o_words)
 breaker(DATA$state)
 by(DATA$state, DATA$person, breaker)
 lapply(DATA$state,  breaker)
-word.split(c(NA, DATA$state))
+word_split(c(NA, DATA$state))
 ```
 
 
@@ -1422,15 +1469,15 @@ common(word_list(DATA$state, DATA$person)$cwl, overlap = 2)
 
 <h4 id="exclude">Exclude Elements From a Vector</h4>
 
-It is often useful and more efficient to start with a preset vector of words and eliminate or `r FUN("exclude")` the words you do not wish to include.  Examples could range from excluding an individual(s) from a column of participant names or excluding a few select word(s) from a pre defined qdap word list.  THis is particlarly useful for passsing terms or stopwords to word counting functions like `r FUN("termco")` or `r FUN("trans.cloud")`.
+It is often useful and more efficient to start with a preset vector of words and eliminate or `r FUN("exclude")` the words you do not wish to include.  Examples could range from excluding an individual(s) from a column of participant names or excluding a few select word(s) from a pre defined qdap word list.  THis is particlarly useful for passsing terms or stopwords to word counting functions like `r FUN("termco")` or `r FUN("trans_cloud")`.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("exclude")` Examples**`r FT(orange, 5, text="&diams;")`
 ```{r}
 exclude(1:10, 3, 4)
 exclude(Top25Words, qcv(the, of, and))
 exclude(Top25Words, "the", "of", "an")
-#Using with `term.match` and `termco`
-MTCH.LST <- exclude(term.match(DATA$state, qcv(th, i)), qcv(truth, stinks))
+#Using with `term_match` and `termco`
+MTCH.LST <- exclude(term_match(DATA$state, qcv(th, i)), qcv(truth, stinks))
 termco(DATA$state, DATA$person, MTCH.LST)
 ```
 
@@ -2262,32 +2309,32 @@ NOTE show spaste w/ termco
 <div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
-<form action="http://trinker.github.io/qdap_dev/distTab.html" target="_blank">
-    <input type="submit" value="distTab"> - SPSS Style Frequency Tables
+<form action="http://trinker.github.io/qdap_dev/dist_tab.html" target="_blank">
+    <input type="submit" value="dist_tab"> - SPSS Style Frequency Tables
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/multiscale.html" target="_blank">
     <input type="submit" value="multiscale"> - Nested Standardization
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/outlier.detect.html" target="_blank">
-    <input type="submit" value="outlier.detect"> - Detect Outliers in Text
+<form action="http://trinker.github.io/qdap_dev/outlier_detect.html" target="_blank">
+    <input type="submit" value="outlier_detect"> - Detect Outliers in Text
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/outlier.labeler.html" target="_blank">
-    <input type="submit" value="outlier.labeler"> - Locate Outliers in Numeric String
+<form action="http://trinker.github.io/qdap_dev/outlier_labeler.html" target="_blank">
+    <input type="submit" value="outlier_labeler"> - Locate Outliers in Numeric String
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/pos.html" target="_blank">
-    <input type="submit" value="pos"><input type="submit" value="pos.by"><input type="submit" value="pos.tags"> - Parts of Speech Tagging
+    <input type="submit" value="pos"><input type="submit" value="pos_by"><input type="submit" value="pos.tags"> - Parts of Speech Tagging
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/question_type.html" target="_blank">
     <input type="submit" value="question_type"> - Count of Question Type
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/syllable.sum.html" target="_blank">
-    <input type="submit" value="syllable.sum"><input type="submit" value="combo_syllable.sum"><input type="submit" value="polysyllable.sum"><input type="submit" value="syllable.count"> - Syllabication
+<form action="http://trinker.github.io/qdap_dev/syllable_sum.html" target="_blank">
+    <input type="submit" value="syllable_sum"><input type="submit" value="combo_syllable_sum"><input type="submit" value="polysyllable_sum"><input type="submit" value="syllable_count"> - Syllabication
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
@@ -2295,23 +2342,23 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form class="form_left" action="http://trinker.github.io/qdap_dev/termco.html" target="_blank">
-    <input type="submit" value="termco"><input type="submit" value="term.match"><input type="submit" value="termco.d"><input type="submit" value="termco2mat">
+    <input type="submit" value="termco"><input type="submit" value="term_match"><input type="submit" value="termco_d"><input type="submit" value="termco2mat">
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/termco.c.html" target="_blank">
-    <input type="submit" value="termco.c"> - Search For and Count Terms
+<form action="http://trinker.github.io/qdap_dev/termco_c.html" target="_blank">
+    <input type="submit" value="termco_c"> - Search For and Count Terms
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/wfm.html" target="_blank">
-    <input type="submit" value="wfm"><input type="submit" value="wfdf"><input type="submit" value="wf.combine"><input type="submit" value="wfm.expanded"> - Word Frequency Matrix
+    <input type="submit" value="wfm"><input type="submit" value="wfdf"><input type="submit" value="wf_combine"><input type="submit" value="wfm_expanded"> - Word Frequency Matrix
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/word.count.html" target="_blank">
-    <input type="submit" value="word.count"><input type="submit" value="wc"> - Word Counts
+<form action="http://trinker.github.io/qdap_dev/word_count.html" target="_blank">
+    <input type="submit" value="word_count"><input type="submit" value="wc"> - Word Counts
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/character.count.html" target="_blank">
-    <input type="submit" value="character.count"><input type="submit" value="character.table"><input type="submit" value="char.table"> - Character Counts
+<form action="http://trinker.github.io/qdap_dev/character_count.html" target="_blank">
+    <input type="submit" value="character_count"><input type="submit" value="character_table"><input type="submit" value="charr_table"> - Character Counts
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank">
@@ -2340,8 +2387,8 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="formality"> - Formality Score
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/kullback.leibler.html" target="_blank">
-    <input type="submit" value="kullback.leibler"> - Kullback Leibler Statistic
+<form action="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank">
+    <input type="submit" value="kullback_leibler"> - Kullback Leibler Statistic
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/polarity.html" target="_blank">
@@ -2375,16 +2422,16 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="tot_plot"> - Visualize Word Length by Turn of Talk
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/trans.cloud.html" target="_blank">
-    <input type="submit" value="trans.cloud"> - Word Clouds by Grouping Variable
+<form action="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank">
+    <input type="submit" value="trans_cloud"> - Word Clouds by Grouping Variable
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/trans.venn.html" target="_blank">
-    <input type="submit" value="trans.venn"> - Venn Diagram by Grouping Variable
+<form action="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank">
+    <input type="submit" value="trans_venn"> - Venn Diagram by Grouping Variable
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/word.network.plot.html" target="_blank">
-    <input type="submit" value="word.network.plot"> - Word Network Plot
+<form action="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank">
+    <input type="submit" value="word_network_plot"> - Word Network Plot
 </form>
 </div>
 

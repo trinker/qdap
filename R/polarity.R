@@ -106,9 +106,9 @@
 #' plot(poldat)
 #' 
 #' poldat3 <- with(rajSPLIT, polarity(dialogue, person))
-#' poldat3[["group"]][, "OL"] <- outlier.labeler(poldat3[["group"]][, 
+#' poldat3[["group"]][, "OL"] <- outlier_labeler(poldat3[["group"]][, 
 #'     "ave.polarity"])
-#' poldat3[["all"]][, "OL"] <- outlier.labeler(poldat3[["all"]][, 
+#' poldat3[["all"]][, "OL"] <- outlier_labeler(poldat3[["all"]][, 
 #'     "polarity"])
 #' head(poldat3[["group"]], 10)
 #' htruncdf(poldat3[["all"]], 15, 8)
@@ -194,12 +194,12 @@ polarity <- function (text.var, grouping.var = NULL,
     words <- c(posneg, ls(alter))
 
     ## create sentence lengths
-    counts <- unlist(lapply(DF[, "text.var"], function(x) length(bag.o.words(x))))
+    counts <- unlist(lapply(DF[, "text.var"], function(x) length(bag_o_words(x))))
     DF[, "text.var"] <- space_fill(text.var = strip(DF[, "text.var"], ...), 
         terms = words[grep("\\s", words)], sep = "~~")
 
     ## split into bag of words per sentence
-    TV <- lapply(lapply(DF[, "text.var"], bag.o.words, ...), function(x) {
+    TV <- lapply(lapply(DF[, "text.var"], bag_o_words, ...), function(x) {
         gsub("~~", " ", x)
     })
 
@@ -394,7 +394,7 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
     names(dat)[c(1)] <-  nms[1]
     names(dat2)[c(1, 6, 2, 3)] <- nms
     dat2 <- data.frame(dat2, with(dat2, 
-        gantt(dialogue, list(group, seq_along(group)), plot = FALSE)))
+        gantt(dialogue, list(group, seq_along(group)))))
     if (is.null(nrow)) {
         leg <- FALSE
         nrow <- 1

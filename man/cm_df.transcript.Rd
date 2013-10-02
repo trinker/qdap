@@ -3,7 +3,7 @@
 \title{Transcript With Word Number}
 \usage{
   cm_df.transcript(text.var, grouping.var, file = NULL,
-    indent = 4, width = 70, ...)
+    indent = 4, width = 70, space = 2, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -21,6 +21,11 @@
   \item{width}{Width to output the file (defaults to 70;
   this is generally a good width and indent for a .docx
   file).}
+
+  \item{space}{An integer value denoting the vertical
+  spacing between the \code{grouping.var} and the numbered
+  text (alow more spce for more coding room) in the output
+  of a text file.}
 
   \item{\ldots}{Other arguments passed to strip.}
 }

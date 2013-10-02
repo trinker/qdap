@@ -10,7 +10,7 @@
 #' duplicates(DATA$state)
 #' duplicates(DATA$state[1])
 #' }
-duplicates <- #used in trans.venn
+duplicates <- #used in trans_venn
 function(string, threshold=1){
     x<-sort(unlist(strsplit(string, " ")))
     if (threshold > 1) {

@@ -5,8 +5,8 @@
   \method{plot}{formality} (x, point.pch = 20,
     point.cex = 0.5, point.colors = c("gray65", "red"),
     bar.colors = NULL, short.names = FALSE,
-    min.wrdcnt = NULL, order.by.formality = TRUE, plot,
-    ...)
+    min.wrdcnt = NULL, order.by.formality = TRUE,
+    plot = TRUE, ...)
 }
 \arguments{
   \item{x}{The formality object.}

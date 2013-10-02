@@ -15,14 +15,14 @@
 #' exclude(Top25Words, qcv(the, of, and))
 #' exclude(Top25Words, "the", "of", "an")
 #' 
-#' #Using with term.match and termco 
-#' terms <- term.match(DATA$state, qcv(th), FALSE) 
+#' #Using with term_match and termco 
+#' terms <- term_match(DATA$state, qcv(th), FALSE) 
 #' exclude(terms, "truth")  
 #' #all together
-#' termco(DATA$state, DATA$person, exclude(term.match(DATA$state, qcv(th), 
+#' termco(DATA$state, DATA$person, exclude(term_match(DATA$state, qcv(th), 
 #'     FALSE), "truth"))
 #' 
-#' MTCH.LST <- exclude(term.match(DATA$state, qcv(th, i)), qcv(truth, stinks))
+#' MTCH.LST <- exclude(term_match(DATA$state, qcv(th, i)), qcv(truth, stinks))
 #' termco(DATA$state, DATA$person, MTCH.LST)
 #' }
 exclude <-

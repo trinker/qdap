@@ -17,7 +17,7 @@
 #' @param margins logical. If \code{TRUE} provides grouping.var and word 
 #' variable totals.
 #' @param word.lists A list of character vectors of words to pass to 
-#' \code{wf.combine}
+#' \code{wf_combine}
 #' @param matrix logical.  If \code{TRUE} returns the output as a 
 #' \code{\link[qdap]{wfm}} rather than a \code{\link[qdap]{wfdf}} object.
 #' @return \code{wfm} - returns a word frequency of the class matrix.
@@ -47,11 +47,11 @@
 #' state2 <- mgsub(alts, gsub("\\s", "~~", alts), DATA$state)
 #' with(DATA, wfdf(state2, list(sex, adult)))[1:18, ]
 #' 
-#' ## wfm.expanded example:
+#' ## wfm_expanded example:
 #' z <- wfm(DATA$state, DATA$person)
-#' wfm.expanded(z)[30:45, ] #two "you"s
+#' wfm_expanded(z)[30:45, ] #two "you"s
 #' 
-#' ## wf.combine examples:
+#' ## wf_combine examples:
 #' #===================
 #' ## raw no margins (will work) 
 #' x <- wfm(DATA$state, DATA$person) 
@@ -70,23 +70,23 @@
 #' WL6 <- list(c("you", "your", "your're"))  #no name so will be called words 1          
 #' WL7 <- c("you", "your", "your're")                             
 #'                                                                
-#' wf.combine(z, WL2) #Won't work not a raw frequency matrix     
-#' wf.combine(x, WL2) #Works (raw and no margins)                     
-#' wf.combine(y, WL2) #Works (raw with margins)                           
-#' wf.combine(y, c("you", "your", "your're"))                        
-#' wf.combine(y, WL1)                                                  
-#' wf.combine(y, WL3)                                                   
-#' ## wf.combine(y, WL4) #Error         
-#' wf.combine(y, WL5)                                         
-#' wf.combine(y, WL6)                                              
-#' wf.combine(y, WL7)                                           
+#' wf_combine(z, WL2) #Won't work not a raw frequency matrix     
+#' wf_combine(x, WL2) #Works (raw and no margins)                     
+#' wf_combine(y, WL2) #Works (raw with margins)                           
+#' wf_combine(y, c("you", "your", "your're"))                        
+#' wf_combine(y, WL1)                                                  
+#' wf_combine(y, WL3)                                                   
+#' ## wf_combine(y, WL4) #Error         
+#' wf_combine(y, WL5)                                         
+#' wf_combine(y, WL6)                                              
+#' wf_combine(y, WL7)                                           
 #'                                                                   
 #' worlis <- c("you", "it", "it's", "no", "not", "we")              
 #' y <- wfdf(DATA$state, list(DATA$sex, DATA$adult), margins = TRUE)  
-#' z <- wf.combine(y, worlis, matrix = TRUE)                      
+#' z <- wf_combine(y, worlis, matrix = TRUE)                      
 #'                                                                  
 #' chisq.test(z)                                                      
-#' chisq.test(wfm(wfdf = y)) 
+#' chisq.test(wfm(y)) 
 #' }
 wfm <-
 function(text.var = NULL, grouping.var = NULL, 
@@ -187,7 +187,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL,
         } 
     } 
     bl <- split(text.var, grouping)
-    x <- lapply(bl, bag.o.words, char.keep = char2space, ...)
+    x <- lapply(bl, bag_o_words, char.keep = char2space, ...)
     tabs <- lapply(x, function(x) as.data.frame(table(x)))
     tabs <- tabs[sapply(tabs, nrow)!=0]
     lapply(seq_along(tabs), function(x) {
@@ -245,15 +245,15 @@ function(text.var, grouping.var = NULL, stopwords = NULL,
 
 #' Expanded Word Frequency Matrix
 #' 
-#' \code{wfm.expanded} - Expand a word frequency matrix to have multiple rows 
+#' \code{wfm_expanded} - Expand a word frequency matrix to have multiple rows 
 #' for each word.
 #' 
 #' @rdname Word_Frequency_Matrix
 #' @export
-#' @return \code{wfm.expanded} - returns a matrix similar to a word frequency 
+#' @return \code{wfm_expanded} - returns a matrix similar to a word frequency 
 #' matrix (\code{wfm}) but the rows are expanded to represent the maximum usages 
 #' of the word and cells are dummy coded to indicate that number of uses.
-wfm.expanded <-
+wfm_expanded <-
 function(text.var, grouping.var = NULL, ...){
     if(is(text.var, "true.matrix")) {
         z <- text.var
@@ -280,16 +280,16 @@ function(text.var, grouping.var = NULL, ...){
 
 #' Combined Word Frequency Data Frame
 #' 
-#' \code{wf.combine} - Combines words (rows) of a word frequency dataframe 
+#' \code{wf_combine} - Combines words (rows) of a word frequency dataframe 
 #' (\code{wfdf}) together.
 #'
 #' @param wf.obj A \code{wfm} or \code{wfdf} object.
 #' @rdname Word_Frequency_Matrix
 #' @export
-#' @return \code{wf.combine} - returns a word frequency matrix (\code{wfm}) or 
+#' @return \code{wf_combine} - returns a word frequency matrix (\code{wfm}) or 
 #' dataframe (\code{wfdf}) with counts for the combined word.lists merged and 
 #' remaining terms (\code{else}).
-wf.combine <-
+wf_combine <-
 function(wf.obj, word.lists, matrix = FALSE){
     suppressWarnings(if (is.list(word.lists) & length(word.lists) > 1 & 
         any(Reduce("%in%", word.lists))) {

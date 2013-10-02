@@ -46,7 +46,7 @@
 #' to make the cloud.
 #' @details Breaking is done using \code{\link[stats]{quantile}}.  This will 
 #' ensure a certain percentage of words will be colored at each bin.
-#' @seealso \code{\link[qdap]{trans.cloud}},
+#' @seealso \code{\link[qdap]{trans_cloud}},
 #' \code{\link[wordcloud]{wordcloud}},
 #' \code{\link[plotrix]{color.legend}}
 #' @keywords heatcloud

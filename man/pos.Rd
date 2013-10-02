@@ -1,17 +1,17 @@
 \name{pos}
 \alias{pos}
-\alias{pos.by}
-\alias{pos.tags}
+\alias{pos_by}
+\alias{pos_tags}
 \title{Parts of Speech Tagging}
 \usage{
   pos(text.var, parallel = FALSE, cores = detectCores()/2,
     progress.bar = TRUE, na.omit = FALSE, digits = 1,
     percent = TRUE, zero.replace = 0, gc.rate = 10)
 
-  pos.by(text.var, grouping.var = NULL, digits = 1,
+  pos_by(text.var, grouping.var = NULL, digits = 1,
     percent = TRUE, zero.replace = 0, ...)
 
-  pos.tags(type = "pretty")
+  pos_tags(type = "pretty")
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -74,7 +74,7 @@
   purposes.} \item{zero.replace}{The value of zero.replace
   used for plotting purposes.}
 
-  pos.by returns a list of 6: \item{text}{The original
+  pos_by returns a list of 6: \item{text}{The original
   text} \item{POStagged}{The original words replaced with
   parts of speech in context.} \item{POSprop}{Dataframe of
   the proportion of parts of speech by row.}
@@ -94,11 +94,11 @@
   \code{pos} - Apply part of speech tagger to
   transcript(s).
 
-  \code{pos.by} - Apply part of speech tagger to
+  \code{pos_by} - Apply part of speech tagger to
   transcript(s) by zero or more grouping variable(s).
 
-  \code{pos.tags} - Useful for interpreting the parts of
-  speech tags created by pos and pos.by.
+  \code{pos_tags} - Useful for interpreting the parts of
+  speech tags created by pos and pos_by.
 }
 \examples{
 \dontrun{
@@ -114,22 +114,22 @@ posdat$POSfreq        #frequency of parts of speech by row
 out1 <- pos(DATA$state, parallel = TRUE) # not always useful
 ltruncdf(out1, 7, 4)
 
-#use pos.tags to interpret part of speech tags used by pos & pos.by
-pos.tags()[1:10, ]
-pos.tags("matrix")[1:10, ]
-pos.tags("dataframe")[1:10, ]
-pos.tags("df")[1:10, ]
-ltruncdf(pos.tags("all"), 3)
+#use pos_tags to interpret part of speech tags used by pos & pos_by
+pos_tags()[1:10, ]
+pos_tags("matrix")[1:10, ]
+pos_tags("dataframe")[1:10, ]
+pos_tags("df")[1:10, ]
+ltruncdf(pos_tags("all"), 3)
 
-posbydat <- with(DATA, pos.by(state, sex))
+posbydat <- with(DATA, pos_by(state, sex))
 names(posbydat)
 ltruncdf(posbydat, 7, 4)
-truncdf(posbydat$pos.by.prop, 4)
+truncdf(posbydat$pos_by.prop, 4)
 
-POSby <- with(DATA, pos.by(state, list(adult, sex)))
+POSby <- with(DATA, pos_by(state, list(adult, sex)))
 plot(POSby, values = TRUE, digits = 2)
 #or more quickly - reuse the output from before
-out2 <- with(DATA, pos.by(posbydat, list(adult, sex)))
+out2 <- with(DATA, pos_by(posbydat, list(adult, sex)))
 }
 }
 \references{

@@ -88,7 +88,7 @@ function(x, ...) {
 
 
 ngram_helper <- function(text, ns = 2, as.list = FALSE, ...) {
-    x <- bag.o.words(text, ...)
+    x <- bag_o_words(text, ...)
     if (ns == 1) {
         return(x)
     }

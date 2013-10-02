@@ -1,4 +1,4 @@
-#internal function used by trans.cloud and word.comp (not exportd)
+#internal function used by trans_cloud and word.comp (not exportd)
 qda.handler <-
 function(x) {
     if (any(class(x) %in% c("freqList", "bagOwords"))) {

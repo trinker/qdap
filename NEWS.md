@@ -22,8 +22,14 @@ And constructed with the following guidelines:
 ----------------------------------------------------------------
 
 The word lists and dictionaries in `qdap` have been moved to `qdapDictionaries`. 
-This may break backward compatibility.  Thus this is a **major** release 
-(ver. 1.0.0).
+Additionally, many functions have been renamed with underscores instead of the 
+former period separators.  These changes break backward compatibility.  Thus 
+this is a **major** release (ver. 1.0.0).
+
+It is the general practice to deprecate functions within a package before 
+removal, however, the number of necessary changes in light of <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> being 
+relatively new to CRAN, made these changes sensible at this point.
+
 
 <b>BUG FIXES</b>
 
@@ -186,6 +192,9 @@ This may break backward compatibility.  Thus this is a **major** release
 
 * `cm_time2long` loses the argument `start.end` to ensure that the `cmspans` 
   class produced would operate as expected.
+
+* Most exported functions utilizing a period separator have been repalces with 
+  underscore named versions.
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5
 ----------------------------------------------------------------

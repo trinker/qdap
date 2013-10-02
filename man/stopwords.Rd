@@ -76,7 +76,7 @@ stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
 }
 \seealso{
   \code{\link[qdap]{strip}},
-  \code{\link[qdap]{bag.o.words}},
+  \code{\link[qdap]{bag_o_words}},
   \code{\link[tm]{stopwords}}
 }
 \keyword{stopwords}

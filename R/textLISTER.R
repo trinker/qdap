@@ -26,11 +26,11 @@ function(text.var, group.vars, rm.bracket = TRUE, char.keep = NULL,
     if (nrow(DF) == 1) {
       DF <- do.call("rbind", list(DF, DF))
       DF[2, 3] <- "void"
-      DF$dia2word <- as.vector(word.split(reducer(strip(DF$dia2word, 
+      DF$dia2word <- as.vector(word_split(reducer(strip(DF$dia2word, 
           char.keep = char.keep, apostrophe.remove = apostrophe.remove, ...))))
       DF <- DF[1, ]
     } else {
-      DF$dia2word <- as.vector(word.split(reducer(strip(DF$dia2word, 
+      DF$dia2word <- as.vector(word_split(reducer(strip(DF$dia2word, 
           char.keep = char.keep, apostrophe.remove = apostrophe.remove, ...))))
     }     
     X <- split(DF[, -1], DF$group.vars)
@@ -47,5 +47,5 @@ function(text.var, group.vars, rm.bracket = TRUE, char.keep = NULL,
         }
     )
     names(X) <- NAMES
-    return(X)
+    X
 }

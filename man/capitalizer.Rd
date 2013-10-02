@@ -6,8 +6,8 @@
     apostrophe.remove = FALSE)
 }
 \arguments{
-  \item{text}{A vector of words (generally from bag.o.words
-  or breaker).}
+  \item{text}{A vector of words (generally from
+  \code{bag_o_words} or \code{breaker}).}
 
   \item{caps.list}{A list of words to capitalize.}
 
@@ -33,8 +33,8 @@
 }
 \examples{
 \dontrun{
-capitalizer(bag.o.words("i like it but i'm not certain"), "like")
-capitalizer(bag.o.words("i like it but i'm not certain"), "like", FALSE)
+capitalizer(bag_o_words("i like it but i'm not certain"), "like")
+capitalizer(bag_o_words("i like it but i'm not certain"), "like", FALSE)
 }
 }
 

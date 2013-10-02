@@ -14,7 +14,7 @@
 #' @param \dots Various: \cr
 #'     \emph{\code{stemmer} - Other arguments passed to 
 #'     \code{\link[qdap]{capitalizer}}} \cr
-#'     \emph{\code{stem.words} - Words or terms.} \cr
+#'     \emph{\code{stem_words} - Words or terms.} \cr
 #'     \emph{\code{stem2df} - Other arguments passed to 
 #'     \code{\link[qdap]{stemmer}}}
 #' @param dataframe A dataframe object.
@@ -33,8 +33,8 @@
 #' out1 <- stemmer(raj$dialogue)
 #' htruncdf(out1, 20, 60)
 #' 
-#' #stem.words EXAMPLE:
-#' stem.words(doggies, jumping, swims)
+#' #stem_words EXAMPLE:
+#' stem_words(doggies, jumping, swims)
 #' 
 #' #stem2df EXAMPLE:
 #' out2 <- stem2df(DATA, "state", "new")
@@ -96,13 +96,13 @@ function(text.var, rm.bracket = TRUE, capitalize = TRUE, warn = TRUE,
 
 #' Stem Words
 #' 
-#' \code{stem.words} - Wrapper for stemmer that stems a vector of words.
+#' \code{stem_words} - Wrapper for stemmer that stems a vector of words.
 #' 
-#' @return \code{stem.words} - returns a vector of individually stemmed words.
+#' @return \code{stem_words} - returns a vector of individually stemmed words.
 #' 
 #' @rdname stemmer
 #' @export
-stem.words <- 
+stem_words <- 
 function(...) {
     x <- substitute(...())
     z <- unblanker(scrubber(unlist(lapply(x, function(y) as.character(y)))))

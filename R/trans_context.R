@@ -11,6 +11,7 @@
 #' @param tot logical.  If \code{TRUE} condenses sub-units (e.g., sentences) 
 #' into turns of talk for that \code{grouping.var}.
 #' @param n.after The number of rows after the indexed occurence.
+#' @param ord.inds logical.  If \code{TRUE} inds is ordered least to greatest.
 #' @return Returns a dataframe of the class "qdap_context" that can be printed 
 #' (i.e., saved) in flexible outputs.  The dataframe can be printed as a 
 #' dataframe style or pretty text output.  The resulting file contains n rows 
@@ -44,15 +45,22 @@
 #' with(DATA.SPLIT, trans_context(state, list(person, sex), inds=inds3))
 #' with(DATA.SPLIT, trans_context(state, list(sex, adult), inds=inds3))
 #' 
+#' inds4 <- boolean_search(raj$dialogue, spaste(paste(negation.words, collapse = " || ")))
+#' trans_context(raj$dialogue, raj$person, inds4)
+#' 
 #' ## With `question_type`
 #' (x <- question_type(DATA.SPLIT$state, DATA.SPLIT$person))
 #' y <- x[["raw"]]
-#' inds4 <- y[y[, "q.type"] %in% qcv(what, how), "n.row"]
-#' with(DATA.SPLIT, trans_context(state, person, inds=inds4))
-#' with(DATA.SPLIT, trans_context(state, person, inds=inds4, tot=F))
+#' inds5 <- y[y[, "q.type"] %in% qcv(what, how), "n.row"]
+#' with(DATA.SPLIT, trans_context(state, person, inds=inds5))
+#' with(DATA.SPLIT, trans_context(state, person, inds=inds5, tot=F))
 #' }
 trans_context <- function(text.var, grouping.var, inds, n.before = 3, 
-    tot = TRUE, n.after = n.before) {
+    tot = TRUE, n.after = n.before, ord.inds = TRUE) {
+
+    if (ord.inds) {
+        inds <- sort(inds)
+    }
 
     if (is.list(grouping.var)) {
         m <- unlist(as.character(substitute(grouping.var))[-1])
@@ -206,9 +214,10 @@ df_form <- function(x, sep.block = TRUE) {
         sep2 <- paste(rep("=", ifelse(ntext < 30, ntext, 30)), collapse = "")  
     }
 
-
     ## Split apart into event clusters and format
-    out <- lapply(split(x, x[, "context"]), function(y) {
+    splitx <- split(x, x[, "context"])
+    splitx <- splitx[as.character(sort(as.numeric(names(splitx))))]
+    out <- lapply(splitx, function(y) {
         y[-1, c("context", "indices")] <- ""
         y[, "event"] <- ifelse(y[, "event"], "**", "")
         y[1, "indices"] <- sprintf("[lines %s]", y[1, "indices"])
@@ -257,7 +266,9 @@ pretty_form <- function(x, sep.block = TRUE, width = 70, indent = 4,
     }
 
     ## Split apart into event clusters and format
-    out <- lapply(split(x, x[, "context"]), function(y) {
+    splitx <- split(x, x[, "context"])
+    splitx <- splitx[as.character(sort(as.numeric(names(splitx))))]
+    out <- lapply(splitx, function(y) {
 
         y[-1, c("context", "indices")] <- ""
         y[, "event"] <- paste0(paste(rep(" ", spacing1), collapse = ""), 

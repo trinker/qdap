@@ -1,0 +1,35 @@
+\name{incomplete_replace}
+\alias{incomp}
+\alias{incomplete_replace}
+\title{Denote Incomplete End Marks With "|"}
+\usage{
+  incomplete_replace(text.var, scan.mode = FALSE)
+
+  incomp(text.var, scan.mode = FALSE)
+}
+\arguments{
+  \item{text.var}{The text variable.}
+
+  \item{scan.mode}{logical.  If \code{TRUE} only scans and
+  reports incomplete sentences.}
+}
+\value{
+  Returns a text variable (character sting) with incomplete
+  sentence marks (.., ..., .?, ..?, en & em dash etc.)
+  replaced with "|".  If scan mode is \code{TRUE} returns a
+  data frame with incomplete sentence location.
+}
+\description{
+  Replaces incomplete sentence end marks (.., ..., .?, ..?,
+  en \& em dash etc.) with \code{"|"}.
+}
+\examples{
+\dontrun{
+x <- c("the...",  "I.?", "you.", "threw..", "we?")
+incomplete_replace(x)
+incomp(x)
+incomp(x, scan.mode = TRUE)
+}
+}
+\keyword{incomplete-sentence}
+

@@ -145,10 +145,10 @@
 
   \item{char2space}{Currently a road to nowhere.
   Eventually this will allow the retention of characters as
-  is allowed in \code{trans.cloud} already.}
+  is allowed in \code{trans_cloud} already.}
 
   \item{\dots}{Other arguments supplied to
-  \code{\link[qdap]{trans.cloud}}.}
+  \code{\link[qdap]{trans_cloud}}.}
 }
 \value{
   Returns a list: \item{word frequency matrices}{Word
@@ -240,8 +240,8 @@ DATA2 <- qdap::DATA2
 }
 }
 \seealso{
-  \code{\link[qdap]{trans.cloud}},
-  \code{\link[qdap]{word.network.plot}},
+  \code{\link[qdap]{trans_cloud}},
+  \code{\link[qdap]{word_network_plot}},
   \code{\link[wordcloud]{wordcloud}},
   \code{\link[igraph]{graph.adjacency}}
 }

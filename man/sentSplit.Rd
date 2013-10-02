@@ -114,7 +114,7 @@ TOT(dat$tot)
 }
 \seealso{
   \code{\link[qdap]{bracketX}},
-  \code{\link[qdap]{incomplete.replace}},
+  \code{\link[qdap]{incomplete_replace}},
   \code{\link[qdap]{stem2df}} , \code{\link[qdap]{TOT}}
 }
 \keyword{sentence,}

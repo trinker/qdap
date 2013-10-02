@@ -43,6 +43,10 @@
 #' ## Passing to `trans_context`
 #' inds <- boolean_search(DATA.SPLIT$state, " I&&.|| I&&!", ignore.case = FALSE)
 #' with(DATA.SPLIT, trans_context(state, person, inds=inds))
+#' 
+#' (inds2 <- boolean_search(raj$dialogue, spaste(paste(negation.words, 
+#'     collapse = " || "))))
+#' trans_context(raj$dialogue, raj$person, inds2)
 #' }
 Search <-
 function(dataframe, term, column.name = NULL, max.distance = 0.02, ...) {
@@ -136,7 +140,7 @@ boolean_search <- function(text.var, terms, ignore.case = TRUE, values = FALSE,
  
         }
     })
-    rnumb <- unique(unlist(out))
+    rnumb <- sort(unique(unlist(out)))
 
     ## Exclusion terms
     if (!is.null(exclude)) {

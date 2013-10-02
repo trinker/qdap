@@ -133,7 +133,7 @@ invisible(lapply(split(pres_debates2012, pres_debates2012$time), function(x) {
 }
 }
 \seealso{
-  \code{\link[qdap]{trans.cloud}},
+  \code{\link[qdap]{trans_cloud}},
   \code{\link[wordcloud]{wordcloud}},
   \code{\link[plotrix]{color.legend}}
 }

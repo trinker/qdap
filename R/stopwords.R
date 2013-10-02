@@ -31,7 +31,7 @@
 #' of vectors of words with stop words removed.  Output depends on supplied 
 #' arguments.
 #' @seealso \code{\link[qdap]{strip}}, 
-#' \code{\link[qdap]{bag.o.words}},
+#' \code{\link[qdap]{bag_o_words}},
 #' \code{\link[tm]{stopwords}}
 #' @keywords stopwords
 #' @export

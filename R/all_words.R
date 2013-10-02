@@ -21,7 +21,7 @@
 #' \code{\link[qdap]{all_words}} returns a 
 #' frequency count for all words.
 #' @seealso 
-#' \code{\link[qdap]{term.match}}
+#' \code{\link[qdap]{term_match}}
 #' @export
 #' @examples
 #' \dontrun{
@@ -40,7 +40,7 @@ function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE, apo
     }
     if(!is.null(begins.with)) begins.with <- tolower(begins.with)
     if(!is.null(contains)) contains <- tolower(contains)
-    WORDS <- unlist(bag.o.words(strip(text.var, apostrophe.remove = apostrophe.remove, ...)))
+    WORDS <- unlist(bag_o_words(strip(text.var, apostrophe.remove = apostrophe.remove, ...)))
     names(WORDS) <- NULL
     y <- data.frame(table(WORDS), stringsAsFactors = FALSE, row.names=NULL)
     names(y) <- c("WORD", "FREQ")
@@ -72,5 +72,5 @@ function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE, apo
 #' @S3method print all_words
 print.all_words <- function(x, ...) {
     class(x) <- "data.frame"
-    print(left.just(x, "WORD"))
+    print(left_just(x, "WORD"))
 }

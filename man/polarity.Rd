@@ -165,9 +165,9 @@ colsplit2df(poldat2$group)
 plot(poldat)
 
 poldat3 <- with(rajSPLIT, polarity(dialogue, person))
-poldat3[["group"]][, "OL"] <- outlier.labeler(poldat3[["group"]][,
+poldat3[["group"]][, "OL"] <- outlier_labeler(poldat3[["group"]][,
     "ave.polarity"])
-poldat3[["all"]][, "OL"] <- outlier.labeler(poldat3[["all"]][,
+poldat3[["all"]][, "OL"] <- outlier_labeler(poldat3[["all"]][,
     "polarity"])
 head(poldat3[["group"]], 10)
 htruncdf(poldat3[["all"]], 15, 8)

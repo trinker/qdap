@@ -2,7 +2,7 @@
 #' 
 #' \code{termco} - Search a transcript by any number of grouping variables for 
 #' categories (themes) of grouped root terms.  While there are other termco 
-#' functions in the termco family (e.g., \code{\link[qdap]{termco.d}}) 
+#' functions in the termco family (e.g., \code{\link[qdap]{termco_d}}) 
 #' \code{termco} is a more powerful and flexible wrapper intended for general 
 #' use.
 #' 
@@ -30,7 +30,7 @@
 #' should be retained based on the elements in \code{match.list}. 
 #' @param zero.replace Value to replace 0 values with.
 #' @param \ldots Other argument supplied to \code{\link[qdap]{strip}}.
-#' @return \code{termco} & \code{termco.d} - both return a list, of class 
+#' @return \code{termco} & \code{termco_d} - both return a list, of class 
 #' "termco", of data frames and information regarding word counts:
 #' \item{raw}{raw word counts by grouping variable} 
 #' \item{prop}{proportional word counts by grouping variable; proportional to 
@@ -52,7 +52,7 @@
 #' vector of c(" read ", " reads", " reading", " reader").  To search for non 
 #' character arguments (i.e., numbers and symbols) additional arguments from 
 #' strip must be passed.
-#' @seealso \code{\link[qdap]{termco.c}}
+#' @seealso \code{\link[qdap]{termco_c}}
 #' @keywords word-search
 #' @export
 #' @examples
@@ -98,11 +98,11 @@
 #' termco(DATA$state, DATA$person, '0', digit.remove=FALSE)
 #' DATA <- qdap::DATA
 #' 
-#' #Using with term.match and exclude    
-#' exclude(term.match(DATA$state, qcv(th), FALSE), "truth")
-#' termco(DATA$state, DATA$person, exclude(term.match(DATA$state, qcv(th), 
+#' #Using with term_match and exclude    
+#' exclude(term_match(DATA$state, qcv(th), FALSE), "truth")
+#' termco(DATA$state, DATA$person, exclude(term_match(DATA$state, qcv(th), 
 #'     FALSE), "truth"))
-#' MTCH.LST <- exclude(term.match(DATA$state, qcv(th, i)), qcv(truth, stinks))
+#' MTCH.LST <- exclude(term_match(DATA$state, qcv(th, i)), qcv(truth, stinks))
 #' termco(DATA$state, DATA$person, MTCH.LST)
 #' 
 #' syns <- synonyms("doubt")
@@ -112,13 +112,13 @@
 #' termco(DATA$state, DATA$person, list(doubt = synonyms("doubt", FALSE)))
 #' termco(DATA$state, DATA$person, syns)
 #' 
-#' #termco.d examples:
-#' termco.d(DATA$state, DATA$person, c(" the", " i'"))
-#' termco.d(DATA$state, DATA$person, c(" the", " i'"), ignore.case=FALSE)
-#' termco.d(DATA$state, DATA$person, c(" the ", " i'"))
+#' #termco_d examples:
+#' termco_d(DATA$state, DATA$person, c(" the", " i'"))
+#' termco_d(DATA$state, DATA$person, c(" the", " i'"), ignore.case=FALSE)
+#' termco_d(DATA$state, DATA$person, c(" the ", " i'"))
 #' 
 #' # termco2mat example:
-#' MTCH.LST <- exclude(term.match(DATA$state, qcv(a, i)), qcv(is, it, am, shall))
+#' MTCH.LST <- exclude(term_match(DATA$state, qcv(a, i)), qcv(is, it, am, shall))
 #' termco_obj <- termco(DATA$state, DATA$person, MTCH.LST)
 #' termco2mat(termco_obj)
 #' plot(termco_obj)
@@ -199,7 +199,7 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
     new.names <- paste0("term(", names(IND)[IND != 1], ")")
     CC <- match.list[names(match.list) != ""]
     ML <- unlist(match.list)
-    TD <- termco.d(text.var = text.var, grouping.var = grouping.var, 
+    TD <- termco_d(text.var = text.var, grouping.var = grouping.var, 
         match.string = ML, ignore.case = ignore.case, percent = percent, 
         apostrophe.remove = apostrophe.remove, char.keep = char.keep, 
         digit.remove = FALSE, digits = digits, zero.replace = zero.replace, ...)
@@ -208,7 +208,7 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
         if(length(IND) == sum(IND)){
             o <- TD
         } else {
-            o <- termco.c(TD, combined.columns = CC, new.name = new.names, 
+            o <- termco_c(TD, combined.columns = CC, new.name = new.names, 
                 zero.replace = zero.replace, short.term = TRUE, 
                 elim.old = elim.old, percent = percent, digits = digits)
         }
@@ -286,16 +286,16 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
 
 #' Search for Terms
 #' 
-#' \code{termco.d} - Search a transcript by any number of grouping variables for 
+#' \code{termco_d} - Search a transcript by any number of grouping variables for 
 #' root terms.
 #' 
 #' @param match.string A vector of terms to search for.  When using inside of 
-#' \code{term.match} the term(s) must be words or partial words but do not have 
-#' to be when using \code{\link[qdap]{termco.d}} (i.e., they can be phrases, 
+#' \code{term_match} the term(s) must be words or partial words but do not have 
+#' to be when using \code{\link[qdap]{termco_d}} (i.e., they can be phrases, 
 #' symbols etc.).
 #' @rdname termco
 #' @export
-termco.d <-
+termco_d <-
   function (text.var, grouping.var=NULL, match.string, short.term = FALSE,
     ignore.case = TRUE, zero.replace = 0, percent = TRUE,  digits = 2, 
     apostrophe.remove = FALSE, char.keep = NULL, digit.remove = TRUE, ...){
@@ -351,18 +351,18 @@ termco.d <-
 
 #' Search a Transcript for Terms
 #' 
-#' \code{term.match} - Search a transcript for words that exactly match term(s).
+#' \code{term_match} - Search a transcript for words that exactly match term(s).
 #' 
 #' @param terms The terms to search for in the \code{text.var}.  Similar to 
 #' \code{match.list} but these terms must be words or partial words rather than 
 #' multiple words and symbols.
 #' @param return.list logical.  If \code{TRUE} returns the output for multiple 
 #' terms as a list by term rather than a vector.
-#' @return \code{term.match} -  returns a list or vector of possible words that 
+#' @return \code{term_match} -  returns a list or vector of possible words that 
 #' match term(s).
 #' @rdname termco
 #' @export
-term.match <-
+term_match <-
 function(text.var, terms, return.list=TRUE, apostrophe.remove=FALSE) {
     y <- stopwords(text.var, stopwords = NULL, 
         unlist=TRUE, strip=TRUE, unique=TRUE, apostrophe.remove=apostrophe.remove)
@@ -383,7 +383,7 @@ function(text.var, terms, return.list=TRUE, apostrophe.remove=FALSE) {
 #' \code{termco2mat} - Convert a termco dataframe to a matrix for use with 
 #' visualization functions (e.g., \code{\link[gplots]{heatmap.2}}).
 #' 
-#' @param dataframe A termco (or termco.d) dataframe or object.
+#' @param dataframe A termco (or termco_d) dataframe or object.
 #' @param drop.wc logical.  If \code{TRUE} the word count column will be 
 #' dropped.
 #' @param rm.zerocol logical.  If \code{TRUE} any column containing all zeros 

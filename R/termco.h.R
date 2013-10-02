@@ -35,7 +35,7 @@ function (text.var, match.string, grouping.var = NULL, ignore.case = FALSE,
     return(y)
   } else {
     y <- data.frame(group.var, y[, -1])
-    X <- data.frame(Y = word.count(text.var), G = group.var)
+    X <- data.frame(Y = word_count(text.var), G = group.var)
     Z <- aggregate(Y ~ G, X, sum)
     z <- lapply(2:length(y), function(x) {
       aggregate(y[, x] ~ group.var, y, sum)

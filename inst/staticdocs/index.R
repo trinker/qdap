@@ -23,7 +23,7 @@ list(
         "beg2char",
         "capitalizer",        
         "clean",
-        "incomplete.replace",
+        "incomplete_replace",
         "multigsub",
         "name2sex",
         "potential_NA",
@@ -44,7 +44,7 @@ list(
       "Functions to aid data viewing.", 
       c(
         "htruncdf",
-        "left.just",
+        "left_just",
         "Search",        
         "strWrap"
       )
@@ -70,7 +70,7 @@ list(
       "Functions for working with dialogue at the word level.",
       c(
         "all_words",
-        "bag.o.words",
+        "bag_o_words",
         "common",
         "exclude",
         "ngrams",
@@ -107,18 +107,18 @@ list(
     sd_section("Counts/Descriptives",
       "Functions for word counts and descriptive statistics.",
       c(
-        "distTab",
+        "dist_tab",
         "multiscale",
-        "outlier.detect",
-        "outlier.labeler",
+        "outlier_detect",
+        "outlier_labeler",
         "pos",
         "question_type",
-        "syllable.sum",
+        "syllable_sum",
         "tdm",        
         "termco",
-        "termco.c",
+        "termco_c",
         "wfm",
-        "word.count",
+        "word_count",
         "word_stats"
       )
     ),
@@ -129,7 +129,7 @@ list(
         "dissimilarity",
         "diversity",
         "formality",
-        "kullback.leibler",
+        "kullback_leibler",
         "polarity"
       )
     ),
@@ -146,7 +146,7 @@ list(
         "sec2hms",        
         "text2color",
         "url_dl",
-        "v.outer"
+        "v_outer"
       ) 
     ),
     sd_section("Identification", 
@@ -164,13 +164,13 @@ list(
         "gradient_cloud",
         "gantt_plot",
         "gantt_wrap",
-        "plot.character.table",
+        "plot.character_table",
         "plot.cmspans",
         "plot.diversity",
         "plot.formality",
         "plot.gantt", 
         "plot.polarity",
-        "plot.pos.by",
+        "plot.pos_by",
         "plot.question_type",
         "plot.sum_cmspans",
         "plot.termco",
@@ -178,29 +178,29 @@ list(
         "qheat",
         "rank_freq_mplot",
         "tot_plot",
-        "trans.cloud",
-        "trans.venn",
-        "word.network.plot"
+        "trans_cloud",
+        "trans_venn",
+        "word_network_plot"
       )
     ),
     sd_section("Print Functions", "",
       c(
         "print.adjacency_matrix",
-        "print.character.table",
+        "print.character_table",
         "print.cm_distance",
         "print.colsplit2df",
         "print.dissimilarity",
         "print.diversity",
         "print.formality",
-        "print.kullback.leibler",
+        "print.kullback_leibler",
         "print.ngrams",
         "print.polarity",
         "print.pos",
-        "print.pos.by",
+        "print.pos_by",
         "print.question_type",
         "print.sum_cmspans",
         "print.termco",
-        "print.v.outer",
+        "print.v_outer",
         "print.word_associate",
         "print.word_list",
         "print.word_stats"

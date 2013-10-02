@@ -51,7 +51,7 @@
 #'         round(log(Reduce("/", y[ order(y[, "gender"]), "per.freq"])), 2)
 #'     })
 #' 
-#' ## The log likelihood of being a female name
+#' ## The log ratio of being a female name
 #' sex
 #' orig_nms 
 #' data.frame(name = orig_nms, sex = sex, `ratio_F:M` = names(sex), 

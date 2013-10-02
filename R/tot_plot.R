@@ -54,7 +54,7 @@
 tot_plot <- function(dataframe, text.var, grouping.var = NULL, facet.vars = NULL, 
     tot = TRUE, transform = FALSE, ncol = NULL, ylab=NULL, xlab=NULL, bar.space=0, 
     scale = NULL, space = NULL) {
-    group <- caps <- NULL
+    word.count <- group <- caps <- NULL
     DF <- dataframe
     if (isTRUE(tot)) {
         if(!any(colnames(dataframe) %in% "tot")) {

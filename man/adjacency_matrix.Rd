@@ -10,8 +10,8 @@
 \arguments{
   \item{matrix.obj}{A matrix object, preferably, of the
   class "termco" generated from \code{\link[qdap]{termco}},
-  \code{\link[qdap]{termco.d}} or
-  \code{\link[qdap]{termco.c}}.}
+  \code{\link[qdap]{termco_d}} or
+  \code{\link[qdap]{termco_c}}.}
 }
 \value{
   Returns list: \item{boolean}{A Boolean matrix}

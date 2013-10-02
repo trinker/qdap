@@ -1,5 +1,5 @@
 \name{stemmer}
-\alias{stem.words}
+\alias{stem_words}
 \alias{stem2df}
 \alias{stemmer}
 \title{Stem Text}
@@ -7,7 +7,7 @@
   stemmer(text.var, rm.bracket = TRUE, capitalize = TRUE,
     warn = TRUE, char.keep = "~~", ...)
 
-  stem.words(...)
+  stem_words(...)
 
   stem2df(dataframe, text.var, stem.name = NULL, ...)
 }
@@ -31,7 +31,7 @@
 
   \item{\dots}{Various: \cr \emph{\code{stemmer} - Other
   arguments passed to \code{\link[qdap]{capitalizer}}} \cr
-  \emph{\code{stem.words} - Words or terms.} \cr
+  \emph{\code{stem_words} - Words or terms.} \cr
   \emph{\code{stem2df} - Other arguments passed to
   \code{\link[qdap]{stemmer}}}}
 
@@ -45,7 +45,7 @@
   \code{stemmer} - returns a character vector with stemmed
   text.
 
-  \code{stem.words} - returns a vector of individually
+  \code{stem_words} - returns a vector of individually
   stemmed words.
 
   \code{stem2df} - returns a dataframe with a character
@@ -54,7 +54,7 @@
 \description{
   \code{stemmer} - Stems a vector of text strings.
 
-  \code{stem.words} - Wrapper for stemmer that stems a
+  \code{stem_words} - Wrapper for stemmer that stems a
   vector of words.
 
   \code{stem2df} - Wrapper for stemmer that stems a vector
@@ -68,8 +68,8 @@ stemmer(DATA$state)
 out1 <- stemmer(raj$dialogue)
 htruncdf(out1, 20, 60)
 
-#stem.words EXAMPLE:
-stem.words(doggies, jumping, swims)
+#stem_words EXAMPLE:
+stem_words(doggies, jumping, swims)
 
 #stem2df EXAMPLE:
 out2 <- stem2df(DATA, "state", "new")

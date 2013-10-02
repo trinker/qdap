@@ -106,7 +106,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
         mat <- mat[["gts"]]
         class(mat) <- "data.frame"
     }
-    if (CLS %in% c("character.table", "question_type", "pos.by")) {
+    if (CLS %in% c("character_table", "question_type", "pos_by")) {
         mat <- mat[["prop"]]
     }
     if (CLS == "termco") {
