@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.00 19.70 15.79 15.79 22.40 25.34 22.40 15.00 15.79 25.34 25.34
-## [12] 25.34 19.70 15.00 15.79 15.00 19.70 15.00 25.34 15.79
+##  [1] 15.79 19.70 16.30 16.30 19.70 16.30 19.70 16.30 19.70 19.70 15.79
+## [12] 16.30 19.70 15.79 25.34 22.40 22.40 25.34 15.00 15.00
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.00 19.70 15.79 15.79 22.40 25.34 22.40 15.00 15.79 25.34 25.34
-## [12] 25.34 19.70 15.00 15.79 15.00 19.70 15.00 25.34 15.79
+##  [1] 15.79 19.70 16.30 16.30 19.70 16.30 19.70 16.30 19.70 19.70 15.79
+## [12] 16.30 19.70 15.79 25.34 22.40 22.40 25.34 15.00 15.00
 ```
 
 
@@ -2553,6 +2553,9 @@ The following functions will be utilized in this section (click to view more):
 <form class="form_left" action="http://trinker.github.io/qdap_dev/paste2.html" target="_blank">
     <input type="submit" value="paste2"/>
 </form>
+<form class="form_left" action="http://trinker.github.io/qdap_dev/paste2.html" target="_blank">
+    <input type="submit" value="colpaste2df"/>
+</form>
 <form class="form_left" action="http://trinker.github.io/qdap_dev/colSplit.html" target="_blank">
     <input type="submit" value="colSplit"/>
 </form>
@@ -2849,7 +2852,7 @@ htruncdf(merged.raj, 10, 40)
 
 <h4 id="paste2">Paste and Split Columns</h4>
 
-Many functions in qdap utilize the <a href="http://trinker.github.io/qdap_dev/paste2.html" target="_blank"><code>paste2</code></a> function, which pastes multiple columns/lists of vectors.  <a href="http://trinker.github.io/qdap_dev/paste2.html" target="_blank"><code>paste2</code></a> differs from base R's <a href="http://127.0.0.1:16084/library/base/html/paste.html" target="_blank">paste</a> function in that <a href="http://trinker.github.io/qdap_dev/paste2.html" target="_blank"><code>paste2</code></a> can paste unspecified columns or a list of vectors together.  The <a href="http://trinker.github.io/qdap_dev/colsplit2df.html" target="_blank"><code>colsplit2df</code></a> and <a href="http://trinker.github.io/qdap_dev/lcolsplit2df.html" target="_blank"><code>lcolsplit2df</code></a> are useful because they can split the output from qdap functions that contain dataframes with pasted columns.
+Many functions in qdap utilize the <a href="http://trinker.github.io/qdap_dev/paste2.html" target="_blank"><code>paste2</code></a> function, which pastes multiple columns/lists of vectors.  <a href="http://trinker.github.io/qdap_dev/paste2.html" target="_blank"><code>paste2</code></a> differs from base R's <a href="http://127.0.0.1:16084/library/base/html/paste.html" target="_blank">paste</a> function in that <a href="http://trinker.github.io/qdap_dev/paste2.html" target="_blank"><code>paste2</code></a> can paste unspecified columns or a list of vectors together.  The <a href="http://trinker.github.io/qdap_dev/paste2.html" target="_blank"><code>colpaste2df</code></a> function, a wrapper for <a href="http://trinker.github.io/qdap_dev/paste2.html" target="_blank"><code>paste2</code></a>, pastes multiple columns together and outputs an appropriately named dataframe.  The <a href="http://trinker.github.io/qdap_dev/colsplit2df.html" target="_blank"><code>colsplit2df</code></a> and <a href="http://trinker.github.io/qdap_dev/colsplit2df.html" target="_blank"><code>lcolsplit2df</code></a> are useful because they can split the output from qdap functions that contain dataframes with pasted columns.
 
 <font size="5" color="orange">&diams;</font> **Using <a href="http://trinker.github.io/qdap_dev/paste2.html" target="_blank"><code>paste2</code></a> and <a href="http://trinker.github.io/qdap_dev/colSplit.html" target="_blank"><code>colSplit</code></a>**: *Pasting & Splitting Vectors and Dataframes*<font size="5" color="orange">&diams;</font>
 
@@ -2901,14 +2904,12 @@ head(bar1, 10)
 ```
 
 
-<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/colsplit2df.html" target="_blank"><code>colsplit2df</code></a>**: *Splitting Columns in Dataframes*<font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/colpaste2df.html" target="_blank"><code>colpaste2df</code></a> & <a href="http://trinker.github.io/qdap_dev/colsplit2df.html" target="_blank"><code>colsplit2df</code></a>**: *Splitting Columns in Dataframes*<font size="5" color="orange">&diams;</font>
 
 
 ```r
 ## Create a dataset with a pasted column
-dat <- data.frame(`Plant&Type&Treatment` = paste2(CO2[, 1:3]), 
-    CO2[, 4:5], check.names = FALSE)[1:9, ]
-head(dat)
+(dat <- colpaste2df(head(CO2), 1:3, keep.orig = FALSE)[, c(3, 1:2)])
 ```
 
 ```
@@ -2934,9 +2935,6 @@ colsplit2df(dat)
 ## 4   Qn1 Quebec nonchilled  350   37.2
 ## 5   Qn1 Quebec nonchilled  500   35.3
 ## 6   Qn1 Quebec nonchilled  675   39.2
-## 7   Qn1 Quebec nonchilled 1000   39.7
-## 8   Qn2 Quebec nonchilled   95   13.6
-## 9   Qn2 Quebec nonchilled  175   27.3
 ```
 
 ```r
@@ -2952,9 +2950,6 @@ colsplit2df(dat, new.names = qcv(A, B, C))
 ## 4 Qn1 Quebec nonchilled  350   37.2
 ## 5 Qn1 Quebec nonchilled  500   35.3
 ## 6 Qn1 Quebec nonchilled  675   39.2
-## 7 Qn1 Quebec nonchilled 1000   39.7
-## 8 Qn2 Quebec nonchilled   95   13.6
-## 9 Qn2 Quebec nonchilled  175   27.3
 ```
 
 ```r
@@ -2970,9 +2965,35 @@ colsplit2df(dat, new.names = qcv(A, B, C), keep.orig = TRUE)
 ## 4 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  350   37.2
 ## 5 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  500   35.3
 ## 6 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  675   39.2
-## 7 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled 1000   39.7
-## 8 Qn2.Quebec.nonchilled Qn2 Quebec nonchilled   95   13.6
-## 9 Qn2.Quebec.nonchilled Qn2 Quebec nonchilled  175   27.3
+```
+
+```r
+## Pasting columns and output a dataframe
+colpaste2df(head(mtcars)[, 1:5], qcv(mpg, cyl, disp), sep ="_", name.sep = "|")
+```
+
+```
+##                    mpg cyl disp  hp drat mpg|cyl|disp
+## Mazda RX4         21.0   6  160 110 3.90     21_6_160
+## Mazda RX4 Wag     21.0   6  160 110 3.90     21_6_160
+## Datsun 710        22.8   4  108  93 3.85   22.8_4_108
+## Hornet 4 Drive    21.4   6  258 110 3.08   21.4_6_258
+## Hornet Sportabout 18.7   8  360 175 3.15   18.7_8_360
+## Valiant           18.1   6  225 105 2.76   18.1_6_225
+```
+
+```r
+colpaste2df(head(CO2)[, -3], list(1:2, qcv("conc", "uptake")))
+```
+
+```
+##   Plant   Type conc uptake Plant&Type conc&uptake
+## 1   Qn1 Quebec   95   16.0 Qn1.Quebec       95.16
+## 2   Qn1 Quebec  175   30.4 Qn1.Quebec    175.30.4
+## 3   Qn1 Quebec  250   34.8 Qn1.Quebec    250.34.8
+## 4   Qn1 Quebec  350   37.2 Qn1.Quebec    350.37.2
+## 5   Qn1 Quebec  500   35.3 Qn1.Quebec    500.35.3
+## 6   Qn1 Quebec  675   39.2 Qn1.Quebec    675.39.2
 ```
 
 
@@ -4444,61 +4465,65 @@ with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))
    
 <h3 id="coding">Qualitative Coding System</h3>
 
-
 <div class="funs">
-The following functions will be utilized in this section (click to view more):    
+The following functions will be utilized in this section (click to view more): <br><br>   
 
-<form action="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank">
-    <input type="submit" value="cm_code.blank"> - <a href="#code.blank">Blank Code Transformation</a>
+<form class="form_left" action="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank">
+    <input type="submit" value="cm_code.blank"> 
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank">
-    <input type="submit" value="cm_code.combine"> - Combine Codes
+<form class="form_left" action="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank">
+    <input type="submit" value="cm_code.combine"> 
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank">
-    <input type="submit" value="cm_code.exclude"> - Exclude Codes
+<form class="form_left" action="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank">
+    <input type="submit" value="cm_code.exclude"> 
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank">
-    <input type="submit" value="cm_code.overlap"> - Find Co-occurrence Between Codes
+<form class="form_left" action="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank">
+    <input type="submit" value="cm_code.overlap"> 
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank">
-    <input type="submit" value="cm_code.transform"> - Transform Codes
+    <input type="submit" value="cm_code.transform"> - <br> <a href="#reshape">Combine Exclude and Overlap Codes</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/cm_df.temp.html" target="_blank">
-    <input type="submit" value="cm_df.temp"> - Break Transcript Dialogue into Blank Code Matrix
+<form class="form_left" action="http://trinker.github.io/qdap_dev/cm_df.temp.html" target="_blank">
+    <input type="submit" value="cm_df.temp"> 
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/cm_df.transcript.html" target="_blank">
-    <input type="submit" value="cm_df.transcript"> - Transcript With Word Number
+<form action="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank">
+    <input type="submit" value="cm_long"> - <a href="#wordcsv">Coding .csv Approach</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/cm_df2long.html" target="_blank">
-    <input type="submit" value="cm_df2long"> - Transform Codes to Start-End Durations
+
+
+<form class="form_left" action="http://trinker.github.io/qdap_dev/cm_range.temp.html" target="_blank">
+    <input type="submit" value="cm_range.temp">
 </form>
+<form class="form_left" action="http://trinker.github.io/qdap_dev/cm_df.transcript.html" target="_blank">
+    <input type="submit" value="cm_df.transcript"> 
+</form>
+<form action="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank">
+    <input type="submit" value="cm_2long">  - <a href="#wordtrans">Coding Words - Transcript & List Approach</a>
+</form>
+
+
+
+<form class="form_left" action="http://trinker.github.io/qdap_dev/cm_time.temp.html" target="_blank">
+    <input type="submit" value="cm_time.temp">
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank">
+    <input type="submit" value="cm_2long"> - <a href="#timespan">Coding Time Spans Approach</a> 
+</form>
+
 
 <form action="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank">
-    <input type="submit" value="cm_distance"> - Distance Matrix Between Codes
+    <input type="submit" value="cm_distance"> - <a href="#cmdist">Distance Matrix Between Codes</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/cm_range.temp.html" target="_blank">
-    <input type="submit" value="cm_range.temp"> - Range Code Sheet
-</form>
 
-<form action="http://trinker.github.io/qdap_dev/cm_range2long.html" target="_blank">
-    <input type="submit" value="cm_range2long"> - Transform Codes to Start-End Durations
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/cm_time.temp.html" target="_blank">
-    <input type="submit" value="cm_time.temp"> - Time Span Code Sheet
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/cm_time2long.html" target="_blank">
-    <input type="submit" value="cm_time2long"> - Transform Codes to Start-End Times
-</form>
 </div>
 
 A major task in qualitative work is coding either time or words with selected coding structures.  For example a researcher may code the teacher's dialogue as related to the resulting behavior of a student in a classroom as "high", "medium" or "low" engagement. The researcher may choose to apply the coding to:
@@ -5765,7 +5790,412 @@ blanklist2 <- list(noAB=qcv(AA, BB), noABC=qcv(AA, BB, CC))
 
 <h4 id="analysis">Initial Coding Analysis</h4>
 
+The <font color="red">cm_</font> family of functions has three approaches to intial analysis of codes.  The researcher may want to summarize, visualize or determine the proximaty of codes to one another.  The following functions accomplish these tasks:
 
+1. <a href="#cmsum">Summary</a>    
+2. <a href="#cmplot">Plotting</a>    
+2. <a href="#cmdist">Distance Measures</a>    
+
+<h5 id="cmsum"><font color="green">Summary</font></h5>
+
+Most of the <font color="red">cm_</font> family of functions have a <a href="http://trinker.github.io/qdap_dev/summary.cmspans.html" target="_blank"><code>summary</code></a> method to allows for summaries of codes by group.  Note that these summaries can be wrapped with <a href="http://trinker.github.io/qdap_dev/plot.sum_cmspans.html" target="_blank"><code>plot</code></a> to print a heat map of the table of summaries.
+
+<font size="5" color="orange">&diams;</font> **Example 1: Summarizing Transcript/List Approach** <font size="5" color="orange">&diams;</font>
+
+
+```r
+## Two transcript lists
+A <- list(
+    person_greg = qcv(terms='7:11, 20:24, 30:33, 49:56'),
+    person_researcher = qcv(terms='42:48'),
+    person_sally = qcv(terms='25:29, 37:41'),
+    person_sam = qcv(terms='1:6, 16:19, 34:36'),
+    person_teacher = qcv(terms='12:15'),
+    adult_0 = qcv(terms='1:11, 16:41, 49:56'),
+    adult_1 = qcv(terms='12:15, 42:48'),
+    AA = qcv(terms="1"),
+    BB = qcv(terms="1:2, 3:10, 19"),
+    CC = qcv(terms="1:9, 100:150")
+)
+
+B  <- list(
+    person_greg = qcv(terms='7:11, 20:24, 30:33, 49:56'),
+    person_researcher = qcv(terms='42:48'),
+    person_sally = qcv(terms='25:29, 37:41'),
+    person_sam = qcv(terms='1:6, 16:19, 34:36'),
+    person_teacher = qcv(terms='12:15'),
+    adult_0 = qcv(terms='1:11, 16:41, 49:56'),
+    adult_1 = qcv(terms='12:15, 42:48'),
+    AA = qcv(terms="40"),
+    BB = qcv(terms="50:90"),
+    CC = qcv(terms="60:90, 100:120, 150"),
+    DD = qcv(terms="")
+)
+
+## Long format for transcript/list approach
+v <- cm_2long(A, B, v.name = "time")
+head(v)
+```
+
+```
+##                code start end time
+## 1       person_greg     6  11    A
+## 2       person_greg    19  24    A
+## 3       person_greg    29  33    A
+## 4       person_greg    48  56    A
+## 5 person_researcher    41  48    A
+## 6      person_sally    24  29    A
+```
+
+
+
+```r
+## Summary of the data and plotting the summary
+summary(v)
+```
+
+
+<pre><code>time              code total percent_total n percent_n  ave min max   mean(sd)
+1  a       person_greg    22         12.0% 4     18.2%  5.5   4   8   5.5(1.7)
+2  a person_researcher     7          3.8% 1      4.5%  7.0   7   7     7.0(0)
+3  a      person_sally    10          5.4% 2      9.1%  5.0   5   5     5.0(0)
+4  a        person_sam    13          7.1% 3     13.6%  4.3   3   6   4.3(1.5)
+5  a    person_teacher     4          2.2% 1      4.5%  4.0   4   4     4.0(0)
+6  a           adult_0    45         24.5% 3     13.6% 15.0   8  26  15.0(9.6)
+7  a           adult_1    11          6.0% 2      9.1%  5.5   4   7   5.5(2.1)
+8  a                AA     1           .5% 1      4.5%  1.0   1   1     1.0(0)
+9  a                BB    11          6.0% 3     13.6%  3.7   1   8   3.7(3.8)
+10 a                CC    60         32.6% 2      9.1% 30.0   9  51 30.0(29.7)
+11 b       person_greg    22         10.6% 4     19.0%  5.5   4   8   5.5(1.7)
+12 b person_researcher     7          3.4% 1      4.8%  7.0   7   7     7.0(0)
+13 b      person_sally    10          4.8% 2      9.5%  5.0   5   5     5.0(0)
+14 b        person_sam    13          6.3% 3     14.3%  4.3   3   6   4.3(1.5)
+15 b    person_teacher     4          1.9% 1      4.8%  4.0   4   4     4.0(0)
+16 b           adult_0    45         21.7% 3     14.3% 15.0   8  26  15.0(9.6)
+17 b           adult_1    11          5.3% 2      9.5%  5.5   4   7   5.5(2.1)
+18 b                AA     1           .5% 1      4.8%  1.0   1   1     1.0(0)
+19 b                BB    41         19.8% 1      4.8% 41.0  41  41    41.0(0)
+20 b                CC    53         25.6% 3     14.3% 17.7   1  31 17.7(15.3)
+============================
+Unit of measure: words
+</code></pre>
+
+
+
+```r
+plot(summary(v))
+```
+
+![plot of chunk unnamed-chunk-106](figure/unnamed-chunk-1061.png) 
+
+```r
+plot(summary(v), facet.vars = "time")
+```
+
+![plot of chunk unnamed-chunk-106](figure/unnamed-chunk-1062.png) 
+
+
+
+<font size="5" color="orange">&diams;</font> **Example 2: Summarizing Time Spans Approach** <font size="5" color="orange">&diams;</font>
+
+
+```r
+## Single time list
+x <- list(
+    transcript_time_span = qcv(00:00 - 1:12:00),
+    A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),
+    B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00,
+        9.00, 1.12.00:1.19.01"),
+    C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
+)
+
+## Long format for time span approach
+z <-cm_2long(x)
+head(z)
+```
+
+```
+##   code start end    Start      End variable
+## 1    A   159 180 00:02:39 00:03:00        x
+## 2    A   300 301 00:05:00 00:05:01        x
+## 3    A   361 420 00:06:01 00:07:00        x
+## 4    A   539 540 00:08:59 00:09:00        x
+## 5    B   159 160 00:02:39 00:02:40        x
+## 6    B   180 182 00:03:00 00:03:02        x
+```
+
+
+
+```r
+## Summary of the data and plotting the summary
+summary(z)
+```
+
+
+<pre><code>  code total percent_total n percent_n  ave min max    mean(sd)
+1    A 01:22         12.6% 4     26.7% 20.5   1  59  20.5(27.3)
+2    B 08:06         74.7% 6     40.0% 81.0   1 422 81.0(168.6)
+3    C 01:23         12.7% 5     33.3% 16.6   1  59  16.6(25.2)
+============================
+Unit of measure: time
+Columns measured in seconds unless in the form hh:mm:ss
+</code></pre>
+
+
+```r
+plot(summary(z))
+```
+
+![plot of chunk unnamed-chunk-109](figure/unnamed-chunk-109.png) 
+
+
+<font size="5" color="orange">&diams;</font> **Trouble Shooting Summary: Suppress Measurement Units** <font size="5" color="orange">&diams;</font>
+
+
+```r
+## suppress printing measurement units
+suppressMessages(print(summary(z)))
+```
+
+
+<pre><code>  code total percent_total n percent_n  ave min max    mean(sd)
+1    A 01:22         12.6% 4     26.7% 20.5   1  59  20.5(27.3)
+2    B 08:06         74.7% 6     40.0% 81.0   1 422 81.0(168.6)
+3    C 01:23         12.7% 5     33.3% 16.6   1  59  16.6(25.2)
+</code></pre>
+
+
+<font size="5" color="orange">&diams;</font> **Trouble Shooting Summary: Print as Dataframe** <font size="5" color="orange">&diams;</font>
+
+
+```r
+## remove print method
+class(z) <- "data.frame"
+z
+```
+
+```
+##    code start  end    Start      End variable
+## 1     A   159  180 00:02:39 00:03:00        x
+## 2     A   300  301 00:05:00 00:05:01        x
+## 3     A   361  420 00:06:01 00:07:00        x
+## 4     A   539  540 00:08:59 00:09:00        x
+## 5     B   159  160 00:02:39 00:02:40        x
+## 6     B   180  182 00:03:00 00:03:02        x
+## 7     B   300  301 00:05:00 00:05:01        x
+## 8     B   361  420 00:06:01 00:07:00        x
+## 9     B   539  540 00:08:59 00:09:00        x
+## 10    B  4319 4741 01:11:59 01:19:01        x
+## 11    C   159  180 00:02:39 00:03:00        x
+## 12    C   300  301 00:05:00 00:05:01        x
+## 13    C   361  420 00:06:01 00:07:00        x
+## 14    C   539  540 00:08:59 00:09:00        x
+## 15    C  1020 1021 00:17:00 00:17:01        x
+```
+
+
+
+<h5 id="cmplot"><font color="green">Plotting</font></h5>
+
+Like <a href="http://trinker.github.io/qdap_dev/summary.cmspans.html" target="_blank"><code>summary</code></a>, most of the <font color="red">cm_</font> family of functions have a <a href="http://trinker.github.io/qdap_dev/plot.cmspans.html" target="_blank"><code>plot</code></a> method as well that allows a Gantt plot visualization of codes by group.
+
+<font size="5" color="orange">&diams;</font> **Gantt Plot of Transcript/List or Time Spans Data** <font size="5" color="orange">&diams;</font>
+
+
+
+```r
+## Two transcript lists
+A <- list(
+    person_greg = qcv(terms='7:11, 20:24, 30:33, 49:56'),
+    person_researcher = qcv(terms='42:48'),
+    person_sally = qcv(terms='25:29, 37:41'),
+    person_sam = qcv(terms='1:6, 16:19, 34:36'),
+    person_teacher = qcv(terms='12:15'),
+    adult_0 = qcv(terms='1:11, 16:41, 49:56'),
+    adult_1 = qcv(terms='12:15, 42:48'),
+    AA = qcv(terms="1"),
+    BB = qcv(terms="1:2, 3:10, 19"),
+    CC = qcv(terms="1:9, 100:150")
+)
+
+B  <- list(
+    person_greg = qcv(terms='7:11, 20:24, 30:33, 49:56'),
+    person_researcher = qcv(terms='42:48'),
+    person_sally = qcv(terms='25:29, 37:41'),
+    person_sam = qcv(terms='1:6, 16:19, 34:36'),
+    person_teacher = qcv(terms='12:15'),
+    adult_0 = qcv(terms='1:11, 16:41, 49:56'),
+    adult_1 = qcv(terms='12:15, 42:48'),
+    AA = qcv(terms="40"),
+    BB = qcv(terms="50:90"),
+    CC = qcv(terms="60:90, 100:120, 150"),
+    DD = qcv(terms="")
+)
+
+## Long format
+x <- cm_2long(A, v.name = "time")
+y <- cm_2long(A, B, v.name = "time")
+
+## cm_code family
+combs <- list(sam_n_sally = qcv(person_sam, person_sally))
+z <- cm_code.combine(v, combs, "time")
+```
+
+
+
+```r
+plot(x, title = "Single")
+```
+
+![plot of chunk unnamed-chunk-113](figure/unnamed-chunk-113.png) 
+
+
+
+```r
+plot(y, title = "Repeated Measure")
+```
+
+![plot of chunk unnamed-chunk-114](figure/unnamed-chunk-1141.png) 
+
+```r
+plot(z, title = "Combined Codes")
+```
+
+![plot of chunk unnamed-chunk-114](figure/unnamed-chunk-1142.png) 
+
+
+<h5 id="cmdist"><font color="green">Distance Measures</font></h5>
+
+Often a research will want to know which codes are clustering closer to other codes (regardless of whether the codes represent word or time spans).  <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a> allows the research to find the distances between codes and standardize the mean of the differences to allow for comparisons similar to a correlation.  The matrix output from <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a> is arrived at by taking the means and standard deviations of the differences between codes and scaling them (without centering) and then multiplying the two together.  This results in a standarized distance measure that is non-negative, with values closer to zero indicating a codes that are found in closer proximaty.  
+
+The researcher may also access the means, standard deviations and number of codes by indexing the list output for each transcript.  This distance measure compliments the Gantt plot.  
+
+Note that the argument <b><font color="green" face="courier new">causal = FALSE</font></b> (the defualt) does not assume Code A comes before Code B whereas <b><font color="green" face="courier new">causal = TRUE</font></b> assumes the first code precedes the second code.  Generally, setting <b><font color="green" face="courier new">causal = FALSE</font></b> wil result in larger mean of differences and accompanying standardized values.  Also note that rownames are the first code and column names are the second comparison code.  The values for Code A compared to Code B will not be the same as Code B compared to Code A.  This is because each span (start and end) for Code A is compared to the nearest start or end for Code B.  So for example there may be 6 Code A spans and thus six differences between A and B, whereas Code B may only have 3 spans and thus three differences between B and A.  This fact alone will lead to differences in A compared to B versus B compared to A.
+
+
+
+```r
+x <- list(
+    transcript_time_span = qcv(00:00 - 1:12:00),
+    A = qcv(terms = "2.40:3.00, 6.32:7.00, 9.00,
+        10.00:11.00, 33.23:40.00, 59.56"),
+    B = qcv(terms = "3.01:3.02, 5.01,  19.00, 1.12.00:1.19.01"),
+    C = qcv(terms = "2.40:3.00, 5.01, 6.32:7.00, 9.00, 17.01, 38.09:40.00")
+)
+y <- list(
+    transcript_time_span = qcv(00:00 - 1:12:00),
+    A = qcv(terms = "2.40:3.00, 6.32:7.00, 9.00,
+        10.00:11.00, 23.44:25.00, 59.56"),
+    B = qcv(terms = "3.01:3.02, 5.01, 7.05:8.00 19.30, 1.12.00:1.19.01"),
+    C = qcv(terms = "2.40:3.00, 5.01, 6.32:7.30, 9.00, 17.01, 25.09:27.00")
+)
+
+## Long format
+dat <- cm_2long(x, y)
+```
+
+
+![plot of chunk unnamed-chunk-116](figure/unnamed-chunk-116.png) 
+
+
+
+```r
+## a cm_distance output
+(out1 <- cm_distance(dat, time.var = "variable"))
+```
+
+
+<pre><code>x
+
+standardized:
+     A    B    C
+A 0.00 1.04 0.82
+B 0.88 0.00 3.89
+C 0.09 0.95 0.00
+
+
+y
+
+standardized:
+     A    B    C
+A 0.00 0.38 1.97
+B 0.47 0.00 4.94
+C 0.08 0.09 0.00
+</code></pre>
+
+
+```r
+## The elements available from the output
+names(out1)
+```
+
+
+<pre><code>[1] "x" "y"
+</code></pre>
+
+
+```r
+## A list containing means, standard deviations and other 
+## descriptive statistics for for the differences between codes
+out1$x
+```
+
+
+<pre><code>$mean
+       A      B      C
+A   0.00 367.67 208.67
+B 322.50   0.00 509.00
+C  74.67 265.00   0.00
+
+$sd
+       A      B      C
+A   0.00 347.51 483.27
+B 337.47   0.00 940.94
+C 143.77 440.92   0.00
+
+$n
+  A B C
+A 6 6 6
+B 4 4 4
+C 6 6 6
+
+$combined
+  A                B                 C                
+A n=6              367.67(347.51)n=6 208.67(483.27)n=6
+B 322.5(337.47)n=4 n=4               509(940.94)n=4   
+C 74.67(143.77)n=6 265(440.92)n=6    n=6              
+
+$standardized
+     A    B    C
+A 0.00 1.04 0.82
+B 0.88 0.00 3.89
+C 0.09 0.95 0.00
+</code></pre>
+
+
+```r
+## a cm_distance output `causal = TRUE`
+cm_distance(dat, time.var = "variable", causal = TRUE)
+```
+
+
+<pre><code>x
+
+standardized:
+     A    B    C
+A 0.66 0.84 0.08
+B 0.29 3.96 0.49
+C 0.40 0.86 0.37
+
+
+y
+
+standardized:
+     A    B    C
+A 1.11 1.63 0.08
+B 0.03 2.95 0.04
+C 0.70 1.27 0.11
+</code></pre>
 
 <h3 id="counts">Word Counts and Descriptive Statistics</h3>
 
