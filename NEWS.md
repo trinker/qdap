@@ -95,6 +95,9 @@ relatively new to CRAN, made these changes sensible at this point.
   prints the indices around the episode from a transcript to the console or a 
   .csv, .xlsx, .txt, or .doc file. 
 
+* `colpaste2df` is a wrapper for `paste2` that pastes dataframe columns together 
+  and outputs a dataframe.
+
 <b>MINOR FEATURES</b>
 
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 

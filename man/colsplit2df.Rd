@@ -67,6 +67,9 @@ head(colsplit2df(CO2, 3, qcv(A, B, C), keep.orig=TRUE))
 head(colsplit2df(CO2, "Plant&Type&Treatment"))
 CO2 <- datasets::CO2
 
+(dat <- colpaste2df(head(mtcars), list(1:3), sep = "|"))
+colsplit2df(dat, 12, sep = "|")
+
 (x <- with(DATA.SPLIT, question_type(state, list(sex, adult))))
 ltruncdf(x)
 z <- lcolsplit2df(x)
@@ -74,7 +77,8 @@ ltruncdf(z)
 }
 }
 \seealso{
-  \code{\link[qdap]{colSplit}}, \code{\link{paste2}}
+  \code{\link[qdap]{colSplit}}, \code{\link{colpaste2df}}
+  \code{\link{paste2}}
 }
 \keyword{column-split}
 

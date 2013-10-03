@@ -14,6 +14,7 @@
 #' @return \code{colsplit2df} - returns a dataframe with the \code{paste2} 
 #' column split into new columns.
 #' @seealso \code{\link[qdap]{colSplit}}, 
+#' \code{\link{colpaste2df}}
 #' \code{\link{paste2}}
 #' @rdname colsplit2df
 #' @keywords column-split
@@ -28,6 +29,9 @@
 #' head(colsplit2df(CO2, 3, qcv(A, B, C), keep.orig=TRUE))
 #' head(colsplit2df(CO2, "Plant&Type&Treatment"))
 #' CO2 <- datasets::CO2
+#' 
+#' (dat <- colpaste2df(head(mtcars), list(1:3), sep = "|"))
+#' colsplit2df(dat, 12, sep = "|")
 #' 
 #' (x <- with(DATA.SPLIT, question_type(state, list(sex, adult))))
 #' ltruncdf(x)

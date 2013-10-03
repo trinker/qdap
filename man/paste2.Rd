@@ -1,27 +1,57 @@
 \name{paste2}
+\alias{colpaste2df}
 \alias{paste2}
 \title{Paste an Unspecified Number Of Text Columns}
 \usage{
   paste2(multi.columns, sep = ".", handle.na = TRUE,
     trim = TRUE)
+
+  colpaste2df(mat, combined.columns, sep = ".",
+    name.sep = "&", keep.orig = TRUE, ...)
 }
 \arguments{
   \item{multi.columns}{The multiple columns or a list of
   vectors to paste together.}
 
-  \item{sep}{A character string to separate the terms.}
+  \item{sep}{The character to be used in \code{paste2} to
+  paste the columns.}
 
   \item{handle.na}{logical.  If \code{TRUE} returns
   \code{NA} if any column/vector contains a missing value.}
 
   \item{trim}{logical.  If \code{TRUE} leading/trailing
   white space is removed.}
+
+  \item{mat}{A matrix or dataframe.}
+
+  \item{combined.columns}{A list of named vectors of the
+  colnames/indexes of the numeric columns to be pasted.  If
+  a vector is unnamed a name will be assigned.}
+
+  \item{name.sep}{The character to be used to paste the
+  column names.}
+
+  \item{keep.orig}{logical.  If \code{TRUE} the original
+  columns (i.e., \code{combined.columns}) will be retained
+  as well.}
+
+  \item{\ldots}{Other arguments passed to
+  \code{\link[qdap]{paste2}}.}
 }
 \value{
-  Returns a vector with row-wise elements pasted together.
+  \code{paste2} - Returns a vector with row-wise elements
+  pasted together.
+
+  \code{colpaste2df} - Returns a dataframe with pasted
+  columns.
 }
 \description{
-  Paste unspecified columns or a list of vectors together.
+  \code{paste2} - Paste unspecified columns or a list of
+  vectors together.
+
+  \code{colpaste2df} - Wrapper for
+  \code{\link[qdap]{paste2}} that returns a dataframe with
+  columns pasted together.
 }
 \note{
   \code{\link[base]{paste}} differs from
@@ -32,6 +62,7 @@
 }
 \examples{
 \dontrun{
+## paste2 examples
 v <- rep(list(state.abb[1:8],  month.abb[1:8]) , 5)
 n <- sample(5:10, 1)
 paste(v[1:n]) #odd looking return
@@ -40,10 +71,33 @@ paste2(v[1:n], sep="|")
 paste2(mtcars[1:10,], sep="|")
 paste(mtcars[1:10,], sep="|") #odd looking return
 paste2(CO2[1:10,], sep="|-|")
+
+## colpaste2df examples
+A <- list(
+    a = c(1, 2, 3),
+    b = qcv(mpg, hp),
+    c = c("disp", "am")
+)
+B <- list(
+    c(1, 2, 3),
+    new.col = qcv(mpg, hp),
+    c("disp", "am")
+)
+E <- list(
+    c(1, 2, 3, 4, 5),
+    qcv(mpg, hp),
+    c("disp", "am")
+)
+
+colpaste2df(head(mtcars), A)
+colpaste2df(head(mtcars), B)
+colpaste2df(head(mtcars), E)
+colpaste2df(head(mtcars), qcv(am, disp, drat), sep ="_", name.sep = "|")
+colpaste2df(head(CO2), list(c(1, 2, 3, 4, 5), qcv("conc", "uptake")))
 }
 }
 \seealso{
-  \code{\link[base]{paste}}
+  \code{\link[base]{paste}}, \code{\link{colsplit2df}}
 }
 \keyword{paste}
 
