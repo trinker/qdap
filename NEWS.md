@@ -196,8 +196,10 @@ relatively new to CRAN, made these changes sensible at this point.
 * `cm_time2long` loses the argument `start.end` to ensure that the `cmspans` 
   class produced would operate as expected.
 
-* Most exported functions utilizing a period separator have been repalces with 
+* Most exported functions utilizing a period separator have been repalced with 
   underscore named versions.
+
+* `wf_combine` renamed `wfm_combine` to be consistent.
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5
 ----------------------------------------------------------------

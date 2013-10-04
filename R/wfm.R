@@ -17,7 +17,7 @@
 #' @param margins logical. If \code{TRUE} provides grouping.var and word 
 #' variable totals.
 #' @param word.lists A list of character vectors of words to pass to 
-#' \code{wf_combine}
+#' \code{wfm_combine}
 #' @param matrix logical.  If \code{TRUE} returns the output as a 
 #' \code{\link[qdap]{wfm}} rather than a \code{\link[qdap]{wfdf}} object.
 #' @return \code{wfm} - returns a word frequency of the class matrix.
@@ -35,14 +35,14 @@
 #' 
 #' ## insert double tilde ("~~") to keep phrases(i.e., first last name)
 #' alts <- c(" fun", "I ")
-#' state2 <- mgsub(alts, gsub("\\s", "~~", alts), DATA$state) 
+#' state2 <- space_fill(DATA$state, alts, rm.extra = FALSE)
 #' with(DATA, wfm(state2, list(sex, adult)))[1:18, ]
 #' 
 #' ## word frequency dataframe (wfdf) example:
 #' with(DATA, wfdf(state, list(sex, adult)))[1:15, ]
 #' with(DATA, wfdf(state, person))[1:15, ]
 #' 
-#' ## insert double tilde ("~~") to keep dual words (i.e., first last name)
+#' ## insert double tilde ("~~") to keep phrases (e.g., first last name)
 #' alts <- c(" fun", "I ")
 #' state2 <- mgsub(alts, gsub("\\s", "~~", alts), DATA$state)
 #' with(DATA, wfdf(state2, list(sex, adult)))[1:18, ]
@@ -70,20 +70,20 @@
 #' WL6 <- list(c("you", "your", "your're"))  #no name so will be called words 1          
 #' WL7 <- c("you", "your", "your're")                             
 #'                                                                
-#' wf_combine(z, WL2) #Won't work not a raw frequency matrix     
-#' wf_combine(x, WL2) #Works (raw and no margins)                     
-#' wf_combine(y, WL2) #Works (raw with margins)                           
-#' wf_combine(y, c("you", "your", "your're"))                        
-#' wf_combine(y, WL1)                                                  
-#' wf_combine(y, WL3)                                                   
-#' ## wf_combine(y, WL4) #Error         
-#' wf_combine(y, WL5)                                         
-#' wf_combine(y, WL6)                                              
-#' wf_combine(y, WL7)                                           
+#' wfm_combine(z, WL2) #Won't work not a raw frequency matrix     
+#' wfm_combine(x, WL2) #Works (raw and no margins)                     
+#' wfm_combine(y, WL2) #Works (raw with margins)                           
+#' wfm_combine(y, c("you", "your", "your're"))                        
+#' wfm_combine(y, WL1)                                                  
+#' wfm_combine(y, WL3)                                                   
+#' ## wfm_combine(y, WL4) #Error         
+#' wfm_combine(y, WL5)                                         
+#' wfm_combine(y, WL6)                                              
+#' wfm_combine(y, WL7)                                           
 #'                                                                   
 #' worlis <- c("you", "it", "it's", "no", "not", "we")              
 #' y <- wfdf(DATA$state, list(DATA$sex, DATA$adult), margins = TRUE)  
-#' z <- wf_combine(y, worlis, matrix = TRUE)                      
+#' z <- wfm_combine(y, worlis)                      
 #'                                                                  
 #' chisq.test(z)                                                      
 #' chisq.test(wfm(y)) 
@@ -278,19 +278,19 @@ function(text.var, grouping.var = NULL, ...){
 }
 
 
-#' Combined Word Frequency Data Frame
+#' Combined Word Frequency Matrix Terms
 #' 
-#' \code{wf_combine} - Combines words (rows) of a word frequency dataframe 
+#' \code{wfm_combine} - Combines words (rows) of a word frequency matrix 
 #' (\code{wfdf}) together.
 #'
 #' @param wf.obj A \code{wfm} or \code{wfdf} object.
 #' @rdname Word_Frequency_Matrix
 #' @export
-#' @return \code{wf_combine} - returns a word frequency matrix (\code{wfm}) or 
+#' @return \code{wfm_combine} - returns a word frequency matrix (\code{wfm}) or 
 #' dataframe (\code{wfdf}) with counts for the combined word.lists merged and 
 #' remaining terms (\code{else}).
-wf_combine <-
-function(wf.obj, word.lists, matrix = FALSE){
+wfm_combine <-
+function(wf.obj, word.lists, matrix = TRUE){
     suppressWarnings(if (is.list(word.lists) & length(word.lists) > 1 & 
         any(Reduce("%in%", word.lists))) {
         stop("overlapping words in word.lists")
@@ -325,7 +325,12 @@ function(wf.obj, word.lists, matrix = FALSE){
             }
         }
     }
-    if(!is.list(word.lists)) word.lists <- list(word.lists)
+    if(!is.list(word.lists)) {
+        word.lists <- list(word.lists)
+    }
+    if (is(wf.obj, "true.matrix")) {
+        wf.obj <- data.frame(rownames(wf.obj), wf.obj)
+    }
     j <- lapply(word.lists, function(x) wf.obj [wf.obj [, 1] %in% x, -1])
     if (!all(wf.obj [, 1] %in% unlist(word.lists))) {
         j[[length(j) + 1]] <- wf.obj [!wf.obj [, 1] %in% unlist(word.lists), -1]

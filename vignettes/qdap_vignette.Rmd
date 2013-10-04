@@ -1588,7 +1588,7 @@ with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))
 <h3 id="coding">Qualitative Coding System</h3>
 
 <div class="funs">
-The following functions will be utilized in this section (click to view more): <br><br>   
+The following functions will be utilized in this section (click to view more): <br>   
 
 <form class="form_left" action="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank">
     <input type="submit" value="cm_code.blank"> 
@@ -1607,7 +1607,7 @@ The following functions will be utilized in this section (click to view more): <
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank">
-    <input type="submit" value="cm_code.transform"> - <br> `r HR("#reshape", "Combine Exclude and Overlap Codes")`
+    <input type="submit" value="cm_code.transform"> - `r HR("#reshape", "Combine, Exclude, and Overlap Codes")`
 </form>
 
 <form class="form_left" action="http://trinker.github.io/qdap_dev/cm_df.temp.html" target="_blank">
@@ -1615,7 +1615,7 @@ The following functions will be utilized in this section (click to view more): <
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank">
-    <input type="submit" value="cm_long"> - `r HR("#wordcsv", "Coding .csv Approach")`
+    <input type="submit" value="cm_long"> - `r HR("#wordcsv", "Coding Words:  .csv Approach")`
 </form>
 
 
@@ -1627,7 +1627,7 @@ The following functions will be utilized in this section (click to view more): <
     <input type="submit" value="cm_df.transcript"> 
 </form>
 <form action="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank">
-    <input type="submit" value="cm_2long">  - `r HR("#wordtrans", "Coding Words - Transcript & List Approach")`
+    <input type="submit" value="cm_2long">  - `r HR("#wordtrans", "Coding Words: Transcript & List Approach")`
 </form>
 
 
@@ -1637,7 +1637,7 @@ The following functions will be utilized in this section (click to view more): <
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank">
-    <input type="submit" value="cm_2long"> - `r HR("#timespan", "Coding Time Spans Approach")` 
+    <input type="submit" value="cm_2long"> - `r HR("#timespan", "Coding Words: Time Spans Approach")` 
 </form>
 
 
@@ -2511,6 +2511,9 @@ The researcher may also access the means, standard deviations and number of code
 Note that the argument <b><font color="green" face="courier new">causal = FALSE</font></b> (the defualt) does not assume Code A comes before Code B whereas <b><font color="green" face="courier new">causal = TRUE</font></b> assumes the first code precedes the second code.  Generally, setting <b><font color="green" face="courier new">causal = FALSE</font></b> wil result in larger mean of differences and accompanying standardized values.  Also note that rownames are the first code and column names are the second comparison code.  The values for Code A compared to Code B will not be the same as Code B compared to Code A.  This is because each span (start and end) for Code A is compared to the nearest start or end for Code B.  So for example there may be 6 Code A spans and thus six differences between A and B, whereas Code B may only have 3 spans and thus three differences between B and A.  This fact alone will lead to differences in A compared to B versus B compared to A.
 
 
+`r FT(orange, 5, text="&diams;")` `r FUN("cm_distance")` - *Initial Data Setup* `r FT(orange, 5, text="&diams;")`
+
+
 ```{r, message=FALSE}
 x <- list(
     transcript_time_span = qcv(00:00 - 1:12:00),
@@ -2534,6 +2537,8 @@ dat <- cm_2long(x, y)
 ```{r, echo=FALSE, fig.height=6}
 plot(dat, title="Plot of the Codes")
 ```
+
+`r FT(orange, 5, text="&diams;")` `r FUN("cm_distance")` - *Non-Causal Distance* `r FT(orange, 5, text="&diams;")`
 
 ```{r, eval = FALSE}
 ## a cm_distance output
@@ -2603,6 +2608,8 @@ B 0.88 0.00 3.89
 C 0.09 0.95 0.00
 </code></pre>
 
+`r FT(orange, 5, text="&diams;")` `r FUN("cm_distance")` - *Causal Distance* `r FT(orange, 5, text="&diams;")`
+
 ```{r, eval = FALSE}
 ## a cm_distance output `causal = TRUE`
 cm_distance(dat, time.var = "variable", causal = TRUE)
@@ -2628,68 +2635,457 @@ C 0.70 1.27 0.11
 
 <h3 id="counts">Word Counts and Descriptive Statistics</h3>
 
-NOTE show spaste w/ termco
-
 
 <div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/dist_tab.html" target="_blank">
-    <input type="submit" value="dist_tab"> - SPSS Style Frequency Tables
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/multiscale.html" target="_blank">
-    <input type="submit" value="multiscale"> - Nested Standardization
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/outlier_detect.html" target="_blank">
-    <input type="submit" value="outlier_detect"> - Detect Outliers in Text
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/outlier_labeler.html" target="_blank">
-    <input type="submit" value="outlier_labeler"> - Locate Outliers in Numeric String
+    <input type="submit" value="dist_tab"> - `r HR("#freqtab", "SPSS Style Frequency Tables")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/pos.html" target="_blank">
-    <input type="submit" value="pos"><input type="submit" value="pos_by"><input type="submit" value="pos.tags"> - Parts of Speech Tagging
+    <input type="submit" value="pos"><input type="submit" value="pos_by"><input type="submit" value="pos_tags"> - `r HR("#pos", "Parts of Speech Tagging")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/question_type.html" target="_blank">
-    <input type="submit" value="question_type"> - Count of Question Type
+    <input type="submit" value="question_type"> - `r HR("#quest", "Count of Question Type")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/syllable_sum.html" target="_blank">
-    <input type="submit" value="syllable_sum"><input type="submit" value="combo_syllable_sum"><input type="submit" value="polysyllable_sum"><input type="submit" value="syllable_count"> - Syllabication
+    <input type="submit" value="syllable_sum"><input type="submit" value="combo_syllable_sum"><input type="submit" value="polysyllable_sum"><input type="submit" value="syllable_count"> - `r HR("#syll", "Syllabication and Counts")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
-    <input type="submit" value="tdm"><input type="submit" value="dtm"> - Convert/Generate Term Document Matrix or Document Term Matrix
+    <input type="submit" value="tdm"><input type="submit" value="dtm"> - `r HR("#tdm", "Convert/Generate Term Document Matrix or Document Term Matrix")`
 </form>
 
 <form class="form_left" action="http://trinker.github.io/qdap_dev/termco.html" target="_blank">
     <input type="submit" value="termco"><input type="submit" value="term_match"><input type="submit" value="termco_d"><input type="submit" value="termco2mat">
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/termco_c.html" target="_blank">
-    <input type="submit" value="termco_c"> - Search For and Count Terms
+<form class="form_left" action="http://trinker.github.io/qdap_dev/termco_c.html" target="_blank">
+    <input type="submit" value="termco_c"> 
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/spaste.html" target="_blank">
+    <input type="submit" value="spaste"> - `r HR("#termco", "Search For and Count Terms")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/wfm.html" target="_blank">
-    <input type="submit" value="wfm"><input type="submit" value="wfdf"><input type="submit" value="wf_combine"><input type="submit" value="wfm_expanded"> - Word Frequency Matrix
+    <input type="submit" value="wfm"><input type="submit" value="wfdf"><input type="submit" value="wf_combine"><input type="submit" value="wfm_expanded"> - `r HR("#wfm", "Word Frequency Matrix")`
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/word_count.html" target="_blank">
-    <input type="submit" value="word_count"><input type="submit" value="wc"> - Word Counts
+<form class="form_left" action="http://trinker.github.io/qdap_dev/word_count.html" target="_blank">
+    <input type="submit" value="word_count"> 
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/character_count.html" target="_blank">
-    <input type="submit" value="character_count"><input type="submit" value="character_table"><input type="submit" value="charr_table"> - Character Counts
+<form class="form_left" action="http://trinker.github.io/qdap_dev/character_count.html" target="_blank">
+    <input type="submit" value="character_count"><input type="submit" value="character_table"> 
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/word_list.html" target="_blank">
+    <input type="submit" value="word_list">  - `r HR("#wordcount", "Word & Character Counts")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank">
-    <input type="submit" value="word_stats"> - Descriptive Word Statistics
+    <input type="submit" value="word_stats"> - `r HR("#wordstats", "Descriptive Word Statistics")`
 </form>
+
 </div>
+
+<h4 id="wordstats">Descriptive Word Statistics</h4>
+
+Often a researcher may want to get a general sense of how words are functioning for different grouping variables.  The `r FUN("word_stats")` function enables a quick picture of what is occuring within the data.  The displayed (printed) output is a dataframe, however, the output from word_stats is actually a list.  Use `r FUN("?word_stats", "word_stats")` to learn more.
+
+The displayed output is a wide dataframe, hence the abbreviated column names.  The following column names and meanings will provide guidance in understanding the output:
+
+<h5 id="wordstats">`r FUN("word_stats")` Column Names</h5>
+
+- n.tot – number of turns of talk   
+- n.sent - number of sentences   
+- n.words - number of words   
+- n.char - number of characters   
+- n.syl - number of syllables   
+- n.poly - number of polysyllables   
+- sptot - syllables per turn of talk   
+- wptot - words per turn of talk   
+- wps - words per sentence   
+- cps - characters per sentence   
+- sps - syllables per sentence   
+- psps - poly-syllables per sentence   
+- cpw - characters per word   
+- spw - syllables per word   
+- n.state - number of statements   
+- n.quest - number of questions   
+- n.exclm - number of exclamations   
+- n.incom - number of incomplete statements   
+- p.state - proportion of statements   
+- p.quest - proportion of questions   
+- p.exclm - proportion of exclamations   
+- p.incom - proportion of incomplete statements   
+- n.hapax - number of hapax legomenon   
+- n.dis - number of dis legomenon   
+- grow.rate - proportion of hapax legomenon to words   
+- prop.dis - proportion of dis legomenon to words
+
+<div class="middleDiv">
+<b>`r FT(red, 4, text="It is assumed you have run <font face=\"courier\">sentSplit</font> on the data.<br>If this is not the case the counts will not be accrate.")`</b>
+</div>
+
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("word_stats")` Example** `r FT(orange, 5, text="&diams;")`
+
+Note that the initial output is broken into three dataframe outputs because of the width of printed output from `r FUN("word_stats")` being so large.  The user will see that these three dataframes are actually one wide dataframe in the R output.
+
+```{r, results = "hide"}
+(desc_wrds <- with(mraja1spl, word_stats(dialogue, person, tot = tot)))
+```
+
+```{r, include = FALSE}
+desc_wrds2 <- with(mraja1spl, word_stats(desc_wrds, person, tot = tot, digits = 1))
+```
+
+```{r, echo = FALSE, comment = NULL}
+desc_wrds2$gts[, c(1, 2:9)]
+```
+
+```{r, echo = FALSE, comment = NULL}
+desc_wrds2$gts[, c(1, 10:19)]
+```
+
+```{r, echo = FALSE, comment = NULL}
+desc_wrds2$gts[, c(1, 20:26)]
+```
+
+```{r}
+## The following shows all the available elements in the `word_stats` output
+names(desc_wrds)
+```
+
+`r FUN("word_stats")` has a plot method that plots the output as a heat map.  This can be useful for finding high/low elements in the data set.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("word_stats")` Plot** `r FT(orange, 5, text="&diams;")`
+
+
+```{r}
+plot(desc_wrds)
+```
+
+```{r, fig.width = 9}
+plot(desc_wrds, label=TRUE, lab.digits = 1)
+```
+
+It takes considerable time to run `r FUN("word_stats")` because it is calculating syllable counts.  The user may re-use the object output from one run and bass this as the text variable (`text.var`) in a subsequent run with different grouping variables (`grouping.vars`) as long as the text variable has not changed.  The example below demonstrates how to re-use the output from one `r FUN("word_stats")` run in another run.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("word_stats")` Re-use** `r FT(orange, 5, text="&diams;")`
+
+
+```{r, eval = FALSE}
+with(mraja1spl, word_stats(desc_wrds, list(sex, fam.aff, died), tot = tot))
+```
+
+
+<h4 id="wfm">Word Frequency Matrix</h4>
+
+Many analyses with words involve a matrix based on the words.  qdap uses a *word frequency matrix* (`r FUN("wfm")`) or the less maliable dataframe version, *word frequency dataframe* (`r FUN("wfdf")`).  The `r FUN("wfm")` is a count of word usages per grouping variable(s).  This is a similar concept to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm packae's")` Term Document Matrix, though instead of documents we are interested in the grouping variable's usage of terms.  `r FUN("wfm")` is the general function that should be used, however, the `r FUN("wfdf")` function does provide options for margin sums (row and column).  Also note that the `r FUN("wfm_expanded")` and `r FUN("wfm_combine")` can expand or combine terms within a word frequency matrix.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("wfm")` Examples** `r FT(orange, 5, text="&diams;")`
+
+```{r}
+## By a single grouping variable
+with(DATA, wfm(state, person))[1:15, ]
+## By two grouping variables
+with(DATA, wfm(state, list(sex, adult)))[1:15, ]
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("wfm")`: Keep Two Word Phrase as a Single Term** `r FT(orange, 5, text="&diams;")`
+
+```{r}
+## insert double tilde ("~~") to keep phrases(e. g., first last name)
+space_keeps <- c(" fun", "I ")
+state2 <- space_fill(DATA$state, space_keeps, rm.extra = FALSE)
+with(DATA, wfm(state2, list(sex, adult)))[1:18, ]
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("wfdf")` Examples**: *Add Margins* `r FT(orange, 5, text="&diams;")`
+
+```{r}
+with(DATA, wfdf(state, person, margins = TRUE))[c(1:15, 41:42), ]
+with(DATA, wfdf(state, list(sex, adult), margins = TRUE))[c(1:15, 41:42), ]
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("wfm_expanded")`: Expand the wfm** `r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Start with a word frequency matrix
+z <- wfm(DATA$state, DATA$person)
+## Note a single `you`
+z[30:41, ]
+## Note that there are two `you`s in the expanded version
+wfm_expanded(z)[33:45, ] 
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("wfm_combine")`: Combine Terms in the wfm** `r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Start with a word frequency matrix
+x <- wfm(DATA$state, DATA$person)
+
+## The terms to exclude
+WL <- list(
+    random = c("the", "fun", "i"), 
+    yous = c("you", "your", "you're")
+)
+
+## Combine the terms
+(out <- wfm_combine(x, WL))
+## Pass the combined version to Chi Squared Test
+chisq.test(out)
+```
+
+<h5 id="tdm"><font color="green">Convert/Generate Term Document Matrix or Document Term Matrix</font></h5>
+
+Some packages that could further the analysis of qdap expect a Document Term or Term Docuement Matrix.  qdap's `r FUN("wfm")` is similar to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm packae's")` `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "TermDocumentMatrix")`     and `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "DocumentTermMatrix")`.  qdap does not try to replicate the extensive work of the`r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm")` package, however, the `r FUN("tdm")` and `r FUN("dtm", "tdm")` do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("tdm")` Use** `r FT(orange, 5, text="&diams;")`
+
+
+```{r}
+x <- wfm(DATA$state, DATA$person)
+## Term Document Matrix
+tdm(x)
+## Document Term Matrix
+dtm(x)
+```
+
+```{r eval =  FALSE}
+## Run Latant Semantic Analysis
+library(lsa)
+lsa(tdm(x), dims=dimcalc_share())
+```
+
+
+<pre><code>$tk
+                 [,1]         [,2]
+about    -0.021153126  0.072269368
+already  -0.169239530 -0.124825133
+am       -0.169239530 -0.124825133
+are      -0.021153126  0.072269368
+be       -0.021153126  0.072269368
+can      -0.021153126  0.072269368
+certain  -0.021153126  0.072269368
+computer -0.090637878  0.215786300
+distrust -0.090637878  0.215786300
+do       -0.001903917  0.014326564
+dumb     -0.169239530 -0.124825133
+eat      -0.169239530 -0.124825133
+fun      -0.181275756  0.431572601
+good     -0.001108363  0.009865681
+how      -0.021153126  0.072269368
+hungry   -0.169239530 -0.124825133
+i        -0.259877408  0.090961168
+i'm      -0.169239530 -0.124825133
+is       -0.259877408  0.090961168
+it       -0.090637878  0.215786300
+it's     -0.338479060 -0.249650265
+let's    -0.169239530 -0.124825133
+liar     -0.090637878  0.215786300
+move     -0.001108363  0.009865681
+no       -0.338479060 -0.249650265
+not      -0.259877408  0.090961168
+on       -0.001108363  0.009865681
+shall    -0.001108363  0.009865681
+should   -0.001903917  0.014326564
+stinks   -0.090637878  0.215786300
+talking  -0.021153126  0.072269368
+telling  -0.169239530 -0.124825133
+the      -0.169239530 -0.124825133
+then     -0.001108363  0.009865681
+there    -0.169239530 -0.124825133
+too      -0.090637878  0.215786300
+truth    -0.169239530 -0.124825133
+way      -0.169239530 -0.124825133
+we       -0.024165406  0.096461613
+what     -0.023057043  0.086595932
+you      -0.371668412  0.379016836
+
+$dk
+                   [,1]        [,2]
+greg       -0.876176894 -0.47984657
+researcher -0.005738152  0.03792516
+sally      -0.109512712  0.27781431
+sam        -0.469245067  0.82951496
+teacher    -0.009856846  0.05507346
+
+$sk
+[1] 5.177141 3.844150
+
+attr(,"class")
+[1] "LSAspace"
+</code></pre>
+
+
+<h4 id="termco">Search For and Count Terms</h4>
+
+The `r FUN("termco")` family of functions are some of the most useful qdap functions for quantative discourse analysis.  `r FUN("termco")` searches for (an optionally groups) terms and outputs a raw count, percent, and combined (raw/percent) matrix of term counts by grouping variable.  The `r FUN("term_match")` `r FUN("all_words")` `r FUN("syn", "synonyms")`, `r FUN("exclude")`, and `r FUN("spaste")` are complimentary functions that are useful in developing word lists to provide to the <b><font color="green" face="courier new">match.list</font></b>.  
+
+The <b><font color="green" face="courier new">match.list</font></b> acts to search for similarly grouped <em>themes</em>.  For example <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font> may be a search for words associated with reading.  It is good practice to name the vectors of words that are stored in the <b><font color="green" face="courier new">match.list</font></b> .  This is the general form for how to set up a <b><font color="green" face="courier new">match.list</font></b>:
+
+```{r eval = FALSE}
+themes <- list(
+    theme_1 = c(),
+    theme_2 = c(),
+    theme_n = c()
+)
+```
+
+It is important to understand how the <b><font color="green" face="courier new">match.list</font></b> is handled by `r FUN("termco")`.  The <b><font color="green" face="courier new">match.list</font></b> is (optionally) case and character sensitive. Spacing is an important way to grab specific words and requires careful thought. For example using <font color="green">"read"</font> will find the words <font color="green">"bread"</font>, <font color="green">"read"</font>, <font color="green">"reading"</font>, and <font color="green">"ready"</font>. If you want to search for just the word <font color="purple">"read"</font> supply a vector of <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font>. Notice the leading and trailing spaces.  A space acts as a boundary where as starting/ending with a nonspace allows for greedy matching that will find words that contain this term.  A leading, trailing or both may be used to control how `r FUN("termco")` searches for the supplied terms.  So the reader may ask why not supply one string spaced as <font color="green">" read"</font>?  Keep in mind that `r FUN("termco")` would also find the word <font color="purple">"ready"</font>
+
+This section's examples will first view the complimentary functions that augment the *themes* supplied to <b><font color="green" face="courier new">match.list</font></b> and then main `r FUN("termco")` function will be explored.
+
+
+`r FUN("term_match")` looks through a text variable (usually the text found in the transcript) and finds/returns a vector of words containing a term(s).
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("term_match")` and  `r FUN("exclude")` Examples**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+term_match(text.var = DATA$state, terms = qcv(the, trust), return.list = FALSE)
+term_match(DATA$state, "i", FALSE)
+exclude(term_match(DATA$state, "i", FALSE), talking, telling)
+```
+
+`r FUN("all_words")` is similar to `r FUN("term_match")`, however, the function looks at all the words found in a text variable (usually the transcript text) and returns words that begin with or contain the term(s).  The output can be arrange alphabetically or by frequency.  The output is a dataframe which helps the researcher to make decisions with regard to frequency of word use. 
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("all_words")` Examples**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+x1 <- all_words(raj$dialogue, begins.with="re")
+head(x1, 10)
+all_words(raj$dialogue, begins.with="q")
+all_words(raj$dialogue, contains="conc")
+x2 <- all_words(raj$dialogue)
+head(x2, 10)
+x3 <- all_words(raj$dialogue, alphabetical = FALSE)
+head(x3, 10)
+```
+
+The `r FUN("synonyms")` (short hand: `r FUN("syn", "synonyms")`) function finds words that are synonyms of a given set of terms and returns either a list of vector that can be passed to `r FUN("termco")`'s <b><font color="green" face="courier new">match.list</font></b>.
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("synonyms")` Examples**`r FT(orange, 5, text="&diams;")`
+
+```{r, message=FALSE}
+synonyms(c("the", "cat", "job", "environment", "read", "teach"))
+head(syn(c("the", "cat", "job", "environment", "read", "teach"),
+    return.list = FALSE), 30)
+syn(c("the", "cat", "job", "environment", "read", "teach"), multiwords = FALSE)
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("termco")` - Simple Example**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Make a small dialogue data set
+(dat2 <- data.frame(dialogue=c("@bryan is bryan good @br",
+    "indeed", "@ brian"), person=qcv(A, B, A)))
+
+## The word list to search for
+ml <- list(
+    wrds=c("bryan", "indeed"), 
+    "@", 
+    bryan=c("bryan", "@ br", "@br")
+)
+
+## Search by person
+with(dat2, termco(dialogue, person, match.list=ml))
+## Search by person peopoerion output
+with(dat2, termco(dialogue, person, match.list=ml, percent = FALSE))
+```
+
+<p id = "rajex">`r FT(orange, 5, text="&diams;")` <b>`r FUN("termco")` - Romeo and Juliet Act 1 Example</b>`r FT(orange, 5, text="&diams;")`</p>
+
+```{r}
+## Word list to search for
+## Note: In the last vector using "the" will actually 
+## include the other 3 versions
+ml2 <- list(
+    theme_1 = c(" the ", " a ", " an "),
+    theme_2 = c(" I'" ),
+    "good",
+    the_words = c("the", " the ", " the", "the ")
+)
+
+(out <- with(raj.act.1,  termco(dialogue, person, ml2)))
+## Available elements in the termco output (use dat$...)
+names(out)
+## Raw and proportion - useful for presenting in tables
+out$rnp  
+## Raw - useful for performing calculations
+out$raw 
+## Proportion - useful for performing calculations
+out$prop
+```
+
+`r FT(orange, 5, text="&diams;")` **Using `r FUN("termco")` with `r FUN("term_match")` and `r FUN("exclude")`**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+## Example 1
+termco(DATA$state, DATA$person, exclude(term_match(DATA$state, qcv(th),
+    FALSE), "truth"))
+## Example 2
+MTCH.LST <- exclude(term_match(DATA$state, qcv(th, i)), qcv(truth, stinks))
+termco(DATA$state, DATA$person, MTCH.LST)
+```
+
+`r FT(orange, 5, text="&diams;")` **Using `r FUN("termco")` with `r FUN("syn")`**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+syns <- synonyms("doubt")
+syns[1]
+```
+
+```{r eval = FALSE}
+termco(DATA$state, DATA$person, unlist(syns[1]))
+```
+
+```{r echo = FALSE}
+termco(DATA$state, DATA$person, unlist(syns[1]))$rnp[, c(1:5, 9:10)]
+```
+
+```{r}
+synonyms("doubt", FALSE)
+termco(DATA$state, DATA$person, list(doubt = synonyms("doubt", FALSE)))
+```
+
+```{r eval = FALSE}
+termco(DATA$state, DATA$person, syns)
+```
+
+```{r echo = FALSE}
+termco(DATA$state, DATA$person, syns)$rnp[, c(1:4, 9:10)]
+```
+
+`r FUN("termco")` also has a plot method that plots a heatmap of the `r FUN("termco")` output.  This allows for rapid visualizations of patterns and anables fast spotting of extreme values.  Here are some plots from the `r HR("#rajex", "Romeo and Juliet Act 1 Example")` above.
+
+`r FT(orange, 5, text="&diams;")` **Using `r FUN("termco")` Plotting**`r FT(orange, 5, text="&diams;")`
+
+```{r, fig.height = 3.5}
+plot(out)
+```
+
+```{r fig.width = 16, fig.height = 5}
+plot(out, label = TRUE)
+```
+
+<h4 id="quest">Count of Question Type</h4>
+<h4 id="wordcount">Word & Character Counts</h4>
+<h4 id="freqtab">SPSS Style Frequency Tables</h4>
+<h4 id="pos">Parts of Speech Tagging</h4>
+<h4 id="syll">Syllabication and Counts</h4>
+
+
+
+
+
+
 
 <h3 id="measures">Word Measures and Scoring</h3>
 

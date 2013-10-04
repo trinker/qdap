@@ -196,8 +196,10 @@ CHANGES
 * `cm_time2long` loses the argument `start.end` to ensure that the `cmspans` 
   class produced would operate as expected.
 
-* Most exported functions utilizing a period separator have been repalces with 
+* Most exported functions utilizing a period separator have been repalced with 
   underscore named versions.
+
+* `wf_combine` renamed `wfm_combine` to be consistent.
 
 CHANGES IN qdap VERSION 0.2.5
 ----------------------------------------------------------------

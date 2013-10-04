@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.79 19.70 16.30 16.30 19.70 16.30 19.70 16.30 19.70 19.70 15.79
-## [12] 16.30 19.70 15.79 25.34 22.40 22.40 25.34 15.00 15.00
+##  [1] 15.79 16.30 22.40 19.70 15.00 16.30 19.70 15.00 16.30 22.40 15.79
+## [12] 16.30 22.40 15.79 19.70 16.30 16.30 15.79 25.34 22.40
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.79 19.70 16.30 16.30 19.70 16.30 19.70 16.30 19.70 19.70 15.79
-## [12] 16.30 19.70 15.79 25.34 22.40 22.40 25.34 15.00 15.00
+##  [1] 15.79 16.30 22.40 19.70 15.00 16.30 19.70 15.00 16.30 22.40 15.79
+## [12] 16.30 22.40 15.79 19.70 16.30 16.30 15.79 25.34 22.40
 ```
 
 
@@ -4466,7 +4466,7 @@ with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))
 <h3 id="coding">Qualitative Coding System</h3>
 
 <div class="funs">
-The following functions will be utilized in this section (click to view more): <br><br>   
+The following functions will be utilized in this section (click to view more): <br>   
 
 <form class="form_left" action="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank">
     <input type="submit" value="cm_code.blank"> 
@@ -4485,7 +4485,7 @@ The following functions will be utilized in this section (click to view more): <
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank">
-    <input type="submit" value="cm_code.transform"> - <br> <a href="#reshape">Combine Exclude and Overlap Codes</a>
+    <input type="submit" value="cm_code.transform"> - <a href="#reshape">Combine, Exclude, and Overlap Codes</a>
 </form>
 
 <form class="form_left" action="http://trinker.github.io/qdap_dev/cm_df.temp.html" target="_blank">
@@ -4493,7 +4493,7 @@ The following functions will be utilized in this section (click to view more): <
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank">
-    <input type="submit" value="cm_long"> - <a href="#wordcsv">Coding .csv Approach</a>
+    <input type="submit" value="cm_long"> - <a href="#wordcsv">Coding Words:  .csv Approach</a>
 </form>
 
 
@@ -4505,7 +4505,7 @@ The following functions will be utilized in this section (click to view more): <
     <input type="submit" value="cm_df.transcript"> 
 </form>
 <form action="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank">
-    <input type="submit" value="cm_2long">  - <a href="#wordtrans">Coding Words - Transcript & List Approach</a>
+    <input type="submit" value="cm_2long">  - <a href="#wordtrans">Coding Words: Transcript & List Approach</a>
 </form>
 
 
@@ -4515,7 +4515,7 @@ The following functions will be utilized in this section (click to view more): <
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/cm_2long.html" target="_blank">
-    <input type="submit" value="cm_2long"> - <a href="#timespan">Coding Time Spans Approach</a> 
+    <input type="submit" value="cm_2long"> - <a href="#timespan">Coding Words: Time Spans Approach</a> 
 </form>
 
 
@@ -6073,6 +6073,9 @@ The researcher may also access the means, standard deviations and number of code
 Note that the argument <b><font color="green" face="courier new">causal = FALSE</font></b> (the defualt) does not assume Code A comes before Code B whereas <b><font color="green" face="courier new">causal = TRUE</font></b> assumes the first code precedes the second code.  Generally, setting <b><font color="green" face="courier new">causal = FALSE</font></b> wil result in larger mean of differences and accompanying standardized values.  Also note that rownames are the first code and column names are the second comparison code.  The values for Code A compared to Code B will not be the same as Code B compared to Code A.  This is because each span (start and end) for Code A is compared to the nearest start or end for Code B.  So for example there may be 6 Code A spans and thus six differences between A and B, whereas Code B may only have 3 spans and thus three differences between B and A.  This fact alone will lead to differences in A compared to B versus B compared to A.
 
 
+<font size="5" color="orange">&diams;</font> <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a> - *Initial Data Setup* <font size="5" color="orange">&diams;</font>
+
+
 
 ```r
 x <- list(
@@ -6097,6 +6100,8 @@ dat <- cm_2long(x, y)
 
 ![plot of chunk unnamed-chunk-116](figure/unnamed-chunk-116.png) 
 
+
+<font size="5" color="orange">&diams;</font> <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a> - *Non-Causal Distance* <font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -6172,6 +6177,8 @@ B 0.88 0.00 3.89
 C 0.09 0.95 0.00
 </code></pre>
 
+<font size="5" color="orange">&diams;</font> <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a> - *Causal Distance* <font size="5" color="orange">&diams;</font>
+
 
 ```r
 ## a cm_distance output `causal = TRUE`
@@ -6199,68 +6206,1301 @@ C 0.70 1.27 0.11
 
 <h3 id="counts">Word Counts and Descriptive Statistics</h3>
 
-NOTE show spaste w/ termco
-
 
 <div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/dist_tab.html" target="_blank">
-    <input type="submit" value="dist_tab"> - SPSS Style Frequency Tables
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/multiscale.html" target="_blank">
-    <input type="submit" value="multiscale"> - Nested Standardization
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/outlier_detect.html" target="_blank">
-    <input type="submit" value="outlier_detect"> - Detect Outliers in Text
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/outlier_labeler.html" target="_blank">
-    <input type="submit" value="outlier_labeler"> - Locate Outliers in Numeric String
+    <input type="submit" value="dist_tab"> - <a href="#freqtab">SPSS Style Frequency Tables</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/pos.html" target="_blank">
-    <input type="submit" value="pos"><input type="submit" value="pos_by"><input type="submit" value="pos.tags"> - Parts of Speech Tagging
+    <input type="submit" value="pos"><input type="submit" value="pos_by"><input type="submit" value="pos_tags"> - <a href="#pos">Parts of Speech Tagging</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/question_type.html" target="_blank">
-    <input type="submit" value="question_type"> - Count of Question Type
+    <input type="submit" value="question_type"> - <a href="#quest">Count of Question Type</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/syllable_sum.html" target="_blank">
-    <input type="submit" value="syllable_sum"><input type="submit" value="combo_syllable_sum"><input type="submit" value="polysyllable_sum"><input type="submit" value="syllable_count"> - Syllabication
+    <input type="submit" value="syllable_sum"><input type="submit" value="combo_syllable_sum"><input type="submit" value="polysyllable_sum"><input type="submit" value="syllable_count"> - <a href="#syll">Syllabication and Counts</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
-    <input type="submit" value="tdm"><input type="submit" value="dtm"> - Convert/Generate Term Document Matrix or Document Term Matrix
+    <input type="submit" value="tdm"><input type="submit" value="dtm"> - <a href="#tdm">Convert/Generate Term Document Matrix or Document Term Matrix</a>
 </form>
 
 <form class="form_left" action="http://trinker.github.io/qdap_dev/termco.html" target="_blank">
     <input type="submit" value="termco"><input type="submit" value="term_match"><input type="submit" value="termco_d"><input type="submit" value="termco2mat">
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/termco_c.html" target="_blank">
-    <input type="submit" value="termco_c"> - Search For and Count Terms
+<form class="form_left" action="http://trinker.github.io/qdap_dev/termco_c.html" target="_blank">
+    <input type="submit" value="termco_c"> 
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/spaste.html" target="_blank">
+    <input type="submit" value="spaste"> - <a href="#termco">Search For and Count Terms</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/wfm.html" target="_blank">
-    <input type="submit" value="wfm"><input type="submit" value="wfdf"><input type="submit" value="wf_combine"><input type="submit" value="wfm_expanded"> - Word Frequency Matrix
+    <input type="submit" value="wfm"><input type="submit" value="wfdf"><input type="submit" value="wf_combine"><input type="submit" value="wfm_expanded"> - <a href="#wfm">Word Frequency Matrix</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/word_count.html" target="_blank">
-    <input type="submit" value="word_count"><input type="submit" value="wc"> - Word Counts
+<form class="form_left" action="http://trinker.github.io/qdap_dev/word_count.html" target="_blank">
+    <input type="submit" value="word_count"> 
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/character_count.html" target="_blank">
-    <input type="submit" value="character_count"><input type="submit" value="character_table"><input type="submit" value="charr_table"> - Character Counts
+<form class="form_left" action="http://trinker.github.io/qdap_dev/character_count.html" target="_blank">
+    <input type="submit" value="character_count"><input type="submit" value="character_table"> 
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/word_list.html" target="_blank">
+    <input type="submit" value="word_list">  - <a href="#wordcount">Word & Character Counts</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank">
-    <input type="submit" value="word_stats"> - Descriptive Word Statistics
+    <input type="submit" value="word_stats"> - <a href="#wordstats">Descriptive Word Statistics</a>
 </form>
+
 </div>
+
+<h4 id="wordstats">Descriptive Word Statistics</h4>
+
+Often a researcher may want to get a general sense of how words are functioning for different grouping variables.  The <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> function enables a quick picture of what is occuring within the data.  The displayed (printed) output is a dataframe, however, the output from word_stats is actually a list.  Use <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>?word_stats</code></a> to learn more.
+
+The displayed output is a wide dataframe, hence the abbreviated column names.  The following column names and meanings will provide guidance in understanding the output:
+
+<h5 id="wordstats"><a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> Column Names</h5>
+
+- n.tot  number of turns of talk   
+- n.sent - number of sentences   
+- n.words - number of words   
+- n.char - number of characters   
+- n.syl - number of syllables   
+- n.poly - number of polysyllables   
+- sptot - syllables per turn of talk   
+- wptot - words per turn of talk   
+- wps - words per sentence   
+- cps - characters per sentence   
+- sps - syllables per sentence   
+- psps - poly-syllables per sentence   
+- cpw - characters per word   
+- spw - syllables per word   
+- n.state - number of statements   
+- n.quest - number of questions   
+- n.exclm - number of exclamations   
+- n.incom - number of incomplete statements   
+- p.state - proportion of statements   
+- p.quest - proportion of questions   
+- p.exclm - proportion of exclamations   
+- p.incom - proportion of incomplete statements   
+- n.hapax - number of hapax legomenon   
+- n.dis - number of dis legomenon   
+- grow.rate - proportion of hapax legomenon to words   
+- prop.dis - proportion of dis legomenon to words
+
+<div class="middleDiv">
+<b><font size="4" color="red">It is assumed you have run <font face="courier">sentSplit</font> on the data.<br>If this is not the case the counts will not be accrate.</font></b>
+</div>
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> Example** <font size="5" color="orange">&diams;</font>
+
+Note that the initial output is broken into three dataframe outputs because of the width of printed output from <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> being so large.  The user will see that these three dataframes are actually one wide dataframe in the R output.
+
+
+```r
+(desc_wrds <- with(mraja1spl, word_stats(dialogue, person, tot = tot)))
+```
+
+
+
+
+
+
+```
+           person n.tot n.sent n.words n.char n.syl n.poly sptot wptot
+1           Romeo    49    113    1163   4757  1441     48   2.3  23.7
+2        Benvolio    34     51     621   2563   780     25   1.5  18.3
+3           Nurse    20     59     599   2274   724     20   3.0  29.9
+4         Sampson    20     28     259    912   294      7   1.4  12.9
+5          Juliet    16     24     206    789   238      5   1.5  12.9
+6         Gregory    15     20     149    553   166      1   1.3   9.9
+7         Capulet    14     72     736   2900   902     35   5.1  52.6
+8    Lady Capulet    12     27     288   1205   370     10   2.2  24.0
+9        Mercutio    11     24     549   2355   704     29   2.2  49.9
+10        Servant    10     19     184    725   226      5   1.9  18.4
+11         Tybalt     8     17     160    660   207      9   2.1  20.0
+12       Montague     6     13     217    919   284     13   2.2  36.2
+13        Abraham     5      6      24     79    26      0   1.2   4.8
+14  First Servant     3      7      69    294    87      2   2.3  23.0
+15 Second Servant     3      4      41    160    49      0   1.3  13.7
+16  Lady Montague     2      4      28     88    30      0   2.0  14.0
+17          Paris     2      3      32    124    41      2   1.5  16.0
+18 Second Capulet     2      2      17     64    21      0   1.0   8.5
+19         Prince     1      9     167    780   228     17   9.0 167.0
+20  First Citizen     1      5      16     79    22      3   5.0  16.0
+```
+
+
+
+```
+           person  wps  cps  sps psps cpw spw pspw n.state n.quest n.exclm
+1           Romeo 10.3 42.1 12.8  0.4 4.1 1.2  0.0      69      22      22
+2        Benvolio 12.2 50.3 15.3  0.5 4.1 1.3  0.0      39       8       4
+3           Nurse 10.2 38.5 12.3  0.3 3.8 1.2  0.0      37       9      13
+4         Sampson  9.2 32.6 10.5  0.2 3.5 1.1  0.0      27       1       0
+5          Juliet  8.6 32.9  9.9  0.2 3.8 1.2  0.0      16       5       3
+6         Gregory  7.5 27.6  8.3  0.0 3.7 1.1  0.0      14       3       3
+7         Capulet 10.2 40.3 12.5  0.5 3.9 1.2  0.0      40      10      22
+8    Lady Capulet 10.7 44.6 13.7  0.4 4.2 1.3  0.0      20       6       1
+9        Mercutio 22.9 98.1 29.3  1.2 4.3 1.3  0.1      20       2       2
+10        Servant  9.7 38.2 11.9  0.3 3.9 1.2  0.0      14       2       3
+11         Tybalt  9.4 38.8 12.2  0.5 4.1 1.3  0.1      13       2       2
+12       Montague 16.7 70.7 21.8  1.0 4.2 1.3  0.1      11       2       0
+13        Abraham  4.0 13.2  4.3  0.0 3.3 1.1  0.0       3       2       1
+14  First Servant  9.9 42.0 12.4  0.3 4.3 1.3  0.0       3       2       2
+15 Second Servant 10.2 40.0 12.2  0.0 3.9 1.2  0.0       4       0       0
+16  Lady Montague  7.0 22.0  7.5  0.0 3.1 1.1  0.0       2       2       0
+17          Paris 10.7 41.3 13.7  0.7 3.9 1.3  0.1       2       1       0
+18 Second Capulet  8.5 32.0 10.5  0.0 3.8 1.2  0.0       2       0       0
+19         Prince 18.6 86.7 25.3  1.9 4.7 1.4  0.1       7       1       1
+20  First Citizen  3.2 15.8  4.4  0.6 4.9 1.4  0.2       0       0       5
+```
+
+
+
+```
+           person p.state p.quest p.exclm n.hapax n.dis grow.rate prop.dis
+1           Romeo     0.6     0.2     0.2     365    84       0.3      0.1
+2        Benvolio     0.8     0.2     0.1     252    43       0.4      0.1
+3           Nurse     0.6     0.2     0.2     147    48       0.2      0.1
+4         Sampson     1.0     0.0     0.0      81    22       0.3      0.1
+5          Juliet     0.7     0.2     0.1      94    22       0.5      0.1
+6         Gregory     0.7     0.2     0.2      72    17       0.5      0.1
+7         Capulet     0.6     0.1     0.3     232    46       0.3      0.1
+8    Lady Capulet     0.7     0.2     0.0     135    28       0.5      0.1
+9        Mercutio     0.8     0.1     0.1     253    28       0.5      0.1
+10        Servant     0.7     0.1     0.2      71    19       0.4      0.1
+11         Tybalt     0.8     0.1     0.1      79    17       0.5      0.1
+12       Montague     0.8     0.2     0.0     117    21       0.5      0.1
+13        Abraham     0.5     0.3     0.2       3     7       0.1      0.3
+14  First Servant     0.4     0.3     0.3      33     8       0.5      0.1
+15 Second Servant     1.0     0.0     0.0      32     3       0.8      0.1
+16  Lady Montague     0.5     0.5     0.0      24     2       0.9      0.1
+17          Paris     0.7     0.3     0.0      25     2       0.8      0.1
+18 Second Capulet     1.0     0.0     0.0       7     5       0.4      0.3
+19         Prince     0.8     0.1     0.1      83    15       0.5      0.1
+20  First Citizen     0.0     0.0     1.0       9     2       0.6      0.1
+```
+
+
+
+```r
+## The following shows all the available elements in the `word_stats` output
+names(desc_wrds)
+```
+
+```
+## [1] "ts"        "gts"       "mpun"      "word.elem" "sent.elem" "omit"     
+## [7] "digits"
+```
+
+
+<a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> has a plot method that plots the output as a heat map.  This can be useful for finding high/low elements in the data set.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> Plot** <font size="5" color="orange">&diams;</font>
+
+
+
+```r
+plot(desc_wrds)
+```
+
+![plot of chunk unnamed-chunk-127](figure/unnamed-chunk-127.png) 
+
+
+
+```r
+plot(desc_wrds, label=TRUE, lab.digits = 1)
+```
+
+![plot of chunk unnamed-chunk-128](figure/unnamed-chunk-128.png) 
+
+
+It takes considerable time to run <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> because it is calculating syllable counts.  The user may re-use the object output from one run and bass this as the text variable (`text.var`) in a subsequent run with different grouping variables (`grouping.vars`) as long as the text variable has not changed.  The example below demonstrates how to re-use the output from one <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> run in another run.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> Re-use** <font size="5" color="orange">&diams;</font>
+
+
+
+```r
+with(mraja1spl, word_stats(desc_wrds, list(sex, fam.aff, died), tot = tot))
+```
+
+
+
+<h4 id="wfm">Word Frequency Matrix</h4>
+
+Many analyses with words involve a matrix based on the words.  qdap uses a *word frequency matrix* (<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>) or the less maliable dataframe version, *word frequency dataframe* (<a href="http://trinker.github.io/qdap_dev/wfdf.html" target="_blank"><code>wfdf</code></a>).  The <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> is a count of word usages per grouping variable(s).  This is a similar concept to the <a href="http://cran.r-project.org/web/packages/tm/index.html">tm packae's</a> Term Document Matrix, though instead of documents we are interested in the grouping variable's usage of terms.  <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> is the general function that should be used, however, the <a href="http://trinker.github.io/qdap_dev/wfdf.html" target="_blank"><code>wfdf</code></a> function does provide options for margin sums (row and column).  Also note that the <a href="http://trinker.github.io/qdap_dev/wfm_expanded.html" target="_blank"><code>wfm_expanded</code></a> and <a href="http://trinker.github.io/qdap_dev/wfm_combine.html" target="_blank"><code>wfm_combine</code></a> can expand or combine terms within a word frequency matrix.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> Examples** <font size="5" color="orange">&diams;</font>
+
+
+```r
+## By a single grouping variable
+with(DATA, wfm(state, person))[1:15, ]
+```
+
+```
+##          greg researcher sally sam teacher
+## about       0          0     1   0       0
+## already     1          0     0   0       0
+## am          1          0     0   0       0
+## are         0          0     1   0       0
+## be          0          0     1   0       0
+## can         0          0     1   0       0
+## certain     0          0     1   0       0
+## computer    0          0     0   1       0
+## distrust    0          0     0   1       0
+## do          0          0     0   0       1
+## dumb        1          0     0   0       0
+## eat         1          0     0   0       0
+## fun         0          0     0   2       0
+## good        0          1     0   0       0
+## how         0          0     1   0       0
+```
+
+```r
+## By two grouping variables
+with(DATA, wfm(state, list(sex, adult)))[1:15, ]
+```
+
+```
+##          f.0 f.1 m.0 m.1
+## about      1   0   0   0
+## already    0   0   1   0
+## am         0   0   1   0
+## are        1   0   0   0
+## be         1   0   0   0
+## can        1   0   0   0
+## certain    1   0   0   0
+## computer   0   0   1   0
+## distrust   0   0   1   0
+## do         0   0   0   1
+## dumb       0   0   1   0
+## eat        0   0   1   0
+## fun        0   0   2   0
+## good       0   1   0   0
+## how        1   0   0   0
+```
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>: Keep Two Word Phrase as a Single Term** <font size="5" color="orange">&diams;</font>
+
+
+```r
+## insert double tilde ("~~") to keep phrases(e. g., first last name)
+space_keeps <- c(" fun", "I ")
+state2 <- space_fill(DATA$state, space_keeps, rm.extra = FALSE)
+with(DATA, wfm(state2, list(sex, adult)))[1:18, ]
+```
+
+```
+##            f.0 f.1 m.0 m.1
+## about        1   0   0   0
+## already      0   0   1   0
+## are          1   0   0   0
+## be           1   0   0   0
+## can          1   0   0   0
+## certain      1   0   0   0
+## computer     0   0   1   0
+## do           0   0   0   1
+## dumb         0   0   1   0
+## eat          0   0   1   0
+## good         0   1   0   0
+## how          1   0   0   0
+## hungry       0   0   1   0
+## i'm          0   0   1   0
+## i am         0   0   1   0
+## i distrust   0   0   1   0
+## is           0   0   1   0
+## is fun       0   0   1   0
+```
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/wfdf.html" target="_blank"><code>wfdf</code></a> Examples**: *Add Margins* <font size="5" color="orange">&diams;</font>
+
+
+```r
+with(DATA, wfdf(state, person, margins = TRUE))[c(1:15, 41:42), ]
+```
+
+```
+##             Words greg researcher sally sam teacher TOTAL.USES
+## 1           about    0          0     1   0       0          1
+## 2         already    1          0     0   0       0          1
+## 3              am    1          0     0   0       0          1
+## 4             are    0          0     1   0       0          1
+## 5              be    0          0     1   0       0          1
+## 6             can    0          0     1   0       0          1
+## 7         certain    0          0     1   0       0          1
+## 8        computer    0          0     0   1       0          1
+## 9        distrust    0          0     0   1       0          1
+## 10             do    0          0     0   0       1          1
+## 11           dumb    1          0     0   0       0          1
+## 12            eat    1          0     0   0       0          1
+## 13            fun    0          0     0   2       0          2
+## 14           good    0          1     0   0       0          1
+## 15            how    0          0     1   0       0          1
+## 41            you    1          0     1   2       0          4
+## 42 TOTAL.WORDS ->   20          6    10  13       4         53
+```
+
+```r
+with(DATA, wfdf(state, list(sex, adult), margins = TRUE))[c(1:15, 41:42), ]
+```
+
+```
+##             Words f.0 f.1 m.0 m.1 TOTAL.USES
+## 1           about   1   0   0   0          1
+## 2         already   0   0   1   0          1
+## 3              am   0   0   1   0          1
+## 4             are   1   0   0   0          1
+## 5              be   1   0   0   0          1
+## 6             can   1   0   0   0          1
+## 7         certain   1   0   0   0          1
+## 8        computer   0   0   1   0          1
+## 9        distrust   0   0   1   0          1
+## 10             do   0   0   0   1          1
+## 11           dumb   0   0   1   0          1
+## 12            eat   0   0   1   0          1
+## 13            fun   0   0   2   0          2
+## 14           good   0   1   0   0          1
+## 15            how   1   0   0   0          1
+## 41            you   1   0   3   0          4
+## 42 TOTAL.WORDS ->  10   6  33   4         53
+```
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/wfm_expanded.html" target="_blank"><code>wfm_expanded</code></a>: Expand the wfm** <font size="5" color="orange">&diams;</font>
+
+
+```r
+## Start with a word frequency matrix
+z <- wfm(DATA$state, DATA$person)
+## Note a single `you`
+z[30:41, ]
+```
+
+```
+##         greg researcher sally sam teacher
+## stinks     0          0     0   1       0
+## talking    0          0     1   0       0
+## telling    1          0     0   0       0
+## the        1          0     0   0       0
+## then       0          1     0   0       0
+## there      1          0     0   0       0
+## too        0          0     0   1       0
+## truth      1          0     0   0       0
+## way        1          0     0   0       0
+## we         0          1     1   0       1
+## what       0          0     1   0       1
+## you        1          0     1   2       0
+```
+
+```r
+## Note that there are two `you`s in the expanded version
+wfm_expanded(z)[33:45, ] 
+```
+
+```
+##         greg researcher sally sam teacher
+## stinks     0          0     0   1       0
+## talking    0          0     1   0       0
+## telling    1          0     0   0       0
+## the        1          0     0   0       0
+## then       0          1     0   0       0
+## there      1          0     0   0       0
+## too        0          0     0   1       0
+## truth      1          0     0   0       0
+## way        1          0     0   0       0
+## we         0          1     1   0       1
+## what       0          0     1   0       1
+## you        1          0     1   1       0
+## you        0          0     0   1       0
+```
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/wfm_combine.html" target="_blank"><code>wfm_combine</code></a>: Combine Terms in the wfm** <font size="5" color="orange">&diams;</font>
+
+
+```r
+## Start with a word frequency matrix
+x <- wfm(DATA$state, DATA$person)
+
+## The terms to exclude
+WL <- list(
+    random = c("the", "fun", "i"), 
+    yous = c("you", "your", "you're")
+)
+
+## Combine the terms
+(out <- wfm_combine(x, WL))
+```
+
+```
+##            greg researcher sally sam teacher
+## random        2          0     0   3       0
+## yous          1          0     1   2       0
+## else.words   17          6     9   8       4
+```
+
+```r
+## Pass the combined version to Chi Squared Test
+chisq.test(out)
+```
+
+```
+## 
+## 	Pearson's Chi-squared test
+## 
+## data:  out
+## X-squared = 7.661, df = 8, p-value = 0.4673
+```
+
+
+<h5 id="tdm"><font color="green">Convert/Generate Term Document Matrix or Document Term Matrix</font></h5>
+
+Some packages that could further the analysis of qdap expect a Document Term or Term Docuement Matrix.  qdap's <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> is similar to the <a href="http://cran.r-project.org/web/packages/tm/index.html">tm packae's</a> <a href="http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix">TermDocumentMatrix</a>     and <a href="http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix">DocumentTermMatrix</a>.  qdap does not try to replicate the extensive work of the<a href="http://cran.r-project.org/web/packages/tm/index.html">tm</a> package, however, the <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> and <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>dtm</code></a> do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> Use** <font size="5" color="orange">&diams;</font>
+
+
+
+```r
+x <- wfm(DATA$state, DATA$person)
+## Term Document Matrix
+tdm(x)
+```
+
+```
+##           Docs
+## Terms      greg researcher sally sam teacher
+##   about       0          0     1   0       0
+##   already     1          0     0   0       0
+##   am          1          0     0   0       0
+##   are         0          0     1   0       0
+##   be          0          0     1   0       0
+##   can         0          0     1   0       0
+##   certain     0          0     1   0       0
+##   computer    0          0     0   1       0
+##   distrust    0          0     0   1       0
+##   do          0          0     0   0       1
+##   dumb        1          0     0   0       0
+##   eat         1          0     0   0       0
+##   fun         0          0     0   2       0
+##   good        0          1     0   0       0
+##   how         0          0     1   0       0
+##   hungry      1          0     0   0       0
+##   i           1          0     0   1       0
+##   i'm         1          0     0   0       0
+##   is          1          0     0   1       0
+##   it          0          0     0   1       0
+##   it's        2          0     0   0       0
+##   let's       1          0     0   0       0
+##   liar        0          0     0   1       0
+##   move        0          1     0   0       0
+##   no          2          0     0   0       0
+##   not         1          0     0   1       0
+##   on          0          1     0   0       0
+##   shall       0          1     0   0       0
+##   should      0          0     0   0       1
+##   stinks      0          0     0   1       0
+##   talking     0          0     1   0       0
+##   telling     1          0     0   0       0
+##   the         1          0     0   0       0
+##   then        0          1     0   0       0
+##   there       1          0     0   0       0
+##   too         0          0     0   1       0
+##   truth       1          0     0   0       0
+##   way         1          0     0   0       0
+##   we          0          1     1   0       1
+##   what        0          0     1   0       1
+##   you         1          0     1   2       0
+```
+
+```r
+## Document Term Matrix
+dtm(x)
+```
+
+```
+##             Terms
+## Docs         about already am are be can certain computer distrust do dumb
+##   greg           0       1  1   0  0   0       0        0        0  0    1
+##   researcher     0       0  0   0  0   0       0        0        0  0    0
+##   sally          1       0  0   1  1   1       1        0        0  0    0
+##   sam            0       0  0   0  0   0       0        1        1  0    0
+##   teacher        0       0  0   0  0   0       0        0        0  1    0
+##             Terms
+## Docs         eat fun good how hungry i i'm is it it's let's liar move no
+##   greg         1   0    0   0      1 1   1  1  0    2     1    0    0  2
+##   researcher   0   0    1   0      0 0   0  0  0    0     0    0    1  0
+##   sally        0   0    0   1      0 0   0  0  0    0     0    0    0  0
+##   sam          0   2    0   0      0 1   0  1  1    0     0    1    0  0
+##   teacher      0   0    0   0      0 0   0  0  0    0     0    0    0  0
+##             Terms
+## Docs         not on shall should stinks talking telling the then there too
+##   greg         1  0     0      0      0       0       1   1    0     1   0
+##   researcher   0  1     1      0      0       0       0   0    1     0   0
+##   sally        0  0     0      0      0       1       0   0    0     0   0
+##   sam          1  0     0      0      1       0       0   0    0     0   1
+##   teacher      0  0     0      1      0       0       0   0    0     0   0
+##             Terms
+## Docs         truth way we what you
+##   greg           1   1  0    0   1
+##   researcher     0   0  1    0   0
+##   sally          0   0  1    1   1
+##   sam            0   0  0    0   2
+##   teacher        0   0  1    1   0
+```
+
+
+
+```r
+## Run Latant Semantic Analysis
+library(lsa)
+lsa(tdm(x), dims=dimcalc_share())
+```
+
+
+
+<pre><code>$tk
+                 [,1]         [,2]
+about    -0.021153126  0.072269368
+already  -0.169239530 -0.124825133
+am       -0.169239530 -0.124825133
+are      -0.021153126  0.072269368
+be       -0.021153126  0.072269368
+can      -0.021153126  0.072269368
+certain  -0.021153126  0.072269368
+computer -0.090637878  0.215786300
+distrust -0.090637878  0.215786300
+do       -0.001903917  0.014326564
+dumb     -0.169239530 -0.124825133
+eat      -0.169239530 -0.124825133
+fun      -0.181275756  0.431572601
+good     -0.001108363  0.009865681
+how      -0.021153126  0.072269368
+hungry   -0.169239530 -0.124825133
+i        -0.259877408  0.090961168
+i'm      -0.169239530 -0.124825133
+is       -0.259877408  0.090961168
+it       -0.090637878  0.215786300
+it's     -0.338479060 -0.249650265
+let's    -0.169239530 -0.124825133
+liar     -0.090637878  0.215786300
+move     -0.001108363  0.009865681
+no       -0.338479060 -0.249650265
+not      -0.259877408  0.090961168
+on       -0.001108363  0.009865681
+shall    -0.001108363  0.009865681
+should   -0.001903917  0.014326564
+stinks   -0.090637878  0.215786300
+talking  -0.021153126  0.072269368
+telling  -0.169239530 -0.124825133
+the      -0.169239530 -0.124825133
+then     -0.001108363  0.009865681
+there    -0.169239530 -0.124825133
+too      -0.090637878  0.215786300
+truth    -0.169239530 -0.124825133
+way      -0.169239530 -0.124825133
+we       -0.024165406  0.096461613
+what     -0.023057043  0.086595932
+you      -0.371668412  0.379016836
+
+$dk
+                   [,1]        [,2]
+greg       -0.876176894 -0.47984657
+researcher -0.005738152  0.03792516
+sally      -0.109512712  0.27781431
+sam        -0.469245067  0.82951496
+teacher    -0.009856846  0.05507346
+
+$sk
+[1] 5.177141 3.844150
+
+attr(,"class")
+[1] "LSAspace"
+</code></pre>
+
+
+<h4 id="termco">Search For and Count Terms</h4>
+
+The <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> family of functions are some of the most useful qdap functions for quantative discourse analysis.  <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> searches for (an optionally groups) terms and outputs a raw count, percent, and combined (raw/percent) matrix of term counts by grouping variable.  The <a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a> <a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a> <a href="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank"><code>syn</code></a>, <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a>, and <a href="http://trinker.github.io/qdap_dev/spaste.html" target="_blank"><code>spaste</code></a> are complimentary functions that are useful in developing word lists to provide to the <b><font color="green" face="courier new">match.list</font></b>.  
+
+The <b><font color="green" face="courier new">match.list</font></b> acts to search for similarly grouped <em>themes</em>.  For example <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font> may be a search for words associated with reading.  It is good practice to name the vectors of words that are stored in the <b><font color="green" face="courier new">match.list</font></b> .  This is the general form for how to set up a <b><font color="green" face="courier new">match.list</font></b>:
+
+
+```r
+themes <- list(
+    theme_1 = c(),
+    theme_2 = c(),
+    theme_n = c()
+)
+```
+
+
+It is important to understand how the <b><font color="green" face="courier new">match.list</font></b> is handled by <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a>.  The <b><font color="green" face="courier new">match.list</font></b> is (optionally) case and character sensitive. Spacing is an important way to grab specific words and requires careful thought. For example using <font color="green">"read"</font> will find the words <font color="green">"bread"</font>, <font color="green">"read"</font>, <font color="green">"reading"</font>, and <font color="green">"ready"</font>. If you want to search for just the word <font color="purple">"read"</font> supply a vector of <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font>. Notice the leading and trailing spaces.  A space acts as a boundary where as starting/ending with a nonspace allows for greedy matching that will find words that contain this term.  A leading, trailing or both may be used to control how <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> searches for the supplied terms.  So the reader may ask why not supply one string spaced as <font color="green">" read"</font>?  Keep in mind that <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> would also find the word <font color="purple">"ready"</font>
+
+This section's examples will first view the complimentary functions that augment the *themes* supplied to <b><font color="green" face="courier new">match.list</font></b> and then main <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> function will be explored.
+
+
+<a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a> looks through a text variable (usually the text found in the transcript) and finds/returns a vector of words containing a term(s).
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a> and  <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a> Examples**<font size="5" color="orange">&diams;</font>
+
+
+```r
+term_match(text.var = DATA$state, terms = qcv(the, trust), return.list = FALSE)
+```
+
+```
+## [1] "distrust" "the"      "then"     "there"
+```
+
+```r
+term_match(DATA$state, "i", FALSE)
+```
+
+```
+##  [1] "certain"  "distrust" "i"        "i'm"      "is"       "it"      
+##  [7] "it's"     "liar"     "stinks"   "talking"  "telling"
+```
+
+```r
+exclude(term_match(DATA$state, "i", FALSE), talking, telling)
+```
+
+```
+## [1] "certain"  "distrust" "i"        "i'm"      "is"       "it"      
+## [7] "it's"     "liar"     "stinks"
+```
+
+
+<a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a> is similar to <a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a>, however, the function looks at all the words found in a text variable (usually the transcript text) and returns words that begin with or contain the term(s).  The output can be arrange alphabetically or by frequency.  The output is a dataframe which helps the researcher to make decisions with regard to frequency of word use. 
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a> Examples**<font size="5" color="orange">&diams;</font>
+
+
+```r
+x1 <- all_words(raj$dialogue, begins.with="re")
+head(x1, 10)
+```
+
+```
+##    WORD       FREQ
+## 1  re            2
+## 2  reach         1
+## 3  read          6
+## 4  ready         5
+## 5  rearward      1
+## 6  reason        5
+## 7  reason's      1
+## 8  rebeck        1
+## 9  rebellious    1
+## 10 receipt       1
+```
+
+```r
+all_words(raj$dialogue, begins.with="q")
+```
+
+```
+##    WORD        FREQ
+## 1  qualities      1
+## 2  quarrel       11
+## 3  quarrelled     1
+## 4  quarrelling    2
+## 5  quarrels       1
+## 6  quarter        1
+## 7  queen          1
+## 8  quench         2
+## 9  question       2
+## 10 quick          2
+## 11 quickly        5
+## 12 quiet          4
+## 13 quinces        1
+## 14 quit           1
+## 15 quite          2
+## 16 quivering      1
+## 17 quivers        1
+## 18 quote          1
+## 19 quoth          5
+```
+
+```r
+all_words(raj$dialogue, contains="conc")
+```
+
+```
+##   WORD      FREQ
+## 1 conceal'd    1
+## 2 conceit      2
+## 3 conceive     1
+## 4 concludes    1
+## 5 reconcile    1
+```
+
+```r
+x2 <- all_words(raj$dialogue)
+head(x2, 10)
+```
+
+```
+##    WORD      FREQ
+## 1  'tis         9
+## 2  a          445
+## 3  a'           1
+## 4  abate        1
+## 5  abbey        1
+## 6  abed         1
+## 7  abhorred     1
+## 8  abhors       1
+## 9  able         2
+## 10 ableeding    1
+```
+
+```r
+x3 <- all_words(raj$dialogue, alphabetical = FALSE)
+head(x3, 10)
+```
+
+```
+##    WORD FREQ
+## 1  and   666
+## 2  the   656
+## 3  i     573
+## 4  to    517
+## 5  a     445
+## 6  of    378
+## 7  my    358
+## 8  is    344
+## 9  that  344
+## 10 in    312
+```
+
+
+The <a href="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank"><code>synonyms</code></a> (short hand: <a href="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank"><code>syn</code></a>) function finds words that are synonyms of a given set of terms and returns either a list of vector that can be passed to <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a>'s <b><font color="green" face="courier new">match.list</font></b>.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank"><code>synonyms</code></a> Examples**<font size="5" color="orange">&diams;</font>
+
+
+```r
+synonyms(c("the", "cat", "job", "environment", "read", "teach"))
+```
+
+```
+## $cat.def_1
+## [1] "feline"    "gib"       "grimalkin" "kitty"     "malkin"   
+## 
+## $cat.def_2
+## [1] "moggy"
+## 
+## $cat.def_3
+## [1] "mouser" "puss"  
+## 
+## $cat.def_4
+## [1] "pussy"
+## 
+## $cat.def_5
+## [1] "tabby"
+## 
+## $job.def_1
+##  [1] "affair"         "assignment"     "charge"         "chore"         
+##  [5] "concern"        "contribution"   "duty"           "enterprise"    
+##  [9] "errand"         "function"       "pursuit"        "responsibility"
+## [13] "role"           "stint"          "task"           "undertaking"   
+## [17] "venture"        "work"          
+## 
+## $job.def_2
+##  [1] "business"   "calling"    "capacity"   "career"     "craft"     
+##  [6] "employment" "function"   "livelihood" "mtier"      "occupation"
+## [11] "office"     "position"   "post"       "profession" "situation" 
+## [16] "trade"      "vocation"  
+## 
+## $job.def_3
+##  [1] "allotment"   "assignment"  "batch"       "commission"  "consignment"
+##  [6] "contract"    "lot"         "output"      "piece"       "portion"    
+## [11] "product"     "share"      
+## 
+## $environment.def_1
+##  [1] "atmosphere"   "background"   "conditions"   "context"     
+##  [5] "domain"       "element"      "habitat"      "locale"      
+##  [9] "medium"       "milieu"       "scene"        "setting"     
+## [13] "situation"    "surroundings" "territory"   
+## 
+## $environment.def_2
+## [1] "The environment is the natural world of land"
+## [2] "sea"                                         
+## [3] "air"                                         
+## [4] "plants"                                      
+## [5] "and animals."                                
+## 
+## $read.def_1
+## [1] "glance at"          "look at"            "peruse"            
+## [4] "pore over"          "refer to"           "run one's eye over"
+## [7] "scan"               "study"             
+## 
+## $read.def_2
+## [1] "announce" "declaim"  "deliver"  "recite"   "speak"    "utter"   
+## 
+## $read.def_3
+## [1] "comprehend"              "construe"               
+## [3] "decipher"                "discover"               
+## [5] "interpret"               "perceive the meaning of"
+## [7] "see"                     "understand"             
+## 
+## $read.def_4
+## [1] "display"  "indicate" "record"   "register" "show"    
+## 
+## $teach.def_1
+##  [1] "advise"          "coach"           "demonstrate"    
+##  [4] "direct"          "discipline"      "drill"          
+##  [7] "edify"           "educate"         "enlighten"      
+## [10] "give lessons in" "guide"           "impart"         
+## [13] "implant"         "inculcate"       "inform"         
+## [16] "instil"          "instruct"        "school"         
+## [19] "show"            "train"           "tutor"
+```
+
+```r
+head(syn(c("the", "cat", "job", "environment", "read", "teach"),
+    return.list = FALSE), 30)
+```
+
+```
+##  [1] "feline"         "gib"            "grimalkin"      "kitty"         
+##  [5] "malkin"         "moggy"          "mouser"         "puss"          
+##  [9] "pussy"          "tabby"          "affair"         "assignment"    
+## [13] "charge"         "chore"          "concern"        "contribution"  
+## [17] "duty"           "enterprise"     "errand"         "function"      
+## [21] "pursuit"        "responsibility" "role"           "stint"         
+## [25] "task"           "undertaking"    "venture"        "work"          
+## [29] "business"       "calling"
+```
+
+```r
+syn(c("the", "cat", "job", "environment", "read", "teach"), multiwords = FALSE)
+```
+
+```
+## $cat.def_1
+## [1] "feline"    "gib"       "grimalkin" "kitty"     "malkin"   
+## 
+## $cat.def_2
+## [1] "moggy"
+## 
+## $cat.def_3
+## [1] "mouser" "puss"  
+## 
+## $cat.def_4
+## [1] "pussy"
+## 
+## $cat.def_5
+## [1] "tabby"
+## 
+## $job.def_1
+##  [1] "affair"         "assignment"     "charge"         "chore"         
+##  [5] "concern"        "contribution"   "duty"           "enterprise"    
+##  [9] "errand"         "function"       "pursuit"        "responsibility"
+## [13] "role"           "stint"          "task"           "undertaking"   
+## [17] "venture"        "work"          
+## 
+## $job.def_2
+##  [1] "business"   "calling"    "capacity"   "career"     "craft"     
+##  [6] "employment" "function"   "livelihood" "mtier"      "occupation"
+## [11] "office"     "position"   "post"       "profession" "situation" 
+## [16] "trade"      "vocation"  
+## 
+## $job.def_3
+##  [1] "allotment"   "assignment"  "batch"       "commission"  "consignment"
+##  [6] "contract"    "lot"         "output"      "piece"       "portion"    
+## [11] "product"     "share"      
+## 
+## $environment.def_1
+##  [1] "atmosphere"   "background"   "conditions"   "context"     
+##  [5] "domain"       "element"      "habitat"      "locale"      
+##  [9] "medium"       "milieu"       "scene"        "setting"     
+## [13] "situation"    "surroundings" "territory"   
+## 
+## $environment.def_2
+## [1] "sea"    "air"    "plants"
+## 
+## $read.def_1
+## [1] "peruse" "scan"   "study" 
+## 
+## $read.def_2
+## [1] "announce" "declaim"  "deliver"  "recite"   "speak"    "utter"   
+## 
+## $read.def_3
+## [1] "comprehend" "construe"   "decipher"   "discover"   "interpret" 
+## [6] "see"        "understand"
+## 
+## $read.def_4
+## [1] "display"  "indicate" "record"   "register" "show"    
+## 
+## $teach.def_1
+##  [1] "advise"      "coach"       "demonstrate" "direct"      "discipline" 
+##  [6] "drill"       "edify"       "educate"     "enlighten"   "guide"      
+## [11] "impart"      "implant"     "inculcate"   "inform"      "instil"     
+## [16] "instruct"    "school"      "show"        "train"       "tutor"
+```
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> - Simple Example**<font size="5" color="orange">&diams;</font>
+
+
+```r
+## Make a small dialogue data set
+(dat2 <- data.frame(dialogue=c("@bryan is bryan good @br",
+    "indeed", "@ brian"), person=qcv(A, B, A)))
+```
+
+```
+##                   dialogue person
+## 1 @bryan is bryan good @br      A
+## 2                   indeed      B
+## 3                  @ brian      A
+```
+
+```r
+
+## The word list to search for
+ml <- list(
+    wrds=c("bryan", "indeed"), 
+    "@", 
+    bryan=c("bryan", "@ br", "@br")
+)
+
+## Search by person
+with(dat2, termco(dialogue, person, match.list=ml))
+```
+
+```
+##   person word.count       wrds         @     bryan
+## 1      A          6  2(33.33%) 3(50.00%) 5(83.33%)
+## 2      B          1 1(100.00%)         0         0
+```
+
+```r
+## Search by person peopoerion output
+with(dat2, termco(dialogue, person, match.list=ml, percent = FALSE))
+```
+
+```
+##   person word.count    wrds      @  bryan
+## 1      A          6  2(.33) 3(.50) 5(.83)
+## 2      B          1 1(1.00)      0      0
+```
+
+
+<p id = "rajex"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> - Romeo and Juliet Act 1 Example</b><font size="5" color="orange">&diams;</font></p>
+
+
+```r
+## Word list to search for
+## Note: In the last vector using "the" will actually 
+## include the other 3 versions
+ml2 <- list(
+    theme_1 = c(" the ", " a ", " an "),
+    theme_2 = c(" I'" ),
+    "good",
+    the_words = c("the", " the ", " the", "the ")
+)
+
+(out <- with(raj.act.1,  termco(dialogue, person, ml2)))
+```
+
+```
+##            person word.count   theme_1 theme_2     good   the_words
+## 1         Abraham         24         0       0        0           0
+## 2        Benvolio        621 32(5.15%) 2(.32%)  2(.32%) 123(19.81%)
+## 3         Capulet        736 39(5.30%) 3(.41%)  3(.41%)  93(12.64%)
+## 4   First Citizen         16 2(12.50%)       0        0  10(62.50%)
+## 5   First Servant         69 8(11.59%)       0 1(1.45%)  20(28.99%)
+## 6         Gregory        149  9(6.04%)       0        0  48(32.21%)
+## 7          Juliet        206  5(2.43%) 1(.49%)  1(.49%)   20(9.71%)
+## 8    Lady Capulet        286 20(6.99%)       0        0  63(22.03%)
+## 9   Lady Montague         28  2(7.14%)       0        0           0
+## 10       Mercutio        552 49(8.88%)       0  2(.36%) 146(26.45%)
+## 11       Montague        217 12(5.53%)       0  1(.46%)  41(18.89%)
+## 12          Nurse        598 44(7.36%) 1(.17%)  2(.33%) 103(17.22%)
+## 13          Paris         32         0       0        0    1(3.12%)
+## 14         Prince        167  8(4.79%)       0        0  35(20.96%)
+## 15          Romeo       1164 56(4.81%) 3(.26%)  3(.26%) 142(12.20%)
+## 16        Sampson        259 19(7.34%)       0  1(.39%)  70(27.03%)
+## 17 Second Capulet         17         0       0        0           0
+## 18 Second Servant         41  2(4.88%)       0 1(2.44%)   8(19.51%)
+## 19        Servant        183 12(6.56%) 1(.55%)  1(.55%)  46(25.14%)
+## 20         Tybalt        160 11(6.88%) 1(.62%)        0  24(15.00%)
+```
+
+```r
+## Available elements in the termco output (use dat$...)
+names(out)
+```
+
+```
+## [1] "raw"          "prop"         "rnp"          "zero.replace"
+## [5] "percent"      "digits"
+```
+
+```r
+## Raw and proportion - useful for presenting in tables
+out$rnp  
+```
+
+```
+##            person word.count   theme_1 theme_2     good   the_words
+## 1         Abraham         24         0       0        0           0
+## 2        Benvolio        621 32(5.15%) 2(.32%)  2(.32%) 123(19.81%)
+## 3         Capulet        736 39(5.30%) 3(.41%)  3(.41%)  93(12.64%)
+## 4   First Citizen         16 2(12.50%)       0        0  10(62.50%)
+## 5   First Servant         69 8(11.59%)       0 1(1.45%)  20(28.99%)
+## 6         Gregory        149  9(6.04%)       0        0  48(32.21%)
+## 7          Juliet        206  5(2.43%) 1(.49%)  1(.49%)   20(9.71%)
+## 8    Lady Capulet        286 20(6.99%)       0        0  63(22.03%)
+## 9   Lady Montague         28  2(7.14%)       0        0           0
+## 10       Mercutio        552 49(8.88%)       0  2(.36%) 146(26.45%)
+## 11       Montague        217 12(5.53%)       0  1(.46%)  41(18.89%)
+## 12          Nurse        598 44(7.36%) 1(.17%)  2(.33%) 103(17.22%)
+## 13          Paris         32         0       0        0    1(3.12%)
+## 14         Prince        167  8(4.79%)       0        0  35(20.96%)
+## 15          Romeo       1164 56(4.81%) 3(.26%)  3(.26%) 142(12.20%)
+## 16        Sampson        259 19(7.34%)       0  1(.39%)  70(27.03%)
+## 17 Second Capulet         17         0       0        0           0
+## 18 Second Servant         41  2(4.88%)       0 1(2.44%)   8(19.51%)
+## 19        Servant        183 12(6.56%) 1(.55%)  1(.55%)  46(25.14%)
+## 20         Tybalt        160 11(6.88%) 1(.62%)        0  24(15.00%)
+```
+
+```r
+## Raw - useful for performing calculations
+out$raw 
+```
+
+```
+##            person word.count theme_1 theme_2 good the_words
+## 1         Abraham         24       0       0    0         0
+## 2        Benvolio        621      32       2    2       123
+## 3         Capulet        736      39       3    3        93
+## 4   First Citizen         16       2       0    0        10
+## 5   First Servant         69       8       0    1        20
+## 6         Gregory        149       9       0    0        48
+## 7          Juliet        206       5       1    1        20
+## 8    Lady Capulet        286      20       0    0        63
+## 9   Lady Montague         28       2       0    0         0
+## 10       Mercutio        552      49       0    2       146
+## 11       Montague        217      12       0    1        41
+## 12          Nurse        598      44       1    2       103
+## 13          Paris         32       0       0    0         1
+## 14         Prince        167       8       0    0        35
+## 15          Romeo       1164      56       3    3       142
+## 16        Sampson        259      19       0    1        70
+## 17 Second Capulet         17       0       0    0         0
+## 18 Second Servant         41       2       0    1         8
+## 19        Servant        183      12       1    1        46
+## 20         Tybalt        160      11       1    0        24
+```
+
+```r
+## Proportion - useful for performing calculations
+out$prop
+```
+
+```
+##            person word.count theme_1 theme_2   good the_words
+## 1         Abraham         24   0.000  0.0000 0.0000     0.000
+## 2        Benvolio        621   5.153  0.3221 0.3221    19.807
+## 3         Capulet        736   5.299  0.4076 0.4076    12.636
+## 4   First Citizen         16  12.500  0.0000 0.0000    62.500
+## 5   First Servant         69  11.594  0.0000 1.4493    28.986
+## 6         Gregory        149   6.040  0.0000 0.0000    32.215
+## 7          Juliet        206   2.427  0.4854 0.4854     9.709
+## 8    Lady Capulet        286   6.993  0.0000 0.0000    22.028
+## 9   Lady Montague         28   7.143  0.0000 0.0000     0.000
+## 10       Mercutio        552   8.877  0.0000 0.3623    26.449
+## 11       Montague        217   5.530  0.0000 0.4608    18.894
+## 12          Nurse        598   7.358  0.1672 0.3344    17.224
+## 13          Paris         32   0.000  0.0000 0.0000     3.125
+## 14         Prince        167   4.790  0.0000 0.0000    20.958
+## 15          Romeo       1164   4.811  0.2577 0.2577    12.199
+## 16        Sampson        259   7.336  0.0000 0.3861    27.027
+## 17 Second Capulet         17   0.000  0.0000 0.0000     0.000
+## 18 Second Servant         41   4.878  0.0000 2.4390    19.512
+## 19        Servant        183   6.557  0.5464 0.5464    25.137
+## 20         Tybalt        160   6.875  0.6250 0.0000    15.000
+```
+
+
+<font size="5" color="orange">&diams;</font> **Using <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> with <a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a> and <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a>**<font size="5" color="orange">&diams;</font>
+
+
+```r
+## Example 1
+termco(DATA$state, DATA$person, exclude(term_match(DATA$state, qcv(th),
+    FALSE), "truth"))
+```
+
+```
+##       person word.count       the      then    there
+## 1       greg         20 2(10.00%)         0 1(5.00%)
+## 2 researcher          6 1(16.67%) 1(16.67%)        0
+## 3      sally         10         0         0        0
+## 4        sam         13         0         0        0
+## 5    teacher          4         0         0        0
+```
+
+```r
+## Example 2
+MTCH.LST <- exclude(term_match(DATA$state, qcv(th, i)), qcv(truth, stinks))
+termco(DATA$state, DATA$person, MTCH.LST)
+```
+
+```
+##       person word.count        th          i
+## 1       greg         20 3(15.00%) 13(65.00%)
+## 2 researcher          6 2(33.33%)          0
+## 3      sally         10         0  4(40.00%)
+## 4        sam         13         0 11(84.62%)
+## 5    teacher          4         0          0
+```
+
+
+<font size="5" color="orange">&diams;</font> **Using <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> with <a href="http://trinker.github.io/qdap_dev/syn.html" target="_blank"><code>syn</code></a>**<font size="5" color="orange">&diams;</font>
+
+
+```r
+syns <- synonyms("doubt")
+syns[1]
+```
+
+```
+## $doubt.def_1
+## [1] "discredit"          "distrust"           "fear"              
+## [4] "lack confidence in" "misgive"            "mistrust"          
+## [7] "query"              "question"           "suspect"
+```
+
+
+
+```r
+termco(DATA$state, DATA$person, unlist(syns[1]))
+```
+
+
+
+```
+##       person word.count discredit distrust fear question
+## 1       greg         20         0        0    0        0
+## 2 researcher          6         0        0    0        0
+## 3      sally         10         0        0    0        0
+## 4        sam         13         0 1(7.69%)    0        0
+## 5    teacher          4         0        0    0        0
+```
+
+
+
+```r
+synonyms("doubt", FALSE)
+```
+
+```
+##  [1] "discredit"          "distrust"           "fear"              
+##  [4] "lack confidence in" "misgive"            "mistrust"          
+##  [7] "query"              "question"           "suspect"           
+## [10] "apprehension"       "disquiet"           "incredulity"       
+## [13] "lack of faith"      "misgiving"          "qualm"             
+## [16] "scepticism"         "suspicion"          "be dubious"        
+## [19] "be uncertain"       "demur"              "fluctuate"         
+## [22] "hesitate"           "scruple"            "vacillate"         
+## [25] "waver"              "dubiety"            "hesitancy"         
+## [28] "hesitation"         "indecision"         "irresolution"      
+## [31] "lack of conviction" "suspense"           "uncertainty"       
+## [34] "vacillation"        "confusion"          "difficulty"        
+## [37] "dilemma"            "perplexity"         "problem"           
+## [40] "quandary"           "admittedly"         "assuredly"         
+## [43] "certainly"          "doubtless"          "doubtlessly"       
+## [46] "probably"           "surely"             "accept"            
+## [49] "believe"            "buy"                "belief"            
+## [52] "certainty"          "confidence"         "conviction"        
+## [55] "trust"
+```
+
+```r
+termco(DATA$state, DATA$person, list(doubt = synonyms("doubt", FALSE)))
+```
+
+```
+##       person word.count     doubt
+## 1       greg         20         0
+## 2 researcher          6         0
+## 3      sally         10         0
+## 4        sam         13 2(15.38%)
+## 5    teacher          4         0
+```
+
+
+
+```r
+termco(DATA$state, DATA$person, syns)
+```
+
+
+
+```
+##       person word.count doubt.def_1 doubt.def_2 doubt.def_7 doubt.def_8
+## 1       greg         20           0           0           0           0
+## 2 researcher          6           0           0           0           0
+## 3      sally         10           0           0           0           0
+## 4        sam         13    1(7.69%)    1(7.69%)           0    1(7.69%)
+## 5    teacher          4           0           0           0           0
+```
+
+
+<a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> also has a plot method that plots a heatmap of the <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> output.  This allows for rapid visualizations of patterns and anables fast spotting of extreme values.  Here are some plots from the <a href="#rajex">Romeo and Juliet Act 1 Example</a> above.
+
+<font size="5" color="orange">&diams;</font> **Using <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> Plotting**<font size="5" color="orange">&diams;</font>
+
+
+```r
+plot(out)
+```
+
+![plot of chunk unnamed-chunk-150](figure/unnamed-chunk-150.png) 
+
+
+
+```r
+plot(out, label = TRUE)
+```
+
+![plot of chunk unnamed-chunk-151](figure/unnamed-chunk-151.png) 
+
+
+<h4 id="quest">Count of Question Type</h4>
+<h4 id="wordcount">Word & Character Counts</h4>
+<h4 id="freqtab">SPSS Style Frequency Tables</h4>
+<h4 id="pos">Parts of Speech Tagging</h4>
+<h4 id="syll">Syllabication and Counts</h4>
+
+
+
+
+
+
 
 <h3 id="measures">Word Measures and Scoring</h3>
 
