@@ -13,6 +13,8 @@
 #' @param keep.orig logical.  If \code{TRUE} the original pasted column will be 
 #' retained as well.
 #' @param name.sep The character(s) that was used to paste the column names.
+#' @param index.names logical.  If \code{TRUE} names of columns that are duplicated
+#' are indexed with c("name.1", "name.2", ... "name.n").  
 #' @return \code{colsplit2df} - returns a dataframe with the \code{paste2} 
 #' column split into new columns.
 #' @seealso \code{\link[qdap]{colSplit}}, 
@@ -53,7 +55,7 @@
 #' ltruncdf(z)
 #' }
 colsplit2df <- function(dataframe, splitcols = 1, new.names = NULL, sep=".", 
-         keep.orig=FALSE, name.sep = "&") {
+         keep.orig=FALSE, name.sep = "&", index.names = FALSE) {
 
 
     if (is.numeric(splitcols)) {
@@ -72,7 +74,8 @@ colsplit2df <- function(dataframe, splitcols = 1, new.names = NULL, sep=".",
     for (i in 1:length(splitcols)) {
         dataframe <- colsplit2df_helper(dataframe = dataframe, 
             splitcol = splitcols[i], new.names = new.names[[i]], 
-            sep = sep[i], keep.orig = keep.orig, name.sep = name.sep[i]
+            sep = sep[i], keep.orig = keep.orig, name.sep = name.sep[i],
+            index.names = index.names
         )
     }
     nfix <- !is.na(suppressWarnings(as.numeric(colnames(dataframe))))
@@ -123,63 +126,89 @@ function(x,  ...) {
 
 colsplit2df_helper <- 
 function(dataframe, splitcol = 1, new.names = NULL, sep=".", 
-         keep.orig=FALSE, name.sep = "&"){
+         keep.orig=FALSE, name.sep = "&", index.names = FALSE){
 
+    ## change width of prrint screen temporarily
     WD <- options()$width
     options(width=10000)
     on.exit(options(width=WD))
     classRdf <- c("diversity")
+
+    ## Checks
     if (!is.data.frame(dataframe)){
         warning("dataframe object is not of the class data.frame")
     }
     if (is.numeric(dataframe[, splitcol])) {
-        stop("splitcol can not be numeric")
+        stop("splitcol class can not be numeric")
     }
-    X <- data.frame(do.call(rbind, strsplit(as.vector(
-        dataframe[, splitcol]), split = sep, fixed=TRUE)),
-        check.names = FALSE)
-    z <- if (!is.numeric(splitcol)) {
-        match(splitcol, names(dataframe)) 
+
+    ## The column was split into list of vectors
+    splits <- strsplit(as.vector(
+        dataframe[, splitcol]), split = sep, fixed=TRUE) 
+   
+    ## Put together as a dataframe (do.call + rbind)
+    splitcols <- data.frame(do.call(rbind, splits), check.names = FALSE)
+
+    ## determine split col location
+    if (!is.numeric(splitcol)) {
+        loc <- match(splitcol, names(dataframe))
     } else {
-        splitcol
+        loc <- splitcol
     }
+
+    ## if new names apply them
     if (!is.null(new.names)) {
-        colnames(X) <- new.names
-    }
-
-    inds <- 1:(z-1)
-    nnms <- colnames(dataframe)[inds]
-
-    if (z!=1 & ncol(dataframe) > z) {
-
-        w <- cbind(dataframe[, 1:(z-1), drop=FALSE], X, 
-            dataframe[, (z + 1):ncol(dataframe), drop=FALSE])
-
+        colnames(splitcols) <- new.names
     } else {
-        if (z!=1 & ncol(dataframe) == z) {
-            w <- cbind(dataframe[, 1:(z-1), drop=FALSE], X)
+        ## Grab name of split column
+        splnm <- colnames(dataframe)[loc]
+         
+        ## Check if the lenght name splits of that column 
+        ## are equal to ncols in splitcols
+        newnms <- unlist(strsplit(splnm, name.sep, fixed = TRUE))
+        lennms <- length(newnms)
+
+        ## if split column name splits appropriately then 
+        ## that's the names use; else use X1, X2, ... Xn
+        if (ncol(splitcols) == lennms) {
+            colnames(splitcols) <- newnms
         } else {
-            if (z==1 & ncol(dataframe) > z) {
-                w <- cbind(X, dataframe[, (z + 1):ncol(dataframe), drop=FALSE])
-            } else {
-                w <- X
-            }
+            colnames(splitcols) <- paste0("X", colnames(splitcols))
         }
     }
-    if (is.null(new.names) & (name.sep %in% unlist(strsplit(names(dataframe[, 
-        splitcol, drop=FALSE]), split=NULL)))) {
-        nams <- unlist(strsplit(names(dataframe[, 
-            splitcol, drop=FALSE]), split=name.sep))
-        colnames(w)[z:(z + length(nams) - 1)] <- nams
+
+    ## get number of columns in original dataframe
+    dn <- ncol(dataframe)
+    
+    ## splice it together
+    dat <- data.frame(dataframe, splitcols, check.names = FALSE)
+
+    ## get number of columns in new dataframe 
+    nn <- ncol(dat)
+ 
+    ## See if there are any columns after the split column to grab
+    if (dn >= (loc + 1)) {
+        ending <- (loc + 1):dn
+    } else {
+        ending <- NULL
     }
 
-    colnames(w)[inds] <- nnms
+    ## put it together in the correct order
+    o <- dat[, c(1:loc, (dn + 1):nn, ending)]
 
-
-    if(keep.orig) {
-        w <- cbind(dataframe[, splitcol, drop=FALSE], w)
+    ## drop the numeric extensions of variables with repeated names
+    if (!index.names) {
+        newnames <- colnames(dat)[c(1:loc, (dn + 1):nn, ending)]
+        colnames(o) <- newnames
     }
-    class(w) <- c("colsplit2df", "data.frame")
-    w
+
+    ## Drop the original split column
+    if(!keep.orig) {
+        o[loc] <- NULL
+    }
+
+    ## give it a class
+    class(o) <- c("colsplit2df", "data.frame")
+    o
 }
 

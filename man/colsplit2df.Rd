@@ -4,7 +4,8 @@
 \title{Wrapper for colSplit that Returns Dataframe(s)}
 \usage{
   colsplit2df(dataframe, splitcols = 1, new.names = NULL,
-    sep = ".", keep.orig = FALSE, name.sep = "&")
+    sep = ".", keep.orig = FALSE, name.sep = "&",
+    index.names = FALSE)
 
   lcolsplit2df(qdap.list, keep.orig = FALSE)
 }
@@ -28,6 +29,10 @@
 
   \item{name.sep}{The character(s) that was used to paste
   the column names.}
+
+  \item{index.names}{logical.  If \code{TRUE} names of
+  columns that are duplicated are indexed with c("name.1",
+  "name.2", ... "name.n").}
 
   \item{qdap.list}{A qdap list object that contains
   dataframes with a leading \code{\link[qdap]{paste2}}

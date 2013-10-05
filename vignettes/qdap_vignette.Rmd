@@ -2679,7 +2679,7 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="word_count"> 
 </form>
 
-<form class="form_left" action="http://trinker.github.io/qdap_dev/character_count.html" target="_blank">
+<form class="form_left" action="http://trinker.github.io/qdap_dev/word_count.html" target="_blank">
     <input type="submit" value="character_count"><input type="submit" value="character_table"> 
 </form>
 
@@ -2701,7 +2701,7 @@ The displayed output is a wide dataframe, hence the abbreviated column names.  T
 
 <h5 id="wordstats">`r FUN("word_stats")` Column Names</h5>
 
-- n.tot – number of turns of talk   
+- n.tot - number of turns of talk   
 - n.sent - number of sentences   
 - n.words - number of words   
 - n.char - number of characters   

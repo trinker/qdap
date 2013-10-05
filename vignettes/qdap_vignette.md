@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.79 19.70 22.40 19.70 15.00 15.79 19.70 25.34 15.00 25.34 19.70
-## [12] 15.00 25.34 19.70 25.34 25.34 15.79 16.30 16.30 22.40
+##  [1] 25.34 15.79 15.00 15.00 15.00 19.70 16.30 19.70 15.00 15.79 15.79
+## [12] 16.30 16.30 15.79 16.30 25.34 25.34 16.30 22.40 16.30
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.79 19.70 22.40 19.70 15.00 15.79 19.70 25.34 15.00 25.34 19.70
-## [12] 15.00 25.34 19.70 25.34 25.34 15.79 16.30 16.30 22.40
+##  [1] 25.34 15.79 15.00 15.00 15.00 19.70 16.30 19.70 15.00 15.79 15.79
+## [12] 16.30 16.30 15.79 16.30 25.34 25.34 16.30 22.40 16.30
 ```
 
 
@@ -6250,7 +6250,7 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="word_count"> 
 </form>
 
-<form class="form_left" action="http://trinker.github.io/qdap_dev/character_count.html" target="_blank">
+<form class="form_left" action="http://trinker.github.io/qdap_dev/word_count.html" target="_blank">
     <input type="submit" value="character_count"><input type="submit" value="character_table"> 
 </form>
 
@@ -6272,7 +6272,7 @@ The displayed output is a wide dataframe, hence the abbreviated column names.  T
 
 <h5 id="wordstats"><a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> Column Names</h5>
 
-- n.tot  number of turns of talk   
+- n.tot - number of turns of talk   
 - n.sent - number of sentences   
 - n.words - number of words   
 - n.char - number of characters   
