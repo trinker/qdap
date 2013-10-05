@@ -164,6 +164,11 @@ MINOR FEATURES
 * `qheat` picks up a `facet.vars` argument that allows a character vector of 
   length 1 or 2 to facet by.
 
+* `question_type` gives the indices of questions via `$inds`.
+
+* `colsplit2df` not splits multiple columns to match the capabilities of 
+  `colpaste2df`.
+
 CHANGES
 
 * The dictionaries and word lists for qdap have been moved to their own package, 

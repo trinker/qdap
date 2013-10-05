@@ -40,11 +40,13 @@
   (\code{tot.quest}) and counts of question types (initial
   interrogative word) by grouping variable(s).}
   \item{rnp}{Dataframe of the frequency and proportions of
-  question types by grouping variable.} \item{missing}{The
-  row numbers of the missing data (excluded from
-  analysis).} \item{percent}{The value of percent used for
-  plotting purposes.} \item{zero.replace}{The value of
-  zero.replace used for plotting purposes.}
+  question types by grouping variable.} \item{inds}{The
+  indices of the original text variable that contain
+  questions.} \item{missing}{The row numbers of the missing
+  data (excluded from analysis).} \item{percent}{The value
+  of percent used for plotting purposes.}
+  \item{zero.replace}{The value of zero.replace used for
+  plotting purposes.}
 }
 \description{
   Transcript apply question counts.

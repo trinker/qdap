@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.79 16.30 22.40 19.70 15.00 16.30 19.70 15.00 16.30 22.40 15.79
-## [12] 16.30 22.40 15.79 19.70 16.30 16.30 15.79 25.34 22.40
+##  [1] 15.79 19.70 22.40 19.70 15.00 15.79 19.70 25.34 15.00 25.34 19.70
+## [12] 15.00 25.34 19.70 25.34 25.34 15.79 16.30 16.30 22.40
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.79 16.30 22.40 19.70 15.00 16.30 19.70 15.00 16.30 22.40 15.79
-## [12] 16.30 22.40 15.79 19.70 16.30 16.30 15.79 25.34 22.40
+##  [1] 15.79 19.70 22.40 19.70 15.00 15.79 19.70 25.34 15.00 25.34 19.70
+## [12] 15.00 25.34 19.70 25.34 25.34 15.79 16.30 16.30 22.40
 ```
 
 
@@ -2928,13 +2928,13 @@ colsplit2df(dat)
 ```
 
 ```
-##   Plant   Type  Treatment conc uptake
-## 1   Qn1 Quebec nonchilled   95   16.0
-## 2   Qn1 Quebec nonchilled  175   30.4
-## 3   Qn1 Quebec nonchilled  250   34.8
-## 4   Qn1 Quebec nonchilled  350   37.2
-## 5   Qn1 Quebec nonchilled  500   35.3
-## 6   Qn1 Quebec nonchilled  675   39.2
+##   Plant&Type&Treatment   Type  Treatment conc uptake
+## 1                  Qn1 Quebec nonchilled   95   16.0
+## 2                  Qn1 Quebec nonchilled  175   30.4
+## 3                  Qn1 Quebec nonchilled  250   34.8
+## 4                  Qn1 Quebec nonchilled  350   37.2
+## 5                  Qn1 Quebec nonchilled  500   35.3
+## 6                  Qn1 Quebec nonchilled  675   39.2
 ```
 
 ```r
@@ -2943,13 +2943,13 @@ colsplit2df(dat, new.names = qcv(A, B, C))
 ```
 
 ```
-##     A      B          C conc uptake
-## 1 Qn1 Quebec nonchilled   95   16.0
-## 2 Qn1 Quebec nonchilled  175   30.4
-## 3 Qn1 Quebec nonchilled  250   34.8
-## 4 Qn1 Quebec nonchilled  350   37.2
-## 5 Qn1 Quebec nonchilled  500   35.3
-## 6 Qn1 Quebec nonchilled  675   39.2
+##   Plant&Type&Treatment      B          C conc uptake
+## 1                  Qn1 Quebec nonchilled   95   16.0
+## 2                  Qn1 Quebec nonchilled  175   30.4
+## 3                  Qn1 Quebec nonchilled  250   34.8
+## 4                  Qn1 Quebec nonchilled  350   37.2
+## 5                  Qn1 Quebec nonchilled  500   35.3
+## 6                  Qn1 Quebec nonchilled  675   39.2
 ```
 
 ```r
@@ -2958,13 +2958,13 @@ colsplit2df(dat, new.names = qcv(A, B, C), keep.orig = TRUE)
 ```
 
 ```
-##    Plant&Type&Treatment   A      B          C conc uptake
-## 1 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled   95   16.0
-## 2 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  175   30.4
-## 3 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  250   34.8
-## 4 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  350   37.2
-## 5 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  500   35.3
-## 6 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  675   39.2
+##    Plant&Type&Treatment Plant&Type&Treatment      B          C conc uptake
+## 1 Qn1.Quebec.nonchilled                  Qn1 Quebec nonchilled   95   16.0
+## 2 Qn1.Quebec.nonchilled                  Qn1 Quebec nonchilled  175   30.4
+## 3 Qn1.Quebec.nonchilled                  Qn1 Quebec nonchilled  250   34.8
+## 4 Qn1.Quebec.nonchilled                  Qn1 Quebec nonchilled  350   37.2
+## 5 Qn1.Quebec.nonchilled                  Qn1 Quebec nonchilled  500   35.3
+## 6 Qn1.Quebec.nonchilled                  Qn1 Quebec nonchilled  675   39.2
 ```
 
 ```r
@@ -3044,33 +3044,33 @@ ltruncdf(z[1:4])
 
 ```
 ## $raw
-##   sex adult   raw.text n.row endmark strip.text     q.type
-## 1   m     1 What shoul     4       ?  what shou       what
-## 2   f     0 How can we     7       ?  how can w        how
-## 3   f     0 What are y    10       ?  what are        what
-## 4   f     1 Shall we m    11       ?  shall we       shall
-## 5   m     0 You alread    15       ?  you alrea implied_do
+##   sex&adult adult   raw.text n.row endmark strip.text     q.type
+## 1         m     1 What shoul     4       ?  what shou       what
+## 2         f     0 How can we     7       ?  how can w        how
+## 3         f     0 What are y    10       ?  what are        what
+## 4         f     1 Shall we m    11       ?  shall we       shall
+## 5         m     0 You alread    15       ?  you alrea implied_do
 ## 
 ## $count
-##   sex adult tot.quest what how shall implied_do
-## 1   f     0         2    1   1     0          0
-## 2   f     1         1    0   0     1          0
-## 3   m     0         1    0   0     0          1
-## 4   m     1         1    1   0     0          0
+##   sex&adult adult tot.quest what how shall implied_do
+## 1         f     0         2    1   1     0          0
+## 2         f     1         1    0   0     1          0
+## 3         m     0         1    0   0     0          1
+## 4         m     1         1    1   0     0          0
 ## 
 ## $prop
-##   sex adult tot.quest what how shall implied_do
-## 1   f     0         2   50  50     0          0
-## 2   f     1         1    0   0   100          0
-## 3   m     0         1    0   0     0        100
-## 4   m     1         1  100   0     0          0
+##   sex&adult adult tot.quest what how shall implied_do
+## 1         f     0         2   50  50     0          0
+## 2         f     1         1    0   0   100          0
+## 3         m     0         1    0   0     0        100
+## 4         m     1         1  100   0     0          0
 ## 
 ## $rnp
-##   sex adult tot.quest    what    how   shall implied_do
-## 1   f     0         2  1(50%) 1(50%)       0          0
-## 2   f     1         1       0      0 1(100%)          0
-## 3   m     0         1       0      0       0    1(100%)
-## 4   m     1         1 1(100%)      0       0          0
+##   sex&adult adult tot.quest    what    how   shall implied_do
+## 1         f     0         2  1(50%) 1(50%)       0          0
+## 2         f     1         1       0      0 1(100%)          0
+## 3         m     0         1       0      0       0    1(100%)
+## 4         m     1         1 1(100%)      0       0          0
 ```
 
 
@@ -6215,11 +6215,11 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/pos.html" target="_blank">
-    <input type="submit" value="pos"><input type="submit" value="pos_by"><input type="submit" value="pos_tags"> - <a href="#pos">Parts of Speech Tagging</a>
+    <input type="submit" value="pos"><input type="submit" value="pos_by"><input type="submit" value="pos_tags"> - <a href="#pos">Parts of Speech Tagging & Counts</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/question_type.html" target="_blank">
-    <input type="submit" value="question_type"> - <a href="#quest">Count of Question Type</a>
+    <input type="submit" value="question_type"> - <a href="#quest">Question Type Counts</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/syllable_sum.html" target="_blank">
@@ -7403,12 +7403,12 @@ termco(DATA$state, DATA$person, unlist(syns[1]))
 
 
 ```
-##       person word.count discredit distrust fear question
-## 1       greg         20         0        0    0        0
-## 2 researcher          6         0        0    0        0
-## 3      sally         10         0        0    0        0
-## 4        sam         13         0 1(7.69%)    0        0
-## 5    teacher          4         0        0    0        0
+##       person word.count discredit distrust fear query question
+## 1       greg         20         0        0    0     0        0
+## 2 researcher          6         0        0    0     0        0
+## 3      sally         10         0        0    0     0        0
+## 4        sam         13         0 1(7.69%)    0     0        0
+## 5    teacher          4         0        0    0     0        0
 ```
 
 
@@ -7470,7 +7470,7 @@ termco(DATA$state, DATA$person, syns)
 ```
 
 
-<a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> also has a plot method that plots a heatmap of the <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> output.  This allows for rapid visualizations of patterns and anables fast spotting of extreme values.  Here are some plots from the <a href="#rajex">Romeo and Juliet Act 1 Example</a> above.
+<a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> also has a plot method that plots a heatmap of the <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> output based on the percent usage by grouping variable.  This allows for rapid visualizations of patterns and anables fast spotting of extreme values.  Here are some plots from the <a href="#rajex">Romeo and Juliet Act 1 Example</a> above.
 
 <font size="5" color="orange">&diams;</font> **Using <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> Plotting**<font size="5" color="orange">&diams;</font>
 
@@ -7490,10 +7490,298 @@ plot(out, label = TRUE)
 ![plot of chunk unnamed-chunk-151](figure/unnamed-chunk-151.png) 
 
 
-<h4 id="quest">Count of Question Type</h4>
+<h4 id="quest">Question Type Counts</h4>
+
+A researcher may be interested in classifying and investigating the types of questions used within dialogue.  
+<a href="http://trinker.github.io/qdap_dev/question_type.html" target="_blank"><code>question_type</code></a> provides question classification.  The algorithm searches for the following interrogative words (and optionally, their negative contraction form as well):
+
+
+```
+are               does              might             were              whose             
+can               had               must              what              why               
+correct           has               ok                when              will              
+could             have              right             where             would             
+did               how               shall             which                               
+do                is                should            who                                 
+implied do/does   may               was               whom                                
+```
+
+
+
+The interrogative word that is found first (with the exception of "ok", "right" and "correct") in the question determines the sentence type. "ok", "right" and "correct" sentence types are determined if the sentence is a question with no other interrogative words found and "ok", "right" or "correct" is the last word of the sentence. Those interrogative sentences beginning with the word "you" are categorized as implying do or does question type, though the use of do/does is not explicit. Those with undetermined sentence type are labeled unknown.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/question_type.html" target="_blank"><code>question_type</code></a> - Basic Example**<font size="5" color="orange">&diams;</font>
+
+
+```r
+## Basic Example
+(x <- question_type(DATA.SPLIT$state, DATA.SPLIT$person))
+```
+
+```
+##       person tot.quest    what    how   shall implied_do/does
+## 1       greg         1       0      0       0         1(100%)
+## 2 researcher         1       0      0 1(100%)               0
+## 3      sally         2  1(50%) 1(50%)       0               0
+## 4    teacher         1 1(100%)      0       0               0
+## 5        sam         0       0      0       0               0
+```
+
+```r
+## Available elements from output
+names(x)
+```
+
+```
+## [1] "raw"          "count"        "prop"         "rnp"         
+## [5] "inds"         "missing"      "percent"      "zero.replace"
+```
+
+```r
+## Table of counts useful for additional analysis
+x$count
+```
+
+```
+##       person tot.quest what how shall implied_do/does
+## 1       greg         1    0   0     0               1
+## 2 researcher         1    0   0     1               0
+## 3      sally         2    1   1     0               0
+## 4    teacher         1    1   0     0               0
+## 5        sam         0    0   0     0               0
+```
+
+```r
+## The raw output with question types
+truncdf(x$raw, 15)
+```
+
+```
+##       person        raw.text n.row endmark      strip.text          q.type
+## 1    teacher What should we      4       ?  what should we            what
+## 2      sally How can we be c     7       ?  how can we be              how
+## 3      sally What are you ta    10       ?  what are you t            what
+## 4 researcher Shall we move o    11       ?  shall we move            shall
+## 5       greg    You already?    15       ?    you already  implied_do/does
+```
+
+
+<a href="http://trinker.github.io/qdap_dev/question_type.html" target="_blank"><code>question_type</code></a> also has a plot method that plots a heatmap of the output.  This allows for rapid visualizations of patterns and anables fast spotting of extreme values.
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/question_type.html" target="_blank"><code>question_type</code></a> - Plotting Method**<font size="5" color="orange">&diams;</font>
+
+
+```r
+plot(x)
+```
+
+![plot of chunk unnamed-chunk-154](figure/unnamed-chunk-154.png) 
+
+
+
+```r
+plot(x, label = TRUE, high = "red", low = "yellow", grid = NULL)
+```
+
+![plot of chunk unnamed-chunk-155](figure/unnamed-chunk-155.png) 
+
+
+Negative forms of questions such as <font color="green">Don't you want the robots to leave?</font> are, by defualt, grouped with with their equivalent positive <font color="green">Do</font> forms, such as <font color="green">Do you want the robots to leave?</font>.  The researcher may choose to keep the two forms separate using the argument <b><font color="green">neg.cont = TRUE</font>
+</b>
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/question_type.html" target="_blank"><code>question_type</code></a> - Include Negative Questions**<font size="5" color="orange">&diams;</font>
+
+
+```r
+## Create a Dataframe with Do and Don't
+(DATA.SPLIT2 <- rbind(DATA.SPLIT,
+    c("sam", "1.1", "1", "m", "0", "K1", "Don't you think so?", "x"),
+    c("sam", "1.1", "1", "m", "0", "K1", "Do you think so?", "x")
+))[, c(1, 7)]
+```
+
+```
+##          person                       state
+## 1.1         sam            Computer is fun.
+## 1.2         sam                Not too fun.
+## 2.1        greg     No it's not, it's dumb.
+## 3.1     teacher          What should we do?
+## 4.1         sam        You liar, it stinks!
+## 5.1        greg     I am telling the truth!
+## 6.1       sally      How can we be certain?
+## 7.1        greg            There is no way.
+## 8.1         sam             I distrust you.
+## 9.1       sally What are you talking about?
+## 10.1 researcher           Shall we move on?
+## 10.2 researcher                  Good then.
+## 11.1       greg                 I'm hungry.
+## 11.2       greg                  Let's eat.
+## 11.3       greg                You already?
+## 16          sam         Don't you think so?
+## 17          sam            Do you think so?
+```
+
+```r
+## Do and Don't Grouped Together
+question_type(DATA.SPLIT2$state, DATA.SPLIT2$person)
+```
+
+```
+##       person tot.quest    what      do    how   shall implied_do/does
+## 1       greg         1       0       0      0       0         1(100%)
+## 2 researcher         1       0       0      0 1(100%)               0
+## 3      sally         2  1(50%)       0 1(50%)       0               0
+## 4        sam         2       0 2(100%)      0       0               0
+## 5    teacher         1 1(100%)       0      0       0               0
+```
+
+```r
+## Do and Don't Grouped Separately
+question_type(DATA.SPLIT2$state, DATA.SPLIT2$person, neg.cont = TRUE)
+```
+
+```
+##       person tot.quest    what  don't     do    how   shall implied_do/does
+## 1       greg         1       0      0      0      0       0         1(100%)
+## 2 researcher         1       0      0      0      0 1(100%)               0
+## 3      sally         2  1(50%)      0      0 1(50%)       0               0
+## 4        sam         2       0 1(50%) 1(50%)      0       0               0
+## 5    teacher         1 1(100%)      0      0      0       0               0
+```
+
+
+It may be helpful to take the indices of the question types int the **x[["inds"]]** output or access **x[["raw"]][, "n.row"]**
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/question_type.html" target="_blank"><code>question_type</code></a> - Passing to <a href="http://trinker.github.io/qdap_dev/trans_context.html" target="_blank"><code>trans_context</code></a>**<font size="5" color="orange">&diams;</font>
+
+
+```r
+## The indices of all questions
+x <- question_type(DATA.SPLIT$state, DATA.SPLIT$person)
+(inds1 <- x[["inds"]])
+```
+
+```
+## [1]  4  7 10 11 15
+```
+
+
+
+```r
+with(DATA.SPLIT, trans_context(state, person, inds = inds1, n.before = 2))
+```
+
+
+<pre><code>===================================
+Event 1: [lines 2-6]
+
+    sam:        Computer is fun. Not too fun.
+
+    greg:       No it's not, it's dumb.
+
+ ** teacher:    What should we do?
+
+    sam:        You liar, it stinks!
+
+    greg:       I am telling the truth! 
+
+===================================
+Event 2: [lines 5-9]
+
+    sam:        You liar, it stinks!
+
+    greg:       I am telling the truth!
+
+ ** sally:      How can we be certain?
+
+    greg:       There is no way.
+
+    sam:        I distrust you. 
+
+===================================
+Event 3: [lines 8-12]
+
+    greg:       There is no way.
+
+    sam:        I distrust you.
+
+ ** sally:      What are you talking about?
+
+    researcher: Shall we move on? Good then.
+
+    greg:       I'm hungry. Let's eat. You already? 
+
+===================================
+Event 4: [lines 9-13]
+
+    sam:        I distrust you.
+
+    sally:      What are you talking about?
+
+ ** researcher: Shall we move on? Good then.
+
+    greg:       I'm hungry. Let's eat. You already? 
+
+===================================
+Event 5: [lines 13-15]
+
+    sally:      What are you talking about?
+
+    researcher: Shall we move on? Good then.
+
+ ** greg:       I'm hungry. Let's eat. You already? </code></pre>
+ 
+
+```r
+## Find what and how questions
+inds2 <- x[["raw"]][x[["raw"]]$q.type %in% c("what", "how"), "n.row"]
+with(DATA.SPLIT, trans_context(state, person, inds = inds2, n.before = 2))
+```
+
+
+<pre><code>===================================
+Event 1: [lines 2-6]
+
+    sam:        Computer is fun. Not too fun.
+
+    greg:       No it's not, it's dumb.
+
+ ** teacher:    What should we do?
+
+    sam:        You liar, it stinks!
+
+    greg:       I am telling the truth! 
+
+===================================
+Event 2: [lines 5-9]
+
+    sam:        You liar, it stinks!
+
+    greg:       I am telling the truth!
+
+ ** sally:      How can we be certain?
+
+    greg:       There is no way.
+
+    sam:        I distrust you. 
+
+===================================
+Event 3: [lines 8-12]
+
+    greg:       There is no way.
+
+    sam:        I distrust you.
+
+ ** sally:      What are you talking about?
+
+    researcher: Shall we move on? Good then.
+
+    greg:       I'm hungry. Let's eat. You already? </code></pre>
+
+
 <h4 id="wordcount">Word & Character Counts</h4>
 <h4 id="freqtab">SPSS Style Frequency Tables</h4>
-<h4 id="pos">Parts of Speech Tagging</h4>
+<h4 id="pos">Parts of Speech Tagging & Counts</h4>
 <h4 id="syll">Syllabication and Counts</h4>
 
 

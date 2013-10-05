@@ -22,6 +22,7 @@
 #' question types (initial interrogative word) by grouping variable(s).}
 #' \item{rnp}{Dataframe of the frequency and proportions of question types by 
 #' grouping variable.} 
+#' \item{inds}{The indices of the original text variable that contain questions.}
 #' \item{missing}{The row numbers of the missing data (excluded from analysis).}
 #' \item{percent}{The value of percent used for plotting purposes.}
 #' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
@@ -226,7 +227,8 @@ question_type <- function(text.var, grouping.var = NULL,
         percent = percent, zero.replace = zero.replace)  
     rnp <- data.frame(DF2[, 1:2], rnp, check.names = FALSE) 
     o <- list(raw = DF3, count = DF, prop = DF2, rnp = rnp, 
-        missing = rows.removed, percent = percent, zero.replace = zero.replace)
+        inds = DF3[, "n.row"], missing = rows.removed, percent = percent, 
+        zero.replace = zero.replace)
     class(o) <- "question_type"
     o
 }

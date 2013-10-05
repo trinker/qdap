@@ -164,6 +164,11 @@ relatively new to CRAN, made these changes sensible at this point.
 * `qheat` picks up a `facet.vars` argument that allows a character vector of 
   length 1 or 2 to facet by.
 
+* `question_type` gives the indices of questions via `$inds`.
+
+* `colsplit2df` not splits multiple columns to match the capabilities of 
+  `colpaste2df`.
+
 <b>CHANGES</b>
 
 * The dictionaries and word lists for <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> have been moved to their own package, 

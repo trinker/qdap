@@ -3,7 +3,7 @@
 \alias{lcolsplit2df}
 \title{Wrapper for colSplit that Returns Dataframe(s)}
 \usage{
-  colsplit2df(dataframe, splitcol = 1, new.names = NULL,
+  colsplit2df(dataframe, splitcols = 1, new.names = NULL,
     sep = ".", keep.orig = FALSE, name.sep = "&")
 
   lcolsplit2df(qdap.list, keep.orig = FALSE)
@@ -12,21 +12,22 @@
   \item{dataframe}{A dataframe with a column that has been
   pasted together.}
 
-  \item{splitcol}{The name of the column that has been
-  pasted together.}
+  \item{splitcol}{The name/index of the column(s) that has
+  been pasted together.}
 
   \item{new.names}{A character vector of new names to
-  assign to the columns. Default attempts to extract the
+  assign to the columns (or list of names if multiple
+  columns are being split). Default attempts to extract the
   original names before the paste.}
 
-  \item{sep}{The character that was used in \code{paste2}
-  to paste the columns.}
+  \item{sep}{The character(s) that was used in
+  \code{paste2} to paste the columns.}
 
   \item{keep.orig}{logical.  If \code{TRUE} the original
   pasted column will be retained as well.}
 
-  \item{name.sep}{The character that was used to paste the
-  column names.}
+  \item{name.sep}{The character(s) that was used to paste
+  the column names.}
 
   \item{qdap.list}{A qdap list object that contains
   dataframes with a leading \code{\link[qdap]{paste2}}
@@ -70,6 +71,18 @@ CO2 <- datasets::CO2
 (dat <- colpaste2df(head(mtcars), list(1:3), sep = "|"))
 colsplit2df(dat, 12, sep = "|")
 
+## Multiple split example
+E <- list(
+    c(1, 2, 3, 4, 5),
+    qcv(mpg, hp),
+    c("disp", "am")
+)
+
+(dat2 <- colpaste2df(head(mtcars), E, sep ="|"))
+cols <- c("mpg&cyl&disp&hp&drat", "mpg&hp", "disp&am")
+colsplit2df(dat2, cols, sep = "|")
+
+## lcolsplit2df example
 (x <- with(DATA.SPLIT, question_type(state, list(sex, adult))))
 ltruncdf(x)
 z <- lcolsplit2df(x)

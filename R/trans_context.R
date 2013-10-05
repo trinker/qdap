@@ -48,8 +48,13 @@
 #' inds4 <- boolean_search(raj$dialogue, spaste(paste(negation.words, collapse = " || ")))
 #' trans_context(raj$dialogue, raj$person, inds4)
 #' 
-#' ## With `question_type`
+#' ### With `question_type`
 #' (x <- question_type(DATA.SPLIT$state, DATA.SPLIT$person))
+#' 
+#' ## All questions
+#' with(DATA.SPLIT, trans_context(state, person, inds=x$inds))
+#' 
+#' ## Specific question types
 #' y <- x[["raw"]]
 #' inds5 <- y[y[, "q.type"] %in% qcv(what, how), "n.row"]
 #' with(DATA.SPLIT, trans_context(state, person, inds=inds5))
