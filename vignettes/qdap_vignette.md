@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 25.34 15.79 15.00 15.00 15.00 19.70 16.30 19.70 15.00 15.79 15.79
-## [12] 16.30 16.30 15.79 16.30 25.34 25.34 16.30 22.40 16.30
+##  [1] 19.70 22.40 22.40 15.00 16.30 16.30 16.30 16.30 15.79 15.00 22.40
+## [12] 19.70 15.79 19.70 15.00 19.70 16.30 19.70 15.00 15.79
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 25.34 15.79 15.00 15.00 15.00 19.70 16.30 19.70 15.00 15.79 15.79
-## [12] 16.30 16.30 15.79 16.30 25.34 25.34 16.30 22.40 16.30
+##  [1] 19.70 22.40 22.40 15.00 16.30 16.30 16.30 16.30 15.79 15.00 22.40
+## [12] 19.70 15.79 19.70 15.00 19.70 16.30 19.70 15.00 15.79
 ```
 
 
@@ -2928,13 +2928,13 @@ colsplit2df(dat)
 ```
 
 ```
-##   Plant&Type&Treatment   Type  Treatment conc uptake
-## 1                  Qn1 Quebec nonchilled   95   16.0
-## 2                  Qn1 Quebec nonchilled  175   30.4
-## 3                  Qn1 Quebec nonchilled  250   34.8
-## 4                  Qn1 Quebec nonchilled  350   37.2
-## 5                  Qn1 Quebec nonchilled  500   35.3
-## 6                  Qn1 Quebec nonchilled  675   39.2
+##   Plant   Type  Treatment conc uptake
+## 1   Qn1 Quebec nonchilled   95   16.0
+## 2   Qn1 Quebec nonchilled  175   30.4
+## 3   Qn1 Quebec nonchilled  250   34.8
+## 4   Qn1 Quebec nonchilled  350   37.2
+## 5   Qn1 Quebec nonchilled  500   35.3
+## 6   Qn1 Quebec nonchilled  675   39.2
 ```
 
 ```r
@@ -2943,13 +2943,13 @@ colsplit2df(dat, new.names = qcv(A, B, C))
 ```
 
 ```
-##   Plant&Type&Treatment      B          C conc uptake
-## 1                  Qn1 Quebec nonchilled   95   16.0
-## 2                  Qn1 Quebec nonchilled  175   30.4
-## 3                  Qn1 Quebec nonchilled  250   34.8
-## 4                  Qn1 Quebec nonchilled  350   37.2
-## 5                  Qn1 Quebec nonchilled  500   35.3
-## 6                  Qn1 Quebec nonchilled  675   39.2
+##     A      B          C conc uptake
+## 1 Qn1 Quebec nonchilled   95   16.0
+## 2 Qn1 Quebec nonchilled  175   30.4
+## 3 Qn1 Quebec nonchilled  250   34.8
+## 4 Qn1 Quebec nonchilled  350   37.2
+## 5 Qn1 Quebec nonchilled  500   35.3
+## 6 Qn1 Quebec nonchilled  675   39.2
 ```
 
 ```r
@@ -2958,13 +2958,13 @@ colsplit2df(dat, new.names = qcv(A, B, C), keep.orig = TRUE)
 ```
 
 ```
-##    Plant&Type&Treatment Plant&Type&Treatment      B          C conc uptake
-## 1 Qn1.Quebec.nonchilled                  Qn1 Quebec nonchilled   95   16.0
-## 2 Qn1.Quebec.nonchilled                  Qn1 Quebec nonchilled  175   30.4
-## 3 Qn1.Quebec.nonchilled                  Qn1 Quebec nonchilled  250   34.8
-## 4 Qn1.Quebec.nonchilled                  Qn1 Quebec nonchilled  350   37.2
-## 5 Qn1.Quebec.nonchilled                  Qn1 Quebec nonchilled  500   35.3
-## 6 Qn1.Quebec.nonchilled                  Qn1 Quebec nonchilled  675   39.2
+##    Plant&Type&Treatment   A      B          C conc uptake
+## 1 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled   95   16.0
+## 2 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  175   30.4
+## 3 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  250   34.8
+## 4 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  350   37.2
+## 5 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  500   35.3
+## 6 Qn1.Quebec.nonchilled Qn1 Quebec nonchilled  675   39.2
 ```
 
 ```r
@@ -3044,33 +3044,33 @@ ltruncdf(z[1:4])
 
 ```
 ## $raw
-##   sex&adult adult   raw.text n.row endmark strip.text     q.type
-## 1         m     1 What shoul     4       ?  what shou       what
-## 2         f     0 How can we     7       ?  how can w        how
-## 3         f     0 What are y    10       ?  what are        what
-## 4         f     1 Shall we m    11       ?  shall we       shall
-## 5         m     0 You alread    15       ?  you alrea implied_do
+##   sex adult   raw.text n.row endmark strip.text     q.type
+## 1   m     1 What shoul     4       ?  what shou       what
+## 2   f     0 How can we     7       ?  how can w        how
+## 3   f     0 What are y    10       ?  what are        what
+## 4   f     1 Shall we m    11       ?  shall we       shall
+## 5   m     0 You alread    15       ?  you alrea implied_do
 ## 
 ## $count
-##   sex&adult adult tot.quest what how shall implied_do
-## 1         f     0         2    1   1     0          0
-## 2         f     1         1    0   0     1          0
-## 3         m     0         1    0   0     0          1
-## 4         m     1         1    1   0     0          0
+##   sex adult tot.quest what how shall implied_do
+## 1   f     0         2    1   1     0          0
+## 2   f     1         1    0   0     1          0
+## 3   m     0         1    0   0     0          1
+## 4   m     1         1    1   0     0          0
 ## 
 ## $prop
-##   sex&adult adult tot.quest what how shall implied_do
-## 1         f     0         2   50  50     0          0
-## 2         f     1         1    0   0   100          0
-## 3         m     0         1    0   0     0        100
-## 4         m     1         1  100   0     0          0
+##   sex adult tot.quest what how shall implied_do
+## 1   f     0         2   50  50     0          0
+## 2   f     1         1    0   0   100          0
+## 3   m     0         1    0   0     0        100
+## 4   m     1         1  100   0     0          0
 ## 
 ## $rnp
-##   sex&adult adult tot.quest    what    how   shall implied_do
-## 1         f     0         2  1(50%) 1(50%)       0          0
-## 2         f     1         1       0      0 1(100%)          0
-## 3         m     0         1       0      0       0    1(100%)
-## 4         m     1         1 1(100%)      0       0          0
+##   sex adult tot.quest    what    how   shall implied_do
+## 1   f     0         2  1(50%) 1(50%)       0          0
+## 2   f     1         1       0      0 1(100%)          0
+## 3   m     0         1       0      0       0    1(100%)
+## 4   m     1         1 1(100%)      0       0          0
 ```
 
 
@@ -7780,6 +7780,252 @@ Event 3: [lines 8-12]
 
 
 <h4 id="wordcount">Word & Character Counts</h4>
+
+A research may have the need to view simple word or character counts for the sake of comparisons between grouping variables.  <a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>word_count</code></a> (<a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>wc</code></a>), <a href="http://trinker.github.io/qdap_dev/word_list.html" target="_blank"><code>word_list</code></a>, <a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>character_count</code></a>, <a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>character_table</code></a> (<a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>char_table</code></a>) serve the purposes of counting words and characters with <a href="http://trinker.github.io/qdap_dev/word_list.html" target="_blank"><code>word_list</code></a> producing a lists of words usage by grouping variable and <a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>character_table</code></a> producing a count table of characters.  The following examples demonstrate the uses of these functions.  
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>word_count</code></a> Examples**<font size="5" color="orange">&diams;</font>
+
+
+```r
+word_count(DATA$state)
+```
+
+```
+##  [1] 6 5 4 4 5 5 4 3 5 6 6
+```
+
+```r
+## `wc a shortened version of `word_count`
+wc(DATA$state)
+```
+
+```
+##  [1] 6 5 4 4 5 5 4 3 5 6 6
+```
+
+```r
+## Retain the text
+wc(DATA$state, names = TRUE)
+```
+
+```
+##         Computer is fun. Not too fun. 
+##                                     6 
+##               No it's not, it's dumb. 
+##                                     5 
+##                    What should we do? 
+##                                     4 
+##                  You liar, it stinks! 
+##                                     4 
+##               I am telling the truth! 
+##                                     5 
+##                How can we be certain? 
+##                                     5 
+##                      There is no way. 
+##                                     4 
+##                       I distrust you. 
+##                                     3 
+##           What are you talking about? 
+##                                     5 
+##         Shall we move on?  Good then. 
+##                                     6 
+## I'm hungry.  Let's eat.  You already? 
+##                                     6
+```
+
+```r
+## Setting `byrow=FALSE` gives a total for the text variable
+word_count(DATA$state, byrow=FALSE, names = TRUE)
+```
+
+```
+## [1] 53
+```
+
+```r
+## identical to `byrow=FALSE` above
+sum(word_count(DATA$state))
+```
+
+```
+## [1] 53
+```
+
+```r
+## By grouping variable
+tapply(DATA$state, DATA$person, wc, byrow=FALSE)
+```
+
+```
+##       greg researcher      sally        sam    teacher 
+##         20          6         10         13          4
+```
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>character_count</code></a> Examples**<font size="5" color="orange">&diams;</font>
+
+
+```r
+character_count(DATA$state)
+```
+
+```
+##  [1] 22 17 14 15 18 17 12 12 22 21 27
+```
+
+```r
+## Setting `byrow=FALSE` gives a total for the text variable
+character_count(DATA$state, byrow=FALSE)
+```
+
+```
+## [1] 197
+```
+
+```r
+## identical to `byrow=FALSE` above
+sum(character_count(DATA$state))
+```
+
+```
+## [1] 197
+```
+
+```r
+## By grouping variable
+tapply(DATA$state, DATA$person, character_count, byrow=FALSE)
+```
+
+```
+##       greg researcher      sally        sam    teacher 
+##         74         21         39         49         14
+```
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>character_table</code></a> Example**<font size="5" color="orange">&diams;</font>
+
+
+```r
+x <- character_table(DATA$state, DATA$person)
+names(x)
+```
+
+```
+## [1] "raw"          "prop"         "rnp"          "percent"     
+## [5] "zero.replace"
+```
+
+```r
+x$raw
+```
+
+```
+##       person '    ! , . ? a b c d e f g h i k l m n o p r s  t u v w y
+## 1       greg 4 16 1 1 7 1 5 1 0 2 7 0 2 4 6 0 4 3 5 4 0 4 4 10 4 0 1 4
+## 2 researcher 0  5 0 0 1 1 1 0 0 1 3 0 1 2 0 0 2 1 2 4 0 0 1  1 0 1 1 0
+## 3      sally 0  8 0 0 1 2 6 2 2 0 4 0 1 2 2 1 1 0 3 3 0 2 0  4 2 0 3 1
+## 4        sam 0 10 1 1 5 0 1 0 1 1 1 2 0 0 6 1 1 1 4 6 1 3 5  7 6 0 0 2
+## 5    teacher 0  3 0 0 0 1 1 0 0 2 1 0 0 2 0 0 1 0 0 2 0 0 1  1 1 0 2 0
+```
+
+```r
+x$prop[, 1:10]
+```
+
+```
+##       person '           !     ,     .     ?      a b     c
+## 1       greg 4 16.00 1.000 1.000 7.000 1.000  5.000 1 0.000
+## 2 researcher 0 17.86 0.000 0.000 3.571 3.571  3.571 0 0.000
+## 3      sally 0 16.00 0.000 0.000 2.000 4.000 12.000 4 4.000
+## 4        sam 0 15.15 1.515 1.515 7.576 0.000  1.515 0 1.515
+## 5    teacher 0 16.67 0.000 0.000 0.000 5.556  5.556 0 0.000
+```
+
+```r
+x$rnp[, 1:7]
+```
+
+```
+##       person     '                   !        ,        .        ?
+## 1       greg 4(4%) 16(16.00%) 1(1.00%) 1(1.00%) 7(7.00%) 1(1.00%)
+## 2 researcher     0  5(17.86%)        0        0 1(3.57%) 1(3.57%)
+## 3      sally     0  8(16.00%)        0        0 1(2.00%) 2(4.00%)
+## 4        sam     0 10(15.15%) 1(1.52%) 1(1.52%) 5(7.58%)        0
+## 5    teacher     0  3(16.67%)        0        0        0 1(5.56%)
+```
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>character_table</code></a> Plot Method**<font size="5" color="orange">&diams;</font>
+
+
+```r
+plot(x)
+```
+
+![plot of chunk unnamed-chunk-163](figure/unnamed-chunk-163.png) 
+
+
+
+```r
+plot(x, label = TRUE, high = "red", lab.digits = 1, zero.replace = "")
+```
+
+![plot of chunk unnamed-chunk-164](figure/unnamed-chunk-164.png) 
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>character_table</code></a> Additional Plotting**<font size="5" color="orange">&diams;</font>
+
+
+```r
+library(ggplot2);library(reshape2)
+dat <- char_table(DATA$state, list(DATA$sex, DATA$adult))
+dat2 <- colsplit2df(melt(dat$raw), keep.orig = TRUE)
+dat2$adult2 <- lookup(dat2$adult, c(0, 1), c("child", "adult"))
+head(dat2, 15)
+```
+
+```
+##    sex&adult sex adult variable value adult2
+## 1        f.0   f     0        '     0  child
+## 2        f.1   f     1        '     0  adult
+## 3        m.0   m     0        '     4  child
+## 4        m.1   m     1        '     0  adult
+## 5        f.0   f     0              8  child
+## 6        f.1   f     1              5  adult
+## 7        m.0   m     0             26  child
+## 8        m.1   m     1              3  adult
+## 9        f.0   f     0        !     0  child
+## 10       f.1   f     1        !     0  adult
+## 11       m.0   m     0        !     2  child
+## 12       m.1   m     1        !     0  adult
+## 13       f.0   f     0        ,     0  child
+## 14       f.1   f     1        ,     0  adult
+## 15       m.0   m     0        ,     2  child
+```
+
+
+
+```r
+ggplot(data = dat2, aes(y = variable, x = value, colour=sex)) +
+    facet_grid(adult2~.) +
+    geom_line(size=1, aes(group =variable), colour = "black") +
+    geom_point()
+```
+
+![plot of chunk unnamed-chunk-166](figure/unnamed-chunk-166.png) 
+
+
+
+```r
+ggplot(data = dat2, aes(x = variable, y = value)) +
+    geom_bar(aes(fill = variable), stat = "identity") +
+    facet_grid(sex ~ adult2, margins = TRUE) +
+    theme(legend.position="none")
+```
+
+![plot of chunk unnamed-chunk-167](figure/unnamed-chunk-167.png) 
+
+
 <h4 id="freqtab">SPSS Style Frequency Tables</h4>
 <h4 id="pos">Parts of Speech Tagging & Counts</h4>
 <h4 id="syll">Syllabication and Counts</h4>

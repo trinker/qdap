@@ -70,10 +70,10 @@
   question with no other interrogative words found and
   "ok", "right" or "correct" is the last word of the
   sentence.  Those interrogative sentences beginning with
-  the word "you" are categorized as implying do or does
-  question type, though the use of do/does is not explicit.
-  Those with undetermined sentence type are labeled
-  unknown.
+  the word "you", "wanna", or "want" are categorized as
+  implying do or does question type, though the use of
+  do/does is not explicit.  Those with undetermined
+  sentence type are labeled unknown.
 }
 \examples{
 \dontrun{

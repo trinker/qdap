@@ -3095,7 +3095,7 @@ cat(paste(paste2(out, sep ="", trim=FALSE), collapse = "\n"))
 ```
 
 
-The interrogative word that is found first (with the exception of "ok", "right" and "correct") in the question determines the sentence type. "ok", "right" and "correct" sentence types are determined if the sentence is a question with no other interrogative words found and "ok", "right" or "correct" is the last word of the sentence. Those interrogative sentences beginning with the word "you" are categorized as implying do or does question type, though the use of do/does is not explicit. Those with undetermined sentence type are labeled unknown.
+The interrogative word that is found first (with the exception of "ok", "right" and "correct") in the question determines the sentence type. "ok", "right" and "correct" sentence types are determined if the sentence is a question with no other interrogative words found and "ok", "right" or "correct" is the last word of the sentence. Those interrogative sentences beginning with the word "you", "wanna", or "want" are categorized as implying do or does question type, though the use of do/does is not explicit. Those with undetermined sentence type are labeled unknown.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("question_type")` - Basic Example**`r FT(orange, 5, text="&diams;")`
 
@@ -3259,6 +3259,81 @@ Event 3: [lines 8-12]
 
 
 <h4 id="wordcount">Word & Character Counts</h4>
+
+A research may have the need to view simple word or character counts for the sake of comparisons between grouping variables.  `r FUN("word_count")` (`r FUN("wc", "word_count")`), `r FUN("word_list")`, `r FUN("character_count", "word_count")`, `r FUN("character_table", "word_count")` (`r FUN("char_table", "word_count")`) serve the purposes of counting words and characters with `r FUN("word_list")` producing a lists of words usage by grouping variable and `r FUN("character_table", "word_count")` producing a count table of characters.  The following examples demonstrate the uses of these functions.  
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("word_count")` Examples**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+word_count(DATA$state)
+## `wc a shortened version of `word_count`
+wc(DATA$state)
+## Retain the text
+wc(DATA$state, names = TRUE)
+## Setting `byrow=FALSE` gives a total for the text variable
+word_count(DATA$state, byrow=FALSE, names = TRUE)
+## identical to `byrow=FALSE` above
+sum(word_count(DATA$state))
+## By grouping variable
+tapply(DATA$state, DATA$person, wc, byrow=FALSE)
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("character_count", "word_count")` Examples**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+character_count(DATA$state)
+## Setting `byrow=FALSE` gives a total for the text variable
+character_count(DATA$state, byrow=FALSE)
+## identical to `byrow=FALSE` above
+sum(character_count(DATA$state))
+## By grouping variable
+tapply(DATA$state, DATA$person, character_count, byrow=FALSE)
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("character_table", "word_count")` Example**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+x <- character_table(DATA$state, DATA$person)
+names(x)
+x$raw
+x$prop[, 1:10]
+x$rnp[, 1:7]
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("character_table", "word_count")` Plot Method**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+plot(x)
+```
+
+```{r}
+plot(x, label = TRUE, high = "red", lab.digits = 1, zero.replace = "")
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("character_table", "word_count")` Additional Plotting**`r FT(orange, 5, text="&diams;")`
+
+```{r message = FALSE}
+library(ggplot2);library(reshape2)
+dat <- char_table(DATA$state, list(DATA$sex, DATA$adult))
+dat2 <- colsplit2df(melt(dat$raw), keep.orig = TRUE)
+dat2$adult2 <- lookup(dat2$adult, c(0, 1), c("child", "adult"))
+head(dat2, 15)
+```
+
+```{r message = FALSE, fig.width = 12}
+ggplot(data = dat2, aes(y = variable, x = value, colour=sex)) +
+    facet_grid(adult2~.) +
+    geom_line(size=1, aes(group =variable), colour = "black") +
+    geom_point()
+```
+
+```{r, fig.width = 12}
+ggplot(data = dat2, aes(x = variable, y = value)) +
+    geom_bar(aes(fill = variable), stat = "identity") +
+    facet_grid(sex ~ adult2, margins = TRUE) +
+    theme(legend.position="none")
+```
+
 <h4 id="freqtab">SPSS Style Frequency Tables</h4>
 <h4 id="pos">Parts of Speech Tagging & Counts</h4>
 <h4 id="syll">Syllabication and Counts</h4>

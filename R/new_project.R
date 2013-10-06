@@ -108,21 +108,21 @@ new_project <- function(project = "new", path = getwd(),
         "PAPER_ARTIFACTS", "PHOTOGRAPHS")
     invisible(folder(folder.name=file.path(y[[13]], dats)))
     cat(paste0("library(qdap)\n",
-        "dir_map(file.path(getwd(), \"CLEANED_TRANSCRIPTS\")\n\n\n\n", 
-        "len <- length(dir(file.path(getwd(), \"CLEANED_TRANSCRIPTS\")))\n",
+        "dir_map(\"CLEANED_TRANSCRIPTS\")\n\n\n\n", 
+        "len <- length(dir(\"CLEANED_TRANSCRIPTS\"))\n",
         "L1 <- lapply(paste0(\"dat\", 1:len), function(x) get(x))\n", 
         "names(L1) <- paste0(\"dat\", 1:len)\n",
         "\n\n\n\nsave( , file = file.path(getwd(), \"DATA/cleaned.RData\"))\n"), 
         file=file.path(y[[1]], "01_clean_data.R"))
     cat(paste0("lapply(c(\"qdap\", \"ggplot2\", \"grid\", \"scales\"), require, character.only = T)\n", 
-        "source(file.path(getwd(), \"extra_functions.R\"))\n",
-        "load(file.path(getwd(), \"DATA/cleaned.RData\"))\n"),
+        "source(\"extra_functions.R\")\n",
+        "load(\"DATA/cleaned.RData\")\n"),
         file=paste0(y[[1]], "/", "02_analysis_I.R"))
     cat(paste0("lapply(c(\"qdap\", \"ggplot2\", \"grid\", \"scales\"), require, character.only = T)\n",
-        "source(file.path(getwd(), \"extra_functions.R\"))\n",
-        "load(file.path(getwd(), \"DATA/cleaned.RData\"))\n",
-        "setwd(file.path(getwd(), \"PLOTS\"))\n"),
-        file=paste0(y[[1]], "/", "03_plots.R"))
+        "source(\"extra_functions.R\")\n",
+        "load(\"DATA/cleaned.RData\")\n",
+        "setwd(\"PLOTS\")\n"),
+        file=file.path(y[[1]], "03_plots.R"))
     root <- system.file("extdata/docs", package = "qdap")
     pdfloc <- file.path(root, "PROJECT_WORKFLOW_GUIDE.pdf")
     invisible(file.copy(pdfloc, x))
@@ -144,34 +144,12 @@ new_project <- function(project = "new", path = getwd(),
     cat(info, file=paste0(y[[10]], "/", "CONTACT_INFO"))
     write.csv(data.frame(person=""), file=paste0(y[[2]], "/", "KEY.csv"), 
         row.names = FALSE)
-    rpro <- c("#load the packages used",
-        "library(ggplot2)",
-        "library(reshape2)",
-        "library(plyr)",
-        "library(grid)",
-        "library(scales)",
-        "library(RColorBrewer)",
-        "library(qdap)",
-        "library(reports)",    
-        "library(tools)",  
-        "",
-        "WD <- getwd()",
-        "",
-        "#load functions into workspace",
-        "source(paste0(WD, \"/extra_functions.R\"))",
-        "",
-        "#load data into work space",
-        "dat <- paste0(WD, \"/DATA/\", dir(paste0(WD, \"/DATA/\")))",
-        "dat2 <- dat[file_ext(dat) %in% c(\"txt\", \"R\", \"r\")]",
-        "if (!identical(dat2, character(0))) {",              
-        "    try(lapply(dat2, source))",
-        "}",              
-        "dat <- dat[file_ext(dat) == \"RData\"]",
-        "if (!identical(dat, character(0))) {",
-        "    lapply(dat, load)",
-        "}")
-    cat(paste(rpro, collapse = "\n"), file = file.path(x, ".Rprofile"))
-        cat(paste(rpro, collapse = "\n"), file = file.path(x, ".Rprofile"))
+ 
+    ## Copy .Rprofile to main directory
+    pdfloc6 <- file.path(root, ".Rprofile")
+    invisible(file.copy(pdfloc6, x))
+
+    ## Create the reprots folder  with `new_report`
     invisible(new_report(c("REPORTS", project), ...))
     o <- paste0("Project \"", project, "\" created:\n", x, "\n") 
     class(o) <- "qdapProj"

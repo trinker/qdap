@@ -39,7 +39,7 @@
 #' "correct" sentence types are determined if the sentence is a question with no 
 #' other interrogative words found and "ok", "right" or "correct" is the last 
 #' word of the sentence.  Those interrogative sentences beginning with the word 
-#' "you" are categorized as implying do or does question type, though the use of 
+#' "you", "wanna", or "want" are categorized as implying do or does question type, though the use of 
 #' do/does is not explicit.  Those with undetermined sentence type are labeled 
 #' unknown.
 #' @keywords question, question-count
@@ -129,7 +129,9 @@ question_type <- function(text.var, grouping.var = NULL,
         x[, " right"] <- (y-6) == sapply(gregexpr("right", z), "[", 1)
         x[, "correct"] <- (y-7) == sapply(gregexpr("correct", z), "[", 1)
         x[, "huh"] <- (y-3) == sapply(gregexpr("huh", z), "[", 1)
-        x[, "implied_do/does"] <- sapply(gregexpr("you", z), "[", 1) == 2 
+        x[, "implied_do/does"] <- c((sapply(gregexpr("you", z), "[", 1) == 2) | 
+            (sapply(gregexpr("wanna ", z), "[", 1) == 2) |    
+            (sapply(gregexpr("want ", z), "[", 1) == 2))
         x
     })
     L2 <- invisible(lapply(L1, function(x) {
@@ -141,6 +143,7 @@ question_type <- function(text.var, grouping.var = NULL,
     }))
     key <- apply(key, 2, Trim)
     L2 <- lapply(L2, lookup, key.match = key[, 2:1], missing = "unknown")
+
     L2 <- lapply(seq_along(L2), function(i) {
          unels <- L2[[i]] == "unknown"
          L2[[i]][unels & L1[[i]][, "ok"]] <- "ok"
@@ -150,6 +153,9 @@ question_type <- function(text.var, grouping.var = NULL,
          L2[[i]][unels & L1[[i]][, "huh"]] <- "huh"
          L2[[i]]
     })
+
+
+
     DF3a <- data.frame(ords = unlist(lapply(L1, "[", "orig.row.num")), 
         q.type = unlist(L2), stringsAsFactors = FALSE)
     DF3a[unlist(lapply(L1, "[", "implied_do/does")),  2] <- "implied_do/does"

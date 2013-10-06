@@ -206,6 +206,9 @@ CHANGES
 
 * `wf_combine` renamed `wfm_combine` to be consistent.
 
+* `question_type` algoritm for implied do/does no ncludes questions with the 
+  first word of the sentence as "want" or "wanna".
+
 CHANGES IN qdap VERSION 0.2.5
 ----------------------------------------------------------------
 

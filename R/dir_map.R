@@ -32,12 +32,18 @@
 #' dir_map(DIR)
 #' }
 dir_map <- 
-function(loc, obj.prefix = "dat", use.path = TRUE,
+function(loc = "CLEANED_TRANSCRIPTS", obj.prefix = "dat", use.path = TRUE,
     col.names = c("person", "dialogue"), file = NULL, copy2clip = TRUE) {
+  
     if (Sys.info()["sysname"] != "Windows") {
         writeClipboard <- NULL
     }    
     fls <- dir(loc)
+    
+    if (identical(character(0), fls)) {
+        stop(sprintf("No files located in:\n%s", loc))  
+    }
+    
     file_ext <- function(x){
         pos <- regexpr("\\.([[:alnum:]]+)$", x)
         ifelse(pos > -1L, substring(x, pos + 1L), "")

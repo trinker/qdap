@@ -124,17 +124,15 @@ library(ggplot2);library(reshape2)
 dat <- character_table(DATA$state, list(DATA$sex, DATA$adult))
 dat2 <- colsplit2df(melt(dat$raw), keep.orig = TRUE)
 head(dat2, 15)
-dat3 <- dat2[rep(seq_len(dim(dat2)[1]), dat2[, 5]), -5]
-
 
 ggplot(data = dat2, aes(y = variable, x = value, colour=sex)) +
     facet_grid(adult~.) +
     geom_line(size=1, aes(group =variable), colour = "black") +
     geom_point()
 
-ggplot(data = dat3, aes(x = variable, fill = variable)) +
-    geom_bar() +
-    facet_grid(sex ~ adult, margins = TRUE) +
+ggplot(data = dat2, aes(x = variable, y = value)) +
+    geom_bar(aes(fill = variable), stat = "identity") +
+    facet_grid(sex ~ adult2, margins = TRUE) +
     theme(legend.position="none")
 }
 }

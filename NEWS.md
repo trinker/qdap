@@ -206,6 +206,9 @@ relatively new to CRAN, made these changes sensible at this point.
 
 * `wf_combine` renamed `wfm_combine` to be consistent.
 
+* `question_type` algoritm for implied do/does no ncludes questions with the 
+  first word of the sentence as "want" or "wanna".
+
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5
 ----------------------------------------------------------------
 

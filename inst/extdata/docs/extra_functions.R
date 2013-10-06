@@ -80,3 +80,5 @@ todo <- function(x = .loc2, report.completed = FALSE, copy2clip = TRUE) {
         }
     }
 }
+
+message("Extra Functions Loaded!")
