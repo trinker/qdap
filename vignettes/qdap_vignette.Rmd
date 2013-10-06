@@ -3081,21 +3081,23 @@ A researcher may be interested in classifying and investigating the types of que
 `r FUN("question_type")` provides question classification.  The algorithm searches for the following interrogative words (and optionally, their negative contraction form as well):
 
 ```{r echo = FALSE, comment=NULL}
-wrds <- c("are", "can", "correct", "could", "did", "do", "implied do/does", 
+wrds <- c("are", "can", "correct", "could", "did", "do",  
     "does", "had", "has", "have", "how", "is", "may", "might", 
     "must", "ok", "right", "shall", "should", "was", "were", "what", 
     "when", "where", "which", "who", "whom", "whose", "why", "will", 
-    "would")
+    "would", "implied do/does/did")
 
 wrds2 <- data.frame(matrix(c(wrds, rep("", 3)), ncol = 5))
 
 pading <- max(nchar(wrds)) + 3
-out <- apply(wrds2, 2, function(x) sprintf(paste0("%-", pading, "s"), x))
-cat(paste(paste2(out, sep ="", trim=FALSE), collapse = "\n"))
+pading2 <- rev(sort(nchar(wrds)))[2] + 8
+out <- apply(wrds2[, 1:4], 2, function(x) sprintf(paste0("%-", pading2, "s"), x))
+out2 <- apply(wrds2[, 5, drop=FALSE], 2, function(x) sprintf(paste0("%-", pading, "s"), x))
+cat(paste(paste2(cbind(out, out2), sep ="", trim=FALSE), collapse = "\n"))
 ```
 
 
-The interrogative word that is found first (with the exception of "ok", "right" and "correct") in the question determines the sentence type. "ok", "right" and "correct" sentence types are determined if the sentence is a question with no other interrogative words found and "ok", "right" or "correct" is the last word of the sentence. Those interrogative sentences beginning with the word "you", "wanna", or "want" are categorized as implying do or does question type, though the use of do/does is not explicit. Those with undetermined sentence type are labeled unknown.
+The interrogative word that is found first (with the exception of "ok", "right" and "correct") in the question determines the sentence type. "ok", "right" and "correct" sentence types are determined if the sentence is a question with no other interrogative words found and "ok", "right" or "correct" is the last word of the sentence. Those interrogative sentences beginning with the word "you", "wanna", or "want" are categorized as implying do/does/did question type, though the use of do/does is not explicit. A sentence that is marked "ok" over rides an implied do/does/did label.  Those with undetermined sentence type are labeled unknown.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("question_type")` - Basic Example**`r FT(orange, 5, text="&diams;")`
 

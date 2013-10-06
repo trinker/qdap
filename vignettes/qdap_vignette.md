@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 19.70 22.40 22.40 15.00 16.30 16.30 16.30 16.30 15.79 15.00 22.40
-## [12] 19.70 15.79 19.70 15.00 19.70 16.30 19.70 15.00 15.79
+##  [1] 15.79 19.70 22.40 16.30 22.40 15.79 22.40 25.34 25.34 15.00 15.00
+## [12] 25.34 19.70 16.30 16.30 19.70 25.34 15.00 19.70 15.79
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 19.70 22.40 22.40 15.00 16.30 16.30 16.30 16.30 15.79 15.00 22.40
-## [12] 19.70 15.79 19.70 15.00 19.70 16.30 19.70 15.00 15.79
+##  [1] 15.79 19.70 22.40 16.30 22.40 15.79 22.40 25.34 25.34 15.00 15.00
+## [12] 25.34 19.70 16.30 16.30 19.70 25.34 15.00 19.70 15.79
 ```
 
 
@@ -7497,18 +7497,18 @@ A researcher may be interested in classifying and investigating the types of que
 
 
 ```
-are               does              might             were              whose             
-can               had               must              what              why               
-correct           has               ok                when              will              
-could             have              right             where             would             
-did               how               shall             which                               
-do                is                should            who                                 
-implied do/does   may               was               whom                                
+are            had            must           what           why                   
+can            has            ok             when           will                  
+correct        have           right          where          would                 
+could          how            shall          which          implied do/does/did   
+did            is             should         who                                  
+do             may            was            whom                                 
+does           might          were           whose                                
 ```
 
 
 
-The interrogative word that is found first (with the exception of "ok", "right" and "correct") in the question determines the sentence type. "ok", "right" and "correct" sentence types are determined if the sentence is a question with no other interrogative words found and "ok", "right" or "correct" is the last word of the sentence. Those interrogative sentences beginning with the word "you" are categorized as implying do or does question type, though the use of do/does is not explicit. Those with undetermined sentence type are labeled unknown.
+The interrogative word that is found first (with the exception of "ok", "right" and "correct") in the question determines the sentence type. "ok", "right" and "correct" sentence types are determined if the sentence is a question with no other interrogative words found and "ok", "right" or "correct" is the last word of the sentence. Those interrogative sentences beginning with the word "you", "wanna", or "want" are categorized as implying do/does/did question type, though the use of do/does is not explicit. A sentence that is marked "ok" over rides an implied do/does/did label.  Those with undetermined sentence type are labeled unknown.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/question_type.html" target="_blank"><code>question_type</code></a> - Basic Example**<font size="5" color="orange">&diams;</font>
 
@@ -7519,12 +7519,12 @@ The interrogative word that is found first (with the exception of "ok", "right" 
 ```
 
 ```
-##       person tot.quest    what    how   shall implied_do/does
-## 1       greg         1       0      0       0         1(100%)
-## 2 researcher         1       0      0 1(100%)               0
-## 3      sally         2  1(50%) 1(50%)       0               0
-## 4    teacher         1 1(100%)      0       0               0
-## 5        sam         0       0      0       0               0
+##       person tot.quest    what    how   shall implied_do/does/did
+## 1       greg         1       0      0       0             1(100%)
+## 2 researcher         1       0      0 1(100%)                   0
+## 3      sally         2  1(50%) 1(50%)       0                   0
+## 4    teacher         1 1(100%)      0       0                   0
+## 5        sam         0       0      0       0                   0
 ```
 
 ```r
@@ -7543,12 +7543,12 @@ x$count
 ```
 
 ```
-##       person tot.quest what how shall implied_do/does
-## 1       greg         1    0   0     0               1
-## 2 researcher         1    0   0     1               0
-## 3      sally         2    1   1     0               0
-## 4    teacher         1    1   0     0               0
-## 5        sam         0    0   0     0               0
+##       person tot.quest what how shall implied_do/does/did
+## 1       greg         1    0   0     0                   1
+## 2 researcher         1    0   0     1                   0
+## 3      sally         2    1   1     0                   0
+## 4    teacher         1    1   0     0                   0
+## 5        sam         0    0   0     0                   0
 ```
 
 ```r
@@ -7627,12 +7627,12 @@ question_type(DATA.SPLIT2$state, DATA.SPLIT2$person)
 ```
 
 ```
-##       person tot.quest    what      do    how   shall implied_do/does
-## 1       greg         1       0       0      0       0         1(100%)
-## 2 researcher         1       0       0      0 1(100%)               0
-## 3      sally         2  1(50%)       0 1(50%)       0               0
-## 4        sam         2       0 2(100%)      0       0               0
-## 5    teacher         1 1(100%)       0      0       0               0
+##       person tot.quest    what      do    how   shall implied_do/does/did
+## 1       greg         1       0       0      0       0             1(100%)
+## 2 researcher         1       0       0      0 1(100%)                   0
+## 3      sally         2  1(50%)       0 1(50%)       0                   0
+## 4        sam         2       0 2(100%)      0       0                   0
+## 5    teacher         1 1(100%)       0      0       0                   0
 ```
 
 ```r
@@ -7641,12 +7641,12 @@ question_type(DATA.SPLIT2$state, DATA.SPLIT2$person, neg.cont = TRUE)
 ```
 
 ```
-##       person tot.quest    what  don't     do    how   shall implied_do/does
-## 1       greg         1       0      0      0      0       0         1(100%)
-## 2 researcher         1       0      0      0      0 1(100%)               0
-## 3      sally         2  1(50%)      0      0 1(50%)       0               0
-## 4        sam         2       0 1(50%) 1(50%)      0       0               0
-## 5    teacher         1 1(100%)      0      0      0       0               0
+##       person tot.quest    what  don't     do    how   shall implied_do/does/did
+## 1       greg         1       0      0      0      0       0             1(100%)
+## 2 researcher         1       0      0      0      0 1(100%)                   0
+## 3      sally         2  1(50%)      0      0 1(50%)       0                   0
+## 4        sam         2       0 1(50%) 1(50%)      0       0                   0
+## 5    teacher         1 1(100%)      0      0      0       0                   0
 ```
 
 

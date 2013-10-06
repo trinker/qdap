@@ -32,20 +32,32 @@
 #' 1) whose 2) whom 3) who 4) where 5) what 6) which 7) why 8) when 9) were 
 #' 10) was 11) does 12) did 13) do 14) is 15) are 16) will 17) how 18) should 
 #' 19) could 20) would 21) shall 22) may 23) might 24) must 25) can 26) has 
-#' 27) have 28) had 29) ok 30) right 31) correct 32) implied do/does
+#' 27) have 28) had 29) ok 30) right 31) correct 32) implied do/does/did
 #' 
 #' The interrogative word that is found first (with the exception of "ok", "right" 
 #' and "correct") in the question determines the sentence type. "ok", "right" and 
 #' "correct" sentence types are determined if the sentence is a question with no 
 #' other interrogative words found and "ok", "right" or "correct" is the last 
 #' word of the sentence.  Those interrogative sentences beginning with the word 
-#' "you", "wanna", or "want" are categorized as implying do or does question type, though the use of 
-#' do/does is not explicit.  Those with undetermined sentence type are labeled 
-#' unknown.
+#' "you", "wanna", or "want" are categorized as implying do/does/did question 
+#' type, though the use of do/does/did is not explicit.  A sentence that is 
+#' marked "ok" over rides an implied do/does/did label.  Those with undetermined 
+#' sentence type are labeled unknown.
 #' @keywords question, question-count
 #' @export 
 #' @examples
 #' \dontrun{
+#' ## Inspect the algorithm classification
+## x <- c("Kate's got no appetite doesn't she?",
+##     "Wanna tell Daddy what you did today?",
+##     "You helped getting out a book?", "umm hum?",
+##     "Do you know what it is?", "What do you want?",
+##     "Who's there?", "Whose?", "Why do you want it?",
+##     "Want some?", "Where did it go?", "Was it fun?")
+## 
+## left_just(question_type(x)$raw[, c(2, 6)])
+#' 
+#' ## Transcript/dialogue examples
 #' (x <- question_type(DATA.SPLIT$state, DATA.SPLIT$person))
 #' truncdf(x$raw, 15)
 #' x$count
@@ -128,8 +140,9 @@ question_type <- function(text.var, grouping.var = NULL,
         x[, "alright"] <- (y-7) == sapply(gregexpr("alright", z), "[", 1)
         x[, " right"] <- (y-6) == sapply(gregexpr("right", z), "[", 1)
         x[, "correct"] <- (y-7) == sapply(gregexpr("correct", z), "[", 1)
-        x[, "huh"] <- (y-3) == sapply(gregexpr("huh", z), "[", 1)
-        x[, "implied_do/does"] <- c((sapply(gregexpr("you", z), "[", 1) == 2) | 
+        x[, "huh"] <- (y-3) == sapply(gregexpr("huh", z), "[", 1)       
+        x[, "implied_do/does/did"] <- !as.logical(x[, "ok"]) && 
+            c((sapply(gregexpr("you", z), "[", 1) == 2) | 
             (sapply(gregexpr("wanna ", z), "[", 1) == 2) |    
             (sapply(gregexpr("want ", z), "[", 1) == 2))
         x
@@ -158,11 +171,11 @@ question_type <- function(text.var, grouping.var = NULL,
 
     DF3a <- data.frame(ords = unlist(lapply(L1, "[", "orig.row.num")), 
         q.type = unlist(L2), stringsAsFactors = FALSE)
-    DF3a[unlist(lapply(L1, "[", "implied_do/does")),  2] <- "implied_do/does"
+    DF3a[unlist(lapply(L1, "[", "implied_do/does/did")),  2] <- "implied_do/does/did"
     DF3 <- data.frame(DF, q.type = DF3a[order(DF3a[, "ords"]), 2])
     names(DF3) <- c(G, "raw.text", "n.row", "endmark", "strip.text", "q.type")
     unL2 <- unlist(L2)
-    unL2[unlist(lapply(L1, "[", "implied_do/does"))] <- "idd"
+    unL2[unlist(lapply(L1, "[", "implied_do/does/did"))] <- "idd"
     WFM <- t(wfm(unL2, rep(names(L1), sapply(L2, length))))
     cols <- c(key[, "x"], "ok", "alright", "right", "correct", "huh", "idd", "unknown")
     cols2 <- cols[cols %in% colnames(WFM)]
@@ -207,7 +220,7 @@ question_type <- function(text.var, grouping.var = NULL,
             "correct", "huh", "idd", "unknown")
         DF <- DF[, ord[ord %in% colnames(DF)]] 
     }
-    colnames(DF)[colnames(DF) == "idd"] <- "implied_do/does"
+    colnames(DF)[colnames(DF) == "idd"] <- "implied_do/does/did"
     DF <- data.frame(group=rownames(DF), tot.quest = tq, DF, row.names = NULL, 
         check.names = FALSE) 
     if(ncol(DF) == 3) {

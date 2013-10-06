@@ -61,7 +61,7 @@
   15) are 16) will 17) how 18) should 19) could 20) would
   21) shall 22) may 23) might 24) must 25) can 26) has 27)
   have 28) had 29) ok 30) right 31) correct 32) implied
-  do/does
+  do/does/did
 
   The interrogative word that is found first (with the
   exception of "ok", "right" and "correct") in the question
@@ -72,7 +72,7 @@
   sentence.  Those interrogative sentences beginning with
   the word "you", "wanna", or "want" are categorized as
   implying do or does question type, though the use of
-  do/does is not explicit.  Those with undetermined
+  do/does/did is not explicit.  Those with undetermined
   sentence type are labeled unknown.
 }
 \examples{
