@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.79 19.70 22.40 16.30 22.40 15.79 22.40 25.34 25.34 15.00 15.00
-## [12] 25.34 19.70 16.30 16.30 19.70 25.34 15.00 19.70 15.79
+##  [1] 15.00 15.79 15.79 15.79 15.00 15.79 22.40 16.30 22.40 22.40 15.79
+## [12] 19.70 19.70 19.70 19.70 22.40 15.00 19.70 19.70 15.79
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.79 19.70 22.40 16.30 22.40 15.79 22.40 25.34 25.34 15.00 15.00
-## [12] 25.34 19.70 16.30 16.30 19.70 25.34 15.00 19.70 15.79
+##  [1] 15.00 15.79 15.79 15.79 15.00 15.79 22.40 16.30 22.40 22.40 15.79
+## [12] 19.70 19.70 19.70 19.70 22.40 15.00 19.70 19.70 15.79
 ```
 
 
@@ -7635,20 +7635,21 @@ question_type(DATA.SPLIT2$state, DATA.SPLIT2$person)
 ## 5    teacher         1 1(100%)       0      0       0                   0
 ```
 
+
+
 ```r
 ## Do and Don't Grouped Separately
 question_type(DATA.SPLIT2$state, DATA.SPLIT2$person, neg.cont = TRUE)
 ```
 
-```
-##       person tot.quest    what  don't     do    how   shall implied_do/does/did
-## 1       greg         1       0      0      0      0       0             1(100%)
-## 2 researcher         1       0      0      0      0 1(100%)                   0
-## 3      sally         2  1(50%)      0      0 1(50%)       0                   0
-## 4        sam         2       0 1(50%) 1(50%)      0       0                   0
-## 5    teacher         1 1(100%)      0      0      0       0                   0
-```
 
+<pre><code>      person tot.quest    what  don't     do    how   shall implied_do/does/did
+1       greg         1       0      0      0      0       0             1(100%)
+2 researcher         1       0      0      0      0 1(100%)                   0
+3      sally         2  1(50%)      0      0 1(50%)       0                   0
+4        sam         2       0 1(50%) 1(50%)      0       0                   0
+5    teacher         1 1(100%)      0      0      0       0                   0
+</code></pre>
 
 It may be helpful to take the indices of the question types int the **x[["inds"]]** output or access **x[["raw"]][, "n.row"]**
 
@@ -7962,7 +7963,7 @@ x$rnp[, 1:7]
 plot(x)
 ```
 
-![plot of chunk unnamed-chunk-163](figure/unnamed-chunk-163.png) 
+![plot of chunk unnamed-chunk-164](figure/unnamed-chunk-164.png) 
 
 
 
@@ -7970,7 +7971,7 @@ plot(x)
 plot(x, label = TRUE, high = "red", lab.digits = 1, zero.replace = "")
 ```
 
-![plot of chunk unnamed-chunk-164](figure/unnamed-chunk-164.png) 
+![plot of chunk unnamed-chunk-165](figure/unnamed-chunk-165.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>character_table</code></a> Additional Plotting**<font size="5" color="orange">&diams;</font>
@@ -8012,7 +8013,7 @@ ggplot(data = dat2, aes(y = variable, x = value, colour=sex)) +
     geom_point()
 ```
 
-![plot of chunk unnamed-chunk-166](figure/unnamed-chunk-166.png) 
+![plot of chunk unnamed-chunk-167](figure/unnamed-chunk-167.png) 
 
 
 
@@ -8023,7 +8024,7 @@ ggplot(data = dat2, aes(x = variable, y = value)) +
     theme(legend.position="none")
 ```
 
-![plot of chunk unnamed-chunk-167](figure/unnamed-chunk-167.png) 
+![plot of chunk unnamed-chunk-168](figure/unnamed-chunk-168.png) 
 
 
 <h4 id="freqtab">SPSS Style Frequency Tables</h4>

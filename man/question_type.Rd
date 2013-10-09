@@ -71,12 +71,16 @@
   "ok", "right" or "correct" is the last word of the
   sentence.  Those interrogative sentences beginning with
   the word "you", "wanna", or "want" are categorized as
-  implying do or does question type, though the use of
-  do/does/did is not explicit.  Those with undetermined
-  sentence type are labeled unknown.
+  implying do/does/did question type, though the use of
+  do/does/did is not explicit.  A sentence that is marked
+  "ok" over rides an implied do/does/did label.  Those with
+  undetermined sentence type are labeled unknown.
 }
 \examples{
 \dontrun{
+## Inspect the algorithm classification
+
+## Transcript/dialogue examples
 (x <- question_type(DATA.SPLIT$state, DATA.SPLIT$person))
 truncdf(x$raw, 15)
 x$count
@@ -97,6 +101,9 @@ out3 <- with(mraja1spl, question_type(dialogue, list(sex, fam.aff),
    percent = FALSE))
 plot(out3, label = TRUE, lab.digits = 3)
 }
+}
+\seealso{
+  \code{\link[qdap]{colcomb2class}}
 }
 \keyword{question-count}
 \keyword{question,}

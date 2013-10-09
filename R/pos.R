@@ -32,7 +32,8 @@
 #' \item{percent}{The value of percent used for plotting purposes.}
 #' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
 #' @rdname pos
-#' @seealso \code{\link[openNLP]{Maxent_POS_Tag_Annotator}}
+#' @seealso \code{\link[openNLP]{Maxent_POS_Tag_Annotator}},
+#' \code{\link[qdap]{colcomb2class}}
 #' @references \href{openNLP}{http:/opennlp.apache.org}
 #' @keywords parts-of-speech
 #' @export

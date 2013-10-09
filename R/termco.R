@@ -52,7 +52,8 @@
 #' vector of c(" read ", " reads", " reading", " reader").  To search for non 
 #' character arguments (i.e., numbers and symbols) additional arguments from 
 #' strip must be passed.
-#' @seealso \code{\link[qdap]{termco_c}}
+#' @seealso \code{\link[qdap]{termco_c}},
+#' \code{\link[qdap]{colcomb2class}}
 #' @keywords word-search
 #' @export
 #' @examples

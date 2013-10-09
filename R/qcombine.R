@@ -30,7 +30,8 @@
 #' qcombine(head(mtcars), B)
 #' qcombine(head(mtcars), B, elim.old = FALSE)
 #' }
-qcombine <- function(mat, combined.columns, elim.old = TRUE){
+qcombine <- 
+function(mat, combined.columns, elim.old = TRUE){
     L1 <- lapply(combined.columns, function(x) {
         if (is.numeric(x)) {
             x <- names(mat)[x]
@@ -46,7 +47,7 @@ qcombine <- function(mat, combined.columns, elim.old = TRUE){
         }        
         return(unlist(rowSums(mat[colnames(mat) %in% x])))
     })
-    DF <- data.frame(do.call(cbind, L1))
+    DF <- data.frame(do.call(cbind, L1), check.names = FALSE)
     DF <- DF[ !sapply(DF, function(x) all(is.na(x)))]
     if(elim.old) {
         for (i in  seq_len(length(combined.columns))) {

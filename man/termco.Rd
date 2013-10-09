@@ -233,7 +233,8 @@ plot(termco_obj, label = TRUE, text.color="red", lab.digits=3)
 }
 }
 \seealso{
-  \code{\link[qdap]{termco_c}}
+  \code{\link[qdap]{termco_c}},
+  \code{\link[qdap]{colcomb2class}}
 }
 \keyword{word-search}
 

@@ -3137,9 +3137,20 @@ Negative forms of questions such as `r FT(green, text = "Don't you want the robo
 ))[, c(1, 7)]
 ## Do and Don't Grouped Together
 question_type(DATA.SPLIT2$state, DATA.SPLIT2$person)
+```
+
+```{r eval = FALSE}
 ## Do and Don't Grouped Separately
 question_type(DATA.SPLIT2$state, DATA.SPLIT2$person, neg.cont = TRUE)
 ```
+
+<pre><code>      person tot.quest    what  don't     do    how   shall implied_do/does/did
+1       greg         1       0      0      0      0       0             1(100%)
+2 researcher         1       0      0      0      0 1(100%)                   0
+3      sally         2  1(50%)      0      0 1(50%)       0                   0
+4        sam         2       0 1(50%) 1(50%)      0       0                   0
+5    teacher         1 1(100%)      0      0      0       0                   0
+</code></pre>
 
 It may be helpful to take the indices of the question types int the **x[["inds"]]** output or access **x[["raw"]][, "n.row"]**
 

@@ -98,6 +98,9 @@ relatively new to CRAN, made these changes sensible at this point.
 * `colpaste2df` is a wrapper for `paste2` that pastes dataframe columns together 
   and outputs a dataframe.
 
+* `colcomb2class` quickly combines columns for  number of <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> classes including 
+  output from: `termco`, `question_type`, `pos_by`.
+
 <b>MINOR FEATURES</b>
 
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 

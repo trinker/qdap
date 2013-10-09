@@ -136,7 +136,8 @@ out2 <- with(DATA, pos_by(posbydat, list(adult, sex)))
   \href{openNLP}{http:/opennlp.apache.org}
 }
 \seealso{
-  \code{\link[openNLP]{Maxent_POS_Tag_Annotator}}
+  \code{\link[openNLP]{Maxent_POS_Tag_Annotator}},
+  \code{\link[qdap]{colcomb2class}}
 }
 \keyword{parts-of-speech}
 

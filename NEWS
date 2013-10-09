@@ -98,6 +98,9 @@ NEW FEATURES
 * `colpaste2df` is a wrapper for `paste2` that pastes dataframe columns together 
   and outputs a dataframe.
 
+* `colcomb2class` quickly combines columns for  number of qdap classes including 
+  output from: `termco`, `question_type`, `pos_by`.
+
 MINOR FEATURES
 
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 

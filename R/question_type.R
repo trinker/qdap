@@ -45,6 +45,7 @@
 #' sentence type are labeled unknown.
 #' @keywords question, question-count
 #' @export 
+#' @seealso \code{\link[qdap]{colcomb2class}}
 #' @examples
 #' \dontrun{
 #' ## Inspect the algorithm classification
