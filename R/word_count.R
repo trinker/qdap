@@ -22,8 +22,9 @@
 #' @param \ldots Other arguments passed to \code{\link[qdap]{prop}}.
 #' @return \code{word_count} - returns a word count by row or total.
 #' @note wc is a convenient short hand for word_count.
-#' @seealso \code{\link[qdap]{syllable_count}}
-#' @seealso \code{\link[qdap]{prop}}
+#' @seealso \code{\link[qdap]{syllable_count}},
+#' \code{\link[qdap]{prop}},
+#' \code{\link[qdap]{colcomb2class}}
 #' @keywords word-count, character-count
 #' @export 
 #' @examples
@@ -49,6 +50,9 @@
 #' x$raw[, 1:20]
 #' x$prop[, 1:8]
 #' x$rnp[, 1:8]
+#' 
+#' ## combine columns
+#' colcomb2class(x, list(vowels = c("a", "e", "i", "o", "u")))
 #' 
 #' ## char_table(DATA$state, DATA$person)
 #' ## char_table(DATA$state, DATA$person, percent = TRUE)

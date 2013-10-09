@@ -3,7 +3,7 @@
 #' Combine columns from qdap classes or a \code{data.frame}.
 #' 
 #' @param dataframe A dataframe or qdap qdap class (e.g., 
-#' "termco", "question_type", "pos_by").
+#' "termco", "question_type", "pos_by", "character_table").
 #' @param combined.columns A list of named vectors of the colnames/indexes 
 #' of the numeric columns to be combined (summed).  If a vector is unnamed a 
 #' name will be assigned. 
@@ -68,6 +68,12 @@ colcomb2class <- function(dataframe, combined.columns, class = "list",
         }
 
     }
+
+    ## Convert numeric columns to named
+    nums <- sapply(combined.columns, is.numeric)
+    combined.columns[nums] <- lapply(combined.columns[nums], function(x){
+       colnames(dataframe)[x]
+    })
    
     ## Error checking
     mtch <- unique(unlist(combined.columns)) %in% colnames(dataframe)
@@ -144,5 +150,4 @@ colcomb2class <- function(dataframe, combined.columns, class = "list",
     class(o) <- cls
     o
 }
-
 

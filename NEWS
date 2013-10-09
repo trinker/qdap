@@ -99,7 +99,7 @@ NEW FEATURES
   and outputs a dataframe.
 
 * `colcomb2class` quickly combines columns for  number of qdap classes including 
-  output from: `termco`, `question_type`, `pos_by`.
+  output from: `termco`, `question_type`, `pos_by`, adn 1character_table`.
 
 MINOR FEATURES
 

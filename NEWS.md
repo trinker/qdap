@@ -99,7 +99,7 @@ relatively new to CRAN, made these changes sensible at this point.
   and outputs a dataframe.
 
 * `colcomb2class` quickly combines columns for  number of <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> classes including 
-  output from: `termco`, `question_type`, `pos_by`.
+  output from: `termco`, `question_type`, `pos_by`, adn 1character_table`.
 
 <b>MINOR FEATURES</b>
 

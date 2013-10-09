@@ -3311,6 +3311,10 @@ names(x)
 x$raw
 x$prop[, 1:10]
 x$rnp[, 1:7]
+## Combine Columns
+vowels <- c("a", "e", "i", "o", "u")
+cons <- letters[!letters %in% c(vowels, qcv(j, q, x, z))]
+colcomb2class(x, list(vowels = vowels, consonants = cons, other = 2:7))
 ```
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("character_table", "word_count")` Plot Method**`r FT(orange, 5, text="&diams;")`

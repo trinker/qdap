@@ -8,7 +8,7 @@
 }
 \arguments{
   \item{dataframe}{A dataframe or qdap qdap class (e.g.,
-  "termco", "question_type", "pos_by").}
+  "termco", "question_type", "pos_by", "character_table").}
 
   \item{combined.columns}{A list of named vectors of the
   colnames/indexes of the numeric columns to be combined

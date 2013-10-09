@@ -116,6 +116,9 @@ x$raw[, 1:20]
 x$prop[, 1:8]
 x$rnp[, 1:8]
 
+## combine columns
+colcomb2class(x, list(vowels = c("a", "e", "i", "o", "u")))
+
 ## char_table(DATA$state, DATA$person)
 ## char_table(DATA$state, DATA$person, percent = TRUE)
 ## character_table(DATA$state, list(DATA$sex, DATA$adult))
@@ -137,9 +140,9 @@ ggplot(data = dat2, aes(x = variable, y = value)) +
 }
 }
 \seealso{
-  \code{\link[qdap]{syllable_count}}
-
-  \code{\link[qdap]{prop}}
+  \code{\link[qdap]{syllable_count}},
+  \code{\link[qdap]{prop}},
+  \code{\link[qdap]{colcomb2class}}
 }
 \keyword{character-count}
 \keyword{word-count,}
