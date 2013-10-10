@@ -352,8 +352,12 @@ delete("foo2")
 <div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
-<form action="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank">
+<form action="http://trinker.github.io/qdap_dev/data_viewing.html" target="_blank">
     <input type="submit" value="truncdf"><input type="submit" value="htruncdf"><input type="submit" value="ltruncdf"><input type="submit" value="qview"> - <a href="#trunc">Truncated Dataframe Viewing</a>
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/data_viewing.html" target="_blank">
+    <input type="submit" value="lview"> - <a href="#unclass">Unclass qdap Object to View List of Dataframes</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/left_just.html" target="_blank">
@@ -369,7 +373,7 @@ The nature of dialogue data makes it large and cumbersome to view in R.  This se
 
 <h4 id="trunc">Truncated Dataframe Viewing</h4> 
 
-The <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions (trunc + dataframe = <a href="http://trinker.github.io/qdap_dev/truncdf.html" target="_blank"><code>truncdf</code></a>) are designed to truncate the width of columns and number of rows in dataframes and lists of dataframes.  The <font face="courier">l</font> and <font face="courier">h</font> in front of <font face="courier">trunc</font> stands for <b><font color="blue">l</font>ist</b> and <b><font color="blue">h</font>ead</b> and are extensions of <a href="http://trinker.github.io/qdap_dev/truncdf.html" target="_blank"><code>truncdf</code></a>.  <a href="http://trinker.github.io/qdap_dev/qview.html" target="_blank"><code>qview</code></a> is a wrapper for <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>htruncdf</code></a> that also displays number of rows,columns, and the dataframe name.
+The <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions (trunc + dataframe = <a href="http://trinker.github.io/qdap_dev/data_viewing.html" target="_blank"><code>truncdf</code></a>) are designed to truncate the width of columns and number of rows in dataframes and lists of dataframes.  The <font face="courier">l</font> and <font face="courier">h</font> in front of <font face="courier">trunc</font> stands for <b><font color="blue">l</font>ist</b> and <b><font color="blue">h</font>ead</b> and are extensions of <a href="http://trinker.github.io/qdap_dev/data_viewing.html" target="_blank"><code>truncdf</code></a>.  <a href="http://trinker.github.io/qdap_dev/data_viewing.html" target="_blank"><code>qview</code></a> is a wrapper for <a href="http://trinker.github.io/qdap_dev/data_viewing.html" target="_blank"><code>htruncdf</code></a> that also displays number of rows, columns, and the dataframe name.
 
 
 <font size="5" color="orange">&diams;</font> **Truncated Data Viewing** <font size="5" color="orange">&diams;</font>
@@ -603,6 +607,68 @@ ltruncdf(rajPOS, width = 4)
 ## 8    Qn2 Quebec nonchilled   95   13.6
 ## 9    Qn2 Quebec nonchilled  175   27.3
 ## 10   Qn2 Quebec nonchilled  250   37.1</code></pre>
+
+<h4 id="unclass">Unclass qdap Object to View List of Dataframes</h4> 
+
+Many qdap objects are lists that print as a single dataframe, though the rest of the objects in the list are available.  The <a href="http://trinker.github.io/qdap_dev/data_viewing.html" target="_blank"><code>lview</code></a> function unclasses the object and assigns "list".
+
+
+
+```r
+lview(question_type(DATA.SPLIT$state, DATA.SPLIT$person))
+```
+
+```
+## $raw
+##        person                    raw.text n.row endmark
+## 4     teacher          What should we do?     4       ?
+## 7       sally      How can we be certain?     7       ?
+## 10      sally What are you talking about?    10       ?
+## 11 researcher           Shall we move on?    11       ?
+## 15       greg                You already?    15       ?
+##                      strip.text              q.type
+## 4            what should we do                 what
+## 7        how can we be certain                  how
+## 10  what are you talking about                 what
+## 11            shall we move on                shall
+## 15                 you already  implied_do/does/did
+## 
+## $count
+##       person tot.quest what how shall implied_do/does/did
+## 1       greg         1    0   0     0                   1
+## 2 researcher         1    0   0     1                   0
+## 3      sally         2    1   1     0                   0
+## 4    teacher         1    1   0     0                   0
+## 5        sam         0    0   0     0                   0
+## 
+## $prop
+##       person tot.quest what how shall implied_do/does/did
+## 1       greg         1    0   0     0                 100
+## 2 researcher         1    0   0   100                   0
+## 3      sally         2   50  50     0                   0
+## 4    teacher         1  100   0     0                   0
+## 5        sam         0    0   0     0                   0
+## 
+## $rnp
+##       person tot.quest    what    how   shall implied_do/does/did
+## 1       greg         1       0      0       0             1(100%)
+## 2 researcher         1       0      0 1(100%)                   0
+## 3      sally         2  1(50%) 1(50%)       0                   0
+## 4    teacher         1 1(100%)      0       0                   0
+## 5        sam         0       0      0       0                   0
+## 
+## $inds
+## [1]  4  7 10 11 15
+## 
+## $missing
+## integer(0)
+## 
+## $percent
+## [1] TRUE
+## 
+## $zero.replace
+## [1] 0
+```
 
 
 <h4 id="just">Text Justification</h4> 
@@ -1108,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 25.34 25.34 15.79 15.00 19.70 16.30 19.70 15.00 19.70 15.00 25.34
-## [12] 19.70 15.79 15.79 16.30 16.30 22.40 15.79 19.70 16.30
+##  [1] 25.34 22.40 15.79 22.40 15.79 22.40 15.00 19.70 19.70 25.34 25.34
+## [12] 15.79 16.30 19.70 19.70 16.30 25.34 22.40 16.30 25.34
 ```
 
 ```r
@@ -1117,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 25.34 25.34 15.79 15.00 19.70 16.30 19.70 15.00 19.70 15.00 25.34
-## [12] 19.70 15.79 15.79 16.30 16.30 22.40 15.79 19.70 16.30
+##  [1] 25.34 22.40 15.79 22.40 15.79 22.40 15.00 19.70 19.70 25.34 25.34
+## [12] 15.79 16.30 19.70 19.70 16.30 25.34 22.40 16.30 25.34
 ```
 
 
@@ -2115,7 +2181,7 @@ trans_cloud(text, c("greg", "bob"), target.words=list(obs), caps.list=obs,
     max.word.size = 3)
 ```
 
-![plot of chunk unnamed-chunk-25](figure/unnamed-chunk-251.png) ![plot of chunk unnamed-chunk-25](figure/unnamed-chunk-252.png) 
+![plot of chunk unnamed-chunk-26](figure/unnamed-chunk-261.png) ![plot of chunk unnamed-chunk-26](figure/unnamed-chunk-262.png) 
 
 
 <h4 id="mgsub">Multiple gsub</h4>
@@ -2361,7 +2427,7 @@ with(stem2df(DATA, "state", "new"), trans_cloud(new, sex, title.cex = 2.5,
     title.color = "blue", max.word.size = 5, title.padj = .7))
 ```
 
-![plot of chunk unnamed-chunk-28](figure/unnamed-chunk-281.png) ![plot of chunk unnamed-chunk-28](figure/unnamed-chunk-282.png) 
+![plot of chunk unnamed-chunk-29](figure/unnamed-chunk-291.png) ![plot of chunk unnamed-chunk-29](figure/unnamed-chunk-292.png) 
 
 ```r
 ## stemmer EXAMPLE:
@@ -3107,13 +3173,13 @@ head(dat, 12)
 plot(dat)
 ```
 
-![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-391.png) 
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-401.png) 
 
 ```r
 plot(dat, base = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-39](figure/unnamed-chunk-392.png) 
+![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-402.png) 
 
 
 <font size="5" color="orange">&diams;</font> **Repeated Measures Unit Spans**<font size="5" color="orange">&diams;</font>
@@ -3146,14 +3212,14 @@ head(dat2, 12)
 plot(dat2)
 ```
 
-![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-401.png) 
+![plot of chunk unnamed-chunk-41](figure/unnamed-chunk-411.png) 
 
 ```r
 gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
     title = "Repeated Measures Gantt Plot")
 ```
 
-![plot of chunk unnamed-chunk-40](figure/unnamed-chunk-402.png) 
+![plot of chunk unnamed-chunk-41](figure/unnamed-chunk-412.png) 
 
 
 <h4 id="adj">Create Adjacency Matrix</h4>
@@ -3224,7 +3290,7 @@ V(g)$degree <- degree(g)
 plot(g, layout=layout.auto(g))
 ```
 
-![plot of chunk unnamed-chunk-43](figure/unnamed-chunk-43.png) 
+![plot of chunk unnamed-chunk-44](figure/unnamed-chunk-44.png) 
 
 
 
@@ -4113,7 +4179,7 @@ word_associate(DATA2$state, DATA2$person, match.string = ms,
     title.color = "blue", cloud.colors = c("red", "purple", "gray70"))
 ```
 
-![plot of chunk unnamed-chunk-54](figure/unnamed-chunk-541.png) ![plot of chunk unnamed-chunk-54](figure/unnamed-chunk-542.png) ![plot of chunk unnamed-chunk-54](figure/unnamed-chunk-543.png) ![plot of chunk unnamed-chunk-54](figure/unnamed-chunk-544.png) ![plot of chunk unnamed-chunk-54](figure/unnamed-chunk-545.png) ![plot of chunk unnamed-chunk-54](figure/unnamed-chunk-546.png) 
+![plot of chunk unnamed-chunk-55](figure/unnamed-chunk-551.png) ![plot of chunk unnamed-chunk-55](figure/unnamed-chunk-552.png) ![plot of chunk unnamed-chunk-55](figure/unnamed-chunk-553.png) ![plot of chunk unnamed-chunk-55](figure/unnamed-chunk-554.png) ![plot of chunk unnamed-chunk-55](figure/unnamed-chunk-555.png) ![plot of chunk unnamed-chunk-55](figure/unnamed-chunk-556.png) 
 
 ```
 ##    row group unit text                             
@@ -4897,7 +4963,7 @@ foo2  <- list(
 ```
 
 
-![plot of chunk unnamed-chunk-59](figure/unnamed-chunk-59.png) 
+![plot of chunk unnamed-chunk-60](figure/unnamed-chunk-60.png) 
 
 
 
@@ -4923,7 +4989,7 @@ foo2  <- list(
 ```
 
 
-![plot of chunk unnamed-chunk-61](figure/unnamed-chunk-61.png) 
+![plot of chunk unnamed-chunk-62](figure/unnamed-chunk-62.png) 
 
 
 
@@ -4979,7 +5045,7 @@ bar2 <- list(
 ```
 
 
-![plot of chunk unnamed-chunk-64](figure/unnamed-chunk-64.png) 
+![plot of chunk unnamed-chunk-65](figure/unnamed-chunk-65.png) 
 
 
 
@@ -5027,7 +5093,7 @@ bar2 <- list(
 ```
 
 
-![plot of chunk unnamed-chunk-66](figure/unnamed-chunk-66.png) 
+![plot of chunk unnamed-chunk-67](figure/unnamed-chunk-67.png) 
 
 
 <h5 id="cm_code.combine"><font color="green">cm_code.combine Examples</font></h5>
@@ -5053,7 +5119,7 @@ bar2 <- list(
 ```
 
 
-![plot of chunk unnamed-chunk-68](figure/unnamed-chunk-68.png) 
+![plot of chunk unnamed-chunk-69](figure/unnamed-chunk-69.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> Repeated Measures** *Word Example*<font size="5" color="orange">&diams;</font>
@@ -5089,7 +5155,7 @@ combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 ```
 
 
-![plot of chunk unnamed-chunk-70](figure/unnamed-chunk-70.png) 
+![plot of chunk unnamed-chunk-71](figure/unnamed-chunk-71.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> Single Time** *Time Span Example*<font size="5" color="orange">&diams;</font>
@@ -5137,7 +5203,7 @@ combines2 <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
 ```
 
 
-![plot of chunk unnamed-chunk-72](figure/unnamed-chunk-72.png) 
+![plot of chunk unnamed-chunk-73](figure/unnamed-chunk-73.png) 
 
 
 <h5 id="cm_code.exclude"><font color="green">cm_code.exclude Examples</font></h5>
@@ -5165,7 +5231,7 @@ combines2 <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
 ```
 
 
-![plot of chunk unnamed-chunk-74](figure/unnamed-chunk-74.png) 
+![plot of chunk unnamed-chunk-75](figure/unnamed-chunk-75.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> Repeated Measures** *Word Example*<font size="5" color="orange">&diams;</font>
@@ -5199,7 +5265,7 @@ exlist <- list(AnoB=qcv(AA, BB), ABnoC=qcv(AA, BB, CC))
 ```
 
 
-![plot of chunk unnamed-chunk-76](figure/unnamed-chunk-76.png) 
+![plot of chunk unnamed-chunk-77](figure/unnamed-chunk-77.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> Repeated Measures** *Time Span Example*<font size="5" color="orange">&diams;</font>
@@ -5255,7 +5321,7 @@ exlist2 <- list(AnoB=qcv(A, B), BnoC=qcv(B, C), ABnoC=qcv(A, B, C))
 ```
 
 
-![plot of chunk unnamed-chunk-78](figure/unnamed-chunk-78.png) 
+![plot of chunk unnamed-chunk-79](figure/unnamed-chunk-79.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> Single TIme** *Time Span Combined Exclude Example*<font size="5" color="orange">&diams;</font>
@@ -5319,7 +5385,7 @@ exlist2 <- list(AnoB=qcv(A, B), BnoC=qcv(B, C), ABnoC=qcv(A, B, C))
 ```
 
 
-![plot of chunk unnamed-chunk-80](figure/unnamed-chunk-80.png) 
+![plot of chunk unnamed-chunk-81](figure/unnamed-chunk-81.png) 
 
 
 <h5 id="cm_code.overlap"><font color="green">cm_code.overlap Examples</font></h5>
@@ -5345,7 +5411,7 @@ exlist2 <- list(AnoB=qcv(A, B), BnoC=qcv(B, C), ABnoC=qcv(A, B, C))
 ```
 
 
-![plot of chunk unnamed-chunk-82](figure/unnamed-chunk-82.png) 
+![plot of chunk unnamed-chunk-83](figure/unnamed-chunk-83.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> Repeated Measures** *Word Example*<font size="5" color="orange">&diams;</font>
@@ -5376,7 +5442,7 @@ overlist <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 ```
 
 
-![plot of chunk unnamed-chunk-84](figure/unnamed-chunk-84.png) 
+![plot of chunk unnamed-chunk-85](figure/unnamed-chunk-85.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> Repeated Measures** *Time Span Example*<font size="5" color="orange">&diams;</font>
@@ -5446,7 +5512,7 @@ overlist2 <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
 ```
 
 
-![plot of chunk unnamed-chunk-86](figure/unnamed-chunk-86.png) 
+![plot of chunk unnamed-chunk-87](figure/unnamed-chunk-87.png) 
 
 
 <h5 id="cm_code.transform"><font color="green"><a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> Examples</font></h5>
@@ -5483,7 +5549,7 @@ ct1
 ```
 
 
-![plot of chunk unnamed-chunk-88](figure/unnamed-chunk-88.png) 
+![plot of chunk unnamed-chunk-89](figure/unnamed-chunk-89.png) 
 
 
 <font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a></b> - Example 2<font size="5" color="orange">&diams;</font>
@@ -5527,7 +5593,7 @@ ct2
 ```
 
 
-![plot of chunk unnamed-chunk-90](figure/unnamed-chunk-90.png) 
+![plot of chunk unnamed-chunk-91](figure/unnamed-chunk-91.png) 
 
 
 <font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a></b> - Example 3<font size="5" color="orange">&diams;</font>
@@ -5574,7 +5640,7 @@ ct3
 ```
 
 
-![plot of chunk unnamed-chunk-92](figure/unnamed-chunk-92.png) 
+![plot of chunk unnamed-chunk-93](figure/unnamed-chunk-93.png) 
 
 
 
@@ -5657,7 +5723,7 @@ Now let's examine a few uses of <a href="http://trinker.github.io/qdap_dev/cm_co
 ```
 
 
-![plot of chunk unnamed-chunk-95](figure/unnamed-chunk-95.png) 
+![plot of chunk unnamed-chunk-96](figure/unnamed-chunk-96.png) 
 
 
 Next we'll set `overlap = FALSE` and see that it is identical to <a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a>.
@@ -5681,7 +5747,7 @@ Next we'll set `overlap = FALSE` and see that it is identical to <a href="http:/
 ```
 
 
-![plot of chunk unnamed-chunk-97](figure/unnamed-chunk-97.png) 
+![plot of chunk unnamed-chunk-98](figure/unnamed-chunk-98.png) 
 
 
 
@@ -5711,7 +5777,7 @@ By first combining all codes (see `cb2` above) and then excluding the final code
 ```
 
 
-![plot of chunk unnamed-chunk-99](figure/unnamed-chunk-99.png) 
+![plot of chunk unnamed-chunk-100](figure/unnamed-chunk-100.png) 
 
 
 Next we shall find when at least two codes overlap by setting `overlap = ">1"`.
@@ -5747,7 +5813,7 @@ blanklist <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 ```
 
 
-![plot of chunk unnamed-chunk-101](figure/unnamed-chunk-101.png) 
+![plot of chunk unnamed-chunk-102](figure/unnamed-chunk-102.png) 
 
 
 Last, we will find spans where not one of the codes occurred by setting `overlap = "==0"`.
@@ -5785,7 +5851,7 @@ blanklist2 <- list(noAB=qcv(AA, BB), noABC=qcv(AA, BB, CC))
 ```
 
 
-![plot of chunk unnamed-chunk-103](figure/unnamed-chunk-103.png) 
+![plot of chunk unnamed-chunk-104](figure/unnamed-chunk-104.png) 
 
 
 <h4 id="analysis">Initial Coding Analysis</h4>
@@ -5886,13 +5952,13 @@ Unit of measure: words
 plot(summary(v))
 ```
 
-![plot of chunk unnamed-chunk-106](figure/unnamed-chunk-1061.png) 
+![plot of chunk unnamed-chunk-107](figure/unnamed-chunk-1071.png) 
 
 ```r
 plot(summary(v), facet.vars = "time")
 ```
 
-![plot of chunk unnamed-chunk-106](figure/unnamed-chunk-1062.png) 
+![plot of chunk unnamed-chunk-107](figure/unnamed-chunk-1072.png) 
 
 
 
@@ -5946,7 +6012,7 @@ Columns measured in seconds unless in the form hh:mm:ss
 plot(summary(z))
 ```
 
-![plot of chunk unnamed-chunk-109](figure/unnamed-chunk-109.png) 
+![plot of chunk unnamed-chunk-110](figure/unnamed-chunk-110.png) 
 
 
 <font size="5" color="orange">&diams;</font> **Trouble Shooting Summary: Suppress Measurement Units** <font size="5" color="orange">&diams;</font>
@@ -6047,7 +6113,7 @@ z <- cm_code.combine(v, combs, "time")
 plot(x, title = "Single")
 ```
 
-![plot of chunk unnamed-chunk-113](figure/unnamed-chunk-113.png) 
+![plot of chunk unnamed-chunk-114](figure/unnamed-chunk-114.png) 
 
 
 
@@ -6055,13 +6121,13 @@ plot(x, title = "Single")
 plot(y, title = "Repeated Measure")
 ```
 
-![plot of chunk unnamed-chunk-114](figure/unnamed-chunk-1141.png) 
+![plot of chunk unnamed-chunk-115](figure/unnamed-chunk-1151.png) 
 
 ```r
 plot(z, title = "Combined Codes")
 ```
 
-![plot of chunk unnamed-chunk-114](figure/unnamed-chunk-1142.png) 
+![plot of chunk unnamed-chunk-115](figure/unnamed-chunk-1152.png) 
 
 
 <h5 id="cmdist"><font color="green">Distance Measures</font></h5>
@@ -6098,7 +6164,7 @@ dat <- cm_2long(x, y)
 ```
 
 
-![plot of chunk unnamed-chunk-116](figure/unnamed-chunk-116.png) 
+![plot of chunk unnamed-chunk-117](figure/unnamed-chunk-117.png) 
 
 
 <font size="5" color="orange">&diams;</font> <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a> - *Non-Causal Distance* <font size="5" color="orange">&diams;</font>
@@ -6417,7 +6483,7 @@ names(desc_wrds)
 plot(desc_wrds)
 ```
 
-![plot of chunk unnamed-chunk-127](figure/unnamed-chunk-127.png) 
+![plot of chunk unnamed-chunk-128](figure/unnamed-chunk-128.png) 
 
 
 
@@ -6425,7 +6491,7 @@ plot(desc_wrds)
 plot(desc_wrds, label=TRUE, lab.digits = 1)
 ```
 
-![plot of chunk unnamed-chunk-128](figure/unnamed-chunk-128.png) 
+![plot of chunk unnamed-chunk-129](figure/unnamed-chunk-129.png) 
 
 
 It takes considerable time to run <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> because it is calculating syllable counts.  The user may re-use the object output from one run and bass this as the text variable (`text.var`) in a subsequent run with different grouping variables (`grouping.vars`) as long as the text variable has not changed.  The example below demonstrates how to re-use the output from one <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> run in another run.
@@ -7479,7 +7545,7 @@ termco(DATA$state, DATA$person, syns)
 plot(out)
 ```
 
-![plot of chunk unnamed-chunk-150](figure/unnamed-chunk-150.png) 
+![plot of chunk unnamed-chunk-151](figure/unnamed-chunk-151.png) 
 
 
 
@@ -7487,7 +7553,7 @@ plot(out)
 plot(out, label = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-151](figure/unnamed-chunk-151.png) 
+![plot of chunk unnamed-chunk-152](figure/unnamed-chunk-152.png) 
 
 
 <h4 id="quest">Question Type Counts</h4>
@@ -7575,7 +7641,7 @@ truncdf(x$raw, 15)
 plot(x)
 ```
 
-![plot of chunk unnamed-chunk-154](figure/unnamed-chunk-154.png) 
+![plot of chunk unnamed-chunk-155](figure/unnamed-chunk-155.png) 
 
 
 
@@ -7583,7 +7649,7 @@ plot(x)
 plot(x, label = TRUE, high = "red", low = "yellow", grid = NULL)
 ```
 
-![plot of chunk unnamed-chunk-155](figure/unnamed-chunk-155.png) 
+![plot of chunk unnamed-chunk-156](figure/unnamed-chunk-156.png) 
 
 
 Negative forms of questions such as <font color="green">Don't you want the robots to leave?</font> are, by defualt, grouped with with their equivalent positive <font color="green">Do</font> forms, such as <font color="green">Do you want the robots to leave?</font>.  The researcher may choose to keep the two forms separate using the argument <b><font color="green">neg.cont = TRUE</font>
@@ -7979,7 +8045,7 @@ colcomb2class(x, list(vowels = vowels, consonants = cons, other = 2:7))
 plot(x)
 ```
 
-![plot of chunk unnamed-chunk-164](figure/unnamed-chunk-164.png) 
+![plot of chunk unnamed-chunk-165](figure/unnamed-chunk-165.png) 
 
 
 
@@ -7987,7 +8053,7 @@ plot(x)
 plot(x, label = TRUE, high = "red", lab.digits = 1, zero.replace = "")
 ```
 
-![plot of chunk unnamed-chunk-165](figure/unnamed-chunk-165.png) 
+![plot of chunk unnamed-chunk-166](figure/unnamed-chunk-166.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>character_table</code></a> Additional Plotting**<font size="5" color="orange">&diams;</font>
@@ -8029,7 +8095,7 @@ ggplot(data = dat2, aes(y = variable, x = value, colour=sex)) +
     geom_point()
 ```
 
-![plot of chunk unnamed-chunk-167](figure/unnamed-chunk-167.png) 
+![plot of chunk unnamed-chunk-168](figure/unnamed-chunk-168.png) 
 
 
 
@@ -8040,7 +8106,7 @@ ggplot(data = dat2, aes(x = variable, y = value)) +
     theme(legend.position="none")
 ```
 
-![plot of chunk unnamed-chunk-168](figure/unnamed-chunk-168.png) 
+![plot of chunk unnamed-chunk-169](figure/unnamed-chunk-169.png) 
 
 
 <h4 id="freqtab">SPSS Style Frequency Tables</h4>
@@ -8057,16 +8123,16 @@ dist_tab(rnorm(10000), 10)
 
 ```
 ##          interval Freq cum.Freq percent cum.percent
-## 1   (-4.03,-3.29]    4        4    0.04        0.04
-## 2   (-3.29,-2.56]   49       53    0.49        0.53
-## 3   (-2.56,-1.83]  283      336    2.83        3.36
-## 4   (-1.83,-1.09]  955     1291    9.55       12.91
-## 5  (-1.09,-0.358] 2210     3501   22.10       35.01
-## 6  (-0.358,0.376] 2951     6452   29.51       64.52
-## 7    (0.376,1.11] 2187     8639   21.87       86.39
-## 8     (1.11,1.84] 1038     9677   10.38       96.77
-## 9     (1.84,2.58]  287     9964    2.87       99.64
-## 10    (2.58,3.31]   36    10000    0.36      100.00
+## 1    (-4.08,-3.3]    4        4    0.04        0.04
+## 2    (-3.3,-2.51]   61       65    0.61        0.65
+## 3   (-2.51,-1.73]  328      393    3.28        3.93
+## 4   (-1.73,-0.95] 1345     1738   13.45       17.38
+## 5  (-0.95,-0.169] 2593     4331   25.93       43.31
+## 6  (-0.169,0.613] 2956     7287   29.56       72.87
+## 7    (0.613,1.39] 1856     9143   18.56       91.43
+## 8     (1.39,2.18]  724     9867    7.24       98.67
+## 9     (2.18,2.96]  116     9983    1.16       99.83
+## 10    (2.96,3.74]   17    10000    0.17      100.00
 ```
 
 ```r
@@ -8075,9 +8141,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   33       33      33          33
-## 2     gray   40       73      40          73
-## 3      red   27      100      27         100
+## 1     blue   37       37      37          37
+## 2     gray   32       69      32          69
+## 3      red   31      100      31         100
 ```
 
 ```r
@@ -8174,6 +8240,208 @@ $n.char
 
 
 <h4 id="pos">Parts of Speech Tagging & Counts</h4>
+
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_tags</code></a>** - *Interpreting POS Tags*<font size="5" color="orange">&diams;</font>
+
+
+```r
+pos_tags()
+```
+
+```
+##    Tag  Description                             
+## 1  CC   Coordinating conjunction                
+## 2  CD   Cardinal number                         
+## 3  DT   Determiner                              
+## 4  EX   Existential there                       
+## 5  FW   Foreign word                            
+## 6  IN   Preposition or subordinating conjunction
+## 7  JJ   Adjective                               
+## 8  JJR  Adjective, comparative                  
+## 9  JJS  Adjective, superlative                  
+## 10 LS   List item marker                        
+## 11 MD   Modal                                   
+## 12 NN   Noun, singular or mass                  
+## 13 NNS  Noun, plural                            
+## 14 NNP  Proper noun, singular                   
+## 15 NNPS Proper noun, plural                     
+## 16 PDT  Predeterminer                           
+## 17 POS  Possessive ending                       
+## 18 PRP  Personal pronoun                        
+## 19 PRP$ Possessive pronoun                      
+## 20 RB   Adverb                                  
+## 21 RBR  Adverb, comparative                     
+## 22 RBS  Adverb, superlative                     
+## 23 RP   Particle                                
+## 24 SYM  Symbol                                  
+## 25 TO   to                                      
+## 26 UH   Interjection                            
+## 27 VB   Verb, base form                         
+## 28 VBD  Verb, past tense                        
+## 29 VBG  Verb, gerund or present participle      
+## 30 VBN  Verb, past participle                   
+## 31 VBP  Verb, non-3rd person singular present   
+## 32 VBZ  Verb, 3rd person singular present       
+## 33 WDT  Wh-determiner                           
+## 34 WP   Wh-pronoun                              
+## 35 WP$  Possessive wh-pronoun                   
+## 36 WRB  Wh-adverb
+```
+
+
+
+
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a>** - *POS by Group(s)*<font size="5" color="orange">&diams;</font>
+
+
+```r
+posbydat <- with(DATA, pos_by(state, list(adult, sex)))
+## Available elements
+names(posbydat)
+```
+
+```
+ [1] "text"         "POStagged"    "POSprop"      "POSfreq"     
+ [5] "POSrnp"       "percent"      "zero.replace" "pos.by.freq" 
+ [9] "pos.by.prop"  "pos.by.rnp"  
+```
+
+
+
+
+```r
+## Inspecting the truncated output
+lview(posbydat)
+```
+
+
+<pre><code>$text
+[1] "computer is fun not too fun"     "no its not its dumb"           
+[3] "what should we do"               "you liar it stinks"            
+[5] "i am telling the truth"          "how can we be certain"         
+[7] "there is no way"                 "i distrust you"                
+[9] "what are you talking about"      "shall we move on good then"    
+[11] "im hungry lets eat you already"
+
+
+$POStagged
+                               POStagged                   POStags word.count
+1 computer/NN is/VBZ fun/NN ...RB fun/NN   NN, VBZ, NN, RB, RB, NN          6
+2 no/DT its/PRP$ not/RB its/PRP$ dumb/JJ    DT, PRP$, RB, PRP$, JJ          5
+3         what/WP should/MD we/PRP do/VB           WP, MD, PRP, VB          4
+4      you/PRP liar/VBP it/PRP stinks/VB         PRP, VBP, PRP, VB          4
+5 i/PRP am/VBP telling/VBG...DT truth/NN     PRP, VBP, VBG, DT, NN          5
+6 how/WRB can/MD we/PRP ...VB certain/JJ      WRB, MD, PRP, VB, JJ          5
+7           there/EX is/VBZ no/DT way/NN           EX, VBZ, DT, NN          4
+8               i/FW distrust/NN you/PRP               FW, NN, PRP          3
+9  what/WP are/VBP you/PR...VBG about/IN     WP, VBP, PRP, VBG, IN          5
+10 shall/MD we/PRP move/VB ...JJ then/RB   MD, PRP, VB, IN, JJ, RB          6
+11 im/PRP hungry/JJ let...PRP already/RB PRP, JJ, VBZ, VB, PRP, RB          6
+
+
+$POSprop
+   wrd.cnt propDT propEX   propFW   propIN   propJJ   propMD ... propWRB
+1        6      0      0  0.00000  0.00000  0.00000  0.00000           0
+2        5     20      0  0.00000  0.00000 20.00000  0.00000           0
+3        4      0      0  0.00000  0.00000  0.00000 25.00000           0
+4        4      0      0  0.00000  0.00000  0.00000  0.00000           0
+5        5     20      0  0.00000  0.00000  0.00000  0.00000           0
+6        5      0      0  0.00000  0.00000 20.00000 20.00000          20
+7        4     25     25  0.00000  0.00000  0.00000  0.00000           0
+8        3      0      0 33.33333  0.00000  0.00000  0.00000           0
+9        5      0      0  0.00000 20.00000  0.00000  0.00000           0
+10       6      0      0  0.00000 16.66667 16.66667 16.66667           0
+11       6      0      0  0.00000  0.00000 16.66667  0.00000           0
+
+$POSfreq
+   wrd.cnt DT EX FW IN JJ MD NN PRP PRP$ RB VB VBG VBP VBZ WP WRB
+1        6  0  0  0  0  0  0  3   0    0  2  0   0   0   1  0   0
+2        5  1  0  0  0  1  0  0   0    2  1  0   0   0   0  0   0
+3        4  0  0  0  0  0  1  0   1    0  0  1   0   0   0  1   0
+4        4  0  0  0  0  0  0  0   2    0  0  1   0   1   0  0   0
+5        5  1  0  0  0  0  0  1   1    0  0  0   1   1   0  0   0
+6        5  0  0  0  0  1  1  0   1    0  0  1   0   0   0  0   1
+7        4  1  1  0  0  0  0  1   0    0  0  0   0   0   1  0   0
+8        3  0  0  1  0  0  0  1   1    0  0  0   0   0   0  0   0
+9        5  0  0  0  1  0  0  0   1    0  0  0   1   1   0  1   0
+10       6  0  0  0  1  1  1  0   1    0  1  1   0   0   0  0   0
+11       6  0  0  0  0  1  0  0   2    0  1  1   0   0   1  0   0
+
+$POSrnp
+   wrd.cnt       DT       EX       FW       IN       JJ ...      WRB
+1        6        0        0        0        0        0            0
+2        5 1(20.0%)        0        0        0 1(20.0%)            0
+3        4        0        0        0        0        0            0
+4        4        0        0        0        0        0            0
+5        5 1(20.0%)        0        0        0        0            0
+6        5        0        0        0        0 1(20.0%)     1(20.0%)
+7        4 1(25.0%) 1(25.0%)        0        0        0            0
+8        3        0        0 1(33.3%)        0        0            0
+9        5        0        0        0 1(20.0%)        0            0
+10       6        0        0        0 1(16.7%) 1(16.7%)            0
+11       6        0        0        0        0 1(16.7%)            0
+
+$percent
+[1] TRUE
+
+$zero.replace
+[1] 0
+
+$pos.by.freq
+  adult&sex wrd.cnt DT EX FW IN JJ MD NN PRP PRP$ RB VB VBG VBP VBZ WP WRB
+1       0.f      10  0  0  0  1  1  1  0   2    0  0  1   1   1   0  1   1
+2       0.m      33  3  1  1  0  2  0  6   6    2  4  2   1   2   3  0   0
+3       1.f       6  0  0  0  1  1  1  0   1    0  1  1   0   0   0  0   0
+4       1.m       4  0  0  0  0  0  1  0   1    0  0  1   0   0   0  1   0
+
+
+$pos.by.prop
+  adult&sex wrd.cnt       DT       EX       FW       IN        JJ ... WP
+1       0.f      10 0.000000 0.000000 0.000000 10.00000 10.000000     10
+2       0.m      33 9.090909 3.030303 3.030303  0.00000  6.060606      0
+3       1.f       6 0.000000 0.000000 0.000000 16.66667 16.666667      0
+4       1.m       4 0.000000 0.000000 0.000000  0.00000  0.000000     25
+
+
+$pos.by.rnp
+  adult&sex wrd.cnt      DT      EX      FW       IN       JJ ...       WP
+1       0.f      10       0       0       0 1(10.0%) 1(10.0%)     1(10.0%)
+2       0.m      33 3(9.1%) 1(3.0%) 1(3.0%)        0  2(6.1%)            0
+3       1.f       6       0       0       0 1(16.7%) 1(16.7%)            0
+4       1.m       4       0       0       0        0        0     1(25.0%)
+</code></pre>
+
+
+<font size="5" color="orange">&diams;</font> **Plot Method**<font size="5" color="orange">&diams;</font>
+
+
+```r
+plot(posbydat, values = TRUE, digits = 2)
+```
+
+![plot of chunk unnamed-chunk-176](figure/unnamed-chunk-176.png) 
+
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a>** - *Recycling Saves Time*<font size="5" color="orange">&diams;</font>
+
+
+```r
+posbydat2 <- with(DATA, pos_by(posbydat, list(person, sex)))
+system.time(with(DATA, pos_by(posbydat, list(person, sex))))
+```
+
+```
+##    user  system elapsed 
+##    0.05    0.00    0.04
+```
+
+
+
 <h4 id="syll">Syllabication and Counts</h4>
 
 

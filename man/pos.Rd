@@ -63,24 +63,24 @@
   previous output types).}
 }
 \value{
-  pos returns a list of 4: \item{text}{The original text}
-  \item{POStagged}{The original words replaced with parts
-  of speech in context.} \item{POSprop}{Dataframe of the
-  proportion of parts of speech by row.}
-  \item{POSfreq}{Dataframe of the frequency of parts of
-  speech by row.} \item{POSrnp}{Dataframe of the frequency
-  and proportions of parts of speech by row.}
+  \code{pos} - returns a list of 4: \item{text}{The
+  original text} \item{POStagged}{The original words
+  replaced with parts of speech in context.}
+  \item{POSprop}{Dataframe of the proportion of parts of
+  speech by row.} \item{POSfreq}{Dataframe of the frequency
+  of parts of speech by row.} \item{POSrnp}{Dataframe of
+  the frequency and proportions of parts of speech by row.}
   \item{percent}{The value of percent used for plotting
   purposes.} \item{zero.replace}{The value of zero.replace
   used for plotting purposes.}
 
-  pos_by returns a list of 6: \item{text}{The original
-  text} \item{POStagged}{The original words replaced with
-  parts of speech in context.} \item{POSprop}{Dataframe of
-  the proportion of parts of speech by row.}
-  \item{POSfreq}{Dataframe of the frequency of parts of
-  speech by row.} \item{POSrnp}{Dataframe of the frequency
-  and proportions of parts of speech by row.}
+  \code{pos_by} - returns a list of 6: \item{text}{The
+  original text} \item{POStagged}{The original words
+  replaced with parts of speech in context.}
+  \item{POSprop}{Dataframe of the proportion of parts of
+  speech by row.} \item{POSfreq}{Dataframe of the frequency
+  of parts of speech by row.} \item{POSrnp}{Dataframe of
+  the frequency and proportions of parts of speech by row.}
   \item{pos.by.prop}{Dataframe of the proportion of parts
   of speech by grouping variable.}
   \item{pos.by.freq}{Dataframe of the frequency of parts of
@@ -124,7 +124,7 @@ ltruncdf(pos_tags("all"), 3)
 posbydat <- with(DATA, pos_by(state, sex))
 names(posbydat)
 ltruncdf(posbydat, 7, 4)
-truncdf(posbydat$pos_by.prop, 4)
+truncdf(posbydat$pos.by.prop, 4)
 
 POSby <- with(DATA, pos_by(state, list(adult, sex)))
 plot(POSby, values = TRUE, digits = 2)

@@ -22,7 +22,7 @@
 #' problem with the garbage collection in the openNLP function that 
 #' \code{\link[qdap]{pos}} wraps.  Consider adjusting this argument upward if 
 #' the error \code{java.lang.OutOfMemoryError} occurs.
-#' @return pos returns a list of 4: 
+#' @return \code{pos} -  returns a list of 4: 
 #' \item{text}{The original text} 
 #' \item{POStagged}{The original words replaced with parts of speech in context.} 
 #' \item{POSprop}{Dataframe of the proportion of parts of speech by row.} 
@@ -64,7 +64,7 @@
 #' posbydat <- with(DATA, pos_by(state, sex))
 #' names(posbydat)
 #' ltruncdf(posbydat, 7, 4)
-#' truncdf(posbydat$pos_by.prop, 4)
+#' truncdf(posbydat$pos.by.prop, 4)
 #' 
 #' POSby <- with(DATA, pos_by(state, list(adult, sex)))
 #' plot(POSby, values = TRUE, digits = 2)
@@ -187,7 +187,7 @@ tagPOS <-  function(text.var, PTA, ...) {
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
 #' @param \ldots Other argument supplied to \code{pos}.
-#' @return pos_by returns a list of 6: 
+#' @return \code{pos_by} -  returns a list of 6: 
 #' \item{text}{The original text} 
 #' \item{POStagged}{The original words replaced with parts of speech in context.} 
 #' \item{POSprop}{Dataframe of the proportion of parts of speech by row.} 

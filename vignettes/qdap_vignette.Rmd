@@ -417,8 +417,12 @@ delete("foo2")
 <div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
-<form action="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank">
+<form action="http://trinker.github.io/qdap_dev/data_viewing.html" target="_blank">
     <input type="submit" value="truncdf"><input type="submit" value="htruncdf"><input type="submit" value="ltruncdf"><input type="submit" value="qview"> - `r HR("#trunc", "Truncated Dataframe Viewing")`
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/data_viewing.html" target="_blank">
+    <input type="submit" value="lview"> - `r HR("#unclass", "Unclass qdap Object to View List of Dataframes")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/left_just.html" target="_blank">
@@ -434,7 +438,7 @@ The nature of dialogue data makes it large and cumbersome to view in R.  This se
 
 <h4 id="trunc">Truncated Dataframe Viewing</h4> 
 
-The <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions (trunc + dataframe = `r FUN("truncdf")`) are designed to truncate the width of columns and number of rows in dataframes and lists of dataframes.  The `r CN("l")` and `r CN("h")` in front of `r CN("trunc")` stands for <b><font color="blue">l</font>ist</b> and <b><font color="blue">h</font>ead</b> and are extensions of `r FUN("truncdf")`.  `r FUN("qview")` is a wrapper for `r FUN("htruncdf")` that also displays number of rows,columns, and the dataframe name.
+The <a href="http://trinker.github.io/qdap_dev/htruncdf.html" target="_blank"><code>_truncdf</code></a> family of functions (trunc + dataframe = `r FUN("truncdf", "data_viewing")`) are designed to truncate the width of columns and number of rows in dataframes and lists of dataframes.  The `r CN("l")` and `r CN("h")` in front of `r CN("trunc")` stands for <b><font color="blue">l</font>ist</b> and <b><font color="blue">h</font>ead</b> and are extensions of `r FUN("truncdf", "data_viewing")`.  `r FUN("qview", "data_viewing")` is a wrapper for `r FUN("htruncdf", "data_viewing")` that also displays number of rows, columns, and the dataframe name.
 
 
 `r FT(orange, 5, text="&diams;")` **Truncated Data Viewing** `r FT(orange, 5, text="&diams;")`
@@ -482,6 +486,14 @@ ltruncdf(rajPOS, width = 4)
 ## 9    Qn2 Quebec nonchilled  175   27.3
 ## 10   Qn2 Quebec nonchilled  250   37.1</code></pre>
 
+<h4 id="unclass">Unclass qdap Object to View List of Dataframes</h4> 
+
+Many qdap objects are lists that print as a single dataframe, though the rest of the objects in the list are available.  The `r FUN("lview", "data_viewing")` function unclasses the object and assigns "list".
+
+
+```{r}
+lview(question_type(DATA.SPLIT$state, DATA.SPLIT$person))
+```
 
 <h4 id="just">Text Justification</h4> 
 
@@ -3410,6 +3422,276 @@ $n.char
 
 
 <h4 id="pos">Parts of Speech Tagging & Counts</h4>
+
+
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("pos_tags", "pos")`** - *Interpreting POS Tags*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+pos_tags()
+```
+
+```{r, include = FALSE}
+posbydat <- structure(list(text = c("computer is fun not too fun", "no its not its dumb", 
+    "what should we do", "you liar it stinks", "i am telling the truth", 
+    "how can we be certain", "there is no way", "i distrust you", 
+    "what are you talking about", "shall we move on good then", "im hungry lets eat you already"
+    ), POStagged = structure(list(POStagged = structure(c(1L, 6L, 
+    10L, 11L, 4L, 2L, 8L, 3L, 9L, 7L, 5L), .Label = c("computer/NN is/VBZ fun/NN not/RB too/RB fun/NN", 
+    "how/WRB can/MD we/PRP be/VB certain/JJ", "i/FW distrust/NN you/PRP", 
+    "i/PRP am/VBP telling/VBG the/DT truth/NN", "im/PRP hungry/JJ lets/VBZ eat/VB you/PRP already/RB", 
+    "no/DT its/PRP$ not/RB its/PRP$ dumb/JJ", "shall/MD we/PRP move/VB on/IN good/JJ then/RB", 
+    "there/EX is/VBZ no/DT way/NN", "what/WP are/VBP you/PRP talking/VBG about/IN", 
+    "what/WP should/MD we/PRP do/VB", "you/PRP liar/VBP it/PRP stinks/VB"
+    ), class = "factor"), POStags = list(c("NN", "VBZ", "NN", "RB", 
+    "RB", "NN"), c("DT", "PRP$", "RB", "PRP$", "JJ"), c("WP", "MD", 
+    "PRP", "VB"), c("PRP", "VBP", "PRP", "VB"), c("PRP", "VBP", "VBG", 
+    "DT", "NN"), c("WRB", "MD", "PRP", "VB", "JJ"), c("EX", "VBZ", 
+    "DT", "NN"), c("FW", "NN", "PRP"), c("WP", "VBP", "PRP", "VBG", 
+    "IN"), c("MD", "PRP", "VB", "IN", "JJ", "RB"), c("PRP", "JJ", 
+    "VBZ", "VB", "PRP", "RB")), word.count = c(6L, 5L, 4L, 4L, 5L, 
+    5L, 4L, 3L, 5L, 6L, 6L)), .Names = c("POStagged", "POStags", 
+    "word.count"), row.names = c(NA, -11L), class = "data.frame"), 
+        POSprop = structure(list(wrd.cnt = c(6L, 5L, 4L, 4L, 5L, 
+        5L, 4L, 3L, 5L, 6L, 6L), propDT = c(0, 20, 0, 0, 20, 0, 25, 
+        0, 0, 0, 0), propEX = c(0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0), 
+            propFW = c(0, 0, 0, 0, 0, 0, 0, 33.3333333333333, 0, 
+            0, 0), propIN = c(0, 0, 0, 0, 0, 0, 0, 0, 20, 16.6666666666667, 
+            0), propJJ = c(0, 20, 0, 0, 0, 20, 0, 0, 0, 16.6666666666667, 
+            16.6666666666667), propMD = c(0, 0, 25, 0, 0, 20, 0, 
+            0, 0, 16.6666666666667, 0), propNN = c(50, 0, 0, 0, 20, 
+            0, 25, 33.3333333333333, 0, 0, 0), propPRP = c(0, 0, 
+            25, 50, 20, 20, 0, 33.3333333333333, 20, 16.6666666666667, 
+            33.3333333333333), `propPRP$` = c(0, 40, 0, 0, 0, 0, 
+            0, 0, 0, 0, 0), propRB = c(33.3333333333333, 20, 0, 0, 
+            0, 0, 0, 0, 0, 16.6666666666667, 16.6666666666667), propVB = c(0, 
+            0, 25, 25, 0, 20, 0, 0, 0, 16.6666666666667, 16.6666666666667
+            ), propVBG = c(0, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0), propVBP = c(0, 
+            0, 0, 25, 20, 0, 0, 0, 20, 0, 0), propVBZ = c(16.6666666666667, 
+            0, 0, 0, 0, 0, 25, 0, 0, 0, 16.6666666666667), propWP = c(0, 
+            0, 25, 0, 0, 0, 0, 0, 20, 0, 0), propWRB = c(0, 0, 0, 
+            0, 0, 20, 0, 0, 0, 0, 0)), .Names = c("wrd.cnt", "propDT", 
+        "propEX", "propFW", "propIN", "propJJ", "propMD", "propNN", 
+        "propPRP", "propPRP$", "propRB", "propVB", "propVBG", "propVBP", 
+        "propVBZ", "propWP", "propWRB"), row.names = c(NA, -11L), class = "data.frame"), 
+        POSfreq = structure(list(wrd.cnt = c(6L, 5L, 4L, 4L, 5L, 
+        5L, 4L, 3L, 5L, 6L, 6L), DT = c(0L, 1L, 0L, 0L, 1L, 0L, 1L, 
+        0L, 0L, 0L, 0L), EX = c(0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 
+        0L, 0L), FW = c(0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L
+        ), IN = c(0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L, 1L, 0L), JJ = c(0L, 
+        1L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 1L, 1L), MD = c(0L, 0L, 1L, 
+        0L, 0L, 1L, 0L, 0L, 0L, 1L, 0L), NN = c(3L, 0L, 0L, 0L, 1L, 
+        0L, 1L, 1L, 0L, 0L, 0L), PRP = c(0L, 0L, 1L, 2L, 1L, 1L, 
+        0L, 1L, 1L, 1L, 2L), `PRP$` = c(0L, 2L, 0L, 0L, 0L, 0L, 0L, 
+        0L, 0L, 0L, 0L), RB = c(2L, 1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 
+        1L, 1L), VB = c(0L, 0L, 1L, 1L, 0L, 1L, 0L, 0L, 0L, 1L, 1L
+        ), VBG = c(0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 1L, 0L, 0L), VBP = c(0L, 
+        0L, 0L, 1L, 1L, 0L, 0L, 0L, 1L, 0L, 0L), VBZ = c(1L, 0L, 
+        0L, 0L, 0L, 0L, 1L, 0L, 0L, 0L, 1L), WP = c(0L, 0L, 1L, 0L, 
+        0L, 0L, 0L, 0L, 1L, 0L, 0L), WRB = c(0L, 0L, 0L, 0L, 0L, 
+        1L, 0L, 0L, 0L, 0L, 0L)), .Names = c("wrd.cnt", "DT", "EX", 
+        "FW", "IN", "JJ", "MD", "NN", "PRP", "PRP$", "RB", "VB", 
+        "VBG", "VBP", "VBZ", "WP", "WRB"), row.names = c(NA, -11L
+        ), class = "data.frame"), POSrnp = structure(list(wrd.cnt = c(6L, 
+        5L, 4L, 4L, 5L, 5L, 4L, 3L, 5L, 6L, 6L), DT = c("0", "1(20.0%)", 
+        "0", "0", "1(20.0%)", "0", "1(25.0%)", "0", "0", "0", "0"
+        ), EX = c("0", "0", "0", "0", "0", "0", "1(25.0%)", "0", 
+        "0", "0", "0"), FW = c("0", "0", "0", "0", "0", "0", "0", 
+        "1(33.3%)", "0", "0", "0"), IN = c("0", "0", "0", "0", "0", 
+        "0", "0", "0", "1(20.0%)", "1(16.7%)", "0"), JJ = c("0", 
+        "1(20.0%)", "0", "0", "0", "1(20.0%)", "0", "0", "0", "1(16.7%)", 
+        "1(16.7%)"), MD = c("0", "0", "1(25.0%)", "0", "0", "1(20.0%)", 
+        "0", "0", "0", "1(16.7%)", "0"), NN = c("3(50.0%)", "0", 
+        "0", "0", "1(20.0%)", "0", "1(25.0%)", "1(33.3%)", "0", "0", 
+        "0"), PRP = c("0", "0", "1(25.0%)", "2(50.0%)", "1(20.0%)", 
+        "1(20.0%)", "0", "1(33.3%)", "1(20.0%)", "1(16.7%)", "2(33.3%)"
+        ), `PRP$` = c("0", "2(40.0%)", "0", "0", "0", "0", "0", "0", 
+        "0", "0", "0"), RB = c("2(33.3%)", "1(20.0%)", "0", "0", 
+        "0", "0", "0", "0", "0", "1(16.7%)", "1(16.7%)"), VB = c("0", 
+        "0", "1(25.0%)", "1(25.0%)", "0", "1(20.0%)", "0", "0", "0", 
+        "1(16.7%)", "1(16.7%)"), VBG = c("0", "0", "0", "0", "1(20.0%)", 
+        "0", "0", "0", "1(20.0%)", "0", "0"), VBP = c("0", "0", "0", 
+        "1(25.0%)", "1(20.0%)", "0", "0", "0", "1(20.0%)", "0", "0"
+        ), VBZ = c("1(16.7%)", "0", "0", "0", "0", "0", "1(25.0%)", 
+        "0", "0", "0", "1(16.7%)"), WP = c("0", "0", "1(25.0%)", 
+        "0", "0", "0", "0", "0", "1(20.0%)", "0", "0"), WRB = c("0", 
+        "0", "0", "0", "0", "1(20.0%)", "0", "0", "0", "0", "0")), .Names = c("wrd.cnt", 
+        "DT", "EX", "FW", "IN", "JJ", "MD", "NN", "PRP", "PRP$", 
+        "RB", "VB", "VBG", "VBP", "VBZ", "WP", "WRB"), row.names = c(NA, 
+        -11L), class = "data.frame"), percent = TRUE, zero.replace = 0, 
+        pos.by.freq = structure(list(`adult&sex` = structure(1:4, .Label = c("0.f", 
+        "0.m", "1.f", "1.m"), class = "factor"), wrd.cnt = c(10, 
+        33, 6, 4), DT = c(0, 3, 0, 0), EX = c(0, 1, 0, 0), FW = c(0, 
+        1, 0, 0), IN = c(1, 0, 1, 0), JJ = c(1, 2, 1, 0), MD = c(1, 
+        0, 1, 1), NN = c(0, 6, 0, 0), PRP = c(2, 6, 1, 1), `PRP$` = c(0, 
+        2, 0, 0), RB = c(0, 4, 1, 0), VB = c(1, 2, 1, 1), VBG = c(1, 
+        1, 0, 0), VBP = c(1, 2, 0, 0), VBZ = c(0, 3, 0, 0), WP = c(1, 
+        0, 0, 1), WRB = c(1, 0, 0, 0)), .Names = c("adult&sex", "wrd.cnt", 
+        "DT", "EX", "FW", "IN", "JJ", "MD", "NN", "PRP", "PRP$", 
+        "RB", "VB", "VBG", "VBP", "VBZ", "WP", "WRB"), row.names = c(NA, 
+        4L), class = "data.frame"), pos.by.prop = structure(list(
+            `adult&sex` = structure(1:4, .Label = c("0.f", "0.m", 
+            "1.f", "1.m"), class = "factor"), wrd.cnt = c(10, 33, 
+            6, 4), DT = c(0, 9.09090909090909, 0, 0), EX = c(0, 3.03030303030303, 
+            0, 0), FW = c(0, 3.03030303030303, 0, 0), IN = c(10, 
+            0, 16.6666666666667, 0), JJ = c(10, 6.06060606060606, 
+            16.6666666666667, 0), MD = c(10, 0, 16.6666666666667, 
+            25), NN = c(0, 18.1818181818182, 0, 0), PRP = c(20, 18.1818181818182, 
+            16.6666666666667, 25), `PRP$` = c(0, 6.06060606060606, 
+            0, 0), RB = c(0, 12.1212121212121, 16.6666666666667, 
+            0), VB = c(10, 6.06060606060606, 16.6666666666667, 25
+            ), VBG = c(10, 3.03030303030303, 0, 0), VBP = c(10, 6.06060606060606, 
+            0, 0), VBZ = c(0, 9.09090909090909, 0, 0), WP = c(10, 
+            0, 0, 25), WRB = c(10, 0, 0, 0)), .Names = c("adult&sex", 
+        "wrd.cnt", "DT", "EX", "FW", "IN", "JJ", "MD", "NN", "PRP", 
+        "PRP$", "RB", "VB", "VBG", "VBP", "VBZ", "WP", "WRB"), row.names = c(NA, 
+        4L), class = "data.frame"), pos.by.rnp = structure(list(`adult&sex` = structure(1:4, .Label = c("0.f", 
+        "0.m", "1.f", "1.m"), class = "factor"), wrd.cnt = c(10, 
+        33, 6, 4), DT = c("0", "3(9.1%)", "0", "0"), EX = c("0", 
+        "1(3.0%)", "0", "0"), FW = c("0", "1(3.0%)", "0", "0"), IN = c("1(10.0%)", 
+        "0", "1(16.7%)", "0"), JJ = c("1(10.0%)", "2(6.1%)", "1(16.7%)", 
+        "0"), MD = c("1(10.0%)", "0", "1(16.7%)", "1(25.0%)"), NN = c("0", 
+        "6(18.2%)", "0", "0"), PRP = c("2(20.0%)", "6(18.2%)", "1(16.7%)", 
+        "1(25.0%)"), `PRP$` = c("0", "2(6.1%)", "0", "0"), RB = c("0", 
+        "4(12.1%)", "1(16.7%)", "0"), VB = c("1(10.0%)", "2(6.1%)", 
+        "1(16.7%)", "1(25.0%)"), VBG = c("1(10.0%)", "1(3.0%)", "0", 
+        "0"), VBP = c("1(10.0%)", "2(6.1%)", "0", "0"), VBZ = c("0", 
+        "3(9.1%)", "0", "0"), WP = c("1(10.0%)", "0", "0", "1(25.0%)"
+        ), WRB = c("1(10.0%)", "0", "0", "0")), .Names = c("adult&sex", 
+        "wrd.cnt", "DT", "EX", "FW", "IN", "JJ", "MD", "NN", "PRP", 
+        "PRP$", "RB", "VB", "VBG", "VBP", "VBZ", "WP", "WRB"), row.names = c(NA, 
+        4L), class = "data.frame")), .Names = c("text", "POStagged", 
+    "POSprop", "POSfreq", "POSrnp", "percent", "zero.replace", "pos.by.freq", 
+    "pos.by.prop", "pos.by.rnp"), class = "pos_by")
+```
+
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("pos_by", "pos")`** - *POS by Group(s)*`r FT(orange, 5, text="&diams;")`
+
+```{r, comment=NA}
+posbydat <- with(DATA, pos_by(state, list(adult, sex)))
+## Available elements
+names(posbydat)
+```
+
+
+```{r, eval = FALSE}
+## Inspecting the truncated output
+lview(posbydat)
+```
+
+<pre><code>$text
+[1] "computer is fun not too fun"     "no its not its dumb"           
+[3] "what should we do"               "you liar it stinks"            
+[5] "i am telling the truth"          "how can we be certain"         
+[7] "there is no way"                 "i distrust you"                
+[9] "what are you talking about"      "shall we move on good then"    
+[11] "im hungry lets eat you already"
+
+
+$POStagged
+                               POStagged                   POStags word.count
+1 computer/NN is/VBZ fun/NN ...RB fun/NN   NN, VBZ, NN, RB, RB, NN          6
+2 no/DT its/PRP$ not/RB its/PRP$ dumb/JJ    DT, PRP$, RB, PRP$, JJ          5
+3         what/WP should/MD we/PRP do/VB           WP, MD, PRP, VB          4
+4      you/PRP liar/VBP it/PRP stinks/VB         PRP, VBP, PRP, VB          4
+5 i/PRP am/VBP telling/VBG...DT truth/NN     PRP, VBP, VBG, DT, NN          5
+6 how/WRB can/MD we/PRP ...VB certain/JJ      WRB, MD, PRP, VB, JJ          5
+7           there/EX is/VBZ no/DT way/NN           EX, VBZ, DT, NN          4
+8               i/FW distrust/NN you/PRP               FW, NN, PRP          3
+9  what/WP are/VBP you/PR...VBG about/IN     WP, VBP, PRP, VBG, IN          5
+10 shall/MD we/PRP move/VB ...JJ then/RB   MD, PRP, VB, IN, JJ, RB          6
+11 im/PRP hungry/JJ let...PRP already/RB PRP, JJ, VBZ, VB, PRP, RB          6
+
+
+$POSprop
+   wrd.cnt propDT propEX   propFW   propIN   propJJ   propMD ... propWRB
+1        6      0      0  0.00000  0.00000  0.00000  0.00000           0
+2        5     20      0  0.00000  0.00000 20.00000  0.00000           0
+3        4      0      0  0.00000  0.00000  0.00000 25.00000           0
+4        4      0      0  0.00000  0.00000  0.00000  0.00000           0
+5        5     20      0  0.00000  0.00000  0.00000  0.00000           0
+6        5      0      0  0.00000  0.00000 20.00000 20.00000          20
+7        4     25     25  0.00000  0.00000  0.00000  0.00000           0
+8        3      0      0 33.33333  0.00000  0.00000  0.00000           0
+9        5      0      0  0.00000 20.00000  0.00000  0.00000           0
+10       6      0      0  0.00000 16.66667 16.66667 16.66667           0
+11       6      0      0  0.00000  0.00000 16.66667  0.00000           0
+
+$POSfreq
+   wrd.cnt DT EX FW IN JJ MD NN PRP PRP$ RB VB VBG VBP VBZ WP WRB
+1        6  0  0  0  0  0  0  3   0    0  2  0   0   0   1  0   0
+2        5  1  0  0  0  1  0  0   0    2  1  0   0   0   0  0   0
+3        4  0  0  0  0  0  1  0   1    0  0  1   0   0   0  1   0
+4        4  0  0  0  0  0  0  0   2    0  0  1   0   1   0  0   0
+5        5  1  0  0  0  0  0  1   1    0  0  0   1   1   0  0   0
+6        5  0  0  0  0  1  1  0   1    0  0  1   0   0   0  0   1
+7        4  1  1  0  0  0  0  1   0    0  0  0   0   0   1  0   0
+8        3  0  0  1  0  0  0  1   1    0  0  0   0   0   0  0   0
+9        5  0  0  0  1  0  0  0   1    0  0  0   1   1   0  1   0
+10       6  0  0  0  1  1  1  0   1    0  1  1   0   0   0  0   0
+11       6  0  0  0  0  1  0  0   2    0  1  1   0   0   1  0   0
+
+$POSrnp
+   wrd.cnt       DT       EX       FW       IN       JJ ...      WRB
+1        6        0        0        0        0        0            0
+2        5 1(20.0%)        0        0        0 1(20.0%)            0
+3        4        0        0        0        0        0            0
+4        4        0        0        0        0        0            0
+5        5 1(20.0%)        0        0        0        0            0
+6        5        0        0        0        0 1(20.0%)     1(20.0%)
+7        4 1(25.0%) 1(25.0%)        0        0        0            0
+8        3        0        0 1(33.3%)        0        0            0
+9        5        0        0        0 1(20.0%)        0            0
+10       6        0        0        0 1(16.7%) 1(16.7%)            0
+11       6        0        0        0        0 1(16.7%)            0
+
+$percent
+[1] TRUE
+
+$zero.replace
+[1] 0
+
+$pos.by.freq
+  adult&sex wrd.cnt DT EX FW IN JJ MD NN PRP PRP$ RB VB VBG VBP VBZ WP WRB
+1       0.f      10  0  0  0  1  1  1  0   2    0  0  1   1   1   0  1   1
+2       0.m      33  3  1  1  0  2  0  6   6    2  4  2   1   2   3  0   0
+3       1.f       6  0  0  0  1  1  1  0   1    0  1  1   0   0   0  0   0
+4       1.m       4  0  0  0  0  0  1  0   1    0  0  1   0   0   0  1   0
+
+
+$pos.by.prop
+  adult&sex wrd.cnt       DT       EX       FW       IN        JJ ... WP
+1       0.f      10 0.000000 0.000000 0.000000 10.00000 10.000000     10
+2       0.m      33 9.090909 3.030303 3.030303  0.00000  6.060606      0
+3       1.f       6 0.000000 0.000000 0.000000 16.66667 16.666667      0
+4       1.m       4 0.000000 0.000000 0.000000  0.00000  0.000000     25
+
+
+$pos.by.rnp
+  adult&sex wrd.cnt      DT      EX      FW       IN       JJ ...       WP
+1       0.f      10       0       0       0 1(10.0%) 1(10.0%)     1(10.0%)
+2       0.m      33 3(9.1%) 1(3.0%) 1(3.0%)        0  2(6.1%)            0
+3       1.f       6       0       0       0 1(16.7%) 1(16.7%)            0
+4       1.m       4       0       0       0        0        0     1(25.0%)
+</code></pre>
+
+
+`r FT(orange, 5, text="&diams;")` **Plot Method**`r FT(orange, 5, text="&diams;")`
+
+```{r}
+plot(posbydat, values = TRUE, digits = 2)
+```
+
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("pos_by", "pos")`** - *Recycling Saves Time*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+posbydat2 <- with(DATA, pos_by(posbydat, list(person, sex)))
+system.time(with(DATA, pos_by(posbydat, list(person, sex))))
+```
+
+
 <h4 id="syll">Syllabication and Counts</h4>
 
 

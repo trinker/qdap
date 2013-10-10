@@ -1,6 +1,7 @@
 \name{htruncdf}
 \alias{htruncdf}
 \alias{ltruncdf}
+\alias{lview}
 \alias{qview}
 \alias{truncdf}
 \title{Dataframe Viewing}
@@ -12,6 +13,8 @@
   ltruncdf(dat.list, n = 6, width = 10, ...)
 
   qview(dataframe, ...)
+
+  lview(x, print = TRUE)
 }
 \arguments{
   \item{dataframe}{A data.frame object.}
@@ -32,6 +35,12 @@
   (\code{\link[qdap]{htruncdf}}).}
 
   \item{dat.list}{A list of data.frame objects.}
+
+  \item{x}{A class qdap object that is a list which prints
+  as a dataframe.}
+
+  \item{print}{logical.  If \code{TRUE} prints to the
+  console.}
 }
 \value{
   \code{htrundf} - returns n number of rows of a truncated
@@ -44,6 +53,9 @@
 
   \code{qview} - returns a dataframe head with summary
   statistics.
+
+  \code{qview} - prints a list of the qdap object and
+  invisibly returns the unclassed object.
 }
 \description{
   \code{htruncdf} - Convenience function to view the head
@@ -57,6 +69,10 @@
 
   \code{qview} - Convenience function to view a summary and
   head of a dataframe.
+
+  \code{lview} - Convenience function to view the list
+  (list view) of qdap objects that have print methods that
+  print a single dataframe.
 }
 \examples{
 \dontrun{
@@ -68,6 +84,9 @@ htruncdf(raj, ,20)
 ltruncdf(rajPOS, width = 4)
 qview(raj)
 qview(CO2)
+lview(question_type(DATA.SPLIT$state, DATA.SPLIT$person))
+lview(rajPOS)
+lview(lm(mpg~hp, data = mtcars))
 }
 }
 \seealso{

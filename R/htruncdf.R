@@ -25,6 +25,9 @@
 #' ltruncdf(rajPOS, width = 4)
 #' qview(raj)
 #' qview(CO2)
+#' lview(question_type(DATA.SPLIT$state, DATA.SPLIT$person))
+#' lview(rajPOS)
+#' lview(lm(mpg~hp, data = mtcars))
 #' }
 htruncdf <-
 function(dataframe, n=10, width=10, ...) {
@@ -75,5 +78,24 @@ function(dataframe, ...){
         ncol(dataframe), "           ", x, collapse="")
     message(paste(y, z, y, sep = "\n"))
     return(htruncdf(dataframe, ...))
+}
+
+#' Unclass qdap Object to View List of Dataframes
+#' 
+#' \code{lview} - Convenience function to view the list (list view) of qdap 
+#' objects that have print methods that print a single dataframe.  
+#' 
+#' @param x A class qdap object that is a list which prints as a dataframe.
+#' @param print logical.  If \code{TRUE} prints to the console.
+#' @return \code{qview} - prints a list of the qdap object and invisibly returns 
+#' the unclassed object.
+#' @rdname data_viewing
+#' @export
+lview <- function(x, print = TRUE) {
+    class(x) <- "list"
+    if (print) {
+        print(x)
+    }
+    invisible(x)
 }
 
