@@ -11,7 +11,9 @@
 #' @param names logical.  If \code{TRUE} the sentences are given as the names of 
 #' the counts.
 #' @param fix.space logical.  If \code{TRUE} extra spaces left behind from an 
-#' extraction will be eliminated.
+#' extraction will be eliminated.  Additionally, non-space (e.g., 
+#' \strong{"text(nospace between text and parenthesis)"}) is repalced with a 
+#' single space (e.g., \strong{"text (space between text and parenthesis)"}).
 #' @param scrub logical.  If \code{TRUE} \code{\link[qdap]{scrubber}} will clean 
 #' the text.
 #' @return \code{bracketX} -  returns a vector of text with brackets removed.
@@ -63,6 +65,8 @@ function (text.var, bracket = "all", missing = NULL, names = FALSE,
     lside <- rside <- ""
     if (fix.space) {
         lside <- rside <- "[ ]*"
+        text.var <- mgsub(c("(", ")","[", "]", "{", "}", "<", ">"), 
+            c(" (", ") "," [", "] ", " {", "} ", " <", "> "), text.var)
     }
     FUN <- function(bracket, text.var, missing, names) {
         X <- switch(bracket, 
@@ -87,13 +91,13 @@ function (text.var, bracket = "all", missing = NULL, names = FALSE,
         if (!names) names(X) <- NULL
         X
     }
+
     invisible(lapply(bracket, function(x) {
         text.var <<- FUN(x, text.var = text.var, 
             missing = missing, names = names)
     }))
     text.var
 }
-
 
 #' bracketXtract
 #' 

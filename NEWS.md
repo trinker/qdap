@@ -50,7 +50,7 @@ relatively new to CRAN, made these changes sensible at this point.
   <a href="https://github.com/trinker/qdap/issues/128">issue #128</a> for more. 
 
 * `trans.cloud` threw an error if a single list with a named vector was passed 
-  to `target.words`.  Thes behavior has been fixed.
+  to `target.words`.  This behavior has been fixed.
 
 * `sentSplit` now returns the "tot" column when `text.place = "original"`.  
 
@@ -75,6 +75,10 @@ relatively new to CRAN, made these changes sensible at this point.
 
 * The use of `comment` to convey object characteristics has been replaced with 
   the use of `class`.
+
+* `question_type` did not include question words ending in 'd as part of the 
+  category.  For instance "How'd you like it?" was not classified as a how 
+  question.
 
 <b>NEW FEATURES</b>
 
@@ -162,7 +166,7 @@ relatively new to CRAN, made these changes sensible at this point.
 * Functions in the `cm_code.xxx` and `cm_xxx2long` pick up a generic summary 
   method.  This summary method has its own plot method that utilizes `qheat` to 
   plot a heatmap of the summary statistics.  The generic print method 
-  (`print.sum_cmspans`) is useful for out put intended for publication.
+  (`print.sum_cmspans`) is useful for output intended for publication.
 
 * `qheat` picks up a `facet.vars` argument that allows a character vector of 
   length 1 or 2 to facet by.
@@ -204,13 +208,13 @@ relatively new to CRAN, made these changes sensible at this point.
 * `cm_time2long` loses the argument `start.end` to ensure that the `cmspans` 
   class produced would operate as expected.
 
-* Most exported functions utilizing a period separator have been repalced with 
+* Most exported functions utilizing a period separator have been replaced with 
   underscore named versions.
 
 * `wf_combine` renamed `wfm_combine` to be consistent.
 
-* `question_type` algoritm for implied do/does no ncludes questions with the 
-  first word of the sentence as "want" or "wanna".
+* `question_type` algorithm improvements including implied do/does/did handling.
+
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5
 ----------------------------------------------------------------

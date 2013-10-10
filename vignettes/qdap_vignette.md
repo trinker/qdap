@@ -1108,8 +1108,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 22.40 19.70 16.30 19.70 16.30 15.00 15.00 25.34 15.00 22.40 19.70
-## [12] 16.30 15.79 19.70 15.00 15.79 25.34 25.34 19.70 19.70
+##  [1] 25.34 25.34 15.79 15.00 19.70 16.30 19.70 15.00 19.70 15.00 25.34
+## [12] 19.70 15.79 15.79 16.30 16.30 22.40 15.79 19.70 16.30
 ```
 
 ```r
@@ -1117,8 +1117,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 22.40 19.70 16.30 19.70 16.30 15.00 15.00 25.34 15.00 22.40 19.70
-## [12] 16.30 15.79 19.70 15.00 15.79 25.34 25.34 19.70 19.70
+##  [1] 25.34 25.34 15.79 15.00 19.70 16.30 19.70 15.00 19.70 15.00 25.34
+## [12] 19.70 15.79 15.79 16.30 16.30 22.40 15.79 19.70 16.30
 ```
 
 
@@ -1298,8 +1298,8 @@ bracketX(examp$text, "square")
 ```
 
 ```
-## [1] "I love chicken!"                  "Me too! (laughter) It's so good."
-## [3] "Yep it's awesome {reading}."      "Agreed. {is so much fun}"
+## [1] "I love chicken !"                 "Me too! (laughter) It's so good."
+## [3] "Yep it's awesome {reading} ."     "Agreed. {is so much fun}"
 ```
 
 ```r
@@ -1307,9 +1307,9 @@ bracketX(examp$text, "curly")
 ```
 
 ```
-## [1] "I love chicken [unintelligible]!"              
-## [2] "Me too! (laughter) It's so good.[interrupting]"
-## [3] "Yep it's awesome."                             
+## [1] "I love chicken [unintelligible] !"              
+## [2] "Me too! (laughter) It's so good. [interrupting]"
+## [3] "Yep it's awesome ."                             
 ## [4] "Agreed."
 ```
 
@@ -1318,8 +1318,8 @@ bracketX(examp$text, c("square", "round"))
 ```
 
 ```
-## [1] "I love chicken!"             "Me too! It's so good."      
-## [3] "Yep it's awesome {reading}." "Agreed. {is so much fun}"
+## [1] "I love chicken !"             "Me too! It's so good."       
+## [3] "Yep it's awesome {reading} ." "Agreed. {is so much fun}"
 ```
 
 ```r
@@ -1327,7 +1327,7 @@ bracketX(examp$text)
 ```
 
 ```
-## [1] "I love chicken!"       "Me too! It's so good." "Yep it's awesome."    
+## [1] "I love chicken !"      "Me too! It's so good." "Yep it's awesome ."   
 ## [4] "Agreed."
 ```
 
@@ -7497,18 +7497,18 @@ A researcher may be interested in classifying and investigating the types of que
 
 
 ```
-are            had            must           what           why                   
-can            has            ok             when           will                  
-correct        have           right          where          would                 
+are*           had*           must*          what           why                   
+can*           has            ok             when           will*                 
+correct        have*          right          where          would*                
 could          how            shall          which          implied do/does/did   
-did            is             should         who                                  
-do             may            was            whom                                 
-does           might          were           whose                                
+did*           is             should         who                                  
+do*            may            was*           whom                                 
+does*          might*         were*          whose                                
 ```
 
 
 
-The interrogative word that is found first (with the exception of "ok", "right" and "correct") in the question determines the sentence type. "ok", "right" and "correct" sentence types are determined if the sentence is a question with no other interrogative words found and "ok", "right" or "correct" is the last word of the sentence. Those interrogative sentences beginning with the word "you", "wanna", or "want" are categorized as implying do/does/did question type, though the use of do/does is not explicit. A sentence that is marked "ok" over rides an implied do/does/did label.  Those with undetermined sentence type are labeled unknown.
+The interrogative word that is found first (with the exception of "ok", "right" and "correct") in the question determines the sentence type. "ok", "right" and "correct" sentence types are determined if the sentence is a question with no other interrogative words found and "ok", "right" or "correct" is the last word of the sentence. Those interrogative sentences beginning with the word "you", "wanna", or "want" are categorized as implying do/does/did question type, though the use of do/does is not explicit. Those sentence beginning with "you" followed by a select interrogative word (and or their negative counter parts) above (marked with *) or 1-2 amplifier(s) followed by the select interrogative word are categorized by the select word rather than an implied do/does/did question type.  A sentence that is marked "ok" over rides an implied do/does/did label.  Those with undetermined sentence type are labeled unknown.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/question_type.html" target="_blank"><code>question_type</code></a> - Basic Example**<font size="5" color="orange">&diams;</font>
 
@@ -8044,6 +8044,135 @@ ggplot(data = dat2, aes(x = variable, y = value)) +
 
 
 <h4 id="freqtab">SPSS Style Frequency Tables</h4>
+
+It is helpful to view the frequency distributions for a vector, matrix or dataframe.   The <a href="http://trinker.github.io/qdap_dev/dist_tab.html" target="_blank"><code>dist_tab</code></a> function allows the researcher to quickly generate frequency distributions.
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/dist_tab.html" target="_blank"><code>dist_tab</code></a> Examples**<font size="5" color="orange">&diams;</font>
+
+
+```r
+dist_tab(rnorm(10000), 10)
+```
+
+```
+##          interval Freq cum.Freq percent cum.percent
+## 1   (-4.03,-3.29]    4        4    0.04        0.04
+## 2   (-3.29,-2.56]   49       53    0.49        0.53
+## 3   (-2.56,-1.83]  283      336    2.83        3.36
+## 4   (-1.83,-1.09]  955     1291    9.55       12.91
+## 5  (-1.09,-0.358] 2210     3501   22.10       35.01
+## 6  (-0.358,0.376] 2951     6452   29.51       64.52
+## 7    (0.376,1.11] 2187     8639   21.87       86.39
+## 8     (1.11,1.84] 1038     9677   10.38       96.77
+## 9     (1.84,2.58]  287     9964    2.87       99.64
+## 10    (2.58,3.31]   36    10000    0.36      100.00
+```
+
+```r
+dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
+```
+
+```
+##   interval Freq cum.Freq percent cum.percent
+## 1     blue   33       33      33          33
+## 2     gray   40       73      40          73
+## 3      red   27      100      27         100
+```
+
+```r
+dist_tab(CO2, 4)
+```
+
+```
+## $Plant
+##    interval Freq cum.Freq percent cum.percent
+## 1       Qn1    7        7    8.33        8.33
+## 2       Qn2    7       14    8.33       16.67
+## 3       Qn3    7       21    8.33       25.00
+## 4       Qc1    7       28    8.33       33.33
+## 5       Qc3    7       35    8.33       41.67
+## 6       Qc2    7       42    8.33       50.00
+## 7       Mn3    7       49    8.33       58.33
+## 8       Mn2    7       56    8.33       66.67
+## 9       Mn1    7       63    8.33       75.00
+## 10      Mc2    7       70    8.33       83.33
+## 11      Mc3    7       77    8.33       91.67
+## 12      Mc1    7       84    8.33      100.00
+## 
+## $Type
+##      interval Freq cum.Freq percent cum.percent
+## 1      Quebec   42       42      50          50
+## 2 Mississippi   42       84      50         100
+## 
+## $Treatment
+##     interval Freq cum.Freq percent cum.percent
+## 1 nonchilled   42       42      50          50
+## 2    chilled   42       84      50         100
+## 
+## $conc
+##      interval Freq cum.Freq percent cum.percent
+## 1  (94.1,321]   36       36   42.86       42.86
+## 2   (321,548]   24       60   28.57       71.43
+## 3   (548,774]   12       72   14.29       85.71
+## 4 (774,1e+03]   12       84   14.29      100.00
+## 
+## $uptake
+##      interval Freq cum.Freq percent cum.percent
+## 1 (7.66,17.1]   19       19   22.62       22.62
+## 2 (17.1,26.6]   18       37   21.43       44.05
+## 3 (26.6,36.1]   25       62   29.76       73.81
+## 4 (36.1,45.5]   22       84   26.19      100.00
+```
+
+
+
+```r
+wdst <- with(mraja1spl, word_stats(dialogue, list(sex, fam.aff, died)))
+dist_tab(wdst$gts[1:4], 5)
+```
+
+
+<pre><code>$`sex&fam.aff&died`
+          interval Freq cum.Freq percent cum.percent
+1      f.cap.FALSE    1        1    9.09        9.09
+2       f.cap.TRUE    1        2    9.09       18.18
+3      f.mont.TRUE    1        3    9.09       27.27
+4      m.cap.FALSE    1        4    9.09       36.36
+5       m.cap.TRUE    1        5    9.09       45.45
+6    m.escal.FALSE    1        6    9.09       54.55
+7     m.escal.TRUE    1        7    9.09       63.64
+8     m.mont.FALSE    1        8    9.09       72.73
+9      m.mont.TRUE    1        9    9.09       81.82
+10    m.none.FALSE    1       10    9.09       90.91
+11 none.none.FALSE    1       11    9.09      100.00
+
+$n.sent
+     interval Freq cum.Freq percent cum.percent
+1 (3.85,34.7]    7        7   63.64       63.64
+2 (34.7,65.6]    0        7    0.00       63.64
+3 (65.6,96.4]    2        9   18.18       81.82
+4  (96.4,127]    1       10    9.09       90.91
+5   (127,158]    1       11    9.09      100.00
+
+$n.words
+            interval Freq cum.Freq percent cum.percent
+1         (14.4,336]    6        6   54.55       54.55
+2          (336,658]    2        8   18.18       72.73
+3          (658,981]    1        9    9.09       81.82
+4      (981,1.3e+03]    1       10    9.09       90.91
+5 (1.3e+03,1.62e+03]    1       11    9.09      100.00
+
+$n.char
+             interval Freq cum.Freq percent cum.percent
+1     (72.7,1.34e+03]    6        6   54.55       54.55
+2  (1.34e+03,2.6e+03]    2        8   18.18       72.73
+3  (2.6e+03,3.86e+03]    1        9    9.09       81.82
+4 (3.86e+03,5.12e+03]    1       10    9.09       90.91
+5 (5.12e+03,6.39e+03]    1       11    9.09      100.00
+</code></pre>
+
+
 <h4 id="pos">Parts of Speech Tagging & Counts</h4>
 <h4 id="syll">Syllabication and Counts</h4>
 

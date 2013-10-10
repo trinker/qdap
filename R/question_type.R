@@ -15,6 +15,15 @@
 #' @param contraction A two column key of contractions (column 1) and expanded 
 #' form replacements (column 2) or a vector of contractions.  Default is to use 
 #' qdapDictionaries's \code{\link[qdapDictionaries]{contractions}} data set. 
+#' @param bracket The type of bracket (and encased text) to remove.  This is one 
+#' or more of the strings \code{"curly"}, \code{"square"}, \code{"round"}, 
+#' \code{"angle"} and \code{"all"}.  These strings correspond 
+#' to: \{, [, (, < or all four types.
+#' @param amplifiers A character vector of terms that increase the 
+#' intensity of a positive or negative word. Default is to use 
+#' qdapDictionaries's \code{\link[qdapDictionaries]{amplification.words}} data 
+#' set.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{bracketX}}.
 #' @return Returns a list of:
 #' \item{raw}{A dataframe of the questions used in the transcript and their 
 #' type.}
@@ -29,23 +38,29 @@
 #' @details The algorithm searches for the following interrogative words (and 
 #' optionally, their negative contraction form as well): 
 #'  
-#' 1) whose 2) whom 3) who 4) where 5) what 6) which 7) why 8) when 9) were 
-#' 10) was 11) does 12) did 13) do 14) is 15) are 16) will 17) how 18) should 
-#' 19) could 20) would 21) shall 22) may 23) might 24) must 25) can 26) has 
-#' 27) have 28) had 29) ok 30) right 31) correct 32) implied do/does/did
+#' 1) whose 2) whom 3) who 4) where 5) what 6) which 7) why 8) when 9) were* 
+#' 10) was* 11) does* 12) did* 13) do* 14) is 15) are* 16) will* 17) how 
+#' 18) should 19) could 20) would* 21) shall 22) may 23) might* 24) must* 
+#' 25) can* 26) has 27) have* 28) had* 29) ok 30) right 31) correct 
+#' 32) implied do/does/did
 #' 
-#' The interrogative word that is found first (with the exception of "ok", "right" 
-#' and "correct") in the question determines the sentence type. "ok", "right" and 
-#' "correct" sentence types are determined if the sentence is a question with no 
-#' other interrogative words found and "ok", "right" or "correct" is the last 
-#' word of the sentence.  Those interrogative sentences beginning with the word 
-#' "you", "wanna", or "want" are categorized as implying do/does/did question 
-#' type, though the use of do/does/did is not explicit.  A sentence that is 
-#' marked "ok" over rides an implied do/does/did label.  Those with undetermined 
-#' sentence type are labeled unknown.
+#' The interrogative word that is found first (with the exception of "ok", 
+#' "right"/"alright", and "correct") in the question determines the sentence 
+#' type. "ok", "right"/"alright", and "correct" sentence types are determined if 
+#' the sentence is a question with no other interrogative words found and "ok", 
+#' "right"/"alright", or "correct" is the last word of the sentence.  Those 
+#' interrogative sentences beginning with the word "you", "wanna", or "want" are 
+#' categorized as implying do/does/did question type, though the use of 
+#' do/does/did is not explicit.  Those sentence beginning with "you" followed by 
+#' a select interrogative word (and or their negative counter parts) above 
+#' (marked with *) or 1-2 amplifier(s) followed by the select interrogative word
+#' are categorized by the select word rather than an implied do/does/did 
+#' question type.  A sentence that is marked "ok" over rides an implied 
+#' do/does/did label.  Those with undetermined sentence type are labeled unknown.
 #' @keywords question, question-count
 #' @export 
-#' @seealso \code{\link[qdap]{colcomb2class}}
+#' @seealso \code{\link[qdap]{colcomb2class}},
+#' \code{\link[qdap]{bracketX}}
 #' @examples
 #' \dontrun{
 #' ## Inspect the algorithm classification
@@ -81,7 +96,8 @@
 #' }
 question_type <- function(text.var, grouping.var = NULL,
     neg.cont = FALSE, percent = TRUE, zero.replace = 0, digits = 2, 
-    contraction = qdapDictionaries::contractions) {
+    contraction = qdapDictionaries::contractions, bracket = "all", 
+    amplifiers = qdapDictionaries::amplification.words, ...) {
     if(is.null(grouping.var)) {
         G <- "all"
     } else {
@@ -116,11 +132,22 @@ question_type <- function(text.var, grouping.var = NULL,
           "  Suggested use of sentSplit function."))
     }
     DF[, "end.mark"] <- substring(DF[, "text.var"], nchar(DF[, "text.var"]))
-    DF[, "stext.var"] <- spaste(strip(gsub("'s ", " ", DF[, "text.var"])))
+
+    ## remove brackets
+    if (!is.null(bracket)) {
+        txt <- bracketX(DF[, "text.var"], bracket = bracket, ...)
+    } else {
+        txt <- mgsub(c("(", ")","[", "]", "{", "}", "<", ">"), 
+            c(" (", ") "," [", "] ", " {", "} ", " <", "> "), DF[, "text.var"])
+    }
+
+    ## account for 's and 'd on the end of question words
+    DF[, "stext.var"] <- spaste(strip(mgsub(c("'s ", "'d "), " ", txt)))
     if (sum(DF$end.mark == "?", na.rm = TRUE) == 0) stop("No questions found") 
     rows.removed <- which(is.na(DF$end.mark))
     DF <- DF[!is.na(DF$end.mark), ]
     DF <- DF[DF$end.mark == "?", ]
+
     L1 <- split(DF, DF[, "grouping"])
     missing <- names(L1)[sapply(L1, nrow) == 0]
     L1 <- L1[sapply(L1, nrow) != 0]
@@ -132,22 +159,52 @@ question_type <- function(text.var, grouping.var = NULL,
             "hasnt", "has", "havent", "have", "hadnt", "had")
     y <- paste0(" XXXXX", sprintf("%02d", seq_along(x)), " ")
     key <- data.frame(x = spaste(x), y = y, stringsAsFactors = FALSE)  
+
     L1 <- lapply(L1, function(x){
         z <- x[, "stext.var"]
         y <- nchar(z)
-        a1 <- (y-4) == sapply(gregexpr("okay", z), "[", 1) 
-        a2 <- (y-2) == sapply(gregexpr("ok", z), "[", 1)
-        x[, "ok"] <- a1 + a2  
-        x[, "alright"] <- (y-7) == sapply(gregexpr("alright", z), "[", 1)
-        x[, " right"] <- (y-6) == sapply(gregexpr("right", z), "[", 1)
-        x[, "correct"] <- (y-7) == sapply(gregexpr("correct", z), "[", 1)
-        x[, "huh"] <- (y-3) == sapply(gregexpr("huh", z), "[", 1)       
-        x[, "implied_do/does/did"] <- !as.logical(x[, "ok"]) && 
-            c((sapply(gregexpr("you", z), "[", 1) == 2) | 
-            (sapply(gregexpr("wanna ", z), "[", 1) == 2) |    
+        a1 <- (y-4) >= 0 && (y-4) == sapply(gregexpr("okay", z), "[", 1) 
+        a2 <- (y-3) >= 0 && (y-3) == sapply(gregexpr(" ok", z), "[", 1)
+        x[, "ok"] <- as.logical(a1 + a2)
+        x[, "alright"] <- (y-7) >= 0 && (y-7) == sapply(gregexpr("alright", z), "[", 1)
+        x[, " right"] <- (y-6) >= 0 && (y-6) == sapply(gregexpr(" right", z), "[", 1)
+        x[, "correct"] <- (y-7) >= 0 && (y-7) == sapply(gregexpr("correct", z), "[", 1)
+        x[, "huh"] <- (y-3) == sapply(gregexpr("huh", z), "[", 1)     
+        x2 <- !x[, "ok"] & 
+            c((sapply(gregexpr("wanna ", z), "[", 1) == 2) |    
             (sapply(gregexpr("want ", z), "[", 1) == 2))
+
+        ## Distinguish between implied do/did and not
+        youimplied <- sapply(gregexpr("you", z), "[", 1) == 2
+        implies <- word_split(x[, "stext.var"][youimplied])
+        imply_qterms1 <- c("werent", "were", "wasnt", "was", "doesnt", 
+            "didnt", "did", "dont", "do", "arent", "are",
+            "will", "wont", "wouldnt", "would", "might", "must", 
+             "cant",  "can", "havent", "have", "hadnt", "had")
+        imply_qterms2 <- c("what", imply_qterms1)
+        implies_2to4 <- lapply(implies, "[", 2:4)
+ 
+        ## Find those not implied you
+        notimplied <- sapply(implies_2to4, function(x) {
+            o1 <- x[1] %in% imply_qterms2
+            if (o1) return(TRUE)
+            o2a <- x[1] %in% amplifiers
+            o2 <- o2a && x[2] %in% imply_qterms1
+            if (o2) return(TRUE)  
+            o3 <- o2 && x[2] %in% amplifiers && x[3] %in% imply_qterms1
+            if (o3) {
+                return(TRUE)  
+            } else {
+                return(FALSE)
+            }
+
+        })
+
+        youimplied[youimplied] <- !notimplied
+        x[, "implied_do/does/did"] <- youimplied
         x
     })
+
     L2 <- invisible(lapply(L1, function(x) {
         subtext <- mgsub(key[, "x"], key[, "y"], x[, "stext.var"])
         gsub("\\s+", " ", (Trim(gsub("[^XXX[:digit:]]", " ", subtext))))
@@ -167,8 +224,6 @@ question_type <- function(text.var, grouping.var = NULL,
          L2[[i]][unels & L1[[i]][, "huh"]] <- "huh"
          L2[[i]]
     })
-
-
 
     DF3a <- data.frame(ords = unlist(lapply(L1, "[", "orig.row.num")), 
         q.type = unlist(L2), stringsAsFactors = FALSE)
@@ -210,13 +265,16 @@ question_type <- function(text.var, grouping.var = NULL,
         have = c("haven't", "have"), 
         had = c("hadn't", "had")
     ) 
+
     if(!neg.cont & ncol(DF) > 1) {
         ord <- c("whose", "whom", "who", "where", "what",  "which", 
             "why", "when", "were", "was", "does", "did", "do", 
             "is", "are", "will", "how", "should", "could", "would", 
             "shall", "may", "might", "must", "can", "has", "have", "had")  
         comdcol <- lapply(comdcol, function(x) gsub("'", "", x)) 
-        DF <- qcombine(DF, comdcol)
+
+        DF <- qcombine2(DF, comdcol)
+
         ord <- c(ord[ord %in% colnames(DF)], "ok", "alright", "right", 
             "correct", "huh", "idd", "unknown")
         DF <- DF[, ord[ord %in% colnames(DF)]] 
@@ -313,4 +371,41 @@ plot.question_type <- function(x, label = FALSE, lab.digits = 1, percent = NULL,
     } else {
         qheat(x$prop, ...)  
     }
+}
+
+## Helper function to combine columns
+qcombine2 <- 
+function(mat, combined.columns){
+
+    L1 <- lapply(combined.columns, function(x) {
+        if (is.numeric(x)) {
+            x <- names(mat)[x]
+        }    
+        if(all(x %in% colnames(mat))){
+            return(unlist(rowSums(mat[, x, drop = FALSE])))
+        }
+        if(all(!x %in% colnames(mat))){
+            return(unlist(rep(NA, nrow(mat))))
+        }
+        if(sum(x %in% colnames(mat)) == 1){
+            return(unlist(mat[colnames(mat) %in% x]))
+        }        
+        return(unlist(rowSums(mat[colnames(mat) %in% x])))
+    })
+    DF <- data.frame(do.call(cbind, L1), check.names = FALSE)
+    DF <- DF[ !sapply(DF, function(x) all(is.na(x)))]
+
+    for (i in  seq_len(length(combined.columns))) {
+        CC <- sapply(combined.columns[[i]], function(x) {
+            which(x == names(mat))[1]
+        })
+        if (identical(colnames(mat), character(0))) {
+            break
+        }
+        nms <- colnames(mat)[!1:ncol(mat) %in% CC]
+        mat <- mat[ , !1:ncol(mat) %in% CC, drop = FALSE]
+        colnames(mat) <- nms
+    }
+
+    data.frame(mat, DF, check.names = FALSE)
 }
