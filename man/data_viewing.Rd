@@ -54,7 +54,7 @@
   \code{qview} - returns a dataframe head with summary
   statistics.
 
-  \code{qview} - prints a list of the qdap object and
+  \code{lview} - prints a list of the qdap object and
   invisibly returns the unclassed object.
 }
 \description{

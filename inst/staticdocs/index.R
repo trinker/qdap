@@ -55,6 +55,7 @@ list(
         "adjacency_matrix",
         "colSplit",
         "colsplit2df",
+        "colcomb2class",
         "gantt",
         "gantt_rep",
         "key_merge",

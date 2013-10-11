@@ -4,7 +4,7 @@
 #' dataframe.
 #' 
 #' @param dataframe A dataframe with a column that has been pasted together.
-#' @param splitcol The name/index of the column(s) that has been pasted together.
+#' @param splitcols The name/index of the column(s) that has been pasted together.
 #' @param new.names A character vector of new names to assign to the columns (or
 #' list of names if multiple columns are being split).  
 #' Default attempts to extract the original names before the paste.
@@ -134,10 +134,17 @@ function(dataframe, splitcol = 1, new.names = NULL, sep=".",
     on.exit(options(width=WD))
     classRdf <- c("diversity")
 
-    ## Checks
+    ## Check 1
     if (!is.data.frame(dataframe)){
         warning("dataframe object is not of the class data.frame")
     }
+
+    ## Check 2 for splitcol == ""/ added 10/10/13
+    if (splitcol == "") {
+        splitcol <- which(colnames(dataframe) %in% splitcol)
+    }
+
+    ## Check 3
     if (is.numeric(dataframe[, splitcol])) {
         stop("splitcol class can not be numeric")
     }

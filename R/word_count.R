@@ -70,7 +70,7 @@
 #'     
 #' ggplot(data = dat2, aes(x = variable, y = value)) +
 #'     geom_bar(aes(fill = variable), stat = "identity") +
-#'     facet_grid(sex ~ adult2, margins = TRUE) +
+#'     facet_grid(sex ~ adult, margins = TRUE) +
 #'     theme(legend.position="none")
 #' }
 word_count <- 

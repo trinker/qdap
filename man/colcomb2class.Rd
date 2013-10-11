@@ -15,7 +15,7 @@
   (summed).  If a vector is unnamed a name will be
   assigned.}
 
-  \item{The}{class to assign to the output.}
+  \item{class}{The class to assign to the output.}
 
   \item{percent}{logical.  If \code{TRUE} output given as
   percent.  If \code{FALSE} the output is proportion.}

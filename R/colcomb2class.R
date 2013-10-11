@@ -7,7 +7,7 @@
 #' @param combined.columns A list of named vectors of the colnames/indexes 
 #' of the numeric columns to be combined (summed).  If a vector is unnamed a 
 #' name will be assigned. 
-#' @param The class to assign to the output.
+#' @param class The class to assign to the output.
 #' @param percent logical.  If \code{TRUE} output given as percent.  If 
 #' \code{FALSE} the output is proportion.
 #' @param digits Integer; number of decimal places to round when printing.   

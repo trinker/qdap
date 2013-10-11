@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 25.34 22.40 15.79 22.40 15.79 22.40 15.00 19.70 19.70 25.34 25.34
-## [12] 15.79 16.30 19.70 19.70 16.30 25.34 22.40 16.30 25.34
+##  [1] 25.34 25.34 15.79 19.70 22.40 15.00 22.40 19.70 25.34 19.70 16.30
+## [12] 15.00 15.79 15.00 15.79 25.34 19.70 25.34 16.30 15.79
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 25.34 22.40 15.79 22.40 15.79 22.40 15.00 19.70 19.70 25.34 25.34
-## [12] 15.79 16.30 19.70 19.70 16.30 25.34 22.40 16.30 25.34
+##  [1] 25.34 25.34 15.79 19.70 22.40 15.00 22.40 19.70 25.34 19.70 16.30
+## [12] 15.00 15.79 15.00 15.79 25.34 19.70 25.34 16.30 15.79
 ```
 
 
@@ -3422,6 +3422,7 @@ The qdap package utilizes the following functions to turn text into a bag of wor
 </TABLE>
 
 Bag of words can be useful for any number of reasons within the scope of analyzing discourse.  Many other qdap functions employ or mention these three functions as seen in the following counts for the three word splitting functions functions.
+
 
 
 
@@ -8122,17 +8123,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##          interval Freq cum.Freq percent cum.percent
-## 1    (-4.08,-3.3]    4        4    0.04        0.04
-## 2    (-3.3,-2.51]   61       65    0.61        0.65
-## 3   (-2.51,-1.73]  328      393    3.28        3.93
-## 4   (-1.73,-0.95] 1345     1738   13.45       17.38
-## 5  (-0.95,-0.169] 2593     4331   25.93       43.31
-## 6  (-0.169,0.613] 2956     7287   29.56       72.87
-## 7    (0.613,1.39] 1856     9143   18.56       91.43
-## 8     (1.39,2.18]  724     9867    7.24       98.67
-## 9     (2.18,2.96]  116     9983    1.16       99.83
-## 10    (2.96,3.74]   17    10000    0.17      100.00
+##             interval Freq cum.Freq percent cum.percent
+## 1      (-3.54,-2.84]   28       28    0.28        0.28
+## 2      (-2.84,-2.13]  134      162    1.34        1.62
+## 3      (-2.13,-1.42]  603      765    6.03        7.65
+## 4     (-1.42,-0.715] 1615     2380   16.15       23.80
+## 5  (-0.715,-0.00715] 2618     4998   26.18       49.98
+## 6     (-0.00715,0.7] 2626     7624   26.26       76.24
+## 7         (0.7,1.41] 1600     9224   16.00       92.24
+## 8        (1.41,2.12]  606     9830    6.06       98.30
+## 9        (2.12,2.82]  155     9985    1.55       99.85
+## 10       (2.82,3.53]   15    10000    0.15      100.00
 ```
 
 ```r
@@ -8141,9 +8142,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   37       37      37          37
-## 2     gray   32       69      32          69
-## 3      red   31      100      31         100
+## 1     blue   29       29      29          29
+## 2     gray   33       62      33          62
+## 3      red   38      100      38         100
 ```
 
 ```r
@@ -8241,7 +8242,9 @@ $n.char
 
 <h4 id="pos">Parts of Speech Tagging & Counts</h4>
 
+In some analysis of text the research may wish to gather information about parts of speech (POS).  The function <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos</code></a> and it's grouping variable counterpart, <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a>, can provide this functionality.  The <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos</code></a> functions are wrappers for POS related functions from the <a href="http://cran.r-project.org/web/packages/openNLP/index.html">openNLP</a> package.  The <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_tags</code></a> function provides a quick reference to what the POS tags utilized by <a href="http://cran.r-project.org/web/packages/openNLP/index.html">openNLP</a> mean.  For more information on the POS tags see the <a href="http://www.cis.upenn.edu/~treebank/">Penn Treebank Project</a>.
 
+The following examples utilize the <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a> function as the <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos</code></a> function is used identically, except without specifying a `grouping.var`.  It is important to realize that POS tagging is a very slow process.  The speed can be increased by using the <b><font  color="green" face="courier">parallel = TRUE</font></b> argument. Additionally, the user can recycle the output from one run of <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos</code></a>, <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a> or <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a> and use it interchangably between the <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a> and <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a> functions.  This reuses the POS tagging which is the time intensive part (and can be extracted via <b><font  color="green" face="courier">YOUR_OUTPUT_HERE[[&quot;POStagged&quot;]]</font></b> from any of the above objects).
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_tags</code></a>** - *Interpreting POS Tags*<font size="5" color="orange">&diams;</font>
 
@@ -8435,17 +8438,112 @@ posbydat2 <- with(DATA, pos_by(posbydat, list(person, sex)))
 system.time(with(DATA, pos_by(posbydat, list(person, sex))))
 ```
 
+
+<pre><code>    user  system elapsed 
+    0.07    0.00    0.07
+</code></pre>
+
+
+```r
+## `pos_by` output Recycled for `formality`
+with(DATA, formality(posbydat, list(person, sex)))
 ```
-##    user  system elapsed 
-##    0.05    0.00    0.04
+
+```
+##     person&sex word.count formality
+## 1       greg.m         20     35.00
+## 2        sam.m         13     34.62
+## 3 researcher.f          6     33.33
+## 4      sally.f         10     20.00
+## 5    teacher.m          4      0.00
 ```
 
 
 
 <h4 id="syll">Syllabication and Counts</h4>
 
+Examining syllable counts can be a useful source of information in associating with education level, age, SES, gender, etc.  Several readability scores rely on syllable and polysyllable word counts.  qdap defines a *polysyllable* word as a word with 3 or more syllables, though some in the linguistics/literacy fields may include two syllable words.  <a href="http://trinker.github.io/qdap_dev/syllabication.html" target="_blank"><code>syllable_count</code></a> is the base function for <a href="http://trinker.github.io/qdap_dev/syllabication.html" target="_blank"><code>syllable_sum</code></a>, <a href="http://trinker.github.io/qdap_dev/syllabication.html" target="_blank"><code>polysyllable_sum</code></a>, and <a href="http://trinker.github.io/qdap_dev/syllabication.html" target="_blank"><code>combo_syllable_sum</code></a>, though is generally not of direct use to the researcher conducting discourse analysis.  <a href="http://trinker.github.io/qdap_dev/syllabication.html" target="_blank"><code>syllable_count</code></a> uses a dictionary lookup method augmented with a syllable algorithm for words not found in the dictionary.  Words not found in the dictionary are denoted with a <b>NF</b> in the  <b>in.dictionary</b> column of the output.
 
 
+Here is a list of qdap <a href="http://trinker.github.io/qdap_dev/syllabication.html" target="_blank"><code>syllabication</code></a> functions and their descriptions:<br>
+
+<TABLE BORDER=2 CELLPADDING=2 CELLSPACING=2 WIDTH="90%">
+  <TR> <TD> <b>syllable_count</b> </TD> <TD> Count the number of syllables in a single text string. </TD> </TR>
+  <TR> <TD> <b>syllable_sum</b> </TD> <TD> Count the number of syllables per row of text. </TD> </TR>
+  <TR> <TD> <b>polysyllable_sum</b> </TD> <TD> Count the number of polysyllables per row of text. </TD> </TR>
+  <TR> <TD> <b>combo_syllable_sum</b> </TD> <TD> Count the number of both syllables and polysyllables per row of text. </TD> </TR>
+   </TABLE>
+
+
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/syllabication.html" target="_blank"><code>syllabication</code></a> Examples**<font size="5" color="orange">&diams;</font>
+
+
+
+```r
+syllable_count("Robots like Dason lie.")
+```
+
+```
+   words syllables in.dictionary
+1 robots         2             -
+2   like         1             -
+3  dason         2            NF
+4    lie         1             -
+```
+
+```r
+## The text variable for reference
+DATA$state
+```
+
+```
+ [1] "Computer is fun. Not too fun."        
+ [2] "No it's not, it's dumb."              
+ [3] "What should we do?"                   
+ [4] "You liar, it stinks!"                 
+ [5] "I am telling the truth!"              
+ [6] "How can we be certain?"               
+ [7] "There is no way."                     
+ [8] "I distrust you."                      
+ [9] "What are you talking about?"          
+[10] "Shall we move on?  Good then."        
+[11] "I'm hungry.  Let's eat.  You already?"
+```
+
+```r
+syllable_sum(DATA$state)
+```
+
+```
+ [1] 8 5 4 5 6 6 4 4 7 6 9
+```
+
+```r
+polysyllable_sum(DATA$state)
+```
+
+```
+ [1] 1 0 0 0 0 0 0 0 0 0 1
+```
+
+```r
+combo_syllable_sum(DATA$state)
+```
+
+```
+   syllable.count polysyllable.count
+1               8                  1
+2               5                  0
+3               4                  0
+4               5                  0
+5               6                  0
+6               6                  0
+7               4                  0
+8               4                  0
+9               7                  0
+10              6                  0
+11              9                  1
+```
 
 
 

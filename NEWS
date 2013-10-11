@@ -105,6 +105,9 @@ NEW FEATURES
 * `colcomb2class` quickly combines columns for  number of qdap classes including 
   output from: `termco`, `question_type`, `pos_by`, adn 1character_table`.
 
+* `lview` a function to unclass a list output that has a special print method 
+  that returns only a portion of the output.  `lview` reclasses to "list".
+
 MINOR FEATURES
 
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 

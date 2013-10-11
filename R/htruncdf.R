@@ -87,7 +87,7 @@ function(dataframe, ...){
 #' 
 #' @param x A class qdap object that is a list which prints as a dataframe.
 #' @param print logical.  If \code{TRUE} prints to the console.
-#' @return \code{qview} - prints a list of the qdap object and invisibly returns 
+#' @return \code{lview} - prints a list of the qdap object and invisibly returns 
 #' the unclassed object.
 #' @rdname data_viewing
 #' @export

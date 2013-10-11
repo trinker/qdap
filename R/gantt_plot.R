@@ -156,10 +156,17 @@ function(text.var, grouping.var = NULL, rm.var = NULL, fill.var = NULL,
         }
         x <- gantt_rep(rm.var = rm.var, text.var = text.var, 
             grouping.var = vars, units =units, col.sep = "%%%%")
-        x <- colsplit2df(x, splitcol = 2, new.names = ANAMES, sep = "%%%%")
+
+        if (!is.null(rmNAME)) {
+            colnames(x)[1:2] <- c(rmNAME, NAME)
+        } else {
+            colnames(x)[1] <- NAME
+        }
+
+        x <- colsplit2df(x, splitcols = 2, new.names = ANAMES, sep = "%%%%")
         rlen <- length(repNAMES)
         if (rlen > 1) {
-            x <- colsplit2df(x, splitcol = 1, new.names = repNAMES, sep = "%%%%")
+            x <- colsplit2df(x, splitcols = 1, new.names = repNAMES, sep = "%%%%")
         } else {
             colnames(x)[length(repNAMES)] <- repNAMES
         }

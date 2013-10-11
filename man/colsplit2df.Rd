@@ -13,7 +13,7 @@
   \item{dataframe}{A dataframe with a column that has been
   pasted together.}
 
-  \item{splitcol}{The name/index of the column(s) that has
+  \item{splitcols}{The name/index of the column(s) that has
   been pasted together.}
 
   \item{new.names}{A character vector of new names to

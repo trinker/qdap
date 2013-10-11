@@ -1427,6 +1427,7 @@ x <- search_repo(bag_o_words, breaker, word.split)
 print(xtable(x), type="html")
 ```
 
+
 <TABLE border=1>
  <TR> <TD align="right">  </TD> <TD><b>Function</b> </TD> <TD> <b>bag_o_words</b> </TD> <TD> <b>breaker</b></TD> <TD> <b>word.split</b></TD> </TR>
  
@@ -3423,7 +3424,9 @@ $n.char
 
 <h4 id="pos">Parts of Speech Tagging & Counts</h4>
 
+In some analysis of text the research may wish to gather information about parts of speech (POS).  The function `r FUN("pos")` and it's grouping variable counterpart, `r FUN("pos_by", "pos")`, can provide this functionality.  The `r FUN("pos")` functions are wrappers for POS related functions from the `r HR("http://cran.r-project.org/web/packages/openNLP/index.html", "openNLP")` package.  The `r FUN("pos_tags", "pos")` function provides a quick reference to what the POS tags utilized by `r HR("http://cran.r-project.org/web/packages/openNLP/index.html", "openNLP")` mean.  For more information on the POS tags see the `r HR("http://www.cis.upenn.edu/~treebank/", "Penn Treebank Project")`.
 
+The following examples utilize the `r FUN("pos_by", "pos")` function as the `r FUN("pos")` function is used identically, except without specifying a `grouping.var`.  It is important to realize that POS tagging is a very slow process.  The speed can be increased by using the <b><font  color="green" face="courier">parallel = TRUE</font></b> argument. Additionally, the user can recycle the output from one run of `r FUN("pos")`, `r FUN("pos_by", "pos")` or `r FUN("formality")` and use it interchangably between the `r FUN("pos_by", "pos")` and `r FUN("formality")` functions.  This reuses the POS tagging which is the time intensive part (and can be extracted via <b><font  color="green" face="courier">YOUR_OUTPUT_HERE[[&quot;POStagged&quot;]]</font></b> from any of the above objects).
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("pos_tags", "pos")`** - *Interpreting POS Tags*`r FT(orange, 5, text="&diams;")`
 
@@ -3686,17 +3689,47 @@ plot(posbydat, values = TRUE, digits = 2)
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("pos_by", "pos")`** - *Recycling Saves Time*`r FT(orange, 5, text="&diams;")`
 
-```{r}
+```{r, eval=FALSE}
 posbydat2 <- with(DATA, pos_by(posbydat, list(person, sex)))
 system.time(with(DATA, pos_by(posbydat, list(person, sex))))
+```
+
+<pre><code>    user  system elapsed 
+    0.07    0.00    0.07
+</code></pre>
+
+```{r}
+## `pos_by` output Recycled for `formality`
+with(DATA, formality(posbydat, list(person, sex)))
 ```
 
 
 <h4 id="syll">Syllabication and Counts</h4>
 
+Examining syllable counts can be a useful source of information in associating with education level, age, SES, gender, etc.  Several readability scores rely on syllable and polysyllable word counts.  qdap defines a *polysyllable* word as a word with 3 or more syllables, though some in the linguistics/literacy fields may include two syllable words.  `r FUN("syllable_count", "syllabication")` is the base function for `r FUN("syllable_sum", "syllabication")`, `r FUN("polysyllable_sum", "syllabication")`, and `r FUN("combo_syllable_sum", "syllabication")`, though is generally not of direct use to the researcher conducting discourse analysis.  `r FUN("syllable_count", "syllabication")` uses a dictionary lookup method augmented with a syllable algorithm for words not found in the dictionary.  Words not found in the dictionary are denoted with a <b>NF</b> in the  <b>in.dictionary</b> column of the output.
 
 
+Here is a list of qdap `r FUN("syllabication", "syllabication")` functions and their descriptions:<br>
 
+<TABLE BORDER=2 CELLPADDING=2 CELLSPACING=2 WIDTH="90%">
+  <TR> <TD> <b>syllable_count</b> </TD> <TD> Count the number of syllables in a single text string. </TD> </TR>
+  <TR> <TD> <b>syllable_sum</b> </TD> <TD> Count the number of syllables per row of text. </TD> </TR>
+  <TR> <TD> <b>polysyllable_sum</b> </TD> <TD> Count the number of polysyllables per row of text. </TD> </TR>
+  <TR> <TD> <b>combo_syllable_sum</b> </TD> <TD> Count the number of both syllables and polysyllables per row of text. </TD> </TR>
+   </TABLE>
+
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("syllabication", "syllabication")` Examples**`r FT(orange, 5, text="&diams;")`
+
+
+```{r, comment=NA}
+syllable_count("Robots like Dason lie.")
+## The text variable for reference
+DATA$state
+syllable_sum(DATA$state)
+polysyllable_sum(DATA$state)
+combo_syllable_sum(DATA$state)
+```
 
 
 
