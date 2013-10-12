@@ -60,6 +60,13 @@ function(..., v.name = "variable", list.var = TRUE, debug = TRUE,
     }  
     L2 <- lapply(L1, cm_t2l, list.var = FALSE)
 
+### added 10-12-13 and added to class
+    spns <- sapply(L2, function(x) {
+        as.numeric(gsub("tspan_", "", class(x)[grepl("tspan_", class(x))]))
+    })
+    spns <- paste(spns, collapse = "||")
+### added 10-12-13
+
     if (list.var) {
         L2 <- lapply(seq_along(L2), function(i) data.frame(L2[[i]], 
             VAR = objs[i]))
@@ -69,6 +76,6 @@ function(..., v.name = "variable", list.var = TRUE, debug = TRUE,
         colnames(DF)[ncol(DF)] <- v.name
     }
     class(DF) <- c("cmspans", "cmtime", "cmtime2long", paste0("vname_", v.name), 
-        class(DF))
+        class(DF), paste0("spans_", spns))
     DF
 }

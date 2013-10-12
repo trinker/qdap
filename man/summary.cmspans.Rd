@@ -3,7 +3,8 @@
 \title{Summarize a cmspans object}
 \usage{
   \method{summary}{cmspans} (object, grouping.var = NULL,
-    rm.var = NULL, percent = TRUE, digits = 2, ...)
+    rm.var = NULL, total.span = TRUE, percent = TRUE,
+    digits = 2, ...)
 }
 \arguments{
   \item{object}{The cmspans object}
@@ -14,6 +15,20 @@
 
   \item{rm.var}{An optional single vector or list of 1 or 2
   of repeated measures to aggregate by.}
+
+  \item{total.span}{logical or an option list of vectors
+  (length 1 or 2) of the total duration of the event.  If
+  \code{FALSE} the "total" column is divided by the sum of
+  the total duration for all codes in that rm.var to arive
+  at "total_percent".  If \code{TRUE} and object is from
+  \code{cm_time2long} the difference for the time span from
+  the \strong{transcript_time_span} of the list used in
+  \code{cm_time2long} are utilized to divide the "total"
+  column. The user may also provide a list of vectors with
+  each vector representing a single total time duration or
+  provide the start and end time of the event.  The user
+  may give input in numeric seconds or in character
+  "hh:mm:ss" form.}
 
   \item{percent}{logical.  If \code{TRUE} output given as
   percent.  If \code{FALSE} the output is proportion.}
@@ -74,6 +89,9 @@ x <- list(
 z <-cm_2long(x)
 
 summary(z)
+summary(z, total.span = FALSE)
+summary(z, total.span = c(0, 3333))
+summary(z, total.span = c("00:01:00", "03:02:00"))
 plot(summary(z))
 
 ## suppress printing measurement units

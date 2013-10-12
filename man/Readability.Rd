@@ -21,7 +21,7 @@
 
   fry(text.var, grouping.var = NULL, auto.label = TRUE,
     rm.incomplete = FALSE, grid = FALSE,
-    div.col = "grey90", ...)
+    div.col = "grey85", ...)
 
   linsear_write(text.var, grouping.var = NULL,
     rm.incomplete = FALSE, ...)

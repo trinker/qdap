@@ -149,11 +149,18 @@ function(time.list, list.var.name = "variable", list.var = TRUE,
         data.frame(code = names(x3)[i], apply(x3[[i]], 2, tonum))
     })
     span <- tonum(x[[1]])
-    span[2] <- span[2] + 1
-    if(start.end) {
-        message(paste0(paste0("start time = ", span[1]), 
-            paste0("; end time = ", span[2])))
-    }
+
+### Section change 10-12-13 Also added to cls to class
+    ##     span[2] <- span[2] + 1
+    ##     if(start.end) {
+    ##         message(paste0(paste0("start time = ", span[1]), 
+    ##             paste0("; end time = ", span[2])))
+    ##     }
+
+    span[2] <- span[2] 
+    cls <- paste0("tspan_", span[2] - span[1])
+####
+
     x3 <- lapply(x3, function(x) {
         if (sum(colSums(x[, -1])) == 0) {
              x[1, ]
@@ -170,6 +177,6 @@ function(time.list, list.var.name = "variable", list.var = TRUE,
         DF <- data.frame(DF, VAR = rep(lv, nrow(DF)))
         colnames(DF)[ncol(DF)] <- list.var.name
     }
-    class(DF) <- c("cmtime", class(DF))
+    class(DF) <- c("cmtime", cls, class(DF))
     DF
 }

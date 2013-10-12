@@ -7,6 +7,16 @@
 #' variable or a list of 1 or more grouping variables.
 #' @param rm.var An optional single vector or list of 1 or 2 of repeated 
 #' measures to aggregate by.
+#' @param total.span logical or an option list of vectors (length 1 or 2) of the 
+#' total duration of the event.  If \code{FALSE} the "total" column is divided 
+#' by the sum of the total duration for all codes in that rm.var to arive at 
+#' "total_percent".  If \code{TRUE} and object is from 
+#' \code{cm_time2long} the difference for the time span from the 
+#' \strong{transcript_time_span} of the list used in \code{cm_time2long} are 
+#' utilized to divide the "total" column. The user may also provide a list of 
+#' vectors with each vector representing a single total time duration or 
+#' provide the start and end time of the event.  The user may give input in 
+#' numeric seconds or in character "hh:mm:ss" form.
 #' @param percent logical.  If \code{TRUE} output given as percent.  If 
 #' \code{FALSE} the output is proportion.
 #' @param digits Integer; number of decimal places to round when printing.  
@@ -62,6 +72,9 @@
 #' z <-cm_2long(x)
 #' 
 #' summary(z)
+#' summary(z, total.span = FALSE)
+#' summary(z, total.span = c(0, 3333))
+#' summary(z, total.span = c("00:01:00", "03:02:00"))
 #' plot(summary(z))
 #' 
 #' ## suppress printing measurement units
@@ -72,8 +85,9 @@
 #' class(z_unclass) <- "data.frame"
 #' z_unclass
 #' }
-summary.cmspans <- function(object, grouping.var = NULL, rm.var = NULL, 
-    percent = TRUE, digits = 2, ...) {
+summary.cmspans <- 
+function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,
+    percent = TRUE, digits = 2,  ...) {
 
     class(object) <- class(object)[!class(object) %in% "cmspans"]
 
@@ -110,8 +124,34 @@ summary.cmspans <- function(object, grouping.var = NULL, rm.var = NULL,
     pn <- sprintf("%s_n", per)
 
     L1 <- split(object, object[, rm.var])
-    output <- lapply(L1, function(a) {
-        L2 <- split(a, a[, group])
+
+### Added 10-12-13
+    ## check the total.span input
+  
+    if (is.logical(total.span) & !isTRUE(total.span)){
+        total.span <- NULL
+    } else {
+        if (is.logical(total.span)){
+    
+            sp.loc <- grepl("spans_", class(object))
+            if (sum(sp.loc) == 0) {
+                total.span <- NULL        
+            } else {
+                spns <- gsub("spans_", "", class(object)[sp.loc])
+                total.span <- lapply(as.list(unlist(strsplit(spns, "\\|\\|"))), as.numeric)
+            }
+        
+        } else {
+            if (!is.list(total.span)) {
+                total.span <- list(total.span)
+            }
+        }
+        total.span <- sapply(total.span, total2tot)
+    }
+###
+
+    output <- lapply(seq_along(L1), function(i) {
+        L2 <- split(L1[[i]], L1[[i]][, group])
         output2 <- lapply(L2, function(b) {      
             diffs <- b[, "end"] - b[, "start"] 
             data.frame(total = sum(diffs), n = length(diffs), ave = mean(diffs), 
@@ -120,11 +160,20 @@ summary.cmspans <- function(object, grouping.var = NULL, rm.var = NULL,
         }) 
         out2 <- do.call(rbind, output2)
         out2 <- data.frame(code = names(L2), out2, row.names = NULL)
-        tot <- sum(out2[, "total"])
+
+#####  Added 10-12-13
+        ## divisor (total time span (external) or total time of codes (summed)
+        if (is.null(total.span)) {
+            tot <- sum(out2[, "total"])
+        } else {
+            tot <- total.span[i]          
+        }
+#####
         out2[, pt] <- (out2[, "total"]/tot) * ifelse(percent, 100, 1)
         out2[, pn] <- (out2[, "n"]/sum(out2[, "n"])) * ifelse(percent, 100, 1)
         out2[, c("code", "total", pt, "n", pn, "ave", "sd", "min", "max")]
     })
+
     out1 <- data.frame(do.call(rbind, output), row.names = NULL)
    
     if(which.cm(object) == "cmtime") {
@@ -197,6 +246,7 @@ print.sum_cmspans <- function(x, digits = NULL, ...) {
     invisible(x)
 }
 
+## helper 
 tred <- function(tmv) {
     tdat <- do.call(rbind, strsplit(as.character(tmv), "\\:"))
     remv <- !apply(tdat, 2, function(z) all(z == "00"))
@@ -207,6 +257,7 @@ tred <- function(tmv) {
     }
 }
 
+## helper to format numbers
 numbformat <- function(b, digits) {
         numformat <- function(val) { 
             sub("^(-?)0.", "\\1.", sprintf(paste0("%.", digits, "f"), val)) 
@@ -215,6 +266,50 @@ numbformat <- function(b, digits) {
     b3 <- numformat(as.numeric(b2))
     ifelse(as.numeric(b3) == 0, "0", as.character(b3))
 }
+
+## helper to convert time spans to diff
+total2tot <- function(x) {
+    if (is.character(x)) {
+ 
+        ## stop if not properly formatted
+        if(!all(sapply(x, timecheck))) stop("format `total.time` in the form \"hh:mm:ss\"")
+
+        if (length(x) == 1) {
+            tot <- hms2sec(x)
+        } else {
+            if (length(x) > 2){
+                warning(paste("`total.time` must be of length 1 or 2:",
+                    "Additional total.time ignored."))
+            }
+            tot <- diff(hms2sec(x[1:2])) 
+        }
+    } else {
+        if (length(x) == 1) {
+            tot <- x
+        } else {
+            if (length(x) > 2){
+                warning(paste("`total.span` must be of length 1 or 2:",
+                    "Additional total.span ignored."))
+            }
+            tot <- diff(x[1:2]) 
+        }              
+    }
+    if (tot < 1) {
+        stop("`total.span` can not be negative")
+    }
+    tot
+}
+
+## time check helper
+timecheck <- function(val) {
+    valp <- unlist(strsplit(val, NULL))
+    t1 <- sum(valp %in% ":") == 2
+    t2 <- length(valp) == 8
+    t3 <- sum(valp %in% 0:9) == 6
+    sum(t1, t2, t3) == 3
+}
+
+
 
 
 #' Plot Summary Stats for a Summary of a cmspans Object
@@ -309,3 +404,4 @@ plot.sum_cmspans <- function(x, digits = 3, sep = ".",
     }
     invisible(out)
 }
+

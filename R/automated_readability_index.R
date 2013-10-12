@@ -317,7 +317,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
 #' @export
 fry <-
 function(text.var, grouping.var = NULL, auto.label = TRUE, 
-    rm.incomplete = FALSE, grid = FALSE, div.col = "grey90", ...) {
+    rm.incomplete = FALSE, grid = FALSE, div.col = "grey85", ...) {
     read.gr <- group <- NULL  
     if(is.null(grouping.var)) {
         G <- "all"

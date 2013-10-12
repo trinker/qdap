@@ -56,7 +56,7 @@
 #' 
 #' Also note that \code{\link[qdap]{polarity}} assumes you've run 
 #' \code{\link[qdap]{sentSplit}}.
-#' @details The equation used by the algorithm to assign value to polarity to 
+#' @details The equation used by the algorithm to assign value to polarity of 
 #' each sentence fist utilizes the sentiment dictionary (Hu and Liu, 2004) to 
 #' tag polarized words.  A context cluster of words is pulled from around this 
 #' polarized word (default 4 words before and two words after) to be considered 
