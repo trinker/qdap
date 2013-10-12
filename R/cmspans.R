@@ -127,26 +127,28 @@ function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,
 
 ### Added 10-12-13
     ## check the total.span input
-  
+ 
     if (is.logical(total.span) & !isTRUE(total.span)){
         total.span <- NULL
     } else {
+        
         if (is.logical(total.span)){
-    
+            
             sp.loc <- grepl("spans_", class(object))
             if (sum(sp.loc) == 0) {
                 total.span <- NULL        
             } else {
                 spns <- gsub("spans_", "", class(object)[sp.loc])
                 total.span <- lapply(as.list(unlist(strsplit(spns, "\\|\\|"))), as.numeric)
+                total.span <- sapply(total.span, total2tot)
             }
         
         } else {
             if (!is.list(total.span)) {
                 total.span <- list(total.span)
             }
+            total.span <- sapply(total.span, total2tot)
         }
-        total.span <- sapply(total.span, total2tot)
     }
 ###
 
@@ -192,6 +194,7 @@ function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,
         paste0("percent_", per), class(out1))
     out1
 }
+
 
 #' Prints a sum_cmspans object
 #' 
