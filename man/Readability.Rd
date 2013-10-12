@@ -19,8 +19,9 @@
   flesch_kincaid(text.var, grouping.var = NULL,
     rm.incomplete = FALSE, ...)
 
-  fry(text.var, grouping.var = NULL, labels = "automatic",
-    rm.incomplete = FALSE, ...)
+  fry(text.var, grouping.var = NULL, auto.label = TRUE,
+    rm.incomplete = FALSE, grid = FALSE,
+    div.col = "grey90", ...)
 
   linsear_write(text.var, grouping.var = NULL,
     rm.incomplete = FALSE, ...)
@@ -43,10 +44,16 @@
   indicating output type. One of "valid" (default and
   congruent with McLaughlin's intent) or "all".}
 
-  \item{labels}{A character vector character string
-  indicating output type. One of \code{"automatic"}
-  (default; adds labels automatically) or \code{"click"}
-  (interactive).}
+  \item{labels}{logical.  If \code{TRUE} labels
+  automatically added.  If \code{FALSE} the user clicks
+  interactively.}
+
+  \item{grid}{logical.  If \code{TRUE} a micro grid is
+  dsicplayed similar to Fry's original depiction, though
+  this makes visualizing more difficult.}
+
+  \item{div.col}{The color of the grade level division
+  lines.}
 }
 \value{
   Returns a dataframe with selected readability statistic

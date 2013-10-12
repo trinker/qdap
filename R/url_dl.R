@@ -29,7 +29,7 @@
 #' url_dl("https://dl.dropboxusercontent.com/u/61803503/qdap.pdf", 
 #'    "http://www.cran.r-project.org/doc/manuals/R-intro.pdf")
 #'
-#' delete(qcv(qdap.pdf, R-intro.pdf))
+#' delete(c("qdap.pdf", "R-intro.pdf"))
 #' }
 url_dl <- 
 function(..., url = 61803503) {

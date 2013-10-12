@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 25.34 25.34 15.79 19.70 22.40 15.00 22.40 19.70 25.34 19.70 16.30
-## [12] 15.00 15.79 15.00 15.79 25.34 19.70 25.34 16.30 15.79
+##  [1] 22.40 19.70 19.70 15.00 19.70 16.30 22.40 25.34 22.40 15.79 15.79
+## [12] 19.70 22.40 15.79 15.79 22.40 19.70 25.34 22.40 15.00
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 25.34 25.34 15.79 19.70 22.40 15.00 22.40 19.70 25.34 19.70 16.30
-## [12] 15.00 15.79 15.00 15.79 25.34 19.70 25.34 16.30 15.79
+##  [1] 22.40 19.70 19.70 15.00 19.70 16.30 22.40 25.34 22.40 15.79 15.79
+## [12] 19.70 22.40 15.79 15.79 22.40 19.70 25.34 22.40 15.00
 ```
 
 
@@ -3297,8 +3297,6 @@ plot(g, layout=layout.auto(g))
 
 <h3 id="word">Extract Words</h3>
 
-This section overviews functions that can extract words and word lists from dialogue text.  The subsections describing function use are in alphabetical order as there is no set chronology for use.
-
 <div class="funs">
 The following functions will be utilized in this section (click to view more):    
 
@@ -3346,6 +3344,8 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="word_list"> - <a href="#word_list">Raw Word Lists/Frequency Counts</a>
 </form>
 </div>
+
+This section overviews functions that can extract words and word lists from dialogue text.  The subsections describing function use are in alphabetical order as there is no set chronology for use.
 
 <h4 id="all_words">Searches Text Column for Words</h4>
 
@@ -6331,6 +6331,8 @@ The following functions will be utilized in this section (click to view more):
 
 </div>
 
+A researcher often needs to quickly gather frequency counts for various words/word types.  qdap offers multiple functions designed to efficiently generate descriptive word statistics by any combination of grouping variables.  Many of the functions also offer proportional usage to more fairly compare between groups.  Additionally, many functions also have plotting methods to better visualize the data that is transformed.
+
 <h4 id="wordstats">Descriptive Word Statistics</h4>
 
 Often a researcher may want to get a general sense of how words are functioning for different grouping variables.  The <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> function enables a quick picture of what is occuring within the data.  The displayed (printed) output is a dataframe, however, the output from word_stats is actually a list.  Use <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>?word_stats</code></a> to learn more.
@@ -6905,7 +6907,7 @@ attr(,"class")
 
 <h4 id="termco">Search For and Count Terms</h4>
 
-The <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> family of functions are some of the most useful qdap functions for quantative discourse analysis.  <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> searches for (an optionally groups) terms and outputs a raw count, percent, and combined (raw/percent) matrix of term counts by grouping variable.  The <a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a> <a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a> <a href="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank"><code>syn</code></a>, <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a>, and <a href="http://trinker.github.io/qdap_dev/spaste.html" target="_blank"><code>spaste</code></a> are complimentary functions that are useful in developing word lists to provide to the <b><font color="green" face="courier new">match.list</font></b>.  
+The <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> family of functions are some of the most useful qdap functions for quantative discourse analysis.  <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> searches for (an optionally groups) terms and outputs a raw count, percent, and combined (raw/percent) matrix of term counts by grouping variable.  The <a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a> <a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a> <a href="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank"><code>syn</code></a>, <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a>, and <a href="http://trinker.github.io/qdap_dev/spaste.html" target="_blank"><code>spaste</code></a> are complementary  functions that are useful in developing word lists to provide to the <b><font color="green" face="courier new">match.list</font></b>.  
 
 The <b><font color="green" face="courier new">match.list</font></b> acts to search for similarly grouped <em>themes</em>.  For example <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font> may be a search for words associated with reading.  It is good practice to name the vectors of words that are stored in the <b><font color="green" face="courier new">match.list</font></b> .  This is the general form for how to set up a <b><font color="green" face="courier new">match.list</font></b>:
 
@@ -6921,7 +6923,7 @@ themes <- list(
 
 It is important to understand how the <b><font color="green" face="courier new">match.list</font></b> is handled by <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a>.  The <b><font color="green" face="courier new">match.list</font></b> is (optionally) case and character sensitive. Spacing is an important way to grab specific words and requires careful thought. For example using <font color="green">"read"</font> will find the words <font color="green">"bread"</font>, <font color="green">"read"</font>, <font color="green">"reading"</font>, and <font color="green">"ready"</font>. If you want to search for just the word <font color="purple">"read"</font> supply a vector of <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font>. Notice the leading and trailing spaces.  A space acts as a boundary where as starting/ending with a nonspace allows for greedy matching that will find words that contain this term.  A leading, trailing or both may be used to control how <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> searches for the supplied terms.  So the reader may ask why not supply one string spaced as <font color="green">" read"</font>?  Keep in mind that <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> would also find the word <font color="purple">"ready"</font>
 
-This section's examples will first view the complimentary functions that augment the *themes* supplied to <b><font color="green" face="courier new">match.list</font></b> and then main <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> function will be explored.
+This section's examples will first view the complementary  functions that augment the *themes* supplied to <b><font color="green" face="courier new">match.list</font></b> and then main <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> function will be explored.
 
 
 <a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a> looks through a text variable (usually the text found in the transcript) and finds/returns a vector of words containing a term(s).
@@ -8123,17 +8125,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##             interval Freq cum.Freq percent cum.percent
-## 1      (-3.54,-2.84]   28       28    0.28        0.28
-## 2      (-2.84,-2.13]  134      162    1.34        1.62
-## 3      (-2.13,-1.42]  603      765    6.03        7.65
-## 4     (-1.42,-0.715] 1615     2380   16.15       23.80
-## 5  (-0.715,-0.00715] 2618     4998   26.18       49.98
-## 6     (-0.00715,0.7] 2626     7624   26.26       76.24
-## 7         (0.7,1.41] 1600     9224   16.00       92.24
-## 8        (1.41,2.12]  606     9830    6.06       98.30
-## 9        (2.12,2.82]  155     9985    1.55       99.85
-## 10       (2.82,3.53]   15    10000    0.15      100.00
+##          interval Freq cum.Freq percent cum.percent
+## 1   (-3.45,-2.71]   27       27    0.27        0.27
+## 2   (-2.71,-1.98]  227      254    2.27        2.54
+## 3   (-1.98,-1.25]  779     1033    7.79       10.33
+## 4  (-1.25,-0.516] 1929     2962   19.29       29.62
+## 5  (-0.516,0.216] 2818     5780   28.18       57.80
+## 6   (0.216,0.949] 2473     8253   24.73       82.53
+## 7    (0.949,1.68] 1290     9543   12.90       95.43
+## 8     (1.68,2.41]  375     9918    3.75       99.18
+## 9     (2.41,3.15]   71     9989    0.71       99.89
+## 10    (3.15,3.88]   11    10000    0.11      100.00
 ```
 
 ```r
@@ -8142,9 +8144,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   29       29      29          29
-## 2     gray   33       62      33          62
-## 3      red   38      100      38         100
+## 1     blue   33       33      33          33
+## 2     gray   36       69      36          69
+## 3      red   31      100      31         100
 ```
 
 ```r
@@ -8554,29 +8556,205 @@ combo_syllable_sum(DATA$state)
 The following functions will be utilized in this section (click to view more):    
 
 <form action="http://trinker.github.io/qdap_dev/automated_readability_index.html" target="_blank">
-    <input type="submit" value="automated_readability_index"><input type="submit" value="coleman_liau"><input type="submit" value="flesch_kincaid"><input type="submit" value="fry"><input type="submit" value="linsear_write"><input type="submit" value="SMOG"> - Readability Measures
+    <input type="submit" value="automated_readability_index"><input type="submit" value="coleman_liau"><input type="submit" value="flesch_kincaid"><input type="submit" value="fry"><input type="submit" value="linsear_write"><input type="submit" value="SMOG"> - <a href="#readability">Readability Measures</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank">
-    <input type="submit" value="dissimilarity"> - Dissimilarity Statistics
+    <input type="submit" value="dissimilarity"> - <a href="#dissimilarity">Dissimilarity</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/diversity.html" target="_blank">
-    <input type="submit" value="diversity"> - Diversity Statistics
+    <input type="submit" value="diversity"> - <a href="#diversity">Diversity Statistics</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/formality.html" target="_blank">
-    <input type="submit" value="formality"> - Formality Score
+    <input type="submit" value="formality"> - <a href="#formality">Formality Score</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank">
-    <input type="submit" value="kullback_leibler"> - Kullback Leibler Statistic
+    <input type="submit" value="kullback_leibler"> - <a href="#kullback">Kullback Leibler Statistic</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/polarity.html" target="_blank">
-    <input type="submit" value="polarity"> - Polarity Score (Sentiment Analysis)
+    <input type="submit" value="polarity"> - <a href="#polarity">Polarity Score (Sentiment Analysis)</a>
 </form>
 </div>
+
+qdap offers a number of word statistics and and scores applied by grouping variable.  Some functions are original to qdap, while others are taken from academic papers.  Complete references for statistics/scores based on others' work are provided in the <a href="http://cran.r-project.org/web/packages/qdap/qdap.pdf">help manual</a> where appropriate.  It is assumed that the reader is familiar, or can become acquainted, with the theory and methods for qdap functions based on the work of others.  For qdap functions that are original to qdap a more narrow description of the use and theory is provided.
+
+<h4 id="readability">Readability Scores</h4>
+
+Readability scores were originally designed to measure the defficulty of text.  Scores are generally based on, number of words, syllables, polly-syllables amnd word length.  While these scores are not specifically designed for, or tested on, speech, they can be useful indicators of speech complexity.  The following score examples demonstrate the use of the following readability scores:
+
+1. <a href="#ari">Automated Readability Index</a>    
+2. <a href="#coleman">Coleman Liau</a>    
+3. <a href="#smog">SMOG</a>    
+4. <a href="#flesch">Flesch Kincaid</a>     
+5. <a href="#fry">Fry</a>    
+6.  <a href="#linwr">Linsear Write</a>    
+
+
+<p id="ari"><font size="5" color="orange">&diams;</font> **Automated Readability Index**<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+with(rajSPLIT, automated_readability_index(dialogue, list(sex, fam.aff)))
+```
+
+
+<pre><code>  sex&fam.aff word.count sentence.count character.count Aut._Read._Index
+1       f.cap       9458            929           37474              2.3
+2      f.mont         28              4              88             -3.1
+3       m.cap       1204            133            4615              1.2
+4     m.escal       3292            262           13406              4.0
+5      m.mont       6356            555           26025              3.6
+6      m.none       3233            250           13527              4.7
+7   none.none        156             12             665              5.1
+</code></pre>
+
+<p id="coleman"><font size="5" color="orange">&diams;</font> **Coleman Liau**<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+with(rajSPLIT, coleman_liau(dialogue, list(fam.aff, act)))
+```
+
+
+<pre><code>  fam.aff&act word.count sentence.count character.count Coleman_Liau
+1       cap.1       2636            272           10228          4.0
+2       cap.2       2113            193            8223          4.4
+3       cap.3       3540            339           14183          4.9
+4       cap.4       2159            232            8620          4.5
+5       cap.5        214             26             835          3.5
+6     escal.1        748             36            3259          8.4
+</code></pre>
+
+<p id="smog"><font size="5" color="orange">&diams;</font> **SMOG**<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+with(rajSPLIT, SMOG(dialogue, list(person, act)))
+```
+
+
+<pre><code>         person&act word.count sentence.count polysyllable.count SMOG
+1        Benvolio.1        621             51                 25  7.1
+2         Capulet.1        736             72                 35  7.1
+3         Capulet.3        749             69                 28  6.8
+4         Capulet.4        569             73                 25  6.5
+5  Friar Laurence.2        699             42                 36  8.4
+6  Friar Laurence.3        675             61                 32  7.3
+7  Friar Laurence.4        656             42                 25  7.5
+8  Friar Laurence.5        696             54                 32  7.5
+9          Juliet.2       1289            113                 48  6.9
+10         Juliet.3       1722            152                 64  6.8
+11         Juliet.4        932             61                 37  7.6
+12   Lady Capulet.3        393             39                 15  6.7
+13       Mercutio.2        964             82                 43  7.3
+14       Mercutio.3        578             54                 19  6.5
+15          Nurse.1        599             59                 20  6.5
+16          Nurse.2        779             76                 24  6.3
+17          Nurse.3        579             68                 14  5.7
+18          Nurse.4        250             50                  9  5.6
+19          Romeo.1       1158            113                 48  6.9
+20          Romeo.2       1289            109                 46  6.8
+21          Romeo.3        969             87                 48  7.4
+22          Romeo.5       1216            103                 52  7.2
+</code></pre>
+
+<p id="flesch"><font size="5" color="orange">&diams;</font> **Flesch Kincaid**<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+with(rajSPLIT, flesch_kincaid(dialogue, list(sex, fam.aff)))
+```
+
+
+<pre><code>  sex&fam.aff word.count sentence.count syllable.count FK_grd.lvl FK_read.ease
+1       f.cap       9458            929          11641        2.9       92.375
+2      f.mont         28              4             30       -0.2      109.087
+3       m.cap       1204            133           1452        2.2       95.621
+4     m.escal       3292            262           4139        4.1       87.715
+5      m.mont       6356            555           7965        3.7       89.195
+6      m.none       3233            250           4097        4.4       86.500
+7   none.none        156             12            195        4.2       87.890
+</code></pre>
+
+Note that the Fry score is a graphical display, rather than text as the other readability scores are.  This is in keeping with the original procedures outlined by Fry.
+
+<p id="fry"><font size="5" color="orange">&diams;</font> **Fry**<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+with(rajSPLIT, fry(dialogue, list(sex, fam.aff)))
+```
+
+![plot of chunk unnamed-chunk-184](figure/unnamed-chunk-184.png) 
+
+
+<p id="linwr"><font size="5" color="orange">&diams;</font> **Linsear Write**<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+with(rajSPLIT, linsear_write(dialogue, person))
+```
+
+
+<pre><code>           person sent.per.100 hard_easy_sum Linsear_Write
+1       Balthasar        9.556           110          4.76
+2        Benvolio        4.143           108         12.03
+3         Capulet       11.469           115          4.01
+4          Chorus        3.071           104         15.93
+5  First Watchman       14.222           114          3.01
+6  Friar Laurence        4.263           108         11.67
+7         Gregory       11.000           100          3.55
+8          Juliet        3.446           110         14.96
+9    Lady Capulet        7.267           110          6.57
+10       Mercutio        5.625           102          8.07
+11       Montague        6.000           114          8.50
+12          Nurse       12.098           102          3.22
+13          Paris        9.091           110          5.05
+14          Peter       10.357           110          4.31
+15         Prince       10.842           110          4.07
+16          Romeo        9.250           114          5.16
+17        Sampson        9.421           107          4.68
+18        Servant        9.667           104          4.38
+19         Tybalt        9.591           112          4.84
+</code></pre>
+
+
+
+<h4 id="dissimilarity">Dissimilarity</h4>
+
+
+<h4 id="diversity">Diversity Statistics</h4>
+
+
+<h4 id="kullback">Kullback Leibler Statistic</h4>
+
+
+<h4 id="polarity">Polarity Score (Sentiment Analysis)</h4>
+
+$$
+\delta=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot w(-1)^{\sum{x_i^{N}}})}}{n}
+$$
+
+Where:
+
+$$
+x_i^{A}=\sum{(w_{neg}\cdot x_i^{a})}
+$$
+<br>
+$$
+x_i^{D}=\sum{((1 - w_{neg})\cdot x_i^{a} + x_i^{d})}
+$$
+<br>
+$$
+w_{neg}=\left\{\begin{array}{cc}
+1 & \sum{x_i^{N}}>0         \\\\ 
+0 & \sum{x_i^{N}}=0
+\end{array}\right.
+$$
 
 <h3 id="visualization">Visualizing Discourse Data</h3>
 
@@ -8616,6 +8794,9 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="word_network_plot"> - Word Network Plot
 </form>
 </div>
+
+
+
 
 <h3 id="id">ID Sentences</h3>
 

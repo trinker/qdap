@@ -309,13 +309,15 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
 #' grouping variable(s).
 #' 
 #' @rdname Readability
-#' @param labels  A character vector character string indicating output type. 
-#' One of \code{"automatic"} (default; adds labels automatically) or 
-#' \code{"click"} (interactive). 
+#' @param labels  logical.  If \code{TRUE} labels automatically added.  If 
+#' \code{FALSE} the user clicks interactively.
+#' @param grid logical.  If \code{TRUE} a micro grid is dsicplayed similar to 
+#' Fry's original depiction, though this makes visualizing more difficult.
+#' @param div.col The color of the grade level division lines.
 #' @export
 fry <-
-function(text.var, grouping.var = NULL, labels = "automatic", 
-    rm.incomplete = FALSE, ...) {
+function(text.var, grouping.var = NULL, auto.label = TRUE, 
+    rm.incomplete = FALSE, grid = FALSE, div.col = "grey90", ...) {
     read.gr <- group <- NULL  
     if(is.null(grouping.var)) {
         G <- "all"
@@ -394,25 +396,27 @@ function(text.var, grouping.var = NULL, labels = "automatic",
     axis(1, at = seq(108, 182, by = 4), tcl = -1.1, labels = FALSE)
     axis(2, at = 2:25, labels = TRUE)
     axis(4, at = 2:25, labels = TRUE)
-    grid(nx = 74, ny = 46, lty = "solid", col = "gold")
-    grid(nx = 37, ny = 23, lty = "solid", col = "gray65")
+    if (grid){
+        grid(nx = 74, ny = 46, lty = "solid", col = "gold")
+        grid(nx = 37, ny = 23, lty = "solid", col = "gray65")
+    }
     box()
-    segments(108, 9.97, 133.9, 25, lwd = 2, col = "darkgreen")
-    segments(108, 7.7, 142.1, 25, lwd = 2, col = "darkgreen")
-    segments(108, 6.4, 147.8, 25, lwd = 2, col = "darkgreen")
-    segments(108, 5.61, 155, 25, lwd = 2, col = "darkgreen")
-    segments(108, 5.1, 160, 25, lwd = 2, col = "darkgreen")
-    segments(108, 3.8, 160.8, 25, lwd = 2, col = "darkgreen")
-    segments(111.5, 2, 167.5, 25, lwd = 2, col = "darkgreen")
-    segments(123, 2, 169, 25, lwd = 2, col = "darkgreen")
-    segments(136.3, 2, 169, 25, lwd = 2, col = "darkgreen")
-    segments(143.3, 2, 173.5, 25, lwd = 2, col = "darkgreen")
-    segments(148.15, 2, 178.2, 25, lwd = 2, col = "darkgreen")
-    segments(155.6, 2, 178.5, 25, lwd = 2, col = "darkgreen")
-    segments(161.9, 2, 178.4, 25, lwd = 2, col = "darkgreen")
-    segments(168.2, 2, 178.2, 25, lwd = 2, col = "darkgreen")
-    segments(173.9, 2, 178.7, 25, lwd = 2, col = "darkgreen")
-    segments(179.1, 2, 181.25, 25, lwd = 2, col = "darkgreen")
+    segments(108, 9.97, 133.9, 25, lwd = 2, col = div.col)
+    segments(108, 7.7, 142.1, 25, lwd = 2, col = div.col)
+    segments(108, 6.4, 147.8, 25, lwd = 2, col = div.col)
+    segments(108, 5.61, 155, 25, lwd = 2, col = div.col)
+    segments(108, 5.1, 160, 25, lwd = 2, col = div.col)
+    segments(108, 3.8, 160.8, 25, lwd = 2, col = div.col)
+    segments(111.5, 2, 167.5, 25, lwd = 2, col = div.col)
+    segments(123, 2, 169, 25, lwd = 2, col = div.col)
+    segments(136.3, 2, 169, 25, lwd = 2, col = div.col)
+    segments(143.3, 2, 173.5, 25, lwd = 2, col = div.col)
+    segments(148.15, 2, 178.2, 25, lwd = 2, col = div.col)
+    segments(155.6, 2, 178.5, 25, lwd = 2, col = div.col)
+    segments(161.9, 2, 178.4, 25, lwd = 2, col = div.col)
+    segments(168.2, 2, 178.2, 25, lwd = 2, col = div.col)
+    segments(173.9, 2, 178.7, 25, lwd = 2, col = div.col)
+    segments(179.1, 2, 181.25, 25, lwd = 2, col = div.col)
     x1 <- c(108, 108, 128)
     y1 <- c(4.2, 2, 2)
     polygon(x1, y1, col = "darkblue", border = "darkblue")
@@ -440,11 +444,12 @@ function(text.var, grouping.var = NULL, labels = "automatic",
         col = "red"))
     with(DF6, points(syll.count, ave.sent.per.100, pch = 3, cex = 3, 
         col = "black"))   
-    switch(labels, 
-        click = {with(DF6, identify(syll.count, ave.sent.per.100, group))}, 
-        automatic = {with(DF6, text(syll.count, ave.sent.per.100, 
-        labels = group, adj = c(1, -0.5)))}
-    )      
+    if (!auto.label) {
+        with(DF6, identify(syll.count, ave.sent.per.100, group))
+    } else {
+        with(DF6, text(syll.count, ave.sent.per.100, labels = group, 
+            adj = c(1, -0.5)))
+    }      
     names(DF6) <- c(G, "ave.syll.per.100", "ave.sent.per.100")
     invisible(list(SENTENCES_USED = DF5, SENTENCE_AVERAGES = DF6))
 }
