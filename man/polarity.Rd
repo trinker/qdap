@@ -68,15 +68,17 @@
 
   \item{pos.weights}{A vector of weights to weight each
   positive word by. Length must be equal to length of
-  \code{postives} or 1 (if 1 weight will be recycled).}
+  \code{postives} or length 1 (if 1 weight will be
+  recycled).}
 
   \item{neg.weights}{A vector of weights to weight each
   negative word by. Length must be equal to length of
-  \code{negatives} or 1 (if 1 weight will be recycled).}
+  \code{negatives} or length 1 (if 1 weight will be
+  recycled).}
 
-  \item{envir}{logical.  If \code{TRUE} a an lookup table
-  (a dataframe within an environment) is produces rather
-  than a data.frame.}
+  \item{envir}{logical.  If \code{TRUE} a lookup table (a
+  dataframe within an environment) is produced rather than
+  a data.frame.}
 }
 \value{
   Returns a list of: \item{all}{A dataframe of scores per
@@ -86,8 +88,17 @@
   positive \item neg.words - words considered negative
   \item text.var - the text variable} } \item{group}{A
   dataframe with the average polarity score by grouping
-  variable.} \item{digits}{integer value od number of
-  digits to display; mostly internal use}
+  variable: \itemize{ \item group.var - the grouping
+  variable \item total.sentences - Total sentences spoken.
+  \item total.words - Total words used.  \item ave.polarity
+  - The sum of all polarity scores for that group divided
+  by number of sentences spoken.  \item sd.polarity - The
+  standard deviation of that group's sentence level
+  polarity scores.  \item stan.mean.polarity - A
+  standardized polarity score calculated by taking the
+  average polarity score for a group divided by the
+  standard deviation.} } \item{digits}{integer value od
+  number of digits to display; mostly internal use}
 }
 \description{
   \code{polarity} - Approximate the sentiment (polarity) of

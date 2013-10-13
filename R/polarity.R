@@ -40,8 +40,15 @@
 #'   \item  neg.words - words considered negative
 #'   \item  text.var - the text variable}
 #' }
-#' \item{group}{A dataframe with the average polarity score by grouping 
-#' variable.}
+#' \item{group}{A dataframe with the average polarity score by grouping variable:
+#' \itemize{
+#'   \item  group.var - the grouping variable
+#'   \item  total.sentences - Total sentences spoken.
+#'   \item  total.words - Total words used.
+#'   \item  ave.polarity - The sum of all polarity scores for that group divided by number of sentences spoken.
+#'   \item  sd.polarity - The standard deviation of that group's sentence level polarity scores.
+#'   \item  stan.mean.polarity - A standardized polarity score calculated by taking the average polarity score for a group divided by the standard deviation.}
+#' }
 #' \item{digits}{integer value od number of digits to display; mostly internal 
 #' use} 
 #' @seealso \url{https://github.com/trestletech/Sermon-Sentiment-Analysis}
@@ -282,13 +289,13 @@ polarity <- function (text.var, grouping.var = NULL,
 #' @param positives A character vector of positive words.
 #' @param negatives A character vector of negative words.
 #' @param pos.weights A vector of weights to weight each positive word by.  
-#' Length must be equal to length of \code{postives} or 1 (if 1 weight will be 
-#' recycled). 
+#' Length must be equal to length of \code{postives} or length 1 (if 1 weight 
+#' will be recycled). 
 #' @param neg.weights A vector of weights to weight each negative word by.  
-#' Length must be equal to length of \code{negatives} or 1 (if 1 weight will be 
-#' recycled). 
-#' @param envir logical.  If \code{TRUE} a an lookup table (a dataframe within 
-#' an environment) is produces rather than a data.frame.
+#' Length must be equal to length of \code{negatives} or length 1 (if 1 weight 
+#' will be recycled). 
+#' @param envir logical.  If \code{TRUE} a lookup table (a dataframe within 
+#' an environment) is produced rather than a data.frame.
 #' @export
 #' @rdname polarity
 polarity_frame <- function(positives, negatives, pos.weights = 1, 
@@ -505,4 +512,3 @@ polarity_helper <- function(tv, hit, polenv, altenv, count, amp.weight,
     ## return the word group score and the polarity of the the polarized word
     list(x = (1 + (D + A)) * (p * (-1)^(2 + n)), y = p, z = targ)
 }
-
