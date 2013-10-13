@@ -2521,7 +2521,7 @@ Often a research will want to know which codes are clustering closer to other co
 
 The researcher may also access the means, standard deviations and number of codes by indexing the list output for each transcript.  This distance measure compliments the Gantt plot.  
 
-Note that the argument <b><font color="green" face="courier new">causal = FALSE</font></b> (the defualt) does not assume Code A comes before Code B whereas <b><font color="green" face="courier new">causal = TRUE</font></b> assumes the first code precedes the second code.  Generally, setting <b><font color="green" face="courier new">causal = FALSE</font></b> wil result in larger mean of differences and accompanying standardized values.  Also note that rownames are the first code and column names are the second comparison code.  The values for Code A compared to Code B will not be the same as Code B compared to Code A.  This is because each span (start and end) for Code A is compared to the nearest start or end for Code B.  So for example there may be 6 Code A spans and thus six differences between A and B, whereas Code B may only have 3 spans and thus three differences between B and A.  This fact alone will lead to differences in A compared to B versus B compared to A.
+Note that the argument <b><font color="green" face="courier new">causal = FALSE</font></b> (the defualt) does not assume Code A comes before Code B whereas <b><font color="green" face="courier new">causal = TRUE</font></b> assumes the first code precedes the second code.  Generally, setting <b><font color="green" face="courier new">causal = FALSE</font></b> wil result in larger mean of differences and accompanying standardized values.  Also note that rownames are the first code and column names are the second comparison code.  The values for Code A compared to Code B will not be the same as Code B compared to Code A.  This is because, unlike a true distance measure, `r FUN("cm_distance")`'s matrix is assymetrical.  `r FUN("cm_distance")`computes the distance by taking each span (start and end) for Code A and comparing it to the nearest start or end for Code B.  So for example there may be 6 Code A spans and thus six differences between A and B, whereas Code B may only have 3 spans and thus three differences between B and A.  This fact alone will lead to differences in A compared to B versus B compared to A.  
 
 
 `r FT(orange, 5, text="&diams;")` `r FUN("cm_distance")` - *Initial Data Setup* `r FT(orange, 5, text="&diams;")`
@@ -3757,7 +3757,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank">
-    <input type="submit" value="kullback_leibler"> - `r HR("#kullback", "Kullback Leibler Statistic")`
+    <input type="submit" value="kullback_leibler"> - `r HR("#kullback", "Kullback-Leibler divergence ")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/polarity.html" target="_blank">
@@ -3901,15 +3901,77 @@ with(rajSPLIT, linsear_write(dialogue, person))
 </code></pre>
 
 
-
 <h4 id="dissimilarity">Dissimilarity</h4>
+
+*Dissimilarity* is another term for distance that is often used in text analysis to measure the pairwise proximity of grouping variables.  The qdap `r FUN("dissimilarity")` function is a wrapper for the R stats package's `r HR("http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html", "dist")` function designed to handle text.  `r FUN("dissimilarity")` takes all the same <b><font color="green" face="courier new">method</font></b> types as `r HR("http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html", "dist")` but also includes the defualt <b><font color="green" face="courier new">method = "prop"</font></b> (1 - "binary") that is focused on the similarity between grouping variables.
+
+<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("dissimilarity")` Examples**`r FT(orange, 5, text="&diams;")`</p >
+
+```{r, comment=NA}
+with(DATA, dissimilarity(state, list(sex, adult)))
+with(DATA, dissimilarity(state, person))
+with(DATA, dissimilarity(state, person, method = "minkowski"))
+```
+
+```{r eval=FALSE}
+dat <- pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY),]
+with(dat, dissimilarity(dialogue, list(person, time)))
+```
+
+<pre><code>         OBAMA.1 OBAMA.2 OBAMA.3 ROMNEY.1 ROMNEY.2
+OBAMA.2    0.340                                  
+OBAMA.3    0.300   0.341                          
+ROMNEY.1   0.340   0.287   0.258                  
+ROMNEY.2   0.291   0.349   0.296    0.321         
+ROMNEY.3   0.264   0.297   0.329    0.290    0.338
+</code></pre>
+
+<h4 id="kullback">Kullback-Leibler divergence </h4>
+
+The Kullback Leibler is often used as a measure of distance, though the matrix is assymetrical.  qdap's `r FUN(""kullback_leibler")` compares the differences between two probability distributions and often leads to results similar to those from `r FUN("dissimilarity")`.  Note that unlike many other qdap functions the user must either supply a word frequency matric (`r FUN("wfm")`) to  <b><font color="green" face="courier new">x</font></b> some other matrix format.  This allows the function to be flexibly used with `r FUN("termco")` and other functions that produce count matrices.
+
+```{r include = FALSE}
+dat <- pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY),]
+KL <- (kullback_leibler(with(dat, wfm(dialogue, list(person, time)))))
+```
+
+<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("kullback_leibler")` Example** - *Compare to `r FUN("dissimilarity")`*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r eval = FALSE}
+dat <- pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY),]
+(KL <- (kullback_leibler(with(dat, wfm(dialogue, list(person, time))))))
+```
+
+<pre><code>         OBAMA.1 OBAMA.2 OBAMA.3 ROMNEY.1 ROMNEY.2 ROMNEY.3
+OBAMA.1    0.000   0.237   0.221    0.195    0.250    0.264
+OBAMA.2    0.104   0.000   0.161    0.148    0.142    0.223
+OBAMA.3    0.119   0.152   0.000    0.142    0.180    0.168
+ROMNEY.1   0.207   0.297   0.279    0.000    0.216    0.224
+ROMNEY.2   0.194   0.195   0.262    0.116    0.000    0.234
+ROMNEY.3   0.160   0.182   0.141    0.101    0.140    0.000
+</code></pre>
+
+```{r, fig.height = 4, fig.width = 5}
+plot(KL, high = "red", values = TRUE)
+```
 
 
 <h4 id="diversity">Diversity Statistics</h4>
 
+Diversity, as applied to dialogue, is a measure of the richness of language being used.  Specifically, it measures how expansive the vocabulary is while taking into account the number of total words used and the different words being used.  qdap's `r FUN("diversity")` function provdes output for the Simpson, Shannon, Collision, Berger Parker, and Brillouin measures.
 
-<h4 id="kullback">Kullback Leibler Statistic</h4>
+<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("diversity")` Example**`r FT(orange, 5, text="&diams;")`</p >
+```{r, comment =NA}
+(div.mod <- with(mraja1spl, diversity(dialogue, person)))
+```
 
+<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("diversity")` Plot Method**`r FT(orange, 5, text="&diams;")`</p >
+
+```{r, fig.width = 10, fig.height = 5}
+plot(div.mod, low = "yellow", grid = FALSE, values = TRUE)
+```
+
+<h4 id="formality">Formality</h4>
 
 <h4 id="polarity">Polarity Score (Sentiment Analysis)</h4>
 
@@ -3950,7 +4012,7 @@ w_{neg}=\left\{\begin{array}{cc}
 \end{array}\right.
 $$
 
-The following examples demonstrate how the `r FUN("polarity")` and `r FUN("polarity_frame", "polarity")` functions operate.  Here the polarity for the `r FUN2("mraja1spl")` data set (Act 1 of Romeo and Juliet).  The gender, family affiliation and binary died/didn't die are used as the grouping variables.
+The following examples demonstrate how the `r FUN("polarity")` and `r FUN("polarity_frame", "polarity")` functions operate.  Here the polarity for the `r FUN("mraja1spl")` data set (Act 1 of Romeo and Juliet).  The gender, family affiliation and binary died/didn't die are used as the grouping variables.
 
 <p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity")` Example**`r FT(orange, 5, text="&diams;")`</p >
 
@@ -4062,11 +4124,11 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/end_mark.html" target="_blank">
-    <input type="submit" value="end_mark"> - Sentence End marks
+    <input type="submit" value="end_mark"> - Sentence End Marks
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/imperative.html" target="_blank">
-    <input type="submit" value="imperative"> - Intuitively Remark Sentences as Imperative
+    <input type="submit" value="imperative"> - Detect and Remark Imperative Sentences
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/NAer.html" target="_blank">
@@ -4307,6 +4369,5 @@ options(markdown.HTML.stylesheet = "css/style.css")
 ```{r, echo=FALSE, results='asis'}
 bibliography("html") 
 ```
-
 
 

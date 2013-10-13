@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 25.34 22.40 15.79 15.79 25.34 25.34 19.70 15.79 25.34 15.79 15.00
-## [12] 16.30 25.34 16.30 16.30 15.00 19.70 22.40 19.70 25.34
+##  [1] 25.34 16.30 15.79 22.40 22.40 22.40 25.34 16.30 22.40 15.79 15.79
+## [12] 25.34 25.34 25.34 25.34 15.79 16.30 25.34 19.70 16.30
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 25.34 22.40 15.79 15.79 25.34 25.34 19.70 15.79 25.34 15.79 15.00
-## [12] 16.30 25.34 16.30 16.30 15.00 19.70 22.40 19.70 25.34
+##  [1] 25.34 16.30 15.79 22.40 22.40 22.40 25.34 16.30 22.40 15.79 15.79
+## [12] 25.34 25.34 25.34 25.34 15.79 16.30 25.34 19.70 16.30
 ```
 
 
@@ -6129,7 +6129,7 @@ Often a research will want to know which codes are clustering closer to other co
 
 The researcher may also access the means, standard deviations and number of codes by indexing the list output for each transcript.  This distance measure compliments the Gantt plot.  
 
-Note that the argument <b><font color="green" face="courier new">causal = FALSE</font></b> (the defualt) does not assume Code A comes before Code B whereas <b><font color="green" face="courier new">causal = TRUE</font></b> assumes the first code precedes the second code.  Generally, setting <b><font color="green" face="courier new">causal = FALSE</font></b> wil result in larger mean of differences and accompanying standardized values.  Also note that rownames are the first code and column names are the second comparison code.  The values for Code A compared to Code B will not be the same as Code B compared to Code A.  This is because each span (start and end) for Code A is compared to the nearest start or end for Code B.  So for example there may be 6 Code A spans and thus six differences between A and B, whereas Code B may only have 3 spans and thus three differences between B and A.  This fact alone will lead to differences in A compared to B versus B compared to A.
+Note that the argument <b><font color="green" face="courier new">causal = FALSE</font></b> (the defualt) does not assume Code A comes before Code B whereas <b><font color="green" face="courier new">causal = TRUE</font></b> assumes the first code precedes the second code.  Generally, setting <b><font color="green" face="courier new">causal = FALSE</font></b> wil result in larger mean of differences and accompanying standardized values.  Also note that rownames are the first code and column names are the second comparison code.  The values for Code A compared to Code B will not be the same as Code B compared to Code A.  This is because, unlike a true distance measure, <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a>'s matrix is assymetrical.  <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a>computes the distance by taking each span (start and end) for Code A and comparing it to the nearest start or end for Code B.  So for example there may be 6 Code A spans and thus six differences between A and B, whereas Code B may only have 3 spans and thus three differences between B and A.  This fact alone will lead to differences in A compared to B versus B compared to A.  
 
 
 <font size="5" color="orange">&diams;</font> <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a> - *Initial Data Setup* <font size="5" color="orange">&diams;</font>
@@ -8117,17 +8117,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##         interval Freq cum.Freq percent cum.percent
-## 1  (-3.43,-2.72]   21       21    0.21        0.21
-## 2     (-2.72,-2]  203      224    2.03        2.24
-## 3     (-2,-1.28]  775      999    7.75        9.99
-## 4  (-1.28,-0.56] 1835     2834   18.35       28.34
-## 5  (-0.56,0.159] 2766     5600   27.66       56.00
-## 6  (0.159,0.878] 2479     8079   24.79       80.79
-## 7    (0.878,1.6] 1393     9472   13.93       94.72
-## 8     (1.6,2.32]  428     9900    4.28       99.00
-## 9    (2.32,3.03]   91     9991    0.91       99.91
-## 10   (3.03,3.75]    9    10000    0.09      100.00
+##          interval Freq cum.Freq percent cum.percent
+## 1   (-3.79,-2.98]   20       20    0.20        0.20
+## 2   (-2.98,-2.17]  132      152    1.32        1.52
+## 3   (-2.17,-1.37]  697      849    6.97        8.49
+## 4  (-1.37,-0.561] 1956     2805   19.56       28.05
+## 5  (-0.561,0.245] 3150     5955   31.50       59.55
+## 6    (0.245,1.05] 2582     8537   25.82       85.37
+## 7     (1.05,1.86] 1165     9702   11.65       97.02
+## 8     (1.86,2.66]  265     9967    2.65       99.67
+## 9     (2.66,3.47]   31     9998    0.31       99.98
+## 10    (3.47,4.28]    2    10000    0.02      100.00
 ```
 
 ```r
@@ -8136,9 +8136,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   28       28      28          28
-## 2     gray   36       64      36          64
-## 3      red   36      100      36         100
+## 1     blue   23       23      23          23
+## 2     gray   39       62      39          62
+## 3      red   38      100      38         100
 ```
 
 ```r
@@ -8564,7 +8564,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank">
-    <input type="submit" value="kullback_leibler"> - <a href="#kullback">Kullback Leibler Statistic</a>
+    <input type="submit" value="kullback_leibler"> - <a href="#kullback">Kullback-Leibler divergence </a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/polarity.html" target="_blank">
@@ -8718,15 +8718,155 @@ with(rajSPLIT, linsear_write(dialogue, person))
 </code></pre>
 
 
-
 <h4 id="dissimilarity">Dissimilarity</h4>
+
+*Dissimilarity* is another term for distance that is often used in text analysis to measure the pairwise proximity of grouping variables.  The qdap <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> function is a wrapper for the R stats package's <a href="http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html">dist</a> function designed to handle text.  <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> takes all the same <b><font color="green" face="courier new">method</font></b> types as <a href="http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html">dist</a> but also includes the defualt <b><font color="green" face="courier new">method = "prop"</font></b> (1 - "binary") that is focused on the similarity between grouping variables.
+
+<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> Examples**<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+with(DATA, dissimilarity(state, list(sex, adult)))
+```
+
+```
+      f.0   f.1   m.0
+f.1 0.067            
+m.0 0.029 0.000      
+m.1 0.167 0.111 0.000
+```
+
+```r
+with(DATA, dissimilarity(state, person))
+```
+
+```
+            greg researcher sally   sam
+researcher 0.000                       
+sally      0.037      0.067            
+sam        0.160      0.000 0.050      
+teacher    0.000      0.111 0.167 0.000
+```
+
+```r
+with(DATA, dissimilarity(state, person, method = "minkowski"))
+```
+
+```
+            greg researcher sally   sam
+researcher 5.477                       
+sally      5.657      3.742            
+sam        5.568      4.796 4.796      
+teacher    5.292      2.828 3.162 4.583
+```
+
+
+
+```r
+dat <- pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY),]
+with(dat, dissimilarity(dialogue, list(person, time)))
+```
+
+
+<pre><code>         OBAMA.1 OBAMA.2 OBAMA.3 ROMNEY.1 ROMNEY.2
+OBAMA.2    0.340                                  
+OBAMA.3    0.300   0.341                          
+ROMNEY.1   0.340   0.287   0.258                  
+ROMNEY.2   0.291   0.349   0.296    0.321         
+ROMNEY.3   0.264   0.297   0.329    0.290    0.338
+</code></pre>
+
+<h4 id="kullback">Kullback-Leibler divergence </h4>
+
+The Kullback Leibler is often used as a measure of distance, though the matrix is assymetrical.  qdap's 
+
+```
+
+Error in base::parse(text = code, srcfile = NULL) : 
+  1:7: unexpected symbol
+1: FUN(""kullback_leibler
+          ^
+
+```
+
+ compares the differences between two probability distributions and often leads to results similar to those from <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a>.  Note that unlike many other qdap functions the user must either supply a word frequency matric (<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>) to  <b><font color="green" face="courier new">x</font></b> some other matrix format.  This allows the function to be flexibly used with <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> and other functions that produce count matrices.
+
+
+
+
+<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank"><code>kullback_leibler</code></a> Example** - *Compare to <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a>*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+dat <- pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY),]
+(KL <- (kullback_leibler(with(dat, wfm(dialogue, list(person, time))))))
+```
+
+
+<pre><code>         OBAMA.1 OBAMA.2 OBAMA.3 ROMNEY.1 ROMNEY.2 ROMNEY.3
+OBAMA.1    0.000   0.237   0.221    0.195    0.250    0.264
+OBAMA.2    0.104   0.000   0.161    0.148    0.142    0.223
+OBAMA.3    0.119   0.152   0.000    0.142    0.180    0.168
+ROMNEY.1   0.207   0.297   0.279    0.000    0.216    0.224
+ROMNEY.2   0.194   0.195   0.262    0.116    0.000    0.234
+ROMNEY.3   0.160   0.182   0.141    0.101    0.140    0.000
+</code></pre>
+
+
+```r
+plot(KL, high = "red", values = TRUE)
+```
+
+![plot of chunk unnamed-chunk-191](figure/unnamed-chunk-191.png) 
+
 
 
 <h4 id="diversity">Diversity Statistics</h4>
 
+Diversity, as applied to dialogue, is a measure of the richness of language being used.  Specifically, it measures how expansive the vocabulary is while taking into account the number of total words used and the different words being used.  qdap's <a href="http://trinker.github.io/qdap_dev/diversity.html" target="_blank"><code>diversity</code></a> function provdes output for the Simpson, Shannon, Collision, Berger Parker, and Brillouin measures.
 
-<h4 id="kullback">Kullback Leibler Statistic</h4>
+<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/diversity.html" target="_blank"><code>diversity</code></a> Example**<font size="5" color="orange">&diams;</font></p >
 
+```r
+(div.mod <- with(mraja1spl, diversity(dialogue, person)))
+```
+
+```
+           person   wc simpson shannon collision berger_parker brillouin
+1         Abraham   24   0.942   2.405     2.331         0.167     1.873
+2        Benvolio  621   0.994   5.432     4.874         0.037     4.809
+3         Capulet  736   0.993   5.358     4.805         0.027     4.813
+4   First Citizen   16   0.958   2.393     2.287         0.188     1.718
+5   First Servant   69   0.983   3.664     3.464         0.072     2.961
+6         Gregory  149   0.991   4.405     4.141         0.054     3.686
+7          Juliet  206   0.993   4.676     4.398         0.039     3.971
+8    Lady Capulet  288   0.993   4.921     4.519         0.042     4.231
+9   Lady Montague   28   0.995   3.233     3.199         0.071     2.375
+10       Mercutio  549   0.991   5.302     4.564         0.051     4.663
+11       Montague  217   0.993   4.805     4.496         0.041     4.063
+12          Nurse  599   0.991   5.111     4.561         0.040     4.588
+13          Paris   32   0.990   3.276     3.194         0.094     2.449
+14         Prince  167   0.990   4.463     4.161         0.048     3.757
+15          Romeo 1163   0.994   5.650     4.917         0.026     5.124
+16        Sampson  259   0.987   4.531     4.106         0.066     3.947
+17 Second Capulet   17   0.963   2.425     2.371         0.118     1.767
+18 Second Servant   41   0.993   3.532     3.457         0.073     2.687
+19        Servant  184   0.987   4.389     4.023         0.060     3.744
+20         Tybalt  160   0.993   4.539     4.345         0.044     3.801
+```
+
+
+<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/diversity.html" target="_blank"><code>diversity</code></a> Plot Method**<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+plot(div.mod, low = "yellow", grid = FALSE, values = TRUE)
+```
+
+![plot of chunk unnamed-chunk-193](figure/unnamed-chunk-193.png) 
+
+
+<h4 id="formality">Formality</h4>
 
 <h4 id="polarity">Polarity Score (Sentiment Analysis)</h4>
 
@@ -8766,7 +8906,7 @@ w_{neg}=\left\{\begin{array}{cc}
 \end{array}\right.
 $$
 
-The following examples demonstrate how the <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> and <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity_frame</code></a> functions operate.  Here the polarity for the <a href="http://trinker.github.io/qdapDictionaries/mraja1spl.html" target="_blank"><code>mraja1spl</code></a> data set (Act 1 of Romeo and Juliet).  The gender, family affiliation and binary died/didn't die are used as the grouping variables.
+The following examples demonstrate how the <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> and <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity_frame</code></a> functions operate.  Here the polarity for the <a href="http://trinker.github.io/qdap_dev/mraja1spl.html" target="_blank"><code>mraja1spl</code></a> data set (Act 1 of Romeo and Juliet).  The gender, family affiliation and binary died/didn't die are used as the grouping variables.
 
 <p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> Example**<font size="5" color="orange">&diams;</font></p >
 
@@ -8846,7 +8986,7 @@ htruncdf(poldat$all, 20, 10)
 plot(poldat)
 ```
 
-![plot of chunk unnamed-chunk-192](figure/unnamed-chunk-192.png) 
+![plot of chunk unnamed-chunk-199](figure/unnamed-chunk-199.png) 
 
 
 <p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> Plot Group Polarity as Heat Map**<font size="5" color="orange">&diams;</font></p >
@@ -8856,7 +8996,7 @@ plot(poldat)
 qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.polarity")
 ```
 
-![plot of chunk unnamed-chunk-193](figure/unnamed-chunk-193.png) 
+![plot of chunk unnamed-chunk-200](figure/unnamed-chunk-200.png) 
 
 
 <p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity_frame.html" target="_blank"><code>polarity_frame</code></a>** - *Specify Your Own Polarity Environment*<font size="5" color="orange">&diams;</font></p >
@@ -8867,7 +9007,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x1239e744>
+<environment: 0x11586500>
 ```
 
 ```r
@@ -8936,11 +9076,11 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/end_mark.html" target="_blank">
-    <input type="submit" value="end_mark"> - Sentence End marks
+    <input type="submit" value="end_mark"> - Sentence End Marks
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/imperative.html" target="_blank">
-    <input type="submit" value="imperative"> - Intuitively Remark Sentences as Imperative
+    <input type="submit" value="imperative"> - Detect and Remark Imperative Sentences
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/NAer.html" target="_blank">
@@ -9152,7 +9292,6 @@ If the reader spots an error in this Vignette or would like to suggest an improv
 - Hu Minqing, Liu Bing,   (2004) Mining Opinion Features in Customer Reviews.  <a href="http://www.cs.uic.edu/~liub/publications/aaai04-featureExtract.pdf">http://www.cs.uic.edu/~liub/publications/aaai04-featureExtract.pdf</a>
 - Tyler Rinker,   (2013) qdap: Quantitative Discourse Analysis Package.  <a href="http://github.com/trinker/qdap">http://github.com/trinker/qdap</a>
 - Tyler Rinker,   (2013) reports: Package to asssist in report writing.  <a href="http://github.com/trinker/reports">http://github.com/trinker/reports</a>
-
 
 
 

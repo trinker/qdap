@@ -76,6 +76,21 @@ function(x, digits = 3, ...) {
     }
 }
 
+#' Plots a kullback_leibler object
+#' 
+#' Plots a kullback_leibler object.
+#' 
+#' @param x The kullback_leibler object
+#' @param \ldots Other arguments passed to \code{qheat}
+#' @method plot kullback_leibler
+#' @S3method plot kullback_leibler
+plot.kullback_leibler <- function(x, digits = 3 , ...) {
+    if (all(dim(x) == c(0, 1))) stop("Can not plot a single value")
+    class(x) <- "matrix"
+    diag(x) <- NA
+    qheat(x, digits = digits, ...)
+}
+
 
 ## Helper function:
 kl <- function(x, y){

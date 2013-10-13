@@ -112,6 +112,7 @@ function(x, digits = 3, ...) {
 #' Plots a diversity object.
 #' 
 #' @param x The diversity object
+#' @param digits Number of decimal places to print if \code{values = TRUE}. 
 #' @param \ldots Other arguments passed to \code{qheat}
 #' @method plot diversity
 #' @S3method plot diversity
