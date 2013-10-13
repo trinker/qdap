@@ -140,10 +140,10 @@
 \note{
   The polarity score is dependent upon the polarity
   dictionary used. This function defaults to the word
-  polarity word dictionary used by Hu, M., & Liu, B.
-  (2004), however, this may not be appropriate for the
-  context of children in a classroom.  The user may (is
-  encouraged) to provide/augment the dictionary (see the
+  polarity dictionary used by Hu, M., & Liu, B. (2004),
+  however, this may not be appropriate for the context of
+  children in a classroom.  The user may (is encouraged) to
+  provide/augment the dictionary (see the
   \code{polarity_frame} function).  For instance the word
   "sick" in a high school setting may mean that something
   is good, whereas "sick" used by a typical adult indicates

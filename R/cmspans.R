@@ -140,7 +140,7 @@ function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,
             } else {
                 spns <- gsub("spans_", "", class(object)[sp.loc])
                 total.span <- lapply(as.list(unlist(strsplit(spns, "\\|\\|"))), as.numeric)
-                total.span <- sapply(total.span, total2tot)
+                total.span <- sapply(total.span, total2tot) 
             }
         
         } else {
@@ -300,7 +300,7 @@ total2tot <- function(x) {
     if (tot < 1) {
         stop("`total.span` can not be negative")
     }
-    tot
+    tot 
 }
 
 ## time check helper
