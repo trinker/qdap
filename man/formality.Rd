@@ -63,14 +63,14 @@
   would probably need to contain a few hundred words for
   the measure to be minimally reliable. For single
   sentences, the F-value should only be computed for
-  purposes of illustration".
+  purposes of illustration" (p. 24).
 }
 \examples{
 \dontrun{
 with(DATA, formality(state, person))
 (x1 <- with(DATA, formality(state, list(sex, adult))))
 plot(x1)
-plot(x1, short.names = TRUE)
+plot(x1, short.names = FALSE)
 data(rajPOS) #A data set consisting of a pos list object
 x2 <- with(raj, formality(rajPOS, act))
 plot(x2)

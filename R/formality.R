@@ -16,7 +16,7 @@
 #' @section Warning: Heylighen & Dewaele(2002) state, "At present, a sample would 
 #' probably need to contain a few hundred words for the measure to be minimally 
 #' reliable. For single sentences, the F-value should only be computed for 
-#' purposes of illustration".
+#' purposes of illustration" (p. 24).
 #' @details Heylighen & Dewaele(2002)'s formality score is calculated as:
 #' \deqn{F = 50(\frac{n_{f}-n_{c}}{N} + 1)}
 #'
@@ -50,7 +50,7 @@
 #' with(DATA, formality(state, person))
 #' (x1 <- with(DATA, formality(state, list(sex, adult))))
 #' plot(x1)
-#' plot(x1, short.names = TRUE)
+#' plot(x1, short.names = FALSE)
 #' data(rajPOS) #A data set consisting of a pos list object
 #' x2 <- with(raj, formality(rajPOS, act))
 #' plot(x2)
@@ -261,7 +261,7 @@ formality <- function(text.var, grouping.var = NULL,
 #' @S3method plot formality
 plot.formality <- function(x, point.pch = 20, point.cex = .5,            
     point.colors = c("gray65", "red"), bar.colors = NULL, 
-    short.names = FALSE, min.wrdcnt = NULL, order.by.formality = TRUE, 
+    short.names = TRUE, min.wrdcnt = NULL, order.by.formality = TRUE, 
     plot = TRUE, ...) {
     word.count <- NULL
     grouping <- form.class <- NULL
@@ -292,14 +292,11 @@ plot.formality <- function(x, point.pch = 20, point.cex = .5,
         ggtitle("Percent Contextual-Formal") +
         scale_y_continuous(breaks = c(0, .25, .5, .75, 1),
             labels=c("0", ".25", ".5", ".75", "1"))  
-        if (!is.null(bar.colors)) {  
-            if (length(bar.colors) == 1) {
-                YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
-                    bar.colors))
-            } else {
-                YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
-                    bar.colors[2]))
-        }
+        if (!is.null(bar.colors)) { 
+ 
+            YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
+                head(bar.colors, 1)))
+
     }        
     dat2 <- dat[dat[, "pos"] != "other", ] 
     dat2[, "pos"] <- factor(dat2[, "pos"])
@@ -311,6 +308,7 @@ plot.formality <- function(x, point.pch = 20, point.cex = .5,
         LAB <- c("noun", "adjective", "preposition",                         
             "articles", "pronoun", "verb", "adverb", "interjection")  
     }
+
     LAB2 <- LAB[substring(LAB, 1, 3) %in% substring(levels(dat2$pos), 1, 3)]
     XX <- ggplot(data=dat2, aes(grouping,  fill=pos)) +                           
         geom_bar(position='fill') + coord_flip() +                               
@@ -322,15 +320,10 @@ plot.formality <- function(x, point.pch = 20, point.cex = .5,
         theme(legend.position = 'bottom') +
         ggtitle("Percent Parts of Speech By Contextual-Formal")                                         
     if (!is.null(bar.colors)) {  
-        if (length(bar.colors) == 1) {
-            XX <- XX + scale_fill_brewer(palette=bar.colors,                     
-                name = "", breaks=levels(dat2$pos),                               
-                labels = LAB2) 
-        } else {
-            XX <- XX + scale_fill_brewer(palette=bar.colors [2],                     
-                name = "", breaks=levels(dat2$pos),                               
-                labels = LAB2)  
-        }
+
+        XX <- XX + scale_fill_brewer(palette=tail(bar.colors, 1),                     
+            name = "", breaks=levels(dat2$pos), labels = LAB2)  
+
     } else {
              XX <- XX + scale_fill_discrete(name = "", 
                  breaks=levels(dat2$pos), labels = LAB2)

@@ -4,7 +4,7 @@
 \usage{
   \method{plot}{formality} (x, point.pch = 20,
     point.cex = 0.5, point.colors = c("gray65", "red"),
-    bar.colors = NULL, short.names = FALSE,
+    bar.colors = NULL, short.names = TRUE,
     min.wrdcnt = NULL, order.by.formality = TRUE,
     plot = TRUE, ...)
 }

@@ -3928,7 +3928,7 @@ ROMNEY.3   0.264   0.297   0.329    0.290    0.338
 
 <h4 id="kullback">Kullback-Leibler divergence </h4>
 
-The Kullback Leibler is often used as a measure of distance, though the matrix is assymetrical.  qdap's `r FUN(""kullback_leibler")` compares the differences between two probability distributions and often leads to results similar to those from `r FUN("dissimilarity")`.  Note that unlike many other qdap functions the user must either supply a word frequency matric (`r FUN("wfm")`) to  <b><font color="green" face="courier new">x</font></b> some other matrix format.  This allows the function to be flexibly used with `r FUN("termco")` and other functions that produce count matrices.
+The Kullback Leibler is often used as a measure of distance, though the matrix is assymetrical.  qdap's `r FUN("kullback_leibler")` compares the differences between two probability distributions and often leads to results similar to those from `r FUN("dissimilarity")`.  Note that unlike many other qdap functions the user must either supply a word frequency matric (`r FUN("wfm")`) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with `r FUN("termco")` and other functions that produce count matrices.
 
 ```{r include = FALSE}
 dat <- pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY),]
@@ -3951,7 +3951,7 @@ ROMNEY.2   0.194   0.195   0.262    0.116    0.000    0.234
 ROMNEY.3   0.160   0.182   0.141    0.101    0.140    0.000
 </code></pre>
 
-```{r, fig.height = 4, fig.width = 5}
+```{r, fig.height = 4.5, fig.width = 5.5}
 plot(KL, high = "red", values = TRUE)
 ```
 
@@ -3973,9 +3973,59 @@ plot(div.mod, low = "yellow", grid = FALSE, values = TRUE)
 
 <h4 id="formality">Formality</h4>
 
+Formality is how contextualize a person's labguage use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 199b, 2002).  Heylighen & Dewaele (2002) have developed a measur eof formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating `r FUN("formality")`, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the `r FUN("dissimilarity")` measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multipled by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
+<br><br>
+
+$$ F = 50(\frac{n_{f}-n_{c}}{N} + 1) $$
+
+Where:
+<br>
+
+$$ f = \left \{noun, \;adjective, \;preposition, \;article\right \} $$
+$$ c = \left \{pronoun, \;verb, \;adverb, \;interjection\right \} $$
+$$ N = \sum{(f \;+ \;c \;+ \;conjunctions)} $$
+<br>
+
+Note that formality utilize parts of speech tagging. T his is computationally expensive.  The user may gain speed by setting <b><font color="green" face="courier new">parallel = TRUE</font></b> if multiple cores are available.  The user can also "recycle" the output from `r FUN("pos")`, `r FUN("pos_by", "pos")`, or `r FUN("formality")` for the same text.  This save considerable time as the parts of speech is saved in the output from these functions as demonstrated in the `r HR("#recform", "Recycled Formality Example")` below.
+
+`r FUN("formality")` also has a plotting method that allows for easy visualization and comparison of formality scores, word counts, formal/contextual parts of speech all by grouping variable(s).  Please note that Heylighen & Dewaele (2002) state, "At present, a sample would probably need to contain a few hundred words for the measure to be minimally reliable. For single sentences, the F-value should only be computed for purposes of illustration" (p. 24).  
+
+
+```{r, include = FALSE}
+citep(bib["Heylighen1999a"])
+citep(bib["Heylighen1999b"])
+citep(bib["Heylighen2002"])
+```
+
+<p>`r FT(orange, 5, text="&diams;")` **`r FUN("formality")` Example**`r FT(orange, 5, text="&diams;")`</p >
+
+```{r, include = FALSE, comment = FALSE}
+(form <- with(raj, formality(rajPOS, person)))
+```
+
+```{r, eval=FALSE}
+form <- with(raj, formality(dialogue, person))
+```
+
+<p>`r FT(orange, 5, text="&diams;")` **`r FUN("formality")` Plot Method**`r FT(orange, 5, text="&diams;")`</p >
+
+```{r, fig.width = 14, fig.height = 10}
+plot(form)
+```
+
+<p id="recform">`r FT(orange, 5, text="&diams;")` **Recycling `r FUN("formality")`**`r FT(orange, 5, text="&diams;")`</p > 
+
+```{r, comment = NA}
+(form2 <- with(raj, formality(form, act)))
+```
+
+```{r, fig.width = 14, fig.height = 3.5}
+plot(form2, bar.colors=c("Set2", "RdBu"))
+```
+
 <h4 id="polarity">Polarity Score (Sentiment Analysis)</h4>
 
-Polarity assignment, a form of sentiment analysis, is using an algorithm to detmine the polarity of a sentence/statement.  While the use polarity scores is applied to many forms of written social dialogue (e.g., Twitter, Facebook, etc.) it has not been applied to spoken dialogue.  qdap offers a flexible function, `r FUN("polarity")` to determine polarity at the sentence level as well as to assign an average polarity score to individual groups within the grouping variable(s).  The frame work for `r FUN("polarity")` is flexible in that the user may supply a polarized dictionary and optional weights.  Many dictionaries used in sentiment analysis are designed for written, adult, online interaction.  
+Polarity assignment, a form of sentiment analysis, is using an algorithm to detmine the polarity of a sentence/statement.  While the use polarity scores is applied to many forms of written social dialogue (e.g., Twitter, Facebook, etc.) it has not typically been applied to spoken dialogue.  qdap offers a flexible function, `r FUN("polarity")` to determine polarity at the sentence level as well as to assign an average polarity score to individual groups within the grouping variable(s).  The frame work for `r FUN("polarity")` is flexible in that the user may supply a polarized dictionary and optional weights.  Many dictionaries used in sentiment analysis are designed for written, adult, online interaction.  
 
 <div class="middleDiv">
 <b>`r FT(red, 4, text="It is assumed you have run <font face=\"courier\">sentSplit</font> on the data.<br>If this is not the case the counts will not be accurate.")`</b>
@@ -4369,5 +4419,4 @@ options(markdown.HTML.stylesheet = "css/style.css")
 ```{r, echo=FALSE, results='asis'}
 bibliography("html") 
 ```
-
 

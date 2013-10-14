@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 19.70 15.79 22.40 16.30 19.70 19.70 22.40 16.30 15.00 15.00 19.70
-## [12] 16.30 25.34 22.40 22.40 15.79 15.00 22.40 19.70 25.34
+##  [1] 15.79 22.40 15.79 15.00 16.30 22.40 15.00 19.70 19.70 25.34 22.40
+## [12] 19.70 15.79 22.40 15.00 19.70 25.34 25.34 15.00 22.40
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 19.70 15.79 22.40 16.30 19.70 19.70 22.40 16.30 15.00 15.00 19.70
-## [12] 16.30 25.34 22.40 22.40 15.79 15.00 22.40 19.70 25.34
+##  [1] 15.79 22.40 15.79 15.00 16.30 22.40 15.00 19.70 19.70 25.34 22.40
+## [12] 19.70 15.79 22.40 15.00 19.70 25.34 25.34 15.00 22.40
 ```
 
 
@@ -8117,17 +8117,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##           interval Freq cum.Freq percent cum.percent
-## 1    (-3.89,-3.11]    7        7    0.07        0.07
-## 2    (-3.11,-2.34]   94      101    0.94        1.01
-## 3    (-2.34,-1.57]  512      613    5.12        6.13
-## 4     (-1.57,-0.8] 1498     2111   14.98       21.11
-## 5   (-0.8,-0.0291] 2723     4834   27.23       48.34
-## 6  (-0.0291,0.742] 2866     7700   28.66       77.00
-## 7     (0.742,1.51] 1645     9345   16.45       93.45
-## 8      (1.51,2.28]  539     9884    5.39       98.84
-## 9      (2.28,3.06]  106     9990    1.06       99.90
-## 10     (3.06,3.83]   10    10000    0.10      100.00
+##          interval Freq cum.Freq percent cum.percent
+## 1   (-4.72,-3.88]    3        3    0.03        0.03
+## 2   (-3.88,-3.03]   11       14    0.11        0.14
+## 3   (-3.03,-2.19]  147      161    1.47        1.61
+## 4   (-2.19,-1.34]  776      937    7.76        9.37
+## 5  (-1.34,-0.493] 2172     3109   21.72       31.09
+## 6  (-0.493,0.354] 3264     6373   32.64       63.73
+## 7     (0.354,1.2] 2470     8843   24.70       88.43
+## 8      (1.2,2.05]  943     9786    9.43       97.86
+## 9     (2.05,2.89]  193     9979    1.93       99.79
+## 10    (2.89,3.74]   21    10000    0.21      100.00
 ```
 
 ```r
@@ -8136,8 +8136,8 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   34       34      34          34
-## 2     gray   38       72      38          72
+## 1     blue   39       39      39          39
+## 2     gray   33       72      33          72
 ## 3      red   28      100      28         100
 ```
 
@@ -8778,18 +8778,7 @@ ROMNEY.3   0.264   0.297   0.329    0.290    0.338
 
 <h4 id="kullback">Kullback-Leibler divergence </h4>
 
-The Kullback Leibler is often used as a measure of distance, though the matrix is assymetrical.  qdap's 
-
-```
-
-Error in base::parse(text = code, srcfile = NULL) : 
-  1:7: unexpected symbol
-1: FUN(""kullback_leibler
-          ^
-
-```
-
- compares the differences between two probability distributions and often leads to results similar to those from <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a>.  Note that unlike many other qdap functions the user must either supply a word frequency matric (<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>) to  <b><font color="green" face="courier new">x</font></b> some other matrix format.  This allows the function to be flexibly used with <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> and other functions that produce count matrices.
+The Kullback Leibler is often used as a measure of distance, though the matrix is assymetrical.  qdap's <a href="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank"><code>kullback_leibler</code></a> compares the differences between two probability distributions and often leads to results similar to those from <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a>.  Note that unlike many other qdap functions the user must either supply a word frequency matric (<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> and other functions that produce count matrices.
 
 
 
@@ -8868,9 +8857,76 @@ plot(div.mod, low = "yellow", grid = FALSE, values = TRUE)
 
 <h4 id="formality">Formality</h4>
 
+Formality is how contextualize a person's labguage use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 199b, 2002).  Heylighen & Dewaele (2002) have developed a measur eof formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a>, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multipled by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
+<br><br>
+
+$$ F = 50(\frac{n_{f}-n_{c}}{N} + 1) $$
+
+Where:
+<br>
+
+$$ f = \left \{noun, \;adjective, \;preposition, \;article\right \} $$
+$$ c = \left \{pronoun, \;verb, \;adverb, \;interjection\right \} $$
+$$ N = \sum{(f \;+ \;c \;+ \;conjunctions)} $$
+<br>
+
+Note that formality utilize parts of speech tagging. T his is computationally expensive.  The user may gain speed by setting <b><font color="green" face="courier new">parallel = TRUE</font></b> if multiple cores are available.  The user can also "recycle" the output from <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos</code></a>, <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a>, or <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a> for the same text.  This save considerable time as the parts of speech is saved in the output from these functions as demonstrated in the <a href="#recform">Recycled Formality Example</a> below.
+
+<a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a> also has a plotting method that allows for easy visualization and comparison of formality scores, word counts, formal/contextual parts of speech all by grouping variable(s).  Please note that Heylighen & Dewaele (2002) state, "At present, a sample would probably need to contain a few hundred words for the measure to be minimally reliable. For single sentences, the F-value should only be computed for purposes of illustration" (p. 24).  
+
+
+
+
+
+<p><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a> Example**<font size="5" color="orange">&diams;</font></p >
+
+
+
+
+
+```r
+form <- with(raj, formality(dialogue, person))
+```
+
+
+<p><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a> Plot Method**<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+plot(form)
+```
+
+![plot of chunk unnamed-chunk-197](figure/unnamed-chunk-197.png) 
+
+
+<p id="recform"><font size="5" color="orange">&diams;</font> **Recycling <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a>**<font size="5" color="orange">&diams;</font></p > 
+
+
+```r
+(form2 <- with(raj, formality(form, act)))
+```
+
+```
+  act word.count formality
+1   5       3379     58.38
+2   2       5358     58.10
+3   1       5525     57.59
+4   3       6354     57.22
+5   4       3167     55.89
+```
+
+
+
+```r
+plot(form2, bar.colors=c("Set2", "RdBu"))
+```
+
+![plot of chunk unnamed-chunk-199](figure/unnamed-chunk-199.png) 
+
+
 <h4 id="polarity">Polarity Score (Sentiment Analysis)</h4>
 
-Polarity assignment, a form of sentiment analysis, is using an algorithm to detmine the polarity of a sentence/statement.  While the use polarity scores is applied to many forms of written social dialogue (e.g., Twitter, Facebook, etc.) it has not been applied to spoken dialogue.  qdap offers a flexible function, <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> to determine polarity at the sentence level as well as to assign an average polarity score to individual groups within the grouping variable(s).  The frame work for <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> is flexible in that the user may supply a polarized dictionary and optional weights.  Many dictionaries used in sentiment analysis are designed for written, adult, online interaction.  
+Polarity assignment, a form of sentiment analysis, is using an algorithm to detmine the polarity of a sentence/statement.  While the use polarity scores is applied to many forms of written social dialogue (e.g., Twitter, Facebook, etc.) it has not typically been applied to spoken dialogue.  qdap offers a flexible function, <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> to determine polarity at the sentence level as well as to assign an average polarity score to individual groups within the grouping variable(s).  The frame work for <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> is flexible in that the user may supply a polarized dictionary and optional weights.  Many dictionaries used in sentiment analysis are designed for written, adult, online interaction.  
 
 <div class="middleDiv">
 <b><font size="4" color="red">It is assumed you have run <font face="courier">sentSplit</font> on the data.<br>If this is not the case the counts will not be accurate.</font></b>
@@ -8986,7 +9042,7 @@ htruncdf(poldat$all, 20, 10)
 plot(poldat)
 ```
 
-![plot of chunk unnamed-chunk-199](figure/unnamed-chunk-199.png) 
+![plot of chunk unnamed-chunk-205](figure/unnamed-chunk-205.png) 
 
 
 <p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> Plot Group Polarity as Heat Map**<font size="5" color="orange">&diams;</font></p >
@@ -8996,7 +9052,7 @@ plot(poldat)
 qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.polarity")
 ```
 
-![plot of chunk unnamed-chunk-200](figure/unnamed-chunk-200.png) 
+![plot of chunk unnamed-chunk-206](figure/unnamed-chunk-206.png) 
 
 
 <p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity_frame.html" target="_blank"><code>polarity_frame</code></a>** - *Specify Your Own Polarity Environment*<font size="5" color="orange">&diams;</font></p >
@@ -9007,7 +9063,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x13319fa0>
+<environment: 0x11f8b5d0>
 ```
 
 ```r
@@ -9289,9 +9345,11 @@ If the reader spots an error in this Vignette or would like to suggest an improv
 ## References
 
 - J. Fox,   (2005) Programmer's niche: How do you spell that number?.  <em>R News</em>  <strong>5</strong>  (1)   51-55-NA
+- Francis Heylighen,   (1999) Advantages and Limitations of Formal Expression.  <em>Foundations of Science</em>  <strong>4</strong>  25-56-NA  <a href="http://dx.doi.org/10.1023/A:1009686703349">10.1023/A:1009686703349</a>
+- Francis Heylighen, Jean-Marc Dewaele,   (1999) Formality of Language: Definition, measurement and behavioral determinants.  <a href="http://pespmc1.vub.ac.be/Papers/Formality.pdf">http://pespmc1.vub.ac.be/Papers/Formality.pdf</a>
+- Francis Heylighen., Jean-Marc Dewaele,   (2002) Variation in the Contextuality of Language: An Empirical Measure.  <em>Foundations of Science</em>  <strong>7</strong>  (3)   293-340-NA  <a href="http://dx.doi.org/10.1023/A:1019661126744">10.1023/A:1019661126744</a>
 - Hu Minqing, Liu Bing,   (2004) Mining Opinion Features in Customer Reviews.  <a href="http://www.cs.uic.edu/~liub/publications/aaai04-featureExtract.pdf">http://www.cs.uic.edu/~liub/publications/aaai04-featureExtract.pdf</a>
 - Tyler Rinker,   (2013) qdap: Quantitative Discourse Analysis Package.  <a href="http://github.com/trinker/qdap">http://github.com/trinker/qdap</a>
 - Tyler Rinker,   (2013) reports: Package to asssist in report writing.  <a href="http://github.com/trinker/reports">http://github.com/trinker/reports</a>
-
 
 
