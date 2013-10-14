@@ -7,7 +7,8 @@
     text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white",
     by.column = TRUE, auto.size = FALSE, mat2 = NULL,
-    plot = TRUE, facet.vars = NULL, facet.flip = FALSE)
+    plot = TRUE, facet.vars = NULL, facet.flip = FALSE,
+    diag.na = FALSE)
 }
 \arguments{
   \item{mat}{A matrix or dataframe produced by many qdap
@@ -67,6 +68,12 @@
 
   \item{facet.flip}{logical If \code{TRUE} the direction of
   the faceting is reversed.}
+
+  \item{diag.na}{logical.  If \code{TRUE} and \code{mat} is
+  a symetrical matrix the diagonals are set to \code{NA}.
+  This is useful with correlation matrices because the
+  diagonal of ones do not effect the scaling of the
+  heatmap.}
 }
 \description{
   A quick heatmap function for visualizing typical qdap
@@ -97,6 +104,7 @@ qheat(ws.ob, "yellow", "red", grid = FALSE)
 qheat(mtcars, facet.vars = "cyl")
 qheat(mtcars, facet.vars = c("gear", "cyl"))
 qheat(t(mtcars), by.column=FALSE)
+qheat(cor(mtcars), diag.na=TRUE)
 
 dat1 <- data.frame(G=LETTERS[1:5], matrix(rnorm(20), ncol = 4))
 dat2 <- data.frame(matrix(LETTERS[1:25], ncol=5))
