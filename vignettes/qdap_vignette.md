@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.79 22.40 15.79 15.00 16.30 22.40 15.00 19.70 19.70 25.34 22.40
-## [12] 19.70 15.79 22.40 15.00 19.70 25.34 25.34 15.00 22.40
+##  [1] 15.00 22.40 15.79 15.79 15.79 22.40 16.30 22.40 15.00 19.70 15.00
+## [12] 19.70 15.79 25.34 25.34 19.70 15.79 15.79 15.79 25.34
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.79 22.40 15.79 15.00 16.30 22.40 15.00 19.70 19.70 25.34 22.40
-## [12] 19.70 15.79 22.40 15.00 19.70 25.34 25.34 15.00 22.40
+##  [1] 15.00 22.40 15.79 15.79 15.79 22.40 16.30 22.40 15.00 19.70 15.00
+## [12] 19.70 15.79 25.34 25.34 19.70 15.79 15.79 15.79 25.34
 ```
 
 
@@ -8117,17 +8117,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##          interval Freq cum.Freq percent cum.percent
-## 1   (-4.72,-3.88]    3        3    0.03        0.03
-## 2   (-3.88,-3.03]   11       14    0.11        0.14
-## 3   (-3.03,-2.19]  147      161    1.47        1.61
-## 4   (-2.19,-1.34]  776      937    7.76        9.37
-## 5  (-1.34,-0.493] 2172     3109   21.72       31.09
-## 6  (-0.493,0.354] 3264     6373   32.64       63.73
-## 7     (0.354,1.2] 2470     8843   24.70       88.43
-## 8      (1.2,2.05]  943     9786    9.43       97.86
-## 9     (2.05,2.89]  193     9979    1.93       99.79
-## 10    (2.89,3.74]   21    10000    0.21      100.00
+##            interval Freq cum.Freq percent cum.percent
+## 1     (-3.68,-2.95]   19       19    0.19        0.19
+## 2     (-2.95,-2.21]  123      142    1.23        1.42
+## 3     (-2.21,-1.48]  540      682    5.40        6.82
+## 4    (-1.48,-0.747] 1559     2241   15.59       22.41
+## 5  (-0.747,-0.0138] 2683     4924   26.83       49.24
+## 6    (-0.0138,0.72] 2745     7669   27.45       76.69
+## 7       (0.72,1.45] 1588     9257   15.88       92.57
+## 8       (1.45,2.19]  581     9838    5.81       98.38
+## 9       (2.19,2.92]  140     9978    1.40       99.78
+## 10      (2.92,3.65]   22    10000    0.22      100.00
 ```
 
 ```r
@@ -8136,9 +8136,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   39       39      39          39
-## 2     gray   33       72      33          72
-## 3      red   28      100      28         100
+## 1     blue   30       30      30          30
+## 2     gray   30       60      30          60
+## 3      red   40      100      40         100
 ```
 
 ```r
@@ -8572,7 +8572,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 </div>
 
-qdap offers a number of word statistics and and scores applied by grouping variable.  Some functions are original to qdap, while others are taken from academic papers.  Complete references for statistics/scores based on others' work are provided in the <a href="http://cran.r-project.org/web/packages/qdap/qdap.pdf">help manual</a> where appropriate.  It is assumed that the reader is familiar, or can become acquainted, with the theory and methods for qdap functions based on the work of others.  For qdap functions that are original to qdap a more narrow description of the use and theory is provided.
+qdap offers a number of word statistics and and scores applied by grouping variable.  Some functions are original to qdap, while others are taken from academic papers.  Complete references for statistics/scores based on others' work are provided in the <a href="http://cran.r-project.org/web/packages/qdap/qdap.pdf">help manual</a> where appropriate.  It is assumed that the reader is familiar, or can become acquainted, with the theory and methods for qdap functions based on the work of others.  For qdap functions that are original to qdap a more robust description of the use and theory is provided.
 
 <h4 id="readability">Readability Scores</h4>
 
@@ -9063,7 +9063,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x11f8b5d0>
+<environment: 0x1294841c>
 ```
 
 ```r

@@ -3765,7 +3765,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 </div>
 
-qdap offers a number of word statistics and and scores applied by grouping variable.  Some functions are original to qdap, while others are taken from academic papers.  Complete references for statistics/scores based on others' work are provided in the `r HR("http://cran.r-project.org/web/packages/qdap/qdap.pdf", "help manual")` where appropriate.  It is assumed that the reader is familiar, or can become acquainted, with the theory and methods for qdap functions based on the work of others.  For qdap functions that are original to qdap a more narrow description of the use and theory is provided.
+qdap offers a number of word statistics and and scores applied by grouping variable.  Some functions are original to qdap, while others are taken from academic papers.  Complete references for statistics/scores based on others' work are provided in the `r HR("http://cran.r-project.org/web/packages/qdap/qdap.pdf", "help manual")` where appropriate.  It is assumed that the reader is familiar, or can become acquainted, with the theory and methods for qdap functions based on the work of others.  For qdap functions that are original to qdap a more robust description of the use and theory is provided.
 
 <h4 id="readability">Readability Scores</h4>
 
