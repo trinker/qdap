@@ -4125,41 +4125,281 @@ ls(POLENV)[1:20]
 <h3 id="visualization">Visualizing Discourse Data</h3>
 
 <div class="funs">
-The following functions will be utilized in this section (click to view more):    
+The following functions will be utilized in this section (click to view more): <br>   
 
-<form action="http://trinker.github.io/qdap_dev/gradient_cloud.html" target="_blank">
-    <input type="submit" value="gradient_cloud"> - Gradient Word Cloud
+<form class="form_left" action="http://trinker.github.io/qdap_dev/gradient_cloud.html" target="_blank">
+    <input type="submit" value="gradient_cloud"> 
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank">
+    <input type="submit" value="trans_cloud"> - `r HR("#wordclouds", "Word Cloud")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank">
-    <input type="submit" value="gantt_plot"><input type="submit" value="gantt_wrap">  - Gantt Plot
+    <input type="submit" value="gantt_plot"><input type="submit" value="gantt_wrap">  - `r HR("#gantts", "Gantt Plot")`
 </form>
 
 
 <form action="http://trinker.github.io/qdap_dev/qheat.html" target="_blank">
-    <input type="submit" value="qheat"> - Quick Heatmap
+    <input type="submit" value="qheat"> - `r HR("#heatmaps", "Quick Heatmap")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank">
-    <input type="submit" value="rank_freq_mplot"><input type="submit" value="rank_freq_plot"> - Rank Frequency Plot
+    <input type="submit" value="rank_freq_mplot"><input type="submit" value="rank_freq_plot"> - `r HR("rankfreq", "Rank Frequency Plot")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank">
-    <input type="submit" value="tot_plot"> - Visualize Word Length by Turn of Talk
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank">
-    <input type="submit" value="trans_cloud"> - Word Clouds by Grouping Variable
+    <input type="submit" value="tot_plot"> - `r HR("#totplot", "Visualize Word Length by Turn of Talk")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank">
-    <input type="submit" value="trans_venn"> - Venn Diagram by Grouping Variable
+    <input type="submit" value="trans_venn"> - `r HR("venn", "Venn Diagram")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank">
-    <input type="submit" value="word_network_plot"> - Word Network Plot
+    <input type="submit" value="word_network_plot"> - `r HR("#wordnet", "Word Network Plot")`
 </form>
 </div>
+
+qdap offers a number of plot methods for various outputs from functions (use <b><font color="green" face="courier new">plot(qdap_FUNCTION_OUTPUT)</font></b>).  In addition to the numerous plot methods qdap also has several functions dedicated solely to plotting purposes.  Many of these functions rely on the `r HR("http://docs.ggplot2.org/current/", "ggplot2 package")` (Wickham, 2009) to produce plots.
+
+```{r, include = FALSE}
+citep(bib["Wickham2009"])
+```
+
+<h4 id="wordclouds">Word Clouds</h4>
+
+Wordclouds can be a useful tool to help find words/phrases that are used frequently.  It allows for the entire dialogue to be contained in pictorial form.  The word cloud becomes more useful in discovering themes when color can be used in a meaningful way (i.e., the information contained in the word size and word color are not redundant).  qdap has two word cloud functions (both are wrappers for `r HR("http://cran.r-project.org/web/packages/wordcloud/index.html", "wordcloud")` from the wordcloud package).  The `r FUN("trans_cloud")` function produces word clouds with optional theme coloring by grouping variable.  The `r FUN("gradient_cloud")` function produces a gradient word cloud colored by a binary grouping variable.
+
+
+`r FUN("trans_cloud")` is passed a list of named vectors to <b><font color="green" face="courier new">target.words</font></b> in much the same way as <b><font color="green" face="courier new">match.list</font></b> in `r FUN("termco")`.
+
+<b><em>Format for Named Vectors</b></em>
+
+<pre><code>list(
+    theme_1 = c("word1", "word2", "word3"),
+    theme_2 = c("word4", "word5"),
+    theme_3 = c("word6", "word7", "word8")    
+)
+</code></pre>
+
+The <b><font color="green" face="courier new">cloud.colors</font></b> argument takes a single color or a vector of colors 1 greater then the number of vectors of <b><font color="green" face="courier new">target.words</font></b>.  The order of <b><font color="green" face="courier new">cloud.colors</font></b> corresponds to the order of <b><font color="green" face="courier new">target.words</font></b> with the extra, final color being utilized for all words not matched to <b><font color="green" face="courier new">target.words</font></b>.
+
+
+<p id="transcloud1">`r FT(orange, 5, text="&diams;")` **`r FUN("trans_cloud")` Example 1**`r FT(orange, 5, text="&diams;")`</p >
+
+```{r}
+## Generate themes/terms to color by
+terms <- list(
+    I=c("i", "i'm"),
+    mal=qcv(stinks, dumb, distrust),
+    articles=qcv(the, a, an),
+    pronoun=qcv(we, you)
+)
+
+with(DATA, trans_cloud(state, person, target.words=terms,
+    cloud.colors=qcv(red, green, blue, black, gray65),
+    expand.target=FALSE, proportional=TRUE, legend=c(names(terms),
+    "other")))
+```
+
+<p id="transcloud1">`r FT(orange, 5, text="&diams;")` **`r FUN("trans_cloud")` Example 2** - *Polarity*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r}
+## Rearrange the data
+DATA2 <- qdap::DATA
+DATA2[1, 4] <- "This is not good!"
+DATA2[8, 4] <- "I don't distrust you."
+DATA2$state <- space_fill(DATA2$state, paste0(negation.words, " "),
+    rm.extra = FALSE)
+txt <- gsub("~~", " ", breaker(DATA2$state))
+rev.neg <- sapply(negation.words, paste, negative.words)
+rev.pos <- sapply(negation.words, paste, positive.words)
+
+## Generate themes/terms to color by
+tw <- list(
+    positive=c(positive.words, rev.neg[rev.neg %in% txt]),
+    negative=c(negative.words, rev.pos[rev.pos %in% txt])
+)
+
+with(DATA2, trans_cloud(state, person,
+    target.words=tw,
+    cloud.colors=qcv(darkgreen, red, gray65),
+    expand.target=FALSE, proportional=TRUE, legend=names(tw)))
+```
+
+
+<p id="gradient">`r FT(orange, 5, text="&diams;")` **`r FUN("gradient_cloud")` Examples**`r FT(orange, 5, text="&diams;")`</p >
+
+
+```{r}
+## Fuse two words
+DATA2 <- DATA
+DATA2$state <- space_fill(DATA$state, c("is fun", "too fun", "you liar"))
+```
+
+```{r}
+gradient_cloud(DATA2$state, DATA2$sex, title="Lying Fun", max.word.size = 5,
+    min.word.size = .025)
+gradient_cloud(DATA2$state, DATA2$sex, title="Houghton Colors", 
+    max.word.size = 8, min.word.size = .01, X ="purple" , Y = "yellow")
+```
+
+
+<h4 id="gantts">Gantt Plot</h4>
+
+Many of the plot methods utilized by other functions' classes are a wrapper for `r FUN("gantt_plot")` or `r FUN("gantt_wrap")`.  `r FUN("gantt_plot")` wraps the `r FUN("gantt")`, `r FUN("gantt_rep")` and `r FUN("gantt_wrap")` functions to allow for direct input of text dialogue and grouping variabes.  The `r FUN("gantt_plot")` function is a fast way to make Gantt charts that can be faceted and filled by grouping variables.  A Gantt plot allows the user to find trends and patterns in dialogue across time.  It essentially allwos for a visual representation of an entire exchange of dialogue.  The following examples show the flexibility of `r FUN("gantt_plot")`; many of these techniques can also be utilized in plot methids for qdap classes that utilize `r FUN("gantt_plot")` and `r FUN("gantt_wrap")`.  It is also prudant to be aware of `r FUN("gantt_wrap")`, that is its arguments and how to utilize it, as it is less conveinent yet more flexible and powerful than `r FUN("gantt_plot")`.
+
+<p id="ganttplot1">`r FT(orange, 5, text="&diams;")` **`r FUN("gantt_plot")`** - *Single Time/Single Grouping Variable*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r}
+with(rajSPLIT, gantt_plot(text.var = dialogue,
+    grouping.var = person, size=4))
+```
+
+<p id="ganttplot2">`r FT(orange, 5, text="&diams;")` **`r FUN("gantt_plot")`** - *Single Time/Multiple Grouping Variable*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r}
+with(rajSPLIT, gantt_plot(text.var = dialogue,
+    grouping.var = list(fam.aff, sex), rm.var  = act,
+    title = "Romeo and Juliet's dialogue"))
+```
+
+Sometimes the location of the facets may not be ideal to show the data (i.e., you may want to reverse the x and y axis).  By setting <b><font color="green" face="courier new">transform = TRUE</font></b> the user can make this switch.
+
+<p id="transform">`r FT(orange, 5, text="&diams;")` **`r FUN("gantt_plot")``** - *Transforming*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r}
+with(rajSPLIT, gantt_plot(dialogue, list(fam.aff, sex), act,
+    transform=T))
+```
+
+Often the defualt colors are less useful in displaying the trends in a way that is most meaningful. Because `r FUN("gantt_plot")` is a wrapper for ggplot2 the color palletes can easily be extended to use with the output from `r FUN("gantt_plot")`.
+
+<p id="changecols">`r FT(orange, 5, text="&diams;")` **`r FUN("gantt_plot")`** - *Color Pallete Examples*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r, fig.width = 14.5}
+## Load needed packages
+library(ggplot2); library(scales); library(RColorBrewer); library(grid)
+
+## Duplicate a new data set and make alterations
+rajSPLIT2 <- rajSPLIT
+
+rajSPLIT2$newb <- as.factor(sample(LETTERS[1:2], nrow(rajSPLIT2),
+    replace=TRUE))
+
+z <- with(rajSPLIT2, gantt_plot(dialogue, list(fam.aff, sex),
+    list(act, newb), size = 4))
+z + theme(panel.margin = unit(1, "lines")) + scale_colour_grey()
+z + scale_colour_brewer(palette="Dark2")
+z + scale_colour_manual(values=rep("black", 7))
+## vector of colors
+cols <- c("black", "red", "blue", "yellow", "orange", "purple", "grey40")
+
+z + scale_colour_manual(values=cols)
+```
+
+At times it may be useful to fill the bar colors by another grouping variable.  The <b><font color="green" face="courier new">fill.var</font></b> argument allows another coloring variable to be utilized.
+
+<p id="examp1">`r FT(orange, 5, text="&diams;")` **`r FUN("gantt_plot")`** - *Fill Variable Example 1*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r, fig.width = 14.5}
+## Generate an end mark variable set to fill by
+dat <- rajSPLIT[rajSPLIT$act == 1, ]
+dat$end_mark <- factor(end_mark(dat$dialogue))
+
+with(dat, gantt_plot(text.var = dialogue, grouping.var = list(person, sex),
+    fill.var=end_mark))
+```
+
+
+<p id="examp2">`r FT(orange, 5, text="&diams;")` **`r FUN("gantt_plot")`** - *Fill Variable Example 2*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r, fig.width = 14.5}
+## Generate an end mark variable data set to fill by
+rajSPLIT2 <- rajSPLIT
+rajSPLIT2$end_mark <- end_mark(rajSPLIT2$dialogue)
+
+with(rajSPLIT2, gantt_plot(text.var = dialogue,
+    grouping.var = list(fam.aff), rm.var  = list(act),
+    fill.var=end_mark, title = "Romeo and Juliet's dialogue"))
+```
+
+Be wary though of using coloring to show what faceting would show better.  Here is an example of faceting versus the color fill used in the `r HR("#examp1", "Fill Variable Example 1")` above.
+
+<p id="gradient">`r FT(orange, 5, text="&diams;")` **`r FUN("gradient_plot")`** - *Facet Instead of Fill Varaible*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r, fig.width = 14.5}
+## Repeated Measures Sentence Type Example
+with(rajSPLIT2, gantt_plot(text.var = dialogue,
+    grouping.var = list(fam.aff, sex), rm.var  = list(end_mark, act),
+    title = "Romeo and Juliet's dialogue"))
+```
+
+
+<h4 id="heatmaps">Quick Heatmap</h4>
+
+Heatmaps are a powerful way to visualize patterns in matrices.  The gradient allows the user to quickly pick out high and low values.  `r FUN("qheat")` (quick heatmap) is a heatmap function that accepts matrices and dataframes and has some nice pre-sets that work well with the way qdap data is structured.  Two of these assumptions to be aware of is that dataframe is numeric with the exception of a single grouping variable column with the possiblity of additional non-numeric columns passed to  <b><font color="green" face="courier new">facet.vars</font></b>.  `r FUN("qheat")` also assumes that matrices are all numeric with row names serving as the grouping variable.  If passing a dataframe, `r FUN("qheat")` the grouping variable column is assumed to be the first column.
+
+The following examples demonstrate various uses of `r FUN("qheat")`.
+
+
+```{r}
+## word stats data set
+ws.ob <- with(DATA.SPLIT, word_stats(state, list(sex, adult), tot=tot))
+
+# same as `plot(ws.ob)`
+qheat(ws.ob) 
+```
+
+```{r}
+qheat(ws.ob, xaxis.col = c("red", "black", "green", "blue"))
+```
+
+```{r}
+qheat(ws.ob, order.by = "sptot")
+qheat(ws.ob, order.by = "-sptot")
+```
+
+```{r}
+qheat(ws.ob, values = TRUE)
+qheat(ws.ob, values = TRUE, text.color = "red")
+```
+
+```{r}
+qheat(ws.ob, "yellow", "red", grid = FALSE)
+```
+
+```{r}
+qheat(mtcars, facet.vars = "cyl")
+qheat(mtcars, facet.vars = c("gear", "cyl"))
+```
+
+```{r}
+qheat(t(mtcars), by.column=FALSE)
+qheat(mtcars, plot = FALSE) + coord_flip()
+```
+
+```{r}
+qheat(cor(mtcars), diag.na=TRUE)
+```
+
+
+```{r}
+## Create a data set and matching labels
+dat1 <- data.frame(G=LETTERS[1:5], matrix(rnorm(20), ncol = 4))
+dat2 <- data.frame(matrix(LETTERS[1:25], ncol=5))
+qheat(dat1, high = "orange", values=TRUE, text.color = "black")
+qheat(dat1, high = "orange", values=TRUE, text.color = "black", mat2=dat2)
+```
+
+<h4 id="rankfreq">Rank Frequency Plot</h4>
+
+<h4 id="totplot">Visualize Word Length by Turn of Talk</h4>
+
+<h4 id="venn">Venn Diagram</h4>
+
+<h4 id="wordnet">Word Network Plot</h4>
 
 
 
@@ -4167,7 +4407,7 @@ The following functions will be utilized in this section (click to view more):
 <h3 id="id">ID Sentences</h3>
 
 <div class="funs">
-The following functions will be utilized in this section (click to view more):    
+The following functions will be utilized in this section (click to view more):  
 
 <form action="http://trinker.github.io/qdap_dev/end_inc.html" target="_blank">
     <input type="submit" value="end_inc"> - Test for Incomplete Sentences
@@ -4419,4 +4659,3 @@ options(markdown.HTML.stylesheet = "css/style.css")
 ```{r, echo=FALSE, results='asis'}
 bibliography("html") 
 ```
-

@@ -145,9 +145,9 @@ names(NAMES_LIST) <- LETTERS
 ##  browseVignettes(package = 'qdap')
 
 #root <- system.file("doc/qdap_vignette.html", package = "qdap")
-root <- "C:/Users/trinker/GitHub/qdap/vignettes/qdap_vignette.html"
-new <- "C:/Users/trinker/Dropbox/Public/packages"
-file.copy(root, new, TRUE, TRUE)
+#root <- "C:/Users/trinker/GitHub/qdap/vignettes/qdap_vignette.html"
+#new <- "C:/Users/trinker/Dropbox/Public/packages"
+#file.copy(root, new, TRUE, TRUE)
 
 #==========================
 # NEWS.md

@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.00 22.40 15.79 15.79 15.79 22.40 16.30 22.40 15.00 19.70 15.00
-## [12] 19.70 15.79 25.34 25.34 19.70 15.79 15.79 15.79 25.34
+##  [1] 15.79 16.30 22.40 25.34 16.30 15.00 15.79 19.70 15.00 22.40 15.00
+## [12] 15.00 22.40 22.40 22.40 16.30 16.30 25.34 15.79 22.40
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.00 22.40 15.79 15.79 15.79 22.40 16.30 22.40 15.00 19.70 15.00
-## [12] 19.70 15.79 25.34 25.34 19.70 15.79 15.79 15.79 25.34
+##  [1] 15.79 16.30 22.40 25.34 16.30 15.00 15.79 19.70 15.00 22.40 15.00
+## [12] 15.00 22.40 22.40 22.40 16.30 16.30 25.34 15.79 22.40
 ```
 
 
@@ -8117,17 +8117,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##            interval Freq cum.Freq percent cum.percent
-## 1     (-3.68,-2.95]   19       19    0.19        0.19
-## 2     (-2.95,-2.21]  123      142    1.23        1.42
-## 3     (-2.21,-1.48]  540      682    5.40        6.82
-## 4    (-1.48,-0.747] 1559     2241   15.59       22.41
-## 5  (-0.747,-0.0138] 2683     4924   26.83       49.24
-## 6    (-0.0138,0.72] 2745     7669   27.45       76.69
-## 7       (0.72,1.45] 1588     9257   15.88       92.57
-## 8       (1.45,2.19]  581     9838    5.81       98.38
-## 9       (2.19,2.92]  140     9978    1.40       99.78
-## 10      (2.92,3.65]   22    10000    0.22      100.00
+##          interval Freq cum.Freq percent cum.percent
+## 1   (-3.64,-2.89]   16       16    0.16        0.16
+## 2   (-2.89,-2.14]  151      167    1.51        1.67
+## 3   (-2.14,-1.39]  654      821    6.54        8.21
+## 4  (-1.39,-0.639] 1784     2605   17.84       26.05
+## 5   (-0.639,0.11] 2744     5349   27.44       53.49
+## 6    (0.11,0.859] 2599     7948   25.99       79.48
+## 7    (0.859,1.61] 1469     9417   14.69       94.17
+## 8     (1.61,2.36]  493     9910    4.93       99.10
+## 9     (2.36,3.11]   80     9990    0.80       99.90
+## 10    (3.11,3.86]   10    10000    0.10      100.00
 ```
 
 ```r
@@ -8136,9 +8136,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   30       30      30          30
-## 2     gray   30       60      30          60
-## 3      red   40      100      40         100
+## 1     blue   45       45      45          45
+## 2     gray   30       75      30          75
+## 3      red   25      100      25         100
 ```
 
 ```r
@@ -9063,7 +9063,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x1294841c>
+<environment: 0x032ca944>
 ```
 
 ```r
@@ -9083,41 +9083,400 @@ ls(POLENV)[1:20]
 <h3 id="visualization">Visualizing Discourse Data</h3>
 
 <div class="funs">
-The following functions will be utilized in this section (click to view more):    
+The following functions will be utilized in this section (click to view more): <br>   
 
-<form action="http://trinker.github.io/qdap_dev/gradient_cloud.html" target="_blank">
-    <input type="submit" value="gradient_cloud"> - Gradient Word Cloud
+<form class="form_left" action="http://trinker.github.io/qdap_dev/gradient_cloud.html" target="_blank">
+    <input type="submit" value="gradient_cloud"> 
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank">
+    <input type="submit" value="trans_cloud"> - <a href="#wordclouds">Word Cloud</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank">
-    <input type="submit" value="gantt_plot"><input type="submit" value="gantt_wrap">  - Gantt Plot
+    <input type="submit" value="gantt_plot"><input type="submit" value="gantt_wrap">  - <a href="#gantts">Gantt Plot</a>
 </form>
 
 
 <form action="http://trinker.github.io/qdap_dev/qheat.html" target="_blank">
-    <input type="submit" value="qheat"> - Quick Heatmap
+    <input type="submit" value="qheat"> - <a href="#heatmaps">Quick Heatmap</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank">
-    <input type="submit" value="rank_freq_mplot"><input type="submit" value="rank_freq_plot"> - Rank Frequency Plot
+    <input type="submit" value="rank_freq_mplot"><input type="submit" value="rank_freq_plot"> - <a href="rankfreq">Rank Frequency Plot</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank">
-    <input type="submit" value="tot_plot"> - Visualize Word Length by Turn of Talk
-</form>
-
-<form action="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank">
-    <input type="submit" value="trans_cloud"> - Word Clouds by Grouping Variable
+    <input type="submit" value="tot_plot"> - <a href="#totplot">Visualize Word Length by Turn of Talk</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank">
-    <input type="submit" value="trans_venn"> - Venn Diagram by Grouping Variable
+    <input type="submit" value="trans_venn"> - <a href="venn">Venn Diagram</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank">
-    <input type="submit" value="word_network_plot"> - Word Network Plot
+    <input type="submit" value="word_network_plot"> - <a href="#wordnet">Word Network Plot</a>
 </form>
 </div>
+
+qdap offers a number of plot methods for various outputs from functions (use <b><font color="green" face="courier new">plot(qdap_FUNCTION_OUTPUT)</font></b>).  In addition to the numerous plot methods qdap also has several functions dedicated solely to plotting purposes.  Many of these functions rely on the <a href="http://docs.ggplot2.org/current/">ggplot2 package</a> (Wickham, 2009) to produce plots.
+
+
+
+
+<h4 id="wordclouds">Word Clouds</h4>
+
+Wordclouds can be a useful tool to help find words/phrases that are used frequently.  It allows for the entire dialogue to be contained in pictorial form.  The word cloud becomes more useful in discovering themes when color can be used in a meaningful way (i.e., the information contained in the word size and word color are not redundant).  qdap has two word cloud functions (both are wrappers for <a href="http://cran.r-project.org/web/packages/wordcloud/index.html">wordcloud</a> from the wordcloud package).  The <a href="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank"><code>trans_cloud</code></a> function produces word clouds with optional theme coloring by grouping variable.  The <a href="http://trinker.github.io/qdap_dev/gradient_cloud.html" target="_blank"><code>gradient_cloud</code></a> function produces a gradient word cloud colored by a binary grouping variable.
+
+
+<a href="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank"><code>trans_cloud</code></a> is passed a list of named vectors to <b><font color="green" face="courier new">target.words</font></b> in much the same way as <b><font color="green" face="courier new">match.list</font></b> in <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a>.
+
+<b><em>Format for Named Vectors</b></em>
+
+<pre><code>list(
+    theme_1 = c("word1", "word2", "word3"),
+    theme_2 = c("word4", "word5"),
+    theme_3 = c("word6", "word7", "word8")    
+)
+</code></pre>
+
+The <b><font color="green" face="courier new">cloud.colors</font></b> argument takes a single color or a vector of colors 1 greater then the number of vectors of <b><font color="green" face="courier new">target.words</font></b>.  The order of <b><font color="green" face="courier new">cloud.colors</font></b> corresponds to the order of <b><font color="green" face="courier new">target.words</font></b> with the extra, final color being utilized for all words not matched to <b><font color="green" face="courier new">target.words</font></b>.
+
+
+<p id="transcloud1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank"><code>trans_cloud</code></a> Example 1**<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+## Generate themes/terms to color by
+terms <- list(
+    I=c("i", "i'm"),
+    mal=qcv(stinks, dumb, distrust),
+    articles=qcv(the, a, an),
+    pronoun=qcv(we, you)
+)
+
+with(DATA, trans_cloud(state, person, target.words=terms,
+    cloud.colors=qcv(red, green, blue, black, gray65),
+    expand.target=FALSE, proportional=TRUE, legend=c(names(terms),
+    "other")))
+```
+
+![plot of chunk unnamed-chunk-209](figure/unnamed-chunk-2091.png) ![plot of chunk unnamed-chunk-209](figure/unnamed-chunk-2092.png) ![plot of chunk unnamed-chunk-209](figure/unnamed-chunk-2093.png) ![plot of chunk unnamed-chunk-209](figure/unnamed-chunk-2094.png) ![plot of chunk unnamed-chunk-209](figure/unnamed-chunk-2095.png) 
+
+
+<p id="transcloud1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank"><code>trans_cloud</code></a> Example 2** - *Polarity*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+## Rearrange the data
+DATA2 <- qdap::DATA
+DATA2[1, 4] <- "This is not good!"
+DATA2[8, 4] <- "I don't distrust you."
+DATA2$state <- space_fill(DATA2$state, paste0(negation.words, " "),
+    rm.extra = FALSE)
+txt <- gsub("~~", " ", breaker(DATA2$state))
+rev.neg <- sapply(negation.words, paste, negative.words)
+rev.pos <- sapply(negation.words, paste, positive.words)
+
+## Generate themes/terms to color by
+tw <- list(
+    positive=c(positive.words, rev.neg[rev.neg %in% txt]),
+    negative=c(negative.words, rev.pos[rev.pos %in% txt])
+)
+
+with(DATA2, trans_cloud(state, person,
+    target.words=tw,
+    cloud.colors=qcv(darkgreen, red, gray65),
+    expand.target=FALSE, proportional=TRUE, legend=names(tw)))
+```
+
+![plot of chunk unnamed-chunk-210](figure/unnamed-chunk-2101.png) ![plot of chunk unnamed-chunk-210](figure/unnamed-chunk-2102.png) ![plot of chunk unnamed-chunk-210](figure/unnamed-chunk-2103.png) ![plot of chunk unnamed-chunk-210](figure/unnamed-chunk-2104.png) ![plot of chunk unnamed-chunk-210](figure/unnamed-chunk-2105.png) 
+
+
+
+<p id="gradient"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gradient_cloud.html" target="_blank"><code>gradient_cloud</code></a> Examples**<font size="5" color="orange">&diams;</font></p >
+
+
+
+```r
+## Fuse two words
+DATA2 <- DATA
+DATA2$state <- space_fill(DATA$state, c("is fun", "too fun", "you liar"))
+```
+
+
+
+```r
+gradient_cloud(DATA2$state, DATA2$sex, title="Lying Fun", max.word.size = 5,
+    min.word.size = .025)
+```
+
+![plot of chunk unnamed-chunk-212](figure/unnamed-chunk-2121.png) 
+
+```r
+gradient_cloud(DATA2$state, DATA2$sex, title="Houghton Colors", 
+    max.word.size = 8, min.word.size = .01, X ="purple" , Y = "yellow")
+```
+
+![plot of chunk unnamed-chunk-212](figure/unnamed-chunk-2122.png) 
+
+
+
+<h4 id="gantts">Gantt Plot</h4>
+
+Many of the plot methods utilized by other functions' classes are a wrapper for <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> or <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a>.  <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> wraps the <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a>, <a href="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank"><code>gantt_rep</code></a> and <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a> functions to allow for direct input of text dialogue and grouping variabes.  The <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> function is a fast way to make Gantt charts that can be faceted and filled by grouping variables.  A Gantt plot allows the user to find trends and patterns in dialogue across time.  It essentially allwos for a visual representation of an entire exchange of dialogue.  The following examples show the flexibility of <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>; many of these techniques can also be utilized in plot methids for qdap classes that utilize <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> and <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a>.  It is also prudant to be aware of <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a>, that is its arguments and how to utilize it, as it is less conveinent yet more flexible and powerful than <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>.
+
+<p id="ganttplot1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>** - *Single Time/Single Grouping Variable*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+with(rajSPLIT, gantt_plot(text.var = dialogue,
+    grouping.var = person, size=4))
+```
+
+![plot of chunk unnamed-chunk-213](figure/unnamed-chunk-213.png) 
+
+
+<p id="ganttplot2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>** - *Single Time/Multiple Grouping Variable*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+with(rajSPLIT, gantt_plot(text.var = dialogue,
+    grouping.var = list(fam.aff, sex), rm.var  = act,
+    title = "Romeo and Juliet's dialogue"))
+```
+
+![plot of chunk unnamed-chunk-214](figure/unnamed-chunk-214.png) 
+
+
+Sometimes the location of the facets may not be ideal to show the data (i.e., you may want to reverse the x and y axis).  By setting <b><font color="green" face="courier new">transform = TRUE</font></b> the user can make this switch.
+
+<p id="transform"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>`** - *Transforming*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+with(rajSPLIT, gantt_plot(dialogue, list(fam.aff, sex), act,
+    transform=T))
+```
+
+![plot of chunk unnamed-chunk-215](figure/unnamed-chunk-215.png) 
+
+
+Often the defualt colors are less useful in displaying the trends in a way that is most meaningful. Because <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> is a wrapper for ggplot2 the color palletes can easily be extended to use with the output from <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>.
+
+<p id="changecols"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>** - *Color Pallete Examples*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+## Load needed packages
+library(ggplot2); library(scales); library(RColorBrewer); library(grid)
+
+## Duplicate a new data set and make alterations
+rajSPLIT2 <- rajSPLIT
+
+rajSPLIT2$newb <- as.factor(sample(LETTERS[1:2], nrow(rajSPLIT2),
+    replace=TRUE))
+
+z <- with(rajSPLIT2, gantt_plot(dialogue, list(fam.aff, sex),
+    list(act, newb), size = 4))
+```
+
+![plot of chunk unnamed-chunk-216](figure/unnamed-chunk-2161.png) 
+
+```r
+z + theme(panel.margin = unit(1, "lines")) + scale_colour_grey()
+```
+
+![plot of chunk unnamed-chunk-216](figure/unnamed-chunk-2162.png) 
+
+```r
+z + scale_colour_brewer(palette="Dark2")
+```
+
+![plot of chunk unnamed-chunk-216](figure/unnamed-chunk-2163.png) 
+
+```r
+z + scale_colour_manual(values=rep("black", 7))
+```
+
+![plot of chunk unnamed-chunk-216](figure/unnamed-chunk-2164.png) 
+
+```r
+## vector of colors
+cols <- c("black", "red", "blue", "yellow", "orange", "purple", "grey40")
+
+z + scale_colour_manual(values=cols)
+```
+
+![plot of chunk unnamed-chunk-216](figure/unnamed-chunk-2165.png) 
+
+
+At times it may be useful to fill the bar colors by another grouping variable.  The <b><font color="green" face="courier new">fill.var</font></b> argument allows another coloring variable to be utilized.
+
+<p id="examp1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>** - *Fill Variable Example 1*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+## Generate an end mark variable set to fill by
+dat <- rajSPLIT[rajSPLIT$act == 1, ]
+dat$end_mark <- factor(end_mark(dat$dialogue))
+
+with(dat, gantt_plot(text.var = dialogue, grouping.var = list(person, sex),
+    fill.var=end_mark))
+```
+
+![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-217.png) 
+
+
+
+<p id="examp2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>** - *Fill Variable Example 2*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+## Generate an end mark variable data set to fill by
+rajSPLIT2 <- rajSPLIT
+rajSPLIT2$end_mark <- end_mark(rajSPLIT2$dialogue)
+
+with(rajSPLIT2, gantt_plot(text.var = dialogue,
+    grouping.var = list(fam.aff), rm.var  = list(act),
+    fill.var=end_mark, title = "Romeo and Juliet's dialogue"))
+```
+
+![plot of chunk unnamed-chunk-218](figure/unnamed-chunk-218.png) 
+
+
+Be wary though of using coloring to show what faceting would show better.  Here is an example of faceting versus the color fill used in the <a href="#examp1">Fill Variable Example 1</a> above.
+
+<p id="gradient"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gradient_plot.html" target="_blank"><code>gradient_plot</code></a>** - *Facet Instead of Fill Varaible*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+## Repeated Measures Sentence Type Example
+with(rajSPLIT2, gantt_plot(text.var = dialogue,
+    grouping.var = list(fam.aff, sex), rm.var  = list(end_mark, act),
+    title = "Romeo and Juliet's dialogue"))
+```
+
+![plot of chunk unnamed-chunk-219](figure/unnamed-chunk-219.png) 
+
+
+
+<h4 id="heatmaps">Quick Heatmap</h4>
+
+Heatmaps are a powerful way to visualize patterns in matrices.  The gradient allows the user to quickly pick out high and low values.  <a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a> (quick heatmap) is a heatmap function that accepts matrices and dataframes and has some nice pre-sets that work well with the way qdap data is structured.  Two of these assumptions to be aware of is that dataframe is numeric with the exception of a single grouping variable column with the possiblity of additional non-numeric columns passed to  <b><font color="green" face="courier new">facet.vars</font></b>.  <a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a> also assumes that matrices are all numeric with row names serving as the grouping variable.  If passing a dataframe, <a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a> the grouping variable column is assumed to be the first column.
+
+The following examples demonstrate various uses of <a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>.
+
+
+
+```r
+## word stats data set
+ws.ob <- with(DATA.SPLIT, word_stats(state, list(sex, adult), tot=tot))
+
+# same as `plot(ws.ob)`
+qheat(ws.ob) 
+```
+
+![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2201.png) 
+
+```r
+qheat(ws.ob, xaxis.col = c("red", "black", "green", "blue"))
+```
+
+![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2202.png) 
+
+```r
+qheat(ws.ob, order.by = "sptot")
+```
+
+![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2203.png) 
+
+```r
+qheat(ws.ob, order.by = "-sptot")
+```
+
+![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2204.png) 
+
+```r
+qheat(ws.ob, values = TRUE)
+```
+
+![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2205.png) 
+
+```r
+qheat(ws.ob, values = TRUE, text.color = "red")
+```
+
+![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2206.png) 
+
+```r
+qheat(ws.ob, "yellow", "red", grid = FALSE)
+```
+
+![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2207.png) 
+
+
+
+```r
+qheat(mtcars, facet.vars = "cyl")
+```
+
+![plot of chunk unnamed-chunk-221](figure/unnamed-chunk-2211.png) 
+
+```r
+qheat(mtcars, facet.vars = c("gear", "cyl"))
+```
+
+![plot of chunk unnamed-chunk-221](figure/unnamed-chunk-2212.png) 
+
+
+
+```r
+qheat(t(mtcars), by.column=FALSE)
+```
+
+![plot of chunk unnamed-chunk-222](figure/unnamed-chunk-2221.png) 
+
+```r
+qheat(mtcars, plot = FALSE) + coord_flip()
+```
+
+![plot of chunk unnamed-chunk-222](figure/unnamed-chunk-2222.png) 
+
+
+
+```r
+qheat(cor(mtcars), diag.na=TRUE)
+```
+
+![plot of chunk unnamed-chunk-223](figure/unnamed-chunk-223.png) 
+
+
+
+
+```r
+## Create a data set and matching labels
+dat1 <- data.frame(G=LETTERS[1:5], matrix(rnorm(20), ncol = 4))
+dat2 <- data.frame(matrix(LETTERS[1:25], ncol=5))
+qheat(dat1, high = "orange", values=TRUE, text.color = "black")
+```
+
+![plot of chunk unnamed-chunk-224](figure/unnamed-chunk-2241.png) 
+
+```r
+qheat(dat1, high = "orange", values=TRUE, text.color = "black", mat2=dat2)
+```
+
+![plot of chunk unnamed-chunk-224](figure/unnamed-chunk-2242.png) 
+
+
+<h4 id="rankfreq">Rank Frequency Plot</h4>
+
+<h4 id="totplot">Visualize Word Length by Turn of Talk</h4>
+
+<h4 id="venn">Venn Diagram</h4>
+
+<h4 id="wordnet">Word Network Plot</h4>
 
 
 
@@ -9125,7 +9484,7 @@ The following functions will be utilized in this section (click to view more):
 <h3 id="id">ID Sentences</h3>
 
 <div class="funs">
-The following functions will be utilized in this section (click to view more):    
+The following functions will be utilized in this section (click to view more):  
 
 <form action="http://trinker.github.io/qdap_dev/end_inc.html" target="_blank">
     <input type="submit" value="end_inc"> - Test for Incomplete Sentences
@@ -9351,5 +9710,5 @@ If the reader spots an error in this Vignette or would like to suggest an improv
 - Hu Minqing, Liu Bing,   (2004) Mining Opinion Features in Customer Reviews.  <a href="http://www.cs.uic.edu/~liub/publications/aaai04-featureExtract.pdf">http://www.cs.uic.edu/~liub/publications/aaai04-featureExtract.pdf</a>
 - Tyler Rinker,   (2013) qdap: Quantitative Discourse Analysis Package.  <a href="http://github.com/trinker/qdap">http://github.com/trinker/qdap</a>
 - Tyler Rinker,   (2013) reports: Package to asssist in report writing.  <a href="http://github.com/trinker/reports">http://github.com/trinker/reports</a>
-
+- Hadley Wickham,   (2009) ggplot2: {E}legant graphics for data analysis.  <a href="http://had.co.nz/ggplot2/book">http://had.co.nz/ggplot2/book</a>
 
