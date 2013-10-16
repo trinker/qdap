@@ -105,7 +105,7 @@ invisible(rank_freq_mplot(raj$dialogue, jitter = .5, shape = 19, alpha = 1/15))
 mod <- with(mraja1spl , word_list(dialogue, person, cut.n = 10,
     cap.list=unique(mraja1spl$person)))
 x3 <- rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo')
-ltruncdf(x2, 10)
+ltruncdf(x3, 10)
 ltruncdf(rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, plot = FALSE)           , 10)
 invisible(rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo',
     jitter.ammount = 0.15, hap.col = "darkgreen", dis.col = "purple"))

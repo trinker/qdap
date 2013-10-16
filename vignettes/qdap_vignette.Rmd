@@ -4420,7 +4420,7 @@ qheat(cor(mtcars), diag.na=TRUE)
 
 Rank Frequency Plots are a way of visualizing word rank versus frequencies as related to Zipf's law which states that the rank of a word is inversely related to its frequency.  The `r FUN("rank_freq_mplot")` and `r FUN("rank_freq_plot", "rank_freq_mplot")` provide the means to plot the ranks and frequencies of words (with `r FUN("rank_freq_mplot")` plotting by grouping variable(s)).  
 
-`r FUN("rank_freq_mplot")` utilizes the ggplot2 package, whereas, `r FUN("rank_freq_plot", "rank_freq_mplot")` employs base graphics. `r FUN("rank_freq_mplot")` is more general, flexible, and takes text/grouping variables directly; in most cases `r FUN("rank_freq_mplot")` should be prefered (though `r FUN("rank_freq_plot", "rank_freq_mplot")` will render quicker).  The `r FUN("rank_freq_mplot")` family of functions also output rank/frequency dataframes used plot the visuals and other related descriptive statistics.
+`r FUN("rank_freq_mplot")` utilizes the ggplot2 package, whereas, `r FUN("rank_freq_plot", "rank_freq_mplot")` employs base graphics. `r FUN("rank_freq_mplot")` is more general, flexible, and takes text/grouping variables directly; in most cases `r FUN("rank_freq_mplot")` should be prefered (though `r FUN("rank_freq_plot", "rank_freq_mplot")` will render quicker).  The `r FUN("rank_freq_mplot")` family of functions also outputs a list of rank/frequency dataframes used plot the visuals and other related descriptive statistics.
 
 <p id="rank1">`r FT(orange, 5, text="&diams;")` **`r FUN("rank_freq_mplot")`**`r FT(orange, 5, text="&diams;")`</p >
 

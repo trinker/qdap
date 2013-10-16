@@ -249,7 +249,7 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
             reord <- x[, -c(1:2), drop = FALSE]
             ML <- paste0("term(", match.list, ")")
             ML[mprot] <- names(match.list)[mprot]
-            x <- data.frame(x[, 1:2], reord[, ML], check.names= FALSE)
+            x <- data.frame(x[, 1:2], reord[, ML, drop = FALSE], check.names= FALSE)
         }
 
         colnames(x)[1] <- NAME
