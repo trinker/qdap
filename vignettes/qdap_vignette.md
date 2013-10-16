@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.79 16.30 22.40 25.34 16.30 15.00 15.79 19.70 15.00 22.40 15.00
-## [12] 15.00 22.40 22.40 22.40 16.30 16.30 25.34 15.79 22.40
+##  [1] 16.30 19.70 19.70 15.79 19.70 16.30 19.70 22.40 19.70 16.30 22.40
+## [12] 22.40 15.00 16.30 16.30 22.40 15.00 16.30 25.34 22.40
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.79 16.30 22.40 25.34 16.30 15.00 15.79 19.70 15.00 22.40 15.00
-## [12] 15.00 22.40 22.40 22.40 16.30 16.30 25.34 15.79 22.40
+##  [1] 16.30 19.70 19.70 15.79 19.70 16.30 19.70 22.40 19.70 16.30 22.40
+## [12] 22.40 15.00 16.30 16.30 22.40 15.00 16.30 25.34 22.40
 ```
 
 
@@ -8118,16 +8118,16 @@ dist_tab(rnorm(10000), 10)
 
 ```
 ##          interval Freq cum.Freq percent cum.percent
-## 1   (-3.64,-2.89]   16       16    0.16        0.16
-## 2   (-2.89,-2.14]  151      167    1.51        1.67
-## 3   (-2.14,-1.39]  654      821    6.54        8.21
-## 4  (-1.39,-0.639] 1784     2605   17.84       26.05
-## 5   (-0.639,0.11] 2744     5349   27.44       53.49
-## 6    (0.11,0.859] 2599     7948   25.99       79.48
-## 7    (0.859,1.61] 1469     9417   14.69       94.17
-## 8     (1.61,2.36]  493     9910    4.93       99.10
-## 9     (2.36,3.11]   80     9990    0.80       99.90
-## 10    (3.11,3.86]   10    10000    0.10      100.00
+## 1   (-3.61,-2.86]   32       32    0.32        0.32
+## 2   (-2.86,-2.11]  149      181    1.49        1.81
+## 3   (-2.11,-1.35]  686      867    6.86        8.67
+## 4  (-1.35,-0.602] 1944     2811   19.44       28.11
+## 5  (-0.602,0.151] 2781     5592   27.81       55.92
+## 6   (0.151,0.904] 2570     8162   25.70       81.62
+## 7    (0.904,1.66] 1321     9483   13.21       94.83
+## 8     (1.66,2.41]  426     9909    4.26       99.09
+## 9     (2.41,3.16]   81     9990    0.81       99.90
+## 10    (3.16,3.91]   10    10000    0.10      100.00
 ```
 
 ```r
@@ -8136,9 +8136,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   45       45      45          45
-## 2     gray   30       75      30          75
-## 3      red   25      100      25         100
+## 1     blue   34       34      34          34
+## 2     gray   35       69      35          69
+## 3      red   31      100      31         100
 ```
 
 ```r
@@ -9063,7 +9063,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x032ca944>
+<environment: 0x02d59bbc>
 ```
 
 ```r
@@ -9367,6 +9367,7 @@ Heatmaps are a powerful way to visualize patterns in matrices.  The gradient all
 
 The following examples demonstrate various uses of <a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>.
 
+<p id="heat1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Basic Example*<font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -9377,80 +9378,55 @@ ws.ob <- with(DATA.SPLIT, word_stats(state, list(sex, adult), tot=tot))
 qheat(ws.ob) 
 ```
 
-![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2201.png) 
+![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-220.png) 
+
+
+<p id="heat2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Color Group Labels Example*<font size="5" color="orange">&diams;</font></p >
+
+
 
 ```r
 qheat(ws.ob, xaxis.col = c("red", "black", "green", "blue"))
 ```
 
-![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2202.png) 
+![plot of chunk unnamed-chunk-221](figure/unnamed-chunk-221.png) 
+
+
+<p id="heat3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Order By Numeric Variable Examples*<font size="5" color="orange">&diams;</font></p >
+
 
 ```r
+## Order by sptot
 qheat(ws.ob, order.by = "sptot")
-```
-
-![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2203.png) 
-
-```r
-qheat(ws.ob, order.by = "-sptot")
-```
-
-![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2204.png) 
-
-```r
-qheat(ws.ob, values = TRUE)
-```
-
-![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2205.png) 
-
-```r
-qheat(ws.ob, values = TRUE, text.color = "red")
-```
-
-![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2206.png) 
-
-```r
-qheat(ws.ob, "yellow", "red", grid = FALSE)
-```
-
-![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2207.png) 
-
-
-
-```r
-qheat(mtcars, facet.vars = "cyl")
-```
-
-![plot of chunk unnamed-chunk-221](figure/unnamed-chunk-2211.png) 
-
-```r
-qheat(mtcars, facet.vars = c("gear", "cyl"))
-```
-
-![plot of chunk unnamed-chunk-221](figure/unnamed-chunk-2212.png) 
-
-
-
-```r
-qheat(t(mtcars), by.column=FALSE)
 ```
 
 ![plot of chunk unnamed-chunk-222](figure/unnamed-chunk-2221.png) 
 
 ```r
-qheat(mtcars, plot = FALSE) + coord_flip()
+## Reverse order by sptot
+qheat(ws.ob, order.by = "-sptot")
 ```
 
 ![plot of chunk unnamed-chunk-222](figure/unnamed-chunk-2222.png) 
 
 
+<p id="heat4"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Cell Labels Examples*<font size="5" color="orange">&diams;</font></p >
+
 
 ```r
-qheat(cor(mtcars), diag.na=TRUE)
+qheat(ws.ob, values = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-223](figure/unnamed-chunk-223.png) 
+![plot of chunk unnamed-chunk-223](figure/unnamed-chunk-2231.png) 
 
+```r
+qheat(ws.ob, values = TRUE, text.color = "red")
+```
+
+![plot of chunk unnamed-chunk-223](figure/unnamed-chunk-2232.png) 
+
+
+<p id="heat5"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Custom Cell Labels Example*<font size="5" color="orange">&diams;</font></p >
 
 
 
@@ -9470,7 +9446,204 @@ qheat(dat1, high = "orange", values=TRUE, text.color = "black", mat2=dat2)
 ![plot of chunk unnamed-chunk-224](figure/unnamed-chunk-2242.png) 
 
 
+<p id="heat6"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Grid Examples*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+qheat(ws.ob, "yellow", "red", grid = FALSE)
+```
+
+![plot of chunk unnamed-chunk-225](figure/unnamed-chunk-2251.png) 
+
+```r
+qheat(ws.ob, high = "red", grid = "black")
+```
+
+![plot of chunk unnamed-chunk-225](figure/unnamed-chunk-2252.png) 
+
+
+<p id="heat7"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Facet Examples*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+qheat(mtcars, facet.vars = "cyl")
+```
+
+![plot of chunk unnamed-chunk-226](figure/unnamed-chunk-2261.png) 
+
+```r
+qheat(mtcars, facet.vars = c("gear", "cyl"))
+```
+
+![plot of chunk unnamed-chunk-226](figure/unnamed-chunk-2262.png) 
+
+
+<p id="heat8"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Transposing Examples*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+qheat(t(mtcars), by.column=FALSE)
+```
+
+![plot of chunk unnamed-chunk-227](figure/unnamed-chunk-2271.png) 
+
+```r
+qheat(mtcars, plot = FALSE) + coord_flip()
+```
+
+![plot of chunk unnamed-chunk-227](figure/unnamed-chunk-2272.png) 
+
+
+When plotting a correlation/distance matrix set diag.na = TRUE to keep these extreme values from effecting the scaling.
+
+<p id="heat9"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Correlation Matrix Examples*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+qheat(cor(mtcars), diag.na=TRUE)
+```
+
+![plot of chunk unnamed-chunk-228](figure/unnamed-chunk-228.png) 
+
+
 <h4 id="rankfreq">Rank Frequency Plot</h4>
+
+Rank Frequency Plots are a way of visualizing word rank versus frequencies as related to Zipf's law which states that the rank of a word is inversely related to its frequency.  The <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> and <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> provide the means to plot the ranks and frequencies of words (with <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> plotting by grouping variable(s)).  
+
+<a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> utilizes the ggplot2 package, whereas, <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> employs base graphics. <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> is more general, flexible, and takes text/grouping variables directly; in most cases <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> should be prefered (though <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> will render quicker).  The <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> family of functions also output rank/frequency dataframes used plot the visuals and other related descriptive statistics.
+
+<p id="rank1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a>**<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+## Plot log-log version
+x2 <- rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
+    hap.col = "purple")
+```
+
+![plot of chunk unnamed-chunk-229](figure/unnamed-chunk-2291.png) 
+
+```r
+## View output
+ltruncdf(x2, 10)
+```
+
+```
+## $WORD_COUNTS
+##      group   word freq
+## 1  Abraham    sir    4
+## 2  Abraham    you    3
+## 3  Abraham     at    2
+## 4  Abraham   bite    2
+## 5  Abraham     do    2
+## 6  Abraham     no    2
+## 7  Abraham  thumb    2
+## 8  Abraham     us    2
+## 9  Abraham   your    2
+## 10 Abraham better    1
+## 
+## $RANK_AND_FREQUENCY_STATS
+##       group n.words freq rank
+## 1   Abraham       1    4    1
+## 2   Abraham       1    3    2
+## 3   Abraham       7    2    3
+## 4   Abraham       3    1    4
+## 5  Benvolio       1   23    1
+## 6  Benvolio       1   18    2
+## 7  Benvolio       1   14    3
+## 8  Benvolio       1   13    4
+## 9  Benvolio       1   12    5
+## 10 Benvolio       2   10    6
+## 
+## $LEGOMENA_STATS
+##        person hapax_lego dis_legome
+## 1     Abraham         25      58.33
+## 2    Benvolio      73.68      12.57
+## 3     Capulet      67.84      13.45
+## 4  First Citi         75      16.67
+## 5  First Serv      71.74      17.39
+## 6     Gregory      72.73      17.17
+## 7      Juliet      71.21      16.67
+## 8  Lady Capul      74.59      15.47
+## 9  Lady Monta      92.31       7.69
+## 10   Mercutio      79.56       8.81
+```
+
+```r
+## Plot standard rank-freq version
+invisible(rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
+    log.freq = FALSE, log.rank = FALSE, jitter = .6,  hap.col = "purple"))
+```
+
+![plot of chunk unnamed-chunk-229](figure/unnamed-chunk-2292.png) 
+
+
+<p id="rank2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a>** - *Using alpga*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+invisible(rank_freq_mplot(raj$dialogue, jitter = .5, shape = 19, alpha = 1/15))
+```
+
+![plot of chunk unnamed-chunk-230](figure/unnamed-chunk-230.png) 
+
+
+The <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> plots more quickly but does not handle multiple groups and roes not take text/grouping variables directly.
+
+<p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> Example** <font size="5" color="orange">&diams;</font></p >
+
+
+```r
+## Generate data for `rank_freq_plot` via `word_list` function
+mod <- with(mraja1spl , word_list(dialogue, person, cut.n = 10,
+    cap.list=unique(mraja1spl$person)))
+
+## Plot it
+x3 <- rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo')
+```
+
+![plot of chunk unnamed-chunk-231](figure/unnamed-chunk-231.png) 
+
+```r
+
+## View output
+ltruncdf(x3, 10)
+```
+
+```
+## $WORD_COUNTS
+##    words freq
+## 1      I   30
+## 2      a   27
+## 3    the   27
+## 4    and   25
+## 5     is   24
+## 6     of   24
+## 7     my   22
+## 8   that   22
+## 9     to   22
+## 10    in   21
+## 
+## $RANK_AND_FREQUENCY_STATS
+##    n.words freq rank per.of.tot
+## 1        1   30    1      2.591
+## 2        2   27    2      2.332
+## 3        1   25    3      2.159
+## 4        2   24    4      2.073
+## 5        3   22    5        1.9
+## 6        1   21    6      1.813
+## 7        1   17    7      1.468
+## 8        1   15    8      1.295
+## 9        1   14    9      1.209
+## 10       1   13   10      1.123
+## 
+## $LEGOMENA_STATS
+##   dataframe
+## 1    69.143
+## 2        16
+```
+
+
 
 <h4 id="totplot">Visualize Word Length by Turn of Talk</h4>
 

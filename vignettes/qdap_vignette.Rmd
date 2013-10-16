@@ -4343,6 +4343,7 @@ Heatmaps are a powerful way to visualize patterns in matrices.  The gradient all
 
 The following examples demonstrate various uses of `r FUN("qheat")`.
 
+<p id="heat1">`r FT(orange, 5, text="&diams;")` **`r FUN("qheat")`** - *Basic Example*`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r}
 ## word stats data set
@@ -4352,37 +4353,30 @@ ws.ob <- with(DATA.SPLIT, word_stats(state, list(sex, adult), tot=tot))
 qheat(ws.ob) 
 ```
 
+<p id="heat2">`r FT(orange, 5, text="&diams;")` **`r FUN("qheat")`** - *Color Group Labels Example*`r FT(orange, 5, text="&diams;")`</p >
+
+
 ```{r}
 qheat(ws.ob, xaxis.col = c("red", "black", "green", "blue"))
 ```
 
+<p id="heat3">`r FT(orange, 5, text="&diams;")` **`r FUN("qheat")`** - *Order By Numeric Variable Examples*`r FT(orange, 5, text="&diams;")`</p >
+
 ```{r}
+## Order by sptot
 qheat(ws.ob, order.by = "sptot")
+## Reverse order by sptot
 qheat(ws.ob, order.by = "-sptot")
 ```
+
+<p id="heat4">`r FT(orange, 5, text="&diams;")` **`r FUN("qheat")`** - *Cell Labels Examples*`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r}
 qheat(ws.ob, values = TRUE)
 qheat(ws.ob, values = TRUE, text.color = "red")
 ```
 
-```{r}
-qheat(ws.ob, "yellow", "red", grid = FALSE)
-```
-
-```{r}
-qheat(mtcars, facet.vars = "cyl")
-qheat(mtcars, facet.vars = c("gear", "cyl"))
-```
-
-```{r}
-qheat(t(mtcars), by.column=FALSE)
-qheat(mtcars, plot = FALSE) + coord_flip()
-```
-
-```{r}
-qheat(cor(mtcars), diag.na=TRUE)
-```
+<p id="heat5">`r FT(orange, 5, text="&diams;")` **`r FUN("qheat")`** - *Custom Cell Labels Example*`r FT(orange, 5, text="&diams;")`</p >
 
 
 ```{r}
@@ -4393,7 +4387,76 @@ qheat(dat1, high = "orange", values=TRUE, text.color = "black")
 qheat(dat1, high = "orange", values=TRUE, text.color = "black", mat2=dat2)
 ```
 
+<p id="heat6">`r FT(orange, 5, text="&diams;")` **`r FUN("qheat")`** - *Grid Examples*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r}
+qheat(ws.ob, "yellow", "red", grid = FALSE)
+qheat(ws.ob, high = "red", grid = "black")
+```
+
+<p id="heat7">`r FT(orange, 5, text="&diams;")` **`r FUN("qheat")`** - *Facet Examples*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r}
+qheat(mtcars, facet.vars = "cyl")
+qheat(mtcars, facet.vars = c("gear", "cyl"))
+```
+
+<p id="heat8">`r FT(orange, 5, text="&diams;")` **`r FUN("qheat")`** - *Transposing Examples*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r}
+qheat(t(mtcars), by.column=FALSE)
+qheat(mtcars, plot = FALSE) + coord_flip()
+```
+
+When plotting a correlation/distance matrix set diag.na = TRUE to keep these extreme values from effecting the scaling.
+
+<p id="heat9">`r FT(orange, 5, text="&diams;")` **`r FUN("qheat")`** - *Correlation Matrix Examples*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r}
+qheat(cor(mtcars), diag.na=TRUE)
+```
+
 <h4 id="rankfreq">Rank Frequency Plot</h4>
+
+Rank Frequency Plots are a way of visualizing word rank versus frequencies as related to Zipf's law which states that the rank of a word is inversely related to its frequency.  The `r FUN("rank_freq_mplot")` and `r FUN("rank_freq_plot", "rank_freq_mplot")` provide the means to plot the ranks and frequencies of words (with `r FUN("rank_freq_mplot")` plotting by grouping variable(s)).  
+
+`r FUN("rank_freq_mplot")` utilizes the ggplot2 package, whereas, `r FUN("rank_freq_plot", "rank_freq_mplot")` employs base graphics. `r FUN("rank_freq_mplot")` is more general, flexible, and takes text/grouping variables directly; in most cases `r FUN("rank_freq_mplot")` should be prefered (though `r FUN("rank_freq_plot", "rank_freq_mplot")` will render quicker).  The `r FUN("rank_freq_mplot")` family of functions also output rank/frequency dataframes used plot the visuals and other related descriptive statistics.
+
+<p id="rank1">`r FT(orange, 5, text="&diams;")` **`r FUN("rank_freq_mplot")`**`r FT(orange, 5, text="&diams;")`</p >
+
+```{r}
+## Plot log-log version
+x2 <- rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
+    hap.col = "purple")
+## View output
+ltruncdf(x2, 10)
+## Plot standard rank-freq version
+invisible(rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
+    log.freq = FALSE, log.rank = FALSE, jitter = .6,  hap.col = "purple"))
+```
+
+<p id="rank2">`r FT(orange, 5, text="&diams;")` **`r FUN("rank_freq_mplot")`** - *Using alpga*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r}
+invisible(rank_freq_mplot(raj$dialogue, jitter = .5, shape = 19, alpha = 1/15))
+```
+
+The `r FUN("rank_freq_plot", "rank_freq_mplot")` plots more quickly but does not handle multiple groups and roes not take text/grouping variables directly.
+
+<p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("rank_freq_plot", "rank_freq_mplot")` Example** `r FT(orange, 5, text="&diams;")`</p >
+
+```{r}
+## Generate data for `rank_freq_plot` via `word_list` function
+mod <- with(mraja1spl , word_list(dialogue, person, cut.n = 10,
+    cap.list=unique(mraja1spl$person)))
+
+## Plot it
+x3 <- rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo')
+
+## View output
+ltruncdf(x3, 10)
+```
+
 
 <h4 id="totplot">Visualize Word Length by Turn of Talk</h4>
 
