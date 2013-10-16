@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 19.70 19.70 15.79 19.70 16.30 19.70 22.40 19.70 16.30 22.40
-## [12] 22.40 15.00 16.30 16.30 22.40 15.00 16.30 25.34 22.40
+##  [1] 19.70 15.00 15.00 16.30 22.40 16.30 16.30 16.30 15.00 16.30 19.70
+## [12] 19.70 25.34 15.00 15.79 16.30 15.79 16.30 15.00 16.30
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 19.70 19.70 15.79 19.70 16.30 19.70 22.40 19.70 16.30 22.40
-## [12] 22.40 15.00 16.30 16.30 22.40 15.00 16.30 25.34 22.40
+##  [1] 19.70 15.00 15.00 16.30 22.40 16.30 16.30 16.30 15.00 16.30 19.70
+## [12] 19.70 25.34 15.00 15.79 16.30 15.79 16.30 15.00 16.30
 ```
 
 
@@ -8117,17 +8117,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##          interval Freq cum.Freq percent cum.percent
-## 1   (-3.61,-2.86]   32       32    0.32        0.32
-## 2   (-2.86,-2.11]  149      181    1.49        1.81
-## 3   (-2.11,-1.35]  686      867    6.86        8.67
-## 4  (-1.35,-0.602] 1944     2811   19.44       28.11
-## 5  (-0.602,0.151] 2781     5592   27.81       55.92
-## 6   (0.151,0.904] 2570     8162   25.70       81.62
-## 7    (0.904,1.66] 1321     9483   13.21       94.83
-## 8     (1.66,2.41]  426     9909    4.26       99.09
-## 9     (2.41,3.16]   81     9990    0.81       99.90
-## 10    (3.16,3.91]   10    10000    0.10      100.00
+##           interval Freq cum.Freq percent cum.percent
+## 1    (-3.81,-3.08]   10       10    0.10        0.10
+## 2    (-3.08,-2.36]   93      103    0.93        1.03
+## 3    (-2.36,-1.63]  436      539    4.36        5.39
+## 4   (-1.63,-0.898] 1373     1912   13.73       19.12
+## 5  (-0.898,-0.169] 2443     4355   24.43       43.55
+## 6   (-0.169,0.559] 2754     7109   27.54       71.09
+## 7     (0.559,1.29] 1883     8992   18.83       89.92
+## 8      (1.29,2.02]  782     9774    7.82       97.74
+## 9      (2.02,2.75]  202     9976    2.02       99.76
+## 10     (2.75,3.47]   24    10000    0.24      100.00
 ```
 
 ```r
@@ -8136,9 +8136,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   34       34      34          34
-## 2     gray   35       69      35          69
-## 3      red   31      100      31         100
+## 1     blue   38       38      38          38
+## 2     gray   34       72      34          72
+## 3      red   28      100      28         100
 ```
 
 ```r
@@ -9063,7 +9063,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x02d59bbc>
+<environment: 0x11e21d58>
 ```
 
 ```r
@@ -9103,7 +9103,7 @@ The following functions will be utilized in this section (click to view more): <
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank">
-    <input type="submit" value="rank_freq_mplot"><input type="submit" value="rank_freq_plot"> - <a href="rankfreq">Rank Frequency Plot</a>
+    <input type="submit" value="rank_freq_mplot"><input type="submit" value="rank_freq_plot"> - <a href="#rankfreq">Rank Frequency Plot</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank">
@@ -9599,13 +9599,13 @@ mod <- with(mraja1spl , word_list(dialogue, person, cut.n = 10,
     cap.list=unique(mraja1spl$person)))
 
 ## Plot it
-x3 <- rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo')
+x3 <- rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, 
+    title.ext = 'Romeo')
 ```
 
 ![plot of chunk unnamed-chunk-231](figure/unnamed-chunk-231.png) 
 
 ```r
-
 ## View output
 ltruncdf(x3, 10)
 ```

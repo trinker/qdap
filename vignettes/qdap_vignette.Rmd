@@ -4145,7 +4145,7 @@ The following functions will be utilized in this section (click to view more): <
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank">
-    <input type="submit" value="rank_freq_mplot"><input type="submit" value="rank_freq_plot"> - `r HR("rankfreq", "Rank Frequency Plot")`
+    <input type="submit" value="rank_freq_mplot"><input type="submit" value="rank_freq_plot"> - `r HR("#rankfreq", "Rank Frequency Plot")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank">
@@ -4396,7 +4396,7 @@ qheat(ws.ob, high = "red", grid = "black")
 
 <p id="heat7">`r FT(orange, 5, text="&diams;")` **`r FUN("qheat")`** - *Facet Examples*`r FT(orange, 5, text="&diams;")`</p >
 
-```{r}
+```{r, fig.width=14}
 qheat(mtcars, facet.vars = "cyl")
 qheat(mtcars, facet.vars = c("gear", "cyl"))
 ```
@@ -4424,7 +4424,7 @@ Rank Frequency Plots are a way of visualizing word rank versus frequencies as re
 
 <p id="rank1">`r FT(orange, 5, text="&diams;")` **`r FUN("rank_freq_mplot")`**`r FT(orange, 5, text="&diams;")`</p >
 
-```{r}
+```{r, fig.width = 14, fig.height = 10}
 ## Plot log-log version
 x2 <- rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
     hap.col = "purple")
@@ -4437,7 +4437,7 @@ invisible(rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
 
 <p id="rank2">`r FT(orange, 5, text="&diams;")` **`r FUN("rank_freq_mplot")`** - *Using alpga*`r FT(orange, 5, text="&diams;")`</p >
 
-```{r}
+```{r, fig.width = 9}
 invisible(rank_freq_mplot(raj$dialogue, jitter = .5, shape = 19, alpha = 1/15))
 ```
 
@@ -4451,8 +4451,8 @@ mod <- with(mraja1spl , word_list(dialogue, person, cut.n = 10,
     cap.list=unique(mraja1spl$person)))
 
 ## Plot it
-x3 <- rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, title.ext = 'Romeo')
-
+x3 <- rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ, 
+    title.ext = 'Romeo')
 ## View output
 ltruncdf(x3, 10)
 ```
