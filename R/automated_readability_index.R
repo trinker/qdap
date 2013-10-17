@@ -309,7 +309,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
 #' grouping variable(s).
 #' 
 #' @rdname Readability
-#' @param labels  logical.  If \code{TRUE} labels automatically added.  If 
+#' @param auto.label  logical.  If \code{TRUE} labels automatically added.  If 
 #' \code{FALSE} the user clicks interactively.
 #' @param grid logical.  If \code{TRUE} a micro grid is dsicplayed similar to 
 #' Fry's original depiction, though this makes visualizing more difficult.

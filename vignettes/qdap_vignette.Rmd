@@ -1142,12 +1142,24 @@ The following functions will be utilized in this section (click to view more):
 
 Many functions in the qdap package require that the dialogue is broken apart into individual sentences, failure to do so may invalidate many of the outputs from the analysis and will lead to lead to warnings.  After reading in and cleaning the data the next step should be to split the text variable into individual sentences.  The `r FUN("sentSplit")` function outputs a dataframe with the text variable split into individual sentences and repeats the demographic variables as necessary.  Additionally, a turn of talk (`r FT(red, text="tot column")`) variable is added that keeps track of the original turn of talk (row number) and the sentence number per turn of talk.  The researcher may also want to create a second text column that has benn stemmed for future analysis by setting `r CN("stem.col = TRUE")`, though this is more time intensive.
 
-`r FT(orange, 5, text="&diams;")` **Sentence Splitting**`r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **`r FUN("sentSplit")` Example**`r FT(orange, 5, text="&diams;")`
 
 ```{r}
 sentSplit(DATA, "state")
 sentSplit(DATA, "state", stem.col = TRUE)
 sentSplit(raj, "dialogue")[1:11, ]
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("sentSplit")`** - *plot Method*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+plot(sentSplit(DATA, "state"), grouping.var = "person")
+plot(sentSplit(DATA, "state"), grouping.var = "sex")
+```
+
+`r FT(orange, 5, text="&diams;")` **`r FUN("TOT", "sentSplit")` Example** `r FT(orange, 5, text="&diams;")`
+
+```{r}
 ## Convert tot column wirh sub sentences to turns of talk
 dat <- sentSplit(DATA, "state")
 TOT(dat$tot)

@@ -7,6 +7,8 @@
 \arguments{
   \item{x}{The kullback_leibler object}
 
+  \item{digits}{Number of decimal places to print.}
+
   \item{\ldots}{Other arguments passed to \code{qheat}}
 }
 \description{

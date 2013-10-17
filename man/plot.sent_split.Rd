@@ -1,0 +1,23 @@
+\name{plot.sent_split}
+\alias{plot.sent_split}
+\title{Plots a sent_split Object}
+\usage{
+  \method{plot}{sent_split} (x, text.var = NULL,
+    rm.var = NULL, ...)
+}
+\arguments{
+  \item{x}{The sent_split object.}
+
+  \item{text.var}{The text variable (character string).}
+
+  \item{rm.var}{An optional repeated measures character
+  vector of 1 or 2 to facet by.  If \code{NULL} the
+  \code{rm.var} fron \code{sentSplit} is used.  To avoid
+  this behavior use \code{FALSE}.}
+
+  \item{\ldots}{Other arguments passed to \code{tot_plot}.}
+}
+\description{
+  Plots a sent_split object.
+}
+

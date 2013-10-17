@@ -81,6 +81,7 @@ function(x, digits = 3, ...) {
 #' Plots a kullback_leibler object.
 #' 
 #' @param x The kullback_leibler object
+#' @param digits Number of decimal places to print. 
 #' @param \ldots Other arguments passed to \code{qheat}
 #' @method plot kullback_leibler
 #' @S3method plot kullback_leibler

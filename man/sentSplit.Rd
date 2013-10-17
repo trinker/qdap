@@ -4,7 +4,7 @@
 \alias{TOT}
 \title{Sentence Splitting}
 \usage{
-  sentSplit(dataframe, text.var,
+  sentSplit(dataframe, text.var, rm.var = NULL,
     endmarks = c("?", ".", "!", "|"),
     incomplete.sub = TRUE, rm.bracket = TRUE,
     stem.col = FALSE, text.place = "right", ...)
@@ -19,6 +19,10 @@
   text variable.}
 
   \item{text.var}{The text variable.}
+
+  \item{rm.var}{An optional character vector of 1 or 2
+  naming the variables that are repeated measures (This
+  will restart the \strong{"tot"} column).}
 
   \item{endmarks}{A character vector of endmarks to split
   turns of talk into sentences.}
@@ -91,19 +95,29 @@
 }
 \examples{
 \dontrun{
-#sentSplit EXAMPLE:
-sentSplit(DATA, "state")
+## `sentSpli`t EXAMPLE:
+(out <- sentSplit(DATA, "state"))
 sentSplit(DATA, "state", stem.col = TRUE)
 sentSplit(DATA, "state", text.place = "left")
 sentSplit(DATA, "state", text.place = "original")
 sentSplit(raj, "dialogue")[1:20, ]
 
-#sentCombine EXAMPLE:
+## plotting
+plot(out)
+plot(out, grouping.var = "person")
+
+out2 <- sentSplit(DATA2, "state", rm.var = c("class", "day"))
+plot(out2)
+plot(out2, grouping.var = "person")
+plot(out2, grouping.var = "person", rm.var = "day")
+plot(out2, grouping.var = "person", rm.var = c("class", "day"))
+
+## `sentCombine` EXAMPLE:
 dat <- sentSplit(DATA, "state")
 sentCombine(dat$state, dat$person)
 truncdf(sentCombine(dat$state, dat$sex), 50)
 
-#TOT EXAMPLE:
+## `TOT` EXAMPLE:
 dat <- sentSplit(DATA, "state")
 TOT(dat$tot)
 }

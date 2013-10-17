@@ -44,7 +44,7 @@
   indicating output type. One of "valid" (default and
   congruent with McLaughlin's intent) or "all".}
 
-  \item{labels}{logical.  If \code{TRUE} labels
+  \item{auto.label}{logical.  If \code{TRUE} labels
   automatically added.  If \code{FALSE} the user clicks
   interactively.}
 

@@ -6,6 +6,8 @@
 #' 
 #' @param dataframe A dataframe that contains the person and text variable.
 #' @param text.var The text variable.
+#' @param rm.var An optional character vector of 1 or 2 naming the variables 
+#' that are repeated measures (This will restart the \strong{"tot"} column).
 #' @param endmarks A character vector of endmarks to split turns of talk into 
 #' sentences.
 #' @param incomplete.sub logical.  If \code{TRUE} detects incomplete sentences 
@@ -42,23 +44,78 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' #sentSplit EXAMPLE:
-#' sentSplit(DATA, "state")
+#' ## `sentSpli`t EXAMPLE:
+#' (out <- sentSplit(DATA, "state"))
 #' sentSplit(DATA, "state", stem.col = TRUE)
 #' sentSplit(DATA, "state", text.place = "left")
 #' sentSplit(DATA, "state", text.place = "original")
 #' sentSplit(raj, "dialogue")[1:20, ]
 #' 
-#' #sentCombine EXAMPLE:
+#' ## plotting
+#' plot(out)
+#' plot(out, grouping.var = "person")
+#' 
+#' out2 <- sentSplit(DATA2, "state", rm.var = c("class", "day"))
+#' plot(out2)
+#' plot(out2, grouping.var = "person")
+#' plot(out2, grouping.var = "person", rm.var = "day")
+#' plot(out2, grouping.var = "person", rm.var = c("class", "day"))
+#'
+#' ## `sentCombine` EXAMPLE:
 #' dat <- sentSplit(DATA, "state") 
 #' sentCombine(dat$state, dat$person)
 #' truncdf(sentCombine(dat$state, dat$sex), 50)
 #' 
-#' #TOT EXAMPLE:
+#' ## `TOT` EXAMPLE:
 #' dat <- sentSplit(DATA, "state") 
 #' TOT(dat$tot)
 #' }
 sentSplit <-
+function(dataframe, text.var, rm.var = NULL, endmarks = c("?", ".", "!", "|"), 
+    incomplete.sub = TRUE, rm.bracket = TRUE, stem.col = FALSE, 
+    text.place = "right", ...) {
+
+    if (is.null(rm.var)) {
+        output <- sentSplit_helper(dataframe = dataframe, text.var = text.var, 
+            endmarks = endmarks, incomplete.sub = incomplete.sub, 
+            rm.bracket = rm.bracket, stem.col = stem.col, text.place = text.place
+        )
+
+    } else {
+
+        if (length(rm.var) == 1) {
+            rm_var_list <- dataframe[, rm.var[1]]
+        } else {
+            rm_var_list <- lapply(rm.var, function(x) dataframe[, x])
+        }
+
+
+        spdat <- split(dataframe, rm_var_list)
+        output <- lapply(spdat, function(x){
+            sentSplit(x, text.var = text.var, endmarks = endmarks, 
+                incomplete.sub = incomplete.sub, rm.bracket = rm.bracket, 
+                stem.col = stem.col, text.place = text.place)
+        })
+
+        if (length(rm.var) > 1) {
+            rmvars <- lapply(dataframe[, rev(rm.var)], levels)
+            rmvars <- expand.grid(rmvars)
+            ord <- match(paste2(rmvars[, ncol(rmvars):1], sep = "."), names(output))
+            output <- output[ord]
+        }
+
+        output <- data.frame(do.call(rbind, output), row.names = NULL)
+    }
+ 
+    if (!is.null(rm.var)) {
+        rm.var <- paste0("rmvars_", paste(rm.var, collapse = ":"))
+    } 
+    class(output) <- c("sent_split", paste0("sent_split_text_var:", text.var), 
+        rm.var, class(output))
+    output
+}
+
+sentSplit_helper <-
 function(dataframe, text.var, endmarks = c("?", ".", "!", "|"), 
     incomplete.sub = TRUE, rm.bracket = TRUE, stem.col = FALSE, 
     text.place = "right", ...) {
@@ -196,8 +253,8 @@ function(text.var, grouping.var = NULL, as.list = FALSE) {
 
 #' Convert the tot Column to Turn of Talk
 #' 
-#' \code{TOT} - Convert the tot column from \code{\link[qdap]{sentSplit}} to turn of talk 
-#' index (no sub sentence).  Generally, for internal use.
+#' \code{TOT} - Convert the tot column from \code{\link[qdap]{sentSplit}} to 
+#' turn of talk index (no sub sentence).  Generally, for internal use.
 #' 
 #' @return \code{TOT} - returns a numeric vector of the turns of talk without 
 #' sentence sub indexing (e.g. 3.2 become 3).
@@ -210,3 +267,73 @@ function(tot){
         fixed=TRUE))[[1]]))
     })
 }
+
+
+#' Prints a sent_split object
+#' 
+#' Prints a sent_split object
+#' 
+#' @param x The sent_split object
+#' @param \ldots ignored
+#' @S3method print sent_split
+#' @method print sent_split
+print.sent_split <-
+function(x, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+    class(x) <- "data.frame"
+    print(x)
+    options(width=WD)
+}
+
+#' Plots a sent_split Object
+#' 
+#' Plots a sent_split object.
+#' 
+#' @param x The sent_split object.
+#' @param text.var The text variable (character string).
+#' @param rm.var An optional repeated measures character vector of 1 or 2 to 
+#' facet by.  If \code{NULL} the \code{rm.var} fron \code{sentSplit} is used.  To 
+#' avoid this behavior use
+#' \code{FALSE}.
+#' @param \ldots Other arguments passed to \code{tot_plot}.
+#' @method plot sent_split
+#' @export
+plot.sent_split <- function(x, text.var = NULL, rm.var = NULL, ...) {
+
+    ## check for text var from class of x  
+    if (is.null(text.var)) {
+        dia <- "sent_split_text_var:"
+        tv <- grepl(dia, class(x))
+        text_var <- gsub(dia, "", class(x)[tv])
+        if (!text_var %in% colnames(x)) {
+            stop(paste("\nsentSplit object has been altered:",
+                "please supply `text.var`"))
+        }
+    }
+
+    ## check for repeated measure vars from class of x    
+    if (is.null(rm.var)) {
+        rmv <- "rmvars_"
+        rv <- grepl(rmv, class(x))
+        if (sum(rv) < 1){
+            rm.var <- NULL
+        } else {
+            rm.var <- unlist(strsplit(gsub(rmv, "", class(x)[rv]), ":"))
+            if (sum(rm.var %in% colnames(x)) != length(rm.var)) {
+                warning("rm.var nit matched to column names: rm.var ignored")
+                rm.var <- NULL
+            }
+        }
+    } else {
+        if (!isTRUE(rm.var) & is.logical(rm.var)) {
+            rm.var <- NULL
+        }
+    }
+    
+    tot_plot(x, text.var = text_var, facet.vars = rm.var, ...)
+    
+}
+
+
+

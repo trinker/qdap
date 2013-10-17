@@ -56,6 +56,7 @@ tot_plot <- function(dataframe, text.var, grouping.var = NULL, facet.vars = NULL
     scale = NULL, space = NULL) {
     word.count <- group <- caps <- NULL
     DF <- dataframe
+
     if (isTRUE(tot)) {
         if(!any(colnames(dataframe) %in% "tot")) {
             warning("Turn of talk (\"tot\") column not found; using rows instead")
@@ -70,7 +71,8 @@ tot_plot <- function(dataframe, text.var, grouping.var = NULL, facet.vars = NULL
     if (!tot) {
         tot2 <- dataframe[, "tot"] <- 1:nrow(dataframe)
         dataframe <- dataframe[, c("tot", text.var)]
-    } 
+    }
+
     if (is.character(tot)) {
         if(!any(colnames(dataframe) %in% tot)) {
             warning("Turn of talk (", tot, ") column not found; using rows instead")
@@ -81,29 +83,45 @@ tot_plot <- function(dataframe, text.var, grouping.var = NULL, facet.vars = NULL
             dataframe <- sentCombine(dataframe[, text.var], tot)
         }
     }
+
+    ## added on 10-16-13
+
+    if (tot) {    
+        grabs <- which(sapply(strsplit(names(tot2), "\\."), "[", 2) == "1")
+    } else { 
+        grabs <- tot2
+    }
+    ##
+
     if (!is.null(grouping.var)) {
         G <- paste(grouping.var, collapse="&")
         if (ncol(DF[, grouping.var, drop=FALSE]) > 1) {
-            dataframe[, "group"] <- sapply(split(paste2(DF[, grouping.var]), tot2), unique)
+            dataframe[, "group"] <- paste2(DF[grabs, grouping.var])
         } else {
-            dataframe[, "group"] <- sapply(split(DF[, grouping.var], tot2), unique)
+            dataframe[, "group"] <- DF[grabs, grouping.var]
         }
         colnames(dataframe)[3] <- G
     }
+
     if (!is.null(facet.vars)) {
         G2 <- paste(facet.vars, collapse="&")
         if (ncol(DF[, facet.vars, drop=FALSE]) > 1) {
-            dataframe[, "new2"] <- sapply(split(paste2(DF[, facet.vars[1]]), tot2), unique)
+
+            ## added on 10-16-13
+            dataframe[, "new2"] <- DF[grabs, facet.vars[1]]
+            dataframe[, "new3"] <- DF[grabs, facet.vars[2]]
+            ## 
+
         } else {
-            dataframe[, "new2"] <- sapply(split(DF[, facet.vars[1]], tot2), unique)
+            dataframe[, "new2"] <- DF[grabs, facet.vars[1]]
         }
-        if (length(facet.vars) == 2) {
-            if (ncol(DF[, facet.vars, drop=FALSE]) > 1) {
-                dataframe[, "new3"] <- sapply(split(paste2(DF[, facet.vars[2]]), tot2), unique)
-            } else {
-                dataframe[, "new3"] <- sapply(split(DF[, facet.vars[2]], tot2), unique)
-            }
-        } 
+        #if (length(facet.vars) == 2) {
+        #    if (ncol(DF[, facet.vars, drop=FALSE]) > 1) {
+        #        dataframe[, "new3"] <- sapply(split(paste2(DF[, facet.vars[2]]), tot2), unique)
+        #    } else {
+        #        dataframe[, "new3"] <- sapply(split(DF[, facet.vars[2]], tot2), unique)
+        #    }
+        #} 
     }
     colnames(dataframe)[2] <- "text.var"
     dataframe[, "word.count"] <- wc(dataframe[, "text.var"])
@@ -114,29 +132,33 @@ tot_plot <- function(dataframe, text.var, grouping.var = NULL, facet.vars = NULL
         Ylab <- "Word Count"
     }
     dataframe <- na.omit(dataframe)
+
     dataframe[, "tot"] <- factor(dataframe[, "tot"], 
-        levels=sort(as.numeric(as.character(dataframe[, "tot"]))))
-    dataframe <- dataframe[order(dataframe[, "tot"]), ]
+        levels=unique(sort(as.numeric(as.character(dataframe[, "tot"])))))
+
+
+    #dataframe <- dataframe[order(dataframe[, "tot"]), ]
     dataframe <- droplevels(dataframe)
-    if (!is.null(facet.vars)) {       
-        if (length(facet.vars == 1)) {
-            sdat <- split(dataframe, dataframe[, "new2"])
-        } else {
-            sdat <- split(dataframe, paste2(dataframe[, c("new2", "new3")]))
-        }
-        sdat <- lapply(sdat, function(x) {
-             x[, "tot"] <- factor(1:nrow(x), levels=1:nrow(x))
-             x
-        })
-        dataframe <- do.call(rbind.data.frame, sdat)
-    }
+   # if (!is.null(facet.vars)) {       
+   #     if (length(facet.vars == 1)) {
+   #         sdat <- split(dataframe, dataframe[, "new2"])
+   #     } else {
+   #         sdat <- split(dataframe, paste2(dataframe[, c("new2", "new3")]))
+   #     }
+   #     sdat <- lapply(sdat, function(x) {
+   #          x[, "tot"] <- factor(1:nrow(x), levels=1:nrow(x))
+   #          x
+   #     })
+   #     dataframe <- do.call(rbind.data.frame, sdat)
+   # }
     dataframe["bar.space"] <- rep(bar.space, nrow(dataframe))
+
     theplot <- ggplot(dataframe, aes(tot, word.count, width=1-bar.space)) 
     if (!is.null(grouping.var)) {
         GR <- colnames(dataframe)[3]
         colnames(dataframe)[3] <- "group"
         theplot <- theplot + geom_bar(stat="identity", aes(fill=group), data=dataframe) +
-            labs(fill = caps(gsub("&", " & ", GR, fixed=TRUE), all=TRUE)) 
+            labs(fill = Caps(gsub("&", " & ", GR, fixed=TRUE), all=TRUE)) 
     } else {
         theplot <- theplot + geom_bar(stat="identity")
     }

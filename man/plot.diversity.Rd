@@ -7,9 +7,6 @@
 \arguments{
   \item{x}{The diversity object}
 
-  \item{digits}{Number of decimal places to print if
-  \code{values = TRUE}.}
-
   \item{\ldots}{Other arguments passed to \code{qheat}}
 }
 \description{
