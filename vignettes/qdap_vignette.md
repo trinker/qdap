@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 15.00 22.40 15.00 22.40 22.40 19.70 15.00 15.00 22.40 15.79
-## [12] 22.40 19.70 15.79 15.00 19.70 22.40 15.00 15.00 19.70
+##  [1] 15.00 22.40 19.70 22.40 15.79 25.34 15.79 25.34 15.79 22.40 16.30
+## [12] 16.30 16.30 22.40 15.79 16.30 16.30 15.00 25.34 19.70
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 15.00 22.40 15.00 22.40 22.40 19.70 15.00 15.00 22.40 15.79
-## [12] 22.40 19.70 15.79 15.00 19.70 22.40 15.00 15.00 19.70
+##  [1] 15.00 22.40 19.70 22.40 15.79 25.34 15.79 25.34 15.79 22.40 16.30
+## [12] 16.30 16.30 22.40 15.79 16.30 16.30 15.00 25.34 19.70
 ```
 
 
@@ -8121,17 +8121,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##           interval Freq cum.Freq percent cum.percent
-## 1    (-4.21,-3.39]    3        3    0.03        0.03
-## 2    (-3.39,-2.58]   30       33    0.30        0.33
-## 3    (-2.58,-1.76]  345      378    3.45        3.78
-## 4   (-1.76,-0.951] 1303     1681   13.03       16.81
-## 5  (-0.951,-0.137] 2796     4477   27.96       44.77
-## 6   (-0.137,0.677] 3039     7516   30.39       75.16
-## 7     (0.677,1.49] 1784     9300   17.84       93.00
-## 8       (1.49,2.3]  572     9872    5.72       98.72
-## 9       (2.3,3.12]  108     9980    1.08       99.80
-## 10     (3.12,3.93]   20    10000    0.20      100.00
+##          interval Freq cum.Freq percent cum.percent
+## 1   (-3.49,-2.71]   34       34    0.34        0.34
+## 2   (-2.71,-1.94]  224      258    2.24        2.58
+## 3   (-1.94,-1.17]  999     1257    9.99       12.57
+## 4  (-1.17,-0.393] 2211     3468   22.11       34.68
+## 5   (-0.393,0.38] 2995     6463   29.95       64.63
+## 6     (0.38,1.15] 2309     8772   23.09       87.72
+## 7     (1.15,1.93]  959     9731    9.59       97.31
+## 8      (1.93,2.7]  237     9968    2.37       99.68
+## 9      (2.7,3.48]   31     9999    0.31       99.99
+## 10    (3.48,4.25]    1    10000    0.01      100.00
 ```
 
 ```r
@@ -8140,8 +8140,8 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   31       31      31          31
-## 2     gray   39       70      39          70
+## 1     blue   38       38      38          38
+## 2     gray   32       70      32          70
 ## 3      red   30      100      30         100
 ```
 
@@ -9067,7 +9067,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x11e142c4>
+<environment: 0x0fca58e0>
 ```
 
 ```r
@@ -9651,10 +9651,98 @@ ltruncdf(x3, 10)
 
 <h4 id="totplot">Visualize Word Length by Turn of Talk</h4>
 
+
+```r
+dataframe <- sentSplit(DATA, "state")
+tot_plot(dataframe, "state")
+```
+
+![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2341.png) 
+
+```r
+## Change space between bars
+tot_plot(dataframe, "state", bar.space=.03)
+```
+
+![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2342.png) 
+
+```r
+## Color bars by grouping variable(s)
+tot_plot(dataframe, "state", "sex")
+```
+
+![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2343.png) 
+
+```r
+## Use rownames as tot: color by family affiliation
+tot_plot(mraja1, "dialogue", "fam.aff", tot=FALSE)
+```
+
+![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2344.png) 
+
+```r
+## Use rownames as tot: color by death
+tot_plot(mraja1, "dialogue", "died", tot=FALSE)
+```
+
+![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2345.png) 
+
+
+
+```r
+tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE) +
+    scale_fill_hue(l=40)
+```
+
+![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-2351.png) 
+
+```r
+tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
+    scale_fill_brewer(palette="Spectral")
+```
+
+![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-2352.png) 
+
+```r
+tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
+    scale_fill_brewer(palette="Set1")
+```
+
+![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-2353.png) 
+
+
 <h4 id="venn">Venn Diagram</h4>
+
+
+```r
+with(DATA , trans_venn(state, person, legend.location = "topright"))
+```
+
+![plot of chunk unnamed-chunk-236](figure/unnamed-chunk-236.png) 
+
 
 <h4 id="wordnet">Word Network Plot</h4>
 
+
+```r
+word_network_plot(text.var=DATA$state, grouping.var=DATA$person)
+```
+
+![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-2371.png) 
+
+```r
+word_network_plot(text.var=DATA$state, grouping.var=list(DATA$sex,
+    DATA$adult))
+```
+
+![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-2372.png) 
+
+```r
+word_network_plot(text.var=DATA$state, grouping.var=DATA$person,
+    title.name = "TITLE", log.labels=TRUE)
+```
+
+![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-2373.png) 
 
 
 

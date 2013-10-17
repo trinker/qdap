@@ -14,8 +14,8 @@
 
   \item{text.var}{The text variable (character string).}
 
-  \item{grouping.var}{The grouping variables.  Default
-  \code{NULL} generates one word list for all text.  Also
+  \item{grouping.var}{The grouping variables to colot by.
+  Default \code{NULL} colors everything in "black".  Also
   takes a single grouping variable or a list of 1 or more
   grouping variables.}
 
@@ -66,8 +66,9 @@
 dataframe <- sentSplit(DATA, "state")
 tot_plot(dataframe, "state")
 tot_plot(DATA, "state", tot=FALSE)
-tot_plot(dataframe, "state", space=.03)
+tot_plot(dataframe, "state", bar.space=.03)
 tot_plot(dataframe, "state", "sex")
+tot_plot(dataframe, "state", "person", tot = "sex")
 tot_plot(mraja1, "dialogue", "fam.aff", tot=FALSE)
 tot_plot(mraja1, "dialogue", "died", tot=FALSE)
 tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE) +
@@ -76,6 +77,10 @@ tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Spectral")
 tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Set1")
+
+## repeated measures
+rajSPLIT2 <- do.call(rbind, lapply(split(rajSPLIT, rajSPLIT$act), head, 25))
+tot_plot(rajSPLIT2, "dialogue", "fam.aff", facet.var = "act")
 }
 }
 \keyword{sentence,}

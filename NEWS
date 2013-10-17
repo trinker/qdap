@@ -179,6 +179,12 @@ MINOR FEATURES
 * `colsplit2df` not splits multiple columns to match the capabilities of 
   `colpaste2df`.
 
+* `sentSplit` now handles repeated measures and picks up a turn of talk plot 
+  method.
+
+* `tot_plot` now handles repeated measures and `grouping.var` to be nested 
+  within the turn of talk.
+
 CHANGES
 
 * The dictionaries and word lists for qdap have been moved to their own package, 

@@ -4472,11 +4472,48 @@ ltruncdf(x3, 10)
 
 <h4 id="totplot">Visualize Word Length by Turn of Talk</h4>
 
+```{r}
+dataframe <- sentSplit(DATA, "state")
+tot_plot(dataframe, "state")
+## Change space between bars
+tot_plot(dataframe, "state", bar.space=.03)
+## Color bars by grouping variable(s)
+tot_plot(dataframe, "state", "sex")
+## Use rownames as tot: color by family affiliation
+tot_plot(mraja1, "dialogue", "fam.aff", tot=FALSE)
+## Use rownames as tot: color by death
+tot_plot(mraja1, "dialogue", "died", tot=FALSE)
+```
+
+```{r}
+tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE) +
+    scale_fill_hue(l=40)
+tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
+    scale_fill_brewer(palette="Spectral")
+tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
+    scale_fill_brewer(palette="Set1")
+```
+
+```{r, figwidth = 14}
+rajSPLIT2 <- do.call(rbind, lapply(split(rajSPLIT, rajSPLIT$act), head, 25))
+tot_plot(rajSPLIT2, "dialogue", "fam.aff", facet.var = "act")
+```
+
 <h4 id="venn">Venn Diagram</h4>
+
+```{r}
+with(DATA , trans_venn(state, person, legend.location = "topright"))
+```
 
 <h4 id="wordnet">Word Network Plot</h4>
 
-
+```{r}
+word_network_plot(text.var=DATA$state, grouping.var=DATA$person)
+word_network_plot(text.var=DATA$state, grouping.var=list(DATA$sex,
+    DATA$adult))
+word_network_plot(text.var=DATA$state, grouping.var=DATA$person,
+    title.name = "TITLE", log.labels=TRUE)
+```
 
 
 <h3 id="id">ID Sentences</h3>

@@ -110,7 +110,7 @@ out2 <- sentSplit(DATA2, "state", rm.var = c("class", "day"))
 plot(out2)
 plot(out2, grouping.var = "person")
 plot(out2, grouping.var = "person", rm.var = "day")
-plot(out2, grouping.var = "person", rm.var = c("class", "day"))
+plot(out2, grouping.var = "person", rm.var = c("day", "class"))
 
 ## `sentCombine` EXAMPLE:
 dat <- sentSplit(DATA, "state")

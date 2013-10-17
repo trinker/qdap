@@ -105,6 +105,9 @@ relatively new to CRAN, made these changes sensible at this point.
 * `colcomb2class` quickly combines columns for  number of <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> classes including 
   output from: `termco`, `question_type`, `pos_by`, adn 1character_table`.
 
+* `lview` a function to unclass a list output that has a special print method 
+  that returns only a portion of the output.  `lview` reclasses to "list".
+
 <b>MINOR FEATURES</b>
 
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 
@@ -175,6 +178,12 @@ relatively new to CRAN, made these changes sensible at this point.
 
 * `colsplit2df` not splits multiple columns to match the capabilities of 
   `colpaste2df`.
+
+* `sentSplit` now handles repeated measures and picks up a turn of talk plot 
+  method.
+
+* `tot_plot` now handles repeated measures and `grouping.var` to be nested 
+  within the turn of talk.
 
 <b>CHANGES</b>
 
