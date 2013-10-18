@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 19.70 19.70 15.79 19.70 16.30 15.00 16.30 22.40 22.40 22.40
-## [12] 22.40 22.40 25.34 25.34 25.34 15.79 19.70 22.40 22.40
+##  [1] 16.30 16.30 19.70 25.34 15.79 19.70 19.70 16.30 15.79 15.00 15.79
+## [12] 19.70 16.30 15.79 25.34 22.40 19.70 15.79 15.00 19.70
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 19.70 19.70 15.79 19.70 16.30 15.00 16.30 22.40 22.40 22.40
-## [12] 22.40 22.40 25.34 25.34 25.34 15.79 19.70 22.40 22.40
+##  [1] 16.30 16.30 19.70 25.34 15.79 19.70 19.70 16.30 15.79 15.00 15.79
+## [12] 19.70 16.30 15.79 25.34 22.40 19.70 15.79 15.00 19.70
 ```
 
 
@@ -8121,17 +8121,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##          interval Freq cum.Freq percent cum.percent
-## 1   (-4.14,-3.38]    5        5    0.05        0.05
-## 2   (-3.38,-2.62]   36       41    0.36        0.41
-## 3   (-2.62,-1.87]  246      287    2.46        2.87
-## 4   (-1.87,-1.11] 1015     1302   10.15       13.02
-## 5  (-1.11,-0.352] 2319     3621   23.19       36.21
-## 6  (-0.352,0.405] 2898     6519   28.98       65.19
-## 7    (0.405,1.16] 2224     8743   22.24       87.43
-## 8     (1.16,1.92]  976     9719    9.76       97.19
-## 9     (1.92,2.68]  233     9952    2.33       99.52
-## 10    (2.68,3.43]   48    10000    0.48      100.00
+##           interval Freq cum.Freq percent cum.percent
+## 1    (-4.28,-3.45]    2        2    0.02        0.02
+## 2    (-3.45,-2.61]   29       31    0.29        0.31
+## 3    (-2.61,-1.78]  300      331    3.00        3.31
+## 4   (-1.78,-0.947] 1402     1733   14.02       17.33
+## 5  (-0.947,-0.114] 2869     4602   28.69       46.02
+## 6    (-0.114,0.72] 3083     7685   30.83       76.85
+## 7      (0.72,1.55] 1700     9385   17.00       93.85
+## 8      (1.55,2.39]  535     9920    5.35       99.20
+## 9      (2.39,3.22]   74     9994    0.74       99.94
+## 10     (3.22,4.05]    6    10000    0.06      100.00
 ```
 
 ```r
@@ -8140,9 +8140,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   24       24      24          24
-## 2     gray   42       66      42          66
-## 3      red   34      100      34         100
+## 1     blue   31       31      31          31
+## 2     gray   32       63      32          63
+## 3      red   37      100      37         100
 ```
 
 ```r
@@ -9067,7 +9067,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x11bf0af4>
+<environment: 0x12d8f224>
 ```
 
 ```r
@@ -10015,8 +10015,8 @@ If the reader spots an error in this Vignette or would like to suggest an improv
 - Francis Heylighen,   (1999) Advantages and Limitations of Formal Expression.  <em>Foundations of Science</em>  <strong>4</strong>  25-56-NA  <a href="http://dx.doi.org/10.1023/A:1009686703349">10.1023/A:1009686703349</a>
 - Francis Heylighen, Jean-Marc Dewaele,   (1999) Formality of Language: Definition, measurement and behavioral determinants.  <a href="http://pespmc1.vub.ac.be/Papers/Formality.pdf">http://pespmc1.vub.ac.be/Papers/Formality.pdf</a>
 - Francis Heylighen., Jean-Marc Dewaele,   (2002) Variation in the Contextuality of Language: An Empirical Measure.  <em>Foundations of Science</em>  <strong>7</strong>  (3)   293-340-NA  <a href="http://dx.doi.org/10.1023/A:1019661126744">10.1023/A:1019661126744</a>
-- Hu Minqing, Liu Bing,   (2004) Mining Opinion Features in Customer Reviews.  <a href="http://www.cs.uic.edu/~liub/publications/aaai04-featureExtract.pdf">http://www.cs.uic.edu/~liub/publications/aaai04-featureExtract.pdf</a>
+- Minqing Hu, Bing Liu,   (2004) Mining Opinion Features in Customer Reviews.  <a href="http://www.cs.uic.edu/~liub/publications/aaai04-featureExtract.pdf">http://www.cs.uic.edu/~liub/publications/aaai04-featureExtract.pdf</a>
 - Tyler Rinker,   (2013) qdap: Quantitative Discourse Analysis Package.  <a href="http://github.com/trinker/qdap">http://github.com/trinker/qdap</a>
 - Tyler Rinker,   (2013) reports: Package to asssist in report writing.  <a href="http://github.com/trinker/reports">http://github.com/trinker/reports</a>
-- Hadley Wickham,   (2009) ggplot2: {E}legant graphics for data analysis.  <a href="http://had.co.nz/ggplot2/book">http://had.co.nz/ggplot2/book</a>
+- Hadley Wickham,   (2009) ggplot2: Elegant graphics for data analysis.  <a href="http://had.co.nz/ggplot2/book">http://had.co.nz/ggplot2/book</a>
 
