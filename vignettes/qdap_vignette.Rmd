@@ -1335,7 +1335,9 @@ adjmat(terms)
 ##         5         5         2         4         4         2 
 </code></pre>
 
-`r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Example 3*`r FT(orange, 5, text="&diams;")`
+It is often useful to plot the adjacency matrix as a network.  The `r HR("http://cran.r-project.org/web/packages/igraph/index.html", "igraph package")` provides this functionality.
+
+<p id="plotadj">`r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Example 1*`r FT(orange, 5, text="&diams;")`</p>
 
 
 ```{r}
@@ -1348,6 +1350,52 @@ V(g)$degree <- degree(g)
 plot(g, layout=layout.auto(g))
 ```
 
+The following example will visualize the presidential debates data as a network plot.
+
+<p id="plotadj2">`r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Example 2*`r FT(orange, 5, text="&diams;")`</p>
+
+```{r}
+library(igraph)
+
+## Subset the presidential debates data set
+subpres <- pres_debates2012[pres_debates2012$person %in% qcv(ROMNEY, OBAMA), ]
+
+## Create a word frequency matrix
+dat <- with(subpres, wfm(dialogue, list(person, time), stopword = Top200Words))
+
+## Generate an adjacency matrix
+adjdat <- adjacency_matrix(dat)
+X <- adjdat$adjacency
+
+g <- graph.adjacency(X, weighted=TRUE, mode ="undirected")
+g <- simplify(g)
+V(g)$label <- V(g)$name
+V(g)$degree <- degree(g)
+plot(g, layout=layout.auto(g))
+```
+
+We can easily add information to the network plot utilizing the `r FUN("dissimilarity")` function to obtain weights and distance measures for use with the plot.
+
+`r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Example 2*`r FT(orange, 5, text="&diams;")`
+
+```{r}
+edge.weight <- 15  #a maximizing thickness constant
+d <- as.matrix(dissimilarity(dat))
+d2 <- d[lower.tri(d)]
+z1 <- edge.weight*d2^2/max(d2)
+z2 <- c(round(d2, 3))
+E(g)$width <- c(z1)[c(z1) != 0] 
+E(g)$label <- c(z2)[c(z2) != 0]
+plot(g, layout=layout.auto(g))
+plot(g, layout=layout.auto(g), edge.curved =TRUE)
+```
+
+`r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Try the plot interactively!*`r FT(orange, 5, text="&diams;")`
+
+                     
+```{r}
+tkplot(g)
+```
 
 
 <h3 id="word">Extract Words</h3>
@@ -4165,7 +4213,7 @@ The following functions will be utilized in this section (click to view more): <
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank">
-    <input type="submit" value="trans_venn"> - `r HR("venn", "Venn Diagram")`
+    <input type="submit" value="trans_venn"> - `r HR("#venn", "Venn Diagram")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank">
@@ -4472,71 +4520,82 @@ ltruncdf(x3, 10)
 
 <h4 id="totplot">Visualize Word Length by Turn of Talk</h4>
 
-<p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("tot_plot")`** - *Examples* `r FT(orange, 5, text="&diams;")`</p >
+It is often useful to view the lengths of turns of talk as a barplot, particularly id the bars are colored by grouping variable.  The `r FUN("tot_plot")` function plots dialogue as a bar plot with the option to color by grouping variables and facet by repreated measure variables.  This can enable the entire dialogue to be viewed in a succint way, possibly leading the researcher to see patterns that may have otherwises escaped attention.  
+
+Within the `r FUN("tot_plot")` function the turn of talk argument (<b><font color="green" face="courier new">tot</font></b>) may be the <b>"tot"</b> column from `r FUN("sentSplit")` output (<b><font color="green" face="courier new">tot = TRUE</font></b>), the row numbers (<b><font color="green" face="courier new">tot = FALSE</font></b>), the character name of a column (<b><font color="green" face="courier new">tot = "COLUMN NAME"</font></b>), or a separate numeric/character vector equal in length to the <b><font color="green" face="courier new">text.var</font></b>.  
+
+<p id="tot1">`r FT(orange, 5, text="&diams;")` **`r FUN("tot_plot")`** - *Examples* `r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.height = 3}
 dataframe <- sentSplit(DATA, "state")
-tot_plot(dataframe, "state")
+tot_plot(dataframe, text.var = "state")
 ## Change space between bars
-tot_plot(dataframe, "state", bar.space=.03)
+tot_plot(dataframe, text.var = "state", bar.space = .03)
 ## Color bars by grouping variable(s)
-tot_plot(dataframe, "state", "sex")
+tot_plot(dataframe, text.var = "state", grouping.var = "sex")
 ```
 
 ```{r, fig.width = 14, fig.height = 4}
 ## Use rownames as tot: color by family affiliation
-tot_plot(mraja1, "dialogue", "fam.aff", tot=FALSE)
+tot_plot(mraja1, "dialogue", grouping.var = "fam.aff", tot = FALSE)
 ## Use rownames as tot: color by death
-tot_plot(mraja1, "dialogue", "died", tot=FALSE)
+tot_plot(mraja1, "dialogue", grouping.var = "died", tot = FALSE)
 ```
 
-<p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("tot_plot")`** - *Facet Variables* `r FT(orange, 5, text="&diams;")`</p >
+<p id="tot2">`r FT(orange, 5, text="&diams;")` **`r FUN("tot_plot")`** - *Facet Variables* `r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 9}
 rajSPLIT2 <- do.call(rbind, lapply(split(rajSPLIT, rajSPLIT$act), head, 25))
-tot_plot(rajSPLIT2, "dialogue", "fam.aff", facet.var = "act")
+tot_plot(rajSPLIT2, "dialogue", grouping.var = "fam.aff", facet.var = "act")
 ```
 
-<p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("tot_plot")`** - *Alter Colors* `r FT(orange, 5, text="&diams;")`</p >
+Because `r FUN("tot_plot")` is based on the `r HR("http://docs.ggplot2.org/current/", "ggplot2 package")` (Wickham, 2009) and `r FUN("tot_plot")` invisibly returns the ggplot2 object, the output (of the class "ggplot") can be altered in the same way that anu other ggplot2 object can be.  In the following examples the color pallete is altered.
+
+<p id="tot3">`r FT(orange, 5, text="&diams;")` **`r FUN("tot_plot")`** - *Alter Colors* `r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 14, fig.height = 4}
-tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE) +
+tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE) +
     scale_fill_hue(l=40)
-tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
+tot_plot(mraja1, grouping.var = "dialogue", c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Spectral")
-tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
+tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Set1")
 ```
 
 <h4 id="venn">Venn Diagram</h4>
 
+The Venn diagram can be a useful way to visualize similarty between grouping variables with respect to word use when the number of groups is relatively small.  The `r FUN("trans_venn")` function wraps the `r HR("http://cran.r-project.org/web/packages/venneuler/index.html", "venneuler")` package to produce Venn diagrams.  The user must keep in mind that producing this output is computationally slow, thus consideration must be given with regard to data size and number of groups when using `r FUN("trans_venn")` to avoid overplotting and lengthly plot production.  The use of the <b><font color="green" face="courier new">stopwords</font></b> argument can also be useful to reduce the overlp of common words between grouping variables.
+
+If a data set is larger the user may want to consider representing the data as a `r FUN("dissimilarity")` matrix or as an adjacency matrix that can be plotted with the `r HR("http://cran.r-project.org/web/packages/igraph/index.html", "igraph package")` as seen in the `r HR("#plotadj2", "presidential examples above")`.
+
 ```{r, fig.width = 9, fig.height = 9}
 with(DATA , trans_venn(state, person, legend.location = "topright"))
 ```
 
+
 <h4 id="wordnet">Word Network Plot</h4>
 
-<p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between Turns of Talk: All Words* `r FT(orange, 5, text="&diams;")`</p >
+<p id="venn1">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between Turns of Talk: All Words* `r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 9, fig.height = 9}
 word_network_plot(text.var=DATA$state, stopwords=NULL)
 ```
 
-<p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between People* `r FT(orange, 5, text="&diams;")`</p >
+<p id="wordnet1">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between People* `r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 9, fig.height = 9}
 word_network_plot(text.var=DATA$state, DATA$person)
 word_network_plot(text.var=DATA$state, DATA$person, stopwords=NULL)
 ```
 
-<p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between sex and adult* `r FT(orange, 5, text="&diams;")`</p >
+<p id="wordnet2">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between sex and adult* `r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 9, fig.height = 9}
 word_network_plot(text.var=DATA$state, grouping.var=list(DATA$sex,
     DATA$adult))
 ```
 
-<p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *`log.labels`* `r FT(orange, 5, text="&diams;")`</p >
+<p id="wordnet3">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *`log.labels`* `r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 9, fig.height = 9}
 word_network_plot(text.var=DATA$state, grouping.var=DATA$person,
@@ -4550,21 +4609,37 @@ word_network_plot(text.var=DATA$state, grouping.var=DATA$person,
 The following functions will be utilized in this section (click to view more):  
 
 <form action="http://trinker.github.io/qdap_dev/end_inc.html" target="_blank">
-    <input type="submit" value="end_inc"> - Test for Incomplete Sentences
+    <input type="submit" value="end_inc"> - `r HR("#incomp", "Test for Incomplete Sentences")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/end_mark.html" target="_blank">
-    <input type="submit" value="end_mark"> - Sentence End Marks
+    <input type="submit" value="end_mark"> - `r HR("#endmark", "Sentence End Marks")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/imperative.html" target="_blank">
-    <input type="submit" value="imperative"> - Detect and Remark Imperative Sentences
+    <input type="submit" value="imperative"> - `r HR("#imper", "Detect and Remark Imperative Sentences")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/NAer.html" target="_blank">
-    <input type="submit" value="NAer"> - Replace Missing Values (NA)
+    <input type="submit" value="NAer"> - `r HR("#naer", "Replace Missing Values (NA)")`
 </form>
 </div>
+
+
+<h4 id="incomp">Test for Incomplete Sentences</h4>
+
+
+<h4 id="endmark">Sentence End Marks</h4>
+
+
+<h4 id="imper">Detect and Remark Imperative Sentences</h4>
+
+
+<h4 id="naer">Replace Missing Values (NA)</h4>
+
+
+
+
 
 <h3 id="data">Data Sets</h3>
 

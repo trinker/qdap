@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 16.30 19.70 25.34 15.79 19.70 19.70 16.30 15.79 15.00 15.79
-## [12] 19.70 16.30 15.79 25.34 22.40 19.70 15.79 15.00 19.70
+##  [1] 22.40 22.40 25.34 19.70 19.70 19.70 15.00 22.40 19.70 15.79 16.30
+## [12] 16.30 15.79 22.40 15.00 16.30 16.30 15.00 16.30 19.70
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 16.30 19.70 25.34 15.79 19.70 19.70 16.30 15.79 15.00 15.79
-## [12] 19.70 16.30 15.79 25.34 22.40 19.70 15.79 15.00 19.70
+##  [1] 22.40 22.40 25.34 19.70 19.70 19.70 15.00 22.40 19.70 15.79 16.30
+## [12] 16.30 15.79 22.40 15.00 16.30 16.30 15.00 16.30 19.70
 ```
 
 
@@ -3280,7 +3280,9 @@ adjmat(terms)
 ##         5         5         2         4         4         2 
 </code></pre>
 
-<font size="5" color="orange">&diams;</font> **Plotting an Adjaceny Matrix**: *Example 3*<font size="5" color="orange">&diams;</font>
+It is often useful to plot the adjacency matrix as a network.  The <a href="http://cran.r-project.org/web/packages/igraph/index.html">igraph package</a> provides this functionality.
+
+<p id="plotadj"><font size="5" color="orange">&diams;</font> **Plotting an Adjaceny Matrix**: *Example 1*<font size="5" color="orange">&diams;</font></p>
 
 
 
@@ -3296,6 +3298,75 @@ plot(g, layout=layout.auto(g))
 
 ![plot of chunk unnamed-chunk-46](figure/unnamed-chunk-46.png) 
 
+
+The following example will visualize the presidential debates data as a network plot.
+
+<p id="plotadj2"><font size="5" color="orange">&diams;</font> **Plotting an Adjaceny Matrix**: *Example 2*<font size="5" color="orange">&diams;</font></p>
+
+
+```r
+library(igraph)
+
+## Subset the presidential debates data set
+subpres <- pres_debates2012[pres_debates2012$person %in% qcv(ROMNEY, OBAMA), ]
+
+## Create a word frequency matrix
+dat <- with(subpres, wfm(dialogue, list(person, time), stopword = Top200Words))
+
+## Generate an adjacency matrix
+adjdat <- adjacency_matrix(dat)
+X <- adjdat$adjacency
+
+g <- graph.adjacency(X, weighted=TRUE, mode ="undirected")
+g <- simplify(g)
+V(g)$label <- V(g)$name
+V(g)$degree <- degree(g)
+plot(g, layout=layout.auto(g))
+```
+
+![plot of chunk unnamed-chunk-47](figure/unnamed-chunk-47.png) 
+
+
+We can easily add information to the network plot utilizing the <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> function to obtain weights and distance measures for use with the plot.
+
+<font size="5" color="orange">&diams;</font> **Plotting an Adjaceny Matrix**: *Example 2*<font size="5" color="orange">&diams;</font>
+
+
+```r
+edge.weight <- 15  #a maximizing thickness constant
+d <- as.matrix(dissimilarity(dat))
+d2 <- d[lower.tri(d)]
+z1 <- edge.weight*d2^2/max(d2)
+z2 <- c(round(d2, 3))
+E(g)$width <- c(z1)[c(z1) != 0] 
+E(g)$label <- c(z2)[c(z2) != 0]
+plot(g, layout=layout.auto(g))
+```
+
+![plot of chunk unnamed-chunk-48](figure/unnamed-chunk-481.png) 
+
+```r
+plot(g, layout=layout.auto(g), edge.curved =TRUE)
+```
+
+![plot of chunk unnamed-chunk-48](figure/unnamed-chunk-482.png) 
+
+
+<font size="5" color="orange">&diams;</font> **Plotting an Adjaceny Matrix**: *Try the plot interactively!*<font size="5" color="orange">&diams;</font>
+
+                     
+
+```r
+tkplot(g)
+```
+
+```
+## Loading required package: tcltk
+```
+
+```
+## [1] 1
+```
 
 
 
@@ -4184,7 +4255,7 @@ word_associate(DATA2$state, DATA2$person, match.string = ms,
     title.color = "blue", cloud.colors = c("red", "purple", "gray70"))
 ```
 
-![plot of chunk unnamed-chunk-57](figure/unnamed-chunk-571.png) ![plot of chunk unnamed-chunk-57](figure/unnamed-chunk-572.png) ![plot of chunk unnamed-chunk-57](figure/unnamed-chunk-573.png) ![plot of chunk unnamed-chunk-57](figure/unnamed-chunk-574.png) ![plot of chunk unnamed-chunk-57](figure/unnamed-chunk-575.png) ![plot of chunk unnamed-chunk-57](figure/unnamed-chunk-576.png) 
+![plot of chunk unnamed-chunk-60](figure/unnamed-chunk-601.png) ![plot of chunk unnamed-chunk-60](figure/unnamed-chunk-602.png) ![plot of chunk unnamed-chunk-60](figure/unnamed-chunk-603.png) ![plot of chunk unnamed-chunk-60](figure/unnamed-chunk-604.png) ![plot of chunk unnamed-chunk-60](figure/unnamed-chunk-605.png) ![plot of chunk unnamed-chunk-60](figure/unnamed-chunk-606.png) 
 
 ```
 ##    row group unit text                             
@@ -4968,7 +5039,7 @@ foo2  <- list(
 ```
 
 
-![plot of chunk unnamed-chunk-62](figure/unnamed-chunk-62.png) 
+![plot of chunk unnamed-chunk-65](figure/unnamed-chunk-65.png) 
 
 
 
@@ -4994,7 +5065,7 @@ foo2  <- list(
 ```
 
 
-![plot of chunk unnamed-chunk-64](figure/unnamed-chunk-64.png) 
+![plot of chunk unnamed-chunk-67](figure/unnamed-chunk-67.png) 
 
 
 
@@ -5046,7 +5117,7 @@ bar2 <- list(
 ```
 
 
-![plot of chunk unnamed-chunk-67](figure/unnamed-chunk-67.png) 
+![plot of chunk unnamed-chunk-70](figure/unnamed-chunk-70.png) 
 
 
 
@@ -5090,7 +5161,7 @@ bar2 <- list(
 ```
 
 
-![plot of chunk unnamed-chunk-69](figure/unnamed-chunk-69.png) 
+![plot of chunk unnamed-chunk-72](figure/unnamed-chunk-72.png) 
 
 
 <h5 id="cm_code.combine"><font color="green">cm_code.combine Examples</font></h5>
@@ -5116,7 +5187,7 @@ bar2 <- list(
 ```
 
 
-![plot of chunk unnamed-chunk-71](figure/unnamed-chunk-71.png) 
+![plot of chunk unnamed-chunk-74](figure/unnamed-chunk-74.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> Repeated Measures** *Word Example*<font size="5" color="orange">&diams;</font>
@@ -5152,7 +5223,7 @@ combines <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 ```
 
 
-![plot of chunk unnamed-chunk-73](figure/unnamed-chunk-73.png) 
+![plot of chunk unnamed-chunk-76](figure/unnamed-chunk-76.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> Single Time** *Time Span Example*<font size="5" color="orange">&diams;</font>
@@ -5200,7 +5271,7 @@ combines2 <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
 ```
 
 
-![plot of chunk unnamed-chunk-75](figure/unnamed-chunk-75.png) 
+![plot of chunk unnamed-chunk-78](figure/unnamed-chunk-78.png) 
 
 
 <h5 id="cm_code.exclude"><font color="green">cm_code.exclude Examples</font></h5>
@@ -5228,7 +5299,7 @@ combines2 <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
 ```
 
 
-![plot of chunk unnamed-chunk-77](figure/unnamed-chunk-77.png) 
+![plot of chunk unnamed-chunk-80](figure/unnamed-chunk-80.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> Repeated Measures** *Word Example*<font size="5" color="orange">&diams;</font>
@@ -5262,7 +5333,7 @@ exlist <- list(AnoB=qcv(AA, BB), ABnoC=qcv(AA, BB, CC))
 ```
 
 
-![plot of chunk unnamed-chunk-79](figure/unnamed-chunk-79.png) 
+![plot of chunk unnamed-chunk-82](figure/unnamed-chunk-82.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> Repeated Measures** *Time Span Example*<font size="5" color="orange">&diams;</font>
@@ -5318,7 +5389,7 @@ exlist2 <- list(AnoB=qcv(A, B), BnoC=qcv(B, C), ABnoC=qcv(A, B, C))
 ```
 
 
-![plot of chunk unnamed-chunk-81](figure/unnamed-chunk-81.png) 
+![plot of chunk unnamed-chunk-84](figure/unnamed-chunk-84.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> Single TIme** *Time Span Combined Exclude Example*<font size="5" color="orange">&diams;</font>
@@ -5382,7 +5453,7 @@ exlist2 <- list(AnoB=qcv(A, B), BnoC=qcv(B, C), ABnoC=qcv(A, B, C))
 ```
 
 
-![plot of chunk unnamed-chunk-83](figure/unnamed-chunk-83.png) 
+![plot of chunk unnamed-chunk-86](figure/unnamed-chunk-86.png) 
 
 
 <h5 id="cm_code.overlap"><font color="green">cm_code.overlap Examples</font></h5>
@@ -5408,7 +5479,7 @@ exlist2 <- list(AnoB=qcv(A, B), BnoC=qcv(B, C), ABnoC=qcv(A, B, C))
 ```
 
 
-![plot of chunk unnamed-chunk-85](figure/unnamed-chunk-85.png) 
+![plot of chunk unnamed-chunk-88](figure/unnamed-chunk-88.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> Repeated Measures** *Word Example*<font size="5" color="orange">&diams;</font>
@@ -5439,7 +5510,7 @@ overlist <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 ```
 
 
-![plot of chunk unnamed-chunk-87](figure/unnamed-chunk-87.png) 
+![plot of chunk unnamed-chunk-90](figure/unnamed-chunk-90.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> Repeated Measures** *Time Span Example*<font size="5" color="orange">&diams;</font>
@@ -5509,7 +5580,7 @@ overlist2 <- list(AB=qcv(A, B), BC=qcv(B, C), ABC=qcv(A, B, C))
 ```
 
 
-![plot of chunk unnamed-chunk-89](figure/unnamed-chunk-89.png) 
+![plot of chunk unnamed-chunk-92](figure/unnamed-chunk-92.png) 
 
 
 <h5 id="cm_code.transform"><font color="green"><a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> Examples</font></h5>
@@ -5546,7 +5617,7 @@ ct1
 ```
 
 
-![plot of chunk unnamed-chunk-91](figure/unnamed-chunk-91.png) 
+![plot of chunk unnamed-chunk-94](figure/unnamed-chunk-94.png) 
 
 
 <font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a></b> - Example 2<font size="5" color="orange">&diams;</font>
@@ -5590,7 +5661,7 @@ ct2
 ```
 
 
-![plot of chunk unnamed-chunk-93](figure/unnamed-chunk-93.png) 
+![plot of chunk unnamed-chunk-96](figure/unnamed-chunk-96.png) 
 
 
 <font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a></b> - Example 3<font size="5" color="orange">&diams;</font>
@@ -5637,7 +5708,7 @@ ct3
 ```
 
 
-![plot of chunk unnamed-chunk-95](figure/unnamed-chunk-95.png) 
+![plot of chunk unnamed-chunk-98](figure/unnamed-chunk-98.png) 
 
 
 
@@ -5720,7 +5791,7 @@ Now let's examine a few uses of <a href="http://trinker.github.io/qdap_dev/cm_co
 ```
 
 
-![plot of chunk unnamed-chunk-98](figure/unnamed-chunk-98.png) 
+![plot of chunk unnamed-chunk-101](figure/unnamed-chunk-101.png) 
 
 
 Next we'll set `overlap = FALSE` and see that it is identical to <a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a>.
@@ -5744,7 +5815,7 @@ Next we'll set `overlap = FALSE` and see that it is identical to <a href="http:/
 ```
 
 
-![plot of chunk unnamed-chunk-100](figure/unnamed-chunk-100.png) 
+![plot of chunk unnamed-chunk-103](figure/unnamed-chunk-103.png) 
 
 
 
@@ -5774,7 +5845,7 @@ By first combining all codes (see `cb2` above) and then excluding the final code
 ```
 
 
-![plot of chunk unnamed-chunk-102](figure/unnamed-chunk-102.png) 
+![plot of chunk unnamed-chunk-105](figure/unnamed-chunk-105.png) 
 
 
 Next we shall find when at least two codes overlap by setting `overlap = ">1"`.
@@ -5810,7 +5881,7 @@ blanklist <- list(AB=qcv(AA, BB), ABC=qcv(AA, BB, CC))
 ```
 
 
-![plot of chunk unnamed-chunk-104](figure/unnamed-chunk-104.png) 
+![plot of chunk unnamed-chunk-107](figure/unnamed-chunk-107.png) 
 
 
 Last, we will find spans where not one of the codes occurred by setting `overlap = "==0"`.
@@ -5848,7 +5919,7 @@ blanklist2 <- list(noAB=qcv(AA, BB), noABC=qcv(AA, BB, CC))
 ```
 
 
-![plot of chunk unnamed-chunk-106](figure/unnamed-chunk-106.png) 
+![plot of chunk unnamed-chunk-109](figure/unnamed-chunk-109.png) 
 
 
 <h4 id="analysis">Initial Coding Analysis</h4>
@@ -5949,13 +6020,13 @@ Unit of measure: words
 plot(summary(v))
 ```
 
-![plot of chunk unnamed-chunk-109](figure/unnamed-chunk-1091.png) 
+![plot of chunk unnamed-chunk-112](figure/unnamed-chunk-1121.png) 
 
 ```r
 plot(summary(v), facet.vars = "time")
 ```
 
-![plot of chunk unnamed-chunk-109](figure/unnamed-chunk-1092.png) 
+![plot of chunk unnamed-chunk-112](figure/unnamed-chunk-1122.png) 
 
 
 
@@ -6009,7 +6080,7 @@ Columns measured in seconds unless in the form hh:mm:ss
 plot(summary(z))
 ```
 
-![plot of chunk unnamed-chunk-112](figure/unnamed-chunk-112.png) 
+![plot of chunk unnamed-chunk-115](figure/unnamed-chunk-115.png) 
 
 
 <font size="5" color="orange">&diams;</font> **Trouble Shooting Summary: Suppress Measurement Units** <font size="5" color="orange">&diams;</font>
@@ -6110,7 +6181,7 @@ z <- cm_code.combine(v, combs, "time")
 plot(x, title = "Single")
 ```
 
-![plot of chunk unnamed-chunk-116](figure/unnamed-chunk-116.png) 
+![plot of chunk unnamed-chunk-119](figure/unnamed-chunk-119.png) 
 
 
 
@@ -6118,13 +6189,13 @@ plot(x, title = "Single")
 plot(y, title = "Repeated Measure")
 ```
 
-![plot of chunk unnamed-chunk-117](figure/unnamed-chunk-1171.png) 
+![plot of chunk unnamed-chunk-120](figure/unnamed-chunk-1201.png) 
 
 ```r
 plot(z, title = "Combined Codes")
 ```
 
-![plot of chunk unnamed-chunk-117](figure/unnamed-chunk-1172.png) 
+![plot of chunk unnamed-chunk-120](figure/unnamed-chunk-1202.png) 
 
 
 <h5 id="cmdist"><font color="green">Distance Measures</font></h5>
@@ -6161,7 +6232,7 @@ dat <- cm_2long(x, y)
 ```
 
 
-![plot of chunk unnamed-chunk-119](figure/unnamed-chunk-119.png) 
+![plot of chunk unnamed-chunk-122](figure/unnamed-chunk-122.png) 
 
 
 <font size="5" color="orange">&diams;</font> <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a> - *Non-Causal Distance* <font size="5" color="orange">&diams;</font>
@@ -6482,7 +6553,7 @@ names(desc_wrds)
 plot(desc_wrds)
 ```
 
-![plot of chunk unnamed-chunk-130](figure/unnamed-chunk-130.png) 
+![plot of chunk unnamed-chunk-133](figure/unnamed-chunk-133.png) 
 
 
 
@@ -6490,7 +6561,7 @@ plot(desc_wrds)
 plot(desc_wrds, label=TRUE, lab.digits = 1)
 ```
 
-![plot of chunk unnamed-chunk-131](figure/unnamed-chunk-131.png) 
+![plot of chunk unnamed-chunk-134](figure/unnamed-chunk-134.png) 
 
 
 It takes considerable time to run <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> because it is calculating syllable counts.  The user may re-use the object output from one run and bass this as the text variable (`text.var`) in a subsequent run with different grouping variables (`grouping.vars`) as long as the text variable has not changed.  The example below demonstrates how to re-use the output from one <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> run in another run.
@@ -7544,7 +7615,7 @@ termco(DATA$state, DATA$person, syns)
 plot(out)
 ```
 
-![plot of chunk unnamed-chunk-153](figure/unnamed-chunk-153.png) 
+![plot of chunk unnamed-chunk-156](figure/unnamed-chunk-156.png) 
 
 
 
@@ -7552,7 +7623,7 @@ plot(out)
 plot(out, label = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-154](figure/unnamed-chunk-154.png) 
+![plot of chunk unnamed-chunk-157](figure/unnamed-chunk-157.png) 
 
 
 <h4 id="quest">Question Type Counts</h4>
@@ -7640,7 +7711,7 @@ truncdf(x$raw, 15)
 plot(x)
 ```
 
-![plot of chunk unnamed-chunk-157](figure/unnamed-chunk-157.png) 
+![plot of chunk unnamed-chunk-160](figure/unnamed-chunk-160.png) 
 
 
 
@@ -7648,7 +7719,7 @@ plot(x)
 plot(x, label = TRUE, high = "red", low = "yellow", grid = NULL)
 ```
 
-![plot of chunk unnamed-chunk-158](figure/unnamed-chunk-158.png) 
+![plot of chunk unnamed-chunk-161](figure/unnamed-chunk-161.png) 
 
 
 Negative forms of questions such as <font color="green">Don't you want the robots to leave?</font> are, by defualt, grouped with with their equivalent positive <font color="green">Do</font> forms, such as <font color="green">Do you want the robots to leave?</font>.  The researcher may choose to keep the two forms separate using the argument <b><font color="green">neg.cont = TRUE</font>
@@ -8044,7 +8115,7 @@ colcomb2class(x, list(vowels = vowels, consonants = cons, other = 2:7))
 plot(x)
 ```
 
-![plot of chunk unnamed-chunk-167](figure/unnamed-chunk-167.png) 
+![plot of chunk unnamed-chunk-170](figure/unnamed-chunk-170.png) 
 
 
 
@@ -8052,7 +8123,7 @@ plot(x)
 plot(x, label = TRUE, high = "red", lab.digits = 1, zero.replace = "")
 ```
 
-![plot of chunk unnamed-chunk-168](figure/unnamed-chunk-168.png) 
+![plot of chunk unnamed-chunk-171](figure/unnamed-chunk-171.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>character_table</code></a> Additional Plotting**<font size="5" color="orange">&diams;</font>
@@ -8094,7 +8165,7 @@ ggplot(data = dat2, aes(y = variable, x = value, colour=sex)) +
     geom_point()
 ```
 
-![plot of chunk unnamed-chunk-170](figure/unnamed-chunk-170.png) 
+![plot of chunk unnamed-chunk-173](figure/unnamed-chunk-173.png) 
 
 
 
@@ -8105,7 +8176,7 @@ ggplot(data = dat2, aes(x = variable, y = value)) +
     theme(legend.position="none")
 ```
 
-![plot of chunk unnamed-chunk-171](figure/unnamed-chunk-171.png) 
+![plot of chunk unnamed-chunk-174](figure/unnamed-chunk-174.png) 
 
 
 <h4 id="freqtab">SPSS Style Frequency Tables</h4>
@@ -8121,17 +8192,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##           interval Freq cum.Freq percent cum.percent
-## 1    (-4.28,-3.45]    2        2    0.02        0.02
-## 2    (-3.45,-2.61]   29       31    0.29        0.31
-## 3    (-2.61,-1.78]  300      331    3.00        3.31
-## 4   (-1.78,-0.947] 1402     1733   14.02       17.33
-## 5  (-0.947,-0.114] 2869     4602   28.69       46.02
-## 6    (-0.114,0.72] 3083     7685   30.83       76.85
-## 7      (0.72,1.55] 1700     9385   17.00       93.85
-## 8      (1.55,2.39]  535     9920    5.35       99.20
-## 9      (2.39,3.22]   74     9994    0.74       99.94
-## 10     (3.22,4.05]    6    10000    0.06      100.00
+##          interval Freq cum.Freq percent cum.percent
+## 1   (-3.36,-2.64]   37       37    0.37        0.37
+## 2   (-2.64,-1.92]  209      246    2.09        2.46
+## 3   (-1.92,-1.21]  860     1106    8.60       11.06
+## 4  (-1.21,-0.488] 1999     3105   19.99       31.05
+## 5   (-0.488,0.23] 2732     5837   27.32       58.37
+## 6    (0.23,0.948] 2369     8206   23.69       82.06
+## 7    (0.948,1.67] 1278     9484   12.78       94.84
+## 8     (1.67,2.38]  429     9913    4.29       99.13
+## 9      (2.38,3.1]   78     9991    0.78       99.91
+## 10     (3.1,3.82]    9    10000    0.09      100.00
 ```
 
 ```r
@@ -8140,9 +8211,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   31       31      31          31
-## 2     gray   32       63      32          63
-## 3      red   37      100      37         100
+## 1     blue   36       36      36          36
+## 2     gray   30       66      30          66
+## 3      red   34      100      34         100
 ```
 
 ```r
@@ -8424,7 +8495,7 @@ $pos.by.rnp
 plot(posbydat, values = TRUE, digits = 2)
 ```
 
-![plot of chunk unnamed-chunk-178](figure/unnamed-chunk-178.png) 
+![plot of chunk unnamed-chunk-181](figure/unnamed-chunk-181.png) 
 
 
 
@@ -8687,7 +8758,7 @@ with(rajSPLIT, fry(dialogue, list(sex, fam.aff)))
 
 
 
-![plot of chunk unnamed-chunk-187](figure/unnamed-chunk-187.png) 
+![plot of chunk unnamed-chunk-190](figure/unnamed-chunk-190.png) 
 
 
 
@@ -8810,7 +8881,7 @@ ROMNEY.3   0.160   0.182   0.141    0.101    0.140    0.000
 plot(KL, high = "red", values = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-193](figure/unnamed-chunk-193.png) 
+![plot of chunk unnamed-chunk-196](figure/unnamed-chunk-196.png) 
 
 
 
@@ -8856,7 +8927,7 @@ Diversity, as applied to dialogue, is a measure of the richness of language bein
 plot(div.mod, low = "yellow", grid = FALSE, values = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-195](figure/unnamed-chunk-195.png) 
+![plot of chunk unnamed-chunk-198](figure/unnamed-chunk-198.png) 
 
 
 <h4 id="formality">Formality</h4>
@@ -8900,7 +8971,7 @@ form <- with(raj, formality(dialogue, person))
 plot(form)
 ```
 
-![plot of chunk unnamed-chunk-199](figure/unnamed-chunk-199.png) 
+![plot of chunk unnamed-chunk-202](figure/unnamed-chunk-202.png) 
 
 
 <p id="recform"><font size="5" color="orange">&diams;</font> **Recycling <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a>**<font size="5" color="orange">&diams;</font></p > 
@@ -8925,7 +8996,7 @@ plot(form)
 plot(form2, bar.colors=c("Set2", "RdBu"))
 ```
 
-![plot of chunk unnamed-chunk-201](figure/unnamed-chunk-201.png) 
+![plot of chunk unnamed-chunk-204](figure/unnamed-chunk-204.png) 
 
 
 <h4 id="polarity">Polarity Score (Sentiment Analysis)</h4>
@@ -9046,7 +9117,7 @@ htruncdf(poldat$all, 20, 10)
 plot(poldat)
 ```
 
-![plot of chunk unnamed-chunk-207](figure/unnamed-chunk-207.png) 
+![plot of chunk unnamed-chunk-210](figure/unnamed-chunk-210.png) 
 
 
 <p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> Plot Group Polarity as Heat Map**<font size="5" color="orange">&diams;</font></p >
@@ -9056,7 +9127,7 @@ plot(poldat)
 qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.polarity")
 ```
 
-![plot of chunk unnamed-chunk-208](figure/unnamed-chunk-208.png) 
+![plot of chunk unnamed-chunk-211](figure/unnamed-chunk-211.png) 
 
 
 <p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity_frame.html" target="_blank"><code>polarity_frame</code></a>** - *Specify Your Own Polarity Environment*<font size="5" color="orange">&diams;</font></p >
@@ -9067,7 +9138,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x12d8f224>
+<environment: 0x1419b688>
 ```
 
 ```r
@@ -9115,7 +9186,7 @@ The following functions will be utilized in this section (click to view more): <
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank">
-    <input type="submit" value="trans_venn"> - <a href="venn">Venn Diagram</a>
+    <input type="submit" value="trans_venn"> - <a href="#venn">Venn Diagram</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank">
@@ -9165,7 +9236,7 @@ with(DATA, trans_cloud(state, person, target.words=terms,
     "other")))
 ```
 
-![plot of chunk unnamed-chunk-211](figure/unnamed-chunk-2111.png) ![plot of chunk unnamed-chunk-211](figure/unnamed-chunk-2112.png) ![plot of chunk unnamed-chunk-211](figure/unnamed-chunk-2113.png) ![plot of chunk unnamed-chunk-211](figure/unnamed-chunk-2114.png) ![plot of chunk unnamed-chunk-211](figure/unnamed-chunk-2115.png) 
+![plot of chunk unnamed-chunk-214](figure/unnamed-chunk-2141.png) ![plot of chunk unnamed-chunk-214](figure/unnamed-chunk-2142.png) ![plot of chunk unnamed-chunk-214](figure/unnamed-chunk-2143.png) ![plot of chunk unnamed-chunk-214](figure/unnamed-chunk-2144.png) ![plot of chunk unnamed-chunk-214](figure/unnamed-chunk-2145.png) 
 
 
 <p id="transcloud1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank"><code>trans_cloud</code></a> Example 2** - *Polarity*<font size="5" color="orange">&diams;</font></p >
@@ -9194,7 +9265,7 @@ with(DATA2, trans_cloud(state, person,
     expand.target=FALSE, proportional=TRUE, legend=names(tw)))
 ```
 
-![plot of chunk unnamed-chunk-212](figure/unnamed-chunk-2121.png) ![plot of chunk unnamed-chunk-212](figure/unnamed-chunk-2122.png) ![plot of chunk unnamed-chunk-212](figure/unnamed-chunk-2123.png) ![plot of chunk unnamed-chunk-212](figure/unnamed-chunk-2124.png) ![plot of chunk unnamed-chunk-212](figure/unnamed-chunk-2125.png) 
+![plot of chunk unnamed-chunk-215](figure/unnamed-chunk-2151.png) ![plot of chunk unnamed-chunk-215](figure/unnamed-chunk-2152.png) ![plot of chunk unnamed-chunk-215](figure/unnamed-chunk-2153.png) ![plot of chunk unnamed-chunk-215](figure/unnamed-chunk-2154.png) ![plot of chunk unnamed-chunk-215](figure/unnamed-chunk-2155.png) 
 
 
 
@@ -9215,14 +9286,14 @@ gradient_cloud(DATA2$state, DATA2$sex, title="Lying Fun", max.word.size = 5,
     min.word.size = .025)
 ```
 
-![plot of chunk unnamed-chunk-214](figure/unnamed-chunk-2141.png) 
+![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-2171.png) 
 
 ```r
 gradient_cloud(DATA2$state, DATA2$sex, title="Houghton Colors", 
     max.word.size = 8, min.word.size = .01, X ="purple" , Y = "yellow")
 ```
 
-![plot of chunk unnamed-chunk-214](figure/unnamed-chunk-2142.png) 
+![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-2172.png) 
 
 
 
@@ -9238,7 +9309,7 @@ with(rajSPLIT, gantt_plot(text.var = dialogue,
     grouping.var = person, size=4))
 ```
 
-![plot of chunk unnamed-chunk-215](figure/unnamed-chunk-215.png) 
+![plot of chunk unnamed-chunk-218](figure/unnamed-chunk-218.png) 
 
 
 <p id="ganttplot2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>** - *Single Time/Multiple Grouping Variable*<font size="5" color="orange">&diams;</font></p >
@@ -9250,7 +9321,7 @@ with(rajSPLIT, gantt_plot(text.var = dialogue,
     title = "Romeo and Juliet's dialogue"))
 ```
 
-![plot of chunk unnamed-chunk-216](figure/unnamed-chunk-216.png) 
+![plot of chunk unnamed-chunk-219](figure/unnamed-chunk-219.png) 
 
 
 Sometimes the location of the facets may not be ideal to show the data (i.e., you may want to reverse the x and y axis).  By setting <b><font color="green" face="courier new">transform = TRUE</font></b> the user can make this switch.
@@ -9263,7 +9334,7 @@ with(rajSPLIT, gantt_plot(dialogue, list(fam.aff, sex), act,
     transform=T))
 ```
 
-![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-217.png) 
+![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-220.png) 
 
 
 Often the defualt colors are less useful in displaying the trends in a way that is most meaningful. Because <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> is a wrapper for ggplot2 the color palletes can easily be extended to use with the output from <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>.
@@ -9285,25 +9356,25 @@ z <- with(rajSPLIT2, gantt_plot(dialogue, list(fam.aff, sex),
     list(act, newb), size = 4))
 ```
 
-![plot of chunk unnamed-chunk-218](figure/unnamed-chunk-2181.png) 
+![plot of chunk unnamed-chunk-221](figure/unnamed-chunk-2211.png) 
 
 ```r
 z + theme(panel.margin = unit(1, "lines")) + scale_colour_grey()
 ```
 
-![plot of chunk unnamed-chunk-218](figure/unnamed-chunk-2182.png) 
+![plot of chunk unnamed-chunk-221](figure/unnamed-chunk-2212.png) 
 
 ```r
 z + scale_colour_brewer(palette="Dark2")
 ```
 
-![plot of chunk unnamed-chunk-218](figure/unnamed-chunk-2183.png) 
+![plot of chunk unnamed-chunk-221](figure/unnamed-chunk-2213.png) 
 
 ```r
 z + scale_colour_manual(values=rep("black", 7))
 ```
 
-![plot of chunk unnamed-chunk-218](figure/unnamed-chunk-2184.png) 
+![plot of chunk unnamed-chunk-221](figure/unnamed-chunk-2214.png) 
 
 ```r
 ## vector of colors
@@ -9312,7 +9383,7 @@ cols <- c("black", "red", "blue", "yellow", "orange", "purple", "grey40")
 z + scale_colour_manual(values=cols)
 ```
 
-![plot of chunk unnamed-chunk-218](figure/unnamed-chunk-2185.png) 
+![plot of chunk unnamed-chunk-221](figure/unnamed-chunk-2215.png) 
 
 
 At times it may be useful to fill the bar colors by another grouping variable.  The <b><font color="green" face="courier new">fill.var</font></b> argument allows another coloring variable to be utilized.
@@ -9329,7 +9400,7 @@ with(dat, gantt_plot(text.var = dialogue, grouping.var = list(person, sex),
     fill.var=end_mark))
 ```
 
-![plot of chunk unnamed-chunk-219](figure/unnamed-chunk-219.png) 
+![plot of chunk unnamed-chunk-222](figure/unnamed-chunk-222.png) 
 
 
 
@@ -9346,7 +9417,7 @@ with(rajSPLIT2, gantt_plot(text.var = dialogue,
     fill.var=end_mark, title = "Romeo and Juliet's dialogue"))
 ```
 
-![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-220.png) 
+![plot of chunk unnamed-chunk-223](figure/unnamed-chunk-223.png) 
 
 
 Be wary though of using coloring to show what faceting would show better.  Here is an example of faceting versus the color fill used in the <a href="#examp1">Fill Variable Example 1</a> above.
@@ -9361,7 +9432,7 @@ with(rajSPLIT2, gantt_plot(text.var = dialogue,
     title = "Romeo and Juliet's dialogue"))
 ```
 
-![plot of chunk unnamed-chunk-221](figure/unnamed-chunk-221.png) 
+![plot of chunk unnamed-chunk-224](figure/unnamed-chunk-224.png) 
 
 
 
@@ -9382,7 +9453,7 @@ ws.ob <- with(DATA.SPLIT, word_stats(state, list(sex, adult), tot=tot))
 qheat(ws.ob) 
 ```
 
-![plot of chunk unnamed-chunk-222](figure/unnamed-chunk-222.png) 
+![plot of chunk unnamed-chunk-225](figure/unnamed-chunk-225.png) 
 
 
 <p id="heat2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Color Group Labels Example*<font size="5" color="orange">&diams;</font></p >
@@ -9393,7 +9464,7 @@ qheat(ws.ob)
 qheat(ws.ob, xaxis.col = c("red", "black", "green", "blue"))
 ```
 
-![plot of chunk unnamed-chunk-223](figure/unnamed-chunk-223.png) 
+![plot of chunk unnamed-chunk-226](figure/unnamed-chunk-226.png) 
 
 
 <p id="heat3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Order By Numeric Variable Examples*<font size="5" color="orange">&diams;</font></p >
@@ -9404,14 +9475,14 @@ qheat(ws.ob, xaxis.col = c("red", "black", "green", "blue"))
 qheat(ws.ob, order.by = "sptot")
 ```
 
-![plot of chunk unnamed-chunk-224](figure/unnamed-chunk-2241.png) 
+![plot of chunk unnamed-chunk-227](figure/unnamed-chunk-2271.png) 
 
 ```r
 ## Reverse order by sptot
 qheat(ws.ob, order.by = "-sptot")
 ```
 
-![plot of chunk unnamed-chunk-224](figure/unnamed-chunk-2242.png) 
+![plot of chunk unnamed-chunk-227](figure/unnamed-chunk-2272.png) 
 
 
 <p id="heat4"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Cell Labels Examples*<font size="5" color="orange">&diams;</font></p >
@@ -9421,13 +9492,13 @@ qheat(ws.ob, order.by = "-sptot")
 qheat(ws.ob, values = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-225](figure/unnamed-chunk-2251.png) 
+![plot of chunk unnamed-chunk-228](figure/unnamed-chunk-2281.png) 
 
 ```r
 qheat(ws.ob, values = TRUE, text.color = "red")
 ```
 
-![plot of chunk unnamed-chunk-225](figure/unnamed-chunk-2252.png) 
+![plot of chunk unnamed-chunk-228](figure/unnamed-chunk-2282.png) 
 
 
 <p id="heat5"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Custom Cell Labels Example*<font size="5" color="orange">&diams;</font></p >
@@ -9441,13 +9512,13 @@ dat2 <- data.frame(matrix(LETTERS[1:25], ncol=5))
 qheat(dat1, high = "orange", values=TRUE, text.color = "black")
 ```
 
-![plot of chunk unnamed-chunk-226](figure/unnamed-chunk-2261.png) 
+![plot of chunk unnamed-chunk-229](figure/unnamed-chunk-2291.png) 
 
 ```r
 qheat(dat1, high = "orange", values=TRUE, text.color = "black", mat2=dat2)
 ```
 
-![plot of chunk unnamed-chunk-226](figure/unnamed-chunk-2262.png) 
+![plot of chunk unnamed-chunk-229](figure/unnamed-chunk-2292.png) 
 
 
 <p id="heat6"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Grid Examples*<font size="5" color="orange">&diams;</font></p >
@@ -9457,13 +9528,13 @@ qheat(dat1, high = "orange", values=TRUE, text.color = "black", mat2=dat2)
 qheat(ws.ob, "yellow", "red", grid = FALSE)
 ```
 
-![plot of chunk unnamed-chunk-227](figure/unnamed-chunk-2271.png) 
+![plot of chunk unnamed-chunk-230](figure/unnamed-chunk-2301.png) 
 
 ```r
 qheat(ws.ob, high = "red", grid = "black")
 ```
 
-![plot of chunk unnamed-chunk-227](figure/unnamed-chunk-2272.png) 
+![plot of chunk unnamed-chunk-230](figure/unnamed-chunk-2302.png) 
 
 
 <p id="heat7"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Facet Examples*<font size="5" color="orange">&diams;</font></p >
@@ -9473,13 +9544,13 @@ qheat(ws.ob, high = "red", grid = "black")
 qheat(mtcars, facet.vars = "cyl")
 ```
 
-![plot of chunk unnamed-chunk-228](figure/unnamed-chunk-2281.png) 
+![plot of chunk unnamed-chunk-231](figure/unnamed-chunk-2311.png) 
 
 ```r
 qheat(mtcars, facet.vars = c("gear", "cyl"))
 ```
 
-![plot of chunk unnamed-chunk-228](figure/unnamed-chunk-2282.png) 
+![plot of chunk unnamed-chunk-231](figure/unnamed-chunk-2312.png) 
 
 
 <p id="heat8"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Transposing Examples*<font size="5" color="orange">&diams;</font></p >
@@ -9489,13 +9560,13 @@ qheat(mtcars, facet.vars = c("gear", "cyl"))
 qheat(t(mtcars), by.column=FALSE)
 ```
 
-![plot of chunk unnamed-chunk-229](figure/unnamed-chunk-2291.png) 
+![plot of chunk unnamed-chunk-232](figure/unnamed-chunk-2321.png) 
 
 ```r
 qheat(mtcars, plot = FALSE) + coord_flip()
 ```
 
-![plot of chunk unnamed-chunk-229](figure/unnamed-chunk-2292.png) 
+![plot of chunk unnamed-chunk-232](figure/unnamed-chunk-2322.png) 
 
 
 When plotting a correlation/distance matrix set diag.na = TRUE to keep these extreme values from effecting the scaling.
@@ -9507,7 +9578,7 @@ When plotting a correlation/distance matrix set diag.na = TRUE to keep these ext
 qheat(cor(mtcars), diag.na=TRUE)
 ```
 
-![plot of chunk unnamed-chunk-230](figure/unnamed-chunk-230.png) 
+![plot of chunk unnamed-chunk-233](figure/unnamed-chunk-233.png) 
 
 
 <h4 id="rankfreq">Rank Frequency Plot</h4>
@@ -9525,7 +9596,7 @@ x2 <- rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
     hap.col = "purple")
 ```
 
-![plot of chunk unnamed-chunk-231](figure/unnamed-chunk-2311.png) 
+![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2341.png) 
 
 ```r
 ## View output
@@ -9579,7 +9650,7 @@ invisible(rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
     log.freq = FALSE, log.rank = FALSE, jitter = .6,  hap.col = "purple"))
 ```
 
-![plot of chunk unnamed-chunk-231](figure/unnamed-chunk-2312.png) 
+![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2342.png) 
 
 
 <p id="rank2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a>** - *Using alpga*<font size="5" color="orange">&diams;</font></p >
@@ -9589,7 +9660,7 @@ invisible(rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
 invisible(rank_freq_mplot(raj$dialogue, jitter = .5, shape = 19, alpha = 1/15))
 ```
 
-![plot of chunk unnamed-chunk-232](figure/unnamed-chunk-232.png) 
+![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-235.png) 
 
 
 The <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> plots more quickly but does not handle multiple groups and roes not take text/grouping variables directly.
@@ -9607,7 +9678,7 @@ x3 <- rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ,
     title.ext = 'Romeo')
 ```
 
-![plot of chunk unnamed-chunk-233](figure/unnamed-chunk-233.png) 
+![plot of chunk unnamed-chunk-236](figure/unnamed-chunk-236.png) 
 
 ```r
 ## View output
@@ -9651,122 +9722,135 @@ ltruncdf(x3, 10)
 
 <h4 id="totplot">Visualize Word Length by Turn of Talk</h4>
 
-<p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a>** - *Examples* <font size="5" color="orange">&diams;</font></p >
+It is often useful to view the lengths of turns of talk as a barplot, particularly id the bars are colored by grouping variable.  The <a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a> function plots dialogue as a bar plot with the option to color by grouping variables and facet by repreated measure variables.  This can enable the entire dialogue to be viewed in a succint way, possibly leading the researcher to see patterns that may have otherwises escaped attention.  
+
+Within the <a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a> function the turn of talk argument (<b><font color="green" face="courier new">tot</font></b>) may be the <b>"tot"</b> column from <a href="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank"><code>sentSplit</code></a> output (<b><font color="green" face="courier new">tot = TRUE</font></b>), the row numbers (<b><font color="green" face="courier new">tot = FALSE</font></b>), the character name of a column (<b><font color="green" face="courier new">tot = "COLUMN NAME"</font></b>), or a separate numeric/character vector equal in length to the <b><font color="green" face="courier new">text.var</font></b>.  
+
+<p id="tot1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a>** - *Examples* <font size="5" color="orange">&diams;</font></p >
 
 
 ```r
 dataframe <- sentSplit(DATA, "state")
-tot_plot(dataframe, "state")
-```
-
-![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2341.png) 
-
-```r
-## Change space between bars
-tot_plot(dataframe, "state", bar.space=.03)
-```
-
-![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2342.png) 
-
-```r
-## Color bars by grouping variable(s)
-tot_plot(dataframe, "state", "sex")
-```
-
-![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2343.png) 
-
-
-
-```r
-## Use rownames as tot: color by family affiliation
-tot_plot(mraja1, "dialogue", "fam.aff", tot=FALSE)
-```
-
-![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-2351.png) 
-
-```r
-## Use rownames as tot: color by death
-tot_plot(mraja1, "dialogue", "died", tot=FALSE)
-```
-
-![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-2352.png) 
-
-
-<p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a>** - *Facet Variables* <font size="5" color="orange">&diams;</font></p >
-
-
-```r
-rajSPLIT2 <- do.call(rbind, lapply(split(rajSPLIT, rajSPLIT$act), head, 25))
-tot_plot(rajSPLIT2, "dialogue", "fam.aff", facet.var = "act")
-```
-
-![plot of chunk unnamed-chunk-236](figure/unnamed-chunk-236.png) 
-
-
-<p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a>** - *Alter Colors* <font size="5" color="orange">&diams;</font></p >
-
-
-```r
-tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE) +
-    scale_fill_hue(l=40)
+tot_plot(dataframe, text.var = "state")
 ```
 
 ![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-2371.png) 
 
 ```r
-tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
-    scale_fill_brewer(palette="Spectral")
+## Change space between bars
+tot_plot(dataframe, text.var = "state", bar.space = .03)
 ```
 
 ![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-2372.png) 
 
 ```r
-tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
-    scale_fill_brewer(palette="Set1")
+## Color bars by grouping variable(s)
+tot_plot(dataframe, text.var = "state", grouping.var = "sex")
 ```
 
 ![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-2373.png) 
 
 
+
+```r
+## Use rownames as tot: color by family affiliation
+tot_plot(mraja1, "dialogue", grouping.var = "fam.aff", tot = FALSE)
+```
+
+![plot of chunk unnamed-chunk-238](figure/unnamed-chunk-2381.png) 
+
+```r
+## Use rownames as tot: color by death
+tot_plot(mraja1, "dialogue", grouping.var = "died", tot = FALSE)
+```
+
+![plot of chunk unnamed-chunk-238](figure/unnamed-chunk-2382.png) 
+
+
+<p id="tot2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a>** - *Facet Variables* <font size="5" color="orange">&diams;</font></p >
+
+
+```r
+rajSPLIT2 <- do.call(rbind, lapply(split(rajSPLIT, rajSPLIT$act), head, 25))
+tot_plot(rajSPLIT2, "dialogue", grouping.var = "fam.aff", facet.var = "act")
+```
+
+![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-239.png) 
+
+
+Because <a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a> is based on the <a href="http://docs.ggplot2.org/current/">ggplot2 package</a> (Wickham, 2009) and <a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a> invisibly returns the ggplot2 object, the output (of the class "ggplot") can be altered in the same way that anu other ggplot2 object can be.  In the following examples the color pallete is altered.
+
+<p id="tot3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a>** - *Alter Colors* <font size="5" color="orange">&diams;</font></p >
+
+
+```r
+tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE) +
+    scale_fill_hue(l=40)
+```
+
+![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2401.png) 
+
+```r
+tot_plot(mraja1, grouping.var = "dialogue", c("sex", "fam.aff"), tot=FALSE)+
+    scale_fill_brewer(palette="Spectral")
+```
+
+```
+## Error: undefined columns selected
+```
+
+```r
+tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
+    scale_fill_brewer(palette="Set1")
+```
+
+![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2402.png) 
+
+
 <h4 id="venn">Venn Diagram</h4>
+
+The Venn diagram can be a useful way to visualize similarty between grouping variables with respect to word use when the number of groups is relatively small.  The <a href="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank"><code>trans_venn</code></a> function wraps the <a href="http://cran.r-project.org/web/packages/venneuler/index.html">venneuler</a> package to produce Venn diagrams.  The user must keep in mind that producing this output is computationally slow, thus consideration must be given with regard to data size and number of groups when using <a href="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank"><code>trans_venn</code></a> to avoid overplotting and lengthly plot production.  The use of the <b><font color="green" face="courier new">stopwords</font></b> argument can also be useful to reduce the overlp of common words between grouping variables.
+
+If a data set is larger the user may want to consider representing the data as a <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> matrix or as an adjacency matrix that can be plotted with the <a href="http://cran.r-project.org/web/packages/igraph/index.html">igraph package</a> as seen in the <a href="#plotadj2">presidential examples above</a>.
 
 
 ```r
 with(DATA , trans_venn(state, person, legend.location = "topright"))
 ```
 
-![plot of chunk unnamed-chunk-238](figure/unnamed-chunk-238.png) 
+![plot of chunk unnamed-chunk-241](figure/unnamed-chunk-241.png) 
+
 
 
 <h4 id="wordnet">Word Network Plot</h4>
 
-<p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between Turns of Talk: All Words* <font size="5" color="orange">&diams;</font></p >
+<p id="venn1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between Turns of Talk: All Words* <font size="5" color="orange">&diams;</font></p >
 
 
 ```r
 word_network_plot(text.var=DATA$state, stopwords=NULL)
 ```
 
-![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-239.png) 
+![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-242.png) 
 
 
-<p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between People* <font size="5" color="orange">&diams;</font></p >
+<p id="wordnet1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between People* <font size="5" color="orange">&diams;</font></p >
 
 
 ```r
 word_network_plot(text.var=DATA$state, DATA$person)
 ```
 
-![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2401.png) 
+![plot of chunk unnamed-chunk-243](figure/unnamed-chunk-2431.png) 
 
 ```r
 word_network_plot(text.var=DATA$state, DATA$person, stopwords=NULL)
 ```
 
-![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2402.png) 
+![plot of chunk unnamed-chunk-243](figure/unnamed-chunk-2432.png) 
 
 
-<p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between sex and adult* <font size="5" color="orange">&diams;</font></p >
+<p id="wordnet2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between sex and adult* <font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -9774,10 +9858,10 @@ word_network_plot(text.var=DATA$state, grouping.var=list(DATA$sex,
     DATA$adult))
 ```
 
-![plot of chunk unnamed-chunk-241](figure/unnamed-chunk-241.png) 
+![plot of chunk unnamed-chunk-244](figure/unnamed-chunk-244.png) 
 
 
-<p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *`log.labels`* <font size="5" color="orange">&diams;</font></p >
+<p id="wordnet3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *`log.labels`* <font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -9785,7 +9869,7 @@ word_network_plot(text.var=DATA$state, grouping.var=DATA$person,
     title.name = "TITLE", log.labels=TRUE)
 ```
 
-![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-242.png) 
+![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-245.png) 
 
 
 
@@ -9795,21 +9879,37 @@ word_network_plot(text.var=DATA$state, grouping.var=DATA$person,
 The following functions will be utilized in this section (click to view more):  
 
 <form action="http://trinker.github.io/qdap_dev/end_inc.html" target="_blank">
-    <input type="submit" value="end_inc"> - Test for Incomplete Sentences
+    <input type="submit" value="end_inc"> - <a href="#incomp">Test for Incomplete Sentences</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/end_mark.html" target="_blank">
-    <input type="submit" value="end_mark"> - Sentence End Marks
+    <input type="submit" value="end_mark"> - <a href="#endmark">Sentence End Marks</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/imperative.html" target="_blank">
-    <input type="submit" value="imperative"> - Detect and Remark Imperative Sentences
+    <input type="submit" value="imperative"> - <a href="#imper">Detect and Remark Imperative Sentences</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/NAer.html" target="_blank">
-    <input type="submit" value="NAer"> - Replace Missing Values (NA)
+    <input type="submit" value="NAer"> - <a href="#naer">Replace Missing Values (NA)</a>
 </form>
 </div>
+
+
+<h4 id="incomp">Test for Incomplete Sentences</h4>
+
+
+<h4 id="endmark">Sentence End Marks</h4>
+
+
+<h4 id="imper">Detect and Remark Imperative Sentences</h4>
+
+
+<h4 id="naer">Replace Missing Values (NA)</h4>
+
+
+
+
 
 <h3 id="data">Data Sets</h3>
 
