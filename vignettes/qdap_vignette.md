@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 22.40 22.40 25.34 19.70 19.70 19.70 15.00 22.40 19.70 15.79 16.30
-## [12] 16.30 15.79 22.40 15.00 16.30 16.30 15.00 16.30 19.70
+##  [1] 16.30 22.40 16.30 15.79 19.70 25.34 22.40 16.30 25.34 15.79 15.00
+## [12] 16.30 16.30 19.70 16.30 22.40 19.70 16.30 22.40 19.70
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 22.40 22.40 25.34 19.70 19.70 19.70 15.00 22.40 19.70 15.79 16.30
-## [12] 16.30 15.79 22.40 15.00 16.30 16.30 15.00 16.30 19.70
+##  [1] 16.30 22.40 16.30 15.79 19.70 25.34 22.40 16.30 25.34 15.79 15.00
+## [12] 16.30 16.30 19.70 16.30 22.40 19.70 16.30 22.40 19.70
 ```
 
 
@@ -3282,7 +3282,7 @@ adjmat(terms)
 
 It is often useful to plot the adjacency matrix as a network.  The <a href="http://cran.r-project.org/web/packages/igraph/index.html">igraph package</a> provides this functionality.
 
-<p id="plotadj"><font size="5" color="orange">&diams;</font> **Plotting an Adjaceny Matrix**: *Example 1*<font size="5" color="orange">&diams;</font></p>
+<p id="plotadj"><font size="5" color="orange">&diams;</font> <b>Plotting an Adjaceny Matrix</b>: <em>Example 1</em><font size="5" color="orange">&diams;</font></p>
 
 
 
@@ -3301,7 +3301,7 @@ plot(g, layout=layout.auto(g))
 
 The following example will visualize the presidential debates data as a network plot.
 
-<p id="plotadj2"><font size="5" color="orange">&diams;</font> **Plotting an Adjaceny Matrix**: *Example 2*<font size="5" color="orange">&diams;</font></p>
+<p id="plotadj2"><font size="5" color="orange">&diams;</font> <b>Plotting an Adjaceny Matrix</b>: <em>Example 2</em><font size="5" color="orange">&diams;</font></p>
 
 
 ```r
@@ -3329,7 +3329,7 @@ plot(g, layout=layout.auto(g))
 
 We can easily add information to the network plot utilizing the <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> function to obtain weights and distance measures for use with the plot.
 
-<font size="5" color="orange">&diams;</font> **Plotting an Adjaceny Matrix**: *Example 2*<font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Plotting an Adjaceny Matrix**: *Example 2b*<font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -8192,17 +8192,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##          interval Freq cum.Freq percent cum.percent
-## 1   (-3.36,-2.64]   37       37    0.37        0.37
-## 2   (-2.64,-1.92]  209      246    2.09        2.46
-## 3   (-1.92,-1.21]  860     1106    8.60       11.06
-## 4  (-1.21,-0.488] 1999     3105   19.99       31.05
-## 5   (-0.488,0.23] 2732     5837   27.32       58.37
-## 6    (0.23,0.948] 2369     8206   23.69       82.06
-## 7    (0.948,1.67] 1278     9484   12.78       94.84
-## 8     (1.67,2.38]  429     9913    4.29       99.13
-## 9      (2.38,3.1]   78     9991    0.78       99.91
-## 10     (3.1,3.82]    9    10000    0.09      100.00
+##           interval Freq cum.Freq percent cum.percent
+## 1    (-3.38,-2.69]   26       26    0.26        0.26
+## 2    (-2.69,-2.01]  202      228    2.02        2.28
+## 3    (-2.01,-1.32]  697      925    6.97        9.25
+## 4   (-1.32,-0.636] 1729     2654   17.29       26.54
+## 5  (-0.636,0.0504] 2570     5224   25.70       52.24
+## 6   (0.0504,0.736] 2452     7676   24.52       76.76
+## 7     (0.736,1.42] 1534     9210   15.34       92.10
+## 8      (1.42,2.11]  617     9827    6.17       98.27
+## 9      (2.11,2.79]  154     9981    1.54       99.81
+## 10     (2.79,3.48]   19    10000    0.19      100.00
 ```
 
 ```r
@@ -8211,9 +8211,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   36       36      36          36
-## 2     gray   30       66      30          66
-## 3      red   34      100      34         100
+## 1     blue   31       31      31          31
+## 2     gray   30       61      30          61
+## 3      red   39      100      39         100
 ```
 
 ```r
@@ -9138,7 +9138,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x1419b688>
+<environment: 0x11f09784>
 ```
 
 ```r
@@ -9791,20 +9791,18 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE) +
 ![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2401.png) 
 
 ```r
-tot_plot(mraja1, grouping.var = "dialogue", c("sex", "fam.aff"), tot=FALSE)+
+tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Spectral")
 ```
 
-```
-## Error: undefined columns selected
-```
+![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2402.png) 
 
 ```r
 tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Set1")
 ```
 
-![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2402.png) 
+![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2403.png) 
 
 
 <h4 id="venn">Venn Diagram</h4>

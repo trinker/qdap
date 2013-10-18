@@ -1337,7 +1337,7 @@ adjmat(terms)
 
 It is often useful to plot the adjacency matrix as a network.  The `r HR("http://cran.r-project.org/web/packages/igraph/index.html", "igraph package")` provides this functionality.
 
-<p id="plotadj">`r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Example 1*`r FT(orange, 5, text="&diams;")`</p>
+<p id="plotadj">`r FT(orange, 5, text="&diams;")` <b>Plotting an Adjaceny Matrix</b>: <em>Example 1</em>`r FT(orange, 5, text="&diams;")`</p>
 
 
 ```{r}
@@ -1352,7 +1352,7 @@ plot(g, layout=layout.auto(g))
 
 The following example will visualize the presidential debates data as a network plot.
 
-<p id="plotadj2">`r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Example 2*`r FT(orange, 5, text="&diams;")`</p>
+<p id="plotadj2">`r FT(orange, 5, text="&diams;")` <b>Plotting an Adjaceny Matrix</b>: <em>Example 2</em>`r FT(orange, 5, text="&diams;")`</p>
 
 ```{r}
 library(igraph)
@@ -1376,7 +1376,7 @@ plot(g, layout=layout.auto(g))
 
 We can easily add information to the network plot utilizing the `r FUN("dissimilarity")` function to obtain weights and distance measures for use with the plot.
 
-`r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Example 2*`r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Example 2b*`r FT(orange, 5, text="&diams;")`
 
 ```{r}
 edge.weight <- 15  #a maximizing thickness constant
@@ -4556,7 +4556,7 @@ Because `r FUN("tot_plot")` is based on the `r HR("http://docs.ggplot2.org/curre
 ```{r, fig.width = 14, fig.height = 4}
 tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE) +
     scale_fill_hue(l=40)
-tot_plot(mraja1, grouping.var = "dialogue", c("sex", "fam.aff"), tot=FALSE)+
+tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Spectral")
 tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Set1")
