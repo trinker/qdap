@@ -134,8 +134,9 @@ function(text.var = NULL, grouping.var = NULL,
         } else {
             rownames(x2) <- rnms
         }
+
         if (!is.null(stopwords)){
-            x2 <- x2[!rownames(x2) %in% stopwords, ]
+            x2 <- x2[!rownames(x2) %in% stopwords, , drop = FALSE]
         }
         if (output != "raw"){
             x2 <- x2/colSums(x2)

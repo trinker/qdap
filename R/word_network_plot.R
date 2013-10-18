@@ -4,8 +4,9 @@
 #' words between textual units containing key terms.
 #' 
 #' @param text.var The text variable.         
-#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
-#' one word list for all text.  Also takes a single grouping variable or a list 
+#' @param grouping.var The grouping variables.  Default uses the sequence along
+#' the length of text variable (this may be the connection of sentences or turn 
+#' of talk as the textual unit).  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
 #' @param target.words A named list of vectors of words whose length corresponds 
 #' to \code{label.colors} (+1 length in cloud colors for non-matched terms).
@@ -63,34 +64,44 @@
 #' @import igraph
 #' @examples
 #' \dontrun{
-#' word_network_plot(text.var=DATA$state, grouping.var=DATA$person)
-#' word_network_plot(text.var=DATA$state, grouping.var=list(DATA$sex, 
+#' word_network_plot(text.var=DATA$state)
+#' word_network_plot(text.var=DATA$state, stopwords=NULL)
+#' word_network_plot(text.var=DATA$state, DATA$person)
+#' word_network_plot(text.var=DATA$state, DATA$person, stopwords=NULL)
+#' word_network_plot(text.var=DATA$state, grouping.var=list(DATA$sex,
 #'     DATA$adult))
-#' word_network_plot(text.var=DATA$state, grouping.var=DATA$person, 
+#' word_network_plot(text.var=DATA$state, grouping.var=DATA$person,
 #'     title.name = "TITLE", log.labels=TRUE)
-#' word_network_plot(text.var=raj.act.1$dialogue, grouping.var=raj.act.1$person, 
+#' word_network_plot(text.var=raj.act.1$dialogue, grouping.var=raj.act.1$person,
 #'   stopwords = Top200Words)
-#'
+#' 
 #' #insert double tilde ("~~") to keep dual words (e.i., first last name)
 #' alts <- c(" fun", "I ")
-#' state2 <- mgsub(alts, gsub("\\s", "~~", alts), DATA$state) 
+#' state2 <- mgsub(alts, gsub("\\s", "~~", alts), DATA$state)
 #' word_network_plot(text.var=state2, grouping.var=DATA$person)
+#' 
+#' ## Invisibly returns the igraph model
+#' x <- word_network_plot(text.var=DATA$state, DATA$person)
+#' str(x)
+#' plot(x, vertex.size=0, vertex.color="white", edge.curved = TRUE)
 #' }
 word_network_plot <-                                                                  
-function(text.var, grouping.var = NULL, target.words = NULL, stopwords = Top100Words, 
-    label.cex = .8, label.size = .5, edge.curved = TRUE, vertex.shape = "circle",     
-    edge.color = "gray70", label.colors = "black", layout = NULL,                     
-    title.name = NULL, title.padj =  -4.5, title.location = 3, title.font = NULL,     
-    title.cex = .8, log.labels = FALSE, title.color = "black",                        
-    legend = NULL, legend.cex = .8, legend.location = c(-1.54, 1.41), plot = TRUE, 
-    char2space = "~~", ...) { 
+function(text.var, grouping.var = 1:length(text.var), target.words = NULL, 
+    stopwords = qdapDictionaries::Top100Words, label.cex = .8, label.size = .5, 
+    edge.curved = TRUE, vertex.shape = "circle", edge.color = "gray70", 
+    label.colors = "black", layout = NULL, title.name = NULL, title.padj =  -4.5, 
+    title.location = 3, title.font = NULL, title.cex = .8, log.labels = FALSE, 
+    title.color = "black", legend = NULL, legend.cex = .8, 
+    legend.location = c(-1.54, 1.41), plot = TRUE, char2space = "~~", ...) { 
+
     if (class(text.var) == "adjacency_matrix") { #actually takes an adjaceny matrix   
        adj.mat.object <- text.var[["adjacency"]]                                      
     } else {    
         z <- wfm(text.var = text.var, grouping.var = grouping.var,       
-            stopwords = stopwords, char2space = char2space, ...)                                                    
+            stopwords = stopwords, char2space = char2space, ...)                                                     
         adj.mat.object <- adjmat(t(z))[["adjacency"]]                                 
-    }                                                                                 
+    }     
+                                                                          
     g <- graph.adjacency(adj.mat.object, weighted=TRUE, mode ='undirected')   
     g <- simplify(g)                                                          
     V(g)$label <- V(g)$name                                           
@@ -138,6 +149,5 @@ function(text.var, grouping.var = NULL, target.words = NULL, stopwords = Top100W
     }                                                                                 
     invisible(g)                                                                      
 }                                                                                     
-
 
 
