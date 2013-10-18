@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 22.40 16.30 15.79 19.70 25.34 22.40 16.30 25.34 15.79 15.00
-## [12] 16.30 16.30 19.70 16.30 22.40 19.70 16.30 22.40 19.70
+##  [1] 22.40 22.40 16.30 15.79 16.30 25.34 16.30 25.34 25.34 25.34 19.70
+## [12] 16.30 15.00 19.70 15.79 16.30 15.79 22.40 16.30 16.30
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 22.40 16.30 15.79 19.70 25.34 22.40 16.30 25.34 15.79 15.00
-## [12] 16.30 16.30 19.70 16.30 22.40 19.70 16.30 22.40 19.70
+##  [1] 22.40 22.40 16.30 15.79 16.30 25.34 16.30 25.34 25.34 25.34 19.70
+## [12] 16.30 15.00 19.70 15.79 16.30 15.79 22.40 16.30 16.30
 ```
 
 
@@ -8193,16 +8193,16 @@ dist_tab(rnorm(10000), 10)
 
 ```
 ##           interval Freq cum.Freq percent cum.percent
-## 1    (-3.38,-2.69]   26       26    0.26        0.26
-## 2    (-2.69,-2.01]  202      228    2.02        2.28
-## 3    (-2.01,-1.32]  697      925    6.97        9.25
-## 4   (-1.32,-0.636] 1729     2654   17.29       26.54
-## 5  (-0.636,0.0504] 2570     5224   25.70       52.24
-## 6   (0.0504,0.736] 2452     7676   24.52       76.76
-## 7     (0.736,1.42] 1534     9210   15.34       92.10
-## 8      (1.42,2.11]  617     9827    6.17       98.27
-## 9      (2.11,2.79]  154     9981    1.54       99.81
-## 10     (2.79,3.48]   19    10000    0.19      100.00
+## 1    (-3.69,-2.98]   17       17    0.17        0.17
+## 2    (-2.98,-2.26]  102      119    1.02        1.19
+## 3    (-2.26,-1.55]  517      636    5.17        6.36
+## 4   (-1.55,-0.831] 1362     1998   13.62       19.98
+## 5  (-0.831,-0.116] 2510     4508   25.10       45.08
+## 6   (-0.116,0.599] 2682     7190   26.82       71.90
+## 7     (0.599,1.31] 1879     9069   18.79       90.69
+## 8      (1.31,2.03]  735     9804    7.35       98.04
+## 9      (2.03,2.74]  173     9977    1.73       99.77
+## 10     (2.74,3.46]   23    10000    0.23      100.00
 ```
 
 ```r
@@ -8211,9 +8211,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   31       31      31          31
-## 2     gray   30       61      30          61
-## 3      red   39      100      39         100
+## 1     blue   41       41      41          41
+## 2     gray   37       78      37          78
+## 3      red   22      100      22         100
 ```
 
 ```r
@@ -9138,7 +9138,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x11f09784>
+<environment: 0x12e3a2cc>
 ```
 
 ```r
@@ -9810,6 +9810,9 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
 The Venn diagram can be a useful way to visualize similarty between grouping variables with respect to word use when the number of groups is relatively small.  The <a href="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank"><code>trans_venn</code></a> function wraps the <a href="http://cran.r-project.org/web/packages/venneuler/index.html">venneuler</a> package to produce Venn diagrams.  The user must keep in mind that producing this output is computationally slow, thus consideration must be given with regard to data size and number of groups when using <a href="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank"><code>trans_venn</code></a> to avoid overplotting and lengthly plot production.  The use of the <b><font color="green" face="courier new">stopwords</font></b> argument can also be useful to reduce the overlp of common words between grouping variables.
 
 If a data set is larger the user may want to consider representing the data as a <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> matrix or as an adjacency matrix that can be plotted with the <a href="http://cran.r-project.org/web/packages/igraph/index.html">igraph package</a> as seen in the <a href="#plotadj2">presidential examples above</a>.
+
+In the following example the reader will notice the centers of the circles (i.e., the person labels) are very similar to the arrangement of the same data in the <a href="#plotadj">adjaceny matrix plot</a> of the same data above.
+
 
 
 ```r

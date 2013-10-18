@@ -4568,7 +4568,11 @@ The Venn diagram can be a useful way to visualize similarty between grouping var
 
 If a data set is larger the user may want to consider representing the data as a `r FUN("dissimilarity")` matrix or as an adjacency matrix that can be plotted with the `r HR("http://cran.r-project.org/web/packages/igraph/index.html", "igraph package")` as seen in the `r HR("#plotadj2", "presidential examples above")`.
 
-```{r, fig.width = 9, fig.height = 9}
+In the following example the reader will notice the centers of the circles (i.e., the person labels) are very similar to the arrangement of the same data in the `r HR("#plotadj", "adjaceny matrix plot")` of the same data above.
+
+
+```{r, fig.width = 9, fig.height = 9, echo=2}
+set.seed(10)
 with(DATA , trans_venn(state, person, legend.location = "topright"))
 ```
 
