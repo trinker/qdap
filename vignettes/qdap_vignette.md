@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.00 15.79 19.70 25.34 22.40 25.34 22.40 19.70 25.34 19.70 19.70
-## [12] 25.34 22.40 22.40 15.00 15.00 15.00 15.79 25.34 15.79
+##  [1] 16.30 19.70 19.70 15.79 19.70 16.30 15.00 16.30 22.40 22.40 22.40
+## [12] 22.40 22.40 25.34 25.34 25.34 15.79 19.70 22.40 22.40
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.00 15.79 19.70 25.34 22.40 25.34 22.40 19.70 25.34 19.70 19.70
-## [12] 25.34 22.40 22.40 15.00 15.00 15.00 15.79 25.34 15.79
+##  [1] 16.30 19.70 19.70 15.79 19.70 16.30 15.00 16.30 22.40 22.40 22.40
+## [12] 22.40 22.40 25.34 25.34 25.34 15.79 19.70 22.40 22.40
 ```
 
 
@@ -8121,17 +8121,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##           interval Freq cum.Freq percent cum.percent
-## 1     (-3.7,-2.98]   17       17    0.17        0.17
-## 2    (-2.98,-2.26]  107      124    1.07        1.24
-## 3    (-2.26,-1.54]  517      641    5.17        6.41
-## 4   (-1.54,-0.825] 1407     2048   14.07       20.48
-## 5  (-0.825,-0.106] 2556     4604   25.56       46.04
-## 6   (-0.106,0.613] 2642     7246   26.42       72.46
-## 7     (0.613,1.33] 1805     9051   18.05       90.51
-## 8      (1.33,2.05]  735     9786    7.35       97.86
-## 9      (2.05,2.77]  185     9971    1.85       99.71
-## 10     (2.77,3.49]   29    10000    0.29      100.00
+##          interval Freq cum.Freq percent cum.percent
+## 1   (-4.14,-3.38]    5        5    0.05        0.05
+## 2   (-3.38,-2.62]   36       41    0.36        0.41
+## 3   (-2.62,-1.87]  246      287    2.46        2.87
+## 4   (-1.87,-1.11] 1015     1302   10.15       13.02
+## 5  (-1.11,-0.352] 2319     3621   23.19       36.21
+## 6  (-0.352,0.405] 2898     6519   28.98       65.19
+## 7    (0.405,1.16] 2224     8743   22.24       87.43
+## 8     (1.16,1.92]  976     9719    9.76       97.19
+## 9     (1.92,2.68]  233     9952    2.33       99.52
+## 10    (2.68,3.43]   48    10000    0.48      100.00
 ```
 
 ```r
@@ -8140,9 +8140,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   29       29      29          29
-## 2     gray   33       62      33          62
-## 3      red   38      100      38         100
+## 1     blue   24       24      24          24
+## 2     gray   42       66      42          66
+## 3      red   34      100      34         100
 ```
 
 ```r
@@ -9067,7 +9067,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x11dd0ed8>
+<environment: 0x11bf0af4>
 ```
 
 ```r
@@ -9675,22 +9675,24 @@ tot_plot(dataframe, "state", "sex")
 
 ![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2343.png) 
 
+
+
 ```r
 ## Use rownames as tot: color by family affiliation
 tot_plot(mraja1, "dialogue", "fam.aff", tot=FALSE)
 ```
 
-![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2344.png) 
+![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-2351.png) 
 
 ```r
 ## Use rownames as tot: color by death
 tot_plot(mraja1, "dialogue", "died", tot=FALSE)
 ```
 
-![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2345.png) 
+![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-2352.png) 
 
 
-<p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a>** - *Facter Variables* <font size="5" color="orange">&diams;</font></p >
+<p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a>** - *Facet Variables* <font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -9698,7 +9700,7 @@ rajSPLIT2 <- do.call(rbind, lapply(split(rajSPLIT, rajSPLIT$act), head, 25))
 tot_plot(rajSPLIT2, "dialogue", "fam.aff", facet.var = "act")
 ```
 
-![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-235.png) 
+![plot of chunk unnamed-chunk-236](figure/unnamed-chunk-236.png) 
 
 
 <p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a>** - *Alter Colors* <font size="5" color="orange">&diams;</font></p >
@@ -9709,21 +9711,21 @@ tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE) +
     scale_fill_hue(l=40)
 ```
 
-![plot of chunk unnamed-chunk-236](figure/unnamed-chunk-2361.png) 
+![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-2371.png) 
 
 ```r
 tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Spectral")
 ```
 
-![plot of chunk unnamed-chunk-236](figure/unnamed-chunk-2362.png) 
+![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-2372.png) 
 
 ```r
 tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Set1")
 ```
 
-![plot of chunk unnamed-chunk-236](figure/unnamed-chunk-2363.png) 
+![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-2373.png) 
 
 
 <h4 id="venn">Venn Diagram</h4>
@@ -9733,7 +9735,7 @@ tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
 with(DATA , trans_venn(state, person, legend.location = "topright"))
 ```
 
-![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-237.png) 
+![plot of chunk unnamed-chunk-238](figure/unnamed-chunk-238.png) 
 
 
 <h4 id="wordnet">Word Network Plot</h4>
@@ -9745,7 +9747,7 @@ with(DATA , trans_venn(state, person, legend.location = "topright"))
 word_network_plot(text.var=DATA$state, stopwords=NULL)
 ```
 
-![plot of chunk unnamed-chunk-238](figure/unnamed-chunk-238.png) 
+![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-239.png) 
 
 
 <p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between People* <font size="5" color="orange">&diams;</font></p >
@@ -9755,13 +9757,13 @@ word_network_plot(text.var=DATA$state, stopwords=NULL)
 word_network_plot(text.var=DATA$state, DATA$person)
 ```
 
-![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-2391.png) 
+![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2401.png) 
 
 ```r
 word_network_plot(text.var=DATA$state, DATA$person, stopwords=NULL)
 ```
 
-![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-2392.png) 
+![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2402.png) 
 
 
 <p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between sex and adult* <font size="5" color="orange">&diams;</font></p >
@@ -9772,7 +9774,7 @@ word_network_plot(text.var=DATA$state, grouping.var=list(DATA$sex,
     DATA$adult))
 ```
 
-![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-240.png) 
+![plot of chunk unnamed-chunk-241](figure/unnamed-chunk-241.png) 
 
 
 <p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *`log.labels`* <font size="5" color="orange">&diams;</font></p >
@@ -9783,7 +9785,7 @@ word_network_plot(text.var=DATA$state, grouping.var=DATA$person,
     title.name = "TITLE", log.labels=TRUE)
 ```
 
-![plot of chunk unnamed-chunk-241](figure/unnamed-chunk-241.png) 
+![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-242.png) 
 
 
 
