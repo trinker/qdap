@@ -4474,7 +4474,7 @@ ltruncdf(x3, 10)
 
 <p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("tot_plot")`** - *Examples* `r FT(orange, 5, text="&diams;")`</p >
 
-```{r}
+```{r, fig.height = 3}
 dataframe <- sentSplit(DATA, "state")
 tot_plot(dataframe, "state")
 ## Change space between bars
@@ -4496,7 +4496,7 @@ tot_plot(rajSPLIT2, "dialogue", "fam.aff", facet.var = "act")
 
 <p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("tot_plot")`** - *Alter Colors* `r FT(orange, 5, text="&diams;")`</p >
 
-```{r}
+```{r, fig.width = 10, fig.height = 3}
 tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE) +
     scale_fill_hue(l=40)
 tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
@@ -4507,7 +4507,7 @@ tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
 
 <h4 id="venn">Venn Diagram</h4>
 
-```{r}
+```{r, fig.width = 9, fig.height = 9}
 with(DATA , trans_venn(state, person, legend.location = "topright"))
 ```
 
@@ -4515,27 +4515,27 @@ with(DATA , trans_venn(state, person, legend.location = "topright"))
 
 <p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between Turns of Talk: All Words* `r FT(orange, 5, text="&diams;")`</p >
 
-```{r}
+```{r, fig.width = 9, fig.height = 9}
 word_network_plot(text.var=DATA$state, stopwords=NULL)
 ```
 
 <p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between People* `r FT(orange, 5, text="&diams;")`</p >
 
-```{r}
+```{r, fig.width = 9, fig.height = 9}
 word_network_plot(text.var=DATA$state, DATA$person)
 word_network_plot(text.var=DATA$state, DATA$person, stopwords=NULL)
 ```
 
 <p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between sex and adult* `r FT(orange, 5, text="&diams;")`</p >
 
-```{r}
+```{r, fig.width = 9, fig.height = 9}
 word_network_plot(text.var=DATA$state, grouping.var=list(DATA$sex,
     DATA$adult))
 ```
 
 <p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *`log.labels`* `r FT(orange, 5, text="&diams;")`</p >
 
-```{r}
+```{r, fig.width = 9, fig.height = 9}
 word_network_plot(text.var=DATA$state, grouping.var=DATA$person,
     title.name = "TITLE", log.labels=TRUE)
 ```
