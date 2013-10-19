@@ -59,6 +59,8 @@ list(
         "gantt",
         "gantt_rep",
         "key_merge",
+        "list2df", 
+        "mtabulate",
         "paste2",
         "prop",
         "qcombine",

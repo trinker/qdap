@@ -224,6 +224,8 @@ relatively new to CRAN, made these changes sensible at this point.
 
 * `question_type` algorithm improvements including implied do/does/did handling.
 
+* `list2df` and `mtabulate` now exported.
+
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5
 ----------------------------------------------------------------
