@@ -4406,7 +4406,7 @@ When plotting a correlation/distance matrix set <b>`r FT(green, courier_new, tex
 <p id="heat9">`r FT(orange, 5, text="&diams;")` **`r FUN("qheat")`** - *Correlation Matrix Examples*`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r}
-qheat(cor(mtcars), diag.na=TRUE, by.row = NULL)
+qheat(cor(mtcars), diag.na=TRUE, by.column = NULL)
 ```
 
 <h4 id="rankfreq">Rank Frequency Plot</h4>

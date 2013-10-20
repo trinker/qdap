@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 22.40 19.70 22.40 15.79 15.00 25.34 22.40 25.34 16.30 15.00 15.79
-## [12] 15.79 16.30 22.40 16.30 15.79 16.30 15.00 19.70 15.79
+##  [1] 16.30 15.00 19.70 15.79 16.30 22.40 19.70 16.30 25.34 15.00 22.40
+## [12] 16.30 16.30 15.00 16.30 19.70 15.00 15.00 22.40 15.79
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 22.40 19.70 22.40 15.79 15.00 25.34 22.40 25.34 16.30 15.00 15.79
-## [12] 15.79 16.30 22.40 16.30 15.79 16.30 15.00 19.70 15.79
+##  [1] 16.30 15.00 19.70 15.79 16.30 22.40 19.70 16.30 25.34 15.00 22.40
+## [12] 16.30 16.30 15.00 16.30 19.70 15.00 15.00 22.40 15.79
 ```
 
 
@@ -9228,7 +9228,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x13ac6444>
+<environment: 0x12bffedc>
 ```
 
 ```r
@@ -9665,12 +9665,10 @@ When plotting a correlation/distance matrix set <b><font color="green" face="cou
 
 
 ```r
-qheat(cor(mtcars), diag.na=TRUE, by.row = NULL)
+qheat(cor(mtcars), diag.na=TRUE, by.column = NULL)
 ```
 
-```
-## Error: unused argument (by.row = NULL)
-```
+![plot of chunk unnamed-chunk-236](figure/unnamed-chunk-236.png) 
 
 
 <h4 id="rankfreq">Rank Frequency Plot</h4>
