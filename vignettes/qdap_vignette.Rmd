@@ -1340,13 +1340,14 @@ It is often useful to plot the adjacency matrix as a network.  The `r HR("http:/
 <p id="plotadj">`r FT(orange, 5, text="&diams;")` <b>Plotting an Adjacency Matrix</b>: <em>Example 1</em>`r FT(orange, 5, text="&diams;")`</p>
 
 
-```{r}
+```{r, echo=-7}
 library(igraph)
 dat <- adjacency_matrix(wfm(DATA$state, DATA$person, stopword = Top25Words))
 g <- graph.adjacency(dat$adjacency, weighted=TRUE, mode ="undirected")
 g <- simplify(g)
 V(g)$label <- V(g)$name
 V(g)$degree <- degree(g)
+set.seed(14)
 plot(g, layout=layout.auto(g))
 ```
 
@@ -4503,11 +4504,11 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
     geom_hline(aes(yintercept=mean(word.count))) +
     geom_hline(aes(yintercept=mean(word.count) + (2 *sd(word.count)))) +
     geom_hline(aes(yintercept=mean(word.count) + (3 *sd(word.count)))) +
-    geom_text(parse=TRUE, hjust=0, vjust=0, family="serif", size = 4, aes(x = 2, 
+    geom_text(parse=TRUE, hjust=0, vjust=0, size = 3, aes(x = 2, 
         y = mean(word.count) + 2, label = "bar(x)")) +
-    geom_text(hjust=0, vjust=0, family="serif", size = 4, aes(x = 1, 
+    geom_text(hjust=0, vjust=0, size = 3, aes(x = 1, 
         y = mean(word.count) + (2 *sd(word.count)) + 2, label = "+2 sd")) +
-    geom_text(hjust=0, vjust=0, family="serif", size = 4, aes(x = 1, 
+    geom_text(hjust=0, vjust=0,  size = 3, aes(x = 1, 
         y = mean(word.count) + (3 *sd(word.count)) + 2, label = "+3 sd")) 
 ```
 

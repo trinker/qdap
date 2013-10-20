@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 25.34 16.30 22.40 25.34 19.70 15.79 25.34 25.34 15.79 22.40 25.34
-## [12] 22.40 15.00 25.34 22.40 25.34 19.70 25.34 16.30 16.30
+##  [1] 22.40 19.70 22.40 15.79 15.00 25.34 22.40 25.34 16.30 15.00 15.79
+## [12] 15.79 16.30 22.40 16.30 15.79 16.30 15.00 19.70 15.79
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 25.34 16.30 22.40 25.34 19.70 15.79 25.34 25.34 15.79 22.40 25.34
-## [12] 22.40 15.00 25.34 22.40 25.34 19.70 25.34 16.30 16.30
+##  [1] 22.40 19.70 22.40 15.79 15.00 25.34 22.40 25.34 16.30 15.00 15.79
+## [12] 15.79 16.30 22.40 16.30 15.79 16.30 15.00 19.70 15.79
 ```
 
 
@@ -8265,17 +8265,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##          interval Freq cum.Freq percent cum.percent
-## 1   (-4.37,-3.56]    2        2    0.02        0.02
-## 2   (-3.56,-2.75]   24       26    0.24        0.26
-## 3   (-2.75,-1.94]  220      246    2.20        2.46
-## 4   (-1.94,-1.13] 1052     1298   10.52       12.98
-## 5  (-1.13,-0.319] 2439     3737   24.39       37.37
-## 6  (-0.319,0.491] 3189     6926   31.89       69.26
-## 7     (0.491,1.3] 2143     9069   21.43       90.69
-## 8      (1.3,2.11]  785     9854    7.85       98.54
-## 9     (2.11,2.92]  129     9983    1.29       99.83
-## 10    (2.92,3.73]   17    10000    0.17      100.00
+##           interval Freq cum.Freq percent cum.percent
+## 1    (-3.98,-3.18]    7        7    0.07        0.07
+## 2    (-3.18,-2.38]   68       75    0.68        0.75
+## 3    (-2.38,-1.58]  525      600    5.25        6.00
+## 4   (-1.58,-0.779] 1611     2211   16.11       22.11
+## 5  (-0.779,0.0204] 2869     5080   28.69       50.80
+## 6    (0.0204,0.82] 2926     8006   29.26       80.06
+## 7      (0.82,1.62] 1496     9502   14.96       95.02
+## 8      (1.62,2.42]  420     9922    4.20       99.22
+## 9      (2.42,3.22]   69     9991    0.69       99.91
+## 10     (3.22,4.02]    9    10000    0.09      100.00
 ```
 
 ```r
@@ -8284,9 +8284,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   33       33      33          33
-## 2     gray   29       62      29          62
-## 3      red   38      100      38         100
+## 1     blue   34       34      34          34
+## 2     gray   31       65      31          65
+## 3      red   35      100      35         100
 ```
 
 ```r
@@ -9228,7 +9228,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x126a300c>
+<environment: 0x13ac6444>
 ```
 
 ```r
@@ -9907,11 +9907,11 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
     geom_hline(aes(yintercept=mean(word.count))) +
     geom_hline(aes(yintercept=mean(word.count) + (2 *sd(word.count)))) +
     geom_hline(aes(yintercept=mean(word.count) + (3 *sd(word.count)))) +
-    geom_text(parse=TRUE, hjust=0, vjust=0, family="serif", size = 4, aes(x = 2, 
+    geom_text(parse=TRUE, hjust=0, vjust=0, size = 3, aes(x = 2, 
         y = mean(word.count) + 2, label = "bar(x)")) +
-    geom_text(hjust=0, vjust=0, family="serif", size = 4, aes(x = 1, 
+    geom_text(hjust=0, vjust=0, size = 3, aes(x = 1, 
         y = mean(word.count) + (2 *sd(word.count)) + 2, label = "+2 sd")) +
-    geom_text(hjust=0, vjust=0, family="serif", size = 4, aes(x = 1, 
+    geom_text(hjust=0, vjust=0,  size = 3, aes(x = 1, 
         y = mean(word.count) + (3 *sd(word.count)) + 2, label = "+3 sd")) 
 ```
 
