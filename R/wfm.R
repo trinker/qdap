@@ -87,6 +87,22 @@
 #'                                                                  
 #' chisq.test(z)                                                      
 #' chisq.test(wfm(y)) 
+#' 
+#' ## Words correlated within turns of talk
+#' library(reports)
+#' x <- factor(with(rajSPLIT, paste(act, pad(TOT(tot)), sep = "|")))
+#' dat <- wfm(rajSPLIT$dialogue, x)
+#' 
+#' 
+#' cor(t(dat)[, c("romeo", "juliet")])
+#' cor(t(dat)[, c("romeo", "banished")])
+#' cor(t(dat)[, c("romeo", "juliet", "hate", "love")])
+#' qheat(cor(t(dat)[, c("romeo", "juliet", "hate", "love")]), 
+#'     diag.na = TRUE, values = TRUE, digits = 3, by.column = NULL)
+#'     
+#' dat2 <- wfm(DATA$state, seq_len(nrow(DATA)))
+#' qheat(cor(t(dat2)), low = "yellow", high = "red", 
+#'     grid = "grey90", diag.na = TRUE, by.column = NULL)
 #' }
 wfm <-
 function(text.var = NULL, grouping.var = NULL, 
@@ -121,8 +137,18 @@ function(text.var = NULL, grouping.var = NULL,
               table(unlist(strsplit(x, "\\s+")))
         })
         rnms <- sort(unique(unlist(lapply(txtL, names))))
-        txtL <- lapply(txtL, data.frame)
+
         txtL <- lapply(txtL, function(x) {
+            if (length(x) == 0) {
+                return(NA)
+            }
+            data.frame(x)
+         })
+
+        txtL <- lapply(txtL, function(x) {
+            if (!is.data.frame(x) && is.na(x)) {
+                return(rep(0, length(rnms)))
+            }
             new <- rnms[!rnms %in% x[, "Var1"]]
             DF <- rbind.data.frame(x, data.frame(Var1 = new, 
                 Freq = rep(0, length(new))))

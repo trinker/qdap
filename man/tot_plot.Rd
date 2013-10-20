@@ -81,6 +81,12 @@ tot_plot(mraja1, "dialogue", c("sex", "fam.aff"), tot=FALSE)+
 ## repeated measures
 rajSPLIT2 <- do.call(rbind, lapply(split(rajSPLIT, rajSPLIT$act), head, 25))
 tot_plot(rajSPLIT2, "dialogue", "fam.aff", facet.var = "act")
+
+## add mean and +/- 2 sd
+tot_plot(rajSPLIT, "dialogue", "fam.aff", facet.var = "act") +
+    geom_hline(aes(yintercept=mean(word.count))) +
+    geom_hline(aes(yintercept=mean(word.count) - (2 *sd(word.count)))) +
+    geom_hline(aes(yintercept=mean(word.count) + (2 *sd(word.count))))
 }
 }
 \keyword{sentence,}

@@ -8,7 +8,7 @@
     yaxis.col = "black", order.by = NULL, grid = "white",
     by.column = TRUE, auto.size = FALSE, mat2 = NULL,
     plot = TRUE, facet.vars = NULL, facet.flip = FALSE,
-    diag.na = FALSE)
+    diag.na = FALSE, diag.values = "")
 }
 \arguments{
   \item{mat}{A matrix or dataframe produced by many qdap
@@ -74,6 +74,10 @@
   This is useful with correlation matrices because the
   diagonal of ones do not effect the scaling of the
   heatmap.}
+
+  \item{diag.values}{The string to be used for the diagonal
+  labels (values) if \code{diag.na} is set to \code{TRUE}.
+  Defualt is to not print a value.}
 }
 \description{
   A quick heatmap function for visualizing typical qdap
@@ -104,7 +108,7 @@ qheat(ws.ob, "yellow", "red", grid = FALSE)
 qheat(mtcars, facet.vars = "cyl")
 qheat(mtcars, facet.vars = c("gear", "cyl"))
 qheat(t(mtcars), by.column=FALSE)
-qheat(cor(mtcars), diag.na=TRUE)
+qheat(cor(mtcars), diag.na=TRUE, diag.value="", by.column=NULL, values = TRUE)
 
 dat1 <- data.frame(G=LETTERS[1:5], matrix(rnorm(20), ncol = 4))
 dat2 <- data.frame(matrix(LETTERS[1:25], ncol=5))

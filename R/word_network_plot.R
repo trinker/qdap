@@ -84,6 +84,11 @@
 #' x <- word_network_plot(text.var=DATA$state, DATA$person)
 #' str(x)
 #' plot(x, vertex.size=0, vertex.color="white", edge.curved = TRUE)
+#' 
+#' x2 <- word_network_plot(text.var=DATA$state, grouping.var=DATA$person,
+#'     title.name = "TITLE", log.labels = TRUE, label.size = 1.2)
+#' l <- layout.drl(x2, options=list(simmer.attraction=0))
+#' plot(x2, vertex.size=0, layout = l)
 #' }
 word_network_plot <-                                                                  
 function(text.var, grouping.var = 1:length(text.var), target.words = NULL, 

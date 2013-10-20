@@ -37,6 +37,8 @@
 #' matrix the diagonals are set to \code{NA}.  This is useful with correlation 
 #' matrices because the diagonal of ones do not effect the scaling of the 
 #' heatmap.
+#' @param diag.values The string to be used for the diagonal labels (values) 
+#' if \code{diag.na} is set to \code{TRUE}.  Defualt is to not print a value.
 #' @details \code{qheat} is useful for finding patterns and anomalies in large
 #' qdap generated dataframes and matrices.
 #' @note \code{\link[qdap]{qheat}} is a fast way of working with data formats 
@@ -65,7 +67,7 @@
 #' qheat(mtcars, facet.vars = "cyl")
 #' qheat(mtcars, facet.vars = c("gear", "cyl"))
 #' qheat(t(mtcars), by.column=FALSE)
-#' qheat(cor(mtcars), diag.na=TRUE)
+#' qheat(cor(mtcars), diag.na=TRUE, diag.value="", by.column=NULL, values = TRUE)
 #' 
 #' dat1 <- data.frame(G=LETTERS[1:5], matrix(rnorm(20), ncol = 4))
 #' dat2 <- data.frame(matrix(LETTERS[1:25], ncol=5))
@@ -77,7 +79,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
     digits = 1, text.size = 3, text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white", by.column = TRUE, 
     auto.size = FALSE, mat2 = NULL, plot = TRUE, facet.vars = NULL, 
-    facet.flip = FALSE, diag.na = FALSE) {
+    facet.flip = FALSE, diag.na = FALSE, diag.values = "") {
     group <- value <- values2 <- NULL
 
     ## set diagonal to NA
@@ -170,10 +172,16 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
         ws5 <- data.frame(group = mat2[, 1], mat2[, -1, drop = FALSE])
 
         ws5 <- melt(ws5, id.var = "group")
+
         if(is.numeric(ws5$value)) {
             ws4$values2 <- numformat(ws5$value, digits = digits)
         } else {
             ws4$values2 <- ws5$value
+        }
+
+        ## what to print the na values on the diagonal as
+        if (!is.null(diag.values)) {
+            ws4[ws4[, "values2"] == "NA", "values2"] <- diag.values
         }
     }
     if (length(xaxis.col) == 1) {

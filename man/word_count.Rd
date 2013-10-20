@@ -94,19 +94,29 @@
 }
 \examples{
 \dontrun{
-# WORD COUNT
+## WORD COUNT
 word_count(DATA$state)
 wc(DATA$state)
 word_count(DATA$state, names = TRUE)
 word_count(DATA$state, byrow=FALSE, names = TRUE)
 sum(word_count(DATA$state))
 
-# CHARACTER COUNTS
+## PLOT WORD COUNTS
+
+raj2 <- raj
+raj2$scaled <- scale(wc(raj$dialogue))
+raj2$ID <- factor(unlist(tapply(raj2$act, raj2$act, seq_along)))
+
+ggplot(raj2, aes(x = ID, y = scaled, fill =person)) +
+    geom_bar(stat="identity") +
+    facet_grid(act~.)
+
+## CHARACTER COUNTS
 character_count(DATA$state)
 character_count(DATA$state, byrow=FALSE)
 sum(character_count(DATA$state))
 
-# CHARACTER TABLE
+## CHARACTER TABLE
 x <- character_table(DATA$state, DATA$person)
 plot(x)
 plot(x, label = TRUE)
