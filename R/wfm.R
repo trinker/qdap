@@ -104,7 +104,7 @@
 #' qheat(cor(t(dat2)), low = "yellow", high = "red", 
 #'     grid = "grey90", diag.na = TRUE, by.column = NULL)
 #' }
-wfm <-
+wfm <- 
 function(text.var = NULL, grouping.var = NULL, 
          output = "raw", stopwords = NULL, char2space = "~~", ...){
 
@@ -134,32 +134,16 @@ function(text.var = NULL, grouping.var = NULL,
         txt <- strip(text.var, char.keep = char2space, 
             apostrophe.remove = FALSE, ...)
         txtL <- lapply(split(txt, grouping), function(x) {
-              table(unlist(strsplit(x, "\\s+")))
+              unlist(strsplit(x, "\\s+"))
         })
-        rnms <- sort(unique(unlist(lapply(txtL, names))))
 
-        txtL <- lapply(txtL, function(x) {
-            if (length(x) == 0) {
-                return(NA)
-            }
-            data.frame(x)
-         })
+        ## tabulate frequencies per word
+        x2 <- t(mtabulate(txtL))
 
-        txtL <- lapply(txtL, function(x) {
-            if (!is.data.frame(x) && is.na(x)) {
-                return(rep(0, length(rnms)))
-            }
-            new <- rnms[!rnms %in% x[, "Var1"]]
-            DF <- rbind.data.frame(x, data.frame(Var1 = new, 
-                Freq = rep(0, length(new))))
-            DF[order(as.character(DF$Var1)), 2]
-        })
-        x2 <- do.call(cbind, txtL)
+        ## replace spaced characters
         if (!is.null(char2space)) {
-            rownames(x2) <- mgsub(char2space, " ", rnms)
-        } else {
-            rownames(x2) <- rnms
-        }
+            rownames(x2) <- mgsub(char2space, " ", rownames(x2))
+        } 
 
         if (!is.null(stopwords)){
             x2 <- x2[!rownames(x2) %in% stopwords, , drop = FALSE]
@@ -176,6 +160,7 @@ function(text.var = NULL, grouping.var = NULL,
     class(x2) <- c("wfm", "true.matrix", class(x2))
     x2
 }
+
 
 #' Prints an wfm Object
 #' 

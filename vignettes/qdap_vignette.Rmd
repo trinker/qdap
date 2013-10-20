@@ -3875,10 +3875,19 @@ dat <- pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY),]
 with(dat, dissimilarity(dialogue, list(person, time)))
 ```
 
+<pre><code>         OBAMA.1 OBAMA.2 OBAMA.3 ROMNEY.1 ROMNEY.2
+OBAMA.2    0.340                                  
+OBAMA.3    0.300   0.341                          
+ROMNEY.1   0.340   0.287   0.258                  
+ROMNEY.2   0.291   0.349   0.296    0.321         
+ROMNEY.3   0.264   0.297   0.329    0.290    0.338
+</code></pre>
+
+
 <p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("dissimilarity")` Clustering (Dendrogram)**`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r}
-(x <- with(pres_debates2012, dissimilarity(dialogue, list(person, time))))
+x <- with(pres_debates2012, dissimilarity(dialogue, list(person, time)))
 fit <- hclust(x)
 plot(fit)
 ```
@@ -3888,14 +3897,6 @@ plot(fit)
 ## draw dendogram with red borders around the 3 clusters 
 rect.hclust(fit, k=3, border=c("red", "purple", "seagreen"))
 ```
-
-<pre><code>         OBAMA.1 OBAMA.2 OBAMA.3 ROMNEY.1 ROMNEY.2
-OBAMA.2    0.340                                  
-OBAMA.3    0.300   0.341                          
-ROMNEY.1   0.340   0.287   0.258                  
-ROMNEY.2   0.291   0.349   0.296    0.321         
-ROMNEY.3   0.264   0.297   0.329    0.290    0.338
-</code></pre>
 
 <h4 id="kullback">Kullback-Leibler divergence </h4>
 
@@ -4480,7 +4481,13 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Set1") +
     geom_hline(aes(yintercept=mean(word.count))) +
     geom_hline(aes(yintercept=mean(word.count) + (2 *sd(word.count)))) +
-    geom_hline(aes(yintercept=mean(word.count) + (3 *sd(word.count))))
+    geom_hline(aes(yintercept=mean(word.count) + (3 *sd(word.count)))) +
+    geom_text(parse=TRUE, hjust=0, vjust=0, family="serif", size = 4, aes(x = 2, 
+        y = mean(word.count) + 2, label = "bar(x)")) +
+    geom_text(hjust=0, vjust=0, family="serif", size = 4, aes(x = 1, 
+        y = mean(word.count) + (2 *sd(word.count)) + 2, label = "+2 sd")) +
+    geom_text(hjust=0, vjust=0, family="serif", size = 4, aes(x = 1, 
+        y = mean(word.count) + (3 *sd(word.count)) + 2, label = "+3 sd")) 
 ```
 
 <h4 id="venn">Venn Diagram</h4>

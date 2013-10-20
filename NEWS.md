@@ -185,6 +185,8 @@ relatively new to CRAN, made these changes sensible at this point.
 * `tot_plot` now handles repeated measures and `grouping.var` to be nested 
   within the turn of talk.
 
+* `wfm` now uses `mtabulate` and is now ~10x faster.
+
 <b>CHANGES</b>
 
 * The dictionaries and word lists for <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> have been moved to their own package, 

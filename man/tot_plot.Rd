@@ -83,10 +83,17 @@ rajSPLIT2 <- do.call(rbind, lapply(split(rajSPLIT, rajSPLIT$act), head, 25))
 tot_plot(rajSPLIT2, "dialogue", "fam.aff", facet.var = "act")
 
 ## add mean and +/- 2 sd
-tot_plot(rajSPLIT, "dialogue", "fam.aff", facet.var = "act") +
+tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
+    scale_fill_brewer(palette="Set1") +
     geom_hline(aes(yintercept=mean(word.count))) +
-    geom_hline(aes(yintercept=mean(word.count) - (2 *sd(word.count)))) +
-    geom_hline(aes(yintercept=mean(word.count) + (2 *sd(word.count))))
+    geom_hline(aes(yintercept=mean(word.count) + (2 *sd(word.count)))) +
+    geom_hline(aes(yintercept=mean(word.count) + (3 *sd(word.count)))) +
+    geom_text(parse=TRUE, hjust=0, vjust=0, family="serif", size = 4, aes(x = 2,
+        y = mean(word.count) + 2, label = "bar(x)")) +
+    geom_text(hjust=0, vjust=0, family="serif", size = 4, aes(x = 1,
+        y = mean(word.count) + (2 *sd(word.count)) + 2, label = "+2 sd")) +
+    geom_text(hjust=0, vjust=0, family="serif", size = 4, aes(x = 1,
+        y = mean(word.count) + (3 *sd(word.count)) + 2, label = "+3 sd"))
 }
 }
 \keyword{sentence,}

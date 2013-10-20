@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.00 16.30 15.00 15.79 22.40 15.00 15.79 16.30 19.70 22.40 22.40
-## [12] 19.70 19.70 19.70 22.40 19.70 25.34 15.79 15.00 15.79
+##  [1] 25.34 15.00 25.34 16.30 15.79 25.34 15.79 15.79 16.30 16.30 15.79
+## [12] 16.30 16.30 16.30 16.30 16.30 19.70 16.30 25.34 19.70
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.00 16.30 15.00 15.79 22.40 15.00 15.79 16.30 19.70 22.40 22.40
-## [12] 19.70 19.70 19.70 22.40 19.70 25.34 15.79 15.00 15.79
+##  [1] 25.34 15.00 25.34 16.30 15.79 25.34 15.79 15.79 16.30 16.30 15.79
+## [12] 16.30 16.30 16.30 16.30 16.30 19.70 16.30 25.34 19.70
 ```
 
 
@@ -8240,17 +8240,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##          interval Freq cum.Freq percent cum.percent
-## 1   (-3.42,-2.69]   23       23    0.23        0.23
-## 2   (-2.69,-1.97]  209      232    2.09        2.32
-## 3   (-1.97,-1.24]  812     1044    8.12       10.44
-## 4  (-1.24,-0.514] 1931     2975   19.31       29.75
-## 5  (-0.514,0.211] 2832     5807   28.32       58.07
-## 6   (0.211,0.937] 2460     8267   24.60       82.67
-## 7    (0.937,1.66] 1251     9518   12.51       95.18
-## 8     (1.66,2.39]  395     9913    3.95       99.13
-## 9     (2.39,3.11]   73     9986    0.73       99.86
-## 10    (3.11,3.84]   14    10000    0.14      100.00
+##           interval Freq cum.Freq percent cum.percent
+## 1    (-3.86,-3.09]    9        9    0.09        0.09
+## 2    (-3.09,-2.31]   97      106    0.97        1.06
+## 3    (-2.31,-1.53]  509      615    5.09        6.15
+## 4   (-1.53,-0.752] 1638     2253   16.38       22.53
+## 5  (-0.752,0.0262] 2856     5109   28.56       51.09
+## 6   (0.0262,0.804] 2823     7932   28.23       79.32
+## 7     (0.804,1.58] 1539     9471   15.39       94.71
+## 8      (1.58,2.36]  423     9894    4.23       98.94
+## 9      (2.36,3.14]   95     9989    0.95       99.89
+## 10     (3.14,3.92]   11    10000    0.11      100.00
 ```
 
 ```r
@@ -8259,9 +8259,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   27       27      27          27
-## 2     gray   32       59      32          59
-## 3      red   41      100      41         100
+## 1     blue   34       34      34          34
+## 2     gray   31       65      31          65
+## 3      red   35      100      35         100
 ```
 
 ```r
@@ -8889,27 +8889,20 @@ with(dat, dissimilarity(dialogue, list(person, time)))
 ```
 
 
+<pre><code>         OBAMA.1 OBAMA.2 OBAMA.3 ROMNEY.1 ROMNEY.2
+OBAMA.2    0.340                                  
+OBAMA.3    0.300   0.341                          
+ROMNEY.1   0.340   0.287   0.258                  
+ROMNEY.2   0.291   0.349   0.296    0.321         
+ROMNEY.3   0.264   0.297   0.329    0.290    0.338
+</code></pre>
+
+
 <p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> Clustering (Dendrogram)**<font size="5" color="orange">&diams;</font></p >
 
 
 ```r
-(x <- with(pres_debates2012, dissimilarity(dialogue, list(person, time))))
-```
-
-```
-##                  CROWLEY.time 2 LEHRER.time 1 OBAMA.time 1 OBAMA.time 2 OBAMA.time 3 QUESTION.time 2 ROMNEY.time 1 ROMNEY.time 2 ROMNEY.time 3
-## LEHRER.time 1             0.240                                                                                                               
-## OBAMA.time 1              0.209         0.169                                                                                                 
-## OBAMA.time 2              0.197         0.113        0.340                                                                                    
-## OBAMA.time 3              0.178         0.114        0.300        0.341                                                                       
-## QUESTION.time 2           0.205         0.195        0.166        0.149        0.136                                                          
-## ROMNEY.time 1             0.208         0.171        0.340        0.287        0.258           0.171                                          
-## ROMNEY.time 2             0.211         0.132        0.291        0.349        0.296           0.149         0.321                            
-## ROMNEY.time 3             0.169         0.111        0.264        0.297        0.329           0.123         0.290         0.338              
-## SCHIEFFER.time 3          0.269         0.219        0.208        0.185        0.204           0.183         0.212         0.195         0.206
-```
-
-```r
+x <- with(pres_debates2012, dissimilarity(dialogue, list(person, time)))
 fit <- hclust(x)
 plot(fit)
 ```
@@ -8925,14 +8918,6 @@ rect.hclust(fit, k=3, border=c("red", "purple", "seagreen"))
 
 ![plot of chunk unnamed-chunk-196](figure/unnamed-chunk-196.png) 
 
-
-<pre><code>         OBAMA.1 OBAMA.2 OBAMA.3 ROMNEY.1 ROMNEY.2
-OBAMA.2    0.340                                  
-OBAMA.3    0.300   0.341                          
-ROMNEY.1   0.340   0.287   0.258                  
-ROMNEY.2   0.291   0.349   0.296    0.321         
-ROMNEY.3   0.264   0.297   0.329    0.290    0.338
-</code></pre>
 
 <h4 id="kullback">Kullback-Leibler divergence </h4>
 
@@ -9218,7 +9203,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x12f9189c>
+<environment: 0x12c690c4>
 ```
 
 ```r
@@ -9894,7 +9879,13 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Set1") +
     geom_hline(aes(yintercept=mean(word.count))) +
     geom_hline(aes(yintercept=mean(word.count) + (2 *sd(word.count)))) +
-    geom_hline(aes(yintercept=mean(word.count) + (3 *sd(word.count))))
+    geom_hline(aes(yintercept=mean(word.count) + (3 *sd(word.count)))) +
+    geom_text(parse=TRUE, hjust=0, vjust=0, family="serif", size = 4, aes(x = 2, 
+        y = mean(word.count) + 2, label = "bar(x)")) +
+    geom_text(hjust=0, vjust=0, family="serif", size = 4, aes(x = 1, 
+        y = mean(word.count) + (2 *sd(word.count)) + 2, label = "+2 sd")) +
+    geom_text(hjust=0, vjust=0, family="serif", size = 4, aes(x = 1, 
+        y = mean(word.count) + (3 *sd(word.count)) + 2, label = "+3 sd")) 
 ```
 
 ![plot of chunk unnamed-chunk-243](figure/unnamed-chunk-243.png) 

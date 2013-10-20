@@ -185,6 +185,8 @@ MINOR FEATURES
 * `tot_plot` now handles repeated measures and `grouping.var` to be nested 
   within the turn of talk.
 
+* `wfm` now uses `mtabulate` and is now ~10x faster.
+
 CHANGES
 
 * The dictionaries and word lists for qdap have been moved to their own package, 
