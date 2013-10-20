@@ -37,14 +37,27 @@
 #' sum(word_count(DATA$state))
 #' 
 #' ## PLOT WORD COUNTS
-#' 
 #' raj2 <- raj
-#' raj2$scaled <- scale(wc(raj$dialogue))
+#' raj2$scaled <- unlist(tapply(wc(raj$dialogue), raj2$act, scale))
+#' raj2$scaled2 <- unlist(tapply(wc(raj$dialogue), raj2$act, scale, scale = FALSE))
 #' raj2$ID <- factor(unlist(tapply(raj2$act, raj2$act, seq_along)))
 #' 
 #' ggplot(raj2, aes(x = ID, y = scaled, fill =person)) +
 #'     geom_bar(stat="identity") +
-#'     facet_grid(act~.)
+#'     facet_grid(act~.) + 
+#'     ylab("Scaled") + xlab("Turn of Talk") +
+#'     guides(fill = guide_legend(nrow = 5, byrow = TRUE)) +
+#'     theme(legend.position="bottom") +
+#'     ggtitle("Scaled and Centered")
+#' 
+#' 
+#' ggplot(raj2, aes(x = ID, y = scaled2, fill =person)) +
+#'     geom_bar(stat="identity") +
+#'     facet_grid(act~.) + 
+#'     ylab("Scaled") + xlab("Turn of Talk") +
+#'     guides(fill = guide_legend(nrow = 5, byrow = TRUE)) +
+#'     theme(legend.position="bottom") +
+#'     ggtitle("Mean Difference")
 #'     
 #' ## CHARACTER COUNTS
 #' character_count(DATA$state)

@@ -195,7 +195,7 @@ The following functions will be utilized in this section (click to view more):
 
 <h4 id="readin">Reading In Transcript Data `r yt("http://youtu.be/UxgOScggLBg")`</h4>    
 
-This subsection covers how to read in transcript data.  Generally the researcher will have data stored as a .docx (Microsoft Word or Open/Libre Office) or .xlsx/.csv (spreadsheet format).  It is of great importance that the researcher manually writes/parses their transcripts to avoid potential analysis problems later.  All sentences should contain appropriate qdap punctuation (declarative = ., interrogative = ?, exclamatory = !, interupted = | or `r FUN("imperative")` = *., *?, *!, *|).  Additionally, if a sentence contains an endmark/punctuation it should have accompanying text/dialogue.  Two functions are useful for reading in data, `r FUN("read.transcript")` and `r FUN("dir_map")`.  `r FUN("read.transcript")` detects file type (.docx/.csv/.xlsx) and reads in a single transcipt whereas `r FUN("dir_map")` generates code that utilizes `r FUN("read.transcript")` for each of the multiple transcripts in a single directory.  Note that `r FUN("read.transcript")` expects a two column formatted transcript (usually with person on the left and dialogue on the right).
+This subsection covers how to read in transcript data.  Generally the researcher will have data stored as a .docx (Microsoft Word or Open/Libre Office) or .xlsx/.csv (spreadsheet format).  It is of great importance that the researcher manually writes/parses their transcripts to avoid potential analysis problems later.  All sentences should contain appropriate qdap punctuation (declarative = ., interrogative = ?, exclamatory = !, interrupted = | or `r FUN("imperative")` = *., *?, *!, *|).  Additionally, if a sentence contains an end mark/punctuation it should have accompanying text/dialogue.  Two functions are useful for reading in data, `r FUN("read.transcript")` and `r FUN("dir_map")`.  `r FUN("read.transcript")` detects file type (.docx/.csv/.xlsx) and reads in a single transcript whereas `r FUN("dir_map")` generates code that utilizes `r FUN("read.transcript")` for each of the multiple transcripts in a single directory.  Note that `r FUN("read.transcript")` expects a two column formatted transcript (usually with person on the left and dialogue on the right).
 
 Five arguments are of particular importance to read.transcript: 
 
@@ -231,10 +231,10 @@ to skip before beginning to read data.</p>
 </td></tr>
 </table>
 
-Often transcripts contain extraneous material at the top and the argument `r CN("skip = ?")` must be used to skip these extra lines.  Some sort of unique separator must also be used to separate the person column from the text column.  By defualt `r CN('sep = ":"')` is assumed.  If your transcripts do no contain a separator one must be inserted manually.  Also note that the researcher may want to prepare the transcripts with brackets to denote non spoken annotations as well dialogue that is read rather than spoken.  For more on bracket parsing see `r HR("#bracket", "Bracket/General Chunk Extraction")`.
+Often transcripts contain extraneous material at the top and the argument `r CN("skip = ?")` must be used to skip these extra lines.  Some sort of unique separator must also be used to separate the person column from the text column.  By default `r CN('sep = ":"')` is assumed.  If your transcripts do not contain a separator one must be inserted manually.  Also note that the researcher may want to prepare the transcripts with brackets to denote non spoken annotations as well dialogue that is read rather than spoken.  For more on bracket parsing see `r HR("#bracket", "Bracket/General Chunk Extraction")`.
 
 <div class="middleDiv">
-<b>`r FT(red, 4, text="Note: It is important that all sentences contain valid qdap punctuation (<font face=\"courier\">.</font>, <font face=\"courier\">?</font>, <font face=\"courier\">!</font>, <font face=\"courier\">|</font>) in your transcripts.  Many qdap functions are dependant upon this assumption.")`</b>
+<b>`r FT(red, 4, text="Note: It is important that all sentences contain valid qdap punctuation (<font face=\"courier\">.</font>, <font face=\"courier\">?</font>, <font face=\"courier\">!</font>, <font face=\"courier\">|</font>) in your transcripts.  Many qdap functions are dependent upon this assumption.")`</b>
 </div>
 
 `r FT(orange, 5, text="&diams;")` **Reading In Data**- *read.transcript* `r FT(orange, 5, text="&diams;")`
@@ -296,7 +296,7 @@ truncdf(dat3, 40)</code></pre>
 </code></pre>
 
 <pre><code class="r">## Be Aware of the `sep` Used
-## Incorrect Read; Wrong `sep` Provided (used defualt `:`)
+## Incorrect Read; Wrong `sep` Provided (used default `:`)
 read.transcript(doc3, skip = 1)</code></pre>
 
 <pre><code>##Dialogue and Person Columns Mixed Inappropriately
@@ -345,7 +345,7 @@ read.transcript(text=trans)</code></pre>
 ## 4     sam          You liar, it stinks!
 </code></pre>
 
-The `r FUN("dir_map")` function enables the researcher to produce multiple lines of code, one line with `r FUN("read.transcript")` for each file in a directory, which is then optionally copied to the clipboard for easy insertion into a script.  Note that setting the argument `r CN("use.path = FALSE")` may allow the code to be more portable in that a static path is not suppplied the the `r FUN("read.transcript")` scripts.
+The `r FUN("dir_map")` function enables the researcher to produce multiple lines of code, one line with `r FUN("read.transcript")` for each file in a directory, which is then optionally copied to the clipboard for easy insertion into a script.  Note that setting the argument `r CN("use.path = FALSE")` may allow the code to be more portable in that a static path is not supplied to the `r FUN("read.transcript")` scripts.
 
 `r FT(orange, 5, text="&diams;")` **Reading In Data**- *dir_map* `r FT(orange, 5, text="&diams;")`
 
@@ -364,7 +364,7 @@ dat4 <- read.transcript('~/extdata/transcripts/trans4.xlsx', col.names = c('pers
 
 The `r CN("mcsv_x")` family of functions are utilized to read (`r FUN("mcsv_r")`) and write (`r FUN("mcsv_w")`) multiple csv files at once.  `r FUN("mcsv_w")` takes an arbitrary number of dataframes and outputs them to the supplied directory( `r CN("dir = ?")`).  An attempt will be made to output the dataframes from qdap functions that output lists of dataframes.  Note that dataframes that contain columns that are lists must be condensed prior to writing with other R dataframe writing functions (e.g., `write.csv`) using the `r FUN("condense")` function.  By default `r FUN("mcsv_w")` attempts to utilize `r FUN("condense")`.
 
-The `r FUN("mcsv_r")` function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the dataframes that are read in are also assigned to an inclusive list (name `L1` by defualt).
+The `r FUN("mcsv_r")` function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the dataframes that are read in are also assigned to an inclusive list (name `L1` by default).
 
 `r FT(orange, 5, text="&diams;")` **Reading and Writing Multiple csvs** `r FT(orange, 5, text="&diams;")`
 
@@ -386,7 +386,7 @@ mcsv_r(file.path(a, nms))
 mtcarsb; CO2b
 L1
 
-## The dataframe anmes and list of dataframe can be altered
+## The dataframe names and list of dataframe can be altered
 mcsv_r(file.path(a, nms), a.name = paste0("bot", 1:2), l.name = "bots_stink")
 bot1; bot2
 bots_stink
@@ -497,14 +497,14 @@ lview(question_type(DATA.SPLIT$state, DATA.SPLIT$person))
 
 <h4 id="just">Text Justification</h4> 
 
-By defualt text data (character vectors) are displayed as right justified in R.  This can be difficult and unnatural to read, particularly as the length of the sentences increase.  The `r FUN("left_just")` function creates a more natural left justification of text.  Note that `r FUN("left_just")` inserts spaces to achieve the justification. This could interfere with analysis and therefore the output from `r FUN("left_just")` should only be used for visualization purposes, not analysis.
+By default text data (character vectors) are displayed as right justified in R.  This can be difficult and unnatural to read, particularly as the length of the sentences increase.  The `r FUN("left_just")` function creates a more natural left justification of text.  Note that `r FUN("left_just")` inserts spaces to achieve the justification. This could interfere with analysis and therefore the output from `r FUN("left_just")` should only be used for visualization purposes, not analysis.
 
 `r FT(orange, 5, text="&diams;")` **Justified Data Viewing** `r FT(orange, 5, text="&diams;")`    
 
 ```{r}
 ## The unnatural state of R text data
 DATA
-## left jsut to the rescue
+## left just to the rescue
 left_just(DATA)
 ## Left just select column(s)
 left_just(DATA, c("sex", "state"))
@@ -550,7 +550,7 @@ The following functions will be utilized in this section (click to view more):<b
     <input type="submit" value="lookup"><input type="submit" value="%l%"> 
 </form>
 
-<form ction="http://trinker.github.io/qdap_dev/hash.html" target="_blank">
+<form action="http://trinker.github.io/qdap_dev/hash.html" target="_blank">
     <input type="submit" value="hash"><input type="submit" value="hash_look"><input type="submit" value="%ha%"> - `r HR("#hash", "Hash Table/Dictionary Lookup")`
 </form>
 
@@ -581,7 +581,7 @@ qcv(terms = "mpg cyl  disp  hp drat    wt  qsec vs am gear carb")
 
 <h4 id="hash">Dictionary/Lookup</h4>  
 
-Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The `r FUN("lookup")` & `r HR2("%l%")` functions provide a fast enviroment lookup for single usage. The `r FUN("hash")` & `r HR2("http://trinker.github.io/qdap_dev/hash.html", "hash_lookup")`/`r HR2("http://trinker.github.io/qdap_dev/hash.html", "%ha%")` functions provide a fast enviroment lookup for multiple uses of the same hash table.
+Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The `r FUN("lookup")` & `r HR2("%l%")` functions provide a fast environment lookup for single usage. The `r FUN("hash")` & `r HR2("http://trinker.github.io/qdap_dev/hash.html", "hash_lookup")`/`r HR2("http://trinker.github.io/qdap_dev/hash.html", "%ha%")` functions provide a fast environment lookup for multiple uses of the same hash table.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("lookup")`**- *Dictionary/Look Up Examples* `r FT(orange, 5, text="&diams;")`
 
@@ -797,7 +797,7 @@ Often a researcher will want to extract some text from the transcript and put it
 paste2(bracketXtract(examp$text, "curly"), " ")
 ```
 
-The researcher may need a more general extraction method that allows for any left/right boundaries to be specified.  This is useful in that many qualitative transciption/coding programs have specific syntax for various dialogue markup for events that must be parsed from the data set.  The `r FUN("genX")` and `r FUN("genXtract")` functions have such capabilities.
+The researcher may need a more general extraction method that allows for any left/right boundaries to be specified.  This is useful in that many qualitative transcription/coding programs have specific syntax for various dialogue markup for events that must be parsed from the data set.  The `r FUN("genX")` and `r FUN("genXtract")` functions have such capabilities.
 
 `r FT(orange, 5, text="&diams;")` **Extracting Chunks 3**- *genX/genXtract* `r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -858,7 +858,7 @@ truncdf(dat2, 40)
 truncdf(rm_row(dat2, "X1", "[C"), 40)
 ## Use column numbers to remove rows
 truncdf(rm_row(dat2, 2, "[C"), 40)
-## Also remove people ect. from the analysis
+## Also remove people etc. from the analysis
 rm_row(DATA, 1, c("sam", "greg"))
 ```
 
@@ -885,7 +885,7 @@ scrubber(x3, TRUE)
 
 The replacement family of functions replace various text elements within the transcripts with alphabetic versions that are more suited to analysis.  These alterations may affect word counts and other alphabetic dependent forms of analysis.
 
-The `r FUN("replace_abbreviation")` replaces standard abbreviations that utilize periods with forms that do not rely on periods.  This is necessary in that many sentence specific functions (e.g., `r FUN("sentSplit")` and `r FUN("word_stats")`) rely on period usage acting as sentence endmarks.  The researcher may augment the standard `r FUN2("abbreviations")` dictionary from qdapDictionaries with field specific abbreviations.
+The `r FUN("replace_abbreviation")` replaces standard abbreviations that utilize periods with forms that do not rely on periods.  This is necessary in that many sentence specific functions (e.g., `r FUN("sentSplit")` and `r FUN("word_stats")`) rely on period usage acting as sentence end marks.  The researcher may augment the standard `r FUN2("abbreviations")` dictionary from qdapDictionaries with field specific abbreviations.
 
 `r FT(orange, 5, text="&diams;")` **Replace Abbreviations**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -905,7 +905,7 @@ replace_abbreviation(x, abv, repl)
 replace_abbreviation(x, KEY)
 ```
 
-The `r FUN("replace_contraction")` replaces contractions with equivalent mult word forms.  This is useful for some word/sentence statistics.  The researcher may augment the `r FUN2("contractions")` dictionary supplied by qdapDictionaries, however, the word list is exhaustive.
+The `r FUN("replace_contraction")` replaces contractions with equivalent multi-word forms.  This is useful for some word/sentence statistics.  The researcher may augment the `r FUN2("contractions")` dictionary supplied by qdapDictionaries, however, the word list is exhaustive.
 
 `r FT(orange, 5, text="&diams;")` **Replace Contractions**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -944,7 +944,7 @@ replace_symbol(x)
 replace_number(replace_symbol(x))
 ```
 
-The `r FUN("qprep")` function is a wrapper for several other replcement family function that allows for more speedy cleaning of the text.  This approach, while speedy, reduces the flexiblity and care that is undertaken by the researcher when the individual replacment functions are utilized.  The function is intended for analysis that requires less care.
+The `r FUN("qprep")` function is a wrapper for several other replacement family function that allows for more speedy cleaning of the text.  This approach, while speedy, reduces the flexibility and care that is undertaken by the researcher when the individual replacement functions are utilized.  The function is intended for analysis that requires less care.
 
 `r FT(orange, 5, text="&diams;")` **General Replacement (Quick Preparation)**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -956,7 +956,7 @@ qprep(x)
 
 <h4 id="fill">Replace Spaces</h4>
 
-Many qdap functions break sentences up into words based on the spaces between words.  Often the researcher will want to keep a group of words as a single unit.  The `r FUN("space_fill")` allows the researcher to replace spaces between selected phrases with <b><font color="blue" face="courier">&#126;&#126;</font></b>.  By defualt <b><font color="blue" face="courier">&#126;&#126;</font></b> is recognized by many qdap functions as a space separator.
+Many qdap functions break sentences up into words based on the spaces between words.  Often the researcher will want to keep a group of words as a single unit.  The `r FUN("space_fill")` allows the researcher to replace spaces between selected phrases with <b><font color="blue" face="courier">&#126;&#126;</font></b>.  By default <b><font color="blue" face="courier">&#126;&#126;</font></b> is recognized by many qdap functions as a space separator.
 
 `r FT(orange, 5, text="&diams;")` **Space Fill Examples**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -984,7 +984,7 @@ trans_cloud(text, c("greg", "bob"), target.words=list(obs), caps.list=obs,
 
 <h4 id="mgsub">Multiple gsub</h4>
 
-The researcher may have the need to make multiple substitutions in a text.  An example of when this is needed is when a transcript is marked up with transctiption coding convention specific to a particular transcription method.  These codes, while useful in some contexts, may lead to inaccurate word statisitcs.  The base R function `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/grep.html", "gsub")` makes a single replacement of these types of coding conventions. The `r FUN("multigsub")` (alias `r FUN("mgsub")`) takes a vector of patterns to search for as well as a vector of replacments.  Note that the replacements occur sequentially rather than all at once. This means a previous (first in pattern string) sub could alter or be altered by a later sub.  `r FUN("mgsub")` is useful throughout multiple stages of the research process.
+The researcher may have the need to make multiple substitutions in a text.  An example of when this is needed is when a transcript is marked up with transcription coding convention specific to a particular transcription method.  These codes, while useful in some contexts, may lead to inaccurate word statistics.  The base R function `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/grep.html", "gsub")` makes a single replacement of these types of coding conventions. The `r FUN("multigsub")` (alias `r FUN("mgsub")`) takes a vector of patterns to search for as well as a vector of replacements.  Note that the replacements occur sequentially rather than all at once. This means a previous (first in pattern string) sub could alter or be altered by a later sub.  `r FUN("mgsub")` is useful throughout multiple stages of the research process.
 
 `r FT(orange, 5, text="&diams;")` **Multiple Substitutions**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -1000,7 +1000,7 @@ mgsub(c("it's", "I'm", "I am"), c("it is", "I am", "ITERATIVE"), DATA$state)
 
 <h4 id="nms">Names to Gender Prediction</h4>
 
-A researcher may face a list of names and be uncertain about gender of the participants.  The `r FUN("name2sex")` function utilizes the `r FUN2("NAMES_LIST")` dictionary based on the 1990 U.S. census data.  For gender neutral names the gender with the higher assignment rate is assumed if `r CN("pred.sex")` is set to `r CN("TRUE")`, otherwise a `r FT(blue, text="B")` is assigned to indicate "both" genders.  For names not matching the `r FUN2("NAMES_LIST")` optional fuzzy matching can be utilized via the `r CN("fuzzy.match")` argument based on the use of `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/agrep.html", "agrep")`.  Both of these argument increase accuracy but act at the cost of speed.  The use of `r CN("fuzzy.match = TRUE")` is particularly computationaly costly.
+A researcher may face a list of names and be uncertain about gender of the participants.  The `r FUN("name2sex")` function utilizes the `r FUN2("NAMES_LIST")` dictionary based on the 1990 U.S. census data.  For gender neutral names the gender with the higher assignment rate is assumed if `r CN("pred.sex")` is set to `r CN("TRUE")`, otherwise a `r FT(blue, text="B")` is assigned to indicate "both" genders.  For names not matching the `r FUN2("NAMES_LIST")` optional fuzzy matching can be utilized via the `r CN("fuzzy.match")` argument based on the use of `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/agrep.html", "agrep")`.  Both of these argument increase accuracy but act at the cost of speed.  The use of `r CN("fuzzy.match = TRUE")` is particularly computationally costly.
 
 `r FT(orange, 5, text="&diams;")` **Name to Gender Prediction**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -1032,7 +1032,7 @@ data.frame(name = orig_nms, sex = sex, `ratio_F:M` = names(sex),
 
 <h4 id="stem">Stem Text</h4>
 
-During the initial cleaning stage of analysis the researcher may chose to create a stemmed verion of the dialogue, that is words are reduced to their root words.  The `r FUN("stemmer")` family of functions allow the researcher to create stemmed text.  The `r FUN("stem2df")` function wraps `r FUN("stemmer")` to quickly create a dataframe with the stemmed column added.
+During the initial cleaning stage of analysis the researcher may choose to create a stemmed version of the dialogue, that is words are reduced to their root words.  The `r FUN("stemmer")` family of functions allow the researcher to create stemmed text.  The `r FUN("stem2df")` function wraps `r FUN("stemmer")` to quickly create a dataframe with the stemmed column added.
 
 `r FT(orange, 5, text="&diams;")` **Stemming**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -1049,7 +1049,7 @@ stem_words(doggies, jumping, swims)
 
 <h4 id="grab">Grab Begin/End of String to Character</h4>
 
-At times it is handy to be able to grab from the begining or enf of a string to a specific character.  The `r FUN("beg2char")` function allows you to grab from the begining of a string to the n<sup>th</sup> occurenece of a character.  The counterpart function, `r FUN("char2end")`, grab from the n<sup>th</sup> occurenece of a character to the end of a string to. This behavior is useful if the transcript contains annotations at the begining or end of a line that should beliminated.
+At times it is handy to be able to grab from the beginning or end of a string to a specific character.  The `r FUN("beg2char")` function allows you to grab from the beginning of a string to the n<sup>th</sup> occurrence of a character.  The counterpart function, `r FUN("char2end")`, grab from the n<sup>th</sup> occurrence of a character to the end of a string to. This behavior is useful if the transcript contains annotations at the beginning or end of a line that should be eliminated.
 
 `r FT(orange, 5, text="&diams;")` **Grab From Character to Beginning/End of String**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -1067,7 +1067,7 @@ char2end(x3, "^", 2)
 
 <h4 id="inc">Denote Incomplete End Marks With "|"</h4> 
 
-Often incomplete sentences have a different function than complete sentences.  The researcher may want to denote incomplete sentences for consideration in later analysis.  Traditionally, incomplete sentence are denoted with the following end marks (.., ..., .?, ..?, en & em).  The `r FUN("incomplete_replace")` can identify and replace the traditional endmarks with a standard form `r FT(blue, text="\"|\"")`.
+Often incomplete sentences have a different function than complete sentences.  The researcher may want to denote incomplete sentences for consideration in later analysis.  Traditionally, incomplete sentence are denoted with the following end marks (.., ..., .?, ..?, en & em).  The `r FUN("incomplete_replace")` can identify and replace the traditional end marks with a standard form `r FT(blue, text="\"|\"")`.
 
 `r FT(orange, 5, text="&diams;")` **Incomplete Sentence Identification**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -1080,7 +1080,7 @@ incomp(x, scan.mode = TRUE)
 
 <h4 id="caps">Capitalize Select Words</h4>
 
-The `r FUN("capitalizer")` functions allows the researcher to specify words within a vector to be capitalized.  By defualt `r FT(blue, text="I")`, and contractions containing `r FT(blue, text="I")`, are capitalized.  Additional words can be specified through the `r CN("caps.list")` argument.  To capitalize words within strings the `r FUN("mgsub")` can be used.
+The `r FUN("capitalizer")` functions allows the researcher to specify words within a vector to be capitalized.  By default `r FT(blue, text="I")`, and contractions containing `r FT(blue, text="I")`, are capitalized.  Additional words can be specified through the `r CN("caps.list")` argument.  To capitalize words within strings the `r FUN("mgsub")` can be used.
 
 `r FT(orange, 5, text="&diams;")` **Word Capitalization**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -1140,7 +1140,7 @@ The following functions will be utilized in this section (click to view more):
 
 <h4 id="sentsplit">Sentence Splitting/Combining</h4>
 
-Many functions in the qdap package require that the dialogue is broken apart into individual sentences, failure to do so may invalidate many of the outputs from the analysis and will lead to lead to warnings.  After reading in and cleaning the data the next step should be to split the text variable into individual sentences.  The `r FUN("sentSplit")` function outputs a dataframe with the text variable split into individual sentences and repeats the demographic variables as necessary.  Additionally, a turn of talk (`r FT(red, text="tot column")`) variable is added that keeps track of the original turn of talk (row number) and the sentence number per turn of talk.  The researcher may also want to create a second text column that has benn stemmed for future analysis by setting `r CN("stem.col = TRUE")`, though this is more time intensive.
+Many functions in the qdap package require that the dialogue is broken apart into individual sentences, failure to do so may invalidate many of the outputs from the analysis and will lead to lead to warnings.  After reading in and cleaning the data the next step should be to split the text variable into individual sentences.  The `r FUN("sentSplit")` function outputs a dataframe with the text variable split into individual sentences and repeats the demographic variables as necessary.  Additionally, a turn of talk (`r FT(red, text="tot column")`) variable is added that keeps track of the original turn of talk (row number) and the sentence number per turn of talk.  The researcher may also want to create a second text column that has been stemmed for future analysis by setting `r CN("stem.col = TRUE")`, though this is more time intensive.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("sentSplit")` Example**`r FT(orange, 5, text="&diams;")`
 
@@ -1160,7 +1160,7 @@ plot(sentSplit(DATA, "state"), grouping.var = "sex")
 `r FT(orange, 5, text="&diams;")` **`r FUN("TOT", "sentSplit")` Example** `r FT(orange, 5, text="&diams;")`
 
 ```{r}
-## Convert tot column wirh sub sentences to turns of talk
+## Convert tot column with sub sentences to turns of talk
 dat <- sentSplit(DATA, "state")
 TOT(dat$tot)
 ```
@@ -1209,7 +1209,7 @@ It is more efficient to maintain a dialogue dataframe (consisting of a column fo
 `r FT(orange, 5, text="&diams;")` **Merging Demographic Information**`r FT(orange, 5, text="&diams;")`
 
 ```{r}
-## A dialogue dataframe and a demographocs dataframe
+## A dialogue dataframe and a demographics dataframe
 ltruncdf(list(dialogue=raj, demographics=raj.demographics), 10, 50)
 ## Merge the two
 merged.raj <- key_merge(raj, raj.demographics)
@@ -1287,10 +1287,10 @@ gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
 
 <h4 id="adj">Create Adjacency Matrix</h4>
 
-It is useful to convert data to an adjaceny matrix for examing relationships between grouping variables in word usage.  The `r FUN("adjaceny_matrix")` (aka: `r FUN("adjmat")`) provide this capability, interacting with a `r FUN("termco")` or `r FUN("wfm")` object.  In the first example below Sam and Greg share 4 words in common, whereas, the Teacher and Greg share no words.  The adjaceny matrix can be passed to a network graphing package such as the `r HR2("http://igraph.sourceforge.net/", "igraph")` package for visulaization of the data structure as seen in Example 3.
+It is useful to convert data to an adjacency matrix for examining relationships between grouping variables in word usage.  The `r FUN("adjaceny_matrix")` (aka: `r FUN("adjmat")`) provide this capability, interacting with a `r FUN("termco")` or `r FUN("wfm")` object.  In the first example below Sam and Greg share 4 words in common, whereas, the Teacher and Greg share no words.  The adjacency matrix can be passed to a network graphing package such as the `r HR2("http://igraph.sourceforge.net/", "igraph")` package for visualization of the data structure as seen in Example 3.
 
 
-`r FT(orange, 5, text="&diams;")` **Adjaceny Matrix**: *Example 1*`r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Adjacency Matrix**: *Example 1*`r FT(orange, 5, text="&diams;")`
 
 ```{r, eval=FALSE}
 adjacency_matrix(wfm(DATA$state, DATA$person))
@@ -1311,7 +1311,7 @@ adjacency_matrix(wfm(DATA$state, DATA$person))
 ##         18          6         10         11          4 
 </code></pre>
 
-`r FT(orange, 5, text="&diams;")` **Adjaceny Matrix**: *Example 2*`r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Adjacency Matrix**: *Example 2*`r FT(orange, 5, text="&diams;")`
 
 ```{r, eval=FALSE}
 words <- c(" education", " war ", " econom", " job", "governor ")
@@ -1337,7 +1337,7 @@ adjmat(terms)
 
 It is often useful to plot the adjacency matrix as a network.  The `r HR("http://cran.r-project.org/web/packages/igraph/index.html", "igraph package")` provides this functionality.
 
-<p id="plotadj">`r FT(orange, 5, text="&diams;")` <b>Plotting an Adjaceny Matrix</b>: <em>Example 1</em>`r FT(orange, 5, text="&diams;")`</p>
+<p id="plotadj">`r FT(orange, 5, text="&diams;")` <b>Plotting an Adjacency Matrix</b>: <em>Example 1</em>`r FT(orange, 5, text="&diams;")`</p>
 
 
 ```{r}
@@ -1352,7 +1352,7 @@ plot(g, layout=layout.auto(g))
 
 The following example will visualize the presidential debates data as a network plot.
 
-<p id="plotadj2">`r FT(orange, 5, text="&diams;")` <b>Plotting an Adjaceny Matrix</b>: <em>Example 2</em>`r FT(orange, 5, text="&diams;")`</p>
+<p id="plotadj2">`r FT(orange, 5, text="&diams;")` <b>Plotting an Adjacency Matrix</b>: <em>Example 2</em>`r FT(orange, 5, text="&diams;")`</p>
 
 ```{r}
 library(igraph)
@@ -1376,7 +1376,7 @@ plot(g, layout=layout.auto(g))
 
 We can easily add information to the network plot utilizing the `r FUN("dissimilarity")` function to obtain weights and distance measures for use with the plot.
 
-`r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Example 2b*`r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Plotting an Adjacency Matrix**: *Example 2b*`r FT(orange, 5, text="&diams;")`
 
 ```{r}
 edge.weight <- 15  #a maximizing thickness constant
@@ -1390,7 +1390,7 @@ plot(g, layout=layout.auto(g))
 plot(g, layout=layout.auto(g), edge.curved =TRUE)
 ```
 
-`r FT(orange, 5, text="&diams;")` **Plotting an Adjaceny Matrix**: *Try the plot interactively!*`r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Plotting an Adjacency Matrix**: *Try the plot interactively!*`r FT(orange, 5, text="&diams;")`
 
                      
 <pre><code class="r">tkplot(g)
@@ -1470,7 +1470,7 @@ head(x2, 10)
 
 <h4 id="bag">Word Splitting (Bag of Words)</h4>
 
-The qdap package utilizes the following functions to turn text into a bag of words (word order is perserved):
+The qdap package utilizes the following functions to turn text into a bag of words (word order is preserved):
 
 
 <TABLE>
@@ -1479,7 +1479,7 @@ The qdap package utilizes the following functions to turn text into a bag of wor
     <TR> <TD align="right"><font face="courier"><b>`r HR("http://trinker.github.io/qdap_dev/bag_o_words.html", "word.split")`</b></font></TD> <TD align="right"> Reduces a text column to a <b>list</b> of vectors of bag of words and qdap recognized end marks (i.e., ".", "!", "?", "*", "-").</TD> </TR>
 </TABLE>
 
-Bag of words can be useful for any number of reasons within the scope of analyzing discourse.  Many other qdap functions employ or mention these three functions as seen in the following counts for the three word splitting functions functions.
+Bag of words can be useful for any number of reasons within the scope of analyzing discourse.  Many other qdap functions employ or mention these three functions as seen in the following counts for the three word splitting functions.
 
 ```{r, eval=FALSE, echo=FALSE, include = FALSE}
 library(acc.roxygen2)
@@ -1537,7 +1537,7 @@ d <- c("house", "feed", "a", "the", "chicken")
 ## Supply individual vectors
 common(a, b, d, overlap=2)
 common(a, b, d, overlap=3)
-## Supply a lsit of vectors
+## Supply a list of vectors
 common(list(a, b, d))
 ## Using to find common words between subjects
 common(word_list(DATA$state, DATA$person)$cwl, overlap = 2)
@@ -1546,7 +1546,7 @@ common(word_list(DATA$state, DATA$person)$cwl, overlap = 2)
 
 <h4 id="exclude">Exclude Elements From a Vector</h4>
 
-It is often useful and more efficient to start with a preset vector of words and eliminate or `r FUN("exclude")` the words you do not wish to include.  Examples could range from excluding an individual(s) from a column of participant names or excluding a few select word(s) from a pre defined qdap word list.  THis is particlarly useful for passsing terms or stopwords to word counting functions like `r FUN("termco")` or `r FUN("trans_cloud")`.
+It is often useful and more efficient to start with a preset vector of words and eliminate or `r FUN("exclude")` the words you do not wish to include.  Examples could range from excluding an individual(s) from a column of participant names or excluding a few select word(s) from a pre-defined qdap word list.  This is particularly useful for passing terms or stopwords to word counting functions like `r FUN("termco")` or `r FUN("trans_cloud")`.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("exclude")` Examples**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -1562,7 +1562,7 @@ termco(DATA$state, DATA$person, MTCH.LST)
 
 Utilizing `r HR2("http://en.wikipedia.org/wiki/N-gram", "ngrams")` can be useful for gaining a sense of what terms are used in conjunction with other terms.  This is particularly useful in the analysis of dialogue when the combination of a particular vocabulary is meaningful.  The `r FUN("ngrams")` function provides a list of ngram related output that can be utilize in various analyses.
 
-`r FT(orange, 5, text="&diams;")` **`r FUN("ngrams")` Example** *note that the out put is only partial*`r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **`r FUN("ngrams")` Example** *note that the output is only partial*`r FT(orange, 5, text="&diams;")`
 
 ```{r}
 out <- ngrams(DATA$state, DATA$person, 2)
@@ -1571,7 +1571,7 @@ lapply(out[["all_n"]], function(x) sapply(x, paste, collapse = " "))
 
 <h4 id="stopwords">Remove Stopwords</h4>
 
-In analyzing discourse it may be helpful to remove certain words from the analysis as the words may not be meaningful or may overshadow the impact of other words.  The `r FUN("stopwords")` function can be utilized to remove `r HR2("http://nlp.stanford.edu/IR-book/html/htmledition/dropping-common-terms-stop-words-1.html", "stopwords")` from the dialogue before passing to further analysis.  It should be noted that many functions have a stopwords argument that allows for the remval of the stopwords within the function environment rather than altering the text in the primary discourse dataframe.  Careful researcher consideration must be given as to the functional impact of removing words from an analysis.
+In analyzing discourse it may be helpful to remove certain words from the analysis as the words may not be meaningful or may overshadow the impact of other words.  The `r FUN("stopwords")` function can be utilized to remove `r HR2("http://nlp.stanford.edu/IR-book/html/htmledition/dropping-common-terms-stop-words-1.html", "stopwords")` from the dialogue before passing to further analysis.  It should be noted that many functions have a stopwords argument that allows for the removal of the stopwords within the function environment rather than altering the text in the primary discourse dataframe.  Careful researcher consideration must be given as to the functional impact of removing words from an analysis.
 
 `r FT(orange, 5, text="&diams;")` **Stopword Removal Examples**`r FT(orange, 5, text="&diams;")`
 
@@ -1586,7 +1586,7 @@ stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
 
 <h4 id="strip">Strip Text of Unwanted Characters/Capitalization</h4>
 
-It is often useful to remove capitalization and puntuation from the dialogue in order to standardize the text.  R is case sensitive.  By removing capital letters and extra punctuation with the `r FUN("strip")` function the text is more comparable.  In the following output we can see, through the `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html", "==")` comparison operator and `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html", "outer")` function that the use of `r FUN("strip")` makes the differnet forms of `r FT(blue, text="Dan")` comparable.
+It is often useful to remove capitalization and punctuation from the dialogue in order to standardize the text.  R is case sensitive.  By removing capital letters and extra punctuation with the `r FUN("strip")` function the text is more comparable.  In the following output we can see, through the `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html", "==")` comparison operator and `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html", "outer")` function that the use of `r FUN("strip")` makes the different forms of `r FT(blue, text="Dan")` comparable.
 
 ```{r}
 x <- c("Dan", "dan", "dan.", "DAN")
@@ -1597,7 +1597,7 @@ y <- outer(x, x, "==")
 dimnames(y) <- list(x, x); y
 ```
 
-As seen in the examples below, `r FUN("strip")` comes with multiple arguments to adjust the flexiblity of the degree of text standardization.
+As seen in the examples below, `r FUN("strip")` comes with multiple arguments to adjust the flexibility of the degree of text standardization.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("strip")` Examples**`r FT(orange, 5, text="&diams;")`
 
@@ -1612,7 +1612,7 @@ strip(DATA$state, char.keep = c("?", "."))
 
 <h4 id="syn">Search For Synonyms</h4>
 
-It is useful in discourse analysis to analyze vocabularly use.  This may mean searching for words similar to your initial word list.  The `r FUN("synonyms")` (aka `r FUN("syn")`) function generates synonyms from the `r HR2("http://trinker.github.io/qdapDictionaries/", "qdapDictionaries'")` `r HR2("http://trinker.github.io/qdapDictionaries/SYNONYM.html", "SYNONYM")` dictionary.  These synonyms can be returned as a list or a vector that can then be passed to other qdap functions.
+It is useful in discourse analysis to analyze vocabulary use.  This may mean searching for words similar to your initial word list.  The `r FUN("synonyms")` (aka `r FUN("syn")`) function generates synonyms from the `r HR2("http://trinker.github.io/qdapDictionaries/", "qdapDictionaries'")` `r HR2("http://trinker.github.io/qdapDictionaries/SYNONYM.html", "SYNONYM")` dictionary.  These synonyms can be returned as a list or a vector that can then be passed to other qdap functions.
 
 `r FT(orange, 5, text="&diams;")` **Synonyms Examples**`r FT(orange, 5, text="&diams;")`
 
@@ -1726,7 +1726,7 @@ A major task in qualitative work is coding either time or words with selected co
 - The dialogue
 - The time spans
 
-The coding process in qdap starts with decison of whether to code the dialogue and/or the time spans.  After that the researcher may follow the sequential subsections in the `r HR("#coding", "Qualitative Coding System")` section outlined in these steps:
+The coding process in qdap starts with the decision of whether to code the dialogue and/or the time spans.  After that the researcher may follow the sequential subsections in the `r HR("#coding", "Qualitative Coding System")` section outlined in these steps:
 
 1. Making a template for coding dialogue/time spans
 2. The actual coding  dialogue/time spans
@@ -1734,9 +1734,9 @@ The coding process in qdap starts with decison of whether to code the dialogue a
 4. Transforming codes (finding overlap and/or differences between word span/time span of codes)
 5. Initial analysis
 
-If you choose the route of coding words qdap gives two approaches.  Each has distinct benefits and disadvantages dependant upon the situation.  If you chose the coding of time spans qdap provides one option. 
+If you choose the route of coding words qdap gives two approaches.  Each has distinct benefits and disadvantages dependent upon the situation.  If you chose the coding of time spans qdap provides one option. 
 
-If you chose the coding of words you may chose to code a csv file or to code the transcript directly (perhaps with markers or other forms of markup), record the ranges in a text list and then read in the data.  Both approaches can result in the same data being read back into qdap.  The csv approach may allow for extended capabilties (beyond the scope of this vignette) while the transcript/list approach is generally more efficient and takes the approach many qualitative researchers typically utilize in qualitative coding (it also has the added benefit of producing a hard copy).
+If you chose the coding of words you may choose to code a csv file or to code the transcript directly (perhaps with markers or other forms of markup), record the ranges in a text list and then read in the data.  Both approaches can result in the same data being read back into qdap.  The csv approach may allow for extended capabilities (beyond the scope of this vignette) while the transcript/list approach is generally more efficient and takes the approach many qualitative researchers typically utilize in qualitative coding (it also has the added benefit of producing a hard copy).
 
 The next three subsections will walk the reader through how to make a template, code in the template, and read the data back into R/qdap.  Subsections 4-5 will cover reshaping and initial analysis after the data has been read in (this approach is generally the same for all three coded data types).
 
@@ -1859,7 +1859,7 @@ cm_range.temp(codes, file = "foo1.txt")
 )
 </code></pre>
 
-This list below contains demographic variables.  If the researcher has demographic variables it is recomended to supply them at this point.  The demographic variables will be generated with durations automatically.
+This list below contains demographic variables.  If the researcher has demographic variables it is recommended to supply them at this point.  The demographic variables will be generated with durations automatically.
 
 `r FT(orange, 5, text="&diams;")` **Coding Words (Transcript/List approach)**: List Template 2`r FT(orange, 5, text="&diams;")`
 
@@ -1961,7 +1961,7 @@ cm_time.temp(codes, file = "codelist.txt")
  )  
 </code></pre>
 
-This list below contains demographic variables.  If the researcher has demographic variables it is recomended to supply them at this point.  
+This list below contains demographic variables.  If the researcher has demographic variables it is recommended to supply them at this point.  
 
 `r FT(orange, 5, text="&diams;")` **Coding Times Spans**: List Template 2`r FT(orange, 5, text="&diams;")`
 
@@ -2038,7 +2038,7 @@ datL
 
 <h4 id="reshape">Transforming Codes</h4>
 
-The researcher may want to determine where codes do and do not overlap with one other.  The `r FT(red, text="cm_")` family of functions bearing (`r FT(red, text="cm_code.")`) perform various transformative functions (Boolean search).  `r FUN("cm_code.combine")` will merge the spans (time or word) for given codes.  `r FUN("cm_code.exclude")` will give provide spans that exclude given codes.  `r FUN("cm_code.overlap")` will yield the spans where all of the given codes co-occur.  `r FUN("cm_code.transform")` is a wrapper for the previous three functions that produces one dataframe in a single call.  Lastly, `r FUN("cm_code.blank")` proveds a more flexible framework that allows for the introduction of multiple lofical operators between codes.  Most tasks can be handled with the `r FUN("cm_code.transform")` function.
+The researcher may want to determine where codes do and do not overlap with one other.  The `r FT(red, text="cm_")` family of functions bearing (`r FT(red, text="cm_code.")`) perform various transformative functions (Boolean search).  `r FUN("cm_code.combine")` will merge the spans (time or word) for given codes.  `r FUN("cm_code.exclude")` will give provide spans that exclude given codes.  `r FUN("cm_code.overlap")` will yield the spans where all of the given codes co-occur.  `r FUN("cm_code.transform")` is a wrapper for the previous three functions that produces one dataframe in a single call.  Lastly, `r FUN("cm_code.blank")` provides a more flexible framework that allows for the introduction of multiple logical operators between codes.  Most tasks can be handled with the `r FUN("cm_code.transform")` function.
 
 For Examples of each click the links below:    
 1. `r HR("#cm_code.combine", "cm_code.combine Examples")`     
@@ -2051,7 +2051,7 @@ For the sake of simplicity the uses of these functions will be demonstrated via 
 
 The reader should note that all of the above functions utilize two helper functions (`r FUN("cm_long2dummy")` and `r FUN("cm_dummy2long")`) to stretch the spans into single units of measure (word or second) perform a calculation and then condense back to spans.  More advanced needs may require the explicit use of these functions, though they are beyond the scope of this vignette.  
 
-The following data sets will be utilized through out the demonstrations of the `r FT(red, text="cm_code.")` family of functions:
+The following data sets will be utilized throughout the demonstrations of the `r FT(red, text="cm_code.")` family of functions:
 
 `r FT(orange, 5, text="&diams;")` **Common Data Sets** - Word Approach`r FT(orange, 5, text="&diams;")`
 
@@ -2200,7 +2200,7 @@ exlist2 <- list(AnoB=qcv(A, B), BnoC=qcv(B, C), ABnoC=qcv(A, B, C))
 gantt_wrap(ce3, "code")
 ```
 
-`r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.exclude")` Single TIme** *Time Span Combined Exclude Example*`r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.exclude")` Single Time** *Time Span Combined Exclude Example*`r FT(orange, 5, text="&diams;")`
 
 ```{r}
 (ce4.1 <- cm_code.combine(dat, list(AB = qcv(A, B))))
@@ -2300,7 +2300,7 @@ gantt_wrap(ct3, "code")
 
 <h5 id="cm_code.blank"><font color="green">cm_code.blank Examples</font></h5>
 
-`r FUN("cm_code.blank")` provides flexible Boolean comparisons between word.time spans.  The `overlap` argument takes a logical value, an integer or a character string of binary operator couple with an integer.  It is important to understand how the function operates.  This initial step calls `r FUN("cm_long2dummy")` as seen below (stretching the spans to dummy coded columns), the comparison is conduted between columns, and then the columns are reverted back to spans via the `r FUN("cm)dummy2long")`.  This first example illustates the stretching to dummy and reverting back to spans.
+`r FUN("cm_code.blank")` provides flexible Boolean comparisons between word.time spans.  The `overlap` argument takes a logical value, an integer or a character string of binary operator couple with an integer.  It is important to understand how the function operates.  This initial step calls `r FUN("cm_long2dummy")` as seen below (stretching the spans to dummy coded columns), the comparison is conduted between columns, and then the columns are reverted back to spans via the `r FUN("cm)dummy2long")`.  This first example illustrates the stretching to dummy and reverting back to spans.
 
 `r FT(orange, 5, text="&diams;")` **Long to dummy and dummy to long** `r FT(orange, 5, text="&diams;")`
 
@@ -2312,7 +2312,7 @@ list(original =x,
 )
 ```
 
-Now let's examine a few uses of `r FUN("cm_code.blank")`.  The first is to set `overlap = TRUE` (the default behavior).  This defualt behavior is identical to `r FUN("cm_code.overlap")` as seen below.
+Now let's examine a few uses of `r FUN("cm_code.blank")`.  The first is to set `overlap = TRUE` (the default behavior).  This default behavior is identical to `r FUN("cm_code.overlap")` as seen below.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("cm_code.blank")`** - `overlap = TRUE` `r FT(orange, 5, text="&diams;")`
 
@@ -2380,7 +2380,7 @@ gantt_wrap(cb5, "code", "time")
 
 <h4 id="analysis">Initial Coding Analysis</h4>
 
-The `r FT(red, text="cm_")` family of functions has three approaches to intial analysis of codes.  The researcher may want to summarize, visualize or determine the proximaty of codes to one another.  The following functions accomplish these tasks:
+The `r FT(red, text="cm_")` family of functions has three approaches to initial analysis of codes.  The researcher may want to summarize, visualize or determine the proximity of codes to one another.  The following functions accomplish these tasks:
 
 1. `r HR("#cmsum", "Summary")`    
 2. `r HR("#cmplot", "Plotting")`    
@@ -2577,11 +2577,11 @@ plot(z, title = "Combined Codes")
 
 <h5 id="cmdist"><font color="green">Distance Measures</font></h5>
 
-Often a research will want to know which codes are clustering closer to other codes (regardless of whether the codes represent word or time spans).  `r FUN("cm_distance")` allows the research to find the distances between codes and standardize the mean of the differences to allow for comparisons similar to a correlation.  The matrix output from `r FUN("cm_distance")` is arrived at by taking the means and standard deviations of the differences between codes and scaling them (without centering) and then multiplying the two together.  This results in a standarized distance measure that is non-negative, with values closer to zero indicating a codes that are found in closer proximaty.  
+Often a research will want to know which codes are clustering closer to other codes (regardless of whether the codes represent word or time spans).  `r FUN("cm_distance")` allows the research to find the distances between codes and standardize the mean of the differences to allow for comparisons similar to a correlation.  The matrix output from `r FUN("cm_distance")` is arrived at by taking the means and standard deviations of the differences between codes and scaling them (without centering) and then multiplying the two together.  This results in a standardized distance measure that is non-negative, with values closer to zero indicating codes that are found in closer proximity.  
 
 The researcher may also access the means, standard deviations and number of codes by indexing the list output for each transcript.  This distance measure compliments the Gantt plot.  
 
-Note that the argument <b><font color="green" face="courier new">causal = FALSE</font></b> (the defualt) does not assume Code A comes before Code B whereas <b><font color="green" face="courier new">causal = TRUE</font></b> assumes the first code precedes the second code.  Generally, setting <b><font color="green" face="courier new">causal = FALSE</font></b> wil result in larger mean of differences and accompanying standardized values.  Also note that rownames are the first code and column names are the second comparison code.  The values for Code A compared to Code B will not be the same as Code B compared to Code A.  This is because, unlike a true distance measure, `r FUN("cm_distance")`'s matrix is assymetrical.  `r FUN("cm_distance")`computes the distance by taking each span (start and end) for Code A and comparing it to the nearest start or end for Code B.  So for example there may be 6 Code A spans and thus six differences between A and B, whereas Code B may only have 3 spans and thus three differences between B and A.  This fact alone will lead to differences in A compared to B versus B compared to A.  
+Note that the argument <b><font color="green" face="courier new">causal = FALSE</font></b> (the default) does not assume Code A comes before Code B whereas <b><font color="green" face="courier new">causal = TRUE</font></b> assumes the first code precedes the second code.  Generally, setting <b><font color="green" face="courier new">causal = FALSE</font></b> will result in larger mean of differences and accompanying standardized values.  Also note that row names are the first code and column names are the second comparison code.  The values for Code A compared to Code B will not be the same as Code B compared to Code A.  This is because, unlike a true distance measure, `r FUN("cm_distance")`'s matrix is asymmetrical.  `r FUN("cm_distance")`computes the distance by taking each span (start and end) for Code A and comparing it to the nearest start or end for Code B.  So for example there may be 6 Code A spans and thus six differences between A and B, whereas Code B may only have 3 spans and thus three differences between B and A.  This fact alone will lead to differences in A compared to B versus B compared to A.  
 
 
 `r FT(orange, 5, text="&diams;")` `r FUN("cm_distance")` - *Initial Data Setup* `r FT(orange, 5, text="&diams;")`
@@ -2646,7 +2646,7 @@ names(out1)
 
 ```{r, eval = FALSE}
 ## A list containing means, standard deviations and other 
-## descriptive statistics for for the differences between codes
+## descriptive statistics for the differences between codes
 out1$x
 ```
 
@@ -2770,7 +2770,7 @@ A researcher often needs to quickly gather frequency counts for various words/wo
 
 <h4 id="wordstats">Descriptive Word Statistics</h4>
 
-Often a researcher may want to get a general sense of how words are functioning for different grouping variables.  The `r FUN("word_stats")` function enables a quick picture of what is occuring within the data.  The displayed (printed) output is a dataframe, however, the output from word_stats is actually a list.  Use `r FUN("?word_stats", "word_stats")` to learn more.
+Often a researcher may want to get a general sense of how words are functioning for different grouping variables.  The `r FUN("word_stats")` function enables a quick picture of what is occurring within the data.  The displayed (printed) output is a dataframe, however, the output from word_stats is actually a list.  Use `r FUN("?word_stats", "word_stats")` to learn more.
 
 The displayed output is a wide dataframe, hence the abbreviated column names.  The following column names and meanings will provide guidance in understanding the output:
 
@@ -2862,7 +2862,7 @@ with(mraja1spl, word_stats(desc_wrds, list(sex, fam.aff, died), tot = tot))
 
 <h4 id="wfm">Word Frequency Matrix</h4>
 
-Many analyses with words involve a matrix based on the words.  qdap uses a *word frequency matrix* (`r FUN("wfm")`) or the less maliable dataframe version, *word frequency dataframe* (`r FUN("wfdf")`).  The `r FUN("wfm")` is a count of word usages per grouping variable(s).  This is a similar concept to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm packae's")` Term Document Matrix, though instead of documents we are interested in the grouping variable's usage of terms.  `r FUN("wfm")` is the general function that should be used, however, the `r FUN("wfdf")` function does provide options for margin sums (row and column).  Also note that the `r FUN("wfm_expanded")` and `r FUN("wfm_combine")` can expand or combine terms within a word frequency matrix.
+Many analyses with words involve a matrix based on the words.  qdap uses a *word frequency matrix* (`r FUN("wfm")`) or the less malleable dataframe version, *word frequency dataframe* (`r FUN("wfdf")`).  The `r FUN("wfm")` is a count of word usages per grouping variable(s).  This is a similar concept to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package's")` Term Document Matrix, though instead of documents we are interested in the grouping variable's usage of terms.  `r FUN("wfm")` is the general function that should be used, however, the `r FUN("wfdf")` function does provide options for margin sums (row and column).  Also note that the `r FUN("wfm_expanded")` and `r FUN("wfm_combine")` can expand or combine terms within a word frequency matrix.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("wfm")` Examples** `r FT(orange, 5, text="&diams;")`
 
@@ -2882,7 +2882,7 @@ state2 <- space_fill(DATA$state, space_keeps, rm.extra = FALSE)
 with(DATA, wfm(state2, list(sex, adult)))[1:18, ]
 ```
 
-At times it may be useful to view the correlation between word occurences between turns of talk or other useful groupings.  The user can utilize the output from `r FUN("wfm")` to accomplish this.
+At times it may be useful to view the correlation between word occurrences between turns of talk or other useful groupings.  The user can utilize the output from `r FUN("wfm")` to accomplish this.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("wfm")`: Word Correlations** `r FT(orange, 5, text="&diams;")`
 
@@ -2947,7 +2947,7 @@ chisq.test(out)
 
 <h5 id="tdm"><font color="green">Convert/Generate Term Document Matrix or Document Term Matrix</font></h5>
 
-Some packages that could further the analysis of qdap expect a Document Term or Term Docuement Matrix.  qdap's `r FUN("wfm")` is similar to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm packae's")` `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "TermDocumentMatrix")`     and `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "DocumentTermMatrix")`.  qdap does not try to replicate the extensive work of the`r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm")` package, however, the `r FUN("tdm")` and `r FUN("dtm", "tdm")` do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.
+Some packages that could further the analysis of qdap expect a Document Term or Term Document Matrix.  qdap's `r FUN("wfm")` is similar to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package's")` `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "TermDocumentMatrix")`     and `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "DocumentTermMatrix")`.  qdap does not try to replicate the extensive work of the`r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm")` package, however, the `r FUN("tdm")` and `r FUN("dtm", "tdm")` do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("tdm")` Use** `r FT(orange, 5, text="&diams;")`
 
@@ -2961,7 +2961,7 @@ dtm(x)
 ```
 
 ```{r eval =  FALSE}
-## Run Latant Semantic Analysis
+## Run Latent Semantic Analysis
 library(lsa)
 lsa(tdm(x), dims=dimcalc_share())
 ```
@@ -3029,7 +3029,7 @@ attr(,"class")
 
 <h4 id="termco">Search For and Count Terms</h4>
 
-The `r FUN("termco")` family of functions are some of the most useful qdap functions for quantative discourse analysis.  `r FUN("termco")` searches for (an optionally groups) terms and outputs a raw count, percent, and combined (raw/percent) matrix of term counts by grouping variable.  The `r FUN("term_match")` `r FUN("all_words")` `r FUN("syn", "synonyms")`, `r FUN("exclude")`, and `r FUN("spaste")` are complementary  functions that are useful in developing word lists to provide to the <b><font color="green" face="courier new">match.list</font></b>.  
+The `r FUN("termco")` family of functions are some of the most useful qdap functions for quantitative discourse analysis.  `r FUN("termco")` searches for (an optionally groups) terms and outputs a raw count, percent, and combined (raw/percent) matrix of term counts by grouping variable.  The `r FUN("term_match")` `r FUN("all_words")` `r FUN("syn", "synonyms")`, `r FUN("exclude")`, and `r FUN("spaste")` are complementary  functions that are useful in developing word lists to provide to the <b><font color="green" face="courier new">match.list</font></b>.  
 
 The <b><font color="green" face="courier new">match.list</font></b> acts to search for similarly grouped <em>themes</em>.  For example <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font> may be a search for words associated with reading.  It is good practice to name the vectors of words that are stored in the <b><font color="green" face="courier new">match.list</font></b> .  This is the general form for how to set up a <b><font color="green" face="courier new">match.list</font></b>:
 
@@ -3041,7 +3041,7 @@ themes <- list(
 )
 ```
 
-It is important to understand how the <b><font color="green" face="courier new">match.list</font></b> is handled by `r FUN("termco")`.  The <b><font color="green" face="courier new">match.list</font></b> is (optionally) case and character sensitive. Spacing is an important way to grab specific words and requires careful thought. For example using <font color="green">"read"</font> will find the words <font color="green">"bread"</font>, <font color="green">"read"</font>, <font color="green">"reading"</font>, and <font color="green">"ready"</font>. If you want to search for just the word <font color="purple">"read"</font> supply a vector of <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font>. Notice the leading and trailing spaces.  A space acts as a boundary where as starting/ending with a nonspace allows for greedy matching that will find words that contain this term.  A leading, trailing or both may be used to control how `r FUN("termco")` searches for the supplied terms.  So the reader may ask why not supply one string spaced as <font color="green">" read"</font>?  Keep in mind that `r FUN("termco")` would also find the word <font color="purple">"ready"</font>
+It is important to understand how the <b><font color="green" face="courier new">match.list</font></b> is handled by `r FUN("termco")`.  The <b><font color="green" face="courier new">match.list</font></b> is (optionally) case and character sensitive. Spacing is an important way to grab specific words and requires careful thought. For example using <font color="green">"read"</font> will find the words <font color="green">"bread"</font>, <font color="green">"read"</font>, <font color="green">"reading"</font>, and <font color="green">"ready"</font>. If you want to search for just the word <font color="purple">"read"</font> supply a vector of <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font>. Notice the leading and trailing spaces.  A space acts as a boundary whereas starting/ending with a nonspace allows for greedy matching that will find words that contain this term.  A leading, trailing or both may be used to control how `r FUN("termco")` searches for the supplied terms.  So the reader may ask why not supply one string spaced as <font color="green">" read"</font>?  Keep in mind that `r FUN("termco")` would also find the word <font color="purple">"ready"</font>
 
 This section's examples will first view the complementary  functions that augment the *themes* supplied to <b><font color="green" face="courier new">match.list</font></b> and then main `r FUN("termco")` function will be explored.
 
@@ -3098,7 +3098,7 @@ ml <- list(
 
 ## Search by person
 with(dat2, termco(dialogue, person, match.list=ml))
-## Search by person peopoerion output
+## Search by person proportion output
 with(dat2, termco(dialogue, person, match.list=ml, percent = FALSE))
 ```
 
@@ -3165,7 +3165,7 @@ termco(DATA$state, DATA$person, syns)
 termco(DATA$state, DATA$person, syns)$rnp[, c(1:4, 9:10)]
 ```
 
-`r FUN("termco")` also has a plot method that plots a heatmap of the `r FUN("termco")` output based on the percent usage by grouping variable.  This allows for rapid visualizations of patterns and anables fast spotting of extreme values.  Here are some plots from the `r HR("#rajex", "Romeo and Juliet Act 1 Example")` above.
+`r FUN("termco")` also has a plot method that plots a heat map of the `r FUN("termco")` output based on the percent usage by grouping variable.  This allows for rapid visualizations of patterns and enables fast spotting of extreme values.  Here are some plots from the `r HR("#rajex", "Romeo and Juliet Act 1 Example")` above.
 
 `r FT(orange, 5, text="&diams;")` **Using `r FUN("termco")` Plotting**`r FT(orange, 5, text="&diams;")`
 
@@ -3191,10 +3191,10 @@ wrds <- c("are*", "can*", "correct", "could", "did*", "do*",
 
 wrds2 <- data.frame(matrix(c(wrds, rep("", 3)), ncol = 5))
 
-pading <- max(nchar(wrds)) + 3
-pading2 <- rev(sort(nchar(wrds)))[2] + 8
-out <- apply(wrds2[, 1:4], 2, function(x) sprintf(paste0("%-", pading2, "s"), x))
-out2 <- apply(wrds2[, 5, drop=FALSE], 2, function(x) sprintf(paste0("%-", pading, "s"), x))
+padding <- max(nchar(wrds)) + 3
+padding2 <- rev(sort(nchar(wrds)))[2] + 8
+out <- apply(wrds2[, 1:4], 2, function(x) sprintf(paste0("%-", padding2, "s"), x))
+out2 <- apply(wrds2[, 5, drop=FALSE], 2, function(x) sprintf(paste0("%-", padding, "s"), x))
 cat(paste(paste2(cbind(out, out2), sep ="", trim=FALSE), collapse = "\n"))
 ```
 
@@ -3214,7 +3214,7 @@ x$count
 truncdf(x$raw, 15)
 ```
 
-`r FUN("question_type")` also has a plot method that plots a heatmap of the output.  This allows for rapid visualizations of patterns and anables fast spotting of extreme values.
+`r FUN("question_type")` also has a plot method that plots a heat map of the output.  This allows for rapid visualizations of patterns and enables fast spotting of extreme values.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("question_type")` - Plotting Method**`r FT(orange, 5, text="&diams;")`
 
@@ -3226,7 +3226,7 @@ plot(x)
 plot(x, label = TRUE, high = "red", low = "yellow", grid = NULL)
 ```
 
-Negative forms of questions such as `r FT(green, text = "Don't you want the robots to leave?")` are, by defualt, grouped with with their equivalent positive `r FT(green, text = "Do")` forms, such as `r FT(green, text = "Do you want the robots to leave?")`.  The researcher may choose to keep the two forms separate using the argument <b><font color="green">neg.cont = TRUE</font>
+Negative forms of questions such as `r FT(green, text = "Don't you want the robots to leave?")` are, by default, grouped with their equivalent positive `r FT(green, text = "Do")` forms, such as `r FT(green, text = "Do you want the robots to leave?")`.  The researcher may choose to keep the two forms separate using the argument <b><font color="green">neg.cont = TRUE</font>
 </b>
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("question_type")` - Include Negative Questions**`r FT(orange, 5, text="&diams;")`
@@ -3254,7 +3254,7 @@ question_type(DATA.SPLIT2$state, DATA.SPLIT2$person, neg.cont = TRUE)
 5    teacher         1 1(100%)      0      0      0       0                   0
 </code></pre>
 
-It may be helpful to take the indices of the question types int the **x[["inds"]]** output or access **x[["raw"]][, "n.row"]**
+It may be helpful to access the indices of the question types in the **x[["inds"]]** output or access **x[["raw"]][, "n.row"]** for use with the **`r FUN("trans_context")`** function as seen below.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("question_type")` - Passing to `r FUN("trans_context")`**`r FT(orange, 5, text="&diams;")`
 
@@ -3393,6 +3393,27 @@ sum(word_count(DATA$state))
 tapply(DATA$state, DATA$person, wc, byrow=FALSE)
 ```
 
+`r FT(orange, 5, text="&diams;")` **`r FUN("word_count")` Plotting Centered Word Counts**`r FT(orange, 5, text="&diams;")`
+
+```{r, fig.height=13, fig.width=14.5, warning=FALSE}
+## Scale variable 
+raj2 <- raj
+raj2$scaled <- unlist(tapply(wc(raj$dialogue), raj2$act, scale))
+raj2$scaled2 <- unlist(tapply(wc(raj$dialogue), raj2$act, scale, scale = FALSE))
+raj2$ID <- factor(unlist(tapply(raj2$act, raj2$act, seq_along)))
+
+## Plot with ggplot2
+library(ggplot2)
+
+ggplot(raj2, aes(x = ID, y = scaled, fill =person)) +
+    geom_bar(stat="identity") +
+    facet_grid(act~.) + 
+    ylab("Scaled") + xlab("Turn of Talk") +
+    guides(fill = guide_legend(nrow = 5, byrow = TRUE)) +
+    theme(legend.position="bottom") +
+    ggtitle("Scaled and Centered")
+```
+
 `r FT(orange, 5, text="&diams;")` **`r FUN("character_count", "word_count")` Examples**`r FT(orange, 5, text="&diams;")`
 
 ```{r}
@@ -3515,7 +3536,7 @@ $n.char
 
 In some analysis of text the research may wish to gather information about parts of speech (POS).  The function `r FUN("pos")` and it's grouping variable counterpart, `r FUN("pos_by", "pos")`, can provide this functionality.  The `r FUN("pos")` functions are wrappers for POS related functions from the `r HR("http://cran.r-project.org/web/packages/openNLP/index.html", "openNLP")` package.  The `r FUN("pos_tags", "pos")` function provides a quick reference to what the POS tags utilized by `r HR("http://cran.r-project.org/web/packages/openNLP/index.html", "openNLP")` mean.  For more information on the POS tags see the `r HR("http://www.cis.upenn.edu/~treebank/", "Penn Treebank Project")`.
 
-The following examples utilize the `r FUN("pos_by", "pos")` function as the `r FUN("pos")` function is used identically, except without specifying a `grouping.var`.  It is important to realize that POS tagging is a very slow process.  The speed can be increased by using the <b><font  color="green" face="courier">parallel = TRUE</font></b> argument. Additionally, the user can recycle the output from one run of `r FUN("pos")`, `r FUN("pos_by", "pos")` or `r FUN("formality")` and use it interchangably between the `r FUN("pos_by", "pos")` and `r FUN("formality")` functions.  This reuses the POS tagging which is the time intensive part (and can be extracted via <b><font  color="green" face="courier">YOUR_OUTPUT_HERE[[&quot;POStagged&quot;]]</font></b> from any of the above objects).
+The following examples utilize the `r FUN("pos_by", "pos")` function as the `r FUN("pos")` function is used identically, except without specifying a `grouping.var`.  It is important to realize that POS tagging is a very slow process.  The speed can be increased by using the <b><font  color="green" face="courier">parallel = TRUE</font></b> argument. Additionally, the user can recycle the output from one run of `r FUN("pos")`, `r FUN("pos_by", "pos")` or `r FUN("formality")` and use it interchangeably between the `r FUN("pos_by", "pos")` and `r FUN("formality")` functions.  This reuses the POS tagging which is the time intensive part (and can be extracted via <b><font  color="green" face="courier">YOUR_OUTPUT_HERE[[&quot;POStagged&quot;]]</font></b> from any of the above objects).
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("pos_tags", "pos")`** - *Interpreting POS Tags*`r FT(orange, 5, text="&diams;")`
 
@@ -3722,11 +3743,11 @@ The following functions will be utilized in this section (click to view more):
 </form>
 </div>
 
-qdap offers a number of word statistics and and scores applied by grouping variable.  Some functions are original to qdap, while others are taken from academic papers.  Complete references for statistics/scores based on others' work are provided in the `r HR("http://cran.r-project.org/web/packages/qdap/qdap.pdf", "help manual")` where appropriate.  It is assumed that the reader is familiar, or can become acquainted, with the theory and methods for qdap functions based on the work of others.  For qdap functions that are original to qdap a more robust description of the use and theory is provided.
+qdap offers a number of word statistics and scores applied by grouping variable.  Some functions are original to qdap, while others are taken from academic papers.  Complete references for statistics/scores based on others' work are provided in the `r HR("http://cran.r-project.org/web/packages/qdap/qdap.pdf", "help manual")` where appropriate.  It is assumed that the reader is familiar, or can become acquainted, with the theory and methods for qdap functions based on the work of others.  For qdap functions that are original to qdap a more robust description of the use and theory is provided.
 
 <h4 id="readability">Readability Scores</h4>
 
-Readability scores were originally designed to measure the defficulty of text.  Scores are generally based on, number of words, syllables, polly-syllables amnd word length.  While these scores are not specifically designed for, or tested on, speech, they can be useful indicators of speech complexity.  The following score examples demonstrate the use of the following readability scores:
+Readability scores were originally designed to measure the difficulty of text.  Scores are generally based on, number of words, syllables, polly-syllables and word length.  While these scores are not specifically designed for, or tested on, speech, they can be useful indicators of speech complexity.  The following score examples demonstrate the use of the following readability scores:
 
 1. `r HR("#ari", "Automated Readability Index")`    
 2. `r HR("#coleman", "Coleman Liau")`    
@@ -3860,7 +3881,7 @@ with(rajSPLIT, linsear_write(dialogue, person))
 
 <h4 id="dissimilarity">Dissimilarity</h4>
 
-*Dissimilarity* is another term for distance that is often used in text analysis to measure the pairwise proximity of grouping variables.  The qdap `r FUN("dissimilarity")` function is a wrapper for the R stats package's `r HR("http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html", "dist")` function designed to handle text.  `r FUN("dissimilarity")` takes all the same <b><font color="green" face="courier new">method</font></b> types as `r HR("http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html", "dist")` but also includes the defualt <b><font color="green" face="courier new">method = "prop"</font></b> (1 - "binary") that is focused on the similarity between grouping variables.
+*Dissimilarity* is another term for distance that is often used in text analysis to measure the pairwise proximity of grouping variables.  The qdap `r FUN("dissimilarity")` function is a wrapper for the R stats package's `r HR("http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html", "dist")` function designed to handle text.  `r FUN("dissimilarity")` takes all the same <b><font color="green" face="courier new">method</font></b> types as `r HR("http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html", "dist")` but also includes the default <b><font color="green" face="courier new">method = "prop"</font></b> (1 - "binary") that is focused on the similarity between grouping variables.
 
 <p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("dissimilarity")` Examples**`r FT(orange, 5, text="&diams;")`</p >
 
@@ -3894,13 +3915,13 @@ plot(fit)
 
 ```{r, echo=-1}
 plot(fit)
-## draw dendogram with red borders around the 3 clusters 
+## draw dendogram with colored borders around the 3 clusters 
 rect.hclust(fit, k=3, border=c("red", "purple", "seagreen"))
 ```
 
 <h4 id="kullback">Kullback-Leibler divergence </h4>
 
-The Kullback Leibler is often used as a measure of distance, though the matrix is assymetrical.  qdap's `r FUN("kullback_leibler")` compares the differences between two probability distributions and often leads to results similar to those from `r FUN("dissimilarity")`.  Note that unlike many other qdap functions the user must either supply a word frequency matric (`r FUN("wfm")`) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with `r FUN("termco")` and other functions that produce count matrices.
+The Kullback Leibler is often used as a measure of distance, though the matrix is asymmetrical.  qdap's `r FUN("kullback_leibler")` compares the differences between two probability distributions and often leads to results similar to those from `r FUN("dissimilarity")`.  Note that unlike many other qdap functions the user must either supply a word frequency matric (`r FUN("wfm")`) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with `r FUN("termco")` and other functions that produce count matrices.
 
 ```{r include = FALSE}
 dat <- pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY),]
@@ -3930,7 +3951,7 @@ plot(KL, high = "red", values = TRUE)
 
 <h4 id="diversity">Diversity Statistics</h4>
 
-Diversity, as applied to dialogue, is a measure of the richness of language being used.  Specifically, it measures how expansive the vocabulary is while taking into account the number of total words used and the different words being used.  qdap's `r FUN("diversity")` function provdes output for the Simpson, Shannon, Collision, Berger Parker, and Brillouin measures.
+Diversity, as applied to dialogue, is a measure of the richness of language being used.  Specifically, it measures how expansive the vocabulary is while taking into account the number of total words used and the different words being used.  qdap's `r FUN("diversity")` function provides output for the Simpson, Shannon, Collision, Berger Parker, and Brillouin measures.
 
 <p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("diversity")` Example**`r FT(orange, 5, text="&diams;")`</p >
 ```{r, comment =NA}
@@ -3945,7 +3966,7 @@ plot(div.mod, low = "yellow", grid = FALSE, values = TRUE)
 
 <h4 id="formality">Formality</h4>
 
-Formality is how contextualize a person's labguage use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 199b, 2002).  Heylighen & Dewaele (2002) have developed a measur eof formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating `r FUN("formality")`, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the `r FUN("dissimilarity")` measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multipled by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
+Formality is how contextualize a person's language use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 199b, 2002).  Heylighen & Dewaele (2002) have developed a measure of formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating `r FUN("formality")`, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the `r FUN("dissimilarity")` measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multiplied by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
 <br><br>
 
 $$ F = 50(\frac{n_{f}-n_{c}}{N} + 1) $$
@@ -3958,7 +3979,7 @@ $$ c = \left \{pronoun, \;verb, \;adverb, \;interjection\right \} $$
 $$ N = \sum{(f \;+ \;c \;+ \;conjunctions)} $$
 <br>
 
-Note that formality utilize parts of speech tagging. T his is computationally expensive.  The user may gain speed by setting <b><font color="green" face="courier new">parallel = TRUE</font></b> if multiple cores are available.  The user can also "recycle" the output from `r FUN("pos")`, `r FUN("pos_by", "pos")`, or `r FUN("formality")` for the same text.  This save considerable time as the parts of speech is saved in the output from these functions as demonstrated in the `r HR("#recform", "Recycled Formality Example")` below.
+Note that formality utilize parts of speech tagging. This is computationally expensive.  The user may gain speed by setting <b><font color="green" face="courier new">parallel = TRUE</font></b> if multiple cores are available.  The user can also "recycle" the output from `r FUN("pos")`, `r FUN("pos_by", "pos")`, or `r FUN("formality")` for the same text.  This save considerable time as the parts of speech is saved in the output from these functions as demonstrated in the `r HR("#recform", "Recycled Formality Example")` below.
 
 `r FUN("formality")` also has a plotting method that allows for easy visualization and comparison of formality scores, word counts, formal/contextual parts of speech all by grouping variable(s).  Please note that Heylighen & Dewaele (2002) state, "At present, a sample would probably need to contain a few hundred words for the measure to be minimally reliable. For single sentences, the F-value should only be computed for purposes of illustration" (p. 24).  
 
@@ -3997,7 +4018,7 @@ plot(form2, bar.colors=c("Set2", "RdBu"))
 
 <h4 id="polarity">Polarity Score (Sentiment Analysis)</h4>
 
-Polarity assignment, a form of sentiment analysis, is using an algorithm to detmine the polarity of a sentence/statement.  While the use polarity scores is applied to many forms of written social dialogue (e.g., Twitter, Facebook, etc.) it has not typically been applied to spoken dialogue.  qdap offers a flexible function, `r FUN("polarity")` to determine polarity at the sentence level as well as to assign an average polarity score to individual groups within the grouping variable(s).  The frame work for `r FUN("polarity")` is flexible in that the user may supply a polarized dictionary and optional weights.  Many dictionaries used in sentiment analysis are designed for written, adult, online interaction.  
+Polarity assignment, a form of sentiment analysis, is using an algorithm to determine the polarity of a sentence/statement.  While the use polarity scores is applied to many forms of written social dialogue (e.g., Twitter, Facebook, etc.) it has not typically been applied to spoken dialogue.  qdap offers a flexible function, `r FUN("polarity")` to determine polarity at the sentence level as well as to assign an average polarity score to individual groups within the grouping variable(s).  The frame work for `r FUN("polarity")` is flexible in that the user may supply a polarized dictionary and optional weights.  Many dictionaries used in sentiment analysis are designed for written, adult, online interaction.  
 
 <div class="middleDiv">
 <b>`r FT(red, 4, text="It is assumed you have run <font face=\"courier\">sentSplit</font> on the data.<br>If this is not the case the counts will not be accurate.")`</b>
@@ -4154,7 +4175,7 @@ Wordclouds can be a useful tool to help find words/phrases that are used frequen
 )
 </code></pre>
 
-The <b><font color="green" face="courier new">cloud.colors</font></b> argument takes a single color or a vector of colors 1 greater then the number of vectors of <b><font color="green" face="courier new">target.words</font></b>.  The order of <b><font color="green" face="courier new">cloud.colors</font></b> corresponds to the order of <b><font color="green" face="courier new">target.words</font></b> with the extra, final color being utilized for all words not matched to <b><font color="green" face="courier new">target.words</font></b>.
+The <b><font color="green" face="courier new">cloud.colors</font></b> argument takes a single color or a vector of colors 1 greater than the number of vectors of <b><font color="green" face="courier new">target.words</font></b>.  The order of <b><font color="green" face="courier new">cloud.colors</font></b> corresponds to the order of <b><font color="green" face="courier new">target.words</font></b> with the extra, final color being utilized for all words not matched to <b><font color="green" face="courier new">target.words</font></b>.
 
 
 <p id="transcloud1">`r FT(orange, 5, text="&diams;")` **`r FUN("trans_cloud")` Example 1**`r FT(orange, 5, text="&diams;")`</p >
@@ -4219,7 +4240,7 @@ gradient_cloud(DATA2$state, DATA2$sex, title="Houghton Colors",
 
 <h4 id="gantts">Gantt Plot</h4>
 
-Many of the plot methods utilized by other functions' classes are a wrapper for `r FUN("gantt_plot")` or `r FUN("gantt_wrap")`.  `r FUN("gantt_plot")` wraps the `r FUN("gantt")`, `r FUN("gantt_rep")` and `r FUN("gantt_wrap")` functions to allow for direct input of text dialogue and grouping variabes.  The `r FUN("gantt_plot")` function is a fast way to make Gantt charts that can be faceted and filled by grouping variables.  A Gantt plot allows the user to find trends and patterns in dialogue across time.  It essentially allwos for a visual representation of an entire exchange of dialogue.  The following examples show the flexibility of `r FUN("gantt_plot")`; many of these techniques can also be utilized in plot methids for qdap classes that utilize `r FUN("gantt_plot")` and `r FUN("gantt_wrap")`.  It is also prudant to be aware of `r FUN("gantt_wrap")`, that is its arguments and how to utilize it, as it is less conveinent yet more flexible and powerful than `r FUN("gantt_plot")`.
+Many of the plot methods utilized by other functions' classes are a wrapper for `r FUN("gantt_plot")` or `r FUN("gantt_wrap")`.  `r FUN("gantt_plot")` wraps the `r FUN("gantt")`, `r FUN("gantt_rep")` and `r FUN("gantt_wrap")` functions to allow for direct input of text dialogue and grouping variables.  The `r FUN("gantt_plot")` function is a fast way to make Gantt charts that can be faceted and filled by grouping variables.  A Gantt plot allows the user to find trends and patterns in dialogue across time.  It essentially allows for a visual representation of an entire exchange of dialogue.  The following examples show the flexibility of `r FUN("gantt_plot")`; many of these techniques can also be utilized in plot methods for qdap classes that utilize `r FUN("gantt_plot")` and `r FUN("gantt_wrap")`.  It is also prudent to be aware of `r FUN("gantt_wrap")`, that is its arguments and how to utilize it, as it is less convenient yet more flexible and powerful than `r FUN("gantt_plot")`.
 
 <p id="ganttplot1">`r FT(orange, 5, text="&diams;")` **`r FUN("gantt_plot")`** - *Single Time/Single Grouping Variable*`r FT(orange, 5, text="&diams;")`</p >
 
@@ -4245,9 +4266,9 @@ with(rajSPLIT, gantt_plot(dialogue, list(fam.aff, sex), act,
     transform=T))
 ```
 
-Often the defualt colors are less useful in displaying the trends in a way that is most meaningful. Because `r FUN("gantt_plot")` is a wrapper for ggplot2 the color palletes can easily be extended to use with the output from `r FUN("gantt_plot")`.
+Often the default colors are less useful in displaying the trends in a way that is most meaningful. Because `r FUN("gantt_plot")` is a wrapper for ggplot2 the color pallettes can easily be extended to use with the output from `r FUN("gantt_plot")`.
 
-<p id="changecols">`r FT(orange, 5, text="&diams;")` **`r FUN("gantt_plot")`** - *Color Pallete Examples*`r FT(orange, 5, text="&diams;")`</p >
+<p id="changecols">`r FT(orange, 5, text="&diams;")` **`r FUN("gantt_plot")`** - *Color Pallette Examples*`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 14.5}
 ## Load needed packages
@@ -4298,7 +4319,7 @@ with(rajSPLIT2, gantt_plot(text.var = dialogue,
 
 Be wary though of using coloring to show what faceting would show better.  Here is an example of faceting versus the color fill used in the `r HR("#examp1", "Fill Variable Example 1")` above.
 
-<p id="gradient">`r FT(orange, 5, text="&diams;")` **`r FUN("gradient_plot")`** - *Facet Instead of Fill Varaible*`r FT(orange, 5, text="&diams;")`</p >
+<p id="gradient">`r FT(orange, 5, text="&diams;")` **`r FUN("gradient_plot")`** - *Facet Instead of Fill Variable*`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 14.5}
 ## Repeated Measures Sentence Type Example
@@ -4310,7 +4331,7 @@ with(rajSPLIT2, gantt_plot(text.var = dialogue,
 
 <h4 id="heatmaps">Quick Heatmap</h4>
 
-Heatmaps are a powerful way to visualize patterns in matrices.  The gradient allows the user to quickly pick out high and low values.  `r FUN("qheat")` (quick heatmap) is a heatmap function that accepts matrices and dataframes and has some nice pre-sets that work well with the way qdap data is structured.  Two of these assumptions to be aware of is that dataframe is numeric with the exception of a single grouping variable column with the possiblity of additional non-numeric columns passed to  <b><font color="green" face="courier new">facet.vars</font></b>.  `r FUN("qheat")` also assumes that matrices are all numeric with row names serving as the grouping variable.  If passing a dataframe, `r FUN("qheat")` the grouping variable column is assumed to be the first column.
+Heatmaps are a powerful way to visualize patterns in matrices.  The gradient allows the user to quickly pick out high and low values.  `r FUN("qheat")` (quick heat map) is a heat map function that accepts matrices and dataframes and has some nice pre-sets that work well with the way qdap data is structured.  Two of these assumptions to be aware of is that dataframe is numeric with the exception of a single grouping variable column with the possibility of additional non-numeric columns passed to  <b><font color="green" face="courier new">facet.vars</font></b>.  `r FUN("qheat")` also assumes that matrices are all numeric with row names serving as the grouping variable.  If passing a dataframe, `r FUN("qheat")` the grouping variable column is assumed to be the first column.
 
 The following examples demonstrate various uses of `r FUN("qheat")`.
 
@@ -4379,19 +4400,19 @@ qheat(t(mtcars), by.column=FALSE)
 qheat(mtcars, plot = FALSE) + coord_flip()
 ```
 
-When plotting a correlation/distance matrix set diag.na = TRUE to keep these extreme values from effecting the scaling.
+When plotting a correlation/distance matrix set <b>`r FT(green, courier_new, text="diag.na = TRUE")`</b> to keep these extreme values from effecting the scaling.
 
 <p id="heat9">`r FT(orange, 5, text="&diams;")` **`r FUN("qheat")`** - *Correlation Matrix Examples*`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r}
-qheat(cor(mtcars), diag.na=TRUE)
+qheat(cor(mtcars), diag.na=TRUE, by.row = NULL)
 ```
 
 <h4 id="rankfreq">Rank Frequency Plot</h4>
 
 Rank Frequency Plots are a way of visualizing word rank versus frequencies as related to Zipf's law which states that the rank of a word is inversely related to its frequency.  The `r FUN("rank_freq_mplot")` and `r FUN("rank_freq_plot", "rank_freq_mplot")` provide the means to plot the ranks and frequencies of words (with `r FUN("rank_freq_mplot")` plotting by grouping variable(s)).  
 
-`r FUN("rank_freq_mplot")` utilizes the ggplot2 package, whereas, `r FUN("rank_freq_plot", "rank_freq_mplot")` employs base graphics. `r FUN("rank_freq_mplot")` is more general, flexible, and takes text/grouping variables directly; in most cases `r FUN("rank_freq_mplot")` should be prefered (though `r FUN("rank_freq_plot", "rank_freq_mplot")` will render quicker).  The `r FUN("rank_freq_mplot")` family of functions also outputs a list of rank/frequency dataframes used plot the visuals and other related descriptive statistics.
+`r FUN("rank_freq_mplot")` utilizes the ggplot2 package, whereas, `r FUN("rank_freq_plot", "rank_freq_mplot")` employs base graphics. `r FUN("rank_freq_mplot")` is more general, flexible, and takes text/grouping variables directly; in most cases `r FUN("rank_freq_mplot")` should be preferred (though `r FUN("rank_freq_plot", "rank_freq_mplot")` will render quicker).  The `r FUN("rank_freq_mplot")` family of functions also outputs a list of rank/frequency dataframes used plot the visuals and other related descriptive statistics.
 
 <p id="rank1">`r FT(orange, 5, text="&diams;")` **`r FUN("rank_freq_mplot")`**`r FT(orange, 5, text="&diams;")`</p >
 
@@ -4406,13 +4427,13 @@ invisible(rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
     log.freq = FALSE, log.rank = FALSE, jitter = .6,  hap.col = "purple"))
 ```
 
-<p id="rank2">`r FT(orange, 5, text="&diams;")` **`r FUN("rank_freq_mplot")`** - *Using alpga*`r FT(orange, 5, text="&diams;")`</p >
+<p id="rank2">`r FT(orange, 5, text="&diams;")` **`r FUN("rank_freq_mplot")`** - *Using alpha*`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 9}
 invisible(rank_freq_mplot(raj$dialogue, jitter = .5, shape = 19, alpha = 1/15))
 ```
 
-The `r FUN("rank_freq_plot", "rank_freq_mplot")` plots more quickly but does not handle multiple groups and roes not take text/grouping variables directly.
+The `r FUN("rank_freq_plot", "rank_freq_mplot")` plots more quickly but does not handle multiple groups and does not take text/grouping variables directly.
 
 <p id="rank3">`r FT(orange, 5, text="&diams;")` **`r FUN("rank_freq_plot", "rank_freq_mplot")` Example** `r FT(orange, 5, text="&diams;")`</p >
 
@@ -4431,7 +4452,7 @@ ltruncdf(x3, 10)
 
 <h4 id="totplot">Visualize Word Length by Turn of Talk</h4>
 
-It is often useful to view the lengths of turns of talk as a barplot, particularly id the bars are colored by grouping variable.  The `r FUN("tot_plot")` function plots dialogue as a bar plot with the option to color by grouping variables and facet by repreated measure variables.  This can enable the entire dialogue to be viewed in a succint way, possibly leading the researcher to see patterns that may have otherwises escaped attention.  
+It is often useful to view the lengths of turns of talk as a bar plot, particularly if the bars are colored by grouping variable.  The `r FUN("tot_plot")` function plots dialogue as a bar plot with the option to color by grouping variables and facet by repeated measure variables.  This can enable the entire dialogue to be viewed in a succinct way, possibly leading the researcher to see patterns that may have otherwise escaped attention.  
 
 Within the `r FUN("tot_plot")` function the turn of talk argument (<b><font color="green" face="courier new">tot</font></b>) may be the <b>"tot"</b> column from `r FUN("sentSplit")` output (<b><font color="green" face="courier new">tot = TRUE</font></b>), the row numbers (<b><font color="green" face="courier new">tot = FALSE</font></b>), the character name of a column (<b><font color="green" face="courier new">tot = "COLUMN NAME"</font></b>), or a separate numeric/character vector equal in length to the <b><font color="green" face="courier new">text.var</font></b>.  
 
@@ -4461,7 +4482,7 @@ rajSPLIT2 <- do.call(rbind, lapply(split(rajSPLIT, rajSPLIT$act), head, 25))
 tot_plot(rajSPLIT2, "dialogue", grouping.var = "fam.aff", facet.var = "act")
 ```
 
-Because `r FUN("tot_plot")` is based on the `r HR("http://docs.ggplot2.org/current/", "ggplot2 package")` (Wickham, 2009) and `r FUN("tot_plot")` invisibly returns the ggplot2 object, the output (of the class "ggplot") can be altered in the same way that anu other ggplot2 object can be.  In the following examples the color pallete is altered.
+Because `r FUN("tot_plot")` is based on the `r HR("http://docs.ggplot2.org/current/", "ggplot2 package")` (Wickham, 2009) and `r FUN("tot_plot")` invisibly returns the ggplot2 object, the output (of the class "ggplot") can be altered in the same way that another ggplot2 object can be.  In the following examples the color pallette is altered.
 
 <p id="tot3">`r FT(orange, 5, text="&diams;")` **`r FUN("tot_plot")`** - *Alter Colors* `r FT(orange, 5, text="&diams;")`</p >
 
@@ -4492,11 +4513,11 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
 
 <h4 id="venn">Venn Diagram</h4>
 
-The Venn diagram can be a useful way to visualize similarty between grouping variables with respect to word use when the number of groups is relatively small.  The `r FUN("trans_venn")` function wraps the `r HR("http://cran.r-project.org/web/packages/venneuler/index.html", "venneuler")` package to produce Venn diagrams.  The user must keep in mind that producing this output is computationally slow, thus consideration must be given with regard to data size and number of groups when using `r FUN("trans_venn")` to avoid overplotting and lengthly plot production.  The use of the <b><font color="green" face="courier new">stopwords</font></b> argument can also be useful to reduce the overlp of common words between grouping variables.
+The Venn diagram can be a useful way to visualize similarity between grouping variables with respect to word use when the number of groups is relatively small.  The `r FUN("trans_venn")` function wraps the `r HR("http://cran.r-project.org/web/packages/venneuler/index.html", "venneuler")` package to produce Venn diagrams.  The user must keep in mind that producing this output is computationally slow, thus consideration must be given with regard to data size and number of groups when using `r FUN("trans_venn")` to avoid over plotting and lengthy plot production.  The use of the <b><font color="green" face="courier new">stopwords</font></b> argument can also be useful to reduce the overlap of common words between grouping variables.
 
 If a data set is larger the user may want to consider representing the data as a `r FUN("dissimilarity")` matrix or as an adjacency matrix that can be plotted with the `r HR("http://cran.r-project.org/web/packages/igraph/index.html", "igraph package")` as seen in the `r HR("#plotadj2", "presidential examples above")`.
 
-In the following example the reader will notice the centers of the circles (i.e., the person labels) are very similar to the positioning (the distances between nodes) of the same data in the `r HR("#plotadj", "adjaceny matrix plot")` of the same data above.
+In the following example the reader will notice the centers of the circles (i.e., the person labels) are very similar to the positioning (the distances between nodes) of the same data in the `r HR("#plotadj", "adjacency matrix plot")` of the same data above.
 
 
 ```{r, fig.width = 9, fig.height = 9, echo=2}
@@ -4785,7 +4806,7 @@ For more see <a href="http://www.r-statistics.com/2012/08/how-to-load-the-rjava-
 <hr>
 ## Acknowledgements
 
-The qdap package was my first R package and a learning process. Several people contributed immensely to my learning. I'd like to particularly thank `r HR2("https://github.com/Dasonk/", "Dason Kurkiewicz")` for his constant mentoring/assistance in learning the R language, GitHub and package development as well as collaboration on numerous qdap functions. Thank you to `r HR2("https://twitter.com/bryangoodrich", "Bryan Goodrich")` for his teaching, feedback and collaboration on serveral qdap functions. Thank you to `r HR2("https://github.com/hadley", "Dr. Hadley Wickham")` for roxygen2, ggplot2, devtools and GitHub repos which I referenced often. I'd also like to thank the many folks at `r HR2("http://www.talkstats.com/", "talkstats.com")` and `r HR2("http://stackoverflow.com/questions/tagged/r", "stackoverflow.com")` for their help in answering many R questions related to qdap.
+The qdap package was my first R package and a learning process. Several people contributed immensely to my learning. I'd like to particularly thank `r HR2("https://github.com/Dasonk/", "Dason Kurkiewicz")` for his constant mentoring/assistance in learning the R language, GitHub and package development as well as collaboration on numerous qdap functions. Thank you to `r HR2("https://twitter.com/bryangoodrich", "Bryan Goodrich")` for his teaching, feedback and collaboration on several qdap functions. Thank you to `r HR2("https://github.com/hadley", "Dr. Hadley Wickham")` for roxygen2, ggplot2, devtools and GitHub repos which I referenced often. I'd also like to thank the many folks at `r HR2("http://www.talkstats.com/", "talkstats.com")` and `r HR2("http://stackoverflow.com/questions/tagged/r", "stackoverflow.com")` for their help in answering many R questions related to qdap.
 
 <hr> 
 

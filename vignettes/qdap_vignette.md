@@ -125,7 +125,7 @@ The following functions will be utilized in this section (click to view more):
 <h4 id="readin">Reading In Transcript Data <a href="http://youtu.be/UxgOScggLBg" target="_blank" style="text-decoration: none"><b><font size="5" color="#B22222">[YT]</font></b></a>
 </h4>    
 
-This subsection covers how to read in transcript data.  Generally the researcher will have data stored as a .docx (Microsoft Word or Open/Libre Office) or .xlsx/.csv (spreadsheet format).  It is of great importance that the researcher manually writes/parses their transcripts to avoid potential analysis problems later.  All sentences should contain appropriate qdap punctuation (declarative = ., interrogative = ?, exclamatory = !, interupted = | or <a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a> = *., *?, *!, *|).  Additionally, if a sentence contains an endmark/punctuation it should have accompanying text/dialogue.  Two functions are useful for reading in data, <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> and <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a>.  <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> detects file type (.docx/.csv/.xlsx) and reads in a single transcipt whereas <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a> generates code that utilizes <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> for each of the multiple transcripts in a single directory.  Note that <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> expects a two column formatted transcript (usually with person on the left and dialogue on the right).
+This subsection covers how to read in transcript data.  Generally the researcher will have data stored as a .docx (Microsoft Word or Open/Libre Office) or .xlsx/.csv (spreadsheet format).  It is of great importance that the researcher manually writes/parses their transcripts to avoid potential analysis problems later.  All sentences should contain appropriate qdap punctuation (declarative = ., interrogative = ?, exclamatory = !, interrupted = | or <a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a> = *., *?, *!, *|).  Additionally, if a sentence contains an end mark/punctuation it should have accompanying text/dialogue.  Two functions are useful for reading in data, <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> and <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a>.  <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> detects file type (.docx/.csv/.xlsx) and reads in a single transcript whereas <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a> generates code that utilizes <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> for each of the multiple transcripts in a single directory.  Note that <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> expects a two column formatted transcript (usually with person on the left and dialogue on the right).
 
 Five arguments are of particular importance to read.transcript: 
 
@@ -161,10 +161,10 @@ to skip before beginning to read data.</p>
 </td></tr>
 </table>
 
-Often transcripts contain extraneous material at the top and the argument <font face="courier">skip = ?</font> must be used to skip these extra lines.  Some sort of unique separator must also be used to separate the person column from the text column.  By defualt <font face="courier">sep = ":"</font> is assumed.  If your transcripts do no contain a separator one must be inserted manually.  Also note that the researcher may want to prepare the transcripts with brackets to denote non spoken annotations as well dialogue that is read rather than spoken.  For more on bracket parsing see <a href="#bracket">Bracket/General Chunk Extraction</a>.
+Often transcripts contain extraneous material at the top and the argument <font face="courier">skip = ?</font> must be used to skip these extra lines.  Some sort of unique separator must also be used to separate the person column from the text column.  By default <font face="courier">sep = ":"</font> is assumed.  If your transcripts do not contain a separator one must be inserted manually.  Also note that the researcher may want to prepare the transcripts with brackets to denote non spoken annotations as well dialogue that is read rather than spoken.  For more on bracket parsing see <a href="#bracket">Bracket/General Chunk Extraction</a>.
 
 <div class="middleDiv">
-<b><font size="4" color="red">Note: It is important that all sentences contain valid qdap punctuation (<font face="courier">.</font>, <font face="courier">?</font>, <font face="courier">!</font>, <font face="courier">|</font>) in your transcripts. Many qdap functions are dependant upon this assumption.</font></b>
+<b><font size="4" color="red">Note: It is important that all sentences contain valid qdap punctuation (<font face="courier">.</font>, <font face="courier">?</font>, <font face="courier">!</font>, <font face="courier">|</font>) in your transcripts. Many qdap functions are dependent upon this assumption.</font></b>
 </div>
 
 <font size="5" color="orange">&diams;</font> **Reading In Data**- *read.transcript* <font size="5" color="orange">&diams;</font>
@@ -226,7 +226,7 @@ truncdf(dat3, 40)</code></pre>
 </code></pre>
 
 <pre><code class="r">## Be Aware of the `sep` Used
-## Incorrect Read; Wrong `sep` Provided (used defualt `:`)
+## Incorrect Read; Wrong `sep` Provided (used default `:`)
 read.transcript(doc3, skip = 1)</code></pre>
 
 <pre><code>##Dialogue and Person Columns Mixed Inappropriately
@@ -275,7 +275,7 @@ read.transcript(text=trans)</code></pre>
 ## 4     sam          You liar, it stinks!
 </code></pre>
 
-The <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a> function enables the researcher to produce multiple lines of code, one line with <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> for each file in a directory, which is then optionally copied to the clipboard for easy insertion into a script.  Note that setting the argument <font face="courier">use.path = FALSE</font> may allow the code to be more portable in that a static path is not suppplied the the <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> scripts.
+The <a href="http://trinker.github.io/qdap_dev/dir_map.html" target="_blank"><code>dir_map</code></a> function enables the researcher to produce multiple lines of code, one line with <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> for each file in a directory, which is then optionally copied to the clipboard for easy insertion into a script.  Note that setting the argument <font face="courier">use.path = FALSE</font> may allow the code to be more portable in that a static path is not supplied to the <a href="http://trinker.github.io/qdap_dev/read.transcript.html" target="_blank"><code>read.transcript</code></a> scripts.
 
 <font size="5" color="orange">&diams;</font> **Reading In Data**- *dir_map* <font size="5" color="orange">&diams;</font>
 
@@ -295,7 +295,7 @@ dat4 <- read.transcript('~/extdata/transcripts/trans4.xlsx', col.names = c('pers
 
 The <font face="courier">mcsv_x</font> family of functions are utilized to read (<a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a>) and write (<a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a>) multiple csv files at once.  <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> takes an arbitrary number of dataframes and outputs them to the supplied directory( <font face="courier">dir = ?</font>).  An attempt will be made to output the dataframes from qdap functions that output lists of dataframes.  Note that dataframes that contain columns that are lists must be condensed prior to writing with other R dataframe writing functions (e.g., `write.csv`) using the <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a> function.  By default <a href="http://trinker.github.io/qdap_dev/mcsv_w.html" target="_blank"><code>mcsv_w</code></a> attempts to utilize <a href="http://trinker.github.io/qdap_dev/condense.html" target="_blank"><code>condense</code></a>.
 
-The <a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a> function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the dataframes that are read in are also assigned to an inclusive list (name `L1` by defualt).
+The <a href="http://trinker.github.io/qdap_dev/mcsv_r.html" target="_blank"><code>mcsv_r</code></a> function reads multiple files at once and then assigns then dataframes to identically named objects (minus the file extension) in the global environment.  Additionally, all of the dataframes that are read in are also assigned to an inclusive list (name `L1` by default).
 
 <font size="5" color="orange">&diams;</font> **Reading and Writing Multiple csvs** <font size="5" color="orange">&diams;</font>
 
@@ -318,7 +318,7 @@ mcsv_r(file.path(a, nms))
 mtcarsb; CO2b
 L1
 
-## The dataframe anmes and list of dataframe can be altered
+## The dataframe names and list of dataframe can be altered
 mcsv_r(file.path(a, nms), a.name = paste0("bot", 1:2), l.name = "bots_stink")
 bot1; bot2
 bots_stink
@@ -673,7 +673,7 @@ lview(question_type(DATA.SPLIT$state, DATA.SPLIT$person))
 
 <h4 id="just">Text Justification</h4> 
 
-By defualt text data (character vectors) are displayed as right justified in R.  This can be difficult and unnatural to read, particularly as the length of the sentences increase.  The <a href="http://trinker.github.io/qdap_dev/left_just.html" target="_blank"><code>left_just</code></a> function creates a more natural left justification of text.  Note that <a href="http://trinker.github.io/qdap_dev/left_just.html" target="_blank"><code>left_just</code></a> inserts spaces to achieve the justification. This could interfere with analysis and therefore the output from <a href="http://trinker.github.io/qdap_dev/left_just.html" target="_blank"><code>left_just</code></a> should only be used for visualization purposes, not analysis.
+By default text data (character vectors) are displayed as right justified in R.  This can be difficult and unnatural to read, particularly as the length of the sentences increase.  The <a href="http://trinker.github.io/qdap_dev/left_just.html" target="_blank"><code>left_just</code></a> function creates a more natural left justification of text.  Note that <a href="http://trinker.github.io/qdap_dev/left_just.html" target="_blank"><code>left_just</code></a> inserts spaces to achieve the justification. This could interfere with analysis and therefore the output from <a href="http://trinker.github.io/qdap_dev/left_just.html" target="_blank"><code>left_just</code></a> should only be used for visualization purposes, not analysis.
 
 <font size="5" color="orange">&diams;</font> **Justified Data Viewing** <font size="5" color="orange">&diams;</font>    
 
@@ -699,7 +699,7 @@ DATA
 ```
 
 ```r
-## left jsut to the rescue
+## left just to the rescue
 left_just(DATA)
 ```
 
@@ -980,7 +980,7 @@ The following functions will be utilized in this section (click to view more):<b
     <input type="submit" value="lookup"><input type="submit" value="%l%"> 
 </form>
 
-<form ction="http://trinker.github.io/qdap_dev/hash.html" target="_blank">
+<form action="http://trinker.github.io/qdap_dev/hash.html" target="_blank">
     <input type="submit" value="hash"><input type="submit" value="hash_look"><input type="submit" value="%ha%"> - <a href="#hash">Hash Table/Dictionary Lookup</a>
 </form>
 
@@ -1053,7 +1053,7 @@ qcv(terms = "mpg cyl  disp  hp drat    wt  qsec vs am gear carb")
 
 <h4 id="hash">Dictionary/Lookup</h4>  
 
-Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The <a href="http://trinker.github.io/qdap_dev/lookup.html" target="_blank"><code>lookup</code></a> & <a href="%l%" target="_blank">%l%</a> functions provide a fast enviroment lookup for single usage. The <a href="http://trinker.github.io/qdap_dev/hash.html" target="_blank"><code>hash</code></a> & <a href="http://trinker.github.io/qdap_dev/hash.html" target="_blank">hash_lookup</a>/<a href="http://trinker.github.io/qdap_dev/hash.html" target="_blank">%ha%</a> functions provide a fast enviroment lookup for multiple uses of the same hash table.
+Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The <a href="http://trinker.github.io/qdap_dev/lookup.html" target="_blank"><code>lookup</code></a> & <a href="%l%" target="_blank">%l%</a> functions provide a fast environment lookup for single usage. The <a href="http://trinker.github.io/qdap_dev/hash.html" target="_blank"><code>hash</code></a> & <a href="http://trinker.github.io/qdap_dev/hash.html" target="_blank">hash_lookup</a>/<a href="http://trinker.github.io/qdap_dev/hash.html" target="_blank">%ha%</a> functions provide a fast environment lookup for multiple uses of the same hash table.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/lookup.html" target="_blank"><code>lookup</code></a>**- *Dictionary/Look Up Examples* <font size="5" color="orange">&diams;</font>
 
@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 25.34 15.00 25.34 16.30 15.79 25.34 15.79 15.79 16.30 16.30 15.79
-## [12] 16.30 16.30 16.30 16.30 16.30 19.70 16.30 25.34 19.70
+##  [1] 25.34 16.30 22.40 25.34 19.70 15.79 25.34 25.34 15.79 22.40 25.34
+## [12] 22.40 15.00 25.34 22.40 25.34 19.70 25.34 16.30 16.30
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 25.34 15.00 25.34 16.30 15.79 25.34 15.79 15.79 16.30 16.30 15.79
-## [12] 16.30 16.30 16.30 16.30 16.30 19.70 16.30 25.34 19.70
+##  [1] 25.34 16.30 22.40 25.34 19.70 15.79 25.34 25.34 15.79 22.40 25.34
+## [12] 22.40 15.00 25.34 22.40 25.34 19.70 25.34 16.30 16.30
 ```
 
 
@@ -1535,7 +1535,7 @@ paste2(bracketXtract(examp$text, "curly"), " ")
 ```
 
 
-The researcher may need a more general extraction method that allows for any left/right boundaries to be specified.  This is useful in that many qualitative transciption/coding programs have specific syntax for various dialogue markup for events that must be parsed from the data set.  The <a href="http://trinker.github.io/qdap_dev/genX.html" target="_blank"><code>genX</code></a> and <a href="http://trinker.github.io/qdap_dev/genXtract.html" target="_blank"><code>genXtract</code></a> functions have such capabilities.
+The researcher may need a more general extraction method that allows for any left/right boundaries to be specified.  This is useful in that many qualitative transcription/coding programs have specific syntax for various dialogue markup for events that must be parsed from the data set.  The <a href="http://trinker.github.io/qdap_dev/genX.html" target="_blank"><code>genX</code></a> and <a href="http://trinker.github.io/qdap_dev/genXtract.html" target="_blank"><code>genXtract</code></a> functions have such capabilities.
 
 <font size="5" color="orange">&diams;</font> **Extracting Chunks 3**- *genX/genXtract* <font size="5" color="orange">&diams;</font>
 
@@ -1797,7 +1797,7 @@ truncdf(rm_row(dat2, 2, "[C"), 40)
 ```
 
 ```r
-## Also remove people ect. from the analysis
+## Also remove people etc. from the analysis
 rm_row(DATA, 1, c("sam", "greg"))
 ```
 
@@ -1881,7 +1881,7 @@ scrubber(x3, TRUE)
 
 The replacement family of functions replace various text elements within the transcripts with alphabetic versions that are more suited to analysis.  These alterations may affect word counts and other alphabetic dependent forms of analysis.
 
-The <a href="http://trinker.github.io/qdap_dev/replace_abbreviation.html" target="_blank"><code>replace_abbreviation</code></a> replaces standard abbreviations that utilize periods with forms that do not rely on periods.  This is necessary in that many sentence specific functions (e.g., <a href="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank"><code>sentSplit</code></a> and <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a>) rely on period usage acting as sentence endmarks.  The researcher may augment the standard <a href="http://trinker.github.io/qdapDictionaries/abbreviations.html" target="_blank"><code>abbreviations</code></a> dictionary from qdapDictionaries with field specific abbreviations.
+The <a href="http://trinker.github.io/qdap_dev/replace_abbreviation.html" target="_blank"><code>replace_abbreviation</code></a> replaces standard abbreviations that utilize periods with forms that do not rely on periods.  This is necessary in that many sentence specific functions (e.g., <a href="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank"><code>sentSplit</code></a> and <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a>) rely on period usage acting as sentence end marks.  The researcher may augment the standard <a href="http://trinker.github.io/qdapDictionaries/abbreviations.html" target="_blank"><code>abbreviations</code></a> dictionary from qdapDictionaries with field specific abbreviations.
 
 <font size="5" color="orange">&diams;</font> **Replace Abbreviations**<font size="5" color="orange">&diams;</font>
 
@@ -1964,7 +1964,7 @@ replace_abbreviation(x, KEY)
 ```
 
 
-The <a href="http://trinker.github.io/qdap_dev/replace_contraction.html" target="_blank"><code>replace_contraction</code></a> replaces contractions with equivalent mult word forms.  This is useful for some word/sentence statistics.  The researcher may augment the <a href="http://trinker.github.io/qdapDictionaries/contractions.html" target="_blank"><code>contractions</code></a> dictionary supplied by qdapDictionaries, however, the word list is exhaustive.
+The <a href="http://trinker.github.io/qdap_dev/replace_contraction.html" target="_blank"><code>replace_contraction</code></a> replaces contractions with equivalent multi-word forms.  This is useful for some word/sentence statistics.  The researcher may augment the <a href="http://trinker.github.io/qdapDictionaries/contractions.html" target="_blank"><code>contractions</code></a> dictionary supplied by qdapDictionaries, however, the word list is exhaustive.
 
 <font size="5" color="orange">&diams;</font> **Replace Contractions**<font size="5" color="orange">&diams;</font>
 
@@ -2070,7 +2070,7 @@ replace_number(replace_symbol(x))
 ```
 
 
-The <a href="http://trinker.github.io/qdap_dev/qprep.html" target="_blank"><code>qprep</code></a> function is a wrapper for several other replcement family function that allows for more speedy cleaning of the text.  This approach, while speedy, reduces the flexiblity and care that is undertaken by the researcher when the individual replacment functions are utilized.  The function is intended for analysis that requires less care.
+The <a href="http://trinker.github.io/qdap_dev/qprep.html" target="_blank"><code>qprep</code></a> function is a wrapper for several other replacement family function that allows for more speedy cleaning of the text.  This approach, while speedy, reduces the flexibility and care that is undertaken by the researcher when the individual replacement functions are utilized.  The function is intended for analysis that requires less care.
 
 <font size="5" color="orange">&diams;</font> **General Replacement (Quick Preparation)**<font size="5" color="orange">&diams;</font>
 
@@ -2095,7 +2095,7 @@ qprep(x)
 
 <h4 id="fill">Replace Spaces</h4>
 
-Many qdap functions break sentences up into words based on the spaces between words.  Often the researcher will want to keep a group of words as a single unit.  The <a href="http://trinker.github.io/qdap_dev/space_fill.html" target="_blank"><code>space_fill</code></a> allows the researcher to replace spaces between selected phrases with <b><font color="blue" face="courier">&#126;&#126;</font></b>.  By defualt <b><font color="blue" face="courier">&#126;&#126;</font></b> is recognized by many qdap functions as a space separator.
+Many qdap functions break sentences up into words based on the spaces between words.  Often the researcher will want to keep a group of words as a single unit.  The <a href="http://trinker.github.io/qdap_dev/space_fill.html" target="_blank"><code>space_fill</code></a> allows the researcher to replace spaces between selected phrases with <b><font color="blue" face="courier">&#126;&#126;</font></b>.  By default <b><font color="blue" face="courier">&#126;&#126;</font></b> is recognized by many qdap functions as a space separator.
 
 <font size="5" color="orange">&diams;</font> **Space Fill Examples**<font size="5" color="orange">&diams;</font>
 
@@ -2186,7 +2186,7 @@ trans_cloud(text, c("greg", "bob"), target.words=list(obs), caps.list=obs,
 
 <h4 id="mgsub">Multiple gsub</h4>
 
-The researcher may have the need to make multiple substitutions in a text.  An example of when this is needed is when a transcript is marked up with transctiption coding convention specific to a particular transcription method.  These codes, while useful in some contexts, may lead to inaccurate word statisitcs.  The base R function <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/grep.html" target="_blank">gsub</a> makes a single replacement of these types of coding conventions. The <a href="http://trinker.github.io/qdap_dev/multigsub.html" target="_blank"><code>multigsub</code></a> (alias <a href="http://trinker.github.io/qdap_dev/mgsub.html" target="_blank"><code>mgsub</code></a>) takes a vector of patterns to search for as well as a vector of replacments.  Note that the replacements occur sequentially rather than all at once. This means a previous (first in pattern string) sub could alter or be altered by a later sub.  <a href="http://trinker.github.io/qdap_dev/mgsub.html" target="_blank"><code>mgsub</code></a> is useful throughout multiple stages of the research process.
+The researcher may have the need to make multiple substitutions in a text.  An example of when this is needed is when a transcript is marked up with transcription coding convention specific to a particular transcription method.  These codes, while useful in some contexts, may lead to inaccurate word statistics.  The base R function <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/grep.html" target="_blank">gsub</a> makes a single replacement of these types of coding conventions. The <a href="http://trinker.github.io/qdap_dev/multigsub.html" target="_blank"><code>multigsub</code></a> (alias <a href="http://trinker.github.io/qdap_dev/mgsub.html" target="_blank"><code>mgsub</code></a>) takes a vector of patterns to search for as well as a vector of replacements.  Note that the replacements occur sequentially rather than all at once. This means a previous (first in pattern string) sub could alter or be altered by a later sub.  <a href="http://trinker.github.io/qdap_dev/mgsub.html" target="_blank"><code>mgsub</code></a> is useful throughout multiple stages of the research process.
 
 <font size="5" color="orange">&diams;</font> **Multiple Substitutions**<font size="5" color="orange">&diams;</font>
 
@@ -2304,7 +2304,7 @@ mgsub(c("it's", "I'm", "I am"), c("it is", "I am", "ITERATIVE"), DATA$state)
 
 <h4 id="nms">Names to Gender Prediction</h4>
 
-A researcher may face a list of names and be uncertain about gender of the participants.  The <a href="http://trinker.github.io/qdap_dev/name2sex.html" target="_blank"><code>name2sex</code></a> function utilizes the <a href="http://trinker.github.io/qdapDictionaries/NAMES_LIST.html" target="_blank"><code>NAMES_LIST</code></a> dictionary based on the 1990 U.S. census data.  For gender neutral names the gender with the higher assignment rate is assumed if <font face="courier">pred.sex</font> is set to <font face="courier">TRUE</font>, otherwise a <font color="blue">B</font> is assigned to indicate "both" genders.  For names not matching the <a href="http://trinker.github.io/qdapDictionaries/NAMES_LIST.html" target="_blank"><code>NAMES_LIST</code></a> optional fuzzy matching can be utilized via the <font face="courier">fuzzy.match</font> argument based on the use of <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/agrep.html" target="_blank">agrep</a>.  Both of these argument increase accuracy but act at the cost of speed.  The use of <font face="courier">fuzzy.match = TRUE</font> is particularly computationaly costly.
+A researcher may face a list of names and be uncertain about gender of the participants.  The <a href="http://trinker.github.io/qdap_dev/name2sex.html" target="_blank"><code>name2sex</code></a> function utilizes the <a href="http://trinker.github.io/qdapDictionaries/NAMES_LIST.html" target="_blank"><code>NAMES_LIST</code></a> dictionary based on the 1990 U.S. census data.  For gender neutral names the gender with the higher assignment rate is assumed if <font face="courier">pred.sex</font> is set to <font face="courier">TRUE</font>, otherwise a <font color="blue">B</font> is assigned to indicate "both" genders.  For names not matching the <a href="http://trinker.github.io/qdapDictionaries/NAMES_LIST.html" target="_blank"><code>NAMES_LIST</code></a> optional fuzzy matching can be utilized via the <font face="courier">fuzzy.match</font> argument based on the use of <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/agrep.html" target="_blank">agrep</a>.  Both of these argument increase accuracy but act at the cost of speed.  The use of <font face="courier">fuzzy.match = TRUE</font> is particularly computationally costly.
 
 <font size="5" color="orange">&diams;</font> **Name to Gender Prediction**<font size="5" color="orange">&diams;</font>
 
@@ -2386,7 +2386,7 @@ data.frame(name = orig_nms, sex = sex, `ratio_F:M` = names(sex),
 
 <h4 id="stem">Stem Text</h4>
 
-During the initial cleaning stage of analysis the researcher may chose to create a stemmed verion of the dialogue, that is words are reduced to their root words.  The <a href="http://trinker.github.io/qdap_dev/stemmer.html" target="_blank"><code>stemmer</code></a> family of functions allow the researcher to create stemmed text.  The <a href="http://trinker.github.io/qdap_dev/stem2df.html" target="_blank"><code>stem2df</code></a> function wraps <a href="http://trinker.github.io/qdap_dev/stemmer.html" target="_blank"><code>stemmer</code></a> to quickly create a dataframe with the stemmed column added.
+During the initial cleaning stage of analysis the researcher may choose to create a stemmed version of the dialogue, that is words are reduced to their root words.  The <a href="http://trinker.github.io/qdap_dev/stemmer.html" target="_blank"><code>stemmer</code></a> family of functions allow the researcher to create stemmed text.  The <a href="http://trinker.github.io/qdap_dev/stem2df.html" target="_blank"><code>stem2df</code></a> function wraps <a href="http://trinker.github.io/qdap_dev/stemmer.html" target="_blank"><code>stemmer</code></a> to quickly create a dataframe with the stemmed column added.
 
 <font size="5" color="orange">&diams;</font> **Stemming**<font size="5" color="orange">&diams;</font>
 
@@ -2456,7 +2456,7 @@ stem_words(doggies, jumping, swims)
 
 <h4 id="grab">Grab Begin/End of String to Character</h4>
 
-At times it is handy to be able to grab from the begining or enf of a string to a specific character.  The <a href="http://trinker.github.io/qdap_dev/beg2char.html" target="_blank"><code>beg2char</code></a> function allows you to grab from the begining of a string to the n<sup>th</sup> occurenece of a character.  The counterpart function, <a href="http://trinker.github.io/qdap_dev/char2end.html" target="_blank"><code>char2end</code></a>, grab from the n<sup>th</sup> occurenece of a character to the end of a string to. This behavior is useful if the transcript contains annotations at the begining or end of a line that should beliminated.
+At times it is handy to be able to grab from the beginning or end of a string to a specific character.  The <a href="http://trinker.github.io/qdap_dev/beg2char.html" target="_blank"><code>beg2char</code></a> function allows you to grab from the beginning of a string to the n<sup>th</sup> occurrence of a character.  The counterpart function, <a href="http://trinker.github.io/qdap_dev/char2end.html" target="_blank"><code>char2end</code></a>, grab from the n<sup>th</sup> occurrence of a character to the end of a string to. This behavior is useful if the transcript contains annotations at the beginning or end of a line that should be eliminated.
 
 <font size="5" color="orange">&diams;</font> **Grab From Character to Beginning/End of String**<font size="5" color="orange">&diams;</font>
 
@@ -2536,7 +2536,7 @@ char2end(x3, "^", 2)
 
 <h4 id="inc">Denote Incomplete End Marks With "|"</h4> 
 
-Often incomplete sentences have a different function than complete sentences.  The researcher may want to denote incomplete sentences for consideration in later analysis.  Traditionally, incomplete sentence are denoted with the following end marks (.., ..., .?, ..?, en & em).  The <a href="http://trinker.github.io/qdap_dev/incomplete_replace.html" target="_blank"><code>incomplete_replace</code></a> can identify and replace the traditional endmarks with a standard form <font color="blue">"|"</font>.
+Often incomplete sentences have a different function than complete sentences.  The researcher may want to denote incomplete sentences for consideration in later analysis.  Traditionally, incomplete sentence are denoted with the following end marks (.., ..., .?, ..?, en & em).  The <a href="http://trinker.github.io/qdap_dev/incomplete_replace.html" target="_blank"><code>incomplete_replace</code></a> can identify and replace the traditional end marks with a standard form <font color="blue">"|"</font>.
 
 <font size="5" color="orange">&diams;</font> **Incomplete Sentence Identification**<font size="5" color="orange">&diams;</font>
 
@@ -2572,7 +2572,7 @@ incomp(x, scan.mode = TRUE)
 
 <h4 id="caps">Capitalize Select Words</h4>
 
-The <a href="http://trinker.github.io/qdap_dev/capitalizer.html" target="_blank"><code>capitalizer</code></a> functions allows the researcher to specify words within a vector to be capitalized.  By defualt <font color="blue">I</font>, and contractions containing <font color="blue">I</font>, are capitalized.  Additional words can be specified through the <font face="courier">caps.list</font> argument.  To capitalize words within strings the <a href="http://trinker.github.io/qdap_dev/mgsub.html" target="_blank"><code>mgsub</code></a> can be used.
+The <a href="http://trinker.github.io/qdap_dev/capitalizer.html" target="_blank"><code>capitalizer</code></a> functions allows the researcher to specify words within a vector to be capitalized.  By default <font color="blue">I</font>, and contractions containing <font color="blue">I</font>, are capitalized.  Additional words can be specified through the <font face="courier">caps.list</font> argument.  To capitalize words within strings the <a href="http://trinker.github.io/qdap_dev/mgsub.html" target="_blank"><code>mgsub</code></a> can be used.
 
 <font size="5" color="orange">&diams;</font> **Word Capitalization**<font size="5" color="orange">&diams;</font>
 
@@ -2645,7 +2645,7 @@ The following functions will be utilized in this section (click to view more):
 
 <h4 id="sentsplit">Sentence Splitting/Combining</h4>
 
-Many functions in the qdap package require that the dialogue is broken apart into individual sentences, failure to do so may invalidate many of the outputs from the analysis and will lead to lead to warnings.  After reading in and cleaning the data the next step should be to split the text variable into individual sentences.  The <a href="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank"><code>sentSplit</code></a> function outputs a dataframe with the text variable split into individual sentences and repeats the demographic variables as necessary.  Additionally, a turn of talk (<font color="red">tot column</font>) variable is added that keeps track of the original turn of talk (row number) and the sentence number per turn of talk.  The researcher may also want to create a second text column that has benn stemmed for future analysis by setting <font face="courier">stem.col = TRUE</font>, though this is more time intensive.
+Many functions in the qdap package require that the dialogue is broken apart into individual sentences, failure to do so may invalidate many of the outputs from the analysis and will lead to lead to warnings.  After reading in and cleaning the data the next step should be to split the text variable into individual sentences.  The <a href="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank"><code>sentSplit</code></a> function outputs a dataframe with the text variable split into individual sentences and repeats the demographic variables as necessary.  Additionally, a turn of talk (<font color="red">tot column</font>) variable is added that keeps track of the original turn of talk (row number) and the sentence number per turn of talk.  The researcher may also want to create a second text column that has been stemmed for future analysis by setting <font face="courier">stem.col = TRUE</font>, though this is more time intensive.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank"><code>sentSplit</code></a> Example**<font size="5" color="orange">&diams;</font>
 
@@ -2736,7 +2736,7 @@ plot(sentSplit(DATA, "state"), grouping.var = "sex")
 
 
 ```r
-## Convert tot column wirh sub sentences to turns of talk
+## Convert tot column with sub sentences to turns of talk
 dat <- sentSplit(DATA, "state")
 TOT(dat$tot)
 ```
@@ -2867,7 +2867,7 @@ It is more efficient to maintain a dialogue dataframe (consisting of a column fo
 
 
 ```r
-## A dialogue dataframe and a demographocs dataframe
+## A dialogue dataframe and a demographics dataframe
 ltruncdf(list(dialogue=raj, demographics=raj.demographics), 10, 50)
 ```
 
@@ -3228,10 +3228,10 @@ gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
 
 <h4 id="adj">Create Adjacency Matrix</h4>
 
-It is useful to convert data to an adjaceny matrix for examing relationships between grouping variables in word usage.  The <a href="http://trinker.github.io/qdap_dev/adjaceny_matrix.html" target="_blank"><code>adjaceny_matrix</code></a> (aka: <a href="http://trinker.github.io/qdap_dev/adjmat.html" target="_blank"><code>adjmat</code></a>) provide this capability, interacting with a <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> or <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> object.  In the first example below Sam and Greg share 4 words in common, whereas, the Teacher and Greg share no words.  The adjaceny matrix can be passed to a network graphing package such as the <a href="http://igraph.sourceforge.net/" target="_blank">igraph</a> package for visulaization of the data structure as seen in Example 3.
+It is useful to convert data to an adjacency matrix for examining relationships between grouping variables in word usage.  The <a href="http://trinker.github.io/qdap_dev/adjaceny_matrix.html" target="_blank"><code>adjaceny_matrix</code></a> (aka: <a href="http://trinker.github.io/qdap_dev/adjmat.html" target="_blank"><code>adjmat</code></a>) provide this capability, interacting with a <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> or <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> object.  In the first example below Sam and Greg share 4 words in common, whereas, the Teacher and Greg share no words.  The adjacency matrix can be passed to a network graphing package such as the <a href="http://igraph.sourceforge.net/" target="_blank">igraph</a> package for visualization of the data structure as seen in Example 3.
 
 
-<font size="5" color="orange">&diams;</font> **Adjaceny Matrix**: *Example 1*<font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Adjacency Matrix**: *Example 1*<font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -3254,7 +3254,7 @@ adjacency_matrix(wfm(DATA$state, DATA$person))
 ##         18          6         10         11          4 
 </code></pre>
 
-<font size="5" color="orange">&diams;</font> **Adjaceny Matrix**: *Example 2*<font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Adjacency Matrix**: *Example 2*<font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -3282,7 +3282,7 @@ adjmat(terms)
 
 It is often useful to plot the adjacency matrix as a network.  The <a href="http://cran.r-project.org/web/packages/igraph/index.html">igraph package</a> provides this functionality.
 
-<p id="plotadj"><font size="5" color="orange">&diams;</font> <b>Plotting an Adjaceny Matrix</b>: <em>Example 1</em><font size="5" color="orange">&diams;</font></p>
+<p id="plotadj"><font size="5" color="orange">&diams;</font> <b>Plotting an Adjacency Matrix</b>: <em>Example 1</em><font size="5" color="orange">&diams;</font></p>
 
 
 
@@ -3301,7 +3301,7 @@ plot(g, layout=layout.auto(g))
 
 The following example will visualize the presidential debates data as a network plot.
 
-<p id="plotadj2"><font size="5" color="orange">&diams;</font> <b>Plotting an Adjaceny Matrix</b>: <em>Example 2</em><font size="5" color="orange">&diams;</font></p>
+<p id="plotadj2"><font size="5" color="orange">&diams;</font> <b>Plotting an Adjacency Matrix</b>: <em>Example 2</em><font size="5" color="orange">&diams;</font></p>
 
 
 ```r
@@ -3329,7 +3329,7 @@ plot(g, layout=layout.auto(g))
 
 We can easily add information to the network plot utilizing the <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> function to obtain weights and distance measures for use with the plot.
 
-<font size="5" color="orange">&diams;</font> **Plotting an Adjaceny Matrix**: *Example 2b*<font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Plotting an Adjacency Matrix**: *Example 2b*<font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -3352,7 +3352,7 @@ plot(g, layout=layout.auto(g), edge.curved =TRUE)
 ![plot of chunk unnamed-chunk-48](figure/unnamed-chunk-482.png) 
 
 
-<font size="5" color="orange">&diams;</font> **Plotting an Adjaceny Matrix**: *Try the plot interactively!*<font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Plotting an Adjacency Matrix**: *Try the plot interactively!*<font size="5" color="orange">&diams;</font>
 
                      
 <pre><code class="r">tkplot(g)
@@ -3477,7 +3477,7 @@ head(x2, 10)
 
 <h4 id="bag">Word Splitting (Bag of Words)</h4>
 
-The qdap package utilizes the following functions to turn text into a bag of words (word order is perserved):
+The qdap package utilizes the following functions to turn text into a bag of words (word order is preserved):
 
 
 <TABLE>
@@ -3486,7 +3486,7 @@ The qdap package utilizes the following functions to turn text into a bag of wor
     <TR> <TD align="right"><font face="courier"><b><a href="http://trinker.github.io/qdap_dev/bag_o_words.html">word.split</a></b></font></TD> <TD align="right"> Reduces a text column to a <b>list</b> of vectors of bag of words and qdap recognized end marks (i.e., ".", "!", "?", "*", "-").</TD> </TR>
 </TABLE>
 
-Bag of words can be useful for any number of reasons within the scope of analyzing discourse.  Many other qdap functions employ or mention these three functions as seen in the following counts for the three word splitting functions functions.
+Bag of words can be useful for any number of reasons within the scope of analyzing discourse.  Many other qdap functions employ or mention these three functions as seen in the following counts for the three word splitting functions.
 
 
 
@@ -3779,7 +3779,7 @@ common(a, b, d, overlap=3)
 ```
 
 ```r
-## Supply a lsit of vectors
+## Supply a list of vectors
 common(list(a, b, d))
 ```
 
@@ -3808,7 +3808,7 @@ common(word_list(DATA$state, DATA$person)$cwl, overlap = 2)
 
 <h4 id="exclude">Exclude Elements From a Vector</h4>
 
-It is often useful and more efficient to start with a preset vector of words and eliminate or <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a> the words you do not wish to include.  Examples could range from excluding an individual(s) from a column of participant names or excluding a few select word(s) from a pre defined qdap word list.  THis is particlarly useful for passsing terms or stopwords to word counting functions like <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> or <a href="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank"><code>trans_cloud</code></a>.
+It is often useful and more efficient to start with a preset vector of words and eliminate or <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a> the words you do not wish to include.  Examples could range from excluding an individual(s) from a column of participant names or excluding a few select word(s) from a pre-defined qdap word list.  This is particularly useful for passing terms or stopwords to word counting functions like <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> or <a href="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank"><code>trans_cloud</code></a>.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a> Examples**<font size="5" color="orange">&diams;</font>
 
@@ -3860,7 +3860,7 @@ termco(DATA$state, DATA$person, MTCH.LST)
 
 Utilizing <a href="http://en.wikipedia.org/wiki/N-gram" target="_blank">ngrams</a> can be useful for gaining a sense of what terms are used in conjunction with other terms.  This is particularly useful in the analysis of dialogue when the combination of a particular vocabulary is meaningful.  The <a href="http://trinker.github.io/qdap_dev/ngrams.html" target="_blank"><code>ngrams</code></a> function provides a list of ngram related output that can be utilize in various analyses.
 
-<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/ngrams.html" target="_blank"><code>ngrams</code></a> Example** *note that the out put is only partial*<font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/ngrams.html" target="_blank"><code>ngrams</code></a> Example** *note that the output is only partial*<font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -3897,7 +3897,7 @@ lapply(out[["all_n"]], function(x) sapply(x, paste, collapse = " "))
 
 <h4 id="stopwords">Remove Stopwords</h4>
 
-In analyzing discourse it may be helpful to remove certain words from the analysis as the words may not be meaningful or may overshadow the impact of other words.  The <a href="http://trinker.github.io/qdap_dev/stopwords.html" target="_blank"><code>stopwords</code></a> function can be utilized to remove <a href="http://nlp.stanford.edu/IR-book/html/htmledition/dropping-common-terms-stop-words-1.html" target="_blank">stopwords</a> from the dialogue before passing to further analysis.  It should be noted that many functions have a stopwords argument that allows for the remval of the stopwords within the function environment rather than altering the text in the primary discourse dataframe.  Careful researcher consideration must be given as to the functional impact of removing words from an analysis.
+In analyzing discourse it may be helpful to remove certain words from the analysis as the words may not be meaningful or may overshadow the impact of other words.  The <a href="http://trinker.github.io/qdap_dev/stopwords.html" target="_blank"><code>stopwords</code></a> function can be utilized to remove <a href="http://nlp.stanford.edu/IR-book/html/htmledition/dropping-common-terms-stop-words-1.html" target="_blank">stopwords</a> from the dialogue before passing to further analysis.  It should be noted that many functions have a stopwords argument that allows for the removal of the stopwords within the function environment rather than altering the text in the primary discourse dataframe.  Careful researcher consideration must be given as to the functional impact of removing words from an analysis.
 
 <font size="5" color="orange">&diams;</font> **Stopword Removal Examples**<font size="5" color="orange">&diams;</font>
 
@@ -4027,7 +4027,7 @@ stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
 
 <h4 id="strip">Strip Text of Unwanted Characters/Capitalization</h4>
 
-It is often useful to remove capitalization and puntuation from the dialogue in order to standardize the text.  R is case sensitive.  By removing capital letters and extra punctuation with the <a href="http://trinker.github.io/qdap_dev/strip.html" target="_blank"><code>strip</code></a> function the text is more comparable.  In the following output we can see, through the <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html" target="_blank">==</a> comparison operator and <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html" target="_blank">outer</a> function that the use of <a href="http://trinker.github.io/qdap_dev/strip.html" target="_blank"><code>strip</code></a> makes the differnet forms of <font color="blue">Dan</font> comparable.
+It is often useful to remove capitalization and punctuation from the dialogue in order to standardize the text.  R is case sensitive.  By removing capital letters and extra punctuation with the <a href="http://trinker.github.io/qdap_dev/strip.html" target="_blank"><code>strip</code></a> function the text is more comparable.  In the following output we can see, through the <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html" target="_blank">==</a> comparison operator and <a href="http://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html" target="_blank">outer</a> function that the use of <a href="http://trinker.github.io/qdap_dev/strip.html" target="_blank"><code>strip</code></a> makes the different forms of <font color="blue">Dan</font> comparable.
 
 
 ```r
@@ -4059,7 +4059,7 @@ dimnames(y) <- list(x, x); y
 ```
 
 
-As seen in the examples below, <a href="http://trinker.github.io/qdap_dev/strip.html" target="_blank"><code>strip</code></a> comes with multiple arguments to adjust the flexiblity of the degree of text standardization.
+As seen in the examples below, <a href="http://trinker.github.io/qdap_dev/strip.html" target="_blank"><code>strip</code></a> comes with multiple arguments to adjust the flexibility of the degree of text standardization.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/strip.html" target="_blank"><code>strip</code></a> Examples**<font size="5" color="orange">&diams;</font>
 
@@ -4131,7 +4131,7 @@ strip(DATA$state, char.keep = c("?", "."))
 
 <h4 id="syn">Search For Synonyms</h4>
 
-It is useful in discourse analysis to analyze vocabularly use.  This may mean searching for words similar to your initial word list.  The <a href="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank"><code>synonyms</code></a> (aka <a href="http://trinker.github.io/qdap_dev/syn.html" target="_blank"><code>syn</code></a>) function generates synonyms from the <a href="http://trinker.github.io/qdapDictionaries/" target="_blank">qdapDictionaries'</a> <a href="http://trinker.github.io/qdapDictionaries/SYNONYM.html" target="_blank">SYNONYM</a> dictionary.  These synonyms can be returned as a list or a vector that can then be passed to other qdap functions.
+It is useful in discourse analysis to analyze vocabulary use.  This may mean searching for words similar to your initial word list.  The <a href="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank"><code>synonyms</code></a> (aka <a href="http://trinker.github.io/qdap_dev/syn.html" target="_blank"><code>syn</code></a>) function generates synonyms from the <a href="http://trinker.github.io/qdapDictionaries/" target="_blank">qdapDictionaries'</a> <a href="http://trinker.github.io/qdapDictionaries/SYNONYM.html" target="_blank">SYNONYM</a> dictionary.  These synonyms can be returned as a list or a vector that can then be passed to other qdap functions.
 
 <font size="5" color="orange">&diams;</font> **Synonyms Examples**<font size="5" color="orange">&diams;</font>
 
@@ -4663,7 +4663,7 @@ A major task in qualitative work is coding either time or words with selected co
 - The dialogue
 - The time spans
 
-The coding process in qdap starts with decison of whether to code the dialogue and/or the time spans.  After that the researcher may follow the sequential subsections in the <a href="#coding">Qualitative Coding System</a> section outlined in these steps:
+The coding process in qdap starts with the decision of whether to code the dialogue and/or the time spans.  After that the researcher may follow the sequential subsections in the <a href="#coding">Qualitative Coding System</a> section outlined in these steps:
 
 1. Making a template for coding dialogue/time spans
 2. The actual coding  dialogue/time spans
@@ -4671,9 +4671,9 @@ The coding process in qdap starts with decison of whether to code the dialogue a
 4. Transforming codes (finding overlap and/or differences between word span/time span of codes)
 5. Initial analysis
 
-If you choose the route of coding words qdap gives two approaches.  Each has distinct benefits and disadvantages dependant upon the situation.  If you chose the coding of time spans qdap provides one option. 
+If you choose the route of coding words qdap gives two approaches.  Each has distinct benefits and disadvantages dependent upon the situation.  If you chose the coding of time spans qdap provides one option. 
 
-If you chose the coding of words you may chose to code a csv file or to code the transcript directly (perhaps with markers or other forms of markup), record the ranges in a text list and then read in the data.  Both approaches can result in the same data being read back into qdap.  The csv approach may allow for extended capabilties (beyond the scope of this vignette) while the transcript/list approach is generally more efficient and takes the approach many qualitative researchers typically utilize in qualitative coding (it also has the added benefit of producing a hard copy).
+If you chose the coding of words you may choose to code a csv file or to code the transcript directly (perhaps with markers or other forms of markup), record the ranges in a text list and then read in the data.  Both approaches can result in the same data being read back into qdap.  The csv approach may allow for extended capabilities (beyond the scope of this vignette) while the transcript/list approach is generally more efficient and takes the approach many qualitative researchers typically utilize in qualitative coding (it also has the added benefit of producing a hard copy).
 
 The next three subsections will walk the reader through how to make a template, code in the template, and read the data back into R/qdap.  Subsections 4-5 will cover reshaping and initial analysis after the data has been read in (this approach is generally the same for all three coded data types).
 
@@ -4798,7 +4798,7 @@ cm_range.temp(codes, file = "foo1.txt")
 )
 </code></pre>
 
-This list below contains demographic variables.  If the researcher has demographic variables it is recomended to supply them at this point.  The demographic variables will be generated with durations automatically.
+This list below contains demographic variables.  If the researcher has demographic variables it is recommended to supply them at this point.  The demographic variables will be generated with durations automatically.
 
 <font size="5" color="orange">&diams;</font> **Coding Words (Transcript/List approach)**: List Template 2<font size="5" color="orange">&diams;</font>
 
@@ -4901,7 +4901,7 @@ cm_time.temp(codes, file = "codelist.txt")
  )  
 </code></pre>
 
-This list below contains demographic variables.  If the researcher has demographic variables it is recomended to supply them at this point.  
+This list below contains demographic variables.  If the researcher has demographic variables it is recommended to supply them at this point.  
 
 <font size="5" color="orange">&diams;</font> **Coding Times Spans**: List Template 2<font size="5" color="orange">&diams;</font>
 
@@ -4978,7 +4978,7 @@ datL
 
 <h4 id="reshape">Transforming Codes</h4>
 
-The researcher may want to determine where codes do and do not overlap with one other.  The <font color="red">cm_</font> family of functions bearing (<font color="red">cm_code.</font>) perform various transformative functions (Boolean search).  <a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> will merge the spans (time or word) for given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> will give provide spans that exclude given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> will yield the spans where all of the given codes co-occur.  <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> is a wrapper for the previous three functions that produces one dataframe in a single call.  Lastly, <a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a> proveds a more flexible framework that allows for the introduction of multiple lofical operators between codes.  Most tasks can be handled with the <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> function.
+The researcher may want to determine where codes do and do not overlap with one other.  The <font color="red">cm_</font> family of functions bearing (<font color="red">cm_code.</font>) perform various transformative functions (Boolean search).  <a href="http://trinker.github.io/qdap_dev/cm_code.combine.html" target="_blank"><code>cm_code.combine</code></a> will merge the spans (time or word) for given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> will give provide spans that exclude given codes.  <a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> will yield the spans where all of the given codes co-occur.  <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> is a wrapper for the previous three functions that produces one dataframe in a single call.  Lastly, <a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a> provides a more flexible framework that allows for the introduction of multiple logical operators between codes.  Most tasks can be handled with the <a href="http://trinker.github.io/qdap_dev/cm_code.transform.html" target="_blank"><code>cm_code.transform</code></a> function.
 
 For Examples of each click the links below:    
 1. <a href="#cm_code.combine">cm_code.combine Examples</a>     
@@ -4991,7 +4991,7 @@ For the sake of simplicity the uses of these functions will be demonstrated via 
 
 The reader should note that all of the above functions utilize two helper functions (<a href="http://trinker.github.io/qdap_dev/cm_long2dummy.html" target="_blank"><code>cm_long2dummy</code></a> and <a href="http://trinker.github.io/qdap_dev/cm_dummy2long.html" target="_blank"><code>cm_dummy2long</code></a>) to stretch the spans into single units of measure (word or second) perform a calculation and then condense back to spans.  More advanced needs may require the explicit use of these functions, though they are beyond the scope of this vignette.  
 
-The following data sets will be utilized through out the demonstrations of the <font color="red">cm_code.</font> family of functions:
+The following data sets will be utilized throughout the demonstrations of the <font color="red">cm_code.</font> family of functions:
 
 <font size="5" color="orange">&diams;</font> **Common Data Sets** - Word Approach<font size="5" color="orange">&diams;</font>
 
@@ -5382,7 +5382,7 @@ exlist2 <- list(AnoB=qcv(A, B), BnoC=qcv(B, C), ABnoC=qcv(A, B, C))
 ![plot of chunk unnamed-chunk-83](figure/unnamed-chunk-83.png) 
 
 
-<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> Single TIme** *Time Span Combined Exclude Example*<font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.exclude.html" target="_blank"><code>cm_code.exclude</code></a> Single Time** *Time Span Combined Exclude Example*<font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -5704,7 +5704,7 @@ ct3
 
 <h5 id="cm_code.blank"><font color="green">cm_code.blank Examples</font></h5>
 
-<a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a> provides flexible Boolean comparisons between word.time spans.  The `overlap` argument takes a logical value, an integer or a character string of binary operator couple with an integer.  It is important to understand how the function operates.  This initial step calls <a href="http://trinker.github.io/qdap_dev/cm_long2dummy.html" target="_blank"><code>cm_long2dummy</code></a> as seen below (stretching the spans to dummy coded columns), the comparison is conduted between columns, and then the columns are reverted back to spans via the <a href="http://trinker.github.io/qdap_dev/cm)dummy2long.html" target="_blank"><code>cm)dummy2long</code></a>.  This first example illustates the stretching to dummy and reverting back to spans.
+<a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a> provides flexible Boolean comparisons between word.time spans.  The `overlap` argument takes a logical value, an integer or a character string of binary operator couple with an integer.  It is important to understand how the function operates.  This initial step calls <a href="http://trinker.github.io/qdap_dev/cm_long2dummy.html" target="_blank"><code>cm_long2dummy</code></a> as seen below (stretching the spans to dummy coded columns), the comparison is conduted between columns, and then the columns are reverted back to spans via the <a href="http://trinker.github.io/qdap_dev/cm)dummy2long.html" target="_blank"><code>cm)dummy2long</code></a>.  This first example illustrates the stretching to dummy and reverting back to spans.
 
 <font size="5" color="orange">&diams;</font> **Long to dummy and dummy to long** <font size="5" color="orange">&diams;</font>
 
@@ -5760,7 +5760,7 @@ $dummy_back_2_long
 ```
 
 
-Now let's examine a few uses of <a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a>.  The first is to set `overlap = TRUE` (the default behavior).  This defualt behavior is identical to <a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> as seen below.
+Now let's examine a few uses of <a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a>.  The first is to set `overlap = TRUE` (the default behavior).  This default behavior is identical to <a href="http://trinker.github.io/qdap_dev/cm_code.overlap.html" target="_blank"><code>cm_code.overlap</code></a> as seen below.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/cm_code.blank.html" target="_blank"><code>cm_code.blank</code></a>** - `overlap = TRUE` <font size="5" color="orange">&diams;</font>
 
@@ -5914,7 +5914,7 @@ blanklist2 <- list(noAB=qcv(AA, BB), noABC=qcv(AA, BB, CC))
 
 <h4 id="analysis">Initial Coding Analysis</h4>
 
-The <font color="red">cm_</font> family of functions has three approaches to intial analysis of codes.  The researcher may want to summarize, visualize or determine the proximaty of codes to one another.  The following functions accomplish these tasks:
+The <font color="red">cm_</font> family of functions has three approaches to initial analysis of codes.  The researcher may want to summarize, visualize or determine the proximity of codes to one another.  The following functions accomplish these tasks:
 
 1. <a href="#cmsum">Summary</a>    
 2. <a href="#cmplot">Plotting</a>    
@@ -6190,11 +6190,11 @@ plot(z, title = "Combined Codes")
 
 <h5 id="cmdist"><font color="green">Distance Measures</font></h5>
 
-Often a research will want to know which codes are clustering closer to other codes (regardless of whether the codes represent word or time spans).  <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a> allows the research to find the distances between codes and standardize the mean of the differences to allow for comparisons similar to a correlation.  The matrix output from <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a> is arrived at by taking the means and standard deviations of the differences between codes and scaling them (without centering) and then multiplying the two together.  This results in a standarized distance measure that is non-negative, with values closer to zero indicating a codes that are found in closer proximaty.  
+Often a research will want to know which codes are clustering closer to other codes (regardless of whether the codes represent word or time spans).  <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a> allows the research to find the distances between codes and standardize the mean of the differences to allow for comparisons similar to a correlation.  The matrix output from <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a> is arrived at by taking the means and standard deviations of the differences between codes and scaling them (without centering) and then multiplying the two together.  This results in a standardized distance measure that is non-negative, with values closer to zero indicating codes that are found in closer proximity.  
 
 The researcher may also access the means, standard deviations and number of codes by indexing the list output for each transcript.  This distance measure compliments the Gantt plot.  
 
-Note that the argument <b><font color="green" face="courier new">causal = FALSE</font></b> (the defualt) does not assume Code A comes before Code B whereas <b><font color="green" face="courier new">causal = TRUE</font></b> assumes the first code precedes the second code.  Generally, setting <b><font color="green" face="courier new">causal = FALSE</font></b> wil result in larger mean of differences and accompanying standardized values.  Also note that rownames are the first code and column names are the second comparison code.  The values for Code A compared to Code B will not be the same as Code B compared to Code A.  This is because, unlike a true distance measure, <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a>'s matrix is assymetrical.  <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a>computes the distance by taking each span (start and end) for Code A and comparing it to the nearest start or end for Code B.  So for example there may be 6 Code A spans and thus six differences between A and B, whereas Code B may only have 3 spans and thus three differences between B and A.  This fact alone will lead to differences in A compared to B versus B compared to A.  
+Note that the argument <b><font color="green" face="courier new">causal = FALSE</font></b> (the default) does not assume Code A comes before Code B whereas <b><font color="green" face="courier new">causal = TRUE</font></b> assumes the first code precedes the second code.  Generally, setting <b><font color="green" face="courier new">causal = FALSE</font></b> will result in larger mean of differences and accompanying standardized values.  Also note that row names are the first code and column names are the second comparison code.  The values for Code A compared to Code B will not be the same as Code B compared to Code A.  This is because, unlike a true distance measure, <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a>'s matrix is asymmetrical.  <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a>computes the distance by taking each span (start and end) for Code A and comparing it to the nearest start or end for Code B.  So for example there may be 6 Code A spans and thus six differences between A and B, whereas Code B may only have 3 spans and thus three differences between B and A.  This fact alone will lead to differences in A compared to B versus B compared to A.  
 
 
 <font size="5" color="orange">&diams;</font> <a href="http://trinker.github.io/qdap_dev/cm_distance.html" target="_blank"><code>cm_distance</code></a> - *Initial Data Setup* <font size="5" color="orange">&diams;</font>
@@ -6265,7 +6265,7 @@ names(out1)
 
 ```r
 ## A list containing means, standard deviations and other 
-## descriptive statistics for for the differences between codes
+## descriptive statistics for the differences between codes
 out1$x
 ```
 
@@ -6392,7 +6392,7 @@ A researcher often needs to quickly gather frequency counts for various words/wo
 
 <h4 id="wordstats">Descriptive Word Statistics</h4>
 
-Often a researcher may want to get a general sense of how words are functioning for different grouping variables.  The <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> function enables a quick picture of what is occuring within the data.  The displayed (printed) output is a dataframe, however, the output from word_stats is actually a list.  Use <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>?word_stats</code></a> to learn more.
+Often a researcher may want to get a general sense of how words are functioning for different grouping variables.  The <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>word_stats</code></a> function enables a quick picture of what is occurring within the data.  The displayed (printed) output is a dataframe, however, the output from word_stats is actually a list.  Use <a href="http://trinker.github.io/qdap_dev/word_stats.html" target="_blank"><code>?word_stats</code></a> to learn more.
 
 The displayed output is a wide dataframe, hence the abbreviated column names.  The following column names and meanings will provide guidance in understanding the output:
 
@@ -6568,7 +6568,7 @@ with(mraja1spl, word_stats(desc_wrds, list(sex, fam.aff, died), tot = tot))
 
 <h4 id="wfm">Word Frequency Matrix</h4>
 
-Many analyses with words involve a matrix based on the words.  qdap uses a *word frequency matrix* (<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>) or the less maliable dataframe version, *word frequency dataframe* (<a href="http://trinker.github.io/qdap_dev/wfdf.html" target="_blank"><code>wfdf</code></a>).  The <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> is a count of word usages per grouping variable(s).  This is a similar concept to the <a href="http://cran.r-project.org/web/packages/tm/index.html">tm packae's</a> Term Document Matrix, though instead of documents we are interested in the grouping variable's usage of terms.  <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> is the general function that should be used, however, the <a href="http://trinker.github.io/qdap_dev/wfdf.html" target="_blank"><code>wfdf</code></a> function does provide options for margin sums (row and column).  Also note that the <a href="http://trinker.github.io/qdap_dev/wfm_expanded.html" target="_blank"><code>wfm_expanded</code></a> and <a href="http://trinker.github.io/qdap_dev/wfm_combine.html" target="_blank"><code>wfm_combine</code></a> can expand or combine terms within a word frequency matrix.
+Many analyses with words involve a matrix based on the words.  qdap uses a *word frequency matrix* (<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>) or the less malleable dataframe version, *word frequency dataframe* (<a href="http://trinker.github.io/qdap_dev/wfdf.html" target="_blank"><code>wfdf</code></a>).  The <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> is a count of word usages per grouping variable(s).  This is a similar concept to the <a href="http://cran.r-project.org/web/packages/tm/index.html">tm package's</a> Term Document Matrix, though instead of documents we are interested in the grouping variable's usage of terms.  <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> is the general function that should be used, however, the <a href="http://trinker.github.io/qdap_dev/wfdf.html" target="_blank"><code>wfdf</code></a> function does provide options for margin sums (row and column).  Also note that the <a href="http://trinker.github.io/qdap_dev/wfm_expanded.html" target="_blank"><code>wfm_expanded</code></a> and <a href="http://trinker.github.io/qdap_dev/wfm_combine.html" target="_blank"><code>wfm_combine</code></a> can expand or combine terms within a word frequency matrix.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> Examples** <font size="5" color="orange">&diams;</font>
 
@@ -6655,7 +6655,7 @@ with(DATA, wfm(state2, list(sex, adult)))[1:18, ]
 ```
 
 
-At times it may be useful to view the correlation between word occurences between turns of talk or other useful groupings.  The user can utilize the output from <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> to accomplish this.
+At times it may be useful to view the correlation between word occurrences between turns of talk or other useful groupings.  The user can utilize the output from <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> to accomplish this.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>: Word Correlations** <font size="5" color="orange">&diams;</font>
 
@@ -6856,7 +6856,7 @@ chisq.test(out)
 
 <h5 id="tdm"><font color="green">Convert/Generate Term Document Matrix or Document Term Matrix</font></h5>
 
-Some packages that could further the analysis of qdap expect a Document Term or Term Docuement Matrix.  qdap's <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> is similar to the <a href="http://cran.r-project.org/web/packages/tm/index.html">tm packae's</a> <a href="http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix">TermDocumentMatrix</a>     and <a href="http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix">DocumentTermMatrix</a>.  qdap does not try to replicate the extensive work of the<a href="http://cran.r-project.org/web/packages/tm/index.html">tm</a> package, however, the <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> and <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>dtm</code></a> do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.
+Some packages that could further the analysis of qdap expect a Document Term or Term Document Matrix.  qdap's <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> is similar to the <a href="http://cran.r-project.org/web/packages/tm/index.html">tm package's</a> <a href="http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix">TermDocumentMatrix</a>     and <a href="http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix">DocumentTermMatrix</a>.  qdap does not try to replicate the extensive work of the<a href="http://cran.r-project.org/web/packages/tm/index.html">tm</a> package, however, the <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> and <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>dtm</code></a> do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> Use** <font size="5" color="orange">&diams;</font>
 
@@ -6953,7 +6953,7 @@ dtm(x)
 
 
 ```r
-## Run Latant Semantic Analysis
+## Run Latent Semantic Analysis
 library(lsa)
 lsa(tdm(x), dims=dimcalc_share())
 ```
@@ -7022,7 +7022,7 @@ attr(,"class")
 
 <h4 id="termco">Search For and Count Terms</h4>
 
-The <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> family of functions are some of the most useful qdap functions for quantative discourse analysis.  <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> searches for (an optionally groups) terms and outputs a raw count, percent, and combined (raw/percent) matrix of term counts by grouping variable.  The <a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a> <a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a> <a href="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank"><code>syn</code></a>, <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a>, and <a href="http://trinker.github.io/qdap_dev/spaste.html" target="_blank"><code>spaste</code></a> are complementary  functions that are useful in developing word lists to provide to the <b><font color="green" face="courier new">match.list</font></b>.  
+The <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> family of functions are some of the most useful qdap functions for quantitative discourse analysis.  <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> searches for (an optionally groups) terms and outputs a raw count, percent, and combined (raw/percent) matrix of term counts by grouping variable.  The <a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a> <a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a> <a href="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank"><code>syn</code></a>, <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a>, and <a href="http://trinker.github.io/qdap_dev/spaste.html" target="_blank"><code>spaste</code></a> are complementary  functions that are useful in developing word lists to provide to the <b><font color="green" face="courier new">match.list</font></b>.  
 
 The <b><font color="green" face="courier new">match.list</font></b> acts to search for similarly grouped <em>themes</em>.  For example <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font> may be a search for words associated with reading.  It is good practice to name the vectors of words that are stored in the <b><font color="green" face="courier new">match.list</font></b> .  This is the general form for how to set up a <b><font color="green" face="courier new">match.list</font></b>:
 
@@ -7036,7 +7036,7 @@ themes <- list(
 ```
 
 
-It is important to understand how the <b><font color="green" face="courier new">match.list</font></b> is handled by <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a>.  The <b><font color="green" face="courier new">match.list</font></b> is (optionally) case and character sensitive. Spacing is an important way to grab specific words and requires careful thought. For example using <font color="green">"read"</font> will find the words <font color="green">"bread"</font>, <font color="green">"read"</font>, <font color="green">"reading"</font>, and <font color="green">"ready"</font>. If you want to search for just the word <font color="purple">"read"</font> supply a vector of <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font>. Notice the leading and trailing spaces.  A space acts as a boundary where as starting/ending with a nonspace allows for greedy matching that will find words that contain this term.  A leading, trailing or both may be used to control how <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> searches for the supplied terms.  So the reader may ask why not supply one string spaced as <font color="green">" read"</font>?  Keep in mind that <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> would also find the word <font color="purple">"ready"</font>
+It is important to understand how the <b><font color="green" face="courier new">match.list</font></b> is handled by <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a>.  The <b><font color="green" face="courier new">match.list</font></b> is (optionally) case and character sensitive. Spacing is an important way to grab specific words and requires careful thought. For example using <font color="green">"read"</font> will find the words <font color="green">"bread"</font>, <font color="green">"read"</font>, <font color="green">"reading"</font>, and <font color="green">"ready"</font>. If you want to search for just the word <font color="purple">"read"</font> supply a vector of <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font>. Notice the leading and trailing spaces.  A space acts as a boundary whereas starting/ending with a nonspace allows for greedy matching that will find words that contain this term.  A leading, trailing or both may be used to control how <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> searches for the supplied terms.  So the reader may ask why not supply one string spaced as <font color="green">" read"</font>?  Keep in mind that <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> would also find the word <font color="purple">"ready"</font>
 
 This section's examples will first view the complementary  functions that augment the *themes* supplied to <b><font color="green" face="courier new">match.list</font></b> and then main <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> function will be explored.
 
@@ -7379,7 +7379,7 @@ with(dat2, termco(dialogue, person, match.list=ml))
 ```
 
 ```r
-## Search by person peopoerion output
+## Search by person proportion output
 with(dat2, termco(dialogue, person, match.list=ml, percent = FALSE))
 ```
 
@@ -7654,7 +7654,7 @@ termco(DATA$state, DATA$person, syns)
 ```
 
 
-<a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> also has a plot method that plots a heatmap of the <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> output based on the percent usage by grouping variable.  This allows for rapid visualizations of patterns and anables fast spotting of extreme values.  Here are some plots from the <a href="#rajex">Romeo and Juliet Act 1 Example</a> above.
+<a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> also has a plot method that plots a heat map of the <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> output based on the percent usage by grouping variable.  This allows for rapid visualizations of patterns and enables fast spotting of extreme values.  Here are some plots from the <a href="#rajex">Romeo and Juliet Act 1 Example</a> above.
 
 <font size="5" color="orange">&diams;</font> **Using <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> Plotting**<font size="5" color="orange">&diams;</font>
 
@@ -7750,7 +7750,7 @@ truncdf(x$raw, 15)
 ```
 
 
-<a href="http://trinker.github.io/qdap_dev/question_type.html" target="_blank"><code>question_type</code></a> also has a plot method that plots a heatmap of the output.  This allows for rapid visualizations of patterns and anables fast spotting of extreme values.
+<a href="http://trinker.github.io/qdap_dev/question_type.html" target="_blank"><code>question_type</code></a> also has a plot method that plots a heat map of the output.  This allows for rapid visualizations of patterns and enables fast spotting of extreme values.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/question_type.html" target="_blank"><code>question_type</code></a> - Plotting Method**<font size="5" color="orange">&diams;</font>
 
@@ -7770,7 +7770,7 @@ plot(x, label = TRUE, high = "red", low = "yellow", grid = NULL)
 ![plot of chunk unnamed-chunk-163](figure/unnamed-chunk-163.png) 
 
 
-Negative forms of questions such as <font color="green">Don't you want the robots to leave?</font> are, by defualt, grouped with with their equivalent positive <font color="green">Do</font> forms, such as <font color="green">Do you want the robots to leave?</font>.  The researcher may choose to keep the two forms separate using the argument <b><font color="green">neg.cont = TRUE</font>
+Negative forms of questions such as <font color="green">Don't you want the robots to leave?</font> are, by default, grouped with their equivalent positive <font color="green">Do</font> forms, such as <font color="green">Do you want the robots to leave?</font>.  The researcher may choose to keep the two forms separate using the argument <b><font color="green">neg.cont = TRUE</font>
 </b>
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/question_type.html" target="_blank"><code>question_type</code></a> - Include Negative Questions**<font size="5" color="orange">&diams;</font>
@@ -7835,7 +7835,7 @@ question_type(DATA.SPLIT2$state, DATA.SPLIT2$person, neg.cont = TRUE)
 5    teacher         1 1(100%)      0      0      0       0                   0
 </code></pre>
 
-It may be helpful to take the indices of the question types int the **x[["inds"]]** output or access **x[["raw"]][, "n.row"]**
+It may be helpful to access the indices of the question types in the **x[["inds"]]** output or access **x[["raw"]][, "n.row"]** for use with the **<a href="http://trinker.github.io/qdap_dev/trans_context.html" target="_blank"><code>trans_context</code></a>** function as seen below.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/question_type.html" target="_blank"><code>question_type</code></a> - Passing to <a href="http://trinker.github.io/qdap_dev/trans_context.html" target="_blank"><code>trans_context</code></a>**<font size="5" color="orange">&diams;</font>
 
@@ -8047,6 +8047,31 @@ tapply(DATA$state, DATA$person, wc, byrow=FALSE)
 ```
 
 
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>word_count</code></a> Plotting Centered Word Counts**<font size="5" color="orange">&diams;</font>
+
+
+```r
+## Scale variable 
+raj2 <- raj
+raj2$scaled <- unlist(tapply(wc(raj$dialogue), raj2$act, scale))
+raj2$scaled2 <- unlist(tapply(wc(raj$dialogue), raj2$act, scale, scale = FALSE))
+raj2$ID <- factor(unlist(tapply(raj2$act, raj2$act, seq_along)))
+
+## Plot with ggplot2
+library(ggplot2)
+
+ggplot(raj2, aes(x = ID, y = scaled, fill =person)) +
+    geom_bar(stat="identity") +
+    facet_grid(act~.) + 
+    ylab("Scaled") + xlab("Turn of Talk") +
+    guides(fill = guide_legend(nrow = 5, byrow = TRUE)) +
+    theme(legend.position="bottom") +
+    ggtitle("Scaled and Centered")
+```
+
+![plot of chunk unnamed-chunk-170](figure/unnamed-chunk-170.png) 
+
+
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>character_count</code></a> Examples**<font size="5" color="orange">&diams;</font>
 
 
@@ -8163,7 +8188,7 @@ colcomb2class(x, list(vowels = vowels, consonants = cons, other = 2:7))
 plot(x)
 ```
 
-![plot of chunk unnamed-chunk-172](figure/unnamed-chunk-172.png) 
+![plot of chunk unnamed-chunk-173](figure/unnamed-chunk-173.png) 
 
 
 
@@ -8171,7 +8196,7 @@ plot(x)
 plot(x, label = TRUE, high = "red", lab.digits = 1, zero.replace = "")
 ```
 
-![plot of chunk unnamed-chunk-173](figure/unnamed-chunk-173.png) 
+![plot of chunk unnamed-chunk-174](figure/unnamed-chunk-174.png) 
 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_count.html" target="_blank"><code>character_table</code></a> Additional Plotting**<font size="5" color="orange">&diams;</font>
@@ -8213,7 +8238,7 @@ ggplot(data = dat2, aes(y = variable, x = value, colour=sex)) +
     geom_point()
 ```
 
-![plot of chunk unnamed-chunk-175](figure/unnamed-chunk-175.png) 
+![plot of chunk unnamed-chunk-176](figure/unnamed-chunk-176.png) 
 
 
 
@@ -8224,7 +8249,7 @@ ggplot(data = dat2, aes(x = variable, y = value)) +
     theme(legend.position="none")
 ```
 
-![plot of chunk unnamed-chunk-176](figure/unnamed-chunk-176.png) 
+![plot of chunk unnamed-chunk-177](figure/unnamed-chunk-177.png) 
 
 
 <h4 id="freqtab">SPSS Style Frequency Tables</h4>
@@ -8240,17 +8265,17 @@ dist_tab(rnorm(10000), 10)
 ```
 
 ```
-##           interval Freq cum.Freq percent cum.percent
-## 1    (-3.86,-3.09]    9        9    0.09        0.09
-## 2    (-3.09,-2.31]   97      106    0.97        1.06
-## 3    (-2.31,-1.53]  509      615    5.09        6.15
-## 4   (-1.53,-0.752] 1638     2253   16.38       22.53
-## 5  (-0.752,0.0262] 2856     5109   28.56       51.09
-## 6   (0.0262,0.804] 2823     7932   28.23       79.32
-## 7     (0.804,1.58] 1539     9471   15.39       94.71
-## 8      (1.58,2.36]  423     9894    4.23       98.94
-## 9      (2.36,3.14]   95     9989    0.95       99.89
-## 10     (3.14,3.92]   11    10000    0.11      100.00
+##          interval Freq cum.Freq percent cum.percent
+## 1   (-4.37,-3.56]    2        2    0.02        0.02
+## 2   (-3.56,-2.75]   24       26    0.24        0.26
+## 3   (-2.75,-1.94]  220      246    2.20        2.46
+## 4   (-1.94,-1.13] 1052     1298   10.52       12.98
+## 5  (-1.13,-0.319] 2439     3737   24.39       37.37
+## 6  (-0.319,0.491] 3189     6926   31.89       69.26
+## 7     (0.491,1.3] 2143     9069   21.43       90.69
+## 8      (1.3,2.11]  785     9854    7.85       98.54
+## 9     (2.11,2.92]  129     9983    1.29       99.83
+## 10    (2.92,3.73]   17    10000    0.17      100.00
 ```
 
 ```r
@@ -8259,9 +8284,9 @@ dist_tab(sample(c("red", "blue", "gray"), 100, T), right = FALSE)
 
 ```
 ##   interval Freq cum.Freq percent cum.percent
-## 1     blue   34       34      34          34
-## 2     gray   31       65      31          65
-## 3      red   35      100      35         100
+## 1     blue   33       33      33          33
+## 2     gray   29       62      29          62
+## 3      red   38      100      38         100
 ```
 
 ```r
@@ -8361,7 +8386,7 @@ $n.char
 
 In some analysis of text the research may wish to gather information about parts of speech (POS).  The function <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos</code></a> and it's grouping variable counterpart, <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a>, can provide this functionality.  The <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos</code></a> functions are wrappers for POS related functions from the <a href="http://cran.r-project.org/web/packages/openNLP/index.html">openNLP</a> package.  The <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_tags</code></a> function provides a quick reference to what the POS tags utilized by <a href="http://cran.r-project.org/web/packages/openNLP/index.html">openNLP</a> mean.  For more information on the POS tags see the <a href="http://www.cis.upenn.edu/~treebank/">Penn Treebank Project</a>.
 
-The following examples utilize the <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a> function as the <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos</code></a> function is used identically, except without specifying a `grouping.var`.  It is important to realize that POS tagging is a very slow process.  The speed can be increased by using the <b><font  color="green" face="courier">parallel = TRUE</font></b> argument. Additionally, the user can recycle the output from one run of <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos</code></a>, <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a> or <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a> and use it interchangably between the <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a> and <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a> functions.  This reuses the POS tagging which is the time intensive part (and can be extracted via <b><font  color="green" face="courier">YOUR_OUTPUT_HERE[[&quot;POStagged&quot;]]</font></b> from any of the above objects).
+The following examples utilize the <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a> function as the <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos</code></a> function is used identically, except without specifying a `grouping.var`.  It is important to realize that POS tagging is a very slow process.  The speed can be increased by using the <b><font  color="green" face="courier">parallel = TRUE</font></b> argument. Additionally, the user can recycle the output from one run of <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos</code></a>, <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a> or <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a> and use it interchangeably between the <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a> and <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a> functions.  This reuses the POS tagging which is the time intensive part (and can be extracted via <b><font  color="green" face="courier">YOUR_OUTPUT_HERE[[&quot;POStagged&quot;]]</font></b> from any of the above objects).
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_tags</code></a>** - *Interpreting POS Tags*<font size="5" color="orange">&diams;</font>
 
@@ -8543,7 +8568,7 @@ $pos.by.rnp
 plot(posbydat, values = TRUE, digits = 2)
 ```
 
-![plot of chunk unnamed-chunk-183](figure/unnamed-chunk-183.png) 
+![plot of chunk unnamed-chunk-184](figure/unnamed-chunk-184.png) 
 
 
 
@@ -8693,11 +8718,11 @@ The following functions will be utilized in this section (click to view more):
 </form>
 </div>
 
-qdap offers a number of word statistics and and scores applied by grouping variable.  Some functions are original to qdap, while others are taken from academic papers.  Complete references for statistics/scores based on others' work are provided in the <a href="http://cran.r-project.org/web/packages/qdap/qdap.pdf">help manual</a> where appropriate.  It is assumed that the reader is familiar, or can become acquainted, with the theory and methods for qdap functions based on the work of others.  For qdap functions that are original to qdap a more robust description of the use and theory is provided.
+qdap offers a number of word statistics and scores applied by grouping variable.  Some functions are original to qdap, while others are taken from academic papers.  Complete references for statistics/scores based on others' work are provided in the <a href="http://cran.r-project.org/web/packages/qdap/qdap.pdf">help manual</a> where appropriate.  It is assumed that the reader is familiar, or can become acquainted, with the theory and methods for qdap functions based on the work of others.  For qdap functions that are original to qdap a more robust description of the use and theory is provided.
 
 <h4 id="readability">Readability Scores</h4>
 
-Readability scores were originally designed to measure the defficulty of text.  Scores are generally based on, number of words, syllables, polly-syllables amnd word length.  While these scores are not specifically designed for, or tested on, speech, they can be useful indicators of speech complexity.  The following score examples demonstrate the use of the following readability scores:
+Readability scores were originally designed to measure the difficulty of text.  Scores are generally based on, number of words, syllables, polly-syllables and word length.  While these scores are not specifically designed for, or tested on, speech, they can be useful indicators of speech complexity.  The following score examples demonstrate the use of the following readability scores:
 
 1. <a href="#ari">Automated Readability Index</a>    
 2. <a href="#coleman">Coleman Liau</a>    
@@ -8804,7 +8829,7 @@ with(rajSPLIT, fry(dialogue, list(sex, fam.aff)))
 
 
 
-![plot of chunk unnamed-chunk-191](figure/unnamed-chunk-191.png) 
+![plot of chunk unnamed-chunk-192](figure/unnamed-chunk-192.png) 
 
 
 
@@ -8841,7 +8866,7 @@ with(rajSPLIT, linsear_write(dialogue, person))
 
 <h4 id="dissimilarity">Dissimilarity</h4>
 
-*Dissimilarity* is another term for distance that is often used in text analysis to measure the pairwise proximity of grouping variables.  The qdap <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> function is a wrapper for the R stats package's <a href="http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html">dist</a> function designed to handle text.  <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> takes all the same <b><font color="green" face="courier new">method</font></b> types as <a href="http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html">dist</a> but also includes the defualt <b><font color="green" face="courier new">method = "prop"</font></b> (1 - "binary") that is focused on the similarity between grouping variables.
+*Dissimilarity* is another term for distance that is often used in text analysis to measure the pairwise proximity of grouping variables.  The qdap <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> function is a wrapper for the R stats package's <a href="http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html">dist</a> function designed to handle text.  <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> takes all the same <b><font color="green" face="courier new">method</font></b> types as <a href="http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html">dist</a> but also includes the default <b><font color="green" face="courier new">method = "prop"</font></b> (1 - "binary") that is focused on the similarity between grouping variables.
 
 <p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> Examples**<font size="5" color="orange">&diams;</font></p >
 
@@ -8907,21 +8932,21 @@ fit <- hclust(x)
 plot(fit)
 ```
 
-![plot of chunk unnamed-chunk-195](figure/unnamed-chunk-195.png) 
+![plot of chunk unnamed-chunk-196](figure/unnamed-chunk-196.png) 
 
 
 
 ```r
-## draw dendogram with red borders around the 3 clusters 
+## draw dendogram with colored borders around the 3 clusters 
 rect.hclust(fit, k=3, border=c("red", "purple", "seagreen"))
 ```
 
-![plot of chunk unnamed-chunk-196](figure/unnamed-chunk-196.png) 
+![plot of chunk unnamed-chunk-197](figure/unnamed-chunk-197.png) 
 
 
 <h4 id="kullback">Kullback-Leibler divergence </h4>
 
-The Kullback Leibler is often used as a measure of distance, though the matrix is assymetrical.  qdap's <a href="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank"><code>kullback_leibler</code></a> compares the differences between two probability distributions and often leads to results similar to those from <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a>.  Note that unlike many other qdap functions the user must either supply a word frequency matric (<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> and other functions that produce count matrices.
+The Kullback Leibler is often used as a measure of distance, though the matrix is asymmetrical.  qdap's <a href="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank"><code>kullback_leibler</code></a> compares the differences between two probability distributions and often leads to results similar to those from <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a>.  Note that unlike many other qdap functions the user must either supply a word frequency matric (<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> and other functions that produce count matrices.
 
 
 
@@ -8949,13 +8974,13 @@ ROMNEY.3   0.160   0.182   0.141    0.101    0.140    0.000
 plot(KL, high = "red", values = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-199](figure/unnamed-chunk-199.png) 
+![plot of chunk unnamed-chunk-200](figure/unnamed-chunk-200.png) 
 
 
 
 <h4 id="diversity">Diversity Statistics</h4>
 
-Diversity, as applied to dialogue, is a measure of the richness of language being used.  Specifically, it measures how expansive the vocabulary is while taking into account the number of total words used and the different words being used.  qdap's <a href="http://trinker.github.io/qdap_dev/diversity.html" target="_blank"><code>diversity</code></a> function provdes output for the Simpson, Shannon, Collision, Berger Parker, and Brillouin measures.
+Diversity, as applied to dialogue, is a measure of the richness of language being used.  Specifically, it measures how expansive the vocabulary is while taking into account the number of total words used and the different words being used.  qdap's <a href="http://trinker.github.io/qdap_dev/diversity.html" target="_blank"><code>diversity</code></a> function provides output for the Simpson, Shannon, Collision, Berger Parker, and Brillouin measures.
 
 <p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/diversity.html" target="_blank"><code>diversity</code></a> Example**<font size="5" color="orange">&diams;</font></p >
 
@@ -8995,12 +9020,12 @@ Diversity, as applied to dialogue, is a measure of the richness of language bein
 plot(div.mod, low = "yellow", grid = FALSE, values = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-201](figure/unnamed-chunk-201.png) 
+![plot of chunk unnamed-chunk-202](figure/unnamed-chunk-202.png) 
 
 
 <h4 id="formality">Formality</h4>
 
-Formality is how contextualize a person's labguage use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 199b, 2002).  Heylighen & Dewaele (2002) have developed a measur eof formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a>, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multipled by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
+Formality is how contextualize a person's language use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 199b, 2002).  Heylighen & Dewaele (2002) have developed a measure of formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a>, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multiplied by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
 <br><br>
 
 $$ F = 50(\frac{n_{f}-n_{c}}{N} + 1) $$
@@ -9013,7 +9038,7 @@ $$ c = \left \{pronoun, \;verb, \;adverb, \;interjection\right \} $$
 $$ N = \sum{(f \;+ \;c \;+ \;conjunctions)} $$
 <br>
 
-Note that formality utilize parts of speech tagging. T his is computationally expensive.  The user may gain speed by setting <b><font color="green" face="courier new">parallel = TRUE</font></b> if multiple cores are available.  The user can also "recycle" the output from <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos</code></a>, <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a>, or <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a> for the same text.  This save considerable time as the parts of speech is saved in the output from these functions as demonstrated in the <a href="#recform">Recycled Formality Example</a> below.
+Note that formality utilize parts of speech tagging. This is computationally expensive.  The user may gain speed by setting <b><font color="green" face="courier new">parallel = TRUE</font></b> if multiple cores are available.  The user can also "recycle" the output from <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos</code></a>, <a href="http://trinker.github.io/qdap_dev/pos.html" target="_blank"><code>pos_by</code></a>, or <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a> for the same text.  This save considerable time as the parts of speech is saved in the output from these functions as demonstrated in the <a href="#recform">Recycled Formality Example</a> below.
 
 <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a> also has a plotting method that allows for easy visualization and comparison of formality scores, word counts, formal/contextual parts of speech all by grouping variable(s).  Please note that Heylighen & Dewaele (2002) state, "At present, a sample would probably need to contain a few hundred words for the measure to be minimally reliable. For single sentences, the F-value should only be computed for purposes of illustration" (p. 24).  
 
@@ -9039,7 +9064,7 @@ form <- with(raj, formality(dialogue, person))
 plot(form)
 ```
 
-![plot of chunk unnamed-chunk-205](figure/unnamed-chunk-205.png) 
+![plot of chunk unnamed-chunk-206](figure/unnamed-chunk-206.png) 
 
 
 <p id="recform"><font size="5" color="orange">&diams;</font> **Recycling <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a>**<font size="5" color="orange">&diams;</font></p > 
@@ -9064,12 +9089,12 @@ plot(form)
 plot(form2, bar.colors=c("Set2", "RdBu"))
 ```
 
-![plot of chunk unnamed-chunk-207](figure/unnamed-chunk-207.png) 
+![plot of chunk unnamed-chunk-208](figure/unnamed-chunk-208.png) 
 
 
 <h4 id="polarity">Polarity Score (Sentiment Analysis)</h4>
 
-Polarity assignment, a form of sentiment analysis, is using an algorithm to detmine the polarity of a sentence/statement.  While the use polarity scores is applied to many forms of written social dialogue (e.g., Twitter, Facebook, etc.) it has not typically been applied to spoken dialogue.  qdap offers a flexible function, <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> to determine polarity at the sentence level as well as to assign an average polarity score to individual groups within the grouping variable(s).  The frame work for <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> is flexible in that the user may supply a polarized dictionary and optional weights.  Many dictionaries used in sentiment analysis are designed for written, adult, online interaction.  
+Polarity assignment, a form of sentiment analysis, is using an algorithm to determine the polarity of a sentence/statement.  While the use polarity scores is applied to many forms of written social dialogue (e.g., Twitter, Facebook, etc.) it has not typically been applied to spoken dialogue.  qdap offers a flexible function, <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> to determine polarity at the sentence level as well as to assign an average polarity score to individual groups within the grouping variable(s).  The frame work for <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> is flexible in that the user may supply a polarized dictionary and optional weights.  Many dictionaries used in sentiment analysis are designed for written, adult, online interaction.  
 
 <div class="middleDiv">
 <b><font size="4" color="red">It is assumed you have run <font face="courier">sentSplit</font> on the data.<br>If this is not the case the counts will not be accurate.</font></b>
@@ -9182,7 +9207,7 @@ htruncdf(poldat$all, 20, 10)
 plot(poldat)
 ```
 
-![plot of chunk unnamed-chunk-212](figure/unnamed-chunk-212.png) 
+![plot of chunk unnamed-chunk-213](figure/unnamed-chunk-213.png) 
 
 
 <p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> Plot Group Polarity as Heat Map**<font size="5" color="orange">&diams;</font></p >
@@ -9192,7 +9217,7 @@ plot(poldat)
 qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.polarity")
 ```
 
-![plot of chunk unnamed-chunk-213](figure/unnamed-chunk-213.png) 
+![plot of chunk unnamed-chunk-214](figure/unnamed-chunk-214.png) 
 
 
 <p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity_frame.html" target="_blank"><code>polarity_frame</code></a>** - *Specify Your Own Polarity Environment*<font size="5" color="orange">&diams;</font></p >
@@ -9203,7 +9228,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x12c690c4>
+<environment: 0x126a300c>
 ```
 
 ```r
@@ -9280,7 +9305,7 @@ Wordclouds can be a useful tool to help find words/phrases that are used frequen
 )
 </code></pre>
 
-The <b><font color="green" face="courier new">cloud.colors</font></b> argument takes a single color or a vector of colors 1 greater then the number of vectors of <b><font color="green" face="courier new">target.words</font></b>.  The order of <b><font color="green" face="courier new">cloud.colors</font></b> corresponds to the order of <b><font color="green" face="courier new">target.words</font></b> with the extra, final color being utilized for all words not matched to <b><font color="green" face="courier new">target.words</font></b>.
+The <b><font color="green" face="courier new">cloud.colors</font></b> argument takes a single color or a vector of colors 1 greater than the number of vectors of <b><font color="green" face="courier new">target.words</font></b>.  The order of <b><font color="green" face="courier new">cloud.colors</font></b> corresponds to the order of <b><font color="green" face="courier new">target.words</font></b> with the extra, final color being utilized for all words not matched to <b><font color="green" face="courier new">target.words</font></b>.
 
 
 <p id="transcloud1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank"><code>trans_cloud</code></a> Example 1**<font size="5" color="orange">&diams;</font></p >
@@ -9301,7 +9326,7 @@ with(DATA, trans_cloud(state, person, target.words=terms,
     "other")))
 ```
 
-![plot of chunk unnamed-chunk-216](figure/unnamed-chunk-2161.png) ![plot of chunk unnamed-chunk-216](figure/unnamed-chunk-2162.png) ![plot of chunk unnamed-chunk-216](figure/unnamed-chunk-2163.png) ![plot of chunk unnamed-chunk-216](figure/unnamed-chunk-2164.png) ![plot of chunk unnamed-chunk-216](figure/unnamed-chunk-2165.png) 
+![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-2171.png) ![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-2172.png) ![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-2173.png) ![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-2174.png) ![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-2175.png) 
 
 
 <p id="transcloud1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/trans_cloud.html" target="_blank"><code>trans_cloud</code></a> Example 2** - *Polarity*<font size="5" color="orange">&diams;</font></p >
@@ -9330,7 +9355,7 @@ with(DATA2, trans_cloud(state, person,
     expand.target=FALSE, proportional=TRUE, legend=names(tw)))
 ```
 
-![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-2171.png) ![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-2172.png) ![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-2173.png) ![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-2174.png) ![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-2175.png) 
+![plot of chunk unnamed-chunk-218](figure/unnamed-chunk-2181.png) ![plot of chunk unnamed-chunk-218](figure/unnamed-chunk-2182.png) ![plot of chunk unnamed-chunk-218](figure/unnamed-chunk-2183.png) ![plot of chunk unnamed-chunk-218](figure/unnamed-chunk-2184.png) ![plot of chunk unnamed-chunk-218](figure/unnamed-chunk-2185.png) 
 
 
 
@@ -9351,20 +9376,20 @@ gradient_cloud(DATA2$state, DATA2$sex, title="Lying Fun", max.word.size = 5,
     min.word.size = .025)
 ```
 
-![plot of chunk unnamed-chunk-219](figure/unnamed-chunk-2191.png) 
+![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2201.png) 
 
 ```r
 gradient_cloud(DATA2$state, DATA2$sex, title="Houghton Colors", 
     max.word.size = 8, min.word.size = .01, X ="purple" , Y = "yellow")
 ```
 
-![plot of chunk unnamed-chunk-219](figure/unnamed-chunk-2192.png) 
+![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-2202.png) 
 
 
 
 <h4 id="gantts">Gantt Plot</h4>
 
-Many of the plot methods utilized by other functions' classes are a wrapper for <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> or <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a>.  <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> wraps the <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a>, <a href="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank"><code>gantt_rep</code></a> and <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a> functions to allow for direct input of text dialogue and grouping variabes.  The <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> function is a fast way to make Gantt charts that can be faceted and filled by grouping variables.  A Gantt plot allows the user to find trends and patterns in dialogue across time.  It essentially allwos for a visual representation of an entire exchange of dialogue.  The following examples show the flexibility of <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>; many of these techniques can also be utilized in plot methids for qdap classes that utilize <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> and <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a>.  It is also prudant to be aware of <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a>, that is its arguments and how to utilize it, as it is less conveinent yet more flexible and powerful than <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>.
+Many of the plot methods utilized by other functions' classes are a wrapper for <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> or <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a>.  <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> wraps the <a href="http://trinker.github.io/qdap_dev/gantt.html" target="_blank"><code>gantt</code></a>, <a href="http://trinker.github.io/qdap_dev/gantt_rep.html" target="_blank"><code>gantt_rep</code></a> and <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a> functions to allow for direct input of text dialogue and grouping variables.  The <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> function is a fast way to make Gantt charts that can be faceted and filled by grouping variables.  A Gantt plot allows the user to find trends and patterns in dialogue across time.  It essentially allows for a visual representation of an entire exchange of dialogue.  The following examples show the flexibility of <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>; many of these techniques can also be utilized in plot methods for qdap classes that utilize <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> and <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a>.  It is also prudent to be aware of <a href="http://trinker.github.io/qdap_dev/gantt_wrap.html" target="_blank"><code>gantt_wrap</code></a>, that is its arguments and how to utilize it, as it is less convenient yet more flexible and powerful than <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>.
 
 <p id="ganttplot1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>** - *Single Time/Single Grouping Variable*<font size="5" color="orange">&diams;</font></p >
 
@@ -9374,7 +9399,7 @@ with(rajSPLIT, gantt_plot(text.var = dialogue,
     grouping.var = person, size=4))
 ```
 
-![plot of chunk unnamed-chunk-220](figure/unnamed-chunk-220.png) 
+![plot of chunk unnamed-chunk-221](figure/unnamed-chunk-221.png) 
 
 
 <p id="ganttplot2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>** - *Single Time/Multiple Grouping Variable*<font size="5" color="orange">&diams;</font></p >
@@ -9386,7 +9411,7 @@ with(rajSPLIT, gantt_plot(text.var = dialogue,
     title = "Romeo and Juliet's dialogue"))
 ```
 
-![plot of chunk unnamed-chunk-221](figure/unnamed-chunk-221.png) 
+![plot of chunk unnamed-chunk-222](figure/unnamed-chunk-222.png) 
 
 
 Sometimes the location of the facets may not be ideal to show the data (i.e., you may want to reverse the x and y axis).  By setting <b><font color="green" face="courier new">transform = TRUE</font></b> the user can make this switch.
@@ -9399,12 +9424,12 @@ with(rajSPLIT, gantt_plot(dialogue, list(fam.aff, sex), act,
     transform=T))
 ```
 
-![plot of chunk unnamed-chunk-222](figure/unnamed-chunk-222.png) 
+![plot of chunk unnamed-chunk-223](figure/unnamed-chunk-223.png) 
 
 
-Often the defualt colors are less useful in displaying the trends in a way that is most meaningful. Because <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> is a wrapper for ggplot2 the color palletes can easily be extended to use with the output from <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>.
+Often the default colors are less useful in displaying the trends in a way that is most meaningful. Because <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a> is a wrapper for ggplot2 the color pallettes can easily be extended to use with the output from <a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>.
 
-<p id="changecols"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>** - *Color Pallete Examples*<font size="5" color="orange">&diams;</font></p >
+<p id="changecols"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gantt_plot.html" target="_blank"><code>gantt_plot</code></a>** - *Color Pallette Examples*<font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -9421,25 +9446,25 @@ z <- with(rajSPLIT2, gantt_plot(dialogue, list(fam.aff, sex),
     list(act, newb), size = 4))
 ```
 
-![plot of chunk unnamed-chunk-223](figure/unnamed-chunk-2231.png) 
+![plot of chunk unnamed-chunk-224](figure/unnamed-chunk-2241.png) 
 
 ```r
 z + theme(panel.margin = unit(1, "lines")) + scale_colour_grey()
 ```
 
-![plot of chunk unnamed-chunk-223](figure/unnamed-chunk-2232.png) 
+![plot of chunk unnamed-chunk-224](figure/unnamed-chunk-2242.png) 
 
 ```r
 z + scale_colour_brewer(palette="Dark2")
 ```
 
-![plot of chunk unnamed-chunk-223](figure/unnamed-chunk-2233.png) 
+![plot of chunk unnamed-chunk-224](figure/unnamed-chunk-2243.png) 
 
 ```r
 z + scale_colour_manual(values=rep("black", 7))
 ```
 
-![plot of chunk unnamed-chunk-223](figure/unnamed-chunk-2234.png) 
+![plot of chunk unnamed-chunk-224](figure/unnamed-chunk-2244.png) 
 
 ```r
 ## vector of colors
@@ -9448,7 +9473,7 @@ cols <- c("black", "red", "blue", "yellow", "orange", "purple", "grey40")
 z + scale_colour_manual(values=cols)
 ```
 
-![plot of chunk unnamed-chunk-223](figure/unnamed-chunk-2235.png) 
+![plot of chunk unnamed-chunk-224](figure/unnamed-chunk-2245.png) 
 
 
 At times it may be useful to fill the bar colors by another grouping variable.  The <b><font color="green" face="courier new">fill.var</font></b> argument allows another coloring variable to be utilized.
@@ -9465,7 +9490,7 @@ with(dat, gantt_plot(text.var = dialogue, grouping.var = list(person, sex),
     fill.var=end_mark))
 ```
 
-![plot of chunk unnamed-chunk-224](figure/unnamed-chunk-224.png) 
+![plot of chunk unnamed-chunk-225](figure/unnamed-chunk-225.png) 
 
 
 
@@ -9482,12 +9507,12 @@ with(rajSPLIT2, gantt_plot(text.var = dialogue,
     fill.var=end_mark, title = "Romeo and Juliet's dialogue"))
 ```
 
-![plot of chunk unnamed-chunk-225](figure/unnamed-chunk-225.png) 
+![plot of chunk unnamed-chunk-226](figure/unnamed-chunk-226.png) 
 
 
 Be wary though of using coloring to show what faceting would show better.  Here is an example of faceting versus the color fill used in the <a href="#examp1">Fill Variable Example 1</a> above.
 
-<p id="gradient"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gradient_plot.html" target="_blank"><code>gradient_plot</code></a>** - *Facet Instead of Fill Varaible*<font size="5" color="orange">&diams;</font></p >
+<p id="gradient"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/gradient_plot.html" target="_blank"><code>gradient_plot</code></a>** - *Facet Instead of Fill Variable*<font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -9497,13 +9522,13 @@ with(rajSPLIT2, gantt_plot(text.var = dialogue,
     title = "Romeo and Juliet's dialogue"))
 ```
 
-![plot of chunk unnamed-chunk-226](figure/unnamed-chunk-226.png) 
+![plot of chunk unnamed-chunk-227](figure/unnamed-chunk-227.png) 
 
 
 
 <h4 id="heatmaps">Quick Heatmap</h4>
 
-Heatmaps are a powerful way to visualize patterns in matrices.  The gradient allows the user to quickly pick out high and low values.  <a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a> (quick heatmap) is a heatmap function that accepts matrices and dataframes and has some nice pre-sets that work well with the way qdap data is structured.  Two of these assumptions to be aware of is that dataframe is numeric with the exception of a single grouping variable column with the possiblity of additional non-numeric columns passed to  <b><font color="green" face="courier new">facet.vars</font></b>.  <a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a> also assumes that matrices are all numeric with row names serving as the grouping variable.  If passing a dataframe, <a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a> the grouping variable column is assumed to be the first column.
+Heatmaps are a powerful way to visualize patterns in matrices.  The gradient allows the user to quickly pick out high and low values.  <a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a> (quick heat map) is a heat map function that accepts matrices and dataframes and has some nice pre-sets that work well with the way qdap data is structured.  Two of these assumptions to be aware of is that dataframe is numeric with the exception of a single grouping variable column with the possibility of additional non-numeric columns passed to  <b><font color="green" face="courier new">facet.vars</font></b>.  <a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a> also assumes that matrices are all numeric with row names serving as the grouping variable.  If passing a dataframe, <a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a> the grouping variable column is assumed to be the first column.
 
 The following examples demonstrate various uses of <a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>.
 
@@ -9518,7 +9543,7 @@ ws.ob <- with(DATA.SPLIT, word_stats(state, list(sex, adult), tot=tot))
 qheat(ws.ob) 
 ```
 
-![plot of chunk unnamed-chunk-227](figure/unnamed-chunk-227.png) 
+![plot of chunk unnamed-chunk-228](figure/unnamed-chunk-228.png) 
 
 
 <p id="heat2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Color Group Labels Example*<font size="5" color="orange">&diams;</font></p >
@@ -9529,7 +9554,7 @@ qheat(ws.ob)
 qheat(ws.ob, xaxis.col = c("red", "black", "green", "blue"))
 ```
 
-![plot of chunk unnamed-chunk-228](figure/unnamed-chunk-228.png) 
+![plot of chunk unnamed-chunk-229](figure/unnamed-chunk-229.png) 
 
 
 <p id="heat3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Order By Numeric Variable Examples*<font size="5" color="orange">&diams;</font></p >
@@ -9540,14 +9565,14 @@ qheat(ws.ob, xaxis.col = c("red", "black", "green", "blue"))
 qheat(ws.ob, order.by = "sptot")
 ```
 
-![plot of chunk unnamed-chunk-229](figure/unnamed-chunk-2291.png) 
+![plot of chunk unnamed-chunk-230](figure/unnamed-chunk-2301.png) 
 
 ```r
 ## Reverse order by sptot
 qheat(ws.ob, order.by = "-sptot")
 ```
 
-![plot of chunk unnamed-chunk-229](figure/unnamed-chunk-2292.png) 
+![plot of chunk unnamed-chunk-230](figure/unnamed-chunk-2302.png) 
 
 
 <p id="heat4"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Cell Labels Examples*<font size="5" color="orange">&diams;</font></p >
@@ -9557,13 +9582,13 @@ qheat(ws.ob, order.by = "-sptot")
 qheat(ws.ob, values = TRUE)
 ```
 
-![plot of chunk unnamed-chunk-230](figure/unnamed-chunk-2301.png) 
+![plot of chunk unnamed-chunk-231](figure/unnamed-chunk-2311.png) 
 
 ```r
 qheat(ws.ob, values = TRUE, text.color = "red")
 ```
 
-![plot of chunk unnamed-chunk-230](figure/unnamed-chunk-2302.png) 
+![plot of chunk unnamed-chunk-231](figure/unnamed-chunk-2312.png) 
 
 
 <p id="heat5"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Custom Cell Labels Example*<font size="5" color="orange">&diams;</font></p >
@@ -9577,13 +9602,13 @@ dat2 <- data.frame(matrix(LETTERS[1:25], ncol=5))
 qheat(dat1, high = "orange", values=TRUE, text.color = "black")
 ```
 
-![plot of chunk unnamed-chunk-231](figure/unnamed-chunk-2311.png) 
+![plot of chunk unnamed-chunk-232](figure/unnamed-chunk-2321.png) 
 
 ```r
 qheat(dat1, high = "orange", values=TRUE, text.color = "black", mat2=dat2)
 ```
 
-![plot of chunk unnamed-chunk-231](figure/unnamed-chunk-2312.png) 
+![plot of chunk unnamed-chunk-232](figure/unnamed-chunk-2322.png) 
 
 
 <p id="heat6"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Grid Examples*<font size="5" color="orange">&diams;</font></p >
@@ -9593,13 +9618,13 @@ qheat(dat1, high = "orange", values=TRUE, text.color = "black", mat2=dat2)
 qheat(ws.ob, "yellow", "red", grid = FALSE)
 ```
 
-![plot of chunk unnamed-chunk-232](figure/unnamed-chunk-2321.png) 
+![plot of chunk unnamed-chunk-233](figure/unnamed-chunk-2331.png) 
 
 ```r
 qheat(ws.ob, high = "red", grid = "black")
 ```
 
-![plot of chunk unnamed-chunk-232](figure/unnamed-chunk-2322.png) 
+![plot of chunk unnamed-chunk-233](figure/unnamed-chunk-2332.png) 
 
 
 <p id="heat7"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Facet Examples*<font size="5" color="orange">&diams;</font></p >
@@ -9609,13 +9634,13 @@ qheat(ws.ob, high = "red", grid = "black")
 qheat(mtcars, facet.vars = "cyl")
 ```
 
-![plot of chunk unnamed-chunk-233](figure/unnamed-chunk-2331.png) 
+![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2341.png) 
 
 ```r
 qheat(mtcars, facet.vars = c("gear", "cyl"))
 ```
 
-![plot of chunk unnamed-chunk-233](figure/unnamed-chunk-2332.png) 
+![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2342.png) 
 
 
 <p id="heat8"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Transposing Examples*<font size="5" color="orange">&diams;</font></p >
@@ -9625,32 +9650,34 @@ qheat(mtcars, facet.vars = c("gear", "cyl"))
 qheat(t(mtcars), by.column=FALSE)
 ```
 
-![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2341.png) 
+![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-2351.png) 
 
 ```r
 qheat(mtcars, plot = FALSE) + coord_flip()
 ```
 
-![plot of chunk unnamed-chunk-234](figure/unnamed-chunk-2342.png) 
+![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-2352.png) 
 
 
-When plotting a correlation/distance matrix set diag.na = TRUE to keep these extreme values from effecting the scaling.
+When plotting a correlation/distance matrix set <b><font color="green" face="courier new">diag.na = TRUE</font></b> to keep these extreme values from effecting the scaling.
 
 <p id="heat9"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/qheat.html" target="_blank"><code>qheat</code></a>** - *Correlation Matrix Examples*<font size="5" color="orange">&diams;</font></p >
 
 
 ```r
-qheat(cor(mtcars), diag.na=TRUE)
+qheat(cor(mtcars), diag.na=TRUE, by.row = NULL)
 ```
 
-![plot of chunk unnamed-chunk-235](figure/unnamed-chunk-235.png) 
+```
+## Error: unused argument (by.row = NULL)
+```
 
 
 <h4 id="rankfreq">Rank Frequency Plot</h4>
 
 Rank Frequency Plots are a way of visualizing word rank versus frequencies as related to Zipf's law which states that the rank of a word is inversely related to its frequency.  The <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> and <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> provide the means to plot the ranks and frequencies of words (with <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> plotting by grouping variable(s)).  
 
-<a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> utilizes the ggplot2 package, whereas, <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> employs base graphics. <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> is more general, flexible, and takes text/grouping variables directly; in most cases <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> should be prefered (though <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> will render quicker).  The <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> family of functions also outputs a list of rank/frequency dataframes used plot the visuals and other related descriptive statistics.
+<a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> utilizes the ggplot2 package, whereas, <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> employs base graphics. <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> is more general, flexible, and takes text/grouping variables directly; in most cases <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> should be preferred (though <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> will render quicker).  The <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a> family of functions also outputs a list of rank/frequency dataframes used plot the visuals and other related descriptive statistics.
 
 <p id="rank1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a>**<font size="5" color="orange">&diams;</font></p >
 
@@ -9661,7 +9688,7 @@ x2 <- rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
     hap.col = "purple")
 ```
 
-![plot of chunk unnamed-chunk-236](figure/unnamed-chunk-2361.png) 
+![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-2371.png) 
 
 ```r
 ## View output
@@ -9715,20 +9742,20 @@ invisible(rank_freq_mplot(mraja1spl$dialogue, mraja1spl$person, ncol = 5,
     log.freq = FALSE, log.rank = FALSE, jitter = .6,  hap.col = "purple"))
 ```
 
-![plot of chunk unnamed-chunk-236](figure/unnamed-chunk-2362.png) 
+![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-2372.png) 
 
 
-<p id="rank2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a>** - *Using alpga*<font size="5" color="orange">&diams;</font></p >
+<p id="rank2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_mplot</code></a>** - *Using alpha*<font size="5" color="orange">&diams;</font></p >
 
 
 ```r
 invisible(rank_freq_mplot(raj$dialogue, jitter = .5, shape = 19, alpha = 1/15))
 ```
 
-![plot of chunk unnamed-chunk-237](figure/unnamed-chunk-237.png) 
+![plot of chunk unnamed-chunk-238](figure/unnamed-chunk-238.png) 
 
 
-The <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> plots more quickly but does not handle multiple groups and roes not take text/grouping variables directly.
+The <a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> plots more quickly but does not handle multiple groups and does not take text/grouping variables directly.
 
 <p id="rank3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/rank_freq_mplot.html" target="_blank"><code>rank_freq_plot</code></a> Example** <font size="5" color="orange">&diams;</font></p >
 
@@ -9743,7 +9770,7 @@ x3 <- rank_freq_plot(mod$fwl$Romeo$WORD, mod$fwl$Romeo$FREQ,
     title.ext = 'Romeo')
 ```
 
-![plot of chunk unnamed-chunk-238](figure/unnamed-chunk-238.png) 
+![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-239.png) 
 
 ```r
 ## View output
@@ -9787,7 +9814,7 @@ ltruncdf(x3, 10)
 
 <h4 id="totplot">Visualize Word Length by Turn of Talk</h4>
 
-It is often useful to view the lengths of turns of talk as a barplot, particularly id the bars are colored by grouping variable.  The <a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a> function plots dialogue as a bar plot with the option to color by grouping variables and facet by repreated measure variables.  This can enable the entire dialogue to be viewed in a succint way, possibly leading the researcher to see patterns that may have otherwises escaped attention.  
+It is often useful to view the lengths of turns of talk as a bar plot, particularly if the bars are colored by grouping variable.  The <a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a> function plots dialogue as a bar plot with the option to color by grouping variables and facet by repeated measure variables.  This can enable the entire dialogue to be viewed in a succinct way, possibly leading the researcher to see patterns that may have otherwise escaped attention.  
 
 Within the <a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a> function the turn of talk argument (<b><font color="green" face="courier new">tot</font></b>) may be the <b>"tot"</b> column from <a href="http://trinker.github.io/qdap_dev/sentSplit.html" target="_blank"><code>sentSplit</code></a> output (<b><font color="green" face="courier new">tot = TRUE</font></b>), the row numbers (<b><font color="green" face="courier new">tot = FALSE</font></b>), the character name of a column (<b><font color="green" face="courier new">tot = "COLUMN NAME"</font></b>), or a separate numeric/character vector equal in length to the <b><font color="green" face="courier new">text.var</font></b>.  
 
@@ -9799,21 +9826,21 @@ dataframe <- sentSplit(DATA, "state")
 tot_plot(dataframe, text.var = "state")
 ```
 
-![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-2391.png) 
+![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2401.png) 
 
 ```r
 ## Change space between bars
 tot_plot(dataframe, text.var = "state", bar.space = .03)
 ```
 
-![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-2392.png) 
+![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2402.png) 
 
 ```r
 ## Color bars by grouping variable(s)
 tot_plot(dataframe, text.var = "state", grouping.var = "sex")
 ```
 
-![plot of chunk unnamed-chunk-239](figure/unnamed-chunk-2393.png) 
+![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2403.png) 
 
 
 
@@ -9822,14 +9849,14 @@ tot_plot(dataframe, text.var = "state", grouping.var = "sex")
 tot_plot(mraja1, "dialogue", grouping.var = "fam.aff", tot = FALSE)
 ```
 
-![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2401.png) 
+![plot of chunk unnamed-chunk-241](figure/unnamed-chunk-2411.png) 
 
 ```r
 ## Use rownames as tot: color by death
 tot_plot(mraja1, "dialogue", grouping.var = "died", tot = FALSE)
 ```
 
-![plot of chunk unnamed-chunk-240](figure/unnamed-chunk-2402.png) 
+![plot of chunk unnamed-chunk-241](figure/unnamed-chunk-2412.png) 
 
 
 
@@ -9841,10 +9868,10 @@ rajSPLIT2 <- do.call(rbind, lapply(split(rajSPLIT, rajSPLIT$act), head, 25))
 tot_plot(rajSPLIT2, "dialogue", grouping.var = "fam.aff", facet.var = "act")
 ```
 
-![plot of chunk unnamed-chunk-241](figure/unnamed-chunk-241.png) 
+![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-242.png) 
 
 
-Because <a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a> is based on the <a href="http://docs.ggplot2.org/current/">ggplot2 package</a> (Wickham, 2009) and <a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a> invisibly returns the ggplot2 object, the output (of the class "ggplot") can be altered in the same way that anu other ggplot2 object can be.  In the following examples the color pallete is altered.
+Because <a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a> is based on the <a href="http://docs.ggplot2.org/current/">ggplot2 package</a> (Wickham, 2009) and <a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a> invisibly returns the ggplot2 object, the output (of the class "ggplot") can be altered in the same way that another ggplot2 object can be.  In the following examples the color pallette is altered.
 
 <p id="tot3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a>** - *Alter Colors* <font size="5" color="orange">&diams;</font></p >
 
@@ -9854,21 +9881,21 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE) +
     scale_fill_hue(l=40)
 ```
 
-![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-2421.png) 
+![plot of chunk unnamed-chunk-243](figure/unnamed-chunk-2431.png) 
 
 ```r
 tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Spectral")
 ```
 
-![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-2422.png) 
+![plot of chunk unnamed-chunk-243](figure/unnamed-chunk-2432.png) 
 
 ```r
 tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Set1")
 ```
 
-![plot of chunk unnamed-chunk-242](figure/unnamed-chunk-2423.png) 
+![plot of chunk unnamed-chunk-243](figure/unnamed-chunk-2433.png) 
 
 
 <p id="tot3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a>** - *Add Mean +2/+3 sd* <font size="5" color="orange">&diams;</font></p >
@@ -9888,16 +9915,16 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
         y = mean(word.count) + (3 *sd(word.count)) + 2, label = "+3 sd")) 
 ```
 
-![plot of chunk unnamed-chunk-243](figure/unnamed-chunk-243.png) 
+![plot of chunk unnamed-chunk-244](figure/unnamed-chunk-244.png) 
 
 
 <h4 id="venn">Venn Diagram</h4>
 
-The Venn diagram can be a useful way to visualize similarty between grouping variables with respect to word use when the number of groups is relatively small.  The <a href="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank"><code>trans_venn</code></a> function wraps the <a href="http://cran.r-project.org/web/packages/venneuler/index.html">venneuler</a> package to produce Venn diagrams.  The user must keep in mind that producing this output is computationally slow, thus consideration must be given with regard to data size and number of groups when using <a href="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank"><code>trans_venn</code></a> to avoid overplotting and lengthly plot production.  The use of the <b><font color="green" face="courier new">stopwords</font></b> argument can also be useful to reduce the overlp of common words between grouping variables.
+The Venn diagram can be a useful way to visualize similarity between grouping variables with respect to word use when the number of groups is relatively small.  The <a href="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank"><code>trans_venn</code></a> function wraps the <a href="http://cran.r-project.org/web/packages/venneuler/index.html">venneuler</a> package to produce Venn diagrams.  The user must keep in mind that producing this output is computationally slow, thus consideration must be given with regard to data size and number of groups when using <a href="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank"><code>trans_venn</code></a> to avoid over plotting and lengthy plot production.  The use of the <b><font color="green" face="courier new">stopwords</font></b> argument can also be useful to reduce the overlap of common words between grouping variables.
 
 If a data set is larger the user may want to consider representing the data as a <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> matrix or as an adjacency matrix that can be plotted with the <a href="http://cran.r-project.org/web/packages/igraph/index.html">igraph package</a> as seen in the <a href="#plotadj2">presidential examples above</a>.
 
-In the following example the reader will notice the centers of the circles (i.e., the person labels) are very similar to the positioning (the distances between nodes) of the same data in the <a href="#plotadj">adjaceny matrix plot</a> of the same data above.
+In the following example the reader will notice the centers of the circles (i.e., the person labels) are very similar to the positioning (the distances between nodes) of the same data in the <a href="#plotadj">adjacency matrix plot</a> of the same data above.
 
 
 
@@ -9905,7 +9932,7 @@ In the following example the reader will notice the centers of the circles (i.e.
 with(DATA , trans_venn(state, person, legend.location = "topright"))
 ```
 
-![plot of chunk unnamed-chunk-244](figure/unnamed-chunk-244.png) 
+![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-245.png) 
 
 
 
@@ -9918,7 +9945,7 @@ with(DATA , trans_venn(state, person, legend.location = "topright"))
 word_network_plot(text.var=DATA$state, stopwords=NULL, label.cex = .95)
 ```
 
-![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-245.png) 
+![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-246.png) 
 
 
 <p id="wordnet1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between People* <font size="5" color="orange">&diams;</font></p >
@@ -9928,13 +9955,13 @@ word_network_plot(text.var=DATA$state, stopwords=NULL, label.cex = .95)
 word_network_plot(text.var=DATA$state, DATA$person)
 ```
 
-![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-2461.png) 
+![plot of chunk unnamed-chunk-247](figure/unnamed-chunk-2471.png) 
 
 ```r
 word_network_plot(text.var=DATA$state, DATA$person, stopwords=NULL)
 ```
 
-![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-2462.png) 
+![plot of chunk unnamed-chunk-247](figure/unnamed-chunk-2472.png) 
 
 
 <p id="wordnet2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between sex and adult* <font size="5" color="orange">&diams;</font></p >
@@ -9945,7 +9972,7 @@ word_network_plot(text.var=DATA$state, grouping.var=list(DATA$sex,
     DATA$adult))
 ```
 
-![plot of chunk unnamed-chunk-247](figure/unnamed-chunk-247.png) 
+![plot of chunk unnamed-chunk-248](figure/unnamed-chunk-248.png) 
 
 
 <p id="wordnet3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *`log.labels`* <font size="5" color="orange">&diams;</font></p >
@@ -9956,7 +9983,7 @@ word_network_plot(text.var=DATA$state, grouping.var=DATA$person,
     title.name = "TITLE", log.labels=TRUE, label.size = .9)
 ```
 
-![plot of chunk unnamed-chunk-248](figure/unnamed-chunk-248.png) 
+![plot of chunk unnamed-chunk-249](figure/unnamed-chunk-249.png) 
 
 
 
@@ -10180,7 +10207,7 @@ For more see <a href="http://www.r-statistics.com/2012/08/how-to-load-the-rjava-
 <hr>
 ## Acknowledgements
 
-The qdap package was my first R package and a learning process. Several people contributed immensely to my learning. I'd like to particularly thank <a href="https://github.com/Dasonk/" target="_blank">Dason Kurkiewicz</a> for his constant mentoring/assistance in learning the R language, GitHub and package development as well as collaboration on numerous qdap functions. Thank you to <a href="https://twitter.com/bryangoodrich" target="_blank">Bryan Goodrich</a> for his teaching, feedback and collaboration on serveral qdap functions. Thank you to <a href="https://github.com/hadley" target="_blank">Dr. Hadley Wickham</a> for roxygen2, ggplot2, devtools and GitHub repos which I referenced often. I'd also like to thank the many folks at <a href="http://www.talkstats.com/" target="_blank">talkstats.com</a> and <a href="http://stackoverflow.com/questions/tagged/r" target="_blank">stackoverflow.com</a> for their help in answering many R questions related to qdap.
+The qdap package was my first R package and a learning process. Several people contributed immensely to my learning. I'd like to particularly thank <a href="https://github.com/Dasonk/" target="_blank">Dason Kurkiewicz</a> for his constant mentoring/assistance in learning the R language, GitHub and package development as well as collaboration on numerous qdap functions. Thank you to <a href="https://twitter.com/bryangoodrich" target="_blank">Bryan Goodrich</a> for his teaching, feedback and collaboration on several qdap functions. Thank you to <a href="https://github.com/hadley" target="_blank">Dr. Hadley Wickham</a> for roxygen2, ggplot2, devtools and GitHub repos which I referenced often. I'd also like to thank the many folks at <a href="http://www.talkstats.com/" target="_blank">talkstats.com</a> and <a href="http://stackoverflow.com/questions/tagged/r" target="_blank">stackoverflow.com</a> for their help in answering many R questions related to qdap.
 
 <hr> 
 
