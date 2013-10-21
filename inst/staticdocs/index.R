@@ -164,6 +164,7 @@ list(
     sd_section("Visualization", 
       "Plotting functions.",
       c(
+        "dispersion_plot",
         "gradient_cloud",
         "gantt_plot",
         "gantt_wrap",

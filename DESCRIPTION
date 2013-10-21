@@ -212,3 +212,4 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
+    'dispersion_plot.R'

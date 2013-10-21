@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 19.70 19.70 15.00 22.40 15.00 15.00 15.79 22.40 25.34 15.00 22.40
-## [12] 25.34 22.40 22.40 22.40 16.30 22.40 25.34 15.79 15.79
+##  [1] 15.79 16.30 15.79 25.34 19.70 25.34 15.00 22.40 15.79 19.70 15.79
+## [12] 22.40 15.00 22.40 16.30 15.00 15.00 19.70 15.79 19.70
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 19.70 19.70 15.00 22.40 15.00 15.00 15.79 22.40 25.34 15.00 22.40
-## [12] 25.34 22.40 22.40 22.40 16.30 22.40 25.34 15.79 15.79
+##  [1] 15.79 16.30 15.79 25.34 19.70 25.34 15.00 22.40 15.79 19.70 15.79
+## [12] 22.40 15.00 22.40 16.30 15.00 15.00 19.70 15.79 19.70
 ```
 
 
@@ -9133,7 +9133,7 @@ $$
 
 The following examples demonstrate how the <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> and <a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity_frame</code></a> functions operate.  Here the polarity for the <a href="http://trinker.github.io/qdap_dev/mraja1spl.html" target="_blank"><code>mraja1spl</code></a> data set (Act 1 of Romeo and Juliet).  The gender, family affiliation and binary died/didn't die are used as the grouping variables.
 
-<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> Example**<font size="5" color="orange">&diams;</font></p >
+<p id="polarity1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> Example**<font size="5" color="orange">&diams;</font></p >
 
 
 
@@ -9169,7 +9169,7 @@ names(poldat)
 ```
 
 
-<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a>** - *Sentence Level Polarity Scores*<font size="5" color="orange">&diams;</font></p >
+<p id="polarity2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a>** - *Sentence Level Polarity Scores*<font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -9201,7 +9201,7 @@ htruncdf(poldat$all, 20, 10)
 ```
 
 
-<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> Plot Method**<font size="5" color="orange">&diams;</font></p >
+<p id="polarity3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> Plot Method**<font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -9211,7 +9211,7 @@ plot(poldat)
 ![plot of chunk unnamed-chunk-213](figure/unnamed-chunk-213.png) 
 
 
-<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> Plot Group Polarity as Heat Map**<font size="5" color="orange">&diams;</font></p >
+<p id="polarity4"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity.html" target="_blank"><code>polarity</code></a> Plot Group Polarity as Heat Map**<font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -9221,7 +9221,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ![plot of chunk unnamed-chunk-214](figure/unnamed-chunk-214.png) 
 
 
-<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity_frame.html" target="_blank"><code>polarity_frame</code></a>** - *Specify Your Own Polarity Environment*<font size="5" color="orange">&diams;</font></p >
+<p id="polarity5"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/polarity_frame.html" target="_blank"><code>polarity_frame</code></a>** - *Specify Your Own Polarity Environment*<font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -9229,7 +9229,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x106c0500>
+<environment: 0x133d0a0c>
 ```
 
 ```r
@@ -9250,6 +9250,10 @@ ls(POLENV)[1:20]
 
 <div class="funs">
 The following functions will be utilized in this section (click to view more): <br>   
+
+<form action="http://trinker.github.io/qdap_dev/dispersion_plot.html" target="_blank">
+    <input type="submit" value="dispersion_plot"> - <a href="#dispersion">Lexical Dispersion Plot</a>
+</form>
 
 <form class="form_left" action="http://trinker.github.io/qdap_dev/gradient_cloud.html" target="_blank">
     <input type="submit" value="gradient_cloud"> 
@@ -9289,6 +9293,8 @@ qdap offers a number of plot methods for various outputs from functions (use <b>
 
 
 
+
+<h4 id="dispersion">Lexical Dispersion Plot</h4>
 
 <h4 id="wordclouds">Word Clouds</h4>
 

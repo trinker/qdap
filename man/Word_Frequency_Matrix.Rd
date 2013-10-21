@@ -17,7 +17,7 @@
   wfm_combine(wf.obj, word.lists, matrix = TRUE)
 }
 \arguments{
-  \item{text.var}{The text variable}
+  \item{text.var}{The text variable.}
 
   \item{grouping.var}{The grouping variables.  Default
   \code{NULL} generates one word list for all text.  Also

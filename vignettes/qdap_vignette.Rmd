@@ -4059,7 +4059,7 @@ $$
 
 The following examples demonstrate how the `r FUN("polarity")` and `r FUN("polarity_frame", "polarity")` functions operate.  Here the polarity for the `r FUN("mraja1spl")` data set (Act 1 of Romeo and Juliet).  The gender, family affiliation and binary died/didn't die are used as the grouping variables.
 
-<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity")` Example**`r FT(orange, 5, text="&diams;")`</p >
+<p id="polarity1">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity")` Example**`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, echo = FALSE, include=FALSE}
 poldat <- readRDS("data/polarity.example.rds")
@@ -4090,25 +4090,25 @@ poldat <- readRDS("data/polarity.example.rds")
 names(poldat)
 ```
 
-<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity")`** - *Sentence Level Polarity Scores*`r FT(orange, 5, text="&diams;")`</p >
+<p id="polarity2">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity")`** - *Sentence Level Polarity Scores*`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r}
 htruncdf(poldat$all, 20, 10)
 ```
 
-<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity")` Plot Method**`r FT(orange, 5, text="&diams;")`</p >
+<p id="polarity3">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity")` Plot Method**`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 15, fig.height = 11}
 plot(poldat)
 ```
 
-<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity")` Plot Group Polarity as Heat Map**`r FT(orange, 5, text="&diams;")`</p >
+<p id="polarity4">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity")` Plot Group Polarity as Heat Map**`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.height=4}
 qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.polarity")
 ```
 
-<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity_frame")`** - *Specify Your Own Polarity Environment*`r FT(orange, 5, text="&diams;")`</p >
+<p id="polarity5">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity_frame")`** - *Specify Your Own Polarity Environment*`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, comment=NA}
 (POLENV <- polarity_frame(positive.words, negative.words))
@@ -4120,6 +4120,10 @@ ls(POLENV)[1:20]
 
 <div class="funs">
 The following functions will be utilized in this section (click to view more): <br>   
+
+<form action="http://trinker.github.io/qdap_dev/dispersion_plot.html" target="_blank">
+    <input type="submit" value="dispersion_plot"> - `r HR("#dispersion", "Lexical Dispersion Plot")`
+</form>
 
 <form class="form_left" action="http://trinker.github.io/qdap_dev/gradient_cloud.html" target="_blank">
     <input type="submit" value="gradient_cloud"> 
@@ -4160,6 +4164,8 @@ qdap offers a number of plot methods for various outputs from functions (use <b>
 ```{r, include = FALSE}
 citep(bib["Wickham2009"])
 ```
+
+<h4 id="dispersion">Lexical Dispersion Plot</h4>
 
 <h4 id="wordclouds">Word Clouds</h4>
 
