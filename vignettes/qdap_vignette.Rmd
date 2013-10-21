@@ -53,9 +53,9 @@ The following vignette is a loose chronological road map for utilizing the tools
 <div>11.  `r HR("#visualization", "Visualizing Discourse Data")`    </div> 
 <div>12.  `r HR("#id", "ID Sentences")`    </div> 
 <div>13.  `r HR("#data", "Data Sets")`    </div> 
-<div>14.  `r HR("#dict", "Dictionaries and Word Lists")`    </div> 
-<div>15.  `r HR("#install", "Installation Issues")`    </div> 
-
+<div>14.  `r HR("#dict", "Dictionaries and Word Lists")`    </div>   
+<div>15.  `r HR("#install", "Installation Issues")`    </div>     
+<div>16.  `r HR("#connect", "Recommended Packages (Extending qdap)")`    </div>   
 
 </ul>
 </div>
@@ -1287,7 +1287,7 @@ gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
 
 <h4 id="adj">Create Adjacency Matrix</h4>
 
-It is useful to convert data to an adjacency matrix for examining relationships between grouping variables in word usage.  The `r FUN("adjaceny_matrix")` (aka: `r FUN("adjmat")`) provide this capability, interacting with a `r FUN("termco")` or `r FUN("wfm")` object.  In the first example below Sam and Greg share 4 words in common, whereas, the Teacher and Greg share no words.  The adjacency matrix can be passed to a network graphing package such as the `r HR2("http://igraph.sourceforge.net/", "igraph")` package for visualization of the data structure as seen in Example 3.
+It is useful to convert data to an adjacency matrix for examining relationships between grouping variables in word usage.  The `r FUN("adjaceny_matrix")` (aka: `r FUN("adjmat")`) provide this capability, interacting with a `r FUN("termco")` or `r FUN("wfm", "Word_Frequency_Matrix")` object.  In the first example below Sam and Greg share 4 words in common, whereas, the Teacher and Greg share no words.  The adjacency matrix can be passed to a network graphing package such as the `r HR2("http://igraph.sourceforge.net/", "igraph")` package for visualization of the data structure as seen in Example 3.
 
 
 `r FT(orange, 5, text="&diams;")` **Adjacency Matrix**: *Example 1*`r FT(orange, 5, text="&diams;")`
@@ -2745,7 +2745,7 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="spaste"> - `r HR("#termco", "Search For and Count Terms")`
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/wfm.html" target="_blank">
+<form action="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank">
     <input type="submit" value="wfm"><input type="submit" value="wfdf"><input type="submit" value="wf_combine"><input type="submit" value="wfm_expanded"> - `r HR("#wfm", "Word Frequency Matrix")`
 </form>
 
@@ -2863,9 +2863,9 @@ with(mraja1spl, word_stats(desc_wrds, list(sex, fam.aff, died), tot = tot))
 
 <h4 id="wfm">Word Frequency Matrix</h4>
 
-Many analyses with words involve a matrix based on the words.  qdap uses a *word frequency matrix* (`r FUN("wfm")`) or the less malleable dataframe version, *word frequency dataframe* (`r FUN("wfdf")`).  The `r FUN("wfm")` is a count of word usages per grouping variable(s).  This is a similar concept to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package's")` Term Document Matrix, though instead of documents we are interested in the grouping variable's usage of terms.  `r FUN("wfm")` is the general function that should be used, however, the `r FUN("wfdf")` function does provide options for margin sums (row and column).  Also note that the `r FUN("wfm_expanded")` and `r FUN("wfm_combine")` can expand or combine terms within a word frequency matrix.
+Many analyses with words involve a matrix based on the words.  qdap uses a *word frequency matrix* (`r FUN("wfm", "Word_Frequency_Matrix")`) or the less malleable dataframe version, *word frequency dataframe* (`r FUN("wfdf", "Word_Frequency_Matrix")`).  The `r FUN("wfm", "Word_Frequency_Matrix")` is a count of word usages per grouping variable(s).  This is a similar concept to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package's")` Term Document Matrix, though instead of documents we are interested in the grouping variable's usage of terms.  `r FUN("wfm", "Word_Frequency_Matrix")` is the general function that should be used, however, the `r FUN("wfdf", "Word_Frequency_Matrix")` function does provide options for margin sums (row and column).  Also note that the `r FUN("wfm_expanded", "Word_Frequency_Matrix")` and `r FUN("wfm_combine", "Word_Frequency_Matrix")` can expand or combine terms within a word frequency matrix.
 
-`r FT(orange, 5, text="&diams;")` **`r FUN("wfm")` Examples** `r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **`r FUN("wfm", "Word_Frequency_Matrix")` Examples** `r FT(orange, 5, text="&diams;")`
 
 ```{r}
 ## By a single grouping variable
@@ -2874,7 +2874,7 @@ with(DATA, wfm(state, person))[1:15, ]
 with(DATA, wfm(state, list(sex, adult)))[1:15, ]
 ```
 
-`r FT(orange, 5, text="&diams;")` **`r FUN("wfm")`: Keep Two Word Phrase as a Single Term** `r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **`r FUN("wfm", "Word_Frequency_Matrix")`: Keep Two Word Phrase as a Single Term** `r FT(orange, 5, text="&diams;")`
 
 ```{r}
 ## insert double tilde ("~~") to keep phrases(e. g., first last name)
@@ -2883,9 +2883,9 @@ state2 <- space_fill(DATA$state, space_keeps, rm.extra = FALSE)
 with(DATA, wfm(state2, list(sex, adult)))[1:18, ]
 ```
 
-At times it may be useful to view the correlation between word occurrences between turns of talk or other useful groupings.  The user can utilize the output from `r FUN("wfm")` to accomplish this.
+At times it may be useful to view the correlation between word occurrences between turns of talk or other useful groupings.  The user can utilize the output from `r FUN("wfm", "Word_Frequency_Matrix")` to accomplish this.
 
-`r FT(orange, 5, text="&diams;")` **`r FUN("wfm")`: Word Correlations** `r FT(orange, 5, text="&diams;")`
+<p id="corr">`r FT(orange, 5, text="&diams;")` **`r FUN("wfm", "Word_Frequency_Matrix")`: Word Correlations** `r FT(orange, 5, text="&diams;")`</p>
 
 ```{r, include = FALSE}
 dat <- readRDS("data/wfmcor.rds")
@@ -2909,14 +2909,14 @@ qheat(cor(t(dat2)), low = "yellow", high = "red",
 ```
 
 
-`r FT(orange, 5, text="&diams;")` **`r FUN("wfdf")` Examples**: *Add Margins* `r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **`r FUN("wfdf", "Word_Frequency_Matrix")` Examples**: *Add Margins* `r FT(orange, 5, text="&diams;")`
 
 ```{r}
 with(DATA, wfdf(state, person, margins = TRUE))[c(1:15, 41:42), ]
 with(DATA, wfdf(state, list(sex, adult), margins = TRUE))[c(1:15, 41:42), ]
 ```
 
-`r FT(orange, 5, text="&diams;")` **`r FUN("wfm_expanded")`: Expand the wfm** `r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **`r FUN("wfm_expanded", "Word_Frequency_Matrix")`: Expand the wfm** `r FT(orange, 5, text="&diams;")`
 
 ```{r}
 ## Start with a word frequency matrix
@@ -2927,7 +2927,7 @@ z[30:41, ]
 wfm_expanded(z)[33:45, ] 
 ```
 
-`r FT(orange, 5, text="&diams;")` **`r FUN("wfm_combine")`: Combine Terms in the wfm** `r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **`r FUN("wfm_combine", "Word_Frequency_Matrix")`: Combine Terms in the wfm** `r FT(orange, 5, text="&diams;")`
 
 ```{r}
 ## Start with a word frequency matrix
@@ -2948,7 +2948,7 @@ chisq.test(out)
 
 <h5 id="tdm"><font color="green">Convert/Generate Term Document Matrix or Document Term Matrix</font></h5>
 
-Some packages that could further the analysis of qdap expect a Document Term or Term Document Matrix.  qdap's `r FUN("wfm")` is similar to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package's")` `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "TermDocumentMatrix")`     and `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "DocumentTermMatrix")`.  qdap does not try to replicate the extensive work of the`r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm")` package, however, the `r FUN("tdm")` and `r FUN("dtm", "tdm")` do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.
+Some packages that could further the analysis of qdap expect a Document Term or Term Document Matrix.  qdap's `r FUN("wfm", "Word_Frequency_Matrix")` is similar to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package's")` `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "TermDocumentMatrix")`     and `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "DocumentTermMatrix")`.  qdap does not try to replicate the extensive work of the`r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm")` package, however, the `r FUN("tdm")` and `r FUN("dtm", "tdm")` do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("tdm")` Use** `r FT(orange, 5, text="&diams;")`
 
@@ -3030,7 +3030,7 @@ attr(,"class")
 
 <h4 id="termco">Search For and Count Terms</h4>
 
-The `r FUN("termco")` family of functions are some of the most useful qdap functions for quantitative discourse analysis.  `r FUN("termco")` searches for (an optionally groups) terms and outputs a raw count, percent, and combined (raw/percent) matrix of term counts by grouping variable.  The `r FUN("term_match")` `r FUN("all_words")` `r FUN("syn", "synonyms")`, `r FUN("exclude")`, and `r FUN("spaste")` are complementary  functions that are useful in developing word lists to provide to the <b><font color="green" face="courier new">match.list</font></b>.  
+The `r FUN("termco")` family of functions are some of the most useful qdap functions for quantitative discourse analysis.  `r FUN("termco")` searches for (an optionally groups) terms and outputs a raw count, percent, and combined (raw/percent) matrix of term counts by grouping variable.  The `r FUN("term_match", "termco")` `r FUN("all_words")` `r FUN("syn", "synonyms")`, `r FUN("exclude")`, and `r FUN("spaste")` are complementary  functions that are useful in developing word lists to provide to the <b><font color="green" face="courier new">match.list</font></b>.  
 
 The <b><font color="green" face="courier new">match.list</font></b> acts to search for similarly grouped <em>themes</em>.  For example <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font> may be a search for words associated with reading.  It is good practice to name the vectors of words that are stored in the <b><font color="green" face="courier new">match.list</font></b> .  This is the general form for how to set up a <b><font color="green" face="courier new">match.list</font></b>:
 
@@ -3047,9 +3047,9 @@ It is important to understand how the <b><font color="green" face="courier new">
 This section's examples will first view the complementary  functions that augment the *themes* supplied to <b><font color="green" face="courier new">match.list</font></b> and then main `r FUN("termco")` function will be explored.
 
 
-`r FUN("term_match")` looks through a text variable (usually the text found in the transcript) and finds/returns a vector of words containing a term(s).
+`r FUN("term_match", "termco")` looks through a text variable (usually the text found in the transcript) and finds/returns a vector of words containing a term(s).
 
-`r FT(orange, 5, text="&diams;")` **`r FUN("term_match")` and  `r FUN("exclude")` Examples**`r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **`r FUN("term_match", "termco")` and  `r FUN("exclude")` Examples**`r FT(orange, 5, text="&diams;")`
 
 ```{r}
 term_match(text.var = DATA$state, terms = qcv(the, trust), return.list = FALSE)
@@ -3057,7 +3057,7 @@ term_match(DATA$state, "i", FALSE)
 exclude(term_match(DATA$state, "i", FALSE), talking, telling)
 ```
 
-`r FUN("all_words")` is similar to `r FUN("term_match")`, however, the function looks at all the words found in a text variable (usually the transcript text) and returns words that begin with or contain the term(s).  The output can be arrange alphabetically or by frequency.  The output is a dataframe which helps the researcher to make decisions with regard to frequency of word use. 
+`r FUN("all_words")` is similar to `r FUN("term_match", "termco")`, however, the function looks at all the words found in a text variable (usually the transcript text) and returns words that begin with or contain the term(s).  The output can be arrange alphabetically or by frequency.  The output is a dataframe which helps the researcher to make decisions with regard to frequency of word use. 
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("all_words")` Examples**`r FT(orange, 5, text="&diams;")`
 
@@ -3127,7 +3127,7 @@ out$raw
 out$prop
 ```
 
-`r FT(orange, 5, text="&diams;")` **Using `r FUN("termco")` with `r FUN("term_match")` and `r FUN("exclude")`**`r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **Using `r FUN("termco")` with `r FUN("term_match", "termco")` and `r FUN("exclude")`**`r FT(orange, 5, text="&diams;")`
 
 ```{r}
 ## Example 1
@@ -3404,15 +3404,16 @@ raj2$scaled2 <- unlist(tapply(wc(raj$dialogue), raj2$act, scale, scale = FALSE))
 raj2$ID <- factor(unlist(tapply(raj2$act, raj2$act, seq_along)))
 
 ## Plot with ggplot2
-library(ggplot2)
+library(ggplot2); library(grid)
 
 ggplot(raj2, aes(x = ID, y = scaled, fill =person)) +
-    geom_bar(stat="identity") +
+    geom_bar(stat="identity", position="identity") +
     facet_grid(act~.) + 
-    ylab("Scaled") + xlab("Turn of Talk") +
+    ylab("Standard Deviations") + xlab("Turns of Talk") +
     guides(fill = guide_legend(nrow = 5, byrow = TRUE)) +
-    theme(legend.position="bottom") +
-    ggtitle("Scaled and Centered")
+    theme(legend.position="bottom", legend.key.size = unit(.35, "cm"), 
+        axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
+    ggtitle("Standardized Word Counts\nPer Turn of Talk")
 ```
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("character_count", "word_count")` Examples**`r FT(orange, 5, text="&diams;")`
@@ -3922,7 +3923,7 @@ rect.hclust(fit, k=3, border=c("red", "purple", "seagreen"))
 
 <h4 id="kullback">Kullback-Leibler divergence </h4>
 
-The Kullback Leibler is often used as a measure of distance, though the matrix is asymmetrical.  qdap's `r FUN("kullback_leibler")` compares the differences between two probability distributions and often leads to results similar to those from `r FUN("dissimilarity")`.  Note that unlike many other qdap functions the user must either supply a word frequency matric (`r FUN("wfm")`) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with `r FUN("termco")` and other functions that produce count matrices.
+The Kullback Leibler is often used as a measure of distance, though the matrix is asymmetrical.  qdap's `r FUN("kullback_leibler")` compares the differences between two probability distributions and often leads to results similar to those from `r FUN("dissimilarity")`.  Note that unlike many other qdap functions the user must either supply a word frequency matric (`r FUN("wfm", "Word_Frequency_Matrix")`) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with `r FUN("termco")` and other functions that produce count matrices.
 
 ```{r include = FALSE}
 dat <- pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY),]
@@ -4529,27 +4530,29 @@ with(DATA , trans_venn(state, person, legend.location = "topright"))
 
 <h4 id="wordnet">Word Network Plot</h4>
 
-<p id="venn1">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between Turns of Talk: All Words* `r FT(orange, 5, text="&diams;")`</p >
+Veiwing connections between words within grouping variables (particularly turns of talk) are a useful means of examining what words are connected together.  For example, this may be useful to a researcher who is looking at particular vocabulary usage by a teacher.  The researcher may wish to know what other terms are supporting/supported by/connected to the terms of interest.  `r FUN("word_network_plot")` a wrapper for the `r HR2("http://igraph.sourceforge.net/", "igraph")` package.  This approach may be used on concert with `r HR("#corr", "correlations between words")`.  Not that terms could also be combined via the `r FUN("wfm_combine", "Word_Frequency_Matrix")` before running a correlation in order to represent the clustering of words that `r FUN("word_network_plot")` handles. Further analysis of the word correlations can be tested via boostrapping of the attained correlation against a random correlation. It is worth noting that the `r FUN("word_associate")` function is a wrapper for `r FUN("word_network_plot")` (for mor see `r HR("#assoc", "this example")` above).
+
+<p id="wordnet1">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between Turns of Talk: All Words* `r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 9, fig.height = 9}
 word_network_plot(text.var=DATA$state, stopwords=NULL, label.cex = .95)
 ```
 
-<p id="wordnet1">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between People* `r FT(orange, 5, text="&diams;")`</p >
+<p id="wordnet2">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between People* `r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 9, fig.height = 9}
 word_network_plot(text.var=DATA$state, DATA$person)
 word_network_plot(text.var=DATA$state, DATA$person, stopwords=NULL)
 ```
 
-<p id="wordnet2">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between sex and adult* `r FT(orange, 5, text="&diams;")`</p >
+<p id="wordnet3">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between sex and adult* `r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 9, fig.height = 9}
 word_network_plot(text.var=DATA$state, grouping.var=list(DATA$sex,
     DATA$adult))
 ```
 
-<p id="wordnet3">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *`log.labels`* `r FT(orange, 5, text="&diams;")`</p >
+<p id="wordnet4">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *`log.labels`* `r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 9, fig.height = 9}
 word_network_plot(text.var=DATA$state, grouping.var=DATA$person,
@@ -4802,6 +4805,11 @@ The following dictionaries/word lists are utilized by qdap (click to view more)
 <p>If there is a discrepancy between the <a href="https://dl.dropbox.com/u/61803503/rjava_warning.txt">R and Java architectures</a> you will have to <a href="http://www.java.com/en/download/manual.jsp">download</a> the appropriate version of Java compatible with the version of R you're using.    
 
 For more see <a href="http://www.r-statistics.com/2012/08/how-to-load-the-rjava-package-after-the-error-java_home-cannot-be-determined-from-the-registry/" target="_blank">Tal Galili's blog post</a> regarding rJava issues.
+
+
+<h3 id="connect">Recommended Packages (Extending qdap)</h3>
+
+
 
 
 <hr>

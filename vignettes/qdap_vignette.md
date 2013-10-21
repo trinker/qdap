@@ -39,9 +39,9 @@ The following vignette is a loose chronological road map for utilizing the tools
 <div>11.  <a href="#visualization">Visualizing Discourse Data</a>    </div> 
 <div>12.  <a href="#id">ID Sentences</a>    </div> 
 <div>13.  <a href="#data">Data Sets</a>    </div> 
-<div>14.  <a href="#dict">Dictionaries and Word Lists</a>    </div> 
-<div>15.  <a href="#install">Installation Issues</a>    </div> 
-
+<div>14.  <a href="#dict">Dictionaries and Word Lists</a>    </div>   
+<div>15.  <a href="#install">Installation Issues</a>    </div>     
+<div>16.  <a href="#connect">Recommended Packages (Extending qdap)</a>    </div>   
 
 </ul>
 </div>
@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 15.00 19.70 15.79 16.30 22.40 19.70 16.30 25.34 15.00 22.40
-## [12] 16.30 16.30 15.00 16.30 19.70 15.00 15.00 22.40 15.79
+##  [1] 19.70 19.70 15.00 22.40 15.00 15.00 15.79 22.40 25.34 15.00 22.40
+## [12] 25.34 22.40 22.40 22.40 16.30 22.40 25.34 15.79 15.79
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 15.00 19.70 15.79 16.30 22.40 19.70 16.30 25.34 15.00 22.40
-## [12] 16.30 16.30 15.00 16.30 19.70 15.00 15.00 22.40 15.79
+##  [1] 19.70 19.70 15.00 22.40 15.00 15.00 15.79 22.40 25.34 15.00 22.40
+## [12] 25.34 22.40 22.40 22.40 16.30 22.40 25.34 15.79 15.79
 ```
 
 
@@ -3228,7 +3228,7 @@ gantt_wrap(dat2, "fam.aff_sex", facet.vars = "act",
 
 <h4 id="adj">Create Adjacency Matrix</h4>
 
-It is useful to convert data to an adjacency matrix for examining relationships between grouping variables in word usage.  The <a href="http://trinker.github.io/qdap_dev/adjaceny_matrix.html" target="_blank"><code>adjaceny_matrix</code></a> (aka: <a href="http://trinker.github.io/qdap_dev/adjmat.html" target="_blank"><code>adjmat</code></a>) provide this capability, interacting with a <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> or <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> object.  In the first example below Sam and Greg share 4 words in common, whereas, the Teacher and Greg share no words.  The adjacency matrix can be passed to a network graphing package such as the <a href="http://igraph.sourceforge.net/" target="_blank">igraph</a> package for visualization of the data structure as seen in Example 3.
+It is useful to convert data to an adjacency matrix for examining relationships between grouping variables in word usage.  The <a href="http://trinker.github.io/qdap_dev/adjaceny_matrix.html" target="_blank"><code>adjaceny_matrix</code></a> (aka: <a href="http://trinker.github.io/qdap_dev/adjmat.html" target="_blank"><code>adjmat</code></a>) provide this capability, interacting with a <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> or <a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a> object.  In the first example below Sam and Greg share 4 words in common, whereas, the Teacher and Greg share no words.  The adjacency matrix can be passed to a network graphing package such as the <a href="http://igraph.sourceforge.net/" target="_blank">igraph</a> package for visualization of the data structure as seen in Example 3.
 
 
 <font size="5" color="orange">&diams;</font> **Adjacency Matrix**: *Example 1*<font size="5" color="orange">&diams;</font>
@@ -6366,7 +6366,7 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="spaste"> - <a href="#termco">Search For and Count Terms</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/wfm.html" target="_blank">
+<form action="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank">
     <input type="submit" value="wfm"><input type="submit" value="wfdf"><input type="submit" value="wf_combine"><input type="submit" value="wfm_expanded"> - <a href="#wfm">Word Frequency Matrix</a>
 </form>
 
@@ -6568,9 +6568,9 @@ with(mraja1spl, word_stats(desc_wrds, list(sex, fam.aff, died), tot = tot))
 
 <h4 id="wfm">Word Frequency Matrix</h4>
 
-Many analyses with words involve a matrix based on the words.  qdap uses a *word frequency matrix* (<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>) or the less malleable dataframe version, *word frequency dataframe* (<a href="http://trinker.github.io/qdap_dev/wfdf.html" target="_blank"><code>wfdf</code></a>).  The <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> is a count of word usages per grouping variable(s).  This is a similar concept to the <a href="http://cran.r-project.org/web/packages/tm/index.html">tm package's</a> Term Document Matrix, though instead of documents we are interested in the grouping variable's usage of terms.  <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> is the general function that should be used, however, the <a href="http://trinker.github.io/qdap_dev/wfdf.html" target="_blank"><code>wfdf</code></a> function does provide options for margin sums (row and column).  Also note that the <a href="http://trinker.github.io/qdap_dev/wfm_expanded.html" target="_blank"><code>wfm_expanded</code></a> and <a href="http://trinker.github.io/qdap_dev/wfm_combine.html" target="_blank"><code>wfm_combine</code></a> can expand or combine terms within a word frequency matrix.
+Many analyses with words involve a matrix based on the words.  qdap uses a *word frequency matrix* (<a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a>) or the less malleable dataframe version, *word frequency dataframe* (<a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfdf</code></a>).  The <a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a> is a count of word usages per grouping variable(s).  This is a similar concept to the <a href="http://cran.r-project.org/web/packages/tm/index.html">tm package's</a> Term Document Matrix, though instead of documents we are interested in the grouping variable's usage of terms.  <a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a> is the general function that should be used, however, the <a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfdf</code></a> function does provide options for margin sums (row and column).  Also note that the <a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm_expanded</code></a> and <a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm_combine</code></a> can expand or combine terms within a word frequency matrix.
 
-<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> Examples** <font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a> Examples** <font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -6622,7 +6622,7 @@ with(DATA, wfm(state, list(sex, adult)))[1:15, ]
 ```
 
 
-<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>: Keep Two Word Phrase as a Single Term** <font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a>: Keep Two Word Phrase as a Single Term** <font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -6655,9 +6655,9 @@ with(DATA, wfm(state2, list(sex, adult)))[1:18, ]
 ```
 
 
-At times it may be useful to view the correlation between word occurrences between turns of talk or other useful groupings.  The user can utilize the output from <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> to accomplish this.
+At times it may be useful to view the correlation between word occurrences between turns of talk or other useful groupings.  The user can utilize the output from <a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a> to accomplish this.
 
-<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>: Word Correlations** <font size="5" color="orange">&diams;</font>
+<p id="corr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a>: Word Correlations** <font size="5" color="orange">&diams;</font></p>
 
 
 
@@ -6712,7 +6712,7 @@ qheat(cor(t(dat2)), low = "yellow", high = "red",
 
 
 
-<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/wfdf.html" target="_blank"><code>wfdf</code></a> Examples**: *Add Margins* <font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfdf</code></a> Examples**: *Add Margins* <font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -6766,7 +6766,7 @@ with(DATA, wfdf(state, list(sex, adult), margins = TRUE))[c(1:15, 41:42), ]
 ```
 
 
-<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/wfm_expanded.html" target="_blank"><code>wfm_expanded</code></a>: Expand the wfm** <font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm_expanded</code></a>: Expand the wfm** <font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -6815,7 +6815,7 @@ wfm_expanded(z)[33:45, ]
 ```
 
 
-<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/wfm_combine.html" target="_blank"><code>wfm_combine</code></a>: Combine Terms in the wfm** <font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm_combine</code></a>: Combine Terms in the wfm** <font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -6856,7 +6856,7 @@ chisq.test(out)
 
 <h5 id="tdm"><font color="green">Convert/Generate Term Document Matrix or Document Term Matrix</font></h5>
 
-Some packages that could further the analysis of qdap expect a Document Term or Term Document Matrix.  qdap's <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> is similar to the <a href="http://cran.r-project.org/web/packages/tm/index.html">tm package's</a> <a href="http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix">TermDocumentMatrix</a>     and <a href="http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix">DocumentTermMatrix</a>.  qdap does not try to replicate the extensive work of the<a href="http://cran.r-project.org/web/packages/tm/index.html">tm</a> package, however, the <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> and <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>dtm</code></a> do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.
+Some packages that could further the analysis of qdap expect a Document Term or Term Document Matrix.  qdap's <a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a> is similar to the <a href="http://cran.r-project.org/web/packages/tm/index.html">tm package's</a> <a href="http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix">TermDocumentMatrix</a>     and <a href="http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix">DocumentTermMatrix</a>.  qdap does not try to replicate the extensive work of the<a href="http://cran.r-project.org/web/packages/tm/index.html">tm</a> package, however, the <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> and <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>dtm</code></a> do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> Use** <font size="5" color="orange">&diams;</font>
 
@@ -7022,7 +7022,7 @@ attr(,"class")
 
 <h4 id="termco">Search For and Count Terms</h4>
 
-The <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> family of functions are some of the most useful qdap functions for quantitative discourse analysis.  <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> searches for (an optionally groups) terms and outputs a raw count, percent, and combined (raw/percent) matrix of term counts by grouping variable.  The <a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a> <a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a> <a href="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank"><code>syn</code></a>, <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a>, and <a href="http://trinker.github.io/qdap_dev/spaste.html" target="_blank"><code>spaste</code></a> are complementary  functions that are useful in developing word lists to provide to the <b><font color="green" face="courier new">match.list</font></b>.  
+The <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> family of functions are some of the most useful qdap functions for quantitative discourse analysis.  <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> searches for (an optionally groups) terms and outputs a raw count, percent, and combined (raw/percent) matrix of term counts by grouping variable.  The <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>term_match</code></a> <a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a> <a href="http://trinker.github.io/qdap_dev/synonyms.html" target="_blank"><code>syn</code></a>, <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a>, and <a href="http://trinker.github.io/qdap_dev/spaste.html" target="_blank"><code>spaste</code></a> are complementary  functions that are useful in developing word lists to provide to the <b><font color="green" face="courier new">match.list</font></b>.  
 
 The <b><font color="green" face="courier new">match.list</font></b> acts to search for similarly grouped <em>themes</em>.  For example <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font> may be a search for words associated with reading.  It is good practice to name the vectors of words that are stored in the <b><font color="green" face="courier new">match.list</font></b> .  This is the general form for how to set up a <b><font color="green" face="courier new">match.list</font></b>:
 
@@ -7041,9 +7041,9 @@ It is important to understand how the <b><font color="green" face="courier new">
 This section's examples will first view the complementary  functions that augment the *themes* supplied to <b><font color="green" face="courier new">match.list</font></b> and then main <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> function will be explored.
 
 
-<a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a> looks through a text variable (usually the text found in the transcript) and finds/returns a vector of words containing a term(s).
+<a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>term_match</code></a> looks through a text variable (usually the text found in the transcript) and finds/returns a vector of words containing a term(s).
 
-<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a> and  <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a> Examples**<font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>term_match</code></a> and  <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a> Examples**<font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -7073,7 +7073,7 @@ exclude(term_match(DATA$state, "i", FALSE), talking, telling)
 ```
 
 
-<a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a> is similar to <a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a>, however, the function looks at all the words found in a text variable (usually the transcript text) and returns words that begin with or contain the term(s).  The output can be arrange alphabetically or by frequency.  The output is a dataframe which helps the researcher to make decisions with regard to frequency of word use. 
+<a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a> is similar to <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>term_match</code></a>, however, the function looks at all the words found in a text variable (usually the transcript text) and returns words that begin with or contain the term(s).  The output can be arrange alphabetically or by frequency.  The output is a dataframe which helps the researcher to make decisions with regard to frequency of word use. 
 
 <font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/all_words.html" target="_blank"><code>all_words</code></a> Examples**<font size="5" color="orange">&diams;</font>
 
@@ -7529,7 +7529,7 @@ out$prop
 ```
 
 
-<font size="5" color="orange">&diams;</font> **Using <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> with <a href="http://trinker.github.io/qdap_dev/term_match.html" target="_blank"><code>term_match</code></a> and <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a>**<font size="5" color="orange">&diams;</font>
+<font size="5" color="orange">&diams;</font> **Using <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> with <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>term_match</code></a> and <a href="http://trinker.github.io/qdap_dev/exclude.html" target="_blank"><code>exclude</code></a>**<font size="5" color="orange">&diams;</font>
 
 
 ```r
@@ -8058,15 +8058,16 @@ raj2$scaled2 <- unlist(tapply(wc(raj$dialogue), raj2$act, scale, scale = FALSE))
 raj2$ID <- factor(unlist(tapply(raj2$act, raj2$act, seq_along)))
 
 ## Plot with ggplot2
-library(ggplot2)
+library(ggplot2); library(grid)
 
 ggplot(raj2, aes(x = ID, y = scaled, fill =person)) +
-    geom_bar(stat="identity") +
+    geom_bar(stat="identity", position="identity") +
     facet_grid(act~.) + 
-    ylab("Scaled") + xlab("Turn of Talk") +
+    ylab("Standard Deviations") + xlab("Turns of Talk") +
     guides(fill = guide_legend(nrow = 5, byrow = TRUE)) +
-    theme(legend.position="bottom") +
-    ggtitle("Scaled and Centered")
+    theme(legend.position="bottom", legend.key.size = unit(.35, "cm"), 
+        axis.text.x = element_blank(), axis.ticks.x = element_blank()) +
+    ggtitle("Standardized Word Counts\nPer Turn of Talk")
 ```
 
 ![plot of chunk unnamed-chunk-170](figure/unnamed-chunk-170.png) 
@@ -8946,7 +8947,7 @@ rect.hclust(fit, k=3, border=c("red", "purple", "seagreen"))
 
 <h4 id="kullback">Kullback-Leibler divergence </h4>
 
-The Kullback Leibler is often used as a measure of distance, though the matrix is asymmetrical.  qdap's <a href="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank"><code>kullback_leibler</code></a> compares the differences between two probability distributions and often leads to results similar to those from <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a>.  Note that unlike many other qdap functions the user must either supply a word frequency matric (<a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a>) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> and other functions that produce count matrices.
+The Kullback Leibler is often used as a measure of distance, though the matrix is asymmetrical.  qdap's <a href="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank"><code>kullback_leibler</code></a> compares the differences between two probability distributions and often leads to results similar to those from <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a>.  Note that unlike many other qdap functions the user must either supply a word frequency matric (<a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a>) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> and other functions that produce count matrices.
 
 
 
@@ -9228,7 +9229,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x12bffedc>
+<environment: 0x106c0500>
 ```
 
 ```r
@@ -9936,7 +9937,9 @@ with(DATA , trans_venn(state, person, legend.location = "topright"))
 
 <h4 id="wordnet">Word Network Plot</h4>
 
-<p id="venn1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between Turns of Talk: All Words* <font size="5" color="orange">&diams;</font></p >
+Veiwing connections between words within grouping variables (particularly turns of talk) are a useful means of examining what words are connected together.  For example, this may be useful to a researcher who is looking at particular vocabulary usage by a teacher.  The researcher may wish to know what other terms are supporting/supported by/connected to the terms of interest.  <a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a> a wrapper for the <a href="http://igraph.sourceforge.net/" target="_blank">igraph</a> package.  This approach may be used on concert with <a href="#corr">correlations between words</a>.  Not that terms could also be combined via the <a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm_combine</code></a> before running a correlation in order to represent the clustering of words that <a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a> handles. Further analysis of the word correlations can be tested via boostrapping of the attained correlation against a random correlation. It is worth noting that the <a href="http://trinker.github.io/qdap_dev/word_associate.html" target="_blank"><code>word_associate</code></a> function is a wrapper for <a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a> (for mor see <a href="#assoc">this example</a> above).
+
+<p id="wordnet1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between Turns of Talk: All Words* <font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -9946,7 +9949,7 @@ word_network_plot(text.var=DATA$state, stopwords=NULL, label.cex = .95)
 ![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-246.png) 
 
 
-<p id="wordnet1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between People* <font size="5" color="orange">&diams;</font></p >
+<p id="wordnet2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between People* <font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -9962,7 +9965,7 @@ word_network_plot(text.var=DATA$state, DATA$person, stopwords=NULL)
 ![plot of chunk unnamed-chunk-247](figure/unnamed-chunk-2472.png) 
 
 
-<p id="wordnet2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between sex and adult* <font size="5" color="orange">&diams;</font></p >
+<p id="wordnet3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *Between sex and adult* <font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -9973,7 +9976,7 @@ word_network_plot(text.var=DATA$state, grouping.var=list(DATA$sex,
 ![plot of chunk unnamed-chunk-248](figure/unnamed-chunk-248.png) 
 
 
-<p id="wordnet3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *`log.labels`* <font size="5" color="orange">&diams;</font></p >
+<p id="wordnet4"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_network_plot.html" target="_blank"><code>word_network_plot</code></a>** - *`log.labels`* <font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -10200,6 +10203,11 @@ The following dictionaries/word lists are utilized by qdap (click to view more)
 <p>If there is a discrepancy between the <a href="https://dl.dropbox.com/u/61803503/rjava_warning.txt">R and Java architectures</a> you will have to <a href="http://www.java.com/en/download/manual.jsp">download</a> the appropriate version of Java compatible with the version of R you're using.    
 
 For more see <a href="http://www.r-statistics.com/2012/08/how-to-load-the-rjava-package-after-the-error-java_home-cannot-be-determined-from-the-registry/" target="_blank">Tal Galili's blog post</a> regarding rJava issues.
+
+
+<h3 id="connect">Recommended Packages (Extending qdap)</h3>
+
+
 
 
 <hr>
