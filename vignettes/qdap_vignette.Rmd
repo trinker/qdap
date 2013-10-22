@@ -3042,7 +3042,7 @@ themes <- list(
 )
 ```
 
-It is important to understand how the <b><font color="green" face="courier new">match.list</font></b> is handled by `r FUN("termco")`.  The <b><font color="green" face="courier new">match.list</font></b> is (optionally) case and character sensitive. Spacing is an important way to grab specific words and requires careful thought. For example using <font color="green">"read"</font> will find the words <font color="green">"bread"</font>, <font color="green">"read"</font>, <font color="green">"reading"</font>, and <font color="green">"ready"</font>. If you want to search for just the word <font color="purple">"read"</font> supply a vector of <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font>. Notice the leading and trailing spaces.  A space acts as a boundary whereas starting/ending with a nonspace allows for greedy matching that will find words that contain this term.  A leading, trailing or both may be used to control how `r FUN("termco")` searches for the supplied terms.  So the reader may ask why not supply one string spaced as <font color="green">" read"</font>?  Keep in mind that `r FUN("termco")` would also find the word <font color="purple">"ready"</font>
+<p id="match">It is important to understand how the <b><font color="green" face="courier new">match.list</font></b> is handled by `r FUN("termco")`.  The <b><font color="green" face="courier new">match.list</font></b> is (optionally) case and character sensitive. Spacing is an important way to grab specific words and requires careful thought. For example using <font color="green">"read"</font> will find the words <font color="green">"bread"</font>, <font color="green">"read"</font>, <font color="green">"reading"</font>, and <font color="green">"ready"</font>. If you want to search for just the word <font color="purple">"read"</font> supply a vector of <font color="green" face="courier new">c(" read ", " reads", " reading", " reader")</font>. Notice the leading and trailing spaces.  A space acts as a boundary whereas starting/ending with a nonspace allows for greedy matching that will find words that contain this term.  A leading, trailing or both may be used to control how `r FUN("termco")` searches for the supplied terms.  So the reader may ask why not supply one string spaced as <font color="green">" read"</font>?  Keep in mind that `r FUN("termco")` would also find the word <font color="purple">"ready"</font></p>
 
 This section's examples will first view the complementary  functions that augment the *themes* supplied to <b><font color="green" face="courier new">match.list</font></b> and then main `r FUN("termco")` function will be explored.
 
@@ -4166,6 +4166,73 @@ citep(bib["Wickham2009"])
 ```
 
 <h4 id="dispersion">Lexical Dispersion Plot</h4>
+
+The *lexical dispersion plot* is a useful too (particularly in the early stage of analysis) for looking at the dispersion of a word throughout the dialogue.  `r FUN("dispersion_plot")` provides the emans to look at and compare multiple word dispersions across repeated measures and/or grouping variables.  This can be useful in conjunction with a `r HR("#corr", "correlation analysis")`.  
+
+The `r HR("#match", "search mechanism")` used by `r FUN("dispersion_plot")` is identical to `r FUN("termco")` and `r FUN("term_match", "termco")`.  For example, <b><font color="green" face="courier new">" love "</font></b> will not yield the same search as <b><font color="green" face="courier new">"love"</font></b>.  The `r HR("#disper1", "search example below")` demonstrates the way the search functions.  For more information see the `r HR("#match", "termco search description")` above.
+
+<p id="disper1">`r FT(orange, 5, text="&diams;")` **`r FUN("dispersion_plot")`** - *Understand the Search*`r FT(orange, 5, text="&diams;")`</p >
+
+<pre><code class="r">term_match(raj$dialogue, c(" love ", "love", " night ", "night"))
+</code></pre>
+
+<pre><code>$` love `
+[1] "love"
+
+$love
+ [1] "love"           "love's"         "lovers"         "loved"          "lovely"        
+ [6] "lovest"         "lover"          "beloved"        "loves"          "newbeloved"    
+[11] "glove"          "lovesong"       "lovedevouring"  "loveperforming" "dearloved"     
+
+$` night `
+[1] "night"
+
+$night
+[1] "night"       "fortnight"   "nights"      "tonight"     "night's"     "knight"     
+[7] "nightingale" "nightly"     "yesternight"
+</code></pre>
+
+<p id="disper2">`r FT(orange, 5, text="&diams;")` **`r FUN("dispersion_plot")`** - *Example 1*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r, echo=FALSE, fig.width = 15, fig.height = 3.25}
+with(rajSPLIT , dispersion_plot(dialogue, c("love", "night"),
+    grouping.var = list(fam.aff, sex), rm.vars = act))
+```
+
+<p id="disper2">`r FT(orange, 5, text="&diams;")` **`r FUN("dispersion_plot")`** - *Example 2: Color Schemes*`r FT(orange, 5, text="&diams;")`</p >
+
+```{r, echo=FALSE, fig.width = 15, fig.height = 3}
+with(rajSPLIT, dispersion_plot(dialogue, c("love", "night"),
+    bg.color = "black", grouping.var = list(fam.aff, sex),
+    color = "yellow", total.color = "white", horiz.color="grey20"))
+```
+
+Using `r FUN("dispersion_plot")` with `r FUN("word_list")`'s <b><font color="green" face="courier new">[["rfswl"]][["all"]]</font></b> can be a useful means of viewing the dispersion of high frequency words after stopword removal.
+
+<p id="disper2">`r FT(orange, 5, text="&diams;")` **`r FUN("dispersion_plot")`** - *Example 3: Using with `r FUN("word_list")`*`r FT(orange, 5, text="&diams;")`</p >
+
+<pre><code class="r">wrds <- word_list(pres_debates2012$dialogue, stopwords = Top200Words)
+
+## Add leading/trailing spaces if desired
+wrds2 <- spaste(wrds[["rfswl"]][["all"]][, "WORD"])
+
+## Use `~~` to maintain spaces
+wrds2 <- c(" governor~~romney ", wrds2[-c(3, 12)])
+
+## Plot
+with(pres_debates2012 , dispersion_plot(dialogue, wrds2, rm.vars = time, 
+    color="black", bg.color="white"))
+</code></pre>
+
+```{r, echo=FALSE, fig.width = 15, fig.height = 5}
+wrds2 <- c(" governor~~romney ", " going ", " that's ", " president ", 
+    " we're ", " sure ", " it's ", " we've ", " years ", " jobs ", 
+    " don't ", " I'm ", " those ", " got ", " four ", " let ", " middle ", 
+    " thousand ", " economy ", " government ", " I've ")
+with(pres_debates2012 , dispersion_plot(dialogue, wrds2, rm.vars = time, 
+    color="black", bg.color="white"))
+```
+
 
 <h4 id="wordclouds">Word Clouds</h4>
 

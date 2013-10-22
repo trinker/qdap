@@ -9,7 +9,7 @@
     rev.factor = TRUE, wrap = "'",
     xlab = "Dialogue (Words)", ylab = NULL, size = 4,
     plot = TRUE, char2space = "~~", scales = "free",
-    space = "free")
+    space = "free", total.color = "black")
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -68,6 +68,9 @@
   \code{"free_x"} their width will be proportional to the
   length of the x scale; or if \code{"free"} both height
   and width will vary.}
+
+  \item{total.color}{The color to use for summary `all`
+  group.  If \code{NULL} totals are dropped.}
 }
 \value{
   Plots a dispersion plot and invisibly returns the ggplot2
@@ -96,10 +99,14 @@ with(rajSPLIT , dispersion_plot(dialogue, c("love", "night"),
 with(rajSPLIT , dispersion_plot(dialogue, c("love", "night"),
      grouping.var = sex, rm.vars = act))
 
+## Drop total with `total.color = NULL`
+with(rajSPLIT , dispersion_plot(dialogue, c("love", "night"),
+     grouping.var = sex, rm.vars = act, total.color = NULL))
+
 ## Change color scheme
 with(rajSPLIT, dispersion_plot(dialogue, c("love", "night"),
     bg.color = "black", grouping.var = list(fam.aff, sex),
-    color = "yellow", horiz.color="grey20"))
+    color = "yellow", total.color = "white", horiz.color="grey20"))
 
 ## Use word list
 wrds <- word_list(pres_debates2012$dialogue, stopwords = Top200Words)

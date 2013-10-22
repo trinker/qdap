@@ -33,10 +33,12 @@
 #' If \code{"free_y"} their height will be proportional to the length of the y 
 #' scale; if \code{"free_x"} their width will be proportional to the length of 
 #' the x scale; or if \code{"free"} both height and width will vary. 
+#' @param total.color The color to use for summary `all` group.  If \code{NULL}
+#' totals are dropped.
 #' @return Plots a dispersion plot and invisibly returns the ggplot2 object.
 #' @keywords dispersion
 #' @export
-#' @importFrom ggplot2 ggplot aes geom_point scale_x_continuous element_rect element_line ggtitle theme theme_bw element_blank facet_grid ylab xlab
+#' @importFrom ggplot2 ggplot scale_colour_manual aes geom_point scale_x_continuous element_rect element_line ggtitle theme theme_bw element_blank facet_grid ylab xlab
 #' @note The match.terms is character sensitive.  Spacing is an important way 
 #' to grab specific words and requires careful thought.  Using "read" will find 
 #' the words "bread", "read" "reading", and "ready".  If you want to search 
@@ -55,10 +57,14 @@
 #' with(rajSPLIT , dispersion_plot(dialogue, c("love", "night"), 
 #'      grouping.var = sex, rm.vars = act))
 #' 
+#' ## Drop total with `total.color = NULL`
+#' with(rajSPLIT , dispersion_plot(dialogue, c("love", "night"), 
+#'      grouping.var = sex, rm.vars = act, total.color = NULL))
+#'
 #' ## Change color scheme
 #' with(rajSPLIT, dispersion_plot(dialogue, c("love", "night"), 
 #'     bg.color = "black", grouping.var = list(fam.aff, sex), 
-#'     color = "yellow", horiz.color="grey20"))
+#'     color = "yellow", total.color = "white", horiz.color="grey20"))
 #'     
 #' ## Use word list
 #' wrds <- word_list(pres_debates2012$dialogue, stopwords = Top200Words)
@@ -69,8 +75,11 @@
 dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,  
     rm.vars =NULL, color = "blue", bg.color = "grey90", horiz.color = "grey85", 
     symbol = "|", title = "Lexical Dispersion Plot", rev.factor = TRUE, 
-    wrap = "'", xlab = "Dialogue (Words)", ylab = NULL, size = 4, 
-    plot = TRUE, char2space = "~~", scales="free", space="free") {
+    wrap = "'", xlab = "Dialogue (Words)", ylab = NULL, size = 4, plot = TRUE,
+    char2space = "~~", scales="free", space="free", total.color = "black") {
+
+    word.num <- NULL
+    GV <- ifelse(!is.null(grouping.var), TRUE, FALSE)
 
     if(is.null(grouping.var)) {
         G <- "all"
@@ -152,12 +161,30 @@ dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,
         ylab <- simpleCap(gsub("&", " & ", G))
     }
 
+    ## Bind it together
     dat2 <- do.call(rbind, rmout)
     dat2[, "word"] <- factor(paste0(" ", wrap, dat2[, "word"], wrap), 
        levels = paste0(" ", wrap, gsub(char2space, " ", match.terms), wrap))
 
+    ## used for color fill when total.color != NULL
+    dat2[, "summary"] <- rep("sub", nrow(dat2))
+
+
+    ## Add totals if total.color != NULL
+    if (!is.null(total.color) && GV) {
+        dat2b <- dat2
+        lvls <- c("all", levels(dat2b[, "grouping"]))
+        dat2b[, "grouping"] <- rep("all", nrow(dat2))
+        dat2b[, "summary"] <- rep("all", nrow(dat2))
+        dat2 <- rbind(dat2, dat2b)
+        dat2[, "grouping"] <- factor(dat2[, "grouping"], levels=lvls)    
+        cols <- c(total.color, color) 
+    } else {
+        cols <- color
+    }
+
     the_plot <- ggplot(data = dat2, aes(x = word.num, y = grouping)) + 
-        geom_point(color = color, aes(position="dodge"), 
+        geom_point(aes(position="dodge", color = summary), 
             shape = symbol, size = size) + 
         theme_bw() + 
         theme(panel.background = element_rect(fill = bg.color), 
@@ -168,7 +195,8 @@ dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,
             strip.text.y = element_text(angle=0, hjust = 0), 
             strip.background = element_blank()) +
         scale_x_continuous(expand = c(0, 0)) + 
-        ylab(ylab) + xlab(xlab) + ggtitle(title)
+        ylab(ylab) + xlab(xlab) + ggtitle(title) + 
+        scale_colour_manual(values = cols, guide=FALSE)
 
     if(is.null(rm.vars)) {
         the_plot <- the_plot + facet_grid(word~., scales=scales, space=space)
@@ -180,6 +208,7 @@ dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,
             theme(axis.ticks.y = element_blank(), 
                 axis.text.y = element_blank())
     }
+
     if (plot) {
         print(the_plot)
     }
@@ -193,8 +222,6 @@ hits <- function(a, b) {
 
 ## Helper function to capitalize
 simpleCap <- function(x) { 
-        x <- gsub("(\\w)(\\w*)","\\U\\1\\L\\2", x, perl=T)
+    x <- gsub("(\\w)(\\w*)","\\U\\1\\L\\2", x, perl=T)
     mgsub(c("And", "Of"), c("and", "of"), x)
 }
-
-
