@@ -83,6 +83,18 @@
 \description{
   Transcript apply descriptive word statistics.
 }
+\details{
+  Note that a sentence is classified with only one endmark.
+  An imperative sentence is classified only as imperative
+  (not as a state, quest, or exclm as well).  If a sentence
+  is both imperative and incomplete the sentence will be
+  counted as incomplete rather than imperative. labeled as
+  both imperative
+}
+\section{Warning}{
+  It is assumed the user has run \code{sentSplit} on their
+  data, otherwise some counts may not be accurate.
+}
 \examples{
 \dontrun{
 word_stats(mraja1spl$dialogue, mraja1spl$person)

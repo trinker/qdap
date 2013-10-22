@@ -43,7 +43,9 @@
   The algorithm used by \code{\link[qdap]{imperative}} is
   sensitive to English language dialects and types.  Commas
   can indicate a choppy sentence and may indicate a false
-  positive.
+  positive.  Sentences marked with `AAVE` may be the use of
+  African American Vernacular English and not an imperative
+  sentence.
 }
 \examples{
 \dontrun{

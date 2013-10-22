@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.79 25.34 15.00 16.30 15.79 25.34 15.00 19.70 19.70 22.40 22.40
-## [12] 16.30 22.40 15.00 15.00 16.30 25.34 16.30 19.70 16.30
+##  [1] 15.00 15.79 16.30 15.79 15.00 15.00 19.70 16.30 15.00 19.70 22.40
+## [12] 16.30 22.40 22.40 15.00 15.00 25.34 25.34 25.34 16.30
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.79 25.34 15.00 16.30 15.79 25.34 15.00 19.70 19.70 22.40 22.40
-## [12] 16.30 22.40 15.00 15.00 16.30 25.34 16.30 19.70 16.30
+##  [1] 15.00 15.79 16.30 15.79 15.00 15.00 19.70 16.30 15.00 19.70 22.40
+## [12] 16.30 22.40 22.40 15.00 15.00 25.34 25.34 25.34 16.30
 ```
 
 
@@ -6703,7 +6703,7 @@ cor(t(dat)[, c("romeo", "juliet", "hate", "love")])
 
 
 ```r
-dat2 <- wfm(DATA$state, seq_len(nrow(DATA)))
+dat2 <- wfm(DATA$state, ID(DATA))
 qheat(cor(t(dat2)), low = "yellow", high = "red", 
     grid = "grey90", diag.na = TRUE, by.column = NULL) 
 ```
@@ -7785,24 +7785,24 @@ Negative forms of questions such as <font color="green">Don't you want the robot
 ```
 
 ```
-##          person                       state
-## 1.1         sam            Computer is fun.
-## 1.2         sam                Not too fun.
-## 2.1        greg     No it's not, it's dumb.
-## 3.1     teacher          What should we do?
-## 4.1         sam        You liar, it stinks!
-## 5.1        greg     I am telling the truth!
-## 6.1       sally      How can we be certain?
-## 7.1        greg            There is no way.
-## 8.1         sam             I distrust you.
-## 9.1       sally What are you talking about?
-## 10.1 researcher           Shall we move on?
-## 10.2 researcher                  Good then.
-## 11.1       greg                 I'm hungry.
-## 11.2       greg                  Let's eat.
-## 11.3       greg                You already?
-## 16          sam         Don't you think so?
-## 17          sam            Do you think so?
+##        person                       state
+## 1         sam            Computer is fun.
+## 2         sam                Not too fun.
+## 3        greg     No it's not, it's dumb.
+## 4     teacher          What should we do?
+## 5         sam        You liar, it stinks!
+## 6        greg     I am telling the truth!
+## 7       sally      How can we be certain?
+## 8        greg            There is no way.
+## 9         sam             I distrust you.
+## 10      sally What are you talking about?
+## 11 researcher           Shall we move on?
+## 12 researcher                  Good then.
+## 13       greg                 I'm hungry.
+## 14       greg                  Let's eat.
+## 15       greg                You already?
+## 16        sam         Don't you think so?
+## 17        sam            Do you think so?
 ```
 
 ```r
@@ -9229,7 +9229,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x0308f0a8>
+<environment: 0x127e26e0>
 ```
 
 ```r
@@ -10073,31 +10073,63 @@ The following functions will be utilized in this section (click to view more):
 
 </div>
 
+
+qdap provies a few general functions for categorizing sentence types.  This section will outline these functions and some of their uses.
+
 <h4 id="incomp">Test for Incomplete Sentences</h4>
+
+It is often helpful to determine if a sentence (a row) is incomplete, as this may effect some forms of analysis. The <a href="http://trinker.github.io/qdap_dev/end_inc.html" target="_blank"><code>end_inc</code></a> provides this functionality after <a href="http://trinker.github.io/qdap_dev/incomplete_replace.html" target="_blank"><code>incomplete_replace</code></a> has replaced various incomplete sentence notation with the standard qdap notation (<b><font color="green" face="courier new">|</font></b>).
+
+<p id="end_inc1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/end_inc.html" target="_blank"><code>end_inc</code></a> Examples</b> <font size="5" color="orange">&diams;</font></p>
+
 
 
 ```r
-dat <- sentSplit(DATA, "state", stem.col = FALSE)
-dat$state[c(2, 5)] <- paste(strip(dat$state[c(2, 5)]), "|")
+## Alter the DATA.SPLIT data set to have incomplete sentences.
+dat <- DATA.SPLIT[, c("person", "state")]
+dat[c(1:2, 7), "state"] <- c("the...",  "I.?", "threw..")
+dat[, "state"] <- incomplete_replace(dat$state)
+dat
+```
+
+```
+##        person                       state
+## 1         sam                        the|
+## 2         sam                          I|
+## 3        greg     No it's not, it's dumb.
+## 4     teacher          What should we do?
+## 5         sam        You liar, it stinks!
+## 6        greg     I am telling the truth!
+## 7       sally                      threw|
+## 8        greg            There is no way.
+## 9         sam             I distrust you.
+## 10      sally What are you talking about?
+## 11 researcher           Shall we move on?
+## 12 researcher                  Good then.
+## 13       greg                 I'm hungry.
+## 14       greg                  Let's eat.
+## 15       greg                You already?
+```
+
+```r
 ## Remove incomplete sentences and warn.
 end_inc(dat, "state")
 ```
 
 ```
-##        person  tot sex adult code                       state
-## 1         sam  1.1   m     0   K1            Computer is fun.
-## 3        greg  2.1   m     0   K2     No it's not, it's dumb.
-## 4     teacher  3.1   m     1   K3          What should we do?
-## 6        greg  5.1   m     0   K5     I am telling the truth!
-## 7       sally  6.1   f     0   K6      How can we be certain?
-## 8        greg  7.1   m     0   K7            There is no way.
-## 9         sam  8.1   m     0   K8             I distrust you.
-## 10      sally  9.1   f     0   K9 What are you talking about?
-## 11 researcher 10.1   f     1  K10           Shall we move on?
-## 12 researcher 10.2   f     1  K10                  Good then.
-## 13       greg 11.1   m     0  K11                 I'm hungry.
-## 14       greg 11.2   m     0  K11                  Let's eat.
-## 15       greg 11.3   m     0  K11                You already?
+##        person                       state
+## 3        greg     No it's not, it's dumb.
+## 4     teacher          What should we do?
+## 5         sam        You liar, it stinks!
+## 6        greg     I am telling the truth!
+## 8        greg            There is no way.
+## 9         sam             I distrust you.
+## 10      sally What are you talking about?
+## 11 researcher           Shall we move on?
+## 12 researcher                  Good then.
+## 13       greg                 I'm hungry.
+## 14       greg                  Let's eat.
+## 15       greg                You already?
 ```
 
 ```r
@@ -10106,20 +10138,19 @@ end_inc(dat, "state", warning.report = FALSE)
 ```
 
 ```
-##        person  tot sex adult code                       state
-## 1         sam  1.1   m     0   K1            Computer is fun.
-## 3        greg  2.1   m     0   K2     No it's not, it's dumb.
-## 4     teacher  3.1   m     1   K3          What should we do?
-## 6        greg  5.1   m     0   K5     I am telling the truth!
-## 7       sally  6.1   f     0   K6      How can we be certain?
-## 8        greg  7.1   m     0   K7            There is no way.
-## 9         sam  8.1   m     0   K8             I distrust you.
-## 10      sally  9.1   f     0   K9 What are you talking about?
-## 11 researcher 10.1   f     1  K10           Shall we move on?
-## 12 researcher 10.2   f     1  K10                  Good then.
-## 13       greg 11.1   m     0  K11                 I'm hungry.
-## 14       greg 11.2   m     0  K11                  Let's eat.
-## 15       greg 11.3   m     0  K11                You already?
+##        person                       state
+## 3        greg     No it's not, it's dumb.
+## 4     teacher          What should we do?
+## 5         sam        You liar, it stinks!
+## 6        greg     I am telling the truth!
+## 8        greg            There is no way.
+## 9         sam             I distrust you.
+## 10      sally What are you talking about?
+## 11 researcher           Shall we move on?
+## 12 researcher                  Good then.
+## 13       greg                 I'm hungry.
+## 14       greg                  Let's eat.
+## 15       greg                You already?
 ```
 
 ```r
@@ -10129,16 +10160,22 @@ end_inc(dat, "state", which.mode = TRUE)
 
 ```
 ## $NOT
-##  [1]  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+##  [1] FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE
 ## [12]  TRUE  TRUE  TRUE  TRUE
 ## 
 ## $INC
-##  [1] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [1]  TRUE  TRUE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
 ## [12] FALSE FALSE FALSE FALSE
 ```
 
 
 <h4 id="endmark">Sentence End Marks</h4>
+
+It is often useful to determine what sentence type (end mark) a sentence is.  The <a href="http://trinker.github.io/qdap_dev/end_mark.html" target="_blank"><code>end_mark</code></a> extracts the end marks from a sentence.  The output can also be used logically grab sentence types. 
+
+
+<p id="endmark1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/end_mark.html" target="_blank"><code>end_mark</code></a> Example</b> <font size="5" color="orange">&diams;</font></p>
+
 
 
 ```r
@@ -10148,6 +10185,10 @@ end_mark(DATA.SPLIT$state)
 ```
 ##  [1] "." "." "." "?" "!" "!" "?" "." "." "?" "?" "." "." "." "?"
 ```
+
+
+
+<p id="endmark2"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/end_mark.html" target="_blank"><code>end_mark</code></a></b> - <em>Grab Sentence Types</em><font size="5" color="orange">&diams;</font></p>
 
 
 ```r
@@ -10173,7 +10214,7 @@ htruncdf(ques)
 ```r
 ## Grab non questions
 non.ques <- mraja1spl[end_mark(mraja1spl$dialogue) != "?", ] 
-htruncdf(non.ques, 20)
+htruncdf(non.ques, 12)
 ```
 
 ```
@@ -10189,21 +10230,13 @@ htruncdf(non.ques, 20)
 ## 9  Gregory  8.2   m     cap FALSE therefore, Therefor i
 ## 10 Sampson  9.1   m     cap FALSE A dog of t A dog of t
 ## 11 Sampson  9.2   m     cap FALSE I will tak I will tak
-## 12 Gregory 10.1   m     cap FALSE That shows That show 
-## 13 Sampson 11.1   m     cap FALSE True; and  True and t
-## 14 Sampson 11.2   m     cap FALSE therefore  Therefor I
-## 15 Gregory 12.1   m     cap FALSE The quarre The quarre
-## 16 Sampson 13.1   m     cap FALSE 'Tis all o Tis all on
-## 17 Sampson 13.2   m     cap FALSE when I hav When I hav
-## 18 Sampson 15.1   m     cap FALSE Ay, the he Ay the hea
-## 19 Gregory 16.1   m     cap FALSE They must  They must 
-## 20 Sampson 17.1   m     cap FALSE Me they sh Me they sh
+## 12 Gregory 10.1   m     cap FALSE That shows That show
 ```
 
 ```r
 ## Grab ? and . ending sentences
 ques.per <- mraja1spl[end_mark(mraja1spl$dialogue) %in% c(".", "?"), ] 
-htruncdf(ques.per, 20)
+htruncdf(ques.per, 12)
 ```
 
 ```
@@ -10219,19 +10252,16 @@ htruncdf(ques.per, 20)
 ## 9  Gregory  8.2   m     cap FALSE therefore, Therefor i
 ## 10 Sampson  9.1   m     cap FALSE A dog of t A dog of t
 ## 11 Sampson  9.2   m     cap FALSE I will tak I will tak
-## 12 Gregory 10.1   m     cap FALSE That shows That show 
-## 13 Sampson 11.1   m     cap FALSE True; and  True and t
-## 14 Sampson 11.2   m     cap FALSE therefore  Therefor I
-## 15 Gregory 12.1   m     cap FALSE The quarre The quarre
-## 16 Sampson 13.1   m     cap FALSE 'Tis all o Tis all on
-## 17 Sampson 13.2   m     cap FALSE when I hav When I hav
-## 18 Gregory 14.1   m     cap FALSE The heads  The head o
-## 19 Sampson 15.1   m     cap FALSE Ay, the he Ay the hea
-## 20 Gregory 16.1   m     cap FALSE They must  They must
+## 12 Gregory 10.1   m     cap FALSE That shows That show
 ```
 
 
 <h4 id="id">Generate unique ID</h4>
+
+The <a href="http://trinker.github.io/qdap_dev/ID.html" target="_blank"><code>ID</code></a> is a shortcut approach to providing row or element IDs on the fly.
+
+<p id="IDfun"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/ID.html" target="_blank"><code>ID</code></a></b> - <em>Grab Sentence Types</em><font size="5" color="orange">&diams;</font></p>
+
 
 
 ```r
@@ -10239,7 +10269,7 @@ ID(list(1, 4, 6))
 ```
 
 ```
-## [1] 1 2 3
+## [1] "1" "2" "3"
 ```
 
 ```r
@@ -10247,11 +10277,21 @@ ID(matrix(1:10, ncol=1))
 ```
 
 ```
-##  [1]  1  2  3  4  5  6  7  8  9 10
+##  [1] "01" "02" "03" "04" "05" "06" "07" "08" "09" "10"
 ```
 
 ```r
 ID(mtcars)
+```
+
+```
+##  [1] "01" "02" "03" "04" "05" "06" "07" "08" "09" "10" "11" "12" "13" "14"
+## [15] "15" "16" "17" "18" "19" "20" "21" "22" "23" "24" "25" "26" "27" "28"
+## [29] "29" "30" "31" "32"
+```
+
+```r
+ID(mtcars, FALSE)
 ```
 
 ```
@@ -10260,26 +10300,56 @@ ID(mtcars)
 ```
 
 ```r
-ID(mtcars, TRUE)
+question_type(DATA.SPLIT$state, ID(DATA.SPLIT, TRUE))
 ```
 
 ```
-##  [1] "X.1"  "X.2"  "X.3"  "X.4"  "X.5"  "X.6"  "X.7"  "X.8"  "X.9"  "X.10"
-## [11] "X.11" "X.12" "X.13" "X.14" "X.15" "X.16" "X.17" "X.18" "X.19" "X.20"
-## [21] "X.21" "X.22" "X.23" "X.24" "X.25" "X.26" "X.27" "X.28" "X.29" "X.30"
-## [31] "X.31" "X.32"
+##    TRUE tot.quest    what     how   shall implied_do/does/did
+## 1    04         1 1(100%)       0       0                   0
+## 2    07         1       0 1(100%)       0                   0
+## 3    10         1 1(100%)       0       0                   0
+## 4    11         1       0       0 1(100%)                   0
+## 5    15         1       0       0       0             1(100%)
+## 6    01         0       0       0       0                   0
+## 7    02         0       0       0       0                   0
+## 8    03         0       0       0       0                   0
+## 9    05         0       0       0       0                   0
+## 10   06         0       0       0       0                   0
+## 11   08         0       0       0       0                   0
+## 12   09         0       0       0       0                   0
+## 13   12         0       0       0       0                   0
+## 14   13         0       0       0       0                   0
+## 15   14         0       0       0       0                   0
 ```
 
 
 <h4 id="imper">Detect and Remark Imperative Sentences</h4>
 
+qdap allows for the detection of imperative sentences via the <a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a> function.  The function detects and optionally remarks as imperative, an asterisk (<b><font color="green" face="courier new">*</font></b>) is used, however, <a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a> is sensitive to choppy, comma riddled sentences and dialects such as African American Vernacular English.  The algorithm is complex and thus slower.
+
+
+<p id="imperative1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a></b> - <em>Imperative Data</em><font size="5" color="orange">&diams;</font></p>
+
 
 ```r
-dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
+(dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
     "sue"), 2)), statement=c("go get it|", "I hate to read.",
     "Stop running!", "I like it!", "You are terrible!", "Don't!",
     "Greg, go to the red, brick office.", "Tyler go to the gym.",
-    "Alex don't run."), stringsAsFactors = FALSE)
+    "Alex don't run."), stringsAsFactors = FALSE))
+```
+
+```
+##    name                          statement
+## 1   sue                         go get it|
+## 2  greg                    I hate to read.
+## 3 tyler                      Stop running!
+## 4  phil                         I like it!
+## 5   sue                  You are terrible!
+## 6  greg                             Don't!
+## 7 tyler Greg, go to the red, brick office.
+## 8  phil               Tyler go to the gym.
+## 9   sue                    Alex don't run.
 ```
 
 
@@ -10296,6 +10366,9 @@ dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
 9   sue                    Alex don't run.
 </code></pre>
 
+<p id="imperative2"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a></b> - <em>Re-mark End Marks</em><font size="5" color="orange">&diams;</font></p>
+
+
 <pre><code class="r">imperative(dat, "name", "statement", additional.names = c("Alex"))
 </code></pre>
 
@@ -10310,6 +10383,10 @@ dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
 8  phil               Tyler go to the gym*.
 9   sue                    Alex don't run*.
 </code></pre>
+
+
+<p id="imperative1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a></b> - <em>Handle Incomplete Sentences</em><font size="5" color="orange">&diams;</font></p>
+
 
 <pre><code class="r">imperative(dat, "name", "statement", lock.incomplete = TRUE, "Alex")
 </code></pre>
@@ -10326,6 +10403,8 @@ dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
 9   sue                    Alex don't run*.
 </code></pre>
 
+<p id="imperative1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a></b> - <em>Warning Report</em><font size="5" color="orange">&diams;</font></p>
+
 <pre><code class="r">imperative(dat, "name", "statement", additional.names = "Alex", warning=TRUE)
 </code></pre>
 
@@ -10338,7 +10417,7 @@ dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
 6  greg                             Don't*!        -
 7 tyler Greg, go to the red, brick office*. 2 commas
 8  phil               Tyler go to the gym*.        -
-9   sue                    Alex don't run*.  ebonics
+9   sue                    Alex don't run*.     AAVE
 </code></pre>
 
 

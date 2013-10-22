@@ -2903,7 +2903,7 @@ cor(t(dat)[, c("romeo", "juliet", "hate", "love")])
 ```
 
 ```{r, fig.width = 8}
-dat2 <- wfm(DATA$state, seq_len(nrow(DATA)))
+dat2 <- wfm(DATA$state, ID(DATA))
 qheat(cor(t(dat2)), low = "yellow", high = "red", 
     grid = "grey90", diag.na = TRUE, by.column = NULL) 
 ```
@@ -4656,11 +4656,22 @@ The following functions will be utilized in this section (click to view more):
 
 </div>
 
+
+qdap provies a few general functions for categorizing sentence types.  This section will outline these functions and some of their uses.
+
 <h4 id="incomp">Test for Incomplete Sentences</h4>
 
+It is often helpful to determine if a sentence (a row) is incomplete, as this may effect some forms of analysis. The `r FUN("end_inc")` provides this functionality after `r FUN("incomplete_replace")` has replaced various incomplete sentence notation with the standard qdap notation (<b><font color="green" face="courier new">|</font></b>).
+
+<p id="end_inc1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("end_inc")` Examples</b> `r FT(orange, 5, text="&diams;")`</p>
+
+
 ```{r}
-dat <- sentSplit(DATA, "state", stem.col = FALSE)
-dat$state[c(2, 5)] <- paste(strip(dat$state[c(2, 5)]), "|")
+## Alter the DATA.SPLIT data set to have incomplete sentences.
+dat <- DATA.SPLIT[, c("person", "state")]
+dat[c(1:2, 7), "state"] <- c("the...",  "I.?", "threw..")
+dat[, "state"] <- incomplete_replace(dat$state)
+dat
 ## Remove incomplete sentences and warn.
 end_inc(dat, "state")
 ## Remove incomplete sentences and no warning.
@@ -4671,38 +4682,59 @@ end_inc(dat, "state", which.mode = TRUE)
 
 <h4 id="endmark">Sentence End Marks</h4>
 
+It is often useful to determine what sentence type (end mark) a sentence is.  The `r FUN("end_mark")` extracts the end marks from a sentence.  The output can also be used logically grab sentence types. 
+
+
+<p id="endmark1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("end_mark")` Example</b> `r FT(orange, 5, text="&diams;")`</p>
+
+
 ```{r}
 end_mark(DATA.SPLIT$state)
 ```
+
+
+<p id="endmark2">`r FT(orange, 5, text="&diams;")` <b>`r FUN("end_mark")`</b> - <em>Grab Sentence Types</em>`r FT(orange, 5, text="&diams;")`</p>
+
 ```{r}
 ## Grab questions
 ques <- mraja1spl[end_mark(mraja1spl$dialogue) == "?", ] 
 htruncdf(ques)
 ## Grab non questions
 non.ques <- mraja1spl[end_mark(mraja1spl$dialogue) != "?", ] 
-htruncdf(non.ques, 20)
+htruncdf(non.ques, 12)
 ## Grab ? and . ending sentences
 ques.per <- mraja1spl[end_mark(mraja1spl$dialogue) %in% c(".", "?"), ] 
-htruncdf(ques.per, 20)
+htruncdf(ques.per, 12)
 ```
 
 <h4 id="id">Generate unique ID</h4>
+
+The `r FUN("ID")` is a shortcut approach to providing row or element IDs on the fly.
+
+<p id="IDfun">`r FT(orange, 5, text="&diams;")` <b>`r FUN("ID")`</b> - <em>Grab Sentence Types</em>`r FT(orange, 5, text="&diams;")`</p>
+
 
 ```{r}
 ID(list(1, 4, 6))
 ID(matrix(1:10, ncol=1))
 ID(mtcars)
-ID(mtcars, TRUE)
+ID(mtcars, FALSE)
+question_type(DATA.SPLIT$state, ID(DATA.SPLIT, TRUE))
 ```
 
 <h4 id="imper">Detect and Remark Imperative Sentences</h4>
 
+qdap allows for the detection of imperative sentences via the `r FUN("imperative")` function.  The function detects and optionally remarks as imperative, an asterisk (<b><font color="green" face="courier new">*</font></b>) is used, however, `r FUN("imperative")` is sensitive to choppy, comma riddled sentences and dialects such as African American Vernacular English.  The algorithm is complex and thus slower.
+
+
+<p id="imperative1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("imperative")`</b> - <em>Imperative Data</em>`r FT(orange, 5, text="&diams;")`</p>
+
 ```{r}
-dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
+(dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
     "sue"), 2)), statement=c("go get it|", "I hate to read.",
     "Stop running!", "I like it!", "You are terrible!", "Don't!",
     "Greg, go to the red, brick office.", "Tyler go to the gym.",
-    "Alex don't run."), stringsAsFactors = FALSE)
+    "Alex don't run."), stringsAsFactors = FALSE))
 ```
 
 
@@ -4717,6 +4749,9 @@ dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
 8  phil               Tyler go to the gym.
 9   sue                    Alex don't run.
 </code></pre>
+
+<p id="imperative2">`r FT(orange, 5, text="&diams;")` <b>`r FUN("imperative")`</b> - <em>Re-mark End Marks</em>`r FT(orange, 5, text="&diams;")`</p>
+
 
 <pre><code class="r">imperative(dat, "name", "statement", additional.names = c("Alex"))
 </code></pre>
@@ -4733,6 +4768,10 @@ dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
 9   sue                    Alex don't run*.
 </code></pre>
 
+
+<p id="imperative1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("imperative")`</b> - <em>Handle Incomplete Sentences</em>`r FT(orange, 5, text="&diams;")`</p>
+
+
 <pre><code class="r">imperative(dat, "name", "statement", lock.incomplete = TRUE, "Alex")
 </code></pre>
 
@@ -4748,6 +4787,8 @@ dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
 9   sue                    Alex don't run*.
 </code></pre>
 
+<p id="imperative1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("imperative")`</b> - <em>Warning Report</em>`r FT(orange, 5, text="&diams;")`</p>
+
 <pre><code class="r">imperative(dat, "name", "statement", additional.names = "Alex", warning=TRUE)
 </code></pre>
 
@@ -4760,7 +4801,7 @@ dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
 6  greg                             Don't*!        -
 7 tyler Greg, go to the red, brick office*. 2 commas
 8  phil               Tyler go to the gym*.        -
-9   sue                    Alex don't run*.  ebonics
+9   sue                    Alex don't run*.     AAVE
 </code></pre>
 
 

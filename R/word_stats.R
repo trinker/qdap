@@ -21,7 +21,14 @@
 #' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophes from 
 #' calculating the output.   
 #' @param digits Integer; number of decimal places to round when printing.                    
-#' @param \ldots Any other arguments passed to \code{\link[qdap]{end_inc}}.     
+#' @param \ldots Any other arguments passed to \code{\link[qdap]{end_inc}}.
+#' @details Note that a sentence is classified with only one endmark.  An 
+#' imperative sentence is classified only as imperative (not as a state, quest, 
+#' or exclm as well).  If a sentence is both imperative and incomplete the 
+#' sentence will be counted as incomplete rather than imperative.
+#' labeled as both imperative 
+#' @section Warning: It is assumed the user has run \code{sentSplit} on their 
+#' data, otherwise some counts may not be accurate.     
 #' @return Returns a list of three descriptive word statistics:
 #' \item{ts}{A data frame of descriptive word statistics by row} 
 #' \item{gts}{A data frame of word/sentence statistics per grouping variable:
