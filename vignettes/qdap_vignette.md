@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 15.79 25.34 19.70 19.70 22.40 15.00 16.30 15.79 22.40 16.30
-## [12] 19.70 22.40 15.00 16.30 16.30 15.00 15.00 15.00 15.00
+##  [1] 15.79 25.34 15.00 16.30 15.79 25.34 15.00 19.70 19.70 22.40 22.40
+## [12] 16.30 22.40 15.00 15.00 16.30 25.34 16.30 19.70 16.30
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 15.79 25.34 19.70 19.70 22.40 15.00 16.30 15.79 22.40 16.30
-## [12] 19.70 22.40 15.00 16.30 16.30 15.00 15.00 15.00 15.00
+##  [1] 15.79 25.34 15.00 16.30 15.79 25.34 15.00 19.70 19.70 22.40 22.40
+## [12] 16.30 22.40 15.00 15.00 16.30 25.34 16.30 19.70 16.30
 ```
 
 
@@ -9229,7 +9229,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x12ff3450>
+<environment: 0x0308f0a8>
 ```
 
 ```r
@@ -10063,29 +10063,283 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="end_mark"> - <a href="#endmark">Sentence End Marks</a>
 </form>
 
+<form action="http://trinker.github.io/qdap_dev/ID.html" target="_blank">
+    <input type="submit" value="ID"> - <a href="#id">Generate unique ID</a>
+</form>
+
 <form action="http://trinker.github.io/qdap_dev/imperative.html" target="_blank">
     <input type="submit" value="imperative"> - <a href="#imper">Detect and Remark Imperative Sentences</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/NAer.html" target="_blank">
-    <input type="submit" value="NAer"> - <a href="#naer">Replace Missing Values (NA)</a>
-</form>
 </div>
 
-
 <h4 id="incomp">Test for Incomplete Sentences</h4>
+
+
+```r
+dat <- sentSplit(DATA, "state", stem.col = FALSE)
+dat$state[c(2, 5)] <- paste(strip(dat$state[c(2, 5)]), "|")
+## Remove incomplete sentences and warn.
+end_inc(dat, "state")
+```
+
+```
+##        person  tot sex adult code                       state
+## 1         sam  1.1   m     0   K1            Computer is fun.
+## 3        greg  2.1   m     0   K2     No it's not, it's dumb.
+## 4     teacher  3.1   m     1   K3          What should we do?
+## 6        greg  5.1   m     0   K5     I am telling the truth!
+## 7       sally  6.1   f     0   K6      How can we be certain?
+## 8        greg  7.1   m     0   K7            There is no way.
+## 9         sam  8.1   m     0   K8             I distrust you.
+## 10      sally  9.1   f     0   K9 What are you talking about?
+## 11 researcher 10.1   f     1  K10           Shall we move on?
+## 12 researcher 10.2   f     1  K10                  Good then.
+## 13       greg 11.1   m     0  K11                 I'm hungry.
+## 14       greg 11.2   m     0  K11                  Let's eat.
+## 15       greg 11.3   m     0  K11                You already?
+```
+
+```r
+## Remove incomplete sentences and no warning.
+end_inc(dat, "state", warning.report = FALSE)
+```
+
+```
+##        person  tot sex adult code                       state
+## 1         sam  1.1   m     0   K1            Computer is fun.
+## 3        greg  2.1   m     0   K2     No it's not, it's dumb.
+## 4     teacher  3.1   m     1   K3          What should we do?
+## 6        greg  5.1   m     0   K5     I am telling the truth!
+## 7       sally  6.1   f     0   K6      How can we be certain?
+## 8        greg  7.1   m     0   K7            There is no way.
+## 9         sam  8.1   m     0   K8             I distrust you.
+## 10      sally  9.1   f     0   K9 What are you talking about?
+## 11 researcher 10.1   f     1  K10           Shall we move on?
+## 12 researcher 10.2   f     1  K10                  Good then.
+## 13       greg 11.1   m     0  K11                 I'm hungry.
+## 14       greg 11.2   m     0  K11                  Let's eat.
+## 15       greg 11.3   m     0  K11                You already?
+```
+
+```r
+## List of logical checks for which are not/are incomplete
+end_inc(dat, "state", which.mode = TRUE)
+```
+
+```
+## $NOT
+##  [1]  TRUE FALSE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE
+## [12]  TRUE  TRUE  TRUE  TRUE
+## 
+## $INC
+##  [1] FALSE  TRUE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+## [12] FALSE FALSE FALSE FALSE
+```
 
 
 <h4 id="endmark">Sentence End Marks</h4>
 
 
+```r
+end_mark(DATA.SPLIT$state)
+```
+
+```
+##  [1] "." "." "." "?" "!" "!" "?" "." "." "?" "?" "." "." "." "?"
+```
+
+
+```r
+## Grab questions
+ques <- mraja1spl[end_mark(mraja1spl$dialogue) == "?", ] 
+htruncdf(ques)
+```
+
+```
+##        person  tot sex fam.aff  died   dialogue  stem.text
+## 1     Gregory 14.1   m     cap FALSE The heads  The head o
+## 2     Gregory 20.2   m     cap FALSE turn thy b Turn thi b
+## 3     Abraham 26.1   m    mont FALSE Do you bit Do you bit
+## 4     Abraham 28.1   m    mont FALSE Do you bit Do you bit
+## 5     Sampson 29.1   m     cap FALSE [Aside to  Is the law
+## 6     Gregory 32.1   m     cap FALSE Do you qua Do you qua
+## 7      Tybalt 42.1   m     cap  TRUE What, art  What art t
+## 8     Capulet 46.1   f     cap FALSE What noise What nois 
+## 9  Lady Capul 47.2   f     cap FALSE why call y Whi call y
+## 10     Prince 51.1   m   escal FALSE Rebellious Rebelli su
+```
+
+```r
+## Grab non questions
+non.ques <- mraja1spl[end_mark(mraja1spl$dialogue) != "?", ] 
+htruncdf(non.ques, 20)
+```
+
+```
+##     person  tot sex fam.aff  died   dialogue  stem.text
+## 1  Sampson  1.1   m     cap FALSE Gregory, o Gregori o 
+## 2  Gregory  2.1   m     cap FALSE No, for th No for the
+## 3  Sampson  3.1   m     cap FALSE I mean, an I mean an 
+## 4  Gregory  4.1   m     cap FALSE Ay, while  Ay while y
+## 5  Sampson  5.1   m     cap FALSE I strike q I strike q
+## 6  Gregory  6.1   m     cap FALSE But thou a But thou a
+## 7  Sampson  7.1   m     cap FALSE A dog of t A dog of t
+## 8  Gregory  8.1   m     cap FALSE To move is To move is
+## 9  Gregory  8.2   m     cap FALSE therefore, Therefor i
+## 10 Sampson  9.1   m     cap FALSE A dog of t A dog of t
+## 11 Sampson  9.2   m     cap FALSE I will tak I will tak
+## 12 Gregory 10.1   m     cap FALSE That shows That show 
+## 13 Sampson 11.1   m     cap FALSE True; and  True and t
+## 14 Sampson 11.2   m     cap FALSE therefore  Therefor I
+## 15 Gregory 12.1   m     cap FALSE The quarre The quarre
+## 16 Sampson 13.1   m     cap FALSE 'Tis all o Tis all on
+## 17 Sampson 13.2   m     cap FALSE when I hav When I hav
+## 18 Sampson 15.1   m     cap FALSE Ay, the he Ay the hea
+## 19 Gregory 16.1   m     cap FALSE They must  They must 
+## 20 Sampson 17.1   m     cap FALSE Me they sh Me they sh
+```
+
+```r
+## Grab ? and . ending sentences
+ques.per <- mraja1spl[end_mark(mraja1spl$dialogue) %in% c(".", "?"), ] 
+htruncdf(ques.per, 20)
+```
+
+```
+##     person  tot sex fam.aff  died   dialogue  stem.text
+## 1  Sampson  1.1   m     cap FALSE Gregory, o Gregori o 
+## 2  Gregory  2.1   m     cap FALSE No, for th No for the
+## 3  Sampson  3.1   m     cap FALSE I mean, an I mean an 
+## 4  Gregory  4.1   m     cap FALSE Ay, while  Ay while y
+## 5  Sampson  5.1   m     cap FALSE I strike q I strike q
+## 6  Gregory  6.1   m     cap FALSE But thou a But thou a
+## 7  Sampson  7.1   m     cap FALSE A dog of t A dog of t
+## 8  Gregory  8.1   m     cap FALSE To move is To move is
+## 9  Gregory  8.2   m     cap FALSE therefore, Therefor i
+## 10 Sampson  9.1   m     cap FALSE A dog of t A dog of t
+## 11 Sampson  9.2   m     cap FALSE I will tak I will tak
+## 12 Gregory 10.1   m     cap FALSE That shows That show 
+## 13 Sampson 11.1   m     cap FALSE True; and  True and t
+## 14 Sampson 11.2   m     cap FALSE therefore  Therefor I
+## 15 Gregory 12.1   m     cap FALSE The quarre The quarre
+## 16 Sampson 13.1   m     cap FALSE 'Tis all o Tis all on
+## 17 Sampson 13.2   m     cap FALSE when I hav When I hav
+## 18 Gregory 14.1   m     cap FALSE The heads  The head o
+## 19 Sampson 15.1   m     cap FALSE Ay, the he Ay the hea
+## 20 Gregory 16.1   m     cap FALSE They must  They must
+```
+
+
+<h4 id="id">Generate unique ID</h4>
+
+
+```r
+ID(list(1, 4, 6))
+```
+
+```
+## [1] 1 2 3
+```
+
+```r
+ID(matrix(1:10, ncol=1))
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10
+```
+
+```r
+ID(mtcars)
+```
+
+```
+##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+## [24] 24 25 26 27 28 29 30 31 32
+```
+
+```r
+ID(mtcars, TRUE)
+```
+
+```
+##  [1] "X.1"  "X.2"  "X.3"  "X.4"  "X.5"  "X.6"  "X.7"  "X.8"  "X.9"  "X.10"
+## [11] "X.11" "X.12" "X.13" "X.14" "X.15" "X.16" "X.17" "X.18" "X.19" "X.20"
+## [21] "X.21" "X.22" "X.23" "X.24" "X.25" "X.26" "X.27" "X.28" "X.29" "X.30"
+## [31] "X.31" "X.32"
+```
+
+
 <h4 id="imper">Detect and Remark Imperative Sentences</h4>
 
 
-<h4 id="naer">Replace Missing Values (NA)</h4>
+```r
+dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
+    "sue"), 2)), statement=c("go get it|", "I hate to read.",
+    "Stop running!", "I like it!", "You are terrible!", "Don't!",
+    "Greg, go to the red, brick office.", "Tyler go to the gym.",
+    "Alex don't run."), stringsAsFactors = FALSE)
+```
 
 
 
+<pre><code>   name                          statement
+1   sue                         go get it|
+2  greg                    I hate to read.
+3 tyler                      Stop running!
+4  phil                         I like it!
+5   sue                  You are terrible!
+6  greg                             Don't!
+7 tyler Greg, go to the red, brick office.
+8  phil               Tyler go to the gym.
+9   sue                    Alex don't run.
+</code></pre>
+
+<pre><code class="r">imperative(dat, "name", "statement", additional.names = c("Alex"))
+</code></pre>
+
+<pre><code>   name                           statement
+1   sue                         go get it*|
+2  greg                     I hate to read.
+3 tyler                      Stop running*!
+4  phil                          I like it!
+5   sue                   You are terrible!
+6  greg                             Don't*!
+7 tyler Greg, go to the red, brick office*.
+8  phil               Tyler go to the gym*.
+9   sue                    Alex don't run*.
+</code></pre>
+
+<pre><code class="r">imperative(dat, "name", "statement", lock.incomplete = TRUE, "Alex")
+</code></pre>
+
+<pre><code>   name                           statement
+1   sue                          go get it|
+2  greg                     I hate to read.
+3 tyler                      Stop running*!
+4  phil                          I like it!
+5   sue                   You are terrible!
+6  greg                             Don't*!
+7 tyler Greg, go to the red, brick office*.
+8  phil               Tyler go to the gym*.
+9   sue                    Alex don't run*.
+</code></pre>
+
+<pre><code class="r">imperative(dat, "name", "statement", additional.names = "Alex", warning=TRUE)
+</code></pre>
+
+<pre><code>   name                           statement warnings
+1   sue                         go get it*|        -
+2  greg                     I hate to read.     read
+3 tyler                      Stop running*!        -
+4  phil                          I like it!        -
+5   sue                   You are terrible!        -
+6  greg                             Don't*!        -
+7 tyler Greg, go to the red, brick office*. 2 commas
+8  phil               Tyler go to the gym*.        -
+9   sue                    Alex don't run*.  ebonics
+</code></pre>
 
 
 <h3 id="data">Data Sets</h3>

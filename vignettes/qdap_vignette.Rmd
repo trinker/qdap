@@ -4646,29 +4646,122 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="end_mark"> - `r HR("#endmark", "Sentence End Marks")`
 </form>
 
+<form action="http://trinker.github.io/qdap_dev/ID.html" target="_blank">
+    <input type="submit" value="ID"> - `r HR("#id", "Generate unique ID")`
+</form>
+
 <form action="http://trinker.github.io/qdap_dev/imperative.html" target="_blank">
     <input type="submit" value="imperative"> - `r HR("#imper", "Detect and Remark Imperative Sentences")`
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/NAer.html" target="_blank">
-    <input type="submit" value="NAer"> - `r HR("#naer", "Replace Missing Values (NA)")`
-</form>
 </div>
-
 
 <h4 id="incomp">Test for Incomplete Sentences</h4>
 
+```{r}
+dat <- sentSplit(DATA, "state", stem.col = FALSE)
+dat$state[c(2, 5)] <- paste(strip(dat$state[c(2, 5)]), "|")
+## Remove incomplete sentences and warn.
+end_inc(dat, "state")
+## Remove incomplete sentences and no warning.
+end_inc(dat, "state", warning.report = FALSE)
+## List of logical checks for which are not/are incomplete
+end_inc(dat, "state", which.mode = TRUE)
+```
 
 <h4 id="endmark">Sentence End Marks</h4>
 
+```{r}
+end_mark(DATA.SPLIT$state)
+```
+```{r}
+## Grab questions
+ques <- mraja1spl[end_mark(mraja1spl$dialogue) == "?", ] 
+htruncdf(ques)
+## Grab non questions
+non.ques <- mraja1spl[end_mark(mraja1spl$dialogue) != "?", ] 
+htruncdf(non.ques, 20)
+## Grab ? and . ending sentences
+ques.per <- mraja1spl[end_mark(mraja1spl$dialogue) %in% c(".", "?"), ] 
+htruncdf(ques.per, 20)
+```
+
+<h4 id="id">Generate unique ID</h4>
+
+```{r}
+ID(list(1, 4, 6))
+ID(matrix(1:10, ncol=1))
+ID(mtcars)
+ID(mtcars, TRUE)
+```
 
 <h4 id="imper">Detect and Remark Imperative Sentences</h4>
 
+```{r}
+dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
+    "sue"), 2)), statement=c("go get it|", "I hate to read.",
+    "Stop running!", "I like it!", "You are terrible!", "Don't!",
+    "Greg, go to the red, brick office.", "Tyler go to the gym.",
+    "Alex don't run."), stringsAsFactors = FALSE)
+```
 
-<h4 id="naer">Replace Missing Values (NA)</h4>
 
+<pre><code>   name                          statement
+1   sue                         go get it|
+2  greg                    I hate to read.
+3 tyler                      Stop running!
+4  phil                         I like it!
+5   sue                  You are terrible!
+6  greg                             Don't!
+7 tyler Greg, go to the red, brick office.
+8  phil               Tyler go to the gym.
+9   sue                    Alex don't run.
+</code></pre>
 
+<pre><code class="r">imperative(dat, "name", "statement", additional.names = c("Alex"))
+</code></pre>
 
+<pre><code>   name                           statement
+1   sue                         go get it*|
+2  greg                     I hate to read.
+3 tyler                      Stop running*!
+4  phil                          I like it!
+5   sue                   You are terrible!
+6  greg                             Don't*!
+7 tyler Greg, go to the red, brick office*.
+8  phil               Tyler go to the gym*.
+9   sue                    Alex don't run*.
+</code></pre>
+
+<pre><code class="r">imperative(dat, "name", "statement", lock.incomplete = TRUE, "Alex")
+</code></pre>
+
+<pre><code>   name                           statement
+1   sue                          go get it|
+2  greg                     I hate to read.
+3 tyler                      Stop running*!
+4  phil                          I like it!
+5   sue                   You are terrible!
+6  greg                             Don't*!
+7 tyler Greg, go to the red, brick office*.
+8  phil               Tyler go to the gym*.
+9   sue                    Alex don't run*.
+</code></pre>
+
+<pre><code class="r">imperative(dat, "name", "statement", additional.names = "Alex", warning=TRUE)
+</code></pre>
+
+<pre><code>   name                           statement warnings
+1   sue                         go get it*|        -
+2  greg                     I hate to read.     read
+3 tyler                      Stop running*!        -
+4  phil                          I like it!        -
+5   sue                   You are terrible!        -
+6  greg                             Don't*!        -
+7 tyler Greg, go to the red, brick office*. 2 commas
+8  phil               Tyler go to the gym*.        -
+9   sue                    Alex don't run*.  ebonics
+</code></pre>
 
 
 <h3 id="data">Data Sets</h3>
