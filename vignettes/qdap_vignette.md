@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 25.34 15.00 16.30 25.34 16.30 15.00 15.79 25.34 19.70 22.40 22.40
-## [12] 19.70 19.70 15.00 15.79 15.79 22.40 15.79 15.79 16.30
+##  [1] 19.70 15.79 22.40 19.70 25.34 15.79 15.79 25.34 15.79 22.40 22.40
+## [12] 25.34 22.40 19.70 22.40 15.00 15.79 15.00 25.34 25.34
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 25.34 15.00 16.30 25.34 16.30 15.00 15.79 25.34 19.70 22.40 22.40
-## [12] 19.70 19.70 15.00 15.79 15.79 22.40 15.79 15.79 16.30
+##  [1] 19.70 15.79 22.40 19.70 25.34 15.79 15.79 25.34 15.79 22.40 22.40
+## [12] 25.34 22.40 19.70 22.40 15.00 15.79 15.00 25.34 25.34
 ```
 
 
@@ -9229,7 +9229,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x115f4b50>
+<environment: 0x0fa8a080>
 ```
 
 ```r
@@ -10608,7 +10608,7 @@ For more see <a href="http://www.r-statistics.com/2012/08/how-to-load-the-rjava-
 
 <h3 id="connect">Recommended Packages (Extending qdap)</h3>
 
-qdap is designed to be a bridge between qualitative text and the quantitative tools that R and its massive collection of add on packages have to offer.  The following categorized list is are examples of packages that I have used to further extend the text analysis of qdap .
+qdap is designed to be a bridge between qualitative text and the quantitative tools that R and its massive collection of add on packages have to offer.  The following categorized list of packages are tools that I have used to further extend the text analysis of qdap.
 
 <h4 id="plotting">Plotting</h4> 
 

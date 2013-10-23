@@ -5022,7 +5022,7 @@ For more see <a href="http://www.r-statistics.com/2012/08/how-to-load-the-rjava-
 
 <h3 id="connect">Recommended Packages (Extending qdap)</h3>
 
-qdap is designed to be a bridge between qualitative text and the quantitative tools that R and its massive collection of add on packages have to offer.  The following categorized list is are examples of packages that I have used to further extend the text analysis of qdap .
+qdap is designed to be a bridge between qualitative text and the quantitative tools that R and its massive collection of add on packages have to offer.  The following categorized list of packages are tools that I have used to further extend the text analysis of qdap.
 
 <h4 id="plotting">Plotting</h4> 
 
