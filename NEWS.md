@@ -108,6 +108,9 @@ relatively new to CRAN, made these changes sensible at this point.
 * `lview` a function to unclass a list output that has a special print method 
   that returns only a portion of the output.  `lview` reclasses to "list".
 
+* `word_cor` added to find words within grouping variables that are associated
+  based on correlation.
+
 <b>MINOR FEATURES</b>
 
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 

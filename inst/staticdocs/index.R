@@ -133,7 +133,8 @@ list(
         "diversity",
         "formality",
         "kullback_leibler",
-        "polarity"
+        "polarity",
+        "word_cor"
       )
     ),
     sd_section("qdap Tools", 
