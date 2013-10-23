@@ -4909,7 +4909,7 @@ cat(paste(unlist(rws), collapse="\n"))
 
 <h3 id="dict">Dictionaries and Word Lists</h3>
 
-Dictories/Wordlists utilized by qdap come from the found in the `r HR("http://trinker.github.io/qdapDictionaries", "qdapDictionaries")` package.
+qdap utilizes the following dictionaries/wordlists from the `r HR("http://trinker.github.io/qdapDictionaries", "qdapDictionaries")` package.
 
 <div class="textbox", style="background-color: #D6EFD6;"> 
 The following dictionaries/word lists are utilized by qdap (click to view more)
