@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 19.70 15.00 22.40 15.79 15.79 16.30 16.30 15.79 19.70 16.30 15.79
-## [12] 15.00 22.40 15.79 16.30 19.70 15.79 22.40 15.79 25.34
+##  [1] 15.00 16.30 25.34 25.34 19.70 15.79 16.30 22.40 15.79 15.79 16.30
+## [12] 15.00 16.30 15.00 22.40 25.34 19.70 16.30 16.30 22.40
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 19.70 15.00 22.40 15.79 15.79 16.30 16.30 15.79 19.70 16.30 15.79
-## [12] 15.00 22.40 15.79 16.30 19.70 15.79 22.40 15.79 25.34
+##  [1] 15.00 16.30 25.34 25.34 19.70 15.79 16.30 22.40 15.79 15.79 16.30
+## [12] 15.00 16.30 15.00 22.40 25.34 19.70 16.30 16.30 22.40
 ```
 
 
@@ -9229,7 +9229,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x12fa773c>
+<environment: 0x11407e18>
 ```
 
 ```r
@@ -10495,8 +10495,10 @@ The following data sets are included with qdap for demonstration purposes (click
 
 <h3 id="dict">Dictionaries and Word Lists</h3>
 
+Dictories/Wordlists utilized by qdap come from the found in the <a href="http://trinker.github.io/qdapDictionaries">qdapDictionaries</a> package.
+
 <div class="textbox", style="background-color: #D6EFD6;"> 
-The following dictionaries/word lists are utilized by qdap and found in the <a href="http://trinker.github.io/qdapDictionaries">qdapDictionaries</a> package (click to view more)
+The following dictionaries/word lists are utilized by qdap (click to view more)
 
 <form action="http://trinker.github.io/qdapDictionaries/abbreviations.html" target="_blank" ">
     <input type="submit" value="abbreviations"> - Small Abbreviations Data Set
@@ -10639,7 +10641,7 @@ qdap is designed to be a bridge between qualitative text and the quantitative to
 4. <a href="http://cran.r-project.org/web/packages/sem/index.html">sem</a>                 
 
 
-<h4 id="textmining"></h4>
+<h4 id="textmining">Text Mining</h4>
 
 1. <a href="http://cran.r-project.org/web/packages/tm/index.html">tm</a>              
 2. <a href="http://cran.r-project.org/web/packages/koRpus/index.html">koRpus</a>             
