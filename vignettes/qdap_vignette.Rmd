@@ -4656,14 +4656,13 @@ The following functions will be utilized in this section (click to view more):
 
 </div>
 
-
 qdap provies a few general functions for categorizing sentence types.  This section will outline these functions and some of their uses.
 
 <h4 id="incomp">Test for Incomplete Sentences</h4>
 
 It is often helpful to determine if a sentence (a row) is incomplete, as this may effect some forms of analysis. The `r FUN("end_inc")` provides this functionality after `r FUN("incomplete_replace")` has replaced various incomplete sentence notation with the standard qdap notation (<b><font color="green" face="courier new">|</font></b>).
 
-<p id="end_inc1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("end_inc")` Examples</b> `r FT(orange, 5, text="&diams;")`</p>
+<p id="incomp1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("end_inc")` Examples</b> `r FT(orange, 5, text="&diams;")` </p >
 
 
 ```{r}
@@ -4685,7 +4684,7 @@ end_inc(dat, "state", which.mode = TRUE)
 It is often useful to determine what sentence type (end mark) a sentence is.  The `r FUN("end_mark")` extracts the end marks from a sentence.  The output can also be used logically grab sentence types. 
 
 
-<p id="endmark1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("end_mark")` Example</b> `r FT(orange, 5, text="&diams;")`</p>
+<p id="endmark1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("end_mark")` Example</b> `r FT(orange, 5, text="&diams;")`</p >
 
 
 ```{r}
@@ -4693,7 +4692,7 @@ end_mark(DATA.SPLIT$state)
 ```
 
 
-<p id="endmark2">`r FT(orange, 5, text="&diams;")` <b>`r FUN("end_mark")`</b> - <em>Grab Sentence Types</em>`r FT(orange, 5, text="&diams;")`</p>
+<p id="endmark2">`r FT(orange, 5, text="&diams;")` <b>`r FUN("end_mark")`</b> - <em>Grab Sentence Types</em>`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r}
 ## Grab questions
@@ -4711,7 +4710,7 @@ htruncdf(ques.per, 12)
 
 The `r FUN("ID")` is a shortcut approach to providing row or element IDs on the fly.
 
-<p id="IDfun">`r FT(orange, 5, text="&diams;")` <b>`r FUN("ID")`</b> - <em>Grab Sentence Types</em>`r FT(orange, 5, text="&diams;")`</p>
+<p id="IDfun">`r FT(orange, 5, text="&diams;")` <b>`r FUN("ID")`</b> - <em>Grab Sentence Types</em>`r FT(orange, 5, text="&diams;")`</p >
 
 
 ```{r}
@@ -4727,7 +4726,7 @@ question_type(DATA.SPLIT$state, ID(DATA.SPLIT, TRUE))
 qdap allows for the detection of imperative sentences via the `r FUN("imperative")` function.  The function detects and optionally remarks as imperative, an asterisk (<b><font color="green" face="courier new">*</font></b>) is used, however, `r FUN("imperative")` is sensitive to choppy, comma riddled sentences and dialects such as African American Vernacular English.  The algorithm is complex and thus slower.
 
 
-<p id="imperative1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("imperative")`</b> - <em>Imperative Data</em>`r FT(orange, 5, text="&diams;")`</p>
+<p id="imperative1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("imperative")`</b> - <em>Imperative Data</em>`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r}
 (dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil",
@@ -4750,7 +4749,7 @@ qdap allows for the detection of imperative sentences via the `r FUN("imperative
 9   sue                    Alex don't run.
 </code></pre>
 
-<p id="imperative2">`r FT(orange, 5, text="&diams;")` <b>`r FUN("imperative")`</b> - <em>Re-mark End Marks</em>`r FT(orange, 5, text="&diams;")`</p>
+<p id="imperative2">`r FT(orange, 5, text="&diams;")` <b>`r FUN("imperative")`</b> - <em>Re-mark End Marks</em>`r FT(orange, 5, text="&diams;")`</p >
 
 
 <pre><code class="r">imperative(dat, "name", "statement", additional.names = c("Alex"))
@@ -4769,7 +4768,7 @@ qdap allows for the detection of imperative sentences via the `r FUN("imperative
 </code></pre>
 
 
-<p id="imperative1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("imperative")`</b> - <em>Handle Incomplete Sentences</em>`r FT(orange, 5, text="&diams;")`</p>
+<p id="imperative1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("imperative")`</b> - <em>Handle Incomplete Sentences</em>`r FT(orange, 5, text="&diams;")`</p >
 
 
 <pre><code class="r">imperative(dat, "name", "statement", lock.incomplete = TRUE, "Alex")
@@ -4787,7 +4786,7 @@ qdap allows for the detection of imperative sentences via the `r FUN("imperative
 9   sue                    Alex don't run*.
 </code></pre>
 
-<p id="imperative1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("imperative")`</b> - <em>Warning Report</em>`r FT(orange, 5, text="&diams;")`</p>
+<p id="imperative1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("imperative")`</b> - <em>Warning Report</em>`r FT(orange, 5, text="&diams;")`</p >
 
 <pre><code class="r">imperative(dat, "name", "statement", additional.names = "Alex", warning=TRUE)
 </code></pre>
@@ -4803,6 +4802,7 @@ qdap allows for the detection of imperative sentences via the `r FUN("imperative
 8  phil               Tyler go to the gym*.        -
 9   sue                    Alex don't run*.     AAVE
 </code></pre>
+
 
 
 <h3 id="data">Data Sets</h3>

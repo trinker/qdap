@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.00 15.79 16.30 15.79 15.00 15.00 19.70 16.30 15.00 19.70 22.40
-## [12] 16.30 22.40 22.40 15.00 15.00 25.34 25.34 25.34 16.30
+##  [1] 16.30 15.79 15.00 15.00 15.00 16.30 19.70 15.00 19.70 22.40 22.40
+## [12] 19.70 15.00 19.70 15.00 25.34 16.30 22.40 25.34 15.00
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.00 15.79 16.30 15.79 15.00 15.00 19.70 16.30 15.00 19.70 22.40
-## [12] 16.30 22.40 22.40 15.00 15.00 25.34 25.34 25.34 16.30
+##  [1] 16.30 15.79 15.00 15.00 15.00 16.30 19.70 15.00 19.70 22.40 22.40
+## [12] 19.70 15.00 19.70 15.00 25.34 16.30 22.40 25.34 15.00
 ```
 
 
@@ -9229,7 +9229,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x127e26e0>
+<environment: 0x1277df98>
 ```
 
 ```r
@@ -10073,14 +10073,13 @@ The following functions will be utilized in this section (click to view more):
 
 </div>
 
-
 qdap provies a few general functions for categorizing sentence types.  This section will outline these functions and some of their uses.
 
 <h4 id="incomp">Test for Incomplete Sentences</h4>
 
 It is often helpful to determine if a sentence (a row) is incomplete, as this may effect some forms of analysis. The <a href="http://trinker.github.io/qdap_dev/end_inc.html" target="_blank"><code>end_inc</code></a> provides this functionality after <a href="http://trinker.github.io/qdap_dev/incomplete_replace.html" target="_blank"><code>incomplete_replace</code></a> has replaced various incomplete sentence notation with the standard qdap notation (<b><font color="green" face="courier new">|</font></b>).
 
-<p id="end_inc1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/end_inc.html" target="_blank"><code>end_inc</code></a> Examples</b> <font size="5" color="orange">&diams;</font></p>
+<p id="incomp1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/end_inc.html" target="_blank"><code>end_inc</code></a> Examples</b> <font size="5" color="orange">&diams;</font> </p >
 
 
 
@@ -10174,7 +10173,7 @@ end_inc(dat, "state", which.mode = TRUE)
 It is often useful to determine what sentence type (end mark) a sentence is.  The <a href="http://trinker.github.io/qdap_dev/end_mark.html" target="_blank"><code>end_mark</code></a> extracts the end marks from a sentence.  The output can also be used logically grab sentence types. 
 
 
-<p id="endmark1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/end_mark.html" target="_blank"><code>end_mark</code></a> Example</b> <font size="5" color="orange">&diams;</font></p>
+<p id="endmark1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/end_mark.html" target="_blank"><code>end_mark</code></a> Example</b> <font size="5" color="orange">&diams;</font></p >
 
 
 
@@ -10188,7 +10187,7 @@ end_mark(DATA.SPLIT$state)
 
 
 
-<p id="endmark2"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/end_mark.html" target="_blank"><code>end_mark</code></a></b> - <em>Grab Sentence Types</em><font size="5" color="orange">&diams;</font></p>
+<p id="endmark2"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/end_mark.html" target="_blank"><code>end_mark</code></a></b> - <em>Grab Sentence Types</em><font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -10260,7 +10259,7 @@ htruncdf(ques.per, 12)
 
 The <a href="http://trinker.github.io/qdap_dev/ID.html" target="_blank"><code>ID</code></a> is a shortcut approach to providing row or element IDs on the fly.
 
-<p id="IDfun"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/ID.html" target="_blank"><code>ID</code></a></b> - <em>Grab Sentence Types</em><font size="5" color="orange">&diams;</font></p>
+<p id="IDfun"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/ID.html" target="_blank"><code>ID</code></a></b> - <em>Grab Sentence Types</em><font size="5" color="orange">&diams;</font></p >
 
 
 
@@ -10328,7 +10327,7 @@ question_type(DATA.SPLIT$state, ID(DATA.SPLIT, TRUE))
 qdap allows for the detection of imperative sentences via the <a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a> function.  The function detects and optionally remarks as imperative, an asterisk (<b><font color="green" face="courier new">*</font></b>) is used, however, <a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a> is sensitive to choppy, comma riddled sentences and dialects such as African American Vernacular English.  The algorithm is complex and thus slower.
 
 
-<p id="imperative1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a></b> - <em>Imperative Data</em><font size="5" color="orange">&diams;</font></p>
+<p id="imperative1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a></b> - <em>Imperative Data</em><font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -10366,7 +10365,7 @@ qdap allows for the detection of imperative sentences via the <a href="http://tr
 9   sue                    Alex don't run.
 </code></pre>
 
-<p id="imperative2"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a></b> - <em>Re-mark End Marks</em><font size="5" color="orange">&diams;</font></p>
+<p id="imperative2"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a></b> - <em>Re-mark End Marks</em><font size="5" color="orange">&diams;</font></p >
 
 
 <pre><code class="r">imperative(dat, "name", "statement", additional.names = c("Alex"))
@@ -10385,7 +10384,7 @@ qdap allows for the detection of imperative sentences via the <a href="http://tr
 </code></pre>
 
 
-<p id="imperative1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a></b> - <em>Handle Incomplete Sentences</em><font size="5" color="orange">&diams;</font></p>
+<p id="imperative1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a></b> - <em>Handle Incomplete Sentences</em><font size="5" color="orange">&diams;</font></p >
 
 
 <pre><code class="r">imperative(dat, "name", "statement", lock.incomplete = TRUE, "Alex")
@@ -10403,7 +10402,7 @@ qdap allows for the detection of imperative sentences via the <a href="http://tr
 9   sue                    Alex don't run*.
 </code></pre>
 
-<p id="imperative1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a></b> - <em>Warning Report</em><font size="5" color="orange">&diams;</font></p>
+<p id="imperative1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/imperative.html" target="_blank"><code>imperative</code></a></b> - <em>Warning Report</em><font size="5" color="orange">&diams;</font></p >
 
 <pre><code class="r">imperative(dat, "name", "statement", additional.names = "Alex", warning=TRUE)
 </code></pre>
@@ -10419,6 +10418,7 @@ qdap allows for the detection of imperative sentences via the <a href="http://tr
 8  phil               Tyler go to the gym*.        -
 9   sue                    Alex don't run*.     AAVE
 </code></pre>
+
 
 
 <h3 id="data">Data Sets</h3>
