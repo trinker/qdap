@@ -45,6 +45,14 @@
 #' (x <- v_outer(L1, wc3))
 #' diag(x) <- (sapply(L1, length))
 #' x
+#' 
+#' ## Cosine similarity
+#' cos_sim <- function(x, y) x %*% y / sqrt(x%*%x * y%*%y)
+#' mat <- matrix(rbinom(500, 0:1, .45), ncol=10)
+#' v_outer(mat, cos_sim)
+#' 
+#' v_outer(with(DATA, wfm(state, person)), cos_sim)
+#' with(DATA, dissimilarity(state, person))
 #' }
 v_outer <- 
 function(x, FUN, ...){

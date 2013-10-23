@@ -4167,7 +4167,7 @@ citep(bib["Wickham2009"])
 
 <h4 id="dispersion">Lexical Dispersion Plot</h4>
 
-The *lexical dispersion plot* is a useful too (particularly in the early stage of analysis) for looking at the dispersion of a word throughout the dialogue.  `r FUN("dispersion_plot")` provides the emans to look at and compare multiple word dispersions across repeated measures and/or grouping variables.  This can be useful in conjunction with a `r HR("#corr", "correlation analysis")`.  
+The *lexical dispersion plot* is a useful too (particularly in the early stage of analysis) for looking at the dispersion of a word throughout the dialogue.  `r FUN("dispersion_plot")` provides the means to look at and compare multiple word dispersions across repeated measures and/or grouping variables.  This can be useful in conjunction with a `r HR("#corr", "correlation analysis")`.  
 
 The `r HR("#match", "search mechanism")` used by `r FUN("dispersion_plot")` is identical to `r FUN("termco")` and `r FUN("term_match", "termco")`.  For example, <b><font color="green" face="courier new">" love "</font></b> will not yield the same search as <b><font color="green" face="courier new">"love"</font></b>.  The `r HR("#disper1", "search example below")` demonstrates the way the search functions.  For more information see the `r HR("#match", "termco search description")` above.
 
@@ -4341,9 +4341,9 @@ with(rajSPLIT, gantt_plot(dialogue, list(fam.aff, sex), act,
     transform=T))
 ```
 
-Often the default colors are less useful in displaying the trends in a way that is most meaningful. Because `r FUN("gantt_plot")` is a wrapper for ggplot2 the color pallettes can easily be extended to use with the output from `r FUN("gantt_plot")`.
+Often the default colors are less useful in displaying the trends in a way that is most meaningful. Because `r FUN("gantt_plot")` is a wrapper for ggplot2 the color palettes can easily be extended to use with the output from `r FUN("gantt_plot")`.
 
-<p id="changecols">`r FT(orange, 5, text="&diams;")` **`r FUN("gantt_plot")`** - *Color Pallette Examples*`r FT(orange, 5, text="&diams;")`</p >
+<p id="changecols">`r FT(orange, 5, text="&diams;")` **`r FUN("gantt_plot")`** - *Color Palette Examples*`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 14.5}
 ## Load needed packages
@@ -4557,7 +4557,7 @@ rajSPLIT2 <- do.call(rbind, lapply(split(rajSPLIT, rajSPLIT$act), head, 25))
 tot_plot(rajSPLIT2, "dialogue", grouping.var = "fam.aff", facet.var = "act")
 ```
 
-Because `r FUN("tot_plot")` is based on the `r HR("http://docs.ggplot2.org/current/", "ggplot2 package")` (Wickham, 2009) and `r FUN("tot_plot")` invisibly returns the ggplot2 object, the output (of the class "ggplot") can be altered in the same way that another ggplot2 object can be.  In the following examples the color pallette is altered.
+Because `r FUN("tot_plot")` is based on the `r HR("http://docs.ggplot2.org/current/", "ggplot2 package")` (Wickham, 2009) and `r FUN("tot_plot")` invisibly returns the ggplot2 object, the output (of the class "ggplot") can be altered in the same way that another ggplot2 object can be.  In the following examples the color palette is altered.
 
 <p id="tot3">`r FT(orange, 5, text="&diams;")` **`r FUN("tot_plot")`** - *Alter Colors* `r FT(orange, 5, text="&diams;")`</p >
 
@@ -4603,7 +4603,7 @@ with(DATA , trans_venn(state, person, legend.location = "topright"))
 
 <h4 id="wordnet">Word Network Plot</h4>
 
-Veiwing connections between words within grouping variables (particularly turns of talk) are a useful means of examining what words are connected together.  For example, this may be useful to a researcher who is looking at particular vocabulary usage by a teacher.  The researcher may wish to know what other terms are supporting/supported by/connected to the terms of interest.  `r FUN("word_network_plot")` a wrapper for the `r HR2("http://igraph.sourceforge.net/", "igraph")` package.  This approach may be used on concert with `r HR("#corr", "correlations between words")`.  Not that terms could also be combined via the `r FUN("wfm_combine", "Word_Frequency_Matrix")` before running a correlation in order to represent the clustering of words that `r FUN("word_network_plot")` handles. Further analysis of the word correlations can be tested via boostrapping of the attained correlation against a random correlation. It is worth noting that the `r FUN("word_associate")` function is a wrapper for `r FUN("word_network_plot")` (for mor see `r HR("#assoc", "this example")` above).
+Viewing connections between words within grouping variables (particularly turns of talk) are a useful means of examining what words are connected together.  For example, this may be useful to a researcher who is looking at particular vocabulary usage by a teacher.  The researcher may wish to know what other terms are supporting/supported by/connected to the terms of interest.  `r FUN("word_network_plot")` a wrapper for the `r HR2("http://igraph.sourceforge.net/", "igraph")` package.  This approach may be used on concert with `r HR("#corr", "correlations between words")`.  Not that terms could also be combined via the `r FUN("wfm_combine", "Word_Frequency_Matrix")` before running a correlation in order to represent the clustering of words that `r FUN("word_network_plot")` handles. Further analysis of the word correlations can be tested via bootstrapping of the attained correlation against a random correlation. It is worth noting that the `r FUN("word_associate")` function is a wrapper for `r FUN("word_network_plot")` (for mor see `r HR("#assoc", "this example")` above).
 
 <p id="wordnet1">`r FT(orange, 5, text="&diams;")` **`r FUN("word_network_plot")`** - *Between Turns of Talk: All Words* `r FT(orange, 5, text="&diams;")`</p >
 
@@ -4808,9 +4808,13 @@ qdap allows for the detection of imperative sentences via the `r FUN("imperative
 <h3 id="data">Data Sets</h3>
 
 <div class="textbox", style="background-color: #D6EFD6;"> 
-The following data sets are included with qdap (click to view more)
+The following data sets are included with qdap for demonstration purposes (click to view more)
 <form action="http://trinker.github.io/qdap_dev/DATA.html" target="_blank">
     <input type="submit" value="DATA"> - Fictitious Classroom Dialogue
+</form>
+          
+<form action="http://trinker.github.io/qdap_dev/DATA.SPLIT.html" target="_blank">
+    <input type="submit" value="DATA.SPLIT"> - Fictitious Split Sentence Classroom Dialogue
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/DATA2.html" target="_blank">
@@ -4905,102 +4909,104 @@ cat(paste(unlist(rws), collapse="\n"))
 
 <h3 id="dict">Dictionaries and Word Lists</h3>
 
+Dictories/Wordlists utilized by qdap come from the found in the `r HR("http://trinker.github.io/qdapDictionaries", "qdapDictionaries")` package.
+
 <div class="textbox", style="background-color: #D6EFD6;"> 
 The following dictionaries/word lists are utilized by qdap (click to view more)
 
-<form action="http://trinker.github.io/qdapDictionaries//abbreviations.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/abbreviations.html" target="_blank" ">
     <input type="submit" value="abbreviations"> - Small Abbreviations Data Set
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//action.verbs.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/action.verbs.html" target="_blank" ">
     <input type="submit" value="action.verbs"> - Action Word List
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//adverb.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/adverb.html" target="_blank" ">
     <input type="submit" value="adverb"> - Adverb Word List
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//BuckleySaltonSWL.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/BuckleySaltonSWL.html" target="_blank" ">
     <input type="submit" value="BuckleySaltonSWL"> - Buckley & Salton Stopword List
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//contractions.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/contractions.html" target="_blank" ">
     <input type="submit" value="contractions"> - Contraction Conversions
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//DICTIONARY.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/DICTIONARY.html" target="_blank" ">
     <input type="submit" value="DICTIONARY"> - Nettalk Corpus Syllable Data Set
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//emoticon.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/emoticon.html" target="_blank" ">
     <input type="submit" value="emoticon"> - Emoticons Data Set
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//env.syl.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/env.syl.html" target="_blank" ">
     <input type="submit" value="env.syl"> - Syllable Lookup Environment
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//env.syn.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/env.syn.html" target="_blank" ">
     <input type="submit" value="env.syn"> - Syllable Lookup Environment
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//increase.amplification.words.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/increase.amplification.words.html" target="_blank" ">
     <input type="submit" value="increase.amplification.words"> - Amplifying Words
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//interjections.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/interjections.html" target="_blank" ">
     <input type="submit" value="interjections"> - Interjections
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//labMT.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/labMT.html" target="_blank" ">
     <input type="submit" value="labMT"> - Language Assessment by Mechanical Turk (labMT) Sentiment Words
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//NAMES.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/NAMES.html" target="_blank" ">
     <input type="submit" value="NAMES"> - First Names and Gender (U.S.)
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//NAMES_SEX.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/NAMES_SEX.html" target="_blank" ">
     <input type="submit" value="NAMES_SEX"> - First Names and Predictive Gender (U.S.)
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//NAMES_LIST.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/NAMES_LIST.html" target="_blank" ">
     <input type="submit" value="NAMES_LIST"> - First Names and Predictive Gender (U.S.) List
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//negation.words.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/negation.words.html" target="_blank" ">
     <input type="submit" value="negation.words"> - Negating Words
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//negative.words.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/negative.words.html" target="_blank" ">
     <input type="submit" value="negative.words"> - Negative Words
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//OnixTxtRetToolkitSWL1.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/OnixTxtRetToolkitSWL1.html" target="_blank" ">
     <input type="submit" value="OnixTxtRetToolkitSWL1"> - Onix Text Retrieval Toolkit Stopword List 1
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//positive.words.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/positive.words.html" target="_blank" ">
     <input type="submit" value="positive.words"> - Positive Words
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//preposition.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/preposition.html" target="_blank" ">
     <input type="submit" value="preposition"> - Preposition Words
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//SYNONYM.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/SYNONYM.html" target="_blank" ">
     <input type="submit" value="SYNONYM"> - Synonyms Data Set
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//Top100Words.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/Top100Words.html" target="_blank" ">
     <input type="submit" value="Top100Words"> - Fry's  100 Most Commonly Used English Words
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//Top200Words.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/Top200Words.html" target="_blank" ">
     <input type="submit" value="Top200Words"> - Fry's 200 Most Commonly Used English Words
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries//Top25Words.html" target="_blank" ">
+<form action="http://trinker.github.io/qdapDictionaries/Top25Words.html" target="_blank" ">
     <input type="submit" value="Top25Words"> - Fry's 25 Most Commonly Used English Words
 </form>
 </div>
@@ -5016,7 +5022,47 @@ For more see <a href="http://www.r-statistics.com/2012/08/how-to-load-the-rjava-
 
 <h3 id="connect">Recommended Packages (Extending qdap)</h3>
 
+qdap is designed to be a bridge between qualitative text and the quantitative tools that R and its massive collection of add on packages have to offer.  The following categorized list is are examples of packages that I have used to further extend the text analysis of qdap .
 
+<h4 id="plotting">Plotting</h4> 
+
+1. `r HR("http://docs.ggplot2.org/current/", "ggplot2")`         
+2. `r HR("http://cran.r-project.org/web/packages/gridExtra/index.html", "gridExtra")`             
+3. `r HR("http://igraph.sourceforge.net/", "igraph")`               
+4. `r HR("http://cran.r-project.org/web/packages/wordcloud/index.html", "wordcloud")`               
+
+
+<h4 id="reshaping">Reshaping/Aggregating</h4> 
+
+1. `r HR("http://datatable.r-forge.r-project.org/", "data.table")`             
+2. `r HR("http://cran.r-project.org/web/packages/plyr/index.html", "plyr")`              
+3. `r HR("http://cran.r-project.org/web/packages/reshape2/index.html", "reshape2")`             
+
+<h4 id="lsa">Semantics</h4> 
+
+1. `r HR("http://cran.r-project.org/web/packages/ca/index.html", "ca")`             
+2. `r HR("http://cran.r-project.org/web/packages/lda/index.html", "lda")`                 
+3. `r HR("http://cran.r-project.org/web/packages/lsa/index.html", "lsa")`                     
+4. `r HR("http://cran.r-project.org/web/packages/mallet/index.html", "mallet")`              
+5. `r HR("http://cran.r-project.org/web/packages/textir/index.html", "textir")`                 
+6. `r HR("http://cran.r-project.org/web/packages/topicmodels/index.html", "topicmodels")`               
+
+<h4 id="hlm">Multi Level Modeling/Structural Equation Modeling</h4>  
+
+1. `r HR("http://cran.r-project.org/web/packages/lme4/index.html", "lme4")`               
+2. `r HR("http://cran.r-project.org/web/packages/nlme/index.html", "nlme")`          
+3. `r HR("http://cran.r-project.org/web/packages/lavaan/index.html", "lavaan")`              
+4. `r HR("http://cran.r-project.org/web/packages/sem/index.html", "sem")`                 
+
+
+<h4 id="textmining">Text Mining</h4>
+
+1. `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm")`              
+2. `r HR("http://cran.r-project.org/web/packages/koRpus/index.html", "koRpus")`             
+3. `r HR("http://cran.r-project.org/web/packages/openNLP/index.html", "openNLP")`              
+4. `r HR("http://cran.r-project.org/web/packages/zipfR/index.html", "zipfR")`             
+
+For more on natural language processing see the related `r HR("http://cran.r-project.org/web/views/NaturalLanguageProcessing.html", "CRAN NLP task view")`.
 
 
 <hr>
