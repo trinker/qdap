@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 19.70 22.40 22.40 15.00 16.30 22.40 15.00 25.34 15.00 22.40 15.79
-## [12] 25.34 25.34 16.30 15.00 25.34 15.00 22.40 16.30 22.40
+##  [1] 19.70 19.70 15.79 19.70 16.30 22.40 15.79 15.00 19.70 16.30 25.34
+## [12] 16.30 19.70 19.70 15.00 19.70 22.40 25.34 19.70 15.00
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 19.70 22.40 22.40 15.00 16.30 22.40 15.00 25.34 15.00 22.40 15.79
-## [12] 25.34 25.34 16.30 15.00 25.34 15.00 22.40 16.30 22.40
+##  [1] 19.70 19.70 15.79 19.70 16.30 22.40 15.79 15.00 19.70 16.30 25.34
+## [12] 16.30 19.70 19.70 15.00 19.70 22.40 25.34 19.70 15.00
 ```
 
 
@@ -8719,18 +8719,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank">
-    <input type="submit" value="polarity"> - 
-
-```
-
-Error in base::parse(text = code, srcfile = NULL) : 
-  1:16: unexpected INCOMPLETE_STRING
-1: HR("#wordcor", "Word Associations (Correlations)
-                   ^
-
-```
-
-
+    <input type="submit" value="polarity"> - <a href="#wordcor">Word Associations (Correlations)</a>
 </form>
 </div>
 
@@ -9244,7 +9233,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x11baf0bc>
+<environment: 0x123ec344>
 ```
 
 ```r
@@ -9278,6 +9267,7 @@ word_cor(rajSPLIT$dialogue, x, "romeo", .45)
 
 
 <pre><code class="r">word_cor(rajSPLIT$dialogue, x, "love", .5)
+</code></pre>
 
 <pre><code>$love
  likewise 
@@ -9496,7 +9486,7 @@ qdap offers a number of plot methods for various outputs from functions (use <b>
 
 <h4 id="dispersion">Lexical Dispersion Plot</h4>
 
-The *lexical dispersion plot* is a useful too (particularly in the early stage of analysis) for looking at the dispersion of a word throughout the dialogue.  <a href="http://trinker.github.io/qdap_dev/dispersion_plot.html" target="_blank"><code>dispersion_plot</code></a> provides the means to look at and compare multiple word dispersions across repeated measures and/or grouping variables.  This can be useful in conjunction with a <a href="#corr">correlation analysis</a>.  
+The *lexical dispersion plot* is a useful tool (particularly in the early stage of analysis) for looking at the dispersion of a word throughout the dialogue.  <a href="http://trinker.github.io/qdap_dev/dispersion_plot.html" target="_blank"><code>dispersion_plot</code></a> provides the means to look at and compare multiple word dispersions across repeated measures and/or grouping variables.  This can be useful in conjunction with a <a href="#corr">correlation analysis</a>.  
 
 The <a href="#match">search mechanism</a> used by <a href="http://trinker.github.io/qdap_dev/dispersion_plot.html" target="_blank"><code>dispersion_plot</code></a> is identical to <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> and <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>term_match</code></a>.  For example, <b><font color="green" face="courier new">" love "</font></b> will not yield the same search as <b><font color="green" face="courier new">"love"</font></b>.  The <a href="#disper1">search example below</a> demonstrates the way the search functions.  For more information see the <a href="#match">termco search description</a> above.
 

@@ -3745,7 +3745,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank">
-    <input type="submit" value="polarity"> - `r HR("#wordcor", "Word Associations (Correlations)`
+    <input type="submit" value="polarity"> - `r HR("#wordcor", "Word Associations (Correlations)")`
 </form>
 </div>
 
@@ -4137,6 +4137,7 @@ word_cor(rajSPLIT$dialogue, x, "romeo", .45)
 
 
 <pre><code class="r">word_cor(rajSPLIT$dialogue, x, "love", .5)
+</code></pre>
 
 <pre><code>$love
  likewise 
@@ -4346,7 +4347,7 @@ citep(bib["Wickham2009"])
 
 <h4 id="dispersion">Lexical Dispersion Plot</h4>
 
-The *lexical dispersion plot* is a useful too (particularly in the early stage of analysis) for looking at the dispersion of a word throughout the dialogue.  `r FUN("dispersion_plot")` provides the means to look at and compare multiple word dispersions across repeated measures and/or grouping variables.  This can be useful in conjunction with a `r HR("#corr", "correlation analysis")`.  
+The *lexical dispersion plot* is a useful tool (particularly in the early stage of analysis) for looking at the dispersion of a word throughout the dialogue.  `r FUN("dispersion_plot")` provides the means to look at and compare multiple word dispersions across repeated measures and/or grouping variables.  This can be useful in conjunction with a `r HR("#corr", "correlation analysis")`.  
 
 The `r HR("#match", "search mechanism")` used by `r FUN("dispersion_plot")` is identical to `r FUN("termco")` and `r FUN("term_match", "termco")`.  For example, <b><font color="green" face="courier new">" love "</font></b> will not yield the same search as <b><font color="green" face="courier new">"love"</font></b>.  The `r HR("#disper1", "search example below")` demonstrates the way the search functions.  For more information see the `r HR("#match", "termco search description")` above.
 
