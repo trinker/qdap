@@ -1,0 +1,16 @@
+\name{plot.wfdf}
+\alias{plot.wfdf}
+\title{Plots a wfdf object}
+\usage{
+  \method{plot}{wfdf} (x, ...)
+}
+\arguments{
+  \item{x}{The wfdf object}
+
+  \item{\ldots}{Other arguments passed to
+  \code{\link[qdap]{plot.wfm}}.}
+}
+\description{
+  Plots a wfdf object.
+}
+

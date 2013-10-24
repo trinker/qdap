@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.00 22.40 15.00 15.00 22.40 19.70 19.70 15.79 16.30 15.79 22.40
-## [12] 19.70 15.79 25.34 16.30 25.34 15.00 16.30 19.70 22.40
+##  [1] 25.34 15.00 15.00 25.34 15.79 25.34 16.30 19.70 25.34 19.70 15.00
+## [12] 19.70 22.40 22.40 15.79 19.70 25.34 19.70 15.79 15.79
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.00 22.40 15.00 15.00 22.40 19.70 19.70 15.79 16.30 15.79 22.40
-## [12] 19.70 15.79 25.34 16.30 25.34 15.00 16.30 19.70 22.40
+##  [1] 25.34 15.00 15.00 25.34 15.79 25.34 16.30 19.70 25.34 19.70 15.00
+## [12] 19.70 22.40 22.40 15.79 19.70 25.34 19.70 15.79 15.79
 ```
 
 
@@ -6854,6 +6854,36 @@ chisq.test(out)
 
 
 
+<font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a>: Correspondence Analysis Example** <font size="5" color="orange">&diams;</font>
+
+<pre><code class="r">library(ca)
+
+## Grab Just the Candidates
+dat <- pres_debates2012
+dat <- dat[dat$person %in% qcv(ROMNEY, OBAMA), ]
+
+## Stem the text
+speech <- stemmer(dat$dialogue)
+
+## With 25 words removed
+mytable1 <- with(dat, wfm(speech, list(person, time), stopwords = Top25Words))
+
+## CA
+fit <- ca(mytable)
+summary(fit)
+plot(fit)
+plot3d.ca(fit, labels=1)
+
+## With 200 words removed
+mytable2 <- with(dat, wfm(speech, list(person, time), stopwords = Top200Words))
+
+## CA
+fit2 <- ca(mytable2)
+summary(fit2)
+plot(fit2)
+plot3d.ca(fit2, labels=1)
+</code></pre>
+
 <h5 id="tdm"><font color="green">Convert/Generate Term Document Matrix or Document Term Matrix</font></h5>
 
 Some packages that could further the analysis of qdap expect a Document Term or Term Document Matrix.  qdap's <a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a> is similar to the <a href="http://cran.r-project.org/web/packages/tm/index.html">tm package's</a> <a href="http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix">TermDocumentMatrix</a>     and <a href="http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix">DocumentTermMatrix</a>.  qdap does not try to replicate the extensive work of the<a href="http://cran.r-project.org/web/packages/tm/index.html">tm</a> package, however, the <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> and <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>dtm</code></a> do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.
@@ -9233,7 +9263,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x12990810>
+<environment: 0x3a383650>
 ```
 
 ```r

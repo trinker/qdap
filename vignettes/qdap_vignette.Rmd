@@ -2946,6 +2946,36 @@ chisq.test(out)
 ```
 
 
+`r FT(orange, 5, text="&diams;")` **`r FUN("wfm", "Word_Frequency_Matrix")`: Correspondence Analysis Example** `r FT(orange, 5, text="&diams;")`
+
+<pre><code class="r">library(ca)
+
+## Grab Just the Candidates
+dat <- pres_debates2012
+dat <- dat[dat$person %in% qcv(ROMNEY, OBAMA), ]
+
+## Stem the text
+speech <- stemmer(dat$dialogue)
+
+## With 25 words removed
+mytable1 <- with(dat, wfm(speech, list(person, time), stopwords = Top25Words))
+
+## CA
+fit <- ca(mytable)
+summary(fit)
+plot(fit)
+plot3d.ca(fit, labels=1)
+
+## With 200 words removed
+mytable2 <- with(dat, wfm(speech, list(person, time), stopwords = Top200Words))
+
+## CA
+fit2 <- ca(mytable2)
+summary(fit2)
+plot(fit2)
+plot3d.ca(fit2, labels=1)
+</code></pre>
+
 <h5 id="tdm"><font color="green">Convert/Generate Term Document Matrix or Document Term Matrix</font></h5>
 
 Some packages that could further the analysis of qdap expect a Document Term or Term Document Matrix.  qdap's `r FUN("wfm", "Word_Frequency_Matrix")` is similar to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package's")` `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "TermDocumentMatrix")`     and `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "DocumentTermMatrix")`.  qdap does not try to replicate the extensive work of the`r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm")` package, however, the `r FUN("tdm")` and `r FUN("dtm", "tdm")` do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.

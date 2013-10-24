@@ -341,10 +341,10 @@ function(x, digits = NULL, ...) {
 #' Plots a word_stats object.
 #' 
 #' @param x The word_stats object
-#' @param label logical.  If TRUE the cells of the heat map plot will be labeled 
-#' with count and proportional values.
+#' @param label logical.  If \code{TRUE} the cells of the heat map plot will be 
+#' labeled with count and proportional values.
 #' @param lab.digits Integer values specifying the number of digits to be 
-#' printed if \code{label} is TRUE.
+#' printed if \code{label} is \code{TRUE}.
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot word_stats
 #' @S3method plot word_stats

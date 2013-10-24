@@ -176,6 +176,10 @@ z <- wfm_combine(y, worlis)
 
 
 word_cor(t(z), word = names(worlis), r = NULL)
+
+## Plotting method
+plot(y, TRUE)
+plot(z)
 }
 }
 \keyword{word-frequency-matrix}

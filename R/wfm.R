@@ -115,6 +115,32 @@
 #' 
 #' 
 #' word_cor(t(z), word = names(worlis), r = NULL)
+#' 
+#' ## Plotting method
+#' plot(y, TRUE)
+#' plot(z)
+#' 
+#' ## Correspondence Analysis
+#' library(ca)
+#' 
+#' dat <- pres_debates2012
+#' dat <- dat[dat$person %in% qcv(ROMNEY, OBAMA), ]
+#' 
+#' speech <- stemmer(dat$dialogue)
+#' mytable1 <- with(dat, wfm(speech, list(person, time), stopwords = Top25Words))
+#' 
+#' fit <- ca(mytable)
+#' summary(fit)
+#' plot(fit)
+#' plot3d.ca(fit, labels=1)
+#' 
+#' 
+#' mytable2 <- with(dat, wfm(speech, list(person, time), stopwords = Top200Words))
+#' 
+#' fit2 <- ca(mytable2)
+#' summary(fit2)
+#' plot(fit2)
+#' plot3d.ca(fit2, labels=1)
 #' }
 wfm <- 
 function(text.var = NULL, grouping.var = NULL, 
@@ -376,4 +402,61 @@ wfm_combine <- function(wf.obj, word.lists, matrix = TRUE){
     }
     class(DFF) <- c("wfdf", class(DFF))
     DFF
+}
+
+
+#' Plots a wfm object
+#' 
+#' Plots a wfm object.
+#' 
+#' @param x The wfm object
+#' @param non.zero logical.  If \code{TRUE} all values coverted to dummy coded 
+#' based on x_ij > 0.
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
+#' @param by.column logical.  If \code{TRUE} applies scaling to the column.  If 
+#' \code{FALSE}  applies scaling by row (use \code{NULL} to turn off scaling).
+#' @param high The color to be used for higher values.
+#' @param grid The color of the grid (Use \code{NULL} to remove the grid).  
+#' @param \ldots Other arguments passed to qheat.
+#' @method plot wfm
+#' @S3method plot wfm
+plot.wfm <- function(x, non.zero = FALSE, digits = 0, by.column,
+    high = ifelse(non.zero, "black", "blue"),  
+    grid = ifelse(non.zero, "black", "white"), ...) {
+
+    class(x) <- "matrix"
+
+    if (non.zero) {
+        if(missing(by.column)) {
+            by.column <- NULL
+        }
+        x <- data.frame(x)
+        x[1:ncol(x)] <- lapply(x, function(z) as.numeric(z > 0))
+    } else {
+        if(missing(by.column)) {
+            by.column <- FALSE
+        }
+
+    }
+
+    out <- qheat(t(x), digits = digits, high=high, grid = grid,
+        by.column = by.column, ...) 
+ 
+    invisible(out)
+}
+
+
+#' Plots a wfdf object
+#' 
+#' Plots a wfdf object.
+#' 
+#' @param x The wfdf object
+#' @param \ldots Other arguments passed to \code{\link[qdap]{plot.wfm}}.
+#' @method plot wfdf
+#' @S3method plot wfdf
+plot.wfdf <- function(x, ...) {
+
+    x <- wfm(x)
+    plot.wfm(x, ...)
+
 }

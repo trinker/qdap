@@ -8,11 +8,12 @@
 \arguments{
   \item{x}{The word_stats object}
 
-  \item{label}{logical.  If TRUE the cells of the heat map
-  plot will be labeled with count and proportional values.}
+  \item{label}{logical.  If \code{TRUE} the cells of the
+  heat map plot will be labeled with count and proportional
+  values.}
 
   \item{lab.digits}{Integer values specifying the number of
-  digits to be printed if \code{label} is TRUE.}
+  digits to be printed if \code{label} is \code{TRUE}.}
 
   \item{\ldots}{Other arguments passed to qheat.}
 }

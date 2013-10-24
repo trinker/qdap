@@ -31,8 +31,37 @@
 
   \item{\dots}{Other arguments passed to
   \code{\link[qdap]{wfm}}.}
+
+  \item{text.var}{The text variable (or frequency matrix).}
+
+  \item{grouping.var}{The grouping variables.  Default
+  \code{NULL} generates one word list for all text.  Also
+  takes a single grouping variable or a list of 1 or more
+  grouping variables.}
+
+  \item{word}{The word(s) vector to find associated words
+  for.}
+
+  \item{r}{The correlation level find associated words for.
+  If positive this is the minimum value, if negative this
+  is the maximum value.}
+
+  \item{values}{logical.  If \code{TRUE}returns the named
+  correlates (names are the words).  If \code{FALSE} only
+  the associated words are returned.}
+
+  \item{method}{A character string indicating which
+  correlation coefficient is to be computed
+  (\code{"pearson"}, \code{"kendall"}, or
+  \code{"spearman"}).}
+
+  \item{\dots}{Other arguments passed to
+  \code{\link[qdap]{wfm}}.}
 }
 \value{
+  Returns a vector of associated words or correlation
+  matrix if \code{r = NULL}.
+
   Returns a vector of associated words or correlation
   matrix if \code{r = NULL}.
 }
@@ -97,8 +126,15 @@ z <- wfm_combine(y, worlis)
 
 word_cor(t(z), word = c(names(worlis), "else.words"), r = NULL)
 }
+Find Correlated Words
+
+Find associated words within grouping variable(s).
 }
 \seealso{
+  \code{\link[tm]{findAssocs}},
+  \code{\link[qdap]{word_associate}},
+  \code{\link[qdap]{wfm}}, \code{\link[stats]{cor}}
+
   \code{\link[tm]{findAssocs}},
   \code{\link[qdap]{word_associate}},
   \code{\link[qdap]{wfm}}, \code{\link[stats]{cor}}
