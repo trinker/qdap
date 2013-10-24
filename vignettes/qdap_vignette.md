@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 19.70 15.79 22.40 19.70 25.34 15.79 15.79 25.34 15.79 22.40 22.40
-## [12] 25.34 22.40 19.70 22.40 15.00 15.79 15.00 25.34 25.34
+##  [1] 19.70 22.40 22.40 15.00 16.30 22.40 15.00 25.34 15.00 22.40 15.79
+## [12] 25.34 25.34 16.30 15.00 25.34 15.00 22.40 16.30 22.40
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 19.70 15.79 22.40 19.70 25.34 15.79 15.79 25.34 15.79 22.40 22.40
-## [12] 25.34 22.40 19.70 22.40 15.00 15.79 15.00 25.34 25.34
+##  [1] 19.70 22.40 22.40 15.00 16.30 22.40 15.00 25.34 15.00 22.40 15.79
+## [12] 25.34 25.34 16.30 15.00 25.34 15.00 22.40 16.30 22.40
 ```
 
 
@@ -8717,6 +8717,21 @@ The following functions will be utilized in this section (click to view more):
 <form action="http://trinker.github.io/qdap_dev/polarity.html" target="_blank">
     <input type="submit" value="polarity"> - <a href="#polarity">Polarity Score (Sentiment Analysis)</a>
 </form>
+
+<form action="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank">
+    <input type="submit" value="polarity"> - 
+
+```
+
+Error in base::parse(text = code, srcfile = NULL) : 
+  1:16: unexpected INCOMPLETE_STRING
+1: HR("#wordcor", "Word Associations (Correlations)
+                   ^
+
+```
+
+
+</form>
 </div>
 
 qdap offers a number of word statistics and scores applied by grouping variable.  Some functions are original to qdap, while others are taken from academic papers.  Complete references for statistics/scores based on others' work are provided in the <a href="http://cran.r-project.org/web/packages/qdap/qdap.pdf">help manual</a> where appropriate.  It is assumed that the reader is familiar, or can become acquainted, with the theory and methods for qdap functions based on the work of others.  For qdap functions that are original to qdap a more robust description of the use and theory is provided.
@@ -9229,7 +9244,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x0fa8a080>
+<environment: 0x11baf0bc>
 ```
 
 ```r
@@ -9245,6 +9260,191 @@ ls(POLENV)[1:20]
 ```
 
 
+<h4 id="wordcor">Word Association (Correlations)</h4>
+
+It is helpful to finds words associated (or negatively associated) with or correlations between selected words in understanding language selection.  The <a href="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank"><code>word_cor</code></a> function calculates correlations (based on the <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> function) for words nested within grouping variables (turn of talk is an obvious choice for a grouping variable).  Running bootstrapping with a random sample can help the researcher determine if a co-occurrence of words is by chance.  <a href="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank"><code>word_cor</code></a> is even more flexible in that it can actually take a frequency matrix (e.g., the <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm_combine</code></a> function or the <a href="#coding">cm_</a> family of functions).  
+
+<p id="wordcor1"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank"><code>word_cor</code></a>** - *Single Words*<font size="5" color="orange">&diams;</font></p >
+
+<pre><code class="r">library(reports)
+x <- factor(with(rajSPLIT, paste(act, pad(TOT(tot)), sep = "|")))
+word_cor(rajSPLIT$dialogue, x, "romeo", .45)
+</code></pre>
+
+<pre><code>$romeo
+     that    tybalt 
+0.4540979 0.4831937 
+</code></pre>
+
+
+<pre><code class="r">word_cor(rajSPLIT$dialogue, x, "love", .5)
+
+<pre><code>$love
+ likewise 
+0.5013104 
+</code></pre>
+
+<p id="wordcor2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank"><code>word_cor</code></a>** - *Negative Correlation*<font size="5" color="orange">&diams;</font></p >
+
+<pre><code class="r">word_cor(rajSPLIT$dialogue, x, "you", -.1)
+with(rajSPLIT, word_cor(dialogue, list(person, act), "hate"))
+</code></pre>
+
+<pre><code>$hate
+ eyesight    knight    prison    smooth     vex'd 
+0.7318131 0.7318131 0.7318131 0.7318131 0.7318131 
+</code></pre>
+
+<p id="wordcor3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank"><code>word_cor</code></a>** - *Multiple Words*<font size="5" color="orange">&diams;</font></p >
+
+<pre><code class="r">words <- c("hate", "i", "love", "ghost")
+with(rajSPLIT, word_cor(dialogue, x, words, r = .5))
+</code></pre>
+
+<pre><code>$hate
+          beasts        beseeming            bills             bred 
+       0.6251743        0.6251743        0.6251743        0.6251743 
+        canker'd      capulethold            clubs           coward 
+       0.6251743        0.6251743        0.6251743        0.6251743 
+          crutch        disturb'd       flourishes        fountains 
+       0.6251743        0.6251743        0.6251743        0.6251743 
+         issuing      mistemper'd neighbourstained        partisans 
+       0.6251743        0.6251743        0.6251743        0.6251743 
+      pernicious        profaners           purple       rebellious 
+       0.6251743        0.6251743        0.6251743        0.6251743 
+         streets         subjects            sword           thrice 
+       0.5027573        0.6251743        0.6164718        0.6251743 
+           throw            wield 
+       0.6251743        0.6251743 
+
+$i
+      and      have        me        my      thee        to 
+0.5150992 0.5573359 0.5329341 0.5134372 0.5101593 0.5533506 
+
+$love
+ likewise 
+0.5013104 
+
+$ghost
+     bone    brains      club      dash     drink      keys kinsman's  methinks 
+0.7056134 0.7056134 1.0000000 1.0000000 0.5749090 1.0000000 1.0000000 0.5749090 
+     rage  rapier's   seeking    spices      spit 
+0.5749090 1.0000000 1.0000000 1.0000000 1.0000000 
+</code></pre>
+
+<p id="wordcor4"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank"><code>word_cor</code></a>** - *Correlations Between Terms: Example 1*<font size="5" color="orange">&diams;</font></p >
+
+<pre><code class="r">## Set 
+
+```
+
+Error in base::parse(text = code, srcfile = NULL) : 1:1: unexpected '='
+1: =
+    ^
+
+```
+
+ to get matrix between words
+with(rajSPLIT, word_cor(dialogue, x, words, r = NULL))
+</code></pre>
+
+<pre><code>             hate          i        love       ghost
+hate   1.00000000 0.05142236  0.15871966 -0.01159382
+i      0.05142236 1.00000000  0.36986172  0.01489943
+love   0.15871966 0.36986172  1.00000000 -0.02847837
+ghost -0.01159382 0.01489943 -0.02847837  1.00000000
+</code></pre>
+
+<p id="wordcor5"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank"><code>word_cor</code></a>** - *Correlations Between Terms: Example 2*<font size="5" color="orange">&diams;</font></p >
+
+
+<pre><code class="r">dat <- pres_debates2012
+dat$TOT <- factor(with(dat, paste(time, pad(TOT(tot)), sep = "|")))
+dat <- dat[dat$person %in% qcv(OBAMA, ROMNEY), ]
+dat$person <- factor(dat$person)
+dat.split <- with(dat, split(dat, list(person, time)))
+
+wrds <- qcv(america, debt, dollar, people, tax, health)
+lapply(dat.split, function(x) {
+    word_cor(x[, "dialogue"], x[, "TOT"], wrds, r=NULL)
+})
+</code></pre>
+
+<pre><code>$`OBAMA.time 1`
+             america       dollar    people          tax      health
+america  1.000000000 -0.005979775 0.6117618 -0.005979775  0.13803797
+dollar  -0.005979775  1.000000000 0.1650493 -0.004219409 -0.01092353
+people   0.611761819  0.165049280 1.0000000  0.165049280  0.50398555
+tax     -0.005979775 -0.004219409 0.1650493  1.000000000  0.20572642
+health   0.138037974 -0.010923527 0.5039855  0.205726420  1.00000000
+
+$`ROMNEY.time 1`
+           america     dollar    people         tax      health
+america 1.00000000 0.07493271 0.2336551  0.07033784  0.14986684
+dollar  0.07493271 1.00000000 0.5859944  0.11109650  0.33821359
+people  0.23365513 0.58599441 1.0000000  0.20584588  0.61333714
+tax     0.07033784 0.11109650 0.2058459  1.00000000 -0.01723713
+health  0.14986684 0.33821359 0.6133371 -0.01723713  1.00000000
+
+$`OBAMA.time 2`
+            america      dollar     people        tax      health
+america  1.00000000 -0.01526328 0.41353310 0.07609871  0.25733977
+dollar  -0.01526328  1.00000000 0.11671525 0.51222872 -0.01220067
+people   0.41353310  0.11671525 1.00000000 0.03761852  0.11285926
+tax      0.07609871  0.51222872 0.03761852 1.00000000  0.03431397
+health   0.25733977 -0.01220067 0.11285926 0.03431397  1.00000000
+
+$`ROMNEY.time 2`
+            america         debt     dollar     people          tax
+america  1.00000000 -0.018370290 0.07531545 0.59403781  0.291238391
+debt    -0.01837029  1.000000000 0.53340505 0.02329285 -0.009432552
+dollar   0.07531545  0.533405053 1.00000000 0.33346752  0.600125943
+people   0.59403781  0.023292854 0.33346752 1.00000000  0.516577197
+tax      0.29123839 -0.009432552 0.60012594 0.51657720  1.000000000
+health   0.06384509 -0.008308652 0.68299026 0.25536510  0.658231340
+              health
+america  0.063845090
+debt    -0.008308652
+dollar   0.682990261
+people   0.255365102
+tax      0.658231340
+health   1.000000000
+
+$`OBAMA.time 3`
+            america        debt      dollar    people         tax
+america  1.00000000 -0.01224452 -0.02326653 0.1182189 -0.02326653
+debt    -0.01224452  1.00000000  0.37361771 0.1765301  0.75525297
+dollar  -0.02326653  0.37361771  1.00000000 0.1909401  0.70993297
+people   0.11821887  0.17653013  0.19094008 1.0000000  0.19094008
+tax     -0.02326653  0.75525297  0.70993297 0.1909401  1.00000000
+
+$`ROMNEY.time 3`
+          america      debt    dollar    people
+america 1.0000000 0.2130341 0.2675978 0.3007027
+debt    0.2130341 1.0000000 0.8191341 0.4275521
+dollar  0.2675978 0.8191341 1.0000000 0.4666635
+people  0.3007027 0.4275521 0.4666635 1.0000000
+</code></pre>
+
+<p id="wordcor6"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank"><code>word_cor</code></a>** - *Matrix from <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm_combine</code></a>*<font size="5" color="orange">&diams;</font></p >
+
+<pre><code class="r">worlis <- list(
+    pronouns = c("you", "it", "it's", "we", "i'm", "i"),
+    negative = qcv(no, dumb, distrust, not, stinks),
+    literacy = qcv(computer, talking, telling)
+)
+y <- wfdf(DATA$state, ID(DATA, prefix = TRUE))
+z <- wfm_combine(y, worlis)
+
+word_cor(t(z), word = c(names(worlis), "else.words"), r = NULL)
+</code></pre>
+
+<pre><code>             pronouns   negative   literacy else.words
+pronouns    1.0000000  0.2488822 -0.4407045 -0.5914760
+negative    0.2488822  1.0000000 -0.2105380 -0.7146856
+literacy   -0.4407045 -0.2105380  1.0000000  0.2318694
+else.words -0.5914760 -0.7146856  0.2318694  1.0000000
+</code></pre>
 
 <h3 id="visualization">Visualizing Discourse Data</h3>
 
@@ -10294,8 +10494,9 @@ ID(mtcars, FALSE)
 ```
 
 ```
-##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
-## [24] 24 25 26 27 28 29 30 31 32
+##  [1] "01" "02" "03" "04" "05" "06" "07" "08" "09" "10" "11" "12" "13" "14"
+## [15] "15" "16" "17" "18" "19" "20" "21" "22" "23" "24" "25" "26" "27" "28"
+## [29] "29" "30" "31" "32"
 ```
 
 ```r
@@ -10304,21 +10505,21 @@ question_type(DATA.SPLIT$state, ID(DATA.SPLIT, TRUE))
 
 ```
 ##    TRUE tot.quest    what     how   shall implied_do/does/did
-## 1    04         1 1(100%)       0       0                   0
-## 2    07         1       0 1(100%)       0                   0
-## 3    10         1 1(100%)       0       0                   0
-## 4    11         1       0       0 1(100%)                   0
-## 5    15         1       0       0       0             1(100%)
-## 6    01         0       0       0       0                   0
-## 7    02         0       0       0       0                   0
-## 8    03         0       0       0       0                   0
-## 9    05         0       0       0       0                   0
-## 10   06         0       0       0       0                   0
-## 11   08         0       0       0       0                   0
-## 12   09         0       0       0       0                   0
-## 13   12         0       0       0       0                   0
-## 14   13         0       0       0       0                   0
-## 15   14         0       0       0       0                   0
+## 1  X.04         1 1(100%)       0       0                   0
+## 2  X.07         1       0 1(100%)       0                   0
+## 3  X.10         1 1(100%)       0       0                   0
+## 4  X.11         1       0       0 1(100%)                   0
+## 5  X.15         1       0       0       0             1(100%)
+## 6  X.01         0       0       0       0                   0
+## 7  X.02         0       0       0       0                   0
+## 8  X.03         0       0       0       0                   0
+## 9  X.05         0       0       0       0                   0
+## 10 X.06         0       0       0       0                   0
+## 11 X.08         0       0       0       0                   0
+## 12 X.09         0       0       0       0                   0
+## 13 X.12         0       0       0       0                   0
+## 14 X.13         0       0       0       0                   0
+## 15 X.14         0       0       0       0                   0
 ```
 
 

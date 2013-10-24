@@ -164,6 +164,18 @@ qheat(cor(t(dat)[, c("romeo", "juliet", "hate", "love")]),
 dat2 <- wfm(DATA$state, seq_len(nrow(DATA)))
 qheat(cor(t(dat2)), low = "yellow", high = "red",
     grid = "grey90", diag.na = TRUE, by.column = NULL)
+
+## With `word_cor`
+worlis <- list(
+    pronouns = c("you", "it", "it's", "we", "i'm", "i"),
+    negative = qcv(no, dumb, distrust, not, stinks),
+    literacy = qcv(computer, talking, telling)
+)
+y <- wfdf(DATA$state, ID(DATA, prefix = TRUE))
+z <- wfm_combine(y, worlis)
+
+
+word_cor(t(z), word = names(worlis), r = NULL)
 }
 }
 \keyword{word-frequency-matrix}

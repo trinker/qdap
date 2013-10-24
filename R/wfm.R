@@ -103,6 +103,18 @@
 #' dat2 <- wfm(DATA$state, seq_len(nrow(DATA)))
 #' qheat(cor(t(dat2)), low = "yellow", high = "red", 
 #'     grid = "grey90", diag.na = TRUE, by.column = NULL)
+#'     
+#' ## With `word_cor`
+#' worlis <- list(
+#'     pronouns = c("you", "it", "it's", "we", "i'm", "i"),
+#'     negative = qcv(no, dumb, distrust, not, stinks),
+#'     literacy = qcv(computer, talking, telling)
+#' )
+#' y <- wfdf(DATA$state, ID(DATA, prefix = TRUE))
+#' z <- wfm_combine(y, worlis)
+#' 
+#' 
+#' word_cor(t(z), word = names(worlis), r = NULL)
 #' }
 wfm <- 
 function(text.var = NULL, grouping.var = NULL, 
@@ -301,8 +313,7 @@ function(text.var, grouping.var = NULL, ...){
 #' @return \code{wfm_combine} - returns a word frequency matrix (\code{wfm}) or 
 #' dataframe (\code{wfdf}) with counts for the combined word.lists merged and 
 #' remaining terms (\code{else}).
-wfm_combine <-
-function(wf.obj, word.lists, matrix = TRUE){
+wfm_combine <- function(wf.obj, word.lists, matrix = TRUE){
     suppressWarnings(if (is.list(word.lists) & length(word.lists) > 1 & 
         any(Reduce("%in%", word.lists))) {
         stop("overlapping words in word.lists")
@@ -341,7 +352,7 @@ function(wf.obj, word.lists, matrix = TRUE){
         word.lists <- list(word.lists)
     }
     if (is(wf.obj, "true.matrix")) {
-        wf.obj <- data.frame(rownames(wf.obj), wf.obj)
+        wf.obj <- data.frame(rownames(wf.obj), wf.obj, check.names = FALSE)
     }
     j <- lapply(word.lists, function(x) wf.obj [wf.obj [, 1] %in% x, -1])
     if (!all(wf.obj [, 1] %in% unlist(word.lists))) {
@@ -355,7 +366,7 @@ function(wf.obj, word.lists, matrix = TRUE){
     } else {
         c(NAMES, "else.words")
     }
-    DFF <- data.frame(word.group = NAMES, m)
+    DFF <- data.frame(word.group = NAMES, m, check.names = FALSE)
     if (matrix) {
         DFF2 <- as.matrix(DFF[, -1])
         rownames(DFF2) <- as.character(DFF[, 1])

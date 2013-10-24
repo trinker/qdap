@@ -2,16 +2,16 @@
 \alias{ID}
 \title{ID By Row Number or Sequence Along}
 \usage{
-  ID(x, pad = TRUE, prefix = FALSE)
+  ID(x, prefix = FALSE, pad = TRUE)
 }
 \arguments{
   \item{x}{A dataframe, matrix, vector, or list object.}
 
-  \item{pad}{logical.  If \code{TRUE} the begining number
-  will be padded with zeros.}
-
   \item{prefix}{logical.  If \code{TRUE} an "X." is place
   before each id.}
+
+  \item{pad}{logical.  If \code{TRUE} the begining number
+  will be padded with zeros.}
 }
 \value{
   Returns a vector of sequential integers.

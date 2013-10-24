@@ -4,9 +4,9 @@
 #' \code{\link[base]{length}}/\code{\link[base]{ncol}} of an object.
 #' 
 #' @param x A dataframe, matrix, vector, or list object.
+#' @param prefix logical.  If \code{TRUE} an "X." is place before each id.
 #' @param pad logical.  If \code{TRUE} the begining number will be padded with 
 #' zeros.
-#' @param prefix logical.  If \code{TRUE} an "X." is place before each id.
 #' @return Returns a vector of sequential integers.
 #' @keywords id
 #' @export
@@ -18,7 +18,7 @@
 #' ID(mtcars, TRUE)
 #' ID("w")
 #' question_type(DATA.SPLIT$state, ID(DATA.SPLIT, TRUE))
-ID <- function(x, pad = TRUE, prefix = FALSE) {
+ID <- function(x, prefix = FALSE, pad = TRUE) {
   
     test1 <- dim(x)[1] > 1
     if (is.data.frame(x) | (!identical(logical(0), test1) && test1)) {
