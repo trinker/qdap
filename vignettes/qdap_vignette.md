@@ -1174,8 +1174,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 19.70 19.70 15.79 19.70 16.30 22.40 15.79 15.00 19.70 16.30 25.34
-## [12] 16.30 19.70 19.70 15.00 19.70 22.40 25.34 19.70 15.00
+##  [1] 15.00 22.40 15.00 15.00 22.40 19.70 19.70 15.79 16.30 15.79 22.40
+## [12] 19.70 15.79 25.34 16.30 25.34 15.00 16.30 19.70 22.40
 ```
 
 ```r
@@ -1183,8 +1183,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 19.70 19.70 15.79 19.70 16.30 22.40 15.79 15.00 19.70 16.30 25.34
-## [12] 16.30 19.70 19.70 15.00 19.70 22.40 25.34 19.70 15.00
+##  [1] 15.00 22.40 15.00 15.00 22.40 19.70 19.70 15.79 16.30 15.79 22.40
+## [12] 19.70 15.79 25.34 16.30 25.34 15.00 16.30 19.70 22.40
 ```
 
 
@@ -9233,7 +9233,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x123ec344>
+<environment: 0x12990810>
 ```
 
 ```r
@@ -9324,17 +9324,7 @@ $ghost
 
 <p id="wordcor4"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank"><code>word_cor</code></a>** - *Correlations Between Terms: Example 1*<font size="5" color="orange">&diams;</font></p >
 
-<pre><code class="r">## Set 
-
-```
-
-Error in base::parse(text = code, srcfile = NULL) : 1:1: unexpected '='
-1: =
-    ^
-
-```
-
- to get matrix between words
+<pre><code class="r">## Set r = NULL to get matrix between words
 with(rajSPLIT, word_cor(dialogue, x, words, r = NULL))
 </code></pre>
 

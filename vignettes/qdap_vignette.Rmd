@@ -4194,7 +4194,7 @@ $ghost
 
 <p id="wordcor4">`r FT(orange, 5, text="&diams;")` **`r FUN("word_cor")`** - *Correlations Between Terms: Example 1*`r FT(orange, 5, text="&diams;")`</p >
 
-<pre><code class="r">## Set `r = NULL` to get matrix between words
+<pre><code class="r">## Set r = NULL to get matrix between words
 with(rajSPLIT, word_cor(dialogue, x, words, r = NULL))
 </code></pre>
 
