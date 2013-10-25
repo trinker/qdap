@@ -67,10 +67,36 @@
 #'     color = "yellow", total.color = "white", horiz.color="grey20"))
 #'     
 #' ## Use word list
+#' ## Presidential debates by all
 #' wrds <- word_list(pres_debates2012$dialogue, stopwords = Top200Words)
 #' wrds2 <- spaste(wrds[["rfswl"]][["all"]][, "WORD"])
 #' wrds2 <- c(" governor~~romney ", wrds2[-c(3, 12)])
 #' with(pres_debates2012 , dispersion_plot(dialogue, wrds2, rm.vars = time))
+#'
+#' ## Presidential debates by person
+#' dat <- pres_debates2012
+#' dat <- dat[dat$person %in% qcv(ROMNEY, OBAMA), ]
+#' 
+#' wordlist <- c(" tax", " health", " rich ", "america", " truth", 
+#'     " money", "cost", " governnor", " president", " we ", 
+#'     " job", " i ", " you ", " because ", " our ", " years ")
+#' 
+#' with(dat, dispersion_plot(dialogue, wordlist, total.color = NULL, 
+#'     bg.color = "white", grouping.var = person, rm.vars = time,
+#'     color = "black", horiz.color="grey80"))
+#' 
+#' ## Extras:
+#' ## Reverse facets
+#' 
+#' x <- #' with(pres_debates2012 , dispersion_plot(dialogue, wrds2, rm.vars = time))
+#' 
+#' ## function to reverse ggplot2 facets
+#' rev_facet <- function(x) {
+#'     names(x$facet)[1:2] <- names(x$facet)[2:1]
+#'     print(x)
+#' }
+#' 
+#' rev_facet(x)
 #' }
 dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,  
     rm.vars =NULL, color = "blue", bg.color = "grey90", horiz.color = "grey85", 

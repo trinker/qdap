@@ -93,6 +93,7 @@
 ## word frequency matrix (wfm) example:
 with(DATA, wfm(state, list(sex, adult)))[1:15, ]
 with(DATA, wfm(state, person))[1:15, ]
+with(DATA, wfm(state, list(sex, adult)))
 
 ## insert double tilde ("~~") to keep phrases(i.e., first last name)
 alts <- c(" fun", "I ")
@@ -180,6 +181,28 @@ word_cor(t(z), word = names(worlis), r = NULL)
 ## Plotting method
 plot(y, TRUE)
 plot(z)
+
+## Correspondence Analysis
+library(ca)
+
+dat <- pres_debates2012
+dat <- dat[dat$person \%in\% qcv(ROMNEY, OBAMA), ]
+
+speech <- stemmer(dat$dialogue)
+mytable1 <- with(dat, wfm(speech, list(person, time), stopwords = Top25Words))
+
+fit <- ca(mytable)
+summary(fit)
+plot(fit)
+plot3d.ca(fit, labels=1)
+
+
+mytable2 <- with(dat, wfm(speech, list(person, time), stopwords = Top200Words))
+
+fit2 <- ca(mytable2)
+summary(fit2)
+plot(fit2)
+plot3d.ca(fit2, labels=1)
 }
 }
 \keyword{word-frequency-matrix}

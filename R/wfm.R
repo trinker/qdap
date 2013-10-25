@@ -32,6 +32,7 @@
 #' ## word frequency matrix (wfm) example:
 #' with(DATA, wfm(state, list(sex, adult)))[1:15, ]
 #' with(DATA, wfm(state, person))[1:15, ]
+#' with(DATA, wfm(state, list(sex, adult)))
 #' 
 #' ## insert double tilde ("~~") to keep phrases(i.e., first last name)
 #' alts <- c(" fun", "I ")
@@ -460,3 +461,73 @@ plot.wfdf <- function(x, ...) {
     plot.wfm(x, ...)
 
 }
+
+#' Summarize a wfm object
+#' 
+#' Summarize a wfm object with familiar tm package look.
+#' 
+#' @param object The wfm object 
+#' @param \ldots Ignored.
+#' @method summary wfm
+#' @details \strong{Non-/sparse entries} is the ratio of non-zeros to zero 
+#' counts.  \strong{Sparsity} is that ratio represented as a percent.  
+#' \strong{Hapax legomenon} is the number(percent) of terms that appear only 
+#' once in the dialogue. \strong{Dis legomenon} is the number(percent) of terms 
+#' that appear exactly two times once.
+#' @export
+#' @examples
+#' \dontrun{
+#' x <- with(DATA, wfm(state, list(sex, adult)))
+#' summary(x)
+#' }
+summary.wfm <- function(object, ...) {
+
+    class(object) <- "matrix"
+    x <- object
+
+    B <- x!=0
+    Y <- sum(B)
+    N <- sum(!B)
+    density <- Y/N
+    sparsity <- round(1 - density, 2)*100
+    NCHAR <- nchar(rownames(x))
+    HL <- sum(rowSums(x) == 1)
+    DL <- sum(rowSums(x) == 2)
+    out <- paste(
+        sprintf("A word-frequency matrix (%s groups, %s terms)", ncol(x), nrow(x)),
+        "\n", sprintf("Non-/sparse entries       : %s/%s", Y, N),
+        sprintf("Sparsity                  : %s%%", sparsity),
+        sprintf("Maximal term length       : %s", max(NCHAR)) ,
+        sprintf("Less than three characters: %s%%", 100*round(sum(NCHAR < 4)/nrow(x), 2)) ,
+        sprintf("Hapax legomenon           : %s(%s%%)", HL, 100*round(HL/nrow(x), 2)),
+        sprintf("Dis legomenon             : %s(%s%%)", DL, 100*round(DL/nrow(x), 2)),
+    sep="\n")
+    message(out)
+}
+
+
+#' Summarize a wfdf object
+#' 
+#' Summarize a wfdf object with familiar tm package look.
+#' 
+#' @param object The wfdf object 
+#' @param \ldots Ignored.
+#' @details \strong{Non-/sparse entries} is the ratio of non-zeros to zero 
+#' counts.  \strong{Sparsity} is that ratio represented as a percent.  
+#' \strong{Hapax legomenon} is the number(percent) of terms that appear only 
+#' once in the dialogue. \strong{Dis legomenon} is the number(percent) of terms 
+#' that appear exactly two times once.
+#' @method summary wfdf
+#' @export
+#' @examples
+#' \dontrun{
+#' x <- with(DATA, wfdf(state, list(sex, adult)))
+#' summary(x)
+#' }
+summary.wfdf <- function(object, ...) {
+
+    summary.wfm(wfm(object))
+
+}
+
+
