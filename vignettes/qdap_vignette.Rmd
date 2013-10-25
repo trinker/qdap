@@ -608,7 +608,8 @@ out[1:20]</code></pre>
 codes <- list(A=c(1, 2, 4),
     B = c(3, 5),
     C = 7,
-    D = c(6, 8:10))
+    D = c(6, 8:10)
+)
 
 lookup(1:10, codes) #or
 1:10 %l% codes
@@ -616,10 +617,8 @@ lookup(1:10, codes) #or
 
 ```{r}
 ## Supply a single vector to key.match and key.assign
-
 lookup(mtcars$carb, sort(unique(mtcars$carb)),
     c('one', 'two', 'three', 'four', 'six', 'eight'))
-
 lookup(mtcars$carb, sort(unique(mtcars$carb)),
     seq(10, 60, by=10))
 ```
@@ -629,10 +628,13 @@ lookup(mtcars$carb, sort(unique(mtcars$carb)),
 ```{r}
 ## Create a fake data set of hash values
 (DF <- aggregate(mpg~as.character(carb), mtcars, mean))
+
 ## Use `hash` to create a lookup environment
 hashTab <- hash(DF)  
+
 ## Create a vector to lookup
 x <- sample(DF[, 1], 20, TRUE)
+
 ## Lookup x in the hash with `hash_look` or `%ha%`
 hash_look(x, hashTab)
 x %ha% hashTab
@@ -822,12 +824,12 @@ After reading in data, removing non-dialogue (via `r FUN("bracketX")`), and view
 
 `r FT(orange, 5, text="&diams;")` **Identifying and Coding Missing Values** `r FT(orange, 5, text="&diams;")`
 ```{r}
-## Create a data set with punctuation and no text
-DATA$state[c(3, 7, 10)] <- c(".", ".", NA)
+## Create A Data Set With Punctuation and No Text
+(DATA$state[c(3, 7, 10)] <- c(".", ".", NA))
 DATA
 potential_NA(DATA$state, 20)
 potential_NA(DATA$state)
-# USE TO SELCTIVELY REPLACE CELLS WITH MISSING VALUES
+## Use To Selctively Replace Cells With Missing Values
 DATA$state[potential_NA(DATA$state, 20)$row[-c(3)]] <- NA
 DATA
 ## Reset DATA
@@ -2921,6 +2923,7 @@ with(DATA, wfdf(state, list(sex, adult), margins = TRUE))[c(1:15, 41:42), ]
 ```{r}
 ## Start with a word frequency matrix
 z <- wfm(DATA$state, DATA$person)
+
 ## Note a single `you`
 z[30:41, ]
 ## Note that there are two `you`s in the expanded version
@@ -3119,7 +3122,6 @@ syn(c("the", "cat", "job", "environment", "read", "teach"), multiwords = FALSE)
 ## Make a small dialogue data set
 (dat2 <- data.frame(dialogue=c("@bryan is bryan good @br",
     "indeed", "@ brian"), person=qcv(A, B, A)))
-
 ## The word list to search for
 ml <- list(
     wrds=c("bryan", "indeed"), 

@@ -1101,7 +1101,8 @@ out[1:20]</code></pre>
 codes <- list(A=c(1, 2, 4),
     B = c(3, 5),
     C = 7,
-    D = c(6, 8:10))
+    D = c(6, 8:10)
+)
 
 lookup(1:10, codes) #or
 ```
@@ -1122,7 +1123,6 @@ lookup(1:10, codes) #or
 
 ```r
 ## Supply a single vector to key.match and key.assign
-
 lookup(mtcars$carb, sort(unique(mtcars$carb)),
     c('one', 'two', 'three', 'four', 'six', 'eight'))
 ```
@@ -1135,7 +1135,6 @@ lookup(mtcars$carb, sort(unique(mtcars$carb)),
 ```
 
 ```r
-
 lookup(mtcars$carb, sort(unique(mtcars$carb)),
     seq(10, 60, by=10))
 ```
@@ -1165,17 +1164,20 @@ lookup(mtcars$carb, sort(unique(mtcars$carb)),
 ```
 
 ```r
+
 ## Use `hash` to create a lookup environment
 hashTab <- hash(DF)  
+
 ## Create a vector to lookup
 x <- sample(DF[, 1], 20, TRUE)
+
 ## Lookup x in the hash with `hash_look` or `%ha%`
 hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 25.34 15.00 15.00 25.34 15.79 25.34 16.30 19.70 25.34 19.70 15.00
-## [12] 19.70 22.40 22.40 15.79 19.70 25.34 19.70 15.79 15.79
+##  [1] 15.00 15.79 15.79 15.79 25.34 15.00 25.34 15.79 16.30 19.70 15.79
+## [12] 22.40 15.79 15.00 19.70 25.34 25.34 15.79 25.34 15.00
 ```
 
 ```r
@@ -1183,8 +1185,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 25.34 15.00 15.00 25.34 15.79 25.34 16.30 19.70 25.34 19.70 15.00
-## [12] 19.70 22.40 22.40 15.79 19.70 25.34 19.70 15.79 15.79
+##  [1] 15.00 15.79 15.79 15.79 25.34 15.00 25.34 15.79 16.30 19.70 15.79
+## [12] 22.40 15.79 15.00 19.70 25.34 25.34 15.79 25.34 15.00
 ```
 
 
@@ -1632,8 +1634,15 @@ After reading in data, removing non-dialogue (via <a href="http://trinker.github
 <font size="5" color="orange">&diams;</font> **Identifying and Coding Missing Values** <font size="5" color="orange">&diams;</font>
 
 ```r
-## Create a data set with punctuation and no text
-DATA$state[c(3, 7, 10)] <- c(".", ".", NA)
+## Create A Data Set With Punctuation and No Text
+(DATA$state[c(3, 7, 10)] <- c(".", ".", NA))
+```
+
+```
+## [1] "." "." NA
+```
+
+```r
 DATA
 ```
 
@@ -1674,7 +1683,7 @@ potential_NA(DATA$state)
 ```
 
 ```r
-# USE TO SELCTIVELY REPLACE CELLS WITH MISSING VALUES
+## Use To Selctively Replace Cells With Missing Values
 DATA$state[potential_NA(DATA$state, 20)$row[-c(3)]] <- NA
 DATA
 ```
@@ -6772,6 +6781,7 @@ with(DATA, wfdf(state, list(sex, adult), margins = TRUE))[c(1:15, 41:42), ]
 ```r
 ## Start with a word frequency matrix
 z <- wfm(DATA$state, DATA$person)
+
 ## Note a single `you`
 z[30:41, ]
 ```
@@ -7390,7 +7400,6 @@ syn(c("the", "cat", "job", "environment", "read", "teach"), multiwords = FALSE)
 ```
 
 ```r
-
 ## The word list to search for
 ml <- list(
     wrds=c("bryan", "indeed"), 
@@ -9263,7 +9272,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x3a383650>
+<environment: 0x136d646c>
 ```
 
 ```r
