@@ -64,7 +64,8 @@ pvrect(fit, alpha=.95)
 ## http://bodongchen.com/blog/?p=301
 
 ## Fit it: 2-D
-(diss <- with(pres_debates2012, dissimilarity(dialogue, list(person, time), method = "euclidean")))
+(diss <- with(pres_debates2012, dissimilarity(dialogue, list(person, time),
+    method = "euclidean")))
 fit <- cmdscale(diss, eig = TRUE, k = 2)
 
 ## Plot it 2-D
@@ -78,7 +79,8 @@ library(scatterplot3d)
 fit <- cmdscale(diss, eig = TRUE, k = 3)
 
 points <- data.frame(colSplit(names(fit$points[, 1])))
-points$colors <- points$X1 \%l\% data.frame(levels(points$X1), qcv(yellow, yellow, blue, yellow, red, yellow))
+points$colors <- points$X1 \%l\% data.frame(levels(points$X1),
+    qcv(yellow, yellow, blue, yellow, red, yellow))
 points$shape <- points$X2 \%l\% data.frame(levels(points$X2), c(15, 17, 19))
 
 ## Plot it: 3-D

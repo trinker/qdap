@@ -3,6 +3,7 @@
 \alias{wfm}
 \alias{wfm_combine}
 \alias{wfm_expanded}
+\alias{wfm_weight}
 \title{Word Frequency Matrix}
 \usage{
   wfm(text.var = NULL, grouping.var = NULL, output = "raw",
@@ -15,6 +16,8 @@
   wfm_expanded(text.var, grouping.var = NULL, ...)
 
   wfm_combine(wf.obj, word.lists, matrix = TRUE)
+
+  wfm_weight(wfm.obj, type = "prop")
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -51,6 +54,18 @@
   \code{\link[qdap]{wfdf}} object.}
 
   \item{wf.obj}{A \code{wfm} or \code{wfdf} object.}
+
+  \item{wfm.obj}{A \code{\link[qdap]{wfm}} object.}
+
+  \item{type}{The type of weighting to use:
+  c(\code{"prop"}, \code{"max"}, \code{"scaled"}).  All
+  weight by column.  \code{"prop"} uses a proportion
+  weighting and all columns sum to 1.  \code{"max"} weights
+  in proportion to the max value; all values are integers
+  and column sums may not be equal. \code{"scaled"} uses
+  \code{\link[base]{scale}} to scale with \code{center =
+  FALSE}; output is not integer and column sums may not be
+  equal.}
 }
 \value{
   \code{wfm} - returns a word frequency of the class
@@ -68,6 +83,10 @@
   (\code{wfm}) or dataframe (\code{wfdf}) with counts for
   the combined word.lists merged and remaining terms
   (\code{else}).
+
+  \code{wfm_weight} - Returns a weighted matrix for use
+  with other R packages. The output is not of the class
+  "wfm".
 }
 \description{
   \code{wfm} - Generate a word frequency matrix by grouping
@@ -81,6 +100,9 @@
 
   \code{wfm_combine} - Combines words (rows) of a word
   frequency matrix (\code{wfdf}) together.
+
+  \code{wfm_weight} - Weight a word frequency matrix for
+  analysis were such weighting is sensible..
 }
 \note{
   Words can be kept as one by inserting a double tilde
@@ -172,9 +194,8 @@ worlis <- list(
     negative = qcv(no, dumb, distrust, not, stinks),
     literacy = qcv(computer, talking, telling)
 )
-y <- wfdf(DATA$state, ID(DATA, prefix = TRUE))
+y <- wfdf(DATA$state, id(DATA, prefix = TRUE))
 z <- wfm_combine(y, worlis)
-
 
 word_cor(t(z), word = names(worlis), r = NULL)
 
@@ -203,6 +224,12 @@ fit2 <- ca(mytable2)
 summary(fit2)
 plot(fit2)
 plot3d.ca(fit2, labels=1)
+
+## Weight a wfm
+#' WFM <- with(DATA, wfm(state, list(sex, adult)))
+wfm_weight(WFM, "prop")
+wfm_weight(WFM, "max")
+wfm_weight(WFM, "scaled")
 }
 }
 \keyword{word-frequency-matrix}

@@ -1,3 +1,4 @@
+
 NEWS 
 ====
 
@@ -111,6 +112,21 @@ NEW FEATURES
 * `word_cor` added to find words within grouping variables that are associated
   based on correlation.
 
+* `tm2wfm` a function to convert `"TermDocumentMatrix"` and 
+  `"DocumentTermMatrix"` to a `wfm` added to allow easier integration with the 
+  `tm` package.
+
+* `apply_as_tm` a function to allow functions intended to be used on the `tm` 
+  package's `TermDocumentMatrix` to be applied to a `wfm` object.
+
+* `tdm` and `dtm` are now truly compatable with the `tm` package.  `tdm` and 
+  `dtm` produce outputs of the class `"TermDocumentMatrix"` and 
+  `"DocumentTermMatrix"` respectively.  This change (coupled with the renaming 
+  of `stopwords` to `rm_stopwords`) should make the two packages logical 
+  companions and further extend the qdap package to integrate with the many 
+  packages that already handle `"TermDocumentMatrix"` and 
+  `"DocumentTermMatrix"`.
+
 MINOR FEATURES
 
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 
@@ -188,7 +204,7 @@ MINOR FEATURES
 * `tot_plot` now handles repeated measures and `grouping.var` to be nested 
   within the turn of talk.
 
-* `wfm` now uses `mtabulate` and is now ~10x faster.
+* `wfm` now uses `mtabulate` and is ~10x faster.
 
 CHANGES
 
@@ -350,13 +366,6 @@ NEW FEATURES
   of packages, data and project functions.  This function uses the reports package
   to generate an extensive reports folder.
 
-* `tdm` and `dtm` are now truly compatable with the `tm` package.  `tdm` and 
-  `dtm` produce outputs of the class `"TermDocumentMatrix"` and 
-  `"DocumentTermMatrix"` respectively.  This change (coupled with the renaming 
-  of `stopwords` to `rm_stopwords`) should make the two packages logical 
-  companions and further extend the qdap package to integrate with the many 
-  packages that already handle `"TermDocumentMatrix"` and 
-  `"DocumentTermMatrix"`.
 
 MINOR FEATURES
 

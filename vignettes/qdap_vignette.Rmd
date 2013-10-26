@@ -1581,10 +1581,10 @@ In analyzing discourse it may be helpful to remove certain words from the analys
 ```{r}
 ## The data
 DATA$state
-stopwords(DATA$state, Top200Words)
-stopwords(DATA$state, Top200Words, strip = TRUE)
-stopwords(DATA$state, Top200Words, separate = FALSE)
-stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
+rm_stopwords(DATA$state, Top200Words)
+rm_stopwords(DATA$state, Top200Words, strip = TRUE)
+rm_stopwords(DATA$state, Top200Words, separate = FALSE)
+rm_stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
 ```
 
 <h4 id="strip">Strip Text of Unwanted Characters/Capitalization</h4>

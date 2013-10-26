@@ -111,9 +111,8 @@
 #'     negative = qcv(no, dumb, distrust, not, stinks),
 #'     literacy = qcv(computer, talking, telling)
 #' )
-#' y <- wfdf(DATA$state, ID(DATA, prefix = TRUE))
+#' y <- wfdf(DATA$state, id(DATA, prefix = TRUE))
 #' z <- wfm_combine(y, worlis)
-#' 
 #' 
 #' word_cor(t(z), word = names(worlis), r = NULL)
 #' 
@@ -142,6 +141,12 @@
 #' summary(fit2)
 #' plot(fit2)
 #' plot3d.ca(fit2, labels=1)
+#' 
+#' ## Weight a wfm
+#' #' WFM <- with(DATA, wfm(state, list(sex, adult)))
+#' wfm_weight(WFM, "prop")
+#' wfm_weight(WFM, "max")
+#' wfm_weight(WFM, "scaled")
 #' }
 wfm <- 
 function(text.var = NULL, grouping.var = NULL, 
@@ -530,4 +535,46 @@ summary.wfdf <- function(object, ...) {
 
 }
 
+#' Weighted Word Frequency Matrix
+#' 
+#' \code{wfm_weight} - Weight a word frequency matrix for analysis were such 
+#' weighting is sensible..
+#' 
+#' @param wfm.obj A \code{\link[qdap]{wfm}} object.
+#' @param type The type of weighting to use: c(\code{"prop"}, \code{"max"}, 
+#' \code{"scaled"}).  All weight by column.  \code{"prop"} uses a proportion
+#' weighting and all columns sum to 1.  \code{"max"} weights in proportion to 
+#' the max value; all values are integers and column sums may not be equal.
+#' \code{"scaled"} uses \code{\link[base]{scale}} to scale with 
+#' \code{center = FALSE}; output is not integer and column sums may not be 
+#' equal.
+#' @rdname Word_Frequency_Matrix
+#' @export
+#' @return \code{wfm_weight} - Returns a weighted matrix for use with other R 
+#' packages. The output is not of the class "wfm".
+wfm_weight <- function(wfm.obj, type = "prop") {
+
+    types <- c("prop", "max", "scaled")
+
+    if (is.numeric(type)) {
+        type <- types[type]
+    }
+
+    switch(type,
+        prop = {FUN <- function(x) apply(x, 2, function(y) y/sum(y))},
+        max = {FUN <- function(x) apply(x, 2, function(y) round(y *(max(x)/max(y)), 0))},
+        scaled = {FUN <- function(x) {
+                o <- apply(x, 2, function(y) scale(y, FALSE))
+                rownames(o) <- rownames(wfm.obj)
+                o
+            }} ,
+        stop("`type` must be one of c(\"prop\", \"max\", \"scaled\")")
+    )
+
+    out <- FUN(wfm.obj)
+    class(out) <- c("weighted_wfm", class(out))
+    attributes(out)[["Weighting"]] <- type
+
+    out
+}
 

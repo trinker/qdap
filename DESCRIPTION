@@ -111,6 +111,7 @@ Collate:
     'end_mark.R'
     'exclude.R'
     'formality.R'
+    'freq_terms.R'
     'freqTab2words.R'
     'gantt.R'
     'gantt_plot.R'
@@ -215,4 +216,3 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
-    'freq_terms.R'

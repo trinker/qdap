@@ -53,13 +53,6 @@ function(dataframe, person.var, text.var, lock.incomplete = FALSE,
     } else {
         c(NAMES, tolower(as.character(additional.names)))
     }
-    '%p%' <- function(x, y) paste(x, y, sep="")
-    vcheck <- function(x, place = 1) x[place]%in% action.verbs
-    pcheck <- function(x, place = 1) x[place]%in% preposition
-    acheck <- function(x, place = 1) x[place]%in% adverb
-    ncheck <- function(x, place = 1, name.list=NAMES) x[place]%in% name.list
-    ccheck <- function(x, place = 1) x[place]%in% ","
-    dcheck <- function(x, place = 1) x[place]%in% "don't"
     DF2 <- if(length(dataframe) < 3) {
         DD <- data.frame(a = 1:nrow(dataframe), b = 1:nrow(dataframe)) 
         DD <- data.frame(DD, dataframe)
@@ -202,3 +195,11 @@ end_inc2 <- function(tx){
     }
     return(y)
 }
+
+'%p%' <- function(x, y) paste(x, y, sep="")
+vcheck <- function(x, place = 1) x[place]%in% action.verbs
+pcheck <- function(x, place = 1) x[place]%in% preposition
+acheck <- function(x, place = 1) x[place]%in% adverb
+ncheck <- function(x, place = 1, name.list=NAMES) x[place]%in% name.list
+ccheck <- function(x, place = 1) x[place]%in% ","
+dcheck <- function(x, place = 1) x[place]%in% "don't"

@@ -1,4 +1,4 @@
-#' Convert/Generate Term Document Matrix or Document Term Matrix
+#' tm Package Compatability Tools: Aplly to or Convert to/from Term Document Matrix or Document Term Matrix
 #' 
 #' \code{tdm} - Create term document matrices from raw text or \code{wfm} for 
 #' use with other text analysis packages.
@@ -7,9 +7,12 @@
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
-#' @param \ldots Other arguments passed to \code{wfm}.
+#' @param \ldots If \code{tdm} or \code{dtm} - Other arguments passed to 
+#' \code{wfm}.  If \code{apply_as_tm} - Other arguments passed to functions used 
+#' on the tm package's \code{"TermDocumentMatrix"}.
 #' @details Identical to the \code{tm} package's 
 #' \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.
+#' @return \code{tdm} - Returns a \code{\link[tm]{TermDocumentMatrix}}.
 #' @export
 #' @importFrom reshape2 melt
 #' @rdname tdm
@@ -21,6 +24,16 @@
 #' x <- wfm(DATA$state, DATA$person)
 #' tdm(x)
 #' dtm(x)
+#' library(tdm)
+#' plot(tdm(x))
+#' 
+#' pres <- tdm(pres_debates2012$dialogue, pres_debates2012$person)
+#' plot(pres, corThreshold = 0.8)
+#' pres
+#' (pres2 <- removeSparseTerms(pres, .3))
+#' plot(pres2, corThreshold = 0.95)
+#' 
+#' ## Latent Semantic Analysis
 #' library(lsa)
 #' lsa(tdm(x), dims=dimcalc_share())
 #' lsa(tdm(DATA$state, DATA$person), dims=dimcalc_share())
@@ -46,6 +59,42 @@
 #' summary(fit2)
 #' plot(fit2)
 #' plot3d.ca(fit2, labels=1)
+#' 
+#' ## tm Matrices to wfm
+#' library(tm)
+#'
+#' ## A Term Document Matrix Conversion
+#' (tm_in <- TermDocumentMatrix(crude, control = list(stopwords = TRUE)))
+#' converted <- tm2wfm(tm_in)
+#' head(converted)
+#' summary(converted)
+#'
+#' ## A Document Term Matrix Conversion
+#' (dtm_in <- DocumentTermMatrix(crude, control = list(stopwords = TRUE)))
+#' summary(tm2wfm(dtm_in))
+#' 
+#' ## `apply_as_tm` Examples
+#' ## Create a wfm
+#' a <- with(DATA, wfm(state, list(sex, adult)))
+#' summary(a)
+#' 
+#' ## Apply functions meant for a tm TermDocumentMatrix
+#' out <- apply_as_tm(a, tm:::removeSparseTerms, sparse=0.6)
+#' summary(out)
+#' 
+#' apply_as_tm(a, tm:::Dictionary)
+#' apply_as_tm(a, tm:::dissimilarity, method = "cosine")
+#' apply_as_tm(a, tm:::findAssocs, "computer", .8)
+#' apply_as_tm(a, tm:::findFreqTerms, 2, 3)
+#' apply_as_tm(a, tm:::Zipf_plot)
+#' apply_as_tm(a, tm:::Heaps_plot)
+#' apply_as_tm(a, tm:::plot.TermDocumentMatrix, corThreshold = 0.4)
+#' 
+#' library(proxy)
+#' apply_as_tm(a, tm:::weightBin)
+#' apply_as_tm(a, tm:::weightBin, to.qdap = FALSE)
+#' apply_as_tm(a, tm:::weightSMART)
+#' apply_as_tm(a, tm:::weightTfIdf)
 #' }
 tdm <- function(text.var, grouping.var = NULL, ...) {
 
@@ -62,20 +111,24 @@ tdm <- function(text.var, grouping.var = NULL, ...) {
         dimnames(x)
     )
     
-    attributes(a) <- list(Weighting = c("term frequency", "tf"),
-        class = c("TermDocumentMatrix", "simple_triplet_matrix"))
+
+    attributes(a) <- list(
+            class = c("TermDocumentMatrix", "simple_triplet_matrix"),
+            Weighting = c("term frequency", "tf")
+    )
     
-    names(a) <- c("i,", "j", "v", "nrow", "ncol", "dimnames")
+    names(a) <- c("i", "j", "v", "nrow", "ncol", "dimnames")
     a
 }
 
 
 
-#' Convert/Generate Term Document Matrix or Document Term Matrix
+#' tm Package Compatability Tools: Aplly to or Convert to/from Term Document Matrix or Document Term Matrix
 #' 
 #' \code{dtm} - Create document term matrices from raw text or \code{wfm} for 
 #' use with other text analysis packages.
 #' 
+#' @return \code{dtm} - Returns a \code{\link[tm]{DocumentTermMatrix}}.
 #' @rdname tdm
 #' @export
 dtm <- function(text.var, grouping.var = NULL, ...) {
@@ -93,10 +146,12 @@ dtm <- function(text.var, grouping.var = NULL, ...) {
         dimnames(x)
     )
     
-    attributes(a) <- list(Weighting = c("term frequency", "tf"),
-        class = c("DocumentTermMatrix", "simple_triplet_matrix"))
+    attributes(a) <- list(
+            class = c("DocumentTermMatrix", "simple_triplet_matrix"),
+            Weighting = c("term frequency", "tf")
+    )
     
-    names(a) <- c("i,", "j", "v", "nrow", "ncol", "dimnames")
+    names(a) <- c("i", "j", "v", "nrow", "ncol", "dimnames")
     a
 }
 
@@ -110,3 +165,70 @@ wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
     colnames(d)[1:2] <- c("Terms", "Docs")
     xtabs(value ~ Terms + Docs, d)
 }
+
+
+#' tm Package Compatability Tools: Aplly to or Convert to/from Term Document Matrix or Document Term Matrix
+#' 
+#' \code{tm2wfm} - Convert the \code{tm} package's 
+#' \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}} to
+#' \code{\link[qdap]{wfm}}.
+#' 
+#' @param x A \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.
+#' @return \code{tm2qdap} - Returns a \code{\link[qdap]{wfm}} object or 
+#' \code{\link[qdap]{wfm_weight}} object.
+#' @rdname tdm
+#' @export
+tm2qdap <- function(x) {
+
+    opts <- c("DocumentTermMatrix", "TermDocumentMatrix")
+    cls <- opts[opts %in% class(x)]
+
+    if (cls == "DocumentTermMatrix") {
+        x <- t(x)
+    }
+    
+    y <- as.matrix(data.frame(as.matrix(x), check.names = FALSE))
+    
+    if(!any(attributes(x)[["Weighting"]] %in% "tf")){
+        class(y) <- c("weighted_wfm", class(y))
+    } else {
+        class(y) <- c("wfm", "true.matrix", class(y))
+    }
+
+    y
+
+}
+
+
+#' tm Package Compatability Tools: Aplly to or Convert to/from Term Document Matrix or Document Term Matrix
+#' 
+#' \code{apply_as_tm} - Apply functions intended to be used on the \code{tm} 
+#' package's \code{\link[tm]{TermDocumentMatrix}} to a \code{\link[qdap]{wfm}} 
+#' object.
+#' 
+#' @param wfm.obj A \code{\link[qdap]{wfm}} object.
+#' @param tmfun A function applied to a \code{\link[tm]{TermDocumentMatrix}}
+#' object.
+#' @param to.qdap logical.  If \code{TRUE} should \code{\link[qdap]{wfm}} try to
+#' coerce the output back to a qdap object.
+#' @rdname tdm
+#' @export
+apply_as_tm <- function(wfm.obj, tmfun, ..., to.qdap = TRUE){
+
+    ## Convert to a tdm
+    x <- tdm(wfm.obj) 
+
+    ## Apply the tm function
+    y <- tmfun(x, ...) 
+
+    ## attempt to coerce back to qdap wfm/weighted_wfm
+    if (to.qdap && (is(y, "DocumentTermMatrix")|is(y, "TermDocumentMatrix"))) {
+        tm2qdap(y)
+    } else {
+        y
+    }
+
+}
+
+
+
