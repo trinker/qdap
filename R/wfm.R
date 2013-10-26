@@ -488,19 +488,19 @@ summary.wfm <- function(object, ...) {
     B <- x!=0
     Y <- sum(B)
     N <- sum(!B)
-    density <- Y/N
+    density <- Y/(N + Y)
     sparsity <- round(1 - density, 2)*100
     NCHAR <- nchar(rownames(x))
     HL <- sum(rowSums(x) == 1)
     DL <- sum(rowSums(x) == 2)
     out <- paste(
-        sprintf("A word-frequency matrix (%s groups, %s terms)", ncol(x), nrow(x)),
-        "\n", sprintf("Non-/sparse entries       : %s/%s", Y, N),
-        sprintf("Sparsity                  : %s%%", sparsity),
-        sprintf("Maximal term length       : %s", max(NCHAR)) ,
-        sprintf("Less than three characters: %s%%", 100*round(sum(NCHAR < 4)/nrow(x), 2)) ,
-        sprintf("Hapax legomenon           : %s(%s%%)", HL, 100*round(HL/nrow(x), 2)),
-        sprintf("Dis legomenon             : %s(%s%%)", DL, 100*round(DL/nrow(x), 2)),
+        sprintf("A word-frequency matrix (%s terms, %s groups)", nrow(x), ncol(x)),
+        "\n", sprintf("Non-/sparse entries      : %s/%s", Y, N),
+        sprintf("Sparsity                 : %s%%", sparsity),
+        sprintf("Maximal term length      : %s", max(NCHAR)) ,
+        sprintf("Less than four characters: %s%%", 100*round(sum(NCHAR < 4)/nrow(x), 2)) ,
+        sprintf("Hapax legomenon          : %s(%s%%)", HL, 100*round(HL/nrow(x), 2)),
+        sprintf("Dis legomenon            : %s(%s%%)", DL, 100*round(DL/nrow(x), 2)),
     sep="\n")
     message(out)
 }

@@ -26,12 +26,14 @@
   or \code{wfm} for use with other text analysis packages.
 }
 \details{
-  Similar to the \code{tm} package's
-  \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}
-  though not identical.
+  Identical to the \code{tm} package's
+  \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.
 }
 \examples{
 \dontrun{
+dtm(DATA$state, DATA$person)
+tdm(DATA$state, DATA$person)
+
 x <- wfm(DATA$state, DATA$person)
 tdm(x)
 dtm(x)
@@ -48,7 +50,7 @@ dat <- dat[dat$person \%in\% qcv(ROMNEY, OBAMA), ]
 speech <- stemmer(dat$dialogue)
 mytable1 <- with(dat, tdm(speech, list(person, time), stopwords = Top25Words))
 
-fit <- ca(mytable)
+fit <- ca(mytable1)
 summary(fit)
 plot(fit)
 plot3d.ca(fit, labels=1)

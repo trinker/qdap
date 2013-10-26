@@ -120,7 +120,7 @@ Collate:
     'hash.R'
     'hms2sec.R'
     'htruncdf.R'
-    'ID.R'
+    'id2.R'
     'imperative.R'
     'incomplete_replace.R'
     'is.dp.R'

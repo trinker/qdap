@@ -12,26 +12,26 @@
 #' @export
 #' @importFrom reports pad
 #' @examples
-#' ID(list(1, 4, 6))
-#' ID(matrix(1:10, ncol=1))
-#' ID(mtcars)
-#' ID(mtcars, TRUE)
-#' ID("w")
+#' id2(list(1, 4, 6))
+#' id2(matrix(1:10, ncol=1))
+#' id2(mtcars)
+#' id2(mtcars, TRUE)
+#' id2("w")
 #' question_type(DATA.SPLIT$state, ID(DATA.SPLIT, TRUE))
-ID <- function(x, prefix = FALSE, pad = TRUE) {
+id2 <- function(x, prefix = FALSE, pad = TRUE) {
   
     test1 <- dim(x)[1] > 1
     if (is.data.frame(x) | (!identical(logical(0), test1) && test1)) {
-        id <- seq_len(nrow(x))
+        ids <- seq_len(nrow(x))
     } else {
-        id <- seq_along(x)
+        ids <- seq_along(x)
     }
     if (pad) {
-        id <- pad(id)
+        ids <- pad(ids)
     }
     if (prefix) {
-        id <- paste("X", id, sep=".")
+        ids <- paste("X", ids, sep=".")
     } 
-    id
+    ids
 }
 
