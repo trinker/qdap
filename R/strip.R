@@ -15,7 +15,7 @@
 #' @param lower.case logical.  If \code{TRUE} forces all alpha characters to 
 #' lower case.
 #' @return Returns a vector of text that has been stripped of unwanted characters.
-#' @seealso \code{\link[qdap]{stopwords}}
+#' @seealso \code{\link[qdap]{rm_stopwords}}
 #' @export
 #' @examples
 #' \dontrun{

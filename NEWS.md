@@ -231,6 +231,10 @@ relatively new to CRAN, made these changes sensible at this point.
 
 * `list2df` and `mtabulate` now exported.
 
+* `stopwords` has been renamed to `rm_stopwords`(`rm_stop` shorthand) to better 
+  fit what the action the function performs and to avoid conflicts with the 
+  `tm` package.
+
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5
 ----------------------------------------------------------------
@@ -345,6 +349,14 @@ qdap 0.2.3
   for easy use with RStudio as well as a .Rprofile that makes loading and sourcing 
   of packages, data and project functions.  This function uses the reports package
   to generate an extensive reports folder.
+
+* `tdm` and `dtm` are now truly compatable with the `tm` package.  `tdm` and 
+  `dtm` produce outputs of the class `"TermDocumentMatrix"` and 
+  `"DocumentTermMatrix"` respectively.  This change (coupled with the renaming 
+  of `stopwords` to `rm_stopwords`) should make the two packages logical 
+  companions and further extend the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package to integrate with the many 
+  packages that already handle `"TermDocumentMatrix"` and 
+  `"DocumentTermMatrix"`.
 
 <b>MINOR FEATURES</b>
 

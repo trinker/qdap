@@ -210,7 +210,7 @@ question_type <- function(text.var, grouping.var = NULL,
         gsub("\\s+", " ", (Trim(gsub("[^XXX[:digit:]]", " ", subtext))))
     }))
     L2 <- invisible(lapply(L2, function(x) {
-        sapply(stopwords(x, stopwords = NULL, ignore.case = FALSE), "[", 1) 
+        sapply(rm_stopwords(x, stopwords = NULL, ignore.case = FALSE), "[", 1) 
     }))
     key <- apply(key, 2, Trim)
     L2 <- lapply(L2, lookup, key.match = key[, 2:1], missing = "unknown")

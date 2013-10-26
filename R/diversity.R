@@ -75,7 +75,7 @@ function (text.var, grouping.var=NULL){
     DF <- na.omit(data.frame(group = grouping,
         text.var = as.character(text.var), stringsAsFactors = FALSE))
     z <- split(DF[, "text.var"], DF[, "group"])
-    y <- lapply(z, stopwords, stopwords=NULL, unlist=TRUE, strip = TRUE)
+    y <- lapply(z, rm_stopwords, stopwords=NULL, unlist=TRUE, strip = TRUE)
     w <- lapply(y, function(x) data.frame(table(x)))
     v <- do.call(rbind, lapply(w, function(x) RICH(x[, 2])))
     o <- data.frame(rownames(v), v)

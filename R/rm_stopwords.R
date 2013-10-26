@@ -1,10 +1,10 @@
-#' Remove Stopwords
+#' Remove Stop Words
 #' 
-#' Transcript apply the removal of stopwords.
+#' Transcript apply the removal of stop words.
 #' 
-#' @param textString A character string of text or a vector of character strings.
+#' @param text.var A character string of text or a vector of character strings.
 #' @param stopwords A character vector of words to remove from the text.  qdap 
-#' has a number of data sets that can be used as stopwords including: 
+#' has a number of data sets that can be used as stop words including: 
 #' \code{Top200Words}, \code{Top100Words}, \code{Top25Words}.  For the tm 
 #' package's traditional English stop words use \code{tm::stopwords("english")}.
 #' @param unlist logical.  If \code{TRUE} unlists into one vector.  General use 
@@ -19,10 +19,10 @@
 #' @param char.keep If strip is \code{TRUE} this argument provides a means of 
 #' retaining supplied character(s).
 #' @param names logical.  If \code{TRUE} will name the elements of the vector or 
-#' list with the original \code{textString}.
+#' list with the original \code{text.var}.
 #' @param ignore.case logical.  If \code{TRUE} stop words will be removed 
 #' regardless of case.  Additionally, case will be stripped from the text.  If 
-#' \code{FALSE} stopwords removal is contingent upon case.  Additionally, case 
+#' \code{FALSE} stop word removal is contingent upon case.  Additionally, case 
 #' is not stripped.
 #' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophe's from 
 #' the output.
@@ -37,18 +37,18 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' stopwords(DATA$state)
-#' stopwords(DATA$state, tm::stopwords("english"))
-#' stopwords(DATA$state, Top200Words)
-#' stopwords(DATA$state, Top200Words, strip = TRUE)
-#' stopwords(DATA$state, Top200Words, separate = FALSE)
-#' stopwords(DATA$state, Top200Words, separate = FALSE, ignore.case = FALSE)
-#' stopwords(DATA$state, Top200Words, unlist = TRUE)
-#' stopwords(DATA$state, Top200Words, unlist = TRUE, strip=TRUE)
-#' stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
+#' rm_stopwords(DATA$state)
+#' rm_stopwords(DATA$state, tm::stopwords("english"))
+#' rm_stopwords(DATA$state, Top200Words)
+#' rm_stopwords(DATA$state, Top200Words, strip = TRUE)
+#' rm_stopwords(DATA$state, Top200Words, separate = FALSE)
+#' rm_stopwords(DATA$state, Top200Words, separate = FALSE, ignore.case = FALSE)
+#' rm_stopwords(DATA$state, Top200Words, unlist = TRUE)
+#' rm_stopwords(DATA$state, Top200Words, unlist = TRUE, strip=TRUE)
+#' rm_stop(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
 #' }
-stopwords<-
-function (textString, stopwords = qdapDictionaries::Top25Words, unlist = FALSE, 
+rm_stopwords<-
+function (text.var, stopwords = qdapDictionaries::Top25Words, unlist = FALSE, 
     separate = TRUE, strip = FALSE, unique = FALSE, char.keep = NULL, 
     names = FALSE, ignore.case = TRUE, apostrophe.remove = FALSE, ...) {
     Stopwords <- if (is.null(stopwords)) {
@@ -56,23 +56,23 @@ function (textString, stopwords = qdapDictionaries::Top25Words, unlist = FALSE,
     } else {
         stopwords
     }
-    SW <- function(textString, stopwords) {
+    SW <- function(text.var, stopwords) {
         "%w/o%" <- function(x, y) x[!x %in% y]
         breaker2 <- function(X) {
             strsplit(X, "[[:space:]]|(?=[!#$%&,-./:;?@_])", perl=TRUE)
         }  
         if (ignore.case) {
-            unblanker(unlist(breaker2(tolower(Trim(textString)))) %w/o% 
+            unblanker(unlist(breaker2(tolower(Trim(text.var)))) %w/o% 
                 tolower(Trim(stopwords)))
         } else {
-            unblanker(unlist(breaker2(Trim(textString))) %w/o% Trim(stopwords))
+            unblanker(unlist(breaker2(Trim(text.var))) %w/o% Trim(stopwords))
         }
     }
     if (strip) {
-        textString <- strip(textString, char.keep = char.keep, 
+        text.var <- strip(text.var, char.keep = char.keep, 
             apostrophe.remove = apostrophe.remove, ...)
     }
-    x <- lapply(textString, function(x) SW(x, Stopwords))
+    x <- lapply(text.var, function(x) SW(x, Stopwords))
     if (unlist) {
         x <- unlist(x)
     }
@@ -84,9 +84,13 @@ function (textString, stopwords = qdapDictionaries::Top25Words, unlist = FALSE,
         x <- mgsub(c(" .", " ?", " ,", " !"), c(".", "?", ",", "!"), x)
     }
     if (names) {
-        names(x) <- textString
+        names(x) <- text.var
     } else {
         names(x) <- NULL
     }
     return(x)
 }
+
+#' @rdname rm_stopwords
+#' @export
+rm_stop <- rm_stopwords

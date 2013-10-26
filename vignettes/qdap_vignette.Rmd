@@ -4858,8 +4858,8 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="end_mark"> - `r HR("#endmark", "Sentence End Marks")`
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/ID.html" target="_blank">
-    <input type="submit" value="ID"> - `r HR("#id", "Generate unique ID")`
+<form action="http://trinker.github.io/qdap_dev/id.html" target="_blank">
+    <input type="submit" value="id"> - `r HR("#id", "Generate unique ID")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/imperative.html" target="_blank">

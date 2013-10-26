@@ -54,7 +54,7 @@
   removed} \item{fwl}{frequency word list; a data frame of
   words and corresponding frequency counts}
   \item{fswl}{frequency stopword word list; same as fwl but
-  with stopwords removed} \item{rfswl}{reduced frequency
+  with stop words removed} \item{rfswl}{reduced frequency
   stopword word list; same as fswl but truncated to n rows}
 }
 \description{

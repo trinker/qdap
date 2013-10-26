@@ -131,7 +131,7 @@ formality <- function(text.var, grouping.var = NULL,
         if (identical(x, character(0))) {                                            
             return(0)                                                                
         } else {                                                                     
-            WORDS <- stopwords(x, stopwords = NULL,                                  
+            WORDS <- rm_stopwords(x, stopwords = NULL,                                  
                 unlist = FALSE, strip = TRUE)                                        
             sapply(WORDS, function(x) sum(x %in% c("the", "an", "a"),                
                 na.rm = TRUE ))                                                      

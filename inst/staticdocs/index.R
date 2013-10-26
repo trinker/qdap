@@ -77,7 +77,7 @@ list(
         "common",
         "exclude",
         "ngrams",
-        "stopwords",
+        "rm_stopwords",
         "strip",
         "synonyms",
         "word_associate",
@@ -158,7 +158,7 @@ list(
       c(
         "end_inc",
         "end_mark",
-        "ID",
+        "id",
         "imperative",
         "NAer"
       )

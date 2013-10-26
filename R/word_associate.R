@@ -234,7 +234,7 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
     if (!is.list(match.string)) {
         match.string <- list(match.string)
     }
-    Terms2 <- qdap::stopwords(text.var, stopwords = NULL, unlist = TRUE, 
+    Terms2 <- rm_stopwords(text.var, stopwords = NULL, unlist = TRUE, 
         strip = TRUE, unique = TRUE, names = FALSE, char.keep = char2space)  
     if (!is.null(char2space)) {
         Terms2 <- mgsub(char2space, " ", Terms2)
@@ -325,7 +325,7 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
     }
     DFsl <- lapply(ALN, function(i) na.omit(DF3[shortDF(DF3, i), 1:4]))
     names(DFsl) <- colnames(DF3)[-c(1:4)]
-    Terms <- qdap::stopwords(text.var2, stopwords = NULL, unlist = TRUE, 
+    Terms <- rm_stopwords(text.var2, stopwords = NULL, unlist = TRUE, 
           strip = TRUE, unique = TRUE, names = FALSE, char.keep = char2space)
     if (!is.null(char2space)) {
         Terms <- mgsub(char2space, " ", Terms)

@@ -59,7 +59,7 @@ function(text.var, rm.bracket = TRUE, capitalize = TRUE, warn = TRUE,
             "The following row(s) do have standard qdap punctuation endmarks:\n", 
             " rows:", paste(which(bl), collapse = ", "), "\n"))
     }
-    LIST <- qdap::stopwords(txt, stopwords = NULL, strip = TRUE, 
+    LIST <- rm_stopwords(txt, stopwords = NULL, strip = TRUE, 
         char.keep = char.keep)
     LIST <- lapply(LIST, function(x) {
         if(identical(x, character(0))) {

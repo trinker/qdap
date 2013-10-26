@@ -103,7 +103,7 @@ function(text.var, byrow = TRUE, missing = NA, digit.remove = TRUE,
         len <- length(x)
         ifelse((len == 0) | len == 1 && (is.na(x) | is.null(x)), missing, len)
     }
-    txt <- stopwords(text.var, strip = TRUE,  digit.remove = digit.remove, 
+    txt <- rm_stopwords(text.var, strip = TRUE,  digit.remove = digit.remove, 
         stopwords = NULL)
     z <- sapply(txt, len2, missing = missing)
     if (!byrow) {
@@ -133,7 +133,7 @@ function(text.var, byrow = TRUE, missing = NA, apostrophe.remove = TRUE,
         len <- length(x)
         ifelse((len == 0) | (is.na(x) | is.null(x)), missing, nchar(x))
     }
-    txt <- stopwords(text.var, strip = TRUE,  separate =  FALSE,
+    txt <- rm_stopwords(text.var, strip = TRUE,  separate =  FALSE,
         digit.remove = digit.remove, stopwords = NULL)
     txt[txt %in% c("", "NA")] <- NA
     if (!count.space) {

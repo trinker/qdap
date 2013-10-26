@@ -28,7 +28,7 @@
 #' \item{swl}{stop word list; same as rwl with stop words removed}
 #' \item{fwl}{frequency word list; a data frame of words and corresponding 
 #' frequency counts}
-#' \item{fswl}{frequency stopword word list; same as fwl but with stopwords 
+#' \item{fswl}{frequency stopword word list; same as fwl but with stop words 
 #' removed}
 #' \item{rfswl}{reduced frequency stopword word list; same as fswl but truncated 
 #' to n rows}
@@ -221,4 +221,3 @@ function(x, ...) {
     class(y) <- "list"
     print(y)
 }
-

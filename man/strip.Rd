@@ -42,6 +42,6 @@ strip(DATA$state, char.keep = c("?", "."))
 }
 }
 \seealso{
-  \code{\link[qdap]{stopwords}}
+  \code{\link[qdap]{rm_stopwords}}
 }
 
