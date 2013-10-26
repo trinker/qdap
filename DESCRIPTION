@@ -120,7 +120,6 @@ Collate:
     'hash.R'
     'hms2sec.R'
     'htruncdf.R'
-    'id2.R'
     'imperative.R'
     'incomplete_replace.R'
     'is.dp.R'
@@ -215,3 +214,4 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
+    'id.R'

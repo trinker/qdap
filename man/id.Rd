@@ -1,8 +1,8 @@
-\name{id2}
-\alias{id2}
+\name{id}
+\alias{id}
 \title{ID By Row Number or Sequence Along}
 \usage{
-  id2(x, prefix = FALSE, pad = TRUE)
+  id(x, prefix = FALSE, pad = TRUE)
 }
 \arguments{
   \item{x}{A dataframe, matrix, vector, or list object.}
@@ -22,12 +22,12 @@
   object.
 }
 \examples{
-id2(list(1, 4, 6))
-id2(matrix(1:10, ncol=1))
-id2(mtcars)
-id2(mtcars, TRUE)
-id2("w")
-question_type(DATA.SPLIT$state, ID(DATA.SPLIT, TRUE))
+id(list(1, 4, 6))
+id(matrix(1:10, ncol=1))
+id(mtcars)
+id(mtcars, TRUE)
+id("w")
+question_type(DATA.SPLIT$state, id(DATA.SPLIT, TRUE))
 }
 \keyword{id}
 
