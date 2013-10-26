@@ -1176,8 +1176,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.00 15.79 15.79 15.79 25.34 15.00 25.34 15.79 16.30 19.70 15.79
-## [12] 22.40 15.79 15.00 19.70 25.34 25.34 15.79 25.34 15.00
+##  [1] 22.40 15.00 25.34 22.40 22.40 22.40 16.30 15.00 19.70 19.70 22.40
+## [12] 16.30 15.00 19.70 25.34 15.79 19.70 22.40 15.00 16.30
 ```
 
 ```r
@@ -1185,8 +1185,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.00 15.79 15.79 15.79 25.34 15.00 25.34 15.79 16.30 19.70 15.79
-## [12] 22.40 15.79 15.00 19.70 25.34 25.34 15.79 25.34 15.00
+##  [1] 22.40 15.00 25.34 22.40 22.40 22.40 16.30 15.00 19.70 19.70 22.40
+## [12] 16.30 15.00 19.70 25.34 15.79 19.70 22.40 15.00 16.30
 ```
 
 
@@ -3935,39 +3935,7 @@ stopwords(DATA$state, Top200Words)
 ```
 
 ```
-## [[1]]
-## [1] "computer" "fun"      "."        "fun"      "."       
-## 
-## [[2]]
-## [1] "it's" ","    "it's" "dumb" "."   
-## 
-## [[3]]
-## [1] "?"
-## 
-## [[4]]
-## [1] "liar"   ","      "stinks" "!"     
-## 
-## [[5]]
-## [1] "am"      "telling" "truth"   "!"      
-## 
-## [[6]]
-## [1] "certain" "?"      
-## 
-## [[7]]
-## [1] "."
-## 
-## [[8]]
-## [1] "distrust" "."       
-## 
-## [[9]]
-## [1] "talking" "?"      
-## 
-## [[10]]
-## [1] "shall" "?"     "."    
-## 
-## [[11]]
-## [1] "i'm"     "hungry"  "."       "let's"   "eat"     "."       "already"
-## [8] "?"
+## Error: could not find function "stopwords"
 ```
 
 ```r
@@ -3975,38 +3943,7 @@ stopwords(DATA$state, Top200Words, strip = TRUE)
 ```
 
 ```
-## [[1]]
-## [1] "computer" "fun"      "fun"     
-## 
-## [[2]]
-## [1] "it's" "it's" "dumb"
-## 
-## [[3]]
-## character(0)
-## 
-## [[4]]
-## [1] "liar"   "stinks"
-## 
-## [[5]]
-## [1] "am"      "telling" "truth"  
-## 
-## [[6]]
-## [1] "certain"
-## 
-## [[7]]
-## character(0)
-## 
-## [[8]]
-## [1] "distrust"
-## 
-## [[9]]
-## [1] "talking"
-## 
-## [[10]]
-## [1] "shall"
-## 
-## [[11]]
-## [1] "i'm"     "hungry"  "let's"   "eat"     "already"
+## Error: could not find function "stopwords"
 ```
 
 ```r
@@ -4014,12 +3951,7 @@ stopwords(DATA$state, Top200Words, separate = FALSE)
 ```
 
 ```
-##  [1] "computer fun. fun."              "it's, it's dumb."               
-##  [3] "?"                               "liar, stinks!"                  
-##  [5] "am telling truth!"               "certain?"                       
-##  [7] "."                               "distrust."                      
-##  [9] "talking?"                        "shall?."                        
-## [11] "i'm hungry. let's eat. already?"
+## Error: could not find function "stopwords"
 ```
 
 ```r
@@ -4027,10 +3959,7 @@ stopwords(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
 ```
 
 ```
-##  [1] "computer" "fun"      "."        "it's"     ","        "dumb"    
-##  [7] "?"        "liar"     "stinks"   "!"        "am"       "telling" 
-## [13] "truth"    "certain"  "distrust" "talking"  "shall"    "i'm"     
-## [19] "hungry"   "let's"    "eat"      "already"
+## Error: could not find function "stopwords"
 ```
 
 
@@ -6712,7 +6641,7 @@ cor(t(dat)[, c("romeo", "juliet", "hate", "love")])
 
 
 ```r
-dat2 <- wfm(DATA$state, ID(DATA))
+dat2 <- wfm(DATA$state, id(DATA))
 qheat(cor(t(dat2)), low = "yellow", high = "red", 
     grid = "grey90", diag.na = TRUE, by.column = NULL) 
 ```
@@ -6909,49 +6838,12 @@ tdm(x)
 ```
 
 ```
-##           Docs
-## Terms      greg researcher sally sam teacher
-##   about       0          0     1   0       0
-##   already     1          0     0   0       0
-##   am          1          0     0   0       0
-##   are         0          0     1   0       0
-##   be          0          0     1   0       0
-##   can         0          0     1   0       0
-##   certain     0          0     1   0       0
-##   computer    0          0     0   1       0
-##   distrust    0          0     0   1       0
-##   do          0          0     0   0       1
-##   dumb        1          0     0   0       0
-##   eat         1          0     0   0       0
-##   fun         0          0     0   2       0
-##   good        0          1     0   0       0
-##   how         0          0     1   0       0
-##   hungry      1          0     0   0       0
-##   i           1          0     0   1       0
-##   i'm         1          0     0   0       0
-##   is          1          0     0   1       0
-##   it          0          0     0   1       0
-##   it's        2          0     0   0       0
-##   let's       1          0     0   0       0
-##   liar        0          0     0   1       0
-##   move        0          1     0   0       0
-##   no          2          0     0   0       0
-##   not         1          0     0   1       0
-##   on          0          1     0   0       0
-##   shall       0          1     0   0       0
-##   should      0          0     0   0       1
-##   stinks      0          0     0   1       0
-##   talking     0          0     1   0       0
-##   telling     1          0     0   0       0
-##   the         1          0     0   0       0
-##   then        0          1     0   0       0
-##   there       1          0     0   0       0
-##   too         0          0     0   1       0
-##   truth       1          0     0   0       0
-##   way         1          0     0   0       0
-##   we          0          1     1   0       1
-##   what        0          0     1   0       1
-##   you         1          0     1   2       0
+## A term-document matrix (41 terms, 5 documents)
+## 
+## Non-/sparse entries: 49/156
+## Sparsity           : 76%
+## Maximal term length: 8 
+## Weighting          : term frequency (tf)
 ```
 
 ```r
@@ -6960,34 +6852,12 @@ dtm(x)
 ```
 
 ```
-##             Terms
-## Docs         about already am are be can certain computer distrust do dumb
-##   greg           0       1  1   0  0   0       0        0        0  0    1
-##   researcher     0       0  0   0  0   0       0        0        0  0    0
-##   sally          1       0  0   1  1   1       1        0        0  0    0
-##   sam            0       0  0   0  0   0       0        1        1  0    0
-##   teacher        0       0  0   0  0   0       0        0        0  1    0
-##             Terms
-## Docs         eat fun good how hungry i i'm is it it's let's liar move no
-##   greg         1   0    0   0      1 1   1  1  0    2     1    0    0  2
-##   researcher   0   0    1   0      0 0   0  0  0    0     0    0    1  0
-##   sally        0   0    0   1      0 0   0  0  0    0     0    0    0  0
-##   sam          0   2    0   0      0 1   0  1  1    0     0    1    0  0
-##   teacher      0   0    0   0      0 0   0  0  0    0     0    0    0  0
-##             Terms
-## Docs         not on shall should stinks talking telling the then there too
-##   greg         1  0     0      0      0       0       1   1    0     1   0
-##   researcher   0  1     1      0      0       0       0   0    1     0   0
-##   sally        0  0     0      0      0       1       0   0    0     0   0
-##   sam          1  0     0      0      1       0       0   0    0     0   1
-##   teacher      0  0     0      1      0       0       0   0    0     0   0
-##             Terms
-## Docs         truth way we what you
-##   greg           1   1  0    0   1
-##   researcher     0   0  1    0   0
-##   sally          0   0  1    1   1
-##   sam            0   0  0    0   2
-##   teacher        0   0  1    1   0
+## A document-term matrix (5 documents, 41 terms)
+## 
+## Non-/sparse entries: 49/156
+## Sparsity           : 76%
+## Maximal term length: 8 
+## Weighting          : term frequency (tf)
 ```
 
 
@@ -9272,7 +9142,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x136d646c>
+<environment: 0x1394a93c>
 ```
 
 ```r
@@ -9452,7 +9322,7 @@ people  0.3007027 0.4275521 0.4666635 1.0000000
     negative = qcv(no, dumb, distrust, not, stinks),
     literacy = qcv(computer, talking, telling)
 )
-y <- wfdf(DATA$state, ID(DATA, prefix = TRUE))
+y <- wfdf(DATA$state, id(DATA, prefix = TRUE))
 z <- wfm_combine(y, worlis)
 
 word_cor(t(z), word = c(names(worlis), "else.words"), r = NULL)
@@ -9550,14 +9420,14 @@ $night
 ![plot of chunk unnamed-chunk-218](figure/unnamed-chunk-218.png) 
 
 
-Using <a href="http://trinker.github.io/qdap_dev/dispersion_plot.html" target="_blank"><code>dispersion_plot</code></a> with <a href="http://trinker.github.io/qdap_dev/word_list.html" target="_blank"><code>word_list</code></a>'s <b><font color="green" face="courier new">[["rfswl"]][["all"]]</font></b> can be a useful means of viewing the dispersion of high frequency words after stopword removal.
+Using <a href="http://trinker.github.io/qdap_dev/dispersion_plot.html" target="_blank"><code>dispersion_plot</code></a> with <a href="http://trinker.github.io/qdap_dev/freq_terms.html" target="_blank"><code>freq_terms</code></a>'s <b><font color="green" face="courier new">[["rfswl"]][["all"]]</font></b> can be a useful means of viewing the dispersion of high frequency words after stopword removal.
 
-<p id="disper2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/dispersion_plot.html" target="_blank"><code>dispersion_plot</code></a>** - *Example 3: Using with <a href="http://trinker.github.io/qdap_dev/word_list.html" target="_blank"><code>word_list</code></a>*<font size="5" color="orange">&diams;</font></p >
+<p id="disper2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/dispersion_plot.html" target="_blank"><code>dispersion_plot</code></a>** - *Example 3: Using with <a href="http://trinker.github.io/qdap_dev/freq_terms.html" target="_blank"><code>freq_terms</code></a>*<font size="5" color="orange">&diams;</font></p >
 
-<pre><code class="r">wrds <- word_list(pres_debates2012$dialogue, stopwords = Top200Words)
+<pre><code class="r">wrds <- freq_terms(pres_debates2012$dialogue, stopwords = Top200Words)
 
 ## Add leading/trailing spaces if desired
-wrds2 <- spaste(wrds[["rfswl"]][["all"]][, "WORD"])
+wrds2 <- spaste(wrds)
 
 ## Use `~~` to maintain spaces
 wrds2 <- c(" governor~~romney ", wrds2[-c(3, 12)])
@@ -10282,8 +10152,8 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="end_mark"> - <a href="#endmark">Sentence End Marks</a>
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/ID.html" target="_blank">
-    <input type="submit" value="ID"> - <a href="#id">Generate unique ID</a>
+<form action="http://trinker.github.io/qdap_dev/id.html" target="_blank">
+    <input type="submit" value="id"> - <a href="#id">Generate unique ID</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/imperative.html" target="_blank">
@@ -10483,7 +10353,7 @@ The <a href="http://trinker.github.io/qdap_dev/ID.html" target="_blank"><code>ID
 
 
 ```r
-ID(list(1, 4, 6))
+id(list(1, 4, 6))
 ```
 
 ```
@@ -10491,7 +10361,7 @@ ID(list(1, 4, 6))
 ```
 
 ```r
-ID(matrix(1:10, ncol=1))
+id(matrix(1:10, ncol=1))
 ```
 
 ```
@@ -10499,7 +10369,7 @@ ID(matrix(1:10, ncol=1))
 ```
 
 ```r
-ID(mtcars)
+id(mtcars)
 ```
 
 ```
@@ -10509,7 +10379,7 @@ ID(mtcars)
 ```
 
 ```r
-ID(mtcars, FALSE)
+id(mtcars, FALSE)
 ```
 
 ```
@@ -10519,7 +10389,7 @@ ID(mtcars, FALSE)
 ```
 
 ```r
-question_type(DATA.SPLIT$state, ID(DATA.SPLIT, TRUE))
+question_type(DATA.SPLIT$state, id(DATA.SPLIT, TRUE))
 ```
 
 ```

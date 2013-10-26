@@ -215,3 +215,4 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
+    'freq_terms.R'

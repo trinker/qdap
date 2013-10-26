@@ -4419,14 +4419,14 @@ with(rajSPLIT, dispersion_plot(dialogue, c("love", "night"),
     color = "yellow", total.color = "white", horiz.color="grey20"))
 ```
 
-Using `r FUN("dispersion_plot")` with `r FUN("word_list")`'s <b><font color="green" face="courier new">[["rfswl"]][["all"]]</font></b> can be a useful means of viewing the dispersion of high frequency words after stopword removal.
+Using `r FUN("dispersion_plot")` with `r FUN("freq_terms")`'s <b><font color="green" face="courier new">[["rfswl"]][["all"]]</font></b> can be a useful means of viewing the dispersion of high frequency words after stopword removal.
 
-<p id="disper2">`r FT(orange, 5, text="&diams;")` **`r FUN("dispersion_plot")`** - *Example 3: Using with `r FUN("word_list")`*`r FT(orange, 5, text="&diams;")`</p >
+<p id="disper2">`r FT(orange, 5, text="&diams;")` **`r FUN("dispersion_plot")`** - *Example 3: Using with `r FUN("freq_terms")`*`r FT(orange, 5, text="&diams;")`</p >
 
-<pre><code class="r">wrds <- word_list(pres_debates2012$dialogue, stopwords = Top200Words)
+<pre><code class="r">wrds <- freq_terms(pres_debates2012$dialogue, stopwords = Top200Words)
 
 ## Add leading/trailing spaces if desired
-wrds2 <- spaste(wrds[["rfswl"]][["all"]][, "WORD"])
+wrds2 <- spaste(wrds)
 
 ## Use `~~` to maintain spaces
 wrds2 <- c(" governor~~romney ", wrds2[-c(3, 12)])

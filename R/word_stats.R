@@ -234,7 +234,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
     rownames(DF2) <- NULL
 
     qdaMOD <- suppressWarnings(lapply(LIST, function(x) {
-        A <- stopwords(x[, "text.var"], stopwords="", strip=TRUE, unlist=TRUE)
+        A <- rm_stopwords(x[, "text.var"], stopwords="", strip=TRUE, unlist=TRUE)
             if (identical(A, character(0))) {
                 return (c(DIS=0, HAPAX=0, ALL=0))
             } else {

@@ -76,6 +76,7 @@ list(
         "bag_o_words",
         "common",
         "exclude",
+        "freq_terms",
         "ngrams",
         "rm_stopwords",
         "strip",
