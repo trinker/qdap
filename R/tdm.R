@@ -15,6 +15,7 @@
 #' @return \code{tdm} - Returns a \code{\link[tm]{TermDocumentMatrix}}.
 #' @export
 #' @importFrom reshape2 melt
+#' @importFrom tm tm_map as.PlainTextDocument
 #' @rdname tdm
 #' @examples
 #' \dontrun{
@@ -95,6 +96,21 @@
 #' apply_as_tm(a, tm:::weightBin, to.qdap = FALSE)
 #' apply_as_tm(a, tm:::weightSMART)
 #' apply_as_tm(a, tm:::weightTfIdf)
+#' 
+#' ## Convert tm Corpus to Dataframe
+#' ## A tm Corpus
+#' library(tm)
+#' reut21578 <- system.file("texts", "crude", package = "tm")
+#' reuters <- Corpus(DirSource(reut21578),
+#'     readerControl = list(reader = readReut21578XML))
+#' 
+#' ## Convert to data.frame
+#' corp_df <- tm_corpus2df(reuters)
+#' htruncdf(corp_df)
+#' 
+#' ## Apply a qdap function
+#' out <- formality(corp_df$text, corp_df$doc3)
+#' plot(out)
 #' }
 tdm <- function(text.var, grouping.var = NULL, ...) {
 
@@ -202,7 +218,7 @@ tm2qdap <- function(x) {
 }
 
 
-#' tm Package Compatability Tools: Aplly to or Convert to/from Term Document Matrix or Document Term Matrix
+#' tm Package Compatability Tools: Apply to or Convert to/from Term Document Matrix or Document Term Matrix
 #' 
 #' \code{apply_as_tm} - Apply functions intended to be used on the \code{tm} 
 #' package's \code{\link[tm]{TermDocumentMatrix}} to a \code{\link[qdap]{wfm}} 
@@ -232,5 +248,19 @@ apply_as_tm <- function(wfm.obj, tmfun, ..., to.qdap = TRUE){
 
 }
 
+#' tm Package Compatability Tools: Apply to or Convert to/from Term Document Matrix or Document Term Matrix
+#' 
+#' \code{tm_corpus2df} - Convert a tm package corpus to a dataframe.
+#' 
+#' @param tm.corpus A \code{\link[tm]{Corpus}} object.
+#' @param col1 Name for column 1 (the vector elements).
+#' @param col2 Name for column 2 (the names of the vectors).
+#' @rdname tdm
+#' @export
+tm_corpus2df <- function(tm.corpus, col1 = "docs", col2 = "text") {
 
-
+    if(!is(tm.corpus[[1]], "PlainTextDocument")) {
+        tm.corpus <- tm_map(tm.corpus, as.PlainTextDocument)
+    }
+    list2df(tm.corpus, "text", "doc")[, 2:1]
+}

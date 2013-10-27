@@ -2,6 +2,7 @@
 \alias{apply_as_tm}
 \alias{dtm}
 \alias{tdm}
+\alias{tm_corpus2df}
 \alias{tm2qdap}
 \title{tm Package Compatability Tools: Aplly to or Convert to/from Term Document Matrix or Document Term Matrix}
 \usage{
@@ -12,6 +13,8 @@
   tm2qdap(x)
 
   apply_as_tm(wfm.obj, tmfun, ..., to.qdap = TRUE)
+
+  tm_corpus2df(tm.corpus, col1 = "docs", col2 = "text")
 }
 \arguments{
   \item{text.var}{The text variable or a \code{wfm}
@@ -38,6 +41,13 @@
   \item{to.qdap}{logical.  If \code{TRUE} should
   \code{\link[qdap]{wfm}} try to coerce the output back to
   a qdap object.}
+
+  \item{tm.corpus}{A \code{\link[tm]{Corpus}} object.}
+
+  \item{col1}{Name for column 1 (the vector elements).}
+
+  \item{col2}{Name for column 2 (the names of the
+  vectors).}
 }
 \value{
   \code{tdm} - Returns a
@@ -64,6 +74,9 @@
   on the \code{tm} package's
   \code{\link[tm]{TermDocumentMatrix}} to a
   \code{\link[qdap]{wfm}} object.
+
+  \code{tm_corpus2df} - Convert a tm package corpus to a
+  dataframe.
 }
 \details{
   Identical to the \code{tm} package's
@@ -148,6 +161,21 @@ apply_as_tm(a, tm:::weightBin)
 apply_as_tm(a, tm:::weightBin, to.qdap = FALSE)
 apply_as_tm(a, tm:::weightSMART)
 apply_as_tm(a, tm:::weightTfIdf)
+
+## Convert tm Corpus to Dataframe
+## A tm Corpus
+library(tm)
+reut21578 <- system.file("texts", "crude", package = "tm")
+reuters <- Corpus(DirSource(reut21578),
+    readerControl = list(reader = readReut21578XML))
+
+## Convert to data.frame
+corp_df <- tm_corpus2df(reuters)
+htruncdf(corp2df)
+
+## Apply a qdap function
+out <- formality(corp_df$text, corp_df$doc3)
+plot(out)
 }
 }
 

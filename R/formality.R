@@ -170,10 +170,11 @@ formality <- function(text.var, grouping.var = NULL,
     } else {                                                                         
         WOR <- sum(WOR, na.rm=TRUE)                                                  
     } 
-    DF2$other <- DF1$other <- WOR - DF1RS                                                  
+    DF2$other <- DF1$other <- WOR - DF1RS    
+                                             
     DF1 <- do.call(rbind, lapply(1:nrow(DF1), function(i) 100*(DF1[i, ]/WOR[i])))  
-    FOR <- (rowSums(cbind(DF1$noun, DF1$article, DF1$adj, DF1$prep)) -               
-        rowSums(cbind(DF1$pronoun, DF1$verb, DF1$adverb, DF1$interj)) + 100)/2                                                                                      
+    FOR <- (rowSums(cbind(DF1[, "noun"], DF1[, "articles"], DF1[, "adj"], DF1[, "prep"])) -               
+        rowSums(cbind(DF1[, "pronoun"], DF1[, "verb"], DF1[, "adverb"], DF1[, "interj"])) + 100)/2                                                                                     
     if(!gv) {                                                                        
         FOR <- data.frame(replace = X[, 1], word.count = WOR, formality = FOR)       
         colnames(FOR)[1] <- G                                                        
