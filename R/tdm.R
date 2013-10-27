@@ -157,10 +157,12 @@ dtm <- function(text.var, grouping.var = NULL, ...) {
 
 
 wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
+  
     if (!is(text.var, "true.matrix")) {
         text.var <- wfm(text.var = text.var, grouping.var = grouping.var, 
             output = "raw", ...)
     }
+    
     d <- melt(text.var)
     colnames(d)[1:2] <- c("Terms", "Docs")
     xtabs(value ~ Terms + Docs, d)

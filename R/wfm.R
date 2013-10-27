@@ -556,6 +556,10 @@ summary.wfdf <- function(object, ...) {
 #' packages. The output is not of the class "wfm".
 wfm_weight <- function(wfm.obj, type = "prop") {
 
+    if (is(wfm.obj, "wfdf") && !is(wfm.obj, "f.df")) {
+        wfm.obj <- wfm(wfm.obj)
+    }
+  
     types <- c("prop", "max", "scaled")
 
     if (is.numeric(type)) {
