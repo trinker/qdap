@@ -143,7 +143,7 @@
 #' plot3d.ca(fit2, labels=1)
 #' 
 #' ## Weight a wfm
-#' #' WFM <- with(DATA, wfm(state, list(sex, adult)))
+#' WFM <- with(DATA, wfm(state, list(sex, adult)))
 #' wfm_weight(WFM, "prop")
 #' wfm_weight(WFM, "max")
 #' wfm_weight(WFM, "scaled")
@@ -496,20 +496,22 @@ summary.wfm <- function(object, ...) {
     density <- Y/(N + Y)
     sparsity <- round(1 - density, 2)*100
     NCHAR <- nchar(rownames(x))
-    HL <- sum(rowSums(x) == 1)
-    DL <- sum(rowSums(x) == 2)
+    RS <- rowSums(x)
+    HL <- sum(RS == 1)
+    DL <- sum(RS == 2)
+    shan <- shannon(RS)
     out <- paste(
         sprintf("A word-frequency matrix (%s terms, %s groups)", nrow(x), ncol(x)),
-        "\n", sprintf("Non-/sparse entries      : %s/%s", Y, N),
-        sprintf("Sparsity                 : %s%%", sparsity),
-        sprintf("Maximal term length      : %s", max(NCHAR)) ,
-        sprintf("Less than four characters: %s%%", 100*round(sum(NCHAR < 4)/nrow(x), 2)) ,
-        sprintf("Hapax legomenon          : %s(%s%%)", HL, 100*round(HL/nrow(x), 2)),
-        sprintf("Dis legomenon            : %s(%s%%)", DL, 100*round(DL/nrow(x), 2)),
+        "\n", sprintf("Non-/sparse entries       : %s/%s", Y, N),
+        sprintf("Sparsity                  : %s%%", sparsity),
+        sprintf("Maximal term length       : %s", max(NCHAR)) ,
+        sprintf("Less than four characters : %s%%", 100*round(sum(NCHAR < 4)/nrow(x), 2)) ,
+        sprintf("Hapax legomenon           : %s(%s%%)", HL, 100*round(HL/nrow(x), 2)),
+        sprintf("Dis legomenon             : %s(%s%%)", DL, 100*round(DL/nrow(x), 2)),
+        sprintf("Shannon's diversity index : %s", round(shan, 2)),
     sep="\n")
     message(out)
 }
-
 
 #' Summarize a wfdf object
 #' 
