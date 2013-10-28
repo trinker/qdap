@@ -153,8 +153,8 @@ function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,
 ###
 
     output <- lapply(seq_along(L1), function(i) {
-        L2 <- split(L1[[i]], L1[[i]][, group])
-        output2 <- lapply(L2, function(b) {      
+        L2 <- split(droplevels(L1[[i]]), droplevels(L1[[i]][, group]))
+        output2 <- lapply(L2, function(b) {   
             diffs <- b[, "end"] - b[, "start"] 
             data.frame(total = sum(diffs), n = length(diffs), ave = mean(diffs), 
                 sd = ifelse(is.na(sd(diffs)), 0, sd(diffs)), min = min(diffs),
@@ -212,7 +212,7 @@ print.sum_cmspans <- function(x, digits = NULL, ...) {
     wdt <- options()[["width"]]
     options(width = 10000)
     on.exit(options(width = wdt))
-    
+
     nums <- function(x) is.numeric(x) && !is(x, "times")
     if (is.null(digits)) {
         digits <- as.numeric(gsub("digits_", "", class(x)[grepl("digits_", class(x))]))
@@ -407,4 +407,3 @@ plot.sum_cmspans <- function(x, digits = 3, sep = ".",
     }
     invisible(out)
 }
-

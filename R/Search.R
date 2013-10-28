@@ -40,6 +40,12 @@
 #' boolean_search(DATA$state, " I ||.", values=TRUE)
 #' boolean_search(DATA$state, " I ||.", exclude = c("way", "truth"), values=TRUE)
 #' 
+#' ## From stackoverflow: http://stackoverflow.com/q/19640562/1000343
+#' dat <- data.frame(x = c("Doggy", "Hello", "Hi Dog", "Zebra"), y = 1:4)
+#' z <- data.frame(z =c("Hello", "Dog"))
+#' 
+#' dat[boolean_search(dat$x, paste(z$z, collapse = "OR")), ]
+#' 
 #' ## Passing to `trans_context`
 #' inds <- boolean_search(DATA.SPLIT$state, " I&&.|| I&&!", ignore.case = FALSE)
 #' with(DATA.SPLIT, trans_context(state, person, inds=inds))
@@ -72,15 +78,18 @@ function(dataframe, term, column.name = NULL, max.distance = 0.02, ...) {
 #' character vector.
 #' 
 #' @param text.var The text variable.
-#' @param terms A character string(s) to search for.
+#' @param terms A character string(s) to search for.  The terms are aranged in a 
+#' single string with AND (use \code{AND} or \code{&&} to connect terms 
+#' together) and OR (use \code{OR} or \code{||} to to allow for searches of 
+#' either set of terms.  Spaces may be used to control what is searched for.  
+#' For example using \code{" I "} on \code{c("I'm", "I want", "in")} will result
+#' in \code{FALSE TRUE FALSE} whereas \code{"I"} will match all three (if case 
+#' is ignored).
 #' @param ignore.case logical.  If \code{TRUE} case is ignored.
 #' @param values logical.  Should the values be returned or the index of the 
 #' values. 
 #' @param exclude Terms to exclude from the search.  If one of these terms is 
-#' found in the sentence it can not be returned.  The terms are aranged in a 
-#' single string with AND (use \code{AND} or \code{&&} to connect terms 
-#' together) and OR (use \code{OR} or \code{||} to to allow for searches of 
-#' either set of terms.  Spaces amy be used to control what is searched for.
+#' found in the sentence it can not be returned.  
 #' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophes from 
 #' the text before examining.
 #' @param char.keep A character vector of symbol character (i.e., punctuation) 
