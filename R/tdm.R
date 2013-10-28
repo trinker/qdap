@@ -109,7 +109,7 @@
 #' htruncdf(corp_df)
 #' 
 #' ## Apply a qdap function
-#' out <- formality(corp_df$text, corp_df$doc3)
+#' out <- formality(corp_df$text, corp_df$docs)
 #' plot(out)
 #' }
 tdm <- function(text.var, grouping.var = NULL, ...) {
@@ -262,5 +262,5 @@ tm_corpus2df <- function(tm.corpus, col1 = "docs", col2 = "text") {
     if(!is(tm.corpus[[1]], "PlainTextDocument")) {
         tm.corpus <- tm_map(tm.corpus, as.PlainTextDocument)
     }
-    list2df(tm.corpus, "text", "doc")[, 2:1]
+    list2df(tm.corpus, col1 = col2, col2 = col1)[, 2:1]
 }

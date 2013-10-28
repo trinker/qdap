@@ -171,10 +171,10 @@ reuters <- Corpus(DirSource(reut21578),
 
 ## Convert to data.frame
 corp_df <- tm_corpus2df(reuters)
-htruncdf(corp2df)
+htruncdf(corp_df)
 
 ## Apply a qdap function
-out <- formality(corp_df$text, corp_df$doc3)
+out <- formality(corp_df$text, corp_df$docs)
 plot(out)
 }
 }
