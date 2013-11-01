@@ -1,10 +1,12 @@
 \name{tdm}
 \alias{apply_as_tm}
+\alias{df2tm_corpus}
 \alias{dtm}
 \alias{tdm}
 \alias{tm_corpus2df}
 \alias{tm2qdap}
-\title{tm Package Compatability Tools: Apply to or Convert to/from Term Document Matrix or Document Term Matrix}
+\title{tm Package Compatability Tools: Apply to or Convert to/from Term Document
+Matrix or Document Term Matrix}
 \usage{
   tdm(text.var, grouping.var = NULL, ...)
 
@@ -15,10 +17,12 @@
   apply_as_tm(wfm.obj, tmfun, ..., to.qdap = TRUE)
 
   tm_corpus2df(tm.corpus, col1 = "docs", col2 = "text")
+
+  df2tm_corpus(text.var, grouping.var = NULL, ...)
 }
 \arguments{
-  \item{text.var}{The text variable or a \code{wfm}
-  object.}
+  \item{text.var}{The text variable or a
+  \code{\link[qdap]{wfm}} object.}
 
   \item{grouping.var}{The grouping variables.  Default
   \code{NULL} generates one word list for all text.  Also
@@ -28,7 +32,9 @@
   \item{\ldots}{If \code{tdm} or \code{dtm} - Other
   arguments passed to \code{wfm}.  If \code{apply_as_tm} -
   Other arguments passed to functions used on the tm
-  package's \code{"TermDocumentMatrix"}.}
+  package's \code{"TermDocumentMatrix"}.  If
+  \code{df2tm_corpus} - Other arguments passed to the tm
+  package's \code{\link[tm]{Corpus}}.}
 
   \item{x}{A
   \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.}
@@ -58,13 +64,26 @@
 
   \code{tm2qdap} - Returns a \code{\link[qdap]{wfm}} object
   or \code{\link[qdap]{wfm_weight}} object.
+
+  \code{apply_as_tm} - Applies a tm oriented function to a
+  \code{\link[qdap]{wfm}} and attempts to simplify back to
+  a \code{\link[qdap]{wfm}} or
+  \code{\link[qdap]{wfm_weight}} format.
+
+  \code{tm_corpus2df} - Converts a \code{\link[tm]{Corpus}}
+  and returns a qdap oriented dataframe.
+
+  \code{df2tm_corpus} - Converts a qdap oriented dataframe
+  and returns a \code{\link[tm]{Corpus}}.
 }
 \description{
   \code{tdm} - Create term document matrices from raw text
-  or \code{wfm} for use with other text analysis packages.
+  or \code{\link[qdap]{wfm}} for use with other text
+  analysis packages.
 
   \code{dtm} - Create document term matrices from raw text
-  or \code{wfm} for use with other text analysis packages.
+  or \code{\link[qdap]{wfm}} for use with other text
+  analysis packages.
 
   \code{tm2wfm} - Convert the \code{tm} package's
   \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}
@@ -77,10 +96,16 @@
 
   \code{tm_corpus2df} - Convert a tm package corpus to a
   dataframe.
+
+  \code{df2tm_corpus} - Convert a qdap dataframe to a tm
+  package \code{\link[tm]{Corpus}}.
 }
 \details{
-  Identical to the \code{tm} package's
-  \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.
+  Produces output that is identical to the \code{tm}
+  package's \code{\link[tm]{TermDocumentMatrix}},
+  \code{\link[tm]{DocumentTermMatrix}},
+  \code{\link[tm]{Corpus}} or allows convenient inteface
+  between the qdap and tm packages.
 }
 \examples{
 \dontrun{
@@ -169,13 +194,26 @@ reut21578 <- system.file("texts", "crude", package = "tm")
 reuters <- Corpus(DirSource(reut21578),
     readerControl = list(reader = readReut21578XML))
 
-## Convert to data.frame
+## Convert to dataframe
 corp_df <- tm_corpus2df(reuters)
 htruncdf(corp_df)
 
 ## Apply a qdap function
 out <- formality(corp_df$text, corp_df$docs)
 plot(out)
+
+## Convert a qdap dataframe to tm package Corpus
+(x <- with(DATA2, df2tm_corpus(state, list(person, class, day))))
+library(tm)
+inspect(x)
+class(x)
+
+(y <- with(pres_debates2012, df2tm_corpus(dialogue, list(person, time))))
 }
+}
+\seealso{
+  \code{\link[tm]{DocumentTermMatrix}},
+  \code{\link[tm]{Corpus}},
+  \code{\link[tm]{TermDocumentMatrix}}
 }
 

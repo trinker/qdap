@@ -1,21 +1,28 @@
-#' tm Package Compatability Tools: Apply to or Convert to/from Term Document Matrix or Document Term Matrix
+#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
+#' Matrix or Document Term Matrix
 #' 
-#' \code{tdm} - Create term document matrices from raw text or \code{wfm} for 
-#' use with other text analysis packages.
+#' \code{tdm} - Create term document matrices from raw text or 
+#' \code{\link[qdap]{wfm}} for use with other text analysis packages.
 #'
-#' @param text.var The text variable or a \code{wfm} object.
+#' @param text.var The text variable or a \code{\link[qdap]{wfm}} object.
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
 #' @param \ldots If \code{tdm} or \code{dtm} - Other arguments passed to 
 #' \code{wfm}.  If \code{apply_as_tm} - Other arguments passed to functions used 
-#' on the tm package's \code{"TermDocumentMatrix"}.
-#' @details Identical to the \code{tm} package's 
-#' \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.
+#' on the tm package's \code{"TermDocumentMatrix"}.  If \code{df2tm_corpus} - 
+#' Other arguments passed to the tm package's \code{\link[tm]{Corpus}}.
+#' @details Produces output that is identical to the \code{tm} package's 
+#' \code{\link[tm]{TermDocumentMatrix}}, \code{\link[tm]{DocumentTermMatrix}},
+#' \code{\link[tm]{Corpus}} or allows convenient inteface between the qdap and 
+#' tm packages.
 #' @return \code{tdm} - Returns a \code{\link[tm]{TermDocumentMatrix}}.
 #' @export
+#' @seealso \code{\link[tm]{DocumentTermMatrix}},
+#' \code{\link[tm]{Corpus}},
+#' \code{\link[tm]{TermDocumentMatrix}}
 #' @importFrom reshape2 melt
-#' @importFrom tm tm_map as.PlainTextDocument
+#' @importFrom tm tm_map as.PlainTextDocument VectorSource Corpus
 #' @rdname tdm
 #' @examples
 #' \dontrun{
@@ -104,13 +111,21 @@
 #' reuters <- Corpus(DirSource(reut21578),
 #'     readerControl = list(reader = readReut21578XML))
 #' 
-#' ## Convert to data.frame
+#' ## Convert to dataframe
 #' corp_df <- tm_corpus2df(reuters)
 #' htruncdf(corp_df)
 #' 
 #' ## Apply a qdap function
 #' out <- formality(corp_df$text, corp_df$docs)
 #' plot(out)
+#' 
+#' ## Convert a qdap dataframe to tm package Corpus
+#' (x <- with(DATA2, df2tm_corpus(state, list(person, class, day))))
+#' library(tm)
+#' inspect(x)
+#' class(x)
+#' 
+#' (y <- with(pres_debates2012, df2tm_corpus(dialogue, list(person, time))))
 #' }
 tdm <- function(text.var, grouping.var = NULL, ...) {
 
@@ -139,10 +154,11 @@ tdm <- function(text.var, grouping.var = NULL, ...) {
 
 
 
-#' tm Package Compatability Tools: Aplly to or Convert to/from Term Document Matrix or Document Term Matrix
+#' tm Package Compatability Tools: Aplly to or Convert to/from Term Document 
+#' Matrix or Document Term Matrix
 #' 
-#' \code{dtm} - Create document term matrices from raw text or \code{wfm} for 
-#' use with other text analysis packages.
+#' \code{dtm} - Create document term matrices from raw text or 
+#' \code{\link[qdap]{wfm}} for use with other text analysis packages.
 #' 
 #' @return \code{dtm} - Returns a \code{\link[tm]{DocumentTermMatrix}}.
 #' @rdname tdm
@@ -185,7 +201,8 @@ wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
 }
 
 
-#' tm Package Compatability Tools: Aplly to or Convert to/from Term Document Matrix or Document Term Matrix
+#' tm Package Compatability Tools: Aplly to or Convert to/from Term Document 
+#' Matrix or Document Term Matrix
 #' 
 #' \code{tm2wfm} - Convert the \code{tm} package's 
 #' \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}} to
@@ -218,7 +235,8 @@ tm2qdap <- function(x) {
 }
 
 
-#' tm Package Compatability Tools: Apply to or Convert to/from Term Document Matrix or Document Term Matrix
+#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
+#' Matrix or Document Term Matrix
 #' 
 #' \code{apply_as_tm} - Apply functions intended to be used on the \code{tm} 
 #' package's \code{\link[tm]{TermDocumentMatrix}} to a \code{\link[qdap]{wfm}} 
@@ -229,6 +247,9 @@ tm2qdap <- function(x) {
 #' object.
 #' @param to.qdap logical.  If \code{TRUE} should \code{\link[qdap]{wfm}} try to
 #' coerce the output back to a qdap object.
+#' @return \code{apply_as_tm} - Applies a tm oriented function to a 
+#' \code{\link[qdap]{wfm}} and attempts to simplify back to a 
+#' \code{\link[qdap]{wfm}} or \code{\link[qdap]{wfm_weight}} format.
 #' @rdname tdm
 #' @export
 apply_as_tm <- function(wfm.obj, tmfun, ..., to.qdap = TRUE){
@@ -248,13 +269,16 @@ apply_as_tm <- function(wfm.obj, tmfun, ..., to.qdap = TRUE){
 
 }
 
-#' tm Package Compatability Tools: Apply to or Convert to/from Term Document Matrix or Document Term Matrix
+#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
+#' Matrix or Document Term Matrix
 #' 
 #' \code{tm_corpus2df} - Convert a tm package corpus to a dataframe.
 #' 
 #' @param tm.corpus A \code{\link[tm]{Corpus}} object.
 #' @param col1 Name for column 1 (the vector elements).
 #' @param col2 Name for column 2 (the names of the vectors).
+#' @return \code{tm_corpus2df} - Converts a \code{\link[tm]{Corpus}} and returns 
+#' a qdap oriented dataframe.
 #' @rdname tdm
 #' @export
 tm_corpus2df <- function(tm.corpus, col1 = "docs", col2 = "text") {
@@ -264,3 +288,56 @@ tm_corpus2df <- function(tm.corpus, col1 = "docs", col2 = "text") {
     }
     list2df(tm.corpus, col1 = col2, col2 = col1)[, 2:1]
 }
+
+#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
+#' Matrix or Document Term Matrix
+#' 
+#' \code{df2tm_corpus} - Convert a qdap dataframe to a tm package 
+#' \code{\link[tm]{Corpus}}.
+#' 
+#' @rdname tdm
+#' @return \code{df2tm_corpus} - Converts a qdap oriented dataframe and returns 
+#' a \code{\link[tm]{Corpus}}.
+#' @export
+df2tm_corpus <- function(text.var, grouping.var = NULL, ...){
+
+    if(is.null(grouping.var)) {
+        G <- "all"
+    } else {
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
+    }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    } 
+    DF <- data.frame(grouping, text.var, check.names = FALSE, 
+        stringsAsFactors = FALSE)
+
+    ## convert text.var to character and grouping.var to factor
+    DF[, "grouping"] <- factor(DF[, "grouping"])
+    DF[, "text.var"] <- as.character(DF[, "text.var"])
+
+    ## Split apart by grouping variables and collpase text
+    LST <- sapply(split(DF[, "text.var"], DF[, "grouping"]), 
+        paste, collapse = " ")
+
+    ## Use the tm package to convert to a Corpus
+    Corpus(VectorSource(LST), ...)
+
+}
+

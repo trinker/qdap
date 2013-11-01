@@ -119,8 +119,8 @@ relatively new to CRAN, made these changes sensible at this point.
 * `apply_as_tm` a function to allow functions intended to be used on the `tm` 
   package's `TermDocumentMatrix` to be applied to a `wfm` object.
 
-* `tm_corpus2df` added to convert a tm package corpus to a dataframe for use in 
-  <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>.
+* `tm_corpus2df` and `df2tm_corpus` added to convert a tm package corpus to a 
+  dataframe for use in <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> or vice versa.
 
 * `tdm` and `dtm` are now truly compatable with the `tm` package.  `tdm` and 
   `dtm` produce outputs of the class `"TermDocumentMatrix"` and 
