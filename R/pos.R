@@ -37,7 +37,7 @@
 #' @references \href{openNLP}{http:/opennlp.apache.org}
 #' @keywords parts-of-speech
 #' @export
-#' @importFrom parallel parApply makeCluster detectCores stopCluster clusterEvalQ
+#' @importFrom parallel parLapply makeCluster detectCores stopCluster clusterEvalQ clusterExport
 #' @importFrom openNLP Maxent_POS_Tag_Annotator Maxent_Word_Token_Annotator
 #' @importFrom NLP as.String annotate Annotation
 #' @examples 

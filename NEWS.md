@@ -130,6 +130,10 @@ relatively new to CRAN, made these changes sensible at this point.
   packages that already handle `"TermDocumentMatrix"` and 
   `"DocumentTermMatrix"`.
 
+* `cm_distance` now uses resampling of data from the null model to generate
+  pvalues for the mean code distances.  Useful for determining if an association 
+  (small distance) between codes is likely to happen if the null is true.
+
 <b>MINOR FEATURES</b>
 
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 

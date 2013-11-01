@@ -227,7 +227,8 @@ print.sum_cmspans <- function(x, digits = NULL, ...) {
 
     x[, "mean(sd)"] <- sprintf("%s(%s)", x[, "ave"], x[, "sd"])
     x[, "sd"] <- NULL
-
+    x[, "ave"] <- NULL
+    
     if(which.class(x, "percent_") == "percent") {
         cn <- colnames(x)
         tot <- grepl("_total", cn) 
@@ -240,6 +241,10 @@ print.sum_cmspans <- function(x, digits = NULL, ...) {
         locs2 <- sapply(colnames(x), function(z) z %in% c("total"))
         x[, locs2] <- lapply(x[, locs2, drop = FALSE], tred)
     }
+    
+    x <- x[, c("code", "total", "percent_total", "n", "percent_n", "mean(sd)", 
+        "min", "max")]     
+    
     print(x)
     message(paste(rep("====", 7), collapse = ""))
     message(sprintf("Unit of measure: %s", ifelse(which.cm(x)== "cmtime", "time", "words")))
