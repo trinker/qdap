@@ -309,10 +309,12 @@ vs2df <- function(col) {
 
 ## reforms pasted vectors with time var to dataframes
 vs2dfb <- function(col) {
-   x <- do.call(rbind, strsplit(col, "\\|"))
-   x <- data.frame(apply(x[, 1:2], 2, as.numeric), x[, 3])
-   if (length(col) == 1) {
-       x <- data.frame(t(x))
+   if (length(col) > 1) {
+       x <- do.call(rbind, strsplit(col, "\\|"))
+          x <- data.frame(apply(x[, 1:2], 2, as.numeric), x[, 3])
+   } else {
+       x <- unlist(strsplit(col, "\\|"))
+   	   x <- data.frame(t(as.numeric(x[1:2])), x[3])
    }
    colnames(x) <- c("start", "end", "time")
    x
