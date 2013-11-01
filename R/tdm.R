@@ -1,4 +1,4 @@
-#' tm Package Compatability Tools: Aplly to or Convert to/from Term Document Matrix or Document Term Matrix
+#' tm Package Compatability Tools: Apply to or Convert to/from Term Document Matrix or Document Term Matrix
 #' 
 #' \code{tdm} - Create term document matrices from raw text or \code{wfm} for 
 #' use with other text analysis packages.

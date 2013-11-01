@@ -4,7 +4,7 @@
 \alias{tdm}
 \alias{tm_corpus2df}
 \alias{tm2qdap}
-\title{tm Package Compatability Tools: Aplly to or Convert to/from Term Document Matrix or Document Term Matrix}
+\title{tm Package Compatability Tools: Apply to or Convert to/from Term Document Matrix or Document Term Matrix}
 \usage{
   tdm(text.var, grouping.var = NULL, ...)
 
