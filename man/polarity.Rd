@@ -128,14 +128,14 @@
   researcher may provide a weight \eqn{c} to be utilized
   with amplifiers/de-amplifiers (default is .8; deamplifier
   weight is constrained to -1 lower bound).  Last, these
-  values are then summed and divided by the word count
-  (\eqn{n}) yielding an unbounded polarity score
-  (\eqn{\delta}).  Note that context clusters containing a
-  comma before the polarized word will only consider words
-  found after the comma.
+  values are then summed and divided by the square root of
+  the word count (\eqn{\sqrt{n}}) yielding an unbounded
+  polarity score (\eqn{\delta}).  Note that context
+  clusters containing a comma before the polarized word
+  will only consider words found after the comma.
 
   \deqn{\delta=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot
-  w(-1)^{\sum{x_i^{N}}})}}{n}}
+  w(-1)^{\sum{x_i^{N}}})}}{\sqrt{n}}}
 
   Where:
 

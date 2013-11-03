@@ -76,11 +76,12 @@
 #' surrounding the positive or negative word.  The researcher may provide a 
 #' weight \eqn{c} to be utilized with amplifiers/de-amplifiers (default is .8; 
 #' deamplifier weight is constrained to -1 lower bound).  Last, these values are 
-#' then summed and divided by the word count (\eqn{n}) yielding an unbounded 
-#' polarity score (\eqn{\delta}).  Note that context clusters containing a comma 
-#' before the polarized word will only consider words found after the comma.
+#' then summed and divided by the square root of the word count (\eqn{\sqrt{n}}) 
+#' yielding an unbounded polarity score (\eqn{\delta}).  Note that context 
+#' clusters containing a comma before the polarized word will only consider 
+#' words found after the comma.
 #' 
-#' \deqn{\delta=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot w(-1)^{\sum{x_i^{N}}})}}{n}}
+#' \deqn{\delta=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot w(-1)^{\sum{x_i^{N}}})}}{\sqrt{n}}}
 #'   
 #' Where:
 #' 
@@ -193,6 +194,10 @@ polarity <- function (text.var, grouping.var = NULL,
         polarity.frame <- hash(polarity.frame)
     }
 
+    ## remove amplifiers also in polarity frame
+    amplifiers <- amplifiers[!amplifiers %in% ls(polarity.frame)]
+    deamplifiers <- deamplifiers[!deamplifiers %in% ls(polarity.frame)]
+
     ## create environment to lookup amps, de-amps and negators
     alter <- alter_env(negators, amplifiers, deamplifiers)
 
@@ -202,8 +207,9 @@ polarity <- function (text.var, grouping.var = NULL,
 
     ## create sentence lengths
     counts <- unlist(lapply(DF[, "text.var"], function(x) length(bag_o_words(x))))
-    DF[, "text.var"] <- space_fill(text.var = strip(DF[, "text.var"], ...), 
-        terms = words[grep("\\s", words)], sep = "~~")
+    DF[, "text.var"] <- space_fill(text.var = strip(DF[, "text.var"], 
+        apostrophe.remove = FALSE, ... ), terms = words[grep("\\s", words)], 
+        sep = "~~")
 
     ## split into bag of words per sentence
     TV <- lapply(lapply(DF[, "text.var"], bag_o_words, ...), function(x) {
@@ -234,7 +240,7 @@ polarity <- function (text.var, grouping.var = NULL,
     }
 
     ## Construct sentence data.frame
-    scores <- sapply(output, sum)/counts
+    scores <- sapply(output, sum)/sqrt(counts)
     all <- data.frame(group.var =  DF[, "grouping"], wc = counts, 
         polarity = scores)
 
@@ -278,6 +284,7 @@ polarity <- function (text.var, grouping.var = NULL,
     class(o) <- "polarity"
     return(o)
 }
+
 
 
 #' Polarity Score (Sentiment Analysis)

@@ -2,7 +2,6 @@
 #' 
 #' Generate distance measures to ascertain a mean distance measure between codes.
 #' 
-
 #' @param dataframe A data frame from the cm_x2long family 
 #' (\code{cm_range2long}; \code{cm_df2long}; \code{cm_time2long}).
 #' @param pvals A logical vector of length 1 or 2.  If element 2 is blank 
