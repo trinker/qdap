@@ -113,10 +113,10 @@
   The equation used by the algorithm to assign value to
   polarity of each sentence fist utilizes the sentiment
   dictionary (Hu and Liu, 2004) to tag polarized words.  A
-  context cluster of words is pulled from around this
-  polarized word (default 4 words before and two words
-  after) to be considered as valence shifters.  The words
-  in this context cluster are tagged as neutral
+  context cluster (\eqn{x_i^{T}}) of words is pulled from
+  around this polarized word (default 4 words before and
+  two words after) to be considered as valence shifters.
+  The words in this context cluster are tagged as neutral
   (\eqn{x_i^{0}}), negator (\eqn{x_i^{N}}), amplifier
   (\eqn{x_i^{a}}), or de-amplifier (\eqn{x_i^{d}}). Neutral
   words hold no value in the equation but do affect word
@@ -128,24 +128,29 @@
   researcher may provide a weight \eqn{c} to be utilized
   with amplifiers/de-amplifiers (default is .8; deamplifier
   weight is constrained to -1 lower bound).  Last, these
-  values are then summed and divided by the square root of
-  the word count (\eqn{\sqrt{n}}) yielding an unbounded
-  polarity score (\eqn{\delta}).  Note that context
-  clusters containing a comma before the polarized word
-  will only consider words found after the comma.
+  context cluster (\eqn{x_i^{T}}) are summed and divided by
+  the square root of the word count (\eqn{\sqrt{n}})
+  yielding an unbounded polarity score (\eqn{\delta}).
+  Note that context clusters containing a comma before the
+  polarized word will only consider words found after the
+  comma.
 
-  \deqn{\delta=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot
-  w(-1)^{\sum{x_i^{N}}})}}{\sqrt{n}}}
+  \deqn{\delta=\frac{x_i^T}{\sqrt{n}}}
 
   Where:
 
+  \deqn{x_i^T=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot
+  w(-1)^{\sum{x_i^{N}}})}}{\sqrt{n}}}
+
   \deqn{x_i^{A}=\sum{(w_{neg}\cdot x_i^{a})}}
 
-  \deqn{x_i^{D}=\sum{((1 - w_{neg})\cdot x_i^{a} +
-  x_i^{d})}}
+  \deqn{x_{i}^D=\left\{\begin{array}{cc} x_{i}^D & x_{i}^D
+  \geq -1 \\ -1 & x_{i}^D < -1 \end{array}\right.}
 
-  \deqn{w_{neg}=\left\{\begin{array}{cc} 1 &
-  \sum{x_i^{N}}>0 \\ 0 & \sum{x_i^{N}}=0
+  \deqn{x_i^{D}=\sum{(- w_{neg}\cdot x_i^{a} + x_i^{d})}}
+
+  \deqn{w_{neg}=\left\{\begin{array}{cc} 1 & \sum{x_i^{N}}
+  \bmod {2} >0 \\ 0 & \sum{x_i^{N}} \bmod {2} =0
   \end{array}\right.}
 }
 \note{

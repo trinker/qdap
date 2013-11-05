@@ -68,6 +68,35 @@
 #' plot(fit2)
 #' plot3d.ca(fit2, labels=1)
 #' 
+#' ## Topic Models
+#' library(topicmodels)
+#' library(tm)
+#' 
+#' # Example 1
+#' shorts <- all_words(pres_debates2012)[,1][nchar(strip(all_words(
+#'     pres_debates2012)[,1])) < 4]
+#' SW <- c(shorts , Top200Words, "governor", "president", "mister", "obama", 
+#'     "romney")
+#'     
+#' DocTermMat <- with(pres_debates2012, dtm(dialogue, person, stopwords = SW))
+#' DocTermMat <- removeSparseTerms(DocTermMat,0.999)
+#' DocTermMat <- DocTermMat[rowSums(as.matrix(DocTermMat))> 0,]
+#' 
+#' lda.model <- LDA(DocTermMat, 5)
+#' 
+#' (topics <- posterior(lda.model, DocTermMat)$topics)
+#' terms(lda.model,20)
+#' 
+#' # Example 2
+#' DocTermMat2 <- with(pres_debates2012, dtm(dialogue, list(person, time), stopwords = SW))
+#' DocTermMat2 <- removeSparseTerms(DocTermMat2,0.95)
+#' DocTermMat2 <- DocTermMat2[rowSums(as.matrix(DocTermMat2))> 0,]
+#' 
+#' lda.model2 <- LDA(DocTermMat2, 6)
+#' 
+#' (topics <- posterior(lda.model2, DocTermMat2)$topics)
+#' terms(lda.model2,20)
+#' 
 #' ## tm Matrices to wfm
 #' library(tm)
 #'
