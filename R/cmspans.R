@@ -207,7 +207,14 @@ function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,
 #' @method print sum_cmspans
 #' @S3method print sum_cmspans
 print.sum_cmspans <- function(x, digits = NULL, ...) {
-    class(x) <- c(class(x)[!class(x) %in% "sum_cmspans"], sprintf("digits_%s", digits)) 
+
+    if (!is.null(digits)) {
+        digs <- sprintf("digits_%s", digits)
+    } else {
+        digs <- class(x)[grepl("digits_", class(x))]
+    }
+
+    class(x) <- c(class(x)[(!class(x) %in% "sum_cmspans") & !grepl("digits_", class(x))], digs) 
 
     wdt <- options()[["width"]]
     options(width = 10000)
@@ -241,9 +248,14 @@ print.sum_cmspans <- function(x, digits = NULL, ...) {
         locs2 <- sapply(colnames(x), function(z) z %in% c("total"))
         x[, locs2] <- lapply(x[, locs2, drop = FALSE], tred)
     }
-    
-    x <- x[, c("code", "total", "percent_total", "n", "percent_n", "mean(sd)", 
-        "min", "max")]     
+
+
+    grabs <- c("code", "total", "percent_total", "n", "percent_n", "mean(sd)", 
+        "min", "max")
+    if (colnames(x)[1] == "time") {
+        grabs <- c("time", grabs)
+    }
+    x <- x[, grabs]     
     
     print(x)
     message(paste(rep("====", 7), collapse = ""))

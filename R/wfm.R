@@ -149,8 +149,8 @@
 #' wfm_weight(WFM, "scaled")
 #' }
 wfm <- 
-function(text.var = NULL, grouping.var = NULL, 
-         output = "raw", stopwords = NULL, char2space = "~~", ...){
+function(text.var = NULL, grouping.var = NULL, output = "raw", stopwords = NULL, 
+    char2space = "~~", ...){
 
     if (is(text.var, "wfdf")) {
         if (is(text.var, "t.df")) {
@@ -190,7 +190,7 @@ function(text.var = NULL, grouping.var = NULL,
         } 
 
         if (!is.null(stopwords)){
-            x2 <- x2[!rownames(x2) %in% stopwords, , drop = FALSE]
+            x2 <- x2[!rownames(x2) %in% tolower(stopwords), , drop = FALSE]
         }
         if (output != "raw"){
             x2 <- x2/colSums(x2)
