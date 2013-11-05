@@ -69,14 +69,16 @@
 #' plot3d.ca(fit2, labels=1)
 #' 
 #' ## Topic Models
-#' library(topicmodels)
-#' library(tm)
-#' 
 #' # Example 1
-#' shorts <- all_words(pres_debates2012)[,1][nchar(strip(all_words(
-#'     pres_debates2012)[,1])) < 4]
-#' SW <- c(shorts , Top200Words, "governor", "president", "mister", "obama", 
-#'     "romney")
+#' library(topicmodels); library(tm)
+#' 
+#' # Generate stop words based on short words, frequent words and contractions
+#' shorts <- all_words(pres_debates2012)[,1][nchar(all_words(
+#'     pres_debates2012)[,1]) < 4]
+#'     
+#' SW <- c(shorts, qdapDictionaries::contractions[, 1], 
+#'     qdapDictionaries::Top200Words, 
+#'     "governor", "president", "mister", "obama","romney")
 #'     
 #' DocTermMat <- with(pres_debates2012, dtm(dialogue, person, stopwords = SW))
 #' DocTermMat <- removeSparseTerms(DocTermMat,0.999)
