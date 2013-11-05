@@ -4,7 +4,7 @@
 \usage{
   \method{plot}{sum_cmspans} (x, digits = 3, sep = ".",
     name.sep = "&", values = TRUE, high = "red",
-    transpose = TRUE, plot = TRUE, facet.vars = NULL,
+    transpose = TRUE, plot = TRUE, facet.vars = "time",
     rev.codes = !transpose, rev.stats = !transpose, ...)
 }
 \arguments{
@@ -34,7 +34,7 @@
   additional plot layers.}
 
   \item{facet.vars}{A character vector of names to facet
-  by.}
+  by.  Defualt is \code{"time"}.}
 
   \item{rev.codes}{logical If \code{TRUE} the plotting
   order of the code groups is reversed.}

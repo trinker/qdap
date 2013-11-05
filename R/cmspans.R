@@ -350,7 +350,8 @@ timecheck <- function(val) {
 #' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
 #' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
 #' to add additional plot layers.
-#' @param facet.vars A character vector of names to facet by.
+#' @param facet.vars A character vector of names to facet by.  Defualt is 
+#' \code{"time"}.
 #' @param rev.codes logical If \code{TRUE} the plotting order of the code 
 #' groups is reversed.
 #' @param rev.stats logical If \code{TRUE} the plotting order of the code 
@@ -363,8 +364,12 @@ timecheck <- function(val) {
 #' @S3method plot sum_cmspans
 plot.sum_cmspans <- function(x, digits = 3, sep = ".", 
     name.sep = "&", values = TRUE, high = "red", transpose = TRUE, 
-    plot =  TRUE, facet.vars = NULL, rev.codes = !transpose, 
+    plot =  TRUE, facet.vars = "time", rev.codes = !transpose, 
     rev.stats = !transpose, ...) {
+
+    if (!"time" %in% colnames(x)) {
+        facet.vars  <- NULL
+    }
 
     class(x) <- c(class(x)[!class(x) %in% "sum_cmspans"]) 
     nvars <- sapply(x, is.numeric)

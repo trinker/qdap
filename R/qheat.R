@@ -160,10 +160,10 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
         ws4 <- melt(ws4, id.var = c(colnames(ws4)[LRM], "group"))
     } else {
         ws4 <- melt(ws4, id.var = "group")
-        colnames(ws4)[1:2] <- c("group", "var")
+        colnames(ws4)[1:2] <- c("group", "variable")
     }
 
-    ws4[, "var"] <- factor(ws4$var, levels=rev(levels(ws4$var)))
+    ws4[, "var"] <- factor(ws4[, "variable"], levels=rev(levels(ws4[, "variable"])))
 
     if (values) {
         if (is.null(mat2)) {
@@ -174,9 +174,9 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
         ws5 <- melt(ws5, id.var = "group")
 
         if(is.numeric(ws5$value)) {
-            ws4$values2 <- numformat(ws5$value, digits = digits)
+            ws4[, "values2"] <- numformat(ws5[, "value"], digits = digits)
         } else {
-            ws4$values2 <- ws5$value
+            ws4[, "values2"] <- ws5[, "value"]
         }
 
         ## what to print the na values on the diagonal as
