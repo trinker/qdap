@@ -85,7 +85,7 @@
 #'   
 #' Where:
 #' 
-#' \deqn{x_i^T=\frac{\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot w(-1)^{\sum{x_i^{N}}})}}{\sqrt{n}}}
+#' \deqn{x_i^T=\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot w(-1)^{\sum{x_i^{N}}})}}
 #' 
 #' \deqn{x_i^{A}=\sum{(w_{neg}\cdot x_i^{a})}}
 #' 
