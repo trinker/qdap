@@ -179,8 +179,9 @@ DocTermMat2 <- DocTermMat2[rowSums(as.matrix(DocTermMat2))> 0,]
 
 lda.model2 <- LDA(DocTermMat2, 6)
 
-(topics <- posterior(lda.model2, DocTermMat2)$topics)
+(topics2 <- posterior(lda.model2, DocTermMat2)$topics)
 terms(lda.model2,20)
+qheat(topics2, high="blue", low="yellow", by.col=F)
 
 ## tm Matrices to wfm
 library(tm)

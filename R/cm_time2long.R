@@ -57,7 +57,10 @@ function(..., v.name = "variable", list.var = TRUE, debug = TRUE,
             message("Warning: possible errors found:\n")
             print(m); stop("Check warnings")
         }  
-    }  
+    } 
+
+    L1 <- lapply(L1, subout)
+
     L2 <- lapply(L1, cm_t2l, list.var = FALSE)
 
 ### added 10-12-13 and added to class
@@ -79,3 +82,18 @@ function(..., v.name = "variable", list.var = TRUE, debug = TRUE,
         class(DF), paste0("spans_", spns))
     DF
 }
+
+## helper to fix poorly formatted overall time span
+subout <- function(x) {
+
+    x[[1]] <- Trim(x[[1]])
+    if(length(x[[1]]) == 3 && x[[1]][1] == "-") {
+        y <- x[[1]][c(2, 1, 3)]
+    } else {
+        y <- x[[1]]
+    }
+
+    x[[1]] <- unlist(strsplit(gsub("-" , "|-|", paste(y, collapse = "")), "\\|"))
+    x
+}
+

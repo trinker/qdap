@@ -216,3 +216,4 @@ Collate:
     'word_stats.R'
     'words.R'
     'xnoy.R'
+    'utils.R'

@@ -108,6 +108,20 @@ cm_code.blank <- function(x2long.obj, combine.code.list, rm.var = NULL, overlap 
     if (is.null(rm.var)) {
         colnames(x1) <- gsub("long.obj.", "", colnames(x1))
     }
+    
+    ## added 11-6-13 to deal with codes in rep mes. not found in both
+    cols <- unique(unlist(lapply(x1, colnames)))
+    if (!is.matrix(x1)) {
+        x1 <- lapply(x1, function(x, y =cols) {
+            addon <- y[!y %in% colnames(x)]
+            if (is.null(addon) | identical(addon, character(0))) return(x)
+            mat <- matrix(rep(0, nrow(x)*length(addon)), ncol = length(addon))
+            colnames(mat) <- addon
+            dat <- data.frame(x, mat)
+            dat[, sort(colnames(dat))]
+        })
+    }
+    
     x2 <- cm_combine.dummy(x1, combine.code = combine.code.list, 
         rm.var = rm.var, overlap = overlap)
     if (is.null(rm.var)) {

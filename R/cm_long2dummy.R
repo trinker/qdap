@@ -46,7 +46,7 @@ function(dataframe, rm.var = NULL,
     code = "code", start = "start", end = "end") {
 
     com <- which.cm(dataframe)
-    if (is.null(com)){
+    if (is.null(com) && !is(dataframe, "cmspans")){
         stop("Please supply an object from `cm_range2long`, `cm_time2long`, or `cm_df2long`.")
     }
       
@@ -56,6 +56,7 @@ function(dataframe, rm.var = NULL,
         L1 <- list(dataframe)
         names(L1) <- as.character(substitute(dataframe))
     }
+
     L2 <- lapply(L1, function(x) dummy(dat=x, code = code, start = start, end = end)) 
     if (is.null(rm.var)) {
         L2 <- L2[[1]]
@@ -87,7 +88,10 @@ dummymatrix <- function(x, group.var = "code", end.var = "end") {
 }
 
 dummy <- function(dat, code, start, end){
-    L2 <- split(dat, dat[, code])
+
+    dat[, code] <- factor(dat[, code]) ## added 0n 11/5/2013
+
+    L2 <- split(droplevels(dat), dat[, code])
     inc <- function(dataframe, start, end) {
         any(diff(c(apply(dataframe[, c(start, end)], 1, c))) < 0)
     }

@@ -97,7 +97,8 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
             mat <- data.frame(mat, check.names = FALSE) 
         }
         nms <- rownames(mat)        
-        mat <- data.frame(group=factor(nms), mat, row.names = NULL)
+        mat <- data.frame(group=factor(nms), mat, row.names = NULL, 
+            check.names = FALSE)
         mat[, "group"] <- factor(mat[, "group"], levels = nms)
     }
     
@@ -106,7 +107,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
     }
 
     if (!is.null(facet.vars)) {
-        f.vars <- data.frame(mat)[, facet.vars, drop = FALSE]
+        f.vars <- data.frame(mat, check.names = FALSE)[, facet.vars, drop = FALSE]
         keeps <- colnames(mat)[!colnames(mat) %in% colnames(f.vars)]
         mat <- mat[, keeps]
     }
@@ -127,7 +128,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
     }
     if (CLS == "termco") {
         mat2 <- mat[["rnp"]]
-        mat <- data.frame(mat[["prop"]])
+        mat <- data.frame(mat[["prop"]], check.names = FALSE)
         class(mat2) <- "data.frame"
     }      
     dat2 <- as.matrix(mat[, -1, drop = FALSE])
@@ -154,7 +155,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
 
     if (!is.null(facet.vars)) {
         rmnames <- colnames(f.vars)
-        ws4 <- data.frame(f.vars, ws4)
+        ws4 <- data.frame(f.vars, ws4, check.names = FALSE)
         LRM <- seq_along(rmnames)
         colnames(ws4)[LRM] <- paste0("facet_", LRM)
         ws4 <- melt(ws4, id.var = c(colnames(ws4)[LRM], "group"))
@@ -169,7 +170,8 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
         if (is.null(mat2)) {
             mat2 <- mat
         }      
-        ws5 <- data.frame(group = mat2[, 1], mat2[, -1, drop = FALSE])
+        ws5 <- data.frame(group = mat2[, 1], mat2[, -1, drop = FALSE], 
+            check.names = FALSE)
 
         ws5 <- melt(ws5, id.var = "group")
 
