@@ -75,7 +75,15 @@ function(cm.l2d.obj, combine.code, rm.var = "time",
     if (!is.list(combine.code)) {
         combine.code <- list(combine.code)
     }
+    
     NEW <- lapply(seq_along(combine.code), function(i) {
+   
+    	## Added 11-7-13 to deal with single length column combine (a rename)
+        if (length(combine.code[[i]]) == 1) {
+        	return(DF[, c(combine.code[[i]])])
+        }
+    	## Added 11-7-13    	
+    	
         if (is.logical(overlap)) {
             if (overlap) {
                 as.numeric(rowSums(DF[, 
