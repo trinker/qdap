@@ -17,7 +17,7 @@
 #' \code{replications}.
 #' @param replications An integer value for the number of replications used in 
 #' resampling the data if any \code{pvals} is \code{TRUE}.  It is recommended 
-#' that this value be no lower than 7500. Failure to use enough replications 
+#' that this value be no lower than 1000. Failure to use enough replications 
 #' may result in unreliable pvalues.
 #' @param parallel logical.  If \code{TRUE} runs the \code{cm_distance} on 
 #' multiple cores (if available).  This will generally be effective with most 
@@ -31,8 +31,11 @@
 #' @param code.var The name of the code variable column.  Defaults to "codes" as 
 #' out putted by x2long family.
 #' @param causal logical.  If \code{TRUE} measures the distance between x and y 
-#' given that x must proceed y.  That is, only those y_i that begin after the 
-#' x_i will be considered, as it is assumed that x precedes y.
+#' given that x must precede y.  That is, only those \eqn{y_i} that begin after 
+#' the \eqn{x_i} has begun will be considered, as it is assumed that x precedes 
+#' y.  If \code{FALSE} x is not assumed to precede y.  The closest \eqn{y_i} 
+#' (either its begining or end) is is calculated to \eqn{x_i} (either it's 
+#' begining or end).
 #' @param start.var The name of the start variable column.  Defaults to "start" 
 #' as out putted by x2long family.
 #' @param end.var The name of the end variable column.  Defaults to "end" as out 
@@ -47,7 +50,9 @@
 #' \item{extended.output}{An optional list of individual repeated measures 
 #' information}
 #' \item{main.output}{A list of aggregated repeated measures information}
-#'
+#' \item{adj.alpha}{An adjusted alpha level (based on \eqn{\alpha = .05}) for 
+#' the estimated p-values using the upper end of the confidence interval around 
+#' the p-values}
 #'
 #' Within the lists of extended.output and list of the main.output are the 
 #' following items: 
@@ -59,17 +64,15 @@
 #' codes.  The closer a value is to zero the closer two codes relate.}
 #' \item{pvalue}{A n optional matrix of simulated pvalues associated with 
 #' the mean distances}
-#' @section Warning: Too few replications in simulating pvalues will yield 
-#' unstable results.  It is recommended the researcher uses > 7500 
-#' replications.  See: Mundform, Schaffer, Kim, Shaw, Thongteeraparp, & 
-#' Supawan (2011)
+#' @section Warning: p-values are estimated and thus subject to error.  More 
+#' replications decreases the error.  Use:
 #' 
-#' @references Mundform, D. J., Schaffer, J., Kim, M., Shaw, D., Thongteeraparp, A., & 
-#' Supawan, P. (2011) Number of Replications Required in Monte Carlo Simulation 
-#' Studies: A Synthesis of Four Studies, Journal of Modern Applied Statistical 
-#' Methods, 10(1), 19-28.
+#' \deqn{p \pm \left (  1.96 \cdot \sqrt{\frac{\alpha(1-\alpha)}{n}}\right )}
 #' 
-#' \url{http://stats.stackexchange.com/a/22333/7482}
+#' to adjust the confidence in the 
+#' estimated p-values based on the number of replications.
+#'
+#' @references \url{http://stats.stackexchange.com/a/22333/7482}
 #' @keywords distance codes association
 #' @seealso \code{\link[qdap]{print.cm_distance}}
 #' @export
@@ -111,7 +114,7 @@
 #' (a <- cm_distance(dat, causal=TRUE, replications=10))
 #' }
 cm_distance <- 
-function(dataframe, pvals = c(TRUE, FALSE), replications = 8000,  
+function(dataframe, pvals = c(TRUE, FALSE), replications = 1000,  
     parallel = TRUE, extended.output = TRUE, time.var = TRUE, 
     code.var = "code", causal = FALSE, start.var = "start", 
     end.var = "end", cores = detectCores()/2) {
@@ -128,12 +131,13 @@ function(dataframe, pvals = c(TRUE, FALSE), replications = 8000,
     }
 
     ## Warning if less than 7500 studies
-    if (any(pvals) && replications < 7500) {
-        cite <- paste0("Mundform, D. J., Schaffer, J., Kim, M., Shaw, D., Thongteeraparp, A., & ", 
-            "Supawan, P. (2011)\n  Number of Replications Required in Monte Carlo Simulation Studies: ", 
-            "A Synthesis of Four\n  Studies, Journal of Modern Applied Statistical Methods, 10(1), pp. 19-28.")
-        warning(sprintf("%s replications may not produce stable results.  See:\n\n%s", replications, cite),
-            call. = FALSE, immediate. = TRUE)
+    if (any(pvals)) {
+
+        mess <- sprintf(paste0("Based on %s replications, estimated p-values must be <= %s",
+            "\n    to have 95%% confidence that the 'true' p-value is < .05"), 
+            replications, numbformat(min_p(replications), digits = 6))
+
+        warning(mess, call. = FALSE, immediate. = TRUE)
         flush.console()
     }
 
@@ -158,7 +162,6 @@ function(dataframe, pvals = c(TRUE, FALSE), replications = 8000,
                 "pvals", "FUN_apply", "scale.all", "paste2")
 
             clusterExport(cl=cl, varlist=vars, envir = environment())
-
             output <- parLapply(cl, L1, DIST, cvar = code.var, cause = causal, 
                 reps = replications, pvals = tail(pvals, 1))
 
@@ -173,6 +176,8 @@ function(dataframe, pvals = c(TRUE, FALSE), replications = 8000,
     ## determine main output (combined for each code)
     o[["main.output"]] <- DIST2(dataframe, cvar = code.var, cause = causal, 
         reps = replications, pvals = head(pvals, 1), time.var = time.var)
+  
+    o[["adj.alpha"]] <- numbformat(min_p(replications), digits = 12)
 
     class(o) <- "cm_distance"
     return(o)
@@ -204,6 +209,10 @@ function(dataframe, pvals = c(TRUE, FALSE), replications = 8000,
 print.cm_distance <- function(x, mean.digits = 0, sd.digits = 2, 
     sd.mean.digits = 3, pval.digits = 3, new.order = NULL, na.replace = "-", 
     diag.replace = na.replace, print = TRUE, ...){
+
+    ## Change width
+    WD <- options()[["width"]]
+    options(width=3000)
 
     ## remove class
     x <- lview(x, print = FALSE)
@@ -259,17 +268,25 @@ print.cm_distance <- function(x, mean.digits = 0, sd.digits = 2,
         print(MSD)
         if (!is.null(PV)) {
             cat("\n===========")
-            cat("\nSimulated P-Values for Mean Distances:\n\n")
+            cat("\nEstimated P-Values for Mean Distances:\n\n")
             print(PV)
-            cat(sprintf("\n*Number of replications: %s\n", x[["replications"]]))
+            cat("\n")
+            cat(sprintf("*Number of replications: %s\n", x[["replications"]]))
+            mess <- sprintf(paste0("*Based on %s replications, estimated p-values must be <= %s",
+                "\n    to have 95%% confidence that the 'true' p-value is < .05"), 
+                x[["replications"]], numbformat(min_p(x[["replications"]]), digits = 6))
+            cat(mess)
+            cat("\n")
         }
         cat("\n===========")
         cat("\nStandardized Mean Distances:\n\n")
         print(SM)
-        cat("\n*Note: The closer a value is to zero, the more closely associated the codes were\n")
+        cat("\n*Note: The closer a value is to zero, the more closely associated the codes are\n")
 
     }
-
+    
+    ## Fix width and return the print invisibly
+    options(width=WD)
     return(invisible(list(`mean(sd)` = MSD, pvalues = PV, stand_means = SM)))
 }
 
@@ -313,7 +330,7 @@ vs2dfb <- function(col) {
           x <- data.frame(apply(x[, 1:2], 2, as.numeric), x[, 3])
    } else {
        x <- unlist(strsplit(col, "\\|"))
-   	   x <- data.frame(t(as.numeric(x[1:2])), x[3])
+          x <- data.frame(t(as.numeric(x[1:2])), x[3])
    }
    colnames(x) <- c("start", "end", "time")
    x
@@ -336,7 +353,7 @@ pvals.n <- function(a, b, trials = 10000, means) {
     a2 <- vs2df(a)
     b2 <- vs2df(b)
     m <- max(c(a2[, "end"], b2[, "end"]))
-    Mean <- mean(vdists1(a2, b2))
+    Mean <- mean(vdists1(a2, b2), na.rm = TRUE)
     simmeans <- unlist(lapply(1:trials, function(i) mean(vdists1(a2, remix(b2, m)))))
     sum(simmeans <= Mean)/trials
 }
@@ -352,12 +369,13 @@ pvals.nb <- function(a, b, trials = 10000, means) {
         w <- splits[[2]][[x]]
         if (any(sapply(list(v, w), is.null))) return(NULL)
         m <- max(c(v[, "end"], w[, "end"]))
-        Mean <- mean(vdists1(v, w))
+        Mean <- mean(vdists1(v, w), na.rm = TRUE)
         vals <- unlist(lapply(1:trials, function(i) mean(vdists1(v, remix(w, m)))))
         list(vals = vals, means = Mean)
     })
 
-    sum(sapply(out, function(x) sum(x[["vals"]] <= x[["means"]])))/(trials*length(out))
+    sum(sapply(out, function(x) sum(x[["vals"]] <= x[["means"]])), 
+        na.rm = TRUE)/(trials*length(out))
 }
 
 ## causal pvals function
@@ -365,7 +383,8 @@ pvals.c <- function(a, b, trials = 10000, means) {
     a2 <- vs2df(a)
     b2 <- vs2df(b)
     m <- max(c(a2[, "end"], b2[, "end"]))
-    Mean <- mean(vdists2(a2, b2))
+    Mean <- mean(vdists2(a2, b2), na.rm = TRUE)
+
     simmeans <- unlist(lapply(1:trials, function(i) mean(vdists2(a2, remix(b2, m)))))
     sum(simmeans <= Mean)/trials
 }
@@ -381,11 +400,12 @@ pvals.cb <- function(a, b, trials = 10000, means) {
         if (any(sapply(list(v, w), is.null))) return(NULL)
         m <- max(c(v[, "end"], w[, "end"]))
         Mean <- mean(vdists1(v, w), na.rm = TRUE)
-        vals <- unlist(lapply(1:trials, function(i) mean(vdists2(v, remix(w, m)), na.rm = TRUE)))
+        vals <- unlist(lapply(1:trials, function(i) mean(vdists2(v, remix(w, m)))))
         list(vals = vals, means = Mean)
     })
 
-    sum(sapply(out, function(x) sum(x[["vals"]] <= x[["means"]])))/(trials*length(out))
+    sum(sapply(out, function(x) sum(x[["vals"]] <= x[["means"]])), 
+        na.rm = TRUE)/(trials*length(out))
 }
 
 ## apply functions to start end codes a and b
@@ -503,3 +523,25 @@ DIST2 <- function(dataframe, cvar, cause, reps, pvals, time.var) {
     } 
     o
 }
+
+
+
+confup <- function(reps, alpha = .05) {
+   alpha + sqrt((alpha*(1-alpha))/reps)
+}
+
+
+min_p <- function(reps, alpha = .05, digits = 6) {
+
+    vals <- seq(0, 1, 1/c(10^digits)) 
+    
+    for (i in 1:length(vals)) {
+        y <- confup(reps, vals[i])
+        if (y > alpha) {
+            out <- vals[i-1]
+            break
+        }
+    }
+    out
+}
+

@@ -3,7 +3,7 @@
 \title{Distance Matrix Between Codes}
 \usage{
   cm_distance(dataframe, pvals = c(TRUE, FALSE),
-    replications = 8000, parallel = TRUE,
+    replications = 1000, parallel = TRUE,
     extended.output = TRUE, time.var = TRUE,
     code.var = "code", causal = FALSE, start.var = "start",
     end.var = "end", cores = detectCores()/2)
@@ -31,7 +31,7 @@
   \item{replications}{An integer value for the number of
   replications used in resampling the data if any
   \code{pvals} is \code{TRUE}.  It is recommended that this
-  value be no lower than 7500. Failure to use enough
+  value be no lower than 1000. Failure to use enough
   replications may result in unreliable pvalues.}
 
   \item{parallel}{logical.  If \code{TRUE} runs the
@@ -54,9 +54,13 @@
   Defaults to "codes" as out putted by x2long family.}
 
   \item{causal}{logical.  If \code{TRUE} measures the
-  distance between x and y given that x must proceed y.
-  That is, only those y_i that begin after the x_i will be
-  considered, as it is assumed that x precedes y.}
+  distance between x and y given that x must precede y.
+  That is, only those \eqn{y_i} that begin after the
+  \eqn{x_i} has begun will be considered, as it is assumed
+  that x precedes y.  If \code{FALSE} x is not assumed to
+  precede y.  The closest \eqn{y_i} (either its begining or
+  end) is is calculated to \eqn{x_i} (either it's begining
+  or end).}
 
   \item{start.var}{The name of the start variable column.
   Defaults to "start" as out putted by x2long family.}
@@ -77,7 +81,10 @@
   of replications used} \item{extended.output}{An optional
   list of individual repeated measures information}
   \item{main.output}{A list of aggregated repeated measures
-  information}
+  information} \item{adj.alpha}{An adjusted alpha level
+  (based on \eqn{\alpha = .05}) for the estimated p-values
+  using the upper end of the confidence interval around the
+  p-values}
 
   Within the lists of extended.output and list of the
   main.output are the following items:
@@ -96,10 +103,14 @@
   measure between codes.
 }
 \section{Warning}{
-  Too few replications in simulating pvalues will yield
-  unstable results.  It is recommended the researcher uses
-  > 7500 replications.  See: Mundform, Schaffer, Kim, Shaw,
-  Thongteeraparp, & Supawan (2011)
+  p-values are estimated and thus subject to error.  More
+  replications decreases the error.  Use:
+
+  \deqn{p \pm \left ( 1.96 \cdot
+  \sqrt{\frac{\alpha(1-\alpha)}{n}}\right )}
+
+  to adjust the confidence in the estimated p-values based
+  on the number of replications.
 }
 \examples{
 \dontrun{
@@ -139,12 +150,6 @@ plot(dat)
 }
 }
 \references{
-  Mundform, D. J., Schaffer, J., Kim, M., Shaw, D.,
-  Thongteeraparp, A., & Supawan, P. (2011) Number of
-  Replications Required in Monte Carlo Simulation Studies:
-  A Synthesis of Four Studies, Journal of Modern Applied
-  Statistical Methods, 10(1), 19-28.
-
   \url{http://stats.stackexchange.com/a/22333/7482}
 }
 \seealso{
