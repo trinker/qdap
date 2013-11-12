@@ -12,6 +12,7 @@
 #' \code{wfm}.  If \code{apply_as_tm} - Other arguments passed to functions used 
 #' on the tm package's \code{"TermDocumentMatrix"}.  If \code{df2tm_corpus} - 
 #' Other arguments passed to the tm package's \code{\link[tm]{Corpus}}.
+#' @param vowel.check logical.  Should terms without vowels be remove?  
 #' @details Produces output that is identical to the \code{tm} package's 
 #' \code{\link[tm]{TermDocumentMatrix}}, \code{\link[tm]{DocumentTermMatrix}},
 #' \code{\link[tm]{Corpus}} or allows convenient inteface between the qdap and 
@@ -159,9 +160,14 @@
 #' 
 #' (y <- with(pres_debates2012, df2tm_corpus(dialogue, list(person, time))))
 #' }
-tdm <- function(text.var, grouping.var = NULL, ...) {
+tdm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
     x <- wfm2xtab(text.var = text.var, grouping.var = grouping.var, ...)
+
+    ## Remove rows with terms with no vowel
+    if (vowel.check) {
+        x <- x[vowel_check(rownames(x)), ]
+    }
 
     z <- unlist(apply(x, 2, function(y) sum(y != 0)), use.names = FALSE)
 
@@ -184,6 +190,11 @@ tdm <- function(text.var, grouping.var = NULL, ...) {
     a
 }
 
+## Helper function to check on words w/o vowels (matches tm output)
+vowel_check <- function(text.var) {
+    grepl("[aeiouy]", text.var)
+}
+
 
 
 #' tm Package Compatability Tools: Aplly to or Convert to/from Term Document 
@@ -195,9 +206,15 @@ tdm <- function(text.var, grouping.var = NULL, ...) {
 #' @return \code{dtm} - Returns a \code{\link[tm]{DocumentTermMatrix}}.
 #' @rdname tdm
 #' @export
-dtm <- function(text.var, grouping.var = NULL, ...) {
+dtm <- 
+function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
     x <- t(wfm2xtab(text.var = text.var, grouping.var = grouping.var, ...))
+
+    ## Remove rows with terms with no vowel
+    if (vowel.check) {
+        x <- x[, vowel_check(colnames(x))]
+    }
 
     z <- unlist(apply(x, 2, function(y) sum(y != 0)), use.names = FALSE)
 

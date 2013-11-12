@@ -8,9 +8,11 @@
 \title{tm Package Compatability Tools: Apply to or Convert to/from Term Document
 Matrix or Document Term Matrix}
 \usage{
-  tdm(text.var, grouping.var = NULL, ...)
+  tdm(text.var, grouping.var = NULL, vowel.check = TRUE,
+    ...)
 
-  dtm(text.var, grouping.var = NULL, ...)
+  dtm(text.var, grouping.var = NULL, vowel.check = TRUE,
+    ...)
 
   tm2qdap(x)
 
@@ -35,6 +37,9 @@ Matrix or Document Term Matrix}
   package's \code{"TermDocumentMatrix"}.  If
   \code{df2tm_corpus} - Other arguments passed to the tm
   package's \code{\link[tm]{Corpus}}.}
+
+  \item{vowel.check}{logical.  Should terms without vowels
+  be remove?}
 
   \item{x}{A
   \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.}
