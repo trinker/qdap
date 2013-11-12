@@ -91,7 +91,7 @@ read.transcript <-
 function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE, 
     header = FALSE, dash = "", ellipsis = "...", quote2bracket = FALSE, 
     rm.empty.rows = TRUE, na.strings = c("999", "NA", "", " "), 
-    sep = NULL, skip = 0, nontext2factor = TRUE, text, , comment.char = "", 
+    sep = NULL, skip = 0, nontext2factor = TRUE, text, comment.char = "", 
     ...) {
     if (missing(file) && !missing(text)) {
         file <- textConnection(text)

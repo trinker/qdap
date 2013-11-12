@@ -7,7 +7,8 @@
     ellipsis = "...", quote2bracket = FALSE,
     rm.empty.rows = TRUE,
     na.strings = c("999", "NA", "", " "), sep = NULL,
-    skip = 0, nontext2factor = TRUE, text, ...)
+    skip = 0, nontext2factor = TRUE, text,
+    comment.char = "", ...)
 }
 \arguments{
   \item{file}{The name of the file which the data are to be
@@ -66,6 +67,11 @@
   this is, then data are read from the value of text.
   Notice that a literal string can be used to include
   (small) data sets within R code.}
+
+  \item{character}{A character vector of length one
+  containing a single character or an empty string. Use
+  \code{""} to turn off the interpretation of comments
+  altogether.}
 
   \item{\ldots}{Further arguments to be passed to
   \code{\link[utils]{read.table}}.}

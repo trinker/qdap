@@ -6,7 +6,7 @@
 \title{Bracket Parsing}
 \usage{
   bracketX(text.var, bracket = "all", missing = NULL,
-    names = FALSE, fix.space = TRUE, scrub = TRUE)
+    names = FALSE, fix.space = TRUE, scrub = fix.space)
 
   bracketXtract(text.var, bracket = "all", with = FALSE,
     merge = TRUE)
