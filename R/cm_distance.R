@@ -446,7 +446,7 @@ FUN_apply2 <- function(a, b, FUN, ..., cause = FALSE) {
 scale.all <- function(x) {
     dims <- dim(x)
     dnms <- dimnames(x)
-    x <- matrix(scale(c(x), F), dims)
+    x <- matrix(scale(c(x), center = FALSE), dims)
     dimnames(x) <- dnms
     x
 }

@@ -59,9 +59,9 @@
 #' DATA$state  #notice number 1 and 10
 #' genX(DATA$state, c("is", "we"), c("too", "on"))
 #' }
-bracketX <- 
+bracketX <-
 function (text.var, bracket = "all", missing = NULL, names = FALSE, 
-    fix.space = TRUE, scrub = TRUE) {
+    fix.space = TRUE, scrub = fix.space) {
     lside <- rside <- ""
     if (fix.space) {
         lside <- rside <- "[ ]*"
@@ -70,16 +70,16 @@ function (text.var, bracket = "all", missing = NULL, names = FALSE,
     }
     FUN <- function(bracket, text.var, missing, names) {
         X <- switch(bracket, 
-            html = sapply(text.var, function(x) gsub(paste0(lside, "<.+?>", rside), "", x)),
-            angle = sapply(text.var, function(x) gsub(paste0(lside, "<.+?>", rside), "", x)),
-            square = sapply(text.var, function(x) gsub(paste0(lside, "\\[.+?\\]", rside), "", x)), 
-            round = sapply(text.var, function(x) gsub(paste0(lside, "\\(.+?\\)", rside), "", x)), 
-            curly = sapply(text.var, function(x) gsub(paste0(lside, "\\{.+?\\}", rside), "", x)), 
+            html = sapply(text.var, function(x) gsub(paste0(lside, "<.*?>", rside), "", x)),
+            angle = sapply(text.var, function(x) gsub(paste0(lside, "<.*?>", rside), "", x)),
+            square = sapply(text.var, function(x) gsub(paste0(lside, "\\[.*?\\]", rside), "", x)), 
+            round = sapply(text.var, function(x) gsub(paste0(lside, "\\(.*?\\)", rside), "", x)), 
+            curly = sapply(text.var, function(x) gsub(paste0(lside, "\\{.*?\\}", rside), "", x)), 
             all = {
-                P1 <- sapply(text.var, function(x) gsub(paste0(lside, "\\[.+?\\]", rside), "", x))
-                P1 <- sapply(P1, function(x) gsub(paste0(lside, "\\(.+?\\)", rside), "", x))
-                P1 <- sapply(P1, function(x) gsub(paste0(lside, "<.+?>", rside), "", x))
-                sapply(P1, function(x) gsub(paste0(lside, "\\{.+?\\}", rside), "", x))
+                P1 <- sapply(text.var, function(x) gsub(paste0(lside, "\\[.*?\\]", rside), "", x))
+                P1 <- sapply(P1, function(x) gsub(paste0(lside, "\\(.*?\\)", rside), "", x))
+                P1 <- sapply(P1, function(x) gsub(paste0(lside, "<.*?>", rside), "", x))
+                sapply(P1, function(x) gsub(paste0(lside, "\\{.*?\\}", rside), "", x))
             }
         )
         if (scrub) {
