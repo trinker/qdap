@@ -5,6 +5,7 @@ language: c
 script: ./travis-tool.sh run_tests
 
 before_install:
+    - cp scripts/travis-tool.sh qdap
     - cd qdap
     - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
     - chmod 755 ./travis-tool.sh
