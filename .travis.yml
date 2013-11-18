@@ -5,7 +5,7 @@ before_install:
   - chmod 755 ./travis-tool.sh
   - ./travis-tool.sh bootstrap
 install:
-  - ./travis-tool.sh istall_github trinker/qdapDictionaries
+  - ./travis-tool.sh install_github trinker/qdapDictionaries
   - ./travis-tool.sh install_deps
 notifications:
   email:
