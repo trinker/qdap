@@ -9,7 +9,8 @@ install:
   - sh -e /etc/init.d/xvfb start
   - sudo R CMD javareconf
   - ./travis-tool.sh aptget_install r-cran-xml 
-  - ./travis-tool.sh github_package trinker/qdapDictionaries trinker/reports
+  - ./travis-tool.sh github_package trinker/reports
+  - ./travis-tool.sh github_package trinker/reports
   - ./travis-tool.sh install_deps
 notifications:
   email:
