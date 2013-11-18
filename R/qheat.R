@@ -90,7 +90,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
             warning ("`mat` is either not a matrix or not symetrical; `diag.na` ignore.")
         }
     }
-
+    
     ## convert all numeric matrices
     if (all(sapply(mat, is.numeric))) {
         if (is.matrix(mat)) {
@@ -152,7 +152,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
     }
     ws4 <- data.frame(group = mat[, 1], dat2, check.names = FALSE)
     colnames(ws4)[1] <- "group"
-
+    
     if (!is.null(facet.vars)) {
         rmnames <- colnames(f.vars)
         ws4 <- data.frame(f.vars, ws4, check.names = FALSE)
@@ -166,6 +166,11 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
 
     ws4[, "var"] <- factor(ws4[, "variable"], levels=rev(levels(ws4[, "variable"])))
 
+    ## row 2 column for mat2 if NULL
+    if (!is.null(mat2) && (ncol(mat2) + 1 == ncol(mat))) {
+        mat2 <- row2col(mat2) 
+    }
+    
     if (values) {
         if (is.null(mat2)) {
             mat2 <- mat
@@ -257,3 +262,15 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
     }
     invisible(GP)
 }
+
+## helper to turn row to column
+row2col <-
+function(dataframe, new.col.name = NULL){
+    x <- data.frame(NEW = rownames(dataframe), dataframe, 
+        check.names=FALSE)
+    if(!is.null(new.col.name)) names(x)[1] <- new.col.name
+    rownames(x) <- 1:nrow(x)
+    return(x)
+}
+
+

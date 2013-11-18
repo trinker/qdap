@@ -102,6 +102,16 @@
   Generate distance measures to ascertain a mean distance
   measure between codes.
 }
+\details{
+  Note that row names are the first code and column names
+  are the second comparison code. The values for Code A
+  compared to Code B will not be the same as Code B
+  compared to Code A. This is because, unlike a true
+  distance measure, cm_distance's matrix is asymmetrical.
+  \code{cm_distance} computes the distance by taking each
+  span (start and end) for Code A and comparing it to the
+  nearest start or end for Code B.
+}
 \section{Warning}{
   p-values are estimated and thus subject to error.  More
   replications decreases the error.  Use:

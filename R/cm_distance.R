@@ -72,6 +72,12 @@
 #' to adjust the confidence in the 
 #' estimated p-values based on the number of replications.
 #'
+#' @details Note that row names are the first code and column names are the 
+#' second comparison code. The values for Code A compared to Code B will not be 
+#' the same as Code B compared to Code A. This is because, unlike a true 
+#' distance measure, cm_distance's matrix is asymmetrical. \code{cm_distance} 
+#' computes the distance by taking each span (start and end) for Code A and 
+#' comparing it to the nearest start or end for Code B.
 #' @references \url{http://stats.stackexchange.com/a/22333/7482}
 #' @keywords distance codes association
 #' @seealso \code{\link[qdap]{print.cm_distance}}
@@ -94,7 +100,7 @@
 #' 
 #' (dat <- cm_2long(foo, foo2, v.name = "time"))
 #' plot(dat)
-#' (out <- cm_distance(dat, replications=10))
+#' (out <- cm_distance(dat, replications=100))
 #' names(out)
 #' names(out$main.output)
 #' out$main.output
@@ -111,7 +117,7 @@
 #' )
 #' (dat <- cm_2long(x))
 #' plot(dat)
-#' (a <- cm_distance(dat, causal=TRUE, replications=10))
+#' (a <- cm_distance(dat, causal=TRUE, replications=100))
 #' }
 cm_distance <- 
 function(dataframe, pvals = c(TRUE, FALSE), replications = 1000,  
@@ -130,12 +136,14 @@ function(dataframe, pvals = c(TRUE, FALSE), replications = 1000,
         }
     }
 
-    ## Warning if less than 7500 studies
+    ## Warning adj alpha for estmated pvalue
     if (any(pvals)) {
+
+        if (confup(replications) <= 0) {stop("Number of replications too small")}
 
         mess <- sprintf(paste0("Based on %s replications, estimated p-values must be <= %s",
             "\n    to have 95%% confidence that the 'true' p-value is < .05"), 
-            replications, numbformat(min_p(replications), digits = 6))
+            replications, numbformat(confup(replications), digits = 6))
 
         warning(mess, call. = FALSE, immediate. = TRUE)
         flush.console()
@@ -177,7 +185,7 @@ function(dataframe, pvals = c(TRUE, FALSE), replications = 1000,
     o[["main.output"]] <- DIST2(dataframe, cvar = code.var, cause = causal, 
         reps = replications, pvals = head(pvals, 1), time.var = time.var)
   
-    o[["adj.alpha"]] <- numbformat(min_p(replications), digits = 12)
+    o[["adj.alpha"]] <- numbformat(confup (replications), digits = 12)
 
     class(o) <- "cm_distance"
     return(o)
@@ -274,7 +282,7 @@ print.cm_distance <- function(x, mean.digits = 0, sd.digits = 2,
             cat(sprintf("*Number of replications: %s\n", x[["replications"]]))
             mess <- sprintf(paste0("*Based on %s replications, estimated p-values must be <= %s",
                 "\n    to have 95%% confidence that the 'true' p-value is < .05"), 
-                x[["replications"]], numbformat(min_p(x[["replications"]]), digits = 6))
+                x[["replications"]], numbformat(confup (x[["replications"]]), digits = 6))
             cat(mess)
             cat("\n")
         }
@@ -527,21 +535,8 @@ DIST2 <- function(dataframe, cvar, cause, reps, pvals, time.var) {
 
 
 confup <- function(reps, alpha = .05) {
-   alpha + sqrt((alpha*(1-alpha))/reps)
+   alpha - sqrt(1.96*((alpha*(1-alpha))/reps))
 }
 
 
-min_p <- function(reps, alpha = .05, digits = 6) {
-
-    vals <- seq(0, 1, 1/c(10^digits)) 
-    
-    for (i in 1:length(vals)) {
-        y <- confup(reps, vals[i])
-        if (y > alpha) {
-            out <- vals[i-1]
-            break
-        }
-    }
-    out
-}
 

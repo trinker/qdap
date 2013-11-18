@@ -1,8 +1,6 @@
 qdap
 ====
-[![Build Status](https://travis-ci.org/csgillespie/qdap.png?branch=master)](https://travis-ci.org/csgillespie/qdap)
-
-
+[![Build Status](https://travis-ci.org/trinker/qdap.png?branch=master)](https://travis-ci.org/trinker/qdap)
 
 
 ![qdapicon](https://dl.dropbox.com/u/61803503/qdapicon.png)   
