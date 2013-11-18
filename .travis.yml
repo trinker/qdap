@@ -1,4 +1,4 @@
-language: java
+        language: java
 
 script: ./travis-tool.sh run_tests
 before_install:
@@ -8,8 +8,8 @@ before_install:
 install:
   - sh -e /etc/init.d/xvfb start
   - sudo R CMD javareconf
-  - ./travis-tool.sh aptget install r-cran-xml 
-  - ./travis-tool.sh install_github trinker/qdapDictionaries
+  - ./travis-tool.sh aptget_install r-cran-xml 
+  - ./travis-tool.sh github_package trinker/qdapDictionaries
   - ./travis-tool.sh install_deps
 notifications:
   email:
