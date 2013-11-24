@@ -3,8 +3,8 @@
 \title{Summarize a cmspans object}
 \usage{
   \method{summary}{cmspans} (object, grouping.var = NULL,
-    rm.var = NULL, total.span = TRUE, percent = TRUE,
-    digits = 2, ...)
+    rm.var = NULL, total.span = TRUE, aggregate = FALSE,
+    percent = TRUE, digits = 2, ...)
 }
 \arguments{
   \item{object}{The cmspans object}
@@ -29,6 +29,10 @@
   provide the start and end time of the event.  The user
   may give input in numeric seconds or in character
   "hh:mm:ss" form.}
+
+  \item{aggregate}{logical.  If \code{TRUE} the output will
+  be aggregated (i.e., the output will collapse the
+  \code{rm.var}).}
 
   \item{percent}{logical.  If \code{TRUE} output given as
   percent.  If \code{FALSE} the output is proportion.}

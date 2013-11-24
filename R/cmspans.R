@@ -17,6 +17,8 @@
 #' vectors with each vector representing a single total time duration or 
 #' provide the start and end time of the event.  The user may give input in 
 #' numeric seconds or in character "hh:mm:ss" form.
+#' @param aggregate logical.  If \code{TRUE} the output will be aggregated 
+#' (i.e., the output will collapse the \code{rm.var}).
 #' @param percent logical.  If \code{TRUE} output given as percent.  If 
 #' \code{FALSE} the output is proportion.
 #' @param digits Integer; number of decimal places to round when printing.  
@@ -85,9 +87,9 @@
 #' class(z_unclass) <- "data.frame"
 #' z_unclass
 #' }
-summary.cmspans <- 
+summary.cmspans <-
 function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,
-    percent = TRUE, digits = 2,  ...) {
+    aggregate = FALSE, percent = TRUE, digits = 2,  ...) {
 
     class(object) <- class(object)[!class(object) %in% "cmspans"]
 
@@ -106,6 +108,15 @@ function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,
         }
     }
 
+    if (aggregate) {
+        sp.loc <- grepl("spans_", class(object))
+        new.spans <- class(object)[sp.loc]
+    	new.spans <- strsplit(gsub("spans_", "", new.spans), "||", fixed = TRUE)
+    	class(object)[sp.loc] <- paste0("spans_", 
+    		sum(as.numeric(unlist(new.spans))))
+    	object[, rm.var] <- "t1"
+    }
+	
     ## denote the grouping measures variable
     if(is.null(grouping.var)) {
         G <- group <- colnames(object)[1]
@@ -194,7 +205,6 @@ function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,
         paste0("percent_", per), class(out1))
     out1
 }
-
 
 #' Prints a sum_cmspans object
 #' 

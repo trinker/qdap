@@ -139,7 +139,7 @@ foo2  <- list(
 
 (dat <- cm_2long(foo, foo2, v.name = "time"))
 plot(dat)
-(out <- cm_distance(dat, replications=10))
+(out <- cm_distance(dat, replications=100))
 names(out)
 names(out$main.output)
 out$main.output
@@ -156,7 +156,7 @@ x <- list(
 )
 (dat <- cm_2long(x))
 plot(dat)
-(a <- cm_distance(dat, causal=TRUE, replications=10))
+(a <- cm_distance(dat, causal=TRUE, replications=100))
 }
 }
 \references{
