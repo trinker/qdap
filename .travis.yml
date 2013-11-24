@@ -13,6 +13,7 @@ install:
   - ./travis-tool.sh github_package ramnathv/slidifyLibraries
   - ./travis-tool.sh github_package trinker/qdapDictionaries
   - ./travis-tool.sh github_package trinker/reports
+  - ./travis-tool.sh github_package cboettig/knitcitations
   - ./travis-tool.sh install_deps
 notifications:
   email:
