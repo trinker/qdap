@@ -38,7 +38,7 @@
 #' @param text Character string: if file is not supplied and this is, then data 
 #' are read from the value of text. Notice that a literal string can be used to 
 #' include (small) data sets within R code.
-#' @param character A character vector of length one containing a single 
+#' @param comment.char A character vector of length one containing a single 
 #' character or an empty string. Use \code{""} to turn off the interpretation of 
 #' comments altogether.
 #' @param \ldots Further arguments to be passed to \code{\link[utils]{read.table}}.

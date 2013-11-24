@@ -68,7 +68,7 @@
   Notice that a literal string can be used to include
   (small) data sets within R code.}
 
-  \item{character}{A character vector of length one
+  \item{comment.char}{A character vector of length one
   containing a single character or an empty string. Use
   \code{""} to turn off the interpretation of comments
   altogether.}
