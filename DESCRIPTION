@@ -40,7 +40,8 @@ Suggests:
     knitr,
     lda,
     lsa,
-    plyr
+    plyr,
+    SnowballC
 LazyData: TRUE
 Description: This package automates many of the tasks associated with
     quantitative discourse analysis of transcripts containing discourse
