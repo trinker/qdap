@@ -12,6 +12,19 @@ To download the development version of qdap:
 
 Download the [zip ball](https://github.com/trinker/qdap/zipball/master) or [tar ball](https://github.com/trinker/qdap/tarball/master), decompress and run `R CMD INSTALL` on it, or use the **devtools** package to install the development version (The user may need to install the [dev version of reports](https://github.com/trinker/reports) first):
 
+Until `slidify` is pushed to CRAN the following installs are necessary first:
+
+```r
+# install.packages("devtools")
+
+library(devtools)
+install_github('slidify', 'ramnathv', ref = 'dev')
+install_github('slidifyLibraries', 'ramnathv', ref = 'dev')
+install_github("knitcitations", "cboettig")
+install_github("reports", "trinker")
+```
+
+
 ```r
 # install.packages("devtools")
 
