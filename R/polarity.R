@@ -390,6 +390,12 @@ function(x, digits = NULL, ...) {
 #' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
 #' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
 #' to add additional plot layers.
+#' @param error.bars logical.  If \code{TRUE} error bars are added to the 
+#' polarity dot plot using the standard error of the mean polarity score.
+#' @param error.bar.height The height of the error bar ends.
+#' @param error.bar.size The size/thickness of the error bars.
+#' @param error.bar.color The color of the error bars.  If \code{NULL} each 
+#' bar will be colored by grouping variable.
 #' @param \ldots ignored
 #' @return Invisibly returns the \code{ggplot2} objects that form the larger 
 #' plot.  
@@ -401,7 +407,9 @@ function(x, digits = NULL, ...) {
 plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99", 
     high = "blue", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
     point.size = 2.5,  jitter = .1, nrow = NULL, na.rm = TRUE, 
-    order.by.polarity = TRUE, plot = TRUE, ...){
+    order.by.polarity = TRUE, plot = TRUE, error.bars =TRUE, 
+    error.bar.height = .5, error.bar.size = .5, error.bar.color = "black", 
+    ...){
   
     Polarity <- group <- ave.polarity <- unit <- NULL
     dat <- x[["group"]][, 1:4]
@@ -422,9 +430,11 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
     } else {
         leg <- TRUE
     }
- 
+
+    ## reverse the levels so first factor level is on top
     dat2$group <- factor(dat2$group, levels = rev(levels(dat2$group)))
 
+    ## the filled polarity Gantt plot
     XX <- ggplot(dat2, aes(color = Polarity )) + 
         geom_segment(aes(x=start, xend=end, y=group, yend=group), 
             size=bar.size) +
@@ -433,6 +443,7 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
         theme_bw() + theme(legend.position="bottom") + 
         guides(colour = guide_colorbar(barwidth = 9, barheight = .75))
 
+    ## order the ave. poalrity dotplot by ave. polarity or factor level
     if (order.by.polarity) {
         dat$group <- factor(dat$group, levels = rev(dat[order(dat$ave.polarity), 
             "group"]))
@@ -444,15 +455,37 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
        dat <- na.omit(dat)
     }
 
+    ## Plot the polarity dotplot with optional error bars
     YY <- ggplot(dat2, aes(y=group, x=Polarity, colour = group)) + 
         geom_point(data = dat, aes(x=ave.polarity), shape = ave.polarity.shape, 
             size = 6, show_guide=FALSE) +
         geom_point(alpha = alpha, shape = shape, 
-            size = point.size, position = position_jitter(height = jitter)) +
-        geom_point(data = dat, aes(x=ave.polarity), shape = 19, 
+            size = point.size, position = position_jitter(height = jitter)) 
+
+    ## Optional Error Bars
+    if (error.bars) {
+        se <-  tapply(dat2[, "Polarity"], dat2[ "group"], SE)
+        dat[, "se"] <- lookup(dat[, "group"], names(se), se)
+
+        ## optional error.bar single color; if NULL colored by group
+        if (!is.null(error.bar.color)) {
+            YY <- YY + geom_errorbarh(data=dat, height = error.bar.height, 
+                size = error.bar.size, color = error.bar.color, aes(x=ave.polarity, 
+                    xmax = ave.polarity + se, xmin = ave.polarity - se))
+        } else {
+            YY <- YY + geom_errorbarh(data=dat, height = error.bar.height, 
+                size = error.bar.size, aes(x=ave.polarity, 
+                    xmax = ave.polarity + se, xmin = ave.polarity - se))
+        }
+    }
+
+    ## Add the black average polarity point
+    YY <- YY + geom_point(data = dat, aes(x=ave.polarity), shape = 19, 
             size = 1.5, colour = "black", show_guide=FALSE) +
         ylab(gsub("\\&", " & ", G)) +
         scale_color_discrete(name= G) 
+
+    ## Legend for dotplot
     if (leg) {
         YY <- YY + theme(plot.margin = unit(c(-.25, 1, 1, 1), "lines"), 
             legend.position="bottom")  +
@@ -462,6 +495,8 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
         YY <- YY + theme(plot.margin = unit(c(-.25, 1, 1, 1), "lines"), 
             legend.position="none")       
     } 
+
+    ## Logical plotting argument for use in knitr
     if (plot) {
         grid.arrange(XX, YY, nrow = 2)
     }
@@ -469,6 +504,8 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
 }
 
 ## Helper functions
+SE <- function(x) sqrt(var(x)/length(x))
+
 alter_env <- function(negators, amplifiers, deamplifiers) {
     n <- rep(1, length(negators))
     a <- rep(2, length(amplifiers))
@@ -526,3 +563,6 @@ polarity_helper <- function(tv, hit, polenv, altenv, count, amp.weight,
     ## return the word group score and the polarity of the the polarized word
     list(x = (1 + (D + A)) * (p * (-1)^(2 + n)), y = p, z = targ)
 }
+
+
+

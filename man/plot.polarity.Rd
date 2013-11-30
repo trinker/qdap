@@ -7,7 +7,8 @@
     ave.polarity.shape = "+", alpha = 1/4, shape = 19,
     point.size = 2.5, jitter = 0.1, nrow = NULL,
     na.rm = TRUE, order.by.polarity = TRUE, plot = TRUE,
-    ...)
+    error.bars = TRUE, error.bar.height = 0.5,
+    error.bar.size = 0.5, error.bar.color = "black", ...)
 }
 \arguments{
   \item{x}{The polarity object.}
@@ -51,6 +52,20 @@
   automatically plot. The user may wish to set to
   \code{FALSE} for use in knitr, sweave, etc. to add
   additional plot layers.}
+
+  \item{error.bars}{logical.  If \code{TRUE} error bars are
+  added to the polarity dot plot using the standard error
+  of the mean polarity score.}
+
+  \item{error.bar.height}{The height of the error bar
+  ends.}
+
+  \item{error.bar.size}{The size/thickness of the error
+  bars.}
+
+  \item{error.bar.color}{The color of the error bars.  If
+  \code{NULL} each bar will be colored by grouping
+  variable.}
 
   \item{\ldots}{ignored}
 }
