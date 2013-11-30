@@ -175,6 +175,8 @@ with(DATA, polarity(state, list(sex, adult)))
 names(poldat)
 truncdf(poldat$all, 8)
 poldat$group
+plot(poldat)
+
 poldat2 <- with(mraja1spl, polarity(dialogue,
     list(sex, fam.aff, died)))
 colsplit2df(poldat2$group)

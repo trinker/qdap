@@ -115,6 +115,8 @@
 #' names(poldat)
 #' truncdf(poldat$all, 8)
 #' poldat$group
+#' plot(poldat)
+#' 
 #' poldat2 <- with(mraja1spl, polarity(dialogue, 
 #'     list(sex, fam.aff, died)))
 #' colsplit2df(poldat2$group)
@@ -266,8 +268,8 @@ polarity <- function (text.var, grouping.var = NULL,
         }
         out
     }
-    all$pos.words <- mapply(pwords, pols, polwords)
-    all$neg.words <-mapply(nwords, pols, polwords)
+    all$pos.words <- mapply(pwords, pols, polwords, SIMPLIFY = FALSE)
+    all$neg.words <-mapply(nwords, pols, polwords, SIMPLIFY = FALSE)
     all[, "text.var"] <- DF[, "text.var2"]
    
     ## Multiple polarity by question weights
@@ -278,10 +280,11 @@ polarity <- function (text.var, grouping.var = NULL,
     ## Create average polarity data.frame (group) from all data.frame
     sall <- split(all, all[, "group.var"])
     lall <- lapply(sall, function(x) {
-        data.frame(total.words = sum(x[, "wc"]), 
-            ave.polarity = mean(x[, "polarity"]),
-            sd.polarity = sd(x[, "polarity"]), 
-            stan.mean.polarity = mean(x[, "polarity"])/sd(x[, "polarity"]))
+        data.frame(total.words = sum(x[, "wc"], na.rm = TRUE), 
+            ave.polarity = mean(x[, "polarity"], na.rm = TRUE),
+            sd.polarity = sd(x[, "polarity"], na.rm = TRUE), 
+            stan.mean.polarity = mean(x[, "polarity"], na.rm = TRUE)/
+                sd(x[, "polarity"], na.rm = TRUE))
     })
     group <- data.frame(group = names(lall), 
         total.sentences = sapply(sall, nrow),
