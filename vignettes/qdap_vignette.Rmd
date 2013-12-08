@@ -52,10 +52,11 @@ The following vignette is a loose chronological road map for utilizing the tools
 <div>10.  `r HR("#measures", "Word Measures and Scoring")`    </div> 
 <div>11.  `r HR("#visualization", "Visualizing Discourse Data")`    </div> 
 <div>12.  `r HR("#id", "ID Sentences")`    </div> 
-<div>13.  `r HR("#data", "Data Sets")`    </div> 
-<div>14.  `r HR("#dict", "Dictionaries and Word Lists")`    </div>   
-<div>15.  `r HR("#install", "Installation Issues")`    </div>     
-<div>16.  `r HR("#connect", "Recommended Packages (Extending qdap)")`    </div>   
+<div>13.  `r HR("#tm", "tm Package Compatability")`    </div> 
+<div>14.  `r HR("#data", "Data Sets")`    </div> 
+<div>15.  `r HR("#dict", "Dictionaries and Word Lists")`    </div>   
+<div>16.  `r HR("#install", "Installation Issues")`    </div>     
+<div>17.  `r HR("#connect", "Recommended Packages (Extending qdap)")`    </div>   
 
 </ul>
 </div>
@@ -851,18 +852,50 @@ Other times the researcher may wish to use `r FUN("rm_row")` to remove rows from
 
 `r FT(orange, 5, text="&diams;")` **Remove Selected Rows**`r FT(orange, 5, text="&diams;")`
 
-```{r}
-## Read in transcript
+
+<pre><code class="r">## Read in transcript
 dat2 <- read.transcript(system.file("extdata/transcripts/trans1.docx", 
     package = "qdap"))
-truncdf(dat2, 40)
-## Use column names to remove rows
-truncdf(rm_row(dat2, "X1", "[C"), 40)
-## Use column numbers to remove rows
-truncdf(rm_row(dat2, 2, "[C"), 40)
-## Also remove people etc. from the analysis
-rm_row(DATA, 1, c("sam", "greg"))
-```
+truncdf(dat2, 40)</code></pre>
+
+<pre><code>##                  X1                                       X2
+## 1      Researcher 2                         October 7, 1892.
+## 2         Teacher 4 Students it&#39;s time to learn. [Student di
+## 3 Multiple Students        Yes teacher we&#39;re ready to learn.
+## 4     [Cross Talk 3                                      00]
+## 5         Teacher 4 Let&#39;s read this terrific book together.
+</code></pre>
+
+<pre><code class="r">## Use column names to remove rows
+truncdf(rm_row(dat2, "X1", "[C"), 40)</code></pre>
+
+<pre><code>##                  X1                                       X2
+## 1      Researcher 2                         October 7, 1892.
+## 2         Teacher 4 Students it&#39;s time to learn. [Student di
+## 3 Multiple Students        Yes teacher we&#39;re ready to learn.
+## 4         Teacher 4 Let&#39;s read this terrific book together.
+</code></pre>
+
+<pre><code class="r">## Use column numbers to remove rows
+truncdf(rm_row(dat2, 2, "[C"), 40)</code></pre>
+
+<pre><code>##                  X1                                       X2
+## 1      Researcher 2                         October 7, 1892.
+## 2         Teacher 4 Students it&#39;s time to learn. [Student di
+## 3 Multiple Students        Yes teacher we&#39;re ready to learn.
+## 4     [Cross Talk 3                                      00]
+## 5         Teacher 4 Let&#39;s read this terrific book together.
+</code></pre>
+
+<pre><code class="r">## Also remove people etc. from the analysis
+rm_row(DATA, 1, c("sam", "greg"))</code></pre>
+
+<pre><code>##       person sex adult                         state code
+## 1    teacher   m     1            What should we do?   K3
+## 2      sally   f     0        How can we be certain?   K6
+## 3      sally   f     0   What are you talking about?   K9
+## 4 researcher   f     1 Shall we move on?  Good then.  K10
+</code></pre>
 
 <h4 id="clean">Remove Extra Spaces and Escaped Characters</h4> 
 
@@ -5015,6 +5048,45 @@ qdap allows for the detection of imperative sentences via the `r FUN("imperative
 9   sue                    Alex don't run*.     AAVE
 </code></pre>
 
+
+
+<h3 id="tm">tm Package Compatability</h3>
+
+<div class="funs">
+The following functions will be utilized in this section (click to view more):   
+
+
+<form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
+    <input type="submit" value="tdm"><input type="submit" value="dtm"> - `r HR("#tdm", "Create term document matrices or document term matrices from raw text or wfm")`
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
+    <input type="submit" value="tm2wfm"> - `r HR("#tm2wfm", "Convert the tm package's TermDocumentMatrix/DocumentTermMatrix to wfm")`
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
+    <input type="submit" value="apply_as_tm"> - `r HR("#apply_as_tm", "Apply functions intended to be used on the tm package's TermDocumentMatrix to a wfm object")`
+</form>
+
+<form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
+    <input type="submit" value="tm_corpus2df"><input type="submit" value="df2tm_corpus"> - `r HR("#tm_corpus2df", "Convert between tm package Corpus and qdap dataframe")`
+</form>
+
+</div>
+
+The `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package")` is a heavily regarded and utilized R package for text mining purposes.  The primary data forms for the tm package are <a href="http://www.inside-r.org/packages/cran/tm/docs/Corpus"><b><font color="green", face="courier">Corpus</font></b></a> and <a href="http://www.inside-r.org/packages/cran/tm/docs/http://www.inside-r.org/packages/cran/tm/docs/TermDocumentMatrix"><b><font color="green", face="courier">TermDocumentMatrix</font></b></a>/<a href="http://www.inside-r.org/packages/cran/tm/docs/http://www.inside-r.org/packages/cran/tm/docs/TermDocumentMatrix"><b><font color="green", face="courier">DocumentTermMatrix</font></b></a>.  Because tm is a dependancy for many R text mining packages it is prudent to provide a set of tools to convert between tm and qdap data types.
+
+
+<h4 id="tdm">Create term document matrices or document term matrices from raw text or wfm</h4>
+
+
+<h4 id="tm2wfm">Convert the tm package's TermDocumentMatrix/DocumentTermMatrix to wfm</h4>
+
+
+<h4 id="apply_as_tm">Apply functions intended to be used on the tm package's TermDocumentMatrix to a wfm object</h4>
+
+
+<h4 id="tm_corpus2df">Convert between tm package Corpus and qdap dataframe.</h4>
 
 
 <h3 id="data">Data Sets</h3>

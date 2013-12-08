@@ -28,6 +28,9 @@
 #' scale; if \code{"free_x"} their width will be proportional to the length of 
 #' the x scale; or if \code{"free"} both height and width will vary. This 
 #' setting has no effect unless the appropriate scales also vary.
+#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
+#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
+#' to add additional plot layers.
 #' @return Invisibly returns the ggplot2 object.
 #' @keywords sentence, split, turn-of-talk
 #' @import RColorBrewer
@@ -71,7 +74,7 @@
 #' }
 tot_plot <- function(dataframe, text.var, grouping.var = NULL, facet.vars = NULL, 
     tot = TRUE, transform = FALSE, ncol = NULL, ylab=NULL, xlab=NULL, bar.space=0, 
-    scale = NULL, space = NULL) {
+    scale = NULL, space = NULL, plot = TRUE) {
     word.count <- group <- caps <- NULL
 
     DF <- dataframe
@@ -210,5 +213,8 @@ tot_plot <- function(dataframe, text.var, grouping.var = NULL, facet.vars = NULL
             }
         }
     }  
-    return(theplot) 
+    if (plot) {
+        print(theplot)
+    }
+    invisible(theplot) 
 }

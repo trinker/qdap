@@ -180,7 +180,7 @@ plot(poldat)
 poldat2 <- with(mraja1spl, polarity(dialogue,
     list(sex, fam.aff, died)))
 colsplit2df(poldat2$group)
-plot(poldat)
+plot(poldat2)
 
 poldat3 <- with(rajSPLIT, polarity(dialogue, person))
 poldat3[["group"]][, "OL"] <- outlier_labeler(poldat3[["group"]][,

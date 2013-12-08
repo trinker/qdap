@@ -120,7 +120,7 @@ tdm(DATA$state, DATA$person)
 x <- wfm(DATA$state, DATA$person)
 tdm(x)
 dtm(x)
-library(tdm)
+library(tm)
 plot(tdm(x))
 
 pres <- tdm(pres_debates2012$dialogue, pres_debates2012$person)

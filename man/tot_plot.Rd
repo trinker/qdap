@@ -5,7 +5,7 @@
   tot_plot(dataframe, text.var, grouping.var = NULL,
     facet.vars = NULL, tot = TRUE, transform = FALSE,
     ncol = NULL, ylab = NULL, xlab = NULL, bar.space = 0,
-    scale = NULL, space = NULL)
+    scale = NULL, space = NULL, plot = TRUE)
 }
 \arguments{
   \item{dataframe}{A dataframe that contains the text
@@ -53,6 +53,11 @@
   length of the x scale; or if \code{"free"} both height
   and width will vary. This setting has no effect unless
   the appropriate scales also vary.}
+
+  \item{plot}{logical.  If \code{TRUE} the plot will
+  automatically plot. The user may wish to set to
+  \code{FALSE} for use in knitr, sweave, etc. to add
+  additional plot layers.}
 }
 \value{
   Invisibly returns the ggplot2 object.
