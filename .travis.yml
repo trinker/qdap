@@ -21,5 +21,8 @@ notifications:
     on_failure: change
 
 env:
-  global:
-    - DISPLAY=:99.0
+   global:
+     - R_BUILD_ARGS=" " 
+     - R_CHECK_ARGS="--as-cran"
+     - BOOTSTRAP_LATEX="1"
+     - DISPLAY=:99.0
