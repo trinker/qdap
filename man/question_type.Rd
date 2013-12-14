@@ -18,7 +18,7 @@
   takes a single grouping variable or a list of 1 or more
   grouping variables.}
 
-  \item{neg.cont}{logical.  IF \code{TRUE} provides
+  \item{neg.cont}{logical.  If \code{TRUE} provides
   separate counts for the negative contraction forms of the
   interrogative words.}
 

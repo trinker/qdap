@@ -6,7 +6,7 @@
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
-#' @param neg.cont logical.  IF \code{TRUE} provides separate counts for the 
+#' @param neg.cont logical.  If \code{TRUE} provides separate counts for the 
 #' negative contraction forms of the interrogative words.
 #' @param percent logical.  If \code{TRUE} output given as percent.  If 
 #' \code{FALSE} the output is proportion.
