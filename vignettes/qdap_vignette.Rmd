@@ -5080,6 +5080,34 @@ The `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package")`
 <h4 id="tdm">Create term document matrices or document term matrices from raw text or wfm</h4>
 
 
+<p id="tdm1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("tdm")` & `r FUN("tdm", "dtm")`</b>  - <em>From Raw Text Example 1</em>`r FT(orange, 5, text="&diams;")`</p>
+
+```{r}
+tdm(DATA$state, DATA$person)
+dtm(DATA$state, DATA$person)
+```
+
+<p id="tdm1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("tdm")` & `r FUN("tdm", "dtm")`</b>  - <em>From Raw Text Example 2</em>`r FT(orange, 5, text="&diams;")`</p>
+
+```{r message = FALSE, fig.width = 9, fig.height = 9}
+(pres <- tdm(pres_debates2012$dialogue, pres_debates2012$person))
+library(tm)
+plot(pres, corThreshold = 0.8)
+(pres2 <- removeSparseTerms(pres, .3))
+plot(pres2, corThreshold = 0.95)
+```
+
+<p id="tdm2">`r FT(orange, 5, text="&diams;")` <b>`r FUN("tdm")` & `r FUN("tdm", "dtm")`</b>  - <em>From `r FUN("wfm")`</em>`r FT(orange, 5, text="&diams;")`</p>
+
+```{r, fig.width = 9, fig.height = 9}
+x <- wfm(DATA$state, DATA$person)
+tdm(x)
+dtm(x)
+plot(tdm(x))
+```
+
+
+
 <h4 id="tm2wfm">Convert the tm package's TermDocumentMatrix/DocumentTermMatrix to wfm</h4>
 
 

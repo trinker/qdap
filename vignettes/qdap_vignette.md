@@ -1177,8 +1177,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.00 22.40 22.40 15.79 16.30 15.00 25.34 19.70 25.34 15.79 22.40
-## [12] 16.30 22.40 15.00 22.40 15.00 15.79 19.70 22.40 15.79
+##  [1] 16.30 25.34 22.40 22.40 16.30 16.30 25.34 19.70 25.34 15.79 22.40
+## [12] 25.34 16.30 15.00 25.34 19.70 15.79 22.40 19.70 19.70
 ```
 
 ```r
@@ -1186,8 +1186,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.00 22.40 22.40 15.79 16.30 15.00 25.34 19.70 25.34 15.79 22.40
-## [12] 16.30 22.40 15.00 22.40 15.00 15.79 19.70 22.40 15.79
+##  [1] 16.30 25.34 22.40 22.40 16.30 16.30 25.34 19.70 25.34 15.79 22.40
+## [12] 25.34 16.30 15.00 25.34 19.70 15.79 22.40 19.70 19.70
 ```
 
 
@@ -9166,7 +9166,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x3ba1d718>
+<environment: 0x12b1d5ac>
 ```
 
 ```r
@@ -10055,21 +10055,21 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE) +
     scale_fill_hue(l=40)
 ```
 
-![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-2451.png) 
+![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-2451.png) ![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-2452.png) 
 
 ```r
 tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Spectral")
 ```
 
-![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-2452.png) 
+![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-2453.png) ![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-2454.png) 
 
 ```r
 tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
     scale_fill_brewer(palette="Set1")
 ```
 
-![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-2453.png) 
+![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-2455.png) ![plot of chunk unnamed-chunk-245](figure/unnamed-chunk-2456.png) 
 
 
 <p id="tot3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a>** - *Add Mean +2/+3 sd* <font size="5" color="orange">&diams;</font></p >
@@ -10089,7 +10089,7 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
         y = mean(word.count) + (3 *sd(word.count)) + 2, label = "+3 sd")) 
 ```
 
-![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-246.png) 
+![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-2461.png) ![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-2462.png) 
 
 
 <h4 id="venn">Venn Diagram</h4>
@@ -10563,6 +10563,118 @@ The <a href="http://cran.r-project.org/web/packages/tm/index.html">tm package</a
 
 
 <h4 id="tdm">Create term document matrices or document term matrices from raw text or wfm</h4>
+
+
+<p id="tdm1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> & <a href="http://trinker.github.io/qdap_dev/dtm.html" target="_blank"><code>tdm</code></a></b>  - <em>From Raw Text Example 1</em><font size="5" color="orange">&diams;</font></p>
+
+
+```r
+tdm(DATA$state, DATA$person)
+```
+
+```
+## A term-document matrix (41 terms, 5 documents)
+## 
+## Non-/sparse entries: 49/156
+## Sparsity           : 76%
+## Maximal term length: 8 
+## Weighting          : term frequency (tf)
+```
+
+```r
+dtm(DATA$state, DATA$person)
+```
+
+```
+## A document-term matrix (5 documents, 41 terms)
+## 
+## Non-/sparse entries: 49/156
+## Sparsity           : 76%
+## Maximal term length: 8 
+## Weighting          : term frequency (tf)
+```
+
+
+<p id="tdm1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> & <a href="http://trinker.github.io/qdap_dev/dtm.html" target="_blank"><code>tdm</code></a></b>  - <em>From Raw Text Example 2</em><font size="5" color="orange">&diams;</font></p>
+
+
+```r
+(pres <- tdm(pres_debates2012$dialogue, pres_debates2012$person))
+```
+
+```
+## A term-document matrix (3363 terms, 6 documents)
+## 
+## Non-/sparse entries: 5770/14408
+## Sparsity           : 71%
+## Maximal term length: 16 
+## Weighting          : term frequency (tf)
+```
+
+```r
+library(tm)
+plot(pres, corThreshold = 0.8)
+```
+
+![plot of chunk unnamed-chunk-258](figure/unnamed-chunk-2581.png) 
+
+```r
+(pres2 <- removeSparseTerms(pres, .3))
+```
+
+```
+## A term-document matrix (131 terms, 6 documents)
+## 
+## Non-/sparse entries: 716/70
+## Sparsity           : 9%
+## Maximal term length: 14 
+## Weighting          : term frequency (tf)
+```
+
+```r
+plot(pres2, corThreshold = 0.95)
+```
+
+![plot of chunk unnamed-chunk-258](figure/unnamed-chunk-2582.png) 
+
+
+<p id="tdm2"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> & <a href="http://trinker.github.io/qdap_dev/dtm.html" target="_blank"><code>tdm</code></a></b>  - <em>From <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a></em><font size="5" color="orange">&diams;</font></p>
+
+
+```r
+x <- wfm(DATA$state, DATA$person)
+tdm(x)
+```
+
+```
+## A term-document matrix (41 terms, 5 documents)
+## 
+## Non-/sparse entries: 49/156
+## Sparsity           : 76%
+## Maximal term length: 8 
+## Weighting          : term frequency (tf)
+```
+
+```r
+dtm(x)
+```
+
+```
+## A document-term matrix (5 documents, 41 terms)
+## 
+## Non-/sparse entries: 49/156
+## Sparsity           : 76%
+## Maximal term length: 8 
+## Weighting          : term frequency (tf)
+```
+
+```r
+plot(tdm(x))
+```
+
+![plot of chunk unnamed-chunk-259](figure/unnamed-chunk-259.png) 
+
+
 
 
 <h4 id="tm2wfm">Convert the tm package's TermDocumentMatrix/DocumentTermMatrix to wfm</h4>
