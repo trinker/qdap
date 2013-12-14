@@ -1177,8 +1177,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 15.79 19.70 25.34 19.70 15.79 25.34 19.70 22.40 25.34 15.00 22.40
-## [12] 15.00 15.00 16.30 19.70 19.70 15.79 19.70 15.79 16.30
+##  [1] 19.70 16.30 25.34 22.40 16.30 25.34 19.70 19.70 15.79 22.40 19.70
+## [12] 22.40 15.79 15.00 25.34 15.00 22.40 16.30 22.40 22.40
 ```
 
 ```r
@@ -1186,8 +1186,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 15.79 19.70 25.34 19.70 15.79 25.34 19.70 22.40 25.34 15.00 22.40
-## [12] 15.00 15.00 16.30 19.70 19.70 15.79 19.70 15.79 16.30
+##  [1] 19.70 16.30 25.34 22.40 16.30 25.34 19.70 19.70 15.79 22.40 19.70
+## [12] 22.40 15.79 15.00 25.34 15.00 22.40 16.30 22.40 22.40
 ```
 
 
@@ -9166,7 +9166,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x13cdc31c>
+<environment: 0x120ef604>
 ```
 
 ```r
@@ -10565,7 +10565,7 @@ The <a href="http://cran.r-project.org/web/packages/tm/index.html">tm package</a
 <h4 id="tdm">Create term document matrices or document term matrices from raw text or wfm</h4>
 
 
-<p id="tdm1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> & <a href="http://trinker.github.io/qdap_dev/dtm.html" target="_blank"><code>tdm</code></a></b>  - <em>From Raw Text Example 1</em><font size="5" color="orange">&diams;</font></p>
+<p id="tdm1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> & <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>dtm</code></a></b>  - <em>From Raw Text Example 1</em><font size="5" color="orange">&diams;</font></p>
 
 
 ```r
@@ -10595,7 +10595,7 @@ dtm(DATA$state, DATA$person)
 ```
 
 
-<p id="tdm1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> & <a href="http://trinker.github.io/qdap_dev/dtm.html" target="_blank"><code>tdm</code></a></b>  - <em>From Raw Text Example 2</em><font size="5" color="orange">&diams;</font></p>
+<p id="tdm1"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> & <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>dtm</code></a></b>  - <em>From Raw Text Example 2</em><font size="5" color="orange">&diams;</font></p>
 
 
 ```r
@@ -10638,7 +10638,7 @@ plot(pres2, corThreshold = 0.95)
 ![plot of chunk unnamed-chunk-258](figure/unnamed-chunk-2582.png) 
 
 
-<p id="tdm2"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> & <a href="http://trinker.github.io/qdap_dev/dtm.html" target="_blank"><code>tdm</code></a></b>  - <em>From <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a></em><font size="5" color="orange">&diams;</font></p>
+<p id="tdm2"><font size="5" color="orange">&diams;</font> <b><a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>tdm</code></a> & <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>dtm</code></a></b>  - <em>From <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a></em><font size="5" color="orange">&diams;</font></p>
 
 
 ```r
@@ -10702,62 +10702,17 @@ summary(tm2qdap(dtm_in))
 
 <h4 id="apply_as_tm">Apply functions intended to be used on the tm package's TermDocumentMatrix to a wfm object</h4>
 
-
-
-```
-
-Error in paste0(BU, fun, ".html") : 
-  cannot coerce type 'closure' to vector of type 'character'
-
-```
-
- allows the user to apply functions intended to be used on the `tm` package's <a href="http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix">TermDocumentMatrix</a> to a <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> object.  
-
-```
-
-Error in paste0(BU, fun, ".html") : 
-  cannot coerce type 'closure' to vector of type 'character'
-
-```
-
- attempts to simplify back to a <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> or <a href="http://trinker.github.io/qdap_dev/wfm_weight.html" target="_blank"><code>wfm</code></a> format.  In the examples belows we first create a <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> and then apply functions designed for a <a href="http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix">TermDocumentMatrix</a>.
+<a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>apply_as_tm</code></a> allows the user to apply functions intended to be used on the `tm` package's <a href="http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix">TermDocumentMatrix</a> to a <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> object.  <a href="http://trinker.github.io/qdap_dev/tdm.html" target="_blank"><code>apply_as_tm</code></a> attempts to simplify back to a <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> or <a href="http://trinker.github.io/qdap_dev/wfm_weight.html" target="_blank"><code>wfm</code></a> format.  In the examples belows we first create a <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> and then apply functions designed for a <a href="http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix">TermDocumentMatrix</a>.
 
 
 
 ```r
 library(tm); library(proxy)
-```
-
-```
-## 
-## Attaching package: 'proxy'
-## 
-## The following objects are masked from 'package:stats':
-## 
-##     as.dist, dist
-```
-
-```r
 ## Create a wfm
 a <- with(DATA, wfm(state, list(sex, adult)))
 summary(a)
-```
 
-```
-## A word-frequency matrix (41 terms, 4 groups)
-## 
-## 
-## Non-/sparse entries       : 45/119
-## Sparsity                  : 73%
-## Maximal term length       : 8
-## Less than four characters : 49%
-## Hapax legomenon           : 32(78%)
-## Dis legomenon             : 7(17%)
-## Shannon's diversity index : 3.62
-```
-
-```r
-
+## Apply as tm
 (out <- apply_as_tm(a, tm:::removeSparseTerms, sparse=0.6))
 ```
 
@@ -10770,23 +10725,6 @@ summary(a)
 
 ```r
 summary(out)
-```
-
-```
-## A word-frequency matrix (3 terms, 4 groups)
-## 
-## 
-## Non-/sparse entries       : 7/5
-## Sparsity                  : 42%
-## Maximal term length       : 4
-## Less than four characters : 67%
-## Hapax legomenon           : 0(0%)
-## Dis legomenon             : 1(33%)
-## Shannon's diversity index : 1.06
-```
-
-```r
-
 apply_as_tm(a, tm:::Dictionary)
 ```
 

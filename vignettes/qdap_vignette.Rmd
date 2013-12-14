@@ -5080,14 +5080,14 @@ The `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package")`
 <h4 id="tdm">Create term document matrices or document term matrices from raw text or wfm</h4>
 
 
-<p id="tdm1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("tdm")` & `r FUN("tdm", "dtm")`</b>  - <em>From Raw Text Example 1</em>`r FT(orange, 5, text="&diams;")`</p>
+<p id="tdm1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("tdm")` & `r FUN("dtm", "tdm")`</b>  - <em>From Raw Text Example 1</em>`r FT(orange, 5, text="&diams;")`</p>
 
 ```{r}
 tdm(DATA$state, DATA$person)
 dtm(DATA$state, DATA$person)
 ```
 
-<p id="tdm1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("tdm")` & `r FUN("tdm", "dtm")`</b>  - <em>From Raw Text Example 2</em>`r FT(orange, 5, text="&diams;")`</p>
+<p id="tdm1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("tdm")` & `r FUN("dtm", "tdm")`</b>  - <em>From Raw Text Example 2</em>`r FT(orange, 5, text="&diams;")`</p>
 
 ```{r message = FALSE, fig.width = 9, fig.height = 9}
 (pres <- tdm(pres_debates2012$dialogue, pres_debates2012$person))
@@ -5097,7 +5097,7 @@ plot(pres, corThreshold = 0.8)
 plot(pres2, corThreshold = 0.95)
 ```
 
-<p id="tdm2">`r FT(orange, 5, text="&diams;")` <b>`r FUN("tdm")` & `r FUN("tdm", "dtm")`</b>  - <em>From `r FUN("wfm")`</em>`r FT(orange, 5, text="&diams;")`</p>
+<p id="tdm2">`r FT(orange, 5, text="&diams;")` <b>`r FUN("tdm")` & `r FUN("dtm", "tdm")`</b>  - <em>From `r FUN("wfm")`</em>`r FT(orange, 5, text="&diams;")`</p>
 
 ```{r, fig.width = 9, fig.height = 9}
 x <- wfm(DATA$state, DATA$person)
@@ -5119,18 +5119,18 @@ summary(tm2qdap(dtm_in))
 
 <h4 id="apply_as_tm">Apply functions intended to be used on the tm package's TermDocumentMatrix to a wfm object</h4>
 
-`r FUN("tdm", apply_as_tm)` allows the user to apply functions intended to be used on the `tm` package's `r HR("http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix", "TermDocumentMatrix")` to a `r FUN("wfm")` object.  `r FUN("tdm", apply_as_tm)` attempts to simplify back to a `r FUN("wfm")` or `r FUN("wfm", "wfm_weight")` format.  In the examples belows we first create a `r FUN("wfm")` and then apply functions designed for a `r HR("http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix", "TermDocumentMatrix")`.
+`r FUN("apply_as_tm", "tdm")` allows the user to apply functions intended to be used on the `tm` package's `r HR("http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix", "TermDocumentMatrix")` to a `r FUN("wfm")` object.  `r FUN("apply_as_tm", "tdm")` attempts to simplify back to a `r FUN("wfm")` or `r FUN("wfm", "wfm_weight")` format.  In the examples belows we first create a `r FUN("wfm")` and then apply functions designed for a `r HR("http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix", "TermDocumentMatrix")`.
 
 
-```{r}
+```{r message = FALSE}
 library(tm); library(proxy)
 ## Create a wfm
 a <- with(DATA, wfm(state, list(sex, adult)))
 summary(a)
 
+## Apply as tm
 (out <- apply_as_tm(a, tm:::removeSparseTerms, sparse=0.6))
 summary(out)
-
 apply_as_tm(a, tm:::Dictionary)
 apply_as_tm(a, tm:::dissimilarity, method = "cosine")
 apply_as_tm(a, tm:::findAssocs, "computer", .8)
