@@ -187,6 +187,7 @@ list(
         "plot.termco",
         "plot.wfdf",
         "plot.wfm",
+        "plot.word_freq", 
         "plot.word_stats",
         "qheat",
         "rank_freq_mplot",

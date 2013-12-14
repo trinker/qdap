@@ -24,9 +24,11 @@
 #' freq_terms(DATA$state)
 #' freq_terms(DATA$state, extend = FALSE)
 #' freq_terms(DATA$state, at.least = 4)
-#' freq_terms(pres_debates2012$dialogue, stopwords = Top200Words)
+#' (x <- freq_terms(pres_debates2012$dialogue, stopwords = Top200Words))
+#' plot(x)
 #' }
-freq_terms <- function(text.var, top = 20, at.least = 1, stopwords = NULL, 
+freq_terms <- 
+function(text.var, top = 20, at.least = 1, stopwords = NULL, 
     extend = TRUE, ...) {
 
     out <- all_words(text.var, alphabetical = FALSE, ...)
@@ -47,5 +49,39 @@ freq_terms <- function(text.var, top = 20, at.least = 1, stopwords = NULL,
         }
     }
 
-    out[grab, ]
+    o <- out[grab, ]
+    class(o) <- c("freq_terms", class(o))
+    o
 }
+
+#' Plots a freq_terms Object
+#' 
+#' Plots a freq_terms object.
+#' 
+#' @param x The freq_terms object.
+#' @param \ldots ignored.
+#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
+#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
+#' to add additional plot layers.
+#' @method plot freq_terms
+#' @export
+#' @importFrom ggplot2 ggplot aes_string  geom_bar ylab xlab scale_y_continuous theme element_blank theme_bw
+plot.freq_terms <- function(x, plot = TRUE, ...) {
+
+    x[, "WORD"] <- factor(x[, "WORD"], levels = rev(x[, "WORD"]))
+    mx <- max(x[, "FREQ"])
+
+    GP <- ggplot(x, aes_string(x="WORD")) +
+        geom_bar(aes_string(weight="FREQ")) +
+        coord_flip() + ylab("Count") + xlab("Word") +
+        scale_y_continuous(expand = c(0,0), 
+           limits = c(0, mx + (.03 * mx))) +
+        theme_qdap() 
+
+    if (plot) {
+        print(GP)
+    }
+    invisible(GP)
+}
+
+

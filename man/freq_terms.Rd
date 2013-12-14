@@ -39,7 +39,8 @@ freq_terms(DATA$state, 5)
 freq_terms(DATA$state)
 freq_terms(DATA$state, extend = FALSE)
 freq_terms(DATA$state, at.least = 4)
-freq_terms(pres_debates2012$dialogue, stopwords = Top200Words)
+(x <- freq_terms(pres_debates2012$dialogue, stopwords = Top200Words))
+plot(x)
 }
 }
 \seealso{
