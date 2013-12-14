@@ -193,7 +193,7 @@ library(tm)
 
 ## A Term Document Matrix Conversion
 (tm_in <- TermDocumentMatrix(crude, control = list(stopwords = TRUE)))
-converted <- tm2wfm(tm_in)
+converted <- qdap(tm_in)
 head(converted)
 summary(converted)
 

@@ -5110,9 +5110,39 @@ plot(tdm(x))
 
 <h4 id="tm2wfm">Convert the tm package's TermDocumentMatrix/DocumentTermMatrix to wfm</h4>
 
+```{r message = FALSE}
+library(tm); data(crude)
+(dtm_in <- DocumentTermMatrix(crude, control = list(stopwords = TRUE)))
+summary(tm2qdap(dtm_in))
+```
+
 
 <h4 id="apply_as_tm">Apply functions intended to be used on the tm package's TermDocumentMatrix to a wfm object</h4>
 
+`r FUN("tdm", apply_as_tm)` allows the user to apply functions intended to be used on the `tm` package's `r HR("http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix", "TermDocumentMatrix")` to a `r FUN("wfm")` object.  `r FUN("tdm", apply_as_tm)` attempts to simplify back to a `r FUN("wfm")` or `r FUN("wfm", "wfm_weight")` format.  In the examples belows we first create a `r FUN("wfm")` and then apply functions designed for a `r HR("http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix", "TermDocumentMatrix")`.
+
+
+```{r}
+library(tm); library(proxy)
+## Create a wfm
+a <- with(DATA, wfm(state, list(sex, adult)))
+summary(a)
+
+(out <- apply_as_tm(a, tm:::removeSparseTerms, sparse=0.6))
+summary(out)
+
+apply_as_tm(a, tm:::Dictionary)
+apply_as_tm(a, tm:::dissimilarity, method = "cosine")
+apply_as_tm(a, tm:::findAssocs, "computer", .8)
+apply_as_tm(a, tm:::findFreqTerms, 2, 3)
+apply_as_tm(a, tm:::Zipf_plot)
+apply_as_tm(a, tm:::Heaps_plot)
+apply_as_tm(a, tm:::plot.TermDocumentMatrix, corThreshold = 0.4)
+apply_as_tm(a, tm:::weightBin)
+apply_as_tm(a, tm:::weightBin, to.qdap = FALSE)
+apply_as_tm(a, tm:::weightSMART)
+apply_as_tm(a, tm:::weightTfIdf)
+```
 
 <h4 id="tm_corpus2df">Convert between tm package Corpus and qdap dataframe.</h4>
 

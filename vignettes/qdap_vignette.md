@@ -1177,8 +1177,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 25.34 22.40 22.40 16.30 16.30 25.34 19.70 25.34 15.79 22.40
-## [12] 25.34 16.30 15.00 25.34 19.70 15.79 22.40 19.70 19.70
+##  [1] 15.79 19.70 25.34 19.70 15.79 25.34 19.70 22.40 25.34 15.00 22.40
+## [12] 15.00 15.00 16.30 19.70 19.70 15.79 19.70 15.79 16.30
 ```
 
 ```r
@@ -1186,8 +1186,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 25.34 22.40 22.40 16.30 16.30 25.34 19.70 25.34 15.79 22.40
-## [12] 25.34 16.30 15.00 25.34 19.70 15.79 22.40 19.70 19.70
+##  [1] 15.79 19.70 25.34 19.70 15.79 25.34 19.70 22.40 25.34 15.00 22.40
+## [12] 15.00 15.00 16.30 19.70 19.70 15.79 19.70 15.79 16.30
 ```
 
 
@@ -9166,7 +9166,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x12b1d5ac>
+<environment: 0x13cdc31c>
 ```
 
 ```r
@@ -10680,7 +10680,357 @@ plot(tdm(x))
 <h4 id="tm2wfm">Convert the tm package's TermDocumentMatrix/DocumentTermMatrix to wfm</h4>
 
 
+```r
+library(tm); data(crude)
+(dtm_in <- DocumentTermMatrix(crude, control = list(stopwords = TRUE)))
+```
+
+```
+## A document-term matrix (20 documents, 1200 terms)
+## 
+## Non-/sparse entries: 1930/22070
+## Sparsity           : 92%
+## Maximal term length: 17 
+## Weighting          : term frequency (tf)
+```
+
+```r
+summary(tm2qdap(dtm_in))
+```
+
+
+
 <h4 id="apply_as_tm">Apply functions intended to be used on the tm package's TermDocumentMatrix to a wfm object</h4>
+
+
+
+```
+
+Error in paste0(BU, fun, ".html") : 
+  cannot coerce type 'closure' to vector of type 'character'
+
+```
+
+ allows the user to apply functions intended to be used on the `tm` package's <a href="http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix">TermDocumentMatrix</a> to a <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> object.  
+
+```
+
+Error in paste0(BU, fun, ".html") : 
+  cannot coerce type 'closure' to vector of type 'character'
+
+```
+
+ attempts to simplify back to a <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> or <a href="http://trinker.github.io/qdap_dev/wfm_weight.html" target="_blank"><code>wfm</code></a> format.  In the examples belows we first create a <a href="http://trinker.github.io/qdap_dev/wfm.html" target="_blank"><code>wfm</code></a> and then apply functions designed for a <a href="http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix">TermDocumentMatrix</a>.
+
+
+
+```r
+library(tm); library(proxy)
+```
+
+```
+## 
+## Attaching package: 'proxy'
+## 
+## The following objects are masked from 'package:stats':
+## 
+##     as.dist, dist
+```
+
+```r
+## Create a wfm
+a <- with(DATA, wfm(state, list(sex, adult)))
+summary(a)
+```
+
+```
+## A word-frequency matrix (41 terms, 4 groups)
+## 
+## 
+## Non-/sparse entries       : 45/119
+## Sparsity                  : 73%
+## Maximal term length       : 8
+## Less than four characters : 49%
+## Hapax legomenon           : 32(78%)
+## Dis legomenon             : 7(17%)
+## Shannon's diversity index : 3.62
+```
+
+```r
+
+(out <- apply_as_tm(a, tm:::removeSparseTerms, sparse=0.6))
+```
+
+```
+##      f.0 f.1 m.0 m.1
+## we     1   1   0   1
+## what   1   0   0   1
+## you    1   0   3   0
+```
+
+```r
+summary(out)
+```
+
+```
+## A word-frequency matrix (3 terms, 4 groups)
+## 
+## 
+## Non-/sparse entries       : 7/5
+## Sparsity                  : 42%
+## Maximal term length       : 4
+## Less than four characters : 67%
+## Hapax legomenon           : 0(0%)
+## Dis legomenon             : 1(33%)
+## Shannon's diversity index : 1.06
+```
+
+```r
+
+apply_as_tm(a, tm:::Dictionary)
+```
+
+```
+##  [1] "about"    "already"  "am"       "are"      "be"       "can"     
+##  [7] "certain"  "computer" "distrust" "do"       "dumb"     "eat"     
+## [13] "fun"      "good"     "how"      "hungry"   "i"        "i'm"     
+## [19] "is"       "it"       "it's"     "let's"    "liar"     "move"    
+## [25] "no"       "not"      "on"       "shall"    "should"   "stinks"  
+## [31] "talking"  "telling"  "the"      "then"     "there"    "too"     
+## [37] "truth"    "way"      "we"       "what"     "you"     
+## attr(,"class")
+## [1] "Dictionary" "character"
+```
+
+```r
+apply_as_tm(a, tm:::dissimilarity, method = "cosine")
+```
+
+```
+##        f.0    f.1    m.0
+## f.1 0.8709              
+## m.0 0.8672 1.0000       
+## m.1 0.6838 0.7959 1.0000
+```
+
+```r
+apply_as_tm(a, tm:::findAssocs, "computer", .8)
+```
+
+```
+##  already       am distrust     dumb      eat      fun   hungry        i 
+##     1.00     1.00     1.00     1.00     1.00     1.00     1.00     1.00 
+##      i'm       is       it     it's    let's     liar       no      not 
+##     1.00     1.00     1.00     1.00     1.00     1.00     1.00     1.00 
+##   stinks  telling      the    there      too    truth      way      you 
+##     1.00     1.00     1.00     1.00     1.00     1.00     1.00     0.94
+```
+
+```r
+apply_as_tm(a, tm:::findFreqTerms, 2, 3)
+```
+
+```
+## [1] "fun"  "i"    "is"   "it's" "no"   "not"  "we"   "what"
+```
+
+```r
+apply_as_tm(a, tm:::Zipf_plot)
+```
+
+![plot of chunk unnamed-chunk-261](figure/unnamed-chunk-2611.png) 
+
+```
+## (Intercept)           x 
+##      1.2003     -0.3672
+```
+
+```r
+apply_as_tm(a, tm:::Heaps_plot)
+```
+
+![plot of chunk unnamed-chunk-261](figure/unnamed-chunk-2612.png) 
+
+```
+## (Intercept)           x 
+##      0.3492      0.8495
+```
+
+```r
+apply_as_tm(a, tm:::plot.TermDocumentMatrix, corThreshold = 0.4)
+```
+
+![plot of chunk unnamed-chunk-261](figure/unnamed-chunk-2613.png) 
+
+```
+## [1] "A graph with 20 nodes."
+```
+
+```r
+apply_as_tm(a, tm:::weightBin)
+```
+
+```
+##          f.0 f.1 m.0 m.1
+## about      1   0   0   0
+## already    0   0   1   0
+## am         0   0   1   0
+## are        1   0   0   0
+## be         1   0   0   0
+## can        1   0   0   0
+## certain    1   0   0   0
+## computer   0   0   1   0
+## distrust   0   0   1   0
+## do         0   0   0   1
+## dumb       0   0   1   0
+## eat        0   0   1   0
+## fun        0   0   1   0
+## good       0   1   0   0
+## how        1   0   0   0
+## hungry     0   0   1   0
+## i          0   0   1   0
+## i'm        0   0   1   0
+## is         0   0   1   0
+## it         0   0   1   0
+## it's       0   0   1   0
+## let's      0   0   1   0
+## liar       0   0   1   0
+## move       0   1   0   0
+## no         0   0   1   0
+## not        0   0   1   0
+## on         0   1   0   0
+## shall      0   1   0   0
+## should     0   0   0   1
+## stinks     0   0   1   0
+## talking    1   0   0   0
+## telling    0   0   1   0
+## the        0   0   1   0
+## then       0   1   0   0
+## there      0   0   1   0
+## too        0   0   1   0
+## truth      0   0   1   0
+## way        0   0   1   0
+## we         1   1   0   1
+## what       1   0   0   1
+## you        1   0   1   0
+## attr(,"class")
+## [1] "weighted_wfm" "matrix"
+```
+
+```r
+apply_as_tm(a, tm:::weightBin, to.qdap = FALSE)
+```
+
+```
+## A term-document matrix (41 terms, 4 documents)
+## 
+## Non-/sparse entries: 45/119
+## Sparsity           : 73%
+## Maximal term length: 8 
+## Weighting          : binary (bin)
+```
+
+```r
+apply_as_tm(a, tm:::weightSMART)
+```
+
+```
+##          f.0 f.1 m.0 m.1
+## about      1   0   0   0
+## already    0   0   1   0
+## am         0   0   1   0
+## are        1   0   0   0
+## be         1   0   0   0
+## can        1   0   0   0
+## certain    1   0   0   0
+## computer   0   0   1   0
+## distrust   0   0   1   0
+## do         0   0   0   1
+## dumb       0   0   1   0
+## eat        0   0   1   0
+## fun        0   0   2   0
+## good       0   1   0   0
+## how        1   0   0   0
+## hungry     0   0   1   0
+## i          0   0   2   0
+## i'm        0   0   1   0
+## is         0   0   2   0
+## it         0   0   1   0
+## it's       0   0   2   0
+## let's      0   0   1   0
+## liar       0   0   1   0
+## move       0   1   0   0
+## no         0   0   2   0
+## not        0   0   2   0
+## on         0   1   0   0
+## shall      0   1   0   0
+## should     0   0   0   1
+## stinks     0   0   1   0
+## talking    1   0   0   0
+## telling    0   0   1   0
+## the        0   0   1   0
+## then       0   1   0   0
+## there      0   0   1   0
+## too        0   0   1   0
+## truth      0   0   1   0
+## way        0   0   1   0
+## we         1   1   0   1
+## what       1   0   0   1
+## you        1   0   3   0
+## attr(,"class")
+## [1] "weighted_wfm" "matrix"
+```
+
+```r
+apply_as_tm(a, tm:::weightTfIdf)
+```
+
+```
+##             f.0     f.1     m.0    m.1
+## about    0.2000 0.00000 0.00000 0.0000
+## already  0.0000 0.00000 0.06061 0.0000
+## am       0.0000 0.00000 0.06061 0.0000
+## are      0.2000 0.00000 0.00000 0.0000
+## be       0.2000 0.00000 0.00000 0.0000
+## can      0.2000 0.00000 0.00000 0.0000
+## certain  0.2000 0.00000 0.00000 0.0000
+## computer 0.0000 0.00000 0.06061 0.0000
+## distrust 0.0000 0.00000 0.06061 0.0000
+## do       0.0000 0.00000 0.00000 0.5000
+## dumb     0.0000 0.00000 0.06061 0.0000
+## eat      0.0000 0.00000 0.06061 0.0000
+## fun      0.0000 0.00000 0.12121 0.0000
+## good     0.0000 0.33333 0.00000 0.0000
+## how      0.2000 0.00000 0.00000 0.0000
+## hungry   0.0000 0.00000 0.06061 0.0000
+## i        0.0000 0.00000 0.12121 0.0000
+## i'm      0.0000 0.00000 0.06061 0.0000
+## is       0.0000 0.00000 0.12121 0.0000
+## it       0.0000 0.00000 0.06061 0.0000
+## it's     0.0000 0.00000 0.12121 0.0000
+## let's    0.0000 0.00000 0.06061 0.0000
+## liar     0.0000 0.00000 0.06061 0.0000
+## move     0.0000 0.33333 0.00000 0.0000
+## no       0.0000 0.00000 0.12121 0.0000
+## not      0.0000 0.00000 0.12121 0.0000
+## on       0.0000 0.33333 0.00000 0.0000
+## shall    0.0000 0.33333 0.00000 0.0000
+## should   0.0000 0.00000 0.00000 0.5000
+## stinks   0.0000 0.00000 0.06061 0.0000
+## talking  0.2000 0.00000 0.00000 0.0000
+## telling  0.0000 0.00000 0.06061 0.0000
+## the      0.0000 0.00000 0.06061 0.0000
+## then     0.0000 0.33333 0.00000 0.0000
+## there    0.0000 0.00000 0.06061 0.0000
+## too      0.0000 0.00000 0.06061 0.0000
+## truth    0.0000 0.00000 0.06061 0.0000
+## way      0.0000 0.00000 0.06061 0.0000
+## we       0.0415 0.06917 0.00000 0.1038
+## what     0.1000 0.00000 0.00000 0.2500
+## you      0.1000 0.00000 0.09091 0.0000
+## attr(,"class")
+## [1] "weighted_wfm" "matrix"
+```
 
 
 <h4 id="tm_corpus2df">Convert between tm package Corpus and qdap dataframe.</h4>
