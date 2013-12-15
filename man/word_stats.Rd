@@ -108,6 +108,9 @@ desc_wrds$word.elem
 desc_wrds$sent.elem
 plot(desc_wrds)
 plot(desc_wrds, label=TRUE, lab.digits = 1)
+## Correlation Visualization
+qheat(cor(desc_wrds$gts[, -1]), diag.na = TRUE, by.column =NULL,
+    low = "yellow", high = "red", grid = FALSE)
 with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff)))
 }
 }
