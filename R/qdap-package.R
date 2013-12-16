@@ -355,6 +355,17 @@ NULL
 #' \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
 NULL
  
+#' Minimal Raw Time Span Data Set 
+#' 
+#' A dataset containing a list of named vectors of time spans.
+#' 
+#' @docType data 
+#' @keywords datasets 
+#' @name raw.time.span 
+#' @usage data(raw.time.span) 
+#' @format A list with 3 elements 
+NULL
+
 #' Minimal Time Span Data Set
 #' 
 #' A ficticious dataset containing time spans for codes A and B.

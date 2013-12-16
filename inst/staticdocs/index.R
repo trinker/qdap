@@ -245,6 +245,7 @@ list(
         "raj",
         "rajPOS",
         "rajSPLIT",
+        "raw.time.span",
         "sample.time.span"
       )
     )
