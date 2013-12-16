@@ -112,6 +112,11 @@ plot(desc_wrds, label=TRUE, lab.digits = 1)
 qheat(cor(desc_wrds$gts[, -1]), diag.na = TRUE, by.column =NULL,
     low = "yellow", high = "red", grid = FALSE)
 with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff)))
+## Parallel (possible speed boost)
+with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff),
+    parallel = TRUE))
+## Recycle for speed boost
+word_stats(desc_wrds, mraja1spl$sex)
 }
 }
 \seealso{
