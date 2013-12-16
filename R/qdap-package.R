@@ -355,3 +355,23 @@ NULL
 #' \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
 NULL
  
+#' Minimal Time Span Data Set
+#' 
+#' A ficticious dataset containing time spans for codes A and B.
+#' 
+#' @details 
+#' \itemize{ 
+#'   \item code. The qualitative code.
+#'   \item start. The integer start time.
+#'   \item end. The integer end time. 
+#'   \item Start. The chron start time.
+#'   \item End. The chron end time.
+#'   \item variable. An arbitrary single time repeated measures variable (ignore).
+#' } 
+#' 
+#' @docType data 
+#' @keywords datasets 
+#' @name sample.time.span 
+#' @usage data(sample.time.span) 
+#' @format A data frame with 9 rows and 6 variables 
+NULL
