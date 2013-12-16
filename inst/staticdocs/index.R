@@ -244,7 +244,8 @@ list(
         "raj.demographics",
         "raj",
         "rajPOS",
-        "rajSPLIT"
+        "rajSPLIT",
+        "sample.time.span"
       )
     )
 
