@@ -280,8 +280,8 @@ print.cm_distance <- function(x, mean.digits = 0, sd.digits = 2,
             print(PV)
             cat("\n")
             cat(sprintf("*Number of replications: %s\n", x[["replications"]]))
-            mess <- sprintf(paste0("*Based on %s replications, estimated p-values must be <= %s",
-                "\n    to have 95%% confidence that the 'true' p-value is < .05"), 
+            mess <- sprintf(paste0("*Based on %s replications, estimated p-values must be",
+                "\n  <= %s to have 95%% confidence that the 'true'\n  p-value is < .05"), 
                 x[["replications"]], numbformat(confup (x[["replications"]]), digits = 6))
             cat(mess)
             cat("\n")
@@ -289,7 +289,8 @@ print.cm_distance <- function(x, mean.digits = 0, sd.digits = 2,
         cat("\n===========")
         cat("\nStandardized Mean Distances:\n\n")
         print(SM)
-        cat("\n*Note: The closer a value is to zero, the more closely associated the codes are\n")
+        cat(paste0("\n*Note: The closer a value is to zero, the more closely", 
+            "\n  associated the codes are\n"))
 
     }
     
