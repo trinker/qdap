@@ -4037,7 +4037,7 @@ plot(div.mod, low = "yellow", grid = FALSE, values = TRUE)
 
 <h4 id="formality">Formality</h4>
 
-Formality is how contextualize a person's language use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 199b, 2002).  Heylighen & Dewaele (2002) have developed a measure of formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating `r FUN("formality")`, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the `r FUN("dissimilarity")` measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multiplied by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
+Formality is how contextualize a person's language use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 1999b, 2002).  Heylighen & Dewaele (2002) have developed a measure of formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating `r FUN("formality")`, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the `r FUN("dissimilarity")` measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multiplied by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
 <br><br>
 
 $$ F = 50(\frac{n_{f}-n_{c}}{N} + 1) $$
@@ -4451,14 +4451,14 @@ $night
 
 <p id="disper2">`r FT(orange, 5, text="&diams;")` **`r FUN("dispersion_plot")`** - *Example 1*`r FT(orange, 5, text="&diams;")`</p >
 
-```{r, echo=FALSE, fig.width = 15, fig.height = 3.25}
+```{r, fig.width = 15, fig.height = 3.25}
 with(rajSPLIT , dispersion_plot(dialogue, c("love", "night"),
     grouping.var = list(fam.aff, sex), rm.vars = act))
 ```
 
 <p id="disper2">`r FT(orange, 5, text="&diams;")` **`r FUN("dispersion_plot")`** - *Example 2: Color Schemes*`r FT(orange, 5, text="&diams;")`</p >
 
-```{r, echo=FALSE, fig.width = 15, fig.height = 3}
+```{r, fig.width = 15, fig.height = 3}
 with(rajSPLIT, dispersion_plot(dialogue, c("love", "night"),
     bg.color = "black", grouping.var = list(fam.aff, sex),
     color = "yellow", total.color = "white", horiz.color="grey20"))
@@ -4822,18 +4822,17 @@ Because `r FUN("tot_plot")` is based on the `r HR("http://docs.ggplot2.org/curre
 <p id="tot3">`r FT(orange, 5, text="&diams;")` **`r FUN("tot_plot")`** - *Alter Colors* `r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 14, fig.height = 4}
-tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE) +
-    scale_fill_hue(l=40)
-tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
-    scale_fill_brewer(palette="Spectral")
-tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
-    scale_fill_brewer(palette="Set1")
+base <- tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), 
+    tot=FALSE, plot=FALSE) 
+base + scale_fill_hue(l=40)
+base + scale_fill_brewer(palette="Spectral")
+base + scale_fill_brewer(palette="Set1")
 ```
 
 <p id="tot3">`r FT(orange, 5, text="&diams;")` **`r FUN("tot_plot")`** - *Add Mean +2/+3 sd* `r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 14, fig.height = 4}
-tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
+base +
     scale_fill_brewer(palette="Set1") +
     geom_hline(aes(yintercept=mean(word.count))) +
     geom_hline(aes(yintercept=mean(word.count) + (2 *sd(word.count)))) +

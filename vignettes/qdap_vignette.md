@@ -1177,8 +1177,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 22.40 25.34 16.30 15.79 19.70 19.70 25.34 15.79 15.79 19.70 15.79
-## [12] 22.40 22.40 22.40 16.30 16.30 22.40 22.40 22.40 25.34
+##  [1] 22.40 16.30 15.00 15.79 22.40 19.70 25.34 19.70 22.40 15.00 25.34
+## [12] 15.79 15.79 16.30 15.79 25.34 19.70 15.00 25.34 25.34
 ```
 
 ```r
@@ -1186,8 +1186,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 22.40 25.34 16.30 15.79 19.70 19.70 25.34 15.79 15.79 19.70 15.79
-## [12] 22.40 22.40 22.40 16.30 16.30 22.40 22.40 22.40 25.34
+##  [1] 22.40 16.30 15.00 15.79 22.40 19.70 25.34 19.70 22.40 15.00 25.34
+## [12] 15.79 15.79 16.30 15.79 25.34 19.70 15.00 25.34 25.34
 ```
 
 
@@ -2393,7 +2393,30 @@ stem2df(DATA, "state", "new")
 ```
 
 ```
-## Error: there is no package called 'SnowballC'
+##        person sex adult                                 state code
+## 1         sam   m     0         Computer is fun. Not too fun.   K1
+## 2        greg   m     0               No it's not, it's dumb.   K2
+## 3     teacher   m     1                    What should we do?   K3
+## 4         sam   m     0                  You liar, it stinks!   K4
+## 5        greg   m     0               I am telling the truth!   K5
+## 6       sally   f     0                How can we be certain?   K6
+## 7        greg   m     0                      There is no way.   K7
+## 8         sam   m     0                       I distrust you.   K8
+## 9       sally   f     0           What are you talking about?   K9
+## 10 researcher   f     1         Shall we move on?  Good then.  K10
+## 11       greg   m     0 I'm hungry.  Let's eat.  You already?  K11
+##                                new
+## 1       Comput is fun not too fun.
+## 2               No it not it dumb.
+## 3               What should we do?
+## 4               You liar it stink!
+## 5             I am tell the truth!
+## 6           How can we be certain?
+## 7                 There is no way.
+## 8                  I distrust you.
+## 9         What are you talk about?
+## 10     Shall we move on good then.
+## 11 I'm hungri let eat you alreadi?
 ```
 
 ```r
@@ -2401,9 +2424,7 @@ with(stem2df(DATA, "state", "new"), trans_cloud(new, sex, title.cex = 2.5,
     title.color = "blue", max.word.size = 5, title.padj = .7))
 ```
 
-```
-## Error: there is no package called 'SnowballC'
-```
+![plot of chunk unnamed-chunk-28](figure/unnamed-chunk-281.png) ![plot of chunk unnamed-chunk-28](figure/unnamed-chunk-282.png) 
 
 ```r
 ## stemmer EXAMPLE:
@@ -2411,7 +2432,12 @@ stemmer(DATA$state)
 ```
 
 ```
-## Error: there is no package called 'SnowballC'
+##  [1] "Comput is fun not too fun."      "No it not it dumb."             
+##  [3] "What should we do?"              "You liar it stink!"             
+##  [5] "I am tell the truth!"            "How can we be certain?"         
+##  [7] "There is no way."                "I distrust you."                
+##  [9] "What are you talk about?"        "Shall we move on good then."    
+## [11] "I'm hungri let eat you alreadi?"
 ```
 
 ```r
@@ -2420,7 +2446,7 @@ stem_words(doggies, jumping, swims)
 ```
 
 ```
-## Error: there is no package called 'SnowballC'
+## [1] "doggi" "jump"  "swim"
 ```
 
 
@@ -2649,7 +2675,22 @@ sentSplit(DATA, "state", stem.col = TRUE)
 ```
 
 ```
-## Error: there is no package called 'SnowballC'
+##        person  tot sex adult code                       state                stem.text
+## 1         sam  1.1   m     0   K1            Computer is fun.           Comput is fun.
+## 2         sam  1.2   m     0   K1                Not too fun.             Not too fun.
+## 3        greg  2.1   m     0   K2     No it's not, it's dumb.       No it not it dumb.
+## 4     teacher  3.1   m     1   K3          What should we do?       What should we do?
+## 5         sam  4.1   m     0   K4        You liar, it stinks!       You liar it stink!
+## 6        greg  5.1   m     0   K5     I am telling the truth!     I am tell the truth!
+## 7       sally  6.1   f     0   K6      How can we be certain?   How can we be certain?
+## 8        greg  7.1   m     0   K7            There is no way.         There is no way.
+## 9         sam  8.1   m     0   K8             I distrust you.          I distrust you.
+## 10      sally  9.1   f     0   K9 What are you talking about? What are you talk about?
+## 11 researcher 10.1   f     1  K10           Shall we move on?        Shall we move on?
+## 12 researcher 10.2   f     1  K10                  Good then.               Good then.
+## 13       greg 11.1   m     0  K11                 I'm hungry.              I'm hungri.
+## 14       greg 11.2   m     0  K11                  Let's eat.                 Let eat.
+## 15       greg 11.3   m     0  K11                You already?             You alreadi?
 ```
 
 ```r
@@ -8963,7 +9004,7 @@ plot(div.mod, low = "yellow", grid = FALSE, values = TRUE)
 
 <h4 id="formality">Formality</h4>
 
-Formality is how contextualize a person's language use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 199b, 2002).  Heylighen & Dewaele (2002) have developed a measure of formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a>, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multiplied by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
+Formality is how contextualize a person's language use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 1999b, 2002).  Heylighen & Dewaele (2002) have developed a measure of formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a>, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multiplied by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
 <br><br>
 
 $$ F = 50(\frac{n_{f}-n_{c}}{N} + 1) $$
@@ -9178,7 +9219,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x12478c90>
+<environment: 0x12a2f6a0>
 ```
 
 ```r
@@ -9448,10 +9489,23 @@ $night
 
 <p id="disper2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/dispersion_plot.html" target="_blank"><code>dispersion_plot</code></a>** - *Example 1*<font size="5" color="orange">&diams;</font></p >
 
+
+```r
+with(rajSPLIT , dispersion_plot(dialogue, c("love", "night"),
+    grouping.var = list(fam.aff, sex), rm.vars = act))
+```
+
 ![plot of chunk unnamed-chunk-216](figure/unnamed-chunk-216.png) 
 
 
 <p id="disper2"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/dispersion_plot.html" target="_blank"><code>dispersion_plot</code></a>** - *Example 2: Color Schemes*<font size="5" color="orange">&diams;</font></p >
+
+
+```r
+with(rajSPLIT, dispersion_plot(dialogue, c("love", "night"),
+    bg.color = "black", grouping.var = list(fam.aff, sex),
+    color = "yellow", total.color = "white", horiz.color="grey20"))
+```
 
 ![plot of chunk unnamed-chunk-217](figure/unnamed-chunk-217.png) 
 
@@ -10065,32 +10119,31 @@ Because <a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank
 
 
 ```r
-tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE) +
-    scale_fill_hue(l=40)
+base <- tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), 
+    tot=FALSE, plot=FALSE) 
+base + scale_fill_hue(l=40)
 ```
 
-![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-2461.png) ![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-2462.png) 
+![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-2461.png) 
 
 ```r
-tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
-    scale_fill_brewer(palette="Spectral")
+base + scale_fill_brewer(palette="Spectral")
 ```
 
-![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-2463.png) ![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-2464.png) 
+![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-2462.png) 
 
 ```r
-tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
-    scale_fill_brewer(palette="Set1")
+base + scale_fill_brewer(palette="Set1")
 ```
 
-![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-2465.png) ![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-2466.png) 
+![plot of chunk unnamed-chunk-246](figure/unnamed-chunk-2463.png) 
 
 
 <p id="tot3"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/tot_plot.html" target="_blank"><code>tot_plot</code></a>** - *Add Mean +2/+3 sd* <font size="5" color="orange">&diams;</font></p >
 
 
 ```r
-tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
+base +
     scale_fill_brewer(palette="Set1") +
     geom_hline(aes(yintercept=mean(word.count))) +
     geom_hline(aes(yintercept=mean(word.count) + (2 *sd(word.count)))) +
@@ -10103,7 +10156,7 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
         y = mean(word.count) + (3 *sd(word.count)) + 2, label = "+3 sd")) 
 ```
 
-![plot of chunk unnamed-chunk-247](figure/unnamed-chunk-2471.png) ![plot of chunk unnamed-chunk-247](figure/unnamed-chunk-2472.png) 
+![plot of chunk unnamed-chunk-247](figure/unnamed-chunk-247.png) 
 
 
 <h4 id="venn">Venn Diagram</h4>
