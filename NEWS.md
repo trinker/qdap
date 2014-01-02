@@ -83,6 +83,10 @@ relatively new to CRAN, made these changes sensible at this point.
 
 * `beg2char` would not include the `char` if `include = TRUE` and `noc = 1`.
 
+* `cm_range2long` returned `NA`s for vectors containing multiple single values.  
+  See GitHub <a href="https://github.com/trinker/qdap/issues/144">issue #144</a> for more.
+
+
 <b>NEW FEATURES</b>
 
 *  The `cm_xxx2long` family of functions (`cm_df2long`, `cm_range2long` and 

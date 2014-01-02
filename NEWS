@@ -83,6 +83,10 @@ BUG FIXES
 
 * `beg2char` would not include the `char` if `include = TRUE` and `noc = 1`.
 
+* `cm_range2long` returned `NA`s for vectors containing multiple single values.  
+  See GitHub issue #144 for more.
+
+
 NEW FEATURES
 
 *  The `cm_xxx2long` family of functions (`cm_df2long`, `cm_range2long` and 
