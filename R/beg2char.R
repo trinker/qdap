@@ -42,7 +42,6 @@ function(text.var, char = " ", noc = 1, include = FALSE) {
     if(char %in% specchar) {
         char <- paste0("\\", char)
     }
-
     if (!include) {
         matchToNth <- function(char, n) {
             others <- paste0("[^", char, "]*") ## matches "[^_]*" if char is "_"
@@ -56,7 +55,7 @@ function(text.var, char = " ", noc = 1, include = FALSE) {
         ins <- paste(rep(paste0(char, ".+"), noc - 1), collapse="")
         rep <- paste0("^(.+", ins, inc, ").*$")
         if (noc == 1) {
-            rep <- paste0(char, ".*$")
+            rep <- paste0("(", char, ")", ".*$")
         }
         gsub(rep, "\\1", text.var)
     }

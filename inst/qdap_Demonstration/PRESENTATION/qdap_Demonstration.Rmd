@@ -1,0 +1,724 @@
+---
+title      : qdap Demonstration
+subtitle   : ...if you can dream up an analysis then qdap and R can help get you there
+author     : Tyler Rinker
+job        : University at Buffalo
+logo       : qdap_logo_clipped_rev_2.png
+biglogo    : 
+license    : 
+framework  : io2012
+highlighter: highlight.js
+hitheme    : tomorrow
+mode       : standalone
+widgets    : [mathjax, quiz, bootstrap]
+--- &twocol
+```{r setup, include=FALSE}
+# set global chunk options
+library(reports); library(slidify); library(knitcitations); library(knitr); library(qdap)
+opts_chunk$set(cache=FALSE, tidy = FALSE)
+
+
+#Reading in your own bib file:
+bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
+#cite in text using `r citet(bib[1])`
+internal <- TRUE
+```
+<style>
+body {
+  background-color: #000;
+}
+.quiz-option label{
+  display: inline;
+  font-size: 1em;
+}
+.refs {
+  padding-left: 80px;
+  text-indent: -35px;
+}
+ul.nav li::before { content: ""; } 
+ul.nav li{ font-size: 18px; line-height: 24px;}
+</style>
+
+
+
+## About Me ##
+
+
+*** =right
+
+`r VS(2)`
+- Former First Grade Teacher
+- Literacy PhD Student 
+- Quantitatively Bent
+- Accidental Programmer
+
+
+*** =left
+
+`r IM2("norah.png", width=350)`
+
+*** =pnotes
+
+## Research Interests
+
+- Engagement, Motivation and Feedback
+- Multimodal Analysis
+- Discourse Analysis
+- Data Visualization
+- Improving Research Methods
+
+--- &twocol
+
+## Why R?
+
+
+*** =left
+
+`r VS(2)`
+- Cutting Edge    
+- Powerful
+- Visualization  
+
+`r VS(4)` `r HS(4)` *Everything can be quantified...*
+
+
+*** =right
+
+`r VS(2)`
+`r IM2("r.jpg", width=350)`
+
+
+
+--- {class: class, tpl: tabs}
+
+## Why qdap?
+
+*** {class: active, id: qdap}
+
+`r IM2("whyqdap.png")`
+
+*** {id: Birth}
+
+## Frustration
+`r IM2("fustration.jpg", width = 400)`
+
+*** {id: Affordances}
+
+<h2> Affordances <img src="assets/img/dollar.jpg" width="100"></h2>
+
+- Fexible    
+- Bridge to `r HR("http://cran.r-project.org/", "5087")` + `r HR("http://www.bioconductor.org/", "749")` + `r HR("https://github.com", "?")` <font color="#DBDBDB">= <sup>+</sup>5836</font>
+
+- Dynamic <font color="#DBDBDB">(Field Driven)</font>      
+- Data Focused      
+
+
+
+---
+
+
+## Recomendations
+<br>
+>- `r IM2("logo_rstudio.jpg", width = 200, center = FALSE, link = "http://www.rstudio.com/")`         
+>- `r IM2("github-social.png", width = 200, center = FALSE, link ="https://github.com/")`          
+>- `r IM2("knitr.png", width = 200, center = FALSE, link ="http://yihui.name/knitr/")` &#43; `r IM2("latex.png", width = 160, center = FALSE, link = "http://en.wikipedia.org/wiki/LaTeX")`  `r HS(5)` <font size="2.5"><em>`r HR("C:/Users/trinker/Desktop/proximity/REPORT/proximity_measure.Rnw", ".Rmd")` `r HS(5)``r HR("C:/Users/trinker/Desktop/proximity/REPORT/proximity_measure.pdf", ".pdf")`
+</em></font>
+>- `r IM2("ggplot.png", width = 200, center = FALSE, link = "http://docs.ggplot2.org/current/")` <br><br><br><em><font size="2.5">press p</font></em>
+
+
+*** =pnotes
+
+`r IM2("ggplot2demo.png")`
+
+--- 
+
+# <center>Let's Dig In </center>
+<br>
+`r IM2("dig.jpg")`
+
+*** =pnotes
+
+## Agenda
+
+1. Installing qdap
+2. Projects
+3. Read In Data
+4. Word Counts and Descriptive Statistics
+6. Word Measures and Scoring
+7. Qualitative Coding System
+8. Visualizing Discourse Data
+9. Discussion
+
+---
+
+## Installing qdap
+
+<pre><code class="r"># install.packages("devtools", eval = FALSE)
+library(devtools)
+install_github(c("slidify", "slidifyLibraries"), "ramnathv", ref = "dev")
+install_github("knitcitations", "cboettig")
+install_github(c("reports", "qdapDictionaries", "qdap"), "trinker")
+install_github("ggthemes", "jrnold")
+install.packages("scales")
+ 
+invisible(lapply(c("qdap", "ggplot2", "ggthemes", "scales", "grid"), 
+    require, character.only = TRUE))
+</code></pre>
+
+`r VS(2)`
+
+<a href="https://github.com/trinker/qdap"><font size="3" color="#DBDBDB"><a href="https://github.com/trinker/qdap">https://github.com/trinker/qdap</a></font></a>
+
+
+--- .YT yt:chQlpEj8g2Q &youtube 
+
+## Projects
+
+*** =pnotes
+
+`r IF("vid1.html")`
+
+--- 
+
+## General qdap Function Format
+<br>
+<pre><code>Function(Text_Variable, list(Grouping_Variables))
+</code></pre>
+
+`r VS(2)`
+
+<pre><code>with(Data_Set, Function(Text_Variable, list(Grouping_Variables)))
+</code></pre>
+
+--- 
+
+## Read In Data
+
+- Word (docx)
+- Text (txt)
+- Excel (csv/xlsx)
+
+--- 
+
+## Read In Data
+
+`r IM2("transcript.png", width= 850)`
+
+--- 
+
+## Read In Data
+
+```{r echo=2:3, comment = NA}
+doc1 <- system.file("extdata/transcripts/trans1.docx", package = "qdap")
+dat1 <- read.transcript(doc1)
+truncdf(dat1, 50)
+```
+
+`r VS(2)`
+Plenty of parsing tools to clean up!!!
+
+---
+
+## Our Data Set
+
+```{r eval = FALSE}
+DATA
+```
+
+```{r echo=FALSE, results="asis"}
+suppressMessages(library(xtable))
+print(xtable(DATA), type="html")
+```
+
+---
+
+## Word Counts and Descriptive Statistics
+
+1.  Word Frequency Matrix
+2.  Word Stats
+3.  Term Counts
+4.  Question Types
+5.  Parts of Speech     
+6.  Syllablication
+
+
+---
+
+### Word Frequency Matrix
+
+```{r}
+with(DATA, wfm(state, person))[1:14, ]
+```
+
+---
+
+### Word Frequency Matrix
+
+```{r, fig.align = "center", fig.width=12, fig.height=5}
+plot(with(DATA, wfm(state, person)), values = TRUE, plot = FALSE) +
+   coord_flip()
+```    
+    
+
+---
+
+### Word Frequency Matrix (Correlations)
+
+```{r, fig.align = "center", fig.height=6}
+dat2 <- wfm(DATA$state, seq_len(nrow(DATA)))
+qheat(cor(t(dat2)), low = "yellow", high = "red",
+    grid = "grey90", diag.na = TRUE, by.column = NULL)
+```    
+    
+
+---
+
+### Word Stats (1 of 3)
+
+```{r, results = "hide"}
+(desc_wrds <- with(mraja1spl, word_stats(dialogue, person, tot = tot)))
+```
+
+```{r, include = FALSE}
+desc_wrds2 <- with(mraja1spl, word_stats(desc_wrds, person, tot = tot, digits = 1))
+```
+
+```{r, echo = FALSE, comment = NULL}
+desc_wrds2$gts[, c(1, 2:9)]
+```
+
+
+---
+
+
+### Word Stats (2 of 3)
+
+```{r, echo = FALSE, comment = NULL}
+desc_wrds2$gts[, c(1, 10:19)]
+```
+
+
+---
+
+
+### Word Stats  (3 of 3)
+
+```{r, echo = FALSE, comment = NULL}
+desc_wrds2$gts[, c(1, 20:26)]
+```
+
+---
+
+### Word Stats Plot
+
+```{r, fig.align = "center", fig.width=13, fig.height=6.5}
+plot(desc_wrds, label = TRUE, high="red")
+```    
+
+
+---
+
+### Term Counts
+
+```{r}
+ml2 <- list(
+    theme_1 = c(" the ", " a ", " an "),
+    theme_2 = c(" I'" ),
+    "good",
+    the_words = c("the", " the ", " the", "the ")
+)
+```
+
+```{r}
+out <- with(raj.act.1,  termco(dialogue, person, ml2))
+```
+
+*** =pnotes
+
+`r VS(2)` <font size="2.5">\*<em>Press <b>p</b></em></font>
+```{r}
+ml2 <- list(
+    theme_1 = c(" the ", " a ", " an "),
+    theme_2 = c(" I'" ),
+    "good",
+    the_words = c("the", " the ", " the", "the ")
+)
+```
+
+
+---
+
+
+### Term Counts
+
+```{r, echo = FALSE, comment=NA}
+out
+```
+
+*** =pnotes
+
+```{r}
+ml2 <- list(
+    theme_1 = c(" the ", " a ", " an "),
+    theme_2 = c(" I'" ),
+    "good",
+    the_words = c("the", " the ", " the", "the ")
+)
+```
+
+---
+
+
+### Term Counts Plot
+
+```{r, fig.align = "center", fig.width=16, fig.height=6.5}
+plot(out, high = "red", low = "yellow", label = TRUE)
+```
+
+---
+
+### Question Types
+
+```{r, comment = NA}
+(x <- with(mraja1spl, question_type(dialogue, person)))
+```
+
+---
+
+### Question Types Plot
+
+```{r, fig.align = "center", fig.width=7, fig.height=6}
+plot(x)
+```
+
+---
+
+### Parts of Speech   
+
+
+<pre><code class="r">(posbydat <- with(DATA, pos_by(state, list(adult, sex))))
+</code></pre>
+
+```{r echo = FALSE}
+load("pos.RData")
+posbydat
+```
+
+`r VS(3)` `r HR("http://faculty.washington.edu/dillon/GramResources/penntable.html", "Penn Treebank Project (1991)")`
+
+*** =pnotes
+
+```{r}
+posbydat[["POStagged"]]
+```
+
+---
+
+### Parts of Speech Plot
+
+```{r, fig.align = "center"}
+plot(posbydat, label = TRUE)
+```
+
+---
+
+## Word Measures and Scoring
+
+1. Readability   
+2. Formality    
+3. Polarity
+
+---
+
+### Readability   
+
+1. Automated Readability Index    
+2. Coleman Liau    
+3. SMOG    
+4. Flesch Kincaid     
+5. Fry  
+6. Linsear Write
+
+---
+
+### Readability
+
+```{r, comment = NA}
+with(rajSPLIT, coleman_liau(dialogue, list(fam.aff)))
+```
+
+---
+
+### Formality
+
+Heylighen & Dewaele(1999a, 1999b, 2002)
+
+<br>
+
+$$ F = 50(\frac{n_{f}-n_{c}}{N} + 1) $$
+
+Where:
+<br>
+
+$$ f = \left \{noun, \;adjective, \;preposition, \;article\right \} $$
+$$ c = \left \{pronoun, \;verb, \;adverb, \;interjection\right \} $$
+$$ N = \sum{(f \;+ \;c \;+ \;conjunctions)} $$
+<br>
+
+---
+
+### Formality
+
+```{r, eval=FALSE}
+(form <- with(raj, formality(dialogue, act)))
+```
+
+```{r, echo = FALSE, comment = NA}
+(form <- with(raj, formality(rajPOS, act)))
+```
+
+
+---
+
+### Formality Plot
+
+```{r, fig.align = "center", fig.width=14, fig.height=6}
+plot(form, bar.colors=c("Set2", "RdBu"))
+```
+
+---
+
+### Polarity
+
+```{r, comment = NA, message=FALSE}
+(poldat <- with(mraja1spl, polarity(dialogue, list(sex, fam.aff, died))))
+```
+
+---
+
+```{r, fig.align = "center", fig.width=14, fig.height=8.5, echo=FALSE}
+plot(poldat)
+```
+
+
+---
+
+## Qualitative Coding System
+
+Apply codes to:
+
+- The dialogue    
+- The time spans     
+
+---
+
+<pre><code class="r">codes <- qcv(AA, BB, CC)
+X <- cm_df.transcript(DATA$state, DATA$person, file="DATA.txt")
+</code></pre>
+
+<pre><code>sam:
+                                  
+     1        2  3    4   5   6   
+     Computer is fun. Not too fun.
+greg:
+                           
+     7  8    9    10   11   
+     No it's not, it's dumb.
+teacher:
+                       
+     12   13     14 15 
+     What should we do?
+sam:
+                         
+     16  17    18 19     
+     You liar, it stinks!
+</code></pre>
+
+---
+
+`r IM2("transcript2.png", width=800)`
+`r VS(1)`
+Coding time spans works similarly...
+<br><br><em><font size="2.5">press p</font></em>
+
+*** =pnotes
+
+```{r}
+x <- list(
+    transcript_time_span = qcv(00:00 - 1:12:00),
+    A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 
+        12.00:14.00, 00.51.00:00.59.00"),
+    B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00,
+        9.00, 30.00:39.00, 1.12.00:1.19.01"),
+    C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
+)
+```
+
+---
+
+### After Reading Qualitative Codes...
+
+```{r comment=NA}
+(y <- cm_2long(x))
+```
+
+---
+
+### Gantt Plot of Codes
+
+```{r, fig.align = "center", fig.width=8, fig.height=2.5}
+plot(y)
+```
+
+
+---
+
+### Summary of Codes
+
+```{r, fig.align = "center", fig.width=6, fig.height=3, comment=NA, message=FALSE}
+summary(y)
+plot(summary(y))
+```
+
+---
+
+
+## Visualizing Discourse Data
+
+1. Lexical Dispersion Plot     
+2. Word Cloud    
+3. Turn of Talk Plot    
+4. Venn Diagram    
+5. Word Network Plot    
+
+---
+
+### Lexical Dispersion Plot
+
+```{r, fig.width = 15, fig.height = 3.25}
+with(rajSPLIT , dispersion_plot(dialogue, c("love", "night"),
+    grouping.var = list(fam.aff, sex), rm.vars = act))
+```
+
+---
+
+### Lexical Dispersion Plot
+
+```{r echo = FALSE, fig.align = "center", fig.width=13}
+wrds <- word_list(pres_debates2012$dialogue, stopwords = Top200Words)
+wrds2 <- spaste(wrds[["rfswl"]][["all"]][, "WORD"])
+wrds2 <- c(" governor~~romney ", wrds2[-c(3, 12)])
+with(pres_debates2012 , dispersion_plot(dialogue, wrds2, rm.vars = time, color="black", bg.color="white"))
+```
+
+---
+
+## Word Cloud (Colored Terms) 
+
+<pre><code>terms <- list(
+    I = c("i", "i'm"),
+    mal = qcv(stinks, dumb, distrust),
+    articles = qcv(the, a, an),
+    pronoun = qcv(we, you)
+)
+
+with(DATA, trans_cloud(state, target.words=terms,
+    cloud.colors=qcv(red, green, blue, black, gray65),
+    expand.target=FALSE, proportional=TRUE, legend=c(names(terms),
+    "other")))
+ </code></pre>   
+    
+```{r, results='hide', include = FALSE}
+terms <- list(
+    I = c("i", "i'm"),
+    mal = qcv(stinks, dumb, distrust),
+    articles = qcv(the, a, an),
+    pronoun = qcv(we, you)
+)
+
+with(DATA, trans_cloud(state, target.words=terms,
+    cloud.colors=qcv(red, green, blue, black, gray65),
+    expand.target=FALSE, proportional=TRUE, legend=c(names(terms),
+    "other")))
+```
+
+---
+
+## Word Cloud Plot (Colored Terms) 
+
+```{r, echo=FALSE, fig.align = "center", fig.width=8, fig.height=8}
+with(DATA, trans_cloud(state, target.words=terms, 
+    cloud.colors=qcv(red, green, blue, black, gray65),
+    expand.target=FALSE, proportional=TRUE, legend=c(names(terms),
+    "other"), max.word.size = 8, min.word.size = .5))
+```
+
+---
+
+## Gradient Cloud
+
+```{r echo=FALSE}
+DATA2 <- DATA
+DATA2$state <- space_fill(DATA$state, c("is fun", "too fun", "you liar"))
+```
+
+<pre><code>gradient_cloud(DATA$state, DATA$sex, title="Houghton Colors", 
+    max.word.size = 8, min.word.size = .01, X ="purple" , Y = "yellow")
+</code></pre>
+
+---
+
+## Gradient Cloud 
+
+```{r echo=FALSE, fig.align = "center", fig.width=8, fig.height=8}
+gradient_cloud(DATA2$state, DATA2$sex, title="Gender Word Use", 
+    max.word.size = 8, min.word.size = .01, X ="red" , Y = "blue")
+```
+
+---
+
+## Turn of Talk Plot    
+`r VS(1)`
+```{r, echo = FALSE, fig.align = "center", fig.width=15, fig.height=5}
+tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE, plot=FALSE)+
+    scale_fill_brewer(palette="Set1") +
+    geom_hline(aes(yintercept=mean(word.count))) +
+    geom_hline(aes(yintercept=mean(word.count) + (2 *sd(word.count)))) +
+    geom_hline(aes(yintercept=mean(word.count) + (3 *sd(word.count)))) +
+    geom_text(parse=TRUE, hjust=0, vjust=0, size = 3, aes(x = 2, 
+        y = mean(word.count) + 2, label = "bar(x)")) +
+    geom_text(hjust=0, vjust=0, size = 3, aes(x = 1, 
+        y = mean(word.count) + (2 *sd(word.count)) + 2, label = "+2 sd")) +
+    geom_text(hjust=0, vjust=0,  size = 3, aes(x = 1, 
+        y = mean(word.count) + (3 *sd(word.count)) + 2, label = "+3 sd")) +
+	ggtitle("Romeo & Juliet:\nAct 1 Turns of Talk")
+```
+
+---
+
+
+## Venn Diagram    
+
+```{r, fig.align = "center", fig.width=7.5, fig.height=7.5}
+with(DATA , trans_venn(state, person, legend.location = "topright"))
+```
+
+---
+
+
+### Word Network Plot
+
+```{r, fig.align = "center"}
+word_network_plot(text.var=DATA$state, DATA$person, stopwords=NULL)
+```
+
+---
+
+## Discussion
+
+1. How might qdap + R fit into your workflow?
+2. What do you want to know more about?
+3. Are there any points that need to be clarified?
+4. &hellip;
+
+

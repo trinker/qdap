@@ -81,6 +81,8 @@ relatively new to CRAN, made these changes sensible at this point.
   category.  For instance "How'd you like it?" was not classified as a how 
   question.
 
+* `beg2char` would not include the `char` if `include = TRUE` and `noc = 1`.
+
 <b>NEW FEATURES</b>
 
 *  The `cm_xxx2long` family of functions (`cm_df2long`, `cm_range2long` and 
