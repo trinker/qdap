@@ -27,6 +27,4 @@ notifications:
 env:
    global:
      - R_BUILD_ARGS="--resave-data=best" 
-     - R_CHECK_ARGS="--as-cran"
-     - BOOTSTRAP_LATEX="1"
      - DISPLAY=:99.0

@@ -42,6 +42,7 @@ Suggests:
     lsa,
     plyr,
     proxy,
+    Rgraphviz,
     SnowballC
 LazyData: TRUE
 Description: This package automates many of the tasks associated with
