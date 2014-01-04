@@ -16,6 +16,9 @@ install:
   - ./travis-tool.sh install_github trinker/reports
   - ./travis-tool.sh install_github trinker/qdapDictionaries
   - ./travis-tool.sh install_deps
+  - Rscript -e "source('http://bioconductor.org/biocLite.R');
+      biocLite();
+      biocLite('Rgraphviz')"
 notifications:
   email:
     on_success: change
@@ -23,4 +26,7 @@ notifications:
 
 env:
    global:
+     - R_BUILD_ARGS="--resave-data=best" 
+     - R_CHECK_ARGS="--as-cran"
+     - BOOTSTRAP_LATEX="1"
      - DISPLAY=:99.0
