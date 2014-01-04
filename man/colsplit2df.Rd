@@ -3,11 +3,10 @@
 \alias{lcolsplit2df}
 \title{Wrapper for colSplit that Returns Dataframe(s)}
 \usage{
-  colsplit2df(dataframe, splitcols = 1, new.names = NULL,
-    sep = ".", keep.orig = FALSE, name.sep = "&",
-    index.names = FALSE)
+colsplit2df(dataframe, splitcols = 1, new.names = NULL, sep = ".",
+  keep.orig = FALSE, name.sep = "&", index.names = FALSE)
 
-  lcolsplit2df(qdap.list, keep.orig = FALSE)
+lcolsplit2df(qdap.list, keep.orig = FALSE)
 }
 \arguments{
   \item{dataframe}{A dataframe with a column that has been
@@ -39,25 +38,23 @@
   column.}
 }
 \value{
-  \code{colsplit2df} - returns a dataframe with the
-  \code{paste2} column split into new columns.
+\code{colsplit2df} - returns a dataframe with the
+\code{paste2} column split into new columns.
 
-  \code{lcolsplit2df} - returns a list of dataframes with
-  the \code{\link[qdap]{paste2}} column split into new
-  columns.
+\code{lcolsplit2df} - returns a list of dataframes with the
+\code{\link[qdap]{paste2}} column split into new columns.
 }
 \description{
-  \code{colsplit2df} - Wrapper for
-  \code{\link[qdap]{colSplit}} that returns a dataframe.
+\code{colsplit2df} - Wrapper for
+\code{\link[qdap]{colSplit}} that returns a dataframe.
 
-  \code{lcolsplit2df} - Wrapper for \code{colsplit2df}
-  designed for qdap lists that returns a list dataframes.
+\code{lcolsplit2df} - Wrapper for \code{colsplit2df}
+designed for qdap lists that returns a list dataframes.
 }
 \note{
-  \code{\link[qdap]{lcolsplit2df}} is a convenience
-  function that is less flexible than
-  \code{\link[qdap]{colsplit2df}} but operates on multiple
-  dataframes at once.
+\code{\link[qdap]{lcolsplit2df}} is a convenience function
+that is less flexible than \code{\link[qdap]{colsplit2df}}
+but operates on multiple dataframes at once.
 }
 \section{Warning}{
   This will strip the class of the qdap object.
@@ -95,8 +92,8 @@ ltruncdf(z)
 }
 }
 \seealso{
-  \code{\link[qdap]{colSplit}}, \code{\link{colpaste2df}}
-  \code{\link{paste2}}
+\code{\link[qdap]{colSplit}}, \code{\link{colpaste2df}}
+\code{\link{paste2}}
 }
 \keyword{column-split}
 

@@ -3,13 +3,11 @@
 \alias{multigsub}
 \title{Multiple gsub}
 \usage{
-  multigsub(pattern, replacement = NULL, text.var,
-    leadspace = FALSE, trailspace = FALSE, fixed = TRUE,
-    trim = TRUE, ...)
+multigsub(pattern, replacement = NULL, text.var, leadspace = FALSE,
+  trailspace = FALSE, fixed = TRUE, trim = TRUE, ...)
 
-  mgsub(pattern, replacement = NULL, text.var,
-    leadspace = FALSE, trailspace = FALSE, fixed = TRUE,
-    trim = TRUE, ...)
+mgsub(pattern, replacement = NULL, text.var, leadspace = FALSE,
+  trailspace = FALSE, fixed = TRUE, trim = TRUE, ...)
 }
 \arguments{
   \item{pattern}{Character string to be matched in the
@@ -38,17 +36,17 @@
   \code{\link[base]{gsub}}.}
 }
 \value{
-  Returns a vector with the pattern replaced.
+Returns a vector with the pattern replaced.
 }
 \description{
-  A wrapper for \code{\link[base]{gsub}} that takes a
-  vector of search terms and a vector or single value of
-  replacements.
+A wrapper for \code{\link[base]{gsub}} that takes a vector
+of search terms and a vector or single value of
+replacements.
 }
 \note{
-  The replacements occur sequentially rather than all at
-  once.  This means a previous (first in pattern string)
-  sub could alter a later sub.
+The replacements occur sequentially rather than all at
+once.  This means a previous (first in pattern string) sub
+could alter a later sub.
 }
 \examples{
 \dontrun{
@@ -58,6 +56,6 @@ mgsub("[[:punct:]]", "PUNC", DATA$state, fixed = FALSE)
 }
 }
 \seealso{
-  \code{\link[base]{gsub}}
+\code{\link[base]{gsub}}
 }
 

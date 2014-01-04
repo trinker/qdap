@@ -2,7 +2,7 @@
 \alias{print.sum_cmspans}
 \title{Prints a sum_cmspans object}
 \usage{
-  \method{print}{sum_cmspans} (x, digits = NULL, ...)
+\method{print}{sum_cmspans}(x, digits = NULL, ...)
 }
 \arguments{
   \item{x}{The sum_cmspans object}
@@ -13,6 +13,6 @@
   \item{\ldots}{ignored}
 }
 \description{
-  Prints a sum_cmspans object.
+Prints a sum_cmspans object.
 }
 

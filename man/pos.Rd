@@ -4,14 +4,14 @@
 \alias{pos_tags}
 \title{Parts of Speech Tagging}
 \usage{
-  pos(text.var, parallel = FALSE, cores = detectCores()/2,
-    progress.bar = TRUE, na.omit = FALSE, digits = 1,
-    percent = TRUE, zero.replace = 0, gc.rate = 10)
+pos(text.var, parallel = FALSE, cores = detectCores()/2,
+  progress.bar = TRUE, na.omit = FALSE, digits = 1, percent = TRUE,
+  zero.replace = 0, gc.rate = 10)
 
-  pos_by(text.var, grouping.var = NULL, digits = 1,
-    percent = TRUE, zero.replace = 0, ...)
+pos_by(text.var, grouping.var = NULL, digits = 1, percent = TRUE,
+  zero.replace = 0, ...)
 
-  pos_tags(type = "pretty")
+pos_tags(type = "pretty")
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -63,42 +63,41 @@
   previous output types).}
 }
 \value{
-  \code{pos} - returns a list of 4: \item{text}{The
-  original text} \item{POStagged}{The original words
-  replaced with parts of speech in context.}
-  \item{POSprop}{Dataframe of the proportion of parts of
-  speech by row.} \item{POSfreq}{Dataframe of the frequency
-  of parts of speech by row.} \item{POSrnp}{Dataframe of
-  the frequency and proportions of parts of speech by row.}
-  \item{percent}{The value of percent used for plotting
-  purposes.} \item{zero.replace}{The value of zero.replace
-  used for plotting purposes.}
+\code{pos} - returns a list of 4: \item{text}{The original
+text} \item{POStagged}{The original words replaced with
+parts of speech in context.} \item{POSprop}{Dataframe of
+the proportion of parts of speech by row.}
+\item{POSfreq}{Dataframe of the frequency of parts of
+speech by row.} \item{POSrnp}{Dataframe of the frequency
+and proportions of parts of speech by row.}
+\item{percent}{The value of percent used for plotting
+purposes.} \item{zero.replace}{The value of zero.replace
+used for plotting purposes.}
 
-  \code{pos_by} - returns a list of 6: \item{text}{The
-  original text} \item{POStagged}{The original words
-  replaced with parts of speech in context.}
-  \item{POSprop}{Dataframe of the proportion of parts of
-  speech by row.} \item{POSfreq}{Dataframe of the frequency
-  of parts of speech by row.} \item{POSrnp}{Dataframe of
-  the frequency and proportions of parts of speech by row.}
-  \item{pos.by.prop}{Dataframe of the proportion of parts
-  of speech by grouping variable.}
-  \item{pos.by.freq}{Dataframe of the frequency of parts of
-  speech by grouping variable.} \item{pos.by.rnp}{Dataframe
-  of the frequency and proportions of parts of speech by
-  grouping variable.} \item{percent}{The value of percent
-  used for plotting purposes.} \item{zero.replace}{The
-  value of zero.replace used for plotting purposes.}
+\code{pos_by} - returns a list of 6: \item{text}{The
+original text} \item{POStagged}{The original words replaced
+with parts of speech in context.} \item{POSprop}{Dataframe
+of the proportion of parts of speech by row.}
+\item{POSfreq}{Dataframe of the frequency of parts of
+speech by row.} \item{POSrnp}{Dataframe of the frequency
+and proportions of parts of speech by row.}
+\item{pos.by.prop}{Dataframe of the proportion of parts of
+speech by grouping variable.} \item{pos.by.freq}{Dataframe
+of the frequency of parts of speech by grouping variable.}
+\item{pos.by.rnp}{Dataframe of the frequency and
+proportions of parts of speech by grouping variable.}
+\item{percent}{The value of percent used for plotting
+purposes.} \item{zero.replace}{The value of zero.replace
+used for plotting purposes.}
 }
 \description{
-  \code{pos} - Apply part of speech tagger to
-  transcript(s).
+\code{pos} - Apply part of speech tagger to transcript(s).
 
-  \code{pos_by} - Apply part of speech tagger to
-  transcript(s) by zero or more grouping variable(s).
+\code{pos_by} - Apply part of speech tagger to
+transcript(s) by zero or more grouping variable(s).
 
-  \code{pos_tags} - Useful for interpreting the parts of
-  speech tags created by pos and pos_by.
+\code{pos_tags} - Useful for interpreting the parts of
+speech tags created by pos and pos_by.
 }
 \examples{
 \dontrun{
@@ -133,11 +132,11 @@ out2 <- with(DATA, pos_by(posbydat, list(adult, sex)))
 }
 }
 \references{
-  \href{openNLP}{http:/opennlp.apache.org}
+\href{openNLP}{http:/opennlp.apache.org}
 }
 \seealso{
-  \code{\link[openNLP]{Maxent_POS_Tag_Annotator}},
-  \code{\link[qdap]{colcomb2class}}
+\code{\link[openNLP]{Maxent_POS_Tag_Annotator}},
+\code{\link[qdap]{colcomb2class}}
 }
 \keyword{parts-of-speech}
 

@@ -2,7 +2,7 @@
 \alias{cm_dummy2long}
 \title{Convert cm_combine.dummy Back to Long}
 \usage{
-  cm_dummy2long(cm_long2dummy_obj, rm.var = "time")
+cm_dummy2long(cm_long2dummy_obj, rm.var = "time")
 }
 \arguments{
   \item{cm_long2dummy_obj}{An object from cm_combine.dummy}
@@ -11,11 +11,11 @@
   Default is \code{"time"}.}
 }
 \value{
-  Returns a dataframe with co-occurrences of provided code
-  columns.
+Returns a dataframe with co-occurrences of provided code
+columns.
 }
 \description{
-  \code{cm_combine.dummy} back to long.
+\code{cm_combine.dummy} back to long.
 }
 \examples{
 \dontrun{
@@ -52,7 +52,7 @@ plot(cm_dummy2long(A))
 }
 }
 \seealso{
-  \code{\link[qdap]{cm_long2dummy}},
-  \code{\link[qdap]{cm_combine.dummy}}
+\code{\link[qdap]{cm_long2dummy}},
+\code{\link[qdap]{cm_combine.dummy}}
 }
 

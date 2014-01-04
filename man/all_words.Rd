@@ -2,8 +2,8 @@
 \alias{all_words}
 \title{Searches Text Column for Words}
 \usage{
-  all_words(text.var, begins.with = NULL, contains = NULL,
-    alphabetical = TRUE, apostrophe.remove = FALSE, ...)
+all_words(text.var, begins.with = NULL, contains = NULL,
+  alphabetical = TRUE, apostrophe.remove = FALSE, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -27,20 +27,19 @@
   \code{\link[qdap]{strip}}.}
 }
 \value{
-  Returns a dataframe with frequency counts of words that
-  begin with or contain the provided word chunk.
+Returns a dataframe with frequency counts of words that
+begin with or contain the provided word chunk.
 }
 \description{
-  A convenience function to find words that begin with or
-  contain a letter chunk and returns the frequency counts
-  of the number of occurrences of each word.
+A convenience function to find words that begin with or
+contain a letter chunk and returns the frequency counts of
+the number of occurrences of each word.
 }
 \note{
-  Cannot provide both \code{begins.with} and
-  \code{contains} arguments at once.  If both begins.with
-  and contains are \code{NULL}.
-  \code{\link[qdap]{all_words}} returns a frequency count
-  for all words.
+Cannot provide both \code{begins.with} and \code{contains}
+arguments at once.  If both begins.with and contains are
+\code{NULL}. \code{\link[qdap]{all_words}} returns a
+frequency count for all words.
 }
 \examples{
 \dontrun{
@@ -54,6 +53,6 @@ head(x3, 10)
 }
 }
 \seealso{
-  \code{\link[qdap]{term_match}}
+\code{\link[qdap]{term_match}}
 }
 

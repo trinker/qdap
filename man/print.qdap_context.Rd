@@ -2,9 +2,8 @@
 \alias{print.qdap_context}
 \title{Prints a qdap_context object}
 \usage{
-  \method{print}{qdap_context} (x, file = NULL,
-    pretty = TRUE, width = 70, sep.block = TRUE,
-    double_space = TRUE, ...)
+\method{print}{qdap_context}(x, file = NULL, pretty = TRUE, width = 70,
+  sep.block = TRUE, double_space = TRUE, ...)
 }
 \arguments{
   \item{x}{The qdap_context object}
@@ -31,6 +30,6 @@
   \item{\ldots}{ignored}
 }
 \description{
-  Prints a qdap_context object
+Prints a qdap_context object
 }
 

@@ -2,8 +2,8 @@
 \alias{scrubber}
 \title{Clean Imported Text}
 \usage{
-  scrubber(text.var, num2word = FALSE, rm.quote = TRUE,
-    fix.comma = TRUE, fix.space = TRUE, ...)
+scrubber(text.var, num2word = FALSE, rm.quote = TRUE, fix.comma = TRUE,
+  fix.space = TRUE, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -24,12 +24,12 @@
   \code{\link[qdap]{replace_number}}.}
 }
 \value{
-  Returns a parsed character vector.
+Returns a parsed character vector.
 }
 \description{
-  Use to clean text variables when importing a new data
-  set.  Removes extra white spaces other textual anomalies
-  that may cause errors.
+Use to clean text variables when importing a new data set.
+Removes extra white spaces other textual anomalies that may
+cause errors.
 }
 \examples{
 \dontrun{
@@ -39,7 +39,7 @@ scrubber(x, TRUE)
 }
 }
 \seealso{
-  \code{\link[qdap]{strip}}
+\code{\link[qdap]{strip}}
 }
 \keyword{clean}
 \keyword{parse,}

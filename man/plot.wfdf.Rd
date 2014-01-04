@@ -2,7 +2,7 @@
 \alias{plot.wfdf}
 \title{Plots a wfdf object}
 \usage{
-  \method{plot}{wfdf} (x, ...)
+\method{plot}{wfdf}(x, ...)
 }
 \arguments{
   \item{x}{The wfdf object}
@@ -11,6 +11,6 @@
   \code{\link[qdap]{plot.wfm}}.}
 }
 \description{
-  Plots a wfdf object.
+Plots a wfdf object.
 }
 

@@ -2,7 +2,7 @@
 \alias{print.dissimilarity}
 \title{Prints a dissimilarity object}
 \usage{
-  \method{print}{dissimilarity} (x, digits = 3, ...)
+\method{print}{dissimilarity}(x, digits = 3, ...)
 }
 \arguments{
   \item{x}{The dissimilarity object}
@@ -12,6 +12,6 @@
   \item{\ldots}{ignored}
 }
 \description{
-  Prints a dissimilarity object.
+Prints a dissimilarity object.
 }
 

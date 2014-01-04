@@ -1,15 +1,13 @@
 \name{Search}
-\alias{boolean_search}
 \alias{Search}
+\alias{boolean_search}
 \title{Search Columns of a Data Frame}
 \usage{
-  Search(dataframe, term, column.name = NULL,
-    max.distance = 0.02, ...)
+Search(dataframe, term, column.name = NULL, max.distance = 0.02, ...)
 
-  boolean_search(text.var, terms, ignore.case = TRUE,
-    values = FALSE, exclude = NULL,
-    apostrophe.remove = FALSE, char.keep = NULL,
-    digit.remove = FALSE)
+boolean_search(text.var, terms, ignore.case = TRUE, values = FALSE,
+  exclude = NULL, apostrophe.remove = FALSE, char.keep = NULL,
+  digit.remove = FALSE)
 }
 \arguments{
   \item{dataframe}{A dataframe object to search.}
@@ -66,26 +64,26 @@
   \code{match.list}.}
 }
 \value{
-  \code{Search} - Returns the rows of the data frame that
-  match the search term.
+\code{Search} - Returns the rows of the data frame that
+match the search term.
 
-  \code{boolean_search} - Returns the values (or indices)
-  of a vector of strings that match given terms.
+\code{boolean_search} - Returns the values (or indices) of
+a vector of strings that match given terms.
 }
 \description{
-  \code{Search} - Find terms located in columns of a data
-  frame.
+\code{Search} - Find terms located in columns of a data
+frame.
 
-  \code{boolean_search} - Conducts a Boolean search for
-  terms/strings within a character vector.
+\code{boolean_search} - Conducts a Boolean search for
+terms/strings within a character vector.
 }
 \details{
-  The terms string is first split by the OR separators into
-  a list. Next the list of vectors is split on the AND
-  separator to produce a list of vectors of seach terms.
-  Each sentence is matched agains the terms.  For a
-  sentence to be counted it must fit all of the terms in an
-  AND Boolean or one of the conditions in an OR Boolean.
+The terms string is first split by the OR separators into a
+list. Next the list of vectors is split on the AND
+separator to produce a list of vectors of seach terms.
+Each sentence is matched agains the terms.  For a sentence
+to be counted it must fit all of the terms in an AND
+Boolean or one of the conditions in an OR Boolean.
 }
 \examples{
 \dontrun{
@@ -127,8 +125,8 @@ trans_context(raj$dialogue, raj$person, inds2)
 }
 }
 \seealso{
-  \code{\link[qdap]{trans_context}}
+\code{\link[qdap]{trans_context}}
 
-  \code{\link[qdap]{termco}}
+\code{\link[qdap]{termco}}
 }
 

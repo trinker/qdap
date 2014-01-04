@@ -2,8 +2,7 @@
 \alias{plot.sent_split}
 \title{Plots a sent_split Object}
 \usage{
-  \method{plot}{sent_split} (x, text.var = NULL,
-    rm.var = NULL, ...)
+\method{plot}{sent_split}(x, text.var = NULL, rm.var = NULL, ...)
 }
 \arguments{
   \item{x}{The sent_split object.}
@@ -18,6 +17,6 @@
   \item{\ldots}{Other arguments passed to \code{tot_plot}.}
 }
 \description{
-  Plots a sent_split object.
+Plots a sent_split object.
 }
 

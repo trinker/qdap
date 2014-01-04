@@ -2,8 +2,7 @@
 \alias{cm_combine.dummy}
 \title{Find Co-occurrence Between Dummy Codes}
 \usage{
-  cm_combine.dummy(cm.l2d.obj, combine.code,
-    rm.var = "time", overlap = TRUE)
+cm_combine.dummy(cm.l2d.obj, combine.code, rm.var = "time", overlap = TRUE)
 }
 \arguments{
   \item{cm.l2d.obj}{An object from
@@ -24,11 +23,11 @@
   an integer and wrapped with quotes.}
 }
 \value{
-  Returns a dataframe with co-occurrences of provided code
-  columns.
+Returns a dataframe with co-occurrences of provided code
+columns.
 }
 \description{
-  Combine code columns where they co-occur.
+Combine code columns where they co-occur.
 }
 \examples{
 \dontrun{
@@ -63,7 +62,7 @@ cm_combine.dummy(D2, combine.code = combines)
 }
 }
 \seealso{
-  \code{\link[qdap]{cm_long2dummy}}
+\code{\link[qdap]{cm_long2dummy}}
 }
 \keyword{co-occurrence}
 

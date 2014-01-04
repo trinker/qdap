@@ -2,7 +2,7 @@
 \alias{print.kullback_leibler}
 \title{Prints a kullback_leibler Object.}
 \usage{
-  \method{print}{kullback_leibler} (x, digits = 3, ...)
+\method{print}{kullback_leibler}(x, digits = 3, ...)
 }
 \arguments{
   \item{x}{The kullback_leibler object}
@@ -12,6 +12,6 @@
   \item{\ldots}{ignored}
 }
 \description{
-  Prints a kullback_leibler object.
+Prints a kullback_leibler object.
 }
 

@@ -2,7 +2,7 @@
 \alias{duplicates}
 \title{Find Duplicated Words in a Text String}
 \usage{
-  duplicates(string, threshold = 1)
+duplicates(string, threshold = 1)
 }
 \arguments{
   \item{string}{A character string.}
@@ -11,11 +11,11 @@
   repeats.}
 }
 \value{
-  Returns a vector of all duplicated words/chunks.
+Returns a vector of all duplicated words/chunks.
 }
 \description{
-  Find duplicated word/word chunks in a string.  Intended
-  for internal use.
+Find duplicated word/word chunks in a string.  Intended for
+internal use.
 }
 \examples{
 \dontrun{

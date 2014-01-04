@@ -2,7 +2,7 @@
 \alias{print.sums_gantt}
 \title{Prints a sums_gantt object}
 \usage{
-  \method{print}{sums_gantt} (x, ...)
+\method{print}{sums_gantt}(x, ...)
 }
 \arguments{
   \item{x}{The sums_gantt object}
@@ -10,6 +10,6 @@
   \item{\ldots}{ignored}
 }
 \description{
-  Prints a sums_gantt object.
+Prints a sums_gantt object.
 }
 

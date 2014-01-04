@@ -2,18 +2,15 @@
 \alias{word_network_plot}
 \title{Word Network Plot}
 \usage{
-  word_network_plot(text.var,
-    grouping.var = 1:length(text.var), target.words = NULL,
-    stopwords = qdapDictionaries::Top100Words,
-    label.cex = 0.8, label.size = 0.5, edge.curved = TRUE,
-    vertex.shape = "circle", edge.color = "gray70",
-    label.colors = "black", layout = NULL,
-    title.name = NULL, title.padj = -4.5,
-    title.location = 3, title.font = NULL, title.cex = 0.8,
-    log.labels = FALSE, title.color = "black",
-    legend = NULL, legend.cex = 0.8,
-    legend.location = c(-1.54, 1.41), plot = TRUE,
-    char2space = "~~", ...)
+word_network_plot(text.var, grouping.var = 1:length(text.var),
+  target.words = NULL, stopwords = qdapDictionaries::Top100Words,
+  label.cex = 0.8, label.size = 0.5, edge.curved = TRUE,
+  vertex.shape = "circle", edge.color = "gray70", label.colors = "black",
+  layout = NULL, title.name = NULL, title.padj = -4.5,
+  title.location = 3, title.font = NULL, title.cex = 0.8,
+  log.labels = FALSE, title.color = "black", legend = NULL,
+  legend.cex = 0.8, legend.location = c(-1.54, 1.41), plot = TRUE,
+  char2space = "~~", ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -104,15 +101,15 @@
   \code{\link[qdap]{strip}}.}
 }
 \description{
-  A network plot of words.  Shows the interconnected and
-  supporting use of words between textual units containing
-  key terms.
+A network plot of words.  Shows the interconnected and
+supporting use of words between textual units containing
+key terms.
 }
 \note{
-  Words can be kept as one by inserting a double tilde
-  (\code{"~~"}), or other character strings passed to
-  char2space, as a single word/entry. This is useful for
-  keeping proper names as a single unit.
+Words can be kept as one by inserting a double tilde
+(\code{"~~"}), or other character strings passed to
+char2space, as a single word/entry. This is useful for
+keeping proper names as a single unit.
 }
 \examples{
 \dontrun{
@@ -144,8 +141,8 @@ plot(x2, vertex.size=0, layout = l)
 }
 }
 \seealso{
-  \code{\link[qdap]{word_network_plot}},
-  \code{\link[igraph]{graph.adjacency}}
+\code{\link[qdap]{word_network_plot}},
+\code{\link[igraph]{graph.adjacency}}
 }
 \keyword{network}
 

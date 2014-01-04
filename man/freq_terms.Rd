@@ -2,8 +2,8 @@
 \alias{freq_terms}
 \title{Find Frequent Terms}
 \usage{
-  freq_terms(text.var, top = 20, at.least = 1,
-    stopwords = NULL, extend = TRUE, ...)
+freq_terms(text.var, top = 20, at.least = 1, stopwords = NULL,
+  extend = TRUE, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -28,10 +28,10 @@
   \code{\link[qdap]{all_words}}.}
 }
 \value{
-  Returns a dataframe with the top occurring words.
+Returns a dataframe with the top occurring words.
 }
 \description{
-  Find the most frequently occuring terms in a text vector.
+Find the most frequently occuring terms in a text vector.
 }
 \examples{
 \dontrun{
@@ -44,8 +44,8 @@ plot(x)
 }
 }
 \seealso{
-  \code{\link[qdap]{word_list}},
-  \code{\link[qdap]{all_words}}
+\code{\link[qdap]{word_list}},
+\code{\link[qdap]{all_words}}
 }
 \keyword{frequent_terms}
 

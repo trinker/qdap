@@ -3,15 +3,18 @@
 \alias{raj.act.5}
 \title{Romeo and Juliet: Act 5}
 \format{A data frame with 88 rows and 2 variables}
+\usage{
+data(raj.act.5)
+}
 \description{
-  A dataset containing Romeo and Juliet: Act 5.
+A dataset containing Romeo and Juliet: Act 5.
 }
 \details{
-  \itemize{ \item person. Character in the play \item
-  dialogue. The spoken dialogue }
+\itemize{ \item person. Character in the play \item
+dialogue. The spoken dialogue }
 }
 \references{
-  \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
+\url{http://shakespeare.mit.edu/romeo_juliet/full.html}
 }
 \keyword{datasets}
 

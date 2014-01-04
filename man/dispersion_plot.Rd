@@ -2,14 +2,12 @@
 \alias{dispersion_plot}
 \title{Lexical Dispersion Plot}
 \usage{
-  dispersion_plot(text.var, match.terms,
-    grouping.var = NULL, rm.vars = NULL, color = "blue",
-    bg.color = "grey90", horiz.color = "grey85",
-    symbol = "|", title = "Lexical Dispersion Plot",
-    rev.factor = TRUE, wrap = "'",
-    xlab = "Dialogue (Words)", ylab = NULL, size = 4,
-    plot = TRUE, char2space = "~~", scales = "free",
-    space = "free", total.color = "black")
+dispersion_plot(text.var, match.terms, grouping.var = NULL, rm.vars = NULL,
+  color = "blue", bg.color = "grey90", horiz.color = "grey85",
+  symbol = "|", title = "Lexical Dispersion Plot", rev.factor = TRUE,
+  wrap = "'", xlab = "Dialogue (Words)", ylab = NULL, size = 4,
+  plot = TRUE, char2space = "~~", scales = "free", space = "free",
+  total.color = "black")
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -73,19 +71,19 @@
   group.  If \code{NULL} totals are dropped.}
 }
 \value{
-  Plots a dispersion plot and invisibly returns the ggplot2
-  object.
+Plots a dispersion plot and invisibly returns the ggplot2
+object.
 }
 \description{
-  Generate a lexical dispersion plot of terms.
+Generate a lexical dispersion plot of terms.
 }
 \note{
-  The match.terms is character sensitive.  Spacing is an
-  important way to grab specific words and requires careful
-  thought.  Using "read" will find the words "bread",
-  "read" "reading", and "ready".  If you want to search for
-  just the word "read" you'd supply a vector of c(" read ",
-  " reads", " reading", " reader").
+The match.terms is character sensitive.  Spacing is an
+important way to grab specific words and requires careful
+thought.  Using "read" will find the words "bread", "read"
+"reading", and "ready".  If you want to search for just the
+word "read" you'd supply a vector of c(" read ", " reads",
+" reading", " reader").
 }
 \examples{
 \dontrun{
@@ -142,7 +140,7 @@ rev_facet(x)
 }
 }
 \seealso{
-  \code{\link[qdap]{term_match}}
+\code{\link[qdap]{term_match}}
 }
 \keyword{dispersion}
 

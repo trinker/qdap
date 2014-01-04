@@ -3,17 +3,14 @@
 \alias{rm_stopwords}
 \title{Remove Stop Words}
 \usage{
-  rm_stopwords(text.var,
-    stopwords = qdapDictionaries::Top25Words,
-    unlist = FALSE, separate = TRUE, strip = FALSE,
-    unique = FALSE, char.keep = NULL, names = FALSE,
-    ignore.case = TRUE, apostrophe.remove = FALSE, ...)
+rm_stopwords(text.var, stopwords = qdapDictionaries::Top25Words,
+  unlist = FALSE, separate = TRUE, strip = FALSE, unique = FALSE,
+  char.keep = NULL, names = FALSE, ignore.case = TRUE,
+  apostrophe.remove = FALSE, ...)
 
-  rm_stop(text.var,
-    stopwords = qdapDictionaries::Top25Words,
-    unlist = FALSE, separate = TRUE, strip = FALSE,
-    unique = FALSE, char.keep = NULL, names = FALSE,
-    ignore.case = TRUE, apostrophe.remove = FALSE, ...)
+rm_stop(text.var, stopwords = qdapDictionaries::Top25Words, unlist = FALSE,
+  separate = TRUE, strip = FALSE, unique = FALSE, char.keep = NULL,
+  names = FALSE, ignore.case = TRUE, apostrophe.remove = FALSE, ...)
 }
 \arguments{
   \item{text.var}{A character string of text or a vector of
@@ -61,12 +58,12 @@
   \code{\link[qdap]{strip}} function.}
 }
 \value{
-  Returns a vector of sentences, vector of words, or
-  (default) a list of vectors of words with stop words
-  removed.  Output depends on supplied arguments.
+Returns a vector of sentences, vector of words, or
+(default) a list of vectors of words with stop words
+removed.  Output depends on supplied arguments.
 }
 \description{
-  Transcript apply the removal of stop words.
+Transcript apply the removal of stop words.
 }
 \examples{
 \dontrun{
@@ -82,9 +79,8 @@ rm_stop(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
 }
 }
 \seealso{
-  \code{\link[qdap]{strip}},
-  \code{\link[qdap]{bag_o_words}},
-  \code{\link[tm]{stopwords}}
+\code{\link[qdap]{strip}}, \code{\link[qdap]{bag_o_words}},
+\code{\link[tm]{stopwords}}
 }
 \keyword{stopwords}
 

@@ -3,19 +3,22 @@
 \alias{mraja1}
 \title{Romeo and Juliet: Act 1 Dialogue Merged with Demographics}
 \format{A data frame with 235 rows and 5 variables}
+\usage{
+data(mraja1)
+}
 \description{
-  A dataset containing act 1 of Romeo and Juliet with
-  demographic information.
+A dataset containing act 1 of Romeo and Juliet with
+demographic information.
 }
 \details{
-  \itemize{ \item person. Character in the play \item sex.
-  Gender \item fam.aff. Family affiliation of character
-  \item died. Dummy coded death variable (0-no; 1-yes); if
-  yes the character dies in the play \item dialogue. The
-  spoken dialogue }
+\itemize{ \item person. Character in the play \item sex.
+Gender \item fam.aff. Family affiliation of character \item
+died. Dummy coded death variable (0-no; 1-yes); if yes the
+character dies in the play \item dialogue. The spoken
+dialogue }
 }
 \references{
-  \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
+\url{http://shakespeare.mit.edu/romeo_juliet/full.html}
 }
 \keyword{datasets}
 

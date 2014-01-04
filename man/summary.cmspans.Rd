@@ -2,9 +2,8 @@
 \alias{summary.cmspans}
 \title{Summarize a cmspans object}
 \usage{
-  \method{summary}{cmspans} (object, grouping.var = NULL,
-    rm.var = NULL, total.span = TRUE, aggregate = FALSE,
-    percent = TRUE, digits = 2, ...)
+\method{summary}{cmspans}(object, grouping.var = NULL, rm.var = NULL,
+  total.span = TRUE, aggregate = FALSE, percent = TRUE, digits = 2, ...)
 }
 \arguments{
   \item{object}{The cmspans object}
@@ -44,7 +43,7 @@
   plot (ignored in summary).}
 }
 \description{
-  Summarize a cmspans object
+Summarize a cmspans object
 }
 \examples{
 \dontrun{
@@ -108,6 +107,6 @@ z_unclass
 }
 }
 \seealso{
-  \code{\link[qdap]{plot.sum_cmspans}}
+\code{\link[qdap]{plot.sum_cmspans}}
 }
 

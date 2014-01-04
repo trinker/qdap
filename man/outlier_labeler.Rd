@@ -2,7 +2,7 @@
 \alias{outlier_labeler}
 \title{Locate Outliers in Numeric String}
 \usage{
-  outlier_labeler(x, standardize = TRUE, ...)
+outlier_labeler(x, standardize = TRUE, ...)
 }
 \arguments{
   \item{x}{A numeric vector.}
@@ -14,12 +14,12 @@
   \code{\link[base]{scale}}.}
 }
 \value{
-  Returns a matrix (one column) of possible outliers coded
-  as \code{"3sd"}, \code{"2sd"} and \code{"1.5sd"},
-  corresponding to >= to 3, 2, or 1.5 standard deviations.
+Returns a matrix (one column) of possible outliers coded as
+\code{"3sd"}, \code{"2sd"} and \code{"1.5sd"},
+corresponding to >= to 3, 2, or 1.5 standard deviations.
 }
 \description{
-  Locate and label possible outliers in a string.
+Locate and label possible outliers in a string.
 }
 \examples{
 \dontrun{
@@ -29,7 +29,7 @@ tapply(mtcars$mpg, mtcars$cyl, outlier_labeler)
 }
 }
 \seealso{
-  \code{\link[base]{scale}}
+\code{\link[base]{scale}}
 }
 \keyword{scale,}
 \keyword{standardize}

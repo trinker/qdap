@@ -2,22 +2,18 @@
 \alias{word_associate}
 \title{Find Associated Words}
 \usage{
-  word_associate(text.var, grouping.var = NULL,
-    match.string, text.unit = "sentence",
-    extra.terms = NULL, target.exclude = NULL,
-    stopwords = NULL, network.plot = FALSE,
-    wordcloud = FALSE, cloud.colors = c("black", "gray55"),
-    title.color = "blue", nw.label.cex = 0.8,
-    title.padj = -4.5, nw.label.colors = NULL,
-    nw.layout = NULL, nw.edge.color = "gray90",
-    nw.label.proportional = TRUE, nw.title.padj = NULL,
-    nw.title.location = NULL, title.font = NULL,
-    title.cex = NULL, nw.edge.curved = TRUE,
-    cloud.legend = NULL, cloud.legend.cex = 0.8,
-    cloud.legend.location = c(-0.03, 1.03),
-    nw.legend = NULL, nw.legend.cex = 0.8,
-    nw.legend.location = c(-1.54, 1.41),
-    legend.override = FALSE, char2space = "~~", ...)
+word_associate(text.var, grouping.var = NULL, match.string,
+  text.unit = "sentence", extra.terms = NULL, target.exclude = NULL,
+  stopwords = NULL, network.plot = FALSE, wordcloud = FALSE,
+  cloud.colors = c("black", "gray55"), title.color = "blue",
+  nw.label.cex = 0.8, title.padj = -4.5, nw.label.colors = NULL,
+  nw.layout = NULL, nw.edge.color = "gray90",
+  nw.label.proportional = TRUE, nw.title.padj = NULL,
+  nw.title.location = NULL, title.font = NULL, title.cex = NULL,
+  nw.edge.curved = TRUE, cloud.legend = NULL, cloud.legend.cex = 0.8,
+  cloud.legend.location = c(-0.03, 1.03), nw.legend = NULL,
+  nw.legend.cex = 0.8, nw.legend.location = c(-1.54, 1.41),
+  legend.override = FALSE, char2space = "~~", ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -151,21 +147,19 @@
   \code{\link[qdap]{trans_cloud}}.}
 }
 \value{
-  Returns a list: \item{word frequency matrices}{Word
-  frequency matrices for each grouping variable.}
-  \item{dialogue}{A list of dataframes for each word list
-  (each vector supplied to \code{match.string}) and a final
-  dataframe of all combined text units that contain any
-  match string.} \item{match.terms}{A list of vectors of
-  word lists (each vector supplied to
-  \code{match.string}).} Optionally, returns a word cloud
-  and/or a network plot of the text unit containing the
-  \code{match.string} terms.
+Returns a list: \item{word frequency matrices}{Word
+frequency matrices for each grouping variable.}
+\item{dialogue}{A list of dataframes for each word list
+(each vector supplied to \code{match.string}) and a final
+dataframe of all combined text units that contain any match
+string.} \item{match.terms}{A list of vectors of word lists
+(each vector supplied to \code{match.string}).} Optionally,
+returns a word cloud and/or a network plot of the text unit
+containing the \code{match.string} terms.
 }
 \description{
-  Find words associated with a given word(s) or a
-  phrase(s).  Results can be output as a network graph
-  and/or wordcloud.
+Find words associated with a given word(s) or a phrase(s).
+Results can be output as a network graph and/or wordcloud.
 }
 \examples{
 \dontrun{
@@ -240,9 +234,9 @@ DATA2 <- qdap::DATA2
 }
 }
 \seealso{
-  \code{\link[qdap]{trans_cloud}},
-  \code{\link[qdap]{word_network_plot}},
-  \code{\link[wordcloud]{wordcloud}},
-  \code{\link[igraph]{graph.adjacency}}
+\code{\link[qdap]{trans_cloud}},
+\code{\link[qdap]{word_network_plot}},
+\code{\link[wordcloud]{wordcloud}},
+\code{\link[igraph]{graph.adjacency}}
 }
 

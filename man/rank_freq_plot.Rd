@@ -3,15 +3,14 @@
 \alias{rank_freq_plot}
 \title{Rank Frequency Plot}
 \usage{
-  rank_freq_mplot(text.var, grouping.var = NULL, ncol = 4,
-    jitter = 0.2, log.freq = TRUE, log.rank = TRUE,
-    hap.col = "red", dis.col = "blue", alpha = 1,
-    shape = 1, title = "Rank-Frequency Plot", digits = 2,
-    plot = TRUE)
+rank_freq_mplot(text.var, grouping.var = NULL, ncol = 4, jitter = 0.2,
+  log.freq = TRUE, log.rank = TRUE, hap.col = "red", dis.col = "blue",
+  alpha = 1, shape = 1, title = "Rank-Frequency Plot", digits = 2,
+  plot = TRUE)
 
-  rank_freq_plot(words, frequencies, plot = TRUE,
-    title.ext = NULL, jitter.ammount = 0.1,
-    log.scale = TRUE, hap.col = "red", dis.col = "blue")
+rank_freq_plot(words, frequencies, plot = TRUE, title.ext = NULL,
+  jitter.ammount = 0.1, log.scale = TRUE, hap.col = "red",
+  dis.col = "blue")
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -66,27 +65,26 @@
   and frequency as a log scale.}
 }
 \value{
-  Returns a rank-frequency plot and a list of three
-  dataframes: \item{WORD_COUNTS}{The word frequencies
-  supplied to \code{\link[qdap]{rank_freq_plot}} or created
-  by \code{\link[qdap]{rank_freq_mplot}}.}
-  \item{RANK_AND_FREQUENCY_STATS}{A dataframe of rank and
-  frequencies for the words used in the text.}
-  \item{LEGOMENA_STATS}{A dataframe displaying the percent
-  hapax legomena and percent dis legomena of the text.}
+Returns a rank-frequency plot and a list of three
+dataframes: \item{WORD_COUNTS}{The word frequencies
+supplied to \code{\link[qdap]{rank_freq_plot}} or created
+by \code{\link[qdap]{rank_freq_mplot}}.}
+\item{RANK_AND_FREQUENCY_STATS}{A dataframe of rank and
+frequencies for the words used in the text.}
+\item{LEGOMENA_STATS}{A dataframe displaying the percent
+hapax legomena and percent dis legomena of the text.}
 }
 \description{
-  \code{rank_freq_mplot} - Plot a faceted word rank versus
-  frequencies by grouping variable(s).
+\code{rank_freq_mplot} - Plot a faceted word rank versus
+frequencies by grouping variable(s).
 
-  \code{rank_freq_plot} - Plot word rank versus
-  frequencies.
+\code{rank_freq_plot} - Plot word rank versus frequencies.
 }
 \note{
-  \code{rank_freq_mplot} utilizes the ggplot2 package,
-  whereas, \code{rank_freq_plot} employs base graphics.
-  \code{rank_freq_mplot} is more general & flexible; in
-  most cases \code{rank_freq_mplot} should be prefered.
+\code{rank_freq_mplot} utilizes the ggplot2 package,
+whereas, \code{rank_freq_plot} employs base graphics.
+\code{rank_freq_mplot} is more general & flexible; in most
+cases \code{rank_freq_mplot} should be prefered.
 }
 \examples{
 \dontrun{
@@ -119,10 +117,10 @@ invisible(lapply(seq_along(mod$fwl), function(i){
 }
 }
 \references{
-  Zipf, G. K. (1949). Human behavior and the principle of
-  least effort. Cambridge, Massachusetts: Addison-Wesley.
-  p. 1.
+Zipf, G. K. (1949). Human behavior and the principle of
+least effort. Cambridge, Massachusetts: Addison-Wesley. p.
+1.
 }
-\keyword{rank-frequency}
 \keyword{Zipf,}
+\keyword{rank-frequency}
 

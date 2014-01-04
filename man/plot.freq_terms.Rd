@@ -2,7 +2,7 @@
 \alias{plot.freq_terms}
 \title{Plots a freq_terms Object}
 \usage{
-  \method{plot}{freq_terms} (x, plot = TRUE, ...)
+\method{plot}{freq_terms}(x, plot = TRUE, ...)
 }
 \arguments{
   \item{x}{The freq_terms object.}
@@ -15,6 +15,6 @@
   additional plot layers.}
 }
 \description{
-  Plots a freq_terms object.
+Plots a freq_terms object.
 }
 

@@ -2,7 +2,7 @@
 \alias{colSplit}
 \title{Separate a Column Pasted by paste2}
 \usage{
-  colSplit(column, col.sep = ".", name.sep = "&")
+colSplit(column, col.sep = ".", name.sep = "&")
 }
 \arguments{
   \item{column}{The pasted vector.}
@@ -15,11 +15,11 @@
   \code{\link[qdap]{colsplit2df}}).}
 }
 \value{
-  Returns a dataframe of split columns.
+Returns a dataframe of split columns.
 }
 \description{
-  Separates a \code{\link[qdap]{paste2}} column into
-  separate columns.
+Separates a \code{\link[qdap]{paste2}} column into separate
+columns.
 }
 \examples{
 \dontrun{
@@ -35,8 +35,7 @@ head(bar2, 10)
 }
 }
 \seealso{
-  \code{\link[qdap]{colsplit2df}},
-  \code{\link[qdap]{paste2}}
+\code{\link[qdap]{colsplit2df}}, \code{\link[qdap]{paste2}}
 }
 \keyword{column-split}
 

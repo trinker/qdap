@@ -2,9 +2,8 @@
 \alias{gantt_plot}
 \title{Gantt Plot}
 \usage{
-  gantt_plot(text.var, grouping.var = NULL, rm.var = NULL,
-    fill.var = NULL, xlab = "duration (in words)",
-    units = "words", col.sep = "__", ...)
+gantt_plot(text.var, grouping.var = NULL, rm.var = NULL, fill.var = NULL,
+  xlab = "duration (in words)", units = "words", col.sep = "__", ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -29,21 +28,21 @@
   \code{\link[qdap]{gantt_wrap}}.}
 }
 \value{
-  Returns a Gantt style visualization.  Invisibly returns
-  the ggplot2 list object.
+Returns a Gantt style visualization.  Invisibly returns the
+ggplot2 list object.
 }
 \description{
-  A convenience function that wraps
-  \code{\link[qdap]{gantt}}, \code{\link[qdap]{gantt_rep}}
-  and \code{\link[qdap]{gantt_wrap}} into a single plotting
-  function.
+A convenience function that wraps
+\code{\link[qdap]{gantt}}, \code{\link[qdap]{gantt_rep}}
+and \code{\link[qdap]{gantt_wrap}} into a single plotting
+function.
 }
 \note{
-  For non repeated measures data/plotting use
-  \code{\link[qdap]{gantt}}; for repeated measures data
-  output use \code{\link[qdap]{gantt_rep}}; and for a
-  flexible gantt plot that words with code matrix functions
-  (cm) use \code{\link[qdap]{gantt_wrap}}.
+For non repeated measures data/plotting use
+\code{\link[qdap]{gantt}}; for repeated measures data
+output use \code{\link[qdap]{gantt_rep}}; and for a
+flexible gantt plot that words with code matrix functions
+(cm) use \code{\link[qdap]{gantt_wrap}}.
 }
 \examples{
 \dontrun{
@@ -93,12 +92,12 @@ rajSPLIT <- qdap::rajSPLIT
 }
 }
 \references{
-  Clark, W. & Gantt, H. (1922) The Gantt chart, a working
-  tool of management. New York, Ronald Press.
+Clark, W. & Gantt, H. (1922) The Gantt chart, a working
+tool of management. New York, Ronald Press.
 }
 \seealso{
-  \code{\link[qdap]{gantt}}, \code{\link[qdap]{gantt_rep}},
-  \code{\link[qdap]{gantt_wrap}}
+\code{\link[qdap]{gantt}}, \code{\link[qdap]{gantt_rep}},
+\code{\link[qdap]{gantt_wrap}}
 }
 \keyword{Gantt}
 

@@ -2,10 +2,9 @@
 \alias{cm_df2long}
 \title{Transform Codes to Start-End Durations}
 \usage{
-  cm_df2long(df.temp.obj, v.name = "variable",
-    list.var = TRUE, code.vars = NULL, no.code = NA,
-    add.start.end = TRUE, repeat.vars = NULL,
-    rev.code = FALSE)
+cm_df2long(df.temp.obj, v.name = "variable", list.var = TRUE,
+  code.vars = NULL, no.code = NA, add.start.end = TRUE,
+  repeat.vars = NULL, rev.code = FALSE)
 }
 \arguments{
   \item{df.temp.obj}{A character vector of names of
@@ -37,13 +36,13 @@
   order of \code{code.vars} and \code{no.code} variables.}
 }
 \value{
-  Generates a data frame of start and end times for each
-  code.
+Generates a data frame of start and end times for each
+code.
 }
 \description{
-  Transforms the range coding structure(s) from
-  \code{\link[qdap]{cm_df.temp}} (in list format) into a
-  data frame of start and end durations in long format.
+Transforms the range coding structure(s) from
+\code{\link[qdap]{cm_df.temp}} (in list format) into a data
+frame of start and end durations in long format.
 }
 \examples{
 \dontrun{
@@ -63,13 +62,13 @@ plot(out2)
 }
 }
 \references{
-  Miles, M. B. & Huberman, A. M. (1994). An expanded
-  sourcebook: Qualitative data analysis. 2nd ed. Thousand
-  Oaks, CA: SAGE Publications.
+Miles, M. B. & Huberman, A. M. (1994). An expanded
+sourcebook: Qualitative data analysis. 2nd ed. Thousand
+Oaks, CA: SAGE Publications.
 }
 \seealso{
-  \code{\link{cm_time2long}}, \code{\link{cm_range2long}},
-  \code{\link{cm_df.temp}}
+\code{\link{cm_time2long}}, \code{\link{cm_range2long}},
+\code{\link{cm_df.temp}}
 }
 \keyword{coding,}
 \keyword{span}

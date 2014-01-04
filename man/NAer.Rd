@@ -2,7 +2,7 @@
 \alias{NAer}
 \title{Replace Missing Values (NA)}
 \usage{
-  NAer(x, replace = 0)
+NAer(x, replace = 0)
 }
 \arguments{
   \item{x}{A vector or dataframe with missing values
@@ -12,12 +12,11 @@
   (\code{NA}) with.}
 }
 \value{
-  Returns a vector or dataframe with missing values
-  replaced.
+Returns a vector or dataframe with missing values replaced.
 }
 \description{
-  Replace missing values (\code{NA}) in a vector or
-  dataframe.
+Replace missing values (\code{NA}) in a vector or
+dataframe.
 }
 \examples{
 \dontrun{

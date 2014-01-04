@@ -2,8 +2,7 @@
 \alias{cm_code.blank}
 \title{Blank Code Transformation}
 \usage{
-  cm_code.blank(x2long.obj, combine.code.list,
-    rm.var = NULL, overlap = TRUE)
+cm_code.blank(x2long.obj, combine.code.list, rm.var = NULL, overlap = TRUE)
 }
 \arguments{
   \item{x2long.obj}{An object from
@@ -25,18 +24,18 @@
   an integer and wrapped with quotes.}
 }
 \value{
-  Returns a dataframe with transformed occurrences of
-  supplied overlapping codes added.
+Returns a dataframe with transformed occurrences of
+supplied overlapping codes added.
 }
 \description{
-  Transform codes with any binary operator combination.
+Transform codes with any binary operator combination.
 }
 \note{
-  For most jobs \code{\link[qdap]{cm_code.transform}} will
-  work.  This adds a bit of flexibility in exclusion and
-  partial matching.  The code column must be named
-  \code{"code"} and your start and end columns must be
-  named \code{"start"} and \code{"end"}.
+For most jobs \code{\link[qdap]{cm_code.transform}} will
+work.  This adds a bit of flexibility in exclusion and
+partial matching.  The code column must be named
+\code{"code"} and your start and end columns must be named
+\code{"start"} and \code{"end"}.
 }
 \examples{
 \dontrun{
@@ -109,13 +108,13 @@ plot(out)
 }
 }
 \seealso{
-  \code{\link[qdap]{cm_range2long}},
-  \code{\link[qdap]{cm_time2long}},
-  \code{\link[qdap]{cm_df2long}},
-  \code{\link[qdap]{cm_code.overlap}},
-  \code{\link[qdap]{cm_code.combine}},
-  \code{\link[qdap]{cm_code.exclude}},
-  \code{\link[qdap]{cm_code.transform}}
+\code{\link[qdap]{cm_range2long}},
+\code{\link[qdap]{cm_time2long}},
+\code{\link[qdap]{cm_df2long}},
+\code{\link[qdap]{cm_code.overlap}},
+\code{\link[qdap]{cm_code.combine}},
+\code{\link[qdap]{cm_code.exclude}},
+\code{\link[qdap]{cm_code.transform}}
 }
 \keyword{co-occurrence}
 

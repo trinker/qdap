@@ -2,9 +2,9 @@
 \alias{plot.wfm}
 \title{Plots a wfm object}
 \usage{
-  \method{plot}{wfm} (x, non.zero = FALSE, digits = 0,
-    by.column, high = ifelse(non.zero, "black", "blue"),
-    grid = ifelse(non.zero, "black", "white"), ...)
+\method{plot}{wfm}(x, non.zero = FALSE, digits = 0, by.column,
+  high = ifelse(non.zero, "black", "blue"), grid = ifelse(non.zero, "black",
+  "white"), ...)
 }
 \arguments{
   \item{x}{The wfm object}
@@ -27,6 +27,6 @@
   \item{\ldots}{Other arguments passed to qheat.}
 }
 \description{
-  Plots a wfm object.
+Plots a wfm object.
 }
 

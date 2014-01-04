@@ -2,8 +2,7 @@
 \alias{multiscale}
 \title{Nested Standardization}
 \usage{
-  multiscale(numeric.var, grouping.var,
-    original_order = TRUE, digits = 2)
+multiscale(numeric.var, grouping.var, original_order = TRUE, digits = 2)
 }
 \arguments{
   \item{numeric.var}{A numeric variable.}
@@ -20,14 +19,14 @@
   round.}
 }
 \value{
-  Returns a list of two: \item{SCALED_OBSERVATIONS}{A
-  dataframe of scaled observations at level one and two of
-  the nesting with possible outliers.}
-  \item{DESCRIPTIVES_BY_GROUP}{A data frame of descriptives
-  by group.}
+Returns a list of two: \item{SCALED_OBSERVATIONS}{A
+dataframe of scaled observations at level one and two of
+the nesting with possible outliers.}
+\item{DESCRIPTIVES_BY_GROUP}{A data frame of descriptives
+by group.}
 }
 \description{
-  Standardize within a subgroup and then within a group.
+Standardize within a subgroup and then within a group.
 }
 \examples{
 \dontrun{
@@ -44,7 +43,7 @@ ltruncdf(out3, 10)
 }
 }
 \seealso{
-  \code{\link[base]{scale}}
+\code{\link[base]{scale}}
 }
 \keyword{scale}
 

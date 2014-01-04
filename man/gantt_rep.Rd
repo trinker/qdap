@@ -2,8 +2,8 @@
 \alias{gantt_rep}
 \title{Generate Unit Spans for Repeated Measures}
 \usage{
-  gantt_rep(rm.var, text.var, grouping.var = NULL,
-    units = "words", col.sep = "_", name.sep = "_")
+gantt_rep(rm.var, text.var, grouping.var = NULL, units = "words",
+  col.sep = "_", name.sep = "_")
 }
 \arguments{
   \item{rm.var}{An optional single vector or list of 1 or 2
@@ -26,18 +26,18 @@
   column names of the pasted columns.}
 }
 \value{
-  Returns a data frame of start and end times by repeated
-  measure and grouping variable(s)
+Returns a data frame of start and end times by repeated
+measure and grouping variable(s)
 }
 \description{
-  Produces start and end times for occurrences for each
-  repeated measure condition.
+Produces start and end times for occurrences for each
+repeated measure condition.
 }
 \note{
-  For non repeated measures data use
-  \code{\link[qdap]{gantt}}.  For more flexible plotting
-  needs use \code{\link[qdap]{gantt_wrap}} over the generic
-  plotting method.
+For non repeated measures data use
+\code{\link[qdap]{gantt}}.  For more flexible plotting
+needs use \code{\link[qdap]{gantt_wrap}} over the generic
+plotting method.
 }
 \examples{
 \dontrun{
@@ -58,13 +58,12 @@ plot(dat2)
 }
 }
 \references{
-  Clark, W. & Gantt, H. (1922) The Gantt chart, a working
-  tool of management. New York, Ronald Press.
+Clark, W. & Gantt, H. (1922) The Gantt chart, a working
+tool of management. New York, Ronald Press.
 }
 \seealso{
-  \code{\link[qdap]{gantt}},
-  \code{\link[qdap]{gantt_wrap}},
-  \code{\link[qdap]{gantt_plot}}
+\code{\link[qdap]{gantt}}, \code{\link[qdap]{gantt_wrap}},
+\code{\link[qdap]{gantt_plot}}
 }
 \keyword{Gantt}
 

@@ -2,7 +2,7 @@
 \alias{ngrams}
 \title{Generate ngrams}
 \usage{
-  ngrams(text.var, grouping.var = NULL, n = 2, ...)
+ngrams(text.var, grouping.var = NULL, n = 2, ...)
 }
 \arguments{
   \item{text.var}{The text variable}
@@ -17,20 +17,20 @@
   \item{\dots}{Further arguments passed to strip function.}
 }
 \value{
-  Returns a list of: \item{raw}{A list of pasted single
-  vectors of the ngrams per row.} \item{group}{A list of
-  pasted vectors of ngrams grouped by grouping.var.}
-  \item{unlist1}{A list of a single vector of pasted ngrams
-  per grouping.var in the order used.} \item{unlist2}{A
-  list of a single vector of pasted ngrams per grouping.var
-  in alphabetical order.} \item{group_n}{A list of a list
-  of vectors of ngrams per grouping.var & n (not pasted).}
-  \item{all}{A single vector of pasted ngrams sorted
-  alphabetically.} \item{all_n}{A list of lists a single
-  vectors of ngrams sorted alphabetically (not pasted).}
+Returns a list of: \item{raw}{A list of pasted single
+vectors of the ngrams per row.} \item{group}{A list of
+pasted vectors of ngrams grouped by grouping.var.}
+\item{unlist1}{A list of a single vector of pasted ngrams
+per grouping.var in the order used.} \item{unlist2}{A list
+of a single vector of pasted ngrams per grouping.var in
+alphabetical order.} \item{group_n}{A list of a list of
+vectors of ngrams per grouping.var & n (not pasted).}
+\item{all}{A single vector of pasted ngrams sorted
+alphabetically.} \item{all_n}{A list of lists a single
+vectors of ngrams sorted alphabetically (not pasted).}
 }
 \description{
-  Transcript apply ngrams.
+Transcript apply ngrams.
 }
 \examples{
 \dontrun{

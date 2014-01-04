@@ -2,7 +2,7 @@
 \alias{blank2NA}
 \title{Replace Blanks in a dataframe}
 \usage{
-  blank2NA(dataframe, missing = NA)
+blank2NA(dataframe, missing = NA)
 }
 \arguments{
   \item{dataframe}{A dataframe with blank (empty) cells.}
@@ -10,11 +10,11 @@
   \item{missing}{Value to replace empty cells with.}
 }
 \value{
-  Returns a data frame with blank spaces replaced.
+Returns a data frame with blank spaces replaced.
 }
 \description{
-  Replaces blank (empty) cells in a dataframe.  Generally,
-  for internal use.
+Replaces blank (empty) cells in a dataframe.  Generally,
+for internal use.
 }
 \examples{
 \dontrun{
@@ -27,6 +27,6 @@ blank2NA(dat)
 }
 }
 \seealso{
-  \code{\link[qdap]{rm_row}}
+\code{\link[qdap]{rm_row}}
 }
 

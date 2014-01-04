@@ -2,7 +2,7 @@
 \alias{plot.kullback_leibler}
 \title{Plots a kullback_leibler object}
 \usage{
-  \method{plot}{kullback_leibler} (x, digits = 3, ...)
+\method{plot}{kullback_leibler}(x, digits = 3, ...)
 }
 \arguments{
   \item{x}{The kullback_leibler object}
@@ -12,6 +12,6 @@
   \item{\ldots}{Other arguments passed to \code{qheat}}
 }
 \description{
-  Plots a kullback_leibler object.
+Plots a kullback_leibler object.
 }
 

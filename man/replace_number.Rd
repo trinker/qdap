@@ -2,7 +2,7 @@
 \alias{replace_number}
 \title{Replace Numbers With Text Representation}
 \usage{
-  replace_number(text.var, num.paste = "separate")
+replace_number(text.var, num.paste = "separate")
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -14,11 +14,11 @@
   is selected the elements will be joined without spaces.}
 }
 \value{
-  Returns a vector with abbreviations replaced.
+Returns a vector with abbreviations replaced.
 }
 \description{
-  Replaces numeric represented numbers with words (e.g.,
-  1001 becomes one thousand one).
+Replaces numeric represented numbers with words (e.g., 1001
+becomes one thousand one).
 }
 \examples{
 \dontrun{
@@ -30,14 +30,14 @@ replace_number(x, "combine")
 }
 }
 \references{
-  Fox, J. (2005). Programmer's niche: How do you spell that
-  number? R News. Vol. 5(1), pp. 51-55.
+Fox, J. (2005). Programmer's niche: How do you spell that
+number? R News. Vol. 5(1), pp. 51-55.
 }
 \seealso{
-  \code{\link[qdap]{bracketX}}, \code{\link[qdap]{qprep}},
-  \code{\link[qdap]{replace_abbreviation}},
-  \code{\link[qdap]{replace_contraction}},
-  \code{\link[qdap]{replace_symbol}}
+\code{\link[qdap]{bracketX}}, \code{\link[qdap]{qprep}},
+\code{\link[qdap]{replace_abbreviation}},
+\code{\link[qdap]{replace_contraction}},
+\code{\link[qdap]{replace_symbol}}
 }
 \keyword{number-to-word}
 

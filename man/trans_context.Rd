@@ -2,8 +2,8 @@
 \alias{trans_context}
 \title{Print Context Around Indices}
 \usage{
-  trans_context(text.var, grouping.var, inds, n.before = 3,
-    tot = TRUE, n.after = n.before, ord.inds = TRUE)
+trans_context(text.var, grouping.var, inds, n.before = 3, tot = TRUE,
+  n.after = n.before, ord.inds = TRUE)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -29,15 +29,15 @@
   least to greatest.}
 }
 \value{
-  Returns a dataframe of the class "qdap_context" that can
-  be printed (i.e., saved) in flexible outputs.  The
-  dataframe can be printed as a dataframe style or pretty
-  text output.  The resulting file contains n rows before
-  and after each index of a vector of indices.
+Returns a dataframe of the class "qdap_context" that can be
+printed (i.e., saved) in flexible outputs.  The dataframe
+can be printed as a dataframe style or pretty text output.
+The resulting file contains n rows before and after each
+index of a vector of indices.
 }
 \description{
-  Print (or save to an external file) n text elements
-  before and after indices.
+Print (or save to an external file) n text elements before
+and after indices.
 }
 \examples{
 \dontrun{
@@ -81,8 +81,8 @@ with(DATA.SPLIT, trans_context(state, person, inds=inds5, tot=F))
 }
 }
 \seealso{
-  \code{\link[qdap]{boolean_search}},
-  \code{\link[qdap]{question_type}},
-  \code{\link[qdap]{end_mark}}
+\code{\link[qdap]{boolean_search}},
+\code{\link[qdap]{question_type}},
+\code{\link[qdap]{end_mark}}
 }
 

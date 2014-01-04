@@ -2,7 +2,7 @@
 \alias{id}
 \title{ID By Row Number or Sequence Along}
 \usage{
-  id(x, prefix = FALSE, pad = TRUE)
+id(x, prefix = FALSE, pad = TRUE)
 }
 \arguments{
   \item{x}{A dataframe, matrix, vector, or list object.}
@@ -14,12 +14,12 @@
   will be padded with zeros.}
 }
 \value{
-  Returns a vector of sequential integers.
+Returns a vector of sequential integers.
 }
 \description{
-  Generate a sequence of integers the
-  \code{\link[base]{length}}/\code{\link[base]{ncol}} of an
-  object.
+Generate a sequence of integers the
+\code{\link[base]{length}}/\code{\link[base]{ncol}} of an
+object.
 }
 \examples{
 id(list(1, 4, 6))

@@ -3,9 +3,9 @@
 \alias{right_just}
 \title{Text Justification}
 \usage{
-  left_just(dataframe, column = NULL, keep.class = FALSE)
+left_just(dataframe, column = NULL, keep.class = FALSE)
 
-  right_just(dataframe)
+right_just(dataframe)
 }
 \arguments{
   \item{dataframe}{A data.frame object with the text
@@ -20,22 +20,21 @@
   honored but factor may be).}
 }
 \value{
-  Returns a dataframe with selected text column left/right
-  justified.
+Returns a dataframe with selected text column left/right
+justified.
 }
 \description{
-  \code{left_just} - Left justifies a text/character
-  column.
+\code{left_just} - Left justifies a text/character column.
 
-  \code{right_just} - A means of undoing a left
-  justification.
+\code{right_just} - A means of undoing a left
+justification.
 }
 \note{
-  \code{\link[qdap]{left_just}} inserts spaces to achieve
-  the justification.  This could interfere with analysis
-  and therefore the output from
-  \code{\link[qdap]{left_just}} should only be used for
-  visualization purposes, not analysis.
+\code{\link[qdap]{left_just}} inserts spaces to achieve the
+justification.  This could interfere with analysis and
+therefore the output from \code{\link[qdap]{left_just}}
+should only be used for visualization purposes, not
+analysis.
 }
 \examples{
 \dontrun{

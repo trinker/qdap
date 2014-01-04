@@ -2,8 +2,8 @@
 \alias{cm_df.fill}
 \title{Range Coding}
 \usage{
-  cm_df.fill(dataframe, ranges, value = 1, text.var = NULL,
-    code.vars = NULL, transform = FALSE)
+cm_df.fill(dataframe, ranges, value = 1, text.var = NULL,
+  code.vars = NULL, transform = FALSE)
 }
 \arguments{
   \item{dataframe}{A dataframe containing a text variable.}
@@ -23,22 +23,21 @@
   located across the top of dataframe.}
 }
 \value{
-  Generates a dummy coded dataframe.
+Generates a dummy coded dataframe.
 }
 \description{
-  Allows range coding of words for efficient coding.
+Allows range coding of words for efficient coding.
 }
 \details{
-  After ranging coding transcripts via
-  (\code{\link{cm_df.temp}}) or the blank code matrix via
-  (\code{\link{cm_df.transcript}}),\code{cm_df.fill} is
-  used to create a matrix of what codes occurred at what
-  words (a filled code matrix).  A list of range codes
-  (word number spans) is fed to \code{cm_df.fill}.  A
-  single number indicates a single word with that coding
-  scheme whereas the colon is used as a separator that
-  indicates the range of words from x to y are that
-  particular code.
+After ranging coding transcripts via
+(\code{\link{cm_df.temp}}) or the blank code matrix via
+(\code{\link{cm_df.transcript}}),\code{cm_df.fill} is used
+to create a matrix of what codes occurred at what words (a
+filled code matrix).  A list of range codes (word number
+spans) is fed to \code{cm_df.fill}.  A single number
+indicates a single word with that coding scheme whereas the
+colon is used as a separator that indicates the range of
+words from x to y are that particular code.
 }
 \examples{
 \dontrun{
@@ -73,13 +72,13 @@ head(out2)
 }
 }
 \references{
-  Miles, M. B. & Huberman, A. M. (1994). An expanded
-  sourcebook: Qualitative data analysis. 2nd ed. Thousand
-  Oaks, CA: SAGE Publications.
+Miles, M. B. & Huberman, A. M. (1994). An expanded
+sourcebook: Qualitative data analysis. 2nd ed. Thousand
+Oaks, CA: SAGE Publications.
 }
 \seealso{
-  \code{\link{cm_df.temp}}, \code{\link{cm_df.transcript}},
-  \code{\link{cm_df2long}}
+\code{\link{cm_df.temp}}, \code{\link{cm_df.transcript}},
+\code{\link{cm_df2long}}
 }
 \keyword{coding}
 

@@ -2,7 +2,7 @@
 \alias{print.all_words}
 \title{Prints an all_words Object}
 \usage{
-  \method{print}{all_words} (x, ...)
+\method{print}{all_words}(x, ...)
 }
 \arguments{
   \item{x}{The all_words object.}
@@ -10,6 +10,6 @@
   \item{\ldots}{ignored}
 }
 \description{
-  Prints an all_words object.
+Prints an all_words object.
 }
 

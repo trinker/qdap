@@ -6,21 +6,20 @@
 \alias{word_count}
 \title{Word Counts}
 \usage{
-  word_count(text.var, byrow = TRUE, missing = NA,
-    digit.remove = TRUE, names = FALSE)
+word_count(text.var, byrow = TRUE, missing = NA, digit.remove = TRUE,
+  names = FALSE)
 
-  wc(text.var, byrow = TRUE, missing = NA,
-    digit.remove = TRUE, names = FALSE)
+wc(text.var, byrow = TRUE, missing = NA, digit.remove = TRUE,
+  names = FALSE)
 
-  character_count(text.var, byrow = TRUE, missing = NA,
-    apostrophe.remove = TRUE, digit.remove = TRUE,
-    count.space = FALSE)
+character_count(text.var, byrow = TRUE, missing = NA,
+  apostrophe.remove = TRUE, digit.remove = TRUE, count.space = FALSE)
 
-  character_table(text.var, grouping.var, percent = TRUE,
-    prop.by.row = TRUE, zero.replace = 0, digits = 2, ...)
+character_table(text.var, grouping.var, percent = TRUE, prop.by.row = TRUE,
+  zero.replace = 0, digits = 2, ...)
 
-  char_table(text.var, grouping.var, percent = TRUE,
-    prop.by.row = TRUE, zero.replace = 0, digits = 2, ...)
+char_table(text.var, grouping.var, percent = TRUE, prop.by.row = TRUE,
+  zero.replace = 0, digits = 2, ...)
 }
 \arguments{
   \item{text.var}{The text variable}
@@ -64,33 +63,31 @@
   when printing.}
 }
 \value{
-  \code{word_count} - returns a word count by row or total.
+\code{word_count} - returns a word count by row or total.
 
-  \code{character_count} - returns a character count by row
-  or total.
+\code{character_count} - returns a character count by row
+or total.
 
-  \code{character_table} - returns a list: dataframe of
-  character counts by grouping variable.
-  \item{raw}{Dataframe of the frequency of characters by
-  grouping variable.} \item{prop}{Dataframe of the
-  proportion of characters by grouping variable.}
-  \item{rnp}{Dataframe of the frequency and proportions of
-  characters by grouping variable.} \item{percent}{The
-  value of percent used for plotting purposes.}
-  \item{zero.replace}{The value of zero.replace used for
-  plotting purposes.}
+\code{character_table} - returns a list: dataframe of
+character counts by grouping variable. \item{raw}{Dataframe
+of the frequency of characters by grouping variable.}
+\item{prop}{Dataframe of the proportion of characters by
+grouping variable.} \item{rnp}{Dataframe of the frequency
+and proportions of characters by grouping variable.}
+\item{percent}{The value of percent used for plotting
+purposes.} \item{zero.replace}{The value of zero.replace
+used for plotting purposes.}
 }
 \description{
-  \code{word_count} - Transcript apply word counts.
+\code{word_count} - Transcript apply word counts.
 
-  \code{character_count} - Transcript apply character
-  counts.
+\code{character_count} - Transcript apply character counts.
 
-  \code{character_table} - Computes a table of character
-  counts by grouping . variable(s).
+\code{character_table} - Computes a table of character
+counts by grouping . variable(s).
 }
 \note{
-  wc is a convenient short hand for word_count.
+wc is a convenient short hand for word_count.
 }
 \examples{
 \dontrun{
@@ -163,9 +160,8 @@ ggplot(data = dat2, aes(x = variable, y = value)) +
 }
 }
 \seealso{
-  \code{\link[qdap]{syllable_count}},
-  \code{\link[qdap]{prop}},
-  \code{\link[qdap]{colcomb2class}}
+\code{\link[qdap]{syllable_count}},
+\code{\link[qdap]{prop}}, \code{\link[qdap]{colcomb2class}}
 }
 \keyword{character-count}
 \keyword{word-count,}

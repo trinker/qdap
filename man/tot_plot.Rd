@@ -2,10 +2,9 @@
 \alias{tot_plot}
 \title{Visualize Word Length by Turn of Talk}
 \usage{
-  tot_plot(dataframe, text.var, grouping.var = NULL,
-    facet.vars = NULL, tot = TRUE, transform = FALSE,
-    ncol = NULL, ylab = NULL, xlab = NULL, bar.space = 0,
-    scale = NULL, space = NULL, plot = TRUE)
+tot_plot(dataframe, text.var, grouping.var = NULL, facet.vars = NULL,
+  tot = TRUE, transform = FALSE, ncol = NULL, ylab = NULL,
+  xlab = NULL, bar.space = 0, scale = NULL, space = NULL, plot = TRUE)
 }
 \arguments{
   \item{dataframe}{A dataframe that contains the text
@@ -60,11 +59,11 @@
   additional plot layers.}
 }
 \value{
-  Invisibly returns the ggplot2 object.
+Invisibly returns the ggplot2 object.
 }
 \description{
-  Uses a bar graph to visualize patterns in sentence length
-  and grouping variables by turn of talk.
+Uses a bar graph to visualize patterns in sentence length
+and grouping variables by turn of talk.
 }
 \examples{
 \dontrun{

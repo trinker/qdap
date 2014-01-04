@@ -2,13 +2,12 @@
 \alias{qheat}
 \title{Quick Heatmap}
 \usage{
-  qheat(mat, low = "white", high = "darkblue",
-    values = FALSE, digits = 1, text.size = 3,
-    text.color = "grey40", xaxis.col = "black",
-    yaxis.col = "black", order.by = NULL, grid = "white",
-    by.column = TRUE, auto.size = FALSE, mat2 = NULL,
-    plot = TRUE, facet.vars = NULL, facet.flip = FALSE,
-    diag.na = FALSE, diag.values = "")
+qheat(mat, low = "white", high = "darkblue", values = FALSE, digits = 1,
+  text.size = 3, text.color = "grey40", xaxis.col = "black",
+  yaxis.col = "black", order.by = NULL, grid = "white",
+  by.column = TRUE, auto.size = FALSE, mat2 = NULL, plot = TRUE,
+  facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
+  diag.values = "")
 }
 \arguments{
   \item{mat}{A matrix or dataframe produced by many qdap
@@ -80,17 +79,17 @@
   Defualt is to not print a value.}
 }
 \description{
-  A quick heatmap function for visualizing typical qdap
-  dataframe/matrix outputs.
+A quick heatmap function for visualizing typical qdap
+dataframe/matrix outputs.
 }
 \details{
-  \code{qheat} is useful for finding patterns and anomalies
-  in large qdap generated dataframes and matrices.
+\code{qheat} is useful for finding patterns and anomalies
+in large qdap generated dataframes and matrices.
 }
 \note{
-  \code{\link[qdap]{qheat}} is a fast way of working with
-  data formats produced by qdap.  The function isn't
-  designed to be extended beyond exploratory qdap usage.
+\code{\link[qdap]{qheat}} is a fast way of working with
+data formats produced by qdap.  The function isn't designed
+to be extended beyond exploratory qdap usage.
 }
 \examples{
 \dontrun{

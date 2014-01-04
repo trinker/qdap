@@ -4,11 +4,11 @@
 \title{Generates start and end times of supplied text selections (i.e., text
 selections are determined by any number of grouping variables).}
 \usage{
-  gantt(text.var, grouping.var, units = "words",
-    sums = FALSE, col.sep = "_")
+gantt(text.var, grouping.var, units = "words", sums = FALSE,
+  col.sep = "_")
 
-  plot_gantt_base(x, sums = NULL, fill.colors = NULL,
-    box.color = "white", title = NULL)
+plot_gantt_base(x, sums = NULL, fill.colors = NULL, box.color = "white",
+  title = NULL)
 }
 \arguments{
   \item{text.var}{The text variable}
@@ -41,24 +41,24 @@ selections are determined by any number of grouping variables).}
   \item{title}{An optional title.}
 }
 \value{
-  Returns a data frame of start and end times by grouping
-  variable(s) or optionally returns a list of two: (1) A
-  data frame of the total units used by grouping
-  variable(s) and (2) a data frame of start and end times
-  by grouping variable(s).
+Returns a data frame of start and end times by grouping
+variable(s) or optionally returns a list of two: (1) A data
+frame of the total units used by grouping variable(s) and
+(2) a data frame of start and end times by grouping
+variable(s).
 }
 \description{
-  Generates start and end times of supplied text selections
-  (i.e., text selections are determined by any number of
-  grouping variables).
+Generates start and end times of supplied text selections
+(i.e., text selections are determined by any number of
+grouping variables).
 
-  \code{plot_gantt_base} - For internal use.
+\code{plot_gantt_base} - For internal use.
 }
 \note{
-  For non repeated measures data use
-  \code{\link[qdap]{gantt}}.  For more flexible plotting
-  needs use \code{\link[qdap]{gantt_wrap}} over the generic
-  plotting method.
+For non repeated measures data use
+\code{\link[qdap]{gantt}}.  For more flexible plotting
+needs use \code{\link[qdap]{gantt_wrap}} over the generic
+plotting method.
 }
 \examples{
 \dontrun{
@@ -94,17 +94,17 @@ dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex),
 }
 }
 \author{
-  DigEmAll (\url{stackoverflow.com}) and Tyler Rinker
-  <tyler.rinker@gmail.com>.
+DigEmAll (\url{stackoverflow.com}) and Tyler Rinker
+<tyler.rinker@gmail.com>.
 }
 \references{
-  Clark, W. & Gantt, H. (1922) The Gantt chart, a working
-  tool of management. New York, Ronald Press.
+Clark, W. & Gantt, H. (1922) The Gantt chart, a working
+tool of management. New York, Ronald Press.
 }
 \seealso{
-  \code{\link[qdap]{gantt_rep}},
-  \code{\link[qdap]{gantt_wrap}},
-  \code{\link[qdap]{gantt_plot}}
+\code{\link[qdap]{gantt_rep}},
+\code{\link[qdap]{gantt_wrap}},
+\code{\link[qdap]{gantt_plot}}
 }
 \keyword{Gantt}
 

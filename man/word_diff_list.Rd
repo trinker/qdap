@@ -2,9 +2,8 @@
 \alias{word_diff_list}
 \title{Differences In Word Use Between Groups}
 \usage{
-  word_diff_list(text.var, grouping.var, vs.all = FALSE,
-    vs.all.cut = 1, stopwords = NULL, alphabetical = FALSE,
-    digits = 2)
+word_diff_list(text.var, grouping.var, vs.all = FALSE, vs.all.cut = 1,
+  stopwords = NULL, alphabetical = FALSE, digits = 2)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -33,17 +32,17 @@
   proportion column (default is 3).}
 }
 \value{
-  An list of word data frames comparing grouping variables
-  word use against one another. Each dataframe contains
-  three columns: \item{word}{The words unique to that
-  group} \item{freq}{The number of times that group used
-  that word} \item{prop}{The proportion of that group's
-  overall word use dedicated to that particular word}
+An list of word data frames comparing grouping variables
+word use against one another. Each dataframe contains three
+columns: \item{word}{The words unique to that group}
+\item{freq}{The number of times that group used that word}
+\item{prop}{The proportion of that group's overall word use
+dedicated to that particular word}
 }
 \description{
-  Look at the differences in word uses between grouping
-  variable(s).  Look at all possible "a" vs. "b"
-  combinations or "a" vs. all others.
+Look at the differences in word uses between grouping
+variable(s).  Look at all possible "a" vs. "b" combinations
+or "a" vs. all others.
 }
 \examples{
 \dontrun{

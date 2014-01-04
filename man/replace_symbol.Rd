@@ -2,8 +2,8 @@
 \alias{replace_symbol}
 \title{Replace Symbols With Word Equivalents}
 \usage{
-  replace_symbol(text.var, dollar = TRUE, percent = TRUE,
-    pound = TRUE, at = TRUE, and = TRUE, with = TRUE)
+replace_symbol(text.var, dollar = TRUE, percent = TRUE, pound = TRUE,
+  at = TRUE, and = TRUE, with = TRUE)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -27,11 +27,11 @@
   (w/) with \code{"with"}.}
 }
 \value{
-  Returns a character vector with symbols replaced..
+Returns a character vector with symbols replaced..
 }
 \description{
-  This function replaces symbols with word equivalents
-  (e.g., \code{@} becomes \code{"at"}.
+This function replaces symbols with word equivalents (e.g.,
+\code{@} becomes \code{"at"}.
 }
 \examples{
 \dontrun{
@@ -42,10 +42,10 @@ replace_symbol(x)
 }
 }
 \seealso{
-  \code{\link[qdap]{bracketX}}, \code{\link[qdap]{qprep}},
-  \code{\link[qdap]{replace_abbreviation}},
-  \code{\link[qdap]{replace_contraction}},
-  \code{\link[qdap]{replace_number}},
+\code{\link[qdap]{bracketX}}, \code{\link[qdap]{qprep}},
+\code{\link[qdap]{replace_abbreviation}},
+\code{\link[qdap]{replace_contraction}},
+\code{\link[qdap]{replace_number}},
 }
 \keyword{symbol-replace}
 

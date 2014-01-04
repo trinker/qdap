@@ -2,8 +2,7 @@
 \alias{plot.word_stats}
 \title{Plots a word_stats object}
 \usage{
-  \method{plot}{word_stats} (x, label = FALSE,
-    lab.digits = NULL, ...)
+\method{plot}{word_stats}(x, label = FALSE, lab.digits = NULL, ...)
 }
 \arguments{
   \item{x}{The word_stats object}
@@ -18,6 +17,6 @@
   \item{\ldots}{Other arguments passed to qheat.}
 }
 \description{
-  Plots a word_stats object.
+Plots a word_stats object.
 }
 

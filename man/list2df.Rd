@@ -2,7 +2,7 @@
 \alias{list2df}
 \title{List to Dataframe}
 \usage{
-  list2df(list.object, col1 = "X1", col2 = "X2")
+list2df(list.object, col1 = "X1", col2 = "X2")
 }
 \arguments{
   \item{list.object}{A named \code{\link[base]{list}} of
@@ -14,13 +14,13 @@
   vectors).}
 }
 \value{
-  Returns a dataframe with two columns.
+Returns a dataframe with two columns.
 }
 \description{
-  Convert a named list of vectors to a dataframe.
+Convert a named list of vectors to a dataframe.
 }
 \details{
-  generally an internal function used for reshaping data.
+generally an internal function used for reshaping data.
 }
 \examples{
 lst1 <- list(x=c("foo", "bar"), y=1:5)

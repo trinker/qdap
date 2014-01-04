@@ -2,17 +2,17 @@
 \alias{Trim}
 \title{Remove Leading/Trailing White Space}
 \usage{
-  Trim(x)
+Trim(x)
 }
 \arguments{
   \item{x}{The text variable.}
 }
 \value{
-  Returns a vector with the leading/trailing white spaces
-  removed.
+Returns a vector with the leading/trailing white spaces
+removed.
 }
 \description{
-  Remove leading/trailing white space.
+Remove leading/trailing white space.
 }
 \examples{
 \dontrun{

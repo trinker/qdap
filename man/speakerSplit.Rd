@@ -2,8 +2,8 @@
 \alias{speakerSplit}
 \title{Break and Stretch if Multiple Persons per Cell}
 \usage{
-  speakerSplit(dataframe, person.var = 1,
-    sep = c("and", "&", ","), track.reps = FALSE)
+speakerSplit(dataframe, person.var = 1, sep = c("and", "&", ","),
+  track.reps = FALSE)
 }
 \arguments{
   \item{dataframe}{A dataframe that contains the person
@@ -19,12 +19,12 @@
   stretched.}
 }
 \value{
-  Returns an expanded dataframe with person variable
-  stretched and accompanying rows repeated.
+Returns an expanded dataframe with person variable
+stretched and accompanying rows repeated.
 }
 \description{
-  Look for cells with multiple people and create separate
-  rows for each person.
+Look for cells with multiple people and create separate
+rows for each person.
 }
 \examples{
 \dontrun{

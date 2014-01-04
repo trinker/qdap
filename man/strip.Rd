@@ -2,8 +2,8 @@
 \alias{strip}
 \title{Strip Text}
 \usage{
-  strip(x, char.keep = "~~", digit.remove = TRUE,
-    apostrophe.remove = TRUE, lower.case = TRUE)
+strip(x, char.keep = "~~", digit.remove = TRUE, apostrophe.remove = TRUE,
+  lower.case = TRUE)
 }
 \arguments{
   \item{x}{The text variable.}
@@ -27,11 +27,11 @@
   alpha characters to lower case.}
 }
 \value{
-  Returns a vector of text that has been stripped of
-  unwanted characters.
+Returns a vector of text that has been stripped of unwanted
+characters.
 }
 \description{
-  Strip text of unwanted characters.
+Strip text of unwanted characters.
 }
 \examples{
 \dontrun{
@@ -42,6 +42,6 @@ strip(DATA$state, char.keep = c("?", "."))
 }
 }
 \seealso{
-  \code{\link[qdap]{rm_stopwords}}
+\code{\link[qdap]{rm_stopwords}}
 }
 

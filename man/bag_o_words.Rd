@@ -4,11 +4,11 @@
 \alias{word_split}
 \title{Bag of Words}
 \usage{
-  bag_o_words(text.var, apostrophe.remove = FALSE, ...)
+bag_o_words(text.var, apostrophe.remove = FALSE, ...)
 
-  breaker(text.var)
+breaker(text.var)
 
-  word_split(text.var)
+word_split(text.var)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -20,22 +20,21 @@
   function.}
 }
 \value{
-  Returns a vector of striped words.
+Returns a vector of striped words.
 
-  \code{breaker} - returns a vector of striped words and
-  qdap recognized endmarks (i.e., \code{".", "!", "?", "*",
-  "-"}).
+\code{breaker} - returns a vector of striped words and qdap
+recognized endmarks (i.e., \code{".", "!", "?", "*", "-"}).
 }
 \description{
-  \code{bag_o_words} - Reduces a text column to a bag of
-  words.
+\code{bag_o_words} - Reduces a text column to a bag of
+words.
 
-  \code{breaker} - Reduces a text column to a bag of words
-  and qdap recognized end marks.
+\code{breaker} - Reduces a text column to a bag of words
+and qdap recognized end marks.
 
-  \code{word_split} - Reduces a text column to a list of
-  vectors of bag of words and qdap recognized end marks
-  (i.e., \code{".", "!", "?", "*", "-"}).
+\code{word_split} - Reduces a text column to a list of
+vectors of bag of words and qdap recognized end marks
+(i.e., \code{".", "!", "?", "*", "-"}).
 }
 \examples{
 \dontrun{

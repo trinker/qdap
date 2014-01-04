@@ -1,18 +1,16 @@
 \name{sentSplit}
+\alias{TOT}
 \alias{sentCombine}
 \alias{sentSplit}
-\alias{TOT}
 \title{Sentence Splitting}
 \usage{
-  sentSplit(dataframe, text.var, rm.var = NULL,
-    endmarks = c("?", ".", "!", "|"),
-    incomplete.sub = TRUE, rm.bracket = TRUE,
-    stem.col = FALSE, text.place = "right", ...)
+sentSplit(dataframe, text.var, rm.var = NULL, endmarks = c("?", ".", "!",
+  "|"), incomplete.sub = TRUE, rm.bracket = TRUE, stem.col = FALSE,
+  text.place = "right", ...)
 
-  sentCombine(text.var, grouping.var = NULL,
-    as.list = FALSE)
+sentCombine(text.var, grouping.var = NULL, as.list = FALSE)
 
-  TOT(tot)
+TOT(tot)
 }
 \arguments{
   \item{dataframe}{A dataframe that contains the person and
@@ -57,29 +55,29 @@
   as a dataframe.}
 }
 \value{
-  \code{sentSplit} - returns a dataframe with turn of talk
-  broken apart into sentences.  Optionally a stemmed
-  version of the text variable may be returned as well.
+\code{sentSplit} - returns a dataframe with turn of talk
+broken apart into sentences.  Optionally a stemmed version
+of the text variable may be returned as well.
 
-  \code{sentCombine} - returns a list of vectors with the
-  continuous sentences by grouping.var pasted together.
-  returned as well.
+\code{sentCombine} - returns a list of vectors with the
+continuous sentences by grouping.var pasted together.
+returned as well.
 
-  \code{TOT} - returns a numeric vector of the turns of
-  talk without sentence sub indexing (e.g. 3.2 become 3).
+\code{TOT} - returns a numeric vector of the turns of talk
+without sentence sub indexing (e.g. 3.2 become 3).
 }
 \description{
-  \code{sentSplit} - Splits turns of talk into individual
-  sentences (provided proper punctuation is used).  This
-  procedure is usually done as part of the data read in and
-  cleaning process.
+\code{sentSplit} - Splits turns of talk into individual
+sentences (provided proper punctuation is used).  This
+procedure is usually done as part of the data read in and
+cleaning process.
 
-  \code{sentCombine} - Combines sentences by the same
-  grouping variable together.
+\code{sentCombine} - Combines sentences by the same
+grouping variable together.
 
-  \code{TOT} - Convert the tot column from
-  \code{\link[qdap]{sentSplit}} to turn of talk index (no
-  sub sentence).  Generally, for internal use.
+\code{TOT} - Convert the tot column from
+\code{\link[qdap]{sentSplit}} to turn of talk index (no sub
+sentence).  Generally, for internal use.
 }
 \section{Warning}{
   \code{\link[qdap]{sentSplit}} requires the dialogue
@@ -123,13 +121,12 @@ TOT(dat$tot)
 }
 }
 \author{
-  Dason Kurkiewicz and Tyler Rinker
-  <tyler.rinker@gmail.com>.
+Dason Kurkiewicz and Tyler Rinker <tyler.rinker@gmail.com>.
 }
 \seealso{
-  \code{\link[qdap]{bracketX}},
-  \code{\link[qdap]{incomplete_replace}},
-  \code{\link[qdap]{stem2df}} , \code{\link[qdap]{TOT}}
+\code{\link[qdap]{bracketX}},
+\code{\link[qdap]{incomplete_replace}},
+\code{\link[qdap]{stem2df}} , \code{\link[qdap]{TOT}}
 }
 \keyword{sentence,}
 \keyword{split,}

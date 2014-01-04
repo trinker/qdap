@@ -2,7 +2,7 @@
 \alias{print.v_outer}
 \title{Prints a v_outer Object.}
 \usage{
-  \method{print}{v_outer} (x, digits = 3, ...)
+\method{print}{v_outer}(x, digits = 3, ...)
 }
 \arguments{
   \item{x}{The v_outer object}
@@ -12,6 +12,6 @@
   \item{\ldots}{ignored}
 }
 \description{
-  Prints a v_outer object.
+Prints a v_outer object.
 }
 

@@ -2,11 +2,9 @@
 \alias{qprep}
 \title{Quick Preparation of Text}
 \usage{
-  qprep(text.var, rm.dash = TRUE, bracket = "all",
-    missing = NULL, names = FALSE,
-    abbreviation = qdapDictionaries::abbreviations,
-    replace = NULL, ignore.case = TRUE,
-    num.paste = "separate", ...)
+qprep(text.var, rm.dash = TRUE, bracket = "all", missing = NULL,
+  names = FALSE, abbreviation = qdapDictionaries::abbreviations,
+  replace = NULL, ignore.case = TRUE, num.paste = "separate", ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -48,17 +46,17 @@
   \code{\link[qdap]{replace_symbol}}.}
 }
 \description{
-  Wrapper for \code{\link[qdap]{bracketX}},
-  \code{\link[qdap]{replace_number}},
-  \code{\link[qdap]{replace_symbol}},
-  \code{\link[qdap]{replace_abbreviation}} and
-  \code{\link[qdap]{scrubber}} to quickly prepare text for
-  analysis.  Care should be taken with this function to
-  ensure data is properly formatted and complete.
+Wrapper for \code{\link[qdap]{bracketX}},
+\code{\link[qdap]{replace_number}},
+\code{\link[qdap]{replace_symbol}},
+\code{\link[qdap]{replace_abbreviation}} and
+\code{\link[qdap]{scrubber}} to quickly prepare text for
+analysis.  Care should be taken with this function to
+ensure data is properly formatted and complete.
 }
 \note{
-  Care should be taken with this function to ensure data is
-  properly formatted and complete.
+Care should be taken with this function to ensure data is
+properly formatted and complete.
 }
 \examples{
 \dontrun{
@@ -67,9 +65,9 @@ qprep(x)
 }
 }
 \seealso{
-  \code{\link[qdap]{bracketX}},
-  \code{\link[qdap]{replace_abbreviation}},
-  \code{\link[qdap]{replace_number}},
-  \code{\link[qdap]{replace_symbol}}
+\code{\link[qdap]{bracketX}},
+\code{\link[qdap]{replace_abbreviation}},
+\code{\link[qdap]{replace_number}},
+\code{\link[qdap]{replace_symbol}}
 }
 

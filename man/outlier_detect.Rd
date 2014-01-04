@@ -2,8 +2,8 @@
 \alias{outlier_detect}
 \title{Detect Outliers in Text}
 \usage{
-  outlier_detect(text.var, grouping.var = NULL,
-    FUN = word_count, scale.by = "grouping")
+outlier_detect(text.var, grouping.var = NULL, FUN = word_count,
+  scale.by = "grouping")
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -23,11 +23,11 @@
   by all.}
 }
 \value{
-  Returns a dataframe with possible outliers.
+Returns a dataframe with possible outliers.
 }
 \description{
-  Locate possible outliers for text variables given numeric
-  word function.
+Locate possible outliers for text variables given numeric
+word function.
 }
 \examples{
 \dontrun{

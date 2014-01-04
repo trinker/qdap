@@ -2,7 +2,7 @@
 \alias{text2color}
 \title{Map Words to Colors}
 \usage{
-  text2color(words, recode.words, colors)
+text2color(words, recode.words, colors)
 }
 \arguments{
   \item{words}{A vector of words.}
@@ -15,11 +15,11 @@
   recode.words + 1(the +1 is for unmatched words).}
 }
 \value{
-  Returns a vector of mapped colors equal in length to the
-  words vector.
+Returns a vector of mapped colors equal in length to the
+words vector.
 }
 \description{
-  A dictionary lookup that maps words to colors.
+A dictionary lookup that maps words to colors.
 }
 \examples{
 \dontrun{
@@ -35,7 +35,7 @@ x
 }
 }
 \seealso{
-  \code{\link[qdap]{lookup}}
+\code{\link[qdap]{lookup}}
 }
 \keyword{color,}
 \keyword{dictionary}

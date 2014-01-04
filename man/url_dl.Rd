@@ -2,7 +2,7 @@
 \alias{url_dl}
 \title{Download Instructional Documents}
 \usage{
-  url_dl(..., url = 61803503)
+url_dl(..., url = 61803503)
 }
 \arguments{
   \item{\ldots}{Document names to download. Quoted strings
@@ -12,15 +12,15 @@
   \item{url}{The download url or dropbox key.}
 }
 \value{
-  Places a copy of the downloaded document in the users
-  working directory.
+Places a copy of the downloaded document in the users
+working directory.
 }
 \description{
-  This function enables downloading documents for future
-  instructional training.
+This function enables downloading documents for future
+instructional training.
 }
 \note{
-  Not intended for general use.
+Not intended for general use.
 }
 \examples{
 \dontrun{

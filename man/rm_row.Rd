@@ -3,10 +3,9 @@
 \alias{rm_row}
 \title{Remove Rows That Contain Markers}
 \usage{
-  rm_row(dataframe, search.column, terms,
-    keep.rownames = FALSE)
+rm_row(dataframe, search.column, terms, keep.rownames = FALSE)
 
-  rm_empty_row(dataframe)
+rm_empty_row(dataframe)
 }
 \arguments{
   \item{dataframe}{A dataframe object.}
@@ -22,19 +21,19 @@
   original, non-sequential, rownames will be used.}
 }
 \value{
-  \code{rm_row} - returns a dataframe with the
-  termed/markered rows removed.
+\code{rm_row} - returns a dataframe with the
+termed/markered rows removed.
 
-  \code{rm_empty_row} - returns a dataframe with empty rows
-  removed.
+\code{rm_empty_row} - returns a dataframe with empty rows
+removed.
 }
 \description{
-  \code{rm_row} - Remove rows from a data set that contain
-  a given marker/term.
+\code{rm_row} - Remove rows from a data set that contain a
+given marker/term.
 
-  \code{rm_empty_row} - Removes the empty rows of a data
-  set that are common in reading in data (default method in
-  \code{\link[qdap]{read.transcript}}).
+\code{rm_empty_row} - Removes the empty rows of a data set
+that are common in reading in data (default method in
+\code{\link[qdap]{read.transcript}}).
 }
 \examples{
 \dontrun{

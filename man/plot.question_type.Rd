@@ -2,9 +2,8 @@
 \alias{plot.question_type}
 \title{Plots a question_type Object}
 \usage{
-  \method{plot}{question_type} (x, label = FALSE,
-    lab.digits = 1, percent = NULL, zero.replace = NULL,
-    ...)
+\method{plot}{question_type}(x, label = FALSE, lab.digits = 1,
+  percent = NULL, zero.replace = NULL, ...)
 }
 \arguments{
   \item{x}{The question_type object.}
@@ -28,6 +27,6 @@
   \item{\ldots}{Other arguments passed to qheat.}
 }
 \description{
-  Plots a question_type object.
+Plots a question_type object.
 }
 

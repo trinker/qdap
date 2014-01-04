@@ -3,21 +3,24 @@
 \alias{rajPOS}
 \title{Romeo and Juliet Split in Parts of Speech}
 \format{A list with 4 elements}
+\usage{
+data(rajPOS)
+}
 \description{
-  A dataset containing a list from \code{\link[qdap]{pos}}
-  using the \code{\link[qdap]{raj}} data set (see
-  \code{\link[qdap]{pos}} for more information).
+A dataset containing a list from \code{\link[qdap]{pos}}
+using the \code{\link[qdap]{raj}} data set (see
+\code{\link[qdap]{pos}} for more information).
 }
 \details{
-  \describe{ \item{text}{The original text}
-  \item{POStagged}{The original words replaced with parts
-  of speech in context.} \item{POSprop}{Dataframe of the
-  proportion of parts of speech by row.}
-  \item{POSfreq}{Dataframe of the frequency of parts of
-  speech by row.} }
+\describe{ \item{text}{The original text}
+\item{POStagged}{The original words replaced with parts of
+speech in context.} \item{POSprop}{Dataframe of the
+proportion of parts of speech by row.}
+\item{POSfreq}{Dataframe of the frequency of parts of
+speech by row.} }
 }
 \references{
-  \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
+\url{http://shakespeare.mit.edu/romeo_juliet/full.html}
 }
 \keyword{datasets}
 

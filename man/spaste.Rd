@@ -2,7 +2,7 @@
 \alias{spaste}
 \title{Add Leading/Trailing Spaces}
 \usage{
-  spaste(terms, trailing = TRUE, leading = TRUE)
+spaste(terms, trailing = TRUE, leading = TRUE)
 }
 \arguments{
   \item{terms}{A character vector of terms to insert
@@ -15,11 +15,11 @@
   trailing space in the terms.}
 }
 \value{
-  Returns a character vector with trailing and/or leading
-  spaces.
+Returns a character vector with trailing and/or leading
+spaces.
 }
 \description{
-  Adds trailing and/or leading spaces to a vector of terms.
+Adds trailing and/or leading spaces to a vector of terms.
 }
 \examples{
 \dontrun{

@@ -2,7 +2,7 @@
 \alias{plot.rmgantt}
 \title{Plots a rmgantt object}
 \usage{
-  \method{plot}{rmgantt} (x, title, transform = FALSE, ...)
+\method{plot}{rmgantt}(x, title, transform = FALSE, ...)
 }
 \arguments{
   \item{x}{The sums_rmgantt object}
@@ -16,6 +16,6 @@
   \code{gantt_wrap}}
 }
 \description{
-  Plots a rmgantt object.
+Plots a rmgantt object.
 }
 

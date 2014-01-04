@@ -2,9 +2,8 @@
 \alias{dissimilarity}
 \title{Dissimilarity Statistics}
 \usage{
-  dissimilarity(text.var, grouping.var = NULL,
-    method = "prop", diag = FALSE, upper = FALSE, p = 2,
-    ...)
+dissimilarity(text.var, grouping.var = NULL, method = "prop",
+  diag = FALSE, upper = FALSE, p = 2, ...)
 }
 \arguments{
   \item{text.var}{A text variable or word frequency matrix
@@ -32,12 +31,12 @@
   \code{\link[qdap]{wfm}}.}
 }
 \value{
-  Returns a matrix of dissimilarity values (the agreement
-  between text).
+Returns a matrix of dissimilarity values (the agreement
+between text).
 }
 \description{
-  Uses the distance function to calculate dissimilarity
-  statistics by grouping variables.
+Uses the distance function to calculate dissimilarity
+statistics by grouping variables.
 }
 \examples{
 \dontrun{
@@ -94,7 +93,7 @@ legend("topleft",  paste("Time", 1:3), pch=c(15, 17, 19))
 }
 }
 \seealso{
-  \code{\link[stats]{dist}}
+\code{\link[stats]{dist}}
 }
 \keyword{dissimilarity}
 

@@ -2,8 +2,8 @@
 \alias{name2sex}
 \title{Names to Gender Prediction}
 \usage{
-  name2sex(names.list, pred.sex = TRUE,
-    fuzzy.match = pred.sex, USE.NAMES = FALSE)
+name2sex(names.list, pred.sex = TRUE, fuzzy.match = pred.sex,
+  USE.NAMES = FALSE)
 }
 \arguments{
   \item{names.list}{Character vector containing first
@@ -25,12 +25,12 @@
   used to name the gender vector.}
 }
 \value{
-  Returns a vector of predicted gender (M/F) based on first
-  name.
+Returns a vector of predicted gender (M/F) based on first
+name.
 }
 \description{
-  Predict gender from U.S. names (based on 1990 U.S. census
-  data).
+Predict gender from U.S. names (based on 1990 U.S. census
+data).
 }
 \examples{
 \dontrun{
@@ -68,18 +68,17 @@ data.frame(name = orig_nms, sex = sex, `ratio_F:M` = names(sex),
 }
 }
 \author{
-  Dason Kurkiewicz and Tyler Rinker
-  <tyler.rinker@gmail.com>.
+Dason Kurkiewicz and Tyler Rinker <tyler.rinker@gmail.com>.
 }
 \references{
-  \url{http://www.census.gov/genealogy/www/data/1990surnames/names_files.html}
+\url{http://www.census.gov/genealogy/www/data/1990surnames/names_files.html}
 
-  \url{http://stackoverflow.com/a/818231/1000343}
+\url{http://stackoverflow.com/a/818231/1000343}
 
-  \url{http://www.talkstats.com/showthread.php/31660}
+\url{http://www.talkstats.com/showthread.php/31660}
 }
 \seealso{
-  \code{\link[base]{agrep}}
+\code{\link[base]{agrep}}
 }
 \keyword{gender}
 \keyword{name}

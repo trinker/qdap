@@ -2,11 +2,10 @@
 \alias{cm_distance}
 \title{Distance Matrix Between Codes}
 \usage{
-  cm_distance(dataframe, pvals = c(TRUE, FALSE),
-    replications = 1000, parallel = TRUE,
-    extended.output = TRUE, time.var = TRUE,
-    code.var = "code", causal = FALSE, start.var = "start",
-    end.var = "end", cores = detectCores()/2)
+cm_distance(dataframe, pvals = c(TRUE, FALSE), replications = 1000,
+  parallel = TRUE, extended.output = TRUE, time.var = TRUE,
+  code.var = "code", causal = FALSE, start.var = "start",
+  end.var = "end", cores = detectCores()/2)
 }
 \arguments{
   \item{dataframe}{A data frame from the cm_x2long family
@@ -73,44 +72,44 @@
   use half of the available cores.}
 }
 \value{
-  An object of the class \code{"cm_distance"}.  This is a
-  list with the following components:
+An object of the class \code{"cm_distance"}.  This is a
+list with the following components:
 
-  \item{pvals}{A logical indication of whether pvalues were
-  calculated} \item{replications}{Integer value of number
-  of replications used} \item{extended.output}{An optional
-  list of individual repeated measures information}
-  \item{main.output}{A list of aggregated repeated measures
-  information} \item{adj.alpha}{An adjusted alpha level
-  (based on \eqn{\alpha = .05}) for the estimated p-values
-  using the upper end of the confidence interval around the
-  p-values}
+\item{pvals}{A logical indication of whether pvalues were
+calculated} \item{replications}{Integer value of number of
+replications used} \item{extended.output}{An optional list
+of individual repeated measures information}
+\item{main.output}{A list of aggregated repeated measures
+information} \item{adj.alpha}{An adjusted alpha level
+(based on \eqn{\alpha = .05}) for the estimated p-values
+using the upper end of the confidence interval around the
+p-values}
 
-  Within the lists of extended.output and list of the
-  main.output are the following items:
+Within the lists of extended.output and list of the
+main.output are the following items:
 
-  \item{mean}{A distance matrix of average distances
-  between codes} \item{sd}{A matrix of standard deviations
-  of distances between codes} \item{n}{A matrix of counts
-  of distances between codes} \item{stan.mean}{A matrix of
-  standardized values of distances between codes.  The
-  closer a value is to zero the closer two codes relate.}
-  \item{pvalue}{A n optional matrix of simulated pvalues
-  associated with the mean distances}
+\item{mean}{A distance matrix of average distances between
+codes} \item{sd}{A matrix of standard deviations of
+distances between codes} \item{n}{A matrix of counts of
+distances between codes} \item{stan.mean}{A matrix of
+standardized values of distances between codes.  The closer
+a value is to zero the closer two codes relate.}
+\item{pvalue}{A n optional matrix of simulated pvalues
+associated with the mean distances}
 }
 \description{
-  Generate distance measures to ascertain a mean distance
-  measure between codes.
+Generate distance measures to ascertain a mean distance
+measure between codes.
 }
 \details{
-  Note that row names are the first code and column names
-  are the second comparison code. The values for Code A
-  compared to Code B will not be the same as Code B
-  compared to Code A. This is because, unlike a true
-  distance measure, cm_distance's matrix is asymmetrical.
-  \code{cm_distance} computes the distance by taking each
-  span (start and end) for Code A and comparing it to the
-  nearest start or end for Code B.
+Note that row names are the first code and column names are
+the second comparison code. The values for Code A compared
+to Code B will not be the same as Code B compared to Code
+A. This is because, unlike a true distance measure,
+cm_distance's matrix is asymmetrical. \code{cm_distance}
+computes the distance by taking each span (start and end)
+for Code A and comparing it to the nearest start or end for
+Code B.
 }
 \section{Warning}{
   p-values are estimated and thus subject to error.  More
@@ -160,10 +159,10 @@ plot(dat)
 }
 }
 \references{
-  \url{http://stats.stackexchange.com/a/22333/7482}
+\url{http://stats.stackexchange.com/a/22333/7482}
 }
 \seealso{
-  \code{\link[qdap]{print.cm_distance}}
+\code{\link[qdap]{print.cm_distance}}
 }
 \keyword{association}
 \keyword{codes}

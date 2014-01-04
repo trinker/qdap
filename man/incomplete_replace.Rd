@@ -3,9 +3,9 @@
 \alias{incomplete_replace}
 \title{Denote Incomplete End Marks With "|"}
 \usage{
-  incomplete_replace(text.var, scan.mode = FALSE)
+incomplete_replace(text.var, scan.mode = FALSE)
 
-  incomp(text.var, scan.mode = FALSE)
+incomp(text.var, scan.mode = FALSE)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -14,14 +14,14 @@
   reports incomplete sentences.}
 }
 \value{
-  Returns a text variable (character sting) with incomplete
-  sentence marks (.., ..., .?, ..?, en & em dash etc.)
-  replaced with "|".  If scan mode is \code{TRUE} returns a
-  data frame with incomplete sentence location.
+Returns a text variable (character sting) with incomplete
+sentence marks (.., ..., .?, ..?, en & em dash etc.)
+replaced with "|".  If scan mode is \code{TRUE} returns a
+data frame with incomplete sentence location.
 }
 \description{
-  Replaces incomplete sentence end marks (.., ..., .?, ..?,
-  en \& em dash etc.) with \code{"|"}.
+Replaces incomplete sentence end marks (.., ..., .?, ..?,
+en \& em dash etc.) with \code{"|"}.
 }
 \examples{
 \dontrun{

@@ -3,10 +3,9 @@
 \alias{lookup}
 \title{Hash Table/Dictionary Lookup}
 \usage{
-  lookup(terms, key.match, key.reassign = NULL,
-    missing = NA)
+lookup(terms, key.match, key.reassign = NULL, missing = NA)
 
-  %l%(terms, key.match, key.reassign = NULL, missing = NA)
+terms \%l\% key.match
 }
 \arguments{
   \item{terms}{A vector of terms to undergo a lookup.}
@@ -26,15 +25,15 @@
   retained.}
 }
 \value{
-  Outputs A new vector with reassigned values.
+Outputs A new vector with reassigned values.
 }
 \description{
-  Environment based hash table useful for large vector
-  lookups.
+Environment based hash table useful for large vector
+lookups.
 
-  \code{terms \%l\% key.match} - A binary operator version
-  of \code{lookup} for when \code{key.match} is a
-  data.frame or named list.
+\code{terms \%l\% key.match} - A binary operator version of
+\code{lookup} for when \code{key.match} is a data.frame or
+named list.
 }
 \examples{
 \dontrun{
@@ -75,7 +74,7 @@ lookup(mtcars$carb, sort(unique(mtcars$carb)),
 }
 }
 \seealso{
-  \code{\link[base]{new.env}}
+\code{\link[base]{new.env}}
 }
 \keyword{dictionary,}
 \keyword{hash,}

@@ -2,13 +2,12 @@
 \alias{plot.polarity}
 \title{Plots a polarity Object}
 \usage{
-  \method{plot}{polarity} (x, bar.size = 5, low = "red",
-    mid = "grey99", high = "blue",
-    ave.polarity.shape = "+", alpha = 1/4, shape = 19,
-    point.size = 2.5, jitter = 0.1, nrow = NULL,
-    na.rm = TRUE, order.by.polarity = TRUE, plot = TRUE,
-    error.bars = TRUE, error.bar.height = 0.5,
-    error.bar.size = 0.5, error.bar.color = "black", ...)
+\method{plot}{polarity}(x, bar.size = 5, low = "red", mid = "grey99",
+  high = "blue", ave.polarity.shape = "+", alpha = 1/4, shape = 19,
+  point.size = 2.5, jitter = 0.1, nrow = NULL, na.rm = TRUE,
+  order.by.polarity = TRUE, plot = TRUE, error.bars = TRUE,
+  error.bar.height = 0.5, error.bar.size = 0.5, error.bar.color = "black",
+  ...)
 }
 \arguments{
   \item{x}{The polarity object.}
@@ -70,13 +69,13 @@
   \item{\ldots}{ignored}
 }
 \value{
-  Invisibly returns the \code{ggplot2} objects that form
-  the larger plot.
+Invisibly returns the \code{ggplot2} objects that form the
+larger plot.
 }
 \description{
-  Plots a polarity object as a heat map Gantt plot with
-  polarity over time (measured in words) and polarity
-  scores per sentence.  In the Gantt plot the black dots
-  are the average polarity per grouping variable.
+Plots a polarity object as a heat map Gantt plot with
+polarity over time (measured in words) and polarity scores
+per sentence.  In the Gantt plot the black dots are the
+average polarity per grouping variable.
 }
 

@@ -3,24 +3,22 @@
 \alias{df2tm_corpus}
 \alias{dtm}
 \alias{tdm}
-\alias{tm_corpus2df}
 \alias{tm2qdap}
+\alias{tm_corpus2df}
 \title{tm Package Compatability Tools: Apply to or Convert to/from Term Document
 Matrix or Document Term Matrix}
 \usage{
-  tdm(text.var, grouping.var = NULL, vowel.check = TRUE,
-    ...)
+tdm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-  dtm(text.var, grouping.var = NULL, vowel.check = TRUE,
-    ...)
+dtm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-  tm2qdap(x)
+tm2qdap(x)
 
-  apply_as_tm(wfm.obj, tmfun, ..., to.qdap = TRUE)
+apply_as_tm(wfm.obj, tmfun, ..., to.qdap = TRUE)
 
-  tm_corpus2df(tm.corpus, col1 = "docs", col2 = "text")
+tm_corpus2df(tm.corpus, col1 = "docs", col2 = "text")
 
-  df2tm_corpus(text.var, grouping.var = NULL, ...)
+df2tm_corpus(text.var, grouping.var = NULL, ...)
 }
 \arguments{
   \item{text.var}{The text variable or a
@@ -61,56 +59,56 @@ Matrix or Document Term Matrix}
   vectors).}
 }
 \value{
-  \code{tdm} - Returns a
-  \code{\link[tm]{TermDocumentMatrix}}.
+\code{tdm} - Returns a
+\code{\link[tm]{TermDocumentMatrix}}.
 
-  \code{dtm} - Returns a
-  \code{\link[tm]{DocumentTermMatrix}}.
+\code{dtm} - Returns a
+\code{\link[tm]{DocumentTermMatrix}}.
 
-  \code{tm2qdap} - Returns a \code{\link[qdap]{wfm}} object
-  or \code{\link[qdap]{wfm_weight}} object.
+\code{tm2qdap} - Returns a \code{\link[qdap]{wfm}} object
+or \code{\link[qdap]{wfm_weight}} object.
 
-  \code{apply_as_tm} - Applies a tm oriented function to a
-  \code{\link[qdap]{wfm}} and attempts to simplify back to
-  a \code{\link[qdap]{wfm}} or
-  \code{\link[qdap]{wfm_weight}} format.
+\code{apply_as_tm} - Applies a tm oriented function to a
+\code{\link[qdap]{wfm}} and attempts to simplify back to a
+\code{\link[qdap]{wfm}} or \code{\link[qdap]{wfm_weight}}
+format.
 
-  \code{tm_corpus2df} - Converts a \code{\link[tm]{Corpus}}
-  and returns a qdap oriented dataframe.
+\code{tm_corpus2df} - Converts a \code{\link[tm]{Corpus}}
+and returns a qdap oriented dataframe.
 
-  \code{df2tm_corpus} - Converts a qdap oriented dataframe
-  and returns a \code{\link[tm]{Corpus}}.
+\code{df2tm_corpus} - Converts a qdap oriented dataframe
+and returns a \code{\link[tm]{Corpus}}.
 }
 \description{
-  \code{tdm} - Create term document matrices from raw text
-  or \code{\link[qdap]{wfm}} for use with other text
-  analysis packages.
+\code{tdm} - Create term document matrices from raw text or
+\code{\link[qdap]{wfm}} for use with other text analysis
+packages.
 
-  \code{dtm} - Create document term matrices from raw text
-  or \code{\link[qdap]{wfm}} for use with other text
-  analysis packages.
+\code{dtm} - Create document term matrices from raw text or
+\code{\link[qdap]{wfm}} for use with other text analysis
+packages.
 
-  \code{tm2wfm} - Convert the \code{tm} package's
-  \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}
-  to \code{\link[qdap]{wfm}}.
+\code{tm2wfm} - Convert the \code{tm} package's
+\code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}
+to \code{\link[qdap]{wfm}}.
 
-  \code{apply_as_tm} - Apply functions intended to be used
-  on the \code{tm} package's
-  \code{\link[tm]{TermDocumentMatrix}} to a
-  \code{\link[qdap]{wfm}} object.
+\code{apply_as_tm} - Apply functions intended to be used on
+the \code{tm} package's
+\code{\link[tm]{TermDocumentMatrix}} to a
+\code{\link[qdap]{wfm}} object.
 
-  \code{tm_corpus2df} - Convert a tm package corpus to a
-  dataframe.
+\code{tm_corpus2df} - Convert a tm package corpus to a
+dataframe.
 
-  \code{df2tm_corpus} - Convert a qdap dataframe to a tm
-  package \code{\link[tm]{Corpus}}.
+\code{df2tm_corpus} - Convert a qdap dataframe to a tm
+package \code{\link[tm]{Corpus}}.
 }
 \details{
-  Produces output that is identical to the \code{tm}
-  package's \code{\link[tm]{TermDocumentMatrix}},
-  \code{\link[tm]{DocumentTermMatrix}},
-  \code{\link[tm]{Corpus}} or allows convenient inteface
-  between the qdap and tm packages.
+Produces output that is identical to the \code{tm}
+package's \code{\link[tm]{TermDocumentMatrix}},
+\code{\link[tm]{DocumentTermMatrix}},
+\code{\link[tm]{Corpus}} or allows convenient inteface
+between the qdap and tm packages.
 }
 \examples{
 \dontrun{
@@ -249,8 +247,8 @@ class(x)
 }
 }
 \seealso{
-  \code{\link[tm]{DocumentTermMatrix}},
-  \code{\link[tm]{Corpus}},
-  \code{\link[tm]{TermDocumentMatrix}}
+\code{\link[tm]{DocumentTermMatrix}},
+\code{\link[tm]{Corpus}},
+\code{\link[tm]{TermDocumentMatrix}}
 }
 

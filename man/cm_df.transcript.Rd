@@ -2,8 +2,8 @@
 \alias{cm_df.transcript}
 \title{Transcript With Word Number}
 \usage{
-  cm_df.transcript(text.var, grouping.var, file = NULL,
-    indent = 4, width = 70, space = 2, ...)
+cm_df.transcript(text.var, grouping.var, file = NULL, indent = 4,
+  width = 70, space = 2, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -30,23 +30,22 @@
   \item{\ldots}{Other arguments passed to strip.}
 }
 \value{
-  Returns a transcript by grouping variable with word
-  number above each word.  This makes use with
-  \code{\link[qdap]{cm_df2long}} transfer/usage easier
-  because the researcher has coded on a transcript with the
-  numeric word index already.
+Returns a transcript by grouping variable with word number
+above each word.  This makes use with
+\code{\link[qdap]{cm_df2long}} transfer/usage easier
+because the researcher has coded on a transcript with the
+numeric word index already.
 }
 \description{
-  Output a transcript with word number/index above for easy
-  input back into
-  \href{http://trinker.github.com/qdap/}{qdap after
-  coding.}
+Output a transcript with word number/index above for easy
+input back into \href{http://trinker.github.com/qdap/}{qdap
+after coding.}
 }
 \note{
-  It is recommended that the researcher actually codes on
-  the output from this file.  The codes can then be
-  transferred to via a list.  If a file already exists
-  \code{cm_df.transcript} will append to that file.
+It is recommended that the researcher actually codes on the
+output from this file.  The codes can then be transferred
+to via a list.  If a file already exists
+\code{cm_df.transcript} will append to that file.
 }
 \examples{
 \dontrun{
@@ -67,12 +66,12 @@ DATA <- qdap::DATA
 }
 }
 \author{
-  DWin, Gavin Simpson and Tyler Rinker
-  <tyler.rinker@gmail.com>.
+DWin, Gavin Simpson and Tyler Rinker
+<tyler.rinker@gmail.com>.
 }
 \seealso{
-  \code{\link[qdap]{cm_df2long}},
-  \code{\link[qdap]{cm_df.temp}}
+\code{\link[qdap]{cm_df2long}},
+\code{\link[qdap]{cm_df.temp}}
 }
 \keyword{transcript}
 

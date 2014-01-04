@@ -2,9 +2,8 @@
 \alias{dir_map}
 \title{Map Transcript Files from a Directory to a Script}
 \usage{
-  dir_map(loc = "CLEANED_TRANSCRIPTS", obj.prefix = "dat",
-    use.path = TRUE, col.names = c("person", "dialogue"),
-    file = NULL, copy2clip = TRUE)
+dir_map(loc = "CLEANED_TRANSCRIPTS", obj.prefix = "dat", use.path = TRUE,
+  col.names = c("person", "dialogue"), file = NULL, copy2clip = TRUE)
 }
 \arguments{
   \item{loc}{The path/location of the transcript data
@@ -30,26 +29,26 @@
   copy the output to the clipboard.}
 }
 \value{
-  Prints a read in script text to the console, optionally
-  copies the wrapped text to the clipboard on a Mac or
-  Windows machine and optionally prints to an outside file.
+Prints a read in script text to the console, optionally
+copies the wrapped text to the clipboard on a Mac or
+Windows machine and optionally prints to an outside file.
 }
 \description{
-  Generate script text (and optionally output it to the
-  clipboard and/or an external file) that can be used to
-  individually read in every file in a directory and assign
-  it to an object.
+Generate script text (and optionally output it to the
+clipboard and/or an external file) that can be used to
+individually read in every file in a directory and assign
+it to an object.
 }
 \details{
-  Generally, the researcher will want to read in and parse
-  every transcript document separately.  The task of
-  writing the script for multiple transcript documents can
-  be tedious.  This function is designed to make the
-  process more efficient and less prone to errors.
+Generally, the researcher will want to read in and parse
+every transcript document separately.  The task of writing
+the script for multiple transcript documents can be
+tedious.  This function is designed to make the process
+more efficient and less prone to errors.
 }
 \note{
-  \code{skip} is set to 0, however, it is likely that this
-  value will need to be changed for each transcript.
+\code{skip} is set to 0, however, it is likely that this
+value will need to be changed for each transcript.
 }
 \examples{
 \dontrun{
@@ -58,6 +57,6 @@ dir_map(DIR)
 }
 }
 \seealso{
-  \code{\link[qdap]{read.transcript}}
+\code{\link[qdap]{read.transcript}}
 }
 

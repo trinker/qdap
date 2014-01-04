@@ -2,8 +2,8 @@
 \alias{word_cor}
 \title{Find Correlated Words}
 \usage{
-  word_cor(text.var, grouping.var = NULL, word, r = 0.7,
-    values = TRUE, method = "pearson", ...)
+word_cor(text.var, grouping.var = NULL, word, r = 0.7, values = TRUE,
+  method = "pearson", ...)
 }
 \arguments{
   \item{text.var}{The text variable (or frequency matrix).}
@@ -33,11 +33,11 @@
   \code{\link[qdap]{wfm}}.}
 }
 \value{
-  Returns a vector of associated words or correlation
-  matrix if \code{r = NULL}.
+Returns a vector of associated words or correlation matrix
+if \code{r = NULL}.
 }
 \description{
-  Find associated words within grouping variable(s).
+Find associated words within grouping variable(s).
 }
 \examples{
 \dontrun{
@@ -99,9 +99,9 @@ word_cor(t(z), word = c(names(worlis), "else.words"), r = NULL)
 }
 }
 \seealso{
-  \code{\link[tm]{findAssocs}},
-  \code{\link[qdap]{word_associate}},
-  \code{\link[qdap]{wfm}}, \code{\link[stats]{cor}}
+\code{\link[tm]{findAssocs}},
+\code{\link[qdap]{word_associate}},
+\code{\link[qdap]{wfm}}, \code{\link[stats]{cor}}
 }
 \keyword{association}
 \keyword{correaltion,}

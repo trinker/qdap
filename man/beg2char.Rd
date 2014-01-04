@@ -3,9 +3,9 @@
 \alias{char2end}
 \title{Grab Begin/End of String to Character}
 \usage{
-  beg2char(text.var, char = " ", noc = 1, include = FALSE)
+beg2char(text.var, char = " ", noc = 1, include = FALSE)
 
-  char2end(text.var, char = " ", noc = 1, include = FALSE)
+char2end(text.var, char = " ", noc = 1, include = FALSE)
 }
 \arguments{
   \item{text.var,}{A character string}
@@ -19,14 +19,13 @@
   character in the grab.}
 }
 \value{
-  returns a vector of text with char on/forward removed.
+returns a vector of text with char on/forward removed.
 }
 \description{
-  \code{beg2char} - Grab from beginning of string to a
-  character(s).
+\code{beg2char} - Grab from beginning of string to a
+character(s).
 
-  \code{char2end} - Grab from character(s) to end of
-  string.
+\code{char2end} - Grab from character(s) to end of string.
 }
 \examples{
 \dontrun{
@@ -53,10 +52,10 @@ beg2char(x3, "^", 2)
 }
 }
 \author{
-  Josh O'Brien, Justin Haynes and Tyler Rinker
-  <tyler.rinker@gmail.com>.
+Josh O'Brien, Justin Haynes and Tyler Rinker
+<tyler.rinker@gmail.com>.
 }
 \references{
-  \url{http://stackoverflow.com/q/15909626/1000343}
+\url{http://stackoverflow.com/q/15909626/1000343}
 }
 

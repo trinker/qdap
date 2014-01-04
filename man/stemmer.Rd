@@ -1,15 +1,15 @@
 \name{stemmer}
-\alias{stem_words}
 \alias{stem2df}
+\alias{stem_words}
 \alias{stemmer}
 \title{Stem Text}
 \usage{
-  stemmer(text.var, rm.bracket = TRUE, capitalize = TRUE,
-    warn = TRUE, char.keep = "~~", ...)
+stemmer(text.var, rm.bracket = TRUE, capitalize = TRUE, warn = TRUE,
+  char.keep = "~~", ...)
 
-  stem_words(...)
+stem_words(...)
 
-  stem2df(dataframe, text.var, stem.name = NULL, ...)
+stem2df(dataframe, text.var, stem.name = NULL, ...)
 }
 \arguments{
   \item{text.var}{The text variable.  In
@@ -42,24 +42,24 @@
   \code{"stem.text"}.}
 }
 \value{
-  \code{stemmer} - returns a character vector with stemmed
-  text.
+\code{stemmer} - returns a character vector with stemmed
+text.
 
-  \code{stem_words} - returns a vector of individually
-  stemmed words.
+\code{stem_words} - returns a vector of individually
+stemmed words.
 
-  \code{stem2df} - returns a dataframe with a character
-  vector with stemmed text.
+\code{stem2df} - returns a dataframe with a character
+vector with stemmed text.
 }
 \description{
-  \code{stemmer} - Stems a vector of text strings.
+\code{stemmer} - Stems a vector of text strings.
 
-  \code{stem_words} - Wrapper for stemmer that stems a
-  vector of words.
+\code{stem_words} - Wrapper for stemmer that stems a vector
+of words.
 
-  \code{stem2df} - Wrapper for stemmer that stems a vector
-  of text strings and returns a dataframe with the vector
-  added..
+\code{stem2df} - Wrapper for stemmer that stems a vector of
+text strings and returns a dataframe with the vector
+added..
 }
 \examples{
 \dontrun{
@@ -77,7 +77,7 @@ truncdf(out2, 30)
 }
 }
 \seealso{
-  \code{\link[qdap]{capitalizer}}
+\code{\link[qdap]{capitalizer}}
 }
 \keyword{stem}
 

@@ -3,11 +3,10 @@
 \alias{paste2}
 \title{Paste an Unspecified Number Of Text Columns}
 \usage{
-  paste2(multi.columns, sep = ".", handle.na = TRUE,
-    trim = TRUE)
+paste2(multi.columns, sep = ".", handle.na = TRUE, trim = TRUE)
 
-  colpaste2df(mat, combined.columns, sep = ".",
-    name.sep = "&", keep.orig = TRUE, ...)
+colpaste2df(mat, combined.columns, sep = ".", name.sep = "&",
+  keep.orig = TRUE, ...)
 }
 \arguments{
   \item{multi.columns}{The multiple columns or a list of
@@ -39,26 +38,25 @@
   \code{\link[qdap]{paste2}}.}
 }
 \value{
-  \code{paste2} - Returns a vector with row-wise elements
-  pasted together.
+\code{paste2} - Returns a vector with row-wise elements
+pasted together.
 
-  \code{colpaste2df} - Returns a dataframe with pasted
-  columns.
+\code{colpaste2df} - Returns a dataframe with pasted
+columns.
 }
 \description{
-  \code{paste2} - Paste unspecified columns or a list of
-  vectors together.
+\code{paste2} - Paste unspecified columns or a list of
+vectors together.
 
-  \code{colpaste2df} - Wrapper for
-  \code{\link[qdap]{paste2}} that returns a dataframe with
-  columns pasted together.
+\code{colpaste2df} - Wrapper for \code{\link[qdap]{paste2}}
+that returns a dataframe with columns pasted together.
 }
 \note{
-  \code{\link[base]{paste}} differs from
-  \code{\link[qdap]{paste2}} because \code{paste} does not
-  allowed an unspecified number of columns to be pasted.
-  This behavior can be convenient for inside of functions
-  when the number of columns being pasted is unknown.
+\code{\link[base]{paste}} differs from
+\code{\link[qdap]{paste2}} because \code{paste} does not
+allowed an unspecified number of columns to be pasted.
+This behavior can be convenient for inside of functions
+when the number of columns being pasted is unknown.
 }
 \examples{
 \dontrun{
@@ -97,7 +95,7 @@ colpaste2df(head(CO2), list(c(1, 2, 3, 4, 5), qcv("conc", "uptake")))
 }
 }
 \seealso{
-  \code{\link[base]{paste}}, \code{\link{colsplit2df}}
+\code{\link[base]{paste}}, \code{\link{colsplit2df}}
 }
 \keyword{paste}
 

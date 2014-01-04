@@ -2,9 +2,8 @@
 \alias{replace_contraction}
 \title{Replace Contractions}
 \usage{
-  replace_contraction(text.var,
-    contraction = qdapDictionaries::contractions,
-    replace = NULL, ignore.case = TRUE, sent.cap = TRUE)
+replace_contraction(text.var, contraction = qdapDictionaries::contractions,
+  replace = NULL, ignore.case = TRUE, sent.cap = TRUE)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -26,10 +25,10 @@
   beginning of every sentence.}
 }
 \value{
-  Returns a vector with contractions replaced.
+Returns a vector with contractions replaced.
 }
 \description{
-  This function replaces contractions with long form.
+This function replaces contractions with long form.
 }
 \examples{
 \dontrun{
@@ -43,10 +42,10 @@ replace_contraction(x)
 }
 }
 \seealso{
-  \code{\link[qdap]{bracketX}}, \code{\link[qdap]{qprep}},
-  \code{\link[qdap]{replace_abbreviation}},
-  \code{\link[qdap]{replace_number}},
-  \code{\link[qdap]{replace_symbol}}
+\code{\link[qdap]{bracketX}}, \code{\link[qdap]{qprep}},
+\code{\link[qdap]{replace_abbreviation}},
+\code{\link[qdap]{replace_number}},
+\code{\link[qdap]{replace_symbol}}
 }
 \keyword{contraction}
 

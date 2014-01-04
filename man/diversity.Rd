@@ -2,7 +2,7 @@
 \alias{diversity}
 \title{Diversity Statistics}
 \usage{
-  diversity(text.var, grouping.var = NULL)
+diversity(text.var, grouping.var = NULL)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -13,46 +13,45 @@
   grouping variables.}
 }
 \value{
-  Returns a dataframe of various diversity related indices
-  for Shannon, collision, Berger Parker and Brillouin.
+Returns a dataframe of various diversity related indices
+for Shannon, collision, Berger Parker and Brillouin.
 }
 \description{
-  Transcript apply diversity/richness indices.
+Transcript apply diversity/richness indices.
 }
 \details{
-  These are the formulas used to calculate the indices:
+These are the formulas used to calculate the indices:
 
-  \bold{Shannon index:}
-  \deqn{H_1(X)=-\sum\limits_{i=1}^R{p_i};log;p_i}
+\bold{Shannon index:}
+\deqn{H_1(X)=-\sum\limits_{i=1}^R{p_i};log;p_i}
 
-  Shannon, C. E. (1948). A mathematical theory of
-  communication. Bell System \cr
+Shannon, C. E. (1948). A mathematical theory of
+communication. Bell System \cr
 
-  \bold{Simpson index:}
-  \deqn{D=\frac{\sum_{i=1}^R{p_i};n_i(n_i -1)}{N(N-1))}}
+\bold{Simpson index:}
+\deqn{D=\frac{\sum_{i=1}^R{p_i};n_i(n_i -1)}{N(N-1))}}
 
-  Simpson, E. H. (1949). Measurement of diversity. Nature
-  163, p. 688 \cr
+Simpson, E. H. (1949). Measurement of diversity. Nature
+163, p. 688 \cr
 
-  \bold{Collision entropy:}
-  \deqn{H_2(X)=-log\sum_{i=1}^n{p_i}^2}
+\bold{Collision entropy:}
+\deqn{H_2(X)=-log\sum_{i=1}^n{p_i}^2}
 
-  Renyi, A. (1961). On measures of information and entropy.
-  Proceedings of the 4th Berkeley Symposium on Mathematics,
-  Statistics and Probability, 1960. pp. 547-5661. \cr
+Renyi, A. (1961). On measures of information and entropy.
+Proceedings of the 4th Berkeley Symposium on Mathematics,
+Statistics and Probability, 1960. pp. 547-5661. \cr
 
-  \bold{Berger Parker index:}
-  \deqn{D_{BP}=\frac{N_{max}}{N}}
+\bold{Berger Parker index:} \deqn{D_{BP}=\frac{N_{max}}{N}}
 
-  Berger, W. H., & Parker, F. L.(1970). Diversity of
-  planktonic Foramenifera in deep sea sediments. Science
-  168, pp. 1345-1347. \cr
+Berger, W. H., & Parker, F. L.(1970). Diversity of
+planktonic Foramenifera in deep sea sediments. Science 168,
+pp. 1345-1347. \cr
 
-  \bold{Brillouin index:}
-  \deqn{H_B=\frac{ln(N!)-\sum{ln(n_1)!}}{N}}
+\bold{Brillouin index:}
+\deqn{H_B=\frac{ln(N!)-\sum{ln(n_1)!}}{N}}
 
-  Magurran, A. E. (2004). Measuring biological diversity.
-  Blackwell.
+Magurran, A. E. (2004). Measuring biological diversity.
+Blackwell.
 }
 \examples{
 \dontrun{

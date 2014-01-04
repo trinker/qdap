@@ -2,8 +2,7 @@
 \alias{common}
 \title{Find Common Words Between Groups}
 \usage{
-  common(word.list, overlap = "all", equal.or = "more",
-    ...)
+common(word.list, overlap = "all", equal.or = "more", ...)
 }
 \arguments{
   \item{word.list}{A list of names character vectors.}
@@ -17,12 +16,12 @@
   input n number of character vectors.}
 }
 \value{
-  Returns a dataframe of all words that match the criteria
-  set by \code{overlap} and \code{equal.or}.
+Returns a dataframe of all words that match the criteria
+set by \code{overlap} and \code{equal.or}.
 }
 \description{
-  Find common words between grouping variables (e.g.,
-  people).
+Find common words between grouping variables (e.g.,
+people).
 }
 \examples{
 \dontrun{

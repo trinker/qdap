@@ -2,8 +2,8 @@
 \alias{print.pos}
 \title{Prints a pos Object.}
 \usage{
-  \method{print}{pos} (x, digits = 1, percent = NULL,
-    zero.replace = NULL, ...)
+\method{print}{pos}(x, digits = 1, percent = NULL, zero.replace = NULL,
+  ...)
 }
 \arguments{
   \item{x}{The pos object}
@@ -23,6 +23,6 @@
   \item{\ldots}{ignored}
 }
 \description{
-  Prints a pos object.
+Prints a pos object.
 }
 

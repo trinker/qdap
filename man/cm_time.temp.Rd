@@ -2,8 +2,8 @@
 \alias{cm_time.temp}
 \title{Time Span Code Sheet}
 \usage{
-  cm_time.temp(codes, grouping.var = NULL, start = ":00",
-    end = NULL, file = NULL, coding = FALSE, print = TRUE)
+cm_time.temp(codes, grouping.var = NULL, start = ":00", end = NULL,
+  file = NULL, coding = FALSE, print = TRUE)
 }
 \arguments{
   \item{codes}{List of codes.}
@@ -29,8 +29,7 @@
   printed to the console.}
 }
 \description{
-  Generates a time span coding sheet and coding format
-  sheet.
+Generates a time span coding sheet and coding format sheet.
 }
 \examples{
 \dontrun{
@@ -49,12 +48,12 @@ cm_time.temp(qcv(AA, BB, CC))
 }
 }
 \references{
-  Miles, M. B. & Huberman, A. M. (1994). An expanded
-  sourcebook: Qualitative data analysis. 2nd ed. Thousand
-  Oaks, CA: SAGE Publications.
+Miles, M. B. & Huberman, A. M. (1994). An expanded
+sourcebook: Qualitative data analysis. 2nd ed. Thousand
+Oaks, CA: SAGE Publications.
 }
 \seealso{
-  \code{\link[qdap]{cm_range.temp}},
+\code{\link[qdap]{cm_range.temp}},
 }
 \keyword{coding}
 

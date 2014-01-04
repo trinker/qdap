@@ -1072,8 +1072,8 @@ During the initial cleaning stage of analysis the researcher may choose to creat
 `r FT(orange, 5, text="&diams;")` **Stemming**`r FT(orange, 5, text="&diams;")`
 ```{r}
 ## stem2df EXAMPLE:
-stem2df(DATA, "state", "new")
-with(stem2df(DATA, "state", "new"), trans_cloud(new, sex, title.cex = 2.5, 
+(stemdat <- stem2df(DATA, "state", "new"))
+with(stemdat, trans_cloud(new, sex, title.cex = 2.5, 
     title.color = "blue", max.word.size = 5, title.padj = .7))
 ## stemmer EXAMPLE:
 stemmer(DATA$state)

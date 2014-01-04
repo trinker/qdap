@@ -2,11 +2,10 @@
 \alias{word_list}
 \title{Raw Word Lists/Frequency Counts}
 \usage{
-  word_list(text.var, grouping.var = NULL,
-    stopwords = NULL, alphabetical = FALSE, cut.n = 20,
-    cap = TRUE, cap.list = NULL, cap.I = TRUE,
-    rm.bracket = TRUE, char.keep = NULL,
-    apostrophe.remove = FALSE, ...)
+word_list(text.var, grouping.var = NULL, stopwords = NULL,
+  alphabetical = FALSE, cut.n = 20, cap = TRUE, cap.list = NULL,
+  cap.I = TRUE, rm.bracket = TRUE, char.keep = NULL,
+  apostrophe.remove = FALSE, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -47,19 +46,19 @@
   \code{\link[qdap]{strip}}.}
 }
 \value{
-  An object of class \code{"word_list"} is a list of lists
-  of vectors or dataframes containing the following
-  components: \item{cwl}{complete word list; raw words}
-  \item{swl}{stop word list; same as rwl with stop words
-  removed} \item{fwl}{frequency word list; a data frame of
-  words and corresponding frequency counts}
-  \item{fswl}{frequency stopword word list; same as fwl but
-  with stop words removed} \item{rfswl}{reduced frequency
-  stopword word list; same as fswl but truncated to n rows}
+An object of class \code{"word_list"} is a list of lists of
+vectors or dataframes containing the following components:
+\item{cwl}{complete word list; raw words} \item{swl}{stop
+word list; same as rwl with stop words removed}
+\item{fwl}{frequency word list; a data frame of words and
+corresponding frequency counts} \item{fswl}{frequency
+stopword word list; same as fwl but with stop words
+removed} \item{rfswl}{reduced frequency stopword word list;
+same as fswl but truncated to n rows}
 }
 \description{
-  Transcript Apply Raw Word Lists and Frequency Counts by
-  grouping variable(s).
+Transcript Apply Raw Word Lists and Frequency Counts by
+grouping variable(s).
 }
 \examples{
 \dontrun{

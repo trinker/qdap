@@ -2,9 +2,8 @@
 \alias{colcomb2class}
 \title{Combine Columns to Class}
 \usage{
-  colcomb2class(dataframe, combined.columns,
-    class = "list", percent = TRUE, digits = 2,
-    elim.old = TRUE, zero.replace = 0, override = FALSE)
+colcomb2class(dataframe, combined.columns, class = "list", percent = TRUE,
+  digits = 2, elim.old = TRUE, zero.replace = 0, override = FALSE)
 }
 \arguments{
   \item{dataframe}{A dataframe or qdap qdap class (e.g.,
@@ -35,11 +34,11 @@
   argument are overrode.}
 }
 \value{
-  Returns a list with raw counts, percents and combined raw
-  and percents.
+Returns a list with raw counts, percents and combined raw
+and percents.
 }
 \description{
-  Combine columns from qdap classes or a \code{data.frame}.
+Combine columns from qdap classes or a \code{data.frame}.
 }
 \examples{
 ## `termco` example

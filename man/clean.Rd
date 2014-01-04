@@ -2,17 +2,17 @@
 \alias{clean}
 \title{Remove Escaped Characters}
 \usage{
-  clean(text.var)
+clean(text.var)
 }
 \arguments{
   \item{text.var}{The text variable}
 }
 \value{
-  Returns a vector of character strings with escaped
-  characters removed.
+Returns a vector of character strings with escaped
+characters removed.
 }
 \description{
-  Preprocess data to remove escaped characters
+Preprocess data to remove escaped characters
 }
 \examples{
 \dontrun{

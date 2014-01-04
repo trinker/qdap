@@ -2,8 +2,7 @@
 \alias{cm_range.temp}
 \title{Range Code Sheet}
 \usage{
-  cm_range.temp(codes, text.var = NULL,
-    grouping.var = NULL, file = NULL)
+cm_range.temp(codes, text.var = NULL, grouping.var = NULL, file = NULL)
 }
 \arguments{
   \item{codes}{Character vector of codes.}
@@ -18,7 +17,7 @@
   the file to print to (.txt or .doc is recommended).}
 }
 \description{
-  Generates a range coding sheet for coding words.
+Generates a range coding sheet for coding words.
 }
 \examples{
 \dontrun{
@@ -29,12 +28,12 @@ with(DATA, cm_range.temp(qcv(AA, BB, CC), state, list(person, adult)))
 }
 }
 \references{
-  Miles, M. B. & Huberman, A. M. (1994). An expanded
-  sourcebook: Qualitative data analysis. 2nd ed. Thousand
-  Oaks, CA: SAGE Publications.
+Miles, M. B. & Huberman, A. M. (1994). An expanded
+sourcebook: Qualitative data analysis. 2nd ed. Thousand
+Oaks, CA: SAGE Publications.
 }
 \seealso{
-  \code{\link[qdap]{cm_time.temp}}
+\code{\link[qdap]{cm_time.temp}}
 }
 \keyword{coding}
 

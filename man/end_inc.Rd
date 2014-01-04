@@ -2,8 +2,7 @@
 \alias{end_inc}
 \title{Test for Incomplete Sentences}
 \usage{
-  end_inc(dataframe, text.var, warning.report = TRUE,
-    which.mode = FALSE)
+end_inc(dataframe, text.var, warning.report = TRUE, which.mode = FALSE)
 }
 \arguments{
   \item{dataframe}{A dataframe that contains the person and
@@ -20,10 +19,10 @@
   incomplete sentence)}
 }
 \value{
-  Generates a dataframe with incomplete sentences removed.
+Generates a dataframe with incomplete sentences removed.
 }
 \description{
-  Test for incomplete sentences and optionally remove them.
+Test for incomplete sentences and optionally remove them.
 }
 \examples{
 \dontrun{

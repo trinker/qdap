@@ -2,9 +2,8 @@
 \alias{cm_code.transform}
 \title{Transform Codes}
 \usage{
-  cm_code.transform(x2long.obj, overlap.code.list = NULL,
-    combine.code.list = NULL, exclude.code.list = NULL,
-    rm.var = NULL)
+cm_code.transform(x2long.obj, overlap.code.list = NULL,
+  combine.code.list = NULL, exclude.code.list = NULL, rm.var = NULL)
 }
 \arguments{
   \item{x2long.obj}{An object from
@@ -27,18 +26,17 @@
   \item{rm.var}{Name of the repeated measures column.}
 }
 \value{
-  Returns a dataframe with overlapping, combined
-  occurrences, and/or exclusion of supplied overlapping
-  codes added.
+Returns a dataframe with overlapping, combined occurrences,
+and/or exclusion of supplied overlapping codes added.
 }
 \description{
-  Transform co-occurrences and/or combinations of codes
-  into a new code(s).
+Transform co-occurrences and/or combinations of codes into
+a new code(s).
 }
 \note{
-  The code column must be named \code{"code"} and your
-  start and end columns must be named \code{"start"} and
-  \code{"end"}.
+The code column must be named \code{"code"} and your start
+and end columns must be named \code{"start"} and
+\code{"end"}.
 }
 \examples{
 \dontrun{
@@ -87,13 +85,13 @@ cm_code.transform(dat,
 }
 }
 \seealso{
-  \code{\link[qdap]{cm_range2long}},
-  \code{\link[qdap]{cm_time2long}},
-  \code{\link[qdap]{cm_df2long}},
-  \code{\link[qdap]{cm_code.blank}},
-  \code{\link[qdap]{cm_code.combine}},
-  \code{\link[qdap]{cm_code.exclude}},
-  \code{\link[qdap]{cm_code.overlap}}
+\code{\link[qdap]{cm_range2long}},
+\code{\link[qdap]{cm_time2long}},
+\code{\link[qdap]{cm_df2long}},
+\code{\link[qdap]{cm_code.blank}},
+\code{\link[qdap]{cm_code.combine}},
+\code{\link[qdap]{cm_code.exclude}},
+\code{\link[qdap]{cm_code.overlap}}
 }
 \keyword{transform}
 

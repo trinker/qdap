@@ -2,7 +2,7 @@
 \alias{potential_NA}
 \title{Search for Potential Missing Values}
 \usage{
-  potential_NA(text.var, n = 3)
+potential_NA(text.var, n = 3)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -11,14 +11,14 @@
   (default is 3).}
 }
 \value{
-  Returns a dataframe of potential missing values row
-  numbers and text.
+Returns a dataframe of potential missing values row numbers
+and text.
 }
 \description{
-  Search for potential missing values (i.e., sentences that
-  are merely a punctuation mark) and optionally replace
-  with missing value (\code{NA}). Useful in the initial
-  cleaning process.
+Search for potential missing values (i.e., sentences that
+are merely a punctuation mark) and optionally replace with
+missing value (\code{NA}). Useful in the initial cleaning
+process.
 }
 \examples{
 \dontrun{

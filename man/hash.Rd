@@ -4,11 +4,11 @@
 \alias{hash_look}
 \title{Hash/Dictionary Lookup}
 \usage{
-  hash(x, mode.out = "numeric")
+hash(x, mode.out = "numeric")
 
-  hash_look(terms, envir, missing = NA)
+hash_look(terms, envir, missing = NA)
 
-  %ha%(terms, envir, missing = NA)
+terms \%ha\% envir
 }
 \arguments{
   \item{x}{A two column dataframe.}
@@ -24,18 +24,18 @@
   hash table.}
 }
 \value{
-  Creates a "hash table", a two column data frame in its
-  own environment.
+Creates a "hash table", a two column data frame in its own
+environment.
 }
 \description{
-  \code{hash} - Creates a new environment for quick hash
-  style dictionary lookup.
+\code{hash} - Creates a new environment for quick hash
+style dictionary lookup.
 
-  \code{hash_look} - Works with a hash table such as is
-  returned from \code{hash}, to lookup values.
+\code{hash_look} - Works with a hash table such as is
+returned from \code{hash}, to lookup values.
 
-  \code{terms \%ha\% envir} - A binary operator version of
-  \code{hash_look}.
+\code{terms \%ha\% envir} - A binary operator version of
+\code{hash_look}.
 }
 \examples{
 \dontrun{
@@ -49,14 +49,13 @@ x \%ha\% new.hash2
 }
 }
 \author{
-  Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
+Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
 }
 \references{
-  \url{http://www.talkstats.com/showthread.php/22754-Create-a-fast-dictionary}
+\url{http://www.talkstats.com/showthread.php/22754-Create-a-fast-dictionary}
 }
 \seealso{
-  \code{\link[qdap]{lookup}},
-  \code{\link[base]{environment}}
+\code{\link[qdap]{lookup}}, \code{\link[base]{environment}}
 }
 \keyword{dictionary,}
 \keyword{hash,}

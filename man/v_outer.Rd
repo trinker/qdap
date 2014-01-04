@@ -2,7 +2,7 @@
 \alias{v_outer}
 \title{Vectorized Version of outer}
 \usage{
-  v_outer(x, FUN, ...)
+v_outer(x, FUN, ...)
 }
 \arguments{
   \item{x}{A \code{matrix}, \code{dataframe} or equal
@@ -14,11 +14,11 @@
   supplied to \code{FUN}.}
 }
 \value{
-  Returns a matrix with the vectorized
-  \code{\link[base]{outer}} function.
+Returns a matrix with the vectorized
+\code{\link[base]{outer}} function.
 }
 \description{
-  Vectorized \code{\link[base]{outer}}.
+Vectorized \code{\link[base]{outer}}.
 }
 \examples{
 \dontrun{
@@ -64,10 +64,10 @@ with(DATA, dissimilarity(state, person))
 }
 }
 \author{
-  Vincent Zoonekynd and Tyler Rinker
-  <tyler.rinker@gmail.com>.
+Vincent Zoonekynd and Tyler Rinker
+<tyler.rinker@gmail.com>.
 }
 \seealso{
-  \code{\link[base]{outer}}, \code{\link[stats]{cor}}
+\code{\link[base]{outer}}, \code{\link[stats]{cor}}
 }
 

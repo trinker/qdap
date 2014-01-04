@@ -2,8 +2,8 @@
 \alias{plot.pos_by}
 \title{Plots a pos_by Object}
 \usage{
-  \method{plot}{pos_by} (x, label = FALSE, lab.digits = 1,
-    percent = NULL, zero.replace = NULL, ...)
+\method{plot}{pos_by}(x, label = FALSE, lab.digits = 1, percent = NULL,
+  zero.replace = NULL, ...)
 }
 \arguments{
   \item{x}{The pos_by object}
@@ -27,6 +27,6 @@
   \item{\ldots}{Other arguments passed to qheat.}
 }
 \description{
-  Plots a pos_by object.
+Plots a pos_by object.
 }
 

@@ -1,30 +1,26 @@
 \name{automated_readability_index}
+\alias{SMOG}
 \alias{automated_readability_index}
 \alias{coleman_liau}
 \alias{flesch_kincaid}
 \alias{fry}
 \alias{linsear_write}
-\alias{SMOG}
 \title{Readability Measures}
 \usage{
-  automated_readability_index(text.var,
-    grouping.var = NULL, rm.incomplete = FALSE, ...)
+automated_readability_index(text.var, grouping.var = NULL,
+  rm.incomplete = FALSE, ...)
 
-  coleman_liau(text.var, grouping.var = NULL,
-    rm.incomplete = FALSE, ...)
+coleman_liau(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...)
 
-  SMOG(text.var, grouping.var = NULL, output = "valid",
-    rm.incomplete = FALSE, ...)
+SMOG(text.var, grouping.var = NULL, output = "valid",
+  rm.incomplete = FALSE, ...)
 
-  flesch_kincaid(text.var, grouping.var = NULL,
-    rm.incomplete = FALSE, ...)
+flesch_kincaid(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...)
 
-  fry(text.var, grouping.var = NULL, auto.label = TRUE,
-    rm.incomplete = FALSE, grid = FALSE,
-    div.col = "grey85", ...)
+fry(text.var, grouping.var = NULL, auto.label = TRUE,
+  rm.incomplete = FALSE, grid = FALSE, div.col = "grey85", ...)
 
-  linsear_write(text.var, grouping.var = NULL,
-    rm.incomplete = FALSE, ...)
+linsear_write(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -56,31 +52,31 @@
   lines.}
 }
 \value{
-  Returns a dataframe with selected readability statistic
-  by grouping variable(s).  The \code{frey} function
-  returns a graphic representation of the readability as
-  well as a list of two dataframe: 1) \code{SENTENCES_USED}
-  and 2) \code{SENTENCE_AVERAGES}.
+Returns a dataframe with selected readability statistic by
+grouping variable(s).  The \code{frey} function returns a
+graphic representation of the readability as well as a list
+of two dataframe: 1) \code{SENTENCES_USED} and 2)
+\code{SENTENCE_AVERAGES}.
 }
 \description{
-  \code{automated_readability_index} - Apply Automated
-  Readability Index to transcript(s) by zero or more
-  grouping variable(s).
+\code{automated_readability_index} - Apply Automated
+Readability Index to transcript(s) by zero or more grouping
+variable(s).
 
-  \code{coleman_liau} - Apply Coleman Liau Index to
-  transcript(s) by zero or more grouping variable(s).
+\code{coleman_liau} - Apply Coleman Liau Index to
+transcript(s) by zero or more grouping variable(s).
 
-  \code{SMOG} - Apply SMOG Readability to transcript(s) by
-  zero or more grouping variable(s).
+\code{SMOG} - Apply SMOG Readability to transcript(s) by
+zero or more grouping variable(s).
 
-  \code{flesch_kincaid} - Flesch-Kincaid Readability to
-  transcript(s) by zero or more grouping variable(s).
+\code{flesch_kincaid} - Flesch-Kincaid Readability to
+transcript(s) by zero or more grouping variable(s).
 
-  \code{fry} - Apply Fry Readability to transcript(s) by
-  zero or more grouping variable(s).
+\code{fry} - Apply Fry Readability to transcript(s) by zero
+or more grouping variable(s).
 
-  \code{linsear_write} - Apply Linsear Write Readability to
-  transcript(s) by zero or more grouping variable(s).
+\code{linsear_write} - Apply Linsear Write Readability to
+transcript(s) by zero or more grouping variable(s).
 }
 \section{Warning}{
   Many of the indices (e.g., Automated Readability Index)
@@ -122,23 +118,23 @@ head(LW2)
 }
 }
 \references{
-  Coleman, M., & Liau, T. L. (1975). A computer readability
-  formula designed for machine scoring. Journal of Applied
-  Psychology, Vol. 60, pp. 283-284.
+Coleman, M., & Liau, T. L. (1975). A computer readability
+formula designed for machine scoring. Journal of Applied
+Psychology, Vol. 60, pp. 283-284.
 
-  Flesch R. (1948). A new readability yardstick. Journal of
-  Applied Psychology. Vol. 32(3), pp. 221-233. doi:
-  10.1037/h0057532.
+Flesch R. (1948). A new readability yardstick. Journal of
+Applied Psychology. Vol. 32(3), pp. 221-233. doi:
+10.1037/h0057532.
 
-  Gunning, T. G. (2003). Building Literacy in the Content
-  Areas. Boston: Allyn & Bacon.
+Gunning, T. G. (2003). Building Literacy in the Content
+Areas. Boston: Allyn & Bacon.
 
-  McLaughlin, G. H. (1969). SMOG Grading: A New Readability
-  Formula. Journal of Reading, Vol. 12(8), pp. 639-646.
+McLaughlin, G. H. (1969). SMOG Grading: A New Readability
+Formula. Journal of Reading, Vol. 12(8), pp. 639-646.
 
-  Senter, R. J., & Smith, E. A.. (1967) Automated
-  readability index. Technical Report AMRLTR-66-220,
-  University of Cincinnati, Cincinnati, Ohio.
+Senter, R. J., & Smith, E. A.. (1967) Automated readability
+index. Technical Report AMRLTR-66-220, University of
+Cincinnati, Cincinnati, Ohio.
 }
 \keyword{Automated}
 \keyword{Coleman}
@@ -148,7 +144,7 @@ head(LW2)
 \keyword{Liau,}
 \keyword{Linsear}
 \keyword{Readability}
-\keyword{readability,}
 \keyword{SMOG,}
 \keyword{Write}
+\keyword{readability,}
 

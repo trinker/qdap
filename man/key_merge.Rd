@@ -2,8 +2,8 @@
 \alias{key_merge}
 \title{Merge Demographic Information with Person/Text Transcript}
 \usage{
-  key_merge(transcript.df, key.df, common.column = NULL,
-    defualt.arrange = TRUE)
+key_merge(transcript.df, key.df, common.column = NULL,
+  defualt.arrange = TRUE)
 }
 \arguments{
   \item{transcript.df}{The text/person transcript
@@ -19,12 +19,12 @@
   arrange the columns with text to the far right.}
 }
 \value{
-  Outputs a merged transcript dataframe with demographic
-  information.
+Outputs a merged transcript dataframe with demographic
+information.
 }
 \description{
-  Wrapper function (\code{\link[base]{merge}}) for merging
-  demographic information with a person/text transcript.
+Wrapper function (\code{\link[base]{merge}}) for merging
+demographic information with a person/text transcript.
 }
 \examples{
 \dontrun{
@@ -35,7 +35,7 @@ htruncdf(merged.raj, 10, 40)
 }
 }
 \seealso{
-  \code{\link[base]{merge}}
+\code{\link[base]{merge}}
 }
 \keyword{demographic}
 \keyword{merge,}

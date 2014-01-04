@@ -2,7 +2,7 @@
 \alias{dist_tab}
 \title{SPSS Style Frequency Tables}
 \usage{
-  dist_tab(dataframe, breaks = NULL, digits = 2, ...)
+dist_tab(dataframe, breaks = NULL, digits = 2, ...)
 }
 \arguments{
   \item{dataframe}{A vector or data.frame object.}
@@ -19,13 +19,13 @@
   \item{\ldots}{Other variables passed to cut.}
 }
 \value{
-  Returns a list of data frames (or singular data frame for
-  a vector) of frequencies, cumulative frequencies,
-  percentages and cumulative percentages for each interval.
+Returns a list of data frames (or singular data frame for a
+vector) of frequencies, cumulative frequencies, percentages
+and cumulative percentages for each interval.
 }
 \description{
-  Generates a distribution table for vectors, matrices and
-  dataframes.
+Generates a distribution table for vectors, matrices and
+dataframes.
 }
 \examples{
 \dontrun{
@@ -45,7 +45,7 @@ ltruncdf(out3, 4)
 }
 }
 \seealso{
-  \code{\link[base]{cut}}
+\code{\link[base]{cut}}
 }
 \keyword{distribution,}
 \keyword{frequency}

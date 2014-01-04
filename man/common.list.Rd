@@ -2,8 +2,7 @@
 \alias{common.list}
 \title{list Method for common}
 \usage{
-  \method{common}{list} (word.list, overlap = "all",
-    equal.or = "more", ...)
+\method{common}{list}(word.list, overlap = "all", equal.or = "more", ...)
 }
 \arguments{
   \item{word.list}{A list of names character vectors.}
@@ -17,6 +16,6 @@
   number of character vectors.}
 }
 \description{
-  list Method for common
+list Method for common
 }
 

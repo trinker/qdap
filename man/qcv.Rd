@@ -2,9 +2,8 @@
 \alias{qcv}
 \title{Quick Character Vector}
 \usage{
-  qcv(..., terms = NULL, space.wrap = FALSE,
-    trailing = FALSE, leading = FALSE, split = " ",
-    rm.blank = TRUE)
+qcv(..., terms = NULL, space.wrap = FALSE, trailing = FALSE,
+  leading = FALSE, split = " ", rm.blank = TRUE)
 }
 \arguments{
   \item{\ldots}{Character objects. Either \ldots or
@@ -32,11 +31,11 @@
   blank spaces from the vector.}
 }
 \value{
-  Returns a character vector.
+Returns a character vector.
 }
 \description{
-  Create a character vector without the use of quotation
-  marks.
+Create a character vector without the use of quotation
+marks.
 }
 \examples{
 \dontrun{
@@ -52,7 +51,7 @@ qcv(terms = "mpg cyl  disp  hp drat    wt  qsec vs am gear carb")
 }
 }
 \seealso{
-  \code{\link[base]{c}}
+\code{\link[base]{c}}
 }
 \keyword{character}
 

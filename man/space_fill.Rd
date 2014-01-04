@@ -2,8 +2,8 @@
 \alias{space_fill}
 \title{Replace Spaces}
 \usage{
-  space_fill(text.var, terms, sep = "~~", rm.extra = TRUE,
-    ignore.case = TRUE, fixed = FALSE, ...)
+space_fill(text.var, terms, sep = "~~", rm.extra = TRUE,
+  ignore.case = TRUE, fixed = FALSE, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -28,23 +28,23 @@
   \code{\link[base]{gsub}}.}
 }
 \value{
-  Returns a character vector with extra, trailing and/or
-  leading spaces removed.
+Returns a character vector with extra, trailing and/or
+leading spaces removed.
 }
 \description{
-  Replace spaces in words groups that should be grouped
-  together.
+Replace spaces in words groups that should be grouped
+together.
 }
 \details{
-  \code{\link[qdap]{space_fill}} is useful for keeping
-  grouped words together.  Many functions in qdap take a
-  \code{char.keep} or \code{char2space} argument.  This can
-  be used to prepare multi word phrases (e.g., proper
-  nouns) as a single unit.
+\code{\link[qdap]{space_fill}} is useful for keeping
+grouped words together.  Many functions in qdap take a
+\code{char.keep} or \code{char2space} argument.  This can
+be used to prepare multi word phrases (e.g., proper nouns)
+as a single unit.
 }
 \note{
-  \code{link[qdap]{strip}} by default does not remove the
-  double tilde \code{"~~"} character.
+\code{link[qdap]{strip}} by default does not remove the
+double tilde \code{"~~"} character.
 }
 \examples{
 \dontrun{

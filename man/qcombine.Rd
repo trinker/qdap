@@ -2,7 +2,7 @@
 \alias{qcombine}
 \title{Combine Columns}
 \usage{
-  qcombine(mat, combined.columns, elim.old = TRUE)
+qcombine(mat, combined.columns, elim.old = TRUE)
 }
 \arguments{
   \item{mat}{A matrix or dataframe with numeric combine
@@ -19,10 +19,10 @@
   (see \code{\link[qdap]{prop}}).}
 }
 \value{
-  Returns a dataframe with combines columns.
+Returns a dataframe with combines columns.
 }
 \description{
-  Quickly combine columns (summed) and rename.
+Quickly combine columns (summed) and rename.
 }
 \examples{
 \dontrun{
@@ -43,7 +43,7 @@ qcombine(head(mtcars), B, elim.old = FALSE)
 }
 }
 \seealso{
-  \code{\link[base]{transform}}
+\code{\link[base]{transform}}
 }
 \keyword{combine,}
 \keyword{transform}

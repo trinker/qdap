@@ -3,12 +3,11 @@
 \alias{mcsv_w}
 \title{Read/Write Multiple csv Files at a Time}
 \usage{
-  mcsv_r(files, a.names = NULL, l.name = NULL, list = TRUE,
-    pos = 1, envir = as.environment(pos))
+mcsv_r(files, a.names = NULL, l.name = NULL, list = TRUE, pos = 1,
+  envir = as.environment(pos))
 
-  mcsv_w(..., dir = NULL, open = FALSE, sep = ", ",
-    dataframes = NULL, pos = 1,
-    envir = as.environment(pos))
+mcsv_w(..., dir = NULL, open = FALSE, sep = ", ", dataframes = NULL,
+  pos = 1, envir = as.environment(pos))
 }
 \arguments{
   \item{files}{csv file(s) to read.}
@@ -49,26 +48,26 @@
   dataframes in lieu of \dots argument.}
 }
 \value{
-  \code{mcsv_r} - reads in multiple csv files at once.
+\code{mcsv_r} - reads in multiple csv files at once.
 
-  \code{mcsv_w} - creates a directory with multiple csv
-  files. Silently returns the path of the directory.
+\code{mcsv_w} - creates a directory with multiple csv
+files. Silently returns the path of the directory.
 }
 \description{
-  \code{mcsv_w} - Read and assign multiple csv files at the
-  same time.
+\code{mcsv_w} - Read and assign multiple csv files at the
+same time.
 
-  \code{mcsv_w} - Write multiple csv files into a file at
-  the same time.
+\code{mcsv_w} - Write multiple csv files into a file at the
+same time.
 }
 \details{
-  mcsv is short for "multiple csv" and the suffix c(_r, _w)
-  stands for "read" (r) or "write" (w).
+mcsv is short for "multiple csv" and the suffix c(_r, _w)
+stands for "read" (r) or "write" (w).
 }
 \note{
-  \code{\link[qdap]{mcsv_r}} is useful for reading in
-  multiple csv files from \code{\link[qdap]{cm_df.temp}}
-  for interaction with \code{\link[qdap]{cm_range2long}}.
+\code{\link[qdap]{mcsv_r}} is useful for reading in
+multiple csv files from \code{\link[qdap]{cm_df.temp}} for
+interaction with \code{\link[qdap]{cm_range2long}}.
 }
 \examples{
 \dontrun{
@@ -98,8 +97,8 @@ delete("foo2")
 }
 }
 \seealso{
-  \code{\link[qdap]{cm_range2long}},
-  \code{\link[qdap]{cm_df.temp}},
-  \code{\link[qdap]{condense}}, \code{\link[base]{assign}}
+\code{\link[qdap]{cm_range2long}},
+\code{\link[qdap]{cm_df.temp}},
+\code{\link[qdap]{condense}}, \code{\link[base]{assign}}
 }
 

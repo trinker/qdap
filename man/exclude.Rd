@@ -2,7 +2,7 @@
 \alias{exclude}
 \title{Exclude Elements From a Vector}
 \usage{
-  exclude(word.list, ...)
+exclude(word.list, ...)
 }
 \arguments{
   \item{word.list}{A list of words/terms to exclude from.}
@@ -11,10 +11,10 @@
   to be excluded from the \code{word.list}.}
 }
 \value{
-  Returns a vector with the excluded terms removed.
+Returns a vector with the excluded terms removed.
 }
 \description{
-  Quickly exclude words from a word list
+Quickly exclude words from a word list
 }
 \examples{
 \dontrun{

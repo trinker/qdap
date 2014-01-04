@@ -2,10 +2,9 @@
 \alias{word_stats}
 \title{Descriptive Word Statistics}
 \usage{
-  word_stats(text.var, grouping.var = NULL, tot = NULL,
-    parallel = FALSE, rm.incomplete = FALSE,
-    digit.remove = FALSE, apostrophe.remove = FALSE,
-    digits = 3, ...)
+word_stats(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
+  rm.incomplete = FALSE, digit.remove = FALSE, apostrophe.remove = FALSE,
+  digits = 3, ...)
 }
 \arguments{
   \item{text.var}{The text variable or a
@@ -44,52 +43,51 @@
   \code{\link[qdap]{end_inc}}.}
 }
 \value{
-  Returns a list of three descriptive word statistics:
-  \item{ts}{A data frame of descriptive word statistics by
-  row} \item{gts}{A data frame of word/sentence statistics
-  per grouping variable: \itemize{ \item{n.tot}{ - number
-  of turns of talk} \item{n.sent}{ - number of sentences}
-  \item{n.words}{ - number of words} \item{n.char}{ -
-  number of characters} \item{n.syl}{ - number of
-  syllables} \item{n.poly}{ - number of polysyllables}
-  \item{sptot}{ - syllables per turn of talk} \item{wptot}{
-  - words per turn of talk} \item{wps}{ - words per
-  sentence} \item{cps}{ - characters per sentence}
-  \item{sps}{ - syllables per sentence} \item{psps}{ -
-  poly-syllables per sentence} \item{cpw}{ - characters per
-  word} \item{spw}{ - syllables per word} \item{n.state}{ -
-  number of statements} \item{n.quest}{ - number of
-  questions} \item{n.exclm}{ - number of exclamations}
-  \item{n.incom}{ - number of incomplete statements}
-  \item{p.state}{ - proportion of statements}
-  \item{p.quest}{ - proportion of questions}
-  \item{p.exclm}{ - proportion of exclamations}
-  \item{p.incom}{ - proportion of incomplete statements}
-  \item{n.hapax}{ - number of hapax legomenon}
-  \item{n.dis}{ - number of dis legomenon}
-  \item{grow.rate}{ - proportion of hapax legomenon to
-  words} \item{prop.dis}{ - proportion of dis legomenon to
-  words} } } \item{mpun}{An account of sentences with an
-  improper/missing end mark} \item{word.elem}{A data frame
-  with word element columns from gts} \item{sent.elem}{A
-  data frame with sentence element columns from gts}
-  \item{omit}{Counter of omitted sentences for internal use
-  (only included if some rows contained missing values)}
-  \item{percent}{The value of percent used for plotting
-  purposes.} \item{zero.replace}{The value of zero.replace
-  used for plotting purposes.} \item{digits}{integer value
-  od number of digits to display; mostly internal use}
+Returns a list of three descriptive word statistics:
+\item{ts}{A data frame of descriptive word statistics by
+row} \item{gts}{A data frame of word/sentence statistics
+per grouping variable: \itemize{ \item{n.tot}{ - number of
+turns of talk} \item{n.sent}{ - number of sentences}
+\item{n.words}{ - number of words} \item{n.char}{ - number
+of characters} \item{n.syl}{ - number of syllables}
+\item{n.poly}{ - number of polysyllables} \item{sptot}{ -
+syllables per turn of talk} \item{wptot}{ - words per turn
+of talk} \item{wps}{ - words per sentence} \item{cps}{ -
+characters per sentence} \item{sps}{ - syllables per
+sentence} \item{psps}{ - poly-syllables per sentence}
+\item{cpw}{ - characters per word} \item{spw}{ - syllables
+per word} \item{n.state}{ - number of statements}
+\item{n.quest}{ - number of questions} \item{n.exclm}{ -
+number of exclamations} \item{n.incom}{ - number of
+incomplete statements} \item{p.state}{ - proportion of
+statements} \item{p.quest}{ - proportion of questions}
+\item{p.exclm}{ - proportion of exclamations}
+\item{p.incom}{ - proportion of incomplete statements}
+\item{n.hapax}{ - number of hapax legomenon} \item{n.dis}{
+- number of dis legomenon} \item{grow.rate}{ - proportion
+of hapax legomenon to words} \item{prop.dis}{ - proportion
+of dis legomenon to words} } } \item{mpun}{An account of
+sentences with an improper/missing end mark}
+\item{word.elem}{A data frame with word element columns
+from gts} \item{sent.elem}{A data frame with sentence
+element columns from gts} \item{omit}{Counter of omitted
+sentences for internal use (only included if some rows
+contained missing values)} \item{percent}{The value of
+percent used for plotting purposes.}
+\item{zero.replace}{The value of zero.replace used for
+plotting purposes.} \item{digits}{integer value od number
+of digits to display; mostly internal use}
 }
 \description{
-  Transcript apply descriptive word statistics.
+Transcript apply descriptive word statistics.
 }
 \details{
-  Note that a sentence is classified with only one endmark.
-  An imperative sentence is classified only as imperative
-  (not as a state, quest, or exclm as well).  If a sentence
-  is both imperative and incomplete the sentence will be
-  counted as incomplete rather than imperative. labeled as
-  both imperative
+Note that a sentence is classified with only one endmark.
+An imperative sentence is classified only as imperative
+(not as a state, quest, or exclm as well).  If a sentence
+is both imperative and incomplete the sentence will be
+counted as incomplete rather than imperative. labeled as
+both imperative
 }
 \section{Warning}{
   It is assumed the user has run \code{sentSplit} on their
@@ -120,7 +118,7 @@ word_stats(desc_wrds, mraja1spl$sex)
 }
 }
 \seealso{
-  \code{\link[qdap]{end_inc}}
+\code{\link[qdap]{end_inc}}
 }
 \keyword{descriptive}
 \keyword{statistic}

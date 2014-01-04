@@ -2,7 +2,7 @@
 \alias{print.adjacency_matrix}
 \title{Prints an adjacency_matrix Object}
 \usage{
-  \method{print}{adjacency_matrix} (x, ...)
+\method{print}{adjacency_matrix}(x, ...)
 }
 \arguments{
   \item{x}{The adjacency_matrix object.}
@@ -10,6 +10,6 @@
   \item{\ldots}{ignored}
 }
 \description{
-  Prints an adjacency_matrix object.
+Prints an adjacency_matrix object.
 }
 

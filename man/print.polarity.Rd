@@ -2,7 +2,7 @@
 \alias{print.polarity}
 \title{Prints a polarity Object}
 \usage{
-  \method{print}{polarity} (x, digits = NULL, ...)
+\method{print}{polarity}(x, digits = NULL, ...)
 }
 \arguments{
   \item{x}{The polarity object.}
@@ -12,6 +12,6 @@
   \item{\ldots}{ignored}
 }
 \description{
-  Prints a polarity object.
+Prints a polarity object.
 }
 

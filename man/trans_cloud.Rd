@@ -2,19 +2,16 @@
 \alias{trans_cloud}
 \title{Word Clouds by Grouping Variable}
 \usage{
-  trans_cloud(text.var = NULL, grouping.var = NULL,
-    word.list = NULL, stem = FALSE, target.words = NULL,
-    expand.target = TRUE, target.exclude = NULL,
-    stopwords = NULL, min.freq = 1, caps = TRUE,
-    caps.list = NULL, random.order = FALSE, rot.per = 0,
-    cloud.colors = NULL, title = TRUE, cloud.font = NULL,
-    title.font = NULL, title.color = "black",
-    title.padj = -4.5, title.location = 3,
-    title.cex = NULL, title.names = NULL,
-    proportional = FALSE, max.word.size = NULL,
-    min.word.size = 0.5, legend = NULL, legend.cex = 0.8,
-    legend.location = c(-0.03, 1.03), char.keep = "~~",
-    char2space = "~~")
+trans_cloud(text.var = NULL, grouping.var = NULL, word.list = NULL,
+  stem = FALSE, target.words = NULL, expand.target = TRUE,
+  target.exclude = NULL, stopwords = NULL, min.freq = 1, caps = TRUE,
+  caps.list = NULL, random.order = FALSE, rot.per = 0,
+  cloud.colors = NULL, title = TRUE, cloud.font = NULL,
+  title.font = NULL, title.color = "black", title.padj = -4.5,
+  title.location = 3, title.cex = NULL, title.names = NULL,
+  proportional = FALSE, max.word.size = NULL, min.word.size = 0.5,
+  legend = NULL, legend.cex = 0.8, legend.location = c(-0.03, 1.03),
+  char.keep = "~~", char2space = "~~")
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -114,12 +111,12 @@
   \code{char2space} will activate this argument.}
 }
 \value{
-  Returns a series of word cloud plots with target words
-  (themes) colored.
+Returns a series of word cloud plots with target words
+(themes) colored.
 }
 \description{
-  Produces word clouds with optional theme coloring by
-  grouping variable.
+Produces word clouds with optional theme coloring by
+grouping variable.
 }
 \examples{
 \dontrun{
@@ -170,8 +167,8 @@ DATA <- qdap::DATA  ## Reset DATA
 }
 }
 \seealso{
-  \code{\link[wordcloud]{wordcloud}},
-  \code{\link[qdap]{gradient_cloud}}
+\code{\link[wordcloud]{wordcloud}},
+\code{\link[qdap]{gradient_cloud}}
 }
 \keyword{wordcloud}
 

@@ -2,9 +2,8 @@
 \alias{plot.character_table}
 \title{Plots a character_table Object}
 \usage{
-  \method{plot}{character_table} (x, label = FALSE,
-    lab.digits = 1, percent = NULL, zero.replace = NULL,
-    ...)
+\method{plot}{character_table}(x, label = FALSE, lab.digits = 1,
+  percent = NULL, zero.replace = NULL, ...)
 }
 \arguments{
   \item{x}{The character_table object}
@@ -31,6 +30,6 @@
   \code{\link[qdap]{qheat}}}
 }
 \description{
-  Plots a character_table object.
+Plots a character_table object.
 }
 

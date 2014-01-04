@@ -1,28 +1,24 @@
 \name{termco}
 \alias{term_match}
 \alias{termco}
-\alias{termco_d}
 \alias{termco2mat}
+\alias{termco_d}
 \title{Search For and Count Terms}
 \usage{
-  termco(text.var, grouping.var = NULL, match.list,
-    short.term = TRUE, ignore.case = TRUE, elim.old = TRUE,
-    percent = TRUE, digits = 2, apostrophe.remove = FALSE,
-    char.keep = NULL, digit.remove = NULL,
-    zero.replace = 0, ...)
+termco(text.var, grouping.var = NULL, match.list, short.term = TRUE,
+  ignore.case = TRUE, elim.old = TRUE, percent = TRUE, digits = 2,
+  apostrophe.remove = FALSE, char.keep = NULL, digit.remove = NULL,
+  zero.replace = 0, ...)
 
-  termco_d(text.var, grouping.var = NULL, match.string,
-    short.term = FALSE, ignore.case = TRUE,
-    zero.replace = 0, percent = TRUE, digits = 2,
-    apostrophe.remove = FALSE, char.keep = NULL,
-    digit.remove = TRUE, ...)
+termco_d(text.var, grouping.var = NULL, match.string, short.term = FALSE,
+  ignore.case = TRUE, zero.replace = 0, percent = TRUE, digits = 2,
+  apostrophe.remove = FALSE, char.keep = NULL, digit.remove = TRUE, ...)
 
-  term_match(text.var, terms, return.list = TRUE,
-    apostrophe.remove = FALSE)
+term_match(text.var, terms, return.list = TRUE, apostrophe.remove = FALSE)
 
-  termco2mat(dataframe, drop.wc = TRUE, short.term = TRUE,
-    rm.zerocol = FALSE, no.quote = TRUE, transform = TRUE,
-    trim.terms = TRUE)
+termco2mat(dataframe, drop.wc = TRUE, short.term = TRUE,
+  rm.zerocol = FALSE, no.quote = TRUE, transform = TRUE,
+  trim.terms = TRUE)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -107,51 +103,49 @@
   spacing when using in other R functions.}
 }
 \value{
-  \code{termco} & \code{termco_d} - both return a list, of
-  class "termco", of data frames and information regarding
-  word counts: \item{raw}{raw word counts by grouping
-  variable} \item{prop}{proportional word counts by
-  grouping variable; proportional to each individual's word
-  use} \item{rnp}{a character combination data frame of raw
-  and proportional} \item{zero_replace}{value to replace
-  zeros with; mostly internal use} \item{percent}{The value
-  of percent used for plotting purposes.}
-  \item{digits}{integer value of number of digits to
-  display; mostly internal use}
+\code{termco} & \code{termco_d} - both return a list, of
+class "termco", of data frames and information regarding
+word counts: \item{raw}{raw word counts by grouping
+variable} \item{prop}{proportional word counts by grouping
+variable; proportional to each individual's word use}
+\item{rnp}{a character combination data frame of raw and
+proportional} \item{zero_replace}{value to replace zeros
+with; mostly internal use} \item{percent}{The value of
+percent used for plotting purposes.} \item{digits}{integer
+value of number of digits to display; mostly internal use}
 
-  \code{term_match} - returns a list or vector of possible
-  words that match term(s).
+\code{term_match} - returns a list or vector of possible
+words that match term(s).
 
-  \code{termco2mat} - returns a matrix of term counts.
+\code{termco2mat} - returns a matrix of term counts.
 }
 \description{
-  \code{termco} - Search a transcript by any number of
-  grouping variables for categories (themes) of grouped
-  root terms.  While there are other termco functions in
-  the termco family (e.g., \code{\link[qdap]{termco_d}})
-  \code{termco} is a more powerful and flexible wrapper
-  intended for general use.
+\code{termco} - Search a transcript by any number of
+grouping variables for categories (themes) of grouped root
+terms.  While there are other termco functions in the
+termco family (e.g., \code{\link[qdap]{termco_d}})
+\code{termco} is a more powerful and flexible wrapper
+intended for general use.
 
-  \code{termco_d} - Search a transcript by any number of
-  grouping variables for root terms.
+\code{termco_d} - Search a transcript by any number of
+grouping variables for root terms.
 
-  \code{term_match} - Search a transcript for words that
-  exactly match term(s).
+\code{term_match} - Search a transcript for words that
+exactly match term(s).
 
-  \code{termco2mat} - Convert a termco dataframe to a
-  matrix for use with visualization functions (e.g.,
-  \code{\link[gplots]{heatmap.2}}).
+\code{termco2mat} - Convert a termco dataframe to a matrix
+for use with visualization functions (e.g.,
+\code{\link[gplots]{heatmap.2}}).
 }
 \note{
-  The match.list/match.string is (optionally) case and
-  character sensitive.  Spacing is an important way to grab
-  specific words and requires careful thought.  Using
-  "read" will find the words "bread", "read" "reading", and
-  "ready".  If you want to search for just the word "read"
-  you'd supply a vector of c(" read ", " reads", "
-  reading", " reader").  To search for non character
-  arguments (i.e., numbers and symbols) additional
-  arguments from strip must be passed.
+The match.list/match.string is (optionally) case and
+character sensitive.  Spacing is an important way to grab
+specific words and requires careful thought.  Using "read"
+will find the words "bread", "read" "reading", and "ready".
+If you want to search for just the word "read" you'd supply
+a vector of c(" read ", " reads", " reading", " reader").
+To search for non character arguments (i.e., numbers and
+symbols) additional arguments from strip must be passed.
 }
 \section{Warning}{
   Percentages are calculated as a ratio of counts of
@@ -233,8 +227,8 @@ plot(termco_obj, label = TRUE, text.color="red", lab.digits=3)
 }
 }
 \seealso{
-  \code{\link[qdap]{termco_c}},
-  \code{\link[qdap]{colcomb2class}}
+\code{\link[qdap]{termco_c}},
+\code{\link[qdap]{colcomb2class}}
 }
 \keyword{word-search}
 

@@ -2,8 +2,7 @@
 \alias{prop}
 \title{Convert Raw Numeric Matrix or Data Frame to Proportions}
 \usage{
-  prop(mat, digits = 2, percent = FALSE, by.column = TRUE,
-    round = FALSE)
+prop(mat, digits = 2, percent = FALSE, by.column = TRUE, round = FALSE)
 }
 \arguments{
   \item{mat}{A numeric matrix or dataframe.}
@@ -21,12 +20,11 @@
   values (controlled by digits).}
 }
 \value{
-  Returns a matrix with proportionally scaled values.
+Returns a matrix with proportionally scaled values.
 }
 \description{
-  Convert a raw matrix or dataframe to
-  proportions/percents.  Divides each element of a column
-  by the column sum.
+Convert a raw matrix or dataframe to proportions/percents.
+Divides each element of a column by the column sum.
 }
 \examples{
 \dontrun{

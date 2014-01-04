@@ -2,7 +2,7 @@
 \alias{plot.gantt}
 \title{Plots a gantt object}
 \usage{
-  \method{plot}{gantt} (x, base = FALSE, title = NULL, ...)
+\method{plot}{gantt}(x, base = FALSE, title = NULL, ...)
 }
 \arguments{
   \item{x}{The sums_gantt object}
@@ -17,6 +17,6 @@
   or \code{plot_gantt_base}}
 }
 \description{
-  Plots a gantt object.
+Plots a gantt object.
 }
 

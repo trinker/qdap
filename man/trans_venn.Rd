@@ -2,12 +2,11 @@
 \alias{trans_venn}
 \title{Venn Diagram by Grouping Variable}
 \usage{
-  trans_venn(text.var, grouping.var, stopwords = NULL,
-    rm.duplicates = TRUE, title = TRUE, title.font = NULL,
-    title.color = "black", title.cex = NULL,
-    title.name = NULL, legend = TRUE, legend.cex = 0.8,
-    legend.location = "bottomleft",
-    legend.text.col = "black", legend.horiz = FALSE, ...)
+trans_venn(text.var, grouping.var, stopwords = NULL, rm.duplicates = TRUE,
+  title = TRUE, title.font = NULL, title.color = "black",
+  title.cex = NULL, title.name = NULL, legend = TRUE, legend.cex = 0.8,
+  legend.location = "bottomleft", legend.text.col = "black",
+  legend.horiz = FALSE, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -61,10 +60,10 @@
   \item{\dots}{Other arguments passed to plot.}
 }
 \value{
-  Returns a Venn plot by grouping variable(s).
+Returns a Venn plot by grouping variable(s).
 }
 \description{
-  Produce a Venn diagram by grouping variable.
+Produce a Venn diagram by grouping variable.
 }
 \section{Warning}{
   The algorithm used to overlap the Venn circles becomes
@@ -81,7 +80,7 @@ with(raj.act.1 , trans_venn(dialogue, person, legend.location = "topleft"))
 }
 }
 \seealso{
-  \code{\link[venneuler]{venneuler}}
+\code{\link[venneuler]{venneuler}}
 }
 \keyword{venn}
 

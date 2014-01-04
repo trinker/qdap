@@ -2,8 +2,8 @@
 \alias{capitalizer}
 \title{Capitalize Select Words}
 \usage{
-  capitalizer(text, caps.list = NULL, I.list = TRUE,
-    apostrophe.remove = FALSE)
+capitalizer(text, caps.list = NULL, I.list = TRUE,
+  apostrophe.remove = FALSE)
 }
 \arguments{
   \item{text}{A vector of words (generally from
@@ -19,17 +19,17 @@
   apostrophe's back into words appropriately.}
 }
 \value{
-  Returns a vector of capitalized words based on supplied
-  capitalization arguments.
+Returns a vector of capitalized words based on supplied
+capitalization arguments.
 }
 \description{
-  A helper function for \code{\link[qdap]{word_list}} that
-  allows the user to supply vectors of words to be
-  capitalized.
+A helper function for \code{\link[qdap]{word_list}} that
+allows the user to supply vectors of words to be
+capitalized.
 }
 \note{
-  Not intended for general use.  Acts as a helper function
-  to several qdap functions.
+Not intended for general use.  Acts as a helper function to
+several qdap functions.
 }
 \examples{
 \dontrun{

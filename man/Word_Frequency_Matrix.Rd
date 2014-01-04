@@ -6,18 +6,17 @@
 \alias{wfm_weight}
 \title{Word Frequency Matrix}
 \usage{
-  wfm(text.var = NULL, grouping.var = NULL, output = "raw",
-    stopwords = NULL, char2space = "~~", ...)
+wfm(text.var = NULL, grouping.var = NULL, output = "raw",
+  stopwords = NULL, char2space = "~~", ...)
 
-  wfdf(text.var, grouping.var = NULL, stopwords = NULL,
-    margins = FALSE, output = "raw", digits = 2,
-    char2space = "~~", ...)
+wfdf(text.var, grouping.var = NULL, stopwords = NULL, margins = FALSE,
+  output = "raw", digits = 2, char2space = "~~", ...)
 
-  wfm_expanded(text.var, grouping.var = NULL, ...)
+wfm_expanded(text.var, grouping.var = NULL, ...)
 
-  wfm_combine(wf.obj, word.lists, matrix = TRUE)
+wfm_combine(wf.obj, word.lists, matrix = TRUE)
 
-  wfm_weight(wfm.obj, type = "prop")
+wfm_weight(wfm.obj, type = "prop")
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -68,47 +67,45 @@
   equal.}
 }
 \value{
-  \code{wfm} - returns a word frequency of the class
-  matrix.
+\code{wfm} - returns a word frequency of the class matrix.
 
-  \code{wfdf} - returns a word frequency of the class
-  data.frame with a words column and optional margin sums.
+\code{wfdf} - returns a word frequency of the class
+data.frame with a words column and optional margin sums.
 
-  \code{wfm_expanded} - returns a matrix similar to a word
-  frequency matrix (\code{wfm}) but the rows are expanded
-  to represent the maximum usages of the word and cells are
-  dummy coded to indicate that number of uses.
+\code{wfm_expanded} - returns a matrix similar to a word
+frequency matrix (\code{wfm}) but the rows are expanded to
+represent the maximum usages of the word and cells are
+dummy coded to indicate that number of uses.
 
-  \code{wfm_combine} - returns a word frequency matrix
-  (\code{wfm}) or dataframe (\code{wfdf}) with counts for
-  the combined word.lists merged and remaining terms
-  (\code{else}).
+\code{wfm_combine} - returns a word frequency matrix
+(\code{wfm}) or dataframe (\code{wfdf}) with counts for the
+combined word.lists merged and remaining terms
+(\code{else}).
 
-  \code{wfm_weight} - Returns a weighted matrix for use
-  with other R packages. The output is not of the class
-  "wfm".
+\code{wfm_weight} - Returns a weighted matrix for use with
+other R packages. The output is not of the class "wfm".
 }
 \description{
-  \code{wfm} - Generate a word frequency matrix by grouping
-  variable(s).
+\code{wfm} - Generate a word frequency matrix by grouping
+variable(s).
 
-  \code{wfdf} - Generate a word frequency data frame by
-  grouping variable.
+\code{wfdf} - Generate a word frequency data frame by
+grouping variable.
 
-  \code{wfm_expanded} - Expand a word frequency matrix to
-  have multiple rows for each word.
+\code{wfm_expanded} - Expand a word frequency matrix to
+have multiple rows for each word.
 
-  \code{wfm_combine} - Combines words (rows) of a word
-  frequency matrix (\code{wfdf}) together.
+\code{wfm_combine} - Combines words (rows) of a word
+frequency matrix (\code{wfdf}) together.
 
-  \code{wfm_weight} - Weight a word frequency matrix for
-  analysis were such weighting is sensible..
+\code{wfm_weight} - Weight a word frequency matrix for
+analysis were such weighting is sensible..
 }
 \note{
-  Words can be kept as one by inserting a double tilde
-  (\code{"~~"}), or other character strings passed to
-  char2space, as a single word/entry. This is useful for
-  keeping proper names as a single unit.
+Words can be kept as one by inserting a double tilde
+(\code{"~~"}), or other character strings passed to
+char2space, as a single word/entry. This is useful for
+keeping proper names as a single unit.
 }
 \examples{
 \dontrun{
