@@ -197,7 +197,7 @@ vowel_check <- function(text.var) {
 
 
 
-#' tm Package Compatability Tools: Aplly to or Convert to/from Term Document 
+#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
 #' \code{dtm} - Create document term matrices from raw text or 
@@ -250,7 +250,7 @@ wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
 }
 
 
-#' tm Package Compatability Tools: Aplly to or Convert to/from Term Document 
+#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
 #' \code{tm2wfm} - Convert the \code{tm} package's 
@@ -335,6 +335,7 @@ tm_corpus2df <- function(tm.corpus, col1 = "docs", col2 = "text") {
     if(!is(tm.corpus[[1]], "PlainTextDocument")) {
         tm.corpus <- tm_map(tm.corpus, as.PlainTextDocument)
     }
+    
     list2df(tm.corpus, col1 = col2, col2 = col1)[, 2:1]
 }
 

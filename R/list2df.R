@@ -16,9 +16,16 @@
 #' lst2 <- list(a=qcv(hello, everybody), b = mtcars[1:6, 1])
 #' list2df(lst2, "col 1", "col 2")
 list2df <- function(list.object, col1 = "X1", col2 = "X2") {
+
+    ## Make sure the vectors have names; if not use numbers
+    if (is.null(names(list.object))){
+        names(list.object) <- seq_along(list.object)
+    }
+
     dat <- data.frame(x = unlist(list.object, ,FALSE), 
         y = rep(names(list.object), sapply(list.object, length)), 
         stringsAsFactors = FALSE)
     colnames(dat) <- c(col1, col2)
     dat
 }
+
