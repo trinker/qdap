@@ -1,6 +1,5 @@
 language: java
 
-script: ./travis-tool.sh run_tests
 before_install:
   - curl -OL http://raw.github.com/craigcitro/r-travis/master/scripts/travis-tool.sh
   - chmod 755 ./travis-tool.sh
@@ -19,6 +18,7 @@ install:
   - Rscript -e "source('http://bioconductor.org/biocLite.R');
       biocLite();
       biocLite('Rgraphviz')"
+script: ./travis-tool.sh run_tests
 notifications:
   email:
     on_success: change
