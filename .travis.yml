@@ -8,6 +8,7 @@ install:
   - sh -e /etc/init.d/xvfb start
   - sudo R CMD javareconf
   - ./travis-tool.sh aptget_install r-cran-xml 
+  - ./travis-tool.sh aptget_install r-cran-gplots
   - ./travis-tool.sh install_github hadley/devtools
   - ./travis-tool.sh install_github ramnathv/slidify@dev
   - ./travis-tool.sh install_github ramnathv/slidifyLibraries@dev
