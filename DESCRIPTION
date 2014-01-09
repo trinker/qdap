@@ -6,7 +6,6 @@ Date: 2013-06-26
 Authors@R: c(person("Bryan", "Goodrich", role = "ctb"), person("Dason",
     "Kurkiewicz", role = "ctb"), person("Tyler", "Rinker", email =
     "tyler.rinker@gmail.com", role = c("aut", "cre")))
-Author: Tyler Rinker
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 VignetteBuilder: knitr
 Depends:

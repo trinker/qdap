@@ -65,4 +65,4 @@ hash_look <- function(terms, envir, missing = NA) {
 #'
 #' @export
 #' @rdname hash
-`%ha%` <- hash_look
+`%ha%` <- function(terms, envir) hash_look(terms = terms, envir = envir)

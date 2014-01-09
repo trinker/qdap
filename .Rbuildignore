@@ -6,7 +6,6 @@ qdap.Rproj
 ^\.gitattributes
 tools.R
 qdap.Rproj
-staticdocs
 maintenance.R
 extra_statdoc
 pdf_gen
@@ -15,6 +14,12 @@ style.R
 inst/polarity
 vignettes/figure
 vignettes/qdap_vignette.md
+vignettes/ARTICLES
+vignettes/OUTLINE
+vignettes/DESCRIPTION
+vignettes/NOTES
+vignettes/TO_DO
+vignettes/extra_functions.R
 NEWS.md
 FAQ.md
 NEWS.html
@@ -22,3 +27,5 @@ FAQ.html
 demos
 ^\.travis\.yml$
 inst/qdap_Demonstration
+inst/staticdocs
+INSTALL

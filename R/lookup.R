@@ -117,4 +117,4 @@ function(terms, key.match, key.reassign=NULL, missing = NA) {
 #'
 #' @export
 #' @rdname lookup
-`%l%` <- lookup
+`%l%` <- function(terms, key.match) lookup(terms = terms, key.match = key.match)
