@@ -1,16 +1,16 @@
 ^\.Rproj\.user$
 ^.*\.Rproj$
-.Rbuildignore
+^\.Rbuildignore
 qdap.Rproj
-.gitignore
-.gitattributes
+^\.gitignore
+^\.gitattributes
 tools.R
 qdap.Rproj
 staticdocs
 maintenance.R
 extra_statdoc
 pdf_gen
-.Rprofile
+^\.Rprofile
 style.R
 inst/polarity
 vignettes/figure
@@ -20,5 +20,5 @@ FAQ.md
 NEWS.html
 FAQ.html
 demos
-.travis.yml
+^\.travis\.yml$
 inst/qdap_Demonstration
