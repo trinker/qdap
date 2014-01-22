@@ -1177,8 +1177,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 22.40 16.30 15.00 15.79 22.40 19.70 25.34 19.70 22.40 15.00 25.34
-## [12] 15.79 15.79 16.30 15.79 25.34 19.70 15.00 25.34 25.34
+##  [1] 16.30 25.34 15.79 16.30 22.40 19.70 25.34 15.00 25.34 25.34 19.70
+## [12] 22.40 25.34 22.40 22.40 25.34 15.00 19.70 22.40 15.00
 ```
 
 ```r
@@ -1186,8 +1186,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 22.40 16.30 15.00 15.79 22.40 19.70 25.34 19.70 22.40 15.00 25.34
-## [12] 15.79 15.79 16.30 15.79 25.34 19.70 15.00 25.34 25.34
+##  [1] 16.30 25.34 15.79 16.30 22.40 19.70 25.34 15.00 25.34 25.34 19.70
+## [12] 22.40 25.34 22.40 22.40 25.34 15.00 19.70 22.40 15.00
 ```
 
 
@@ -2389,7 +2389,7 @@ During the initial cleaning stage of analysis the researcher may choose to creat
 
 ```r
 ## stem2df EXAMPLE:
-stem2df(DATA, "state", "new")
+(stemdat <- stem2df(DATA, "state", "new"))
 ```
 
 ```
@@ -2420,7 +2420,7 @@ stem2df(DATA, "state", "new")
 ```
 
 ```r
-with(stem2df(DATA, "state", "new"), trans_cloud(new, sex, title.cex = 2.5, 
+with(stemdat, trans_cloud(new, sex, title.cex = 2.5, 
     title.color = "blue", max.word.size = 5, title.padj = .7))
 ```
 
@@ -4140,8 +4140,7 @@ synonyms(c("the", "cat", "teach"))
 ```
 ## no match for the following:
 ## 
-## the
-## ========================
+## the ========================
 ```
 
 ```
@@ -4177,8 +4176,7 @@ syn(c("the", "cat", "teach"), return.list = FALSE)
 ```
 ## no match for the following:
 ## 
-## the
-## ========================
+## the ========================
 ```
 
 ```
@@ -4202,8 +4200,7 @@ syn(c("the", "cat", "teach"), multiwords = FALSE)
 ```
 ## no match for the following:
 ## 
-## the
-## ========================
+## the ========================
 ```
 
 ```
@@ -4289,12 +4286,9 @@ word_associate(DATA2$state, DATA2$person, match.string = ms,
 ```
 
 ```
+## Match Terms ===========
 ## 
-## Match Terms
-## ===========
-## 
-## List 1:
-## i, you
+## List 1: i, you
 ```
 
 
@@ -8241,16 +8235,16 @@ dist_tab(rnorm(10000), 10)
 
 ```
 ##           interval Freq cum.Freq percent cum.percent
-## 1    (-3.98,-3.18]    7        7    0.07        0.07
-## 2    (-3.18,-2.38]   68       75    0.68        0.75
-## 3    (-2.38,-1.58]  525      600    5.25        6.00
-## 4   (-1.58,-0.779] 1611     2211   16.11       22.11
-## 5  (-0.779,0.0204] 2869     5080   28.69       50.80
-## 6    (0.0204,0.82] 2926     8006   29.26       80.06
-## 7      (0.82,1.62] 1496     9502   14.96       95.02
-## 8      (1.62,2.42]  420     9922    4.20       99.22
-## 9      (2.42,3.22]   69     9991    0.69       99.91
-## 10     (3.22,4.02]    9    10000    0.09      100.00
+## 1    (-3.98,-3.17]    7        7    0.07        0.07
+## 2    (-3.17,-2.37]   71       78    0.71        0.78
+## 3    (-2.37,-1.58]  526      604    5.26        6.04
+## 4   (-1.58,-0.778] 1612     2216   16.12       22.16
+## 5  (-0.778,0.0204] 2864     5080   28.64       50.80
+## 6   (0.0204,0.818] 2923     8003   29.23       80.03
+## 7     (0.818,1.62] 1499     9502   14.99       95.02
+## 8      (1.62,2.41]  420     9922    4.20       99.22
+## 9      (2.41,3.21]   69     9991    0.69       99.91
+## 10     (3.21,4.02]    9    10000    0.09      100.00
 ```
 
 ```r
@@ -8305,8 +8299,8 @@ dist_tab(CO2, 4)
 ##      interval Freq cum.Freq percent cum.percent
 ## 1 (7.66,17.1]   19       19   22.62       22.62
 ## 2 (17.1,26.6]   18       37   21.43       44.05
-## 3 (26.6,36.1]   25       62   29.76       73.81
-## 4 (36.1,45.5]   22       84   26.19      100.00
+## 3   (26.6,36]   25       62   29.76       73.81
+## 4   (36,45.5]   22       84   26.19      100.00
 ```
 
 
@@ -9219,7 +9213,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x12a2f6a0>
+<environment: 0x10767f84>
 ```
 
 ```r
@@ -10791,22 +10785,6 @@ summary(a)
 
 ```r
 summary(out)
-apply_as_tm(a, tm:::Dictionary)
-```
-
-```
-##  [1] "about"    "already"  "am"       "are"      "be"       "can"     
-##  [7] "certain"  "computer" "distrust" "do"       "dumb"     "eat"     
-## [13] "fun"      "good"     "how"      "hungry"   "i"        "i'm"     
-## [19] "is"       "it"       "it's"     "let's"    "liar"     "move"    
-## [25] "no"       "not"      "on"       "shall"    "should"   "stinks"  
-## [31] "talking"  "telling"  "the"      "then"     "there"    "too"     
-## [37] "truth"    "way"      "we"       "what"     "you"     
-## attr(,"class")
-## [1] "Dictionary" "character"
-```
-
-```r
 apply_as_tm(a, tm:::dissimilarity, method = "cosine")
 ```
 
@@ -10822,12 +10800,31 @@ apply_as_tm(a, tm:::findAssocs, "computer", .8)
 ```
 
 ```
-##  already       am distrust     dumb      eat      fun   hungry        i 
-##     1.00     1.00     1.00     1.00     1.00     1.00     1.00     1.00 
-##      i'm       is       it     it's    let's     liar       no      not 
-##     1.00     1.00     1.00     1.00     1.00     1.00     1.00     1.00 
-##   stinks  telling      the    there      too    truth      way      you 
-##     1.00     1.00     1.00     1.00     1.00     1.00     1.00     0.94
+##          computer
+## already      1.00
+## am           1.00
+## distrust     1.00
+## dumb         1.00
+## eat          1.00
+## fun          1.00
+## hungry       1.00
+## i            1.00
+## i'm          1.00
+## is           1.00
+## it           1.00
+## it's         1.00
+## let's        1.00
+## liar         1.00
+## no           1.00
+## not          1.00
+## stinks       1.00
+## telling      1.00
+## the          1.00
+## there        1.00
+## too          1.00
+## truth        1.00
+## way          1.00
+## you          0.94
 ```
 
 ```r

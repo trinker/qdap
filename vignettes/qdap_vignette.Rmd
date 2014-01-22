@@ -5144,7 +5144,6 @@ summary(a)
 ## Apply as tm
 (out <- apply_as_tm(a, tm:::removeSparseTerms, sparse=0.6))
 summary(out)
-apply_as_tm(a, tm:::Dictionary)
 apply_as_tm(a, tm:::dissimilarity, method = "cosine")
 apply_as_tm(a, tm:::findAssocs, "computer", .8)
 apply_as_tm(a, tm:::findFreqTerms, 2, 3)
