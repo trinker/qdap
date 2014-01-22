@@ -86,6 +86,8 @@ relatively new to CRAN, made these changes sensible at this point.
 * `cm_range2long` returned `NA`s for vectors containing multiple single values.  
   See GitHub <a href="https://github.com/trinker/qdap/issues/144">issue #144</a> for more.
 
+* `termco` family of functions did not handle `NA` values.  This has been fixed. 
+  (Matt Williamson) See GitHub <a href="https://github.com/trinker/qdap/issues/147">issue #147</a> details.
 
 <b>NEW FEATURES</b>
 
@@ -318,7 +320,7 @@ qdap 0.2.3
 <b>BUG FIXES</b>
 
 * `genXtract` labels returned the word "right" rather than the right edge string.
-  See http://stackoverflow.com/a/15423439/1000343 for an example of the old 
+  See <a href="http://stackoverflow.com/a/15423439/1000343" target="_blank">http://stackoverflow.com/a/15423439/1000343</a> for an example of the old 
   behavior.  This behavior has been fixed.
 
 * `gradient_cloud`'s `min.freq ` locked at 1.  This has been fixed. (Manuel 

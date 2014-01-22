@@ -54,6 +54,9 @@ function(termco.object, combined.columns, new.name, short.term = TRUE,
     colnames(x) <- nms 
     x2 <- qcombine(x, combined.columns = combined.columns, elim.old = elim.old)
     y2 <- x2[, -c(1:2), drop = FALSE]/x[, 2]
+
+    ## Added 1-21-14 to deal with missing values
+    y2[] <- lapply(y2,  nan2zero)
     if (percent){
         y2 <- y2*100
     }
