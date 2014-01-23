@@ -1,15 +1,16 @@
 #' Read/Write Multiple csv Files at a Time
 #' 
-#' \code{mcsv_w} - Read and assign multiple csv files at the same time.
+#' \code{mcsv_r} - Read and assign multiple csv files at the same time.
 #' 
 #' @param files csv file(s) to read.   
 #' @param a.names object names to assign the csv file(s) to.  If \code{NULL} 
-#' assigns the csv to the name(s) of the csv file(s) in the global environment.
-#' @param l.name A character vector of names to assign to the csv files 
-#' (dataframes) being read in.  Default (\code{NULL}) uses the names of the 
-#' files in the directory without the file extension.
-#' @param list A character vector of length one to name the list being read in.  
-#' Default is \code{"L1"}.
+#' assigns the name(s) of the csv files in the directory, without the file 
+#' extension, to the objects in the global environment.
+#' @param l.name A single character string of a name to assign to the list if 
+#' dataframes created by the csv files being read in.  Default (\code{NULL}) 
+#' uses \code{L1}.
+#' @param list logical.  If \code{TRUE} then a list of dataframes is crated in 
+#' the global environment in addition to the individual dataframes.
 #' @param pos where to do the removal. By default, uses the current environment. 
 #' @param envir the environment to use. 
 #' @param \dots data.frame object(s) to write to a file or a list of data.frame 
