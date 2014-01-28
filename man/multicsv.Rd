@@ -13,16 +13,17 @@ mcsv_w(..., dir = NULL, open = FALSE, sep = ", ", dataframes = NULL,
   \item{files}{csv file(s) to read.}
 
   \item{a.names}{object names to assign the csv file(s) to.
-  If \code{NULL} assigns the csv to the name(s) of the csv
-  file(s) in the global environment.}
+  If \code{NULL} assigns the name(s) of the csv files in
+  the directory, without the file extension, to the objects
+  in the global environment.}
 
-  \item{l.name}{A character vector of names to assign to
-  the csv files (dataframes) being read in.  Default
-  (\code{NULL}) uses the names of the files in the
-  directory without the file extension.}
+  \item{l.name}{A single character string of a name to
+  assign to the list if dataframes created by the csv files
+  being read in.  Default (\code{NULL}) uses \code{L1}.}
 
-  \item{list}{A character vector of length one to name the
-  list being read in. Default is \code{"L1"}.}
+  \item{list}{logical.  If \code{TRUE} then a list of
+  dataframes is crated in the global environment in
+  addition to the individual dataframes.}
 
   \item{pos}{where to do the removal. By default, uses the
   current environment.}
@@ -54,7 +55,7 @@ mcsv_w(..., dir = NULL, open = FALSE, sep = ", ", dataframes = NULL,
 files. Silently returns the path of the directory.
 }
 \description{
-\code{mcsv_w} - Read and assign multiple csv files at the
+\code{mcsv_r} - Read and assign multiple csv files at the
 same time.
 
 \code{mcsv_w} - Write multiple csv files into a file at the

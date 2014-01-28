@@ -87,7 +87,10 @@ BUG FIXES
   See GitHub issue #144 for more.
 
 * `termco` family of functions did not handle `NA` values.  This has been fixed. 
-  (Matt Williamson) See GitHub issue #147 details.
+  (Matt Williamson) See GitHub issue #150 for details.
+
+* `pos` thew an error for vectors of length 1.  This has been fixed. (Kurt 
+  Hornik) See GitHub issue #147 for details.
 
 NEW FEATURES
 

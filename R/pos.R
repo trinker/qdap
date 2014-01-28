@@ -125,8 +125,13 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
     G4 <- mtabulate(m2$POStags)
     m2$word.count <- wc(text.var)
     cons <- ifelse(percent, 100, 1)
+
     G5 <- sapply(data.frame(G4, check.names = FALSE), 
-        function(x) cons*(x/m2$word.count)) 
+        function(x) cons*(x/m2$word.count))
+    ## Added data.frame wrap on 128-per Kurt Hornik's bug find
+    if (is.vector(G5)) {
+        G5 <- data.frame(t(G5))
+    }
     colnames(G5) <- paste0("prop", colnames(G5))
     G4 <- data.frame(wrd.cnt = m2$word.count, G4, check.names = FALSE)
     G5 <- data.frame(wrd.cnt = m2$word.count, G5, check.names = FALSE)
@@ -135,6 +140,7 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
         G4[nas, 2:ncol(G4)] <- NA
         m2[nas, 1:ncol(m2)] <- NA
     }
+
     rnp <- raw_pro_comb(G4[, -1], G5[, -1], digits = digits, 
         percent = percent, zero.replace = zero.replace, override = TRUE)  
     rnp <- data.frame(G4[, 1, drop = FALSE], rnp, check.names = FALSE)     
