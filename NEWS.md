@@ -87,10 +87,10 @@ relatively new to CRAN, made these changes sensible at this point.
   See GitHub <a href="https://github.com/trinker/qdap/issues/144">issue #144</a> for more.
 
 * `termco` family of functions did not handle `NA` values.  This has been fixed. 
-  (Matt Williamson) See GitHub <a href="https://github.com/trinker/qdap/issues/150">issue #150</a> for details.
+  (Matt Williamson) See GitHub <a href="https://github.com/trinker/qdap/issues/147">issue #147</a> for details.
 
 * `pos` thew an error for vectors of length 1.  This has been fixed. (Kurt 
-  Hornik) See GitHub <a href="https://github.com/trinker/qdap/issues/147">issue #147</a> for details.
+  Hornik) See GitHub <a href="https://github.com/trinker/qdap/issues/150">issue #150</a> for details.
 
 <b>NEW FEATURES</b>
 
