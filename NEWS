@@ -92,6 +92,9 @@ BUG FIXES
 * `pos` thew an error for vectors of length 1.  This has been fixed. (Kurt 
   Hornik) See GitHub issue #150 for details.
 
+* `formality` thew an error for vectors of length 1.  This has been fixed. (Kurt 
+  Hornik) See GitHub issue #151 for details.
+
 NEW FEATURES
 
 *  The `cm_xxx2long` family of functions (`cm_df2long`, `cm_range2long` and 

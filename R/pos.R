@@ -218,21 +218,22 @@ function(text.var, grouping.var = NULL, digits = 1, percent = TRUE,
             G <- G[length(G)]
         }
     }
-    check <- FALSE
+ #   check <- FALSE
     if (any(class(text.var) %in% c("pos", "pos_by", "formality"))) {
         pos.list <- text.var
         text.var <- text.var[["POSfreq"]]
-        check <- TRUE
+#       check <- TRUE
     } else {
         pos.list <- pos(text.var, digits = digits, percent = percent, ...)
         text.var <- pos.list[["POSfreq"]]
     }
     if(is.null(grouping.var)){
-        if (check) {
+#        if (check) {
+## commented out rows removed 1-29-14 to deal with single length vector
             grouping <- rep("all", nrow(text.var))  
-        } else {
-            grouping <- rep("all", length(text.var))
-        }
+#        } else {
+#            grouping <- rep("all", length(text.var))
+#        }
     } else {
         if (is.list(grouping.var) & length(grouping.var)>1) {
             grouping <- paste2(grouping.var)

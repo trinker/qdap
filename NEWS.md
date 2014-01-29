@@ -92,6 +92,9 @@ relatively new to CRAN, made these changes sensible at this point.
 * `pos` thew an error for vectors of length 1.  This has been fixed. (Kurt 
   Hornik) See GitHub <a href="https://github.com/trinker/qdap/issues/150">issue #150</a> for details.
 
+* `formality` thew an error for vectors of length 1.  This has been fixed. (Kurt 
+  Hornik) See GitHub <a href="https://github.com/trinker/qdap/issues/151">issue #151</a> for details.
+
 <b>NEW FEATURES</b>
 
 *  The `cm_xxx2long` family of functions (`cm_df2long`, `cm_range2long` and 

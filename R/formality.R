@@ -127,16 +127,7 @@ formality <- function(text.var, grouping.var = NULL,
     xn <- nrow(X)                                                                    
     X$JI <- rep(0, xn)                                                               
     X$JK <- rep(0, xn)                                                               
-    article <- function(x) {                                                         
-        if (identical(x, character(0))) {                                            
-            return(0)                                                                
-        } else {                                                                     
-            WORDS <- rm_stopwords(x, stopwords = NULL,                                  
-                unlist = FALSE, strip = TRUE)                                        
-            sapply(WORDS, function(x) sum(x %in% c("the", "an", "a"),                
-                na.rm = TRUE ))                                                      
-        }                                                                            
-    }                                                                                
+                                                                             
     if (!gv){                                                                        
         stv <- split(text.var, grouping.var)                                         
         stv <- stv[sapply(stv, function(x) !identical(x, character(0)))]             
@@ -227,6 +218,18 @@ formality <- function(text.var, grouping.var = NULL,
     class(o) <- "formality"                                                  
     return(o)                                                                        
 }
+
+## Helper function to find articles
+article <- function(x) {                                                         
+    if (identical(x, character(0))) {                                            
+        return(0)                                                                
+    } else {                                                                     
+        WORDS <- rm_stopwords(x, stopwords = NULL,                                  
+            unlist = FALSE, strip = TRUE)                                        
+        sapply(WORDS, function(x) sum(x %in% c("the", "an", "a"),                
+            na.rm = TRUE ))                                                      
+    }                                                                            
+}  
 
 
 #' Plots a formality Object
