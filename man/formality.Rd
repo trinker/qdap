@@ -57,7 +57,7 @@ Where: \deqn{f = \left \{noun, \;adjective, \;preposition,
 \;c \;+ \;conjunctions)}}
 }
 \section{Warning}{
-  Heylighen & Dewaele(2002) state, "At present, a sample
+  Heylighen & Dewaele (2002) state, "At present, a sample
   would probably need to contain a few hundred words for
   the measure to be minimally reliable. For single
   sentences, the F-value should only be computed for

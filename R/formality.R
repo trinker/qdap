@@ -13,7 +13,7 @@
 #' formality score.
 #' @param digits The number of digits displayed.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{pos_by}}.
-#' @section Warning: Heylighen & Dewaele(2002) state, "At present, a sample would 
+#' @section Warning: Heylighen & Dewaele (2002) state, "At present, a sample would 
 #' probably need to contain a few hundred words for the measure to be minimally 
 #' reliable. For single sentences, the F-value should only be computed for 
 #' purposes of illustration" (p. 24).
