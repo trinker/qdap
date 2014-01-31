@@ -4,10 +4,10 @@
 \usage{
 dispersion_plot(text.var, match.terms, grouping.var = NULL, rm.vars = NULL,
   color = "blue", bg.color = "grey90", horiz.color = "grey85",
-  symbol = "|", title = "Lexical Dispersion Plot", rev.factor = TRUE,
-  wrap = "'", xlab = "Dialogue (Words)", ylab = NULL, size = 4,
-  plot = TRUE, char2space = "~~", scales = "free", space = "free",
-  total.color = "black")
+  total.color = "black", symbol = "|", title = "Lexical Dispersion Plot",
+  rev.factor = TRUE, wrap = "'", xlab = "Dialogue (Words)", ylab = NULL,
+  size = 4, plot = TRUE, char2space = "~~", apostrophe.remove = FALSE,
+  scales = "free", space = "free", ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -30,6 +30,9 @@ dispersion_plot(text.var, match.terms, grouping.var = NULL, rm.vars = NULL,
 
   \item{horiz.color}{The color of the horizontal tracking
   stripe.  Use \code{horiz.color = bg.color} to eliminate.}
+
+  \item{total.color}{The color to use for summary `all`
+  group.  If \code{NULL} totals are dropped.}
 
   \item{symbol}{The word symbol.  Defualt is \code{"|"}.}
 
@@ -56,6 +59,9 @@ dispersion_plot(text.var, match.terms, grouping.var = NULL, rm.vars = NULL,
   \item{char2space}{A vector of characters to be turned
   into spaces.}
 
+  \item{apostrophe.remove}{logical.  If \code{TRUE} removes
+  apostrophes from the output.}
+
   \item{scales}{Should scales be fixed (\code{"fixed"}, the
   default), free (\code{"free"}), or free in one dimension
   (\code{"free_x"}, \code{"free_y"})}
@@ -67,8 +73,8 @@ dispersion_plot(text.var, match.terms, grouping.var = NULL, rm.vars = NULL,
   length of the x scale; or if \code{"free"} both height
   and width will vary.}
 
-  \item{total.color}{The color to use for summary `all`
-  group.  If \code{NULL} totals are dropped.}
+  \item{\ldots}{Other argument supplied to
+  \code{\link[qdap]{strip}}.}
 }
 \value{
 Plots a dispersion plot and invisibly returns the ggplot2

@@ -14,6 +14,8 @@
 #' @param bg.color The background color.
 #' @param horiz.color The color of the horizontal tracking stripe.  Use 
 #' \code{horiz.color = bg.color} to eliminate.
+#' @param total.color The color to use for summary `all` group.  If \code{NULL}
+#' totals are dropped.
 #' @param symbol The word symbol.  Defualt is \code{"|"}.
 #' @param title Title of the plot
 #' @param rev.factor logical.  If \code{TRUE} reverses the plot order of the 
@@ -27,14 +29,15 @@
 #' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
 #' to add additional plot layers.
 #' @param char2space A vector of characters to be turned into spaces.  
+#' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophes from 
+#' the output.
 #' @param scales Should scales be fixed (\code{"fixed"}, the default), free 
 #' (\code{"free"}), or free in one dimension (\code{"free_x"}, \code{"free_y"})
 #' @param space If \code{"fixed"}, the default, all panels have the same size. 
 #' If \code{"free_y"} their height will be proportional to the length of the y 
 #' scale; if \code{"free_x"} their width will be proportional to the length of 
 #' the x scale; or if \code{"free"} both height and width will vary. 
-#' @param total.color The color to use for summary `all` group.  If \code{NULL}
-#' totals are dropped.
+#' @param \ldots Other argument supplied to \code{\link[qdap]{strip}}.
 #' @return Plots a dispersion plot and invisibly returns the ggplot2 object.
 #' @keywords dispersion
 #' @export
@@ -100,9 +103,10 @@
 #' }
 dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,  
     rm.vars =NULL, color = "blue", bg.color = "grey90", horiz.color = "grey85", 
-    symbol = "|", title = "Lexical Dispersion Plot", rev.factor = TRUE, 
-    wrap = "'", xlab = "Dialogue (Words)", ylab = NULL, size = 4, plot = TRUE,
-    char2space = "~~", scales="free", space="free", total.color = "black") {
+    total.color = "black", symbol = "|", title = "Lexical Dispersion Plot", 
+    rev.factor = TRUE, wrap = "'", xlab = "Dialogue (Words)", ylab = NULL, 
+    size = 4, plot = TRUE, char2space = "~~", apostrophe.remove = FALSE, 
+    scales="free", space="free", ...) {
 
     word.num <- NULL
     GV <- ifelse(!is.null(grouping.var), TRUE, FALSE)
@@ -166,8 +170,9 @@ dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,
 
     ## split it out by rep. measures var.
     rmout <- lapply(LDF, function(x) {
-
-        out <- cm_df.temp(x, text.var = "text.var", strip = TRUE, 
+        x[, "text.var"] <- strip(x[, "text.var"], 
+            apostrophe.remove = apostrophe.remove, ...)
+        out <- cm_df.temp(x, text.var = "text.var", strip = FALSE, 
             char.keep = char2space)
         out[, "text"] <- spaste(gsub(char2space, " ", out[, "text"]))
 

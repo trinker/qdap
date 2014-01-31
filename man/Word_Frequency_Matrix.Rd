@@ -197,10 +197,19 @@ qheat(word_cor(t(dat2), word = wrds2, r = NULL),
     high="red", low="yellow", grid=NULL)
 
 ## EXAMPLE 3
-library(gridExtra, ggplot2, grid)
+library(gridExtra); library(ggplot2); library(grid)
 dat3 <- lapply(qcv(OBAMA, ROMNEY), function(x) {
     with(pres_debates2012, wfm(dialogue[person == x], x2[person == x]))
 })
+
+
+# Presidential debates by person
+dat5 <- pres_debates2012
+dat5 <- dat5[dat5$person \%in\% qcv(ROMNEY, OBAMA), ]
+
+disp <- with(dat5, dispersion_plot(dialogue, wrds2, grouping.var = person,
+    total.color = NULL, rm.vars=time))
+
 
 cors <- lapply(dat3, function(m) {
     word_cor(t(m), word = wrds2, r = NULL)
@@ -208,7 +217,7 @@ cors <- lapply(dat3, function(m) {
 
 plots <- lapply(cors, function(x) {
     qheat(x, diag.na = TRUE, values = TRUE, digits = 3, plot = FALSE,
-    by.column = NULL, high="white", low="darkgreen", grid=NULL)
+    by.column = NULL, high="red", low="yellow", grid=NULL)
 })
 
 plots <- lapply(1:2, function(i) {
@@ -216,8 +225,8 @@ plots <- lapply(1:2, function(i) {
     theme(axis.title.x = element_blank(),
         plot.margin = unit(rep(0, 4), "lines"))
 })
-#1 1 0.5 0.5
-grid.arrange(plots[[1]], plots[[2]], ncol=1)
+
+grid.arrange(disp, arrangeGrob(plots[[1]], plots[[2]], ncol=1), ncol=2)
 
 ## With `word_cor`
 worlis <- list(
