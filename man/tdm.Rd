@@ -88,7 +88,7 @@ packages.
 \code{\link[qdap]{wfm}} for use with other text analysis
 packages.
 
-\code{tm2wfm} - Convert the \code{tm} package's
+\code{tm2qdap} - Convert the \code{tm} package's
 \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}
 to \code{\link[qdap]{wfm}}.
 
@@ -188,16 +188,17 @@ qheat(topics2, high="blue", low="yellow", by.col=F)
 
 ## tm Matrices to wfm
 library(tm)
+data(crude)
 
 ## A Term Document Matrix Conversion
 (tm_in <- TermDocumentMatrix(crude, control = list(stopwords = TRUE)))
-converted <- qdap(tm_in)
+converted <- tm2qdap(tm_in)
 head(converted)
 summary(converted)
 
 ## A Document Term Matrix Conversion
 (dtm_in <- DocumentTermMatrix(crude, control = list(stopwords = TRUE)))
-summary(tm2wfm(dtm_in))
+summary(tm2qdap(dtm_in))
 
 ## `apply_as_tm` Examples
 ## Create a wfm

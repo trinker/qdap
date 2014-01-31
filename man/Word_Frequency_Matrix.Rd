@@ -170,6 +170,7 @@ chisq.test(z)
 chisq.test(wfm(y))
 
 ## Words correlated within turns of talk
+## EXAMPLE 1
 library(reports)
 x <- factor(with(rajSPLIT, paste(act, pad(TOT(tot)), sep = "|")))
 dat <- wfm(rajSPLIT$dialogue, x)
@@ -184,6 +185,39 @@ qheat(cor(t(dat)[, c("romeo", "juliet", "hate", "love")]),
 dat2 <- wfm(DATA$state, seq_len(nrow(DATA)))
 qheat(cor(t(dat2)), low = "yellow", high = "red",
     grid = "grey90", diag.na = TRUE, by.column = NULL)
+
+## EXAMPLE 2
+x2 <- factor(with(pres_debates2012, paste(time, pad(TOT(tot)), sep = "|")))
+dat2 <- wfm(pres_debates2012$dialogue, x2)
+wrds <- word_list(pres_debates2012$dialogue,
+    stopwords = c("it's", "that's", Top200Words))
+wrds2 <- tolower(sort(wrds$rfswl[[1]][, 1]))
+qheat(word_cor(t(dat2), word = wrds2, r = NULL),
+    diag.na = TRUE, values = TRUE, digits = 3, by.column = NULL,
+    high="red", low="yellow", grid=NULL)
+
+## EXAMPLE 3
+library(gridExtra, ggplot2, grid)
+dat3 <- lapply(qcv(OBAMA, ROMNEY), function(x) {
+    with(pres_debates2012, wfm(dialogue[person == x], x2[person == x]))
+})
+
+cors <- lapply(dat3, function(m) {
+    word_cor(t(m), word = wrds2, r = NULL)
+})
+
+plots <- lapply(cors, function(x) {
+    qheat(x, diag.na = TRUE, values = TRUE, digits = 3, plot = FALSE,
+    by.column = NULL, high="white", low="darkgreen", grid=NULL)
+})
+
+plots <- lapply(1:2, function(i) {
+    plots[[i]] + ggtitle(qcv(OBAMA, ROMNEY)[i]) +
+    theme(axis.title.x = element_blank(),
+        plot.margin = unit(rep(0, 4), "lines"))
+})
+#1 1 0.5 0.5
+grid.arrange(plots[[1]], plots[[2]], ncol=1)
 
 ## With `word_cor`
 worlis <- list(

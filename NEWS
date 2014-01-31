@@ -230,6 +230,9 @@ MINOR FEATURES
 * `plot.polarity` gains arguments for optional error bars using the standard 
   error of the mean polarity.
 
+* `exclude` now works with `wfm` and the `tm` package's `DocumentTermMatrix` and
+  `TermDocumentMatrix` classes.
+
 CHANGES
 
 * The dictionaries and word lists for qdap have been moved to their own package, 

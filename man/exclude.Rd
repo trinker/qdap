@@ -5,7 +5,10 @@
 exclude(word.list, ...)
 }
 \arguments{
-  \item{word.list}{A list of words/terms to exclude from.}
+  \item{word.list}{A list/vector of words/terms, a
+  \code{\link[qdap]{wfm}},
+  \code{\link[tm]{DocumentTermMatrix}}, or
+  \code{\link[tm]{TermDocumentMatrix}} to exclude from.}
 
   \item{\dots}{A vector (character/numeric) if element(s)
   to be excluded from the \code{word.list}.}
@@ -33,6 +36,20 @@ termco(DATA$state, DATA$person, exclude(term_match(DATA$state, qcv(th),
 
 MTCH.LST <- exclude(term_match(DATA$state, qcv(th, i)), qcv(truth, stinks))
 termco(DATA$state, DATA$person, MTCH.LST)
+
+## Works with wfm
+dat <- wfm(DATA$state, DATA$person)
+the.no <- term_match(DATA$state, c("the", "no"))
+exclude(dat, unlist(the.no))
+
+## Works with tm's TermDocumentMatrix/DocumentTermMatrix
+dat2 <- dtm(DATA$state, DATA$person)
+out.dtm <- exclude(dat2, unlist(the.no))
+inspect(out.dtm)
+
+dat3 <- tdm(DATA$state, DATA$person)
+out.tdm <- exclude(dat3, unlist(the.no))
+inspect(out.tdm)
 }
 }
 

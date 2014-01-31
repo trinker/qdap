@@ -103,16 +103,17 @@
 #' 
 #' ## tm Matrices to wfm
 #' library(tm)
+#' data(crude)
 #'
 #' ## A Term Document Matrix Conversion
 #' (tm_in <- TermDocumentMatrix(crude, control = list(stopwords = TRUE)))
-#' converted <- qdap(tm_in)
+#' converted <- tm2qdap(tm_in)
 #' head(converted)
 #' summary(converted)
 #'
 #' ## A Document Term Matrix Conversion
 #' (dtm_in <- DocumentTermMatrix(crude, control = list(stopwords = TRUE)))
-#' summary(tm2wfm(dtm_in))
+#' summary(tm2qdap(dtm_in))
 #' 
 #' ## `apply_as_tm` Examples
 #' ## Create a wfm
@@ -253,7 +254,7 @@ wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
 #' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
-#' \code{tm2wfm} - Convert the \code{tm} package's 
+#' \code{tm2qdap} - Convert the \code{tm} package's 
 #' \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}} to
 #' \code{\link[qdap]{wfm}}.
 #' 

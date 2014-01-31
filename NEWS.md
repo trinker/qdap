@@ -230,6 +230,9 @@ relatively new to CRAN, made these changes sensible at this point.
 * `plot.polarity` gains arguments for optional error bars using the standard 
   error of the mean polarity.
 
+* `exclude` now works with `wfm` and the `tm` package's `DocumentTermMatrix` and
+  `TermDocumentMatrix` classes.
+
 <b>CHANGES</b>
 
 * The dictionaries and word lists for <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> have been moved to their own package, 
