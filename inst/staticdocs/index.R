@@ -135,7 +135,8 @@ list(
         "formality",
         "kullback_leibler",
         "polarity",
-        "word_cor"
+        "word_cor",
+        "word_proximity"
       )
     ),
     sd_section("qdap Tools", 

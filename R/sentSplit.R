@@ -69,6 +69,9 @@
 #' ## `TOT` EXAMPLE:
 #' dat <- sentSplit(DATA, "state") 
 #' TOT(dat$tot)
+#' 
+#' ## `sent_detect`
+#' sent_detect(DATA$state)
 #' }
 sentSplit <-
 function(dataframe, text.var, rm.var = NULL, endmarks = c("?", ".", "!", "|"), 
@@ -335,5 +338,30 @@ plot.sent_split <- function(x, text.var = NULL, rm.var = NULL, ...) {
     
 }
 
+#' Convert the tot Column to Turn of Talk
+#' 
+#' \code{sent_detect} - Detect and split sentences on endmark boundaries.
+#' 
+#' @return \code{sent_detect} - returns a character vector of sentences split on
+#' endmark.
+#' @rdname sentSplit
+#' @export
+sent_detect <- function(text.var, endmarks = c("?", ".", "!", "|"), 
+    incomplete.sub = TRUE, rm.bracket = TRUE, ...) {
 
-
+    splitpoint <- paste0("[", paste("\\", endmarks, sep="", collapse=""), "]")
+    text.var <- as.character(text.var)
+    text.var[is.na(text.var)] <- "DELETEME_QDAP_DELqdapDEL"
+    text.var <- paste(text.var, collapse = " ")
+    if (incomplete.sub) {
+        text.var <- incomplete_replace(text.var)
+    }
+    if (rm.bracket) {
+        text.var <- bracketX(text.var)
+    }
+    splits <- strsplit(text.var, sprintf("(?<=%s)|_DELqdapDEL", 
+        splitpoint), perl=TRUE)
+    out <-  Trim(unlist(splits))
+    out[out == "DELETEME_QDAP"] <- NA
+    out
+}

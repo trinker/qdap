@@ -2,6 +2,7 @@
 \alias{TOT}
 \alias{sentCombine}
 \alias{sentSplit}
+\alias{sent_detect}
 \title{Sentence Splitting}
 \usage{
 sentSplit(dataframe, text.var, rm.var = NULL, endmarks = c("?", ".", "!",
@@ -11,6 +12,9 @@ sentSplit(dataframe, text.var, rm.var = NULL, endmarks = c("?", ".", "!",
 sentCombine(text.var, grouping.var = NULL, as.list = FALSE)
 
 TOT(tot)
+
+sent_detect(text.var, endmarks = c("?", ".", "!", "|"),
+  incomplete.sub = TRUE, rm.bracket = TRUE, ...)
 }
 \arguments{
   \item{dataframe}{A dataframe that contains the person and
@@ -65,6 +69,9 @@ returned as well.
 
 \code{TOT} - returns a numeric vector of the turns of talk
 without sentence sub indexing (e.g. 3.2 become 3).
+
+\code{sent_detect} - returns a character vector of
+sentences split on endmark.
 }
 \description{
 \code{sentSplit} - Splits turns of talk into individual
@@ -78,6 +85,9 @@ grouping variable together.
 \code{TOT} - Convert the tot column from
 \code{\link[qdap]{sentSplit}} to turn of talk index (no sub
 sentence).  Generally, for internal use.
+
+\code{sent_detect} - Detect and split sentences on endmark
+boundaries.
 }
 \section{Warning}{
   \code{\link[qdap]{sentSplit}} requires the dialogue
@@ -118,6 +128,9 @@ truncdf(sentCombine(dat$state, dat$sex), 50)
 ## `TOT` EXAMPLE:
 dat <- sentSplit(DATA, "state")
 TOT(dat$tot)
+
+## `sent_detect`
+sent_detect(DATA$state)
 }
 }
 \author{

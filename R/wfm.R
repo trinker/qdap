@@ -95,7 +95,6 @@
 #' x <- factor(with(rajSPLIT, paste(act, pad(TOT(tot)), sep = "|")))
 #' dat <- wfm(rajSPLIT$dialogue, x)
 #' 
-#' 
 #' cor(t(dat)[, c("romeo", "juliet")])
 #' cor(t(dat)[, c("romeo", "banished")])
 #' cor(t(dat)[, c("romeo", "juliet", "hate", "love")])
