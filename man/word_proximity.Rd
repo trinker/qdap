@@ -2,7 +2,7 @@
 \alias{word_proximity}
 \title{Proximity Matrix Between Words}
 \usage{
-word_proximity(text.var, terms, grouping.var = NULL)
+word_proximity(text.var, terms, grouping.var = NULL, scale = TRUE)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -31,15 +31,13 @@ word "read" you'd supply a vector of c(" read ", " reads",
 " reading", " reader").
 }
 \examples{
-\dontrun{
 wrds <- word_list(pres_debates2012$dialogue,
     stopwords = c("it's", "that's", Top200Words))
 wrds2 <- tolower(sort(wrds$rfswl[[1]][, 1]))
 
 (x <- with(pres_debates2012, word_proximity(dialogue, wrds2)))
-out <- round(scale(x), 2)
-diag(out) <- attr(out, "scaled:center")
-qheat(scale(x), values=TRUE, digits=2, high="red", low="yellow", grid=NULL)
-}
+plot(x)
+
+(x2 <- with(pres_debates2012, word_proximity(dialogue, wrds2, person)))
 }
 
