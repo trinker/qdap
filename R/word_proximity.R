@@ -8,30 +8,35 @@
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
-#' @scale logical.  If \code{TRUE} the mean distance is given in standardized 
-#' units rather than in sentences as units.
-#' @return Returns a matrix of proximity measures in the unit of average 
-#' sentences between words.
+#' @return Returns a list of matrices of proximity measures in the unit of average 
+#' sentences between words (defualts to scaled).
 #' @note The match.terms is character sensitive.  Spacing is an important way 
 #' to grab specific words and requires careful thought.  Using "read" will find 
 #' the words "bread", "read" "reading", and "ready".  If you want to search 
 #' for just the word "read" you'd supply a vector of c(" read ", " reads", 
 #' " reading", " reader").  
+#' @details Note that row names are the first word and column names are the 
+#' second comparison word. The values for Word A compared to Word B will not 
+#' be the same as Word B compared to Word A. This is because, unlike a true 
+#' distance measure, \code{word+proximity}'s matrix is asymmetrical. 
+#' \code{word_proximity} computes the distance by taking each sentence position 
+#' for Word A and comparing it to the nearest sentence location for Word B.
+#' @rdname word_proximity
 #' @export
 #' @examples
+#' \dontrun{
 #' wrds <- word_list(pres_debates2012$dialogue, 
 #'     stopwords = c("it's", "that's", Top200Words))
 #' wrds2 <- tolower(sort(wrds$rfswl[[1]][, 1]))
 #' 
 #' (x <- with(pres_debates2012, word_proximity(dialogue, wrds2)))
 #' plot(x)
+#' plot(weight(x))
+#' plot(weight(x, "rev_scale_log"))
 #' 
 #' (x2 <- with(pres_debates2012, word_proximity(dialogue, wrds2, person)))
-word_proximity <- function(text.var, terms, grouping.var = NULL, scale = TRUE) {
- 
-## check the grep use
-## describe the non-symetrical matrix (look at cm_distance)
-## pvals???
+#' }
+word_proximity <- function(text.var, terms, grouping.var = NULL) {
   
     if(!is.null(grouping.var)){
         if (is.list(grouping.var) & length(grouping.var)>1) {
@@ -43,26 +48,27 @@ word_proximity <- function(text.var, terms, grouping.var = NULL, scale = TRUE) {
 
     inds <- seq_along(terms)
     ncols <- max(inds)
-    mat <- matrix(rep(NA, ncols^2), ncols)
     terms <- tolower(terms)
-    colnames(mat) <- rownames(mat) <- terms
 
     if (is.null(grouping.var)) {
-        out <- list(word_proximity_helper(text.var, terms, tofill = mat, inds = inds))
+        out <- list(word_proximity_helper(text.var, terms, inds = inds))
     } else {
         splits <- split(text.var, grouping)
-        out <- suppressWarnings(lapply(splits, word_proximity_helper, terms = terms, tofill = mat, inds = inds))
+        out <- suppressWarnings(lapply(splits, word_proximity_helper, terms = terms, inds = inds))
     }
 
     out <- lapply(out, function(x) {
         rms <- apply(x, 1, function(y) !all(is.na(y)))
-        x[rms, rms]
+        new <- x[rms, rms]
+        new[is.nan(new)] <- 0
+        new
     })
 
-    if (scale) {
-        out <- lapply(out, scale2)
-    } 
-    class(out) <- c("word_proximity", class(out))
+    attributes(out) <- list(
+        class = c("word_proximity", class(out)), 
+        weight = c("none"),
+        names = attributes(out)[["names"]] 
+    )
     out
 }
 
@@ -77,8 +83,15 @@ word_proximity <- function(text.var, terms, grouping.var = NULL, scale = TRUE) {
 #' @S3method print word_proximity
 #' @method print word_proximity
 print.word_proximity <-
-function(x, digits = 3, ...) {
+function(x, digits = NULL, ...) {
     WD <- options()[["width"]]
+    if (is.null(digits)) {
+        if(attributes(x)[["weight"]] == "none") {
+            digits <- 1
+        } else {
+            digits <- 3   
+        }
+    }
     options(width=3000)
     class(x) <- "list"
     x <- lapply(x, function(y) round(y, digits = digits))
@@ -99,12 +112,23 @@ function(x, digits = 3, ...) {
 #' labeled with count and proportional values.
 #' @param lab.digits Integer values specifying the number of digits to be 
 #' printed if \code{label} is \code{TRUE}.
+#' @param low The color to be used for lower values.
+#' @param high The color to be used for higher values.
+#' @param grid The color of the grid (Use \code{NULL} to remove the grid).  
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot word_proximity
 #' @S3method plot word_proximity
-plot.word_proximity <- function(x, label = TRUE, lab.digits = 3, high="blue", 
+plot.word_proximity <- function(x, label = TRUE, lab.digits = NULL, high="blue", 
     low="white", grid=NULL, ...) {
 
+    if (is.null(lab.digits)) {
+        if(attributes(x)[["weight"]] == "none") {
+            lab.digits <- 1
+        } else {
+            lab.digits <- 3   
+        }
+    }
+    
     class(x) <- "list"
     if (length(x) == 1) {
         x <- x[[1]]
@@ -112,38 +136,106 @@ plot.word_proximity <- function(x, label = TRUE, lab.digits = 3, high="blue",
         stop("plot method for `word_proximity` works when `grouping.var` not specified.\n",
             "  Use `qheat` and gridExtra package for multiple grouping variables.")
     }
-    qheat(x, diag.na = TRUE, diag.value = "", by.column = NULL, 
+    if (is.null(lab.digits)) {
+                
+    }
+    qheat(t(x), diag.na = TRUE, diag.values = "", by.column = NULL, 
         values = TRUE, digits = lab.digits, high = high, 
         low = low, grid = grid, ...)
 }
 
 
-
-scale2 <- function(x) (x-mean(x, na.rm = TRUE))/sd(x, na.rm = TRUE)
-
-word_proximity_helper <- function(text.var, terms, tofill, inds) {
+word_proximity_helper <- function(text.var, terms, inds) {
 
     text.var <- spaste(strip(na.omit(sent_detect(text.var)), 
          apostrophe.remove = FALSE))
 
-    locs <- lapply(terms, grepl, text.var, fixed = TRUE, ignore.case = FALSE)
-    locs <- lapply(locs, which)
-    
-    for (i in inds){
-        for (j in inds){
-            tofill[i, j] <- ifelse(i == j, NA, 
-                mean(min_dist(locs[[i]], locs[[j]])))
-        }   
+    locs <- lapply(terms, function(x) which(grepl(x, text.var, fixed = TRUE, 
+        ignore.case = FALSE)))  
+
+    mat <- v_outer(locs, locsfun)
+    colnames(mat) <- rownames(mat) <- terms
+    diag(mat) <- NA
+    mat
+}
+
+locsfun <- function(x, y) mean(abs(min_dist(x, y)))
+
+
+min_dist <- function(xw, yw) {
+   i <- findInterval(xw, yw, all.inside = TRUE)
+   pmin(xw - yw[i], yw[i+1L] - xw, na.rm = TRUE)
+}
+
+#' Weight a word_proximity object
+#' 
+#' Weight a word_proximity object.
+#' 
+#' @param x An object to be weighted.
+#' @param type A weighting type of: c(\code{"scale_log"}, \code{"scale"}, 
+#' \code{"rev_scale"}, \code{"rev_scale_log"}, \code{"log"}, \code{"sqrt"}, 
+#' \code{"scale_sqrt"}, \code{"rev_sqrt"}, \code{"rev_scale_sqrt"}).  The 
+#' weight type section name (i.e. \code{A_B_C} where \code{A}, \code{B}, and
+#' \code{C} are sections) determines what action will occur.  \code{log} will 
+#' use \code{\link[base]{log}}, \code{sqrt} will use \code{\link[base]{sqrt}},
+#' \code{scale} will standardize the values.  \code{rev} will multiply by -1 to 
+#' give the inverse sign.  This enables a comparison cloder to correlations 
+#' rather than distance.
+#' @param \dots ignored.
+#' @note A constant of .000000000001 is added to each element when log is used 
+#' to deal with the problem of \code{log(0)}.
+#' @return Returns a weighted list of matrices.
+#' @rdname word_proximity
+#' @export
+weight <- 
+function(x, type = "scale", ...) {
+    UseMethod("weight")
+}
+
+
+#' word_proximity Method for weight
+#' 
+#' @rdname word_proximity
+#' @export
+#' @method weight word_proximity
+weight.word_proximity <- function(x, type = "scale", ...) {
+
+    if (attributes(x)[["weight"]] != "none") {
+        stop("Supply an unweighted `word_proximity` object")
     }
-    tofill
+    
+    names <- attributes(x)[["names"]]
+    class(x) <- "list"
+    fun <- switch(type,
+        scale_log = wp_scale_log,
+        scale = wp_scale,
+        rev_scale = wp_rev_scale,
+        rev_scale_log = wp_rev_scale_log,
+        log = wp_log,
+        sqrt = wp_sqrt,
+        scale_sqrt = wp_scale_sqrt,
+        rev_sqrt = wp_rev_sqrt,
+        rev_scale_sqrt = wp_rev_scale_sqrt,
+        stop("Please see `?weight` for weight types")
+    )
+    o <- lapply(x, fun)
+    attributes(o) <- list(
+        class = c("word_proximity", class(o)), 
+        weight = type,
+        names = names
+        
+    )
+    o
 }
 
-
-
-min_dist <- function(x, y) {
-    unlist(lapply(x, function(x2) {
-        min(abs(x2 - y))
-    }))
-}
-
+scale2 <- function(x) (x-mean(x, na.rm = TRUE))/sd(x, na.rm = TRUE)
+wp_scale_log <- function(x) scale2(log(x + .000000000001))
+wp_scale <- function(x) scale2(x)
+wp_rev_scale <- function(x) (-1) * scale2(x)
+wp_rev_scale_log <- function(x) (-1) * scale2(log(x+ .000000000001))
+wp_log <- function(x) log(x+ .000000000001)
+wp_sqrt <- function(x) sqrt(x)
+wp_scale_sqrt <- function(x) scale2(sqrt(x))
+wp_rev_sqrt <- function(x) (-1) * sqrt(x)
+wp_rev_scale_sqrt <- function(x) (-1) * scale2(sqrt(x))
 

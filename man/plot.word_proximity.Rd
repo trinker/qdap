@@ -2,7 +2,7 @@
 \alias{plot.word_proximity}
 \title{Plots a word_proximity object}
 \usage{
-\method{plot}{word_proximity}(x, label = TRUE, lab.digits = 3,
+\method{plot}{word_proximity}(x, label = TRUE, lab.digits = NULL,
   high = "blue", low = "white", grid = NULL, ...)
 }
 \arguments{
@@ -14,6 +14,13 @@
 
   \item{lab.digits}{Integer values specifying the number of
   digits to be printed if \code{label} is \code{TRUE}.}
+
+  \item{low}{The color to be used for lower values.}
+
+  \item{high}{The color to be used for higher values.}
+
+  \item{grid}{The color of the grid (Use \code{NULL} to
+  remove the grid).}
 
   \item{\ldots}{Other arguments passed to qheat.}
 }

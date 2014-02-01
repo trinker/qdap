@@ -2,7 +2,7 @@
 \alias{print.word_proximity}
 \title{Prints a word_proximity object}
 \usage{
-\method{print}{word_proximity}(x, digits = 3, ...)
+\method{print}{word_proximity}(x, digits = NULL, ...)
 }
 \arguments{
   \item{x}{The word_proximity object}
