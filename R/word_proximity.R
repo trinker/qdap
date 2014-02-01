@@ -124,7 +124,7 @@ word_proximity_helper <- function(text.var, terms, tofill, inds) {
     text.var <- spaste(strip(na.omit(sent_detect(text.var)), 
          apostrophe.remove = FALSE))
 
-    locs <- lapply(terms, grepl, text.var)
+    locs <- lapply(terms, grepl, text.var, fixed = TRUE, ignore.case = FALSE)
 
     for (i in inds){
         for (j in inds){
