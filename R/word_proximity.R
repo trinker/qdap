@@ -118,7 +118,7 @@ function(x, digits = NULL, ...) {
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot word_proximity
 #' @S3method plot word_proximity
-plot.word_proximity <- function(x, label = TRUE, lab.digits = NULL, high="blue", 
+plot.word_proximity <- function(x, label = TRUE, lab.digits = NULL, high="red", 
     low="white", grid=NULL, ...) {
 
     if (is.null(lab.digits)) {
@@ -151,10 +151,11 @@ word_proximity_helper <- function(text.var, terms, inds) {
          apostrophe.remove = FALSE))
 
     locs <- lapply(terms, function(x) which(grepl(x, text.var, fixed = TRUE, 
-        ignore.case = FALSE)))  
-
-    mat <- v_outer(locs, locsfun)
-    colnames(mat) <- rownames(mat) <- terms
+        ignore.case = FALSE))) 
+    grab <- !sapply(locs, identical, integer(0))
+    locs <- locs[grab]
+    mat <- suppressWarnings(v_outer(locs, locsfun))
+    colnames(mat) <- rownames(mat) <- terms[grab]
     diag(mat) <- NA
     mat
 }
@@ -164,8 +165,11 @@ locsfun <- function(x, y) mean(abs(min_dist(x, y)))
 
 min_dist <- function(xw, yw) {
    i <- findInterval(xw, yw, all.inside = TRUE)
-   pmin(xw - yw[i], yw[i+1L] - xw, na.rm = TRUE)
+   o <- pmin(xw - yw[i], yw[i+1L] - xw, na.rm = TRUE)
+   if(identical(o, integer(0))) return(0)
+   o
 }
+
 
 #' Weight a word_proximity object
 #' 

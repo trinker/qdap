@@ -3,7 +3,7 @@
 \title{Plots a word_proximity object}
 \usage{
 \method{plot}{word_proximity}(x, label = TRUE, lab.digits = NULL,
-  high = "blue", low = "white", grid = NULL, ...)
+  high = "red", low = "white", grid = NULL, ...)
 }
 \arguments{
   \item{x}{The word_proximity object}
