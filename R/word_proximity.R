@@ -35,6 +35,10 @@
 #' plot(weight(x, "rev_scale_log"))
 #' 
 #' (x2 <- with(pres_debates2012, word_proximity(dialogue, wrds2, person)))
+#' 
+#' ## The spaces around `terms` are important
+#' (x3 <- with(DATA, word_proximity(state, spaste(qcv(the, i)))))
+#' (x4 <- with(DATA, word_proximity(state, qcv(the, i))))
 #' }
 word_proximity <- function(text.var, terms, grouping.var = NULL) {
   
