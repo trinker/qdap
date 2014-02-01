@@ -148,6 +148,10 @@ relatively new to CRAN, made these changes sensible at this point.
   pvalues for the mean code distances.  Useful for determining if an association 
   (small distance) between codes is likely to happen if the null is true.
 
+* `word_proximity` added to compliment `dispersion_plot` and `word_cor` 
+  functions.  `word_proximity` gives the average distance between words in 
+  the unit of sentences.
+
 <b>MINOR FEATURES</b>
 
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 

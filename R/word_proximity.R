@@ -31,6 +31,8 @@ word_proximity <- function(text.var, terms, grouping.var = NULL) {
  
 ## check the grep use
 ## describe the non-symetrical matrix (look at cm_distance)
+## pvals???
+## plot method
   
     if(!is.null(grouping.var)){
         if (is.list(grouping.var) & length(grouping.var)>1) {
