@@ -8,6 +8,8 @@
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
+#' @scale logical.  If \code{TRUE} the mean distance is given in standardized 
+#' units rather than in sentences as units.
 #' @return Returns a matrix of proximity measures in the unit of average 
 #' sentences between words.
 #' @note The match.terms is character sensitive.  Spacing is an important way 
@@ -125,7 +127,8 @@ word_proximity_helper <- function(text.var, terms, tofill, inds) {
          apostrophe.remove = FALSE))
 
     locs <- lapply(terms, grepl, text.var, fixed = TRUE, ignore.case = FALSE)
-
+    locs <- lapply(locs, which)
+    
     for (i in inds){
         for (j in inds){
             tofill[i, j] <- ifelse(i == j, NA, 
@@ -138,8 +141,8 @@ word_proximity_helper <- function(text.var, terms, tofill, inds) {
 
 
 min_dist <- function(x, y) {
-    unlist(lapply(which(x), function(x) {
-        min(abs(x - which(y)))
+    unlist(lapply(x, function(x2) {
+        min(abs(x2 - y))
     }))
 }
 
