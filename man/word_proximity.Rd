@@ -24,10 +24,7 @@ weight(x, type = "scale", ...)
   \item{parallel}{logical.  If \code{TRUE} attempts to run
   the function on multiple cores.  Note that this may not
   mean a speed boost if you have one core or if the data
-  set is smaller as the cluster takes time to create. For a
-  visual representation of the use of parallel processing
-  see:
-  \url{https://raw.github.com/trinker/embodied/master/inst/gridify_parallel_test/output.png}}
+  set is smaller as the cluster takes time to create.}
 
   \item{cores}{The number of cores to use if \code{parallel
   = TRUE}.  Default is half the number of available cores.}
