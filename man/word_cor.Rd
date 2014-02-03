@@ -99,6 +99,7 @@ word_cor(t(z), word = c(names(worlis), "else.words"), r = NULL)
 }
 }
 \seealso{
+\code{\link[qdap]{word_proximity}},
 \code{\link[tm]{findAssocs}},
 \code{\link[qdap]{word_associate}},
 \code{\link[qdap]{wfm}}, \code{\link[stats]{cor}}

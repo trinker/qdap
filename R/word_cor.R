@@ -18,7 +18,8 @@
 #' \code{r = NULL}.
 #' @keywords correaltion, association 
 #' @export
-#' @seealso \code{\link[tm]{findAssocs}},
+#' @seealso \code{\link[qdap]{word_proximity}},
+#' \code{\link[tm]{findAssocs}},
 #' \code{\link[qdap]{word_associate}},
 #' \code{\link[qdap]{wfm}},
 #' \code{\link[stats]{cor}}

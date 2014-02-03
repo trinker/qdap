@@ -21,6 +21,7 @@
 #' distance measure, \code{word+proximity}'s matrix is asymmetrical. 
 #' \code{word_proximity} computes the distance by taking each sentence position 
 #' for Word A and comparing it to the nearest sentence location for Word B.
+#' @seealso \code{\link[qdap]{word_proximity}}
 #' @rdname word_proximity
 #' @export
 #' @examples

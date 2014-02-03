@@ -91,4 +91,7 @@ plot(weight(x, "rev_scale_log"))
 (x4 <- with(DATA, word_proximity(state, qcv(the, i))))
 }
 }
+\seealso{
+\code{\link[qdap]{word_proximity}}
+}
 
