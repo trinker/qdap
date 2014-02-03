@@ -4,7 +4,8 @@
 \alias{word_proximity}
 \title{Proximity Matrix Between Words}
 \usage{
-word_proximity(text.var, terms, grouping.var = NULL)
+word_proximity(text.var, terms, grouping.var = NULL, parallel = TRUE,
+  cores = parallel::detectCores()/2)
 
 weight(x, type = "scale", ...)
 
@@ -19,6 +20,17 @@ weight(x, type = "scale", ...)
   \code{NULL} generates one word list for all text.  Also
   takes a single grouping variable or a list of 1 or more
   grouping variables.}
+
+  \item{parallel}{logical.  If \code{TRUE} attempts to run
+  the function on multiple cores.  Note that this may not
+  mean a speed boost if you have one core or if the data
+  set is smaller as the cluster takes time to create. For a
+  visual representation of the use of parallel processing
+  see:
+  \url{https://raw.github.com/trinker/embodied/master/inst/gridify_parallel_test/output.png}}
+
+  \item{cores}{The number of cores to use if \code{parallel
+  = TRUE}.  Default is half the number of available cores.}
 
   \item{x}{An object to be weighted.}
 

@@ -8,6 +8,13 @@
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
+#' @param parallel logical.  If \code{TRUE} attempts to run the function on 
+#' multiple cores.  Note that this may not mean a speed boost if you have one 
+#' core or if the data set is smaller as the cluster takes time to create.  
+#' For a visual representation of the use of parallel processing see:
+#' \url{https://raw.github.com/trinker/embodied/master/inst/gridify_parallel_test/output.png}
+#' @param cores The number of cores to use if \code{parallel = TRUE}.  Default 
+#' is half the number of available cores.
 #' @return Returns a list of matrices of proximity measures in the unit of average 
 #' sentences between words (defualts to scaled).
 #' @note The match.terms is character sensitive.  Spacing is an important way 
@@ -23,6 +30,7 @@
 #' for Word A and comparing it to the nearest sentence location for Word B.
 #' @seealso \code{\link[qdap]{word_proximity}}
 #' @rdname word_proximity
+#' @importFrom parallel parLapply makeCluster detectCores stopCluster clusterEvalQ clusterExport
 #' @export
 #' @examples
 #' \dontrun{
@@ -41,7 +49,8 @@
 #' (x3 <- with(DATA, word_proximity(state, spaste(qcv(the, i)))))
 #' (x4 <- with(DATA, word_proximity(state, qcv(the, i))))
 #' }
-word_proximity <- function(text.var, terms, grouping.var = NULL) {
+word_proximity <- function(text.var, terms, grouping.var = NULL, parallel = TRUE, 
+    cores = parallel::detectCores()/2) {
   
     if(!is.null(grouping.var)){
         if (is.list(grouping.var) & length(grouping.var)>1) {
@@ -58,8 +67,28 @@ word_proximity <- function(text.var, terms, grouping.var = NULL) {
     if (is.null(grouping.var)) {
         out <- list(word_proximity_helper(text.var, terms, inds = inds))
     } else {
+
         splits <- split(text.var, grouping)
-        out <- suppressWarnings(lapply(splits, word_proximity_helper, terms = terms, inds = inds))
+
+        if (parallel && cores > 1){
+
+            cl <- makeCluster(mc <- getOption("cl.cores", cores))
+            vars <- c("splits", "word_proximity_helper", "terms", "inds",
+                "spaste", "strip", "sent_detect", "v_outer", "locsfun",
+                "min_dist")
+            
+            clusterExport(cl=cl, varlist=vars, envir = environment())
+            
+            out <- suppressWarnings(parLapply(cl, splits, word_proximity_helper, 
+                terms = terms, inds = inds))
+     
+            stopCluster(cl)
+        } else {
+
+            out <- suppressWarnings(lapply(splits, word_proximity_helper, 
+                terms = terms, inds = inds))
+        }
+
     }
 
     out <- lapply(out, function(x) {
@@ -76,7 +105,6 @@ word_proximity <- function(text.var, terms, grouping.var = NULL) {
     )
     out
 }
-
 
 #' Prints a word_proximity object
 #' 
@@ -247,4 +275,3 @@ wp_sqrt <- function(x) sqrt(x)
 wp_scale_sqrt <- function(x) scale2(sqrt(x))
 wp_rev_sqrt <- function(x) (-1) * sqrt(x)
 wp_rev_scale_sqrt <- function(x) (-1) * scale2(sqrt(x))
-
