@@ -167,9 +167,7 @@ plot.word_proximity <- function(x, label = TRUE, lab.digits = NULL, high="red",
         stop("plot method for `word_proximity` works when `grouping.var` not specified.\n",
             "  Use `qheat` and gridExtra package for multiple grouping variables.")
     }
-    if (is.null(lab.digits)) {
-                
-    }
+
     qheat(t(x), diag.na = TRUE, diag.values = "", by.column = NULL, 
         values = TRUE, digits = lab.digits, high = high, 
         low = low, grid = grid, ...)

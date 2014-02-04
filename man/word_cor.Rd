@@ -95,7 +95,9 @@ worlis <- list(
 y <- wfdf(DATA$state, ID(DATA, prefix = TRUE))
 z <- wfm_combine(y, worlis)
 
-word_cor(t(z), word = c(names(worlis), "else.words"), r = NULL)
+out <- word_cor(t(z), word = c(names(worlis), "else.words"), r = NULL)
+out
+plot(out)
 }
 }
 \seealso{

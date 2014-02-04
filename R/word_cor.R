@@ -79,7 +79,9 @@
 #' y <- wfdf(DATA$state, ID(DATA, prefix = TRUE))
 #' z <- wfm_combine(y, worlis)
 #' 
-#' word_cor(t(z), word = c(names(worlis), "else.words"), r = NULL)
+#' out <- word_cor(t(z), word = c(names(worlis), "else.words"), r = NULL)
+#' out
+#' plot(out)
 #' }
 word_cor <- function(text.var, grouping.var = NULL, word, r = .7, 
     values = TRUE, method = "pearson", ...) {
@@ -119,11 +121,64 @@ word_cor <- function(text.var, grouping.var = NULL, word, r = .7,
         L1 <- lapply(word, cor_help1, m = WFM, o = r, sORw = wordlen, 
             vals = values, positive = posit, meth = method)
         names(L1) <- word
-        L1
+        out <- L1
     } else {
-        cor(WFM[, word], method = method)
+        out <- cor(WFM[, word], method = method)
+        attributes(out) <- list(
+            class = c("word_cor", class(out)), 
+            type = c("cor_matrix"),
+            dim = attributes(out)[["dim"]],
+            dimnames = attributes(out)[["dimnames"]]
+        )        
     }
+    out    
 }
+
+#' Prints a word_cor object
+#' 
+#' Prints a word_cor object
+#' 
+#' @param x The word_cor object
+#' @param digits The number of duguts to print
+#' @param \ldots ignored
+#' @S3method print word_cor
+#' @method print word_cor
+print.word_cor <-
+function(x, digits = 3, ...) {
+    WD <- options()[["width"]]
+
+    if (attributes(x)[["type"]] == "cor_matrix") {
+        options(width=3000)
+        class(x) <- "matrix"
+        attributes(x)[["type"]] <- NULL
+    }
+    print(round(x, digits = digits))
+    options(width=WD)
+}
+
+#' Plots a word_cor object
+#' 
+#' Plots a word_cor object.
+#' 
+#' @param x The word_cor object
+#' @param label logical.  If \code{TRUE} the cells of the heat map plot will be 
+#' labeled with count and proportional values.
+#' @param lab.digits Integer values specifying the number of digits to be 
+#' printed if \code{label} is \code{TRUE}.
+#' @param low The color to be used for lower values.
+#' @param high The color to be used for higher values.
+#' @param grid The color of the grid (Use \code{NULL} to remove the grid).  
+#' @param \ldots Other arguments passed to qheat.
+#' @method plot word_cor
+#' @S3method plot word_cor
+plot.word_cor <- function(x, label = TRUE, lab.digits = 3, high="red", 
+    low="white", grid=NULL, ...) {
+    
+    qheat(t(x), diag.na = TRUE, diag.values = "", by.column = NULL, 
+        values = TRUE, digits = lab.digits, high = high, 
+        low = low, grid = grid, ...)
+}
+
 
 cor_help1 <- function(n, m, o, sORw, vals, positive, meth) {
     L <- sapply(m[, !colnames(m) %in% tolower(n)], function(x) {
