@@ -237,6 +237,8 @@ MINOR FEATURES
 * `exclude` now works with `wfm` and the `tm` package's `DocumentTermMatrix` and
   `TermDocumentMatrix` classes.
 
+* `rm_url` removes/repalces URLs in a string(s).
+
 CHANGES
 
 * The dictionaries and word lists for qdap have been moved to their own package, 

@@ -33,6 +33,8 @@ list(
         "replace_number",
         "replace_symbol",
         "rm_row",
+        "rm_stopwords", 
+        "rm_url",          
         "scrubber",
         "space_fill",
         "spaste",

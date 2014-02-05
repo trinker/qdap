@@ -237,6 +237,8 @@ relatively new to CRAN, made these changes sensible at this point.
 * `exclude` now works with `wfm` and the `tm` package's `DocumentTermMatrix` and
   `TermDocumentMatrix` classes.
 
+* `rm_url` removes/repalces URLs in a string(s).
+
 <b>CHANGES</b>
 
 * The dictionaries and word lists for <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> have been moved to their own package, 
