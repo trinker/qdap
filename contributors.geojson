@@ -1,0 +1,62 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -93.6200,
+          42.0347
+        ]
+      },
+      "properties": {
+        "marker-symbol": "rocket",
+        "name": "Dason Kurkiewicz",
+        "contribution": "contributor",
+        "entity": "Bot",
+        "address": "Ames, IA",
+        "affiliation": "Department of Statistics, Iowa State University"
+      }
+    },
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+            -121.494927,
+              38.582061
+        ]
+      },
+      "properties": {
+        "marker-symbol": "danger",
+        "name": "Bryan Goodrich",
+        "contribution": "contributor",
+        "entity": "wepwawet",
+        "address": "Sacramento, CA",
+        "affiliation": "Sacramento Municipal Utility District"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -78.8494,
+          42.9047
+        ]
+      },
+      "properties": {
+        "marker-symbol": "pitch",
+        "name": "Tyler Rinker",
+        "contribution": "author, creator, contributor",
+        "entity": "Raptor",
+        "address": "Buffalo, NY",
+        "affiliation": "Center for Literacy and Instruction: University at Buffalo"
+      }
+    }
+    
+  ]
+}
