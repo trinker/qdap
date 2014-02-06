@@ -22,7 +22,7 @@
 #' #should be copied to the clipboard on a Mac or Windows machine.
 #' }
 strWrap <-
-function(text = "clipboard", width = 70, copy2clip = TRUE) {
+function(text = "clipboard", width = 70, copy2clip = interactive()) {
     if (Sys.info()["sysname"] != "Windows") {
         writeClipboard <- NULL
     }  

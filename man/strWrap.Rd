@@ -2,7 +2,7 @@
 \alias{strWrap}
 \title{Wrap Character Strings to Format Paragraphs}
 \usage{
-strWrap(text = "clipboard", width = 70, copy2clip = TRUE)
+strWrap(text = "clipboard", width = 70, copy2clip = interactive())
 }
 \arguments{
   \item{text}{character vector, or an object which can be

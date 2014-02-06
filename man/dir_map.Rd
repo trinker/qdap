@@ -3,7 +3,8 @@
 \title{Map Transcript Files from a Directory to a Script}
 \usage{
 dir_map(loc = "CLEANED_TRANSCRIPTS", obj.prefix = "dat", use.path = TRUE,
-  col.names = c("person", "dialogue"), file = NULL, copy2clip = TRUE)
+  col.names = c("person", "dialogue"), file = NULL,
+  copy2clip = interactive())
 }
 \arguments{
   \item{loc}{The path/location of the transcript data

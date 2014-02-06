@@ -33,7 +33,8 @@
 #' }
 dir_map <- 
 function(loc = "CLEANED_TRANSCRIPTS", obj.prefix = "dat", use.path = TRUE,
-    col.names = c("person", "dialogue"), file = NULL, copy2clip = TRUE) {
+    col.names = c("person", "dialogue"), file = NULL, 
+    copy2clip = interactive()) {
   
     if (Sys.info()["sysname"] != "Windows") {
         writeClipboard <- NULL
