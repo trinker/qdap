@@ -19,8 +19,6 @@
         "affiliation": "Department of Statistics, Iowa State University"
       }
     },
-  "type": "FeatureCollection",
-  "features": [
     {
       "type": "Feature",
       "geometry": {
