@@ -11,6 +11,7 @@
 #' character string for \code{fixed = TRUE}) to be matched in the given 
 #' character vector.
 #' @param replacement Replacement for matched \code{pattern}.
+#' @param \dots Other arguments passed to \code{\link[base]{gsub}}.
 #' @return Returns a character string with URLs removed.
 #' @keywords url www http
 #' @export

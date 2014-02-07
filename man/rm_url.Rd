@@ -20,6 +20,9 @@ rm_url(text.var, trim = TRUE, clean = TRUE,
 
   \item{replacement}{Replacement for matched
   \code{pattern}.}
+
+  \item{\dots}{Other arguments passed to
+  \code{\link[base]{gsub}}.}
 }
 \value{
 Returns a character string with URLs removed.
