@@ -284,6 +284,9 @@ relatively new to CRAN, made these changes sensible at this point.
   fit what the action the function performs and to avoid conflicts with the 
   `tm` package.
 
+* `replace_number`'s `num.paste` becomes logical rather than character input.
+  This makes use easier as the user doesn't need to remember arguments.
+
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5
 ----------------------------------------------------------------

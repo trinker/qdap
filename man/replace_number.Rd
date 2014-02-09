@@ -2,16 +2,14 @@
 \alias{replace_number}
 \title{Replace Numbers With Text Representation}
 \usage{
-replace_number(text.var, num.paste = "separate")
+replace_number(text.var, num.paste = TRUE)
 }
 \arguments{
   \item{text.var}{The text variable.}
 
-  \item{num.paste}{A character vector of either
-  \code{"separate"} or \code{"combine"}.  Of
-  \code{"separate"} is specified the elements of larger
-  numbers are separated with spaces.  If \code{"combine"}
-  is selected the elements will be joined without spaces.}
+  \item{num.paste}{logical.  If \code{TURE} a the elements
+  of larger numbers are separated with spaces.  If
+  \code{FALSE} the elements will be joined without spaces.}
 }
 \value{
 Returns a vector with abbreviations replaced.
@@ -38,6 +36,7 @@ number? R News. Vol. 5(1), pp. 51-55.
 \code{\link[qdap]{replace_abbreviation}},
 \code{\link[qdap]{replace_contraction}},
 \code{\link[qdap]{replace_symbol}}
+\code{\link[qenglish]{renglish}}
 }
 \keyword{number-to-word}
 

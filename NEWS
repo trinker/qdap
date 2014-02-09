@@ -284,6 +284,9 @@ CHANGES
   fit what the action the function performs and to avoid conflicts with the 
   `tm` package.
 
+* `replace_number`'s `num.paste` becomes logical rather than character input.
+  This makes use easier as the user doesn't need to remember arguments.
+
 
 CHANGES IN qdap VERSION 0.2.5
 ----------------------------------------------------------------

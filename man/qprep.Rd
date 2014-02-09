@@ -4,7 +4,7 @@
 \usage{
 qprep(text.var, rm.dash = TRUE, bracket = "all", missing = NULL,
   names = FALSE, abbreviation = qdapDictionaries::abbreviations,
-  replace = NULL, ignore.case = TRUE, num.paste = "separate", ...)
+  replace = NULL, ignore.case = TRUE, num.paste = TRUE, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -36,11 +36,11 @@ qprep(text.var, rm.dash = TRUE, bracket = "all", missing = NULL,
   \item{ignore.case}{logical.  If \code{TRUE} replaces
   without regard to capitalization.}
 
-  \item{num.paste}{A character string c(\code{"separate"},
-  \code{"combine"}); \code{"separate"} will treat each word
-  section as separate, \code{"combine"} will lump the
-  sections together as one word.  Also takes the argument
-  \code{NULL} which turns off this parsing technique.}
+  \item{num.paste}{logical.  If \code{TURE} a the elements
+  of larger numbers are separated with spaces.  If
+  \code{FALSE} the elements will be joined without spaces.
+  Also takes the argument \code{NULL} which turns off this
+  parsing technique.}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[qdap]{replace_symbol}}.}

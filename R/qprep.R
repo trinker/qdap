@@ -24,10 +24,10 @@
 #' supplied to the abbreviation argument.
 #' @param ignore.case logical.  If \code{TRUE} replaces without regard to 
 #' capitalization.
-#' @param num.paste A character string c(\code{"separate"}, \code{"combine"}); 
-#' \code{"separate"} will treat each word section as separate, \code{"combine"} 
-#' will lump the sections together as one word.  Also takes the argument 
-#' \code{NULL} which turns off this parsing technique.
+#' @param num.paste logical.  If \code{TURE} a the elements of larger numbers are 
+#' separated with spaces.  If \code{FALSE} the elements will be joined without 
+#' spaces.  Also takes the argument \code{NULL} which turns off this parsing 
+#' technique.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{replace_symbol}}.
 #' @seealso 
 #' \code{\link[qdap]{bracketX}},
@@ -45,7 +45,7 @@
 qprep <-
 function(text.var, rm.dash = TRUE, bracket = "all", missing = NULL, 
     names = FALSE, abbreviation = qdapDictionaries::abbreviations, 
-    replace = NULL, ignore.case = TRUE, num.paste = "separate", ...) {
+    replace = NULL, ignore.case = TRUE, num.paste = TRUE, ...) {
   
     if (!is.null(bracket)) {
         text.var <- bracketX(clean(text.var), bracket = bracket, 
