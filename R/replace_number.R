@@ -17,7 +17,7 @@
 #' \code{\link[qdap]{replace_abbreviation}},
 #' \code{\link[qdap]{replace_contraction}},
 #' \code{\link[qdap]{replace_symbol}}
-#' \code{\link[qenglish]{renglish}}
+#' \code{\link[english]{english}}
 #' @export
 #' @examples
 #' \dontrun{
