@@ -963,7 +963,7 @@ replace_number(x)
 y <- c("I like 346,457 ice cream cones.", "They are 99 percent good")
 replace_number(y)
 ## Combine numbers as one word/string
-replace_number(x, "combine")
+replace_number(x, FALSE)
 ```
 
 

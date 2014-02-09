@@ -1177,8 +1177,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 25.34 15.79 16.30 22.40 19.70 25.34 15.00 25.34 25.34 19.70
-## [12] 22.40 25.34 22.40 22.40 25.34 15.00 19.70 22.40 15.00
+##  [1] 19.70 15.79 25.34 15.79 16.30 15.00 15.79 15.00 22.40 19.70 15.79
+## [12] 19.70 22.40 15.79 22.40 16.30 19.70 15.79 15.00 15.79
 ```
 
 ```r
@@ -1186,8 +1186,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 25.34 15.79 16.30 22.40 19.70 25.34 15.00 25.34 25.34 19.70
-## [12] 22.40 25.34 22.40 22.40 25.34 15.00 19.70 22.40 15.00
+##  [1] 19.70 15.79 25.34 15.79 16.30 15.00 15.79 15.00 22.40 19.70 15.79
+## [12] 19.70 22.40 15.79 22.40 16.30 19.70 15.79 15.00 15.79
 ```
 
 
@@ -2020,12 +2020,11 @@ replace_number(y)
 
 ```r
 ## Combine numbers as one word/string
-replace_number(x, "combine")
+replace_number(x, FALSE)
 ```
 
 ```
-## [1] "I like threehundredfortysixthousandfourhundredfiftyseven ice cream cones."
-## [2] "They are ninetynine percent good"
+## Error: invalid 'row.names' length
 ```
 
 
@@ -9213,7 +9212,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x10767f84>
+<environment: 0x3b8f7210>
 ```
 
 ```r
