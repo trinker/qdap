@@ -287,6 +287,9 @@ CHANGES
 * `replace_number`'s `num.paste` becomes logical rather than character input.
   This makes use easier as the user doesn't need to remember arguments.
 
+* `matrix2df` added (under `list2df`) to convert rownnames of matrix to a 
+  dataframe column.
+
 
 CHANGES IN qdap VERSION 0.2.5
 ----------------------------------------------------------------

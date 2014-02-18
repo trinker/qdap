@@ -24,7 +24,7 @@ x <- c("I like 346,457 ice cream cones.", "They are 99 percent good")
 y <- c("I like 346457 ice cream cones.", "They are 99 percent good")
 replace_number(x)
 replace_number(y)
-replace_number(x, "combine")
+replace_number(x, FALSE)
 }
 }
 \references{
@@ -36,7 +36,7 @@ number? R News. Vol. 5(1), pp. 51-55.
 \code{\link[qdap]{replace_abbreviation}},
 \code{\link[qdap]{replace_contraction}},
 \code{\link[qdap]{replace_symbol}}
-\code{\link[qenglish]{renglish}}
+\code{\link[english]{english}}
 }
 \keyword{number-to-word}
 
