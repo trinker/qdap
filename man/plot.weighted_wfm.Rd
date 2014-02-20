@@ -1,13 +1,13 @@
-\name{plot.wfm}
-\alias{plot.wfm}
-\title{Plots a wfm object}
+\name{plot.weighted_wfm}
+\alias{plot.weighted_wfm}
+\title{Plots a weighted_wfm object}
 \usage{
-\method{plot}{wfm}(x, non.zero = FALSE, digits = 0, by.column = NULL,
-  high = ifelse(non.zero, "black", "blue"), grid = ifelse(non.zero, "black",
-  "white"), plot = TRUE, ...)
+\method{plot}{weighted_wfm}(x, non.zero = FALSE, digits = 0,
+  by.column = NULL, high = ifelse(non.zero, "black", "blue"),
+  grid = ifelse(non.zero, "black", "white"), plot = TRUE, ...)
 }
 \arguments{
-  \item{x}{The wfm object}
+  \item{x}{The weighted_wfm object}
 
   \item{non.zero}{logical.  If \code{TRUE} all values
   converted to dummy coded based on x_ij > 0.}
@@ -32,6 +32,6 @@
   \item{\ldots}{Other arguments passed to qheat.}
 }
 \description{
-Plots a wfm object.
+Plots a weighted_wfm object.
 }
 

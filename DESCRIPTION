@@ -34,6 +34,7 @@ Imports:
     xlsx,
     XML
 Suggests:
+    english,
     koRpus,
     knitcitations,
     knitr,

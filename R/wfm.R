@@ -186,6 +186,7 @@
 #' 
 #' ## Weight a wfm
 #' WFM <- with(DATA, wfm(state, list(sex, adult)))
+#' plot(wfm_weight(WFM, "scaled"), TRUE)
 #' wfm_weight(WFM, "prop")
 #' wfm_weight(WFM, "max")
 #' wfm_weight(WFM, "scaled")
@@ -458,19 +459,22 @@ wfm_combine <- function(wf.obj, word.lists, matrix = TRUE){
 #' Plots a wfm object.
 #' 
 #' @param x The wfm object
-#' @param non.zero logical.  If \code{TRUE} all values coverted to dummy coded 
+#' @param non.zero logical.  If \code{TRUE} all values converted to dummy coded 
 #' based on x_ij > 0.
 #' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param by.column logical.  If \code{TRUE} applies scaling to the column.  If 
 #' \code{FALSE}  applies scaling by row (use \code{NULL} to turn off scaling).
 #' @param high The color to be used for higher values.
 #' @param grid The color of the grid (Use \code{NULL} to remove the grid).  
+#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
+#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
+#' to add additional plot layers.
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot wfm
 #' @S3method plot wfm
-plot.wfm <- function(x, non.zero = FALSE, digits = 0, by.column,
+plot.wfm <- function(x, non.zero = FALSE, digits = 0, by.column = NULL,
     high = ifelse(non.zero, "black", "blue"),  
-    grid = ifelse(non.zero, "black", "white"), ...) {
+    grid = ifelse(non.zero, "black", "white"), plot = TRUE, ...) {
 
     class(x) <- "matrix"
 
@@ -488,11 +492,16 @@ plot.wfm <- function(x, non.zero = FALSE, digits = 0, by.column,
     }
 
     out <- qheat(t(x), digits = digits, high=high, grid = grid,
-        by.column = by.column, ...) 
+        by.column = by.column, plot = FALSE, ...) 
  
+    if (non.zero) {
+        out <- out + guides(fill=FALSE)
+    }
+    if (plot) {
+        print(out)
+    }
     invisible(out)
 }
-
 
 #' Plots a wfdf object
 #' 
@@ -626,3 +635,51 @@ wfm_weight <- function(wfm.obj, type = "prop") {
     out
 }
 
+#' Plots a weighted_wfm object
+#' 
+#' Plots a weighted_wfm object.
+#' 
+#' @param x The weighted_wfm object
+#' @param non.zero logical.  If \code{TRUE} all values converted to dummy coded 
+#' based on x_ij > 0.
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
+#' @param by.column logical.  If \code{TRUE} applies scaling to the column.  If 
+#' \code{FALSE}  applies scaling by row (use \code{NULL} to turn off scaling).
+#' @param high The color to be used for higher values.
+#' @param grid The color of the grid (Use \code{NULL} to remove the grid).  
+#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
+#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
+#' to add additional plot layers.
+#' @param \ldots Other arguments passed to qheat.
+#' @method plot weighted_wfm
+#' @S3method plot weighted_wfm
+plot.weighted_wfm <- function(x, non.zero = FALSE, digits = 0, by.column = NULL,
+    high = ifelse(non.zero, "black", "blue"),  
+    grid = ifelse(non.zero, "black", "white"), plot = TRUE, ...) {
+
+    class(x) <- "matrix"
+
+    if (non.zero) {
+        if(missing(by.column)) {
+            by.column <- NULL
+        }
+        x <- data.frame(x)
+        x[1:ncol(x)] <- lapply(x, function(z) as.numeric(z > 0))
+    } else {
+        if(missing(by.column)) {
+            by.column <- FALSE
+        }
+
+    }
+
+    out <- qheat(t(x), digits = digits, high=high, grid = grid,
+        by.column = by.column, plot = FALSE, ...) 
+ 
+    if (non.zero) {
+        out <- out + guides(fill=FALSE)
+    }
+    if (plot) {
+        print(out)
+    }
+    invisible(out)
+}

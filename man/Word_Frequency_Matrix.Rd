@@ -266,6 +266,7 @@ plot3d.ca(fit2, labels=1)
 
 ## Weight a wfm
 WFM <- with(DATA, wfm(state, list(sex, adult)))
+plot(wfm_weight(WFM, "scaled"), TRUE)
 wfm_weight(WFM, "prop")
 wfm_weight(WFM, "max")
 wfm_weight(WFM, "scaled")

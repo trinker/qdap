@@ -155,7 +155,7 @@ plot(fit2)
 plot3d.ca(fit2, labels=1)
 
 ## Topic Models
-# Example 1
+# Example 1 #
 library(topicmodels); library(tm)
 
 # Generate stop words based on short words, frequent words and contractions
@@ -175,7 +175,19 @@ lda.model <- LDA(DocTermMat, 5)
 (topics <- posterior(lda.model, DocTermMat)$topics)
 terms(lda.model,20)
 
-# Example 2
+# Plot the Topics Per Person
+topic.dat <- matrix2df(topics, "Person")
+colnames(topic.dat)[-1] <- paste2(t(terms(lda.model,20)), sep=", ")
+
+library(reshape2)
+mtopic <- melt(topic.dat, variable="Topic", value.name="Proportion")
+ggplot(mtopic, aes(weight=Proportion, x=Topic, fill=Topic)) +
+    geom_bar() +
+    coord_flip() +
+    facet_grid(Person~.) +
+    guides(fill=FALSE)
+
+# Example 2 #
 DocTermMat2 <- with(pres_debates2012, dtm(dialogue, list(person, time), stopwords = SW))
 DocTermMat2 <- removeSparseTerms(DocTermMat2,0.95)
 DocTermMat2 <- DocTermMat2[rowSums(as.matrix(DocTermMat2))> 0,]
@@ -184,7 +196,43 @@ lda.model2 <- LDA(DocTermMat2, 6)
 
 (topics2 <- posterior(lda.model2, DocTermMat2)$topics)
 terms(lda.model2,20)
-qheat(topics2, high="blue", low="yellow", by.col=F)
+qheat(topics2, high="blue", low="yellow", by.col=FALSE)
+
+## Example 3 #
+lda.model3 <- LDA(DocTermMat2, 10)
+
+(topics3 <- posterior(lda.model3, DocTermMat2)$topics)
+terms(lda.model3, 20)
+qheat(topics3, high="blue", low="yellow", by.col=FALSE)
+
+#--- Plot the Topics Per Person
+topic.dat3 <- matrix2df(topics3, "Person&Time")
+colnames(topic.dat3)[-1] <- paste2(t(terms(lda.model3, 10)), sep=", ")
+topic.dat3 <- colsplit2df(topic.dat3)
+
+library(reshape2)
+mtopic3 <- melt(topic.dat3, variable="Topic", value.name="Proportion")
+(p1 <- ggplot(mtopic3, aes(weight=Proportion, x=Topic, fill=Topic)) +
+    geom_bar() +
+    coord_flip() +
+    facet_grid(Person~Time) +
+    guides(fill=FALSE))
+
+mtopic3.b <- mtopic3
+mtopic3.b[, "Topic"] <- as.character(as.numeric(mtopic3.b[, "Topic"]))
+
+p2 <- ggplot(mtopic3.b, aes(x=Time, y=Topic, fill=Proportion)) +
+    geom_tile(color = "white") +
+    scale_fill_gradient(low = "grey70", high = "red") +
+    facet_grid(Person~Time, scales = "free") +
+    theme(axis.title.y = element_blank(),
+        axis.title.x = element_text(colour="white"),
+        axis.ticks.x= element_line(colour="white"),
+        axis.text.x= element_text(colour="white")
+)
+
+library(gridExtra)
+grid.arrange(p1, p2, nrow=1, widths = c(.8, .2))
 
 ## tm Matrices to wfm
 library(tm)
