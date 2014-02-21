@@ -7,6 +7,7 @@
 #' @param prefix logical.  If \code{TRUE} an "X." is place before each id.
 #' @param pad logical.  If \code{TRUE} the beginning number will be padded with 
 #' zeros.
+#' @param \ldots Other arguments passed to \code{link[reports]{pad}}.
 #' @return Returns a vector of sequential integers.
 #' @keywords id
 #' @export
@@ -18,7 +19,7 @@
 #' id(mtcars, TRUE)
 #' id("w")
 #' question_type(DATA.SPLIT$state, id(DATA.SPLIT, TRUE))
-id <- function(x, prefix = FALSE, pad = TRUE) {
+id <- function(x, prefix = FALSE, pad = TRUE, ...) {
   
     test1 <- dim(x)[1] > 1
     if (is.data.frame(x) | (!identical(logical(0), test1) && test1)) {
@@ -27,7 +28,7 @@ id <- function(x, prefix = FALSE, pad = TRUE) {
         ids <- seq_along(x)
     }
     if (pad) {
-        ids <- pad(ids)
+        ids <- pad(ids, ...)
     }
     if (prefix) {
         ids <- paste("X", ids, sep=".")

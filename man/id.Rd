@@ -2,7 +2,7 @@
 \alias{id}
 \title{ID By Row Number or Sequence Along}
 \usage{
-id(x, prefix = FALSE, pad = TRUE)
+id(x, prefix = FALSE, pad = TRUE, ...)
 }
 \arguments{
   \item{x}{A dataframe, matrix, vector, or list object.}
@@ -12,6 +12,9 @@ id(x, prefix = FALSE, pad = TRUE)
 
   \item{pad}{logical.  If \code{TRUE} the beginning number
   will be padded with zeros.}
+
+  \item{\ldots}{Other arguments passed to
+  \code{link[reports]{pad}}.}
 }
 \value{
 Returns a vector of sequential integers.
