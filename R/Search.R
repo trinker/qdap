@@ -78,9 +78,9 @@ function(dataframe, term, column.name = NULL, max.distance = 0.02, ...) {
 #' character vector.
 #' 
 #' @param text.var The text variable.
-#' @param terms A character string(s) to search for.  The terms are aranged in a 
-#' single string with AND (use \code{AND} or \code{&&} to connect terms 
-#' together) and OR (use \code{OR} or \code{||} to to allow for searches of 
+#' @param terms A character string(s) to search for.  The terms are arranged in 
+#' a single string with AND (use \code{AND} or \code{&&} to connect terms 
+#' together) and OR (use \code{OR} or \code{||} to allow for searches of 
 #' either set of terms.  Spaces may be used to control what is searched for.  
 #' For example using \code{" I "} on \code{c("I'm", "I want", "in")} will result
 #' in \code{FALSE TRUE FALSE} whereas \code{"I"} will match all three (if case 
@@ -89,7 +89,7 @@ function(dataframe, term, column.name = NULL, max.distance = 0.02, ...) {
 #' @param values logical.  Should the values be returned or the index of the 
 #' values. 
 #' @param exclude Terms to exclude from the search.  If one of these terms is 
-#' found in the sentence it can not be returned.  
+#' found in the sentence it cannot be returned.  
 #' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophes from 
 #' the text before examining.
 #' @param char.keep A character vector of symbol character (i.e., punctuation) 
@@ -103,7 +103,7 @@ function(dataframe, term, column.name = NULL, max.distance = 0.02, ...) {
 #' given terms.
 #' @details The terms string is first split by the OR separators into a list.  
 #' Next the list of vectors is split on the AND separator to produce a list of 
-#' vectors of seach terms.  Each sentence is matched agains the terms.  For a 
+#' vectors of search terms.  Each sentence is matched against the terms.  For a 
 #' sentence to be counted it must fit all of the terms in an AND Boolean or one 
 #' of the conditions in an OR Boolean.
 #' @seealso \code{\link[qdap]{termco}}

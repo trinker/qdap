@@ -54,7 +54,7 @@
 #' to add additional plot layers.
 #' @return Returns a Gantt style visualization. Invisibly returns the ggplot2 
 #' list object.
-#' @note For non repeated measures data/plotting use \code{\link[qdap]{gantt}}; 
+#' @note For non-repeated measures data/plotting use \code{\link[qdap]{gantt}}; 
 #' for repeated measures data output use \code{\link[qdap]{gantt_rep}}; and for 
 #' a convenient wrapper that takes text and generates plots use 
 #' \code{\link[qdap]{gantt_plot}}.

@@ -1,6 +1,6 @@
 #' Find Frequent Terms
 #' 
-#' Find the most frequently occuring terms in a text vector.
+#' Find the most frequently occurring terms in a text vector.
 #' 
 #' @param text.var The text variable.
 #' @param top Top number of terms to show.

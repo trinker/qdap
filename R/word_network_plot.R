@@ -75,7 +75,7 @@
 #' word_network_plot(text.var=raj.act.1$dialogue, grouping.var=raj.act.1$person,
 #'   stopwords = Top200Words)
 #' 
-#' #insert double tilde ("~~") to keep dual words (e.i., first last name)
+#' #insert double tilde ("~~") to keep dual words (e.g., first last name)
 #' alts <- c(" fun", "I ")
 #' state2 <- mgsub(alts, gsub("\\s", "~~", alts), DATA$state)
 #' word_network_plot(text.var=state2, grouping.var=DATA$person)

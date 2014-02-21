@@ -62,16 +62,16 @@ qheat(mat, low = "white", high = "darkblue", values = FALSE, digits = 1,
   \code{FALSE} for use in knitr, sweave, etc. to add
   additional plot layers.}
 
-  \item{facet.vars}{A character vector of of 1 or 2 column
+  \item{facet.vars}{A character vector of 1 or 2 column
   names to facet by.}
 
   \item{facet.flip}{logical If \code{TRUE} the direction of
   the faceting is reversed.}
 
   \item{diag.na}{logical.  If \code{TRUE} and \code{mat} is
-  a symetrical matrix the diagonals are set to \code{NA}.
+  a symmetrical matrix the diagonals are set to \code{NA}.
   This is useful with correlation matrices because the
-  diagonal of ones do not effect the scaling of the
+  diagonal of ones do not affect the scaling of the
   heatmap.}
 
   \item{diag.values}{The string to be used for the diagonal

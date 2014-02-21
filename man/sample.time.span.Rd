@@ -7,7 +7,7 @@
 data(sample.time.span)
 }
 \description{
-A ficticious dataset containing time spans for codes A and
+A fictitious dataset containing time spans for codes A and
 B.
 }
 \details{

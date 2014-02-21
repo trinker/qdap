@@ -28,9 +28,9 @@ boolean_search(text.var, terms, ignore.case = TRUE, values = FALSE,
   \item{text.var}{The text variable.}
 
   \item{terms}{A character string(s) to search for.  The
-  terms are aranged in a single string with AND (use
+  terms are arranged in a single string with AND (use
   \code{AND} or \code{&&} to connect terms together) and OR
-  (use \code{OR} or \code{||} to to allow for searches of
+  (use \code{OR} or \code{||} to allow for searches of
   either set of terms.  Spaces may be used to control what
   is searched for. For example using \code{" I "} on
   \code{c("I'm", "I want", "in")} will result in
@@ -44,7 +44,7 @@ boolean_search(text.var, terms, ignore.case = TRUE, values = FALSE,
   the index of the values.}
 
   \item{exclude}{Terms to exclude from the search.  If one
-  of these terms is found in the sentence it can not be
+  of these terms is found in the sentence it cannot be
   returned.}
 
   \item{apostrophe.remove}{logical.  If \code{TRUE} removes
@@ -80,8 +80,8 @@ terms/strings within a character vector.
 \details{
 The terms string is first split by the OR separators into a
 list. Next the list of vectors is split on the AND
-separator to produce a list of vectors of seach terms.
-Each sentence is matched agains the terms.  For a sentence
+separator to produce a list of vectors of search terms.
+Each sentence is matched against the terms.  For a sentence
 to be counted it must fit all of the terms in an AND
 Boolean or one of the conditions in an OR Boolean.
 }

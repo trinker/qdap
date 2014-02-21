@@ -10,7 +10,7 @@ id(x, prefix = FALSE, pad = TRUE)
   \item{prefix}{logical.  If \code{TRUE} an "X." is place
   before each id.}
 
-  \item{pad}{logical.  If \code{TRUE} the begining number
+  \item{pad}{logical.  If \code{TRUE} the beginning number
   will be padded with zeros.}
 }
 \value{

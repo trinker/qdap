@@ -34,7 +34,7 @@
   additional plot layers.}
 
   \item{facet.vars}{A character vector of names to facet
-  by.  Defualt is \code{"time"}.}
+  by.  Default is \code{"time"}.}
 
   \item{rev.codes}{logical If \code{TRUE} the plotting
   order of the code groups is reversed.}

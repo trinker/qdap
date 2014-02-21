@@ -51,7 +51,7 @@
 #' lookup(mtcars$carb, sort(unique(mtcars$carb)),        
 #'     seq(10, 60, by=10))
 #'     
-#' ## %l%, a binarary operator version of lookup
+#' ## %l%, a binary operator version of lookup
 #' 1:5 %l% data.frame(1:4, 11:14)
 #' 1:10 %l% codes
 #' }

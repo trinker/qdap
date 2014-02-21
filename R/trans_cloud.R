@@ -10,7 +10,7 @@
 #' \code{\link[qdap]{word_list}}.
 #' @param stem logical.  If \code{TRUE} the \code{text.var} will be stemmed.
 #' @param target.words A named list of vectors of words whose length corresponds 
-#' to \code{cloud.colors} (+1 length in cloud colors for non matched terms).
+#' to \code{cloud.colors} (+1 length in cloud colors for non-matched terms).
 #' @param expand.target logical.  If \code{TRUE} \code{\link[base]{agrep}}  
 #' will be used to expand the \code{target.words}.
 #' @param target.exclude A vector of words to exclude from the 

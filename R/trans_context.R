@@ -7,10 +7,10 @@
 #' grouping variable or a list 
 #' of 1 or more grouping variables.
 #' @param inds A list of integer indices to print context for.
-#' @param n.before The number of rows before the indexed occurence.
+#' @param n.before The number of rows before the indexed occurrence.
 #' @param tot logical.  If \code{TRUE} condenses sub-units (e.g., sentences) 
 #' into turns of talk for that \code{grouping.var}.
-#' @param n.after The number of rows after the indexed occurence.
+#' @param n.after The number of rows after the indexed occurrence.
 #' @param ord.inds logical.  If \code{TRUE} inds is ordered least to greatest.
 #' @return Returns a dataframe of the class "qdap_context" that can be printed 
 #' (i.e., saved) in flexible outputs.  The dataframe can be printed as a 
@@ -142,7 +142,7 @@ trans_context <- function(text.var, grouping.var, inds, n.before = 3,
 #' @param file The name of the file (can print csv, xlsx, txt, doc and other 
 #' text based files).  If \code{NULL} file prints to the console.
 #' @param pretty logical.  If \code{TRUE} generates a prettier text version of 
-#' the output (can not be used with csv/xlsx file types).  If \code{FALSE} a
+#' the output (cannot be used with csv/xlsx file types).  If \code{FALSE} a
 #' semi-structured dataframe is generated.
 #' @param width A positive integer giving the target column for wrapping lines 
 #' in the output.

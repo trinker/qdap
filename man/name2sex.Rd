@@ -10,7 +10,7 @@ name2sex(names.list, pred.sex = TRUE, fuzzy.match = pred.sex,
   names.}
 
   \item{pred.sex}{logical.  If \code{TRUE} overlapping M/F
-  names will be predicted based on highest cummulative
+  names will be predicted based on highest cumulative
   frequency.  If \code{FALSE} the overlapping names will be
   denoted with a \code{"B"}.}
 

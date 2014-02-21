@@ -7,7 +7,7 @@
 data(pres_debates2012)
 }
 \description{
-A dataset containing a clenaed version of all three
+A dataset containing a cleaned version of all three
 presidential debates for the 2012 election.
 }
 \details{

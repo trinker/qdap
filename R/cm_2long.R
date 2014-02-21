@@ -12,7 +12,7 @@
 #' @param debug logical. If \code{TRUE} debugging mode is on.  
 #' \code{\link[qdap]{cm_time2long}} will return possible errors in time span 
 #' inputs.
-#' @return Retruns a long data.frame of the correct \strong{cm_XXX} classes.
+#' @return Returns a long data.frame of the correct \strong{cm_XXX} classes.
 #' @keywords long
 #' @export
 #' @seealso \code{\link[qdap]{cm_df2long}},

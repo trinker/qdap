@@ -42,13 +42,13 @@ weight(x, type = "scale", ...)
   will use \code{\link[base]{sqrt}}, \code{scale} will
   standardize the values.  \code{rev} will multiply by -1
   to give the inverse sign.  This enables a comparison
-  cloder to correlations rather than distance.}
+  similar to correlations rather than distance.}
 
   \item{\dots}{ignored.}
 }
 \value{
 Returns a list of matrices of proximity measures in the
-unit of average sentences between words (defualts to
+unit of average sentences between words (defaults to
 scaled).
 
 Returns a weighted list of matrices.
@@ -66,7 +66,7 @@ Note that row names are the first word and column names are
 the second comparison word. The values for Word A compared
 to Word B will not be the same as Word B compared to Word
 A. This is because, unlike a true distance measure,
-\code{word+proximity}'s matrix is asymmetrical.
+\code{word_proximity}'s matrix is asymmetrical.
 \code{word_proximity} computes the distance by taking each
 sentence position for Word A and comparing it to the
 nearest sentence location for Word B.

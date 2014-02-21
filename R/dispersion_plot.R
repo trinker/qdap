@@ -91,7 +91,7 @@
 #' ## Extras:
 #' ## Reverse facets
 #' 
-#' x <- #' with(pres_debates2012 , dispersion_plot(dialogue, wrds2, rm.vars = time))
+#' x <- with(pres_debates2012 , dispersion_plot(dialogue, wrds2, rm.vars = time))
 #' 
 #' ## function to reverse ggplot2 facets
 #' rev_facet <- function(x) {

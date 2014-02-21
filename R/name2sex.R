@@ -4,7 +4,7 @@
 #' 
 #' @param names.list Character vector containing first names.
 #' @param pred.sex logical.  If \code{TRUE} overlapping M/F names will be 
-#' predicted based on highest cummulative frequency.  If \code{FALSE} the 
+#' predicted based on highest cumulative frequency.  If \code{FALSE} the 
 #' overlapping names will be denoted with a \code{"B"}.
 #' @param fuzzy.match logical.  If \code{TRUE} uses Levenshtein edit distance 
 #' from \code{\link[base]{agrep}} to predict gender from the closest name match 

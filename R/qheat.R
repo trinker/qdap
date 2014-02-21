@@ -30,12 +30,12 @@
 #' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
 #' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
 #' to add additional plot layers.
-#' @param facet.vars A character vector of of 1 or 2 column names to facet by.
+#' @param facet.vars A character vector of 1 or 2 column names to facet by.
 #' @param facet.flip logical If \code{TRUE} the direction of the faceting 
 #' is reversed.
-#' @param diag.na logical.  If \code{TRUE} and \code{mat} is a symetrical 
+#' @param diag.na logical.  If \code{TRUE} and \code{mat} is a symmetrical 
 #' matrix the diagonals are set to \code{NA}.  This is useful with correlation 
-#' matrices because the diagonal of ones do not effect the scaling of the 
+#' matrices because the diagonal of ones do not affect the scaling of the 
 #' heatmap.
 #' @param diag.values The string to be used for the diagonal labels (values) 
 #' if \code{diag.na} is set to \code{TRUE}.  Defualt is to not print a value.
@@ -87,7 +87,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
         if (diff(dim(mat)) == 0 && is.matrix(mat)) {
             diag(mat) <- NA
         } else {
-            warning ("`mat` is either not a matrix or not symetrical; `diag.na` ignore.")
+            warning ("`mat` is either not a matrix or not symmetrical; `diag.na` ignore.")
         }
     }
     

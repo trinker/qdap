@@ -24,8 +24,8 @@ cm_df.transcript(text.var, grouping.var, file = NULL, indent = 4,
 
   \item{space}{An integer value denoting the vertical
   spacing between the \code{grouping.var} and the numbered
-  text (alow more spce for more coding room) in the output
-  of a text file.}
+  text (allow more space for more coding room) in the
+  output of a text file.}
 
   \item{\ldots}{Other arguments passed to strip.}
 }

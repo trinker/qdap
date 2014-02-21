@@ -55,7 +55,7 @@ grouping variables).
 \code{plot_gantt_base} - For internal use.
 }
 \note{
-For non repeated measures data use
+For non-repeated measures data use
 \code{\link[qdap]{gantt}}.  For more flexible plotting
 needs use \code{\link[qdap]{gantt_wrap}} over the generic
 plotting method.

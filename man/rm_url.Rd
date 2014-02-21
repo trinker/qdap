@@ -12,7 +12,7 @@ rm_url(text.var, trim = TRUE, clean = TRUE,
   trailing white spaces.}
 
   \item{clean}{trim logical.  If \code{TRUE} extra white
-  sapces and escaped character will be removed.}
+  spaces and escaped character will be removed.}
 
   \item{pattern}{A character string containing a regular
   expression (or character string for \code{fixed = TRUE})

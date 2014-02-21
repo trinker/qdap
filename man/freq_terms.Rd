@@ -31,7 +31,7 @@ freq_terms(text.var, top = 20, at.least = 1, stopwords = NULL,
 Returns a dataframe with the top occurring words.
 }
 \description{
-Find the most frequently occuring terms in a text vector.
+Find the most frequently occurring terms in a text vector.
 }
 \examples{
 \dontrun{

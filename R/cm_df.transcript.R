@@ -13,7 +13,7 @@
 #' @param width Width to output the file (defaults to 70; this is generally a 
 #' good width and indent for a .docx file).
 #' @param space An integer value denoting the vertical spacing between the 
-#' \code{grouping.var} and the numbered text (alow more spce for more coding 
+#' \code{grouping.var} and the numbered text (allow more space for more coding 
 #' room) in the output of a text file.
 #' @param \ldots Other arguments passed to strip.
 #' @return Returns a transcript by grouping variable with word number above each 

@@ -171,7 +171,7 @@
 #' speech <- stemmer(dat$dialogue)
 #' mytable1 <- with(dat, wfm(speech, list(person, time), stopwords = Top25Words))
 #' 
-#' fit <- ca(mytable)
+#' fit <- ca(mytable1)
 #' summary(fit)
 #' plot(fit)
 #' plot3d.ca(fit, labels=1)

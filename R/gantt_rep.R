@@ -16,7 +16,7 @@
 #' pasted columns.
 #' @return Returns a data frame of start and end times by repeated measure and 
 #' grouping variable(s)
-#' @note For non repeated measures data use \code{\link[qdap]{gantt}}.  For
+#' @note For non-repeated measures data use \code{\link[qdap]{gantt}}.  For
 #' more flexible plotting needs use \code{\link[qdap]{gantt_wrap}} over the 
 #' generic plotting method.
 #' @seealso \code{\link[qdap]{gantt}},
@@ -153,7 +153,7 @@ function(rm.var, text.var, grouping.var = NULL, units = "words", col.sep = "_",
 #' 
 #' @param x The sums_rmgantt object
 #' @param title An optional title.
-#' @param transform logical.  If \code{TRUE} and there are two repeated mesures 
+#' @param transform logical.  If \code{TRUE} and there are two repeated measures 
 #' the faceting is reversed.
 #' @param \ldots Other arguments passed to \code{gantt_wrap} 
 #' @method plot rmgantt

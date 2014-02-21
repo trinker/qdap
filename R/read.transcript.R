@@ -33,8 +33,8 @@
 #' type being read in.
 #' @param skip Integer; the number of lines of the data file to skip before 
 #' beginning to read data.
-#' @param nontext2factor logical.  If \code{TRUE} attempts to convert any non text to a 
-#' factor.
+#' @param nontext2factor logical.  If \code{TRUE} attempts to convert any 
+#' non-text to a factor.
 #' @param text Character string: if file is not supplied and this is, then data 
 #' are read from the value of text. Notice that a literal string can be used to 
 #' include (small) data sets within R code.

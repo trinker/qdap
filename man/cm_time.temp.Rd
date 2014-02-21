@@ -23,7 +23,7 @@ cm_time.temp(codes, grouping.var = NULL, start = ":00", end = NULL,
 
   \item{coding}{logical.  If \code{TRUE} a coding list is
   provided with the time span coding sheet.  \code{coding}
-  is ignoted if \code{end = NULL}.}
+  is ignored if \code{end = NULL}.}
 
   \item{print}{logical.  If \code{TRUE} the time spans are
   printed to the console.}

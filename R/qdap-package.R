@@ -106,7 +106,7 @@ NULL
 
 #' 2012 U.S. Presidential Debates
 #' 
-#' A dataset containing a clenaed version of all three presidential debates for 
+#' A dataset containing a cleaned version of all three presidential debates for 
 #' the 2012 election. 
 #' 
 #' @details 
@@ -368,7 +368,7 @@ NULL
 
 #' Minimal Time Span Data Set
 #' 
-#' A ficticious dataset containing time spans for codes A and B.
+#' A fictitious dataset containing time spans for codes A and B.
 #' 
 #' @details 
 #' \itemize{ 

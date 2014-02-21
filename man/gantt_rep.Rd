@@ -34,7 +34,7 @@ Produces start and end times for occurrences for each
 repeated measure condition.
 }
 \note{
-For non repeated measures data use
+For non-repeated measures data use
 \code{\link[qdap]{gantt}}.  For more flexible plotting
 needs use \code{\link[qdap]{gantt_wrap}} over the generic
 plotting method.

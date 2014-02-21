@@ -59,7 +59,7 @@ read.transcript(file, col.names = NULL, text.var = NULL,
   to skip before beginning to read data.}
 
   \item{nontext2factor}{logical.  If \code{TRUE} attempts
-  to convert any non text to a factor.}
+  to convert any non-text to a factor.}
 
   \item{text}{Character string: if file is not supplied and
   this is, then data are read from the value of text.

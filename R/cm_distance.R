@@ -34,8 +34,8 @@
 #' given that x must precede y.  That is, only those \eqn{y_i} that begin after 
 #' the \eqn{x_i} has begun will be considered, as it is assumed that x precedes 
 #' y.  If \code{FALSE} x is not assumed to precede y.  The closest \eqn{y_i} 
-#' (either its begining or end) is is calculated to \eqn{x_i} (either it's 
-#' begining or end).
+#' (either its beginning or end) is calculated to \eqn{x_i} (either it's 
+#' beginning or end).
 #' @param start.var The name of the start variable column.  Defaults to "start" 
 #' as out putted by x2long family.
 #' @param end.var The name of the end variable column.  Defaults to "end" as out 

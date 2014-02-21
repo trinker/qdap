@@ -5,7 +5,7 @@
 #' 
 #' @param x A dataframe, matrix, vector, or list object.
 #' @param prefix logical.  If \code{TRUE} an "X." is place before each id.
-#' @param pad logical.  If \code{TRUE} the begining number will be padded with 
+#' @param pad logical.  If \code{TRUE} the beginning number will be padded with 
 #' zeros.
 #' @return Returns a vector of sequential integers.
 #' @keywords id

@@ -92,7 +92,7 @@ BUG FIXES
 * `pos` threw an error for vectors of length 1.  This has been fixed. (Kurt 
   Hornik) See GitHub issue #150 for details.
 
-* `formality` thew an error for vectors of length 1.  This has been fixed. (Kurt 
+* `formality` threw an error for vectors of length 1.  This has been fixed. (Kurt 
   Hornik) See GitHub issue #151 for details.
 
 NEW FEATURES
@@ -254,7 +254,13 @@ CHANGES
         well.
 
 * qdap gains an HTML package vignette to better explain the intended work flow 
-  and function use for the package.
+  and function use for the package.  This is not currently a part of the build 
+  but can be accessed via:
+
+  http://htmlpreview.github.io/?https://github.com/trinker/qdap/blob/master/vignettes/qdap_vignette.html
+
+  *Note* that the vignette may include development version functions not yet 
+  available in the current CRAN version
 
 * `polarity` utilizes a new, unbounded algorithm based on weighting to determine 
   polarity.

@@ -37,8 +37,8 @@ list2df <- function(list.object, col1 = "X1", col2 = "X2") {
 
 #' List/Matrix to Dataframe
 #' 
-#' \code{matrix2df} - Convert a matrix to a dataframe and conver the rownames to 
-#' the first column.
+#' \code{matrix2df} - Convert a matrix to a dataframe and convert the rownames 
+#' to the first column.
 #' 
 #' @param matrix.object A matrix object.
 #' @rdname list2df

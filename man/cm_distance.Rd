@@ -57,8 +57,8 @@ cm_distance(dataframe, pvals = c(TRUE, FALSE), replications = 1000,
   That is, only those \eqn{y_i} that begin after the
   \eqn{x_i} has begun will be considered, as it is assumed
   that x precedes y.  If \code{FALSE} x is not assumed to
-  precede y.  The closest \eqn{y_i} (either its begining or
-  end) is is calculated to \eqn{x_i} (either it's begining
+  precede y.  The closest \eqn{y_i} (either its beginning
+  or end) is calculated to \eqn{x_i} (either it's beginning
   or end).}
 
   \item{start.var}{The name of the start variable column.

@@ -13,7 +13,7 @@
   file prints to the console.}
 
   \item{pretty}{logical.  If \code{TRUE} generates a
-  prettier text version of the output (can not be used with
+  prettier text version of the output (cannot be used with
   csv/xlsx file types).  If \code{FALSE} a semi-structured
   dataframe is generated.}
 

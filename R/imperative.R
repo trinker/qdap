@@ -64,7 +64,7 @@ function(dataframe, person.var, text.var, lock.incomplete = FALSE,
         cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
         clusterExport(cl=cl, varlist=c("text", "lock.incomplete", "end_inc2", 
             "IMP", "DF2", "breaker", "action.verbs", "preposition",
-            "adverb"), envir = environment())
+            "adverb", "NAMES"), envir = environment())
         m <- parLapply(cl, text, function(x) {
                 if (lock.incomplete & end_inc2(x)){
                     x

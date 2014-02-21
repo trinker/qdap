@@ -5,7 +5,7 @@
 #' @param text.var The text variable.
 #' @param trim logical.  If \code{TRUE} removes leading and trailing white 
 #' spaces.
-#' @param clean trim logical.  If \code{TRUE} extra white sapces and escaped 
+#' @param clean trim logical.  If \code{TRUE} extra white spaces and escaped 
 #' character will be removed.
 #' @param pattern A character string containing a regular expression (or 
 #' character string for \code{fixed = TRUE}) to be matched in the given 

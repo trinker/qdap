@@ -30,7 +30,7 @@ matrix2df(matrix.object, col1 = "var1")
 dataframe.
 
 \code{matrix2df} - Convert a matrix to a dataframe and
-conver the rownames to the first column.
+convert the rownames to the first column.
 }
 \details{
 generally an internal function used for reshaping data.

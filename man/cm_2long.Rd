@@ -22,7 +22,7 @@ cm_2long(..., v.name = "variable", list.var = TRUE, debug = TRUE)
   errors in time span inputs.}
 }
 \value{
-Retruns a long data.frame of the correct \strong{cm_XXX}
+Returns a long data.frame of the correct \strong{cm_XXX}
 classes.
 }
 \description{

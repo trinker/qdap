@@ -47,7 +47,7 @@ with(DATA, dissimilarity(state, person, diag = TRUE))
 (x <- with(pres_debates2012, dissimilarity(dialogue, list(person, time))))
 fit <- hclust(x)
 plot(fit)
-## draw dendogram with red borders around the 3 clusters
+## draw dendrogram with red borders around the 3 clusters
 rect.hclust(fit, k=3, border=c("red", "purple", "seagreen"))
 
 ## Clustering: Dendrogram with p.values

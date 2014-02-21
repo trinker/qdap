@@ -11,7 +11,7 @@
 #' @param file A connection, or a character string naming the file to print to 
 #' (.txt or .doc is recommended).
 #' @param coding logical.  If \code{TRUE} a coding list is provided with the 
-#' time span coding sheet.  \code{coding} is ignoted if \code{end = NULL}.
+#' time span coding sheet.  \code{coding} is ignored if \code{end = NULL}.
 #' @param print logical.  If \code{TRUE} the time spans are printed to the 
 #' console.
 #' @references Miles, M. B. & Huberman, A. M. (1994). An expanded sourcebook: 

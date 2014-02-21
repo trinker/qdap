@@ -13,7 +13,7 @@ tot_plot(dataframe, text.var, grouping.var = NULL, facet.vars = NULL,
 
   \item{text.var}{The text variable (character string).}
 
-  \item{grouping.var}{The grouping variables to colot by.
+  \item{grouping.var}{The grouping variables to color by.
   Default \code{NULL} colors everything in "black".  Also
   takes a single grouping variable or a list of 1 or more
   grouping variables.}

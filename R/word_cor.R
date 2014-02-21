@@ -16,7 +16,7 @@
 #' @param \dots Other arguments passed to \code{\link[qdap]{wfm}}.
 #' @return Returns a vector of associated words or correlation matrix if 
 #' \code{r = NULL}.
-#' @keywords correaltion, association 
+#' @keywords correlation, association 
 #' @export
 #' @seealso \code{\link[qdap]{word_proximity}},
 #' \code{\link[tm]{findAssocs}},
@@ -139,7 +139,7 @@ word_cor <- function(text.var, grouping.var = NULL, word, r = .7,
 #' Prints a word_cor object
 #' 
 #' @param x The word_cor object
-#' @param digits The number of duguts to print
+#' @param digits The number of digits to print
 #' @param \ldots ignored
 #' @S3method print word_cor
 #' @method print word_cor

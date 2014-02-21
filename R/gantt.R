@@ -14,7 +14,7 @@
 #' or optionally returns a list of two: (1) A data frame of the total units 
 #' used by grouping variable(s) and (2) a data frame of start and end times 
 #' by grouping variable(s).  
-#' @note For non repeated measures data use \code{\link[qdap]{gantt}}.  For
+#' @note For non-repeated measures data use \code{\link[qdap]{gantt}}.  For
 #' more flexible plotting needs use \code{\link[qdap]{gantt_wrap}} over the 
 #' generic plotting method.
 #' @author DigEmAll (\url{stackoverflow.com}) and Tyler Rinker <tyler.rinker@@gmail.com>.

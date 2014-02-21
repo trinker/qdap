@@ -6,7 +6,7 @@
 #' @param dataframe A dataframe that contains the text variable and optionally 
 #' the grouping.var and tot variables.
 #' @param text.var The text variable (character string).
-#' @param grouping.var The grouping variables to colot by.  Default \code{NULL} 
+#' @param grouping.var The grouping variables to color by.  Default \code{NULL} 
 #' colors everything in "black".  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables. 
 #' @param facet.vars An optional single vector or list of 1 or 2 to facet by.

@@ -16,7 +16,7 @@
 #' @param \ldots Other arguments passed to \code{\link[qdap]{gantt_wrap}}.
 #' @return Returns a Gantt style visualization.  Invisibly returns the ggplot2 
 #' list object.
-#' @note For non repeated measures data/plotting use \code{\link[qdap]{gantt}}; 
+#' @note For non-repeated measures data/plotting use \code{\link[qdap]{gantt}}; 
 #' for repeated measures data output use \code{\link[qdap]{gantt_rep}}; and for 
 #' a flexible gantt plot that words with code matrix functions (cm) use 
 #' \code{\link[qdap]{gantt_wrap}}.

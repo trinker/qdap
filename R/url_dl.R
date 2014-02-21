@@ -4,14 +4,14 @@
 #' 
 #' @param \ldots Document names to download. Quoted strings (complete urls) can
 #' also be supplied (if so no url argument is supplied).
-#' @param url The download url or dropbox key. 
+#' @param url The download url or Dropbox key. 
 #' @return Places a copy of the downloaded document in the users working 
 #' directory.
 #' @note Not intended for general use.
 #' @export
 #' @examples
 #' \dontrun{
-#' ## Example 1 (download from dropbox)
+#' ## Example 1 (download from Dropbox)
 #' # download transcript of the debate to working directory
 #' url_dl(pres.deb1.docx, pres.deb2.docx, pres.deb3.docx)   
 #' 

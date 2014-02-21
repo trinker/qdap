@@ -113,7 +113,7 @@ A \href{http://docs.ggplot2.org/current/}{ggplot2} wrapper
 that produces a Gantt plot.
 }
 \note{
-For non repeated measures data/plotting use
+For non-repeated measures data/plotting use
 \code{\link[qdap]{gantt}}; for repeated measures data
 output use \code{\link[qdap]{gantt_rep}}; and for a
 convenient wrapper that takes text and generates plots use

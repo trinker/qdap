@@ -107,7 +107,7 @@ package \code{\link[tm]{Corpus}}.
 Produces output that is identical to the \code{tm}
 package's \code{\link[tm]{TermDocumentMatrix}},
 \code{\link[tm]{DocumentTermMatrix}},
-\code{\link[tm]{Corpus}} or allows convenient inteface
+\code{\link[tm]{Corpus}} or allows convenient interface
 between the qdap and tm packages.
 }
 \examples{

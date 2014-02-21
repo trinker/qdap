@@ -10,7 +10,7 @@
   \item{title}{An optional title.}
 
   \item{transform}{logical.  If \code{TRUE} and there are
-  two repeated mesures the faceting is reversed.}
+  two repeated measures the faceting is reversed.}
 
   \item{\ldots}{Other arguments passed to
   \code{gantt_wrap}}

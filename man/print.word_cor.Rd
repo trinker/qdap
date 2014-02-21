@@ -7,7 +7,7 @@
 \arguments{
   \item{x}{The word_cor object}
 
-  \item{digits}{The number of duguts to print}
+  \item{digits}{The number of digits to print}
 
   \item{\ldots}{ignored}
 }

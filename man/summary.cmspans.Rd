@@ -18,7 +18,7 @@
   \item{total.span}{logical or an option list of vectors
   (length 1 or 2) of the total duration of the event.  If
   \code{FALSE} the "total" column is divided by the sum of
-  the total duration for all codes in that rm.var to arive
+  the total duration for all codes in that rm.var to arrive
   at "total_percent".  If \code{TRUE} and object is from
   \code{cm_time2long} the difference for the time span from
   the \strong{transcript_time_span} of the list used in

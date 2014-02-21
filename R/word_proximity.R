@@ -14,7 +14,7 @@
 #' @param cores The number of cores to use if \code{parallel = TRUE}.  Default 
 #' is half the number of available cores.
 #' @return Returns a list of matrices of proximity measures in the unit of average 
-#' sentences between words (defualts to scaled).
+#' sentences between words (defaults to scaled).
 #' @note The match.terms is character sensitive.  Spacing is an important way 
 #' to grab specific words and requires careful thought.  Using "read" will find 
 #' the words "bread", "read" "reading", and "ready".  If you want to search 
@@ -23,7 +23,7 @@
 #' @details Note that row names are the first word and column names are the 
 #' second comparison word. The values for Word A compared to Word B will not 
 #' be the same as Word B compared to Word A. This is because, unlike a true 
-#' distance measure, \code{word+proximity}'s matrix is asymmetrical. 
+#' distance measure, \code{word_proximity}'s matrix is asymmetrical. 
 #' \code{word_proximity} computes the distance by taking each sentence position 
 #' for Word A and comparing it to the nearest sentence location for Word B.
 #' @seealso \code{\link[qdap]{word_proximity}}
@@ -109,7 +109,7 @@ word_proximity <- function(text.var, terms, grouping.var = NULL, parallel = TRUE
 #' Prints a word_proximity object
 #' 
 #' @param x The word_proximity object
-#' @param digits The number of duguts to print
+#' @param digits The number of digits to print
 #' @param \ldots ignored
 #' @S3method print word_proximity
 #' @method print word_proximity
@@ -212,7 +212,7 @@ min_dist <- function(xw, yw) {
 #' \code{C} are sections) determines what action will occur.  \code{log} will 
 #' use \code{\link[base]{log}}, \code{sqrt} will use \code{\link[base]{sqrt}},
 #' \code{scale} will standardize the values.  \code{rev} will multiply by -1 to 
-#' give the inverse sign.  This enables a comparison cloder to correlations 
+#' give the inverse sign.  This enables a comparison similar to correlations 
 #' rather than distance.
 #' @param \dots ignored.
 #' @note A constant of .000000000001 is added to each element when log is used 

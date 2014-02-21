@@ -107,5 +107,5 @@ plot(out)
 \code{\link[qdap]{wfm}}, \code{\link[stats]{cor}}
 }
 \keyword{association}
-\keyword{correaltion,}
+\keyword{correlation,}
 

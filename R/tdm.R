@@ -15,7 +15,7 @@
 #' @param vowel.check logical.  Should terms without vowels be remove?  
 #' @details Produces output that is identical to the \code{tm} package's 
 #' \code{\link[tm]{TermDocumentMatrix}}, \code{\link[tm]{DocumentTermMatrix}},
-#' \code{\link[tm]{Corpus}} or allows convenient inteface between the qdap and 
+#' \code{\link[tm]{Corpus}} or allows convenient interface between the qdap and 
 #' tm packages.
 #' @return \code{tdm} - Returns a \code{\link[tm]{TermDocumentMatrix}}.
 #' @export

@@ -296,7 +296,7 @@ function(x, ...) {
 #' @param x The sent_split object.
 #' @param text.var The text variable (character string).
 #' @param rm.var An optional repeated measures character vector of 1 or 2 to 
-#' facet by.  If \code{NULL} the \code{rm.var} fron \code{sentSplit} is used.  To 
+#' facet by.  If \code{NULL} the \code{rm.var} from \code{sentSplit} is used.  To 
 #' avoid this behavior use
 #' \code{FALSE}.
 #' @param \ldots Other arguments passed to \code{tot_plot}.

@@ -16,14 +16,14 @@ trans_context(text.var, grouping.var, inds, n.before = 3, tot = TRUE,
   for.}
 
   \item{n.before}{The number of rows before the indexed
-  occurence.}
+  occurrence.}
 
   \item{tot}{logical.  If \code{TRUE} condenses sub-units
   (e.g., sentences) into turns of talk for that
   \code{grouping.var}.}
 
   \item{n.after}{The number of rows after the indexed
-  occurence.}
+  occurrence.}
 
   \item{ord.inds}{logical.  If \code{TRUE} inds is ordered
   least to greatest.}

@@ -29,7 +29,7 @@ trans_cloud(text.var = NULL, grouping.var = NULL, word.list = NULL,
 
   \item{target.words}{A named list of vectors of words
   whose length corresponds to \code{cloud.colors} (+1
-  length in cloud colors for non matched terms).}
+  length in cloud colors for non-matched terms).}
 
   \item{expand.target}{logical.  If \code{TRUE}
   \code{\link[base]{agrep}} will be used to expand the
