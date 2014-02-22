@@ -89,6 +89,11 @@
 #' chisq.test(z)                                                      
 #' chisq.test(wfm(y)) 
 #' 
+#' ## Dendrogram
+#' presdeb <- with(pres_debates2012, wfm(dialogue, list(person, time)))
+#' library(sjPlot)
+#' sjc.dend(t(presdeb), 2:4)
+#' 
 #' ## Words correlated within turns of talk
 #' ## EXAMPLE 1
 #' library(reports)

@@ -249,6 +249,9 @@ relatively new to CRAN, made these changes sensible at this point.
 
 * `rm_url` removes/repalces URLs in a string(s).
 
+* `matrix2df` added (under `list2df`) to convert rownnames of matrix to a 
+  dataframe column.
+
 <b>CHANGES</b>
 
 * The dictionaries and word lists for <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> have been moved to their own package, 
@@ -302,9 +305,6 @@ relatively new to CRAN, made these changes sensible at this point.
 
 * `replace_number`'s `num.paste` becomes logical rather than character input.
   This makes use easier as the user doesn't need to remember arguments.
-
-* `matrix2df` added (under `list2df`) to convert rownnames of matrix to a 
-  dataframe column.
 
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5
