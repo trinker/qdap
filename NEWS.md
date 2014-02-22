@@ -18,6 +18,16 @@ And constructed with the following guidelines:
 * Bug fixes and misc changes bumps the patch
 
 
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.1.0
+----------------------------------------------------------------
+
+A version bump necessary for Re-Sumbission to CRAN.  
+
+<b>CHANGES</b>
+
+*  Down graded the version requirement for the reports package to 
+  reports (&gt;= 0.1.2) in order to upload to CRAN.  reports (&gt;= 0.2.0) is not yet
+  available on CRAN.
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.0.0
 ----------------------------------------------------------------
@@ -92,7 +102,7 @@ relatively new to CRAN, made these changes sensible at this point.
 * `pos` threw an error for vectors of length 1.  This has been fixed. (Kurt 
   Hornik) See GitHub <a href="https://github.com/trinker/qdap/issues/150">issue #150</a> for details.
 
-* `formality` thew an error for vectors of length 1.  This has been fixed. (Kurt 
+* `formality` threw an error for vectors of length 1.  This has been fixed. (Kurt 
   Hornik) See GitHub <a href="https://github.com/trinker/qdap/issues/151">issue #151</a> for details.
 
 <b>NEW FEATURES</b>
@@ -254,7 +264,13 @@ relatively new to CRAN, made these changes sensible at this point.
         well.
 
 * <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> gains an HTML package vignette to better explain the intended work flow 
-  and function use for the package.
+  and function use for the package.  This is not currently a part of the build 
+  but can be accessed via:
+
+  <a href="http://htmlpreview.github.io/?https://github.com/trinker/qdap/blob/master/vignettes/qdap_vignette.html" target="_blank">http://htmlpreview.github.io/?https://github.com/trinker/qdap/blob/master/vignettes/qdap_vignette.html</a>
+
+  *Note* that the vignette may include development version functions not yet 
+  available in the current CRAN version
 
 * `polarity` utilizes a new, unbounded algorithm based on weighting to determine 
   polarity.

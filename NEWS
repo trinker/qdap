@@ -18,6 +18,16 @@ And constructed with the following guidelines:
 * Bug fixes and misc changes bumps the patch
 
 
+CHANGES IN qdap VERSION 1.1.0
+----------------------------------------------------------------
+
+A version bump necessary for Re-Sumbission to CRAN.  
+
+CHANGES
+
+*  Down graded the version requirement for the reports package to 
+  reports (>= 0.1.2) in order to upload to CRAN.  reports (>= 0.2.0) is not yet
+  available on CRAN.
 
 CHANGES IN qdap VERSION 1.0.0
 ----------------------------------------------------------------
