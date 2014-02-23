@@ -1,4 +1,3 @@
-
 NEWS 
 ====
 
@@ -15,17 +14,17 @@ And constructed with the following guidelines:
   and patch)
 * New additions without breaking backward compatibility bumps the minor 
   (and resets the patch)
-* Bug fixes and misc changes bumps the patch
+* Bug fixes and misc. changes bumps the patch
 
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.1.0
 ----------------------------------------------------------------
 
-A version bump necessary for Re-Sumbission to CRAN.  
+A version bump necessary for Re-Submission to CRAN.  
 
 <b>CHANGES</b>
 
-*  Down graded the version requirement for the reports package to 
+*  Downgraded the version requirement for the reports package to 
   reports (&gt;= 0.1.2) in order to upload to CRAN.  reports (&gt;= 0.2.0) is not yet
   available on CRAN.
 
@@ -131,7 +130,7 @@ relatively new to CRAN, made these changes sensible at this point.
   output from: `termco`, `question_type`, `pos_by`, adn 1character_table`.
 
 * `lview` a function to unclass a list output that has a special print method 
-  that returns only a portion of the output.  `lview` reclasses to "list".
+  that returns only a portion of the output.  `lview` re-classes to "list".
 
 * `word_cor` added to find words within grouping variables that are associated
   based on correlation.
@@ -261,9 +260,9 @@ relatively new to CRAN, made these changes sensible at this point.
   major release number has been upped to 1.  The following name changes have 
   occurred:
 
-    - increase.amplification.words -&gt; became -&gt; amplification.words
+    - `increase.amplification.words` -&gt; became -&gt; `amplification.words`
 
-    - The deamplification.words and env.pol wordlist and dictionary were added as 
+    - The `deamplification.words` wordlist  and `env.pol` dictionary were added as 
         well.
 
 * <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> gains an HTML package vignette to better explain the intended work flow 
