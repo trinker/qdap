@@ -55,7 +55,7 @@ Description: This package automates many of the tasks associated with
     undertake higher level analysis and visualization of text.  This affords
     the user a more efficient and targeted analysis.  qdap is designed for
     transcript analysis, however, many functions are applicable to other areas
-    of Text Mining/Natural Language Processing
+    of Text Mining/Natural Language Processing.
 License: GPL-2
 URL: http://trinker.github.com/qdap/
 BugReports: http://github.com/trinker/qdap/issues

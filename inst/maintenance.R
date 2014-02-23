@@ -25,9 +25,17 @@ extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry,
     linsear_write, SMOG, syn, mgsub, adjmat, wc, wfdf, mcsv_w, dtm, "%ha%", 
     "hash_look", "%l%", "polarity_frame", "boolean_search", "stem_words", 
     "stem2df", colpaste2df, rm_stop, wfm_weight, apply_as_tm, tm2qdap,
-    sent_detect)
+    sent_detect, matrix2df, df2tm_corpus, tm_corpus2df)
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character_table, char_table))
+
+x <- readLines(path2)
+x[grepl("<h2>Authors</h2>", x)] <- paste(c("<h2>Author</h2>", 
+    rep("<h2>Contributor</h2>", 2)),
+    c("Tyler W. Rinker", "Dason Kurkiewicz", "Bryan Goodrich"))
+
+cat(paste(x, collapse="\n"), file=path2)
+
 
 #STEP 3: move to trinker.guthub
 library(reports)
@@ -55,17 +63,23 @@ extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry,
     linsear_write, SMOG, syn, mgsub, adjmat, wc, wfdf, mcsv_w, dtm, "%ha%", 
     "hash_look", "%l%", "polarity_frame", "boolean_search", "stem_words", 
     "stem2df", colpaste2df, rm_stop, wfm_weight, apply_as_tm, tm2qdap, 
-    sent_detect)
+    sent_detect, matrix2df, df2tm_corpus, tm_corpus2df)
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character_table, char_table))
 
+
+x <- readLines(path2)
+x[grepl("<h2>Authors</h2>", x)] <- paste(c("<h2>Author</h2>", 
+    rep("<h2>Contributor</h2>", 2)),
+    c("Tyler W. Rinker", "Dason Kurkiewicz", "Bryan Goodrich"))
+cat(paste(x, collapse="\n"), file=path2)
 
 #STEP 3: move to trinker.guthub
 library(reports)
 file <- "C:/Users/trinker/GitHub/trinker.github.com/"
 delete(paste0(file, "qdap"))
 file.copy(path, file, TRUE, TRUE)
-delete(path)
+delete(path2)
 
 #==========================
 #move project directions
@@ -167,6 +181,3 @@ cat(paste(x, collapse = "\n\n"), file="clipboard")
 # Copy from Current R to R_dev
 #==============================
 r2dev()
-
-
-
