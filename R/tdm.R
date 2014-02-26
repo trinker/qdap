@@ -470,3 +470,19 @@ df2tm_corpus <- function(text.var, grouping.var = NULL, ...){
 
 }
 
+#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
+#' Matrix or Document Term Matrix
+#' 
+#' \code{tm_corpus2wfm} - Convert a \code{\link[tm]{Corpus}} package corpus to a dataframe. 
+#' 
+#' @rdname tdm
+#' @return \code{df2tm_corpus} - Converts a qdap oriented dataframe and returns 
+#' a \code{\link[tm]{Corpus}}.
+#' @export
+tm_corpus2wfm <- function(tm.corpus, col1 = "docs", col2 = "text") {
+
+      text <- docs <- NULL
+      with(tm_corpus2df(tm.corpus), wfm(text, docs))  
+
+}
+

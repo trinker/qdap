@@ -16,6 +16,23 @@ And constructed with the following guidelines:
   (and resets the patch)
 * Bug fixes and misc. changes bumps the patch
 
+CHANGES IN qdap VERSION 1.2.0
+----------------------------------------------------------------
+
+BUG FIXES
+
+NEW FEATURES
+
+MINOR FEATURES
+
+* `tm_corpus2wfm` added to quickly convert from a tm package `Corpus` to a qdap
+  `wfm` object.
+
+IMPROVEMENTS
+
+CHANGES
+
+
 
 CHANGES IN qdap VERSION 1.1.0
 ----------------------------------------------------------------
@@ -24,7 +41,7 @@ A version bump necessary for Re-Submission to CRAN.
 
 CHANGES
 
-*  Downgraded the version requirement for the reports package to 
+* Downgraded the version requirement for the reports package to 
   reports (>= 0.1.2) in order to upload to CRAN.  reports (>= 0.2.0) is not yet
   available on CRAN.
 
@@ -135,7 +152,7 @@ NEW FEATURES
 * `word_cor` added to find words within grouping variables that are associated
   based on correlation.
 
-* `tm2wfm` a function to convert `"TermDocumentMatrix"` and 
+* `tm2qdap` a function to convert `"TermDocumentMatrix"` and 
   `"DocumentTermMatrix"` to a `wfm` added to allow easier integration with the 
   `tm` package.
 
@@ -156,6 +173,9 @@ NEW FEATURES
 * `cm_distance` now uses resampling of data from the null model to generate
   pvalues for the mean code distances.  Useful for determining if an association 
   (small distance) between codes is likely to happen if the null is true.
+
+*  `dispersion_plot` added to enable viewing of word dispersion through 
+  discourse.
 
 * `word_proximity` added to compliment `dispersion_plot` and `word_cor` 
   functions.  `word_proximity` gives the average distance between words in 

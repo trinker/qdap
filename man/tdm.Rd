@@ -5,6 +5,7 @@
 \alias{tdm}
 \alias{tm2qdap}
 \alias{tm_corpus2df}
+\alias{tm_corpus2wfm}
 \title{tm Package Compatability Tools: Apply to or Convert to/from Term Document
 Matrix or Document Term Matrix}
 \usage{
@@ -19,6 +20,8 @@ apply_as_tm(wfm.obj, tmfun, ..., to.qdap = TRUE)
 tm_corpus2df(tm.corpus, col1 = "docs", col2 = "text")
 
 df2tm_corpus(text.var, grouping.var = NULL, ...)
+
+tm_corpus2wfm(tm.corpus, col1 = "docs", col2 = "text")
 }
 \arguments{
   \item{text.var}{The text variable or a
@@ -78,6 +81,9 @@ and returns a qdap oriented dataframe.
 
 \code{df2tm_corpus} - Converts a qdap oriented dataframe
 and returns a \code{\link[tm]{Corpus}}.
+
+\code{df2tm_corpus} - Converts a qdap oriented dataframe
+and returns a \code{\link[tm]{Corpus}}.
 }
 \description{
 \code{tdm} - Create term document matrices from raw text or
@@ -102,6 +108,9 @@ dataframe.
 
 \code{df2tm_corpus} - Convert a qdap dataframe to a tm
 package \code{\link[tm]{Corpus}}.
+
+\code{tm_corpus2wfm} - Convert a \code{\link[tm]{Corpus}}
+package corpus to a dataframe.
 }
 \details{
 Produces output that is identical to the \code{tm}

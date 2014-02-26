@@ -16,6 +16,23 @@ And constructed with the following guidelines:
   (and resets the patch)
 * Bug fixes and misc. changes bumps the patch
 
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.2.0
+----------------------------------------------------------------
+
+<b>BUG FIXES</b>
+
+<b>NEW FEATURES</b>
+
+<b>MINOR FEATURES</b>
+
+* `tm_corpus2wfm` added to quickly convert from a tm package `Corpus` to a <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>
+  `wfm` object.
+
+IMPROVEMENTS
+
+<b>CHANGES</b>
+
+
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.1.0
 ----------------------------------------------------------------
@@ -24,7 +41,7 @@ A version bump necessary for Re-Submission to CRAN.
 
 <b>CHANGES</b>
 
-*  Downgraded the version requirement for the reports package to 
+* Downgraded the version requirement for the reports package to 
   reports (&gt;= 0.1.2) in order to upload to CRAN.  reports (&gt;= 0.2.0) is not yet
   available on CRAN.
 
@@ -135,7 +152,7 @@ relatively new to CRAN, made these changes sensible at this point.
 * `word_cor` added to find words within grouping variables that are associated
   based on correlation.
 
-* `tm2wfm` a function to convert `"TermDocumentMatrix"` and 
+* `tm2qdap` a function to convert `"TermDocumentMatrix"` and 
   `"DocumentTermMatrix"` to a `wfm` added to allow easier integration with the 
   `tm` package.
 
@@ -156,6 +173,9 @@ relatively new to CRAN, made these changes sensible at this point.
 * `cm_distance` now uses resampling of data from the null model to generate
   pvalues for the mean code distances.  Useful for determining if an association 
   (small distance) between codes is likely to happen if the null is true.
+
+*  `dispersion_plot` added to enable viewing of word dispersion through 
+  discourse.
 
 * `word_proximity` added to compliment `dispersion_plot` and `word_cor` 
   functions.  `word_proximity` gives the average distance between words in 
