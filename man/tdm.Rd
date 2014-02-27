@@ -19,9 +19,9 @@ apply_as_tm(wfm.obj, tmfun, ..., to.qdap = TRUE)
 
 tm_corpus2df(tm.corpus, col1 = "docs", col2 = "text")
 
-df2tm_corpus(text.var, grouping.var = NULL, ...)
+tm_corpus2wfm(tm.corpus, col1 = "docs", col2 = "text", ...)
 
-tm_corpus2wfm(tm.corpus, col1 = "docs", col2 = "text")
+df2tm_corpus(text.var, grouping.var = NULL, ...)
 }
 \arguments{
   \item{text.var}{The text variable or a
@@ -37,7 +37,9 @@ tm_corpus2wfm(tm.corpus, col1 = "docs", col2 = "text")
   Other arguments passed to functions used on the tm
   package's \code{"TermDocumentMatrix"}.  If
   \code{df2tm_corpus} - Other arguments passed to the tm
-  package's \code{\link[tm]{Corpus}}.}
+  package's \code{\link[tm]{Corpus}}.  If
+  \code{tm_corpus2wfm} - Other arguments passed to
+  \code{\link[qdap]{wfm}}.}
 
   \item{vowel.check}{logical.  Should terms without vowels
   be remove?}
@@ -79,8 +81,8 @@ format.
 \code{tm_corpus2df} - Converts a \code{\link[tm]{Corpus}}
 and returns a qdap oriented dataframe.
 
-\code{df2tm_corpus} - Converts a qdap oriented dataframe
-and returns a \code{\link[tm]{Corpus}}.
+\code{df2tm_wfm} - Converts a qdap oriented dataframe and
+returns a \code{\link[qdap]{wfm}}.
 
 \code{df2tm_corpus} - Converts a qdap oriented dataframe
 and returns a \code{\link[tm]{Corpus}}.
@@ -106,11 +108,11 @@ the \code{tm} package's
 \code{tm_corpus2df} - Convert a tm package corpus to a
 dataframe.
 
+\code{tm_corpus2wfm} - Convert a \code{\link[tm]{Corpus}}
+package corpus to a \code{\link[qdap]{wfm}}.
+
 \code{df2tm_corpus} - Convert a qdap dataframe to a tm
 package \code{\link[tm]{Corpus}}.
-
-\code{tm_corpus2wfm} - Convert a \code{\link[tm]{Corpus}}
-package corpus to a dataframe.
 }
 \details{
 Produces output that is identical to the \code{tm}

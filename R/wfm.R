@@ -32,6 +32,7 @@
 #' ## word frequency matrix (wfm) example:
 #' with(DATA, wfm(state, list(sex, adult)))[1:15, ]
 #' with(DATA, wfm(state, person))[1:15, ]
+#' nchar_range(with(DATA, wfm(state, list(sex, adult))), 5)
 #' with(DATA, wfm(state, list(sex, adult)))
 #' 
 #' ## insert double tilde ("~~") to keep phrases(i.e., first last name)
@@ -450,9 +451,7 @@ wfm_combine <- function(wf.obj, word.lists, matrix = TRUE){
     if (matrix) {
         DFF2 <- as.matrix(DFF[, -1])
         rownames(DFF2) <- as.character(DFF[, 1])
-        DFF <- DFF2
-        class(DFF) <- c("wfm", "true.matrix", class(DFF))
-        return(DFF)
+        return(as.wfm(DFF2))
     }
     class(DFF) <- c("wfdf", class(DFF))
     DFF
@@ -596,7 +595,7 @@ summary.wfdf <- function(object, ...) {
 #' Weighted Word Frequency Matrix
 #' 
 #' \code{wfm_weight} - Weight a word frequency matrix for analysis were such 
-#' weighting is sensible..
+#' weighting is sensible.
 #' 
 #' @param wfm.obj A \code{\link[qdap]{wfm}} object.
 #' @param type The type of weighting to use: c(\code{"prop"}, \code{"max"}, 
@@ -688,3 +687,51 @@ plot.weighted_wfm <- function(x, non.zero = FALSE, digits = 0, by.column = NULL,
     }
     invisible(out)
 }
+
+
+#' Word Frequency Matrix
+#' 
+#' \code{nchar_range} - Grab words from a wfm that meet max/min word length 
+#' criteria.
+#' 
+#' @param min Minimum word length.
+#' @param max Maximum word length.
+#' @rdname Word_Frequency_Matrix
+#' @export
+#' @return \code{nchar_range} - Returns a matrix of the class "wfm".
+nchar_range <- function(wfm.obj, min = 1, max = Inf) {
+
+    if (!"wfm" %in% class(wfm.obj)) {
+        warning("wfm.obj not a matrix of class `wfm`", immediate. = TRUE)
+    }
+
+    lens <- nchar(rownames(wfm.obj))
+    as.wfm(wfm.obj[lens >= min & lens <= max, ])
+
+}
+
+#' Word Frequency Matrix
+#' 
+#' \code{as.wfm} - Attempts to coerce a matrix to a \code{\link[qdap]{wfm}}.
+#' 
+#' @param matrix.object A matrix object with words for row names and integer 
+#' values.
+#' @rdname Word_Frequency_Matrix
+#' @export
+#' @return \code{as.wfm} - Returns a matrix of the class "wfm".
+as.wfm <- function(matrix.object) {
+
+    if(!all(is.Integer(matrix.object))){
+        stop("matrix.object must contain only integer values")
+    }
+    if (!is.matrix(matrix.object)) {
+        warning("Not a matrix.object; may not convert correctly",
+            immediate. = TRUE)
+        matrix.object <- as.matrix(matrix.object)
+    } 
+    class(matrix.object) <- c("wfm", "true.matrix", class(matrix.object))
+    matrix.object    
+}
+
+is.Integer <- 
+function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol

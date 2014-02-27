@@ -25,7 +25,8 @@ extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry,
     linsear_write, SMOG, syn, mgsub, adjmat, wc, wfdf, mcsv_w, dtm, "%ha%", 
     "hash_look", "%l%", "polarity_frame", "boolean_search", "stem_words", 
     "stem2df", colpaste2df, rm_stop, wfm_weight, apply_as_tm, tm2qdap,
-    sent_detect, matrix2df, df2tm_corpus, tm_corpus2df, tm_corpus2wfm)
+    sent_detect, matrix2df, df2tm_corpus, tm_corpus2df, tm_corpus2wfm, as.wfm, 
+    nchar_range)
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character_table, char_table))
 
@@ -63,7 +64,8 @@ extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry,
     linsear_write, SMOG, syn, mgsub, adjmat, wc, wfdf, mcsv_w, dtm, "%ha%", 
     "hash_look", "%l%", "polarity_frame", "boolean_search", "stem_words", 
     "stem2df", colpaste2df, rm_stop, wfm_weight, apply_as_tm, tm2qdap, 
-    sent_detect, matrix2df, df2tm_corpus, tm_corpus2df, tm_corpus2wfm)
+    sent_detect, matrix2df, df2tm_corpus, tm_corpus2df, tm_corpus2wfm, as.wfm, 
+    nchar_range)
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character_table, char_table))
 

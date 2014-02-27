@@ -1,4 +1,4 @@
-#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
+#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
 #' \code{tdm} - Create term document matrices from raw text or 
@@ -11,7 +11,8 @@
 #' @param \ldots If \code{tdm} or \code{dtm} - Other arguments passed to 
 #' \code{wfm}.  If \code{apply_as_tm} - Other arguments passed to functions used 
 #' on the tm package's \code{"TermDocumentMatrix"}.  If \code{df2tm_corpus} - 
-#' Other arguments passed to the tm package's \code{\link[tm]{Corpus}}.
+#' Other arguments passed to the tm package's \code{\link[tm]{Corpus}}.  If 
+#' \code{tm_corpus2wfm} - Other arguments passed to \code{\link[qdap]{wfm}}.
 #' @param vowel.check logical.  Should terms without vowels be remove?  
 #' @details Produces output that is identical to the \code{tm} package's 
 #' \code{\link[tm]{TermDocumentMatrix}}, \code{\link[tm]{DocumentTermMatrix}},
@@ -276,7 +277,7 @@ vowel_check <- function(text.var) {
 
 
 
-#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
+#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
 #' \code{dtm} - Create document term matrices from raw text or 
@@ -329,7 +330,7 @@ wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
 }
 
 
-#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
+#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
 #' \code{tm2qdap} - Convert the \code{tm} package's 
@@ -363,7 +364,7 @@ tm2qdap <- function(x) {
 }
 
 
-#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
+#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
 #' \code{apply_as_tm} - Apply functions intended to be used on the \code{tm} 
@@ -397,7 +398,7 @@ apply_as_tm <- function(wfm.obj, tmfun, ..., to.qdap = TRUE){
 
 }
 
-#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
+#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
 #' \code{tm_corpus2df} - Convert a tm package corpus to a dataframe.
@@ -418,7 +419,25 @@ tm_corpus2df <- function(tm.corpus, col1 = "docs", col2 = "text") {
     list2df(tm.corpus, col1 = col2, col2 = col1)[, 2:1]
 }
 
-#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
+#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
+#' Matrix or Document Term Matrix
+#' 
+#' \code{tm_corpus2wfm} - Convert a \code{\link[tm]{Corpus}} package corpus to a 
+#' \code{\link[qdap]{wfm}}. 
+#' 
+#' @rdname tdm
+#' @return \code{df2tm_wfm} - Converts a qdap oriented dataframe and returns 
+#' a \code{\link[qdap]{wfm}}.
+#' @export
+tm_corpus2wfm <- function(tm.corpus, col1 = "docs", col2 = "text", ...) {
+
+      text <- docs <- NULL
+      with(tm_corpus2df(tm.corpus), wfm(text, docs, ...))  
+
+}
+
+
+#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
 #' \code{df2tm_corpus} - Convert a qdap dataframe to a tm package 
@@ -461,28 +480,12 @@ df2tm_corpus <- function(text.var, grouping.var = NULL, ...){
     DF[, "grouping"] <- factor(DF[, "grouping"])
     DF[, "text.var"] <- as.character(DF[, "text.var"])
 
-    ## Split apart by grouping variables and collpase text
+    ## Split apart by grouping variables and collapse text
     LST <- sapply(split(DF[, "text.var"], DF[, "grouping"]), 
         paste, collapse = " ")
 
     ## Use the tm package to convert to a Corpus
     Corpus(VectorSource(LST), ...)
-
-}
-
-#' tm Package Compatability Tools: Apply to or Convert to/from Term Document 
-#' Matrix or Document Term Matrix
-#' 
-#' \code{tm_corpus2wfm} - Convert a \code{\link[tm]{Corpus}} package corpus to a dataframe. 
-#' 
-#' @rdname tdm
-#' @return \code{df2tm_corpus} - Converts a qdap oriented dataframe and returns 
-#' a \code{\link[tm]{Corpus}}.
-#' @export
-tm_corpus2wfm <- function(tm.corpus, col1 = "docs", col2 = "text") {
-
-      text <- docs <- NULL
-      with(tm_corpus2df(tm.corpus), wfm(text, docs))  
 
 }
 

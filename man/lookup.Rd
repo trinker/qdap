@@ -1,4 +1,5 @@
 \name{lookup}
+\alias{\%l+\%}
 \alias{\%l\%}
 \alias{lookup}
 \title{Hash Table/Dictionary Lookup}
@@ -6,6 +7,8 @@
 lookup(terms, key.match, key.reassign = NULL, missing = NA)
 
 terms \%l\% key.match
+
+terms \%l+\% key.match
 }
 \arguments{
   \item{terms}{A vector of terms to undergo a lookup.}
@@ -34,6 +37,11 @@ lookups.
 \code{terms \%l\% key.match} - A binary operator version of
 \code{lookup} for when \code{key.match} is a data.frame or
 named list.
+
+\code{terms \%l+\% key.match} - A binary operator version
+of \code{lookup} for when \code{key.match} is a data.frame
+or named list and \code{missing} is assumed to be
+\code{NULL}.
 }
 \examples{
 \dontrun{
@@ -71,6 +79,9 @@ lookup(mtcars$carb, sort(unique(mtcars$carb)),
 ## \%l\%, a binary operator version of lookup
 1:5 \%l\% data.frame(1:4, 11:14)
 1:10 \%l\% codes
+
+1:12 \%l\% codes
+1:12 \%l+\% codes
 }
 }
 \seealso{

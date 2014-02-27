@@ -1,4 +1,6 @@
 \name{wfm}
+\alias{as.wfm}
+\alias{nchar_range}
 \alias{wfdf}
 \alias{wfm}
 \alias{wfm_combine}
@@ -17,6 +19,10 @@ wfm_expanded(text.var, grouping.var = NULL, ...)
 wfm_combine(wf.obj, word.lists, matrix = TRUE)
 
 wfm_weight(wfm.obj, type = "prop")
+
+nchar_range(wfm.obj, min = 1, max = Inf)
+
+as.wfm(matrix.object)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -65,6 +71,13 @@ wfm_weight(wfm.obj, type = "prop")
   \code{\link[base]{scale}} to scale with \code{center =
   FALSE}; output is not integer and column sums may not be
   equal.}
+
+  \item{min}{Minimum word length.}
+
+  \item{max}{Maximum word length.}
+
+  \item{matrix.object}{A matrix object with words for row
+  names and integer values.}
 }
 \value{
 \code{wfm} - returns a word frequency of the class matrix.
@@ -84,6 +97,10 @@ combined word.lists merged and remaining terms
 
 \code{wfm_weight} - Returns a weighted matrix for use with
 other R packages. The output is not of the class "wfm".
+
+\code{nchar_range} - Returns a matrix of the class "wfm".
+
+\code{as.wfm} - Returns a matrix of the class "wfm".
 }
 \description{
 \code{wfm} - Generate a word frequency matrix by grouping
@@ -99,7 +116,13 @@ have multiple rows for each word.
 frequency matrix (\code{wfdf}) together.
 
 \code{wfm_weight} - Weight a word frequency matrix for
-analysis were such weighting is sensible..
+analysis were such weighting is sensible.
+
+\code{nchar_range} - Grab words from a wfm that meet
+max/min word length criteria.
+
+\code{as.wfm} - Attempts to coerce a matrix to a
+\code{\link[qdap]{wfm}}.
 }
 \note{
 Words can be kept as one by inserting a double tilde
@@ -112,6 +135,7 @@ keeping proper names as a single unit.
 ## word frequency matrix (wfm) example:
 with(DATA, wfm(state, list(sex, adult)))[1:15, ]
 with(DATA, wfm(state, person))[1:15, ]
+nchar_range(with(DATA, wfm(state, list(sex, adult))), 5)
 with(DATA, wfm(state, list(sex, adult)))
 
 ## insert double tilde ("~~") to keep phrases(i.e., first last name)

@@ -54,6 +54,9 @@
 #' ## %l%, a binary operator version of lookup
 #' 1:5 %l% data.frame(1:4, 11:14)
 #' 1:10 %l% codes
+#' 
+#' 1:12 %l% codes
+#' 1:12 %l+% codes
 #' }
 lookup <-
 function(terms, key.match, key.reassign=NULL, missing = NA) {
@@ -118,3 +121,15 @@ function(terms, key.match, key.reassign=NULL, missing = NA) {
 #' @export
 #' @rdname lookup
 `%l%` <- function(terms, key.match) lookup(terms = terms, key.match = key.match)
+
+#' Hash/Dictionary Lookup
+#' 
+#' \code{terms \%l+\% key.match} - A binary operator version of \code{lookup} 
+#' for when \code{key.match} is a data.frame or named list and \code{missing} is
+#' assumed to be \code{NULL}.
+#'
+#' @export
+#' @rdname lookup
+`%l+%` <- function(terms, key.match) {
+    lookup(terms = terms, key.match = key.match, missing = NULL)
+}
