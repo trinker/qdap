@@ -485,7 +485,13 @@ df2tm_corpus <- function(text.var, grouping.var = NULL, ...){
         paste, collapse = " ")
 
     ## Use the tm package to convert to a Corpus
-    Corpus(VectorSource(LST), ...)
-
+    mycorpus <- Corpus(VectorSource(LST), ...)
+    
+    ## Add metadata info
+    attributes(mycorpus)[["DMetaData"]][,1] <- names(LST)
+    pers <- unname(Sys.info()["user"])
+    if (!is.null(pers)) {
+        attributes(mycorpus)[["CMetaData"]][["MetaData"]][["creator"]] <- pers
+    }
+    mycorpus
 }
-

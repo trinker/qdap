@@ -6,7 +6,7 @@
 \alias{tm2qdap}
 \alias{tm_corpus2df}
 \alias{tm_corpus2wfm}
-\title{tm Package Compatability Tools: Apply to or Convert to/from Term Document
+\title{tm Package Compatibility Tools: Apply to or Convert to/from Term Document
 Matrix or Document Term Matrix}
 \usage{
 tdm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)

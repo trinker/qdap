@@ -597,7 +597,7 @@ summary.wfdf <- function(object, ...) {
 #' \code{wfm_weight} - Weight a word frequency matrix for analysis were such 
 #' weighting is sensible.
 #' 
-#' @param wfm.obj A \code{\link[qdap]{wfm}} object.
+#' @param wfm.object A \code{\link[qdap]{wfm}} object.
 #' @param type The type of weighting to use: c(\code{"prop"}, \code{"max"}, 
 #' \code{"scaled"}).  All weight by column.  \code{"prop"} uses a proportion
 #' weighting and all columns sum to 1.  \code{"max"} weights in proportion to 
@@ -609,10 +609,10 @@ summary.wfdf <- function(object, ...) {
 #' @export
 #' @return \code{wfm_weight} - Returns a weighted matrix for use with other R 
 #' packages. The output is not of the class "wfm".
-wfm_weight <- function(wfm.obj, type = "prop") {
+wfm_weight <- function(wfm.object, type = "prop") {
 
-    if (is(wfm.obj, "wfdf") && !is(wfm.obj, "f.df")) {
-        wfm.obj <- wfm(wfm.obj)
+    if (is(wfm.object, "wfdf") && !is(wfm.object, "f.df")) {
+        wfm.object <- wfm(wfm.object)
     }
   
     types <- c("prop", "max", "scaled")
@@ -626,13 +626,13 @@ wfm_weight <- function(wfm.obj, type = "prop") {
         max = {FUN <- function(x) apply(x, 2, function(y) round(y *(max(x)/max(y)), 0))},
         scaled = {FUN <- function(x) {
                 o <- apply(x, 2, function(y) scale(y, FALSE))
-                rownames(o) <- rownames(wfm.obj)
+                rownames(o) <- rownames(wfm.object)
                 o
             }} ,
         stop("`type` must be one of c(\"prop\", \"max\", \"scaled\")")
     )
 
-    out <- FUN(wfm.obj)
+    out <- FUN(wfm.object)
     class(out) <- c("weighted_wfm", class(out))
     attributes(out)[["Weighting"]] <- type
 
@@ -699,14 +699,14 @@ plot.weighted_wfm <- function(x, non.zero = FALSE, digits = 0, by.column = NULL,
 #' @rdname Word_Frequency_Matrix
 #' @export
 #' @return \code{nchar_range} - Returns a matrix of the class "wfm".
-nchar_range <- function(wfm.obj, min = 1, max = Inf) {
+nchar_range <- function(wfm.object, min = 1, max = Inf) {
 
-    if (!"wfm" %in% class(wfm.obj)) {
-        warning("wfm.obj not a matrix of class `wfm`", immediate. = TRUE)
+    if (!"wfm" %in% class(wfm.object)) {
+        warning("wfm.object not a matrix of class `wfm`", immediate. = TRUE)
     }
 
-    lens <- nchar(rownames(wfm.obj))
-    as.wfm(wfm.obj[lens >= min & lens <= max, ])
+    lens <- nchar(rownames(wfm.object))
+    as.wfm(wfm.object[lens >= min & lens <= max, ])
 
 }
 

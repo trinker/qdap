@@ -37,6 +37,10 @@ MINOR FEATURES
 
 IMPROVEMENTS
 
+* `df2tm_corpus` now sets metaData information for ID and creator (based on) 
+  `Sys.info()["user"]`.
+
+* `matrix2df` now accepts a simple_triplet_matrix object as well.
 
 CHANGES
 

@@ -18,9 +18,9 @@ wfm_expanded(text.var, grouping.var = NULL, ...)
 
 wfm_combine(wf.obj, word.lists, matrix = TRUE)
 
-wfm_weight(wfm.obj, type = "prop")
+wfm_weight(wfm.object, type = "prop")
 
-nchar_range(wfm.obj, min = 1, max = Inf)
+nchar_range(wfm.object, min = 1, max = Inf)
 
 as.wfm(matrix.object)
 }
@@ -60,7 +60,7 @@ as.wfm(matrix.object)
 
   \item{wf.obj}{A \code{wfm} or \code{wfdf} object.}
 
-  \item{wfm.obj}{A \code{\link[qdap]{wfm}} object.}
+  \item{wfm.object}{A \code{\link[qdap]{wfm}} object.}
 
   \item{type}{The type of weighting to use:
   c(\code{"prop"}, \code{"max"}, \code{"scaled"}).  All

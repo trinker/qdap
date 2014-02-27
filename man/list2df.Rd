@@ -18,7 +18,8 @@ matrix2df(matrix.object, col1 = "var1")
   \item{col2}{Name for column 2 (the names of the
   vectors).}
 
-  \item{matrix.object}{A matrix object.}
+  \item{matrix.object}{A matrix simple_triplet_matrix
+  object.}
 }
 \value{
 \code{list2df} - Returns a dataframe with two columns.

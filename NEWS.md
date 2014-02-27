@@ -28,7 +28,19 @@ And constructed with the following guidelines:
 * `tm_corpus2wfm` added to quickly convert from a tm package `Corpus` to a <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>
   `wfm` object.
 
+* `nchar_range` added to give the ability to provide a range of character 
+  lengths to filter from a `wfm` object.
+
+* `as.wfm` added as a means to attempt to coerce a matrix to a `wfm` object.
+
+* `%l+%` added as a counterpart to `%l%` that assumes `missing = NULL`.
+
 IMPROVEMENTS
+
+* `df2tm_corpus` now sets metaData information for ID and creator (based on) 
+  `Sys.info()["user"]`.
+
+* `matrix2df` now accepts a simple_triplet_matrix object as well.
 
 <b>CHANGES</b>
 

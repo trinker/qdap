@@ -40,12 +40,17 @@ list2df <- function(list.object, col1 = "X1", col2 = "X2") {
 #' \code{matrix2df} - Convert a matrix to a dataframe and convert the rownames 
 #' to the first column.
 #' 
-#' @param matrix.object A matrix object.
+#' @param matrix.object A matrix simple_triplet_matrix object.
 #' @rdname list2df
 #' @return \code{matrix2df} - Returns a dataframe.
 #' @export
 matrix2df <- function(matrix.object, col1 = "var1") {
 
+        ## Convert simple_triplet_matrix to a matrix
+    if("simple_triplet_matrix" %in% class(matrix.object)){
+        matrix.object <- as.matrix(matrix.object)
+    }
+    
     if (is.null(rownames(matrix.object))) {
         rownames(matrix.object) <- 1:nrow(matrix.object)
     }
