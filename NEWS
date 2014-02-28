@@ -42,6 +42,10 @@ IMPROVEMENTS
 
 * `matrix2df` now accepts a simple_triplet_matrix object as well.
 
+* `word_cor` out put that was a list (not a correlation matrix) did not have a 
+  plot method.  The plot method for `word_cor` now handles both matrices and the 
+  lsit of correlations.
+
 CHANGES
 
 * `dissimilarity` has been renamed to `Dissimilarity` to prevent tm package 
