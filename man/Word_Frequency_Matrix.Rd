@@ -83,9 +83,6 @@ as.wfm(matrix.object)
   \item{count.apostrophe}{logical.  If \code{TRUE}
   apostrophes are counted as characters.}
 
-  \item{stopwords}{An optional vector of stop words to
-  remove.}
-
   \item{matrix.object}{A matrix object with words for row
   names and integer values.}
 }

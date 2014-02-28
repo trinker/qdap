@@ -749,7 +749,6 @@ plot.weighted_wfm <- function(x, non.zero = FALSE, digits = 0, by.column = NULL,
 #' @param max Maximum word length.
 #' @param count.apostrophe logical.  If \code{TRUE} apostrophes are counted as 
 #' characters.
-#' @param stopwords An optional vector of stop words to remove.
 #' @rdname Word_Frequency_Matrix
 #' @export
 #' @return \code{Filter} - Returns a matrix of the class "wfm".
