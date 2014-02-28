@@ -103,18 +103,16 @@ plot(out)
 require(tm)
 data("crude")
 
-out <- word_cor(t(tm_corpus2wfm(crude)), word = "oil", r=.7)
-vect2df(out[[1]], "word", "cor")
+out1 <- word_cor(t(tm_corpus2wfm(crude)), word = "oil", r=.7)
+vect2df(out1[[1]], "word", "cor")
 
-qheat(vect2df(out[[1]], "word", "cor"), values=TRUE, high="red",
+plot(out1)
+qheat(vect2df(out1[[1]], "word", "cor"), values=TRUE, high="red",
     digits=2, order.by ="cor", plot=FALSE) + coord_flip()
-ggplot(vect2df(out[[1]], "word", "cor"), aes(cor, word)) + geom_point()
 
 
 out2 <- word_cor(t(tm_corpus2wfm(crude)), word = c("oil", "country"), r=.7)
-ggplot(list_vect2df(out2, "word", "comp_word", "cor"), aes(cor, comp_word)) +
-    geom_point() +
-    facet_grid(word~., space="free_y", scales="free_y")
+plot(out2)
 }
 }
 \seealso{

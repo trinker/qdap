@@ -87,18 +87,16 @@
 #' require(tm)
 #' data("crude")
 #' 
-#' out <- word_cor(t(tm_corpus2wfm(crude)), word = "oil", r=.7)
-#' vect2df(out[[1]], "word", "cor")
+#' out1 <- word_cor(t(tm_corpus2wfm(crude)), word = "oil", r=.7)
+#' vect2df(out1[[1]], "word", "cor")
 #' 
-#' qheat(vect2df(out[[1]], "word", "cor"), values=TRUE, high="red", 
+#' plot(out1)
+#' qheat(vect2df(out1[[1]], "word", "cor"), values=TRUE, high="red", 
 #'     digits=2, order.by ="cor", plot=FALSE) + coord_flip()
-#' ggplot(vect2df(out[[1]], "word", "cor"), aes(cor, word)) + geom_point()
 #' 
 #' 
 #' out2 <- word_cor(t(tm_corpus2wfm(crude)), word = c("oil", "country"), r=.7)
-#' ggplot(list_vect2df(out2, "word", "comp_word", "cor"), aes(cor, comp_word)) + 
-#'     geom_point() + 
-#'     facet_grid(word~., space="free_y", scales="free_y")
+#' plot(out2)
 #' }
 word_cor <- function(text.var, grouping.var = NULL, word, r = .7, 
     values = TRUE, method = "pearson", ...) {
@@ -139,6 +137,11 @@ word_cor <- function(text.var, grouping.var = NULL, word, r = .7,
             vals = values, positive = posit, meth = method)
         names(L1) <- word
         out <- L1
+        attributes(out) <- list(
+            class = c("word_cor", class(out)), 
+            type = c("cor_list"),
+            names = names(out)
+        ) 
     } else {
         out <- cor(WFM[, word], method = method)
         attributes(out) <- list(
@@ -168,9 +171,14 @@ function(x, digits = 3, ...) {
         options(width=3000)
         class(x) <- "matrix"
         attributes(x)[["type"]] <- NULL
+        print(round(x, digits = digits))
+        options(width=WD)
     }
-    print(round(x, digits = digits))
-    options(width=WD)
+    if (attributes(x)[["type"]] == "cor_list") {
+        class(x) <- "list"
+        attributes(x)[["type"]] <- NULL
+        print(lapply(x, round, digits = digits))
+    }
 }
 
 #' Plots a word_cor object
@@ -185,15 +193,34 @@ function(x, digits = 3, ...) {
 #' @param low The color to be used for lower values.
 #' @param high The color to be used for higher values.
 #' @param grid The color of the grid (Use \code{NULL} to remove the grid).  
-#' @param \ldots Other arguments passed to qheat.
+#' @param \ldots Other arguments passed to qheat if matrix and other arguments 
+#' passed to \code{\link[ggplot2]{geom_point}} if a list.
+#' @importFrom ggplot2 ggplot aes facet_grid geom_point xlab ylab
 #' @method plot word_cor
 #' @S3method plot word_cor
 plot.word_cor <- function(x, label = TRUE, lab.digits = 3, high="red", 
     low="white", grid=NULL, ...) {
     
-    qheat(t(x), diag.na = TRUE, diag.values = "", by.column = NULL, 
-        values = TRUE, digits = lab.digits, high = high, 
-        low = low, grid = grid, ...)
+    word <- cor <- comp_word <- NULL
+
+    if (attributes(x)[["type"]] == "cor_matrix") {
+        qheat(t(x), diag.na = TRUE, diag.values = "", by.column = NULL, 
+            values = TRUE, digits = lab.digits, high = high, 
+            low = low, grid = grid, ...)
+    }
+    if (attributes(x)[["type"]] == "cor_list") {
+        dat <- list_vect2df(x, "word", "comp_word", "cor")
+        if (length(x) == 1) {
+            facets <- reformulate("word", ".")
+        } else {
+            facets <- reformulate(".", "word")
+        }
+        ggplot(dat, aes(cor, comp_word)) +
+            geom_point(...) +
+            facet_grid(facets, space="free_y", scales="free_y") +
+            ylab("Words") + xlab("Correlation")
+    }
+
 }
 
 

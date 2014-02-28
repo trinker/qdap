@@ -22,7 +22,9 @@
   \item{grid}{The color of the grid (Use \code{NULL} to
   remove the grid).}
 
-  \item{\ldots}{Other arguments passed to qheat.}
+  \item{\ldots}{Other arguments passed to qheat if matrix
+  and other arguments passed to
+  \code{\link[ggplot2]{geom_point}} if a list.}
 }
 \description{
 Plots a word_cor object.
