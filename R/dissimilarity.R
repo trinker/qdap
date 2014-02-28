@@ -15,17 +15,18 @@
 #' matrix.
 #' @param p The power of the Minkowski distance.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{wfm}}.
+#' @rdname Dissimilarity
 #' @return Returns a matrix of dissimilarity values (the agreement between text).
 #' @seealso \code{\link[stats]{dist}}
 #' @keywords dissimilarity
 #' @export
 #' @examples 
 #' \dontrun{
-#' with(DATA, dissimilarity(state, list(sex, adult)))
-#' with(DATA, dissimilarity(state, person, diag = TRUE))
+#' with(DATA, Dissimilarity(state, list(sex, adult)))
+#' with(DATA, Dissimilarity(state, person, diag = TRUE))
 #' 
 #' ## Clustering: Dendrogram
-#' (x <- with(pres_debates2012, dissimilarity(dialogue, list(person, time))))
+#' (x <- with(pres_debates2012, Dissimilarity(dialogue, list(person, time))))
 #' fit <- hclust(x)
 #' plot(fit)
 #' ## draw dendrogram with red borders around the 3 clusters 
@@ -44,7 +45,7 @@
 #' ## http://bodongchen.com/blog/?p=301
 #' 
 #' ## Fit it: 2-D
-#' (diss <- with(pres_debates2012, dissimilarity(dialogue, list(person, time), 
+#' (diss <- with(pres_debates2012, Dissimilarity(dialogue, list(person, time), 
 #'     method = "euclidean")))
 #' fit <- cmdscale(diss, eig = TRUE, k = 2)
 #' 
@@ -71,8 +72,16 @@
 #' legend("bottomright", title="Person",
 #'    qcv(Obama, Romney, Other), fill=qcv(blue, red, yellow))
 #' legend("topleft",  paste("Time", 1:3), pch=c(15, 17, 19))
+#' 
+#' ## Compare to Cosine Similarity
+#' cos_sim <- function(x, y) x %*% y / sqrt(x%*%x * y%*%y)
+#' mat <- matrix(rbinom(500, 0:1, .45), ncol=10)
+#' v_outer(mat, cos_sim)
+#' 
+#' v_outer(with(DATA, wfm(state, person)), cos_sim)
+#' with(DATA, dissimilarity(state, person))
 #' }
-dissimilarity <- 
+Dissimilarity <- 
 function(text.var, grouping.var= NULL, method = "prop", diag = FALSE, 
     upper = FALSE, p = 2, ...){   
     if(!is(text.var, "true.matrix")){ 
@@ -95,20 +104,20 @@ function(text.var, grouping.var= NULL, method = "prop", diag = FALSE,
     if (meth.check) {
       x <- 1 - x
     }   
-    class(x) <- c("dissimilarity", class(x))    
+    class(x) <- c("Dissimilarity", class(x))    
     x
 }
 
-#' Prints a dissimilarity object
+#' Prints a Dissimilarity object
 #' 
-#' Prints a dissimilarity object.
+#' Prints a Dissimilarity object.
 #' 
-#' @param x The dissimilarity object
+#' @param x The Dissimilarity object
 #' @param digits Number of decimal places to print. 
 #' @param \ldots ignored
-#' @method print dissimilarity
-#' @S3method print dissimilarity
-print.dissimilarity <-
+#' @method print Dissimilarity
+#' @S3method print Dissimilarity
+print.Dissimilarity <-
 function(x, digits = 3, ...) {
     WD <- options()[["width"]]
     options(width=3000)
@@ -119,5 +128,41 @@ function(x, digits = 3, ...) {
     print(x)
     options(width=WD)  
 }
+
+#' @rdname Dissimilarity
+#' @export
+dissimilarity <- 
+function(text.var, grouping.var= NULL, method = "prop", diag = FALSE, 
+    upper = FALSE, p = 2, ...){   
+    
+    .Deprecated(msg = paste("`dissimilarity` is deprecated.  Please use", 
+        "Dissimilarity to prevent conflicts with the tm package."), 
+        old = as.character(sys.call(sys.parent()))[1L])
+    
+    
+    if(!is(text.var, "true.matrix")){ 
+        wfm.object <- wfm(text.var = text.var, grouping.var = grouping.var, ...)
+    } else {
+        wfm.object <- text.var
+    }
+    wfm.object <- t(wfm.object)
+    meth.check <- FALSE
+    if (method == "prop") {
+        method <- "binary" 
+        meth.check <- TRUE
+    }
+    #leave this stats::dist b/c other packages use dist
+    if (meth.check) {
+        diag <- FALSE
+    }
+    x <- stats::dist(wfm.object, method = method, diag = diag, upper = upper, 
+        p = p)
+    if (meth.check) {
+      x <- 1 - x
+    }   
+    class(x) <- c("Dissimilarity", class(x))    
+    x
+}
+
 
 

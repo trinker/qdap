@@ -20,7 +20,7 @@ word_cor(text.var, grouping.var = NULL, word, r = 0.7, values = TRUE,
   If positive this is the minimum value, if negative this
   is the maximum value.}
 
-  \item{values}{logical.  If \code{TRUE}returns the named
+  \item{values}{logical.  If \code{TRUE} returns the named
   correlates (names are the words).  If \code{FALSE} only
   the associated words are returned.}
 
@@ -98,6 +98,23 @@ z <- wfm_combine(y, worlis)
 out <- word_cor(t(z), word = c(names(worlis), "else.words"), r = NULL)
 out
 plot(out)
+
+## Additional plotting/viewing
+require(tm)
+data("crude")
+
+out <- word_cor(t(tm_corpus2wfm(crude)), word = "oil", r=.7)
+vect2df(out[[1]], "word", "cor")
+
+qheat(vect2df(out[[1]], "word", "cor"), values=TRUE, high="red",
+    digits=2, order.by ="cor", plot=FALSE) + coord_flip()
+ggplot(vect2df(out[[1]], "word", "cor"), aes(cor, word)) + geom_point()
+
+
+out2 <- word_cor(t(tm_corpus2wfm(crude)), word = c("oil", "country"), r=.7)
+ggplot(list_vect2df(out2, "word", "comp_word", "cor"), aes(cor, comp_word)) +
+    geom_point() +
+    facet_grid(word~., space="free_y", scales="free_y")
 }
 }
 \seealso{

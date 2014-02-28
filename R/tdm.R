@@ -339,7 +339,7 @@ wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
 #' 
 #' @param x A \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.
 #' @return \code{tm2qdap} - Returns a \code{\link[qdap]{wfm}} object or 
-#' \code{\link[qdap]{wfm_weight}} object.
+#' \code{weight} object.
 #' @rdname tdm
 #' @export
 tm2qdap <- function(x) {
@@ -378,7 +378,7 @@ tm2qdap <- function(x) {
 #' coerce the output back to a qdap object.
 #' @return \code{apply_as_tm} - Applies a tm oriented function to a 
 #' \code{\link[qdap]{wfm}} and attempts to simplify back to a 
-#' \code{\link[qdap]{wfm}} or \code{\link[qdap]{wfm_weight}} format.
+#' \code{\link[qdap]{wfm}} or \code{weight} format.
 #' @rdname tdm
 #' @export
 apply_as_tm <- function(wfm.obj, tmfun, ..., to.qdap = TRUE){
@@ -494,4 +494,69 @@ df2tm_corpus <- function(text.var, grouping.var = NULL, ...){
         attributes(mycorpus)[["CMetaData"]][["MetaData"]][["creator"]] <- pers
     }
     mycorpus
+}
+
+#' Transposes a TermDocumentMatrix object
+#' 
+#' Transposes a TermDocumentMatrix object
+#' 
+#' @param x The TermDocumentMatrix object
+#' @param \ldots ignored
+#' @S3method t TermDocumentMatrix
+#' @method t TermDocumentMatrix
+t.TermDocumentMatrix <- function(x, ...) {
+     
+    x <- t(as.matrix(x))
+
+    z <- unlist(apply(x, 2, function(y) sum(y != 0)), use.names = FALSE)
+
+    a <- list(
+        unlist(apply(x, 2, function(y) which(y != 0)), use.names = FALSE),
+        rep(seq_along(z), z),
+        x[apply(x, 2, function(y) y != 0)],
+        nrow(x),
+        ncol(x),
+        dimnames(x)
+    )
+    
+    attributes(a) <- list(
+            class = c("DocumentTermMatrix", "simple_triplet_matrix"),
+            Weighting = c("term frequency", "tf")
+    )
+    
+    names(a) <- c("i", "j", "v", "nrow", "ncol", "dimnames")
+    a
+}
+
+#' Transposes a DocumentTermMatrix object
+#' 
+#' Transposes a DocumentTermMatrix object
+#' 
+#' @param x The DocumentTermMatrix object
+#' @param \ldots ignored
+#' @S3method t DocumentTermMatrix
+#' @method t DocumentTermMatrix
+t.DocumentTermMatrix <- function(x, ...) {
+     
+    x <- t(as.matrix(x))
+
+    z <- unlist(apply(x, 2, function(y) sum(y != 0)), use.names = FALSE)
+
+    a <- list(
+        unlist(apply(x, 2, function(y) which(y != 0)), use.names = FALSE),
+        rep(seq_along(z), z),
+        x[apply(x, 2, function(y) y != 0)],
+        nrow(x),
+        ncol(x),
+        dimnames(x)
+    )
+    
+
+    attributes(a) <- list(
+            class = c("TermDocumentMatrix", "simple_triplet_matrix"),
+            Weighting = c("term frequency", "tf")
+    )
+    
+    names(a) <- c("i", "j", "v", "nrow", "ncol", "dimnames")
+    a
 }

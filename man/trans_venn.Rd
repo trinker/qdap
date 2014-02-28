@@ -69,8 +69,9 @@ Produce a Venn diagram by grouping variable.
   The algorithm used to overlap the Venn circles becomes
   increasingly overburdened and less accurate with
   increased grouping variables. An alternative is to use a
-  network plot with dissimilarity measures labeling the
-  edges between nodes (grouping variables).
+  network plot with \{code{\link[qdap]{Dissimilarity}}
+  measures labeling the edges between nodes (grouping
+  variables) or a heat map (\code{\link[qdap]{qheat}}).
 }
 \examples{
 \dontrun{

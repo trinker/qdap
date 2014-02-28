@@ -248,8 +248,8 @@ function(text.var, grouping.var = NULL, as.list = FALSE) {
     if (as.list) {
         return(L1)
     }
-    DF <- data.frame(x=names(L1), text.var=unlist(L1))
-    names(DF)[1] <- G
+    DF <- data.frame(x=names(L1), text.var=unlist(L1), row.names=NULL)
+    colnames(DF)[1] <- G
     DF
 }
 

@@ -52,7 +52,7 @@
 #' v_outer(mat, cos_sim)
 #' 
 #' v_outer(with(DATA, wfm(state, person)), cos_sim)
-#' with(DATA, dissimilarity(state, person))
+#' with(DATA, Dissimilarity(state, person))
 #' }
 v_outer <- 
 function(x, FUN, ...){

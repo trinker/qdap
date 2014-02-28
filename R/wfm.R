@@ -35,6 +35,15 @@
 #' nchar_range(with(DATA, wfm(state, list(sex, adult))), 5)
 #' with(DATA, wfm(state, list(sex, adult)))
 #' 
+#' ## Filter particular words based on max/min values
+#' v <- with(DATA, wfm(state, list(sex, adult)))
+#' Filter(v, 5)
+#' Filter(v, 5, count.apostrophe = FALSE)
+#' Filter(v, 5, 7)
+#' Filter(v, 4, 4)
+#' Filter(v, 3, 4)
+#' Filter(v, 3, 4, stopwords = Top25Words)
+#' 
 #' ## insert double tilde ("~~") to keep phrases(i.e., first last name)
 #' alts <- c(" fun", "I ")
 #' state2 <- space_fill(DATA$state, alts, rm.extra = FALSE)
@@ -192,10 +201,10 @@
 #' 
 #' ## Weight a wfm
 #' WFM <- with(DATA, wfm(state, list(sex, adult)))
-#' plot(wfm_weight(WFM, "scaled"), TRUE)
-#' wfm_weight(WFM, "prop")
-#' wfm_weight(WFM, "max")
-#' wfm_weight(WFM, "scaled")
+#' plot(weight(WFM, "scaled"), TRUE)
+#' weight(WFM, "prop")
+#' weight(WFM, "max")
+#' weight(WFM, "scaled")
 #' }
 wfm <- 
 function(text.var = NULL, grouping.var = NULL, output = "raw", stopwords = NULL, 
@@ -594,10 +603,9 @@ summary.wfdf <- function(object, ...) {
 
 #' Weighted Word Frequency Matrix
 #' 
-#' \code{wfm_weight} - Weight a word frequency matrix for analysis were such 
+#' \code{weight} - Weight a word frequency matrix for analysis where such 
 #' weighting is sensible.
 #' 
-#' @param wfm.object A \code{\link[qdap]{wfm}} object.
 #' @param type The type of weighting to use: c(\code{"prop"}, \code{"max"}, 
 #' \code{"scaled"}).  All weight by column.  \code{"prop"} uses a proportion
 #' weighting and all columns sum to 1.  \code{"max"} weights in proportion to 
@@ -607,12 +615,14 @@ summary.wfdf <- function(object, ...) {
 #' equal.
 #' @rdname Word_Frequency_Matrix
 #' @export
-#' @return \code{wfm_weight} - Returns a weighted matrix for use with other R 
+#' @return \code{weight} - Returns a weighted matrix for use with other R 
 #' packages. The output is not of the class "wfm".
-wfm_weight <- function(wfm.object, type = "prop") {
+#' @S3method weight wfm
+#' @method weight wfm
+weight.wfm <- function(x, type = "prop", ...) {
 
-    if (is(wfm.object, "wfdf") && !is(wfm.object, "f.df")) {
-        wfm.object <- wfm(wfm.object)
+    if (is(x, "wfdf") && !is(x, "f.df")) {
+        x <- wfm(x)
     }
   
     types <- c("prop", "max", "scaled")
@@ -626,13 +636,53 @@ wfm_weight <- function(wfm.object, type = "prop") {
         max = {FUN <- function(x) apply(x, 2, function(y) round(y *(max(x)/max(y)), 0))},
         scaled = {FUN <- function(x) {
                 o <- apply(x, 2, function(y) scale(y, FALSE))
-                rownames(o) <- rownames(wfm.object)
+                rownames(o) <- rownames(x)
                 o
             }} ,
         stop("`type` must be one of c(\"prop\", \"max\", \"scaled\")")
     )
 
-    out <- FUN(wfm.object)
+    out <- FUN(x)
+    class(out) <- c("weighted_wfm", class(out))
+    attributes(out)[["Weighting"]] <- type
+
+    out
+}
+
+#' Weighted Word Frequency Matrix
+#' 
+#' \code{weight.wfdf} - Weight a word frequency matrix for analysis where such 
+#' weighting is sensible.
+#' 
+#' @rdname Word_Frequency_Matrix
+#' @S3method weight wfm
+#' @method weight wfm
+weight.wfdf <- function(x, type = "prop", ...) {
+
+    if (is(x, "wfdf") && !is(x, "f.df")) {
+        x <- wfm(x)
+    } else {
+        stop(paste("no applicable method for 'weight' applied to an object of", "class \"wfdf\" that is proportional"))
+    }
+  
+    types <- c("prop", "max", "scaled")
+
+    if (is.numeric(type)) {
+        type <- types[type]
+    }
+
+    switch(type,
+        prop = {FUN <- function(x) apply(x, 2, function(y) y/sum(y))},
+        max = {FUN <- function(x) apply(x, 2, function(y) round(y *(max(x)/max(y)), 0))},
+        scaled = {FUN <- function(x) {
+                o <- apply(x, 2, function(y) scale(y, FALSE))
+                rownames(o) <- rownames(x)
+                o
+            }} ,
+        stop("`type` must be one of c(\"prop\", \"max\", \"scaled\")")
+    )
+
+    out <- FUN(x)
     class(out) <- c("weighted_wfm", class(out))
     attributes(out)[["Weighting"]] <- type
 
@@ -691,24 +741,70 @@ plot.weighted_wfm <- function(x, non.zero = FALSE, digits = 0, by.column = NULL,
 
 #' Word Frequency Matrix
 #' 
-#' \code{nchar_range} - Grab words from a wfm that meet max/min word length 
+#' \code{Filter} - Filter words from a wfm that meet max/min word length 
 #' criteria.
 #' 
+#' @param x A \code{\link[qdap]{wfm}} object.
 #' @param min Minimum word length.
 #' @param max Maximum word length.
+#' @param count.apostrophe logical.  If \code{TRUE} apostrophes are counted as 
+#' characters.
+#' @param stopwords An optional vector of stop words to remove.
 #' @rdname Word_Frequency_Matrix
 #' @export
-#' @return \code{nchar_range} - Returns a matrix of the class "wfm".
-nchar_range <- function(wfm.object, min = 1, max = Inf) {
+#' @return \code{Filter} - Returns a matrix of the class "wfm".
+Filter <-
+function(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL, ...){
+    min
+    max
+    count.apostrophe
+    stopwords
+    UseMethod("Filter")
+}
 
-    if (!"wfm" %in% class(wfm.object)) {
-        warning("wfm.object not a matrix of class `wfm`", immediate. = TRUE)
+#' Word Frequency Matrix
+#' 
+#' \code{Filter.wfm} - Filter words from a wfm that meet max/min word length 
+#' criteria.
+#' 
+#' @param x A \code{\link[qdap]{wfm}} object.
+#' @param min Minimum word length.
+#' @param max Maximum word length.
+#' @param count.apostrophe logical.  If \code{TRUE} apostrophes are counted as 
+#' characters.
+#' @param stopwords An optional vector of stop words to remove.
+#' @param \ldots ignored.
+#' wfm Method for Filter
+#' @rdname Word_Frequency_Matrix.
+#' @export
+#' @method Filter wfm
+Filter.wfm <- 
+function(x, min = 1, max = Inf, count.apostrophe = TRUE, 
+    stopwords = NULL, ...) {
+
+    if (!is.null(stopwords)) {
+        x <- x[!rownames(x) %in% stopwords, ]
     }
 
-    lens <- nchar(rownames(wfm.object))
-    as.wfm(wfm.object[lens >= min & lens <= max, ])
+    nms <- rownames(x)
+    if (!count.apostrophe) {
+        nms <- gsub("'", "", nms)
+    }
+
+    lens <- nchar(nms)
+    as.wfm(x[lens >= min & lens <= max, ])
 
 }
+
+
+#' @S3method Filter default  
+Filter.default <- 
+function(..., min = 1, max = Inf, count.apostrophe, 
+    stopwords = NULL, x){
+        LIS <- list(...)
+        return(Filter.wfm(LIS, min, max, count.apostrophe))
+}
+
 
 #' Word Frequency Matrix
 #' 

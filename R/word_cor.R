@@ -9,7 +9,7 @@
 #' @param word The word(s) vector to find associated words for.
 #' @param r The correlation level find associated words for.  If positive this
 #' is the minimum value, if negative this is the maximum value.
-#' @param values logical.  If \code{TRUE}returns the named correlates (names are 
+#' @param values logical.  If \code{TRUE} returns the named correlates (names are 
 #' the words).  If \code{FALSE} only the associated words are returned.
 #' @param method A character string indicating which correlation coefficient is 
 #' to be computed (\code{"pearson"}, \code{"kendall"}, or \code{"spearman"}).
@@ -82,6 +82,23 @@
 #' out <- word_cor(t(z), word = c(names(worlis), "else.words"), r = NULL)
 #' out
 #' plot(out)
+#' 
+#' ## Additional plotting/viewing
+#' require(tm)
+#' data("crude")
+#' 
+#' out <- word_cor(t(tm_corpus2wfm(crude)), word = "oil", r=.7)
+#' vect2df(out[[1]], "word", "cor")
+#' 
+#' qheat(vect2df(out[[1]], "word", "cor"), values=TRUE, high="red", 
+#'     digits=2, order.by ="cor", plot=FALSE) + coord_flip()
+#' ggplot(vect2df(out[[1]], "word", "cor"), aes(cor, word)) + geom_point()
+#' 
+#' 
+#' out2 <- word_cor(t(tm_corpus2wfm(crude)), word = c("oil", "country"), r=.7)
+#' ggplot(list_vect2df(out2, "word", "comp_word", "cor"), aes(cor, comp_word)) + 
+#'     geom_point() + 
+#'     facet_grid(word~., space="free_y", scales="free_y")
 #' }
 word_cor <- function(text.var, grouping.var = NULL, word, r = .7, 
     values = TRUE, method = "pearson", ...) {
@@ -107,7 +124,7 @@ word_cor <- function(text.var, grouping.var = NULL, word, r = .7,
     if (sum(test1) < 2) {
         if (is.null(r) & sum(test1) == 1) {
             warning(sprintf("Only `%s` was found in the data set.  NULL returned", word))
-            return(NULL)
+          #  return(NULL)
         } else {
             if (sum(test1) == 0) {
                 warning("No words found in the data set.  NULL returned")
@@ -181,19 +198,27 @@ plot.word_cor <- function(x, label = TRUE, lab.digits = 3, high="red",
 
 
 cor_help1 <- function(n, m, o, sORw, vals, positive, meth) {
+
     L <- sapply(m[, !colnames(m) %in% tolower(n)], function(x) {
-        cor(x, m[, tolower(n)], method = meth)
+        suppressWarnings(cor(x, m[, tolower(n)], method = meth))
     })
+
+    NAS <- is.na(L)
+    if(sum(NAS) > 0) {
+        warning("The sd on the following words was 0:\n", 
+            paste(names(L[NAS]), collapse=", "))
+        L <- L[!NAS]
+    }
 
     if (positive) {
         extr <- L > o
         phr <- "at least"
     } else {
-        extr <- L < o
+        extr <- L <= o
         phr <- "less than or equal to"
     }
 
-    if (all(sapply(extr, is.na)) | sum(extr) == 0) {
+    if (all(sapply(extr, is.na)) | sum(extr, na.rm = TRUE) == 0) {
         if (sORw) {
             stop(sprintf("No words correlate %s %s", phr, o))
         } else {

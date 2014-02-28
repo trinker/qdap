@@ -1,17 +1,17 @@
-\name{print.dissimilarity}
-\alias{print.dissimilarity}
-\title{Prints a dissimilarity object}
+\name{print.Dissimilarity}
+\alias{print.Dissimilarity}
+\title{Prints a Dissimilarity object}
 \usage{
-\method{print}{dissimilarity}(x, digits = 3, ...)
+\method{print}{Dissimilarity}(x, digits = 3, ...)
 }
 \arguments{
-  \item{x}{The dissimilarity object}
+  \item{x}{The Dissimilarity object}
 
   \item{digits}{Number of decimal places to print.}
 
   \item{\ldots}{ignored}
 }
 \description{
-Prints a dissimilarity object.
+Prints a Dissimilarity object.
 }
 

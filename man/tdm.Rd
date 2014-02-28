@@ -71,12 +71,11 @@ df2tm_corpus(text.var, grouping.var = NULL, ...)
 \code{\link[tm]{DocumentTermMatrix}}.
 
 \code{tm2qdap} - Returns a \code{\link[qdap]{wfm}} object
-or \code{\link[qdap]{wfm_weight}} object.
+or \code{weight} object.
 
 \code{apply_as_tm} - Applies a tm oriented function to a
 \code{\link[qdap]{wfm}} and attempts to simplify back to a
-\code{\link[qdap]{wfm}} or \code{\link[qdap]{wfm_weight}}
-format.
+\code{\link[qdap]{wfm}} or \code{weight} format.
 
 \code{tm_corpus2df} - Converts a \code{\link[tm]{Corpus}}
 and returns a qdap oriented dataframe.

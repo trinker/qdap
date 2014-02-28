@@ -23,13 +23,13 @@ And constructed with the following guidelines:
 
 <b>NEW FEATURES</b>
 
+* `Filter` added to give the ability to provide a range of character 
+  lengths to filter from a `wfm` object.
+
 <b>MINOR FEATURES</b>
 
 * `tm_corpus2wfm` added to quickly convert from a tm package `Corpus` to a <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>
   `wfm` object.
-
-* `nchar_range` added to give the ability to provide a range of character 
-  lengths to filter from a `wfm` object.
 
 * `as.wfm` added as a means to attempt to coerce a matrix to a `wfm` object.
 
@@ -43,6 +43,10 @@ IMPROVEMENTS
 * `matrix2df` now accepts a simple_triplet_matrix object as well.
 
 <b>CHANGES</b>
+
+* `dissimilarity` has been renamed to `Dissimilarity` to prevent tm package 
+  conflicts.  The old version has been deprecated and will be removed in a the
+  next version minor/major push to CRAN.
 
 
 

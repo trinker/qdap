@@ -1,7 +1,11 @@
-\name{dissimilarity}
+\name{Dissimilarity}
+\alias{Dissimilarity}
 \alias{dissimilarity}
 \title{Dissimilarity Statistics}
 \usage{
+Dissimilarity(text.var, grouping.var = NULL, method = "prop",
+  diag = FALSE, upper = FALSE, p = 2, ...)
+
 dissimilarity(text.var, grouping.var = NULL, method = "prop",
   diag = FALSE, upper = FALSE, p = 2, ...)
 }
@@ -40,11 +44,11 @@ statistics by grouping variables.
 }
 \examples{
 \dontrun{
-with(DATA, dissimilarity(state, list(sex, adult)))
-with(DATA, dissimilarity(state, person, diag = TRUE))
+with(DATA, Dissimilarity(state, list(sex, adult)))
+with(DATA, Dissimilarity(state, person, diag = TRUE))
 
 ## Clustering: Dendrogram
-(x <- with(pres_debates2012, dissimilarity(dialogue, list(person, time))))
+(x <- with(pres_debates2012, Dissimilarity(dialogue, list(person, time))))
 fit <- hclust(x)
 plot(fit)
 ## draw dendrogram with red borders around the 3 clusters
@@ -63,7 +67,7 @@ pvrect(fit, alpha=.95)
 ## http://bodongchen.com/blog/?p=301
 
 ## Fit it: 2-D
-(diss <- with(pres_debates2012, dissimilarity(dialogue, list(person, time),
+(diss <- with(pres_debates2012, Dissimilarity(dialogue, list(person, time),
     method = "euclidean")))
 fit <- cmdscale(diss, eig = TRUE, k = 2)
 
@@ -90,6 +94,14 @@ scatterplot3d(fit$points[, 1], fit$points[, 2], fit$points[, 3], color = points$
 legend("bottomright", title="Person",
    qcv(Obama, Romney, Other), fill=qcv(blue, red, yellow))
 legend("topleft",  paste("Time", 1:3), pch=c(15, 17, 19))
+
+## Compare to Cosine Similarity
+cos_sim <- function(x, y) x \%*\% y / sqrt(x\%*\%x * y\%*\%y)
+mat <- matrix(rbinom(500, 0:1, .45), ncol=10)
+v_outer(mat, cos_sim)
+
+v_outer(with(DATA, wfm(state, person)), cos_sim)
+with(DATA, dissimilarity(state, person))
 }
 }
 \seealso{
