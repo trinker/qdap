@@ -43,11 +43,13 @@
 #' htruncdf(AR1,, 15)
 #' AR2 <- with(rajSPLIT, automated_readability_index(dialogue, list(sex, fam.aff)))
 #' htruncdf(AR2,, 15)
+#' plot(AR1)
 #' 
 #' CL1 <- with(rajSPLIT, coleman_liau(dialogue, list(person, act)))
 #' head(CL1)
 #' CL2 <- with(rajSPLIT, coleman_liau(dialogue, list(sex, fam.aff)))
 #' head(CL2)
+#' plot(CL1)
 #' 
 #' SM1 <- with(rajSPLIT, SMOG(dialogue, list(person, act)))
 #' head(SM1)
@@ -99,6 +101,10 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
+    }   
+    if (is.dp(text.var = DF[, "text.var"])) {
+        warning(paste0("\n  Some rows contain double punctuation.", 
+            "  Suggested use of sentSplit function."))
     }    
     DF$word.count <- word_count(DF$text.var, missing = 0)
     i <- as.data.frame(table(DF$group))
@@ -115,8 +121,43 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         ari(tse = sentence.count, tc = character.count, tw = word.count)), 
         digits = 1)
     names(DF2)[1] <- G
+    class(DF2) <- c("automated_readability_index", class(DF2))
     DF2
 }
+
+#' Plots a automated_readability_index Object
+#' 
+#' Plots a automated_readability_index object.
+#' 
+#' @param x The automated_readability_index object.
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes guide_colorbar geom_point theme ggplotGrob theme_bw ylab xlab scale_fill_gradient element_blank guides 
+#' @importFrom gridExtra grid.arrange
+#' @method plot automated_readability_index
+#' @export
+plot.automated_readability_index <- function(x, ...){ 
+
+    x  <- x[order(x[, "Automated_Readability_Index"]), ]
+    x[, 1] <- factor(x[, 1], levels = x[, 1])
+    forlater <-  names(x)[1]
+    names(x)[1] <- "grvar"
+    plot1 <- ggplot(x, aes(fill = word.count, x = sentence.count, 
+        y = character.count)) + geom_point(size=2.75, shape=21, colour="grey65") +
+        theme_bw() + 
+        scale_fill_gradient(high="red", low="pink", name="Word\nCount") +
+        ylab("Character Count") + 
+        xlab("Sentence Count") + 
+        theme(panel.grid = element_blank(),
+            legend.position = "bottom") +
+        guides(fill = guide_colorbar(barwidth = 10, barheight = .5)) 
+    plot2 <- ggplot(x, aes(y = grvar, x = Automated_Readability_Index)) +
+        geom_point(size=2) + 
+        ylab(gsub("&", " & ", forlater)) + 
+        xlab("Automated Readability Index")
+
+    grid.arrange(plot2, plot1, ncol=2)
+}
+
 
 #' Coleman Liau Readability
 #' 
@@ -157,6 +198,10 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
+    if (is.dp(text.var = DF[, "text.var"])) {
+        warning(paste0("\n  Some rows contain double punctuation.", 
+            "  Suggested use of sentSplit function."))
+    }    
     DF$word.count <- word_count(DF$text.var, missing = 0, digit.remove = FALSE)
     i <- as.data.frame(table(DF$group))
     DF$group <- DF$group[ , drop=TRUE]
@@ -173,7 +218,41 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF2$Coleman_Liau <- round(with(DF2, clf(tse = sentence.count, 
         tc = character.count, tw = word.count)), digits = 1)
     names(DF2)[1] <- G
+    class(DF2) <- c("coleman_liau", class(DF2))
     DF2
+}
+
+#' Plots a coleman_liauObject
+#' 
+#' Plots a coleman_liauobject.
+#' 
+#' @param x The coleman_liauobject.
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes guide_colorbar geom_point theme ggplotGrob theme_bw ylab xlab scale_fill_gradient element_blank guides 
+#' @importFrom gridExtra grid.arrange
+#' @method plot coleman_liau
+#' @export
+plot.coleman_liau<- function(x, ...){ 
+
+    x  <- x[order(x[, "Coleman_Liau"]), ]
+    x[, 1] <- factor(x[, 1], levels = x[, 1])
+    forlater <-  names(x)[1]
+    names(x)[1] <- "grvar"
+    plot1 <- ggplot(x, aes(fill = word.count, x = sentence.count, 
+        y = character.count)) + geom_point(size=2.75, shape=21, colour="grey65") +
+        theme_bw() + 
+        scale_fill_gradient(high="red", low="pink", name="Word\nCount") +
+        ylab("Character Count") + 
+        xlab("Sentence Count") + 
+        theme(panel.grid = element_blank(),
+            legend.position = "bottom") +
+        guides(fill = guide_colorbar(barwidth = 10, barheight = .5)) 
+    plot2 <- ggplot(x, aes(y = grvar, x = Coleman_Liau)) +
+        geom_point(size=2) + 
+        ylab(gsub("&", " & ", forlater)) + 
+        xlab("Coleman Liau")
+
+    grid.arrange(plot2, plot1, ncol=2)
 }
 
 
@@ -219,6 +298,10 @@ function(text.var, grouping.var = NULL, output = "valid",
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
+    if (is.dp(text.var = DF[, "text.var"])) {
+        warning(paste0("\n  Some rows contain double punctuation.", 
+            "  Suggested use of sentSplit function."))
+    }    
     DF$word.count <- word_count(DF$text.var, missing = 0)
     i <- as.data.frame(table(DF$group))
     if (output == "valid") {
@@ -283,6 +366,10 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
+    }
+    if (is.dp(text.var = DF[, "text.var"])) {
+        warning(paste0("\n  Some rows contain double punctuation.", 
+            "  Suggested use of sentSplit function."))
     }
     DF$word.count <- word_count(DF$text.var, missing = 0)
     DF$syllable.count <- syllable_sum(DF$text.var)

@@ -91,11 +91,13 @@ AR1 <- with(rajSPLIT, automated_readability_index(dialogue, list(person, act)))
 htruncdf(AR1,, 15)
 AR2 <- with(rajSPLIT, automated_readability_index(dialogue, list(sex, fam.aff)))
 htruncdf(AR2,, 15)
+plot(AR1)
 
 CL1 <- with(rajSPLIT, coleman_liau(dialogue, list(person, act)))
 head(CL1)
 CL2 <- with(rajSPLIT, coleman_liau(dialogue, list(sex, fam.aff)))
 head(CL2)
+plot(CL1)
 
 SM1 <- with(rajSPLIT, SMOG(dialogue, list(person, act)))
 head(SM1)
