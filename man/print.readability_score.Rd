@@ -1,0 +1,18 @@
+\name{print.readability_score}
+\alias{print.readability_score}
+\title{Prints a readability_score Object}
+\usage{
+\method{print}{readability_score}(x, digits = 3, ...)
+}
+\arguments{
+  \item{x}{The readability_score object.}
+
+  \item{digits}{The number of digits displayed if
+  \code{values} is \code{TRUE}.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Prints a readability_score object.
+}
+

@@ -264,9 +264,9 @@ function(text.var = NULL, grouping.var = NULL, output = "raw", stopwords = NULL,
 }
 
 
-#' Prints an wfm Object
+#' Prints a wfm Object
 #' 
-#' Prints an wfm object.
+#' Prints a wfm object.
 #' 
 #' @param x The wfm object.
 #' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
@@ -766,15 +766,8 @@ function(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL, ...){
 #' \code{Filter.wfm} - Filter words from a wfm that meet max/min word length 
 #' criteria.
 #' 
-#' @param x A \code{\link[qdap]{wfm}} object.
-#' @param min Minimum word length.
-#' @param max Maximum word length.
-#' @param count.apostrophe logical.  If \code{TRUE} apostrophes are counted as 
-#' characters.
-#' @param stopwords An optional vector of stop words to remove.
-#' @param \ldots ignored.
 #' wfm Method for Filter
-#' @rdname Word_Frequency_Matrix.
+#' @rdname Word_Frequency_Matrix
 #' @export
 #' @method Filter wfm
 Filter.wfm <- 

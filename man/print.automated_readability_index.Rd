@@ -1,0 +1,18 @@
+\name{print.automated_readability_index}
+\alias{print.automated_readability_index}
+\title{Prints an automated_readability_index Object}
+\usage{
+\method{print}{automated_readability_index}(x, digits = 3, ...)
+}
+\arguments{
+  \item{x}{The automated_readability_index object.}
+
+  \item{digits}{The number of digits displayed if
+  \code{values} is \code{TRUE}.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Prints an automated_readability_index object.
+}
+

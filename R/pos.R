@@ -162,8 +162,8 @@ tagPOS <-  function(text.var, PTA, ...) {
     ## Need sentence and word token annotations.
     word_token_annotator <- Maxent_Word_Token_Annotator()
     a2 <- Annotation(1L, "sentence", 1L, nchar(s))
-    a2 <- annotate(s, word_token_annotator, a2)
-    a3 <- annotate(s, PTA, a2)
+    a2 <- NLP::annotate(s, word_token_annotator, a2)
+    a3 <- NLP::annotate(s, PTA, a2)
 
     ## Determine the distribution of POS tags for word tokens.
     a3w <- a3[a3$type == "word"]

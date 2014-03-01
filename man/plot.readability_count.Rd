@@ -1,0 +1,17 @@
+\name{plot.readability_count}
+\alias{plot.readability_count}
+\title{Plots a readability_count Object}
+\usage{
+\method{plot}{readability_count}(x, alpha = 0.3, ...)
+}
+\arguments{
+  \item{x}{The readability_count object.}
+
+  \item{alpha}{The alpha level to use for points.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Plots a readability_count object.
+}
+

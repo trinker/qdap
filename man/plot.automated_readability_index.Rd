@@ -5,7 +5,7 @@
 \method{plot}{automated_readability_index}(x, ...)
 }
 \arguments{
-  \item{x}{The automated_readability_index object.}
+  \item{x}{The readability_score object.}
 
   \item{\ldots}{ignored}
 }

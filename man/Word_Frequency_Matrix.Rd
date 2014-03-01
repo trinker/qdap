@@ -1,5 +1,6 @@
 \name{wfm}
 \alias{Filter}
+\alias{Filter.wfm}
 \alias{as.wfm}
 \alias{weight.wfdf}
 \alias{weight.wfm}
@@ -25,6 +26,9 @@ wfm_combine(wf.obj, word.lists, matrix = TRUE)
 
 Filter(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL,
   ...)
+
+\method{Filter}{wfm}(x, min = 1, max = Inf, count.apostrophe = TRUE,
+  stopwords = NULL, ...)
 
 as.wfm(matrix.object)
 }
@@ -131,8 +135,14 @@ analysis where such weighting is sensible.
 \code{Filter} - Filter words from a wfm that meet max/min
 word length criteria.
 
+\code{Filter.wfm} - Filter words from a wfm that meet
+max/min word length criteria.
+
 \code{as.wfm} - Attempts to coerce a matrix to a
 \code{\link[qdap]{wfm}}.
+}
+\details{
+wfm Method for Filter
 }
 \note{
 Words can be kept as one by inserting a double tilde

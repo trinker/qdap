@@ -1,6 +1,6 @@
 \name{print.wfm}
 \alias{print.wfm}
-\title{Prints an wfm Object}
+\title{Prints a wfm Object}
 \usage{
 \method{print}{wfm}(x, digits = 3, ...)
 }
@@ -13,6 +13,6 @@
   \item{\ldots}{ignored}
 }
 \description{
-Prints an wfm object.
+Prints a wfm object.
 }
 

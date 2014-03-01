@@ -10,10 +10,13 @@
 #' @param rm.incomplete logical.  If \code{TRUE} removes incomplete sentences 
 #' from the analysis.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{end_inc}}.
-#' @return Returns a dataframe with selected readability statistic by grouping 
-#' variable(s).  The \code{frey} function returns a graphic representation of 
-#' the readability as well as a list of two dataframe: 1) \code{SENTENCES_USED} 
-#' and 2) \code{SENTENCE_AVERAGES}.
+#' @return Returns a list of 2 dataframes: (1) Counts and (2) Readability.  
+#' Counts are the raw scores used to calculate readability score and can be
+#' accessed via \code{\link[qdap]{counts}}.  Readability is the dataframe
+#' with the selected readability statistic by grouping variable(s) and can be 
+#' access via \code{\link[qdap]{counts}} (\code{\link[qdap]{fry}} does not 
+#' contain scores).  The \code{frey} function returns a graphic representation of 
+#' the readability.
 #' @rdname Readability
 #' @section Warning: Many of the indices (e.g., Automated Readability Index) 
 #' are derived from word difficulty (letters per word) and sentence difficulty 
@@ -40,10 +43,25 @@
 #' @examples
 #' \dontrun{
 #' AR1 <- with(rajSPLIT, automated_readability_index(dialogue, list(person, act)))
-#' htruncdf(AR1,, 15)
-#' AR2 <- with(rajSPLIT, automated_readability_index(dialogue, list(sex, fam.aff)))
-#' htruncdf(AR2,, 15)
+#' ltruncdf(AR1,, 15)
+#' scores(AR1)
+#' counts(AR1)
 #' plot(AR1)
+#' plot(counts(AR1))
+#' 
+#' AR2 <- with(rajSPLIT, automated_readability_index(dialogue, list(sex, fam.aff)))
+#' ltruncdf(AR2,, 15)
+#' scores(AR2)
+#' counts(AR2)
+#' plot(AR2)
+#' plot(counts(AR2))
+#' 
+#' AR3 <- with(rajSPLIT, automated_readability_index(dialogue, person))
+#' ltruncdf(AR3,, 15)
+#' scores(AR3)
+#' counts(AR3)
+#' plot(AR3)
+#' plot(counts(AR3))
 #' 
 #' CL1 <- with(rajSPLIT, coleman_liau(dialogue, list(person, act)))
 #' head(CL1)
@@ -117,46 +135,29 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF2$character.count <- aggregate(character.count ~ 
         group, DF, sum)$character.count 
     ari <- function(tse, tw, tc) 4.71*(tc/tw) + .5*(tw/tse) - 21.43
-    DF2$Automated_Readability_Index <- round(with(DF2, 
-        ari(tse = sentence.count, tc = character.count, tw = word.count)), 
-        digits = 1)
+    DF2$Automated_Readability_Index <- with(DF2, 
+        ari(tse = sentence.count, tc = character.count, tw = word.count))
+    rownames(DF) <- NULL
     names(DF2)[1] <- G
-    class(DF2) <- c("automated_readability_index", class(DF2))
-    DF2
+    o <- list(Counts = DF, Readability = DF2)
+    class(o) <- c("automated_readability_index", class(DF2))
+    o
 }
 
-#' Plots a automated_readability_index Object
+
+#' Prints an automated_readability_index Object
 #' 
-#' Plots a automated_readability_index object.
+#' Prints an automated_readability_index object.
 #' 
 #' @param x The automated_readability_index object.
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param \ldots ignored
-#' @importFrom ggplot2 ggplot aes guide_colorbar geom_point theme ggplotGrob theme_bw ylab xlab scale_fill_gradient element_blank guides 
-#' @importFrom gridExtra grid.arrange
-#' @method plot automated_readability_index
-#' @export
-plot.automated_readability_index <- function(x, ...){ 
-
-    x  <- x[order(x[, "Automated_Readability_Index"]), ]
-    x[, 1] <- factor(x[, 1], levels = x[, 1])
-    forlater <-  names(x)[1]
-    names(x)[1] <- "grvar"
-    plot1 <- ggplot(x, aes(fill = word.count, x = sentence.count, 
-        y = character.count)) + geom_point(size=2.75, shape=21, colour="grey65") +
-        theme_bw() + 
-        scale_fill_gradient(high="red", low="pink", name="Word\nCount") +
-        ylab("Character Count") + 
-        xlab("Sentence Count") + 
-        theme(panel.grid = element_blank(),
-            legend.position = "bottom") +
-        guides(fill = guide_colorbar(barwidth = 10, barheight = .5)) 
-    plot2 <- ggplot(x, aes(y = grvar, x = Automated_Readability_Index)) +
-        geom_point(size=2) + 
-        ylab(gsub("&", " & ", forlater)) + 
-        xlab("Automated Readability Index")
-
-    grid.arrange(plot2, plot1, ncol=2)
+#' @method print automated_readability_index 
+#' @S3method print automated_readability_index 
+print.automated_readability_index <- function(x, digits = 3, ...) {
+    print(scores(x), digits = digits, ...)
 }
+
 
 
 #' Coleman Liau Readability
@@ -218,8 +219,9 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF2$Coleman_Liau <- round(with(DF2, clf(tse = sentence.count, 
         tc = character.count, tw = word.count)), digits = 1)
     names(DF2)[1] <- G
-    class(DF2) <- c("coleman_liau", class(DF2))
-    DF2
+    o <- list(Counts = DF, Readability = DF2)
+    class(o) <- c("coleman_liau", class(DF2))
+    o
 }
 
 #' Plots a coleman_liauObject
@@ -234,6 +236,9 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
 #' @export
 plot.coleman_liau<- function(x, ...){ 
 
+    character.count <- sentence.count <- Coleman_Liau <- word.count <- grvar <- 
+        NULL
+    
     x  <- x[order(x[, "Coleman_Liau"]), ]
     x[, 1] <- factor(x[, 1], levels = x[, 1])
     forlater <-  names(x)[1]
@@ -628,4 +633,244 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF5 <- DF5[, c(2, 4, 6, 8)]
     names(DF5) <- c(G, "sent.per.100", "hard_easy_sum", "Linsear_Write")
     DF5
+}
+
+#' Readability Measures
+#' 
+#' \code{scores} - Access the readability scores from a readability function output.
+#' 
+#' @rdname Readability
+#' @export
+#' @return \code{scores} - Returns a data.frame of the class "readability_score".
+scores <-
+function(x, ...){
+    UseMethod("scores")
+}
+
+#' Readability Measures
+#' 
+#' \code{scores.automated_readability_index} - View scores from \code{\link[qdap]{automated_readability_index}}.
+#' 
+#' automated_readability_index Method for scores
+#' @rdname Readability
+#' @export
+#' @method scores automated_readability_index
+scores.automated_readability_index <- function(x, ...) {
+
+    out <- x[["Readability"]]
+    attributes(out) <- list(
+            class = c("readability_score", class(out)),
+            type = "automated_readability_index_scores",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+#' Prints a readability_score Object
+#' 
+#' Prints a readability_score object.
+#' 
+#' @param x The readability_score object.
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
+#' @param \ldots ignored
+#' @method print readability_score
+#' @S3method print readability_score
+print.readability_score <-
+    function(x, digits = 3, ...) {
+    class(x) <- "data.frame"
+    WD <- options()[["width"]]
+    options(width=3000)
+    x[, -1] <- round(x[, -1], digits = digits)
+    print(x)
+    options(width=WD)
+}
+
+#' Readability Measures
+#' 
+#' \code{count} - Access the readability count from a readability function output.
+#' 
+#' @param x A readability object (output from a readability function).
+#' @rdname Readability
+#' @export
+#' @return \code{count} - Returns a data.frame of the class "readability_count".
+counts <-
+function(x, ...){
+    UseMethod("counts")
+}
+
+#' Readability Measures
+#' 
+#' \code{counts.automated_readability_index} - View counts from \code{\link[qdap]{automated_readability_index}}.
+#' 
+#' automated_readability_index Method for counts.
+#' @rdname Readability
+#' @export
+#' @method counts automated_readability_index
+counts.automated_readability_index <- function(x, ...) {
+    out <- x[["Counts"]]
+    attributes(out) <- list(
+            class = c("readability_count", class(out)),
+            type = "automated_readability_index_count",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+
+#' Prints a readability_count Object
+#' 
+#' Prints a readability_count object.
+#' 
+#' @param x The readability_count object.
+#' @param digits The number of digits displayed.
+#' @param \ldots ignored
+#' @method print readability_count
+#' @S3method print readability_count
+print.readability_count <-
+    function(x, digits = 3, ...) {
+    class(x) <- "data.frame"
+    WD <- options()[["width"]]
+    options(width=3000)
+    print(x)
+    options(width=WD)
+}
+
+
+
+
+#' Plots a readability_count Object
+#' 
+#' Plots a readability_count object.
+#' 
+#' @param x The readability_count object.
+#' @param alpha The alpha level to use for points.
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes geom_point theme theme_minimal ylab xlab scale_size_continuous element_blank guides 
+#' @importFrom scales alpha
+#' @method plot readability_count
+#' @export
+plot.readability_count <- function(x, alpha = .3, ...){ 
+
+    type <- attributes(x)[["type"]]
+    switch(type,
+        automated_readability_index_count = {
+            word_counts(DF = x, x = "word.count", y = "character.count", 
+                z = NULL, g = "group", alpha = alpha)
+        },
+        stop("Not a plotable readability count")
+    )
+
+}
+
+#' Plots a readability_score Object
+#' 
+#' Plots a readability_score object.
+#' 
+#' @param x The readability_score object.
+#' @param alpha The alpha level to be used for the points.
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes geom_smooth facet_wrap guide_colorbar geom_point theme ggplotGrob theme_bw ylab xlab scale_fill_gradient element_blank guides 
+#' @importFrom gridExtra grid.arrange
+#' @importFrom scales alpha
+#' @method plot readability_score
+#' @export
+plot.readability_score <- function(x, alpha = .3, ...){ 
+
+    type <- attributes(x)[["type"]]
+
+    switch(type,
+        automated_readability_index_scores = {
+            plot_automated_readability_index(x)
+        },
+        stop("Not a plotable readability score")
+    )
+
+}
+
+plot_automated_readability_index <- function(x) {
+
+    character.count <- sentence.count <- Coleman_Liau <- word.count <- grvar <- 
+        Readability_count <-NULL
+
+    names(x)[ncol(x)] <- "Readability_count"
+    x  <- x[order(x[, "Readability_count"]), ]
+    x[, 1] <- factor(x[, 1], levels = x[, 1])
+    forlater <-  names(x)[1]
+    names(x)[1] <- "grvar"
+    plot1 <- ggplot(x, aes(fill = word.count, x = sentence.count, 
+        y = character.count)) + geom_point(size=2.75, shape=21, colour="grey65") +
+        theme_bw() + 
+        scale_fill_gradient(high="red", low="pink", name="Word\nCount") +
+        ylab("Character Count") + 
+        xlab("Sentence Count") + 
+        theme(panel.grid = element_blank(),
+            legend.position = "bottom") +
+        guides(fill = guide_colorbar(barwidth = 10, barheight = .5)) 
+    plot2 <- ggplot(x, aes(y = grvar, x = Readability_count)) +
+        geom_point(size=2) + 
+        ylab(gsub("&", " & ", forlater)) + 
+        xlab("Automated Readability Index")
+
+    grid.arrange(plot2, plot1, ncol=2)
+}
+
+#' Plots a automated_readability_index Object
+#' 
+#' Plots a automated_readability_index object.
+#' 
+#' @param x The readability_score object.
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes guide_colorbar geom_point theme ggplotGrob theme_bw ylab xlab scale_fill_gradient element_blank guides 
+#' @importFrom gridExtra grid.arrange
+#' @method plot automated_readability_index
+#' @export
+plot.automated_readability_index <- function(x, ...){ 
+
+    plot.readability_score(scores(x))
+
+}
+
+## Generic helper plotting function for counts
+word_counts <- function(DF, x, y, z = NULL, g, alpha = .3) {
+
+
+    NMS <- rename(c(x, y, z))
+
+    AES <- aes(x=x, y=y, color=g)
+    if (!is.null(z)) {
+        AES[["size"]] <- g
+    }
+    MAX <- max(DF[, y])
+
+    plot <- ggplot(data.frame(x=DF[, x], y=DF[, y], z=DF[, z], g=DF[, g]), AES) + 
+        geom_point(alpha=alpha) + facet_wrap(~g) + 
+        geom_smooth() + ylim(0, MAX + MAX*.05) +
+        guides(color=FALSE) +
+        ylab(NMS[2]) + xlab(NMS[1]) +
+        theme_minimal() + 
+        theme(panel.grid = element_blank(),
+            panel.margin = unit(1, "lines")) +
+        ggplot2::annotate("segment", x=-Inf, xend=Inf, y=-Inf, yend=-Inf)+
+        ggplot2::annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf)
+
+
+    if (!is.null(z)) {
+        plot <- plot + scale_size_continuous(names=gsub(" ", "\n", NMS[3]))
+    }
+
+    suppressMessages(suppressWarnings(print(plot)))
+
+}
+
+
+## Generic helper funciton for word_counts plotting to rename axi labels
+rename <- function(x) {
+
+    input <- c("word.count",  "character.count")
+    output <- c("Word Count", "Character Count")
+    mgsub(input, output, x)
+
 }
