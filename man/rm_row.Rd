@@ -3,7 +3,8 @@
 \alias{rm_row}
 \title{Remove Rows That Contain Markers}
 \usage{
-rm_row(dataframe, search.column, terms, keep.rownames = FALSE)
+rm_row(dataframe, search.column, terms, contains = FALSE,
+  ignore.case = FALSE, keep.rownames = FALSE, ...)
 
 rm_empty_row(dataframe)
 }
@@ -17,8 +18,20 @@ rm_empty_row(dataframe)
   removed from the dataframe.  The term/marker must appear
   at the beginning of the string and is case sensitive.}
 
+  \item{contains}{logical.  If \code{TRUE} \code{rm_row}
+  searches for the terms anywhere within the string.  If
+  \code{FALSE} \code{rm_row} searches only the begining of
+  the string.}
+
+  \item{ignore.case}{logical.  If \code{TRUE} case is
+  ignored during matching, if \code{FALSE}the pattern
+  matching is case sensitive.}
+
   \item{keep.rownames}{logical.  If \code{TRUE} the
   original, non-sequential, rownames will be used.}
+
+  \item{\ldots}{Other arguments passed to
+  \code{\link[base]{grepl}}.}
 }
 \value{
 \code{rm_row} - returns a dataframe with the
@@ -41,6 +54,8 @@ that are common in reading in data (default method in
 rm_row(DATA, "person", c("sam", "greg"))
 rm_row(DATA, 1, c("sam", "greg"))
 rm_row(DATA, "state", c("Comp"))
+rm_row(DATA, "state", c("I "))
+rm_row(DATA, "state", c("you"), contains = TRUE, ignore.case=TRUE)
 
 #rm_empty_row EXAMPLE:
 (dat <- rbind.data.frame(DATA[, c(1, 4)], matrix(rep(" ", 4),

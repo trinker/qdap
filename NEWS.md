@@ -26,6 +26,10 @@ And constructed with the following guidelines:
 * `Filter` added to give the ability to provide a range of character 
   lengths to filter from a `wfm` object.
 
+* `scores` generic method added to view scores from select <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> objects.
+
+* `counts` generic method added to view counts from select <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> objects.
+
 <b>MINOR FEATURES</b>
 
 * `tm_corpus2wfm` added to quickly convert from a tm package `Corpus` to a <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>
@@ -42,15 +46,18 @@ IMPROVEMENTS
 
 * `matrix2df` now accepts a simple_triplet_matrix object as well.
 
-* `word_cor` out put that was a list (not a correlation matrix) did not have a 
+* `word_cor` output that was a list (not a correlation matrix) did not have a 
   plot method.  The plot method for `word_cor` now handles both matrices and the 
   lsit of correlations.
+
+* `rm_row` picks up the `contains` argument that allows the user to search for, 
+  and remove rows of, within the string, not just the beginning.
 
 <b>CHANGES</b>
 
 * `dissimilarity` has been renamed to `Dissimilarity` to prevent tm package 
   conflicts.  The old version has been deprecated and will be removed in a the
-  next version minor/major push to CRAN.
+  next version (minor or major) push to CRAN.
 
 
 
