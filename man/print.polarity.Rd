@@ -1,17 +1,18 @@
 \name{print.polarity}
 \alias{print.polarity}
-\title{Prints a polarity Object}
+\title{Prints an polarity Object}
 \usage{
-\method{print}{polarity}(x, digits = NULL, ...)
+\method{print}{polarity}(x, digits = 3, ...)
 }
 \arguments{
   \item{x}{The polarity object.}
 
-  \item{digits}{Number of decimal places to print.}
+  \item{digits}{The number of digits displayed if
+  \code{values} is \code{TRUE}.}
 
   \item{\ldots}{ignored}
 }
 \description{
-Prints a polarity object.
+Prints an polarity object.
 }
 

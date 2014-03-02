@@ -169,26 +169,25 @@ run \code{\link[qdap]{sentSplit}}.
 \dontrun{
 with(DATA, polarity(state, list(sex, adult)))
 (poldat <- with(sentSplit(DATA, 4), polarity(state, person)))
-names(poldat)
-truncdf(poldat$all, 8)
-poldat$group
+counts(poldat)
+scores(poldat)
 plot(poldat)
 
 poldat2 <- with(mraja1spl, polarity(dialogue,
     list(sex, fam.aff, died)))
-colsplit2df(poldat2$group)
+colsplit2df(scores(poldat2))
 plot(poldat2)
 
 poldat3 <- with(rajSPLIT, polarity(dialogue, person))
-poldat3[["group"]][, "OL"] <- outlier_labeler(poldat3[["group"]][,
+poldat3[["group"]][, "OL"] <- outlier_labeler(scores(poldat3)[,
     "ave.polarity"])
-poldat3[["all"]][, "OL"] <- outlier_labeler(poldat3[["all"]][,
+poldat3[["all"]][, "OL"] <- outlier_labeler(counts(poldat3)[,
     "polarity"])
-head(poldat3[["group"]], 10)
-htruncdf(poldat3[["all"]], 15, 8)
+htruncdf(scores(poldat3), 10)
+htruncdf(counts(poldat3), 15, 8)
 plot(poldat3)
 plot(poldat3, nrow=4)
-qheat(poldat3[["group"]][, -7], high="red", order.b="ave.polarity")
+qheat(scores(poldat3)[, -7], high="red", order.b="ave.polarity")
 
 ## Create researcher defined polarity.frame
 POLENV <- polarity_frame(positive.words, negative.words)

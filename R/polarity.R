@@ -112,26 +112,25 @@
 #' \dontrun{
 #' with(DATA, polarity(state, list(sex, adult)))
 #' (poldat <- with(sentSplit(DATA, 4), polarity(state, person)))
-#' names(poldat)
-#' truncdf(poldat$all, 8)
-#' poldat$group
+#' counts(poldat)
+#' scores(poldat)
 #' plot(poldat)
 #' 
 #' poldat2 <- with(mraja1spl, polarity(dialogue, 
 #'     list(sex, fam.aff, died)))
-#' colsplit2df(poldat2$group)
+#' colsplit2df(scores(poldat2))
 #' plot(poldat2)
 #' 
 #' poldat3 <- with(rajSPLIT, polarity(dialogue, person))
-#' poldat3[["group"]][, "OL"] <- outlier_labeler(poldat3[["group"]][, 
+#' poldat3[["group"]][, "OL"] <- outlier_labeler(scores(poldat3)[, 
 #'     "ave.polarity"])
-#' poldat3[["all"]][, "OL"] <- outlier_labeler(poldat3[["all"]][, 
+#' poldat3[["all"]][, "OL"] <- outlier_labeler(counts(poldat3)[, 
 #'     "polarity"])
-#' head(poldat3[["group"]], 10)
-#' htruncdf(poldat3[["all"]], 15, 8)
+#' htruncdf(scores(poldat3), 10)
+#' htruncdf(counts(poldat3), 15, 8)
 #' plot(poldat3)
 #' plot(poldat3, nrow=4)
-#' qheat(poldat3[["group"]][, -7], high="red", order.b="ave.polarity")
+#' qheat(scores(poldat3)[, -7], high="red", order.b="ave.polarity")
 #' 
 #' ## Create researcher defined polarity.frame
 #' POLENV <- polarity_frame(positive.words, negative.words)
@@ -290,10 +289,127 @@ polarity <- function (text.var, grouping.var = NULL,
         total.sentences = sapply(sall, nrow),
         do.call(rbind, lall), row.names = NULL)
     colnames(group)[1] <- colnames(all)[1] <- G
-    o <- list(all = all, group = group, digits = digits)
-    class(o) <- "polarity"
+    o <- list(all = all, group = group)
+    attributes(o) <- list(
+            class = c("polarity", class(o)),
+            names = names(o),
+            digits = digits
+    )
     return(o)
 }
+
+
+#' Polarity
+#' 
+#' \code{scores.polarity} - View scores from \code{\link[qdap]{polarity}}.
+#' 
+#' polarity Method for scores
+#' @param x The polarity object.
+#' @param \ldots ignored
+#' @export
+#' @method scores polarity
+scores.polarity <- function(x, ...) {
+
+    out <- x[["group"]]
+    attributes(out) <- list(
+            class = c("polarity_score", class(out)),
+            type = "polarity_scores",
+            names = colnames(out),
+            row.names = rownames(out),
+            digits = attributes(x)[["digits"]]
+    )
+    out
+}
+
+#' Prints a polarity_score Object
+#' 
+#' Prints a polarity_score object.
+#' 
+#' @param x The polarity_score object.
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
+#' @param \ldots ignored
+#' @method print polarity_score
+#' @S3method print polarity_score
+print.polarity_score <-
+    function(x, digits = NULL, ...) {
+
+    WD <- options()[["width"]]
+    options(width=3000)
+
+    if (is.null(digits)) {
+        digits <- attributes(x)[["digits"]]
+    }
+    class(x) <- "data.frame"
+    x[, "ave.polarity"] <- round(x[, "ave.polarity"], digits = digits)
+    x[, "sd.polarity"] <- round(x[, "sd.polarity"], digits = digits)
+    x[, "stan.mean.polarity"] <- round(x[, "stan.mean.polarity"], 
+        digits = digits)
+    print(x)
+    options(width=WD)
+}
+
+
+#' Prints an polarity Object
+#' 
+#' Prints an polarity object.
+#' 
+#' @param x The polarity object.
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
+#' @param \ldots ignored
+#' @method print polarity
+#' @S3method print polarity
+print.polarity <- function(x, digits = 3, ...) {
+    print(scores(x), digits = digits, ...)
+}
+
+
+#' Polarity
+#' 
+#' \code{counts.polarity} - View counts from \code{\link[qdap]{polarity}}.
+#' 
+#' polarity Method for counts.
+#' @param x The polarity object.
+#' @param \ldots ignored
+#' @export
+#' @method counts polarity
+counts.polarity <- function(x, ...) {
+    out <- x[["all"]]
+    attributes(out) <- list(
+            class = c("polarity_count", class(out)),
+            type = "polarity_count",
+            names = colnames(out),
+            row.names = rownames(out),
+            digits = attributes(x)[["digits"]]
+    )
+    out
+}
+
+#' Prints a polarity_count Object
+#' 
+#' Prints a polarity_count object.
+#' 
+#' @param x The polarity_count object.
+#' @param digits The number of digits displayed.
+#' @param \ldots ignored
+#' @method print polarity_count
+#' @S3method print polarity_count
+print.polarity_count <-
+    function(x, digits = NULL, ...) {
+
+    if (is.null(digits)) {
+        digits <- attributes(x)[["digits"]]
+    }
+
+    class(x) <- "data.frame"
+    x[, "polarity"] <- round(x[, "polarity"], digits = digits)
+    WD <- options()[["width"]]
+    options(width=3000)
+    print(x)
+    options(width=WD)
+}
+
+
+
 
 
 
@@ -339,31 +455,8 @@ polarity_frame <- function(positives, negatives, pos.weights = 1,
         dat
     }
 }
-#' Prints a polarity Object
-#' 
-#' Prints a polarity object.
-#' 
-#' @param x The polarity object.
-#' @param digits Number of decimal places to print. 
-#' @param \ldots ignored
-#' @method print polarity
-#' @S3method print polarity
-print.polarity <- 
-function(x, digits = NULL, ...) {
-    message("POLARITY BY GROUP\n=================\n")
-    WD <- options()[["width"]]
-    options(width=3000)
-    y <- x$group
-    if (is.null(digits)) {
-        digits <- x$digits
-    }
-    y[, "ave.polarity"] <- round(y[, "ave.polarity"], digits = digits)
-    y[, "sd.polarity"] <- round(y[, "sd.polarity"], digits = digits)
-    y[, "stan.mean.polarity"] <- round(y[, "stan.mean.polarity"], 
-        digits = digits)
-    print(y)
-    options(width=WD)
-}
+
+
 
 #' Plots a polarity Object
 #' 
