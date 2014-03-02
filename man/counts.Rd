@@ -1,0 +1,20 @@
+\name{counts}
+\alias{counts}
+\title{Generic Counts Method}
+\usage{
+counts(x, ...)
+}
+\arguments{
+  \item{x}{A qdap object (list) with a count dataframe
+  (e.g., \code{\link[qdap]{fry}}).}
+
+  \item{\ldots}{Arguments passed to counts method of other
+  classes.}
+}
+\value{
+Returns a data.frame of counts.
+}
+\description{
+Access the count dataframes from select qdap outputs.
+}
+

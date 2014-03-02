@@ -1,0 +1,19 @@
+\name{scores.automated_readability_index}
+\alias{scores.automated_readability_index}
+\title{Readability Measures}
+\usage{
+\method{scores}{automated_readability_index}(x, ...)
+}
+\arguments{
+  \item{x}{The automated_readability_index object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+\code{scores.automated_readability_index} - View scores
+from \code{\link[qdap]{automated_readability_index}}.
+}
+\details{
+automated_readability_index Method for scores
+}
+

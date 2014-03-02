@@ -59,15 +59,18 @@
 #' AR3 <- with(rajSPLIT, automated_readability_index(dialogue, person))
 #' ltruncdf(AR3,, 15)
 #' scores(AR3)
-#' counts(AR3)
+#' head(counts(AR3))
 #' plot(AR3)
 #' plot(counts(AR3))
 #' 
 #' CL1 <- with(rajSPLIT, coleman_liau(dialogue, list(person, act)))
-#' head(CL1)
-#' CL2 <- with(rajSPLIT, coleman_liau(dialogue, list(sex, fam.aff)))
-#' head(CL2)
+#' ltruncdf(CL1, 20)
+#' head(counts(CL1))
 #' plot(CL1)
+#' 
+#' CL2 <- with(rajSPLIT, coleman_liau(dialogue, list(sex, fam.aff)))
+#' ltruncdf(CL2)
+#' plot(counts(CL2))
 #' 
 #' SM1 <- with(rajSPLIT, SMOG(dialogue, list(person, act)))
 #' head(SM1)
@@ -216,48 +219,13 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         group, DF, sum)$character.count 
     clf <- function(tse, tw, tc) (.0588*((100*tc)/tw)) - 
       (.296*((100*tse)/tw) ) - 15.8
-    DF2$Coleman_Liau <- round(with(DF2, clf(tse = sentence.count, 
-        tc = character.count, tw = word.count)), digits = 1)
+    DF2$Coleman_Liau <- with(DF2, clf(tse = sentence.count, 
+        tc = character.count, tw = word.count))
     names(DF2)[1] <- G
+    rownames(DF) <- NULL    
     o <- list(Counts = DF, Readability = DF2)
     class(o) <- c("coleman_liau", class(DF2))
     o
-}
-
-#' Plots a coleman_liauObject
-#' 
-#' Plots a coleman_liauobject.
-#' 
-#' @param x The coleman_liauobject.
-#' @param \ldots ignored
-#' @importFrom ggplot2 ggplot aes guide_colorbar geom_point theme ggplotGrob theme_bw ylab xlab scale_fill_gradient element_blank guides 
-#' @importFrom gridExtra grid.arrange
-#' @method plot coleman_liau
-#' @export
-plot.coleman_liau<- function(x, ...){ 
-
-    character.count <- sentence.count <- Coleman_Liau <- word.count <- grvar <- 
-        NULL
-    
-    x  <- x[order(x[, "Coleman_Liau"]), ]
-    x[, 1] <- factor(x[, 1], levels = x[, 1])
-    forlater <-  names(x)[1]
-    names(x)[1] <- "grvar"
-    plot1 <- ggplot(x, aes(fill = word.count, x = sentence.count, 
-        y = character.count)) + geom_point(size=2.75, shape=21, colour="grey65") +
-        theme_bw() + 
-        scale_fill_gradient(high="red", low="pink", name="Word\nCount") +
-        ylab("Character Count") + 
-        xlab("Sentence Count") + 
-        theme(panel.grid = element_blank(),
-            legend.position = "bottom") +
-        guides(fill = guide_colorbar(barwidth = 10, barheight = .5)) 
-    plot2 <- ggplot(x, aes(y = grvar, x = Coleman_Liau)) +
-        geom_point(size=2) + 
-        ylab(gsub("&", " & ", forlater)) + 
-        xlab("Coleman Liau")
-
-    grid.arrange(plot2, plot1, ncol=2)
 }
 
 
@@ -324,8 +292,8 @@ function(text.var, grouping.var = NULL, output = "valid",
     DF2$polysyllable.count <- aggregate(polysyllable.count ~ 
         group, DF, sum)$polysyllable.count   
     smog <- function(tse, tpsy) 1.043 * sqrt(tpsy * (30/tse)) + 3.1291 
-    DF2$SMOG <- round(with(DF2, smog(tse = sentence.count, 
-        tpsy = polysyllable.count)), digits = 1)
+    DF2$SMOG <- with(DF2, smog(tse = sentence.count, 
+        tpsy = polysyllable.count))
     DF2$validity <- ifelse(DF2$sentence.count < 30, "n < 30", "valid")
     if(output == "valid") DF2$validity <- NULL
     names(DF2)[1] <- G
@@ -386,10 +354,10 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         sum)$syllable.count  
     fkgl <- function(tw, tse, tsy) 0.39 * (tw/tse) + 11.8 * (tsy/tw) - 15.59
     fre <- function(tw, tse, tsy) 206.835 - 1.015 * (tw/tse) - 84.6 * (tsy/tw)
-    DF2$FK_grd.lvl <- round(with(DF2, fkgl(tw = word.count, 
-        tse = sentence.count, tsy = syllable.count)), digits = 1)
-    DF2$FK_read.ease <- round(with(DF2, fre(tw = word.count, 
-        tse = sentence.count, tsy = syllable.count)), digits = 3)
+    DF2$FK_grd.lvl <- with(DF2, fkgl(tw = word.count, 
+        tse = sentence.count, tsy = syllable.count))
+    DF2$FK_read.ease <- with(DF2, fre(tw = word.count, 
+        tse = sentence.count, tsy = syllable.count))
     names(DF2)[1] <- G
     DF2
 }
@@ -603,7 +571,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF2$wo.last <- DF2$cumsum.gr - DF2$word.count
     DF2$hun.word <- 100 - DF2$wo.last
     DF2$frac.sent <- ifelse(DF2$hun.word/DF2$word.count > 1, 1, 
-        round(DF2$hun.word/DF2$word.count, digits = 3))  
+        DF2$hun.word/DF2$word.count)  
     DF3b <- unique(data.frame(sub = DF2$sub, group = DF2$group))
     DF3 <- data.frame(sub = DF2$sub, group = DF2$group, text.var = 
         DF2$text.var, frac.sent = DF2$frac.sent)
@@ -628,31 +596,21 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     }))
     DF5$HE_tsent_ratio <- unlist(DF5$hard_easy_sum)/DF5$sent.per.100
     DF5$Linsear_Write <- ifelse(DF5$sent.per.100 > 20, 
-        round(DF5$HE_tsent_ratio/2, digits = 2), 
-        round((DF5$HE_tsent_ratio - 2)/2, digits = 2))
+        DF5$HE_tsent_ratio/2, 
+        (DF5$HE_tsent_ratio - 2)/2)
     DF5 <- DF5[, c(2, 4, 6, 8)]
     names(DF5) <- c(G, "sent.per.100", "hard_easy_sum", "Linsear_Write")
     DF5
 }
 
-#' Readability Measures
-#' 
-#' \code{scores} - Access the readability scores from a readability function output.
-#' 
-#' @rdname Readability
-#' @export
-#' @return \code{scores} - Returns a data.frame of the class "readability_score".
-scores <-
-function(x, ...){
-    UseMethod("scores")
-}
 
 #' Readability Measures
 #' 
 #' \code{scores.automated_readability_index} - View scores from \code{\link[qdap]{automated_readability_index}}.
 #' 
 #' automated_readability_index Method for scores
-#' @rdname Readability
+#' @param x The automated_readability_index object.
+#' @param \ldots ignored
 #' @export
 #' @method scores automated_readability_index
 scores.automated_readability_index <- function(x, ...) {
@@ -686,25 +644,14 @@ print.readability_score <-
     options(width=WD)
 }
 
-#' Readability Measures
-#' 
-#' \code{count} - Access the readability count from a readability function output.
-#' 
-#' @param x A readability object (output from a readability function).
-#' @rdname Readability
-#' @export
-#' @return \code{count} - Returns a data.frame of the class "readability_count".
-counts <-
-function(x, ...){
-    UseMethod("counts")
-}
 
 #' Readability Measures
 #' 
 #' \code{counts.automated_readability_index} - View counts from \code{\link[qdap]{automated_readability_index}}.
 #' 
+#' @param x The automated_readability_index object.
+#' @param \ldots ignored
 #' automated_readability_index Method for counts.
-#' @rdname Readability
 #' @export
 #' @method counts automated_readability_index
 counts.automated_readability_index <- function(x, ...) {
@@ -760,6 +707,10 @@ plot.readability_count <- function(x, alpha = .3, ...){
             word_counts(DF = x, x = "word.count", y = "character.count", 
                 z = NULL, g = "group", alpha = alpha)
         },
+        coleman_liau_count = {
+            word_counts(DF = x, x = "word.count", y = "character.count", 
+                z = NULL, g = "group", alpha = alpha)
+        },
         stop("Not a plotable readability count")
     )
 
@@ -785,10 +736,14 @@ plot.readability_score <- function(x, alpha = .3, ...){
         automated_readability_index_scores = {
             plot_automated_readability_index(x)
         },
+        coleman_liau_scores = {
+            plot_coleman_liau(x)
+        },
         stop("Not a plotable readability score")
     )
 
 }
+
 
 plot_automated_readability_index <- function(x) {
 
@@ -825,8 +780,8 @@ plot_automated_readability_index <- function(x) {
 #' @param \ldots ignored
 #' @importFrom ggplot2 ggplot aes guide_colorbar geom_point theme ggplotGrob theme_bw ylab xlab scale_fill_gradient element_blank guides 
 #' @importFrom gridExtra grid.arrange
-#' @method plot automated_readability_index
 #' @export
+#' @method plot automated_readability_index
 plot.automated_readability_index <- function(x, ...){ 
 
     plot.readability_score(scores(x))
@@ -874,3 +829,107 @@ rename <- function(x) {
     mgsub(input, output, x)
 
 }
+
+####=============Template================
+
+#' Readability Measures
+#' 
+#' \code{scores.coleman_liau} - View scores from \code{\link[qdap]{coleman_liau}}.
+#' 
+#' coleman_liau Method for scores
+#' @param x The coleman_liau object.
+#' @param \ldots ignored
+#' @export
+#' @method scores coleman_liau
+scores.coleman_liau <- function(x, ...) {
+
+    out <- x[["Readability"]]
+    attributes(out) <- list(
+            class = c("readability_score", class(out)),
+            type = "coleman_liau_scores",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+#' Prints an coleman_liau Object
+#' 
+#' Prints an coleman_liau object.
+#' 
+#' @param x The coleman_liau object.
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
+#' @param \ldots ignored
+#' @method print coleman_liau
+#' @S3method print coleman_liau
+print.coleman_liau <- function(x, digits = 3, ...) {
+    print(scores(x), digits = digits, ...)
+}
+
+
+#' Readability Measures
+#' 
+#' \code{counts.coleman_liau} - View counts from \code{\link[qdap]{coleman_liau}}.
+#' 
+#' coleman_liau Method for counts.
+#' @param x The coleman_liau object.
+#' @param \ldots ignored
+#' @export
+#' @method counts coleman_liau
+counts.coleman_liau <- function(x, ...) {
+    out <- x[["Counts"]]
+    attributes(out) <- list(
+            class = c("readability_count", class(out)),
+            type = "coleman_liau_count",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+#' Plots a coleman_liau Object
+#' 
+#' Plots a coleman_liau object.
+#' 
+#' @param x The readability_score object.
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes guide_colorbar geom_point theme ggplotGrob theme_bw ylab xlab scale_fill_gradient element_blank guides 
+#' @importFrom gridExtra grid.arrange
+#' @export
+#' @method plot coleman_liau
+plot.coleman_liau <- function(x, ...){ 
+
+    plot.readability_score(scores(x))
+
+}
+
+
+plot_coleman_liau <- function(x, ...){ 
+
+    character.count <- sentence.count <- Coleman_Liau <- word.count <- grvar <- 
+        NULL
+    
+    x  <- x[order(x[, "Coleman_Liau"]), ]
+    x[, 1] <- factor(x[, 1], levels = x[, 1])
+    forlater <-  names(x)[1]
+    names(x)[1] <- "grvar"
+    plot1 <- ggplot(x, aes(fill = word.count, x = sentence.count, 
+        y = character.count)) + geom_point(size=2.75, shape=21, colour="grey65") +
+        theme_bw() + 
+        scale_fill_gradient(high="red", low="pink", name="Word\nCount") +
+        ylab("Character Count") + 
+        xlab("Sentence Count") + 
+        theme(panel.grid = element_blank(),
+            legend.position = "bottom") +
+        guides(fill = guide_colorbar(barwidth = 10, barheight = .5)) 
+    plot2 <- ggplot(x, aes(y = grvar, x = Coleman_Liau)) +
+        geom_point(size=2) + 
+        ylab(gsub("&", " & ", forlater)) + 
+        xlab("Coleman Liau")
+
+    grid.arrange(plot2, plot1, ncol=2)
+}
+
+###==============End of template==========

@@ -1,0 +1,19 @@
+\name{scores.coleman_liau}
+\alias{scores.coleman_liau}
+\title{Readability Measures}
+\usage{
+\method{scores}{coleman_liau}(x, ...)
+}
+\arguments{
+  \item{x}{The coleman_liau object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+\code{scores.coleman_liau} - View scores from
+\code{\link[qdap]{coleman_liau}}.
+}
+\details{
+coleman_liau Method for scores
+}
+

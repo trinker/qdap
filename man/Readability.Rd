@@ -2,13 +2,9 @@
 \alias{SMOG}
 \alias{automated_readability_index}
 \alias{coleman_liau}
-\alias{counts}
-\alias{counts.automated_readability_index}
 \alias{flesch_kincaid}
 \alias{fry}
 \alias{linsear_write}
-\alias{scores}
-\alias{scores.automated_readability_index}
 \title{Readability Measures}
 \usage{
 automated_readability_index(text.var, grouping.var = NULL,
@@ -25,14 +21,6 @@ fry(text.var, grouping.var = NULL, auto.label = TRUE,
   rm.incomplete = FALSE, grid = FALSE, div.col = "grey85", ...)
 
 linsear_write(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...)
-
-scores(x, ...)
-
-\method{scores}{automated_readability_index}(x, ...)
-
-counts(x, ...)
-
-\method{counts}{automated_readability_index}(x, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -62,9 +50,6 @@ counts(x, ...)
 
   \item{div.col}{The color of the grade level division
   lines.}
-
-  \item{x}{A readability object (output from a readability
-  function).}
 }
 \value{
 Returns a list of 2 dataframes: (1) Counts and (2)
@@ -76,12 +61,6 @@ variable(s) and can be access via
 \code{\link[qdap]{counts}} (\code{\link[qdap]{fry}} does
 not contain scores).  The \code{frey} function returns a
 graphic representation of the readability.
-
-\code{scores} - Returns a data.frame of the class
-"readability_score".
-
-\code{count} - Returns a data.frame of the class
-"readability_count".
 }
 \description{
 \code{automated_readability_index} - Apply Automated
@@ -102,23 +81,6 @@ or more grouping variable(s).
 
 \code{linsear_write} - Apply Linsear Write Readability to
 transcript(s) by zero or more grouping variable(s).
-
-\code{scores} - Access the readability scores from a
-readability function output.
-
-\code{scores.automated_readability_index} - View scores
-from \code{\link[qdap]{automated_readability_index}}.
-
-\code{count} - Access the readability count from a
-readability function output.
-
-\code{counts.automated_readability_index} - View counts
-from \code{\link[qdap]{automated_readability_index}}.
-}
-\details{
-automated_readability_index Method for scores
-
-automated_readability_index Method for counts.
 }
 \section{Warning}{
   Many of the indices (e.g., Automated Readability Index)
@@ -146,15 +108,18 @@ plot(counts(AR2))
 AR3 <- with(rajSPLIT, automated_readability_index(dialogue, person))
 ltruncdf(AR3,, 15)
 scores(AR3)
-counts(AR3)
+head(counts(AR3))
 plot(AR3)
 plot(counts(AR3))
 
 CL1 <- with(rajSPLIT, coleman_liau(dialogue, list(person, act)))
-head(CL1)
-CL2 <- with(rajSPLIT, coleman_liau(dialogue, list(sex, fam.aff)))
-head(CL2)
+ltruncdf(CL1, 20)
+head(counts(CL1))
 plot(CL1)
+
+CL2 <- with(rajSPLIT, coleman_liau(dialogue, list(sex, fam.aff)))
+ltruncdf(CL2)
+plot(counts(CL2))
 
 SM1 <- with(rajSPLIT, SMOG(dialogue, list(person, act)))
 head(SM1)

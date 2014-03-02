@@ -1,0 +1,19 @@
+\name{counts.coleman_liau}
+\alias{counts.coleman_liau}
+\title{Readability Measures}
+\usage{
+\method{counts}{coleman_liau}(x, ...)
+}
+\arguments{
+  \item{x}{The coleman_liau object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+\code{counts.coleman_liau} - View counts from
+\code{\link[qdap]{coleman_liau}}.
+}
+\details{
+coleman_liau Method for counts.
+}
+

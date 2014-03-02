@@ -1,0 +1,18 @@
+\name{print.coleman_liau}
+\alias{print.coleman_liau}
+\title{Prints an coleman_liau Object}
+\usage{
+\method{print}{coleman_liau}(x, digits = 3, ...)
+}
+\arguments{
+  \item{x}{The coleman_liau object.}
+
+  \item{digits}{The number of digits displayed if
+  \code{values} is \code{TRUE}.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Prints an coleman_liau object.
+}
+
