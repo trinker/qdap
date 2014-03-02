@@ -120,6 +120,7 @@
 #'     list(sex, fam.aff, died)))
 #' colsplit2df(scores(poldat2))
 #' plot(poldat2)
+#' plot(scores(poldat2))
 #' 
 #' poldat3 <- with(rajSPLIT, polarity(dialogue, person))
 #' poldat3[["group"]][, "OL"] <- outlier_labeler(scores(poldat3)[, 
@@ -461,7 +462,7 @@ polarity_frame <- function(positives, negatives, pos.weights = 1,
 #' Plots a polarity Object
 #' 
 #' Plots a polarity object as a heat map Gantt plot with polarity over 
-#' time (measured in words) and polarity scores per sentence.  In the Gantt 
+#' time (measured in words) and polarity scores per sentence.  In the dorplot 
 #' plot the black dots are the average polarity per grouping variable.
 #' 
 #' @param x The polarity object.
@@ -660,5 +661,200 @@ polarity_helper <- function(tv, hit, polenv, altenv, count, amp.weight,
     list(x = (1 + (D + A)) * (p * (-1)^(2 + n)), y = p, z = targ)
 }
 
+#' Plots a polarity_count Object
+#' 
+#' Plots a polarity_count object as a heat map Gantt plot with polarity over 
+#' time (measured in words) and polarity scores per sentence.  In the dotplot 
+#' plot the black dots are the average polarity per grouping variable.
+#' 
+#' @param x The polarity_count object.
+#' @param bar.size The size of the bars used in the Gantt plot.
+#' @param low The color to be used for lower values.
+#' @param mid The color to be used for mid-range values (default is a less 
+#' striking color).
+#' @param high The color to be used for higher values.
+#' @param ave.polarity.shape The shape of the average polarity score used in the 
+#' dot plot.
+#' @param alpha Transparency level of points (ranges between 0 and 1).
+#' @param shape The shape of the points used in the dot plot.
+#' @param point.size The size of the points used in the dot plot.
+#' @param jitter Amount of vertical jitter to add to the points.
+#' @param nrow The number of rows in the dotplot legend (used when the number of 
+#' grouping variables makes the legend too wide).  If \code{NULL} no legend if 
+#' plotted.
+#' @param na.rm logical. Should missing values be removed?
+#' @param order.by.polarity logical.  If \code{TRUE} the group polarity plot 
+#' will be ordered by average polarity score, otherwise alphabetical order is 
+#' assumed.
+#' @param plot logical.  If \code{TRUE} the plot will automatically plot.  
+#' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
+#' to add additional plot layers.
+#' @param error.bars logical.  If \code{TRUE} error bars are added to the 
+#' polarity dot plot using the standard error of the mean polarity score.
+#' @param error.bar.height The height of the error bar ends.
+#' @param error.bar.size The size/thickness of the error bars.
+#' @param error.bar.color The color of the error bars.  If \code{NULL} each 
+#' bar will be colored by grouping variable.
+#' @param \ldots ignored
+#' @return Invisibly returns the \code{ggplot2} objects that form the larger 
+#' plot.  
+#' @method plot polarity_count
+#' @importFrom gridExtra grid.arrange
+#' @importFrom scales alpha
+#' @importFrom ggplot2 ggplot aes geom_segment xlab ylab scale_colour_gradientn theme_bw guides geom_point guide_colorbar scale_color_discrete guide_legend
+#' @S3method plot polarity_count
+plot.polarity_count <- function(x, bar.size = 5, low = "red", mid = "grey99", 
+    high = "blue", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
+    point.size = 2.5,  jitter = .1, nrow = NULL, na.rm = TRUE, 
+    order.by.polarity = TRUE, plot = TRUE, error.bars =TRUE, 
+    error.bar.height = .5, error.bar.size = .5, error.bar.color = "black", 
+    ...){
+  
+    Polarity <- group <- ave.polarity <- unit <- NULL
+
+    dat2 <- data.frame(x)
+    dat <- do.call(rbind, lapply(split(data.frame(x), x[, 1]), function(x2) {
+     
+        data.frame(group = x2[1, 1], total.sentences = nrow(x2), 
+            total.words = sum(x2[, "wc"], na.rm = TRUE), 
+            ave.polarity = mean(x2[, "polarity"], na.rm = TRUE))
+    
+    }))
+    names(dat)[1] <- names(dat2)[1]
+
+    if (na.rm) {
+       dat <- na.omit(dat)
+       dat2 <- na.omit(dat2)
+    }
+    G <- names(dat)[1]
+    nms <- c("group", "dialogue", "word_count", "Polarity")
+    names(dat)[c(1)] <-  nms[1]
+    names(dat2)[c(1, 6, 2, 3)] <- nms
+    dat2 <- data.frame(dat2, with(dat2, 
+        gantt(dialogue, list(group, seq_along(group)))))
+    if (is.null(nrow)) {
+        leg <- FALSE
+        nrow <- 1
+    } else {
+        leg <- TRUE
+    }
+
+    ## reverse the levels so first factor level is on top
+    dat2$group <- factor(dat2$group, levels = rev(levels(dat2$group)))
+
+    ## the filled polarity Gantt plot
+    XX <- ggplot(dat2, aes(color = Polarity )) + 
+        geom_segment(aes(x=start, xend=end, y=group, yend=group), 
+            size=bar.size) +
+        xlab("Duration (words)") + ylab(gsub("\\&", " & ", G)) +
+        scale_colour_gradientn(colours = c(low, mid, high)) +
+        theme_bw() + theme(legend.position="bottom") + 
+        guides(colour = guide_colorbar(barwidth = 9, barheight = .75))
+
+    ## order the ave. poalrity dotplot by ave. polarity or factor level
+    if (order.by.polarity) {
+        dat$group <- factor(dat$group, levels = rev(dat[order(dat$ave.polarity), 
+            "group"]))
+        dat2$group <- factor(dat2$group, 
+            levels = rev(dat[order(dat$ave.polarity), "group"]))
+    }
+    if (na.rm) {
+       dat2 <- na.omit(dat2)
+       dat <- na.omit(dat)
+    }
+
+    ## Plot the polarity dotplot with optional error bars
+    YY <- ggplot(dat2, aes(y=group, x=Polarity, colour = group)) + 
+        geom_point(data = dat, aes(x=ave.polarity), shape = ave.polarity.shape, 
+            size = 6, show_guide=FALSE) +
+        geom_point(alpha = alpha, shape = shape, 
+            size = point.size, position = position_jitter(height = jitter)) 
+
+    ## Optional Error Bars
+    if (error.bars) {
+        se <-  tapply(dat2[, "Polarity"], dat2[ "group"], SE)
+        dat[, "se"] <- lookup(dat[, "group"], names(se), se)
+
+        ## optional error.bar single color; if NULL colored by group
+        if (!is.null(error.bar.color)) {
+            YY <- YY + geom_errorbarh(data=dat, height = error.bar.height, 
+                size = error.bar.size, color = error.bar.color, aes(x=ave.polarity, 
+                    xmax = ave.polarity + se, xmin = ave.polarity - se))
+        } else {
+            YY <- YY + geom_errorbarh(data=dat, height = error.bar.height, 
+                size = error.bar.size, aes(x=ave.polarity, 
+                    xmax = ave.polarity + se, xmin = ave.polarity - se))
+        }
+    }
+
+    ## Add the black average polarity point
+    YY <- YY + geom_point(data = dat, aes(x=ave.polarity), shape = 19, 
+            size = 1.5, colour = "black", show_guide=FALSE) +
+        ylab(gsub("\\&", " & ", G)) +
+        scale_color_discrete(name= G) 
+
+    ## Legend for dotplot
+    if (leg) {
+        YY <- YY + theme(plot.margin = unit(c(-.25, 1, 1, 1), "lines"), 
+            legend.position="bottom")  +
+            guides(col = guide_legend(nrow = nrow, byrow = TRUE, 
+                override.aes = list(shape = shape, alpha = 1)))
+    } else {
+        YY <- YY + theme(plot.margin = unit(c(-.25, 1, 1, 1), "lines"), 
+            legend.position="none")       
+    } 
+
+    ## Logical plotting argument for use in knitr
+    if (plot) {
+        grid.arrange(XX, YY, nrow = 2)
+    }
+    invisible(list(p1 = XX, p2 = YY))
+}
 
 
+#' Plots a polarity_score Object
+#' 
+#' Plots a polarity_score object.
+#' 
+#' @param x The polarity_score object.
+#' @param error.bar.height The height of the error bar ends.
+#' @param error.bar.size The size/thickness of the error bars.
+#' @param error.bar.alpha The alpha level of the error bars.
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes geom_smooth facet_wrap geom_errorbarh guide_colorbar geom_point theme ggplotGrob theme_bw ylab xlab scale_fill_gradient element_blank guides 
+#' @importFrom gridExtra grid.arrange
+#' @importFrom scales alpha
+#' @method plot polarity_score
+#' @export
+plot.polarity_score <- function(x, error.bar.height = .35, 
+    error.bar.size = .5, error.bar.alpha = .3, ...){ 
+
+    character.count <- sentence.count <- word.count <- grvar <- 
+        SE <- ave.polarity <- sd.polarity <- total.sentences <- NULL
+
+    x  <- x[order(x[, "ave.polarity"]), ]
+    x[, 1] <- factor(x[, 1], levels = x[, 1])
+    forlater <-  names(x)[1]
+    names(x)[1] <- "grvar"
+    x[, "SE"] <- sqrt((x[, "sd.polarity"]^2)/x[, "total.sentences"])
+
+    plot1 <- ggplot(x, aes(fill = sd.polarity, x = ave.polarity, 
+        y = total.sentences)) + geom_point(size=2.75, shape=21, colour="grey65") +
+        theme_bw() + 
+        scale_fill_gradient(high="red", low="pink", name="Polaity\nVariability") +
+        ylab("Numer of Sentences") + 
+        xlab("Average Polarity") + 
+        theme(panel.grid = element_blank(),
+            legend.position = "bottom") +
+        guides(fill = guide_colorbar(barwidth = 10, barheight = .5)) 
+    plot2 <- ggplot(x, aes(y = grvar, x = ave.polarity)) +
+        geom_errorbarh(aes(xmax = ave.polarity + SE, xmin = ave.polarity - SE), 
+                height = error.bar.height, size = error.bar.size, 
+                alpha = error.bar.alpha) +
+        geom_point(size=2) + 
+        ylab(gsub("&", " & ", forlater)) + 
+        xlab("Average Polarity")
+
+    grid.arrange(plot2, plot1, ncol=2)
+    invisible(list(plot1=plot2, plot2=plot1))
+}

@@ -17,4 +17,7 @@ Returns a data.frame of counts.
 \description{
 Access the count dataframes from select qdap outputs.
 }
+\seealso{
+\code{\link[qdap]{scores}}
+}
 

@@ -6,6 +6,7 @@
 #' \code{\link[qdap]{fry}}, \code{\link[qdap]{formality}}).
 #' @param \ldots Arguments passed to scores method of other classes.
 #' @export
+#' @seealso \code{\link[qdap]{counts}}
 #' @return Returns a data.frame of scores.
 scores <-
 function(x, ...){

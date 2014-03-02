@@ -409,6 +409,10 @@ function(text.var, grouping.var = NULL, auto.label = TRUE,
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
+    if (is.dp(text.var = DF[, "text.var"])) {
+        warning(paste0("\n  Some rows contain double punctuation.", 
+            "  Suggested use of sentSplit function."))
+    }       
     DF$word.count <- word_count(DF$text.var, missing = 0)
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
@@ -554,6 +558,10 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
     }
+    if (is.dp(text.var = DF[, "text.var"])) {
+        warning(paste0("\n  Some rows contain double punctuation.", 
+            "  Suggested use of sentSplit function."))
+    }       
     DF$word.count <- word_count(DF$text.var)
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]

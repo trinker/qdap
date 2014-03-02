@@ -6,6 +6,7 @@
 #' \code{\link[qdap]{fry}}).
 #' @param \ldots Arguments passed to counts method of other classes.
 #' @export
+#' @seealso \code{\link[qdap]{scores}}
 #' @return Returns a data.frame of counts.
 counts <-
 function(x, ...){
