@@ -53,6 +53,9 @@ IMPROVEMENTS
 * `rm_row` picks up the `contains` argument that allows the user to search for, 
   and remove rows of, within the string, not just the beginning.
 
+* `read.transcript` now handles multiple blank spaces as an argument to `sep` 
+  when `text` argument is used.
+
 <b>CHANGES</b>
 
 * `dissimilarity` has been renamed to `Dissimilarity` to prevent tm package 

@@ -100,6 +100,29 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     } else {
         y <- file_ext(file)
     }
+
+    ## Handling for text= && sep == \\s+
+    revert <- FALSE
+    if (!is.null(sep) && !missing(text)) {
+    
+        sep2 <- gsub('\\\\s',' ', sep)
+        log_test <- grepl('[[:blank:]]{2,}', sep2) & 
+            !grepl('[[:alnum:][:punct:]]', sep2)
+    
+        if (!log_test) {
+            stop("`read.trancript` requires a `sep` of one character or\n", 
+            "  greater than one (> 1) spaces when using with text")
+        }
+    
+        if(log_test) {      
+            text <- gsub(":", "QDAP_PLACE_HOLDER", text)
+            text <- gsub(sep, ":", text)
+            sep <- ":"
+            revert <- TRUE
+        }
+    
+    }
+
     if (is.null(sep)) {
         if (y %in% c("docx", "txt", "text")) {
             sep <- ":"
@@ -135,6 +158,9 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
         },
         text = {
             x <- read.table(text=text, header = header, sep = sep, skip=skip)
+            if(revert) {
+                x[, 2] <- gsub("QDAP_PLACE_HOLDER", ":", x[, 2])
+            }
         },
         stop("invalid file extension:\n \bfile must be a .docx .csv .xls or .xlsx" )
     )
