@@ -121,6 +121,27 @@ teacher: What should we do?
 sam: You liar, it stinks!"
 
 read.transcript(text=trans)
+
+## Read in text specify spaces as sep
+## EXAMPLE 1
+
+read.transcript(text="34    The New York Times reports a lot of words here.
+12    Greenwire reports a lot of words.
+31    Only three words.
+ 2    The Financial Times reports a lot of words.
+ 9    Greenwire short.
+13    The New York Times reports a lot of words again.",
+    col.names=qcv(NO,    ARTICLE), sep="   ")
+
+## EXAMPLE 2
+
+read.transcript(text="34..    The New York Times reports a lot of words here.
+12..    Greenwire reports a lot of words.
+31..    Only three words.
+ 2..    The Financial Times reports a lot of words.
+ 9..    Greenwire short.
+13..    The New York Times reports a lot of words again.",
+    col.names=qcv(NO,    ARTICLE), sep="\\\\.\\\\.")
 }
 }
 \author{
