@@ -1,0 +1,18 @@
+\name{print.flesch_kincaid}
+\alias{print.flesch_kincaid}
+\title{Prints an flesch_kincaid Object}
+\usage{
+\method{print}{flesch_kincaid}(x, digits = 3, ...)
+}
+\arguments{
+  \item{x}{The flesch_kincaid object.}
+
+  \item{digits}{The number of digits displayed if
+  \code{values} is \code{TRUE}.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Prints an flesch_kincaid object.
+}
+

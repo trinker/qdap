@@ -30,6 +30,9 @@ And constructed with the following guidelines:
 
 * `counts` generic method added to view counts from select <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> objects.
 
+* `apply_as_df` added to allow the user to apply <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> functions to a Corpus 
+  directly.
+
 <b>MINOR FEATURES</b>
 
 * `tm_corpus2wfm` added to quickly convert from a tm package `Corpus` to a <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>

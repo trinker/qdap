@@ -30,6 +30,9 @@ NEW FEATURES
 
 * `counts` generic method added to view counts from select qdap objects.
 
+* `apply_as_df` added to allow the user to apply qdap functions to a Corpus 
+  directly.
+
 MINOR FEATURES
 
 * `tm_corpus2wfm` added to quickly convert from a tm package `Corpus` to a qdap

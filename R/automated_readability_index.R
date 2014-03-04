@@ -75,12 +75,14 @@
 #' (SM1 <- with(rajSPLIT, SMOG(dialogue, list(person, act))))
 #' plot(counts(SM1))
 #' plot(SM1)
-#' SM2 <- with(rajSPLIT, SMOG(dialogue, list(sex, fam.aff)))
+#' (SM2 <- with(rajSPLIT, SMOG(dialogue, list(sex, fam.aff))))
 #' 
-#' FL1 <- with(rajSPLIT, flesch_kincaid(dialogue, list(person, act)))
-#' head(FL1)
-#' FL2 <-  with(rajSPLIT, flesch_kincaid(dialogue, list(sex, fam.aff)))
-#' head(FL2)
+#' (FL1 <- with(rajSPLIT, flesch_kincaid(dialogue, list(person, act))))
+#' plot(scores(FL1))
+#' plot(counts(FL1))
+#' (FL2 <-  with(rajSPLIT, flesch_kincaid(dialogue, list(sex, fam.aff))))
+#' plot(scores(FL2))
+#' plot(counts(FL2))
 #' 
 #' FR <- with(rajSPLIT, fry(dialogue, list(sex, fam.aff)))
 #' htruncdf(FR$SENTENCES_USED)
@@ -730,6 +732,10 @@ plot.readability_count <- function(x, alpha = .3, ...){
             word_counts(DF = x, x = "word.count", y = "polysyllable.count", 
                 z = NULL, g = "group", alpha = alpha)
         },
+        flesch_kincaid_count = {
+            word_counts(DF = x, x = "word.count", y = "syllable.count", 
+                z = NULL, g = "group", alpha = alpha)
+        },
         stop("Not a plotable readability count")
     )
 
@@ -760,6 +766,9 @@ plot.readability_score <- function(x, alpha = .3, ...){
         },
         SMOG_scores = {
             plot_SMOG(x)
+        },
+        flesch_kincaid_scores = {
+            plot_flesch_kincaid(x)
         },
         stop("Not a plotable readability score")
     )
@@ -845,9 +854,10 @@ word_counts <- function(DF, x, y, z = NULL, g, alpha = .3) {
 ## Generic helper funciton for word_counts plotting to rename axi labels
 rename <- function(x) {
 
-    input <- c("word.count",  "character.count", "polysyllable.count")
+    input <- c("word.count",  "character.count", "polysyllable.count",
+        "syllable.count")
     output <- c("Words Per Sentence", "Characters Per Sentence", 
-        "Polysyllables Per Sentence")
+        "Polysyllables Per Sentence", "Syllables Per Sentence")
     mgsub(input, output, x)
 
 }
@@ -915,7 +925,7 @@ counts.SMOG <- function(x, ...) {
 #' 
 #' @param x The readability_score object.
 #' @param \ldots ignored
-#' @importFrom ggplot2 ggplot aes guide_colorbar geom_point theme ggplotGrob theme_bw ylab xlab scale_fill_gradient element_blank guides 
+#' @importFrom ggplot2 ggplot aes geom_point theme ylab xlab scale_size_continuous  element_rect
 #' @importFrom gridExtra grid.arrange
 #' @export
 #' @method plot SMOG
@@ -944,6 +954,111 @@ plot_SMOG <- function(x, ...){
         theme(legend.key = element_rect(fill = NA))
 
 }
+
+#' Readability Measures
+#' 
+#' \code{scores.flesch_kincaid} - View scores from \code{\link[qdap]{flesch_kincaid}}.
+#' 
+#' flesch_kincaid Method for scores
+#' @param x The flesch_kincaid object.
+#' @param \ldots ignored
+#' @export
+#' @method scores flesch_kincaid
+scores.flesch_kincaid <- function(x, ...) {
+
+    out <- x[["Readability"]]
+    attributes(out) <- list(
+            class = c("readability_score", class(out)),
+            type = "flesch_kincaid_scores",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+#' Prints an flesch_kincaid Object
+#' 
+#' Prints an flesch_kincaid object.
+#' 
+#' @param x The flesch_kincaid object.
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
+#' @param \ldots ignored
+#' @method print flesch_kincaid
+#' @S3method print flesch_kincaid
+print.flesch_kincaid <- function(x, digits = 3, ...) {
+    print(scores(x), digits = digits, ...)
+}
+
+
+#' Readability Measures
+#' 
+#' \code{counts.flesch_kincaid} - View counts from \code{\link[qdap]{flesch_kincaid}}.
+#' 
+#' flesch_kincaid Method for counts.
+#' @param x The flesch_kincaid object.
+#' @param \ldots ignored
+#' @export
+#' @method counts flesch_kincaid
+counts.flesch_kincaid <- function(x, ...) {
+    out <- x[["Counts"]]
+    attributes(out) <- list(
+            class = c("readability_count", class(out)),
+            type = "flesch_kincaid_count",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+#' Plots a flesch_kincaid Object
+#' 
+#' Plots a flesch_kincaid object.
+#' 
+#' @param x The readability_score object.
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes guide_colorbar geom_point theme ggplotGrob theme_bw ylab xlab scale_fill_gradient element_blank guides 
+#' @importFrom gridExtra grid.arrange
+#' @export
+#' @method plot flesch_kincaid
+plot.flesch_kincaid <- function(x, ...){ 
+
+    plot.readability_score(scores(x))
+
+}
+
+
+plot_flesch_kincaid <- function(x, ...){ 
+
+    character.count <- sentence.count <- FK_grd.lvl <- FK_read.ease <- 
+        word.count <- grvar <- value <- syllable.count <- NULL
+
+    x  <- x[order(x[, "FK_grd.lvl"]), ]
+    x[, 1] <- factor(x[, 1], levels = x[, 1])
+    forlater <-  names(x)[1]
+    names(x)[1] <- "grvar"
+    plot1 <- ggplot(x, aes(x = sentence.count, 
+        y = syllable.count)) + geom_point(size=2.75, alpha=.3) +
+        theme_bw() + 
+        ylab("Syllable Count") + 
+        xlab("Sentence Count") + 
+        theme(panel.grid = element_blank())
+    
+    x2 <- melt(x[, c(1, 5:6)], id="grvar")
+    x2[, "variable"] <- mgsub(c("FK_grd.lvl", "FK_read.ease"),
+        c("Flesch Kincaid Grade Level", 
+        "Flesch Kincaid Reading Ease"), x2[, "variable"])
+
+    plot2 <- ggplot(x2, aes(y = grvar, x = value)) +
+        geom_point(size=2) + 
+        ylab(gsub("&", " & ", forlater)) + 
+        xlab("score") +
+        facet_grid(.~variable, scales="free_x") 
+
+    grid.arrange(plot2, plot1, ncol=2, widths=2:1)
+}
+
 
 ####=============Template================
 
