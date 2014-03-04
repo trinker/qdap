@@ -121,10 +121,10 @@ CL2 <- with(rajSPLIT, coleman_liau(dialogue, list(sex, fam.aff)))
 ltruncdf(CL2)
 plot(counts(CL2))
 
-SM1 <- with(rajSPLIT, SMOG(dialogue, list(person, act)))
-head(SM1)
+(SM1 <- with(rajSPLIT, SMOG(dialogue, list(person, act))))
+plot(counts(SM1))
+plot(SM1)
 SM2 <- with(rajSPLIT, SMOG(dialogue, list(sex, fam.aff)))
-head(SM2)
 
 FL1 <- with(rajSPLIT, flesch_kincaid(dialogue, list(person, act)))
 head(FL1)

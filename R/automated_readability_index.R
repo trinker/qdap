@@ -72,10 +72,10 @@
 #' ltruncdf(CL2)
 #' plot(counts(CL2))
 #' 
-#' SM1 <- with(rajSPLIT, SMOG(dialogue, list(person, act)))
-#' head(SM1)
+#' (SM1 <- with(rajSPLIT, SMOG(dialogue, list(person, act))))
+#' plot(counts(SM1))
+#' plot(SM1)
 #' SM2 <- with(rajSPLIT, SMOG(dialogue, list(sex, fam.aff)))
-#' head(SM2)
 #' 
 #' FL1 <- with(rajSPLIT, flesch_kincaid(dialogue, list(person, act)))
 #' head(FL1)
@@ -297,7 +297,9 @@ function(text.var, grouping.var = NULL, output = "valid",
     DF2$validity <- ifelse(DF2$sentence.count < 30, "n < 30", "valid")
     if(output == "valid") DF2$validity <- NULL
     names(DF2)[1] <- G
-    DF2
+    o <- list(Counts = DF, Readability = DF2)
+    class(o) <- c("SMOG", class(DF2))
+    o
 }
 
 
@@ -359,7 +361,9 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF2$FK_read.ease <- with(DF2, fre(tw = word.count, 
         tse = sentence.count, tsy = syllable.count))
     names(DF2)[1] <- G
-    DF2
+    o <- list(Counts = DF, Readability = DF2)
+    class(o) <- c("flesch_kincaid", class(DF2))
+    o
 }
 
 
@@ -608,7 +612,9 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         (DF5$HE_tsent_ratio - 2)/2)
     DF5 <- DF5[, c(2, 4, 6, 8)]
     names(DF5) <- c(G, "sent.per.100", "hard_easy_sum", "Linsear_Write")
-    DF5
+    o <- list(Counts = DF, Readability = DF5)
+    class(o) <- c("linsear_write", class(DF5))
+    o
 }
 
 
@@ -710,6 +716,7 @@ print.readability_count <-
 plot.readability_count <- function(x, alpha = .3, ...){ 
 
     type <- attributes(x)[["type"]]
+
     switch(type,
         automated_readability_index_count = {
             word_counts(DF = x, x = "word.count", y = "character.count", 
@@ -717,6 +724,10 @@ plot.readability_count <- function(x, alpha = .3, ...){
         },
         coleman_liau_count = {
             word_counts(DF = x, x = "word.count", y = "character.count", 
+                z = NULL, g = "group", alpha = alpha)
+        },
+        SMOG_count = {
+            word_counts(DF = x, x = "word.count", y = "polysyllable.count", 
                 z = NULL, g = "group", alpha = alpha)
         },
         stop("Not a plotable readability count")
@@ -746,6 +757,9 @@ plot.readability_score <- function(x, alpha = .3, ...){
         },
         coleman_liau_scores = {
             plot_coleman_liau(x)
+        },
+        SMOG_scores = {
+            plot_SMOG(x)
         },
         stop("Not a plotable readability score")
     )
@@ -799,7 +813,6 @@ plot.automated_readability_index <- function(x, ...){
 ## Generic helper plotting function for counts
 word_counts <- function(DF, x, y, z = NULL, g, alpha = .3) {
 
-
     NMS <- rename(c(x, y, z))
 
     AES <- aes(x=x, y=y, color=g)
@@ -832,9 +845,103 @@ word_counts <- function(DF, x, y, z = NULL, g, alpha = .3) {
 ## Generic helper funciton for word_counts plotting to rename axi labels
 rename <- function(x) {
 
-    input <- c("word.count",  "character.count")
-    output <- c("Word Count", "Character Count")
+    input <- c("word.count",  "character.count", "polysyllable.count")
+    output <- c("Words Per Sentence", "Characters Per Sentence", 
+        "Polysyllables Per Sentence")
     mgsub(input, output, x)
+
+}
+
+#' Readability Measures
+#' 
+#' \code{scores.SMOG} - View scores from \code{\link[qdap]{SMOG}}.
+#' 
+#' SMOG Method for scores
+#' @param x The SMOG object.
+#' @param \ldots ignored
+#' @export
+#' @method scores SMOG
+scores.SMOG <- function(x, ...) {
+
+    out <- x[["Readability"]]
+    attributes(out) <- list(
+            class = c("readability_score", class(out)),
+            type = "SMOG_scores",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+#' Prints an SMOG Object
+#' 
+#' Prints an SMOG object.
+#' 
+#' @param x The SMOG object.
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
+#' @param \ldots ignored
+#' @method print SMOG
+#' @S3method print SMOG
+print.SMOG <- function(x, digits = 3, ...) {
+    print(scores(x), digits = digits, ...)
+}
+
+
+#' Readability Measures
+#' 
+#' \code{counts.SMOG} - View counts from \code{\link[qdap]{SMOG}}.
+#' 
+#' SMOG Method for counts.
+#' @param x The SMOG object.
+#' @param \ldots ignored
+#' @export
+#' @method counts SMOG
+counts.SMOG <- function(x, ...) {
+    out <- x[["Counts"]]
+    attributes(out) <- list(
+            class = c("readability_count", class(out)),
+            type = "SMOG_count",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+#' Plots a SMOG Object
+#' 
+#' Plots a SMOG object.
+#' 
+#' @param x The readability_score object.
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes guide_colorbar geom_point theme ggplotGrob theme_bw ylab xlab scale_fill_gradient element_blank guides 
+#' @importFrom gridExtra grid.arrange
+#' @export
+#' @method plot SMOG
+plot.SMOG <- function(x, ...){ 
+
+    plot.readability_score(scores(x))
+
+}
+
+
+plot_SMOG <- function(x, ...){ 
+
+    sentence.count <- SMOG <- word.count <- grvar <- NULL
+    
+    x  <- x[order(x[, "SMOG"]), ]
+    x[, 1] <- factor(x[, 1], levels = x[, 1])
+    forlater <-  names(x)[1]
+    names(x)[1] <- "grvar"
+
+    ggplot(x, aes(y = grvar, x = SMOG)) +
+        geom_point(aes(size = word.count), color="grey75") +
+        geom_point(size=2.2) + 
+        ylab(gsub("&", " & ", forlater)) + 
+        xlab("SMOG") +
+        scale_size_continuous(name="  Word\n  Count") + 
+        theme(legend.key = element_rect(fill = NA))
 
 }
 

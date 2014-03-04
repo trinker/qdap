@@ -1,0 +1,18 @@
+\name{print.SMOG}
+\alias{print.SMOG}
+\title{Prints an SMOG Object}
+\usage{
+\method{print}{SMOG}(x, digits = 3, ...)
+}
+\arguments{
+  \item{x}{The SMOG object.}
+
+  \item{digits}{The number of digits displayed if
+  \code{values} is \code{TRUE}.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Prints an SMOG object.
+}
+
