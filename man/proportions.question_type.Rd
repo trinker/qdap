@@ -1,0 +1,18 @@
+\name{proportions.question_type}
+\alias{proportions.question_type}
+\title{Term Counts}
+\usage{
+\method{proportions}{question_type}(x, ...)
+}
+\arguments{
+  \item{x}{The question_type object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+View \code{\link[qdap]{question_type}} proportions.
+}
+\details{
+question_type Method for proportions
+}
+

@@ -571,6 +571,7 @@ t.DocumentTermMatrix <- function(x, ...) {
 #' @note \code{aply_ad_df} coherses to a dataframe with columns named `docs` and 
 #' the othe rnames `docs`.
 #' @export
+#' @rdname tdm
 #' @seealso \code{\link[tm]{Corpus}}
 #' @examples
 #' library(tm)

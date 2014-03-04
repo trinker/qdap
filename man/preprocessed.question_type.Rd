@@ -1,0 +1,18 @@
+\name{preprocessed.question_type}
+\alias{preprocessed.question_type}
+\title{Term Counts}
+\usage{
+\method{preprocessed}{question_type}(x, ...)
+}
+\arguments{
+  \item{x}{The question_type object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+View \code{\link[qdap]{question_type}} preprocessed.
+}
+\details{
+question_type Method for preprocessed
+}
+

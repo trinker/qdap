@@ -1,0 +1,16 @@
+\name{plot.question_type_preprocessed}
+\alias{plot.question_type_preprocessed}
+\title{Plots a question_type_preprocessed Object}
+\usage{
+\method{plot}{question_type_preprocessed}(x, ...)
+}
+\arguments{
+  \item{x}{The question_type_preprocessed object.}
+
+  \item{\ldots}{Arguments passed to
+  \code{\link[qdap]{gantt_plot}}.}
+}
+\description{
+Plots a question_type_preprocessed object.
+}
+

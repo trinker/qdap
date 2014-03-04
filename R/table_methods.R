@@ -6,7 +6,7 @@
 #' @param high The color to be used for higher values.
 #' @param values logical.  If \code{TRUE} the cell values will be included on 
 #' the heatmap. 
-#' @param \ldots Arguments passed to qheat.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{qheat}}.
 #' @export
 plot.table_score <- function(x, values = TRUE, high = "red", ...){ 
 
@@ -16,6 +16,9 @@ plot.table_score <- function(x, values = TRUE, high = "red", ...){
     })
 
     y[, -c(1:2)] <- y[, -c(1:2)]/y[, 2]
+    y[, -c(1:2)] <- lapply(y[, -c(1:2)], function(z) {
+        z[is.na(z)] <- 0; z
+    })
 
     if (!values) {
         mat2 <- NULL
@@ -35,7 +38,7 @@ plot.table_score <- function(x, values = TRUE, high = "red", ...){
 #' @param high The color to be used for higher values.
 #' @param values logical.  If \code{TRUE} the cell values will be included on 
 #' the heatmap. 
-#' @param \ldots Arguments passed to qheat.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{qheat}}.
 #' @export
 plot.table_proportion <- function(x, values = TRUE, high = "red", ...){ 
 
@@ -53,7 +56,7 @@ plot.table_proportion <- function(x, values = TRUE, high = "red", ...){
 #' @param high The color to be used for higher values.
 #' @param values logical.  If \code{TRUE} the cell values will be included on 
 #' the heatmap. 
-#' @param \ldots Arguments passed to qheat.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{qheat}}.
 #' @export
 plot.table_count <- function(x, values = TRUE, high = "red", ...){ 
 

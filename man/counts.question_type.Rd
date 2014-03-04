@@ -1,0 +1,18 @@
+\name{counts.question_type}
+\alias{counts.question_type}
+\title{Term Counts}
+\usage{
+\method{counts}{question_type}(x, ...)
+}
+\arguments{
+  \item{x}{The \code{\link[qdap]{question_type}} object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+View question_type counts.
+}
+\details{
+question_type Method for counts
+}
+

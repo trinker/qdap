@@ -12,7 +12,8 @@
   \item{values}{logical.  If \code{TRUE} the cell values
   will be included on the heatmap.}
 
-  \item{\ldots}{Arguments passed to qheat.}
+  \item{\ldots}{Other arguments passed to
+  \code{\link[qdap]{qheat}}.}
 }
 \description{
 Plots a table_count object.

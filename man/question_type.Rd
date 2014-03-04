@@ -99,11 +99,28 @@ are labeled unknown.
 \examples{
 \dontrun{
 ## Inspect the algorithm classification
+x <- c("Kate's got no appetite doesn't she?",
+    "Wanna tell Daddy what you did today?",
+    "You helped getting out a book?", "umm hum?",
+    "Do you know what it is?", "What do you want?",
+    "Who's there?", "Whose?", "Why do you want it?",
+    "Want some?", "Where did it go?", "Was it fun?")
+
+left_just(preprocessed(question_type(x))[, c(2, 6)])
 
 ## Transcript/dialogue examples
 (x <- question_type(DATA.SPLIT$state, DATA.SPLIT$person))
-truncdf(x$raw, 15)
-x$count
+
+## methods
+scores(x)
+plot(scores(x))
+counts(x)
+plot(counts(x))
+proportions(x)
+plot(proportions(x))
+truncdf(preprocessed(x), 15)
+plot(preprocessed(x))
+
 plot(x)
 plot(x, label = TRUE)
 plot(x, label = TRUE, text.color = "red")
