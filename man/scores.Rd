@@ -20,5 +20,9 @@ Access the scores dataframes from select qdap outputs.
 }
 \seealso{
 \code{\link[qdap]{counts}}
+
+\code{\link[qdap]{proportions}}
+
+\code{\link[qdap]{preprocessed}}
 }
 

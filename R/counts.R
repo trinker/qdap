@@ -7,8 +7,13 @@
 #' @param \ldots Arguments passed to counts method of other classes.
 #' @export
 #' @seealso \code{\link[qdap]{scores}}
+#' @seealso \code{\link[qdap]{proportions}}
+#' @seealso \code{\link[qdap]{preprocessed}}
 #' @return Returns a data.frame of counts.
 counts <-
 function(x, ...){
     UseMethod("counts")
 }
+
+
+

@@ -5,11 +5,14 @@
 apply_as_df(tm.corpus, qdapfun, ...)
 }
 \arguments{
+  \item{tm.corpus}{A \pkg{tm} \code{\link[tm]{Corpus}}.}
+
   \item{qdapfun}{A qdap function that is usually used on
   text.variable ~ grouping variable.}
 }
 \description{
-Apply a tm \code{\link[tm]{Corpus}} as a qdap dataframe.
+Apply a \pkg{tm} \code{\link[tm]{Corpus}} as a qdap
+dataframe.
 }
 \note{
 \code{aply_ad_df} coherses to a dataframe with columns
@@ -48,5 +51,8 @@ apply_as_df(reuters, word_cor,
 plot(apply_as_df(reuters, word_cor,
     word = qcv(oil, Texas, crude, economic, money)
 ))
+}
+\seealso{
+\code{\link[tm]{Corpus}}
 }
 

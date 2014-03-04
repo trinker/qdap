@@ -159,7 +159,16 @@ symbols) additional arguments from strip must be passed.
 #termco examples:
 
 term <- c("the ", "she", " wh")
-with(raj.act.1,  termco(dialogue, person, term))
+(out <- with(raj.act.1,  termco(dialogue, person, term)))
+
+plot(out)
+scores(out)
+plot(scores(out))
+counts(out)
+plot(counts(out))
+proportions(out)
+plot(proportions(out))
+
 # General form for match.list as themes
 #
 # ml <- list(
@@ -176,10 +185,9 @@ ml <- list(
 )
 
 (dat <- with(raj.act.1,  termco(dialogue, person, ml)))
-names(dat)
-dat$rnp  #useful for presenting in tables
-dat$raw  #prop and raw are useful for performing calculations
-dat$prop
+scores(dat)  #useful for presenting in tables
+counts(dat)  #prop and raw counts are useful for performing calculations
+proportions(dat)
 datb <- with(raj.act.1, termco(dialogue, person, ml,
     short.term = FALSE, elim.old=FALSE))
 ltruncdf(datb, 20, 6)

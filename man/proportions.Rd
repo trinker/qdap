@@ -1,0 +1,27 @@
+\name{proportions}
+\alias{proportions}
+\title{Generic Proportions Method}
+\usage{
+proportions(x, ...)
+}
+\arguments{
+  \item{x}{A qdap object (list) with a proportions
+  dataframe (e.g., \code{\link[qdap]{termco}}).}
+
+  \item{\ldots}{Arguments passed to proportions method of
+  other classes.}
+}
+\value{
+Returns a data.frame of proportions.
+}
+\description{
+Access the proportions dataframes from select qdap outputs.
+}
+\seealso{
+\code{\link[qdap]{scores}}
+
+\code{\link[qdap]{counts}}
+
+\code{\link[qdap]{preprocessed}}
+}
+

@@ -563,13 +563,15 @@ t.DocumentTermMatrix <- function(x, ...) {
 
 #' Apply a tm Corpus as a qdap Dataframe
 #' 
-#' Apply a tm \code{\link[tm]{Corpus}} as a qdap dataframe.
+#' Apply a \pkg{tm} \code{\link[tm]{Corpus}} as a qdap dataframe.
 #' 
+#' @param tm.corpus A \pkg{tm} \code{\link[tm]{Corpus}}.
 #' @param qdapfun A qdap function that is usually used on 
 #' text.variable ~ grouping variable.
 #' @note \code{aply_ad_df} coherses to a dataframe with columns named `docs` and 
 #' the othe rnames `docs`.
 #' @export
+#' @seealso \code{\link[tm]{Corpus}}
 #' @examples
 #' library(tm)
 #' reut21578 <- system.file("texts", "crude", package = "tm")

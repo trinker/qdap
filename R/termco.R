@@ -61,7 +61,16 @@
 #' #termco examples:
 #' 
 #' term <- c("the ", "she", " wh")
-#' with(raj.act.1,  termco(dialogue, person, term))
+#' (out <- with(raj.act.1,  termco(dialogue, person, term)))
+#' 
+#' plot(out)
+#' scores(out)
+#' plot(scores(out))
+#' counts(out)
+#' plot(counts(out))
+#' proportions(out)
+#' plot(proportions(out))
+#' 
 #' # General form for match.list as themes
 #' #
 #' # ml <- list(
@@ -78,10 +87,9 @@
 #' )
 #' 
 #' (dat <- with(raj.act.1,  termco(dialogue, person, ml)))
-#' names(dat)
-#' dat$rnp  #useful for presenting in tables
-#' dat$raw  #prop and raw are useful for performing calculations
-#' dat$prop
+#' scores(dat)  #useful for presenting in tables
+#' counts(dat)  #prop and raw counts are useful for performing calculations
+#' proportions(dat)
 #' datb <- with(raj.act.1, termco(dialogue, person, ml,
 #'     short.term = FALSE, elim.old=FALSE))
 #' ltruncdf(datb, 20, 6)
@@ -529,4 +537,68 @@ plot.termco <- function(x, label = FALSE, lab.digits = 1, percent = NULL,
     } else {
         qheat(x$prop, ...)  
     }
+}
+
+#' Term Counts
+#' 
+#' View termco scores.
+#' 
+#' termco Method for scores
+#' @param x The \code{\link[qdap]{termco}} object.
+#' @param \ldots ignored
+#' @export
+#' @method scores termco
+scores.termco <- function(x, ...) {
+
+    out <- x[["rnp"]]
+    attributes(out) <- list(
+            class = c("table_score", class(out)),
+            type = "termco_scores",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+#' Term Counts
+#' 
+#' View termco counts.
+#' 
+#' termco Method for counts
+#' @param x The \code{\link[qdap]{termco}} object.
+#' @param \ldots ignored
+#' @export
+#' @method counts termco
+counts.termco <- function(x, ...) {
+
+    out <- x[["raw"]]
+    attributes(out) <- list(
+            class = c("table_count", class(out)),
+            type = "termco_counts",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+#' Term Counts
+#' 
+#' View \code{\link[qdap]{termco}} proportions.
+#' 
+#' termco Method for proportions
+#' @param x The termco object.
+#' @param \ldots ignored
+#' @export
+#' @method proportions termco
+proportions.termco <- function(x, ...) {
+
+    out <- x[["prop"]]
+    attributes(out) <- list(
+            class = c("table_proportion", class(out)),
+            type = "termco_proportions",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
 }

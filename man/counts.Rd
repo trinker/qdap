@@ -19,5 +19,9 @@ Access the count dataframes from select qdap outputs.
 }
 \seealso{
 \code{\link[qdap]{scores}}
+
+\code{\link[qdap]{proportions}}
+
+\code{\link[qdap]{preprocessed}}
 }
 
