@@ -1,0 +1,18 @@
+\name{preprocessed.formality}
+\alias{preprocessed.formality}
+\title{Formality}
+\usage{
+\method{preprocessed}{formality}(x, ...)
+}
+\arguments{
+  \item{x}{The \code{\link[qdap]{formality}} object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+View formality preprocessed.
+}
+\details{
+formality Method for preprocessed
+}
+

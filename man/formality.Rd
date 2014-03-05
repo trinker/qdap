@@ -69,6 +69,17 @@ with(DATA, formality(state, person))
 (x1 <- with(DATA, formality(state, list(sex, adult))))
 plot(x1)
 plot(x1, short.names = FALSE)
+
+scores(x1)
+counts(x1)
+proportions(x1)
+preprocessed(x1)
+
+plot(scores(x1))
+plot(counts(x1))
+plot(proportions(x1), high="darkgreen")
+plot(preprocessed(x1))
+
 data(rajPOS) #A data set consisting of a pos list object
 x2 <- with(raj, formality(rajPOS, act))
 plot(x2)

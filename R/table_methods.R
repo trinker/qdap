@@ -68,7 +68,7 @@ plot.table_proportion <- function(x, values = TRUE, high = "red", ...){
 #' @export
 plot.table_count <- function(x, values = TRUE, high = "red", ...){ 
 
-    qheat(x, values = values, high=high, ...)
+    qheat(x, values = values, high=high, digits = 0, ...)
 
 }
 

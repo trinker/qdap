@@ -30,6 +30,12 @@ NEW FEATURES
 
 * `counts` generic method added to view counts from select qdap objects.
 
+* `proportions` generic method added to view proportions from select qdap 
+  objects.
+
+* `preprocessed` generic method added to view preprocessed data from select qdap 
+  objects.
+
 * `apply_as_df` added to allow the user to apply qdap functions to a Corpus 
   directly.
 

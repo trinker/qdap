@@ -51,6 +51,17 @@
 #' (x1 <- with(DATA, formality(state, list(sex, adult))))
 #' plot(x1)
 #' plot(x1, short.names = FALSE)
+#' 
+#' scores(x1)
+#' counts(x1)
+#' proportions(x1)
+#' preprocessed(x1)
+#' 
+#' plot(scores(x1))
+#' plot(counts(x1))
+#' plot(proportions(x1), high="darkgreen")
+#' plot(preprocessed(x1))
+#' 
 #' data(rajPOS) #A data set consisting of a pos list object
 #' x2 <- with(raj, formality(rajPOS, act))
 #' plot(x2)
@@ -372,3 +383,192 @@ print.formality <-
 function(x, ...) {
     print(x$formality)
 }
+
+#' Formality
+#' 
+#' View formality scores.
+#' 
+#' formality Method for scores
+#' @param x The \code{\link[qdap]{formality}} object.
+#' @param \ldots ignored
+#' @export
+#' @method scores formality
+scores.formality <- function(x, ...) {
+
+    out <- x[["formality"]]
+    attributes(out) <- list(
+            class = c("formality_scores", class(out)),
+            type = "formality_scores",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+#' Formality
+#' 
+#' View formality counts.
+#' 
+#' formality Method for counts
+#' @param x The \code{\link[qdap]{formality}} object.
+#' @param \ldots ignored
+#' @export
+#' @method counts formality
+counts.formality <- function(x, ...) {
+
+    out <- x[["form.freq.by"]]
+    attributes(out) <- list(
+            class = c("table_count", class(out)),
+            type = "formality_counts",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+#' Formality
+#' 
+#' View \code{\link[qdap]{formality}} proportions.
+#' 
+#' formality Method for proportions
+#' @param x The formality object.
+#' @param \ldots ignored
+#' @export
+#' @method proportions formality
+proportions.formality <- function(x, ...) {
+
+    out <- x[["form.freq.by"]]
+    out[, -c(1:2)] <- out[, -c(1:2)]/out[, 2]
+    attributes(out) <- list(
+            class = c("table_proportion", class(out)),
+            type = "formality_proportions",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+#' Formality
+#' 
+#' View formality preprocessed.
+#' 
+#' formality Method for preprocessed
+#' @param x The \code{\link[qdap]{formality}} object.
+#' @param \ldots ignored
+#' @export
+#' @method preprocessed formality
+preprocessed.formality <- function(x, ...) {
+
+    out <- x[["POStagged"]]
+    attributes(out) <- list(
+            class = c("formality_preprocessed", class(out)),
+            type = "formality_preprocessed",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+#' Prints a formality_scores object
+#' 
+#' Prints a formality_scores object
+#' 
+#' @param x The formality_scores object
+#' @param \ldots ignored
+#' @S3method print formality_scores
+#' @method print formality_scores
+print.formality_scores <-
+function(x, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+    class(x) <- "data.frame"
+    print(x)
+    options(width=WD)
+}
+
+
+#' Prints a formality_preprocessed object
+#' 
+#' Prints a formality_preprocessed object
+#' 
+#' @param x The formality_preprocessed object
+#' @param \ldots ignored
+#' @S3method print formality_preprocessed
+#' @method print formality_preprocessed
+print.formality_preprocessed <-
+function(x, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+    class(x) <- "data.frame"
+    print(x)
+    options(width=WD)
+}
+
+
+#' Plots a formality_scores Object
+#' 
+#' Plots a formality_scores object.
+#' 
+#' @param x The formality_scores object.
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes geom_point scale_y_continuous ggtitle theme labs geom_text xlab ylab scale_size_continuous
+#' @export
+plot.formality_scores <- function(x, ...){ 
+
+    group <- formality <- word.count <- NULL
+
+    point.colors <- c("gray65", "red")
+    buffer <- diff(range(x$formality))*.05
+    nms1 <- colnames(x)[1]
+    colnames(x)[1] <- "group"
+
+    x <- x[order(x["formality"]), ]
+    x[, "group"] <- factor(x[, "group"], levels = x[, "group"])
+
+    ggplot(data=x, aes(group, formality, size=word.count)) +         
+        geom_point(colour=point.colors[1]) + coord_flip()+                       
+        geom_text(aes(label = word.count), vjust = 1.2, size = 3,                
+            position = "identity",colour = "grey30") +                           
+        labs(size="word count") +                                                
+        theme(legend.position = 'bottom') +      
+        ggtitle("F Measure (Formality)") +
+        scale_y_continuous(limits=c(min(x$formality)-buffer,                   
+            max(x$formality) + buffer)) +  
+        geom_point(color="red", size=.4) +
+        ylab("Formality") + xlab(plot_namer(nms1)) +
+        scale_size_continuous(name="Word Count")
+                                   
+}
+
+
+#' Plots a formality_preprocessed Object
+#' 
+#' Plots a formality_preprocessed object.
+#' 
+#' @param x The formality_preprocessed object.
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes geom_bar coord_flip ylab theme theme_bw
+#' @export
+plot.formality_preprocessed <- function(x, ...){ 
+
+    POS <- Counts <- NULL
+
+    dat <- matrix2df(data.frame(Counts = sort(table(unlist(x[, "POStags"])))), "POS")
+    dat[, "POS"] <- dat[, "POS"] %l%  pos_tags("dataframe")
+    dat[, "POS"] <- factor(dat[, "POS"], levels=dat[, "POS"])
+
+    Max <- max(dat[, "Counts"])
+
+    ggplot(dat, aes(POS)) + 
+        geom_bar(aes(weights=Counts)) + 
+        coord_flip() + 
+        ylab("Count") +
+        scale_y_continuous(expand = c(0,0), limits = c(0,Max + Max*.05)) +
+        theme_qdap()
+
+}
+
+
+
+

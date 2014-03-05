@@ -1,0 +1,15 @@
+\name{plot.formality_scores}
+\alias{plot.formality_scores}
+\title{Plots a formality_scores Object}
+\usage{
+\method{plot}{formality_scores}(x, ...)
+}
+\arguments{
+  \item{x}{The formality_scores object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Plots a formality_scores object.
+}
+
