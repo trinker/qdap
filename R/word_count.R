@@ -70,9 +70,14 @@
 #' plot(x, label = TRUE)
 #' plot(x, label = TRUE, text.color = "red")
 #' plot(x, label = TRUE, lab.digits = 1, zero.replace = "PP7")
-#' x$raw[, 1:20]
-#' x$prop[, 1:8]
-#' x$rnp[, 1:8]
+#' 
+#' scores(x)
+#' counts(x)
+#' proportions(x)
+#' 
+#' plot(scores(x))
+#' plot(counts(x))
+#' plot(proportions(x))
 #' 
 #' ## combine columns
 #' colcomb2class(x, list(vowels = c("a", "e", "i", "o", "u")))
@@ -83,14 +88,14 @@
 #' 
 #' library(ggplot2);library(reshape2)
 #' dat <- character_table(DATA$state, list(DATA$sex, DATA$adult))
-#' dat2 <- colsplit2df(melt(dat$raw), keep.orig = TRUE)
+#' dat2 <- colsplit2df(melt(counts(dat)), keep.orig = TRUE)
 #' head(dat2, 15)
 #' 
 #' ggplot(data = dat2, aes(y = variable, x = value, colour=sex)) +
 #'     facet_grid(adult~.) +
 #'     geom_line(size=1, aes(group =variable), colour = "black") +
-#'     geom_point() 
-#'     
+#'     geom_point()
+#' 
 #' ggplot(data = dat2, aes(x = variable, y = value)) +
 #'     geom_bar(aes(fill = variable), stat = "identity") +
 #'     facet_grid(sex ~ adult, margins = TRUE) +
@@ -221,7 +226,7 @@ character_table <- function(text.var, grouping.var, percent = TRUE,
     
     out <- list(raw = DF2, prop = DF3, rnp = rnp)  
     attributes(out) <- list(
-            class = "fry",
+            class = "character_table",
             names = names(out),
             percent = percent, 
             zero.replace = zero.replace,
@@ -251,7 +256,7 @@ function(x, digits = 2, percent = NULL, zero.replace = NULL, ...) {
     WD <- options()[["width"]]
     options(width=3000)
     if (!is.null(percent)) {
-        if (percent != x$percent) {
+        if (percent != attributes(x)[["percent"]]) {
             DF <- as.matrix(x$prop[, -c(1:2)])
             if (percent) {
                 DF <- DF*100    
@@ -261,10 +266,13 @@ function(x, digits = 2, percent = NULL, zero.replace = NULL, ...) {
             x$prop <- data.frame(x$prop[, 1:2], DF, check.names = FALSE) 
         }
     } else {
-        percent <- x$percent 
+        percent <- attributes(x)[["percent"]]
     }
     if (is.null(zero.replace)) {
-        zero.replace <- x$zero.replace
+        zero.replace <- attributes(x)[["zero.replace"]]
+    }
+    if (is.null(digits)) {
+        digits <- attributes(x)[["digits"]]
     }
     rnp <- raw_pro_comb(x$raw[, -1, drop = FALSE], 
         x$prop[, -1, drop = FALSE], digits = digits, percent = percent, 
@@ -296,7 +304,7 @@ plot.character_table <- function(x, label = FALSE, lab.digits = 1, percent = NUL
     zero.replace = NULL, ...) {
     if (label) {
         if (!is.null(percent)) {
-            if (percent != x$percent) {
+            if (percent != attributes(x)[["percent"]]) {
                 DF <- as.matrix(x$prop[, -1])
                 if (percent) {
                     DF <- DF*100    
@@ -307,10 +315,13 @@ plot.character_table <- function(x, label = FALSE, lab.digits = 1, percent = NUL
                     check.names = FALSE) 
             }
         } else {
-            percent <- x$percent 
+            percent <- attributes(x)[["percent"]] 
         }
         if (is.null(zero.replace)) {
-            zero.replace <- x$zero.replace
+            zero.replace <- attributes(x)[["zero.replace"]]
+        }
+        if (is.null(lab.digits)) {
+            lab.digits <- attributes(x)[["digits"]]
         }
         rnp <- raw_pro_comb(x$raw[, -1], x$prop[, -1], 
             digits = lab.digits, percent = percent, 
@@ -322,6 +333,72 @@ plot.character_table <- function(x, label = FALSE, lab.digits = 1, percent = NUL
     }
 }
 
+
 #' @rdname word_count
 #' @export
 char_table <- character_table
+
+ #' Term Counts
+#' 
+#' View character_table scores.
+#' 
+#' character_table Method for scores
+#' @param x The \code{\link[qdap]{character_table}} object.
+#' @param \ldots ignored
+#' @export
+#' @method scores character_table
+scores.character_table <- function(x, ...) {
+
+    out <- x[["rnp"]]
+    attributes(out) <- list(
+            class = c("table_score", class(out)),
+            type = "character_table_scores",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+#' Term Counts
+#' 
+#' View character_table counts.
+#' 
+#' character_table Method for counts
+#' @param x The \code{\link[qdap]{character_table}} object.
+#' @param \ldots ignored
+#' @export
+#' @method counts character_table
+counts.character_table <- function(x, ...) {
+
+    out <- x[["raw"]]
+    attributes(out) <- list(
+            class = c("table_count", class(out)),
+            type = "character_table_counts",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+#' Term Counts
+#' 
+#' View \code{\link[qdap]{character_table}} proportions.
+#' 
+#' character_table Method for proportions
+#' @param x The character_table object.
+#' @param \ldots ignored
+#' @export
+#' @method proportions character_table
+proportions.character_table <- function(x, ...) {
+
+    out <- x[["prop"]]
+    attributes(out) <- list(
+            class = c("table_proportion", class(out)),
+            type = "character_table_proportions",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+

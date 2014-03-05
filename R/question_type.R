@@ -315,7 +315,7 @@ question_type <- function(text.var, grouping.var = NULL,
     rnp <- data.frame(DF2[, 1:2], rnp, check.names = FALSE) 
     o <- list(raw = DF3, count = DF, prop = DF2, rnp = rnp, 
         inds = DF3[, "n.row"], missing = rows.removed, percent = percent, 
-        zero.replace = zero.replace)
+        zero.replace = zero.replace, digits = digits)
     class(o) <- "question_type"
     o
 }

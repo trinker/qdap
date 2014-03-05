@@ -3498,9 +3498,9 @@ tapply(DATA$state, DATA$person, character_count, byrow=FALSE)
 ```{r}
 x <- character_table(DATA$state, DATA$person)
 names(x)
-x$raw
-x$prop[, 1:10]
-x$rnp[, 1:7]
+counts(x)
+proportions(x)[, 1:10]
+scores(x)[, 1:7]
 ## Combine Columns
 vowels <- c("a", "e", "i", "o", "u")
 cons <- letters[!letters %in% c(vowels, qcv(j, q, x, z))]

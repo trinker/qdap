@@ -132,9 +132,14 @@ plot(x)
 plot(x, label = TRUE)
 plot(x, label = TRUE, text.color = "red")
 plot(x, label = TRUE, lab.digits = 1, zero.replace = "PP7")
-x$raw[, 1:20]
-x$prop[, 1:8]
-x$rnp[, 1:8]
+
+scores(x)
+counts(x)
+proportions(x)
+
+plot(scores(x))
+plot(counts(x))
+plot(proportions(x))
 
 ## combine columns
 colcomb2class(x, list(vowels = c("a", "e", "i", "o", "u")))
@@ -145,7 +150,7 @@ colcomb2class(x, list(vowels = c("a", "e", "i", "o", "u")))
 
 library(ggplot2);library(reshape2)
 dat <- character_table(DATA$state, list(DATA$sex, DATA$adult))
-dat2 <- colsplit2df(melt(dat$raw), keep.orig = TRUE)
+dat2 <- colsplit2df(melt(counts(dat)), keep.orig = TRUE)
 head(dat2, 15)
 
 ggplot(data = dat2, aes(y = variable, x = value, colour=sex)) +

@@ -53,6 +53,7 @@ colcomb2class <- function(dataframe, combined.columns, class = "list",
 
     ordat <- dataframe
     cls <- class
+    attrib <- FALSE
 
     ## If question type or lit pull raw or count in as dataframe
     if (is.list(ordat) && !is.data.frame(ordat)) {
@@ -63,8 +64,19 @@ colcomb2class <- function(dataframe, combined.columns, class = "list",
         ## overide defualt transfering calss print options
         if (!override) {
             cls <- class(ordat)
-            percent <- ordat[["percent"]]
-            digits <- ordat[["digits"]]
+
+            ## check for use of class or attributes to store info
+            attrib <- ifelse(is.null(ordat[["percent"]]),
+                TRUE, FALSE)
+            percent <- ifelse(is.null(ordat[["percent"]]),
+                ifelse(is.null(attributes(ordat)[["percent"]]), 
+                    TRUE, is.null(attributes(ordat)[["percent"]])), 
+                    ordat[["percent"]])
+            digits <- ifelse(is.null(ordat[["digits"]]),
+                ifelse(is.null(attributes(ordat)[["digits"]]),
+                    2, attributes(ordat)[["digits"]]), 
+                    ordat[["digits"]])
+
         }
 
     }
@@ -116,6 +128,7 @@ colcomb2class <- function(dataframe, combined.columns, class = "list",
         x[is.nan(x)] <- repl
         x
     }
+
     props <- apply(props, 2, FUN)*cons
 
     ## combine raw and proportion
@@ -137,8 +150,13 @@ colcomb2class <- function(dataframe, combined.columns, class = "list",
     }
 
     ## Add percents and digits
-    o[["digits"]] <- digits  
-    o[["percent"]] <-  percent    
+    if (attrib) {
+        attributes(o) <- attributes(ordat)
+        return(o)
+    } else {
+        o[["digits"]] <- digits  
+        o[["percent"]] <-  percent    
+    }
 
     ## add any items from the original class not recreated
     if (is.list(ordat) && !is.data.frame(ordat)) {
@@ -150,4 +168,3 @@ colcomb2class <- function(dataframe, combined.columns, class = "list",
     class(o) <- cls
     o
 }
-

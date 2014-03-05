@@ -1,0 +1,18 @@
+\name{counts.character_table}
+\alias{counts.character_table}
+\title{Term Counts}
+\usage{
+\method{counts}{character_table}(x, ...)
+}
+\arguments{
+  \item{x}{The \code{\link[qdap]{character_table}} object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+View character_table counts.
+}
+\details{
+character_table Method for counts
+}
+

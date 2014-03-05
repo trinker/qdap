@@ -15,10 +15,18 @@ plot.table_score <- function(x, values = TRUE, high = "red", ...){
         as.numeric(bracketX(z))
     })
 
-    y[, -c(1:2)] <- y[, -c(1:2)]/y[, 2]
-    y[, -c(1:2)] <- lapply(y[, -c(1:2)], function(z) {
-        z[is.na(z)] <- 0; z
-    })
+    if (attributes(x)[["type"]] %in% c("character_table_scores")) {
+        y[, -c(1)] <- y[, -c(1)]/rowSums(y[, -c(1)])
+        y[, -c(1)] <- lapply(y[, -c(1)], function(z) {
+            z[is.na(z)] <- 0; z
+        })
+    } else {
+        y[, -c(1:2)] <- y[, -c(1:2)]/y[, 2]
+        y[, -c(1:2)] <- lapply(y[, -c(1:2)], function(z) {
+            z[is.na(z)] <- 0; z
+        })
+    }
+
 
     if (!values) {
         mat2 <- NULL
@@ -93,7 +101,8 @@ print.table_count <-
 function(x, ...) {
     WD <- options()[["width"]]
     options(width=3000)
-    print(x$rnp)
+    class(x) <- "data.frame"
+    print(x)
     options(width=WD)
 }
 
@@ -109,7 +118,8 @@ print.table_proportion <-
 function(x, ...) {
     WD <- options()[["width"]]
     options(width=3000)
-    print(x$rnp)
+    class(x) <- "data.frame"
+    print(x)
     options(width=WD)
 }
 
