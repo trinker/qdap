@@ -89,9 +89,11 @@
 #' head(FR$SENTENCE_AVERAGES)
 #' 
 #' LW1 <- with(rajSPLIT, linsear_write(dialogue, list(person, act)))
-#' head(LW1)
+#' plot(scores(LW1))
+#' plot(counts(LW1))
 #' LW2 <- with(rajSPLIT, linsear_write(dialogue, list(sex, fam.aff)))
-#' head(LW2)
+#' plot(scores(LW2), method="lm")
+#' plot(counts(LW2))
 #' }
 automated_readability_index <-
 function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
@@ -614,6 +616,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         (DF5$HE_tsent_ratio - 2)/2)
     DF5 <- DF5[, c(2, 4, 6, 8)]
     names(DF5) <- c(G, "sent.per.100", "hard_easy_sum", "Linsear_Write")
+    names(DF)[1] <- names(DF5)[1]
     o <- list(Counts = DF, Readability = DF5)
     class(o) <- c("linsear_write", class(DF5))
     o
@@ -1059,6 +1062,191 @@ plot_flesch_kincaid <- function(x, ...){
     grid.arrange(plot2, plot1, ncol=2, widths=2:1)
 }
 
+#' Readability Measures
+#' 
+#' \code{scores.linsear_write} - View scores from \code{\link[qdap]{linsear_write}}.
+#' 
+#' linsear_write Method for scores
+#' @param x The linsear_write object.
+#' @param \ldots ignored
+#' @export
+#' @method scores linsear_write
+scores.linsear_write <- function(x, ...) {
+
+    out <- x[["Readability"]]
+    attributes(out) <- list(
+            class = c("linsear_write_scores", class(out)),
+            type = "linsear_write_scores",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+#' Prints a linsear_write_scores Object
+#' 
+#' Prints a linsear_write_scores object.
+#' 
+#' @param x The linsear_write_scores object.
+#' @param digits The number of digits displayed.
+#' @param \ldots ignored
+#' @method print linsear_write_scores
+#' @S3method print linsear_write_scores
+print.linsear_write_scores <-
+    function(x, digits = 3, ...) {
+    class(x) <- "data.frame"
+    WD <- options()[["width"]]
+    options(width=3000)
+    print(x)
+    options(width=WD)
+}
+
+
+#' Prints an linsear_write Object
+#' 
+#' Prints an linsear_write object.
+#' 
+#' @param x The linsear_write object.
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
+#' @param \ldots ignored
+#' @method print linsear_write
+#' @S3method print linsear_write
+print.linsear_write <- function(x, digits = 3, ...) {
+    print(scores(x), digits = digits, ...)
+}
+
+
+#' Readability Measures
+#' 
+#' \code{counts.linsear_write} - View counts from \code{\link[qdap]{linsear_write}}.
+#' 
+#' linsear_write Method for counts.
+#' @param x The linsear_write object.
+#' @param \ldots ignored
+#' @export
+#' @method counts linsear_write
+counts.linsear_write <- function(x, ...) {
+    out <- x[["Counts"]]
+    rownames(out) <- NULL
+    
+    attributes(out) <- list(
+            class = c("linsear_write_count", class(out)),
+            type = "linsear_write_count",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+#' Prints a linsear_write_count Object
+#' 
+#' Prints a linsear_write_count object.
+#' 
+#' @param x The linsear_write_count object.
+#' @param digits The number of digits displayed.
+#' @param \ldots ignored
+#' @method print linsear_write_count
+#' @S3method print linsear_write_count
+print.linsear_write_count <-
+    function(x, digits = 3, ...) {
+    class(x) <- "data.frame"
+    WD <- options()[["width"]]
+    options(width=3000)
+    print(x)
+    options(width=WD)
+}
+
+
+#' Plots a linsear_write_count Object
+#' 
+#' Plots a linsear_write_count object.
+#' 
+#' @param x The linsear_write_count object.
+#' @param \ldots ignored
+#' @importFrom ggplot2 scale_colour_manual ylab
+#' @export
+#' @method plot linsear_write_count
+plot.linsear_write_count <- function(x, ...){ 
+
+    x[, "Selected"] <- ifelse(is.na(x[, "read.gr"]), "Used", "Not Used")
+    nms1 <- paste(sapply(unlist(strsplit(names(x)[1], "\\&")), 
+        Caps), collapse = " & ")
+    names(x)[1] <- "group"
+    x[, "group"] <- paste(1:nrow(x), x[, "group"], sep="|||")
+
+    dat <- gantt(x[, "text.var"], x[, "group"])
+    dat[, "group"] <- sapply(strsplit(as.character(dat[, "group"]), "\\|\\|\\|"), "[", 2)
+    dat[, "Selected"] <- ifelse(is.na(x[, "read.gr"]), "Used", "Not Used")
+
+    plot1 <- gantt_wrap(dat, "group", fill.var = "Selected", plot = FALSE)
+
+    plot1 + 
+        scale_colour_manual(values=c("grey90", "red")) +
+        ylab(nms1) 
+}
+
+
+
+#' Plots a linsear_write Object
+#' 
+#' Plots a linsear_write object.
+#' 
+#' @param x The readability_score object.
+#' @param alpha The alpha level for the points and smooth fill in the 
+#' scatterplot (length one or two; if two 1-points, 2-smooth fill).
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes geom_point geom_smooth theme ggplotGrob theme_bw ylab xlab
+#' @importFrom gridExtra grid.arrange
+#' @importFrom scales alpha
+#' @export
+#' @method plot linsear_write
+plot.linsear_write <- function(x, alpha = .4, ...){ 
+
+    plot(scores(x, alpha = alpha, ...))
+
+}
+
+#' Plots a linsear_write_scores Object
+#' 
+#' Plots a linsear_write_scores object.
+#' 
+#' @param x The readability_score object.
+#' @param alpha The alpha level for the points and smooth fill in the 
+#' scatterplot (length one or two; if two 1-points, 2-smooth fill).
+#' @param \ldots Other arguments passed to \code{\link[ggplot2]{geom_smooth}}.
+#' @importFrom ggplot2 ggplot aes geom_point geom_smooth theme ggplotGrob theme_bw ylab xlab
+#' @importFrom gridExtra grid.arrange
+#' @importFrom scales alpha
+#' @export
+#' @method plot linsear_write_scores
+plot.linsear_write_scores <- function(x, alpha = c(.4, .08), ...){ 
+
+    hard_easy_sum <- Linsear_Write <- NULL
+    
+    character.count <- sent.per.100 <- Linsear_write <- 
+        hard_easy_sumt <- grvar <- NULL
+  
+    x  <- x[order(x[, "Linsear_Write"]), ]
+    x[, 1] <- factor(x[, 1], levels = x[, 1])
+    forlater <-  names(x)[1]
+    names(x)[1] <- "grvar"
+
+    plot1 <- ggplot(x, aes(y = hard_easy_sum, 
+        x = sent.per.100)) + 
+        geom_smooth(fill="blue", colour="darkblue", size=1, 
+            alpha = tail(alpha, 1), ...) +
+        geom_point(size=2.75, alpha = head(alpha, 1)) +
+        theme_bw() + 
+        xlab("Sentence Per 100 Words") + 
+        ylab("3 x Hard Words + Easy Words") + 
+        theme(panel.grid = element_blank()) 
+    plot2 <- ggplot(x, aes(y = grvar, x = Linsear_Write)) +
+        geom_point(size=2) + 
+        ylab(gsub("&", " & ", forlater)) + 
+        xlab("Linsear Write")
+
+    grid.arrange(plot2, plot1, ncol=2)
+}
 
 ####=============Template================
 

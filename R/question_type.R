@@ -454,7 +454,7 @@ counts.question_type <- function(x, ...) {
 
     out <- x[["count"]]
     attributes(out) <- list(
-            class = c("table_counts", class(out)),
+            class = c("table_count", class(out)),
             type = "question_type_counts",
             names = colnames(out),
             row.names = rownames(out)
@@ -514,14 +514,14 @@ preprocessed.question_type <- function(x, ...) {
 #' @param \ldots Arguments passed to \code{\link[qdap]{gantt_plot}}.
 #' @importFrom ggplot2 ylab xlab theme element_blank theme_minimal geom_bar guide_legend aes coord_flip
 #' @importFrom gridExtra grid.arrange
+#' @importFrom reshape2 melt
 #' @export
 plot.question_type_preprocessed <- function(x, ...){ 
     
     Var1 <- value <- NULL
     
     dat2 <- melt(sort(table(x[, "q.type"])))
-    x[, "q.type"] <- factor(x[, "q.type"], levels=as.character(dat2[, 1]))
-    dat2[, 1] <- factor(dat2[, 1], levels=as.character(dat2[, 1]))
+    x[, "q.type"] <- factor(x[, "q.type"], levels=rev(dat2[, 1]))
 
     out <- gantt_plot(text.var = x[, "raw.text"], 
         grouping.var = x[, colnames(x)[1]], fill.var = x[, "q.type"],
@@ -530,19 +530,35 @@ plot.question_type_preprocessed <- function(x, ...){
     nms <- paste(sapply(unlist(strsplit(colnames(x)[1], "\\&")), 
         Caps), collapse = " & ")
 
-    plot1 <- out + ylab(nms)  +  xlab("Duration (in words)") +
-        guides(color=guide_legend(title="Question\nType", reverse =TRUE))
+    x[, colnames(x)[1]] <- paste(1:nrow(x), x[, colnames(x)[1]], sep ="|||")
+    dat <- gantt(x[, "raw.text"], list(x[, colnames(x)[1]], x[, "q.type"]), 
+        col.sep ="&")
 
-    qtype <- mgsub(c("_", "/"), c(" ", ","), dat2[, "Var1"])
-    dat2[, "Var1"] <- factor(qtype, levels=qtype)
+    dat[, 1] <- sapply(strsplit(as.character(dat[, 1]), 
+        "\\|\\|\\|"), "[", 2)    
+    dat <- colsplit2df(dat, sep="&")
+    colnames(dat)[1:2] <- c("group", "q.type")
+    dat[, "q.type"] <- factor(dat[, "q.type"], levels=rev(levels(x[, 
+        "q.type"])))
+
+    plot1 <- gantt_wrap(dat, "group", fill.var="q.type", plot = FALSE) + 
+        ylab(nms)  +  xlab("Duration (in words)")  +
+        guides(colour=guide_legend(title="Question\nType", reverse=TRUE))
+
+    dat2[, "Var1"] <- mgsub(c("_", "/"), c(" ", ","), dat2[, "Var1"])
+    dat2[, "Var1"] <- factor(dat2[, "Var1"], levels=dat2[, "Var1"])
+    Max <- max(dat2[, "value"])
+
     plot2 <- ggplot(dat2, aes(x=Var1)) + 
         geom_bar(aes(weights=value, fill=Var1)) + 
+        scale_y_continuous(expand = c(0,0), limits = c(0,Max + Max*.05)) +
         coord_flip() + xlab(NULL) + 
         ylab("Count") + theme_qdap() +
         theme(legend.position="none")
 
-   grid.arrange(plot2, plot1, ncol=2, widths=c(1,2,2,2))
+    grid.arrange(plot2, plot1, ncol=2, widths=c(1,2,2,2))
   
 }
+
 
 

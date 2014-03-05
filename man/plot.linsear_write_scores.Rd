@@ -1,0 +1,20 @@
+\name{plot.linsear_write_scores}
+\alias{plot.linsear_write_scores}
+\title{Plots a linsear_write_scores Object}
+\usage{
+\method{plot}{linsear_write_scores}(x, alpha = c(0.4, 0.08), ...)
+}
+\arguments{
+  \item{x}{The readability_score object.}
+
+  \item{alpha}{The alpha level for the points and smooth
+  fill in the scatterplot (length one or two; if two
+  1-points, 2-smooth fill).}
+
+  \item{\ldots}{Other arguments passed to
+  \code{\link[ggplot2]{geom_smooth}}.}
+}
+\description{
+Plots a linsear_write_scores object.
+}
+

@@ -1,0 +1,19 @@
+\name{counts.linsear_write}
+\alias{counts.linsear_write}
+\title{Readability Measures}
+\usage{
+\method{counts}{linsear_write}(x, ...)
+}
+\arguments{
+  \item{x}{The linsear_write object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+\code{counts.linsear_write} - View counts from
+\code{\link[qdap]{linsear_write}}.
+}
+\details{
+linsear_write Method for counts.
+}
+

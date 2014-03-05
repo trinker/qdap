@@ -1,0 +1,17 @@
+\name{print.linsear_write_count}
+\alias{print.linsear_write_count}
+\title{Prints a linsear_write_count Object}
+\usage{
+\method{print}{linsear_write_count}(x, digits = 3, ...)
+}
+\arguments{
+  \item{x}{The linsear_write_count object.}
+
+  \item{digits}{The number of digits displayed.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Prints a linsear_write_count object.
+}
+

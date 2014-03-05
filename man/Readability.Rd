@@ -138,9 +138,11 @@ htruncdf(FR$SENTENCES_USED)
 head(FR$SENTENCE_AVERAGES)
 
 LW1 <- with(rajSPLIT, linsear_write(dialogue, list(person, act)))
-head(LW1)
+plot(scores(LW1))
+plot(counts(LW1))
 LW2 <- with(rajSPLIT, linsear_write(dialogue, list(sex, fam.aff)))
-head(LW2)
+plot(scores(LW2), method="lm")
+plot(counts(LW2))
 }
 }
 \references{

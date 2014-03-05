@@ -1,0 +1,19 @@
+\name{plot.linsear_write}
+\alias{plot.linsear_write}
+\title{Plots a linsear_write Object}
+\usage{
+\method{plot}{linsear_write}(x, alpha = 0.4, ...)
+}
+\arguments{
+  \item{x}{The readability_score object.}
+
+  \item{alpha}{The alpha level for the points and smooth
+  fill in the scatterplot (length one or two; if two
+  1-points, 2-smooth fill).}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Plots a linsear_write object.
+}
+
