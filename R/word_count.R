@@ -218,10 +218,16 @@ character_table <- function(text.var, grouping.var, percent = TRUE,
     rnp <- raw_pro_comb(DF2[, -1], DF3[, -1], digits = digits, 
         percent = percent, zero.replace = zero.replace)  
     rnp <- data.frame(DF2[, 1, drop = FALSE], rnp, check.names = FALSE)  
-    o <- list(raw = DF2, prop = DF3, rnp = rnp, percent = percent, 
-        zero.replace = zero.replace)  
-    class(o) <- "character_table"
-    o
+    
+    out <- list(raw = DF2, prop = DF3, rnp = rnp)  
+    attributes(out) <- list(
+            class = "fry",
+            names = names(out),
+            percent = percent, 
+            zero.replace = zero.replace,
+            digits = digits
+    )
+    out
 }
 
 #' Prints a character_table object

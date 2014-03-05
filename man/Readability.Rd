@@ -17,8 +17,8 @@ SMOG(text.var, grouping.var = NULL, output = "valid",
 
 flesch_kincaid(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...)
 
-fry(text.var, grouping.var = NULL, auto.label = TRUE,
-  rm.incomplete = FALSE, grid = FALSE, div.col = "grey85", ...)
+fry(text.var, grouping.var = NULL, rm.incomplete = FALSE,
+  auto.label = TRUE, grid = FALSE, div.col = "grey85", plot = TRUE, ...)
 
 linsear_write(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...)
 }
@@ -50,6 +50,9 @@ linsear_write(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...)
 
   \item{div.col}{The color of the grade level division
   lines.}
+
+  \item{plot}{logical.  If \code{TRUE} a graph is plotted
+  corresponding to Fry's graphic representation.}
 }
 \value{
 Returns a list of 2 dataframes: (1) Counts and (2)
@@ -58,9 +61,10 @@ readability score and can be accessed via
 \code{\link[qdap]{counts}}.  Readability is the dataframe
 with the selected readability statistic by grouping
 variable(s) and can be access via
-\code{\link[qdap]{counts}} (\code{\link[qdap]{fry}} does
-not contain scores).  The \code{frey} function returns a
-graphic representation of the readability.
+\code{\link[qdap]{scores}}.  The \code{\link[qdap]{fry}}
+function returns a graphic representation of the
+readability as the \code{\link[qdap]{scores}} returns the
+information for graphing but not a readability score.
 }
 \description{
 \code{automated_readability_index} - Apply Automated
@@ -124,22 +128,45 @@ plot(counts(CL2))
 (SM1 <- with(rajSPLIT, SMOG(dialogue, list(person, act))))
 plot(counts(SM1))
 plot(SM1)
+
 (SM2 <- with(rajSPLIT, SMOG(dialogue, list(sex, fam.aff))))
 
 (FL1 <- with(rajSPLIT, flesch_kincaid(dialogue, list(person, act))))
 plot(scores(FL1))
 plot(counts(FL1))
+
 (FL2 <-  with(rajSPLIT, flesch_kincaid(dialogue, list(sex, fam.aff))))
 plot(scores(FL2))
 plot(counts(FL2))
 
-FR <- with(rajSPLIT, fry(dialogue, list(sex, fam.aff)))
-htruncdf(FR$SENTENCES_USED)
-head(FR$SENTENCE_AVERAGES)
+FR1 <- with(rajSPLIT, fry(dialogue, list(sex, fam.aff)))
+scores(FR1)
+plot(scores(FR1))
+counts(FR1)
+plot(counts(FR1))
+
+FR2 <- with(rajSPLIT, fry(dialogue, person))
+scores(FR2)
+plot(scores(FR2))
+counts(FR2)
+plot(counts(FR2))
+
+FR3 <- with(pres_debates2012, fry(dialogue, list(time, person)))
+colsplit2df(scores(FR3))
+plot(scores(FR3), auto.label = FALSE)
+counts(FR3)
+plot(counts(FR3))
+
+library(ggplot2)
+ggplot(colsplit2df(counts(FR3)), aes(sent.per.100.wrds,
+    syllables.per.100.wrds)) +
+    geom_point(aes(fill=person), shape=21, size=3) +
+    facet_grid(person~time)
 
 LW1 <- with(rajSPLIT, linsear_write(dialogue, list(person, act)))
 plot(scores(LW1))
 plot(counts(LW1))
+
 LW2 <- with(rajSPLIT, linsear_write(dialogue, list(sex, fam.aff)))
 plot(scores(LW2), method="lm")
 plot(counts(LW2))

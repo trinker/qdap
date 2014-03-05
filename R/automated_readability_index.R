@@ -14,9 +14,10 @@
 #' Counts are the raw scores used to calculate readability score and can be
 #' accessed via \code{\link[qdap]{counts}}.  Readability is the dataframe
 #' with the selected readability statistic by grouping variable(s) and can be 
-#' access via \code{\link[qdap]{counts}} (\code{\link[qdap]{fry}} does not 
-#' contain scores).  The \code{frey} function returns a graphic representation of 
-#' the readability.
+#' access via \code{\link[qdap]{scores}}.  The \code{\link[qdap]{fry}} function 
+#' returns a graphic representation of the readability as the 
+#' \code{\link[qdap]{scores}} returns the information for graphing but not a
+#' readability score.
 #' @rdname Readability
 #' @section Warning: Many of the indices (e.g., Automated Readability Index) 
 #' are derived from word difficulty (letters per word) and sentence difficulty 
@@ -75,22 +76,45 @@
 #' (SM1 <- with(rajSPLIT, SMOG(dialogue, list(person, act))))
 #' plot(counts(SM1))
 #' plot(SM1)
+#' 
 #' (SM2 <- with(rajSPLIT, SMOG(dialogue, list(sex, fam.aff))))
 #' 
 #' (FL1 <- with(rajSPLIT, flesch_kincaid(dialogue, list(person, act))))
 #' plot(scores(FL1))
 #' plot(counts(FL1))
+#' 
 #' (FL2 <-  with(rajSPLIT, flesch_kincaid(dialogue, list(sex, fam.aff))))
 #' plot(scores(FL2))
 #' plot(counts(FL2))
 #' 
-#' FR <- with(rajSPLIT, fry(dialogue, list(sex, fam.aff)))
-#' htruncdf(FR$SENTENCES_USED)
-#' head(FR$SENTENCE_AVERAGES)
+#' FR1 <- with(rajSPLIT, fry(dialogue, list(sex, fam.aff)))
+#' scores(FR1)
+#' plot(scores(FR1))
+#' counts(FR1)
+#' plot(counts(FR1))
 #' 
+#' FR2 <- with(rajSPLIT, fry(dialogue, person))
+#' scores(FR2)
+#' plot(scores(FR2))
+#' counts(FR2)
+#' plot(counts(FR2))
+#' 
+#' FR3 <- with(pres_debates2012, fry(dialogue, list(time, person)))
+#' colsplit2df(scores(FR3))
+#' plot(scores(FR3), auto.label = FALSE)
+#' counts(FR3)
+#' plot(counts(FR3))
+#' 
+#' library(ggplot2)
+#' ggplot(colsplit2df(counts(FR3)), aes(sent.per.100.wrds, 
+#'     syllables.per.100.wrds)) +
+#'     geom_point(aes(fill=person), shape=21, size=3) +
+#'     facet_grid(person~time)
+#'     
 #' LW1 <- with(rajSPLIT, linsear_write(dialogue, list(person, act)))
 #' plot(scores(LW1))
 #' plot(counts(LW1))
+#' 
 #' LW2 <- with(rajSPLIT, linsear_write(dialogue, list(sex, fam.aff)))
 #' plot(scores(LW2), method="lm")
 #' plot(counts(LW2))
@@ -228,7 +252,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     names(DF2)[1] <- G
     rownames(DF) <- NULL    
     o <- list(Counts = DF, Readability = DF2)
-    class(o) <- c("coleman_liau", class(DF2))
+    class(o) <- "coleman_liau"
     o
 }
 
@@ -302,7 +326,7 @@ function(text.var, grouping.var = NULL, output = "valid",
     if(output == "valid") DF2$validity <- NULL
     names(DF2)[1] <- G
     o <- list(Counts = DF, Readability = DF2)
-    class(o) <- c("SMOG", class(DF2))
+    class(o) <- "SMOG"
     o
 }
 
@@ -366,7 +390,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         tse = sentence.count, tsy = syllable.count))
     names(DF2)[1] <- G
     o <- list(Counts = DF, Readability = DF2)
-    class(o) <- c("flesch_kincaid", class(DF2))
+    class(o) <- "flesch_kincaid"
     o
 }
 
@@ -382,10 +406,12 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
 #' @param grid logical.  If \code{TRUE} a micro grid is dsicplayed similar to 
 #' Fry's original depiction, though this makes visualizing more difficult.
 #' @param div.col The color of the grade level division lines.
+#' @param plot logical.  If \code{TRUE} a graph is plotted corresponding to Fry's 
+#' graphic representation.
 #' @export
 fry <-
-function(text.var, grouping.var = NULL, auto.label = TRUE, 
-    rm.incomplete = FALSE, grid = FALSE, div.col = "grey85", ...) {
+function(text.var, grouping.var = NULL, rm.incomplete = FALSE, 
+    auto.label = TRUE, grid = FALSE, div.col = "grey85", plot = TRUE, ...) {
     read.gr <- group <- NULL  
     if(is.null(grouping.var)) {
         G <- "all"
@@ -458,73 +484,21 @@ function(text.var, grouping.var = NULL, auto.label = TRUE,
     DF5$syll.count <- syllable_sum(lapply(DF5$text.var, hun.grab))
     DF6 <- aggregate(syll.count ~ group, DF5, mean)
     DF6$ave.sent.per.100 <- aggregate(sent.per.100 ~ group, DF5, mean)[, 2]
-    suppressWarnings(plot(1, 1, xlim = c(108, 182), ylim = c(2, 
-        25), axes = FALSE, type = "n", 
-        xlab = "Average number of syllables per 100 words", 
-        ylab = "Average number of sentences per 100 words", 
-        main = "Fry Graph for Estimating Reading Ages (grade level)", 
-        xaxs = "i", yaxs = "i"))
-    axis(1, at = 108:182, labels = TRUE)
-    axis(1, at = seq(108, 182, by = 4), tcl = -1.1, labels = FALSE)
-    axis(2, at = 2:25, labels = TRUE)
-    axis(4, at = 2:25, labels = TRUE)
-    if (grid){
-        grid(nx = 74, ny = 46, lty = "solid", col = "gold")
-        grid(nx = 37, ny = 23, lty = "solid", col = "gray65")
-    }
-    box()
-    segments(108, 9.97, 133.9, 25, lwd = 2, col = div.col)
-    segments(108, 7.7, 142.1, 25, lwd = 2, col = div.col)
-    segments(108, 6.4, 147.8, 25, lwd = 2, col = div.col)
-    segments(108, 5.61, 155, 25, lwd = 2, col = div.col)
-    segments(108, 5.1, 160, 25, lwd = 2, col = div.col)
-    segments(108, 3.8, 160.8, 25, lwd = 2, col = div.col)
-    segments(111.5, 2, 167.5, 25, lwd = 2, col = div.col)
-    segments(123, 2, 169, 25, lwd = 2, col = div.col)
-    segments(136.3, 2, 169, 25, lwd = 2, col = div.col)
-    segments(143.3, 2, 173.5, 25, lwd = 2, col = div.col)
-    segments(148.15, 2, 178.2, 25, lwd = 2, col = div.col)
-    segments(155.6, 2, 178.5, 25, lwd = 2, col = div.col)
-    segments(161.9, 2, 178.4, 25, lwd = 2, col = div.col)
-    segments(168.2, 2, 178.2, 25, lwd = 2, col = div.col)
-    segments(173.9, 2, 178.7, 25, lwd = 2, col = div.col)
-    segments(179.1, 2, 181.25, 25, lwd = 2, col = div.col)
-    x1 <- c(108, 108, 128)
-    y1 <- c(4.2, 2, 2)
-    polygon(x1, y1, col = "darkblue", border = "darkblue")
-    x2 <- c(143, 145, 150, 152, 155, 158, 162, 166, 172, 180, 181, 182, 182)
-    y2 <- c(25, 18.3, 14.3, 12.5, 11.1, 10, 9.1, 8.3, 7.7, 7.55, 7.5, 7.5, 25)
-    polygon(x2, y2, col = "darkblue", border = "darkblue")  
-    text(120, 22.2, 1, col = "darkgreen", cex = 1.25)
-    text(124, 17.9, 2, col = "darkgreen", cex = 1.25)
-    text(126, 15.9, 3, col = "darkgreen", cex = 1.25)
-    text(127, 14.4, 4, col = "darkgreen", cex = 1.25)
-    text(128, 13.3, 5, col = "darkgreen", cex = 1.25)
-    text(110.7, 5.5, 6, col = "darkgreen", cex = 1.25)
-    text(115, 4.88, 7, col = "darkgreen", cex = 1.25)
-    text(121, 3.78, 8, col = "darkgreen", cex = 1.25)
-    text(132, 3.5, 9, col = "darkgreen", cex = 1.25)
-    text(142, 3.5, 10, col = "darkgreen", cex = 1.25)
-    text(147.7, 3.5, 11, col = "darkgreen", cex = 1.25)
-    text(153.7, 3.5, 12, col = "darkgreen", cex = 1.25)
-    text(160, 3.5, 13, col = "darkgreen", cex = 1.25)
-    text(166.4, 3.5, 14, col = "darkgreen", cex = 1.25)
-    text(171, 3.5, 15, col = "darkgreen", cex = 1.25)
-    text(176.7, 3.5, 16, col = "darkgreen", cex = 1.25)
-    text(180.7, 3.5, 17, col = "darkgreen", cex = 1.25)
-    with(DF6, points(syll.count, ave.sent.per.100, pch = 19, cex = 1, 
-        col = "red"))
-    with(DF6, points(syll.count, ave.sent.per.100, pch = 3, cex = 3, 
-        col = "black"))   
-    if (!auto.label) {
-        with(DF6, identify(syll.count, ave.sent.per.100, group))
-    } else {
-        with(DF6, text(syll.count, ave.sent.per.100, labels = group, 
-            adj = c(1, -0.5)))
-    }      
     names(DF6) <- c(G, "ave.syll.per.100", "ave.sent.per.100")
-    invisible(list(SENTENCES_USED = DF5, SENTENCE_AVERAGES = DF6))
+    colnames(DF5)[c(2, 4, 5)] <- c(colnames(DF6)[1], "sent.per.100.wrds",
+        "syllables.per.100.wrds")
+    DF5 <- DF5[, -1]
+    
+    out <- list(Counts = DF5[, c(1, 3:4, 2)], Readability = DF6)
+    attributes(out) <- list(
+            class = "fry",
+            names = names(out),
+            plot_instructions = list(auto.label = auto.label, 
+                grid = grid, div.col = div.col, plot = plot)
+    )
+    out
 }
+
 
 
 #' Linsear Write Readability
@@ -618,7 +592,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     names(DF5) <- c(G, "sent.per.100", "hard_easy_sum", "Linsear_Write")
     names(DF)[1] <- names(DF5)[1]
     o <- list(Counts = DF, Readability = DF5)
-    class(o) <- c("linsear_write", class(DF5))
+    class(o) <- "linsear_write"
     o
 }
 
@@ -739,6 +713,12 @@ plot.readability_count <- function(x, alpha = .3, ...){
             word_counts(DF = x, x = "word.count", y = "syllable.count", 
                 z = NULL, g = "group", alpha = alpha)
         },
+        fry_count = {
+            
+            word_counts3(DF = x, x = "sent.per.100.wrds", 
+                y = "syllables.per.100.wrds", 
+                z = NULL, g = colnames(x)[1])
+        },        
         stop("Not a plotable readability count")
     )
 
@@ -750,13 +730,22 @@ plot.readability_count <- function(x, alpha = .3, ...){
 #' 
 #' @param x The readability_score object.
 #' @param alpha The alpha level to be used for the points.
+#' @param auto.label  logical.  For plotting \code{\link[qdap]{fry}} only, if 
+#' \code{TRUE} labels automatically added.  If \code{FALSE} the user clicks 
+#' interactively.
+#' @param grid logical.  For plotting \code{\link[qdap]{fry}} only, if 
+#' \code{TRUE} a micro grid is dsicplayed similar to Fry's original depiction, 
+#' though this makes visualizing more difficult.
+#' @param div.col For plotting \code{\link[qdap]{fry}} only, the color of the 
+#' grade level division lines.
 #' @param \ldots ignored
 #' @importFrom ggplot2 ggplot aes geom_smooth facet_wrap guide_colorbar geom_point theme ggplotGrob theme_bw ylab xlab scale_fill_gradient element_blank guides 
 #' @importFrom gridExtra grid.arrange
 #' @importFrom scales alpha
 #' @method plot readability_score
 #' @export
-plot.readability_score <- function(x, alpha = .3, ...){ 
+plot.readability_score <- function(x, alpha = .3, auto.label, 
+    grid, div.col, ...){ 
 
     type <- attributes(x)[["type"]]
 
@@ -772,6 +761,22 @@ plot.readability_score <- function(x, alpha = .3, ...){
         },
         flesch_kincaid_scores = {
             plot_flesch_kincaid(x)
+        },
+        fry_scores = {
+            ## Plotting attributes
+            PA <- attributes(x)[["plot_instructions"]]
+        
+            if (missing(auto.label)) {
+                auto.label <- PA[["auto.label"]]
+            }
+            if (missing(grid)) {
+                grid <- PA[["grid"]]
+            }
+            if (missing(div.col)) {
+                div.col <- PA[["div.col"]]
+            }    
+            plot_fry(x, auto.label = auto.label, grid = grid, 
+                    div.col = div.col)
         },
         stop("Not a plotable readability score")
     )
@@ -883,15 +888,44 @@ word_counts2 <- function(DF, x, y, z = NULL, g, alpha = .3) {
 
 }
 
+word_counts3 <- function(DF, x, y, z = NULL, g) {
+
+    NMS <- rename(c(x, y, z))
+
+    AES <- aes(x=x, y=y, fill=g)
+    if (!is.null(z)) {
+        AES[["size"]] <- g
+    }
+    MAX <- max(DF[, y])
+
+    avs <- matrix2df(do.call(rbind, lapply(split(DF[, 2:3], 
+        DF[,1]), colMeans)), "g")
+
+    plot <- ggplot(data.frame(x=DF[, x], y=DF[, y], z=DF[, z], g=DF[, g]), AES) + 
+        geom_point(shape=21, size=3) + facet_wrap(~g) + 
+        guides(color=FALSE, fill=FALSE) +
+        ylab(NMS[2]) + xlab(NMS[1]) +
+        geom_point(data=avs, shape=3, colour="black", aes_string(x=x, y=y, group="g")) 
+
+    if (!is.null(z)) {
+        plot <- plot + scale_size_continuous(names=gsub(" ", "\n", NMS[3]))
+    }
+
+    suppressMessages(suppressWarnings(print(plot)))
+
+}
+
 
 ## Generic helper funciton for word_counts plotting to rename axi labels
 rename <- function(x) {
 
     input <- c("word.count",  "character.count", "polysyllable.count",
-        "syllable.count", "polysyl2word.ratio")
+        "syllable.count", "polysyl2word.ratio", "sent.per.100.wrds",
+        "syllables.per.100.wrds")
     output <- c("Words Per Sentence", "Characters Per Sentence", 
         "Polysyllables Per Sentence", "Syllables Per Sentence",
-        "Polysyllables Per Word")
+        "Polysyllables Per Word", "Sentences Per 100 Words", 
+        "Syllables Per 100 Words")
     mgsub(input, output, x)
 
 }
@@ -1382,3 +1416,164 @@ plot_coleman_liau <- function(x, ...){
 }
 
 ###==============End of template==========
+
+plot_fry <- function(x, auto.label = TRUE, grid = FALSE, div.col = "grey85", ...) {
+
+    ## Setting up the graph
+    suppressWarnings(plot(1, 1, xlim = c(108, 182), ylim = c(2, 
+        25), axes = FALSE, type = "n", 
+        xlab = "Average number of syllables per 100 words", 
+        ylab = "Average number of sentences per 100 words", 
+        main = "Fry Graph for Estimating Reading Ages (grade level)", 
+        xaxs = "i", yaxs = "i"))
+    axis(1, at = 108:182, labels = TRUE)
+    axis(1, at = seq(108, 182, by = 4), tcl = -1.1, labels = FALSE)
+    axis(2, at = 2:25, labels = TRUE)
+    axis(4, at = 2:25, labels = TRUE)
+    if (grid){
+        grid(nx = 74, ny = 46, lty = "solid", col = "gold")
+        grid(nx = 37, ny = 23, lty = "solid", col = "gray65")
+    }
+    box()
+    segments(108, 9.97, 133.9, 25, lwd = 2, col = div.col)
+    segments(108, 7.7, 142.1, 25, lwd = 2, col = div.col)
+    segments(108, 6.4, 147.8, 25, lwd = 2, col = div.col)
+    segments(108, 5.61, 155, 25, lwd = 2, col = div.col)
+    segments(108, 5.1, 160, 25, lwd = 2, col = div.col)
+    segments(108, 3.8, 160.8, 25, lwd = 2, col = div.col)
+    segments(111.5, 2, 167.5, 25, lwd = 2, col = div.col)
+    segments(123, 2, 169, 25, lwd = 2, col = div.col)
+    segments(136.3, 2, 169, 25, lwd = 2, col = div.col)
+    segments(143.3, 2, 173.5, 25, lwd = 2, col = div.col)
+    segments(148.15, 2, 178.2, 25, lwd = 2, col = div.col)
+    segments(155.6, 2, 178.5, 25, lwd = 2, col = div.col)
+    segments(161.9, 2, 178.4, 25, lwd = 2, col = div.col)
+    segments(168.2, 2, 178.2, 25, lwd = 2, col = div.col)
+    segments(173.9, 2, 178.7, 25, lwd = 2, col = div.col)
+    segments(179.1, 2, 181.25, 25, lwd = 2, col = div.col)
+    x1 <- c(108, 108, 128)
+    y1 <- c(4.2, 2, 2)
+    polygon(x1, y1, col = "darkblue", border = "darkblue")
+    x2 <- c(143, 145, 150, 152, 155, 158, 162, 166, 172, 180, 181, 182, 182)
+    y2 <- c(25, 18.3, 14.3, 12.5, 11.1, 10, 9.1, 8.3, 7.7, 7.55, 7.5, 7.5, 25)
+    polygon(x2, y2, col = "darkblue", border = "darkblue")  
+    text(120, 22.2, 1, col = "darkgreen", cex = 1.25)
+    text(124, 17.9, 2, col = "darkgreen", cex = 1.25)
+    text(126, 15.9, 3, col = "darkgreen", cex = 1.25)
+    text(127, 14.4, 4, col = "darkgreen", cex = 1.25)
+    text(128, 13.3, 5, col = "darkgreen", cex = 1.25)
+    text(110.7, 5.5, 6, col = "darkgreen", cex = 1.25)
+    text(115, 4.88, 7, col = "darkgreen", cex = 1.25)
+    text(121, 3.78, 8, col = "darkgreen", cex = 1.25)
+    text(132, 3.5, 9, col = "darkgreen", cex = 1.25)
+    text(142, 3.5, 10, col = "darkgreen", cex = 1.25)
+    text(147.7, 3.5, 11, col = "darkgreen", cex = 1.25)
+    text(153.7, 3.5, 12, col = "darkgreen", cex = 1.25)
+    text(160, 3.5, 13, col = "darkgreen", cex = 1.25)
+    text(166.4, 3.5, 14, col = "darkgreen", cex = 1.25)
+    text(171, 3.5, 15, col = "darkgreen", cex = 1.25)
+    text(176.7, 3.5, 16, col = "darkgreen", cex = 1.25)
+    text(180.7, 3.5, 17, col = "darkgreen", cex = 1.25)
+
+    ## Actually plotting the points
+    points(x[, "ave.syll.per.100"], x[, "ave.sent.per.100"], pch = 19, cex = 1, 
+        col = "red")
+    points(x[, "ave.syll.per.100"], x[, "ave.sent.per.100"], pch = 3, cex = 3, 
+        col = "black")  
+    if (!auto.label) {
+        identify(x[, "ave.syll.per.100"], x[, "ave.sent.per.100"], x[, 1])
+    } else {
+        text(x[, "ave.syll.per.100"], x[, "ave.sent.per.100"], labels = x[, 1], 
+            adj = c(1, -0.5))
+    }  
+}
+
+#' Readability Measures
+#' 
+#' \code{scores.fry} - View scores from \code{\link[qdap]{fry}}.
+#' 
+#' fry Method for scores
+#' @param x The fry object.
+#' @param \ldots ignored
+#' @export
+#' @method scores fry
+scores.fry <- function(x, ...) {
+
+    out <- x[["Readability"]]
+    attributes(out) <- list(
+            class = c("readability_score", class(out)),
+            type = "fry_scores",
+            names = colnames(out),
+            row.names = rownames(out),
+            plot_instructions = attributes(x)[["plot_instructions"]]
+    )
+    out
+}
+
+
+#' Prints an fry Object
+#' 
+#' Prints an fry object.
+#' 
+#' @param x The fry object.
+#' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
+#' @param auto.label  logical.  If \code{TRUE} labels automatically added.  If 
+#' \code{FALSE} the user clicks interactively.
+#' @param grid logical.  If \code{TRUE} a micro grid is dsicplayed similar to 
+#' Fry's original depiction, though this makes visualizing more difficult.
+#' @param div.col The color of the grade level division lines.
+#' @param plot logical.  If \code{TRUE} a graph is plotted corresponding to Fry's 
+#' graphic representation.
+#' @param \ldots ignored
+#' @method print fry
+#' @S3method print fry
+print.fry <- function(x, digits = 3, auto.label, 
+    grid, div.col, plot, ...) {
+
+    print(scores(x), digits = digits, ...)
+
+    ## Plotting attributes
+    PA <- attributes(x)[["plot_instructions"]]
+
+    if (missing(auto.label)) {
+        auto.label <- PA[["auto.label"]]
+    }
+    if (missing(grid)) {
+        grid <- PA[["grid"]]
+    }
+    if (missing(div.col)) {
+        div.col <- PA[["div.col"]]
+    }
+    if (missing(plot)) {
+        plot <- PA[["plot"]]
+    }
+
+    if (plot) {
+        plot_fry(scores(x), auto.label = auto.label, grid = grid, 
+            div.col = div.col)
+    }
+
+}
+
+
+#' Readability Measures
+#' 
+#' \code{counts.fry} - View counts from \code{\link[qdap]{fry}}.
+#' 
+#' fry Method for counts.
+#' @param x The fry object.
+#' @param \ldots ignored
+#' @export
+#' @method counts fry
+counts.fry <- function(x, ...) {
+    out <- x[["Counts"]]
+    attributes(out) <- list(
+            class = c("readability_count", class(out)),
+            type = "fry_count",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+

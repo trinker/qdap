@@ -2,12 +2,26 @@
 \alias{plot.readability_score}
 \title{Plots a readability_score Object}
 \usage{
-\method{plot}{readability_score}(x, alpha = 0.3, ...)
+\method{plot}{readability_score}(x, alpha = 0.3, auto.label, grid, div.col,
+  ...)
 }
 \arguments{
   \item{x}{The readability_score object.}
 
   \item{alpha}{The alpha level to be used for the points.}
+
+  \item{auto.label}{logical.  For plotting
+  \code{\link[qdap]{fry}} only, if \code{TRUE} labels
+  automatically added.  If \code{FALSE} the user clicks
+  interactively.}
+
+  \item{grid}{logical.  For plotting
+  \code{\link[qdap]{fry}} only, if \code{TRUE} a micro grid
+  is dsicplayed similar to Fry's original depiction, though
+  this makes visualizing more difficult.}
+
+  \item{div.col}{For plotting \code{\link[qdap]{fry}} only,
+  the color of the grade level division lines.}
 
   \item{\ldots}{ignored}
 }
