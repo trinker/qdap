@@ -66,8 +66,6 @@ apply_as_df(tm.corpus, qdapfun, ...)
   \item{col2}{Name for column 2 (the names of the
   vectors).}
 
-  \item{tm.corpus}{A \pkg{tm} \code{\link[tm]{Corpus}}.}
-
   \item{qdapfun}{A qdap function that is usually used on
   text.variable ~ grouping variable.}
 }
@@ -348,7 +346,8 @@ inspect(x)
 class(x)
 
 (y <- with(pres_debates2012, df2tm_corpus(dialogue, list(person, time))))
-}
+
+## Apply qdap functions meant for dataframes from sentSplit to tm Corpus
 library(tm)
 reut21578 <- system.file("texts", "crude", package = "tm")
 reuters <- Corpus(DirSource(reut21578),
@@ -382,11 +381,10 @@ plot(apply_as_df(reuters, word_cor,
     word = qcv(oil, Texas, crude, economic, money)
 ))
 }
+}
 \seealso{
 \code{\link[tm]{DocumentTermMatrix}},
 \code{\link[tm]{Corpus}},
 \code{\link[tm]{TermDocumentMatrix}}
-
-\code{\link[tm]{Corpus}}
 }
 
