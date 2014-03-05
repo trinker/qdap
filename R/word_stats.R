@@ -77,8 +77,18 @@
 #' @examples
 #' \dontrun{
 #' word_stats(mraja1spl$dialogue, mraja1spl$person)
+#' 
 #' (desc_wrds <- with(mraja1spl, word_stats(dialogue, person, tot = tot)))
-#' with(mraja1spl, word_stats(desc_wrds, person, tot = tot)) #speed boost
+#' 
+#' ## Recycle for speed boost
+#' with(mraja1spl, word_stats(desc_wrds, person, tot = tot)) 
+#' 
+#' scores(desc_wrds)
+#' counts(desc_wrds)
+#' htruncdf(counts(desc_wrds), 15, 6)
+#' plot(scores(desc_wrds))
+#' plot(counts(desc_wrds))
+#' 
 #' names(desc_wrds)
 #' htruncdf(desc_wrds$ts, 15, 5)
 #' htruncdf(desc_wrds$gts, 15, 6)
@@ -87,13 +97,16 @@
 #' desc_wrds$sent.elem 
 #' plot(desc_wrds)
 #' plot(desc_wrds, label=TRUE, lab.digits = 1)
+#' 
 #' ## Correlation Visualization
-#' qheat(cor(desc_wrds$gts[, -1]), diag.na = TRUE, by.column =NULL,
+#' qheat(cor(scores(desc_wrds)[, -1]), diag.na = TRUE, by.column =NULL,
 #'     low = "yellow", high = "red", grid = FALSE)
-#' with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff))) 
+#' 
 #' ## Parallel (possible speed boost)
+#' with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff))) 
 #' with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff), 
 #'     parallel = TRUE)) 
+#'     
 #' ## Recycle for speed boost
 #' word_stats(desc_wrds, mraja1spl$sex)
 #' }
@@ -395,3 +408,94 @@ function(text.var, digit.remove = FALSE, apos_rm = FALSE,
     DF <- DF[order(DF$n.sent),]  
     return(DF)
 }
+
+#' Word Stats
+#' 
+#' View question_type scores.
+#' 
+#' question_type Method for scores
+#' @param x The \code{\link[qdap]{question_type}} object.
+#' @param \ldots ignored
+#' @export
+#' @method scores word_stats
+scores.word_stats <- function(x, ...) {
+
+    out <- x[["gts"]]
+    attributes(out) <- list(
+            class = c("table_score", class(out)),
+            type = "word_stats_scores",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+#' Word Stats
+#' 
+#' View word_stats counts.
+#' 
+#' word_stats Method for counts
+#' @param x The \code{\link[qdap]{word_stats}} object.
+#' @param \ldots ignored
+#' @export
+#' @method counts word_stats
+counts.word_stats <- function(x, ...) {
+
+    out <- x[["ts"]]
+    attributes(out) <- list(
+            class = c("word_stats_counts", class(out)),
+            type = "word_stats_counts",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+#' Prints a word_stats_counts object
+#' 
+#' Prints a word_stats_counts object
+#' 
+#' @param x The word_stats_counts object
+#' @param \ldots ignored
+#' @S3method print word_stats_counts
+#' @method print word_stats_counts
+print.word_stats_counts <-
+function(x, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+    class(x) <- "data.frame"
+    print(x)
+    options(width=WD)
+}
+
+#' Plots a word_stats_counts Object
+#' 
+#' Plots a word_stats_counts object.
+#' 
+#' @param x The word_stats_counts object.
+#' @param alpha The alpha level to use for points.
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes geom_point theme theme_minimal ylab xlab scale_size_continuous element_blank guides 
+#' @importFrom scales alpha
+#' @export
+plot.word_stats_counts <- function(x, alpha = .3, ...){ 
+    
+    nms1 <- plot_namer(names(x)[1])
+    names(x)[1] <- "group"
+    plot1 <- gantt_plot(x[, "text.var"], x[, "group"], plot=FALSE)
+    plot1 <- plot1 + 
+        xlab("Duration (in words)") + ylab(nms1)
+
+    plot2 <- word_counts2(DF=x,x = "word.count", y = "polysyl2word.ratio",  
+        g="group", alpha = alpha)
+
+    grid.arrange(plot1, plot2, ncol=2)
+  
+}
+
+
+plot_namer <- function(x) {
+    paste(sapply(unlist(strsplit(x, "&")), Caps), collapse =" & ")
+}
+

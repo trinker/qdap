@@ -853,14 +853,45 @@ word_counts <- function(DF, x, y, z = NULL, g, alpha = .3) {
 
 }
 
+word_counts2 <- function(DF, x, y, z = NULL, g, alpha = .3) {
+
+    NMS <- rename(c(x, y, z))
+
+    AES <- aes(x=x, y=y, color=g)
+    if (!is.null(z)) {
+        AES[["size"]] <- g
+    }
+    MAX <- max(DF[, y])
+
+    plot <- ggplot(data.frame(x=DF[, x], y=DF[, y], z=DF[, z], g=DF[, g]), AES) + 
+        geom_point(alpha=alpha) + facet_wrap(~g) + 
+        geom_smooth() + ylim(0, MAX + MAX*.05) +
+        guides(color=FALSE) +
+        ylab(NMS[2]) + xlab(NMS[1]) +
+        theme_minimal() + 
+        theme(panel.grid = element_blank(),
+            panel.margin = unit(1, "lines")) +
+        ggplot2::annotate("segment", x=-Inf, xend=Inf, y=-Inf, yend=-Inf)+
+        ggplot2::annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf)
+
+
+    if (!is.null(z)) {
+        plot <- plot + scale_size_continuous(names=gsub(" ", "\n", NMS[3]))
+    }
+
+    invisible(    suppressMessages(suppressWarnings(plot)))
+
+}
+
 
 ## Generic helper funciton for word_counts plotting to rename axi labels
 rename <- function(x) {
 
     input <- c("word.count",  "character.count", "polysyllable.count",
-        "syllable.count")
+        "syllable.count", "polysyl2word.ratio")
     output <- c("Words Per Sentence", "Characters Per Sentence", 
-        "Polysyllables Per Sentence", "Syllables Per Sentence")
+        "Polysyllables Per Sentence", "Syllables Per Sentence",
+        "Polysyllables Per Word")
     mgsub(input, output, x)
 
 }

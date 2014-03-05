@@ -63,3 +63,54 @@ plot.table_count <- function(x, values = TRUE, high = "red", ...){
     qheat(x, values = values, high=high, ...)
 
 }
+
+#' Prints a table_score object
+#' 
+#' Prints a table_score object
+#' 
+#' @param x The table_score object
+#' @param \ldots ignored
+#' @S3method print table_score
+#' @method print table_score
+print.table_score <-
+function(x, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+    class(x) <- "data.frame"
+    print(x)
+    options(width=WD)
+}
+
+#' Prints a table_count object
+#' 
+#' Prints a table_count object
+#' 
+#' @param x The table_count object
+#' @param \ldots ignored
+#' @S3method print table_count
+#' @method print table_count
+print.table_count <-
+function(x, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+    print(x$rnp)
+    options(width=WD)
+}
+
+#' Prints a table_proportion object
+#' 
+#' Prints a table_proportion object
+#' 
+#' @param x The table_proportion object
+#' @param \ldots ignored
+#' @S3method print table_proportion
+#' @method print table_proportion
+print.table_proportion <-
+function(x, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+    print(x$rnp)
+    options(width=WD)
+}
+
+

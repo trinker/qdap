@@ -1,6 +1,6 @@
 \name{preprocessed.question_type}
 \alias{preprocessed.question_type}
-\title{Term Counts}
+\title{Question Counts}
 \usage{
 \method{preprocessed}{question_type}(x, ...)
 }

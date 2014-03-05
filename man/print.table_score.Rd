@@ -1,0 +1,15 @@
+\name{print.table_score}
+\alias{print.table_score}
+\title{Prints a table_score object}
+\usage{
+\method{print}{table_score}(x, ...)
+}
+\arguments{
+  \item{x}{The table_score object}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Prints a table_score object
+}
+

@@ -1,8 +1,8 @@
-\name{scores.question_type}
-\alias{scores.question_type}
-\title{Question Counts}
+\name{scores.word_stats}
+\alias{scores.word_stats}
+\title{Word Stats}
 \usage{
-\method{scores}{question_type}(x, ...)
+\method{scores}{word_stats}(x, ...)
 }
 \arguments{
   \item{x}{The \code{\link[qdap]{question_type}} object.}

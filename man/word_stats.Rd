@@ -96,8 +96,18 @@ both imperative
 \examples{
 \dontrun{
 word_stats(mraja1spl$dialogue, mraja1spl$person)
+
 (desc_wrds <- with(mraja1spl, word_stats(dialogue, person, tot = tot)))
-with(mraja1spl, word_stats(desc_wrds, person, tot = tot)) #speed boost
+
+## Recycle for speed boost
+with(mraja1spl, word_stats(desc_wrds, person, tot = tot))
+
+scores(desc_wrds)
+counts(desc_wrds)
+htruncdf(counts(desc_wrds), 15, 6)
+plot(scores(desc_wrds))
+plot(counts(desc_wrds))
+
 names(desc_wrds)
 htruncdf(desc_wrds$ts, 15, 5)
 htruncdf(desc_wrds$gts, 15, 6)
@@ -106,13 +116,16 @@ desc_wrds$word.elem
 desc_wrds$sent.elem
 plot(desc_wrds)
 plot(desc_wrds, label=TRUE, lab.digits = 1)
+
 ## Correlation Visualization
-qheat(cor(desc_wrds$gts[, -1]), diag.na = TRUE, by.column =NULL,
+qheat(cor(scores(desc_wrds)[, -1]), diag.na = TRUE, by.column =NULL,
     low = "yellow", high = "red", grid = FALSE)
-with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff)))
+
 ## Parallel (possible speed boost)
+with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff)))
 with(mraja1spl, word_stats(dialogue, list(sex, died, fam.aff),
     parallel = TRUE))
+
 ## Recycle for speed boost
 word_stats(desc_wrds, mraja1spl$sex)
 }

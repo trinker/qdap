@@ -1,0 +1,15 @@
+\name{print.table_count}
+\alias{print.table_count}
+\title{Prints a table_count object}
+\usage{
+\method{print}{table_count}(x, ...)
+}
+\arguments{
+  \item{x}{The table_count object}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Prints a table_count object
+}
+

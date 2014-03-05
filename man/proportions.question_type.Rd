@@ -1,6 +1,6 @@
 \name{proportions.question_type}
 \alias{proportions.question_type}
-\title{Term Counts}
+\title{Question Counts}
 \usage{
 \method{proportions}{question_type}(x, ...)
 }

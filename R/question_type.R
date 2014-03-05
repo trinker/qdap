@@ -419,7 +419,7 @@ function(mat, combined.columns){
     data.frame(mat, DF, check.names = FALSE)
 }
 
-#' Term Counts
+#' Question Counts
 #' 
 #' View question_type scores.
 #' 
@@ -441,7 +441,7 @@ scores.question_type <- function(x, ...) {
 }
 
 
-#' Term Counts
+#' Question Counts
 #' 
 #' View question_type counts.
 #' 
@@ -462,7 +462,7 @@ counts.question_type <- function(x, ...) {
     out
 }
 
-#' Term Counts
+#' Question Counts
 #' 
 #' View \code{\link[qdap]{question_type}} proportions.
 #' 
@@ -484,7 +484,7 @@ proportions.question_type <- function(x, ...) {
 }
 
 
-#' Term Counts
+#' Question Counts
 #' 
 #' View \code{\link[qdap]{question_type}} preprocessed.
 #' 
@@ -561,4 +561,20 @@ plot.question_type_preprocessed <- function(x, ...){
 }
 
 
+#' Prints a question_type_preprocessed object
+#' 
+#' Prints a question_type_preprocessed object
+#' 
+#' @param x The question_type_preprocessed object
+#' @param \ldots ignored
+#' @S3method print question_type_preprocessed
+#' @method print question_type_preprocessed
+print.question_type_preprocessed <-
+function(x, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+    class(x) <- "data.frame"
+    print(x)
+    options(width=WD)
+}
 

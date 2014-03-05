@@ -1,6 +1,6 @@
 \name{counts.question_type}
 \alias{counts.question_type}
-\title{Term Counts}
+\title{Question Counts}
 \usage{
 \method{counts}{question_type}(x, ...)
 }
