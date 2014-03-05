@@ -1,0 +1,18 @@
+\name{proportions.pos_by}
+\alias{proportions.pos_by}
+\title{Parts of Speech}
+\usage{
+\method{proportions}{pos_by}(x, ...)
+}
+\arguments{
+  \item{x}{The pos_by object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+View \code{\link[qdap]{pos_by}} proportions.
+}
+\details{
+pos_by Method for proportions
+}
+

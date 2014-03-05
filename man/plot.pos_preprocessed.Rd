@@ -1,0 +1,15 @@
+\name{plot.pos_preprocessed}
+\alias{plot.pos_preprocessed}
+\title{Plots a pos_preprocessed Object}
+\usage{
+\method{plot}{pos_preprocessed}(x, ...)
+}
+\arguments{
+  \item{x}{The pos_preprocessed object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Plots a pos_preprocessed object.
+}
+

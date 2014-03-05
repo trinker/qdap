@@ -440,6 +440,7 @@ proportions.formality <- function(x, ...) {
 
     out <- x[["form.freq.by"]]
     out[, -c(1:2)] <- out[, -c(1:2)]/out[, 2]
+
     attributes(out) <- list(
             class = c("table_proportion", class(out)),
             type = "formality_proportions",
@@ -462,7 +463,7 @@ preprocessed.formality <- function(x, ...) {
 
     out <- x[["POStagged"]]
     attributes(out) <- list(
-            class = c("formality_preprocessed", class(out)),
+            class = c("pos_preprocessed", class(out)),
             type = "formality_preprocessed",
             names = colnames(out),
             row.names = rownames(out)
@@ -488,15 +489,15 @@ function(x, ...) {
 }
 
 
-#' Prints a formality_preprocessed object
+#' Prints a pos_preprocessed object
 #' 
-#' Prints a formality_preprocessed object
+#' Prints a pos_preprocessed object
 #' 
-#' @param x The formality_preprocessed object
+#' @param x The pos_preprocessed object
 #' @param \ldots ignored
-#' @S3method print formality_preprocessed
-#' @method print formality_preprocessed
-print.formality_preprocessed <-
+#' @S3method print pos_preprocessed
+#' @method print pos_preprocessed
+print.pos_preprocessed <-
 function(x, ...) {
     WD <- options()[["width"]]
     options(width=3000)
@@ -542,15 +543,15 @@ plot.formality_scores <- function(x, ...){
 }
 
 
-#' Plots a formality_preprocessed Object
+#' Plots a pos_preprocessed Object
 #' 
-#' Plots a formality_preprocessed object.
+#' Plots a pos_preprocessed object.
 #' 
-#' @param x The formality_preprocessed object.
+#' @param x The pos_preprocessed object.
 #' @param \ldots ignored
 #' @importFrom ggplot2 ggplot aes geom_bar coord_flip ylab theme theme_bw
 #' @export
-plot.formality_preprocessed <- function(x, ...){ 
+plot.pos_preprocessed <- function(x, ...){ 
 
     POS <- Counts <- NULL
 

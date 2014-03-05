@@ -466,3 +466,174 @@ plot.pos_by <- function(x, label = FALSE, lab.digits = 1, percent = NULL,
         qheat(x$pos.by.prop, ...)  
     }  
 }
+
+#==============
+## methods
+
+#' Parts of Speech
+#' 
+#' View pos counts.
+#' 
+#' pos Method for counts
+#' @param x The \code{\link[qdap]{pos}} object.
+#' @param \ldots ignored
+#' @export
+#' @method counts pos
+counts.pos <- function(x, ...) {
+
+    out <- x[["POSfreq"]]
+    attributes(out) <- list(
+            class = c("table_count", class(out)),
+            type = "pos_counts",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+#' Parts of Speech
+#' 
+#' View \code{\link[qdap]{pos}} proportions.
+#' 
+#' pos Method for proportions
+#' @param x The pos object.
+#' @param \ldots ignored
+#' @export
+#' @method proportions pos
+proportions.pos <- function(x, ...) {
+
+    out <- x[["POSfreq"]]
+    out[, -c(1)] <- out[, -c(1)]/rowSums(out[, -c(1)])
+    attributes(out) <- list(
+            class = c("table_proportion", class(out)),
+            type = "pos_proportions",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+#' Parts of Speech
+#' 
+#' View pos preprocessed.
+#' 
+#' pos Method for preprocessed
+#' @param x The \code{\link[qdap]{pos}} object.
+#' @param \ldots ignored
+#' @export
+#' @method preprocessed pos
+preprocessed.pos <- function(x, ...) {
+
+    out <- x[["POStagged"]]
+    attributes(out) <- list(
+            class = c("pos_preprocessed", class(out)),
+            type = "pos_preprocessed",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+#' Parts of Speech
+#' 
+#' View pos_by preprocessed.
+#' 
+#' pos_by Method for preprocessed
+#' @param x The \code{\link[qdap]{pos_by}} object.
+#' @param \ldots ignored
+#' @export
+#' @method preprocessed pos_by
+preprocessed.pos_by <- function(x, ...) {
+
+    out <- x[["POStagged"]]
+    attributes(out) <- list(
+            class = c("pos_preprocessed", class(out)),
+            type = "pos_by_preprocessed",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+#' Parts of Speech
+#' 
+#' View pos_by scores.
+#' 
+#' pos_by Method for scores
+#' @param x The \code{\link[qdap]{pos_by}} object.
+#' @param \ldots ignored
+#' @export
+#' @method scores pos_by
+scores.pos_by <- function(x, ...) {
+
+    out <- x[["pos.by.rnp"]]
+    attributes(out) <- list(
+            class = c("table_score", class(out)),
+            type = "pos_by_scores",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+#' Parts of Speech
+#' 
+#' View pos_by counts.
+#' 
+#' pos_by Method for counts
+#' @param x The \code{\link[qdap]{pos_by}} object.
+#' @param \ldots ignored
+#' @export
+#' @method counts pos_by
+counts.pos_by <- function(x, ...) {
+
+    out <- x[["pos.by.freq"]]
+    attributes(out) <- list(
+            class = c("table_count", class(out)),
+            type = "pos_by_counts",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+#' Parts of Speech
+#' 
+#' View \code{\link[qdap]{pos_by}} proportions.
+#' 
+#' pos_by Method for proportions
+#' @param x The pos_by object.
+#' @param \ldots ignored
+#' @export
+#' @method proportions pos_by
+proportions.pos_by <- function(x, ...) {
+
+    out <- x["pos.by.freq"]
+    out[, -c(1:2)] <- out[, -c(1:2)]/out[, 2]
+ 
+    attributes(out) <- list(
+            class = c("table_proportion", class(out)),
+            type = "pos_by_proportions",
+            names = colnames(out),
+            row.names = rownames(out)
+    )
+    out
+}
+
+
+#' Plots a pos Object
+#' 
+#' Plots a pos object.
+#' 
+#' @param x The pos object
+#' @param \ldots ignored
+#' @method plot pos
+#' @S3method plot pos
+plot.pos <- function(x, ...) {
+
+    plot(counts(x), ...)
+
+}
+

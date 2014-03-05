@@ -1,0 +1,15 @@
+\name{print.pos_preprocessed}
+\alias{print.pos_preprocessed}
+\title{Prints a pos_preprocessed object}
+\usage{
+\method{print}{pos_preprocessed}(x, ...)
+}
+\arguments{
+  \item{x}{The pos_preprocessed object}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Prints a pos_preprocessed object
+}
+
