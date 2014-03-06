@@ -56,6 +56,19 @@ with(rajSPLIT, word_cor(dialogue, x, words, r = .4))
 ## Set `r = NULL` to get matrix between words
 with(rajSPLIT, word_cor(dialogue, x, words, r = NULL))
 
+## Plotting
+library(tm)
+data("crude")
+oil_cor1 <- apply_as_df(crude, word_cor, word = "oil", r=.7)
+plot(oil_cor1)
+
+oil_cor2 <- apply_as_df(crude, word_cor, word = qcv(texas, oil, money), r=.7)
+plot(oil_cor2)
+plot(oil_cor2, ncol=2)
+
+oil_cor3 <- apply_as_df(crude, word_cor, word = qcv(texas, oil, money), r=NULL)
+plot(oil_cor3)
+
 ## Run on multiple times/person/nested
 ## Split and apply to data sets
 ## Suggested use of stemming
@@ -114,6 +127,11 @@ qheat(vect2df(out1[[1]], "word", "cor"), values=TRUE, high="red",
 out2 <- word_cor(t(tm_corpus2wfm(crude)), word = c("oil", "country"), r=.7)
 plot(out2)
 }
+}
+\references{
+The plotting method for the list output was inspired by
+stackoverflow.com member Ben; see
+\url{http://stackoverflow.com/a/19925445/1000343} for more.
 }
 \seealso{
 \code{\link[qdap]{word_proximity}},

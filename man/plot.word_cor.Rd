@@ -3,7 +3,7 @@
 \title{Plots a word_cor object}
 \usage{
 \method{plot}{word_cor}(x, label = TRUE, lab.digits = 3, high = "red",
-  low = "white", grid = NULL, ...)
+  low = "white", grid = NULL, ncol = NULL, ...)
 }
 \arguments{
   \item{x}{The word_cor object}
@@ -21,6 +21,14 @@
 
   \item{grid}{The color of the grid (Use \code{NULL} to
   remove the grid).}
+
+  \item{ncol}{The number of columns to arrange the facets
+  in (specifying an integer results in the use of
+  \code{\link[ggplot2]{facet_wrap}}, specifying \code{NULL}
+  utilizes a single column with
+  \code{\link[ggplot2]{facet_grid}}. The second approach
+  limits columns but allows the y scale's space to be
+  free.}
 
   \item{\ldots}{Other arguments passed to qheat if matrix
   and other arguments passed to

@@ -601,15 +601,28 @@ t.DocumentTermMatrix <- function(x, ...) {
 #' 
 #' @param qdapfun A qdap function that is usually used on 
 #' text.variable ~ grouping variable.
+#' @param stopwords A character vector of words to remove from the text.  qdap 
+#' has a number of data sets that can be used as stop words including: 
+#' \code{Top200Words}, \code{Top100Words}, \code{Top25Words}.  For the tm 
+#' package's traditional English stop words use \code{tm::stopwords("english")}.
+#' @param ignore.case logical.  If \code{TRUE} stop words will be removed 
+#' regardless of case.  
 #' @note \code{aply_ad_df} coerces to a dataframe with columns named `docs` and 
-#' the other named `docs`.
+#' the other named `text`.
 #' @export
 #' @rdname tdm
-apply_as_df <- function(tm.corpus, qdapfun, ...) {
+apply_as_df <- function(tm.corpus, qdapfun, ..., stopwords = NULL, 
+    ignore.case = TRUE) {
 
     text <- doc <- tot <- NULL
 
     dat <- sentSplit(tm_corpus2df(tm.corpus), "text")
+
+    if (!is.null(stopwords)) {
+        dat[, "text"] <- rm_stopwords(dat[, "text"], stopwords, separate = FALSE, 
+            ignore.case = ignore.case)
+    }
+
     if (any(unlist(formals(qdapfun)) %in% "tot")) {
         with(dat, qdapfun(text.var = text, grouping.var = docs, tot = tot,  ...))
     } else {
@@ -617,5 +630,3 @@ apply_as_df <- function(tm.corpus, qdapfun, ...) {
     }
 
 }
-
-

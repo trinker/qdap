@@ -171,6 +171,7 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
             x <- read.table(text=text, header = header, sep = sep, skip=skip)
             if(revert) {
                 x[, 2] <- gsub("QDAP_PLACE_HOLDER", ":", x[, 2])
+                x[, 1] <- gsub("QDAP_PLACE_HOLDER", ":", x[, 1])
             }
         },
         stop("invalid file extension:\n \bfile must be a .docx .csv .xls or .xlsx" )

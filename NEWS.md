@@ -22,11 +22,22 @@ And constructed with the following guidelines:
 
 <b>BUG FIXES</b>
 
+* `read.transcript` could leave a QDAP_PLACE_HOLDER behind if a colon was found 
+  in the person column.  This behavior has been fixed.
+
 <b>NEW FEATURES</b>
 
 <b>MINOR FEATURES</b>
 
 IMPROVEMENTS
+
+* `apply_as_df` picks up a `stopwords` argument that allows the user to remove 
+  stopwords.
+
+* `plot.word_cor` picks up the argument `ncol` that allows the user to specify 
+  the number of columns used.  This uses ggplot2's `facet_wrap` rather than 
+  `facet_grid` (which is the default if `ncol =NULL`).
+
 
 <b>CHANGES</b>
 

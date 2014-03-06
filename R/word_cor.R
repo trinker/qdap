@@ -18,6 +18,9 @@
 #' \code{r = NULL}.
 #' @keywords correlation, association 
 #' @export
+#' @references The plotting method for the list output was inspired by 
+#' stackoverflow.com member Ben; see 
+#' \url{http://stackoverflow.com/a/19925445/1000343} for more.
 #' @seealso \code{\link[qdap]{word_proximity}},
 #' \code{\link[tm]{findAssocs}},
 #' \code{\link[qdap]{word_associate}},
@@ -39,6 +42,19 @@
 #' 
 #' ## Set `r = NULL` to get matrix between words
 #' with(rajSPLIT, word_cor(dialogue, x, words, r = NULL))
+#' 
+#' ## Plotting 
+#' library(tm)
+#' data("crude")
+#' oil_cor1 <- apply_as_df(crude, word_cor, word = "oil", r=.7)
+#' plot(oil_cor1)
+#' 
+#' oil_cor2 <- apply_as_df(crude, word_cor, word = qcv(texas, oil, money), r=.7)
+#' plot(oil_cor2)
+#' plot(oil_cor2, ncol=2)
+#' 
+#' oil_cor3 <- apply_as_df(crude, word_cor, word = qcv(texas, oil, money), r=NULL)
+#' plot(oil_cor3)
 #' 
 #' ## Run on multiple times/person/nested
 #' ## Split and apply to data sets
@@ -197,14 +213,18 @@ function(x, digits = 3, ...) {
 #' printed if \code{label} is \code{TRUE}.
 #' @param low The color to be used for lower values.
 #' @param high The color to be used for higher values.
-#' @param grid The color of the grid (Use \code{NULL} to remove the grid).  
+#' @param grid The color of the grid (Use \code{NULL} to remove the grid). 
+#' @param ncol The number of columns to arrange the facets in (specifying an 
+#' integer results in the use of \code{\link[ggplot2]{facet_wrap}}, specifying
+#' \code{NULL} utilizes a single column with \code{\link[ggplot2]{facet_grid}}.  
+#' The second approach limits columns but allows the y scale's space to be free.
 #' @param \ldots Other arguments passed to qheat if matrix and other arguments 
 #' passed to \code{\link[ggplot2]{geom_point}} if a list.
-#' @importFrom ggplot2 ggplot aes facet_grid geom_point xlab ylab
+#' @importFrom ggplot2 ggplot aes facet_grid facet_wrap geom_point xlab ylab
 #' @method plot word_cor
 #' @S3method plot word_cor
 plot.word_cor <- function(x, label = TRUE, lab.digits = 3, high="red", 
-    low="white", grid=NULL, ...) {
+    low="white", grid=NULL, ncol=NULL, ...) {
     
     word <- cor <- comp_word <- NULL
 
@@ -215,15 +235,25 @@ plot.word_cor <- function(x, label = TRUE, lab.digits = 3, high="red",
     }
     if (attributes(x)[["type"]] == "cor_list") {
         dat <- list_vect2df(x, "word", "comp_word", "cor")
-        if (length(x) == 1) {
-            facets <- reformulate("word", ".")
-        } else {
-            facets <- reformulate(".", "word")
+       
+        if (is.null(ncol)) {
+
+            if (length(x) == 1) {
+                facets <- reformulate("word", ".")
+            } else {
+                facets <- reformulate(".", "word")
+            }
+            ggplot(dat, aes(cor, comp_word)) +
+                geom_point(...) +
+                facet_grid(facets, space="free_y", scales="free_y") +
+                ylab("Words") + xlab("Correlation")
+         } else {
+
+            ggplot(dat, aes(cor, comp_word)) +
+                geom_point(...) +
+                facet_wrap(~word, scales="free_y", ncol=ncol) +
+                ylab("Words") + xlab("Correlation")
         }
-        ggplot(dat, aes(cor, comp_word)) +
-            geom_point(...) +
-            facet_grid(facets, space="free_y", scales="free_y") +
-            ylab("Words") + xlab("Correlation")
     }
 
 }
