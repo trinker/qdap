@@ -106,9 +106,17 @@ ltruncdf(posdat, 7, 4)
 ## str(posdat)
 names(posdat)
 posdat$text           #original text
-posdat$POStagged      #words replaced with parts of speech
-posdat$POSprop[, 1:8] #proportion of parts of speech by row
-posdat$POSfreq        #frequency of parts of speech by row
+
+## Methods
+preprocessed(posdat)  #words replaced with parts of speech
+counts(posdat)        #frequency of parts of speech by row
+proportions(posdat)   #proportion of parts of speech by row
+
+## Methods Plotting
+plot(preprocessed(posdat))
+plot(counts(posdat))
+plot(proportions(posdat))
+plot(posdat)
 
 out1 <- pos(DATA$state, parallel = TRUE) # not always useful
 ltruncdf(out1, 7, 4)
@@ -122,6 +130,19 @@ ltruncdf(pos_tags("all"), 3)
 
 posbydat <- with(DATA, pos_by(state, sex))
 names(posbydat)
+
+## Methods
+scores(posbydat)
+preprocessed(posbydat)
+counts(posbydat)
+proportions(posbydat)
+
+## Methods Plotting
+plot(preprocessed(posbydat))
+plot(counts(posbydat))
+plot(proportions(posbydat))
+plot(posbydat)
+
 ltruncdf(posbydat, 7, 4)
 truncdf(posbydat$pos.by.prop, 4)
 

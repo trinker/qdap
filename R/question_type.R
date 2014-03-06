@@ -515,6 +515,7 @@ preprocessed.question_type <- function(x, ...) {
 #' @importFrom ggplot2 ylab xlab theme element_blank theme_minimal geom_bar guide_legend aes coord_flip
 #' @importFrom gridExtra grid.arrange
 #' @importFrom reshape2 melt
+#' @method plot question_type_preprocessed
 #' @export
 plot.question_type_preprocessed <- function(x, ...){ 
     
@@ -567,8 +568,7 @@ plot.question_type_preprocessed <- function(x, ...){
 #' 
 #' @param x The question_type_preprocessed object
 #' @param \ldots ignored
-#' @S3method print question_type_preprocessed
-#' @method print question_type_preprocessed
+#' @export
 print.question_type_preprocessed <-
 function(x, ...) {
     WD <- options()[["width"]]
