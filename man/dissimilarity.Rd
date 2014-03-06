@@ -87,8 +87,9 @@ points$colors <- points$X1 \%l\% data.frame(levels(points$X1),
 points$shape <- points$X2 \%l\% data.frame(levels(points$X2), c(15, 17, 19))
 
 ## Plot it: 3-D
-scatterplot3d(fit$points[, 1], fit$points[, 2], fit$points[, 3], color = points$colors,
-    pch = points$shape, main = "Semantic Space Scaled to 3D", xlab = "x", ylab = "y",
+scatterplot3d(fit$points[, 1], fit$points[, 2], fit$points[, 3],
+    color = points$colors, pch = points$shape,
+    main = "Semantic Space Scaled to 3D", xlab = "x", ylab = "y",
     zlab = "z", type = "h")
 
 legend("bottomright", title="Person",
@@ -101,7 +102,7 @@ mat <- matrix(rbinom(500, 0:1, .45), ncol=10)
 v_outer(mat, cos_sim)
 
 v_outer(with(DATA, wfm(state, person)), cos_sim)
-with(DATA, dissimilarity(state, person))
+with(DATA, Dissimilarity(state, person))
 }
 }
 \seealso{

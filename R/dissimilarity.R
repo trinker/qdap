@@ -65,8 +65,9 @@
 #' points$shape <- points$X2 %l% data.frame(levels(points$X2), c(15, 17, 19))
 #' 
 #' ## Plot it: 3-D
-#' scatterplot3d(fit$points[, 1], fit$points[, 2], fit$points[, 3], color = points$colors, 
-#'     pch = points$shape, main = "Semantic Space Scaled to 3D", xlab = "x", ylab = "y", 
+#' scatterplot3d(fit$points[, 1], fit$points[, 2], fit$points[, 3], 
+#'     color = points$colors, pch = points$shape, 
+#'     main = "Semantic Space Scaled to 3D", xlab = "x", ylab = "y", 
 #'     zlab = "z", type = "h")
 #' 
 #' legend("bottomright", title="Person",
@@ -79,7 +80,7 @@
 #' v_outer(mat, cos_sim)
 #' 
 #' v_outer(with(DATA, wfm(state, person)), cos_sim)
-#' with(DATA, dissimilarity(state, person))
+#' with(DATA, Dissimilarity(state, person))
 #' }
 Dissimilarity <- 
 function(text.var, grouping.var= NULL, method = "prop", diag = FALSE, 

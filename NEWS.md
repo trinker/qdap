@@ -30,6 +30,12 @@ And constructed with the following guidelines:
 
 * `counts` generic method added to view counts from select <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> objects.
 
+* `proportions` generic method added to view proportions from select <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> 
+  objects.
+
+* `preprocessed` generic method added to view preprocessed data from select <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> 
+  objects.
+
 * `apply_as_df` added to allow the user to apply <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> functions to a Corpus 
   directly.
 
@@ -41,6 +47,8 @@ And constructed with the following guidelines:
 * `as.wfm` added as a means to attempt to coerce a matrix to a `wfm` object.
 
 * `%l+%` added as a counterpart to `%l%` that assumes `missing = NULL`.
+
+* `%bs%` added as quick counterpart to `boolean_search` for indexing.
 
 IMPROVEMENTS
 
@@ -56,7 +64,7 @@ IMPROVEMENTS
 * `rm_row` picks up the `contains` argument that allows the user to search for, 
   and remove rows of, within the string, not just the beginning.
 
-* `read.transcript` now handles multiple characterk spaces as an argument to 
+* `read.transcript` now handles multiple character spaces as an argument to 
   `sep` when `text` argument is used.
 
 <b>CHANGES</b>
@@ -64,7 +72,6 @@ IMPROVEMENTS
 * `dissimilarity` has been renamed to `Dissimilarity` to prevent tm package 
   conflicts.  The old version has been deprecated and will be removed in a the
   next version (minor or major) push to CRAN.
-
 
 
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.1.0

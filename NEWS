@@ -48,6 +48,8 @@ MINOR FEATURES
 
 * `%l+%` added as a counterpart to `%l%` that assumes `missing = NULL`.
 
+* `%bs%` added as quick counterpart to `boolean_search` for indexing.
+
 IMPROVEMENTS
 
 * `df2tm_corpus` now sets metaData information for ID and creator (based on) 
@@ -62,7 +64,7 @@ IMPROVEMENTS
 * `rm_row` picks up the `contains` argument that allows the user to search for, 
   and remove rows of, within the string, not just the beginning.
 
-* `read.transcript` now handles multiple characterk spaces as an argument to 
+* `read.transcript` now handles multiple character spaces as an argument to 
   `sep` when `text` argument is used.
 
 CHANGES
@@ -70,7 +72,6 @@ CHANGES
 * `dissimilarity` has been renamed to `Dissimilarity` to prevent tm package 
   conflicts.  The old version has been deprecated and will be removed in a the
   next version (minor or major) push to CRAN.
-
 
 
 CHANGES IN qdap VERSION 1.1.0

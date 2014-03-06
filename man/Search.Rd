@@ -1,5 +1,6 @@
 \name{Search}
 \alias{Search}
+\alias{\%bs\%}
 \alias{boolean_search}
 \title{Search Columns of a Data Frame}
 \usage{
@@ -8,6 +9,8 @@ Search(dataframe, term, column.name = NULL, max.distance = 0.02, ...)
 boolean_search(text.var, terms, ignore.case = TRUE, values = FALSE,
   exclude = NULL, apostrophe.remove = FALSE, char.keep = NULL,
   digit.remove = FALSE)
+
+text.var \%bs\% terms
 }
 \arguments{
   \item{dataframe}{A dataframe object to search.}
@@ -76,6 +79,9 @@ frame.
 
 \code{boolean_search} - Conducts a Boolean search for
 terms/strings within a character vector.
+
+\code{bs} - Binary operator version of
+\code{\link[qdap]{boolean_search}} .
 }
 \details{
 The terms string is first split by the OR separators into a
@@ -114,6 +120,9 @@ dat <- data.frame(x = c("Doggy", "Hello", "Hi Dog", "Zebra"), y = 1:4)
 z <- data.frame(z =c("Hello", "Dog"))
 
 dat[boolean_search(dat$x, paste(z$z, collapse = "OR")), ]
+
+## Binary operator version
+dat[dat$x \%bs\% paste(z$z, collapse = "OR"), ]
 
 ## Passing to `trans_context`
 inds <- boolean_search(DATA.SPLIT$state, " I&&.|| I&&!", ignore.case = FALSE)

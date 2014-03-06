@@ -258,3 +258,7 @@ function(text.var, parallel = FALSE) {
     names(n) <- c("syllable.count", "polysyllable.count")
     return(n)
 }
+
+
+
+

@@ -46,6 +46,9 @@
 #' 
 #' dat[boolean_search(dat$x, paste(z$z, collapse = "OR")), ]
 #' 
+#' ## Binary operator version
+#' dat[dat$x %bs% paste(z$z, collapse = "OR"), ]
+#' 
 #' ## Passing to `trans_context`
 #' inds <- boolean_search(DATA.SPLIT$state, " I&&.|| I&&!", ignore.case = FALSE)
 #' with(DATA.SPLIT, trans_context(state, person, inds=inds))
@@ -198,4 +201,14 @@ splitting <- function(x) {
           strsplit(y, "AND|\\&\\&")
       })
       unlist(out, recursive = FALSE)
+}
+
+#' Search Columns of a Data Frame 
+#' 
+#' \code{bs} - Binary operator version of \code{\link[qdap]{boolean_search}} .
+#' 
+#' @rdname Search
+#' @export
+`%bs%` <- function(text.var, terms) {
+    boolean_search(text.var = text.var, terms = terms)
 }

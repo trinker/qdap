@@ -51,6 +51,15 @@ list(
         "strWrap"
       )
     ),
+    sd_section("Generic qdap Methods", 
+      "Functions to aid data viewing.", 
+      c(
+        "counts",
+        "preprocessed",
+        "proportions",        
+        "scores"
+      )
+    ),      
     sd_section("Reshaping",
       "Functions to reshape data.",
       c(
@@ -131,7 +140,7 @@ list(
       "Word measures and scoring.",
       c(
         "automated_readability_index",
-        "dissimilarity",
+        "Dissimilarity",
         "diversity",
         "formality",
         "kullback_leibler",
@@ -206,7 +215,7 @@ list(
         "print.character_table",
         "print.cm_distance",
         "print.colsplit2df",
-        "print.dissimilarity",
+        "print.Dissimilarity",
         "print.diversity",
         "print.formality",
         "print.kullback_leibler",
