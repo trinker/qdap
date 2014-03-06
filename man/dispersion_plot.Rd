@@ -34,7 +34,7 @@ dispersion_plot(text.var, match.terms, grouping.var = NULL, rm.vars = NULL,
   \item{total.color}{The color to use for summary `all`
   group.  If \code{NULL} totals are dropped.}
 
-  \item{symbol}{The word symbol.  Defualt is \code{"|"}.}
+  \item{symbol}{The word symbol.  Default is \code{"|"}.}
 
   \item{title}{Title of the plot}
 
@@ -42,7 +42,7 @@ dispersion_plot(text.var, match.terms, grouping.var = NULL, rm.vars = NULL,
   plot order of the factors.}
 
   \item{wrap}{a character to wrap around the words (enables
-  the reader to visualize spaces).  Defualt is \code{"'"},
+  the reader to visualize spaces).  Default is \code{"'"},
   use \code{""} to remove.}
 
   \item{xlab}{The x label.}

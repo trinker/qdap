@@ -83,6 +83,7 @@
 #' ## Invisibly returns the igraph model
 #' x <- word_network_plot(text.var=DATA$state, DATA$person)
 #' str(x)
+#' library(igraph)
 #' plot(x, vertex.size=0, vertex.color="white", edge.curved = TRUE)
 #' 
 #' x2 <- word_network_plot(text.var=DATA$state, grouping.var=DATA$person,

@@ -31,7 +31,9 @@
 #' }
 htruncdf <-
 function(dataframe, n=10, width=10, ...) {
-    head(truncdf(as.data.frame(dataframe), width), n = n, ...)
+    o <- head(truncdf(as.data.frame(dataframe), width), n = n, ...)
+    class(o) <- c("trunc", class(o))
+    o
 }
 
 #' Truncated Dataframe Viewing
@@ -46,6 +48,7 @@ function(dataframe, end=10, begin=1) {
     x <- as.data.frame(dataframe)
     DF <- data.frame(lapply(x, substr, begin, end), check.names=FALSE)
     names(DF) <- substring(names(DF), begin, end)
+    class(DF) <- c("trunc", class(DF))
     DF
 }
 
@@ -60,7 +63,9 @@ function(dataframe, end=10, begin=1) {
 #' @rdname data_viewing
 #' @export
 ltruncdf <- function(dat.list, n = 6, width = 10, ...) {
-    lapply(dat.list, htruncdf, n = n, width = width, ...)
+    o <- lapply(dat.list, htruncdf, n = n, width = width, ...)
+    class(o) <- c("trunc", class(o))
+    o
 }
 
 #' Summary Dataframe Viewing
@@ -76,8 +81,11 @@ function(dataframe, ...){
     y <- paste(rep("=", 72), collapse="")   
     z <- paste("nrow = ",nrow(dataframe), "          ncol = ",
         ncol(dataframe), "           ", x, collapse="")
+    o <- htruncdf(dataframe, ...)
+    class(o) <- c("trunc", class(o))
+    o
     message(paste(y, z, y, sep = "\n"))
-    return(htruncdf(dataframe, ...))
+    return(o)
 }
 
 #' Unclass qdap Object to View List of Dataframes
@@ -99,3 +107,25 @@ lview <- function(x, print = TRUE) {
     invisible(x)
 }
 
+
+#' Prints a trunc object
+#' 
+#' Prints a trunc object
+#' 
+#' @param x The trunc object
+#' @param \ldots ignored
+#' @S3method print trunc
+#' @method print trunc
+print.trunc <-
+function(x, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+
+    if (any(class(x) %in% "data.frame")) {
+        class(x) <- "data.frame"
+    } else {
+        class(x) <- "list"
+    }
+    print(x)
+    options(width=WD)
+}

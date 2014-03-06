@@ -20,7 +20,7 @@ rm_empty_row(dataframe)
 
   \item{contains}{logical.  If \code{TRUE} \code{rm_row}
   searches for the terms anywhere within the string.  If
-  \code{FALSE} \code{rm_row} searches only the begining of
+  \code{FALSE} \code{rm_row} searches only the beginning of
   the string.}
 
   \item{ignore.case}{logical.  If \code{TRUE} case is

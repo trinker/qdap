@@ -118,6 +118,12 @@ list(
         "cm_long2dummy"
       )
     ),
+    sd_section("tm Package Integration",
+      "Functions for working between the tm and qdap packages.",
+      c(
+        "tdm"        
+      )
+    ),      
     sd_section("Counts/Descriptives",
       "Functions for word counts and descriptive statistics.",
       c(
@@ -127,8 +133,7 @@ list(
         "outlier_labeler",
         "pos",
         "question_type",
-        "syllable_sum",
-        "tdm",        
+        "syllable_sum",     
         "termco",
         "termco_c",
         "wfm",

@@ -35,11 +35,11 @@
 #' ## Works with tm's TermDocumentMatrix/DocumentTermMatrix
 #' dat2 <- dtm(DATA$state, DATA$person)
 #' out.dtm <- exclude(dat2, unlist(the.no))
-#' inspect(out.dtm)
+#' tm::inspect(out.dtm)
 #' 
 #' dat3 <- tdm(DATA$state, DATA$person)
 #' out.tdm <- exclude(dat3, unlist(the.no))
-#' inspect(out.tdm)
+#' tm::inspect(out.tdm)
 #' }
 exclude <-
 function(word.list, ...) {

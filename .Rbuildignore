@@ -30,3 +30,8 @@ inst/qdap_Demonstration
 inst/staticdocs
 INSTALL
 contributors.geojson
+AFTER_REPORTS_UPDATES
+vignettes
+
+
+

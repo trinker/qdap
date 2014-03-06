@@ -75,7 +75,7 @@ larger plot.
 \description{
 Plots a polarity object as a heat map Gantt plot with
 polarity over time (measured in words) and polarity scores
-per sentence.  In the dorplot plot the black dots are the
+per sentence.  In the dotplot plot the black dots are the
 average polarity per grouping variable.
 }
 

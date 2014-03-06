@@ -16,12 +16,12 @@
 #' \code{horiz.color = bg.color} to eliminate.
 #' @param total.color The color to use for summary `all` group.  If \code{NULL}
 #' totals are dropped.
-#' @param symbol The word symbol.  Defualt is \code{"|"}.
+#' @param symbol The word symbol.  Default is \code{"|"}.
 #' @param title Title of the plot
 #' @param rev.factor logical.  If \code{TRUE} reverses the plot order of the 
 #' factors.
 #' @param wrap a character to wrap around the words (enables the reader to 
-#' visualize spaces).  Defualt is \code{"'"}, use \code{""} to remove.
+#' visualize spaces).  Default is \code{"'"}, use \code{""} to remove.
 #' @param xlab The x label.
 #' @param ylab The y label.
 #' @param size The size of the plotting symbol.

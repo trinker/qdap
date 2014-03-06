@@ -4,7 +4,7 @@
 #' 
 #' @param text.var The text variable.
 #' @param top Top number of terms to show.
-#' @param at.least An interger indicating at least how many letters a word 
+#' @param at.least An integer indicating at least how many letters a word 
 #' must be to be included in the output.
 #' @param stopwords A character vector of words to remove from the text.  qdap 
 #' has a number of data sets that can be used as stop words including: 

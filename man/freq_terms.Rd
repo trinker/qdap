@@ -10,7 +10,7 @@ freq_terms(text.var, top = 20, at.least = 1, stopwords = NULL,
 
   \item{top}{Top number of terms to show.}
 
-  \item{at.least}{An interger indicating at least how many
+  \item{at.least}{An integer indicating at least how many
   letters a word must be to be included in the output.}
 
   \item{stopwords}{A character vector of words to remove

@@ -2,7 +2,7 @@
 #' 
 #' Combine columns from qdap classes or a \code{data.frame}.
 #' 
-#' @param dataframe A dataframe or qdap qdap class (e.g., 
+#' @param dataframe A dataframe or qdap class (e.g., 
 #' "termco", "question_type", "pos_by", "character_table").
 #' @param combined.columns A list of named vectors of the colnames/indexes 
 #' of the numeric columns to be combined (summed).  If a vector is unnamed a 

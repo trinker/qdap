@@ -478,7 +478,8 @@ function(x, ...) {
 #' @param \ldots ignored
 #' @importFrom ggplot2 ggplot aes geom_point theme theme_minimal ylab xlab scale_size_continuous element_blank guides 
 #' @importFrom scales alpha
-#' @export
+#' @method plot word_stats_counts
+#' @S3method plot word_stats_counts
 plot.word_stats_counts <- function(x, alpha = .3, ...){ 
     
     nms1 <- plot_namer(names(x)[1])

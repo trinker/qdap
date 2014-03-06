@@ -9,7 +9,7 @@
 #' case sensitive.
 #' @param contains logical.  If \code{TRUE} \code{rm_row} searches for the terms 
 #' anywhere within the string.  If \code{FALSE} \code{rm_row} searches only the 
-#' begining of the string.
+#' beginning of the string.
 #' @param ignore.case logical.  If \code{TRUE} case is ignored during matching, 
 #' if \code{FALSE}the pattern matching is case sensitive.
 #' @param keep.rownames logical.  If \code{TRUE} the original, non-sequential, 

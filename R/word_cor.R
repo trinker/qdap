@@ -48,13 +48,13 @@
 #' ## Find correlations between words per turn of talk by person
 #' ## Throws multiple warning because small data set
 #' lapply(DATA3, function(x) {
-#'     word_cor(x[, "state"], ID(x), qcv(computer, i, no, good), r = NULL)
+#'     word_cor(x[, "state"], id(x), qcv(computer, i, no, good), r = NULL)
 #' })
 #' 
 #' ## Find words correlated per turn of talk by person
 #' ## Throws multiple warning because small data set
 #' lapply(DATA3, function(x) {
-#'     word_cor(x[, "state"], ID(x), qcv(computer, i, no, good))
+#'     word_cor(x[, "state"], id(x), qcv(computer, i, no, good))
 #' })
 #' 
 #' 
@@ -121,8 +121,9 @@ word_cor <- function(text.var, grouping.var = NULL, word, r = .7,
 
     if (sum(test1) < 2) {
         if (is.null(r) & sum(test1) == 1) {
-            warning(sprintf("Only `%s` was found in the data set.  NULL returned", word))
-          #  return(NULL)
+            warning(sprintf("Only `%s` was found in the data set. NULL returned", 
+                word))
+            return(NULL)
         } else {
             if (sum(test1) == 0) {
                 warning("No words found in the data set.  NULL returned")
@@ -165,19 +166,23 @@ word_cor <- function(text.var, grouping.var = NULL, word, r = .7,
 #' @method print word_cor
 print.word_cor <-
 function(x, digits = 3, ...) {
-    WD <- options()[["width"]]
 
+    WD <- options()[["width"]]
     if (attributes(x)[["type"]] == "cor_matrix") {
         options(width=3000)
         class(x) <- "matrix"
         attributes(x)[["type"]] <- NULL
         print(round(x, digits = digits))
         options(width=WD)
+        return()
     }
     if (attributes(x)[["type"]] == "cor_list") {
         class(x) <- "list"
         attributes(x)[["type"]] <- NULL
-        print(lapply(x, round, digits = digits))
+        print(lapply(x, function(y) {
+            if (is.null(y)) return(NULL)
+            round(y, digits = digits)
+        }))
     }
 }
 

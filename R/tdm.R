@@ -601,8 +601,8 @@ t.DocumentTermMatrix <- function(x, ...) {
 #' 
 #' @param qdapfun A qdap function that is usually used on 
 #' text.variable ~ grouping variable.
-#' @note \code{aply_ad_df} coherses to a dataframe with columns named `docs` and 
-#' the othe rnames `docs`.
+#' @note \code{aply_ad_df} coerces to a dataframe with columns named `docs` and 
+#' the other named `docs`.
 #' @export
 #' @rdname tdm
 apply_as_df <- function(tm.corpus, qdapfun, ...) {

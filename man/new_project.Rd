@@ -2,24 +2,13 @@
 \alias{new_project}
 \title{Project Template}
 \usage{
-new_project(project = "new", path = getwd(), open = reports::is.global(2),
-  github = FALSE, ...)
+new_project(project = "new", path = getwd(), ...)
 }
 \arguments{
   \item{project}{A character vector of the project name.}
 
   \item{path}{The path to where the project should be
   created.  Default is the current working directory.}
-
-  \item{open}{logical.  If \code{TRUE} the project will be
-  opened in RStudio. The default is to test if
-  \code{new_project} is being used in the global
-  environment, if it is then the project directory will be
-  opened.}
-
-  \item{github}{logical.  If \code{TRUE} the repo will be
-  sent to public \href{https://github.com/}{GitHub}
-  account.}
 
   \item{\ldots}{Other arguments passed to
   \code{\link[reports]{new_report}}.}
@@ -57,17 +46,15 @@ directory to store plots}
 \item{PROJECT_WORKFLOW_GUIDE.pdf}{ * A pdf explaining the
 structure of the project template} \item{RAW_DATA}{ - A
 directory to store non-transcript data related to the
-project: \itemize{ \item{ANALYTIC_MEMOS}{ * A directory to
-put audio files (or shortcuts)} \item{AUDIO}{ * A directory
-to put audio files (or shortcuts)} \item{FIELD_NOTES}{ * A
-directory to put audio files (or shortcuts)}
-\item{PAPER_ARTIFACTS}{ * A directory to put paper
-artifacts} \item{PHOTOGRAPHS}{ * A directory to put
-photographs} \item{VIDEO}{ * A directory to put video files
-(or shortcuts)} } } \item{RAW_TRANSCRIPTS}{ - A directory
-to store the raw transcripts} \item{REPORTS}{ - A directory
-with report and presentation related tools.  Please see the
-\cr
+project: \itemize{ \item{AUDIO}{ * A directory to put audio
+files (or shortcuts)} \item{FIELD_NOTES}{ * A directory to
+put audio files (or shortcuts)} \item{PAPER_ARTIFACTS}{ * A
+directory to put paper artifacts} \item{PHOTOGRAPHS}{ * A
+directory to put photographs} \item{VIDEO}{ * A directory
+to put video files (or shortcuts)} } }
+\item{RAW_TRANSCRIPTS}{ - A directory to store the raw
+transcripts} \item{REPORTS}{ - A directory with report and
+presentation related tools.  Please see the \cr
 \href{https://dl.dropbox.com/u/61803503/packages/REPORT_WORKFLOW_GUIDE.pdf}{REPORT_WORKFLOW_GUIDE.pdf}
 for more details} \item{TABLES}{ - A directory to export
 tables to} \item{WORD_LISTS}{ - A directory to store word
@@ -97,7 +84,6 @@ application such as \href{https://github.com/}{github},
 \href{https://www.dropbox.com/}{dropbox}, depending on what
 the client/research team is comfortable utilizing.
 }
-\keyword{is.global}
 \keyword{project,}
-\keyword{workflow,}
+\keyword{workflow}
 

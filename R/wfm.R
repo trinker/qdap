@@ -32,7 +32,7 @@
 #' ## word frequency matrix (wfm) example:
 #' with(DATA, wfm(state, list(sex, adult)))[1:15, ]
 #' with(DATA, wfm(state, person))[1:15, ]
-#' nchar_range(with(DATA, wfm(state, list(sex, adult))), 5)
+#' Filter(with(DATA, wfm(state, list(sex, adult))), 5)
 #' with(DATA, wfm(state, list(sex, adult)))
 #' 
 #' ## Filter particular words based on max/min values

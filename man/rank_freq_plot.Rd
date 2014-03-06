@@ -84,7 +84,7 @@ frequencies by grouping variable(s).
 \code{rank_freq_mplot} utilizes the ggplot2 package,
 whereas, \code{rank_freq_plot} employs base graphics.
 \code{rank_freq_mplot} is more general & flexible; in most
-cases \code{rank_freq_mplot} should be prefered.
+cases \code{rank_freq_mplot} should be preferred.
 }
 \examples{
 \dontrun{

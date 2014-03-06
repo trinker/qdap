@@ -64,13 +64,13 @@ DATA3 <- split(DATA2, DATA2$person)
 ## Find correlations between words per turn of talk by person
 ## Throws multiple warning because small data set
 lapply(DATA3, function(x) {
-    word_cor(x[, "state"], ID(x), qcv(computer, i, no, good), r = NULL)
+    word_cor(x[, "state"], id(x), qcv(computer, i, no, good), r = NULL)
 })
 
 ## Find words correlated per turn of talk by person
 ## Throws multiple warning because small data set
 lapply(DATA3, function(x) {
-    word_cor(x[, "state"], ID(x), qcv(computer, i, no, good))
+    word_cor(x[, "state"], id(x), qcv(computer, i, no, good))
 })
 
 

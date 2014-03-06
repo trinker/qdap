@@ -22,7 +22,7 @@ single vector of strings.
 \dontrun{
 library(qdap)
 poldat <- with(DATA.SPLIT, polarity(state, person))
-write.csv(x = condense(poldat$all), file = "foo.csv")
+write.csv(x = condense(counts(poldat)), file = "foo.csv")
 }
 }
 \seealso{

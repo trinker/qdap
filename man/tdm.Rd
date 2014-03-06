@@ -130,8 +130,8 @@ package's \code{\link[tm]{TermDocumentMatrix}},
 between the qdap and tm packages.
 }
 \note{
-\code{aply_ad_df} coherses to a dataframe with columns
-named `docs` and the othe rnames `docs`.
+\code{aply_ad_df} coerces to a dataframe with columns named
+`docs` and the other named `docs`.
 }
 \examples{
 \dontrun{

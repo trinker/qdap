@@ -37,7 +37,7 @@
 #' percent dis legomena of the text.}
 #' @note \code{rank_freq_mplot} utilizes the ggplot2 package, whereas, 
 #' \code{rank_freq_plot} employs base graphics.  \code{rank_freq_mplot} is more 
-#' general & flexible; in most cases \code{rank_freq_mplot} should be prefered.
+#' general & flexible; in most cases \code{rank_freq_mplot} should be preferred.
 #' @rdname rank_freq_plot
 #' @references Zipf, G. K. (1949). Human behavior and the principle of least 
 #' effort. Cambridge, Massachusetts: Addison-Wesley. p. 1.

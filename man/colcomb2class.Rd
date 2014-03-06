@@ -6,7 +6,7 @@ colcomb2class(dataframe, combined.columns, class = "list", percent = TRUE,
   digits = 2, elim.old = TRUE, zero.replace = 0, override = FALSE)
 }
 \arguments{
-  \item{dataframe}{A dataframe or qdap qdap class (e.g.,
+  \item{dataframe}{A dataframe or qdap class (e.g.,
   "termco", "question_type", "pos_by", "character_table").}
 
   \item{combined.columns}{A list of named vectors of the
