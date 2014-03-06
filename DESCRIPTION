@@ -23,7 +23,7 @@ Imports:
     NLP,
     parallel,
     plotrix,
-    reports,
+    reports (>= 0.2.0),
     reshape2,
     scales,
     tm,
@@ -44,6 +44,7 @@ Suggests:
     Rgraphviz,
     SnowballC
 LazyData: TRUE
+VignetteBuilder: knitr
 Description: This package automates many of the tasks associated with
     quantitative discourse analysis of transcripts containing discourse
     including frequency counts of sentence types, words, sentences, turns of

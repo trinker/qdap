@@ -64,9 +64,9 @@ rdme <- "C:/Users/trinker/GitHub/qdap/inst/extra_statdoc/readme.R"
 extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry, 
     linsear_write, SMOG, syn, mgsub, adjmat, wc, wfdf, mcsv_w, dtm, "%ha%", 
     "hash_look", "%l%", "%l+%", "polarity_frame", "boolean_search", "stem_words", 
-    "stem2df", colpaste2df, rm_stop, weight, apply_as_tm, tm2qdap,
-    sent_detect, matrix2df, df2tm_corpus, tm_corpus2df, tm_corpus2wfm, as.wfm, 
-    Filter, apply_as_df, "%bs%")
+    "stem2df", colpaste2df, rm_stop, sent_detect, matrix2df, as.wfm, "%bs%",
+    Filter.wfm, weight.wfdf, weight.wfm, wfm_combine, wfm_expanded, 
+    dissimilarity)
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character_table, char_table))
 
