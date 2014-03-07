@@ -116,7 +116,7 @@
 #' qheat(cor(t(dat)[, c("romeo", "juliet", "hate", "love")]), 
 #'     diag.na = TRUE, values = TRUE, digits = 3, by.column = NULL)
 #'     
-#' dat2 <- wfm(DATA$state, seq_len(nrow(DATA)))
+#' dat2 <- wfm(DATA$state, id(DATA))
 #' qheat(cor(t(dat2)), low = "yellow", high = "red", 
 #'     grid = "grey90", diag.na = TRUE, by.column = NULL)
 #'     

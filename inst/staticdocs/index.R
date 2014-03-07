@@ -52,9 +52,10 @@ list(
       )
     ),
     sd_section("Generic qdap Methods", 
-      "Functions to aid data viewing.", 
+      "Functions to aid in selection of data elements.", 
       c(
         "counts",
+        "Filter",
         "preprocessed",
         "proportions",        
         "scores"

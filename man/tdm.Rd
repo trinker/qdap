@@ -398,6 +398,13 @@ apply_as_df(reuters, word_cor,
 plot(apply_as_df(reuters, word_cor,
     word = qcv(oil, Texas, crude, economic, money)
 ))
+(f_terms <- apply_as_df(reuters, freq_terms, at.least = 3))
+plot(f_terms)
+apply_as_df(reuters, trans_cloud)
+finds <- apply_as_df(reuters, freq_terms, at.least = 5,
+    top = 5, stopwords = Top100Words)
+apply_as_df(reuters, dispersion_plot, match.terms = finds[, 1],
+    total.color = NULL)
 }
 }
 \seealso{

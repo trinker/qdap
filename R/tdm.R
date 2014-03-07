@@ -273,6 +273,13 @@
 #' plot(apply_as_df(reuters, word_cor, 
 #'     word = qcv(oil, Texas, crude, economic, money)
 #' ))
+#' (f_terms <- apply_as_df(reuters, freq_terms, at.least = 3))
+#' plot(f_terms)
+#' apply_as_df(reuters, trans_cloud)
+#' finds <- apply_as_df(reuters, freq_terms, at.least = 5, 
+#'     top = 5, stopwords = Top100Words)
+#' apply_as_df(reuters, dispersion_plot, match.terms = finds[, 1], 
+#'     total.color = NULL)
 #' }
 tdm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
@@ -632,10 +639,18 @@ apply_as_df <- function(tm.corpus, qdapfun, ..., stopwords = NULL,
         dat[, "text"]  <- Filter(dat[, "text"], min = min, max = max, 
             count.apostrophe = count.apostrophe) 
     }
-    if (any(unlist(formals(qdapfun)) %in% "tot")) {
-        with(dat, qdapfun(text.var = text, grouping.var = docs, tot = tot,  ...))
+
+    ext_args <- list(...)
+    theargs <- names(formals(qdapfun))
+    if (any(theargs %in% "tot")) {
+        with(dat, qdapfun(text.var = text, grouping.var = docs, tot = tot, ...))
     } else {
-        with(dat, qdapfun(text.var = text, grouping.var = docs, ...))
+        if (any(theargs %in% "grouping.var")) {
+            with(dat, qdapfun(text.var = text, grouping.var = docs, ...))
+        } else {
+            with(dat, qdapfun(text.var = text, ...))
+        }
     }
 
 }
+
