@@ -45,7 +45,7 @@ rm_stop(text.var, stopwords = qdapDictionaries::Top25Words, unlist = FALSE,
   elements of the vector or list with the original
   \code{text.var}.}
 
-  \item{ignore.case}{logical.  If \code{TRUE} stop words
+  \item{ignore.case}{logical.  If \code{TRUE} stopwords
   will be removed regardless of case.  Additionally, case
   will be stripped from the text.  If \code{FALSE} stop
   word removal is contingent upon case.  Additionally, case

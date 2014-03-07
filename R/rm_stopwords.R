@@ -20,7 +20,7 @@
 #' retaining supplied character(s).
 #' @param names logical.  If \code{TRUE} will name the elements of the vector or 
 #' list with the original \code{text.var}.
-#' @param ignore.case logical.  If \code{TRUE} stop words will be removed 
+#' @param ignore.case logical.  If \code{TRUE} stopwords will be removed 
 #' regardless of case.  Additionally, case will be stripped from the text.  If 
 #' \code{FALSE} stop word removal is contingent upon case.  Additionally, case 
 #' is not stripped.

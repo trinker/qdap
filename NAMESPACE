@@ -1,3 +1,4 @@
+S3method(Filter,character)
 S3method(Filter,default)
 S3method(Filter,wfm)
 S3method(common,default)

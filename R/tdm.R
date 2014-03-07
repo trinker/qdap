@@ -605,14 +605,19 @@ t.DocumentTermMatrix <- function(x, ...) {
 #' has a number of data sets that can be used as stop words including: 
 #' \code{Top200Words}, \code{Top100Words}, \code{Top25Words}.  For the tm 
 #' package's traditional English stop words use \code{tm::stopwords("english")}.
+#' @param min Minimum word length.
+#' @param max Maximum word length.
+#' @param count.apostrophe logical.  If \code{TRUE} apostrophes are counted as 
+#' characters.
 #' @param ignore.case logical.  If \code{TRUE} stop words will be removed 
 #' regardless of case.  
 #' @note \code{aply_ad_df} coerces to a dataframe with columns named `docs` and 
 #' the other named `text`.
+#' @seealso \code{\link[qdap]{Filter}}
 #' @export
 #' @rdname tdm
 apply_as_df <- function(tm.corpus, qdapfun, ..., stopwords = NULL, 
-    ignore.case = TRUE) {
+    min = 1, max = Inf, count.apostrophe = TRUE, ignore.case = TRUE) {
 
     text <- doc <- tot <- NULL
 
@@ -623,6 +628,10 @@ apply_as_df <- function(tm.corpus, qdapfun, ..., stopwords = NULL,
             ignore.case = ignore.case)
     }
 
+    if (min != 1 | max != Inf) {
+        dat[, "text"]  <- Filter(dat[, "text"], min = min, max = max, 
+            count.apostrophe = count.apostrophe) 
+    }
     if (any(unlist(formals(qdapfun)) %in% "tot")) {
         with(dat, qdapfun(text.var = text, grouping.var = docs, tot = tot,  ...))
     } else {

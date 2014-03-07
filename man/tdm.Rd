@@ -24,7 +24,8 @@ tm_corpus2wfm(tm.corpus, col1 = "docs", col2 = "text", ...)
 
 df2tm_corpus(text.var, grouping.var = NULL, ...)
 
-apply_as_df(tm.corpus, qdapfun, ..., stopwords = NULL, ignore.case = TRUE)
+apply_as_df(tm.corpus, qdapfun, ..., stopwords = NULL, min = 1, max = Inf,
+  count.apostrophe = TRUE, ignore.case = TRUE)
 }
 \arguments{
   \item{text.var}{The text variable or a
@@ -75,6 +76,13 @@ apply_as_df(tm.corpus, qdapfun, ..., stopwords = NULL, ignore.case = TRUE)
   \code{Top100Words}, \code{Top25Words}.  For the tm
   package's traditional English stop words use
   \code{tm::stopwords("english")}.}
+
+  \item{min}{Minimum word length.}
+
+  \item{max}{Maximum word length.}
+
+  \item{count.apostrophe}{logical.  If \code{TRUE}
+  apostrophes are counted as characters.}
 
   \item{ignore.case}{logical.  If \code{TRUE} stop words
   will be removed regardless of case.}
@@ -396,5 +404,7 @@ plot(apply_as_df(reuters, word_cor,
 \code{\link[tm]{DocumentTermMatrix}},
 \code{\link[tm]{Corpus}},
 \code{\link[tm]{TermDocumentMatrix}}
+
+\code{\link[qdap]{Filter}}
 }
 

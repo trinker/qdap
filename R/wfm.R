@@ -35,7 +35,7 @@
 #' Filter(with(DATA, wfm(state, list(sex, adult))), 5)
 #' with(DATA, wfm(state, list(sex, adult)))
 #' 
-#' ## Filter particular words based on max/min values
+#' ## Filter particular words based on max/min values in wfm
 #' v <- with(DATA, wfm(state, list(sex, adult)))
 #' Filter(v, 5)
 #' Filter(v, 5, count.apostrophe = FALSE)
@@ -739,40 +739,82 @@ plot.weighted_wfm <- function(x, non.zero = FALSE, digits = 0, by.column = NULL,
 }
 
 
+#' Filter
+#' 
+#' \code{Filter} - Filter words from various objects that meet max/min word 
+#' length criteria.
+#' 
+#' @param x A filterable object (e.g., \code{\link[qdap]{wfm}},
+#' \code{\link[base]{character}}).
+#' @param min Minimum word length.
+#' @param max Maximum word length.
+#' @param count.apostrophe logical.  If \code{TRUE} apostrophes are counted as 
+#' characters.
+#' @param stopwords A vector of stop words to remove.
+#' @param ignore.case logical.  If \code{TRUE} stopwords will be removed 
+#' regardless of case (ignored if used on a \code{\link[qdap]{wfm}}).
+#' @param \ldots Other arguments passed to specific Filter methods.
+#' @rdname Filter
+#' @note The name and idea behind this function is inspired by the \pkg{dplyr}
+#' package's \code{filter} function and has a similar meaning in that you are 
+#' grabbing rows (or elements) meeting a particular criteria.
+#' @export
+#' @examples
+#' \dontrun{
+#' Filter(with(DATA, wfm(state, list(sex, adult))), 5)
+#' with(DATA, wfm(state, list(sex, adult)))
+#' 
+#' ## Filter particular words based on max/min values in wfm
+#' v <- with(DATA, wfm(state, list(sex, adult)))
+#' Filter(v, 5)
+#' Filter(v, 5, count.apostrophe = FALSE)
+#' Filter(v, 5, 7)
+#' Filter(v, 4, 4)
+#' Filter(v, 3, 4)
+#' Filter(v, 3, 4, stopwords = Top25Words)
+#' 
+#' ## Filter works on character strings too...
+#' x <- c("Raptors don't like robots!",  "I'd pay $500.00 to rid them.")
+#' Filter(x, 3)
+#' Filter(x, 4)
+#' Filter(x, 4, count.apostrophe = FALSE)
+#' Filter(x, 4, count.apostrophe = FALSE, stopwords="raptors")
+#' Filter(x, 4, stopwords="raptors")
+#' Filter(x, 4, stopwords="raptors", ignore.case = FALSE)
+#' 
+#' DATA[, "state"] <- Filter(DATA[, "state"], 4)
+#' DATA <- qdap::DATA
+#' }
+Filter <-
+function(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL, 
+    ignore.case = TRUE, ...){
+    
+    min
+    max
+    count.apostrophe
+    stopwords
+    ignore.case
+    UseMethod("Filter")
+}
+
 #' Word Frequency Matrix
 #' 
 #' \code{Filter} - Filter words from a wfm that meet max/min word length 
 #' criteria.
 #' 
-#' @param x A \code{\link[qdap]{wfm}} object.
+#' @param x A filterable object (e.g., \code{\link[qdap]{wfm}},
+#' \code{\link[base]{character}}).
 #' @param min Minimum word length.
 #' @param max Maximum word length.
 #' @param count.apostrophe logical.  If \code{TRUE} apostrophes are counted as 
 #' characters.
 #' @rdname Word_Frequency_Matrix
 #' @export
-#' @return \code{Filter} - Returns a matrix of the class "wfm".
-Filter <-
-function(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL, ...){
-    min
-    max
-    count.apostrophe
-    stopwords
-    UseMethod("Filter")
-}
-
-#' Word Frequency Matrix
-#' 
-#' \code{Filter.wfm} - Filter words from a wfm that meet max/min word length 
-#' criteria.
-#' 
-#' wfm Method for Filter
-#' @rdname Word_Frequency_Matrix
-#' @export
 #' @method Filter wfm
+#' @return \code{Filter} - Returns a matrix of the class "wfm".
 Filter.wfm <- 
-function(x, min = 1, max = Inf, count.apostrophe = TRUE, 
-    stopwords = NULL, ...) {
+function(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL, 
+    ...) {
 
     if (!is.null(stopwords)) {
         x <- x[!rownames(x) %in% stopwords, ]
@@ -791,10 +833,45 @@ function(x, min = 1, max = Inf, count.apostrophe = TRUE,
 
 #' @S3method Filter default  
 Filter.default <- 
-function(..., min = 1, max = Inf, count.apostrophe, 
-    stopwords = NULL, x){
+function(..., min = 1, max = Inf, count.apostrophe, stopwords = NULL, x){
         LIS <- list(...)
         return(Filter.wfm(LIS, min, max, count.apostrophe))
+}
+
+
+is.Integer <- 
+function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
+
+#' Filter
+#' 
+#' \code{Filter.character} - Filter words from a character vector that meet 
+#' max/min word length criteria.
+#' 
+#' character Method for Filter
+#' @rdname Filter
+#' @export
+#' @method Filter character
+#' @return \code{Filter.character} - Returns a vector of the class "character".
+#' @return \code{Filter.wfm} - Returns a matrix of the class "wfm".
+Filter.character <- function(x, min = 1, max = Inf, count.apostrophe = TRUE, 
+    stopwords = NULL, ignore.case = TRUE, ...) {
+
+    splits <- "(\\s+)|%s(?=[[:punct:]])"
+    splits <- sprintf(splits, ifelse(count.apostrophe, "(?!')", ""))
+    x2 <- lapply(strsplit(x, splits, perl = TRUE), function(y) {
+        unblanker(unlist(y))
+    })
+
+    if (!is.null(stopwords)) {
+        if (ignore.case) {
+            stopwords <- c(stopwords, sapply(stopwords, Caps))
+        }
+        x2 <- lapply(x2, function(x) x[!x %in% stopwords])
+    }
+
+    mapply(function(a, b) {paste(a[b >= min & b <= max], 
+        collapse = " ")}, x2, lapply(x2, nchar))
+
 }
 
 
@@ -821,5 +898,3 @@ as.wfm <- function(matrix.object) {
     matrix.object    
 }
 
-is.Integer <- 
-function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol

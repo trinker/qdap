@@ -31,8 +31,8 @@ MINOR FEATURES
 
 IMPROVEMENTS
 
-* `apply_as_df` picks up a `stopwords` argument that allows the user to remove 
-  stopwords.
+* `apply_as_df` picks up a `stopwords` and `filter` arguments that allows the 
+  user to remove stopwords and min/max length words.
 
 * `plot.word_cor` picks up the argument `ncol` that allows the user to specify 
   the number of columns used.  This uses ggplot2's `facet_wrap` rather than 
