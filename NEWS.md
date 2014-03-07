@@ -17,7 +17,7 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
-<b>CHANGES</b> IN <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> VERSION 1.3.0
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.0
 ----------------------------------------------------------------
 
 <b>BUG FIXES</b>
@@ -41,7 +41,7 @@ IMPROVEMENTS
   the number of columns used.  This uses ggplot2's `facet_wrap` rather than 
   `facet_grid` (which is the default if `ncol =NULL`).
 
-* `name2sex` relied upon having <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a>Dictionaries loaded.  This could be an issue 
+* `name2sex` relied upon having <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>Dictionaries loaded.  This could be an issue 
   if the function were used internally.  The user now supplies a dictionary of 
   names and probabilities.
 
@@ -49,7 +49,7 @@ IMPROVEMENTS
 <b>CHANGES</b>
 
 
-<b>CHANGES</b> IN <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> VERSION 1.2.0
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.2.0
 ----------------------------------------------------------------
 
 <b>BUG FIXES</b>
@@ -59,22 +59,22 @@ IMPROVEMENTS
 * `Filter` added to give the ability to provide a range of character 
   lengths to filter from a `wfm` object.
 
-* `scores` generic method added to view scores from select <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> objects.
+* `scores` generic method added to view scores from select <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> objects.
 
-* `counts` generic method added to view counts from select <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> objects.
+* `counts` generic method added to view counts from select <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> objects.
 
-* `proportions` generic method added to view proportions from select <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> 
+* `proportions` generic method added to view proportions from select <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> 
   objects.
 
-* `preprocessed` generic method added to view preprocessed data from select <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> 
+* `preprocessed` generic method added to view preprocessed data from select <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> 
   objects.
 
-* `apply_as_df` added to allow the user to apply <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> functions to a Corpus 
+* `apply_as_df` added to allow the user to apply <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> functions to a Corpus 
   directly.
 
 <b>MINOR FEATURES</b>
 
-* `tm_corpus2wfm` added to quickly convert from a tm package `Corpus` to a <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a>
+* `tm_corpus2wfm` added to quickly convert from a tm package `Corpus` to a <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>
   `wfm` object.
 
 * `as.wfm` added as a means to attempt to coerce a matrix to a `wfm` object.
@@ -107,7 +107,7 @@ IMPROVEMENTS
   next version (minor or major) push to CRAN.
 
 
-<b>CHANGES</b> IN <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> VERSION 1.1.0
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.1.0
 ----------------------------------------------------------------
 
 A version bump necessary for Re-Submission to CRAN.  
@@ -118,7 +118,7 @@ A version bump necessary for Re-Submission to CRAN.
   reports (&gt;= 0.1.2) in order to upload to CRAN.  reports (&gt;= 0.2.0) is not yet
   available on CRAN.
 
-<b>CHANGES</b> IN <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> VERSION 1.0.0
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.0.0
 ----------------------------------------------------------------
 
 The word lists and dictionaries in `qdap` have been moved to `qdapDictionaries`. 
@@ -127,7 +127,7 @@ former period separators.  These changes break backward compatibility.  Thus
 this is a **major** release (ver. 1.0.0).
 
 It is the general practice to deprecate functions within a package before 
-removal, however, the number of necessary changes in light of <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> being 
+removal, however, the number of necessary changes in light of <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> being 
 relatively new to CRAN, made these changes sensible at this point.
 
 
@@ -216,7 +216,7 @@ relatively new to CRAN, made these changes sensible at this point.
 * `colpaste2df` is a wrapper for `paste2` that pastes dataframe columns together 
   and outputs a dataframe.
 
-* `colcomb2class` quickly combines columns for  number of <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> classes including 
+* `colcomb2class` quickly combines columns for  number of <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> classes including 
   output from: `termco`, `question_type`, `pos_by`, adn 1character_table`.
 
 * `lview` a function to unclass a list output that has a special print method 
@@ -233,13 +233,13 @@ relatively new to CRAN, made these changes sensible at this point.
   package's `TermDocumentMatrix` to be applied to a `wfm` object.
 
 * `tm_corpus2df` and `df2tm_corpus` added to convert a tm package corpus to a 
-  dataframe for use in <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> or vice versa.
+  dataframe for use in <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> or vice versa.
 
 * `tdm` and `dtm` are now truly compatable with the `tm` package.  `tdm` and 
   `dtm` produce outputs of the class `"TermDocumentMatrix"` and 
   `"DocumentTermMatrix"` respectively.  This change (coupled with the renaming 
   of `stopwords` to `rm_stopwords`) should make the two packages logical 
-  companions and further extend the <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> package to integrate with the many 
+  companions and further extend the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package to integrate with the many 
   packages that already handle `"TermDocumentMatrix"` and 
   `"DocumentTermMatrix"`.
 
@@ -286,7 +286,7 @@ relatively new to CRAN, made these changes sensible at this point.
   `polarity` function.
 
 * `DATA.SPLIT` a `sentSplit` version of the `DATA` dataset has been added to 
-  <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a>.
+  <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>.
 
 * `gantt_plot` accepts`NULL`.for `grouping.var` and figures for "all" rows as a 
   single grouping var.
@@ -346,9 +346,9 @@ relatively new to CRAN, made these changes sensible at this point.
 
 <b>CHANGES</b>
 
-* The dictionaries and word lists for <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> have been moved to their own package, 
+* The dictionaries and word lists for <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> have been moved to their own package, 
   `qdapDictionaries`.  This will allow easier access to these resources beyond 
-  the <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> package as well as reducing the overall size of the <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> package.  
+  the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package as well as reducing the overall size of the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package.  
   Because this is a major change that make break the code of some users the 
   major release number has been upped to 1.  The following name changes have 
   occurred:
@@ -358,7 +358,7 @@ relatively new to CRAN, made these changes sensible at this point.
     - The `deamplification.words` wordlist  and `env.pol` dictionary were added as 
         well.
 
-* <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> gains an HTML package vignette to better explain the intended work flow 
+* <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> gains an HTML package vignette to better explain the intended work flow 
   and function use for the package.  This is not currently a part of the build 
   but can be accessed via:
 
@@ -399,11 +399,11 @@ relatively new to CRAN, made these changes sensible at this point.
   This makes use easier as the user doesn't need to remember arguments.
 
 
-<b>CHANGES</b> IN <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> VERSION 0.2.5
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5
 ----------------------------------------------------------------
 
 Patch release.  This version deals with the changes in the `openNLP` package 
-  that effect <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a>.  Next major release scheduled after `slidify` package is 
+  that effect <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>.  Next major release scheduled after `slidify` package is 
   pushed to CRAN.
 
 qdap 0.2.3
@@ -443,7 +443,7 @@ qdap 0.2.3
   `file.path(getwd(), "DIR/file.ext")` is used rather than the full file path).
 
 
-<b>CHANGES</b> IN <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> VERSION 0.2.2
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.2
 ----------------------------------------------------------------
 
 <b>BUG FIXES</b>
@@ -480,10 +480,10 @@ qdap 0.2.3
 
 <b>CHANGES</b>
 
-* <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> is now compiled for mac users (as openNLP now passes CRAN checks with no
+* <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> is now compiled for mac users (as openNLP now passes CRAN checks with no
   Errors on Mac).
 
-<b>CHANGES</b> IN <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> VERSION 0.2.1
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.1
 ----------------------------------------------------------------
 
 <b>BUG FIXES</b>
@@ -536,14 +536,14 @@ qdap 0.2.3
 * `sec2hms` is the new name for `convert` 
 
 * `folder` and `delete` have been moved to the reports package which is imported 
-  by <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a>.  Previously `folder` would not generate a directory with the 
+  by <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>.  Previously `folder` would not generate a directory with the 
   time/date stamp if no directory name was given; this has been fixed, though 
   the function now resides in the reports package.
 
-<b>CHANGES</b> IN <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> VERSION 0.2.0
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.0
 ----------------------------------------------------------------
 
-* The first installation of the <a href="https://github.com/trinker/qdapDictonaries" target="_blank">qdapDictonaries</a> package
+* The first installation of the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package
 
 * Package designed to bridge the gap between qualitative data and quantitative 
   analysis
