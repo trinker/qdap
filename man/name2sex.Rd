@@ -3,7 +3,7 @@
 \title{Names to Gender Prediction}
 \usage{
 name2sex(names.list, pred.sex = TRUE, fuzzy.match = pred.sex,
-  USE.NAMES = FALSE)
+  USE.NAMES = FALSE, database = NAMES_SEX, list.database = NAMES_LIST)
 }
 \arguments{
   \item{names.list}{Character vector containing first
@@ -23,6 +23,13 @@ name2sex(names.list, pred.sex = TRUE, fuzzy.match = pred.sex,
 
   \item{USE.NAMES}{logical.  If \code{TRUE} names.list is
   used to name the gender vector.}
+
+  \item{database}{A database of names (mostly for internal
+  purposes).}
+
+  \item{list.database}{A list version of the database of
+  names broken down by first letter of the name (mostly for
+  internal purposes).}
 }
 \value{
 Returns a vector of predicted gender (M/F) based on first

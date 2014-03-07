@@ -41,6 +41,10 @@ IMPROVEMENTS
   the number of columns used.  This uses ggplot2's `facet_wrap` rather than 
   `facet_grid` (which is the default if `ncol =NULL`).
 
+* `name2sex` relied upon having <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>Dictionaries loaded.  This could be an issue 
+  if the function were used internally.  The user now supplies a dictionary of 
+  names and probabilities.
+
 
 <b>CHANGES</b>
 

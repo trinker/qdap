@@ -12,6 +12,9 @@
 #' not be used on larger vectors.  Defaults to \code{pred.sex}.
 #' @param USE.NAMES logical.  If \code{TRUE} names.list is used to name the 
 #' gender vector.
+#' @param database A database of names (mostly for internal purposes).
+#' @param list.database A list version of the database of names broken down by 
+#' first letter of the name (mostly for internal purposes).
 #' @return Returns a vector of predicted gender (M/F) based on first name.
 #' @author Dason Kurkiewicz and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @keywords name gender
@@ -58,17 +61,19 @@
 #'     check.names=FALSE)
 #' }
 name2sex <- 
-function(names.list, pred.sex = TRUE, fuzzy.match = pred.sex, USE.NAMES = FALSE) {
+function(names.list, pred.sex = TRUE, fuzzy.match = pred.sex, USE.NAMES = FALSE,
+    database = NAMES_SEX, list.database = NAMES_LIST) {
     if(pred.sex) {
-        dat <- NAMES_SEX[, -2]
+        dat <- database[, -2]
     } else {
-        dat <- NAMES_SEX[, -3]
+        dat <- database[, -3]
     }
     nms <- toupper(names.list)
     out <- lookup(nms, dat)
     if (fuzzy.match) {
         FUN <- function(pattern, pred.sex2 = ifelse(pred.sex, 3, 2)) {
-            sector <- NAMES_LIST[names(NAMES_LIST) %in% substring(pattern, 1, 1)][[1]]
+            sector <- list.database[names(list.database) %in% substring(pattern, 
+                1, 1)][[1]]
             sector[which.min(Ldist(pattern, sector[, 1]))[1], pred.sex2]
         }
         if (length(out) == 1 && is.na(out)) {
