@@ -172,6 +172,7 @@ function(text.var, byrow = TRUE, missing = NA, apostrophe.remove = TRUE,
 #' @export
 character_table <- function(text.var, grouping.var, percent = TRUE, 
     prop.by.row = TRUE, zero.replace = 0, digits = 2, ...) {
+
     if(is.null(grouping.var)) {
         G <- "all"
     } else {
@@ -195,7 +196,8 @@ character_table <- function(text.var, grouping.var, percent = TRUE,
         } else {
             grouping <- unlist(grouping.var)
         } 
-    }                 
+    }  
+              
     ctab <- function(x) {
         table(unlist(strsplit(tolower(scrubber(paste2(x))), NULL)))
     }
@@ -203,7 +205,7 @@ character_table <- function(text.var, grouping.var, percent = TRUE,
     DF <- data.frame(grouping, text.var, check.names = FALSE, 
         stringsAsFactors = FALSE)
     DF$grouping <- factor(DF$grouping)
-    L1 <- split(DF$text.var, DF$grouping)
+    L1 <- lapply(split(DF$text.var, DF$grouping), na.omit)
     L2 <- lapply(L1, ctab)
     chars <- sort(unique(unlist(lapply(L2, names))))
     L3 <- do.call(rbind, lapply(L2, function(x){
@@ -234,7 +236,6 @@ character_table <- function(text.var, grouping.var, percent = TRUE,
     )
     out
 }
-
 #' Prints a character_table object
 #' 
 #' Prints a character_table object.

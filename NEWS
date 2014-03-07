@@ -25,6 +25,9 @@ BUG FIXES
 * `read.transcript` could leave a QDAP_PLACE_HOLDER behind if a colon was found 
   in the person column.  This behavior has been fixed.
 
+* `word_cor`'s plotting method threw an error if a word did not have any words 
+  above the r  threshhold.  This behavior has been corrected.
+
 NEW FEATURES
 
 MINOR FEATURES

@@ -246,10 +246,16 @@
 #' reuters <- Corpus(DirSource(reut21578),
 #'     readerControl = list(reader = readReut21578XML))
 #' 
+#' matches <- list(
+#'     oil = qcv(oil, crude),
+#'     money = c("economic", "money")
+#' )
+#' 
 #' apply_as_df(reuters, word_stats)
 #' apply_as_df(reuters, formality)
 #' apply_as_df(reuters, word_list)
 #' apply_as_df(reuters, polarity)
+#' apply_as_df(reuters, formality)
 #' apply_as_df(reuters, Dissimilarity)
 #' apply_as_df(reuters, diversity)
 #' apply_as_df(reuters, pos_by)
@@ -257,28 +263,25 @@
 #' apply_as_df(reuters, trans_venn)
 #' apply_as_df(reuters, gantt_plot)
 #' apply_as_df(reuters, rank_freq_mplot)
-#' apply_as_df(reuters, termco, 
-#'     match.list = list(
-#'         oil = qcv(oil, Texas, crude), 
-#'         money = c("economic", "money")
-#'     ))
-#' plot(apply_as_df(reuters, termco, 
-#'     match.list = list(
-#'         oil = qcv(oil, Texas, crude), 
-#'         money = c("economic", "money")
-#'     ), elim.old = FALSE), values = TRUE, high="red")
-#' apply_as_df(reuters, word_cor, 
-#'     word = qcv(oil, Texas, crude, economic, money)
-#' )
-#' plot(apply_as_df(reuters, word_cor, 
-#'     word = qcv(oil, Texas, crude, economic, money)
-#' ))
+#' apply_as_df(reuters, character_table)
+#' 
+#' (termco_out <- apply_as_df(reuters, termco, match.list = matches))
+#' plot(termco_out, values = TRUE, high="red")
+#' 
+#' (wordcor_out <- apply_as_df(reuters, word_cor, word = unlist(matches)))
+#' plot(wordcor_out)
+#' 
 #' (f_terms <- apply_as_df(reuters, freq_terms, at.least = 3))
 #' plot(f_terms)
+#' 
 #' apply_as_df(reuters, trans_cloud)
-#' finds <- apply_as_df(reuters, freq_terms, at.least = 5, 
+#' ## To use "all" rather than "docs" as "grouping.var"...
+#' apply_as_df(reuters, trans_cloud, grouping.var=NULL, 
+#'     target.words=matches, cloud.colors = c("red", "blue", "grey75"))
+#' 
+#' finds <- apply_as_df(reuters, freq_terms, at.least = 5,
 #'     top = 5, stopwords = Top100Words)
-#' apply_as_df(reuters, dispersion_plot, match.terms = finds[, 1], 
+#' apply_as_df(reuters, dispersion_plot, match.terms = finds[, 1],
 #'     total.color = NULL)
 #' }
 tdm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
@@ -639,14 +642,31 @@ apply_as_df <- function(tm.corpus, qdapfun, ..., stopwords = NULL,
         dat[, "text"]  <- Filter(dat[, "text"], min = min, max = max, 
             count.apostrophe = count.apostrophe) 
     }
-
-    ext_args <- list(...)
+  
     theargs <- names(formals(qdapfun))
+   
+    ## See if the user has set grouping.var to NULL
+    extras <- substitute(...())
+    group.null <- FALSE
+    if("grouping.var" %in% names(extras)) {
+        if (is.null(extras[["grouping.var"]])) {
+            group.null <- TRUE
+        }
+    }
+
     if (any(theargs %in% "tot")) {
-        with(dat, qdapfun(text.var = text, grouping.var = docs, tot = tot, ...))
+        if (group.null) {
+            with(dat, qdapfun(text.var = text, tot = tot, ...)) 
+        } else {
+            with(dat, qdapfun(text.var = text, grouping.var = docs, tot = tot, ...))
+        }
     } else {
         if (any(theargs %in% "grouping.var")) {
-            with(dat, qdapfun(text.var = text, grouping.var = docs, ...))
+            if (group.null) {
+                with(dat, qdapfun(text.var = text, ...))
+            } else {
+                with(dat, qdapfun(text.var = text, grouping.var = docs, ...))
+            }
         } else {
             with(dat, qdapfun(text.var = text, ...))
         }

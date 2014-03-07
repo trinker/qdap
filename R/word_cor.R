@@ -227,13 +227,16 @@ plot.word_cor <- function(x, label = TRUE, lab.digits = 3, high="red",
     low="white", grid=NULL, ncol=NULL, ...) {
     
     word <- cor <- comp_word <- NULL
-
+    
     if (attributes(x)[["type"]] == "cor_matrix") {
         qheat(t(x), diag.na = TRUE, diag.values = "", by.column = NULL, 
             values = TRUE, digits = lab.digits, high = high, 
             low = low, grid = grid, ...)
     }
     if (attributes(x)[["type"]] == "cor_list") {
+  
+        x <- x[!sapply(x, is.null)]
+        
         dat <- list_vect2df(x, "word", "comp_word", "cor")
        
         if (is.null(ncol)) {

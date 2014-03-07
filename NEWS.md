@@ -25,14 +25,17 @@ And constructed with the following guidelines:
 * `read.transcript` could leave a QDAP_PLACE_HOLDER behind if a colon was found 
   in the person column.  This behavior has been fixed.
 
+* `word_cor`'s plotting method threw an error if a word did not have any words 
+  above the r  threshhold.  This behavior has been corrected.
+
 <b>NEW FEATURES</b>
 
 <b>MINOR FEATURES</b>
 
 IMPROVEMENTS
 
-* `apply_as_df` picks up a `stopwords` argument that allows the user to remove 
-  stopwords.
+* `apply_as_df` picks up a `stopwords` and `filter` arguments that allows the 
+  user to remove stopwords and min/max length words.
 
 * `plot.word_cor` picks up the argument `ncol` that allows the user to specify 
   the number of columns used.  This uses ggplot2's `facet_wrap` rather than 
