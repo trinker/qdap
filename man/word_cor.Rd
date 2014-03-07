@@ -129,8 +129,8 @@ plot(out2)
 }
 }
 \references{
-The plotting method for the list output was inspired by
-stackoverflow.com member Ben; see
+The plotting method for the list output was inspired by Ben
+Marwick; see
 \url{http://stackoverflow.com/a/19925445/1000343} for more.
 }
 \seealso{
