@@ -23,7 +23,7 @@ Imports:
     NLP,
     parallel,
     plotrix,
-    reports (>= 0.2.0),
+    reports,
     reshape2,
     scales,
     tm,

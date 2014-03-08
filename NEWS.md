@@ -28,6 +28,8 @@ And constructed with the following guidelines:
 * `word_cor`'s plotting method threw an error if a word did not have any words 
   above the r  threshhold.  This behavior has been corrected.
 
+* `Filter` overwrote a base R function this has been fixed per Joshua Ulrich.
+
 <b>NEW FEATURES</b>
 
 <b>MINOR FEATURES</b>
