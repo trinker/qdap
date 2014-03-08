@@ -36,6 +36,9 @@ NEW FEATURES
   function use for the package.   Use `browseVignettes(package = "qdap")` to
   open.
 
+* qdap adds a PDF vignette to describe the compatibility and navigation between 
+  qdap and the `tm` packages. Use `browseVignettes(package = "qdap")` to open.
+
 MINOR FEATURES
 
 IMPROVEMENTS

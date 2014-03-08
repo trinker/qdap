@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.15)  8 MAR 2014 03:57
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.15)  8 MAR 2014 18:25
 entering extended mode
 **tm_package_compatability.tex
 (C:\Users\trinker\GitHub\qdap\vignettes\tm_package_compatability.tex
@@ -550,27 +550,28 @@ LaTeX Font Info:    Try loading font information for OT1+zplm on input line 106
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1zplm.fd"
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
-<figure/qdap_logo.png, id=5, 539.01375pt x 426.59375pt>
-File: figure/qdap_logo.png Graphic file (type png)
-
-<use figure/qdap_logo.png>
-Package pdftex.def Info: figure/qdap_logo.png used on input line 110.
-(pdftex.def)             Requested size: 271.0125pt x 214.48753pt.
+<imgs/qdaplogo.png, id=5, 539.01375pt x 426.59375pt>
+File: imgs/qdaplogo.png Graphic file (type png)
+ <use imgs/qdaplogo.png>
+Package pdftex.def Info: imgs/qdaplogo.png used on input line 109.
+(pdftex.def)             Requested size: 252.94499pt x 200.19315pt.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 113.
- [1
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 112.
+
+[1
 
 {C:/Users/trinker/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/
-trinker/GitHub/qdap/vignettes/figure/qdap_logo.png>]
+trinker/GitHub/qdap/vignettes/imgs/qdaplogo.png>]
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 119.
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 121.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 120.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 122.
 
- ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\t1lmtt.fd"
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <8> not available
-(Font)              Font shape `T1/ppl/b/n' tried instead on input line 139.
+(Font)              Font shape `T1/ppl/b/n' tried instead on input line 140.
 Package color Info: Redefining color shadecolor on input line 148.
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 150.
@@ -581,71 +582,138 @@ Underfull \hbox (badness 10000) in paragraph at lines 156--157
 
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <12> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 158.
-Package color Info: Redefining color shadecolor on input line 161.
-Package color Info: Redefining color shadecolor on input line 172.
-LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 178
+Package color Info: Redefining color shadecolor on input line 162.
+Package color Info: Redefining color shadecolor on input line 173.
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 179
 .
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\lm\ts1lmtt.fd"
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [2]
-Underfull \vbox (badness 10000) detected at line 214
- []
-
-
-Underfull \vbox (badness 10000) detected at line 214
- []
-
-[3]
-Package color Info: Redefining color shadecolor on input line 219.
-Package color Info: Redefining color shadecolor on input line 230.
-Package color Info: Redefining color shadecolor on input line 258.
-Package color Info: Redefining color shadecolor on input line 271.
+Package color Info: Redefining color shadecolor on input line 191.
+Package color Info: Redefining color shadecolor on input line 212.
+ [3]
+Package color Info: Redefining color shadecolor on input line 231.
+Package color Info: Redefining color shadecolor on input line 242.
+Package color Info: Redefining color shadecolor on input line 270.
+Package color Info: Redefining color shadecolor on input line 283.
  [4]
-Package color Info: Redefining color shadecolor on input line 289.
-Package color Info: Redefining color shadecolor on input line 321.
- [5]
+Package color Info: Redefining color shadecolor on input line 298.
+Package color Info: Redefining color shadecolor on input line 307.
 Package color Info: Redefining color shadecolor on input line 335.
-Package color Info: Redefining color shadecolor on input line 350.
-Package color Info: Redefining color shadecolor on input line 364.
+
+[5]
+Package color Info: Redefining color shadecolor on input line 349.
+Package color Info: Redefining color shadecolor on input line 365.
+Package color Info: Redefining color shadecolor on input line 379.
  [6]
-Package color Info: Redefining color shadecolor on input line 393.
-Package color Info: Redefining color shadecolor on input line 411.
+Package color Info: Redefining color shadecolor on input line 409.
+Package color Info: Redefining color shadecolor on input line 418.
+Package color Info: Redefining color shadecolor on input line 433.
  [7]
-Package color Info: Redefining color shadecolor on input line 445.
-Package color Info: Redefining color shadecolor on input line 465.
-Package color Info: Redefining color shadecolor on input line 482.
+Package color Info: Redefining color shadecolor on input line 461.
+Package color Info: Redefining color shadecolor on input line 479.
+Package color Info: Redefining color shadecolor on input line 488.
+Package color Info: Redefining color shadecolor on input line 505.
  [8]
 Package color Info: Redefining color shadecolor on input line 514.
+Package color Info: Redefining color shadecolor on input line 529.
+Package color Info: Redefining color shadecolor on input line 538.
+Package color Info: Redefining color shadecolor on input line 568.
  [9]
-(C:\Users\trinker\GitHub\qdap\vignettes\tm_package_compatability.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 548.
+Package color Info: Redefining color shadecolor on input line 578.
+Package color Info: Redefining color shadecolor on input line 592.
+Package color Info: Redefining color shadecolor on input line 610.
+Package color Info: Redefining color shadecolor on input line 619.
  [10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 548.
+Overfull \hbox (0.78238pt too wide) in paragraph at lines 643--643
+[]\T1/ppl/b/n/14.4 stemming, Stop-words, and Choos-ing n-Character Words/Terms
+ []
 
-(C:\Users\trinker\GitHub\qdap\vignettes\tm_package_compatability.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 548.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 548.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 548.
+Package color Info: Redefining color shadecolor on input line 654.
+Package color Info: Redefining color shadecolor on input line 663.
+Package color Info: Redefining color shadecolor on input line 683.
+[11]
+Package color Info: Redefining color shadecolor on input line 692.
+Package color Info: Redefining color shadecolor on input line 720.
+Package color Info: Redefining color shadecolor on input line 730.
+Package color Info: Redefining color shadecolor on input line 743.
+Package color Info: Redefining color shadecolor on input line 752.
+Package color Info: Redefining color shadecolor on input line 763.
+ [12]
+Package color Info: Redefining color shadecolor on input line 772.
+Package color Info: Redefining color shadecolor on input line 785.
+Package color Info: Redefining color shadecolor on input line 794.
+Package color Info: Redefining color shadecolor on input line 806.
+Package color Info: Redefining color shadecolor on input line 815.
+Package color Info: Redefining color shadecolor on input line 832.
+Package color Info: Redefining color shadecolor on input line 841.
+
+Overfull \hbox (39.9014pt too wide) in paragraph at lines 856--857
+\T1/ppl/m/n/10 At times it is con-ve-nient to ap-ply a func-tion in-tended for 
+a \T1/ppl/b/n/10 tm \T1/lmtt/m/n/10 TermDocumentMatrix \T1/ppl/m/n/10 or \T1/lm
+tt/m/n/10 DocumentTermMatrix
+ []
+
+[13]
+Package color Info: Redefining color shadecolor on input line 863.
+Package color Info: Redefining color shadecolor on input line 872.
+Package color Info: Redefining color shadecolor on input line 885.
+Package color Info: Redefining color shadecolor on input line 894.
+Package color Info: Redefining color shadecolor on input line 903.
+ [14]
+Package color Info: Redefining color shadecolor on input line 911.
+Package color Info: Redefining color shadecolor on input line 920.
+Package color Info: Redefining color shadecolor on input line 933.
+ [15]
+Package color Info: Redefining color shadecolor on input line 961.
+Package color Info: Redefining color shadecolor on input line 976.
+ <figure/minimal-apply_as_df2.pdf, id=117, 505.89pt x 361.35pt>
+File: figure/minimal-apply_as_df2.pdf Graphic file (type pdf)
+
+<use figure/minimal-apply_as_df2.pdf>
+Package pdftex.def Info: figure/minimal-apply_as_df2.pdf used on input line 978
+.
+(pdftex.def)             Requested size: 430.00462pt x 307.15446pt.
+Package color Info: Redefining color shadecolor on input line 992.
+ [16 <C:/Users/trinker/GitHub/qdap/vignettes/figure/minimal-apply_as_df2.pdf>] 
+[17]
+Package color Info: Redefining color shadecolor on input line 1041.
+Package color Info: Redefining color shadecolor on input line 1052.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1063--1064
+
+ []
+
+(C:\Users\trinker\GitHub\qdap\vignettes\tm_package_compatability.bbl [18])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1071.
+
+[19]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1071.
+ (C:\Users\trinker\GitHub\qdap\vignettes\tm_package_compatability.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1071.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1071.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1071.
  ) 
 Here is how much of TeX's memory you used:
- 8773 strings out of 493921
- 133241 string characters out of 3152890
- 239796 words of memory out of 3000000
- 11900 multiletter control sequences out of 15000+200000
- 31708 words of font info for 68 fonts, out of 3000000 for 9000
+ 8825 strings out of 493921
+ 133866 string characters out of 3152890
+ 238796 words of memory out of 3000000
+ 11924 multiletter control sequences out of 15000+200000
+ 33635 words of font info for 71 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 36i,10n,38p,987b,480s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,10n,38p,811b,480s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program F
 iles (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Program Files (x86)/MiK
 TeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2.9/font
 s/type1/public/lm/lmtk10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
 lic/lm/lmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtt
-i10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb>
-<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Prog
-ram Files (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on tm_package_compatability.pdf (10 pages, 272183 bytes).
+8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb><C:/
+Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program 
+Files (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files (x
+86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on tm_package_compatability.pdf (19 pages, 327941 bytes).
 PDF statistics:
- 160 PDF objects out of 1000 (max. 8388607)
- 33 named destinations out of 1000 (max. 500000)
- 110 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 273 PDF objects out of 1000 (max. 8388607)
+ 57 named destinations out of 1000 (max. 500000)
+ 211 words of extra memory for PDF output out of 10000 (max. 10000000)
 

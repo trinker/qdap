@@ -1,4 +1,4 @@
-\begin{thebibliography}{3}
+\begin{thebibliography}{5}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -14,6 +14,14 @@ Feinerer I, Hornik K (2014).
 \newblock \emph{tm: Text Mining Package}.
 \newblock Version 0.5-10, \urlprefix\url{http://CRAN.R-project.org/package=tm}.
 
+\bibitem[{Feinerer \emph{et~al.}(2008)Feinerer, Hornik, and
+  Meyer}]{Feinerer2008}
+Feinerer I, Hornik K, Meyer D (2008).
+\newblock \enquote{Text Mining Infrastructure in R. Journal of Statistical
+  Software.}
+\newblock \emph{Language and Education}, \textbf{25}(5), 51 -- 54.
+\newblock \urlprefix\url{http://www.jstatsoft.org/v25/i05/}.
+
 \bibitem[{{R Core Team}(2013)}]{R-core}
 {R Core Team} (2013).
 \newblock \emph{R: {A} Language and Environment for Statistical Computing}.
@@ -25,5 +33,11 @@ Rinker TW (2013).
 \newblock \emph{qdap: Quantitative Discourse Analysis Package}.
 \newblock University at Buffalo/SUNY, Buffalo, New York.
 \newblock Version 1.0.0, \urlprefix\url{http://github.com/trinker/qdap}.
+
+\bibitem[{Xie(2013)}]{R-knitr}
+Xie Y (2013).
+\newblock \emph{{knitr}: {A} general-purpose package for dynamic report
+  generation in R}.
+\newblock R package version 1.1, \urlprefix\url{http://yihui.name/knitr/}.
 
 \end{thebibliography}

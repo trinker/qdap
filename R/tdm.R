@@ -255,7 +255,6 @@
 #' apply_as_df(reuters, formality)
 #' apply_as_df(reuters, word_list)
 #' apply_as_df(reuters, polarity)
-#' apply_as_df(reuters, formality)
 #' apply_as_df(reuters, Dissimilarity)
 #' apply_as_df(reuters, diversity)
 #' apply_as_df(reuters, pos_by)

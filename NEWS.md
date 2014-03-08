@@ -36,6 +36,9 @@ And constructed with the following guidelines:
   function use for the package.   Use `browseVignettes(package = "qdap")` to
   open.
 
+* <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> adds a PDF vignette to describe the compatibility and navigation between 
+  <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> and the `tm` packages. Use `browseVignettes(package = "qdap")` to open.
+
 <b>MINOR FEATURES</b>
 
 IMPROVEMENTS
