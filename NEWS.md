@@ -28,7 +28,13 @@ And constructed with the following guidelines:
 * `word_cor`'s plotting method threw an error if a word did not have any words 
   above the r  threshhold.  This behavior has been corrected.
 
+* `Filter` overwrote a base R function this has been fixed per Joshua Ulrich.
+
 <b>NEW FEATURES</b>
+
+* <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> adds an HTML vignette to better explain the intended work flow and 
+  function use for the package.   Use `browseVignettes(package = "qdap")` to
+  open.
 
 <b>MINOR FEATURES</b>
 

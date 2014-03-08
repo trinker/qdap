@@ -832,11 +832,11 @@ function(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL,
 
 
 #' @S3method Filter default  
-Filter.default <- 
-function(..., min = 1, max = Inf, count.apostrophe, stopwords = NULL, x){
-        LIS <- list(...)
-        return(Filter.wfm(LIS, min, max, count.apostrophe))
-}
+Filter.default <- function(x, ...) base::Filter
+#function(..., min = 1, max = Inf, count.apostrophe, stopwords = NULL, x){
+#        LIS <- list(...)
+#        return(Filter.wfm(LIS, min, max, count.apostrophe))
+#}
 
 
 is.Integer <- 

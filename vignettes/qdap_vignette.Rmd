@@ -7,9 +7,12 @@
 # set global chunk options
 library(knitr); library(qdap)
 opts_chunk$set(cache=FALSE, tidy=FALSE, warning=FALSE)
-library(knitcitations); library(reports)
+library(knitcitations)#; library(reports)
 bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
 
+source("funs/utils_functions.R")
+source("funs/extra_functions.R")    
+    
 #  BU <- "http://trinker.github.io/qdap/" 
 BU <- "http://trinker.github.io/qdap_dev/" #switch before upload
 LN <- function(fun, base=BU) paste0(BU, fun, ".html")
