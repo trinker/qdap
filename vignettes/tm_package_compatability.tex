@@ -1,0 +1,562 @@
+%====================
+%  Document Class
+%====================
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+%====================
+%  Packages
+%====================
+\usepackage{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{url}
+\usepackage[authoryear]{natbib}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{animate}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{booktabs}
+\usepackage{bookmark}
+\usepackage{caption}
+
+\captionsetup{
+  font=footnotesize,
+  justification=raggedright,
+  singlelinecheck=false
+}
+%====================
+%  Custom Commands
+%====================
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\newcommand\posscite[1]{\citeauthor{#1}'s (\citeyear{#1})} 
+\newcommand\poscite[1]{\citeauthor{#1}' (\citeyear{#1})}
+%====================
+%  Formatting
+%====================
+%\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+
+%====================
+%  Other
+%====================
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+% \VignetteIndexEntry{An Introduction to knitr}
+% \VignetteEngine{knitr}
+
+\makeatother
+%===============================================================================
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+\title{qdap-tm Package Compatability}
+\author{Tyler W. Rinker}
+\date{\today}
+\maketitle
+
+\vspace{1cm}
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=3.75in]{../inst/demos/qdap_logo.png}
+\end{figure}
+
+The \textbf{qdap} package \citep{R-qdap} is an R package designed to assist in quantitative discourse analysis. The package stands as a bridge between qualitative transcripts of dialogue and statistical analysis and visualization.  The \textbf{tm} package \citep{R-tm} is a major R \citep{R-core} package used for a variety of text mining tasks. Many text analysis packages have been built around the \textbf{tm} package's infastructure (see \href{http://cran.r-project.org/web/views/NaturalLanguageProcessing.html}{CRAN Task View: Natural Language Processing}).  As \textbf{qdap} aims to act as a bridge to other R text mining analyses it is improtant that \textbf{qdap} provides a means of moving between the various \textbf{qdap} and \textbf{tm} data types.  This vignette serves as a guide describign the various data formats of the two packages and the qdap functions that enable the user to move seemlessly between the two package.
+
+
+
+
+\newpage
+\section{Data Formats}
+
+\hspace{.4cm} The \textbf{qdap} and \textbf{tm} packages each have two basic data formats.  \textbf{qdap} stores raw text data in the form of a \texttt{data.frame} augmented with columns of demogrphic variables whereas \textbf{tm} stores raw text as a \texttt{Corpus} and annotates demographic information with Meta Data attributes.  The structures are both \texttt{list}s and are comparable.
+
+The second format both packages use is a matrix structure of word frequency counts.  The \textbf{qdap} package utilizes the \emph{Word Frequency Matrix} (\texttt{wfm} function) whereas the \textbf{tm} package utilizes the \emph{Term Document Matrix} or \emph{Document Term Matrix} (\texttt{TermDocumentMatrix} and \texttt{DocumentTermMatrix} functions).  Again the structure is similar between these two dataforms.  Table~\ref{datforms} lays out the dataforms of the two packages.
+
+
+
+\begin{singlespace}
+\begin{table}[!ht]
+\begin{center}
+  \captionbox{\textbf{qdap}-\textbf{tm} Dataforms \label{datforms}}{%
+    \begin{tabular}{p{2cm}p{2cm}p{8cm}}
+    \hline
+    \multicolumn{1}{l}{Package} & \multicolumn{1}{l}{Raw Text} & \multicolumn{1}{l}{Word Counts}  \\
+    \hline
+    \noindent \textbf{qdap} & \noindent Dataframe & \noindent  Word Frequency Matrix \\
+    \noindent \textbf{tm} & \noindent Corpus & \noindent Term Document Matrix/Document Term matrix \\
+    \hline
+    \end{tabular}
+  }
+\end{center}
+\end{table}
+\end{singlespace}
+
+One of the most visible differences between \textbf{qdap}-\textbf{tm} dataforms is that \textbf{qdap} enables the user to readily view the data while the \textbf{tm} utilizes a print method that provides a summary of the data.  The \texttt{tm::inspect} function enables the user to view \textbf{tm} dataforms. The \textbf{qdap} package provides \texttt{qdap::qview} and \texttt{qdap::htruncdf} functions to view more digestable ammounts of the data. Let's have a look at the different data types.  we'll start by loading both packages:
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{library}\hlstd{(qdap);} \hlkwd{library}\hlstd{(tm)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\noindent Now let us have a look at the raw text storage of both packages. \\ 
+
+\subsection{Raw Text}
+\subsubsection{qdap's Raw Text}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{DATA}
+\hlkwd{qview}\hlstd{(DATA)}
+\hlkwd{htruncdf}\hlstd{(DATA)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+## > DATA
+##
+##        person sex adult                                 state code
+## 1         sam   m     0         Computer is fun. Not too fun.   K1
+## 2        greg   m     0               No it's not, it's dumb.   K2
+## .
+## .
+## .
+## 9       sally   f     0           What are you talking about?   K9
+## 10 researcher   f     1         Shall we move on?  Good then.  K10
+## 11       greg   m     0 I'm hungry.  Let's eat.  You already?  K11
+
+
+## > qview(DATA)
+##
+## ========================================================================
+## nrow =  11           ncol =  5             DATA
+## ========================================================================
+##        person sex adult      state code
+## 1         sam   m     0 Computer i   K1
+## 2        greg   m     0 No it's no   K2
+## .
+## .
+## .
+## 8         sam   m     0 I distrust   K8
+## 9       sally   f     0 What are y   K9
+## 10 researcher   f     1 Shall we m  K10
+
+## > htruncdf(DATA)
+##
+##        person sex adult      state code
+## 1         sam   m     0 Computer i   K1
+## 2        greg   m     0 No it's no   K2
+## .
+## .
+## .
+## 8         sam   m     0 I distrust   K8
+## 9       sally   f     0 What are y   K9
+## 10 researcher   f     1 Shall we m  K10
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\subsubsection{tm's Raw Text}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{data}\hlstd{(}\hlstr{"crude"}\hlstd{)}
+\hlstd{crude}
+\hlkwd{inspect}\hlstd{(crude)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+## > crude
+## A corpus with 20 text documents
+## 
+## > crude[[1]]
+## Diamond Shamrock Corp said that
+## effective today it had cut its contract prices for crude oil by
+## 1.50 dlrs a barrel.
+##     The reduction brings its posted price for West Texas
+## Intermediate to 16.00 dlrs a barrel, the copany said.
+##     "The price reduction today was made in the light of falling
+## .
+## .
+## .
+##     Diamond is the latest in a line of U.S. oil companies that
+## have cut its contract, or posted, prices over the last two days
+## citing weak oil markets.
+##  Reuter
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\subsection{Word/Term Frequency Counts}
+
+\hspace{.4cm} Now we'll look at how the two packages handle word frequency counts.  We'll start by setting up the raw text forms the two packages expect.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{tm_dat} \hlkwb{<-} \hlstd{qdap_dat} \hlkwb{<-} \hlstd{DATA[}\hlnum{1}\hlopt{:}\hlnum{4}\hlstd{,} \hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,} \hlnum{4}\hlstd{) ]}
+\hlkwd{rownames}\hlstd{(tm_dat)} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"docs"}\hlstd{,} \hlnum{1}\hlopt{:}\hlkwd{nrow}\hlstd{(tm_dat))}
+\hlstd{tm_dat} \hlkwb{<-} \hlkwd{Corpus}\hlstd{(}\hlkwd{DataframeSource}\hlstd{(tm_dat[,} \hlnum{2}\hlstd{,} \hlkwc{drop}\hlstd{=}\hlnum{FALSE}\hlstd{]))}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+ 
+\noindent Both \texttt{qdap\_dat} and \texttt{tm\_dat} are storing this basic information:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{qdap_dat}
+\end{alltt}
+\begin{verbatim}
+##    person                         state
+## 1     sam Computer is fun. Not too fun.
+## 2    greg       No it's not, it's dumb.
+## 3 teacher            What should we do?
+## 4     sam          You liar, it stinks!
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\subsubsection{qdap's Frequency Counts}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{with}\hlstd{(qdap_dat,} \hlkwd{wfm}\hlstd{(state, person))}
+\end{alltt}
+\begin{verbatim}
+##          greg researcher sally sam teacher
+## computer    0          0     0   1       0
+## do          0          0     0   0       1
+## dumb        1          0     0   0       0
+## fun         0          0     0   2       0
+## is          0          0     0   1       0
+## it          0          0     0   1       0
+## it's        2          0     0   0       0
+## liar        0          0     0   1       0
+## no          1          0     0   0       0
+## not         1          0     0   1       0
+## should      0          0     0   0       1
+## stinks      0          0     0   1       0
+## too         0          0     0   1       0
+## we          0          0     0   0       1
+## what        0          0     0   0       1
+## you         0          0     0   1       0
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\subsubsection{tm's Frequency Counts}
+
+Now we'll Look at the tm output using \texttt{inspect}.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{TermDocumentMatrix}(tm_dat, 
+    control = \hlkwd{list}(
+        removePunctuation = TRUE, 
+        wordLengths=\hlkwd{c}(0, Inf))
+    )
+)
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+## > TermDocumentMatrix(tm_dat)
+## A term-document matrix (13 terms, 4 documents)
+## 
+## Non-/sparse entries: 13/39
+## Sparsity           : 75%
+## Maximal term length: 8 
+## Weighting          : term frequency (tf)
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{inspect}(\hlkwd{TermDocumentMatrix}(tm_dat, 
+    control = \hlkwd{list}(
+        removePunctuation = TRUE, 
+        wordLengths=\hlkwd{c}(0, Inf))
+    )
+))
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+#'           Docs
+#' Terms      docs 1 docs 2 docs 3 docs 4
+#'   computer      1      0      0      0
+#'   do            0      0      1      0
+#'   dumb          0      1      0      0
+#'   fun           2      0      0      0
+#'   is            1      0      0      0
+#'   it            0      0      0      1
+#'   its           0      2      0      0
+#'   liar          0      0      0      1
+#'   no            0      1      0      0
+#'   not           1      1      0      0
+#'   should        0      0      1      0
+#'   stinks        0      0      0      1
+#'   too           1      0      0      0
+#'   we            0      0      1      0
+#'   what          0      0      1      0
+#'   you           0      0      0      1
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+The two matrices are esentially the same, with the execption of column order and names.  Notice that we have to specify not to remove low character words while removing punctuation in the \textbf{tm} package semantics.  qdap takes the opposite approach, removing punctuation by default and ustilizing all word lengths by default.  These differences arise out of the intended uses, audiences, and philosophies of the package authors.  Each has strengths in particular situations.  The ]textbf{qdap} output is an ordinary \texttt{matrix} whereas the \textbf{tm} output is a more compact \texttt{simple triplet matrix}.  While the storage is different, both packages can be made to mimic the default of the other.  
+
+Also note that the \textbf{qdap} \texttt{sumamry} method for \texttt{wfm} provides the user with information simialr to the \texttt{TermDocumentMatrix}/\texttt{DocumentTermMatrix} functions' deault \texttt{print} method.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{summary}\hlstd{(}\hlkwd{with}\hlstd{(qdap_dat,} \hlkwd{wfm}\hlstd{(state, person)))}
+\end{alltt}
+
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# A word-frequency matrix (16 terms, 5 groups)\\\#\# \\\#\# \\\#\# Non-/sparse entries\ \ \ \ \ \  : 17/63\\\#\# Sparsity\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ : 79\%\\\#\# Maximal term length\ \ \ \ \ \  : 8\\\#\# Less than four characters : 56\%\\\#\# Hapax legomenon\ \ \ \ \ \ \ \ \ \  : 13(81\%)\\\#\# Dis legomenon\ \ \ \ \ \ \ \ \ \ \ \  : 3(19\%)\\\#\# Shannon's diversity index : 2.73}}\end{kframe}
+\end{knitrout}
+
+
+Now we'll look at some \textbf{qdap} functions that enable the user to move between packages, gaining the flexibility and benefits of both packages.
+
+
+\section{Converting Data Forms}
+
+We'll again use the following preset data.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{tm_dat} \hlkwb{<-} \hlstd{qdap_dat} \hlkwb{<-} \hlstd{DATA[}\hlnum{1}\hlopt{:}\hlnum{4}\hlstd{,} \hlkwd{c} \hlstd{(}\hlnum{1}\hlstd{,} \hlnum{4}\hlstd{) ]}
+\hlkwd{rownames} \hlstd{(tm_dat)} \hlkwb{<-} \hlkwd{paste} \hlstd{(}\hlstr{"docs"}\hlstd{,} \hlnum{1}\hlopt{:} \hlkwd{nrow} \hlstd{(tm_dat))}
+\hlstd{tm_dat} \hlkwb{<-} \hlkwd{Corpus} \hlstd{(} \hlkwd{DataframeSource} \hlstd{(tm_dat[,} \hlnum{2}\hlstd{,} \hlkwc{drop}\hlstd{=}\hlnum{FALSE}\hlstd{]))}
+
+\hlstd{qdap_wfm} \hlkwb{<-} \hlkwd{with} \hlstd{(qdap_dat,} \hlkwd{wfm} \hlstd{(state, person))}
+\hlstd{tm_tdm} \hlkwb{<-} \hlkwd{TermDocumentMatrix} \hlstd{(tm_dat,}
+    \hlkwc{control} \hlstd{=} \hlkwd{list} \hlstd{(}
+        \hlkwc{removePunctuation} \hlstd{=} \hlnum{TRUE}\hlstd{,}
+        \hlkwc{wordLengths}\hlstd{=} \hlkwd{c} \hlstd{(}\hlnum{0}\hlstd{,} \hlnum{Inf}\hlstd{)}
+    \hlstd{)}
+\hlstd{)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+
+\begin{enumerate}
+  \item \texttt{qdap\_dat} -- is a \underline{\textbf{qdap} raw text} form
+  \item \texttt{tm\_dat} -- is a \underline{\textbf{tm} raw text} format
+  \item \texttt{qdap\_wfm} -- is a \underline{\textbf{qdap} word frequncies count}
+  \item \texttt{tm\_tdm} -- is a \underline{\textbf{tm} word frequncies count}
+\end{enumerate}
+
+
+
+%%%%%%%
+
+\subsection{Corpus to data.frame}
+
+To move from a \texttt{Corpus} to a \texttt{data.frame} the \texttt{tm\_corpus2df} function is used as follows:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{tm_corpus2df}\hlstd{(tm_dat)}
+\end{alltt}
+\begin{verbatim}
+##     docs                          text
+## 1 docs 1 Computer is fun. Not too fun.
+## 2 docs 2       No it's not, it's dumb.
+## 3 docs 3            What should we do?
+## 4 docs 4          You liar, it stinks!
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\subsection{data.frame to Corpus}
+
+To move from a \texttt{data.frame} to a \texttt{Corpus} the \texttt{df2tm\_corpus} function is used as follows:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{with}\hlstd{(qdap_dat,} \hlkwd{df2tm_corpus}\hlstd{(state, person))}
+\end{alltt}
+\begin{verbatim}
+## A corpus with 3 text documents
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+\subsection{TermDocumentMatrix/DocumentTermMatrix to wfm}
+
+To move from a \texttt{TermDocumentMatrix} to a \texttt{wfm} the \texttt{as.wfm} function is used as follows:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{as.wfm}\hlstd{(tm_tdm)}
+\end{alltt}
+\begin{verbatim}
+##          docs 1 docs 2 docs 3 docs 4
+## computer      1      0      0      0
+## do            0      0      1      0
+## dumb          0      1      0      0
+## fun           2      0      0      0
+## is            1      0      0      0
+## it            0      0      0      1
+## its           0      2      0      0
+## liar          0      0      0      1
+## no            0      1      0      0
+## not           1      1      0      0
+## should        0      0      1      0
+## stinks        0      0      0      1
+## too           1      0      0      0
+## we            0      0      1      0
+## what          0      0      1      0
+## you           0      0      0      1
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+\subsection{wfm to TermDocumentMatrix/DocumentTermMatrix}
+
+To move from a \texttt{wfm} to a \texttt{TermDocumentMatrix} or \texttt{DocumentTermMatrix} the \texttt{tdm} and \texttt{dtm} functions can be used as follows:
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlkwd{tdm}\hlstd{(qdap_wfm)}
+\end{alltt}
+\begin{verbatim}
+## A term-document matrix (16 terms, 5 documents)
+## 
+## Non-/sparse entries: 17/63
+## Sparsity           : 79%
+## Maximal term length: 8 
+## Weighting          : term frequency (tf)
+\end{verbatim}
+\begin{alltt}
+\hlkwd{dtm}\hlstd{(qdap_wfm)}
+\end{alltt}
+\begin{verbatim}
+## A document-term matrix (5 documents, 16 terms)
+## 
+## Non-/sparse entries: 17/63
+## Sparsity           : 79%
+## Maximal term length: 8 
+## Weighting          : term frequency (tf)
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{jss}
+\bibliography{qdap}
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

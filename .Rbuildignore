@@ -31,6 +31,8 @@ inst/staticdocs
 INSTALL
 contributors.geojson
 AFTER_REPORTS_UPDATES
+tm_package_compatability.bbl
+tm_package_compatability.log
 
 
 

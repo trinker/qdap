@@ -889,6 +889,9 @@ as.wfm <- function(matrix.object) {
     if(!all(is.Integer(matrix.object))){
         stop("matrix.object must contain only integer values")
     }
+    if (any(class(matrix.object) %in% c("TermDocumentMatrix", "DocumentTermMatrix"))) {
+        return(tm2qdap(matrix.object))
+    }
     if (!is.matrix(matrix.object)) {
         warning("Not a matrix.object; may not convert correctly",
             immediate. = TRUE)

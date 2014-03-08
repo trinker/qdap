@@ -27,5 +27,6 @@ notifications:
 
 env:
    global:
+     - R_BUILD_ARGS="--compact-vignettes=gs+qpdf" 
      - R_BUILD_ARGS="--resave-data=best" 
      - DISPLAY=:99.0

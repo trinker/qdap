@@ -1,0 +1,29 @@
+\begin{thebibliography}{3}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Feinerer and Hornik(2014)}]{R-tm}
+Feinerer I, Hornik K (2014).
+\newblock \emph{tm: Text Mining Package}.
+\newblock Version 0.5-10, \urlprefix\url{http://CRAN.R-project.org/package=tm}.
+
+\bibitem[{{R Core Team}(2013)}]{R-core}
+{R Core Team} (2013).
+\newblock \emph{R: {A} Language and Environment for Statistical Computing}.
+\newblock R Foundation for Statistical Computing, Vienna, Austria.
+\newblock \urlprefix\url{http://www.R-project.org/}.
+
+\bibitem[{Rinker(2013)}]{R-qdap}
+Rinker TW (2013).
+\newblock \emph{qdap: Quantitative Discourse Analysis Package}.
+\newblock University at Buffalo/SUNY, Buffalo, New York.
+\newblock Version 1.0.0, \urlprefix\url{http://github.com/trinker/qdap}.
+
+\end{thebibliography}
