@@ -57,7 +57,7 @@
 \vspace{1cm}
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=3.75in]{../inst/demos/qdap_logo.png}
+    \includegraphics[width=3.75in]{figure/qdap_logo.png}
 \end{figure}
 
 The \textbf{qdap} package \citep{R-qdap} is an R package designed to assist in quantitative discourse analysis. The package stands as a bridge between qualitative transcripts of dialogue and statistical analysis and visualization.  The \textbf{tm} package \citep{R-tm} is a major R \citep{R-core} package used for a variety of text mining tasks. Many text analysis packages have been built around the \textbf{tm} package's infastructure (see \href{http://cran.r-project.org/web/views/NaturalLanguageProcessing.html}{CRAN Task View: Natural Language Processing}).  As \textbf{qdap} aims to act as a bridge to other R text mining analyses it is improtant that \textbf{qdap} provides a means of moving between the various \textbf{qdap} and \textbf{tm} data types.  This vignette serves as a guide describign the various data formats of the two packages and the qdap functions that enable the user to move seemlessly between the two package.
@@ -278,7 +278,7 @@ The two matrices are esentially the same, with the execption of column order and
 
 Also note that the \textbf{qdap} \texttt{sumamry} method for \texttt{wfm} provides the user with information simialr to the \texttt{TermDocumentMatrix}/\texttt{DocumentTermMatrix} functions' deault \texttt{print} method.
 
-<<summary>>=
+<<sum_wfm>>=
 summary(with(qdap_dat, wfm(state, person)))
 @
 

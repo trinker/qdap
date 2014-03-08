@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.15)  8 MAR 2014 03:33
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.15)  8 MAR 2014 03:57
 entering extended mode
 **tm_package_compatability.tex
 (C:\Users\trinker\GitHub\qdap\vignettes\tm_package_compatability.tex
@@ -550,18 +550,18 @@ LaTeX Font Info:    Try loading font information for OT1+zplm on input line 106
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\psnfss\ot1zplm.fd"
 File: ot1zplm.fd 2002/09/08 Fontinst v1.914 font definitions for OT1/zplm.
 )
-<../inst/demos/qdap_logo.png, id=5, 539.01375pt x 426.59375pt>
-File: ../inst/demos/qdap_logo.png Graphic file (type png)
+<figure/qdap_logo.png, id=5, 539.01375pt x 426.59375pt>
+File: figure/qdap_logo.png Graphic file (type png)
 
-<use ../inst/demos/qdap_logo.png>
-Package pdftex.def Info: ../inst/demos/qdap_logo.png used on input line 110.
+<use figure/qdap_logo.png>
+Package pdftex.def Info: figure/qdap_logo.png used on input line 110.
 (pdftex.def)             Requested size: 271.0125pt x 214.48753pt.
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <10> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 113.
  [1
 
 {C:/Users/trinker/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <C:/Users/
-trinker/GitHub/qdap/inst/demos/qdap_logo.png>]
+trinker/GitHub/qdap/vignettes/figure/qdap_logo.png>]
 LaTeX Font Info:    Font shape `T1/ppl/bx/n' in size <14.4> not available
 (Font)              Font shape `T1/ppl/b/n' tried instead on input line 119.
 LaTeX Font Info:    Try loading font information for T1+lmtt on input line 121.
@@ -629,7 +629,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 548.
  ) 
 Here is how much of TeX's memory you used:
  8773 strings out of 493921
- 133276 string characters out of 3152890
+ 133241 string characters out of 3152890
  239796 words of memory out of 3000000
  11900 multiletter control sequences out of 15000+200000
  31708 words of font info for 68 fonts, out of 3000000 for 9000
