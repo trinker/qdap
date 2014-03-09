@@ -2,7 +2,7 @@
 \alias{print.polarity_count}
 \title{Prints a polarity_count Object}
 \usage{
-\method{print}{polarity_count}(x, digits = NULL, ...)
+\method{print}{polarity_count}(x, digits = 3, ...)
 }
 \arguments{
   \item{x}{The polarity_count object.}

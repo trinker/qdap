@@ -2,7 +2,7 @@
 \alias{print.polarity_score}
 \title{Prints a polarity_score Object}
 \usage{
-\method{print}{polarity_score}(x, digits = NULL, ...)
+\method{print}{polarity_score}(x, digits = 3, ...)
 }
 \arguments{
   \item{x}{The polarity_score object.}

@@ -332,23 +332,26 @@ scores.polarity <- function(x, ...) {
 #' @method print polarity_score
 #' @S3method print polarity_score
 print.polarity_score <-
-    function(x, digits = NULL, ...) {
+    function(x, digits = 3, ...) {
 
     WD <- options()[["width"]]
     options(width=3000)
 
-    if (is.null(digits)) {
-        digits <- attributes(x)[["digits"]]
-    }
     class(x) <- "data.frame"
-    x[, "ave.polarity"] <- round(x[, "ave.polarity"], digits = digits)
-    x[, "sd.polarity"] <- round(x[, "sd.polarity"], digits = digits)
-    x[, "stan.mean.polarity"] <- round(x[, "stan.mean.polarity"], 
-        digits = digits)
+    if ("ave.polarity" %in% colnames(x)) {    
+        x[, "ave.polarity"] <- round(x[, "ave.polarity"], digits = digits)
+    }        
+    if ("sd.polarity" %in% colnames(x)) {    
+        x[, "sd.polarity"] <- round(x[, "sd.polarity"], digits = digits)
+    }        
+    if ("stan.mean.polarity" %in% colnames(x)) {    
+        x[, "stan.mean.polarity"] <- round(x[, "stan.mean.polarity"], 
+            digits = digits)
+    }    
+
     print(x)
     options(width=WD)
 }
-
 
 #' Prints an polarity Object
 #' 
@@ -395,14 +398,13 @@ counts.polarity <- function(x, ...) {
 #' @method print polarity_count
 #' @S3method print polarity_count
 print.polarity_count <-
-    function(x, digits = NULL, ...) {
-
-    if (is.null(digits)) {
-        digits <- attributes(x)[["digits"]]
-    }
+    function(x, digits = 3, ...) {
 
     class(x) <- "data.frame"
-    x[, "polarity"] <- round(x[, "polarity"], digits = digits)
+        
+    if ("polarity" %in% colnames(x)) {    
+        x[, "polarity"] <- round(x[, "polarity"], digits = digits)
+    }
     WD <- options()[["width"]]
     options(width=3000)
     print(x)

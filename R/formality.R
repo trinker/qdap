@@ -185,7 +185,7 @@ formality <- function(text.var, grouping.var = NULL,
             formality = FOR)                                                         
         colnames(FOR)[1] <- G                                                        
     }                                                                                
-    FOR[, "formality"] <- round(FOR[, "formality"], digits = digits)                 
+                
     if (!gv & order.by.formality) {                                                   
         FOR <- FOR[order(-FOR$formality), ]                                          
         rownames(FOR) <- NULL                                                        
@@ -226,7 +226,8 @@ formality <- function(text.var, grouping.var = NULL,
     row.names(dat) <- NULL                                                           
     o$pos.reshaped <- dat  
     o$group <- G                                                                                                                                                                                                      
-    class(o) <- "formality"                                                  
+    class(o) <- "formality"  
+    attributes(o)[["digits"]] <- digits
     return(o)                                                                        
 }
 
@@ -376,12 +377,26 @@ plot.formality <- function(x, point.pch = 20, point.cex = .5,
 #' Prints a formality  object.
 #' 
 #' @param x The formality object.
+#' @param digits The number of digits to print.
 #' @param \ldots ignored
 #' @method print formality
 #' @S3method print formality
 print.formality <-
-function(x, ...) {
-    print(x$formality)
+function(x, digits, ...) {
+    
+    y <- x[["formality"]]
+
+    if ("formality" %in% colnames(y)) {
+        if (missing(digits)) {
+             if(!is.null(attributes(x)[["digits"]])) {
+                 digits <- attributes(x)[["digits"]]
+             } else {
+                 digits <- 2   
+             }
+        }
+        y[, "formality"] <- round(y[, "formality"], digits = digits)
+    }
+    print(y)
 }
 
 #' Formality
@@ -569,7 +584,6 @@ plot.pos_preprocessed <- function(x, ...){
         theme_qdap()
 
 }
-
 
 
 

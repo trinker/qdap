@@ -30,6 +30,13 @@ And constructed with the following guidelines:
 
 * `Filter` overwrote a base R function this has been fixed per Joshua Ulrich.
 
+* `scores.polarity`'s print method would return an error if columns were not 
+  indexed yet were rounded.  For instance, the following threw an error: 
+
+  `scores(with(sentSplit(DATA, 4), polarity(state, person)))[, 1:4]` 
+
+   This behavior has been fixed.
+
 <b>NEW FEATURES</b>
 
 * <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> adds an HTML vignette to better explain the intended work flow and 
