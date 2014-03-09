@@ -168,6 +168,9 @@ names(NAMES_LIST) <- LETTERS
 #new <- "C:/Users/trinker/Dropbox/Public/packages"
 #file.copy(root, new, TRUE, TRUE)
 
+root <- "vignettes/tm_package_compatability.pdf"
+new <- "C:/Users/trinker/Dropbox/Public/packages"
+file.copy(root, new, TRUE, TRUE)
 #==========================
 # NEWS.md
 #==========================

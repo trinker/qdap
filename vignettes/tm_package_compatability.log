@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.15)  8 MAR 2014 18:25
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.15)  8 MAR 2014 20:24
 entering extended mode
 **tm_package_compatability.tex
 (C:\Users\trinker\GitHub\qdap\vignettes\tm_package_compatability.tex
@@ -629,6 +629,12 @@ Overfull \hbox (0.78238pt too wide) in paragraph at lines 643--643
 []\T1/ppl/b/n/14.4 stemming, Stop-words, and Choos-ing n-Character Words/Terms
  []
 
+
+Overfull \hbox (4.41257pt too wide) in paragraph at lines 651--652
+  \T1/ppl/b/n/10 qdap \T1/ppl/m/n/10 takes the ap-proach that the user stems th
+e dataframe upon cre-ation (us-ing \T1/lmtt/m/n/10 sentSplit(...,
+ []
+
 Package color Info: Redefining color shadecolor on input line 654.
 Package color Info: Redefining color shadecolor on input line 663.
 Package color Info: Redefining color shadecolor on input line 683.
@@ -648,10 +654,10 @@ Package color Info: Redefining color shadecolor on input line 815.
 Package color Info: Redefining color shadecolor on input line 832.
 Package color Info: Redefining color shadecolor on input line 841.
 
-Overfull \hbox (39.9014pt too wide) in paragraph at lines 856--857
-\T1/ppl/m/n/10 At times it is con-ve-nient to ap-ply a func-tion in-tended for 
-a \T1/ppl/b/n/10 tm \T1/lmtt/m/n/10 TermDocumentMatrix \T1/ppl/m/n/10 or \T1/lm
-tt/m/n/10 DocumentTermMatrix
+Overfull \hbox (53.18234pt too wide) in paragraph at lines 856--857
+  \T1/ppl/m/n/10 At times it is con-ve-nient to ap-ply a func-tion in-tended fo
+r a \T1/ppl/b/n/10 tm \T1/lmtt/m/n/10 TermDocumentMatrix \T1/ppl/m/n/10 or \T1/
+lmtt/m/n/10 DocumentTermMatrix
  []
 
 [13]
@@ -711,7 +717,7 @@ lic/lm/lmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtt
 Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program 
 Files (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files (x
 86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on tm_package_compatability.pdf (19 pages, 327941 bytes).
+Output written on tm_package_compatability.pdf (19 pages, 327994 bytes).
 PDF statistics:
  273 PDF objects out of 1000 (max. 8388607)
  57 named destinations out of 1000 (max. 500000)

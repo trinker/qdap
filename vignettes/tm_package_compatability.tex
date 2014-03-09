@@ -91,7 +91,7 @@
 %====================
 \makeatletter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-% \VignetteIndexEntry{An Introduction to knitr}
+% \VignetteIndexEntry{qdap-tm Package Compatibility}
 % \VignetteEngine{knitr}
 
 \makeatother
@@ -359,7 +359,7 @@ One of the most visible differences between \textbf{qdap}-\textbf{tm} data forms
 \end{knitrout}
 
 
-Now we'll Look at the tm output using \texttt{inspect}.
+\noindent Now we'll Look at the tm output using \texttt{inspect}.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -427,7 +427,7 @@ Now we'll look at some \textbf{qdap} functions that enable the user to move betw
 
 \section{Converting Data Forms}
 
-We'll again use the following preset data.
+\hspace{.4cm} We'll again use the following preset data.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -473,7 +473,7 @@ We'll again use the following preset data.
 
 \subsection{Corpus to data.frame}
 
-To move from a \texttt{Corpus} to a \texttt{data.frame} the \texttt{tm\_corpus2df} function is used as follows:
+\hspace{.4cm} To move from a \texttt{Corpus} to a \texttt{data.frame} the \texttt{tm\_corpus2df} function is used as follows:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -499,7 +499,7 @@ To move from a \texttt{Corpus} to a \texttt{data.frame} the \texttt{tm\_corpus2d
 
 \subsection{data.frame to Corpus}
 
-To move from a \texttt{data.frame} to a \texttt{Corpus} the \texttt{df2tm\_corpus} function is used as follows:
+\hspace{.4cm} To move from a \texttt{data.frame} to a \texttt{Corpus} the \texttt{df2tm\_corpus} function is used as follows:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -523,7 +523,7 @@ To move from a \texttt{data.frame} to a \texttt{Corpus} the \texttt{df2tm\_corpu
 
 \subsection{TermDocumentMatrix/DocumentTermMatrix to wfm}
 
-To move from a \texttt{TermDocumentMatrix} to a \texttt{wfm} the \texttt{as.wfm} function is used as follows:
+\hspace{.4cm} To move from a \texttt{TermDocumentMatrix} to a \texttt{wfm} the \texttt{as.wfm} function is used as follows:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -562,7 +562,7 @@ To move from a \texttt{TermDocumentMatrix} to a \texttt{wfm} the \texttt{as.wfm}
 
 \subsection{wfm to TermDocumentMatrix/DocumentTermMatrix}
 
-To move from a \texttt{wfm} to a \texttt{TermDocumentMatrix} or \texttt{DocumentTermMatrix} the \texttt{tdm} and \texttt{dtm} functions can be used as follows:
+\hspace{.4cm} To move from a \texttt{wfm} to a \texttt{TermDocumentMatrix} or \texttt{DocumentTermMatrix} the \texttt{tdm} and \texttt{dtm} functions can be used as follows:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -604,7 +604,7 @@ To move from a \texttt{wfm} to a \texttt{TermDocumentMatrix} or \texttt{Document
 
 \subsection{Corpus to wfm}
 
-One can also move directly from a \textbf{tm} \texttt{Corpus} to a \textbf{qdap} \texttt{wfm} with the \texttt{tm\_corpus2wfm} function.
+\hspace{.4cm} One can also move directly from a \textbf{tm} \texttt{Corpus} to a \textbf{qdap} \texttt{wfm} with the \texttt{tm\_corpus2wfm} function.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -643,12 +643,12 @@ One can also move directly from a \textbf{tm} \texttt{Corpus} to a \textbf{qdap}
 \section{stemming, Stopwords, and Choosing n-Character Words/Terms from a wfm}
 
 
-Many of the \textbf{qdap} and \textbf{tm} functions have means of stemming, removing stopwords, and bounding, that is filtering rows (greater than, equal to or less than) meeting min/max criteria.  \textbf{qdap} also offers two external functions to address these issues directly.  
+\hspace{.4cm} Many of the \textbf{qdap} and \textbf{tm} functions have means of stemming, removing stopwords, and bounding, that is filtering rows (greater than, equal to or less than) meeting min/max criteria.  \textbf{qdap} also offers two external functions to address these issues directly.  
 
 
 \subsection{stemming}
 
-\textbf{qdap} takes the approach that the user stems the dataframe upon creation (using \texttt{sentSplit(..., stem = TRUE)}) or after (using the \texttt{stem2df} function), maintianing a column of stemmed and unstemmed text for various analyses.
+\hspace{.4cm} \textbf{qdap} takes the approach that the user stems the dataframe upon creation (using \texttt{sentSplit(..., stem = TRUE)}) or after (using the \texttt{stem2df} function), maintianing a column of stemmed and unstemmed text for various analyses.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -677,7 +677,7 @@ Many of the \textbf{qdap} and \textbf{tm} functions have means of stemming, remo
 \subsection{Filtering: Stopwords and Bounding}
     
 
-\textbf{qdap}'s \texttt{Filter} function allows the user to remove stopwords and bound a Word Frequency Matrix (\texttt {wfm}).  First we'll construct a minimal Word Frequency Matrix:
+\hspace{.4cm} \textbf{qdap}'s \texttt{Filter} function allows the user to remove stopwords and bound a Word Frequency Matrix (\texttt {wfm}).  First we'll construct a minimal Word Frequency Matrix:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -853,11 +853,11 @@ Now we'll move through a series of examples demonstrating the usage of \texttt{F
 
 \section{Apply Functions Intended for TermDocumentMatrix to wfm Object}
 
-At times it is convenient to apply a function intended for a \textbf{tm} \texttt{TermDocumentMatrix} or \texttt{DocumentTermMatrix} directly to a \textbf{qdap} \texttt{wfm} object.  \textbf{qdap}'s \texttt{apply\_as\_tm} function enables these functions to be used directly on a \texttt{wfm}.
+\hspace{.4cm} At times it is convenient to apply a function intended for a \textbf{tm} \texttt{TermDocumentMatrix} or \texttt{DocumentTermMatrix} directly to a \textbf{qdap} \texttt{wfm} object.  \textbf{qdap}'s \texttt{apply\_as\_tm} function enables these functions to be used directly on a \texttt{wfm}.
 
 \subsection{A Minimal wfm Object}
 
-Let us begin with a slightly larger \texttt{wfm} minimal example:
+\hspace{.4cm} Let us begin with a slightly larger \texttt{wfm} minimal example:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -879,7 +879,7 @@ Let us begin with a slightly larger \texttt{wfm} minimal example:
 
 \subsection{A Small Demonstration}
 
-Here we will use the \textbf{tm} package's \texttt{removeSparseTerms} to remove sparse terms from a \texttt{wfm} object and return a Word Frequency Matrix object (\texttt{wfm} class).
+\hspace{.4cm} Here we will use the \textbf{tm} package's \texttt{removeSparseTerms} to remove sparse terms from a \texttt{wfm} object and return a Word Frequency Matrix object (\texttt{wfm} class).
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -951,11 +951,11 @@ Here are some further examples to try:
 
 \section{Apply Functions Intended for qdap Dataframes to tm Corpus}
 
-While the \textbf{tm} package (and other packages used on \textbf{tm} objects) tends to conduct analysis by feeding functions a \texttt{TermDocumentMatrix} or \texttt{DocumentTermMatrix} \textbf{qdap} generally feeds functions raw text directly.  There are advantages to both approaches (e.g., the matrix is a mathematical structure while raw text maintains word order).  Many \textbf{qdap} functions can be used on the \texttt{Corpus} structure via the \texttt{apply\_as\_df} function.    
+\hspace{.4cm} While the \textbf{tm} package (and other packages used on \textbf{tm} objects) tends to conduct analysis by feeding functions a \texttt{TermDocumentMatrix} or \texttt{DocumentTermMatrix} \textbf{qdap} generally feeds functions raw text directly.  There are advantages to both approaches (e.g., the matrix is a mathematical structure while raw text maintains word order).  Many \textbf{qdap} functions can be used on the \texttt{Corpus} structure via the \texttt{apply\_as\_df} function.    
 
 \subsection{A Small Demonstration}
 
-Here we will use the \textbf{qdap} package's \texttt{trans\_cloud} function to produce a word cloud with particular words highlighted on our minimal \textbf{tm} \texttt{Corpus}:
+\hspace{.4cm} Here we will use the \textbf{qdap} package's \texttt{trans\_cloud} function, on our minimal \textbf{tm} \texttt{Corpus}, to produce a word cloud with particular words highlighted:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
@@ -986,7 +986,7 @@ Here we will use the \textbf{qdap} package's \texttt{trans\_cloud} function to p
 
 \subsection{Further Examples to Try}
 
-Here are some further examples to try:
+\hspace{.4cm} Here are some further examples to try:
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}

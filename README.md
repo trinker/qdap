@@ -10,19 +10,7 @@ qdap
 
 To download the development version of qdap:
 
-Download the [zip ball](https://github.com/trinker/qdap/zipball/master) or [tar ball](https://github.com/trinker/qdap/tarball/master), decompress and run `R CMD INSTALL` on it, or use the **devtools** package to install the development version (The user may need to install the [dev version of reports](https://github.com/trinker/reports) first):
-
-Until `slidify` is pushed to CRAN the following installs are necessary first:
-
-```r
-# install.packages("devtools")
-
-library(devtools)
-install_github('slidify', 'ramnathv', ref = 'dev')
-install_github('slidifyLibraries', 'ramnathv', ref = 'dev')
-install_github("knitcitations", "cboettig")
-install_github("reports", "trinker")
-```
+Download the [zip ball](https://github.com/trinker/qdap/zipball/master) or [tar ball](https://github.com/trinker/qdap/tarball/master), decompress and run `R CMD INSTALL` on it, or use the **devtools** package to install the development version (The user may want to install the [dev version of reports](https://github.com/trinker/reports) first):
 
 
 ```r
@@ -40,7 +28,8 @@ install_github("qdap", "trinker")
 ## Help
 
 [Web Page](http://trinker.github.com/qdap/)    
-[Package Vignette](http://htmlpreview.github.io/?https://github.com/trinker/qdap/blob/master/vignettes/qdap_vignette.html)   
+[HTML Vignette: Introduction to qdap](http://htmlpreview.github.io/?https://github.com/trinker/qdap/blob/master/vignettes/qdap_vignette.html)   
+[PDF Vignette: qdap-tm Package Compatibility](https://dl.dropboxusercontent.com/u/61803503/packages/tm_package_compatability.pdf)     
 [Package PDF Help Manual](https://dl.dropbox.com/u/61803503/qdap.pdf)
 
 ## Contact
