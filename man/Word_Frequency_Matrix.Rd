@@ -167,11 +167,6 @@ with(DATA, wfm(state2, list(sex, adult)))[1:18, ]
 with(DATA, wfdf(state, list(sex, adult)))[1:15, ]
 with(DATA, wfdf(state, person))[1:15, ]
 
-## insert double tilde ("~~") to keep phrases (e.g., first last name)
-alts <- c(" fun", "I ")
-state2 <- mgsub(alts, gsub("\\\\s", "~~", alts), DATA$state)
-with(DATA, wfdf(state2, list(sex, adult)))[1:18, ]
-
 ## wfm_expanded example:
 z <- wfm(DATA$state, DATA$person)
 wfm_expanded(z)[30:45, ] #two "you"s

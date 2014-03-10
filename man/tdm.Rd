@@ -16,13 +16,13 @@ dtm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
 tm2qdap(x)
 
-apply_as_tm(wfm.obj, tmfun, ..., to.qdap = TRUE)
-
 tm_corpus2df(tm.corpus, col1 = "docs", col2 = "text")
 
 tm_corpus2wfm(tm.corpus, col1 = "docs", col2 = "text", ...)
 
-df2tm_corpus(text.var, grouping.var = NULL, ...)
+df2tm_corpus(text.var, grouping.var = NULL, demographic.vars, ...)
+
+apply_as_tm(wfm.obj, tmfun, ..., to.qdap = TRUE)
 
 apply_as_df(tm.corpus, qdapfun, ..., stopwords = NULL, min = 1, max = Inf,
   count.apostrophe = TRUE, ignore.case = TRUE)
@@ -51,6 +51,20 @@ apply_as_df(tm.corpus, qdapfun, ..., stopwords = NULL, min = 1, max = Inf,
   \item{x}{A
   \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.}
 
+  \item{tm.corpus}{A \code{\link[tm]{Corpus}} object.}
+
+  \item{col1}{Name for column 1 (the vector elements).}
+
+  \item{col2}{Name for column 2 (the names of the
+  vectors).}
+
+  \item{demographic.vars}{Additional demographic
+  information about the grouping variables.  This is a
+  data.frame, list of equal length vectors, or a single
+  vector corresponding to the grouping variable/text
+  variable.  This information will be mapped to the
+  DMetaData in the \code{\link[tm]{Corpus}}.}
+
   \item{wfm.obj}{A \code{\link[qdap]{wfm}} object.}
 
   \item{tmfun}{A function applied to a
@@ -59,13 +73,6 @@ apply_as_df(tm.corpus, qdapfun, ..., stopwords = NULL, min = 1, max = Inf,
   \item{to.qdap}{logical.  If \code{TRUE} should
   \code{\link[qdap]{wfm}} try to coerce the output back to
   a qdap object.}
-
-  \item{tm.corpus}{A \code{\link[tm]{Corpus}} object.}
-
-  \item{col1}{Name for column 1 (the vector elements).}
-
-  \item{col2}{Name for column 2 (the names of the
-  vectors).}
 
   \item{qdapfun}{A qdap function that is usually used on
   text.variable ~ grouping variable.}
@@ -97,10 +104,6 @@ apply_as_df(tm.corpus, qdapfun, ..., stopwords = NULL, min = 1, max = Inf,
 \code{tm2qdap} - Returns a \code{\link[qdap]{wfm}} object
 or \code{weight} object.
 
-\code{apply_as_tm} - Applies a tm oriented function to a
-\code{\link[qdap]{wfm}} and attempts to simplify back to a
-\code{\link[qdap]{wfm}} or \code{weight} format.
-
 \code{tm_corpus2df} - Converts a \code{\link[tm]{Corpus}}
 and returns a qdap oriented dataframe.
 
@@ -109,6 +112,10 @@ returns a \code{\link[qdap]{wfm}}.
 
 \code{df2tm_corpus} - Converts a qdap oriented dataframe
 and returns a \code{\link[tm]{Corpus}}.
+
+\code{apply_as_tm} - Applies a tm oriented function to a
+\code{\link[qdap]{wfm}} and attempts to simplify back to a
+\code{\link[qdap]{wfm}} or \code{weight} format.
 }
 \description{
 \code{tdm} - Create term document matrices from raw text or
@@ -119,14 +126,9 @@ packages.
 \code{\link[qdap]{wfm}} for use with other text analysis
 packages.
 
-\code{tm2qdap} - Convert the \code{tm} package's
+\code{tm2qdap} - Convert the \pkg{tm} package's
 \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}
 to \code{\link[qdap]{wfm}}.
-
-\code{apply_as_tm} - Apply functions intended to be used on
-the \code{tm} package's
-\code{\link[tm]{TermDocumentMatrix}} to a
-\code{\link[qdap]{wfm}} object.
 
 \code{tm_corpus2df} - Convert a tm package corpus to a
 dataframe.
@@ -137,8 +139,16 @@ package corpus to a \code{\link[qdap]{wfm}}.
 \code{df2tm_corpus} - Convert a qdap dataframe to a tm
 package \code{\link[tm]{Corpus}}.
 
-Apply a \pkg{tm} \code{\link[tm]{Corpus}} as a qdap
-dataframe.
+\code{apply_as_tm} - Apply functions intended to be used on
+the \pkg{tm} package's \code{\link[tm]{TermDocumentMatrix}}
+to a \code{\link[qdap]{wfm}} object.
+
+\code{apply_as_df} - Apply a \pkg{tm}
+\code{\link[tm]{Corpus}} as a qdap dataframe.
+\code{apply_as_df} - Apply functions intended to be used on
+the \pkg{qdap} package's \code{\link[base]{data.frame}} +
+\code{\link[qdap]{sentSplit}} to a \pkg{tm}
+\code{\link[tm]{Corpus}} object.
 }
 \details{
 Produces output that is identical to the \code{tm}
@@ -364,6 +374,17 @@ inspect(x)
 class(x)
 
 (y <- with(pres_debates2012, df2tm_corpus(dialogue, list(person, time))))
+
+## Add demographic info to DMetaData of Corpus
+z <- df2tm_corpus(DATA$state, DATA$person,
+    demographic=DATA[, qcv(sex, adult, code)])
+lview(z)
+
+lview(df2tm_corpus(DATA$state, DATA$person,
+    demographic=DATA$sex))
+
+lview(df2tm_corpus(DATA$state, DATA$person,
+    demographic=list(DATA$sex, DATA$adult)))
 
 ## Apply qdap functions meant for dataframes from sentSplit to tm Corpus
 library(tm)

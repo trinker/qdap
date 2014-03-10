@@ -240,6 +240,17 @@
 #' 
 #' (y <- with(pres_debates2012, df2tm_corpus(dialogue, list(person, time))))
 #' 
+#' ## Add demographic info to DMetaData of Corpus
+#' z <- df2tm_corpus(DATA$state, DATA$person, 
+#'     demographic=DATA[, qcv(sex, adult, code)])
+#' lview(z)
+#' 
+#' lview(df2tm_corpus(DATA$state, DATA$person,
+#'     demographic=DATA$sex))
+#' 
+#' lview(df2tm_corpus(DATA$state, DATA$person,
+#'     demographic=list(DATA$sex, DATA$adult)))
+#'
 #' ## Apply qdap functions meant for dataframes from sentSplit to tm Corpus
 #' library(tm)
 #' reut21578 <- system.file("texts", "crude", package = "tm")
@@ -376,7 +387,7 @@ wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
-#' \code{tm2qdap} - Convert the \code{tm} package's 
+#' \code{tm2qdap} - Convert the \pkg{tm} package's 
 #' \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}} to
 #' \code{\link[qdap]{wfm}}.
 #' 
@@ -407,39 +418,6 @@ tm2qdap <- function(x) {
 }
 
 
-#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
-#' Matrix or Document Term Matrix
-#' 
-#' \code{apply_as_tm} - Apply functions intended to be used on the \code{tm} 
-#' package's \code{\link[tm]{TermDocumentMatrix}} to a \code{\link[qdap]{wfm}} 
-#' object.
-#' 
-#' @param wfm.obj A \code{\link[qdap]{wfm}} object.
-#' @param tmfun A function applied to a \code{\link[tm]{TermDocumentMatrix}}
-#' object.
-#' @param to.qdap logical.  If \code{TRUE} should \code{\link[qdap]{wfm}} try to
-#' coerce the output back to a qdap object.
-#' @return \code{apply_as_tm} - Applies a tm oriented function to a 
-#' \code{\link[qdap]{wfm}} and attempts to simplify back to a 
-#' \code{\link[qdap]{wfm}} or \code{weight} format.
-#' @rdname tdm
-#' @export
-apply_as_tm <- function(wfm.obj, tmfun, ..., to.qdap = TRUE){
-
-    ## Convert to a tdm
-    x <- tdm(wfm.obj) 
-
-    ## Apply the tm function
-    y <- tmfun(x, ...) 
-
-    ## attempt to coerce back to qdap wfm/weighted_wfm
-    if (to.qdap && (is(y, "DocumentTermMatrix")|is(y, "TermDocumentMatrix"))) {
-        tm2qdap(y)
-    } else {
-        y
-    }
-
-}
 
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
@@ -486,11 +464,15 @@ tm_corpus2wfm <- function(tm.corpus, col1 = "docs", col2 = "text", ...) {
 #' \code{df2tm_corpus} - Convert a qdap dataframe to a tm package 
 #' \code{\link[tm]{Corpus}}.
 #' 
+#' @param demographic.vars Additional demographic information about the grouping 
+#' variables.  This is a data.frame, list of equal length vectors, or a single 
+#' vector corresponding to the grouping variable/text variable.  This 
+#' information will be mapped to the DMetaData in the \code{\link[tm]{Corpus}}.
 #' @rdname tdm
 #' @return \code{df2tm_corpus} - Converts a qdap oriented dataframe and returns 
 #' a \code{\link[tm]{Corpus}}.
 #' @export
-df2tm_corpus <- function(text.var, grouping.var = NULL, ...){
+df2tm_corpus <- function(text.var, grouping.var = NULL, demographic.vars, ...){
 
     if(is.null(grouping.var)) {
         G <- "all"
@@ -536,8 +518,50 @@ df2tm_corpus <- function(text.var, grouping.var = NULL, ...){
     if (!is.null(pers)) {
         attributes(mycorpus)[["CMetaData"]][["MetaData"]][["creator"]] <- pers
     }
+
+    ## Add other demographic variables to "DMetaData"
+    if(!missing(demographic.vars)) {
+        if (is.data.frame(demographic.vars)) {
+    
+        } else {
+            if (is.list(demographic.vars)) {
+                nms <- colnames(demographic.vars)
+                demographic.vars <- do.call(cbind.data.frame, demographic.vars)
+                if (is.null(nms)) {
+
+                    colnames(demographic.vars) <- paste0("X", 1:ncol(demographic.vars))
+                } else {
+                    colnames(demographic.vars) <- nms
+                }
+            } else {
+                if (is.vector(demographic.vars) | is.factor(demographic.vars)) {
+                    demographic.vars <- data.frame(dems=demographic.vars)
+                } else {
+                    warning("Please supply a data.frame, list of equal length vectors,\n",  
+                        "   or a single vector to `demographic.vars`")
+                }
+        
+            }
+        }
+        metadat <- split(demographic.vars, grouping)
+        checks <- colSums(do.call(rbind, lapply(metadat, function(x) {
+            unlist(lapply(x, function(y) !compare(y)))
+        }))) == 0
+        if (sum(checks) != 0){
+            metadat <- list_df2df(lapply(metadat, 
+                function(x) x[1, checks, drop = FALSE]), "MetaID")
+            attributes(mycorpus)[["DMetaData"]] <- 
+                key_merge(attributes(mycorpus)[["DMetaData"]], metadat)
+        }
+    }
+
     mycorpus
 }
+
+
+compare <- function(v) all(sapply( as.list(v[-1]), 
+    FUN=function(z) {identical(z, v[1])}))
+
 
 #' Transposes a TermDocumentMatrix object
 #' 
@@ -604,9 +628,47 @@ t.DocumentTermMatrix <- function(x, ...) {
     a
 }
 
+#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
+#' Matrix or Document Term Matrix
+#' 
+#' \code{apply_as_tm} - Apply functions intended to be used on the \pkg{tm} 
+#' package's \code{\link[tm]{TermDocumentMatrix}} to a \code{\link[qdap]{wfm}} 
+#' object.
+#' 
+#' @param wfm.obj A \code{\link[qdap]{wfm}} object.
+#' @param tmfun A function applied to a \code{\link[tm]{TermDocumentMatrix}}
+#' object.
+#' @param to.qdap logical.  If \code{TRUE} should \code{\link[qdap]{wfm}} try to
+#' coerce the output back to a qdap object.
+#' @return \code{apply_as_tm} - Applies a tm oriented function to a 
+#' \code{\link[qdap]{wfm}} and attempts to simplify back to a 
+#' \code{\link[qdap]{wfm}} or \code{weight} format.
+#' @rdname tdm
+#' @export
+apply_as_tm <- function(wfm.obj, tmfun, ..., to.qdap = TRUE){
+
+    ## Convert to a tdm
+    x <- tdm(wfm.obj) 
+
+    ## Apply the tm function
+    y <- tmfun(x, ...) 
+
+    ## attempt to coerce back to qdap wfm/weighted_wfm
+    if (to.qdap && (is(y, "DocumentTermMatrix")|is(y, "TermDocumentMatrix"))) {
+        tm2qdap(y)
+    } else {
+        y
+    }
+
+}
+
 #' Apply a tm Corpus as a qdap Dataframe
 #' 
-#' Apply a \pkg{tm} \code{\link[tm]{Corpus}} as a qdap dataframe.
+#' \code{apply_as_df} - Apply a \pkg{tm} \code{\link[tm]{Corpus}} as a qdap 
+#' dataframe.
+#' \code{apply_as_df} - Apply functions intended to be used on the \pkg{qdap} 
+#' package's \code{\link[base]{data.frame}} + \code{\link[qdap]{sentSplit}} to 
+#' a \pkg{tm} \code{\link[tm]{Corpus}} object.
 #' 
 #' @param qdapfun A qdap function that is usually used on 
 #' text.variable ~ grouping variable.

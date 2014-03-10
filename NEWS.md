@@ -61,6 +61,8 @@ IMPROVEMENTS
   if the function were used internally.  The user now supplies a dictionary of 
   names and probabilities.
 
+* `df2tm_corpus` gains a `demographics.vars` argument that allows the user to 
+  add demographic information to the resulting corpus `DMetaDat`.
 
 <b>CHANGES</b>
 

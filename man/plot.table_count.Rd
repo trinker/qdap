@@ -2,7 +2,7 @@
 \alias{plot.table_count}
 \title{Plots a table_count Object}
 \usage{
-\method{plot}{table_count}(x, values = TRUE, high = "red", ...)
+plot.table_count(x, values = TRUE, high = "red", ...)
 }
 \arguments{
   \item{x}{The table_count object.}
