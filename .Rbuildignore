@@ -31,12 +31,12 @@ inst/staticdocs
 INSTALL
 contributors.geojson
 AFTER_REPORTS_UPDATES
-tm_package_compatability.bbl
-tm_package_compatability.log
-tm_package_compatability.Rproj
-tm_package_compatability.synctex.gz
-tm_package_compatability.tex
-tm_package_compatability.tex
+tm_package_compatibility.bbl
+tm_package_compatibility.log
+tm_package_compatibility.Rproj
+tm_package_compatibility.synctex.gz
+tm_package_compatibility.tex
+tm_package_compatibility.tex
 
 
 
