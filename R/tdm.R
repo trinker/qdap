@@ -10,9 +10,11 @@
 #' of 1 or more grouping variables.
 #' @param \ldots If \code{tdm} or \code{dtm} - Other arguments passed to 
 #' \code{wfm}.  If \code{apply_as_tm} - Other arguments passed to functions used 
-#' on the tm package's \code{"TermDocumentMatrix"}.  If \code{df2tm_corpus} - 
-#' Other arguments passed to the tm package's \code{\link[tm]{Corpus}}.  If 
-#' \code{tm_corpus2wfm} - Other arguments passed to \code{\link[qdap]{wfm}}.
+#' on the tm package's \code{"TermDocumentMatrix"}.  If \code{tm_corpus2df} - 
+#' Other arguments passed to \code{\link[qdap]{sentSplit}}.  If 
+#' \code{df2tm_corpus} - Other arguments passed to the tm package's 
+#' \code{\link[tm]{Corpus}}.  If \code{tm_corpus2wfm} - Other arguments passed 
+#' to \code{\link[qdap]{wfm}}.
 #' @param vowel.check logical.  Should terms without vowels be remove?  
 #' @details Produces output that is identical to the \code{tm} package's 
 #' \code{\link[tm]{TermDocumentMatrix}}, \code{\link[tm]{DocumentTermMatrix}},
@@ -228,6 +230,10 @@
 #' corp_df <- tm_corpus2df(reuters)
 #' htruncdf(corp_df)
 #' 
+#' z <- df2tm_corpus(DATA$state, DATA$person, 
+#'        demographic=DATA[, qcv(sex, adult, code)])
+#' tm_corpus2df(z)
+#' 
 #' ## Apply a qdap function
 #' out <- formality(corp_df$text, corp_df$docs)
 #' plot(out)
@@ -427,17 +433,32 @@ tm2qdap <- function(x) {
 #' @param tm.corpus A \code{\link[tm]{Corpus}} object.
 #' @param col1 Name for column 1 (the vector elements).
 #' @param col2 Name for column 2 (the names of the vectors).
+#' @param sent.split logical.  If \code{TRUE} the text variable sentences will 
+#' be split into individual rows.
 #' @return \code{tm_corpus2df} - Converts a \code{\link[tm]{Corpus}} and returns 
 #' a qdap oriented dataframe.
 #' @rdname tdm
 #' @export
-tm_corpus2df <- function(tm.corpus, col1 = "docs", col2 = "text") {
+tm_corpus2df <- function(tm.corpus, col1 = "docs", col2 = "text", 
+    sent.split = TRUE, ...) {
 
     if(!is(tm.corpus[[1]], "PlainTextDocument")) {
         tm.corpus <- tm_map(tm.corpus, as.PlainTextDocument)
     }
     
-    list2df(tm.corpus, col1 = col2, col2 = col1)[, 2:1]
+    out <- list2df(tm.corpus, col1 = col2, col2 = col1)[, 2:1]
+
+    metadat <- attributes(tm.corpus)[["DMetaData"]]
+    if (ncol(metadat) > 1) {
+        colnames(metadat)[1] <- col1
+        out <- key_merge(out, metadat)
+    }
+
+    if (sent.split) {
+        out <- sentSplit(out, col2, ...)
+    }
+    out
+
 }
 
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
@@ -692,7 +713,7 @@ apply_as_df <- function(tm.corpus, qdapfun, ..., stopwords = NULL,
 
     text <- doc <- tot <- NULL
 
-    dat <- sentSplit(tm_corpus2df(tm.corpus), "text")
+    dat <- tm_corpus2df(tm.corpus)
 
     if (!is.null(stopwords)) {
         dat[, "text"] <- rm_stopwords(dat[, "text"], stopwords, separate = FALSE, 

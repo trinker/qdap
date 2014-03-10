@@ -16,7 +16,8 @@ dtm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
 tm2qdap(x)
 
-tm_corpus2df(tm.corpus, col1 = "docs", col2 = "text")
+tm_corpus2df(tm.corpus, col1 = "docs", col2 = "text", sent.split = TRUE,
+  ...)
 
 tm_corpus2wfm(tm.corpus, col1 = "docs", col2 = "text", ...)
 
@@ -40,10 +41,11 @@ apply_as_df(tm.corpus, qdapfun, ..., stopwords = NULL, min = 1, max = Inf,
   arguments passed to \code{wfm}.  If \code{apply_as_tm} -
   Other arguments passed to functions used on the tm
   package's \code{"TermDocumentMatrix"}.  If
-  \code{df2tm_corpus} - Other arguments passed to the tm
-  package's \code{\link[tm]{Corpus}}.  If
-  \code{tm_corpus2wfm} - Other arguments passed to
-  \code{\link[qdap]{wfm}}.}
+  \code{tm_corpus2df} - Other arguments passed to
+  \code{\link[qdap]{sentSplit}}.  If \code{df2tm_corpus} -
+  Other arguments passed to the tm package's
+  \code{\link[tm]{Corpus}}.  If \code{tm_corpus2wfm} -
+  Other arguments passed to \code{\link[qdap]{wfm}}.}
 
   \item{vowel.check}{logical.  Should terms without vowels
   be remove?}
@@ -57,6 +59,9 @@ apply_as_df(tm.corpus, qdapfun, ..., stopwords = NULL, min = 1, max = Inf,
 
   \item{col2}{Name for column 2 (the names of the
   vectors).}
+
+  \item{sent.split}{logical.  If \code{TRUE} the text
+  variable sentences will be split into individual rows.}
 
   \item{demographic.vars}{Additional demographic
   information about the grouping variables.  This is a
@@ -362,6 +367,10 @@ reuters <- Corpus(DirSource(reut21578),
 ## Convert to dataframe
 corp_df <- tm_corpus2df(reuters)
 htruncdf(corp_df)
+
+z <- df2tm_corpus(DATA$state, DATA$person,
+       demographic=DATA[, qcv(sex, adult, code)])
+tm_corpus2df(z)
 
 ## Apply a qdap function
 out <- formality(corp_df$text, corp_df$docs)
