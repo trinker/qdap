@@ -26,9 +26,9 @@ And constructed with the following guidelines:
   in the person column.  This behavior has been fixed.
 
 * `word_cor`'s plotting method threw an error if a word did not have any words 
-  above the r  threshhold.  This behavior has been corrected.
+  above the r threshhold.  This behavior has been corrected.
 
-* `Filter` overwrote a base R function this has been fixed per Joshua Ulrich.
+* `Filter` overwrote a base R function; this has been fixed per Joshua Ulrich.
 
 * `scores.polarity`'s print method would return an error if columns were not 
   indexed yet were rounded.  For instance, the following threw an error: 

@@ -97,6 +97,13 @@ The second format both packages use is a matrix structure of word frequency coun
 \end{table}
 \end{singlespace}
 
+\noindent Here is a visual overview of the textbf{qdap} functions used to convert between data structures.  Many of these conversion could be achieved via the \textbf{tm} package as well.
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=5in]{imgs/data_convert.png}
+\end{figure}
+
 One of the most visible differences between \textbf{qdap}-\textbf{tm} data forms is that \textbf{qdap} enables the user to readily view the data while the \textbf{tm} utilizes a print method that provides a summary of the data.  The \texttt{tm::inspect} function enables the user to view \textbf{tm} data forms. The \textbf{qdap} package provides \texttt{qdap::qview} and \texttt{qdap::htruncdf} functions to view more digestible amounts of the data. Let's have a look at the different data types.  We'll start by loading both packages:
 
 <<packs, eval=FALSE>>=
@@ -218,6 +225,8 @@ tm_dat <- Corpus(DataframeSource(tm_dat[, 2, drop=FALSE]))
 qdap_dat
 @
 
+\newpage
+
 \subsubsection{qdap's Frequency Counts}
 
 <<freq_dat_qdap, eval=FALSE>>=
@@ -285,7 +294,7 @@ inspect(TermDocumentMatrix(tm_dat,
 \end{kframe}
 \end{knitrout}
 
-The two matrices are essentially the same, with the exception of column order and names.  Notice that we have to specify not to remove low character words while removing punctuation in the \textbf{tm} package semantics.  \textbf{qdap} takes the opposite approach, removing punctuation and utilizing all words, by default.  These differences arise out of the intended uses, audiences, and philosophies of the package authors.  Each has strengths in particular situations.  The \textbf{qdap} output is an ordinary \texttt{matrix} whereas the \textbf{tm} output is a more compact \texttt{simple triplet matrix}.  While the storage is different, both packages can be made to mimic the default of the other.  
+The two matrices are essentially the same, with the exception of column order and names.  Notice that by default \textbf{tm} removes words with fewer characters (word length) and does not discard punctuation (we made the matrices equal by specifying \texttt{removePunctuation = TRUE} and \texttt{wordLengths=c(0, Inf)} for \textbf{tm}'s \texttt{control} argument).  \textbf{qdap} takes the opposite approach, removing punctuation and utilizing all words, by default.  These differences arise out of the intended uses, audiences, and philosophies of the package authors.  Each has strengths in particular situations.  The \textbf{qdap} output is an ordinary \texttt{matrix} whereas the \textbf{tm} output is a more compact \texttt{simple triplet matrix}.  While the storage is different, both packages can be made to mimic the default of the other.  
 
 Also note that the \textbf{qdap} \texttt{summary} method for \texttt{wfm} provides the user with information similar to the \texttt{TermDocumentMatrix}/\texttt{DocumentTermMatrix} functions' default \texttt{print} method.
 
@@ -413,7 +422,7 @@ tm_corpus2wfm(tm_dat)
 
 \subsection{stemming}
 
-\hspace{.4cm} \textbf{qdap} takes the approach that the user stems the dataframe upon creation (using \texttt{sentSplit(..., stem = TRUE)}) or after (using the \texttt{stem2df} function), maintianing a column of stemmed and unstemmed text for various analyses.
+\hspace{.4cm} \textbf{qdap} takes the approach that the user stems the dataframe upon creation (using \texttt{sentSplit(..., stem = TRUE)}) or after (using the \texttt{stem2df} function), maintaining a column of stemmed and unstemmed text for various analyses.
 
 <<stem, eval=FALSE>>=
 sentSplit(qdap_dat, "state", stem = TRUE)
@@ -513,7 +522,7 @@ summary(a)
 \hspace{.4cm} Here we will use the \textbf{tm} package's \texttt{removeSparseTerms} to remove sparse terms from a \texttt{wfm} object and return a Word Frequency Matrix object (\texttt{wfm} class).
 
 <<apply_as_tm1>>=
-out <- apply_as_tm(a, tm:::removeSparseTerms, sparse=0.6)
+out <- apply_as_tm(a, tm::removeSparseTerms, sparse=0.6)
 @
 
 <<apply_as_tm2a, eval=FALSE>>=
@@ -537,18 +546,18 @@ class(out)
 Here are some further examples to try:
 
 <<apply_as_tm4, eval=FALSE>>=
-apply_as_tm(a, tm:::dissimilarity, method = "cosine")
-apply_as_tm(a, tm:::findAssocs, "computer", .8)
-apply_as_tm(a, tm:::findFreqTerms, 2, 3)
-apply_as_tm(a, tm:::Zipf_plot)
-apply_as_tm(a, tm:::Heaps_plot)
-apply_as_tm(a, tm:::plot.TermDocumentMatrix, corThreshold = 0.4)
+apply_as_tm(a, tm::dissimilarity, method = "cosine")
+apply_as_tm(a, tm::findAssocs, "computer", .8)
+apply_as_tm(a, tm::findFreqTerms, 2, 3)
+apply_as_tm(a, tm::Zipf_plot)
+apply_as_tm(a, tm::Heaps_plot)
+apply_as_tm(a, tm::plot.TermDocumentMatrix, corThreshold = 0.4)
 
 library(proxy)
-apply_as_tm(a, tm:::weightBin)
-apply_as_tm(a, tm:::weightBin, to.qdap = FALSE)
-apply_as_tm(a, tm:::weightSMART)
-apply_as_tm(a, tm:::weightTfIdf)
+apply_as_tm(a, tm::weightBin)
+apply_as_tm(a, tm::weightBin, to.qdap = FALSE)
+apply_as_tm(a, tm::weightSMART)
+apply_as_tm(a, tm::weightTfIdf)
 @
 
 \section{Apply Functions Intended for qdap Dataframes to tm Corpus}
