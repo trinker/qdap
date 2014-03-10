@@ -142,11 +142,13 @@ The second format both packages use is a matrix structure of word frequency coun
 \end{table}
 \end{singlespace}
 
-\noindent Here is a visual overview of the textbf{qdap} functions used to convert between data structures.  Many of these conversion could be achieved via the \textbf{tm} package as well.
+\noindent Figure~\ref{convert} provides a visual overview of the \textbf{qdap} functions used to convert between data structures.  Many of these conversion could be achieved via the \textbf{tm} package as well.
 
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=5in]{imgs/data_convert.png}
+    \includegraphics[width=4.60in]{imgs/data_convert.png}
+    \caption{Converting Data between \textbf{qdap} and \textbf{tm}}
+  \label{convert}
 \end{figure}
 
 One of the most visible differences between \textbf{qdap}-\textbf{tm} data forms is that \textbf{qdap} enables the user to readily view the data while the \textbf{tm} utilizes a print method that provides a summary of the data.  The \texttt{tm::inspect} function enables the user to view \textbf{tm} data forms. The \textbf{qdap} package provides \texttt{qdap::qview} and \texttt{qdap::htruncdf} functions to view more digestible amounts of the data. Let's have a look at the different data types.  We'll start by loading both packages:
