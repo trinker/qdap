@@ -539,5 +539,80 @@ confup <- function(reps, alpha = .05) {
    alpha - sqrt(1.96*((alpha*(1-alpha))/reps))
 }
 
+#' Plots a cm_distance object
+#' 
+#' Plots a cm_distance object.
+#' 
+#' @param x A cm_distance object.
+#' @param digits The number of digits to use if distance labels are included on 
+#' the edges.
+#' @param constant A constant to weight the edges by.
+#' @param label.dist logical.  If \code{TRUE} distance measures are placed on 
+#' the edges.
+#' @param layout A layout; see \code{\link[igraph]{layout}}.
+#' @param label.cex A constant to use for the label size.
+#' @param label.cex.scale.by.n logical.  If \code{TRUE} the label size is scaled 
+#' by the number of uses of the code.
+#' @param alpha The cut off value for pvalue inclusion of edges.
+#' @param label.color Color of the vertex labels.
+#' @param use.vertex.shape logical.  If \code{TRUE} the vertex label if plotted 
+#' on a circle.
+#' @param arrow.size The size of the arrows. Currently this is a constant, so it 
+#' is the same for every edge.
+#' @param \ldots Further arguments passed to the chosen \code{layout}.
+#' @importFrom reshape2 melt
+#' @import igraph
+#' @note This plotting method is not particularly well developed. It is 
+#' suggested that the user further develop the graph via direct use of the 
+#' \pkg{igraph} package. 
+#' @return Returns the \pkg{igraph} object.
+#' @method plot cm_distance
+#' @S3method plot cm_distance
+plot.cm_distance <- function(x, digits = 3, constant = 1, 
+    label.dist = FALSE, layout =layout.fruchterman.reingold, 
+    label.cex = 1, label.cex.scale.by.n = FALSE, alpha = NULL, 
+    label.color = "black", use.vertex.shape = FALSE, arrow.size = .6, ...) {
 
+    if (is.null(x[[c("main.output", "pvalue")]])) {
+        message("object does not contain pvalues")
+        return()
+    }
+    if (is.null(alpha)) {
+        alpha <- as.numeric(x[["adj.alpha"]])    
+    }
+    keeps <- x[[c("main.output", "pvalue")]] <= alpha
+    diag(keeps) <- FALSE
+    
+    x[[c("main.output", "stan.mean")]][!keeps] <- NA
+    X <- x[[c("main.output", "stan.mean")]]
+    
+    X2 <- na.omit(melt(X, value.name = "stan.mean"))
+    colnames(X2)[1:2] <-c("to", "from")
+    coding <- vect2df(x[[c("main.output", "n")]], "codes", "size")
+    g <- graph.data.frame(X2, directed=TRUE, vertices=coding)
+    
+    weight1 <- X2[, "stan.mean"]
+    weight1b <- weight1 - min(weight1)
+    weight1c <- log(weight1b +.0000000001)
+    E(g)$width <- weight1c/max(weight1c) * constant
+    if (label.dist) {
+        E(g)$label <- round(weight1, digits = digits)
+    }  
+    if (!use.vertex.shape){
+        V(g)$size <- 0
+    }
+    if (!is.null(label.color)){
+        V(g)$label.color <- label.color
+    }
+    if (!is.null(label.cex)){
+        V(g)$label.cex <- label.cex
+    }
+    if (!is.null(label.cex) && label.cex.scale.by.n){
+        V(g)$label.cex <- V(g)$label.cex * coding[, "size"]/(max(coding[, 
+            "size"]) - (.2 *max(coding[, "size"])))
+    }
+    E(g)$arrow.size <- arrow.size
+    plot.igraph(g, layout = layout(g, ...), edge.curved = TRUE)
+    return(invisible(g))
+}
 
