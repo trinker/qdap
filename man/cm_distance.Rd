@@ -156,6 +156,37 @@ x <- list(
 (dat <- cm_2long(x))
 plot(dat)
 (a <- cm_distance(dat, causal=TRUE, replications=100))
+
+## Plotting as a network graph
+datA <- list(
+    A = qcv(terms="02:03, 05"),
+    B = qcv(terms="1:2, 3:10, 45, 60, 200:206, 250, 289:299, 330"),
+    C = qcv(terms="1:9, 47, 62, 100:150, 202, 260, 292:299, 332"),
+    D = qcv(terms="10:20, 30, 38:44, 138:145"),
+    E = qcv(terms="10:15, 32, 36:43, 132:140"),
+    F = qcv(terms="1:2, 3:9, 10:15, 32, 36:43, 45, 60, 132:140, 250, 289:299"),
+    G = qcv(terms="1:2, 3:9, 10:15, 32, 36:43, 45, 60, 132:140, 250, 289:299"),
+    H = qcv(terms="20, 40, 60, 150, 190, 222, 255, 277"),
+    I = qcv(terms="20, 40, 60, 150, 190, 222, 255, 277")
+)
+
+datB  <- list(
+    A = qcv(terms="40"),
+    B = qcv(terms="50:90, 110, 148, 177, 200:206, 250, 289:299"),
+    C = qcv(terms="60:90, 100:120, 150, 201, 244, 292"),
+    D = qcv(terms="10:20, 30, 38:44, 138:145"),
+    E = qcv(terms="10:15, 32, 36:43, 132:140"),
+    F = qcv(terms="10:15, 32, 36:43, 132:140, 148, 177, 200:206, 250, 289:299"),
+    G = qcv(terms="10:15, 32, 36:43, 132:140, 148, 177, 200:206, 250, 289:299"),
+    I = qcv(terms="20, 40, 60, 150, 190, 222, 255, 277")
+)
+
+(datC <- cm_2long(datA, datB, v.name = "time"))
+plot(datC)
+(out2 <- cm_distance(datC, replications=1250))
+
+plot(out2)
+plot(out2, label.cex=2, label.dist=TRUE, digits=5)
 }
 }
 \references{
