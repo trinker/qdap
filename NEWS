@@ -65,7 +65,7 @@ IMPROVEMENTS
   add demographic information to the resulting corpus `DMetaDat`.
 
 * `tm_corpus2df` gains the ability to convert `DMetaDat` into demographic 
-data.frame columns.
+  data.frame columns.
 
 
 CHANGES
