@@ -600,7 +600,7 @@ confup <- function(reps, alpha = .05) {
 #' @method plot cm_distance
 #' @S3method plot cm_distance
 plot.cm_distance <- function(x, digits = 3, constant = 1, 
-    label.dist = FALSE, layout =layout.fruchterman.reingold, 
+    label.dist = FALSE, layout = igraph::layout.fruchterman.reingold, 
     label.cex = 1, label.cex.scale.by.n = FALSE, alpha = NULL, 
     label.color = "black", use.vertex.shape = FALSE, arrow.size = .6, ...) {
 

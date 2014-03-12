@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.15)  10 MAR 2014 21:09
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.15)  11 MAR 2014 19:09
 entering extended mode
 **tm_package_compatibility.tex
 (C:\Users\trinker\GitHub\qdap\vignettes\tm_package_compatibility.tex
@@ -617,104 +617,104 @@ Package color Info: Redefining color shadecolor on input line 390.
  [7]
 Package color Info: Redefining color shadecolor on input line 420.
 Package color Info: Redefining color shadecolor on input line 429.
-Package color Info: Redefining color shadecolor on input line 444.
+Package color Info: Redefining color shadecolor on input line 453.
  [8]
-Package color Info: Redefining color shadecolor on input line 472.
-Package color Info: Redefining color shadecolor on input line 490.
+Package color Info: Redefining color shadecolor on input line 481.
 Package color Info: Redefining color shadecolor on input line 499.
-Package color Info: Redefining color shadecolor on input line 517.
+Package color Info: Redefining color shadecolor on input line 508.
 Package color Info: Redefining color shadecolor on input line 526.
-Package color Info: Redefining color shadecolor on input line 541.
- [9]
+Package color Info: Redefining color shadecolor on input line 535.
 Package color Info: Redefining color shadecolor on input line 550.
-Package color Info: Redefining color shadecolor on input line 580.
-Package color Info: Redefining color shadecolor on input line 590.
+ [9]
+Package color Info: Redefining color shadecolor on input line 559.
+Package color Info: Redefining color shadecolor on input line 589.
+Package color Info: Redefining color shadecolor on input line 599.
  [10]
-Package color Info: Redefining color shadecolor on input line 604.
-Package color Info: Redefining color shadecolor on input line 622.
+Package color Info: Redefining color shadecolor on input line 613.
 Package color Info: Redefining color shadecolor on input line 631.
+Package color Info: Redefining color shadecolor on input line 640.
 
-Overfull \hbox (3.18724pt too wide) in paragraph at lines 655--655
+Overfull \hbox (3.18724pt too wide) in paragraph at lines 664--664
 []\T1/ppl/b/n/14.4 Stemming, Stop-words, and Choos-ing n-Character Words/Terms
  []
 
 [11]
-Overfull \hbox (4.41257pt too wide) in paragraph at lines 663--664
+Overfull \hbox (4.41257pt too wide) in paragraph at lines 672--673
   \T1/ppl/b/n/10 qdap \T1/ppl/m/n/10 takes the ap-proach that the user stems th
 e dataframe upon cre-ation (us-ing \T1/lmtt/m/n/10 sentSplit(...,
  []
 
-Package color Info: Redefining color shadecolor on input line 666.
 Package color Info: Redefining color shadecolor on input line 675.
-Package color Info: Redefining color shadecolor on input line 695.
+Package color Info: Redefining color shadecolor on input line 684.
 Package color Info: Redefining color shadecolor on input line 704.
+Package color Info: Redefining color shadecolor on input line 713.
 [12]
-Package color Info: Redefining color shadecolor on input line 732.
-Package color Info: Redefining color shadecolor on input line 742.
-Package color Info: Redefining color shadecolor on input line 755.
+Package color Info: Redefining color shadecolor on input line 741.
+Package color Info: Redefining color shadecolor on input line 751.
 Package color Info: Redefining color shadecolor on input line 764.
-Package color Info: Redefining color shadecolor on input line 775.
+Package color Info: Redefining color shadecolor on input line 773.
 Package color Info: Redefining color shadecolor on input line 784.
-Package color Info: Redefining color shadecolor on input line 797.
- [13]
+Package color Info: Redefining color shadecolor on input line 793.
 Package color Info: Redefining color shadecolor on input line 806.
-Package color Info: Redefining color shadecolor on input line 818.
+ [13]
+Package color Info: Redefining color shadecolor on input line 815.
 Package color Info: Redefining color shadecolor on input line 827.
-Package color Info: Redefining color shadecolor on input line 844.
+Package color Info: Redefining color shadecolor on input line 836.
 Package color Info: Redefining color shadecolor on input line 853.
+Package color Info: Redefining color shadecolor on input line 862.
 
-Overfull \hbox (53.18234pt too wide) in paragraph at lines 868--869
+Overfull \hbox (53.18234pt too wide) in paragraph at lines 877--878
   \T1/ppl/m/n/10 At times it is con-ve-nient to ap-ply a func-tion in-tended fo
 r a \T1/ppl/b/n/10 tm \T1/lmtt/m/n/10 TermDocumentMatrix \T1/ppl/m/n/10 or \T1/
 lmtt/m/n/10 DocumentTermMatrix
  []
 
-Package color Info: Redefining color shadecolor on input line 875.
-[14]
 Package color Info: Redefining color shadecolor on input line 884.
-Package color Info: Redefining color shadecolor on input line 897.
-Package color Info: Redefining color shadecolor on input line 906.
+[14]
+Package color Info: Redefining color shadecolor on input line 893.
 Package color Info: Redefining color shadecolor on input line 915.
-Package color Info: Redefining color shadecolor on input line 923.
+Package color Info: Redefining color shadecolor on input line 924.
+Package color Info: Redefining color shadecolor on input line 933.
+Package color Info: Redefining color shadecolor on input line 950.
  [15]
-Package color Info: Redefining color shadecolor on input line 932.
-Package color Info: Redefining color shadecolor on input line 945.
-Package color Info: Redefining color shadecolor on input line 973.
+Package color Info: Redefining color shadecolor on input line 959.
+Package color Info: Redefining color shadecolor on input line 972.
+Package color Info: Redefining color shadecolor on input line 1000.
  [16]
-Package color Info: Redefining color shadecolor on input line 988.
- <figure/minimal-apply_as_df2.pdf, id=126, 505.89pt x 361.35pt>
+Package color Info: Redefining color shadecolor on input line 1015.
+ <figure/minimal-apply_as_df2.pdf, id=125, 505.89pt x 361.35pt>
 File: figure/minimal-apply_as_df2.pdf Graphic file (type pdf)
 
 <use figure/minimal-apply_as_df2.pdf>
-Package pdftex.def Info: figure/minimal-apply_as_df2.pdf used on input line 990
-.
+Package pdftex.def Info: figure/minimal-apply_as_df2.pdf used on input line 101
+7.
 (pdftex.def)             Requested size: 430.00462pt x 307.15446pt.
-Package color Info: Redefining color shadecolor on input line 1004.
+Package color Info: Redefining color shadecolor on input line 1031.
  [17 <C:/Users/trinker/GitHub/qdap/vignettes/figure/minimal-apply_as_df2.pdf>] 
 [18]
-Package color Info: Redefining color shadecolor on input line 1053.
-Package color Info: Redefining color shadecolor on input line 1064.
+Package color Info: Redefining color shadecolor on input line 1080.
+Package color Info: Redefining color shadecolor on input line 1091.
 
-Underfull \hbox (badness 10000) in paragraph at lines 1075--1076
+Underfull \hbox (badness 10000) in paragraph at lines 1102--1103
 
  []
 
 (C:\Users\trinker\GitHub\qdap\vignettes\tm_package_compatibility.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1083.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1110.
  [19]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1083.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1110.
 
 (C:\Users\trinker\GitHub\qdap\vignettes\tm_package_compatibility.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1083.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1083.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1083.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1110.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 1110.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1110.
  ) 
 Here is how much of TeX's memory you used:
- 8833 strings out of 493921
- 134016 string characters out of 3152890
+ 8831 strings out of 493921
+ 133991 string characters out of 3152890
  238796 words of memory out of 3000000
- 11930 multiletter control sequences out of 15000+200000
- 33635 words of font info for 71 fonts, out of 3000000 for 9000
+ 11929 multiletter control sequences out of 15000+200000
+ 33316 words of font info for 70 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  36i,10n,38p,893b,480s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program F
@@ -722,13 +722,12 @@ iles (x86)/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ts1.enc}{C:/Program Files (x86)/MiK
 TeX 2.9/fonts/enc/dvips/fontname/8r.enc}<C:/Program Files (x86)/MiKTeX 2.9/font
 s/type1/public/lm/lmtk10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/pub
 lic/lm/lmtt10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtt
-8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb><C:/
-Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C:/Program 
-Files (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Program Files (x
-86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb>
-Output written on tm_package_compatibility.pdf (19 pages, 352796 bytes).
+8.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplb8a.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplr8a.pfb><C:/Progra
+m Files (x86)/MiKTeX 2.9/fonts/type1/urw/palatino/uplri8a.pfb>
+Output written on tm_package_compatibility.pdf (19 pages, 332300 bytes).
 PDF statistics:
- 277 PDF objects out of 1000 (max. 8388607)
+ 273 PDF objects out of 1000 (max. 8388607)
  58 named destinations out of 1000 (max. 500000)
  216 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -558,18 +558,68 @@ summary.wfm <- function(object, ...) {
     RS <- rowSums(x)
     HL <- sum(RS == 1)
     DL <- sum(RS == 2)
-    shan <- shannon(RS)
-    out <- paste(
-        sprintf("A word-frequency matrix (%s terms, %s groups)", nrow(x), ncol(x)),
-        "\n", sprintf("Non-/sparse entries       : %s/%s", Y, N),
-        sprintf("Sparsity                  : %s%%", sparsity),
-        sprintf("Maximal term length       : %s", max(NCHAR)) ,
-        sprintf("Less than four characters : %s%%", 100*round(sum(NCHAR < 4)/nrow(x), 2)) ,
-        sprintf("Hapax legomenon           : %s(%s%%)", HL, 100*round(HL/nrow(x), 2)),
-        sprintf("Dis legomenon             : %s(%s%%)", DL, 100*round(DL/nrow(x), 2)),
-        sprintf("Shannon's diversity index : %s", round(shan, 2)),
-    sep="\n")
-    message(out)
+    shan <- shannon(RS)             
+    output <- list(
+        c(Y, N),
+        c(sparsity),
+        c(max(NCHAR)),
+        c(sum(NCHAR < 4)/nrow(x)),
+        c(HL, HL/nrow(x)),
+        c(DL, DL/nrow(x)),
+        c(shan)
+    )
+    names(output) <- c("Non-/sparse entries", "Sparsity", 
+        "Maximal term length", "Less than four characters", 
+        "Hapax legomenon", "Dis legomenon", "Shannon's diversity index"                                          
+    )        
+
+    attributes(output) <- list(
+            class = c("wfm_summary"),
+            names = names(output),
+            nrow = nrow(x),
+            ncol = ncol(x)
+    )       
+
+    output
+
+}
+
+
+#' Prints a wfm_summary Object
+#' 
+#' Prints a wfm_summary object.
+#' 
+#' @param x The wfm_summary object.
+#' @param \ldots ignored
+#' @method print wfm_summary
+#' @S3method print wfm_summary
+print.wfm_summary <- function(x, ...) {
+
+    nms <- c("Non-/sparse entries", "Sparsity", 
+        "Maximal term length", "Less than four characters", 
+        "Hapax legomenon", "Dis legomenon", "Shannon's diversity index"                                          
+    ) 
+
+    numrow <- attributes(x)[["nrow"]]
+    numcol <- attributes(x)[["ncol"]]
+    class(x) <- "list"
+
+    if (!all(nms %in% names(x))) {
+        print(x)
+        return(invisible(NULL))
+    }      
+
+    vals <- c(
+        sprintf("A word-frequency matrix (%s terms, %s groups)", numrow, numcol),
+        "", sprintf("Non-/sparse entries       : %s/%s", x[[nms[1]]][1], x[[nms[1]]][2]),
+        sprintf("Sparsity                  : %s%%", x[[nms[2]]]),
+        sprintf("Maximal term length       : %s", x[[nms[3]]]) ,
+        sprintf("Less than four characters : %s%%", 100*round(x[[nms[4]]], 2)) ,
+        sprintf("Hapax legomenon           : %s(%s%%)", x[[nms[5]]][1], 100*round(x[[nms[5]]][2], 2)),
+        sprintf("Dis legomenon             : %s(%s%%)", x[[nms[6]]][1], 100*round(x[[nms[6]]][2], 2)),
+        sprintf("Shannon's diversity index : %s\n", round(x[[nms[7]]], 2))
+    )
+    cat(paste(vals, collapse="\n"))
 }
 
 #' Summarize a wfdf object
