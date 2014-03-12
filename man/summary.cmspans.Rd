@@ -79,7 +79,6 @@ v <- cm_2long(foo, foo2, v.name = "time")
 plot(v)
 summary(v)
 plot(summary(v))
-plot(summary(v), facet.vars = "time")
 
 ## Example 2
 x <- list(
@@ -101,9 +100,7 @@ plot(summary(z))
 suppressMessages(print(summary(z)))
 
 ## remove print method
-z_unclass <- summary(z)
-class(z_unclass) <- "data.frame"
-z_unclass
+as.data.frame(z_unclass)
 }
 }
 \seealso{

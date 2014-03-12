@@ -264,14 +264,23 @@ function(text.var = NULL, grouping.var = NULL, output = "raw", stopwords = NULL,
 #' Prints a wfm object.
 #' 
 #' @param x The wfm object.
+#' @param width  The width to temporarily set for printing (default = 10000).  
+#' See \code{\link[base]{options}} for more.
 #' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param \ldots ignored
 #' @method print wfm
 #' @S3method print wfm
 print.wfm <-
-  function(x, digits = 3, ...) {
+  function(x, digits = 3, width = 10000, ...) {
     class(x) <- "matrix"
+      
+    WD <- options()[["width"]]
+    if (!is.null(width)) {
+        options(width=width)
+    }
     print(round(x, digits = digits))
+    options(width=WD)
+      
 }
 
 

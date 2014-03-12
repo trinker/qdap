@@ -2,10 +2,14 @@
 \alias{print.wfm}
 \title{Prints a wfm Object}
 \usage{
-\method{print}{wfm}(x, digits = 3, ...)
+\method{print}{wfm}(x, digits = 3, width = 10000, ...)
 }
 \arguments{
   \item{x}{The wfm object.}
+
+  \item{width}{The width to temporarily set for printing
+  (default = 10000). See \code{\link[base]{options}} for
+  more.}
 
   \item{digits}{The number of digits displayed if
   \code{values} is \code{TRUE}.}

@@ -61,7 +61,6 @@
 #' plot(v)
 #' summary(v)
 #' plot(summary(v))
-#' plot(summary(v), facet.vars = "time")
 #' 
 #' ## Example 2
 #' x <- list(
@@ -83,9 +82,7 @@
 #' suppressMessages(print(summary(z)))
 #' 
 #' ## remove print method
-#' z_unclass <- summary(z)
-#' class(z_unclass) <- "data.frame"
-#' z_unclass
+#' as.data.frame(z_unclass)
 #' }
 summary.cmspans <-
 function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,
@@ -218,13 +215,23 @@ function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,
 #' @S3method print sum_cmspans
 print.sum_cmspans <- function(x, digits = NULL, ...) {
 
+    x.nms <- c("code", "total", "percent_total", "n", "percent_n", 
+        "ave", "sd", "min", "max")
+
+    if (!all(x.nms %in% colnames(x))) {
+        class(x) <- "data.frame"
+        print(x)
+        return(invisible(NULL))
+    }
+
     if (!is.null(digits)) {
         digs <- sprintf("digits_%s", digits)
     } else {
         digs <- class(x)[grepl("digits_", class(x))]
     }
 
-    class(x) <- c(class(x)[(!class(x) %in% "sum_cmspans") & !grepl("digits_", class(x))], digs) 
+    class(x) <- c(class(x)[(!class(x) %in% "sum_cmspans") & !grepl("digits_", 
+        class(x))], digs) 
 
     wdt <- options()[["width"]]
     options(width = 10000)
@@ -232,7 +239,8 @@ print.sum_cmspans <- function(x, digits = NULL, ...) {
 
     nums <- function(x) is.numeric(x) && !is(x, "times")
     if (is.null(digits)) {
-        digits <- as.numeric(gsub("digits_", "", class(x)[grepl("digits_", class(x))]))
+        digits <- as.numeric(gsub("digits_", "", class(x)[grepl("digits_", 
+            class(x))]))
     }
     locs <- sapply(x, nums)
 
@@ -267,12 +275,18 @@ print.sum_cmspans <- function(x, digits = NULL, ...) {
     }
     x <- x[, grabs]     
     
+    WD <- options()[["width"]]
+    options(width=3000)
     print(x)
+    
     message(paste(rep("====", 7), collapse = ""))
-    message(sprintf("Unit of measure: %s", ifelse(which.cm(x)== "cmtime", "time", "words")))
+    message(sprintf("Unit of measure: %s", ifelse(which.cm(x)== "cmtime", 
+        "time", "words")))
     if (which.cm(x)== "cmtime") {
           message("Columns measured in seconds unless in the form hh:mm:ss")
     }
+    options(width=WD)
+    
     invisible(x)
 }
 
