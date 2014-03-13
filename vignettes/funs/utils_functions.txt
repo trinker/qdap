@@ -562,3 +562,4 @@ root_warn <- function() {
             sprintf("'%s' may not be the root directory", getwd())))
     }
 }
+
