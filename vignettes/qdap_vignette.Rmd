@@ -1384,7 +1384,7 @@ dat <- adjacency_matrix(wfm(DATA$state, DATA$person, stopword = Top25Words))
 g <- graph.adjacency(dat$adjacency, weighted=TRUE, mode ="undirected")
 g <- simplify(g)
 V(g)$label <- V(g)$name
-V(g)$degree <- degree(g)
+V(g)$degree <- igraph::degree(g)
 set.seed(14)
 plot(g, layout=layout.auto(g))
 ```
@@ -1409,7 +1409,7 @@ X <- adjdat$adjacency
 g <- graph.adjacency(X, weighted=TRUE, mode ="undirected")
 g <- simplify(g)
 V(g)$label <- V(g)$name
-V(g)$degree <- degree(g)
+V(g)$degree <- igraph::degree(g)
 plot(g, layout=layout.auto(g))
 ```
 
@@ -5147,7 +5147,7 @@ summary(a)
 ## Apply as tm
 (out <- apply_as_tm(a, tm:::removeSparseTerms, sparse=0.6))
 summary(out)
-apply_as_tm(a, tm:::Dissimilarity, method = "cosine")
+apply_as_tm(a, tm:::dissimilarity, method = "cosine")
 apply_as_tm(a, tm:::findAssocs, "computer", .8)
 apply_as_tm(a, tm:::findFreqTerms, 2, 3)
 apply_as_tm(a, tm:::Zipf_plot)

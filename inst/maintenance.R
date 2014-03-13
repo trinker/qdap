@@ -53,8 +53,7 @@ library(highlight); library(qdap); library(staticdocs); library(acc.roxygen2)
 #STEP 1: create static doc  
 #right now examples are FALSE in the future this will be true
 #in the future qdap2 will be the go to source
-build_package(package="C:/Users/trinker/GitHub/qdap", 
-    base_path="C:/Users/trinker/Desktop/qdap/", examples = FALSE)
+build_site(pkg="C:/Users/trinker/GitHub/qdap")
 
 #STEP 2: reshape index
 path <- "C:/Users/trinker/Desktop/qdap"
