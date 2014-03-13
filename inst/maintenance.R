@@ -14,11 +14,11 @@ library(highlight); library(qdap); library(staticdocs); library(acc.roxygen2)
 #STEP 1: create static doc  
 #right now examples are FALSE in the future this will be true
 #in the future qdap2 will be the go to source
-build_site(pkg="C:/Users/trinker/GitHub/qdap")
+build_site(pkg="C:/Users/trinker/GitHub/qdap2")
 
 #STEP 2: reshape index
 path <- "inst/web"
-path2 <- paste0(path, "/index.html")
+path2 <- file.path(path, "/index.html")
 rdme <- "C:/Users/trinker/GitHub/qdap/inst/extra_statdoc/readme.R"
 extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry, 
     linsear_write, SMOG, syn, mgsub, adjmat, wc, wfdf, mcsv_w, dtm, "%ha%", 
