@@ -38,6 +38,6 @@ tm_package_compatibility.synctex.gz
 tm_package_compatibility.tex
 tm_package_compatibility.tex
 vignettes/helper_files
-
+inst/web
 
 

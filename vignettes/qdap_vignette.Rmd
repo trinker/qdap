@@ -1413,13 +1413,13 @@ V(g)$degree <- degree(g)
 plot(g, layout=layout.auto(g))
 ```
 
-We can easily add information to the network plot utilizing the `r FUN("dissimilarity")` function to obtain weights and distance measures for use with the plot.
+We can easily add information to the network plot utilizing the `r FUN("Dissimilarity")` function to obtain weights and distance measures for use with the plot.
 
 `r FT(orange, 5, text="&diams;")` **Plotting an Adjacency Matrix**: *Example 2b*`r FT(orange, 5, text="&diams;")`
 
 ```{r}
 edge.weight <- 15  #a maximizing thickness constant
-d <- as.matrix(dissimilarity(dat))
+d <- as.matrix(Dissimilarity(dat))
 d2 <- d[lower.tri(d)]
 z1 <- edge.weight*d2^2/max(d2)
 z2 <- c(round(d2, 3))
@@ -3793,7 +3793,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank">
-    <input type="submit" value="dissimilarity"> - `r HR("#dissimilarity", "Dissimilarity")`
+    <input type="submit" value="Dissimilarity"> - `r HR("#dissimilarity", "Dissimilarity")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/diversity.html" target="_blank">
@@ -3955,19 +3955,19 @@ with(rajSPLIT, linsear_write(dialogue, person))
 
 <h4 id="dissimilarity">Dissimilarity</h4>
 
-*Dissimilarity* is another term for distance that is often used in text analysis to measure the pairwise proximity of grouping variables.  The qdap `r FUN("dissimilarity")` function is a wrapper for the R stats package's `r HR("http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html", "dist")` function designed to handle text.  `r FUN("dissimilarity")` takes all the same <b><font color="green" face="courier new">method</font></b> types as `r HR("http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html", "dist")` but also includes the default <b><font color="green" face="courier new">method = "prop"</font></b> (1 - "binary") that is focused on the similarity between grouping variables.
+*Dissimilarity* is another term for distance that is often used in text analysis to measure the pairwise proximity of grouping variables.  The qdap `r FUN("Dissimilarity")` function is a wrapper for the R stats package's `r HR("http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html", "dist")` function designed to handle text.  `r FUN("Dissimilarity")` takes all the same <b><font color="green" face="courier new">method</font></b> types as `r HR("http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html", "dist")` but also includes the default <b><font color="green" face="courier new">method = "prop"</font></b> (1 - "binary") that is focused on the similarity between grouping variables.
 
-<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("dissimilarity")` Examples**`r FT(orange, 5, text="&diams;")`</p >
+<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("Dissimilarity")` Examples**`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, comment=NA}
-with(DATA, dissimilarity(state, list(sex, adult)))
-with(DATA, dissimilarity(state, person))
-with(DATA, dissimilarity(state, person, method = "minkowski"))
+with(DATA, Dissimilarity(state, list(sex, adult)))
+with(DATA, Dissimilarity(state, person))
+with(DATA, Dissimilarity(state, person, method = "minkowski"))
 ```
 
 ```{r eval=FALSE}
 dat <- pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY),]
-with(dat, dissimilarity(dialogue, list(person, time)))
+with(dat, Dissimilarity(dialogue, list(person, time)))
 ```
 
 <pre><code>         OBAMA.1 OBAMA.2 OBAMA.3 ROMNEY.1 ROMNEY.2
@@ -3979,10 +3979,10 @@ ROMNEY.3   0.264   0.297   0.329    0.290    0.338
 </code></pre>
 
 
-<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("dissimilarity")` Clustering (Dendrogram)**`r FT(orange, 5, text="&diams;")`</p >
+<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("Dissimilarity")` Clustering (Dendrogram)**`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r}
-x <- with(pres_debates2012, dissimilarity(dialogue, list(person, time)))
+x <- with(pres_debates2012, Dissimilarity(dialogue, list(person, time)))
 fit <- hclust(x)
 plot(fit)
 ```
@@ -3995,14 +3995,14 @@ rect.hclust(fit, k=3, border=c("red", "purple", "seagreen"))
 
 <h4 id="kullback">Kullback-Leibler divergence </h4>
 
-The Kullback Leibler is often used as a measure of distance, though the matrix is asymmetrical.  qdap's `r FUN("kullback_leibler")` compares the differences between two probability distributions and often leads to results similar to those from `r FUN("dissimilarity")`.  Note that unlike many other qdap functions the user must either supply a word frequency matric (`r FUN("wfm", "Word_Frequency_Matrix")`) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with `r FUN("termco")` and other functions that produce count matrices.
+The Kullback Leibler is often used as a measure of distance, though the matrix is asymmetrical.  qdap's `r FUN("kullback_leibler")` compares the differences between two probability distributions and often leads to results similar to those from `r FUN("Dissimilarity")`.  Note that unlike many other qdap functions the user must either supply a word frequency matric (`r FUN("wfm", "Word_Frequency_Matrix")`) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with `r FUN("termco")` and other functions that produce count matrices.
 
 ```{r include = FALSE}
 dat <- pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY),]
 KL <- (kullback_leibler(with(dat, wfm(dialogue, list(person, time)))))
 ```
 
-<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("kullback_leibler")` Example** - *Compare to `r FUN("dissimilarity")`*`r FT(orange, 5, text="&diams;")`</p >
+<p id="linwr">`r FT(orange, 5, text="&diams;")` **`r FUN("kullback_leibler")` Example** - *Compare to `r FUN("Dissimilarity")`*`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r eval = FALSE}
 dat <- pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY),]
@@ -4040,7 +4040,7 @@ plot(div.mod, low = "yellow", grid = FALSE, values = TRUE)
 
 <h4 id="formality">Formality</h4>
 
-Formality is how contextualize a person's language use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 1999b, 2002).  Heylighen & Dewaele (2002) have developed a measure of formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating `r FUN("formality")`, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the `r FUN("dissimilarity")` measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multiplied by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
+Formality is how contextualize a person's language use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 1999b, 2002).  Heylighen & Dewaele (2002) have developed a measure of formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating `r FUN("formality")`, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the `r FUN("Dissimilarity")` measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multiplied by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
 <br><br>
 
 $$ F = 50(\frac{n_{f}-n_{c}}{N} + 1) $$
@@ -4852,7 +4852,7 @@ base +
 
 The Venn diagram can be a useful way to visualize similarity between grouping variables with respect to word use when the number of groups is relatively small.  The `r FUN("trans_venn")` function wraps the `r HR("http://cran.r-project.org/web/packages/venneuler/index.html", "venneuler")` package to produce Venn diagrams.  The user must keep in mind that producing this output is computationally slow, thus consideration must be given with regard to data size and number of groups when using `r FUN("trans_venn")` to avoid over plotting and lengthy plot production.  The use of the <b><font color="green" face="courier new">stopwords</font></b> argument can also be useful to reduce the overlap of common words between grouping variables.
 
-If a data set is larger the user may want to consider representing the data as a `r FUN("dissimilarity")` matrix or as an adjacency matrix that can be plotted with the `r HR("http://cran.r-project.org/web/packages/igraph/index.html", "igraph package")` as seen in the `r HR("#plotadj2", "presidential examples above")`.
+If a data set is larger the user may want to consider representing the data as a `r FUN("Dissimilarity")` matrix or as an adjacency matrix that can be plotted with the `r HR("http://cran.r-project.org/web/packages/igraph/index.html", "igraph package")` as seen in the `r HR("#plotadj2", "presidential examples above")`.
 
 In the following example the reader will notice the centers of the circles (i.e., the person labels) are very similar to the positioning (the distances between nodes) of the same data in the `r HR("#plotadj", "adjacency matrix plot")` of the same data above.
 
@@ -5147,7 +5147,7 @@ summary(a)
 ## Apply as tm
 (out <- apply_as_tm(a, tm:::removeSparseTerms, sparse=0.6))
 summary(out)
-apply_as_tm(a, tm:::dissimilarity, method = "cosine")
+apply_as_tm(a, tm:::Dissimilarity, method = "cosine")
 apply_as_tm(a, tm:::findAssocs, "computer", .8)
 apply_as_tm(a, tm:::findFreqTerms, 2, 3)
 apply_as_tm(a, tm:::Zipf_plot)

@@ -1,6 +1,6 @@
 <!--
 %\VignetteEngine{knitr}
-%\VignetteIndexEntry{A Markdown Vignette with knitr}
+%\VignetteIndexEntry{An Introduction to qdap}
 -->
 
 
@@ -1145,8 +1145,8 @@ hash_look(x, hashTab)
 ```
 
 ```
-##  [1] 16.30 19.70 25.34 19.70 16.30 19.70 16.30 16.30 19.70 25.34 16.30
-## [12] 16.30 16.30 16.30 15.00 22.40 15.00 19.70 25.34 25.34
+##  [1] 15.79 16.30 15.00 19.70 15.00 25.34 19.70 16.30 22.40 15.79 15.79
+## [12] 15.79 16.30 22.40 15.00 16.30 15.00 22.40 16.30 16.30
 ```
 
 ```r
@@ -1154,8 +1154,8 @@ x %ha% hashTab
 ```
 
 ```
-##  [1] 16.30 19.70 25.34 19.70 16.30 19.70 16.30 16.30 19.70 25.34 16.30
-## [12] 16.30 16.30 16.30 15.00 22.40 15.00 19.70 25.34 25.34
+##  [1] 15.79 16.30 15.00 19.70 15.00 25.34 19.70 16.30 22.40 15.79 15.79
+## [12] 15.79 16.30 22.40 15.00 16.30 15.00 22.40 16.30 16.30
 ```
 
 
@@ -3292,14 +3292,14 @@ plot(g, layout=layout.auto(g))
 ![plot of chunk unnamed-chunk-46](figure/unnamed-chunk-46.png) 
 
 
-We can easily add information to the network plot utilizing the <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> function to obtain weights and distance measures for use with the plot.
+We can easily add information to the network plot utilizing the <a href="http://trinker.github.io/qdap_dev/Dissimilarity.html" target="_blank"><code>Dissimilarity</code></a> function to obtain weights and distance measures for use with the plot.
 
 <font size="5" color="orange">&diams;</font> **Plotting an Adjacency Matrix**: *Example 2b*<font size="5" color="orange">&diams;</font>
 
 
 ```r
 edge.weight <- 15  #a maximizing thickness constant
-d <- as.matrix(dissimilarity(dat))
+d <- as.matrix(Dissimilarity(dat))
 d2 <- d[lower.tri(d)]
 z1 <- edge.weight*d2^2/max(d2)
 z2 <- c(round(d2, 3))
@@ -4108,7 +4108,8 @@ synonyms(c("the", "cat", "teach"))
 ```
 ## no match for the following:
 ## 
-## the ========================
+## the
+## ========================
 ```
 
 ```
@@ -4144,7 +4145,8 @@ syn(c("the", "cat", "teach"), return.list = FALSE)
 ```
 ## no match for the following:
 ## 
-## the ========================
+## the
+## ========================
 ```
 
 ```
@@ -4168,7 +4170,8 @@ syn(c("the", "cat", "teach"), multiwords = FALSE)
 ```
 ## no match for the following:
 ## 
-## the ========================
+## the
+## ========================
 ```
 
 ```
@@ -4254,9 +4257,12 @@ word_associate(DATA2$state, DATA2$person, match.string = ms,
 ```
 
 ```
-## Match Terms ===========
 ## 
-## List 1: i, you
+## Match Terms
+## ===========
+## 
+## List 1:
+## i, you
 ```
 
 
@@ -8203,16 +8209,16 @@ dist_tab(rnorm(10000), 10)
 
 ```
 ##           interval Freq cum.Freq percent cum.percent
-## 1    (-3.98,-3.17]    7        7    0.07        0.07
-## 2    (-3.17,-2.37]   71       78    0.71        0.78
-## 3    (-2.37,-1.58]  526      604    5.26        6.04
-## 4   (-1.58,-0.778] 1612     2216   16.12       22.16
-## 5  (-0.778,0.0204] 2864     5080   28.64       50.80
-## 6   (0.0204,0.818] 2923     8003   29.23       80.03
-## 7     (0.818,1.62] 1499     9502   14.99       95.02
-## 8      (1.62,2.41]  420     9922    4.20       99.22
-## 9      (2.41,3.21]   69     9991    0.69       99.91
-## 10     (3.21,4.02]    9    10000    0.09      100.00
+## 1    (-3.98,-3.18]    7        7    0.07        0.07
+## 2    (-3.18,-2.38]   68       75    0.68        0.75
+## 3    (-2.38,-1.58]  525      600    5.25        6.00
+## 4   (-1.58,-0.779] 1611     2211   16.11       22.11
+## 5  (-0.779,0.0204] 2869     5080   28.69       50.80
+## 6    (0.0204,0.82] 2926     8006   29.26       80.06
+## 7      (0.82,1.62] 1496     9502   14.96       95.02
+## 8      (1.62,2.42]  420     9922    4.20       99.22
+## 9      (2.42,3.22]   69     9991    0.69       99.91
+## 10     (3.22,4.02]    9    10000    0.09      100.00
 ```
 
 ```r
@@ -8267,8 +8273,8 @@ dist_tab(CO2, 4)
 ##      interval Freq cum.Freq percent cum.percent
 ## 1 (7.66,17.1]   19       19   22.62       22.62
 ## 2 (17.1,26.6]   18       37   21.43       44.05
-## 3   (26.6,36]   25       62   29.76       73.81
-## 4   (36,45.5]   22       84   26.19      100.00
+## 3 (26.6,36.1]   25       62   29.76       73.81
+## 4 (36.1,45.5]   22       84   26.19      100.00
 ```
 
 
@@ -8635,7 +8641,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank">
-    <input type="submit" value="dissimilarity"> - <a href="#dissimilarity">Dissimilarity</a>
+    <input type="submit" value="Dissimilarity"> - <a href="#dissimilarity">Dissimilarity</a>
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/diversity.html" target="_blank">
@@ -8817,13 +8823,13 @@ with(rajSPLIT, linsear_write(dialogue, person))
 
 <h4 id="dissimilarity">Dissimilarity</h4>
 
-*Dissimilarity* is another term for distance that is often used in text analysis to measure the pairwise proximity of grouping variables.  The qdap <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> function is a wrapper for the R stats package's <a href="http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html">dist</a> function designed to handle text.  <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> takes all the same <b><font color="green" face="courier new">method</font></b> types as <a href="http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html">dist</a> but also includes the default <b><font color="green" face="courier new">method = "prop"</font></b> (1 - "binary") that is focused on the similarity between grouping variables.
+*Dissimilarity* is another term for distance that is often used in text analysis to measure the pairwise proximity of grouping variables.  The qdap <a href="http://trinker.github.io/qdap_dev/Dissimilarity.html" target="_blank"><code>Dissimilarity</code></a> function is a wrapper for the R stats package's <a href="http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html">dist</a> function designed to handle text.  <a href="http://trinker.github.io/qdap_dev/Dissimilarity.html" target="_blank"><code>Dissimilarity</code></a> takes all the same <b><font color="green" face="courier new">method</font></b> types as <a href="http://stat.ethz.ch/R-manual/R-devel/library/stats/html/dist.html">dist</a> but also includes the default <b><font color="green" face="courier new">method = "prop"</font></b> (1 - "binary") that is focused on the similarity between grouping variables.
 
-<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> Examples**<font size="5" color="orange">&diams;</font></p >
+<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/Dissimilarity.html" target="_blank"><code>Dissimilarity</code></a> Examples**<font size="5" color="orange">&diams;</font></p >
 
 
 ```r
-with(DATA, dissimilarity(state, list(sex, adult)))
+with(DATA, Dissimilarity(state, list(sex, adult)))
 ```
 
 ```
@@ -8834,7 +8840,7 @@ m.1 0.167 0.111 0.000
 ```
 
 ```r
-with(DATA, dissimilarity(state, person))
+with(DATA, Dissimilarity(state, person))
 ```
 
 ```
@@ -8846,7 +8852,7 @@ teacher    0.000      0.111 0.167 0.000
 ```
 
 ```r
-with(DATA, dissimilarity(state, person, method = "minkowski"))
+with(DATA, Dissimilarity(state, person, method = "minkowski"))
 ```
 
 ```
@@ -8861,7 +8867,7 @@ teacher    5.292      2.828 3.162 4.583
 
 ```r
 dat <- pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY),]
-with(dat, dissimilarity(dialogue, list(person, time)))
+with(dat, Dissimilarity(dialogue, list(person, time)))
 ```
 
 
@@ -8874,11 +8880,11 @@ ROMNEY.3   0.264   0.297   0.329    0.290    0.338
 </code></pre>
 
 
-<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> Clustering (Dendrogram)**<font size="5" color="orange">&diams;</font></p >
+<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/Dissimilarity.html" target="_blank"><code>Dissimilarity</code></a> Clustering (Dendrogram)**<font size="5" color="orange">&diams;</font></p >
 
 
 ```r
-x <- with(pres_debates2012, dissimilarity(dialogue, list(person, time)))
+x <- with(pres_debates2012, Dissimilarity(dialogue, list(person, time)))
 fit <- hclust(x)
 plot(fit)
 ```
@@ -8897,12 +8903,12 @@ rect.hclust(fit, k=3, border=c("red", "purple", "seagreen"))
 
 <h4 id="kullback">Kullback-Leibler divergence </h4>
 
-The Kullback Leibler is often used as a measure of distance, though the matrix is asymmetrical.  qdap's <a href="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank"><code>kullback_leibler</code></a> compares the differences between two probability distributions and often leads to results similar to those from <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a>.  Note that unlike many other qdap functions the user must either supply a word frequency matric (<a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a>) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> and other functions that produce count matrices.
+The Kullback Leibler is often used as a measure of distance, though the matrix is asymmetrical.  qdap's <a href="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank"><code>kullback_leibler</code></a> compares the differences between two probability distributions and often leads to results similar to those from <a href="http://trinker.github.io/qdap_dev/Dissimilarity.html" target="_blank"><code>Dissimilarity</code></a>.  Note that unlike many other qdap functions the user must either supply a word frequency matric (<a href="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank"><code>wfm</code></a>) to  <b><font color="green" face="courier new">x</font></b> or some other matrix format.  This allows the function to be flexibly used with <a href="http://trinker.github.io/qdap_dev/termco.html" target="_blank"><code>termco</code></a> and other functions that produce count matrices.
 
 
 
 
-<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank"><code>kullback_leibler</code></a> Example** - *Compare to <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a>*<font size="5" color="orange">&diams;</font></p >
+<p id="linwr"><font size="5" color="orange">&diams;</font> **<a href="http://trinker.github.io/qdap_dev/kullback_leibler.html" target="_blank"><code>kullback_leibler</code></a> Example** - *Compare to <a href="http://trinker.github.io/qdap_dev/Dissimilarity.html" target="_blank"><code>Dissimilarity</code></a>*<font size="5" color="orange">&diams;</font></p >
 
 
 ```r
@@ -8976,7 +8982,7 @@ plot(div.mod, low = "yellow", grid = FALSE, values = TRUE)
 
 <h4 id="formality">Formality</h4>
 
-Formality is how contextualize a person's language use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 1999b, 2002).  Heylighen & Dewaele (2002) have developed a measure of formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a>, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multiplied by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
+Formality is how contextualize a person's language use is.  In situations involving what may be new content/context for an audience, a speaker may be more formal in their speech (Heylighen & Dewaele, 1999a, 1999b, 2002).  Heylighen & Dewaele (2002) have developed a measure of formality based on categorizing parts of speech into contextual/formal categories.  While qdap is not the creator of the algorithm for calculating <a href="http://trinker.github.io/qdap_dev/formality.html" target="_blank"><code>formality</code></a>, Heylighen & Dewaele's (2002) F-measure (formality) is less known than other qdap word measures and thus more explanation is provide to the reader than say the <a href="http://trinker.github.io/qdap_dev/Dissimilarity.html" target="_blank"><code>Dissimilarity</code></a> measures above. Heylighen & Dewaele's (2002) F-measure is calculated by finding the difference of all of the formal parts ($f$) of speech (noun, adjective, preposition, article) and contextual ($c$) parts of speech (pronoun, verb, adverb, interjection) divided by the sum of all formal & contextual speech plus conjunctions ($N$).  This quotient is added to one and multiplied by 50 to ensure a measure between 0 and 1, with scores closer to 100 being more formal and those approaching 0 being more contextual.
 <br><br>
 
 $$ F = 50(\frac{n_{f}-n_{c}}{N} + 1) $$
@@ -9191,7 +9197,7 @@ qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.pola
 ```
 
 ```
-<environment: 0x13c79880>
+<environment: 0x1252dc44>
 ```
 
 ```r
@@ -10135,7 +10141,7 @@ base +
 
 The Venn diagram can be a useful way to visualize similarity between grouping variables with respect to word use when the number of groups is relatively small.  The <a href="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank"><code>trans_venn</code></a> function wraps the <a href="http://cran.r-project.org/web/packages/venneuler/index.html">venneuler</a> package to produce Venn diagrams.  The user must keep in mind that producing this output is computationally slow, thus consideration must be given with regard to data size and number of groups when using <a href="http://trinker.github.io/qdap_dev/trans_venn.html" target="_blank"><code>trans_venn</code></a> to avoid over plotting and lengthy plot production.  The use of the <b><font color="green" face="courier new">stopwords</font></b> argument can also be useful to reduce the overlap of common words between grouping variables.
 
-If a data set is larger the user may want to consider representing the data as a <a href="http://trinker.github.io/qdap_dev/dissimilarity.html" target="_blank"><code>dissimilarity</code></a> matrix or as an adjacency matrix that can be plotted with the <a href="http://cran.r-project.org/web/packages/igraph/index.html">igraph package</a> as seen in the <a href="#plotadj2">presidential examples above</a>.
+If a data set is larger the user may want to consider representing the data as a <a href="http://trinker.github.io/qdap_dev/Dissimilarity.html" target="_blank"><code>Dissimilarity</code></a> matrix or as an adjacency matrix that can be plotted with the <a href="http://cran.r-project.org/web/packages/igraph/index.html">igraph package</a> as seen in the <a href="#plotadj2">presidential examples above</a>.
 
 In the following example the reader will notice the centers of the circles (i.e., the person labels) are very similar to the positioning (the distances between nodes) of the same data in the <a href="#plotadj">adjacency matrix plot</a> of the same data above.
 
@@ -10736,6 +10742,18 @@ library(tm); data(crude)
 summary(tm2qdap(dtm_in))
 ```
 
+```
+## A word-frequency matrix (1200 terms, 20 groups)
+## 
+## Non-/sparse entries       : 1930/22070
+## Sparsity                  : 92%
+## Maximal term length       : 17
+## Less than four characters : 6%
+## Hapax legomenon           : 768(64%)
+## Dis legomenon             : 210(18%)
+## Shannon's diversity index : 6.57
+```
+
 
 
 <h4 id="apply_as_tm">Apply functions intended to be used on the tm package's TermDocumentMatrix to a wfm object</h4>
@@ -10749,6 +10767,21 @@ library(tm); library(proxy)
 ## Create a wfm
 a <- with(DATA, wfm(state, list(sex, adult)))
 summary(a)
+```
+
+```
+## A word-frequency matrix (41 terms, 4 groups)
+## 
+## Non-/sparse entries       : 45/119
+## Sparsity                  : 73%
+## Maximal term length       : 8
+## Less than four characters : 49%
+## Hapax legomenon           : 32(78%)
+## Dis legomenon             : 7(17%)
+## Shannon's diversity index : 3.62
+```
+
+```r
 
 ## Apply as tm
 (out <- apply_as_tm(a, tm:::removeSparseTerms, sparse=0.6))
@@ -10763,14 +10796,26 @@ summary(a)
 
 ```r
 summary(out)
-apply_as_tm(a, tm:::dissimilarity, method = "cosine")
 ```
 
 ```
-##        f.0    f.1    m.0
-## f.1 0.8709              
-## m.0 0.8672 1.0000       
-## m.1 0.6838 0.7959 1.0000
+## A word-frequency matrix (3 terms, 4 groups)
+## 
+## Non-/sparse entries       : 7/5
+## Sparsity                  : 42%
+## Maximal term length       : 4
+## Less than four characters : 67%
+## Hapax legomenon           : 0(0%)
+## Dis legomenon             : 1(33%)
+## Shannon's diversity index : 1.06
+```
+
+```r
+apply_as_tm(a, tm:::Dissimilarity, method = "cosine")
+```
+
+```
+## Error: object 'Dissimilarity' not found
 ```
 
 ```r
@@ -11114,22 +11159,22 @@ htruncdf(tm_corpus2df(x), 15, 30)
 ```
 
 ```
-##                     docs                           text
-## 1         greg.ELA.day 1 No its not, its dumb. I am tel
-## 2         greg.ELA.day 2 Im hungry.  Lets eat.  You alr
-## 3        greg.math.day 1 There is no way. I am telling 
-## 4        greg.math.day 2 I am telling the truth! Im hun
-## 5   researcher.ELA.day 1  Shall we move on?  Good then.
-## 6   researcher.ELA.day 2 Shall we move on?  Good then. 
-## 7  researcher.math.day 1  Shall we move on?  Good then.
-## 8  researcher.math.day 2 Shall we move on?  Good then. 
-## 9        sally.ELA.day 1 How can we be certain? What ar
-## 10       sally.ELA.day 2         How can we be certain?
-## 11      sally.math.day 1 What are you talking about? Ho
-## 12      sally.math.day 2 What are you talking about? Wh
-## 13         sam.ELA.day 1 Computer is fun. Not too fun. 
-## 14         sam.ELA.day 2 Computer is fun. Not too fun. 
-## 15        sam.math.day 1 I distrust you. You liar, it s
+##              docs tot                    text
+## 1  greg.ELA.day 1 1.1   No its not, its dumb.
+## 2  greg.ELA.day 1 1.2 I am telling the truth!
+## 3  greg.ELA.day 1 1.3        There is no way.
+## 4  greg.ELA.day 1 1.4              Im hungry.
+## 5  greg.ELA.day 1 1.5               Lets eat.
+## 6  greg.ELA.day 1 1.6            You already?
+## 7  greg.ELA.day 2 2.1              Im hungry.
+## 8  greg.ELA.day 2 2.2               Lets eat.
+## 9  greg.ELA.day 2 2.3            You already?
+## 10 greg.ELA.day 2 2.4   No its not, its dumb.
+## 11 greg.ELA.day 2 2.5        There is no way.
+## 12 greg.ELA.day 2 2.6 I am telling the truth!
+## 13 greg.ELA.day 2 2.7 I am telling the truth!
+## 14 greg.ELA.day 2 2.8   No its not, its dumb.
+## 15 greg.ELA.day 2 2.9        There is no way.
 ```
 
 
