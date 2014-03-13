@@ -17,6 +17,16 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.1
+----------------------------------------------------------------
+
+A version bump necessary for Re-Submission to CRAN.  
+
+<b>CHANGES</b>
+
+* `new_project` was reconfigured with the old code that does not require the 
+  newest version of the reports package.
+
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.0
 ----------------------------------------------------------------
 

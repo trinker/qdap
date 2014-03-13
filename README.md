@@ -28,8 +28,8 @@ install_github("qdap", "trinker")
 ## Help
 
 [Web Page](http://trinker.github.com/qdap/)    
-[HTML Vignette: Introduction to qdap](http://htmlpreview.github.io/?https://github.com/trinker/qdap/blob/master/vignettes/qdap_vignette.html)   
-[PDF Vignette: qdap-tm Package Compatibility](https://dl.dropboxusercontent.com/u/61803503/packages/tm_package_compatibility.pdf)     
+[HTML Vignette: Introduction to qdap](http://trinker.github.io/qdap/vignettes/qdap_vignette.html)   
+[PDF Vignette: qdap-tm Package Compatibility](http://trinker.github.io/qdap/vignettes/tm_package_compatibility.pdf)     
 [Package PDF Help Manual](https://dl.dropbox.com/u/61803503/qdap.pdf)
 
 ## Contact

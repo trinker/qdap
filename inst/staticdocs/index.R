@@ -1,12 +1,12 @@
 library(staticdocs)
-list(
-  index = list(
+
     sd_section("Project Template",
       "A function to generate a project template of folders, scripts and documents.",  
       c(
         "new_project"
       )
-    ),
+    )
+
     sd_section("Import/Export Data",
       "Functions for importing data and exporting output.",  
       c(
@@ -15,7 +15,8 @@ list(
         "mcsv_r",
         "read.transcript"      
       )
-    ),
+    )
+
     sd_section("Cleaning/Parsing",
       "Function to clean and parse text data.",
       c(
@@ -41,7 +42,8 @@ list(
         "stemmer",
         "Trim"
       )
-    ),
+    )
+
     sd_section("Viewing", 
       "Functions to aid data viewing.", 
       c(
@@ -50,7 +52,8 @@ list(
         "Search",        
         "strWrap"
       )
-    ),
+    )
+
     sd_section("Generic qdap Methods", 
       "Functions to aid in selection of data elements.", 
       c(
@@ -60,7 +63,8 @@ list(
         "proportions",        
         "scores"
       )
-    ),      
+    )
+
     sd_section("Reshaping",
       "Functions to reshape data.",
       c(
@@ -80,7 +84,8 @@ list(
         "speakerSplit",
         "trans_context"
       )
-    ),
+    )
+
     sd_section("Word Extraction/Comparison", 
       "Functions for working with dialogue at the word level.",
       c(
@@ -96,7 +101,8 @@ list(
         "word_diff_list",
         "word_list"
       )
-    ),
+    )
+
     sd_section("Coding Tools",
       "cm functions are code matrix functions.  These functions are used for coding and reshaping transcripts, dataframes, and time spans for further use in analysis and visualization.",
       c(
@@ -118,13 +124,15 @@ list(
         "cm_dummy2long",
         "cm_long2dummy"
       )
-    ),
+    )
+
     sd_section("tm Package Integration",
       "Functions for working between the tm and qdap packages.",
       c(
         "tdm"        
       )
-    ),      
+    )
+
     sd_section("Counts/Descriptives",
       "Functions for word counts and descriptive statistics.",
       c(
@@ -141,7 +149,8 @@ list(
         "word_count",
         "word_stats"
       )
-    ),
+    )
+
     sd_section("Measures",
       "Word measures and scoring.",
       c(
@@ -154,7 +163,8 @@ list(
         "word_cor",
         "word_proximity"
       )
-    ),
+    )
+
     sd_section("qdap Tools", 
       "Tools to assist in transcript/discourse analysis.",
       c(
@@ -170,7 +180,8 @@ list(
         "url_dl",
         "v_outer"
       ) 
-    ),
+    )
+
     sd_section("Identification", 
       "Identify sentence elements/types.",
       c(
@@ -180,7 +191,8 @@ list(
         "imperative",
         "NAer"
       )
-    ),
+    )
+
     sd_section("Visualization", 
       "Plotting functions.",
       c(
@@ -212,7 +224,8 @@ list(
         "trans_venn",
         "word_network_plot"
       )
-    ),
+    )
+
     sd_section("Print Functions", "",
       c(
         "print.all_words",
@@ -241,7 +254,8 @@ list(
         "print.word_list",
         "print.word_stats"
       )
-    ),
+    )
+
     sd_section("Data", 
       "Data sets included in qdap and used in examples.",
       c( 
@@ -266,5 +280,5 @@ list(
       )
     )
 
-))
+
 

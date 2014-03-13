@@ -56,7 +56,7 @@ library(highlight); library(qdap); library(staticdocs); library(acc.roxygen2)
 build_site(pkg="C:/Users/trinker/GitHub/qdap")
 
 #STEP 2: reshape index
-path <- "C:/Users/trinker/Desktop/qdap"
+path <- "inst/web"
 path2 <- paste0(path, "/index.html")
 rdme <- "C:/Users/trinker/GitHub/qdap/inst/extra_statdoc/readme.R"
 extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry, 
@@ -69,6 +69,8 @@ expand_statdoc(path2, to.icon = extras, readme = rdme,
     combine = qcv(character_table, char_table))
 
 
+path <- "inst/web"
+path2 <- file.path(path, "index.html")
 x <- readLines(path2)
 x[grepl("<h2>Authors</h2>", x)] <- paste(c("<h2>Author</h2>", 
     rep("<h2>Contributor</h2>", 2)),
@@ -77,9 +79,11 @@ cat(paste(x, collapse="\n"), file=path2)
 
 #STEP 3: move to trinker.guthub
 library(reports)
-file <- "C:/Users/trinker/GitHub/trinker.github.com/"
-delete(paste0(file, "qdap"))
+file <- "C:/Users/trinker/GitHub/trinker.github.com"
+incoming <- file.path(file, "qdap")
+delete(incoming)
 file.copy(path, file, TRUE, TRUE)
+file.rename(file.path(file, "web"), incoming)
 delete(path2)
 
 #==========================
