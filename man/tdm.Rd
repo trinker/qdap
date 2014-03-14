@@ -437,6 +437,23 @@ finds <- apply_as_df(reuters, freq_terms, at.least = 5,
     top = 5, stopwords = Top100Words)
 apply_as_df(reuters, dispersion_plot, match.terms = finds[, 1],
     total.color = NULL)
+
+## Filter for Term Document Matrix/Document Term Matrix
+library(tm)
+data(crude)
+
+(tdm_in <- TermDocumentMatrix(crude, control = list(stopwords = TRUE)))
+Filter(tdm_in, 5)
+
+(dtm_in <- DocumentTermMatrix(crude, control = list(stopwords = TRUE)))
+Filter(dtm_in, 5)
+
+## Filter particular words based on max/min values in wfm
+v <- with(DATA, wfm(state, list(sex, adult)))
+Filter(dtm_in, 5, 7)
+Filter(dtm_in, 4, 4)
+Filter(tdm_in, 3, 4)
+Filter(tdm_in, 3, 4, stopwords = Top200Words)
 }
 }
 \seealso{

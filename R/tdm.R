@@ -299,6 +299,23 @@
 #'     top = 5, stopwords = Top100Words)
 #' apply_as_df(reuters, dispersion_plot, match.terms = finds[, 1],
 #'     total.color = NULL)
+#'     
+#' ## Filter for Term Document Matrix/Document Term Matrix
+#' library(tm)
+#' data(crude)
+#' 
+#' (tdm_in <- TermDocumentMatrix(crude, control = list(stopwords = TRUE)))
+#' Filter(tdm_in, 5)
+#' 
+#' (dtm_in <- DocumentTermMatrix(crude, control = list(stopwords = TRUE)))
+#' Filter(dtm_in, 5)
+#' 
+#' ## Filter particular words based on max/min values in wfm
+#' v <- with(DATA, wfm(state, list(sex, adult)))
+#' Filter(dtm_in, 5, 7)
+#' Filter(dtm_in, 4, 4)
+#' Filter(tdm_in, 3, 4)
+#' Filter(tdm_in, 3, 4, stopwords = Top200Words)
 #' }
 tdm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
@@ -753,6 +770,47 @@ apply_as_df <- function(tm.corpus, qdapfun, ..., stopwords = NULL,
             with(dat, qdapfun(text.var = text, ...))
         }
     }
+
+}
+
+
+#' Filter
+#' 
+#' \code{Filter.TermDocumentMatrix} - Filter words from a TermDocumentMatrix vector that meet 
+#' max/min word length criteria.
+#' 
+#' TermDocumentMatrix Method for Filter
+#' @rdname Filter
+#' @export
+#' @method Filter TermDocumentMatrix
+#' @return \code{Filter.TermDocumentMatrix} - Returns a vector of the class "TermDocumentMatrix".
+#' @return \code{Filter.wfm} - Returns a matrix of the class "wfm".
+Filter.TermDocumentMatrix <- function(x, min = 1, max = Inf, count.apostrophe = TRUE, 
+    stopwords = NULL, ignore.case = TRUE, ...) {
+   
+    tdm(Filter(as.wfm(x), min = min, max = max, 
+        count.apostrophe = count.apostrophe, 
+        stopwords = stopwords, ignore.case = ignore.case, ...))
+
+}
+
+#' Filter
+#' 
+#' \code{Filter.DocumentTermMatrix} - Filter words from a DocumentTermMatrix 
+#' that meet max/min word length criteria.
+#' 
+#' DocumentTermMatrix Method for Filter
+#' @rdname Filter
+#' @export
+#' @method Filter DocumentTermMatrix
+#' @return \code{Filter.DocumentTermMatrix} - Returns a vector of the class "DocumentTermMatrix".
+#' @return \code{Filter.wfm} - Returns a matrix of the class "wfm".
+Filter.DocumentTermMatrix <- function(x, min = 1, max = Inf, 
+    count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...) {
+   
+    dtm(Filter(as.wfm(x), min = min, max = max, 
+        count.apostrophe = count.apostrophe, 
+        stopwords = stopwords, ignore.case = ignore.case, ...))
 
 }
 

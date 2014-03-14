@@ -17,6 +17,23 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
+<b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.2
+----------------------------------------------------------------
+
+<b>BUG FIXES</b>
+
+<b>NEW FEATURES</b>
+
+<b>MINOR FEATURES</b>
+
+* `DocumentTermMatrix` and `TermDocumentMatrix` from the tm package pick up a 
+  `Filter` method.
+
+IMPROVEMENTS
+
+<b>CHANGES</b>
+
+
 <b>CHANGES</b> IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.1
 ----------------------------------------------------------------
 

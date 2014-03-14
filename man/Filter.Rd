@@ -1,8 +1,16 @@
-\name{Filter}
+\name{Filter.TermDocumentMatrix}
 \alias{Filter}
+\alias{Filter.DocumentTermMatrix}
+\alias{Filter.TermDocumentMatrix}
 \alias{Filter.character}
 \title{Filter}
 \usage{
+\method{Filter}{TermDocumentMatrix}(x, min = 1, max = Inf,
+  count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...)
+
+\method{Filter}{DocumentTermMatrix}(x, min = 1, max = Inf,
+  count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...)
+
 Filter(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL,
   ignore.case = TRUE, ...)
 
@@ -30,12 +38,29 @@ Filter(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL,
   methods.}
 }
 \value{
+\code{Filter.TermDocumentMatrix} - Returns a vector of the
+class "TermDocumentMatrix".
+
+\code{Filter.wfm} - Returns a matrix of the class "wfm".
+
+\code{Filter.DocumentTermMatrix} - Returns a vector of the
+class "DocumentTermMatrix".
+
+\code{Filter.wfm} - Returns a matrix of the class "wfm".
+
 \code{Filter.character} - Returns a vector of the class
 "character".
 
 \code{Filter.wfm} - Returns a matrix of the class "wfm".
 }
 \description{
+\code{Filter.TermDocumentMatrix} - Filter words from a
+TermDocumentMatrix vector that meet max/min word length
+criteria.
+
+\code{Filter.DocumentTermMatrix} - Filter words from a
+DocumentTermMatrix that meet max/min word length criteria.
+
 \code{Filter} - Filter words from various objects that meet
 max/min word length criteria.
 
@@ -43,6 +68,10 @@ max/min word length criteria.
 vector that meet max/min word length criteria.
 }
 \details{
+TermDocumentMatrix Method for Filter
+
+DocumentTermMatrix Method for Filter
+
 character Method for Filter
 }
 \note{

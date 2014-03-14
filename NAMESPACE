@@ -1,3 +1,5 @@
+S3method(Filter,DocumentTermMatrix)
+S3method(Filter,TermDocumentMatrix)
 S3method(Filter,character)
 S3method(Filter,default)
 S3method(Filter,wfm)
