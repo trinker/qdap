@@ -38,15 +38,11 @@ Filter(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL,
   methods.}
 }
 \value{
-\code{Filter.TermDocumentMatrix} - Returns a vector of the
+\code{Filter.TermDocumentMatrix} - Returns a matrix of the
 class "TermDocumentMatrix".
 
-\code{Filter.wfm} - Returns a matrix of the class "wfm".
-
-\code{Filter.DocumentTermMatrix} - Returns a vector of the
+\code{Filter.DocumentTermMatrix} - Returns a matrix of the
 class "DocumentTermMatrix".
-
-\code{Filter.wfm} - Returns a matrix of the class "wfm".
 
 \code{Filter.character} - Returns a vector of the class
 "character".

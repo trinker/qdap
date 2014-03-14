@@ -783,8 +783,7 @@ apply_as_df <- function(tm.corpus, qdapfun, ..., stopwords = NULL,
 #' @rdname Filter
 #' @export
 #' @method Filter TermDocumentMatrix
-#' @return \code{Filter.TermDocumentMatrix} - Returns a vector of the class "TermDocumentMatrix".
-#' @return \code{Filter.wfm} - Returns a matrix of the class "wfm".
+#' @return \code{Filter.TermDocumentMatrix} - Returns a matrix of the class "TermDocumentMatrix".
 Filter.TermDocumentMatrix <- function(x, min = 1, max = Inf, count.apostrophe = TRUE, 
     stopwords = NULL, ignore.case = TRUE, ...) {
    
@@ -803,8 +802,7 @@ Filter.TermDocumentMatrix <- function(x, min = 1, max = Inf, count.apostrophe = 
 #' @rdname Filter
 #' @export
 #' @method Filter DocumentTermMatrix
-#' @return \code{Filter.DocumentTermMatrix} - Returns a vector of the class "DocumentTermMatrix".
-#' @return \code{Filter.wfm} - Returns a matrix of the class "wfm".
+#' @return \code{Filter.DocumentTermMatrix} - Returns a matrix of the class "DocumentTermMatrix".
 Filter.DocumentTermMatrix <- function(x, min = 1, max = Inf, 
     count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...) {
    
