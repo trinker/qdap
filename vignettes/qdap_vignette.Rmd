@@ -1393,7 +1393,7 @@ The following example will visualize the presidential debates data as a network 
 
 <p id="plotadj2">`r FT(orange, 5, text="&diams;")` <b>Plotting an Adjacency Matrix</b>: <em>Example 2</em>`r FT(orange, 5, text="&diams;")`</p>
 
-```{r}
+```{r warning=FALSE}
 library(igraph)
 
 ## Subset the presidential debates data set
@@ -1462,8 +1462,8 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="ngrams"> - `r HR("#ngram", "Generate ngrams")`
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/stopwords.html" target="_blank">
-    <input type="submit" value="stopwords"> - `r HR("#stopwords", "Remove Stopwords")`
+<form action="http://trinker.github.io/qdap_dev/rm_stopwords.html" target="_blank">
+    <input type="submit" value="rm_stopwords"> - `r HR("#stopwords", "Remove Stopwords")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/strip.html" target="_blank">
@@ -1538,7 +1538,7 @@ print(xtable(x), type="html")
   <TR> <TD align="right"> 5 </TD> <TD> imperative.R                  </TD> <TD> - </TD> <TD> 3 </TD> <TD> - </TD> </TR>
   <TR> <TD align="right"> 6 </TD> <TD> ngrams.R                      </TD> <TD> 1 </TD> <TD> - </TD> <TD> - </TD> </TR>
   <TR> <TD align="right"> 7 </TD> <TD> polarity.R                    </TD> <TD> 2 </TD> <TD> - </TD> <TD> - </TD> </TR>
-  <TR> <TD align="right"> 8 </TD> <TD> stopwords.R                   </TD> <TD> 1 </TD> <TD> 3 </TD> <TD> - </TD> </TR>
+  <TR> <TD align="right"> 8 </TD> <TD> rm_stopwords.R                   </TD> <TD> 1 </TD> <TD> 3 </TD> <TD> - </TD> </TR>
   <TR> <TD align="right"> 9 </TD> <TD> textLISTER.R                  </TD> <TD> - </TD> <TD> - </TD> <TD> 2 </TD> </TR>
   <TR> <TD align="right"> 10 </TD> <TD> trans_cloud.R                 </TD> <TD> 1 </TD> <TD> 1 </TD> <TD> - </TD> </TR>
   <TR> <TD align="right"> 11 </TD> <TD> wfm.R                         </TD> <TD> 1 </TD> <TD> - </TD> <TD> - </TD> </TR>
@@ -1610,7 +1610,7 @@ lapply(out[["all_n"]], function(x) sapply(x, paste, collapse = " "))
 
 <h4 id="stopwords">Remove Stopwords</h4>
 
-In analyzing discourse it may be helpful to remove certain words from the analysis as the words may not be meaningful or may overshadow the impact of other words.  The `r FUN("stopwords")` function can be utilized to remove `r HR2("http://nlp.stanford.edu/IR-book/html/htmledition/dropping-common-terms-stop-words-1.html", "stopwords")` from the dialogue before passing to further analysis.  It should be noted that many functions have a stopwords argument that allows for the removal of the stopwords within the function environment rather than altering the text in the primary discourse dataframe.  Careful researcher consideration must be given as to the functional impact of removing words from an analysis.
+In analyzing discourse it may be helpful to remove certain words from the analysis as the words may not be meaningful or may overshadow the impact of other words.  The `r FUN("rm_stopwords")` function can be utilized to remove `r HR2("http://nlp.stanford.edu/IR-book/html/htmledition/dropping-common-terms-stop-words-1.html", "rm_stopwords")` from the dialogue before passing to further analysis.  It should be noted that many functions have a stopwords argument that allows for the removal of the stopwords within the function environment rather than altering the text in the primary discourse dataframe.  Careful researcher consideration must be given as to the functional impact of removing words from an analysis.
 
 `r FT(orange, 5, text="&diams;")` **Stopword Removal Examples**`r FT(orange, 5, text="&diams;")`
 
@@ -5305,6 +5305,10 @@ The following dictionaries/word lists are utilized by qdap (click to view more)
     <input type="submit" value="DICTIONARY"> - Nettalk Corpus Syllable Data Set
 </form>
 
+<form action="http://trinker.github.io/qdapDictionaries/Dolch.html" target="_blank" ">
+    <input type="submit" value="Dolch"> - Dolch's list of 220 Most Commonly Used Words
+</form>
+
 <form action="http://trinker.github.io/qdapDictionaries/emoticon.html" target="_blank" ">
     <input type="submit" value="emoticon"> - Emoticons Data Set
 </form>
@@ -5317,6 +5321,10 @@ The following dictionaries/word lists are utilized by qdap (click to view more)
     <input type="submit" value="env.syn"> - Syllable Lookup Environment
 </form>
 
+<form action="http://trinker.github.io/qdapDictionaries/Fry_1000" target="_blank" ">
+    <input type="submit" value="Fry_1000"> - Fry's 1000 Most Frequent Words
+</form>
+
 <form action="http://trinker.github.io/qdapDictionaries/increase.amplification.words.html" target="_blank" ">
     <input type="submit" value="increase.amplification.words"> - Amplifying Words
 </form>
@@ -5327,6 +5335,10 @@ The following dictionaries/word lists are utilized by qdap (click to view more)
 
 <form action="http://trinker.github.io/qdapDictionaries/labMT.html" target="_blank" ">
     <input type="submit" value="labMT"> - Language Assessment by Mechanical Turk (labMT) Sentiment Words
+</form>
+
+<form action="http://trinker.github.io/qdapDictionaries/Leveled_Dolch.html" target="_blank" ">
+    <input type="submit" value="Leveled_Dolch"> - Leveled Dolch List
 </form>
 
 <form action="http://trinker.github.io/qdapDictionaries/NAMES.html" target="_blank" ">

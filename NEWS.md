@@ -31,6 +31,12 @@ And constructed with the following guidelines:
 
 IMPROVEMENTS
 
+* `multigsub` picks up an argument, `order.pattern`, to prevent substrings from 
+  replacing meta-strings.
+
+* The following data sets were added to <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>Dictionaries package: 
+    `Fry_1000`, `Leveled_Dolch`, `Dolch`
+
 <b>CHANGES</b>
 
 

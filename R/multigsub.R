@@ -15,11 +15,13 @@
 #' Overrides all conflicting arguments.
 #' @param trim logical.  If \code{TRUE} leading and trailing white spaces are 
 #' removed.
+#' @param order.pattern logical.  If \code{TRUE} and \code{fixed = TRUE}, the 
+#' \code{pattern} string is sorted by number of characters to prevent substrings 
+#' replacing meta strings (e.g., \code{pattern = c("the", "then")} resorts to 
+#' search for "then" first).
 #' @param \dots Additional arguments passed to \code{\link[base]{gsub}}.
 #' @rdname multigsub
 #' @return Returns a vector with the pattern replaced.
-#' @note The replacements occur sequentially rather than all at once.  This 
-#' means a previous (first in pattern string) sub could alter a later sub.
 #' @seealso \code{\link[base]{gsub}}
 #' @export
 #' @examples
@@ -30,13 +32,24 @@
 #' }
 multigsub <-
 function(pattern, replacement = NULL, text.var, leadspace = FALSE, 
-    trailspace = FALSE, fixed = TRUE, trim = TRUE, ...){
+    trailspace = FALSE, fixed = TRUE, trim = TRUE, order.pattern = fixed, ...){
+
     if (leadspace | trailspace) {
         replacement <- spaste(replacement, trailing = trailspace, 
             leading = leadspace)
     }
+
+    ## replaces the larger n character words first
+    if (fixed && order.pattern) {
+        if (!is.null(replacement)) {
+            replacement <- replacement[rev(order(nchar(pattern)))]
+        }
+        pattern <- pattern[rev(order(nchar(pattern)))]
+    }
+
     key <- data.frame(pat=pattern, rep=replacement, 
         stringsAsFactors = FALSE)
+
     msubs <-function(K, x, trim, ...){
         sapply(seq_len(nrow(K)), function(i){
                 x <<- gsub(K[i, 1], K[i, 2], x, fixed = fixed, ...)
@@ -45,13 +58,17 @@ function(pattern, replacement = NULL, text.var, leadspace = FALSE,
         if (trim) x <- gsub(" +", " ", x)
         return(x)
     }
+
     if (trim) {
         x <- Trim(msubs(K=key, x=text.var, trim = trim, ...))
     } else {    
         x <- msubs(K=key, x=text.var, trim = trim, ...)
     }
+
     return(x)
 }
+
+
 #' @rdname multigsub
 #' @export
 mgsub <- multigsub

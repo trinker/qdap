@@ -31,6 +31,12 @@ MINOR FEATURES
 
 IMPROVEMENTS
 
+* `multigsub` picks up an argument, `order.pattern`, to prevent substrings from 
+  replacing meta-strings.
+
+* The following data sets were added to qdapDictionaries package: 
+    `Fry_1000`, `Leveled_Dolch`, `Dolch`
+
 CHANGES
 
 

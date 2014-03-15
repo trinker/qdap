@@ -4,10 +4,12 @@
 \title{Multiple gsub}
 \usage{
 multigsub(pattern, replacement = NULL, text.var, leadspace = FALSE,
-  trailspace = FALSE, fixed = TRUE, trim = TRUE, ...)
+  trailspace = FALSE, fixed = TRUE, trim = TRUE, order.pattern = fixed,
+  ...)
 
 mgsub(pattern, replacement = NULL, text.var, leadspace = FALSE,
-  trailspace = FALSE, fixed = TRUE, trim = TRUE, ...)
+  trailspace = FALSE, fixed = TRUE, trim = TRUE, order.pattern = fixed,
+  ...)
 }
 \arguments{
   \item{pattern}{Character string to be matched in the
@@ -32,6 +34,12 @@ mgsub(pattern, replacement = NULL, text.var, leadspace = FALSE,
   \item{trim}{logical.  If \code{TRUE} leading and trailing
   white spaces are removed.}
 
+  \item{order.pattern}{logical.  If \code{TRUE} and
+  \code{fixed = TRUE}, the \code{pattern} string is sorted
+  by number of characters to prevent substrings replacing
+  meta strings (e.g., \code{pattern = c("the", "then")}
+  resorts to search for "then" first).}
+
   \item{\dots}{Additional arguments passed to
   \code{\link[base]{gsub}}.}
 }
@@ -42,11 +50,6 @@ Returns a vector with the pattern replaced.
 A wrapper for \code{\link[base]{gsub}} that takes a vector
 of search terms and a vector or single value of
 replacements.
-}
-\note{
-The replacements occur sequentially rather than all at
-once.  This means a previous (first in pattern string) sub
-could alter a later sub.
 }
 \examples{
 \dontrun{

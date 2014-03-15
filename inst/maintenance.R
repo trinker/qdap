@@ -46,7 +46,7 @@ incoming <- file.path(file, "qdap_dev")
 delete(incoming)
 file.copy(path, file, TRUE, TRUE)
 file.rename(file.path(file, "web"), incoming)
-delete(path)
+## delete(path)
 #==========================
 #staticdocs current version
 #==========================

@@ -36,10 +36,12 @@
 #' 
 #' ## Supply a named list of vectors to key.match
 #' 
-#' codes <- list(A=c(1, 2, 4), 
+#' codes <- list(
+#'     A = c(1, 2, 4), 
 #'     B = c(3, 5),
 #'     C = 7,
-#'     D = c(6, 8:10))
+#'     D = c(6, 8:10)
+#' )
 #' 
 #' lookup(1:10, codes)
 #' 
@@ -51,6 +53,20 @@
 #' lookup(mtcars$carb, sort(unique(mtcars$carb)),        
 #'     seq(10, 60, by=10))
 #'     
+#' ## A big string to recode with variation
+#' ## means a bigger dictionary
+#' recode_me <- sample(1:(length(LETTERS)*10), 1000000, TRUE)
+#' 
+#' ## Time it
+#' tic <- Sys.time()  
+#' 
+#' output <- recode_me %l% split(1:(length(LETTERS)*10), LETTERS)
+#' difftime(Sys.time(), tic)
+#' 
+#' ## view it
+#' sample(output, 100)
+#' 
+#' 
 #' ## %l%, a binary operator version of lookup
 #' 1:5 %l% data.frame(1:4, 11:14)
 #' 1:10 %l% codes
