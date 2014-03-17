@@ -69,7 +69,7 @@ syn_dat <- list(
 )
 
 synonyms_frame(syn_dat)
-synonyms_frame(syn_dat, return.hash=FALSE)
+synonyms_frame(syn_dat, envir=FALSE)
 syn(c("R", "show"), synonym.frame = syn_frame(syn_dat))
 
 syns.hash <- syn_frame(syn_dat, prior.frame = SYNONYM)
