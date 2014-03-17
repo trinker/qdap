@@ -17,14 +17,14 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
-&lt;b&gt;CHANGES&lt;/b&gt; IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.3
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.3
 ----------------------------------------------------------------
 
-&lt;b&gt;BUG FIXES&lt;/b&gt;
+**BUG FIXES**
 
-&lt;b&gt;NEW FEATURES&lt;/b&gt;
+**NEW FEATURES**
 
-&lt;b&gt;MINOR FEATURES&lt;/b&gt;
+**MINOR FEATURES**
 
 * `synonyms_frame` (`syn_frame`) added to allow the user to create a synonym
   hash for the revamped `synonyms` function.
@@ -43,22 +43,22 @@ IMPROVEMENTS
   a synonym hash table.  This can br created via the `synonyms_frame` function
   (per a request from J. Aravind).
 
-&lt;b&gt;CHANGES&lt;/b&gt;
+**CHANGES**
 
 
-&lt;b&gt;CHANGES&lt;/b&gt; IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.2
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.2
 ----------------------------------------------------------------
 
 This is a patch release to address the archiving of the `lsa` package.
 
 
-&lt;b&gt;BUG FIXES&lt;/b&gt;
+**BUG FIXES**
 
 * The **qdap-tm Package Compatibility** Vignette contained an error in the 
   Feinerer I, Hornik K, Meyer D (2008) reference (pages listed as 51-54 has been 
   corrected to pages 1-54 as well as incorrect journal). Caught by Kurt Hornik.
 
-&lt;b&gt;MINOR FEATURES&lt;/b&gt;
+**MINOR FEATURES**
 
 * `DocumentTermMatrix` and `TermDocumentMatrix` from the tm package pick up a 
   `Filter` method.
@@ -71,26 +71,26 @@ IMPROVEMENTS
 * The following data sets were added to <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>Dictionaries package: 
     `Fry_1000`, `Leveled_Dolch`, `Dolch`
 
-&lt;b&gt;CHANGES&lt;/b&gt;
+**CHANGES**
 
 * The package `lsa` has been removed from Suggests field int he DESCRIPTIONN 
   file, examples, and vignettes.
 
 
-&lt;b&gt;CHANGES&lt;/b&gt; IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.1
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.1
 ----------------------------------------------------------------
 
 A version bump necessary for Re-Submission to CRAN.  
 
-&lt;b&gt;CHANGES&lt;/b&gt;
+**CHANGES**
 
 * `new_project` was reconfigured with the old code that does not require the 
   newest version of the reports package.
 
-&lt;b&gt;CHANGES&lt;/b&gt; IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.0
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.0
 ----------------------------------------------------------------
 
-&lt;b&gt;BUG FIXES&lt;/b&gt;
+**BUG FIXES**
 
 * `read.transcript` could leave a QDAP_PLACE_HOLDER behind if a colon was found 
   in the person column.  This behavior has been fixed.
@@ -107,7 +107,7 @@ A version bump necessary for Re-Submission to CRAN.
 
    This behavior has been fixed.
 
-&lt;b&gt;NEW FEATURES&lt;/b&gt;
+**NEW FEATURES**
 
 * <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> adds an HTML vignette to better explain the intended work flow and 
   function use for the package.   Use `browseVignettes(package = "qdap")` to
@@ -116,7 +116,7 @@ A version bump necessary for Re-Submission to CRAN.
 * <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> adds a PDF vignette to describe the compatibility and navigation between 
   <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> and the `tm` packages. Use `browseVignettes(package = "qdap")` to open.
 
-&lt;b&gt;MINOR FEATURES&lt;/b&gt;
+**MINOR FEATURES**
 
 IMPROVEMENTS
 
@@ -138,15 +138,15 @@ IMPROVEMENTS
   data.frame columns.
 
 
-&lt;b&gt;CHANGES&lt;/b&gt;
+**CHANGES**
 
 
-&lt;b&gt;CHANGES&lt;/b&gt; IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.2.0
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.2.0
 ----------------------------------------------------------------
 
-&lt;b&gt;BUG FIXES&lt;/b&gt;
+**BUG FIXES**
 
-&lt;b&gt;NEW FEATURES&lt;/b&gt;
+**NEW FEATURES**
 
 * `Filter` added to give the ability to provide a range of character 
   lengths to filter from a `wfm` object.
@@ -164,7 +164,7 @@ IMPROVEMENTS
 * `apply_as_df` added to allow the user to apply <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> functions to a Corpus 
   directly.
 
-&lt;b&gt;MINOR FEATURES&lt;/b&gt;
+**MINOR FEATURES**
 
 * `tm_corpus2wfm` added to quickly convert from a tm package `Corpus` to a <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>
   `wfm` object.
@@ -192,25 +192,25 @@ IMPROVEMENTS
 * `read.transcript` now handles multiple character spaces as an argument to 
   `sep` when `text` argument is used.
 
-&lt;b&gt;CHANGES&lt;/b&gt;
+**CHANGES**
 
 * `dissimilarity` has been renamed to `Dissimilarity` to prevent tm package 
   conflicts.  The old version has been deprecated and will be removed in a the
   next version (minor or major) push to CRAN.
 
 
-&lt;b&gt;CHANGES&lt;/b&gt; IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.1.0
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.1.0
 ----------------------------------------------------------------
 
 A version bump necessary for Re-Submission to CRAN.  
 
-&lt;b&gt;CHANGES&lt;/b&gt;
+**CHANGES**
 
 * Downgraded the version requirement for the reports package to 
   reports (&gt;= 0.1.2) in order to upload to CRAN.  reports (&gt;= 0.2.0) is not yet
   available on CRAN.
 
-&lt;b&gt;CHANGES&lt;/b&gt; IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.0.0
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.0.0
 ----------------------------------------------------------------
 
 The word lists and dictionaries in `qdap` have been moved to `qdapDictionaries`. 
@@ -223,7 +223,7 @@ removal, however, the number of necessary changes in light of <a href="https://g
 relatively new to CRAN, made these changes sensible at this point.
 
 
-&lt;b&gt;BUG FIXES&lt;/b&gt;
+**BUG FIXES**
 
 * `qheat`'s  argument `by.column = FALSE` resulted in an error.  This behavior 
   has been fixed.
@@ -286,7 +286,7 @@ relatively new to CRAN, made these changes sensible at this point.
 * `formality` threw an error for vectors of length 1.  This has been fixed. (Kurt 
   Hornik) See GitHub <a href="https://github.com/trinker/qdap/issues/151">issue #151</a> for details.
 
-&lt;b&gt;NEW FEATURES&lt;/b&gt;
+**NEW FEATURES**
 
 *  The `cm_xxx2long` family of functions (`cm_df2long`, `cm_range2long` and 
   `cm_time2long`) now have a generic wrapper, `cm_2long`, to generate the long
@@ -346,7 +346,7 @@ relatively new to CRAN, made these changes sensible at this point.
   functions.  `word_proximity` gives the average distance between words in 
   the unit of sentences.
 
-&lt;b&gt;MINOR FEATURES&lt;/b&gt;
+**MINOR FEATURES**
 
 * `url_dl` now takes quoted string urls supplied to ... (no url argument is 
   supplied)
@@ -436,7 +436,7 @@ relatively new to CRAN, made these changes sensible at this point.
 * `matrix2df` added (under `list2df`) to convert rownnames of matrix to a 
   dataframe column.
 
-&lt;b&gt;CHANGES&lt;/b&gt;
+**CHANGES**
 
 * The dictionaries and word lists for <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> have been moved to their own package, 
   `qdapDictionaries`.  This will allow easier access to these resources beyond 
@@ -491,7 +491,7 @@ relatively new to CRAN, made these changes sensible at this point.
   This makes use easier as the user doesn't need to remember arguments.
 
 
-&lt;b&gt;CHANGES&lt;/b&gt; IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.5
 ----------------------------------------------------------------
 
 Patch release.  This version deals with the changes in the `openNLP` package 
@@ -500,7 +500,7 @@ Patch release.  This version deals with the changes in the `openNLP` package
 
 qdap 0.2.3
 ----------------------------------------------------------------
-&lt;b&gt;BUG FIXES&lt;/b&gt;
+**BUG FIXES**
 
 * `new_project` placed a report in the CORRESPONDENCE directory rather than 
   CONTACT_INFO
@@ -513,7 +513,7 @@ qdap 0.2.3
   `beg2char(c("abc-edw-www", "nmn-ggg", "rer-qqq-fdf"), "-", 2)` resulted in
   "abc-e" "nmn-g" "rer-q" rather than "abc-edw" "nmn-ggg" "rer-qqq"
 
-&lt;b&gt;NEW FEATURES&lt;/b&gt;
+**NEW FEATURES**
 
 * `names2sex` a function for predicting gender from name.
 
@@ -522,23 +522,23 @@ qdap 0.2.3
 * `tdm` added as an equivalent to TermDocumentMatrix from the tm package.  This 
   allows for portability across text analysis packages.
 
-&lt;b&gt;MINOR FEATURES&lt;/b&gt;
+**MINOR FEATURES**
 
 * `mgsub` now gets a `trim` argument that optionally removes trailing leading 
   white spaces.
 
 * `lookup` now takes a list of named vectors for the key.match argument.
 
-&lt;b&gt;CHANGES&lt;/b&gt;
+**CHANGES**
 
 * `new_project` directory can now be transferred without breaking paths (i.e.,
   `file.path(getwd(), "DIR/file.ext")` is used rather than the full file path).
 
 
-&lt;b&gt;CHANGES&lt;/b&gt; IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.2
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.2
 ----------------------------------------------------------------
 
-&lt;b&gt;BUG FIXES&lt;/b&gt;
+**BUG FIXES**
 
 * `genXtract` labels returned the word "right" rather than the right edge string.
   See <a href="http://stackoverflow.com/a/15423439/1000343" target="_blank">http://stackoverflow.com/a/15423439/1000343</a> for an example of the old 
@@ -552,7 +552,7 @@ qdap 0.2.3
   if an unnamed multi-length vector was passed to `match.list`.  This behavior has 
   been fixed.
 
-&lt;b&gt;NEW FEATURES&lt;/b&gt;
+**NEW FEATURES**
 
 * `tot_plot` a visualizing function that uses a bar graph to visualize patterns 
   in sentence length and grouping variables by turn of talk.
@@ -562,7 +562,7 @@ qdap 0.2.3
 
 * `ngrams` function to calculate ngrams by grouping variable.
 
-&lt;b&gt;MINOR FEATURES&lt;/b&gt;
+**MINOR FEATURES**
 
 * `genX` and `bracketX` gain an extra argument `space.fix` to remove extra 
   spaces left over from bracket removal.
@@ -570,15 +570,15 @@ qdap 0.2.3
 * Updated out of date dropbox url download in `url_dl`.  `url_dl` also takes the 
   dropbox key as well.
 
-&lt;b&gt;CHANGES&lt;/b&gt;
+**CHANGES**
 
 * <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> is now compiled for mac users (as openNLP now passes CRAN checks with no
   Errors on Mac).
 
-&lt;b&gt;CHANGES&lt;/b&gt; IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.1
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.1
 ----------------------------------------------------------------
 
-&lt;b&gt;BUG FIXES&lt;/b&gt;
+**BUG FIXES**
 
 * `word_associate` colors the word cloud appropriately and deals with the error 
   caused by a grouping variable not containing any words from 1 or more of the 
@@ -593,7 +593,7 @@ qdap 0.2.3
 
 * `cm_df.transcript` did not give the correct speaker labels (fixed).
 
-&lt;b&gt;NEW FEATURES&lt;/b&gt;
+**NEW FEATURES**
 
 * `gradient_cloud`: Binary gradient Word Cloud - A new plotting function 
   that plots and colors words for a binary variable based on which group of 
@@ -606,7 +606,7 @@ qdap 0.2.3
   to generate an extensive reports folder.
 
 
-&lt;b&gt;MINOR FEATURES&lt;/b&gt;
+**MINOR FEATURES**
 
 * `stemmer`, `stem2df` and `stem.words` now explicitly have the argument 
   `char.keep` set to "~~" to enable retaining special character formerly stripped 
@@ -623,7 +623,7 @@ qdap 0.2.3
 
 * `read.transcript` now reads .txt files as well as text similar to read.table.
 
-&lt;b&gt;CHANGES&lt;/b&gt;
+**CHANGES**
 
 * `sec2hms` is the new name for `convert` 
 
@@ -632,7 +632,7 @@ qdap 0.2.3
   time/date stamp if no directory name was given; this has been fixed, though 
   the function now resides in the reports package.
 
-&lt;b&gt;CHANGES&lt;/b&gt; IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.0
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.0
 ----------------------------------------------------------------
 
 * The first installation of the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package
