@@ -40,8 +40,8 @@ syn_frame(synonym.list, envir = TRUE, prior.frame)
   dataframe within an environment) is produced rather than
   a data.frame.}
 
-  \item{A}{prior synonyms data.frame in the format produced
-  by \code{synonym_frame}}
+  \item{prior.frame}{A prior synonyms data.frame in the
+  format produced by \code{synonym_frame}}
 }
 \value{
 Returns a list of vectors or vector of possible words that

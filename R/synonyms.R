@@ -95,7 +95,7 @@ syn <- synonyms
 #' @param synonym.list A named list of lists (or vectos) of synonyms.
 #' @param envir logical.  If \code{TRUE} a lookup table (a dataframe within 
 #' an environment) is produced rather than a data.frame.
-#' @param A prior synonyms data.frame in the format produced by \code{synonym_frame}
+#' @param prior.frame A prior synonyms data.frame in the format produced by \code{synonym_frame}
 #' @export
 #' @rdname synonyms
 synonyms_frame <- function(synonym.list, envir = TRUE, prior.frame) {
