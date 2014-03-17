@@ -38,7 +38,6 @@ Suggests:
     knitcitations,
     knitr,
     lda,
-    lsa,
     plyr,
     proxy,
     Rgraphviz,

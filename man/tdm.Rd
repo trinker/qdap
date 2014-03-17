@@ -183,11 +183,6 @@ pres
 (pres2 <- removeSparseTerms(pres, .3))
 plot(pres2, corThreshold = 0.95)
 
-## Latent Semantic Analysis
-library(lsa)
-lsa(tdm(x), dims=dimcalc_share())
-lsa(tdm(DATA$state, DATA$person), dims=dimcalc_share())
-
 shorts <- all_words(pres_debates2012)[,1][nchar(all_words(
     pres_debates2012)[,1]) < 4]
 
@@ -198,19 +193,6 @@ SW <- c(shorts, qdapDictionaries::contractions[, 1],
 DocTermMat2 <- with(pres_debates2012, dtm(dialogue, list(person, time), stopwords = SW))
 DocTermMat2 <- removeSparseTerms(DocTermMat2,0.95)
 DocTermMat2 <- DocTermMat2[rowSums(as.matrix(DocTermMat2))> 0,]
-
-out <- lsa(DocTermMat2, 6)
-out$tk
-out2 <- colsplit2df(matrix2df(out$tk), new.names = qcv(Person, Time))
-out2$Person <- factor(out2$Person,
-    levels = names(sort(colSums(with(pres_debates2012,
-        wfm(dialogue, person, stopwords = SW))), TRUE))
-)
-colnames(out2) <- gsub("X", "Topic ", colnames(out2))
-
-qheat(out2, facet.vars = "Time", high="darkgreen", plot=FALSE) +
-    theme(legend.title=element_blank()) +
-    guides(fill = guide_colorbar(barwidth = .5, barheight = 12))
 
 ## Correspondence Analysis
 library(ca)

@@ -89,7 +89,7 @@ incoming <- file.path(file, "qdap")
 delete(incoming)
 file.copy(path, file, TRUE, TRUE)
 file.rename(file.path(file, "web"), incoming)
-delete(path2)
+#delete(path2)
 
 #==========================
 #move project directions

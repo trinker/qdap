@@ -17,9 +17,8 @@ Feinerer I, Hornik K (2014).
 \bibitem[{Feinerer \emph{et~al.}(2008)Feinerer, Hornik, and
   Meyer}]{Feinerer2008}
 Feinerer I, Hornik K, Meyer D (2008).
-\newblock \enquote{Text Mining Infrastructure in R. Journal of Statistical
-  Software.}
-\newblock \emph{Language and Education}, \textbf{25}(5), 51 -- 54.
+\newblock \enquote{Text Mining Infrastructure in R.}
+\newblock \emph{Journal of Statistical Software}, \textbf{25}(5), 1 -- 54.
 \newblock \urlprefix\url{http://www.jstatsoft.org/v25/i05/}.
 
 \bibitem[{{R Core Team}(2013)}]{R-core}

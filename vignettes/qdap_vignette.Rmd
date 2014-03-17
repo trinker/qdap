@@ -3017,7 +3017,7 @@ plot3d.ca(fit2, labels=1)
 
 <h5 id="tdm"><font color="green">Convert/Generate Term Document Matrix or Document Term Matrix</font></h5>
 
-Some packages that could further the analysis of qdap expect a Document Term or Term Document Matrix.  qdap's `r FUN("wfm", "Word_Frequency_Matrix")` is similar to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package's")` `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "TermDocumentMatrix")`     and `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "DocumentTermMatrix")`.  qdap does not try to replicate the extensive work of the`r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm")` package, however, the `r FUN("tdm")` and `r FUN("dtm", "tdm")` do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.
+Some packages that could further the analysis of qdap expect a Document Term or Term Document Matrix.  qdap's `r FUN("wfm", "Word_Frequency_Matrix")` is similar to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package's")` `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "TermDocumentMatrix")`     and `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "DocumentTermMatrix")`.  qdap does not try to replicate the extensive work of the`r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm")` package, however, the `r FUN("tdm")` and `r FUN("dtm", "tdm")` do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.  For a vignette describing qdap-tm compatability use `browseVignettes(package = "qdap")` or `\r HR2("http://cran.r-project.org/web/packages/qdap/vignettes/tm_package_compatibility.pdf, "Click Here")`.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("tdm")` Use** `r FT(orange, 5, text="&diams;")`
 
@@ -3030,71 +3030,73 @@ tdm(x)
 dtm(x)
 ```
 
-```{r eval =  FALSE}
-## Run Latent Semantic Analysis
-library(lsa)
-lsa(tdm(x), dims=dimcalc_share())
+```{r rval=FALSE, echoh=FALSE, include=FALSE}
+## ```{r eval =  FALSE}
+## ## Run Latent Semantic Analysis
+## library(lsa)
+## lsa(tdm(x), dims=dimcalc_share())
+## ```
+## 
+## 
+## <pre><code>$tk
+##                  [,1]         [,2]
+## about    -0.021153126  0.072269368
+## already  -0.169239530 -0.124825133
+## am       -0.169239530 -0.124825133
+## are      -0.021153126  0.072269368
+## be       -0.021153126  0.072269368
+## can      -0.021153126  0.072269368
+## certain  -0.021153126  0.072269368
+## computer -0.090637878  0.215786300
+## distrust -0.090637878  0.215786300
+## do       -0.001903917  0.014326564
+## dumb     -0.169239530 -0.124825133
+## eat      -0.169239530 -0.124825133
+## fun      -0.181275756  0.431572601
+## good     -0.001108363  0.009865681
+## how      -0.021153126  0.072269368
+## hungry   -0.169239530 -0.124825133
+## i        -0.259877408  0.090961168
+## i'm      -0.169239530 -0.124825133
+## is       -0.259877408  0.090961168
+## it       -0.090637878  0.215786300
+## it's     -0.338479060 -0.249650265
+## let's    -0.169239530 -0.124825133
+## liar     -0.090637878  0.215786300
+## move     -0.001108363  0.009865681
+## no       -0.338479060 -0.249650265
+## not      -0.259877408  0.090961168
+## on       -0.001108363  0.009865681
+## shall    -0.001108363  0.009865681
+## should   -0.001903917  0.014326564
+## stinks   -0.090637878  0.215786300
+## talking  -0.021153126  0.072269368
+## telling  -0.169239530 -0.124825133
+## the      -0.169239530 -0.124825133
+## then     -0.001108363  0.009865681
+## there    -0.169239530 -0.124825133
+## too      -0.090637878  0.215786300
+## truth    -0.169239530 -0.124825133
+## way      -0.169239530 -0.124825133
+## we       -0.024165406  0.096461613
+## what     -0.023057043  0.086595932
+## you      -0.371668412  0.379016836
+## 
+## $dk
+##                    [,1]        [,2]
+## greg       -0.876176894 -0.47984657
+## researcher -0.005738152  0.03792516
+## sally      -0.109512712  0.27781431
+## sam        -0.469245067  0.82951496
+## teacher    -0.009856846  0.05507346
+## 
+## $sk
+## [1] 5.177141 3.844150
+## 
+## attr(,"class")
+## [1] "LSAspace"
+## </code></pre>
 ```
-
-
-<pre><code>$tk
-                 [,1]         [,2]
-about    -0.021153126  0.072269368
-already  -0.169239530 -0.124825133
-am       -0.169239530 -0.124825133
-are      -0.021153126  0.072269368
-be       -0.021153126  0.072269368
-can      -0.021153126  0.072269368
-certain  -0.021153126  0.072269368
-computer -0.090637878  0.215786300
-distrust -0.090637878  0.215786300
-do       -0.001903917  0.014326564
-dumb     -0.169239530 -0.124825133
-eat      -0.169239530 -0.124825133
-fun      -0.181275756  0.431572601
-good     -0.001108363  0.009865681
-how      -0.021153126  0.072269368
-hungry   -0.169239530 -0.124825133
-i        -0.259877408  0.090961168
-i'm      -0.169239530 -0.124825133
-is       -0.259877408  0.090961168
-it       -0.090637878  0.215786300
-it's     -0.338479060 -0.249650265
-let's    -0.169239530 -0.124825133
-liar     -0.090637878  0.215786300
-move     -0.001108363  0.009865681
-no       -0.338479060 -0.249650265
-not      -0.259877408  0.090961168
-on       -0.001108363  0.009865681
-shall    -0.001108363  0.009865681
-should   -0.001903917  0.014326564
-stinks   -0.090637878  0.215786300
-talking  -0.021153126  0.072269368
-telling  -0.169239530 -0.124825133
-the      -0.169239530 -0.124825133
-then     -0.001108363  0.009865681
-there    -0.169239530 -0.124825133
-too      -0.090637878  0.215786300
-truth    -0.169239530 -0.124825133
-way      -0.169239530 -0.124825133
-we       -0.024165406  0.096461613
-what     -0.023057043  0.086595932
-you      -0.371668412  0.379016836
-
-$dk
-                   [,1]        [,2]
-greg       -0.876176894 -0.47984657
-researcher -0.005738152  0.03792516
-sally      -0.109512712  0.27781431
-sam        -0.469245067  0.82951496
-teacher    -0.009856846  0.05507346
-
-$sk
-[1] 5.177141 3.844150
-
-attr(,"class")
-[1] "LSAspace"
-</code></pre>
 
 
 <h4 id="termco">Search For and Count Terms</h4>
@@ -5077,7 +5079,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
-    <input type="submit" value="tm2wfm"> - `r HR("#tm2wfm", "Convert the tm package's TermDocumentMatrix/DocumentTermMatrix to wfm")`
+    <input type="submit" value="tm2wfm"> - `r HR("#as.wfm", "Convert the tm package's TermDocumentMatrix/DocumentTermMatrix to wfm")`
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
@@ -5091,7 +5093,7 @@ The following functions will be utilized in this section (click to view more):
 </div>
 
 
-The `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package")` is a heavily regarded and utilized R package for text mining purposes.  The primary data forms for the tm package are <a href="http://www.inside-r.org/packages/cran/tm/docs/Corpus"><b><font color="green", face="courier">Corpus</font></b></a> and <a href="http://www.inside-r.org/packages/cran/tm/docs/http://www.inside-r.org/packages/cran/tm/docs/TermDocumentMatrix"><b><font color="green", face="courier">TermDocumentMatrix</font></b></a>/<a href="http://www.inside-r.org/packages/cran/tm/docs/http://www.inside-r.org/packages/cran/tm/docs/TermDocumentMatrix"><b><font color="green", face="courier">DocumentTermMatrix</font></b></a>.  Because tm is a dependancy for many R text mining packages it is prudent to provide a set of tools to convert between tm and qdap data types.
+The `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package")` is a heavily regarded and utilized R package for text mining purposes.  The primary data forms for the tm package are <a href="http://www.inside-r.org/packages/cran/tm/docs/Corpus"><b><font color="green", face="courier">Corpus</font></b></a> and <a href="http://www.inside-r.org/packages/cran/tm/docs/http://www.inside-r.org/packages/cran/tm/docs/TermDocumentMatrix"><b><font color="green", face="courier">TermDocumentMatrix</font></b></a>/<a href="http://www.inside-r.org/packages/cran/tm/docs/http://www.inside-r.org/packages/cran/tm/docs/TermDocumentMatrix"><b><font color="green", face="courier">DocumentTermMatrix</font></b></a>.  Because tm is a dependancy for many R text mining packages it is prudent to provide a set of tools to convert between tm and qdap data types.  This section demos a few of the tools designed to achieve qdap-tm compatibility.  For a more thorough vignette describing qdap-tm compatability use `browseVignettes(package = "qdap")` or `\r HR2("http://cran.r-project.org/web/packages/qdap/vignettes/tm_package_compatibility.pdf, "Click Here")`.
 
 
 <h4 id="tdm">Create term document matrices or document term matrices from raw text or wfm</h4>
@@ -5417,14 +5419,13 @@ qdap is designed to be a bridge between qualitative text and the quantitative to
 2. `r HR("http://cran.r-project.org/web/packages/plyr/index.html", "plyr")`              
 3. `r HR("http://cran.r-project.org/web/packages/reshape2/index.html", "reshape2")`             
 
-<h4 id="lsa">Semantics</h4> 
+<h4 id="topics">Semantics</h4> 
 
 1. `r HR("http://cran.r-project.org/web/packages/ca/index.html", "ca")`             
-2. `r HR("http://cran.r-project.org/web/packages/lda/index.html", "lda")`                 
-3. `r HR("http://cran.r-project.org/web/packages/lsa/index.html", "lsa")`                     
-4. `r HR("http://cran.r-project.org/web/packages/mallet/index.html", "mallet")`              
-5. `r HR("http://cran.r-project.org/web/packages/textir/index.html", "textir")`                 
-6. `r HR("http://cran.r-project.org/web/packages/topicmodels/index.html", "topicmodels")`               
+2. `r HR("http://cran.r-project.org/web/packages/lda/index.html", "lda")`                              
+3. `r HR("http://cran.r-project.org/web/packages/mallet/index.html", "mallet")`              
+4. `r HR("http://cran.r-project.org/web/packages/textir/index.html", "textir")`                 
+5. `r HR("http://cran.r-project.org/web/packages/topicmodels/index.html", "topicmodels")`               
 
 <h4 id="hlm">Multi Level Modeling/Structural Equation Modeling</h4>  
 
