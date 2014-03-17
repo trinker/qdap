@@ -17,7 +17,7 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
-&lt;b&gt;CHANGES&lt;/b&gt; IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.3
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.3
 ----------------------------------------------------------------
 
 &lt;b&gt;BUG FIXES&lt;/b&gt;
