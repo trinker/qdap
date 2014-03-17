@@ -26,12 +26,22 @@ NEW FEATURES
 
 MINOR FEATURES
 
+* `synonyms_frame` (`syn_frame`) added to allow the user to create a synonym
+  hash for the revamped `synonyms` function.
+
 * `repo2github` function added to send a directory to GitHub upon first commit.
 
 IMPROVEMENTS
 
 * `new_project` has an improved directory structure and works with any version 
   of the `reports` package.
+
+* `synonyms` function used the `env.syl` hash data from qdapDictionaries 
+  internally.  This approach could cause problems if used within other functions
+  in a package.  It also limits the usability of synonyms.  The `synonyms` 
+  function picks up a `synonym.frame` argument that allows the user to specify
+  a synonym hash table.  This can br created via the `synonyms_frame` function
+  (per a request from J. Aravind).
 
 CHANGES
 

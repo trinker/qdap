@@ -1,11 +1,19 @@
 \name{synonyms}
 \alias{syn}
+\alias{syn_frame}
 \alias{synonyms}
+\alias{synonyms_frame}
 \title{Search For Synonyms}
 \usage{
-synonyms(terms, return.list = TRUE, multiwords = TRUE, report.null = TRUE)
+synonyms(terms, return.list = TRUE, multiwords = TRUE, report.null = TRUE,
+  synonym.frame = qdapDictionaries::env.syn)
 
-syn(terms, return.list = TRUE, multiwords = TRUE, report.null = TRUE)
+syn(terms, return.list = TRUE, multiwords = TRUE, report.null = TRUE,
+  synonym.frame = qdapDictionaries::env.syn)
+
+synonyms_frame(synonym.list, envir = TRUE, prior.frame)
+
+syn_frame(synonym.list, envir = TRUE, prior.frame)
 }
 \arguments{
   \item{terms}{The terms to find synonyms for.}
@@ -20,6 +28,20 @@ syn(terms, return.list = TRUE, multiwords = TRUE, report.null = TRUE)
 
   \item{report.null}{logical.  If \code{TRUE} reports the
   words that no match was found at the head of the output.}
+
+  \item{synonym.frame}{A dataframe or environment
+  containing a dataframe of positive/negative words and
+  weights.}
+
+  \item{synonym.list}{A named list of lists (or vectos) of
+  synonyms.}
+
+  \item{envir}{logical.  If \code{TRUE} a lookup table (a
+  dataframe within an environment) is produced rather than
+  a data.frame.}
+
+  \item{A}{prior synonyms data.frame in the format produced
+  by \code{synonym_frame}}
 }
 \value{
 Returns a list of vectors or vector of possible words that
@@ -27,6 +49,10 @@ match term(s).
 }
 \description{
 Search for synonyms that match term(s).
+
+\code{synonyms_frame} - Generate a synonym lookup
+environment for use with the \code{synonym.frame} argument
+in the \code{synonym} function.
 }
 \examples{
 \dontrun{
@@ -34,6 +60,20 @@ synonyms(c("the", "cat", "job", "environment", "read", "teach"))
 head(syn(c("the", "cat", "job", "environment", "read", "teach"),
     return.list = FALSE), 30)
 syn(c("the", "cat", "job", "environment", "read", "teach"), multiwords = FALSE)
+
+## User defined synonym lookup
+syn_dat <- list(
+    like = list(c("want", "desire"), c("love", "care")),
+    show = list(c("reveal"), c("movie", "opera")),
+    R = c("old friend", "statistics language")
+)
+
+synonyms_frame(syn_dat)
+synonyms_frame(syn_dat, return.hash=FALSE)
+syn(c("R", "show"), synonym.frame = syn_frame(syn_dat))
+
+syns.hash <- syn_frame(syn_dat, prior.frame = SYNONYM)
+syn(c("R", "show", "like", "robot"), synonym.frame = syns.hash)
 }
 }
 \references{

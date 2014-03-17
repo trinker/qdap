@@ -413,9 +413,6 @@ print.polarity_count <-
 
 
 
-
-
-
 #' Polarity Score (Sentiment Analysis)
 #' 
 #' \code{polarity_frame} - Generate a polarity lookup environment or data.frame 
