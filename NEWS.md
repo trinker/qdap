@@ -20,7 +20,7 @@ And constructed with the following guidelines:
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.3
 ----------------------------------------------------------------
 
-&lt;b&gt;BUG FIXES&lt;/b&gt;
+**BUG FIXES**
 
 &lt;b&gt;NEW FEATURES&lt;/b&gt;
 
