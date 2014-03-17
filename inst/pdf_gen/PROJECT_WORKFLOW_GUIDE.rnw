@@ -18,14 +18,13 @@
 The project template includes these main directories and scripts:
 
 \begin{enumerate}
-  \item \textbf{ANALYSIS} - A directory containing the following analysis scripts:
+  \item \textbf{SCRIPTS} - A directory to store scripts; already contains the following:
   \begin{enumerate}
     \item \textbf{01\_clean\_data.R} initial cleaning of raw transcripts
     \item \textbf{02\_analysis\_I.R} initial analysis
     \item \textbf{03\_plots.R} plotting script
   \end{enumerate}
-  \item \textbf{CM\_DATA} - A directory to export/import scripts for \texttt{cm\_xxx} family of functions
-  \item \textbf{CODEBOOK} - A directory to store coding conventions or demographics data
+  \item \textbf{CODEBOOK} - A directory to store coding conventions or demographics data:
   \begin{enumerate}
     \item \textbf{KEY.csv} A blank template for demographic information
   \end{enumerate}  
@@ -35,22 +34,29 @@ The project template includes these main directories and scripts:
      \item \textbf{CONTACT\_INFO} A text file to put research team members' 
        contact information
   \end{enumerate}  
-  \item \textbf{DATA} - A directory to store cleaned data (generally .RData 
-     format)
-  \item \textbf{DATA\_FOR\_REVIEW} - A directory to put data that may need to be altered or needs to be inspected more closely:
-  \item \textbf{DOCUMENTS} - A directory to store documents related to the project
-  \item \textbf{PLOTS} - A directory to store plots
-  \item \textbf{PROJECT\_WORKFLOW\_GUIDE.pdf} A pdf explaining the structure of the project directory (this document) 
+  \item \textbf{DATA} - A directory to store data:
+    \begin{enumerate}
+      \item \textbf{CLEANED\_DATA} - A directory to store cleaned data (generally .RData or .rds format)
+      \item \textbf{CM\_DATA} - A directory to export/import scripts for \texttt{cm\_xxx} family of functions
+  \item \textbf{DATA\_FOR\_REVIEW} - A directory to put data that may need to be altered or needs to be inspected more closely
   \item \textbf{RAW\_DATA} - A directory to store non-transcript data related to the project:
   \begin{enumerate}
      \item \textbf{ANALYTIC\_MEMOS} - A directory to put analytic memos
      \item \textbf{AUDIO} - A directory to put audio files (or shortcuts)
      \item \textbf{FIELD\_NOTES} - A directory to put audio files (or shortcuts)
      \item \textbf{PAPER\_ARTIFACTS} - A directory to put paper artifacts 
-     \item \textbf{PHOTOGRAPHS} - directory to put photographs
+     \item \textbf{PHOTOGRAPHS} - A directory to put photographs
      \item \textbf{VIDEO} - A directory to put video files (or shortcuts)
   \end{enumerate}  
+      \item \textbf{TRANSCRIPTS} - A directory to put transcription data:
+  \begin{enumerate}
+  \item \textbf{CLEANED\_TRANSCRIPTS} - A directory to store the cleaned transcripts (If the transcripts are already cleaned you may choose to not utilize the RAW\_TRANSCRIPTS directory)
   \item \textbf{RAW\_TRANSCRIPTS} - A directory to store the raw transcripts
+  \end{enumerate}      
+    \end{enumerate}
+  \item \textbf{DOCUMENTATION} - A directory to store documents related to the project
+  \item \textbf{PLOTS} - A directory to store plots
+  \item \textbf{PROJECT\_WORKFLOW\_GUIDE.pdf} A pdf explaining the structure of the project directory (this document) 
   \item \textbf{REPORTS} - A directory related to reports and presentations; see \href{https://dl.dropbox.com/u/61803503/packages/REPORT_WORKFLOW_GUIDE.pdf}{REPORT\_WORKFLOW\_GUIDE.pdf} for details
   \item \textbf{TABLES} - A directory to export tables to 
   \item \textbf{WORD\_LISTS} - A directory to store word lists that can be sourced and supplied to functions

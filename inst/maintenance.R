@@ -14,7 +14,7 @@ library(highlight); library(qdap); library(staticdocs); library(acc.roxygen2)
 #STEP 1: create static doc  
 #right now examples are FALSE in the future this will be true
 #in the future qdap2 will be the go to source
-build_site(pkg="C:/Users/trinker/GitHub/qdap2")
+build_site(pkg="C:/Users/trinker/GitHub/qdap")
 
 #STEP 2: reshape index
 path <- "inst/web"
@@ -25,8 +25,7 @@ extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry,
     "hash_look", "%l%", "%l+%", "polarity_frame", "boolean_search", "stem_words", 
     "stem2df", colpaste2df, rm_stop, sent_detect, matrix2df, as.wfm, "%bs%",
     Filter.wfm, weight.wfdf, weight.wfm, wfm_combine, wfm_expanded, 
-    dissimilarity, Filter.character, Filter.DocumentTermMatrix, 
-    Filter.TermDocumentMatrix )
+    dissimilarity, Filter.character, Filter.DocumentTermMatrix)
 
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character_table, char_table))
@@ -67,8 +66,7 @@ extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry,
     "hash_look", "%l%", "%l+%", "polarity_frame", "boolean_search", "stem_words", 
     "stem2df", colpaste2df, rm_stop, sent_detect, matrix2df, as.wfm, "%bs%",
     Filter.wfm, weight.wfdf, weight.wfm, wfm_combine, wfm_expanded, 
-    dissimilarity, Filter.character, Filter.DocumentTermMatrix, 
-    Filter.TermDocumentMatrix )
+    dissimilarity, Filter.character, Filter.DocumentTermMatrix)
 
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character_table, char_table))

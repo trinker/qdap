@@ -26,7 +26,12 @@ NEW FEATURES
 
 MINOR FEATURES
 
+* `repo2github` function added to send a directory to GitHub upon first commit.
+
 IMPROVEMENTS
+
+* `new_project` has an improved directory structure and works with any version 
+  of the `reports` package.
 
 CHANGES
 
