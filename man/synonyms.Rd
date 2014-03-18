@@ -48,7 +48,7 @@ Returns a list of vectors or vector of possible words that
 match term(s).
 }
 \description{
-Search for synonyms that match term(s).
+\code{synonyms} - Search for synonyms that match term(s).
 
 \code{synonyms_frame} - Generate a synonym lookup
 environment for use with the \code{synonym.frame} argument

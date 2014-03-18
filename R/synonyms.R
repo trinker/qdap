@@ -1,6 +1,6 @@
 #' Search For Synonyms
 #' 
-#' Search for synonyms that match term(s).
+#' \code{synonyms} - Search for synonyms that match term(s).
 #' 
 #' @param terms The terms to find synonyms for.  
 #' @param return.list logical.  If \code{TRUE} returns the output for multiple 
