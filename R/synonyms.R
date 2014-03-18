@@ -108,7 +108,7 @@ synonyms_frame <- function(synonym.list, envir = TRUE, prior.frame) {
         }
     })
     phase1 <- lapply(synonym.list, lapply, paste, collapse = ", ")
-    phase2 <- mapply(seqs, phase1, lapply(phase1, function(x) 1:length(x))) 
+    phase2 <- mapply(seqs(x=x, y=y), phase1, lapply(phase1, function(x) 1:length(x))) 
     phase3 <- list2df(lapply(phase2, paste, collapse = " @@@@ "), 
         col2 = "word", col1 = "match.string")[2:1]
     phase3[] <- lapply(phase3, as.character)
