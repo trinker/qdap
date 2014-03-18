@@ -51,12 +51,10 @@
 phrase_net <- function(text.var, freq=4, r = .35, 
     edge.constant = 6, vertex.constant = 3,...) {
 
-    if (is.dp(text.var = text.var)) {
-        text <- varsent_detect(text.var)
-    }   
-    
     Filtered_dat <- Filter(all_words(text.var), freq=freq, ...)
-    cor_dat <- with(dat, word_cor(text, tot, word=Filtered_dat[, 1], r=NULL))
+    text.var <- sentSplit(data.frame(text=text.var), "text")
+    cor_dat <- word_cor(text.var[, "text"], text.var[, "tot"],
+        word=Filtered_dat[, 1], r=NULL)
     
     X2 <- na.omit(melt(cor_dat))
     colnames(X2)[1:2] <-c("to", "from")
@@ -90,5 +88,4 @@ phrase_net <- function(text.var, freq=4, r = .35,
 print.phrase_net <- function(x, edge.curved = TRUE, ...) {
     plot.igraph(x, edge.curved = edge.curved, ...)
 }
-
 
