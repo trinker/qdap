@@ -74,3 +74,25 @@ print.all_words <- function(x, ...) {
     class(x) <- "data.frame"
     print(left_just(x, "WORD"))
 }
+
+#' Filter
+#' 
+#' \code{Filter.all_words} - Filter words from a all_words 
+#' that meet max/min word length criteria.
+#' 
+#' all_words Method for Filter
+#' @rdname Filter
+#' @export
+#' @method Filter all_words
+#' @return \code{Filter.all_words} - Returns a matrix of the class "all_words".
+Filter.all_words <- function(x, min = 1, max = Inf, 
+    count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...) {
+
+    word_list_filter_helper(x, min = min, max = max, 
+        count.apostrophe = count.apostrophe, stopwords = stopwords, 
+        ignore.case = ignore.case, ...)
+}
+
+
+
+

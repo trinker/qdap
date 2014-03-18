@@ -125,7 +125,7 @@ synonyms_frame <- function(synonym.list, envir = TRUE, prior.frame) {
 #' @export
 syn_frame <- synonyms_frame
 
-seqs <- function(x, y) function(x, y) sprintf("[%s]%s", y, x)
+seqs <- function(x, y) sprintf("[%s]%s", y, x)
 
 qdap_recoder <- function(x, envr, missing){                               
     x <- as.character(x)                                                         

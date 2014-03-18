@@ -24,6 +24,9 @@ BUG FIXES
 
 NEW FEATURES
 
+* `phrase_net` function provides functioning similar to the Many Eyes 
+  Phrase Net plot.
+
 MINOR FEATURES
 
 * `synonyms_frame` (`syn_frame`) added to allow the user to create a synonym

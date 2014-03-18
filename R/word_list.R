@@ -221,3 +221,81 @@ function(x, ...) {
     class(y) <- "list"
     print(y)
 }
+
+
+#' Filter
+#' 
+#' \code{Filter.fwl} - Filter words from a fwl 
+#' that meet max/min word length criteria.
+#' 
+#' fwl Method for Filter
+#' @rdname Filter
+#' @export
+#' @method Filter fwl
+#' @return \code{Filter.fwl} - Returns a matrix of the class "fwl".
+Filter.fwl <- function(x, min = 1, max = Inf, 
+    count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...) {
+
+    lapply(x, word_list_filter_helper, min = min, max = max, 
+        count.apostrophe = count.apostrophe, stopwords = stopwords, 
+        ignore.case = ignore.case, ...)
+}
+
+word_list_filter_helper <- function(x, min, max, freq =1, 
+    count.apostrophe, stopwords, ignore.case, ...) {
+
+    if (!is.null(stopwords)) {
+        x[, 1] <- strip(x[, 1], apostrophe.remove = !count.apostrophe, 
+            lower.case = ignore.case, ...)
+        stopwords <- strip(stopwords, apostrophe.remove = !count.apostrophe, 
+            lower.case = ignore.case, ...)
+    }
+
+    if (!is.null(stopwords)) {
+        x <- x[!x[, 1] %in% stopwords, ]
+    }
+
+    lens <- nchar(x[, 1])
+    x <- x[lens >= min & lens <= max, ]
+    x <- x[x[, 2] >= freq, ]
+    class(x) <- c("filtered_word_list", class(x))
+    x
+}
+
+
+#' Filter
+#' 
+#' \code{Filter.fswl} - Filter words from a fswl 
+#' that meet max/min word length criteria.
+#' 
+#' fswl Method for Filter
+#' @rdname Filter
+#' @export
+#' @method Filter fswl
+#' @return \code{Filter.fswl} - Returns a matrix of the class "fswl".
+Filter.fswl <- function(x, min = 1, max = Inf,
+    count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...) {
+
+    lapply(x, word_list_filter_helper, min = min, max = max, 
+        count.apostrophe = count.apostrophe, stopwords = stopwords, 
+        ignore.case = ignore.case, ...)
+}
+
+
+#' Filter
+#' 
+#' \code{Filter.rfswl} - Filter words from a rfswl 
+#' that meet max/min word length criteria.
+#' 
+#' rfswl Method for Filter
+#' @rdname Filter
+#' @export
+#' @method Filter rfswl
+#' @return \code{Filter.rfswl} - Returns a matrix of the class "rfswl".
+Filter.rfswl <- function(x, min = 1, max = Inf,  
+    count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...) {
+
+    lapply(x, word_list_filter_helper, min = min, max = max, 
+        count.apostrophe = count.apostrophe, stopwords = stopwords, 
+        ignore.case = ignore.case,  ...)
+}

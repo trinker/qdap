@@ -1,0 +1,94 @@
+#' Phrase Nets
+#' 
+#' Create \href{http://www-958.ibm.com/software/data/cognos/manyeyes/}{Many Eyes} 
+#' style phrase nets.
+#' 
+#' @param text.var The text variable.
+#' @param freq The minimum word frequency occurrence.
+#' @param r The minimum correlation value
+#' @param edge.constant A constant to multiple the edges by.
+#' @param vertex.constant A constant to multiple the vertex label sizes by.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{Filter}}.
+#' @return Returns an igraph object.
+#' @note While \href{http://www-958.ibm.com/software/data/cognos/manyeyes/}{Many Eyes} 
+#' phrase nets inspired this function the two outputs are not identical.  The
+#' \code{\link[qdap]{phrase_net}} function operates off of correlations between 
+#' words in sentences.
+#' @references \url{http://www-01.ibm.com/software/analytics/many-eyes/}
+#' @keywords phrase_net
+#' @export
+#' @importFrom reshape2 melt
+#' @import igraph
+#' @examples
+#' \dontrun{
+#' x <- "Questions must be at least 2 days old to be eligible for a bounty.
+#'     There can only be 1 active bounty per question at any given time.
+#'     Users must have at least 75 reputation to offer a bounty, and may
+#'     only have a maximum of 3 active bounties at any given time. The
+#'     bounty period lasts 7 days. Bounties must have a minimum duration of
+#'     at least 1 day. After the bounty ends, there is a grace period of 24
+#'     hours to manually award the bounty. If you do not award your bounty
+#'     within 7 days (plus the grace period), the highest voted answer
+#'     created after the bounty started with at least 2 upvotes will be
+#'     awarded half the bounty amount. If there's no answer meeting that
+#'     criteria, the bounty is not awarded to anyone. If the bounty was
+#'     started by the question owner, and the question owner accepts an
+#'     answer during the bounty period, and the bounty expires without an
+#'     explicit award - we assume the bounty owner liked the answer they
+#'     accepted and award it the full bounty amount at the time of bounty
+#'     expiration. In any case, you will always give up the amount of
+#'     reputation specified in the bounty, so if you start a bounty, be sure
+#'     to follow up and award your bounty to the best answer! As an
+#'     additional bonus, bounty awards are immune to the daily reputation
+#'     cap and community wiki mode."
+#' 
+#' dat <- sentSplit(data.frame(text = qprep(x)), "text")
+#' 
+#' phrase_net(dat$text, r=.5)
+#' library(igraph)
+#' plot(phrase_net(dat$text, r=.5), edge.curved = FALSE)
+#' }
+phrase_net <- function(text.var, freq=4, r = .35, 
+    edge.constant = 6, vertex.constant = 3,...) {
+
+    if (is.dp(text.var = text.var)) {
+        text <- varsent_detect(text.var)
+    }   
+    
+    Filtered_dat <- Filter(all_words(text.var), freq=freq, ...)
+    cor_dat <- with(dat, word_cor(text, tot, word=Filtered_dat[, 1], r=NULL))
+    
+    X2 <- na.omit(melt(cor_dat))
+    colnames(X2)[1:2] <-c("to", "from")
+    X2 <- X2[X2[, "value"] >= r, ]
+    X2 <- X2[X2[, "to"] != X2[, "from"], ]
+    X2[, -3] <- t(apply(X2[, -3], 1, sort))
+    X2 <- unique(X2)
+
+    g <- graph.data.frame(X2, directed=FALSE)
+    E(g)$width <- X2[, "value"] * edge.constant
+    E(g)$width <- E(g)$width + (1 - min(E(g)$width))
+    V(g)$size <- 0
+    Filtered_dat[, "vweight"] <- Filtered_dat[, 2] *
+        (vertex.constant/max(Filtered_dat[, 2]))
+    V(g)$label.cex <- lookup(V(g)$name, Filtered_dat[, -2])
+    V(g)$label.cex <- V(g)$label.cex + (1 - min(V(g)$label.cex))
+    class(g) <- c("phrase_net", class(g))
+    return(g)
+}
+
+
+#' Prints an phrase_net Object
+#' 
+#' Prints an phrase_net object.
+#' 
+#' @param x The phrase_net object.
+#' @param edge.curved logical.  If \code{TRUE} edges are plotted with curves.
+#' @param \ldots Other Arguments passed to \code{\link[igraph]{plot.igraph}}.
+#' @method print phrase_net
+#' @S3method print phrase_net
+print.phrase_net <- function(x, edge.curved = TRUE, ...) {
+    plot.igraph(x, edge.curved = edge.curved, ...)
+}
+
+

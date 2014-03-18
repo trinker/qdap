@@ -1,10 +1,17 @@
-\name{Filter.TermDocumentMatrix}
+\name{Filter.all_words}
 \alias{Filter}
 \alias{Filter.DocumentTermMatrix}
 \alias{Filter.TermDocumentMatrix}
+\alias{Filter.all_words}
 \alias{Filter.character}
+\alias{Filter.fswl}
+\alias{Filter.fwl}
+\alias{Filter.rfswl}
 \title{Filter}
 \usage{
+\method{Filter}{all_words}(x, min = 1, max = Inf, count.apostrophe = TRUE,
+  stopwords = NULL, ignore.case = TRUE, ...)
+
 \method{Filter}{TermDocumentMatrix}(x, min = 1, max = Inf,
   count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...)
 
@@ -15,6 +22,15 @@ Filter(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL,
   ignore.case = TRUE, ...)
 
 \method{Filter}{character}(x, min = 1, max = Inf, count.apostrophe = TRUE,
+  stopwords = NULL, ignore.case = TRUE, ...)
+
+\method{Filter}{fwl}(x, min = 1, max = Inf, count.apostrophe = TRUE,
+  stopwords = NULL, ignore.case = TRUE, ...)
+
+\method{Filter}{fswl}(x, min = 1, max = Inf, count.apostrophe = TRUE,
+  stopwords = NULL, ignore.case = TRUE, ...)
+
+\method{Filter}{rfswl}(x, min = 1, max = Inf, count.apostrophe = TRUE,
   stopwords = NULL, ignore.case = TRUE, ...)
 }
 \arguments{
@@ -38,6 +54,9 @@ Filter(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL,
   methods.}
 }
 \value{
+\code{Filter.all_words} - Returns a matrix of the class
+"all_words".
+
 \code{Filter.TermDocumentMatrix} - Returns a matrix of the
 class "TermDocumentMatrix".
 
@@ -48,8 +67,18 @@ class "DocumentTermMatrix".
 "character".
 
 \code{Filter.wfm} - Returns a matrix of the class "wfm".
+
+\code{Filter.fwl} - Returns a matrix of the class "fwl".
+
+\code{Filter.fswl} - Returns a matrix of the class "fswl".
+
+\code{Filter.rfswl} - Returns a matrix of the class
+"rfswl".
 }
 \description{
+\code{Filter.all_words} - Filter words from a all_words
+that meet max/min word length criteria.
+
 \code{Filter.TermDocumentMatrix} - Filter words from a
 TermDocumentMatrix vector that meet max/min word length
 criteria.
@@ -62,13 +91,30 @@ max/min word length criteria.
 
 \code{Filter.character} - Filter words from a character
 vector that meet max/min word length criteria.
+
+\code{Filter.fwl} - Filter words from a fwl that meet
+max/min word length criteria.
+
+\code{Filter.fswl} - Filter words from a fswl that meet
+max/min word length criteria.
+
+\code{Filter.rfswl} - Filter words from a rfswl that meet
+max/min word length criteria.
 }
 \details{
+all_words Method for Filter
+
 TermDocumentMatrix Method for Filter
 
 DocumentTermMatrix Method for Filter
 
 character Method for Filter
+
+fwl Method for Filter
+
+fswl Method for Filter
+
+rfswl Method for Filter
 }
 \note{
 The name and idea behind this function is inspired by the
