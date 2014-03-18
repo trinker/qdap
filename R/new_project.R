@@ -13,13 +13,6 @@
 #' @param \ldots Other arguments passed to \code{\link[reports]{new_report}}.
 #' @details The project template includes these main directories and scripts:
 #' \itemize{
-#' \item{SCRIPTS}{ - A directory to store scripts; already contains the following:
-#' \itemize{
-#'     \item{01_clean_data.R}{ - initial cleaning of raw transcripts}
-#'     \item{02_analysis_I.R}{ - initial analysis}
-#'     \item{03_plots.R}{ - plotting script}
-#'     }
-#' }
 #' \item{CODEBOOK}{ - A directory to store coding conventions or demographics data:
 #' \itemize{
 #'     \item{KEY.csv}{ - A blank template for demographic information}
@@ -54,8 +47,14 @@
 #' }
 #' \item{DOCUMENTATION}{ - A directory to store documents related to the project}
 #' \item{PLOTS}{ - A directory to store plots}
-#' \item{PROJECT_WORKFLOW_GUIDE.pdf}{ - A pdf explaining the structure of the project template}
 #' \item{REPORTS}{ - A directory with report and presentation related tools.  Please see the \cr \href{https://dl.dropbox.com/u/61803503/packages/REPORT_WORKFLOW_GUIDE.pdf}{REPORT_WORKFLOW_GUIDE.pdf} for more details}
+#' \item{SCRIPTS}{ - A directory to store scripts; already contains the following:
+#' \itemize{
+#'     \item{01_clean_data.R}{ - initial cleaning of raw transcripts}
+#'     \item{02_analysis_I.R}{ - initial analysis}
+#'     \item{03_plots.R}{ - plotting script}
+#'     }
+#' }
 #' \item{TABLES}{ - A directory to export tables to}  
 #' \item{WORD_LISTS}{ - A directory to store word lists that can be sourced and supplied to functions}
 #' \item{.Rprofile}{ - Performs certain tasks such as loading libraries, data and sourcing functions upon startup in \href{http://www.rstudio.com/}{RStudio}} 
@@ -66,6 +65,7 @@
 #'     }
 #' }
 #' \item{LOG}{ - A text file documenting project changes/needs etc.}
+#' \item{PROJECT_WORKFLOW_GUIDE.pdf}{ - A pdf explaining the structure of the project template}
 #' \item{xxx.Rproj}{ - A project file used by \href{http://www.rstudio.com/}{RStudio}; clicking this will open the project in RStudio.} 
 #' \item{TO_DO}{ - A text file documenting project tasks}
 #' }
