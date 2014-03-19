@@ -27,6 +27,9 @@ And constructed with the following guidelines:
 * `phrase_net` function provides functioning similar to the Many Eyes 
   Phrase Net plot.
 
+* `colpaste2df` dropped the column name for a single retained column when 
+  `keep.orig = FALSE`.  See GitHub <a href="https://github.com/trinker/qdap/issues/157">issue #157</a> for more.
+
 **MINOR FEATURES**
 
 * `synonyms_frame` (`syn_frame`) added to allow the user to create a synonym

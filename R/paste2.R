@@ -139,7 +139,7 @@ colpaste2df <- function(mat, combined.columns, sep = ".", name.sep = "&",
         names(L1) <- rep("", length(L1))
     }
 
-    ## name any nameless combined names bay pasting old 
+    ## name any nameless combined names by pasting old 
     ## column names together
     locs <- names(L1) == ""
     if (sum(locs) > 0) {
@@ -150,12 +150,12 @@ colpaste2df <- function(mat, combined.columns, sep = ".", name.sep = "&",
 
     ## cbind the pasted columns into a new dataframe
     DF <- data.frame(do.call(cbind, L1), check.names = FALSE)
-    DF <- DF[ !sapply(DF, function(x) all(is.na(x)))]
+    DF <- DF[!sapply(DF, function(x) all(is.na(x)))]
 
     ## remove columns if eliminating old
     if(!keep.orig) {
-        mat <- mat[, !colnames(mat) %in% unique(unlist(combined.columns))]
-
+        mat <- mat[, !colnames(mat) %in% unique(unlist(combined.columns)), 
+            drop=FALSE]
     }
 
     ## merge it back together

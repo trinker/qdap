@@ -27,6 +27,9 @@ NEW FEATURES
 * `phrase_net` function provides functioning similar to the Many Eyes 
   Phrase Net plot.
 
+* `colpaste2df` dropped the column name for a single retained column when 
+  `keep.orig = FALSE`.  See GitHub issue #157 for more.
+
 MINOR FEATURES
 
 * `synonyms_frame` (`syn_frame`) added to allow the user to create a synonym
