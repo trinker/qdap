@@ -40,4 +40,5 @@ tm_package_compatibility.tex
 vignettes/helper_files
 inst/web
 Scraping Word Lists
+inst/demos/discoursemap
 
