@@ -80,9 +80,9 @@ lapply(seq_along(plot_dat), function(i){
 
 ## Repeated Measures (EXTENDED EXAMPLE)
 ##------------------------------
-
-fam_key <- data.frame(unique(raj.demographics$fam.aff),
-    cols = qcv(blue, , grey10, red, brown))
+fam_key <- data.frame(fam=unique(raj.demographics$fam.aff),
+    cols=qcv(blue, grey10, red, orange),
+    stringsAsFactors = FALSE)
 
 par(mfrow=c(3, 2), mar=c(0, 1, 3, 1))
 lapply(seq_along(plot_dat), function(i){
@@ -97,6 +97,11 @@ lapply(seq_along(plot_dat), function(i){
     plot(THE_PLOT, edge.curved=TRUE)
     mtext(paste("Act", names(plot_dat)[i]), side=3)
 })
+frame()
+bords <- rep("black", 7)
+bords[3] <- "white"
+legend(.29, .95, c("Female", "Male", NA, as.character(fam_key[, 1])),
+    fill=c("pink", "lightblue", NA, fam_key[, 2]), border=bords, cex=1.5)
 
 ## Reset graphics margins
 par(mar=opar)
