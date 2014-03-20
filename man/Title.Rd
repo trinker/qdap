@@ -1,0 +1,19 @@
+\name{Title}
+\alias{Title}
+\alias{Title<-}
+\title{Add Title to Select qdap Plots}
+\usage{
+Title(object)
+
+Title(object) <- value
+}
+\arguments{
+  \item{object}{A select qdap object that stores a plot.}
+
+  \item{value}{The value to assign to title.}
+}
+\description{
+Add title to select qdap objects that store a plot.
+}
+\keyword{title}
+

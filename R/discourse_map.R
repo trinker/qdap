@@ -28,6 +28,12 @@
 #' library(igraph)
 #' plot(visual(x), edge.curved=FALSE)
 #' 
+#' ## Quickly add/remove a title
+#' Title(x) <- "Act 1"
+#' x
+#' Title(x) <- NULL
+#' x
+#' 
 #' ## Augmenting the plot
 #' mygraph <- visual(x)
 #' 
@@ -107,44 +113,62 @@ discourse_map <- function(text.var, grouping.var, edge.constant, sep = "_",
         G <- G[length(G)]
     }
 
-
     if (is.list(grouping.var) & length(grouping.var)>1) {
         grouping <- paste2(grouping.var, sep = sep, ...)
     } else {
         grouping <- unlist(grouping.var)
     } 
 
-    DF <- data.frame(from=grouping, wc=wc(text.var), 
-        check.names = FALSE, stringsAsFactors = FALSE)
-    DF[, "from"] <- factor(DF[, "from"])
-    DF[, "to"] <- factor(c(as.character(DF[-1, "from"]), "End"))
-    DF <- DF[, c(1, 3, 2)] 
-
     qsep <- "|-|qdap|-|"
 
-    DF2 <- colpaste2df(DF, 1:2, keep.orig=FALSE, sep=qsep, name.sep ="|")
-    DF2 <- colsplit2df(list2df(lapply(split(DF2[, "wc"], 
-        DF2[, "from|to"]) , sum), "wc", "from&to")[, 2:1], sep=qsep)
-    DF2[, "prop_wc"] <- DF2["wc"]/sum(DF2[, "wc"])
-
-    DF3 <- matrix2df(do.call(rbind, lapply(split(DF[, "wc"], 
-        DF[, "from"]), sum)), "from")
-    names(DF3)[2] <- "wc"
-    DF3[, "prop_wc"] <- DF3["wc"]/sum(DF3[, "wc"])
-
-    g <- graph.data.frame(DF2, directed=TRUE)
-    V(g)$size <- 10 
-
     if (missing(edge.constant)) {
-        edge.constant <- nrow(DF3) * 2.5
+        edge.constant <- length(unique(grouping)) * 2.5
     }
 
-    E(g)$width <- edge.constant*DF2[, "prop_wc"]
+    DF <- map_df1(grouping, text.var) 
+    DF2 <- map_df2(DF, qsep)
+    DF3 <- map_df3(DF)
+    g <- map_graph_qdap(DF2, edge.constant)
 
     o <- list(raw = DF, edge_word_count=DF2, 
         vertex_word_count=DF3, plot = g)
     class(o) <- "discourse_map"
     o
+}
+
+
+map_df1 <- function(grouping, text.var){
+    DF <- data.frame(from=grouping, wc=wc(text.var), 
+        check.names = FALSE, stringsAsFactors = FALSE)
+    DF[, "from"] <- factor(DF[, "from"])
+    DF[, "to"] <- factor(c(as.character(DF[-1, "from"]), "End"))
+    DF <- DF[, c(1, 3, 2)] 
+    DF
+}
+
+map_df2 <- function(DF, qsep){
+    DF2 <- colpaste2df(DF, 1:2, keep.orig=FALSE, sep=qsep, name.sep ="|")
+    DF2 <- colsplit2df(list2df(lapply(split(DF2[, "wc"], 
+        DF2[, "from|to"]) , sum), "wc", "from&to")[, 2:1], sep=qsep)
+    DF2[, "prop_wc"] <- DF2["wc"]/sum(DF2[, "wc"])
+   DF2
+}
+
+
+map_df3 <- function(DF){
+    DF3 <- matrix2df(do.call(rbind, lapply(split(DF[, "wc"], 
+        DF[, "from"]), sum)), "from")
+    names(DF3)[2] <- "wc"
+    DF3[, "prop_wc"] <- DF3["wc"]/sum(DF3[, "wc"])
+    DF3
+}
+
+
+map_graph_qdap <- function(DF2, edgeconstant){
+    g <- graph.data.frame(DF2, directed=TRUE)
+    V(g)$size <- 10 
+    E(g)$width <- edgeconstant*DF2[, "prop_wc"]
+    g
 }
 
 #' Prints a discourse_map Object
@@ -153,12 +177,20 @@ discourse_map <- function(text.var, grouping.var, edge.constant, sep = "_",
 #' 
 #' @param x The discourse_map object.
 #' @param edge.curved logical.  If \code{TRUE} edges are plotted with curves.
+#' @param title The title of the plot.
 #' @param \ldots Other Arguments passed to \code{\link[igraph]{plot.igraph}}.
 #' @import igraph
 #' @method print discourse_map
 #' @S3method print discourse_map
-print.discourse_map <- function(x, edge.curved = TRUE, ...) {
+print.discourse_map <- function(x, edge.curved = TRUE, title = NULL, ...) {
     plot.igraph(x[["plot"]], edge.curved = edge.curved, ...)
+    if (!is.null(title)) {
+        mtext(title, side=3)
+    } else { 
+        if (!is.null(attributes(x)[["title"]])){
+            mtext(Title(x), side=3)
+        }
+    }
 }
 
 
@@ -181,12 +213,12 @@ visual.discourse_map <- function(x, ...) {
 #' Plots a discourse_map object.
 #' 
 #' @param x The discourse_map object.
-#' @param \ldots ignored
+#' @param \ldots Other arguments passed to \code{print.discourse_map}.
 #' @method plot discourse_map
 #' @export
 plot.discourse_map <- function(x, ...){ 
 
-    print(x)
+    print(x, ...)
 
 }
 

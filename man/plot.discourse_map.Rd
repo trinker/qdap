@@ -7,7 +7,8 @@
 \arguments{
   \item{x}{The discourse_map object.}
 
-  \item{\ldots}{ignored}
+  \item{\ldots}{Other arguments passed to
+  \code{print.discourse_map}.}
 }
 \description{
 Plots a discourse_map object.

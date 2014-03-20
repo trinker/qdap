@@ -42,6 +42,12 @@ lview(x)
 library(igraph)
 plot(visual(x), edge.curved=FALSE)
 
+## Quickly add/remove a title
+Title(x) <- "Act 1"
+x
+Title(x) <- NULL
+x
+
 ## Augmenting the plot
 mygraph <- visual(x)
 
