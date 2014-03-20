@@ -6,9 +6,10 @@
 #' (e.g., \code{\link[qdap]{pos_by}}).
 #' @param \ldots Arguments passed to preprocessed method of other classes.
 #' @export
-#' @seealso \code{\link[qdap]{counts}}
-#' @seealso \code{\link[qdap]{proportions}}
-#' @seealso \code{\link[qdap]{scores}}
+#' @seealso \code{\link[qdap]{scores}},
+#' \code{\link[qdap]{counts}},
+#' \code{\link[qdap]{proportions}},
+#' \code{\link[qdap]{visual}}
 #' @return Returns a data.frame or list of preprocessed data.
 preprocessed <-
 function(x, ...){

@@ -1,6 +1,6 @@
 \name{print.phrase_net}
 \alias{print.phrase_net}
-\title{Prints an phrase_net Object}
+\title{Prints a phrase_net Object}
 \usage{
 \method{print}{phrase_net}(x, edge.curved = TRUE, ...)
 }
@@ -14,6 +14,6 @@
   \code{\link[igraph]{plot.igraph}}.}
 }
 \description{
-Prints an phrase_net object.
+Prints a phrase_net object.
 }
 

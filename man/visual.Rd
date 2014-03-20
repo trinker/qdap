@@ -1,0 +1,26 @@
+\name{visual}
+\alias{visual}
+\title{Generic visual Method}
+\usage{
+visual(x, ...)
+}
+\arguments{
+  \item{x}{A qdap object (list) with a visual-graph-plot
+  object (e.g., \code{\link[qdap]{discourse_map}}).}
+
+  \item{\ldots}{Arguments passed to visual method of other
+  classes.}
+}
+\value{
+Returns a plot object.
+}
+\description{
+Access the visual-graph-plot object from select qdap
+outputs.
+}
+\seealso{
+\code{\link[qdap]{scores}}, \code{\link[qdap]{counts}},
+\code{\link[qdap]{preprocessed}},
+\code{\link[qdap]{proportions}}
+}
+

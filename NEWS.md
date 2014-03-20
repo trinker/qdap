@@ -22,13 +22,16 @@ And constructed with the following guidelines:
 
 **BUG FIXES**
 
+* `colpaste2df` dropped the column name for a single retained column when 
+  `keep.orig = FALSE`.  See GitHub <a href="https://github.com/trinker/qdap/issues/157">issue #157</a> for more.
+
 **NEW FEATURES**
 
 * `phrase_net` function provides functioning similar to the Many Eyes 
   Phrase Net plot.
 
-* `colpaste2df` dropped the column name for a single retained column when 
-  `keep.orig = FALSE`.  See GitHub <a href="https://github.com/trinker/qdap/issues/157">issue #157</a> for more.
+* `discourse_map` function provides a network mapping of the flow of discourse 
+  between social actors.
 
 **MINOR FEATURES**
 

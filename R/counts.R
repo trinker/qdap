@@ -6,9 +6,10 @@
 #' \code{\link[qdap]{fry}}).
 #' @param \ldots Arguments passed to counts method of other classes.
 #' @export
-#' @seealso \code{\link[qdap]{scores}}
-#' @seealso \code{\link[qdap]{proportions}}
-#' @seealso \code{\link[qdap]{preprocessed}}
+#' @seealso \code{\link[qdap]{scores}},
+#' \code{\link[qdap]{proportions}},
+#' \code{\link[qdap]{preprocessed}},
+#' \code{\link[qdap]{visual}}
 #' @return Returns a data.frame of counts.
 counts <-
 function(x, ...){

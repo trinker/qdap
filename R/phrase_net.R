@@ -76,9 +76,9 @@ phrase_net <- function(text.var, freq=4, r = .35,
 }
 
 
-#' Prints an phrase_net Object
+#' Prints a phrase_net Object
 #' 
-#' Prints an phrase_net object.
+#' Prints a phrase_net object.
 #' 
 #' @param x The phrase_net object.
 #' @param edge.curved logical.  If \code{TRUE} edges are plotted with curves.

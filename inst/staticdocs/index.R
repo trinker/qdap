@@ -61,7 +61,8 @@ sd_section("Generic qdap Methods",
     "Filter",
     "preprocessed",
     "proportions",        
-    "scores"
+    "scores",
+    "visual"
   )
 )
 
@@ -197,6 +198,7 @@ sd_section("Identification",
 sd_section("Visualization", 
   "Plotting functions.",
   c(
+    "discourse_map", 
     "dispersion_plot",
     "gradient_cloud",
     "gantt_plot",

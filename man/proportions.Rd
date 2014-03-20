@@ -18,10 +18,8 @@ Returns a data.frame of proportions.
 Access the proportions dataframes from select qdap outputs.
 }
 \seealso{
-\code{\link[qdap]{scores}}
-
-\code{\link[qdap]{counts}}
-
-\code{\link[qdap]{preprocessed}}
+\code{\link[qdap]{scores}}, \code{\link[qdap]{counts}},
+\code{\link[qdap]{preprocessed}},
+\code{\link[qdap]{visual}}
 }
 

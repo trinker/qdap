@@ -1,0 +1,19 @@
+\name{visual.discourse_map}
+\alias{visual.discourse_map}
+\title{Discourse Map}
+\usage{
+\method{visual}{discourse_map}(x, ...)
+}
+\arguments{
+  \item{x}{The discourse_map object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+\code{visual.discourse_map} - View visual from
+\code{\link[qdap]{discourse_map}}.
+}
+\details{
+discourse_map Method for visual
+}
+

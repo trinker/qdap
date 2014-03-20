@@ -22,13 +22,16 @@ CHANGES IN qdap VERSION 1.3.3
 
 BUG FIXES
 
+* `colpaste2df` dropped the column name for a single retained column when 
+  `keep.orig = FALSE`.  See GitHub issue #157 for more.
+
 NEW FEATURES
 
 * `phrase_net` function provides functioning similar to the Many Eyes 
   Phrase Net plot.
 
-* `colpaste2df` dropped the column name for a single retained column when 
-  `keep.orig = FALSE`.  See GitHub issue #157 for more.
+* `discourse_map` function provides a network mapping of the flow of discourse 
+  between social actors.
 
 MINOR FEATURES
 

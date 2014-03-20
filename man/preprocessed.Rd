@@ -19,10 +19,7 @@ Access the preprocessed dataframes/lists from select qdap
 outputs.
 }
 \seealso{
-\code{\link[qdap]{counts}}
-
-\code{\link[qdap]{proportions}}
-
-\code{\link[qdap]{scores}}
+\code{\link[qdap]{scores}}, \code{\link[qdap]{counts}},
+\code{\link[qdap]{proportions}}, \code{\link[qdap]{visual}}
 }
 
