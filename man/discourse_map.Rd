@@ -127,6 +127,7 @@ dev.off()
 ## Animate it
 ##-----------
 library(animation)
+library(igraph)
 
 loc <- folder(animation_dialogue)
 ans <- Animate(test)
@@ -138,7 +139,7 @@ FUN <- function() {
     lapply(seq_along(ans), function(i) {
         par(mar=c(0, 0, 1, 0))
         set.seed(10)
-        plot(ans[[i]], edge.curved=TRUE, layout=layout.circle)
+        plot.igraph(ans[[i]], edge.curved=TRUE, layout=layout.circle)
         mtext("Discourse Plot", side=3)
         animation::ani.pause()
     })
@@ -171,7 +172,7 @@ FUN3 <- function() {
     lapply(seq_along(ans2), function(i) {
         par(mar=c(0, 0, 1, 0))
         set.seed(10)
-        plot(ans2[[i]], edge.curved=TRUE, layout=layout.auto)
+        plot.igraph(ans2[[i]], edge.curved=TRUE, layout=layout.auto)
         mtext("Discourse Plot", side=3)
         animation::ani.pause()
     })
@@ -179,7 +180,7 @@ FUN3 <- function() {
 
 saveHTML(FUN3(), autoplay = FALSE, loop = FALSE, verbose = FALSE,
     outdir = file.path(loc2, "new"), single.opts =
-    "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0")
+    "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
 }
 }
 
