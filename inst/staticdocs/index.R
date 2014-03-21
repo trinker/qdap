@@ -198,6 +198,7 @@ sd_section("Identification",
 sd_section("Visualization", 
   "Plotting functions.",
   c(
+    "Animate.discourse_map", 
     "discourse_map", 
     "dispersion_plot",
     "gradient_cloud",

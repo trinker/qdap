@@ -97,6 +97,75 @@
 #' 
 #' ## Reset graphics margins
 #' par(mar=opar)
+#' 
+#' ## ANIMATION
+#' #===========
+#' test <- discourse_map(DATA$state, list(DATA$person))
+#' 
+#' ## Very quick, hard to see
+#' Animate(test)
+#' 
+#' pdf("test.pdf")
+#'     par(mar=c(0, 0, 1, 0))
+#'     Animate(test, title="Test Plot")
+#' dev.off()
+#' 
+#' ## Animate it
+#' ##-----------
+#' library(animation)
+#' 
+#' loc <- folder(animation_dialogue)
+#' ans <- Animate(test)
+#' 
+#' ## Set up the plotting function
+#' oopt <- animation::ani.options(interval = 0.1)
+#' 
+#' FUN <- function() {
+#'     lapply(seq_along(ans), function(i) {
+#'         par(mar=c(0, 0, 1, 0))
+#'         set.seed(10)
+#'         plot(ans[[i]], edge.curved=TRUE, layout=layout.circle)
+#'         mtext("Discourse Plot", side=3)
+#'         animation::ani.pause()
+#'     })
+#' }
+#' 
+#' ## Detect OS
+#' type <- if(.Platform$OS.type == "windows") shell else system
+#' saveGIF(FUN(), interval = 0.1, outdir = loc, cmd.fun = type)
+#' 
+#' saveVideo(FUN(), interval = 0.1, outdir = loc)
+#' 
+#' saveLatex(FUN(), autoplay = TRUE, loop = FALSE, latex.filename = "tester.tex", 
+#'     caption = "animated dialogue", outdir = loc, ani.type = "pdf", 
+#'     ani.dev = "pdf", ani.width = 5, ani.height = 5.5, interval = 0.1)
+#' 
+#' saveHTML(FUN(), autoplay = FALSE, loop = TRUE, verbose = FALSE, 
+#'     outdir = file.path(loc, "new"), single.opts = 
+#'     "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0")
+#'     
+#'     
+#' ## More Elaborate Layout
+#' test2 <- with(mraja1, discourse_map(dialogue, person))
+#' 
+#' loc2 <- folder(animation_dialogue2)
+#' ans2 <- Animate(test2)
+#' ## Set up the plotting function
+#' oopt <- animation::ani.options(interval = 0.1)
+#' 
+#' FUN3 <- function() {
+#'     lapply(seq_along(ans2), function(i) {
+#'         par(mar=c(0, 0, 1, 0))
+#'         set.seed(10)
+#'         plot(ans2[[i]], edge.curved=TRUE, layout=layout.auto)
+#'         mtext("Discourse Plot", side=3)
+#'         animation::ani.pause()
+#'     })
+#' }
+#' 
+#' saveHTML(FUN3(), autoplay = FALSE, loop = FALSE, verbose = FALSE,
+#'     outdir = file.path(loc2, "new"), single.opts =
+#'     "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0")
 #' }
 discourse_map <- function(text.var, grouping.var, edge.constant, sep = "_", 
     ...) {
@@ -130,6 +199,9 @@ discourse_map <- function(text.var, grouping.var, edge.constant, sep = "_",
     DF3 <- map_df3(DF)
     g <- map_graph_qdap(DF2, edge.constant)
 
+    V(g)$wc <- V(g)$name %l% DF3[, -3]
+    V(g)$prop_wc<- V(g)$name %l% DF3[, -2]
+   
     o <- list(raw = DF, edge_word_count=DF2, 
         vertex_word_count=DF3, plot = g)
     class(o) <- "discourse_map"
@@ -222,6 +294,147 @@ plot.discourse_map <- function(x, ...){
 
 }
 
+#' Plots a animated_discourse_map  Object
+#' 
+#' Plots a animated_discourse_map  object.
+#' 
+#' @param x The animated_discourse_map  object.
+#' @param \ldots Other arguments passed to \code{print.animated_discourse_map }.
+#' @method plot animated_discourse_map 
+#' @export
+plot.animated_discourse_map  <- function(x, ...){ 
+
+    print(x, ...)
+
+}
 
 
+animated_discourse_map <- function(DF, edge.constant, sep = "_", 
+    current.color = "red", previous.color = "grey50", 
+    wc.time = TRUE, time.constant = 2, title = NULL, ...) {
 
+    qsep <- "|-|qdap|-|"
+    nms <- as.character(unique(unlist(DF[, 1:2])))
+    if (missing(edge.constant)) {
+        edge.constant <- length(nms) * 2.5
+    }
+
+    g <- graph.data.frame(map_df2b(DF, qsep))
+    E(g)$width <- 0
+    E(g)$color <- NA
+
+    igraph_weights <- setNames(lapply(1:nrow(DF), function(i) {
+        DF2 <- map_df2b(DF[1:i, ], qsep)
+        DF2[, "color"] <- previous.color
+        DF2[nrow(DF2), "color"] <- current.color
+        DF2
+    }), paste0("Turn_", 1:nrow(DF)))
+
+    igraph_objs <- setNames(lapply(seq_along(igraph_weights), 
+        function(i, grp =g, len=length(nms), sep=qsep){
+
+        if (i %in% 1:5) {
+            edge.constant <- edge.constant/(len/i)
+        }
+
+        weight <- igraph_weights[[i]][, c("from", "to", "prop_wc"), drop=FALSE]
+        weight[, "prop_wc"] <- edge.constant*weight[, "prop_wc"]
+        cols <- igraph_weights[[i]][, c("from", "to", "color"), drop=FALSE]
+        wkey <- colpaste2df(weight, 1:2, sep = sep, keep.orig=FALSE)[, 2:1]
+        edges <- bracketX(capture.output(E(grp))[-c(1:2)])
+        ekey <- paste2(do.call(rbind, lapply(strsplit(edges, "->"), Trim)), 
+            sep = sep)
+        ckey <- colpaste2df(cols, 1:2, sep = sep, keep.orig=FALSE)[, 2:1]
+
+        E(grp)$width <- NAer(ekey %l% wkey)
+        E(grp)$color <- ekey %l% ckey
+        grp
+    }), paste0("Turn_", 1:nrow(DF)))
+
+    timings <- round(exp(DF[, "wc"]/(max(DF[, "wc"])/time.constant)))
+    if(wc.time) {
+        igraph_objs <- rep(igraph_objs, timings)
+    }
+
+    class(igraph_objs) <- "animated_discourse_map"
+    attributes(igraph_objs)[["title"]] <- title
+    attributes(igraph_objs)[["timings"]] <- timings
+    igraph_objs
+}
+#' Prints a animated_discourse_map  Object
+#' 
+#' Prints a animated_discourse_map  object.
+#' 
+#' @param x The animated_discourse_map  object.
+#' @param title The title of the plot.
+#' @param seed The seed to use in plotting the graph.
+#' @param layout \pkg{igraph} \code{layout} to use.
+#' @param \ldots Other Arguments passed to \code{\link[igraph]{plot.igraph}}.
+#' @import igraph
+#' @method print animated_discourse_map 
+#' @S3method print animated_discourse_map 
+print.animated_discourse_map <- function(x, title = NULL, 
+    seed = sample(1:10000, 1), layout=layout.circle, ...){
+    
+    if (is.null(title)) {
+        title <- attributes(x)[["title"]]
+    }
+
+    set.seed(seed)
+    invisible(lapply(x, function(y) {
+        plot.igraph(y, edge.curved=TRUE, layout=layout)
+        if (!is.null(title)) {
+            mtext(title, side=3)
+        }
+    }))  
+   
+}
+
+map_df2b <- function(DF, qsep){
+    DF2 <- colpaste2df(DF, 1:2, keep.orig=FALSE, sep=qsep, name.sep ="|")
+    DF2[, "id"] <- seq_len(nrow(DF2))
+    DF2 <- colsplit2df(list_df2df(lapply(split(DF2[, c("wc", "id")], 
+        DF2[, "from|to"]), function(x) {
+            data.frame(wc=sum(x[, 1]), id = max(x[, 2]))
+        }), "from&to"), sep=qsep)
+    DF2[, "prop_wc"] <- DF2["wc"]/sum(DF2[, "wc"])
+    DF2[order(DF2[, "id"]), ]
+}
+
+
+#'Discourse Map
+#' 
+#' \code{Animate.discourse_map} - View Animate from \code{\link[qdap]{discourse_map}}.
+#' 
+#' discourse_map Method for Animate
+#' @param x The discourse_map object.
+#' @param edge.constant A constant to multiple edge width by.
+#' @param sep The separator character to use between grouping variables.
+#' @param current.color The color to make the vector edge as it moves.
+#' @param previous.color The color to make the already plotted edges.
+#' @param wc.time logical.  If \code{TRUE} weights duration of frame by word 
+#' count.
+#' @param time.constant A constant to divide the maximum word count by.  Time
+#' is calculated by `round(exp(WORD COUNT/(max(WORD COUNT)/time.constant)))`.  
+#' Therefore a larger constant will make the difference between the large and 
+#' small word counts greater.
+#' @param title The title to apply to the animated image(s).
+#' @param \ldots ignored
+#' @note The width of edges is based on words counts on that edge until that 
+#' moment divided by total number of words used until that moment.  Thicker 
+#' edges tend to thin as time passes.  The actual duration a word lasts is based 
+#' on word counts for that particular flow of dialogue divided by total dialogue 
+#' (words) used.
+#' @import igraph
+#' @export
+#' @method Animate discourse_map
+Animate.discourse_map <- function(x, edge.constant, sep = "_", 
+    current.color = "red", previous.color = "grey50", 
+    wc.time = TRUE, time.constant = 2, title = NULL, ...) {
+
+    animated_discourse_map(x[["raw"]], edge.constant = edge.constant, 
+        sep = sep, current.color = current.color, 
+        previous.color = previous.color, wc.time = wc.time, 
+        title = title, ...) 
+
+}

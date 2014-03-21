@@ -111,6 +111,75 @@ legend(.29, .95, c("Female", "Male", NA, as.character(fam_key[, 1])),
 
 ## Reset graphics margins
 par(mar=opar)
+
+## ANIMATION
+#===========
+test <- discourse_map(DATA$state, list(DATA$person))
+
+## Very quick, hard to see
+Animate(test)
+
+pdf("test.pdf")
+    par(mar=c(0, 0, 1, 0))
+    Animate(test, title="Test Plot")
+dev.off()
+
+## Animate it
+##-----------
+library(animation)
+
+loc <- folder(animation_dialogue)
+ans <- Animate(test)
+
+## Set up the plotting function
+oopt <- animation::ani.options(interval = 0.1)
+
+FUN <- function() {
+    lapply(seq_along(ans), function(i) {
+        par(mar=c(0, 0, 1, 0))
+        set.seed(10)
+        plot(ans[[i]], edge.curved=TRUE, layout=layout.circle)
+        mtext("Discourse Plot", side=3)
+        animation::ani.pause()
+    })
+}
+
+## Detect OS
+type <- if(.Platform$OS.type == "windows") shell else system
+saveGIF(FUN(), interval = 0.1, outdir = loc, cmd.fun = type)
+
+saveVideo(FUN(), interval = 0.1, outdir = loc)
+
+saveLatex(FUN(), autoplay = TRUE, loop = FALSE, latex.filename = "tester.tex",
+    caption = "animated dialogue", outdir = loc, ani.type = "pdf",
+    ani.dev = "pdf", ani.width = 5, ani.height = 5.5, interval = 0.1)
+
+saveHTML(FUN(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
+    outdir = file.path(loc, "new"), single.opts =
+    "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0")
+
+
+## More Elaborate Layout
+test2 <- with(mraja1, discourse_map(dialogue, person))
+
+loc2 <- folder(animation_dialogue2)
+ans2 <- Animate(test2)
+## Set up the plotting function
+oopt <- animation::ani.options(interval = 0.1)
+
+FUN3 <- function() {
+    lapply(seq_along(ans2), function(i) {
+        par(mar=c(0, 0, 1, 0))
+        set.seed(10)
+        plot(ans2[[i]], edge.curved=TRUE, layout=layout.auto)
+        mtext("Discourse Plot", side=3)
+        animation::ani.pause()
+    })
+}
+
+saveHTML(FUN3(), autoplay = FALSE, loop = FALSE, verbose = FALSE,
+    outdir = file.path(loc2, "new"), single.opts =
+    "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0")
 }
 }
 
