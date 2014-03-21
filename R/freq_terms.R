@@ -35,8 +35,17 @@
 #' 
 #' 
 #' ## All words by person
-#' FUN <- function(x) freq_terms(paste(x, collapse=" "), top=Inf)
+#' FUN <- function(x, n=Inf) freq_terms(paste(x, collapse=" "), top=n)
 #' list_df2df(lapply(split(x, raj$person), FUN), "person")
+#' 
+#' ## Plot it
+#' out <- lapply(split(x, raj$person), FUN, n=10)
+#' pdf("Freq Terms by Person.pdf", width=13) 
+#' lapply(seq_along(out), function(i) {
+#'     ## dev.new()
+#'     plot(out[[i]], plot=FALSE) + ggtitle(names(out)[i])
+#' })
+#' dev.off()
 #' }
 freq_terms <- 
 function(text.var, top = 20, at.least = 1, stopwords = NULL, 
