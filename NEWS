@@ -35,7 +35,7 @@ NEW FEATURES
   Phrase Net plot.
 
 * `discourse_map` function provides a network mapping of the flow of discourse 
-  between social actors.  Function output is `Animate` read as well.  See
+  between social actors.  Function output is `Animate` ready as well.  See
   `?discourse_map` and http://trinker.github.io/qdap_examples/animation_dialogue
   for more.
 
