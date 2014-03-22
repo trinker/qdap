@@ -180,7 +180,7 @@ FUN3 <- function() {
         par(mar=c(0, 0, 1, 0))
         set.seed(10)
         plot.igraph(ans2[[i]], edge.curved=TRUE, layout=layout.auto)
-        mtext("Discourse Plot", side=3)
+        mtext("Discourse Map\\nRomeo and Juliet: Act 1", side=3)
         animation::ani.pause()
     })
 }
