@@ -33,6 +33,13 @@ word counts + proportional word count} \item{plot}{An
 \description{
 View the flow of discourse from social actors.
 }
+\details{
+For an example of the video generated from the
+\code{Animate} output of \code{discourse_map} see:
+\url{https://www.youtube.com/watch?v=7LcqFZODXNo&feature=youtu.be}.
+An HTML output can be view:
+\url{http://trinker.github.io/qdap_examples/animation_dialogue}.
+}
 \examples{
 \dontrun{
 discourse_map(DATA$state, list(DATA$person, DATA$sex))
@@ -181,6 +188,8 @@ FUN3 <- function() {
 saveHTML(FUN3(), autoplay = FALSE, loop = FALSE, verbose = FALSE,
     outdir = file.path(loc2, "new"), single.opts =
     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
+
+saveVideo(FUN3(), video.name = "discourse_map.avi", interval = 0.2, outdir = loc2)
 }
 }
 

@@ -18,6 +18,11 @@
 #' proportional word count}
 #' \item{plot}{An \pkg{igraph} object}
 #' @export
+#' @details For an example of the video generated from the \code{Animate} 
+#' output of \code{discourse_map} see: 
+#' \url{https://www.youtube.com/watch?v=7LcqFZODXNo&feature=youtu.be}.  An HTML
+#' output can be view: 
+#' \url{http://trinker.github.io/qdap_examples/animation_dialogue}.
 #' @import igraph
 #' @examples
 #' \dontrun{
@@ -167,6 +172,8 @@
 #' saveHTML(FUN3(), autoplay = FALSE, loop = FALSE, verbose = FALSE,
 #'     outdir = file.path(loc2, "new"), single.opts =
 #'     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
+#'     
+#' saveVideo(FUN3(), video.name = "discourse_map.avi", interval = 0.2, outdir = loc2)    
 #' }
 discourse_map <- function(text.var, grouping.var, edge.constant, sep = "_", 
     ...) {
