@@ -25,6 +25,10 @@ And constructed with the following guidelines:
 * `colpaste2df` dropped the column name for a single retained column when 
   `keep.orig = FALSE`.  See GitHub <a href="https://github.com/trinker/qdap/issues/157">issue #157</a> for more.
 
+* `multigsub` (`mgsub`) would return `NA` for replacement of length 1 after the 
+  addition of the `order.pattern` (used to prevent substrings from 
+  replacing meta-strings) in version 1.3.2.
+
 **NEW FEATURES**
 
 * `phrase_net` function provides functioning similar to the Many Eyes 

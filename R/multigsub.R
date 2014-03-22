@@ -41,7 +41,7 @@ function(pattern, replacement = NULL, text.var, leadspace = FALSE,
 
     ## replaces the larger n character words first
     if (fixed && order.pattern) {
-        if (!is.null(replacement)) {
+        if (!is.null(replacement) && length(replacement) > 1) {
             replacement <- replacement[rev(order(nchar(pattern)))]
         }
         pattern <- pattern[rev(order(nchar(pattern)))]
