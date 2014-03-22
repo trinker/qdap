@@ -46,8 +46,9 @@ discourse_map Method for Animate
 The width of edges is based on words counts on that edge
 until that moment divided by total number of words used
 until that moment.  Thicker edges tend to thin as time
-passes.  The actual duration a word lasts is based on word
-counts for that particular flow of dialogue divided by
-total dialogue (words) used.
+passes.  The actual duration the current edge stays as the
+\code{current.color} is based on word counts for that
+particular flow of dialogue divided by total dialogue
+(words) used.
 }
 
