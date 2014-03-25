@@ -58,7 +58,7 @@ IMPROVEMENTS
   internally.  This approach could cause problems if used within other functions
   in a package.  It also limits the usability of synonyms.  The `synonyms` 
   function picks up a `synonym.frame` argument that allows the user to specify
-  a synonym hash table.  This can br created via the `synonyms_frame` function
+  a synonym hash table.  This can be created via the `synonyms_frame` function
   (per a request from J. Aravind).
 
 **CHANGES**
@@ -91,7 +91,7 @@ IMPROVEMENTS
 
 **CHANGES**
 
-* The package `lsa` has been removed from Suggests field int he DESCRIPTIONN 
+* The package `lsa` has been removed from Suggests field in the DESCRIPTIONN 
   file, examples, and vignettes.
 
 
