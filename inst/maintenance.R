@@ -86,9 +86,7 @@ cat(paste(x, collapse="\n"), file=path2)
 library(reports)
 file <- "C:/Users/trinker/GitHub/trinker.github.com"
 incoming <- file.path(file, "qdap")
-delete(incoming)
-file.copy(path, file, TRUE, TRUE)
-file.rename(file.path(file, "web"), incoming)
+# delete(incoming); file.copy(path, file, TRUE, TRUE); file.rename(file.path(file, "web"), incoming)
 #delete(path2)
 
 #==========================
