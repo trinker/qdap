@@ -1,8 +1,11 @@
 \name{exclude}
+\alias{\%ex\%}
 \alias{exclude}
 \title{Exclude Elements From a Vector}
 \usage{
 exclude(word.list, ...)
+
+word.list \%ex\% ...
 }
 \arguments{
   \item{word.list}{A list/vector of words/terms, a
@@ -17,7 +20,10 @@ exclude(word.list, ...)
 Returns a vector with the excluded terms removed.
 }
 \description{
-Quickly exclude words from a word list
+\code{exclude} - Quickly exclude words from a word list
+
+\code{\%ex\%} - Binary operator version of
+\code{\link[qdap]{exclude}} .
 }
 \examples{
 \dontrun{

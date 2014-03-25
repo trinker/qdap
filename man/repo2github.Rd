@@ -39,7 +39,7 @@ or other git interface.
 The arguments \code{project.dir} and \code{repo} use
 \code{\link[base]{getwd}}.  This assumes is the current
 working directoy is the root directory and is done for
-convienence.  The user should ensure that either their
+convenience.  The user should ensure that either their
 working directory is the root directory or supply the
 correct root directory/name to these arguments.
 }

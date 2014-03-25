@@ -33,7 +33,7 @@ syn_frame(synonym.list, envir = TRUE, prior.frame)
   containing a dataframe of positive/negative words and
   weights.}
 
-  \item{synonym.list}{A named list of lists (or vectos) of
+  \item{synonym.list}{A named list of lists (or vectors) of
   synonyms.}
 
   \item{envir}{logical.  If \code{TRUE} a lookup table (a

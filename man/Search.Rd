@@ -80,7 +80,7 @@ frame.
 \code{boolean_search} - Conducts a Boolean search for
 terms/strings within a character vector.
 
-\code{bs} - Binary operator version of
+\code{\%bs\%} - Binary operator version of
 \code{\link[qdap]{boolean_search}} .
 }
 \details{

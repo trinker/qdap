@@ -12,7 +12,7 @@
 #' the counts.
 #' @param fix.space logical.  If \code{TRUE} extra spaces left behind from an 
 #' extraction will be eliminated.  Additionally, non-space (e.g., 
-#' \strong{"text(nospace between text and parenthesis)"}) is replaced with a 
+#' \strong{"text(no space between text and parenthesis)"}) is replaced with a 
 #' single space (e.g., \strong{"text (space between text and parenthesis)"}).
 #' @param scrub logical.  If \code{TRUE} \code{\link[qdap]{scrubber}} will clean 
 #' the text.

@@ -734,7 +734,7 @@ plot.readability_count <- function(x, alpha = .3, ...){
 #' \code{TRUE} labels automatically added.  If \code{FALSE} the user clicks 
 #' interactively.
 #' @param grid logical.  For plotting \code{\link[qdap]{fry}} only, if 
-#' \code{TRUE} a micro grid is displayedsimilar to Fry's original depiction, 
+#' \code{TRUE} a micro grid is displayed similar to Fry's original depiction, 
 #' though this makes visualizing more difficult.
 #' @param div.col For plotting \code{\link[qdap]{fry}} only, the color of the 
 #' grade level division lines.
@@ -1519,7 +1519,7 @@ scores.fry <- function(x, ...) {
 #' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param auto.label  logical.  If \code{TRUE} labels automatically added.  If 
 #' \code{FALSE} the user clicks interactively.
-#' @param grid logical.  If \code{TRUE} a micro grid is displayedsimilar to 
+#' @param grid logical.  If \code{TRUE} a micro grid is displayed similar to 
 #' Fry's original depiction, though this makes visualizing more difficult.
 #' @param div.col The color of the grade level division lines.
 #' @param plot logical.  If \code{TRUE} a graph is plotted corresponding to Fry's 

@@ -205,7 +205,7 @@ splitting <- function(x) {
 
 #' Search Columns of a Data Frame 
 #' 
-#' \code{bs} - Binary operator version of \code{\link[qdap]{boolean_search}} .
+#' \code{\%bs\%} - Binary operator version of \code{\link[qdap]{boolean_search}} .
 #' 
 #' @rdname Search
 #' @export

@@ -92,7 +92,7 @@ syn <- synonyms
 #' for use with the \code{synonym.frame} argument in the \code{synonym} 
 #' function.
 #' 
-#' @param synonym.list A named list of lists (or vectos) of synonyms.
+#' @param synonym.list A named list of lists (or vectors) of synonyms.
 #' @param envir logical.  If \code{TRUE} a lookup table (a dataframe within 
 #' an environment) is produced rather than a data.frame.
 #' @param prior.frame A prior synonyms data.frame in the format produced by \code{synonym_frame}

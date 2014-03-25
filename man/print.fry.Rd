@@ -15,8 +15,8 @@
   interactively.}
 
   \item{grid}{logical.  If \code{TRUE} a micro grid is
-  displayedsimilar to Fry's original depiction, though this
-  makes visualizing more difficult.}
+  displayed similar to Fry's original depiction, though
+  this makes visualizing more difficult.}
 
   \item{div.col}{The color of the grade level division
   lines.}

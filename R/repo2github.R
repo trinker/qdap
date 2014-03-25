@@ -26,7 +26,7 @@
 #' \code{file.path(Sys.getenv()["HOME"], "DELETE_ME_REPORTS_PACKAGE/_nectrc")}.
 #' @details The arguments \code{project.dir} and \code{repo} use 
 #' \code{\link[base]{getwd}}.  This assumes is the current working directoy is 
-#' the root directory and is done for convienence.  The user should ensure that 
+#' the root directory and is done for convenience.  The user should ensure that 
 #' either their working directory is the root directory or supply the correct 
 #' root directory/name to these arguments.
 #' @note The user will need to have a \href{https://github.com/}{GitHub} account 

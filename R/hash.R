@@ -61,7 +61,7 @@ hash_look <- function(terms, envir, missing = NA) {
 
 #' Hash/Dictionary Lookup
 #' 
-#' \code{terms \%ha\% envir} - A binary operator version of \code{hash_look}.
+#' \code{\%ha\%} - A binary operator version of \code{hash_look}.
 #'
 #' @export
 #' @rdname hash

@@ -76,7 +76,7 @@ qheat(mat, low = "white", high = "darkblue", values = FALSE, digits = 1,
 
   \item{diag.values}{The string to be used for the diagonal
   labels (values) if \code{diag.na} is set to \code{TRUE}.
-  Defualt is to not print a value.}
+  Default is to not print a value.}
 }
 \description{
 A quick heatmap function for visualizing typical qdap

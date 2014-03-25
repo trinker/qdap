@@ -17,7 +17,7 @@
 
   \item{grid}{logical.  For plotting
   \code{\link[qdap]{fry}} only, if \code{TRUE} a micro grid
-  is displayedsimilar to Fry's original depiction, though
+  is displayed similar to Fry's original depiction, though
   this makes visualizing more difficult.}
 
   \item{div.col}{For plotting \code{\link[qdap]{fry}} only,

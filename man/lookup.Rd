@@ -31,17 +31,15 @@ terms \%l+\% key.match
 Outputs A new vector with reassigned values.
 }
 \description{
-Environment based hash table useful for large vector
-lookups.
+\code{lookup} - Environment based hash table useful for
+large vector lookups.
 
-\code{terms \%l\% key.match} - A binary operator version of
-\code{lookup} for when \code{key.match} is a data.frame or
-named list.
+\code{\%l\%} - A binary operator version of \code{lookup}
+for when \code{key.match} is a data.frame or named list.
 
-\code{terms \%l+\% key.match} - A binary operator version
-of \code{lookup} for when \code{key.match} is a data.frame
-or named list and \code{missing} is assumed to be
-\code{NULL}.
+\code{\%l+\%} - A binary operator version of \code{lookup}
+for when \code{key.match} is a data.frame or named list and
+\code{missing} is assumed to be \code{NULL}.
 }
 \examples{
 \dontrun{

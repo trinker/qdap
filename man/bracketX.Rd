@@ -31,7 +31,7 @@ genXtract(text.var, left, right, with = FALSE, merge = TRUE)
 
   \item{fix.space}{logical.  If \code{TRUE} extra spaces
   left behind from an extraction will be eliminated.
-  Additionally, non-space (e.g., \strong{"text(nospace
+  Additionally, non-space (e.g., \strong{"text(no space
   between text and parenthesis)"}) is replaced with a
   single space (e.g., \strong{"text (space between text and
   parenthesis)"}).}

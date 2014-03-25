@@ -1,6 +1,6 @@
 #' Hash Table/Dictionary Lookup
 #'  
-#' Environment based hash table useful for large vector lookups.
+#' \code{lookup} - Environment based hash table useful for large vector lookups.
 #' 
 #' @param terms A vector of terms to undergo a lookup.
 #' @param key.match Takes one of the following: (1) a two column data.frame of a 
@@ -131,7 +131,7 @@ function(terms, key.match, key.reassign=NULL, missing = NA) {
 
 #' Hash/Dictionary Lookup
 #' 
-#' \code{terms \%l\% key.match} - A binary operator version of \code{lookup} 
+#' \code{\%l\%} - A binary operator version of \code{lookup} 
 #' for when \code{key.match} is a data.frame or named list.
 #'
 #' @export
@@ -140,7 +140,7 @@ function(terms, key.match, key.reassign=NULL, missing = NA) {
 
 #' Hash/Dictionary Lookup
 #' 
-#' \code{terms \%l+\% key.match} - A binary operator version of \code{lookup} 
+#' \code{\%l+\%} - A binary operator version of \code{lookup} 
 #' for when \code{key.match} is a data.frame or named list and \code{missing} is
 #' assumed to be \code{NULL}.
 #'

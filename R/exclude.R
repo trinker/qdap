@@ -1,6 +1,6 @@
 #' Exclude Elements From a Vector
 #' 
-#' Quickly exclude words from a word list
+#' \code{exclude} - Quickly exclude words from a word list
 #' 
 #' @param word.list A list/vector of words/terms, a \code{\link[qdap]{wfm}}, 
 #' \code{\link[tm]{DocumentTermMatrix}}, or \code{\link[tm]{TermDocumentMatrix}}
@@ -9,6 +9,7 @@
 #' the \code{word.list}.
 #' @return Returns a vector with the excluded terms removed.
 #' @export
+#' @rdname exclude
 #' @examples
 #' \dontrun{
 #' exclude(1:10, 3, 4)
@@ -81,5 +82,13 @@ function(word.list, ...) {
 }
 
 
-
+#' Exclude Elements From a Vector
+#' 
+#' \code{\%ex\%} - Binary operator version of \code{\link[qdap]{exclude}} .
+#' 
+#' @rdname exclude
+#' @export
+`%ex%` <- function(word.list, ...) {
+    exclude(word.list=word.list, ...)
+}
 

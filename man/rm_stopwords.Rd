@@ -1,4 +1,5 @@
 \name{rm_stopwords}
+\alias{\%sw\%}
 \alias{rm_stop}
 \alias{rm_stopwords}
 \title{Remove Stop Words}
@@ -11,6 +12,8 @@ rm_stopwords(text.var, stopwords = qdapDictionaries::Top25Words,
 rm_stop(text.var, stopwords = qdapDictionaries::Top25Words, unlist = FALSE,
   separate = TRUE, strip = FALSE, unique = FALSE, char.keep = NULL,
   names = FALSE, ignore.case = TRUE, apostrophe.remove = FALSE, ...)
+
+text.var \%sw\% stopwords
 }
 \arguments{
   \item{text.var}{A character string of text or a vector of
@@ -63,7 +66,11 @@ Returns a vector of sentences, vector of words, or
 removed.  Output depends on supplied arguments.
 }
 \description{
-Transcript apply the removal of stop words.
+Removal of stop words in a variety of contexts .
+
+\code{\%sw\%} - Binary operator version of
+\code{\link[qdap]{rm_stopwords}} that defaults to
+\code{separate = FALSE}..
 }
 \examples{
 \dontrun{
@@ -76,6 +83,8 @@ rm_stopwords(DATA$state, Top200Words, separate = FALSE, ignore.case = FALSE)
 rm_stopwords(DATA$state, Top200Words, unlist = TRUE)
 rm_stopwords(DATA$state, Top200Words, unlist = TRUE, strip=TRUE)
 rm_stop(DATA$state, Top200Words, unlist = TRUE, unique = TRUE)
+
+c("I like it alot", "I like it too") \%sw\% qdapDictionaries::Top25Words
 }
 }
 \seealso{

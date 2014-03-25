@@ -34,7 +34,7 @@ style dictionary lookup.
 \code{hash_look} - Works with a hash table such as is
 returned from \code{hash}, to lookup values.
 
-\code{terms \%ha\% envir} - A binary operator version of
+\code{\%ha\%} - A binary operator version of
 \code{hash_look}.
 }
 \examples{

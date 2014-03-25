@@ -38,7 +38,7 @@
 #' matrices because the diagonal of ones do not affect the scaling of the 
 #' heatmap.
 #' @param diag.values The string to be used for the diagonal labels (values) 
-#' if \code{diag.na} is set to \code{TRUE}.  Defualt is to not print a value.
+#' if \code{diag.na} is set to \code{TRUE}.  Default is to not print a value.
 #' @details \code{qheat} is useful for finding patterns and anomalies in large
 #' qdap generated dataframes and matrices.
 #' @note \code{\link[qdap]{qheat}} is a fast way of working with data formats 
