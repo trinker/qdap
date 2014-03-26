@@ -1,8 +1,7 @@
 \name{gantt}
 \alias{gantt}
 \alias{plot_gantt_base}
-\title{Generates start and end times of supplied text selections (i.e., text
-selections are determined by any number of grouping variables).}
+\title{Gantt Durations}
 \usage{
 gantt(text.var, grouping.var, units = "words", sums = FALSE,
   col.sep = "_")
@@ -48,9 +47,9 @@ frame of the total units used by grouping variable(s) and
 variable(s).
 }
 \description{
-Generates start and end times of supplied text selections
-(i.e., text selections are determined by any number of
-grouping variables).
+\code{gantt} - Generates start and end times of supplied
+text selections (i.e., text selections are determined by
+any number of grouping variables).
 
 \code{plot_gantt_base} - For internal use.
 }
@@ -91,6 +90,31 @@ plot(f, base = FALSE)
 
 dat <- gantt(mraja1$dialogue, list(mraja1$fam.aff, mraja1$sex),
     units = "sentences", col.sep = "_")
+
+
+## Animate It
+##=================
+ani_gannt <- with(DATA.SPLIT, gantt(state, person))
+Animate(ani_gannt)
+Animate(plot(ani_gannt))
+
+library(animation)
+loc <- folder(animation_gantt)
+
+## Set up the plotting function
+oopt <- animation::ani.options(interval = 0.1)
+
+FUN <- function() {
+    out <- Animate(ani_gannt)
+    lapply(out, function(x) {
+        print(x)
+        animation::ani.pause()
+    })
+
+}
+
+type <- if(.Platform$OS.type == "windows") shell else system
+saveGIF(FUN(), interval = 0.1, outdir = loc, cmd.fun = type)
 }
 }
 \author{

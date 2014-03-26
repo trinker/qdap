@@ -73,6 +73,39 @@
 #' 
 #' ## Reset rajSPLIT
 #' rajSPLIT <- qdap::rajSPLIT
+#' 
+#' ## Animate It
+#' ##=================
+#' ani_gannt <- with(mraja1, gantt_plot(dialogue, person))
+#' 
+#' library(animation)
+#' loc <- folder(animation_gantt)
+#' 
+#' ## Set up the plotting function
+#' oopt <- animation::ani.options(interval = 0.1)
+#' 
+#' FUN <- function() {
+#'     out <- Animate(ani_gannt)
+#'     lapply(out, function(x) {
+#'         print(x)
+#'         animation::ani.pause()
+#'     })
+#' 
+#' }
+#' 
+#' type <- if(.Platform$OS.type == "windows") shell else system
+#' saveVideo(FUN(), video.name = "animation.avi", interval = 0.1, outdir = loc)
+#' 
+#' saveLatex(FUN(), autoplay = TRUE, loop = FALSE, latex.filename = "tester.tex", 
+#'     caption = "animated dialogue", outdir = loc, ani.type = "pdf", 
+#'     ani.dev = "pdf", ani.width = 5, ani.height = 5.5, interval = 0.1)
+#' 
+#' 
+#' saveHTML(FUN(), autoplay = FALSE, loop = TRUE, verbose = FALSE, 
+#'     ani.width=600, ani.height=280,
+#'     outdir = file.path(loc, "new"), single.opts = 
+#'     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
+#' 
 #' }
 gantt_plot <- 
 function(text.var, grouping.var = NULL, rm.var = NULL, fill.var = NULL, 

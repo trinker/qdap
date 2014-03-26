@@ -24,9 +24,14 @@ And constructed with the following guidelines:
 
 **NEW FEATURES**
 
+* `gantt` and `gantt_wrap` (single facet) pick up and `Animate` mathod.
+
 **MINOR FEATURES**
 
 IMPROVEMENTS
+
+* `discourse_map` picks up a `condense` argument that allows the user to 
+  condense sequential rows for like grouping variable sub groups.
 
 **CHANGES**
 

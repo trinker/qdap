@@ -36,7 +36,7 @@
   \item{\ldots}{ignored}
 }
 \description{
-\code{Animate.discourse_map} - View Animate from
+\code{Animate.discourse_map} - Animate from discourse
 \code{\link[qdap]{discourse_map}}.
 }
 \details{

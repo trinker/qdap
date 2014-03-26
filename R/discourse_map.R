@@ -9,6 +9,8 @@
 #' @param edge.constant A constant to multiple the edges by.  Defaults (if 
 #' \code{missing}) to 2.5 times the number of social actors.
 #' @param \ldots ignored
+#' @param condense logical.  If \code{TRUE} \code{sentCombine} is used to 
+#' condense text by grouping variable.
 #' @param sep The separator character to use between grouping variables.
 #' @return Returns a list:
 #' \item{raw}{The dataframe with to and from columns (the edges) + word counts}
@@ -21,7 +23,7 @@
 #' @details For an example of the video generated from the \code{Animate} 
 #' output of \code{discourse_map} see: 
 #' \url{https://www.youtube.com/watch?v=7LcqFZODXNo&feature=youtu.be}.  An HTML
-#' output can be view: 
+#' output can be viewed: 
 #' \url{http://trinker.github.io/qdap_examples/animation_dialogue}.
 #' @import igraph
 #' @examples
@@ -173,10 +175,11 @@
 #'     outdir = file.path(loc2, "new"), single.opts =
 #'     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
 #'     
-#' saveVideo(FUN3(), video.name = "discourse_map.avi", interval = 0.2, outdir = loc2)    
+#' saveVideo(FUN3(), video.name = "discourse_map.avi", interval = 0.2, 
+#'     outdir = loc2)    
 #' }
 discourse_map <- function(text.var, grouping.var, edge.constant, sep = "_", 
-    ...) {
+    condense = TRUE, ...) {
 
     if (is.list(grouping.var)) {
         m <- unlist(as.character(substitute(grouping.var))[-1])
@@ -202,7 +205,17 @@ discourse_map <- function(text.var, grouping.var, edge.constant, sep = "_",
         edge.constant <- length(unique(grouping)) * 2.5
     }
 
+    ## check if any grouping vars repeat and condense
+    if(condense) {
+        if (sum(rle(as.character(grouping.var))[["lengths"]] > 1) > 0){
+            dat <- sentCombine(text.var, grouping.var)
+            grouping <- dat[, 1]
+            text.var <- dat[, 2]
+        }
+    }
+
     DF <- map_df1(grouping, text.var) 
+
     DF2 <- map_df2(DF, qsep)
     DF3 <- map_df3(DF)
     g <- map_graph_qdap(DF2, edge.constant)
@@ -410,9 +423,10 @@ map_df2b <- function(DF, qsep){
 }
 
 
-#'Discourse Map
+#' Discourse Map
 #' 
-#' \code{Animate.discourse_map} - View Animate from \code{\link[qdap]{discourse_map}}.
+#' \code{Animate.discourse_map} - Animate from discourse 
+#' \code{\link[qdap]{discourse_map}}.
 #' 
 #' discourse_map Method for Animate
 #' @param x The discourse_map object.
@@ -443,6 +457,6 @@ Animate.discourse_map <- function(x, edge.constant, sep = "_",
     animated_discourse_map(x[["raw"]], edge.constant = edge.constant, 
         sep = sep, current.color = current.color, 
         previous.color = previous.color, wc.time = wc.time, 
-        title = title, ...) 
+        title = title, ...)
 
 }

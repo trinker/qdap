@@ -260,8 +260,45 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     if (!is.null(fill.var)){
         theplot <- theplot + guides(colour = guide_legend(fill.var))
     }
+    class(theplot)<-c(class(theplot), ifelse(is.null(facet.vars),"gantt_plot", 
+        "gantt_plot_m"))
     if (plot) {
         print(theplot)
     }
     invisible(theplot)
 }
+
+#' Gantt Plot
+#' 
+#' \code{gantt_plot} - Animate discourse from \code{\link[qdap]{gantt_wrap}},
+#' \code{\link[qdap]{gantt_wrap}}, or any other Gantt plotting method.
+#' 
+#' gantt_plot Method for Animate
+#' @param x The gantt_plot object.
+#' @param wc.time logical.  If \code{TRUE} weights duration of frame by word 
+#' count.
+#' @param time.constant A constant to divide the maximum word count by.  Time
+#' is calculated by `round(exp(WORD COUNT/(max(WORD COUNT)/time.constant)))`.  
+#' Therefore a larger constant will make the difference between the large and 
+#' small word counts greater.
+#' @param \ldots ignored
+#' @export
+#' @method Animate gantt_plot
+Animate.gantt_plot <- function(x, wc.time = TRUE, time.constant = 2, ...){
+
+     x[[c("coordinates", "limits", "x")]] <- c(0, sum(x[["data"]][, "n"]))
+     plots <- lapply(1:nrow(x[["data"]]), function(i, myplot=x, dat = x[["data"]]) {
+         thedat <- dat[1:i, , drop=FALSE]
+         thedat[, 1]
+         myplot[["data"]] <- thedat
+         myplot + scale_y_discrete(drop=FALSE)
+     })
+
+    timings <- round(exp(x[["data"]][, "n"]/(max(x[["data"]][, "n"])/time.constant)))
+    if(wc.time) {
+        plots <- rep(plots, timings)
+    }
+    plots
+}
+
+

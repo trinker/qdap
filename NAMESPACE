@@ -1,4 +1,6 @@
 S3method(Animate,discourse_map)
+S3method(Animate,gantt)
+S3method(Animate,gantt_plot)
 S3method(Filter,DocumentTermMatrix)
 S3method(Filter,TermDocumentMatrix)
 S3method(Filter,all_words)

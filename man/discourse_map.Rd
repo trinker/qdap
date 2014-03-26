@@ -2,7 +2,8 @@
 \alias{discourse_map}
 \title{Discourse Mapping}
 \usage{
-discourse_map(text.var, grouping.var, edge.constant, sep = "_", ...)
+discourse_map(text.var, grouping.var, edge.constant, sep = "_",
+  condense = TRUE, ...)
 }
 \arguments{
   \item{text.var}{The text variable or a
@@ -18,6 +19,10 @@ discourse_map(text.var, grouping.var, edge.constant, sep = "_", ...)
   social actors.}
 
   \item{\ldots}{ignored}
+
+  \item{condense}{logical.  If \code{TRUE}
+  \code{sentCombine} is used to condense text by grouping
+  variable.}
 
   \item{sep}{The separator character to use between
   grouping variables.}
@@ -37,7 +42,7 @@ View the flow of discourse from social actors.
 For an example of the video generated from the
 \code{Animate} output of \code{discourse_map} see:
 \url{https://www.youtube.com/watch?v=7LcqFZODXNo&feature=youtu.be}.
-An HTML output can be view:
+An HTML output can be viewed:
 \url{http://trinker.github.io/qdap_examples/animation_dialogue}.
 }
 \examples{
@@ -189,7 +194,8 @@ saveHTML(FUN3(), autoplay = FALSE, loop = FALSE, verbose = FALSE,
     outdir = file.path(loc2, "new"), single.opts =
     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
 
-saveVideo(FUN3(), video.name = "discourse_map.avi", interval = 0.2, outdir = loc2)
+saveVideo(FUN3(), video.name = "discourse_map.avi", interval = 0.2,
+    outdir = loc2)
 }
 }
 
