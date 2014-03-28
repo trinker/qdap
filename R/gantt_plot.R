@@ -76,7 +76,7 @@
 #' 
 #' ## Animate It
 #' ##=================
-#' ani_gannt <- with(mraja1, gantt_plot(dialogue, person))
+#' ani_gantt <- with(mraja1, gantt_plot(dialogue, person))
 #' 
 #' library(animation)
 #' loc <- folder(animation_gantt)
@@ -85,7 +85,7 @@
 #' oopt <- animation::ani.options(interval = 0.1)
 #' 
 #' FUN <- function() {
-#'     out <- Animate(ani_gannt)
+#'     out <- Animate(ani_gantt)
 #'     lapply(out, function(x) {
 #'         print(x)
 #'         animation::ani.pause()

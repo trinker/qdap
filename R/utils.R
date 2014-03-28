@@ -9,3 +9,12 @@ rbind_qdap <- function(x) {
     })), row.names = NULL)
 
 }
+
+
+## Chosing colour pallette that matches ggplot2's default colour pallette
+## Compliments of John Colby
+## http://stackoverflow.com/a/8197703/1000343
+gg_color_hue <- function(n) {
+    hues <- seq(15, 375, length=n+1)
+    hcl(h=hues, l=65, c=100)[1:n]
+}

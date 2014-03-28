@@ -27,8 +27,8 @@
 #' (out <- freq_terms(pres_debates2012$dialogue, stopwords = Top200Words))
 #' plot(out)
 #' 
-#' x <- raj$dialogue
 #' ## All words by sentence (row)
+#' x <- raj$dialogue
 #' list_df2df(setNames(lapply(x, freq_terms, top=Inf), seq_along(x)), "row")
 #' list_df2df(setNames(lapply(x, freq_terms, top=10, stopwords = Dolch), 
 #'     seq_along(x)), "Title")

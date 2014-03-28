@@ -133,7 +133,7 @@
 #'         par(mar=c(0, 0, 1, 0))
 #'         set.seed(10)
 #'         plot.igraph(ans[[i]], edge.curved=TRUE, layout=layout.circle)
-#'         mtext("Discourse Plot", side=3)
+#'         mtext("Discourse Map", side=3)
 #'         animation::ani.pause()
 #'     })
 #' }
@@ -377,11 +377,17 @@ animated_discourse_map <- function(DF, edge.constant, sep = "_",
         igraph_objs <- rep(igraph_objs, timings)
     }
 
+    ## starts with a blank object
+    igraph_objs <- rep(igraph_objs, c(2, rep(1, length(igraph_objs) - 1)))
+    uncol <- E(igraph_objs[[1]])$color
+    E(igraph_objs[[1]])$color[!is.na(uncol)] <- NA
+
     class(igraph_objs) <- "animated_discourse_map"
     attributes(igraph_objs)[["title"]] <- title
     attributes(igraph_objs)[["timings"]] <- timings
     igraph_objs
 }
+
 #' Prints a animated_discourse_map  Object
 #' 
 #' Prints a animated_discourse_map  object.

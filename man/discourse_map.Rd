@@ -152,7 +152,7 @@ FUN <- function() {
         par(mar=c(0, 0, 1, 0))
         set.seed(10)
         plot.igraph(ans[[i]], edge.curved=TRUE, layout=layout.circle)
-        mtext("Discourse Plot", side=3)
+        mtext("Discourse Map", side=3)
         animation::ani.pause()
     })
 }
