@@ -1,0 +1,43 @@
+\name{vertex_apply}
+\alias{edge_apply}
+\alias{vertex_apply}
+\title{Apply Parameter to List of Igraph Vertices/Edges}
+\usage{
+vertex_apply(x, ..., hold.ends = NULL)
+
+edge_apply(x, ..., hold.ends = c("label.color"))
+}
+\arguments{
+  \item{x}{A list of \pkg{igraph} objects.}
+
+  \item{\ldots}{Arguments passed \pkg{igraph}'s
+  \code{\link[igraph]{V}} and \code{\link[igraph]{E}}. See
+  \href{http://igraph.sourceforge.net/doc/R/plot.common.html}{Drawing
+  Graphs} for more.}
+
+  \item{hold.ends}{A vector of parameters passed to \dots
+  that should not be altered for the first and last (ends)
+  objects in the list.}
+}
+\value{
+Returns a list of igraph objects.
+}
+\description{
+\code{vertex_apply} - Uniformly apply \pkg{igrph} vertex
+plotting parameters to a list of \pkg{igraph} objects.
+
+\code{edge_apply} - Uniformly apply \pkg{igrph} edge
+plotting parameters to a list of \pkg{igraph} objects.
+}
+\examples{
+\dontrun{
+x <- with(DATA.SPLIT, polarity(state, person))
+bg_black <- Animate(x, neutral="white")
+print(bg_black)
+
+bgb <- vertex_apply(bg_black, label.color="grey80", size=20, color="grey40")
+bgb <- edge_apply(bgb, label.color="yellow")
+print(bgb, bg="black", pause=.75)
+}
+}
+

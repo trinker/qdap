@@ -198,7 +198,6 @@ sd_section("Identification",
 sd_section("Visualization", 
   "Plotting functions.",
   c(
-    "Animate.discourse_map", 
     "discourse_map", 
     "dispersion_plot",
     "gradient_cloud",
@@ -228,6 +227,16 @@ sd_section("Visualization",
     "trans_cloud",
     "trans_venn",
     "word_network_plot"
+  )
+)
+
+sd_section("Animation", 
+  "Animate qdap Objects.",
+  c(
+    "Animate",
+    "Animate.discourse_map",
+    "Animate.polarity",
+    "vertex_apply"
   )
 )
 

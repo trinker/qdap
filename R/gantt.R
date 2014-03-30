@@ -1,7 +1,7 @@
 #' Gantt Durations
 #' 
-#' \code{gantt} - Generates start and end times of supplied text selections (i.e., text 
-#' selections are determined by any number of grouping variables).
+#' \code{gantt} - Generates start and end times of supplied text selections 
+#' (i.e., text selections are determined by any number of grouping variables).
 #' 
 #' @param text.var The text variable    
 #' @param grouping.var The grouping variables. Also takes a single grouping 

@@ -142,7 +142,7 @@
 #' type <- if(.Platform$OS.type == "windows") shell else system
 #' saveGIF(FUN(), interval = 0.1, outdir = loc, cmd.fun = type)
 #' 
-#' saveVideo(FUN(), interval = 0.1, outdir = loc)
+#' saveVideo(FUN(), video.name = "discourse_map.avi", interval = 0.1, outdir = loc)
 #' 
 #' saveLatex(FUN(), autoplay = TRUE, loop = FALSE, latex.filename = "tester.tex", 
 #'     caption = "animated dialogue", outdir = loc, ani.type = "pdf", 
@@ -349,7 +349,7 @@ animated_discourse_map <- function(DF, edge.constant, sep = "_",
         DF2[, "color"] <- previous.color
         DF2[nrow(DF2), "color"] <- current.color
         DF2
-    }), paste0("Turn_", 1:nrow(DF)))
+    }), paste0("Turn_", pad(1:nrow(DF))))
 
     igraph_objs <- setNames(lapply(seq_along(igraph_weights), 
         function(i, grp =g, len=length(nms), sep=qsep){
@@ -370,7 +370,7 @@ animated_discourse_map <- function(DF, edge.constant, sep = "_",
         E(grp)$width <- NAer(ekey %l% wkey)
         E(grp)$color <- ekey %l% ckey
         grp
-    }), paste0("Turn_", 1:nrow(DF)))
+    }), paste0("Turn_", pad(1:nrow(DF))))
 
     timings <- round(exp(DF[, "wc"]/(max(DF[, "wc"])/time.constant)))
     if(wc.time) {
@@ -379,6 +379,8 @@ animated_discourse_map <- function(DF, edge.constant, sep = "_",
 
     ## starts with a blank object
     igraph_objs <- rep(igraph_objs, c(2, rep(1, length(igraph_objs) - 1)))
+    len <- nchar(char2end(names(igraph_objs)[1], "_"))
+    names(igraph_objs)[1] <- sprintf("turn_%s", paste(rep(0, len), collapse=""))
     uncol <- E(igraph_objs[[1]])$color
     E(igraph_objs[[1]])$color[!is.na(uncol)] <- NA
 
@@ -401,14 +403,14 @@ animated_discourse_map <- function(DF, edge.constant, sep = "_",
 #' @method print animated_discourse_map 
 #' @S3method print animated_discourse_map 
 print.animated_discourse_map <- function(x, title = NULL, 
-    seed = sample(1:10000, 1), layout=layout.circle, ...){
+    seed = sample(1:10000, 1), layout=layout.auto, ...){
     
     if (is.null(title)) {
         title <- attributes(x)[["title"]]
     }
 
-    set.seed(seed)
     invisible(lapply(x, function(y) {
+        set.seed(seed)        
         plot.igraph(y, edge.curved=TRUE, layout=layout)
         if (!is.null(title)) {
             mtext(title, side=3)
@@ -431,7 +433,7 @@ map_df2b <- function(DF, qsep){
 
 #' Discourse Map
 #' 
-#' \code{Animate.discourse_map} - Animate from discourse 
+#' \code{Animate.discourse_map} - Animate a discourse 
 #' \code{\link[qdap]{discourse_map}}.
 #' 
 #' discourse_map Method for Animate

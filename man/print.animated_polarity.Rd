@@ -1,0 +1,38 @@
+\name{print.animated_polarity}
+\alias{print.animated_polarity}
+\title{Prints a animated_polarity  Object}
+\usage{
+\method{print}{animated_polarity}(x, title = NULL, seed = sample(1:10000,
+  1), layout = layout.auto, pause = 0, legend = c(-0.5, -1.5, 0.5, -1.45),
+  legend.cex = 1, bg = NULL, ...)
+}
+\arguments{
+  \item{x}{The animated_polarity object.}
+
+  \item{title}{The title of the plot.}
+
+  \item{layout}{\pkg{igraph} \code{layout} to use.}
+
+  \item{seed}{The seed to use in plotting the graph.}
+
+  \item{pause}{The length of time to pause between plots.}
+
+  \item{legend}{The coordinates of the legend. See
+  \code{\link[plotrix]{color.legend}} for more
+  information.}
+
+  \item{legend.cex}{character expansion factor. \code{NULL}
+  and \code{NA} are equivalent to 1.0. See
+  \code{\link[graphics]{mtext}} for more information.}
+
+  \item{bg}{The color to be used for the background of the
+  device region. See \code{\link[graphics]{par}} for more
+  information.}
+
+  \item{\ldots}{Other Arguments passed to
+  \code{\link[igraph]{plot.igraph}}.}
+}
+\description{
+Prints a animated_polarity object.
+}
+

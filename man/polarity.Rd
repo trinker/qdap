@@ -194,6 +194,54 @@ qheat(scores(poldat3)[, -7], high="red", order.b="ave.polarity")
 POLENV <- polarity_frame(positive.words, negative.words)
 POLENV
 ls(POLENV)[1:20]
+
+## ANIMATION
+#===========
+(deb2 <- with(subset(pres_debates2012, time=="time 2"),
+    polarity(dialogue, person)))
+
+bg_black <- Animate(deb2, neutral="white")
+print(bg_black, pause=.75)
+
+bgb <- vertex_apply(bg_black, label.color="grey80", size=20, color="grey40")
+bgb <- edge_apply(bgb, label.color="yellow")
+print(bgb, bg="black", pause=.75)
+
+## Save it
+library(animation)
+library(igraph)
+library(plotrix)
+
+loc <- folder(animation_polarity)
+
+## Set up the plotting function
+oopt <- animation::ani.options(interval = 0.1)
+
+FUN <- function() {
+    Title <- "Animated Polarity: 2012 Presidential Debate 2"
+    Legend <- c(-1.1, -1.25, -.2, -1.2)
+    Legend.cex <- 1
+    lapply(seq_along(bgb), function(i) {
+        par(mar=c(2, 0, 1, 0), bg="black")
+        set.seed(10)
+        plot.igraph(bgb[[i]], edge.curved=TRUE)
+        mtext(Title, side=3, col="white")
+        color.legend(Legend[1], Legend[2], Legend[3], Legend[4],
+              c("Negative", "Neutral", "Positive"), attributes(bgb)[["legend"]],
+              cex = Legend.cex, col="white")
+        animation::ani.pause()
+    })
+}
+
+FUN()
+
+## Detect OS
+type <- if(.Platform$OS.type == "windows") shell else system
+
+saveHTML(FUN(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
+    ani.height = 500, ani.width=500,
+    outdir = file.path(loc, "new"), single.opts =
+    "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
 }
 }
 \references{

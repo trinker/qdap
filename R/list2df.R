@@ -114,7 +114,7 @@ vect2df <- function(vector.object, col1 = "X1", col2 = "X2", order = TRUE,
 list_df2df <- function(list.df.object, col1 = "X1") {
 
     if (is.null(names(list.df.object))) {
-        names(list.df.object) <- paste0("L", 1:length(list.df.object))
+        names(list.df.object) <- paste0("L", pad(1:length(list.df.object)))
     }
     list.names <- rep(names(list.df.object), sapply(list.df.object, nrow))
     out <- data.frame(list.names, do.call(rbind, list.df.object), row.names=NULL)

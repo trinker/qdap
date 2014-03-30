@@ -5,8 +5,7 @@
 Animate(x, ...)
 }
 \arguments{
-  \item{x}{A qdap object (list) with a animatable
-  graph-plot object (e.g.,
+  \item{x}{An animatable qdap object (e.g.,
   \code{\link[qdap]{discourse_map}}).}
 
   \item{\ldots}{Arguments passed to Animate method of other
@@ -16,7 +15,7 @@ Animate(x, ...)
 Returns a plot object.
 }
 \description{
-Animate graph-plot objects from select qdap outputs.
+Animate select qdap objects.
 }
 \seealso{
 \code{\link[qdap]{scores}}, \code{\link[qdap]{counts}},

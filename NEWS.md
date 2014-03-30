@@ -26,12 +26,21 @@ And constructed with the following guidelines:
 
 * `gantt` and `gantt_wrap` (single facet) pick up and `Animate` mathod.
 
+* `polarity` pics up an `Animate` method.
+
+* `vertex_apply` and `edge` apply added to make uniform changes to lists of 
+  `igraph` objects.
+
 **MINOR FEATURES**
 
 IMPROVEMENTS
 
 * `discourse_map` picks up a `condense` argument that allows the user to 
   condense sequential rows for like grouping variable sub groups.
+
+* `list_df2df` names now use a zero padded numeric portion for defualt names.  
+  For example `c("L1", "L2", "L3", ... "L10")`, becomes 
+  `c("L01", "L02", "L03", ... "L10")`.
 
 **CHANGES**
 

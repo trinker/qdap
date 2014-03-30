@@ -3,7 +3,7 @@
 \title{Prints a animated_discourse_map  Object}
 \usage{
 \method{print}{animated_discourse_map}(x, title = NULL,
-  seed = sample(1:10000, 1), layout = layout.circle, ...)
+  seed = sample(1:10000, 1), layout = layout.auto, ...)
 }
 \arguments{
   \item{x}{The animated_discourse_map object.}

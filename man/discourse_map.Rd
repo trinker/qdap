@@ -161,7 +161,7 @@ FUN <- function() {
 type <- if(.Platform$OS.type == "windows") shell else system
 saveGIF(FUN(), interval = 0.1, outdir = loc, cmd.fun = type)
 
-saveVideo(FUN(), interval = 0.1, outdir = loc)
+saveVideo(FUN(), video.name = "discourse_map.avi", interval = 0.1, outdir = loc)
 
 saveLatex(FUN(), autoplay = TRUE, loop = FALSE, latex.filename = "tester.tex",
     caption = "animated dialogue", outdir = loc, ani.type = "pdf",
