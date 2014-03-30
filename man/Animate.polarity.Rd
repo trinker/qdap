@@ -4,8 +4,8 @@
 \usage{
 \method{Animate}{polarity}(x, negative = "blue", positive = "red",
   neutral = "yellow", edge.constant, wc.time = TRUE, time.constant = 2,
-  title = NULL, digits = 3, current.color = "black", as.network = TRUE,
-  ...)
+  title = NULL, digits = 3, current.color = "black",
+  ave.color.line = "red", as.network = TRUE, ...)
 }
 \arguments{
   \item{x}{A \code{\link[qdap]{polarity}} object.}
@@ -36,6 +36,9 @@
 
   \item{current.color}{The color to use for the current
   turn of talk polarity.}
+
+  \item{ave.color.line}{The color to use for the average
+  color line if \code{network = FALSE}.}
 
   \item{as.network}{logical.  If \code{TRUE} the animation
   is a network plot. If \code{FALSE} the animation is a

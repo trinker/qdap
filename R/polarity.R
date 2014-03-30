@@ -946,7 +946,7 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
         seq(.001, .5, by=.001), seq(.6, 1, by=.01), 2:10)
     max.color.breaks <- length(brks)
 
-    y <- counts(x)
+    y2 <- y <- counts(x)
     condlens <- rle(as.character(y[, 1]))
     y[, "temp"] <- rep(paste0("X", pad(1:length(condlens[[2]]))),
         condlens[[1]])
@@ -988,10 +988,11 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
 
     ## split it back into the iterative per row 
     ## dataframes of aggregated values
-    list_polarity <- lapply(split(df_polarity[, -1], df_polarity[, 1]), function(x) {
-         y <- colsplit2df(x, sep=qsep)
-         colnames(y)[1:2] <- c("from", "to")
-         y
+    list_polarity <- lapply(split(df_polarity[, -1], df_polarity[, 1]), 
+        function(x) {
+            y <- colsplit2df(x, sep=qsep)
+            colnames(y)[1:2] <- c("from", "to")
+            y
     })
 
     ## create a single network plot with all values
@@ -1059,7 +1060,7 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
         grp[[i]]
     }), paste0("Turn_", pad(1:nrow(y))))
 
-    timings <- round(exp(y[, "wc"]/(max(y[, "wc"])/time.constant)))
+    timings <- round(exp(y2[, "wc"]/(max(y2[, "wc"])/time.constant)))
     if(wc.time) {
         igraph_objs <- rep(igraph_objs, timings)
     }
@@ -1088,6 +1089,83 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
     igraph_objs
 }
 
+Animate_polarity_bar <- function(x, wc.time = TRUE, time.constant = 1, 
+    digits = 3, ave.color.line = "red", ...) {
+
+    input <- counts(x)
+    ord <- scores(x)[order(scores(x)[, "ave.polarity"]), 1]
+ 
+    grp <- colnms1 <- colnames(input)[1]
+    colnames(input)[1] <- "group"
+    input[, "group"] <- factor(input[, "group"], levels = ord)
+    listdat <- lapply(1:nrow(input), function(i) {
+        row_dat(input[1:i, ])
+    })
+    thedat <- list_df2df(listdat, "row")
+    rng <- range(thedat[, "ave.polarity"], na.rm=TRUE)
+
+
+    theplot <- ggbar(listdat[[length(listdat)]], grp = colnms1, rng = rng)
+
+    ggplots <- setNames(lapply(seq_along(listdat), function(i, aplot=theplot) {
+        listdat[[i]][, "group"] <- factor(listdat[[i]][, "group"], levels=ord)
+
+        tot_ave_pol <- mean(listdat[[i]][, "ave.polarity"], na.rm = TRUE)
+        titlepol <- numbformat(tot_ave_pol, digits)
+
+        aplot[["labels"]][["title"]] <- sprintf("Average Discourse Polarity:  %s", 
+            titlepol)
+        aplot[["data"]] <- listdat[[i]]
+        aplot + geom_hline(yintercept=tot_ave_pol, size=1, color=ave.color.line) 
+        }), paste0("turn_", pad(1:length(listdat))))
+
+    timings <- round(exp(input[, "wc"]/(max(input[, "wc"])/time.constant)))
+    if(wc.time) {
+        ggplots <- rep(ggplots, timings)
+    }
+
+    ## starts with a blank object and end match the network Animate
+    theplot[["data"]][, "ave.polarity"] <- NaN
+    ggplots <- unlist(list(list(theplot), ggplots, 
+        ggplots[length(ggplots)]), recursive=FALSE)
+
+    len <- nchar(char2end(names(ggplots)[1], "_"))
+    names(ggplots)[1] <- sprintf("turn_%s", paste(rep(0, len), collapse=""))
+
+    ## add class info
+    class(ggplots) <- "animated_polarity"
+    attributes(ggplots)[["timings"]] <- timings
+    attributes(ggplots)[["network"]] <- FALSE
+    attributes(ggplots)[["legend"]] <- NULL
+    ggplots
+}
+
+
+row_dat <- function(input) {    
+    list_df2df(lapply(split(input, input[, "group"]), function(x) {
+           data.frame(wc = sum(x[, "wc"], na.rm = TRUE), 
+               ave.polarity = mean(x[, "polarity"], na.rm = TRUE))
+        }), "group")
+}
+
+
+ggbar <- function(dat, grp = grp, rng = rng) {
+
+    padding <- diff(rng)*.1
+
+    ggplot(dat, aes_string(x="group"))  +
+        geom_hline(yintercept=0, size=1.5, color="grey50", linetype="dashed") + 
+#        geom_hline(yintercept=tot_ave_pol, size=1, color=ave.color.line) + 
+        geom_bar(aes_string(weight="ave.polarity")) +
+        ylab("Average Polarity") + 
+        xlab(paste(sapply(unlist(strsplit(grp, "&")), Caps), collapse = " ")) +
+        ylim(c(rng[1] - padding, rng[2] + padding)) + theme_bw() +
+        ggtitle(sprintf("Average Discourse Polarity:  %s", "")) +
+        theme(axis.text.x=element_text(angle = 90, vjust = .4, hjust = 1, size=11),
+            plot.title=element_text(hjust=0, size=11, color="grey60")) + 
+        scale_x_discrete(drop=FALSE)
+
+}
 
 #' Animate Polarity
 #' 
@@ -1109,6 +1187,8 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
 #' @param digits The number of digits to use in the current turn of talk 
 #' polarity.
 #' @param current.color The color to use for the current turn of talk polarity.
+#' @param ave.color.line The color to use for the average color line if 
+#' \code{network = FALSE}.
 #' @param as.network logical.  If \code{TRUE} the animation is a network plot.
 #' If \code{FALSE} the animation is a hybrid dot plot.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}}.
@@ -1123,11 +1203,13 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
 #' positive current turn of talk, while the coloring may indicate a negative 
 #' sentences.
 #' @import igraph
+#' @importFrom ggplot2 ggplot geom_hline geom_bar ylab xlab theme ggtitle theme_bw ylim element_text scale_x_discrete 
 #' @export
 #' @method Animate polarity
 Animate.polarity <- function(x, negative = "blue", positive = "red", 
     neutral = "yellow", edge.constant, wc.time = TRUE, time.constant = 2,
-    title = NULL, digits = 3, current.color = "black", as.network = TRUE, ...){
+    title = NULL, digits = 3, current.color = "black", ave.color.line = "red",
+    as.network = TRUE, ...){
 
     if (as.network) {
         Animate_polarity_net(x = x, negative = negative, positive = positive, 
@@ -1135,7 +1217,9 @@ Animate.polarity <- function(x, negative = "blue", positive = "red",
             time.constant = time.constant, title = title, digits = digits, 
             current.color = current.color, ...)
     } else {
-return(message("Not Currently Supported"))
+        Animate_polarity_bar(x = x, wc.time = wc.time, 
+            time.constant = time.constant, digits = digits, 
+            ave.color.line = ave.color.line, ...)         
     }
 
 }
@@ -1168,20 +1252,24 @@ print.animated_polarity <- function(x, title = NULL,
         title <- attributes(x)[["title"]]
     }
 
-    invisible(lapply(x, function(y) {
-        set.seed(seed)
-        par(bg = bg)
-        plot.igraph(y, edge.curved=TRUE, layout=layout)
-        if (!is.null(title)) {
-            mtext(title, side=3)
-        }
-        if (!is.null(legend)) {
-            color.legend(legend[1], legend[2], legend[3], legend[4], 
-                c("Negative", "Neutral", "Positive"), attributes(x)[["legend"]], 
-                cex = legend.cex)
-        }
-        if (pause > 0) Sys.sleep(pause)
-    }))  
+    if (attributes(x)[["network"]]) {
+        invisible(lapply(x, function(y) {
+            set.seed(seed)
+            par(bg = bg)
+            plot.igraph(y, edge.curved=TRUE, layout=layout)
+            if (!is.null(title)) {
+                mtext(title, side=3)
+            }
+            if (!is.null(legend)) {
+                color.legend(legend[1], legend[2], legend[3], legend[4], 
+                    c("Negative", "Neutral", "Positive"), attributes(x)[["legend"]], 
+                    cex = legend.cex)
+            }
+            if (pause > 0) Sys.sleep(pause)
+        })) 
+    } else {
+        invisible(lapply(x, print))
+    }
    
 }
 

@@ -271,7 +271,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
 #' Gantt Plot
 #' 
 #' \code{gantt_plot} - Animate discourse from \code{\link[qdap]{gantt_wrap}},
-#' \code{\link[qdap]{gantt_wrap}}, or any other Gantt plotting method.
+#' \code{\link[qdap]{gantt_plot}}, or any other Gantt plotting method.
 #' 
 #' gantt_plot Method for Animate
 #' @param x The gantt_plot object.

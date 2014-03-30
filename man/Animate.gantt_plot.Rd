@@ -26,7 +26,7 @@
 \description{
 \code{gantt_plot} - Animate discourse from
 \code{\link[qdap]{gantt_wrap}},
-\code{\link[qdap]{gantt_wrap}}, or any other Gantt plotting
+\code{\link[qdap]{gantt_plot}}, or any other Gantt plotting
 method.
 }
 \details{

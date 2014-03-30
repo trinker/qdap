@@ -235,6 +235,8 @@ sd_section("Animation",
   c(
     "Animate",
     "Animate.discourse_map",
+    "Animate.gantt",
+    "Animate.gantt_plot", 
     "Animate.polarity",
     "vertex_apply"
   )
