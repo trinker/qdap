@@ -10,6 +10,7 @@ install:
   - ./travis-tool.sh aptget_install r-cran-xml 
   - ./travis-tool.sh aptget_install r-cran-gplots
   - ./travis-tool.sh install_github hadley/devtools
+  - ./travis-tool.sh install_github cboettig/knitcitations
   - ./travis-tool.sh install_deps
   - Rscript -e "source('http://bioconductor.org/biocLite.R');
       biocLite();
