@@ -143,7 +143,7 @@
 #' (deb2 <- with(subset(pres_debates2012, time=="time 2"),
 #'     polarity(dialogue, person)))
 #' 
-#' bg_black <- Animate(deb2, neutral="white")
+#' bg_black <- Animate(deb2, neutral="white", current.speaker.color="grey70")
 #' print(bg_black, pause=.75)
 #' 
 #' bgb <- vertex_apply(bg_black, label.color="grey80", size=20, color="grey40")
@@ -185,6 +185,103 @@
 #'     ani.height = 500, ani.width=500,
 #'     outdir = file.path(loc, "new"), single.opts =
 #'     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
+#' 
+#' ## Detect OS
+#' type <- if(.Platform$OS.type == "windows") shell else system
+#' 
+#' saveHTML(FUN2(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
+#'     ani.height = 1000, ani.width=650,
+#'     outdir = loc2, single.opts =
+#'     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
+#' 
+#' FUN2(TRUE)
+#' 
+#' #=====================#
+#' ## Complex Animation ##
+#' #=====================#
+#' library(animation)
+#' library(grid)
+#' library(gridBase)
+#' library(qdap)
+#' library(reports)
+#' library(igraph)
+#' library(plotrix)
+#' 
+#' deb2dat <- subset(pres_debates2012, time=="time 2")
+#' deb2dat[, "person"] <- factor(deb2dat[, "person"])
+#' (deb2 <- with(deb2dat, polarity(dialogue, person)))
+#' 
+#' ## Set up the network version
+#' bg_black <- Animate(deb2, neutral="white", current.speaker.color="grey70")
+#' bgb <- vertex_apply(bg_black, label.color="grey80", size=30, label.size=22,
+#'     color="grey40")
+#' bgb <- edge_apply(bgb, label.color="yellow")
+#' 
+#' ## Set up the bar version
+#' deb2_bar <- Animate(deb2, as.network=FALSE)
+#' 
+#' ## Generate a folder
+#' loc2 <- folder(animation_polarity2)
+#' 
+#' ## Set up the plotting function
+#' oopt <- animation::ani.options(interval = 0.1)
+#' 
+#' 
+#' FUN2 <- function(follow=FALSE, theseq = seq_along(bgb)) {
+#' 
+#'     Title <- "Animated Polarity: 2012 Presidential Debate 2"
+#'     Legend <- c(.2, -1.075, 1.5, -1.005)
+#'     Legend.cex <- 1
+#' 
+#'     lapply(theseq, function(i) {
+#'         if (follow) {
+#'             png(file=sprintf("%s/images/Rplot%s.png", loc2, i), 
+#'                 width=650, height=725)
+#'         }
+#'         ## Set up the layout
+#'         layout(matrix(c(rep(1, 9), rep(2, 4)), 13, 1, byrow = TRUE))
+#' 
+#'         ## Plot 1
+#'         par(mar=c(2, 0, 2, 0), bg="black")
+#'         #par(mar=c(2, 0, 2, 0))
+#'         set.seed(20)
+#'         plot.igraph(bgb[[i]], edge.curved=TRUE)
+#'         mtext(Title, side=3, col="white")
+#'         color.legend(Legend[1], Legend[2], Legend[3], Legend[4],
+#'               c("Negative", "Neutral", "Positive"), attributes(bgb)[["legend"]],
+#'               cex = Legend.cex, col="white")
+#' 
+#'         ## Plot2
+#'         plot.new()              
+#'         vps <- baseViewports()
+#' 
+#'         uns <- unit(c(-1.3,.5,-.75,.25), "cm")
+#'         p <- deb2_bar[[i]] + 
+#'             theme(plot.margin = uns,
+#'                 text=element_text(color="white"),
+#'                 plot.background = element_rect(fill = "black", 
+#'                     color="black")) 
+#'         print(p,vp = vpStack(vps$figure,vps$plot))
+#'         animation::ani.pause()
+#' 
+#'         if (follow) {
+#'             dev.off()
+#'         }
+#'     })
+#' 
+#' }
+#' 
+#' FUN2()
+#' 
+#' ## Detect OS
+#' type <- if(.Platform$OS.type == "windows") shell else system
+#' 
+#' saveHTML(FUN2(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
+#'     ani.height = 1000, ani.width=650,
+#'     outdir = loc2, single.opts =
+#'     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
+#' 
+#' FUN2(TRUE)
 #' }
 polarity <- function (text.var, grouping.var = NULL, 
     polarity.frame = qdapDictionaries::env.pol, 
@@ -938,7 +1035,7 @@ agg_pol <- function(a) {
 Animate_polarity_net <- function(x, negative = "blue", positive = "red", 
     neutral = "yellow", edge.constant, 
     wc.time = TRUE, time.constant = 1, title = NULL, digits = 3, 
-    current.color = "black", ...){
+    current.color = "black", current.speaker.color, non.speaker.color = NA, ...){
 
     qsep <- "|-|qdap|-|"
 
@@ -1052,6 +1149,13 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
         #plot(grp[[i]], edge.curved=TRUE)
         E(grp[[i]])$color <- ekey %l% ckey
         E(grp[[i]])$label <- ekey %l% curkey
+        V(grp[[i]])$frame.color <- NA
+        if (!is.null(current.speaker.color)) {
+            spkkey <- data.frame(as.character(cur[cur_edge, 1]), current.speaker.color, 
+                stringsAsFactors = FALSE)
+            V(grp[[i]])$frame.color <- V(grp[[i]])$name %l% spkkey
+        }
+        V(grp[[i]])$frame.color[is.na(V(grp[[i]])$frame.color)] <- non.speaker.color
 
         ## change edge label color
         E(grp[[i]])$label.color <- current.color
@@ -1074,12 +1178,14 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
     E(igraph_objs[[1]])$color <- NA
     E(igraph_objs[[1]])$label.color <- NA
     E(igraph_objs[[1]])$label <- NA
+    V(igraph_objs[[1]])$frame.color <- non.speaker.color    
 
-    ## end with no label
+    ## end with no label or frame color
     igraph_objs <- rep(igraph_objs, c(rep(1, length(igraph_objs) - 1), 2))
     E(igraph_objs[[length(igraph_objs)]])$label.color <- NA
     E(igraph_objs[[length(igraph_objs)]])$label <- NA
-
+    V(igraph_objs[[length(igraph_objs)]])$frame.color <- non.speaker.color
+    
     ## add class info
     class(igraph_objs) <- "animated_polarity"
     attributes(igraph_objs)[["title"]] <- title
@@ -1088,6 +1194,7 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
     attributes(igraph_objs)[["legend"]] <- cols
     igraph_objs
 }
+
 
 Animate_polarity_bar <- function(x, wc.time = TRUE, time.constant = 1, 
     digits = 3, ave.color.line = "red", ...) {
@@ -1113,8 +1220,10 @@ Animate_polarity_bar <- function(x, wc.time = TRUE, time.constant = 1,
         tot_ave_pol <- mean(listdat[[i]][, "ave.polarity"], na.rm = TRUE)
         titlepol <- numbformat(tot_ave_pol, digits)
 
-        aplot[["labels"]][["title"]] <- sprintf("Average Discourse Polarity:  %s", 
-            titlepol)
+        aplot[["labels"]][["title"]] <- paste(sprintf("Average Discourse Polarity:  %s", 
+            titlepol), sprintf("%sCurrent Speaker:   %s", paste(rep(" ", 15), 
+            collapse=""), input[i, 1]))
+
         aplot[["data"]] <- listdat[[i]]
         aplot + geom_hline(yintercept=tot_ave_pol, size=1, color=ave.color.line) 
         }), paste0("turn_", pad(1:length(listdat))))
@@ -1187,6 +1296,8 @@ ggbar <- function(dat, grp = grp, rng = rng) {
 #' @param digits The number of digits to use in the current turn of talk 
 #' polarity.
 #' @param current.color The color to use for the current turn of talk polarity.
+#' @param current.speaker.color The color for the current speaker.
+#' @param non.speaker.color The color for the speakers not currently speaking.
 #' @param ave.color.line The color to use for the average color line if 
 #' \code{network = FALSE}.
 #' @param as.network logical.  If \code{TRUE} the animation is a network plot.
@@ -1208,13 +1319,15 @@ ggbar <- function(dat, grp = grp, rng = rng) {
 #' @method Animate polarity
 Animate.polarity <- function(x, negative = "blue", positive = "red", 
     neutral = "yellow", edge.constant, wc.time = TRUE, time.constant = 2,
-    title = NULL, digits = 3, current.color = "black", ave.color.line = "red",
-    as.network = TRUE, ...){
+    title = NULL, digits = 3, current.color = "black", 
+    current.speaker.color = NULL, non.speaker.color = NA, 
+    ave.color.line = "red", as.network = TRUE, ...){
 
     if (as.network) {
         Animate_polarity_net(x = x, negative = negative, positive = positive, 
             neutral = neutral, edge.constant = edge.constant, wc.time = wc.time, 
             time.constant = time.constant, title = title, digits = digits, 
+            current.speaker.color = current.speaker.color,
             current.color = current.color, ...)
     } else {
         Animate_polarity_bar(x = x, wc.time = wc.time, 
@@ -1223,6 +1336,7 @@ Animate.polarity <- function(x, negative = "blue", positive = "red",
     }
 
 }
+
 
 #' Prints a animated_polarity  Object
 #' 

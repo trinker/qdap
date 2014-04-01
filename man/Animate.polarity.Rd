@@ -5,6 +5,7 @@
 \method{Animate}{polarity}(x, negative = "blue", positive = "red",
   neutral = "yellow", edge.constant, wc.time = TRUE, time.constant = 2,
   title = NULL, digits = 3, current.color = "black",
+  current.speaker.color = NULL, non.speaker.color = NA,
   ave.color.line = "red", as.network = TRUE, ...)
 }
 \arguments{
@@ -36,6 +37,12 @@
 
   \item{current.color}{The color to use for the current
   turn of talk polarity.}
+
+  \item{current.speaker.color}{The color for the current
+  speaker.}
+
+  \item{non.speaker.color}{The color for the speakers not
+  currently speaking.}
 
   \item{ave.color.line}{The color to use for the average
   color line if \code{network = FALSE}.}

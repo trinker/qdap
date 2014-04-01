@@ -17,6 +17,25 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.5
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+* The An Introduction to <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> vignette contained a broken link in the tm 
+  Package Compatibility section.  This has been fixed.  Also the reliance on 
+  `Rgraphviz` from the vignette has been removed.  This will eliminate CRAN
+  WARN in CRAN checks (for some OS) but not the note for `tm`'s reliance on 
+  `Rgraphviz`.
+
+**NEW FEATURES**
+
+**MINOR FEATURES**
+
+IMPROVEMENTS
+
+**CHANGES**
+
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.4
 ----------------------------------------------------------------
 

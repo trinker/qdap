@@ -5,7 +5,7 @@
 
 ```{r setup, include=FALSE}
 # set global chunk options
-library(knitr); library(qdap)
+library(knitr); library(qdap); library(tm)
 opts_chunk$set(cache=FALSE, tidy=FALSE, warning=FALSE)
 library(knitcitations)#; library(reports)
 bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
@@ -34,7 +34,7 @@ R already has thousands of excellent packages for statistics and visualization. 
 
 ...if you can dream up an analysis then qdap and R can help get you there.
 
-`r IM("https://dl.dropbox.com/u/61803503/qdap_logo.png", width=350, height=250)`
+`r IM("imgs/qdaplogo.png", width=350, height=250)`
 
 The following vignette is a loose chronological road map for utilizing the tools provided by qdap.  
 
@@ -4433,7 +4433,7 @@ The *lexical dispersion plot* is a useful tool (particularly in the early stage 
 
 The `r HR("#match", "search mechanism")` used by `r FUN("dispersion_plot")` is identical to `r FUN("termco")` and `r FUN("term_match", "termco")`.  For example, <b><font color="green" face="courier new">" love "</font></b> will not yield the same search as <b><font color="green" face="courier new">"love"</font></b>.  The `r HR("#disper1", "search example below")` demonstrates the way the search functions.  For more information see the `r HR("#match", "termco search description")` above.
 
-<p id="disper1">`r FT(orange, 5, text="&diams;")` **`r FUN("dispersion_plot")`** - *Understand the Search*`r FT(orange, 5, text="&diams;")`</p >
+<p id="disper1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("dispersion_plot")`</b> - <i>Understand the Search</i>`r FT(orange, 5, text="&diams;")`</p >
 
 <pre><code class="r">term_match(raj$dialogue, c(" love ", "love", " night ", "night"))
 </code></pre>
@@ -5093,7 +5093,7 @@ The following functions will be utilized in this section (click to view more):
 </div>
 
 
-The `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package")` is a heavily regarded and utilized R package for text mining purposes.  The primary data forms for the tm package are <a href="http://www.inside-r.org/packages/cran/tm/docs/Corpus"><b><font color="green", face="courier">Corpus</font></b></a> and <a href="http://www.inside-r.org/packages/cran/tm/docs/http://www.inside-r.org/packages/cran/tm/docs/TermDocumentMatrix"><b><font color="green", face="courier">TermDocumentMatrix</font></b></a>/<a href="http://www.inside-r.org/packages/cran/tm/docs/http://www.inside-r.org/packages/cran/tm/docs/TermDocumentMatrix"><b><font color="green", face="courier">DocumentTermMatrix</font></b></a>.  Because tm is a dependancy for many R text mining packages it is prudent to provide a set of tools to convert between tm and qdap data types.  This section demos a few of the tools designed to achieve qdap-tm compatibility.  For a more thorough vignette describing qdap-tm compatability use `browseVignettes(package = "qdap")` or `\r HR2("http://cran.r-project.org/web/packages/qdap/vignettes/tm_package_compatibility.pdf, "Click Here")`.
+The `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package")` is a heavily regarded and utilized R package for text mining purposes.  The primary data forms for the tm package are <a href="http://www.inside-r.org/packages/cran/tm/docs/Corpus"><b><font color="green", face="courier">Corpus</font></b></a> and <a href="http://www.inside-r.org/packages/cran/tm/docs/http://www.inside-r.org/packages/cran/tm/docs/TermDocumentMatrix"><b><font color="green", face="courier">TermDocumentMatrix</font></b></a>/<a href="http://www.inside-r.org/packages/cran/tm/docs/http://www.inside-r.org/packages/cran/tm/docs/TermDocumentMatrix"><b><font color="green", face="courier">DocumentTermMatrix</font></b></a>.  Because tm is a dependancy for many R text mining packages it is prudent to provide a set of tools to convert between tm and qdap data types.  This section demos a few of the tools designed to achieve qdap-tm compatibility.  For a more thorough vignette describing qdap-tm compatability use `browseVignettes(package = "qdap")` or `r HR2("http://cran.r-project.org/web/packages/qdap/vignettes/tm_package_compatibility.pdf", "Click Here")`.
 
 
 <h4 id="tdm">Create term document matrices or document term matrices from raw text or wfm</h4>
@@ -5109,11 +5109,20 @@ dtm(DATA$state, DATA$person)
 
 ```{r message = FALSE, fig.width = 9, fig.height = 9}
 (pres <- tdm(pres_debates2012$dialogue, pres_debates2012$person))
-library(tm)
-plot(pres, corThreshold = 0.8)
-(pres2 <- removeSparseTerms(pres, .3))
-plot(pres2, corThreshold = 0.95)
 ```
+
+<pre><code class="r">library(tm)
+plot(pres, corThreshold = 0.8)</code></pre>
+![](imgs/tm_imgs/img1.png)
+
+
+```{r message = FALSE, fig.width = 9, fig.height = 9}
+(pres2 <- removeSparseTerms(pres, .3))
+```
+
+<pre><code class="r">plot(pres2, corThreshold = 0.95)</code></pre>
+
+![](imgs/tm_imgs/img2.png)
 
 <p id="tdm2">`r FT(orange, 5, text="&diams;")` <b>`r FUN("tdm")`</b> & <b>`r FUN("dtm", "tdm")`</b>  - <em>From `r FUN("wfm")`</em>`r FT(orange, 5, text="&diams;")`</p >
 
@@ -5121,9 +5130,10 @@ plot(pres2, corThreshold = 0.95)
 x <- wfm(DATA$state, DATA$person)
 tdm(x)
 dtm(x)
-plot(tdm(x))
 ```
 
+<pre><code class="r">plot(tdm(x))</code></pre>
+![](imgs/tm_imgs/img3.png)
 
 
 <h4 id="tm2wfm">Convert the tm package's TermDocumentMatrix/DocumentTermMatrix to wfm</h4>
@@ -5154,7 +5164,14 @@ apply_as_tm(a, tm:::findAssocs, "computer", .8)
 apply_as_tm(a, tm:::findFreqTerms, 2, 3)
 apply_as_tm(a, tm:::Zipf_plot)
 apply_as_tm(a, tm:::Heaps_plot)
-apply_as_tm(a, tm:::plot.TermDocumentMatrix, corThreshold = 0.4)
+```
+
+<pre><code class="r">apply_as_tm(a, tm:::plot.TermDocumentMatrix, corThreshold = 0.4)</code></pre>
+
+![](imgs/tm_imgs/img4.png)
+
+
+```{r message = FALSE}
 apply_as_tm(a, tm:::weightBin)
 apply_as_tm(a, tm:::weightBin, to.qdap = FALSE)
 apply_as_tm(a, tm:::weightSMART)

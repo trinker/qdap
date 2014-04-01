@@ -285,6 +285,7 @@ function(text.var, grouping.var = NULL, digits = 1, percent = TRUE,
     o[["pos.by.rnp"]] <- data.frame(o[["pos.by.freq"]][, 1:2], 
         rnp2, check.names = FALSE)     
     class(o) <- "pos_by"
+    attributes(o)[["grouping.var"]] <- DF1[["grouping"]]
     return(o)
 }
 
