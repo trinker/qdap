@@ -28,6 +28,9 @@ And constructed with the following guidelines:
   WARN in CRAN checks (for some OS) but not the note for `tm`'s reliance on 
   `Rgraphviz`.
 
+* `polarity` reported the incorrect number of words for sentences containing 
+  commas.  This has been fixed (Max Ghenis).
+
 **NEW FEATURES**
 
 **MINOR FEATURES**

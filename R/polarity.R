@@ -394,6 +394,7 @@ polarity <- function (text.var, grouping.var = NULL,
     }
 
     ## Construct sentence data.frame
+    counts <- unlist(lapply(DF[, "text.var2"], function(x) length(bag_o_words(x))))
     scores <- sapply(output, sum)/sqrt(counts)
     all <- data.frame(group.var =  DF[, "grouping"], wc = counts, 
         polarity = scores)
