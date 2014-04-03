@@ -107,6 +107,7 @@ ltruncdf(with(raj, formality(x8 , list(act, person))), 6, 4)
 
 ## ANIMATION
 #===========
+## EXAMPLE 1
 form_ani <- formality(DATA.SPLIT$state, DATA.SPLIT$person)
 forma <- Animate(form_ani, contextual="white", formal="blue",
     current.color = "yellow", current.speaker.color="grey70")
@@ -115,6 +116,18 @@ bgb <- vertex_apply(forma, label.color="grey80", size=20, color="grey40")
 bgb <- edge_apply(bgb, label.color="yellow")
 
 print(bgb, bg="black", net.legend.color ="white", pause=1)
+
+## EXAMPLE 2
+form_ani2 <- formality(raj_act1POS, mraja1spl$person)
+forma2 <- Animate(form_ani2, contextual="white", formal="blue",
+    current.color = "yellow", current.speaker.color="grey70")
+
+bgb2 <- vertex_apply(forma2, label.color="grey80", size=17, color="grey40")
+bgb2 <- edge_apply(bgb2, label.color="yellow")
+print(bgb2, bg="black", pause=.75, net.legend.color = "white")
+
+## EXAMPLE 3 (bar plot)
+Animate(form_ani2, as.network=FALSE)
 }
 }
 \references{

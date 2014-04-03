@@ -5,7 +5,9 @@
 \method{Animate}{formality}(x, contextual = "yellow", formal = "red",
   edge.constant, wc.time = TRUE, time.constant = 2, title = NULL,
   digits = 3, current.color = "black", current.speaker.color = NULL,
-  non.speaker.color = NA, ave.color.line = "red", as.network = TRUE, ...)
+  non.speaker.color = NA, missing.color = "purple",
+  all.color.line = "red", plus.300.color = "grey40",
+  under.300.color = "grey88", as.network = TRUE, ...)
 }
 \arguments{
   \item{x}{A \code{\link[qdap]{formality}} object.}
@@ -43,8 +45,22 @@
   \item{non.speaker.color}{The color for the speakers not
   currently speaking.}
 
-  \item{ave.color.line}{The color to use for the average
-  color line if \code{network = FALSE}.}
+  \item{missing.color}{The color to use in a network plot
+  for edges corresponding to missing text data.  Use
+  \code{\link[stats]{na.omit}} before hand to remove the
+  missing values all together.}
+
+  \item{all.color.line}{The color to use for the total
+  discourse formality color line if \code{network =
+  FALSE}.}
+
+  \item{plus.300.color}{The bar color to use for grouping
+  variables exceeding 299 words per Heylighen & Dewaele's
+  (2002) minimum word recommendations.}
+
+  \item{under.300.color}{The bar color to use for grouping
+  variables less than 300 words per Heylighen & Dewaele's
+  (2002) minimum word recommendations.}
 
   \item{as.network}{logical.  If \code{TRUE} the animation
   is a network plot. If \code{FALSE} the animation is a

@@ -1193,6 +1193,7 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
     attributes(igraph_objs)[["timings"]] <- timings
     attributes(igraph_objs)[["network"]] <- TRUE
     attributes(igraph_objs)[["legend"]] <- cols
+    attributes(igraph_objs)[["data"]] <- list_polarity
     igraph_objs
 }
 
@@ -1247,6 +1248,7 @@ Animate_polarity_bar <- function(x, wc.time = TRUE, time.constant = 1,
     attributes(ggplots)[["timings"]] <- timings
     attributes(ggplots)[["network"]] <- FALSE
     attributes(ggplots)[["legend"]] <- NULL
+    attributes(ggplots)[["data"]] <- listdat
     ggplots
 }
 
