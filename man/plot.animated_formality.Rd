@@ -1,0 +1,16 @@
+\name{plot.animated_formality}
+\alias{plot.animated_formality}
+\title{Plots a animated_formality  Object}
+\usage{
+\method{plot}{animated_formality}(x, ...)
+}
+\arguments{
+  \item{x}{The animated_formality object.}
+
+  \item{\ldots}{Other arguments passed to
+  \code{print.animated_formality }.}
+}
+\description{
+Plots a animated_formality object.
+}
+

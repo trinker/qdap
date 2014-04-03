@@ -35,6 +35,9 @@ NEW FEATURES
 
 MINOR FEATURES
 
+* `raj_act1POS` added.  `raj_act1POS` is a data set for Romeo and Juliet: Act 1
+  broken into parts of speech.
+
 IMPROVEMENTS
 
 CHANGES

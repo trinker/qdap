@@ -1354,6 +1354,7 @@ Animate.polarity <- function(x, negative = "blue", positive = "red",
 #' equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.
 #' @param bg The color to be used for the background of the device region. See
 #' \code{\link[graphics]{par}} for more information. 
+#' @param net.legend.color The text legend color for the network plot.
 #' @param \ldots Other Arguments passed to \code{\link[igraph]{plot.igraph}}.
 #' @import igraph
 #' @importFrom plotrix color.legend
@@ -1361,7 +1362,8 @@ Animate.polarity <- function(x, negative = "blue", positive = "red",
 #' @S3method print animated_polarity 
 print.animated_polarity <- function(x, title = NULL, 
     seed = sample(1:10000, 1), layout=layout.auto, pause = 0, 
-    legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, bg=NULL, ...){
+    legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, bg=NULL, 
+    net.legend.color = "black", ...){
     
     if (is.null(title)) {
         title <- attributes(x)[["title"]]
@@ -1371,7 +1373,7 @@ print.animated_polarity <- function(x, title = NULL,
         invisible(lapply(x, function(y) {
             set.seed(seed)
             par(bg = bg)
-            plot.igraph(y, edge.curved=TRUE, layout=layout)
+            plot.igraph(y, edge.curved=TRUE, layout=layout, ...)
             if (!is.null(title)) {
                 mtext(title, side=3)
             }

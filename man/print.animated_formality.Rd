@@ -1,13 +1,13 @@
-\name{print.animated_polarity}
-\alias{print.animated_polarity}
-\title{Prints a animated_polarity  Object}
+\name{print.animated_formality}
+\alias{print.animated_formality}
+\title{Prints a animated_formality  Object}
 \usage{
-\method{print}{animated_polarity}(x, title = NULL, seed = sample(1:10000,
+\method{print}{animated_formality}(x, title = NULL, seed = sample(1:10000,
   1), layout = layout.auto, pause = 0, legend = c(-0.5, -1.5, 0.5, -1.45),
   legend.cex = 1, bg = NULL, net.legend.color = "black", ...)
 }
 \arguments{
-  \item{x}{The animated_polarity object.}
+  \item{x}{The animated_formality object.}
 
   \item{title}{The title of the plot.}
 
@@ -36,6 +36,6 @@
   \code{\link[igraph]{plot.igraph}}.}
 }
 \description{
-Prints a animated_polarity object.
+Prints a animated_formality object.
 }
 

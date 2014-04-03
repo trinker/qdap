@@ -104,6 +104,17 @@ colsplit2df(x8$formality)
 
 #pass an object from pos or pos_by
 ltruncdf(with(raj, formality(x8 , list(act, person))), 6, 4)
+
+## ANIMATION
+#===========
+form_ani <- formality(DATA.SPLIT$state, DATA.SPLIT$person)
+forma <- Animate(form_ani, contextual="white", formal="blue",
+    current.color = "yellow", current.speaker.color="grey70")
+
+bgb <- vertex_apply(forma, label.color="grey80", size=20, color="grey40")
+bgb <- edge_apply(bgb, label.color="yellow")
+
+print(bgb, bg="black", net.legend.color ="white", pause=1)
 }
 }
 \references{

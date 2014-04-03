@@ -86,6 +86,17 @@
 #' 
 #' #pass an object from pos or pos_by
 #' ltruncdf(with(raj, formality(x8 , list(act, person))), 6, 4)
+#' 
+#' ## ANIMATION
+#' #===========
+#' form_ani <- formality(DATA.SPLIT$state, DATA.SPLIT$person)
+#' forma <- Animate(form_ani, contextual="white", formal="blue", 
+#'     current.color = "yellow", current.speaker.color="grey70")
+#' 
+#' bgb <- vertex_apply(forma, label.color="grey80", size=20, color="grey40")
+#' bgb <- edge_apply(bgb, label.color="yellow")
+#' 
+#' print(bgb, bg="black", net.legend.color ="white", pause=1)
 #' }
 formality <- function(text.var, grouping.var = NULL,                    
     order.by.formality = TRUE, digits = 2, ...){  
@@ -151,6 +162,8 @@ formality <- function(text.var, grouping.var = NULL,
     }                                                                                
     if (!is.null(X$DT)) {                                                            
         PD <- X$DT-articles                                                          
+    }  else {
+        PD <- rep(0, nrow(X))
     }                                                                                
     DF1 <- DF2 <- data.frame(                                                        
         noun = rowSums(X[, names(X) %in% c("NN", "NNS", "NNP", "NNPS",               
@@ -584,6 +597,352 @@ plot.pos_preprocessed <- function(x, ...){
         theme_qdap()
 
 }
+
+Animate_formality_net <- function(x, contextual, formal, 
+    edge.constant, wc.time = TRUE, time.constant = 2, title = NULL, digits = 3, 
+    current.color = "black", current.speaker.color, non.speaker.color = NA, 
+    ...){
+
+    v <- cbind.data.frame(group=attributes(x)[["grouping.var"]], 
+        x[["POSfreq"]])
+
+    ## Count the articles per row
+    articles <- unlist(lapply(x[["text"]], function(x){  
+            if(identical(x, character(0)) ) return(0)                               
+            sum(article(x))                                                      
+    })) 
+
+    if (!is.null(v$DT)) {                                                            
+        PD <- v$DT-articles                                                          
+    } else {
+        PD <- rep(0, nrow(v))
+    }    
+
+    ## tally parts of speech for formality stat
+    z <- data.frame(v[, 1:2, drop=FALSE],                                    
+        noun = rowSums(v[, names(v) %in% c("NN", "NNS", "NNP", "NNPS",               
+            "POS", "JI", "JK"), drop=FALSE]),                                                    
+        adj = rowSums(cbind(v[, names(v) %in% c("CD", "JJ", "JJR", "JJS",            
+            "JI", "JK"), drop=FALSE], PD)),                                                      
+        prep = rowSums(v[, names(v) %in% c("IN", "RP", "TO", "JI", "JK"), 
+            drop=FALSE]),          
+        articles = articles,                                                         
+        pronoun = rowSums(v[, names(v) %in% c("PRP", "PRP$", "PRP.", "WDT",          
+            "WP", "WP$", "WP.", "JI", "JK", "EX"), drop=FALSE]),                                 
+        verb = rowSums(v[, names(v) %in% c("MD", "VB", "VBD", "VBG",                 
+            "VBN", "VBP", "VBZ", "JI", "JK"), drop=FALSE]),                                      
+        adverb = rowSums(v[, names(v) %in% c("RB", "RBR", "RBS", "WRB",              
+            "JI", "JK"), drop=FALSE]),                                                           
+        interj = rowSums(v[, names(v) %in% c("UH", "JI", "JK"), drop=FALSE]))
+
+    qsep <- "|-|qdap|-|"
+
+    brks <- seq(0, 1, by=.001)
+    max.color.breaks <- length(brks)
+
+    y <- form_fun(z)
+
+    condlens <- rle(as.character(y[, 1]))
+    temp <- rep(paste0("X", pad(1:length(condlens[[2]]))),
+        condlens[[1]])
+
+    y <- list_df2df(lapply(split(y, temp), function(x) {
+        x[, 2] <- tail(x[, 2], 1)
+        x
+    }))[, -1]
+
+ 
+    y <- colpaste2df(y, 1:2, keep.orig =FALSE, sep=qsep, name.sep="|")
+    y <- data.frame(y[, 7, drop=FALSE], y[, -7], check.names=FALSE) 
+    y[, "id"] <- 1:nrow(y) 
+
+    ## get aggregated values iterating through rows
+    ## sum wc, max(id),  prop_wc
+    list_formality <- lapply(1:nrow(y), function(i) col_meaner(y[1:i, ]))
+
+    ## combine into a dataframe by turn of talk
+    df_formality <- list_df2df(list_formality, "turn")
+
+    ## set up color gradients
+    colfunc <- colorRampPalette(c(contextual, formal))
+    cols <- colfunc(max.color.breaks)
+   
+    ## add colors to df_formality based on agrgegated 
+    ## average formality per edge
+    cuts <- cut(df_formality[, "prop_formal"], brks)
+
+    df_formality[, "color"] <- cuts %l% data.frame(cut(brks, brks), cols)
+
+    ## split it back into the iterative per row 
+    ## dataframes of aggregated values
+    list_formality <- lapply(split(df_formality[, -1], df_formality[, 1]), 
+        function(x) {
+            y <- colsplit2df(x, sep=qsep)
+            colnames(y)[1:2] <- c("from", "to")
+            y
+    })
+
+    ## create a single network plot with all values
+    dat <- sentCombine(x[["text"]], attributes(x)[["grouping.var"]])
+    theplot <- discourse_map(dat[, "text.var"], dat[, "grouping.var"], 
+        ...)[["plot"]]
+
+    ## generate edge constant of needed
+    if (missing(edge.constant)) {
+        edge.constant <- length(unique(dat[, "grouping.var"])) * 2.5
+    }
+
+    ## function to added colr to edges in network plot
+    colorize <- function(x, y) {
+        E(y)$color <- paste2(edge_capture(y), sep="|-|qdap|-|") %l%
+            data.frame(edge=paste2(x[, 1:2], sep="|-|qdap|-|"), cols=x[, "color"])
+        y
+    }
+
+    ## Add colors from the aggregated list of average polarities
+    ## and output a corresponding list of network plots
+    new_pol_nets <- lapply(list_formality, colorize, theplot)
+
+    ## Add edge weights etc to each graph
+    igraph_objs <- setNames(lapply(seq_along(new_pol_nets), 
+        function(i, grp =new_pol_nets, len=length(unique(y[, 1])), sep=qsep){
+
+        ## limit the edge weights (widths) of first 5 plots)
+        if (i %in% 1:5) {
+            edge.constant <- edge.constant/(len/i)
+        }
+
+        ## calculate edge widths
+        cur <- list_formality[[i]]
+        cur[, "width"] <- edge.constant*cur[, "prop_wc"]
+
+        ## get current edge
+        cur_edge <- which.max(cur[, "id"])
+        cur_edge2 <- max(cur[, "id"])
+
+        ## create current edge label and formality sign
+        cur_form <- y[y[, "id"] == cur_edge2, "prop_formal"]
+        lab <- numbformat(cur_form, digits)
+        E(grp[[i]])$label <- NA
+        curkey <- data.frame(paste2(cur[cur_edge, 1:2], sep="|-|qdap|-|"), lab)
+
+        ## Set up widths and colors
+        tcols <- cur[, c("from", "to", "color"), drop=FALSE]
+        widths <- cur[, c("from", "to", "width"), drop=FALSE]
+        widths[, "width"] <- ceiling(widths[, "width"])
+        ekey <- paste2(edge_capture(grp[[i]]), sep=sep)
+        ckey <- colpaste2df(tcols, 1:2, sep = sep, keep.orig=FALSE)[, 2:1]
+        wkey <- colpaste2df(widths, 1:2, sep = sep, keep.orig=FALSE)[, 2:1]
+        E(grp[[i]])$width <- NAer(ekey %l% wkey, 1)
+        #plot(grp[[i]], edge.curved=TRUE)
+        E(grp[[i]])$color <- ekey %l% ckey
+        E(grp[[i]])$label <- ekey %l% curkey
+        V(grp[[i]])$frame.color <- NA
+        if (!is.null(current.speaker.color)) {
+            spkkey <- data.frame(as.character(cur[cur_edge, 1]), current.speaker.color, 
+                stringsAsFactors = FALSE)
+            V(grp[[i]])$frame.color <- V(grp[[i]])$name %l% spkkey
+        }
+        V(grp[[i]])$frame.color[is.na(V(grp[[i]])$frame.color)] <- non.speaker.color
+
+        ## change edge label color
+        E(grp[[i]])$label.color <- current.color
+
+            
+        grp[[i]]
+    }), paste0("Turn_", pad(1:nrow(y))))
+
+    timings <- round(exp(y[, "wc"]/(max(y[, "wc"])/time.constant)))
+    if(wc.time) {
+        igraph_objs <- rep(igraph_objs, timings)
+    }
+
+    ## starts with a blank object
+    igraph_objs <- rep(igraph_objs, c(2, rep(1, length(igraph_objs) - 1)))
+    len <- nchar(char2end(names(igraph_objs)[1], "_"))
+    names(igraph_objs)[1] <- sprintf("turn_%s", paste(rep(0, len), collapse=""))
+
+    uncol <- E(igraph_objs[[1]])$color
+    E(igraph_objs[[1]])$color <- NA
+    E(igraph_objs[[1]])$label.color <- NA
+    E(igraph_objs[[1]])$label <- NA
+    V(igraph_objs[[1]])$frame.color <- non.speaker.color    
+
+    ## end with no label or frame color
+    igraph_objs <- rep(igraph_objs, c(rep(1, length(igraph_objs) - 1), 2))
+    E(igraph_objs[[length(igraph_objs)]])$label.color <- NA
+    E(igraph_objs[[length(igraph_objs)]])$label <- NA
+    V(igraph_objs[[length(igraph_objs)]])$frame.color <- non.speaker.color
+    
+    ## add class info
+    class(igraph_objs) <- "animated_formality"
+    attributes(igraph_objs)[["title"]] <- title
+    attributes(igraph_objs)[["timings"]] <- timings
+    attributes(igraph_objs)[["network"]] <- TRUE
+    attributes(igraph_objs)[["legend"]] <- cols
+    igraph_objs
+}
+
+form_fun <- function(z) {
+    out <- data.frame(formal=rowSums(cbind(z[, "noun"], 
+        z[, "articles"], z[, "adj"], z[, "prep"])),               
+        contextual=rowSums(cbind(z[, "pronoun"], 
+        z[, "verb"], z[, "adverb"], z[, "interj"])))
+    out[, "total"] <- rowSums(out)
+    out[, paste0("prop_", names(out)[1:2])] <- out[, 1:2]/out[, 3]
+    data.frame(from=z[, 1], to=c(as.character(z[-1, 1]), "End"), wc=z[, "wrd.cnt"], out)
+}
+
+col_meaner <- function(y) {
+    m <- head(y, -1)
+    if (nrow(m) == "0") {
+        out <- tail(y, 1)
+        out[, "prop_wc"] <- 1
+        return(out)
+    }
+    n <- matrix2df(do.call(rbind, lapply(split(m[, c(2:4, 8)], m[, 1]), function(x) {
+        if (nrow(x) == "0") return(NULL)
+        out <- data.frame(t(colSums(x[, c("wc", "formal", "contextual")])))
+        out[, "id"] <- max(x[, "id"])
+        out
+    })), "from|to")
+    n[, "total"] <- rowSums(n[3:4])
+    n[, paste0("prop_", names(n)[3:4])] <- n[, 3:4]/n[, 6]
+    n <- n[!n[, 1] %in% tail(y, 1)[, 1], ]
+    out <- data.frame(rbind(n, tail(y, 1)), row.names=NULL, check.names=FALSE)
+    out[, "prop_wc"] <- out[, "wc"]/sum(out[, "wc"], na.rm=TRUE)
+    out
+}
+
+
+#' Animate Formality
+#' 
+#' \code{Animate.formality} - Animate a \code{\link[qdap]{formality}} object.
+#' 
+#' formality Method for Animate
+#' @param x A \code{\link[qdap]{formality}} object.
+#' @param contextual The color to use for 0% formality (purely contextual).
+#' @param formal The color to use for 100% formality (purely formal).
+#' @param edge.constant A constant to multiple edge width by.
+#' @param wc.time logical.  If \code{TRUE} weights duration of frame by word 
+#' count.
+#' @param time.constant A constant to divide the maximum word count by.  Time
+#' is calculated by `round(exp(WORD COUNT/(max(WORD COUNT)/time.constant)))`.  
+#' Therefore a larger constant will make the difference between the large and 
+#' small word counts greater.
+#' @param title The title to apply to the animated image(s).
+#' @param digits The number of digits to use in the current turn of talk 
+#' formality.
+#' @param current.color The color to use for the current turn of talk formality.
+#' @param current.speaker.color The color for the current speaker.
+#' @param non.speaker.color The color for the speakers not currently speaking.
+#' @param ave.color.line The color to use for the average color line if 
+#' \code{network = FALSE}.
+#' @param as.network logical.  If \code{TRUE} the animation is a network plot.
+#' If \code{FALSE} the animation is a hybrid dot plot.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}}.
+#' @note The width of edges is based on words counts on that edge until that 
+#' moment divided by total number of words used until that moment.  Thicker 
+#' edges tend to thin as time passes.  The actual duration the current edge 
+#' stays as the \code{current.color} is based on word counts for that particular 
+#' flow of dialogue divided by total dialogue (words) used.  The edge label is
+#' the current formality for that turn of talk (an aggregation of the sub 
+#' sentences of the current turn of talk).  The coloring of the current edge 
+#' formality is produced at th sentence level, therefor a label may indicate a 
+#' positive current turn of talk, while the coloring may indicate a negative 
+#' sentences.  Coloring is based on percentage of formal parts of speech (i.e.,
+#' noun, adjective, preposition, article).
+#' @import igraph
+#' @importFrom ggplot2 ggplot geom_hline geom_bar ylab xlab theme ggtitle theme_bw ylim element_text scale_x_discrete 
+#' @export
+#' @method Animate formality
+Animate.formality <- function(x, contextual = "yellow", formal = "red", 
+    edge.constant, wc.time = TRUE, time.constant = 2, title = NULL, digits = 3, 
+    current.color = "black", current.speaker.color = NULL, non.speaker.color = NA,
+    ave.color.line = "red", as.network = TRUE, ...){
+
+    if (as.network) {
+        Animate_formality_net(x = x, contextual = contextual, formal = formal, 
+            edge.constant = edge.constant, wc.time = wc.time, time.constant = time.constant, 
+            title = title, digits = digits, current.color = current.color, 
+            current.speaker.color = current.speaker.color, 
+            non.speaker.color = non.speaker.color, ...)
+    } else {
+message("Currently Unavailable"); return(NULL)
+        Animate_formality_bar(x = x, wc.time = wc.time, 
+            time.constant = time.constant, digits = digits, 
+            ave.color.line = ave.color.line, ...)         
+    }
+
+}
+
+
+#' Prints a animated_formality  Object
+#' 
+#' Prints a animated_formality  object.
+#' 
+#' @param x The animated_formality  object.
+#' @param title The title of the plot.
+#' @param layout \pkg{igraph} \code{layout} to use.
+#' @param seed The seed to use in plotting the graph.
+#' @param pause The length of time to pause between plots.
+#' @param legend The coordinates of the legend. See 
+#' \code{\link[plotrix]{color.legend}} for more information.
+#' @param legend.cex character expansion factor. \code{NULL} and \code{NA} are 
+#' equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.
+#' @param bg The color to be used for the background of the device region. See
+#' \code{\link[graphics]{par}} for more information. 
+#' @param net.legend.color The text legend color for the network plot.
+#' @param \ldots Other Arguments passed to \code{\link[igraph]{plot.igraph}}.
+#' @import igraph
+#' @importFrom plotrix color.legend
+#' @method print animated_formality 
+#' @S3method print animated_formality 
+print.animated_formality <- function(x, title = NULL, 
+    seed = sample(1:10000, 1), layout=layout.auto, pause = 0, 
+    legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, bg=NULL, 
+    net.legend.color = "black", ...){
+    
+    if (is.null(title)) {
+        title <- attributes(x)[["title"]]
+    }
+
+    if (attributes(x)[["network"]]) {
+        invisible(lapply(x, function(y) {
+            set.seed(seed)
+            par(bg = bg)
+            plot.igraph(y, edge.curved=TRUE, layout=layout)
+            if (!is.null(title)) {
+                mtext(title, side=3)
+            }
+            if (!is.null(legend)) {
+                color.legend(legend[1], legend[2], legend[3], legend[4], 
+                    c("Contextual", "Formal"), attributes(x)[["legend"]], 
+                    cex = legend.cex, col=net.legend.color, ...)
+            }
+            if (pause > 0) Sys.sleep(pause)
+        })) 
+    } else {
+        invisible(lapply(x, print))
+    }
+   
+}
+
+
+#' Plots a animated_formality  Object
+#' 
+#' Plots a animated_formality  object.
+#' 
+#' @param x The animated_formality  object.
+#' @param \ldots Other arguments passed to \code{print.animated_formality }.
+#' @method plot animated_formality 
+#' @export
+plot.animated_formality  <- function(x, ...){ 
+
+    print(x, ...)
+
+}
+
 
 
 

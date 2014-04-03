@@ -1,0 +1,33 @@
+\docType{data}
+\name{raj_act1POS}
+\alias{raj_act1POS}
+\title{Romeo and Juliet: Act 1 Parts of Speech by Person}
+\format{A list with 10 elements
+\url{http://shakespeare.mit.edu/romeo_juliet/full.html}}
+\usage{
+data(raj_act1POS)
+}
+\description{
+A dataset containing a list from \code{\link[qdap]{pos_by}}
+using the \code{\link[qdap]{mraja1spl}} data set (see
+\code{\link[qdap]{pos_by}} for more information).
+}
+\details{
+\describe{ \item{text}{The original text}
+\item{POStagged}{The original words replaced with parts of
+speech in context.} \item{POSprop}{Dataframe of the
+proportion of parts of speech by row.}
+\item{POSfreq}{Dataframe of the frequency of parts of
+speech by row.} \item{POSrnp}{Dataframe of the frequency
+and proportions of parts of speech by row}
+\item{percent}{The value of percent used for plotting
+purposes.} \item{zero.replace}{The value of zero.replace
+used for plotting purposes.} \item{pos.by.freq}{Dataframe
+of the frequency of parts of speech by grouping variable.}
+\item{pos.by.prop}{Dataframe of the proportion of parts of
+speech by grouping variable.} \item{pos.by.rnp}{Dataframe
+of the frequency and proportions of parts of speech by
+grouping variable.} }
+}
+\keyword{datasets}
+
