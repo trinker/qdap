@@ -398,12 +398,13 @@ animated_discourse_map <- function(DF, edge.constant, sep = "_",
 #' @param title The title of the plot.
 #' @param seed The seed to use in plotting the graph.
 #' @param layout \pkg{igraph} \code{layout} to use.
+#' @param pause The length of time to pause between plots.
 #' @param \ldots Other Arguments passed to \code{\link[igraph]{plot.igraph}}.
 #' @import igraph
 #' @method print animated_discourse_map 
 #' @S3method print animated_discourse_map 
 print.animated_discourse_map <- function(x, title = NULL, 
-    seed = sample(1:10000, 1), layout=layout.auto, ...){
+    seed = sample(1:10000, 1), layout=layout.auto, pause = 0, ...){
     
     if (is.null(title)) {
         title <- attributes(x)[["title"]]
@@ -415,6 +416,7 @@ print.animated_discourse_map <- function(x, title = NULL,
         if (!is.null(title)) {
             mtext(title, side=3)
         }
+        if (pause > 0) Sys.sleep(pause)
     }))  
    
 }

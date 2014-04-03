@@ -35,7 +35,13 @@ And constructed with the following guidelines:
 
 **MINOR FEATURES**
 
+* `raj_act1POS` added.  `raj_act1POS` is a data set for Romeo and Juliet: Act 1
+  broken into parts of speech.
+
 IMPROVEMENTS
+
+* `discourse_map` picks up a `pause` argument that enables the user to pasue 
+  between plots in itneractive mode.
 
 **CHANGES**
 

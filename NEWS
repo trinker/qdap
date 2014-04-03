@@ -40,6 +40,9 @@ MINOR FEATURES
 
 IMPROVEMENTS
 
+* `discourse_map` picks up a `pause` argument that enables the user to pasue 
+  between plots in itneractive mode.
+
 CHANGES
 
 CHANGES IN qdap VERSION 1.3.4
