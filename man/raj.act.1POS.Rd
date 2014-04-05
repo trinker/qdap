@@ -1,11 +1,11 @@
 \docType{data}
-\name{raj_act1POS}
-\alias{raj_act1POS}
+\name{raj.act.1POS}
+\alias{raj.act.1POS}
 \title{Romeo and Juliet: Act 1 Parts of Speech by Person}
 \format{A list with 10 elements
 \url{http://shakespeare.mit.edu/romeo_juliet/full.html}}
 \usage{
-data(raj_act1POS)
+data(raj.act.1POS)
 }
 \description{
 A dataset containing a list from \code{\link[qdap]{pos_by}}

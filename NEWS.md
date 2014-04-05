@@ -37,7 +37,7 @@ And constructed with the following guidelines:
 
 **MINOR FEATURES**
 
-* `raj_act1POS` added.  `raj_act1POS` is a data set for Romeo and Juliet: Act 1
+* `raj.act.1POS` added.  `raj.act.1POS` is a data set for Romeo and Juliet: Act 1
   broken into parts of speech.
 
 IMPROVEMENTS

@@ -126,8 +126,8 @@ NULL
 #' 
 #' @docType data 
 #' @keywords datasets 
-#' @name raj_act1POS 
-#' @usage data(raj_act1POS) 
+#' @name raj.act.1POS 
+#' @usage data(raj.act.1POS) 
 #' @format A list with 10 elements 
 #' \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
 NULL

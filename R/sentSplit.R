@@ -115,6 +115,7 @@ function(dataframe, text.var, rm.var = NULL, endmarks = c("?", ".", "!", "|"),
     } 
     class(output) <- c("sent_split", paste0("sent_split_text_var:", text.var), 
         rm.var, class(output))
+    attributes(output)[["text.var"]] <- text.var
     output
 }
 

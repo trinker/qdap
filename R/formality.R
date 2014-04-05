@@ -101,7 +101,7 @@
 #' print(bgb, bg="black", net.legend.color ="white", pause=1)
 #' 
 #' ## EXAMPLE 2
-#' form_ani2 <- formality(raj_act1POS, mraja1spl$person)
+#' form_ani2 <- formality(raj.act.1POS, mraja1spl$person)
 #' forma2 <- Animate(form_ani2, contextual="white", formal="blue",
 #'     current.color = "yellow", current.speaker.color="grey70")
 #' 
@@ -123,7 +123,7 @@
 #' library(igraph)
 #' library(plotrix)
 #' 
-#' form_ani2 <- formality(raj_act1POS, mraja1spl$person)
+#' form_ani2 <- formality(raj.act.1POS, mraja1spl$person)
 #' 
 #' ## Set up the network version
 #' form_net <- Animate(form_ani2, contextual="white", formal="blue",
