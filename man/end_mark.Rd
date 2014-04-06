@@ -74,6 +74,7 @@ preprocessed(x_by)
 plot(scores(x_by))
 plot(counts(x_by))
 plot(proportions(x_by))
+plot(preprocessed(x_by))
 }
 }
 \keyword{end-mark}

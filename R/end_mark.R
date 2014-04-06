@@ -51,6 +51,7 @@
 #' plot(scores(x_by))
 #' plot(counts(x_by))
 #' plot(proportions(x_by))
+#' plot(preprocessed(x_by))
 #' }
 end_mark <- function(text.var, missing.end.mark = "_", missing.text = NA, 
     other.endmarks = NULL) {
@@ -118,7 +119,7 @@ end_mark_by <- function(text.var, grouping.var, digits = 3, percent = FALSE,
        raw_pro_comb(DF2, digits = digits, percent = percent, 
        zero.replace = zero.replace), check.names=FALSE),  
        c(G, colnames(props)))
-    out <- list(raw= DF, count = matrix2df(DF2, G), 
+    out <- list(raw= setNames(DF, c(G, colnames(DF[-1]))), count = matrix2df(DF2, G), 
         prop = matrix2df(props, G), rnp = comb)
     class(out) <- c("end_mark_by", class(out))
     attributes(out)[["digits"]] <- digits
@@ -126,7 +127,6 @@ end_mark_by <- function(text.var, grouping.var, digits = 3, percent = FALSE,
     attributes(out)[["zero.replace"]] <- zero.replace
     out
 }
-
 #' Prints a end_mark_by object
 #' 
 #' Prints a end_mark_by object
@@ -156,13 +156,15 @@ scores.end_mark_by <- function(x, ...) {
 
     out <- x[["rnp"]]
     attributes(out) <- list(
-            class = c("end_mark_score", class(out)),
+            class = c("end_mark_by_score", class(out)),
             type = "end_mark_by_scores",
             names = colnames(out),
-            row.names = rownames(out)
+            row.names = rownames(out),
+            count = (x[["count"]])
     )
     out
 }
+
 
 
 #' Question Counts
@@ -178,7 +180,7 @@ counts.end_mark_by <- function(x, ...) {
 
     out <- x[["count"]]
     attributes(out) <- list(
-            class = c("end_mark_count", class(out)),
+            class = c("end_mark_by_count", class(out)),
             type = "end_mark_by_counts",
             names = colnames(out),
             row.names = rownames(out)
@@ -199,7 +201,7 @@ proportions.end_mark_by <- function(x, ...) {
 
     out <- x[["prop"]]
     attributes(out) <- list(
-            class = c("end_mark_proportion", class(out)),
+            class = c("end_mark_by_proportion", class(out)),
             type = "end_mark_by_proportions",
             names = colnames(out),
             row.names = rownames(out)
@@ -245,15 +247,87 @@ function(x, ...) {
     options(width=WD)
 }
 
+#' Plots a end_mark_by_score Object
+#' 
+#' Plots a end_mark_by_score object.
+#' 
+#' @param x The end_mark_by_score object.
+#' @param values logical.  If \code{TRUE} the cell values will be included on 
+#' the heatmap.
+#' @param \ldots Arguments passed to \code{\link[qdap]{qheat}}.
+#' @method plot end_mark_by_score
+#' @export
+plot.end_mark_by_score <- function(x, values = TRUE, ...){ 
+
+    if (values) {
+        qheat(attributes(x)[["count"]], mat2 = x, ...)
+    } else {
+        qheat(attributes(x)[["count"]], ...) 
+    }
+  
+}
+
+
+#' Plots a end_mark_by_count Object
+#' 
+#' Plots a end_mark_by_count object.
+#' 
+#' @param x The end_mark_by_count object.
+#' @param values logical.  If \code{TRUE} the cell values will be included on 
+#' the heatmap.
+#' @param \ldots Arguments passed to \code{\link[qdap]{qheat}}.
+#' @method plot end_mark_by_count
+#' @export
+plot.end_mark_by_count <- function(x, values = TRUE, ...){ 
+
+    qheat(x, values = values, ...)
+
+}
+
+#' Plots a end_mark_by_proportion Object
+#' 
+#' Plots a end_mark_by_proportion object.
+#' 
+#' @param x The end_mark_by_proportion object.
+#' @param values logical.  If \code{TRUE} the cell values will be included on 
+#' the heatmap.
+#' @param \ldots Arguments passed to \code{\link[qdap]{qheat}}.
+#' @method plot end_mark_by_proportion
+#' @export
+plot.end_mark_by_proportion <- function(x, values = TRUE, ...){ 
+
+    qheat(x, values = values, ...)
+
+}
 
 
 
+#' Plots a end_mark_by_preprocessed Object
+#' 
+#' Plots a end_mark_by_preprocessed object.
+#' 
+#' @param x The end_mark_by_preprocessed object.
+#' @param ncol The number of columns to use for \code{\link[ggplot2]{facet_wrap}}.
+#' @param \ldots ignored
+#' @importFrom ggplot2 xlab ggplot geom_bar facet_wrap coord_flip aes_string
+#' @method plot end_mark_by_preprocessed
+#' @export
+plot.end_mark_by_preprocessed <- function(x, ncol = 1, ...){ 
 
+    group <- colnames(x)[1]    
+    ord1 <- sort(table(x[, group] ))
+    x[, group] <- factor(x[, group], levels = names(ord1))
+    ord2 <- sort(table(x[, "end.mark"]), decreasing = TRUE)
+    x[, "end.mark"] <- factor(x[, "end.mark"], levels = names(ord2))
 
-
-
-
-
+    colnames(x)[1] <- "QDAP_GROUP"
+    ggplot(x, aes_string(x="QDAP_GROUP", fill="QDAP_GROUP")) + 
+        geom_bar(show_guide = FALSE) + 
+        coord_flip() +
+        facet_wrap(reformulate("end.mark"), ncol = ncol) +
+        xlab(paste(unlist(sapply(unlist(strsplit(group, "&")), 
+            Caps)), collapse =" & ")) 
+}
 
 
 

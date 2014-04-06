@@ -1,0 +1,19 @@
+\name{plot.end_mark_by_count}
+\alias{plot.end_mark_by_count}
+\title{Plots a end_mark_by_count Object}
+\usage{
+\method{plot}{end_mark_by_count}(x, values = TRUE, ...)
+}
+\arguments{
+  \item{x}{The end_mark_by_count object.}
+
+  \item{values}{logical.  If \code{TRUE} the cell values
+  will be included on the heatmap.}
+
+  \item{\ldots}{Arguments passed to
+  \code{\link[qdap]{qheat}}.}
+}
+\description{
+Plots a end_mark_by_count object.
+}
+
