@@ -329,7 +329,21 @@ plot.end_mark_by_preprocessed <- function(x, ncol = 1, ...){
             Caps)), collapse =" & ")) 
 }
 
+#' Plots a end_mark_by Object
+#' 
+#' Plots a end_mark_by object.
+#' 
+#' @param x The end_mark_by object.
+#' @param values logical.  If \code{TRUE} the cell values will be included on 
+#' the heatmap.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{qheat}}.
+#' @method plot end_mark_by
+#' @export 
+plot.end_mark_by <- function(x, values = FALSE, ...) {
 
+    plot(scores(x), values = values, ...)
+
+}
 
 
 
