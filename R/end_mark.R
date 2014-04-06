@@ -1,7 +1,8 @@
 #' Sentence End marks
 #' 
-#' Grab the sentence end marks for a transcript.  This can be useful to 
-#' categorize based on sentence type.
+#' 
+#' \code{end_mark} - Grab the sentence end marks for a transcript.  This can be 
+#' useful to categorize based on sentence type.
 #' 
 #' @param text.var The text variable.        
 #' @param missing.end.mark A value to use for sentences with missing endmarks.
@@ -16,6 +17,7 @@
 #' @param zero.replace Value to replace 0 values with.
 #' @param digits Integer; number of decimal places to round when printing.  
 #' @param \ldots Other arguments passed to \code{end_mark}.
+#' @rdname end_mark
 #' @return Returns a character vector of qdap end marks for each sentence.  
 #' End marks include:
 #' \item{"."}{Declarative sentence.} 
@@ -69,7 +71,14 @@ end_mark <- function(text.var, missing.end.mark = "_", missing.text = NA,
     last1
 }
 
-
+#' Sentence End marks
+#' 
+#' 
+#' \code{end_mark_by} - Grab the sentence end marks for a transcriptby grouping 
+#' variable(s).
+#' 
+#' @rdname end_mark
+#' @export
 end_mark_by <- function(text.var, grouping.var, digits = 3, percent = FALSE, 
     zero.replace = 0, ...) {
 

@@ -1,9 +1,13 @@
 \name{end_mark}
 \alias{end_mark}
+\alias{end_mark_by}
 \title{Sentence End marks}
 \usage{
 end_mark(text.var, missing.end.mark = "_", missing.text = NA,
   other.endmarks = NULL)
+
+end_mark_by(text.var, grouping.var, digits = 3, percent = FALSE,
+  zero.replace = 0, ...)
 }
 \arguments{
   \item{text.var}{The text variable.}
@@ -44,8 +48,12 @@ occur)} \item{"*!"}{Imperative-exclamatory sentence.}
 \item{"no.em"}{No end mark.} \item{"blank"}{Empty cell/NA.}
 }
 \description{
-Grab the sentence end marks for a transcript.  This can be
-useful to categorize based on sentence type.
+\code{end_mark} - Grab the sentence end marks for a
+transcript.  This can be useful to categorize based on
+sentence type.
+
+\code{end_mark_by} - Grab the sentence end marks for a
+transcriptby grouping variable(s).
 }
 \examples{
 \dontrun{
