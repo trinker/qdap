@@ -38,7 +38,7 @@ list2df <- function(list.object, col1 = "X1", col2 = "X2") {
 
     dat <- data.frame(x = unlist(list.object, ,FALSE), 
         y = rep(names(list.object), sapply(list.object, length)), 
-        stringsAsFactors = FALSE)
+        stringsAsFactors = FALSE, check.names=FALSE)
     colnames(dat) <- c(col1, col2)
     dat
 }
@@ -62,7 +62,8 @@ matrix2df <- function(matrix.object, col1 = "var1") {
     if (is.null(rownames(matrix.object))) {
         rownames(matrix.object) <- 1:nrow(matrix.object)
     }
-    dat <- data.frame(rownames(matrix.object), matrix.object, row.names=NULL)
+    dat <- data.frame(rownames(matrix.object), matrix.object, row.names=NULL, 
+        check.names=FALSE)
     colnames(dat)[1] <- col1
     dat
 }
@@ -87,7 +88,7 @@ vect2df <- function(vector.object, col1 = "X1", col2 = "X2", order = TRUE,
     if (is.null(names(vector.object))) {
         names(vector.object) <- paste0("x", 1:length(vector.object))
     }
-    out <- data.frame(names(vector.object), vector.object)
+    out <- data.frame(names(vector.object), vector.object, check.names=FALSE)
     colnames(out) <- c(col1, col2)
     if (order) {
         FUN <- match.fun(ifelse(rev, "rev", "c"))
@@ -117,7 +118,8 @@ list_df2df <- function(list.df.object, col1 = "X1") {
         names(list.df.object) <- paste0("L", pad(1:length(list.df.object)))
     }
     list.names <- rep(names(list.df.object), sapply(list.df.object, nrow))
-    out <- data.frame(list.names, do.call(rbind, list.df.object), row.names=NULL)
+    out <- data.frame(list.names, do.call(rbind, list.df.object), 
+        row.names=NULL, check.names=FALSE)
     colnames(out)[1] <- col1
     out
 }
