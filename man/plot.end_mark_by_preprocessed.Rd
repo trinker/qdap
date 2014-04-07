@@ -1,0 +1,18 @@
+\name{plot.end_mark_by_preprocessed}
+\alias{plot.end_mark_by_preprocessed}
+\title{Plots a end_mark_by_preprocessed Object}
+\usage{
+\method{plot}{end_mark_by_preprocessed}(x, ncol = 1, ...)
+}
+\arguments{
+  \item{x}{The end_mark_by_preprocessed object.}
+
+  \item{ncol}{The number of columns to use for
+  \code{\link[ggplot2]{facet_wrap}}.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Plots a end_mark_by_preprocessed object.
+}
+

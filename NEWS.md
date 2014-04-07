@@ -35,6 +35,8 @@ And constructed with the following guidelines:
 
 * `formality` picks up an `Animate` method.
 
+* `end_mark_by` function added as a aggregated grouping version of `end_mark`.
+
 **MINOR FEATURES**
 
 * `raj.act.1POS` added.  `raj.act.1POS` is a data set for Romeo and Juliet: Act 1

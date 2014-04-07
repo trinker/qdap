@@ -1,0 +1,18 @@
+\name{proportions.end_mark_by}
+\alias{proportions.end_mark_by}
+\title{Question Counts}
+\usage{
+\method{proportions}{end_mark_by}(x, ...)
+}
+\arguments{
+  \item{x}{The end_mark_by object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+View \code{\link[qdap]{end_mark_by}} proportions.
+}
+\details{
+end_mark_by Method for proportions
+}
+

@@ -1,0 +1,18 @@
+\name{scores.end_mark_by}
+\alias{scores.end_mark_by}
+\title{Question Counts}
+\usage{
+\method{scores}{end_mark_by}(x, ...)
+}
+\arguments{
+  \item{x}{The \code{\link[qdap]{end_mark_by}} object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+View end_mark_by scores.
+}
+\details{
+end_mark_by Method for scores
+}
+

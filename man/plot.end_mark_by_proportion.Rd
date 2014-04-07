@@ -1,0 +1,19 @@
+\name{plot.end_mark_by_proportion}
+\alias{plot.end_mark_by_proportion}
+\title{Plots a end_mark_by_proportion Object}
+\usage{
+\method{plot}{end_mark_by_proportion}(x, values = TRUE, ...)
+}
+\arguments{
+  \item{x}{The end_mark_by_proportion object.}
+
+  \item{values}{logical.  If \code{TRUE} the cell values
+  will be included on the heatmap.}
+
+  \item{\ldots}{Arguments passed to
+  \code{\link[qdap]{qheat}}.}
+}
+\description{
+Plots a end_mark_by_proportion object.
+}
+

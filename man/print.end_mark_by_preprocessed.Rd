@@ -1,0 +1,15 @@
+\name{print.end_mark_by_preprocessed}
+\alias{print.end_mark_by_preprocessed}
+\title{Prints a end_mark_by_preprocessed object}
+\usage{
+\method{print}{end_mark_by_preprocessed}(x, ...)
+}
+\arguments{
+  \item{x}{The end_mark_by_preprocessed object}
+
+  \item{\ldots}{ignored}
+}
+\description{
+Prints a end_mark_by_preprocessed object
+}
+

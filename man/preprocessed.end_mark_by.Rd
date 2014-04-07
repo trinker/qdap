@@ -1,0 +1,18 @@
+\name{preprocessed.end_mark_by}
+\alias{preprocessed.end_mark_by}
+\title{Question Counts}
+\usage{
+\method{preprocessed}{end_mark_by}(x, ...)
+}
+\arguments{
+  \item{x}{The end_mark_by object.}
+
+  \item{\ldots}{ignored}
+}
+\description{
+View \code{\link[qdap]{end_mark_by}} preprocessed.
+}
+\details{
+end_mark_by Method for preprocessed
+}
+
