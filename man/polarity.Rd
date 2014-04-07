@@ -125,30 +125,35 @@ position of the valence shifters directly surrounding the
 positive or negative word.  The researcher may provide a
 weight \eqn{c} to be utilized with amplifiers/de-amplifiers
 (default is .8; deamplifier weight is constrained to -1
-lower bound).  Last, these context cluster (\eqn{x_i^{T}})
-are summed and divided by the square root of the word count
-(\eqn{\sqrt{n}}) yielding an unbounded polarity score
-(\eqn{\delta}).  Note that context clusters containing a
-comma before the polarized word will only consider words
-found after the comma.
+lower bound).  Last, these context cluster
+(\eqn{x_i^{T}}{x_i^T}) are summed and divided by the square
+root of the word count (\eqn{\sqrt{n}}{sqrt(n)}) yielding
+an unbounded polarity score (\eqn{\delta}{C}).  Note that
+context clusters containing a comma before the polarized
+word will only consider words found after the comma.
 
-\deqn{\delta=\frac{x_i^T}{\sqrt{n}}}
+\deqn{\delta=\frac{x_i^T}{\sqrt{n}}}{C=x_i^2/sqrt(n)}
 
 Where:
 
 \deqn{x_i^T=\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot
-w(-1)^{\sum{x_i^{N}}})}}
+w(-1)^{\sum{x_i^{N}}})}}{x_i^T=\sum((1 + c(x_i^A - x_i^D))
+* w(-1)^(\sumx_i^N))}
 
-\deqn{x_i^{A}=\sum{(w_{neg}\cdot x_i^{a})}}
+\deqn{x_i^{A}=\sum{(w_{neg}\cdot
+x_i^{a})}}{x_i^A=\sum(w_neg * x_i^a)}
 
 \deqn{x_{i}^D=\left\{\begin{array}{cc} x_{i}^D & x_{i}^D
-\geq -1 \\ -1 & x_{i}^D < -1 \end{array}\right.}
+\geq -1 \\ -1 & x_{i}^D < -1 \end{array}\right.}{ (x_i^D
+x_i^D >= -1 x_i^D= ( (-1 x_i^D < -1}
 
-\deqn{x_i^{D}=\sum{(- w_{neg}\cdot x_i^{a} + x_i^{d})}}
+\deqn{x_i^{D}=\sum{(- w_{neg}\cdot x_i^{a} +
+x_i^{d})}}{x_i^D=\sum(- w_neg * x_i^a + x_i^d)}
 
 \deqn{w_{neg}=\left\{\begin{array}{cc} 1 & \sum{x_i^{N}}
 \bmod {2} >0 \\ 0 & \sum{x_i^{N}} \bmod {2} =0
-\end{array}\right.}
+\end{array}\right.}{ (1 \sumx_i^N mod 2 > 0 \cr w_neg= ( (0
+\sumx_i^N mod 2 = 0 }
 }
 \note{
 The polarity score is dependent upon the polarity
@@ -160,7 +165,8 @@ provide/augment the dictionary (see the
 \code{polarity_frame} function).  For instance the word
 "sick" in a high school setting may mean that something is
 good, whereas "sick" used by a typical adult indicates
-something is not right or negative connotation.
+something is not right or negative connotation
+(\strong{deixis}).
 
 Also note that \code{\link[qdap]{polarity}} assumes you've
 run \code{\link[qdap]{sentSplit}}.
