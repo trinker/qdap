@@ -152,7 +152,7 @@ x_i^{d})}}{x_i^D=\sum(- w_neg * x_i^a + x_i^d)}
 
 \deqn{w_{neg}=\left\{\begin{array}{cc} 1 & \sum{x_i^{N}}
 \bmod {2} >0 \\ 0 & \sum{x_i^{N}} \bmod {2} =0
-\end{array}\right.}{ (1 \sumx_i^N mod 2 > 0 \cr w_neg= ( (0
+\end{array}\right.}{ (1 \sumx_i^N mod 2 > 0 w_neg= ( (0
 \sumx_i^N mod 2 = 0 }
 }
 \note{

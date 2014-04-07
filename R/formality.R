@@ -18,12 +18,12 @@
 #' reliable. For single sentences, the F-value should only be computed for 
 #' purposes of illustration" (p. 24).
 #' @details Heylighen & Dewaele(2002)'s formality score is calculated as:
-#' \deqn{F = 50(\frac{n_{f}-n_{c}}{N} + 1)}
+#' \deqn{F = 50(\frac{n_{f}-n_{c}}{N} + 1)}{F = 50(n_f-n_c/N + 1)}
 #'
 #' Where:
-#' \deqn{f = \left \{noun, \;adjective, \;preposition, \;article\right \}}
-#' \deqn{c = \left \{pronoun, \;verb, \;adverb, \;interjection\right \}}
-#' \deqn{N = \sum{(f \;+ \;c \;+ \;conjunctions)}}
+#' \deqn{f = \left \{noun, \;adjective, \;preposition, \;article\right \}}{f = {noun,adjective, preposition, article}}
+#' \deqn{c = \left \{pronoun, \;verb, \;adverb, \;interjection\right \}}{c = {pronoun, verb, adverb, interjection}}
+#' \deqn{N = \sum{(f \;+ \;c \;+ \;conjunctions)}}{N = \sum(f + c + conjunctions)}
 #' @return A list containing at the following components: 
 #' \item{text}{The text variable} 
 #' \item{POStagged}{Raw part of speech for every word of the text variable} 

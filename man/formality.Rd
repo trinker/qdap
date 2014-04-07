@@ -49,12 +49,15 @@ and optionally plot the breakdown of the model.
 }
 \details{
 Heylighen & Dewaele(2002)'s formality score is calculated
-as: \deqn{F = 50(\frac{n_{f}-n_{c}}{N} + 1)}
+as: \deqn{F = 50(\frac{n_{f}-n_{c}}{N} + 1)}{F =
+50(n_f-n_c/N + 1)}
 
 Where: \deqn{f = \left \{noun, \;adjective, \;preposition,
-\;article\right \}} \deqn{c = \left \{pronoun, \;verb,
-\;adverb, \;interjection\right \}} \deqn{N = \sum{(f \;+
-\;c \;+ \;conjunctions)}}
+\;article\right \}}{f = {noun,adjective, preposition,
+article}} \deqn{c = \left \{pronoun, \;verb, \;adverb,
+\;interjection\right \}}{c = {pronoun, verb, adverb,
+interjection}} \deqn{N = \sum{(f \;+ \;c \;+
+\;conjunctions)}}{N = \sum(f + c + conjunctions)}
 }
 \section{Warning}{
   Heylighen & Dewaele (2002) state, "At present, a sample
