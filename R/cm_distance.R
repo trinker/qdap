@@ -67,7 +67,7 @@
 #' @section Warning: p-values are estimated and thus subject to error.  More 
 #' replications decreases the error.  Use:
 #' 
-#' \deqn{p \pm \left (  1.96 \cdot \sqrt{\frac{\alpha(1-\alpha)}{n}}\right )}
+#' \deqn{p \pm \left (  1.96 \cdot \sqrt{\frac{\alpha(1-\alpha)}{n}}\right )}{p +/- (1.96 * \sqrt[\alpha * (1-\alpha)/n])}
 #' 
 #' to adjust the confidence in the 
 #' estimated p-values based on the number of replications.

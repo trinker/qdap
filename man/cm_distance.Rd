@@ -116,7 +116,8 @@ Code B.
   replications decreases the error.  Use:
 
   \deqn{p \pm \left ( 1.96 \cdot
-  \sqrt{\frac{\alpha(1-\alpha)}{n}}\right )}
+  \sqrt{\frac{\alpha(1-\alpha)}{n}}\right )}{p +/- (1.96 *
+  \sqrt[\alpha * (1-\alpha)/n])}
 
   to adjust the confidence in the estimated p-values based
   on the number of replications.
