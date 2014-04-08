@@ -111,34 +111,35 @@ function.
 The equation used by the algorithm to assign value to
 polarity of each sentence fist utilizes the sentiment
 dictionary (Hu and Liu, 2004) to tag polarized words.  A
-context cluster (\eqn{x_i^{T}}) of words is pulled from
-around this polarized word (default 4 words before and two
-words after) to be considered as valence shifters.  The
+context cluster (\eqn{x_i^{T}}{x_i^T}) of words is pulled
+from around this polarized word (default 4 words before and
+two words after) to be considered as valence shifters.  The
 words in this context cluster are tagged as neutral
-(\eqn{x_i^{0}}), negator (\eqn{x_i^{N}}), amplifier
-(\eqn{x_i^{a}}), or de-amplifier (\eqn{x_i^{d}}). Neutral
-words hold no value in the equation but do affect word
-count (\eqn{n}).  Each polarized word is then weighted
-\eqn{w} based on the weights from the \code{polarity.frame}
-argument and then further weighted by the number and
-position of the valence shifters directly surrounding the
-positive or negative word.  The researcher may provide a
-weight \eqn{c} to be utilized with amplifiers/de-amplifiers
-(default is .8; deamplifier weight is constrained to -1
-lower bound).  Last, these context cluster
-(\eqn{x_i^{T}}{x_i^T}) are summed and divided by the square
-root of the word count (\eqn{\sqrt{n}}{sqrt(n)}) yielding
-an unbounded polarity score (\eqn{\delta}{C}).  Note that
-context clusters containing a comma before the polarized
-word will only consider words found after the comma.
+(\eqn{x_i^{0}}{x_i^0}), negator (\eqn{x_i^{N}}{x_i^N}),
+amplifier (\eqn{x_i^{a}}{x_i^a}), or de-amplifier
+(\eqn{x_i^{d}}{x_i^d}). Neutral words hold no value in the
+equation but do affect word count (\eqn{n}).  Each
+polarized word is then weighted \eqn{w} based on the
+weights from the \code{polarity.frame} argument and then
+further weighted by the number and position of the valence
+shifters directly surrounding the positive or negative
+word.  The researcher may provide a weight \eqn{c} to be
+utilized with amplifiers/de-amplifiers (default is .8;
+deamplifier weight is constrained to -1 lower bound).
+Last, these context cluster (\eqn{x_i^{T}}{x_i^T}) are
+summed and divided by the square root of the word count
+(\eqn{\sqrt{n}}{\sqrtn}) yielding an unbounded polarity
+score (\eqn{\delta}{C}).  Note that context clusters
+containing a comma before the polarized word will only
+consider words found after the comma.
 
-\deqn{\delta=\frac{x_i^T}{\sqrt{n}}}{C=x_i^2/sqrt(n)}
+\deqn{\delta=\frac{x_i^T}{\sqrt{n}}}{C=x_i^2/\sqrt(n)}
 
 Where:
 
 \deqn{x_i^T=\sum{((1 + c(x_i^{A} - x_i^{D}))\cdot
-w(-1)^{\sum{x_i^{N}}})}}{x_i^T=\sum((1 + c(x_i^A - x_i^D))
-* w(-1)^(\sumx_i^N))}
+w(-1)^{\sum{x_i^{N}}})}}{x_i^T=\sum((1 + c * (x_i^A -
+x_i^D)) * w(-1)^(\sumx_i^N))}
 
 \deqn{x_i^{A}=\sum{(w_{neg}\cdot
 x_i^{a})}}{x_i^A=\sum(w_neg * x_i^a)}
