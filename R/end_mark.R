@@ -1,4 +1,4 @@
-#' Sentence End marks
+#' Sentence End Marks
 #' 
 #' 
 #' \code{end_mark} - Grab the sentence end marks for a transcript.  This can be 
@@ -72,7 +72,7 @@ end_mark <- function(text.var, missing.end.mark = "_", missing.text = NA,
     last1
 }
 
-#' Sentence End marks
+#' Sentence End Marks
 #' 
 #' 
 #' \code{end_mark_by} - Grab the sentence end marks for a transcriptby grouping 
