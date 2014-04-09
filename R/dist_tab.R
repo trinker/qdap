@@ -33,29 +33,33 @@
 #' }
 dist_tab <-
 function(dataframe, breaks = NULL, digits = 2, ...){
+    
     DF <- as.data.frame(dataframe)
-    freq.dist <- function (var, breaks, digits, ...){
-        x1 <- substitute(var)
-        if (is.null(breaks)){
-            VAR <- var
-        } else {
-            if (is.numeric(var) & length(table(var)) > breaks){
-                VAR <- cut(var, breaks, ...)
-            } else {
-                VAR <- var
-            }
-        }
-        x <- data.frame(table(VAR))
-        names(x)[1] <- as.character(x1)
-        percent <- x[, 2]/sum(x[, 2])*100
-        data.frame(interval = x[, 1], Freq = x[, 2],
-            cum.Freq = cumsum(x[, 2]), 
-            percent = round(percent, digits = digits),
-            cum.percent = round(cumsum(percent), digits = digits))
-    }
     z <- lapply(DF, function(x) freq.dist(x, breaks = breaks, digits = digits, ...))
     if (is.vector(dataframe)) {
         z <- z[[1]]
     }
     z
 }
+
+
+freq.dist <- function (var, breaks, digits, ...){
+    x1 <- substitute(var)
+    if (is.null(breaks)){
+        VAR <- var
+    } else {
+        if (is.numeric(var) & length(table(var)) > breaks){
+            VAR <- cut(var, breaks, ...)
+        } else {
+            VAR <- var
+        }
+    }
+    x <- data.frame(table(VAR))
+    names(x)[1] <- as.character(x1)
+    percent <- x[, 2]/sum(x[, 2])*100
+    data.frame(interval = x[, 1], freq = x[, 2],
+        cum.freq = cumsum(x[, 2]), 
+        percent = round(percent, digits = digits),
+        cum.percent = round(cumsum(percent), digits = digits))
+}
+

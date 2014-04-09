@@ -17,6 +17,27 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
+CHANGES IN qdap VERSION 1.3.6
+----------------------------------------------------------------
+
+BUG FIXES
+
+NEW FEATURES
+
+MINOR FEATURES
+
+IMPROVEMENTS
+
+* `polarity`'s equation now uses primes on the de-amplifiers before they're 
+  confined to be >= -1.  This avoids confusion in the indicator function that 
+  took the de-amplifiers variable and returned the same variable.
+
+* `dist_tab`'s frequency columns used a capital F in Freq.  This was not 
+  consistent across all column names and has been changed to lower case.
+
+CHANGES
+
+
 CHANGES IN qdap VERSION 1.3.5
 ----------------------------------------------------------------
 

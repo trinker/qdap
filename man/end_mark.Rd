@@ -1,7 +1,7 @@
 \name{end_mark}
 \alias{end_mark}
 \alias{end_mark_by}
-\title{Sentence End marks}
+\title{Sentence End Marks}
 \usage{
 end_mark(text.var, missing.end.mark = "_", missing.text = NA,
   other.endmarks = NULL)

@@ -58,7 +58,15 @@
 #'     guides(fill = guide_legend(nrow = 5, byrow = TRUE)) +
 #'     theme(legend.position="bottom") +
 #'     ggtitle("Mean Difference")
+#'   
 #'     
+#' raj$wc <- wc(raj$dialogue)
+#' raj$cum.wc <- unlist(with(raj, tapply(wc, act, cumsum)))
+#' raj$turn <- unlist(with(raj, tapply(act, act, seq_along)))
+#' ggplot(raj, aes(y=cum.wc, x=turn)) + 
+#'     geom_step(direction = "hv") + 
+#'     facet_wrap(~act)
+#'         
 #' ## CHARACTER COUNTS
 #' character_count(DATA$state)
 #' character_count(DATA$state, byrow=FALSE)
