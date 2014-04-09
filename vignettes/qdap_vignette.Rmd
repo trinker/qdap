@@ -4125,21 +4125,15 @@ x_i^{A}=\sum{(w_{neg}\cdot x_i^{a})}
 $$
 <br>
 $$
-x_{i}^D=\left\{\begin{array}{cc}
- x_{i}^D & x_{i}^D \geq  -1         \\\\ 
- -1 & x_{i}^D < -1
- \end{array}\right.
+x_i^D = \max(x_i^{D'}, -1)
 $$ 
 <br>
 $$
-x_i^{D}=\sum{(- w_{neg}\cdot x_i^{a} + x_i^{d})}
+x_i^{D'}=\sum{(- w_{neg}\cdot x_i^{a} + x_i^{d})}
 $$ 
 <br>
 $$
-w_{neg}=\left\{\begin{array}{cc}
-1 & \sum{x_i^{N}}>0         \\\\ 
-0 & \sum{x_i^{N}}=0
-\end{array}\right.
+w_{neg}= \left(\sum{x_i^{N}}\right) \bmod {2}
 $$
 
 

@@ -91,21 +91,11 @@
 #' 
 #' \deqn{x_i^{A}=\sum{(w_{neg}\cdot x_i^{a})}}{x_i^A=\sum(w_neg * x_i^a)}
 #' 
-#' \deqn{x_{i}^D=\left\{\begin{array}{cc}
-#' x_{i}^{D'} & x_{i}^{D'} \geq  -1         \\ 
-#' -1 & x_{i}^{D'} < -1
-#' \end{array}\right.}{        (x_i^D'  x_i^D' >=  -1   
-#' x_i^D= ( 
-#'         (-1  x_i^D' < -1}
+#' \deqn{x_i^D = \max(x_i^{D'}, -1)}{x_i^D = max(x_i^D', -1)}
 #' 
-#' \deqn{x_i^{D'}=\sum{(- w_{neg}\cdot x_i^{a} + x_i^{d})}}{x_i^D'=\sum(- w_neg * x_i^a + x_i^d)}
+#' \deqn{x_i^{D'}= \sum{(- w_{neg}\cdot x_i^{a} + x_i^{d})}}{x_i^D'=\sum(- w_neg * x_i^a + x_i^d)}
 #' 
-#' \deqn{w_{neg}=\left\{\begin{array}{cc}
-#' 1 & \sum{x_i^{N}} \bmod {2} >0         \\ 
-#' 0 & \sum{x_i^{N}} \bmod {2} =0
-#' \end{array}\right.}{        (1  \sumx_i^N mod 2 > 0      
-#' w_neg= (      
-#'         (0  \sumx_i^N mod 2 = 0      } 
+#' \deqn{w_{neg}= \left(\sum{x_i^{N}}\right) \bmod {2}}{w_neg= (\sumx_i^N) mod 2}
 #'     
 #' @references Hu, M., & Liu, B. (2004). Mining opinion features in customer 
 #' reviews. National Conference on Artificial Intelligence. 
