@@ -61,6 +61,12 @@
 #' "sick" used by a typical adult indicates something is not right or negative 
 #' connotation (\strong{deixis}).
 #' 
+#' Also note that the old behavior of polarity was to give a value constrained 
+#' between -1 and 1.  The new output is unbounded.  Constaining polarity to be 
+#' between -1 and 1 can be acheived via this transformation:
+#' 
+#' \deqn{\left[\left( 1 - \frac{1}{exp(x)}\right ) \cdot 2 \right] - 1}{((1 - (1/(1 + exp(x)))) * 2) - 1}
+#' 
 #' Also note that \code{\link[qdap]{polarity}} assumes you've run 
 #' \code{\link[qdap]{sentSplit}}.
 #' @details The equation used by the algorithm to assign value to polarity of 
@@ -278,6 +284,16 @@
 #'     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
 #' 
 #' FUN2(TRUE)
+#' 
+#' ## The old behavior of polarity constrained the output to be between -1 and 1
+#' ## this can be replicated via:
+#' 
+#' constrain <- function(x) ((1 - (1/(1 + exp(x)))) * 2) - 1
+#' 
+#' constrain(counts(poldat)$polarity)
+#' constrain(scores(poldat)$ave.polarity)
+#' 
+#' constrain(scores(polarity("really really hate death"))$ave.polarity)
 #' }
 polarity <- function (text.var, grouping.var = NULL, 
     polarity.frame = qdapDictionaries::env.pol, 

@@ -66,7 +66,7 @@ IMPROVEMENTS
 IMPROVEMENTS
 
 * `discourse_map` picks up a `pause` argument that enables the user to pasue 
-  between plots in itneractive mode.
+  between plots in interactive mode.
 
 **CHANGES**
 
