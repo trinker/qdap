@@ -29,6 +29,11 @@
 #' @param rm.incomplete logical.  If \code{TRUE} text rows ending with qdap's 
 #' incomplete sentence end mark (\code{|}) will be removed from the analysis.
 #' @param digits Integer; number of decimal places to round when printing. 
+#' @param constrain logical.  If \code{TRUE} polarity values are constrained to 
+#' be between -1 and 1 using the following transformation:
+#' 
+#' \deqn{\left[\left( 1 - \frac{1}{exp(\delta)}\right ) \cdot 2 \right] - 1}{((1 - (1/(1 + exp(polarity)))) * 2) - 1}
+#' 
 #' @param \ldots Other arguments supplied to \code{\link[qdap]{strip}}.
 #' @return Returns a list of:
 #' \item{all}{A dataframe of scores per row with:
@@ -60,12 +65,6 @@
 #' "sick" in a high school setting may mean that something is good, whereas 
 #' "sick" used by a typical adult indicates something is not right or negative 
 #' connotation (\strong{deixis}).
-#' 
-#' Also note that the old behavior of polarity was to give a value constrained 
-#' between -1 and 1.  The new output is unbounded.  Constaining polarity to be 
-#' between -1 and 1 can be acheived via this transformation:
-#' 
-#' \deqn{\left[\left( 1 - \frac{1}{exp(x)}\right ) \cdot 2 \right] - 1}{((1 - (1/(1 + exp(x)))) * 2) - 1}
 #' 
 #' Also note that \code{\link[qdap]{polarity}} assumes you've run 
 #' \code{\link[qdap]{sentSplit}}.
@@ -285,18 +284,17 @@
 #' 
 #' FUN2(TRUE)
 #' 
+#' ##-----------------------------##
+#' ## Constraining between -1 & 1 ##
+#' ##-----------------------------##
 #' ## The old behavior of polarity constrained the output to be between -1 and 1
-#' ## this can be replicated via:
+#' ## this can be replicated via the `constrain = TRUE` argument:
 #' 
-#' constrain <- function(x) ((1 - (1/(1 + exp(x)))) * 2) - 1
-#' 
-#' constrain(counts(poldat)$polarity)
-#' constrain(scores(poldat)$ave.polarity)
-#' 
-#' constrain(scores(polarity("really really hate death"))$ave.polarity)
+#' polarity("really hate anger")
+#' polarity("really hate anger", constrain=TRUE)
 #' }
 polarity <- function (text.var, grouping.var = NULL, 
-    polarity.frame = qdapDictionaries::env.pol, 
+    polarity.frame = qdapDictionaries::env.pol, constrain = FALSE,
     negators = qdapDictionaries::negation.words, 
     amplifiers = qdapDictionaries::amplification.words, 
     deamplifiers = qdapDictionaries::deamplification.words, question.weight = 0, 
@@ -433,10 +431,15 @@ polarity <- function (text.var, grouping.var = NULL,
     ## Multiple polarity by question weights
     qweight <- ifelse(suppressWarnings(end_mark(all[, "text.var"])) %in% c("?", 
         "*?"), question.weight, 1)
-    all[, "polarity"] <- qweight * all[, "polarity"]
+    pols <- all[, "polarity"] <- qweight * all[, "polarity"]
 
+    ## constrain to -1 to 1
+    if (constrain) {
+        all[, "polarity"] <- constrain(all[, "polarity"])    
+    }
+   
     ## Create average polarity data.frame (group) from all data.frame
-    sall <- split(all, all[, "group.var"])
+    sall <- split(all, all[, "group.var"])  
     lall <- lapply(sall, function(x) {
         data.frame(total.words = sum(x[, "wc"], na.rm = TRUE), 
             ave.polarity = mean(x[, "polarity"], na.rm = TRUE),
@@ -452,7 +455,9 @@ polarity <- function (text.var, grouping.var = NULL,
     attributes(o) <- list(
             class = c("polarity", class(o)),
             names = names(o),
-            digits = digits
+            digits = digits,
+            constrained = constrain,
+            unconstrained.polarity = pols
     )
     return(o)
 }
@@ -498,7 +503,7 @@ print.polarity_score <-
     class(x) <- "data.frame"
     if ("ave.polarity" %in% colnames(x)) {    
         x[, "ave.polarity"] <- round(x[, "ave.polarity"], digits = digits)
-    }        
+    }   
     if ("sd.polarity" %in% colnames(x)) {    
         x[, "sd.polarity"] <- round(x[, "sd.polarity"], digits = digits)
     }        
@@ -511,6 +516,7 @@ print.polarity_score <-
     options(width=WD)
 }
 
+        
 #' Prints an polarity Object
 #' 
 #' Prints an polarity object.
@@ -1418,4 +1424,7 @@ plot.animated_polarity  <- function(x, ...){
     print(x, ...)
 
 }
+
+constrain <- function(x) ((1 - (1/(1 + exp(x)))) * 2) - 1
+
 

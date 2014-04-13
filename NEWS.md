@@ -26,6 +26,9 @@ And constructed with the following guidelines:
 
 **MINOR FEATURES**
 
+* `polarity` picks up a `constrain` argument that constrains the polarity values
+  to be between -1 and 1.
+
 IMPROVEMENTS
 
 * `polarity`'s equation now uses primes on the de-amplifiers before they're 
