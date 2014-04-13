@@ -15,8 +15,8 @@ install:
   - ./travis-tool.sh install_github cboettig/knitcitations
   - ./travis-tool.sh install_deps
   - Rscript -e "source('http://bioconductor.org/biocLite.R');
-      biocLite();
-      biocLite('Rgraphviz')"
+      biocLite(suppressUpdates =TRUE);
+      biocLite('Rgraphviz', suppressUpdates =TRUE)"
 script: ./travis-tool.sh run_tests
 notifications:
   email:
