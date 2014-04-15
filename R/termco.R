@@ -134,6 +134,21 @@
 #' plot(termco_obj, label = TRUE)
 #' plot(termco_obj, label = TRUE, text.color = "red")
 #' plot(termco_obj, label = TRUE, text.color="red", lab.digits=3)
+#' 
+#' ## REVERSE TERMCO (return raw words found per variable)
+#' df <- data.frame(x=1:6,
+#'     y = c("the fluffy little bat" , "the man was round like a ball",
+#'         "the fluffy little bat" , "the man was round like a ball",
+#'         "he ate the chair" , "cough, cough"),
+#'     stringsAsFactors=FALSE)
+#' 
+#' l <- list("bat" ,"man", "ball", "heavy")
+#' z <- counts(termco(df$y, id(df), l))[, -2]
+#' 
+#' lapply(1:nrow(z), function(i, mat = z[-1]) {
+#'     x <- mat[i,, drop=FALSE]
+#'     rep(colnames(x)[x > 0], x[x > 0])
+#' })
 #' }
 termco <-
 function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
