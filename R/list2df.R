@@ -12,6 +12,7 @@
 #' @export
 #' @rdname list2df
 #' @examples
+#' \dontrun{
 #' lst1 <- list(x=c("foo", "bar"), y=1:5)
 #' list2df(lst1)
 #' 
@@ -29,6 +30,13 @@
 #' 
 #' L1 <- list(a=1:10, b=1:6, c=5:8)
 #' list_vect2df(L1)
+#' 
+#' term <- c("the ", "she", " wh")
+#' (out <- with(raj.act.1,  termco(dialogue, person, term)))
+#' x <- counts(out)
+#' 
+#' counts2list(x[, -c(1:2)], x[, 1])
+#' }
 list2df <- function(list.object, col1 = "X1", col2 = "X2") {
 
     ## Make sure the vectors have names; if not use numbers
@@ -142,5 +150,22 @@ list_vect2df <- function(list.vector.object, col1 = "X1", col2 = "X2",
     list_df2df(lapply(list.vector.object, vect2df, col1=col2, col2=col3, ...), 
         col1=col1)
 
+}
+
+
+#' List/Matrix/Vector to Dataframe
+#' 
+#' \code{counts2list} - Convert a count matrix to a named list of elements.
+#' 
+#' @param mat A matrix of counts.
+#' @param nm A character vector of names to assign to the list.
+#' @rdname list2df
+#' @return \code{counts2list} - Returns a list of elements.
+#' @export
+counts2list <- function(mat, nm = rownames(mat)) {
+    setNames(lapply(1:nrow(mat), function(i) {
+        x <- mat[i,, drop=FALSE]
+        rep(colnames(x)[x > 0], x[x > 0])
+    }),  nm = nm)
 }
 

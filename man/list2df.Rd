@@ -1,4 +1,5 @@
 \name{list2df}
+\alias{counts2list}
 \alias{list2df}
 \alias{list_df2df}
 \alias{list_vect2df}
@@ -17,6 +18,8 @@ list_df2df(list.df.object, col1 = "X1")
 
 list_vect2df(list.vector.object, col1 = "X1", col2 = "X2", col3 = "X3",
   ...)
+
+counts2list(mat, nm = rownames(mat))
 }
 \arguments{
   \item{list.object}{A named \code{\link[base]{list}} of
@@ -50,6 +53,11 @@ list_vect2df(list.vector.object, col1 = "X1", col2 = "X2", col3 = "X3",
   (\code{list_vect2df}).}
 
   \item{\dots}{Further arguments passed to \code{vect2df})}
+
+  \item{mat}{A matrix of counts.}
+
+  \item{nm}{A character vector of names to assign to the
+  list.}
 }
 \value{
 \code{list2df} - Returns a dataframe with two columns.
@@ -61,6 +69,8 @@ list_vect2df(list.vector.object, col1 = "X1", col2 = "X2", col3 = "X3",
 \code{list_df2df} - Returns a dataframe.
 
 \code{list_vect2df} - Returns a dataframe.
+
+\code{counts2list} - Returns a list of elements.
 }
 \description{
 \code{list2df} - Convert a named list of vectors to a
@@ -77,11 +87,15 @@ two variable.
 
 \code{list_vect2df} - Convert a list of named vectors to a
 hierarchical dataframe.
+
+\code{counts2list} - Convert a count matrix to a named list
+of elements.
 }
 \details{
 generally an internal function used for reshaping data.
 }
 \examples{
+\dontrun{
 lst1 <- list(x=c("foo", "bar"), y=1:5)
 list2df(lst1)
 
@@ -99,6 +113,13 @@ list_df2df(list(mtcars, mtcars))
 
 L1 <- list(a=1:10, b=1:6, c=5:8)
 list_vect2df(L1)
+
+term <- c("the ", "she", " wh")
+(out <- with(raj.act.1,  termco(dialogue, person, term)))
+x <- counts(out)
+
+counts2list(x[, -c(1:2)], x[, 1])
+}
 }
 \keyword{collapse}
 \keyword{list}
