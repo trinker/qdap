@@ -145,10 +145,7 @@
 #' l <- list("bat" ,"man", "ball", "heavy")
 #' z <- counts(termco(df$y, id(df), l))[, -2]
 #' 
-#' lapply(1:nrow(z), function(i, mat = z[-1]) {
-#'     x <- mat[i,, drop=FALSE]
-#'     rep(colnames(x)[x > 0], x[x > 0])
-#' })
+#' counts2list(z[, -1], z[, 1])
 #' }
 termco <-
 function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
