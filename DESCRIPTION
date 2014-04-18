@@ -41,7 +41,6 @@ Suggests:
     lda,
     plyr,
     proxy,
-    Rgraphviz,
     SnowballC
 LazyData: TRUE
 VignetteBuilder: knitr
