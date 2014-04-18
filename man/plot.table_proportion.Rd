@@ -2,7 +2,7 @@
 \alias{plot.table_proportion}
 \title{Plots a table_proportion Object}
 \usage{
-\method{plot}{table_proportion}(x, values = TRUE, high = "red", ...)
+plot.table_proportion(x, values = TRUE, high = "red", ...)
 }
 \arguments{
   \item{x}{The table_proportion object.}

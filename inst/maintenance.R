@@ -192,3 +192,64 @@ cat(paste(x, collapse = "\n\n"), file="clipboard")
 # Copy from Current R to R_dev
 #==============================
 r2dev()
+
+#========================================================
+
+library(qdap)
+library(ggplot2)
+library(pacman)
+library(reports)
+
+options(repos="http://cran.rstudio.com/")
+
+options(rstudio.markdownToHTML =
+  function(inputFile, outputFile) {
+    require(markdown)
+    markdownToHTML(inputFile, outputFile, stylesheet=file.path(getwd(), "css/style.css"))
+  }
+)
+
+update_news <- function(repo = "qdap") {
+  
+    News <- readLines("NEWS")
+    library(qdap)
+    
+    News <- qdap::mgsub(
+        c("<", ">", "&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;", "BUG FIXES", 
+            "NEW FEATURES", "MINOR FEATURES", "CHANGES", " TRUE ", " FALSE ", 
+            " NULL ", "TRUE.", "FALSE.", "NULL.", ":m:"), 
+        c("&lt;", "&gt;", "**&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;**", 
+            "**BUG FIXES**", "**NEW FEATURES**", "**MINOR FEATURES**", 
+            "**CHANGES**", " `TRUE` ", "`FALSE`.", "`NULL`.", "`TRUE`.", 
+            " `FALSE` ", " `NULL` ", " : m : "), 
+        News, trim = FALSE, fixed=TRUE)
+    
+    News <- sub(pattern="issue *# *([0-9]+)", 
+        replacement=sprintf("<a href=\"https://github.com/trinker/%s/issues/\\1\">issue #\\1</a>",
+        repo), 
+        x=News)
+    
+    News <- sub(pattern="pull request *# *([0-9]+)", 
+        replacement=sprintf("<a href=\"https://github.com/trinker/%s/issues/\\1\">pull request #\\1</a>",
+        repo), 
+        x=News)
+    
+
+    News <- gsub(sprintf(" %s", repo), 
+        sprintf(" <a href=\"https://github.com/trinker/%s\" target=\"_blank\">%s</a>", 
+        repo, repo), News)
+
+    News <- gsub("(http://[^ ]*)", '<a href="\\1" target="_blank">\\1</a>', News)
+	
+    cat(paste(News, collapse = "\n"), file = "NEWS.md")
+	  message("news.md updated")
+}
+
+r2dev <- function(pack = "qdap", rver = "3.0.1", dev = "C:/R/R-devel/library") {
+    cur <- file.path(paste0("C:/R/R-", rver), "library", pack)
+    if (file.exists(file.path(dev, pack))) {
+        unlink(file.path(dev, pack), recursive = TRUE, force = FALSE)
+    }
+    file.copy(cur, dev, recursive = TRUE)
+    message(paste("dev version of", pack, "updated"))
+}

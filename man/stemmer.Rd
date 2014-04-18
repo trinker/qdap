@@ -52,7 +52,8 @@ stemmed words.
 vector with stemmed text.
 }
 \description{
-\code{stemmer} - Stems a vector of text strings.
+\code{stemmer} - Stems a vector of text strings (A wrapper
+for the pkg{tm} package's \code{\link[tm]{stemDocument}}.
 
 \code{stem_words} - Wrapper for stemmer that stems a vector
 of words.
