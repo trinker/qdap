@@ -659,3 +659,31 @@ plot.pos <- function(x, ...) {
 
 }
 
+#' Plots a pos_preprocessed Object
+#' 
+#' Plots a pos_preprocessed object.
+#' 
+#' @param x The pos_preprocessed object.
+#' @param \ldots ignored
+#' @importFrom ggplot2 ggplot aes geom_bar coord_flip ylab theme theme_bw
+#' @method plot pos_preprocessed
+#' @export
+plot.pos_preprocessed <- function(x, ...){ 
+
+    POS <- Counts <- NULL
+
+    dat <- matrix2df(data.frame(Counts = sort(table(unlist(x[, "POStags"])))), "POS")
+    dat[, "POS"] <- dat[, "POS"] %l%  pos_tags("dataframe")
+    dat[, "POS"] <- factor(dat[, "POS"], levels=dat[, "POS"])
+
+    Max <- max(dat[, "Counts"])
+
+    ggplot(dat, aes(POS)) + 
+        geom_bar(aes(weights=Counts)) + 
+        coord_flip() + 
+        ylab("Count") +
+        scale_y_continuous(expand = c(0,0), limits = c(0,Max + Max*.05)) +
+        theme_qdap()
+
+}
+

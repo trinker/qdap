@@ -7,6 +7,7 @@
 #' @param values logical.  If \code{TRUE} the cell values will be included on 
 #' the heatmap. 
 #' @param \ldots Other arguments passed to \code{\link[qdap]{qheat}}.
+#' @method plot table_score 
 #' @export
 plot.table_score <- function(x, values = TRUE, high = "red", ...){ 
 
@@ -47,6 +48,7 @@ plot.table_score <- function(x, values = TRUE, high = "red", ...){
 #' @param values logical.  If \code{TRUE} the cell values will be included on 
 #' the heatmap. 
 #' @param \ldots Other arguments passed to \code{\link[qdap]{qheat}}.
+#' @method plot table_proportion
 #' @export
 plot.table_proportion <- function(x, values = TRUE, high = "red", ...){ 
 
@@ -65,6 +67,7 @@ plot.table_proportion <- function(x, values = TRUE, high = "red", ...){
 #' @param values logical.  If \code{TRUE} the cell values will be included on 
 #' the heatmap. 
 #' @param \ldots Other arguments passed to \code{\link[qdap]{qheat}}.
+#' @method plot table_count
 #' @export
 plot.table_count <- function(x, values = TRUE, high = "red", ...){ 
 

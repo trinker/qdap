@@ -2,7 +2,7 @@
 \alias{plot.table_score}
 \title{Plots a table_score Object}
 \usage{
-plot.table_score(x, values = TRUE, high = "red", ...)
+\method{plot}{table_score}(x, values = TRUE, high = "red", ...)
 }
 \arguments{
   \item{x}{The table_score object.}

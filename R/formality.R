@@ -644,6 +644,7 @@ function(x, ...) {
 #' @param x The formality_scores object.
 #' @param \ldots ignored
 #' @importFrom ggplot2 ggplot aes geom_point scale_y_continuous ggtitle theme labs geom_text xlab ylab scale_size_continuous
+#' @method plot formality_scores
 #' @export
 plot.formality_scores <- function(x, ...){ 
 
@@ -673,32 +674,6 @@ plot.formality_scores <- function(x, ...){
 }
 
 
-#' Plots a pos_preprocessed Object
-#' 
-#' Plots a pos_preprocessed object.
-#' 
-#' @param x The pos_preprocessed object.
-#' @param \ldots ignored
-#' @importFrom ggplot2 ggplot aes geom_bar coord_flip ylab theme theme_bw
-#' @export
-plot.pos_preprocessed <- function(x, ...){ 
-
-    POS <- Counts <- NULL
-
-    dat <- matrix2df(data.frame(Counts = sort(table(unlist(x[, "POStags"])))), "POS")
-    dat[, "POS"] <- dat[, "POS"] %l%  pos_tags("dataframe")
-    dat[, "POS"] <- factor(dat[, "POS"], levels=dat[, "POS"])
-
-    Max <- max(dat[, "Counts"])
-
-    ggplot(dat, aes(POS)) + 
-        geom_bar(aes(weights=Counts)) + 
-        coord_flip() + 
-        ylab("Count") +
-        scale_y_continuous(expand = c(0,0), limits = c(0,Max + Max*.05)) +
-        theme_qdap()
-
-}
 
 Animate_formality_net <- function(x, contextual, formal, 
     edge.constant, wc.time = TRUE, time.constant = 2, title = NULL, digits = 3, 

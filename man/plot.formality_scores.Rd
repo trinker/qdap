@@ -2,7 +2,7 @@
 \alias{plot.formality_scores}
 \title{Plots a formality_scores Object}
 \usage{
-plot.formality_scores(x, ...)
+\method{plot}{formality_scores}(x, ...)
 }
 \arguments{
   \item{x}{The formality_scores object.}

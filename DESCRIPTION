@@ -7,7 +7,6 @@ Authors@R: c(person("Bryan", "Goodrich", role = "ctb"), person("Dason",
     "Kurkiewicz", role = "ctb"), person("Tyler", "Rinker", email =
     "tyler.rinker@gmail.com", role = c("aut", "cre")))
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
-Roxygen: list(wrap = TRUE)
 Depends:
     R (>= 3.0.0),
     ggplot2 (>= 0.9.3.1),
