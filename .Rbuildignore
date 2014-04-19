@@ -5,7 +5,6 @@ qdap.Rproj
 ^\.gitignore
 ^\.gitattributes
 tools.R
-qdap.Rproj
 maintenance.R
 extra_statdoc
 pdf_gen
