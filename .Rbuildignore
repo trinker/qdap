@@ -40,4 +40,4 @@ vignettes/helper_files
 inst/web
 Scraping Word Lists
 inst/demos/discoursemap
-
+travis-tool.sh
