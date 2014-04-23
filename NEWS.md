@@ -40,6 +40,9 @@ IMPROVEMENTS
 
 **CHANGES**
 
+* `polarity_frame` is deprecated and will be removed in a subsequent release.
+  Please use `sentiment_frame` instead.
+
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.5
 ----------------------------------------------------------------

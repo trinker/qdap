@@ -134,11 +134,12 @@
 #' plot(poldat3, nrow=4)
 #' qheat(scores(poldat3)[, -7], high="red", order.b="ave.polarity")
 #' 
-#' ## Create researcher defined polarity.frame
-#' POLENV <- polarity_frame(positive.words, negative.words)
+#' ## Create researcher defined sentiment.frame
+#' POLENV <- sentiment_frame(positive.words, negative.words)
 #' POLENV
 #' ls(POLENV)[1:20]
-#'
+#' c("abrasive", "abrupt", "happy") %ha% POLENV 
+#' 
 #' ## ANIMATION
 #' #===========
 #' (deb2 <- with(subset(pres_debates2012, time=="time 2"),
@@ -353,7 +354,7 @@ polarity <- function (text.var, grouping.var = NULL,
     if (!is.environment(polarity.frame)) {
         if (!is.data.frame(polarity.frame)) {
             stop(paste("Please supply a dataframe or environment", 
-               "(see `polarity_frame`) to polarity.frame"))
+               "(see `sentiment_frame`) to polarity.frame"))
         }
         polarity.frame <- hash(polarity.frame)
     }
@@ -597,6 +598,11 @@ print.polarity_count <-
 #' @rdname polarity
 polarity_frame <- function(positives, negatives, pos.weights = 1, 
     neg.weights = -1, envir = TRUE) {
+    
+    .Deprecated(msg = paste("polarity_frame is deprecated.  Please use the", 
+        "sentiment_frame function instead."), 
+        old = as.character(sys.call(sys.parent()))[1L])    
+    
     plen <- length(positives)
     nlen <- length(negatives)
     if (!length(plen) %in% c(length(positives), 1)) {
