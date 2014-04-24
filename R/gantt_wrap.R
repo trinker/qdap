@@ -61,6 +61,8 @@
 #' @import RColorBrewer 
 #' @importFrom gridExtra grid.arrange
 #' @importFrom scales alpha trans_new pretty_breaks
+#' @importFrom qdapTools sec2hms
+#' @importFrom chron times
 #' @importFrom ggplot2 ggplot aes geom_segment geom_vline scale_x_continuous element_rect ggtitle theme element_blank facet_wrap facet_grid guides guide_legend ylab xlab
 #' @author Andrie de Vries and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso 
@@ -313,6 +315,7 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
 #' grouping variable.
 #' @param \ldots ignored
 #' @export
+#' @importFrom qdapTools %l%
 #' @method Animate gantt_plot
 Animate.gantt_plot <- function(x, wc.time = TRUE, time.constant = 2, 
     colors = NULL, ...){

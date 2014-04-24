@@ -59,6 +59,7 @@
 #' do/does/did label.  Those with undetermined sentence type are labeled unknown.
 #' @keywords question, question-count
 #' @export 
+#' @importFrom qdapTools lookup
 #' @seealso \code{\link[qdap]{colcomb2class}},
 #' \code{\link[qdap]{bracketX}}
 #' @examples

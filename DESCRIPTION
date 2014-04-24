@@ -11,6 +11,7 @@ Depends:
     R (>= 3.0.0),
     ggplot2 (>= 0.9.3.1),
     qdapDictionaries,
+    qdapTools,
     RColorBrewer
 Imports:
     chron,
@@ -33,12 +34,12 @@ Imports:
     xlsx,
     XML
 Suggests:
+    dplyr,
     english,
     koRpus,
     knitcitations,
     knitr,
     lda,
-    plyr,
     proxy,
     SnowballC
 LazyData: TRUE

@@ -665,6 +665,7 @@ plot.pos <- function(x, ...) {
 #' 
 #' @param x The pos_preprocessed object.
 #' @param \ldots ignored
+#' @importFrom qdapTools %l% 
 #' @importFrom ggplot2 ggplot aes geom_bar coord_flip ylab theme theme_bw
 #' @method plot pos_preprocessed
 #' @export

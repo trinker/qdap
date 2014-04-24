@@ -17,12 +17,40 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
-**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.6
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.0.0
 ----------------------------------------------------------------
+
+The `qdapTools` package now houses several former <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> functions.  While 
+  `qdapTools` is a Dependency and all of these functions will be accessible to 
+  the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> user there is a break in backward compatability if these functions
+  are included in code.  For this reason this release is a major bump of <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>.
+
 
 **BUG FIXES**
 
 **NEW FEATURES**
+
+**MINOR FEATURES**
+
+IMPROVEMENTS
+
+**CHANGES**
+
+* The `qdapTools` package now houses the following former `qdap` functions:
+  `hash`, `%ha%`, `hash_look`, `hms2sec`, `id`, `lookup`, `%l%`, `%l+%`, `%l*%`, 
+  `repo2github`, `sec2hms`, `text2color`, `url_dl`, `v_outer`.  These functions 
+  will continue to be available to `qdap` users in interactive mode (`qdapTools` 
+  is a Dependency and thus these functions are loaded into the workspace by 
+  default).  This will allow this bundle of functions to be used outside of
+  <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> without calling the larger <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package per the request of Kirill Muller
+  (see <a href="https://github.com/trinker/qdap/issues/165">issue #165</a>).
+
+* The `dissimialrity` function has been removed from the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package to avoid
+  conflict with the `tm` package.  Use `Dissimilarity` function instead.
+
+
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.6
+----------------------------------------------------------------
 
 **MINOR FEATURES**
 

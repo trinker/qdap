@@ -16,6 +16,7 @@
 #' doi:10.1214/aoms/1177729694
 #' @keywords Kullback-Leibler
 #' @export
+#' @importFrom qdapTools v_outer
 #' @examples
 #' \dontrun{
 #' p.df <- wfdf(DATA$state, DATA$person)

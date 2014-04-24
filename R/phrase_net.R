@@ -19,6 +19,7 @@
 #' @export
 #' @importFrom reshape2 melt
 #' @import igraph
+#' @importFrom qdapTools lookup
 #' @examples
 #' \dontrun{
 #' x <- "Questions must be at least 2 days old to be eligible for a bounty.

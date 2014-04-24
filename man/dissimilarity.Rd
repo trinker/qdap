@@ -1,12 +1,8 @@
 \name{Dissimilarity}
 \alias{Dissimilarity}
-\alias{dissimilarity}
 \title{Dissimilarity Statistics}
 \usage{
 Dissimilarity(text.var, grouping.var = NULL, method = "prop",
-  diag = FALSE, upper = FALSE, p = 2, ...)
-
-dissimilarity(text.var, grouping.var = NULL, method = "prop",
   diag = FALSE, upper = FALSE, p = 2, ...)
 }
 \arguments{
@@ -82,6 +78,7 @@ library(scatterplot3d)
 fit <- cmdscale(diss, eig = TRUE, k = 3)
 
 points <- data.frame(colSplit(names(fit$points[, 1])))
+library(qdapTools)
 points$colors <- points$X1 \%l\% data.frame(levels(points$X1),
     qcv(yellow, yellow, blue, yellow, red, yellow))
 points$shape <- points$X2 \%l\% data.frame(levels(points$X2), c(15, 17, 19))

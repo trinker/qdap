@@ -20,6 +20,7 @@
 #' proportional word count}
 #' \item{plot}{An \pkg{igraph} object}
 #' @export
+#' @importFrom qdapTools %l% 
 #' @details For an example of the video generated from the \code{Animate} 
 #' output of \code{discourse_map} see: 
 #' \url{https://www.youtube.com/watch?v=7LcqFZODXNo&feature=youtu.be}.  An HTML
@@ -42,6 +43,7 @@
 #' x
 #' 
 #' ## Augmenting the plot
+#' library(qdapTools)
 #' mygraph <- visual(x)
 #' 
 #' plot(mygraph, edge.curved=TRUE)

@@ -108,6 +108,7 @@
 #' \url{http://www.slideshare.net/jeffreybreen/r-by-example-mining-twitter-for}
 #' @keywords sentiment, polarity
 #' @export
+#' @importFrom qdapTools hash hash_look
 #' @rdname polarity
 #' @examples
 #' \dontrun{
@@ -668,6 +669,7 @@ polarity_frame <- function(positives, negatives, pos.weights = 1,
 #' @method plot polarity
 #' @importFrom gridExtra grid.arrange
 #' @importFrom scales alpha
+#' @importFrom qdapTools lookup
 #' @importFrom ggplot2 ggplot aes geom_segment xlab ylab scale_colour_gradientn theme_bw guides geom_point guide_colorbar scale_color_discrete guide_legend
 #' @S3method plot polarity
 plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99", 
@@ -1341,6 +1343,7 @@ ggbar <- function(dat, grp = grp, rng = rng) {
 #' positive current turn of talk, while the coloring may indicate a negative 
 #' sentences.
 #' @import igraph
+#' @importFrom qdapTools %l%
 #' @importFrom ggplot2 ggplot geom_hline geom_bar ylab xlab theme ggtitle theme_bw ylim element_text scale_x_discrete 
 #' @export
 #' @method Animate polarity

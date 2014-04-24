@@ -76,6 +76,7 @@ DATA3 <- split(DATA2, DATA2$person)
 
 ## Find correlations between words per turn of talk by person
 ## Throws multiple warning because small data set
+library(qdapTools)
 lapply(DATA3, function(x) {
     word_cor(x[, "state"], id(x), qcv(computer, i, no, good), r = NULL)
 })

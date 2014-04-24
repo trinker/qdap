@@ -171,16 +171,8 @@ sd_section("qdap Tools",
   c(
     "blank2NA",
     "duplicates",
-    "hash",
-    "hms2sec",
-    "lookup",
     "qcv",
-    "replacer",
-    "repo2github", 
-    "sec2hms",        
-    "text2color",
-    "url_dl",
-    "v_outer"
+    "replacer"
   ) 
 )
 
@@ -189,7 +181,6 @@ sd_section("Identification",
   c(
     "end_inc",
     "end_mark",
-    "id",
     "imperative",
     "NAer"
   )

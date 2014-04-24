@@ -51,6 +51,7 @@
 #' \code{\link[plotrix]{color.legend}}
 #' @keywords heatcloud
 #' @export
+#' @importFrom qdapTools lookup
 #' @importFrom plotrix color.legend
 #' @importFrom wordcloud wordcloud
 #' @importFrom gdata drop.levels

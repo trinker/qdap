@@ -143,7 +143,7 @@
 #'     stringsAsFactors=FALSE)
 #' 
 #' l <- list("bat" ,"man", "ball", "heavy")
-#' z <- counts(termco(df$y, id(df), l))[, -2]
+#' z <- counts(termco(df$y, qdapTools::id(df), l))[, -2]
 #' 
 #' counts2list(z[, -1], z[, 1])
 #' }

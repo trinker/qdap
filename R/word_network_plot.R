@@ -62,6 +62,7 @@
 #' @keywords network
 #' @export
 #' @import igraph
+#' @importFrom qdapTools text2color
 #' @examples
 #' \dontrun{
 #' word_network_plot(text.var=DATA$state)

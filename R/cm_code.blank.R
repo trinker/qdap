@@ -28,6 +28,7 @@
 #' \code{\link[qdap]{cm_code.transform}}
 #' @keywords co-occurrence
 #' @export
+#' @importFrom qdapTools sec2hms
 #' @examples
 #' \dontrun{
 #' foo <- list(

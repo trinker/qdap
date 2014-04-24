@@ -22,6 +22,7 @@
 #' Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 #' @keywords coding, time-span
 #' @export
+#' @importFrom qdapTools sec2hms
 #' @examples
 #' \dontrun{
 #' x <- list(

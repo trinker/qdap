@@ -47,6 +47,7 @@
 #' @keywords heatmap
 #' @export
 #' @import RColorBrewer 
+#' @importFrom qdapTools lookup
 #' @importFrom gridExtra grid.arrange 
 #' @importFrom reshape2 melt 
 #' @importFrom scales alpha 

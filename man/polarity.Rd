@@ -201,10 +201,11 @@ plot(poldat3)
 plot(poldat3, nrow=4)
 qheat(scores(poldat3)[, -7], high="red", order.b="ave.polarity")
 
-## Create researcher defined polarity.frame
-POLENV <- polarity_frame(positive.words, negative.words)
+## Create researcher defined sentiment.frame
+POLENV <- sentiment_frame(positive.words, negative.words)
 POLENV
 ls(POLENV)[1:20]
+c("abrasive", "abrupt", "happy") \%ha\% POLENV
 
 ## ANIMATION
 #===========

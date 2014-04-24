@@ -277,7 +277,7 @@ worlis <- list(
     negative = qcv(no, dumb, distrust, not, stinks),
     literacy = qcv(computer, talking, telling)
 )
-y <- wfdf(DATA$state, id(DATA, prefix = TRUE))
+y <- wfdf(DATA$state, qdapTools::id(DATA, prefix = TRUE))
 z <- wfm_combine(y, worlis)
 
 word_cor(t(z), word = names(worlis), r = NULL)

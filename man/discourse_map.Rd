@@ -61,6 +61,7 @@ Title(x) <- NULL
 x
 
 ## Augmenting the plot
+library(qdapTools)
 mygraph <- visual(x)
 
 plot(mygraph, edge.curved=TRUE)

@@ -25,6 +25,7 @@
 #' 
 #' \url{http://www.talkstats.com/showthread.php/31660}
 #' @export
+#' @importFrom qdapTools lookup
 #' @seealso \code{\link[base]{agrep}}
 #' @examples
 #' \dontrun{

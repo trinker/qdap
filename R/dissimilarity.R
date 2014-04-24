@@ -60,6 +60,7 @@
 #' fit <- cmdscale(diss, eig = TRUE, k = 3)
 #' 
 #' points <- data.frame(colSplit(names(fit$points[, 1])))
+#' library(qdapTools)
 #' points$colors <- points$X1 %l% data.frame(levels(points$X1), 
 #'     qcv(yellow, yellow, blue, yellow, red, yellow))
 #' points$shape <- points$X2 %l% data.frame(levels(points$X2), c(15, 17, 19))
@@ -128,41 +129,6 @@ function(x, digits = 3, ...) {
     }
     print(x)
     options(width=WD)  
-}
-
-#' @rdname Dissimilarity
-#' @export
-dissimilarity <- 
-function(text.var, grouping.var= NULL, method = "prop", diag = FALSE, 
-    upper = FALSE, p = 2, ...){   
-    
-    .Deprecated(msg = paste("`dissimilarity` is deprecated.  Please use", 
-        "Dissimilarity to prevent conflicts with the tm package."), 
-        old = as.character(sys.call(sys.parent()))[1L])
-    
-    
-    if(!is(text.var, "true.matrix")){ 
-        wfm.object <- wfm(text.var = text.var, grouping.var = grouping.var, ...)
-    } else {
-        wfm.object <- text.var
-    }
-    wfm.object <- t(wfm.object)
-    meth.check <- FALSE
-    if (method == "prop") {
-        method <- "binary" 
-        meth.check <- TRUE
-    }
-    #leave this stats::dist b/c other packages use dist
-    if (meth.check) {
-        diag <- FALSE
-    }
-    x <- stats::dist(wfm.object, method = method, diag = diag, upper = upper, 
-        p = p)
-    if (meth.check) {
-      x <- 1 - x
-    }   
-    class(x) <- c("Dissimilarity", class(x))    
-    x
 }
 
 

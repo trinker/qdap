@@ -63,6 +63,7 @@
 #' \code{\link[qdap]{gradient_cloud}}
 #' @keywords wordcloud
 #' @export
+#' @importFrom qdapTools text2color
 #' @importFrom wordcloud wordcloud
 #' @examples
 #' \dontrun{

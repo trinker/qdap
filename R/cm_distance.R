@@ -82,6 +82,7 @@
 #' @keywords distance codes association
 #' @seealso \code{\link[qdap]{print.cm_distance}}
 #' @export
+#' @importFrom qdapTools v_outer
 #' @importFrom parallel parLapply makeCluster detectCores stopCluster clusterExport 
 #' @examples
 #' \dontrun{

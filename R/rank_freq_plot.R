@@ -44,6 +44,7 @@
 #' @keywords Zipf, rank-frequency
 #' @export
 #' @import RColorBrewer
+#' @importFrom qdapTools text2color
 #' @importFrom gridExtra grid.arrange
 #' @importFrom scales alpha
 #' @importFrom ggplot2 ggplot aes geom_point facet_wrap position_jitter theme_bw scale_color_manual theme element_blank guides guide_legend xlab ylab 

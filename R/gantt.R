@@ -350,6 +350,7 @@ Caps <- function(x, all = FALSE) {
 #' grouping variable.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{gantt_wrap}}.
 #' @export
+#' @importFrom qdapTools %l%
 #' @method Animate gantt
 Animate.gantt <- function(x, wc.time = TRUE, time.constant = 2, colors = NULL, ...){
 

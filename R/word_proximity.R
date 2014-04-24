@@ -28,6 +28,7 @@
 #' for Word A and comparing it to the nearest sentence location for Word B.
 #' @seealso \code{\link[qdap]{word_proximity}}
 #' @rdname word_proximity
+#' @importFrom qdapTools v_outer
 #' @importFrom parallel parLapply makeCluster detectCores stopCluster clusterEvalQ clusterExport
 #' @export
 #' @examples

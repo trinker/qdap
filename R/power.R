@@ -15,6 +15,7 @@
 #' @param envir logical.  If \code{TRUE} a lookup table (a dataframe within 
 #' an environment) is produced rather than a data.frame.
 #' @export
+#' @importFrom qdapTools hash 
 #' @rdname power
 sentiment_frame <- function(positives, negatives, pos.weights = 1, 
     neg.weights = -1, envir = TRUE) {

@@ -27,6 +27,7 @@
 #' @method summary cmspans
 #' @seealso \code{\link[qdap]{plot.sum_cmspans}}
 #' @export
+#' @importFrom qdapTools sec2hms hms2sec
 #' @examples
 #' \dontrun{
 #' ## Example 1
