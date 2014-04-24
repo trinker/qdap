@@ -2941,7 +2941,7 @@ cor(t(dat)[, c("romeo", "juliet", "hate", "love")])
 ```
 
 ```{r, fig.width = 8}
-dat2 <- wfm(DATA$state, qdapTools::id(DATA))
+dat2 <- wfm(DATA$state, id(DATA))
 qheat(cor(t(dat2)), low = "yellow", high = "red", 
     grid = "grey90", diag.na = TRUE, by.column = NULL) 
 ```
@@ -4359,7 +4359,7 @@ people  0.3007027 0.4275521 0.4666635 1.0000000
     negative = qcv(no, dumb, distrust, not, stinks),
     literacy = qcv(computer, talking, telling)
 )
-y <- wfdf(DATA$state, qdapTools::id(DATA, prefix = TRUE))
+y <- wfdf(DATA$state, id(DATA, prefix = TRUE))
 z <- wfm_combine(y, worlis)
 
 word_cor(t(z), word = c(names(worlis), "else.words"), r = NULL)
@@ -4972,7 +4972,6 @@ The `r FUN("ID")` is a shortcut approach to providing row or element IDs on the 
 
 
 ```{r}
-library(qdapTools)
 id(list(1, 4, 6))
 id(matrix(1:10, ncol=1))
 id(mtcars)
