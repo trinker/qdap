@@ -22,7 +22,7 @@ And constructed with the following guidelines:
 
 The `qdapTools` package now houses several former <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> functions.  While 
   `qdapTools` is a Dependency and all of these functions will be accessible to 
-  the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> user there is a break in backward compatability if these functions
+  the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> user there is a break in backward compatibility if these functions
   are included in code.  For this reason this release is a major bump of <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>.
 
 
