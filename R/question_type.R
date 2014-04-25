@@ -552,7 +552,7 @@ plot.question_type_preprocessed <- function(x, ...){
     Max <- max(dat2[, "value"])
 
     plot2 <- ggplot(dat2, aes(x=Var1)) + 
-        geom_bar(aes(weights=value, fill=Var1)) + 
+        geom_bar(aes(weight=value, fill=Var1)) + 
         scale_y_continuous(expand = c(0,0), limits = c(0,Max + Max*.05)) +
         coord_flip() + xlab(NULL) + 
         ylab("Count") + theme_qdap() +

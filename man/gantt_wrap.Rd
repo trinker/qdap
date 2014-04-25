@@ -154,7 +154,8 @@ m <- gantt_wrap(a, "person", fill.var="state", size=15, plot=FALSE) +
     ) +
     scale_color_manual(values=rep("black", length(unique(dat$state))))
 
-tr$ggplotly(m)
+py <- plotly("RgraphingAPI", "ektgzomjbx")
+py$ggplotly(m)
 
 (a2 <- colsplit2df(with(mraja1, gantt(dialogue, list(person, dialogue))), sep="_", name.sep="_"))
 m2 <- gantt_wrap(a2, "person", fill.var="dialogue", size=15, plot=FALSE) +
@@ -164,7 +165,7 @@ m2 <- gantt_wrap(a2, "person", fill.var="dialogue", size=15, plot=FALSE) +
     ) +
     scale_color_manual(values=rep("black", length(unique(a2$dialogue))))
 
-tr$ggplotly(m2)
+py$ggplotly(m2)
 }
 }
 \author{
