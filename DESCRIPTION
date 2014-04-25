@@ -1,7 +1,7 @@
 Package: qdap
 Type: Package
 Title: Bridging the gap between qualitative data and quantitative analysis
-Version: 1.3.6
+Version: 2.0.0
 Date: 2013-06-26
 Authors@R: c(person("Bryan", "Goodrich", role = "ctb"), person("Dason",
     "Kurkiewicz", role = "ctb"), person("Tyler", "Rinker", email =
