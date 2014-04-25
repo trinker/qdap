@@ -653,7 +653,7 @@ browseVignettes(package = "qdap")
 
 \textbf{qdap} relies heavily on the \textbf{tm} package.  The \textbf{tm} package has extended text analysis to the R platform.  Thank you to Ingo Feinerer and Kurt Hornik for their work on this and many other R packages. \\
 
-\noindent This document was produced with \textbf{knitr} \citep{R-knitr}.  Thank you to Yihui Xie for the \textbf{knitr} package and as well as his many other contributions to the R community.
+\noindent This document was produced with \textbf{knitr} \citep{R-knitr}.  Thank you to Yihui Xie for the \textbf{knitr} package and his many other contributions to the R community.
 
 
 \bibliographystyle{jss}
