@@ -1075,8 +1075,8 @@ ggbar_form <- function(dat, grp = grp, rng = rng, colors) {
 #' 
 #' formality Method for Animate
 #' @param x A \code{\link[qdap]{formality}} object.
-#' @param contextual The color to use for 0% formality (purely contextual).
-#' @param formal The color to use for 100% formality (purely formal).
+#' @param contextual The color to use for 0\% formality (purely contextual).
+#' @param formal The color to use for 100\% formality (purely formal).
 #' @param edge.constant A constant to multiple edge width by.
 #' @param wc.time logical.  If \code{TRUE} weights duration of frame by word 
 #' count.
