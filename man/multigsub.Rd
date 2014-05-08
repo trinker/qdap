@@ -2,6 +2,7 @@
 \name{multigsub}
 \alias{mgsub}
 \alias{multigsub}
+\alias{sub_holder}
 \title{Multiple gsub}
 \usage{
 multigsub(pattern, replacement = NULL, text.var, leadspace = FALSE,
@@ -11,6 +12,8 @@ multigsub(pattern, replacement = NULL, text.var, leadspace = FALSE,
 mgsub(pattern, replacement = NULL, text.var, leadspace = FALSE,
   trailspace = FALSE, fixed = TRUE, trim = TRUE, order.pattern = fixed,
   ...)
+
+sub_holder(pattern, text.var, ...)
 }
 \arguments{
 \item{pattern}{Character string to be matched in the given character vector.}
@@ -40,17 +43,30 @@ search for "then" first).}
 \item{\dots}{Additional arguments passed to \code{\link[base]{gsub}}.}
 }
 \value{
-Returns a vector with the pattern replaced.
+\code{multigsub} - Returns a vector with the pattern replaced.
+
+\code{sub_holder} - Returns a list with the following:
+\item{output}{keyed place holder character vector}
+\item{unhold}{A function used to revert back to the original values}
 }
 \description{
-A wrapper for \code{\link[base]{gsub}} that takes a vector of search terms
-and a vector or single value of replacements.
+\code{multigsub} - A wrapper for \code{\link[base]{gsub}} that takes a vector
+of search terms and a vector or single value of replacements.
+
+\code{sub_holder} - This function holds the place for particular character
+values, allowing the user to manipulate the vector and then revert the place
+holders back to the original values.
 }
 \examples{
 \dontrun{
 multigsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
 mgsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
 mgsub("[[:punct:]]", "PUNC", DATA$state, fixed = FALSE)
+
+## `sub_holder` Function
+(fake_dat <- paste(emoticon[1:11,2], DATA$state))
+m <- sub_holder(emoticon[,2], fake_dat)
+m$unhold(strip(m$output))
 }
 }
 \seealso{

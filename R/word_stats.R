@@ -458,7 +458,7 @@ counts.word_stats <- function(x, ...) {
 #' 
 #' @param x The word_stats_counts object
 #' @param \ldots ignored
-#' @S3method print word_stats_counts
+#' @export
 #' @method print word_stats_counts
 print.word_stats_counts <-
 function(x, ...) {

@@ -1,7 +1,7 @@
 #' Multiple gsub
 #' 
-#' A wrapper for \code{\link[base]{gsub}} that takes a vector of search terms 
-#' and a vector or single value of replacements.
+#' \code{multigsub} - A wrapper for \code{\link[base]{gsub}} that takes a vector 
+#' of search terms and a vector or single value of replacements.
 #' 
 #' @param pattern Character string to be matched in the given character vector. 
 #' @param replacement Character string equal in length to pattern or of length 
@@ -21,7 +21,7 @@
 #' search for "then" first).
 #' @param \dots Additional arguments passed to \code{\link[base]{gsub}}.
 #' @rdname multigsub
-#' @return Returns a vector with the pattern replaced.
+#' @return \code{multigsub} - Returns a vector with the pattern replaced.
 #' @seealso \code{\link[base]{gsub}}
 #' @export
 #' @examples
@@ -29,6 +29,11 @@
 #' multigsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
 #' mgsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
 #' mgsub("[[:punct:]]", "PUNC", DATA$state, fixed = FALSE)
+#' 
+#' ## `sub_holder` Function
+#' (fake_dat <- paste(emoticon[1:11,2], DATA$state))
+#' m <- sub_holder(emoticon[,2], fake_dat)
+#' m$unhold(strip(m$output))
 #' }
 multigsub <-
 function(pattern, replacement = NULL, text.var, leadspace = FALSE, 
@@ -72,3 +77,70 @@ function(pattern, replacement = NULL, text.var, leadspace = FALSE,
 #' @rdname multigsub
 #' @export
 mgsub <- multigsub
+
+
+#' Multiple gsub
+#' 
+#' \code{sub_holder} - This function holds the place for particular character 
+#' values, allowing the user to manipulate the vector and then revert the place
+#' holders back to the original values.
+#' 
+#' @return \code{sub_holder} - Returns a list with the following:
+#' \item{output}{keyed place holder character vector} 
+#' \item{unhold}{A function used to revert back to the original values}
+#' @rdname multigsub
+#' @note The \code{unhold} function for \code{sub_holder} will only work on keys
+#' that have not been disturbed by subsequen alterations.  The key follows the 
+#' pattern of `qdapplaceholder` followed by lower case letter keys.
+#' @export
+sub_holder <- function(pattern, text.var, ...) {
+
+    if (!is.character(pattern)) pattern <- as.character(pattern)
+    x2 <- x <- length(pattern)
+    counter <- 0
+    while(x > 26) {
+        x <- x/26
+        counter <- counter + 1
+    }
+    if (x > 0) counter + 1
+
+    keys <- paste2(expand.grid(lapply(1:counter, function(i) letters)), sep="")
+    reps <- paste0("qdapplaceholder", keys)
+
+    output <- mgsub(pattern, reps, text.var, ...)
+
+
+    FUN <- function(text.var, ...) {
+        mgsub(reps, pattern, text.var)
+    }
+
+    out <- list(output = output, unhold = FUN)
+
+    attributes(out) <- list(
+        class = c("sub_holder", "list"), 
+        names = names(out),
+        pattern = pattern, 
+        keys = keys, 
+        len = x2
+    )
+    out
+
+}
+
+
+#' Prints a sub_holder object
+#' 
+#' Prints a sub_holder object
+#' 
+#' @param x The sub_holder object
+#' @param \ldots ignored
+#' @export
+#' @method print sub_holder
+print.sub_holder <-
+function(x, ...) {
+    WD <- options()[["width"]]
+    options(width=3000)
+    print(x[["output"]])
+    options(width=WD)
+}
+

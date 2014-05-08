@@ -30,6 +30,10 @@ The `qdapTools` package now houses several former <a href="https://github.com/tr
 
 **NEW FEATURES**
 
+* `sub_holder` added; this function holds the place for particular character 
+  values, allowing the user to manipulate the vector and then revert the place
+  holders back to the original values.
+
 **MINOR FEATURES**
 
 IMPROVEMENTS
