@@ -32,8 +32,10 @@
 #' 
 #' ## `sub_holder` Function
 #' (fake_dat <- paste(emoticon[1:11,2], DATA$state))
-#' m <- sub_holder(emoticon[,2], fake_dat)
+#' (m <- sub_holder(emoticon[,2], fake_dat))
 #' m$unhold(strip(m$output))
+#' # With Stemming
+#' m$unhold(stemmer(strip(m$output), capitalize = FALSE))
 #' }
 multigsub <-
 function(pattern, replacement = NULL, text.var, leadspace = FALSE, 
@@ -91,7 +93,8 @@ mgsub <- multigsub
 #' @rdname multigsub
 #' @note The \code{unhold} function for \code{sub_holder} will only work on keys
 #' that have not been disturbed by subsequen alterations.  The key follows the 
-#' pattern of `qdapplaceholder` followed by lower case letter keys.
+#' pattern of `qdapplaceholder` followed by lower case letter keys followed by
+#' `qdap`.
 #' @export
 sub_holder <- function(pattern, text.var, ...) {
 
@@ -105,7 +108,7 @@ sub_holder <- function(pattern, text.var, ...) {
     if (x > 0) counter + 1
 
     keys <- paste2(expand.grid(lapply(1:counter, function(i) letters)), sep="")
-    reps <- paste0("qdapplaceholder", keys)
+    reps <- paste0("qdapplaceholder", keys, "qdap")
 
     output <- mgsub(pattern, reps, text.var, ...)
 

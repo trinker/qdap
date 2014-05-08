@@ -57,6 +57,12 @@ of search terms and a vector or single value of replacements.
 values, allowing the user to manipulate the vector and then revert the place
 holders back to the original values.
 }
+\note{
+The \code{unhold} function for \code{sub_holder} will only work on keys
+that have not been disturbed by subsequen alterations.  The key follows the
+pattern of `qdapplaceholder` followed by lower case letter keys followed by
+`qdap`.
+}
 \examples{
 \dontrun{
 multigsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
@@ -65,8 +71,10 @@ mgsub("[[:punct:]]", "PUNC", DATA$state, fixed = FALSE)
 
 ## `sub_holder` Function
 (fake_dat <- paste(emoticon[1:11,2], DATA$state))
-m <- sub_holder(emoticon[,2], fake_dat)
+(m <- sub_holder(emoticon[,2], fake_dat))
 m$unhold(strip(m$output))
+# With Stemming
+m$unhold(stemmer(strip(m$output), capitalize = FALSE))
 }
 }
 \seealso{
