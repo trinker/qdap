@@ -1,4 +1,4 @@
-#' List/Matrix/Vector to Dataframe
+#' List/Matrix/Vector to Dataframe/List
 #' 
 #' \code{list2df} - Convert a named list of vectors to a dataframe.
 #' 
@@ -36,6 +36,13 @@
 #' x <- counts(out)
 #' 
 #' counts2list(x[, -c(1:2)], x[, 1])
+#' 
+#' vect2list(LETTERS[1:10])
+#' vect2list(LETTERS[1:10], numbered.names = TRUE)
+#' x <- setNames(LETTERS[1:4], paste0("Element_", 1:4))
+#' vect2list(x)
+#' vect2list(x, FALSE)
+#' vect2list(x, FALSE, TRUE)
 #' }
 list2df <- function(list.object, col1 = "X1", col2 = "X2") {
 
@@ -51,7 +58,7 @@ list2df <- function(list.object, col1 = "X1", col2 = "X2") {
     dat
 }
 
-#' List/Matrix/Vector to Dataframe
+#' List/Matrix/Vector to Dataframe/List
 #' 
 #' \code{matrix2df} - Convert a matrix to a dataframe and convert the rownames 
 #' to the first column.
@@ -76,7 +83,7 @@ matrix2df <- function(matrix.object, col1 = "var1") {
     dat
 }
 
-#' List/Matrix/Vector to Dataframe
+#' List/Matrix/Vector to Dataframe/List
 #' 
 #' \code{vect2df} - Convert a named vector to a dataframe.
 #' 
@@ -111,7 +118,7 @@ vect2df <- function(vector.object, col1 = "X1", col2 = "X2", order = TRUE,
     out
 }
 
-#' List/Matrix/Vector to Dataframe
+#' List/Matrix/Vector to Dataframe/List
 #' 
 #' \code{list_df2df} - Convert a list of equal numbered/named columns to a 
 #' dataframe using the list names as the level two variable.
@@ -132,7 +139,7 @@ list_df2df <- function(list.df.object, col1 = "X1") {
     out
 }
 
-#' List/Matrix/Vector to Dataframe
+#' List/Matrix/Vector to Dataframe/List
 #' 
 #' \code{list_vect2df} - Convert a list of named vectors to a hierarchical
 #' dataframe.
@@ -153,7 +160,7 @@ list_vect2df <- function(list.vector.object, col1 = "X1", col2 = "X2",
 }
 
 
-#' List/Matrix/Vector to Dataframe
+#' List/Matrix/Vector to Dataframe/List
 #' 
 #' \code{counts2list} - Convert a count matrix to a named list of elements.
 #' 
@@ -167,5 +174,36 @@ counts2list <- function(mat, nm = rownames(mat)) {
         x <- mat[i,, drop=FALSE]
         rep(colnames(x)[x > 0], x[x > 0])
     }),  nm = nm)
+}
+
+
+#' List/Matrix/Vector to Dataframe/List
+#' 
+#' \code{vect2list} - Convert a vector to a named list.
+#' 
+#' @param vector.object A vector object.
+#' @param use.names logical.  If \code{TRUE} and the vector is named, these 
+#' names will be transferred to the list names.
+#' @param numbered.names logical.  If \code{TRUE} padded numbers will be used
+#' as list names.  If \code{FALSE} the vector elements themselves will become
+#' the list names.
+#' @rdname list2df
+#' @return \code{vect2list} - Returns a list of named elements.
+#' @export
+vect2list <- function(vector.object, use.names = TRUE, numbered.names = FALSE){
+    
+    if (is.list(vector.object) | ! is.vector(vector.object)) {
+        stop("`vector.object` is not a vector; results may be unstable")
+    }
+
+    if (!is.null(names(vector.object)) && use.names) {
+        setNames(as.list(vector.object), names(vector.object))
+    } else {
+        if (numbered.names) {
+            setNames(as.list(vector.object), pad(1:length(vector.object)))
+        } else {
+            setNames(as.list(vector.object), as.character(vector.object))
+        }
+    }
 }
 

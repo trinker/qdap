@@ -6,7 +6,8 @@
 \alias{list_vect2df}
 \alias{matrix2df}
 \alias{vect2df}
-\title{List/Matrix/Vector to Dataframe}
+\alias{vect2list}
+\title{List/Matrix/Vector to Dataframe/List}
 \usage{
 list2df(list.object, col1 = "X1", col2 = "X2")
 
@@ -21,6 +22,8 @@ list_vect2df(list.vector.object, col1 = "X1", col2 = "X2", col3 = "X3",
   ...)
 
 counts2list(mat, nm = rownames(mat))
+
+vect2list(vector.object, use.names = TRUE, numbered.names = FALSE)
 }
 \arguments{
 \item{list.object}{A named \code{\link[base]{list}} of vectors..}
@@ -51,6 +54,15 @@ columns.}
 \item{mat}{A matrix of counts.}
 
 \item{nm}{A character vector of names to assign to the list.}
+
+\item{vector.object}{A vector object.}
+
+\item{use.names}{logical.  If \code{TRUE} and the vector is named, these
+names will be transferred to the list names.}
+
+\item{numbered.names}{logical.  If \code{TRUE} padded numbers will be used
+as list names.  If \code{FALSE} the vector elements themselves will become
+the list names.}
 }
 \value{
 \code{list2df} - Returns a dataframe with two columns.
@@ -64,6 +76,8 @@ columns.}
 \code{list_vect2df} - Returns a dataframe.
 
 \code{counts2list} - Returns a list of elements.
+
+\code{vect2list} - Returns a list of named elements.
 }
 \description{
 \code{list2df} - Convert a named list of vectors to a dataframe.
@@ -80,6 +94,8 @@ dataframe using the list names as the level two variable.
 dataframe.
 
 \code{counts2list} - Convert a count matrix to a named list of elements.
+
+\code{vect2list} - Convert a vector to a named list.
 }
 \details{
 generally an internal function used for reshaping data.
@@ -109,6 +125,13 @@ term <- c("the ", "she", " wh")
 x <- counts(out)
 
 counts2list(x[, -c(1:2)], x[, 1])
+
+vect2list(LETTERS[1:10])
+vect2list(LETTERS[1:10], numbered.names = TRUE)
+x <- setNames(LETTERS[1:4], paste0("Element_", 1:4))
+vect2list(x)
+vect2list(x, FALSE)
+vect2list(x, FALSE, TRUE)
 }
 }
 \keyword{collapse}
