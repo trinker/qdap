@@ -9,12 +9,13 @@ delete(file.path(mans, dir(mans)))
 #packages
 # library(devtools); install_github("qdap", "trinker"); install_github("staticdocs", "hadley")
 # install_github("acc.roxygen2", "trinker")
-library(highlight); library(qdap); library(staticdocs); library(acc.roxygen2)
+library(highlight); library(staticdocs)
 
 #STEP 1: create static doc  
 #right now examples are FALSE in the future this will be true
 #in the future qdap2 will be the go to source
 build_site(pkg="C:/Users/trinker/GitHub/qdap",launch = FALSE)
+library(qdap); library(acc.roxygen2)
 
 #STEP 2: reshape index
 path <- "inst/web"
@@ -23,10 +24,10 @@ rdme <- "C:/Users/trinker/GitHub/qdap/inst/extra_statdoc/readme.R"
 extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry, 
     linsear_write, SMOG, syn, mgsub, adjmat, wc, wfdf, mcsv_w, dtm,  
     "polarity_frame", "boolean_search", "stem_words", 
-    "stem2df", colpaste2df, rm_stop, sent_detect, matrix2df, as.wfm, "%bs%",
+    "stem2df", colpaste2df, rm_stop, sent_detect, as.wfm, "%bs%",
     Filter.wfm, weight.wfdf, weight.wfm, wfm_combine, wfm_expanded, 
     Filter.character, Filter.DocumentTermMatrix, synonyms_frame,
-    syn_frame, edge_apply, end_mark_by,counts2list)
+    syn_frame, edge_apply, end_mark_by)
 
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character_table, char_table))
@@ -65,10 +66,10 @@ rdme <- "C:/Users/trinker/GitHub/qdap/inst/extra_statdoc/readme.R"
 extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry, 
     linsear_write, SMOG, syn, mgsub, adjmat, wc, wfdf, mcsv_w, dtm,  
     "polarity_frame", "boolean_search", "stem_words", 
-    "stem2df", colpaste2df, rm_stop, sent_detect, matrix2df, as.wfm, "%bs%",
+    "stem2df", colpaste2df, rm_stop, sent_detect, as.wfm, "%bs%",
     Filter.wfm, weight.wfdf, weight.wfm, wfm_combine, wfm_expanded, 
     Filter.character, Filter.DocumentTermMatrix, synonyms_frame,
-    syn_frame, edge_apply, end_mark_by,counts2list)
+    syn_frame, edge_apply, end_mark_by)
 
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character_table, char_table))
