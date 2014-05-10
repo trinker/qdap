@@ -141,9 +141,6 @@ sub_holder <- function(pattern, text.var, ...) {
 #' @method print sub_holder
 print.sub_holder <-
 function(x, ...) {
-    WD <- options()[["width"]]
-    options(width=3000)
     print(x[["output"]])
-    options(width=WD)
 }
 

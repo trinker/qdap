@@ -672,8 +672,8 @@ polarity_frame <- function(positives, negatives, pos.weights = 1,
 #' @importFrom qdapTools lookup
 #' @importFrom ggplot2 ggplot aes geom_segment xlab ylab scale_colour_gradientn theme_bw guides geom_point guide_colorbar scale_color_discrete guide_legend
 #' @S3method plot polarity
-plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99", 
-    high = "blue", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
+plot.polarity <- function(x, bar.size = 5, low = "blue", mid = "grey99", 
+    high = "red", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
     point.size = 2.5,  jitter = .1, nrow = NULL, na.rm = TRUE, 
     order.by.polarity = TRUE, plot = TRUE, error.bars =TRUE, 
     error.bar.height = .5, error.bar.size = .5, error.bar.color = "black", 
@@ -709,7 +709,7 @@ plot.polarity <- function(x, bar.size = 5, low = "red", mid = "grey99",
         xlab("Duration (words)") + ylab(gsub("\\&", " & ", G)) +
         scale_colour_gradientn(colours = c(low, mid, high)) +
         theme_bw() + theme(legend.position="bottom") + 
-        guides(colour = guide_colorbar(barwidth = 9, barheight = .75))
+        guides(colour = guide_colorbar(barwidth = 9, barheight = .75, nbin=1000))
 
     ## order the ave. poalrity dotplot by ave. polarity or factor level
     if (order.by.polarity) {
@@ -874,8 +874,8 @@ polarity_helper <- function(tv, hit, polenv, altenv, count, amp.weight,
 #' @importFrom scales alpha
 #' @importFrom ggplot2 ggplot aes geom_segment xlab ylab scale_colour_gradientn theme_bw guides geom_point guide_colorbar scale_color_discrete guide_legend
 #' @S3method plot polarity_count
-plot.polarity_count <- function(x, bar.size = 5, low = "red", mid = "grey99", 
-    high = "blue", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
+plot.polarity_count <- function(x, bar.size = 5, low = "blue", mid = "grey99", 
+    high = "red", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
     point.size = 2.5,  jitter = .1, nrow = NULL, na.rm = TRUE, 
     order.by.polarity = TRUE, plot = TRUE, error.bars =TRUE, 
     error.bar.height = .5, error.bar.size = .5, error.bar.color = "black", 
@@ -920,7 +920,7 @@ plot.polarity_count <- function(x, bar.size = 5, low = "red", mid = "grey99",
         xlab("Duration (words)") + ylab(gsub("\\&", " & ", G)) +
         scale_colour_gradientn(colours = c(low, mid, high)) +
         theme_bw() + theme(legend.position="bottom") + 
-        guides(colour = guide_colorbar(barwidth = 9, barheight = .75))
+        guides(colour = guide_colorbar(barwidth = 9, barheight = .75, nbin=1000))
 
     ## order the ave. poalrity dotplot by ave. polarity or factor level
     if (order.by.polarity) {
