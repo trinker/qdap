@@ -40,6 +40,7 @@
 #' @importFrom parallel parLapply makeCluster detectCores stopCluster clusterEvalQ clusterExport
 #' @importFrom openNLP Maxent_POS_Tag_Annotator Maxent_Word_Token_Annotator
 #' @importFrom NLP as.String annotate Annotation
+#' @importFrom qdapTools mtabulate
 #' @examples 
 #' \dontrun{
 #' posdat <- pos(DATA$state)
@@ -665,7 +666,7 @@ plot.pos <- function(x, ...) {
 #' 
 #' @param x The pos_preprocessed object.
 #' @param \ldots ignored
-#' @importFrom qdapTools %l% 
+#' @importFrom qdapTools %l% list_df2df
 #' @importFrom ggplot2 ggplot aes geom_bar coord_flip ylab theme theme_bw
 #' @method plot pos_preprocessed
 #' @export

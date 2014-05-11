@@ -1343,7 +1343,7 @@ ggbar <- function(dat, grp = grp, rng = rng) {
 #' positive current turn of talk, while the coloring may indicate a negative 
 #' sentences.
 #' @import igraph
-#' @importFrom qdapTools %l%
+#' @importFrom qdapTools %l% list_df2df
 #' @importFrom ggplot2 ggplot geom_hline geom_bar ylab xlab theme ggtitle theme_bw ylim element_text scale_x_discrete 
 #' @export
 #' @method Animate polarity
@@ -1388,7 +1388,7 @@ Animate.polarity <- function(x, negative = "blue", positive = "red",
 #' @import igraph
 #' @importFrom plotrix color.legend
 #' @method print animated_polarity 
-#' @S3method print animated_polarity 
+#' @export
 print.animated_polarity <- function(x, title = NULL, 
     seed = sample(1:10000, 1), layout=layout.auto, pause = 0, 
     legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, bg=NULL, 

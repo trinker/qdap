@@ -18,6 +18,7 @@
 #' \code{r = NULL}.
 #' @keywords correlation, association 
 #' @export
+#' @importFrom qdapTools list_vect2df
 #' @references The plotting method for the list output was inspired by Ben 
 #' Marwick; see \url{http://stackoverflow.com/a/19925445/1000343} for more.
 #' @seealso \code{\link[qdap]{word_proximity}},
@@ -222,7 +223,7 @@ function(x, digits = 3, ...) {
 #' passed to \code{\link[ggplot2]{geom_point}} if a list.
 #' @importFrom ggplot2 ggplot aes facet_grid facet_wrap geom_point xlab ylab
 #' @method plot word_cor
-#' @S3method plot word_cor
+#' @export
 plot.word_cor <- function(x, label = TRUE, lab.digits = 3, high="red", 
     low="white", grid=NULL, ncol=NULL, ...) {
     

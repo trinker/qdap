@@ -20,7 +20,7 @@
 #' proportional word count}
 #' \item{plot}{An \pkg{igraph} object}
 #' @export
-#' @importFrom qdapTools %l% 
+#' @importFrom qdapTools %l% matrix2df list2df list_df2df
 #' @details For an example of the video generated from the \code{Animate} 
 #' output of \code{discourse_map} see: 
 #' \url{https://www.youtube.com/watch?v=7LcqFZODXNo&feature=youtu.be}.  An HTML
@@ -404,7 +404,7 @@ animated_discourse_map <- function(DF, edge.constant, sep = "_",
 #' @param \ldots Other Arguments passed to \code{\link[igraph]{plot.igraph}}.
 #' @import igraph
 #' @method print animated_discourse_map 
-#' @S3method print animated_discourse_map 
+#' @export
 print.animated_discourse_map <- function(x, title = NULL, 
     seed = sample(1:10000, 1), layout=layout.auto, pause = 0, ...){
     

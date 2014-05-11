@@ -390,7 +390,7 @@ article <- function(x) {
 #' @importFrom gridExtra grid.arrange
 #' @importFrom qdapTools lookup
 #' @importFrom ggplot2 ggplot geom_bar coord_flip aes ylab xlab theme ggtitle scale_y_continuous scale_fill_brewer facet_grid scale_x_discrete scale_fill_discrete geom_point geom_text labs scale_size_continuous 
-#' @S3method plot formality
+#' @export
 plot.formality <- function(x, point.pch = 20, point.cex = .5,            
     point.colors = c("gray65", "red"), bar.colors = NULL, 
     short.names = TRUE, min.wrdcnt = NULL, order.by.formality = TRUE, 
@@ -1114,7 +1114,7 @@ ggbar_form <- function(dat, grp = grp, rng = rng, colors) {
 #' sentences.  Coloring is based on percentage of formal parts of speech (i.e.,
 #' noun, adjective, preposition, article).
 #' @import igraph
-#' @importFrom qdapTools %l% 
+#' @importFrom qdapTools %l% matrix2df list_df2df
 #' @importFrom ggplot2 ggplot geom_hline geom_bar ylab xlab theme ggtitle theme_bw ylim element_text scale_x_discrete 
 #' @export
 #' @method Animate formality

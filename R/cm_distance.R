@@ -594,6 +594,7 @@ confup <- function(reps, alpha = .05) {
 #' @param \ldots Further arguments passed to the chosen \code{layout}.
 #' @importFrom reshape2 melt
 #' @import igraph
+#' @importFrom qdapTools vect2df
 #' @note This plotting method is not particularly well developed. It is 
 #' suggested that the user further develop the graph via direct use of the 
 #' \pkg{igraph} package. 

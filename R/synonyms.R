@@ -98,6 +98,7 @@ syn <- synonyms
 #' an environment) is produced rather than a data.frame.
 #' @param prior.frame A prior synonyms data.frame in the format produced by \code{synonym_frame}
 #' @export
+#' @importFrom qdapTools list2df
 #' @rdname synonyms
 synonyms_frame <- function(synonym.list, envir = TRUE, prior.frame) {
     

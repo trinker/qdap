@@ -41,6 +41,7 @@
 #' @keywords readability, Automated Readability Index, Coleman Liau, SMOG, 
 #' Flesch-Kincaid, Fry, Linsear Write
 #' @export
+#' @importFrom qdapTools matrix2df 
 #' @examples
 #' \dontrun{
 #' AR1 <- with(rajSPLIT, automated_readability_index(dialogue, list(person, act)))

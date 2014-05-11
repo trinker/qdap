@@ -27,6 +27,7 @@
 #' useful for keeping proper names as a single unit.
 #' @keywords word-frequency-matrix
 #' @export
+#' @importFrom qdapTools mtabulate
 #' @examples
 #' \dontrun{
 #' ## word frequency matrix (wfm) example:

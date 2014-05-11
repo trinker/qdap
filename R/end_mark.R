@@ -32,6 +32,7 @@
 #' \item{"blank"}{Empty cell/NA.} 
 #' @keywords end-mark
 #' @export
+#' @importFrom qdapTools matrix2df
 #' @examples
 #' \dontrun{
 #' end_mark(DATA.SPLIT$state)
@@ -79,6 +80,7 @@ end_mark <- function(text.var, missing.end.mark = "_", missing.text = NA,
 #' variable(s).
 #' 
 #' @rdname end_mark
+#' @importFrom qdapTools mtabulate
 #' @export
 end_mark_by <- function(text.var, grouping.var, digits = 3, percent = FALSE, 
     zero.replace = 0, ...) {

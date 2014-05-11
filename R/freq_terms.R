@@ -28,6 +28,7 @@
 #' plot(out)
 #' 
 #' ## All words by sentence (row)
+#' library(qdapTools)
 #' x <- raj$dialogue
 #' list_df2df(setNames(lapply(x, freq_terms, top=Inf), seq_along(x)), "row")
 #' list_df2df(setNames(lapply(x, freq_terms, top=10, stopwords = Dolch), 

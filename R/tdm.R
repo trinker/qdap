@@ -438,6 +438,7 @@ tm2qdap <- function(x) {
 #' a qdap oriented dataframe.
 #' @rdname tdm
 #' @export
+#' @importFrom qdapTools list2df
 tm_corpus2df <- function(tm.corpus, col1 = "docs", col2 = "text", 
     sent.split = TRUE, ...) {
 
@@ -492,6 +493,7 @@ tm_corpus2wfm <- function(tm.corpus, col1 = "docs", col2 = "text", ...) {
 #' @return \code{df2tm_corpus} - Converts a qdap oriented dataframe and returns 
 #' a \code{\link[tm]{Corpus}}.
 #' @export
+#' @importFrom qdapTools list_df2df
 df2tm_corpus <- function(text.var, grouping.var = NULL, demographic.vars, ...){
 
     if(is.null(grouping.var)) {
