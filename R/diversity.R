@@ -94,7 +94,7 @@ function (text.var, grouping.var=NULL){
 #' @param digits Number of decimal places to print. 
 #' @param \ldots ignored
 #' @method print diversity
-#' @S3method print diversity
+#' @export
 print.diversity <-
 function(x, digits = 3, ...) {
     WD <- options()[["width"]]
@@ -114,7 +114,7 @@ function(x, digits = 3, ...) {
 #' @param x The diversity object
 #' @param \ldots Other arguments passed to \code{qheat}
 #' @method plot diversity
-#' @S3method plot diversity
+#' @export
 plot.diversity <- function(x, ...) {
     class(x) <- "data.frame"
     qheat(x, ...)

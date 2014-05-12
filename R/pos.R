@@ -367,7 +367,7 @@ function(type = "pretty"){
 #' from \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
 #' @param \ldots ignored
 #' @method print pos
-#' @S3method print pos
+#' @export
 print.pos <-
 function(x, digits = 1, percent = NULL, zero.replace = NULL, ...) {
     WD <- options()[["width"]]
@@ -410,7 +410,7 @@ function(x, digits = 1, percent = NULL, zero.replace = NULL, ...) {
 #' from \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
 #' @param \ldots ignored
 #' @method print pos_by
-#' @S3method print pos_by
+#' @export
 print.pos_by <-
 function(x, digits = 1, percent = NULL, zero.replace = NULL, ...) {
     WD <- options()[["width"]]
@@ -459,7 +459,7 @@ function(x, digits = 1, percent = NULL, zero.replace = NULL, ...) {
 #' from \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot pos_by
-#' @S3method plot pos_by
+#' @export
 plot.pos_by <- function(x, label = FALSE, lab.digits = 1, percent = NULL, 
     zero.replace = NULL, ...) {
     if (label) {
@@ -653,7 +653,7 @@ proportions.pos_by <- function(x, ...) {
 #' @param x The pos object
 #' @param \ldots ignored
 #' @method plot pos
-#' @S3method plot pos
+#' @export
 plot.pos <- function(x, ...) {
 
     plot(counts(x), ...)

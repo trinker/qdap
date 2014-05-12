@@ -495,7 +495,7 @@ scores.polarity <- function(x, ...) {
 #' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param \ldots ignored
 #' @method print polarity_score
-#' @S3method print polarity_score
+#' @export
 print.polarity_score <-
     function(x, digits = 3, ...) {
 
@@ -527,7 +527,7 @@ print.polarity_score <-
 #' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param \ldots ignored
 #' @method print polarity
-#' @S3method print polarity
+#' @export
 print.polarity <- function(x, digits = 3, ...) {
     print(scores(x), digits = digits, ...)
 }
@@ -562,7 +562,7 @@ counts.polarity <- function(x, ...) {
 #' @param digits The number of digits displayed.
 #' @param \ldots ignored
 #' @method print polarity_count
-#' @S3method print polarity_count
+#' @export
 print.polarity_count <-
     function(x, digits = 3, ...) {
 
@@ -671,7 +671,7 @@ polarity_frame <- function(positives, negatives, pos.weights = 1,
 #' @importFrom scales alpha
 #' @importFrom qdapTools lookup
 #' @importFrom ggplot2 ggplot aes geom_segment xlab ylab scale_colour_gradientn theme_bw guides geom_point guide_colorbar scale_color_discrete guide_legend
-#' @S3method plot polarity
+#' @export
 plot.polarity <- function(x, bar.size = 5, low = "blue", mid = "grey99", 
     high = "red", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
     point.size = 2.5,  jitter = .1, nrow = NULL, na.rm = TRUE, 
@@ -873,7 +873,7 @@ polarity_helper <- function(tv, hit, polenv, altenv, count, amp.weight,
 #' @importFrom gridExtra grid.arrange
 #' @importFrom scales alpha
 #' @importFrom ggplot2 ggplot aes geom_segment xlab ylab scale_colour_gradientn theme_bw guides geom_point guide_colorbar scale_color_discrete guide_legend
-#' @S3method plot polarity_count
+#' @export
 plot.polarity_count <- function(x, bar.size = 5, low = "blue", mid = "grey99", 
     high = "red", ave.polarity.shape = "+", alpha = 1/4, shape = 19, 
     point.size = 2.5,  jitter = .1, nrow = NULL, na.rm = TRUE, 

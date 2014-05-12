@@ -471,7 +471,7 @@ termco2mat <-function (dataframe, drop.wc = TRUE, short.term = TRUE,
 #' @param zero.replace Value to replace 0 values with.  If NULL uses the value 
 #' from \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.
 #' @param \ldots ignored
-#' @S3method print termco
+#' @export
 #' @method print termco
 print.termco <-
 function(x, digits = NULL, percent = NULL, zero.replace = NULL, ...) {

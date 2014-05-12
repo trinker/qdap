@@ -344,7 +344,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
 #' the output. 
 #' @param \ldots ignored
 #' @method print word_stats
-#' @S3method print word_stats
+#' @export
 print.word_stats <-
 function(x, digits = NULL, ...) {
     if (is.null(digits)) {
@@ -368,7 +368,7 @@ function(x, digits = NULL, ...) {
 #' printed if \code{label} is \code{TRUE}.
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot word_stats
-#' @S3method plot word_stats
+#' @export
 plot.word_stats <- function(x, label = FALSE, lab.digits = NULL, ...) {
     v <- x$gts
     if (is.null(lab.digits)) {
@@ -479,7 +479,7 @@ function(x, ...) {
 #' @importFrom ggplot2 ggplot aes geom_point theme theme_minimal ylab xlab scale_size_continuous element_blank guides 
 #' @importFrom scales alpha
 #' @method plot word_stats_counts
-#' @S3method plot word_stats_counts
+#' @export
 plot.word_stats_counts <- function(x, alpha = .3, ...){ 
     
     nms1 <- plot_namer(names(x)[1])

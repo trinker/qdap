@@ -270,7 +270,7 @@ function(text.var = NULL, grouping.var = NULL, output = "raw", stopwords = NULL,
 #' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param \ldots ignored
 #' @method print wfm
-#' @S3method print wfm
+#' @export
 print.wfm <-
   function(x, digits = 3, width = 10000, ...) {
     class(x) <- "matrix"
@@ -489,7 +489,7 @@ wfm_combine <- function(wf.obj, word.lists, matrix = TRUE){
 #' to add additional plot layers.
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot wfm
-#' @S3method plot wfm
+#' @export
 plot.wfm <- function(x, non.zero = FALSE, digits = 0, by.column = NULL,
     high = ifelse(non.zero, "black", "blue"),  
     grid = ifelse(non.zero, "black", "white"), plot = TRUE, ...) {
@@ -528,7 +528,7 @@ plot.wfm <- function(x, non.zero = FALSE, digits = 0, by.column = NULL,
 #' @param x The wfdf object
 #' @param \ldots Other arguments passed to \code{\link[qdap]{plot.wfm}}.
 #' @method plot wfdf
-#' @S3method plot wfdf
+#' @export
 plot.wfdf <- function(x, ...) {
 
     x <- wfm(x)
@@ -602,7 +602,7 @@ summary.wfm <- function(object, ...) {
 #' @param x The wfm_summary object.
 #' @param \ldots ignored
 #' @method print wfm_summary
-#' @S3method print wfm_summary
+#' @export
 print.wfm_summary <- function(x, ...) {
 
     nms <- c("Non-/sparse entries", "Sparsity", 
@@ -672,7 +672,7 @@ summary.wfdf <- function(object, ...) {
 #' @export
 #' @return \code{weight} - Returns a weighted matrix for use with other R 
 #' packages. The output is not of the class "wfm".
-#' @S3method weight wfm
+#' @export
 #' @method weight wfm
 weight.wfm <- function(x, type = "prop", ...) {
 
@@ -710,7 +710,7 @@ weight.wfm <- function(x, type = "prop", ...) {
 #' weighting is sensible.
 #' 
 #' @rdname Word_Frequency_Matrix
-#' @S3method weight wfm
+#' @export
 #' @method weight wfm
 weight.wfdf <- function(x, type = "prop", ...) {
 
@@ -761,7 +761,7 @@ weight.wfdf <- function(x, type = "prop", ...) {
 #' to add additional plot layers.
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot weighted_wfm
-#' @S3method plot weighted_wfm
+#' @export
 plot.weighted_wfm <- function(x, non.zero = FALSE, digits = 0, by.column = NULL,
     high = ifelse(non.zero, "black", "blue"),  
     grid = ifelse(non.zero, "black", "white"), plot = TRUE, ...) {
@@ -886,7 +886,7 @@ function(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL,
 }
 
 
-#' @S3method Filter default  
+#' @export
 Filter.default <- function(x, ...) base::Filter
 #function(..., min = 1, max = Inf, count.apostrophe, stopwords = NULL, x){
 #        LIS <- list(...)

@@ -112,7 +112,7 @@ word_proximity <- function(text.var, terms, grouping.var = NULL, parallel = TRUE
 #' @param x The word_proximity object
 #' @param digits The number of digits to print
 #' @param \ldots ignored
-#' @S3method print word_proximity
+#' @export
 #' @method print word_proximity
 print.word_proximity <-
 function(x, digits = NULL, ...) {
@@ -149,7 +149,7 @@ function(x, digits = NULL, ...) {
 #' @param grid The color of the grid (Use \code{NULL} to remove the grid).  
 #' @param \ldots Other arguments passed to qheat.
 #' @method plot word_proximity
-#' @S3method plot word_proximity
+#' @export
 plot.word_proximity <- function(x, label = TRUE, lab.digits = NULL, high="red", 
     low="white", grid=NULL, ...) {
 

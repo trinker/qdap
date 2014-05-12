@@ -213,7 +213,7 @@ function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,
 #' the output. 
 #' @param \ldots ignored
 #' @method print sum_cmspans
-#' @S3method print sum_cmspans
+#' @export
 print.sum_cmspans <- function(x, digits = NULL, ...) {
 
     x.nms <- c("code", "total", "percent_total", "n", "percent_n", 
@@ -386,7 +386,7 @@ timecheck <- function(val) {
 #' @seealso \code{\link[qdap]{summary.cmspans}}
 #' @importFrom ggplot2 coord_flip
 #' @method plot sum_cmspans
-#' @S3method plot sum_cmspans
+#' @export
 plot.sum_cmspans <- function(x, digits = 3, sep = ".", 
     name.sep = "&", values = TRUE, high = "red", transpose = TRUE, 
     plot =  TRUE, facet.vars = "time", rev.codes = !transpose, 

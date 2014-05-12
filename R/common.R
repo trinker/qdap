@@ -67,7 +67,7 @@ function(word.list, overlap = "all", equal.or = "more", ...){
 }
 
 
-#' @S3method common default  
+#' @export
 common.default <-
     function(..., overlap = "all", equal.or = "more", word.list){
         LIS <- list(...)

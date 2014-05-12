@@ -157,7 +157,7 @@ function(rm.var, text.var, grouping.var = NULL, units = "words", col.sep = "_",
 #' the faceting is reversed.
 #' @param \ldots Other arguments passed to \code{gantt_wrap} 
 #' @method plot rmgantt
-#' @S3method plot rmgantt
+#' @export
 plot.rmgantt <- function(x, title, transform = FALSE, ...) {
     class(x) <- cls <- class(x)[!class(x) %in% "rmgantt"]
 

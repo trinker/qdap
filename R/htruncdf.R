@@ -114,7 +114,7 @@ lview <- function(x, print = TRUE) {
 #' 
 #' @param x The trunc object
 #' @param \ldots ignored
-#' @S3method print trunc
+#' @export
 #' @method print trunc
 print.trunc <-
 function(x, ...) {

@@ -84,7 +84,7 @@ adjmat <- adjacency_matrix
 #' @param x The adjacency_matrix object.
 #' @param \ldots ignored
 #' @method print adjacency_matrix
-#' @S3method print adjacency_matrix
+#' @export
 print.adjacency_matrix <-
   function(x, ...) {
     cat("Adjacency Matrix:\n\n")

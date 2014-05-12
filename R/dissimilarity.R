@@ -118,7 +118,7 @@ function(text.var, grouping.var= NULL, method = "prop", diag = FALSE,
 #' @param digits Number of decimal places to print. 
 #' @param \ldots ignored
 #' @method print Dissimilarity
-#' @S3method print Dissimilarity
+#' @export
 print.Dissimilarity <-
 function(x, digits = 3, ...) {
     WD <- options()[["width"]]

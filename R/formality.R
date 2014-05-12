@@ -496,7 +496,7 @@ plot.formality <- function(x, point.pch = 20, point.cex = .5,
 #' @param digits The number of digits to print.
 #' @param \ldots ignored
 #' @method print formality
-#' @S3method print formality
+#' @export
 print.formality <-
 function(x, digits, ...) {
     
@@ -608,7 +608,7 @@ preprocessed.formality <- function(x, ...) {
 #' 
 #' @param x The formality_scores object
 #' @param \ldots ignored
-#' @S3method print formality_scores
+#' @export
 #' @method print formality_scores
 print.formality_scores <-
 function(x, ...) {
@@ -626,7 +626,7 @@ function(x, ...) {
 #' 
 #' @param x The pos_preprocessed object
 #' @param \ldots ignored
-#' @S3method print pos_preprocessed
+#' @export
 #' @method print pos_preprocessed
 print.pos_preprocessed <-
 function(x, ...) {
@@ -1161,7 +1161,7 @@ Animate.formality <- function(x, contextual = "yellow", formal = "red",
 #' @import igraph
 #' @importFrom plotrix color.legend
 #' @method print animated_formality 
-#' @S3method print animated_formality 
+#' @export
 print.animated_formality <- function(x, title = NULL, 
     seed = sample(1:10000, 1), layout=layout.auto, pause = 0, 
     legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, bg=NULL, 

@@ -327,7 +327,7 @@ question_type <- function(text.var, grouping.var = NULL,
 #' 
 #' @param x The question_type object
 #' @param \ldots ignored
-#' @S3method print question_type
+#' @export
 #' @method print question_type
 print.question_type <-
 function(x, ...) {

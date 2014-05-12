@@ -181,7 +181,7 @@ boolean_search <- function(text.var, terms, ignore.case = TRUE, values = FALSE,
 #' 
 #' @param x The boolean_qdap object
 #' @param \ldots ignored
-#' @S3method print boolean_qdap
+#' @export
 #' @method print boolean_qdap
 print.boolean_qdap <-
 function(x, ...) {

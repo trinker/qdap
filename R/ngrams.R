@@ -79,7 +79,7 @@ ngrams <- function(text.var, grouping.var = NULL, n = 2, ...) {
 #' 
 #' @param x The ngrams object
 #' @param \ldots ignored
-#' @S3method print ngrams
+#' @export
 #' @method print ngrams
 print.ngrams <-
 function(x, ...) {

@@ -185,7 +185,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
 #' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param \ldots ignored
 #' @method print automated_readability_index 
-#' @S3method print automated_readability_index 
+#' @export
 print.automated_readability_index <- function(x, digits = 3, ...) {
     print(scores(x), digits = digits, ...)
 }
@@ -627,7 +627,7 @@ scores.automated_readability_index <- function(x, ...) {
 #' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param \ldots ignored
 #' @method print readability_score
-#' @S3method print readability_score
+#' @export
 print.readability_score <-
     function(x, digits = 3, ...) {
     class(x) <- "data.frame"
@@ -669,7 +669,7 @@ counts.automated_readability_index <- function(x, ...) {
 #' @param digits The number of digits displayed.
 #' @param \ldots ignored
 #' @method print readability_count
-#' @S3method print readability_count
+#' @export
 print.readability_count <-
     function(x, digits = 3, ...) {
     class(x) <- "data.frame"
@@ -961,7 +961,7 @@ scores.SMOG <- function(x, ...) {
 #' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param \ldots ignored
 #' @method print SMOG
-#' @S3method print SMOG
+#' @export
 print.SMOG <- function(x, digits = 3, ...) {
     print(scores(x), digits = digits, ...)
 }
@@ -1054,7 +1054,7 @@ scores.flesch_kincaid <- function(x, ...) {
 #' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param \ldots ignored
 #' @method print flesch_kincaid
-#' @S3method print flesch_kincaid
+#' @export
 print.flesch_kincaid <- function(x, digits = 3, ...) {
     print(scores(x), digits = digits, ...)
 }
@@ -1157,7 +1157,7 @@ scores.linsear_write <- function(x, ...) {
 #' @param digits The number of digits displayed.
 #' @param \ldots ignored
 #' @method print linsear_write_scores
-#' @S3method print linsear_write_scores
+#' @export
 print.linsear_write_scores <-
     function(x, digits = 3, ...) {
     class(x) <- "data.frame"
@@ -1176,7 +1176,7 @@ print.linsear_write_scores <-
 #' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param \ldots ignored
 #' @method print linsear_write
-#' @S3method print linsear_write
+#' @export
 print.linsear_write <- function(x, digits = 3, ...) {
     print(scores(x), digits = digits, ...)
 }
@@ -1212,7 +1212,7 @@ counts.linsear_write <- function(x, ...) {
 #' @param digits The number of digits displayed.
 #' @param \ldots ignored
 #' @method print linsear_write_count
-#' @S3method print linsear_write_count
+#' @export
 print.linsear_write_count <-
     function(x, digits = 3, ...) {
     class(x) <- "data.frame"
@@ -1346,7 +1346,7 @@ scores.coleman_liau <- function(x, ...) {
 #' @param digits The number of digits displayed if \code{values} is \code{TRUE}.
 #' @param \ldots ignored
 #' @method print coleman_liau
-#' @S3method print coleman_liau
+#' @export
 print.coleman_liau <- function(x, digits = 3, ...) {
     print(scores(x), digits = digits, ...)
 }
@@ -1527,7 +1527,7 @@ scores.fry <- function(x, ...) {
 #' graphic representation.
 #' @param \ldots ignored
 #' @method print fry
-#' @S3method print fry
+#' @export
 print.fry <- function(x, digits = 3, auto.label, 
     grid, div.col, plot, ...) {
 

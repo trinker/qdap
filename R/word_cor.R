@@ -179,7 +179,7 @@ word_cor <- function(text.var, grouping.var = NULL, word, r = .7,
 #' @param x The word_cor object
 #' @param digits The number of digits to print
 #' @param \ldots ignored
-#' @S3method print word_cor
+#' @export
 #' @method print word_cor
 print.word_cor <-
 function(x, digits = 3, ...) {

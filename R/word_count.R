@@ -259,7 +259,7 @@ character_table <- function(text.var, grouping.var, percent = TRUE,
 #' \code{TRUE}.
 #' @param \ldots ignored
 #' @method print character_table
-#' @S3method print character_table 
+#' @export
 print.character_table <-
 function(x, digits = 2, percent = NULL, zero.replace = NULL, ...) {
     WD <- options()[["width"]]
@@ -308,7 +308,7 @@ function(x, digits = 2, percent = NULL, zero.replace = NULL, ...) {
 #' \code{TRUE}.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{qheat}}
 #' @method plot character_table 
-#' @S3method plot character_table 
+#' @export
 plot.character_table <- function(x, label = FALSE, lab.digits = 1, percent = NULL, 
     zero.replace = NULL, ...) {
     if (label) {

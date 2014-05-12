@@ -540,7 +540,7 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
 #' @param x The word_associate object
 #' @param \ldots ignored
 #' @method print word_associate
-#' @S3method print word_associate
+#' @export
 print.word_associate <-
 function(x, ...) {
     elem <- unlist(x, recursive=FALSE)

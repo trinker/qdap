@@ -113,7 +113,7 @@ function(qdap.list, keep.orig=FALSE){
 #' @param x The colsplit2df object 
 #' @param \ldots ignored
 #' @method print colsplit2df
-#' @S3method print colsplit2df
+#' @export
 print.colsplit2df <-
 function(x,  ...) {
     WD <- options()[["width"]]

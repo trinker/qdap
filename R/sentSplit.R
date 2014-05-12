@@ -279,7 +279,7 @@ function(tot){
 #' 
 #' @param x The sent_split object
 #' @param \ldots ignored
-#' @S3method print sent_split
+#' @export
 #' @method print sent_split
 print.sent_split <-
 function(x, ...) {

@@ -213,7 +213,7 @@ function(text.var, grouping.var = NULL, stopwords = NULL, alphabetical = FALSE,
 #' @param x The word_list object
 #' @param \ldots ignored
 #' @method print word_list
-#' @S3method print word_list
+#' @export
 print.word_list <-
 function(x, ...) {
     class(x) <- "list"

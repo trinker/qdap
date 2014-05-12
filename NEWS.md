@@ -43,15 +43,16 @@ IMPROVEMENTS
 * The `qdapTools` package now houses the following former `qdap` functions:
   `hash`, `%ha%`, `hash_look`, `hms2sec`, `id`, `lookup`, `%l%`, `%l+%`, `%l*%`, 
   `repo2github`, `sec2hms`, `text2color`, `url_dl`, `v_outer`, `list2df`, 
-  `matrix2df`, `vect2df`, `list_df2df`, `list_vect2df`, `counts2list`, & 
-  `vect2list` .  These functions will continue to be available to <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> users 
-  in interactive mode (`qdapTools` is a Dependency and thus these functions are 
-  loaded into the workspace by default).  This will allow this bundle of 
-  functions to be used outside of <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> without calling the larger <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package 
-  per the request of Kirill Muller (see <a href="https://github.com/trinker/qdap/issues/165">issue #165</a>).
+  `matrix2df`, `vect2df`, `list_df2df`, `list_vect2df`, `counts2list`,  
+  `vect2list`, & `mtabulate`.  These functions will continue to be available to 
+  <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> users in interactive mode (`qdapTools` is a Dependency and thus these 
+  functions are loaded into the workspace by default).  This will allow this 
+  bundle of functions to be used outside of <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> without calling the larger <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> 
+  package per the request of Kirill Muller (see <a href="https://github.com/trinker/qdap/issues/165">issue #165</a>).
 
-* The `dissimialrity` function has been removed from the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> package to avoid
-  conflict with the `tm` package.  Use `Dissimilarity` function instead.
+* As schedulaed the `dissimialrity` function has been removed from the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> 
+  package to avoid conflict with the `tm` package.  Use `Dissimilarity` function 
+  instead.
 
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 1.3.6

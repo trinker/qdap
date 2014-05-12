@@ -8,7 +8,7 @@
 #' @param title An optional title.
 #' @param \ldots Other arguments passed to \code{gantt_wrap}.
 #' @method plot cmspans
-#' @S3method plot cmspans
+#' @export
 plot.cmspans <- function(x, plot.var = NULL, facet.vars = NULL, title = "Gantt Plot", ...) {
     class(x) <- class(x) [!class(x) %in% "cmdf2long"]
     if(is.null(plot.var)) {

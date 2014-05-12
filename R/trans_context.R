@@ -151,7 +151,7 @@ trans_context <- function(text.var, grouping.var, inds, n.before = 3,
 #' @param double_space logical.  If \code{TRUE} and \code{pretty = TRUE} 
 #' double spacing between speech chunks (speakers) is used.
 #' @param \ldots ignored
-#' @S3method print qdap_context
+#' @export
 #' @method print qdap_context
 #' @importFrom tools file_ext
 #' @importFrom xlsx write.xlsx

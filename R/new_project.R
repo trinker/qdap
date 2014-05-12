@@ -231,7 +231,7 @@ new_project <- function(project = "new", path = getwd(),
 #' @param x The qdapProj object.
 #' @param \ldots ignored
 #' @method print qdapProj
-#' @S3method print qdapProj
+#' @export
 print.qdapProj <-
 function(x, ...) {
     class(x) <- NULL

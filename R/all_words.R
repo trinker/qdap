@@ -69,7 +69,7 @@ function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE, apo
 #' @param x The all_words object.
 #' @param \ldots ignored
 #' @method print all_words
-#' @S3method print all_words
+#' @export
 print.all_words <- function(x, ...) {
     class(x) <- "data.frame"
     print(left_just(x, "WORD"))

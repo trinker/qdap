@@ -591,7 +591,7 @@ compare <- function(v) all(sapply( as.list(v[-1]),
 #' 
 #' @param x The TermDocumentMatrix object
 #' @param \ldots ignored
-#' @S3method t TermDocumentMatrix
+#' @export
 #' @method t TermDocumentMatrix
 t.TermDocumentMatrix <- function(x, ...) {
      
@@ -623,7 +623,7 @@ t.TermDocumentMatrix <- function(x, ...) {
 #' 
 #' @param x The DocumentTermMatrix object
 #' @param \ldots ignored
-#' @S3method t DocumentTermMatrix
+#' @export
 #' @method t DocumentTermMatrix
 t.DocumentTermMatrix <- function(x, ...) {
      

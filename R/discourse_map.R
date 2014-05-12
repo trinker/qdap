@@ -276,7 +276,7 @@ map_graph_qdap <- function(DF2, edgeconstant){
 #' @param \ldots Other Arguments passed to \code{\link[igraph]{plot.igraph}}.
 #' @import igraph
 #' @method print discourse_map
-#' @S3method print discourse_map
+#' @export
 print.discourse_map <- function(x, edge.curved = TRUE, title = NULL, ...) {
     plot.igraph(x[["plot"]], edge.curved = edge.curved, ...)
     if (!is.null(title)) {

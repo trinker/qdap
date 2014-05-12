@@ -135,7 +135,7 @@ end_mark_by <- function(text.var, grouping.var, digits = 3, percent = FALSE,
 #' 
 #' @param x The end_mark_by object
 #' @param \ldots ignored
-#' @S3method print end_mark_by
+#' @export
 #' @method print end_mark_by
 print.end_mark_by <-
 function(x, ...) {
