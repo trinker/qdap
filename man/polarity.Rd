@@ -339,6 +339,21 @@ FUN2(TRUE)
 
 polarity("really hate anger")
 polarity("really hate anger", constrain=TRUE)
+
+#==================#
+## Static Network ##
+#==================#
+(poldat <- with(sentSplit(DATA, 4), polarity(state, person)))
+m <- Network(poldat)
+m
+print(m, bg="grey40")
+
+library(igraph)
+bgb2 <- Network(poldat, negative = "white", positive = "red",
+    neutral = "pink")
+E(bgb2)$label.color <- "yellow"
+print(bgb2, title="Polarity Discourse Map", title.color="white", bg="black",
+    net.legend.color="white", vertex.label.color = "grey70")
 }
 }
 \references{

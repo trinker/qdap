@@ -94,34 +94,6 @@
 #' library(ggplot2); library(scales); library(RColorBrewer)
 #' x + scale_color_manual(values=rep("black",
 #'     length(levels(dat2$fam.aff_sex))))
-#'     
-#' ## Interactive D3
-#' install.packages("devtools")
-#' library("devtools")
-#' install_github("plotly", "ropensci")
-#' library(plotly)
-#' ## get your access key 
-#' ## browseURL("https://plot.ly/plot")
-#' (a <- colsplit2df(gantt(DATA$state, list(DATA$person, DATA$state)), sep="_", name.sep="_"))
-#' m <- gantt_wrap(a, "person", fill.var="state", size=15, plot=FALSE) + 
-#'     theme(
-#'         panel.background = element_rect(fill = 'white'), 
-#'         legend.position="none"
-#'     ) + 
-#'     scale_color_manual(values=rep("black", length(unique(dat$state))))
-#' 
-#' py <- plotly("RgraphingAPI", "ektgzomjbx")
-#' py$ggplotly(m)
-#'
-#' (a2 <- colsplit2df(with(mraja1, gantt(dialogue, list(person, dialogue))), sep="_", name.sep="_"))
-#' m2 <- gantt_wrap(a2, "person", fill.var="dialogue", size=15, plot=FALSE) + 
-#'     theme(
-#'         panel.background = element_rect(fill = 'white'), 
-#'         legend.position="none"
-#'     ) + 
-#'     scale_color_manual(values=rep("black", length(unique(a2$dialogue))))
-#' 
-#' py$ggplotly(m2)
 #' }
 gantt_wrap <-
 function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL, 

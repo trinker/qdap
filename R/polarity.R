@@ -294,6 +294,21 @@
 #' 
 #' polarity("really hate anger")
 #' polarity("really hate anger", constrain=TRUE)
+#' 
+#' #==================#
+#' ## Static Network ##
+#' #==================#
+#' (poldat <- with(sentSplit(DATA, 4), polarity(state, person)))
+#' m <- Network(poldat)
+#' m
+#' print(m, bg="grey40")
+#' 
+#' library(igraph)
+#' bgb2 <- Network(poldat, negative = "white", positive = "red", 
+#'     neutral = "pink")
+#' E(bgb2)$label.color <- "yellow"
+#' print(bgb2, title="Polarity Discourse Map", title.color="white", bg="black", 
+#'     net.legend.color="white", vertex.label.color = "grey70")
 #' }
 polarity <- function (text.var, grouping.var = NULL, 
     polarity.frame = qdapDictionaries::env.pol, constrain = FALSE,
@@ -1129,13 +1144,6 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
         edge.constant <- length(unique(y[, 1])) * 2.5
     }
 
-    ## function to added colr to edges in network plot
-    colorize <- function(x, y) {
-        E(y)$color <- paste2(edge_capture(y), sep="|-|qdap|-|") %l%
-            data.frame(edge=paste2(x[, 1:2], sep="|-|qdap|-|"), cols=x[, "color"])
-        y
-    }
-
     ## Add colors from the aggregated list of average polarities
     ## and output a corresponding list of network plots
     new_pol_nets <- lapply(list_polarity, colorize, theplot)
@@ -1409,7 +1417,7 @@ print.animated_polarity <- function(x, title = NULL,
             if (!is.null(legend)) {
                 color.legend(legend[1], legend[2], legend[3], legend[4], 
                     c("Negative", "Neutral", "Positive"), attributes(x)[["legend"]], 
-                    cex = legend.cex)
+                    cex = legend.cex, col = net.legend.color)
             }
             if (pause > 0) Sys.sleep(pause)
         })) 
@@ -1436,4 +1444,181 @@ plot.animated_polarity  <- function(x, ...){
 
 constrain <- function(x) ((1 - (1/(1 + exp(x)))) * 2) - 1
 
+#' Network Polarity
+#' 
+#' \code{Network.polarity} - Network a \code{\link[qdap]{polarity}} object.
+#' 
+#' polarity Method for Network
+#' @param x A \code{\link[qdap]{polarity}} object.
+#' @param negative The color to use for negative polarity.
+#' @param positive The color to use for positive polarity.
+#' @param neutral The color to use for neutral polarity.
+#' @param edge.constant A constant to multiple edge width by.
+#' @param title The title to apply to the Networkd image(s).
+#' @param digits The number of digits to use in the current turn of talk 
+#' polarity.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}}.
+#' @import igraph
+#' @importFrom qdapTools %l% 
+#' @export
+#' @method Network polarity
+Network.polarity <- function(x, negative = "blue", positive = "red", 
+    neutral = "yellow", edge.constant, title = NULL, digits = 3, ...){
+
+    qsep <- "|-|qdap|-|"
+
+    brks <- c(-10:-2, seq(-1, -.6, by=.01), seq(-.5, 0, by=.001), 
+        seq(.001, .5, by=.001), seq(.6, 1, by=.01), 2:10)
+    max.color.breaks <- length(brks)
+
+    y2 <- y <- counts(x)
+    condlens <- rle(as.character(y[, 1]))
+    y[, "temp"] <- rep(paste0("X", pad(1:length(condlens[[2]]))),
+        condlens[[1]])
+    y[, "ave.polarity"] <- ave(y[, 3], y[, "temp"], FUN=mean)
+
+    ## Add to  and from columns
+    y <- cbind(y, from_to_End(y[, 1]))
+
+    ## repeat last to column to match with split sentence (i.e.
+    ## we don't want an edge to return to the node it leaves
+    tos <- split(y[, "to"], y[, "temp"])
+    tos_lens <- sapply(tos, length)
+    y[, "to"] <- rep(sapply(tos, tail, 1), tos_lens)
+  
+    ## make a combined from|to column
+    y[, "from|to"] <- paste2(y[, c("from", "to")], sep=qsep)
+
+    ## add id column
+    y[, "id"] <- 1:nrow(y)
+
+    ## get aggregated values 
+    ## sum wc, max(id),  prop_wc
+    the_polarity <- agg_pol(y[1:nrow(y), , drop=FALSE])
+
+    ## set up color gradients
+    colfunc <- colorRampPalette(c(negative, neutral, positive))
+    cols <- colfunc(max.color.breaks)
+   
+    ## add colors to df_polarity based on agrgegated 
+    ## average polarity per edge
+    cuts <- cut(the_polarity[, "polarity"], brks)
+
+    the_polarity[, "color"] <- cuts %l% data.frame(cut(brks, brks), cols)
+
+    ## split it back into the from --> to
+    ## dataframes of aggregated values
+    thedat <- splitter(the_polarity, sep=qsep)
+
+    ## create a single network plot with all values
+    dat <- sentCombine(y[, "text.var"], y[, "from"])
+    theplot <- discourse_map(dat[, "text.var"], dat[, "from"], 
+        ...)[["plot"]]
+
+    ## generate edge constant of needed
+    if (missing(edge.constant)) {
+        edge.constant <- length(unique(y[, 1])) * 2.5
+    }
+
+    ## Add colors from the aggregated list of average polarities
+    ## and output a corresponding list of network plots
+    new_pol_net <- colorize(thedat, theplot)
+ 
+    ## calculate edge widths
+    thedat[, "width"] <- edge.constant*thedat[, "prop_wc"]
+
+    ## get current edge
+    cur_edge <- which.max(thedat[, "id"])
+    cur_edge2 <- max(thedat[, "id"])
+
+    ## create current edge label and polarity sign
+    lab <- numbformat(thedat[, "polarity"], digits)
+    curkey <- data.frame(paste2(thedat[, c("from", "to")], sep=qsep), lab)
+
+    ## Set up widths and colors
+    tcols <- thedat[, c("from", "to", "color"), drop=FALSE]
+    widths <- thedat[, c("from", "to", "width"), drop=FALSE]
+    widths[, "width"] <- ceiling(widths[, "width"])
+    ekey <- paste2(edge_capture(theplot), sep=qsep)
+    ckey <- colpaste2df(tcols, 1:2, sep = qsep, keep.orig=FALSE)[, 2:1]
+    wkey <- colpaste2df(widths, 1:2, sep = qsep, keep.orig=FALSE)[, 2:1]
+    E(theplot)$width <- NAer(ekey %l% wkey, 1)
+    #plot(grp[[i]], edge.curved=TRUE)
+    E(theplot)$color <- ekey %l% ckey
+    E(theplot)$label <- ekey %l% curkey
+    V(theplot)$frame.color <- NA
+    
+    ## add class info
+    class(theplot) <- c("Network_polarity", class(theplot))
+    attributes(theplot)[["title"]] <- title
+    attributes(theplot)[["legend"]] <- cols
+    theplot
+}
+
+splitter <- function(x, sep) {
+        y <- colsplit2df(x, sep=sep)
+        colnames(y)[1:2] <- c("from", "to")
+        y
+}
+
+## function to added color to edges in network plot
+colorize <- function(x, y) {
+    E(y)$color <- paste2(edge_capture(y), sep="|-|qdap|-|") %l%
+        data.frame(edge=paste2(x[, 1:2], sep="|-|qdap|-|"), cols=x[, "color"])
+    y
+}
+
+
+
+#' Prints a Network_polarity  Object
+#' 
+#' Prints a Network_polarity  object.
+#' 
+#' @param x The Network_polarity  object.
+#' @param title The title of the plot.
+#' @param layout \pkg{igraph} \code{layout} to use.
+#' @param seed The seed to use in plotting the graph.
+#' @param legend The coordinates of the legend. See 
+#' \code{\link[plotrix]{color.legend}} for more information.
+#' @param legend.cex character expansion factor. \code{NULL} and \code{NA} are 
+#' equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.
+#' @param bg The color to be used for the background of the device region. See
+#' \code{\link[graphics]{par}} for more information. 
+#' @param net.legend.color The text legend color for the network plot.
+#' @param vertex.color The font family to be used for vertex labels.
+#' @param vertex.size The size of the vertex.
+#' @param vertex.label.color The color of the labels.
+#' @param vertex.label.cex The font size for vertex labels. 
+#' @param \ldots Other Arguments passed to \code{\link[igraph]{plot.igraph}}.
+#' @import igraph
+#' @importFrom plotrix color.legend
+#' @method print Network_polarity 
+#' @export
+print.Network_polarity <- function(x, title = NULL, title.color = "black",
+    seed = sample(1:10000, 1), layout=layout.auto,  
+    legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, bg=NULL, 
+    net.legend.color = "black", vertex.color = "grey40", vertex.size = 20,
+    vertex.label.color = "deepskyblue", vertex.label.cex = 1.1, ...){
+    
+    if (is.null(title)) {
+        title <- attributes(x)[["title"]]
+    }
+
+    V(x)$color <- vertex.color
+    V(x)$label.color  <- vertex.label.color    
+    V(x)$size <- vertex.size
+    V(x)$label.cex <- vertex.label.cex
+
+    set.seed(seed)
+    par(bg = bg, mar=c(5, 0, 2, 0))
+    plot.igraph(x, edge.curved=TRUE, layout=layout, ...)
+    if (!is.null(title)) {
+       mtext(title, side=3, col = title.color)
+    }
+    if (!is.null(legend)) {
+        color.legend(legend[1], legend[2], legend[3], legend[4], 
+            c("Negative", "Neutral", "Positive"), attributes(x)[["legend"]], 
+                cex = legend.cex, col = net.legend.color)
+    }
+}
 
