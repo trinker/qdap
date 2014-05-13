@@ -34,6 +34,12 @@ NEW FEATURES
   values, allowing the user to manipulate the vector and then revert the place
   holders back to the original values.
 
+* `Network` method added to make network plots of select qdap objects.  
+
+* `qtheme` and `qtheme_nightheat` added to style `Network` plots.
+
+* `polarity` picks up a `Network` method.
+
 MINOR FEATURES
 
 IMPROVEMENTS

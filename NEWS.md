@@ -34,9 +34,15 @@ The `qdapTools` package now houses several former <a href="https://github.com/tr
   values, allowing the user to manipulate the vector and then revert the place
   holders back to the original values.
 
+* `Network` method added to make network plots of select <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> objects.  
+
+* `qtheme` and `qtheme_nightheat` added to style `Network` plots.
+
+* `polarity` picks up a `Network` method.
+
 **MINOR FEATURES**
 
-IMPROVEMENTS
+**IMPROVEMENTS**
 
 **CHANGES**
 
@@ -63,7 +69,7 @@ IMPROVEMENTS
 * `polarity` picks up a `constrain` argument that constrains the polarity values
   to be between -1 and 1.
 
-IMPROVEMENTS
+**IMPROVEMENTS**
 
 * `polarity`'s equation now uses primes on the de-amplifiers before they're 
   confined to be &gt;= -1.  This avoids confusion in the indicator function that 
@@ -103,7 +109,7 @@ IMPROVEMENTS
 * `raj.act.1POS` added.  `raj.act.1POS` is a data set for Romeo and Juliet: Act 1
   broken into parts of speech.
 
-IMPROVEMENTS
+**IMPROVEMENTS**
 
 * `discourse_map` picks up a `pause` argument that enables the user to pasue 
   between plots in interactive mode.
@@ -126,7 +132,7 @@ IMPROVEMENTS
 
 **MINOR FEATURES**
 
-IMPROVEMENTS
+**IMPROVEMENTS**
 
 * `discourse_map` picks up a `condense` argument that allows the user to 
   condense sequential rows for like grouping variable sub groups.
@@ -169,7 +175,7 @@ IMPROVEMENTS
 
 * `repo2github` function added to send a directory to GitHub upon first commit.
 
-IMPROVEMENTS
+**IMPROVEMENTS**
 
 * `new_project` has an improved directory structure and works with any version 
   of the `reports` package.
@@ -201,7 +207,7 @@ This is a patch release to address the archiving of the `lsa` package.
 * `DocumentTermMatrix` and `TermDocumentMatrix` from the tm package pick up a 
   `Filter` method.
 
-IMPROVEMENTS
+**IMPROVEMENTS**
 
 * `multigsub` picks up an argument, `order.pattern`, to prevent substrings from 
   replacing meta-strings.
@@ -256,7 +262,7 @@ A version bump necessary for Re-Submission to CRAN.
 
 **MINOR FEATURES**
 
-IMPROVEMENTS
+**IMPROVEMENTS**
 
 * `apply_as_df` picks up a `stopwords` and `filter` arguments that allows the 
   user to remove stopwords and min/max length words.
@@ -313,7 +319,7 @@ IMPROVEMENTS
 
 * `%bs%` added as quick counterpart to `boolean_search` for indexing.
 
-IMPROVEMENTS
+**IMPROVEMENTS**
 
 * `df2tm_corpus` now sets metaData information for ID and creator (based on) 
   `Sys.info()["user"]`.
