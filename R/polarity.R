@@ -311,10 +311,10 @@
 #'     edge.label.color="yellow")
 #'     
 #' ## or use themes:
-#' m + theme()
-#' m + theme_nightheat
+#' m + qtheme()
+#' m + qtheme_nightheat
 #' dev.off()
-#' bgb2 + theme_nightheat(title="Polarity Discourse Map")
+#' bgb2 + qtheme_nightheat(title="Polarity Discourse Map")
 #' }
 polarity <- function (text.var, grouping.var = NULL, 
     polarity.frame = qdapDictionaries::env.pol, constrain = FALSE,

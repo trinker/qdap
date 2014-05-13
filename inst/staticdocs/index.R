@@ -187,7 +187,6 @@ sd_section("Identification",
 sd_section("Visualization", 
   "Plotting functions.",
   c(
-    "discourse_map", 
     "dispersion_plot",
     "gradient_cloud",
     "gantt_plot",
@@ -218,6 +217,18 @@ sd_section("Visualization",
     "word_network_plot"
   )
 )
+
+sd_section("Network Plots", 
+  "Network Plots for qdap Objects.",
+  c(
+    "discourse_map", 
+    "Network",
+    "Network.polarity",
+    "qtheme",
+    "qtheme_nightheat"
+  )
+)
+
 
 sd_section("Animation", 
   "Animate qdap Objects.",

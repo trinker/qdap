@@ -51,10 +51,10 @@ function(x, ...){
 
 #' Add themes to a Network object.
 #'
-#' This theme allows you to add a theme to a Network object rather than 
-#' individual \code{print} arguments.
+#' This function builds generic themes to add a theme to a Network object rather 
+#' than individual \code{print} arguments.
 #' 
-#' @param x The name of the theme.
+#' @param x The name of the qtheme.
 #' @param title.colot The color of the title.
 #' @param layout \pkg{igraph} \code{layout} to use.
 #' @param seed The seed to use in plotting the graph.
@@ -74,7 +74,7 @@ function(x, ...){
 #' @param edge.label.cex The font size of the edge labels.
 #' @export
 #' @rdname theme
-theme <- function(x = "generic", title, title.color, layout, legend, 
+qtheme <- function(x = "generic", title, title.color, layout, legend, 
     legend.cex, legend.color, bg, vertex.color, vertex.size,
     vertex.label.color, vertex.label.cex, edge.label.color, 
     edge.label.cex){
@@ -134,14 +134,14 @@ theme <- function(x = "generic", title, title.color, layout, legend,
 
 #' Add themes to a Network object.
 #'
-#' This theme allows you to add a theme to a Network object rather than 
-#' individual \code{print} arguments.
+#' This theme allows you to add a night heat theme to a Network object rather 
+#' than individual \code{print} arguments.
 #' 
 #' @param title The title of the plot.  \code{NULL} eliminates title.  \code{NA}
 #' uses title attribute of the Network object.
 #' @export
 #' @rdname theme
-theme_nightheat <- theme(x = "nightheat", title.color = "white", 
+qtheme_nightheat <- qtheme(x = "nightheat", title.color = "white", 
     bg = "black", legend.color = "white", vertex.label.color = "grey70", 
     edge.label.color="yellow", vertex.size=10)
 

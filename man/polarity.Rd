@@ -356,10 +356,10 @@ print(bgb2, title="Polarity Discourse Map", title.color="white", bg="black",
     edge.label.color="yellow")
 
 ## or use themes:
-m + theme()
-m + theme_nightheat
+m + qtheme()
+m + qtheme_nightheat
 dev.off()
-bgb2 + theme_nightheat(title="Polarity Discourse Map")
+bgb2 + qtheme_nightheat(title="Polarity Discourse Map")
 }
 }
 \references{
