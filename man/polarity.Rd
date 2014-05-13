@@ -349,11 +349,11 @@ m
 print(m, bg="grey40")
 
 library(igraph)
-bgb2 <- Network(poldat, negative = "white", positive = "red",
-    neutral = "pink")
-E(bgb2)$label.color <- "yellow"
+bgb2 <- Network(poldat, negative = "blue", positive = "red",
+    neutral = "white")
 print(bgb2, title="Polarity Discourse Map", title.color="white", bg="black",
-    net.legend.color="white", vertex.label.color = "grey70")
+    net.legend.color="white", vertex.label.color = "grey70",
+    edge.label.color="yellow")
 }
 }
 \references{

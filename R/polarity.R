@@ -304,11 +304,11 @@
 #' print(m, bg="grey40")
 #' 
 #' library(igraph)
-#' bgb2 <- Network(poldat, negative = "white", positive = "red", 
-#'     neutral = "pink")
-#' E(bgb2)$label.color <- "yellow"
-#' print(bgb2, title="Polarity Discourse Map", title.color="white", bg="black", 
-#'     net.legend.color="white", vertex.label.color = "grey70")
+#' bgb2 <- Network(poldat, negative = "blue", positive = "red",
+#'     neutral = "white")
+#' print(bgb2, title="Polarity Discourse Map", title.color="white", bg="black",
+#'     net.legend.color="white", vertex.label.color = "grey70", 
+#'     edge.label.color="yellow")
 #' }
 polarity <- function (text.var, grouping.var = NULL, 
     polarity.frame = qdapDictionaries::env.pol, constrain = FALSE,
@@ -1576,6 +1576,7 @@ colorize <- function(x, y) {
 #' 
 #' @param x The Network_polarity  object.
 #' @param title The title of the plot.
+#' @param title.colot The color of the title.
 #' @param layout \pkg{igraph} \code{layout} to use.
 #' @param seed The seed to use in plotting the graph.
 #' @param legend The coordinates of the legend. See 
@@ -1589,16 +1590,25 @@ colorize <- function(x, y) {
 #' @param vertex.size The size of the vertex.
 #' @param vertex.label.color The color of the labels.
 #' @param vertex.label.cex The font size for vertex labels. 
+#' @param edge.label.color The color for the edge labels.  Use \code{NA} to 
+#' remove.
+#' @param edge.label.cex The font size of the edge labels.
 #' @param \ldots Other Arguments passed to \code{\link[igraph]{plot.igraph}}.
 #' @import igraph
 #' @importFrom plotrix color.legend
+#' @note The output from \code{Network} is an \pkg{igraph} object and can be
+#' altered and plotted directly using \pkg{igraph}.  The \pkg{qdap} \code{print}
+#' method is offered as a quick approach to styling the figure.  For mor control
+#' use \code{\link[igraph]{V}}, \code{\link[igraph]{E}}, and
+#' \code{\link[igraph]{plot.igrapgh}}.
 #' @method print Network_polarity 
 #' @export
 print.Network_polarity <- function(x, title = NULL, title.color = "black",
     seed = sample(1:10000, 1), layout=layout.auto,  
     legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, bg=NULL, 
     net.legend.color = "black", vertex.color = "grey40", vertex.size = 20,
-    vertex.label.color = "deepskyblue", vertex.label.cex = 1.1, ...){
+    vertex.label.color = "deepskyblue", vertex.label.cex = 1.1, 
+    edge.label.color = "black", edge.label.cex = .9, ...){
     
     if (is.null(title)) {
         title <- attributes(x)[["title"]]
@@ -1608,9 +1618,16 @@ print.Network_polarity <- function(x, title = NULL, title.color = "black",
     V(x)$label.color  <- vertex.label.color    
     V(x)$size <- vertex.size
     V(x)$label.cex <- vertex.label.cex
-
+    E(x)$label.color <- edge.label.color
+    E(x)$label.cex <- edge.label.cex    
+    
     set.seed(seed)
-    par(bg = bg, mar=c(5, 0, 2, 0))
+    if (is.null(bg)) {
+        par(mar=c(5, 0, 2, 0))
+    } else {
+        par(mar=c(5, 0, 2, 0), bg = bg)
+    }
+
     plot.igraph(x, edge.curved=TRUE, layout=layout, ...)
     if (!is.null(title)) {
        mtext(title, side=3, col = title.color)
@@ -1621,4 +1638,5 @@ print.Network_polarity <- function(x, title = NULL, title.color = "black",
                 cex = legend.cex, col = net.legend.color)
     }
 }
+
 

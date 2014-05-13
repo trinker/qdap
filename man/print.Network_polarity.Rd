@@ -7,12 +7,15 @@
   seed = sample(1:10000, 1), layout = layout.auto, legend = c(-0.5, -1.5,
   0.5, -1.45), legend.cex = 1, bg = NULL, net.legend.color = "black",
   vertex.color = "grey40", vertex.size = 20,
-  vertex.label.color = "deepskyblue", vertex.label.cex = 1.1, ...)
+  vertex.label.color = "deepskyblue", vertex.label.cex = 1.1,
+  edge.label.color = "black", edge.label.cex = 0.9, ...)
 }
 \arguments{
 \item{x}{The Network_polarity  object.}
 
 \item{title}{The title of the plot.}
+
+\item{title.colot}{The color of the title.}
 
 \item{layout}{\pkg{igraph} \code{layout} to use.}
 
@@ -37,9 +40,21 @@ equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.}
 
 \item{vertex.label.cex}{The font size for vertex labels.}
 
+\item{edge.label.color}{The color for the edge labels.  Use \code{NA} to
+remove.}
+
+\item{edge.label.cex}{The font size of the edge labels.}
+
 \item{\ldots}{Other Arguments passed to \code{\link[igraph]{plot.igraph}}.}
 }
 \description{
 Prints a Network_polarity  object.
+}
+\note{
+The output from \code{Network} is an \pkg{igraph} object and can be
+altered and plotted directly using \pkg{igraph}.  The \pkg{qdap} \code{print}
+method is offered as a quick approach to styling the figure.  For mor control
+use \code{\link[igraph]{V}}, \code{\link[igraph]{E}}, and
+\code{\link[igraph]{plot.igrapgh}}.
 }
 
