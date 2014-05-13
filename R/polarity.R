@@ -307,8 +307,14 @@
 #' bgb2 <- Network(poldat, negative = "blue", positive = "red",
 #'     neutral = "white")
 #' print(bgb2, title="Polarity Discourse Map", title.color="white", bg="black",
-#'     net.legend.color="white", vertex.label.color = "grey70", 
+#'     legend.color="white", vertex.label.color = "grey70", 
 #'     edge.label.color="yellow")
+#'     
+#' ## or use themes:
+#' m + theme()
+#' m + theme_nightheat
+#' dev.off()
+#' bgb2 + theme_nightheat(title="Polarity Discourse Map")
 #' }
 polarity <- function (text.var, grouping.var = NULL, 
     polarity.frame = qdapDictionaries::env.pol, constrain = FALSE,
@@ -1549,9 +1555,10 @@ Network.polarity <- function(x, negative = "blue", positive = "red",
     V(theplot)$frame.color <- NA
     
     ## add class info
-    class(theplot) <- c("Network_polarity", class(theplot))
+    class(theplot) <- c("Network", class(theplot))
     attributes(theplot)[["title"]] <- title
     attributes(theplot)[["legend"]] <- cols
+    attributes(theplot)[["network.type"]] <- "polarity"
     theplot
 }
 
@@ -1570,12 +1577,13 @@ colorize <- function(x, y) {
 
 
 
-#' Prints a Network_polarity  Object
+#' Prints a Network Object
 #' 
-#' Prints a Network_polarity  object.
+#' Prints a Network object.
 #' 
-#' @param x The Network_polarity  object.
-#' @param title The title of the plot.
+#' @param x The Network object.
+#' @param title The title of the plot.  \code{NULL} eliminates title.  \code{NA}
+#' uses title attribute of the Network object.
 #' @param title.colot The color of the title.
 #' @param layout \pkg{igraph} \code{layout} to use.
 #' @param seed The seed to use in plotting the graph.
@@ -1583,9 +1591,9 @@ colorize <- function(x, y) {
 #' \code{\link[plotrix]{color.legend}} for more information.
 #' @param legend.cex character expansion factor. \code{NULL} and \code{NA} are 
 #' equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.
+#' @param legend.color The text legend color for the network plot.
 #' @param bg The color to be used for the background of the device region. See
 #' \code{\link[graphics]{par}} for more information. 
-#' @param net.legend.color The text legend color for the network plot.
 #' @param vertex.color The font family to be used for vertex labels.
 #' @param vertex.size The size of the vertex.
 #' @param vertex.label.color The color of the labels.
@@ -1601,16 +1609,16 @@ colorize <- function(x, y) {
 #' method is offered as a quick approach to styling the figure.  For mor control
 #' use \code{\link[igraph]{V}}, \code{\link[igraph]{E}}, and
 #' \code{\link[igraph]{plot.igrapgh}}.
-#' @method print Network_polarity 
+#' @method print Network
 #' @export
-print.Network_polarity <- function(x, title = NULL, title.color = "black",
+print.Network <- function(x, title = NA, title.color = "black",
     seed = sample(1:10000, 1), layout=layout.auto,  
     legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, bg=NULL, 
-    net.legend.color = "black", vertex.color = "grey40", vertex.size = 20,
+    legend.color = "black", vertex.color = "grey40", vertex.size = 20,
     vertex.label.color = "deepskyblue", vertex.label.cex = 1.1, 
     edge.label.color = "black", edge.label.cex = .9, ...){
     
-    if (is.null(title)) {
+    if (!is.null(title) && is.na(title)) {
         title <- attributes(x)[["title"]]
     }
 
@@ -1629,14 +1637,14 @@ print.Network_polarity <- function(x, title = NULL, title.color = "black",
     }
 
     plot.igraph(x, edge.curved=TRUE, layout=layout, ...)
+
     if (!is.null(title)) {
        mtext(title, side=3, col = title.color)
     }
     if (!is.null(legend)) {
         color.legend(legend[1], legend[2], legend[3], legend[4], 
             c("Negative", "Neutral", "Positive"), attributes(x)[["legend"]], 
-                cex = legend.cex, col = net.legend.color)
+                cex = legend.cex, col = legend.color)
     }
 }
-
 

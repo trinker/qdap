@@ -1,3 +1,8 @@
+#========
+# BUILD
+#========
+source("inst/build.R")
+
 #========================
 # Delete manuals Rd files
 #========================

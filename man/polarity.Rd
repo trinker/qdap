@@ -352,8 +352,14 @@ library(igraph)
 bgb2 <- Network(poldat, negative = "blue", positive = "red",
     neutral = "white")
 print(bgb2, title="Polarity Discourse Map", title.color="white", bg="black",
-    net.legend.color="white", vertex.label.color = "grey70",
+    legend.color="white", vertex.label.color = "grey70",
     edge.label.color="yellow")
+
+## or use themes:
+m + theme()
+m + theme_nightheat
+dev.off()
+bgb2 + theme_nightheat(title="Polarity Discourse Map")
 }
 }
 \references{

@@ -41,3 +41,5 @@ inst/web
 Scraping Word Lists
 inst/demos/discoursemap
 travis-tool.sh
+inst/build.R
+
