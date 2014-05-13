@@ -19,11 +19,9 @@ qtheme_nightheat(x = pars[["x"]], title = pars[["title"]],
 \arguments{
 \item{x}{The name of the qtheme.}
 
-\item{title.colot}{The color of the title.}
+\item{title.color}{The color of the title.}
 
 \item{layout}{\pkg{igraph} \code{layout} to use.}
-
-\item{seed}{The seed to use in plotting the graph.}
 
 \item{legend}{The coordinates of the legend. See
 \code{\link[plotrix]{color.legend}} for more information.}

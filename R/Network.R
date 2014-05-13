@@ -55,9 +55,8 @@ function(x, ...){
 #' than individual \code{print} arguments.
 #' 
 #' @param x The name of the qtheme.
-#' @param title.colot The color of the title.
+#' @param title.color The color of the title.
 #' @param layout \pkg{igraph} \code{layout} to use.
-#' @param seed The seed to use in plotting the graph.
 #' @param legend The coordinates of the legend. See 
 #' \code{\link[plotrix]{color.legend}} for more information.
 #' @param legend.cex character expansion factor. \code{NULL} and \code{NA} are 

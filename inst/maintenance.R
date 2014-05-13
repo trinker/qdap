@@ -8,6 +8,7 @@ source("inst/build.R")
 #========================
 mans <- file.path(getwd(), "man")
 delete(file.path(mans, dir(mans)))
+
 #========================
 #staticdocs dev version
 #========================
