@@ -789,13 +789,6 @@ Animate_formality_net <- function(x, contextual, formal,
         edge.constant <- length(unique(dat[, "grouping.var"])) * 2.5
     }
 
-    ## function to added colr to edges in network plot
-    colorize <- function(x, y) {
-        E(y)$color <- paste2(edge_capture(y), sep="|-|qdap|-|") %l%
-            data.frame(edge=paste2(x[, 1:2], sep="|-|qdap|-|"), cols=x[, "color"])
-        y
-    }
-
     ## Add colors from the aggregated list of average polarities
     ## and output a corresponding list of network plots
     new_form_nets <- lapply(list_formality, colorize, theplot)

@@ -225,7 +225,7 @@ sd_section("Network Plots",
     "Network",
     "Network.polarity",
     "qtheme",
-    "qtheme_nightheat"
+    "theme_nightheat"
   )
 )
 
