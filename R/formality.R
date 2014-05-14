@@ -1200,4 +1200,161 @@ plot.animated_formality  <- function(x, ...){
 
 }
 
+#' Network Formality
+#' 
+#' \code{Network.formality} - Network a \code{\link[qdap]{formality}} object.
+#' 
+#' formality Method for Network
+#' @param x A \code{\link[qdap]{formality}} object.
+#' @param contextual The color to use for 0\% formality (purely contextual).
+#' @param formal The color to use for 100\% formality (purely formal).
+#' @param edge.constant A constant to multiple edge width by.
+#' @param title The title to apply to the Networkd image(s).
+#' @param digits The number of digits to use in the current turn of talk 
+#' formality.
+#' @param plus.300.color The bar color to use for grouping variables exceeding 
+#' 299 words per Heylighen & Dewaele's (2002) minimum word recommendations.
+#' @param under.300.color The bar color to use for grouping variables less 
+#' than 300 words per Heylighen & Dewaele's (2002) minimum word recommendations.
+#' @param missing.color The color to use in a network plot for edges 
+#' corresponding to missing text data.  Use \code{\link[stats]{na.omit}} before 
+#' hand to remove the missing values all together.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}}.
+#' @import igraph
+#' @importFrom qdapTools %l% 
+#' @export
+#' @method Network formality
+Network.formality <- function(x, contextual = "yellow", formal = "red", 
+    edge.constant, title = NULL, digits = 3, plus.300.color = "grey40", 
+    under.300.color = "grey88", missing.color = "purple", ...){
+
+    v <- cbind.data.frame(group=attributes(x)[["grouping.var"]], 
+        x[["POSfreq"]])
+
+    nas <- which(is.na(x[["text"]]))
+    x[["text"]][nas] <- ""
+
+    if(!identical(nas, integer(0))) {
+        x[["POSfreq"]][nas,] <- 0
+        x[["POSfreq"]][nas, 1] <- 1
+    }
+
+    ## Count the articles per row
+    articles <- unlist(lapply(x[["text"]], function(x){  
+            if(identical(x, character(0)) ) return(0)                               
+            sum(article(x))                                                      
+    })) 
+
+    if (!is.null(v$DT)) {                                                            
+        PD <- v$DT-articles                                                          
+    } else {
+        PD <- rep(0, nrow(v))
+    }    
+
+    ## tally parts of speech for formality stat
+    z <- data.frame(v[, 1:2, drop=FALSE],                                    
+        noun = rowSums(v[, names(v) %in% c("NN", "NNS", "NNP", "NNPS",               
+            "POS", "JI", "JK"), drop=FALSE]),                                                    
+        adj = rowSums(cbind(v[, names(v) %in% c("CD", "JJ", "JJR", "JJS",            
+            "JI", "JK"), drop=FALSE], PD)),                                                      
+        prep = rowSums(v[, names(v) %in% c("IN", "RP", "TO", "JI", "JK"), 
+            drop=FALSE]),          
+        articles = articles,                                                         
+        pronoun = rowSums(v[, names(v) %in% c("PRP", "PRP$", "PRP.", "WDT",          
+            "WP", "WP$", "WP.", "JI", "JK", "EX"), drop=FALSE]),                                 
+        verb = rowSums(v[, names(v) %in% c("MD", "VB", "VBD", "VBG",                 
+            "VBN", "VBP", "VBZ", "JI", "JK"), drop=FALSE]),                                      
+        adverb = rowSums(v[, names(v) %in% c("RB", "RBR", "RBS", "WRB",              
+            "JI", "JK"), drop=FALSE]),                                                           
+        interj = rowSums(v[, names(v) %in% c("UH", "JI", "JK"), drop=FALSE]))
+
+    qsep <- "|-|qdap|-|"
+
+    brks <- seq(0, 1, by=.001)
+    max.color.breaks <- length(brks)
+
+    condlens <- rle(as.character(z[, 1]))
+    temp <- rep(paste0("X", pad(1:length(condlens[[2]]))),
+        condlens[[1]])
+
+    z <- list_df2df(lapply(split(z, temp), function(x) {
+        data.frame(x[1, 1, drop=FALSE], t(colSums(x[, -1, drop=FALSE])))
+    }))[, -1]
+
+    z[, "from"] <- as.character(z[, "group"])
+    z[, "to"] <- c(z[-1, "from"], "end")
+    nc <- ncol(z[, -1])
+    z <- colpaste2df(z[, -1], (nc-1):nc, keep.orig =FALSE, sep=qsep, name.sep="|")
+    
+    nc <- ncol(z)
+
+    z <- list_df2df(lapply(split(z[, -nc], z[, nc]), function(x) {
+        data.frame(t(colSums(x)))
+    }), "group")
+
+    y <- form_fun2(z)
+
+    df_formality <- colsplit2df(y, sep=qsep, name.sep="|")
+    df_formality[, "to"] <- gsub("end", "End", df_formality[, "to"])
+
+    ## set up color gradients
+    colfunc <- colorRampPalette(c(contextual, formal))
+    cols <- colfunc(max.color.breaks)
+
+    ## add colors to df_formality based on agrgegated 
+    ## average formality per edge
+    cuts <- cut(df_formality[, "prop_formal"], brks)
+
+    df_formality[, "color"] <- cuts %l% data.frame(cut(brks, brks), cols)
+
+    ## Handle missing data colors
+    missing <- df_formality[, "wc"] == "1" & 
+        df_formality[, "formal"] =="0" & 
+        df_formality[, "contextual"] == "0"
+    df_formality[missing , "color"] <- missing.color
+
+    ## create a single network plot with all values
+    dat <- sentCombine(x[["text"]], attributes(x)[["grouping.var"]])
+    theplot <- discourse_map(dat[, "text.var"], dat[, "grouping.var"], 
+        ...)[["plot"]]
+
+    ## generate edge constant of needed
+    if (missing(edge.constant)) {
+        edge.constant <- length(unique(dat[, "grouping.var"])) * 2.5
+    }
+
+    ## Add colors from the aggregated list of average polarities
+    ## and output a corresponding list of network plots
+    theplot <- colorize(df_formality, theplot)
+
+    theedges <- paste2(edge_capture(theplot), sep=qsep)
+    df_formality <- colpaste2df(df_formality, 1:2, sep=qsep, name.sep="|")
+
+    counts <- aggregate(wc~from, df_formality, sum)
+    counts[, "vcol"] <- ifelse(counts[, "wc"] > 299, 
+        plus.300.color, under.300.color)
+
+    V(theplot)$color <- lookup(V(theplot)$name, counts[, -2], missing = under.300.color)
+    V(theplot)$frame.color <- NA
+    E(theplot)$label <-lookup(theedges, df_formality[, "from|to"], 
+        numbformat(df_formality[, "prop_formal"], digits))
+
+    ## add class info
+    class(theplot) <- c("Network", class(theplot))
+    attributes(theplot)[["title"]] <- title
+    attributes(theplot)[["legend"]] <- cols
+    attributes(theplot)[["network.type"]] <- "formality"
+    theplot
+}
+
+
+
+form_fun2 <- function (z) {
+    out <- data.frame(formal = rowSums(z[, c("noun", "articles", 
+        "adj", "prep")]), contextual = rowSums(z[, c("pronoun", 
+        "verb", "adverb", "interj")]))
+    out[, "total"] <- rowSums(out)
+    out[, paste0("prop_", names(out)[1:2])] <- out[, 1:2]/out[, 3]
+    data.frame(`from|to` = z[, 1], wc = z[, "wrd.cnt"], out, check.names=FALSE)
+}
 
