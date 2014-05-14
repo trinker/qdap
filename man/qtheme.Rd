@@ -49,6 +49,8 @@ remove.}
 
 \item{title}{The title of the plot.  \code{NULL} eliminates title.  \code{NA}
 uses title attribute of the Network object.}
+
+\item{\ldots}{Additional arguments supplied to \code{qtheme}.}
 }
 \description{
 This function builds generic themes to add a theme to a Network object rather

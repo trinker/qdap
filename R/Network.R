@@ -43,9 +43,8 @@ function(x, ...){
 #' altered and plotted directly using \pkg{igraph}.  The \pkg{qdap} \code{print}
 #' method is offered as a quick approach to styling the figure.  For mor control
 #' use \code{\link[igraph]{V}}, \code{\link[igraph]{E}}, and
-#' \code{\link[igraph]{plot.igrapgh}}.
+#' \code{plot.igrapgh}.
 #' @method print Network
-#' @rdname Network
 #' @export
 print.Network <- function(x, title = NA, title.color = "black",
     seed = sample(1:10000, 1), layout=layout.auto,  
@@ -222,6 +221,7 @@ qtheme <- function(x = "generic", title, title.color, layout, legend,
 #' 
 #' @param title The title of the plot.  \code{NULL} eliminates title.  \code{NA}
 #' uses title attribute of the Network object.
+#' @param \ldots Additional arguments supplied to \code{qtheme}.
 #' @export
 #' @import igraph
 #' @importFrom plotrix color.legend
