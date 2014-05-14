@@ -12,6 +12,92 @@ function(x, ...){
     UseMethod("Network")
 }
 
+#' Prints a Network Object
+#' 
+#' Prints a Network object.
+#' 
+#' @param x The Network object.
+#' @param title The title of the plot.  \code{NULL} eliminates title.  \code{NA}
+#' uses title attribute of the Network object.
+#' @param title.color The color of the title.
+#' @param layout \pkg{igraph} \code{layout} to use.
+#' @param seed The seed to use in plotting the graph.
+#' @param legend The coordinates of the legend. See 
+#' \code{\link[plotrix]{color.legend}} for more information.
+#' @param legend.cex character expansion factor. \code{NULL} and \code{NA} are 
+#' equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.
+#' @param legend.color The text legend color for the network plot.
+#' @param bg The color to be used for the background of the device region. See
+#' \code{\link[graphics]{par}} for more information. 
+#' @param vertex.color The font family to be used for vertex labels.
+#' @param vertex.size The size of the vertex.
+#' @param vertex.label.color The color of the labels.
+#' @param vertex.label.cex The font size for vertex labels. 
+#' @param edge.label.color The color for the edge labels.  Use \code{NA} to 
+#' remove.
+#' @param edge.label.cex The font size of the edge labels.
+#' @param \ldots Other Arguments passed to \code{\link[igraph]{plot.igraph}}.
+#' @import igraph
+#' @importFrom plotrix color.legend
+#' @note The output from \code{Network} is an \pkg{igraph} object and can be
+#' altered and plotted directly using \pkg{igraph}.  The \pkg{qdap} \code{print}
+#' method is offered as a quick approach to styling the figure.  For mor control
+#' use \code{\link[igraph]{V}}, \code{\link[igraph]{E}}, and
+#' \code{\link[igraph]{plot.igrapgh}}.
+#' @method print Network
+#' @rdname Network
+#' @export
+print.Network <- function(x, title = NA, title.color = "black",
+    seed = sample(1:10000, 1), layout=layout.auto,  
+    legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, bg=NULL, 
+    legend.color = "black", vertex.color = "grey40", vertex.size = 20,
+    vertex.label.color = "deepskyblue", vertex.label.cex = 1.1, 
+    edge.label.color = "black", edge.label.cex = .9, ...){
+    
+    if (!is.null(title) && is.na(title)) {
+        title <- attributes(x)[["title"]]
+    }
+
+    V(x)$color <- vertex.color
+    V(x)$label.color  <- vertex.label.color    
+    V(x)$size <- vertex.size
+    V(x)$label.cex <- vertex.label.cex
+    E(x)$label.color <- edge.label.color
+    E(x)$label.cex <- edge.label.cex    
+    
+    set.seed(seed)
+    if (is.null(bg)) {
+        par(mar=c(5, 0, 2, 0))
+    } else {
+        par(mar=c(5, 0, 2, 0), bg = bg)
+    }
+
+    plot.igraph(x, edge.curved=TRUE, layout=layout, ...)
+
+    if (!is.null(title)) {
+       mtext(title, side=3, col = title.color)
+    }
+    if (!is.null(legend)) {
+        color.legend(legend[1], legend[2], legend[3], legend[4], 
+            c("Negative", "Neutral", "Positive"), attributes(x)[["legend"]], 
+                cex = legend.cex, col = legend.color)
+    }
+}
+
+#' Plots a Network  Object
+#' 
+#' Plots a Network  object.
+#' 
+#' @param x The Network  object.
+#' @param \ldots Other arguments passed to \code{print.Network }.
+#' @method plot Network 
+#' @export
+plot.Network  <- function(x, ...){ 
+
+    print(x, ...)
+
+}
+
 
 #' Add themes to a Network object.
 #'
@@ -19,9 +105,8 @@ function(x, ...){
 #'
 #' @param Network.obj A object of class \code{Network}.
 #' @param x A component to add to \code{Network.obj}
-#'
 #' @export
-#' @rdname Network
+#' @rdname addNetwork
 #' @method + Network
 "+.Network" <- function(Network.obj, x) { 
 
@@ -48,7 +133,6 @@ function(x, ...){
     )
 }
 
-
 #' Add themes to a Network object.
 #'
 #' This function builds generic themes to add a theme to a Network object rather 
@@ -72,7 +156,9 @@ function(x, ...){
 #' remove.
 #' @param edge.label.cex The font size of the edge labels.
 #' @export
-#' @rdname theme
+#' @import igraph
+#' @importFrom plotrix color.legend
+#' @rdname qtheme
 qtheme <- function(x = "generic", title, title.color, layout, legend, 
     legend.cex, legend.color, bg, vertex.color, vertex.size,
     vertex.label.color, vertex.label.cex, edge.label.color, 
@@ -129,8 +215,6 @@ qtheme <- function(x = "generic", title, title.color, layout, legend,
     }
 }
 
-
-
 #' Add themes to a Network object.
 #'
 #' This theme allows you to add a night heat theme to a Network object rather 
@@ -139,9 +223,10 @@ qtheme <- function(x = "generic", title, title.color, layout, legend,
 #' @param title The title of the plot.  \code{NULL} eliminates title.  \code{NA}
 #' uses title attribute of the Network object.
 #' @export
-#' @rdname theme
-qtheme_nightheat <- qtheme(x = "nightheat", title.color = "white", 
+#' @import igraph
+#' @importFrom plotrix color.legend
+#' @rdname qtheme
+theme_nightheat <- qtheme(x = "nightheat", title.color = "white", 
     bg = "black", legend.color = "white", vertex.label.color = "grey70", 
     edge.label.color="yellow", vertex.size=10)
-
 
