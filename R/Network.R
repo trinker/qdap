@@ -264,3 +264,16 @@ theme_nightheat <- qtheme(x = "nightheat", title.color = "white",
     vertex.label.color = "grey70", 
     edge.label.color="yellow", vertex.size=10)
 
+#' Add themes to a Network object.
+#'
+#' This theme allows you to add a 70s kitchen theme to a Network object rather 
+#' than individual \code{print} arguments.
+#' 
+#' @export
+#' @import igraph
+#' @importFrom plotrix color.legend
+#' @rdname qtheme
+theme_badkitchen <- qtheme(x = "kitchen", 
+    bg = "grey70", vertex.label.color = "brown",
+    legend.gradient = c("bisque", "tomato1", "grey20"), 
+    edge.label.color="yellow4", vertex.size=10)
