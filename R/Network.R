@@ -159,8 +159,8 @@ plot.Network  <- function(x, ...){
 
 #' Add themes to a Network object.
 #'
-#' This function builds generic themes to add a theme to a Network object rather 
-#' than individual \code{print} arguments.
+#' \code{qtheme} - This function builds generic themes to add a theme to a 
+#' \code{Network} object rather than individual \code{print} arguments.
 #' 
 #' @param x The name of the qtheme.
 #' @param title.color The color of the title.
@@ -278,8 +278,7 @@ qtheme <- function(x = "generic", title, title.color, layout, legend,
 
 #' Add themes to a Network object.
 #'
-#' This theme allows you to add a night heat theme to a Network object rather 
-#' than individual \code{print} arguments.
+#' \code{theme_nightheat} A night heat theme.
 #' 
 #' @param title The title of the plot.  \code{NULL} eliminates title.  \code{NA}
 #' uses title attribute of the Network object.
@@ -296,8 +295,7 @@ theme_nightheat <- qtheme(x = "nightheat", title.color = "white",
 
 #' Add themes to a Network object.
 #'
-#' This theme allows you to add a 70s kitchen theme to a Network object rather 
-#' than individual \code{print} arguments.
+#' \code{theme_badkitchen} A 70s kitchen theme.
 #' 
 #' @export
 #' @import igraph
@@ -312,8 +310,7 @@ theme_badkitchen <- qtheme(x = "kitchen",
 
 #' Add themes to a Network object.
 #'
-#' This theme allows you to add a cafe theme to a Network object rather 
-#' than individual \code{print} arguments.
+#' \code{theme_cafe} A cafe theme.
 #' 
 #' @export
 #' @import igraph
@@ -326,8 +323,7 @@ theme_cafe <- qtheme(x = "cafe",
 
 #' Add themes to a Network object.
 #'
-#' This theme allows you to add a gray scale theme to a Network object rather 
-#' than individual \code{print} arguments.
+#' \code{theme_grayscale} A grayscale theme.
 #' 
 #' @export
 #' @import igraph
@@ -344,8 +340,7 @@ theme_greyscale <- theme_grayscale
 
 #' Add themes to a Network object.
 #'
-#' This theme allows you to add a Norah theme to a Network object rather 
-#' than individual \code{print} arguments.
+#' \code{theme_norah} A Norah theme.
 #' 
 #' @export
 #' @import igraph
@@ -359,8 +354,7 @@ theme_norah <- qtheme(x = "norah",
 
 #' Add themes to a Network object.
 #'
-#' This theme allows you to add a hipster theme to a Network object rather 
-#' than individual \code{print} arguments.
+#' \code{theme_hipster} A hipster theme.
 #' 
 #' @export
 #' @import igraph
@@ -375,15 +369,14 @@ theme_hipster <- qtheme(x = "hipster",
 
 #' Add themes to a Network object.
 #'
-#' This theme allows you to add a dusk heat theme to a Network object rather 
-#' than individual \code{print} arguments.
+#' \code{theme_duskheat} A duskheat theme.
 #' 
 #' @export
 #' @import igraph
 #' @importFrom plotrix color.legend
 #' @rdname qtheme
 theme_duskheat <- qtheme(x = "duskheat", bg = "grey25", 
-    vertex.label.color = "grey50", legend.text.color = "white",
+    title.color="white", vertex.label.color = "grey55", legend.text.color = "white",
     legend.gradient = c("black", "darkblue", "blue", "white", "red", "darkred", "#4E2F2F"), 
     edge.label.color="white")
 

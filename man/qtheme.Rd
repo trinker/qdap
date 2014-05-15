@@ -162,29 +162,22 @@ uses title attribute of the Network object.}
 \item{\ldots}{Additional arguments supplied to \code{qtheme}.}
 }
 \description{
-This function builds generic themes to add a theme to a Network object rather
-than individual \code{print} arguments.
+\code{qtheme} - This function builds generic themes to add a theme to a
+\code{Network} object rather than individual \code{print} arguments.
 
-This theme allows you to add a night heat theme to a Network object rather
-than individual \code{print} arguments.
+\code{theme_nightheat} A night heat theme.
 
-This theme allows you to add a 70s kitchen theme to a Network object rather
-than individual \code{print} arguments.
+\code{theme_badkitchen} A 70s kitchen theme.
 
-This theme allows you to add a cafe theme to a Network object rather
-than individual \code{print} arguments.
+\code{theme_cafe} A cafe theme.
 
-This theme allows you to add a gray scale theme to a Network object rather
-than individual \code{print} arguments.
+\code{theme_grayscale} A grayscale theme.
 
-This theme allows you to add a Norah theme to a Network object rather
-than individual \code{print} arguments.
+\code{theme_norah} A Norah theme.
 
-This theme allows you to add a hipster theme to a Network object rather
-than individual \code{print} arguments.
+\code{theme_hipster} A hipster theme.
 
-This theme allows you to add a dusk heat theme to a Network object rather
-than individual \code{print} arguments.
+\code{theme_duskheat} A duskheat theme.
 }
 \examples{
 \dontrun{
