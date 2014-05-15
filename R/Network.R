@@ -26,7 +26,7 @@ function(x, ...){
 #' \code{\link[plotrix]{color.legend}} for more information.
 #' @param legend.cex character expansion factor. \code{NULL} and \code{NA} are 
 #' equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.
-#' @param legend.color The text legend color for the network plot.
+#' @param legend.text.color The legend text color.
 #' @param bg The color to be used for the background of the device region. See
 #' \code{\link[graphics]{par}} for more information. 
 #' @param vertex.color The font family to be used for vertex labels.
@@ -49,8 +49,8 @@ function(x, ...){
 print.Network <- function(x, title = NA, title.color = "black",
     seed = sample(1:10000, 1), layout=layout.auto,  
     legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, bg=NULL, 
-    legend.color = "black", vertex.color = "grey40", vertex.size = 20,
-    vertex.label.color = "deepskyblue", vertex.label.cex = 1.1, 
+    legend.text.color = "black", vertex.color = "grey80", vertex.size = 9,
+    vertex.label.color = "grey40", vertex.label.cex = 1.1, 
     edge.label.color = "black", edge.label.cex = .9, ...){
     
     if (!is.null(title) && is.na(title)) {
@@ -76,10 +76,13 @@ print.Network <- function(x, title = NA, title.color = "black",
     if (!is.null(title)) {
        mtext(title, side=3, col = title.color)
     }
+    
+    legend.gradient <- attributes(x)[["legend.gradient"]]
+    
     if (!is.null(legend)) {
         color.legend(legend[1], legend[2], legend[3], legend[4], 
-            c("Negative", "Neutral", "Positive"), attributes(x)[["legend"]], 
-                cex = legend.cex, col = legend.color)
+            attributes(x)[["legend.label"]], legend.gradient, 
+                cex = legend.cex, col = legend.text.color)
     }
 }
 
@@ -122,7 +125,7 @@ plot.Network  <- function(x, ...){
         legend = attributes(x)[["legend"]],
         legend.cex = attributes(x)[["legend.cex"]],
         bg = attributes(x)[["bg"]],
-        legend.color = attributes(x)[["legend.color"]],
+        legend.text.color = attributes(x)[["legend.text.color"]],
         vertex.color = attributes(x)[["vertex.color"]],
         vertex.size = attributes(x)[["vertex.size"]],
         vertex.label.color = attributes(x)[["vertex.label.color"]],
@@ -130,6 +133,7 @@ plot.Network  <- function(x, ...){
         edge.label.color = attributes(x)[["edge.label.color"]],
         edge.label.cex = attributes(x)[["edge.label.cex"]],
     )
+
 }
 
 #' Add themes to a Network object.
@@ -144,7 +148,7 @@ plot.Network  <- function(x, ...){
 #' \code{\link[plotrix]{color.legend}} for more information.
 #' @param legend.cex character expansion factor. \code{NULL} and \code{NA} are 
 #' equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.
-#' @param legend.color The text legend color for the network plot.
+#' @param legend.text.color The text legend text color.
 #' @param bg The color to be used for the background of the device region. See
 #' \code{\link[graphics]{par}} for more information. 
 #' @param vertex.color The font family to be used for vertex labels.
@@ -159,14 +163,14 @@ plot.Network  <- function(x, ...){
 #' @importFrom plotrix color.legend
 #' @rdname qtheme
 qtheme <- function(x = "generic", title, title.color, layout, legend, 
-    legend.cex, legend.color, bg, vertex.color, vertex.size,
+    legend.cex, legend.text.color, bg, vertex.color, vertex.size,
     vertex.label.color, vertex.label.cex, edge.label.color, 
     edge.label.cex){
 
     default_theme <- list(title.color = "black",
         layout=layout.auto, legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, 
-        bg=NULL, legend.color = "black", vertex.color = "grey40", 
-        vertex.size = 10, vertex.label.color = "deepskyblue", 
+        bg=NULL, legend.text.color = "black", vertex.color = "grey80", 
+        vertex.size = 9, vertex.label.color = "grey40", 
         vertex.label.cex = 1.1, edge.label.color = "black", edge.label.cex = .9)
 
     if(missing(title)) title <- NA
@@ -175,7 +179,7 @@ qtheme <- function(x = "generic", title, title.color, layout, legend,
     if(missing(legend)) legend <- default_theme[["legend"]]
     if(missing(legend.cex)) legend.cex <- default_theme[["legend.cex"]]
     if(missing(bg)) bg <- default_theme[["bg"]]
-    if(missing(legend.color)) legend.color <- default_theme[["legend.color"]]
+    if(missing(legend.text.color)) legend.text.color <- default_theme[["legend.text.color"]]
     if(missing(vertex.color)) vertex.color <- default_theme[["vertex.color"]]
     if(missing(vertex.size)) vertex.size <- default_theme[["vertex.size"]]
     if(missing(vertex.label.color)) vertex.label.color <- default_theme[["vertex.label.color"]]
@@ -185,31 +189,35 @@ qtheme <- function(x = "generic", title, title.color, layout, legend,
 
     pars <- list(x = x, title = title, title.color = title.color, layout = layout, 
        legend = legend, legend.cex = legend.cex, bg = bg, 
-       legend.color = legend.color, vertex.color = vertex.color, 
+       legend.text.color = legend.text.color, vertex.color = vertex.color, 
        vertex.size = vertex.size, vertex.label.color = vertex.label.color, 
        vertex.label.cex = vertex.label.cex, edge.label.color = edge.label.color, 
        edge.label.cex = edge.label.cex)
 
     function(x = pars[["x"]], title = pars[["title"]], title.color = pars[["title.color"]], 
-        bg = pars[["bg"]], legend.color = pars[["legend.color"]], 
+        layout = pars[["layout"]], legend = pars[["legend"]], 
+        legend.cex = pars[["legend.cex"]], bg = pars[["bg"]], 
+        legend.text.color = pars[["legend.text.color"]], 
         vertex.color = pars[["vertex.color"]], vertex.size = pars[["vertex.size"]],
         vertex.label.color = pars[["vertex.label.color"]], 
-        edge.label.color = pars[["edge.label.color"]], ...) {
+        vertex.label.cex = pars[["vertex.label.cex"]],
+        edge.label.color = pars[["edge.label.color"]], 
+        edge.label.cex = pars[["edge.label.cex"]], ...) {
 
         x <- "generic"
         attributes(x)[["title"]] <- list(title=title)
         attributes(x)[["title.color"]] <- title.color
-        attributes(x)$layout <- layout
-        attributes(x)$legend <- legend
-        attributes(x)$legend.cex <- legend.cex
-        attributes(x)$bg <- bg
-        attributes(x)$legend.color <- legend.color
-        attributes(x)$vertex.color <- vertex.color
-        attributes(x)$vertex.size <- vertex.size
-        attributes(x)$vertex.label.color <- vertex.label.color
-        attributes(x)$vertex.label.cex <- vertex.label.cex
-        attributes(x)$edge.label.color <- edge.label.color
-        attributes(x)$edge.label.cex <- edge.label.cex
+        attributes(x)[["layout"]] <- layout
+        attributes(x)[["legend"]] <- legend
+        attributes(x)[["legend.cex"]] <- legend.cex
+        attributes(x)[["bg"]] <- bg
+        attributes(x)[["legend.text.color"]] <- legend.text.color
+        attributes(x)[["vertex.color"]] <- vertex.color
+        attributes(x)[["vertex.size"]] <- vertex.size
+        attributes(x)[["vertex.label.color"]] <- vertex.label.color
+        attributes(x)[["vertex.label.cex"]] <- vertex.label.cex
+        attributes(x)[["edge.label.color"]] <- edge.label.color
+        attributes(x)[["edge.label.cex"]] <- edge.label.cex
         x
     }
 }
@@ -227,6 +235,6 @@ qtheme <- function(x = "generic", title, title.color, layout, legend,
 #' @importFrom plotrix color.legend
 #' @rdname qtheme
 theme_nightheat <- qtheme(x = "nightheat", title.color = "white", 
-    bg = "black", legend.color = "white", vertex.label.color = "grey70", 
+    bg = "black", legend.text.color = "white", vertex.label.color = "grey70", 
     edge.label.color="yellow", vertex.size=10)
 

@@ -5,10 +5,10 @@
 \usage{
 \method{print}{Network}(x, title = NA, title.color = "black",
   seed = sample(1:10000, 1), layout = layout.auto, legend = c(-0.5, -1.5,
-  0.5, -1.45), legend.cex = 1, bg = NULL, legend.color = "black",
-  vertex.color = "grey40", vertex.size = 20,
-  vertex.label.color = "deepskyblue", vertex.label.cex = 1.1,
-  edge.label.color = "black", edge.label.cex = 0.9, ...)
+  0.5, -1.45), legend.cex = 1, bg = NULL, legend.text.color = "black",
+  vertex.color = "grey80", vertex.size = 9, vertex.label.color = "grey40",
+  vertex.label.cex = 1.1, edge.label.color = "black",
+  edge.label.cex = 0.9, ...)
 }
 \arguments{
 \item{x}{The Network object.}
@@ -28,7 +28,7 @@ uses title attribute of the Network object.}
 \item{legend.cex}{character expansion factor. \code{NULL} and \code{NA} are
 equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.}
 
-\item{legend.color}{The text legend color for the network plot.}
+\item{legend.text.color}{The legend text color.}
 
 \item{bg}{The color to be used for the background of the device region. See
 \code{\link[graphics]{par}} for more information.}

@@ -346,13 +346,13 @@ polarity("really hate anger", constrain=TRUE)
 (poldat <- with(sentSplit(DATA, 4), polarity(state, person)))
 m <- Network(poldat)
 m
-print(m, bg="grey40")
+print(m, bg="grey97", vertex.color="grey75")
 
 library(igraph)
 bgb2 <- Network(poldat, negative = "blue", positive = "red",
     neutral = "white")
 print(bgb2, title="Polarity Discourse Map", title.color="white", bg="black",
-    legend.color="white", vertex.label.color = "grey70",
+    legend.text.color="white", vertex.label.color = "grey70",
     edge.label.color="yellow")
 
 ## or use themes:

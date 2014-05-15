@@ -1342,8 +1342,11 @@ Network.formality <- function(x, contextual = "yellow", formal = "red",
     ## add class info
     class(theplot) <- c("Network", class(theplot))
     attributes(theplot)[["title"]] <- title
-    attributes(theplot)[["legend"]] <- cols
+    attributes(theplot)[["legend.gradient"]] <- cols
     attributes(theplot)[["network.type"]] <- "formality"
+    attributes(theplot)[["legend.label"]] <- c("Contextual", "Formal")
+    attributes(theplot)[["color.breaks"]] <- brks    
+    attributes(theplot)[["n.color.breaks"]] <- max.color.breaks
     theplot
 }
 

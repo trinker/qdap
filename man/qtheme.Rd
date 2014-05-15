@@ -5,16 +5,19 @@
 \title{Add themes to a Network object.}
 \usage{
 qtheme(x = "generic", title, title.color, layout, legend, legend.cex,
-  legend.color, bg, vertex.color, vertex.size, vertex.label.color,
+  legend.text.color, bg, vertex.color, vertex.size, vertex.label.color,
   vertex.label.cex, edge.label.color, edge.label.cex)
 
 theme_nightheat(x = pars[["x"]], title = pars[["title"]],
-  title.color = pars[["title.color"]], bg = pars[["bg"]],
-  legend.color = pars[["legend.color"]],
+  title.color = pars[["title.color"]], layout = pars[["layout"]],
+  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
+  bg = pars[["bg"]], legend.text.color = pars[["legend.text.color"]],
   vertex.color = pars[["vertex.color"]],
   vertex.size = pars[["vertex.size"]],
   vertex.label.color = pars[["vertex.label.color"]],
-  edge.label.color = pars[["edge.label.color"]], ...)
+  vertex.label.cex = pars[["vertex.label.cex"]],
+  edge.label.color = pars[["edge.label.color"]],
+  edge.label.cex = pars[["edge.label.cex"]], ...)
 }
 \arguments{
 \item{x}{The name of the qtheme.}
@@ -29,7 +32,7 @@ theme_nightheat(x = pars[["x"]], title = pars[["title"]],
 \item{legend.cex}{character expansion factor. \code{NULL} and \code{NA} are
 equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.}
 
-\item{legend.color}{The text legend color for the network plot.}
+\item{legend.text.color}{The text legend text color.}
 
 \item{bg}{The color to be used for the background of the device region. See
 \code{\link[graphics]{par}} for more information.}
