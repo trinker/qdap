@@ -385,5 +385,5 @@ theme_hipster <- qtheme(x = "hipster",
 theme_duskheat <- qtheme(x = "duskheat", bg = "grey25", 
     vertex.label.color = "grey50", legend.text.color = "white",
     legend.gradient = c("black", "darkblue", "blue", "white", "red", "darkred", "#4E2F2F"), 
-    edge.label.color="white", vertex.size= 20)
+    edge.label.color="white")
 
