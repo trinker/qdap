@@ -303,18 +303,16 @@
 #' m
 #' print(m, bg="grey97", vertex.color="grey75")
 #' 
-#' library(igraph)
-#' bgb2 <- Network(poldat, negative = "blue", positive = "red",
-#'     neutral = "white")
-#' print(bgb2, title="Polarity Discourse Map", title.color="white", bg="black",
+#' print(m, title="Polarity Discourse Map", title.color="white", bg="black",
 #'     legend.text.color="white", vertex.label.color = "grey70", 
 #'     edge.label.color="yellow")
 #'     
 #' ## or use themes:
+#' dev.off()
 #' m + qtheme()
 #' m + theme_nightheat
 #' dev.off()
-#' bgb2 + theme_nightheat(title="Polarity Discourse Map")
+#' m+ theme_nightheat(title="Polarity Discourse Map")
 #' }
 polarity <- function (text.var, grouping.var = NULL, 
     polarity.frame = qdapDictionaries::env.pol, constrain = FALSE,
@@ -1560,7 +1558,7 @@ Network.polarity <- function(x, negative = "blue", positive = "red",
     attributes(theplot)[["legend.gradient"]] <- cols
     attributes(theplot)[["network.type"]] <- "polarity"
     attributes(theplot)[["legend.label"]] <- c("Negative", "Neutral", "Positive")
-    attributes(theplot)[["breaks"]] <- brks
+    attributes(theplot)[["n.color.breaks"]] <- max.color.breaks
     theplot
 }
 

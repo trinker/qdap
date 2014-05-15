@@ -199,6 +199,26 @@
 #'     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
 #' 
 #' FUN(TRUE)
+#' 
+#' #==================#
+#' ## Static Network ##
+#' #==================#
+#' (formdat <- with(sentSplit(DATA, 4), formality(state, person)))
+#' m <- Network(formdat)
+#' m
+#' print(m, bg="grey97", vertex.color="grey75")
+#' 
+#' print(m, title="Polarity Discourse Map", title.color="white", bg="black",
+#'     legend.text.color="white", vertex.label.color = "grey70", 
+#'     edge.label.color="yellow")
+#'     
+#' ## or use themes:
+#' dev.off()
+#' m + qtheme()
+#' m + theme_nightheat
+#' dev.off()
+#' m + theme_nightheat(title="Formality Discourse Map", 
+#'     vertex.label.color = "grey50")
 #' }
 formality <- function(text.var, grouping.var = NULL,                    
     order.by.formality = TRUE, digits = 2, ...){  
@@ -1323,8 +1343,7 @@ Network.formality <- function(x, contextual = "yellow", formal = "red",
         edge.constant <- length(unique(dat[, "grouping.var"])) * 2.5
     }
 
-    ## Add colors from the aggregated list of average polarities
-    ## and output a corresponding list of network plots
+    ## Add colors from 
     theplot <- colorize(df_formality, theplot)
 
     theedges <- paste2(edge_capture(theplot), sep=qsep)
@@ -1344,8 +1363,7 @@ Network.formality <- function(x, contextual = "yellow", formal = "red",
     attributes(theplot)[["title"]] <- title
     attributes(theplot)[["legend.gradient"]] <- cols
     attributes(theplot)[["network.type"]] <- "formality"
-    attributes(theplot)[["legend.label"]] <- c("Contextual", "Formal")
-    attributes(theplot)[["color.breaks"]] <- brks    
+    attributes(theplot)[["legend.label"]] <- c("Contextual", "Formal")  
     attributes(theplot)[["n.color.breaks"]] <- max.color.breaks
     theplot
 }

@@ -5,13 +5,14 @@
 \title{Add themes to a Network object.}
 \usage{
 qtheme(x = "generic", title, title.color, layout, legend, legend.cex,
-  legend.text.color, bg, vertex.color, vertex.size, vertex.label.color,
-  vertex.label.cex, edge.label.color, edge.label.cex)
+  legend.text.color, legend.gradient, bg, vertex.color, vertex.size,
+  vertex.label.color, vertex.label.cex, edge.label.color, edge.label.cex)
 
 theme_nightheat(x = pars[["x"]], title = pars[["title"]],
   title.color = pars[["title.color"]], layout = pars[["layout"]],
   legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
-  bg = pars[["bg"]], legend.text.color = pars[["legend.text.color"]],
+  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+  legend.text.color = pars[["legend.text.color"]],
   vertex.color = pars[["vertex.color"]],
   vertex.size = pars[["vertex.size"]],
   vertex.label.color = pars[["vertex.label.color"]],
@@ -33,6 +34,9 @@ theme_nightheat(x = pars[["x"]], title = pars[["title"]],
 equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.}
 
 \item{legend.text.color}{The text legend text color.}
+
+\item{legend.gradient}{A vector of ordered colors to use for the gradient
+fills in the network edges.}
 
 \item{bg}{The color to be used for the background of the device region. See
 \code{\link[graphics]{par}} for more information.}

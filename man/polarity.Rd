@@ -348,18 +348,16 @@ m <- Network(poldat)
 m
 print(m, bg="grey97", vertex.color="grey75")
 
-library(igraph)
-bgb2 <- Network(poldat, negative = "blue", positive = "red",
-    neutral = "white")
-print(bgb2, title="Polarity Discourse Map", title.color="white", bg="black",
+print(m, title="Polarity Discourse Map", title.color="white", bg="black",
     legend.text.color="white", vertex.label.color = "grey70",
     edge.label.color="yellow")
 
 ## or use themes:
+dev.off()
 m + qtheme()
 m + theme_nightheat
 dev.off()
-bgb2 + theme_nightheat(title="Polarity Discourse Map")
+m+ theme_nightheat(title="Polarity Discourse Map")
 }
 }
 \references{

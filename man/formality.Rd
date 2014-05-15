@@ -213,6 +213,26 @@ saveHTML(FUN(, 1:20), autoplay = FALSE, loop = TRUE, verbose = FALSE,
     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
 
 FUN(TRUE)
+
+#==================#
+## Static Network ##
+#==================#
+(formdat <- with(sentSplit(DATA, 4), formality(state, person)))
+m <- Network(formdat)
+m
+print(m, bg="grey97", vertex.color="grey75")
+
+print(m, title="Polarity Discourse Map", title.color="white", bg="black",
+    legend.text.color="white", vertex.label.color = "grey70",
+    edge.label.color="yellow")
+
+## or use themes:
+dev.off()
+m + qtheme()
+m + theme_nightheat
+dev.off()
+m + theme_nightheat(title="Formality Discourse Map",
+    vertex.label.color = "grey50")
 }
 }
 \references{

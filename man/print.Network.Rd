@@ -6,9 +6,9 @@
 \method{print}{Network}(x, title = NA, title.color = "black",
   seed = sample(1:10000, 1), layout = layout.auto, legend = c(-0.5, -1.5,
   0.5, -1.45), legend.cex = 1, bg = NULL, legend.text.color = "black",
-  vertex.color = "grey80", vertex.size = 9, vertex.label.color = "grey40",
-  vertex.label.cex = 1.1, edge.label.color = "black",
-  edge.label.cex = 0.9, ...)
+  legend.gradient = NULL, vertex.color = "grey80", vertex.size = 9,
+  vertex.label.color = "grey40", vertex.label.cex = 1.1,
+  edge.label.color = "black", edge.label.cex = 0.9, ...)
 }
 \arguments{
 \item{x}{The Network object.}
@@ -29,6 +29,9 @@ uses title attribute of the Network object.}
 equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.}
 
 \item{legend.text.color}{The legend text color.}
+
+\item{legend.gradient}{A vector of ordered colors to use for the gradient
+fills in the network edges.}
 
 \item{bg}{The color to be used for the background of the device region. See
 \code{\link[graphics]{par}} for more information.}
