@@ -7,8 +7,9 @@
   seed = sample(1:10000, 1), layout = layout.auto, legend = c(-0.5, -1.5,
   0.5, -1.45), legend.cex = 1, bg = NULL, legend.text.color = "black",
   legend.gradient = NULL, vertex.color = "grey80", vertex.size = 9,
-  vertex.label.color = "grey40", vertex.label.cex = 1.1,
-  edge.label.color = "black", edge.label.cex = 0.9, ...)
+  vertex.frame.color = NA, vertex.label.color = "grey40",
+  vertex.label.cex = 1.1, edge.label.color = "black",
+  edge.label.cex = 0.9, ...)
 }
 \arguments{
 \item{x}{The Network object.}
@@ -39,6 +40,8 @@ fills in the network edges.}
 \item{vertex.color}{The font family to be used for vertex labels.}
 
 \item{vertex.size}{The size of the vertex.}
+
+\item{vertex.frame.color}{The color of the vertex border.}
 
 \item{vertex.label.color}{The color of the labels.}
 

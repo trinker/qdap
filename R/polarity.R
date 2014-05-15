@@ -1550,7 +1550,6 @@ Network.polarity <- function(x, negative = "blue", positive = "red",
     #plot(grp[[i]], edge.curved=TRUE)
     E(theplot)$color <- ekey %l% ckey
     E(theplot)$label <- ekey %l% curkey
-    V(theplot)$frame.color <- NA
     
     ## add class info
     class(theplot) <- c("Network", class(theplot))

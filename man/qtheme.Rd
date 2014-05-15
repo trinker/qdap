@@ -2,12 +2,19 @@
 \name{qtheme}
 \alias{qtheme}
 \alias{theme_badkitchen}
+\alias{theme_cafe}
+\alias{theme_duskheat}
+\alias{theme_grayscale}
+\alias{theme_greyscale}
+\alias{theme_hipster}
 \alias{theme_nightheat}
+\alias{theme_norah}
 \title{Add themes to a Network object.}
 \usage{
 qtheme(x = "generic", title, title.color, layout, legend, legend.cex,
   legend.text.color, legend.gradient, bg, vertex.color, vertex.size,
-  vertex.label.color, vertex.label.cex, edge.label.color, edge.label.cex)
+  vertex.frame.color, vertex.label.color, vertex.label.cex, edge.label.color,
+  edge.label.cex)
 
 theme_nightheat(x = pars[["x"]], title = pars[["title"]],
   title.color = pars[["title.color"]], layout = pars[["layout"]],
@@ -16,6 +23,7 @@ theme_nightheat(x = pars[["x"]], title = pars[["title"]],
   legend.text.color = pars[["legend.text.color"]],
   vertex.color = pars[["vertex.color"]],
   vertex.size = pars[["vertex.size"]],
+  vertex.frame.color = pars[["vertex.frame.color"]],
   vertex.label.color = pars[["vertex.label.color"]],
   vertex.label.cex = pars[["vertex.label.cex"]],
   edge.label.color = pars[["edge.label.color"]],
@@ -28,6 +36,85 @@ theme_badkitchen(x = pars[["x"]], title = pars[["title"]],
   legend.text.color = pars[["legend.text.color"]],
   vertex.color = pars[["vertex.color"]],
   vertex.size = pars[["vertex.size"]],
+  vertex.frame.color = pars[["vertex.frame.color"]],
+  vertex.label.color = pars[["vertex.label.color"]],
+  vertex.label.cex = pars[["vertex.label.cex"]],
+  edge.label.color = pars[["edge.label.color"]],
+  edge.label.cex = pars[["edge.label.cex"]], ...)
+
+theme_cafe(x = pars[["x"]], title = pars[["title"]],
+  title.color = pars[["title.color"]], layout = pars[["layout"]],
+  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+  legend.text.color = pars[["legend.text.color"]],
+  vertex.color = pars[["vertex.color"]],
+  vertex.size = pars[["vertex.size"]],
+  vertex.frame.color = pars[["vertex.frame.color"]],
+  vertex.label.color = pars[["vertex.label.color"]],
+  vertex.label.cex = pars[["vertex.label.cex"]],
+  edge.label.color = pars[["edge.label.color"]],
+  edge.label.cex = pars[["edge.label.cex"]], ...)
+
+theme_grayscale(x = pars[["x"]], title = pars[["title"]],
+  title.color = pars[["title.color"]], layout = pars[["layout"]],
+  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+  legend.text.color = pars[["legend.text.color"]],
+  vertex.color = pars[["vertex.color"]],
+  vertex.size = pars[["vertex.size"]],
+  vertex.frame.color = pars[["vertex.frame.color"]],
+  vertex.label.color = pars[["vertex.label.color"]],
+  vertex.label.cex = pars[["vertex.label.cex"]],
+  edge.label.color = pars[["edge.label.color"]],
+  edge.label.cex = pars[["edge.label.cex"]], ...)
+
+theme_greyscale(x = pars[["x"]], title = pars[["title"]],
+  title.color = pars[["title.color"]], layout = pars[["layout"]],
+  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+  legend.text.color = pars[["legend.text.color"]],
+  vertex.color = pars[["vertex.color"]],
+  vertex.size = pars[["vertex.size"]],
+  vertex.frame.color = pars[["vertex.frame.color"]],
+  vertex.label.color = pars[["vertex.label.color"]],
+  vertex.label.cex = pars[["vertex.label.cex"]],
+  edge.label.color = pars[["edge.label.color"]],
+  edge.label.cex = pars[["edge.label.cex"]], ...)
+
+theme_norah(x = pars[["x"]], title = pars[["title"]],
+  title.color = pars[["title.color"]], layout = pars[["layout"]],
+  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+  legend.text.color = pars[["legend.text.color"]],
+  vertex.color = pars[["vertex.color"]],
+  vertex.size = pars[["vertex.size"]],
+  vertex.frame.color = pars[["vertex.frame.color"]],
+  vertex.label.color = pars[["vertex.label.color"]],
+  vertex.label.cex = pars[["vertex.label.cex"]],
+  edge.label.color = pars[["edge.label.color"]],
+  edge.label.cex = pars[["edge.label.cex"]], ...)
+
+theme_hipster(x = pars[["x"]], title = pars[["title"]],
+  title.color = pars[["title.color"]], layout = pars[["layout"]],
+  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+  legend.text.color = pars[["legend.text.color"]],
+  vertex.color = pars[["vertex.color"]],
+  vertex.size = pars[["vertex.size"]],
+  vertex.frame.color = pars[["vertex.frame.color"]],
+  vertex.label.color = pars[["vertex.label.color"]],
+  vertex.label.cex = pars[["vertex.label.cex"]],
+  edge.label.color = pars[["edge.label.color"]],
+  edge.label.cex = pars[["edge.label.cex"]], ...)
+
+theme_duskheat(x = pars[["x"]], title = pars[["title"]],
+  title.color = pars[["title.color"]], layout = pars[["layout"]],
+  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+  legend.text.color = pars[["legend.text.color"]],
+  vertex.color = pars[["vertex.color"]],
+  vertex.size = pars[["vertex.size"]],
+  vertex.frame.color = pars[["vertex.frame.color"]],
   vertex.label.color = pars[["vertex.label.color"]],
   vertex.label.cex = pars[["vertex.label.cex"]],
   edge.label.color = pars[["edge.label.color"]],
@@ -58,6 +145,8 @@ fills in the network edges.}
 
 \item{vertex.size}{The size of the vertex.}
 
+\item{vertex.frame.color}{The color of the vertex border.}
+
 \item{vertex.label.color}{The color of the labels.}
 
 \item{vertex.label.cex}{The font size for vertex labels.}
@@ -81,5 +170,43 @@ than individual \code{print} arguments.
 
 This theme allows you to add a 70s kitchen theme to a Network object rather
 than individual \code{print} arguments.
+
+This theme allows you to add a cafe theme to a Network object rather
+than individual \code{print} arguments.
+
+This theme allows you to add a gray scale theme to a Network object rather
+than individual \code{print} arguments.
+
+This theme allows you to add a Norah theme to a Network object rather
+than individual \code{print} arguments.
+
+This theme allows you to add a hipster theme to a Network object rather
+than individual \code{print} arguments.
+
+This theme allows you to add a dusk heat theme to a Network object rather
+than individual \code{print} arguments.
+}
+\examples{
+\dontrun{
+(poldat <- with(sentSplit(DATA, 4), polarity(state, person)))
+m <- Network(poldat)
+m
+
+m + theme_nightheat
+m + theme_cafe
+m + theme_grayscale
+m + theme_norah
+m + theme_hipster
+m + theme_badkitchen
+m + theme_duskheat
+
+## make your own themes
+theme_irish <- qtheme(x = "irish", bg = "grey25",
+    vertex.label.color = "grey50", legend.text.color = "white",
+    legend.gradient = c("darkgreen", "white", "darkorange"),
+    edge.label.color="white", vertex.size= 20)
+
+m + theme_irish
+}
 }
 

@@ -36,8 +36,9 @@ The `qdapTools` package now houses several former <a href="https://github.com/tr
 
 * `Network` method added to make network plots of select <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> objects.  
 
-* `qtheme`, `theme_nightheat`,  and `theme_badkitchen` added to style `Network` 
-  plots.
+* `qtheme`, `theme_nightheat`, `theme_duskheat`, theme_norah`, `theme_cafe`, 
+  `theme_grayscale`, `theme_badkitchen`, and `theme_hipster` added to style 
+  `Network` plots.
 
 * `polarity` picks up a `Network` method.
 

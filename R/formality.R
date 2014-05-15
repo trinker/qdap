@@ -1354,7 +1354,6 @@ Network.formality <- function(x, contextual = "yellow", formal = "red",
         plus.300.color, under.300.color)
 
     V(theplot)$color <- lookup(V(theplot)$name, counts[, -2], missing = under.300.color)
-    V(theplot)$frame.color <- NA
     E(theplot)$label <-lookup(theedges, df_formality[, "from|to"], 
         numbformat(df_formality[, "prop_formal"], digits))
 

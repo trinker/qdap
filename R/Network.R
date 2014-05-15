@@ -33,6 +33,7 @@ function(x, ...){
 #' \code{\link[graphics]{par}} for more information. 
 #' @param vertex.color The font family to be used for vertex labels.
 #' @param vertex.size The size of the vertex.
+#' @param vertex.frame.color The color of the vertex border.
 #' @param vertex.label.color The color of the labels.
 #' @param vertex.label.cex The font size for vertex labels. 
 #' @param edge.label.color The color for the edge labels.  Use \code{NA} to 
@@ -53,7 +54,7 @@ print.Network <- function(x, title = NA, title.color = "black",
     seed = sample(1:10000, 1), layout=layout.auto,  
     legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, bg=NULL, 
     legend.text.color = "black", legend.gradient = NULL, 
-    vertex.color = "grey80", vertex.size = 9,
+    vertex.color = "grey80", vertex.size = 9, vertex.frame.color = NA,
     vertex.label.color = "grey40", vertex.label.cex = 1.1, 
     edge.label.color = "black", edge.label.cex = .9, ...){
     
@@ -67,6 +68,7 @@ print.Network <- function(x, title = NA, title.color = "black",
     V(x)$label.cex <- vertex.label.cex
     E(x)$label.color <- edge.label.color
     E(x)$label.cex <- edge.label.cex    
+    V(x)$frame.color <- vertex.frame.color
 
     if (is.null(legend.gradient) | is.null(attributes(x)[["n.color.breaks"]])) {
         legend.gradient <- attributes(x)[["legend.gradient"]]
@@ -146,6 +148,7 @@ plot.Network  <- function(x, ...){
         legend.text.color = attributes(x)[["legend.text.color"]],
         vertex.color = attributes(x)[["vertex.color"]],
         vertex.size = attributes(x)[["vertex.size"]],
+        vertex.frame.color = attributes(x)[["vertex.frame.color"]],        
         vertex.label.color = attributes(x)[["vertex.label.color"]],
         vertex.label.cex = attributes(x)[["vertex.label.cex"]],
         edge.label.color = attributes(x)[["edge.label.color"]],
@@ -173,6 +176,7 @@ plot.Network  <- function(x, ...){
 #' \code{\link[graphics]{par}} for more information. 
 #' @param vertex.color The font family to be used for vertex labels.
 #' @param vertex.size The size of the vertex.
+#' @param vertex.frame.color The color of the vertex border.
 #' @param vertex.label.color The color of the labels.
 #' @param vertex.label.cex The font size for vertex labels. 
 #' @param edge.label.color The color for the edge labels.  Use \code{NA} to 
@@ -182,15 +186,37 @@ plot.Network  <- function(x, ...){
 #' @import igraph
 #' @importFrom plotrix color.legend
 #' @rdname qtheme
+#' @examples
+#' \dontrun{
+#' (poldat <- with(sentSplit(DATA, 4), polarity(state, person)))
+#' m <- Network(poldat)
+#' m
+#' 
+#' m + theme_nightheat
+#' m + theme_cafe
+#' m + theme_grayscale
+#' m + theme_norah
+#' m + theme_hipster
+#' m + theme_badkitchen
+#' m + theme_duskheat
+#' 
+#' ## make your own themes
+#' theme_irish <- qtheme(x = "irish", bg = "grey25", 
+#'     vertex.label.color = "grey50", legend.text.color = "white",
+#'     legend.gradient = c("darkgreen", "white", "darkorange"), 
+#'     edge.label.color="white", vertex.size= 20)
+#' 
+#' m + theme_irish
+#' }
 qtheme <- function(x = "generic", title, title.color, layout, legend, 
     legend.cex, legend.text.color, legend.gradient, bg, vertex.color, 
-    vertex.size, vertex.label.color, vertex.label.cex, edge.label.color, 
+    vertex.size, vertex.frame.color, vertex.label.color, vertex.label.cex, edge.label.color, 
     edge.label.cex){
 
     default_theme <- list(title.color = "black",
         layout=layout.auto, legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, 
         bg=NULL, legend.text.color = "black", vertex.color = "grey80", 
-        vertex.size = 9, vertex.label.color = "grey50", 
+        vertex.size = 9, vertex.label.color = "grey50", vertex.frame.color = NA,
         vertex.label.cex = 1.1, edge.label.color = "black", edge.label.cex = .9)
 
     if(missing(title)) title <- NA
@@ -203,6 +229,7 @@ qtheme <- function(x = "generic", title, title.color, layout, legend,
     if(missing(legend.text.color)) legend.text.color <- default_theme[["legend.text.color"]]
     if(missing(vertex.color)) vertex.color <- default_theme[["vertex.color"]]
     if(missing(vertex.size)) vertex.size <- default_theme[["vertex.size"]]
+    if(missing(vertex.frame.color)) vertex.frame.color <- default_theme[["vertex.frame.color"]]    
     if(missing(vertex.label.color)) vertex.label.color <- default_theme[["vertex.label.color"]]
     if(missing(vertex.label.cex)) vertex.label.cex <- default_theme[["vertex.label.cex"]]
     if(missing(edge.label.color)) edge.label.color <- default_theme[["edge.label.color"]]
@@ -212,7 +239,8 @@ qtheme <- function(x = "generic", title, title.color, layout, legend,
         legend = legend, legend.cex = legend.cex, 
         legend.gradient = legend.gradient, bg = bg, 
         legend.text.color = legend.text.color, vertex.color = vertex.color, 
-        vertex.size = vertex.size, vertex.label.color = vertex.label.color, 
+        vertex.size = vertex.size, vertex.frame.color =vertex.frame.color,
+        vertex.label.color = vertex.label.color, 
         vertex.label.cex = vertex.label.cex, edge.label.color = edge.label.color, 
         edge.label.cex = edge.label.cex)
 
@@ -222,6 +250,7 @@ qtheme <- function(x = "generic", title, title.color, layout, legend,
         legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]], 
         legend.text.color = pars[["legend.text.color"]], 
         vertex.color = pars[["vertex.color"]], vertex.size = pars[["vertex.size"]],
+        vertex.frame.color = pars[["vertex.frame.color"]], 
         vertex.label.color = pars[["vertex.label.color"]], 
         vertex.label.cex = pars[["vertex.label.cex"]],
         edge.label.color = pars[["edge.label.color"]], 
@@ -238,6 +267,7 @@ qtheme <- function(x = "generic", title, title.color, layout, legend,
         attributes(x)[["legend.gradient"]] <- legend.gradient       
         attributes(x)[["vertex.color"]] <- vertex.color
         attributes(x)[["vertex.size"]] <- vertex.size
+        attributes(x)[["vertex.frame.color"]] <- vertex.frame.color
         attributes(x)[["vertex.label.color"]] <- vertex.label.color
         attributes(x)[["vertex.label.cex"]] <- vertex.label.cex
         attributes(x)[["edge.label.color"]] <- edge.label.color
@@ -262,7 +292,7 @@ theme_nightheat <- qtheme(x = "nightheat", title.color = "white",
     bg = "black", legend.text.color = "white", 
     legend.gradient = c("blue", "white", "red"), 
     vertex.label.color = "grey70", 
-    edge.label.color="yellow", vertex.size=10)
+    edge.label.color="yellow")
 
 #' Add themes to a Network object.
 #'
@@ -276,4 +306,84 @@ theme_nightheat <- qtheme(x = "nightheat", title.color = "white",
 theme_badkitchen <- qtheme(x = "kitchen", 
     bg = "grey70", vertex.label.color = "brown",
     legend.gradient = c("bisque", "tomato1", "grey20"), 
-    edge.label.color="yellow4", vertex.size=10)
+    edge.label.color="yellow4")
+
+
+
+#' Add themes to a Network object.
+#'
+#' This theme allows you to add a cafe theme to a Network object rather 
+#' than individual \code{print} arguments.
+#' 
+#' @export
+#' @import igraph
+#' @importFrom plotrix color.legend
+#' @rdname qtheme
+theme_cafe <- qtheme(x = "cafe", 
+    bg = "khaki2", vertex.label.color = "brown",
+    legend.gradient = c("burlywood3", "burlywood4", "darkorange4"), 
+    edge.label.color="brown4")
+
+#' Add themes to a Network object.
+#'
+#' This theme allows you to add a gray scale theme to a Network object rather 
+#' than individual \code{print} arguments.
+#' 
+#' @export
+#' @import igraph
+#' @importFrom plotrix color.legend
+#' @rdname qtheme
+theme_grayscale <- qtheme(x = "grayscale", 
+    bg = "white", vertex.label.color = "grey30",
+    legend.gradient = c("grey85", "grey50", "black"), 
+    edge.label.color="grey60")
+
+#' @export
+#' @rdname qtheme
+theme_greyscale <- theme_grayscale
+
+#' Add themes to a Network object.
+#'
+#' This theme allows you to add a Norah theme to a Network object rather 
+#' than individual \code{print} arguments.
+#' 
+#' @export
+#' @import igraph
+#' @importFrom plotrix color.legend
+#' @rdname qtheme
+theme_norah <- qtheme(x = "norah", 
+    bg = "darkolivegreen1", vertex.label.color = "violetred4",
+    legend.gradient = c("grey80", "indianred3", "maroon4"), 
+    edge.label.color="green4")
+
+
+#' Add themes to a Network object.
+#'
+#' This theme allows you to add a hipster theme to a Network object rather 
+#' than individual \code{print} arguments.
+#' 
+#' @export
+#' @import igraph
+#' @importFrom plotrix color.legend
+#' @rdname qtheme
+theme_hipster <- qtheme(x = "hipster", 
+    bg = "gold3", vertex.label.color = "brown4",
+    legend.gradient = c("#5EA1DD", "grey70", "#9E0A39"), 
+    edge.label.color="#FFF9D6")
+
+
+
+#' Add themes to a Network object.
+#'
+#' This theme allows you to add a dusk heat theme to a Network object rather 
+#' than individual \code{print} arguments.
+#' 
+#' @export
+#' @import igraph
+#' @importFrom plotrix color.legend
+#' @rdname qtheme
+theme_duskheat <- qtheme(x = "duskheat", bg = "grey25", 
+    vertex.label.color = "grey50", legend.text.color = "white",
+    legend.gradient = c("black", "darkblue", "blue", "white", "red", "darkred", "#4E2F2F"), 
+    edge.label.color="white", vertex.size= 20)
+
