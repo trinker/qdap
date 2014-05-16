@@ -14,6 +14,6 @@ Network(x, ...)
 Returns a network plot.
 }
 \description{
-Create a network plt for select qdap outputs.
+Create a network plot for select qdap outputs.
 }
 

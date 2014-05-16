@@ -1,6 +1,6 @@
 #' Generic Network Method
 #' 
-#' Create a network plt for select qdap outputs.
+#' Create a network plot for select qdap outputs.
 #' 
 #' @param x A select qdap object.
 #' @param \ldots Arguments passed to Network method of other classes.
