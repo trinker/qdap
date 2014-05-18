@@ -42,7 +42,7 @@ function(text.var, parallel = FALSE) {
     } else {
         cl <- makeCluster(mc <- getOption("cl.cores", detectCores()/2))
         clusterExport(cl=cl, varlist=c("text.var", "strip", "Trim",
-            "syllable_count", "scrubber", "bracketX", "env.syl"), 
+            "syllable_count", "scrubber", "bracketX", "key.syl"), 
             envir = environment())
         m <- parLapply(cl, as.character(text.var), function(x) {
                 sum(syllable_count(Trim(x))['syllables'])
@@ -73,20 +73,17 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
             q <- bracketX(q) 
         } 
         q <- strip(q) 
-        q <- gsub("-", " ", q) 
-        q <- gsub("\\?", " ", q) 
-        q <- reducer(Trim(q))
         if (q=="") {
             return(NA)
         }
-        q <- c(sapply(q, function(x) as.vector(unlist(strsplit(x, " ")))))
-        y <- tolower(q)
+        y <- unlist(lapply(q, strsplit, "\\s+"))
+
         SYLL <- function(x) {
             if(exists(x, envir = env.syl)){
                 return(get(x, envir = env.syl))   
             } else {  
                 x2 <- as.character(substring(x, 1, nchar(x) - 1))
-                if(substring(x, nchar(x), nchar(x)) == "s" &  
+                if(substring(x, nchar(x)) == "s" &  
                     exists(x2, envir = env.syl)){
                     return(get(x2, envir = env.syl))
                 } else {
@@ -162,7 +159,7 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
                 }
             }
         }  
-        n <- sapply(y, function(x) SYLL(x))
+        n <- unlist(lapply(y, SYLL))
         InDic <- function(x) {
             ifelse(exists(x, envir = env.syl), "-", 
                 ifelse(substring(x, nchar(x), nchar(x)) == "s" &&  
@@ -170,8 +167,8 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
                     envir = env.syl), "-", "NF"))
         }
         k <- sapply(y, InDic)
-        DF <- data.frame(words = q, syllables = n, in.dictionary = k)
-        row.names(DF) <- 1:nrow(DF)
+        DF <- data.frame(words = q, syllables = n, in.dictionary = k, 
+            row.names = NULL)
         if (algorithm.report == TRUE){
             list("ALGORITHM REPORT" = DF[which(DF$in.dictionary == 'NF'), ], 
                 "SYLLABLE DATAFRAME" = DF)
@@ -181,6 +178,15 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
     }
 }
 
+## Function to check if ends in s
+s_end <- function(x, n = 1){
+    substr(x, nchar(x)-n+1, nchar(x)) == "s"
+}
+
+## Function to drop last letter
+drop_s <- function(x, n){
+  substr(x, 1, nchar(x) - 1)
+}
 
 #' Transcript Apply Summing of Polysyllables
 #' 
@@ -207,7 +213,7 @@ function(text.var, parallel = FALSE) {
     } else {
         cl <- makeCluster(mc <- getOption("cl.cores", detectCores()/2))
         clusterExport(cl=cl, varlist=c("text.var", "counter", "strip",
-            "Trim", "syllable_count", "scrubber", "bracketX", "env.syl"), 
+            "Trim", "syllable_count", "scrubber", "bracketX", "key.syl"), 
             envir = environment())
         m <- parLapply(cl, as.character(text.var), function(x) {
                 counter(x)
@@ -245,7 +251,7 @@ function(text.var, parallel = FALSE) {
     } else {
         cl <- makeCluster(mc <- getOption("cl.cores", detectCores()))
         clusterExport(cl=cl, varlist=c("text.var", "counter", "strip",
-            "syllable_count", "scrubber", "bracketX", "env.syl"), 
+            "syllable_count", "scrubber", "bracketX", "key.syl"), 
             envir = environment())
         m <- parLapply(cl, as.character(text.var), function(x) {
                 counter(x)

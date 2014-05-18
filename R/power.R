@@ -1,8 +1,7 @@
 #' Power Score (Sentiment Analysis)
 #' 
-#' \code{sentiment_frame} - Generate a sentiment lookup environment or data.frame 
-#' for use with the \code{xxx.frame} argument of various sentiment functions 
-#' function.
+#' \code{sentiment_frame} - Generate a sentiment lookup hash table  
+#' for use with the \code{xxx.frame} argument of various sentiment functions.
 #' 
 #' @param positives A character vector of positive words.
 #' @param negatives A character vector of negative words.
@@ -12,13 +11,11 @@
 #' @param neg.weights A vector of weights to weight each negative word by.  
 #' Length must be equal to length of \code{negatives} or length 1 (if 1 weight 
 #' will be recycled). 
-#' @param envir logical.  If \code{TRUE} a lookup table (a dataframe within 
-#' an environment) is produced rather than a data.frame.
 #' @export
 #' @importFrom qdapTools hash 
 #' @rdname power
 sentiment_frame <- function(positives, negatives, pos.weights = 1, 
-    neg.weights = -1, envir = TRUE) {
+    neg.weights = -1) {
     plen <- length(positives)
     nlen <- length(negatives)
     if (!length(plen) %in% c(length(positives), 1)) {
@@ -35,9 +32,6 @@ sentiment_frame <- function(positives, negatives, pos.weights = 1,
     }
     dat <- data.frame(words = c(positives, negatives), polarity = c(pos.weights, 
         neg.weights))
-    if (envir) {
-        hash(dat)
-    } else {
-        dat
-    }
+    hash(dat)
+
 }

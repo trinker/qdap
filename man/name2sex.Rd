@@ -4,7 +4,8 @@
 \title{Names to Gender Prediction}
 \usage{
 name2sex(names.list, pred.sex = TRUE, fuzzy.match = pred.sex,
-  USE.NAMES = FALSE, database = NAMES_SEX, list.database = NAMES_LIST)
+  USE.NAMES = FALSE, database = qdapDictionaries::NAMES_SEX,
+  list.database = qdapDictionaries::NAMES_LIST)
 }
 \arguments{
 \item{names.list}{Character vector containing first names.}

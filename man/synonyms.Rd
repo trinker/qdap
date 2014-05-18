@@ -7,14 +7,14 @@
 \title{Search For Synonyms}
 \usage{
 synonyms(terms, return.list = TRUE, multiwords = TRUE, report.null = TRUE,
-  synonym.frame = qdapDictionaries::env.syn)
+  synonym.frame = qdapDictionaries::key.syn)
 
 syn(terms, return.list = TRUE, multiwords = TRUE, report.null = TRUE,
-  synonym.frame = qdapDictionaries::env.syn)
+  synonym.frame = qdapDictionaries::key.syn)
 
-synonyms_frame(synonym.list, envir = TRUE, prior.frame)
+synonyms_frame(synonym.list, prior.frame)
 
-syn_frame(synonym.list, envir = TRUE, prior.frame)
+syn_frame(synonym.list, prior.frame)
 }
 \arguments{
 \item{terms}{The terms to find synonyms for.}
@@ -29,14 +29,14 @@ word.}
 \item{report.null}{logical.  If \code{TRUE} reports the words that no match
 was found at the head of the output.}
 
-\item{synonym.frame}{A dataframe or environment containing a dataframe of positive/negative words and weights.}
+\item{synonym.frame}{A dataframe or hash key of positive/negative words and weights.}
 
 \item{synonym.list}{A named list of lists (or vectors) of synonyms.}
 
-\item{envir}{logical.  If \code{TRUE} a lookup table (a dataframe within
-an environment) is produced rather than a data.frame.}
+\item{envir}{logical.  If \code{TRUE} a lookup table (a dataframe within}
 
-\item{prior.frame}{A prior synonyms data.frame in the format produced by \code{synonym_frame}}
+\item{prior.frame}{A prior synonyms data.frame in the format produced by
+\code{synonym_frame}.}
 }
 \value{
 Returns a list of vectors or vector of possible words that match
@@ -45,7 +45,7 @@ term(s).
 \description{
 \code{synonyms} - Search for synonyms that match term(s).
 
-\code{synonyms_frame} - Generate a synonym lookup environment
+\code{synonyms_frame} - Generate a synonym lookup hash key
 for use with the \code{synonym.frame} argument in the \code{synonym}
 function.
 }
@@ -64,7 +64,6 @@ syn_dat <- list(
 )
 
 synonyms_frame(syn_dat)
-synonyms_frame(syn_dat, envir=FALSE)
 syn(c("R", "show"), synonym.frame = syn_frame(syn_dat))
 
 syns.hash <- syn_frame(syn_dat, prior.frame = SYNONYM)

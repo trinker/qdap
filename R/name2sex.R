@@ -63,7 +63,9 @@
 #' }
 name2sex <- 
 function(names.list, pred.sex = TRUE, fuzzy.match = pred.sex, USE.NAMES = FALSE,
-    database = NAMES_SEX, list.database = NAMES_LIST) {
+    database = qdapDictionaries::NAMES_SEX, 
+    list.database = qdapDictionaries::NAMES_LIST) {
+    
     if(pred.sex) {
         dat <- database[, -2]
     } else {

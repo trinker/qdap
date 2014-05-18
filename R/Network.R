@@ -76,9 +76,7 @@ print.Network <- function(x, title = NA, title.color = "black",
         ## set up color gradients
         colfunc <- colorRampPalette(legend.gradient)
         legend.gradient <- colfunc(attributes(x)[["n.color.breaks"]])
-        E(x)$color <- lookup(E(x)$color, attributes(x)[["legend.gradient"]],
-            legend.gradient)
-
+        E(x)$color <- legend.gradient[attributes(x)[["color.locs"]]]
     }
     
     set.seed(seed)
@@ -263,7 +261,7 @@ qtheme <- function(x = "generic", title, title.color, layout, legend,
         attributes(x)[["legend"]] <- legend
         attributes(x)[["legend.cex"]] <- legend.cex
         attributes(x)[["bg"]] <- bg
-        attributes(x)[["legend.text.color"]] <- legend.text.color         
+        attributes(x)[["legend.text.color"]] <- legend.text.color       
         attributes(x)[["legend.gradient"]] <- legend.gradient       
         attributes(x)[["vertex.color"]] <- vertex.color
         attributes(x)[["vertex.size"]] <- vertex.size
@@ -379,4 +377,3 @@ theme_duskheat <- qtheme(x = "duskheat", bg = "grey25",
     title.color="white", vertex.label.color = "grey55", legend.text.color = "white",
     legend.gradient = c("black", "darkblue", "blue", "white", "red", "darkred", "#4E2F2F"), 
     edge.label.color="white")
-

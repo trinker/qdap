@@ -782,7 +782,8 @@ Animate_formality_net <- function(x, contextual, formal,
     ## average formality per edge
     cuts <- cut(df_formality[, "prop_formal"], brks)
 
-    df_formality[, "color"] <- cuts %l% data.frame(cut(brks, brks), cols)
+    df_formality[, "color"] <- cuts %l% data.frame(cut(brks, brks), cols, 
+        stringsAsFactors = FALSE)
 
     ## Handle missing data colors
     missing <- df_formality[, "wc"] == "1" & 
@@ -838,7 +839,8 @@ Animate_formality_net <- function(x, contextual, formal,
         }
 
         E(grp[[i]])$label <- NA
-        curkey <- data.frame(paste2(cur[cur_edge, 1:2], sep="|-|qdap|-|"), lab)
+        curkey <- data.frame(paste2(cur[cur_edge, 1:2], sep="|-|qdap|-|"), lab, 
+            stringsAsFactors = FALSE)
 
         ## Set up widths and colors
         tcols <- cur[, c("from", "to", "color"), drop=FALSE]
@@ -923,7 +925,8 @@ col_meaner <- function(y) {
     n[, "total"] <- rowSums(n[3:4])
     n[, paste0("prop_", names(n)[3:4])] <- n[, 3:4]/n[, 6]
     n <- n[!n[, 1] %in% tail(y, 1)[, 1], ]
-    out <- data.frame(rbind(n, tail(y, 1)), row.names=NULL, check.names=FALSE)
+    out <- data.frame(rbind(n, tail(y, 1)), row.names=NULL, check.names=FALSE, 
+        stringsAsFactors = FALSE)
     out[, "prop_wc"] <- out[, "wc"]/sum(out[, "wc"], na.rm=TRUE)
     out
 }
@@ -1040,7 +1043,8 @@ form_stats <- function(x) {
 
     data.frame(group=grp, wc=x["wrd.cnt"], prop_contextual=x["prop_contextual"], 
         prop_formal=x["prop_formal"], formality=formality, row.names=NULL, 
-        Words = ifelse(x["wrd.cnt"] > 299, "300 Plus", "Less Than 300"))
+        Words = ifelse(x["wrd.cnt"] > 299, "300 Plus", "Less Than 300"), 
+        stringsAsFactors = FALSE)
 
 }
 
@@ -1057,7 +1061,8 @@ form_stats_total <- function(x) {
 agg_form <- function(x) {
     ldat <- split(x, x[, 1])
     ldat <- ldat[sapply(ldat, nrow) > 0]
-    data.frame(do.call(rbind, lapply(ldat, form_stats)), row.names=NULL)
+    data.frame(do.call(rbind, lapply(ldat, form_stats)), row.names=NULL, 
+        stringsAsFactors = FALSE)
  
 }
 
@@ -1323,9 +1328,10 @@ Network.formality <- function(x, contextual = "yellow", formal = "red",
 
     ## add colors to df_formality based on agrgegated 
     ## average formality per edge
-    cuts <- cut(df_formality[, "prop_formal"], brks)
+    cuts <- cut(df_formality[, "prop_formal"], c(-1, brks, 2) )
 
-    df_formality[, "color"] <- cuts %l% data.frame(cut(brks, brks), cols)
+    df_formality[, "color"] <- cuts %l% data.frame(cut(brks, brks), cols, 
+        stringsAsFactors = FALSE)
 
     ## Handle missing data colors
     missing <- df_formality[, "wc"] == "1" & 
@@ -1364,6 +1370,7 @@ Network.formality <- function(x, contextual = "yellow", formal = "red",
     attributes(theplot)[["network.type"]] <- "formality"
     attributes(theplot)[["legend.label"]] <- c("Contextual", "Formal")  
     attributes(theplot)[["n.color.breaks"]] <- max.color.breaks
+    attributes(theplot)[["color.locs"]] <- as.numeric(cuts)
     theplot
 }
 
@@ -1377,4 +1384,3 @@ form_fun2 <- function (z) {
     out[, paste0("prop_", names(out)[1:2])] <- out[, 1:2]/out[, 3]
     data.frame(`from|to` = z[, 1], wc = z[, "wrd.cnt"], out, check.names=FALSE)
 }
-

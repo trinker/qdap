@@ -305,39 +305,7 @@ function(text.var, grouping.var = NULL, digits = 1, percent = TRUE,
 #' @export
 pos_tags <-
 function(type = "pretty"){
-        POStags.df <- structure(list(Tag = structure(c(1L, 
-            2L, 3L, 4L, 5L, 6L, 7L, 8L, 9L, 10L, 11L, 12L, 15L, 
-            13L, 14L, 16L, 17L, 18L, 19L, 20L, 21L, 22L, 23L, 
-            24L, 25L, 26L, 27L, 28L, 29L, 30L, 31L, 32L, 33L, 34L, 
-            35L, 36L), .Label = c("CC", "CD", "DT", "EX", "FW", 
-            "IN", "JJ", "JJR", "JJS", "LS", "MD", "NN", "NNP", 
-            "NNPS", "NNS", "PDT", "POS", "PRP", "PRP$", "RB",
-            "RBR", "RBS", "RP", "SYM", "TO", "UH", "VB", "VBD", 
-            "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", "WRB"), 
-            class = "factor"), Description = structure(c(8L, 7L, 
-            9L, 10L, 11L, 23L, 1L, 2L, 3L, 13L, 14L, 16L, 15L, 
-            25L, 24L, 22L, 19L, 18L, 20L, 4L, 5L, 6L, 17L, 26L, 
-            27L, 12L, 29L, 33L, 30L, 32L, 31L, 28L, 35L, 36L, 
-            21L, 34L), .Label = c("Adjective", 
-            "Adjective, comparative", "Adjective, superlative", 
-            "Adverb", "Adverb, comparative", "Adverb, superlative", 
-            "Cardinal number", "Coordinating conjunction", 
-            "Determiner", "Existential there", "Foreign word", 
-            "Interjection", "List item marker", "Modal", 
-            "Noun, plural", "Noun, singular or mass", "Particle", 
-            "Personal pronoun", "Possessive ending", 
-            "Possessive pronoun", "Possessive wh-pronoun", 
-            "Predeterminer", 
-            "Preposition or subordinating conjunction", 
-            "Proper noun, plural", "Proper noun, singular", 
-            "Symbol", "to", "Verb, 3rd person singular present", 
-            "Verb, base form", "Verb, gerund or present participle", 
-            "Verb, non-3rd person singular present", 
-            "Verb, past participle", "Verb, past tense", "Wh-adverb", 
-            "Wh-determiner", "Wh-pronoun"), class = "factor")), 
-            .Names = c("Tag", "Description"), row.names = c(NA, -36L), 
-            class = "data.frame", comment = 
-            "http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html")
+
     POStags.matrix <- as.matrix(POStags.df)
     POStags <- left_just(POStags.df, 1:2)   
     x <- switch(type,
@@ -351,6 +319,25 @@ function(type = "pretty"){
     )
     return(x)
 }
+
+POStags.df <- structure(list(Tag = c("CC", "CD", "DT", "EX", "FW", "IN", "JJ", 
+    "JJR", "JJS", "LS", "MD", "NN", "NNS", "NNP", "NNPS", "PDT", 
+    "POS", "PRP", "PRP$", "RB", "RBR", "RBS", "RP", "SYM", "TO", 
+    "UH", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ", "WDT", "WP", "WP$", 
+    "WRB"), Description = c("Coordinating conjunction", "Cardinal number", 
+    "Determiner", "Existential there", "Foreign word", "Preposition or subordinating conjunction", 
+    "Adjective", "Adjective, comparative", "Adjective, superlative", 
+    "List item marker", "Modal", "Noun, singular or mass", "Noun, plural", 
+    "Proper noun, singular", "Proper noun, plural", "Predeterminer", 
+    "Possessive ending", "Personal pronoun", "Possessive pronoun", 
+    "Adverb", "Adverb, comparative", "Adverb, superlative", "Particle", 
+    "Symbol", "to", "Interjection", "Verb, base form", "Verb, past tense", 
+    "Verb, gerund or present participle", "Verb, past participle", 
+    "Verb, non-3rd person singular present", "Verb, 3rd person singular present", 
+    "Wh-determiner", "Wh-pronoun", "Possessive wh-pronoun", "Wh-adverb"
+    )), .Names = c("Tag", "Description"), row.names = c(NA, -36L), 
+    comment = "http://www.ling.upenn.edu/courses/Fall_2003/ling001/penn_treebank_pos.html", 
+    class = "data.frame")
 
 
 #' Prints a pos Object.
@@ -674,7 +661,8 @@ plot.pos_preprocessed <- function(x, ...){
 
     POS <- Counts <- NULL
 
-    dat <- matrix2df(data.frame(Counts = sort(table(unlist(x[, "POStags"])))), "POS")
+    dat <- matrix2df(data.frame(Counts = sort(table(unlist(x[, "POStags"]))), 
+        stringsAsFactors = FALSE), "POS")
     dat[, "POS"] <- dat[, "POS"] %l%  pos_tags("dataframe")
     dat[, "POS"] <- factor(dat[, "POS"], levels=dat[, "POS"])
 

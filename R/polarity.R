@@ -7,8 +7,8 @@
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
-#' @param polarity.frame A dataframe or environment containing a dataframe of 
-#' positive/negative words and weights.
+#' @param polarity.frame A dataframe or hash key of positive/negative words and 
+#' weights.
 #' @param negators A character vector of terms reversing the intent of a 
 #' positive or negative word.
 #' @param amplifiers A character vector of terms that increase the 
@@ -136,10 +136,9 @@
 #' qheat(scores(poldat3)[, -7], high="red", order.b="ave.polarity")
 #' 
 #' ## Create researcher defined sentiment.frame
-#' POLENV <- sentiment_frame(positive.words, negative.words)
-#' POLENV
-#' ls(POLENV)[1:20]
-#' c("abrasive", "abrupt", "happy") %ha% POLENV 
+#' POLKEY <- sentiment_frame(positive.words, negative.words)
+#' POLKEY
+#' c("abrasive", "abrupt", "happy") %hl% POLKEY
 #' 
 #' ## ANIMATION
 #' #===========
@@ -315,7 +314,7 @@
 #' m+ theme_nightheat(title="Polarity Discourse Map")
 #' }
 polarity <- function (text.var, grouping.var = NULL, 
-    polarity.frame = qdapDictionaries::env.pol, constrain = FALSE,
+    polarity.frame = qdapDictionaries::key.pol, constrain = FALSE,
     negators = qdapDictionaries::negation.words, 
     amplifiers = qdapDictionaries::amplification.words, 
     deamplifiers = qdapDictionaries::deamplification.words, question.weight = 0, 
@@ -370,10 +369,10 @@ polarity <- function (text.var, grouping.var = NULL,
     ## replace commas for later consideration
     DF[, "text.var"] <- gsub(",", " longreplacementbreakoff ", DF[, "text.var"])
 
-    ## An environment to look up polarized words
-    if (!is.environment(polarity.frame)) {
+    ## An hash key to look up polarized words
+    if (!is.hash(polarity.frame)) {
         if (!is.data.frame(polarity.frame)) {
-            stop(paste("Please supply a dataframe or environment", 
+            stop(paste("Please supply a dataframe or hash_key", 
                "(see `sentiment_frame`) to polarity.frame"))
         }
         polarity.frame <- hash(polarity.frame)
@@ -383,12 +382,12 @@ polarity <- function (text.var, grouping.var = NULL,
     amplifiers <- amplifiers[!amplifiers %in% ls(polarity.frame)]
     deamplifiers <- deamplifiers[!deamplifiers %in% ls(polarity.frame)]
 
-    ## create environment to lookup amps, de-amps and negators
+    ## create hash key to lookup amps, de-amps and negators
     alter <- alter_env(negators, amplifiers, deamplifiers)
 
     ## grab the polarized/alter words to search for spaces and insert into textvar
-    posneg <- ls(polarity.frame)
-    words <- c(posneg, ls(alter))
+    posneg <- polarity.frame[[1]]
+    words <- c(posneg, alter[[1]])
 
     ## create sentence lengths
     counts <- unlist(lapply(DF[, "text.var"], function(x) length(bag_o_words(x))))
@@ -428,7 +427,7 @@ polarity <- function (text.var, grouping.var = NULL,
     counts <- unlist(lapply(DF[, "text.var2"], function(x) length(bag_o_words(x))))
     scores <- sapply(output, sum)/sqrt(counts)
     all <- data.frame(group.var =  DF[, "grouping"], wc = counts, 
-        polarity = scores)
+        polarity = scores, stringsAsFactors = FALSE)
 
     ## Functions to grab pos and neg words and then add to all data.frame
     pwords <- function(x, y) {
@@ -600,7 +599,7 @@ print.polarity_count <-
 
 #' Polarity Score (Sentiment Analysis)
 #' 
-#' \code{polarity_frame} - Generate a polarity lookup environment or data.frame 
+#' \code{polarity_frame} - Generate a polarity lookup hash key 
 #' for use with the \code{polarity.frame} argument in the \code{polarity} 
 #' function.
 #' 
@@ -612,12 +611,10 @@ print.polarity_count <-
 #' @param neg.weights A vector of weights to weight each negative word by.  
 #' Length must be equal to length of \code{negatives} or length 1 (if 1 weight 
 #' will be recycled). 
-#' @param envir logical.  If \code{TRUE} a lookup table (a dataframe within 
-#' an environment) is produced rather than a data.frame.
 #' @export
 #' @rdname polarity
 polarity_frame <- function(positives, negatives, pos.weights = 1, 
-    neg.weights = -1, envir = TRUE) {
+    neg.weights = -1, key = TRUE) {
     
     .Deprecated(msg = paste("polarity_frame is deprecated.  Please use the", 
         "sentiment_frame function instead."), 
@@ -638,12 +635,8 @@ polarity_frame <- function(positives, negatives, pos.weights = 1,
         neg.weights <- rep(neg.weights, nlen)
     }
     dat <- data.frame(words = c(positives, negatives), polarity = c(pos.weights, 
-        neg.weights))
-    if (envir) {
-        hash(dat)
-    } else {
-        dat
-    }
+        neg.weights), stringsAsFactors = FALSE)
+    hash(dat)
 }
 
 
@@ -709,6 +702,7 @@ plot.polarity <- function(x, bar.size = 5, low = "blue", mid = "grey99",
     nms <- c("group", "dialogue", "word_count", "Polarity")
     names(dat)[c(1)] <-  nms[1]
     names(dat2)[c(1, 6, 2, 3)] <- nms
+
     dat2 <- data.frame(dat2, with(dat2, 
         gantt(dialogue, list(group, seq_along(group)))))
     if (is.null(nrow)) {
@@ -719,7 +713,7 @@ plot.polarity <- function(x, bar.size = 5, low = "blue", mid = "grey99",
     }
 
     ## reverse the levels so first factor level is on top
-    dat2$group <- factor(dat2$group, levels = rev(levels(dat2$group)))
+    dat2$group <- factor(dat2$group, levels = sort(unique(dat2$group), decreasing = TRUE))
 
     ## the filled polarity Gantt plot
     XX <- ggplot(dat2, aes(color = Polarity )) + 
@@ -798,7 +792,7 @@ alter_env <- function(negators, amplifiers, deamplifiers) {
     a <- rep(2, length(amplifiers))
     d <- rep(3, length(deamplifiers)) 
     hash(data.frame(words=c(negators, amplifiers, deamplifiers), 
-        value=c(n, a, d)))
+        value=c(n, a, d), stringsAsFactors = FALSE))
 }
 
 polarity_helper <- function(tv, hit, polenv, altenv, count, amp.weight, 
@@ -1127,7 +1121,8 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
     ## average polarity per edge
     cuts <- cut(df_polarity[, "polarity"], brks)
 
-    df_polarity[, "color"] <- cuts %l% data.frame(cut(brks, brks), cols)
+    df_polarity[, "color"] <- cuts %l% data.frame(cut(brks, brks), cols, 
+        stringsAsFactors = FALSE)
 
     ## split it back into the iterative per row 
     ## dataframes of aggregated values
@@ -1175,7 +1170,8 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
         lab <- numbformat(cur_pol, digits)
         lab <- ifelse(symb == "", "0", sprintf("%s (%s)", lab, symb))
         E(grp[[i]])$label <- NA
-        curkey <- data.frame(paste2(cur[cur_edge, 1:2], sep="|-|qdap|-|"), lab)
+        curkey <- data.frame(paste2(cur[cur_edge, 1:2], sep="|-|qdap|-|"), lab, 
+            stringsAsFactors = FALSE)
 
         ## Set up widths and colors
         tcols <- cur[, c("from", "to", "color"), drop=FALSE]
@@ -1508,7 +1504,8 @@ Network.polarity <- function(x, negative = "blue", positive = "red",
     ## average polarity per edge
     cuts <- cut(the_polarity[, "polarity"], brks)
 
-    the_polarity[, "color"] <- cuts %l% data.frame(cut(brks, brks), cols)
+    the_polarity[, "color"] <- cuts %l% data.frame(cut(brks, brks), cols, 
+        stringsAsFactors = FALSE)
 
     ## split it back into the from --> to
     ## dataframes of aggregated values
@@ -1537,7 +1534,8 @@ Network.polarity <- function(x, negative = "blue", positive = "red",
 
     ## create current edge label and polarity sign
     lab <- numbformat(thedat[, "polarity"], digits)
-    curkey <- data.frame(paste2(thedat[, c("from", "to")], sep=qsep), lab)
+    curkey <- data.frame(paste2(thedat[, c("from", "to")], sep=qsep), lab, 
+        stringsAsFactors = FALSE)
 
     ## Set up widths and colors
     tcols <- thedat[, c("from", "to", "color"), drop=FALSE]
@@ -1558,6 +1556,7 @@ Network.polarity <- function(x, negative = "blue", positive = "red",
     attributes(theplot)[["network.type"]] <- "polarity"
     attributes(theplot)[["legend.label"]] <- c("Negative", "Neutral", "Positive")
     attributes(theplot)[["n.color.breaks"]] <- max.color.breaks
+    attributes(theplot)[["color.locs"]] <- as.numeric(cuts)    
     theplot
 }
 
@@ -1570,7 +1569,8 @@ splitter <- function(x, sep) {
 ## function to added color to edges in network plot
 colorize <- function(x, y) {
     E(y)$color <- paste2(edge_capture(y), sep="|-|qdap|-|") %l%
-        data.frame(edge=paste2(x[, 1:2], sep="|-|qdap|-|"), cols=x[, "color"])
+        data.frame(edge=paste2(x[, 1:2], sep="|-|qdap|-|"), cols=x[, "color"], 
+            stringsAsFactors = FALSE)
     y
 }
 

@@ -5,7 +5,7 @@
 \title{Polarity Score (Sentiment Analysis)}
 \usage{
 polarity(text.var, grouping.var = NULL,
-  polarity.frame = qdapDictionaries::env.pol, constrain = FALSE,
+  polarity.frame = qdapDictionaries::key.pol, constrain = FALSE,
   negators = qdapDictionaries::negation.words,
   amplifiers = qdapDictionaries::amplification.words,
   deamplifiers = qdapDictionaries::deamplification.words,
@@ -13,7 +13,7 @@ polarity(text.var, grouping.var = NULL,
   n.after = 2, rm.incomplete = FALSE, digits = 3, ...)
 
 polarity_frame(positives, negatives, pos.weights = 1, neg.weights = -1,
-  envir = TRUE)
+  key = TRUE)
 }
 \arguments{
 \item{text.var}{The text variable.}
@@ -22,8 +22,8 @@ polarity_frame(positives, negatives, pos.weights = 1, neg.weights = -1,
 one word list for all text.  Also takes a single grouping variable or a list
 of 1 or more grouping variables.}
 
-\item{polarity.frame}{A dataframe or environment containing a dataframe of
-positive/negative words and weights.}
+\item{polarity.frame}{A dataframe or hash key of positive/negative words and
+weights.}
 
 \item{negators}{A character vector of terms reversing the intent of a
 positive or negative word.}
@@ -72,9 +72,6 @@ will be recycled).}
 \item{neg.weights}{A vector of weights to weight each negative word by.
 Length must be equal to length of \code{negatives} or length 1 (if 1 weight
 will be recycled).}
-
-\item{envir}{logical.  If \code{TRUE} a lookup table (a dataframe within
-an environment) is produced rather than a data.frame.}
 }
 \value{
 Returns a list of:
@@ -103,7 +100,7 @@ use}
 \code{polarity} - Approximate the sentiment (polarity) of text by grouping
 variable(s).
 
-\code{polarity_frame} - Generate a polarity lookup environment or data.frame
+\code{polarity_frame} - Generate a polarity lookup hash key
 for use with the \code{polarity.frame} argument in the \code{polarity}
 function.
 }
@@ -181,10 +178,9 @@ plot(poldat3, nrow=4)
 qheat(scores(poldat3)[, -7], high="red", order.b="ave.polarity")
 
 ## Create researcher defined sentiment.frame
-POLENV <- sentiment_frame(positive.words, negative.words)
-POLENV
-ls(POLENV)[1:20]
-c("abrasive", "abrupt", "happy") \%ha\% POLENV
+POLKEY <- sentiment_frame(positive.words, negative.words)
+POLKEY
+c("abrasive", "abrupt", "happy") \%hl\% POLKEY
 
 ## ANIMATION
 #===========

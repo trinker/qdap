@@ -414,3 +414,18 @@ NULL
 #' @usage data(sample.time.span) 
 #' @format A data frame with 9 rows and 6 variables 
 NULL
+
+#' Syllable Lookup Environment
+#' 
+#' A dataset containing a syllable lookup environment (see \code{DICTIONARY}).
+#' 
+#' @details For internal use.
+#' 
+#' @docType data 
+#' @keywords datasets 
+#' @name env.syl 
+#' @usage data(env.syl) 
+#' @format A environment with the DICTIONARY data set.  
+#' @references 
+#' \href{http://archive.ics.uci.edu/ml/machine-learning-databases/undocumented/connectionist-bench/nettalk/}{UCI Machine Learning Repository website}
+NULL

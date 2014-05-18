@@ -54,3 +54,27 @@ from_to <- function(x) {
         "end"), stringsAsFactors = FALSE)
 
 }
+
+## check if something inherits "qdap_hash"
+is.hash <- function(x) inherits(x, "qdap_hash")
+
+env_look <- function(terms, envir, missing = NA) {
+    
+    hits <- which(!is.na(match(terms, names(as.list(envir)))))
+    x <- rep(ifelse(is.null(missing), NA, missing), length(terms))
+    
+    x[hits] <- recoder(terms[hits], envr = envir)
+
+    if (is.null(missing)) { 
+        x[is.na(x)] <- terms[is.na(x)]
+        x
+    }   
+    x
+	
+}
+
+## Helper function
+recoder <- function(x, envr){                               
+    x <- as.character(x) #turn the numbers to character                                                        
+    unlist(lapply(x, get, envir = envr))                      
+}  
