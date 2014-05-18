@@ -3528,7 +3528,8 @@ plot(x, label = TRUE, high = "red", lab.digits = 1, zero.replace = "")
 library(ggplot2);library(reshape2)
 dat <- char_table(DATA$state, list(DATA$sex, DATA$adult))
 dat2 <- colsplit2df(melt(dat$raw), keep.orig = TRUE)
-dat2$adult2 <- lookup(dat2$adult, c(0, 1), c("child", "adult"))
+dat2$adult2 <- lookup(as.numeric(as.character(dat2$adult)), 
+    c(0, 1), c("child", "adult"))
 head(dat2, 15)
 ```
 
