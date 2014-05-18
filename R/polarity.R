@@ -614,7 +614,7 @@ print.polarity_count <-
 #' @export
 #' @rdname polarity
 polarity_frame <- function(positives, negatives, pos.weights = 1, 
-    neg.weights = -1, key = TRUE) {
+    neg.weights = -1) {
     
     .Deprecated(msg = paste("polarity_frame is deprecated.  Please use the", 
         "sentiment_frame function instead."), 

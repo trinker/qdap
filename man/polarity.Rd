@@ -12,8 +12,7 @@ polarity(text.var, grouping.var = NULL,
   question.weight = 0, amplifier.weight = 0.8, n.before = 4,
   n.after = 2, rm.incomplete = FALSE, digits = 3, ...)
 
-polarity_frame(positives, negatives, pos.weights = 1, neg.weights = -1,
-  key = TRUE)
+polarity_frame(positives, negatives, pos.weights = 1, neg.weights = -1)
 }
 \arguments{
 \item{text.var}{The text variable.}

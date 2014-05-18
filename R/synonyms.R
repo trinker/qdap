@@ -91,7 +91,6 @@ syn <- synonyms
 #' function.
 #' 
 #' @param synonym.list A named list of lists (or vectors) of synonyms.
-#' @param envir logical.  If \code{TRUE} a lookup table (a dataframe within 
 #' @param prior.frame A prior synonyms data.frame in the format produced by 
 #' \code{synonym_frame}.
 #' @export
