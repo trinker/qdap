@@ -83,7 +83,7 @@
 #' suppressMessages(print(summary(z)))
 #' 
 #' ## remove print method
-#' as.data.frame(z_unclass)
+#' as.data.frame(summary(z))
 #' }
 summary.cmspans <-
 function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,

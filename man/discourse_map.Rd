@@ -107,7 +107,7 @@ lapply(seq_along(plot_dat), function(i){
 
     V(THE_PLOT)$sex <- V(THE_PLOT)$name \%l\% raj.demographics[, 1:2]
     V(THE_PLOT)$color <- ifelse(V(THE_PLOT)$sex=="f", "pink", "lightblue")
-    V(THE_PLOT)$family <- V(THE_PLOT)$name \%l+\% raj.demographics[, c(1, 3)]
+    V(THE_PLOT)$family <- V(THE_PLOT)$name \%lc+\% raj.demographics[, c(1, 3)]
     V(THE_PLOT)$label.color <- lookup(V(THE_PLOT)$family, fam_key)
 
     plot(THE_PLOT, edge.curved=TRUE)

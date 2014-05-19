@@ -232,12 +232,10 @@ saveHTML(FUN(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
 ## Detect OS
 type <- if(.Platform$OS.type == "windows") shell else system
 
-saveHTML(FUN2(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
+saveHTML(FUN(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
     ani.height = 1000, ani.width=650,
     outdir = loc2, single.opts =
     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
-
-FUN2(TRUE)
 
 #=====================#
 ## Complex Animation ##

@@ -95,7 +95,7 @@ plot(summary(z))
 suppressMessages(print(summary(z)))
 
 ## remove print method
-as.data.frame(z_unclass)
+as.data.frame(summary(z))
 }
 }
 \seealso{
