@@ -555,7 +555,7 @@ The following functions will be utilized in this section (click to view more):<b
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/hash.html" target="_blank">
-    <input type="submit" value="hash"><input type="submit" value="hash_look"><input type="submit" value="%ha%"> - `r HR("#hash", "Hash Table/Dictionary Lookup")`
+    <input type="submit" value="hash"><input type="submit" value="hash_look"><input type="submit" value="%hl%"> - `r HR("#hash", "Hash Table/Dictionary Lookup")`
 </form>
 
 
@@ -585,7 +585,7 @@ qcv(terms = "mpg cyl  disp  hp drat    wt  qsec vs am gear carb")
 
 <h4 id="hash">Dictionary/Lookup</h4>  
 
-Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The `r FUN("lookup")` & `r HR2("%l%")` functions provide a fast environment lookup for single usage. The `r FUN("hash")` & `r HR2("http://trinker.github.io/qdap_dev/hash.html", "hash_lookup")`/`r HR2("http://trinker.github.io/qdap_dev/hash.html", "%ha%")` functions provide a fast environment lookup for multiple uses of the same hash table.
+Often the researcher who deals with text data will have the need to lookup values quickly and return an accompanying value.  This is often called a dictionary, hash, or lookup.  This can be used to find corresponding values or recode variables etc.  The `r FUN("lookup")` & `r HR2("%l%")` functions provide a fast environment lookup for single usage. The `r FUN("hash")` & `r HR2("http://trinker.github.io/qdap_dev/hash.html", "hash_lookup")`/`r HR2("http://trinker.github.io/qdap_dev/hash.html", "%hl%")` functions provide a fast environment lookup for multiple uses of the same hash table.
 
 `r FT(orange, 5, text="&diams;")` **`r FUN("lookup")`**- *Dictionary/Look Up Examples* `r FT(orange, 5, text="&diams;")`
 
@@ -639,9 +639,9 @@ hashTab <- hash(DF)
 ## Create a vector to lookup
 x <- sample(DF[, 1], 20, TRUE)
 
-## Lookup x in the hash with `hash_look` or `%ha%`
+## Lookup x in the hash with `hash_look` or `%hl%`
 hash_look(x, hashTab)
-x %ha% hashTab
+x %hl% hashTab
 ```
 
 <h4 id="time">Time Conversion</h4>  

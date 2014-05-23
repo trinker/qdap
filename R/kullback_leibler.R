@@ -43,7 +43,7 @@ function(x, y = NULL){
         x <- x
     }
     if (is.null(y)) { 
-        z <- v_outer(x, "kl")
+        z <- v_outer(x, kl)
     } else {
         z <- kl(x = x, y = y)
     }
