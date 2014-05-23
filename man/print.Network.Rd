@@ -4,12 +4,12 @@
 \title{Prints a Network Object}
 \usage{
 \method{print}{Network}(x, title = NA, title.color = "black",
-  seed = sample(1:10000, 1), layout = layout.auto, legend = c(-0.5, -1.5,
-  0.5, -1.45), legend.cex = 1, bg = NULL, legend.text.color = "black",
-  legend.gradient = NULL, vertex.color = "grey80", vertex.size = 9,
-  vertex.frame.color = NA, vertex.label.color = "grey40",
-  vertex.label.cex = 1.1, edge.label.color = "black",
-  edge.label.cex = 0.9, ...)
+  seed = sample(1:10000, 1), layout = igraph::layout.auto,
+  legend = c(-0.5, -1.5, 0.5, -1.45), legend.cex = 1, bg = NULL,
+  legend.text.color = "black", legend.gradient = NULL,
+  vertex.color = "grey80", vertex.size = 9, vertex.frame.color = NA,
+  vertex.label.color = "grey40", vertex.label.cex = 1.1,
+  edge.label.color = "black", edge.label.cex = 0.9, ...)
 }
 \arguments{
 \item{x}{The Network object.}

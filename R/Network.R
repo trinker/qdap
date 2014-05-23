@@ -51,7 +51,7 @@ function(x, ...){
 #' @method print Network
 #' @export
 print.Network <- function(x, title = NA, title.color = "black",
-    seed = sample(1:10000, 1), layout=layout.auto,  
+    seed = sample(1:10000, 1), layout=igraph::layout.auto,  
     legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, bg=NULL, 
     legend.text.color = "black", legend.gradient = NULL, 
     vertex.color = "grey80", vertex.size = 9, vertex.frame.color = NA,

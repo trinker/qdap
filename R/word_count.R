@@ -178,7 +178,7 @@ function(text.var, byrow = TRUE, missing = NA, apostrophe.remove = TRUE,
 #' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
 #' @rdname word_count
 #' @export
-character_table <- function(text.var, grouping.var, percent = TRUE, 
+character_table <- function(text.var, grouping.var=NULL, percent = TRUE, 
     prop.by.row = TRUE, zero.replace = 0, digits = 2, ...) {
 
     if(is.null(grouping.var)) {
@@ -244,6 +244,7 @@ character_table <- function(text.var, grouping.var, percent = TRUE,
     )
     out
 }
+
 #' Prints a character_table object
 #' 
 #' Prints a character_table object.

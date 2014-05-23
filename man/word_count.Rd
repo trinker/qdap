@@ -16,11 +16,11 @@ wc(text.var, byrow = TRUE, missing = NA, digit.remove = TRUE,
 character_count(text.var, byrow = TRUE, missing = NA,
   apostrophe.remove = TRUE, digit.remove = TRUE, count.space = FALSE)
 
-character_table(text.var, grouping.var, percent = TRUE, prop.by.row = TRUE,
-  zero.replace = 0, digits = 2, ...)
+character_table(text.var, grouping.var = NULL, percent = TRUE,
+  prop.by.row = TRUE, zero.replace = 0, digits = 2, ...)
 
-char_table(text.var, grouping.var, percent = TRUE, prop.by.row = TRUE,
-  zero.replace = 0, digits = 2, ...)
+char_table(text.var, grouping.var = NULL, percent = TRUE,
+  prop.by.row = TRUE, zero.replace = 0, digits = 2, ...)
 }
 \arguments{
 \item{text.var}{The text variable}
