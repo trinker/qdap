@@ -4,7 +4,7 @@
 #' thousand one).
 #' 
 #' @param text.var  The text variable.
-#' @param num.paste logical.  If \code{TURE} a the elements of larger numbers are 
+#' @param num.paste logical.  If \code{TRUE} a the elements of larger numbers are 
 #' separated with spaces.  If \code{FALSE} the elements will be joined without 
 #' spaces.
 #' @return Returns a vector with abbreviations replaced.
@@ -30,9 +30,12 @@
 replace_number  <-
 function(text.var, num.paste = TRUE) {
 
+    ones <- c("zero", "one", "two", "three", "four", "five", "six", "seven", 
+        "eight", "nine") 
+
     num.paste <- ifelse(num.paste, "separate", "combine")
-    
-    unlist(lapply(gsub(",([0-9])", "\\1", text.var), function(x) {
+ 
+    unlist(lapply(lapply(gsub(",([0-9])", "\\1", text.var), function(x) {
             if (!is.na(x) & length(unlist(strsplit(x, 
                 "([0-9])", perl = TRUE))) > 1) {
                 num_sub(x, num.paste = num.paste)
@@ -40,7 +43,7 @@ function(text.var, num.paste = TRUE) {
                 x
             }
         }
-    ))
+    ), function(x) mgsub(0:9, ones, x)))
     
 }
 

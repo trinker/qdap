@@ -28,6 +28,10 @@ The `qdapTools` package now houses several former qdap functions.  While
 
 BUG FIXES
 
+* `replace_number` did not replace single digits numbers.  Spotted by Ben Bolker.
+  This behavior has been fixed and unit testing added for this function. See
+  issue # 178.
+
 NEW FEATURES
 
 * `sub_holder` added; this function holds the place for particular character 
@@ -43,6 +47,10 @@ NEW FEATURES
 * `polarity` picks up a `Network` method.
 
 * `formality` picks up a `Network` method.
+
+* qdap officially begins utilizing the `testthat` package for unit testing, 
+  though only a few functions have begun the process, more will be added over 
+  time.
 
 MINOR FEATURES
 

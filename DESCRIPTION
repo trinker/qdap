@@ -42,7 +42,8 @@ Suggests:
     lda,
     proxy,
     stringi,
-    SnowballC
+    SnowballC,
+    testthat
 LazyData: TRUE
 VignetteBuilder: knitr
 Description: This package automates many of the tasks associated with
@@ -59,3 +60,4 @@ Description: This package automates many of the tasks associated with
 License: GPL-2
 URL: http://trinker.github.com/qdap/
 BugReports: http://github.com/trinker/qdap/issues
+Roxygen: list(wrap = FALSE)

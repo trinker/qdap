@@ -8,7 +8,7 @@ replace_number(text.var, num.paste = TRUE)
 \arguments{
 \item{text.var}{The text variable.}
 
-\item{num.paste}{logical.  If \code{TURE} a the elements of larger numbers are
+\item{num.paste}{logical.  If \code{TRUE} a the elements of larger numbers are
 separated with spaces.  If \code{FALSE} the elements will be joined without
 spaces.}
 }
