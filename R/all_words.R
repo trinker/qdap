@@ -32,6 +32,13 @@
 #' all_words(raj$dialogue, contains="conc")
 #' x3 <- all_words(raj$dialogue)
 #' head(x3, 10)
+#' x4 <- all_words(raj$dialogue, contains="the)
+#' head(x4)
+#' x5 <- all_words(raj$dialogue, contains="read")
+#' head(x5)
+#' 
+#' ## Filter by nchar and stopwords
+#' Filter(head(x3), min = 3)
 #' }
 all_words <- 
 function(text.var, begins.with = NULL, contains = NULL, alphabetical = TRUE, apostrophe.remove = FALSE, ...){

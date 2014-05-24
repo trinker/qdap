@@ -839,6 +839,10 @@ plot.weighted_wfm <- function(x, non.zero = FALSE, digits = 0, by.column = NULL,
 #' 
 #' DATA[, "state"] <- Filter(DATA[, "state"], 4)
 #' DATA <- qdap::DATA
+#' 
+#' ## Filter `all_words`
+#' head(all_words(raj$dialogue))
+#' Filter(head(all_words(raj$dialogue)), min = 3)
 #' }
 Filter <-
 function(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL, 
