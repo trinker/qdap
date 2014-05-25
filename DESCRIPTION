@@ -10,8 +10,8 @@ Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Depends:
     R (>= 3.0.0),
     ggplot2 (>= 0.9.3.1),
-    qdapDictionaries,
-    qdapTools,
+    qdapDictionaries (>= 1.0.0),
+    qdapTools (>= 1.0.1),
     RColorBrewer
 Imports:
     chron,
