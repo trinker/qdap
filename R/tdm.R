@@ -704,8 +704,10 @@ apply_as_tm <- function(wfm.obj, tmfun, ..., to.qdap = TRUE){
 #' characters.
 #' @param ignore.case logical.  If \code{TRUE} stop words will be removed 
 #' regardless of case.  
-#' @note \code{aply_ad_df} coerces to a dataframe with columns named `docs` and 
+#' @note \code{aply_as_df} coerces to a dataframe with columns named `docs` and 
 #' the other named `text`.
+#' @return \code{apply_as_df} - Returns the output typical of the applied 
+#' \pkg{qdap} function.
 #' @seealso \code{\link[qdap]{Filter}}
 #' @export
 #' @rdname tdm

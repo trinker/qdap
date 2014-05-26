@@ -44,7 +44,7 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' ## `sentSpli`t EXAMPLE:
+#' ## `sentSplit` EXAMPLE:
 #' (out <- sentSplit(DATA, "state"))
 #' sentSplit(DATA, "state", stem.col = TRUE)
 #' sentSplit(DATA, "state", text.place = "left")

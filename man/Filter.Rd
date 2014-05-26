@@ -139,6 +139,10 @@ Filter(x, 4, stopwords="raptors", ignore.case = FALSE)
 
 DATA[, "state"] <- Filter(DATA[, "state"], 4)
 DATA <- qdap::DATA
+
+## Filter `all_words`
+head(all_words(raj$dialogue))
+Filter(head(all_words(raj$dialogue)), min = 3)
 }
 }
 

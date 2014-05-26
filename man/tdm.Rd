@@ -108,6 +108,9 @@ a \code{\link[tm]{Corpus}}.
 \code{apply_as_tm} - Applies a tm oriented function to a
 \code{\link[qdap]{wfm}} and attempts to simplify back to a
 \code{\link[qdap]{wfm}} or \code{weight} format.
+
+\code{apply_as_df} - Returns the output typical of the applied
+\pkg{qdap} function.
 }
 \description{
 \code{tdm} - Create term document matrices from raw text or
@@ -145,7 +148,7 @@ Produces output that is identical to the \code{tm} package's
 tm packages.
 }
 \note{
-\code{aply_ad_df} coerces to a dataframe with columns named `docs` and
+\code{aply_as_df} coerces to a dataframe with columns named `docs` and
 the other named `text`.
 }
 \examples{
