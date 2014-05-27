@@ -86,17 +86,3 @@ test_that("cm_2long gives the desired output for time spans",{
  
 })
     
-test_that("cm_2long gives the desired output for data.frames",{
-    
-    codes <- qcv(dc, sf, wes, pol, rejk, lk, azx, mmm)
-    x1 <- cm_df.temp(DATA, "state", codes)
-    #fill it randomly
-    x1[, 7:14] <- lapply(7:14,  function(i) {
-        set.seed(10)
-        sample(0:1, nrow(x1), TRUE)
-    })
-    out2 <- cm_2long(x1)
-    expect_true(all(dim(out2) == c(224, 10)))
-    expect_true(is.data.frame(out2))
-
-})
