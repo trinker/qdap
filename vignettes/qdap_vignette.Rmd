@@ -25,43 +25,113 @@ yt <- function(URL) {
 }
 #cite in text using `r citet(bib[1])`
 ```
+# qdap Package Vignette
+# Tyler Rinker
 
+qdap `r citep(bib[["Rinker2013a"]])` is an R package designed to assist in quantitative discourse analysis. The package stands as a bridge between qualitative transcripts of dialogue and statistical analysis and visualization.  qdap was born out of a frustration with current discourse analysis programs. Packaged programs are a closed system, meaning the researcher using the method has little, if any, influence on the program applied to her data.
 
-FUN(dat[, 1], dat[, 2])
+R already has thousands of excellent packages for statistics and visualization. qdap is designed to stand as a bridge between the qualitative discourse of a transcript and the computational power and freedom that R offers. As qdap returns the power to the researcher it will also allow the researcher to be more efficient and thus effective and productive in data analysis.  The qdap package provides researchers with the tools to analyze data and more importantly is a dynamic system governed by the data, shaped by theory, and continuously refined by the field.
 
-path <- "C:/Users/trinker/GitHub/trinker.github.com/qdap_dev"
-#  path <- "C:/Users/trinker/GitHub/trinker.github.com/qdap"
-URL <- "http://trinker.github.io/qdap_dev/"
-#  url <- "http://trinker.github.io/qdap"
+...if you can dream up an analysis then qdap and R can help get you there.
 
-inds <- readLines(file.path(path, "index.html"))
-h3s <- grep("<h3", inds)
-h2s <- grep("<h2", inds)
+`r IM("imgs/qdaplogo.png", width=350, height=250)`
 
-inds <- inds[head(h3s, 1):(tail(h2s, 1) - 1)]
-inds <- inds[12: tail(grep("</ul>", inds), 1)]
-h3s <- grep("<h3", inds)
-dat2 <- data.frame(start = h3s + 4, end = c(tail(h3s, -1) - 1, length(inds)))
+The following vignette is a loose chronological road map for utilizing the tools provided by qdap.  
 
-inds <- substring(inds, 5)
+<hr>
+<h3 id="toc">Select from sections below:</h3>
 
+<div style="float: left; width: 50%;">
+<ul>
+<div>1.  `r HR("#project", "Starting a New Project")`    </div> 
+<div>2.  `r HR("#import_export", "Import/Export Discourse Data")`    </div> 
+<div>3.  `r HR("#viewing", "View the Data")`    </div> 
+<div>4.  `r HR("#tools", "Generic qdap Tools")`    </div> 
+<div>5.  `r HR("#cleaning", "Cleaning/Preparing the Data")`    </div> 
+<div>6.  `r HR("#reshaping", "Reshaping the Data")`    </div> 
+<div>7.  `r HR("#word", "Extract Words")`    </div> 
+<div>8.  `r HR("#coding", "Qualitative Coding System")`    </div> 
+<div>9.  `r HR("#counts", "Word Counts and Descriptive Statistics")`    </div> 
+<div>10.  `r HR("#measures", "Word Measures and Scoring")`    </div> 
+<div>11.  `r HR("#visualization", "Visualizing Discourse Data")`    </div> 
+<div>12.  `r HR("#id", "ID Sentences")`    </div> 
+<div>13.  `r HR("#tm", "tm Package Compatability")`    </div> 
+<div>14.  `r HR("#data", "Data Sets")`    </div> 
+<div>15.  `r HR("#dict", "Dictionaries and Word Lists")`    </div>   
+<div>16.  `r HR("#install", "Installation Issues")`    </div>     
+<div>17.  `r HR("#connect", "Recommended Packages (Extending qdap)")`    </div>   
 
+</ul>
+</div>
+<div style="float: right; width: 50%;">
+<ul>
+<div><b>Symbol Conventions:</b></div>  
+<div>`r FT(orange, 5, text="&diams;")` = Example (R code)    </div> 
+<div><b>`r FT(firebrick, 5, text="[YT]")`</b> = Video Demo (click to watch)    </div> 
+</ul>
+</div>
+<br style="clear:both;"/>
 
-invisible(lapply(1:nrow(dat2), function(i) {
-    rws <- inds[dat2[i, 1]:dat2[i, 2]]
-    
-    funs <- unlist(genXtract(rws, ".html\">", "</a>"))
-    descripts <- unlist(genXtract(rws, "<br />", "</li>"))
-    
-    rws <- rws[grepl("<code>", rws)]
-    rws <- paste0("<form action=\"", file.path(URL, paste0(funs, ".html")), " target=\"_blank\" \">
-    <input type=\"submit\" value=\"", funs, "\"> - ", descripts, "\n</form>", "\n") 
-    
-    
-    cat(paste0("============\nfun group", i, "\n============\n"))
-    cat(paste0("The following functions will be utilized in this section (click to view more):    \n\n"))
-    cat(paste(rws, collapse = "\n")); cat("\n")
-}))
+```{r, echo=FALSE, eval=FALSE}
+## library(qdap)
+## dat <- data.frame(
+##     x = c("project", "import_export", "tools", "cleaning", "viewing", 
+##         "reshaping", "word", "coding", "counts", "measures", "visualization", 
+##         "id", "data", "dict", "install"),
+##     
+##     y = c("Starting a New Project", "Import/Export Discourse Data", 
+##         "Generic qdap Tools", "Cleaning/Preparing the Data", "View the Data", 
+##         "Reshaping the Data", "Extract/Analyze Words", "Qualitative Coding System", 
+##         "Word Counts and Descriptive Statistics", "Word Measures and Scoring", 
+##         "Visualizing Discourse Data", "ID Sentences", 
+##         "Data Sets", "Dictionaries and Word Lists", "Installation Issues")
+## )
+## 
+## FUN <- function(x, y) {
+##     cat("\n\n")
+##     m <- paste0("<div>", 1:length(x), ".  `r HR(\"#", x, "\", \"", y, "\")`    </div> ")
+##     cat(paste(m, collapse="\n")); cat("\n")
+##     cat("\n\n")
+##     n <- paste0("<h3 id=\"", x, "\">", y, "</h3>")
+##     cat(paste(n, collapse="\n")); cat("\n")
+## }
+## 
+## FUN(dat[, 1], dat[, 2])
+## 
+## path <- "C:/Users/trinker/GitHub/trinker.github.com/qdap_dev"
+## #  path <- "C:/Users/trinker/GitHub/trinker.github.com/qdap"
+## URL <- "http://trinker.github.io/qdap_dev/"
+## #  url <- "http://trinker.github.io/qdap"
+## 
+## inds <- readLines(file.path(path, "index.html"))
+## h3s <- grep("<h3", inds)
+## h2s <- grep("<h2", inds)
+## 
+## inds <- inds[head(h3s, 1):(tail(h2s, 1) - 1)]
+## inds <- inds[12: tail(grep("</ul>", inds), 1)]
+## h3s <- grep("<h3", inds)
+## dat2 <- data.frame(start = h3s + 4, end = c(tail(h3s, -1) - 1, length(inds)))
+## 
+## inds <- substring(inds, 5)
+## 
+## 
+## 
+## invisible(lapply(1:nrow(dat2), function(i) {
+##     rws <- inds[dat2[i, 1]:dat2[i, 2]]
+##     
+##     funs <- unlist(genXtract(rws, ".html\">", "</a>"))
+##     descripts <- unlist(genXtract(rws, "<br />", "</li>"))
+##     
+##     rws <- rws[grepl("<code>", rws)]
+##     rws <- paste0("<form action=\"", file.path(URL, paste0(funs, ".html")), " target=\"_blank\" \">
+##     <input type=\"submit\" value=\"", funs, "\"> - ", descripts, "\n</form>", "\n") 
+##     
+##     
+##     cat(paste0("============\nfun group", i, "\n============\n"))
+##     cat(paste0("The following functions will be utilized in this section (click to view more):    \n\n"))
+##     cat(paste(rws, collapse = "\n")); cat("\n")
+## }))
+
 
 ```
 
@@ -5186,6 +5256,11 @@ The following data sets are included with qdap for demonstration purposes (click
 </form>
 </div>
 
+<form action="http://trinker.github.io/qdap_dev/hamlet.html" target="_blank">
+    <input type="submit" value="hamlet"> - Hamlet (Complete & Split)
+</form>
+</div>
+
 ```{r eval=FALSE, echo = FALSE}
 path <- "C:/Users/trinker/GitHub/trinker.github.com/qdapDictionaries"
 #  path <- "C:/Users/trinker/GitHub/trinker.github.com/qdap"
@@ -5258,12 +5333,12 @@ The following dictionaries/word lists are utilized by qdap (click to view more)
     <input type="submit" value="emoticon"> - Emoticons Data Set
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries/env.syl.html" target="_blank" ">
-    <input type="submit" value="env.syl"> - Syllable Lookup Environment
+<form action="http://trinker.github.io/qdapDictionaries/key.syl.html" target="_blank" ">
+    <input type="submit" value="key.syl"> - Syllable Lookup Key
 </form>
 
-<form action="http://trinker.github.io/qdapDictionaries/env.syn.html" target="_blank" ">
-    <input type="submit" value="env.syn"> - Syllable Lookup Environment
+<form action="http://trinker.github.io/qdapDictionaries/key.syn.html" target="_blank" ">
+    <input type="submit" value="key.syn"> - Synonyms Lookup Key
 </form>
 
 <form action="http://trinker.github.io/qdapDictionaries/Fry_1000" target="_blank" ">
