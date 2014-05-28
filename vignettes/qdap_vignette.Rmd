@@ -5,7 +5,7 @@
 
 ```{r setup, include=FALSE}
 # set global chunk options
-library(knitr); library(qdap); library(tm)
+library(knitr); library(tm); library(qdap);
 opts_chunk$set(cache=FALSE, tidy=FALSE, warning=FALSE)
 library(knitcitations)#; library(reports); library(qdapTools)
 bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
