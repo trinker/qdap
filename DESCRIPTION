@@ -37,7 +37,6 @@ Imports:
 Suggests:
     english,
     koRpus,
-    knitcitations,
     knitr,
     lda,
     proxy,
