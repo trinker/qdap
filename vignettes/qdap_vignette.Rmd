@@ -8,7 +8,7 @@
 library(knitr); library(tm); library(qdap); #library(reports)
 opts_chunk$set(cache=FALSE, tidy=FALSE, warning=FALSE)
 #library(knitcitations); library(reports); library(qdapTools)
-bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
+#bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
 
 source("funs/utils_functions.txt")
 source("funs/extra_functions.txt")    
