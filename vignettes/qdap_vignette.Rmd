@@ -5,7 +5,7 @@
 
 ```{r setup, include=FALSE}
 # set global chunk options
-library(knitr); library(tm); library(qdap);
+library(knitr); library(tm); library(qdap); library(reports)
 opts_chunk$set(cache=FALSE, tidy=FALSE, warning=FALSE)
 library(knitcitations)#; library(reports); library(qdapTools)
 bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
@@ -24,6 +24,19 @@ yt <- function(URL) {
   paste0("<a href=\"", URL, "\" target=\"_blank\" style=\"text-decoration: none\"><b><font size=\"5\" color=\"#B22222\">[YT]</font></b></a>\n")
 }
 #cite in text using `r citet(bib[1])`
+CN <-
+function (text = "clipboard", copy2clip = interactive()) {
+    if (text == "clipboard") {
+        text <- read_clip()
+    }
+    text <- text_fix(text)
+    x <- noquote(paste0("<font face=\"courier\">", text, "</font>"))
+    if (copy2clip) {
+        write_clip(x)
+    }
+    return(x)
+}
+
 ```
 # qdap Package Vignette
 # Tyler Rinker
