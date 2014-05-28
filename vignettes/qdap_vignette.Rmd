@@ -29,7 +29,7 @@ yt <- function(URL) {
 # qdap Package Vignette
 # Tyler Rinker
 
-qdap `r citep(bib[["Rinker2013a"]])` is an R package designed to assist in quantitative discourse analysis. The package stands as a bridge between qualitative transcripts of dialogue and statistical analysis and visualization.  qdap was born out of a frustration with current discourse analysis programs. Packaged programs are a closed system, meaning the researcher using the method has little, if any, influence on the program applied to her data.
+
 
 
 
