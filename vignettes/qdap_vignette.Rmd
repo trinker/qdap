@@ -29,7 +29,11 @@ yt <- function(URL) {
 # qdap Package Vignette
 # Tyler Rinker
 
-qdap `r citep(bib[["Rinker2013a"]])`
+qdap 
+
+```{r}
+bib
+```
 
 
 
