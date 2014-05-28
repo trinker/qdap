@@ -78,3 +78,6 @@ recoder <- function(x, envr){
     x <- as.character(x) #turn the numbers to character                                                        
     unlist(lapply(x, get, envir = envr))                      
 }  
+
+## check if dplyr::tbl_df
+is.tbl_df <- function(x) inherits(x, "tbl_df")

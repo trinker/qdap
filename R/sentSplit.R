@@ -42,6 +42,7 @@
 #' \code{\link[qdap]{TOT}} 
 #' @keywords sentence, split, turn-of-talk
 #' @export
+#' @importFrom dplyr tbl_df
 #' @examples
 #' \dontrun{
 #' ## `sentSplit` EXAMPLE:
@@ -113,6 +114,7 @@ function(dataframe, text.var, rm.var = NULL, endmarks = c("?", ".", "!", "|"),
     if (!is.null(rm.var)) {
         rm.var <- paste0("rmvars_", paste(rm.var, collapse = ":"))
     } 
+    output <- tbl_df(output)
     class(output) <- c("sent_split", paste0("sent_split_text_var:", text.var), 
         rm.var, class(output))
     attributes(output)[["text.var"]] <- text.var

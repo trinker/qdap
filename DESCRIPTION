@@ -15,6 +15,7 @@ Depends:
     RColorBrewer
 Imports:
     chron,
+    dplyr,
     gdata,
     grid,
     gridExtra,
@@ -34,7 +35,6 @@ Imports:
     xlsx,
     XML
 Suggests:
-    dplyr,
     english,
     koRpus,
     knitcitations,

@@ -42,7 +42,8 @@ function(text.var, parallel = FALSE) {
     } else {
         cl <- makeCluster(mc <- getOption("cl.cores", detectCores()/2))
         clusterExport(cl=cl, varlist=c("text.var", "strip", "Trim",
-            "syllable_count", "scrubber", "bracketX", "env.syl"), 
+            "syllable_count", "scrubber", "bracketX", "env.syl", 
+            "reducer", "clean", "mgsub"), 
             envir = environment())
         m <- parLapply(cl, as.character(text.var), function(x) {
                 sum(syllable_count(Trim(x))['syllables'])

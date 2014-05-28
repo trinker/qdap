@@ -208,11 +208,11 @@ plot.Network  <- function(x, ...){
 #' }
 qtheme <- function(x = "generic", title, title.color, layout, legend, 
     legend.cex, legend.text.color, legend.gradient, bg, vertex.color, 
-    vertex.size, vertex.frame.color, vertex.label.color, vertex.label.cex, edge.label.color, 
-    edge.label.cex){
+    vertex.size, vertex.frame.color, vertex.label.color, vertex.label.cex, 
+    edge.label.color, edge.label.cex){
 
     default_theme <- list(title.color = "black",
-        layout=layout.auto, legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, 
+        layout=igraph::layout.auto, legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, 
         bg=NULL, legend.text.color = "black", vertex.color = "grey80", 
         vertex.size = 9, vertex.label.color = "grey50", vertex.frame.color = NA,
         vertex.label.cex = 1.1, edge.label.color = "black", edge.label.cex = .9)

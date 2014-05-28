@@ -728,12 +728,18 @@ plot.polarity <- function(x, bar.size = 5, low = "blue", mid = "grey99",
             "group"]))
         dat2$group <- factor(dat2$group, 
             levels = rev(dat[order(dat$ave.polarity), "group"]))
+    } else {
+        ## reverse the levels so first factor level is on top
+        dat2$group <- factor(dat2$group, levels = sort(unique(dat2$group), decreasing = TRUE))
+        dat$group <- factor(dat$group, levels = sort(unique(dat$group), decreasing = TRUE))     
     }
     if (na.rm) {
        dat2 <- na.omit(dat2)
        dat <- na.omit(dat)
     }
 
+  
+    
     ## Plot the polarity dotplot with optional error bars
     YY <- ggplot(dat2, aes(y=group, x=Polarity, colour = group)) + 
         geom_point(data = dat, aes(x=ave.polarity), shape = ave.polarity.shape, 
