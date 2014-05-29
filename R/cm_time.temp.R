@@ -20,7 +20,7 @@
 #' @seealso 
 #' \code{\link[qdap]{cm_range.temp}},
 #' @export
-#' @importFrom reports pad
+#' @importFrom qdapTools pad
 #' @examples
 #' \dontrun{
 #' ## cm_time.temp(qcv(AA, BB, CC), ":30", "7:40", file = "foo.txt")
