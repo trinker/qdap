@@ -136,7 +136,7 @@ question_type <- function(text.var, grouping.var = NULL,
         contraction[grepl("you", contraction[, 1]), ])
     DF <- data.frame(grouping, text.var, check.names = FALSE, 
         stringsAsFactors = FALSE, orig.row.num = seq_len(length(text.var)))
-    DF$grouping <- factor(DF$grouping)
+    DF[, "grouping"] <- factor(DF[, "grouping"])
     if (is.dp(text.var=DF[, "text.var"])){
         warning(paste0("\n  Some rows contain double punctuation.",
           "  Suggested use of sentSplit function."))

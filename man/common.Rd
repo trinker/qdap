@@ -6,7 +6,7 @@
 common(word.list, overlap = "all", equal.or = "more", ...)
 }
 \arguments{
-\item{word.list}{A list of names character vectors.}
+\item{word.list}{A list of named character vectors.}
 
 \item{overlap}{Minimum/exact amount of overlap.}
 

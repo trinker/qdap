@@ -24,6 +24,9 @@ And constructed with the following guidelines:
 
 **NEW FEATURES**
 
+* `unique_by` added to allow the user to find terms unique to individual 
+  elements of a grouping variable.
+
 **MINOR FEATURES**
 
 **IMPROVEMENTS**

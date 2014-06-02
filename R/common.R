@@ -2,7 +2,7 @@
 #' 
 #' Find common words between grouping variables (e.g., people).
 #' 
-#' @param word.list A list of names character vectors.
+#' @param word.list A list of named character vectors.
 #' @param overlap Minimum/exact amount of overlap.
 #' @param equal.or A character vector of c(\code{"equal"}, \code{"greater"}, 
 #' \code{"more"}, \code{"less"}).
