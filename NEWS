@@ -33,6 +33,8 @@ IMPROVEMENTS
 
 CHANGES
 
+* `colsplit2df` and `colpaste2df` no longer convert character columns to factor.
+
 CHANGES IN qdap VERSION 2.0.0
 ----------------------------------------------------------------
 

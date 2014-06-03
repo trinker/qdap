@@ -56,7 +56,7 @@
 paste2 <-
 function(multi.columns, sep=".", handle.na=TRUE, trim=TRUE){
     if (is.matrix(multi.columns)) {
-        multi.columns <- data.frame(multi.columns)
+        multi.columns <- data.frame(multi.columns, stringsAsFactors = FALSE)
     }
     if (trim) multi.columns <- lapply(multi.columns, function(x) {
             gsub("^\\s+|\\s+$", "", x)
@@ -149,7 +149,8 @@ colpaste2df <- function(mat, combined.columns, sep = ".", name.sep = "&",
     }
 
     ## cbind the pasted columns into a new dataframe
-    DF <- data.frame(do.call(cbind, L1), check.names = FALSE)
+    DF <- data.frame(do.call(cbind, L1), check.names = FALSE, 
+        stringsAsFactors = FALSE)
     DF <- DF[!sapply(DF, function(x) all(is.na(x)))]
 
     ## remove columns if eliminating old
@@ -159,6 +160,6 @@ colpaste2df <- function(mat, combined.columns, sep = ".", name.sep = "&",
     }
 
     ## merge it back together
-    data.frame(mat, DF, check.names = FALSE)
+    data.frame(mat, DF, check.names = FALSE, stringsAsFactors = FALSE)
 }
 

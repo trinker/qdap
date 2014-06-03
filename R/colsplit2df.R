@@ -154,7 +154,8 @@ function(dataframe, splitcol = 1, new.names = NULL, sep=".",
         dataframe[, splitcol]), split = sep, fixed=TRUE) 
    
     ## Put together as a dataframe (do.call + rbind)
-    splitcols <- data.frame(do.call(rbind, splits), check.names = FALSE)
+    splitcols <- data.frame(do.call(rbind, splits), check.names = FALSE, 
+        stringsAsFactors = FALSE)
 
     ## determine split col location
     if (!is.numeric(splitcol)) {
@@ -188,7 +189,8 @@ function(dataframe, splitcol = 1, new.names = NULL, sep=".",
     dn <- ncol(dataframe)
     
     ## splice it together
-    dat <- data.frame(dataframe, splitcols, check.names = FALSE)
+    dat <- data.frame(dataframe, splitcols, check.names = FALSE, 
+        stringsAsFactors = FALSE)
 
     ## get number of columns in new dataframe 
     nn <- ncol(dat)
