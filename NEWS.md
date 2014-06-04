@@ -31,6 +31,10 @@ And constructed with the following guidelines:
 
 **IMPROVEMENTS**
 
+* `qheat` becomes a generic method.  THis means some of the internal function 
+  class checking has been moved to individual methods for those classes.  
+  Additionally, `qheat` now works with logical matrices/data.frames.
+
 **CHANGES**
 
 * `colsplit2df` and `colpaste2df` no longer convert character columns to factor.

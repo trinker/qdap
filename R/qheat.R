@@ -723,7 +723,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
     }
 
     ## specific to class word_stats    
-    mat <- scores(out)
+    mat <- scores(mat)
    
     dat2 <- as.matrix(mat[, -1, drop = FALSE])
     NMS <- colnames(dat2)
