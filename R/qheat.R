@@ -46,6 +46,7 @@
 #' exploratory qdap usage.
 #' @keywords heatmap
 #' @export
+#' @rdname qheat
 #' @import RColorBrewer 
 #' @importFrom qdapTools lookup
 #' @importFrom gridExtra grid.arrange 
@@ -91,7 +92,15 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
             warning ("`mat` is either not a matrix or not symmetrical; `diag.na` ignore.")
         }
     }
-    
+
+    ## if original was logical matrix fix
+    if(all(sapply(mat, is.logical))) {
+        nms <- row.names(mat)
+        if (is.null(mat2)) mat2 <- mat
+        mat <- apply(mat, 2, as.integer)
+        row.names(mat) <- nms
+    }  
+  
     ## convert all numeric matrices
     if (all(sapply(mat, is.numeric))) {
         if (is.matrix(mat)) {
@@ -112,9 +121,8 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
         keeps <- colnames(mat)[!colnames(mat) %in% colnames(f.vars)]
         mat <- mat[, keeps]
     }
-    numformat <- function(val, digits) { 
-        sub("^(-?)0.", "\\1.", sprintf(paste0("%.", digits, "f"), val)) 
-    }
+
+#================
     classRdf <- c("diversity")
     if (any(class(mat) %in% classRdf)) {
         class(mat) <- "data.frame"
@@ -131,7 +139,8 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
         mat2 <- mat[["rnp"]]
         mat <- data.frame(mat[["prop"]], check.names = FALSE)
         class(mat2) <- "data.frame"
-    }      
+    }  
+#=============    
     dat2 <- as.matrix(mat[, -1, drop = FALSE])
     NMS <- colnames(dat2)
     if (!is.null(by.column)){
@@ -208,6 +217,10 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
         }      
         ws4[, "yaxis.col"] <- lookup(ws4[, "group"], mat[, 1], yaxis.col)         
     }
+
+    ## if original was logical data.frame fix
+    if (is.logical(ws4[, "value"])) ws4[, "value"] <- as.integer(ws4[, "value"])
+
     if (is.null(grid)) {
         if (values) {
             GP <- ggplot(ws4, aes(group, var, group=var)) +
@@ -238,7 +251,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
             hjust = -.1, vjust=.6, colour=xaxis.col), 
             axis.text.y =element_text(colour=yaxis.col)) +
     xlab(gsub("\\&", " & ", colnames(mat)[1])) +
-    ylab("")
+    ylab(NULL)
     if (auto.size) {
         GP <- GP + coord_equal()
     }
@@ -274,4 +287,7 @@ function(dataframe, new.col.name = NULL){
     return(x)
 }
 
-
+## helper number formating function
+numformat <- function(val, digits) { 
+    sub("^(-?)0.", "\\1.", sprintf(paste0("%.", digits, "f"), val)) 
+}
