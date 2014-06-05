@@ -7,10 +7,18 @@ Matrix or Document Term Matrix}
 df2tm_corpus(text.var, grouping.var = NULL, demographic.vars, ...)
 }
 \arguments{
+\item{text.var}{The text variable or a \code{\link[qdap]{wfm}} object.}
+
+\item{grouping.var}{The grouping variables.  Default \code{NULL} generates
+one word list for all text.  Also takes a single grouping variable or a list
+of 1 or more grouping variables.}
+
 \item{demographic.vars}{Additional demographic information about the grouping
 variables.  This is a data.frame, list of equal length vectors, or a single
 vector corresponding to the grouping variable/text variable.  This
 information will be mapped to the DMetaData in the \code{\link[tm]{Corpus}}.}
+
+\item{\ldots}{Other arguments passed to \code{\link[qdap]{sentSplit}}.}
 }
 \value{
 \code{df2tm_corpus} - Converts a qdap oriented dataframe and returns

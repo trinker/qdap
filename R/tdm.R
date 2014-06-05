@@ -502,7 +502,7 @@ as.Corpus <- function(text.var, grouping.var = NULL, demographic.vars, ...){
     UseMethod("as.Corpus")
 }    
 
-#' sent_split Method for as.Corpus
+#' \code{as.Corpus.sent_split} - sent_split Method for as.Corpus
 #' @rdname tdm
 #' @export
 #' @method as.Corpus sent_split 
@@ -536,7 +536,7 @@ as.Corpus.sent_split <- function(text.var, grouping.var = NULL,
 }
     
     
-#' default Method for as.Corpus
+#' \code{as.Corpus.default} - default Method for as.Corpus
 #' @rdname tdm
 #' @export
 #' @method as.Corpus default 

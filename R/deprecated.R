@@ -4,10 +4,15 @@
 #' \code{df2tm_corpus} - Convert a qdap dataframe to a tm package 
 #' \code{\link[tm]{Corpus}}.
 #' 
+#' @param text.var The text variable or a \code{\link[qdap]{wfm}} object.
+#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
+#' one word list for all text.  Also takes a single grouping variable or a list 
+#' of 1 or more grouping variables.
 #' @param demographic.vars Additional demographic information about the grouping 
 #' variables.  This is a data.frame, list of equal length vectors, or a single 
 #' vector corresponding to the grouping variable/text variable.  This 
 #' information will be mapped to the DMetaData in the \code{\link[tm]{Corpus}}.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{sentSplit}}.  
 #' @rdname deprecated
 #' @section Warning: The \code{df2tm_corpus} function is deprecated.  It will be 
 #' removed in a subsequent version of qdap.  Use \code{as.Corpus} instead.

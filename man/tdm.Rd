@@ -139,9 +139,9 @@ a \code{\link[tm]{Corpus}}.
 \code{as.Corpus} - Convert a qdap dataframe to a tm package
 \code{\link[tm]{Corpus}}.
 
-sent_split Method for as.Corpus
+\code{as.Corpus.sent_split} - sent_split Method for as.Corpus
 
-default Method for as.Corpus
+\code{as.Corpus.default} - default Method for as.Corpus
 
 \code{apply_as_tm} - Apply functions intended to be used on the \pkg{tm}
 package's \code{\link[tm]{TermDocumentMatrix}} to a \code{\link[qdap]{wfm}}
