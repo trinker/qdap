@@ -114,7 +114,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
     digits = 1, text.size = 3, text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white", by.column = TRUE, 
     auto.size = FALSE, mat2 = NULL, plot = TRUE, facet.vars = NULL, 
-    facet.flip = FALSE, diag.na = FALSE, diag.values = "") {
+    facet.flip = FALSE, diag.na = FALSE, diag.values = "", ...) {
     group <- value <- values2 <- NULL
 
     ## set diagonal to NA
@@ -301,7 +301,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
     digits = 1, text.size = 3, text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white", by.column = TRUE, 
     auto.size = FALSE, mat2 = NULL, plot = TRUE, facet.vars = NULL, 
-    facet.flip = FALSE, diag.na = FALSE, diag.values = "") {
+    facet.flip = FALSE, diag.na = FALSE, diag.values = "", ...) {
     group <- value <- values2 <- NULL
 
     ## set diagonal to NA
@@ -491,7 +491,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
     digits = 1, text.size = 3, text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white", by.column = TRUE, 
     auto.size = FALSE, mat2 = NULL, plot = TRUE, facet.vars = NULL, 
-    facet.flip = FALSE, diag.na = FALSE, diag.values = "") {
+    facet.flip = FALSE, diag.na = FALSE, diag.values = "", ...) {
     group <- value <- values2 <- NULL
 
     ## set diagonal to NA
@@ -681,7 +681,7 @@ function(mat, low = "white", high ="darkblue", values = FALSE,
     digits = 1, text.size = 3, text.color = "grey40", xaxis.col = "black",
     yaxis.col = "black", order.by = NULL, grid = "white", by.column = TRUE, 
     auto.size = FALSE, mat2 = NULL, plot = TRUE, facet.vars = NULL, 
-    facet.flip = FALSE, diag.na = FALSE, diag.values = "") {
+    facet.flip = FALSE, diag.na = FALSE, diag.values = "", ...) {
     group <- value <- values2 <- NULL
 
     ## set diagonal to NA

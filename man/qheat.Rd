@@ -22,49 +22,49 @@ qheat(mat, low = "white", high = "darkblue", values = FALSE, digits = 1,
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
   plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "")
+  diag.values = "", ...)
 
 \method{qheat}{diversity}(mat, low = "white", high = "darkblue",
   values = FALSE, digits = 1, text.size = 3, text.color = "grey40",
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
   plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "")
+  diag.values = "", ...)
 
 \method{qheat}{termco}(mat, low = "white", high = "darkblue",
   values = FALSE, digits = 1, text.size = 3, text.color = "grey40",
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
   plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "")
+  diag.values = "", ...)
 
 \method{qheat}{word_stats}(mat, low = "white", high = "darkblue",
   values = FALSE, digits = 1, text.size = 3, text.color = "grey40",
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
   plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "")
+  diag.values = "", ...)
 
 \method{qheat}{character_table}(mat, low = "white", high = "darkblue",
   values = FALSE, digits = 1, text.size = 3, text.color = "grey40",
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
   plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "")
+  diag.values = "", ...)
 
 \method{qheat}{question_type}(mat, low = "white", high = "darkblue",
   values = FALSE, digits = 1, text.size = 3, text.color = "grey40",
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
   plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "")
+  diag.values = "", ...)
 
 \method{qheat}{pos_by}(mat, low = "white", high = "darkblue",
   values = FALSE, digits = 1, text.size = 3, text.color = "grey40",
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
   plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "")
+  diag.values = "", ...)
 }
 \arguments{
 \item{mat}{A matrix or dataframe produced by many qdap functions in
