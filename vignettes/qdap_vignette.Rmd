@@ -5084,7 +5084,7 @@ The following functions will be utilized in this section (click to view more):
 </form>
 
 <form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
-    <input type="submit" value="tm_corpus2df"><input type="submit" value="df2tm_corpus"> - `r HR("#tm_corpus2df", "Convert between tm package Corpus and qdap dataframe")`
+    <input type="submit" value="tm_corpus2df"><input type="submit" value="as.Corpus"> - `r HR("#tm_corpus2df", "Convert between tm package Corpus and qdap dataframe")`
 </form>
 
 </div>
@@ -5180,7 +5180,7 @@ apply_as_tm(a, tm:::weightTfIdf)
 
 ```{r}
 ## Convert dataframe to a Corpus
-(x <- with(DATA2, df2tm_corpus(state, list(person, class, day))))
+(x <- with(DATA2, as.Corpus(state, list(person, class, day))))
 library(tm)
 inspect(x)
 class(x)

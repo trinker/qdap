@@ -12,7 +12,7 @@
 #' \code{wfm}.  If \code{apply_as_tm} - Other arguments passed to functions used 
 #' on the tm package's \code{"TermDocumentMatrix"}.  If \code{tm_corpus2df} - 
 #' Other arguments passed to \code{\link[qdap]{sentSplit}}.  If 
-#' \code{df2tm_corpus} - Other arguments passed to the tm package's 
+#' \code{as.Corpus} - Other arguments passed to the tm package's 
 #' \code{\link[tm]{Corpus}}.  If \code{tm_corpus2wfm} - Other arguments passed 
 #' to \code{\link[qdap]{wfm}}.
 #' @param vowel.check logical.  Should terms without vowels be remove?  
@@ -212,7 +212,7 @@
 #' corp_df <- tm_corpus2df(reuters)
 #' htruncdf(corp_df)
 #' 
-#' z <- df2tm_corpus(DATA$state, DATA$person, 
+#' z <- as.Corpus(DATA$state, DATA$person, 
 #'        demographic=DATA[, qcv(sex, adult, code)])
 #' tm_corpus2df(z)
 #' 
@@ -221,22 +221,22 @@
 #' plot(out)
 #' 
 #' ## Convert a qdap dataframe to tm package Corpus
-#' (x <- with(DATA2, df2tm_corpus(state, list(person, class, day))))
+#' (x <- with(DATA2, as.Corpus(state, list(person, class, day))))
 #' library(tm)
 #' inspect(x)
 #' class(x)
 #' 
-#' (y <- with(pres_debates2012, df2tm_corpus(dialogue, list(person, time))))
+#' (y <- with(pres_debates2012, as.Corpus(dialogue, list(person, time))))
 #' 
 #' ## Add demographic info to DMetaData of Corpus
-#' z <- df2tm_corpus(DATA$state, DATA$person, 
+#' z <- as.Corpus(DATA$state, DATA$person, 
 #'     demographic=DATA[, qcv(sex, adult, code)])
 #' lview(z)
 #' 
-#' lview(df2tm_corpus(DATA$state, DATA$person,
+#' lview(as.Corpus(DATA$state, DATA$person,
 #'     demographic=DATA$sex))
 #' 
-#' lview(df2tm_corpus(DATA$state, DATA$person,
+#' lview(as.Corpus(DATA$state, DATA$person,
 #'     demographic=list(DATA$sex, DATA$adult)))
 #'
 #' ## Apply qdap functions meant for dataframes from sentSplit to tm Corpus
@@ -482,7 +482,7 @@ tm_corpus2wfm <- function(tm.corpus, col1 = "docs", col2 = "text", ...) {
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
-#' \code{df2tm_corpus} - Convert a qdap dataframe to a tm package 
+#' \code{as.Corpus} - Convert a qdap dataframe to a tm package 
 #' \code{\link[tm]{Corpus}}.
 #' 
 #' @param demographic.vars Additional demographic information about the grouping 
@@ -490,11 +490,58 @@ tm_corpus2wfm <- function(tm.corpus, col1 = "docs", col2 = "text", ...) {
 #' vector corresponding to the grouping variable/text variable.  This 
 #' information will be mapped to the DMetaData in the \code{\link[tm]{Corpus}}.
 #' @rdname tdm
-#' @return \code{df2tm_corpus} - Converts a qdap oriented dataframe and returns 
+#' @return \code{as.Corpus} - Converts a qdap oriented dataframe and returns 
 #' a \code{\link[tm]{Corpus}}.
 #' @export
 #' @importFrom qdapTools list_df2df
-df2tm_corpus <- function(text.var, grouping.var = NULL, demographic.vars, ...){
+as.Corpus <- function(text.var, grouping.var = NULL, demographic.vars, ...){
+    
+    text.var
+    grouping.var
+
+    UseMethod("as.Corpus")
+}    
+
+#' sent_split Method for as.Corpus
+#' @rdname tdm
+#' @export
+#' @method as.Corpus sent_split 
+as.Corpus.sent_split <- function(text.var, grouping.var = NULL, 
+    demographic.vars, ...){
+
+    if (!is.null(grouping.var) && length(grouping.var) == 1 && 
+            is.character(grouping.var)) {
+       if (grouping.var %in%  colnames(text.var)) {
+           grouping.var <- text.var[, grouping.var]
+       }
+    }
+    if (missing(demographic.vars)){
+        nulls <- c(attributes(text.var)[["text.var"]], grouping.var)
+        demographic.vars <- text.var[, !colnames(text.var) %in% nulls, 
+            drop=FALSE]
+    } else {
+        if (!is.null(demographic.vars) && is.character(grouping.var)) {
+           if (all(demographic.vars %in%  colnames(text.var))) {
+               demographic.vars <- text.var[, demographic.vars]
+           }
+        }   
+
+    }
+    as.Corpus.default(
+        text.var = text.var[, attributes(text.var)[["text.var"]]],
+        grouping.var = grouping.var,
+        demographic.vars = demographic.vars
+    )
+    
+}
+    
+    
+#' default Method for as.Corpus
+#' @rdname tdm
+#' @export
+#' @method as.Corpus default 
+as.Corpus.default <- function(text.var, grouping.var = NULL, demographic.vars, 
+    ...){
 
     if(is.null(grouping.var)) {
         G <- "all"
@@ -543,11 +590,9 @@ df2tm_corpus <- function(text.var, grouping.var = NULL, demographic.vars, ...){
 
     ## Add other demographic variables to "DMetaData"
     if(!missing(demographic.vars)) {
-        if (is.data.frame(demographic.vars)) {
-    
-        } else {
+        if (!is.data.frame(demographic.vars)) {
             if (is.list(demographic.vars)) {
-                nms <- colnames(demographic.vars)
+                nms <- names(demographic.vars)
                 demographic.vars <- do.call(cbind.data.frame, demographic.vars)
                 if (is.null(nms)) {
 

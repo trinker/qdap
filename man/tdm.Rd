@@ -2,7 +2,9 @@
 \name{tdm}
 \alias{apply_as_df}
 \alias{apply_as_tm}
-\alias{df2tm_corpus}
+\alias{as.Corpus}
+\alias{as.Corpus.default}
+\alias{as.Corpus.sent_split}
 \alias{dtm}
 \alias{tdm}
 \alias{tm2qdap}
@@ -22,7 +24,13 @@ tm_corpus2df(tm.corpus, col1 = "docs", col2 = "text", sent.split = TRUE,
 
 tm_corpus2wfm(tm.corpus, col1 = "docs", col2 = "text", ...)
 
-df2tm_corpus(text.var, grouping.var = NULL, demographic.vars, ...)
+as.Corpus(text.var, grouping.var = NULL, demographic.vars, ...)
+
+\method{as.Corpus}{sent_split}(text.var, grouping.var = NULL,
+  demographic.vars, ...)
+
+\method{as.Corpus}{default}(text.var, grouping.var = NULL, demographic.vars,
+  ...)
 
 apply_as_tm(wfm.obj, tmfun, ..., to.qdap = TRUE)
 
@@ -40,7 +48,7 @@ of 1 or more grouping variables.}
 \code{wfm}.  If \code{apply_as_tm} - Other arguments passed to functions used
 on the tm package's \code{"TermDocumentMatrix"}.  If \code{tm_corpus2df} -
 Other arguments passed to \code{\link[qdap]{sentSplit}}.  If
-\code{df2tm_corpus} - Other arguments passed to the tm package's
+\code{as.Corpus} - Other arguments passed to the tm package's
 \code{\link[tm]{Corpus}}.  If \code{tm_corpus2wfm} - Other arguments passed
 to \code{\link[qdap]{wfm}}.}
 
@@ -102,7 +110,7 @@ a qdap oriented dataframe.
 \code{df2tm_wfm} - Converts a qdap oriented dataframe and returns
 a \code{\link[qdap]{wfm}}.
 
-\code{df2tm_corpus} - Converts a qdap oriented dataframe and returns
+\code{as.Corpus} - Converts a qdap oriented dataframe and returns
 a \code{\link[tm]{Corpus}}.
 
 \code{apply_as_tm} - Applies a tm oriented function to a
@@ -128,8 +136,12 @@ a \code{\link[tm]{Corpus}}.
 \code{tm_corpus2wfm} - Convert a \code{\link[tm]{Corpus}} package corpus to a
 \code{\link[qdap]{wfm}}.
 
-\code{df2tm_corpus} - Convert a qdap dataframe to a tm package
+\code{as.Corpus} - Convert a qdap dataframe to a tm package
 \code{\link[tm]{Corpus}}.
+
+sent_split Method for as.Corpus
+
+default Method for as.Corpus
 
 \code{apply_as_tm} - Apply functions intended to be used on the \pkg{tm}
 package's \code{\link[tm]{TermDocumentMatrix}} to a \code{\link[qdap]{wfm}}
@@ -335,7 +347,7 @@ reuters <- Corpus(DirSource(reut21578),
 corp_df <- tm_corpus2df(reuters)
 htruncdf(corp_df)
 
-z <- df2tm_corpus(DATA$state, DATA$person,
+z <- as.Corpus(DATA$state, DATA$person,
        demographic=DATA[, qcv(sex, adult, code)])
 tm_corpus2df(z)
 
@@ -344,22 +356,22 @@ out <- formality(corp_df$text, corp_df$docs)
 plot(out)
 
 ## Convert a qdap dataframe to tm package Corpus
-(x <- with(DATA2, df2tm_corpus(state, list(person, class, day))))
+(x <- with(DATA2, as.Corpus(state, list(person, class, day))))
 library(tm)
 inspect(x)
 class(x)
 
-(y <- with(pres_debates2012, df2tm_corpus(dialogue, list(person, time))))
+(y <- with(pres_debates2012, as.Corpus(dialogue, list(person, time))))
 
 ## Add demographic info to DMetaData of Corpus
-z <- df2tm_corpus(DATA$state, DATA$person,
+z <- as.Corpus(DATA$state, DATA$person,
     demographic=DATA[, qcv(sex, adult, code)])
 lview(z)
 
-lview(df2tm_corpus(DATA$state, DATA$person,
+lview(as.Corpus(DATA$state, DATA$person,
     demographic=DATA$sex))
 
-lview(df2tm_corpus(DATA$state, DATA$person,
+lview(as.Corpus(DATA$state, DATA$person,
     demographic=list(DATA$sex, DATA$adult)))
 
 ## Apply qdap functions meant for dataframes from sentSplit to tm Corpus

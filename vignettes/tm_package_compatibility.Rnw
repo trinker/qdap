@@ -101,7 +101,8 @@ The second format both packages use is a matrix structure of word frequency coun
 
 \begin{figure}[h!]
   \centering
-    \includegraphics[width=4.60in]{imgs/data_convert.png}
+    \includegraphics[width=4.5in]{imgs/data_convert.png} \\
+\hspace{-.95cm} \scriptsize{\noindent *Note: \texttt{as.tdm} \& \texttt{as.dtm} are short hand for \texttt{as.TermDocumentMatrix} \& \texttt{as.DocumentTermMatrix}}
     \caption{Converting Data between \textbf{qdap} and \textbf{tm}}
   \label{convert}
 \end{figure}
@@ -365,11 +366,11 @@ tm_corpus2df(tm_dat)
 \hspace{.4cm} To move from a \texttt{data.frame} to a \texttt{Corpus} the \texttt{df2tm\_corpus} function is used as follows:
 
 <<df2corp, eval=FALSE>>=
-with(qdap_dat, df2tm_corpus(state, person))
+with(qdap_dat, as.Corpus(state, person))
 @
 
 <<df2corp2, echo=FALSE>>=
-with(qdap_dat, df2tm_corpus(state, person))
+with(qdap_dat, as.Corpus(state, person))
 @
 
 \scriptsize\noindent *Note the 3 text documents; one for each grouping variable.  To get one for each row use: \\ \indent \texttt{with(qdap\_dat, df2tm\_corpus(state, id(person)))} \normalsize
@@ -660,7 +661,6 @@ browseVignettes(package = "qdap")
 \bibliography{qdap}
 
 \end{document}
-
 
 
 

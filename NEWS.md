@@ -39,6 +39,9 @@ And constructed with the following guidelines:
 
 * `colsplit2df` and `colpaste2df` no longer convert character columns to factor.
 
+* `df2tm_corpus` is deprecated.  It will be removed in a subsequent version of 
+  `qdap`.  Use `as.Corpus` instead.
+
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.0.0
 ----------------------------------------------------------------
 
