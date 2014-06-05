@@ -34,11 +34,11 @@
 #' exclude(dat, unlist(the.no))
 #' 
 #' ## Works with tm's TermDocumentMatrix/DocumentTermMatrix
-#' dat2 <- dtm(DATA$state, DATA$person)
+#' dat2 <- as.dtm(DATA$state, DATA$person)
 #' out.dtm <- exclude(dat2, unlist(the.no))
 #' tm::inspect(out.dtm)
 #' 
-#' dat3 <- tdm(DATA$state, DATA$person)
+#' dat3 <- as.tdm(DATA$state, DATA$person)
 #' out.tdm <- exclude(dat3, unlist(the.no))
 #' tm::inspect(out.tdm)
 #' }
@@ -60,9 +60,9 @@ function(word.list, ...) {
         z <- z[!rownames(z) %in% excluded,]
         class(z) <- cls2
         if ("DocumentTermMatrix" %in% cls) {
-            z <- dtm(z)
+            z <- as.dtm(z)
         } else {
-            z <- tdm(z)
+            z <- as.tdm(z)
         }
         return(z)
     }

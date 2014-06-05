@@ -35,6 +35,18 @@ And constructed with the following guidelines:
   class checking has been moved to individual methods for those classes.  
   Additionally, `qheat` now works with logical matrices/data.frames.
 
+* The `tm` package compatibility functions have been renamed in a more R-ish
+  way and take the form of generic methods for specific classes.  For example,
+  `df2tm_corpus` becomes `as.Corpus`.  Here is a complete list of changes:
+
+    - `df2tm_courpus` is now  `as.Corpus`
+    - `tm_corpus2df` is now `as.data.frame`
+    - `as.wfm` is now a generic method
+    - `tm_corpus2wfm` is now `as.wfm`
+    - `tm2qdap` is now `as.wfm`
+    - `tdm` is now `as.tdm` or `as.TermDocumentMatrix` 
+    - `dtm` is now `as.dtm` or `as.DocumentTermMatrix`
+
 **CHANGES**
 
 * `colsplit2df` and `colpaste2df` no longer convert character columns to factor.
@@ -42,8 +54,22 @@ And constructed with the following guidelines:
 * `df2tm_corpus` is deprecated.  It will be removed in a subsequent version of 
   `qdap`.  Use `as.Corpus` instead.
 
-* `tm2qdap` is deprecated.  It will not be exported in a subsequent version of 
+* `tm_corpus2df` is deprecated.  It will be removed in a subsequent version of 
+  `qdap`.  Use `as.data.frame` instead.
+
+* `tm2qdap` is deprecated.  It will be removed in a subsequent version of 
   `qdap`.  Use `as.wfm` instead.
+
+* `tm_corpus2wfm` is deprecated.  It will be removed in a subsequent version of 
+  `qdap`.  Use `as.wfm` instead.
+
+* `tdm` is deprecated.  It will be removed in a subsequent version of `qdap`.  
+  Use `as.tdm` or `as.TermDocumentMatrix` instead.
+
+* `dtm` is deprecated.  It will be removed in a subsequent version of `qdap`.  
+  Use `as.dtm` or `as.DocumentTermMatrix` instead.
+
+
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.0.0
 ----------------------------------------------------------------

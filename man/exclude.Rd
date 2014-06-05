@@ -48,11 +48,11 @@ the.no <- term_match(DATA$state, c("the", "no"))
 exclude(dat, unlist(the.no))
 
 ## Works with tm's TermDocumentMatrix/DocumentTermMatrix
-dat2 <- dtm(DATA$state, DATA$person)
+dat2 <- as.dtm(DATA$state, DATA$person)
 out.dtm <- exclude(dat2, unlist(the.no))
 tm::inspect(out.dtm)
 
-dat3 <- tdm(DATA$state, DATA$person)
+dat3 <- as.tdm(DATA$state, DATA$person)
 out.tdm <- exclude(dat3, unlist(the.no))
 tm::inspect(out.tdm)
 }

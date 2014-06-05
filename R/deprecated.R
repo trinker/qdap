@@ -15,8 +15,6 @@
 #' @rdname deprecated
 #' @section Warning: \code{df2tm_corpus} - function is deprecated.  It will be 
 #' removed in a subsequent version of qdap.  Use \code{as.Corpus} instead.
-#' @return \code{df2tm_corpus} - Converts a qdap oriented dataframe and returns 
-#' a \code{\link[tm]{Corpus}}.
 #' @export
 #' @importFrom qdapTools list_df2df
 df2tm_corpus <- function(text.var, grouping.var = NULL, demographic.vars, ...){
@@ -120,8 +118,6 @@ df2tm_corpus <- function(text.var, grouping.var = NULL, demographic.vars, ...){
 #' @param x A \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.
 #' @section Warning: \code{tm2qdap} - function is deprecated.  It will be 
 #' removed in a subsequent version of qdap.  Use \code{as.wfm} instead. 
-#' @return \code{tm2qdap} - Returns a \code{\link[qdap]{wfm}} object or 
-#' \code{weight} object.
 #' @rdname deprecated
 #' @export
 tm2qdap <- function(x) {
@@ -148,3 +144,158 @@ tm2qdap <- function(x) {
     y
 
 }
+
+#' Deprecated qdap Functions
+#' 
+#' \code{tm_corpus2wfm} - Convert a \code{\link[tm]{Corpus}} package corpus to a 
+#' \code{\link[qdap]{wfm}}. 
+#' 
+#' @rdname deprecated
+#' @section Warning: \code{tm_corpus2wfm} - function is deprecated.  It will be 
+#' removed in a subsequent version of qdap.  Use \code{as.wfm} instead.  
+#' @export
+tm_corpus2wfm <- function(tm.corpus, col1 = "docs", col2 = "text", ...) {
+
+    .Deprecated(msg = paste("`tm2qdap` is deprecated and will be removed in", 
+        "a subsequent version of qdap.  Please use `as.wfm` instead."), 
+        old = as.character(sys.call(sys.parent()))[1L])   
+    
+      text <- docs <- NULL
+      with(as.data.frame(tm.corpus, col1 = col1, col2 = col2), wfm(text, docs, ...))  
+
+}
+
+
+#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
+#' Matrix or Document Term Matrix
+#' 
+#' \code{tm_corpus2df} - Convert a tm package corpus to a dataframe.
+#' 
+#' @param tm.corpus A \code{\link[tm]{Corpus}} object.
+#' @param col1 Name for column 1 (the vector elements).
+#' @param col2 Name for column 2 (the names of the vectors).
+#' @param sent.split logical.  If \code{TRUE} the text variable sentences will 
+#' be split into individual rows.
+#' @section Warning: \code{tm_corpus2df} - function is deprecated.  It will be 
+#' removed in a subsequent version of qdap.  Use \code{as.data.frame} instead.  
+#' @rdname deprecated
+#' @export
+#' @importFrom qdapTools list2df
+tm_corpus2df <- function(tm.corpus, col1 = "docs", col2 = "text", 
+    sent.split = TRUE, ...) {
+
+    .Deprecated(msg = paste("`tm_corpus2df` is deprecated and will be removed in", 
+        "a subsequent version of qdap.  Please use `as.data.frame` instead."), 
+        old = as.character(sys.call(sys.parent()))[1L])   
+    
+    
+    if(!is(tm.corpus[[1]], "PlainTextDocument")) {
+        tm.corpus <- tm_map(tm.corpus, as.PlainTextDocument)
+    }
+    
+    out <- list2df(tm.corpus, col1 = col2, col2 = col1)[, 2:1]
+
+    metadat <- attributes(tm.corpus)[["DMetaData"]]
+    if (ncol(metadat) > 1) {
+        colnames(metadat)[1] <- col1
+        out <- key_merge(out, metadat)
+    }
+
+    if (sent.split) {
+        out <- sentSplit(out, col2, ...)
+    }
+    out
+
+}
+
+
+
+#' Deprecated qdap Functions
+#' 
+#' \code{tdm} - Create term document matrices from raw text or 
+#' \code{\link[qdap]{wfm}} for use with other text analysis packages.
+#'
+#' @param vowel.check logical.  Should terms without vowels be remove?  
+#' @export
+#' @section Warning: \code{tdm} - function is deprecated.  It will be 
+#' removed in a subsequent version of qdap.  Use \code{as.tdm} instead.  
+#' @importFrom reshape2 melt
+#' @importFrom tm tm_map as.PlainTextDocument VectorSource Corpus
+#' @rdname deprecated
+tdm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+
+    .Deprecated(msg = paste("`tdm` is deprecated and will be removed in", 
+        "a subsequent version of qdap.  Please use `as.tdm` instead."), 
+        old = as.character(sys.call(sys.parent()))[1L]) 
+    
+    x <- wfm2xtab(text.var = text.var, grouping.var = grouping.var, ...)
+
+    ## Remove rows with terms with no vowel
+    if (vowel.check) {
+        x <- x[vowel_check(rownames(x)), ]
+    }
+
+    z <- unlist(apply(x, 2, function(y) sum(y != 0)), use.names = FALSE)
+
+    a <- list(
+        unlist(apply(x, 2, function(y) which(y != 0)), use.names = FALSE),
+        rep(seq_along(z), z),
+        x[apply(x, 2, function(y) y != 0)],
+        nrow(x),
+        ncol(x),
+        dimnames(x)
+    )
+    
+
+    attributes(a) <- list(
+            class = c("TermDocumentMatrix", "simple_triplet_matrix"),
+            Weighting = c("term frequency", "tf")
+    )
+    
+    names(a) <- c("i", "j", "v", "nrow", "ncol", "dimnames")
+    a
+}
+
+#' Deprecated qdap Functions
+#' 
+#' \code{dtm} - Create document term matrices from raw text or 
+#' \code{\link[qdap]{wfm}} for use with other text analysis packages.
+#' 
+#' @section Warning: \code{dtm} - function is deprecated.  It will be 
+#' removed in a subsequent version of qdap.  Use \code{as.dtm} instead.
+#' @rdname deprecated
+#' @export
+dtm <- 
+function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+
+    .Deprecated(msg = paste("`dtm` is deprecated and will be removed in", 
+        "a subsequent version of qdap.  Please use `as.dtm` instead."), 
+        old = as.character(sys.call(sys.parent()))[1L])   
+    
+    x <- t(wfm2xtab(text.var = text.var, grouping.var = grouping.var, ...))
+
+    ## Remove rows with terms with no vowel
+    if (vowel.check) {
+        x <- x[, vowel_check(colnames(x))]
+    }
+
+    z <- unlist(apply(x, 2, function(y) sum(y != 0)), use.names = FALSE)
+
+    a <- list(
+        unlist(apply(x, 2, function(y) which(y != 0)), use.names = FALSE),
+        rep(seq_along(z), z),
+        x[apply(x, 2, function(y) y != 0)],
+        nrow(x),
+        ncol(x),
+        dimnames(x)
+    )
+    
+    attributes(a) <- list(
+            class = c("DocumentTermMatrix", "simple_triplet_matrix"),
+            Weighting = c("term frequency", "tf")
+    )
+    
+    names(a) <- c("i", "j", "v", "nrow", "ncol", "dimnames")
+    a
+}
+

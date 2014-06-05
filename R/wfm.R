@@ -11,7 +11,9 @@
 #' @param char2space A vector of characters to be turned into spaces.  If 
 #' \code{char.keep} is \code{NULL}, \code{char2space} will activate this 
 #' argument.
-#' @param \ldots Other arguments supplied to \code{\link[qdap]{strip}}.
+#' @param \ldots Other arguments supplied to \code{\link[qdap]{strip}}.  If
+#' \code{as.wfm} this is other arguments passed to \code{as.wfm} methods 
+#' (currently ignored).
 #' @param digits An integer indicating the number of decimal places (round) or 
 #' significant digits (signif) to be used. Negative values are allowed.
 #' @param margins logical. If \code{TRUE} provides grouping.var and word 
@@ -858,16 +860,10 @@ function(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL,
 
 #' Word Frequency Matrix
 #' 
-#' \code{Filter} - Filter words from a wfm that meet max/min word length 
+#' \code{Filter.wfm} - Filter words from a wfm that meet max/min word length 
 #' criteria.
 #' 
-#' @param x A filterable object (e.g., \code{\link[qdap]{wfm}},
-#' \code{\link[base]{character}}).
-#' @param min Minimum word length.
-#' @param max Maximum word length.
-#' @param count.apostrophe logical.  If \code{TRUE} apostrophes are counted as 
-#' characters.
-#' @rdname Word_Frequency_Matrix
+#' @rdname Filter
 #' @export
 #' @method Filter wfm
 #' @return \code{Filter} - Returns a matrix of the class "wfm".
@@ -939,7 +935,6 @@ Filter.character <- function(x, min = 1, max = Inf, count.apostrophe = TRUE,
 #' \code{as.wfm} - Attempts to coerce a matrix to a \code{\link[qdap]{wfm}}.
 #' 
 #' @param x An object with words for row names and integer values.
-#' @param x Other arguments passed to \code{as.wfm} methods.
 #' @rdname Word_Frequency_Matrix
 #' @export
 #' @return \code{as.wfm} - Returns a matrix of the class "wfm".
@@ -952,10 +947,10 @@ as.wfm <- function(x, ...){
 
 #' \code{as.wfm.matrix} - \code{matrix} method for \code{as.wfm} used to 
 #' convert matrices to a \code{wfm}.
-#' @rdname wfm
+#' @rdname Word_Frequency_Matrix
 #' @export
 #' @method as.wfm matrix
-as.wfm.matrix <- function(x) {
+as.wfm.matrix <- function(x, ...) {
 
     if(!all(is.Integer(x))){
         stop("x must contain only integer values")
@@ -968,10 +963,10 @@ as.wfm.matrix <- function(x) {
 
 #' \code{as.wfm.default} - Default method for \code{as.wfm} used to 
 #' convert matrices to a \code{wfm}.
-#' @rdname wfm
+#' @rdname Word_Frequency_Matrix
 #' @export
 #' @method as.wfm default 
-as.wfm.default <- function(x) {
+as.wfm.default <- function(x, ...) {
 
     if(!all(is.Integer(x))){
         stop("x must contain only integer values")
@@ -985,10 +980,10 @@ as.wfm.default <- function(x) {
 
 #' \code{as.wfm.TermDocumentMatrix} - \code{TermDocumentMatrix} method for 
 #' \code{as.wfm} used to a \code{TermDocumentMatrix} to a \code{wfm}.
-#' @rdname wfm
+#' @rdname Word_Frequency_Matrix
 #' @export
 #' @method as.wfm TermDocumentMatrix 
-as.wfm.TermDocumentMatrix <- function(x) {
+as.wfm.TermDocumentMatrix <- function(x, ...) {
   
     tm2qdap(x)
  
@@ -997,10 +992,10 @@ as.wfm.TermDocumentMatrix <- function(x) {
 
 #' \code{as.wfm.DocumentTermMatrix} - \code{DocumentTermMatrix} method for 
 #' \code{as.wfm} used to a \code{DocumentTermMatrix} to a \code{wfm}.
-#' @rdname wfm
+#' @rdname Word_Frequency_Matrix
 #' @export
 #' @method as.wfm DocumentTermMatrix 
-as.wfm.DocumentTermMatrix <- function(x) {
+as.wfm.DocumentTermMatrix <- function(x, ...) {
   
     tm2qdap(x)
  
@@ -1008,10 +1003,10 @@ as.wfm.DocumentTermMatrix <- function(x) {
 
 #' \code{as.wfm.data.frame} - data.frame method for \code{as.wfm} used to 
 #' convert matrices to a \code{wfm}.
-#' @rdname wfm
+#' @rdname Word_Frequency_Matrix
 #' @export
 #' @method as.wfm data.frame 
-as.wfm.data.frame <- function(x) {
+as.wfm.data.frame <- function(x, ...) {
 
     if(!all(is.Integer(x))){
         stop("x must contain only integer values")
@@ -1025,12 +1020,27 @@ as.wfm.data.frame <- function(x) {
 
 #' \code{as.wfm.wfdf} - wfdf method for \code{as.wfm} used to 
 #' convert matrices to a \code{wfm}.
-#' @rdname wfm
+#' @rdname Word_Frequency_Matrix
 #' @export
 #' @method as.wfm wfdf 
-as.wfm.wfdf <- function(x) {
+as.wfm.wfdf <- function(x, ...) {
 
     wfm(x)
+
+}
+
+
+#' \code{as.wfm.Corpus} - Corpus method for \code{as.wfm} used to 
+#' convert matrices to a \code{wfm}.
+#' @param col The column name (generally not used).
+#' @param row The row name (generally not used).
+#' @rdname Word_Frequency_Matrix
+#' @export
+#' @method as.wfm Corpus
+as.wfm.Corpus <- function(x, col = "docs", row = "text", ...) {
+
+      text <- docs <- NULL
+      with(as.data.frame(x, col1 = col, col2 = row), wfm(text, docs, ...))  
 
 }
 
@@ -1044,7 +1054,7 @@ as.wfm.wfdf <- function(x) {
 ## @param x A \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.
 ## @return \code{tm2qdap} - Returns a \code{\link[qdap]{wfm}} object or 
 ## \code{weight} object.
-## @rdname tdm
+## @rdname
 ## INTERNAL HELPER FUNCTION TO CONVERT "DocumentTermMatrix", "TermDocumentMatrix"
 ## TO "wfm"
 tm2qdap <- function(x) {

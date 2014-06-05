@@ -1,26 +1,25 @@
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
-#' \code{tdm} - Create term document matrices from raw text or 
+#' \code{as.tdm} - Create term document matrices from raw text or 
 #' \code{\link[qdap]{wfm}} for use with other text analysis packages.
 #'
 #' @param text.var The text variable or a \code{\link[qdap]{wfm}} object.
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
-#' @param \ldots If \code{tdm} or \code{dtm} - Other arguments passed to 
+#' @param \ldots If \code{as.tdm} or \code{as.dtm} - Other arguments passed to 
 #' \code{wfm}.  If \code{apply_as_tm} - Other arguments passed to functions used 
-#' on the tm package's \code{"TermDocumentMatrix"}.  If \code{tm_corpus2df} - 
+#' on the tm package's \code{"TermDocumentMatrix"}.  If \code{as.data.frame} - 
 #' Other arguments passed to \code{\link[qdap]{sentSplit}}.  If 
 #' \code{as.Corpus} - Other arguments passed to the tm package's 
-#' \code{\link[tm]{Corpus}}.  If \code{tm_corpus2wfm} - Other arguments passed 
-#' to \code{\link[qdap]{wfm}}.
+#' \code{\link[tm]{Corpus}}.  
 #' @param vowel.check logical.  Should terms without vowels be remove?  
 #' @details Produces output that is identical to the \code{tm} package's 
 #' \code{\link[tm]{TermDocumentMatrix}}, \code{\link[tm]{DocumentTermMatrix}},
 #' \code{\link[tm]{Corpus}} or allows convenient interface between the qdap and 
 #' tm packages.
-#' @return \code{tdm} - Returns a \code{\link[tm]{TermDocumentMatrix}}.
+#' @return \code{as.tdm} - Returns a \code{\link[tm]{TermDocumentMatrix}}.
 #' @export
 #' @seealso \code{\link[tm]{DocumentTermMatrix}},
 #' \code{\link[tm]{Corpus}},
@@ -28,19 +27,19 @@
 #' \code{\link[qdap]{as.wfm}}
 #' @importFrom reshape2 melt
 #' @importFrom tm tm_map as.PlainTextDocument VectorSource Corpus
-#' @rdname tdm
+#' @rdname as.tdm
 #' @examples
 #' \dontrun{
-#' dtm(DATA$state, DATA$person)
-#' tdm(DATA$state, DATA$person)
+#' as.dtm(DATA$state, DATA$person)
+#' as.tdm(DATA$state, DATA$person)
 #' 
 #' x <- wfm(DATA$state, DATA$person)
-#' tdm(x)
-#' dtm(x)
+#' as.tdm(x)
+#' as.dtm(x)
 #' library(tm)
-#' plot(tdm(x))
+#' plot(as.tdm(x))
 #' 
-#' pres <- tdm(pres_debates2012$dialogue, pres_debates2012$person)
+#' pres <- as.tdm(pres_debates2012$dialogue, pres_debates2012$person)
 #' plot(pres, corThreshold = 0.8)
 #' pres
 #' (pres2 <- removeSparseTerms(pres, .3))
@@ -53,7 +52,7 @@
 #'     qdapDictionaries::Top200Words,
 #'     "governor", "president", "mister", "obama","romney")
 #' 
-#' DocTermMat2 <- with(pres_debates2012, dtm(dialogue, list(person, time), stopwords = SW))
+#' DocTermMat2 <- with(pres_debates2012, as.dtm(dialogue, list(person, time), stopwords = SW))
 #' DocTermMat2 <- removeSparseTerms(DocTermMat2,0.95)
 #' DocTermMat2 <- DocTermMat2[rowSums(as.matrix(DocTermMat2))> 0,]
 #'     
@@ -64,7 +63,7 @@
 #' dat <- dat[dat$person %in% qcv(ROMNEY, OBAMA), ]
 #' 
 #' speech <- stemmer(dat$dialogue)
-#' mytable1 <- with(dat, tdm(speech, list(person, time), stopwords = Top25Words))
+#' mytable1 <- with(dat, as.tdm(speech, list(person, time), stopwords = Top25Words))
 #' 
 #' fit <- ca(mytable1)
 #' summary(fit)
@@ -72,7 +71,7 @@
 #' plot3d.ca(fit, labels=1)
 #' 
 #' 
-#' mytable2 <- with(dat, tdm(speech, list(person, time), stopwords = Top200Words))
+#' mytable2 <- with(dat, as.tdm(speech, list(person, time), stopwords = Top200Words))
 #' 
 #' fit2 <- ca(mytable2)
 #' summary(fit2)
@@ -91,7 +90,7 @@
 #'     qdapDictionaries::Top200Words, 
 #'     "governor", "president", "mister", "obama","romney")
 #'     
-#' DocTermMat <- with(pres_debates2012, dtm(dialogue, person, stopwords = SW))
+#' DocTermMat <- with(pres_debates2012, as.dtm(dialogue, person, stopwords = SW))
 #' DocTermMat <- removeSparseTerms(DocTermMat,0.999)
 #' DocTermMat <- DocTermMat[rowSums(as.matrix(DocTermMat))> 0,]
 #' 
@@ -113,7 +112,7 @@
 #'     guides(fill=FALSE)
 #' 
 #' # Example 2 #
-#' DocTermMat2 <- with(pres_debates2012, dtm(dialogue, list(person, time), stopwords = SW))
+#' DocTermMat2 <- with(pres_debates2012, as.dtm(dialogue, list(person, time), stopwords = SW))
 #' DocTermMat2 <- removeSparseTerms(DocTermMat2,0.95)
 #' DocTermMat2 <- DocTermMat2[rowSums(as.matrix(DocTermMat2))> 0,]
 #' 
@@ -210,12 +209,12 @@
 #'     readerControl = list(reader = readReut21578XML))
 #' 
 #' ## Convert to dataframe
-#' corp_df <- tm_corpus2df(reuters)
+#' corp_df <- as.data.frame(reuters)
 #' htruncdf(corp_df)
 #' 
 #' z <- as.Corpus(DATA$state, DATA$person, 
 #'        demographic=DATA[, qcv(sex, adult, code)])
-#' tm_corpus2df(z)
+#' as.data.frame(z)
 #' 
 #' ## Apply a qdap function
 #' out <- formality(corp_df$text, corp_df$docs)
@@ -300,7 +299,59 @@
 #' Filter(tdm_in, 3, 4)
 #' Filter(tdm_in, 3, 4, stopwords = Top200Words)
 #' }
-tdm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+as.tdm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+
+    text.var
+    grouping.var
+    vowel.check
+    
+    UseMethod("as.tdm")
+}    
+
+#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
+#' Matrix or Document Term Matrix
+#' 
+#' \code{as.TermDocumentMatrix} - Create document term matrices from raw text or 
+#' \code{\link[qdap]{wfm}} for use with other text analysis packages.
+#' 
+#' @return \code{as.TermDocumentMatrix} - Returns a 
+#' \code{\link[tm]{TermDocumentMatrix}}.
+#' @rdname as.tdm
+#' @export
+as.TermDocumentMatrix <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+
+    text.var
+    grouping.var
+    vowel.check
+    
+    UseMethod("as.TermDocumentMatrix")
+} 
+
+#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
+#' Matrix or Document Term Matrix
+#' 
+#' \code{as.DocumentTermMatrix} - Create document term matrices from raw text or 
+#' \code{\link[qdap]{wfm}} for use with other text analysis packages.
+#' 
+#' @return \code{as.DocumentTermMatrix} - Returns a 
+#' \code{\link[tm]{TermDocumentMatrix}}.
+#' @rdname as.tdm
+#' @export
+as.DocumentTermMatrix <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+
+    text.var
+    grouping.var
+    vowel.check
+    
+    UseMethod("as.DocumentTermMatrix")
+} 
+
+#' \code{as.tdm.default} - Default method for \code{as.tdm} used to 
+#' convert to a \code{\link[tm]{TermDocumentMatrix}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.tdm default    
+as.tdm.default <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
     x <- wfm2xtab(text.var = text.var, grouping.var = grouping.var, ...)
 
@@ -330,23 +381,37 @@ tdm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
     a
 }
 
+
 ## Helper function to check on words w/o vowels (matches tm output)
 vowel_check <- function(text.var) {
     grepl("[aeiouy]", text.var)
 }
 
 
-
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
-#' \code{dtm} - Create document term matrices from raw text or 
+#' \code{as.dtm} - Create document term matrices from raw text or 
 #' \code{\link[qdap]{wfm}} for use with other text analysis packages.
 #' 
-#' @return \code{dtm} - Returns a \code{\link[tm]{DocumentTermMatrix}}.
-#' @rdname tdm
+#' @return \code{as.dtm} - Returns a \code{\link[tm]{DocumentTermMatrix}}.
+#' @rdname as.tdm
 #' @export
-dtm <- 
+as.dtm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+
+    text.var
+    grouping.var
+    vowel.check
+    
+    UseMethod("as.dtm")
+}    
+    
+#' \code{as.dtm.default} - Default method for \code{as.dtm} used to 
+#' convert to a \code{\link[tm]{DocumentTermMatrix}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.dtm default 
+as.dtm.default <- 
 function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
     x <- t(wfm2xtab(text.var = text.var, grouping.var = grouping.var, ...))
@@ -376,6 +441,19 @@ function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
     a
 }
 
+#' \code{as.DocumentTermMatrix.default} - Default method for \code{as.DocumentTermMatrix} used to 
+#' convert to a \code{\link[tm]{DocumentTermMatrix}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.DocumentTermMatrix default 
+as.DocumentTermMatrix.default <- as.dtm.default
+
+#' \code{as.TermDocumentMatrix.default} - Default method for \code{as.TermDocumentMatrix} used to 
+#' convert to a \code{\link[tm]{TermDocumentMatrix}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.TermDocumentMatrix default 
+as.TermDocumentMatrix.default <- as.tdm.default
 
 wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
   
@@ -393,56 +471,47 @@ wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
-#' \code{tm_corpus2df} - Convert a tm package corpus to a dataframe.
+#' \code{as.data.frame} - Convert a \pkg{tm} package \code{\link[tm]{Corpus}} to 
+#' a \pkg{qdap} \code{\link[base]{data.frame}}.
 #' 
-#' @param tm.corpus A \code{\link[tm]{Corpus}} object.
-#' @param col1 Name for column 1 (the vector elements).
-#' @param col2 Name for column 2 (the names of the vectors).
+#' @param x A \code{\link[tm]{Corpus}} object.
+#' @param doc Name for \code{\link[tm]{Corpus}} documents.
+#' @param text Name for \code{\link[tm]{Corpus}} text.
 #' @param sent.split logical.  If \code{TRUE} the text variable sentences will 
 #' be split into individual rows.
-#' @return \code{tm_corpus2df} - Converts a \code{\link[tm]{Corpus}} and returns 
+#' @param row.names \code{NULL} or a character vector giving the row names for 
+#' the data frame. Not used in \pkg{qdap}; for base genric consistency.
+#' @param optional logical. If \code{TRUE}, setting row names and converting 
+#' column names is optional. Not used in \pkg{qdap}; for base genric consistency.
+#' @return \code{as.data.frame} - Converts a \code{\link[tm]{Corpus}} and returns 
 #' a qdap oriented dataframe.
-#' @rdname tdm
+#' @rdname as.tdm
 #' @export
 #' @importFrom qdapTools list2df
-tm_corpus2df <- function(tm.corpus, col1 = "docs", col2 = "text", 
-    sent.split = TRUE, ...) {
+#' @method as.data.frame Corpus
+as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "docs", 
+    text = "text", sent.split = TRUE) {
 
-    if(!is(tm.corpus[[1]], "PlainTextDocument")) {
-        tm.corpus <- tm_map(tm.corpus, as.PlainTextDocument)
+    if(!is(x[[1]], "PlainTextDocument")) {
+        x <- tm_map(x, as.PlainTextDocument)
     }
     
-    out <- list2df(tm.corpus, col1 = col2, col2 = col1)[, 2:1]
+    out <- list2df(x, col1 = text, col2 = doc)[, 2:1]
 
-    metadat <- attributes(tm.corpus)[["DMetaData"]]
+    metadat <- attributes(x)[["DMetaData"]]
     if (ncol(metadat) > 1) {
-        colnames(metadat)[1] <- col1
+        colnames(metadat)[1] <- doc
         out <- key_merge(out, metadat)
     }
 
     if (sent.split) {
-        out <- sentSplit(out, col2, ...)
+        out <- sentSplit(out, text, ...)
     }
     out
 
 }
 
-#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
-#' Matrix or Document Term Matrix
-#' 
-#' \code{tm_corpus2wfm} - Convert a \code{\link[tm]{Corpus}} package corpus to a 
-#' \code{\link[qdap]{wfm}}. 
-#' 
-#' @rdname tdm
-#' @return \code{df2tm_wfm} - Converts a qdap oriented dataframe and returns 
-#' a \code{\link[qdap]{wfm}}.
-#' @export
-tm_corpus2wfm <- function(tm.corpus, col1 = "docs", col2 = "text", ...) {
 
-      text <- docs <- NULL
-      with(tm_corpus2df(tm.corpus), wfm(text, docs, ...))  
-
-}
 
 
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
@@ -455,7 +524,7 @@ tm_corpus2wfm <- function(tm.corpus, col1 = "docs", col2 = "text", ...) {
 #' variables.  This is a data.frame, list of equal length vectors, or a single 
 #' vector corresponding to the grouping variable/text variable.  This 
 #' information will be mapped to the DMetaData in the \code{\link[tm]{Corpus}}.
-#' @rdname tdm
+#' @rdname as.tdm
 #' @return \code{as.Corpus} - Converts a qdap oriented dataframe and returns 
 #' a \code{\link[tm]{Corpus}}.
 #' @export
@@ -469,7 +538,7 @@ as.Corpus <- function(text.var, grouping.var = NULL, demographic.vars, ...){
 }    
 
 #' \code{as.Corpus.sent_split} - \code{sent_split} Method for \code{as.Corpus}.
-#' @rdname tdm
+#' @rdname as.tdm
 #' @export
 #' @method as.Corpus sent_split 
 as.Corpus.sent_split <- function(text.var, grouping.var = NULL, 
@@ -504,7 +573,7 @@ as.Corpus.sent_split <- function(text.var, grouping.var = NULL,
     
 #' \code{as.Corpus.default} - Default method for \code{as.Corpus} used to 
 #' convert vectors (from a \code{data.frame}) to a \code{\link[tm]{Corpus}}.
-#' @rdname tdm
+#' @rdname as.tdm
 #' @export
 #' @method as.Corpus default 
 as.Corpus.default <- function(text.var, grouping.var = NULL, demographic.vars, 
@@ -677,12 +746,12 @@ t.DocumentTermMatrix <- function(x, ...) {
 #' @return \code{apply_as_tm} - Applies a tm oriented function to a 
 #' \code{\link[qdap]{wfm}} and attempts to simplify back to a 
 #' \code{\link[qdap]{wfm}} or \code{weight} format.
-#' @rdname tdm
+#' @rdname as.tdm
 #' @export
 apply_as_tm <- function(wfm.obj, tmfun, ..., to.qdap = TRUE){
 
     ## Convert to a tdm
-    x <- tdm(wfm.obj) 
+    x <- as.tdm(wfm.obj) 
 
     ## Apply the tm function
     y <- tmfun(x, ...) 
@@ -704,6 +773,7 @@ apply_as_tm <- function(wfm.obj, tmfun, ..., to.qdap = TRUE){
 #' package's \code{\link[base]{data.frame}} + \code{\link[qdap]{sentSplit}} to 
 #' a \pkg{tm} \code{\link[tm]{Corpus}} object.
 #' 
+#' @param tm.corpus A \code{\link[tm]{Corpus}} object.
 #' @param qdapfun A qdap function that is usually used on 
 #' text.variable ~ grouping variable.
 #' @param stopwords A character vector of words to remove from the text.  qdap 
@@ -722,13 +792,13 @@ apply_as_tm <- function(wfm.obj, tmfun, ..., to.qdap = TRUE){
 #' \pkg{qdap} function.
 #' @seealso \code{\link[qdap]{Filter}}
 #' @export
-#' @rdname tdm
+#' @rdname as.tdm
 apply_as_df <- function(tm.corpus, qdapfun, ..., stopwords = NULL, 
     min = 1, max = Inf, count.apostrophe = TRUE, ignore.case = TRUE) {
 
     text <- doc <- tot <- NULL
 
-    dat <- tm_corpus2df(tm.corpus)
+    dat <- as.data.frame(tm.corpus)
 
     if (!is.null(stopwords)) {
         dat[, "text"] <- rm_stopwords(dat[, "text"], stopwords, separate = FALSE, 
@@ -785,7 +855,7 @@ apply_as_df <- function(tm.corpus, qdapfun, ..., stopwords = NULL,
 Filter.TermDocumentMatrix <- function(x, min = 1, max = Inf, count.apostrophe = TRUE, 
     stopwords = NULL, ignore.case = TRUE, ...) {
    
-    tdm(Filter(as.wfm(x), min = min, max = max, 
+    as.tdm(Filter(as.wfm(x), min = min, max = max, 
         count.apostrophe = count.apostrophe, 
         stopwords = stopwords, ignore.case = ignore.case, ...))
 
@@ -804,7 +874,7 @@ Filter.TermDocumentMatrix <- function(x, min = 1, max = Inf, count.apostrophe = 
 Filter.DocumentTermMatrix <- function(x, min = 1, max = Inf, 
     count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...) {
    
-    dtm(Filter(as.wfm(x), min = min, max = max, 
+    as.dtm(Filter(as.wfm(x), min = min, max = max, 
         count.apostrophe = count.apostrophe, 
         stopwords = stopwords, ignore.case = ignore.case, ...))
 
@@ -814,8 +884,8 @@ Filter.DocumentTermMatrix <- function(x, min = 1, max = Inf,
 ##Removed after las archived:
 ## ## Latent Semantic Analysis
 ## library(lsa)
-## lsa(tdm(x), dims=dimcalc_share())
-## lsa(tdm(DATA$state, DATA$person), dims=dimcalc_share())
+## lsa(as.tdm(x), dims=dimcalc_share())
+## lsa(as.tdm(DATA$state, DATA$person), dims=dimcalc_share())
 
 #' 
 #' out <- lsa(DocTermMat2, 6)

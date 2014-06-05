@@ -8,6 +8,7 @@
 \alias{Filter.fswl}
 \alias{Filter.fwl}
 \alias{Filter.rfswl}
+\alias{Filter.wfm}
 \title{Filter}
 \usage{
 \method{Filter}{all_words}(x, min = 1, max = Inf, count.apostrophe = TRUE,
@@ -21,6 +22,9 @@
 
 Filter(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL,
   ignore.case = TRUE, ...)
+
+\method{Filter}{wfm}(x, min = 1, max = Inf, count.apostrophe = TRUE,
+  stopwords = NULL, ...)
 
 \method{Filter}{character}(x, min = 1, max = Inf, count.apostrophe = TRUE,
   stopwords = NULL, ignore.case = TRUE, ...)
@@ -59,6 +63,8 @@ regardless of case (ignored if used on a \code{\link[qdap]{wfm}}).}
 
 \code{Filter.DocumentTermMatrix} - Returns a matrix of the class "DocumentTermMatrix".
 
+\code{Filter} - Returns a matrix of the class "wfm".
+
 \code{Filter.character} - Returns a vector of the class "character".
 
 \code{Filter.wfm} - Returns a matrix of the class "wfm".
@@ -81,6 +87,9 @@ that meet max/min word length criteria.
 
 \code{Filter} - Filter words from various objects that meet max/min word
 length criteria.
+
+\code{Filter.wfm} - Filter words from a wfm that meet max/min word length
+criteria.
 
 \code{Filter.character} - Filter words from a character vector that meet
 max/min word length criteria.

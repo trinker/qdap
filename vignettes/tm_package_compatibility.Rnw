@@ -320,7 +320,7 @@ Now we'll look at some \textbf{qdap} functions that enable the user to move betw
 <<data_set_up>>=
 tm_dat <- qdap_dat <- DATA[1:4, c (1, 4) ]
 rownames (tm_dat) <- paste ("docs", 1: nrow (tm_dat))
-tm_dat <- Corpus ( DataframeSource (tm_dat[, 2, drop=FALSE]))
+tm_dat <- Corpus(DataframeSource (tm_dat[, 2, drop=FALSE]))
 
 qdap_wfm <- with (qdap_dat, wfm (state, person))
 tm_tdm <- TermDocumentMatrix (tm_dat,
@@ -330,6 +330,8 @@ tm_tdm <- TermDocumentMatrix (tm_dat,
     )
 )
 @
+
+\newpage
 
 \begin{enumerate}
   \item \texttt{qdap\_dat} -- is a \underline{\textbf{qdap} raw text} form
@@ -351,19 +353,19 @@ tm_tdm; inspect(tm_tdm)
 
 \subsection{Corpus to data.frame}
 
-\hspace{.4cm} To move from a \texttt{Corpus} to a \texttt{data.frame} the \texttt{tm\_corpus2df} function is used as follows:
+\hspace{.4cm} To move from a \texttt{Corpus} to a \texttt{data.frame} the \texttt{as.data.frame} function is used as follows:
 
 <<corp2df, eval=FALSE>>=
-tm_corpus2df(tm_dat)
+as.data.frame(tm_dat)
 @
 
 <<corp2df2, echo=FALSE>>=
-tm_corpus2df(tm_dat)
+as.data.frame(tm_dat)
 @
 
 \subsection{data.frame to Corpus}
 
-\hspace{.4cm} To move from a \texttt{data.frame} to a \texttt{Corpus} the \texttt{df2tm\_corpus} function is used as follows:
+\hspace{.4cm} To move from a \texttt{data.frame} to a \texttt{Corpus} the \texttt{as.Corpus} function is used as follows:
 
 <<df2corp, eval=FALSE>>=
 with(qdap_dat, as.Corpus(state, person))
@@ -373,48 +375,48 @@ with(qdap_dat, as.Corpus(state, person))
 with(qdap_dat, as.Corpus(state, person))
 @
 
-\scriptsize\noindent *Note the 3 text documents; one for each grouping variable.  To get one for each row use: \\ \indent \texttt{with(qdap\_dat, df2tm\_corpus(state, id(person)))} \normalsize
+\scriptsize\noindent *Note the 3 text documents; one for each grouping variable.  To get one for each row use: \\ \indent \texttt{with(qdap\_dat, as.Corpus(state, id(person)))} \normalsize
 
 \subsection{TermDocumentMatrix/DocumentTermMatrix to wfm}
 
 \hspace{.4cm} To move from a \texttt{TermDocumentMatrix} to a \texttt{wfm} the \texttt{as.wfm} function is used as follows:
 
-<<tdm2wfm, eval=FALSE>>=
+<<as.wfm1, eval=FALSE>>=
 as.wfm(tm_tdm)
 @
 
-<<tdm2wfm2, echo=FALSE>>=
+<<as.wfm2, echo=FALSE>>=
 as.wfm(tm_tdm)
 @
 
 
 \subsection{wfm to TermDocumentMatrix/DocumentTermMatrix}
 
-\hspace{.4cm} To move from a \texttt{wfm} to a \texttt{TermDocumentMatrix} or \texttt{DocumentTermMatrix} the \texttt{tdm} and \texttt{dtm} functions can be used as follows:
+\hspace{.4cm} To move from a \texttt{wfm} to a \texttt{TermDocumentMatrix} or \texttt{DocumentTermMatrix} the \texttt{as.tdm} and \texttt{as.dtm} functions can be used as follows:
 
 <<wfm2tdm, eval=FALSE>>=
-tdm(qdap_wfm)
-dtm(qdap_wfm)
+as.tdm(qdap_wfm)
+as.dtm(qdap_wfm)
 @
 
 <<wfm2tdm2, echo=FALSE>>=
-tdm(qdap_wfm)
+as.tdm(qdap_wfm)
 @
 
 <<wfm2tdm3, echo=FALSE>>=
-dtm(qdap_wfm)
+as.dtm(qdap_wfm)
 @
 
 \subsection{Corpus to wfm}
 
-\hspace{.4cm} One can also move directly from a \textbf{tm} \texttt{Corpus} to a \textbf{qdap} \texttt{wfm} with the \texttt{tm\_corpus2wfm} function.
+\hspace{.4cm} One can also move directly from a \textbf{tm} \texttt{Corpus} to a \textbf{qdap} \texttt{wfm} with the \texttt{as.wfm} function.
 
 <<corp2wfma, eval=FALSE>>=
-tm_corpus2wfm(tm_dat)
+as.wfm(tm_dat)
 @
 
 <<corp2wfmb, echo=FALSE>>=
-tm_corpus2wfm(tm_dat)
+as.wfm(tm_dat)
 @
 
 \section{Stemming, Stopwords, and Choosing n-Character Words/Terms from a wfm}

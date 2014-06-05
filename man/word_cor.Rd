@@ -111,7 +111,7 @@ plot(out)
 require(tm)
 data("crude")
 
-out1 <- word_cor(t(tm_corpus2wfm(crude)), word = "oil", r=.7)
+out1 <- word_cor(t(as.wfm(crude)), word = "oil", r=.7)
 vect2df(out1[[1]], "word", "cor")
 
 plot(out1)
@@ -119,7 +119,7 @@ qheat(vect2df(out1[[1]], "word", "cor"), values=TRUE, high="red",
     digits=2, order.by ="cor", plot=FALSE) + coord_flip()
 
 
-out2 <- word_cor(t(tm_corpus2wfm(crude)), word = c("oil", "country"), r=.7)
+out2 <- word_cor(t(as.wfm(crude)), word = c("oil", "country"), r=.7)
 plot(out2)
 }
 }

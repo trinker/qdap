@@ -2769,8 +2769,8 @@ The following functions will be utilized in this section (click to view more):
     <input type="submit" value="syllable_sum"><input type="submit" value="combo_syllable_sum"><input type="submit" value="polysyllable_sum"><input type="submit" value="syllable_count"> - `r HR("#syll", "Syllabication and Counts")`
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
-    <input type="submit" value="tdm"><input type="submit" value="dtm"> - `r HR("#tdm", "Convert/Generate Term Document Matrix or Document Term Matrix")`
+<form action="http://trinker.github.io/qdap_dev/as.tdm.html" target="_blank">
+    <input type="submit" value="as.tdm"><input type="submit" value="as.dtm"> - `r HR("#as.tdm", "Convert/Generate Term Document Matrix or Document Term Matrix")`
 </form>
 
 <form class="form_left" action="http://trinker.github.io/qdap_dev/termco.html" target="_blank">
@@ -3017,26 +3017,26 @@ plot(fit2)
 plot3d.ca(fit2, labels=1)
 </code></pre>
 
-<h5 id="tdm"><font color="green">Convert/Generate Term Document Matrix or Document Term Matrix</font></h5>
+<h5 id="as.tdm"><font color="green">Convert/Generate Term Document Matrix or Document Term Matrix</font></h5>
 
-Some packages that could further the analysis of qdap expect a Document Term or Term Document Matrix.  qdap's `r FUN("wfm", "Word_Frequency_Matrix")` is similar to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package's")` `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "TermDocumentMatrix")`     and `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "DocumentTermMatrix")`.  qdap does not try to replicate the extensive work of the`r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm")` package, however, the `r FUN("tdm")` and `r FUN("dtm", "tdm")` do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.  For a vignette describing qdap-tm compatability use `browseVignettes(package = "qdap")` or `\r HR2("http://cran.r-project.org/web/packages/qdap/vignettes/tm_package_compatibility.pdf, "Click Here")`.
+Some packages that could further the analysis of qdap expect a Document Term or Term Document Matrix.  qdap's `r FUN("wfm", "Word_Frequency_Matrix")` is similar to the `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package's")` `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "TermDocumentMatrix")`     and `r HR("http://www.inside-r.org/packages/cran/tm/docs/DocumentTermMatrix", "DocumentTermMatrix")`.  qdap does not try to replicate the extensive work of the`r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm")` package, however, the `r FUN("as.tdm")` and `r FUN("as.dtm", "as.tdm")` do attempt to extend the work the researcher conducts in qdap to be utilized in other R packages.  For a vignette describing qdap-tm compatability use `browseVignettes(package = "qdap")` or `\r HR2("http://cran.r-project.org/web/packages/qdap/vignettes/tm_package_compatibility.pdf, "Click Here")`.
 
-`r FT(orange, 5, text="&diams;")` **`r FUN("tdm")` Use** `r FT(orange, 5, text="&diams;")`
+`r FT(orange, 5, text="&diams;")` **`r FUN("as.tdm")` Use** `r FT(orange, 5, text="&diams;")`
 
 
 ```{r}
 x <- wfm(DATA$state, DATA$person)
 ## Term Document Matrix
-tdm(x)
+as.tdm(x)
 ## Document Term Matrix
-dtm(x)
+as.dtm(x)
 ```
 
 ```{r rval=FALSE, echoh=FALSE, include=FALSE}
 ## ```{r eval =  FALSE}
 ## ## Run Latent Semantic Analysis
 ## library(lsa)
-## lsa(tdm(x), dims=dimcalc_share())
+## lsa(as.tdm(x), dims=dimcalc_share())
 ## ```
 ## 
 ## 
@@ -5071,20 +5071,20 @@ qdap allows for the detection of imperative sentences via the `r FUN("imperative
 The following functions will be utilized in this section (click to view more):   
 
 
-<form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
-    <input type="submit" value="tdm"><input type="submit" value="dtm"> - `r HR("#tdm", "Create term document matrices or document term matrices from raw text or wfm")`
+<form action="http://trinker.github.io/qdap_dev/as.tdm.html" target="_blank">
+    <input type="submit" value="as.tdm"><input type="submit" value="as.dtm"> - `r HR("#as.tdm", "Create term document matrices or document term matrices from raw text or wfm")`
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
-    <input type="submit" value="tm2wfm"> - `r HR("#as.wfm", "Convert the tm package's TermDocumentMatrix/DocumentTermMatrix to wfm")`
+<form action="http://trinker.github.io/qdap_dev/Word_Frequency_Matrix.html" target="_blank">
+    <input type="submit" value="as.wfm"> - `r HR("#as.wfm", "Convert the tm package's TermDocumentMatrix/DocumentTermMatrix to wfm")`
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
+<form action="http://trinker.github.io/qdap_dev/as.tdm.html" target="_blank">
     <input type="submit" value="apply_as_tm"> - `r HR("#apply_as_tm", "Apply functions intended to be used on the tm package's TermDocumentMatrix to a wfm object")`
 </form>
 
-<form action="http://trinker.github.io/qdap_dev/tdm.html" target="_blank">
-    <input type="submit" value="tm_corpus2df"><input type="submit" value="as.Corpus"> - `r HR("#tm_corpus2df", "Convert between tm package Corpus and qdap dataframe")`
+<form action="http://trinker.github.io/qdap_dev/as.tdm.html" target="_blank">
+    <input type="submit" value="as.data.frame"><input type="submit" value="as.Corpus"> - `r HR("#as.data.frame", "Convert between tm package Corpus and qdap dataframe")`
 </form>
 
 </div>
@@ -5093,19 +5093,19 @@ The following functions will be utilized in this section (click to view more):
 The `r HR("http://cran.r-project.org/web/packages/tm/index.html", "tm package")` is a heavily regarded and utilized R package for text mining purposes.  The primary data forms for the tm package are <a href="http://www.inside-r.org/packages/cran/tm/docs/Corpus"><b><font color="green", face="courier">Corpus</font></b></a> and <a href="http://www.inside-r.org/packages/cran/tm/docs/http://www.inside-r.org/packages/cran/tm/docs/TermDocumentMatrix"><b><font color="green", face="courier">TermDocumentMatrix</font></b></a>/<a href="http://www.inside-r.org/packages/cran/tm/docs/http://www.inside-r.org/packages/cran/tm/docs/TermDocumentMatrix"><b><font color="green", face="courier">DocumentTermMatrix</font></b></a>.  Because tm is a dependancy for many R text mining packages it is prudent to provide a set of tools to convert between tm and qdap data types.  This section demos a few of the tools designed to achieve qdap-tm compatibility.  For a more thorough vignette describing qdap-tm compatability use `browseVignettes(package = "qdap")` or `r HR2("http://cran.r-project.org/web/packages/qdap/vignettes/tm_package_compatibility.pdf", "Click Here")`.
 
 
-<h4 id="tdm">Create term document matrices or document term matrices from raw text or wfm</h4>
+<h4 id="as.tdm">Create term document matrices or document term matrices from raw text or wfm</h4>
 
-<p id="tdm1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("tdm")`</b> & <b>`r FUN("dtm", "tdm")`</b>  - <em>From Raw Text Example 1</em>`r FT(orange, 5, text="&diams;")`</p >
+<p id="as.tdm1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("as.tdm")`</b> & <b>`r FUN("as.dtm", "as.tdm")`</b>  - <em>From Raw Text Example 1</em>`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r}
-tdm(DATA$state, DATA$person)
-dtm(DATA$state, DATA$person)
+as.tdm(DATA$state, DATA$person)
+as.dtm(DATA$state, DATA$person)
 ```
 
-<p id="tdm1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("tdm")`</b> & <b>`r FUN("dtm", "tdm")`</b>  - <em>From Raw Text Example 2</em>`r FT(orange, 5, text="&diams;")`</p >
+<p id="as.tdm1">`r FT(orange, 5, text="&diams;")` <b>`r FUN("as.tdm")`</b> & <b>`r FUN("as.dtm", "as.tdm")`</b>  - <em>From Raw Text Example 2</em>`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r message = FALSE, fig.width = 9, fig.height = 9}
-(pres <- tdm(pres_debates2012$dialogue, pres_debates2012$person))
+(pres <- as.tdm(pres_debates2012$dialogue, pres_debates2012$person))
 ```
 
 <pre><code class="r">library(tm)
@@ -5121,15 +5121,15 @@ plot(pres, corThreshold = 0.8)</code></pre>
 
 ![](imgs/tm_imgs/img2.png)
 
-<p id="tdm2">`r FT(orange, 5, text="&diams;")` <b>`r FUN("tdm")`</b> & <b>`r FUN("dtm", "tdm")`</b>  - <em>From `r FUN("wfm")`</em>`r FT(orange, 5, text="&diams;")`</p >
+<p id="as.tdm2">`r FT(orange, 5, text="&diams;")` <b>`r FUN("as.tdm")`</b> & <b>`r FUN("as.dtm", "as.tdm")`</b>  - <em>From `r FUN("wfm")`</em>`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.width = 9, fig.height = 9}
 x <- wfm(DATA$state, DATA$person)
-tdm(x)
-dtm(x)
+as.tdm(x)
+as.dtm(x)
 ```
 
-<pre><code class="r">plot(tdm(x))</code></pre>
+<pre><code class="r">plot(as.tdm(x))</code></pre>
 ![](imgs/tm_imgs/img3.png)
 
 
@@ -5138,13 +5138,13 @@ dtm(x)
 ```{r message = FALSE}
 library(tm); data(crude)
 (dtm_in <- DocumentTermMatrix(crude, control = list(stopwords = TRUE)))
-summary(tm2qdap(dtm_in))
+summary(as.wfm(dtm_in))
 ```
 
 
 <h4 id="apply_as_tm">Apply functions intended to be used on the tm package's TermDocumentMatrix to a wfm object</h4>
 
-`r FUN("apply_as_tm", "tdm")` allows the user to apply functions intended to be used on the `tm` package's `r HR("http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix", "TermDocumentMatrix")` to a `r FUN("wfm")` object.  `r FUN("apply_as_tm", "tdm")` attempts to simplify back to a `r FUN("wfm")` or `r FUN("wfm_weight", "wfm")` format.  In the examples belows we first create a `r FUN("wfm")` and then apply functions designed for a `r HR("http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix", "TermDocumentMatrix")`.
+`r FUN("apply_as_tm", "as.tdm")` allows the user to apply functions intended to be used on the `tm` package's `r HR("http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix", "TermDocumentMatrix")` to a `r FUN("wfm")` object.  `r FUN("apply_as_tm", "as.tdm")` attempts to simplify back to a `r FUN("wfm")` or `r FUN("wfm_weight", "wfm")` format.  In the examples belows we first create a `r FUN("wfm")` and then apply functions designed for a `r HR("http://www.inside-r.org/packages/cran/tm/docs/as.TermDocumentMatrix", "TermDocumentMatrix")`.
 
 
 ```{r message = FALSE}
@@ -5176,7 +5176,7 @@ apply_as_tm(a, tm:::weightTfIdf)
 ```
 
 
-<h4 id="tm_corpus2df">Convert between tm package Corpus and qdap dataframe.</h4>
+<h4 id="as.data.frame">Convert between tm package Corpus and qdap dataframe.</h4>
 
 ```{r}
 ## Convert dataframe to a Corpus
@@ -5185,7 +5185,7 @@ library(tm)
 inspect(x)
 class(x)
 ## Convert Back
-htruncdf(tm_corpus2df(x), 15, 30)
+htruncdf(as.data.frame(x), 15, 30)
 ```
 
 <h3 id="data">Data Sets</h3>
