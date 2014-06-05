@@ -42,6 +42,9 @@ And constructed with the following guidelines:
 * `df2tm_corpus` is deprecated.  It will be removed in a subsequent version of 
   `qdap`.  Use `as.Corpus` instead.
 
+* `tm2qdap` is deprecated.  It will not be exported in a subsequent version of 
+  `qdap`.  Use `as.wfm` instead.
+
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.0.0
 ----------------------------------------------------------------
 

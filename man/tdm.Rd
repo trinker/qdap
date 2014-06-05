@@ -7,7 +7,6 @@
 \alias{as.Corpus.sent_split}
 \alias{dtm}
 \alias{tdm}
-\alias{tm2qdap}
 \alias{tm_corpus2df}
 \alias{tm_corpus2wfm}
 \title{tm Package Compatibility Tools: Apply to or Convert to/from Term Document
@@ -16,8 +15,6 @@ Matrix or Document Term Matrix}
 tdm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
 dtm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
-
-tm2qdap(x)
 
 tm_corpus2df(tm.corpus, col1 = "docs", col2 = "text", sent.split = TRUE,
   ...)
@@ -53,8 +50,6 @@ Other arguments passed to \code{\link[qdap]{sentSplit}}.  If
 to \code{\link[qdap]{wfm}}.}
 
 \item{vowel.check}{logical.  Should terms without vowels be remove?}
-
-\item{x}{A \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.}
 
 \item{tm.corpus}{A \code{\link[tm]{Corpus}} object.}
 
@@ -101,9 +96,6 @@ regardless of case.}
 
 \code{dtm} - Returns a \code{\link[tm]{DocumentTermMatrix}}.
 
-\code{tm2qdap} - Returns a \code{\link[qdap]{wfm}} object or
-\code{weight} object.
-
 \code{tm_corpus2df} - Converts a \code{\link[tm]{Corpus}} and returns
 a qdap oriented dataframe.
 
@@ -127,21 +119,18 @@ a \code{\link[tm]{Corpus}}.
 \code{dtm} - Create document term matrices from raw text or
 \code{\link[qdap]{wfm}} for use with other text analysis packages.
 
-\code{tm2qdap} - Convert the \pkg{tm} package's
-\code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}} to
-\code{\link[qdap]{wfm}}.
-
 \code{tm_corpus2df} - Convert a tm package corpus to a dataframe.
 
 \code{tm_corpus2wfm} - Convert a \code{\link[tm]{Corpus}} package corpus to a
 \code{\link[qdap]{wfm}}.
 
-\code{as.Corpus} - Convert a qdap dataframe to a tm package
+\code{as.Corpus} - Attempts to convert its argument into a \pkg{tm} package
 \code{\link[tm]{Corpus}}.
 
-\code{as.Corpus.sent_split} - sent_split Method for as.Corpus
+\code{as.Corpus.sent_split} - \code{sent_split} Method for \code{as.Corpus}.
 
-\code{as.Corpus.default} - default Method for as.Corpus
+\code{as.Corpus.default} - Default method for \code{as.Corpus} used to
+convert vectors (from a \code{data.frame}) to a \code{\link[tm]{Corpus}}.
 
 \code{apply_as_tm} - Apply functions intended to be used on the \pkg{tm}
 package's \code{\link[tm]{TermDocumentMatrix}} to a \code{\link[qdap]{wfm}}
@@ -306,13 +295,13 @@ data(crude)
 
 ## A Term Document Matrix Conversion
 (tm_in <- TermDocumentMatrix(crude, control = list(stopwords = TRUE)))
-converted <- tm2qdap(tm_in)
+converted <- as.wfm(tm_in)
 head(converted)
 summary(converted)
 
 ## A Document Term Matrix Conversion
 (dtm_in <- DocumentTermMatrix(crude, control = list(stopwords = TRUE)))
-summary(tm2qdap(dtm_in))
+summary(as.wfm(dtm_in))
 
 ## `apply_as_tm` Examples
 ## Create a wfm
@@ -438,7 +427,8 @@ Filter(tdm_in, 3, 4, stopwords = Top200Words)
 \seealso{
 \code{\link[tm]{DocumentTermMatrix}},
 \code{\link[tm]{Corpus}},
-\code{\link[tm]{TermDocumentMatrix}}
+\code{\link[tm]{TermDocumentMatrix}},
+\code{\link[qdap]{as.wfm}}
 
 \code{\link[qdap]{Filter}}
 }

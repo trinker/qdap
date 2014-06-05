@@ -1,5 +1,4 @@
-#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
-#' Matrix or Document Term Matrix
+#' Deprecated qdap Functions
 #' 
 #' \code{df2tm_corpus} - Convert a qdap dataframe to a tm package 
 #' \code{\link[tm]{Corpus}}.
@@ -14,7 +13,7 @@
 #' information will be mapped to the DMetaData in the \code{\link[tm]{Corpus}}.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{sentSplit}}.  
 #' @rdname deprecated
-#' @section Warning: The \code{df2tm_corpus} function is deprecated.  It will be 
+#' @section Warning: \code{df2tm_corpus} - function is deprecated.  It will be 
 #' removed in a subsequent version of qdap.  Use \code{as.Corpus} instead.
 #' @return \code{df2tm_corpus} - Converts a qdap oriented dataframe and returns 
 #' a \code{\link[tm]{Corpus}}.
@@ -22,7 +21,7 @@
 #' @importFrom qdapTools list_df2df
 df2tm_corpus <- function(text.var, grouping.var = NULL, demographic.vars, ...){
 
-    .Deprecated(msg = paste("df2tm_corpus is deprecated and will be removed in", 
+    .Deprecated(msg = paste("`df2tm_corpus` is deprecated and will be removed in", 
         "a subsequent version of qdap.  Please use `as.Corpus` instead."), 
         old = as.character(sys.call(sys.parent()))[1L])    
     
@@ -108,4 +107,44 @@ df2tm_corpus <- function(text.var, grouping.var = NULL, demographic.vars, ...){
     }
 
     mycorpus
+}
+
+
+
+#' Deprecated qdap Functions
+#' 
+#' \code{tm2qdap} - Convert the \pkg{tm} package's 
+#' \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}} to
+#' \code{\link[qdap]{wfm}}.
+#' 
+#' @param x A \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.
+#' @section Warning: \code{tm2qdap} - function is deprecated.  It will be 
+#' removed in a subsequent version of qdap.  Use \code{as.wfm} instead. 
+#' @return \code{tm2qdap} - Returns a \code{\link[qdap]{wfm}} object or 
+#' \code{weight} object.
+#' @rdname deprecated
+#' @export
+tm2qdap <- function(x) {
+
+    .Deprecated(msg = paste("`tm2qdap` is deprecated and will be removed in", 
+        "a subsequent version of qdap.  Please use `as.wfm` instead."), 
+        old = as.character(sys.call(sys.parent()))[1L])   
+    
+    opts <- c("DocumentTermMatrix", "TermDocumentMatrix")
+    cls <- opts[opts %in% class(x)]
+
+    if (cls == "DocumentTermMatrix") {
+        x <- t(x)
+    }
+    
+    y <- as.matrix(data.frame(as.matrix(x), check.names = FALSE))
+    
+    if(!any(attributes(x)[["Weighting"]] %in% "tf")){
+        class(y) <- c("weighted_wfm", class(y))
+    } else {
+        class(y) <- c("wfm", "true.matrix", class(y))
+    }
+
+    y
+
 }

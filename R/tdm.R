@@ -24,7 +24,8 @@
 #' @export
 #' @seealso \code{\link[tm]{DocumentTermMatrix}},
 #' \code{\link[tm]{Corpus}},
-#' \code{\link[tm]{TermDocumentMatrix}}
+#' \code{\link[tm]{TermDocumentMatrix}},
+#' \code{\link[qdap]{as.wfm}}
 #' @importFrom reshape2 melt
 #' @importFrom tm tm_map as.PlainTextDocument VectorSource Corpus
 #' @rdname tdm
@@ -171,13 +172,13 @@
 #'
 #' ## A Term Document Matrix Conversion
 #' (tm_in <- TermDocumentMatrix(crude, control = list(stopwords = TRUE)))
-#' converted <- tm2qdap(tm_in)
+#' converted <- as.wfm(tm_in)
 #' head(converted)
 #' summary(converted)
 #'
 #' ## A Document Term Matrix Conversion
 #' (dtm_in <- DocumentTermMatrix(crude, control = list(stopwords = TRUE)))
-#' summary(tm2qdap(dtm_in))
+#' summary(as.wfm(dtm_in))
 #' 
 #' ## `apply_as_tm` Examples
 #' ## Create a wfm
@@ -392,41 +393,6 @@ wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
-#' \code{tm2qdap} - Convert the \pkg{tm} package's 
-#' \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}} to
-#' \code{\link[qdap]{wfm}}.
-#' 
-#' @param x A \code{\link[tm]{TermDocumentMatrix}}/\code{\link[tm]{DocumentTermMatrix}}.
-#' @return \code{tm2qdap} - Returns a \code{\link[qdap]{wfm}} object or 
-#' \code{weight} object.
-#' @rdname tdm
-#' @export
-tm2qdap <- function(x) {
-
-    opts <- c("DocumentTermMatrix", "TermDocumentMatrix")
-    cls <- opts[opts %in% class(x)]
-
-    if (cls == "DocumentTermMatrix") {
-        x <- t(x)
-    }
-    
-    y <- as.matrix(data.frame(as.matrix(x), check.names = FALSE))
-    
-    if(!any(attributes(x)[["Weighting"]] %in% "tf")){
-        class(y) <- c("weighted_wfm", class(y))
-    } else {
-        class(y) <- c("wfm", "true.matrix", class(y))
-    }
-
-    y
-
-}
-
-
-
-#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
-#' Matrix or Document Term Matrix
-#' 
 #' \code{tm_corpus2df} - Convert a tm package corpus to a dataframe.
 #' 
 #' @param tm.corpus A \code{\link[tm]{Corpus}} object.
@@ -482,7 +448,7 @@ tm_corpus2wfm <- function(tm.corpus, col1 = "docs", col2 = "text", ...) {
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
 #' 
-#' \code{as.Corpus} - Convert a qdap dataframe to a tm package 
+#' \code{as.Corpus} - Attempts to convert its argument into a \pkg{tm} package 
 #' \code{\link[tm]{Corpus}}.
 #' 
 #' @param demographic.vars Additional demographic information about the grouping 
@@ -502,7 +468,7 @@ as.Corpus <- function(text.var, grouping.var = NULL, demographic.vars, ...){
     UseMethod("as.Corpus")
 }    
 
-#' \code{as.Corpus.sent_split} - sent_split Method for as.Corpus
+#' \code{as.Corpus.sent_split} - \code{sent_split} Method for \code{as.Corpus}.
 #' @rdname tdm
 #' @export
 #' @method as.Corpus sent_split 
@@ -536,7 +502,8 @@ as.Corpus.sent_split <- function(text.var, grouping.var = NULL,
 }
     
     
-#' \code{as.Corpus.default} - default Method for as.Corpus
+#' \code{as.Corpus.default} - Default method for \code{as.Corpus} used to 
+#' convert vectors (from a \code{data.frame}) to a \code{\link[tm]{Corpus}}.
 #' @rdname tdm
 #' @export
 #' @method as.Corpus default 

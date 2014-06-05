@@ -27,7 +27,7 @@ wfm_combine(wf.obj, word.lists, matrix = TRUE)
 \method{Filter}{wfm}(x, min = 1, max = Inf, count.apostrophe = TRUE,
   stopwords = NULL, ...)
 
-as.wfm(matrix.object)
+as.wfm(x, ...)
 }
 \arguments{
 \item{text.var}{The text variable.}
@@ -78,8 +78,9 @@ equal.}
 \item{count.apostrophe}{logical.  If \code{TRUE} apostrophes are counted as
 characters.}
 
-\item{matrix.object}{A matrix object with words for row names and integer
-values.}
+\item{x}{An object with words for row names and integer values.}
+
+\item{x}{Other arguments passed to \code{as.wfm} methods.}
 }
 \value{
 \code{wfm} - returns a word frequency of the class matrix.
