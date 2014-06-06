@@ -1,0 +1,565 @@
+write_clip <- function(x) {
+    ## The code for this helper function comes from the oveRflow package.  
+    ## # https://raw.github.com/sebastian-c/oveRflow/master/R/writeClip.R
+    ## This is code I submitted but was modified by the package maintainers.
+    ## The idea to keep this function as a modular unit makes sense and was 
+    ## subsequently applied to the reports package
+    
+    OS <- Sys.info()["sysname"]
+    
+    if(!(OS %in% c("Darwin", "Windows", "Linux"))) {
+        stop("Copying to clipboard not supported on your OS")
+    }
+    
+    if (OS != "Windows") {
+        writeClipboard <- NULL
+    } 
+    
+    switch(OS, 
+        "Darwin"={j <- pipe("pbcopy", "w")                       
+            writeLines(x, con = j)                               
+            close(j)   
+        },
+        "Windows"=writeClipboard(x, format = 1),
+        "Linux"={
+            if(Sys.which("xclip") == "") {
+              warning("Clipboard on Linux requires 'xclip'. Try using:\nsudo apt-get install xclip")
+            }
+            con <- pipe("xclip -i", "w")
+            writeLines(x, con=con)
+            close(con)
+        }
+    )
+}
+
+text_fix <- function(text, addhyph = FALSE) {
+    text <- clean(paste2(text, " "))
+    ligs <- gregexpr("([\\?])([a-z])", text)[[1]]
+    text <- gsub("([\\?])([aeiouy])", "\\fl\\2", text)
+    text <- gsub("([\\?])([a-z])", "\\fi\\2", text)
+    nligs <- length(ligs)
+    if (ligs[1] > 0) {
+        plural <- ifelse(nligs > 1, "ligatures were", "ligature was")
+        warning(paste(nligs, "possible", plural, "found: \nCheck output!"))
+    }
+    text <- Trim(iconv(text, "", "ASCII", "byte"))
+    ser <- c("<91>", "<92>", "<93>", "<94>", "<85>", "<e2><80><9c>", "<e2><80><9d>", 
+        "<e2><80><98>", "<e2><80><99>", "<e2><80><9b>", "<ef><bc><87>", 
+        "<e2><80><a6>", "<e2><80><93>", "<e2><80><94>", "<c3><a1>", "<c3><a9>", 
+        "<c2><bd>", "<97>", "<eb>", "<e1>", "<e9>", "<97>", "``", "''", 
+        "<ef><ac><81>", "<ef><ac><82>", "<95>", "<c2>")
+    reps <- c("`", "'", "\"", "\"", "...", "", "", "'", "'", "'", "'", "...", 
+        "&ndash;", "&mdash;", "a", "e", "half", "&mdash;", "&euml;", "&aacute;",
+        "&eacute;","&mdash;", "\"", "\"", "fi", "fl", "", "")
+    if (addhyph) {
+        ser <- c(ser, "- ")
+        reps <- c(reps, "")  
+    }
+    Encoding(text) <-"latin1"
+    clean(mgsub(ser, reps, text))
+}
+
+
+#simpleCap <- function(x) { 
+#    s <- strsplit(x, " ")[[1]] 
+#    paste(toupper(substring(s, 1,1)), substring(s, 2), sep="", collapse=" ") 
+#} 
+
+simpleCap <- function(x) { 
+	x <- gsub("(\\w)(\\w*)","\\U\\1\\L\\2", x, perl=T)
+    mgsub(c("And", "Of"), c("and", "of"), x)
+}
+
+prin <- function(x, print) {
+    if (print) {
+        cat(x); cat("\n")
+        invisible(x)
+    } else {
+        x	
+    }
+}
+
+read_clip <- function() {
+    ## The code for this helper function comes from the oveRflow package.  
+    ## # https://raw.github.com/sebastian-c/oveRflow/master/R/writeClip.R
+    ## This is code I submitted but was modified by the package maintainers.
+    ## The idea to keep this function as a modular unit makes sense and was 
+    ## subsequently applied to the reports package
+	
+    OS <- Sys.info()["sysname"]
+
+    if (OS != "Windows") {
+        readClipboard <- NULL
+    } 
+    
+
+    switch(OS, 
+        "Darwin" = {j <- pipe("pbcopy", "w")                       
+            pcon <- pipe("pbpaste")
+            out <- scan(pcon, what="character", quiet=TRUE)
+            close(pcon)
+        },
+        "Windows" = {out <- readClipboard()},
+        out <- readLines("clipboard")
+    )
+    out
+}
+
+scrubber <-
+function(text.var, rm.quote = TRUE, fix.comma = TRUE, ...){
+    x <- reducer(Trim(clean(text.var)))
+    if (rm.quote) {
+        x  <- gsub('\"', "", x)
+    }
+    if (fix.comma) {
+        x <- gsub(" ,", ",", x)
+    }
+    ncx <- nchar(x)
+    x <- paste0(Trim(substring(x, 1, ncx - 1)), substring(x, ncx))
+    x[is.na(text.var)] <- NA
+    x
+}
+
+clean <-
+function(text.var) {
+    gsub("\\s+", " ", gsub("\r|\n|\t", " ", text.var))
+}
+
+strWrap <-
+function(text = "clipboard", width = 70, copy2clip = interactive(), 
+	invisible = FALSE) {
+	
+    if (text == "clipboard") {
+        text <- read_clip()
+    } 
+    x <- gsub("\\s+", " ", gsub("\n|\t", " ", text))
+    x <- strwrap(x, width = width)
+    if(copy2clip){
+        write_clip(x)
+    }
+    if (!invisible) {
+    	writeLines(x)
+    }
+    return(invisible(x))
+}
+
+Trim <-
+function (x) gsub("^\\s+|\\s+$", "", x)
+
+truncdf <- 
+function(dataframe, end=10, begin=1) {
+    x <- as.data.frame(dataframe, stringsAsFactors = FALSE)
+    DF <- data.frame(lapply(x, substr, begin, end), check.names=FALSE, 
+        stringsAsFactors = FALSE)
+    names(DF) <- substring(names(DF), begin, end)
+    DF
+}
+
+
+unblanker <-
+function(x)subset(x, nchar(x)>0)
+
+reducer <- 
+function(x) gsub("\\s+", " ", x)
+
+
+wheresPandoc <- function() {
+    myPaths <- c("pandoc",  "~/.cabal/bin/pandoc", 
+        "~/Library/Haskell/bin/pandoc", "C:\\PROGRA~1\\Pandoc\\bin\\pandoc")
+    panloc <- Sys.which(myPaths)
+    temp <- panloc[panloc != ""]
+    if (identical(names(temp), character(0))) {
+        ans <- readline("Pandoc not installed in one of the typical locations.\n 
+            Do you know where Pandoc is installed? (y/n) ")
+        if (ans == "y") {
+        	temp <- readline("Enter the (unquoted) path to Pandoc: ")
+        } else {
+            if (ans == "n") {
+            	stop("Pandoc not installed or not found.")
+            }
+        }
+    } 
+    temp[1]
+}
+
+wheresRstudio <- 
+function() {
+    myPaths <- c("rstudio",  "~/.cabal/bin/rstudio", 
+        "~/Library/Haskell/bin/rstudio", "C:\\PROGRA~1\\RStudio\\bin\\rstudio.exe",
+        "C:\\RStudio\\bin\\rstudio.exe", "/Applications/RStudio.app/Contents/MacOS/RStudio")
+    panloc <- Sys.which(myPaths)
+    temp <- panloc[panloc != ""]
+    if (identical(names(temp), character(0))) {
+        ans <- readline("RStudio not installed in one of the typical locations.\n 
+            Do you know where RStudio is installed? (y/n) ")
+        if (ans == "y") {
+                temp <- readline("Enter the (unquoted) path to RStudio: ")
+        } else {
+            if (ans == "n") {
+                stop("RStudio not installed or not found.")
+            }
+        }
+    } 
+    short.path <- which.min(unlist(lapply(gregexpr("RStudio", temp), "[[", 1)))
+    temp[short.path] 
+}
+
+open_project <- function(Rproj.loc) {
+    action <- paste(wheresRstudio(), Rproj.loc)
+    message("Preparing to open project!")
+    try(system(action, wait = FALSE, ignore.stderr = TRUE))
+}
+
+read.notes <-
+function(file = NULL, rm.nonquote = TRUE, trunc = 50, 
+    notes.col = TRUE, print = TRUE) {
+	if (is.null(file)) {
+		if (basename(getwd()) %in% c("PRESENTATION", "REPORT")) {
+            loc <- file.path(dirname(getwd()), "ARTICLES")
+		} else {
+	        loc <- file.path(getwd(), "ARTICLES")
+		}
+	    locfls <- dir(loc)
+	    poss <- locfls[grepl("notes", locfls)]
+	    ins <- poss[!grepl("~$", poss, fixed=TRUE)][1]
+	    file <- file.path(loc, ins)
+    }
+    ext <- file_ext(file)
+    switch(ext, 
+        xlsx = {
+        	x <- read.xlsx(file, 1)[, 1:5]
+            },
+        csv = {
+            x <- read.csv(file,  header = TRUE, 
+                sep = ",", as.is=FALSE, na.strings= c(NA, ""), 
+                strip.white = TRUE, stringsAsFactors = FALSE, 
+                blank.lines.skip = TRUE)[, 1:5]
+            },
+        stop("invalid file extension:\n \bfile must be a .csv .xls or .xlsx" )
+    )  
+	nis.na <- Negate(is.na)
+	x <- x[rowSums(t(apply(x, 1, nis.na))) != 0, ]	#remove empty rows
+	x[, 3] <- remove2backslahes(x[, 3])  #remove backslashes for quotes only
+    colnames(x) <- c("bibkey", "page", "quote", "Q", "notes")
+	if (rm.nonquote) {
+	    x <- x[tolower(as.character(x$Q)) %in% c("yes", "y", "t", "true", "quote"), -4]
+	}
+	x$bibkey <- mgsub(c("\\{", "}"), "", x$bibkey)
+	x[, 1:ncol(x)] <- lapply(1:ncol(x), function(i) as.character(x[, i]))
+	if (!print) {
+    	if (!notes.col) {
+     	    if (trunc > 0) {
+	            truncdf(x, trunc)[, 1:3]
+	            return(invisible(x[, 1:3]))
+	        } else {
+	            x[, 1:3]
+	        }	
+	    } else {
+	        if (trunc > 0) {
+	            truncdf(x, trunc)
+	            return(invisible(x))
+	        } else {
+	            x
+	        }
+	    }
+	} else {
+    	if (!notes.col) {
+     	    if (trunc > 0) {
+	            print(truncdf(x, trunc)[, 1:3])
+	            return(invisible(x[, 1:3]))
+	        } else {
+	            x[, 1:3]
+	        }	
+	    } else {
+	        if (trunc > 0) {
+	            print(truncdf(x, trunc))
+	            return(invisible(x))
+	        } else {
+	            x
+	        }
+	    }
+    }
+}
+
+
+remove2backslahes <- function(x){
+    ## Compliments of mathematical.coffee
+    ## browsURL("http://stackoverflow.com/a/15939139/1000343")
+    ## split into parts separated by '$'.
+    ## Add a space at the end of every string to deal with '$'
+    ##   at the end of the string (as
+    ##      strsplit('a$', '$', fixed=T)
+    ##   is just 'a' in R)
+    bits <- strsplit(paste(x, ""), "$", fixed=T)
+
+    ## apply the regex to every second part (starting with the first)
+    ## and always to the last bit (because of the ' ' we added)
+    sapply(bits, function (x) {
+        idx <- unique(c(seq(1, length(x), by=2), length(x)))
+        x[idx] <- gsub("\\", "\"", x[idx], fixed=T)
+        # join back together
+        x <- paste(x, collapse="$")
+        # remove that last " " we added
+        substring(x, 1, nchar(x) - 1)
+    }, USE.NAMES=FALSE)
+}
+
+paste2 <-
+function(multi.columns, sep=".", handle.na=TRUE, trim=TRUE){
+    if (is.matrix(multi.columns)) {
+        multi.columns <- data.frame(multi.columns)
+    }
+    if (trim) multi.columns <- lapply(multi.columns, function(x) {
+            gsub("^\\s+|\\s+$", "", x)
+        }
+    )
+    if (!is.data.frame(multi.columns) & is.list(multi.columns)) {
+        multi.columns <- do.call('cbind', multi.columns)
+    } 
+    m <- if (handle.na){
+                 apply(multi.columns, 1, function(x){
+                     if (any(is.na(x))){
+                         NA
+                     } else {
+                         paste(x, collapse = sep)
+                     }
+                 }
+             )   
+         } else {
+             apply(multi.columns, 1, paste, collapse = sep)
+    }
+    names(m) <- NULL
+    return(m)
+}
+
+#NO LONGER EXPORTED: USE installr instead
+#
+#Download Pandoc
+#
+#Download Pandoc from the command line (Windows users). 
+#
+#@return Installs Pandoc on your system.
+#@author Gergely Daroczi and Gabor Grothendieck
+#@references \url{http://stackoverflow.com/a/15072501/1000343} 
+#@section Pandoc Website: \url{http://johnmacfarlane.net/pandoc/}
+#@export
+#@examples
+#\dontrun{
+#install_pandoc()
+#}
+install_pandoc <- function() {
+    page <- readLines('http://code.google.com/p/pandoc/downloads/list', warn = FALSE)
+    pat  <- "//pandoc.googlecode.com/files/pandoc-[0-9.]+-setup.exe"
+    line <- grep(pat, page, value = TRUE); m <- regexpr(pat, line)
+    url  <- paste('http', regmatches(line, m), sep = ':')
+    tmp <- tempfile(fileext = '.exe')
+    download.file(url, tmp, mode = 'wb')
+    system(tmp)
+    on.exit(unlink(tmp))
+}
+
+genX <-
+function (text.var, left, right, missing = NULL, names = FALSE, scrub = TRUE) {
+    if (length(left) != length(right)) {
+        stop("left and right must be equal length") 
+    }
+    specchar <- c(".", "|", "(", ")", "[", "{", "^", "$", "*", "+", "?")
+    left <- mgsub(specchar, paste0("\\", specchar), left, fixed = TRUE)
+    right <- mgsub(specchar, paste0("\\", specchar), right, fixed = TRUE)
+    FUN <- function(left, right, text.var, missing, names) {
+        X <- sapply(text.var, function(x) gsub(paste0(left, ".+?", right), "", x))
+        if (scrub) {
+            X <- scrubber(gsub(" +", " ", X))
+        }
+        if (!is.null(missing)) {
+            X[X == ""] <- missing
+        }
+        if (!names) names(X) <- NULL
+        X
+    }
+    invisible(lapply(seq_along(left), function(i) {
+        text.var <<- FUN(left[i], right[i], text.var = text.var, 
+            missing = missing, names = names)
+    }))
+    text.var
+}
+
+genXtract <- 
+function(text.var, left, right, with = FALSE, merge = TRUE){
+    if (length(left) != length(right)) {
+        stop("left and right must be equal length") 
+    }
+    specchar <- c(".", "|", "(", ")", "[", "{", "^", "$", "*", "+", "?")
+    left <- mgsub(specchar, paste0("\\", specchar), left, fixed = TRUE)
+    right <- mgsub(specchar, paste0("\\", specchar), right, fixed = TRUE)
+    FUN <- function(left, right, text.var, with){   
+        fmt <- if (with==TRUE) {
+            "(%s).*?(%s)"
+        } else {
+            "(?<=%s).*?(?=%s)"
+        }
+        re <- sprintf(fmt, as.character(left), as.character(right))
+        if(length(text.var)==1){
+            unlist(regmatches(text.var, gregexpr(re, text.var, perl=TRUE)))
+        }else{  
+            regmatches(text.var, gregexpr(re, text.var, perl=TRUE)) 
+        }
+    }
+    out <- invisible(lapply(seq_along(left), function(i) {
+        FUN(left[i], right[i], text.var = text.var, with = with)
+    }))
+    names(out) <- paste(left, " : ", "right")
+    if (length(left) == 1) {
+        return(unlist(out, recursive = FALSE))
+    } else {
+        if (merge) {
+            out <- invisible(lapply(seq_along(text.var), function(i) {
+                unlist(invisible(lapply(seq_along(out), function(j) {
+                    out[[j]][[i]]
+                })))
+            }))            
+        }
+    }
+    out
+}
+
+mgsub <-
+function(pattern, replacement = NULL, text.var, fixed = TRUE, ...){
+    key <- data.frame(pat=pattern, rep=replacement, 
+        stringsAsFactors = FALSE)
+    msubs <-function(K, x, ...){
+        sapply(seq_len(nrow(K)), function(i){
+                x <<- gsub(K[i, 1], K[i, 2], x, fixed = fixed, ...)
+            }
+        )
+       return(gsub(" +", " ", x))
+    }
+    x <- Trim(msubs(K=key, x=text.var, ...))
+    return(x)
+}
+
+CITEhelper <- function(text.loc = NULL, from = "markdown", to = "latex",
+    copy2clip = interactive(), citation = TRUE){
+    if (is.null(text.loc)) {
+        nts <- notes2()[, -4]
+        cat("\n\n\bPlease select a row number from the entries above:\n\n")
+        text.loc <- as.numeric(readLines(n=1))
+    } else {
+    	if (is.character(text.loc)) {
+    	    nts <- notes2()
+    	    nts <- nts[grepl(text.loc, nts[, "bibkey"], ignore.case=TRUE), ]
+    	    print(truncdf(nts, end = 70))
+            cat("\n\n\bPlease select a row number from the entries above:\n\n")
+            text.loc <- as.numeric(readLines(n=1))
+	
+        } else {
+            nts <- notes2()
+        }
+    }
+    if(text.loc > nrow(nts)) stop("text.loc exceeds number of note entries")
+    txt <- nts[text.loc, "quote"]
+    out <- list(QC(to=to, from=from, text=txt, copy2clip = FALSE))
+    if(citation) {
+        out[["pgs"]] <- nts[text.loc, "page"]
+        out[["bibkey"]] <- nts[text.loc, "bibkey"]
+    }   
+    return(out)
+}
+
+left.just <- 
+function(dataframe, column = NULL, keep.class = FALSE) {
+    df.class <- function(dataframe) {
+        sapply(1:ncol(dataframe), function(i) {
+            x <- class(dataframe[, i])
+            x[length(x)]
+        })
+    }
+    CLASS <- df.class(dataframe)
+    left.j <- function(x) {
+        n <- max(nchar(x))
+        return(sprintf(paste("%-", n, "s", sep = ""), x))
+    }
+    if (is.null(column)) column <- colnames(dataframe)
+    lj <- function(DF2, column) {
+        if (is.null(column)) column <- colnames(DF2)
+        Q <- max(nchar(c(as.character(DF2[, column]), names(DF2)[column])))
+        DF2 <- data.frame(rbind(colnames(DF2), do.call(cbind,
+            lapply(DF2, as.character))), check.names = FALSE)
+        DF2[, column] <- left.j(as.character(DF2[, column]))     
+        if (is.character(column)) {
+            col <- names(DF2)[which(names(DF2) == column)]
+                names(DF2)[which(names(DF2) == column)] <- sprintf(paste("%-", 
+                Q, "s", sep = ""), col)
+        } else {
+            if (is.numeric(column)) {
+                col <- names(DF2)[column]
+                    names(DF2)[column] <- sprintf(paste("%-", Q, "s", 
+                    sep = ""), col)
+            }
+        }
+        DF2 <- data.frame(DF2[-1, , drop = FALSE], check.names = FALSE)
+        rownames(DF2) <- NULL
+        return(DF2)
+    }
+    if (length(column) < 2) {
+        if (!is.data.frame(dataframe)) {
+            y <- as.character(substitute(dataframe))
+            dataframe <- data.frame(dataframe, check.names = FALSE)
+            y <- if (y[1]%in%c("[", "$")) y[2] else y[1]
+            names(dataframe) <- y
+        }
+        DF3 <- lj(DF2=dataframe, column=column)
+    } else { 
+        if (!is.numeric(column)) column <- match(column, names(dataframe))
+        dat <- dataframe[, -c(column), drop=FALSE]
+        ndf <- colnames(dataframe)
+        LIST <- lapply(column, function(x) {
+            lj(DF2=dataframe[, x, drop=FALSE], column = NULL)
+        })
+        dat2 <- data.frame(cbind(do.call('cbind', LIST), dat), checknames=FALSE)
+        NAMES <- colnames(dat2)
+        STrim <- function (x) gsub("^\\s+|\\s+$|\\.+$", "", x)
+        newloc <- match(ndf, STrim(NAMES))
+        DF3 <- dat2[, newloc]
+    }
+    if (keep.class) {
+        colClasses <- function(d, colClasses) {
+            colClasses <- rep(colClasses, len=length(d))
+            d[] <- lapply(seq_along(d), function(i) switch(colClasses[i], 
+                numeric=as.numeric(d[[i]]), 
+                character=as.character(d[[i]]), 
+                Date=as.Date(d[[i]], origin='1970-01-01'), 
+                POSIXct=as.POSIXct(d[[i]], origin='1970-01-01'), 
+                factor=as.factor(d[[i]]),
+                as(d[[i]], colClasses[i]) ))
+            d
+        }
+        DF3 <- colClasses(DF3, CLASS)
+    }
+    colnames(DF3) <- gsub("\\.(?=\\.*$)", " ", colnames(DF3), perl=TRUE)
+    return(DF3)
+}
+
+
+## Opens a new RStudio for the project and shuts down the current version
+restart_rstudio <- function(Rproj.loc = basename(getwd()), ...) {
+    if (!Sys.getenv("RSTUDIO") == "1") {
+        warning("RStudio is not being used.  `restart` will be ignored.")
+    } else {
+        loc <- paste0(Rproj.loc, ".Rproj")
+        if (!file.exists(loc)) {
+            warning(".Rproj not found.  `restart` will be ignored.")
+        } else {
+            open_project(loc)
+            q(...)
+        }
+    }
+}
+
+root_warn <- function() {
+    if (!any(file_ext(dir()) %in% "Rproj")) {
+        warning(paste0("The working directory does not contain a .Rproj file\n",
+            sprintf("'%s' may not be the root directory", getwd())))
+    }
+}
+
