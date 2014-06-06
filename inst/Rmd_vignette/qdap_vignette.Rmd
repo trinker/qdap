@@ -5496,3 +5496,5 @@ options(markdown.HTML.stylesheet = "css/style.css")
 <li> Wickham, H. (2009). ggplot2: Elegant graphics for data analysis.  <a href="http://had.co.nz/ggplot2/book"><a href="http://had.co.nz/ggplot2/book">http://had.co.nz/ggplot2/book</a></a></li>
 </ul>
 
+
+
