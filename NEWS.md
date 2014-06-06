@@ -22,6 +22,9 @@ And constructed with the following guidelines:
 
 **BUG FIXES**
 
+* `new_project` did not copy the .Rprofile over into the new project. This has 
+  been fixed. Reference <a href="https://github.com/trinker/qdap/issues/184">issue #184</a>.
+
 **NEW FEATURES**
 
 * `unique_by` added to allow the user to find terms unique to individual 

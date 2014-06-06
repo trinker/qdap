@@ -22,6 +22,9 @@ CHANGES IN qdap VERSION 2.0.1
 
 BUG FIXES
 
+* `new_project` did not copy the .Rprofile over into the new project. This has 
+  been fixed. Reference issue #184.
+
 NEW FEATURES
 
 * `unique_by` added to allow the user to find terms unique to individual 

@@ -204,8 +204,10 @@ new_project <- function(project = "new", path = getwd(),
         row.names = FALSE)
  
     ## Copy .Rprofile to main directory
-    pdfloc6 <- file.path(root, ".Rprofile")
+    pdfloc6 <- file.path(root, "Rprofile.txt")
     invisible(file.copy(pdfloc6, x))
+    invisible(file.rename(file.path(x, "Rprofile.txt"), 
+        file.path(x, ".Rprofile")))        
 
     ## Create the reports folder  with `new_report`
     invisible(new_report(c("REPORTS", project), ...))

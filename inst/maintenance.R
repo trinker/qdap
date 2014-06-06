@@ -175,7 +175,7 @@ names(NAMES_LIST) <- LETTERS
 #==========================
 # Vignette copy
 #==========================
-#path <- file.path("C:/Users/trinker/GitHub", "qdap_1.0.0.tar.gz")
+#path <- file.path("C:/Users/trinker/GitHub", "qdap_2.0.1.tar.gz")
 #install.packages(path,  repos = NULL, type="source")
 
 ##  browseVignettes(package = 'qdap')

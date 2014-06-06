@@ -1,0 +1,27 @@
+#load the packages used
+#load the packages used
+packs <- c("ggplot2", "qdap", "reshape2", "dplyr", "grid", "reports", "scales", 
+    "RColorBrewer", "tools")
+invisible(lapply(packs, library, character.only = TRUE)) 
+
+#load functions into workspace
+source("extra_functions.R")
+
+#load data into work space
+path1 <- file.path("DATA/CLEANED_DATA", dir("DATA/CLEANED_DATA"))
+path2 <- path1[file_ext(path1) %in% c("txt", "R", "r")]
+if (!identical(path2, character(0))) {
+    try(lapply(path2, source), TRUE)
+}
+path1 <- path1[file_ext(path1) == "RData"]
+if (!identical(path1, character(0))) {
+    invisible(lapply(path1, function(x) {
+    	ENV <- ls(envir = .GlobalEnv)
+    	load(x, envir = .GlobalEnv)
+    	ENV2 <- ls(envir = .GlobalEnv)
+    	y <- setdiff(ENV2, ENV)
+    	y <- y[!y %in% c("ENV", "ENV2")]
+    	cat(sprintf("The following data have been loaded:\n%s", 
+    	    paste(y, collapse = ", ")))
+    }))
+}
