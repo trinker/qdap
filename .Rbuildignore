@@ -13,6 +13,8 @@ style.R
 inst/polarity
 vignettes/figure
 vignettes/qdap_vignette.md
+vignettes/qdap_vignette.html
+inst/Rmd_vignette/qdap_vignette.md
 vignettes/qdap_vignette.pdf
 vignettes/qdap_vignette.Rproj
 vignettes/ARTICLES
@@ -52,5 +54,11 @@ Scraping Word Lists
 inst/demos/discoursemap
 travis-tool.sh
 inst/build.R
-tests
+inst/Rmd_vignette/qdap_vignette.Rproj
+inst/Rmd_vignette/qdap_vignette.html
+inst/Rmd_vignette/qdap_vignette.md
+inst/Rmd_vignette/qdap_vignette.Rproj
+inst/Rmd_vignette/qdap_vignette.html
+inst/Rmd_vignette/figure
+
 

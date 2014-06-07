@@ -168,6 +168,7 @@ sd_section("qdap Tools",
   "Tools to assist in transcript/discourse analysis.",
   c(
     "blank2NA",
+    "build_qdap_vignette",
     "duplicates",
     "qcv",
     "replacer"

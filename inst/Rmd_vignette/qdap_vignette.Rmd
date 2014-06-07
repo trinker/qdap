@@ -7,6 +7,8 @@
 # set global chunk options
 library(knitr); library(tm); library(qdap); #library(reports)
 opts_chunk$set(cache=FALSE, tidy=FALSE, warning=FALSE)
+
+opts_knit$set(upload.fun = image_uri, self.contained=TRUE)
 #library(knitcitations); library(reports); library(qdapTools)
 #bib <- read.bibtex(dir()[tools::file_ext(dir()) == "bib"][1])
 
@@ -24,6 +26,10 @@ yt <- function(URL) {
   paste0("<a href=\"", URL, "\" target=\"_blank\" style=\"text-decoration: none\"><b><font size=\"5\" color=\"#B22222\">[YT]</font></b></a>\n")
 }
 #cite in text using `r citet(bib[1])`
+uri_embed <- function(path, add="") {
+    uri <- knitr::image_uri(path)
+    cat(paste0("<img ", add, " src=\"", uri, "\" />"))
+}
 ```
 
 # qdap Package Vignette
@@ -35,7 +41,10 @@ R already has thousands of excellent packages for statistics and visualization. 
 
 ...if you can dream up an analysis then qdap and R can help get you there.
 
-`r IM("imgs/qdaplogo.png", width=350, height=250)`
+```{r, echo=FALSE, results='asis'}
+uri_embed("imgs/qdaplogo.png", 
+    "width=\"350\", height=\"250\" style=\"display:block; margin-left:auto; margin-right:auto;\"")
+```
 
 The following vignette is a loose chronological road map for utilizing the tools provided by qdap.  
 
@@ -5110,8 +5119,10 @@ as.dtm(DATA$state, DATA$person)
 
 <pre><code class="r">library(tm)
 plot(pres, corThreshold = 0.8)</code></pre>
-![](imgs/tm_imgs/img1.png)
 
+```{r, echo=FALSE, results='asis'}
+uri_embed("imgs/tm_imgs/img1.png")
+```
 
 ```{r message = FALSE, fig.width = 9, fig.height = 9}
 (pres2 <- removeSparseTerms(pres, .3))
@@ -5119,7 +5130,9 @@ plot(pres, corThreshold = 0.8)</code></pre>
 
 <pre><code class="r">plot(pres2, corThreshold = 0.95)</code></pre>
 
-![](imgs/tm_imgs/img2.png)
+```{r, echo=FALSE, results='asis'}
+uri_embed("imgs/tm_imgs/img2.png")
+```
 
 <p id="as.tdm2">`r FT(orange, 5, text="&diams;")` <b>`r FUN("as.tdm")`</b> & <b>`r FUN("as.dtm", "as.tdm")`</b>  - <em>From `r FUN("wfm")`</em>`r FT(orange, 5, text="&diams;")`</p >
 
@@ -5130,7 +5143,10 @@ as.dtm(x)
 ```
 
 <pre><code class="r">plot(as.tdm(x))</code></pre>
-![](imgs/tm_imgs/img3.png)
+
+```{r, echo=FALSE, results='asis'}
+uri_embed("imgs/tm_imgs/img3.png")
+```
 
 
 <h4 id="tm2wfm">Convert the tm package's TermDocumentMatrix/DocumentTermMatrix to wfm</h4>
@@ -5165,7 +5181,9 @@ apply_as_tm(a, tm:::Heaps_plot)
 
 <pre><code class="r">apply_as_tm(a, tm:::plot.TermDocumentMatrix, corThreshold = 0.4)</code></pre>
 
-![](imgs/tm_imgs/img4.png)
+```{r, echo=FALSE, results='asis'}
+uri_embed("imgs/tm_imgs/img4.png")
+```
 
 
 ```{r message = FALSE}

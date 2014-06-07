@@ -137,6 +137,8 @@ qdap.Rproj
 vignettes/figure
 vignettes/qdap_vignette.html
 vignettes/qdap_vignette.md
+inst/Rmd_vignette/qdap_vignette.md
+inst/Rmd_vignette/qdap_vignette.html
 FAQ.html
 NEWS.html
 PROJECT_WORKFLOW_GUIDE-concordance.tex
@@ -153,3 +155,4 @@ tm_package_compatibility.synctex.gz
 tm_package_compatibility.tex
 tm_package_compatibility.tex
 inst/web
+inst/Rmd_vignette/figure

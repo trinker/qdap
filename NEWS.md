@@ -30,6 +30,10 @@ And constructed with the following guidelines:
 * `unique_by` added to allow the user to find terms unique to individual 
   elements of a grouping variable.
 
+* `build_qdap_vignette` replaces the temporary place holder version of the 
+  *Introduction to <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> vignette*.  This function will replace the (1) HTML, 
+  (2) source, & (3) R code found in `browseVignettes(package = 'qdap')`.
+
 **MINOR FEATURES**
 
 **IMPROVEMENTS**
@@ -71,6 +75,12 @@ And constructed with the following guidelines:
 
 * `dtm` is deprecated.  It will be removed in a subsequent version of `qdap`.  
   Use `as.dtm` or `as.DocumentTermMatrix` instead.
+
+* The *Introduction to <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>* .Rmd vignette has been moved to an internal 
+  directory.  The HTML version is not built by default.  THis saves CRAN space 
+  and time checking the package source.  The file has been replaced with a
+  temporary place holder that contains instructions for building the actual 
+  vignette.  The user may also use the `build_qdap_vignette` directly.
 
 
 
