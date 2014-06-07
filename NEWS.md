@@ -25,6 +25,12 @@ And constructed with the following guidelines:
 * `new_project` did not copy the .Rprofile over into the new project. This has 
   been fixed. Reference <a href="https://github.com/trinker/qdap/issues/184">issue #184</a>.
 
+* `sentiment_frame` coerced words to factor.  `stringsAsFactors = FALSE` has 
+  been added to prebent this.
+
+* `polarity` did not work on &gt; 1 grams due to a bug in `sentiment_frame` 
+  converting character to factor (chewth). See GitHub <a href="https://github.com/trinker/qdap/issues/185">issue #185</a> for details.
+
 **NEW FEATURES**
 
 * `unique_by` added to allow the user to find terms unique to individual 
@@ -503,8 +509,8 @@ relatively new to CRAN, made these changes sensible at this point.
 * `termco` family of functions did not handle `NA` values.  This has been fixed. 
   (Matt Williamson) See GitHub <a href="https://github.com/trinker/qdap/issues/147">issue #147</a> for details.
 
-* `pos` threw an error for vectors of length 1.  This has been fixed. (Kurt 
-  Hornik) See GitHub <a href="https://github.com/trinker/qdap/issues/150">issue #150</a> for details.
+* `pos` threw an error for vectors of length 1.  This has been fixed (Kurt 
+  Hornik). See GitHub <a href="https://github.com/trinker/qdap/issues/150">issue #150</a> for details.
 
 * `formality` threw an error for vectors of length 1.  This has been fixed. (Kurt 
   Hornik) See GitHub <a href="https://github.com/trinker/qdap/issues/151">issue #151</a> for details.

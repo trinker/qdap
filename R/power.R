@@ -31,7 +31,7 @@ sentiment_frame <- function(positives, negatives, pos.weights = 1,
         neg.weights <- rep(neg.weights, nlen)
     }
     dat <- data.frame(words = c(positives, negatives), polarity = c(pos.weights, 
-        neg.weights))
+        neg.weights), stringsAsFactors = FALSE)
     hash(dat)
 
 }

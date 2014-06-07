@@ -299,3 +299,46 @@ function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
     a
 }
 
+#' Polarity Score (Sentiment Analysis)
+#' 
+#' \code{polarity_frame} - Generate a polarity lookup hash key 
+#' for use with the \code{polarity.frame} argument in the \code{polarity} 
+#' function.
+#' 
+#' @param positives A character vector of positive words.
+#' @param negatives A character vector of negative words.
+#' @param pos.weights A vector of weights to weight each positive word by.  
+#' Length must be equal to length of \code{postives} or length 1 (if 1 weight 
+#' will be recycled). 
+#' @param neg.weights A vector of weights to weight each negative word by.  
+#' Length must be equal to length of \code{negatives} or length 1 (if 1 weight 
+#' will be recycled). 
+#' @export
+#' @section Warning: \code{polarity_frame} - function is deprecated.  It will be 
+#' removed in a subsequent version of qdap.  Use \code{sentiment_frame} instead.
+#' @rdname deprecated
+polarity_frame <- function(positives, negatives, pos.weights = 1, 
+    neg.weights = -1) {
+    
+    .Deprecated(msg = paste("polarity_frame is deprecated.  Please use the", 
+        "sentiment_frame function instead."), 
+        old = as.character(sys.call(sys.parent()))[1L])    
+    
+    plen <- length(positives)
+    nlen <- length(negatives)
+    if (!length(plen) %in% c(length(positives), 1)) {
+        stop("The length of positives and pos.weights must be equal")
+    }
+    if (!length(nlen) %in% c(length(negatives), 1)) {
+        stop("The length of negatives and negative weights must be equal")
+    }
+    if (length(pos.weights) == 1) {
+        pos.weights <- rep(pos.weights, plen)
+    }
+    if (length(neg.weights) == 1) {
+        neg.weights <- rep(neg.weights, nlen)
+    }
+    dat <- data.frame(words = c(positives, negatives), polarity = c(pos.weights, 
+        neg.weights), stringsAsFactors = FALSE)
+    hash(dat)
+}
