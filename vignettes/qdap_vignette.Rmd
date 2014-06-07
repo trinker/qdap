@@ -10,7 +10,7 @@ library(knitr)
 
 # qdap Package Vignette
 
-This is a temporary place holder for the actual *Introduction to qdap Vignette*.  The HTML vignette contains many images and is larger in size (~2.2 mb).  Rather than housing the HTML document on [CRAN](http://cran.r-project.org/) I am opting to store the Rmd file internally and the user will have to manually run `knitr` to render the HTML version.  The user may do this and replace this temporary vignette via the following options.  After running this the user may call the following to access the actual Introduction Vignette:
+This is a temporary place holder for the actual *Introduction to qdap Vignette*.  The HTML vignette contains many images and is larger in size (~2.3 mb).  Rather than housing the HTML document on [CRAN](http://cran.r-project.org/) I am opting to store the Rmd file internally and the user will have to manually run `knitr` to render the HTML version.  The user may do this and replace this temporary vignette via the following options.  After running this the user may call the following to access the actual Introduction Vignette:
 
 ```{r eval=FALSE}
 browseVignettes(package = 'qdap')
@@ -18,13 +18,13 @@ browseVignettes(package = 'qdap')
 
 ## (1) Via the `build_qdap_vignette` Function    
 
-To use `knitr` to build the HTML file from the Rmd file:
+To use `knitr` to build the HTML file from the Rmd file (~4 minutes build time):
 
 ```{r eval=FALSE}
 build_qdap_vignette()
 ```
 
-or to download the latest CRAN version HTML use:
+or to download the latest CRAN version HTML use (< 30 seconds build time):
 
 ```{r eval=FALSE}
 build_qdap_vignette(TRUE)
@@ -55,11 +55,14 @@ The `knitr` built HTML approach above takes about 4 minutes.  The user may choos
 knitr::knit(new[1], output = old[3], tangle=TRUE)
 file.copy(new[1], old[1], overwrite = TRUE)
 
-download.file(
-    url = paste0("https://raw.githubusercontent.com/trinker/qdap/master/inst/",
-        "Rmd_vignette/qdap_vignette.html"), 
-    destfile = old[2]
-)
+url <- paste0("https://raw.githubusercontent.com/trinker/qdap", 
+    "/master/inst/Rmd_vignette/qdap_vignette.html")
+
+bin <- RCurl::getBinaryURL(url, ssl.verifypeer = FALSE)
+temp <- tempdir()
+con <- file(old[2], open = "wb")
+writeBin(bin, con)
+close(con)
 ```
 
 

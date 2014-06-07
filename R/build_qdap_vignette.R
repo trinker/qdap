@@ -51,10 +51,13 @@ build_qdap_vignette <- function(download.html = FALSE) {
         suppressWarnings(knitr::knit2html(new[1], output = old[2], 
             stylesheet=file.path(path, 'css/style.css')))
     } else {    
-        download.file(
-            url = paste0("https://raw.githubusercontent.com/trinker/qdap/master/inst/",
-                "Rmd_vignette/qdap_vignette.html"), 
-            destfile = old[2]
-        )
+        url <- paste0("https://raw.githubusercontent.com/trinker/qdap", 
+            "/master/inst/Rmd_vignette/qdap_vignette.html")
+        
+        bin <- RCurl::getBinaryURL(url, ssl.verifypeer = FALSE)
+        temp <- tempdir()
+        con <- file(old[2], open = "wb")
+        writeBin(bin, con)
+        close(con)
     }
 }
