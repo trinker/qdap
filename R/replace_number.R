@@ -7,6 +7,7 @@
 #' @param num.paste logical.  If \code{TRUE} a the elements of larger numbers are 
 #' separated with spaces.  If \code{FALSE} the elements will be joined without 
 #' spaces.
+#' @param remove logical.  If \code{TRUE} numbers are removed from the text.
 #' @return Returns a vector with abbreviations replaced.
 #' @references Fox, J. (2005). Programmer's niche: How do you spell that number? 
 #' R News. Vol. 5(1), pp. 51-55.
@@ -26,9 +27,12 @@
 #' replace_number(x)
 #' replace_number(y)
 #' replace_number(x, FALSE)
+#' replace_number(x, remove=TRUE)
 #' }
 replace_number  <-
-function(text.var, num.paste = TRUE) {
+function(text.var, num.paste = TRUE, remove = FALSE) {
+
+    if (remove) return(gsub("[0-9]", "", text.var))
 
     ones <- c("zero", "one", "two", "three", "four", "five", "six", "seven", 
         "eight", "nine") 

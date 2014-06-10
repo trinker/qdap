@@ -175,10 +175,10 @@ names(NAMES_LIST) <- LETTERS
 #==========================
 # Vignette copy
 #==========================
-#  path <- file.path("C:/Users/trinker/GitHub", "qdap_2.0.1.tar.gz")
-#  install.packages(path,  repos = NULL, type="source")
+  path <- file.path("C:/Users/trinker/GitHub", "qdap_2.0.1.tar.gz")
+  install.packages(path,  repos = NULL, type="source")
 
-##  browseVignettes(package = 'qdap')
+  browseVignettes(package = 'qdap')
 
 knitr::knit2html("inst/Rmd_vignette/qdap_vignette.Rmd", 
     "inst/Rmd_vignette/qdap_vignette.html",

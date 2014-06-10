@@ -42,6 +42,11 @@ And constructed with the following guidelines:
 
 **MINOR FEATURES**
 
+* `sub_holder` picks up a `alpha.type` argument that allows the user to specify 
+  whether alpha or numeric keys should be used.
+
+* `replace_number` picks up a `remove` argument that removes numbers from text.
+
 **IMPROVEMENTS**
 
 * `qheat` becomes a generic method.  This means some of the internal function 

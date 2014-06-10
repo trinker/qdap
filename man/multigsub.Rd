@@ -13,7 +13,7 @@ mgsub(pattern, replacement = NULL, text.var, leadspace = FALSE,
   trailspace = FALSE, fixed = TRUE, trim = TRUE, order.pattern = fixed,
   ...)
 
-sub_holder(pattern, text.var, ...)
+sub_holder(pattern, text.var, alpha.type = TRUE, ...)
 }
 \arguments{
 \item{pattern}{Character string to be matched in the given character vector.}
@@ -41,6 +41,9 @@ replacing meta strings (e.g., \code{pattern = c("the", "then")} resorts to
 search for "then" first).}
 
 \item{\dots}{Additional arguments passed to \code{\link[base]{gsub}}.}
+
+\item{alpha.type}{logical.  If \code{TRUE} alpha (lower case letters) are
+used for the key.  If \code{FALSE} numbers are used as the key.}
 }
 \value{
 \code{multigsub} - Returns a vector with the pattern replaced.
@@ -65,16 +68,30 @@ pattern of `qdapplaceholder` followed by lower case letter keys followed by
 }
 \examples{
 \dontrun{
+## ======================
+##    `mgsub` Function
+## ======================
+
 multigsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
 mgsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
 mgsub("[[:punct:]]", "PUNC", DATA$state, fixed = FALSE)
 
+## ======================
 ## `sub_holder` Function
+## ======================
+
+## `alpha.type` as TRUE
 (fake_dat <- paste(emoticon[1:11,2], DATA$state))
 (m <- sub_holder(emoticon[,2], fake_dat))
 m$unhold(strip(m$output))
 # With Stemming
 m$unhold(stemmer(strip(m$output), capitalize = FALSE))
+
+## `alpha.type` as FALSE (numeric keys)
+vowels <- LETTERS[c(1, 5, 9, 15, 21)]
+(m2 <- sub_holder(vowels, toupper(DATA$state), alpha.type = FALSE))
+m2$unhold(gsub("[^0-9]", "", m2$output))
+mtabulate(strsplit(m2$unhold(gsub("[^0-9]", "", m2$output)), ""))
 }
 }
 \seealso{
