@@ -6,13 +6,13 @@
 \alias{as.Corpus.default}
 \alias{as.Corpus.sent_split}
 \alias{as.DocumentTermMatrix}
-\alias{as.DocumentTermMatrix.default}
 \alias{as.TermDocumentMatrix}
-\alias{as.TermDocumentMatrix.default}
 \alias{as.data.frame.Corpus}
 \alias{as.dtm}
+\alias{as.dtm.character}
 \alias{as.dtm.default}
 \alias{as.tdm}
+\alias{as.tdm.character}
 \alias{as.tdm.default}
 \title{tm Package Compatibility Tools: Apply to or Convert to/from Term Document
 Matrix or Document Term Matrix}
@@ -22,21 +22,21 @@ as.tdm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 as.TermDocumentMatrix(text.var, grouping.var = NULL, vowel.check = TRUE,
   ...)
 
+as.dtm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
+
 as.DocumentTermMatrix(text.var, grouping.var = NULL, vowel.check = TRUE,
   ...)
 
 \method{as.tdm}{default}(text.var, grouping.var = NULL, vowel.check = TRUE,
   ...)
 
-as.dtm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
+\method{as.tdm}{character}(text.var, grouping.var = NULL,
+  vowel.check = TRUE, ...)
 
 \method{as.dtm}{default}(text.var, grouping.var = NULL, vowel.check = TRUE,
   ...)
 
-\method{as.DocumentTermMatrix}{default}(text.var, grouping.var = NULL,
-  vowel.check = TRUE, ...)
-
-\method{as.TermDocumentMatrix}{default}(text.var, grouping.var = NULL,
+\method{as.dtm}{character}(text.var, grouping.var = NULL,
   vowel.check = TRUE, ...)
 
 \method{as.data.frame}{Corpus}(x, row.names, optional, ..., doc = "docs",
@@ -125,10 +125,10 @@ regardless of case.}
 \code{as.TermDocumentMatrix} - Returns a
 \code{\link[tm]{TermDocumentMatrix}}.
 
+\code{as.dtm} - Returns a \code{\link[tm]{DocumentTermMatrix}}.
+
 \code{as.DocumentTermMatrix} - Returns a
 \code{\link[tm]{TermDocumentMatrix}}.
-
-\code{as.dtm} - Returns a \code{\link[tm]{DocumentTermMatrix}}.
 
 \code{as.data.frame} - Converts a \code{\link[tm]{Corpus}} and returns
 a qdap oriented dataframe.
@@ -150,23 +150,23 @@ a \code{\link[tm]{Corpus}}.
 \code{as.TermDocumentMatrix} - Create document term matrices from raw text or
 \code{\link[qdap]{wfm}} for use with other text analysis packages.
 
+\code{as.dtm} - Create document term matrices from raw text or
+\code{\link[qdap]{wfm}} for use with other text analysis packages.
+
 \code{as.DocumentTermMatrix} - Create document term matrices from raw text or
 \code{\link[qdap]{wfm}} for use with other text analysis packages.
 
 \code{as.tdm.default} - Default method for \code{as.tdm} used to
 convert to a \code{\link[tm]{TermDocumentMatrix}}.
 
-\code{as.dtm} - Create document term matrices from raw text or
-\code{\link[qdap]{wfm}} for use with other text analysis packages.
+\code{as.tdm.character} - character method for \code{as.tdm} used to
+convert to a \code{\link[tm]{TermDocumentMatrix}}.
 
 \code{as.dtm.default} - Default method for \code{as.dtm} used to
 convert to a \code{\link[tm]{DocumentTermMatrix}}.
 
-\code{as.DocumentTermMatrix.default} - Default method for \code{as.DocumentTermMatrix} used to
+\code{as.dtm.character} - character method for \code{as.dtm} used to
 convert to a \code{\link[tm]{DocumentTermMatrix}}.
-
-\code{as.TermDocumentMatrix.default} - Default method for \code{as.TermDocumentMatrix} used to
-convert to a \code{\link[tm]{TermDocumentMatrix}}.
 
 \code{as.data.frame} - Convert a \pkg{tm} package \code{\link[tm]{Corpus}} to
 a \pkg{qdap} \code{\link[base]{data.frame}}.

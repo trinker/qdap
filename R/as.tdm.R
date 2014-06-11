@@ -318,13 +318,24 @@ as.tdm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 #' \code{\link[tm]{TermDocumentMatrix}}.
 #' @rdname as.tdm
 #' @export
-as.TermDocumentMatrix <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+as.TermDocumentMatrix <- as.tdm
+
+#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
+#' Matrix or Document Term Matrix
+#' 
+#' \code{as.dtm} - Create document term matrices from raw text or 
+#' \code{\link[qdap]{wfm}} for use with other text analysis packages.
+#' 
+#' @return \code{as.dtm} - Returns a \code{\link[tm]{DocumentTermMatrix}}.
+#' @rdname as.tdm
+#' @export
+as.dtm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
     text.var
     grouping.var
     vowel.check
     
-    UseMethod("as.TermDocumentMatrix")
+    UseMethod("as.dtm")
 } 
 
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
@@ -337,14 +348,7 @@ as.TermDocumentMatrix <- function(text.var, grouping.var = NULL, vowel.check = T
 #' \code{\link[tm]{TermDocumentMatrix}}.
 #' @rdname as.tdm
 #' @export
-as.DocumentTermMatrix <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
-
-    text.var
-    grouping.var
-    vowel.check
-    
-    UseMethod("as.DocumentTermMatrix")
-} 
+as.DocumentTermMatrix <- as.dtm
 
 #' \code{as.tdm.default} - Default method for \code{as.tdm} used to 
 #' convert to a \code{\link[tm]{TermDocumentMatrix}}.
@@ -352,6 +356,15 @@ as.DocumentTermMatrix <- function(text.var, grouping.var = NULL, vowel.check = T
 #' @export
 #' @method as.tdm default    
 as.tdm.default <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+    tm::as.TermDocumentMatrix(x = text.var, ...)
+}
+
+#' \code{as.tdm.character} - character method for \code{as.tdm} used to 
+#' convert to a \code{\link[tm]{TermDocumentMatrix}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.tdm character
+as.tdm.character <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
     x <- wfm2xtab(text.var = text.var, grouping.var = grouping.var, ...)
 
@@ -388,24 +401,6 @@ vowel_check <- function(text.var) {
 }
 
 
-#' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
-#' Matrix or Document Term Matrix
-#' 
-#' \code{as.dtm} - Create document term matrices from raw text or 
-#' \code{\link[qdap]{wfm}} for use with other text analysis packages.
-#' 
-#' @return \code{as.dtm} - Returns a \code{\link[tm]{DocumentTermMatrix}}.
-#' @rdname as.tdm
-#' @export
-as.dtm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
-
-    text.var
-    grouping.var
-    vowel.check
-    
-    UseMethod("as.dtm")
-}    
-    
 #' \code{as.dtm.default} - Default method for \code{as.dtm} used to 
 #' convert to a \code{\link[tm]{DocumentTermMatrix}}.
 #' @rdname as.tdm
@@ -413,6 +408,16 @@ as.dtm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 #' @method as.dtm default 
 as.dtm.default <- 
 function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+    tm::as.DocumentTermMatrix(x = text.var, ...)
+}
+
+#' \code{as.dtm.character} - character method for \code{as.dtm} used to 
+#' convert to a \code{\link[tm]{DocumentTermMatrix}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.dtm character
+as.dtm.character <- 
+    function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
     x <- t(wfm2xtab(text.var = text.var, grouping.var = grouping.var, ...))
 
@@ -441,19 +446,6 @@ function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
     a
 }
 
-#' \code{as.DocumentTermMatrix.default} - Default method for \code{as.DocumentTermMatrix} used to 
-#' convert to a \code{\link[tm]{DocumentTermMatrix}}.
-#' @rdname as.tdm
-#' @export
-#' @method as.DocumentTermMatrix default 
-as.DocumentTermMatrix.default <- as.dtm.default
-
-#' \code{as.TermDocumentMatrix.default} - Default method for \code{as.TermDocumentMatrix} used to 
-#' convert to a \code{\link[tm]{TermDocumentMatrix}}.
-#' @rdname as.tdm
-#' @export
-#' @method as.TermDocumentMatrix default 
-as.TermDocumentMatrix.default <- as.tdm.default
 
 wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
   
