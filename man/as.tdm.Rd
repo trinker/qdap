@@ -11,9 +11,11 @@
 \alias{as.dtm}
 \alias{as.dtm.character}
 \alias{as.dtm.default}
+\alias{as.dtm.wfm}
 \alias{as.tdm}
 \alias{as.tdm.character}
 \alias{as.tdm.default}
+\alias{as.tdm.wfm}
 \title{tm Package Compatibility Tools: Apply to or Convert to/from Term Document
 Matrix or Document Term Matrix}
 \usage{
@@ -38,6 +40,10 @@ as.DocumentTermMatrix(text.var, grouping.var = NULL, vowel.check = TRUE,
 
 \method{as.dtm}{character}(text.var, grouping.var = NULL,
   vowel.check = TRUE, ...)
+
+\method{as.tdm}{wfm}(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
+
+\method{as.dtm}{wfm}(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
 \method{as.data.frame}{Corpus}(x, row.names, optional, ..., doc = "docs",
   text = "text", sent.split = TRUE)
@@ -168,6 +174,12 @@ convert to a \code{\link[tm]{DocumentTermMatrix}}.
 \code{as.dtm.character} - character method for \code{as.dtm} used to
 convert to a \code{\link[tm]{DocumentTermMatrix}}.
 
+\code{as.tdm.wfm} - wfm method for \code{as.tdm} used to
+convert to a \code{\link[tm]{TermDocumentMatrix}}.
+
+\code{as.dtm.wfm} - wfm method for \code{as.dtm} used to
+convert to a \code{\link[tm]{TermDocumentMatrix}}.
+
 \code{as.data.frame} - Convert a \pkg{tm} package \code{\link[tm]{Corpus}} to
 a \pkg{qdap} \code{\link[base]{data.frame}}.
 
@@ -225,7 +237,8 @@ SW <- c(shorts, qdapDictionaries::contractions[, 1],
 
 DocTermMat2 <- with(pres_debates2012, as.dtm(dialogue, list(person, time), stopwords = SW))
 DocTermMat2 <- removeSparseTerms(DocTermMat2,0.95)
-DocTermMat2 <- DocTermMat2[rowSums(as.matrix(DocTermMat2))> 0,]
+(DocTermMat2 <- DocTermMat2[rowSums(as.matrix(DocTermMat2))> 0,])
+plot(DocTermMat2)
 
 ## Correspondence Analysis
 library(ca)
@@ -359,7 +372,6 @@ summary(a)
 out <- apply_as_tm(a, tm:::removeSparseTerms, sparse=0.6)
 summary(out)
 
-apply_as_tm(a, tm:::dissimilarity, method = "cosine")
 apply_as_tm(a, tm:::findAssocs, "computer", .8)
 apply_as_tm(a, tm:::findFreqTerms, 2, 3)
 apply_as_tm(a, tm:::Zipf_plot)
@@ -463,8 +475,7 @@ Filter(tdm_in, 5)
 (dtm_in <- DocumentTermMatrix(crude, control = list(stopwords = TRUE)))
 Filter(dtm_in, 5)
 
-## Filter particular words based on max/min values in wfm
-v <- with(DATA, wfm(state, list(sex, adult)))
+## Filter particular words based on max/min values
 Filter(dtm_in, 5, 7)
 Filter(dtm_in, 4, 4)
 Filter(tdm_in, 3, 4)

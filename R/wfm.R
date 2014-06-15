@@ -622,7 +622,7 @@ print.wfm_summary <- function(x, ...) {
     }      
 
     vals <- c(
-        sprintf("A word-frequency matrix (%s terms, %s groups)", numrow, numcol),
+        sprintf("<<A word-frequency matrix (%s terms, %s groups)>>", numrow, numcol),
         "", sprintf("Non-/sparse entries       : %s/%s", x[[nms[1]]][1], x[[nms[1]]][2]),
         sprintf("Sparsity                  : %s%%", x[[nms[2]]]),
         sprintf("Maximal term length       : %s", x[[nms[3]]]) ,
@@ -701,7 +701,7 @@ weight.wfm <- function(x, type = "prop", ...) {
 
     out <- FUN(x)
     class(out) <- c("weighted_wfm", class(out))
-    attributes(out)[["Weighting"]] <- type
+    attributes(out)[["weighting"]] <- type
 
     out
 }
@@ -741,7 +741,7 @@ weight.wfdf <- function(x, type = "prop", ...) {
 
     out <- FUN(x)
     class(out) <- c("weighted_wfm", class(out))
-    attributes(out)[["Weighting"]] <- type
+    attributes(out)[["weighting"]] <- type
 
     out
 }
@@ -1068,7 +1068,7 @@ tm2qdap <- function(x) {
     
     y <- as.matrix(data.frame(as.matrix(x), check.names = FALSE))
     
-    if(!any(attributes(x)[["Weighting"]] %in% "tf")){
+    if(!any(attributes(x)[["weighting"]] %in% "tf")){
         class(y) <- c("weighted_wfm", class(y))
     } else {
         class(y) <- c("wfm", "true.matrix", class(y))

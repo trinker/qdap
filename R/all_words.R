@@ -32,7 +32,7 @@
 #' all_words(raj$dialogue, contains="conc")
 #' x3 <- all_words(raj$dialogue)
 #' head(x3, 10)
-#' x4 <- all_words(raj$dialogue, contains="the)
+#' x4 <- all_words(raj$dialogue, contains="the")
 #' head(x4)
 #' x5 <- all_words(raj$dialogue, contains="read")
 #' head(x5)

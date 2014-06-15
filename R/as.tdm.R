@@ -26,7 +26,7 @@
 #' \code{\link[tm]{TermDocumentMatrix}},
 #' \code{\link[qdap]{as.wfm}}
 #' @importFrom reshape2 melt
-#' @importFrom tm tm_map as.PlainTextDocument VectorSource Corpus
+#' @importFrom tm tm_map PlainTextDocument VectorSource Corpus
 #' @rdname as.tdm
 #' @examples
 #' \dontrun{
@@ -54,7 +54,8 @@
 #' 
 #' DocTermMat2 <- with(pres_debates2012, as.dtm(dialogue, list(person, time), stopwords = SW))
 #' DocTermMat2 <- removeSparseTerms(DocTermMat2,0.95)
-#' DocTermMat2 <- DocTermMat2[rowSums(as.matrix(DocTermMat2))> 0,]
+#' (DocTermMat2 <- DocTermMat2[rowSums(as.matrix(DocTermMat2))> 0,])
+#' plot(DocTermMat2)
 #'     
 #' ## Correspondence Analysis
 #' library(ca)
@@ -188,7 +189,6 @@
 #' out <- apply_as_tm(a, tm:::removeSparseTerms, sparse=0.6)
 #' summary(out)
 #' 
-#' apply_as_tm(a, tm:::dissimilarity, method = "cosine")
 #' apply_as_tm(a, tm:::findAssocs, "computer", .8)
 #' apply_as_tm(a, tm:::findFreqTerms, 2, 3)
 #' apply_as_tm(a, tm:::Zipf_plot)
@@ -292,8 +292,7 @@
 #' (dtm_in <- DocumentTermMatrix(crude, control = list(stopwords = TRUE)))
 #' Filter(dtm_in, 5)
 #' 
-#' ## Filter particular words based on max/min values in wfm
-#' v <- with(DATA, wfm(state, list(sex, adult)))
+#' ## Filter particular words based on max/min values
 #' Filter(dtm_in, 5, 7)
 #' Filter(dtm_in, 4, 4)
 #' Filter(tdm_in, 3, 4)
@@ -384,13 +383,12 @@ as.tdm.character <- function(text.var, grouping.var = NULL, vowel.check = TRUE, 
         dimnames(x)
     )
     
-
     attributes(a) <- list(
-            class = c("TermDocumentMatrix", "simple_triplet_matrix"),
-            Weighting = c("term frequency", "tf")
+        names = c("i", "j", "v", "nrow", "ncol", "dimnames"),
+        class = c("TermDocumentMatrix", "simple_triplet_matrix"),
+        weighting = c("term frequency", "tf")
     )
     
-    names(a) <- c("i", "j", "v", "nrow", "ncol", "dimnames")
     a
 }
 
@@ -438,14 +436,27 @@ as.dtm.character <-
     )
     
     attributes(a) <- list(
-            class = c("DocumentTermMatrix", "simple_triplet_matrix"),
-            Weighting = c("term frequency", "tf")
+        names = c("i", "j", "v", "nrow", "ncol", "dimnames")  ,      
+        class = c("DocumentTermMatrix", "simple_triplet_matrix"),
+        weighting = c("term frequency", "tf")
     )
     
-    names(a) <- c("i", "j", "v", "nrow", "ncol", "dimnames")
     a
 }
 
+#' \code{as.tdm.wfm} - wfm method for \code{as.tdm} used to 
+#' convert to a \code{\link[tm]{TermDocumentMatrix}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.tdm wfm    
+as.tdm.wfm <- as.tdm.character
+
+#' \code{as.dtm.wfm} - wfm method for \code{as.dtm} used to 
+#' convert to a \code{\link[tm]{TermDocumentMatrix}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.dtm wfm    
+as.dtm.wfm <- as.dtm.character
 
 wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
   
@@ -485,12 +496,13 @@ as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "docs",
     text = "text", sent.split = TRUE) {
 
     if(!is(x[[1]], "PlainTextDocument")) {
-        x <- tm_map(x, as.PlainTextDocument)
+        x <- tm_map(x, PlainTextDocument)
     }
-    
-    out <- list2df(x, col1 = text, col2 = doc)[, 2:1]
 
-    metadat <- attributes(x)[["DMetaData"]]
+    qpaste <- function(x) paste(as.character(x), collapse = " ")
+    out <- list2df(lapply(x, qpaste), col1 = text, col2 = doc)[, 2:1]
+
+    metadat <- NLP::meta(x)
     if (ncol(metadat) > 1) {
         colnames(metadat)[1] <- doc
         out <- key_merge(out, metadat)
@@ -502,8 +514,6 @@ as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "docs",
     out
 
 }
-
-
 
 
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
@@ -608,22 +618,22 @@ as.Corpus.default <- function(text.var, grouping.var = NULL, demographic.vars,
 
     ## Use the tm package to convert to a Corpus
     mycorpus <- Corpus(VectorSource(LST), ...)
-    
+ 
     ## Add metadata info
-    attributes(mycorpus)[["DMetaData"]][,1] <- names(LST)
+    NLP::meta(mycorpus, "MetaID") <- names(LST)
+    NLP::meta(mycorpus, "labels") <- names(LST)
     pers <- unname(Sys.info()["user"])
     if (!is.null(pers)) {
-        attributes(mycorpus)[["CMetaData"]][["MetaData"]][["creator"]] <- pers
+        tm::DublinCore(mycorpus, tag = "creator") <- pers
     }
 
-    ## Add other demographic variables to "DMetaData"
+    ## Add other demographic variables to "dmeta"
     if(!missing(demographic.vars)) {
         if (!is.data.frame(demographic.vars)) {
             if (is.list(demographic.vars)) {
                 nms <- names(demographic.vars)
                 demographic.vars <- do.call(cbind.data.frame, demographic.vars)
                 if (is.null(nms)) {
-
                     colnames(demographic.vars) <- paste0("X", 1:ncol(demographic.vars))
                 } else {
                     colnames(demographic.vars) <- nms
@@ -645,8 +655,12 @@ as.Corpus.default <- function(text.var, grouping.var = NULL, demographic.vars,
         if (sum(checks) != 0){
             metadat <- list_df2df(lapply(metadat, 
                 function(x) x[1, checks, drop = FALSE]), "MetaID")
-            attributes(mycorpus)[["DMetaData"]] <- 
-                key_merge(attributes(mycorpus)[["DMetaData"]], metadat)
+            new_vars <- key_merge(NLP::meta(mycorpus)[, 1, drop=FALSE], 
+                metadat, defualt.arrange = FALSE)[, -1, drop=FALSE]
+            lapply(colnames(new_vars), function(x){
+                NLP::meta(mycorpus, x) <<- new_vars[[x]]
+            })
+
         }
     }
 
@@ -682,11 +696,11 @@ t.TermDocumentMatrix <- function(x, ...) {
     )
     
     attributes(a) <- list(
-            class = c("DocumentTermMatrix", "simple_triplet_matrix"),
-            Weighting = c("term frequency", "tf")
+        names = c("i", "j", "v", "nrow", "ncol", "dimnames"),
+        class = c("DocumentTermMatrix", "simple_triplet_matrix"),
+        weighting = c("term frequency", "tf")
     )
     
-    names(a) <- c("i", "j", "v", "nrow", "ncol", "dimnames")
     a
 }
 
@@ -713,13 +727,12 @@ t.DocumentTermMatrix <- function(x, ...) {
         dimnames(x)
     )
     
-
     attributes(a) <- list(
-            class = c("TermDocumentMatrix", "simple_triplet_matrix"),
-            Weighting = c("term frequency", "tf")
+        names = c("i", "j", "v", "nrow", "ncol", "dimnames"), 
+        class = c("TermDocumentMatrix", "simple_triplet_matrix"),
+        weighting = c("term frequency", "tf")
     )
     
-    names(a) <- c("i", "j", "v", "nrow", "ncol", "dimnames")
     a
 }
 

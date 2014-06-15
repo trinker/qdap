@@ -35,8 +35,8 @@
 #' ## Clustering: Dendrogram with p.values
 #' library(pvclust)
 #' wfm.mod <- with(pres_debates2012, wfm(dialogue, list(person, time)))
-#' fit <- pvclust(wfm.mod, method.hclust="ward",
-#'    method.dist="euclidean")
+#' fit <- suppressMessages(pvclust(wfm.mod, method.hclust="ward",
+#'     method.dist="euclidean"))
 #' plot(fit) 
 #' pvrect(fit, alpha=.95)
 #' 

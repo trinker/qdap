@@ -184,6 +184,9 @@ knitr::knit2html("inst/Rmd_vignette/qdap_vignette.Rmd",
     "inst/Rmd_vignette/qdap_vignette.html",
     stylesheet='inst/Rmd_vignette/css/style.css')
 
+knitr::knit2html("vignettes/qdap_vignette.Rmd", 
+    "vignettes/qdap_vignette.html")
+
 #root <- system.file("doc/qdap_vignette.html", package = "qdap")
 #root <- "C:/Users/trinker/GitHub/qdap/vignettes/qdap_vignette.html"
 #new <- "C:/Users/trinker/Dropbox/Public/packages"

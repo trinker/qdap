@@ -135,7 +135,7 @@ tm2qdap <- function(x) {
     
     y <- as.matrix(data.frame(as.matrix(x), check.names = FALSE))
     
-    if(!any(attributes(x)[["Weighting"]] %in% "tf")){
+    if(!any(attributes(x)[["weighting"]] %in% "tf")){
         class(y) <- c("weighted_wfm", class(y))
     } else {
         class(y) <- c("wfm", "true.matrix", class(y))
@@ -190,7 +190,7 @@ tm_corpus2df <- function(tm.corpus, col1 = "docs", col2 = "text",
     
     
     if(!is(tm.corpus[[1]], "PlainTextDocument")) {
-        tm.corpus <- tm_map(tm.corpus, as.PlainTextDocument)
+        tm.corpus <- tm_map(tm.corpus, PlainTextDocument)
     }
     
     out <- list2df(tm.corpus, col1 = col2, col2 = col1)[, 2:1]
@@ -220,7 +220,7 @@ tm_corpus2df <- function(tm.corpus, col1 = "docs", col2 = "text",
 #' @section Warning: \code{tdm} - function is deprecated.  It will be 
 #' removed in a subsequent version of qdap.  Use \code{as.tdm} instead.  
 #' @importFrom reshape2 melt
-#' @importFrom tm tm_map as.PlainTextDocument VectorSource Corpus
+#' @importFrom tm tm_map PlainTextDocument VectorSource Corpus
 #' @rdname deprecated
 tdm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
@@ -245,14 +245,13 @@ tdm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
         ncol(x),
         dimnames(x)
     )
-    
 
     attributes(a) <- list(
-            class = c("TermDocumentMatrix", "simple_triplet_matrix"),
-            Weighting = c("term frequency", "tf")
+        names = c("i", "j", "v", "nrow", "ncol", "dimnames"), 
+        class = c("TermDocumentMatrix", "simple_triplet_matrix"),
+        weighting = c("term frequency", "tf")
     )
     
-    names(a) <- c("i", "j", "v", "nrow", "ncol", "dimnames")
     a
 }
 
@@ -291,11 +290,11 @@ function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
     )
     
     attributes(a) <- list(
-            class = c("DocumentTermMatrix", "simple_triplet_matrix"),
-            Weighting = c("term frequency", "tf")
+        names = c("i", "j", "v", "nrow", "ncol", "dimnames"),
+        class = c("DocumentTermMatrix", "simple_triplet_matrix"),
+        weighting = c("term frequency", "tf")
     )
     
-    names(a) <- c("i", "j", "v", "nrow", "ncol", "dimnames")
     a
 }
 

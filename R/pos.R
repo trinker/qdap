@@ -99,6 +99,8 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
     zero.replace=0, gc.rate=10){
         
     text.var <- strip(text.var)
+    text.var[text.var == ""] <- NA
+
     if (parallel){
         ntv <- length(text.var)
         cl <- makeCluster(mc <- getOption("cl.cores", cores))
@@ -113,6 +115,7 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
         ) 
         stopCluster(cl)
     } else { 
+
         pta <- Maxent_POS_Tag_Annotator()
         if (progress.bar){
             ntv <- length(text.var)
@@ -172,8 +175,10 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
     class(POS) <- "pos"
     POS
 }
-
 tagPOS <-  function(text.var, PTA, ...) {
+
+    if (is.na(text.var)) return(list(POStagged = NA, POStags = NA))
+
     s <- as.String(text.var)
 
     ## Set up the POS annotator if missing (for parallel)
@@ -195,6 +200,7 @@ tagPOS <-  function(text.var, PTA, ...) {
     POStagged <- paste(sprintf("%s/%s", s[a3w], POStags), collapse = " ")
     list(POStagged = POStagged, POStags = POStags)
 }
+
 
 #' Parts of Speech by Grouping Variable(s)
 #' 

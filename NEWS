@@ -17,7 +17,7 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
-CHANGES IN qdap VERSION 2.0.1
+CHANGES IN qdap VERSION 2.1.0
 ----------------------------------------------------------------
 
 BUG FIXES
@@ -93,7 +93,8 @@ CHANGES
   temporary place holder that contains instructions for building the actual 
   vignette.  The user may also use the `build_qdap_vignette` directly.
 
-
+* `qdap` incorporates the chanegs from the `tm` package version: 0.6:
+  http://cran.r-project.org/web/packages/tm/news.html  Reference issue #187.
 
 CHANGES IN qdap VERSION 2.0.0
 ----------------------------------------------------------------

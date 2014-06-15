@@ -17,7 +17,7 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
-**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.0.1
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.1.0
 ----------------------------------------------------------------
 
 **BUG FIXES**
@@ -93,7 +93,8 @@ And constructed with the following guidelines:
   temporary place holder that contains instructions for building the actual 
   vignette.  The user may also use the `build_qdap_vignette` directly.
 
-
+* `qdap` incorporates the chanegs from the `tm` package version: 0.6:
+  <a href="http://cran.r-project.org/web/packages/tm/news.html" target="_blank">http://cran.r-project.org/web/packages/tm/news.html</a>  Reference <a href="https://github.com/trinker/qdap/issues/187">issue #187</a>.
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.0.0
 ----------------------------------------------------------------
