@@ -28,7 +28,7 @@ Imports:
     reports,
     reshape2,
     scales,
-    tm,
+    tm (>= 0.6),
     tools,
     venneuler,
     wordcloud,

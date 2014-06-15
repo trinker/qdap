@@ -6,8 +6,6 @@ qdap.Rproj
 ^\.gitattributes
 tools.R
 maintenance.R
-extra_statdoc
-pdf_gen
 ^\.Rprofile
 style.R
 inst/polarity
@@ -35,7 +33,7 @@ NEWS.md
 FAQ.md
 NEWS.html
 FAQ.html
-demos
+inst/demos
 ^\.travis\.yml$
 inst/qdap_Demonstration
 inst/staticdocs
@@ -59,5 +57,15 @@ inst/Rmd_vignette/qdap_vignette.html
 inst/Rmd_vignette/qdap_vignette.md
 inst/Rmd_vignette/qdap_vignette.Rproj
 inst/Rmd_vignette/figure
+inst/extra_statdoc
+inst/polarity
+inst/qdap_Demonstration
+inst/Scraping_Word_Lists
+inst/staticdocs
+inst/web
+inst/pdf_gen
+inst/demos/discoursemap
+
+
 
 
