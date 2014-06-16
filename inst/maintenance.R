@@ -49,7 +49,9 @@ x[grepl("<h2>Authors</h2>", x)] <- paste(c("<h2>Author</h2>",
     c("Tyler W. Rinker", "Dason Kurkiewicz", "Bryan Goodrich"))
 
 cat(paste(x, collapse="\n"), file=path2)
-
+v_to <- file.path(path, "vignettes/qdap_vignette.html")
+v_from <- "inst/Rmd_vignette/qdap_vignette.html"
+file.copy(v_from, v_to, overwrite = TRUE)
 
 #STEP 3: move to trinker.guthub
 library(reports)
@@ -93,6 +95,9 @@ x[grepl("<h2>Authors</h2>", x)] <- paste(c("<h2>Author</h2>",
     rep("<h2>Contributor</h2>", 2)),
     c("Tyler W. Rinker", "Dason Kurkiewicz", "Bryan Goodrich"))
 cat(paste(x, collapse="\n"), file=path2)
+v_to <- file.path(path, "vignettes/qdap_vignette.html")
+v_from <- "inst/Rmd_vignette/qdap_vignette.html"
+file.copy(v_from, v_to, overwrite = TRUE)
 
 #STEP 3: move to trinker.guthub
 library(reports)
@@ -100,6 +105,7 @@ file <- "C:/Users/trinker/GitHub/trinker.github.com"
 incoming <- file.path(file, "qdap")
 # delete(incoming); file.copy(path, file, TRUE, TRUE); file.rename(file.path(file, "web"), incoming)
 #delete(path2)
+## https://github.com/trinker/qdap/releases
 
 #==========================
 #move project directions

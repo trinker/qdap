@@ -30,28 +30,28 @@ test_that("coleman_liau gives list of data.frames with correct dimensions",{
 
 test_that("SMOG gives list of data.frames with correct dimensions",{
 
-    SM2 <- with(rajSPLIT, SMOG(dialogue, list(sex, fam.aff)))
+    SM2 <- with(rajSPLIT[1:100, ], SMOG(dialogue, list(sex, fam.aff)))
     
     expect_true(is.list(SM2))
     expect_true(all(names(SM2) == c("Counts", "Readability")))
     expect_true(is.data.frame(scores(SM2)))
-    expect_true(all(dim(scores(SM2)) == c(5, 5)))
+    expect_true(all(dim(scores(SM2)) == c(1, 5)))
     expect_true(is.data.frame(counts(SM2)))
-    expect_true(all(dim(counts(SM2)) == c(2129, 5)))
+    expect_true(all(dim(counts(SM2)) == c(53, 5)))
 
 })
 
 
 test_that("flesch_kincaid gives list of data.frames with correct dimensions",{
 
-    FL2 <-  with(rajSPLIT, flesch_kincaid(dialogue, list(sex, fam.aff)))
+    FL2 <-  with(rajSPLIT[1:50, ], flesch_kincaid(dialogue, list(sex, fam.aff)))
     
     expect_true(is.list(FL2))
     expect_true(all(names(FL2) == c("Counts", "Readability")))
     expect_true(is.data.frame(scores(FL2)))
-    expect_true(all(dim(scores(FL2)) == c(7, 6)))
+    expect_true(all(dim(scores(FL2)) == c(2, 6)))
     expect_true(is.data.frame(counts(FL2)))
-    expect_true(all(dim(counts(FL2)) == c(2145, 5)))
+    expect_true(all(dim(counts(FL2)) == c(50, 5)))
 
 })
 
