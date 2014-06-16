@@ -59,8 +59,14 @@ foo2  <- list(
     DD = qcv(terms="")
 )
 
+## General ldots Approach
 (dat <- cm_range2long(foo, foo2, v.name = "time"))
 plot(dat)
+
+## Specify `object` Approach
+cm_range2long(object=list(foo=foo))
+cm_range2long(object=list(foo=foo, foo2=foo2), v.name="time")
+cm_range2long(object=list(a=foo, b=foo2), v.name="time")
 }
 }
 \references{

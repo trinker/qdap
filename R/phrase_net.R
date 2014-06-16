@@ -43,11 +43,37 @@
 #'     additional bonus, bounty awards are immune to the daily reputation
 #'     cap and community wiki mode."
 #' 
-#' dat <- sentSplit(data.frame(text = qprep(x)), "text")
-#' 
-#' phrase_net(dat$text, r=.5)
+#' phrase_net(sent_detect(x), r=.5)
 #' library(igraph)
-#' plot(phrase_net(dat$text, r=.5), edge.curved = FALSE)
+#' plot(phrase_net(sent_detect(x), r=.5), edge.curved = FALSE)
+#' 
+#' ## Declaration of Independence Example
+#' y <- readLines("http://www.constitution.org/usdeclar.txt")
+#' y <- paste(y[grep("When, in the", y):length(y)], collapse=" ")
+#' phrase_net(sent_detect(y), r=.7)
+#' 
+#' 
+#' ## Multiple grouping variables
+#' z <- lapply(split(raj.act.1$dialogue, raj.act.1$person), paste, collapse = " ")
+#' par(mfrow=c(2, 5), mai = c(.05, 0.15, 0.15, 0.15))
+#' lapply(seq_along(z), function(i) {
+#'     x <- try(phrase_net(sent_detect(z[i]), r=.6))
+#'     if (!inherits(x, "try-error")) {
+#'         print(x)
+#'         box()
+#'         mtext(names(z)[i])
+#'     }
+#' }) 
+#' 
+#' 
+#' lapply(seq_along(z), function(i) {
+#'     x <- try(phrase_net(sent_detect(z[i]), r=.6))
+#'     if (!inherits(x, "try-error")) {
+#'         dev.new()
+#'         print(x)
+#'         mtext(names(z)[i], padj=-1, cex=1.7, col="red")
+#'     }
+#' }) 
 #' }
 phrase_net <- function(text.var, freq=4, r = .35, 
     edge.constant = 6, vertex.constant = 3,...) {

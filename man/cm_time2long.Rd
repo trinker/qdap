@@ -41,6 +41,31 @@ x <- list(
 )
 (dat <- cm_time2long(x))
 plot(dat)
+
+bar1 <- list(
+    transcript_time_span = qcv(00:00 - 1:12:00),
+    A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),
+    B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00,
+        1.12.00:1.19.01"),
+    C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 16.25:17.01")
+)
+
+bar2 <- list(
+    transcript_time_span = qcv(00:00 - 1:12:00),
+    A = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00"),
+    B = qcv(terms = "2.40, 3.01:3.02, 5.01, 6.02:7.00, 9.00,
+        1.12.00:1.19.01"),
+    C = qcv(terms = "2.40:3.00, 5.01, 6.02:7.00, 9.00, 17.01")
+)
+
+## General ldots Approach
+cm_time2long(bar)
+cm_time2long(bar1, bar2, v.name="time")
+
+## Specify `object` Approach
+cm_time2long(object=list(bar1=bar1))
+cm_time2long(object=list(bar1=bar1, bar2=bar2), v.name="time")
+cm_time2long(object=list(a=bar1, b=bar2), v.name="time")
 }
 }
 \references{
