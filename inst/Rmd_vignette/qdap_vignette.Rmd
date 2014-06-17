@@ -4210,7 +4210,7 @@ qheat(scores(poldat), high="blue", low="yellow", grid=NULL, order.b="ave.polarit
 (POLENV <- sentiment_frame(positive.words, negative.words))
 ```
 
-<p id="polarity5">`r FT(orange, 5, text="&diams;")` **Polarity Over Time** `r FT(orange, 5, text="&diams;")`</p >
+<p id="polarity6">`r FT(orange, 5, text="&diams;")` **Polarity Over Time** `r FT(orange, 5, text="&diams;")`</p >
 
 <pre><code class="r">poldat4 <- with(rajSPLIT, polarity(dialogue, act, constrain = TRUE))
 
@@ -4246,6 +4246,7 @@ ggplot() + theme_bw() +
     scale_fill_brewer(palette="Set1")
 </code></pre>
 
+<p id="polarity7"></p>
 ```{r, echo = FALSE, fig.width=14.5, fig.height=6, message=FALSE, warning=FALSE}
 poldat4 <- readRDS("data/poldat4.rds")
 
