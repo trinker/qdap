@@ -332,6 +332,42 @@ m + qtheme()
 m + theme_nightheat
 dev.off()
 m+ theme_nightheat(title="Polarity Discourse Map")
+
+#===============================#
+## CUMULATIVE POLARITY EXAMPLE ##
+#===============================#
+poldat4 <- with(rajSPLIT, polarity(dialogue, act, constrain = TRUE))
+
+polcount <- counts(poldat4)$polarity
+len <- length(polcount)
+
+cumpolarity_mean <- cumpolarity_median <- rep(NA, len)
+
+cummean <- function(x){cumsum(x)/seq_along(x)}
+
+cumpolarity <- data.frame(cum_mean = cummean(polcount), Time=1:len)
+
+## Calculate background rectangles
+ends <- cumsum(rle(counts(poldat4)$act)$lengths)
+starts <- c(1, head(ends + 1, -1))
+rects <- data.frame(xstart = starts, xend = ends + 1,
+    Act = c("I", "II", "III", "IV", "V"))
+
+library(ggplot2)
+ggplot() + theme_bw() +
+    geom_rect(data = rects, aes(xmin = xstart, xmax = xend,
+        ymin = -Inf, ymax = Inf, fill = Act), alpha = 0.17) +
+    geom_smooth(data = cumpolarity, aes(y=cum_mean, x = Time)) +
+    geom_hline(y=mean(polcount), color="grey30", size=1, alpha=.3, linetype=2) +
+    annotate("text", x = mean(ends[1:2]), y = mean(polcount), color="grey30",
+        label = "Average Polarity", vjust = .3, size=3) +
+    geom_line(data = cumpolarity, aes(y=cum_mean, x = Time), size=1) +
+    ylab("Cumulative Average Polarity") + xlab("Duration") +
+    scale_x_continuous(expand = c(0,0)) +
+    geom_text(data=rects, aes(x=(xstart + xend)/2, y=-.04,
+        label=paste("Act", Act)), size=3) +
+    guides(fill=FALSE) +
+    scale_fill_brewer(palette="Set1")
 }
 }
 \references{

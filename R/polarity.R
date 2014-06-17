@@ -328,7 +328,7 @@
 #' ## Calculate background rectangles
 #' ends <- cumsum(rle(counts(poldat4)$act)$lengths)
 #' starts <- c(1, head(ends + 1, -1))
-#' rects <- data.frame(xstart = starts, xend = ends, 
+#' rects <- data.frame(xstart = starts, xend = ends + 1, 
 #'     Act = c("I", "II", "III", "IV", "V"))
 #' 
 #' library(ggplot2)
