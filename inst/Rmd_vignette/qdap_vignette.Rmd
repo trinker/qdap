@@ -4189,7 +4189,7 @@ names(poldat)
 <p id="polarity2">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity")`** - *Sentence Level Polarity Scores*`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r}
-htruncdf(poldat$all, 20, 10)
+htruncdf(counts(poldat), 20, 10)
 ```
 
 <p id="polarity3">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity")` Plot Method**`r FT(orange, 5, text="&diams;")`</p >
@@ -4201,19 +4201,89 @@ plot(poldat)
 <p id="polarity4">`r FT(orange, 5, text="&diams;")` **`r FUN("polarity")` Plot Group Polarity as Heat Map**`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, fig.height=4}
-qheat(poldat[["group"]], high="blue", low="yellow", grid=NULL, order.b="ave.polarity")
+qheat(scores(poldat), high="blue", low="yellow", grid=NULL, order.b="ave.polarity")
 ```
 
 <p id="polarity5">`r FT(orange, 5, text="&diams;")` **`r FUN("sentiment_frame")`** - *Specify Your Own Polarity Environment*`r FT(orange, 5, text="&diams;")`</p >
 
 ```{r, comment=NA}
 (POLENV <- sentiment_frame(positive.words, negative.words))
-ls(POLENV)[1:20]
+```
+
+<p id="polarity5">`r FT(orange, 5, text="&diams;")` **Polarity Over Time** `r FT(orange, 5, text="&diams;")`</p >
+
+<pre><code class="r">poldat4 <- with(rajSPLIT, polarity(dialogue, act, constrain = TRUE))
+
+polcount <- counts(poldat4)$polarity
+len <- length(polcount)
+
+cumpolarity_mean <- cumpolarity_median <- rep(NA, len)
+
+cummean <- function(x){cumsum(x)/seq_along(x)}
+
+cumpolarity <- data.frame(cum_mean = cummean(polcount), Time=1:len)
+
+## Calculate background rectangles
+ends <- cumsum(rle(counts(poldat4)$act)$lengths)
+starts <- c(1, head(ends + 1, -1))
+rects <- data.frame(xstart = starts, xend = ends, 
+    Act = c("I", "II", "III", "IV", "V"))
+
+library(ggplot2)
+ggplot() + theme_bw() +
+    geom_rect(data = rects, aes(xmin = xstart, xmax = xend, 
+        ymin = -Inf, ymax = Inf, fill = Act), alpha = 0.2) +
+    geom_smooth(data = cumpolarity, aes(y=cum_mean, x = Time)) +
+    geom_hline(y=mean(polcount), color="grey30", size=1, alpha=.3, linetype=2) + 
+    annotate("text", x = mean(ends[1:2]), y = mean(polcount), color="grey30", 
+        label = "Average Polarity", vjust = .3, size=3) +
+    geom_line(data = cumpolarity, aes(y=cum_mean, x = Time), size=1) +
+    ylab("Cumulative Average Polarity") + xlab("Duration") +
+    scale_x_continuous(expand = c(0,0)) +
+    geom_text(data=rects, aes(x=(xstart + xend)/2, y=-.04, 
+        label=paste("Act", Act)), size=3) + 
+    guides(fill=FALSE) +
+    scale_fill_brewer(palette="Set1")
+</code></pre>
+
+```{r, echo = FALSE, fig.width=14.5, fig.height=6, message=FALSE, warning=FALSE}
+poldat4 <- readRDS("data/poldat4.rds")
+
+polcount <- counts(poldat4)$polarity
+len <- length(polcount)
+
+cumpolarity_mean <- cumpolarity_median <- rep(NA, len)
+
+cummean <- function(x){cumsum(x)/seq_along(x)}
+
+cumpolarity <- data.frame(cum_mean = cummean(polcount), Time=1:len)
+
+## Calculate background rectangles
+ends <- cumsum(rle(counts(poldat4)$act)$lengths)
+starts <- c(1, head(ends + 1, -1))
+rects <- data.frame(xstart = starts, xend = ends, 
+    Act = c("I", "II", "III", "IV", "V"))
+
+library(ggplot2)
+ggplot() + theme_bw() +
+    geom_rect(data = rects, aes(xmin = xstart, xmax = xend, 
+        ymin = -Inf, ymax = Inf, fill = Act), alpha = 0.2) +
+    geom_smooth(data = cumpolarity, aes(y=cum_mean, x = Time)) +
+    geom_hline(y=mean(polcount), color="grey30", size=1, alpha=.3, linetype=2) + 
+    annotate("text", x = mean(ends[1:2]), y = mean(polcount), color="grey30", 
+        label = "Average Polarity", vjust = .3, size=3) +
+    geom_line(data = cumpolarity, aes(y=cum_mean, x = Time), size=1) +
+    ylab("Cumulative Average Polarity") + xlab("Duration") +
+    scale_x_continuous(expand = c(0,0)) +
+    geom_text(data=rects, aes(x=(xstart + xend)/2, y=-.04, 
+        label=paste("Act", Act)), size=3) + 
+    guides(fill=FALSE) +
+    scale_fill_brewer(palette="Set1")
 ```
 
 <h4 id="wordcor">Word Association (Correlations)</h4>
 
-It is helpful to finds words associated (or negatively associated) with or correlations between selected words in understanding language selection.  The <a href="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank"><code>word_cor</code></a> function calculates correlations (based on the `r FUN("wfm")` function) for words nested within grouping variables (turn of talk is an obvious choice for a grouping variable).  Running bootstrapping with a random sample can help the researcher determine if a co-occurrence of words is by chance.  `r FUN("word_cor")` is even more flexible in that it can actually take a frequency matrix (e.g., the `r FUN("wfm_combine", "wfm")` function or the `r HR("#coding", "cm_")` family of functions).  
+It is helpful to finds words associated (or negatively associated) with or correlations between selected words in understanding language selection.  The <a href="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank"><code>word\_cor</code></a> function calculates correlations (based on the `r FUN("wfm")` function) for words nested within grouping variables (turn of talk is an obvious choice for a grouping variable).  Running bootstrapping with a random sample can help the researcher determine if a co-occurrence of words is by chance.  `r FUN("word_cor")` is even more flexible in that it can actually take a frequency matrix (e.g., the `r FUN("wfm_combine", "wfm")` function or the `r HR("#coding", "cm_")` family of functions).  
 
 <p id="wordcor1">`r FT(orange, 5, text="&diams;")` **`r FUN("word_cor")`** - *Single Words*`r FT(orange, 5, text="&diams;")`</p >
 
@@ -5515,6 +5585,5 @@ options(markdown.HTML.stylesheet = "css/style.css")
 <li>Rinker, T. (2013). reports: Package to asssist in report writing.  <a href="http://github.com/trinker/reports"><a href="http://github.com/trinker/reports">http://github.com/trinker/reports</a></a></li>
 <li> Wickham, H. (2009). ggplot2: Elegant graphics for data analysis.  <a href="http://had.co.nz/ggplot2/book"><a href="http://had.co.nz/ggplot2/book">http://had.co.nz/ggplot2/book</a></a></li>
 </ul>
-
 
 
