@@ -4246,7 +4246,6 @@ ggplot() + theme_bw() +
     scale_fill_brewer(palette="Set1")
 </code></pre>
 
-<p id="polarity7"></p>
 ```{r, echo = FALSE, fig.width=14.5, fig.height=6, message=FALSE, warning=FALSE}
 poldat4 <- readRDS("data/poldat4.rds")
 
@@ -4284,7 +4283,7 @@ ggplot() + theme_bw() +
 
 <h4 id="wordcor">Word Association (Correlations)</h4>
 
-It is helpful to finds words associated (or negatively associated) with or correlations between selected words in understanding language selection.  The <a href="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank"><code>word\_cor</code></a> function calculates correlations (based on the `r FUN("wfm")` function) for words nested within grouping variables (turn of talk is an obvious choice for a grouping variable).  Running bootstrapping with a random sample can help the researcher determine if a co-occurrence of words is by chance.  `r FUN("word_cor")` is even more flexible in that it can actually take a frequency matrix (e.g., the `r FUN("wfm_combine", "wfm")` function or the `r HR("#coding", "cm_")` family of functions).  
+It is helpful to finds words associated (or negatively associated) with or correlations between selected words in understanding language selection.  The <a href="http://trinker.github.io/qdap_dev/word_cor.html" target="_blank"><code>word&#095;cor</code></a> function calculates correlations (based on the `r FUN("wfm")` function) for words nested within grouping variables (turn of talk is an obvious choice for a grouping variable).  Running bootstrapping with a random sample can help the researcher determine if a co-occurrence of words is by chance.  `r FUN("wordword&#095;cor")` is even more flexible in that it can actually take a frequency matrix (e.g., the `r FUN("wfm&#095;combine", "wfm")` function or the `r HR("#coding", "cm&#095;")` family of functions).  
 
 <p id="wordcor1">`r FT(orange, 5, text="&diams;")` **`r FUN("word_cor")`** - *Single Words*`r FT(orange, 5, text="&diams;")`</p >
 
