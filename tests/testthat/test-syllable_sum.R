@@ -33,7 +33,7 @@ test_that("syllable_sum, gives the desired output",{
    
     x3_c <- c(8, 5, 4, 5, 6, 6, 4, 4, 7, 6, 9)
 
-    expect_true(identical(x3, x3_c))
+    expect_true(all(x3 == x3_c))
     
 })
 
@@ -43,7 +43,7 @@ test_that("polysyllable_sum, gives the desired output",{
     
     x4_c <- c(1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L)    
 
-    expect_true(identical(x4, x4_c))
+    expect_true(all(x4 ==  x4_c))
     
 })
 
@@ -54,7 +54,7 @@ test_that("combo_syllable_sum, gives the desired output",{
     x5_c <- structure(list(syllable.count = c(8, 5, 4, 5, 6, 6, 4, 4, 7, 
         6, 9), polysyllable.count = c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
         )), .Names = c("syllable.count", "polysyllable.count"), row.names = c(NA, 
-        -11L), class = "data.frame")
+        -11L), class = c("combo_syllable_sum", "data.frame"))
 
     expect_true(identical(x5, x5_c))
     

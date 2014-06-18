@@ -36,7 +36,7 @@
 syllable_sum <-
 function(text.var, parallel = FALSE) {
     if (!parallel) {
-        unlist(lapply(as.character(text.var), function(x) {
+        out <- unlist(lapply(as.character(text.var), function(x) {
             sum(syllable_count(Trim(x))['syllables'])
         }))
     } else {
@@ -50,8 +50,24 @@ function(text.var, parallel = FALSE) {
             }
         )
         stopCluster(cl)
-        unlist(m)
+        out <- unlist(m)
     }
+    class(out) <- c("syllable_sum", class(out))
+    out
+}
+
+#' Prints an syllable_sum object
+#' 
+#' Prints an syllable_sum object
+#' 
+#' @param x The syllable_sum object
+#' @param \ldots ignored
+#' @export
+#' @method print syllable_sum
+print.syllable_sum <-
+function(x, ...) {
+
+    print(as.numeric(x))
 }
 
 
@@ -211,7 +227,7 @@ function(text.var, parallel = FALSE) {
         return(j)
     }
     if (!parallel) {
-        unlist(lapply(as.character(text.var), function(x) counter(x)))
+        out <- unlist(lapply(as.character(text.var), function(x) counter(x)))
     } else {
         cl <- makeCluster(mc <- getOption("cl.cores", detectCores()/2))
         clusterExport(cl=cl, varlist=c("text.var", "counter", "strip",
@@ -222,10 +238,24 @@ function(text.var, parallel = FALSE) {
             }
         )
         stopCluster(cl)
-        unlist(m)
+        out <- unlist(m)
     }
+    class(out) <- c("polysyllable_sum", class(out))
+    out    
 }
 
+#' Prints an polysyllable_sum object
+#' 
+#' Prints an polysyllable_sum object
+#' 
+#' @param x The polysyllable_sum object
+#' @param \ldots ignored
+#' @export
+#' @method print polysyllable_sum
+print.polysyllable_sum <-
+function(x, ...) {
+    print(as.numeric(x))
+}
 
 #' Transcript Apply Syllable and Polysyllable Count
 #' 
@@ -264,9 +294,23 @@ function(text.var, parallel = FALSE) {
     }
     n <- as.data.frame(t(matrix(m, 2, length(m)/2)))
     names(n) <- c("syllable.count", "polysyllable.count")
-    return(n)
+    class(n) <- c("combo_syllable_sum", class(n))
+    n
 }
 
+#' Prints an combo_syllable_sum object
+#' 
+#' Prints an combo_syllable_sum object
+#' 
+#' @param x The combo_syllable_sum object
+#' @param \ldots ignored
+#' @export
+#' @method print combo_syllable_sum
+print.combo_syllable_sum <-
+function(x, ...) {
+    class(x) <- "data.frame"
+    print(x)
+}
 
 
 
