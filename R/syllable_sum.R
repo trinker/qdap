@@ -168,7 +168,8 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
                     envir = env.syl), "-", "NF"))
         }
         k <- sapply(y, InDic)
-        DF <- data.frame(words = q, syllables = n, in.dictionary = k, 
+
+        DF <- data.frame(words = y, syllables = n, in.dictionary = k, 
             row.names = NULL)
         if (algorithm.report == TRUE){
             list("ALGORITHM REPORT" = DF[which(DF$in.dictionary == 'NF'), ], 

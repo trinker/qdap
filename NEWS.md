@@ -22,6 +22,9 @@ And constructed with the following guidelines:
 
 **BUG FIXES**
 
+* `syllable_count` returned the sentence (recycled) in the `words` column of the
+  output.  This behavior has been fixed.  See GitHub <a href="https://github.com/trinker/qdap/issues/188">issue #188</a> for details.
+
 **NEW FEATURES**
 
 * `cumulative` generic method added to view cumulative scores over time.

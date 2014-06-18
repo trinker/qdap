@@ -22,6 +22,9 @@ CHANGES IN qdap VERSION 2.1.1
 
 BUG FIXES
 
+* `syllable_count` returned the sentence (recycled) in the `words` column of the
+  output.  This behavior has been fixed.  See GitHub issue #188 for details.
+
 NEW FEATURES
 
 * `cumulative` generic method added to view cumulative scores over time.
