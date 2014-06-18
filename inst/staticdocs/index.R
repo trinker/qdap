@@ -224,12 +224,29 @@ sd_section("Network Plots",
   c(
     "discourse_map", 
     "Network",
+    "Network.formality",      
     "Network.polarity",
     "qtheme",
-    "theme_nightheat"
+    "theme_badkitchen",           
+    "theme_cafe",                  
+    "theme_duskheat",             
+    "theme_grayscale",             
+    "theme_greyscale",            
+    "theme_hipster",               
+    "theme_nightheat",            
+    "theme_norah"  
   )
 )
 
+sd_section("Cumulative Plots", 
+  "Network Plots for qdap Objects.",
+  c(
+    "cumulative", 
+    "cumulative.end_mark",       
+    "cumulative.formality",      
+    "cumulative.polarity"
+  )
+)
 
 sd_section("Animation", 
   "Animate qdap Objects.",

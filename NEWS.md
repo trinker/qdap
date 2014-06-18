@@ -17,6 +17,28 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.1.1
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+**NEW FEATURES**
+
+* `cumulative` generic method added to view cumulative scores over time.
+
+* `formality` picks up a `cumulative` method.
+
+* `polarity` picks up a `cumulative` method.
+
+* `end_mark` picks up a `class` (`end_mark`), `plot` method, and a `cumulative` 
+  method.
+
+**MINOR FEATURES**
+
+**IMPROVEMENTS**
+
+**CHANGES**
+
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.1.0
 ----------------------------------------------------------------
 

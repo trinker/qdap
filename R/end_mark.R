@@ -37,6 +37,7 @@
 #' \dontrun{
 #' end_mark(DATA.SPLIT$state)
 #' end_mark(mraja1spl$dialogue)
+#' plot(end_mark(mraja1spl$dialogue))
 #' ques <- mraja1spl[end_mark(mraja1spl$dialogue) == "?", ] #grab questions
 #' htruncdf(ques)
 #' non.ques <- mraja1spl[end_mark(mraja1spl$dialogue) != "?", ] #non questions
@@ -53,6 +54,26 @@
 #' plot(counts(x_by))
 #' plot(proportions(x_by))
 #' plot(preprocessed(x_by))
+#' 
+#' #===============================#
+#' ## End Marks Over Time Example ##
+#' #===============================#
+#' sentpres <- lapply(with( pres_debates2012, split(dialogue, time)), function(x) {
+#'     end_mark(x)
+#' })
+#' 
+#' x <- sentpres[[1]]
+#' 
+#' sentplots <- lapply(seq_along(sentpres), function(i) {
+#'     m <- plot(cumulative(sentpres[[i]]))
+#'     if (i != 2) m <- m + ylab("")
+#'     if (i != 3) m <- m + xlab(NULL)
+#'     m + ggtitle(paste("Debate", i))
+#' })
+#' 
+#' library(grid)
+#' library(gridExtra)
+#' do.call(grid.arrange, sentplots)
 #' }
 end_mark <- function(text.var, missing.end.mark = "_", missing.text = NA, 
     other.endmarks = NULL) {
@@ -70,7 +91,22 @@ end_mark <- function(text.var, missing.end.mark = "_", missing.text = NA,
     }
     last1[!last1 %in% c(vals, ".", "?", "!", "|")] <- missing.end.mark
     last1[is.na(text.var)] <- missing.text
+    class(last1) <- c("end_mark", class(last1))
     last1
+}
+
+#' Prints an end_mark object
+#' 
+#' Prints an end_mark object
+#' 
+#' @param x The end_mark object
+#' @param \ldots ignored
+#' @export
+#' @method print end_mark
+print.end_mark <-
+function(x, ...) {
+    class(x) <- "character"
+    print(x)
 }
 
 #' Sentence End Marks
@@ -129,9 +165,10 @@ end_mark_by <- function(text.var, grouping.var, digits = 3, percent = FALSE,
     attributes(out)[["zero.replace"]] <- zero.replace
     out
 }
-#' Prints a end_mark_by object
+
+#' Prints an end_mark_by object
 #' 
-#' Prints a end_mark_by object
+#' Prints an end_mark_by object
 #' 
 #' @param x The end_mark_by object
 #' @param \ldots ignored
@@ -349,4 +386,107 @@ plot.end_mark_by <- function(x, values = FALSE, ...) {
 
 
 
+#' \code{cumulative.end_mark} - Generate end_mark over time (duration in 
+#' sentences).
+#' @rdname cumulative
+#' @export
+#' @method cumulative end_mark
+cumulative.end_mark <- function(x, ...){
+
+    types_key <- structure(list(Symbol = c(".", "?", "!", "|", "*.", "*?", "*!", 
+        "*|", "no.em", "blank"), Type = structure(c(1L, 10L, 2L, 7L, 
+        3L, 6L, 4L, 5L, 9L, 8L), .Label = c("Declarative", "Exclamatory", 
+        "Imperative-declarative", "Imperative-exclamatory", "Imperative-incomplete", 
+        "Imperative-question", "Incomplete", "Missing", "No end mark", 
+        "Question"), class = "factor")), .Names = c("Symbol", "Type"), row.names = c(NA, 
+        -10L), class = "data.frame")
+
+    x <- x %lc% types_key
+    x[is.na(x)] <- "Missing"
+    
+    all <- names(table(x))
+    
+    out <- lapply(1:length(x), function(i){
+    
+        y <- table(x[1:i])
+        missing <- all[!all %in% names(y)]
+        
+        if(!identical(missing, character(0))){
+            y <- c(y, setNames(rep(0, length(missing)), missing))
+        }
+        data.frame(t(y[as.character(types_key[["Type"]][types_key[["Type"]] 
+            %in% names(y)])]), stringsAsFactors = FALSE)
+    })
+    
+    plottingdf <- data.frame(Sentence = 1:length(out), do.call(rbind, out))
+    class(plottingdf) <- c("cumulative_end_mark", class(plottingdf))
+    plottingdf
+}
+
+#' Plots a cumulative_end_mark Object
+#' 
+#' Plots a cumulative_end_mark object.
+#' 
+#' @param x The cumulative_end_mark object.
+#' @param \ldots ignored
+#' @method plot cumulative_end_mark 
+#' @export
+plot.cumulative_end_mark <- function(x, ...){
+    
+    ord <- names(sort(colSums(x[nrow(x), -1, drop=FALSE]), decreasing=FALSE))
+
+    mplottingdf <- reshape2::melt(x, id="Sentence", variable="Type")
+    mplottingdf[, "Type"] <- factor(mplottingdf[, "Type"], levels=colnames(x)[-1])
+    
+    ggplot2::ggplot(data=mplottingdf, ggplot2::aes_string(x="Sentence", 
+        y="value", group="Type", color="Type")) + ggplot2::theme_bw() +
+        ggplot2::geom_line(size=1) + 
+        ggplot2::ylab("Number") + 
+        ggplot2::xlab("Duration") +
+        ggplot2::scale_x_continuous(expand = c(0, 0)) +
+        ggplot2::scale_colour_discrete(name = "Sentence Type")
+}
+
+#' Prints a cumulative_end_mark Object
+#' 
+#' Prints a cumulative_end_mark  object.
+#' 
+#' @param x The cumulative_end_mark object.
+#' @param \ldots ignored
+#' @method print cumulative_end_mark
+#' @export
+print.cumulative_end_mark <- function(x, ...) {
+    print(plot.cumulative_end_mark(x, ...))
+}
+
+#' Plots a end_mark Object
+#' 
+#' Plots a end_mark object.
+#' 
+#' @param x The end_mark object.
+#' @param \ldots ignored
+#' @method plot end_mark 
+#' @export
+plot.end_mark <- function(x, ...) {
+
+    types_key <- structure(list(Symbol = c(".", "?", "!", "|", "*.", "*?", "*!", 
+        "*|", "no.em", "blank"), Type = structure(c(1L, 10L, 2L, 7L, 
+        3L, 6L, 4L, 5L, 9L, 8L), .Label = c("Declarative", "Exclamatory", 
+        "Imperative-declarative", "Imperative-exclamatory", "Imperative-incomplete", 
+        "Imperative-question", "Incomplete", "Missing", "No end mark", 
+        "Question"), class = "factor")), .Names = c("Symbol", "Type"), row.names = c(NA, 
+        -10L), class = "data.frame")
+
+    x <- x %lc% types_key
+    x[is.na(x)] <- "Missing"
+    y <- table(x)
+    dat <- data.frame(y)
+    dat[, "x"] <- factor(dat[, "x"], levels=names(sort(y)))
+
+    ggplot2::ggplot(data=dat, aes_string(x="x", weight="Freq")) + 
+        ggplot2::geom_bar() +
+        ggplot2::coord_flip() + ggplot2::ylab("Count") +
+        ggplot2::xlab("Sentence Type")
+
+}
 

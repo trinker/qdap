@@ -4217,8 +4217,6 @@ qheat(scores(poldat), high="blue", low="yellow", grid=NULL, order.b="ave.polarit
 polcount <- counts(poldat4)$polarity
 len <- length(polcount)
 
-cumpolarity_mean <- cumpolarity_median <- rep(NA, len)
-
 cummean <- function(x){cumsum(x)/seq_along(x)}
 
 cumpolarity <- data.frame(cum_mean = cummean(polcount), Time=1:len)
@@ -4251,8 +4249,6 @@ poldat4 <- readRDS("data/poldat4.rds")
 
 polcount <- counts(poldat4)$polarity
 len <- length(polcount)
-
-cumpolarity_mean <- cumpolarity_median <- rep(NA, len)
 
 cummean <- function(x){cumsum(x)/seq_along(x)}
 

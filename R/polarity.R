@@ -123,6 +123,7 @@
 #' colsplit2df(scores(poldat2))
 #' plot(poldat2)
 #' plot(scores(poldat2))
+#' cumulative(poldat2)
 #' 
 #' poldat3 <- with(rajSPLIT, polarity(dialogue, person))
 #' poldat3[["group"]][, "OL"] <- outlier_labeler(scores(poldat3)[, 
@@ -318,8 +319,6 @@
 #' 
 #' polcount <- counts(poldat4)$polarity
 #' len <- length(polcount)
-#' 
-#' cumpolarity_mean <- cumpolarity_median <- rep(NA, len)
 #' 
 #' cummean <- function(x){cumsum(x)/seq_along(x)}
 #' 
@@ -1571,6 +1570,62 @@ colorize <- function(x, y) {
 }
 
 
+#' \code{cumulative.polarity} - Generate polarity over time (duration in 
+#' sentences).
+#' @rdname cumulative
+#' @export
+#' @method cumulative polarity
+cumulative.polarity <- function(x, ...){
+    
+    out <- list(cumulative_average_polarity = cummean(counts(x)[["polarity"]]))
 
+    class(out) <- "cumulative_polarity"
+    attributes(out)[["constrained"]] <- attributes(x)[["constrained"]]
+    out
+
+}
+
+cummean <- function(x){
+    cumsum(x)/seq_along(x)
+}
+
+#' Plots a cumulative_polarity Object
+#' 
+#' Plots a cumulative_polarity object.
+#' 
+#' @param x The cumulative_polarity object.
+#' @param \ldots ignored
+#' @method plot cumulative_polarity 
+#' @export
+plot.cumulative_polarity <- function(x, ...){
+
+    len <- length(x[[1]])
+    cumpolarity <- data.frame(cum_mean = x[[1]], Time = 1:len, drop=TRUE) 
+
+    ggplot2::ggplot() + ggplot2::theme_bw() +
+        ggplot2::geom_smooth(data = cumpolarity, ggplot2::aes_string(y="cum_mean", 
+            x = "Time")) +
+        ggplot2::geom_hline(y=mean(x[[1]]), color="grey30", size=1, alpha=.3, linetype=2) + 
+        ggplot2::annotate("text", x = len/2, y = mean(x[[1]]), color="grey30", 
+            label = "Average Polarity", vjust = .3, size=4) +
+        ggplot2::geom_line(data = cumpolarity, ggplot2::aes_string(y="cum_mean", 
+            x = "Time"), size=1) +
+        ggplot2::ylab("Cumulative Average Polarity") + 
+        ggplot2::xlab("Duration") +
+        ggplot2::scale_x_continuous(expand = c(0, 0), limits = c(0, len))
+
+}
+
+#' Prints a cumulative_polarity Object
+#' 
+#' Prints a cumulative_polarity  object.
+#' 
+#' @param x The cumulative_polarity object.
+#' @param \ldots ignored
+#' @method print cumulative_polarity
+#' @export
+print.cumulative_polarity <- function(x, ...) {
+    print(plot.cumulative_polarity(x, ...))
+}
 
 

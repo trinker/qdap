@@ -79,6 +79,7 @@ plot(preprocessed(x1))
 data(rajPOS) #A data set consisting of a pos list object
 x2 <- with(raj, formality(rajPOS, act))
 plot(x2)
+cumulative(x2)
 x3 <- with(raj, formality(rajPOS, person))
 plot(x3, bar.colors="Dark2")
 plot(x3, bar.colors=c("Dark2", "Set1"))
@@ -222,7 +223,7 @@ m <- Network(formdat)
 m
 print(m, bg="grey97", vertex.color="grey75")
 
-print(m, title="Polarity Discourse Map", title.color="white", bg="black",
+print(m, title="Formality Discourse Map", title.color="white", bg="black",
     legend.text.color="white", vertex.label.color = "grey70",
     edge.label.color="yellow")
 
@@ -233,6 +234,23 @@ m + theme_nightheat
 dev.off()
 m + theme_nightheat(title="Formality Discourse Map",
     vertex.label.color = "grey50")
+
+#===============================#
+## Formality Over Time Example ##
+#===============================#
+formpres <- lapply(with( pres_debates2012, split(dialogue, time)), function(x) {
+    formality(x)
+})
+formplots <- lapply(seq_along(formpres), function(i) {
+    m <- plot(cumulative(formpres[[i]]))
+    if (i != 2) m <- m + ylab("")
+    if (i != 3) m <- m + xlab(NULL)
+    m + ggtitle(paste("Debate", i))
+})
+
+library(grid)
+library(gridExtra)
+do.call(grid.arrange, formplots)
 }
 }
 \references{

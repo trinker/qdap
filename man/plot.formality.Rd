@@ -28,8 +28,8 @@ names for more compact plot width.}
 \item{min.wrdcnt}{A minimum word count threshold that must be achieved to be
 considered in the results.  Default includes all subgroups.}
 
-\item{order.by.formality}{logical.  If \code{TRUE} the group polarity plot
-will be ordered by average polarity score, otherwise alphabetical order is
+\item{order.by.formality}{logical.  If \code{TRUE} the group formality plot
+will be ordered by average formality score, otherwise alphabetical order is
 assumed.}
 
 \item{plot}{logical.  If \code{TRUE} the plot will automatically plot.

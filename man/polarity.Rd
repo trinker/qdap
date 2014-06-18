@@ -145,6 +145,7 @@ poldat2 <- with(mraja1spl, polarity(dialogue,
 colsplit2df(scores(poldat2))
 plot(poldat2)
 plot(scores(poldat2))
+cumulative(poldat2)
 
 poldat3 <- with(rajSPLIT, polarity(dialogue, person))
 poldat3[["group"]][, "OL"] <- outlier_labeler(scores(poldat3)[,
@@ -340,8 +341,6 @@ poldat4 <- with(rajSPLIT, polarity(dialogue, act, constrain = TRUE))
 
 polcount <- counts(poldat4)$polarity
 len <- length(polcount)
-
-cumpolarity_mean <- cumpolarity_median <- rep(NA, len)
 
 cummean <- function(x){cumsum(x)/seq_along(x)}
 
