@@ -37,6 +37,7 @@
 #' \dontrun{
 #' end_mark(DATA.SPLIT$state)
 #' end_mark(mraja1spl$dialogue)
+#' table(end_mark(mraja1spl$dialogue))
 #' plot(end_mark(mraja1spl$dialogue))
 #' ques <- mraja1spl[end_mark(mraja1spl$dialogue) == "?", ] #grab questions
 #' htruncdf(ques)
@@ -55,14 +56,13 @@
 #' plot(proportions(x_by))
 #' plot(preprocessed(x_by))
 #' 
-#' #===============================#
-#' ## End Marks Over Time Example ##
-#' #===============================#
-#' sentpres <- lapply(with( pres_debates2012, split(dialogue, time)), function(x) {
+#' #================================#
+#' ## End Marks Over Time Examples ##
+#' #================================#
+#' ##EXAMPLE 1
+#' sentpres <- lapply(with(pres_debates2012, split(dialogue, time)), function(x) {
 #'     end_mark(x)
 #' })
-#' 
-#' x <- sentpres[[1]]
 #' 
 #' sentplots <- lapply(seq_along(sentpres), function(i) {
 #'     m <- plot(cumulative(sentpres[[i]]))
@@ -74,6 +74,23 @@
 #' library(grid)
 #' library(gridExtra)
 #' do.call(grid.arrange, sentplots)
+#' 
+#' ##EXAMPLE 2
+#' sentraj <- lapply(with(rajSPLIT, split(dialogue, act)), function(x) {
+#'     end_mark(x)
+#' })
+#' 
+#' 
+#' 
+#' sentplots2 <- lapply(seq_along(sentraj), function(i) {
+#'     m <- plot(cumulative(sentraj[[i]]))
+#'     if (i != 2) m <- m + ylab("")
+#'     if (i != 3) m <- m + xlab(NULL)
+#'     act <- qcv(I, II, III, IV, V)
+#'     m + ggtitle(paste("Act", act[i]))
+#' })
+#' 
+#' do.call(grid.arrange, sentplots2)
 #' }
 end_mark <- function(text.var, missing.end.mark = "_", missing.text = NA, 
     other.endmarks = NULL) {
