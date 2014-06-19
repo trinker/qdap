@@ -57,8 +57,12 @@ test_that("combo_syllable_sum, gives the desired output",{
     x5_c <- structure(list(syllable.count = c(8, 5, 4, 5, 6, 6, 4, 4, 7, 
         6, 9), polysyllable.count = c(1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1
         )), .Names = c("syllable.count", "polysyllable.count"), row.names = c(NA, 
-        11L), class = c("combo_syllable_sum", "data.frame"), wc = c(6L, 
-        5L, 4L, 4L, 5L, 5L, 4L, 3L, 5L, 6L, 6L))
+        11L), class = c("combo_syllable_sum", "data.frame"), text.var = c("Computer is fun. Not too fun.", 
+        "No it's not, it's dumb.", "What should we do?", "You liar, it stinks!", 
+        "I am telling the truth!", "How can we be certain?", "There is no way.", 
+        "I distrust you.", "What are you talking about?", "Shall we move on?  Good then.", 
+        "I'm hungry.  Let's eat.  You already?"), wc = c(6L, 5L, 4L, 
+        4L, 5L, 5L, 4L, 3L, 5L, 6L, 6L))
 
     expect_true(identical(x5, x5_c))
     
