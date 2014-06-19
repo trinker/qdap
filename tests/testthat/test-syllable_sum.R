@@ -41,6 +41,8 @@ test_that("syllable_sum, gives the desired output",{
 
 test_that("polysyllable_sum, gives the desired output",{
     
+    x4 <- polysyllable_sum(DATA$state)
+    
     x4_c <- structure(c(1L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 0L, 1L), 
         class = c("polysyllable_sum", "syllable_freq", "integer"), 
         wc = c(6L, 5L, 4L, 4L, 5L, 5L, 4L, 3L, 5L, 6L, 6L), 
