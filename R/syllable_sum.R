@@ -308,7 +308,7 @@ function(text.var, parallel = FALSE) {
     n <- as.data.frame(t(matrix(m, 2, length(m)/2)))
     names(n) <- c("syllable.count", "polysyllable.count")
     class(n) <- c("combo_syllable_sum", class(n))
-    attributes(out)[["wc"]] <- wc(text.var)     
+    attributes(n)[["wc"]] <- wc(text.var)     
     n
 }
 
