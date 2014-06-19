@@ -476,9 +476,9 @@ print.cumulative_end_mark <- function(x, ...) {
     print(plot.cumulative_end_mark(x, ...))
 }
 
-#' Plots a end_mark Object
+#' Plots an end_mark Object
 #' 
-#' Plots a end_mark object.
+#' Plots an end_mark object.
 #' 
 #' @param x The end_mark object.
 #' @param \ldots ignored

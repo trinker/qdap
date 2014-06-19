@@ -36,6 +36,9 @@ And constructed with the following guidelines:
 * `end_mark` picks up a `class` (`end_mark`), `plot` method, and a `cumulative` 
   method.
 
+* `syllable_sum` and `polysyllable_sum` pick up a `class`, `plot` method, and a 
+  `cumulative` method.
+
 **MINOR FEATURES**
 
 **IMPROVEMENTS**

@@ -62,8 +62,17 @@ algorithm method.
 \dontrun{
 syllable_count("Robots like Dason lie.")
 syllable_count("Robots like Dason lie.", algorithm.report = TRUE)
+
 syllable_sum(DATA$state)
+x1 <- syllable_sum(rajSPLIT$dialogue)
+plot(x1)
+cumulative(x1)
+
 polysyllable_sum(DATA$state)
+x2 <- polysyllable_sum(rajSPLIT$dialogue)
+plot(x2)
+cumulative(x2)
+
 combo_syllable_sum(DATA$state)
 }
 }

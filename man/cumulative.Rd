@@ -6,6 +6,7 @@
 \alias{cumulative.polarity}
 \alias{cumulative.pos}
 \alias{cumulative.pos_by}
+\alias{cumulative.syllable_freq}
 \title{Cumulative Scores}
 \usage{
 cumulative(x, ...)
@@ -19,6 +20,8 @@ cumulative(x, ...)
 \method{cumulative}{pos_by}(x, ...)
 
 \method{cumulative}{polarity}(x, ...)
+
+\method{cumulative}{syllable_freq}(x, ...)
 }
 \arguments{
 \item{x}{A qdap object with an accompanying \code{cumulative} method.}
@@ -42,6 +45,9 @@ sentences).
 sentences).
 
 \code{cumulative.polarity} - Generate polarity over time (duration in
+sentences).
+
+\code{cumulative.syllable_freq} - Generate syllable_freq over time (duration in
 sentences).
 }
 

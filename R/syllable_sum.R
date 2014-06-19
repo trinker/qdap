@@ -29,8 +29,17 @@
 #' \dontrun{
 #' syllable_count("Robots like Dason lie.")
 #' syllable_count("Robots like Dason lie.", algorithm.report = TRUE)
+#' 
 #' syllable_sum(DATA$state)
+#' x1 <- syllable_sum(rajSPLIT$dialogue)
+#' plot(x1)
+#' cumulative(x1)
+#' 
 #' polysyllable_sum(DATA$state)
+#' x2 <- polysyllable_sum(rajSPLIT$dialogue)
+#' plot(x2)
+#' cumulative(x2)
+#' 
 #' combo_syllable_sum(DATA$state)
 #' }
 syllable_sum <-
@@ -52,7 +61,9 @@ function(text.var, parallel = FALSE) {
         stopCluster(cl)
         out <- unlist(m)
     }
-    class(out) <- c("syllable_sum", class(out))
+    class(out) <- c("syllable_sum", "syllable_freq", class(out))
+    attributes(out)[["wc"]] <- wc(text.var)
+    attributes(out)[["type"]] <- "Syllable"   
     out
 }
 
@@ -240,7 +251,9 @@ function(text.var, parallel = FALSE) {
         stopCluster(cl)
         out <- unlist(m)
     }
-    class(out) <- c("polysyllable_sum", class(out))
+    class(out) <- c("polysyllable_sum", "syllable_freq", class(out))
+    attributes(out)[["wc"]] <- wc(text.var)  
+    attributes(out)[["type"]] <- "Pollysyllable"       
     out    
 }
 
@@ -295,6 +308,7 @@ function(text.var, parallel = FALSE) {
     n <- as.data.frame(t(matrix(m, 2, length(m)/2)))
     names(n) <- c("syllable.count", "polysyllable.count")
     class(n) <- c("combo_syllable_sum", class(n))
+    attributes(out)[["wc"]] <- wc(text.var)     
     n
 }
 
@@ -313,4 +327,62 @@ function(x, ...) {
 }
 
 
+#' Plots a syllable_freq Object
+#' 
+#' Plots a syllable_freq object.
+#' 
+#' @param x The syllable_freq object.
+#' @param \ldots ignored
+#' @method plot syllable_freq 
+#' @export
+plot.syllable_freq <- function(x, ...){
 
+    dat <- data.frame(x=x)
+    ggplot2::ggplot(dat, ggplot2::aes_string(x="x")) +  ggplot2::geom_histogram()  
+
+}
+
+#' \code{cumulative.syllable_freq} - Generate syllable_freq over time (duration in 
+#' sentences).
+#' @rdname cumulative
+#' @export
+#' @method cumulative syllable_freq
+cumulative.syllable_freq <- function(x, ...){
+
+    keeps <- !is.na(attributes(x)[["wc"]])
+    y <- x[keeps]
+    syl_sent <- y/attributes(x)[["wc"]][keeps]
+    out <- data.frame(cumave =cumsum(syl_sent)/1:length(y), Time = 1:length(y))
+    class(out) <- c("cumulative_syllable_freq", class(out))
+    attributes(out)[["type"]] <- attributes(x)[["type"]]
+    out
+}
+
+#' Plots a cumulative_syllable_freqObject
+#' 
+#' Plots a cumulative_syllable_freqobject.
+#' 
+#' @param x The cumulative_syllable_freqobject.
+#' @param \ldots ignored
+#' @method plot cumulative_syllable_freq
+#' @export
+plot.cumulative_syllable_freq <- function(x, ...) {
+
+    ggplot2::ggplot(x, ggplot2::aes_string(x="Time", y="cumave")) +
+        ggplot2::geom_path() + ggplot2::geom_smooth() + 
+        ggplot2::ylab(sprintf("Cummulative Average %s Per Sentence", 
+            attributes(x)[["type"]])) + 
+        ggplot2::xlab("Duration")     
+}    
+
+#' Prints a cumulative_syllable_freqObject
+#' 
+#' Prints a cumulative_syllable_freq object.
+#' 
+#' @param x The cumulative_syllable_freqobject.
+#' @param \ldots ignored
+#' @method print cumulative_syllable_freq
+#' @export
+print.cumulative_syllable_freq <- function(x, ...) {
+    print(plot.cumulative_syllable_freq(x, ...))
+}
