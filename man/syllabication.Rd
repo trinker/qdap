@@ -74,6 +74,8 @@ plot(x2)
 cumulative(x2)
 
 combo_syllable_sum(DATA$state)
+x3 <- combo_syllable_sum(rajSPLIT$dialogue)
+cumulative(x3)
 }
 }
 \references{

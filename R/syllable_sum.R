@@ -41,6 +41,8 @@
 #' cumulative(x2)
 #' 
 #' combo_syllable_sum(DATA$state)
+#' x3 <- combo_syllable_sum(rajSPLIT$dialogue)
+#' cumulative(x3)
 #' }
 syllable_sum <-
 function(text.var, parallel = FALSE) {
@@ -308,6 +310,7 @@ function(text.var, parallel = FALSE) {
     n <- as.data.frame(t(matrix(m, 2, length(m)/2)))
     names(n) <- c("syllable.count", "polysyllable.count")
     class(n) <- c("combo_syllable_sum", class(n))
+    attributes(n)[["text.var"]] <- text.var      
     attributes(n)[["wc"]] <- wc(text.var)     
     n
 }
@@ -338,7 +341,11 @@ function(x, ...) {
 plot.syllable_freq <- function(x, ...){
 
     dat <- data.frame(x=x)
-    ggplot2::ggplot(dat, ggplot2::aes_string(x="x")) +  ggplot2::geom_histogram()  
+    ggplot2::ggplot(dat, ggplot2::aes_string(x="x")) +  
+        ggplot2::geom_histogram()  +
+        ggplot2::ylab("Count") + 
+        ggplot2::xlab(sprintf("Number of %s Per Sentence", 
+            attributes(x)[["type"]])) 
 
 }
 
@@ -355,24 +362,32 @@ cumulative.syllable_freq <- function(x, ...){
     out <- data.frame(cumave =cumsum(syl_sent)/1:length(y), Time = 1:length(y))
     class(out) <- c("cumulative_syllable_freq", class(out))
     attributes(out)[["type"]] <- attributes(x)[["type"]]
+    attributes(out)[["ave"]] <- mean(syl_sent)    
     out
 }
 
-#' Plots a cumulative_syllable_freqObject
+#' Plots a cumulative_syllable_freq Object
 #' 
-#' Plots a cumulative_syllable_freqobject.
+#' Plots a cumulative_syllable_freq object.
 #' 
-#' @param x The cumulative_syllable_freqobject.
+#' @param x The cumulative_syllable_freq object.
 #' @param \ldots ignored
 #' @method plot cumulative_syllable_freq
 #' @export
 plot.cumulative_syllable_freq <- function(x, ...) {
 
-    ggplot2::ggplot(x, ggplot2::aes_string(x="Time", y="cumave")) +
-        ggplot2::geom_path() + ggplot2::geom_smooth() + 
+    ggplot2::ggplot(x, ggplot2::aes_string(x="Time", y="cumave")) + 
+        ggplot2::theme_bw() +
+        ggplot2::geom_line(size=1) + ggplot2::geom_smooth() + 
         ggplot2::ylab(sprintf("Cummulative Average %s Per Sentence", 
             attributes(x)[["type"]])) + 
-        ggplot2::xlab("Duration")     
+        ggplot2::xlab("Duration") +
+        ggplot2::geom_hline(y=attributes(x)[["ave"]], color="grey30", size=1, 
+            alpha=.3, linetype=2) + 
+        ggplot2::annotate("text", x = nrow(x)/3, y = attributes(x)[["ave"]],  
+            label = sprintf("Average %s Per Sentence", attributes(x)[["type"]]), 
+            vjust = .3, color="grey30", size=4) +        
+        ggplot2::scale_x_continuous(expand=c(0, 0))
 }    
 
 #' Prints a cumulative_syllable_freqObject
@@ -386,3 +401,86 @@ plot.cumulative_syllable_freq <- function(x, ...) {
 print.cumulative_syllable_freq <- function(x, ...) {
     print(plot.cumulative_syllable_freq(x, ...))
 }
+
+#' \code{cumulative.combo_syllable_sum} - Generate combo_syllable_sum over time (duration in 
+#' sentences).
+#' @rdname cumulative
+#' @export
+#' @method cumulative combo_syllable_sum
+cumulative.combo_syllable_sum <- function(x, ...){
+
+    keeps <- !is.na(attributes(x)[["wc"]])
+    syl_sent <- y <- x[keeps, ]
+    syl_sent[gsub(".count", "", paste0("ave.", names(y)))] <- lapply(y, function(v, den = 
+        attributes(x)[["wc"]][keeps]) {
+            v/den
+    })
+    len <- nrow(syl_sent)
+    syl_sent[gsub(".count", "", paste0("cum.ave.", names(y)))] <- lapply(syl_sent[, 3:4], 
+        function(v) {
+            cumsum(v)/1:len
+    })
+
+    syl_sent[["Time"]] <- 1:len
+    class(syl_sent) <- c("cumulative_combo_syllable_sum", "data.frame")
+    attributes(syl_sent)[["ave.syl"]] <- sum(syl_sent[,
+        "syllable.count"])/sum(attributes(x)[["wc"]][keeps])   
+    attributes(syl_sent)[["ave.polysyl"]] <- sum(syl_sent[,
+        "polysyllable.count"])/sum(attributes(x)[["wc"]][keeps])     
+    syl_sent
+}
+
+#' Plots a cumulative_combo_syllable_sum Object
+#' 
+#' Plots a cumulative_combo_syllable_sum object.
+#' 
+#' @param x The cumulative_combo_syllable_sum object.
+#' @param \ldots ignored
+#' @method plot cumulative_combo_syllable_sum
+#' @export
+plot.cumulative_combo_syllable_sum <- function(x, ...) {
+
+    dat <- reshape2::melt(x[, -c(1:4)], id="Time", variable.name="Type")
+    dat[, "Type"] <- gsub("cum.ave.", "", dat[, "Type"])
+    dat[, "Type"] <- paste0(toupper(substr(dat[, "Type"], 1, 1)), 
+        substr(dat[, "Type"], 2, nchar(dat[, "Type"])))
+    dat[, "Type"] <- factor(dat[, "Type"], levels=c("Syllable", "Polysyllable"))
+
+    dat2 <- data.frame(Type=factor(c("Syllable", "Polysyllable"), 
+        levels=c("Syllable", "Polysyllable")),
+        Mean = c(attributes(x)[["ave.syl"]], attributes(x)[["ave.polysyl"]]),
+        x = 1)
+
+    dat2[, "labs"] <- sprintf("Average %s Per Sentence", dat2[["Type"]])
+
+    ggplot2::ggplot(dat, ggplot2::aes_string(x="Time", group="Type", 
+        color="Type", y="value")) + 
+        ggplot2::theme_bw() +
+        ggplot2::geom_smooth(color="black") + 
+        ggplot2::geom_line(size=1) +
+        ggplot2::ylab("Cummulative Average Per Sentence") + 
+        ggplot2::xlab("Duration") +
+        ggplot2::geom_hline(data=dat2, ggplot2::aes_string(yintercept="Mean", 
+            group="Type"), color="grey30", size=1, alpha=.3, linetype=2) + 
+        ggplot2::geom_text(data=dat2, ggplot2::aes_string(x = "x", 
+            y = "Mean", label = "labs"), hjust = -.05, vjust = .3, 
+            color="grey40", size=4) +        
+        ggplot2::scale_x_continuous(expand=c(0, 0)) +
+        ggplot2::facet_wrap(~Type, scales="free_y", ncol=1) + 
+        ggplot2::guides(color=FALSE) 
+}    
+
+
+#' Prints a cumulative_combo_syllable_sum Object
+#' 
+#' Prints a cumulative_combo_syllable_sum object.
+#' 
+#' @param x The cumulative_combo_syllable_sum object.
+#' @param \ldots ignored
+#' @method print cumulative_combo_syllable_sum
+#' @export
+print.cumulative_combo_syllable_sum <- function(x, ...) {
+    print(plot.cumulative_combo_syllable_sum(x, ...))
+}
+
+

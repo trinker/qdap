@@ -39,6 +39,8 @@ And constructed with the following guidelines:
 * `syllable_sum` and `polysyllable_sum` pick up a `class`, `plot` method, and a 
   `cumulative` method.
 
+* `combo_syllable_sum` picks up a `cumulative` method.
+
 **MINOR FEATURES**
 
 **IMPROVEMENTS**
