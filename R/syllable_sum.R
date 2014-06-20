@@ -42,6 +42,7 @@
 #' 
 #' combo_syllable_sum(DATA$state)
 #' x3 <- combo_syllable_sum(rajSPLIT$dialogue)
+#' plot(x3) 
 #' cumulative(x3)
 #' }
 syllable_sum <-
@@ -483,4 +484,44 @@ print.cumulative_combo_syllable_sum <- function(x, ...) {
     print(plot.cumulative_combo_syllable_sum(x, ...))
 }
 
-
+#' Plots a combo_syllable_sum Object
+#' 
+#' Plots a combo_syllable_sum object.
+#' 
+#' @param x The combo_syllable_sum object.
+#' @param \ldots ignored
+#' @method plot combo_syllable_sum 
+#' @export
+plot.combo_syllable_sum <- function(x, ...){
+    x[["syllable.count"]] <- x[[1]] - x[[2]]
+    wrdcnt <- attributes(x)[["wc"]]
+    x <- x[!is.na(wrdcnt), ]
+    wrdcnt <- wrdcnt[!is.na(wrdcnt)]
+    x[] <- lapply(x, function(x) x/wrdcnt)
+    
+    x[["Time"]] <- 1:nrow(x) 
+    x[["Time"]] <- factor(qdapTools::pad(x[["Time"]]))
+    colnames(x) <- gsub("\\.count", "", colnames(x))
+    dat <- reshape2::melt(x, id="Time", variable="Type")
+    extra <- max(rowSums(x[, 1:2]))
+    
+    dat[["Type"]] <- factor(gsub("(\\w)(\\w*)", "\\U\\1\\L\\2", 
+        dat[["Type"]], perl=T) , levels=c("Polysyllable", "Syllable"))
+    dat[["time"]] <- as.numeric(dat[["Time"]])
+    
+    ggplot2::ggplot(dat, aes_string(x="Time", fill="Type", weight="value")) +
+        ggplot2::geom_bar() +
+        ggplot2::guides(fill = ggplot2::guide_legend(reverse=TRUE)) +
+        ggplot2::xlab("Duration") +
+        ggplot2::ylab("Syllable/Polysyllable Per Word") +
+        ggplot2::theme(axis.text.x = ggplot2::element_blank(),
+            axis.ticks.x = ggplot2::element_blank(),
+            panel.grid.major.y = ggplot2::element_blank(),
+            panel.grid.minor.y = ggplot2::element_blank(),
+            panel.background = ggplot2::element_rect(fill = "white", color="black")) + 
+        ggplot2::scale_y_continuous(expand = c(0, 0), 
+            limits = c(0, extra + extra*.05)) +
+        ggplot2::scale_fill_manual(values=c("#000000", "#C1C1C1")) +
+        ggplot2::geom_smooth(aes_string(y="value", x="time", group="Type"), 
+            fill="#7070DB")
+}

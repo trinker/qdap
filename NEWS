@@ -36,10 +36,8 @@ NEW FEATURES
 * `end_mark` picks up a `class` (`end_mark`), `plot` method, and a `cumulative` 
   method.
 
-* `syllable_sum` and `polysyllable_sum` pick up a `class`, `plot` method, and a 
-  `cumulative` method.
-
-* `combo_syllable_sum` picks up a `cumulative` method.
+* `syllable_sum`, `polysyllable_sum`, and `combo_syllable_sum` pick up a 
+  `class`, `plot` method, and a `cumulative` method.
 
 MINOR FEATURES
 

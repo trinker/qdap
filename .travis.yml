@@ -23,5 +23,6 @@ notifications:
 env:
    global:
      - R_BUILD_ARGS="--compact-vignettes=gs+qpdf --resave-data=best"
+     - R_CHECK_ARGS="--as-cran"
      - DISPLAY=:99.0
      - BOOTSTRAP_LATEX=1
