@@ -15,6 +15,10 @@
 #' is.global()
 #' lapply(1:3, function(i) is.global())
 #' FUN <- function() is.global(); FUN()
+#' 
+#' FUN2 <- function(x = is.global(2)) x
+#' FUN2()
+#' FUN3 <- function() FUN2(); FUN3()
 is.global <- function(n = 1) {
     identical(parent.frame(n = n) , globalenv())
 }
