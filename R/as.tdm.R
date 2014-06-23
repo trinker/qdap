@@ -527,6 +527,9 @@ as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "docs",
     }
 
     if (sent.split) {
+        if(any(end_mark(out[["text"]]) == "_")) {
+            message("Missing end marks.", "Consider setting:\n\n    sent.split = FALSE\n")
+        }        
         out <- sentSplit(out, text, ...)
     }
     out

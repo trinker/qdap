@@ -52,6 +52,9 @@ IMPROVEMENTS
 * `as.tdm.character` and `as.dtm.character` gain a speed boost with a `tm` 
   package integration.
 
+* Added message to `as.data.frame.Corpus` for missing endmarks suggesting the 
+  use of: `sent.split = FALSE`.
+
 CHANGES
 
 CHANGES IN qdap VERSION 2.1.0
