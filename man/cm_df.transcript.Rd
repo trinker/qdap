@@ -61,7 +61,7 @@ DATA <- qdap::DATA
 }
 }
 \author{
-DWin, Gavin Simpson and Tyler Rinker <tyler.rinker@gmail.com>.
+BondedDust (stackoverflow.com), Gavin Simpson and Tyler Rinker <tyler.rinker@gmail.com>
 }
 \seealso{
 \code{\link[qdap]{cm_df2long}},

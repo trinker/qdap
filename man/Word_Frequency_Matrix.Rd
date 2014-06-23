@@ -12,11 +12,23 @@
 \alias{weight.wfm}
 \alias{wfdf}
 \alias{wfm}
+\alias{wfm.character}
+\alias{wfm.factor}
+\alias{wfm.wfdf}
 \alias{wfm_combine}
 \alias{wfm_expanded}
 \title{Word Frequency Matrix}
 \usage{
 wfm(text.var = NULL, grouping.var = NULL, output = "raw",
+  stopwords = NULL, char2space = "~~", ...)
+
+\method{wfm}{wfdf}(text.var = NULL, grouping.var = NULL, output = "raw",
+  stopwords = NULL, char2space = "~~", ...)
+
+\method{wfm}{character}(text.var = NULL, grouping.var = NULL,
+  output = "raw", stopwords = NULL, char2space = "~~", ...)
+
+\method{wfm}{factor}(text.var = NULL, grouping.var = NULL, output = "raw",
   stopwords = NULL, char2space = "~~", ...)
 
 wfdf(text.var, grouping.var = NULL, stopwords = NULL, margins = FALSE,
@@ -61,7 +73,7 @@ of 1 or more grouping variables.}
 \code{char.keep} is \code{NULL}, \code{char2space} will activate this
 argument.}
 
-\item{\ldots}{Other arguments supplied to \code{\link[qdap]{strip}}.  If
+\item{\ldots}{Other arguments supplied to \code{\link[tm]{Corpus}}.  If
 \code{as.wfm} this is other arguments passed to \code{as.wfm} methods
 (currently ignored).}
 
@@ -114,6 +126,12 @@ packages. The output is not of the class "wfm".
 }
 \description{
 \code{wfm} - Generate a word frequency matrix by grouping variable(s).
+
+\code{wfm.wfdf} - wfdf method for \code{wfm}.
+
+\code{wfm.character} - character method for \code{wfm}.
+
+\code{wfm.factor} - factor method for \code{wfm}.
 
 \code{wfdf} - Generate a word frequency data frame by grouping variable.
 

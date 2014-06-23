@@ -38,7 +38,7 @@ extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry,
     "stem2df", colpaste2df, rm_stop, sent_detect, as.wfm, "%bs%",
     Filter.wfm, weight.wfdf, weight.wfm, wfm_combine, wfm_expanded, 
     Filter.character, Filter.DocumentTermMatrix, synonyms_frame,
-    syn_frame, edge_apply, end_mark_by)
+    syn_frame, edge_apply, end_mark_by, wfm.wfdf, wfm.character, wfm.factor)
 
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character_table, char_table))
@@ -82,7 +82,7 @@ extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry,
     "stem2df", colpaste2df, rm_stop, sent_detect, as.wfm, "%bs%",
     Filter.wfm, weight.wfdf, weight.wfm, wfm_combine, wfm_expanded, 
     Filter.character, Filter.DocumentTermMatrix, synonyms_frame,
-    syn_frame, edge_apply, end_mark_by)
+    syn_frame, edge_apply, end_mark_by, wfm.wfdf, wfm.character, wfm.factor)
 
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character_table, char_table))

@@ -39,9 +39,15 @@ NEW FEATURES
 * `syllable_sum`, `polysyllable_sum`, and `combo_syllable_sum` pick up a 
   `class`, `plot` method, and a `cumulative` method.
 
+* `wfm` becomes a generic method currently applied to a `text.var` that is:
+  `character`, `factor` (coerced to `character`), or `wfdf`.
+
 MINOR FEATURES
 
 IMPROVEMENTS
+
+* `wfm` gains a speedup through generic classes and `tm` package integration 
+  (`strip` is no longer used in `wfm`).
 
 CHANGES
 

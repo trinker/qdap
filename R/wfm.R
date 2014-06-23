@@ -11,7 +11,7 @@
 #' @param char2space A vector of characters to be turned into spaces.  If 
 #' \code{char.keep} is \code{NULL}, \code{char2space} will activate this 
 #' argument.
-#' @param \ldots Other arguments supplied to \code{\link[qdap]{strip}}.  If
+#' @param \ldots Other arguments supplied to \code{\link[tm]{Corpus}}.  If
 #' \code{as.wfm} this is other arguments passed to \code{as.wfm} methods 
 #' (currently ignored).
 #' @param digits An integer indicating the number of decimal places (round) or 
@@ -204,62 +204,186 @@
 #' weight(WFM, "max")
 #' weight(WFM, "scaled")
 #' }
-wfm <- 
+wfm <- function(text.var = NULL, grouping.var = NULL, output = "raw", 
+    stopwords = NULL, char2space = "~~", ...){
+
+    text.var
+    grouping.var 
+    output
+    stopwords
+    
+    UseMethod("wfm")
+} 
+
+#' \code{wfm.wfdf} - wfdf method for \code{wfm}.
+#' @rdname Word_Frequency_Matrix
+#' @export
+#' @method wfm wfdf    
+wfm.wfdf <- 
 function(text.var = NULL, grouping.var = NULL, output = "raw", stopwords = NULL, 
     char2space = "~~", ...){
 
-    if (is(text.var, "wfdf")) {
-        if (is(text.var, "t.df")) {
-            wfdf <- text.var
-        } else {
-            if (is(text.var, "m.df")) { 
-                wfdf <- text.var[-nrow(text.var), -ncol(text.var)]
-            } else {
-                stop("Object must be a raw word frequency data frame")
-            }
-        }
-        x2 <- wfdf[, -1, drop = FALSE]
-        rownames(x2) <- wfdf[, 1]
-        x2 <- as.matrix(x2)
+    if (is(text.var, "t.df")) {
+        wfdf <- text.var
     } else {
-        if(is.null(grouping.var)){
-            grouping <- rep("all", length(text.var))
+        if (is(text.var, "m.df")) { 
+            wfdf <- text.var[-nrow(text.var), -ncol(text.var)]
         } else {
-            if (is.list(grouping.var) & length(grouping.var)>1) {
-                grouping <- paste2(grouping.var)
-            } else {
-                grouping <- unlist(grouping.var)
-            } 
-        } 
-        txt <- strip(text.var, char.keep = char2space, 
-            apostrophe.remove = FALSE, ...)
-        txtL <- lapply(split(txt, grouping), function(x) {
-              unlist(strsplit(x, "\\s+"))
-        })
-
-        ## tabulate frequencies per word
-        x2 <- t(mtabulate(txtL))
-
-        ## replace spaced characters
-        if (!is.null(char2space)) {
-            rownames(x2) <- mgsub(char2space, " ", rownames(x2))
-        } 
-
-        if (!is.null(stopwords)){
-            x2 <- x2[!rownames(x2) %in% tolower(stopwords), , drop = FALSE]
-        }
-        if (output != "raw"){
-            x2 <- x2/colSums(x2)
-            if (output == "percent") {
-                x2 <- x2*100
-            }
-            class(x2) <- c("wfm", "prop.matrix", class(x2))
-            return(x2)
+            stop("Object must be a raw word frequency data frame")
         }
     }
+    x2 <- wfdf[, -1, drop = FALSE]
+    rownames(x2) <- wfdf[, 1]
+    x2 <- as.matrix(x2)
+
     class(x2) <- c("wfm", "true.matrix", class(x2))
     x2
+
 }
+
+#' \code{wfm.character} - character method for \code{wfm}.
+#' @rdname Word_Frequency_Matrix
+#' @export
+#' @method wfm character 
+wfm.character <- 
+function(text.var = NULL, grouping.var = NULL, output = "raw", stopwords = NULL, 
+    char2space = "~~", ...){
+
+        if(is.null(stopwords)) stopwords <- FALSE
+        tm_tdm_interface(text.var = text.var, grouping.var = grouping.var, 
+            output = output, stopwords = stopwords, char2space = char2space, ...)
+}
+
+#' \code{wfm.factor} - factor method for \code{wfm}.
+#' @rdname Word_Frequency_Matrix
+#' @export
+#' @method wfm factor 
+wfm.factor <- wfm.character
+
+## SAVE historical reasons
+##
+## ## more flexible slower wfm helper
+## wfm_flexible <- function(text.var, grouping.var, output, stopwords, 
+##     char2space, ...){
+## 
+##     if(is.null(grouping.var)){
+##         grouping <- rep("all", length(text.var))
+##     } else {
+##         if (is.list(grouping.var) & length(grouping.var)>1) {
+##             grouping <- paste2(grouping.var)
+##         } else {
+##             grouping <- unlist(grouping.var)
+##         } 
+##     } 
+##     txt <- strip(text.var, char.keep = char2space, 
+##         apostrophe.remove = FALSE, ...)
+##     txtL <- lapply(split(txt, grouping), function(x) {
+##           unlist(strsplit(x, "\\s+"))
+##     })
+## 
+##     ## tabulate frequencies per word
+##     x2 <- t(mtabulate(txtL))
+## 
+##     ## replace spaced characters
+##     if (!is.null(char2space)) {
+##         rownames(x2) <- mgsub(char2space, " ", rownames(x2))
+##     } 
+## 
+##     if (!is.null(stopwords)){
+##         x2 <- x2[!rownames(x2) %in% tolower(stopwords), , drop = FALSE]
+##     }
+##     if (output != "raw"){
+##         x2 <- x2/colSums(x2)
+##         if (output == "percent") {
+##             x2 <- x2*100
+##         }
+##         class(x2) <- c("wfm", "prop.matrix", class(x2))
+##         return(x2)
+##     }
+## 
+##     class(x2) <- c("wfm", "true.matrix", class(x2))
+##     x2
+## }
+##
+## SAVE historical reasons
+
+## less flexible faster wfm helper
+tm_tdm_interface <- function(text.var, grouping.var, stopwords, char2space, 
+    output = output, ...){
+
+    if(is.null(grouping.var)) {
+        G <- "all"
+    } else {
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
+    }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    } 
+    DF <- data.frame(grouping, text.var, check.names = FALSE, 
+        stringsAsFactors = FALSE)
+
+    ## convert text.var to character and grouping.var to factor
+    DF[, "grouping"] <- factor(DF[, "grouping"])
+    DF[, "text.var"] <- as.character(DF[, "text.var"])
+
+    ## Split apart by grouping variables and collapse text
+    LST <- sapply(split(DF[, "text.var"], DF[, "grouping"]), 
+        paste, collapse = " ")
+
+    ## Use the tm package to convert to a Corpus
+    mycorpus <- tm::Corpus(tm::VectorSource(LST), ...)
+ 
+    ## Add metadata info
+    NLP::meta(mycorpus, "MetaID") <- names(LST)
+    NLP::meta(mycorpus, "labels") <- names(LST)
+    pers <- unname(Sys.info()["user"])
+    if (!is.null(pers)) {
+        tm::DublinCore(mycorpus, tag = "creator") <- pers
+    }
+
+    apo_rm <- function(x) gsub(paste0(".*?($|'|", paste(paste0("\\", 
+        char2space), collapse = "|"), "|[^[:punct:]]).*?"), 
+        "\\1", x)
+    m <- as.wfm(tm::TermDocumentMatrix(mycorpus,
+        control = list(
+            removePunctuation = apo_rm,
+            wordLengths =c(0, Inf),
+            stopwords = stopwords,
+            removeNumbers = TRUE
+        )
+    ))
+    colnames(m) <- names(LST)
+    rownames(m) <- mgsub(char2space, " ", rownames(m))
+    
+    if (output != "raw"){
+        m <- m/colSums(m)
+        if (output == "percent") {
+            m <- m*100
+        }
+        class(m) <- gsub("true.matrix", "prop.matrix", class(m))
+        return(m)
+    }    
+    
+    m
+}
+
+
 
 
 #' Prints a wfm Object

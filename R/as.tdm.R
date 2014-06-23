@@ -617,7 +617,7 @@ as.Corpus.default <- function(text.var, grouping.var = NULL, demographic.vars,
         paste, collapse = " ")
 
     ## Use the tm package to convert to a Corpus
-    mycorpus <- Corpus(VectorSource(LST), ...)
+    mycorpus <- tm::Corpus(tm::VectorSource(LST), ...)
  
     ## Add metadata info
     NLP::meta(mycorpus, "MetaID") <- names(LST)

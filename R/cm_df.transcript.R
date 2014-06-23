@@ -23,7 +23,7 @@
 #' @note It is recommended that the researcher actually codes on the output 
 #' from this file.  The codes can then be transferred to via a list.  If a file 
 #' already exists \code{cm_df.transcript} will append to that file.
-#' @author DWin, Gavin Simpson and Tyler Rinker <tyler.rinker@@gmail.com>.
+#' @author BondedDust (stackoverflow.com), Gavin Simpson and Tyler Rinker <tyler.rinker@@gmail.com>
 #' @seealso \code{\link[qdap]{cm_df2long}},
 #' \code{\link[qdap]{cm_df.temp}}
 #' @keywords transcript
