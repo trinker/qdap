@@ -128,7 +128,7 @@ sd_section("Coding Tools",
 sd_section("tm Package Integration",
   "Functions for working between the tm and qdap packages.",
   c(
-    "tdm"        
+    "as.tdm"        
   )
 )
 
