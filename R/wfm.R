@@ -249,9 +249,9 @@ wfm.character <-
 function(text.var = NULL, grouping.var = NULL, output = "raw", stopwords = NULL, 
     char2space = "~~", ...){
 
-        if(is.null(stopwords)) stopwords <- FALSE
-        tm_tdm_interface(text.var = text.var, grouping.var = grouping.var, 
-            output = output, stopwords = stopwords, char2space = char2space, ...)
+    if(is.null(stopwords)) stopwords <- FALSE
+    tm_tdm_interface(text.var = text.var, grouping.var = grouping.var, 
+        output = output, stopwords = stopwords, char2space = char2space, ...)
 }
 
 #' \code{wfm.factor} - factor method for \code{wfm}.
@@ -309,7 +309,7 @@ wfm.factor <- wfm.character
 
 ## less flexible faster wfm helper
 tm_tdm_interface <- function(text.var, grouping.var, stopwords, char2space, 
-    output = output, ...){
+    output = output, apostrophe.remove, ...){
 
     if(is.null(grouping.var)) {
         G <- "all"
@@ -357,9 +357,16 @@ tm_tdm_interface <- function(text.var, grouping.var, stopwords, char2space,
         tm::DublinCore(mycorpus, tag = "creator") <- pers
     }
 
-    apo_rm <- function(x) gsub(paste0(".*?($|'|", paste(paste0("\\", 
-        char2space), collapse = "|"), "|[^[:punct:]]).*?"), 
-        "\\1", x)
+    if(missing(apostrophe.remove)) apostrophe.remove <- FALSE
+
+    apo_rm <- TRUE
+
+    if(!apostrophe.remove) {
+        apo_rm <- function(x) gsub(paste0(".*?($|'|", paste(paste0("\\", 
+            char2space), collapse = "|"), "|[^[:punct:]]).*?"), 
+            "\\1", x)
+    }
+    
     m <- as.wfm(tm::TermDocumentMatrix(mycorpus,
         control = list(
             removePunctuation = apo_rm,

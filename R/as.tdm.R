@@ -365,6 +365,55 @@ as.tdm.default <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ..
 #' @method as.tdm character
 as.tdm.character <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
+    out <- tm_tdm_interface2(text.var = text.var, grouping.var = grouping.var, 
+        ...)
+
+    if (vowel.check) {
+        out <- out[vowel_check(rownames(out)), ]
+    }
+    out
+}
+
+
+## Helper function to check on words w/o vowels (matches tm output)
+vowel_check <- function(text.var) {
+    grepl("[aeiouy]", text.var)
+}
+
+
+#' \code{as.dtm.default} - Default method for \code{as.dtm} used to 
+#' convert to a \code{\link[tm]{DocumentTermMatrix}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.dtm default 
+as.dtm.default <- 
+function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+    tm::as.DocumentTermMatrix(x = text.var, ...)
+}
+
+#' \code{as.dtm.character} - character method for \code{as.dtm} used to 
+#' convert to a \code{\link[tm]{DocumentTermMatrix}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.dtm character
+as.dtm.character <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+
+    out <- tm_dtm_interface2(text.var = text.var, grouping.var = grouping.var, 
+        ...)
+
+    if (vowel.check) {
+        out <- out[, vowel_check(colnames(out))]
+    }
+    out
+}
+
+#' \code{as.tdm.wfm} - wfm method for \code{as.tdm} used to 
+#' convert to a \code{\link[tm]{TermDocumentMatrix}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.tdm wfm    
+as.tdm.wfm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+
     x <- wfm2xtab(text.var = text.var, grouping.var = grouping.var, ...)
 
     ## Remove rows with terms with no vowel
@@ -392,29 +441,12 @@ as.tdm.character <- function(text.var, grouping.var = NULL, vowel.check = TRUE, 
     a
 }
 
-
-## Helper function to check on words w/o vowels (matches tm output)
-vowel_check <- function(text.var) {
-    grepl("[aeiouy]", text.var)
-}
-
-
-#' \code{as.dtm.default} - Default method for \code{as.dtm} used to 
-#' convert to a \code{\link[tm]{DocumentTermMatrix}}.
+#' \code{as.dtm.wfm} - wfm method for \code{as.dtm} used to 
+#' convert to a \code{\link[tm]{TermDocumentMatrix}}.
 #' @rdname as.tdm
 #' @export
-#' @method as.dtm default 
-as.dtm.default <- 
-function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
-    tm::as.DocumentTermMatrix(x = text.var, ...)
-}
-
-#' \code{as.dtm.character} - character method for \code{as.dtm} used to 
-#' convert to a \code{\link[tm]{DocumentTermMatrix}}.
-#' @rdname as.tdm
-#' @export
-#' @method as.dtm character
-as.dtm.character <- 
+#' @method as.dtm wfm    
+as.dtm.wfm <- 
     function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
     x <- t(wfm2xtab(text.var = text.var, grouping.var = grouping.var, ...))
@@ -443,20 +475,6 @@ as.dtm.character <-
     
     a
 }
-
-#' \code{as.tdm.wfm} - wfm method for \code{as.tdm} used to 
-#' convert to a \code{\link[tm]{TermDocumentMatrix}}.
-#' @rdname as.tdm
-#' @export
-#' @method as.tdm wfm    
-as.tdm.wfm <- as.tdm.character
-
-#' \code{as.dtm.wfm} - wfm method for \code{as.dtm} used to 
-#' convert to a \code{\link[tm]{TermDocumentMatrix}}.
-#' @rdname as.tdm
-#' @export
-#' @method as.dtm wfm    
-as.dtm.wfm <- as.dtm.character
 
 wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
   
@@ -886,6 +904,153 @@ Filter.DocumentTermMatrix <- function(x, min = 1, max = Inf,
 }
 
 
+tm_tdm_interface2 <- function(text.var, grouping.var, stopwords, char2space, 
+    apostrophe.remove, ...){
+
+    if(is.null(grouping.var)) {
+        G <- "all"
+    } else {
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
+    }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    } 
+    DF <- data.frame(grouping, text.var, check.names = FALSE, 
+        stringsAsFactors = FALSE)
+
+    ## convert text.var to character and grouping.var to factor
+    DF[, "grouping"] <- factor(DF[, "grouping"])
+    DF[, "text.var"] <- as.character(DF[, "text.var"])
+
+    ## Split apart by grouping variables and collapse text
+    LST <- sapply(split(DF[, "text.var"], DF[, "grouping"]), 
+        paste, collapse = " ")
+
+    ## Use the tm package to convert to a Corpus
+    mycorpus <- tm::Corpus(tm::VectorSource(LST), ...)
+ 
+    ## Add metadata info
+    NLP::meta(mycorpus, "MetaID") <- names(LST)
+    NLP::meta(mycorpus, "labels") <- names(LST)
+    pers <- unname(Sys.info()["user"])
+    if (!is.null(pers)) {
+        tm::DublinCore(mycorpus, tag = "creator") <- pers
+    }
+
+    if(missing(char2space)) char2space <- "~~"
+
+    if(missing(apostrophe.remove)) apostrophe.remove <- FALSE
+
+    apo_rm <- TRUE
+
+    if(!apostrophe.remove) {
+        apo_rm <- function(x) gsub(paste0(".*?($|'|", paste(paste0("\\", 
+            char2space), collapse = "|"), "|[^[:punct:]]).*?"), 
+            "\\1", x)
+    }
+
+    if(missing(stopwords)) stopwords <- FALSE
+
+    tm::TermDocumentMatrix(mycorpus,
+        control = list(
+            removePunctuation = apo_rm,
+            wordLengths =c(0, Inf),
+            stopwords = FALSE,
+            removeNumbers = stopwords
+        )
+    )
+
+}
+
+
+tm_dtm_interface2 <- function(text.var, grouping.var, stopwords, char2space, 
+    apostrophe.remove, ...){
+
+    if(is.null(grouping.var)) {
+        G <- "all"
+    } else {
+        if (is.list(grouping.var)) {
+            m <- unlist(as.character(substitute(grouping.var))[-1])
+            m <- sapply(strsplit(m, "$", fixed=TRUE), function(x) {
+                    x[length(x)]
+                }
+            )
+            G <- paste(m, collapse="&")
+        } else {
+            G <- as.character(substitute(grouping.var))
+            G <- G[length(G)]
+        }
+    }
+    if(is.null(grouping.var)){
+        grouping <- rep("all", length(text.var))
+    } else {
+        if (is.list(grouping.var) & length(grouping.var)>1) {
+            grouping <- paste2(grouping.var)
+        } else {
+            grouping <- unlist(grouping.var)
+        } 
+    } 
+    DF <- data.frame(grouping, text.var, check.names = FALSE, 
+        stringsAsFactors = FALSE)
+
+    ## convert text.var to character and grouping.var to factor
+    DF[, "grouping"] <- factor(DF[, "grouping"])
+    DF[, "text.var"] <- as.character(DF[, "text.var"])
+
+    ## Split apart by grouping variables and collapse text
+    LST <- sapply(split(DF[, "text.var"], DF[, "grouping"]), 
+        paste, collapse = " ")
+
+    ## Use the tm package to convert to a Corpus
+    mycorpus <- tm::Corpus(tm::VectorSource(LST), ...)
+ 
+    ## Add metadata info
+    NLP::meta(mycorpus, "MetaID") <- names(LST)
+    NLP::meta(mycorpus, "labels") <- names(LST)
+    pers <- unname(Sys.info()["user"])
+    if (!is.null(pers)) {
+        tm::DublinCore(mycorpus, tag = "creator") <- pers
+    }
+
+    if(missing(char2space)) char2space <- "~~"
+
+    if(missing(apostrophe.remove)) apostrophe.remove <- FALSE
+
+    apo_rm <- TRUE
+
+    if(!apostrophe.remove) {
+        apo_rm <- function(x) gsub(paste0(".*?($|'|", paste(paste0("\\", 
+            char2space), collapse = "|"), "|[^[:punct:]]).*?"), 
+            "\\1", x)
+    }
+
+    if(missing(stopwords)) stopwords <- FALSE
+
+    tm::DocumentTermMatrix(mycorpus,
+        control = list(
+            removePunctuation = apo_rm,
+            wordLengths =c(0, Inf),
+            stopwords = stopwords,
+            removeNumbers = TRUE
+        )
+    )
+}
 ##Removed after las archived:
 ## ## Latent Semantic Analysis
 ## library(lsa)

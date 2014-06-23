@@ -49,6 +49,9 @@ And constructed with the following guidelines:
 * `wfm` gains a speedup through generic classes and `tm` package integration 
   (`strip` is no longer used in `wfm`).
 
+* `as.tdm.character` and `as.dtm.character` gain a speed boost with a `tm` 
+  package integration.
+
 **CHANGES**
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.1.0
