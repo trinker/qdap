@@ -4,19 +4,19 @@ context("Checking as.tdm")
 test_that("as.tdm, as.dtm, as.DocumentTermMatrix, and as.TermDocumentMatrix 
     convert wfm, character and existing TermDocumentMatrix/DocumentTermMatrix",{
 
-    expect_true( inherits(as.dtm(DATA$state, DATA$person), "DocumentTermMatrix"))
-    expect_true( inherits(as.tdm(DATA$state, DATA$person), "TermDocumentMatrix"))
+    expect_true(inherits(as.dtm(DATA$state, DATA$person), "DocumentTermMatrix"))
+    expect_true(inherits(as.tdm(DATA$state, DATA$person), "TermDocumentMatrix"))
 
     x <- wfm(DATA$state, DATA$person)
-    expect_true( inherits(as.dtm(x), "DocumentTermMatrix"))
-    expect_true( inherits(as.tdm(x), "TermDocumentMatrix"))
-    expect_true( inherits(as.dtm(as.tdm(x)), "DocumentTermMatrix"))
-    expect_true( inherits(as.tdm(as.dtm(x)), "TermDocumentMatrix"))
+    expect_true(inherits(as.dtm(x), "DocumentTermMatrix"))
+    expect_true(inherits(as.tdm(x), "TermDocumentMatrix"))
+    expect_true(inherits(as.dtm(as.tdm(x)), "DocumentTermMatrix"))
+    expect_true(inherits(as.tdm(as.dtm(x)), "TermDocumentMatrix"))
 
-    expect_true( inherits(as.DocumentTermMatrix(x), "DocumentTermMatrix"))
-    expect_true( inherits(as.TermDocumentMatrix(x), "TermDocumentMatrix"))
-    expect_true( inherits(as.DocumentTermMatrix(as.TermDocumentMatrix(x)), "DocumentTermMatrix"))
-    expect_true( inherits(as.TermDocumentMatrix(as.DocumentTermMatrix(x)), "TermDocumentMatrix"))
+    expect_true(inherits(as.DocumentTermMatrix(x), "DocumentTermMatrix"))
+    expect_true(inherits(as.TermDocumentMatrix(x), "TermDocumentMatrix"))
+    expect_true(inherits(as.DocumentTermMatrix(as.TermDocumentMatrix(x)), "DocumentTermMatrix"))
+    expect_true(inherits(as.TermDocumentMatrix(as.DocumentTermMatrix(x)), "TermDocumentMatrix"))
 
 })
 
@@ -49,13 +49,13 @@ test_that("as.Corpus and as.data.frame methods work to convert between qadp/tm",
     
     corp_df <- as.data.frame(reuters)
     expect_true(is.data.frame(corp_df))
-    expect_true(all(dim(corp_df) == c(277, 3)))
+    expect_true(all(dim(corp_df) == c(20, 2)))
     
     z <- as.Corpus(DATA$state, DATA$person,
            demographic=DATA[, qcv(sex, adult, code)])
     expect_true(inherits(z, "Corpus"))
     expect_true(is.data.frame(as.data.frame(z)))
-    expect_true(all(dim(as.data.frame(z)) == c(15, 7)))
+    expect_true(all(dim(as.data.frame(z)) == c(5, 6)))
 
 })
 

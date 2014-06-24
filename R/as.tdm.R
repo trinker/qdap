@@ -505,13 +505,13 @@ wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
 #' @param optional logical. If \code{TRUE}, setting row names and converting 
 #' column names is optional. Not used in \pkg{qdap}; for base genric consistency.
 #' @return \code{as.data.frame} - Converts a \code{\link[tm]{Corpus}} and returns 
-#' a qdap oriented dataframe.
+#' a \pkg{qdap} oriented \code{\link[base]{data.frame}}.
 #' @rdname as.tdm
 #' @export
 #' @importFrom qdapTools list2df
 #' @method as.data.frame Corpus
 as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "docs", 
-    text = "text", sent.split = TRUE) {
+    text = "text", sent.split = FALSE) {
 
     if(!is(x[[1]], "PlainTextDocument")) {
         x <- tm_map(x, PlainTextDocument)
@@ -528,7 +528,8 @@ as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "docs",
 
     if (sent.split) {
         if(any(end_mark(out[["text"]]) == "_")) {
-            warning("Missing end marks.  Consider setting: sent.split = FALSE\n")
+            warning("Missing end marks. This may result in lost data.
+                \nConsider setting: sent.split = FALSE\n")
         }        
         out <- sentSplit(out, text, ...)
     }

@@ -57,6 +57,8 @@ IMPROVEMENTS
 
 CHANGES
 
+* `as.data.frame.Corpus`'s default value for `sent.split` is now `FALSE`.
+
 CHANGES IN qdap VERSION 2.1.0
 ----------------------------------------------------------------
 

@@ -52,7 +52,12 @@ And constructed with the following guidelines:
 * `as.tdm.character` and `as.dtm.character` gain a speed boost with a `tm` 
   package integration.
 
+* Added message to `as.data.frame.Corpus` for missing endmarks suggesting the 
+  use of: `sent.split = FALSE`.
+
 **CHANGES**
+
+* `as.data.frame.Corpus`'s default value for `sent.split` is now `FALSE`.
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.1.0
 ----------------------------------------------------------------

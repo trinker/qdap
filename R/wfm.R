@@ -366,18 +366,27 @@ tm_tdm_interface <- function(text.var, grouping.var, stopwords, char2space,
             char2space), collapse = "|"), "|[^[:punct:]]).*?"), 
             "\\1", x)
     }
+
+    pdots <- eval(substitute(list(...)))
+    
+    if(is.null(pdots[["removeNumbers"]])) {
+        rmnum <- TRUE
+    } else {
+        rmnum <- pdots[["removeNumbers"]]
+    }
     
     m <- as.wfm(tm::TermDocumentMatrix(mycorpus,
         control = list(
             removePunctuation = apo_rm,
-            wordLengths =c(0, Inf),
+            wordLengths =c(1, Inf),
             stopwords = stopwords,
-            removeNumbers = TRUE
+            removeNumbers = rmnum, ...
         )
     ))
     colnames(m) <- names(LST)
     rownames(m) <- mgsub(char2space, " ", rownames(m))
-    
+    m <- m[rownames(m) != "", ]
+       
     if (output != "raw"){
         m <- m/colSums(m)
         if (output == "percent") {
@@ -386,7 +395,7 @@ tm_tdm_interface <- function(text.var, grouping.var, stopwords, char2space,
         class(m) <- gsub("true.matrix", "prop.matrix", class(m))
         return(m)
     }    
-    
+    class(m) <- c("wfm", "true.matrix", class(m))
     m
 }
 
@@ -1171,8 +1180,17 @@ as.wfm.wfdf <- function(x, ...) {
 as.wfm.Corpus <- function(x, col = "docs", row = "text", ...) {
 
       text <- docs <- NULL
-      with(as.data.frame(x, col1 = col, col2 = row), wfm(text, docs, ...))  
+      with(as.data.frame(x, col1 = col, col2 = row, sent.split = FALSE), 
+          wfm(text, docs, ...))  
 
+}
+
+#' \code{wfm.Corpus} - Corpus method for \code{wfm}.
+#' @rdname Word_Frequency_Matrix
+#' @export
+#' @method wfm Corpus 
+wfm.Corpus <- function(text.var, ...){
+    as.wfm.Corpus(x=text.var)
 }
 
 ## tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
