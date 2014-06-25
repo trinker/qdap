@@ -59,6 +59,9 @@ CHANGES
 
 * `as.data.frame.Corpus`'s default value for `sent.split` is now `FALSE`.
 
+* The `state` column in the `qdap::DATA2` dataset is now character (previously 
+  factor).
+
 CHANGES IN qdap VERSION 2.1.0
 ----------------------------------------------------------------
 

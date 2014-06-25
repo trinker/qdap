@@ -229,9 +229,9 @@ WL5 <- list(yous = c("you", "your", "your're"))
 WL6 <- list(c("you", "your", "your're"))  #no name so will be called words 1
 WL7 <- c("you", "your", "your're")
 
-wfm_combine(z, WL2) #Won't work not a raw frequency matrix
-wfm_combine(x, WL2) #Works (raw and no margins)
-wfm_combine(y, WL2) #Works (raw with margins)
+wfm_combine(z2, WL2) #Won't work not a raw frequency matrix
+wfm_combine(x, WL2)  #Works (raw and no margins)
+wfm_combine(y, WL2)  #Works (raw with margins)
 wfm_combine(y, c("you", "your", "your're"))
 wfm_combine(y, WL1)
 wfm_combine(y, WL3)
