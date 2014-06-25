@@ -386,7 +386,11 @@ tm_tdm_interface <- function(text.var, grouping.var, stopwords, char2space,
     colnames(m) <- names(LST)
     rownames(m) <- mgsub(char2space, " ", rownames(m))
     m <- m[rownames(m) != "", ]
-       
+
+    if (!is.matrix(m)) {
+        m <- as.matrix(m)
+        colnames(m) <- G
+    }
     if (output != "raw"){
         m <- m/colSums(m)
         if (output == "percent") {
@@ -1226,6 +1230,5 @@ tm2qdap <- function(x) {
     y
 
 }
-
 
 
