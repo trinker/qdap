@@ -225,7 +225,8 @@ dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,
             panel.grid.major.y = element_line(color = horiz.color),
             strip.text.y = element_text(angle=0, hjust = 0), 
             strip.background = element_blank()) +
-        scale_x_continuous(expand = c(0, 0)) + 
+        scale_x_continuous(expand = c(0, 0), 
+            limits = c(.975, max(dat2[["word.num"]]))) + 
         ylab(ylab) + xlab(xlab) + ggtitle(title) + 
         scale_colour_manual(values = cols, guide=FALSE)
 

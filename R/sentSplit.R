@@ -115,9 +115,11 @@ function(dataframe, text.var, rm.var = NULL, endmarks = c("?", ".", "!", "|"),
         rm.var <- paste0("rmvars_", paste(rm.var, collapse = ":"))
     } 
     output <- tbl_df(output)
-    class(output) <- c("sent_split", paste0("sent_split_text_var:", text.var), 
-        rm.var, class(output))
+    class(output) <- unique(c("sent_split", "qdap_df", 
+        paste0("sent_split_text_var:", text.var), rm.var, class(output)))
     attributes(output)[["text.var"]] <- text.var
+    attributes(output)[["qdap_df_text.var"]] <- substitute(text.var)  
+    
     output
 }
 
