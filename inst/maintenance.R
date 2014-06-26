@@ -39,9 +39,9 @@ extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry,
     Filter.wfm, weight.wfdf, weight.wfm, wfm_combine, wfm_expanded, 
     Filter.character, Filter.DocumentTermMatrix, synonyms_frame,
     syn_frame, edge_apply, end_mark_by, wfm.wfdf, wfm.character, wfm.factor,
-    unbag, breaker, word_split, exclude.DocumentTermMatrix, %ex%, 
+    unbag, breaker, word_split, exclude.DocumentTermMatrix, "%ex%", 
     exclude.TermDocumentMatrix, exclude.default, exclude.list, exclude.wfm,
-    cm_range2long, cm_time2long, colsplit2df, lcolsplit2df, terco_d, terco_c,
+    lcolsplit2df, termco_d, 
     as.wfm.Corpus, as.wfm.DocumentTermMatrix, as.wfm.TermDocumentMatrix, 
     as.wfm.data.frame, as.wfm.default, as.wfm.matrix, as.wfm.wfdf, wfm.Corpus,
     weight.word_proximity)
@@ -89,12 +89,13 @@ extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry,
     Filter.wfm, weight.wfdf, weight.wfm, wfm_combine, wfm_expanded, 
     Filter.character, Filter.DocumentTermMatrix, synonyms_frame,
     syn_frame, edge_apply, end_mark_by, wfm.wfdf, wfm.character, wfm.factor,
-    unbag, breaker, word_split, exclude.DocumentTermMatrix, %ex%, 
+    unbag, breaker, word_split, exclude.DocumentTermMatrix, "%ex%", 
     exclude.TermDocumentMatrix, exclude.default, exclude.list, exclude.wfm,
-    cm_range2long, cm_time2long, colsplit2df, lcolsplit2df, terco_d, terco_c,
+    lcolsplit2df, termco_d, 
     as.wfm.Corpus, as.wfm.DocumentTermMatrix, as.wfm.TermDocumentMatrix, 
     as.wfm.data.frame, as.wfm.default, as.wfm.matrix, as.wfm.wfdf, wfm.Corpus,
     weight.word_proximity)
+
 
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character_table, char_table))

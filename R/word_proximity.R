@@ -213,6 +213,7 @@ min_dist <- function(xw, yw) {
 #' \code{scale} will standardize the values.  \code{rev} will multiply by -1 to 
 #' give the inverse sign.  This enables a comparison similar to correlations 
 #' rather than distance.
+#' @param \dots ignored.
 #' @rdname word_proximity
 #' @export
 #' @method weight word_proximity
