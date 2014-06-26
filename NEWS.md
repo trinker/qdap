@@ -48,6 +48,9 @@ And constructed with the following guidelines:
 * `as.Corpus.TermDocumentMatrix`, `as.Corpus.DocumentTermMatrix`, and 
   `as.Corpus.wfm` added to convert a matrix format to a `tm::Corpus`.
 
+* `exclude` becomes a generic method for various classes.  Functionality is the 
+  same but with improved code readability.
+
 **MINOR FEATURES**
 
 **IMPROVEMENTS**

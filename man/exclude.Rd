@@ -2,9 +2,24 @@
 \name{exclude}
 \alias{\%ex\%}
 \alias{exclude}
+\alias{exclude.DocumentTermMatrix}
+\alias{exclude.TermDocumentMatrix}
+\alias{exclude.default}
+\alias{exclude.list}
+\alias{exclude.wfm}
 \title{Exclude Elements From a Vector}
 \usage{
 exclude(word.list, ...)
+
+\method{exclude}{TermDocumentMatrix}(word.list, ...)
+
+\method{exclude}{DocumentTermMatrix}(word.list, ...)
+
+\method{exclude}{wfm}(word.list, ...)
+
+\method{exclude}{list}(word.list, ...)
+
+\method{exclude}{default}(word.list, ...)
 
 word.list \%ex\% ...
 }
@@ -21,6 +36,16 @@ Returns a vector with the excluded terms removed.
 }
 \description{
 \code{exclude} - Quickly exclude words from a word list
+
+\code{exclude.TermDocumentMatrix} - TermDocumentMatrix method for \code{exclude}.
+
+\code{exclude.DocumentTermMatrix} - DocumentTermMatrix method for \code{exclude}.
+
+\code{exclude.wfm} - wfm method for \code{exclude}.
+
+\code{exclude.list} - list method for \code{exclude}.
+
+\code{exclude.default} - default method for \code{exclude}.
 
 \code{\%ex\%} - Binary operator version of \code{\link[qdap]{exclude}} .
 }

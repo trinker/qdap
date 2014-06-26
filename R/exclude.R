@@ -43,42 +43,102 @@
 #' tm::inspect(out.tdm)
 #' }
 exclude <-
+function(word.list, ...){
+    word.list
+    UseMethod("exclude")
+}
+
+#' \code{exclude.TermDocumentMatrix} - TermDocumentMatrix method for \code{exclude}.
+#' @rdname exclude
+#' @export
+#' @method exclude TermDocumentMatrix    
+exclude.TermDocumentMatrix <-
 function(word.list, ...) {
+
     mes <- try(is.vector(...), TRUE)
-    if(substring(mes[[1]], 1, 5) != "Error") {
+    if(!inherits(mes, "try-error")) {
         excluded <- unlist(...)
     } else {
         mf <- match.call(expand.dots = FALSE)   
         excluded <- as.character(mf[[3]])
     }
 
-    cls <- class(word.list)
-    ## Handling for TermDocumentMatrix/DocumentTermMatrix
-    if ("DocumentTermMatrix" %in% cls | "TermDocumentMatrix" %in% cls) {  
-        z <- tm2qdap(word.list)
-        cls2 <- class(z) 
-        z <- z[!rownames(z) %in% excluded,]
-        class(z) <- cls2
-        if ("DocumentTermMatrix" %in% cls) {
-            z <- as.dtm(z)
-        } else {
-            z <- as.tdm(z)
-        }
-        return(z)
-    }
+    word.list[!rownames(word.list) %in% excluded,]
+}
 
-    ## Handling for wfm
-    if ("wfm" %in% cls) {  
-        z <- word.list[!rownames(word.list) %in% excluded,]
-        class(z) <- cls
-        return(z)
-    }
+#' \code{exclude.DocumentTermMatrix} - DocumentTermMatrix method for \code{exclude}.
+#' @rdname exclude
+#' @export
+#' @method exclude DocumentTermMatrix    
+exclude.DocumentTermMatrix <-
+function(word.list, ...) {
 
-    if (!is.list(word.list)) {
-      word.list[!word.list %in% excluded]
+    mes <- try(is.vector(...), TRUE)
+    if(!inherits(mes, "try-error")) {
+        excluded <- unlist(...)
     } else {
-      lapply(word.list, function(x) x[!x %in% excluded])
+        mf <- match.call(expand.dots = FALSE)   
+        excluded <- as.character(mf[[3]])
     }
+
+    word.list[, !colnames(word.list) %in% excluded]
+}
+
+#' \code{exclude.wfm} - wfm method for \code{exclude}.
+#' @rdname exclude
+#' @export
+#' @method exclude wfm    
+exclude.wfm <-
+function(word.list, ...) {
+
+    mes <- try(is.vector(...), TRUE)
+    if(!inherits(mes, "try-error")) {
+        excluded <- unlist(...)
+    } else {
+        mf <- match.call(expand.dots = FALSE)   
+        excluded <- as.character(mf[[3]])
+    }
+  
+    z <- word.list[!rownames(word.list) %in% excluded,]
+    class(z) <- class(word.list) 
+    z
+}
+
+
+#' \code{exclude.list} - list method for \code{exclude}.
+#' @rdname exclude
+#' @export
+#' @method exclude list    
+exclude.list <-
+function(word.list, ...) {
+
+    mes <- try(is.vector(...), TRUE)
+    if(!inherits(mes, "try-error")) {
+        excluded <- unlist(...)
+    } else {
+        mf <- match.call(expand.dots = FALSE)   
+        excluded <- as.character(mf[[3]])
+    }
+
+    lapply(word.list, function(x) x[!x %in% excluded])
+}
+
+#' \code{exclude.default} - default method for \code{exclude}.
+#' @rdname exclude
+#' @export
+#' @method exclude default    
+exclude.default <-
+function(word.list, ...) {
+
+    mes <- try(is.vector(...), TRUE)
+    if(!inherits(mes, "try-error")) {
+        excluded <- unlist(...)
+    } else {
+        mf <- match.call(expand.dots = FALSE)   
+        excluded <- as.character(mf[[3]])
+    }
+
+    word.list[!word.list %in% excluded]
 }
 
 

@@ -8,7 +8,7 @@ colcomb2class(dataframe, combined.columns, class = "list", percent = TRUE,
 }
 \arguments{
 \item{dataframe}{A dataframe or qdap class (e.g.,
-"termco", "question_type", "pos_by", "character_table").}
+\code{termco}, \code{question_type}, \code{pos_by}, \code{character_table}).}
 
 \item{combined.columns}{A list of named vectors of the colnames/indexes
 of the numeric columns to be combined (summed).  If a vector is unnamed a

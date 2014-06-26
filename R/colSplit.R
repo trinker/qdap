@@ -30,8 +30,16 @@ function(column, col.sep = ".", name.sep = "&"){
     svar <- data.frame(do.call('rbind', svar))
     if (!is.null(name.sep) & length(unlist(strsplit(names(column), 
         name.sep, fixed = TRUE))) > 1){
-            cn <- strsplit(names(column)[1], name.sep, fixed = TRUE)[[1]]
+        
+        cn <- strsplit(names(column)[1], name.sep, fixed = TRUE)[[1]]
+
+        if (length(cn) == ncol(svar)) {
             names(svar) <- cn
+        } else {
+            colnames(svar) <- make.names(1:ncol(svar), unique = TRUE)
+        }
+
     } 
-    return(svar)
+    svar
 }
+
