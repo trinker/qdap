@@ -42,7 +42,7 @@ And constructed with the following guidelines:
 * `wfm` becomes a generic method currently applied to a `text.var` that is:
   `character`, `factor` (coerced to `character`), or `wfdf`.
 
-* `unbag` added as a compliment ro `bag_o_words` and friends for undoing string 
+* `unbag` added as a compliment to `bag_o_words` and friends for undoing string 
   splitting.  A convenience wrapper for `paste(collapse = " ")`.
 
 * `as.Corpus.TermDocumentMatrix`, `as.Corpus.DocumentTermMatrix`, and 
@@ -61,14 +61,14 @@ And constructed with the following guidelines:
 * `as.tdm.character` and `as.dtm.character` gain a speed boost with a `tm` 
   package integration.
 
-* Added message to `as.data.frame.Corpus` for missing endmarks suggesting the 
+* Added message to `as.data.frame.Corpus` for missing end-marks suggesting the 
   use of: `sent.split = FALSE`.
 
 **CHANGES**
 
 * `as.data.frame.Corpus`'s default value for `sent.split` is now `FALSE`.
 
-* The `state` column in the `qdap::DATA2` dataset is now character (previously 
+* The `state` column in the `qdap::DATA2` data-set is now character (previously 
   factor).
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.1.0
@@ -80,10 +80,11 @@ And constructed with the following guidelines:
   been fixed. Reference <a href="https://github.com/trinker/qdap/issues/184">issue #184</a>.
 
 * `sentiment_frame` coerced words to factor.  `stringsAsFactors = FALSE` has 
-  been added to prebent this.
+  been added to prevent this.
 
 * `polarity` did not work on &gt; 1 grams due to a bug in `sentiment_frame` 
-  converting character to factor (chewth). See GitHub <a href="https://github.com/trinker/qdap/issues/185">issue #185</a> for details.
+  converting character to factor (thanks for the find @chewth). See GitHub 
+  <a href="https://github.com/trinker/qdap/issues/185">issue #185</a> for details.
 
 **NEW FEATURES**
 
@@ -142,12 +143,12 @@ And constructed with the following guidelines:
   Use `as.dtm` or `as.DocumentTermMatrix` instead.
 
 * The *Introduction to <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>* .Rmd vignette has been moved to an internal 
-  directory.  The HTML version is not built by default.  THis saves CRAN space 
+  directory.  The HTML version is not built by default.  This saves CRAN space 
   and time checking the package source.  The file has been replaced with a
   temporary place holder that contains instructions for building the actual 
   vignette.  The user may also use the `build_qdap_vignette` directly.
 
-* `qdap` incorporates the chanegs from the `tm` package version: 0.6:
+* `qdap` incorporates the changes from the `tm` package version: 0.6:
   <a href="http://cran.r-project.org/web/packages/tm/news.html" target="_blank">http://cran.r-project.org/web/packages/tm/news.html</a>  Reference <a href="https://github.com/trinker/qdap/issues/187">issue #187</a>.
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.0.0
@@ -201,7 +202,7 @@ The `qdapTools` package now houses several former <a href="https://github.com/tr
   bundle of functions to be used outside of <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> without calling the larger <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> 
   package per the request of Kirill Muller (see <a href="https://github.com/trinker/qdap/issues/165">issue #165</a>).
 
-* As schedulaed the `dissimialrity` function has been removed from the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> 
+* As scheduled the `dissimilarity` function has been removed from the <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> 
   package to avoid conflict with the `tm` package.  Use `Dissimilarity` function 
   instead.
 
@@ -256,7 +257,7 @@ The `qdapTools` package now houses several former <a href="https://github.com/tr
 
 **IMPROVEMENTS**
 
-* `discourse_map` picks up a `pause` argument that enables the user to pasue 
+* `discourse_map` picks up a `pause` argument that enables the user to pause 
   between plots in interactive mode.
 
 **CHANGES**
@@ -268,7 +269,7 @@ The `qdapTools` package now houses several former <a href="https://github.com/tr
 
 **NEW FEATURES**
 
-* `gantt` and `gantt_wrap` (single facet) pick up and `Animate` mathod.
+* `gantt` and `gantt_wrap` (single facet) pick up and `Animate` method.
 
 * `polarity` picks up an `Animate` method.
 
@@ -282,7 +283,7 @@ The `qdapTools` package now houses several former <a href="https://github.com/tr
 * `discourse_map` picks up a `condense` argument that allows the user to 
   condense sequential rows for like grouping variable sub groups.
 
-* `list_df2df` names now use a zero padded numeric portion for defualt names.  
+* `list_df2df` names now use a zero padded numeric portion for default names.  
   For example `c("L1", "L2", "L3", ... "L10")`, becomes 
   `c("L01", "L02", "L03", ... "L10")`.
 
@@ -413,7 +414,7 @@ A version bump necessary for Re-Submission to CRAN.
   user to remove stopwords and min/max length words.
 
 * `plot.word_cor` picks up the argument `ncol` that allows the user to specify 
-  the number of columns used.  This uses ggplot2's `facet_wrap` rather than 
+  the number of columns used.  This uses `ggplot2`'s `facet_wrap` rather than 
   `facet_grid` (which is the default if `ncol =NULL`).
 
 * `name2sex` relied upon having <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>Dictionaries loaded.  This could be an issue 
@@ -473,7 +474,7 @@ A version bump necessary for Re-Submission to CRAN.
 
 * `word_cor` output that was a list (not a correlation matrix) did not have a 
   plot method.  The plot method for `word_cor` now handles both matrices and the 
-  lsit of correlations.
+  list of correlations.
 
 * `rm_row` picks up the `contains` argument that allows the user to search for, 
   and remove rows of, within the string, not just the beginning.
@@ -544,7 +545,7 @@ relatively new to CRAN, made these changes sensible at this point.
   within the `grouping.vars`.  This behavior has been fixed with corresponding 
   examples added.
 
-* `url_dl` - Downloaded an empty file when not using a dropbox key.  This 
+* `url_dl` - Downloaded an empty file when not using a Dropbox key.  This 
   behavior has been fixed.
 
 * The `cm_code.` family of functions had a bug in the output due to 
@@ -598,7 +599,7 @@ relatively new to CRAN, made these changes sensible at this point.
   and outputs a dataframe.
 
 * `colcomb2class` quickly combines columns for  number of <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> classes including 
-  output from: `termco`, `question_type`, `pos_by`, adn 1character_table`.
+  output from: `termco`, `question_type`, `pos_by`, and `character_table`.
 
 * `lview` a function to unclass a list output that has a special print method 
   that returns only a portion of the output.  `lview` re-classes to "list".
@@ -616,7 +617,7 @@ relatively new to CRAN, made these changes sensible at this point.
 * `tm_corpus2df` and `df2tm_corpus` added to convert a tm package corpus to a 
   dataframe for use in <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> or vice versa.
 
-* `tdm` and `dtm` are now truly compatable with the `tm` package.  `tdm` and 
+* `tdm` and `dtm` are now truly compatible with the `tm` package.  `tdm` and 
   `dtm` produce outputs of the class `"TermDocumentMatrix"` and 
   `"DocumentTermMatrix"` respectively.  This change (coupled with the renaming 
   of `stopwords` to `rm_stopwords`) should make the two packages logical 
@@ -656,7 +657,7 @@ relatively new to CRAN, made these changes sensible at this point.
   to `strip`
 
 * `dtm` added to compliment `tdm`, allowing for easier integration with other R 
-  packages that utilize tdm/dtm.
+  packages that utilize `tdm`/`dtm`.
 
 * `dir_map` picks up a `use.path` argument that allows the user to specify a 
   more flexible path to the created pre-formed `read.transcript` scripts based 
@@ -666,7 +667,7 @@ relatively new to CRAN, made these changes sensible at this point.
 * `polarity_frame` a function to make a hash environment lookup for use with the 
   `polarity` function.
 
-* `DATA.SPLIT` a `sentSplit` version of the `DATA` dataset has been added to 
+* `DATA.SPLIT` a `sentSplit` version of the `DATA` data-set has been added to 
   <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>.
 
 * `gantt_plot` accepts`NULL`.for `grouping.var` and figures for "all" rows as a 
@@ -679,7 +680,7 @@ relatively new to CRAN, made these changes sensible at this point.
 
 * `qheat`, `polarity.plot` and `formality.plot` pick up the argument `plot` 
   which optionally suppresses the plotting.  This is useful if the user is 
-  operating in knitr, sewave, etc. and wishes to alter/add onto the plot.
+  operating in **knitr**, **sewave**, etc. and wishes to alter/add onto the plot.
 
 * `lookup` now takes `missing = NULL`.  This results in the original values in
   `terms` corresponding to the missing elements being retained.
@@ -720,9 +721,9 @@ relatively new to CRAN, made these changes sensible at this point.
 * `exclude` now works with `wfm` and the `tm` package's `DocumentTermMatrix` and
   `TermDocumentMatrix` classes.
 
-* `rm_url` removes/repalces URLs in a string(s).
+* `rm_url` removes/replaces URLs in a string(s).
 
-* `matrix2df` added (under `list2df`) to convert rownnames of matrix to a 
+* `matrix2df` added (under `list2df`) to convert `rownames` of matrix to a 
   dataframe column.
 
 **CHANGES**
@@ -806,7 +807,7 @@ qdap 0.2.3
 
 * `names2sex` a function for predicting gender from name.
 
-* Added `NAMES` and `NAMES_SEX` datasets, based on 1990 U.S. census data.
+* Added `NAMES` and `NAMES_SEX` data-sets, based on 1990 U.S. census data.
 
 * `tdm` added as an equivalent to TermDocumentMatrix from the tm package.  This 
   allows for portability across text analysis packages.
@@ -856,12 +857,12 @@ qdap 0.2.3
 * `genX` and `bracketX` gain an extra argument `space.fix` to remove extra 
   spaces left over from bracket removal.
 
-* Updated out of date dropbox url download in `url_dl`.  `url_dl` also takes the 
-  dropbox key as well.
+* Updated out of date Dropbox url download in `url_dl`.  `url_dl` also takes the 
+  Dropbox key as well.
 
 **CHANGES**
 
-* <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> is now compiled for mac users (as openNLP now passes CRAN checks with no
+* <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> is now compiled for mac users (as `openNLP` now passes CRAN checks with no
   Errors on Mac).
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 0.2.1
