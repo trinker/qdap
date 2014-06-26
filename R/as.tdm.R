@@ -1055,6 +1055,49 @@ tm_dtm_interface2 <- function(text.var, grouping.var, stopwords, char2space,
         )
     )
 }
+
+#' \code{as.Corpus.TermDocumentMatrix} - \code{TermDocumentMatrix} method for 
+#' \code{as.Corpus} used to convert a \code{\link[tm]{Corpus}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.Corpus TermDocumentMatrix 
+as.Corpus.TermDocumentMatrix <- function(text.var, ...){
+
+    tm::VCorpus(tm::VectorSource(mat2word_list(text.var)))
+
+}
+
+#' \code{as.Corpus.DocumentTermMatrix} - \code{DocumentTermMatrix} method for 
+#' \code{as.Corpus} used to convert a \code{\link[tm]{Corpus}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.Corpus DocumentTermMatrix 
+as.Corpus.DocumentTermMatrix <- function(text.var, ...){
+
+    tm::VCorpus(tm::VectorSource(mat2word_list(t(text.var))))
+
+}
+
+#' \code{as.Corpus.wfm} - \code{wfm} method for 
+#' \code{as.Corpus} used to convert a \code{\link[tm]{Corpus}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.Corpus wfm 
+as.Corpus.wfm <- function(text.var, ...){
+
+    as.Corpus.TermDocumentMatrix(as.tdm(text.var))
+
+}
+
+## helper function to construct Corpus from matrices
+mat2word_list <- function(mat){
+
+    apply(mat, 2, function(x) {
+        unbag(rep(names(x), x))
+    })
+
+}
+
 ##Removed after las archived:
 ## ## Latent Semantic Analysis
 ## library(lsa)

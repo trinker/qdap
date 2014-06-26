@@ -2,10 +2,13 @@
 \name{bag_o_words}
 \alias{bag_o_words}
 \alias{breaker}
+\alias{unbag}
 \alias{word_split}
 \title{Bag of Words}
 \usage{
 bag_o_words(text.var, apostrophe.remove = FALSE, ...)
+
+unbag(text.var, na.rm = TRUE)
 
 breaker(text.var)
 
@@ -18,15 +21,22 @@ word_split(text.var)
 the output.}
 
 \item{\ldots}{further arguments passed to strip function.}
+
+\item{na.rm}{logical.  If \code{TRUE} \code{NA}s are removed before pasting.}
 }
 \value{
 Returns a vector of striped words.
 
-\code{breaker} - returns a vector of striped words and qdap
+\code{unbag} - Returns a string.
+
+\code{breaker} - Returns a vector of striped words and qdap
 recognized endmarks (i.e., \code{".", "!", "?", "*", "-"}).
 }
 \description{
 \code{bag_o_words} - Reduces a text column to a bag of words.
+
+\code{unbag} - Wrapper for \code{paste(collapse=" ")} to glue words back into
+strings.
 
 \code{breaker} - Reduces a text column to a bag of words and qdap recognized
 end marks.
@@ -38,6 +48,7 @@ words and qdap recognized end marks (i.e., \code{".", "!", "?", "*", "-"}).
 \dontrun{
 bag_o_words("I'm going home!")
 bag_o_words("I'm going home!", apostrophe.remove = TRUE)
+unbag(bag_o_words("I'm going home!"))
 
 bag_o_words(DATA$state)
 by(DATA$state, DATA$person, bag_o_words)
@@ -46,8 +57,10 @@ lapply(DATA$state,  bag_o_words)
 breaker(DATA$state)
 by(DATA$state, DATA$person, breaker)
 lapply(DATA$state,  breaker)
+unbag(breaker(DATA$state))
 
 word_split(c(NA, DATA$state))
+unbag(word_split(c(NA, DATA$state)))
 }
 }
 \keyword{bag-of-words}

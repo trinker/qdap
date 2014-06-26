@@ -14,6 +14,7 @@
 #' \dontrun{
 #' bag_o_words("I'm going home!")
 #' bag_o_words("I'm going home!", apostrophe.remove = TRUE)
+#' unbag(bag_o_words("I'm going home!"))
 #' 
 #' bag_o_words(DATA$state)
 #' by(DATA$state, DATA$person, bag_o_words)
@@ -22,8 +23,10 @@
 #' breaker(DATA$state)
 #' by(DATA$state, DATA$person, breaker)
 #' lapply(DATA$state,  breaker)
+#' unbag(breaker(DATA$state))
 #' 
 #' word_split(c(NA, DATA$state))
+#' unbag(word_split(c(NA, DATA$state)))
 #' }
 bag_o_words <-
 function(text.var, apostrophe.remove = FALSE, ...) {
@@ -33,10 +36,26 @@ function(text.var, apostrophe.remove = FALSE, ...) {
 
 #' Bag of Stripped Words and End Marks
 #' 
+#' \code{unbag} - Wrapper for \code{paste(collapse=" ")} to glue words back into 
+#' strings. 
+#' 
+#' @param na.rm logical.  If \code{TRUE} \code{NA}s are removed before pasting.
+#' @return \code{unbag} - Returns a string.
+#' @rdname bag_o_words
+#' @export
+unbag <- function(text.var, na.rm = TRUE) {
+    text.var <- unlist(text.var)
+    if (na.rm) text.var <- text.var[!is.na(text.var)]
+    paste(text.var, collapse=" ")
+}
+
+
+#' Bag of Stripped Words and End Marks
+#' 
 #' \code{breaker} - Reduces a text column to a bag of words and qdap recognized 
 #' end marks.
 #' 
-#' @return \code{breaker} - returns a vector of striped words and qdap 
+#' @return \code{breaker} - Returns a vector of striped words and qdap 
 #' recognized endmarks (i.e., \code{".", "!", "?", "*", "-"}).
 #' @rdname bag_o_words
 #' @export

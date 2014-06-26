@@ -25,3 +25,10 @@ test_that("bag_o_words, breaker, and word_split gives list of data.frames with c
 
 })
 
+test_that("unbag gives a pasted string",{
+
+    expect_true(unbag(bag_o_words("I'm going home!")) == "i'm going home")
+    expect_true(unbag(breaker(DATA$state)) == unbag(word_split(c(NA, DATA$state))))
+
+
+})

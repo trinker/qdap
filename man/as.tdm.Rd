@@ -3,8 +3,11 @@
 \alias{apply_as_df}
 \alias{apply_as_tm}
 \alias{as.Corpus}
+\alias{as.Corpus.DocumentTermMatrix}
+\alias{as.Corpus.TermDocumentMatrix}
 \alias{as.Corpus.default}
 \alias{as.Corpus.sent_split}
+\alias{as.Corpus.wfm}
 \alias{as.DocumentTermMatrix}
 \alias{as.TermDocumentMatrix}
 \alias{as.data.frame.Corpus}
@@ -60,6 +63,12 @@ apply_as_tm(wfm.obj, tmfun, ..., to.qdap = TRUE)
 
 apply_as_df(tm.corpus, qdapfun, ..., stopwords = NULL, min = 1, max = Inf,
   count.apostrophe = TRUE, ignore.case = TRUE)
+
+\method{as.Corpus}{TermDocumentMatrix}(text.var, ...)
+
+\method{as.Corpus}{DocumentTermMatrix}(text.var, ...)
+
+\method{as.Corpus}{wfm}(text.var, ...)
 }
 \arguments{
 \item{text.var}{The text variable or a \code{\link[qdap]{wfm}} object.}
@@ -200,6 +209,15 @@ dataframe.
 \code{apply_as_df} - Apply functions intended to be used on the \pkg{qdap}
 package's \code{\link[base]{data.frame}} + \code{\link[qdap]{sentSplit}} to
 a \pkg{tm} \code{\link[tm]{Corpus}} object.
+
+\code{as.Corpus.TermDocumentMatrix} - \code{TermDocumentMatrix} method for
+\code{as.Corpus} used to convert a \code{\link[tm]{Corpus}}.
+
+\code{as.Corpus.DocumentTermMatrix} - \code{DocumentTermMatrix} method for
+\code{as.Corpus} used to convert a \code{\link[tm]{Corpus}}.
+
+\code{as.Corpus.wfm} - \code{wfm} method for
+\code{as.Corpus} used to convert a \code{\link[tm]{Corpus}}.
 }
 \details{
 Produces output that is identical to the \code{tm} package's

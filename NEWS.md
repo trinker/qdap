@@ -42,6 +42,12 @@ And constructed with the following guidelines:
 * `wfm` becomes a generic method currently applied to a `text.var` that is:
   `character`, `factor` (coerced to `character`), or `wfdf`.
 
+* `unbag` added as a compliment ro `bag_o_words` and friends for undoing string 
+  splitting.  A convenience wrapper for `paste(collapse = " ")`.
+
+* `as.Corpus.TermDocumentMatrix`, `as.Corpus.DocumentTermMatrix`, and 
+  `as.Corpus.wfm` added to convert a matrix format to a `tm::Corpus`.
+
 **MINOR FEATURES**
 
 **IMPROVEMENTS**
