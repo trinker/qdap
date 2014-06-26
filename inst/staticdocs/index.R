@@ -54,6 +54,16 @@ sd_section("Viewing",
   )
 )
 
+sd_section("Chaining",
+  "Functions chain together qdap data and functions.",  
+  c(
+    "qdap_df",
+    "%&%",
+    "Text"
+  )
+)
+
+
 sd_section("Generic qdap Methods", 
   "Functions to aid in selection of data elements.", 
   c(

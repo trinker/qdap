@@ -29,8 +29,9 @@ Returns a \code{\link[base]{data.frame}} of the class \code{"qdap_df"}.
 \description{
 Creating this \pkg{qdap} specific data structure enables short hand with
 subsequent \pkg{qdap} function calls that utilize the \code{text.var}
-argument.  Combined with the \code{\%&\%} operator, the user need not specifiy
-a data set or the \code{text.var} argument.
+argument.  Combined with the \code{\link[qdap]{\%&\%}} operator, the user n
+need not specify a data set or the \code{text.var} argument (as many
+\pkg{qdap} functions contain a \code{text.var} argument).
 
 Change text.var column of a qdap_df object.
 }
@@ -49,12 +50,41 @@ Text(dat2)
 ## change the `text.var` column
 Text(dat2) <- "stem.text"
 dat2 \%&\% trans_cloud()
+
+dat <- sentSplit(DATA, "state", stem.col = TRUE)
+dat \%&\% trans_cloud(grouping.var=person)
+dat \%&\% termco(person, match.list=list("fun", "computer"))
+dat \%&\% trans_venn(person)
+dat \%&\% polarity(person)
+dat \%&\% formality(person)
+dat \%&\% automated_readability_index(person)
+dat \%&\% Dissimilarity(person)
+dat \%&\% gradient_cloud(sex)
+dat \%&\% dispersion_plot(c("fun", "computer"))
+dat \%&\% discourse_map(list(sex, adult))
+dat \%&\% gantt_plot(person)
+dat \%&\% word_list(adult)
+dat \%&\% end_mark_by(person)
+dat \%&\% end_mark()
+dat \%&\% word_stats(person)
+dat \%&\% wfm(person)
+dat \%&\% word_cor(person, "i")
+dat \%&\% sentCombine(person)
+dat \%&\% question_type(person)
+
+## combine with magrittr/dplyr
+library(magrittr)
+dat \%&\% wfm(person) \%>\% plot()
+dat \%&\% polarity(person) \%>\% scores()
+dat \%&\% polarity(person) \%>\% counts()
+dat \%&\% polarity(person) \%,\% scores()
 }
 }
 \references{
 Inspired by \pkg{dplyr}'s \code{\link[dplyr]{tbl_df}} structure.
 }
 \seealso{
+\code{\link[qdap]{\%&\%}},
 \code{\link[qdap]{sentSplit}}
 }
 \keyword{Text}

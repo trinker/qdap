@@ -23,7 +23,7 @@ dat \%&\% trans_cloud(grouping.var=person)
 dat \%&\% trans_cloud(grouping.var=person, text.var=stemmer(DATA$state))
 dat \%&\% termco(grouping.var=person, match.list=list("fun", "computer"))
 
-dat <- qdap_df(DATA.SPLIT, state)
+dat <- sentSplit(DATA, "state", stem.col = TRUE)
 dat \%&\% trans_cloud(grouping.var=person)
 dat \%&\% termco(person, match.list=list("fun", "computer"))
 dat \%&\% trans_venn(person)
@@ -42,18 +42,28 @@ dat \%&\% word_stats(person)
 dat \%&\% wfm(person)
 dat \%&\% word_cor(person, "i")
 dat \%&\% sentCombine(person)
+dat \%&\% question_type(person)
 
+## combine with magrittr/dplyr
 library(magrittr)
 dat \%&\% wfm(person) \%>\% plot()
 dat \%&\% polarity(person) \%>\% scores()
 dat \%&\% polarity(person) \%>\% counts()
+dat \%&\% polarity(person) \%,\% scores()
+
+## change text column in `qdap_df`
+dat \%&\% trans_cloud()
+Text(dat)
+Text(dat) <- "stem.text"
+dev.new()
+dat \%&\% trans_cloud() # notice words are stemmed
 }
 }
 \references{
 Inspired by \pkg{dplyr}'s \code{\link[dplyr]{\%.\%}} and
 \pkg{magrittr}'s \code{\link[dplyr]{\%>\%}} functionality.
 }
-\keyword{\code{\link[qdap]{\%&\%}},}
+\keyword{\code{\link[dplyr]{\%>\%}},}
 \keyword{\code{\link[qdap]{qdap_df}}}
 \keyword{chain}
 \keyword{chaining}
