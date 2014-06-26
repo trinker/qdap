@@ -12,10 +12,12 @@
 \alias{as.TermDocumentMatrix}
 \alias{as.data.frame.Corpus}
 \alias{as.dtm}
+\alias{as.dtm.Corpus}
 \alias{as.dtm.character}
 \alias{as.dtm.default}
 \alias{as.dtm.wfm}
 \alias{as.tdm}
+\alias{as.tdm.Corpus}
 \alias{as.tdm.character}
 \alias{as.tdm.default}
 \alias{as.tdm.wfm}
@@ -32,11 +34,17 @@ as.dtm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 as.DocumentTermMatrix(text.var, grouping.var = NULL, vowel.check = TRUE,
   ...)
 
+\method{as.tdm}{Corpus}(text.var, grouping.var = NULL, vowel.check = TRUE,
+  ...)
+
 \method{as.tdm}{default}(text.var, grouping.var = NULL, vowel.check = TRUE,
   ...)
 
 \method{as.tdm}{character}(text.var, grouping.var = NULL,
   vowel.check = TRUE, ...)
+
+\method{as.dtm}{Corpus}(text.var, grouping.var = NULL, vowel.check = TRUE,
+  ...)
 
 \method{as.dtm}{default}(text.var, grouping.var = NULL, vowel.check = TRUE,
   ...)
@@ -171,11 +179,17 @@ a \code{\link[tm]{Corpus}}.
 \code{as.DocumentTermMatrix} - Create document term matrices from raw text or
 \code{\link[qdap]{wfm}} for use with other text analysis packages.
 
+\code{as.tdm.Corpus} - Corpus method for \code{as.tdm} used to
+convert to a \code{\link[tm]{DocumentTermMatrix}}.
+
 \code{as.tdm.default} - Default method for \code{as.tdm} used to
 convert to a \code{\link[tm]{TermDocumentMatrix}}.
 
 \code{as.tdm.character} - character method for \code{as.tdm} used to
 convert to a \code{\link[tm]{TermDocumentMatrix}}.
+
+\code{as.dtm.Corpus} - Corpus method for \code{as.dtm} used to
+convert to a \code{\link[tm]{DocumentTermMatrix}}.
 
 \code{as.dtm.default} - Default method for \code{as.dtm} used to
 convert to a \code{\link[tm]{DocumentTermMatrix}}.

@@ -349,6 +349,16 @@ as.dtm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 #' @export
 as.DocumentTermMatrix <- as.dtm
 
+#' \code{as.tdm.Corpus} - Corpus method for \code{as.tdm} used to 
+#' convert to a \code{\link[tm]{DocumentTermMatrix}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.tdm Corpus 
+as.tdm.Corpus <- 
+function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+    tm::TermDocumentMatrix(x = text.var, ...)
+}
+
 #' \code{as.tdm.default} - Default method for \code{as.tdm} used to 
 #' convert to a \code{\link[tm]{TermDocumentMatrix}}.
 #' @rdname as.tdm
@@ -380,6 +390,15 @@ vowel_check <- function(text.var) {
     grepl("[aeiouy]", text.var)
 }
 
+#' \code{as.dtm.Corpus} - Corpus method for \code{as.dtm} used to 
+#' convert to a \code{\link[tm]{DocumentTermMatrix}}.
+#' @rdname as.tdm
+#' @export
+#' @method as.dtm Corpus 
+as.dtm.Corpus <- 
+function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
+    tm::DocumentTermMatrix(x = text.var, ...)
+}
 
 #' \code{as.dtm.default} - Default method for \code{as.dtm} used to 
 #' convert to a \code{\link[tm]{DocumentTermMatrix}}.

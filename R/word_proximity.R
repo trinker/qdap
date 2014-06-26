@@ -1,7 +1,7 @@
 #' Proximity Matrix Between Words
 #' 
-#' Generate proximity measures to ascertain a mean distance measure between 
-#' word uses.
+#' \code{word_proximity} - Generate proximity measures to ascertain a mean 
+#' distance measure between word uses.
 #' 
 #' @param text.var The text variable.
 #' @param terms  A vector of quoted terms.
@@ -201,9 +201,7 @@ min_dist <- function(xw, yw) {
 }
 
 
-#' Weight a word_proximity object
-#' 
-#' Weight a word_proximity object.
+#' \code{weight} - weight Method for word_proximity.
 #' 
 #' @param x An object to be weighted.
 #' @param type A weighting type of: c(\code{"scale_log"}, \code{"scale"}, 
@@ -215,20 +213,6 @@ min_dist <- function(xw, yw) {
 #' \code{scale} will standardize the values.  \code{rev} will multiply by -1 to 
 #' give the inverse sign.  This enables a comparison similar to correlations 
 #' rather than distance.
-#' @param \dots ignored.
-#' @note A constant of .000000000001 is added to each element when log is used 
-#' to deal with the problem of \code{log(0)}.
-#' @return Returns a weighted list of matrices.
-#' @rdname word_proximity
-#' @export
-weight <- 
-function(x, type = "scale", ...) {
-    UseMethod("weight")
-}
-
-
-#' word_proximity Method for weight
-#' 
 #' @rdname word_proximity
 #' @export
 #' @method weight word_proximity
