@@ -27,6 +27,12 @@ And constructed with the following guidelines:
 
 **NEW FEATURES**
 
+* `qdap_df` and `%&%` added to mimic some of the functionality of `dplyr`'s 
+  `tbl_df` and `%&gt;%` in a more specific, less flexible, `qdap` oriented way.
+
+* `Text` added to view and change the `text.var` attribute of a `data.frame of 
+  the class `qdap_df`.
+
 * `cumulative` generic method added to view cumulative scores over time.
 
 * `formality` picks up a `cumulative` method.
