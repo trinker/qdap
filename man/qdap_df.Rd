@@ -51,7 +51,7 @@ Text(dat2)
 Text(dat2) <- "stem.text"
 dat2 \%&\% trans_cloud()
 
-dat <- sentSplit(DATA, "state", stem.col = TRUE)
+dat <- sentSplit(DATA, "state")
 dat \%&\% trans_cloud(grouping.var=person)
 dat \%&\% termco(person, match.list=list("fun", "computer"))
 dat \%&\% trans_venn(person)
@@ -77,7 +77,7 @@ library(magrittr)
 dat \%&\% wfm(person) \%>\% plot()
 dat \%&\% polarity(person) \%>\% scores()
 dat \%&\% polarity(person) \%>\% counts()
-dat \%&\% polarity(person) \%,\% scores()
+dat \%&\% polarity(person) \%>\% scores()
 }
 }
 \references{

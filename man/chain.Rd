@@ -23,7 +23,7 @@ dat \%&\% trans_cloud(grouping.var=person)
 dat \%&\% trans_cloud(grouping.var=person, text.var=stemmer(DATA$state))
 dat \%&\% termco(grouping.var=person, match.list=list("fun", "computer"))
 
-dat <- sentSplit(DATA, "state", stem.col = TRUE)
+dat <- sentSplit(DATA.SPLIT, "state")
 dat \%&\% trans_cloud(grouping.var=person)
 dat \%&\% termco(person, match.list=list("fun", "computer"))
 dat \%&\% trans_venn(person)
@@ -49,7 +49,7 @@ library(magrittr)
 dat \%&\% wfm(person) \%>\% plot()
 dat \%&\% polarity(person) \%>\% scores()
 dat \%&\% polarity(person) \%>\% counts()
-dat \%&\% polarity(person) \%,\% scores()
+dat \%&\% polarity(person) \%>\% scores()
 
 ## change text column in `qdap_df`
 dat \%&\% trans_cloud()

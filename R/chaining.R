@@ -21,7 +21,7 @@
 #' dat %&% trans_cloud(grouping.var=person, text.var=stemmer(DATA$state))
 #' dat %&% termco(grouping.var=person, match.list=list("fun", "computer"))
 #' 
-#' dat <- sentSplit(DATA, "state", stem.col = TRUE)
+#' dat <- sentSplit(DATA.SPLIT, "state")
 #' dat %&% trans_cloud(grouping.var=person)
 #' dat %&% termco(person, match.list=list("fun", "computer"))
 #' dat %&% trans_venn(person)
@@ -47,7 +47,7 @@
 #' dat %&% wfm(person) %>% plot()
 #' dat %&% polarity(person) %>% scores()
 #' dat %&% polarity(person) %>% counts()
-#' dat %&% polarity(person) %,% scores()
+#' dat %&% polarity(person) %>% scores()
 #' 
 #' ## change text column in `qdap_df`
 #' dat %&% trans_cloud()
@@ -62,11 +62,18 @@
 
     thecall <- substitute(qdap.fun)
 
+    the_fun <- as.list(thecall)[[1]]
+    if(!"text.var" %in% names(formals(match.fun(the_fun)))) {
+        stop(sprintf("%s does not have `text.var` as a formal argument", 
+            as.character(the_fun)))
+    }
+
     if(is.null(thecall$text.var)) {
         thecall$text.var <- as.name(attributes(qdap_df.object)[["qdap_df_text.var"]])
     }
 
     eval(thecall, qdap_df.object, parent.frame())
 }
+
 
 

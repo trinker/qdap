@@ -34,7 +34,7 @@
 #' Text(dat2) <- "stem.text"
 #' dat2 %&% trans_cloud()
 #' 
-#' dat <- sentSplit(DATA, "state", stem.col = TRUE)
+#' dat <- sentSplit(DATA, "state")
 #' dat %&% trans_cloud(grouping.var=person)
 #' dat %&% termco(person, match.list=list("fun", "computer"))
 #' dat %&% trans_venn(person)
@@ -60,7 +60,7 @@
 #' dat %&% wfm(person) %>% plot()
 #' dat %&% polarity(person) %>% scores()
 #' dat %&% polarity(person) %>% counts()
-#' dat %&% polarity(person) %,% scores()
+#' dat %&% polarity(person) %>% scores()
 #' }
 qdap_df <- function(dataframe, text.var) {
     stopifnot(is.data.frame(dataframe))
