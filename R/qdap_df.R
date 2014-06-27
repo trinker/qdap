@@ -8,7 +8,7 @@
 #' 
 #' @param dataframe A \code{\link[base]{data.frame}} with a text variable.  
 #' Generally, \code{\link[qdap]{sentSplit}} should be run first 
-#' (\code{\link[qdap]{sentSplit}}) actually produces a 
+#' (\code{\link[qdap]{sentSplit}} actually produces a 
 #' \code{\link[base]{data.frame}} that is of the class \code{"qdap_df"}).
 #' @param text.var The name of the \code{text.var} column.
 #' @return Returns a \code{\link[base]{data.frame}} of the class \code{"qdap_df"}.
