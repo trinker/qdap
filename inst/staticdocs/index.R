@@ -58,8 +58,7 @@ sd_section("Chaining",
   "Functions chain together qdap data and functions.",  
   c(
     "qdap_df",
-    "%&%",
-    "Text"
+    "%&%"
   )
 )
 

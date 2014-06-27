@@ -63,10 +63,11 @@ dat \%&\% trans_cloud() # notice words are stemmed
 Inspired by \pkg{dplyr}'s \code{\link[dplyr]{\%.\%}} and
 \pkg{magrittr}'s \code{\link[dplyr]{\%>\%}} functionality.
 }
-\keyword{\code{\link[dplyr]{\%>\%}},}
-\keyword{\code{\link[qdap]{qdap_df}}}
+\seealso{
+\code{\link[dplyr]{\%>\%}},
+\code{\link[qdap]{qdap_df}}
+}
 \keyword{chain}
 \keyword{chaining}
 \keyword{pipe}
-\keyword{seealso}
 
