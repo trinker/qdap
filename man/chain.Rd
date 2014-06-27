@@ -23,7 +23,8 @@ dat \%&\% trans_cloud(grouping.var=person)
 dat \%&\% trans_cloud(grouping.var=person, text.var=stemmer(DATA$state))
 dat \%&\% termco(grouping.var=person, match.list=list("fun", "computer"))
 
-dat <- sentSplit(DATA.SPLIT, "state")
+## Various examples with qdap functions (sentSplit gives class "qdap_df")
+dat <- sentSplit(DATA, "state")
 dat \%&\% trans_cloud(grouping.var=person)
 dat \%&\% termco(person, match.list=list("fun", "computer"))
 dat \%&\% trans_venn(person)
@@ -43,6 +44,13 @@ dat \%&\% wfm(person)
 dat \%&\% word_cor(person, "i")
 dat \%&\% sentCombine(person)
 dat \%&\% question_type(person)
+dat \%&\% word_network_plot()
+dat \%&\% character_count()
+dat \%&\% char_table(person)
+dat \%&\% phrase_net(2, .1)
+dat \%&\% boolean_search("it||!")
+dat \%&\% trans_context(person, which(end_mark(DATA.SPLIT[, "state"]) == "?"))
+dat \%&\% mgsub(c("it's", "I'm"), c("it is", "I am"))
 
 ## combine with magrittr/dplyr
 library(magrittr)
@@ -51,12 +59,20 @@ dat \%&\% polarity(person) \%>\% scores()
 dat \%&\% polarity(person) \%>\% counts()
 dat \%&\% polarity(person) \%>\% scores()
 
-## change text column in `qdap_df`
-dat \%&\% trans_cloud()
-Text(dat)
-Text(dat) <- "stem.text"
-dev.new()
-dat \%&\% trans_cloud() # notice words are stemmed
+## Change text column in `qdap_df` (Example 1)
+dat2 <- sentSplit(DATA, "state", stem.col = TRUE)
+class(dat2)
+dat2 \%&\% trans_cloud()
+Text(dat2)
+## change the `text.var` column
+Text(dat2) <- "stem.text"
+dat2 \%&\% trans_cloud()
+
+## Change text column in `qdap_df` (Example 2)
+(dat2$fake_dat <- paste(emoticon[1:11,2], dat2$state))
+Text(dat2) <- "fake_dat"
+(m <- dat2 \%&\% sub_holder(emoticon[,2]))
+m$unhold(strip(m$output))
 }
 }
 \references{
