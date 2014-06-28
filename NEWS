@@ -57,6 +57,9 @@ NEW FEATURES
 * `exclude` becomes a generic method for various classes.  Functionality is the 
   same but with improved code readability.
 
+* `check_spelling` and `which_misspelled` allow the user to identify potentially 
+  misspelled words and optionally suggest replacements.
+
 MINOR FEATURES
 
 IMPROVEMENTS
