@@ -79,8 +79,18 @@ recoder <- function(x, envr){
     unlist(lapply(x, get, envir = envr))                      
 }  
 
-## check if dplyr::tbl_df, wfm, tdm, dtm
+## check if dplyr::tbl_df, wfm, tdm, dtm, missing punctuation, douple punctuation
 is.tbl_df <- function(x) inherits(x, "tbl_df")
 is.wfm <- function(x) inherits(x, "wfm")
 is.tdm <- function(x) inherits(x, "TermDocumentMatrix")
 is.dtm <- function(x) inherits(x, "DocumentTermMatrix")
+is.mp <- function(x) any(suppressWarnings(na.omit(end_mark(x))) == "_")
+is.dp <- function(text.var) {
+    punct <- c(".", "?", "!", "|")
+    any(sapply(strsplit(text.var, NULL), function(x) {
+        sum(x %in% punct) > 1
+    }))
+}
+
+
+

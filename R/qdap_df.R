@@ -86,6 +86,9 @@ qdap_df <- function(dataframe, text.var) {
         text.var <- as.character(substitute(text.var))
     }
 
+    ## coerce factor text to character
+    dataframe[[text.var]] <- as.character(dataframe[[text.var]])
+
     if(is.mp(dataframe[[text.var]])) {
         warning(paste0("\nSome rows contain missing punctuation.", 
             "\nConsider data further cleaining."))
@@ -100,7 +103,7 @@ qdap_df <- function(dataframe, text.var) {
     dataframe
 }
 
-is.mp <- function(x) any(suppressWarnings(end_mark(x)) == "_")
+
 
 #' Change text.var column of a qdap_df Object
 #' 

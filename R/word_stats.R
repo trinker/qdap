@@ -147,13 +147,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
             as.character(tot)
         }
         Text <- as.character(text.var)
-        is.dp <- function(text.var) {
-          punct <- c(".", "?", "!", "|")
-          any(sapply(strsplit(text.var, NULL), function(x) {
-            sum(x %in% punct) > 1
-          }
-          ))
-        }
+
         if (any(is.na(text.var))) {
             omit <- which(is.na(text.var))
         } else {

@@ -5,8 +5,7 @@
 #' @param text.var The text variable.
 #' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophe's from 
 #' the output.
-#' @param \ldots further arguments passed to strip function.
-#' @return Returns a vector of striped words.
+#' @return Returns a vector of stripped words.
 #' @keywords bag-of-words
 #' @rdname bag_o_words
 #' @export
@@ -30,7 +29,30 @@
 #' }
 bag_o_words <-
 function(text.var, apostrophe.remove = FALSE, ...) {
-    unblanker(words(strip(clean(text.var), 
+    if (identical(list(), list(...))) {
+        bag_o_words1(x = text.var, apostrophe.remove = apostrophe.remove, ...)
+    } else {
+        bag_o_words1(x = text.var, apostrophe.remove = apostrophe.remove)
+    }
+}
+
+bag_o_words1 <- 
+function(x, apostrophe.remove = FALSE) {
+    x <- x[!is.na(x)]
+    x <- paste(x, collapse=" ")
+    if(apostrophe.remove) {
+        reg <- "[^[:alpha:]]"
+        x <- gsub("'", "", x)
+    } else {
+        reg <- "[^[:alpha:]|\\']"
+    }
+    x <- strsplit(tolower(gsub(reg, " ", x)), "\\s+")[[1]]
+    x[x != ""]
+}
+
+bag_o_words2 <-
+function(x, apostrophe.remove = FALSE, ...) {
+    unblanker(words(strip(clean(x), 
         apostrophe.remove = apostrophe.remove, ...)))
 }
 

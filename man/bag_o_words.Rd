@@ -20,12 +20,10 @@ word_split(text.var)
 \item{apostrophe.remove}{logical.  If \code{TRUE} removes apostrophe's from
 the output.}
 
-\item{\ldots}{further arguments passed to strip function.}
-
 \item{na.rm}{logical.  If \code{TRUE} \code{NA}s are removed before pasting.}
 }
 \value{
-Returns a vector of striped words.
+Returns a vector of stripped words.
 
 \code{unbag} - Returns a string.
 
