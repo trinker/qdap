@@ -315,7 +315,6 @@ preprocessed.check_spelling_interactive <- function(x, ...){
 #' \code{"check_spelling_interactive"} object for subsequent text character 
 #' vector spelling corrections.
 #' 
-#' @param x An object of the class \code{"check_spelling_interactive"}.
 #' @param \ldots ignored
 #' @return \code{correct} - Returns a function for correcting spelling errors.
 #' @export

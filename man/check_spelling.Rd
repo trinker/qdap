@@ -69,8 +69,6 @@ of each word in the dictionary.}
 \item{click}{logical.  If \code{TRUE} the interface is a point and click GUI.
 If \code{FALSE} the interace is command line driven.}
 
-\item{x}{An object of the class \code{"check_spelling_interactive"}.}
-
 \item{\ldots}{ignored}
 }
 \value{

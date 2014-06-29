@@ -57,8 +57,9 @@ And constructed with the following guidelines:
 * `exclude` becomes a generic method for various classes.  Functionality is the 
   same but with improved code readability.
 
-* `check_spelling` (which_misspelled) allows the user to identify potentially 
-  misspelled words.
+* `check_spelling`, `check_spelling`, `which_misspelled`, and `correct` allow 
+  the user to identify potentially misspelled words and optionally suggest 
+  replacements.
 
 **MINOR FEATURES**
 
