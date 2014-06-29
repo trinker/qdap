@@ -7,7 +7,7 @@
   ...)
 }
 \arguments{
-\item{text.var}{A \code{\link[base]{check_spelling}} object.}
+\item{text.var}{A \code{\link[qdap]{check_spelling}} object.}
 
 \item{\ldots}{ignored}
 }

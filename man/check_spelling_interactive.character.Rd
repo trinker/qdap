@@ -26,6 +26,9 @@ This may be increased if no suitable suggestion is returned.}
 first letter of the misspelled word is correct.  This reduces the dictionary
 size, thus speeding up computation.}
 
+\item{click}{logical.  If \code{TRUE} the interface is a point and click GUI.
+If \code{FALSE} the interace is command line driven.}
+
 \item{dictionary}{A character vector of terms to search for.  To reduce
 overhead it is expected that this dictionary is lower case, unique terms.}
 

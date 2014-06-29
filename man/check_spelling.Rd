@@ -17,7 +17,10 @@ which_misspelled(x, suggest = FALSE, range = 2, max.distance = 0.15,
   nchar.dictionary = nchar(dictionary),
   first.char.dictionary = substring(dictionary, 1, 1))
 
-check_spelling_interactive(text.var, click = TRUE, ...)
+check_spelling_interactive(text.var, range = 2, max.distance = 0.15,
+  assume.first.correct = TRUE, click = TRUE,
+  dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE,
+  cores = parallel::detectCores()/2, ...)
 
 correct(x, ...)
 }
@@ -48,18 +51,47 @@ core or if the data set is smaller as the cluster takes time to create.}
 \item{cores}{The number of cores to use if \code{parallel = TRUE}.  Default
 is half the number of available cores.}
 
-\item{x}{A character string.}
+\item{x}{If \code{which_misspelled} - A character string.  If \code{correct} -
+An object from \code{check_spelling_interactive}.}
 
 \item{suggest}{logical.  If \code{TRUE} returns a
 \code{\link[base]{data.frame}} with possible suggestions for misspelled words
 (words not found in the dictionary).}
 
-\item{text.var}{The text variable or an object of the class
-\code{"check_spelling"}.}
+\item{nchar.dictionary}{A vector that correponds in length and content to
+\code{dictionary} with elements that are the precalculated number of
+characters for each word in the dictionary.}
 
-\item{click}{logical.  If \code{TRUE} the user will interactively conduct a
-spell check via a click GUI approach.  If \code{FALSE} the user interacts via
-the command line.}
+\item{first.char.dictionary}{A vector that corresponds in length ans content
+to \code{dictionary} with elements that are the pre-allotted first characters
+of each word in the dictionary.}
+
+\item{range}{An integer of length 1 to use as a range for number of
+characters, beyond the number of characters of a word not found in the
+\code{dictionary}, to initially limit \code{dictionary} size and thus time to
+find a suggested replacement term.  This may be expanded if no suitable
+suggestion is returned.}
+
+\item{max.distance}{A maximum distance to use as a starting \code{dictionary}
+reduction as the \code{max.distance} passed to \code{\link[base]{agrep}}.
+This may be increased if no suitable suggestion is returned.}
+
+\item{assume.first.correct}{logical.  If \code{TRUE} it is assumed that the
+first letter of the misspelled word is correct.  This reduces the dictionary
+size, thus speeding up computation.}
+
+\item{click}{logical.  If \code{TRUE} the interface is a point and click GUI.
+If \code{FALSE} the interace is command line driven.}
+
+\item{dictionary}{A character vector of terms to search for.  To reduce
+overhead it is expected that this dictionary is lower case, unique terms.}
+
+\item{parallel}{logical.  If \code{TRUE} attempts to run the function on
+multiple cores.  Note that this may not mean a speed boost if you have one
+core or if the data set is smaller as the cluster takes time to create.}
+
+\item{cores}{The number of cores to use if \code{parallel = TRUE}.  Default
+is half the number of available cores.}
 
 \item{\ldots}{Arguments passed to \code{\link[qdap]{check_spelling}}.}
 

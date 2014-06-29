@@ -5,6 +5,7 @@
 #' @param text.var The text variable.
 #' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophe's from 
 #' the output.
+#' @param \ldots Additional arguments passed to strip.
 #' @return Returns a vector of stripped words.
 #' @keywords bag-of-words
 #' @rdname bag_o_words

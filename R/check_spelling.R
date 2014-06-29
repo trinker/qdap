@@ -142,10 +142,17 @@ check_spelling <- function(text.var, range = 2, max.distance = .15,
 #' 
 #' \code{which_misspelled}  - Check the spelling for a string. 
 #' 
-#' @param x A character string.
+#' @param x If \code{which_misspelled} - A character string.  If \code{correct} -
+#' An object from \code{check_spelling_interactive}.
 #' @param suggest logical.  If \code{TRUE} returns a 
 #' \code{\link[base]{data.frame}} with possible suggestions for misspelled words 
 #' (words not found in the dictionary).
+#' @param nchar.dictionary A vector that correponds in length and content to 
+#' \code{dictionary} with elements that are the precalculated number of 
+#' characters for each word in the dictionary.
+#' @param first.char.dictionary A vector that corresponds in length ans content 
+#' to \code{dictionary} with elements that are the pre-allotted first characters
+#' of each word in the dictionary.
 #' @return \code{which_misspelled} - Returns either a named vector (names are 
 #' the word number) of possible misspelled words (if\code{suggestions = FALSE}) 
 #' or a \code{\link[base]{data.frame}} with \code{word.no} (number of misspelled 
@@ -247,11 +254,26 @@ print.which_misspelled <- function(x, ...){
 #' 
 #' \code{check_spelling_interactive} - Interactively check spelling.
 #' 
-#' @param text.var  The text variable or an object of the class 
-#' \code{"check_spelling"}.
-#' @param click logical.  If \code{TRUE} the user will interactively conduct a 
-#' spell check via a click GUI approach.  If \code{FALSE} the user interacts via 
-#' the command line. 
+#' @param range An integer of length 1 to use as a range for number of 
+#' characters, beyond the number of characters of a word not found in the 
+#' \code{dictionary}, to initially limit \code{dictionary} size and thus time to 
+#' find a suggested replacement term.  This may be expanded if no suitable 
+#' suggestion is returned.
+#' @param max.distance A maximum distance to use as a starting \code{dictionary} 
+#' reduction as the \code{max.distance} passed to \code{\link[base]{agrep}}.  
+#' This may be increased if no suitable suggestion is returned.
+#' @param assume.first.correct logical.  If \code{TRUE} it is assumed that the 
+#' first letter of the misspelled word is correct.  This reduces the dictionary 
+#' size, thus speeding up computation.
+#' @param click logical.  If \code{TRUE} the interface is a point and click GUI.
+#' If \code{FALSE} the interace is command line driven.
+#' @param dictionary A character vector of terms to search for.  To reduce 
+#' overhead it is expected that this dictionary is lower case, unique terms.
+#' @param parallel logical.  If \code{TRUE} attempts to run the function on 
+#' multiple cores.  Note that this may not mean a speed boost if you have one 
+#' core or if the data set is smaller as the cluster takes time to create.  
+#' @param cores The number of cores to use if \code{parallel = TRUE}.  Default 
+#' is half the number of available cores. 
 #' @param \ldots Arguments passed to \code{\link[qdap]{check_spelling}}.
 #' @note The user may go back (undo) pressing \code{"TYPE MY OWN"} entering 
 #' either \code{"!"} (not) or \code{"0"} (similar to a phone system).  The 
@@ -262,9 +284,20 @@ print.which_misspelled <- function(x, ...){
 #' the corrected text, the replacement list (via an \code{attribute} to the 
 #' character vector), and a function to correct the same spelling errors in 
 #' subsequent text character vectors.
-check_spelling_interactive <- function(text.var, click = TRUE, ...){
+check_spelling_interactive <- function(text.var, range = 2, 
+    max.distance = .15, assume.first.correct = TRUE, click = TRUE, 
+    dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
+    cores = parallel::detectCores()/2, ...) {
+
     text.var
     click
+    range
+    max.distance
+    assume.first.correct
+    dictionary
+    parallel
+    cores
+    
     UseMethod("check_spelling_interactive")
 }
 
@@ -328,6 +361,8 @@ correct <- function(x, ...){
 #' @param assume.first.correct logical.  If \code{TRUE} it is assumed that the 
 #' first letter of the misspelled word is correct.  This reduces the dictionary 
 #' size, thus speeding up computation.
+#' @param click logical.  If \code{TRUE} the interface is a point and click GUI.
+#' If \code{FALSE} the interace is command line driven.
 #' @param dictionary A character vector of terms to search for.  To reduce 
 #' overhead it is expected that this dictionary is lower case, unique terms.
 #' @param parallel logical.  If \code{TRUE} attempts to run the function on 
@@ -387,6 +422,8 @@ check_spelling_interactive.character <- function(text.var, range = 2,
 #' @param assume.first.correct logical.  If \code{TRUE} it is assumed that the 
 #' first letter of the misspelled word is correct.  This reduces the dictionary 
 #' size, thus speeding up computation.
+#' @param click logical.  If \code{TRUE} the interface is a point and click GUI.
+#' If \code{FALSE} the interace is command line driven.
 #' @param dictionary A character vector of terms to search for.  To reduce 
 #' overhead it is expected that this dictionary is lower case, unique terms.
 #' @param parallel logical.  If \code{TRUE} attempts to run the function on 
@@ -430,7 +467,7 @@ check_spelling_interactive.factor <- function(text.var, range = 2,
 #' View check_spelling check_spelling_interactive.
 #' 
 #' check_spelling Method for check_spelling_interactive
-#' @param text.var A \code{\link[base]{check_spelling}} object.
+#' @param text.var A \code{\link[qdap]{check_spelling}} object.
 #' @param \ldots ignored
 #' @export
 #' @method check_spelling_interactive check_spelling
