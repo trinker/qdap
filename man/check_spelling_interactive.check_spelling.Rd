@@ -3,11 +3,40 @@
 \alias{check_spelling_interactive.check_spelling}
 \title{Check Spelling}
 \usage{
-\method{check_spelling_interactive}{check_spelling}(text.var, click = TRUE,
-  ...)
+\method{check_spelling_interactive}{check_spelling}(text.var, range = 2,
+  max.distance = 0.15, assume.first.correct = TRUE, click = TRUE,
+  dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE,
+  cores = parallel::detectCores()/2, ...)
 }
 \arguments{
 \item{text.var}{A \code{\link[qdap]{check_spelling}} object.}
+
+\item{range}{An integer of length 1 to use as a range for number of
+characters, beyond the number of characters of a word not found in the
+\code{dictionary}, to initially limit \code{dictionary} size and thus time to
+find a suggested replacement term.  This may be expanded if no suitable
+suggestion is returned.}
+
+\item{max.distance}{A maximum distance to use as a starting \code{dictionary}
+reduction as the \code{max.distance} passed to \code{\link[base]{agrep}}.
+This may be increased if no suitable suggestion is returned.}
+
+\item{assume.first.correct}{logical.  If \code{TRUE} it is assumed that the
+first letter of the misspelled word is correct.  This reduces the dictionary
+size, thus speeding up computation.}
+
+\item{click}{logical.  If \code{TRUE} the interface is a point and click GUI.
+If \code{FALSE} the interace is command line driven.}
+
+\item{dictionary}{A character vector of terms to search for.  To reduce
+overhead it is expected that this dictionary is lower case, unique terms.}
+
+\item{parallel}{logical.  If \code{TRUE} attempts to run the function on
+multiple cores.  Note that this may not mean a speed boost if you have one
+core or if the data set is smaller as the cluster takes time to create.}
+
+\item{cores}{The number of cores to use if \code{parallel = TRUE}.  Default
+is half the number of available cores.}
 
 \item{\ldots}{ignored}
 }

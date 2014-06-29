@@ -254,27 +254,8 @@ print.which_misspelled <- function(x, ...){
 #' 
 #' \code{check_spelling_interactive} - Interactively check spelling.
 #' 
-#' @param range An integer of length 1 to use as a range for number of 
-#' characters, beyond the number of characters of a word not found in the 
-#' \code{dictionary}, to initially limit \code{dictionary} size and thus time to 
-#' find a suggested replacement term.  This may be expanded if no suitable 
-#' suggestion is returned.
-#' @param max.distance A maximum distance to use as a starting \code{dictionary} 
-#' reduction as the \code{max.distance} passed to \code{\link[base]{agrep}}.  
-#' This may be increased if no suitable suggestion is returned.
-#' @param assume.first.correct logical.  If \code{TRUE} it is assumed that the 
-#' first letter of the misspelled word is correct.  This reduces the dictionary 
-#' size, thus speeding up computation.
 #' @param click logical.  If \code{TRUE} the interface is a point and click GUI.
 #' If \code{FALSE} the interace is command line driven.
-#' @param dictionary A character vector of terms to search for.  To reduce 
-#' overhead it is expected that this dictionary is lower case, unique terms.
-#' @param parallel logical.  If \code{TRUE} attempts to run the function on 
-#' multiple cores.  Note that this may not mean a speed boost if you have one 
-#' core or if the data set is smaller as the cluster takes time to create.  
-#' @param cores The number of cores to use if \code{parallel = TRUE}.  Default 
-#' is half the number of available cores. 
-#' @param \ldots Arguments passed to \code{\link[qdap]{check_spelling}}.
 #' @note The user may go back (undo) pressing \code{"TYPE MY OWN"} entering 
 #' either \code{"!"} (not) or \code{"0"} (similar to a phone system).  The 
 #' second choice in the \code{"SELECT REPLACEMNT:"} will be the original word.
@@ -468,10 +449,33 @@ check_spelling_interactive.factor <- function(text.var, range = 2,
 #' 
 #' check_spelling Method for check_spelling_interactive
 #' @param text.var A \code{\link[qdap]{check_spelling}} object.
+#' @param range An integer of length 1 to use as a range for number of 
+#' characters, beyond the number of characters of a word not found in the 
+#' \code{dictionary}, to initially limit \code{dictionary} size and thus time to 
+#' find a suggested replacement term.  This may be expanded if no suitable 
+#' suggestion is returned.
+#' @param max.distance A maximum distance to use as a starting \code{dictionary} 
+#' reduction as the \code{max.distance} passed to \code{\link[base]{agrep}}.  
+#' This may be increased if no suitable suggestion is returned.
+#' @param assume.first.correct logical.  If \code{TRUE} it is assumed that the 
+#' first letter of the misspelled word is correct.  This reduces the dictionary 
+#' size, thus speeding up computation.
+#' @param click logical.  If \code{TRUE} the interface is a point and click GUI.
+#' If \code{FALSE} the interace is command line driven.
+#' @param dictionary A character vector of terms to search for.  To reduce 
+#' overhead it is expected that this dictionary is lower case, unique terms.
+#' @param parallel logical.  If \code{TRUE} attempts to run the function on 
+#' multiple cores.  Note that this may not mean a speed boost if you have one 
+#' core or if the data set is smaller as the cluster takes time to create.  
+#' @param cores The number of cores to use if \code{parallel = TRUE}.  Default 
+#' is half the number of available cores.  
 #' @param \ldots ignored
 #' @export
 #' @method check_spelling_interactive check_spelling
-check_spelling_interactive.check_spelling <- function(text.var, click = TRUE, ...) {
+check_spelling_interactive.check_spelling <- function(text.var, range = 2, 
+    max.distance = .15, assume.first.correct = TRUE, click = TRUE, 
+    dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
+    cores = parallel::detectCores()/2, ...) {
 
     out <- split(out, out[["not.found"]])
     suggests <- lapply(out, function(x) unlist(x[1, 4:5], use.names = FALSE))
