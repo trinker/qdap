@@ -1,0 +1,675 @@
+%====================
+%  Document Class
+%====================
+\documentclass{article}
+%====================
+%  Packages
+%====================
+\usepackage{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{url}
+\usepackage[authoryear]{natbib}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{animate}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{booktabs}
+\usepackage{bookmark}
+\usepackage{caption}
+
+\captionsetup{
+  font=footnotesize,
+  justification=raggedright,
+  singlelinecheck=false
+}
+%====================
+%  Custom Commands
+%====================
+\renewcommand{\sfdefault}{lmss}
+\renewcommand{\ttdefault}{lmtt}
+\newcommand\posscite[1]{\citeauthor{#1}'s (\citeyear{#1})} 
+\newcommand\poscite[1]{\citeauthor{#1}' (\citeyear{#1})}
+%====================
+%  Formatting
+%====================
+%\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+
+%====================
+%  Other
+%====================
+\makeatletter
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+% \VignetteIndexEntry{qdap-tm Package Compatibility}
+% \VignetteEngine{knitr}
+
+\makeatother
+%===============================================================================
+\begin{document}
+
+\title{qdap-tm Package Compatibility}
+\author{Tyler W. Rinker}
+\date{\today}
+\maketitle
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=3.5in]{imgs/qdaplogo.png}
+\end{figure}
+
+The \textbf{qdap} package \citep{R-qdap} is an R package designed to assist in quantitative discourse analysis. The package stands as a bridge between qualitative transcripts of dialogue and statistical analysis and visualization.  The \textbf{tm} package \citep{R-tm} is a major R \citep{R-core} package used for a variety of text mining tasks. Many text analysis packages have been built around the \textbf{tm} package's infrastructure (see \href{http://cran.r-project.org/web/views/NaturalLanguageProcessing.html}{CRAN Task View: Natural Language Processing}).  As \textbf{qdap} aims to act as a bridge to other R text mining analyses it is important that \textbf{qdap} provides a means of moving between the various \textbf{qdap} and \textbf{tm} data types.  
+
+This vignette serves as a guide towards navigating between the \textbf{qdap} and \textbf{tm} packages.  Specifically, the two goals of this vignette are to (1) describe the various data formats of the two packages and (2) demonstrate the use of \textbf{qdap} functions that enable the user to move seamlessly between the two packages.
+
+<<setup, include=FALSE, cache=FALSE>>=
+library(knitr); library(qdap); library(tm)
+opts_chunk$set(fig.path='figure/minimal-', fig.align='center', fig.show='hold', 
+    tidy=FALSE, cache=FALSE)
+options(replace.assign=TRUE, width=90)
+pdf.options(useDingbats = TRUE)
+@
+
+\newpage
+\section{Data Formats}
+
+\hspace{.4cm} The \textbf{qdap} and \textbf{tm} packages each have two basic data formats.  \textbf{qdap} stores raw text data in the form of a \texttt{data.frame} augmented with columns of demographic variables whereas \textbf{tm} stores raw text as a \texttt{Corpus} and annotates demographic information with Meta Data attributes.  The structures are both \texttt{list}s and are comparable.
+
+The second format both packages use is a matrix structure of word frequency counts.  The \textbf{qdap} package utilizes the \emph{Word Frequency Matrix} (\texttt{wfm} function) whereas the \textbf{tm} package utilizes the \emph{Term Document Matrix} or \emph{Document Term Matrix} (\texttt{TermDocumentMatrix} and \texttt{DocumentTermMatrix} functions).  Again the structure is similar between these two data forms.  Table~\ref{datforms} lays out the data forms of the two packages.
+
+
+
+\begin{singlespace}
+\begin{table}[!ht]
+\begin{center}
+  \captionbox{\textbf{qdap}-\textbf{tm} Data forms \label{datforms}}{%
+    \begin{tabular}{p{2cm}p{2cm}p{8cm}}
+    \hline
+    \multicolumn{1}{l}{Package} & \multicolumn{1}{l}{Raw Text} & \multicolumn{1}{l}{Word Counts}  \\
+    \hline
+    \noindent \textbf{qdap} & \noindent Dataframe & \noindent  Word Frequency Matrix \\
+    \noindent \textbf{tm} & \noindent Corpus & \noindent Term Document Matrix/Document Term matrix \\
+    \hline
+    \end{tabular}
+  }
+\end{center}
+\end{table}
+\end{singlespace}
+
+\noindent Figure~\ref{convert} provides a visual overview of the \textbf{qdap} functions used to convert between data structures.  Many of these conversion could be achieved via the \textbf{tm} package as well.
+
+\begin{figure}[h!]
+  \centering
+    \includegraphics[width=4.5in]{imgs/data_convert.png} \\
+\hspace{-.95cm} \scriptsize{\noindent *Note: \texttt{as.tdm} \& \texttt{as.dtm} are short hand for \texttt{as.TermDocumentMatrix} \& \texttt{as.DocumentTermMatrix}}
+    \caption{Converting Data between \textbf{qdap} and \textbf{tm}}
+  \label{convert}
+\end{figure}
+
+One of the most visible differences between \textbf{qdap}-\textbf{tm} data forms is that \textbf{qdap} enables the user to readily view the data while the \textbf{tm} utilizes a print method that provides a summary of the data.  The \texttt{tm::inspect} function enables the user to view \textbf{tm} data forms. The \textbf{qdap} package provides \texttt{qdap::qview} and \texttt{qdap::htruncdf} functions to view more digestible amounts of the data. Let's have a look at the different data types.  We'll start by loading both packages:
+
+<<packs, eval=FALSE>>=
+library(qdap); library(tm)
+@
+
+\noindent Now let us have a look at the raw text storage of both packages. \\ 
+
+\subsection{Raw Text}
+\subsubsection{qdap's Raw Text}
+
+<<qdap_view_text, eval=FALSE>>=
+DATA
+qview(DATA)
+htruncdf(DATA)
+@
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+## > DATA
+##
+##        person sex adult                                 state code
+## 1         sam   m     0         Computer is fun. Not too fun.   K1
+## 2        greg   m     0               No it's not, it's dumb.   K2
+## .
+## .
+## .
+## 9       sally   f     0           What are you talking about?   K9
+## 10 researcher   f     1         Shall we move on?  Good then.  K10
+## 11       greg   m     0 I'm hungry.  Let's eat.  You already?  K11
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+## > qview(DATA)
+##
+## ========================================================================
+## nrow =  11           ncol =  5             DATA
+## ========================================================================
+##        person sex adult      state code
+## 1         sam   m     0 Computer i   K1
+## 2        greg   m     0 No it's no   K2
+## .
+## .
+## .
+## 8         sam   m     0 I distrust   K8
+## 9       sally   f     0 What are y   K9
+## 10 researcher   f     1 Shall we m  K10
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+## > htruncdf(DATA)
+##
+##        person sex adult      state code
+## 1         sam   m     0 Computer i   K1
+## 2        greg   m     0 No it's no   K2
+## .
+## .
+## .
+## 8         sam   m     0 I distrust   K8
+## 9       sally   f     0 What are y   K9
+## 10 researcher   f     1 Shall we m  K10
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\subsubsection{tm's Raw Text}
+<<tm_view_text, eval=FALSE>>=
+data("crude")
+crude
+inspect(crude)
+@
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+## > crude
+## A corpus with 20 text documents
+## 
+## > crude[[1]]
+## Diamond Shamrock Corp said that
+## effective today it had cut its contract prices for crude oil by
+## 1.50 dlrs a barrel.
+##     The reduction brings its posted price for West Texas
+## Intermediate to 16.00 dlrs a barrel, the copany said.
+##     "The price reduction today was made in the light of falling
+## .
+## .
+## .
+##     Diamond is the latest in a line of U.S. oil companies that
+## have cut its contract, or posted, prices over the last two days
+## citing weak oil markets.
+##  Reuter
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\subsection{Word/Term Frequency Counts}
+
+\hspace{.4cm} Now we'll look at how the two packages handle word frequency counts.  We'll start by setting up the raw text forms the two packages expect.
+
+<<freq_dat>>=
+tm_dat <- qdap_dat <- DATA[1:4, c(1, 4)]
+rownames(tm_dat) <- paste("docs", 1:nrow(tm_dat))
+tm_dat <- Corpus(DataframeSource(tm_dat[, 2, drop=FALSE]))
+@
+ 
+\noindent Both \texttt{qdap\_dat} and \texttt{tm\_dat} are storing this basic information:
+
+<<freq_dat_view, echo=FALSE>>=
+qdap_dat
+@
+
+\newpage
+
+\subsubsection{qdap's Frequency Counts}
+
+<<freq_dat_qdap, eval=FALSE>>=
+with(qdap_dat, wfm(state, person))
+@
+
+<<freq_dat_qdap2, echo=FALSE>>=
+with(qdap_dat, wfm(state, person))
+@
+
+
+\subsubsection{tm's Frequency Counts}
+
+<<freq_dat_view_tm1, eval=FALSE>>=
+TermDocumentMatrix(tm_dat, 
+    control = list(
+        removePunctuation = TRUE, 
+        wordLengths=c(0, Inf)
+    )
+)
+@
+
+<<freq_dat_view_tm1b, echo=FALSE>>=
+TermDocumentMatrix(tm_dat, 
+    control = list(
+        removePunctuation = TRUE, 
+        wordLengths=c(0, Inf)
+    )
+)
+@
+
+\noindent Now we'll Look at the tm output using \texttt{inspect}.
+
+<<freq_dat_view_tm2, eval=FALSE>>=
+inspect(TermDocumentMatrix(tm_dat, 
+    control = list(
+        removePunctuation = TRUE, 
+        wordLengths=c(0, Inf)
+    )
+))
+@
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+##           Docs
+## Terms      1 2 3 4
+##   computer 1 0 0 0
+##   do       0 0 1 0
+##   dumb     0 1 0 0
+##   fun      2 0 0 0
+##   is       1 0 0 0
+##   it       0 0 0 1
+##   its      0 2 0 0
+##   liar     0 0 0 1
+##   no       0 1 0 0
+##   not      1 1 0 0
+##   should   0 0 1 0
+##   stinks   0 0 0 1
+##   too      1 0 0 0
+##   we       0 0 1 0
+##   what     0 0 1 0
+##   you      0 0 0 1
+
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+The two matrices are essentially the same, with the exception of column order and names.  Notice that by default \textbf{tm} removes words with fewer characters (word length) and does not discard punctuation (we made the matrices equal by specifying \texttt{removePunctuation = TRUE} and \texttt{wordLengths=c(0, Inf)} for \textbf{tm}'s \texttt{control} argument).  \textbf{qdap} takes the opposite approach, removing punctuation and utilizing all words, by default.  Likewise, the \textbf{tm} package stores demographic information as meta data within the \texttt{Corpus}, whereas, \textbf{qdap} incorporates the demographics with the text into a single \texttt{data.frame} structure.  These differences arise out of the intended uses, audiences, and philosophies of the package authors.  Each has strengths in particular situations.  The \textbf{qdap} output is an ordinary \texttt{matrix} whereas the \textbf{tm} output is a more compact \texttt{simple\_triplet\_matrix}.  While the storage is different, both packages can be made to mimic the default of the other.  
+
+Also note that the \textbf{qdap} \texttt{summary} method for \texttt{wfm} provides the user with information similar to the \texttt{TermDocumentMatrix}/\texttt{DocumentTermMatrix} functions' default \texttt{print} method.
+
+
+<<sum1, eval=FALSE>>=
+summary(with(qdap_dat, wfm(state, person)))
+@
+
+<<sum2, echo=FALSE>>=
+summary(with(qdap_dat, wfm(state, person)))
+@
+
+Now we'll look at some \textbf{qdap} functions that enable the user to move between packages, gaining the flexibility and benefits of both packages.
+
+
+\section{Converting Data Forms}
+
+\hspace{.4cm} We'll again use the following preset data:
+
+<<data_set_up>>=
+tm_dat <- qdap_dat <- DATA[1:4, c (1, 4) ]
+rownames (tm_dat) <- paste ("docs", 1: nrow (tm_dat))
+tm_dat <- Corpus(DataframeSource (tm_dat[, 2, drop=FALSE]))
+
+qdap_wfm <- with (qdap_dat, wfm (state, person))
+tm_tdm <- TermDocumentMatrix (tm_dat,
+    control = list (
+        removePunctuation = TRUE,
+        wordLengths= c (0, Inf)
+    )
+)
+@
+
+\begin{enumerate}
+  \item \texttt{qdap\_dat} -- is a \underline{\textbf{qdap} raw text} form
+  \item \texttt{tm\_dat} -- is a \underline{\textbf{tm} raw text} format
+  \item \texttt{qdap\_wfm} -- is a \underline{\textbf{qdap} word frequencies count}
+  \item \texttt{tm\_tdm} -- is a \underline{\textbf{tm} word frequencies count}
+\end{enumerate}
+
+\noindent The reader is encouraged to view each of the data formats:
+
+<<datviewing, eval=FALSE>>=
+qdap_dat; qview(qdap_dat)
+tm_dat; inspect(tm_dat)
+qdap_wfm; summary(qdap_wfm)
+tm_tdm; inspect(tm_tdm)
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection{Corpus to data.frame}
+
+\hspace{.4cm} To move from a \texttt{Corpus} to a \texttt{data.frame} the \texttt{as.data.frame} function is used as follows:
+
+<<corp2df, eval=FALSE>>=
+as.data.frame(tm_dat)
+@
+
+<<corp2df2, echo=FALSE>>=
+as.data.frame(tm_dat)
+@
+
+\subsection{data.frame to Corpus}
+
+\hspace{.4cm} To move from a \texttt{data.frame} to a \texttt{Corpus} the \texttt{as.Corpus} function is used as follows:
+
+<<df2corp, eval=FALSE>>=
+with(qdap_dat, as.Corpus(state, person))
+@
+
+<<df2corp2, echo=FALSE>>=
+with(qdap_dat, as.Corpus(state, person))
+@
+
+\scriptsize\noindent *Note the 3 text documents; one for each grouping variable.  To get one for each row use: \\ \indent \texttt{with(qdap\_dat, as.Corpus(state, id(person)))} \normalsize
+
+\subsection{TermDocumentMatrix/DocumentTermMatrix to wfm}
+
+\hspace{.4cm} To move from a \texttt{TermDocumentMatrix} to a \texttt{wfm} the \texttt{as.wfm} function is used as follows:
+
+<<as.wfm1, eval=FALSE>>=
+as.wfm(tm_tdm)
+@
+
+<<as.wfm2, echo=FALSE>>=
+as.wfm(tm_tdm)
+@
+
+
+\subsection{wfm to TermDocumentMatrix/DocumentTermMatrix}
+
+\hspace{.4cm} To move from a \texttt{wfm} to a \texttt{TermDocumentMatrix} or \texttt{DocumentTermMatrix} the \texttt{as.tdm} and \texttt{as.dtm} functions can be used as follows:
+
+<<wfm2tdm, eval=FALSE>>=
+as.tdm(qdap_wfm)
+as.dtm(qdap_wfm)
+@
+
+<<wfm2tdm2, echo=FALSE>>=
+as.tdm(qdap_wfm)
+@
+
+<<wfm2tdm3, echo=FALSE>>=
+as.dtm(qdap_wfm)
+@
+
+\subsection{Corpus to wfm}
+
+\hspace{.4cm} One can also move directly from a \textbf{tm} \texttt{Corpus} to a \textbf{qdap} \texttt{wfm} with the \texttt{as.wfm} function.
+
+<<corp2wfma, eval=FALSE>>=
+as.wfm(tm_dat)
+@
+
+<<corp2wfmb, echo=FALSE>>=
+as.wfm(tm_dat)
+@
+
+\section{Stemming, Stopwords, and Choosing n-Character Words/Terms from a wfm}
+
+
+\hspace{.4cm} Many of the \textbf{qdap} and \textbf{tm} functions have means of stemming, removing stopwords, and bounding, that is filtering rows (greater than, equal to or less than) meeting min/max criteria.  \textbf{qdap} also offers two external functions to address these issues directly.  
+
+
+\subsection{stemming}
+
+\hspace{.4cm} \textbf{qdap} takes the approach that the user stems the dataframe upon creation (using \texttt{sentSplit(..., stem = TRUE)}) or after (using the \texttt{stem2df} function), maintaining a column of stemmed and unstemmed text for various analyses.
+
+<<stem, eval=FALSE>>=
+sentSplit(qdap_dat, "state", stem = TRUE)
+@
+
+<<stem2, echo=FALSE>>=
+sentSplit(qdap_dat, "state", stem = TRUE)
+@
+
+
+\subsection{Filtering: Stopwords and Bounding}
+    
+
+\hspace{.4cm} \textbf{qdap}'s \texttt{Filter} function allows the user to remove stopwords and bound a Word Frequency Matrix (\texttt {wfm}).  First we'll construct a minimal Word Frequency Matrix:
+
+<<wfmdat>>=
+qdap_wfm <- with(qdap_dat, wfm(state, person))
+@
+
+<<wfmdat2, echo=FALSE>>=
+with(qdap_dat, wfm(state, person))
+@
+
+Now we'll move through a series of examples demonstrating the usage of \texttt{Filter} on a \texttt{wfm} object.
+
+
+<<filtera, eval=FALSE>>=
+Filter(qdap_wfm, min = 5)
+@
+
+
+<<filter2, echo=FALSE>>=
+Filter(qdap_wfm, min = 5)
+@
+
+
+<<filterb, eval=FALSE>>=
+Filter(qdap_wfm, min = 5, max = 7)
+@
+
+<<filter3, echo=FALSE>>=
+Filter(qdap_wfm, min = 5, max = 7)
+@
+
+<<filterd, eval=FALSE>>=
+Filter(qdap_wfm, 4, 4)
+@
+
+<<filter4, echo=FALSE>>=
+Filter(qdap_wfm, 4, 4)
+@
+
+<<filtere, eval=FALSE>>=
+Filter(qdap_wfm, 4, 4, count.apostrophe = FALSE)
+@
+
+<<filter5, echo=FALSE>>=
+Filter(qdap_wfm, 4, 4, count.apostrophe = FALSE)
+@
+
+<<filterf, eval=FALSE>>=
+Filter(qdap_wfm, 3, 4)
+@
+
+<<filter6, echo=FALSE>>=
+Filter(qdap_wfm, 3, 4)
+@
+
+<<filterg, eval=FALSE>>=
+Filter(qdap_wfm, 3, 4, stopwords = Top200Words)
+@
+
+<<filter7, echo=FALSE>>=
+Filter(qdap_wfm, 3, 4, stopwords = Top200Words)
+@
+
+
+\section{Apply Functions Intended for TermDocumentMatrix to wfm Object}
+
+\hspace{.4cm} At times it is convenient to apply a function intended for a \textbf{tm} \texttt{TermDocumentMatrix} or \texttt{DocumentTermMatrix} directly to a \textbf{qdap} \texttt{wfm} object.  \textbf{qdap}'s \texttt{apply\_as\_tm} function enables these functions to be used directly on a \texttt{wfm}.
+
+\subsection{A Minimal wfm Object}
+
+\hspace{.4cm} Let us begin with a slightly larger \texttt{wfm} minimal example:
+
+<<wfmdat2b>>=
+a <- with(DATA, wfm(state, list(sex, adult)))
+@
+
+<<wfmdat2c, echo=FALSE>>=
+summary(a)
+@
+
+
+\subsection{A Small Demonstration}
+
+\hspace{.4cm} Here we will use the \textbf{tm} package's \texttt{removeSparseTerms} to remove sparse terms from a \texttt{wfm} object and return a Word Frequency Matrix object (\texttt{wfm} class).
+
+<<apply_as_tm1>>=
+out <- apply_as_tm(a, tm::removeSparseTerms, sparse=0.6)
+@
+
+<<apply_as_tm2a, eval=FALSE>>=
+summary(out)
+@
+
+<<apply_as_tm2, echo=FALSE>>=
+summary(out)
+@
+
+<<apply_as_tm3a, eval=FALSE>>=
+class(out)
+@
+
+<<apply_as_tm3, echo=FALSE>>=
+class(out)
+@
+
+\subsection{Further Examples to Try}
+
+Here are some further examples to try:
+
+<<apply_as_tm4, eval=FALSE>>=
+apply_as_tm(a, tm::findAssocs, "computer", .8)
+apply_as_tm(a, tm::findFreqTerms, 2, 3)
+apply_as_tm(a, tm::Zipf_plot)
+apply_as_tm(a, tm::Heaps_plot)
+apply_as_tm(a, tm:::plot.TermDocumentMatrix, corThreshold = 0.4)
+
+library(proxy)
+apply_as_tm(a, tm::weightBin)
+apply_as_tm(a, tm::weightBin, to.qdap = FALSE)
+apply_as_tm(a, tm::weightSMART)
+apply_as_tm(a, tm::weightTfIdf)
+@
+
+\section{Apply Functions Intended for qdap Dataframes to tm Corpus}
+
+\hspace{.4cm} While the \textbf{tm} package (and other packages used on \textbf{tm} objects) tends to conduct analysis by feeding functions a \texttt{TermDocumentMatrix} or \texttt{DocumentTermMatrix} \textbf{qdap} generally feeds functions raw text directly.  There are advantages to both approaches (e.g., the matrix is a mathematical structure while raw text maintains word order).  Many \textbf{qdap} functions can be used on the \texttt{Corpus} structure via the \texttt{apply\_as\_df} function.    
+
+\subsection{A Small Demonstration}
+
+\hspace{.4cm} Here we will use the \textbf{qdap} package's \texttt{trans\_cloud} function, on our minimal \textbf{tm} \texttt{Corpus}, to produce a word cloud with particular words highlighted:
+
+<<apply_as_df1, eval = FALSE>>=
+matches <- list(
+    good = "fun",
+    bad = c("dumb", "stinks", "liar")
+)
+
+apply_as_df(tm_dat, trans_cloud, grouping.var=NULL,
+    target.words=matches, cloud.colors = c("red", "blue", "grey75"))
+@
+
+<<apply_as_df2, echo=FALSE, fig.height=5>>=
+matches <- list(
+    good = "fun",
+    bad = c("dumb", "stinks", "liar")
+)
+
+apply_as_df(tm_dat, trans_cloud, grouping.var=NULL,
+    target.words=matches, cloud.colors = c("red", "blue", "grey75"))
+@
+
+\subsection{Further Examples to Try}
+
+\hspace{.4cm} Here are some further examples to try:
+
+<<apply_as_df3, eval=FALSE>>=
+library(tm)
+reut21578 <- system.file("texts", "crude", package = "tm")
+reuters <- Corpus(DirSource(reut21578),
+    readerControl = list(reader = readReut21578XML))
+
+apply_as_df(reuters, word_stats)
+apply_as_df(reuters, formality)
+apply_as_df(reuters, word_list)
+apply_as_df(reuters, polarity)
+apply_as_df(reuters, Dissimilarity)
+apply_as_df(reuters, diversity)
+apply_as_df(tm_dat, pos_by)
+apply_as_df(reuters, flesch_kincaid)
+apply_as_df(tm_dat, trans_venn)
+apply_as_df(reuters, gantt_plot)
+apply_as_df(reuters, rank_freq_mplot)
+apply_as_df(reuters, character_table)
+apply_as_df(reuters, trans_cloud)
+
+matches2 <- list(
+    oil = qcv(oil, crude),
+    money = c("economic", "money")
+)
+
+(termco_out <- apply_as_df(reuters, termco, match.list = matches2))
+plot(termco_out, values = TRUE, high="red")
+
+(wordcor_out <- apply_as_df(reuters, word_cor, word = unlist(matches2)))
+plot(wordcor_out)
+
+(f_terms <- apply_as_df(reuters, freq_terms, at.least = 3))
+plot(f_terms)
+
+finds <- apply_as_df(reuters, freq_terms, at.least = 5,
+    top = 5, stopwords = Top100Words)
+apply_as_df(reuters, dispersion_plot, match.terms = finds[, 1],
+    total.color = NULL)
+@
+
+\section{Conclusion}
+
+\hspace{.4cm} This vignette described the various data formats for the \textbf{qdap} and \textbf{tm} packages.  It also demonstrated some of the basic functionality of the \textbf{qdap} functions designed to navigate between the two packages.  For more information on the \textbf{tm} package \citep{Feinerer2008} use:
+
+<<add1, eval=FALSE>>=
+browseVignettes(package = "tm")
+@
+
+\noindent Likewise, the user may view additional information about the \textbf{qdap} package \citep{R-qdap}:
+
+<<add2, eval=FALSE>>=
+browseVignettes(package = "qdap")
+@
+
+
+\section*{Acknowledgments}
+
+\textbf{qdap} relies heavily on the \textbf{tm} package.  The \textbf{tm} package has extended text analysis to the R platform.  Thank you to Ingo Feinerer and Kurt Hornik for their work on this and many other R packages. \\
+
+\noindent This document was produced with \textbf{knitr} \citep{R-knitr}.  Thank you to Yihui Xie for the \textbf{knitr} package and his many other contributions to the R community.
+
+
+\bibliographystyle{jss}
+\bibliography{qdap}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
