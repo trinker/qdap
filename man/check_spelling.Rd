@@ -119,9 +119,10 @@ A possible misspelled word is defined as not found in the
 not contain words with endings.  This may lead to false positives for
 misspelled words.
 
-The user may go back (undo) pressing \code{"TYPE MY OWN"} entering
+The user may go back (undo) by pressing \code{"TYPE MY OWN"} entering
 either \code{"!"} (not) or \code{"0"} (similar to a phone system).  The
-second choice in the \code{"SELECT REPLACEMNT:"} will be the original word.
+second choice in the \code{"SELECT REPLACEMNT:"} will be the original word
+and is prefixed with \code{"IGNORE:"}.  Press this to keep the original word.
 }
 \examples{
 \dontrun{

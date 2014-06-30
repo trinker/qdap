@@ -256,9 +256,10 @@ print.which_misspelled <- function(x, ...){
 #' 
 #' @param click logical.  If \code{TRUE} the interface is a point and click GUI.
 #' If \code{FALSE} the interace is command line driven.
-#' @note The user may go back (undo) pressing \code{"TYPE MY OWN"} entering 
+#' @note The user may go back (undo) by pressing \code{"TYPE MY OWN"} entering 
 #' either \code{"!"} (not) or \code{"0"} (similar to a phone system).  The 
-#' second choice in the \code{"SELECT REPLACEMNT:"} will be the original word.
+#' second choice in the \code{"SELECT REPLACEMNT:"} will be the original word 
+#' and is prefixed with \code{"IGNORE:"}.  Press this to keep the original word.
 #' @export
 #' @rdname check_spelling
 #' @return \code{check_spelling_interactive} - Returns a character vector with 
@@ -516,7 +517,8 @@ check_spelling_interactive_helper <- function(out, suggests, click, text.var) {
         repl2 <- NULL
 
         if (click) {
-            repl <- select.list(c("TYPE MY OWN", comb), title = "SELECT REPLACEMENT:")
+            repl <- select.list(c("TYPE MY OWN", paste("IGNORE:", comb[1]), comb[-1]), 
+                title = "SELECT REPLACEMENT:")
             if (repl == "TYPE MY OWN") {
                 ans <- "1" 
             } else { 
@@ -524,7 +526,7 @@ check_spelling_interactive_helper <- function(out, suggests, click, text.var) {
             }
         } else {
             message(under, "\nSELECT REPLACEMENT:")
-            ans <- menu(c("TYPE MY OWN", comb))
+            ans <- menu(c("TYPE MY OWN", paste("IGNORE:", comb[1]), comb[-1]))
         }
 
         if (ans == "1") {
@@ -533,7 +535,7 @@ check_spelling_interactive_helper <- function(out, suggests, click, text.var) {
             while (repl %in% c("0", "!")) {
 
                 if (click) {
-                    ans <- select.list(c("TYPE MY OWN", comb), 
+                    ans <- select.list(c("TYPE MY OWN", paste("IGNORE:", comb[1]), comb[-1]), 
                         title = "SELECT REPLACEMNT:")
                     if (ans == "TYPE MY OWN") {
                         ans <- "1" 
@@ -556,6 +558,8 @@ check_spelling_interactive_helper <- function(out, suggests, click, text.var) {
                 repl <- comb[ans - 1]
             }
         }
+
+        repl <- gsub("IGNORE: ", "", repl)
 
         data.frame(not.found = x[["not.found"]][1], 
             replacement = repl, stringsAsFactors = FALSE)
