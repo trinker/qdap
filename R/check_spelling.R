@@ -371,6 +371,8 @@ check_spelling_interactive.character <- function(text.var, range = 2,
     out <- lapply(out, "[", ,1:3)
 
     output <- check_spelling_interactive_helper(out, suggests, click, text.var=text.var)
+    
+    output <- output[apply(output, 1, function(x) x[1] != x[2]), ]    
 
     out <- mgsub(output[, 1], output[, 2], text.var, ignore.case = TRUE, fixed=FALSE)
 
@@ -432,6 +434,9 @@ check_spelling_interactive.factor <- function(text.var, range = 2,
     out <- lapply(out, "[", ,1:3)
 
     output <- check_spelling_interactive_helper(out, suggests, click, text.var=text.var)
+
+    output <- output[apply(output, 1, function(x) x[1] != x[2]), ]
+    
     out <- mgsub(output[, 1], output[, 2], text.var, ignore.case = TRUE, fixed=FALSE)
 
     class(out)  <- c("check_spelling_interactive", class(out))
@@ -483,6 +488,8 @@ check_spelling_interactive.check_spelling <- function(text.var, range = 2,
     output <- check_spelling_interactive_helper(out, suggests, click, 
         text.var=attributes(text.var)[["text.var"]])
 
+    output <- output[apply(output, 1, function(x) x[1] != x[2]), ]
+    
     out <- mgsub(output[, 1], output[, 2], attributes(text.var)[["text.var"]], 
         ignore.case = TRUE, fixed=FALSE)
 
