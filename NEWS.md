@@ -26,8 +26,8 @@ And constructed with the following guidelines:
   output.  This behavior has been fixed.  See GitHub <a href="https://github.com/trinker/qdap/issues/188">issue #188</a> for details.
 
 * `syn` returned antonyms for some words.  This was caused by the dictionary:
-  `key.syn` contained antonyms and elemets the were error messages (character).
-  This has been fixed.  Reference <a href="https://github.com/trinker/qdap/issues/190">issue #190</a>. (Jingjing Zou)
+  `qdapDictionaries::key.syn` contained antonyms and elemets the were error 
+  messages (character).  This has been fixed.  Reference <a href="https://github.com/trinker/qdap/issues/190">issue #190</a>. (Jingjing Zou)
 
 **NEW FEATURES**
 
