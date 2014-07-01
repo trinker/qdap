@@ -67,6 +67,9 @@ NEW FEATURES
 
 MINOR FEATURES
 
+* `dplyr`'s `%>%` imported for convenience.  See 
+  http://www.rdocumentation.org/packages/magrittr/functions/magrittr for details.
+
 IMPROVEMENTS
 
 * `wfm` gains a speedup through generic classes and `tm` package integration 
@@ -947,3 +950,6 @@ CHANGES IN qdap VERSION 0.2.0
 
 * Package designed to bridge the gap between qualitative data and quantitative 
   analysis
+
+
+

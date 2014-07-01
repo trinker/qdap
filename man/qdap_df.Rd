@@ -87,12 +87,13 @@ dat \%&\% boolean_search("it||!")
 dat \%&\% trans_context(person, which(end_mark(DATA.SPLIT[, "state"]) == "?"))
 dat \%&\% mgsub(c("it's", "I'm"), c("it is", "I am"))
 
-## combine with magrittr/dplyr
-library(magrittr)
+## combine with magrittr/dplyr chaining
 dat \%&\% wfm(person) \%>\% plot()
 dat \%&\% polarity(person) \%>\% scores()
 dat \%&\% polarity(person) \%>\% counts()
 dat \%&\% polarity(person) \%>\% scores()
+dat \%&\% polarity(person) \%>\% scores() \%>\% plot()
+dat \%&\% polarity(person) \%>\% scores \%>\% plot
 }
 }
 \references{

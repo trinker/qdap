@@ -1,6 +1,6 @@
 #' qdap Chaining
 #' 
-#' Chain \code{\link[qdap]{qdap_df}}s to \pkg{qdap} functions with a 
+#' \code{\%&\%} - Chain \code{\link[qdap]{qdap_df}}s to \pkg{qdap} functions with a 
 #' \code{text.var} argument.  Saves typing of an explicit \code{text.var} 
 #' argument and supplying a \code{\link[base]{data.frame}}. 
 #' 
@@ -50,12 +50,13 @@
 #' dat %&% trans_context(person, which(end_mark(DATA.SPLIT[, "state"]) == "?"))
 #' dat %&% mgsub(c("it's", "I'm"), c("it is", "I am"))
 #' 
-#' ## combine with magrittr/dplyr
-#' library(magrittr)
+#' ## combine with magrittr/dplyr chaining
 #' dat %&% wfm(person) %>% plot()
 #' dat %&% polarity(person) %>% scores()
 #' dat %&% polarity(person) %>% counts()
 #' dat %&% polarity(person) %>% scores()
+#' dat %&% polarity(person) %>% scores() %>% plot()
+#' dat %&% polarity(person) %>% scores %>% plot
 #' 
 #' ## Change text column in `qdap_df` (Example 1)
 #' dat2 <- sentSplit(DATA, "state", stem.col = TRUE)
@@ -93,3 +94,15 @@
 
 
 
+#' qdap Chaining
+#' 
+#' \code{\%>\%} - The \pkg{magrittr} "then" chain operator imported by 
+#' \pkg{dplyr}.  Imported for convenience.  See 
+#' \url{http://www.rdocumentation.org/packages/magrittr/functions/magrittr}
+#' for details.
+#' 
+#' @param lhs The value to be piped.
+#' @param rhs A function or expression.
+#' @export
+#' @rdname chain
+`%>%` <- dplyr::`%>%`

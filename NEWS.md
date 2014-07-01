@@ -67,6 +67,9 @@ And constructed with the following guidelines:
 
 **MINOR FEATURES**
 
+* `dplyr`'s `%&gt;%` imported for convenience.  See 
+  <a href="http://www.rdocumentation.org/packages/magrittr/functions/magrittr" target="_blank">http://www.rdocumentation.org/packages/magrittr/functions/magrittr</a> for details.
+
 **IMPROVEMENTS**
 
 * `wfm` gains a speedup through generic classes and `tm` package integration 
@@ -947,3 +950,5 @@ qdap 0.2.3
 
 * Package designed to bridge the gap between qualitative data and quantitative 
   analysis
+
+
