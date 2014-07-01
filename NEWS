@@ -32,7 +32,8 @@ BUG FIXES
 NEW FEATURES
 
 * `qdap_df` and `%&%` added to mimic some of the functionality of `dplyr`'s 
-  `tbl_df` and `%&gt;%` in a more specific, less flexible, `qdap` oriented way.
+  `tbl_df` and chaining pipe in a more specific, less flexible, `qdap` oriented 
+  way.
 
 * `Text` added to view and change the `text.var` attribute of a `data.frame of 
   the class `qdap_df`.
@@ -67,7 +68,7 @@ NEW FEATURES
 
 MINOR FEATURES
 
-* `dplyr`'s `%>%` imported for convenience.  See 
+* `dplyr`'s chaining pipe imported for convenience.  See 
   http://www.rdocumentation.org/packages/magrittr/functions/magrittr for details.
 
 IMPROVEMENTS

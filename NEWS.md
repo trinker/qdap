@@ -32,7 +32,8 @@ And constructed with the following guidelines:
 **NEW FEATURES**
 
 * `qdap_df` and `%&%` added to mimic some of the functionality of `dplyr`'s 
-  `tbl_df` and `%&gt;%` in a more specific, less flexible, `qdap` oriented way.
+  `tbl_df` and chaining pipe in a more specific, less flexible, `qdap` oriented 
+  way.
 
 * `Text` added to view and change the `text.var` attribute of a `data.frame of 
   the class `qdap_df`.
@@ -67,7 +68,7 @@ And constructed with the following guidelines:
 
 **MINOR FEATURES**
 
-* `dplyr`'s `%&gt;%` imported for convenience.  See 
+* `dplyr`'s chaining pipe imported for convenience.  See 
   <a href="http://www.rdocumentation.org/packages/magrittr/functions/magrittr" target="_blank">http://www.rdocumentation.org/packages/magrittr/functions/magrittr</a> for details.
 
 **IMPROVEMENTS**
