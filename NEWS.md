@@ -78,6 +78,10 @@ And constructed with the following guidelines:
 * Added message to `as.data.frame.Corpus` for missing end-marks suggesting the 
   use of: `sent.split = FALSE`.
 
+* `as.Corpus` familiy of functions didn't necessarily respect document names and
+  sometimes used numeric sequence instead.  The introduction of a reader via
+  `tm::readTabular` has fixed this.
+
 **CHANGES**
 
 * `as.data.frame.Corpus`'s default value for `sent.split` is now `FALSE`.

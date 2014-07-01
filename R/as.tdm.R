@@ -533,14 +533,17 @@ as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "docs",
     text = "text", sent.split = FALSE) {
 
     if(!is(x[[1]], "PlainTextDocument")) {
-        x <- tm_map(x, PlainTextDocument)
+        x <- tm::tm_map(x, PlainTextDocument)
     }
 
     qpaste <- function(x) paste(as.character(x), collapse = " ")
     out <- list2df(lapply(x, qpaste), col1 = text, col2 = doc)[, 2:1]
 
     metadat <- NLP::meta(x)
-    if (ncol(metadat) > 1) {
+    if(!is.null(metadat[["labels"]])) {
+        out[[1]] <- metadat[["labels"]]
+    } 
+    if (ncol(metadat) > 1 && all(out[[1]] %in% metadat[[1]])) {
         colnames(metadat)[1] <- doc
         out <- key_merge(out, metadat)
     }
@@ -553,7 +556,6 @@ as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "docs",
         out <- sentSplit(out, text, ...)
     }
     out
-
 }
 
 
@@ -656,10 +658,12 @@ as.Corpus.default <- function(text.var, grouping.var = NULL, demographic.vars,
     ## Split apart by grouping variables and collapse text
     LST <- sapply(split(DF[, "text.var"], DF[, "grouping"]), 
         paste, collapse = " ")
-
+    LST_DF <- qdapTools::list2df(LST, "text.var", "grouping")
+    
     ## Use the tm package to convert to a Corpus
-    mycorpus <- tm::Corpus(tm::VectorSource(LST), ...)
- 
+    mycorpus <- tm::VCorpus(tm::DataframeSource(LST_DF), 
+        readerControl=list(reader=qdap_tm_reader))
+
     ## Add metadata info
     NLP::meta(mycorpus, "MetaID") <- names(LST)
     NLP::meta(mycorpus, "labels") <- names(LST)
@@ -708,9 +712,12 @@ as.Corpus.default <- function(text.var, grouping.var = NULL, demographic.vars,
     mycorpus
 }
 
+## helper readers
+qdap_tm_reader <- tm::readTabular(mapping=list(content="text.var", id="grouping"))
 
-compare <- function(v) all(sapply( as.list(v[-1]), 
-    FUN=function(z) {identical(z, v[1])}))
+compare <- function(v) {
+    all(sapply( as.list(v[-1]), FUN=function(z) {identical(z, v[1])}))
+}
 
 
 #' Transposes a TermDocumentMatrix object
@@ -965,8 +972,11 @@ tm_tdm_interface2 <- function(text.var, grouping.var, stopwords, char2space,
     LST <- sapply(split(DF[, "text.var"], DF[, "grouping"]), 
         paste, collapse = " ")
 
+    LST_DF <- qdapTools::list2df(LST, "text.var", "grouping")
+    
     ## Use the tm package to convert to a Corpus
-    mycorpus <- tm::Corpus(tm::VectorSource(LST), ...)
+    mycorpus <- tm::VCorpus(tm::DataframeSource(LST_DF), 
+        readerControl=list(reader=qdap_tm_reader))
  
     ## Add metadata info
     NLP::meta(mycorpus, "MetaID") <- names(LST)
@@ -1040,8 +1050,11 @@ tm_dtm_interface2 <- function(text.var, grouping.var, stopwords, char2space,
     LST <- sapply(split(DF[, "text.var"], DF[, "grouping"]), 
         paste, collapse = " ")
 
+    LST_DF <- qdapTools::list2df(LST, "text.var", "grouping")
+    
     ## Use the tm package to convert to a Corpus
-    mycorpus <- tm::Corpus(tm::VectorSource(LST), ...)
+    mycorpus <- tm::VCorpus(tm::DataframeSource(LST_DF), 
+        readerControl=list(reader=qdap_tm_reader))
  
     ## Add metadata info
     NLP::meta(mycorpus, "MetaID") <- names(LST)
@@ -1082,7 +1095,11 @@ tm_dtm_interface2 <- function(text.var, grouping.var, stopwords, char2space,
 #' @method as.Corpus TermDocumentMatrix 
 as.Corpus.TermDocumentMatrix <- function(text.var, ...){
 
-    tm::VCorpus(tm::VectorSource(mat2word_list(text.var)))
+    LST_DF <- qdapTools::list2df(mat2word_list(text.var), "text.var", "grouping")
+
+    ## Use the tm package to convert to a Corpus
+    tm::VCorpus(tm::DataframeSource(LST_DF), 
+        readerControl=list(reader=qdap_tm_reader))
 
 }
 
@@ -1093,8 +1110,8 @@ as.Corpus.TermDocumentMatrix <- function(text.var, ...){
 #' @method as.Corpus DocumentTermMatrix 
 as.Corpus.DocumentTermMatrix <- function(text.var, ...){
 
-    tm::VCorpus(tm::VectorSource(mat2word_list(t(text.var))))
-
+    as.Corpus.TermDocumentMatrix(t(text.var))
+ 
 }
 
 #' \code{as.Corpus.wfm} - \code{wfm} method for 

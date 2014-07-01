@@ -346,8 +346,11 @@ tm_tdm_interface <- function(text.var, grouping.var, stopwords, char2space,
     LST <- sapply(split(DF[, "text.var"], DF[, "grouping"]), 
         paste, collapse = " ")
 
+    LST_DF <- qdapTools::list2df(LST, "text.var", "grouping")
+    
     ## Use the tm package to convert to a Corpus
-    mycorpus <- tm::Corpus(tm::VectorSource(LST), ...)
+    mycorpus <- tm::VCorpus(tm::DataframeSource(LST_DF), 
+        readerControl=list(reader=qdap_tm_reader))
  
     ## Add metadata info
     NLP::meta(mycorpus, "MetaID") <- names(LST)
