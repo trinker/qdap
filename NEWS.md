@@ -25,6 +25,10 @@ And constructed with the following guidelines:
 * `syllable_count` returned the sentence (recycled) in the `words` column of the
   output.  This behavior has been fixed.  See GitHub <a href="https://github.com/trinker/qdap/issues/188">issue #188</a> for details.
 
+* `syn` returned antonyms for some words.  This was caused by the dictionary:
+  `key.syn` contained antonyms and elemets the were error messages (character).
+  This has been fixed.  Reference <a href="https://github.com/trinker/qdap/issues/190">issue #190</a>. (Jingjing Zou)
+
 **NEW FEATURES**
 
 * `qdap_df` and `%&%` added to mimic some of the functionality of `dplyr`'s 
