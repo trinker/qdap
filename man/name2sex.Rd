@@ -5,7 +5,7 @@
 \usage{
 name2sex(names.list, pred.sex = TRUE, fuzzy.match = pred.sex,
   USE.NAMES = FALSE, database = qdapDictionaries::NAMES_SEX,
-  list.database = qdapDictionaries::NAMES_LIST)
+  parallel = FALSE, ...)
 }
 \arguments{
 \item{names.list}{Character vector containing first names.}
@@ -24,8 +24,11 @@ gender vector.}
 
 \item{database}{A database of names (mostly for internal purposes).}
 
-\item{list.database}{A list version of the database of names broken down by
-first letter of the name (mostly for internal purposes).}
+\item{parallel}{logical.  If \code{TRUE} attempts to run the function on
+multiple cores.  Note that this may not mean a speed boost if you have one
+core or if the data set is smaller as the cluster takes time to create.}
+
+\item{\ldots}{Other aguments passed to \code{\link[qdap]{check_spelling}}.}
 }
 \value{
 Returns a vector of predicted gender (M/F) based on first name.
@@ -79,7 +82,7 @@ Dason Kurkiewicz and Tyler Rinker <tyler.rinker@gmail.com>.
 \url{http://www.talkstats.com/showthread.php/31660}
 }
 \seealso{
-\code{\link[base]{agrep}}
+\code{\link[stringdist]{stringdist}}
 }
 \keyword{gender}
 \keyword{name}

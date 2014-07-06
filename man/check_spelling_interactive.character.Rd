@@ -5,7 +5,7 @@
 \usage{
 \method{check_spelling_interactive}{character}(text.var, range = 2,
   assume.first.correct = TRUE, click = TRUE, method = "jaccard",
-  dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE,
+  dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE,
   cores = parallel::detectCores()/2, n.suggests = 8, ...)
 }
 \arguments{

@@ -42,6 +42,7 @@
 #' \code{more.suggestions} (A list of vectors of up to 10 most likely replacements).
 #' @export
 #' @rdname check_spelling
+#' @seealso \code{\link[stringdist]{stringdist}}
 #' @references \url{http://stackoverflow.com/a/24454727/1000343}
 #' @note A possible misspelled word is defined as not found in the 
 #' \code{dictionary}.  Currently, the \code{dictionary} used is smaller and may 
@@ -95,7 +96,7 @@
 #' }
 check_spelling <- function(text.var, range = 2,
     assume.first.correct = TRUE, method = "jaccard",
-    dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
+    dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
     cores = parallel::detectCores()/2, n.suggests = 8) {
 
     dictnchar <- nchar(dictionary)
@@ -274,7 +275,7 @@ print.which_misspelled <- function(x, ...){
 #' subsequent text character vectors.
 check_spelling_interactive <- function(text.var, range = 2, 
     assume.first.correct = TRUE, click = TRUE, method = "jaccard",
-    dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
+    dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
     cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
     text.var
@@ -366,7 +367,7 @@ correct <- function(x, ...){
 #' @method check_spelling_interactive character
 check_spelling_interactive.character <- function(text.var, range = 2, 
     assume.first.correct = TRUE, click = TRUE, method = "jaccard",
-    dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
+    dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
     cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
     out <- check_spelling(text.var = text.var, range = range, 
@@ -393,6 +394,7 @@ check_spelling_interactive.character <- function(text.var, range = 2,
     attributes(out)[["correct"]] <- function(text.var) {
             mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
         }
+    message("Spelling Check Complete!")
     out
 }
 
@@ -434,7 +436,7 @@ check_spelling_interactive.character <- function(text.var, range = 2,
 #' @method check_spelling_interactive factor
 check_spelling_interactive.factor <- function(text.var, range = 2, 
     assume.first.correct = TRUE, click = TRUE, method = "jaccard",
-    dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
+    dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
     cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
     out <- check_spelling(text.var = text.var, range = range, 
@@ -462,6 +464,7 @@ check_spelling_interactive.factor <- function(text.var, range = 2,
     attributes(out)[["correct"]] <- function(text.var) {
             mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
         }
+    message("Spelling Check Complete!")    
     out
 }
 
@@ -500,7 +503,7 @@ check_spelling_interactive.factor <- function(text.var, range = 2,
 #' @method check_spelling_interactive check_spelling
 check_spelling_interactive.check_spelling <- function(text.var, range = 2, 
     assume.first.correct = TRUE, click = TRUE, method = "jaccard",
-    dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
+    dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
     cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
     out <- split(out, out[["not.found"]])
@@ -520,6 +523,7 @@ check_spelling_interactive.check_spelling <- function(text.var, range = 2,
     attributes(out)[["correct"]] <- function(text.var) {
             mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
         }
+    message("Spelling Check Complete!")
     out
 }
 

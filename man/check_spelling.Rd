@@ -8,7 +8,7 @@
 \usage{
 check_spelling(text.var, range = 2, assume.first.correct = TRUE,
   method = "jaccard", dictionary = qdapDictionaries::GradyAugmented,
-  parallel = TRUE, cores = parallel::detectCores()/2, n.suggests = 8)
+  parallel = FALSE, cores = parallel::detectCores()/2, n.suggests = 8)
 
 which_misspelled(x, suggest = FALSE, range = 2,
   assume.first.correct = TRUE,
@@ -18,7 +18,7 @@ which_misspelled(x, suggest = FALSE, range = 2,
 
 check_spelling_interactive(text.var, range = 2, assume.first.correct = TRUE,
   click = TRUE, method = "jaccard",
-  dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE,
+  dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE,
   cores = parallel::detectCores()/2, n.suggests = 8, ...)
 
 correct(x, ...)
@@ -177,5 +177,8 @@ preprocessed(y)
 }
 \references{
 \url{http://stackoverflow.com/a/24454727/1000343}
+}
+\seealso{
+\code{\link[stringdist]{stringdist}}
 }
 

@@ -13,8 +13,10 @@
 #' @param USE.NAMES logical.  If \code{TRUE} names.list is used to name the 
 #' gender vector.
 #' @param database A database of names (mostly for internal purposes).
-#' @param list.database A list version of the database of names broken down by 
-#' first letter of the name (mostly for internal purposes).
+#' @param parallel logical.  If \code{TRUE} attempts to run the function on 
+#' multiple cores.  Note that this may not mean a speed boost if you have one 
+#' core or if the data set is smaller as the cluster takes time to create.
+#' @param \ldots Other aguments passed to \code{\link[qdap]{check_spelling}}.
 #' @return Returns a vector of predicted gender (M/F) based on first name.
 #' @author Dason Kurkiewicz and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @keywords name gender
@@ -26,7 +28,7 @@
 #' \url{http://www.talkstats.com/showthread.php/31660}
 #' @export
 #' @importFrom qdapTools lookup
-#' @seealso \code{\link[base]{agrep}}
+#' @seealso \code{\link[stringdist]{stringdist}}
 #' @examples
 #' \dontrun{
 #' name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, 
@@ -63,8 +65,7 @@
 #' }
 name2sex <- 
 function(names.list, pred.sex = TRUE, fuzzy.match = pred.sex, USE.NAMES = FALSE,
-    database = qdapDictionaries::NAMES_SEX, 
-    list.database = qdapDictionaries::NAMES_LIST) {
+    database = qdapDictionaries::NAMES_SEX, parallel=FALSE, ...) {
     
     if(pred.sex) {
         dat <- database[, -2]
@@ -72,20 +73,18 @@ function(names.list, pred.sex = TRUE, fuzzy.match = pred.sex, USE.NAMES = FALSE,
         dat <- database[, -3]
     }
     nms <- toupper(names.list)
-    out <- lookup(nms, dat)
-    if (fuzzy.match) {
-        FUN <- function(pattern, pred.sex2 = ifelse(pred.sex, 3, 2)) {
-            sector <- list.database[names(list.database) %in% substring(pattern, 
-                1, 1)][[1]]
-            sector[which.min(Ldist(pattern, sector[, 1]))[1], pred.sex2]
-        }
-        if (length(out) == 1 && is.na(out)) {
-            out <- FUN(nms)
-        } else {
-            out[is.na(out)] <- as.character(sapply(nms[is.na(out)], FUN))
-        }
+    out <- factor(lookup(nms, dat), levels=c("F", "M"))
+
+    if (sum(is.na(out)) > 0 && fuzzy.match) {
+        
+        ## find closest match with `check_spelling`
+        mtchs <- toupper(check_spelling(tolower(nms[is.na(out)]), 
+            dictionary=tolower(dat[[1]]), parallel = parallel)[[4]])
+
+        ## lookup and assign gender
+        out[is.na(out)] <- lookup(mtchs, dat)
     }
-    out <- factor(out)
+
     if (USE.NAMES) {
         names(out) <- names.list
     }
