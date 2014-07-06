@@ -7,17 +7,17 @@
 \title{Check Spelling}
 \usage{
 check_spelling(text.var, range = 2, assume.first.correct = TRUE,
-  method = "jaccard", dictionary = qdapDictionaries::GradyAugmented,
+  method = "jw", dictionary = qdapDictionaries::GradyAugmented,
   parallel = FALSE, cores = parallel::detectCores()/2, n.suggests = 8)
 
 which_misspelled(x, suggest = FALSE, range = 2,
   assume.first.correct = TRUE,
-  dictionary = qdapDictionaries::GradyAugmented, method = "jaccard",
+  dictionary = qdapDictionaries::GradyAugmented, method = "jw",
   nchar.dictionary = nchar(dictionary),
   first.char.dictionary = substring(dictionary, 1, 1), n.suggests = 8)
 
 check_spelling_interactive(text.var, range = 2, assume.first.correct = TRUE,
-  click = TRUE, method = "jaccard",
+  click = TRUE, method = "jw",
   dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE,
   cores = parallel::detectCores()/2, n.suggests = 8, ...)
 
@@ -173,6 +173,16 @@ preprocessed(x)
 correct(x)(mraja1spl$dialogue[1:75])
 (y <- check_spelling_interactive(out, click=FALSE))
 preprocessed(y)
+
+## Examine Methods (?stringdist::stringdist)
+strings <- c(
+    "Robots are evl creatres and deserv exterimanitation kream.",
+    "I gots me a biggert measrue, tommorrow"
+)
+
+meths <- c("osa", "lv", "dl", "hamming", "lcs", "qgram", "cosine", "jaccard", "jw")
+
+setNames(lapply(meths, function(x) check_spelling(strings, method=x)), meths)
 }
 }
 \references{

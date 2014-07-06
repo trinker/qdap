@@ -93,9 +93,19 @@
 #' correct(x)(mraja1spl$dialogue[1:75])
 #' (y <- check_spelling_interactive(out, click=FALSE))
 #' preprocessed(y)
+#' 
+#' ## Examine Methods (?stringdist::stringdist)
+#' strings <- c(
+#'     "Robots are evl creatres and deserv exterimanitation kream.",
+#'     "I gots me a biggert measrue, tommorrow"
+#' )
+#' 
+#' meths <- c("osa", "lv", "dl", "hamming", "lcs", "qgram", "cosine", "jaccard", "jw")
+#' 
+#' setNames(lapply(meths, function(x) check_spelling(strings, method=x)), meths)
 #' }
 check_spelling <- function(text.var, range = 2,
-    assume.first.correct = TRUE, method = "jaccard",
+    assume.first.correct = TRUE, method = "jw",
     dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
     cores = parallel::detectCores()/2, n.suggests = 8) {
 
@@ -168,7 +178,7 @@ check_spelling <- function(text.var, range = 2,
 #' @export
 which_misspelled <- function(x, suggest = FALSE, range = 2, 
     assume.first.correct = TRUE, dictionary = qdapDictionaries::GradyAugmented,
-    method = "jaccard", nchar.dictionary = nchar(dictionary), 
+    method = "jw", nchar.dictionary = nchar(dictionary), 
     first.char.dictionary = substring(dictionary, 1, 1), n.suggests = 8) {
 
     if (length(x) > 1) stop("`x` must be a single string")
@@ -274,7 +284,7 @@ print.which_misspelled <- function(x, ...){
 #' character vector), and a function to correct the same spelling errors in 
 #' subsequent text character vectors.
 check_spelling_interactive <- function(text.var, range = 2, 
-    assume.first.correct = TRUE, click = TRUE, method = "jaccard",
+    assume.first.correct = TRUE, click = TRUE, method = "jw",
     dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
     cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
@@ -366,7 +376,7 @@ correct <- function(x, ...){
 #' @export
 #' @method check_spelling_interactive character
 check_spelling_interactive.character <- function(text.var, range = 2, 
-    assume.first.correct = TRUE, click = TRUE, method = "jaccard",
+    assume.first.correct = TRUE, click = TRUE, method = "jw",
     dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
     cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
@@ -435,7 +445,7 @@ check_spelling_interactive.character <- function(text.var, range = 2,
 #' @export
 #' @method check_spelling_interactive factor
 check_spelling_interactive.factor <- function(text.var, range = 2, 
-    assume.first.correct = TRUE, click = TRUE, method = "jaccard",
+    assume.first.correct = TRUE, click = TRUE, method = "jw",
     dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
     cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
@@ -502,7 +512,7 @@ check_spelling_interactive.factor <- function(text.var, range = 2,
 #' @export
 #' @method check_spelling_interactive check_spelling
 check_spelling_interactive.check_spelling <- function(text.var, range = 2, 
-    assume.first.correct = TRUE, click = TRUE, method = "jaccard",
+    assume.first.correct = TRUE, click = TRUE, method = "jw",
     dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
     cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
@@ -592,4 +602,22 @@ check_spelling_interactive_helper <- function(out, suggests, click,
             replacement = repl, stringsAsFactors = FALSE)
 
     }, out, suggests)), row.names=NULL, stringsAsFactors = FALSE)
+}
+
+#' Prints a check_spelling Object
+#' 
+#' Prints a check_spelling object.
+#' 
+#' @param x The check_spelling object.
+#' @param \ldots ignored
+#' @method print check_spelling
+#' @export
+print.check_spelling <- function(x, ...){
+
+    WD <- options()[["width"]]
+    options(width = 10000)
+    class(x) <- "data.frame"
+    x[["more.suggestions"]] <- sapply(x[["more.suggestions"]], paste, collapse=", ")
+    print(left_just(x))
+    options(width = WD)
 }
