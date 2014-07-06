@@ -404,7 +404,7 @@ check_spelling_interactive.character <- function(text.var, range = 2,
     attributes(out)[["correct"]] <- function(text.var) {
             mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
         }
-    message("Spelling Check Complete!")
+    message("\nSpelling Check Complete!\n")
     out
 }
 
@@ -474,7 +474,7 @@ check_spelling_interactive.factor <- function(text.var, range = 2,
     attributes(out)[["correct"]] <- function(text.var) {
             mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
         }
-    message("Spelling Check Complete!")    
+    message("\nSpelling Check Complete!\n")    
     out
 }
 
@@ -533,7 +533,7 @@ check_spelling_interactive.check_spelling <- function(text.var, range = 2,
     attributes(out)[["correct"]] <- function(text.var) {
             mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
         }
-    message("Spelling Check Complete!")
+    message("\nSpelling Check Complete!\n")
     out
 }
 
@@ -548,7 +548,9 @@ check_spelling_interactive_helper <- function(out, suggests, click,
             tolower(as.character(text.var[x[["row"]]])))
 
         under <- paste(rep("=", max(nchar(Line))), collapse="")
-        invisible(lapply(Line, function(x) message("LINE: ", x)))
+              
+        invisible(lapply(Line, function(x) message("\nLINE: ", 
+            paste(strwrap(x, 80), collapse="\n      "))))
         comb <- c(x[["not.found"]], y)
         repl2 <- NULL
 
