@@ -106,7 +106,7 @@ function use the following technique:\cr
   \item Optionally, reduce dictionary by assuming the first letter of the misspelled word is correct (dictionary for this letter only).
   \item Reduce dictionary by eliminating words outside of the range of number of characters of the misspelled word.
   \item Use \code{\link[stringdist]{stringdist}} to find string distances between possible replacements and the misspelled term.
-  \item Select \emph{n} (\code{n.suggests}) terms from dictionary that is closest to the misspelled term.
+  \item Select \emph{n} (\code{n.suggests}) terms from dictionary that are closest to the misspelled term.
 }
 
 \code{which_misspelled}  - Check the spelling for a string.
@@ -119,14 +119,13 @@ vector spelling corrections.
 }
 \note{
 A possible misspelled word is defined as not found in the
-\code{dictionary}.  Currently, the \code{dictionary} used is smaller and may
-not contain words with endings.  This may lead to false positives for
-misspelled words.
+\code{dictionary}.
 
-The user may go back (undo) by pressing \code{"TYPE MY OWN"} entering
-either \code{"!"} (not) or \code{"0"} (similar to a phone system).  The
-second choice in the \code{"SELECT REPLACEMNT:"} will be the original word
-and is prefixed with \code{"IGNORE:"}.  Press this to keep the original word.
+\code{check_spelling_interactive} - The user may go back (undo) by
+pressing \code{"TYPE MY OWN"} entering either \code{"!"} (not) or \code{"0"}
+(similar to a phone system).  The second choice in the
+\code{"SELECT REPLACEMNT:"} will be the original word and is prefixed with
+\code{"IGNORE:"}.  Press this to keep the original word.
 }
 \examples{
 \dontrun{
@@ -186,7 +185,8 @@ setNames(lapply(meths, function(x) check_spelling(strings, method=x)), meths)
 }
 }
 \references{
-\url{http://stackoverflow.com/a/24454727/1000343}
+\url{http://stackoverflow.com/a/24454727/1000343} \cr
+\url{http://journal.r-project.org/archive/2011-2/RJournal_2011-2_Hornik+Murdoch.pdf}
 }
 \seealso{
 \code{\link[stringdist]{stringdist}}
