@@ -4,8 +4,7 @@
 \title{Names to Gender Prediction}
 \usage{
 name2sex(names.list, pred.sex = TRUE, fuzzy.match = pred.sex,
-  USE.NAMES = FALSE, database = qdapDictionaries::NAMES_SEX,
-  parallel = FALSE, ...)
+  USE.NAMES = FALSE, database = qdapDictionaries::NAMES_SEX, ...)
 }
 \arguments{
 \item{names.list}{Character vector containing first names.}
@@ -23,10 +22,6 @@ not be used on larger vectors.  Defaults to \code{pred.sex}.}
 gender vector.}
 
 \item{database}{A database of names (mostly for internal purposes).}
-
-\item{parallel}{logical.  If \code{TRUE} attempts to run the function on
-multiple cores.  Note that this may not mean a speed boost if you have one
-core or if the data set is smaller as the cluster takes time to create.}
 
 \item{\ldots}{Other aguments passed to \code{\link[qdap]{check_spelling}}.}
 }

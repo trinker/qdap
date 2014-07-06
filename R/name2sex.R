@@ -13,9 +13,6 @@
 #' @param USE.NAMES logical.  If \code{TRUE} names.list is used to name the 
 #' gender vector.
 #' @param database A database of names (mostly for internal purposes).
-#' @param parallel logical.  If \code{TRUE} attempts to run the function on 
-#' multiple cores.  Note that this may not mean a speed boost if you have one 
-#' core or if the data set is smaller as the cluster takes time to create.
 #' @param \ldots Other aguments passed to \code{\link[qdap]{check_spelling}}.
 #' @return Returns a vector of predicted gender (M/F) based on first name.
 #' @author Dason Kurkiewicz and Tyler Rinker <tyler.rinker@@gmail.com>.
@@ -65,7 +62,7 @@
 #' }
 name2sex <- 
 function(names.list, pred.sex = TRUE, fuzzy.match = pred.sex, USE.NAMES = FALSE,
-    database = qdapDictionaries::NAMES_SEX, parallel=FALSE, ...) {
+    database = qdapDictionaries::NAMES_SEX,  ...) {
     
     if(pred.sex) {
         dat <- database[, -2]
