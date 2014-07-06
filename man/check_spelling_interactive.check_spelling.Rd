@@ -4,9 +4,9 @@
 \title{Check Spelling}
 \usage{
 \method{check_spelling_interactive}{check_spelling}(text.var, range = 2,
-  max.distance = 0.15, assume.first.correct = TRUE, click = TRUE,
+  assume.first.correct = TRUE, click = TRUE, method = "jaccard",
   dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE,
-  cores = parallel::detectCores()/2, ...)
+  cores = parallel::detectCores()/2, n.suggests = 8, ...)
 }
 \arguments{
 \item{text.var}{A \code{\link[qdap]{check_spelling}} object.}
@@ -17,16 +17,17 @@ characters, beyond the number of characters of a word not found in the
 find a suggested replacement term.  This may be expanded if no suitable
 suggestion is returned.}
 
-\item{max.distance}{A maximum distance to use as a starting \code{dictionary}
-reduction as the \code{max.distance} passed to \code{\link[base]{agrep}}.
-This may be increased if no suitable suggestion is returned.}
-
 \item{assume.first.correct}{logical.  If \code{TRUE} it is assumed that the
 first letter of the misspelled word is correct.  This reduces the dictionary
 size, thus speeding up computation.}
 
 \item{click}{logical.  If \code{TRUE} the interface is a point and click GUI.
 If \code{FALSE} the interace is command line driven.}
+
+\item{method}{Method for distance calculation. The default is "jaccard".  It
+is assumed that smaller measures indicate closer distance.  Measures that do
+not adhere to this assumption will result in incorrect output (see
+\code{\link[stringdist]{stringdist}} for details).}
 
 \item{dictionary}{A character vector of terms to search for.  To reduce
 overhead it is expected that this dictionary is lower case, unique terms.}
@@ -37,6 +38,10 @@ core or if the data set is smaller as the cluster takes time to create.}
 
 \item{cores}{The number of cores to use if \code{parallel = TRUE}.  Default
 is half the number of available cores.}
+
+\item{n.suggests}{The number of terms to suggest.  In the case of a tie
+(multiple terms have the same distance from misspelled word) all will be provided.
+Dictionary reduction may result in less than \code{n.suggests} suggested terms.}
 
 \item{\ldots}{ignored}
 }

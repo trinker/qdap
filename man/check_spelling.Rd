@@ -6,21 +6,20 @@
 \alias{which_misspelled}
 \title{Check Spelling}
 \usage{
-check_spelling(text.var, range = 2, max.distance = 0.15,
-  assume.first.correct = TRUE,
-  dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE,
-  cores = parallel::detectCores()/2)
+check_spelling(text.var, range = 2, assume.first.correct = TRUE,
+  method = "jaccard", dictionary = qdapDictionaries::GradyAugmented,
+  parallel = TRUE, cores = parallel::detectCores()/2, n.suggests = 8)
 
-which_misspelled(x, suggest = FALSE, range = 2, max.distance = 0.15,
+which_misspelled(x, suggest = FALSE, range = 2,
   assume.first.correct = TRUE,
-  dictionary = qdapDictionaries::GradyAugmented,
+  dictionary = qdapDictionaries::GradyAugmented, method = "jaccard",
   nchar.dictionary = nchar(dictionary),
-  first.char.dictionary = substring(dictionary, 1, 1))
+  first.char.dictionary = substring(dictionary, 1, 1), n.suggests = 8)
 
-check_spelling_interactive(text.var, range = 2, max.distance = 0.15,
-  assume.first.correct = TRUE, click = TRUE,
+check_spelling_interactive(text.var, range = 2, assume.first.correct = TRUE,
+  click = TRUE, method = "jaccard",
   dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE,
-  cores = parallel::detectCores()/2, ...)
+  cores = parallel::detectCores()/2, n.suggests = 8, ...)
 
 correct(x, ...)
 }
@@ -33,13 +32,14 @@ characters, beyond the number of characters of a word not found in the
 find a suggested replacement term.  This may be expanded if no suitable
 suggestion is returned.}
 
-\item{max.distance}{A maximum distance to use as a starting \code{dictionary}
-reduction as the \code{max.distance} passed to \code{\link[base]{agrep}}.
-This may be increased if no suitable suggestion is returned.}
-
 \item{assume.first.correct}{logical.  If \code{TRUE} it is assumed that the
 first letter of the misspelled word is correct.  This reduces the dictionary
 size, thus speeding up computation.}
+
+\item{method}{Method for distance calculation. The default is "jaccard".  It
+is assumed that smaller measures indicate closer distance.  Measures that do
+not adhere to this assumption will result in incorrect output (see
+\code{\link[stringdist]{stringdist}} for details).}
 
 \item{dictionary}{A character vector of terms to search for.  To reduce
 overhead it is expected that this dictionary is lower case, unique terms.}
@@ -50,6 +50,10 @@ core or if the data set is smaller as the cluster takes time to create.}
 
 \item{cores}{The number of cores to use if \code{parallel = TRUE}.  Default
 is half the number of available cores.}
+
+\item{n.suggests}{The number of terms to suggest.  In the case of a tie
+(multiple terms have the same distance from misspelled word) all will be provided.
+Dictionary reduction may result in less than \code{n.suggests} suggested terms.}
 
 \item{x}{If \code{which_misspelled} - A character string.  If \code{correct} -
 An object from \code{check_spelling_interactive}.}
@@ -101,8 +105,8 @@ function use the following technique:\cr
   \item These misses (possible misspellings) will be what is looked up for suggested replacements.
   \item Optionally, reduce dictionary by assuming the first letter of the misspelled word is correct (dictionary for this letter only).
   \item Reduce dictionary by eliminating words outside of the range of number of characters of the misspelled word.
-  \item Reduce dictionary further by eliminating words with \code{\link[base]{agrep}} to within a preset tolerance (\code{max.distance}).
-  \item Use a binary lookup (that reverse engineers \code{\link[base]{agrep}}) to determine the word from dictionary that is closest to the misspelled term.
+  \item Use \code{\link[stringdist]{stringdist}} to find string distances between possible replacements and the misspelled term.
+  \item Select \emph{n} (\code{n.suggests}) terms from dictionary that is closest to the misspelled term.
 }
 
 \code{which_misspelled}  - Check the spelling for a string.
@@ -131,7 +135,6 @@ which_misspelled(x, suggest=FALSE)
 which_misspelled(x, suggest=TRUE)
 
 check_spelling(DATA$state)
-check_spelling(DATA$state, stem=FALSE)
 
 ## browseURL("http://stackoverflow.com/a/24454727/1000343")
 terms <- c("accounts", "account", "accounting", "acounting", "acount", "acounts", "accounnt")
@@ -150,21 +153,21 @@ check_spelling(fake_text)
 ## No misspellings found
 check_spelling_interactive(DATA$state)
 
-## minimal character method approach
+## character method approach (minimal example)
 dat <- DATA$state; dat[1] <- "I likedd the cokie icekream"
 (o <- check_spelling_interactive(dat))
 preprocessed(o)
 fixit <- attributes(o)$correct
 fixit(dat)
 
-## character method approach
+## character method approach (larger example)
 m <- check_spelling_interactive(mraja1spl$dialogue[1:75])
 preprocessed(m)
 fixit <- attributes(m)$correct
 fixit(mraja1spl$dialogue[1:75])
 
 ## check_spelling method approach
-out <- check_spelling(mraja1spl$dialogue[1:75], max.distance = .15)
+out <- check_spelling(mraja1spl$dialogue[1:75])
 (x <- check_spelling_interactive(out))
 preprocessed(x)
 correct(x)(mraja1spl$dialogue[1:75])

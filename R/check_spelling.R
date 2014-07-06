@@ -8,8 +8,8 @@
 #'   \item These misses (possible misspellings) will be what is looked up for suggested replacements.
 #'   \item Optionally, reduce dictionary by assuming the first letter of the misspelled word is correct (dictionary for this letter only).
 #'   \item Reduce dictionary by eliminating words outside of the range of number of characters of the misspelled word.
-#'   \item Reduce dictionary further by eliminating words with \code{\link[base]{agrep}} to within a preset tolerance (\code{max.distance}). 
-#'   \item Use a binary lookup (that reverse engineers \code{\link[base]{agrep}}) to determine the word from dictionary that is closest to the misspelled term.
+#'   \item Use \code{\link[stringdist]{stringdist}} to find string distances between possible replacements and the misspelled term.
+#'   \item Select \emph{n} (\code{n.suggests}) terms from dictionary that is closest to the misspelled term.
 #' }
 #'
 #' @param text.var The text variable.
@@ -18,19 +18,23 @@
 #' \code{dictionary}, to initially limit \code{dictionary} size and thus time to 
 #' find a suggested replacement term.  This may be expanded if no suitable 
 #' suggestion is returned.
-#' @param max.distance A maximum distance to use as a starting \code{dictionary} 
-#' reduction as the \code{max.distance} passed to \code{\link[base]{agrep}}.  
-#' This may be increased if no suitable suggestion is returned.
 #' @param assume.first.correct logical.  If \code{TRUE} it is assumed that the 
 #' first letter of the misspelled word is correct.  This reduces the dictionary 
 #' size, thus speeding up computation.
+#' @param method Method for distance calculation. The default is "jaccard".  It 
+#' is assumed that smaller measures indicate closer distance.  Measures that do 
+#' not adhere to this assumption will result in incorrect output (see 
+#' \code{\link[stringdist]{stringdist}} for details).
 #' @param dictionary A character vector of terms to search for.  To reduce 
 #' overhead it is expected that this dictionary is lower case, unique terms.
 #' @param parallel logical.  If \code{TRUE} attempts to run the function on 
 #' multiple cores.  Note that this may not mean a speed boost if you have one 
 #' core or if the data set is smaller as the cluster takes time to create.  
 #' @param cores The number of cores to use if \code{parallel = TRUE}.  Default 
-#' is half the number of available cores.  
+#' is half the number of available cores. 
+#' @param n.suggests The number of terms to suggest.  In the case of a tie 
+#' (multiple terms have the same distance from misspelled word) all will be provided.  
+#' Dictionary reduction may result in less than \code{n.suggests} suggested terms.
 #' @return \code{check_spelling} - Returns a \code{\link[base]{data.frame}} with 
 #' \code{row} (row number), \code{not.found}  \code{word.no} (number of 
 #' misspelled word), \code{not.found} (a word not found in the dictionary), 
@@ -50,7 +54,6 @@
 #' which_misspelled(x, suggest=TRUE)
 #'
 #' check_spelling(DATA$state)
-#' check_spelling(DATA$state, stem=FALSE)
 #' 
 #' ## browseURL("http://stackoverflow.com/a/24454727/1000343")
 #' terms <- c("accounts", "account", "accounting", "acounting", "acount", "acounts", "accounnt")
@@ -69,31 +72,31 @@
 #' ## No misspellings found
 #' check_spelling_interactive(DATA$state)
 #' 
-#' ## minimal character method approach
+#' ## character method approach (minimal example)
 #' dat <- DATA$state; dat[1] <- "I likedd the cokie icekream"
 #' (o <- check_spelling_interactive(dat))
 #' preprocessed(o)
 #' fixit <- attributes(o)$correct
 #' fixit(dat)
 #' 
-#' ## character method approach
+#' ## character method approach (larger example)
 #' m <- check_spelling_interactive(mraja1spl$dialogue[1:75])
 #' preprocessed(m)
 #' fixit <- attributes(m)$correct
 #' fixit(mraja1spl$dialogue[1:75])
 #' 
 #' ## check_spelling method approach
-#' out <- check_spelling(mraja1spl$dialogue[1:75], max.distance = .15)
+#' out <- check_spelling(mraja1spl$dialogue[1:75])
 #' (x <- check_spelling_interactive(out))
 #' preprocessed(x)
 #' correct(x)(mraja1spl$dialogue[1:75])
 #' (y <- check_spelling_interactive(out, click=FALSE))
 #' preprocessed(y)
 #' }
-check_spelling <- function(text.var, range = 2, max.distance = .15,
-    assume.first.correct = TRUE, 
+check_spelling <- function(text.var, range = 2,
+    assume.first.correct = TRUE, method = "jaccard",
     dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
-    cores = parallel::detectCores()/2) {
+    cores = parallel::detectCores()/2, n.suggests = 8) {
 
     dictnchar <- nchar(dictionary)
     dictfirst <- substring(dictionary, 1, 1)
@@ -101,14 +104,15 @@ check_spelling <- function(text.var, range = 2, max.distance = .15,
     if (parallel && cores > 1){
 
         cl <- parallel::makeCluster(mc <- getOption("cl.cores", cores))
-        vars <- c("text.var", "Ldist", "which_misspelled", "dictnchar",
-            "dictfirst", "bag_o_words", "range", "max.distance", "mgsub")
+        vars <- c("text.var", "which_misspelled", "dictnchar",
+            "dictfirst", "bag_o_words", "range", "mgsub", "method", 
+            "n.suggests")
         
         parallel::clusterExport(cl=cl, varlist=vars, envir = environment())
         
         out <- setNames(parallel::parLapply(cl, text.var, which_misspelled, 
-            range = range, suggest = TRUE, max.distance = max.distance, 
-            assume.first.correct = assume.first.correct,
+            range = range, suggest = TRUE, method = method, 
+            assume.first.correct = assume.first.correct, n.suggests = n.suggests,
             dictionary = dictionary, nchar.dictionary = dictnchar, 
             first.char.dictionary=dictfirst), 1:length(text.var))
  
@@ -117,7 +121,7 @@ check_spelling <- function(text.var, range = 2, max.distance = .15,
     } else {
 
         out <- setNames(lapply(text.var, which_misspelled, range = range, 
-            suggest = TRUE, max.distance = max.distance, 
+            suggest = TRUE,  method = method, n.suggests = n.suggests,
             assume.first.correct = assume.first.correct,
             dictionary = dictionary, nchar.dictionary = dictnchar, 
             first.char.dictionary=dictfirst), 1:length(text.var))
@@ -161,11 +165,12 @@ check_spelling <- function(text.var, range = 2, max.distance = .15,
 #' \code{more.suggestions} (A list of vectors of up to 10 most likely replacements).
 #' @rdname check_spelling
 #' @export
-which_misspelled <- function(x, suggest = FALSE, range = 2, max.distance = .15,
+which_misspelled <- function(x, suggest = FALSE, range = 2, 
     assume.first.correct = TRUE, dictionary = qdapDictionaries::GradyAugmented,
-    nchar.dictionary = nchar(dictionary), 
-    first.char.dictionary = substring(dictionary, 1, 1)) {
+    method = "jaccard", nchar.dictionary = nchar(dictionary), 
+    first.char.dictionary = substring(dictionary, 1, 1), n.suggests = 8) {
 
+    if (length(x) > 1) stop("`x` must be a single string")
     if (is.na(x)) return(NULL)
 
     ## break into a bag of words
@@ -175,29 +180,39 @@ which_misspelled <- function(x, suggest = FALSE, range = 2, max.distance = .15,
     ## determine if found in dictionary
     misses <- wrds[is.na(match(mgsub(c("'d", "'s"), "", wrds), dictionary))]
     if (identical(character(0), unname(misses))) return(NULL)
+
+    ## if no suggestions desired retruns misspelled words
     if (!suggest) return(misses)
-
+    
+    ## force eval of first.char.dictionary before
+    ## possibly changing the dictionary
+    first.char.dictionary <- force(first.char.dictionary)
+ 
+    ## combine the words from dictionary with numb. characters
+    dictionary <- data.frame(dictionary, nchar.dictionary, 
+        stringsAsFactors = FALSE)
+    
+    ## if we assume the first letter is spelled correct we split
+    ## the dictionary and take only those words begining with the at letter
     if(assume.first.correct) {
-        dictionary <- split(data.frame(dictionary, nchar.dictionary, 
-            stringsAsFactors = FALSE), first.char.dictionary)
-    } else {
-        ## compute nchar for dictionary for use in reducing possibilities
-        chars <- nchar(dictionary)
-    }
+        dictionary <- split(dictionary, first.char.dictionary)
+    } 
 
-    replacements <- lapply(misses, function(x, wchar = nchar.dictionary, 
-        therange = range, thedist = max.distance) {
+    replacements <- Map(function(x, y, dictionary2 = dictionary, 
+        therange = range, n.sugg = n.suggests,
+        meth = method) {
 
+        ## if assume first grab the dictionary list that 
+        ## starts with that letter
         if(assume.first.correct) {
-            dictionary <- dictionary[[substring(x, 1, 1)]]
-            chars <- dictionary[[2]]
-            dictionary <- dictionary[[1]]
+            dictionary2 <- dictionary2[[substring(x, 1, 1)]]
         }
 
-        wchar <- nchar(x)
+        ## grab words form dictionary within that range 
+        ## of characters close to x
         dict <- character(0)
         while(identical(character(0), dict)) {
-            dict <- dictionary[chars >= max(1, wchar - therange) & chars <= (wchar + therange)]
+            dict <- dictionary2[dictionary2[[2]] >= max(1, y - therange) & dictionary2[[2]] <= (y + therange), 1]
             if (identical(character(0), dict)) {
                 message(paste("Range was not large enough.  Increasing range to", 
                     therange + 1, "for: ", x))
@@ -206,22 +221,13 @@ which_misspelled <- function(x, suggest = FALSE, range = 2, max.distance = .15,
             }
         }
 
-        dict2 <- character(0)      
-        while(identical(character(0), dict2)) {
-            dict2 <- dict[agrep(x, dict, max.distance=thedist)]
+        ## find the disctionary word distance to the target ond sort
+        ratings <- sort(setNames(stringdist::stringdist(x, dict, method = meth), dict))
+ 
+        ## return the top n terms in order of likliness
+        names(ratings)[ratings <= ratings[min(n.sugg, length(ratings))]]
 
-            if (identical(character(0), dict2)) {
-                message(paste("max.distance was not large enough.  Increasing max.distance to", 
-                    thedist + .05, "for: ", x))
-                thedist <- thedist + .05
-                flush.console()
-            } else {
-                dict <- dict2
-            }
-        }
-        names(sort(setNames(unlist(lapply(dict, Ldist, x)), 
-            dict), decreasing =TRUE)[1:(min(10, length(dict)))])
-    })
+    }, misses, nchar(misses))
 
     out <- data.frame(word.no = names(misses), not.found=misses, 
         suggestion = unlist(lapply(replacements, "[", 1)), 
@@ -267,19 +273,19 @@ print.which_misspelled <- function(x, ...){
 #' character vector), and a function to correct the same spelling errors in 
 #' subsequent text character vectors.
 check_spelling_interactive <- function(text.var, range = 2, 
-    max.distance = .15, assume.first.correct = TRUE, click = TRUE, 
+    assume.first.correct = TRUE, click = TRUE, method = "jaccard",
     dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
-    cores = parallel::detectCores()/2, ...) {
+    cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
     text.var
     click
     range
-    max.distance
     assume.first.correct
     dictionary
     parallel
     cores
-    
+    n.suggests
+
     UseMethod("check_spelling_interactive")
 }
 
@@ -336,14 +342,15 @@ correct <- function(x, ...){
 #' \code{dictionary}, to initially limit \code{dictionary} size and thus time to 
 #' find a suggested replacement term.  This may be expanded if no suitable 
 #' suggestion is returned.
-#' @param max.distance A maximum distance to use as a starting \code{dictionary} 
-#' reduction as the \code{max.distance} passed to \code{\link[base]{agrep}}.  
-#' This may be increased if no suitable suggestion is returned.
 #' @param assume.first.correct logical.  If \code{TRUE} it is assumed that the 
 #' first letter of the misspelled word is correct.  This reduces the dictionary 
 #' size, thus speeding up computation.
 #' @param click logical.  If \code{TRUE} the interface is a point and click GUI.
 #' If \code{FALSE} the interace is command line driven.
+#' @param method Method for distance calculation. The default is "jaccard".  It 
+#' is assumed that smaller measures indicate closer distance.  Measures that do 
+#' not adhere to this assumption will result in incorrect output (see 
+#' \code{\link[stringdist]{stringdist}} for details).
 #' @param dictionary A character vector of terms to search for.  To reduce 
 #' overhead it is expected that this dictionary is lower case, unique terms.
 #' @param parallel logical.  If \code{TRUE} attempts to run the function on 
@@ -351,17 +358,21 @@ correct <- function(x, ...){
 #' core or if the data set is smaller as the cluster takes time to create.  
 #' @param cores The number of cores to use if \code{parallel = TRUE}.  Default 
 #' is half the number of available cores.  
+#' @param n.suggests The number of terms to suggest.  In the case of a tie 
+#' (multiple terms have the same distance from misspelled word) all will be provided.  
+#' Dictionary reduction may result in less than \code{n.suggests} suggested terms.
 #' @param \ldots ignored
 #' @export
 #' @method check_spelling_interactive character
 check_spelling_interactive.character <- function(text.var, range = 2, 
-    max.distance = .15, assume.first.correct = TRUE, click = TRUE, 
+    assume.first.correct = TRUE, click = TRUE, method = "jaccard",
     dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
-    cores = parallel::detectCores()/2, ...) {
+    cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
     out <- check_spelling(text.var = text.var, range = range, 
-        max.distance = max.distance, assume.first.correct = assume.first.correct, 
-        dictionary = dictionary, parallel = parallel, cores = cores)
+        assume.first.correct = assume.first.correct, 
+        n.suggests = n.suggests, method = method, dictionary = dictionary, 
+        parallel = parallel, cores = cores)
 
     if (is.null(out)) {
         return(invisible(NULL))
@@ -375,12 +386,12 @@ check_spelling_interactive.character <- function(text.var, range = 2,
     
     output <- output[apply(output, 1, function(x) x[1] != x[2]), ]    
 
-    out <- mgsub(output[, 1], output[, 2], text.var, ignore.case = TRUE, fixed=FALSE)
+    out <- mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
 
     class(out)  <- c("check_spelling_interactive", class(out))
     attributes(out)[["replacements"]] <- output
     attributes(out)[["correct"]] <- function(text.var) {
-            mgsub(output[, 1], output[, 2], text.var, ignore.case = TRUE, fixed=FALSE)
+            mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
         }
     out
 }
@@ -399,14 +410,15 @@ check_spelling_interactive.character <- function(text.var, range = 2,
 #' \code{dictionary}, to initially limit \code{dictionary} size and thus time to 
 #' find a suggested replacement term.  This may be expanded if no suitable 
 #' suggestion is returned.
-#' @param max.distance A maximum distance to use as a starting \code{dictionary} 
-#' reduction as the \code{max.distance} passed to \code{\link[base]{agrep}}.  
-#' This may be increased if no suitable suggestion is returned.
 #' @param assume.first.correct logical.  If \code{TRUE} it is assumed that the 
 #' first letter of the misspelled word is correct.  This reduces the dictionary 
 #' size, thus speeding up computation.
 #' @param click logical.  If \code{TRUE} the interface is a point and click GUI.
 #' If \code{FALSE} the interace is command line driven.
+#' @param method Method for distance calculation. The default is "jaccard".  It 
+#' is assumed that smaller measures indicate closer distance.  Measures that do 
+#' not adhere to this assumption will result in incorrect output (see 
+#' \code{\link[stringdist]{stringdist}} for details).
 #' @param dictionary A character vector of terms to search for.  To reduce 
 #' overhead it is expected that this dictionary is lower case, unique terms.
 #' @param parallel logical.  If \code{TRUE} attempts to run the function on 
@@ -414,17 +426,22 @@ check_spelling_interactive.character <- function(text.var, range = 2,
 #' core or if the data set is smaller as the cluster takes time to create.  
 #' @param cores The number of cores to use if \code{parallel = TRUE}.  Default 
 #' is half the number of available cores.  
+#' @param n.suggests The number of terms to suggest.  In the case of a tie 
+#' (multiple terms have the same distance from misspelled word) all will be provided.  
+#' Dictionary reduction may result in less than \code{n.suggests} suggested terms.
 #' @param \ldots ignored
 #' @export
 #' @method check_spelling_interactive factor
 check_spelling_interactive.factor <- function(text.var, range = 2, 
-    max.distance = .15, assume.first.correct = TRUE, click = TRUE, 
+    assume.first.correct = TRUE, click = TRUE, method = "jaccard",
     dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
-    cores = parallel::detectCores()/2, ...) {
+    cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
     out <- check_spelling(text.var = text.var, range = range, 
-        max.distance = max.distance, assume.first.correct = assume.first.correct, 
-        dictionary = dictionary, parallel = parallel, cores = cores)
+        assume.first.correct = assume.first.correct, 
+        n.suggests = n.suggests, method = method, dictionary = dictionary, 
+        parallel = parallel, cores = cores)
+
 
     if (is.null(out)) {
         return(invisible(NULL))
@@ -438,12 +455,12 @@ check_spelling_interactive.factor <- function(text.var, range = 2,
 
     output <- output[apply(output, 1, function(x) x[1] != x[2]), ]
     
-    out <- mgsub(output[, 1], output[, 2], text.var, ignore.case = TRUE, fixed=FALSE)
+    out <- mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
 
     class(out)  <- c("check_spelling_interactive", class(out))
     attributes(out)[["replacements"]] <- output
     attributes(out)[["correct"]] <- function(text.var) {
-            mgsub(output[, 1], output[, 2], text.var, ignore.case = TRUE, fixed=FALSE)
+            mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
         }
     out
 }
@@ -459,14 +476,15 @@ check_spelling_interactive.factor <- function(text.var, range = 2,
 #' \code{dictionary}, to initially limit \code{dictionary} size and thus time to 
 #' find a suggested replacement term.  This may be expanded if no suitable 
 #' suggestion is returned.
-#' @param max.distance A maximum distance to use as a starting \code{dictionary} 
-#' reduction as the \code{max.distance} passed to \code{\link[base]{agrep}}.  
-#' This may be increased if no suitable suggestion is returned.
 #' @param assume.first.correct logical.  If \code{TRUE} it is assumed that the 
 #' first letter of the misspelled word is correct.  This reduces the dictionary 
 #' size, thus speeding up computation.
 #' @param click logical.  If \code{TRUE} the interface is a point and click GUI.
 #' If \code{FALSE} the interace is command line driven.
+#' @param method Method for distance calculation. The default is "jaccard".  It 
+#' is assumed that smaller measures indicate closer distance.  Measures that do 
+#' not adhere to this assumption will result in incorrect output (see 
+#' \code{\link[stringdist]{stringdist}} for details).
 #' @param dictionary A character vector of terms to search for.  To reduce 
 #' overhead it is expected that this dictionary is lower case, unique terms.
 #' @param parallel logical.  If \code{TRUE} attempts to run the function on 
@@ -474,13 +492,16 @@ check_spelling_interactive.factor <- function(text.var, range = 2,
 #' core or if the data set is smaller as the cluster takes time to create.  
 #' @param cores The number of cores to use if \code{parallel = TRUE}.  Default 
 #' is half the number of available cores.  
+#' @param n.suggests The number of terms to suggest.  In the case of a tie 
+#' (multiple terms have the same distance from misspelled word) all will be provided.  
+#' Dictionary reduction may result in less than \code{n.suggests} suggested terms.
 #' @param \ldots ignored
 #' @export
 #' @method check_spelling_interactive check_spelling
 check_spelling_interactive.check_spelling <- function(text.var, range = 2, 
-    max.distance = .15, assume.first.correct = TRUE, click = TRUE, 
+    assume.first.correct = TRUE, click = TRUE, method = "jaccard",
     dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
-    cores = parallel::detectCores()/2, ...) {
+    cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
     out <- split(out, out[["not.found"]])
     suggests <- lapply(out, function(x) unlist(x[1, 4:5], use.names = FALSE))
@@ -491,18 +512,19 @@ check_spelling_interactive.check_spelling <- function(text.var, range = 2,
 
     output <- output[apply(output, 1, function(x) x[1] != x[2]), ]
     
-    out <- mgsub(output[, 1], output[, 2], attributes(text.var)[["text.var"]], 
+    out <- mgsub(output[[1]], output[[2]], attributes(text.var)[["text.var"]], 
         ignore.case = TRUE, fixed=FALSE)
 
     class(out)  <- c("check_spelling_interactive", class(out))
     attributes(out)[["replacements"]] <- output
     attributes(out)[["correct"]] <- function(text.var) {
-            mgsub(output[, 1], output[, 2], text.var, ignore.case = TRUE, fixed=FALSE)
+            mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
         }
     out
 }
 
-check_spelling_interactive_helper <- function(out, suggests, click, text.var) {
+check_spelling_interactive_helper <- function(out, suggests, click, 
+    text.var, n.suggests, method) {
 
     text.var <- as.character(text.var)
 
@@ -531,7 +553,8 @@ check_spelling_interactive_helper <- function(out, suggests, click, text.var) {
 
         if (ans == "1") {
             message("\n","Enter Repalcement:","\n")  
-            repl <- scan(n=1, what = character(0), quiet=TRUE)
+            repl <- readLines(n=1)
+
             while (repl %in% c("0", "!")) {
 
                 if (click) {
@@ -550,7 +573,7 @@ check_spelling_interactive_helper <- function(out, suggests, click, text.var) {
                     ans <- menu(c("TYPE MY OWN", comb))
                 }
                 message("\n","ENTER REPLACEMENT:","\n")  
-                repl <- scan(n=1, what = character(0), quiet=TRUE)
+                repl <- readLines(n=1)
             }
             if (click && !is.null(repl2)) repl <- repl2
         } else {

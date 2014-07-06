@@ -28,6 +28,7 @@ Imports:
     reports,
     reshape2,
     scales,
+    stringdist,
     tm (>= 0.6),
     tools,
     venneuler,
@@ -35,7 +36,6 @@ Imports:
     xlsx,
     XML
 Suggests:
-    english,
     koRpus,
     knitr,
     lda,
