@@ -66,17 +66,19 @@ function(names.list, pred.sex = TRUE, fuzzy.match = pred.sex, USE.NAMES = FALSE,
     
     if(pred.sex) {
         dat <- database[, -2]
+        lvls <- c("F", "M")
     } else {
         dat <- database[, -3]
+        lvls <- c("F", "M", "B")
     }
     nms <- toupper(names.list)
-    out <- factor(lookup(nms, dat), levels=c("F", "M"))
+    out <- factor(lookup(nms, dat), levels=lvls)
 
     if (sum(is.na(out)) > 0 && fuzzy.match) {
         
         ## find closest match with `check_spelling`
         mtchs <- toupper(check_spelling(tolower(nms[is.na(out)]), 
-            dictionary=tolower(dat[[1]]), parallel = parallel)[[4]])
+            dictionary=tolower(dat[[1]]), ...)[[4]])
 
         ## lookup and assign gender
         out[is.na(out)] <- lookup(mtchs, dat)
