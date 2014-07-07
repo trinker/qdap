@@ -155,7 +155,13 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     if (is.dp(text.var = DF[, "text.var"])) {
         warning(paste0("\n  Some rows contain double punctuation.", 
             "  Suggested use of sentSplit function."))
-    }    
+    }  
+    if (is.empty(DF[["text.var"]])) {   
+        badrows <- which.empty(DF[["text.var"]])
+        DF <- DF[-c(badrows), ]
+        warning("The following rows contained empty sentences and were removed:\n",
+             paste(badrows, collapse=", "))                  
+    }        
     DF$word.count <- word_count(DF$text.var, missing = 0)
     i <- as.data.frame(table(DF$group))
     DF$group <- DF$group[ , drop=TRUE]
@@ -235,6 +241,12 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         warning(paste0("\n  Some rows contain double punctuation.", 
             "  Suggested use of sentSplit function."))
     }    
+    if (is.empty(DF[["text.var"]])) {   
+        badrows <- which.empty(DF[["text.var"]])
+        DF <- DF[-c(badrows), ]
+        warning("The following rows contained empty sentences and were removed:\n",
+             paste(badrows, collapse=", "))                  
+    }          
     DF$word.count <- word_count(DF$text.var, missing = 0, digit.remove = FALSE)
     i <- as.data.frame(table(DF$group))
     DF$group <- DF$group[ , drop=TRUE]
@@ -303,7 +315,13 @@ function(text.var, grouping.var = NULL, output = "valid",
     if (is.dp(text.var = DF[, "text.var"])) {
         warning(paste0("\n  Some rows contain double punctuation.", 
             "  Suggested use of sentSplit function."))
-    }    
+    }   
+    if (is.empty(DF[["text.var"]])) {   
+        badrows <- which.empty(DF[["text.var"]])
+        DF <- DF[-c(badrows), ]
+        warning("The following rows contained empty sentences and were removed:\n",
+             paste(badrows, collapse=", "))                  
+    }          
     DF$word.count <- word_count(DF$text.var, missing = 0)
     i <- as.data.frame(table(DF$group))
     if (output == "valid") {
@@ -375,6 +393,12 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         warning(paste0("\n  Some rows contain double punctuation.", 
             "  Suggested use of sentSplit function."))
     }
+    if (is.empty(DF[["text.var"]])) {   
+        badrows <- which.empty(DF[["text.var"]])
+        DF <- DF[-c(badrows), ]
+        warning("The following rows contained empty sentences and were removed:\n",
+             paste(badrows, collapse=", "))                  
+    }          
     DF$word.count <- word_count(DF$text.var, missing = 0)
     DF$syllable.count <- syllable_sum(DF$text.var)
     DF$tot.n.sent <- 1:nrow(DF)
@@ -447,7 +471,13 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE,
     if (is.dp(text.var = DF[, "text.var"])) {
         warning(paste0("\n  Some rows contain double punctuation.", 
             "  Suggested use of sentSplit function."))
-    }       
+    }   
+    if (is.empty(DF[["text.var"]])) {   
+        badrows <- which.empty(DF[["text.var"]])
+        DF <- DF[-c(badrows), ]
+        warning("The following rows contained empty sentences and were removed:\n",
+             paste(badrows, collapse=", "))                  
+    }          
     DF$word.count <- word_count(DF$text.var, missing = 0)
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
@@ -544,7 +574,13 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     if (is.dp(text.var = DF[, "text.var"])) {
         warning(paste0("\n  Some rows contain double punctuation.", 
             "  Suggested use of sentSplit function."))
-    }       
+    }   
+    if (is.empty(DF[["text.var"]])) {   
+        badrows <- which.empty(DF[["text.var"]])
+        DF <- DF[-c(badrows), ]
+        warning("The following rows contained empty sentences and were removed:\n",
+             paste(badrows, collapse=", "))                  
+    }          
     DF$word.count <- word_count(DF$text.var)
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]

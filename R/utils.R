@@ -85,6 +85,8 @@ is.wfm <- function(x) inherits(x, "wfm")
 is.tdm <- function(x) inherits(x, "TermDocumentMatrix")
 is.dtm <- function(x) inherits(x, "DocumentTermMatrix")
 is.mp <- function(x) any(suppressWarnings(na.omit(end_mark(x))) == "_")
+is.empty <- function(x) any(na.omit(x) == "")
+which.empty <- function(x) which(na.omit(x) == "")
 is.dp <- function(text.var) {
     punct <- c(".", "?", "!", "|")
     any(sapply(strsplit(text.var, NULL), function(x) {

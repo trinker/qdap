@@ -71,8 +71,10 @@ random_data <- function(n = 10, ..., n.people = 10, ages = 7:10,
         "1.9", "100.0%", "12.2", "16.3", "4.7", "63.7"), class = "factor")), 
         .Names = c("race", "percent"), row.names = c(NA, -8L), class = "data.frame")
 
+    nms <- sample(people.names, n.people)
+    
     output <- data.frame(
-        person = sample(people.names, n.people),
+        person = nms,
         sex = name2sex(nms),
         age = sample(ages, n.people, replace=TRUE),
         race = sample(races[[1]], n.people, replace=TRUE, prob = races[[2]]),  
