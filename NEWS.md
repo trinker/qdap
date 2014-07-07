@@ -66,6 +66,8 @@ And constructed with the following guidelines:
   `correct` allow the user to identify potentially misspelled words and 
   optionally suggest replacements.
 
+* `random_sent` added to generate random sentence vectors.
+
 **MINOR FEATURES**
 
 * `dplyr`'s chaining pipe imported for convenience.  See 

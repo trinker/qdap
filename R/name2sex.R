@@ -71,6 +71,7 @@ function(names.list, pred.sex = TRUE, fuzzy.match = pred.sex, USE.NAMES = FALSE,
         dat <- database[, -3]
         lvls <- c("F", "M", "B")
     }
+    dat <- dat[order(dat[[1]]), ]
     nms <- toupper(names.list)
     out <- factor(lookup(nms, dat), levels=lvls)
 

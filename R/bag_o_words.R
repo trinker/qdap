@@ -39,7 +39,7 @@ function(text.var, apostrophe.remove = FALSE, ...) {
 
 bag_o_words1 <- 
 function(x, apostrophe.remove = FALSE) {
-    x <- x[!is.na(x)]
+    x <- gsub("\\|", "", x[!is.na(x)])
     x <- paste(x, collapse=" ")
     if(apostrophe.remove) {
         reg <- "[^[:alpha:]]"
