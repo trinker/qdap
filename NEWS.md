@@ -66,7 +66,8 @@ And constructed with the following guidelines:
   `correct` allow the user to identify potentially misspelled words and 
   optionally suggest replacements.
 
-* `random_sent` added to generate random sentence vectors.
+* `random_data` & `random_sent` added to generate random sentence data sets and 
+  vectors.
 
 **MINOR FEATURES**
 

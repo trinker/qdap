@@ -1,7 +1,7 @@
-#' Generate Random Sentence Samples
+#' Generate Random Dialogue Data
 #' 
-#' Generates a random sample of sentences (sentences are sampled at the word 
-#' level and there for are likely nonsensical).
+#' \code{random_sent} - Generates a random sample of sentences (sentences are 
+#' sampled at the word level and there for are likely nonsensical).
 #' 
 #' @param n Number of sentences to create.
 #' @param len Average length of sentences (in words).
@@ -9,9 +9,10 @@
 #' be a recycled single integer vector or an integer vector of length 2.
 #' @param dictionary A dictionary of words to sample from.
 #' @param endmark.fun A function to create random end marks. 
-#' @return Returns a random vector of sentence strings.
+#' @return \code{random_sent} - Returns a random vector of sentence strings.
 #' @keywords sample random sentence
 #' @export
+#' @rdname random_data
 #' @examples
 #' \dontrun{
 #' random_sent()
@@ -19,6 +20,12 @@
 #' 
 #' dict <- sort(unique(bag_o_words(pres_debates2012[["dialogue"]])))
 #' random_sent(dictionary=dict)
+#' 
+#' random_data()
+#' random_data(ages = seq(10, 20, by = .5))
+#' random_data(50) %&% word_stats(person)
+#' random_data(100) %&% word_stats(list(race, sex))
+#' random_data(dictionary = dict)
 #' }
 random_sent <- function(n =10, len = 14, range = len - 1, 
     dictionary = qdapDictionaries::Top200Words, 
@@ -34,6 +41,52 @@ random_sent <- function(n =10, len = 14, range = len - 1,
             endmark.fun()
         ))
     })
+}
+
+#' Generate Random Dialogue Data
+#' 
+#' \code{random_data} - Generate random dialogue, people, and demographic 
+#' variables
+#' 
+#' @param \ldots Other arguments passed to \code{random_sent}
+#' @param n.people An integer of the number of people to include in the sample 
+#' (number of people is sampled from; if \code{n} is smaller not all people may 
+#' be included).
+#' @param ages The possible ages to choose from (numeric).
+#' @param people.names A vector of names to choose from at least as large as 
+#' \code{n.people}.
+#' @return \code{random_data} - Returns a \code{\link[base]{data.frame}} of
+#' people, dialogue, and demographic variables of the class \code{sent_split}.
+#' @export
+#' @rdname random_data
+random_data <- function(n = 10, ..., n.people = 10, ages = 7:10, 
+    people.names = unique(tolower(qdapDictionaries::NAMES[[1]]))) {
+
+    m <- random_sent(n = n, ...)
+    len <- length(m)
+
+    races <- structure(list(race = c("White", "Black", "Native", "Asian", 
+        "Hawaiian", "Bi-Racial", "Other", "Hispanic"), percent = structure(c(10L, 
+        7L, 3L, 9L, 4L, 5L, 2L, 8L), .Label = c("", ".2", ".7", "0.15", 
+        "1.9", "100.0%", "12.2", "16.3", "4.7", "63.7"), class = "factor")), 
+        .Names = c("race", "percent"), row.names = c(NA, -8L), class = "data.frame")
+
+    output <- data.frame(
+        person = sample(people.names, n.people),
+        sex = name2sex(nms),
+        age = sample(ages, n.people, replace=TRUE),
+        race = sample(races[[1]], n.people, replace=TRUE, prob = races[[2]]),  
+        dialogue = m,
+        stringsAsFactors = FALSE 
+    )
+
+    text.var <- "dialogue"
+    output <- dplyr::tbl_df(output)
+    class(output) <- unique(c("sent_split", "qdap_df", paste0("sent_split_text_var:", 
+        text.var), class(output)))
+    attributes(output)[["text.var"]] <- text.var
+    attributes(output)[["qdap_df_text.var"]] <- substitute(text.var)
+    output
 }
 
 
