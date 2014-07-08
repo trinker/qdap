@@ -86,8 +86,10 @@ Additionally, extraneous punctuation such as abbreviations should be removed
 Trailing sentences such as \bold{I thought I...} will be treated as
 incomplete and marked with \code{"|"} to denote an incomplete/trailing
 sentence.
+}
 
-It is recommended that the user runs \code{\link[qdap]{check_text}} on the
+\section{Suggestion}{
+ It is recommended that the user runs \code{\link[qdap]{check_text}} on the
 output of \code{sentSplit}'s text coloumn.
 }
 \examples{
