@@ -33,6 +33,9 @@
 #' Trailing sentences such as \bold{I thought I...} will be treated as 
 #' incomplete and marked with \code{"|"} to denote an incomplete/trailing 
 #' sentence.
+#' 
+#' It is recommended that the user runs \code{\link[qdap]{check_text}} on the 
+#' output text coloumn.
 #' @rdname sentSplit
 #' @author Dason Kurkiewicz and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @seealso 
@@ -47,6 +50,7 @@
 #' \dontrun{
 #' ## `sentSplit` EXAMPLE:
 #' (out <- sentSplit(DATA, "state"))
+#' out %&% check_text()  ## check output text
 #' sentSplit(DATA, "state", stem.col = TRUE)
 #' sentSplit(DATA, "state", text.place = "left")
 #' sentSplit(DATA, "state", text.place = "original")
