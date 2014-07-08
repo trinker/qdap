@@ -57,7 +57,7 @@
 %====================
 \makeatletter
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
-% \VignetteIndexEntry{qdap-tm Package Compatibility}
+% \VignetteIndexEntry{Cleaning Text & Debugging}
 % \VignetteEngine{knitr}
 
 \makeatother
