@@ -79,6 +79,16 @@ function(dataframe, text.var, rm.var = NULL, endmarks = c("?", ".", "!", "|"),
     incomplete.sub = TRUE, rm.bracket = TRUE, stem.col = FALSE, 
     text.place = "right", ...) {
 
+    checks <- check_text(dataframe[[text.var]])
+    checks <- checks[!names(checks) %in% c("double_punctuation", 
+        "missing_value", "potentially_misspelled")]
+    pot_probs <- !sapply(checks, is.null)
+    if(sum(pot_probs) > 0) {
+        probs <- gsub("_", " ", paste(names(pot_probs)[pot_probs], collapse=", "))
+        warning("The following problems were detected:\n", probs, 
+            "\n\n*Consider running `check_text`")
+    }
+
     if (is.null(rm.var)) {
         output <- sentSplit_helper(dataframe = dataframe, text.var = text.var, 
             endmarks = endmarks, incomplete.sub = incomplete.sub, 

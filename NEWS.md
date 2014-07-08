@@ -69,6 +69,10 @@ And constructed with the following guidelines:
 * `random_data` & `random_sent` added to generate random sentence data sets and 
   vectors.
 
+* `comma_spacer` added to ensure strings with commas contain a space after them.
+
+* `check_text` added to identify potential problems in text.
+
 **MINOR FEATURES**
 
 * `dplyr`'s chaining pipe imported for convenience.  See 
@@ -88,6 +92,10 @@ And constructed with the following guidelines:
 * `as.Corpus` familiy of functions didn't necessarily respect document names and
   sometimes used numeric sequence instead.  The introduction of a reader via
   `tm::readTabular` has fixed this.
+
+* `sentSplit` now gives warnings for text that may contain anomalies such as:
+  non-ASCII characters, factors, missing punctuation, empty cells, and no 
+  alphabetic characters found.
 
 **CHANGES**
 

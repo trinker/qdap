@@ -182,6 +182,7 @@ which_misspelled <- function(x, suggest = FALSE, range = 2,
 
     if (length(x) > 1) stop("`x` must be a single string")
     if (is.na(x)) return(NULL)
+    if (is.non.alpha(x)) return(NULL)
 
     ## break into a bag of words
     wrds <- bag_o_words(x)

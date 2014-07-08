@@ -84,15 +84,72 @@ is.tbl_df <- function(x) inherits(x, "tbl_df")
 is.wfm <- function(x) inherits(x, "wfm")
 is.tdm <- function(x) inherits(x, "TermDocumentMatrix")
 is.dtm <- function(x) inherits(x, "DocumentTermMatrix")
+## is missing punctiuation
 is.mp <- function(x) any(suppressWarnings(na.omit(end_mark(x))) == "_")
 is.empty <- function(x) any(na.omit(x) == "")
-which.empty <- function(x) which(na.omit(x) == "")
+## is double punctuation
 is.dp <- function(text.var) {
     punct <- c(".", "?", "!", "|")
     any(sapply(strsplit(text.var, NULL), function(x) {
         sum(x %in% punct) > 1
     }))
 }
+## is comma with no space
+is.cns <- function(x) grepl("(,)([^ ])", x)
+## x <- c("the, dog,went", "I,like,it", "where are you", NA, "why")
+## is.cns(x)
+is.empty.integer <- function(x) identical(integer(0), x)
 
+is.dp2 <- function(text.var) {
+    punct <- c(".", "?", "!", "|")
+    sapply(strsplit(text.var, NULL), function(x) {
+        sum(x %in% punct) > 1
+    })
+}
 
+is.non.alpha <- function(x) {
+    !is.na(x) & !grepl("[a-zA-Z]", x)
+}
+
+is.non.ascii <- function(x) {
+    capture.output(nonascii <- tools::showNonASCII(x))
+    x %in% unique(nonascii[!is.na(nonascii)])
+}
+
+which.mp <- function(x) {
+    y <- suppressWarnings(end_mark(x))
+    out <- which(!is.na(y) & y == "_")
+    if(is.empty.integer(out)) return(NULL)
+    out
+}
+
+which.empty <- function(x) {
+    out <- which(!is.na(x) & x == "")
+    if(is.empty.integer(out)) return(NULL)
+    out
+}
+
+which.cns <- function(x) {
+    out <- which(is.cns(x))
+    if(is.empty.integer(out)) return(NULL)
+    out
+}
+
+which.dp <- function(x){
+    out <- which(is.dp2(x))
+    if(is.empty.integer(out)) return(NULL)
+    out
+}
+
+which.non.alpha <- function(x){
+    out <- which(is.non.alpha(x))
+    if(is.empty.integer(out)) return(NULL)
+    out
+}
+
+which.non.ascii <- function(x){
+    out <- which(is.non.ascii(x))
+    if(is.empty.integer(out)) return(NULL)
+    out
+}
 
