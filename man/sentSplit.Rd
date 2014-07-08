@@ -88,7 +88,7 @@ incomplete and marked with \code{"|"} to denote an incomplete/trailing
 sentence.
 
 It is recommended that the user runs \code{\link[qdap]{check_text}} on the
-output text coloumn.
+output of \code{sentSplit}'s text coloumn.
 }
 \examples{
 \dontrun{
