@@ -42,4 +42,4 @@ You are welcome to:
 * send a pull request on: <https://github.com/trinker/qdap/>
 * compose a friendly e-mail to: <tyler.rinker@gmail.com>
 
-***Note:** If you are reporting a bug make sure you have first read the [Cleaning Text & Debugging vignette](http://trinker.github.io/qdap/vignettes/cleaning_and_debugging.pdf)*
+*<b>Note:</b> If you are reporting a bug make sure you have first read the [Cleaning Text & Debugging vignette](http://trinker.github.io/qdap/vignettes/cleaning_and_debugging.pdf)*
