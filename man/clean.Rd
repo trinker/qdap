@@ -16,8 +16,8 @@ Preprocess data to remove escaped characters
 }
 \examples{
 \dontrun{
-x <- "I go \\r
-    to the \\tnext line"
+x <- "I go \\\\r
+    to the \\\\tnext line"
 x
 clean(x)
 }

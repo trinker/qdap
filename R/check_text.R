@@ -21,7 +21,10 @@
 #'   \item{no_alpha}{- Text that contains string elements with no alphabetic characters.}
 #'   \item{non_ascii}{- Text that contains non-ASCII characters.}
 #'   \item{missing_value}{- Text that contains missing values (i.e., \code{NA}).}
-#'   \item{potentially_misspelled}{-  Text that contains potentially misspelled words.}
+#'   \item{containing_escaped}{- Text that contains escaped (see \code{?Quotes}).}
+#'   \item{containing_digits}{- Text that contains digits.}
+#'   \item{indicating_incomplete}{- Text that contains endmarks that are indicative of incomplete/trailing sentences (e.g., \code{...}).}
+#'   \item{potentially_misspelled}{- Text that contains potentially misspelled words.}
 #' }
 #' @note The output is a list but prints as a pretty formatted output with 
 #' potential problem elements, the accompanying text, and possible suggestions 
@@ -32,7 +35,8 @@
 #' @examples
 #' \dontrun{
 #' x <- c("i like", "i want. thet them .", "I am ! that|", "", NA, 
-#'     "they,were there", ".", "   ", "?", "3;", "I like goud eggs!")
+#'     "they,were there", ".", "   ", "?", "3;", "I like goud eggs!", 
+#'     "i 4like...", "\\tgreat",  "She said \"yes\"")
 #' check_text(x)
 #' print(check_text(x), include.text=FALSE)
 #'
@@ -60,6 +64,9 @@ check_text <- function(text.var, file = NULL) {
         no_alpha = which.non.alpha(text.var),
         non_ascii = which.non.ascii(text.var),
         missing_value = missing, 
+        containing_escaped = which.escaped(text.var),
+        containing_digits = which.digit(text.var),
+        indicating_incomplete = which.incomplete(text.var),
         potentially_misspelled = misspelled
     )
     class(out) <- "check_text"
@@ -147,6 +154,9 @@ print.check_text <- function(x, include.text = TRUE, file = NULL, ...) {
     no_alpha = "cleaning the raw text",
     non_ascii = "exploring `?Encoding`",
     missing_value = NULL, 
+    containing_escaped = "using `clean` or `scrubber`",
+    containing_digits = "using `replace_number`",
+    indicating_incomplete = "using `incomplete_replace`",   
     potentially_misspelled = "running `check_spelling_interactive`"
 )
 

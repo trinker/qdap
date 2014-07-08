@@ -8,12 +8,12 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' x <- "I go \r
-#'     to the \tnext line"
+#' x <- "I go \\r
+#'     to the \\tnext line"
 #' x
 #' clean(x)
 #' }
 clean <-
 function(text.var) {
-    gsub("\\s+", " ", gsub("\r|\n|\t", " ", text.var))
+    gsub("\\s+", " ", gsub("\\\\r|\\\\n|\\n|\\\\t", " ", text.var))
 }

@@ -116,6 +116,20 @@ is.non.ascii <- function(x) {
     x %in% unique(nonascii[!is.na(nonascii)])
 }
 
+which.incomplete <- function(x) {
+    pat <- "\\?*\\?[.]+|[.?!]*\\? [.][.?!]+|[.?!]*\\. [.?!]+|[.?!]+\\. [.?!]*|[.?!]+\\.[.?!]*|[.?!]*\\.[.?!]+"
+    out <- grep(pat, x)
+    if(is.empty.integer(out)) return(NULL)
+    out
+}
+
+
+which.escaped <- function(x) {
+    out <- which(grepl("[\\\\]", x) & !grepl("\\\"|\\\'|\\\`", x))
+    if(is.empty.integer(out)) return(NULL)
+    out
+}
+
 which.mp <- function(x) {
     y <- suppressWarnings(end_mark(x))
     out <- which(!is.na(y) & y == "_")
@@ -149,6 +163,12 @@ which.non.alpha <- function(x){
 
 which.non.ascii <- function(x){
     out <- which(is.non.ascii(x))
+    if(is.empty.integer(out)) return(NULL)
+    out
+}
+
+which.digit <- function(x) {
+    out <- grep(paste(0:9, collapse="|"), x)    
     if(is.empty.integer(out)) return(NULL)
     out
 }

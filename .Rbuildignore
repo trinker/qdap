@@ -65,7 +65,12 @@ inst/staticdocs
 inst/web
 inst/pdf_gen
 inst/demos/discoursemap
-
-
+vignettes/cleaning_and_debugging-concordance.tex
+vignettes/cleaning_and_debugging.bbl
+vignettes/cleaning_and_debugging.log
+vignettes/cleaning_and_debugging.tex
+vignettes/cleaning_and_debugging.synctex.gz
+vignettes/cleaning_and_debugging.blg
+vignettes/cleaning_and_debugging.aux
 
 

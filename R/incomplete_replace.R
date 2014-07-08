@@ -1,6 +1,6 @@
 #' Denote Incomplete End Marks With "|"
 #' 
-#' Replaces incomplete sentence end marks (.., ..., .?, ..?, en \& em dash etc.)
+#' Replaces incomplete sentence end marks (.., ..., .?, ..?, en & em dash etc.)
 #' with \code{"|"}.
 #' 
 #' @rdname incomplete_replace

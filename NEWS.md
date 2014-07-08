@@ -73,6 +73,9 @@ And constructed with the following guidelines:
 
 * `check_text` added to identify potential problems in text.
 
+* A vignette: `Cleaning Text & Debugging` was added to assist users with 
+  cleaning and debugging problems in `qdap`.
+
 **MINOR FEATURES**
 
 * `dplyr`'s chaining pipe imported for convenience.  See 

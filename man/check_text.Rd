@@ -23,6 +23,9 @@ Returns a list with the following potential text faults reports:\cr
   \item{no_alpha}{- Text that contains string elements with no alphabetic characters.}
   \item{non_ascii}{- Text that contains non-ASCII characters.}
   \item{missing_value}{- Text that contains missing values (i.e., \code{NA}).}
+  \item{containing_escaped}{- Text that contains escaped (see \code{?Quotes}).}
+  \item{containing_digits}{- Text that contains digits.}
+  \item{indicating_incomplete}{- Text that contains endmarks that are indicative of incomplete/trailing sentences (e.g., \code{...}).}
   \item{potentially_misspelled}{-  Text that contains potentially misspelled words.}
 }
 }
@@ -42,7 +45,8 @@ to fix the text.
 \examples{
 \dontrun{
 x <- c("i like", "i want. thet them .", "I am ! that|", "", NA,
-    "they,were there", ".", "   ", "?", "3;", "I like goud eggs!")
+    "they,were there", ".", "   ", "?", "3;", "I like goud eggs!",
+    "i 4like...", "\\\\tgreat",  "She said \\"yes\\"")
 check_text(x)
 print(check_text(x), include.text=FALSE)
 

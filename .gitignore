@@ -154,3 +154,10 @@ tm_package_compatibility.synctex.gz
 tm_package_compatibility.tex
 inst/web
 inst/Rmd_vignette/figure
+vignettes/cleaning_and_debugging-concordance.tex
+vignettes/cleaning_and_debugging.bbl
+vignettes/cleaning_and_debugging.log
+vignettes/cleaning_and_debugging.tex
+vignettes/cleaning_and_debugging.synctex.gz
+vignettes/cleaning_and_debugging.blg
+vignettes/cleaning_and_debugging.aux
