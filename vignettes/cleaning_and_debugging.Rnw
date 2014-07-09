@@ -302,7 +302,6 @@ with(DATA[9, ], fake_fun(substring(state, 21)))
 
 At this point you have to either identified improperly cleaned data or a potential bug in \textbf{qdap}.  It is important that you can replicate the problem (either bad data or the bug).  If you have located the source you should be able to cause the error to be raised with new data that contains the same error causing string(s).  If you can not replicate the error you have not isolated the source.
 
-\newpage 
 \section{Reporting a Potential Bug}
 
 If you believe there is a bug in \textbf{qdap} you can:
