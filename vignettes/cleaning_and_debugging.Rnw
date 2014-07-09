@@ -76,14 +76,39 @@
 
 The \textbf{qdap} package \citep{R-qdap} contains many functions that assume that the text strings supplied are cleaned and in the expected form.  Failing to prepare data may result in errors, warnings, and incorrect results.  This vignette will outline the checking and prepping of text as well as how to isolate and identify errors caused by unprepared text.
 
+\newpage
+\tableofcontents
+
+\newpage
+\section{qdap Text Assumptions}
+
+Many of the analysis/scoring functions in \textbf{qdap} make the following assumptions about your data:
+
+\begin{sing_enum}
+  \item Each row contains a single sentence
+  \item Each sentence contains a \textbf{qdap} end-mark ("?", ".", "!", "|")
+  \item Each sentence contains only one punctuation end-mark
+  \item Commas are followed by a space
+  \item Numbers are unimportant (they are ignored unless converted to text equivalent)
+  \item Symbols (non-text other than apostrophes and end-marks) are ignored
+  \item Text elements contain alphabetic characters or are \texttt{NA}
+  \item Text words are spelled correctly
+  \item Text contains only ASCII characters
+  \item Text contains no escape characters
+\end{sing_enum}
+
+\noindent If these assumptions are not met the integrity of \textbf{qdap}'s functions may be undermined.
+
+\section{Cleaning and Debugging Procedures}
+
 The follow procedure will help the user to avoid problems caused by poorly formatted text and cope with errors:
 
 \begin{sing_enum}
-  \item \emph{Check text} for potential problems
-  \item Perform recommended \emph{cleaning procedures}
-  \item \emph{Recheck text} for potential problems
+  \item \emph{Check text} for potential problems with \texttt{check\_text} 
+  \item Perform \texttt{check\_text}'s recommended \emph{cleaning procedures}
+  \item \emph{Recheck text} for potential problems with \texttt{check\_text} 
   \item Run \emph{analysis}
-  \item \emph{Debugging} to isolate errors when they occur
+  \item \emph{Debugging} (via halving) to isolate errors when they occur
 \end{sing_enum}
 
 
@@ -117,6 +142,9 @@ The \texttt{check\_text} function is designed to check text for the following po
 \end{sing_item}
 
 The user simply supplies a text variable and \texttt{check\_text} will output a list which prints to the console (or can be saved to an external file) a prettified summary of potential problems with the text.
+
+
+\subsection{Example \textbf{check\_text}}
 
 Here is an example:
 
@@ -160,15 +188,18 @@ The following is a list of \textbf{qdap} cleaning \& formatting functions and th
 
 \noindent While an exhaustive discussion of these functions is beyond the scope of this vignette the reader should be aware of these functions and their uses to clean and format text for analysis.
 
+\newpage
 \section{Debugging}
 
-While the \texttt{check\_text} is useful for catching many text problems it can not detect all problems a user may encounter.  Some functions may provide useful error/warning message that help the user isolate the source of the problem.  At other times the source is unknown.
+While the \texttt{check\_text} is useful for catching many text problems it can not detect all problems a user may encounter.  Some functions may provide useful error/warning message that help the user isolate the source of the problem.  At other times the source of the error is unknown.
 
 When a user encounters such an error it is important to isolate and identify the source of the error.  Often text data sets (corpora) are larger and thus an appropriate strategy may isolate the source of the bug more quickly.  The use of \emph{halving} is one such approach.
 
-In halving the user experiences an error and recursively divides the data set into halves until the source of the error is found.  With each pass the non-offending portion and half of the offending data is used to test smaller and smaller pieces of the data for the location of the error.  Here is an example where I walk you through the entire process.
+In halving the user experiences an error and recursively divides the data set into halves until the source of the error is found.  With each pass the non-offending portion and half of the offending data is used to test smaller and smaller pieces of the data for the location of the error.  
 
-\noindent First we'll create an error generating function to use with the built in \textbf{qdap} data set \texttt{DATA}:
+\subsection{Halving Example}
+
+Here is an example where I walk you through the entire halving process.  First we'll create an error generating function to use with the built in \textbf{qdap} data set \texttt{DATA}:
 
 <<bug1>>=
 fake_fun <- function(x) {
@@ -271,6 +302,7 @@ with(DATA[9, ], fake_fun(substring(state, 21)))
 
 At this point you have to either identified improperly cleaned data or a potential bug in \textbf{qdap}.  It is important that you can replicate the problem (either bad data or the bug).  If you have located the source you should be able to cause the error to be raised with new data that contains the same error causing string(s).  If you can not replicate the error you have not isolated the source.
 
+\newpage 
 \section{Reporting a Potential Bug}
 
 If you believe there is a bug in \textbf{qdap} you can:
