@@ -304,19 +304,19 @@ At this point you have to either identified improperly cleaned data or a potenti
 
 \section{Reporting a Potential Bug}
 
-If you believe there is a bug in \textbf{qdap} you can:
+If you believe that there is a bug in \textbf{qdap} you can:
 
 
 \begin{sing_enum}
   \item Fork the repository, correct the code, run a CRAN check, and send a pull request.
   \item Report the bug via \href{https://github.com/trinker/qdap/issues}{\textbf{qdap}'s GitHub issues page}.  Be sure you:
     \begin{enumerate}
-      \item Describe the bug (be specific; in other words show work on your part to locate the source of the error)
-      \item Provide a \href{http://sscce.org/}{minimally reproducible example} including data and code that produces the error
+      \item Describe the bug (be specific; in other words, show work on your part to locate the source of the error)
+      \item Provide a \href{http://sscce.org/}{minimally reproducible example}, including data and code that produces the error
     \end{enumerate}
 \end{sing_enum}
 
-The later former is preferred if you are experienced with R programming, the latter if not.
+The former is preferred if you are experienced with R programming, the latter if not.
 
 \bibliographystyle{jss}
 \bibliography{qdap}
