@@ -129,8 +129,10 @@ print.check_text <- function(x, include.text = TRUE, file = NULL, ...) {
                 mess2 <- sprintf("\nThe following text is %s:\n", tolower(nm))
 
                 if (y == "potentially_misspelled" && !is.null(spelling)) {
-                    txt.var[x] <- mgsub(spelling, paste0("<<", spelling, ">>"), 
-                        txt.var[x])
+                    spelling <- unique(spelling)
+                    txt.var[x] <- Trim(mgsub(spaste(spelling), 
+                        spaste(paste0("<<", spelling, ">>")), 
+                        spaste(strip(txt.var[x], apostrophe.remove = FALSE))))
                 } 
                 affected.text <- txt.var[x]
 

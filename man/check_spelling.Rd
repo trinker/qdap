@@ -8,7 +8,7 @@
 \usage{
 check_spelling(text.var, range = 2, assume.first.correct = TRUE,
   method = "jw", dictionary = qdapDictionaries::GradyAugmented,
-  parallel = FALSE, cores = parallel::detectCores()/2, n.suggests = 8)
+  parallel = TRUE, cores = parallel::detectCores()/2, n.suggests = 8)
 
 which_misspelled(x, suggest = FALSE, range = 2,
   assume.first.correct = TRUE,
@@ -18,7 +18,7 @@ which_misspelled(x, suggest = FALSE, range = 2,
 
 check_spelling_interactive(text.var, range = 2, assume.first.correct = TRUE,
   click = TRUE, method = "jw",
-  dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE,
+  dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE,
   cores = parallel::detectCores()/2, n.suggests = 8, ...)
 
 correct(x, ...)

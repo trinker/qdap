@@ -105,7 +105,7 @@
 #' }
 check_spelling <- function(text.var, range = 2,
     assume.first.correct = TRUE, method = "jw",
-    dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
+    dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
     cores = parallel::detectCores()/2, n.suggests = 8) {
 
     dictnchar <- nchar(dictionary)
@@ -286,7 +286,7 @@ print.which_misspelled <- function(x, ...){
 #' subsequent text character vectors.
 check_spelling_interactive <- function(text.var, range = 2, 
     assume.first.correct = TRUE, click = TRUE, method = "jw",
-    dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
+    dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
     cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
     text.var
@@ -378,7 +378,7 @@ correct <- function(x, ...){
 #' @method check_spelling_interactive character
 check_spelling_interactive.character <- function(text.var, range = 2, 
     assume.first.correct = TRUE, click = TRUE, method = "jw",
-    dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
+    dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
     cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
     out <- check_spelling(text.var = text.var, range = range, 
@@ -447,7 +447,7 @@ check_spelling_interactive.character <- function(text.var, range = 2,
 #' @method check_spelling_interactive factor
 check_spelling_interactive.factor <- function(text.var, range = 2, 
     assume.first.correct = TRUE, click = TRUE, method = "jw",
-    dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
+    dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
     cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
     out <- check_spelling(text.var = text.var, range = range, 
@@ -514,7 +514,7 @@ check_spelling_interactive.factor <- function(text.var, range = 2,
 #' @method check_spelling_interactive check_spelling
 check_spelling_interactive.check_spelling <- function(text.var, range = 2, 
     assume.first.correct = TRUE, click = TRUE, method = "jw",
-    dictionary = qdapDictionaries::GradyAugmented, parallel = FALSE, 
+    dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE, 
     cores = parallel::detectCores()/2, n.suggests = 8, ...) {
 
     out <- split(out, out[["not.found"]])
@@ -545,8 +545,9 @@ check_spelling_interactive_helper <- function(out, suggests, click,
 
     data.frame(do.call(rbind, Map(function(x, y) {
     
-        Line <- gsub(x[["not.found"]][1], paste0("<<", x[["not.found"]][1], ">>"), 
-            tolower(as.character(text.var[x[["row"]]])))
+        Line <- gsub(spaste(x[["not.found"]][1]), 
+            spaste(paste0("<<", x[["not.found"]][1], ">>")), 
+            spaste(tolower(as.character(text.var[x[["row"]]]))))
 
         under <- paste(rep("=", max(nchar(Line))), collapse="")
               
