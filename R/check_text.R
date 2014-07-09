@@ -103,7 +103,7 @@ print.check_text <- function(x, include.text = TRUE, file = NULL, ...) {
             if (y == "non_character") {
 
                 if(is.null(x)) {
-                    mess <- "\n  --WAS CHARACTER--\n"
+                    mess <- "\n  --IS CHARACTER--\n"
                     mess3 <- NULL
                 } else {
                     mess <- "\nText is a factor."

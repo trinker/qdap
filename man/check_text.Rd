@@ -26,7 +26,7 @@ Returns a list with the following potential text faults reports:\cr
   \item{containing_escaped}{- Text that contains escaped (see \code{?Quotes}).}
   \item{containing_digits}{- Text that contains digits.}
   \item{indicating_incomplete}{- Text that contains endmarks that are indicative of incomplete/trailing sentences (e.g., \code{...}).}
-  \item{potentially_misspelled}{-  Text that contains potentially misspelled words.}
+  \item{potentially_misspelled}{- Text that contains potentially misspelled words.}
 }
 }
 \description{

@@ -82,7 +82,7 @@ The \textbf{qdap} package \citep{R-qdap} contains many functions that assume tha
 \newpage
 \section{qdap Text Assumptions}
 
-Many of the analysis/scoring functions in \textbf{qdap} make the following assumptions about your data:
+\hspace{.4cm} Many of the analysis/scoring functions in \textbf{qdap} make the following assumptions about your data:
 
 \begin{sing_enum}
   \item Each row contains a single sentence
@@ -101,14 +101,14 @@ Many of the analysis/scoring functions in \textbf{qdap} make the following assum
 
 \section{Cleaning and Debugging Procedures}
 
-The follow procedure will help the user to avoid problems caused by poorly formatted text and cope with errors:
+\hspace{.4cm} The follow procedure will help the user to avoid problems caused by poorly formatted text and cope with errors:
 
 \begin{sing_enum}
   \item \emph{Check text} for potential problems with \texttt{check\_text} 
   \item Perform \texttt{check\_text}'s recommended \emph{cleaning procedures}
   \item \emph{Recheck text} for potential problems with \texttt{check\_text} 
   \item Run \emph{analysis}
-  \item \emph{Debugging} (via halving) to isolate errors when they occur
+  \item \emph{Debugging} (via halving) to isolate and identify errors when they occur
 \end{sing_enum}
 
 
@@ -124,10 +124,12 @@ pdf.options(useDingbats = TRUE)
 \newpage
 \section{Checking Text}
 
-The \texttt{check\_text} function is designed to check text for the following potential sources of errors, warnings, and incorrect results:
+\subsection{\texttt{check\_text} Introduced}
+
+\hspace{.4cm} The \texttt{check\_text} function is designed to check text for the following potential sources of errors, warnings, and incorrect results:
 
 \begin{sing_item}
-  \item \textbf{non\_character} -- Text that is non-character.
+  \item \textbf{non\_character} -- Text that is of \texttt{factor} class.
   \item \textbf{missing\_ending\_punctuation} -- Text with no end-mark at the end of the string.
   \item \textbf{empty} -- Text that contains an empty element (i.e., \texttt{""}).
   \item \textbf{double\_punctuation} - Text that contains two \textbf{qdap} punctuation marks in the same string.
@@ -141,27 +143,60 @@ The \texttt{check\_text} function is designed to check text for the following po
   \item \textbf{potentially\_misspelled} -- Text that contains potentially misspelled words.
 \end{sing_item}
 
-The user simply supplies a text variable and \texttt{check\_text} will output a list which prints to the console (or can be saved to an external file) a prettified summary of potential problems with the text.
+The user simply supplies a text variable and \texttt{check\_text} will output a list.  The list prints to the console (or can be saved to an external file) as a prettified summary of potential text problems .  
+
+\newpage
+\subsection{\texttt{check\_text} Output Explained}
+
+\hspace{.4cm} Here is a sample section for potential misspellings.  Notice that there are typically 4 elements within a section: (A) a section header, (B) the index within the vector for where the potential problems are located, (C) the actual text strings that raised the alert, and (D) a suggested fix for the problem.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+======================
+POTENTIALLY MISSPELLED
+======================
+
+The following observations were potentially misspelled:
+
+2, 11, 13
+
+The following text is potentially misspelled:
+
+2: i want. <<thet>> them .
+11: I like <<goud>> eggs!
+13: <<tgreat>>
+
+*Suggestion: Consider running `check_spelling_interactive`
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 
 
-\subsection{Example \textbf{check\_text}}
+\newpage
+\subsection{\texttt{check\_text} Example}
 
-Here is an example:
+\hspace{.4cm} In this section you will see an instance of the use and output of \texttt{check\_text}.  Here is the data we'll use:
 
-<<checking>>=
+
+<<checking1>>=
 x <- c("i like", "i want. thet them .", "I am ! that|", "", NA,
     "they,were there", ".", "   ", "?", "3;", "I like goud eggs!",
     "i 4like...", "\\tgreat",  "She said \"yes\"")
 x
+@
+
+\noindent Output from \texttt{check\_text}:
+
+<<checking2>>=
 check_text(x)
 @
 
-\noindent \emph{*Notice that \texttt{check\_text} provides suggested fixes for potential problems.}
 
 \newpage
 \section{Cleaning}
 
-\textbf{qdap} has a number of functions that can be used to clean and format the text into the form expected by many \textbf{qdap} functions.  \texttt{check\_text} suggests the use of some of these cleaning functions.  The user should consider cleaning their text as recommended or have rationale for not doing so.  Failure to do so may lead to errors, warnings, and incorrect results.
+\hspace{.4cm} \textbf{qdap} has a number of functions that can be used to clean and format the text into the form expected by many \textbf{qdap} functions.  \texttt{check\_text} suggests the use of some of these cleaning functions.  The user should consider cleaning the text as recommended or have legitimate rationale for not doing so.  Failure to clean data as recomended may lead to errors, warnings, and incorrect results.
 
 The following is a list of \textbf{qdap} cleaning \& formatting functions and their designed uses:
 
@@ -191,15 +226,15 @@ The following is a list of \textbf{qdap} cleaning \& formatting functions and th
 \newpage
 \section{Debugging}
 
-While the \texttt{check\_text} is useful for catching many text problems it can not detect all problems a user may encounter.  Some functions may provide useful error/warning message that help the user isolate the source of the problem.  At other times the source of the error is unknown.
+\hspace{.4cm} While the \texttt{check\_text} is useful for catching many text problems it can not detect all problems a user may encounter.  Some functions may provide useful error/warning message that help the user isolate the source of the problem.  At other times the source of the error is unknown.
 
-When a user encounters such an error it is important to isolate and identify the source of the error.  Often text data sets (corpora) are larger and thus an appropriate strategy may isolate the source of the bug more quickly.  The use of \emph{halving} is one such approach.
+When a user encounters such an error it is important to isolate and identify the source of the error.  Often text data sets (corpora) are larger and thus a reasonable strategy can be employed to isolate the source of the bug more quickly.  The use of \emph{halving} is one such approach.
 
-In halving the user experiences an error and recursively divides the data set into halves until the source of the error is found.  With each pass the non-offending portion and half of the offending data is used to test smaller and smaller pieces of the data for the location of the error.  
+In halving, after the user experiences an error, she recursively divides the data set into halves until the source of the error is found.  With each pass the non-offending portion is excluded while half of the offending portion of the data is used to test smaller and smaller chunks of the data for the location of the error.\footnote{Note that the halving technique can be used with code testing as well.}  
 
 \subsection{Halving Example}
 
-Here is an example where I walk you through the entire halving process.  First we'll create an error generating function to use with the built in \textbf{qdap} data set \texttt{DATA}:
+\hspace{.4cm} Here is an example of the entire halving process.  First we'll create an error generating function to use with the built in \textbf{qdap} data set \texttt{DATA}:
 
 <<bug1>>=
 fake_fun <- function(x) {
@@ -298,25 +333,25 @@ Error: !any(grepl("talk", x)) is not TRUE
 with(DATA[9, ], fake_fun(substring(state, 21)))
 @
 
-\noindent All clear!  We continue the halving technique until we've located the source of the error.
+\noindent All clear!  We continue the halving technique until we've identified the source of the error, in this case the use of the word \emph{talk}.
 
-At this point you have to either identified improperly cleaned data or a potential bug in \textbf{qdap}.  It is important that you can replicate the problem (either bad data or the bug).  If you have located the source you should be able to cause the error to be raised with new data that contains the same error causing string(s).  If you can not replicate the error you have not isolated the source.
+At this point you may have either identified (a) improperly cleaned data or (b) a potential bug in \textbf{qdap}.  It is important that you can replicate the problem (either bad data or the bug).  If you have located (where) and identified the source of an error (what) you should be able to recreate the error with new data that contains the same type of error causing string(s).  If you cannot replicate the error you have not identified the source.
 
 \section{Reporting a Potential Bug}
 
-If you believe that there is a bug in \textbf{qdap} you can:
+\hspace{.4cm} If you believe that there is a bug in \textbf{qdap} you can:
 
 
 \begin{sing_enum}
   \item Fork the repository, correct the code, run a CRAN check, and send a pull request.
-  \item Report the bug via \href{https://github.com/trinker/qdap/issues}{\textbf{qdap}'s GitHub issues page}.  Be sure you:
+  \item Report the bug via \href{https://github.com/trinker/qdap/issues}{\textbf{qdap}'s GitHub issues page}.  Be sure that you:
     \begin{enumerate}
-      \item Describe the bug (be specific; in other words, show work on your part to locate the source of the error)
-      \item Provide a \href{http://sscce.org/}{minimally reproducible example}, including data and code that produces the error
+      \item Describe the bug (be specific; in other words, show work on your part to locate and identify the source of the error)
+      \item Provide a \href{http://sscce.org/}{minimally reproducible example}, including a small data set and code to produce the error
     \end{enumerate}
 \end{sing_enum}
 
-The former is preferred if you are experienced with R programming, the latter if not.
+\noindent The former is preferred if you are experienced with R programming, the latter if not.
 
 \bibliographystyle{jss}
 \bibliography{qdap}

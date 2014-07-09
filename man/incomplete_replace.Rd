@@ -20,7 +20,7 @@ marks (.., ..., .?, ..?, en & em dash etc.) replaced with "|".  If scan mode
 is \code{TRUE} returns a data frame with incomplete sentence location.
 }
 \description{
-Replaces incomplete sentence end marks (.., ..., .?, ..?, en \& em dash etc.)
+Replaces incomplete sentence end marks (.., ..., .?, ..?, en & em dash etc.)
 with \code{"|"}.
 }
 \examples{
