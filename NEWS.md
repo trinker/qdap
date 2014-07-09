@@ -73,6 +73,9 @@ And constructed with the following guidelines:
 
 * `check_text` added to identify potential problems in text.
 
+* `replace_ordinal` added to convert 1-25, 30, 40, 50, 60, 70, 80, 90, & 100 to
+  strictly ordinal text (e.g., "1st" becomes "first").
+
 * A vignette: `Cleaning Text & Debugging` was added to assist users with 
   cleaning and debugging problems in `qdap`.
 

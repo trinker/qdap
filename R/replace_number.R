@@ -17,7 +17,7 @@
 #' \code{\link[qdap]{qprep}},
 #' \code{\link[qdap]{replace_abbreviation}},
 #' \code{\link[qdap]{replace_contraction}},
-#' \code{\link[qdap]{replace_symbol}}
+#' \code{\link[qdap]{replace_symbol}},
 #' \code{\link[english]{english}}
 #' @export
 #' @examples

@@ -40,7 +40,7 @@ R News. Vol. 5(1), pp. 51-55.
 \code{\link[qdap]{qprep}},
 \code{\link[qdap]{replace_abbreviation}},
 \code{\link[qdap]{replace_contraction}},
-\code{\link[qdap]{replace_symbol}}
+\code{\link[qdap]{replace_symbol}},
 \code{\link[english]{english}}
 }
 \keyword{number-to-word}
