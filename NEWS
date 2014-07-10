@@ -110,6 +110,10 @@ IMPROVEMENTS
   separator (`sep`) used is still found in the text as this may indicate the 
   data did not split correctly.
 
+* `dispersion_plot` now takes a named list of vectors of terms as the argument to 
+  `match.terms`.  The vectors are combined as a unified theme named with the 
+  names of the list supplied to `match.terms`.
+
 CHANGES
 
 * `as.data.frame.Corpus`'s default value for `sent.split` is now `FALSE`.

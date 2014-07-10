@@ -3,7 +3,10 @@
 #' Generate a lexical dispersion plot of terms.
 #' 
 #' @param text.var The text variable.
-#' @param match.terms  A vector of quoted terms.
+#' @param match.terms  A vector of quoted terms or a named list of quoted terms.  
+#' If the latter terms will be combined into a single unified theme named 
+#' according to the list names.  Note that terms within the vectors of the list 
+#' cannot be dulicated.
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
@@ -69,7 +72,7 @@
 #'     bg.color = "black", grouping.var = list(fam.aff, sex), 
 #'     color = "yellow", total.color = "white", horiz.color="grey20"))
 #'     
-#' ## Use word list
+#' ## Use `word_list`
 #' ## Presidential debates by all
 #' wrds <- word_list(pres_debates2012$dialogue, stopwords = Top200Words)
 #' wrds2 <- spaste(wrds[["rfswl"]][["all"]][, "WORD"])
@@ -95,12 +98,26 @@
 #' 
 #' with(dat, dispersion_plot(dialogue, wordlist2, 
 #'     bg.color = "black", grouping.var = person, rm.vars = time,
-#'      color = "yellow", total.color = NULL, horiz.color="grey20"))
+#'     color = "yellow", total.color = NULL, horiz.color="grey20"))
 #'    
 #' with(dat, dispersion_plot(dialogue, wordlist2, 
 #'     bg.color = "black", grouping.var = person, rm.vars = time,
 #'     color = "red", total.color = "white", horiz.color="grey20"))
-#'       
+#' 
+#' ## `match.terms` as a named list        
+#' wordlist3 <- list(
+#'     I = c(" i'd ", " i'll ", " i'm ", " i've ", " i "),
+#'     we = c(" we'd ", " we'll ", " we're ", " we've ", " we "),
+#'     you = c(" you'd ",  " you'll ", " you're ", " you've ", " you ", " your "),
+#'     he = c(" he'd ", " he'll ", " he's ", " he ")
+#' )
+#' 
+#' with(dat, dispersion_plot(dialogue, wordlist3,
+#'     bg.color = "grey60", grouping.var = person, rm.vars = time,
+#'     color = "blue", total.color = "grey40", horiz.color="grey20"))
+#' 
+#' colsplit2df(scores(with(dat, termco(dialogue, list(time, person), wordlist3))))
+#' 
 #' ## Extras:
 #' ## Reverse facets
 #' 
@@ -120,6 +137,14 @@ dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,
     rev.factor = TRUE, wrap = "'", xlab = "Dialogue (Words)", ylab = NULL, 
     size = 4, plot = TRUE, char2space = "~~", apostrophe.remove = FALSE, 
     scales="free", space="free", ...) {
+
+    match.list <- NULL
+    if (is.list_o_vectors(match.terms)) {
+        match.terms <- list_namer(match.terms)
+        match.list <- match.terms
+        match.terms <- unlist(match.terms)
+        if (any(duplicated(match.terms))) stop("`match.terms` cannot contain duplicates")
+    }
 
     word.num <- NULL
     GV <- ifelse(!is.null(grouping.var), TRUE, FALSE)
@@ -226,6 +251,16 @@ dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,
     } else {
         cols <- color
     }
+
+    if(!is.null(match.list)) {
+
+        word2 <- rep(NA, nrow(dat2))
+        for (i in seq_along(match.list)) {
+            word2[dat2[["text"]] %in% match.list[[i]]] <- paste(" ", names(match.list)[i])
+        }
+        dat2[["word"]] <- factor(word2, levels=paste(" ", names(match.list)))
+    }
+
 
     the_plot <- ggplot(data = dat2, aes(x = word.num, y = grouping)) + 
         geom_point(aes(position="dodge", color = summary), 

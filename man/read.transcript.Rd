@@ -85,7 +85,7 @@ each transcript for errors before further parsing the data.
 \examples{
 \dontrun{
 #Note: to view the document below use the path:
-gsub("trans1.docx", "", system.file("extdata/transcripts/trans1.docx", package = "qdap"))
+system.file("extdata/transcripts/", package = "qdap")
 (doc1 <- system.file("extdata/transcripts/trans1.docx", package = "qdap"))
 (doc2 <- system.file("extdata/transcripts/trans2.docx", package = "qdap"))
 (doc3 <- system.file("extdata/transcripts/trans3.docx", package = "qdap"))

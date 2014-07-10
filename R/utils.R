@@ -116,6 +116,13 @@ is.non.ascii <- function(x) {
     x %in% unique(nonascii[!is.na(nonascii)])
 }
 
+## check if something is a list of vectors
+is.list_o_vectors <-  function(x) {
+
+    is.list(x) && !is.data.frame(x) && all(sapply(x, is.vector))
+}
+
+
 which.incomplete <- function(x) {
     pat <- "\\?*\\?[.]+|[.?!]*\\? [.][.?!]+|[.?!]*\\. [.?!]+|[.?!]+\\. [.?!]*|[.?!]+\\.[.?!]*|[.?!]*\\.[.?!]+"
     out <- grep(pat, x)
@@ -173,3 +180,30 @@ which.digit <- function(x) {
     out
 }
 
+
+
+## name lists
+list_namer <- function(x){
+
+    nms <- names(x)
+    if (is.null(nms)) nms <- rep("", length(x))
+    blanks <- nms == ""
+    if (sum(blanks) == 0) return(x)
+    singles <- sapply(x, length) == 1   
+    names(x)[blanks & singles] <- as.character(x[blanks & singles])
+    blanks[blanks & singles] <- FALSE  
+    left_overs <- !singles & blanks
+
+    if (sum(left_overs) != 0) {
+ 
+        newnms <- paste0("X", 1:sum(left_overs))
+        looptime <- 1
+        while (newnms %in% names(x)) {
+            newnms[newnms %in% names(x)] <-
+                paste(newnms[newnms %in% names(x)], looptime, sep = ".")
+            looptime <- 1 + 1
+        }
+        names(x)[left_overs] <- newnms
+    }
+    x
+}

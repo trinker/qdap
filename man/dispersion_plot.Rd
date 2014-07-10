@@ -13,7 +13,10 @@ dispersion_plot(text.var, match.terms, grouping.var = NULL, rm.vars = NULL,
 \arguments{
 \item{text.var}{The text variable.}
 
-\item{match.terms}{A vector of quoted terms.}
+\item{match.terms}{A vector of quoted terms or a named list of quoted terms.
+If the latter terms will be combined into a single unified theme named
+according to the list names.  Note that terms within the vectors of the list
+cannot be dulicated.}
 
 \item{grouping.var}{The grouping variables.  Default \code{NULL} generates
 one word list for all text.  Also takes a single grouping variable or a list
@@ -102,7 +105,7 @@ with(rajSPLIT, dispersion_plot(dialogue, c("love", "night"),
     bg.color = "black", grouping.var = list(fam.aff, sex),
     color = "yellow", total.color = "white", horiz.color="grey20"))
 
-## Use word list
+## Use `word_list`
 ## Presidential debates by all
 wrds <- word_list(pres_debates2012$dialogue, stopwords = Top200Words)
 wrds2 <- spaste(wrds[["rfswl"]][["all"]][, "WORD"])
@@ -128,11 +131,25 @@ wordlist2 <- c(" i'd ", " i'll ", " i'm ", " i've ", " i ",
 
 with(dat, dispersion_plot(dialogue, wordlist2,
     bg.color = "black", grouping.var = person, rm.vars = time,
-     color = "yellow", total.color = NULL, horiz.color="grey20"))
+    color = "yellow", total.color = NULL, horiz.color="grey20"))
 
 with(dat, dispersion_plot(dialogue, wordlist2,
     bg.color = "black", grouping.var = person, rm.vars = time,
     color = "red", total.color = "white", horiz.color="grey20"))
+
+## `match.terms` as a named list
+wordlist3 <- list(
+    I = c(" i'd ", " i'll ", " i'm ", " i've ", " i "),
+    we = c(" we'd ", " we'll ", " we're ", " we've ", " we "),
+    you = c(" you'd ",  " you'll ", " you're ", " you've ", " you ", " your "),
+    he = c(" he'd ", " he'll ", " he's ", " he ")
+)
+
+with(dat, dispersion_plot(dialogue, wordlist3,
+    bg.color = "grey60", grouping.var = person, rm.vars = time,
+    color = "blue", total.color = "grey40", horiz.color="grey20"))
+
+colsplit2df(scores(with(dat, termco(dialogue, list(time, person), wordlist3))))
 
 ## Extras:
 ## Reverse facets
