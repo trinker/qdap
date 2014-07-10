@@ -9,7 +9,7 @@
 #' spaces.
 #' @param remove logical.  If \code{TRUE} ordinal numbers are removed from the text.
 #' @keywords ordinal-to-word
-#' @note Currently only implemented for ordinam values: 1-25, 30, 40, 50, 60, 70, 80, 90, & 100
+#' @note Currently only implemented for ordinal values 1 through 100
 #' @seealso 
 #' \code{\link[qdap]{bracketX}},
 #' \code{\link[qdap]{qprep}},
@@ -17,28 +17,35 @@
 #' \code{\link[qdap]{replace_contraction}},
 #' \code{\link[qdap]{replace_symbol}},
 #' \code{\link[qdap]{replace_number}}
-#' \code{\link[english]{english}}
 #' @export
 #' @examples
 #' \dontrun{
-#' x <- "I like the 1st one not the 22nd one."
+#' x <- c(
+#'     "I like the 1st one not the 22nd one.", 
+#'     "For the 100th time stop!"
+#' )
 #' replace_ordinal(x)
+#' replace_ordinal(x, FALSE)
+#' replace_ordinal(x, remove = TRUE)
 #' }
 replace_ordinal <- function(text.var, num.paste = TRUE, remove = FALSE) {
 
-    symb <- c("1st", "2nd", "3rd", paste0(4:20, "th"), "21st", "22nd", "23rd", 
-        "24th", "25th", paste0(seq(30, 100, by=10), "th"))
+    symb <- c("1st", "2nd", "3rd", paste0(4:19, "th"),
+        paste0(20:100, c("th", "st", "nd", "rd", rep("th", 6))))
 
     if (remove) {
         ordinal <- ""
     } else {
-        ordinal <- c("first", "second", "third", "fourth", "fifth", "sixth", "seventh",
-            "eighth", "ninth", "tenth", "eleventh", "twelfth", "thirteenth", 
-            "fourteenth", "fifteenth", "sixteenth", "seventeenth", "eighteenth", 
-            "nineteenth", "twentieth", "twenti first", "twenti second", "twenti third", 
-            "twenti fith", "thirtieth", "fortieth", "fiftieth", "sixtieth", 
-            "seventieth", "eightieth", "ninetieth", "hundredth")
+        base_ord <- ordinal <- c("first", "second", "third", "fourth", 
+            "fifth", "sixth", "seventh", "eighth", "ninth")
+        prefix <- c("twent", "thirt", "fort", "fift", "sixt", 
+            "sevent", "eight", "ninet")
+        ordinal <- c(base_ord, "tenth", "eleventh", "twelfth", 
+            "thirteenth", "fourteenth", "fifteenth", "sixteenth", 
+            "seventeenth", "eighteenth", "nineteenth", 
+            paste0(rep(prefix, each=10), c("ieth", paste("y", base_ord))), 
+            "hundredth")
     }
-    if (num.paste) ordinal <- gsub("\\s+", "", ordinal)
-    mgsub(symb, ordinal, text.var)
+    if (num.paste & !remove) ordinal <- gsub("\\s+", "", ordinal)
+    Trim(mgsub(paste0("\\b", symb, "\\b"), spaste(ordinal), text.var, fixed=FALSE))
 }

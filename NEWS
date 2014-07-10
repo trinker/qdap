@@ -73,7 +73,7 @@ NEW FEATURES
 
 * `check_text` added to identify potential problems in text.
 
-* `replace_ordinal` added to convert 1-25, 30, 40, 50, 60, 70, 80, 90, & 100 to
+* `replace_ordinal` added to convert ordinal representations of 1 through 100 to
   strictly ordinal text (e.g., "1st" becomes "first").
 
 * A vignette: `Cleaning Text & Debugging` was added to assist users with 

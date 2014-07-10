@@ -19,12 +19,17 @@ Replaces mixed text/numeric represented ordinal numbers with words (e.g.,
 "1st" becomes "first").
 }
 \note{
-Currently only implemented for ordinam values: 1-25, 30, 40, 50, 60, 70, 80, 90, & 100
+Currently only implemented for ordinal values 1 through 100
 }
 \examples{
 \dontrun{
-x <- "I like the 1st one not the 22nd one."
+x <- c(
+    "I like the 1st one not the 22nd one.",
+    "For the 100th time stop!"
+)
 replace_ordinal(x)
+replace_ordinal(x, FALSE)
+replace_ordinal(x, remove = TRUE)
 }
 }
 \seealso{
@@ -34,7 +39,6 @@ replace_ordinal(x)
 \code{\link[qdap]{replace_contraction}},
 \code{\link[qdap]{replace_symbol}},
 \code{\link[qdap]{replace_number}}
-\code{\link[english]{english}}
 }
 \keyword{ordinal-to-word}
 

@@ -11,6 +11,10 @@
 #' @return Returns a vector with abbreviations replaced.
 #' @references Fox, J. (2005). Programmer's niche: How do you spell that number? 
 #' R News. Vol. 5(1), pp. 51-55.
+#' @note The user may want to use \code{\link[qdap]{replace_ordinal}} first to 
+#' remove ordinal number notation.  For example \code{\link[qdap]{replace_number}}
+#' would turn "21st" into "twenty onest", whereas \code{\link[qdap]{replace_ordinal}}
+#' would generate "twenty first".
 #' @keywords number-to-word
 #' @seealso 
 #' \code{\link[qdap]{bracketX}},
@@ -18,7 +22,7 @@
 #' \code{\link[qdap]{replace_abbreviation}},
 #' \code{\link[qdap]{replace_contraction}},
 #' \code{\link[qdap]{replace_symbol}},
-#' \code{\link[english]{english}}
+#' \code{\link[qdap]{replace_ordinal}}
 #' @export
 #' @examples
 #' \dontrun{
