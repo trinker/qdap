@@ -96,7 +96,11 @@
 #' with(dat, dispersion_plot(dialogue, wordlist2, 
 #'     bg.color = "black", grouping.var = person, rm.vars = time,
 #'      color = "yellow", total.color = NULL, horiz.color="grey20"))
-#'      
+#'    
+#' with(dat, dispersion_plot(dialogue, wordlist2, 
+#'     bg.color = "black", grouping.var = person, rm.vars = time,
+#'     color = "red", total.color = "white", horiz.color="grey20"))
+#'       
 #' ## Extras:
 #' ## Reverse facets
 #' 

@@ -106,6 +106,10 @@ IMPROVEMENTS
   non-ASCII characters, factors, missing punctuation, empty cells, and no 
   alphabetic characters found.
 
+* `read.transcript` now gives a warning when reading from a .docx file and the 
+  separator (`sep`) used is still found in the text as this may indicate the 
+  data did not split correctly.
+
 CHANGES
 
 * `as.data.frame.Corpus`'s default value for `sent.split` is now `FALSE`.
