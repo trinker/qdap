@@ -29,6 +29,9 @@ And constructed with the following guidelines:
   `qdapDictionaries::key.syn` contained antonyms and elemets the were error 
   messages (character).  This has been fixed.  Reference <a href="https://github.com/trinker/qdap/issues/190">issue #190</a>. (Jingjing Zou)
 
+* The `pres_debates2012` data set contained three errors in speech attribution.
+  This has been corrected and the turn of talk (`tot`) as well.
+
 **NEW FEATURES**
 
 * `qdap_df` and `%&%` added to mimic some of the functionality of `dplyr`'s 

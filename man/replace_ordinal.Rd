@@ -30,6 +30,7 @@ x <- c(
 replace_ordinal(x)
 replace_ordinal(x, FALSE)
 replace_ordinal(x, remove = TRUE)
+"I like the 1st 1 not the 22nd 1." \%>\% replace_ordinal \%>\% replace_number
 }
 }
 \seealso{

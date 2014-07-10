@@ -121,6 +121,15 @@ with(dat, dispersion_plot(dialogue, wordlist, total.color = NULL,
     bg.color = "white", grouping.var = person, rm.vars = time,
     color = "black", horiz.color="grey80"))
 
+wordlist2 <- c(" i'd ", " i'll ", " i'm ", " i've ", " i ",
+    " we'd ", " we'll ", " we're ", " we've ", " we ",
+    " you'd ",  " you'll ", " you're ", " you've ", " you ", " your ",
+    " he'd ", " he'll ", " he's ", " he ")
+
+with(dat, dispersion_plot(dialogue, wordlist2,
+    bg.color = "black", grouping.var = person, rm.vars = time,
+     color = "yellow", total.color = NULL, horiz.color="grey20"))
+
 ## Extras:
 ## Reverse facets
 
