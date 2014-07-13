@@ -48,7 +48,7 @@
 #' 
 #' plot(mygraph, edge.curved=TRUE)
 #' 
-#' V(mygraph)$sex <- V(mygraph)$name %l% raj.demographics[, 1:2]
+#' V(mygraph)$sex <- V(mygraph)$name %lc% raj.demographics[, 1:2]
 #' V(mygraph)$color <- ifelse(V(mygraph)$sex=="f", "pink", "lightblue")
 #' 
 #' plot(mygraph, edge.curved=TRUE)
@@ -59,6 +59,12 @@
 #'     unique(V(mygraph)$family), cols)
 #' 
 #' plot(mygraph, edge.curved=TRUE)
+#' 
+#' ## Community detection
+#' x <- with(mraja1, discourse_map(dialogue, person))
+#' wc <- walktrap.community(visual(x))
+#' colors <- rainbow(max(membership(wc)))
+#' plot(x, vertex.color=colors[membership(wc)])
 #' 
 #' ## Repeated Measures (BASIC EXAMPLE)
 #' ##------------------------------
