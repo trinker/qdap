@@ -161,14 +161,15 @@ function(text.var, bracket = "all", with = FALSE, merge = TRUE){
 
 #' genX
 #' 
-#' \code{genX} - Apply general chunk removal to character vectors.
+#' \code{genX} - Apply general chunk removal to character vectors.  A 
+#' generalized version of \code{bracketX}.
 #' 
 #' @param left A vector of character or numeric symbols as the left edge to 
 #' extract.
 #' @param right A vector of character or numeric symbols as the right edge to 
 #' extract.
 #' @rdname bracketX
-#' @return \code{genXtract} - returns a vector of text with checks removed.
+#' @return \code{genXtract} - returns a vector of text with chunks removed.
 #' @export
 genX <- 
 function (text.var, left, right, missing = NULL, names = FALSE, fix.space = TRUE, 
@@ -204,10 +205,11 @@ function (text.var, left, right, missing = NULL, names = FALSE, fix.space = TRUE
 
 #' genXtract
 #' 
-#' \code{genXtract} - Apply general chunk extraction to character vectors.
+#' \code{genXtract} - Apply general chunk extraction to character vectors.   A 
+#' generalized version of \code{bracketXtract}.
 #' 
 #' @rdname bracketX
-#' @return \code{genX} -  returns a list of vectors of removed text.
+#' @return \code{genX} - returns a list of vectors of removed text.
 #' @export
 genXtract <-
 function(text.var, left, right, with = FALSE, merge = TRUE){

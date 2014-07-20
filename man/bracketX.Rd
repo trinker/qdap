@@ -55,18 +55,20 @@ extract.}
 
 \code{bracketXtract} -  returns a list of vectors of bracketed text.
 
-\code{genXtract} - returns a vector of text with checks removed.
+\code{genXtract} - returns a vector of text with chunks removed.
 
-\code{genX} -  returns a list of vectors of removed text.
+\code{genX} - returns a list of vectors of removed text.
 }
 \description{
 \code{bracketX} - Apply bracket removal to character vectors.
 
 \code{bracketXtract} - Apply bracket extraction to character vectors.
 
-\code{genX} - Apply general chunk removal to character vectors.
+\code{genX} - Apply general chunk removal to character vectors.  A
+generalized version of \code{bracketX}.
 
-\code{genXtract} - Apply general chunk extraction to character vectors.
+\code{genXtract} - Apply general chunk extraction to character vectors.   A
+generalized version of \code{bracketXtract}.
 }
 \examples{
 \dontrun{

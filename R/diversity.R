@@ -38,6 +38,7 @@
 #' 
 #' Magurran, A. E. (2004). Measuring biological diversity. Blackwell.
 #' @keywords diversity
+#' @references \url{http://arxiv.org/abs/physics/0512106}
 #' @export
 #' @examples
 #' \dontrun{
