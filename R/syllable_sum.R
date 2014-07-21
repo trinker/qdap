@@ -380,7 +380,7 @@ plot.cumulative_syllable_freq <- function(x, ...) {
     ggplot2::ggplot(x, ggplot2::aes_string(x="Time", y="cumave")) + 
         ggplot2::theme_bw() +
         ggplot2::geom_line(size=1) + ggplot2::geom_smooth() + 
-        ggplot2::ylab(sprintf("Cummulative Average %s Per Sentence", 
+        ggplot2::ylab(sprintf("Cumulative Average %s Per Sentence", 
             attributes(x)[["type"]])) + 
         ggplot2::xlab("Duration") +
         ggplot2::geom_hline(y=attributes(x)[["ave"]], color="grey30", size=1, 

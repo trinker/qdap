@@ -306,6 +306,9 @@ saveHTML(FUN2(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
 
 FUN2(TRUE)
 
+# Could use animated line plot over time as well:
+cumulative(deb2_bar)
+
 ##-----------------------------##
 ## Constraining between -1 & 1 ##
 ##-----------------------------##
@@ -339,7 +342,7 @@ m+ theme_nightheat(title="Polarity Discourse Map")
 #===============================#
 poldat4 <- with(rajSPLIT, polarity(dialogue, act, constrain = TRUE))
 
-polcount <- counts(poldat4)$polarity
+polcount <- na.omit(counts(poldat4)$polarity)
 len <- length(polcount)
 
 cummean <- function(x){cumsum(x)/seq_along(x)}

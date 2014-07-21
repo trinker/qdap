@@ -284,6 +284,9 @@
 #' 
 #' FUN2(TRUE)
 #' 
+#' # Could use animated line plot over time as well:
+#' cumulative(deb2_bar)
+#' 
 #' ##-----------------------------##
 #' ## Constraining between -1 & 1 ##
 #' ##-----------------------------##
@@ -317,7 +320,7 @@
 #' #===============================#
 #' poldat4 <- with(rajSPLIT, polarity(dialogue, act, constrain = TRUE))
 #' 
-#' polcount <- counts(poldat4)$polarity
+#' polcount <- na.omit(counts(poldat4)$polarity)
 #' len <- length(polcount)
 #' 
 #' cummean <- function(x){cumsum(x)/seq_along(x)}
@@ -708,7 +711,7 @@ plot.polarity <- function(x, bar.size = 5, low = "blue", mid = "grey99",
     XX <- ggplot(dat2, aes(color = Polarity )) + 
         geom_segment(aes(x=start, xend=end, y=group, yend=group), 
             size=bar.size) +
-        xlab("Duration (words)") + ylab(gsub("\\&", " & ", G)) +
+        xlab("Duration (sentences)") + ylab(gsub("\\&", " & ", G)) +
         scale_colour_gradientn(colours = c(low, mid, high)) +
         theme_bw() + theme(legend.position="bottom") + 
         guides(colour = guide_colorbar(barwidth = 9, barheight = .75, nbin=1000))
@@ -1577,7 +1580,10 @@ colorize <- function(x, y) {
 #' @method cumulative polarity
 cumulative.polarity <- function(x, ...){
     
-    out <- list(cumulative_average_polarity = cummean(counts(x)[["polarity"]]))
+    keeps <- !is.na(counts(x)[["polarity"]])
+    y <- counts(x)[["polarity"]][keeps]
+
+    out <- list(cumulative_average_polarity = cummean(y))
 
     class(out) <- "cumulative_polarity"
     attributes(out)[["constrained"]] <- attributes(x)[["constrained"]]
@@ -1628,4 +1634,78 @@ print.cumulative_polarity <- function(x, ...) {
     print(plot.cumulative_polarity(x, ...))
 }
 
+#' \code{cumulative.animated_polarity} - Generate animated polarity over time 
+#' (duration in sentences).
+#' @rdname cumulative
+#' @export
+#' @method cumulative animated_polarity
+cumulative.animated_polarity <- function(x, ...) {
 
+    if(attributes(x)[["network"]]) {
+        stop("Output must be from an `Animate.polarity` when `network = FALSE`")
+    }
+
+    out <- c(0, unlist(lapply(x, grab_ave_polarity), use.names = FALSE))
+    avepol <- tail(out, 1)
+    len <- length(out)
+    
+    output <- data.frame(cum_mean = out, Time = 1:len, drop=TRUE) 
+
+    class(output) <- c("cumulative_animated_polarity", class(output))
+    attributes(output)[["length"]] <- len
+    attributes(output)[["average.polarity"]] <- avepol    
+    output
+}
+
+#' Plots a cumulative_animated_polarity Object
+#' 
+#' Plots a cumulative_animated_polarity object.
+#' 
+#' @param x The cumulative_animated_polarity object.
+#' @param \ldots ignored
+#' @method plot cumulative_animated_polarity 
+#' @export
+plot.cumulative_animated_polarity <- function(x, ...){
+
+    output <- lapply(1:nrow(x), function(i) {
+
+        ggplot2::ggplot() + ggplot2::theme_bw() +
+            ggplot2::geom_line(data = x[1:i, ,drop=FALSE], ggplot2::aes_string(y="cum_mean", 
+                x = "Time"), size=1) +
+            ggplot2::geom_hline(y=attributes(x)[["average.polarity"]], 
+                color="grey30", size=1, alpha=.3, linetype=2) + 
+            ggplot2::ylab("Cumulative Average Polarity") + 
+            ggplot2::xlab("Duration") +
+            ggplot2::scale_x_continuous(expand = c(0, 0), 
+                limits = c(0, attributes(x)[["length"]])) +
+            ggplot2::ylim(range(x[, "cum_mean"])) +
+            ggplot2::annotate("point", y = x[i, "cum_mean"], 
+                x =x[i, "Time"], colour = "red", size = 1.5) 
+    })
+
+    output[[length(output)]] <- output[[length(output)]] + 
+        ggplot2::geom_smooth(data = x, 
+            ggplot2::aes_string(y="cum_mean", x = "Time")) 
+
+    output
+}
+
+#' Prints a cumulative_animated_polarity Object
+#' 
+#' Prints a cumulative_animated_polarity  object.
+#' 
+#' @param x The cumulative_animated_polarity object.
+#' @param \ldots ignored
+#' @method print cumulative_animated_polarity
+#' @export
+print.cumulative_animated_polarity <- function(x, ...) {
+    print(plot.cumulative_animated_polarity(x, ...))
+}
+
+grab_ave_polarity <- function(x, left="Average Discourse Polarity:", 
+    right = "Current Speaker:") {
+    
+    genXtract(x[["labels"]][["title"]], left, right) %>% 
+    Trim() %>% 
+    as.numeric() 
+}
