@@ -32,6 +32,9 @@ And constructed with the following guidelines:
 * The `pres_debates2012` data set contained three errors in speech attribution.
   This has been corrected and the turn of talk (`tot`) as well.
 
+* `word_stats` would throw an error if no poly-syllable words existed.  This has 
+  been corrected (reported by Nicolas Turenne).
+
 **NEW FEATURES**
 
 * `qdap_df` and `%&%` added to mimic some of the functionality of `dplyr`'s 

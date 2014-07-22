@@ -229,6 +229,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
         return(x)
     }
     DF2 <- row2col(DF2, "group")
+
     DF2 <- transform(DF2, 
         sptot = round(n.sent/n.tot, digits=digits),
         wptot = round(n.words/n.tot, digits=digits),
@@ -240,6 +241,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
         spw = round(n.syl/n.words, digits=digits),
         pspw = round(n.poly/n.words, digits=digits)
     )
+
     typer <- function(df){
         types <- c("n.state", "n.quest", "n.exclm", "n.imper", "n.incom")
         sapply(types, function(x) sum(na.omit(df[, "sent.type"]==x)))
@@ -288,11 +290,10 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
     rownames(DF3) <- NULL
     names(DF3) <- c(G, names(DF3)[c(2:3)], "text.var", 
         "sent.num", names(DF3)[-c(1:5)])
-    DF3$tot.sen <- if(is.null(tot)){
-        NULL
-    } else {
-        DF3$tot.sen 
+    if(is.null(tot)){
+        DF3$tot.sen <- NULL
     }
+
     DF3$TOT <- if (is.null(tot)){
         NULL
     } else {
@@ -303,6 +304,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
         DF2$sptot <- NULL
         DF2$wptot <- NULL
     } 
+
     sum2 <- function(x){
         if(is.numeric(x)){
             sum(x, na.rm = TRUE)
@@ -310,9 +312,13 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
             TRUE
         }
     }
-    DF2 <- DF2[, unlist(lapply(DF2, sum2))!=0]
+
+    col_keeps <- unlist(lapply(DF2, sum2))!=0 
+    col_keeps[colnames(DF2) == "pspw"] <- TRUE
+
+    DF2 <- DF2[, col_keeps]
     rng <- which(colnames(DF2) %in% c("pspw", "n.hapax"))
-    proDF2 <- lapply(DF2[, (rng[1]+1):(rng[2]-1)], function(x) {
+    proDF2 <- lapply(DF2[, (rng[1]+1):(rng[2]-1), drop=FALSE], function(x) {
         round(x/DF2[, "n.sent"], digits = digits)
     })
     proDF2 <- do.call(cbind, proDF2)
@@ -493,4 +499,3 @@ plot.word_stats_counts <- function(x, alpha = .3, ...){
 plot_namer <- function(x) {
     paste(sapply(unlist(strsplit(x, "&")), Caps), collapse =" & ")
 }
-
