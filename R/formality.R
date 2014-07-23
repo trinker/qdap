@@ -1533,3 +1533,84 @@ print.cumulative_formality <- function(x, ...) {
     print(plot.cumulative_formality(x, ...))
 }
 
+#' \code{cumulative.animated_formality} - Generate animated formality over time 
+#' (duration in sentences).
+#' @rdname cumulative
+#' @export
+#' @method cumulative animated_formality
+cumulative.animated_formality <- function(x, ...) {
+
+    if(attributes(x)[["network"]]) {
+        stop("Output must be from an `Animate.formality` when `network = FALSE`")
+    }
+
+    out <- c(NA, unlist(lapply(x, grab_ave_formality), use.names = FALSE))
+    out[1] <- out[2]
+    avepol <- tail(out, 1)
+    len <- length(out)
+    
+    output <- data.frame(cum_mean = out, Time = 1:len, drop=TRUE) 
+
+    class(output) <- c("cumulative_animated_formality", class(output))
+    attributes(output)[["length"]] <- len
+    attributes(output)[["average.formality"]] <- avepol    
+    attributes(output)[["range"]] <- x[[1]][["scales"]][["scales"]][[1]][["limits"]]  
+    output
+}
+
+
+#' Plots a cumulative_animated_formality Object
+#' 
+#' Plots a cumulative_animated_formality object.
+#' 
+#' @param x The cumulative_animated_formality object.
+#' @param \ldots ignored
+#' @method plot cumulative_animated_formality 
+#' @export
+plot.cumulative_animated_formality <- function(x, ...){
+   
+    output <- lapply(1:nrow(x), function(i) {
+
+        ggplot2::ggplot() + ggplot2::theme_bw() +
+            ggplot2::geom_line(data = x[1:i, ,drop=FALSE], ggplot2::aes_string(y="cum_mean", 
+                x = "Time"), size=1) +
+            ggplot2::geom_hline(yintercept=0, size=1.5, color="grey50", linetype="dashed") + 
+            ggplot2::geom_hline(y=attributes(x)[["average.formality"]], 
+                color="grey30", size=1, alpha=.3) + 
+            ggplot2::ylab("Cumulative Average formality") + 
+            ggplot2::xlab("Duration") +
+            ggplot2::scale_x_continuous(expand = c(0, 0), 
+                limits = c(0, attributes(x)[["length"]])) +
+            ggplot2::ylim(range(x[["cum_mean"]])) +
+            ggplot2::annotate("point", y = x[i, "cum_mean"], 
+                x =x[i, "Time"], colour = "red", size = 1.5) 
+    })
+
+    output[[1]][["layers"]][[4]][["geom_params"]][["colour"]] <- NA
+    output[[length(output)]] <- output[[length(output)]] + 
+        ggplot2::geom_smooth(data = x, 
+            ggplot2::aes_string(y="cum_mean", x = "Time")) 
+
+    output
+}
+
+#' Prints a cumulative_animated_formality Object
+#' 
+#' Prints a cumulative_animated_formality  object.
+#' 
+#' @param x The cumulative_animated_formality object.
+#' @param \ldots ignored
+#' @method print cumulative_animated_formality
+#' @export
+print.cumulative_animated_formality <- function(x, ...) {
+    print(plot.cumulative_animated_formality(x, ...))
+}
+
+grab_ave_formality <- function(x, left="Total Discourse Formality:", 
+    right = "Current Speaker:") {
+
+    genXtract(x[["labels"]][["title"]], left, right) %>% 
+    Trim() %>% 
+    as.numeric() 
+}
+
