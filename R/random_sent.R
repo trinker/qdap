@@ -78,9 +78,12 @@ random_data <- function(n = 10, ..., n.people = 10, ages = 7:10,
         sex = name2sex(nms),
         age = sample(ages, n.people, replace=TRUE),
         race = sample(races[[1]], n.people, replace=TRUE, prob = races[[2]]),  
-        dialogue = m,
         stringsAsFactors = FALSE 
     )
+
+    output <- output[sample(seq_len(n.people), len, TRUE), ]
+    output[["dialogue"]] <- m
+    rownames(output) <- NULL
 
     text.var <- "dialogue"
     output <- dplyr::tbl_df(output)

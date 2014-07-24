@@ -6,6 +6,7 @@
 #' @param parallel logical.  If \code{TRUE} attempts to run the function on 
 #' multiple cores.  Note that this may not mean a speed boost if you have one 
 #' core or if the data set is smaller as the cluster takes time to create.
+#' @param \ldots Other arguments passed to \code{syllable_count}.
 #' @param text A single character vector of text.
 #' @param remove.bracketed logical.  If \code{TRUE} brackets are removed from 
 #' the analysis.
@@ -46,10 +47,10 @@
 #' cumulative(x3)
 #' }
 syllable_sum <-
-function(text.var, parallel = FALSE) {
+function(text.var, parallel = FALSE, ...) {
     if (!parallel) {
         out <- unlist(lapply(as.character(text.var), function(x) {
-            sum(syllable_count(Trim(x))['syllables'])
+            sum(syllable_count(Trim(x))['syllables'], ...)
         }))
     } else {
         cl <- makeCluster(mc <- getOption("cl.cores", detectCores()/2))

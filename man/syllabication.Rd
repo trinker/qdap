@@ -6,7 +6,7 @@
 \alias{syllable_sum}
 \title{Syllabication}
 \usage{
-syllable_sum(text.var, parallel = FALSE)
+syllable_sum(text.var, parallel = FALSE, ...)
 
 syllable_count(text, remove.bracketed = TRUE, algorithm.report = FALSE)
 
@@ -20,6 +20,8 @@ combo_syllable_sum(text.var, parallel = FALSE)
 \item{parallel}{logical.  If \code{TRUE} attempts to run the function on
 multiple cores.  Note that this may not mean a speed boost if you have one
 core or if the data set is smaller as the cluster takes time to create.}
+
+\item{\ldots}{Other arguments passed to \code{syllable_count}.}
 
 \item{text}{A single character vector of text.}
 
