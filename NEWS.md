@@ -85,6 +85,9 @@ And constructed with the following guidelines:
 * A vignette: `Cleaning Text & Debugging` was added to assist users with 
   cleaning and debugging problems in `qdap`.
 
+* `pronoun_type`, and `subject_pronoun_type`, `object_pronoun_type` added to 
+  examine usage of subject/object pronouns by grouping variable.
+
 **MINOR FEATURES**
 
 * `dplyr`'s chaining pipe imported for convenience.  See 

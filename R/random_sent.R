@@ -66,10 +66,9 @@ random_data <- function(n = 10, ..., n.people = 10, ages = 7:10,
     len <- length(m)
 
     races <- structure(list(race = c("White", "Black", "Native", "Asian", 
-        "Hawaiian", "Bi-Racial", "Other", "Hispanic"), percent = structure(c(10L, 
-        7L, 3L, 9L, 4L, 5L, 2L, 8L), .Label = c("", ".2", ".7", "0.15", 
-        "1.9", "100.0%", "12.2", "16.3", "4.7", "63.7"), class = "factor")), 
-        .Names = c("race", "percent"), row.names = c(NA, -8L), class = "data.frame")
+        "Hawaiian", "Bi-Racial", "Other", "Hispanic"), percent = c(0.637, 
+        0.122, 0.007, 0.047, 0.0015, 0.019, 0.002, 0.163)), .Names = c("race", 
+        "percent"), row.names = c(NA, -8L), class = "data.frame")  
 
     nms <- sample(people.names, n.people)
     
