@@ -66,7 +66,7 @@ plot(scores(out))
 plot(counts(out))
 plot(proportions(out))
 
-(out2 <- pronoun_type(na.omit(hamlet)$dialogue, na.omit(hamlet)$person))
+(out2 <- pronoun_type(hamlet$dialogue, hamlet$person))
 plot(out2, 3, ncol=7)
 }
 }
