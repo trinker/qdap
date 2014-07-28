@@ -202,7 +202,8 @@ dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,
     }
 
     DF[, "time"] <- factor(DF[, "time"])
-
+    DF <- DF[!is.na(DF[["text.var"]]), ]
+    
     ## split DF into a list by rm.vars
     LDF <- split(DF, DF[, "time"])
 
@@ -237,8 +238,7 @@ dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,
 
     ## used for color fill when total.color != NULL
     dat2[, "summary"] <- rep("sub", nrow(dat2))
-
-
+    
     ## Add totals if total.color != NULL
     if (!is.null(total.color) && GV) {
         dat2b <- dat2
@@ -261,6 +261,8 @@ dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,
         dat2[["word"]] <- factor(word2, levels=paste(" ", names(match.list)))
     }
 
+    ## remove NA values
+    dat2 <- dat2[!is.na(dat2[["word"]]), ]
 
     the_plot <- ggplot(data = dat2, aes(x = word.num, y = grouping)) + 
         geom_point(aes(position="dodge", color = summary), 
