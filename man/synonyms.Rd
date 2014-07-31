@@ -34,7 +34,7 @@ was found at the head of the output.}
 \item{synonym.list}{A named list of lists (or vectors) of synonyms.}
 
 \item{prior.frame}{A prior synonyms data.frame in the format produced by
-\code{synonym_frame}.}
+\code{synonyms_frame}.}
 }
 \value{
 Returns a list of vectors or vector of possible words that match
@@ -64,7 +64,7 @@ syn_dat <- list(
 synonyms_frame(syn_dat)
 syn(c("R", "show"), synonym.frame = syn_frame(syn_dat))
 
-syns.hash <- syn_frame(syn_dat, prior.frame = SYNONYM)
+syns.hash <- syn_frame(syn_dat, prior.frame = qdapDictionaries::key.syn)
 syn(c("R", "show", "like", "robot"), synonym.frame = syns.hash)
 }
 }

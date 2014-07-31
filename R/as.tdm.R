@@ -66,7 +66,7 @@
 #' speech <- stemmer(dat$dialogue)
 #' mytable1 <- with(dat, as.tdm(speech, list(person, time), stopwords = Top25Words))
 #' 
-#' fit <- ca(mytable1)
+#' fit <- ca(as.matrix(ytable1))
 #' summary(fit)
 #' plot(fit)
 #' plot3d.ca(fit, labels=1)
@@ -74,7 +74,7 @@
 #' 
 #' mytable2 <- with(dat, as.tdm(speech, list(person, time), stopwords = Top200Words))
 #' 
-#' fit2 <- ca(mytable2)
+#' fit2 <- ca(as.matrix(mytable2))
 #' summary(fit2)
 #' plot(fit2)
 #' plot3d.ca(fit2, labels=1)

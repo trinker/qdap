@@ -8,7 +8,7 @@
 \usage{
 sentSplit(dataframe, text.var, rm.var = NULL, endmarks = c("?", ".", "!",
   "|"), incomplete.sub = TRUE, rm.bracket = TRUE, stem.col = FALSE,
-  text.place = "right", ...)
+  text.place = "right", verbose = is.global(2), ...)
 
 sentCombine(text.var, grouping.var = NULL, as.list = FALSE)
 
@@ -38,6 +38,9 @@ and replaces with \code{"|"}.}
 \item{text.place}{A character string giving placement location of the text
 column. This must be one of the strings \code{"original"}, \code{"right"} or
 \code{"left"}.}
+
+\item{verbose}{logical.  If \code{TRUE} select diagnostics from
+\code{\link[qdap]{check_text}} are reported.}
 
 \item{\ldots}{Additional options passed to \code{\link[qdap]{stem2df}}.}
 

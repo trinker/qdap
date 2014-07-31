@@ -37,13 +37,13 @@
 #' \code{\link[qdap]{subject_pronoun_type}}
 #' @export
 #' @references
-#' Fairclough, N. (1989). Language and Power. London: Longman. \cr
+#' Fairclough, N. (1989). Language and power. London: Longman. \cr
 #' 
-#' Fairclough, N. (2003). Analysing Discourse: Textual Analysis for Social 
-#' Research. Oxford and New York: Routledge.\cr 
+#' Fairclough, N. (2003). Analysing discourse: Textual analysis for social 
+#' research. Oxford and New York: Routledge.\cr 
 #' 
-#' Okamura, A. (2009). Use of Personal Pronouns In Two Types of Monologic 
-#' Academic Speech.  The Economic Journal of Takasaki City University of 
+#' Okamura, A. (2009). Use of personal pronouns in two types of monologic 
+#' academic speech.  The Economic Journal of Takasaki City University of 
 #' Economics, 52(1). 17-26. \cr
 #' 
 #' Us and them: Social categorization and the process of intergroup bias. 

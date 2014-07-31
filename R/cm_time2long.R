@@ -52,7 +52,7 @@
 #' )
 #'
 #' ## General ldots Approach
-#' cm_time2long(bar)
+#' cm_time2long(bar1)
 #' cm_time2long(bar1, bar2, v.name="time")
 #' 
 #' ## Specify `object` Approach

@@ -138,7 +138,7 @@
 #' form_bar <- Animate(form_ani2, as.network=FALSE)
 #' 
 #' ## Generate a folder
-#' loc <- folder(animation_formality)
+#' loc <- reports::folder(animation_formality)
 #' 
 #' ## Set up the plotting function
 #' oopt <- animation::ani.options(interval = 0.1)

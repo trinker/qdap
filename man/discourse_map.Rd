@@ -145,7 +145,7 @@ dev.off()
 library(animation)
 library(igraph)
 
-loc <- folder(animation_dialogue)
+loc <- reports::folder(animation_dialogue)
 ans <- Animate(test)
 
 ## Set up the plotting function
@@ -179,7 +179,7 @@ saveHTML(FUN(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
 ## More Elaborate Layout
 test2 <- with(mraja1, discourse_map(dialogue, person))
 
-loc2 <- folder(animation_dialogue2)
+loc2 <- reports::folder(animation_dialogue2)
 ans2 <- Animate(test2)
 ## Set up the plotting function
 oopt <- animation::ani.options(interval = 0.1)

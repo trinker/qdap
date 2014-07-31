@@ -17,6 +17,8 @@
 #' @param text.place A character string giving placement location of the text 
 #' column. This must be one of the strings \code{"original"}, \code{"right"} or 
 #' \code{"left"}.
+#' @param verbose logical.  If \code{TRUE} select diagnostics from 
+#' \code{\link[qdap]{check_text}} are reported. 
 #' @param \ldots Additional options passed to \code{\link[qdap]{stem2df}}.
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
@@ -81,16 +83,18 @@
 sentSplit <-
 function(dataframe, text.var, rm.var = NULL, endmarks = c("?", ".", "!", "|"), 
     incomplete.sub = TRUE, rm.bracket = TRUE, stem.col = FALSE, 
-    text.place = "right", ...) {
+    text.place = "right", verbose = is.global(2),  ...) {
 
-    checks <- check_text(dataframe[[text.var]])
-    checks <- checks[!names(checks) %in% c("double_punctuation", 
-        "missing_value", "potentially_misspelled")]
-    pot_probs <- !sapply(checks, is.null)
-    if(sum(pot_probs) > 0) {
-        probs <- gsub("_", " ", paste(names(pot_probs)[pot_probs], collapse=", "))
-        warning("The following problems were detected:\n", probs, 
-            "\n\n*Consider running `check_text`")
+    if (verbose) {
+        checks <- check_text(dataframe[[text.var]])
+        checks <- checks[!names(checks) %in% c("double_punctuation", 
+            "missing_value", "potentially_misspelled")]
+        pot_probs <- !sapply(checks, is.null)
+        if(sum(pot_probs) > 0) {
+            probs <- gsub("_", " ", paste(names(pot_probs)[pot_probs], collapse=", "))
+            warning("The following problems were detected:\n", probs, 
+                "\n\n*Consider running `check_text`")
+        }
     }
 
     if (is.null(rm.var)) {

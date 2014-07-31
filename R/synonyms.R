@@ -39,7 +39,7 @@
 #' synonyms_frame(syn_dat)
 #' syn(c("R", "show"), synonym.frame = syn_frame(syn_dat))
 #' 
-#' syns.hash <- syn_frame(syn_dat, prior.frame = SYNONYM)
+#' syns.hash <- syn_frame(syn_dat, prior.frame = qdapDictionaries::key.syn)
 #' syn(c("R", "show", "like", "robot"), synonym.frame = syns.hash)
 #' }
 synonyms <- function(terms, return.list = TRUE, 
@@ -92,12 +92,12 @@ syn <- synonyms
 #' 
 #' @param synonym.list A named list of lists (or vectors) of synonyms.
 #' @param prior.frame A prior synonyms data.frame in the format produced by 
-#' \code{synonym_frame}.
+#' \code{synonyms_frame}.
 #' @export
 #' @importFrom qdapTools list2df
 #' @rdname synonyms
 synonyms_frame <- function(synonym.list, prior.frame) {
-    
+   
     synonym.list <- lapply(synonym.list, function(x) {
         if(is.list(x)) {
             x
@@ -110,7 +110,12 @@ synonyms_frame <- function(synonym.list, prior.frame) {
     phase3 <- list2df(lapply(phase2, paste, collapse = " @@@@ "), 
         col2 = "word", col1 = "match.string")[2:1]
     phase3[] <- lapply(phase3, as.character)
+
     if (!missing(prior.frame)) {
+
+        class(prior.frame) <- "data.frame"
+        suppressWarnings(colnames(prior.frame) <- colnames(phase3))
+
         phase3 <- data.frame(rbind(phase3, 
             prior.frame[!prior.frame[, "word"] %in%  phase3[, "word"], ]
         ), stringsAsFactors = FALSE)
