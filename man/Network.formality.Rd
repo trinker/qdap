@@ -16,7 +16,7 @@
 
 \item{edge.constant}{A constant to multiple edge width by.}
 
-\item{title}{The title to apply to the Networkd image(s).}
+\item{title}{The title to apply to the \code{Network}ed image(s).}
 
 \item{digits}{The number of digits to use in the current turn of talk
 formality.}

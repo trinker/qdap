@@ -13,7 +13,7 @@
 #' @param USE.NAMES logical.  If \code{TRUE} names.list is used to name the 
 #' gender vector.
 #' @param database A database of names (mostly for internal purposes).
-#' @param \ldots Other aguments passed to \code{\link[qdap]{check_spelling}}.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{check_spelling}}.
 #' @return Returns a vector of predicted gender (M/F) based on first name.
 #' @author Dason Kurkiewicz and Tyler Rinker <tyler.rinker@@gmail.com>.
 #' @keywords name gender

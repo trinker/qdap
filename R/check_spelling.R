@@ -161,10 +161,10 @@ check_spelling <- function(text.var, range = 2,
 #' @param suggest logical.  If \code{TRUE} returns a 
 #' \code{\link[base]{data.frame}} with possible suggestions for misspelled words 
 #' (words not found in the dictionary).
-#' @param nchar.dictionary A vector that correponds in length and content to 
+#' @param nchar.dictionary A vector that corresponds in length and content to 
 #' \code{dictionary} with elements that are the precalculated number of 
 #' characters for each word in the dictionary.
-#' @param first.char.dictionary A vector that corresponds in length ans content 
+#' @param first.char.dictionary A vector that corresponds in length and content 
 #' to \code{dictionary} with elements that are the pre-allotted first characters
 #' of each word in the dictionary.
 #' @return \code{which_misspelled} - Returns either a named vector (names are 
@@ -272,7 +272,7 @@ print.which_misspelled <- function(x, ...){
 #' \code{check_spelling_interactive} - Interactively check spelling.
 #' 
 #' @param click logical.  If \code{TRUE} the interface is a point and click GUI.
-#' If \code{FALSE} the interace is command line driven.
+#' If \code{FALSE} the interface is command line driven.
 #' @note \code{check_spelling_interactive} - The user may go back (undo) by 
 #' pressing \code{"TYPE MY OWN"} entering either \code{"!"} (not) or \code{"0"} 
 #' (similar to a phone system).  The second choice in the 
@@ -358,7 +358,7 @@ correct <- function(x, ...){
 #' first letter of the misspelled word is correct.  This reduces the dictionary 
 #' size, thus speeding up computation.
 #' @param click logical.  If \code{TRUE} the interface is a point and click GUI.
-#' If \code{FALSE} the interace is command line driven.
+#' If \code{FALSE} the interface is command line driven.
 #' @param method Method for distance calculation. The default is "jaccard".  It 
 #' is assumed that smaller measures indicate closer distance.  Measures that do 
 #' not adhere to this assumption will result in incorrect output (see 
@@ -427,7 +427,7 @@ check_spelling_interactive.character <- function(text.var, range = 2,
 #' first letter of the misspelled word is correct.  This reduces the dictionary 
 #' size, thus speeding up computation.
 #' @param click logical.  If \code{TRUE} the interface is a point and click GUI.
-#' If \code{FALSE} the interace is command line driven.
+#' If \code{FALSE} the interface is command line driven.
 #' @param method Method for distance calculation. The default is "jaccard".  It 
 #' is assumed that smaller measures indicate closer distance.  Measures that do 
 #' not adhere to this assumption will result in incorrect output (see 
@@ -494,7 +494,7 @@ check_spelling_interactive.factor <- function(text.var, range = 2,
 #' first letter of the misspelled word is correct.  This reduces the dictionary 
 #' size, thus speeding up computation.
 #' @param click logical.  If \code{TRUE} the interface is a point and click GUI.
-#' If \code{FALSE} the interace is command line driven.
+#' If \code{FALSE} the interface is command line driven.
 #' @param method Method for distance calculation. The default is "jaccard".  It 
 #' is assumed that smaller measures indicate closer distance.  Measures that do 
 #' not adhere to this assumption will result in incorrect output (see 

@@ -40,7 +40,7 @@
 #' plot(fit) 
 #' pvrect(fit, alpha=.95)
 #' 
-#' ## Mutidimentional Scaling
+#' ## Multidimentional Scaling
 #' ## Based on blog post from Bodong Chen
 #' ## http://bodongchen.com/blog/?p=301
 #' 

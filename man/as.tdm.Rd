@@ -104,10 +104,10 @@ Other arguments passed to \code{\link[qdap]{sentSplit}}.  If
 be split into individual rows.}
 
 \item{row.names}{\code{NULL} or a character vector giving the row names for
-the data frame. Not used in \pkg{qdap}; for base genric consistency.}
+the data frame. Not used in \pkg{qdap}; for base generic consistency.}
 
 \item{optional}{logical. If \code{TRUE}, setting row names and converting
-column names is optional. Not used in \pkg{qdap}; for base genric consistency.}
+column names is optional. Not used in \pkg{qdap}; for base generic consistency.}
 
 \item{demographic.vars}{Additional demographic information about the grouping
 variables.  This is a data.frame, list of equal length vectors, or a single
@@ -281,7 +281,7 @@ dat <- dat[dat$person \%in\% qcv(ROMNEY, OBAMA), ]
 speech <- stemmer(dat$dialogue)
 mytable1 <- with(dat, as.tdm(speech, list(person, time), stopwords = Top25Words))
 
-fit <- ca(as.matrix(ytable1))
+fit <- ca(as.matrix(mytable1))
 summary(fit)
 plot(fit)
 plot3d.ca(fit, labels=1)

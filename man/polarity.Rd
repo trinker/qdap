@@ -216,7 +216,7 @@ type <- if(.Platform$OS.type == "windows") shell else system
 
 saveHTML(FUN(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
     ani.height = 1000, ani.width=650,
-    outdir = loc2, single.opts =
+    outdir = loc, single.opts =
     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
 
 #=====================#
@@ -229,6 +229,7 @@ library(qdap)
 library(reports)
 library(igraph)
 library(plotrix)
+library(gridExtra)
 
 deb2dat <- subset(pres_debates2012, time=="time 2")
 deb2dat[, "person"] <- factor(deb2dat[, "person"])
@@ -333,7 +334,7 @@ deb2_bar <- Animate(deb2, as.network=FALSE)
 deb2_line <- plot(cumulative(deb2_bar))
 
 ## Generate a folder
-loc2 <- folder(animation_polarity2)
+loc2b <- folder(animation_polarity2)
 
 ## Set up the plotting function
 oopt <- animation::ani.options(interval = 0.1)
@@ -347,7 +348,7 @@ FUN2 <- function(follow=FALSE, theseq = seq_along(bgb)) {
 
     lapply(theseq, function(i) {
         if (follow) {
-            png(file=sprintf("\%s/images/Rplot\%s.png", loc2, i),
+            png(file=sprintf("\%s/images/Rplot\%s.png", loc2b, i),
                 width=650, height=725)
         }
         ## Set up the layout
@@ -390,7 +391,7 @@ type <- if(.Platform$OS.type == "windows") shell else system
 
 saveHTML(FUN2(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
     ani.height = 1000, ani.width=650,
-    outdir = loc2, single.opts =
+    outdir = loc2b, single.opts =
     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
 
 FUN2(TRUE)

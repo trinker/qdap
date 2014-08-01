@@ -6,7 +6,7 @@
 \method{+}{Network}(Network.obj, x)
 }
 \arguments{
-\item{Network.obj}{A object of class \code{Network}.}
+\item{Network.obj}{An object of class \code{Network}.}
 
 \item{x}{A component to add to \code{Network.obj}}
 }

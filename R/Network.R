@@ -45,9 +45,9 @@ function(x, ...){
 #' @importFrom qdapTools lookup
 #' @note The output from \code{Network} is an \pkg{igraph} object and can be
 #' altered and plotted directly using \pkg{igraph}.  The \pkg{qdap} \code{print}
-#' method is offered as a quick approach to styling the figure.  For mor control
+#' method is offered as a quick approach to styling the figure.  For more control
 #' use \code{\link[igraph]{V}}, \code{\link[igraph]{E}}, and
-#' \code{plot.igrapgh}.
+#' \code{plot.igraph}.
 #' @method print Network
 #' @export
 print.Network <- function(x, title = NA, title.color = "black",
@@ -118,7 +118,7 @@ plot.Network  <- function(x, ...){
 #'
 #' This operator allows you to add themes to a Network object.
 #'
-#' @param Network.obj A object of class \code{Network}.
+#' @param Network.obj An object of class \code{Network}.
 #' @param x A component to add to \code{Network.obj}
 #' @export
 #' @rdname addNetwork

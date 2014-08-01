@@ -108,7 +108,7 @@ mgsub <- multigsub
 #' \item{unhold}{A function used to revert back to the original values}
 #' @rdname multigsub
 #' @note The \code{unhold} function for \code{sub_holder} will only work on keys
-#' that have not been disturbed by subsequen alterations.  The key follows the 
+#' that have not been disturbed by subsequent alterations.  The key follows the 
 #' pattern of `qdapplaceholder` followed by lower case letter keys followed by
 #' `qdap`.
 #' @export

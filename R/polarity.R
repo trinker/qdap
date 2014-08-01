@@ -194,7 +194,7 @@
 #' 
 #' saveHTML(FUN(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
 #'     ani.height = 1000, ani.width=650,
-#'     outdir = loc2, single.opts =
+#'     outdir = loc, single.opts =
 #'     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
 #'  
 #' #=====================#
@@ -207,6 +207,7 @@
 #' library(reports)
 #' library(igraph)
 #' library(plotrix)
+#' library(gridExtra)
 #' 
 #' deb2dat <- subset(pres_debates2012, time=="time 2")
 #' deb2dat[, "person"] <- factor(deb2dat[, "person"])
@@ -311,7 +312,7 @@
 #' deb2_line <- plot(cumulative(deb2_bar))
 #' 
 #' ## Generate a folder
-#' loc2 <- folder(animation_polarity2)
+#' loc2b <- folder(animation_polarity2)
 #' 
 #' ## Set up the plotting function
 #' oopt <- animation::ani.options(interval = 0.1)
@@ -325,7 +326,7 @@
 #' 
 #'     lapply(theseq, function(i) {
 #'         if (follow) {
-#'             png(file=sprintf("%s/images/Rplot%s.png", loc2, i),
+#'             png(file=sprintf("%s/images/Rplot%s.png", loc2b, i),
 #'                 width=650, height=725)
 #'         }
 #'         ## Set up the layout
@@ -368,7 +369,7 @@
 #' 
 #' saveHTML(FUN2(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
 #'     ani.height = 1000, ani.width=650,
-#'     outdir = loc2, single.opts =
+#'     outdir = loc2b, single.opts =
 #'     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
 #' 
 #' FUN2(TRUE)
@@ -1630,7 +1631,7 @@ constrain <- function(x) ((1 - (1/(1 + exp(x)))) * 2) - 1
 #' @param positive The color to use for positive polarity.
 #' @param neutral The color to use for neutral polarity.
 #' @param edge.constant A constant to multiple edge width by.
-#' @param title The title to apply to the Networkd image(s).
+#' @param title The title to apply to the Networked image(s).
 #' @param digits The number of digits to use in the current turn of talk 
 #' polarity.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}}.

@@ -62,16 +62,16 @@ An object from \code{check_spelling_interactive}.}
 \code{\link[base]{data.frame}} with possible suggestions for misspelled words
 (words not found in the dictionary).}
 
-\item{nchar.dictionary}{A vector that correponds in length and content to
+\item{nchar.dictionary}{A vector that corresponds in length and content to
 \code{dictionary} with elements that are the precalculated number of
 characters for each word in the dictionary.}
 
-\item{first.char.dictionary}{A vector that corresponds in length ans content
+\item{first.char.dictionary}{A vector that corresponds in length and content
 to \code{dictionary} with elements that are the pre-allotted first characters
 of each word in the dictionary.}
 
 \item{click}{logical.  If \code{TRUE} the interface is a point and click GUI.
-If \code{FALSE} the interace is command line driven.}
+If \code{FALSE} the interface is command line driven.}
 
 \item{\ldots}{ignored}
 }

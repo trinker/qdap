@@ -93,7 +93,7 @@ sentence.
 
 \section{Suggestion}{
  It is recommended that the user runs \code{\link[qdap]{check_text}} on the
-output of \code{sentSplit}'s text coloumn.
+output of \code{sentSplit}'s text column.
 }
 \examples{
 \dontrun{

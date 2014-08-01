@@ -1,6 +1,6 @@
 #' Apply Parameter to List of Igraph Vertices/Edges
 #' 
-#' \code{vertex_apply} - Uniformly apply \pkg{igrph} vertex plotting parameters to a list of \pkg{igraph} objects.
+#' \code{vertex_apply} - Uniformly apply \pkg{igraph} vertex plotting parameters to a list of \pkg{igraph} objects.
 #' 
 #' @param x A list of \pkg{igraph} objects.
 #' @param \ldots Arguments passed \pkg{igraph}'s \code{\link[igraph]{V}} and \code{\link[igraph]{E}}.  

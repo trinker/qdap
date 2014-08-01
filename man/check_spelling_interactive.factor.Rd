@@ -25,7 +25,7 @@ first letter of the misspelled word is correct.  This reduces the dictionary
 size, thus speeding up computation.}
 
 \item{click}{logical.  If \code{TRUE} the interface is a point and click GUI.
-If \code{FALSE} the interace is command line driven.}
+If \code{FALSE} the interface is command line driven.}
 
 \item{method}{Method for distance calculation. The default is "jaccard".  It
 is assumed that smaller measures indicate closer distance.  Measures that do

@@ -8,7 +8,7 @@
 #' @param missing.end.mark A value to use for sentences with missing endmarks.
 #' @param missing.text A value to use for sentences with missing (\code{NA}) 
 #' text.
-#' @param other.endmarks Other 1-2 character endmarks tos earch for.
+#' @param other.endmarks Other 1-2 character endmarks to search for.
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
@@ -79,9 +79,7 @@
 #' sentraj <- lapply(with(rajSPLIT, split(dialogue, act)), function(x) {
 #'     end_mark(x)
 #' })
-#' 
-#' 
-#' 
+#'  
 #' sentplots2 <- lapply(seq_along(sentraj), function(i) {
 #'     m <- plot(cumulative(sentraj[[i]]))
 #'     if (i != 2) m <- m + ylab("")
@@ -90,7 +88,22 @@
 #'     m + ggtitle(paste("Act", act[i]))
 #' })
 #' 
-#' do.call(grid.arrange, sentplots2)
+#' ## ggplot2 function to extract legend
+#' g_legend <- function(a.gplot){ 
+#'     tmp <- ggplot_gtable(ggplot_build(a.gplot)) 
+#'     leg <- which(sapply(tmp[["grobs"]], function(x) x[["name"]]) == "guide-box") 
+#'     legend <- tmp[["grobs"]][[leg]] 
+#'     legend
+#' } 
+#' 
+#' ## remove legends from plots
+#' sentplots3 <- lapply(sentplots2, function(x){
+#'     x + theme(legend.position="none") + xlab(NULL) + ylab(NULL)
+#' })
+#' 
+#' sentplots3[[6]] <- g_legend(sentplots2[[1]]) 
+#' 
+#' do.call(grid.arrange, sentplots3)
 #' }
 end_mark <- function(text.var, missing.end.mark = "_", missing.text = NA, 
     other.endmarks = NULL) {
@@ -129,7 +142,7 @@ function(x, ...) {
 #' Sentence End Marks
 #' 
 #' 
-#' \code{end_mark_by} - Grab the sentence end marks for a transcriptby grouping 
+#' \code{end_mark_by} - Grab the sentence end marks for a transcript by grouping 
 #' variable(s).
 #' 
 #' @rdname end_mark

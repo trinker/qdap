@@ -22,7 +22,7 @@ altered for the first and last (ends) objects in the list.}
 Returns a list of igraph objects.
 }
 \description{
-\code{vertex_apply} - Uniformly apply \pkg{igrph} vertex plotting parameters to a list of \pkg{igraph} objects.
+\code{vertex_apply} - Uniformly apply \pkg{igraph} vertex plotting parameters to a list of \pkg{igraph} objects.
 
 \code{edge_apply} - Uniformly apply \pkg{igrph} edge plotting parameters to a list of \pkg{igraph} objects.
 }

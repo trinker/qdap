@@ -23,7 +23,7 @@ gender vector.}
 
 \item{database}{A database of names (mostly for internal purposes).}
 
-\item{\ldots}{Other aguments passed to \code{\link[qdap]{check_spelling}}.}
+\item{\ldots}{Other arguments passed to \code{\link[qdap]{check_spelling}}.}
 }
 \value{
 Returns a vector of predicted gender (M/F) based on first name.

@@ -323,9 +323,9 @@ plot.discourse_map <- function(x, ...){
 
 }
 
-#' Plots a animated_discourse_map  Object
+#' Plots an animated_discourse_map  Object
 #' 
-#' Plots a animated_discourse_map  object.
+#' Plots an animated_discourse_map  object.
 #' 
 #' @param x The animated_discourse_map  object.
 #' @param \ldots Other arguments passed to \code{print.animated_discourse_map }.
@@ -398,9 +398,9 @@ animated_discourse_map <- function(DF, edge.constant, sep = "_",
     igraph_objs
 }
 
-#' Prints a animated_discourse_map  Object
+#' Prints an animated_discourse_map  Object
 #' 
-#' Prints a animated_discourse_map  object.
+#' Prints an animated_discourse_map  object.
 #' 
 #' @param x The animated_discourse_map  object.
 #' @param title The title of the plot.

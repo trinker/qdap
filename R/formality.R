@@ -1253,7 +1253,7 @@ plot.animated_formality  <- function(x, ...){
 #' @param contextual The color to use for 0\% formality (purely contextual).
 #' @param formal The color to use for 100\% formality (purely formal).
 #' @param edge.constant A constant to multiple edge width by.
-#' @param title The title to apply to the Networkd image(s).
+#' @param title The title to apply to the \code{Network}ed image(s).
 #' @param digits The number of digits to use in the current turn of talk 
 #' formality.
 #' @param plus.300.color The bar color to use for grouping variables exceeding 

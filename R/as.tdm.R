@@ -66,7 +66,7 @@
 #' speech <- stemmer(dat$dialogue)
 #' mytable1 <- with(dat, as.tdm(speech, list(person, time), stopwords = Top25Words))
 #' 
-#' fit <- ca(as.matrix(ytable1))
+#' fit <- ca(as.matrix(mytable1))
 #' summary(fit)
 #' plot(fit)
 #' plot3d.ca(fit, labels=1)
@@ -520,9 +520,9 @@ wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
 #' @param sent.split logical.  If \code{TRUE} the text variable sentences will 
 #' be split into individual rows.
 #' @param row.names \code{NULL} or a character vector giving the row names for 
-#' the data frame. Not used in \pkg{qdap}; for base genric consistency.
+#' the data frame. Not used in \pkg{qdap}; for base generic consistency.
 #' @param optional logical. If \code{TRUE}, setting row names and converting 
-#' column names is optional. Not used in \pkg{qdap}; for base genric consistency.
+#' column names is optional. Not used in \pkg{qdap}; for base generic consistency.
 #' @return \code{as.data.frame} - Converts a \code{\link[tm]{Corpus}} and returns 
 #' a \pkg{qdap} oriented \code{\link[base]{data.frame}}.
 #' @rdname as.tdm

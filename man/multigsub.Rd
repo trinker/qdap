@@ -62,7 +62,7 @@ holders back to the original values.
 }
 \note{
 The \code{unhold} function for \code{sub_holder} will only work on keys
-that have not been disturbed by subsequen alterations.  The key follows the
+that have not been disturbed by subsequent alterations.  The key follows the
 pattern of `qdapplaceholder` followed by lower case letter keys followed by
 `qdap`.
 }

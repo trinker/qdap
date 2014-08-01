@@ -6,7 +6,7 @@
 #' @param match.terms  A vector of quoted terms or a named list of quoted terms.  
 #' If the latter terms will be combined into a single unified theme named 
 #' according to the list names.  Note that terms within the vectors of the list 
-#' cannot be dulicated.
+#' cannot be duplicated.
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
