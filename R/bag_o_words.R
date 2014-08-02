@@ -33,7 +33,7 @@ function(text.var, apostrophe.remove = FALSE, ...) {
     if (identical(list(), list(...))) {
         bag_o_words1(x = text.var, apostrophe.remove = apostrophe.remove, ...)
     } else {
-        bag_o_words1(x = text.var, apostrophe.remove = apostrophe.remove)
+        bag_o_words2(x = text.var, apostrophe.remove = apostrophe.remove)
     }
 }
 

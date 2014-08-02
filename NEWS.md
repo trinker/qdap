@@ -17,6 +17,26 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.0
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+* `bag_o_words` did not make use of the `bag_o_words2` helper function that has 
+  finer grained control of the output.  `...` were ignored but now are respected.
+
+**NEW FEATURES**
+
+* `rm_email`, rm_tag`, and `rm_hash` have been added to remove/replace/extract 
+  emails, person tags, and hash tags from a string.
+
+**MINOR FEATURES**
+
+**IMPROVEMENTS**
+
+**CHANGES**
+
+
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.1.1
 ----------------------------------------------------------------
 

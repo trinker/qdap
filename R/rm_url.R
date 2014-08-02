@@ -1,6 +1,6 @@
-#' Remove/Replace URLs
+#' Remove/Replace/Extract URLs
 #' 
-#' Remove/Replace URLs from a string.
+#' Remove/replace/extract URLs from a string.
 #' 
 #' @param text.var The text variable.
 #' @param trim logical.  If \code{TRUE} removes leading and trailing white 
@@ -11,6 +11,8 @@
 #' character string for \code{fixed = TRUE}) to be matched in the given 
 #' character vector.
 #' @param replacement Replacement for matched \code{pattern}.
+#' @param extract logical.  If \code{TRUE} the URLs are extracted into a list 
+#' of vectors.
 #' @param \dots Other arguments passed to \code{\link[base]{gsub}}.
 #' @return Returns a character string with URLs removed.
 #' @keywords url www http
@@ -21,10 +23,16 @@
 #' x <- " I like www.talkstats.com and http://stackoverflow.com"
 #' rm_url(x)
 #' rm_url(x, replacement = '<a href="\\1" target="_blank">\\1</a>')
+#' rm_url(x, extract=TRUE)
 #' }
 rm_url <- function(text.var, trim = TRUE, clean = TRUE, 
-    pattern = "(http[^ ]*)|(www\\.[^ ]*)", replacement = "", ...) {
+    pattern = "(http[^ ]*)|(www\\.[^ ]*)", replacement = "", extract = FALSE, 
+    ...) {
 
+    if (extract) {
+        return(regmatches(text.var, gregexpr(pattern, text.var)))
+    }
+    
     out <- gsub(pattern, replacement, text.var, ...)
     if (trim) out <- Trim(out)
     if (clean) out <- clean(out)
