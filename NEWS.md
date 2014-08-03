@@ -27,7 +27,7 @@ And constructed with the following guidelines:
 
 **NEW FEATURES**
 
-* `rm_email`, rm_tag`, and `rm_hash` have been added to remove/replace/extract 
+* `rm_email`, `rm_tag`, and `rm_hash` have been added to remove/replace/extract 
   emails, person tags, and hash tags from a string.
 
 **MINOR FEATURES**
