@@ -27,9 +27,9 @@ And constructed with the following guidelines:
 
 **NEW FEATURES**
 
-* `rm_email`, `rm_tag`, `rm_hash`, `rm_dollar`, and `rm_percent` have been added 
-  to remove/replace/extract emails, person tags, hash tags, dollar amounts, and 
-  percentages from a string.
+* `rm_email`, `rm_tag`, `rm_hash`, `rm_dollar`, `rm_percent`, and `rm_time` have 
+  been added to remove/replace/extract emails, person tags, hash tags, dollar 
+  amounts, percentages, and times from a string.
 
 **MINOR FEATURES**
 
