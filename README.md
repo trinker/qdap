@@ -19,6 +19,7 @@ Download the [zip ball](https://github.com/trinker/qdap/zipball/master) or [tar 
 
 library(devtools)
 install_github("qdapDictionaries", "trinker")
+install_github("qdapRegex", "trinker")
 install_github("qdapTools", "trinker")
 install_github("qdap", "trinker")
 ```
