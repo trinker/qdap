@@ -208,4 +208,5 @@ list_namer <- function(x){
     x
 }
 
-rm_number_to_remove_warning <- qdapRegex::rm_number
+#' @importFrom qdapRegex rm_number
+rm_number_to_remove_warning <- rm_number
