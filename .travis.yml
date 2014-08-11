@@ -13,6 +13,7 @@ install:
   - ./travis-tool.sh install_r_binary rjava
   - ./travis-tool.sh install_github hadley/devtools
   - ./travis-tool.sh install_github trinker/qdapTools
+  - ./travis-tool.sh install_github trinker/qdapRegex
   - ./travis-tool.sh install_github trinker/qdapDictionaries
   - ./travis-tool.sh install_deps
 script: ./travis-tool.sh run_tests
