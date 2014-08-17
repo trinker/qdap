@@ -224,6 +224,13 @@ l <- list("bat" ,"man", "ball", "heavy")
 z <- counts(termco(df$y, qdapTools::id(df), l))[, -2]
 
 counts2list(z[, -1], z[, 1])
+
+## politness
+politness <- c("please", "excuse me", "thank you", "you welcome",
+    "you're welcome", "i'm sorry", "forgive me", "pardon me")
+
+with(pres_debates2012, termco(dialogue, person, politness))
+with(hamlet, termco(dialogue, person, politness))
 }
 }
 \seealso{
