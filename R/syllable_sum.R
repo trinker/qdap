@@ -90,12 +90,15 @@ function(x, ...) {
 #' 
 #' \code{syllable_count} - Count the number of syllables in a single text string.
 #' 
+#' @param env A lookup environment to lookup the number of syllables in found 
+#' words.
 #' @return \code{syllable_count} - returns a dataframe of syllable counts and 
 #' algorithm/dictionary uses and, optionally, a report of words not found in the dictionary. 
 #' @rdname syllabication
 #' @export
 syllable_count <- 
-function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
+function(text, remove.bracketed = TRUE, algorithm.report = FALSE, 
+    env = qdap::env.syl) {
     if (length(text) > 1) stop("text must be length one")
     if (is.na(text)) {
         NA
@@ -111,13 +114,13 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
         y <- unlist(lapply(q, strsplit, "\\s+"))
 
         SYLL <- function(x) {
-            if(exists(x, envir = env.syl)){
-                return(get(x, envir = env.syl))   
+            if(exists(x, envir = env)){
+                return(get(x, envir = env))   
             } else {  
                 x2 <- as.character(substring(x, 1, nchar(x) - 1))
                 if(substring(x, nchar(x)) == "s" &  
-                    exists(x2, envir = env.syl)){
-                    return(get(x2, envir = env.syl))
+                    exists(x2, envir = env)){
+                    return(get(x2, envir = env))
                 } else {
                     m <- gsub("eeing", "XX", x)
                     m <- gsub("eing", "XX", m)
@@ -193,10 +196,10 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE) {
         }  
         n <- unlist(lapply(y, SYLL))
         InDic <- function(x) {
-            ifelse(exists(x, envir = env.syl), "-", 
+            ifelse(exists(x, envir = env), "-", 
                 ifelse(substring(x, nchar(x), nchar(x)) == "s" &&  
                     exists(substring(x, nchar(x), nchar(x)), 
-                    envir = env.syl), "-", "NF"))
+                    envir = env), "-", "NF"))
         }
         k <- sapply(y, InDic)
 

@@ -8,7 +8,8 @@
 \usage{
 syllable_sum(text.var, parallel = FALSE, ...)
 
-syllable_count(text, remove.bracketed = TRUE, algorithm.report = FALSE)
+syllable_count(text, remove.bracketed = TRUE, algorithm.report = FALSE,
+  env = qdap::env.syl)
 
 polysyllable_sum(text.var, parallel = FALSE)
 
@@ -31,6 +32,9 @@ the analysis.}
 \item{algorithm.report}{logical.  If \code{TRUE} generates a report of words
 not found in the dictionary (i.e., syllables were calculated with an
 algorithm).}
+
+\item{env}{A lookup environment to lookup the number of syllables in found
+words.}
 }
 \value{
 \code{syllable_sum} - returns a vector of syllable counts per row.

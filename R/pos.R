@@ -92,6 +92,88 @@
 #' plot(POSby, values = TRUE, digits = 2)
 #' #or more quickly - reuse the output from before
 #' out2 <- with(DATA, pos_by(posbydat, list(adult, sex)))
+#'
+#' ## Definite/Indefinite Noun 
+#' ## 2 approached compared...
+#' ## The later is more efficient but less accurate
+#' 
+#' ## ------------------------##
+#' ## Part off speech tagging ##
+#' ## ------------------------##
+#' pos_after <- function(text.var, words, pos){
+#' 
+#'     posses <- strsplit(as.character(text.var[["POStagged"]][["POStagged"]]), "\\s+")
+#'     namespos <- lapply(posses, function(x) {
+#'         y <- unlist(strsplit(x, "/"))
+#'         setNames(y[c(TRUE, FALSE)], y[c(FALSE, TRUE)])
+#'     })
+#' 
+#'     lapply(namespos, function(x, thewords = words, thepos = pos){
+#'         locs <- which(x %in% thewords)
+#'         locs <- locs[!is.na(locs)]
+#' 
+#'         if (identical(unclass(locs), integer(0))) return(NA_character_)
+#' 
+#'         nounlocs <- which(names(x) %in% thepos)
+#' 
+#'         unname(x[unique(sapply(locs, function(x){ 
+#'             min(nounlocs[nounlocs - x > 0])
+#'         }))])
+#'     })  
+#' }
+#' 
+#' out2 <- setNames(lapply(list(a=c("a", "an"), the="the"), function(x) {
+#'     o <- pos_after(rajPOS, x, c("NN", "NNS", "NNP", "NNPS"))
+#'     m <- qdapTools::matrix2df(data.frame(freq=sort(table(unlist(o)), TRUE)), "word")
+#'     m[m$freq> 3, ]
+#' }), c("a", "the"))
+#' 
+#' 
+#' dat2 <- setNames(Reduce(function(x, y) {
+#'     merge(x, y, by = "word", all = TRUE)}, out2), c("Word", "A", "THE"))
+#' 
+#' dat2 <- reshape2::melt(dat2, id="Word", variable.name="Article", value.name="freq")
+#' 
+#' dat2 <- dat2[order(dat2$freq, dat2$Word), ]
+#' 
+#' ord2 <- aggregate(freq ~ Word, dat2, sum)
+#' 
+#' dat2$Word <- factor(dat2$Word, levels=ord2[order(ord2[[2]]), 1])
+#' rownames(dat2) <- NULL
+#' ggplot(dat2, aes(x=freq, y=Word)) + 
+#'     geom_point()+ facet_grid(~Article) + 
+#'     ggtitle("Part Of Speech Parsing Approach")
+#' 
+#' dev.new()
+#' 
+#' ## --------------------##
+#' ## Regular Expressions ##
+#' ## --------------------##
+#' 
+#' library(qdapRegex);library(ggplot2);library(reshape2)
+#' 
+#' out <- setNames(lapply(c("@@after_a", "@@after_the"), function(x) {
+#'     o <- rm_default(stringi:::stri_trans_tolower(raj$dialogue),
+#'         pattern = x, extract=TRUE)
+#'     m <- qdapTools::matrix2df(data.frame(freq=sort(table(unlist(o)), TRUE)), "word")
+#'     m[m$freq> 3, ]
+#' }), c("a", "the"))
+#' 
+#' 
+#' dat <- setNames(Reduce(function(x, y) {
+#'     merge(x, y, by = "word", all = TRUE)}, out), c("Word", "A", "THE"))
+#' 
+#' dat <- reshape2::melt(dat, id="Word", variable.name="Article", value.name="freq")
+#' 
+#' dat <- dat[order(dat$freq, dat$Word), ]
+#' 
+#' ord <- aggregate(freq ~ Word, dat, sum)
+#' 
+#' dat$Word <- factor(dat$Word, levels=ord[order(ord[[2]]), 1])
+#' rownames(dat) <- NULL
+#' ggplot(dat, aes(x=freq, y=Word)) + 
+#'     geom_point()+ facet_grid(~Article) + 
+#'     ggtitle("Regex Approach")
 #' }
 pos <-
 function(text.var, parallel = FALSE, cores = detectCores()/2, 

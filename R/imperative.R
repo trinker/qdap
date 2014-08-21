@@ -69,7 +69,7 @@ function(dataframe, person.var, text.var, lock.incomplete = FALSE,
                 if (lock.incomplete & end_inc2(x)){
                     x
                 } else {
-                    IMP(x)
+                    IMP(x, NAMES)
                 }
             }
         )
@@ -80,7 +80,7 @@ function(dataframe, person.var, text.var, lock.incomplete = FALSE,
             if (lock.incomplete & end_inc2(x)){
                 x
             } else {
-                IMP(x)
+                IMP(x, NAMES)
             }
         })))
     }    
@@ -95,7 +95,7 @@ function(dataframe, person.var, text.var, lock.incomplete = FALSE,
 
 ## Helper functions:
 
-IMP <- function(x){
+IMP <- function(x, thenames){
     SL <- nchar(x)
     x <- gsub(" +", " ", x)
     y <- gsub("[^[:alnum:][:space:]'\ ,\"]", "", 
@@ -119,7 +119,7 @@ IMP <- function(x){
     ifelse(ncheck(y) & dcheck(y, 2) & vcheck(y, 3), z, 
     ifelse(ncheck(y) & ccheck(y, 2) & dcheck(y, 3) & vcheck(y, 4), z, 
     ifelse(vcheck(y) & !y[1]%in%c("do", "cause", "last", "like", "come", 
-        "sort") & !y[1]%in%NAMES , z,   
+        "sort") & !y[1]%in%thenames , z,   
     ifelse(y[1]%in%"come" & !y[2]%in%"on", z, 
     ifelse(y[1]%in%"come" & y[2]%in%"on" & 
         (!ccheck(y, 3)|(y[3]%in%"now" & !ccheck(y, 4))), z,
@@ -196,6 +196,11 @@ end_inc2 <- function(tx){
     return(y)
 }
 
+action.verbs <- qdapDictionaries::action.verbs
+preposition <- qdapDictionaries::preposition
+adverb <- qdapDictionaries::adverb
+  
+    
 '%p%' <- function(x, y) paste(x, y, sep="")
 vcheck <- function(x, place = 1) x[place]%in% action.verbs
 pcheck <- function(x, place = 1) x[place]%in% preposition

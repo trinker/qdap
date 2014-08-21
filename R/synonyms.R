@@ -21,7 +21,7 @@
 #' is the unique words from the combination of \code{\link[qdapDictionaries]{DICTIONARY}} 
 #' and \code{\link[qdapDictionaries]{labMT}}.
 #' @export
-#' @importFrom qdapTools hash hash_look
+#' @importFrom qdapTools hash hash_look %hl%
 #' @examples
 #' \dontrun{
 #' synonyms(c("the", "cat", "job", "environment", "read", "teach"))

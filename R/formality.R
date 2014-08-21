@@ -1090,18 +1090,18 @@ ggbar_form <- function(dat, grp = grp, rng = rng, colors) {
     padding <- rng*.05
     levels(dat[, "Words"]) <- c("Less Than 300", "300 Plus")
   
-    ggplot(dat, aes_string(x="group"))  +
-        geom_bar(aes_string(weight="formality", fill="Words")) +
-        ylab("Average Formality") + 
-        xlab(paste(sapply(unlist(strsplit(grp, "&")), Caps), collapse = " ")) +
-        theme_bw() +
-        ggtitle(sprintf("Average Discourse Formality:  %s", "")) +
-        theme(axis.text.x=element_text(angle = 90, vjust = .4, hjust = 1, size=11),
+    ggplot2::ggplot(dat, aes_string(x="group"))  +
+        ggplot2::geom_bar(aes_string(weight="formality", fill="Words")) +
+        ggplot2::ylab("Average Formality") + 
+        ggplot2::xlab(paste(sapply(unlist(strsplit(grp, "&")), Caps), collapse = " ")) +
+        ggplot2::theme_bw() +
+        ggplot2::ggtitle(sprintf("Average Discourse Formality:  %s", "")) +
+        ggplot2::theme(axis.text.x=element_text(angle = 90, vjust = .4, hjust = 1, size=11),
             plot.title=element_text(hjust=0, size=11, color="grey60")) + 
-        scale_x_discrete(drop=FALSE) + 
-        scale_fill_manual(values=rev(colors), name="Number of Words", drop=FALSE) +
-        scale_y_continuous(expand = c(0,0), limits=c(0, rng + padding)) +
-        guides(fill=guide_legend(reverse=TRUE))
+        ggplot2::scale_x_discrete(drop=FALSE) + 
+        ggplot2::scale_fill_manual(values=rev(colors), name="Number of Words", drop=FALSE) +
+        ggplot2::scale_y_continuous(expand = c(0,0), limits=c(0, rng + padding)) +
+        ggplot2::guides(fill=guide_legend(reverse=TRUE))
 
 }
 

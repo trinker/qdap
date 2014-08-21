@@ -420,6 +420,7 @@ plot.end_mark_by <- function(x, values = FALSE, ...) {
 #' sentences).
 #' @rdname cumulative
 #' @export
+#' @importFrom qdapTools %lc%
 #' @method cumulative end_mark
 cumulative.end_mark <- function(x, ...){
 
@@ -495,6 +496,7 @@ print.cumulative_end_mark <- function(x, ...) {
 #' 
 #' @param x The end_mark object.
 #' @param \ldots ignored
+#' @importFrom qdapTools %lc%
 #' @method plot end_mark 
 #' @export
 plot.end_mark <- function(x, ...) {
