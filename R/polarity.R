@@ -106,6 +106,8 @@
 #' reviews. National Conference on Artificial Intelligence. 
 #' 
 #' \url{http://www.slideshare.net/jeffreybreen/r-by-example-mining-twitter-for}
+#' 
+#' \url{http://hedonometer.org/papers.html} Links to papers on hedonometrics
 #' @keywords sentiment, polarity
 #' @export
 #' @importFrom qdapTools hash hash_look
@@ -497,6 +499,8 @@
 #' 
 #' #===============================#
 #' ## CUMULATIVE POLARITY EXAMPLE ##
+#' #===============================#
+#' #        Hedonometrics          #           
 #' #===============================#
 #' poldat4 <- with(rajSPLIT, polarity(dialogue, act, constrain = TRUE))
 #' 

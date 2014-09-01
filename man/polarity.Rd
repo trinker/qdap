@@ -520,6 +520,8 @@ m+ theme_nightheat(title="Polarity Discourse Map")
 #===============================#
 ## CUMULATIVE POLARITY EXAMPLE ##
 #===============================#
+#        Hedonometrics          #
+#===============================#
 poldat4 <- with(rajSPLIT, polarity(dialogue, act, constrain = TRUE))
 
 polcount <- na.omit(counts(poldat4)$polarity)
@@ -557,6 +559,8 @@ Hu, M., & Liu, B. (2004). Mining opinion features in customer
 reviews. National Conference on Artificial Intelligence.
 
 \url{http://www.slideshare.net/jeffreybreen/r-by-example-mining-twitter-for}
+
+\url{http://hedonometer.org/papers.html} Links to papers on hedonometrics
 }
 \seealso{
 \url{https://github.com/trestletech/Sermon-Sentiment-Analysis}
