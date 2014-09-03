@@ -8,12 +8,13 @@
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 
 #' one word list for all text.  Also takes a single grouping variable or a list 
 #' of 1 or more grouping variables.
-#' @param \ldots If \code{as.tdm} or \code{as.dtm} - Other arguments passed to 
-#' \code{wfm}.  If \code{apply_as_tm} - Other arguments passed to functions used 
-#' on the tm package's \code{"TermDocumentMatrix"}.  If \code{as.data.frame} - 
-#' Other arguments passed to \code{\link[qdap]{sentSplit}}.  If 
-#' \code{as.Corpus} - Other arguments passed to the tm package's 
-#' \code{\link[tm]{Corpus}}.  
+#' @param \ldots Function dependant:
+#' \itemize{
+#'   \item \bold{as.tdm} or \bold{as.dtm} - Other arguments passed to \code{wfm}
+#'   \item \bold{apply_as_tm} - Other arguments passed to functions used on a \pkg{tm} \code{TermDocumentMatrix}
+#'   \item \bold{as.data.frame} - Other arguments passed to \code{\link[qdap]{sentSplit}}
+#'   \item \bold{as.Corpus} - Other arguments passed to \pkg{tm}'s \code{\link[tm]{Corpus}}
+#' }
 #' @param vowel.check logical.  Should terms without vowels be remove?  
 #' @details Produces output that is identical to the \code{tm} package's 
 #' \code{\link[tm]{TermDocumentMatrix}}, \code{\link[tm]{DocumentTermMatrix}},
