@@ -27,6 +27,10 @@ And constructed with the following guidelines:
 
 **NEW FEATURES**
 
+* `chunker` added to break text, optionally by grouping variables, into equal 
+  chunks.  The chunk size can be specified by giving number of words to be in 
+  each chunk or the number of chunks.
+
 **MINOR FEATURES**
 
 **IMPROVEMENTS**

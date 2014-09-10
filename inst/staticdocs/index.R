@@ -102,6 +102,7 @@ sd_section("Word Extraction/Comparison",
   c(
     "all_words",
     "bag_o_words",
+    "chunker",
     "common",
     "exclude",
     "freq_terms",
