@@ -32,6 +32,60 @@
 #' ## Bigger data
 #' with(hamlet, chunker(dialogue, person, n.chunks = 10))
 #' with(hamlet, chunker(dialogue, person, n.words = 300))
+#' 
+#' \dontrun{
+#' ## with polarity hedonmetrics
+#' dat <- with(pres_debates2012[pres_debates2012$person %in% qcv(OBAMA, ROMNEY), ], 
+#'     chunker(dialogue, list(person, time), n.words = 300))
+#' 
+#' dat2 <- colsplit2df(list2df(dat, "dialogue", "person&time")[, 2:1])
+#' 
+#' dat3 <- split(dat2[, -2], dat2$time)
+#' ltruncdf(dat3, 10, 50)
+#' 
+#' poldat <- lapply(dat3, function(x) with(x, polarity(dialogue, person, constrain = TRUE)))
+#' 
+#' 
+#' m <- lapply(poldat, function(x) plot(cumulative(x)))
+#' m <- Map(function(w, x, y, z) {
+#'         w + ggtitle(x) + xlab(y) + ylab(z)
+#'     }, 
+#'         m, 
+#'         paste("Debate", 1:3), 
+#'         list(NULL, NULL, "Duration (300 Word Segment)"), 
+#'         list(NULL, "Cumulative Average Polarity", NULL)
+#' )
+#' 
+#' library(gridExtra)
+#' do.call(grid.arrange, m)
+#' 
+#' ## By person
+#' ## By person
+#' poldat2 <- Map(function(x, x2){
+#' 
+#'     scores <- with(counts(x), split(polarity, person))
+#'     setNames(lapply(scores, function(y) {
+#'         y <- list(cumulative_average_polarity = y)
+#'         attributes(y)[["constrained"]] <- TRUE
+#'         qdap:::plot.cumulative_polarity(y) + xlab(NULL) + ylab(x2)
+#'     }), names(scores))
+#' 
+#' }, poldat, paste("Debate", 1:3))
+#' 
+#' poldat2 <- lapply(poldat2, function(x) {
+#'     x[[2]] <- x[[2]] + ylab(NULL)
+#'     x
+#' })
+#' 
+#' poldat2[[1]] <- Map(function(x, y) {
+#'         x + ggtitle(y)
+#'     },
+#'         poldat2[[1]], qcv(Obama, Romney)
+#' )
+#' 
+#' library(gridExtra)
+#' do.call(grid.arrange, unlist(poldat2, recursive=FALSE))
+#' }
 chunker <- function(text.var, grouping.var = NULL, n.words, n.chunks,  
     as.string = TRUE, rm.unequal = FALSE){
 
