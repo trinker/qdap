@@ -25,6 +25,10 @@ And constructed with the following guidelines:
 * `bag_o_words` did not make use of the `bag_o_words2` helper function that has 
   finer grained control of the output.  `...` were ignored but now are respected.
 
+* `fry` threw an error if a group contained &lt; 300 words but had enough text to
+  generate 2 texts chunks of 100 words each, caught by S. Enrico P. Indiogine.
+  The bug has been fixed as these groups are dropped and a warning given.
+
 **NEW FEATURES**
 
 * `chunker` added to break text, optionally by grouping variables, into equal 

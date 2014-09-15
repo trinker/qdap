@@ -23,9 +23,18 @@
 #' are derived from word difficulty (letters per word) and sentence difficulty 
 #' (words per sentence).  If you have not run the sentSplit function on your 
 #' data the results may not be accurate.
+#' @section Fry: The \code{fry} function is based on Fry's formula that randomly 
+#' samples 3 100 word length passages.  If a group(s) in does not contain 300+ 
+#' words they will not be included in the output.
 #' @references Coleman, M., & Liau, T. L. (1975). A computer readability formula 
 #' designed for machine scoring. Journal of Applied Psychology, Vol. 60, 
 #' pp. 283-284.
+#' 
+#' Fry, E. B. (1968). A readability formula that saves time. Journal of Reading,
+#' 11(7), 513-516, 575?578.
+#' 
+#' Fry, E. B. (1969). The readability graph validated at primary levels. The Reading
+#' Teacher, 22(6), 534-538.
 #' 
 #' Flesch R. (1948). A new readability yardstick. Journal of Applied Psychology. 
 #' Vol. 32(3), pp. 221-233. doi: 10.1037/h0057532.
@@ -36,7 +45,7 @@
 #' McLaughlin, G. H. (1969). SMOG Grading: A New Readability Formula. 
 #' Journal of Reading, Vol. 12(8), pp. 639-646. 
 #' 
-#' Senter, R. J., & Smith, E. A.. (1967) Automated readability index. 
+#' Smith, E. A. & Senter, R. J. (1967) Automated readability index. 
 #' Technical Report AMRLTR-66-220, University of Cincinnati, Cincinnati, Ohio.
 #' @keywords readability, Automated Readability Index, Coleman Liau, SMOG, 
 #' Flesch-Kincaid, Fry, Linsear Write
@@ -499,9 +508,19 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE,
     DF3 <- data.frame(sub = DF2$sub, group = DF2$group, 
         text.var = DF2$text.var, frac.sent = DF2$frac.sent)
     CHOICES <- tapply(as.character(DF3b$sub), DF3b$group, function(x) {
+            if (length(x) < 3) return(NULL)
             sample(x, 3, replace = FALSE)
         }
     )
+    ## drop any less than 300 words
+    less_than_300 <- sapply(CHOICES, is.null)
+    if (any(less_than_300)) {
+        warning("The following groups contain < 300 words and were dropped:\n  ",
+            paste(names(CHOICES[less_than_300]), collapse="', '")
+        )
+    }
+    CHOICES <- CHOICES[!less_than_300]
+
     CHOICES <- as.character(unlist(CHOICES))
     DF4 <- DF3[which(DF3$sub %in% CHOICES), ]
     DF4$sub <- DF4$sub[, drop = TRUE]
@@ -529,7 +548,6 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE,
     )
     out
 }
-
 
 
 #' Linsear Write Readability
