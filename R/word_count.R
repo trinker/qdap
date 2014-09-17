@@ -36,6 +36,11 @@
 #' word_count(DATA$state, byrow=FALSE, names = TRUE)
 #' sum(word_count(DATA$state))
 #' 
+#' sapply(split(raj$dialogue, raj$person), wc, FALSE) %>%
+#'     sort(decreasing=TRUE) %>% 
+#'     list2df("wordcount", "person") %>%
+#'     `[`(, 2:1)
+#' 
 #' ## PLOT WORD COUNTS
 #' raj2 <- raj
 #' raj2$scaled <- unlist(tapply(wc(raj$dialogue), raj2$act, scale))

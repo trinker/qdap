@@ -153,6 +153,48 @@
 #' 
 #' with(pres_debates2012, termco(dialogue, person, politness))
 #' with(hamlet, termco(dialogue, person, politness))
+#' 
+#' ## Term Use Percentage per N Words
+#' dat <- with(raj, chunker(dialogue, person, n.words = 100, rm.unequal = TRUE))
+#' dat2 <- list2df(dat, "Dialogue", "Person")
+#' dat2[["Duration"]] <- unlist(lapply(dat, id, pad=FALSE))
+#' dat2 <- qdap_df(dat2, "Dialogue")
+#' 
+#' Top5 <- sapply(split(raj$dialogue, raj$person), wc, FALSE) %>%
+#'     sort(decreasing=TRUE) %>% 
+#'     list2df("wordcount", "person") %>%
+#'     `[`(1:5, 2)
+#' 
+#' propdat <- dat2 %&% 
+#'     termco(list(Person, Duration), as.list(Top25Words[1:5]), percent = FALSE) %>% 
+#'     proportions %>%
+#'     colsplit2df %>% 
+#'     reshape2::melt(id=c("Person", "Duration", "word.count"), variable="Word") %>%
+#'     dplyr::filter(Person %in% Top5)
+#' 
+#' head(propdat)
+#' 
+#' ggplot(propdat, aes(y=value, x=Duration, group=Person, color=Person)) +
+#'     geom_line(size=1.25) +
+#'     facet_grid(Word~., scales="free_y") +
+#'     ylab("Percent of Word Use")  +
+#'     xlab("Per 100 Words") + 
+#'     scale_y_continuous(labels = percent)
+#' 
+#' ggplot(propdat, aes(y=value, x=Duration, group=Word, color=Word)) +
+#'     geom_line(size=1.25) +
+#'     facet_grid(Person~.) +
+#'     ylab("Percent of Word Use")  +
+#'     xlab("Per 100 Words") + 
+#'     scale_y_continuous(labels = percent)
+#' 
+#' ggplot(propdat, aes(y=value, x=Duration, group=Word)) +
+#'     geom_line() +
+#'     facet_grid(Word~Person, scales="free_y") +
+#'     ylab("Percent of Word Use")  +
+#'     xlab("Per 100 Words") + 
+#'     scale_y_continuous(labels = percent) +
+#'     ggthemes::theme_few()
 #' }
 termco <-
 function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
