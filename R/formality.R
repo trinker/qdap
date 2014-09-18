@@ -1152,7 +1152,7 @@ ggbar_form <- function(dat, grp = grp, rng = rng, colors) {
 #' noun, adjective, preposition, article).
 #' @import igraph
 #' @importFrom qdapTools %l% matrix2df list_df2df
-#' @importFrom ggplot2 ggplot geom_hline geom_bar ylab xlab theme ggtitle theme_bw ylim element_text scale_x_discrete 
+#' @importFrom ggplot2 ggplot geom_hline geom_bar ylab xlab theme ggtitle theme_bw ylim element_text scale_x_discrete scale_fill_manual
 #' @export
 #' @method Animate formality
 Animate.formality <- function(x, contextual = "yellow", formal = "red",

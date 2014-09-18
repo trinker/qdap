@@ -32,7 +32,7 @@
 #' \item{"blank"}{Empty cell/NA.} 
 #' @keywords end-mark
 #' @export
-#' @importFrom qdapTools matrix2df
+#' @importFrom qdapTools matrix2df  
 #' @examples
 #' \dontrun{
 #' end_mark(DATA.SPLIT$state)
@@ -432,7 +432,8 @@ cumulative.end_mark <- function(x, ...){
         "Question"), class = "factor")), .Names = c("Symbol", "Type"), row.names = c(NA, 
         -10L), class = "data.frame")
 
-    x <- x %lc% types_key
+    `%lcqdap%` <- qdapTools::`%lc%`    
+    x <- x %lcqdap% types_key
     x[is.na(x)] <- "Missing"
     
     all <- names(table(x))
@@ -509,7 +510,8 @@ plot.end_mark <- function(x, ...) {
         "Question"), class = "factor")), .Names = c("Symbol", "Type"), row.names = c(NA, 
         -10L), class = "data.frame")
 
-    x <- x %lc% types_key
+    `%lcqdap%` <- qdapTools::`%lc%`        
+    x <- x %lcqdap% types_key
     x[is.na(x)] <- "Missing"
     y <- table(x)
     dat <- data.frame(y)

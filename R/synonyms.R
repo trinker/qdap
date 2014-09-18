@@ -46,7 +46,9 @@ synonyms <- function(terms, return.list = TRUE,
     multiwords = TRUE, report.null = TRUE, 
     synonym.frame = qdapDictionaries::key.syn){
 
-    z <- terms %hl% synonym.frame
+    `%hlqdap%` <- qdapTools::`%hl%`        
+    
+    z <- terms %hlqdap% synonym.frame
     out <- lapply(z, rcst)
 
     if (!multiwords){
