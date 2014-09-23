@@ -104,9 +104,9 @@ equal.}
 
 \item{row}{The row name (generally not used).}
 
-\item{\ldots}{Other arguments supplied to \code{\link[tm]{Corpus}}.  If
-\code{as.wfm} this is other arguments passed to \code{as.wfm} methods
-(currently ignored).}
+\item{\ldots}{Other arguments supplied to \code{\link[tm]{Corpus}} or
+\code{\link[tm]{TermDocumentMatrix}}.  If \code{as.wfm} this is other
+arguments passed to \code{as.wfm} methods (currently ignored).}
 }
 \value{
 \code{wfm} - returns a word frequency of the class matrix.

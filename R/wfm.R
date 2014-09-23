@@ -11,9 +11,9 @@
 #' @param char2space A vector of characters to be turned into spaces.  If 
 #' \code{char.keep} is \code{NULL}, \code{char2space} will activate this 
 #' argument.
-#' @param \ldots Other arguments supplied to \code{\link[tm]{Corpus}}.  If
-#' \code{as.wfm} this is other arguments passed to \code{as.wfm} methods 
-#' (currently ignored).
+#' @param \ldots Other arguments supplied to \code{\link[tm]{Corpus}} or
+#' \code{\link[tm]{TermDocumentMatrix}}.  If \code{as.wfm} this is other 
+#' arguments passed to \code{as.wfm} methods (currently ignored).
 #' @param digits An integer indicating the number of decimal places (round) or 
 #' significant digits (signif) to be used. Negative values are allowed.
 #' @param margins logical. If \code{TRUE} provides grouping.var and word 
