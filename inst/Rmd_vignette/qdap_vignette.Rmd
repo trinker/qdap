@@ -1053,35 +1053,16 @@ mgsub(c("it's", "I'm", "I am"), c("it is", "I am", "ITERATIVE"), DATA$state)
 
 <h4 id="nms">Names to Gender Prediction</h4>
 
-A researcher may face a list of names and be uncertain about gender of the participants.  The `r FUN("name2sex")` function utilizes the `r FUN2("NAMES_LIST")` dictionary based on the 1990 U.S. census data.  For gender neutral names the gender with the higher assignment rate is assumed if `r CN("pred.sex")` is set to `r CN("TRUE")`, otherwise a `r FT(blue, text="B")` is assigned to indicate "both" genders.  For names not matching the `r FUN2("NAMES_LIST")` optional fuzzy matching can be utilized via the `r CN("fuzzy.match")` argument based on the use of `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/agrep.html", "agrep")`.  Both of these argument increase accuracy but act at the cost of speed.  The use of `r CN("fuzzy.match = TRUE")` is particularly computationally costly.
+A researcher may face a list of names and be uncertain about gender of the participants.  The `r FUN("name2sex")` function utilizes the [**gender**](http://cran.r-project.org/web/packages/gender/) package to predict names based on Social Security Administration data, defaulting to the period from 1932-2012.
 
 `r FT(orange, 5, text="&diams;")` **Name to Gender Prediction**`r FT(orange, 5, text="&diams;")`
-```{r}
-name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
-    tyrone, cheryl, drew), pred.sex = TRUE, fuzzy.match = TRUE)
-name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
-    tyrone, cheryl, drew), pred.sex = FALSE, fuzzy.match = FALSE)
-name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
-    tyrone, cheryl, drew), pred.sex = FALSE, fuzzy.match = TRUE)
-name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
-    tyrone, cheryl, drew), pred.sex = TRUE, fuzzy.match = FALSE)
-## Get rank percent frequency ratio of being a gender
-library(qdapDictionaries)
-orig_nms <- qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA,
-    tyler, jamie, JAMES, tyrone, cheryl, drew)
+<pre><code class="r">name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, tyler, jamie, JAMES, 
+    tyrone, cheryl, drew))
+</code></pre>
 
-sex <- name2sex(orig_nms, FALSE, TRUE)
-
-names(sex) <- rep("", length(sex))
-names(sex)[sex == "B"] <- sapply(toupper(orig_nms[sex == "B"]), function(x) {
-        y <- NAMES[NAMES[, 1] %in% x, ]
-        round(log(Reduce("/", y[ order(y[, "gender"]), "per.freq"])), 2)
-    })
-
-## The log ratio of being a female name
-data.frame(name = orig_nms, sex = sex, `ratio_F:M` = names(sex),
-    check.names=FALSE)
-```
+<pre><code>[1] F F F M M F M F M M F M
+Levels: F M
+</code></pre>
 
 <h4 id="stem">Stem Text</h4>
 
