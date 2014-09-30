@@ -44,6 +44,12 @@ And constructed with the following guidelines:
 * `rm_url` has been moved into its own canned regex pattern extraction/replacer
   package named `qdapRegex`.
 
+* `name2sex` now uses the **gender** package to predict sex.  This makes the 
+  function slightly slower but much more accurate than previous versions.  
+  Because of this increased accuracy and dependence on `gender`, the arguments 
+  `pred.sex`, `fuzzy.match`, and `database` are no longer necessary and have 
+  been removed.
+
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.1.1
 ----------------------------------------------------------------

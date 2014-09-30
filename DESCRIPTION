@@ -18,6 +18,7 @@ Imports:
     chron,
     dplyr,
     gdata,
+    gender,
     grid,
     gridExtra,
     igraph,

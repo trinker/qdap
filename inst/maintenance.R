@@ -45,7 +45,7 @@ extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry,
     as.wfm.Corpus, as.wfm.DocumentTermMatrix, as.wfm.TermDocumentMatrix, 
     as.wfm.data.frame, as.wfm.default, as.wfm.matrix, as.wfm.wfdf, wfm.Corpus,
     weight.word_proximity, which_misspelled, check_spelling_interactive, 
-    "Text<-")
+    "Text", "Text&lt;-")
 
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
     combine = qcv(character_table, char_table))
@@ -96,7 +96,7 @@ extras <- qcv(right_just, coleman_liau, flesch_kincaid, fry,
     as.wfm.Corpus, as.wfm.DocumentTermMatrix, as.wfm.TermDocumentMatrix, 
     as.wfm.data.frame, as.wfm.default, as.wfm.matrix, as.wfm.wfdf, wfm.Corpus,
     weight.word_proximity, which_misspelled, check_spelling_interactive, 
-    "Text<-")
+    "Text", "Text&lt;-")
 
 
 expand_statdoc(path2, to.icon = extras, readme = rdme, 
