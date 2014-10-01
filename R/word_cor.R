@@ -65,13 +65,13 @@
 #' ## Throws multiple warning because small data set
 #' library(qdapTools)
 #' lapply(DATA3, function(x) {
-#'     word_cor(x[, "state"], id(x), qcv(computer, i, no, good), r = NULL)
+#'     word_cor(x[, "state"], qdapTools::id(x), qcv(computer, i, no, good), r = NULL)
 #' })
 #' 
 #' ## Find words correlated per turn of talk by person
 #' ## Throws multiple warning because small data set
 #' lapply(DATA3, function(x) {
-#'     word_cor(x[, "state"], id(x), qcv(computer, i, no, good))
+#'     word_cor(x[, "state"], qdapTools::id(x), qcv(computer, i, no, good))
 #' })
 #' 
 #' 
@@ -93,7 +93,7 @@
 #'     negative = qcv(no, dumb, distrust, not, stinks),
 #'     literacy = qcv(computer, talking, telling)
 #' )
-#' y <- wfdf(DATA$state, id(DATA, prefix = TRUE))
+#' y <- wfdf(DATA$state, qdapTools::id(DATA, prefix = TRUE))
 #' z <- wfm_combine(y, worlis)
 #' 
 #' out <- word_cor(t(z), word = c(names(worlis), "else.words"), r = NULL)
@@ -124,7 +124,7 @@ word_cor <- function(text.var, grouping.var = NULL, word, r = .7,
         WFM <- t(wfm(text.var = text.var, grouping.var = grouping.var, ...))
     }
 
-    WFM <- data.frame(WFM, check.names = F)
+    WFM <- data.frame(WFM, check.names = FALSE)
     wordlen <- length(word) == 1
 
     test1 <- word %in% colnames(WFM)

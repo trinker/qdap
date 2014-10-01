@@ -87,7 +87,7 @@ tot_plot <- function(dataframe, text.var, grouping.var = NULL, facet.vars = NULL
             if (!"tot" %in% colnames(dataframe)) {
                 stop("supply valid tot argument")
             }
-            tot <- TOT(dataframe[, "tot"])
+            tot <- TOT(dataframe[["tot"]])
 
         } else {
 
@@ -96,7 +96,7 @@ tot_plot <- function(dataframe, text.var, grouping.var = NULL, facet.vars = NULL
                 DF[, "qdapIDqdap"] <- seq_len(nrow(DF))
             
                 ## Split, order and make tot
-                rmout <- lapply(split(DF, DF[, facet.vars]), function(x) {
+                rmout <- lapply(split(DF, DF[[facet.vars]]), function(x) {
                     x <- x[order(x[, "qdapIDqdap"]), ]
                     x[, "tot"] <- seq_len(nrow(x))
                     x

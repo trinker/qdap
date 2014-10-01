@@ -85,7 +85,8 @@ random_data <- function(n = 10, ..., n.people = 10, ages = 7:10,
     rownames(output) <- NULL
 
     text.var <- "dialogue"
-    output <- dplyr::tbl_df(output)
+    # removed on 10/1 per tbl_df no longer returning vector for df[, 1]
+    # output <- dplyr::tbl_df(output)
     class(output) <- unique(c("sent_split", "qdap_df", paste0("sent_split_text_var:", 
         text.var), class(output)))
     attributes(output)[["text.var"]] <- text.var

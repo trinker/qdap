@@ -104,5 +104,6 @@
 #' @param lhs The value to be piped.
 #' @param rhs A function or expression.
 #' @export
+#' @importFrom dplyr tbl_df
 #' @rdname chain
 `%>%` <- dplyr::`%>%`
