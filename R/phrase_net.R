@@ -80,8 +80,8 @@ phrase_net <- function(text.var, freq=4, r = .35,
 
     Filtered_dat <- Filter(all_words(text.var), freq=freq, ...)
     text.var <- sentSplit(data.frame(text=text.var), "text")
-    cor_dat <- word_cor(text.var[, "text"], text.var[, "tot"],
-        word=Filtered_dat[, 1], r=NULL)
+    cor_dat <- word_cor(text.var[["text"]], text.var[["tot"]],
+        word=Filtered_dat[[1]], r=NULL)
     
     X2 <- na.omit(melt(cor_dat))
     colnames(X2)[1:2] <-c("to", "from")

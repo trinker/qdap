@@ -12,11 +12,11 @@ Depends:
     ggplot2 (>= 0.9.3.1),
     qdapDictionaries (>= 1.0.2),
     qdapRegex (>= 0.1.2),
-    qdapTools (>= 1.0.1),
+    qdapTools (>= 1.0.3),
     RColorBrewer
 Imports:
     chron,
-    dplyr,
+    dplyr (>= 0.3),
     gdata,
     gender,
     grid,

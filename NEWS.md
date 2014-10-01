@@ -29,6 +29,11 @@ And constructed with the following guidelines:
   generate 2 texts chunks of 100 words each, caught by S. Enrico P. Indiogine.
   The bug has been fixed as these groups are dropped and a warning given.
 
+* `phrase_net` threw an error caused by **dplyr**'s (0.3) approach to subsetting 
+  columns.  Proviously a vector was returned, now a `tbl_df` object is returned: 
+  https://github.com/hadley/dplyr/issues/587. This was adtreeded by using 
+  explicit `df[[index]]` rather than `df[, index]`.
+
 **NEW FEATURES**
 
 * `chunker` added to break text, optionally by grouping variables, into equal 
