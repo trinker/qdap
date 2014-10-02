@@ -59,6 +59,9 @@ lapply(seq_along(out), function(i) {
     plot(out[[i]], plot=FALSE) + ggtitle(names(out)[i])
 })
 dev.off()
+
+## Keep spaces
+freq_terms(space_fill(DATA$state, "are you"), 500, char.keep="~~")
 }
 }
 \seealso{

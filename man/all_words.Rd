@@ -4,7 +4,8 @@
 \title{Searches Text Column for Words}
 \usage{
 all_words(text.var, begins.with = NULL, contains = NULL,
-  alphabetical = TRUE, apostrophe.remove = FALSE, ...)
+  alphabetical = TRUE, apostrophe.remove = FALSE, char.keep = char2space,
+  char2space = "~~", ...)
 }
 \arguments{
 \item{text.var}{The text variable.}
@@ -20,6 +21,13 @@ Use this if searching for a word containing the word chunk.}
 
 \item{apostrophe.remove}{logical.  If \code{TRUE} removes apostrophes from
 the text before examining.}
+
+\item{char.keep}{A character vector of symbol character (i.e., punctuation)
+that strip should keep.  The default is to strip everything except
+apostrophes.  This enables the use of special characters to be turned into
+spaces or for characters to be retained.}
+
+\item{char2space}{A vector of characters to be turned into spaces.}
 
 \item{\ldots}{Other argument supplied to \code{\link[qdap]{strip}}.}
 }
@@ -54,6 +62,9 @@ head(x5)
 
 ## Filter by nchar and stopwords
 Filter(head(x3), min = 3)
+
+## Keep spaces
+all_words(space_fill(DATA$state, c("are you", "can be")))
 }
 }
 \seealso{

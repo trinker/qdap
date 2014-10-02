@@ -44,6 +44,11 @@ And constructed with the following guidelines:
 
 **IMPROVEMENTS**
 
+  `all_words` gains `char.keep` and `char2space` arguments to enable retention 
+  of characters and multi word phrases.  These features are passed to 
+  `freq_terms` as well.  Suggestd by stackoverflow's lawyeR 
+  (<a href="http://stackoverflow.com/a/26162401/1000343)." target="_blank">http://stackoverflow.com/a/26162401/1000343).</a>
+
 **CHANGES**
 
 * `rm_url` has been moved into its own canned regex pattern extraction/replacer
