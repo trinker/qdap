@@ -40,8 +40,6 @@ And constructed with the following guidelines:
   chunks.  The chunk size can be specified by giving number of words to be in 
   each chunk or the number of chunks.
 
-**MINOR FEATURES**
-
 **IMPROVEMENTS**
 
   `all_words` gains `char.keep` and `char2space` arguments to enable retention 

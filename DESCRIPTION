@@ -1,6 +1,6 @@
 Package: qdap
 Type: Package
-Title: Bridging the gap between qualitative data and quantitative analysis
+Title: Bridging the Gap Between Qualitative Data and Quantitative Analysis
 Version: 2.2.0
 Date: 2013-06-26
 Authors@R: c(person("Bryan", "Goodrich", role = "ctb"), person("Dason",
@@ -18,7 +18,7 @@ Imports:
     chron,
     dplyr (>= 0.3),
     gdata,
-    gender,
+    gender (>= 0.4.1),
     grid,
     gridExtra,
     igraph,
@@ -47,7 +47,7 @@ Suggests:
     testthat
 LazyData: TRUE
 VignetteBuilder: knitr
-Description: This package automates many of the tasks associated with
+Description: qdap automates many of the tasks associated with
     quantitative discourse analysis of transcripts containing discourse
     including frequency counts of sentence types, words, sentences, turns of
     talk, syllables and other assorted analysis tasks.  The package
