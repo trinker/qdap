@@ -29,7 +29,7 @@
 #' HR2("https://github.com/trinker/reports", "reports", print = TRUE)
 #' BT("http://trinker.github.io/reports/dependencies", "Click Here!", print = TRUE)
 HR <- function(path = "clipboard", text = NULL, new_win = FALSE, 
-    copy2clip = interactive(), print = FALSE) {
+    copy2clip = FALSE, print = FALSE) {
 	
     if (path == "clipboard") {
         path <- read_clip()
@@ -58,7 +58,7 @@ HR <- function(path = "clipboard", text = NULL, new_win = FALSE,
 #' @export
 #' @rdname hyperref
 HR2 <- function(path = "clipboard", text = NULL, new_win = TRUE, 
-	copy2clip = interactive(), print = FALSE) {
+	copy2clip = FALSE, print = FALSE) {
 	
     if (path == "clipboard") {
         path <- read_clip()
@@ -87,7 +87,7 @@ HR2 <- function(path = "clipboard", text = NULL, new_win = TRUE,
 #' @rdname hyperref
 BT <-
 function(path = "clipboard", text = NULL, new_win = FALSE, 
-	copy2clip = interactive(), print = FALSE) {
+	copy2clip = FALSE, print = FALSE) {
 	
     if (path == "clipboard") {
         path <- read_clip()
@@ -149,7 +149,7 @@ function(path = "clipboard", text = NULL, new_win = FALSE,
 #' IM_MO("http://i.imgur.com/VClk4DS.png", print =TRUE)
 IM <- function(path = "clipboard", link = NULL, width = 540,  
     height = IE(width, round(width/1.5)), sty = IE(width, width*1.05, 480), 
-    center = TRUE, new_win = TRUE, copy2clip = interactive(), print = FALSE) { 
+    center = TRUE, new_win = TRUE, copy2clip = FALSE, print = FALSE) { 
     if (path == "clipboard") {
         path <- read_clip()
     } 
@@ -242,7 +242,7 @@ function(image = "clipboard", loc = 1, ...) {
 IW <- 
 function(path = "clipboard", link = NULL, side = "right", width = 540, 
     height = IE(width, round(width/1.5)), new_win = TRUE, top = -15, right = 20, 
-    left = 20, bottom = 0, copy2clip = interactive(), print = FALSE) { 
+    left = 20, bottom = 0, copy2clip = FALSE, print = FALSE) { 
     if (path == "clipboard") {
         path <- read_clip()
     } 
@@ -321,7 +321,7 @@ function(image = "clipboard", ...) {
 IM_MO <- function(path = "clipboard", link = NULL, width = 32,  
     height = 32, width2 = width * 10, height2 = height * 10,
     sty = width*1.05, center = FALSE, new_win = TRUE, 
-    copy2clip = interactive(), print = FALSE) { 
+    copy2clip = FALSE, print = FALSE) { 
 
     grow <- "onmouseover=\"bigImg(this, '%spx', '%spx')\" onmouseout=\"regImg(this, '%spx', '%spx')\" border=\"0\" "
     grow <- sprintf(grow, width2, height2, width, height)
@@ -419,7 +419,7 @@ IE <- function(input, out1, out2 = NULL, FUN  = is.numeric) {
 #' FT(6, blue, text="guy")
 #' FT(6, red, times_new_roman, text="guy")
 FT <-
-function(..., text = "clipboard", copy2clip = interactive()) { 
+function(..., text = "clipboard", copy2clip = FALSE) { 
     if (length(text) == 1 && text == "clipboard") {
         text <- read_clip()
     } 
@@ -477,7 +477,7 @@ function(..., text = "clipboard", copy2clip = interactive()) {
 #' paste0("reports", HS(10), "end")
 #' cat(paste0("the", VS(), "end"))
 #' cat(paste0("the", VS(3), "end"))
-HS <- function(n=1, copy2clip = interactive()) {
+HS <- function(n=1, copy2clip = FALSE) {
     x <- paste(rep("&nbsp;", n), collapse="")
     if(copy2clip){
         write_clip(x)
@@ -487,7 +487,7 @@ HS <- function(n=1, copy2clip = interactive()) {
 
 #' @export
 #' @rdname space
-VS <- function(n=1, copy2clip = interactive()) {
+VS <- function(n=1, copy2clip = FALSE) {
     x <- paste(rep("</br>", n), collapse="")
     if(copy2clip){
         write_clip(x)
@@ -511,7 +511,7 @@ VS <- function(n=1, copy2clip = interactive()) {
 #' @export
 #' @examples
 #' CN("new_report()")
-CN <- function(text = "clipboard", copy2clip = interactive()) { 
+CN <- function(text = "clipboard", copy2clip = FALSE) { 
     
     if (text == "clipboard") {
         text <- read_clip()
