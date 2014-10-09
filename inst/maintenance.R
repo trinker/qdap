@@ -163,7 +163,8 @@ knitr::knit2html("inst/Rmd_vignette/qdap_vignette.Rmd",
 
 knitr::knit2html("inst/Rmd_vignette/qdap_vignette.Rmd", 
     "inst/Rmd_vignette/qdap_vignette.html",
-    stylesheet='inst/Rmd_vignette/css/style.css')
+    stylesheet='inst/Rmd_vignette/css/style.css',
+    options=c("use_xhtml","smartypants","mathjax","highlight_code", "base64_images"))
 
 reports::delete("figure")
 

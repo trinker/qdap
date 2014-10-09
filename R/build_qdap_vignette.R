@@ -35,10 +35,16 @@ build_qdap_vignette <- function(download.html = FALSE) {
     new <- file.path(path, fls)
     old <- file.path(path2, fls)
        
+    ## Here we build the R code by untangling the Rmd
     knitr::knit(new[1], output = old[3], tangle=TRUE)
     file.copy(new[1], old[1], overwrite = TRUE)
-    
-    if (!download.html){
+
+    ## =========================================================    
+    ## Here we choose between building the HTML file from Rmd
+    ## or downloading from the Internet
+    ## =========================================================
+    if (!download.html){   
+        ## BUILD FROM Rmd
         if (file.info(old[2])[["size"]] > 2000000) {
             message(paste0("It appears the qdap Intro Vignette in:\n\n    ", 
                 path2, "\nwas already built.\n\nDo you want to still render?\n"))
@@ -47,10 +53,17 @@ build_qdap_vignette <- function(download.html = FALSE) {
                 stop("`build_qdap_vignette` build aborted")
             }  
 
-        }        
+        }     
+
+        ## set working directory to qdpa_Rmd directory temporarily
+        WD <- getwd()
+        on.exit(setwd(WD))
+        setwd(path)
         suppressWarnings(knitr::knit2html(new[1], output = old[2], 
-            stylesheet=file.path(path, 'css/style.css')))
-    } else {    
+            stylesheet=file.path(path, 'css/style.css'),
+            options=c("use_xhtml", "smartypants", "mathjax", "highlight_code", "base64_images")))
+    } else {     
+        ## IMPORT FROM INTERNET
         url <- paste0("https://raw.githubusercontent.com/trinker/qdap", 
             "/master/inst/Rmd_vignette/qdap_vignette.html")
         
