@@ -298,6 +298,20 @@
 #' Filter(dtm_in, 4, 4)
 #' Filter(tdm_in, 3, 4)
 #' Filter(tdm_in, 3, 4, stopwords = Top200Words)
+#' 
+#' ## SPECIAL REMOVAL OF TERMS (more flexible consideration of words than wfm)
+#' dat <- data.frame(
+#'     person = paste0("person_", 1:5),
+#'     tweets = c("test one two", "two apples","hashtag #apple", 
+#'         "#apple #tree", "http://microsoft.com")
+#' )
+#' 
+#' ## remove specialty items
+#' dat[[2]] <- rm_default(dat[[2]], pattern=pastex("@@rm_url", "#apple\\b"))
+#' 
+#' 
+#' myCorp <- tm::tm_map(myCorp, tm::removeWords, stopwords)
+#' myCorp %>% as.dtm() %>% tm::inspect()
 #' }
 as.tdm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
