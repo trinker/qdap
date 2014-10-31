@@ -21,7 +21,6 @@ test_that("end_mark_by gives the desired output",{
     expect_true(all(sapply(outs, is.data.frame)))
 
     dims <- structure(c(5L, 4L, 5L, 4L, 5L, 4L, 15L, 4L), .Dim = c(2L, 4L))
-    expect_true(identical(sapply(outs, dim), dims))
+    expect_equivalent(sapply(outs, dim), dims)
     
 })
-

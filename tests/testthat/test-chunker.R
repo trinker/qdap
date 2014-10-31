@@ -18,7 +18,7 @@ test_that("chunker produces lists of the correct dimensions",{
         "f.1", "m.0", "m.1")), structure(c(2L, 0L, 0L, 1L, 0L), .Names = c("greg", 
         "researcher", "sally", "sam", "teacher")))
 
-    expect_identical(lapply(list(x1, x2, x3, x4, x5, x6, x7), sapply, length), expect)
+    expect_equivalent(lapply(list(x1, x2, x3, x4, x5, x6, x7), sapply, length), expect)
     
 })
 
@@ -31,4 +31,3 @@ test_that("chunker unbags correctly",{
     
     expect_true(all(head(lens[[2]], -1) > 1))
 })
-

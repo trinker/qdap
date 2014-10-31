@@ -21,7 +21,7 @@ test_that("bag_o_words, breaker, and word_split gives list of data.frames with c
     expect_true(is.vector(z))
     expect_true(is.list(z))
     expect_true(length(z) == nrow(DATA) + 1)
-    expect_true(identical(sort(unique(unlist(z))), sort(unique(y))))
+    expect_equivalent(sort(unique(unlist(z))), sort(unique(y)))
 
 })
 

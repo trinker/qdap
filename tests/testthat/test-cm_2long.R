@@ -28,8 +28,8 @@ test_that("cm_2long gives the desired output for ranges",{
     x <- cm_range2long(object=list(foo=foo))
     y <- cm_range2long(object=list(foo=foo, foo2=foo2), v.name="time")
     
-    expect_true(all.equal(x, x2))
-    expect_true(all.equal(y, y2))
+    expect_equivalent(x, x2)
+    expect_equivalent(y, y2)
 
 })
 
@@ -107,8 +107,8 @@ test_that("cm_2long gives the desired output for time spans",{
     x <- cm_time2long(object=list(bar1=bar1))
     y <- cm_time2long(object=list(bar1=bar1, bar2=bar2), v.name="time")
     
-    expect_true(all.equal(x, x2))
-    expect_true(all.equal(y, y2))    
+    expect_equivalent(x, x2)
+    expect_equivalent(y, y2)   
     
 })
     

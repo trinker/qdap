@@ -24,7 +24,7 @@ test_that("cmspans gives appropriate dims, is.data.frame, and correct colnames",
     out <- summary(v)
     expect_true(is.data.frame(out))
     expect_true(all(dim(out) == c(20, 10)))
-    expect_identical(colnames(out) , c("time", "code", "total", "percent_total", 
+    expect_equivalent(colnames(out) , c("time", "code", "total", "percent_total", 
         "n", "percent_n", "ave", "sd", "min", "max"))
     
     z <- structure(list(code = structure(c(1L, 1L, 1L, 1L, 2L, 2L, 2L, 
@@ -52,7 +52,7 @@ test_that("cmspans gives appropriate dims, is.data.frame, and correct colnames",
     
     expect_true(is.data.frame(out2))
     expect_true(all(dim(out2) == c(3, 9)))
-    expect_identical(colnames(out2) , c("code", "total", "percent_total", 
+    expect_equivalent(colnames(out2) , c("code", "total", "percent_total", 
         "n", "percent_n", "ave", "sd", "min", "max"))
     
     expect_false(identical(out2, summary(z, total.span = FALSE)))
@@ -61,5 +61,4 @@ test_that("cmspans gives appropriate dims, is.data.frame, and correct colnames",
         total.span = c("00:01:00", "03:02:00"))))
 
 })
-
 

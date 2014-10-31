@@ -12,4 +12,3 @@ test_that("blank2NA gives the desired output and replaces empty cells",{
     expect_false(any(sapply(blank2NA(dat), function(x) any(na.omit(x) == ""))))
 
 })
-

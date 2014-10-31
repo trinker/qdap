@@ -22,4 +22,3 @@ test_that("phrase_net gives a `phrase_net` and `igraph` object",{
 
 })
 
-

@@ -23,8 +23,8 @@ test_that("wfm out puts a matrix with appropriate attributes",{
         "fun", "good", "how"), c("greg", "researcher", "sally", "sam", 
         "teacher")))
     
-    expect_identical(wfm1,wfm1_c)
-    expect_identical(wfm2,wfm2_c)
+    expect_equivalent(wfm1,wfm1_c)
+    expect_equivalent(wfm2,wfm2_c)
 
 })
 
@@ -53,8 +53,8 @@ test_that("wfdf out puts a matrix with appropriate attributes",{
         "greg", "researcher", "sally", "sam", "teacher"), row.names = c(NA, 
         15L), class = c("wfdf", "t.df", "data.frame"))
 
-    expect_identical(wfdf1, wfdf1_c)
-    expect_identical(wfdf2, wfdf2_c)
+    expect_equivalent(wfdf1, wfdf1_c)
+    expect_equivalent(wfdf2, wfdf2_c)
 
 })
 
@@ -139,14 +139,14 @@ test_that("wf_combine combines",{
         ))
     
     
-    expect_identical(wc1, wc1_c)
-    expect_identical(wc2, wc2_c)
-    expect_identical(wc3, wc3_c)
-    expect_identical(wc4, wc4_c)
-    expect_identical(wc5, wc5_c)
-    expect_identical(wc6, wc6_c)
-    expect_identical(wc7, wc7_c)
-    expect_identical(wc8, wc8_c)
+    expect_equivalent(wc1, wc1_c)
+    expect_equivalent(wc2, wc2_c)
+    expect_equivalent(wc3, wc3_c)
+    expect_equivalent(wc4, wc4_c)
+    expect_equivalent(wc5, wc5_c)
+    expect_equivalent(wc6, wc6_c)
+    expect_equivalent(wc7, wc7_c)
+    expect_equivalent(wc8, wc8_c)
 
 })
 
@@ -188,8 +188,8 @@ test_that("weight produces matrices of the right class with right attributes",{
         weighting = "scaled"), .Names = c("dim", 
         "dimnames", "class", "weighting"))
     
-    expect_identical(attributes(w_wfm1), w_wfm1_c)
-    expect_identical(attributes(w_wfm2), w_wfm2_c)
-    expect_identical(attributes(w_wfm3), w_wfm3_c)
+    expect_equivalent(attributes(w_wfm1), w_wfm1_c)
+    expect_equivalent(attributes(w_wfm2), w_wfm2_c)
+    expect_equivalent(attributes(w_wfm3), w_wfm3_c)
 
 })

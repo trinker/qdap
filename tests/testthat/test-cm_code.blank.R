@@ -28,7 +28,7 @@ test_that("cm_code.blank, gives the desired output",{
     x1 <- cm_code.blank(x, combine.code.list = list(ABC=qcv(AA, BB, CC)),
         overlap = "!=1")
     
-    expect_true(identical(x1, x1_c))
+    expect_equivalent(x1, x1_c)
     
     ## Repeated measures version
     z <- cm_range2long(v.name="time", object=list(foo = foo, foo2 = foo2))
@@ -47,7 +47,7 @@ test_that("cm_code.blank, gives the desired output",{
     x2 <- cm_code.blank(z, combine.code.list = list(ABC=qcv(AA, BB, CC)),
         rm.var = "time", overlap = "!=1")
     
-    expect_true(identical(x2, x2_c))
+    expect_equivalent(x2, x2_c)
     
     x3_c <- structure(list(code = structure(c(1L, 3L, 3L, 4L, 4L, 2L, 1L, 
         3L, 3L, 4L, 4L, 4L, 2L), .Label = c("AA", "AA_and_BB", "BB", 
@@ -63,7 +63,7 @@ test_that("cm_code.blank, gives the desired output",{
     x3 <- cm_code.blank(z, combine.code.list = list(AA_and_BB=qcv(AA, BB)),
         rm.var = "time", overlap = TRUE)
     
-    expect_true(identical(x3, x3_c))
+    expect_equivalent(x3, x3_c)
     
     x4_c <- structure(list(code = structure(c(1L, 3L, 3L, 4L, 4L, 2L, 2L, 
         1L, 3L, 3L, 4L, 4L, 4L, 2L, 2L), .Label = c("AA", "AA_or_BB", 
@@ -79,7 +79,7 @@ test_that("cm_code.blank, gives the desired output",{
     x4 <- cm_code.blank(z, combine.code.list = list(AA_or_BB=qcv(AA, BB)),
         rm.var = "time", overlap = FALSE)
     
-    expect_true(identical(x4, x4_c))
+    expect_equivalent(x4, x4_c)
     
     
     x <- list(

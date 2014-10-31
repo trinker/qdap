@@ -13,9 +13,8 @@ test_that("colcomb2class gives the correct output including number of columns",{
         "logical"), .Names = c("raw", "prop", "rnp", "digits", "percent"
         ))
     
-    expect_identical(sapply(out, class), classes)
+    expect_equivalent(sapply(out, class), classes)
     expect_true(all(unlist(sapply(out, ncol)) == rep(4, 3)))
 
 })
-
 

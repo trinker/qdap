@@ -5,7 +5,7 @@ test_that("replace_number is replacing numbers as expected 0 - 12 (single and 2 
     x <- c("zero", "one", "two", "three", "four", "five", "six", "seven", "eight", 
         "nine", "ten", "eleven", "twelve")
 
-    expect_true(identical(x, replace_number(0:12)))
+    expect_equivalent(x, replace_number(0:12))
 	
 })
 
@@ -20,7 +20,7 @@ test_that("replace_number is repalcing numbers (w/ & w/o comma as well as w/ & w
     
     x <- c("I like 346,457 ice cream cones.", "They are 99 percent good")
     y <- c("I like 346457 ice cream cones.", "They are 99 percent good")
-    identical(replace_number(x), output1)
-    identical(replace_number(y), output1)
-    identical(replace_number(x, FALSE), output2)
+    expect_equivalent(replace_number(x), output1)
+    expect_equivalent(replace_number(y), output1)
+    expect_equivalent(replace_number(x, FALSE), output2)
 })

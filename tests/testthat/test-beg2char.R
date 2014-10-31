@@ -34,4 +34,3 @@ test_that("char2end gives the desired output",{
     expect_true(all(char2end(x3, "^", 2) == c("c^d", "3^4", ".^:")))
 
 })
-

@@ -37,7 +37,7 @@ test_that("apply_as_tm applies tm functions and then optionally converts back",{
         ), c("weighted_wfm", "matrix"), c("weighted_wfm", "matrix"
     ))
     
-    expect_true(identical(lapply(list(x1, x2, x3, x4, x5, x6, x7), class), types))
+    expect_equivalent(lapply(list(x1, x2, x3, x4, x5, x6, x7), class), types)
 
 })
 
@@ -84,6 +84,6 @@ test_that("apply_as_df allows users to apply data.frame based functions to a Cor
     outs <- c("word_list", "Dissimilarity", "diversity", "character_table", 
         "termco", "word_cor", "freq_terms")
     
-    expect_true(identical(sapply(list(x1, x2, x3, x4, x5, x6, x7), is), outs))
+    expect_equivalent(sapply(list(x1, x2, x3, x4, x5, x6, x7), is), outs)
 
 })

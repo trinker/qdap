@@ -14,7 +14,7 @@ test_that("colSplit splits columns and column names",{
         ), row.names = c(NA, 6L), class = "data.frame")
     
     
-    expect_identical(head(colSplit(foo1)), foo1_c)
+    expect_equivalent(head(colSplit(foo1)), foo1_c)
     
     foo2  <- paste2(mtcars[, 1:3], sep="|")
     
@@ -30,9 +30,8 @@ test_that("colSplit splits columns and column names",{
             "472", "71.1", "75.7", "78.7", "79", "95.1"), class = "factor")), .Names = c("X1", 
         "X2", "X3"), row.names = c(NA, 6L), class = "data.frame")
     
-    expect_identical(head(colSplit(foo2, col.sep = "|")), foo2_c)
+    expect_equivalent(head(colSplit(foo2, col.sep = "|")), foo2_c)
 
 
 })
-
 

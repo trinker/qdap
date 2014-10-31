@@ -17,10 +17,10 @@ test_that("bracketX gives the desired output",{
         ), c("I love chicken !", "Me too! It's so good.", "Yep it's awesome .", 
         "Agreed."))
     
-    expect_true(identical(bracketX(examp$text, "square"), expected1 [[1]]))
-    expect_true(identical(bracketX(examp$text, "curly"), expected1 [[2]]))
-    expect_true(identical(bracketX(examp$text, c("square", "round")), expected1 [[3]]))
-    expect_true(identical(bracketX(examp$text), expected1 [[4]]))
+    expect_equivalent(bracketX(examp$text, "square"), expected1 [[1]])
+    expect_equivalent(bracketX(examp$text, "curly"), expected1 [[2]])
+    expect_equivalent(bracketX(examp$text, c("square", "round")), expected1 [[3]])
+    expect_equivalent(bracketX(examp$text), expected1 [[4]])
 })
 
 
@@ -48,13 +48,13 @@ test_that("bracketXtract gives the desired output",{
             all4 = "{is so much fun}"), .Names = c("all1", "all2", "all3", 
         "all4")), "reading is so much fun")
     
-    expect_true(identical(bracketXtract(examp$text, "square"), expected2 [[1]]))
-    expect_true(identical(bracketXtract(examp$text, "curly"), expected2 [[2]]))
-    expect_true(identical(bracketXtract(examp$text, c("square", "round")), expected2 [[3]]))
-    expect_true(identical(bracketXtract(examp$text, c("square", "round"), merge = FALSE), expected2 [[4]]))
-    expect_true(identical(bracketXtract(examp$text), expected2 [[5]]))
-    expect_true(identical(bracketXtract(examp$text, with = TRUE), expected2 [[6]]))
-    expect_true(identical(paste2(bracketXtract(examp$text, "curly"), " "), expected2 [[7]]))
+    expect_equivalent(bracketXtract(examp$text, "square"), expected2 [[1]])
+    expect_equivalent(bracketXtract(examp$text, "curly"), expected2 [[2]])
+    expect_equivalent(bracketXtract(examp$text, c("square", "round")), expected2 [[3]])
+    expect_equivalent(bracketXtract(examp$text, c("square", "round"), merge = FALSE), expected2 [[4]])
+    expect_equivalent(bracketXtract(examp$text), expected2 [[5]])
+    expect_equivalent(bracketXtract(examp$text, with = TRUE), expected2 [[6]])
+    expect_equivalent(paste2(bracketXtract(examp$text, "curly"), " "), expected2 [[7]])
     
 })
 
@@ -65,13 +65,13 @@ test_that("genX gives the desired output",{
         "There is no way.", "I distrust you.", "What are you talking about?", 
         "Shall? Good then.", "I'm hungry. Let's eat. You already?")
     
-    expect_true(identical(genX(DATA$state, c("is", "we"), c("too", "on")), expected3))
+    expect_equivalent(genX(DATA$state, c("is", "we"), c("too", "on")), expected3)
 
     x <- c("Where is the /big dog#?",
         "I think he's @arunning@b with /little cat#.")
     expected4 <- c("Where is the?", "I think he's with.")
     
-    expect_true(identical(genX(x, c("/", "@a"), c("#", "@b")), expected4))
+    expect_equivalent(genX(x, c("/", "@a"), c("#", "@b")), expected4)
     
 })
 
@@ -81,10 +81,10 @@ test_that("genXtract gives the desired output",{
     
     x2 <- c("Where is the /big dog#?",
         "I think he's @arunning@b with /little cat#.")
-    expect_true(identical(genXtract(x2, c("/", "@a"), c("#", "@b")), expected5))
+    expect_equivalent(genXtract(x2, c("/", "@a"), c("#", "@b")), expected5)
     
     x3 <- c("Where is the L1big dogL2?",
         "I think he's 98running99 with L1little catL2.")
-    expect_true(identical(genXtract(x3, c("L1", 98), c("L2", 99)), expected5))
+    expect_equivalent(genXtract(x3, c("L1", 98), c("L2", 99)), expected5)
 
 })

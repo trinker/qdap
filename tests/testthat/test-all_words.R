@@ -27,4 +27,3 @@ test_that("all_words begins with or contains given chars, are data.frames and ar
     expect_false(all(diff(rev(x3[, 2])) >= 0))
 
 })
-

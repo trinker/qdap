@@ -22,8 +22,8 @@ test_that("syllable_count, gives the desired output",{
         "in.dictionary"), row.names = c(NA, -4L), class = "data.frame")), 
         .Names = c("ALGORITHM REPORT", "SYLLABLE DATAFRAME"))
    
-    expect_true(identical(x1, x1_c))
-    expect_true(identical(x2, x2_c))
+    expect_equivalent(x1, x1_c)
+    expect_equivalent(x2, x2_c)
     
 })
 
@@ -66,7 +66,7 @@ test_that("combo_syllable_sum, gives the desired output",{
         "I'm hungry.  Let's eat.  You already?"), wc = c(6L, 5L, 4L, 
         4L, 5L, 5L, 4L, 3L, 5L, 6L, 6L))
 
-    expect_true(identical(x5, x5_c))
+    expect_equivalent(x5, x5_c)
     
 })
 
