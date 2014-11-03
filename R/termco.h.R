@@ -29,6 +29,7 @@ function (text.var, match.string, grouping.var = NULL, ignore.case = FALSE,
   } else {
     y <- data.frame(text.var, do.call("rbind", x))
   }
+
   if (is.null(group.var)) {
     names(y) <- c(as.character(substitute(text.var))[3], 
       paste("term(", match.string, ")", sep = ""))
@@ -63,6 +64,10 @@ function (text.var, match.string, grouping.var = NULL, ignore.case = FALSE,
       ")", sep = ""))
     w[, -c(1:2)] <- replacer(w[, -c(1:2), drop=FALSE], replace = 0, 
       with = zero.replace)
+    attributes(w)[["by.row"]] <- setNames(data.frame(
+        X[, 2:1], 
+        y[, -1, drop=FALSE]
+    ), names(w))
     return(w)
   }
 }
