@@ -417,10 +417,12 @@ termco_d <-
     if (short.term) {
         o <- termco2short.term(o)
     }
+    if (!is.null(attributes(o[["raw"]])[["by.row"]])) {
+        colnames(attributes(o[["raw"]])[["by.row"]])[1] <- colnames(o[["raw"]])[1]
+    }      
     class(o) <- "termco"    
     o 
 }
-
 
 
 #' Search a Transcript for Terms
