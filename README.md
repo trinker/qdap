@@ -18,10 +18,10 @@ Download the [zip ball](https://github.com/trinker/qdap/zipball/master) or [tar 
 # install.packages("devtools")
 
 library(devtools)
-install_github("qdapDictionaries", "trinker")
-install_github("qdapRegex", "trinker")
-install_github("qdapTools", "trinker")
-install_github("qdap", "trinker")
+install_github("trinker/qdapDictionaries")
+install_github("trinker/qdapRegex")
+install_github("trinker/qdapTools")
+install_github("trinker/qdap")
 ```
 
 **Note**: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](http://CRAN.R-project.org/package=devtools) to install this way.
