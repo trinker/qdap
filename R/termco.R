@@ -354,6 +354,7 @@ function (text.var, grouping.var = NULL, match.list, short.term = TRUE,
     class(o) <- "termco"
     if (!is.null(attributes(TD[["raw"]])[["by.row"]])) {
         attributes(o[["raw"]])[["by.row"]] <- attributes(TD[["raw"]])[["by.row"]]
+        colnames(attributes(o[["raw"]])[["by.row"]])[1] <- colnames(o[["raw"]])[1]
     }
     o
 }
