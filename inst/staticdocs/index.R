@@ -162,7 +162,7 @@ sd_section("Counts/Descriptives",
     "termco_c",
     "wfm",
     "word_count",
-    "word_lengths",
+    "word_length",
     "word_stats"
   )
 )
