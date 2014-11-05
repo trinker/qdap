@@ -18,8 +18,8 @@ delete(file.path(mans, dir(mans)))
 #staticdocs dev version
 #========================
 #packages
-# library(devtools); install_github("qdap", "trinker"); install_github("staticdocs", "hadley")
-# install_github("acc.roxygen2", "trinker")
+# library(devtools); install_github("trinker/qdap"); install_github("hadley/staticdocs")
+# install_github("trinker/acc.roxygen2")
 library(highlight); library(staticdocs)
 
 #STEP 1: create static doc  

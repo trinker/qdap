@@ -30,6 +30,9 @@ And constructed with the following guidelines:
 
 **NEW FEATURES**
 
+* `word_length` function added to give counts of word lenth usage by grouping 
+  variable.  See `?word_length` for details`
+
 
 **IMPROVEMENTS**
 
