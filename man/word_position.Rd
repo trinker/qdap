@@ -51,8 +51,9 @@ counts(position)
 proportions(position)
 plot(proportions(position))
 
-topwords <- freq_terms(text.var, top = top, at.least = at.least,
-    stopwords = stopwords)[[1]]
+stopwords <- unique(c(contractions[[1]], Top200Words))
+topwords <- freq_terms(pres_debates2012[["dialogue"]], top = 40,
+    at.least = 4, stopwords = stopwords)[[1]]
 word_position(pres_debates2012[["dialogue"]], topwords)
 plot(word_position(pres_debates2012[["dialogue"]], topwords), FALSE)
 plot(word_position(pres_debates2012[["dialogue"]], topwords), TRUE, scale=FALSE)
@@ -71,8 +72,64 @@ do.call("grid.arrange", c(lapply(out1, plot), ncol=1))
 
 pres_deb_by_person <- with(pres_debates2012, split(dialogue, person))
 out2 <-lapply(pres_deb_by_person, word_position, wordlist)
-plots <- lapply(names(out2), function(x) plot(out2[[x]]) + ggtitle(x))
+plots <- lapply(names(out2), function(x) plot(out2[[x]], scale=FALSE) +
+    ggtitle(x))
 do.call("grid.arrange", c(plots, ncol=2))
+
+## As a histogram
+## theme taken from: http://jonlefcheck.net/2013/03/11/black-theme-for-ggplot2-2/
+theme_black <- function(base_size=12,base_family="") {
+  theme_grey(base_size=base_size,base_family=base_family) \%+replace\%
+    theme(
+      # Specify axis options
+      axis.line=element_blank(),
+      axis.text.x=element_text(size=base_size*0.8,color="grey55",
+                               lineheight=0.9,vjust=1),
+      axis.text.y=element_text(size=base_size*0.8,color="grey55",
+                               lineheight=0.9,hjust=1),
+      axis.ticks=element_line(color="grey55",size = 0.2),
+      axis.title.x=element_text(size=base_size,color="grey55",vjust=1),
+      axis.title.y=element_text(size=base_size,color="grey55",angle=90,
+                                vjust=0.5),
+      axis.ticks.length=unit(0.3,"lines"),
+      axis.ticks.margin=unit(0.5,"lines"),
+      # Specify legend options
+      legend.background=element_rect(color=NA,fill="black"),
+      legend.key=element_rect(color="grey55", fill="black"),
+      legend.key.size=unit(1.2,"lines"),
+      legend.key.height=NULL,
+      legend.key.width=NULL,
+      legend.text=element_text(size=base_size*0.8,color="grey55"),
+      legend.title=element_text(size=base_size*0.8,face="bold",hjust=0,
+                                color="grey55"),
+      legend.position="right",
+      legend.text.align=NULL,
+      legend.title.align=NULL,
+      legend.direction="vertical",
+      legend.box=NULL,
+      # Specify panel options
+      panel.background=element_rect(fill="black",color = NA),
+      panel.border=element_rect(fill=NA,color="grey55"),
+      panel.grid.major=element_blank(),
+      panel.grid.minor=element_blank(),
+      panel.margin=unit(0.25,"lines"),
+      # Specify facetting options
+      strip.background=element_rect(fill="grey30",color="grey10"),
+      strip.text.x=element_text(size=base_size*0.8,color="grey55"),
+      strip.text.y=element_text(size=base_size*0.8,color="grey55",
+                                angle=-90),
+      # Specify plot options
+      plot.background=element_rect(color="black",fill="black"),
+      plot.title=element_text(size=base_size*1.2,color="grey55"),
+      plot.margin=unit(c(1,1,0.5,0.5),"lines")
+    )
+}
+
+out3 <- list_df2df(lapply(out2[1:2], preprocessed), "Person")
+out3 \%>\% ggplot(aes(x=position)) +
+    geom_histogram(binwidth = 1, fill="white") +
+    facet_grid(Person~word) +
+    theme_black() + ylab("Count") + xlab("Position")
 }
 }
 \keyword{position}
