@@ -163,6 +163,7 @@ sd_section("Counts/Descriptives",
     "wfm",
     "word_count",
     "word_length",
+    "word_position",
     "word_stats"
   )
 )

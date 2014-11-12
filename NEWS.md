@@ -33,6 +33,9 @@ And constructed with the following guidelines:
 * `word_length` function added to give counts of word lenth usage by grouping 
   variable.  See `?word_length` for details`
 
+* `word_position` function added to give counts of the position of words within 
+  a sentence.
+
 
 **IMPROVEMENTS**
 
