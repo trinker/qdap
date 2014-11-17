@@ -114,6 +114,22 @@
 #'     geom_histogram(binwidth = 1, fill="white") +
 #'     facet_grid(Person~word) +
 #'     theme_black() + ylab("Count") + xlab("Position")
+#' 
+#' ## MOVE TO THE MICRO THROUGH QUALITATIVE ANALYSIS
+#' locs <- unlist(setNames(lapply(wordlist, function(x){
+#'      sapply(c("ROMNEY", "OBAMA"), function(y){
+#'          which(pres_debates2012[["person"]] ==y & grepl(x, pres_debates2012[["dialogue"]]))
+#'      })
+#' }), wordlist), recursive=FALSE)
+#' 
+#' fdl <- reports::folder(pres_context)
+#' Map(function(x, y){
+#'     if (identical(integer(0), x)) return(NULL)
+#'     z <- with(pres_debates2012, trans_context(dialogue, person, inds=x, n.before=1))
+#'     z[["text"]] <- gsub(beg2char(y, "."), 
+#'         paste0("[[", beg2char(y, "."), "]]"), z[["text"]])
+#'     print(z, file=file.path(fdl, sprintf("%s.doc", y)))
+#' }, locs, names(locs))
 #' }
 word_position <- function(text.var, match.terms, digits = 2, 
     percent = TRUE, zero.replace = 0, ...){
