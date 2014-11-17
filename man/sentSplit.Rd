@@ -126,6 +126,19 @@ TOT(dat$tot)
 
 ## `sent_detect`
 sent_detect(DATA$state)
+
+## NLP based sentence splitting
+sent_detect2 <- function(text.var, ...){
+    sent_token_annotator <- openNLP::Maxent_Sent_Token_Annotator(...)
+    unlist(lapply(text.var, function(x) {
+        if (is.na(x)) return(NA)
+        tv <- NLP::as.String(unbag(x))
+        out <- annotate(tv, sent_token_annotator)
+        tv[out]
+    }))
+}
+
+sent_detect2(x)
 }
 }
 \author{
