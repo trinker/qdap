@@ -36,6 +36,9 @@ And constructed with the following guidelines:
 * `word_position` function added to give counts of the position of words within 
   a sentence.
 
+* `sent_detect_nlp` added in the `sentSplit` family to wrap **NLP** package 
+  functionality into a convenient function.
+
 
 **IMPROVEMENTS**
 
