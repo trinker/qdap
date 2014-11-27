@@ -42,8 +42,14 @@ NEW FEATURES
 
 IMPROVEMENTS
 
+* `polarity` takes `polarity.frame` with phrases (words with spaces).
+
 
 CHANGES
+
+* The **ggplot2** package is no longer in Depends.  This means the user will 
+  have to manually laod the package to use additional ggplot2 features.   See 
+  GitHub issue #199 for more.
 
 
 

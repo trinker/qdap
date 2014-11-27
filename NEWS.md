@@ -42,8 +42,14 @@ And constructed with the following guidelines:
 
 **IMPROVEMENTS**
 
+* `polarity` takes `polarity.frame` with phrases (words with spaces).
+
 
 **CHANGES**
+
+* The **ggplot2** package is no longer in Depends.  This means the user will 
+  have to manually laod the package to use additional ggplot2 features.   See 
+  GitHub <a href="https://github.com/trinker/qdap/issues/199">issue #199</a> for more.
 
 
 

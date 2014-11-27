@@ -9,7 +9,6 @@ Authors@R: c(person("Bryan", "Goodrich", role = "ctb"), person("Dason",
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Depends:
     R (>= 3.1.0),
-    ggplot2 (>= 0.9.3.1),
     qdapDictionaries (>= 1.0.2),
     qdapRegex (>= 0.1.2),
     qdapTools (>= 1.0.3),
@@ -19,6 +18,7 @@ Imports:
     dplyr (>= 0.3),
     gdata,
     gender (>= 0.4.1),
+    ggplot2 (>= 0.9.3.1),
     grid,
     gridExtra,
     igraph,

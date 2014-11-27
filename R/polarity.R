@@ -616,12 +616,12 @@ polarity <- function (text.var, grouping.var = NULL,
         sep = "~~")
 
     ## split into bag of words per sentence
-    TV <- lapply(lapply(DF[, "text.var"], bag_o_words, ...), function(x) {
+    TV <- lapply(lapply(DF[, "text.var"], bag_o_words2, char.keep = "~~", ...), function(x) {
         gsub("~~", " ", x)
     })
 
     ## Get position of polarized word (hits)
-    hits <- lapply(TV, function(x) which(x %in% posneg))
+    hits <- lapply(TV, function(x) which(x %in% gsub("~~", " ", posneg)))
 
     ## loop over the hits per sentence (nested loop) and apply the polarity_helper
     pols <- list()
