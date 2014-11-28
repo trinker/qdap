@@ -28,6 +28,12 @@ BUG FIXES
   grab data from the global enviroment, which may not be the case in a `knitr`/
   `rmarkdown` generated envioronment.
 
+* `polarity` no longer handled phrases (words + spaces) for `polarity.frame`.
+  This behavior was caught by @Benasso http://stackoverflow.com/q/27156834/1000343.
+  This bug is a result of the changes made to `bag_o_words` earlier this year.
+  The bug has been fixed and a unit test put in place to ensure the bug is not
+  reintroduced.
+
 NEW FEATURES
 
 * `word_length` function added to give counts of word lenth usage by grouping 

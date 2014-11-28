@@ -6,7 +6,6 @@ qdap.Rproj
 ^\.gitattributes
 tools.R
 maintenance.R
-^\.Rprofile
 style.R
 inst/polarity
 vignettes/figure
