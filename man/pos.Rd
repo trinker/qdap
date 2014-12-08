@@ -7,7 +7,7 @@
 \usage{
 pos(text.var, parallel = FALSE, cores = detectCores()/2,
   progress.bar = TRUE, na.omit = FALSE, digits = 1, percent = TRUE,
-  zero.replace = 0, gc.rate = 10)
+  zero.replace = 0, gc.rate = 10, apostrophe.remove = FALSE)
 
 pos_by(text.var, grouping.var = NULL, digits = 1, percent = TRUE,
   zero.replace = 0, ...)
@@ -43,6 +43,9 @@ omitted.}
 problem with the garbage collection in the openNLP function that
 \code{\link[qdap]{pos}} wraps.  Consider adjusting this argument upward if
 the error \code{java.lang.OutOfMemoryError} occurs.}
+
+\item{apostrophe.remove}{logical.  If \code{TRUE} removes apostrophes from
+the analysis/output.}
 
 \item{grouping.var}{The grouping variables.  Default \code{NULL} generates
 one word list for all text.  Also takes a single grouping variable or a list

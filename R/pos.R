@@ -22,6 +22,8 @@
 #' problem with the garbage collection in the openNLP function that 
 #' \code{\link[qdap]{pos}} wraps.  Consider adjusting this argument upward if 
 #' the error \code{java.lang.OutOfMemoryError} occurs.
+#' @param apostrophe.remove logical.  If \code{TRUE} removes apostrophes from 
+#' the analysis/output.
 #' @return \code{pos} -  returns a list of 4: 
 #' \item{text}{The original text} 
 #' \item{POStagged}{The original words replaced with parts of speech in context.} 
@@ -178,9 +180,9 @@
 pos <-
 function(text.var, parallel = FALSE, cores = detectCores()/2, 
     progress.bar = TRUE, na.omit = FALSE, digits = 1, percent = TRUE, 
-    zero.replace=0, gc.rate=10){
+    zero.replace=0, gc.rate=10, apostrophe.remove = FALSE){
         
-    text.var <- strip(text.var)
+    text.var <- strip(text.var, apostrophe.remove = apostrophe.remove)
     text.var[text.var == ""] <- NA
 
     if (parallel){
@@ -329,7 +331,7 @@ function(text.var, grouping.var = NULL, digits = 1, percent = TRUE,
         }
     }
  #   check <- FALSE
-    if (any(class(text.var) %in% c("pos", "pos_by", "formality"))) {
+    if (any(class(text.var) %in% c("pos", "pos_by", "formality", "lexical_classification"))) {
         pos.list <- text.var
         text.var <- text.var[["POSfreq"]]
 #       check <- TRUE

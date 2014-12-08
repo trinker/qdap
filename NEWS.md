@@ -57,6 +57,8 @@ And constructed with the following guidelines:
   have to manually laod the package to use additional ggplot2 features.   See 
   GitHub <a href="https://github.com/trinker/qdap/issues/199">issue #199</a> for more.
 
+* `pos` functions (`pos`, `pos_by`, and `formality`) no longer strip the 
+  apostrophe from analysis by default.
 
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.0

@@ -57,6 +57,8 @@ CHANGES
   have to manually laod the package to use additional ggplot2 features.   See 
   GitHub issue #199 for more.
 
+* `pos` functions (`pos`, `pos_by`, and `formality`) no longer strip the 
+  apostrophe from analysis by default.
 
 
 CHANGES IN qdap VERSION 2.2.0
