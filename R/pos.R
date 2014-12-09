@@ -331,7 +331,7 @@ function(text.var, grouping.var = NULL, digits = 1, percent = TRUE,
         }
     }
  #   check <- FALSE
-    if (any(class(text.var) %in% c("pos", "pos_by", "formality", "lexical_classification"))) {
+    if (any(class(text.var) %in% c("pos", "pos_by", "formality"))) {
         pos.list <- text.var
         text.var <- text.var[["POSfreq"]]
 #       check <- TRUE
