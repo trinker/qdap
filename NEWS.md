@@ -45,6 +45,8 @@ And constructed with the following guidelines:
 * `sent_detect_nlp` added in the `sentSplit` family to wrap **NLP** package 
   functionality into a convenient function.
 
+* `lexical_classification` provides a means of assessing content vs. functional 
+  word usage at the grouping variable and sentence level. 
 
 **IMPROVEMENTS**
 
