@@ -37,7 +37,74 @@
 #' @export
 #' @rdname lexical_classification
 #' @examples
-#' mean(1:10)
+#' \dontrun{
+#' lexical_classification("I did not like the dog.")
+#' lexical_classification(DATA.SPLIT$state, DATA.SPLIT$person)
+#' 
+#' (out <- with(pres_debates2012, lexical_classification(dialogue, list(person, time))))
+#' plot(out)
+#' 
+#' scores(out)
+#' 
+#' out2 <- preprocessed(out)
+#' htruncdf(out2)
+#' plot(out2)
+#' 
+#' plot(out[["content"]])
+#' dev.new()
+#' plot(out[["functional"]])
+#' 
+#' ## cloud of functional vs. content
+#' ## Highlight Content Words
+#' set.seed(10)
+#' par(mar = c(0,0,0,0))
+#' list(
+#'         content = out[["content"]],
+#'         functional = out[["functional"]]
+#'     ) %>%
+#'     list_df2df("type") %>%
+#'     dplyr::mutate(colors = ifelse(type == "functional", "gray80", "blue")) %>%
+#'     with(., wordcloud::wordcloud(
+#'         word, 
+#'         freq, 
+#'         min.freq = 8, 
+#'         random.order=FALSE,
+#'         ordered.colors = TRUE,
+#'         colors = colors
+#'     )) 
+#' mtext("2012 Presidential Debates:\nFunctional vs. Content Word Use", padj=1.25)
+#' legend(
+#'     .05, .12, bty = "n",
+#'     legend = c("functional", "content"), 
+#'     fill = c("gray80", "blue"),  
+#'     cex = .7
+#' )
+#' 
+#' ## Highlight Functional Words
+#' set.seed(10)
+#' par(mar = c(0,0,0,0))
+#' list(
+#'         content = out[["content"]],
+#'         functional = out[["functional"]]
+#'     ) %>%
+#'     list_df2df("type") %>%
+#'     dplyr::mutate(colors = ifelse(type == "functional", "red", "gray80")) %>%
+#'     with(., wordcloud::wordcloud(
+#'         word, 
+#'         freq, 
+#'         min.freq = 8, 
+#'         random.order=FALSE,
+#'         ordered.colors = TRUE,
+#'         colors = colors
+#'     )) 
+#' mtext("2012 Presidential Debates:\nFunctional vs. Content Word Use", padj=1.25)
+#' legend(
+#'     .05, .12, bty = "n",
+#'     legend = c("functional", "content"), 
+#'     fill = c("red", "gray80"),  
+#'     cex = .7
+#' )
+#' }
 lexical_classification <- function(text.var, grouping.var = NULL,
     order.by.lexical_classification = TRUE,
     function.words = qdapDictionaries::function.words, 
@@ -133,7 +200,7 @@ lexical_classification <- function(text.var, grouping.var = NULL,
 
     DF3[["content"]] <- char02NA(lapply(DF3[["content"]], function(x) strsplit(x, "_")[[1]]))
     DF3[["functional"]] <- char02NA(lapply(DF3[["functional"]], function(x) strsplit(x, "_")[[1]]))
-    if (lexical_classification) {
+    if (order.by.lexical_classification) {
         DF3 <- DF3 %>% 
             dplyr::arrange(-ave.content.rate)
         DF3[["group"]] <- factor(DF3[["group"]], levels = DF3[["group"]])
@@ -143,29 +210,36 @@ lexical_classification <- function(text.var, grouping.var = NULL,
 
     class(DF2) <- c("lexical_classification_sent", "data.frame")    
 
-    content <- DF2[["content"]] %>%
-        unlist %>%
-        na.omit %>%
-        table %>%
-        as.matrix %>%
-        matrix2df %>%
-        setNames(c("word", "freq")) %>% 
-        dplyr::arrange(-freq)
+    content <- NA
+    if (!all(is.na(unlist(DF2[["content"]])))) {
+        content <- DF2[["content"]] %>%
+            unlist %>%
+            na.omit %>%
+            table %>%
+            as.matrix %>%
+            matrix2df %>%
+            setNames(c("word", "freq")) %>% 
+            dplyr::arrange(-freq)
 
-    class(content) <- c("lexical", class(content))
-    attributes(content)[["type"]] <- "content"
+        class(content) <- c("lexical", class(content))
+        attributes(content)[["type"]] <- "content"
+    }
 
-    functional <- DF2[["functional"]] %>%
-        unlist %>%
-        na.omit %>%
-        table %>%
-        as.matrix %>%
-        matrix2df %>%
-        setNames(c("word", "freq")) %>% 
-        dplyr::arrange(-freq)
+    functional <- NA
+    if (!all(is.na(unlist(DF2[["functional"]])))) {
+        functional <- DF2[["functional"]] %>%
+            unlist %>%
+            na.omit %>%
+            table %>%
+            as.matrix %>%
+            matrix2df %>%
+            setNames(c("word", "freq")) %>% 
+            dplyr::arrange(-freq)
 
-    class(functional) <- c("lexical", class(functional) )
-    attributes(functional)[["type"]] <- "functional"
+        class(functional) <- c("lexical", class(functional) )
+        attributes(functional)[["type"]] <- "functional"
+
+    }
 
     o <- list(content = content, functional = functional, 
         raw = DF2, lexical_classification = DF3)
@@ -175,6 +249,9 @@ lexical_classification <- function(text.var, grouping.var = NULL,
     text.env <- new.env(FALSE)
     text.env[["text.var"]] <- DF[["text.var"]]
     attributes(o)[["text.var"]] <- text.env
+    group.env <- new.env(FALSE)
+    group.env[["grouping.var"]] <- DF[["grouping"]]
+    attributes(o)[["grouping.var"]] <- group.env
     o  
 }
 

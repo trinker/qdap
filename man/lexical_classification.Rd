@@ -46,7 +46,74 @@ time and stress to these words (i.e., pronouns, articles, conjunctions,
 quantifiers, and prepositions).
 }
 \examples{
-mean(1:10)
+\dontrun{
+lexical_classification("I did not like the dog.")
+lexical_classification(DATA.SPLIT$state, DATA.SPLIT$person)
+
+(out <- with(pres_debates2012, lexical_classification(dialogue, list(person, time))))
+plot(out)
+
+scores(out)
+
+out2 <- preprocessed(out)
+htruncdf(out2)
+plot(out2)
+
+plot(out[["content"]])
+dev.new()
+plot(out[["functional"]])
+
+## cloud of functional vs. content
+## Highlight Content Words
+set.seed(10)
+par(mar = c(0,0,0,0))
+list(
+        content = out[["content"]],
+        functional = out[["functional"]]
+    ) \%>\%
+    list_df2df("type") \%>\%
+    dplyr::mutate(colors = ifelse(type == "functional", "gray80", "blue")) \%>\%
+    with(., wordcloud::wordcloud(
+        word,
+        freq,
+        min.freq = 8,
+        random.order=FALSE,
+        ordered.colors = TRUE,
+        colors = colors
+    ))
+mtext("2012 Presidential Debates:\\nFunctional vs. Content Word Use", padj=1.25)
+legend(
+    .05, .12, bty = "n",
+    legend = c("functional", "content"),
+    fill = c("gray80", "blue"),
+    cex = .7
+)
+
+## Highlight Functional Words
+set.seed(10)
+par(mar = c(0,0,0,0))
+list(
+        content = out[["content"]],
+        functional = out[["functional"]]
+    ) \%>\%
+    list_df2df("type") \%>\%
+    dplyr::mutate(colors = ifelse(type == "functional", "red", "gray80")) \%>\%
+    with(., wordcloud::wordcloud(
+        word,
+        freq,
+        min.freq = 8,
+        random.order=FALSE,
+        ordered.colors = TRUE,
+        colors = colors
+    ))
+mtext("2012 Presidential Debates:\\nFunctional vs. Content Word Use", padj=1.25)
+legend(
+    .05, .12, bty = "n",
+    legend = c("functional", "content"),
+    fill = c("red", "gray80"),
+    cex = .7
+)
+}
 }
 \references{
 Chung, C. & Pennebaker, J. (2007). The Psychological Functions of Function Words. In K. Fiedler (Ed.) Social Communication (pp. 343-359). New York: Psychology Press.
