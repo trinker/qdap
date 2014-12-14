@@ -219,6 +219,9 @@ saveHTML(FUN(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
     outdir = loc, single.opts =
     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
 
+ ## Animated corresponding text plot
+ Animate(deb2, type="text")
+
 #=====================#
 ## Complex Animation ##
 #=====================#

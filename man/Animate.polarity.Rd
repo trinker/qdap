@@ -5,9 +5,10 @@
 \usage{
 \method{Animate}{polarity}(x, negative = "blue", positive = "red",
   neutral = "yellow", edge.constant, wc.time = TRUE, time.constant = 2,
-  title = NULL, digits = 3, current.color = "black",
+  title = NULL, digits = 3, width = 65, current.color = "black",
   current.speaker.color = NULL, non.speaker.color = NA,
-  ave.color.line = "red", as.network = TRUE, ...)
+  ave.color.line = "red", type = "network", coord = c(0, 0.5),
+  just = c(0, 0.5), ...)
 }
 \arguments{
 \item{x}{A \code{\link[qdap]{polarity}} object.}
@@ -33,6 +34,8 @@ small word counts greater.}
 \item{digits}{The number of digits to use in the current turn of talk
 polarity.}
 
+\item{width}{The width to break text at if \code{type = "text"}.}
+
 \item{current.color}{The color to use for the current turn of talk polarity.}
 
 \item{current.speaker.color}{The color for the current speaker.}
@@ -40,10 +43,16 @@ polarity.}
 \item{non.speaker.color}{The color for the speakers not currently speaking.}
 
 \item{ave.color.line}{The color to use for the average color line if
-\code{network = FALSE}.}
+\code{type = "network"}.}
 
-\item{as.network}{logical.  If \code{TRUE} the animation is a network plot.
-If \code{FALSE} the animation is a hybrid dot plot.}
+\item{type}{Character string of either \code{"network"} (as a network
+plot), \code{"network"} (as a bar plot), or \code{"text"} (as a simple
+colored text plot).}
+
+\item{coord}{The x/y coordinate to plot the test if \code{type = "text"}.}
+
+\item{just}{The \code{hjust} and \code{vjust} values to use for the text if
+\code{type = "text"}.}
 
 \item{\ldots}{Other arguments passed to \code{\link[qdap]{discourse_map}}.}
 }

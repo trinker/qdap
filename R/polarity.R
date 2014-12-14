@@ -198,6 +198,9 @@
 #'     ani.height = 1000, ani.width=650,
 #'     outdir = loc, single.opts =
 #'     "'controls': ['first', 'play', 'loop', 'speed'], 'delayMin': 0")
+#'     
+#'  ## Animated corresponding text plot
+#'  Animate(deb2, type="text")
 #'  
 #' #=====================#
 #' ## Complex Animation ##
@@ -1493,6 +1496,51 @@ ggbar <- function(dat, grp = grp, rng = rng) {
 
 }
 
+Animate_polarity_text <- function(x, wc.time = TRUE, time.constant = 2, 
+    width,  just, coord, ...) {
+  
+    y <- counts(x)
+    txt <- lapply(y[["text.var"]], function(x){
+            paste(strwrap(x, width), collapse="\n")
+        }) %>% unlist
+    
+    
+
+    theplot <- ggplot2::ggplot(data.frame(x=0:1, y=0:1), ggplot2::aes(x, x, y=y)) + 
+        ggplot2::geom_blank() + ggplot2::theme_bw() +
+        ggplot2::theme( 
+            panel.grid.major = ggplot2::element_blank(),
+            panel.grid.minor = ggplot2::element_blank(),
+            axis.ticks = ggplot2::element_blank(),
+            axis.text = ggplot2::element_blank()
+        ) + 
+        ggplot2::ylab(NULL) + 
+        ggplot2::xlab(NULL) 
+
+    ggplots <- lapply(txt, function(z){
+        theplot + ggplot2::annotate("text", x = coord[1], 
+            y = coord[2], label = z, vjust = just[2], hjust = just[1], ...)
+    })
+
+    timings <- round(exp(y[["wc"]]/(max(y[["wc"]], na.rm=TRUE)/time.constant)))
+
+    if(wc.time) {
+        ggplots <- rep(ggplots, replace_nan(timings, is.na, 1))
+    }
+
+    ## starts with a blank object and end match the network Animate
+    ggplots <- unlist(list(list(theplot), ggplots, 
+        list(theplot)), recursive=FALSE)
+
+    ## add class info
+    class(ggplots) <- "animated_polarity"
+    attributes(ggplots)[["timings"]] <- timings
+    attributes(ggplots)[["type"]] <- "text"
+    attributes(ggplots)[["legend"]] <- NULL
+    attributes(ggplots)[["data"]] <- NULL
+    ggplots
+}
+
 #' Animate Polarity
 #' 
 #' \code{Animate.polarity} - Animate a \code{\link[qdap]{polarity}} object.
@@ -1512,13 +1560,18 @@ ggbar <- function(dat, grp = grp, rng = rng) {
 #' @param title The title to apply to the animated image(s).
 #' @param digits The number of digits to use in the current turn of talk 
 #' polarity.
+#' @param width The width to break text at if \code{type = "text"}.
 #' @param current.color The color to use for the current turn of talk polarity.
 #' @param current.speaker.color The color for the current speaker.
 #' @param non.speaker.color The color for the speakers not currently speaking.
 #' @param ave.color.line The color to use for the average color line if 
-#' \code{network = FALSE}.
-#' @param as.network logical.  If \code{TRUE} the animation is a network plot.
-#' If \code{FALSE} the animation is a hybrid dot plot.
+#' \code{type = "network"}.
+#' @param type  Character string of either \code{"network"} (as a network 
+#' plot), \code{"network"} (as a bar plot), or \code{"text"} (as a simple 
+#' colored text plot).
+#' @param coord The x/y coordinate to plot the test if \code{type = "text"}.
+#' @param just The \code{hjust} and \code{vjust} values to use for the text if 
+#' \code{type = "text"}.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}}.
 #' @note The width of edges is based on words counts on that edge until that 
 #' moment divided by total number of words used until that moment.  Thicker 
@@ -1537,22 +1590,30 @@ ggbar <- function(dat, grp = grp, rng = rng) {
 #' @method Animate polarity
 Animate.polarity <- function(x, negative = "blue", positive = "red", 
     neutral = "yellow", edge.constant, wc.time = TRUE, time.constant = 2,
-    title = NULL, digits = 3, current.color = "black", 
+    title = NULL, digits = 3, width = 65, current.color = "black", 
     current.speaker.color = NULL, non.speaker.color = NA, 
-    ave.color.line = "red", as.network = TRUE, ...){
+    ave.color.line = "red", type = "network", coord = c(.0, .5), just = c(.0, .5), 
+    ...){
 
-    if (as.network) {
-        Animate_polarity_net(x = x, negative = negative, positive = positive, 
-            neutral = neutral, edge.constant = edge.constant, wc.time = wc.time, 
-            time.constant = time.constant, title = title, digits = digits, 
-            current.speaker.color = current.speaker.color,
-            current.color = current.color, ...)
-    } else {
-        Animate_polarity_bar(x = x, wc.time = wc.time, 
-            time.constant = time.constant, digits = digits, 
-            ave.color.line = ave.color.line, ...)         
-    }
-
+    switch(type,
+        network = {
+            Animate_polarity_net(x = x, negative = negative, positive = positive, 
+                neutral = neutral, edge.constant = edge.constant, wc.time = wc.time, 
+                time.constant = time.constant, title = title, digits = digits, 
+                current.speaker.color = current.speaker.color,
+                current.color = current.color, ...)
+        },
+        bar = {
+            Animate_polarity_bar(x = x, wc.time = wc.time, 
+                time.constant = time.constant, digits = digits, 
+                ave.color.line = ave.color.line, ...)         
+        },
+        text = {
+           Animate_polarity_text(x = x, wc.time = wc.time, 
+               time.constant = time.constant, width = width,  
+               coord = coord, just = just, ...)
+        }, stop("`type` must be \"network\", \"bar\", or \"text\"")
+    )
 }
 
 
@@ -1586,26 +1647,33 @@ print.animated_polarity <- function(x, title = NULL,
         title <- attributes(x)[["title"]]
     }
 
-    if (attributes(x)[["network"]]) {
-        invisible(lapply(x, function(y) {
-            set.seed(seed)
-            par(bg = bg)
-            plot.igraph(y, edge.curved=TRUE, layout=layout, ...)
-            if (!is.null(title)) {
-                mtext(title, side=3)
-            }
-            if (!is.null(legend)) {
-                color.legend(legend[1], legend[2], legend[3], legend[4], 
-                    c("Negative", "Neutral", "Positive"), attributes(x)[["legend"]], 
-                    cex = legend.cex, col = net.legend.color)
-            }
-            if (pause > 0) Sys.sleep(pause)
-        })) 
-    } else {
-        invisible(lapply(x, print))
-    }
+    switch(attributes(x)[["type"]],
+        network = {
+            invisible(lapply(x, function(y) {
+                set.seed(seed)
+                par(bg = bg)
+                plot.igraph(y, edge.curved=TRUE, layout=layout, ...)
+                if (!is.null(title)) {
+                    mtext(title, side=3)
+                }
+                if (!is.null(legend)) {
+                    color.legend(legend[1], legend[2], legend[3], legend[4], 
+                        c("Negative", "Neutral", "Positive"), attributes(x)[["legend"]], 
+                        cex = legend.cex, col = net.legend.color)
+                }
+                if (pause > 0) Sys.sleep(pause)
+            })) 
+        },
+        bar = {
+            invisible(lapply(x, print))
+        },
+        text = {
+            invisible(lapply(x, print))
+        }, stop("`type` must be \"network\", \"bar\", or \"text\"")
+    )  
    
 }
+
 
 
 #' Plots a animated_polarity  Object
