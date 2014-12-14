@@ -234,7 +234,6 @@
 #'         vps <- baseViewports()
 #' 
 #'         print(lex_text_bar[[i]], vp = vpStack(vps$figure,vps$plot))
-#'         animation::ani.pause()
 #' 
 #'         animation::ani.pause()
 #' 
