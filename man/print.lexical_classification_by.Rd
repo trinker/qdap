@@ -3,7 +3,7 @@
 \alias{print.lexical_classification_by}
 \title{Prints a lexical_classification Object}
 \usage{
-\method{print}{lexical_classification_by}(x, ave.digits = 1, se.digits = 1,
+\method{print}{lexical_classification_by}(x, ave.digits = 1, se.digits = 2,
   trunc = 25, ...)
 }
 \arguments{

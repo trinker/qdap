@@ -52,7 +52,7 @@ color line if \code{network = FALSE}.}
 than 300 words per Heylighen & Dewaele's (2002) minimum word recommendations.}
 
 \item{as.network}{logical.  If \code{TRUE} the animation is a network plot.
-If \code{FALSE} the animation is a hybrid dot plot.}
+If \code{FALSE} the animation is a hybrid bar plot.}
 
 \item{\ldots}{Other arguments passed to \code{\link[qdap]{discourse_map}}.}
 }

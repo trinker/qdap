@@ -1137,7 +1137,7 @@ ggbar_form <- function(dat, grp = grp, rng = rng, colors) {
 #' @param under.300.color The bar color to use for grouping variables less 
 #' than 300 words per Heylighen & Dewaele's (2002) minimum word recommendations.
 #' @param as.network logical.  If \code{TRUE} the animation is a network plot.
-#' If \code{FALSE} the animation is a hybrid dot plot.
+#' If \code{FALSE} the animation is a hybrid bar plot.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}}.
 #' @note The width of edges is based on words counts on that edge until that 
 #' moment divided by total number of words used until that moment.  Thicker 

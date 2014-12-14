@@ -104,6 +104,157 @@
 #'     fill = c("red", "gray80"),  
 #'     cex = .7
 #' )
+#' 
+#' #=============#
+#' ## ANIMATION ##
+#' #=============#
+#' ## EXAMPLE 1
+#' lex_ani <- lexical_classification(DATA.SPLIT$state, DATA.SPLIT$person)
+#' lexa <- Animate(lex_ani, content="white", functional="blue",
+#'     current.color = "yellow", current.speaker.color="grey70")
+#' 
+#' bgb <- vertex_apply(lexa, label.color="grey80", size=20, color="grey40")
+#' bgb <- edge_apply(bgb, label.color="yellow")
+#' 
+#' print(bgb, bg="black", net.legend.color ="white", pause=1)
+#' 
+#' ## EXAMPLE 2
+#' lex_ani2 <- lexical_classification(mraja1spl$dialogue, mraja1spl$person)
+#' lexa2 <- Animate(lex_ani2, content="white", functional="blue",
+#'     current.color = "yellow", current.speaker.color="grey70")
+#' 
+#' bgb2 <- vertex_apply(lexa2, label.color="grey80", size=17, color="grey40")
+#' bgb2 <- edge_apply(bgb2, label.color="yellow")
+#' print(bgb2, bg="black", pause=.75, net.legend.color = "white")
+#' 
+#' ## EXAMPLE 3 (bar plot)
+#' Animate(lex_ani2, type="bar")
+#' 
+#' ## EXAMPLE 4 (text plot)
+#' Animate(lex_ani2, type="text")
+#' 
+#' #=====================#
+#' ## Complex Animation ##
+#' #=====================#
+#' library(animation)
+#' library(grid)
+#' library(gridBase)
+#' library(qdap)
+#' library(reports)
+#' library(igraph)
+#' library(plotrix)
+#' 
+#' lex_ani2 <- lexical_classification(mraja1spl$dialogue, mraja1spl$person)
+#' 
+#' ## Set up the network version
+#' lex_net <- Animate(lex_ani2, contextual="white", lexal="blue",
+#'     current.color = "yellow", current.speaker.color="grey70")
+#' bgb <- vertex_apply(lex_net, label.color="grey80", size=17, color="grey40")
+#' bgb <- edge_apply(bgb, label.color="yellow")
+#' 
+#' 
+#' ## Set up the bar version
+#' lex_bar <- Animate(lex_ani2, type="bar")
+#' 
+#' ## Set up the text
+#' lex_text <- Animate(lex_ani2, type="text", size = 3, width=125, color="white")
+#' 
+#' ## Generate a folder
+#' loc <- reports::folder(animation_lexical_classification)
+#' setwd(loc)
+#' 
+#' ## Set up the plotting function
+#' oopt <- animation::ani.options(interval = 0.1)
+#' 
+#' 
+#' lex_text_bar <- Map(function(x, y){
+#' 
+#'     uns <- unit(c(-1.6,.5,-.2,.25), "cm")
+#' 
+#'     x <- x +
+#'         theme(plot.margin = uns,
+#'             text=element_text(color="white"),
+#'             legend.text=element_text(color="white"),
+#'             legend.background = element_rect(fill = "black"),
+#'             panel.border = element_rect(color = "black"),
+#'             panel.background = element_rect(fill = "black"),
+#'             plot.background = element_rect(fill = "black",
+#'                 color="black"))
+#' 
+#'     uns2 <- unit(c(-.5,.5,-.45,.25), "cm")
+#' 
+#'     y <- y +
+#'         theme(plot.margin = uns2,
+#'             text=element_text(color="white"),
+#'             legend.text=element_text(color="white"),
+#'             legend.background = element_rect(fill = "black"),
+#'             plot.background = element_rect(fill = "black",
+#'                 color="black"))
+#' 
+#'     gA <- ggplotGrob(x)
+#'     gB <- ggplotGrob(y)
+#'     maxWidth <- grid::unit.pmax(gA$widths[2:5], gB$widths[2:5])
+#'     gA$widths[2:5] <- as.list(maxWidth)
+#'     gB$widths[2:5] <- as.list(maxWidth)
+#'     out <- arrangeGrob(gA, gB, ncol=1, heights = c(.3, .70))
+#'     ## grid.draw(out)
+#'     invisible(out)
+#' 
+#' }, lex_text, lex_bar)
+#' 
+#' 
+#' FUN <- function(follow=FALSE, theseq = seq_along(bgb)) {
+#' 
+#'     Title <- "Animated Content Rate: Romeo and Juliet Act 1"
+#'     Legend <- c(.2, -1, 1.5, -.95)
+#'     Legend.cex <- 1
+#' 
+#'     lapply(theseq, function(i) {
+#'         if (follow) {
+#'             png(file=sprintf("%s/images/Rplot%s.png", loc, i),
+#'                 width=750, height=875)
+#'         }
+#'         ## Set up the layout
+#'         layout(matrix(c(rep(1, 7), rep(2, 6)), 13, 1, byrow = TRUE))
+#' 
+#'         ## Plot 1
+#'         par(mar=c(2, 0, 2, 0), bg="black")
+#'         #par(mar=c(2, 0, 2, 0))
+#'         set.seed(22)
+#'         plot.igraph(bgb[[i]], edge.curved=TRUE)
+#'         mtext(Title, side=3, col="white")
+#'         color.legend(Legend[1], Legend[2], Legend[3], Legend[4],
+#'               c("Functional", "Content"), attributes(bgb)[["legend"]],
+#'               cex = Legend.cex, col="white")
+#' 
+#'         ## Plot2
+#'         plot.new()
+#'         vps <- baseViewports()
+#' 
+#'         print(lex_text_bar[[i]], vp = vpStack(vps$figure,vps$plot))
+#'         animation::ani.pause()
+#' 
+#'         animation::ani.pause()
+#' 
+#'         if (follow) {
+#'             dev.off()
+#'         }
+#'     })
+#' 
+#' }
+#' 
+#' FUN()
+#' 
+#' ## Detect OS
+#' type <- if(.Platform$OS.type == "windows") shell else system
+#' 
+#' 
+#' saveHTML(FUN(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
+#'     ani.height = 1000, ani.width=750,
+#'     outdir = loc, single.opts =
+#'     "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0")
+#' 
+#' FUN(TRUE)
 #' }
 lexical_classification <- function(text.var, grouping.var = NULL,
     order.by.lexical_classification = TRUE,
@@ -269,7 +420,7 @@ lexical_classification <- function(text.var, grouping.var = NULL,
 #' @method print lexical_classification_by
 #' @export
 print.lexical_classification_by <-
-function(x, ave.digits = 1, se.digits = 1, trunc = 25, ...) {
+function(x, ave.digits = 1, se.digits = 2, trunc = 25, ...) {
   
     WD <- options()[["width"]]
     options(width=3000)
@@ -758,3 +909,503 @@ plot.lexical_classification_preprocessed <- function(x, jitter=.1,
 
     gridExtra::grid.arrange(plot1, plot2, ncol=2)
 }
+
+
+## heper to animate a networkplot
+Animate_lexical_classification_net <- function(x, functional = "yellow", 
+    content = "red", edge.constant, wc.time = TRUE, time.constant = 1, 
+    title = NULL, digits = 1, current.color = "black", missing.color="purple", 
+    current.speaker.color, non.speaker.color = NA, ...){
+
+    content.rate <- word.count <- id <- NULL
+    
+    qsep <- "|-|qdap|-|"
+
+    brks <- seq(0, 1, by=.001)
+    max.color.breaks <- length(brks)
+
+    y <- preprocessed(x) 
+
+    nms <- names(y)[1]
+    names(y)[1] <- "group"
+    y <- y %>%
+        dplyr::select_("group", "word.count", "content.rate") %>%
+        dplyr::mutate(content.rate=content.rate/100)
+
+    condlens <- rle(as.character(y[["group"]]))
+    y[["temp"]] <- rep(paste0("X", pad(1:length(condlens[[2]]))),
+        condlens[[1]])
+
+    ## Add to  and from columns
+    y <- cbind(y, from_to_End(y[["group"]]))
+
+    ## repeat last to column to match with split sentence (i.e.
+    ## we don't want an edge to return to the node it leaves
+    tos <- split(y[["to"]], y[["temp"]])
+    tos_lens <- sapply(tos, length)
+    y[["to"]] <- rep(sapply(tos, tail, 1), tos_lens)
+  
+    ## make a combined from|to column
+    y[["fromQDAPQDAPto"]] <- paste2(y[, c("from", "to")], sep=qsep)
+
+    ## add id column
+    y[["id"]] <- 1:nrow(y)
+
+    nrows <- 1:nrow(y)
+    inds <- unlist(lapply(nrows, function(i) nrows[1:i]))
+    bigy <- y[inds, c("word.count", "content.rate", "fromQDAPQDAPto", "id")]
+    bigy[["times"]] <- rep(nrows, nrows)
+
+    df_lexical_classification <- bigy %>%
+        dplyr::group_by_("times", "fromQDAPQDAPto") %>%
+            dplyr::summarise(
+                content.rate=replace_nan(mean(content.rate, na.rm = TRUE)),
+                wc=sum(word.count, na.rm = TRUE), 
+                id=max(id, na.rm = TRUE)
+         ) %>%
+         dplyr::group_by_("times") %>%
+         dplyr::mutate(
+             prop_wc = wc/(sum(wc, rm.na=TRUE) - 1)
+         )
+
+    ## set up color gradients
+    colfunc <- colorRampPalette(c(functional, content))
+    cols <- colfunc(max.color.breaks)
+   
+    ## add colors to df_lexical_classification based on agrgegated 
+    ## average lexical_classification per edge
+    cuts <- cut(df_lexical_classification[["content.rate"]], brks)
+
+    df_lexical_classification[["color"]] <- cuts %l% data.frame(cut(brks, brks), cols, 
+        stringsAsFactors = FALSE)
+
+    ## split it back into the iterative per row 
+    ## dataframes of aggregated values
+    list_lexical_classification <- lapply(split(as.data.frame(df_lexical_classification)[, -1], df_lexical_classification[[1]]), 
+        function(x) {
+            y <- colsplit2df(x, sep=qsep)
+            colnames(y)[1:2] <- c("from", "to")
+            y
+    })
+
+    ## create a single network plot with all values
+    dat <- sentCombine(attributes(x)[["text.var"]][["text.var"]], y[["from"]])
+    theplot <- discourse_map(dat[, "text.var"], dat[, "from"], 
+        ...)[["plot"]]
+
+    ## generate edge constant if needed
+    if (missing(edge.constant)) {
+        edge.constant <- length(unique(y[, 1])) * 2.5
+    }
+
+    ## Add colors from the aggregated list of average content rate
+    ## and output a corresponding list of network plots
+    new_lex_nets <- lapply(list_lexical_classification, colorize, theplot)
+
+    names(y)[7] <- sub("QDAPQDAP", "|", names(y)[7])
+    missing <- which(is.na(y[["word.count"]]))
+
+    ## Add edge weights etc to each graph
+    igraph_objs <- setNames(lapply(seq_along(new_lex_nets), 
+        function(i, grp =new_lex_nets, len=length(unique(y[[1]])), sep=qsep){
+
+        ## limit the edge weights (widths) of first 5 plots)
+        if (i %in% 1:5) {
+            edge.constant <- edge.constant/(len/i)
+        }
+
+        ## calculate edge widths
+        cur <- list_lexical_classification[[i]]
+        cur[["width"]] <- edge.constant*cur[["prop_wc"]]
+
+        ## get current edge
+        cur_edge <- which.max(cur[["id"]])
+        cur_edge2 <- max(cur[["id"]])
+
+        ## create current edge label and lexical_classification sign
+        cur_lex <- y[y[["id"]] == cur_edge2, "content.rate"]
+        lab <- ifelse(is.na(cur_lex), "-", numbformat(cur_lex, digits))
+        E(grp[[i]])$label <- NA
+        curkey <- data.frame(paste2(cur[cur_edge, 1:2], sep="|-|qdap|-|"), lab, 
+            stringsAsFactors = FALSE)
+
+        if (i %in% missing) current.speaker.color <- missing.color
+
+        ## Set up widths and colors
+        tcols <- cur[, c("from", "to", "color"), drop=FALSE]
+        widths <- cur[, c("from", "to", "width"), drop=FALSE]
+        widths[["width"]] <- ceiling(widths[["width"]])
+        ekey <- paste2(edge_capture(grp[[i]]), sep=sep)
+        ckey <- colpaste2df(tcols, 1:2, sep = sep, keep.orig=FALSE)[, 2:1]
+        wkey <- colpaste2df(widths, 1:2, sep = sep, keep.orig=FALSE)[, 2:1]
+        E(grp[[i]])$width <- NAer(ekey %l% wkey, 1)
+        #plot(grp[[i]], edge.curved=TRUE)
+        E(grp[[i]])$color <- ekey %l% ckey
+        E(grp[[i]])$label <- ekey %l% curkey
+        V(grp[[i]])$frame.color <- NA
+        if (!is.null(current.speaker.color)) {
+            spkkey <- data.frame(as.character(cur[cur_edge, 1]), current.speaker.color, 
+                stringsAsFactors = FALSE)
+            V(grp[[i]])$frame.color <- V(grp[[i]])$name %l% spkkey
+        }
+        V(grp[[i]])$frame.color[is.na(V(grp[[i]])$frame.color)] <- non.speaker.color
+
+        ## change edge label color
+        E(grp[[i]])$label.color <- current.color
+        ##ekey %l% data.frame(curkey[1, 1], current.color)
+            
+        grp[[i]]
+    }), paste0("Turn_", pad(1:nrow(y))))
+
+    timings <- round(exp(y[["word.count"]]/(max(y[["word.count"]], na.rm=TRUE)/time.constant)))
+
+
+    if(wc.time) {
+        igraph_objs <- rep(igraph_objs, replace_nan(timings, is.na, 1))
+    }
+
+    ## starts with a blank object
+    igraph_objs <- rep(igraph_objs, c(2, rep(1, length(igraph_objs) - 1)))
+    len <- nchar(char2end(names(igraph_objs)[1], "_"))
+    names(igraph_objs)[1] <- sprintf("turn_%s", paste(rep(0, len), collapse=""))
+
+    uncol <- E(igraph_objs[[1]])$color
+    E(igraph_objs[[1]])$color <- NA
+    E(igraph_objs[[1]])$label.color <- NA
+    E(igraph_objs[[1]])$label <- NA
+    V(igraph_objs[[1]])$frame.color <- non.speaker.color    
+
+    ## end with no label or frame color
+    igraph_objs <- rep(igraph_objs, c(rep(1, length(igraph_objs) - 1), 2))
+    E(igraph_objs[[length(igraph_objs)]])$label.color <- NA
+    E(igraph_objs[[length(igraph_objs)]])$label <- NA
+    V(igraph_objs[[length(igraph_objs)]])$frame.color <- non.speaker.color
+    
+    ## add class info
+    class(igraph_objs) <- "animated_lexical_classification"
+    attributes(igraph_objs)[["title"]] <- title
+    attributes(igraph_objs)[["timings"]] <- timings
+    attributes(igraph_objs)[["type"]] <- "network"
+    attributes(igraph_objs)[["legend"]] <- cols
+    attributes(igraph_objs)[["data"]] <- list_lexical_classification
+    igraph_objs
+}
+
+## Hlper to animate bar graph
+Animate_lexical_classification_bar <- function(x, wc.time = TRUE, time.constant = 2, 
+    digits = 2, all.color.line = "red", ...) {
+
+    content.rate <- NULL
+    
+    y <- preprocessed(x) 
+
+    isna <- which(is.na(y[["word.count"]]))
+    if (!identical(integer(0), isna)){
+        y[isna, 3:6] <- 0
+    }
+
+    nms <- names(y)[1]
+    names(y)[1] <- "group"
+    y <- y %>%
+        dplyr::select_("group", "word.count", "content.rate")
+
+    nrows <- 1:nrow(y)
+    inds <- unlist(lapply(nrows, function(i) nrows[1:i]))
+    bigy <- y[inds, ]
+    bigy[["times"]] <- rep(nrows, nrows)
+
+    thedat <- bigy %>%
+        dplyr::group_by_("times", "group") %>%
+            dplyr::summarise(
+                lexical_classification = replace_nan(mean(content.rate, na.rm = TRUE))
+         ) 
+
+    thebardat <- bigy %>%
+        dplyr::group_by_("times") %>%
+        dplyr::summarise(
+           ave.lex = mean(content.rate, na.rm = TRUE)
+        ) %>% `[`(, 2) %>% unlist
+
+    ## Order factor levels greatest to least
+    ord <- levels(scores(x)[[1]])
+    thedat[["group"]] <- factor(thedat[["group"]], levels = ord)
+
+    rng <- max(thedat[["lexical_classification"]], na.rm=TRUE)
+
+    listdat <- split(thedat, thedat[["times"]])
+
+    theplot <- ggbar_lex(listdat[[length(listdat)]], grp = nms, rng = rng)
+
+    ggplots <- setNames(lapply(seq_along(listdat), function(i, aplot=theplot) {
+
+        listdat[[i]][["group"]] <- factor(listdat[[i]][["group"]], levels=ord)
+        titlepol <- numbformat(thebardat[i], digits)
+
+        aplot[["labels"]][["title"]] <- paste(
+            paste0(sprintf("Average Discourse Content Rate:  %s",titlepol), "%"), 
+            sprintf("%sCurrent Speaker:   %s", paste(rep(" ", 15), 
+            collapse=""), y[i, 1]))
+
+        aplot[["data"]] <- listdat[[i]]
+        aplot + geom_hline(yintercept=unlist(thebardat[i]), size=1, color=all.color.line) 
+        }), paste0("turn_", pad(1:length(listdat))))
+
+    timings <- round(exp(y[["word.count"]]/(max(y[["word.count"]], na.rm=TRUE)/time.constant)))
+
+    if(wc.time) {
+        ggplots <- rep(ggplots, replace_nan(timings, is.na, 1))
+    }
+
+    ## starts with a blank object and end match the network Animate
+    theplot[["data"]][, "lexical_classification"] <- NaN
+    ggplots <- unlist(list(list(theplot), ggplots, 
+        ggplots[length(ggplots)]), recursive=FALSE)
+
+    len <- nchar(char2end(names(ggplots)[2], "_"))
+    names(ggplots)[1] <- sprintf("turn_%s", paste(rep(0, len), collapse=""))
+
+    ## add class info
+    class(ggplots) <- "animated_lexical_classification"
+    attributes(ggplots)[["timings"]] <- timings
+    attributes(ggplots)[["type"]] <- "bar"
+    attributes(ggplots)[["legend"]] <- NULL
+    attributes(ggplots)[["data"]] <- listdat
+    ggplots
+}
+
+replace_nan <- function(x, fun = is.nan, repl = NA) {x[fun(x)] <- repl; x}
+
+
+## Helper to make intial plot
+ggbar_lex <- function(dat, grp = grp, rng = rng) {
+
+    padding <- rng*.05
+  
+    ggplot2::ggplot(dat, aes_string(x="group"))  +
+        ggplot2::geom_bar(aes_string(weight="lexical_classification")) +
+        ggplot2::ylab("Average Content Rate") + 
+        ggplot2::xlab(paste(sapply(unlist(strsplit(grp, "&")), Caps), collapse = " ")) +
+        ggplot2::theme_bw() +
+        ggplot2::ggtitle(sprintf("Average Discourse Content Rate:  %s", "")) +
+        ggplot2::theme(axis.text.x=element_text(angle = 90, vjust = .4, hjust = 1, size=11),
+            plot.title=element_text(hjust=0, size=11, color="grey60")) + 
+        ggplot2::scale_x_discrete(drop=FALSE) + 
+        ggplot2::scale_y_continuous(expand = c(0,0), limits=c(0, rng + padding),
+            labels = function(x) paste0(x, "%")) 
+}
+
+
+## Helper for animated text
+
+Animate_lexical_classification_text <- function(x, wc.time = TRUE, time.constant = 2, 
+    width, function.words, left, right, coord, just, ...) {
+    
+    y <- preprocessed(x) 
+
+    txt <- gsub("/0", "", gsub("/1", right, gsub("(?<=\\b)(['a-z09]+)(?=/1)", 
+        paste0(left, "\\1"), y[["markup"]], perl=TRUE))) 
+    
+    txt <- lapply(txt, function(x){
+            paste(strwrap(x, width), collapse="\n")
+        }) %>% unlist
+
+    theplot <- ggplot2::ggplot(data.frame(x=0:1, y=0:1), ggplot2::aes(x, x, y=y)) + 
+        ggplot2::geom_blank() + ggplot2::theme_bw() +
+        ggplot2::theme( 
+            panel.grid.major = ggplot2::element_blank(),
+            panel.grid.minor = ggplot2::element_blank(),
+            axis.ticks = ggplot2::element_blank(),
+            axis.text = ggplot2::element_blank()
+        ) + 
+        ggplot2::ylab(NULL) + 
+        ggplot2::xlab(NULL) 
+
+    ggplots <- lapply(txt, function(z){
+        theplot + ggplot2::annotate("text", x = coord[1], 
+            y = coord[2], label = z, vjust = just[2], hjust = just[1], ...)
+    })
+
+    timings <- round(exp(y[["word.count"]]/(max(y[["word.count"]], na.rm=TRUE)/time.constant)))
+
+    if(wc.time) {
+        ggplots <- rep(ggplots, replace_nan(timings, is.na, 1))
+    }
+
+    ## starts with a blank object and end match the network Animate
+    ggplots <- unlist(list(list(theplot), ggplots, 
+        list(theplot)), recursive=FALSE)
+
+    ## add class info
+    class(ggplots) <- "animated_lexical_classification"
+    attributes(ggplots)[["timings"]] <- timings
+    attributes(ggplots)[["type"]] <- "text"
+    attributes(ggplots)[["legend"]] <- NULL
+    attributes(ggplots)[["data"]] <- NULL
+    ggplots
+}
+
+
+
+#' Animate Formality
+#' 
+#' \code{Animate.lexical_classification} - Animate a 
+#' \code{\link[qdap]{lexical_classification}} object.
+#' 
+#' lexical_classification Method for Animate
+#' @param x A \code{\link[qdap]{lexical_classification}} object.
+#' @param type  Character string of either \code{"network"} (as a network 
+#' plot), \code{"network"} (as a bar plot), or \code{"text"} (as a simple 
+#' colored text plot).
+#' @param content The color to use for 100\% lexical_classification (purely 
+#' content).
+#' @param functional The color to use for 0\% lexical_classification (purely 
+#' functional).
+#' @param edge.constant A constant to multiple edge width by.
+#' @param wc.time logical.  If \code{TRUE} weights duration of frame by word 
+#' count.
+#' @param time.constant A constant to divide the maximum word count by.  Time
+#' is calculated by `round(exp(WORD COUNT/(max(WORD COUNT)/time.constant)))`.  
+#' Therefore a larger constant will make the difference between the large and 
+#' small word counts greater.
+#' @param title The title to apply to the animated image(s).
+#' @param digits The number of digits to use in the current turn of talk's
+#' content rate.
+#' @param current.color The color to use for the current turn of talk's 
+#' content rate.
+#' @param current.speaker.color The color for the current speaker.
+#' @param non.speaker.color The color for the speakers not currently speaking.
+#' @param missing.color The color to use in a network plot for edges 
+#' corresponding to missing text data.  Use \code{\link[stats]{na.omit}} before 
+#' hand to remove the missing values all together.
+#' @param all.color.line The color to use for the total average discourse 
+#' content rate.
+#' @param width The width to break text at if \code{type = "text"}.
+#' @param function.words A vector of function words.  Default is 
+#' \code{\link[qdapDictionaries]{function.words}}.
+#' @param left A left bound to wrap content words with if \code{type = "text"}.
+#' @param right A right bound to wrap content words with  if \code{type = "text"}.
+#' @param coord The x/y coordinate to plot the test if \code{type = "text"}.
+#' @param just The \code{hjust} and \code{vjust} values to use for the text if 
+#' \code{type = "text"}.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}}.
+#' @note The width of edges is based on words counts on that edge until that 
+#' moment divided by total number of words used until that moment.  Thicker 
+#' edges tend to thin as time passes.  The actual duration the current edge 
+#' stays as the \code{current.color} is based on word counts for that particular 
+#' flow of dialogue divided by total dialogue (words) used.  The edge label is
+#' the current content rate for that turn of talk (an aggregation of 
+#' the sub sentences of the current turn of talk).  The coloring of the current 
+#' edge content rate is produced at th sentence level, therefor a label may 
+#' indicate a more content laden current turn of talk, while the coloring may 
+#' indicate a functional laden average of sentences.  Coloring is based on 
+#' percentage of conent words.
+#' @import igraph
+#' @export
+#' @method Animate lexical_classification
+Animate.lexical_classification <- function(x, type = "network", content = "red", 
+    functional = "yellow", edge.constant, wc.time = TRUE, time.constant = 2, 
+    title = NULL, digits = 2, current.color = "black", 
+    current.speaker.color = NULL, non.speaker.color = NA,
+    missing.color = "purple", all.color.line = "red", width = 65,
+    function.words = qdapDictionaries::function.words, left = "<<", right = ">>", 
+    coord = c(.0, .5), just = c(.0, .5), ...){
+
+    switch(type,
+        network = {
+            Animate_lexical_classification_net(x = x, content = content, 
+                functional = functional, edge.constant = edge.constant, 
+                wc.time = wc.time, time.constant = time.constant, title = title, 
+                digits = digits, current.color = current.color, 
+                current.speaker.color = current.speaker.color, 
+                non.speaker.color = non.speaker.color, missing.color = missing.color , 
+                ...)
+        },
+        bar = {
+            Animate_lexical_classification_bar(x = x, wc.time = wc.time, 
+                time.constant = time.constant, digits = digits, 
+                all.color.line = all.color.line, ...)         
+        },
+        text = {
+           Animate_lexical_classification_text(x = x, wc.time = wc.time, 
+               time.constant = time.constant, width = width, 
+               function.words = function.words, left = left, right = right, 
+               coord = coord, just = just, ...)
+        }, stop("`type` must be \"network\", \"bar\", or \"text\"")
+    )
+
+}
+
+#' Prints a animated_lexical_classification  Object
+#' 
+#' Prints a animated_lexical_classification  object.
+#' 
+#' @param x The animated_lexical_classification  object.
+#' @param title The title of the plot.
+#' @param layout \pkg{igraph} \code{layout} to use.
+#' @param seed The seed to use in plotting the graph.
+#' @param pause The length of time to pause between plots.
+#' @param legend The coordinates of the legend. See 
+#' \code{\link[plotrix]{color.legend}} for more information.
+#' @param legend.cex character expansion factor. \code{NULL} and \code{NA} are 
+#' equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.
+#' @param bg The color to be used for the background of the device region. See
+#' \code{\link[graphics]{par}} for more information. 
+#' @param net.legend.color The text legend color for the network plot.
+#' @param \ldots Other Arguments passed to \code{\link[igraph]{plot.igraph}}.
+#' @import igraph
+#' @method print animated_lexical_classification 
+#' @export
+print.animated_lexical_classification <- function(x, title = NULL, 
+    seed = sample(1:10000, 1), layout=layout.auto, pause = 0, 
+    legend = c(-.5, -1.5, .5, -1.45), legend.cex=1, bg=NULL, 
+    net.legend.color = "black", ...){
+    
+    if (is.null(title)) {
+        title <- attributes(x)[["title"]]
+    }
+
+    switch(attributes(x)[["type"]],
+        network = {
+            invisible(lapply(x, function(y) {
+                set.seed(seed)
+                par(bg = bg)
+                plot.igraph(y, edge.curved=TRUE, layout=layout)
+                if (!is.null(title)) {
+                    mtext(title, side=3)
+                }
+                if (!is.null(legend)) {
+                    plotrix::color.legend(legend[1], legend[2], legend[3], legend[4], 
+                        c("Functional", "Content"), attributes(x)[["legend"]], 
+                        cex = legend.cex, col=net.legend.color, ...)
+                }
+                if (pause > 0) Sys.sleep(pause)
+            })) 
+        },
+        bar = {
+            invisible(lapply(x, print))
+        },
+        text = {
+            invisible(lapply(x, print))
+        }, stop("`type` must be \"network\", \"bar\", or \"text\"")
+    )  
+}
+
+
+#' Plots a animated_lexical_classification  Object
+#' 
+#' Plots a animated_lexical_classification  object.
+#' 
+#' @param x The animated_lexical_classification  object.
+#' @param \ldots Other arguments passed to \code{print.animated_lexical_classification }.
+#' @method plot animated_lexical_classification 
+#' @export
+plot.animated_lexical_classification  <- function(x, ...){ 
+
+    print(x, ...)
+
+}
+
+
+
+
+
