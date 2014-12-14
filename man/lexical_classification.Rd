@@ -264,6 +264,26 @@ saveHTML(FUN(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
     "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0")
 
 FUN(TRUE)
+
+#==================#
+## Static Network ##
+#==================#
+(lexdat <- with(sentSplit(DATA, 4), lexical_classification(state, person)))
+m <- Network(lexdat)
+m
+print(m, bg="grey97", vertex.color="grey75")
+
+print(m, title="Lexical Content Discourse Map", title.color="white",
+    bg="black", legend.text.color="white", vertex.label.color = "grey70",
+    edge.label.color="yellow")
+
+## or use themes:
+dev.off()
+m + qtheme()
+m + theme_nightheat
+dev.off()
+m + theme_nightheat(title="Lexical Content Discourse Map",
+    vertex.label.color = "grey50")
 }
 }
 \references{

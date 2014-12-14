@@ -255,6 +255,26 @@
 #'     "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0")
 #' 
 #' FUN(TRUE)
+#' 
+#' #==================#
+#' ## Static Network ##
+#' #==================#
+#' (lexdat <- with(sentSplit(DATA, 4), lexical_classification(state, person)))
+#' m <- Network(lexdat)
+#' m
+#' print(m, bg="grey97", vertex.color="grey75")
+#' 
+#' print(m, title="Lexical Content Discourse Map", title.color="white", 
+#'     bg="black", legend.text.color="white", vertex.label.color = "grey70",
+#'     edge.label.color="yellow")
+#' 
+#' ## or use themes:
+#' dev.off()
+#' m + qtheme()
+#' m + theme_nightheat
+#' dev.off()
+#' m + theme_nightheat(title="Lexical Content Discourse Map",
+#'     vertex.label.color = "grey50")
 #' }
 lexical_classification <- function(text.var, grouping.var = NULL,
     order.by.lexical_classification = TRUE,
@@ -1406,6 +1426,118 @@ plot.animated_lexical_classification  <- function(x, ...){
 }
 
 
+#' Network Lexical Classification
+#' 
+#' \code{Network.lexical_classification} - Network a 
+#' \code{\link[qdap]{lexical_classification}} object.
+#' 
+#' lexical_classification Method for Network
+#' @param x A \code{\link[qdap]{lexical_classification}} object.
+#' @param content The color to use for 100\% lexical_classification (purely 
+#' content).
+#' @param functional The color to use for 0\% lexical_classification (purely 
+#' functional).
+#' @param edge.constant A constant to multiple edge width by.
+#' @param title The title to apply to the Networked image(s).
+#' @param digits The number of digits to use in the current turn of talk 
+#' lexical_classification.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}}.
+#' @import igraph
+#' @importFrom qdapTools %l% 
+#' @export
+#' @method Network lexical_classification
+Network.lexical_classification <- function(x, functional = "yellow", content = "red", 
+    edge.constant, title = NULL, digits = 2, ...){
+
+    content.rate <- word.count <- id <- NULL
+    
+    qsep <- "|-|qdap|-|"
+
+    brks <- seq(0, 1, by=.001)
+    max.color.breaks <- length(brks)
+
+    y <- preprocessed(x) 
+
+    nms <- names(y)[1]
+    names(y)[1] <- "group"
+    y <- y %>%
+        dplyr::select_("group", "word.count", "content.rate") %>%
+        dplyr::mutate(content.rate=content.rate/100)
+
+    condlens <- rle(as.character(y[["group"]]))
+    y[["temp"]] <- rep(paste0("X", pad(1:length(condlens[[2]]))),
+        condlens[[1]])
+
+    ## Add to  and from columns
+    y <- cbind(y, from_to_End(y[["group"]]))
+
+    ## repeat last to column to match with split sentence (i.e.
+    ## we don't want an edge to return to the node it leaves
+    tos <- split(y[["to"]], y[["temp"]])
+    tos_lens <- sapply(tos, length)
+    y[["to"]] <- rep(sapply(tos, tail, 1), tos_lens)
+  
+    ## make a combined from|to column
+    y[["fromQDAPQDAPto"]] <- paste2(y[, c("from", "to")], sep=qsep)
+
+    df_lexical_classification <- y %>%
+        dplyr::group_by_("fromQDAPQDAPto") %>%
+            dplyr::summarise(
+                content.rate=replace_nan(mean(content.rate, na.rm = TRUE)),
+                wc=sum(word.count, na.rm = TRUE)
+         ) %>%
+         dplyr::mutate(
+             prop_wc = wc/(sum(wc, rm.na=TRUE) - 1)
+         )
+
+    ## set up color gradients
+    colfunc <- colorRampPalette(c(functional, content))
+    cols <- colfunc(max.color.breaks)
+   
+    ## add colors to df_lexical_classification based on agrgegated 
+    ## average lexical_classification per edge
+    cuts <- cut(df_lexical_classification[["content.rate"]], brks)
+
+    df_lexical_classification[["color"]] <- cuts %l% data.frame(cut(brks, brks), cols, 
+        stringsAsFactors = FALSE)
+
+    ## split it back into the iterative per row 
+    ## dataframes of aggregated values
+    df_lexical_classification <- colsplit2df(as.data.frame(df_lexical_classification), 
+        sep=qsep, keep.orig = TRUE)
+    colnames(df_lexical_classification)[2:3] <- c("from", "to")
+
+    ## create a single network plot with all values
+    dat <- sentCombine(attributes(x)[["text.var"]][["text.var"]], y[["from"]])
+    theplot <- discourse_map(dat[, "text.var"], dat[, "from"], 
+        ...)[["plot"]]
+
+    ## generate edge constant if needed
+    if (missing(edge.constant)) {
+        edge.constant <- length(unique(y[, 1])) * 2.5
+    }
+
+    ## Add colors from the aggregated list of average content rate
+    ## and output a corresponding list of network plots
+    theplot <- colorize(df_lexical_classification[, -1], theplot)
+
+    names(df_lexical_classification)[1] <- names(y)[7] <- sub("QDAPQDAP", "|", names(y)[7])
+    missing <- which(is.na(y[["word.count"]]))
+   
+    theedges <- paste2(edge_capture(theplot), sep=qsep)
+    E(theplot)$label <- qdapTools::lookup(theedges, df_lexical_classification[, "from|to"], 
+        numbformat(df_lexical_classification[, "content.rate"], digits))
+    
+    ## add class info
+    class(theplot) <- c("Network", class(theplot))
+    attributes(theplot)[["title"]] <- title
+    attributes(theplot)[["legend.gradient"]] <- cols
+    attributes(theplot)[["network.type"]] <- "lexical_classification"
+    attributes(theplot)[["legend.label"]] <- c("Functional", "Content")
+    attributes(theplot)[["n.color.breaks"]] <- max.color.breaks
+    attributes(theplot)[["color.locs"]] <- as.numeric(cuts)    
+    theplot
+}
 
 
 
