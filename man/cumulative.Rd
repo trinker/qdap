@@ -2,10 +2,12 @@
 \name{cumulative}
 \alias{cumulative}
 \alias{cumulative.animated_formality}
+\alias{cumulative.animated_lexical_classification}
 \alias{cumulative.animated_polarity}
 \alias{cumulative.combo_syllable_sum}
 \alias{cumulative.end_mark}
 \alias{cumulative.formality}
+\alias{cumulative.lexical_classification}
 \alias{cumulative.polarity}
 \alias{cumulative.pos}
 \alias{cumulative.pos_by}
@@ -23,6 +25,10 @@ cumulative(x, ...)
 \method{cumulative}{pos_by}(x, ...)
 
 \method{cumulative}{animated_formality}(x, ...)
+
+\method{cumulative}{lexical_classification}(x, ...)
+
+\method{cumulative}{animated_lexical_classification}(x, ...)
 
 \method{cumulative}{polarity}(x, ...)
 
@@ -54,6 +60,12 @@ sentences).
 sentences).
 
 \code{cumulative.animated_formality} - Generate animated formality over time
+(duration in sentences).
+
+\code{cumulative.lexical_classification} - Generate lexical_classification over time (duration in
+sentences).
+
+\code{cumulative.animated_lexical_classification} - Generate animated lexical_classification over time
 (duration in sentences).
 
 \code{cumulative.polarity} - Generate polarity over time (duration in

@@ -1382,6 +1382,17 @@ Network.formality <- function(x, contextual = "yellow", formal = "red",
     E(theplot)$label <-lookup(theedges, df_formality[, "from|to"], 
         numbformat(df_formality[, "prop_formal"], digits))
 
+    ## Set up widths and colors
+    df_formality[, "prop_wc"] <- df_formality[, "wc"]/sum(df_formality[, "wc"])
+    df_formality[, "width"] <- edge.constant*df_formality[, "prop_wc"]
+    tcols <- df_formality[, c("from", "to", "color"), drop=FALSE]
+    widths <- df_formality[, c("from", "to", "width"), drop=FALSE]
+    widths[, "width"] <- ceiling(widths[, "width"])
+    ekey <- paste2(edge_capture(theplot), sep=qsep)
+    ckey <- colpaste2df(tcols, 1:2, sep = qsep, keep.orig=FALSE)[, 2:1]
+    wkey <- colpaste2df(widths, 1:2, sep = qsep, keep.orig=FALSE)[, 2:1]
+    E(theplot)$width <- NAer(ekey %l% wkey, 1)    
+    
     ## add class info
     class(theplot) <- c("Network", class(theplot))
     attributes(theplot)[["title"]] <- title

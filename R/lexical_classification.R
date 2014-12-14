@@ -133,9 +133,11 @@
 #' ## EXAMPLE 4 (text plot)
 #' Animate(lex_ani2, type="text")
 #' 
-#' #=====================#
-#' ## Complex Animation ##
-#' #=====================#
+#' #======================#
+#' ## Complex Animations ##
+#' #======================#
+#' ## EXAMPLE 1: Network + Text + Bar
+#'  
 #' library(animation)
 #' library(grid)
 #' library(gridBase)
@@ -256,6 +258,79 @@
 #' 
 #' FUN(TRUE)
 #' 
+#' ## EXAMPLE 2: Line + Text + Bar
+#' ## Generate a folder
+#' loc2 <- reports::folder(animation_lexical_classification2)
+#' setwd(loc2)
+#' 
+#' lex_ani2 <- lexical_classification(mraja1spl$dialogue, mraja1spl$person)
+#' 
+#' ## Set up the bar version
+#' lex_bar <- Animate(lex_ani2, type="bar")
+#' cumline <- cumulative(lex_bar)
+#' lex_line <- plot(cumline)
+#' ylims <- range(cumline[[1]][-c(1:100)]) + c(-.1, .1)
+#' 
+#' ## Set up the text
+#' lex_text <- Animate(lex_ani2, type="text", size = 4, width = 80)
+#' 
+#' 
+#' lex_line_text_bar <- Map(function(x, y, z){
+#' 
+#'     mar <- theme(plot.margin = unit(c(0, .5, 0, .25), "cm"))
+#' 
+#'     gA <- ggplotGrob(x + mar + 
+#'         theme(panel.background = element_rect(fill = NA, colour = NA), 
+#'             panel.border = element_rect(fill = NA, colour = NA),
+#'             plot.background = element_rect(fill = NA, colour = NA)))
+#'     gB <- ggplotGrob(y + mar)
+#'     gC <- ggplotGrob(z + mar + ylab("Average Content Rate") + 
+#'         coord_cartesian(ylim = ylims) +
+#'         ggtitle("Average Content Rate: Romeo & Juliet Act 1"))
+#' 
+#'     maxWidth <- grid::unit.pmax(gA$widths[2:5], gB$widths[2:5], gC$widths[2:5])
+#'     gA$widths[2:5] <- as.list(maxWidth)
+#'     gB$widths[2:5] <- as.list(maxWidth)
+#'     gC$widths[2:5] <- as.list(maxWidth)
+#'     out <- arrangeGrob(gC, gA, gB, ncol=1, heights = c(.38, .25, .37))
+#'     ## grid.draw(out)
+#'     invisible(out)
+#' 
+#' }, lex_text, lex_bar, lex_line)
+#' 
+#' 
+#' FUN2 <- function(follow=FALSE, theseq = seq_along(lex_line_text_bar)) {
+#' 
+#' 
+#'     lapply(theseq, function(i) {
+#'         if (follow) {
+#'             png(file=sprintf("%s/images/Rplot%s.png", loc2, i),
+#'                 width=750, height=875)
+#'         }
+#'  
+#'         print(lex_line_text_bar[[i]])
+#'         animation::ani.pause()
+#' 
+#'         if (follow) {
+#'             dev.off()
+#'         }
+#'     })
+#' 
+#' }
+#' 
+#' FUN2()
+#' 
+#' ## Detect OS
+#' type <- if(.Platform$OS.type == "windows") shell else system
+#' 
+#' library(animation)
+#' saveHTML(FUN2(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
+#'     ani.height = 1000, ani.width=750,
+#'     outdir = loc2, single.opts =
+#'     "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0")
+#' 
+#' FUN2(TRUE)
+#' 
 #' #==================#
 #' ## Static Network ##
 #' #==================#
@@ -275,6 +350,28 @@
 #' dev.off()
 #' m + theme_nightheat(title="Lexical Content Discourse Map",
 #'     vertex.label.color = "grey50")
+#'     
+#' #==================================#
+#' ## Content Rate Over Time Example ##
+#' #==================================#
+#' lexpres <- lapply(with( pres_debates2012, split(dialogue, time)), function(x) {
+#'     lexical_classification(x)
+#' })
+#' lexplots <- lapply(seq_along(lexpres), function(i) {
+#'     dat <- cumulative(lexpres[[i]])
+#'     m <- plot(dat)
+#'     if (i != 2) m <- m + ylab("")  
+#'     if (i == 2) m <- m + ylab("Average Content Rate") 
+#'     if (i != 3) m <- m + xlab(NULL)
+#'     if (i != 1) m <- m + theme(plot.margin=unit(c(0, 1, 0, .5) + .1, "lines"))
+#'     m + ggtitle(paste("Debate", i)) + 
+#'         coord_cartesian(xlim = c(300, length(dat[[1]])),
+#'             ylim = unlist(range(dat[[1]][-c(1:300)]) + c(-.25, .25)))
+#' })
+#' 
+#' library(grid)
+#' library(gridExtra)
+#' do.call(grid.arrange, lexplots)
 #' }
 lexical_classification <- function(text.var, grouping.var = NULL,
     order.by.lexical_classification = TRUE,
@@ -1527,6 +1624,16 @@ Network.lexical_classification <- function(x, functional = "yellow", content = "
     theedges <- paste2(edge_capture(theplot), sep=qsep)
     E(theplot)$label <- qdapTools::lookup(theedges, df_lexical_classification[, "from|to"], 
         numbformat(df_lexical_classification[, "content.rate"], digits))
+
+    ## Set up widths and colors
+    df_lexical_classification[, "width"] <- edge.constant*df_lexical_classification[, "prop_wc"]
+    tcols <- df_lexical_classification[, c("from", "to", "color"), drop=FALSE]
+    widths <- df_lexical_classification[, c("from", "to", "width"), drop=FALSE]
+    widths[, "width"] <- ceiling(widths[, "width"])
+    ekey <- paste2(edge_capture(theplot), sep=qsep)
+    ckey <- colpaste2df(tcols, 1:2, sep = qsep, keep.orig=FALSE)[, 2:1]
+    wkey <- colpaste2df(widths, 1:2, sep = qsep, keep.orig=FALSE)[, 2:1]
+    E(theplot)$width <- NAer(ekey %l% wkey, 1)
     
     ## add class info
     class(theplot) <- c("Network", class(theplot))
@@ -1539,5 +1646,138 @@ Network.lexical_classification <- function(x, functional = "yellow", content = "
     theplot
 }
 
+
+#' \code{cumulative.lexical_classification} - Generate lexical_classification over time (duration in 
+#' sentences).
+#' @rdname cumulative
+#' @export
+#' @method cumulative lexical_classification
+cumulative.lexical_classification <- function (x, ...) {
+    keeps <- !is.na(preprocessed(x)[["content.rate"]])
+    y <- preprocessed(x)[["content.rate"]][keeps]
+    out <- list(cumulative_average_content_rate = cummean(y))
+    class(out) <- "cumulative_lexical_classification"
+    out
+}
+
+#' Plots a cumulative_lexical_classification Object
+#' 
+#' Plots a cumulative_lexical_classification object.
+#' 
+#' @param x The cumulative_lexical_classification object.
+#' @param \ldots ignored
+#' @method plot cumulative_lexical_classification 
+#' @export
+plot.cumulative_lexical_classification <- function(x, ...){
+
+    len <- length(x[[1]])
+    cumlexical_classification <- data.frame(cum_mean = x[[1]], Time = 1:len) 
+
+    ggplot2::ggplot() + ggplot2::theme_bw() +
+        ggplot2::geom_smooth(data = cumlexical_classification, ggplot2::aes_string(y="cum_mean", 
+            x = "Time")) +
+        ggplot2::geom_hline(y=mean(x[[1]]), color="grey30", size=1, alpha=.3, linetype=2) + 
+        ggplot2::annotate("text", x = len/2, y = mean(x[[1]]), color="grey30", 
+            label = "Average Content Rate", vjust = .3, size=4) +
+        ggplot2::geom_line(data = cumlexical_classification, ggplot2::aes_string(y="cum_mean", 
+            x = "Time"), size=1) +
+        ggplot2::ylab("Cumulative Average Content Rate") + 
+        ggplot2::xlab("Duration") +
+        ggplot2::scale_x_continuous(expand = c(0, 0), limits = c(0, len)) +
+        ggplot2::scale_y_continuous(labels=function(x) paste0(x, "%"))
+
+}
+
+#' Prints a cumulative_lexical_classification Object
+#' 
+#' Prints a cumulative_lexical_classification  object.
+#' 
+#' @param x The cumulative_lexical_classification object.
+#' @param \ldots ignored
+#' @method print cumulative_lexical_classification
+#' @export
+print.cumulative_lexical_classification <- function(x, ...) {
+    print(plot.cumulative_lexical_classification(x, ...))
+}
+
+#' \code{cumulative.animated_lexical_classification} - Generate animated lexical_classification over time 
+#' (duration in sentences).
+#' @rdname cumulative
+#' @export
+#' @method cumulative animated_lexical_classification
+cumulative.animated_lexical_classification <- function(x, ...) {
+
+    if(attributes(x)[["type"]] != "bar") {
+        stop("Output must be from an `Animate.lexical_classification` when `type =\"bar\"`")
+    }
+
+    out <- c(0, unlist(lapply(x, grab_ave_lexical_classification), use.names = FALSE))
+    avelex <- tail(out, 1)
+    len <- length(out)
+    
+    output <- data.frame(cum_mean = out, Time = 1:len, drop=TRUE) 
+
+    class(output) <- c("cumulative_animated_lexical_classification", class(output))
+    attributes(output)[["length"]] <- len
+    attributes(output)[["average.lexical_classification"]] <- avelex   
+    attributes(output)[["range"]] <- x[[1]][["scales"]][["scales"]][[1]][["limits"]]  
+    output
+}
+
+#' Plots a cumulative_animated_lexical_classification Object
+#' 
+#' Plots a cumulative_animated_lexical_classification object.
+#' 
+#' @param x The cumulative_animated_lexical_classification object.
+#' @param \ldots ignored
+#' @method plot cumulative_animated_lexical_classification 
+#' @export
+plot.cumulative_animated_lexical_classification <- function(x, ...){
+   
+    output <- lapply(1:nrow(x), function(i) {
+
+        ggplot2::ggplot() + ggplot2::theme_bw() +
+            ggplot2::geom_line(data = x[1:i, ,drop=FALSE], ggplot2::aes_string(y="cum_mean", 
+                x = "Time"), size=1) +
+            ggplot2::geom_hline(yintercept=50, size=1, alpha=.4, color="grey50", linetype="dashed") + 
+            ggplot2::geom_hline(y=attributes(x)[["average.lexical_classification"]], 
+                color="grey30", size=1, alpha=.3) + 
+            ggplot2::ylab("Cumulative Average Content Rate") + 
+            ggplot2::xlab("Duration") +
+            ggplot2::scale_x_continuous(expand = c(0, 0), 
+                limits = c(0, attributes(x)[["length"]])) +
+            ggplot2::ylim(range(x[["cum_mean"]])) +
+            ggplot2::annotate("point", y = x[i, "cum_mean"], 
+                x =x[i, "Time"], colour = "red", size = 1.5) +
+            ggplot2::scale_y_continuous(labels=function(x) paste0(x, "%"))
+    })
+
+    output[[1]][["layers"]][[4]][["geom_params"]][["colour"]] <- NA
+    output[[length(output)]] <- output[[length(output)]] + 
+        ggplot2::geom_smooth(data = x, 
+            ggplot2::aes_string(y="cum_mean", x = "Time")) 
+
+    output
+}
+
+#' Prints a cumulative_animated_lexical_classification Object
+#' 
+#' Prints a cumulative_animated_lexical_classification  object.
+#' 
+#' @param x The cumulative_animated_lexical_classification object.
+#' @param \ldots ignored
+#' @method print cumulative_animated_lexical_classification
+#' @export
+print.cumulative_animated_lexical_classification <- function(x, ...) {
+    print(plot.cumulative_animated_lexical_classification(x, ...))
+}
+
+grab_ave_lexical_classification <- function(x, left="Average Discourse Content Rate:", 
+    right = "%") {
+  
+    genXtract(x[["labels"]][["title"]], left, right) %>% 
+    Trim() %>% 
+    as.numeric() 
+}
 
 

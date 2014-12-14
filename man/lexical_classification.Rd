@@ -142,9 +142,11 @@ Animate(lex_ani2, type="bar")
 ## EXAMPLE 4 (text plot)
 Animate(lex_ani2, type="text")
 
-#=====================#
-## Complex Animation ##
-#=====================#
+#======================#
+## Complex Animations ##
+#======================#
+## EXAMPLE 1: Network + Text + Bar
+
 library(animation)
 library(grid)
 library(gridBase)
@@ -265,6 +267,79 @@ saveHTML(FUN(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
 
 FUN(TRUE)
 
+## EXAMPLE 2: Line + Text + Bar
+## Generate a folder
+loc2 <- reports::folder(animation_lexical_classification2)
+setwd(loc2)
+
+lex_ani2 <- lexical_classification(mraja1spl$dialogue, mraja1spl$person)
+
+## Set up the bar version
+lex_bar <- Animate(lex_ani2, type="bar")
+cumline <- cumulative(lex_bar)
+lex_line <- plot(cumline)
+ylims <- range(cumline[[1]][-c(1:100)]) + c(-.1, .1)
+
+## Set up the text
+lex_text <- Animate(lex_ani2, type="text", size = 4, width = 80)
+
+
+lex_line_text_bar <- Map(function(x, y, z){
+
+    mar <- theme(plot.margin = unit(c(0, .5, 0, .25), "cm"))
+
+    gA <- ggplotGrob(x + mar +
+        theme(panel.background = element_rect(fill = NA, colour = NA),
+            panel.border = element_rect(fill = NA, colour = NA),
+            plot.background = element_rect(fill = NA, colour = NA)))
+    gB <- ggplotGrob(y + mar)
+    gC <- ggplotGrob(z + mar + ylab("Average Content Rate") +
+        coord_cartesian(ylim = ylims) +
+        ggtitle("Average Content Rate: Romeo & Juliet Act 1"))
+
+    maxWidth <- grid::unit.pmax(gA$widths[2:5], gB$widths[2:5], gC$widths[2:5])
+    gA$widths[2:5] <- as.list(maxWidth)
+    gB$widths[2:5] <- as.list(maxWidth)
+    gC$widths[2:5] <- as.list(maxWidth)
+    out <- arrangeGrob(gC, gA, gB, ncol=1, heights = c(.38, .25, .37))
+    ## grid.draw(out)
+    invisible(out)
+
+}, lex_text, lex_bar, lex_line)
+
+
+FUN2 <- function(follow=FALSE, theseq = seq_along(lex_line_text_bar)) {
+
+
+    lapply(theseq, function(i) {
+        if (follow) {
+            png(file=sprintf("\%s/images/Rplot\%s.png", loc2, i),
+                width=750, height=875)
+        }
+
+        print(lex_line_text_bar[[i]])
+        animation::ani.pause()
+
+        if (follow) {
+            dev.off()
+        }
+    })
+
+}
+
+FUN2()
+
+## Detect OS
+type <- if(.Platform$OS.type == "windows") shell else system
+
+library(animation)
+saveHTML(FUN2(), autoplay = FALSE, loop = TRUE, verbose = FALSE,
+    ani.height = 1000, ani.width=750,
+    outdir = loc2, single.opts =
+    "'controls': ['first', 'previous', 'play', 'next', 'last', 'loop', 'speed'], 'delayMin': 0")
+
+FUN2(TRUE)
+
 #==================#
 ## Static Network ##
 #==================#
@@ -284,6 +359,28 @@ m + theme_nightheat
 dev.off()
 m + theme_nightheat(title="Lexical Content Discourse Map",
     vertex.label.color = "grey50")
+
+#==================================#
+## Content Rate Over Time Example ##
+#==================================#
+lexpres <- lapply(with( pres_debates2012, split(dialogue, time)), function(x) {
+    lexical_classification(x)
+})
+lexplots <- lapply(seq_along(lexpres), function(i) {
+    dat <- cumulative(lexpres[[i]])
+    m <- plot(dat)
+    if (i != 2) m <- m + ylab("")
+    if (i == 2) m <- m + ylab("Average Content Rate")
+    if (i != 3) m <- m + xlab(NULL)
+    if (i != 1) m <- m + theme(plot.margin=unit(c(0, 1, 0, .5) + .1, "lines"))
+    m + ggtitle(paste("Debate", i)) +
+        coord_cartesian(xlim = c(300, length(dat[[1]])),
+            ylim = unlist(range(dat[[1]][-c(1:300)]) + c(-.25, .25)))
+})
+
+library(grid)
+library(gridExtra)
+do.call(grid.arrange, lexplots)
 }
 }
 \references{

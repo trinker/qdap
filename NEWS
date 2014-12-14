@@ -34,6 +34,9 @@ BUG FIXES
   The bug has been fixed and a unit test put in place to ensure the bug is not
   reintroduced.
 
+* `Network.formality` did not include edge width handling.  This has been 
+  corrected.
+
 NEW FEATURES
 
 * `word_length` function added to give counts of word lenth usage by grouping 
@@ -46,7 +49,9 @@ NEW FEATURES
   functionality into a convenient function.
 
 * `lexical_classification` provides a means of assessing content vs. functional 
-  word usage at the grouping variable and sentence level. 
+  word usage at the grouping variable and sentence level. The class comes with 
+  generic methods for `preprocessed`, `scores` (and plots of these methods),
+  `Animated`, `Network`, `cumulative` and `Animate.cumulative`.
 
 IMPROVEMENTS
 

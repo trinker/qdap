@@ -319,7 +319,6 @@
 #' ## Set up the plotting function
 #' oopt <- animation::ani.options(interval = 0.1)
 #' 
-#' 
 #' FUN2 <- function(follow=FALSE, theseq = seq_along(bgb)) {
 #' 
 #'     Title <- "Animated Polarity: 2012 Presidential Debate 2"
