@@ -176,6 +176,7 @@ sd_section("Measures",
     "diversity",
     "formality",
     "kullback_leibler",
+    "lexical_classification",
     "polarity",
     "word_cor",
     "word_proximity"
@@ -243,6 +244,7 @@ sd_section("Network Plots",
     "discourse_map", 
     "Network",
     "Network.formality",      
+    "Network.lexical_classification",      
     "Network.polarity",
     "qtheme",
     "theme_badkitchen",           
@@ -261,7 +263,8 @@ sd_section("Cumulative Plots",
   c(
     "cumulative", 
     "cumulative.end_mark",       
-    "cumulative.formality",      
+    "cumulative.formality",   
+    "cumulative.lexical_classification",      
     "cumulative.polarity"
   )
 )
@@ -274,7 +277,9 @@ sd_section("Animation",
     "Animate.formality", 
     "Animate.gantt",
     "Animate.gantt_plot", 
+    "Animate.lexical_classification",      
     "Animate.polarity",
+    "Animate.character",
     "vertex_apply"
   )
 )
