@@ -57,6 +57,9 @@ And constructed with the following guidelines:
 
 * `polarity` takes `polarity.frame` with phrases (words with spaces).
 
+* The `Animate` method for the classes: `polarity`, `formality`, gains the ability to print 
+  corresponding animated text for combined use with oter `Animated` methods.
+
 
 **CHANGES**
 

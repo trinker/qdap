@@ -1503,8 +1503,6 @@ Animate_polarity_text <- function(x, wc.time = TRUE, time.constant = 2,
     txt <- lapply(y[["text.var"]], function(x){
             paste(strwrap(x, width), collapse="\n")
         }) %>% unlist
-    
-    
 
     theplot <- ggplot2::ggplot(data.frame(x=0:1, y=0:1), ggplot2::aes(x, x, y=y)) + 
         ggplot2::geom_blank() + ggplot2::theme_bw() +

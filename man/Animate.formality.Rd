@@ -8,7 +8,8 @@
   digits = 3, current.color = "black", current.speaker.color = NULL,
   non.speaker.color = NA, missing.color = "purple",
   all.color.line = "red", plus.300.color = "grey40",
-  under.300.color = "grey88", as.network = TRUE, ...)
+  under.300.color = "grey88", type = "network", width = 65, coord = c(0,
+  0.5), just = c(0, 0.5), ...)
 }
 \arguments{
 \item{x}{A \code{\link[qdap]{formality}} object.}
@@ -51,8 +52,16 @@ color line if \code{network = FALSE}.}
 \item{under.300.color}{The bar color to use for grouping variables less
 than 300 words per Heylighen & Dewaele's (2002) minimum word recommendations.}
 
-\item{as.network}{logical.  If \code{TRUE} the animation is a network plot.
-If \code{FALSE} the animation is a hybrid bar plot.}
+\item{type}{Character string of either \code{"network"} (as a network
+plot), \code{"network"} (as a bar plot), or \code{"text"} (as a simple
+colored text plot).}
+
+\item{width}{The width to break text at if \code{type = "text"}.}
+
+\item{coord}{The x/y coordinate to plot the test if \code{type = "text"}.}
+
+\item{just}{The \code{hjust} and \code{vjust} values to use for the text if
+\code{type = "text"}.}
 
 \item{\ldots}{Other arguments passed to \code{\link[qdap]{discourse_map}}.}
 }
