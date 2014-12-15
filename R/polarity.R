@@ -1570,7 +1570,8 @@ Animate_polarity_text <- function(x, wc.time = TRUE, time.constant = 2,
 #' @param coord The x/y coordinate to plot the test if \code{type = "text"}.
 #' @param just The \code{hjust} and \code{vjust} values to use for the text if 
 #' \code{type = "text"}.
-#' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}}.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}} or
+#' \code{\link[ggplot2]{annotate}} if \code{type = "text"}.
 #' @note The width of edges is based on words counts on that edge until that 
 #' moment divided by total number of words used until that moment.  Thicker 
 #' edges tend to thin as time passes.  The actual duration the current edge 
@@ -1615,9 +1616,9 @@ Animate.polarity <- function(x, negative = "blue", positive = "red",
 }
 
 
-#' Prints a animated_polarity  Object
+#' Prints an animated_polarity  Object
 #' 
-#' Prints a animated_polarity  object.
+#' Prints an animated_polarity  object.
 #' 
 #' @param x The animated_polarity  object.
 #' @param title The title of the plot.
@@ -1674,9 +1675,9 @@ print.animated_polarity <- function(x, title = NULL,
 
 
 
-#' Plots a animated_polarity  Object
+#' Plots an animated_polarity  Object
 #' 
-#' Plots a animated_polarity  object.
+#' Plots an animated_polarity  object.
 #' 
 #' @param x The animated_polarity  object.
 #' @param \ldots Other arguments passed to \code{print.animated_polarity }.

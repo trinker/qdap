@@ -58,12 +58,13 @@ colored text plot).}
 
 \item{width}{The width to break text at if \code{type = "text"}.}
 
-\item{coord}{The x/y coordinate to plot the test if \code{type = "text"}.}
+\item{coord}{The x/y coordinate to plot the text if \code{type = "text"}.}
 
 \item{just}{The \code{hjust} and \code{vjust} values to use for the text if
 \code{type = "text"}.}
 
-\item{\ldots}{Other arguments passed to \code{\link[qdap]{discourse_map}}.}
+\item{\ldots}{Other arguments passed to \code{\link[qdap]{discourse_map}} or
+\code{\link[ggplot2]{annotate}} if \code{type = "text"}.}
 }
 \description{
 \code{Animate.formality} - Animate a \code{\link[qdap]{formality}} object.

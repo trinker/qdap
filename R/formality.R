@@ -1183,10 +1183,11 @@ Animate_formality_text <- function(x, wc.time = TRUE, time.constant = 2,
 #' plot), \code{"network"} (as a bar plot), or \code{"text"} (as a simple 
 #' colored text plot).
 #' @param width The width to break text at if \code{type = "text"}.
-#' @param coord The x/y coordinate to plot the test if \code{type = "text"}.
+#' @param coord The x/y coordinate to plot the text if \code{type = "text"}.
 #' @param just The \code{hjust} and \code{vjust} values to use for the text if 
 #' \code{type = "text"}.
-#' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}}.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}} or
+#' \code{\link[ggplot2]{annotate}} if \code{type = "text"}.
 #' @note The width of edges is based on words counts on that edge until that 
 #' moment divided by total number of words used until that moment.  Thicker 
 #' edges tend to thin as time passes.  The actual duration the current edge 

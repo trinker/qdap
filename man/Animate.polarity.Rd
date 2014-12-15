@@ -54,7 +54,8 @@ colored text plot).}
 \item{just}{The \code{hjust} and \code{vjust} values to use for the text if
 \code{type = "text"}.}
 
-\item{\ldots}{Other arguments passed to \code{\link[qdap]{discourse_map}}.}
+\item{\ldots}{Other arguments passed to \code{\link[qdap]{discourse_map}} or
+\code{\link[ggplot2]{annotate}} if \code{type = "text"}.}
 }
 \description{
 \code{Animate.polarity} - Animate a \code{\link[qdap]{polarity}} object.

@@ -53,12 +53,17 @@ NEW FEATURES
   generic methods for `preprocessed`, `scores` (and plots of these methods),
   `Animated`, `Network`, `cumulative` and `Animate.cumulative`.
 
+* `Animate.charater` added as a generic method tat allows for the animation of 
+  text.  This is useful in conjunction with other \code{Animate} objects to 
+  create complex animations with accompanying text.
+
 IMPROVEMENTS
 
 * `polarity` takes `polarity.frame` with phrases (words with spaces).
 
-* The `Animate` method for the classes: `polarity`, `formality`, gains the ability to print 
-  corresponding animated text for combined use with oter `Animated` methods.
+* The `Animate` method for the classes: `polarity` & `formality` gains the 
+  ability to print corresponding animated text for combined use with oter 
+  `Animated` methods.
 
 
 CHANGES

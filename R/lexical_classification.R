@@ -1403,7 +1403,8 @@ Animate_lexical_classification_text <- function(x, wc.time = TRUE, time.constant
 #' @param coord The x/y coordinate to plot the test if \code{type = "text"}.
 #' @param just The \code{hjust} and \code{vjust} values to use for the text if 
 #' \code{type = "text"}.
-#' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}}.
+#' @param \ldots Other arguments passed to \code{\link[qdap]{discourse_map}} or
+#' \code{\link[ggplot2]{annotate}} if \code{type = "text"}.
 #' @note The width of edges is based on words counts on that edge until that 
 #' moment divided by total number of words used until that moment.  Thicker 
 #' edges tend to thin as time passes.  The actual duration the current edge 
@@ -1451,9 +1452,9 @@ Animate.lexical_classification <- function(x, type = "network", content = "red",
 
 }
 
-#' Prints a animated_lexical_classification  Object
+#' Prints an animated_lexical_classification  Object
 #' 
-#' Prints a animated_lexical_classification  object.
+#' Prints an animated_lexical_classification  object.
 #' 
 #' @param x The animated_lexical_classification  object.
 #' @param title The title of the plot.
@@ -1507,9 +1508,9 @@ print.animated_lexical_classification <- function(x, title = NULL,
 }
 
 
-#' Plots a animated_lexical_classification  Object
+#' Plots an animated_lexical_classification  Object
 #' 
-#' Plots a animated_lexical_classification  object.
+#' Plots an animated_lexical_classification  object.
 #' 
 #' @param x The animated_lexical_classification  object.
 #' @param \ldots Other arguments passed to \code{print.animated_lexical_classification }.
