@@ -65,6 +65,9 @@ IMPROVEMENTS
   ability to print corresponding animated text for combined use with oter 
   `Animated` methods.
 
+* `multigsub`/`mgsub` get a speed boost through better programming choices. See
+  issue #201 for details.  Thank you to @Alexey Ferapontov for his critical post
+  http://stackoverflow.com/q/27367914/1000343 that inspired the changes.
 
 CHANGES
 

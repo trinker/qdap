@@ -5,13 +5,12 @@
 \alias{sub_holder}
 \title{Multiple gsub}
 \usage{
-multigsub(pattern, replacement = NULL, text.var, leadspace = FALSE,
+multigsub(pattern, replacement, text.var, leadspace = FALSE,
   trailspace = FALSE, fixed = TRUE, trim = TRUE, order.pattern = fixed,
   ...)
 
-mgsub(pattern, replacement = NULL, text.var, leadspace = FALSE,
-  trailspace = FALSE, fixed = TRUE, trim = TRUE, order.pattern = fixed,
-  ...)
+mgsub(pattern, replacement, text.var, leadspace = FALSE, trailspace = FALSE,
+  fixed = TRUE, trim = TRUE, order.pattern = fixed, ...)
 
 sub_holder(pattern, text.var, alpha.type = TRUE, ...)
 }
@@ -33,7 +32,7 @@ replacements.}
 Overrides all conflicting arguments.}
 
 \item{trim}{logical.  If \code{TRUE} leading and trailing white spaces are
-removed.}
+removed and multiple white spaces are reduced to a single white space.}
 
 \item{order.pattern}{logical.  If \code{TRUE} and \code{fixed = TRUE}, the
 \code{pattern} string is sorted by number of characters to prevent substrings

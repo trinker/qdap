@@ -65,6 +65,9 @@ And constructed with the following guidelines:
   ability to print corresponding animated text for combined use with oter 
   `Animated` methods.
 
+* `multigsub`/`mgsub` get a speed boost through better programming choices. See
+  <a href="https://github.com/trinker/qdap/issues/201">issue #201</a> for details.  Thank you to @Alexey Ferapontov for his critical post
+  <a href="http://stackoverflow.com/q/27367914/1000343" target="_blank">http://stackoverflow.com/q/27367914/1000343</a> that inspired the changes.
 
 **CHANGES**
 

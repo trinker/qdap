@@ -14,7 +14,7 @@
 #' @param fixed logical. If \code{TRUE}, pattern is a string to be matched as is. 
 #' Overrides all conflicting arguments.
 #' @param trim logical.  If \code{TRUE} leading and trailing white spaces are 
-#' removed.
+#' removed and multiple white spaces are reduced to a single white space.
 #' @param order.pattern logical.  If \code{TRUE} and \code{fixed = TRUE}, the 
 #' \code{pattern} string is sorted by number of characters to prevent substrings 
 #' replacing meta strings (e.g., \code{pattern = c("the", "then")} resorts to 
@@ -52,43 +52,26 @@
 #' mtabulate(strsplit(m2$unhold(gsub("[^0-9]", "", m2$output)), ""))
 #' }
 multigsub <-
-function(pattern, replacement = NULL, text.var, leadspace = FALSE, 
-    trailspace = FALSE, fixed = TRUE, trim = TRUE, order.pattern = fixed, ...){
+function (pattern, replacement, text.var, leadspace = FALSE, 
+    trailspace = FALSE, fixed = TRUE, trim = TRUE, order.pattern = fixed, 
+    ...) {
 
-    if (leadspace | trailspace) {
-        replacement <- spaste(replacement, trailing = trailspace, 
-            leading = leadspace)
-    }
+    if (leadspace | trailspace) replacement <- spaste(replacement, trailing = trailspace, leading = leadspace)
 
-    ## replaces the larger n character words first
     if (fixed && order.pattern) {
-        if (!is.null(replacement) && length(replacement) > 1) {
-            replacement <- replacement[rev(order(nchar(pattern)))]
-        }
-        pattern <- pattern[rev(order(nchar(pattern)))]
+        ord <- rev(order(nchar(pattern)))
+        pattern <- pattern[ord]
+        if (length(replacement) != 1) replacement <- replacement[ord]
+    }
+    if (length(replacement) == 1) replacement <- rep(replacement, length(pattern))
+   
+    for (i in seq_along(pattern)){
+        text.var <- gsub(pattern[i], replacement[i], text.var, fixed = fixed, ...)
     }
 
-    key <- data.frame(pat=pattern, rep=replacement, 
-        stringsAsFactors = FALSE)
-
-    msubs <-function(K, x, trim, ...){
-        sapply(seq_len(nrow(K)), function(i){
-                x <<- gsub(K[i, 1], K[i, 2], x, fixed = fixed, ...)
-            }
-        )
-        if (trim) x <- gsub(" +", " ", x)
-        return(x)
-    }
-
-    if (trim) {
-        x <- Trim(msubs(K=key, x=text.var, trim = trim, ...))
-    } else {    
-        x <- msubs(K=key, x=text.var, trim = trim, ...)
-    }
-
-    return(x)
+    if (trim) text.var <- gsub("\\s+", " ", gsub("^\\s+|\\s+$", "", text.var, perl=TRUE), perl=TRUE)
+    text.var
 }
-
 
 #' @rdname multigsub
 #' @export
