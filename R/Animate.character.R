@@ -5,7 +5,7 @@
 #' objects to create complex animations with accompanying text.
 #' 
 #' character Method for Animate
-#' @param x A \code{\link[qdap]{character}} object.
+#' @param x A \code{\link[base]{character}} object.
 #' @param wc.time logical.  If \code{TRUE} weights duration of frame by word 
 #' count.
 #' @param time.constant A constant to divide the maximum word count by.  Time
@@ -17,7 +17,7 @@
 #' @param just The \code{hjust} and \code{vjust} values to use for the text.
 #' @param size The size to print the text.  Can be a vector of length 1 or equal 
 #' to the length of \code{x}.
-#' @param colo  The color to print the text.  Can be a vector of length 1 or equal 
+#' @param color  The color to print the text.  Can be a vector of length 1 or equal 
 #' to the length of \code{x}.
 #' @param border.color The \code{panel.border} color (see\code{\link[ggplot2]{theme}}).
 #' @param \ldots Other arguments passed to \code{\link[ggplot2]{annotate}}.
@@ -46,6 +46,8 @@ Animate.character <- function(x, wc.time = TRUE, time.constant = 2,
     width = 65, coord = c(.0, .5), just = c(.0, .5), 
     size = 5, color = "black", border.color = NA, ...) {
 
+    y <- NULL
+    
     txt <- lapply(x, function(y){
             paste(strwrap(y, width), collapse="\n")
         }) %>% unlist
@@ -106,20 +108,9 @@ Animate.character <- function(x, wc.time = TRUE, time.constant = 2,
 #' Prints an animated_character  object.
 #' 
 #' @param x The animated_character  object.
-#' @param title The title of the plot.
-#' @param layout \pkg{igraph} \code{layout} to use.
-#' @param seed The seed to use in plotting the graph.
 #' @param pause The length of time to pause between plots.
-#' @param legend The coordinates of the legend. See 
-#' \code{\link[plotrix]{color.legend}} for more information.
-#' @param legend.cex character expansion factor. \code{NULL} and \code{NA} are 
-#' equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.
-#' @param bg The color to be used for the background of the device region. See
-#' \code{\link[graphics]{par}} for more information. 
-#' @param net.legend.color The text legend color for the network plot.
-#' @param \ldots Other Arguments passed to \code{\link[igraph]{plot.igraph}}.
+#' @param \ldots ignored.
 #' @import igraph
-#' @importFrom plotrix color.legend
 #' @method print animated_character 
 #' @export
 print.animated_character <- function(x, pause = 0, ...){
@@ -137,7 +128,7 @@ print.animated_character <- function(x, pause = 0, ...){
 #' Plots an animated_character  object.
 #' 
 #' @param x The animated_character  object.
-#' @param \ldots Other arguments passed to \code{print.animated_character }.
+#' @param \ldots Other arguments passed to \code{print.animated_character}.
 #' @method plot animated_character 
 #' @export
 plot.animated_character  <- function(x, ...){ 

@@ -25,8 +25,8 @@ And constructed with the following guidelines:
 * The internal vignette `An Introduction to <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>` produced errors when compiled 
   by `build_qdap_vignete`.  This behavior has been fixed by using static 
   reporting.  The root of the behavior is the ability of `cm_` functions to
-  grab data from the global enviroment, which may not be the case in a `knitr`/
-  `rmarkdown` generated envioronment.
+  grab data from the global environment, which may not be the case in a `knitr`/
+  `rmarkdown` generated environment.
 
 * `polarity` no longer handled phrases (words + spaces) for `polarity.frame`.
   This behavior was caught by @Benasso <a href="http://stackoverflow.com/q/27156834/1000343." target="_blank">http://stackoverflow.com/q/27156834/1000343.</a>
@@ -39,7 +39,7 @@ And constructed with the following guidelines:
 
 **NEW FEATURES**
 
-* `word_length` function added to give counts of word lenth usage by grouping 
+* `word_length` function added to give counts of word length usage by grouping 
   variable.  See `?word_length` for details`
 
 * `word_position` function added to give counts of the position of words within 
@@ -53,7 +53,7 @@ And constructed with the following guidelines:
   generic methods for `preprocessed`, `scores` (and plots of these methods),
   `Animated`, `Network`, `cumulative` and `Animate.cumulative`.
 
-* `Animate.charater` added as a generic method tat allows for the animation of 
+* `Animate.character` added as a generic method that allows for the animation of 
   text.  This is useful in conjunction with other \code{Animate} objects to 
   create complex animations with accompanying text.
 
@@ -69,11 +69,19 @@ And constructed with the following guidelines:
   <a href="https://github.com/trinker/qdap/issues/201">issue #201</a> for details.  Thank you to @Alexey Ferapontov for his critical post
   <a href="http://stackoverflow.com/q/27367914/1000343" target="_blank">http://stackoverflow.com/q/27367914/1000343</a> that inspired the changes.
 
+* `formality` and `pos` now have minimal unit tests.
+
 **CHANGES**
 
 * The **ggplot2** package is no longer in Depends.  This means the user will 
-  have to manually laod the package to use additional ggplot2 features.   See 
+  have to manually load the package to use additional ggplot2 features.   See 
   GitHub <a href="https://github.com/trinker/qdap/issues/199">issue #199</a> for more.
+
+* `pos` now treats contractions words as 2 words.  For example the word count on
+  what's is 2 for what + is.  The previous behavior was to strip out the 
+  apostrophes.  This was undesirable as the sentence "She's cool" would have no
+  verb in the `pos` output.  This change affects `pos_by` and `formality` as 
+  well.  
 
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.0
@@ -89,8 +97,8 @@ And constructed with the following guidelines:
   The bug has been fixed as these groups are dropped and a warning given.
 
 * `phrase_net` threw an error caused by **dplyr**'s (0.3) approach to subsetting 
-  columns.  Proviously a vector was returned, now a `tbl_df` object is returned: 
-  https://github.com/hadley/dplyr/issues/587. This was adtreeded by using 
+  columns.  Previously a vector was returned, now a `tbl_df` object is returned: 
+  https://github.com/hadley/dplyr/issues/587. This was addressed by using 
   explicit `df[[index]]` rather than `df[, index]`.
 
 **NEW FEATURES**
@@ -103,7 +111,7 @@ And constructed with the following guidelines:
 
   `all_words` gains `char.keep` and `char2space` arguments to enable retention 
   of characters and multi word phrases.  These features are passed to 
-  `freq_terms` as well.  Suggestd by stackoverflow's lawyeR 
+  `freq_terms` as well.  Suggested by stackoverflow's lawyeR 
   (<a href="http://stackoverflow.com/a/26162401/1000343)." target="_blank">http://stackoverflow.com/a/26162401/1000343).</a>
 
 **CHANGES**
@@ -127,7 +135,7 @@ And constructed with the following guidelines:
   output.  This behavior has been fixed.  See GitHub <a href="https://github.com/trinker/qdap/issues/188">issue #188</a> for details.
 
 * `syn` returned antonyms for some words.  This was caused by the dictionary:
-  `qdapDictionaries::key.syn` contained antonyms and elemets the were error 
+  `qdapDictionaries::key.syn` contained antonyms and elements the were error 
   messages (character).  This has been fixed.  Reference <a href="https://github.com/trinker/qdap/issues/190">issue #190</a>. (Jingjing Zou)
 
 * The `pres_debates2012` data set contained three errors in speech attribution.
@@ -196,7 +204,7 @@ And constructed with the following guidelines:
 
 **IMPROVEMENTS**
 
-* `wfm` gains a speedup through generic classes and `tm` package integration 
+* `wfm` gains a speed-up through generic classes and `tm` package integration 
   (`strip` is no longer used in `wfm`).
 
 * `as.tdm.character` and `as.dtm.character` gain a speed boost with a `tm` 
@@ -205,7 +213,7 @@ And constructed with the following guidelines:
 * Added message to `as.data.frame.Corpus` for missing end-marks suggesting the 
   use of: `sent.split = FALSE`.
 
-* `as.Corpus` familiy of functions didn't necessarily respect document names and
+* `as.Corpus` family of functions didn't necessarily respect document names and
   sometimes used numeric sequence instead.  The introduction of a reader via
   `tm::readTabular` has fixed this.
 
@@ -613,7 +621,7 @@ A version bump necessary for Re-Submission to CRAN.
 
 **MINOR FEATURES**
 
-* `tm_corpus2wfm` added to quickly convert from a tm package `Corpus` to a <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>
+* `tm_corpus2wfm` added to quickly convert from a **tm** package `Corpus` to a <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>
   `wfm` object.
 
 * `as.wfm` added as a means to attempt to coerce a matrix to a `wfm` object.
@@ -678,7 +686,7 @@ relatively new to CRAN, made these changes sensible at this point.
 * `question_type` did not work because of changes to `lookup` that did not 
   accept a two column matrix for `key.match`.  See GitHub <a href="https://github.com/trinker/qdap/issues/127">issue #127</a> for more.
 
-* `combo_syllable.sum` threw an error if the text.var contained a cell with an 
+* `combo_syllable.sum` threw an error if the `text.var` contained a cell with an 
   all non-character ([a-z]) string.  This behavior has been fixed.
 
 * `todo` function created by `new_project` would not report completed tasks if 
@@ -696,7 +704,7 @@ relatively new to CRAN, made these changes sensible at this point.
 * `all_words` output dataframe FREQ column class has been changed from factor to 
   numeric.  Additionally, the WORDS column prints using `left.just` but retains
   traditional character properties (print class added).  `all_words` also picks
-  up apostrophe.remove and ldots (for `strip`) arguments.
+  up `apostrophe.remove` and `ldots` (for `strip`) arguments.
 
 * `gantt_plot` did not handle `fill.vars`, particularly if the fill was nested 
   within the `grouping.vars`.  This behavior has been fixed with corresponding 
@@ -837,7 +845,7 @@ relatively new to CRAN, made these changes sensible at this point.
 
 * `qheat`, `polarity.plot` and `formality.plot` pick up the argument `plot` 
   which optionally suppresses the plotting.  This is useful if the user is 
-  operating in **knitr**, **sewave**, etc. and wishes to alter/add onto the plot.
+  operating in **knitr**, **sweave**, etc. and wishes to alter/add onto the plot.
 
 * `lookup` now takes `missing = NULL`.  This results in the original values in
   `terms` corresponding to the missing elements being retained.
@@ -1035,7 +1043,7 @@ qdap 0.2.3
   been eliminated.
 
 * `termco` would eliminate &gt; 1 columns matching an identical search.term found 
-  in a second vector of match.list.  termco now counts repeated terms multiple 
+  in a second vector of match.list.  `termco` now counts repeated terms multiple 
   times.
 
 * `cm_df.transcript` did not give the correct speaker labels (fixed).
@@ -1086,5 +1094,4 @@ qdap 0.2.3
 
 * Package designed to bridge the gap between qualitative data and quantitative 
   analysis
-
 

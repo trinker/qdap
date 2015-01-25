@@ -32,6 +32,11 @@
 #' \item{percent}{The value of percent used for plotting purposes.}
 #' \item{zero.replace}{The value of zero.replace used for plotting purposes.}
 #' @rdname pos
+#' @note Note that contractions are treated as two words; for example the word 
+#' count on \bold{"what's"} is 2 for \bold{"what + is"}.  This is not consistent 
+#' with the \code{\link[qdap]{word_count}} treatment of contractions but makes 
+#' sense in a part of speech framework where a phrase such as "She's cool" is 
+#' treated as a pronoun, verb and adjective respectively for "She + is + cool".
 #' @seealso \code{\link[openNLP]{Maxent_POS_Tag_Annotator}},
 #' \code{\link[qdap]{colcomb2class}}
 #' @references \href{openNLP}{http:/opennlp.apache.org}
@@ -180,7 +185,7 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
     progress.bar = TRUE, na.omit = FALSE, digits = 1, percent = TRUE, 
     zero.replace=0, gc.rate=10){
         
-    text.var <- strip(text.var)
+    text.var <- strip(text.var, apostrophe.remove = FALSE)
     text.var[text.var == ""] <- NA
 
     if (parallel){
@@ -230,7 +235,12 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
     m2 <- data.frame(POStagged = unlist(lapply(m, "[[", 1)))
     m2$POStags <- lapply(m, "[[", 2)
     G4 <- mtabulate(m2$POStags)
-    m2$word.count <- wc(text.var)
+#    m2$word.count <- wc(text.var)  
+##   switched to apostrophe as word on 1/24/15
+    m2$word.count <- sapply(m2$POStags, function(x){
+        if (length(x) == "1" && (is.na(x) | grepl("^\\s+$", x))) return(NA)
+        length(x)
+    })
     cons <- ifelse(percent, 100, 1)
 
     G5 <- sapply(data.frame(G4, check.names = FALSE), 
@@ -257,6 +267,7 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
     class(POS) <- "pos"
     POS
 }
+
 tagPOS <-  function(text.var, PTA, ...) {
 
     if (is.na(text.var)) return(list(POStagged = NA, POStags = NA))

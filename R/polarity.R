@@ -1409,7 +1409,7 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
     class(igraph_objs) <- "animated_polarity"
     attributes(igraph_objs)[["title"]] <- title
     attributes(igraph_objs)[["timings"]] <- timings
-    attributes(igraph_objs)[["network"]] <- TRUE
+    attributes(igraph_objs)[["type"]] <- "network"
     attributes(igraph_objs)[["legend"]] <- cols
     attributes(igraph_objs)[["data"]] <- list_polarity
     igraph_objs
@@ -1463,7 +1463,7 @@ Animate_polarity_bar <- function(x, wc.time = TRUE, time.constant = 1,
     ## add class info
     class(ggplots) <- "animated_polarity"
     attributes(ggplots)[["timings"]] <- timings
-    attributes(ggplots)[["network"]] <- FALSE
+    attributes(ggplots)[["type"]] <- "bar"
     attributes(ggplots)[["legend"]] <- NULL
     attributes(ggplots)[["data"]] <- listdat
     ggplots
@@ -1565,7 +1565,7 @@ Animate_polarity_text <- function(x, wc.time = TRUE, time.constant = 2,
 #' @param ave.color.line The color to use for the average color line if 
 #' \code{type = "network"}.
 #' @param type  Character string of either \code{"network"} (as a network 
-#' plot), \code{"network"} (as a bar plot), or \code{"text"} (as a simple 
+#' plot), \code{"bar"} (as a bar plot), or \code{"text"} (as a simple 
 #' colored text plot).
 #' @param coord The x/y coordinate to plot the test if \code{type = "text"}.
 #' @param just The \code{hjust} and \code{vjust} values to use for the text if 

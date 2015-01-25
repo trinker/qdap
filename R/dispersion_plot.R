@@ -130,6 +130,31 @@
 #' }
 #' 
 #' rev_facet(x)
+#' 
+#' ## Discourse Markers: See...
+#' ## Schiffrin, D. (2001). Discourse markers: Language, meaning, and context. 
+#' ##    In D. Schiffrin, D. Tannen, & H. E. Hamilton (Eds.), The handbook of 
+#' ##    discourse analysis (pp. 54-75). Malden, MA: Blackwell Publishing.
+#' 
+#' discoure_markers <- list(
+#'     response_cries = c(" oh ", " ah ", " aha ", " ouch ", " yuk "),
+#'     back_channels = c(" uh-huh ", " uhuh ", " yeah "), 
+#'     summons = " hey ", 
+#'     justification = " because "
+#' )
+#' 
+#' (markers <- with(pres_debates2012, 
+#'     termco(dialogue, list(person, time), discoure_markers)
+#' ))
+#' plot(markers, high="red")
+#' 
+#' with(pres_debates2012, 
+#'     termco(dialogue, list(person, time), discoure_markers, elim.old = FALSE)
+#' )
+#' 
+#' with(pres_debates2012, 
+#'     dispersion_plot(dialogue, unlist(discoure_markers), person, time)
+#' )
 #' }
 dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,  
     rm.vars =NULL, color = "blue", bg.color = "grey90", horiz.color = "grey85", 

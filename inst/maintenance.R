@@ -224,3 +224,8 @@ r2dev <- function(pack = "qdap", rver = "3.0.1", dev = "C:/R/R-devel/library") {
 }
 
 
+#==============================
+# Copy from Current R to R_dev
+#==============================
+res <- devtools::revdep_check("qdap" , ignore="qdapDictionaries")
+shell.exec(res$path)

@@ -1370,7 +1370,7 @@ Animate_lexical_classification_text <- function(x, wc.time = TRUE, time.constant
 #' lexical_classification Method for Animate
 #' @param x A \code{\link[qdap]{lexical_classification}} object.
 #' @param type  Character string of either \code{"network"} (as a network 
-#' plot), \code{"network"} (as a bar plot), or \code{"text"} (as a simple 
+#' plot), \code{"bar"} (as a bar plot), or \code{"text"} (as a simple 
 #' colored text plot).
 #' @param content The color to use for 100\% lexical_classification (purely 
 #' content).

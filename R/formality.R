@@ -281,9 +281,11 @@ formality <- function(text.var, grouping.var = NULL,
     } else {                                                                         
         pos.list <- suppressWarnings(pos_by(text.var = text.var,                     
             grouping.var = NULL, digits = digits, ...))                                   
-    }                                                                              
-    text.var <- pos.list$text                                                        
-    WOR <- word_count(text.var)                                                      
+    } 
+                                                                             
+    text.var <- pos.list$text        
+    WOR <- pos.list[["POStagged"]][["word.count"]]
+##   WOR <- word_count(text.var)                                                      
     X <- pos.list[["pos.by.freq"]]                                                   
     nameX <- rownames(X)                                                             
     X <- data.frame(X)                                                               
@@ -372,7 +374,9 @@ formality <- function(text.var, grouping.var = NULL,
     colnames(dat)[1] <- "grouping"   
     ON <- sum(dat[, "pos"] == "other")
     dat[, "form.class"] <- c(rep(c("formal", "contectual"), 
-        each = (nrow(dat) - ON)/2), rep("other", ON))      
+        each = (nrow(dat) - ON)/2), rep("other", ON)) 
+
+     
     dat <- dat[rep(seq_len(dim(dat)[1]), dat[, 4]), -4]                              
     dat[, "pos"] <- factor(dat[, "pos"], levels=unique(dat[, "pos"]))                
     dat[, "form.class"] <- factor(dat[, "form.class"],                               
@@ -913,7 +917,7 @@ Animate_formality_net <- function(x, contextual, formal,
     class(igraph_objs) <- "animated_formality"
     attributes(igraph_objs)[["title"]] <- title
     attributes(igraph_objs)[["timings"]] <- timings
-    attributes(igraph_objs)[["network"]] <- TRUE
+    attributes(igraph_objs)[["type"]] <- "network"
     attributes(igraph_objs)[["legend"]] <- cols
     attributes(igraph_objs)[["data"]] <- list_formality
     igraph_objs
@@ -1045,7 +1049,7 @@ Animate_formality_bar <- function(x, wc.time = TRUE, time.constant = 2,
     ## add class info
     class(ggplots) <- "animated_formality"
     attributes(ggplots)[["timings"]] <- timings
-    attributes(ggplots)[["network"]] <- FALSE
+    attributes(ggplots)[["type"]] <- "bar"
     attributes(ggplots)[["legend"]] <- NULL
     attributes(ggplots)[["data"]] <- listdat
     ggplots
@@ -1180,7 +1184,7 @@ Animate_formality_text <- function(x, wc.time = TRUE, time.constant = 2,
 #' @param under.300.color The bar color to use for grouping variables less 
 #' than 300 words per Heylighen & Dewaele's (2002) minimum word recommendations.
 #' @param type  Character string of either \code{"network"} (as a network 
-#' plot), \code{"network"} (as a bar plot), or \code{"text"} (as a simple 
+#' plot), \code{"bar"} (as a bar plot), or \code{"text"} (as a simple 
 #' colored text plot).
 #' @param width The width to break text at if \code{type = "text"}.
 #' @param coord The x/y coordinate to plot the text if \code{type = "text"}.
@@ -1687,4 +1691,3 @@ grab_ave_formality <- function(x, left="Total Discourse Formality:",
     Trim() %>% 
     as.numeric() 
 }
-
