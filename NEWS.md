@@ -37,6 +37,10 @@ And constructed with the following guidelines:
 * `Network.formality` did not include edge width handling.  This has been 
   corrected.
 
+* `word_stats` gave an incorrect warning message for missing endmarks:
+  "Some sentences not have standard <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> punctuation endmarks."  The "do" has 
+  been added: "Some sentences do not have standard <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> punctuation endmarks."
+
 **NEW FEATURES**
 
 * `word_length` function added to give counts of word length usage by grouping 

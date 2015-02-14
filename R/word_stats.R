@@ -203,7 +203,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
     mpun <- which(!DF$end.mark %in% c("!", ".", "|", "?", "*"))
     comment(mpun) <- "These observations did not have a ! . | ? * endmark"
     if(any(is.na(DF$sent.type))) {
-        warning("Some sentences do have standard qdap punctuation endmarks.",
+        warning("Some sentences do not have standard qdap punctuation endmarks.",
             "\n  Use $mpun for a list of observations with missing endmarks.")
     }
     DF$end.mark2 <- NULL
