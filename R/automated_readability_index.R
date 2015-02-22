@@ -31,7 +31,7 @@
 #' pp. 283-284.
 #' 
 #' Fry, E. B. (1968). A readability formula that saves time. Journal of Reading,
-#' 11(7), 513-516, 575?578.
+#' 11(7), 513-516, 575-578.
 #' 
 #' Fry, E. B. (1969). The readability graph validated at primary levels. The Reading
 #' Teacher, 22(6), 534-538.

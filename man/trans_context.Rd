@@ -11,8 +11,7 @@ trans_context(text.var, grouping.var, inds, n.before = 3, tot = TRUE,
 \item{text.var}{The text variable.}
 
 \item{grouping.var}{The grouping variables.  Also takes a single
-grouping variable or a list
-of 1 or more grouping variables.}
+grouping variable or a list of 1 or more grouping variables.}
 
 \item{inds}{A list of integer indices to print context for.}
 

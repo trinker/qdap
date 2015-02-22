@@ -66,7 +66,7 @@ And constructed with the following guidelines:
 * `polarity` takes `polarity.frame` with phrases (words with spaces).
 
 * The `Animate` method for the classes: `polarity` & `formality` gains the 
-  ability to print corresponding animated text for combined use with oter 
+  ability to print corresponding animated text for combined use with other 
   `Animated` methods.
 
 * `multigsub`/`mgsub` get a speed boost through better programming choices. See
@@ -74,6 +74,9 @@ And constructed with the following guidelines:
   <a href="http://stackoverflow.com/q/27367914/1000343" target="_blank">http://stackoverflow.com/q/27367914/1000343</a> that inspired the changes.
 
 * `formality` and `pos` now have minimal unit tests.
+
+* `trans_context` used `message` to print to the console.  This results in 
+  truncated output.  `message` has been replaced with `cat`.
 
 **CHANGES**
 
