@@ -26,7 +26,7 @@
 #' strip(DATA$state, char.keep = c("?", "."))
 #' }
 strip <- function(x, char.keep = "~~", digit.remove = TRUE, apostrophe.remove = TRUE,
-    lower.case = TRUE, digit.replace = ""){
+    lower.case = TRUE){
 
     UseMethod("strip")
 }

@@ -9,7 +9,7 @@
 \title{Strip Text}
 \usage{
 strip(x, char.keep = "~~", digit.remove = TRUE, apostrophe.remove = TRUE,
-  lower.case = TRUE, digit.replace = "")
+  lower.case = TRUE)
 
 \method{strip}{character}(x, char.keep = "~~", digit.remove = TRUE,
   apostrophe.remove = TRUE, lower.case = TRUE)
