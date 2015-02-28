@@ -17,6 +17,7 @@
 #' @return Returns a vector of text that has been stripped of unwanted characters.
 #' @seealso \code{\link[qdap]{rm_stopwords}}
 #' @export
+#' @rdname strip
 #' @examples
 #' \dontrun{
 #' DATA$state #no strip applied
@@ -24,29 +25,62 @@
 #' strip(DATA$state, apostrophe.remove=FALSE)
 #' strip(DATA$state, char.keep = c("?", "."))
 #' }
-strip <-
-function (x, char.keep = "~~", digit.remove = TRUE, apostrophe.remove = TRUE,
-    lower.case = TRUE) {
-    strp <- function(x, digit.remove, apostrophe.remove, char.keep, lower.case) {
-        if (!is.null(char.keep)) {
-            x2 <- Trim(gsub(paste0(".*?($|'|",
-            paste(paste0("\\", char.keep), collapse = "|"),
-            "|[^[:punct:]]).*?"), "\\1", 
-                as.character(x)))
-        } else {
-            x2 <- Trim(gsub(".*?($|'|[^[:punct:]]).*?", "\\1", 
-                as.character(x)))
-        }
-        if (lower.case) {
-            x2 <- tolower(x2)
-        }
-        if (apostrophe.remove) {
-            x2 <- gsub("'", "", x2)
-        }
-        ifelse(digit.remove == TRUE, gsub("[[:digit:]]", "", x2), x2)
-    }  
-    x <- clean(x) 
-    unlist(lapply(x, function(x) Trim(strp(x = x, digit.remove = digit.remove, 
-       apostrophe.remove = apostrophe.remove, char.keep = char.keep, 
-       lower.case = lower.case))))
+strip <- function(x, char.keep = "~~", digit.remove = TRUE, apostrophe.remove = TRUE,
+    lower.case = TRUE, digit.replace = ""){
+
+    UseMethod("strip")
 }
+
+#' \code{strip.character} - factor method for \code{strip}.
+#' @rdname strip
+#' @export
+#' @method strip character
+strip.character <- function(x, char.keep = "~~", digit.remove = TRUE, apostrophe.remove = TRUE,
+    lower.case = TRUE){
+
+    x <- gsub(paste0(ifelse(digit.remove, "[0-9]|", ""), "\\\\r|\\\\n|\\n|\\\\t"), " ", x)
+
+    regex1 <- sprintf(".*?($%s%s|[^[:punct:]]).*?",
+        ifelse(apostrophe.remove, "", "|'"),
+        ifelse(is.null(char.keep), "", paste0("|", paste(paste0("\\", char.keep), collapse="|")))
+    )
+
+    white <- "^\\s+|\\s+$|\\s+(?=[.](?:\\D|$))|(\\s+)(?=[,]|[;:?!\\]\\}\\)]+)|(?<=[\\(\\[\\{])(\\s+)|(\\s+)(?=[\\s])"
+
+    x <- gsub(regex1, "\\1", ifelse(lower.case, tolower, c)(x))
+    gsub("\\s+", " ", gsub("^\\s+|\\s+$", "", x))
+}
+
+
+#' \code{strip.factor} - factor method for \code{strip}.
+#' @rdname strip
+#' @export
+#' @method strip factor 
+strip.factor <- function(x, char.keep = "~~", digit.remove = TRUE, apostrophe.remove = TRUE,
+    lower.case = TRUE){
+
+    strip(as.character(x), char.keep = char.keep, digit.remove = digit.remove, 
+        apostrophe.remove = apostrophe.remove, lower.case = lower.case)
+}
+
+#' \code{strip.default} - factor method for \code{strip}.
+#' @rdname strip
+#' @export
+#' @method strip default
+strip.default <- function(x, char.keep = "~~", digit.remove = TRUE, apostrophe.remove = TRUE,
+    lower.case = TRUE){
+
+    strip(as.character(x), char.keep = char.keep, digit.remove = digit.remove, 
+        apostrophe.remove = apostrophe.remove, lower.case = lower.case)
+}
+
+#' \code{strip.list} - factor method for \code{strip}.
+#' @rdname strip
+#' @export
+#' @method strip list
+strip.list <- function(x, char.keep = "~~", digit.remove = TRUE, apostrophe.remove = TRUE,
+    lower.case = TRUE){
+
+    unlist(lapply(x, strip))
+}
+

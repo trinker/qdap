@@ -78,6 +78,10 @@ And constructed with the following guidelines:
 * `trans_context` used `message` to print to the console.  This results in 
   truncated output.  `message` has been replaced with `cat`.
 
+* `strip` gets a speed boost (~10x) by using better regex algorithms, 
+  consolidating code/function calls, and by creating a generic `strip` method 
+  for different classes.  
+
 **CHANGES**
 
 * The **ggplot2** package is no longer in Depends.  This means the user will 

@@ -2,10 +2,26 @@
 % Please edit documentation in R/strip.R
 \name{strip}
 \alias{strip}
+\alias{strip.character}
+\alias{strip.default}
+\alias{strip.factor}
+\alias{strip.list}
 \title{Strip Text}
 \usage{
 strip(x, char.keep = "~~", digit.remove = TRUE, apostrophe.remove = TRUE,
-  lower.case = TRUE)
+  lower.case = TRUE, digit.replace = "")
+
+\method{strip}{character}(x, char.keep = "~~", digit.remove = TRUE,
+  apostrophe.remove = TRUE, lower.case = TRUE)
+
+\method{strip}{factor}(x, char.keep = "~~", digit.remove = TRUE,
+  apostrophe.remove = TRUE, lower.case = TRUE)
+
+\method{strip}{default}(x, char.keep = "~~", digit.remove = TRUE,
+  apostrophe.remove = TRUE, lower.case = TRUE)
+
+\method{strip}{list}(x, char.keep = "~~", digit.remove = TRUE,
+  apostrophe.remove = TRUE, lower.case = TRUE)
 }
 \arguments{
 \item{x}{The text variable.}
@@ -30,6 +46,14 @@ Returns a vector of text that has been stripped of unwanted characters.
 }
 \description{
 Strip text of unwanted characters.
+
+\code{strip.character} - factor method for \code{strip}.
+
+\code{strip.factor} - factor method for \code{strip}.
+
+\code{strip.default} - factor method for \code{strip}.
+
+\code{strip.list} - factor method for \code{strip}.
 }
 \examples{
 \dontrun{
