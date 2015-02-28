@@ -80,7 +80,8 @@ And constructed with the following guidelines:
 
 * `strip` gets a speed boost (~10x) by using better regex algorithms, 
   consolidating code/function calls, and by creating a generic `strip` method 
-  for different classes.  
+  for different classes.  Additionally, mutiple white spaces are now condensed 
+  to a single white space.
 
 **CHANGES**
 
