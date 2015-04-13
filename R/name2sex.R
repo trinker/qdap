@@ -18,18 +18,23 @@
 #' name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA, 
 #'     tyler, jamie, JAMES, tyrone, cheryl, drew))
 #' }
-name2sex <- function(names.list, USE.NAMES = FALSE, ...) {
-
-    nms <- if (USE.NAMES) {names.list} else {NULL}
-    genkey <- data.frame(c("male", "female"), c("M", "F")) 
+name2sex <- function (names.list, USE.NAMES = FALSE, ...) {
+    if (USE.NAMES) {
+        nms <- names.list
+    } else {
+        nms <- NULL
+    }
     `%lc_qdap%` <- qdapTools::`%lc%`
-    
-    gender::gender(names.list, ...) %>% 
-        sapply("[[", "gender") %lc_qdap% 
-        genkey %>% 
-        as.factor() %>% 
-        setNames(nm=nms)
 
+    key <- gender::gender(names.list, ...) %>%
+        dplyr::select_("name", "gender") %>%
+        as.data.frame() %>% 
+        dplyr::mutate(gender = toupper(substring(gender, 1, 1)))
+
+    names.list %lc_qdap% 
+        key %>% 
+        as.factor() %>% 
+        setNames(nm = nms)
 }
 
 ## name2sex <- 
