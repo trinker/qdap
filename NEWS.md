@@ -86,7 +86,7 @@ And constructed with the following guidelines:
 * `scrubber` would automatically take a space and a single last character and 
   remove the space.  This was to remove spaces before ending punctuation. `scrubber` 
   used `substring` rather than a more controlled regular expression.
-  This has been corrected.  Report thanks to Fabrizio Maccallini.  See <a href="https://github.com/trinker/qdap/issues/207">issue #207</a> 
+  This has been corrected.  Report thanks to @Fabrizio Maccallini.  See <a href="https://github.com/trinker/qdap/issues/207">issue #207</a> 
   for more information.
 
 **CHANGES**
