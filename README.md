@@ -12,17 +12,17 @@ qdap
 
 To download the development version of qdap:
 
-Download the [zip ball](https://github.com/trinker/qdap/zipball/master) or [tar ball](https://github.com/trinker/qdap/tarball/master), decompress and run `R CMD INSTALL` on it, or use the **devtools** package to install the development version (The user may want to install the [dev version of reports](https://github.com/trinker/reports) first):
+Download the [zip ball](https://github.com/trinker/qdap/zipball/master) or [tar ball](https://github.com/trinker/qdap/tarball/master), decompress and run `R CMD INSTALL` on it, or use the **pacman** package to install the development version (The user may want to install the [dev version of reports](https://github.com/trinker/reports) first):
 
 
 ```r
-# install.packages("devtools")
-
-library(devtools)
-install_github("trinker/qdapDictionaries")
-install_github("trinker/qdapRegex")
-install_github("trinker/qdapTools")
-install_github("trinker/qdap")
+if (!require("pacman")) install.packages("pacman")
+pacman::p_load_gh(
+    "trinker/qdapDictionaries",
+    "trinker/qdapRegex",
+    "trinker/qdapTools",
+    "trinker/qdap"
+)
 ```
 
 **Note**: Windows users need [Rtools](http://www.murdoch-sutherland.com/Rtools/) and [devtools](http://CRAN.R-project.org/package=devtools) to install this way.
