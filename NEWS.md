@@ -60,6 +60,9 @@ And constructed with the following guidelines:
 * `Animate.character` added as a generic method that allows for the animation of 
   text.  This is useful in conjunction with other \code{Animate} objects to 
   create complex animations with accompanying text.
+  
+* `add_incomplete` added to replace sentences with missing endmarks with a `|`
+  to indicate an incomplete sentence.
 
 **IMPROVEMENTS**
 

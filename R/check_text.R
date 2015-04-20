@@ -149,7 +149,7 @@ print.check_text <- function(x, include.text = TRUE, file = NULL, ...) {
 
 .check_messages <- list(
     non_character = "using `as.character`", 
-    missing_ending_punctuation = "cleaning the raw text",
+    missing_ending_punctuation = "cleaning the raw text or running `add_incomplete`",
     empty = "running `blank2NA`",
     double_punctuation = "running `sentSplit`",
     non_space_after_comma = "running `comma_spacer`",
