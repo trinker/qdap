@@ -1,7 +1,8 @@
 qdap
 ====
 
-[![Build Status](https://travis-ci.org/trinker/qdap.png?branch=master)](https://travis-ci.org/trinker/qdap) [![DOI](https://zenodo.org/badge/5398/trinker/qdap.png)](http://dx.doi.org/10.5281/zenodo.11124)
+[![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/0.1.0/active.svg)](http://www.repostatus.org/#active)
+[![Build Status](https://travis-ci.org/trinker/qdap.svg?branch=master)](https://travis-ci.org/trinker/qdap) [![DOI](https://zenodo.org/badge/5398/trinker/qdap.svg)](http://dx.doi.org/10.5281/zenodo.11124)
 [![Version](https://img.shields.io/badge/Version-2.2.1-orange.svg)](https://img.shields.io/badge/Version-2.2.1-orange.svg)
 
 ![qdapicon](https://dl.dropbox.com/u/61803503/qdapicon.png)   

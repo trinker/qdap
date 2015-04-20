@@ -33,7 +33,7 @@ function(text.var, num2word = FALSE, rm.quote = TRUE, fix.comma = TRUE,
     }
     ncx <- nchar(x)
     if (fix.space) {
-        x <- paste0(Trim(substring(x, 1, ncx - 1)), substring(x, ncx))
+        x <- Trim(gsub("(\\s+)([.?|!,*]+)$", "\\2", x))
     }
     x[is.na(text.var)] <- NA
     if (num2word) {
@@ -41,4 +41,3 @@ function(text.var, num2word = FALSE, rm.quote = TRUE, fix.comma = TRUE,
     }
     x
 }
-
