@@ -86,8 +86,8 @@ IMPROVEMENTS
 * `scrubber` would automatically take a space and a single last character and 
   remove the space.  This was to remove spaces before ending punctuation.  
   `scrubber` used `substring` rather than a more controlled regular expression.
-  This has been corrected.  Report thanks to Fabrizio Maccallini.  See #207 for
-  more information.
+  This has been corrected.  Report thanks to Fabrizio Maccallini.  See issue 
+  #207 for more information.
 
 CHANGES
 
