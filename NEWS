@@ -94,6 +94,10 @@ IMPROVEMENTS
   used `substring` rather than a more controlled regular expression.
   This has been corrected.  Report thanks to @Fabrizio Maccallini.  See issue #207 
   for more information.
+  
+* `pres_debates2012` picks up a `role` column to make fitering out the 
+  candidates easier.  The variable order has also changed to put the `dialogue` 
+  last.
 
 CHANGES
 

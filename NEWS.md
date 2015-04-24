@@ -94,6 +94,10 @@ And constructed with the following guidelines:
   used `substring` rather than a more controlled regular expression.
   This has been corrected.  Report thanks to @Fabrizio Maccallini.  See <a href="https://github.com/trinker/qdap/issues/207">issue #207</a> 
   for more information.
+  
+* `pres_debates2012` picks up a `role` column to make fitering out the 
+  candidates easier.  The variable order has also changed to put the `dialogue` 
+  last.
 
 **CHANGES**
 
