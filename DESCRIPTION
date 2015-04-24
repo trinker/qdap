@@ -18,7 +18,7 @@ Imports: chron, dplyr (>= 0.3), gdata, gender (>= 0.4.1), ggplot2 (>=
 Suggests: koRpus, knitr, lda, proxy, stringi, SnowballC, testthat
 LazyData: TRUE
 VignetteBuilder: knitr
-Description: qdap automates many of the tasks associated with
+Description: Automates many of the tasks associated with
         quantitative discourse analysis of transcripts containing
         discourse including frequency counts of sentence types, words,
         sentences, turns of talk, syllables and other assorted analysis
@@ -27,7 +27,7 @@ Description: qdap automates many of the tasks associated with
         data by any number of grouping variables, providing analysis
         and seamless integration with other R packages that undertake
         higher level analysis and visualization of text.  This affords
-        the user a more efficient and targeted analysis.  qdap is
+        the user a more efficient and targeted analysis.  'qdap' is
         designed for transcript analysis, however, many functions are
         applicable to other areas of Text Mining/Natural Language
         Processing.
