@@ -40,6 +40,9 @@ And constructed with the following guidelines:
 * `word_stats` gave an incorrect warning message for missing endmarks:
   "Some sentences not have standard <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> punctuation endmarks."  The "do" has 
   been added: "Some sentences do not have standard <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> punctuation endmarks."
+  
+* `pres_debates2012` data set contained missplits in lines: 544, 1054.  These 
+  have been corrected (GitHub <a href="https://github.com/trinker/qdap/issues/205">issue #205</a>).
 
 **NEW FEATURES**
 

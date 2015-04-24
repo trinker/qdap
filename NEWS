@@ -40,6 +40,9 @@ BUG FIXES
 * `word_stats` gave an incorrect warning message for missing endmarks:
   "Some sentences not have standard qdap punctuation endmarks."  The "do" has 
   been added: "Some sentences do not have standard qdap punctuation endmarks."
+  
+* `pres_debates2012` data set contained missplits in lines: 544, 1054.  These 
+  have been corrected (GitHub issue #205).
 
 NEW FEATURES
 
