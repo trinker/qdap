@@ -44,6 +44,10 @@ And constructed with the following guidelines:
 * `pres_debates2012` data set contained missplits in lines: 544, 1054.  These 
   have been corrected (GitHub <a href="https://github.com/trinker/qdap/issues/205">issue #205</a>).
 
+* `pos` threw an error if only one word was passed to `text.var`.   Fix:
+  `drop = FALSE` has been added to data frame indexing.  Caught by 
+  StackOverflow user G_1991 <a href="http://stackoverflow.com/q/29896488/1000343." target="_blank">http://stackoverflow.com/q/29896488/1000343.</a>
+
 **NEW FEATURES**
 
 * `word_length` function added to give counts of word length usage by grouping 

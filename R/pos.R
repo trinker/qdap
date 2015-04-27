@@ -258,8 +258,9 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
         m2[nas, 1:ncol(m2)] <- NA
     }
 
-    rnp <- raw_pro_comb(G4[, -1], G5[, -1], digits = digits, 
-        percent = percent, zero.replace = zero.replace, override = TRUE)  
+    rnp <- raw_pro_comb(G4[, -1, drop = FALSE], G5[, -1, drop = FALSE], 
+        digits = digits, percent = percent, zero.replace = zero.replace, 
+        override = TRUE)  
     rnp <- data.frame(G4[, 1, drop = FALSE], rnp, check.names = FALSE)     
     POS <- list(text = text.var, POStagged = m2, POSprop = G5, POSfreq = G4,
         POSrnp = rnp, percent = percent, zero.replace = zero.replace)
