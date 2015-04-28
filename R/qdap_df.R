@@ -92,7 +92,7 @@ qdap_df <- function(dataframe, text.var) {
 
     if(is.mp(dataframe[[text.var]])) {
         warning(paste0("\nSome rows contain missing punctuation.", 
-            "\nConsider data further cleaining."))
+            "\nConsider further data cleaning or use of `add_incomplete`."))
     }   
 
     if (is.dp(dataframe[[text.var]])) {
