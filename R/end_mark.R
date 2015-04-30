@@ -440,7 +440,7 @@ cumulative.end_mark <- function(x, ...){
     
     out <- lapply(1:length(x), function(i){
     
-        y <- table(x[1:i])
+        y <- c(table(x[1:i]))
         missing <- all[!all %in% names(y)]
         
         if(!identical(missing, character(0))){
