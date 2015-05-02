@@ -25,7 +25,7 @@ into sentences.
 }
 }
 \references{
-\url{http://www.gutenberg.org/ebooks/1524}
+\url{http://www.gutenberg.org}
 }
 \keyword{datasets}
 

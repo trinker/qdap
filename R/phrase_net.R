@@ -14,7 +14,7 @@
 #' phrase nets inspired this function the two outputs are not identical.  The
 #' \code{\link[qdap]{phrase_net}} function operates off of correlations between 
 #' words in sentences.
-#' @references \url{http://www-01.ibm.com/software/analytics/many-eyes/}
+#' @references \url{http://www-01.ibm.com}
 #' @keywords phrase_net
 #' @export
 #' @importFrom reshape2 melt

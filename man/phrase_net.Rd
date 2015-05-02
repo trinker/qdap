@@ -90,7 +90,7 @@ lapply(seq_along(z), function(i) {
 }
 }
 \references{
-\url{http://www-01.ibm.com/software/analytics/many-eyes/}
+\url{http://www-01.ibm.com}
 }
 \keyword{phrase_net}
 

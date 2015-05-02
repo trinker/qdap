@@ -71,6 +71,8 @@ And constructed with the following guidelines:
 * `add_incomplete` added to replace sentences with missing endmarks with a `|`
   to indicate an incomplete sentence.
 
+* `type_toke_ratio` added to determine type-token ratio per grouping variable.
+
 **IMPROVEMENTS**
 
 * `polarity` takes `polarity.frame` with phrases (words with spaces).

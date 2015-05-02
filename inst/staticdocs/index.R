@@ -178,6 +178,7 @@ sd_section("Measures",
     "kullback_leibler",
     "lexical_classification",
     "polarity",
+    "type_token_ratio",
     "word_cor",
     "word_proximity"
   )
