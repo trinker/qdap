@@ -24,7 +24,7 @@
 #' @return A list containing at the following components: 
 #' \item{content}{A \code{data.frame} of all content words used and corresponding frequencies} 
 #' \item{functional}{A \code{data.frame} of all content words used and corresponding frequencies} 
-#' \item{raw}{Sentence level descriptive statistics on content vs. functional word use} 
+#' \item{raw}{Sentence level descriptive statistics on content vs. functional word use (ave.content.rate is also nown as lexical density} 
 #' \item{lexical_classification}{Summarized (grouping variable level) descriptive statistics for content vs. functional word use} 
 #' @references Chung, C. & Pennebaker, J. (2007). The Psychological Functions of Function Words. In K. Fiedler (Ed.) Social Communication (pp. 343-359). New York: Psychology Press.
 #'
