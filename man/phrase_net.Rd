@@ -24,11 +24,11 @@ phrase_net(text.var, freq = 4, r = 0.35, edge.constant = 6,
 Returns an igraph object.
 }
 \description{
-Create \href{http://www-958.ibm.com/software/data/cognos/manyeyes/}{Many Eyes}
+Create \href{http://trinker.github.io/many-eye}{Many Eyes}
 style phrase nets.
 }
 \note{
-While \href{http://www-958.ibm.com/software/data/cognos/manyeyes/}{Many Eyes}
+While \href{http://trinker.github.io/many-eye}{Many Eyes}
 phrase nets inspired this function the two outputs are not identical.  The
 \code{\link[qdap]{phrase_net}} function operates off of correlations between
 words in sentences.
@@ -90,7 +90,7 @@ lapply(seq_along(z), function(i) {
 }
 }
 \references{
-\url{http://www-01.ibm.com}
+\url{http://trinker.github.io/many-eye}
 }
 \keyword{phrase_net}
 
