@@ -452,7 +452,7 @@ as.tdm.wfm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
 
     ## Remove rows with terms with no vowel
     if (vowel.check) {
-        x <- x[vowel_check(rownames(x)), ]
+        x <- x[vowel_check(rownames(x)), ,drop=FALSE]
     }
 
     z <- unlist(apply(x, 2, function(y) sum(y != 0)), use.names = FALSE)

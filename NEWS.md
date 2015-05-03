@@ -48,6 +48,9 @@ And constructed with the following guidelines:
   `drop = FALSE` has been added to data frame indexing.  Caught by 
   StackOverflow user G_1991 <a href="http://stackoverflow.com/q/29896488/1000343." target="_blank">http://stackoverflow.com/q/29896488/1000343.</a>
 
+* `as.tdm.wfm` would error if no grouping variable was supplied.  This behavior
+  has been corrected.
+
 **NEW FEATURES**
 
 * `word_length` function added to give counts of word length usage by grouping 
