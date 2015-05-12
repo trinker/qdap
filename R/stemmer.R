@@ -1,6 +1,6 @@
 #' Stem Text
 #' 
-#' \code{stemmer} - Stems a vector of text strings (A wrapper for the pkg{tm} 
+#' \code{stemmer} - Stems a vector of text strings (A wrapper for the \pkg{tm} 
 #' package's \code{\link[tm]{stemDocument}}.
 #' 
 #' @param text.var  The text variable.  In \code{\link[qdap]{stemmer}} this is a 
