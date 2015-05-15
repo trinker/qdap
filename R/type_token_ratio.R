@@ -14,9 +14,9 @@
 #' @references Baker, P. (2006) Using Corpora in Discourse Analysis. London: Continuum.
 #' @export
 #' @examples
-#' with(raj, type_text_ratio(dialogue, person))
-#' plot(with(raj, type_text_ratio(dialogue, person)))
-type_text_ratio <-  function(text.var, grouping.var = NULL, n.words = 1000, ...) {
+#' with(raj, type_token_ratio(dialogue, person))
+#' plot(with(raj, type_token_ratio(dialogue, person)))
+type_token_ratio <-  function(text.var, grouping.var = NULL, n.words = 1000, ...) {
 
     if(is.null(grouping.var)) {
         G <- "all"
@@ -126,7 +126,7 @@ plot.type_token_ratio <- function(x, ...){
         ggplot2::geom_vline(xintercept = x[["all"]], size = .7, linetype = "longdash", alpha = .4) +
         ggplot2::geom_point(ggplot2::aes_string(size="wc"), alpha = .3) +
         ggplot2::geom_point(color="red") +
-        ggplot2::xlab("Type-Toke Ratio") +
+        ggplot2::xlab("Type-Token Ratio") +
         ggplot2::ylab(nms) + 
         ggplot2::theme_bw() +
         ggplot2::annotate("text", x = x[["all"]], y = ceiling(nrow(x[["ttr"]])/2), 

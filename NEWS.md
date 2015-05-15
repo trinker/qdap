@@ -16,6 +16,23 @@ And constructed with the following guidelines:
   (and resets the patch)
 * Bug fixes and misc. changes bumps the patch
 
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.2
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+* `type_token_ratio` was misnamed as `type_text_ratio`, this has been corrected.
+  The plot for this class also contained a misspelling "type-toke ratio" which
+  has been corrected as well.
+
+**NEW FEATURES**
+
+**MINOR FEATURES**
+
+**IMPROVEMENTS**
+
+**CHANGES**
+
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.1
 ----------------------------------------------------------------
