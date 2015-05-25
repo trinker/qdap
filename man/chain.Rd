@@ -26,8 +26,7 @@ argument and supplying a \code{\link[base]{data.frame}}.
 
 \code{\%>\%} - The \pkg{magrittr} "then" chain operator imported by
 \pkg{dplyr}.  Imported for convenience.  See
-\url{http://www.rdocumentation.org/packages/magrittr/functions/magrittr}
-for details.
+\url{https://github.com/smbache/magrittr} for details.
 }
 \examples{
 \dontrun{

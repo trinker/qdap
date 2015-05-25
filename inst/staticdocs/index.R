@@ -53,7 +53,8 @@ sd_section("Viewing",
     "htruncdf",
     "left_just",
     "Search",        
-    "strWrap"
+    "strWrap",
+    "instpect_tect"
   )
 )
 

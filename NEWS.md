@@ -27,6 +27,9 @@ And constructed with the following guidelines:
 
 **NEW FEATURES**
 
+* `inspect_text` added to allow for pretty printed viewing of text strings and
+  **tm** `Corpus`es.
+
 **MINOR FEATURES**
 
 **IMPROVEMENTS**
