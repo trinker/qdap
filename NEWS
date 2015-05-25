@@ -42,7 +42,7 @@ CHANGES IN qdap VERSION 2.2.1
 
 BUG FIXES
 
-* The internal vignette `An Introduction to qdap` produced errors when compiled 
+* The internal vignette "An Introduction to qdap" produced errors when compiled 
   by `build_qdap_vignete`.  This behavior has been fixed by using static 
   reporting.  The root of the behavior is the ability of `cm_` functions to
   grab data from the global environment, which may not be the case in a `knitr`/

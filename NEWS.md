@@ -42,7 +42,7 @@ And constructed with the following guidelines:
 
 **BUG FIXES**
 
-* The internal vignette `An Introduction to <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>` produced errors when compiled 
+* The internal vignette "An Introduction to <a href="https://github.com/trinker/qdap" target="_blank">qdap</a>" produced errors when compiled 
   by `build_qdap_vignete`.  This behavior has been fixed by using static 
   reporting.  The root of the behavior is the ability of `cm_` functions to
   grab data from the global environment, which may not be the case in a `knitr`/
