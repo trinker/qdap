@@ -143,6 +143,13 @@
 #' POLKEY
 #' c("abrasive", "abrupt", "happy") %hl% POLKEY
 #' 
+#' # Augmenting the sentiment.frame
+#' mycorpus <- c("Wow that's a raw move.", "His jokes are so corny")
+#' counts(polarity(mycorpus))
+#' 
+#' POLKEY <- sentiment_frame(c(positive.words, "raw"), c(negative.words, "corny"))
+#' counts(polarity(mycorpus, polarity.frame=POLKEY))
+#' 
 #' ## ANIMATION
 #' #===========
 #' (deb2 <- with(subset(pres_debates2012, time=="time 2"),

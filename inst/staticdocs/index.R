@@ -54,7 +54,7 @@ sd_section("Viewing",
     "left_just",
     "Search",        
     "strWrap",
-    "instpect_tect"
+    "instpect_text"
   )
 )
 
