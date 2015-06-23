@@ -24,6 +24,44 @@
 #' ngrams(DATA$state, DATA$person, 3)
 #' ngrams(DATA$state, , 3)
 #' with(mraja1, ngrams(dialogue, list(sex, fam.aff), 3))
+#' 
+#' ## Alternative ngram analysis:
+#' n_gram <- function(x, n = 2, sep = " "){
+#' 
+#'     m <- qdap::bag_o_words(x)
+#'     if (length(m) < n) return(character(0))
+#'     starts <- 1:(length(m) - (n - 1))
+#'     ends <- n:length(m) 
+#'     Map(function(x, y){
+#'             paste(m[x:y], collapse=sep)
+#'         }, starts, ends
+#'     )
+#' }
+#' 
+#' dat <- sentSplit(DATA, "state")
+#' 
+#' dat[["grams"]] <- sapply(dat[["state"]], function(x) { 
+#'     unbag(n_gram(x, sep = "~~"))
+#' })
+#' 
+#' m <- with(dat, as.tdm(grams, person))
+#' rownames(m) <- gsub("~~", " ", rownames(m))
+#' as.matrix(m)
+#' rowSums(as.matrix(m))
+#' 
+#' 
+#' 
+#' dat2 <- sentSplit(raj, "dialogue")
+#' 
+#' dat2[["grams"]] <- sapply(dat2[["dialogue"]], function(x) { 
+#'     unbag(n_gram(x, sep = "~~"))
+#' })
+#' 
+#' m2 <- with(dat2, as.tdm(grams, person))
+#' rownames(m2) <- gsub("~~", " ", rownames(m2))
+#' qheat(t(as.matrix(tm:::weightTfIdf(tm::removeSparseTerms(m2, .7)))), high="red")
+#' 
+#' sort(rowSums(as.matrix(m2)))
 #' }
 ngrams <- function(text.var, grouping.var = NULL, n = 2, ...) {
     if(is.null(grouping.var)){
