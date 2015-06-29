@@ -225,6 +225,7 @@
 #' (x <- with(DATA2, as.Corpus(state, list(person, class, day))))
 #' library(tm)
 #' inspect(x)
+#' inspect_text(x)
 #' class(x)
 #' 
 #' (y <- with(pres_debates2012, as.Corpus(dialogue, list(person, time))))
@@ -310,7 +311,7 @@
 #' dat[[2]] <- rm_default(dat[[2]], pattern=pastex("@@rm_url", "#apple\\b"))
 #' 
 #' 
-#' myCorp <- tm::tm_map(myCorp, tm::removeWords, stopwords)
+#' myCorp <- tm::tm_map(crude, tm::removeWords, Top200Words)
 #' myCorp %>% as.dtm() %>% tm::inspect()
 #' }
 as.tdm <- function(text.var, grouping.var = NULL, vowel.check = TRUE, ...) {
@@ -552,12 +553,23 @@ as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "docs",
     }
 
     qpaste <- function(x) paste(as.character(x), collapse = " ")
-    out <- list2df(lapply(x, qpaste), col1 = text, col2 = doc)[, 2:1]
+    out <- qdapTools::list2df(lapply(x, qpaste), col1 = text, col2 = doc)[, 2:1]
 
     metadat <- NLP::meta(x)
+
+    if (all(unlist(lapply(NLP::meta(x, tag = "labels"), is.null)))){
+        NLP::meta(x, tag = "labels") <- paste("doc", qdapTools::pad(seq_len(length(x))))
+        metadat <- NLP::meta(x)
+    }
+
     if(!is.null(metadat[["labels"]])) {
         out[[1]] <- metadat[["labels"]]
-    } 
+        if (!is.null(metadat[["MetaID"]]) && all.equal(metadat[["labels"]], metadat[["MetaID"]])){
+            metadat[["MetaID"]] <- NULL
+        }
+        colnames(metadat)[colnames(metadat) == "labels"] <- doc
+    }
+
     if (ncol(metadat) > 1 && all(out[[1]] %in% metadat[[1]])) {
         colnames(metadat)[1] <- doc
         out <- key_merge(out, metadat)
@@ -572,7 +584,6 @@ as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "docs",
     }
     out
 }
-
 
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix
@@ -596,6 +607,8 @@ as.Corpus <- function(text.var, grouping.var = NULL, demographic.vars, ...){
 
     UseMethod("as.Corpus")
 }    
+
+
 
 #' \code{as.Corpus.sent_split} - \code{sent_split} Method for \code{as.Corpus}.
 #' @rdname as.tdm
