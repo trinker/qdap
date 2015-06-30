@@ -692,9 +692,9 @@ polarity <- function (text.var, grouping.var = NULL,
     lall <- lapply(sall, function(x) {
         data.frame(total.words = sum(x[, "wc"], na.rm = TRUE), 
             ave.polarity = mean(x[, "polarity"], na.rm = TRUE),
-            sd.polarity = sd(x[, "polarity"], na.rm = TRUE), 
+            sd.polarity = stats::sd(x[, "polarity"], na.rm = TRUE), 
             stan.mean.polarity = mean(x[, "polarity"], na.rm = TRUE)/
-                sd(x[, "polarity"], na.rm = TRUE))
+                stats::sd(x[, "polarity"], na.rm = TRUE))
     })
     group <- data.frame(group = names(lall), 
         total.sentences = sapply(sall, nrow),
@@ -876,12 +876,12 @@ plot.polarity <- function(x, bar.size = 5, low = "blue", mid = "grey99",
     error.bar.height = .5, error.bar.size = .5, error.bar.color = "black", 
     ...){
   
-    Polarity <- group <- ave.polarity <- unit <- NULL
+    start <- end <- Polarity <- group <- ave.polarity <- unit <- NULL
     dat <- x[["group"]][, 1:4]
     dat2 <- x[["all"]]
     if (na.rm) {
-       dat <- na.omit(dat)
-       dat2 <- na.omit(dat2)
+       dat <- stats::na.omit(dat)
+       dat2 <- stats::na.omit(dat2)
     }
     G <- names(dat)[1]
     nms <- c("group", "dialogue", "word_count", "Polarity")
@@ -921,8 +921,8 @@ plot.polarity <- function(x, bar.size = 5, low = "blue", mid = "grey99",
         dat$group <- factor(dat$group, levels = sort(unique(dat$group), decreasing = TRUE))     
     }
     if (na.rm) {
-       dat2 <- na.omit(dat2)
-       dat <- na.omit(dat)
+       dat2 <- stats::na.omit(dat2)
+       dat <- stats::na.omit(dat)
     }
 
   
@@ -976,7 +976,7 @@ plot.polarity <- function(x, bar.size = 5, low = "blue", mid = "grey99",
 }
 
 ## Helper functions
-SE <- function(x) sqrt(var(x)/length(x))
+SE <- function(x) sqrt(stats::var(x)/length(x))
 
 alter_env <- function(negators, amplifiers, deamplifiers) {
     n <- rep(1, length(negators))
@@ -1001,7 +1001,7 @@ polarity_helper <- function(tv, hit, polenv, altenv, count, amp.weight,
     if (sum(comma.check) > 0) {
         comma.loc <- which(comma.check)
         if (sum(comma.loc < target) > 0) {
-            final.comma <- tail(comma.loc[comma.loc < target], 1)
+            final.comma <- utils::tail(comma.loc[comma.loc < target], 1)
             n.before <- hit - final.comma
             target <- ifelse((hit - n.before) < 1, hit, n.before + 1)
         }
@@ -1085,7 +1085,7 @@ plot.polarity_count <- function(x, bar.size = 5, low = "blue", mid = "grey99",
     error.bar.height = .5, error.bar.size = .5, error.bar.color = "black", 
     ...){
   
-    Polarity <- group <- ave.polarity <- unit <- NULL
+    start <- end <- Polarity <- group <- ave.polarity <- unit <- NULL
 
     dat2 <- data.frame(x)
     dat <- do.call(rbind, lapply(split(data.frame(x), x[, 1]), function(x2) {
@@ -1098,8 +1098,8 @@ plot.polarity_count <- function(x, bar.size = 5, low = "blue", mid = "grey99",
     names(dat)[1] <- names(dat2)[1]
 
     if (na.rm) {
-       dat <- na.omit(dat)
-       dat2 <- na.omit(dat2)
+       dat <- stats::na.omit(dat)
+       dat2 <- stats::na.omit(dat2)
     }
     G <- names(dat)[1]
     nms <- c("group", "dialogue", "word_count", "Polarity")
@@ -1134,8 +1134,8 @@ plot.polarity_count <- function(x, bar.size = 5, low = "blue", mid = "grey99",
             levels = rev(dat[order(dat$ave.polarity), "group"]))
     }
     if (na.rm) {
-       dat2 <- na.omit(dat2)
-       dat <- na.omit(dat)
+       dat2 <- stats::na.omit(dat2)
+       dat <- stats::na.omit(dat)
     }
 
     ## Plot the polarity dotplot with optional error bars
@@ -1181,7 +1181,7 @@ plot.polarity_count <- function(x, bar.size = 5, low = "blue", mid = "grey99",
 
     ## Logical plotting argument for use in knitr
     if (plot) {
-        grid.arrange(XX, YY, nrow = 2)
+        gridExtra::grid.arrange(XX, YY, nrow = 2)
     }
     invisible(list(p1 = XX, p2 = YY))
 }
@@ -1278,7 +1278,7 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
     condlens <- rle(as.character(y[, 1]))
     y[, "temp"] <- rep(paste0("X", pad(1:length(condlens[[2]]))),
         condlens[[1]])
-    y[, "ave.polarity"] <- ave(y[, 3], y[, "temp"], FUN=mean)
+    y[, "ave.polarity"] <- stats::ave(y[, 3], y[, "temp"], FUN=mean)
 
     ## Add to  and from columns
     y <- cbind(y, from_to_End(y[, 1]))
@@ -1287,7 +1287,7 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
     ## we don't want an edge to return to the node it leaves
     tos <- split(y[, "to"], y[, "temp"])
     tos_lens <- sapply(tos, length)
-    y[, "to"] <- rep(sapply(tos, tail, 1), tos_lens)
+    y[, "to"] <- rep(sapply(tos, utils::tail, 1), tos_lens)
   
     ## make a combined from|to column
     y[, "from|to"] <- paste2(y[, c("from", "to")], sep=qsep)
@@ -1305,7 +1305,7 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
     df_polarity <- list_df2df(list_polarity, "turn")
 
     ## set up color gradients
-    colfunc <- colorRampPalette(c(negative, neutral, positive))
+    colfunc <- grDevices::colorRampPalette(c(negative, neutral, positive))
     cols <- colfunc(max.color.breaks)
    
     ## add colors to df_polarity based on agrgegated 
@@ -1339,7 +1339,7 @@ Animate_polarity_net <- function(x, negative = "blue", positive = "red",
     new_pol_nets <- lapply(list_polarity, colorize, theplot)
 
     ## Add edge weights etc to each graph
-    igraph_objs <- setNames(lapply(seq_along(new_pol_nets), 
+    igraph_objs <- stats::setNames(lapply(seq_along(new_pol_nets), 
         function(i, grp =new_pol_nets, len=length(unique(y[, 1])), sep=qsep){
 
         ## limit the edge weights (widths) of first 5 plots)
@@ -1440,7 +1440,7 @@ Animate_polarity_bar <- function(x, wc.time = TRUE, time.constant = 1,
 
     theplot <- ggbar(listdat[[length(listdat)]], grp = colnms1, rng = rng)
 
-    ggplots <- setNames(lapply(seq_along(listdat), function(i, aplot=theplot) {
+    ggplots <- stats::setNames(lapply(seq_along(listdat), function(i, aplot=theplot) {
         listdat[[i]][, "group"] <- factor(listdat[[i]][, "group"], levels=ord)
 
         tot_ave_pol <- mean(listdat[[i]][, "ave.polarity"], na.rm = TRUE)
@@ -1657,10 +1657,10 @@ print.animated_polarity <- function(x, title = NULL,
         network = {
             invisible(lapply(x, function(y) {
                 set.seed(seed)
-                par(bg = bg)
+                graphics::par(bg = bg)
                 plot.igraph(y, edge.curved=TRUE, layout=layout, ...)
                 if (!is.null(title)) {
-                    mtext(title, side=3)
+                    graphics::mtext(title, side=3)
                 }
                 if (!is.null(legend)) {
                     color.legend(legend[1], legend[2], legend[3], legend[4], 
@@ -1729,7 +1729,7 @@ Network.polarity <- function(x, negative = "blue", positive = "red",
     condlens <- rle(as.character(y[, 1]))
     y[, "temp"] <- rep(paste0("X", pad(1:length(condlens[[2]]))),
         condlens[[1]])
-    y[, "ave.polarity"] <- ave(y[, 3], y[, "temp"], FUN=mean)
+    y[, "ave.polarity"] <- stats::ave(y[, 3], y[, "temp"], FUN=mean)
 
     ## Add to  and from columns
     y <- cbind(y, from_to_End(y[, 1]))
@@ -1738,7 +1738,7 @@ Network.polarity <- function(x, negative = "blue", positive = "red",
     ## we don't want an edge to return to the node it leaves
     tos <- split(y[, "to"], y[, "temp"])
     tos_lens <- sapply(tos, length)
-    y[, "to"] <- rep(sapply(tos, tail, 1), tos_lens)
+    y[, "to"] <- rep(sapply(tos, utils::tail, 1), tos_lens)
   
     ## make a combined from|to column
     y[, "from|to"] <- paste2(y[, c("from", "to")], sep=qsep)
@@ -1751,7 +1751,7 @@ Network.polarity <- function(x, negative = "blue", positive = "red",
     the_polarity <- agg_pol(y[1:nrow(y), , drop=FALSE])
 
     ## set up color gradients
-    colfunc <- colorRampPalette(c(negative, neutral, positive))
+    colfunc <- grDevices::colorRampPalette(c(negative, neutral, positive))
     cols <- colfunc(max.color.breaks)
    
     ## add colors to df_polarity based on agrgegated 
@@ -1902,7 +1902,7 @@ cumulative.animated_polarity <- function(x, ...) {
     }
 
     out <- c(0, unlist(lapply(x, grab_ave_polarity), use.names = FALSE))
-    avepol <- tail(out, 1)
+    avepol <- utils::tail(out, 1)
     len <- length(out)
     
     output <- data.frame(cum_mean = out, Time = 1:len, drop=TRUE) 

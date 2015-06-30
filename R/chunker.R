@@ -159,7 +159,7 @@ chunker_help_groups <- function(x, N, ub, rme){
         ## if there is only one chunk it is returned
         if (ylen != 1) {
             lens <- sapply(y, length)
-            if (!Reduce("==", tail(lens, 2))) y <- y[1:(ylen-1)]
+            if (!Reduce("==", utils::tail(lens, 2))) y <- y[1:(ylen-1)]
         }
     }
     if (ub) y <- lapply(y, unbag)

@@ -26,7 +26,7 @@ build_qdap_vignette <- function(download.html = FALSE) {
 
     message(paste0("`qdap` wants to rebuild the Intro Vignette in:\n\n    ", 
         path2, "\n\nDo you want to continue?\n"))
-    ans <- menu(c("Yes", "No"))
+    ans <- utils::menu(c("Yes", "No"))
     if (ans == "2") {
         stop("`build_qdap_vignette` build aborted")
     }  
@@ -48,7 +48,7 @@ build_qdap_vignette <- function(download.html = FALSE) {
         if (file.info(old[2])[["size"]] > 2000000) {
             message(paste0("It appears the qdap Intro Vignette in:\n\n    ", 
                 path2, "\nwas already built.\n\nDo you want to still render?\n"))
-            ans <- menu(c("Yes", "No"))
+            ans <- utils::menu(c("Yes", "No"))
             if (ans == "2") {
                 stop("`build_qdap_vignette` build aborted")
             }  

@@ -36,6 +36,10 @@ And constructed with the following guidelines:
 
 **CHANGES**
 
+* The following functions had been previously depracated and now have been 
+  removed: `df2tm_corpus`, `tm2qdap`, `tm_corpus2wfm`, `tm_corpus2df`, `tdm`, 
+  `dtm`, and `polarity_frame`.
+
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.1
 ----------------------------------------------------------------

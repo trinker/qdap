@@ -68,7 +68,7 @@ function(numeric.var, grouping.var, original_order = TRUE, digits = 2) {
     X <- data.frame(ID = seq_along(numeric.var), group = grouping, 
         num = numeric.var)
     X <- X[order(X$group), ]
-    X$scale.by.group <- unlist(aggregate(num ~ group, X, scale)$num)
+    X$scale.by.group <- unlist(stats::aggregate(num ~ group, X, scale)$num)
     X$outlier.by.group <- 
         ifelse(abs(X$scale.by.group) >= 3, "3 sd", 
         ifelse(abs(X$scale.by.group) >= 2 & abs(X$scale.by.group) < 3, 
@@ -86,10 +86,10 @@ function(numeric.var, grouping.var, original_order = TRUE, digits = 2) {
         )
     )
     msd <- function(x, digits) {
-        MSD <- c(mean = mean(x), sd = sd(x), n = length(x), total = sum(x))
+        MSD <- c(mean = mean(x), sd = stats::sd(x), n = length(x), total = sum(x))
         round(MSD, digits)
     }
-    mean.sd.n <- aggregate(num ~ group, X, function(x) msd(x, 
+    mean.sd.n <- stats::aggregate(num ~ group, X, function(x) msd(x, 
         digits = digits))
     mean.sd.n$group <- as.character(mean.sd.n$group)
     ALL <- c("ALL", msd(numeric.var, digits = digits))

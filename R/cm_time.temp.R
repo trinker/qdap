@@ -101,7 +101,7 @@ function(codes, grouping.var = NULL, start = ":00", end = NULL, file=NULL,
         if (en[2] < 59) {
             z[x, (en[2] + 2):60] <- NA
         }
-        zz <- matrix(capture.output(print(z, na.print=""))[-1], ncol =1)
+        zz <- matrix(utils::capture.output(print(z, na.print=""))[-1], ncol =1)
         if (print){
             print(z, na.print=""); message("\n")
         }

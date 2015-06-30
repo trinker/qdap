@@ -101,7 +101,7 @@
 #' 
 #' meths <- c("osa", "lv", "dl", "hamming", "lcs", "qgram", "cosine", "jaccard", "jw")
 #' 
-#' setNames(lapply(meths, function(x) check_spelling(strings, method=x)), meths)
+#' stats::setNames(lapply(meths, function(x) check_spelling(strings, method=x)), meths)
 #' }
 check_spelling <- function(text.var, range = 2,
     assume.first.correct = TRUE, method = "jw",
@@ -120,7 +120,7 @@ check_spelling <- function(text.var, range = 2,
         
         parallel::clusterExport(cl=cl, varlist=vars, envir = environment())
         
-        out <- setNames(parallel::parLapply(cl, text.var, which_misspelled, 
+        out <- stats::setNames(parallel::parLapply(cl, text.var, which_misspelled, 
             range = range, suggest = TRUE, method = method, 
             assume.first.correct = assume.first.correct, n.suggests = n.suggests,
             dictionary = dictionary, nchar.dictionary = dictnchar, 
@@ -130,7 +130,7 @@ check_spelling <- function(text.var, range = 2,
 
     } else {
 
-        out <- setNames(lapply(text.var, which_misspelled, range = range, 
+        out <- stats::setNames(lapply(text.var, which_misspelled, range = range, 
             suggest = TRUE,  method = method, n.suggests = n.suggests,
             assume.first.correct = assume.first.correct,
             dictionary = dictionary, nchar.dictionary = dictnchar, 
@@ -228,12 +228,12 @@ which_misspelled <- function(x, suggest = FALSE, range = 2,
                 message(paste("Range was not large enough.  Increasing range to", 
                     therange + 1, "for: ", x))
                 therange <- therange + 1
-                flush.console()
+                utils::flush.console()
             }
         }
 
         ## find the disctionary word distance to the target ond sort
-        ratings <- sort(setNames(stringdist::stringdist(x, dict, method = meth), dict))
+        ratings <- sort(stats::setNames(stringdist::stringdist(x, dict, method = meth), dict))
  
         ## return the top n terms in order of likliness
         names(ratings)[ratings <= ratings[min(n.sugg, length(ratings))]]
@@ -557,7 +557,7 @@ check_spelling_interactive_helper <- function(out, suggests, click,
         repl2 <- NULL
 
         if (click) {
-            repl <- select.list(c("TYPE MY OWN", paste("IGNORE:", comb[1]), comb[-1]), 
+            repl <- utils::select.list(c("TYPE MY OWN", paste("IGNORE:", comb[1]), comb[-1]), 
                 title = "SELECT REPLACEMENT:")
             if (repl == "TYPE MY OWN") {
                 ans <- "1" 
@@ -566,7 +566,7 @@ check_spelling_interactive_helper <- function(out, suggests, click,
             }
         } else {
             message(under, "\nSELECT REPLACEMENT:")
-            ans <- menu(c("TYPE MY OWN", paste("IGNORE:", comb[1]), comb[-1]))
+            ans <- utils::menu(c("TYPE MY OWN", paste("IGNORE:", comb[1]), comb[-1]))
         }
 
         if (ans == "1") {
@@ -576,7 +576,7 @@ check_spelling_interactive_helper <- function(out, suggests, click,
             while (repl %in% c("0", "!")) {
 
                 if (click) {
-                    ans <- select.list(c("TYPE MY OWN", paste("IGNORE:", comb[1]), comb[-1]), 
+                    ans <- utils::select.list(c("TYPE MY OWN", paste("IGNORE:", comb[1]), comb[-1]), 
                         title = "SELECT REPLACEMNT:")
                     if (ans == "TYPE MY OWN") {
                         ans <- "1" 
@@ -588,7 +588,7 @@ check_spelling_interactive_helper <- function(out, suggests, click,
                     }
                 } else {
                     message(under, "\nSELECT REPLACEMNT:")
-                    ans <- menu(c("TYPE MY OWN", comb))
+                    ans <- utils::menu(c("TYPE MY OWN", comb))
                 }
                 message("\n","ENTER REPLACEMENT:","\n")  
                 repl <- readLines(n=1)

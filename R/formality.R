@@ -163,7 +163,7 @@
 #'         #par(mar=c(2, 0, 2, 0))
 #'         set.seed(22)
 #'         plot.igraph(bgb[[i]], edge.curved=TRUE)
-#'         mtext(Title, side=3, col="white")
+#'         graphics::mtext(Title, side=3, col="white")
 #'         color.legend(Legend[1], Legend[2], Legend[3], Legend[4],
 #'               c("Contextual", "Formal"), attributes(bgb)[["legend"]],
 #'               cex = Legend.cex, col="white")
@@ -364,7 +364,7 @@ formality <- function(text.var, grouping.var = NULL,
     o$form.freq.by <- freq.by                                                        
     o$form.prop.by <- prop.by                                                        
     o$formality <- FOR                                                               
-    dat <- reshape(freq.by,                                                          
+    dat <- stats::reshape(freq.by,                                                          
         direction="long",                                                            
         varying=list(c(3:11)),                                                       
         idvar= names(freq.by)[c(1:2)],                                                  
@@ -470,7 +470,7 @@ plot.formality <- function(x, point.pch = 20, point.cex = .5,
         if (!is.null(bar.colors)) { 
  
             YY <- YY + suppressWarnings(scale_fill_brewer(palette = 
-                head(bar.colors, 1)))
+                utils::head(bar.colors, 1)))
 
     }        
     dat2 <- dat[dat[, "pos"] != "other", ] 
@@ -496,7 +496,7 @@ plot.formality <- function(x, point.pch = 20, point.cex = .5,
         ggtitle("Percent Parts of Speech By Contextual-Formal")                                         
     if (!is.null(bar.colors)) {  
 
-        XX <- XX + scale_fill_brewer(palette=tail(bar.colors, 1),                     
+        XX <- XX + scale_fill_brewer(palette=utils::tail(bar.colors, 1),                     
             name = "", breaks=levels(dat2$pos), labels = LAB2)  
 
     } else {
@@ -782,7 +782,7 @@ Animate_formality_net <- function(x, contextual, formal,
         condlens[[1]])
 
     y <- list_df2df(lapply(split(y, temp), function(x) {
-        x[, 2] <- tail(x[, 2], 1)
+        x[, 2] <- utils::tail(x[, 2], 1)
         x
     }))[, -1]
 
@@ -798,7 +798,7 @@ Animate_formality_net <- function(x, contextual, formal,
     df_formality <- list_df2df(list_formality, "turn")
 
     ## set up color gradients
-    colfunc <- colorRampPalette(c(contextual, formal))
+    colfunc <- grDevices::colorRampPalette(c(contextual, formal))
     cols <- colfunc(max.color.breaks)
    
     ## add colors to df_formality based on agrgegated 
@@ -838,7 +838,7 @@ Animate_formality_net <- function(x, contextual, formal,
     new_form_nets <- lapply(list_formality, colorize, theplot)
 
     ## Add edge weights etc to each graph
-    igraph_objs <- setNames(lapply(seq_along(new_form_nets), 
+    igraph_objs <- stats::setNames(lapply(seq_along(new_form_nets), 
         function(i, grp =new_form_nets, len=length(unique(y[, 1])), sep=qsep){
 
         ## limit the edge weights (widths) of first 5 plots)
@@ -933,9 +933,9 @@ form_fun <- function(z) {
 }
 
 col_meaner <- function(y) {
-    m <- head(y, -1)
+    m <- utils::head(y, -1)
     if (nrow(m) == "0") {
-        out <- tail(y, 1)
+        out <- utils::tail(y, 1)
         out[, "prop_wc"] <- 1
         return(out)
     }
@@ -947,8 +947,8 @@ col_meaner <- function(y) {
     })), "from|to")
     n[, "total"] <- rowSums(n[3:4])
     n[, paste0("prop_", names(n)[3:4])] <- n[, 3:4]/n[, 6]
-    n <- n[!n[, 1] %in% tail(y, 1)[, 1], ]
-    out <- data.frame(rbind(n, tail(y, 1)), row.names=NULL, check.names=FALSE, 
+    n <- n[!n[, 1] %in% utils::tail(y, 1)[, 1], ]
+    out <- data.frame(rbind(n, utils::tail(y, 1)), row.names=NULL, check.names=FALSE, 
         stringsAsFactors = FALSE)
     out[, "prop_wc"] <- out[, "wc"]/sum(out[, "wc"], na.rm=TRUE)
     out
@@ -1018,7 +1018,7 @@ Animate_formality_bar <- function(x, wc.time = TRUE, time.constant = 2,
     theplot <- ggbar_form(listdat[[length(listdat)]], grp = colnms1, rng = rng, 
         colors=c(plus.300.color, under.300.color))
 
-    ggplots <- setNames(lapply(seq_along(listdat), function(i, aplot=theplot) {
+    ggplots <- stats::setNames(lapply(seq_along(listdat), function(i, aplot=theplot) {
         listdat[[i]][, "group"] <- factor(listdat[[i]][, "group"], levels=ord)
         titlepol <- numbformat(form_all[i], digits)
 
@@ -1077,7 +1077,7 @@ form_stats_total <- function(x) {
     x <- colSums(x, na.rm=TRUE)
     x[paste0("prop_", names(x)[2:3])] <- x[2:3]/x[1]
 
-    setNames(50*(1 +(x["prop_formal"] - x["prop_contextual"])/x["wrd.cnt"]), "formality") 
+    stats::setNames(50*(1 +(x["prop_formal"] - x["prop_contextual"])/x["wrd.cnt"]), "formality") 
 
 }
 
@@ -1273,10 +1273,10 @@ print.animated_formality <- function(x, title = NULL,
         network = {
             invisible(lapply(x, function(y) {
                 set.seed(seed)
-                par(bg = bg)
+                graphics::par(bg = bg)
                 plot.igraph(y, edge.curved=TRUE, layout=layout)
                 if (!is.null(title)) {
-                    mtext(title, side=3)
+                    graphics::mtext(title, side=3)
                 }
                 if (!is.null(legend)) {
                     color.legend(legend[1], legend[2], legend[3], legend[4], 
@@ -1409,7 +1409,7 @@ Network.formality <- function(x, contextual = "yellow", formal = "red",
     df_formality[, "to"] <- gsub("end", "End", df_formality[, "to"])
 
     ## set up color gradients
-    colfunc <- colorRampPalette(c(contextual, formal))
+    colfunc <- grDevices::colorRampPalette(c(contextual, formal))
     cols <- colfunc(max.color.breaks)
 
     ## add colors to df_formality based on agrgegated 
@@ -1441,7 +1441,7 @@ Network.formality <- function(x, contextual = "yellow", formal = "red",
     theedges <- paste2(edge_capture(theplot), sep=qsep)
     df_formality <- colpaste2df(df_formality, 1:2, sep=qsep, name.sep="|")
 
-    counts <- aggregate(wc~from, df_formality, sum)
+    counts <- stats::aggregate(wc~from, df_formality, sum)
     counts[, "vcol"] <- ifelse(counts[, "wc"] > 299, 
         plus.300.color, under.300.color)
 
@@ -1624,7 +1624,7 @@ cumulative.animated_formality <- function(x, ...) {
 
     out <- c(NA, unlist(lapply(x, grab_ave_formality), use.names = FALSE))
     out[1] <- out[2]
-    avepol <- tail(out, 1)
+    avepol <- utils::tail(out, 1)
     len <- length(out)
     
     output <- data.frame(cum_mean = out, Time = 1:len, drop=TRUE) 

@@ -178,7 +178,7 @@ function(dataframe, pvals = c(TRUE, FALSE), replications = 1000,
             replications, numbformat(confup(replications), digits = 6))
 
         warning(mess, call. = FALSE, immediate. = TRUE)
-        flush.console()
+        utils::flush.console()
     }
 
     o <- list(pvals = pvals, replications = replications, extended.output = NULL)       
@@ -203,19 +203,19 @@ function(dataframe, pvals = c(TRUE, FALSE), replications = 1000,
 
             clusterExport(cl=cl, varlist=vars, envir = environment())
             output <- parLapply(cl, L1, DIST, cvar = code.var, cause = causal, 
-                reps = replications, pvals = tail(pvals, 1))
+                reps = replications, pvals = utils::tail(pvals, 1))
 
             stopCluster(cl)
         } else { 
             output <- lapply(L1, DIST, cvar = code.var, cause = causal, 
-                reps = replications, pvals = tail(pvals, 1))
+                reps = replications, pvals = utils::tail(pvals, 1))
         }
         o[["extended.output"]] <- output
     }
 
     ## determine main output (combined for each code)
     o[["main.output"]] <- DIST2(dataframe, cvar = code.var, cause = causal, 
-        reps = replications, pvals = head(pvals, 1), time.var = time.var)
+        reps = replications, pvals = utils::head(pvals, 1), time.var = time.var)
   
     o[["adj.alpha"]] <- numbformat(confup (replications), digits = 12)
 
@@ -258,7 +258,7 @@ print.cm_distance <- function(x, mean.digits = 0, sd.digits = 2,
     x <- lview(x, print = FALSE)
 
     ## Determine if pvals were generated for The main display
-    pvals <- head(x[["pvals"]], 1)
+    pvals <- utils::head(x[["pvals"]], 1)
 
     ## function to reclass v_outer to matrix
     vrc <- function(x, digs) {
@@ -509,7 +509,7 @@ DIST <- function(dataframe, cvar, cause, reps, pvals) {
 
     Means <- v_outer(codesplits, FUN_apply, mean, na.rm = TRUE)
     Means[is.nan(Means)] <- NA
-    Sds <- v_outer(codesplits, FUN_apply, sd, na.rm = TRUE)
+    Sds <- v_outer(codesplits, FUN_apply, stats::sd, na.rm = TRUE)
     Sds[is.na(Sds) & !is.na(Means)] <- 0
     N <- sapply(codesplits, Nget)
 
@@ -545,7 +545,7 @@ DIST2 <- function(dataframe, cvar, cause, reps, pvals, time.var) {
 
     Means <- v_outer(codesplits, FUN_apply2, mean, na.rm = TRUE)
     Means[is.nan(Means)] <- NA
-    Sds <- v_outer(codesplits, FUN_apply2, sd, na.rm = TRUE)
+    Sds <- v_outer(codesplits, FUN_apply2, stats::sd, na.rm = TRUE)
     Sds[is.na(Sds) & !is.na(Means)] <- 0
     N <- sapply(codesplits, length)
 
@@ -619,7 +619,7 @@ plot.cm_distance <- function(x, digits = 3, constant = 1,
     x[[c("main.output", "stan.mean")]][!keeps] <- NA
     X <- x[[c("main.output", "stan.mean")]]
     
-    X2 <- na.omit(melt(X, value.name = "stan.mean"))
+    X2 <- stats::na.omit(melt(X, value.name = "stan.mean"))
     colnames(X2)[1:2] <-c("to", "from")
     coding <- vect2df(x[[c("main.output", "n")]], "codes", "size")
     g <- graph.data.frame(X2, directed=TRUE, vertices=coding)

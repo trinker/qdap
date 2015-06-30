@@ -45,7 +45,7 @@ inspect_text.default <- function(text.var, grouping.var = NULL, ...){
         } 
     } 
 
-    o <- setNames(as.list(text.var), grouping)
+    o <- stats::setNames(as.list(text.var), grouping)
     class(o) <- c("inspect_text", "list")
     o
  

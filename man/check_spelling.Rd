@@ -182,7 +182,7 @@ strings <- c(
 
 meths <- c("osa", "lv", "dl", "hamming", "lcs", "qgram", "cosine", "jaccard", "jw")
 
-setNames(lapply(meths, function(x) check_spelling(strings, method=x)), meths)
+stats::setNames(lapply(meths, function(x) check_spelling(strings, method=x)), meths)
 }
 }
 \references{

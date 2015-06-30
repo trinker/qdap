@@ -34,7 +34,7 @@ name2sex <- function (names.list, USE.NAMES = FALSE, ...) {
     names.list %lc_qdap% 
         key %>% 
         as.factor() %>% 
-        setNames(nm = nms)
+        stats::setNames(nm = nms)
 }
 
 ## name2sex <- 

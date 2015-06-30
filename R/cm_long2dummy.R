@@ -46,7 +46,7 @@ function(dataframe, rm.var = NULL,
     code = "code", start = "start", end = "end") {
 
     com <- which.cm(dataframe)
-    if (is.null(com) && !is(dataframe, "cmspans")){
+    if (is.null(com) && !methods::is(dataframe, "cmspans")){
         stop("Please supply an object from `cm_range2long`, `cm_time2long`, or `cm_df2long`.")
     }
       

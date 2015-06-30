@@ -70,15 +70,15 @@ function(text.var, grouping.var, stopwords = NULL,
     } else {
         title.name <- ""
     }
-    plot(v, main = title.name, cex.main = title.cex, col.main = title.color,
+    graphics::plot(v, main = title.name, cex.main = title.cex, col.main = title.color,
         family = title.font, ...)
     if (legend) {
         cols <- col.fn(v$colors)
-        par(mar = rep(0, 4), xpd = TRUE)
+        graphics::par(mar = rep(0, 4), xpd = TRUE)
         legend(legend.location[1], legend.location[2], horiz = legend.horiz,
             legend = colnames(Counts), fill = cols, cex = legend.cex, 
             text.col = legend.text.col)
-        par(mar = c(5, 4, 4, 2) + 0.1, xpd = TRUE)
+        graphics::par(mar = c(5, 4, 4, 2) + 0.1, xpd = TRUE)
     }
     invisible(list(freq.mat = Counts, venneuler.obj = v))
 }

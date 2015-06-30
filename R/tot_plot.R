@@ -173,7 +173,7 @@ tot_plot <- function(dataframe, text.var, grouping.var = NULL, facet.vars = NULL
         Ylab <- "Word Count"
     }
 
-    dataframe <- na.omit(dataframe)
+    dataframe <- stats::na.omit(dataframe)
     dataframe <- droplevels(dataframe)
     dataframe[, "bar.space"] <- rep(bar.space, nrow(dataframe))
 

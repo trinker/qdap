@@ -3,7 +3,7 @@ Type: Package
 Title: Bridging the Gap Between Qualitative Data and Quantitative
         Analysis
 Version: 2.2.2
-Date: 2015-06-29
+Date: 2015-06-30
 Authors@R: c(person("Bryan", "Goodrich", role = "ctb"), person("Dason",
         "Kurkiewicz", role = "ctb"), person("Tyler", "Rinker", email =
         "tyler.rinker@gmail.com", role = c("aut", "cre")))
@@ -11,8 +11,8 @@ Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Depends: R (>= 3.1.0), qdapDictionaries (>= 1.0.2), qdapRegex (>=
         0.1.2), qdapTools (>= 1.0.3), RColorBrewer
 Imports: chron, dplyr (>= 0.3), gdata, gender (>= 0.5.0), ggplot2 (>=
-        0.9.3.1), grid, gridExtra, igraph, NLP, openNLP (>= 0.2-1),
-        parallel, plotrix, RCurl, reports, reshape2, scales,
+        0.9.3.1), grid, gridExtra, igraph, methods, NLP, openNLP (>=
+        0.2-1), parallel, plotrix, RCurl, reports, reshape2, scales,
         stringdist, tidyr, tm (>= 0.6.1), tools, venneuler, wordcloud,
         xlsx, XML
 Suggests: koRpus, knitr, lda, proxy, stringi, SnowballC, testthat

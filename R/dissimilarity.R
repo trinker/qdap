@@ -86,7 +86,7 @@
 Dissimilarity <- 
 function(text.var, grouping.var= NULL, method = "prop", diag = FALSE, 
     upper = FALSE, p = 2, ...){   
-    if(!is(text.var, "true.matrix")){ 
+    if(!methods::is(text.var, "true.matrix")){ 
         wfm.object <- wfm(text.var = text.var, grouping.var = grouping.var, ...)
     } else {
         wfm.object <- text.var

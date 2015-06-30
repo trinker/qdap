@@ -31,7 +31,7 @@
 #' }
 htruncdf <-
 function(dataframe, n=10, width=10, ...) {
-    o <- head(truncdf(as.data.frame(dataframe), width), n = n, ...)
+    o <- utils::head(truncdf(as.data.frame(dataframe), width), n = n, ...)
     class(o) <- c("trunc", class(o))
     o
 }

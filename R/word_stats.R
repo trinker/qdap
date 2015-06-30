@@ -153,7 +153,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
         } else {
             omit <- NULL
         }
-        DF <- na.omit(data.frame(group = grouping, tot.sen = t.o.t., 
+        DF <- stats::na.omit(data.frame(group = grouping, tot.sen = t.o.t., 
             TOT = TOT(t.o.t.), text.var = Text, stringsAsFactors = FALSE)) 
         if (is.dp(text.var=DF[, "text.var"])){
             warning(paste0("\n  Some rows contain double punctuation.",
@@ -244,7 +244,7 @@ function(text.var, grouping.var = NULL, tot = NULL, parallel = FALSE,
 
     typer <- function(df){
         types <- c("n.state", "n.quest", "n.exclm", "n.imper", "n.incom")
-        sapply(types, function(x) sum(na.omit(df[, "sent.type"]==x)))
+        sapply(types, function(x) sum(stats::na.omit(df[, "sent.type"]==x)))
     }
     DF2 <- data.frame(DF2, do.call("rbind", lapply(LIST, typer)))   
     DF2 <- DF2[order(-DF2$n.words), ]
@@ -388,7 +388,7 @@ function(text.var, digit.remove = FALSE, apos_rm = FALSE,
     digits = 3, parallel = FALSE) {
     syllable.count <- character.count <- word.count <- NULL
     polysyllable.count <- NULL
-    DF <- na.omit(data.frame(text.var = text.var, 
+    DF <- stats::na.omit(data.frame(text.var = text.var, 
         stringsAsFactors = FALSE))
     DF$n.sent <- 1:nrow(DF)
     DF[, "word.count"] <- word_count(DF$text.var, missing = 0, 

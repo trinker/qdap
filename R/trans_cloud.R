@@ -143,13 +143,13 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
     } else {
         PRO <- length(word.list)
     }
-    if(is(word.list, "word_list")){
+    if(methods::is(word.list, "word_list")){
         word.list <- word.list
     } else {
-        if (is(word.list, "bagOwords")){
+        if (methods::is(word.list, "bagOwords")){
             word.list <- word.list
         } else {
-            if (is(word.list, "freqList")) {
+            if (methods::is(word.list, "freqList")) {
                 word.list <- freqTab2words(word.list)
             } else {
                 word.list <- lapply(word.list, qda.handler)
@@ -239,22 +239,22 @@ function(text.var = NULL, grouping.var = NULL, word.list = NULL, stem = FALSE,
                 mean(df2[, 2] + 1)
             }
         }
-        if (dev.interactive()) {
-            dev.new()
+        if (grDevices::dev.interactive()) {
+            grDevices::dev.new()
         }
         wordcloud(df2[, 1], df2[, 2], colors = COL, rot.per = rot.per, 
             min.freq = min.freq, ordered.colors = TRUE, vfont = font, 
             random.order = random.order, scale = c(Scale, word.size))
         if (title) {
-            mtext(text, side = side, padj = title.padj, col = title.color,
+            graphics::mtext(text, side = side, padj = title.padj, col = title.color,
                 family = title.font, cex = title.cex)
         }
         if (!is.null(legend)){
-            par(mar = rep(0, 4), xpd = NA)
+            graphics::par(mar = rep(0, 4), xpd = NA)
             legend(x = legend.location[1], y = legend.location[2], 
                 cex = legend.cex, legend = legend, 
                 fill = cloud.colors[1:length(legend)])
-            par(mar = c(5, 4, 4, 2) + 0.1, xpd = TRUE)
+            graphics::par(mar = c(5, 4, 4, 2) + 0.1, xpd = TRUE)
         }
     }  #end of CLOUD function
     if (!is.list(word.list)) {

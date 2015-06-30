@@ -41,9 +41,9 @@ function (text.var, match.string, grouping.var = NULL, ignore.case = FALSE,
     ## Added on 1-21-14 to deal with NA in data
     X[is.na(X[, "Y"]), "Y"] <- 0
 
-    Z <- aggregate(Y ~ G, X, sum)
+    Z <- stats::aggregate(Y ~ G, X, sum)
     z <- lapply(2:length(y), function(x) {
-      aggregate(y[, x] ~ group.var, y, sum)
+      stats::aggregate(y[, x] ~ group.var, y, sum)
     })
 
     w <- data.frame(z[[1]][1], Z[, 2], lapply(seq_along(z), 
@@ -64,7 +64,7 @@ function (text.var, match.string, grouping.var = NULL, ignore.case = FALSE,
       ")", sep = ""))
     w[, -c(1:2)] <- replacer(w[, -c(1:2), drop=FALSE], replace = 0, 
       with = zero.replace)
-    attributes(w)[["by.row"]] <- setNames(data.frame(
+    attributes(w)[["by.row"]] <- stats::setNames(data.frame(
         X[, 2:1], 
         y[, -1, drop=FALSE]
     ), names(w))

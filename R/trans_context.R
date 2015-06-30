@@ -179,7 +179,7 @@ print.qdap_context <- function(x, file = NULL, pretty = TRUE, width = 70,
         }
     } else {
         if(FE == "csv") {
-            write.csv(out, file = file, row.names = FALSE)
+            utils::write.csv(out, file = file, row.names = FALSE)
         } else {
             if(FE == "xlsx") {
                 write.xlsx(out, file = file, row.names = FALSE)

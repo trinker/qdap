@@ -62,7 +62,7 @@ function(loc = "DATA/TRANSCRIPTS/CLEANED_TRANSCRIPTS", obj.prefix = "dat",
     if (use.path) {
         string <- paste0("\"", file.path(loc, fls), "\"")
     } else {
-        basic <- capture.output(substitute(loc))
+        basic <- utils::capture.output(substitute(loc))
         string <- paste0("file.path(", basic, ", \"", fls, "\")")
     }
     x <- paste0(obj.prefix, vals, " <- ", "read.transcript(",  

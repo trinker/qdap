@@ -458,11 +458,11 @@ lexical_classification <- function(text.var, grouping.var = NULL,
         dplyr::summarise(
             word.count = sum(word.count, na.rm = TRUE),
             ave.content.rate = 100*mean(unlist(lexical), na.rm = TRUE),
-            SE = SE(100*na.omit(unlist(lexical))),
+            SE = SE(100*stats::na.omit(unlist(lexical))),
             n.content = sum(n.content, na.rm = TRUE),
             n.functional = sum(n.functional, na.rm = TRUE),
-            content = paste(na.omit(unlist(content)), collapse="_"),
-            functional = paste(na.omit(unlist(functional)), collapse="_")
+            content = paste(stats::na.omit(unlist(content)), collapse="_"),
+            functional = paste(stats::na.omit(unlist(functional)), collapse="_")
         ) 
 
     DF3[["content"]] <- char02NA(lapply(DF3[["content"]], function(x) strsplit(x, "_")[[1]]))
@@ -481,11 +481,11 @@ lexical_classification <- function(text.var, grouping.var = NULL,
     if (!all(is.na(unlist(DF2[["content"]])))) {
         content <- DF2[["content"]] %>%
             unlist %>%
-            na.omit %>%
+            stats::na.omit %>%
             table %>%
             as.matrix %>%
             matrix2df %>%
-            setNames(c("word", "freq")) %>% 
+            stats::setNames(c("word", "freq")) %>% 
             dplyr::arrange(-freq)
 
         class(content) <- c("lexical", class(content))
@@ -496,11 +496,11 @@ lexical_classification <- function(text.var, grouping.var = NULL,
     if (!all(is.na(unlist(DF2[["functional"]])))) {
         functional <- DF2[["functional"]] %>%
             unlist %>%
-            na.omit %>%
+            stats::na.omit %>%
             table %>%
             as.matrix %>%
             matrix2df %>%
-            setNames(c("word", "freq")) %>% 
+            stats::setNames(c("word", "freq")) %>% 
             dplyr::arrange(-freq)
 
         class(functional) <- c("lexical", class(functional) )
@@ -630,9 +630,9 @@ plot.lexical <- function(x, min.freq=1, rot.per=0, random.order = FALSE,
         min.freq = min.freq, rot.per = rot.per, ...)
 
     if (!is.null(title)) {
-        par(mar = c(0, 0, 2, 0))
+        graphics::par(mar = c(0, 0, 2, 0))
         if (isTRUE(title)) title <- Caps(attributes(x)[["type"]])
-        mtext(title, side = 3, col = title.color, padj=-1)
+        graphics::mtext(title, side = 3, col = title.color, padj=-1)
     }
 }
 
@@ -710,17 +710,17 @@ plot.lexical_classification <- function(x, bar.size = 5, low = "blue", mid = "gr
     error.bar.height = .5, error.bar.size = .5, error.bar.color = "black",
     error.bar.alpha = .6, ...){
 
-    content.rate <- Lexical_classification <- group <- content.rate <- ave.content.rate <- unit <- NULL
+    start <- end <- ave <- content.rate <- Lexical_classification <- group <- content.rate <- ave.content.rate <- unit <- NULL
 
     dat2 <- x[["lexical_classification"]] 
-    dat <- as.data.frame(setNames(lapply(1:6, function(i) dat2[, i]), 
+    dat <- as.data.frame(stats::setNames(lapply(1:6, function(i) dat2[, i]), 
         colnames(dat2)[1:6]))
     dat2 <- x[["raw"]][, c(1, 4)]
     dat2[["dialogue"]] <- sapply(x[["raw"]][, 7], unbag)
     dat2[dat2[["dialogue"]] == "", "dialogue"] <- NA
     if (na.rm) {
-       dat <- na.omit(dat)
-       dat2 <- na.omit(dat2)
+       dat <- stats::na.omit(dat)
+       dat2 <- stats::na.omit(dat2)
     }
     G <- names(dat)[1]
   
@@ -768,8 +768,8 @@ plot.lexical_classification <- function(x, bar.size = 5, low = "blue", mid = "gr
             levels = sort(unique(dat[["group"]]), decreasing = TRUE))     
     }
     if (na.rm) {
-       dat2 <- na.omit(dat2)
-       dat <- na.omit(dat)
+       dat2 <- stats::na.omit(dat2)
+       dat <- stats::na.omit(dat)
     }
     
     ## Plot the lexical_classification dotplot with optional error bars
@@ -904,14 +904,14 @@ plot.lexical_classification_score <- function(x, error.bar.height = .35,
     nms <- paste(sapply(strsplit(names(x)[1], "&")[[1]], Caps), collapse = " & ")
     names(x)[1] <- "grvar"
 
-    dat <- as.data.frame(setNames(lapply(1:6, function(i) x[[i]]), colnames(x)[1:6])) 
+    dat <- as.data.frame(stats::setNames(lapply(1:6, function(i) x[[i]]), colnames(x)[1:6])) 
 
     dat2 <- dat %>% 
         tidyr::gather(class, counts, c(n.content, n.functional)) %>%
         dplyr::mutate(prop = counts/word.count) %>%
         dplyr::group_by(grvar) %>%
         dplyr::mutate(
-            position = Reduce('+', list(prop/2,cumsum(c(0,head(prop,-1))))),
+            position = Reduce('+', list(prop/2, cumsum(c(0, utils::head(prop, -1))))),
             labs = paste0(numformat(100*round(prop, 4), 2), "%"),
             class = sapply(gsub("n\\.", "", class), Caps)
          )
@@ -968,7 +968,7 @@ plot.lexical_classification_score <- function(x, error.bar.height = .35,
 plot.lexical_classification_preprocessed <- function(x, jitter=.1, 
     text.size=3.5, alpha = .3, ncol = 3, ...){ 
 
-    content.rate <- NULL
+    ave <- content.rate <- NULL
     
     nms <- paste(sapply(strsplit(names(x)[1], "&")[[1]], 
         Caps), collapse = " & ")
@@ -1059,7 +1059,7 @@ Animate_lexical_classification_net <- function(x, functional = "yellow",
     ## we don't want an edge to return to the node it leaves
     tos <- split(y[["to"]], y[["temp"]])
     tos_lens <- sapply(tos, length)
-    y[["to"]] <- rep(sapply(tos, tail, 1), tos_lens)
+    y[["to"]] <- rep(sapply(tos, utils::tail, 1), tos_lens)
   
     ## make a combined from|to column
     y[["fromQDAPQDAPto"]] <- paste2(y[, c("from", "to")], sep=qsep)
@@ -1085,7 +1085,7 @@ Animate_lexical_classification_net <- function(x, functional = "yellow",
          )
 
     ## set up color gradients
-    colfunc <- colorRampPalette(c(functional, content))
+    colfunc <- grDevices::colorRampPalette(c(functional, content))
     cols <- colfunc(max.color.breaks)
    
     ## add colors to df_lexical_classification based on agrgegated 
@@ -1122,7 +1122,7 @@ Animate_lexical_classification_net <- function(x, functional = "yellow",
     missing <- which(is.na(y[["word.count"]]))
 
     ## Add edge weights etc to each graph
-    igraph_objs <- setNames(lapply(seq_along(new_lex_nets), 
+    igraph_objs <- stats::setNames(lapply(seq_along(new_lex_nets), 
         function(i, grp =new_lex_nets, len=length(unique(y[[1]])), sep=qsep){
 
         ## limit the edge weights (widths) of first 5 plots)
@@ -1252,7 +1252,7 @@ Animate_lexical_classification_bar <- function(x, wc.time = TRUE, time.constant 
 
     theplot <- ggbar_lex(listdat[[length(listdat)]], grp = nms, rng = rng)
 
-    ggplots <- setNames(lapply(seq_along(listdat), function(i, aplot=theplot) {
+    ggplots <- stats::setNames(lapply(seq_along(listdat), function(i, aplot=theplot) {
 
         listdat[[i]][["group"]] <- factor(listdat[[i]][["group"]], levels=ord)
         titlepol <- numbformat(thebardat[i], digits)
@@ -1485,10 +1485,10 @@ print.animated_lexical_classification <- function(x, title = NULL,
         network = {
             invisible(lapply(x, function(y) {
                 set.seed(seed)
-                par(bg = bg)
+                graphics::par(bg = bg)
                 plot.igraph(y, edge.curved=TRUE, layout=layout)
                 if (!is.null(title)) {
-                    mtext(title, side=3)
+                    graphics::mtext(title, side=3)
                 }
                 if (!is.null(legend)) {
                     plotrix::color.legend(legend[1], legend[2], legend[3], legend[4], 
@@ -1572,7 +1572,7 @@ Network.lexical_classification <- function(x, functional = "yellow", content = "
     ## we don't want an edge to return to the node it leaves
     tos <- split(y[["to"]], y[["temp"]])
     tos_lens <- sapply(tos, length)
-    y[["to"]] <- rep(sapply(tos, tail, 1), tos_lens)
+    y[["to"]] <- rep(sapply(tos, utils::tail, 1), tos_lens)
   
     ## make a combined from|to column
     y[["fromQDAPQDAPto"]] <- paste2(y[, c("from", "to")], sep=qsep)
@@ -1588,7 +1588,7 @@ Network.lexical_classification <- function(x, functional = "yellow", content = "
          )
 
     ## set up color gradients
-    colfunc <- colorRampPalette(c(functional, content))
+    colfunc <- grDevices::colorRampPalette(c(functional, content))
     cols <- colfunc(max.color.breaks)
    
     ## add colors to df_lexical_classification based on agrgegated 
@@ -1712,7 +1712,7 @@ cumulative.animated_lexical_classification <- function(x, ...) {
     }
 
     out <- c(0, unlist(lapply(x, grab_ave_lexical_classification), use.names = FALSE))
-    avelex <- tail(out, 1)
+    avelex <- utils::tail(out, 1)
     len <- length(out)
     
     output <- data.frame(cum_mean = out, Time = 1:len, drop=TRUE) 

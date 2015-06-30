@@ -513,14 +513,14 @@ as.dtm.wfm <-
 
 wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
   
-    if (!is(text.var, "true.matrix")) {
+    if (!methods::is(text.var, "true.matrix")) {
         text.var <- wfm(text.var = text.var, grouping.var = grouping.var, 
             output = "raw", ...)
     }
     
     d <- melt(text.var)
     colnames(d)[1:2] <- c("Terms", "Docs")
-    xtabs(value ~ Terms + Docs, d)
+    stats::xtabs(value ~ Terms + Docs, d)
 }
 
 
@@ -548,7 +548,7 @@ wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
 as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "docs", 
     text = "text", sent.split = FALSE) {
 
-    if(!is(x[[1]], "PlainTextDocument")) {
+    if(!methods::is(x[[1]], "PlainTextDocument")) {
         x <- tm::tm_map(x, PlainTextDocument)
     }
 
@@ -838,7 +838,7 @@ apply_as_tm <- function(wfm.obj, tmfun, ..., to.qdap = TRUE){
     y <- tmfun(x, ...) 
 
     ## attempt to coerce back to qdap wfm/weighted_wfm
-    if (to.qdap && (is(y, "DocumentTermMatrix")|is(y, "TermDocumentMatrix"))) {
+    if (to.qdap && (methods::is(y, "DocumentTermMatrix")|methods::is(y, "TermDocumentMatrix"))) {
         tm2qdap(y)
     } else {
         y

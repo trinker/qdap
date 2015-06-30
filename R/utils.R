@@ -16,7 +16,7 @@ rbind_qdap <- function(x) {
 ## http://stackoverflow.com/a/8197703/1000343
 gg_color_hue <- function(n) {
     hues <- seq(15, 375, length=n+1)
-    hcl(h=hues, l=65, c=100)[1:n]
+    grDevices::hcl(h=hues, l=65, c=100)[1:n]
 }
 
 ## Pad number and character vectors
@@ -43,7 +43,7 @@ pad <- function (x, padding = max(nchar(as.character(x))), sort = TRUE,
 edge_capture <- function(iobj) {
 
     data.frame(do.call(rbind, 
-    strsplit(bracketX(capture.output(E(iobj)))[-c(1:2)], " -> ")))
+    strsplit(bracketX(utils::capture.output(E(iobj)))[-c(1:2)], " -> ")))
 
 }
 
@@ -85,8 +85,8 @@ is.wfm <- function(x) inherits(x, "wfm")
 is.tdm <- function(x) inherits(x, "TermDocumentMatrix")
 is.dtm <- function(x) inherits(x, "DocumentTermMatrix")
 ## is missing punctiuation
-is.mp <- function(x) any(suppressWarnings(na.omit(end_mark(x))) == "_")
-is.empty <- function(x) any(na.omit(x) == "")
+is.mp <- function(x) any(suppressWarnings(stats::na.omit(end_mark(x))) == "_")
+is.empty <- function(x) any(stats::na.omit(x) == "")
 ## is double punctuation
 is.dp <- function(text.var) {
     punct <- c(".", "?", "!", "|")
@@ -112,7 +112,7 @@ is.non.alpha <- function(x) {
 }
 
 is.non.ascii <- function(x) {
-    capture.output(nonascii <- tools::showNonASCII(x))
+    utils::capture.output(nonascii <- tools::showNonASCII(x))
     x %in% unique(nonascii[!is.na(nonascii)])
 }
 

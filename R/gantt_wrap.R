@@ -104,13 +104,13 @@ function(dataframe, plot.var, facet.vars = NULL, fill.var = NULL, title = NULL,
     y.ticks = TRUE, legend.position = NULL, bar.color = NULL, 
     border.color = NULL, border.size = 2, border.width = .1, constrain = TRUE, 
     plot = TRUE) { 
-    new4 <- startp <- endp <- NULL
+    end <- start <- new <- new4 <- startp <- endp <- NULL
     if (is.null(hms.scale)) {
-        if (is(dataframe, "cmtime")) {
+        if (methods::is(dataframe, "cmtime")) {
             hms.scale <- TRUE
         } else {
             hms.scale <- FALSE
-            if (is(dataframe, "cmrange") & xlab == "duration.default"){
+            if (methods::is(dataframe, "cmrange") & xlab == "duration.default"){
                 xlab <- "Duration (words)"
             }
         }

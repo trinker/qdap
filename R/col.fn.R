@@ -2,8 +2,8 @@
 #diagrams 
 col.fn <-
 function(col, alpha=0.3) {
-    col<- hcl(col * 360, 130, 60)
-    col <- col2rgb(col)/255
-    col <- rgb(col[1, ], col[2, ], col[3, ], alpha)
+    col<- grDevices::hcl(col * 360, 130, 60)
+    col <- grDevices::col2rgb(col)/255
+    col <- grDevices::rgb(col[1, ], col[2, ], col[3, ], alpha)
     col
 }

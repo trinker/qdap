@@ -166,7 +166,7 @@ function(object, grouping.var = NULL, rm.var = NULL, total.span = TRUE,
         output2 <- lapply(L2, function(b) {   
             diffs <- b[, "end"] - b[, "start"] 
             data.frame(total = sum(diffs), n = length(diffs), ave = mean(diffs), 
-                sd = ifelse(is.na(sd(diffs)), 0, sd(diffs)), min = min(diffs),
+                sd = ifelse(is.na(stats::sd(diffs)), 0, stats::sd(diffs)), min = min(diffs),
                 max = max(diffs))
         }) 
         out2 <- do.call(rbind, output2)
@@ -238,7 +238,7 @@ print.sum_cmspans <- function(x, digits = NULL, ...) {
     options(width = 10000)
     on.exit(options(width = wdt))
 
-    nums <- function(x) is.numeric(x) && !is(x, "times")
+    nums <- function(x) is.numeric(x) && !methods::is(x, "times")
     if (is.null(digits)) {
         digits <- as.numeric(gsub("digits_", "", class(x)[grepl("digits_", 
             class(x))]))

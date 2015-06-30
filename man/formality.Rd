@@ -177,7 +177,7 @@ FUN <- function(follow=FALSE, theseq = seq_along(bgb)) {
         #par(mar=c(2, 0, 2, 0))
         set.seed(22)
         plot.igraph(bgb[[i]], edge.curved=TRUE)
-        mtext(Title, side=3, col="white")
+        graphics::mtext(Title, side=3, col="white")
         color.legend(Legend[1], Legend[2], Legend[3], Legend[4],
               c("Contextual", "Formal"), attributes(bgb)[["legend"]],
               cex = Legend.cex, col="white")

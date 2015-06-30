@@ -323,7 +323,7 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
             rep(any(x[, col]), nrow(x))
         }))
     }
-    DFsl <- lapply(ALN, function(i) na.omit(DF3[shortDF(DF3, i), 1:4]))
+    DFsl <- lapply(ALN, function(i) stats::na.omit(DF3[shortDF(DF3, i), 1:4]))
     names(DFsl) <- colnames(DF3)[-c(1:4)]
     Terms <- rm_stopwords(text.var2, stopwords = NULL, unlist = TRUE, 
           strip = TRUE, unique = TRUE, names = FALSE, char.keep = char2space)
@@ -432,7 +432,7 @@ function(text.var, grouping.var = NULL, match.string, text.unit = "sentence",
         LISTb <- LISTb[!sapply(LISTb, function(x) nrow(x) == 0)]
         qn <- LIST[!sapply(LIST, function(x) nrow(x)) == 0]
         qn <- unlist(lapply(length(qn), function(i) qn[[i]][, "group"]))
-        names(LIST) <- paste0(unique(na.omit(qn)),
+        names(LIST) <- paste0(unique(stats::na.omit(qn)),
             "_list", seq_along(LIST))
         LIST <- LIST[!sapply(LIST, is.null)]
         LIST <- LIST[!sapply(LIST, function(x) nrow(x) == 0)]

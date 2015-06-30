@@ -67,7 +67,7 @@ cm_df.temp <- function(dataframe, text.var, codes = NULL,
         DF <- data.frame(vars = rownames(DF), DF, check.names = FALSE, row.names=NULL)
     }
     if(!is.null(file)) {
-        write.table(DF, file = file,  sep = ",", 
+        utils::write.table(DF, file = file,  sep = ",", 
             col.names = T, row.names=F, qmethod = "double") 
         message(sprintf("%s written!", file))
     }

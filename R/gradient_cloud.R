@@ -104,7 +104,7 @@ gradient_cloud <- function(text.var, bigroup.var, rev.binary = FALSE, X = "red",
     }
     word.freq <- wfdf(text.var, bigroup.var)
     nms <- colnames(word.freq)[-1]
-    colnames(word.freq)[-1] <- tail(LETTERS, 2)
+    colnames(word.freq)[-1] <- utils::tail(LETTERS, 2)
     wf2 <- word.freq[, -1]/colSums(word.freq[, -1])
     colnames(wf2) <- paste0("prop_", colnames(wf2))
     WF <- data.frame(word.freq, wf2, check.names = FALSE)
@@ -112,8 +112,8 @@ gradient_cloud <- function(text.var, bigroup.var, rev.binary = FALSE, X = "red",
     WF[, "diff"] <- wf2[, 1] - wf2[, 2]
     low <- WF[, "diff"][WF[, "diff"] < 0]
     high <- WF[, "diff"][WF[, "diff"] > 0]
-    lcuts <- quantile(low, seq(0, 1, length.out = round(breaks/2)))
-    hcuts <- quantile(high, seq(0, 1, length.out = round(breaks/2)))
+    lcuts <- stats::quantile(low, seq(0, 1, length.out = round(breaks/2)))
+    hcuts <- stats::quantile(high, seq(0, 1, length.out = round(breaks/2)))
     cts <- as.numeric(unique(sort(c(-1, lcuts, 0, hcuts, 1))))
     WF[, "trans"] <- cut(WF[, "diff"], breaks=cts)
     if (!is.null(stopwords)) {
@@ -126,18 +126,18 @@ gradient_cloud <- function(text.var, bigroup.var, rev.binary = FALSE, X = "red",
     if(is.null(max.word.size )) {
         max.word.size  <- mean(WF[, "total"] + 1)
     }
-    colfunc <- colorRampPalette(c(X, Y))
+    colfunc <- grDevices::colorRampPalette(c(X, Y))
     WF[, "colors"] <- lookup(WF[, "trans"], levels(WF[, "trans"]),
         rev(colfunc(length(levels(WF[, "trans"])))))
-    OP <- par()[["mar"]]
-    on.exit(par(mar = OP))
-    par(mar=c(7,1,1,1))
+    OP <- graphics::par()[["mar"]]
+    on.exit(graphics::par(mar = OP))
+    graphics::par(mar=c(7,1,1,1))
     wordcloud(WF[, 1], WF[, "total"], min.freq = min.freq, 
         colors = WF[, "colors"], rot.per = rot.per, random.order = random.order, 
         ordered.colors = TRUE, vfont = cloud.font, 
         scale = c(max.word.size , min.word.size))
     if (!is.null(title)) {
-        mtext(title, side = title.location, padj = title.padj, 
+        graphics::mtext(title, side = title.location, padj = title.padj, 
             col = title.color, family = title.font, cex = title.cex)
     }
     COLS <- colfunc(length(levels(WF[, "trans"])))

@@ -50,7 +50,7 @@ function(cm_long2dummy_obj, rm.var = "time") {
 
     ## If the cm_long2dummy_obj isn't a list make it so and named 
     if (is.matrix(cm_long2dummy_obj) | is.data.frame(cm_long2dummy_obj)) {
-        nms <- tail(as.character(substitute(cm_long2dummy_obj)), 1)
+        nms <- utils::tail(as.character(substitute(cm_long2dummy_obj)), 1)
         cm_long2dummy_obj <- list(cm_long2dummy_obj)
         names(cm_long2dummy_obj) <- nms
     }

@@ -207,21 +207,21 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
         if (progress.bar){
             ntv <- length(text.var)
             if (Sys.info()[['sysname']] == "Windows" & progress.bar != "text"){
-                pb <- winProgressBar(title = "progress bar", min = 0,
+                pb <- utils::winProgressBar(title = "progress bar", min = 0,
                     max = ntv, width = 300)
                 m <- lapply(seq_len(ntv), function(i) {
                         x <- tagPOS(text.var[i], pta)
-                        setWinProgressBar(pb, i, title = paste(round(i/ntv*100, 0),
+                        utils::setWinProgressBar(pb, i, title = paste(round(i/ntv*100, 0),
                             "% done"))
                         x
                     }
                 )
                 close(pb)
             } else {
-                pb <- txtProgressBar(min = 0, max = ntv, style = 3)
+                pb <- utils::txtProgressBar(min = 0, max = ntv, style = 3)
                 m <- lapply(seq_len(ntv), function(i) {
                         x <- tagPOS(text.var[i], pta)
-                        setTxtProgressBar(pb, i)
+                        utils::setTxtProgressBar(pb, i)
                         x
                     }
                 )
@@ -743,7 +743,7 @@ proportions.pos_by <- function(x, ...) {
 #' @export
 plot.pos <- function(x, ...) {
 
-    plot(counts(x), ...)
+    graphics::plot(counts(x), ...)
 
 }
 
@@ -768,11 +768,11 @@ plot.pos_preprocessed <- function(x, ...){
 
     Max <- max(dat[, "Counts"])
 
-    ggplot(dat, aes(POS)) + 
-        geom_bar(aes(weights=Counts)) + 
-        coord_flip() + 
-        ylab("Count") +
-        scale_y_continuous(expand = c(0,0), limits = c(0,Max + Max*.05)) +
+    ggplot2::ggplot(dat, ggplot2::aes(POS)) + 
+        ggplot2::geom_bar(aes(weights=Counts)) + 
+        ggplot2::coord_flip() + 
+        ggplot2::ylab("Count") +
+        ggplot2::scale_y_continuous(expand = c(0,0), limits = c(0,Max + Max*.05)) +
         theme_qdap()
 
 }

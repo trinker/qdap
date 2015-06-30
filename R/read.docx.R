@@ -4,7 +4,7 @@ function(file, skip = 0, sep = ":") {
     tmp <- tempfile()
     if (!dir.create(tmp))
       stop("Temporary directory could not be established.")
-    unzip(file, exdir = tmp)  # Unzip to temporary directory
+    utils::unzip(file, exdir = tmp)  # Unzip to temporary directory
     xmlfile <- file.path(tmp, "word", "document.xml")  # Path to xml document
     doc     <- xmlTreeParse(xmlfile, useInternalNodes=TRUE)  # Import XML
     unlink(tmp, recursive = TRUE)  # Delete unzipped files; no longer needed

@@ -79,7 +79,7 @@ plot(mygraph, edge.curved=TRUE)
 ## Community detection
 x <- with(mraja1, discourse_map(dialogue, person))
 wc <- walktrap.community(visual(x))
-colors <- rainbow(max(membership(wc)))
+colors <- grDevices::rainbow(max(membership(wc)))
 plot(x, vertex.color=colors[membership(wc)])
 
 ## Repeated Measures (BASIC EXAMPLE)
@@ -97,7 +97,7 @@ par(mfrow=c(3, 2), mar=c(0, 0, 3, 0))
 
 lapply(seq_along(plot_dat), function(i){
     plot(plot_dat[[i]])
-    mtext(paste("Act", names(plot_dat)[i]), side=3)
+    graphics::mtext(paste("Act", names(plot_dat)[i]), side=3)
 })
 
 
@@ -118,7 +118,7 @@ lapply(seq_along(plot_dat), function(i){
     V(THE_PLOT)$label.color <- lookup(V(THE_PLOT)$family, fam_key)
 
     plot(THE_PLOT, edge.curved=TRUE)
-    mtext(paste("Act", names(plot_dat)[i]), side=3)
+    graphics::mtext(paste("Act", names(plot_dat)[i]), side=3)
 })
 frame()
 bords <- rep("black", 7)
@@ -157,7 +157,7 @@ FUN <- function() {
         par(mar=c(0, 0, 1, 0))
         set.seed(10)
         plot.igraph(ans[[i]], edge.curved=TRUE, layout=layout.circle)
-        mtext("Discourse Map", side=3)
+        graphics::mtext("Discourse Map", side=3)
         animation::ani.pause()
     })
 }
@@ -190,7 +190,7 @@ FUN3 <- function() {
         par(mar=c(0, 0, 1, 0))
         set.seed(10)
         plot.igraph(ans2[[i]], edge.curved=TRUE, layout=layout.auto)
-        mtext("Discourse Map\\nRomeo and Juliet: Act 1", side=3)
+        graphics::mtext("Discourse Map\\nRomeo and Juliet: Act 1", side=3)
         animation::ani.pause()
     })
 }

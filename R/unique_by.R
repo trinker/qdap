@@ -37,14 +37,14 @@ unique_by <- function(text.var, grouping.var) {
         grouping <- unlist(grouping.var)
     } 
 
-    DF <- na.omit(data.frame(grouping, text.var, check.names = FALSE, 
+    DF <- stats::na.omit(data.frame(grouping, text.var, check.names = FALSE, 
         stringsAsFactors = FALSE))
     DF[, "grouping"] <- factor(DF[, "grouping"])
 
     LIST <- split(DF[, "text.var"], DF[, "grouping"])
     LIST <- lapply(LIST, function(x) unique(bag_o_words(x)))
 
-    setNames(lapply(seq_along(LIST), function(i) {
+    stats::setNames(lapply(seq_along(LIST), function(i) {
         inds <- seq_along(LIST)[!seq_along(LIST) %in% i]
         sort(LIST[[i]][!LIST[[i]] %in% unique(unlist(LIST[inds]))])
     }), names(LIST))

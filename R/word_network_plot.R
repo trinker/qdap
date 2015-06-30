@@ -133,7 +133,7 @@ function(text.var, grouping.var = 1:length(text.var), target.words = NULL,
         layout <- layout.fruchterman.reingold(g)                              
     }                                                                                 
     if (plot) {                                                                       
-        if (dev.interactive()) dev.new()                                              
+        if (grDevices::dev.interactive()) grDevices::dev.new()                                              
         plot.igraph(g, layout=layout, vertex.size=0, vertex.color="white",            
             edge.curved = edge.curved)                                                
         if (is.null(title.padj)){                                                     
@@ -143,15 +143,15 @@ function(text.var, grouping.var = 1:length(text.var), target.words = NULL,
             title.location = 3                                                        
         }                                                                             
         if (!is.null(title.name)) {                                                   
-            mtext(text = title.name, side = title.location, padj = title.padj,        
+            graphics::mtext(text = title.name, side = title.location, padj = title.padj,        
             col = title.color, family = title.font, cex = title.cex)                  
         }                                                                             
         if (!is.null(legend)){                                                        
-            par(mar = rep(0, 4), xpd = NA)                                            
+            graphics::par(mar = rep(0, 4), xpd = NA)                                            
             legend(x = legend.location[1], y = legend.location[2],                    
                 cex = legend.cex, legend = legend,                                    
                 fill = label.colors[1:length(legend)])                                
-            par(mar = c(5, 4, 4, 2) + 0.1, xpd = TRUE)                                
+            graphics::par(mar = c(5, 4, 4, 2) + 0.1, xpd = TRUE)                                
         }                                                                             
     }                                                                                 
     invisible(g)                                                                      

@@ -28,9 +28,9 @@ function(code_x, code_y, grouping.var = NULL) {
         }
     )
     Dc[is.infinite(Dc)] <- NA
-    v <- list(associated_distance = Dnc, mean.sd.n_assoc_dist = c(mean(na.omit(Dnc)), 
-        sd(na.omit(Dnc)), length(na.omit(Dnc))), causal_distance = Dc, 
-        mean.sd.n_causal_dist = c(mean(na.omit(Dc)), sd(na.omit(Dc)), length(na.omit(Dc))))
+    v <- list(associated_distance = Dnc, mean.sd.n_assoc_dist = c(mean(stats::na.omit(Dnc)), 
+        stats::sd(stats::na.omit(Dnc)), length(stats::na.omit(Dnc))), causal_distance = Dc, 
+        mean.sd.n_causal_dist = c(mean(stats::na.omit(Dc)), stats::sd(stats::na.omit(Dc)), length(stats::na.omit(Dc))))
     v2 <- invisible(lapply(v, function(x){
         x[is.nan(x)] <- NA
         return(x)

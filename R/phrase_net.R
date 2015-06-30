@@ -83,7 +83,7 @@ phrase_net <- function(text.var, freq=4, r = .35,
     cor_dat <- word_cor(text.var[["text"]], text.var[["tot"]],
         word=Filtered_dat[[1]], r=NULL)
     
-    X2 <- na.omit(melt(cor_dat))
+    X2 <- stats::na.omit(melt(cor_dat))
     colnames(X2)[1:2] <-c("to", "from")
     X2 <- X2[X2[, "value"] >= r, ]
     X2 <- X2[X2[, "to"] != X2[, "from"], ]

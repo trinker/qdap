@@ -27,7 +27,7 @@ function(cm.list.obj) {
         }
         tester <- function(x, y){
             p <- suppressWarnings(unlist(gregexpr(x, y, fixed = TRUE)))
-            j <- suppressWarnings(if(is.na(str) | length(p) == 1 & p<1) { 
+            j <- suppressWarnings(if(is.na(p) | length(p) == 1 & p<1) { 
                     0 
                 } else {
                     length(p)

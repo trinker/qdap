@@ -34,7 +34,7 @@ function(text = "clipboard", width = 70, copy2clip = interactive()) {
             close(pcon)
         }                                             
         if (Sys.info()["sysname"] == "Windows") {
-            text <- paste(readClipboard(), collapse=" ")
+            text <- paste(utils::readClipboard(), collapse=" ")
         }
         if(!Sys.info()["sysname"] %in% c("Darwin", "Windows")) {
           warning("not Windows or Darwin:

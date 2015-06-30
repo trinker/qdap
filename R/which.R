@@ -1,9 +1,9 @@
 ## Helper function to find out which cm type is used
 which.cm <- function(x) {
-    if(is(x, "cmtime")) {
+    if(methods::is(x, "cmtime")) {
         return("cmtime")
     }
-    if(is(x, "cmrange")) {
+    if(methods::is(x, "cmrange")) {
         return("cmrange")
     }
     NULL
@@ -21,10 +21,10 @@ which.unit <- function(x) {
 
 ## Helper function to find out which cm list type is used
 which.lcm <- function(x) {
-    if(is(x, "l2d_cmtime")) {
+    if(methods::is(x, "l2d_cmtime")) {
         return("l2d_cmtime")
     }
-    if(is(x, "l2d_cmrange")) {
+    if(methods::is(x, "l2d_cmrange")) {
         return("l2d_cmrange")
     }
     NULL

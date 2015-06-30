@@ -144,13 +144,13 @@ word_position <- function(text.var, match.terms, digits = 2,
     ## split sentences into bag of words and find positioning of match.terms
     position <- lapply(lapply(text.var, bag_o_words), function(x){
      
-        out <- na.omit(unlist(sapply(match.terms, function(y){
+        out <- stats::na.omit(unlist(sapply(match.terms, function(y){
             out <- which(y == x)
             if (identical(out, integer(0))) out <- NA
             out
         })))
 
-        setNames(out, gsub("\\d", "", names(out)))
+        stats::setNames(out, gsub("\\d", "", names(out)))
     })
     
     ## unlist postions for later count    
@@ -163,7 +163,7 @@ word_position <- function(text.var, match.terms, digits = 2,
     dat2b <- table(dat)
     dat2 <- data.frame(dat2b) %>% tidyr::spread(position, Freq)
 
-    inds <- suppress_plot(heatmap(as.matrix(dat2b)), 
+    inds <- suppress_plot(stats::heatmap(as.matrix(dat2b)), 
         envir = environment())[["rowInd"]]
     dat2[["word"]] <- factor(dat2[["word"]], 
         levels = as.character(dat2[["word"]])[inds])
@@ -192,9 +192,9 @@ word_position <- function(text.var, match.terms, digits = 2,
 ## helper function
 suppress_plot <- function(..., envir = envir) {
     tdir <- tempdir()
-    pdf(file.path(tdir, "out.pdf"))
+    grDevices::pdf(file.path(tdir, "out.pdf"))
     out <- eval(substitute(...())[[1]], envir = envir)
-    dev.off()
+    grDevices::dev.off()
     out
 }
 
@@ -216,14 +216,15 @@ plot.word_position <- function(x, qheat = TRUE, scale = TRUE, ...){
     dat <- x[["prop"]]
 
     if (!qheat){
-        heatmap(t(qdapTools::df2matrix(dat)), Colv=NA, ylab="Word", 
+        stats::heatmap(t(qdapTools::df2matrix(dat)), Colv=NA, ylab="Word", 
             xlab="Position", scale=if( scale){"row"}else{"none"}, ...)
     } else {
         out <- qheat(dat, high="blue", low="yellow", 
                 by.column=if( scale){ FALSE}else{ NULL}, 
                 digits=3, plot=FALSE, grid=NULL, ...) +
-          ylab("Word") + xlab("Position") + 
-          guides(fill=guide_legend(title="Proportion"))
+            ggplot2::ylab("Word") + 
+            ggplot2::xlab("Position") + 
+            ggplot2::guides(fill=ggplot2::guide_legend(title="Proportion"))
         out
     }
 }
@@ -237,7 +238,7 @@ plot.word_position <- function(x, qheat = TRUE, scale = TRUE, ...){
 #' @export
 #' @method print word_position
 print.word_position <- function(x, ...){
-    print(plot(x, ...))
+    print(graphics::plot(x, ...))
 }
 
 

@@ -2,10 +2,10 @@
 qda.handler <-
 function(x) {
     if (any(class(x) %in% c("freqList", "bagOwords"))) {
-        if (is(x, "freqList")) {
+        if (methods::is(x, "freqList")) {
             return(freqTab2words(x))
         } else {
-            if (is(x, "bagOwords")) {
+            if (methods::is(x, "bagOwords")) {
                 return(x)
             }
         }

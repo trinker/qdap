@@ -73,7 +73,7 @@ function (text.var, grouping.var=NULL){
             grouping <- unlist(grouping.var)
         } 
     } 
-    DF <- na.omit(data.frame(group = grouping,
+    DF <- stats::na.omit(data.frame(group = grouping,
         text.var = as.character(text.var), stringsAsFactors = FALSE))
     z <- split(DF[, "text.var"], DF[, "group"])
     y <- lapply(z, rm_stopwords, stopwords=NULL, unlist=TRUE, strip = TRUE)

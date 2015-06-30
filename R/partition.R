@@ -2,7 +2,7 @@
 partition <-
 function(x, k = 100){
     n <- length(x)
-    if (sum(na.omit(x)) < k) {
+    if (sum(stats::na.omit(x)) < k) {
         ans <- rep(NA, n)
         return(factor(ans))
     }

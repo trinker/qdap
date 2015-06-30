@@ -156,7 +156,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         } 
     } 
     text <- as.character(text.var)
-    DF <- na.omit(data.frame(group = grouping, text.var = text, 
+    DF <- stats::na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
@@ -177,9 +177,9 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
     DF$character.count <- character_count(DF$text.var)
-    DF2 <- aggregate(word.count ~ group, DF, sum)
+    DF2 <- stats::aggregate(word.count ~ group, DF, sum)
     DF2$sentence.count <- as.data.frame(table(DF$group))$Freq
-    DF2$character.count <- aggregate(character.count ~ 
+    DF2$character.count <- stats::aggregate(character.count ~ 
         group, DF, sum)$character.count 
     ari <- function(tse, tw, tc) 4.71*(tc/tw) + .5*(tw/tse) - 21.43
     DF2$Automated_Readability_Index <- with(DF2, 
@@ -241,7 +241,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         } 
     } 
     text <- as.character(text.var)
-    DF <- na.omit(data.frame(group = grouping, text.var = text, 
+    DF <- stats::na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
@@ -263,9 +263,9 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
     DF$character.count <- character_count(DF$text.var, 
         apostrophe.remove = FALSE, digit.remove = FALSE)
-    DF2 <- aggregate(word.count ~ group, DF, sum)
+    DF2 <- stats::aggregate(word.count ~ group, DF, sum)
     DF2$sentence.count <- as.data.frame(table(DF$group))$Freq
-    DF2$character.count <- aggregate(character.count ~ 
+    DF2$character.count <- stats::aggregate(character.count ~ 
         group, DF, sum)$character.count 
     clf <- function(tse, tw, tc) (.0588*((100*tc)/tw)) - 
       (.296*((100*tse)/tw) ) - 15.8
@@ -316,7 +316,7 @@ function(text.var, grouping.var = NULL, output = "valid",
         } 
     } 
     text <- as.character(text.var)
-    DF <- na.omit(data.frame(group = grouping, text.var = text, 
+    DF <- stats::na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
@@ -343,9 +343,9 @@ function(text.var, grouping.var = NULL, output = "valid",
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
     DF$polysyllable.count <- polysyllable_sum(DF$text.var)
-    DF2 <- aggregate(word.count ~ group, DF, sum)
+    DF2 <- stats::aggregate(word.count ~ group, DF, sum)
     DF2$sentence.count <- as.data.frame(table(DF$group))$Freq
-    DF2$polysyllable.count <- aggregate(polysyllable.count ~ 
+    DF2$polysyllable.count <- stats::aggregate(polysyllable.count ~ 
         group, DF, sum)$polysyllable.count   
     smog <- function(tse, tpsy) 1.043 * sqrt(tpsy * (30/tse)) + 3.1291 
     DF2$SMOG <- with(DF2, smog(tse = sentence.count, 
@@ -393,7 +393,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         } 
     } 
     text <- as.character(text.var)
-    DF <- na.omit(data.frame(group = grouping, text.var = text, 
+    DF <- stats::na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
@@ -412,9 +412,9 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF$syllable.count <- syllable_sum(DF$text.var)
     DF$tot.n.sent <- 1:nrow(DF)
     DF <- DF[with(DF, order(group, DF$tot.n.sent)), ]
-    DF2 <- aggregate(word.count ~ group, DF, sum)
+    DF2 <- stats::aggregate(word.count ~ group, DF, sum)
     DF2$sentence.count <- as.data.frame(table(DF$group))$Freq
-    DF2$syllable.count <- aggregate(syllable.count ~ group, DF, 
+    DF2$syllable.count <- stats::aggregate(syllable.count ~ group, DF, 
         sum)$syllable.count  
     fkgl <- function(tw, tse, tsy) 0.39 * (tw/tse) + 11.8 * (tsy/tw) - 15.59
     fre <- function(tw, tse, tsy) 206.835 - 1.015 * (tw/tse) - 84.6 * (tsy/tw)
@@ -472,7 +472,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE,
         } 
     } 
     text <- as.character(text.var)
-    DF <- na.omit(data.frame(group = grouping, text.var = text, 
+    DF <- stats::na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
@@ -525,15 +525,15 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE,
     DF4 <- DF3[which(DF3$sub %in% CHOICES), ]
     DF4$sub <- DF4$sub[, drop = TRUE]
     FUN <- function(x) paste(as.character(unlist(x)), collapse = " ")
-    DF5 <- aggregate(text.var ~ sub + group, DF4, FUN)
+    DF5 <- stats::aggregate(text.var ~ sub + group, DF4, FUN)
     sent.per.100 <- as.data.frame(tapply(DF2$frac.sent, DF2$sub, sum))
     names(sent.per.100) <- "x"
     DF5$sent.per.100 <- sent.per.100[as.character(DF5$sub), "x"] 
     hun.grab <- function(x) paste(unblanker(unlist(word_split(
         reducer(unlist(strip(x))))))[1:100], collapse = " ")
     DF5$syll.count <- syllable_sum(lapply(DF5$text.var, hun.grab))
-    DF6 <- aggregate(syll.count ~ group, DF5, mean)
-    DF6$ave.sent.per.100 <- aggregate(sent.per.100 ~ group, DF5, mean)[, 2]
+    DF6 <- stats::aggregate(syll.count ~ group, DF5, mean)
+    DF6$ave.sent.per.100 <- stats::aggregate(sent.per.100 ~ group, DF5, mean)[, 2]
     names(DF6) <- c(G, "ave.syll.per.100", "ave.sent.per.100")
     colnames(DF5)[c(2, 4, 5)] <- c(colnames(DF6)[1], "sent.per.100.wrds",
         "syllables.per.100.wrds")
@@ -584,7 +584,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
         } 
     } 
     text <- as.character(text.var)
-    DF <- na.omit(data.frame(group = grouping, text.var = text, 
+    DF <- stats::na.omit(data.frame(group = grouping, text.var = text, 
         stringsAsFactors = FALSE))
     if (rm.incomplete) {
         DF <- end_inc(dataframe = DF, text.var = text.var, ...)
@@ -628,7 +628,7 @@ function(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...) {
     DF4 <- DF3[which(DF3$sub %in% CHOICES), ]
     DF4$sub <- DF4$sub[, drop = TRUE]
     FUN <- function(x) paste(as.character(unlist(x)), collapse = " ")
-    DF5 <- aggregate(text.var ~ sub + group, DF4, FUN)
+    DF5 <- stats::aggregate(text.var ~ sub + group, DF4, FUN)
     sent.per.100 <- as.data.frame(tapply(DF2$frac.sent, DF2$sub, sum))
     names(sent.per.100) <- "x"
     DF5$sent.per.100 <- sent.per.100[as.character(DF5$sub), "x"]
@@ -849,21 +849,23 @@ plot_automated_readability_index <- function(x) {
     x[, 1] <- factor(x[, 1], levels = x[, 1])
     forlater <-  names(x)[1]
     names(x)[1] <- "grvar"
-    plot1 <- ggplot(x, aes(fill = word.count, x = sentence.count, 
-        y = character.count)) + geom_point(size=2.75, shape=21, colour="grey65") +
-        theme_bw() + 
-        scale_fill_gradient(high="red", low="pink", name="Word\nCount") +
-        ylab("Character Count") + 
-        xlab("Sentence Count") + 
-        theme(panel.grid = element_blank(),
+    plot1 <- ggplot2::ggplot(x, ggplot2::aes(fill = word.count, x = sentence.count, 
+            y = character.count)) + 
+        ggplot2::geom_point(size=2.75, shape=21, colour="grey65") +
+        ggplot2::theme_bw() + 
+        ggplot2::scale_fill_gradient(high="red", low="pink", name="Word\nCount") +
+        ggplot2::ylab("Character Count") + 
+        ggplot2::xlab("Sentence Count") + 
+        ggplot2::theme(panel.grid = ggplot2::element_blank(),
             legend.position = "bottom") +
-        guides(fill = guide_colorbar(barwidth = 10, barheight = .5)) 
-    plot2 <- ggplot(x, aes(y = grvar, x = Readability_count)) +
-        geom_point(size=2) + 
-        ylab(gsub("&", " & ", forlater)) + 
-        xlab("Automated Readability Index")
+        ggplot2::guides(fill = ggplot2::guide_colorbar(barwidth = 10, barheight = .5)) 
+    
+    plot2 <- ggplot2::ggplot(x, ggplot2::aes(y = grvar, x = Readability_count)) +
+        ggplot2::geom_point(size=2) + 
+        ggplot2::ylab(gsub("&", " & ", forlater)) + 
+        ggplot2::xlab("Automated Readability Index")
 
-    grid.arrange(plot2, plot1, ncol=2)
+    gridExtra::grid.arrange(plot2, plot1, ncol=2)
 }
 
 #' Plots a automated_readability_index Object
@@ -887,26 +889,27 @@ word_counts <- function(DF, x, y, z = NULL, g, alpha = .3) {
 
     NMS <- rename(c(x, y, z))
 
-    AES <- aes(x=x, y=y, color=g)
+    AES <- ggplot2::aes(x=x, y=y, color=g)
     if (!is.null(z)) {
         AES[["size"]] <- g
     }
     MAX <- max(DF[, y])
 
-    plot <- ggplot(data.frame(x=DF[, x], y=DF[, y], z=DF[, z], g=DF[, g]), AES) + 
-        geom_point(alpha=alpha) + facet_wrap(~g) + 
-        geom_smooth() + ylim(0, MAX + MAX*.05) +
-        guides(color=FALSE) +
-        ylab(NMS[2]) + xlab(NMS[1]) +
-        theme_minimal() + 
-        theme(panel.grid = element_blank(),
+    plot <- ggplot2::ggplot(data.frame(x=DF[, x], y=DF[, y], z=DF[, z], g=DF[, g]), AES) + 
+        ggplot2::geom_point(alpha=alpha) + facet_wrap(~g) + 
+        ggplot2::geom_smooth() + ylim(0, MAX + MAX*.05) +
+        ggplot2::guides(color=FALSE) +
+        ggplot2::ylab(NMS[2]) + 
+        ggplot2::xlab(NMS[1]) +
+        ggplot2::theme_minimal() + 
+        ggplot2::theme(panel.grid = ggplot2::element_blank(),
             panel.margin = unit(1, "lines")) +
         ggplot2::annotate("segment", x=-Inf, xend=Inf, y=-Inf, yend=-Inf)+
         ggplot2::annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf)
 
 
     if (!is.null(z)) {
-        plot <- plot + scale_size_continuous(names=gsub(" ", "\n", NMS[3]))
+        plot <- plot + ggplot2::scale_size_continuous(names=gsub(" ", "\n", NMS[3]))
     }
 
     suppressMessages(suppressWarnings(print(plot)))
@@ -917,29 +920,31 @@ word_counts2 <- function(DF, x, y, z = NULL, g, alpha = .3) {
 
     NMS <- rename(c(x, y, z))
 
-    AES <- aes(x=x, y=y, color=g)
+    AES <- ggplot2::aes(x=x, y=y, color=g)
     if (!is.null(z)) {
         AES[["size"]] <- g
     }
     MAX <- max(DF[, y])
 
-    plot <- ggplot(data.frame(x=DF[, x], y=DF[, y], z=DF[, z], g=DF[, g]), AES) + 
-        geom_point(alpha=alpha) + facet_wrap(~g) + 
-        geom_smooth() + ylim(0, MAX + MAX*.05) +
-        guides(color=FALSE) +
-        ylab(NMS[2]) + xlab(NMS[1]) +
-        theme_minimal() + 
-        theme(panel.grid = element_blank(),
+    plot <- ggplot2::ggplot(data.frame(x=DF[, x], y=DF[, y], z=DF[, z], g=DF[, g]), AES) + 
+        ggplot2::geom_point(alpha=alpha) + 
+        ggplot2::facet_wrap(~g) + 
+        ggplot2::geom_smooth() + ylim(0, MAX + MAX*.05) +
+        ggplot2::guides(color=FALSE) +
+        ggplot2::ylab(NMS[2]) + 
+        ggplot2::xlab(NMS[1]) +
+        ggplot2::theme_minimal() + 
+        ggplot2::theme(panel.grid = ggplot2::element_blank(),
             panel.margin = unit(1, "lines")) +
         ggplot2::annotate("segment", x=-Inf, xend=Inf, y=-Inf, yend=-Inf)+
         ggplot2::annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf)
 
 
     if (!is.null(z)) {
-        plot <- plot + scale_size_continuous(names=gsub(" ", "\n", NMS[3]))
+        plot <- plot + ggplot2::scale_size_continuous(names=gsub(" ", "\n", NMS[3]))
     }
 
-    invisible(    suppressMessages(suppressWarnings(plot)))
+    invisible(suppressMessages(suppressWarnings(plot)))
 
 }
 
@@ -947,23 +952,25 @@ word_counts3 <- function(DF, x, y, z = NULL, g) {
 
     NMS <- rename(c(x, y, z))
 
-    AES <- aes(x=x, y=y, fill=g)
+    AES <- ggplot2::aes(x=x, y=y, fill=g)
     if (!is.null(z)) {
         AES[["size"]] <- g
     }
     MAX <- max(DF[, y])
 
-    avs <- matrix2df(do.call(rbind, lapply(split(DF[, 2:3], 
+    avs <- qdapTools::matrix2df(do.call(rbind, lapply(split(DF[, 2:3], 
         DF[,1]), colMeans)), "g")
 
-    plot <- ggplot(data.frame(x=DF[, x], y=DF[, y], z=DF[, z], g=DF[, g]), AES) + 
-        geom_point(shape=21, size=3) + facet_wrap(~g) + 
-        guides(color=FALSE, fill=FALSE) +
-        ylab(NMS[2]) + xlab(NMS[1]) +
-        geom_point(data=avs, shape=3, colour="black", aes_string(x=x, y=y, group="g")) 
+    plot <- ggplot2::ggplot(data.frame(x=DF[, x], y=DF[, y], z=DF[, z], g=DF[, g]), AES) + 
+        ggplot2::geom_point(shape=21, size=3) + 
+        ggplot2::facet_wrap(~g) + 
+        ggplot2::guides(color=FALSE, fill=FALSE) +
+        ggplot2::ylab(NMS[2]) + 
+        ggplot2::xlab(NMS[1]) +
+        ggplot2::geom_point(data=avs, shape=3, colour="black", ggplot2::aes_string(x=x, y=y, group="g")) 
 
     if (!is.null(z)) {
-        plot <- plot + scale_size_continuous(names=gsub(" ", "\n", NMS[3]))
+        plot <- plot + ggplot2::scale_size_continuous(names=gsub(" ", "\n", NMS[3]))
     }
 
     suppressMessages(suppressWarnings(print(plot)))
@@ -1068,13 +1075,13 @@ plot_SMOG <- function(x, ...){
     forlater <-  names(x)[1]
     names(x)[1] <- "grvar"
 
-    ggplot(x, aes(y = grvar, x = SMOG)) +
-        geom_point(aes(size = word.count), color="grey75") +
-        geom_point(size=2.2) + 
-        ylab(gsub("&", " & ", forlater)) + 
-        xlab("SMOG") +
-        scale_size_continuous(name="  Word\n  Count") + 
-        theme(legend.key = element_rect(fill = NA))
+    ggplot2::ggplot(x, ggplot2::aes(y = grvar, x = SMOG)) +
+        ggplot2::geom_point(aes(size = word.count), color="grey75") +
+        ggplot2::geom_point(size=2.2) + 
+        ggplot2::ylab(gsub("&", " & ", forlater)) + 
+        ggplot2::xlab("SMOG") +
+        ggplot2::scale_size_continuous(name="  Word\n  Count") + 
+        ggplot2::theme(legend.key = ggplot2::element_rect(fill = NA))
 
 }
 
@@ -1161,25 +1168,25 @@ plot_flesch_kincaid <- function(x, ...){
     x[, 1] <- factor(x[, 1], levels = x[, 1])
     forlater <-  names(x)[1]
     names(x)[1] <- "grvar"
-    plot1 <- ggplot(x, aes(x = sentence.count, 
-        y = syllable.count)) + geom_point(size=2.75, alpha=.3) +
-        theme_bw() + 
-        ylab("Syllable Count") + 
-        xlab("Sentence Count") + 
-        theme(panel.grid = element_blank())
+    plot1 <- ggplot2::ggplot(x, ggplot2::aes(x = sentence.count, y = syllable.count)) + 
+        ggplot2::geom_point(size=2.75, alpha=.3) +
+        ggplot2::theme_bw() + 
+        ggplot2::ylab("Syllable Count") + 
+        ggplot2::xlab("Sentence Count") + 
+        ggplot2::theme(panel.grid = ggplot2::element_blank())
     
     x2 <- melt(x[, c(1, 5:6)], id="grvar")
     x2[, "variable"] <- mgsub(c("FK_grd.lvl", "FK_read.ease"),
         c("Flesch Kincaid Grade Level", 
         "Flesch Kincaid Reading Ease"), x2[, "variable"])
 
-    plot2 <- ggplot(x2, aes(y = grvar, x = value)) +
-        geom_point(size=2) + 
-        ylab(gsub("&", " & ", forlater)) + 
-        xlab("score") +
-        facet_grid(.~variable, scales="free_x") 
+    plot2 <- ggplot2::ggplot(x2, ggplot2::aes(y = grvar, x = value)) +
+        ggplot2::geom_point(size=2) + 
+        ggplot2::ylab(gsub("&", " & ", forlater)) + 
+        ggplot2::xlab("score") +
+        ggplot2::facet_grid(.~variable, scales="free_x") 
 
-    grid.arrange(plot2, plot1, ncol=2, widths=2:1)
+    gridExtra::grid.arrange(plot2, plot1, ncol=2, widths=2:1)
 }
 
 #' Readability Measures
@@ -1301,8 +1308,8 @@ plot.linsear_write_count <- function(x, ...){
     plot1 <- gantt_wrap(dat, "group", fill.var = "Selected", plot = FALSE)
 
     plot1 + 
-        scale_colour_manual(values=c("grey90", "red")) +
-        ylab(nms1) 
+        ggplot2::scale_colour_manual(values=c("grey90", "red")) +
+        ggplot2::ylab(nms1) 
 }
 
 
@@ -1322,7 +1329,7 @@ plot.linsear_write_count <- function(x, ...){
 #' @method plot linsear_write
 plot.linsear_write <- function(x, alpha = .4, ...){ 
 
-    plot(scores(x, alpha = alpha, ...))
+    graphics::plot(scores(x, alpha = alpha, ...))
 
 }
 
@@ -1351,21 +1358,22 @@ plot.linsear_write_scores <- function(x, alpha = c(.4, .08), ...){
     forlater <-  names(x)[1]
     names(x)[1] <- "grvar"
 
-    plot1 <- ggplot(x, aes(y = hard_easy_sum, 
-        x = sent.per.100)) + 
-        geom_smooth(fill="blue", colour="darkblue", size=1, 
-            alpha = tail(alpha, 1), ...) +
-        geom_point(size=2.75, alpha = head(alpha, 1)) +
-        theme_bw() + 
-        xlab("Sentence Per 100 Words") + 
-        ylab("3 x Hard Words + Easy Words") + 
-        theme(panel.grid = element_blank()) 
-    plot2 <- ggplot(x, aes(y = grvar, x = Linsear_Write)) +
-        geom_point(size=2) + 
-        ylab(gsub("&", " & ", forlater)) + 
-        xlab("Linsear Write")
+    plot1 <- ggplot2::ggplot(x, ggplot2::aes(y = hard_easy_sum, 
+            x = sent.per.100)) + 
+        ggplot2::geom_smooth(fill="blue", colour="darkblue", size=1, 
+            alpha = utils::tail(alpha, 1), ...) +
+        ggplot2::geom_point(size=2.75, alpha = utils::head(alpha, 1)) +
+        ggplot2::theme_bw() + 
+        ggplot2::xlab("Sentence Per 100 Words") + 
+        ggplot2::ylab("3 x Hard Words + Easy Words") + 
+        ggplot2::theme(panel.grid = ggplot2::element_blank()) 
+    
+    plot2 <- ggplot2::ggplot(x, ggplot2::aes(y = grvar, x = Linsear_Write)) +
+        ggplot2::geom_point(size=2) + 
+        ggplot2::ylab(gsub("&", " & ", forlater)) + 
+        ggplot2::xlab("Linsear Write")
 
-    grid.arrange(plot2, plot1, ncol=2)
+    gridExtra::grid.arrange(plot2, plot1, ncol=2)
 }
 
 ####=============Template================
@@ -1453,21 +1461,23 @@ plot_coleman_liau <- function(x, ...){
     x[, 1] <- factor(x[, 1], levels = x[, 1])
     forlater <-  names(x)[1]
     names(x)[1] <- "grvar"
-    plot1 <- ggplot(x, aes(fill = word.count, x = sentence.count, 
-        y = character.count)) + geom_point(size=2.75, shape=21, colour="grey65") +
-        theme_bw() + 
-        scale_fill_gradient(high="red", low="pink", name="Word\nCount") +
-        ylab("Character Count") + 
-        xlab("Sentence Count") + 
-        theme(panel.grid = element_blank(),
+    plot1 <- ggplot2::ggplot(x, ggplot2::aes(fill = word.count, x = sentence.count, 
+            y = character.count)) + 
+        ggplot2::geom_point(size=2.75, shape=21, colour="grey65") +
+        ggplot2::theme_bw() + 
+        ggplot2::scale_fill_gradient(high="red", low="pink", name="Word\nCount") +
+        ggplot2::ylab("Character Count") + 
+        ggplot2::xlab("Sentence Count") + 
+        ggplot2::theme(panel.grid = ggplot2::element_blank(),
             legend.position = "bottom") +
-        guides(fill = guide_colorbar(barwidth = 10, barheight = .5)) 
-    plot2 <- ggplot(x, aes(y = grvar, x = Coleman_Liau)) +
-        geom_point(size=2) + 
-        ylab(gsub("&", " & ", forlater)) + 
-        xlab("Coleman Liau")
+        ggplot2::guides(fill = ggplot2::guide_colorbar(barwidth = 10, barheight = .5)) 
+    
+    plot2 <- ggplot2::ggplot(x, ggplot2::aes(y = grvar, x = Coleman_Liau)) +
+        ggplot2::geom_point(size=2) + 
+        ggplot2::ylab(gsub("&", " & ", forlater)) + 
+        ggplot2::xlab("Coleman Liau")
 
-    grid.arrange(plot2, plot1, ncol=2)
+    gridExtra::grid.arrange(plot2, plot1, ncol=2)
 }
 
 ###==============End of template==========
@@ -1475,70 +1485,70 @@ plot_coleman_liau <- function(x, ...){
 plot_fry <- function(x, auto.label = TRUE, grid = FALSE, div.col = "grey85", ...) {
 
     ## Setting up the graph
-    suppressWarnings(plot(1, 1, xlim = c(108, 182), ylim = c(2, 
+    suppressWarnings(graphics::plot(1, 1, xlim = c(108, 182), ylim = c(2, 
         25), axes = FALSE, type = "n", 
         xlab = "Average number of syllables per 100 words", 
         ylab = "Average number of sentences per 100 words", 
         main = "Fry Graph for Estimating Reading Ages (grade level)", 
         xaxs = "i", yaxs = "i"))
-    axis(1, at = 108:182, labels = TRUE)
-    axis(1, at = seq(108, 182, by = 4), tcl = -1.1, labels = FALSE)
-    axis(2, at = 2:25, labels = TRUE)
-    axis(4, at = 2:25, labels = TRUE)
+    graphics::axis(1, at = 108:182, labels = TRUE)
+    graphics::axis(1, at = seq(108, 182, by = 4), tcl = -1.1, labels = FALSE)
+    graphics::axis(2, at = 2:25, labels = TRUE)
+    graphics::axis(4, at = 2:25, labels = TRUE)
     if (grid){
         grid(nx = 74, ny = 46, lty = "solid", col = "gold")
         grid(nx = 37, ny = 23, lty = "solid", col = "gray65")
     }
-    box()
-    segments(108, 9.97, 133.9, 25, lwd = 2, col = div.col)
-    segments(108, 7.7, 142.1, 25, lwd = 2, col = div.col)
-    segments(108, 6.4, 147.8, 25, lwd = 2, col = div.col)
-    segments(108, 5.61, 155, 25, lwd = 2, col = div.col)
-    segments(108, 5.1, 160, 25, lwd = 2, col = div.col)
-    segments(108, 3.8, 160.8, 25, lwd = 2, col = div.col)
-    segments(111.5, 2, 167.5, 25, lwd = 2, col = div.col)
-    segments(123, 2, 169, 25, lwd = 2, col = div.col)
-    segments(136.3, 2, 169, 25, lwd = 2, col = div.col)
-    segments(143.3, 2, 173.5, 25, lwd = 2, col = div.col)
-    segments(148.15, 2, 178.2, 25, lwd = 2, col = div.col)
-    segments(155.6, 2, 178.5, 25, lwd = 2, col = div.col)
-    segments(161.9, 2, 178.4, 25, lwd = 2, col = div.col)
-    segments(168.2, 2, 178.2, 25, lwd = 2, col = div.col)
-    segments(173.9, 2, 178.7, 25, lwd = 2, col = div.col)
-    segments(179.1, 2, 181.25, 25, lwd = 2, col = div.col)
+    graphics::box()
+    graphics::segments(108, 9.97, 133.9, 25, lwd = 2, col = div.col)
+    graphics::segments(108, 7.7, 142.1, 25, lwd = 2, col = div.col)
+    graphics::segments(108, 6.4, 147.8, 25, lwd = 2, col = div.col)
+    graphics::segments(108, 5.61, 155, 25, lwd = 2, col = div.col)
+    graphics::segments(108, 5.1, 160, 25, lwd = 2, col = div.col)
+    graphics::segments(108, 3.8, 160.8, 25, lwd = 2, col = div.col)
+    graphics::segments(111.5, 2, 167.5, 25, lwd = 2, col = div.col)
+    graphics::segments(123, 2, 169, 25, lwd = 2, col = div.col)
+    graphics::segments(136.3, 2, 169, 25, lwd = 2, col = div.col)
+    graphics::segments(143.3, 2, 173.5, 25, lwd = 2, col = div.col)
+    graphics::segments(148.15, 2, 178.2, 25, lwd = 2, col = div.col)
+    graphics::segments(155.6, 2, 178.5, 25, lwd = 2, col = div.col)
+    graphics::segments(161.9, 2, 178.4, 25, lwd = 2, col = div.col)
+    graphics::segments(168.2, 2, 178.2, 25, lwd = 2, col = div.col)
+    graphics::segments(173.9, 2, 178.7, 25, lwd = 2, col = div.col)
+    graphics::segments(179.1, 2, 181.25, 25, lwd = 2, col = div.col)
     x1 <- c(108, 108, 128)
     y1 <- c(4.2, 2, 2)
-    polygon(x1, y1, col = "darkblue", border = "darkblue")
+    graphics::polygon(x1, y1, col = "darkblue", border = "darkblue")
     x2 <- c(143, 145, 150, 152, 155, 158, 162, 166, 172, 180, 181, 182, 182)
     y2 <- c(25, 18.3, 14.3, 12.5, 11.1, 10, 9.1, 8.3, 7.7, 7.55, 7.5, 7.5, 25)
-    polygon(x2, y2, col = "darkblue", border = "darkblue")  
-    text(120, 22.2, 1, col = "darkgreen", cex = 1.25)
-    text(124, 17.9, 2, col = "darkgreen", cex = 1.25)
-    text(126, 15.9, 3, col = "darkgreen", cex = 1.25)
-    text(127, 14.4, 4, col = "darkgreen", cex = 1.25)
-    text(128, 13.3, 5, col = "darkgreen", cex = 1.25)
-    text(110.7, 5.5, 6, col = "darkgreen", cex = 1.25)
-    text(115, 4.88, 7, col = "darkgreen", cex = 1.25)
-    text(121, 3.78, 8, col = "darkgreen", cex = 1.25)
-    text(132, 3.5, 9, col = "darkgreen", cex = 1.25)
-    text(142, 3.5, 10, col = "darkgreen", cex = 1.25)
-    text(147.7, 3.5, 11, col = "darkgreen", cex = 1.25)
-    text(153.7, 3.5, 12, col = "darkgreen", cex = 1.25)
-    text(160, 3.5, 13, col = "darkgreen", cex = 1.25)
-    text(166.4, 3.5, 14, col = "darkgreen", cex = 1.25)
-    text(171, 3.5, 15, col = "darkgreen", cex = 1.25)
-    text(176.7, 3.5, 16, col = "darkgreen", cex = 1.25)
-    text(180.7, 3.5, 17, col = "darkgreen", cex = 1.25)
+    graphics::polygon(x2, y2, col = "darkblue", border = "darkblue")  
+    graphics::text(120, 22.2, 1, col = "darkgreen", cex = 1.25)
+    graphics::text(124, 17.9, 2, col = "darkgreen", cex = 1.25)
+    graphics::text(126, 15.9, 3, col = "darkgreen", cex = 1.25)
+    graphics::text(127, 14.4, 4, col = "darkgreen", cex = 1.25)
+    graphics::text(128, 13.3, 5, col = "darkgreen", cex = 1.25)
+    graphics::text(110.7, 5.5, 6, col = "darkgreen", cex = 1.25)
+    graphics::text(115, 4.88, 7, col = "darkgreen", cex = 1.25)
+    graphics::text(121, 3.78, 8, col = "darkgreen", cex = 1.25)
+    graphics::text(132, 3.5, 9, col = "darkgreen", cex = 1.25)
+    graphics::text(142, 3.5, 10, col = "darkgreen", cex = 1.25)
+    graphics::text(147.7, 3.5, 11, col = "darkgreen", cex = 1.25)
+    graphics::text(153.7, 3.5, 12, col = "darkgreen", cex = 1.25)
+    graphics::text(160, 3.5, 13, col = "darkgreen", cex = 1.25)
+    graphics::text(166.4, 3.5, 14, col = "darkgreen", cex = 1.25)
+    graphics::text(171, 3.5, 15, col = "darkgreen", cex = 1.25)
+    graphics::text(176.7, 3.5, 16, col = "darkgreen", cex = 1.25)
+    graphics::text(180.7, 3.5, 17, col = "darkgreen", cex = 1.25)
 
     ## Actually plotting the points
-    points(x[, "ave.syll.per.100"], x[, "ave.sent.per.100"], pch = 19, cex = 1, 
+    graphics::points(x[, "ave.syll.per.100"], x[, "ave.sent.per.100"], pch = 19, cex = 1, 
         col = "red")
-    points(x[, "ave.syll.per.100"], x[, "ave.sent.per.100"], pch = 3, cex = 3, 
+    graphics::points(x[, "ave.syll.per.100"], x[, "ave.sent.per.100"], pch = 3, cex = 3, 
         col = "black")  
     if (!auto.label) {
-        identify(x[, "ave.syll.per.100"], x[, "ave.sent.per.100"], x[, 1])
+        graphics::identify(x[, "ave.syll.per.100"], x[, "ave.sent.per.100"], x[, 1])
     } else {
-        text(x[, "ave.syll.per.100"], x[, "ave.sent.per.100"], labels = x[, 1], 
+        graphics::text(x[, "ave.syll.per.100"], x[, "ave.sent.per.100"], labels = x[, 1], 
             adj = c(1, -0.5))
     }  
 }

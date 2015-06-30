@@ -181,7 +181,7 @@ function(dataframe, text.var, endmarks = c("?", ".", "!", "|"),
     colnames(ans)[1] <- input
     vlen <- sapply(j$lengths, seq_len)
     ans$tot <- unlist(lapply(seq_along(vlen), function(i) paste0(i, ".", vlen[[i]])))
-    if(any(na.omit(ans[, input]==""))){
+    if(any(stats::na.omit(ans[, input]==""))){
         NAdet <- ans[, input]==""
         NAdet[is.na(NAdet)] <- FALSE
         ans[NAdet, input] <- NA

@@ -177,7 +177,7 @@ plot.word_proximity <- function(x, label = TRUE, lab.digits = NULL, high="red",
 
 word_proximity_helper <- function(text.var, terms, inds) {
 
-    text.var <- spaste(strip(na.omit(sent_detect(text.var)), 
+    text.var <- spaste(strip(stats::na.omit(sent_detect(text.var)), 
          apostrophe.remove = FALSE))
 
     locs <- lapply(terms, function(x) which(grepl(x, text.var, fixed = TRUE, 
@@ -247,7 +247,7 @@ weight.word_proximity <- function(x, type = "scale", ...) {
     o
 }
 
-scale2 <- function(x) (x-mean(x, na.rm = TRUE))/sd(x, na.rm = TRUE)
+scale2 <- function(x) (x-mean(x, na.rm = TRUE))/stats::sd(x, na.rm = TRUE)
 wp_scale_log <- function(x) scale2(log(x + .000000000001))
 wp_scale <- function(x) scale2(x)
 wp_rev_scale <- function(x) (-1) * scale2(x)

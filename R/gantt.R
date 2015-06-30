@@ -212,13 +212,13 @@ print.sums_gantt <- function(x, ...) {
 #' @export
 plot_gantt_base <- function(x, sums = NULL, fill.colors = NULL, 
     box.color = "white", title = NULL){
-    if(is(x, "sums_gantt")) {
+    if(methods::is(x, "sums_gantt")) {
         sums <- x[["sums"]][, 2]
         x <- x[["gantt.df"]]        
     } 
     units <- gsub("unit_", "", class(x)[grepl("unit_", class(x))])
     if (is.null(fill.colors)) {
-        fill.colors <- rainbow(10 + length(levels(x[, 1]))) 
+        fill.colors <- grDevices::rainbow(10 + length(levels(x[, 1]))) 
     }
     helper(data = x, res.col = colnames(x)[1], 
         start.col = 'start', end.col='end', 
@@ -226,9 +226,9 @@ plot_gantt_base <- function(x, sums = NULL, fill.colors = NULL,
         xlab = Caps(units), box.color = box.color,
         title = title, 
         y2 = sums) 
-    mtext(Caps(colnames(x)[1]), side = 2, padj = -4.5)
+    graphics::mtext(Caps(colnames(x)[1]), side = 2, padj = -4.5)
     if (!is.null(sums)) {
-        mtext("Sums", side = 4, padj = 1)
+        graphics::mtext("Sums", side = 4, padj = 1)
     }
 }
 
@@ -288,26 +288,26 @@ plot.sums_gantt <- function(x, base = TRUE, title = NULL, ...) {
 # helper function for gantt (not exported)
 helper <-
 function(data, res.col = "person", start.col = "start",
-    end.col = "end", res.colors = rainbow(40), title = NULL, 
+    end.col = "end", res.colors = grDevices::rainbow(40), title = NULL, 
     box.color = "black", xlab = "Duration", ylab = NA, y2 = NULL){
-    op <- par("mar")
+    op <- graphics::par("mar")
     if (is.null(y2)){
-        par(mar = op + c(0,3,0,0)) 
+        graphics::par(mar = op + c(0,3,0,0)) 
     } else {
-        par(mar = op + c(0,3,0,2.2)) 
+        graphics::par(mar = op + c(0,3,0,2.2)) 
     }
-    on.exit(par(mar = c(5, 4, 4, 2) + 0.1))
+    on.exit(graphics::par(mar = c(5, 4, 4, 2) + 0.1))
     minval <- min(data[,start.col])
     maxval <- max(data[,end.col])
     res.colors <- rev(res.colors)
     resources <- sort(unique(data[,res.col]),decreasing=T)
-    plot(c(minval,maxval),
+    graphics::plot(c(minval,maxval),
        c(0.5,length(resources)+0.5),
        type="n", xlab=xlab,ylab=ylab,yaxt="n" , main = title, 
        cex.main = 1)
-    axis(side=2,at=1:length(resources),labels=resources,las=1)
+    graphics::axis(side=2,at=1:length(resources),labels=resources,las=1)
     if (!is.null(y2)){
-        axis(side=4,at=1:length(y2),labels=rev(y2),las=1) 
+        graphics::axis(side=4,at=1:length(y2),labels=rev(y2),las=1) 
     }
     for (i in 1:length(resources)) {
         yTop <- i+0.1
@@ -317,7 +317,7 @@ function(data, res.col = "person", start.col = "start",
             color <- res.colors[((i-1)%%length(res.colors))+1]
             start <- subset[r,start.col]
             end <- subset[r,end.col]
-            rect(start,yBottom,end,yTop,col=color, border= box.color)
+            graphics::rect(start,yBottom,end,yTop,col=color, border= box.color)
         }
     }
 }
@@ -355,7 +355,7 @@ Caps <- function(x, all = FALSE) {
 Animate.gantt <- function(x, wc.time = TRUE, time.constant = 2, colors = NULL, ...){
 
     if (!"n" %in% colnames(x)) stop("x contains no column \"n\"")
-    z <- plot(x,  plot=FALSE) ###
+    z <- graphics::plot(x,  plot=FALSE) ###
     z[[c("coordinates", "limits", "x")]] <- c(0, sum(x[, "n"]))
        
     plots <- lapply(0:nrow(x), function(i, myplot=z, dat = z[["data"]]) {

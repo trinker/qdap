@@ -161,7 +161,7 @@ word_cor <- function(text.var, grouping.var = NULL, word, r = .7,
             names = names(out)
         ) 
     } else {
-        out <- cor(WFM[, word], method = method)
+        out <- stats::cor(WFM[, word], method = method)
         attributes(out) <- list(
             class = c("word_cor", class(out)), 
             type = c("cor_matrix"),
@@ -243,9 +243,9 @@ plot.word_cor <- function(x, label = TRUE, lab.digits = 3, high="red",
         if (is.null(ncol)) {
 
             if (length(x) == 1) {
-                facets <- reformulate("word", ".")
+                facets <- stats::reformulate("word", ".")
             } else {
-                facets <- reformulate(".", "word")
+                facets <- stats::reformulate(".", "word")
             }
             ggplot(dat, aes(cor, comp_word)) +
                 geom_point(...) +
@@ -266,7 +266,7 @@ plot.word_cor <- function(x, label = TRUE, lab.digits = 3, high="red",
 cor_help1 <- function(n, m, o, sORw, vals, positive, meth) {
 
     L <- sapply(m[, !colnames(m) %in% tolower(n)], function(x) {
-        suppressWarnings(cor(x, m[, tolower(n)], method = meth))
+        suppressWarnings(stats::cor(x, m[, tolower(n)], method = meth))
     })
 
     NAS <- is.na(L)

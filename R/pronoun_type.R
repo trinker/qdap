@@ -97,12 +97,12 @@ pronoun_type <- function(text.var, grouping.var = NULL,
         match.list = pronoun.list, elim.old = FALSE, ...)
 
     nms <- c("raw", "prop", "rnp")
-    output <- setNames(lapply(nms, function(x){
-        data.frame(setNames(out[[x]][, c(1:2)], c(G, "word.count")),
+    output <- stats::setNames(lapply(nms, function(x){
+        data.frame(stats::setNames(out[[x]][, c(1:2)], c(G, "word.count")),
             out[[x]][, names(.pronouns), drop = TRUE])
     }), nms)
     
-    out3 <- setNames(lapply(nms, function(x){
+    out3 <- stats::setNames(lapply(nms, function(x){
             out[[x]][, !colnames(out[[x]]) %in% names(.pronouns), drop = TRUE]
     }), nms)
 
@@ -134,7 +134,7 @@ pronoun_type <- function(text.var, grouping.var = NULL,
 plot.pronoun_type <- function(x, type = 1, ...) {
 
     switch(type,
-        `1` = plot(scores(x), ...),
+        `1` = graphics::plot(scores(x), ...),
         `2` = plot_pronoun_type_helper1(x, ...),
         `3` = plot_pronoun_type_helper2(x, ...),
         stop("`type` must be 1, 2, or 3:\n1 - heat map\n2 - lexical dispersion plot\n3 - facetted pie graph")
@@ -149,7 +149,7 @@ plot_pronoun_type_helper1 <- function(x, ...){
     dat <- data.frame(text= attributes(x)[["text.var"]],  
         group = attributes(x)[["grouping.var"]], stringsAsFactors = FALSE)
     
-    dat <- na.omit(dat)
+    dat <- stats::na.omit(dat)
     dispersion_plot(strip(dat[["text"]]), attributes(x)[["pronoun.list"]], 
         dat[["group"]], plot=FALSE, ...) + 
         ggplot2::ylab(nms)
@@ -175,7 +175,8 @@ plot_pronoun_type_helper2 <- function(x, ...){
         ggplot2::coord_flip() + 
         ggplot2::scale_y_continuous(labels = scales::percent) +
         ggplot2::ylab("Percentage of Prounoun Use") +
-        ggplot2::xlab(nms) + ggplot2::theme_bw() + 
+        ggplot2::xlab(nms) + 
+        ggplot2::theme_bw() + 
         ggplot2::facet_wrap(~Pronoun, ...) +
         ggplot2::theme(
             legend.position="none"

@@ -74,22 +74,22 @@ print.Network <- function(x, title = NA, title.color = "black",
         legend.gradient <- attributes(x)[["legend.gradient"]]
     } else {
         ## set up color gradients
-        colfunc <- colorRampPalette(legend.gradient)
+        colfunc <- grDevices::colorRampPalette(legend.gradient)
         legend.gradient <- colfunc(attributes(x)[["n.color.breaks"]])
         E(x)$color <- legend.gradient[attributes(x)[["color.locs"]]]
     }
     
     set.seed(seed)
     if (is.null(bg)) {
-        par(mar=c(5, 0, 2, 0))
+        graphics::par(mar=c(5, 0, 2, 0))
     } else {
-        par(mar=c(5, 0, 2, 0), bg = bg)
+        graphics::par(mar=c(5, 0, 2, 0), bg = bg)
     }
 
     plot.igraph(x, edge.curved=TRUE, layout=layout, ...)
 
     if (!is.null(title)) {
-       mtext(title, side=3, col = title.color)
+       graphics::mtext(title, side=3, col = title.color)
     }
     
     if (!is.null(legend)) {

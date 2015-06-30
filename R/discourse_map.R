@@ -63,7 +63,7 @@
 #' ## Community detection
 #' x <- with(mraja1, discourse_map(dialogue, person))
 #' wc <- walktrap.community(visual(x))
-#' colors <- rainbow(max(membership(wc)))
+#' colors <- grDevices::rainbow(max(membership(wc)))
 #' plot(x, vertex.color=colors[membership(wc)])
 #' 
 #' ## Repeated Measures (BASIC EXAMPLE)
@@ -81,7 +81,7 @@
 #' 
 #' lapply(seq_along(plot_dat), function(i){
 #'     plot(plot_dat[[i]])
-#'     mtext(paste("Act", names(plot_dat)[i]), side=3)
+#'     graphics::mtext(paste("Act", names(plot_dat)[i]), side=3)
 #' })
 #' 
 #' 
@@ -102,7 +102,7 @@
 #'     V(THE_PLOT)$label.color <- lookup(V(THE_PLOT)$family, fam_key)
 #' 
 #'     plot(THE_PLOT, edge.curved=TRUE)
-#'     mtext(paste("Act", names(plot_dat)[i]), side=3)
+#'     graphics::mtext(paste("Act", names(plot_dat)[i]), side=3)
 #' })
 #' frame()
 #' bords <- rep("black", 7)
@@ -141,7 +141,7 @@
 #'         par(mar=c(0, 0, 1, 0))
 #'         set.seed(10)
 #'         plot.igraph(ans[[i]], edge.curved=TRUE, layout=layout.circle)
-#'         mtext("Discourse Map", side=3)
+#'         graphics::mtext("Discourse Map", side=3)
 #'         animation::ani.pause()
 #'     })
 #' }
@@ -174,7 +174,7 @@
 #'         par(mar=c(0, 0, 1, 0))
 #'         set.seed(10)
 #'         plot.igraph(ans2[[i]], edge.curved=TRUE, layout=layout.auto)
-#'         mtext("Discourse Map\nRomeo and Juliet: Act 1", side=3)
+#'         graphics::mtext("Discourse Map\nRomeo and Juliet: Act 1", side=3)
 #'         animation::ani.pause()
 #'     })
 #' }
@@ -286,10 +286,10 @@ map_graph_qdap <- function(DF2, edgeconstant){
 print.discourse_map <- function(x, edge.curved = TRUE, title = NULL, ...) {
     plot.igraph(x[["plot"]], edge.curved = edge.curved, ...)
     if (!is.null(title)) {
-        mtext(title, side=3)
+        graphics::mtext(title, side=3)
     } else { 
         if (!is.null(attributes(x)[["title"]])){
-            mtext(Title(x), side=3)
+            graphics::mtext(Title(x), side=3)
         }
     }
 }
@@ -352,14 +352,14 @@ animated_discourse_map <- function(DF, edge.constant, sep = "_",
     E(g)$width <- 0
     E(g)$color <- NA
 
-    igraph_weights <- setNames(lapply(1:nrow(DF), function(i) {
+    igraph_weights <- stats::setNames(lapply(1:nrow(DF), function(i) {
         DF2 <- map_df2b(DF[1:i, ], qsep)
         DF2[, "color"] <- previous.color
         DF2[nrow(DF2), "color"] <- current.color
         DF2
     }), paste0("Turn_", pad(1:nrow(DF))))
 
-    igraph_objs <- setNames(lapply(seq_along(igraph_weights), 
+    igraph_objs <- stats::setNames(lapply(seq_along(igraph_weights), 
         function(i, grp =g, len=length(nms), sep=qsep){
 
         if (i %in% 1:5) {
@@ -370,7 +370,7 @@ animated_discourse_map <- function(DF, edge.constant, sep = "_",
         weight[, "prop_wc"] <- edge.constant*weight[, "prop_wc"]
         cols <- igraph_weights[[i]][, c("from", "to", "color"), drop=FALSE]
         wkey <- colpaste2df(weight, 1:2, sep = sep, keep.orig=FALSE)[, 2:1]
-        edges <- bracketX(capture.output(E(grp))[-c(1:2)])
+        edges <- bracketX(utils::capture.output(E(grp))[-c(1:2)])
         ekey <- paste2(do.call(rbind, lapply(strsplit(edges, "->"), Trim)), 
             sep = sep)
         ckey <- colpaste2df(cols, 1:2, sep = sep, keep.orig=FALSE)[, 2:1]
@@ -422,7 +422,7 @@ print.animated_discourse_map <- function(x, title = NULL,
         set.seed(seed)        
         plot.igraph(y, edge.curved=TRUE, layout=layout)
         if (!is.null(title)) {
-            mtext(title, side=3)
+            graphics::mtext(title, side=3)
         }
         if (pause > 0) Sys.sleep(pause)
     }))  

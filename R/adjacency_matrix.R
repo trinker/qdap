@@ -50,8 +50,8 @@ function(matrix.obj) {
         }
         matrix.obj <- termco2mat(matrix.obj)
     } else {    
-        if (is(matrix.obj, "matrix")) {
-            if(!is(matrix.obj, "true.matrix")){
+        if (methods::is(matrix.obj, "matrix")) {
+            if(!methods::is(matrix.obj, "true.matrix")){
                  warning(paste("Not a termco_d, termco_c or wfm object;",
                      "results may not be correct."))
             }
@@ -63,7 +63,7 @@ function(matrix.obj) {
       stop("matrix.obj must have > 1 rows")
     }
     Y <- matrix.obj >= 1
-    Y <- apply(Y, 2, as, "numeric") 
+    Y <- apply(Y, 2, methods::as, "numeric") 
     rownames(Y) <- rownames(matrix.obj)
     Z <- Z2 <- t(Y) %*% Y                    
     Z2[!lower.tri(Z2)] <- NA

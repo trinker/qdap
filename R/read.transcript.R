@@ -163,17 +163,17 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
                 }
             },
         csv = {
-            x <- read.csv(file,  header = header, 
+            x <- utils::read.csv(file,  header = header, 
                 sep = sep, as.is=FALSE, na.strings= na.strings, 
                 strip.white = TRUE, stringsAsFactors = FALSE, 
                 blank.lines.skip = rm.empty.rows, ...)
             },
         doc = stop("convert file to docx"),
         txt = {
-            x <- read.table(file=file, header = header, sep = sep, skip=skip)
+            x <- utils::read.table(file=file, header = header, sep = sep, skip=skip)
         },
         text = {
-            x <- read.table(text=text, header = header, sep = sep, skip=skip)
+            x <- utils::read.table(text=text, header = header, sep = sep, skip=skip)
             if(revert) {
                 x[, 2] <- gsub("QDAP_PLACE_HOLDER", ":", x[, 2])
                 x[, 1] <- gsub("QDAP_PLACE_HOLDER", ":", x[, 1])

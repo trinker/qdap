@@ -32,7 +32,7 @@ random_sent <- function(n =10, len = 14, range = len - 1,
     endmark.fun = function() sample(c(".", "!", "|", "?"), 1, 
         prob=c(.85, .05, .05,  .05))){
 
-    x <- seq(len - tail(range, 1), len + head(range, 1), by = 1)
+    x <- seq(len - utils::tail(range, 1), len + utils::head(range, 1), by = 1)
     lens <- replicate(n, max(1, sample(x, 1)))
 
     sapply(lens, function(x) {

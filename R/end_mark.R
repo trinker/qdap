@@ -183,11 +183,11 @@ end_mark_by <- function(text.var, grouping.var, digits = 3, percent = FALSE,
   
     DF2 <- mtabulate(split(DF[, "end.mark"], DF[, "grouping"]))
     props <- prop(DF2, round=FALSE)
-    comb <- setNames(data.frame(rownames(DF2), 
+    comb <- stats::setNames(data.frame(rownames(DF2), 
        raw_pro_comb(DF2, digits = digits, percent = percent, 
        zero.replace = zero.replace), check.names=FALSE),  
        c(G, colnames(props)))
-    out <- list(raw= setNames(DF, c(G, colnames(DF[-1]))), count = matrix2df(DF2, G), 
+    out <- list(raw= stats::setNames(DF, c(G, colnames(DF[-1]))), count = matrix2df(DF2, G), 
         prop = matrix2df(props, G), rnp = comb)
     class(out) <- c("end_mark_by", class(out))
     attributes(out)[["digits"]] <- digits
@@ -393,7 +393,7 @@ plot.end_mark_by_preprocessed <- function(x, ncol = 1, ...){
     ggplot(x, aes_string(x="QDAP_GROUP", fill="QDAP_GROUP")) + 
         geom_bar(show_guide = FALSE) + 
         coord_flip() +
-        facet_wrap(reformulate("end.mark"), ncol = ncol) +
+        facet_wrap(stats::reformulate("end.mark"), ncol = ncol) +
         xlab(paste(unlist(sapply(unlist(strsplit(group, "&")), 
             Caps)), collapse =" & ")) 
 }
@@ -410,7 +410,7 @@ plot.end_mark_by_preprocessed <- function(x, ncol = 1, ...){
 #' @export 
 plot.end_mark_by <- function(x, values = FALSE, ...) {
 
-    plot(scores(x), values = values, ...)
+    graphics::plot(scores(x), values = values, ...)
 
 }
 
@@ -444,7 +444,7 @@ cumulative.end_mark <- function(x, ...){
         missing <- all[!all %in% names(y)]
         
         if(!identical(missing, character(0))){
-            y <- c(y, setNames(rep(0, length(missing)), missing))
+            y <- c(y, stats::setNames(rep(0, length(missing)), missing))
         }
         data.frame(t(y[as.character(types_key[["Type"]][types_key[["Type"]] 
             %in% names(y)])]), stringsAsFactors = FALSE)

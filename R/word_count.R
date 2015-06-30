@@ -218,7 +218,7 @@ character_table <- function(text.var, grouping.var=NULL, percent = TRUE,
     DF <- data.frame(grouping, text.var, check.names = FALSE, 
         stringsAsFactors = FALSE)
     DF$grouping <- factor(DF$grouping)
-    L1 <- lapply(split(DF$text.var, DF$grouping), na.omit)
+    L1 <- lapply(split(DF$text.var, DF$grouping), stats::na.omit)
     L2 <- lapply(L1, ctab)
     chars <- sort(unique(unlist(lapply(L2, names))))
     L3 <- do.call(rbind, lapply(L2, function(x){
@@ -317,6 +317,7 @@ function(x, digits = 2, percent = NULL, zero.replace = NULL, ...) {
 #' @export
 plot.character_table <- function(x, label = FALSE, lab.digits = 1, percent = NULL, 
     zero.replace = NULL, ...) {
+    
     if (label) {
         if (!is.null(percent)) {
             if (percent != attributes(x)[["percent"]]) {

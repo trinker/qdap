@@ -88,7 +88,7 @@ function(dataframe, column = NULL, keep.class = FALSE) {
                 Date=as.Date(d[[i]], origin='1970-01-01'), 
                 POSIXct=as.POSIXct(d[[i]], origin='1970-01-01'), 
                 factor=as.factor(d[[i]]),
-                as(d[[i]], colClasses[i]) ))
+                methods::as(d[[i]], colClasses[i]) ))
             d
         }
         DF3 <- colClasses(DF3, CLASS)

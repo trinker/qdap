@@ -223,10 +223,10 @@ wfm.wfdf <-
 function(text.var = NULL, grouping.var = NULL, output = "raw", stopwords = NULL, 
     char2space = "~~", ...){
 
-    if (is(text.var, "t.df")) {
+    if (methods::is(text.var, "t.df")) {
         wfdf <- text.var
     } else {
-        if (is(text.var, "m.df")) { 
+        if (methods::is(text.var, "m.df")) { 
             wfdf <- text.var[-nrow(text.var), -ncol(text.var)]
         } else {
             stop("Object must be a raw word frequency data frame")
@@ -523,10 +523,10 @@ function(text.var, grouping.var = NULL, stopwords = NULL,
 #' of the word and cells are dummy coded to indicate that number of uses.
 wfm_expanded <-
 function(text.var, grouping.var = NULL, ...){
-    if(is(text.var, "true.matrix")) {
+    if(methods::is(text.var, "true.matrix")) {
         z <- text.var
     } else {
-        if(is(text.var, "m.df")){
+        if(methods::is(text.var, "m.df")){
             z <- wfm(text.var)
         } else {
             z <- wfm(text.var, grouping.var, ...)
@@ -562,14 +562,14 @@ wfm_combine <- function(wf.obj, word.lists, matrix = TRUE){
         any(Reduce("%in%", word.lists))) {
         stop("overlapping words in word.lists")
     })
-    if (is(wf.obj, "t.df")) {
+    if (methods::is(wf.obj, "t.df")) {
         wf.obj <- wf.obj
     } else {
    
-        if (is(wf.obj, "m.df")) { 
+        if (methods::is(wf.obj, "m.df")) { 
             wf.obj <- wf.obj [-nrow(wf.obj), -ncol(wf.obj)]
         } else {
-            if (!is(wf.obj, "true.matrix")) {
+            if (!methods::is(wf.obj, "true.matrix")) {
                 stop("Object must be a raw word frequency matrix/data.frame")
             }
         }
@@ -595,7 +595,7 @@ wfm_combine <- function(wf.obj, word.lists, matrix = TRUE){
     if(!is.list(word.lists)) {
         word.lists <- list(word.lists)
     }
-    if (is(wf.obj, "true.matrix")) {
+    if (methods::is(wf.obj, "true.matrix")) {
         wf.obj <- data.frame(rownames(wf.obj), wf.obj, check.names = FALSE)
     }
     j <- lapply(word.lists, function(x) wf.obj [wf.obj [, 1] %in% x, -1])
@@ -825,7 +825,7 @@ summary.wfdf <- function(object, ...) {
 #' @method weight wfm
 weight.wfm <- function(x, type = "prop", ...) {
 
-    if (is(x, "wfdf") && !is(x, "f.df")) {
+    if (methods::is(x, "wfdf") && !methods::is(x, "f.df")) {
         x <- wfm(x)
     }
   
@@ -863,7 +863,7 @@ weight.wfm <- function(x, type = "prop", ...) {
 #' @method weight wfm
 weight.wfdf <- function(x, type = "prop", ...) {
 
-    if (is(x, "wfdf") && !is(x, "f.df")) {
+    if (methods::is(x, "wfdf") && !methods::is(x, "f.df")) {
         x <- wfm(x)
     } else {
         stop(paste("no applicable method for 'weight' applied to an object of", "class \"wfdf\" that is proportional"))

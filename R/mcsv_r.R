@@ -73,7 +73,7 @@ function(files, a.names = NULL, l.name = NULL, list = TRUE, pos = 1,
         }))
     }
     invisible(lapply(seq_along(files), function(i) {
-        assign(a.names[i], read.csv(files[i]), envir = envir)
+        assign(a.names[i], utils::read.csv(files[i]), envir = envir)
     }))
     if (list) {
         L1 <- lapply(a.names, function(x){
@@ -139,7 +139,7 @@ function(..., dir = NULL, open = FALSE, sep = ", ", dataframes = NULL, pos = 1,
         x3 <- x3[[1]]
         x3 <- condense(x3, sep = sep)
         names(x3) <- gsub(names(x2)[i], "", names(x3))
-        write.table(x3, file = files[i],  sep = ",", col.names = TRUE, 
+        utils::write.table(x3, file = files[i],  sep = ",", col.names = TRUE, 
             row.names=F, qmethod = "double")
         }
     ))
