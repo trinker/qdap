@@ -16,6 +16,26 @@ And constructed with the following guidelines:
   (and resets the patch)
 * Bug fixes and misc. changes bumps the patch
 
+
+
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.3
+----------------------------------------------------------------
+
+**BUG FIXES**
+
+**NEW FEATURES**
+
+**MINOR FEATURES**
+
+**IMPROVEMENTS**
+
+* `common` now returns `NULL` invisibly with a message rather than an error if
+  no groups meet the parmeters.  Suggested by @bitanshu via <a href="https://github.com/trinker/qdap/issues/213">issue #213</a>
+
+**CHANGES**
+
+
+
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.2
 ----------------------------------------------------------------
 
@@ -30,13 +50,9 @@ And constructed with the following guidelines:
 * `inspect_text` added to allow for pretty printed viewing of text strings and
   **tm** `Corpus`es.
 
-**MINOR FEATURES**
-
-**IMPROVEMENTS**
-
 **CHANGES**
 
-* The following functions had been previously depracated and now have been 
+* The following functions had been previously deprecated and now have been 
   removed: `df2tm_corpus`, `tm2qdap`, `tm_corpus2wfm`, `tm_corpus2df`, `tdm`, 
   `dtm`, and `polarity_frame`.
 

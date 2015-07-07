@@ -60,7 +60,8 @@ function(word.list, overlap = "all", equal.or = "more", ...){
         more = DF[DF$freq > (OL - 1), ],
         less = DF[DF$freq < (OL + 1), ])
     if (nrow(DF) == 0) {
-        stop(paste(overlap, "groups do not have any words in common."))
+        message(paste(overlap, "groups do not have any words in common."))
+        return(invisible(NULL))
     }
     rownames(DF) <- 1:nrow(DF)
     return(DF)
