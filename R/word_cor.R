@@ -3,9 +3,9 @@
 #' Find associated words within grouping variable(s).
 #' 
 #' @param text.var The text variable (or frequency matrix).
-#' @param grouping.var The grouping variables.  Default \code{NULL} generates 
-#' one word list for all text.  Also takes a single grouping variable or a list 
-#' of 1 or more grouping variables.
+#' @param grouping.var The grouping variables.  Default uses each row as a group.  
+#' Also takes a single grouping variable or a list of 1 or more grouping 
+#' variables.  Unlike other \pkg{qdap} functions, this cannot be \code{NULL}.
 #' @param word The word(s) vector to find associated words for.
 #' @param r The correlation level find associated words for.  If positive this
 #' is the minimum value, if negative this is the maximum value.
@@ -16,6 +16,10 @@
 #' @param \dots Other arguments passed to \code{\link[qdap]{wfm}}.
 #' @return Returns a vector of associated words or correlation matrix if 
 #' \code{r = NULL}.
+#' @note Note that if a word has no variablity in it's usage across grouping 
+#' variable(s) the \code{\link[stats]{sd}} will result in 0, thus 
+#' \code{\link[stats]{cor}} will will likely return a warning as in this 
+#' example: \code{cor(rep(3, 10), rnorm(10))}.
 #' @keywords correlation, association 
 #' @export
 #' @importFrom qdapTools list_vect2df
@@ -115,12 +119,13 @@
 #' out2 <- word_cor(t(as.wfm(crude)), word = c("oil", "country"), r=.7)
 #' plot(out2)
 #' }
-word_cor <- function(text.var, grouping.var = NULL, word, r = .7, 
-    values = TRUE, method = "pearson", ...) {
+word_cor <- function(text.var, grouping.var = qdapTools::id(text.var), word, 
+    r = .7, values = TRUE, method = "pearson", ...) {
 
     if (missing(grouping.var) & is.matrix(text.var) | is.data.frame(text.var)) {
         WFM <- text.var
     } else {
+        if (is.null(grouping.var)) stop("Must supply a grouping variable")
         WFM <- t(wfm(text.var = text.var, grouping.var = grouping.var, ...))
     }
 

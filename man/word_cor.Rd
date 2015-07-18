@@ -4,15 +4,15 @@
 \alias{word_cor}
 \title{Find Correlated Words}
 \usage{
-word_cor(text.var, grouping.var = NULL, word, r = 0.7, values = TRUE,
-  method = "pearson", ...)
+word_cor(text.var, grouping.var = qdapTools::id(text.var), word, r = 0.7,
+  values = TRUE, method = "pearson", ...)
 }
 \arguments{
 \item{text.var}{The text variable (or frequency matrix).}
 
-\item{grouping.var}{The grouping variables.  Default \code{NULL} generates
-one word list for all text.  Also takes a single grouping variable or a list
-of 1 or more grouping variables.}
+\item{grouping.var}{The grouping variables.  Default uses each row as a group.
+Also takes a single grouping variable or a list of 1 or more grouping
+variables.  Unlike other \pkg{qdap} functions, this cannot be \code{NULL}.}
 
 \item{word}{The word(s) vector to find associated words for.}
 
@@ -33,6 +33,12 @@ Returns a vector of associated words or correlation matrix if
 }
 \description{
 Find associated words within grouping variable(s).
+}
+\note{
+Note that if a word has no variablity in it's usage across grouping
+variable(s) the \code{\link[stats]{sd}} will result in 0, thus
+\code{\link[stats]{cor}} will will likely return a warning as in this
+example: \code{cor(rep(3, 10), rnorm(10))}.
 }
 \examples{
 \dontrun{

@@ -31,6 +31,11 @@ And constructed with the following guidelines:
 
 * `common` now returns `NULL` invisibly with a message rather than an error if
   no groups meet the parmeters.  Suggested by @bitanshu via <a href="https://github.com/trinker/qdap/issues/213">issue #213</a>
+  
+* `word_cor`'s defualt `group.var` is no longer `NULL` but set to use `1:nrow` 
+  via `qdapTools::id(text.var)`.  Thanks to Drew Schmidt for bringing this issue 
+  to attention.  Documentation and an error for `group.var = NULL` has been 
+  updated to add clarity.
 
 **CHANGES**
 
