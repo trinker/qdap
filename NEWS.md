@@ -25,6 +25,8 @@ And constructed with the following guidelines:
 
 **NEW FEATURES**
 
+* `add_s` added to add -s, -es, or -ies to word endings.
+
 **MINOR FEATURES**
 
 **IMPROVEMENTS**
