@@ -1186,7 +1186,7 @@ plot_flesch_kincaid <- function(x, ...){
         ggplot2::xlab("score") +
         ggplot2::facet_grid(.~variable, scales="free_x") 
 
-    gridExtra::grid.arrange(plot2, plot1, ncol=2, widths=2:1)
+    gridExtra::grid.arrange(plot2, plot1, ncol=2, widths= grid::unit(c(.67, .33), "native"))
 }
 
 #' Readability Measures

@@ -208,7 +208,7 @@ lex_text_bar <- Map(function(x, y){
     maxWidth <- grid::unit.pmax(gA$widths[2:5], gB$widths[2:5])
     gA$widths[2:5] <- as.list(maxWidth)
     gB$widths[2:5] <- as.list(maxWidth)
-    out <- arrangeGrob(gA, gB, ncol=1, heights = c(.3, .70))
+    out <- arrangeGrob(gA, gB, ncol=1, heights = grid::unit(c(.3, .7), "native"))
     ## grid.draw(out)
     invisible(out)
 
@@ -301,7 +301,7 @@ lex_line_text_bar <- Map(function(x, y, z){
     gA$widths[2:5] <- as.list(maxWidth)
     gB$widths[2:5] <- as.list(maxWidth)
     gC$widths[2:5] <- as.list(maxWidth)
-    out <- arrangeGrob(gC, gA, gB, ncol=1, heights = c(.38, .25, .37))
+    out <- arrangeGrob(gC, gA, gB, ncol=1, heights = grid::unit(c(.38, .25, .37), "native"))
     ## grid.draw(out)
     invisible(out)
 

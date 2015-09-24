@@ -328,6 +328,7 @@ formality <- function(text.var, grouping.var = NULL,
     } else {                                                                         
         WOR <- sum(WOR, na.rm=TRUE)                                                  
     } 
+    
     DF2$other <- DF1$other <- WOR - DF1RS    
                                              
     DF1 <- do.call(rbind, lapply(1:nrow(DF1), function(i) 100*(DF1[i, ]/WOR[i])))  
@@ -525,7 +526,7 @@ plot.formality <- function(x, point.pch = 20, point.cex = .5,
     }   
     if (plot) {
         suppressWarnings(grid.arrange(YY, XX,                         
-            ZZ, widths=c(.24, .47, .29), ncol=3))   
+            ZZ, widths= grid::unit(c(.24, .47, .29), "native"), ncol=3))   
     }
     invisible(list(f1 = XX, f2 = YY, f3 = ZZ))
 }

@@ -558,7 +558,9 @@ plot.question_type_preprocessed <- function(x, ...){
         ylab("Count") + theme_qdap() +
         theme(legend.position="none")
 
-    grid.arrange(plot2, plot1, ncol=2, widths=c(1,2,2,2))
+    grid.arrange(plot2, plot1, ncol=2, 
+        widths=grid::unit(c(1,2,2,2)/sum(c(1,2,2,2)), "native")
+        )
   
 }
 

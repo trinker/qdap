@@ -198,7 +198,7 @@
 #'     maxWidth <- grid::unit.pmax(gA$widths[2:5], gB$widths[2:5])
 #'     gA$widths[2:5] <- as.list(maxWidth)
 #'     gB$widths[2:5] <- as.list(maxWidth)
-#'     out <- arrangeGrob(gA, gB, ncol=1, heights = c(.3, .70))
+#'     out <- arrangeGrob(gA, gB, ncol=1, heights = grid::unit(c(.3, .7), "native"))
 #'     ## grid.draw(out)
 #'     invisible(out)
 #' 
@@ -291,7 +291,7 @@
 #'     gA$widths[2:5] <- as.list(maxWidth)
 #'     gB$widths[2:5] <- as.list(maxWidth)
 #'     gC$widths[2:5] <- as.list(maxWidth)
-#'     out <- arrangeGrob(gC, gA, gB, ncol=1, heights = c(.38, .25, .37))
+#'     out <- arrangeGrob(gC, gA, gB, ncol=1, heights = grid::unit(c(.38, .25, .37), "native"))
 #'     ## grid.draw(out)
 #'     invisible(out)
 #' 
@@ -406,6 +406,7 @@ lexical_classification <- function(text.var, grouping.var = NULL,
 
     DF <- data.frame(grouping, text.var = as.character(text.var), check.names = FALSE, 
         stringsAsFactors = FALSE, orig.row.num = seq_len(length(text.var)))
+
     DF[, "grouping"] <- factor(DF[, "grouping"])
     if (is.dp(text.var=DF[, "text.var"])){
         warning(paste0("\n  Some rows contain double punctuation.",
@@ -445,6 +446,7 @@ lexical_classification <- function(text.var, grouping.var = NULL,
 
     DF2[["words"]] <- words
     DF2[["lexical"]] <- lapply(is_content, as.numeric)
+
     DF2[DF2[["markup"]] == "", 2:8] <- NA
     DF2[["content"]] <- char02NA(Map(function(x, y) x[as.logical(y)], 
         DF2[["words"]], DF2[["lexical"]]))
@@ -478,13 +480,14 @@ lexical_classification <- function(text.var, grouping.var = NULL,
     class(DF2) <- c("lexical_classification_sent", "data.frame")    
 
     content <- NA
+
     if (!all(is.na(unlist(DF2[["content"]])))) {
         content <- DF2[["content"]] %>%
-            unlist %>%
-            stats::na.omit %>%
-            table %>%
-            as.matrix %>%
-            matrix2df %>%
+            unlist() %>%
+            stats::na.omit() %>%
+            table() %>%
+            as.matrix() %>%
+            matrix2df() %>%
             stats::setNames(c("word", "freq")) %>% 
             dplyr::arrange(-freq)
 
@@ -495,11 +498,11 @@ lexical_classification <- function(text.var, grouping.var = NULL,
     functional <- NA
     if (!all(is.na(unlist(DF2[["functional"]])))) {
         functional <- DF2[["functional"]] %>%
-            unlist %>%
-            stats::na.omit %>%
-            table %>%
-            as.matrix %>%
-            matrix2df %>%
+            unlist() %>%
+            stats::na.omit() %>%
+            table() %>%
+            as.matrix() %>%
+            matrix2df() %>%
             stats::setNames(c("word", "freq")) %>% 
             dplyr::arrange(-freq)
 
@@ -561,6 +564,7 @@ function(x, ave.digits = 1, se.digits = 2, trunc = 25, ...) {
 
     x[c("content", "functional")] <- lapply(c("content", "functional"), function(y) {
         sapply(x[[y]], function(z){
+            if (is.na(z)) return("")
             if (nchar(z) < 1000) return(z)
             substring(z, 1, 1000)
         })

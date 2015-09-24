@@ -165,7 +165,7 @@
 #' ) 
 #' 
 #' library(gridExtra)
-#' grid.arrange(p1, p2, nrow=1, widths = c(.85, .15))
+#' grid.arrange(p1, p2, nrow=1, widths = grid::unit(c(.85, .15), "native")) 
 #'     
 #' ## tm Matrices to wfm
 #' library(tm)

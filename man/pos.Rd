@@ -184,7 +184,8 @@ pos_after <- function(text.var, words, pos){
 
 out2 <- setNames(lapply(list(a=c("a", "an"), the="the"), function(x) {
     o <- pos_after(rajPOS, x, c("NN", "NNS", "NNP", "NNPS"))
-    m <- qdapTools::matrix2df(data.frame(freq=sort(table(unlist(o)), TRUE)), "word")
+    m <- stats::setNames(data.frame(sort(table(unlist(o))),
+        stringsAsFactors = FALSE), c("word", "freq"))
     m[m$freq> 3, ]
 }), c("a", "the"))
 
@@ -215,10 +216,10 @@ library(qdapRegex);library(ggplot2);library(reshape2)
 out <- setNames(lapply(c("@after_a", "@after_the"), function(x) {
     o <- rm_default(stringi:::stri_trans_tolower(raj$dialogue),
         pattern = x, extract=TRUE)
-    m <- qdapTools::matrix2df(data.frame(freq=sort(table(unlist(o)), TRUE)), "word")
+    m <- stats::setNames(data.frame(sort(table(unlist(o))),
+        stringsAsFactors = FALSE), c("word", "freq"))
     m[m$freq> 3, ]
 }), c("a", "the"))
-
 
 dat <- setNames(Reduce(function(x, y) {
     merge(x, y, by = "word", all = TRUE)}, out), c("Word", "A", "THE"))

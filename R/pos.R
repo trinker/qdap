@@ -129,7 +129,8 @@
 #' 
 #' out2 <- setNames(lapply(list(a=c("a", "an"), the="the"), function(x) {
 #'     o <- pos_after(rajPOS, x, c("NN", "NNS", "NNP", "NNPS"))
-#'     m <- qdapTools::matrix2df(data.frame(freq=sort(table(unlist(o)), TRUE)), "word")
+#'     m <- stats::setNames(data.frame(sort(table(unlist(o))), 
+#'         stringsAsFactors = FALSE), c("word", "freq"))
 #'     m[m$freq> 3, ]
 #' }), c("a", "the"))
 #' 
@@ -145,8 +146,8 @@
 #' 
 #' dat2$Word <- factor(dat2$Word, levels=ord2[order(ord2[[2]]), 1])
 #' rownames(dat2) <- NULL
-#' ggplot(dat2, aes(x=freq, y=Word)) + 
-#'     geom_point()+ facet_grid(~Article) + 
+#' ggplot(dat2, aes(x=freq, y=Word)) +
+#'     geom_point()+ facet_grid(~Article) +
 #'     ggtitle("Part Of Speech Parsing Approach")
 #' 
 #' dev.new()
@@ -160,10 +161,10 @@
 #' out <- setNames(lapply(c("@@after_a", "@@after_the"), function(x) {
 #'     o <- rm_default(stringi:::stri_trans_tolower(raj$dialogue),
 #'         pattern = x, extract=TRUE)
-#'     m <- qdapTools::matrix2df(data.frame(freq=sort(table(unlist(o)), TRUE)), "word")
+#'     m <- stats::setNames(data.frame(sort(table(unlist(o))), 
+#'         stringsAsFactors = FALSE), c("word", "freq"))
 #'     m[m$freq> 3, ]
 #' }), c("a", "the"))
-#' 
 #' 
 #' dat <- setNames(Reduce(function(x, y) {
 #'     merge(x, y, by = "word", all = TRUE)}, out), c("Word", "A", "THE"))
@@ -234,6 +235,7 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
     
     m2 <- data.frame(POStagged = unlist(lapply(m, "[[", 1)))
     m2$POStags <- lapply(m, "[[", 2)
+browser()
     G4 <- mtabulate(m2$POStags)
 #    m2$word.count <- wc(text.var)  
 ##   switched to apostrophe as word on 1/24/15
@@ -760,16 +762,16 @@ plot.pos <- function(x, ...) {
 plot.pos_preprocessed <- function(x, ...){ 
 
     POS <- Counts <- NULL
-
-    dat <- matrix2df(data.frame(Counts = sort(table(unlist(x[, "POStags"]))), 
-        stringsAsFactors = FALSE), "POS")
+    
+    dat <- stats::setNames(data.frame(sort(table(unlist(x[, "POStags"]))), 
+        stringsAsFactors = FALSE), c("POS", "Counts"))
     dat[, "POS"] <- dat[, "POS"] %l%  pos_tags("dataframe")
     dat[, "POS"] <- factor(dat[, "POS"], levels=dat[, "POS"])
 
     Max <- max(dat[, "Counts"])
 
     ggplot2::ggplot(dat, ggplot2::aes(POS)) + 
-        ggplot2::geom_bar(aes(weights=Counts)) + 
+        ggplot2::geom_bar(ggplot2::aes(weights=Counts)) + 
         ggplot2::coord_flip() + 
         ggplot2::ylab("Count") +
         ggplot2::scale_y_continuous(expand = c(0,0), limits = c(0,Max + Max*.05)) +
