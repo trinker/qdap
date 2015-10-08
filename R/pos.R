@@ -235,7 +235,7 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
     
     m2 <- data.frame(POStagged = unlist(lapply(m, "[[", 1)))
     m2$POStags <- lapply(m, "[[", 2)
-browser()
+
     G4 <- mtabulate(m2$POStags)
 #    m2$word.count <- wc(text.var)  
 ##   switched to apostrophe as word on 1/24/15

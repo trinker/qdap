@@ -18,10 +18,9 @@ And constructed with the following guidelines:
 
 
 
-**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.3
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.4
 ----------------------------------------------------------------
 
-**BUG FIXES**
 
 **NEW FEATURES**
 
