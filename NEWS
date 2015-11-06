@@ -23,6 +23,12 @@ CHANGES IN qdap VERSION 2.2.5
 
 BUG FIXES
 
+* `check_spelling` and other spell checkers threw an error with a custom 
+  dictionary that did not have at least one word beginning with all 26 letters
+  of the alphabet.  The dictionary automatically uses `assume.first.correct=FALSE`
+  if this occurs.  Reported by @CallumH of StackOverflow: 
+  http://stackoverflow.com/q/33516466/1000343  See issue #217 for details.
+
 NEW FEATURES
 
 MINOR FEATURES

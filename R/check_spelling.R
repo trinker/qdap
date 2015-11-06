@@ -202,10 +202,10 @@ which_misspelled <- function(x, suggest = FALSE, range = 2,
     ## combine the words from dictionary with numb. characters
     dictionary <- data.frame(dictionary, nchar.dictionary, 
         stringsAsFactors = FALSE)
-    
+   
     ## if we assume the first letter is spelled correct we split
     ## the dictionary and take only those words begining with the at letter
-    if(assume.first.correct) {
+    if(assume.first.correct && all(letters %in% sort(unique(first.char.dictionary)))) {
         dictionary <- split(dictionary, first.char.dictionary)
     } 
 

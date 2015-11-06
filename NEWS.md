@@ -23,6 +23,12 @@ And constructed with the following guidelines:
 
 **BUG FIXES**
 
+* `check_spelling` and other spell checkers threw an error with a custom 
+  dictionary that did not have at least one word beginning with all 26 letters
+  of the alphabet.  The dictionary automatically uses `assume.first.correct=FALSE`
+  if this occurs.  Reported by @CallumH of StackOverflow: 
+  <a href="http://stackoverflow.com/q/33516466/1000343" target="_blank">http://stackoverflow.com/q/33516466/1000343</a>  See <a href="https://github.com/trinker/qdap/issues/217">issue #217</a> for details.
+
 **NEW FEATURES**
 
 **MINOR FEATURES**
