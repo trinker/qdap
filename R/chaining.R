@@ -7,8 +7,7 @@
 #' @param qdap_df.object A \code{\link[base]{data.frame}} of the class 
 #' \code{"qdap_df"}.
 #' @param qdap.fun A \pkg{qdap} function with a \code{text.var} argument.
-#' @references Inspired by \pkg{dplyr}'s \code{\link[dplyr]{\%.\%}} and 
-#' \pkg{magrittr}'s \code{\link[dplyr]{\%>\%}} functionality.
+#' @references Inspired by \pkg{magrittr}'s \code{\link[dplyr]{\%>\%}} functionality.
 #' @keywords pipe chain chaining
 #' @seealso \code{\link[dplyr]{\%>\%}},
 #' \code{\link[qdap]{qdap_df}}

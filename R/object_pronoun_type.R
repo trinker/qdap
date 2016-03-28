@@ -21,7 +21,7 @@
 #'     \item it = c(" it'd ", " it'll ", " it's ", " it ")
 #' }
 #' @return Returns a list, of class "object_pronoun_type", of data frames 
-#' regarding objectpronoun word counts:
+#' regarding object pronoun word counts:
 #' \item{preprocessed}{List of uncollapsed dataframes (raw, prop, rnp) of the class "termco" that contain all searchable object pronouns.} 
 #' \item{raw}{raw word counts by grouping variable} 
 #' \item{prop}{proportional word counts by grouping variable; proportional to 

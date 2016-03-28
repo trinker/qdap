@@ -11,20 +11,18 @@
 #' @return Returns a dataframe of all words that match the criteria set by 
 #' \code{overlap} and \code{equal.or}.
 #' @export
-#' @examples
-#' \dontrun{
-#' a <- c("a", "cat", "dog", "the", "the")                                                              
-#' b <- c("corn", "a", "chicken", "the")                                                                
-#' d <- c("house", "feed", "a", "the", "chicken")                                                       
-#' common(a, b, d, overlap=2)  
-#' common(a, b, d, overlap=3)                                                                          
-#'                                                                                                      
-#' r <- list(a, b, d)  
-#' common(r)                                                                                 
-#' common(r, overlap=2)                                                                                            
-#'                                                                                                     
-#' common(word_list(DATA$state, DATA$person)$cwl, overlap = 2) 
-#' } 
+## @examples
+## a <- c("a", "cat", "dog", "the", "the")                                                              
+## b <- c("corn", "a", "chicken", "the")                                                                
+## d <- c("house", "feed", "a", "the", "chicken")                                                       
+## common(a, b, d, overlap=2)  
+## common(a, b, d, overlap=3)                                                                          
+##                                                                                                      
+## r <- list(a, b, d)  
+## common(r)                                                                                 
+## common(r, overlap=2)                                                                                            
+##                                                                                                     
+## common(word_list(DATA$state, DATA$person)$cwl, overlap = 2) 
 common <-
 function(word.list, overlap = "all", equal.or = "more", ...){
     overlap
