@@ -17,7 +17,7 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
-**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.5
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.5-
 ----------------------------------------------------------------
 
 
@@ -28,6 +28,9 @@ And constructed with the following guidelines:
   of the alphabet.  The dictionary automatically uses `assume.first.correct=FALSE`
   if this occurs.  Reported by @CallumH of StackOverflow: 
   <a href="http://stackoverflow.com/q/33516466/1000343" target="_blank">http://stackoverflow.com/q/33516466/1000343</a>  See <a href="https://github.com/trinker/qdap/issues/217">issue #217</a> for details.
+  
+* `check_spelling_interactive` replace substrings rather then bounded words.
+  This was caught by @chrisjacques  See <a href="https://github.com/trinker/qdap/issues/221">issue #221</a>
 
 **NEW FEATURES**
 

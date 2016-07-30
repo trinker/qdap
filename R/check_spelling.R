@@ -398,12 +398,12 @@ check_spelling_interactive.character <- function(text.var, range = 2,
     
     output <- output[apply(output, 1, function(x) x[1] != x[2]), ]    
 
-    out <- mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
+    out <- mgsub(paste0("\\b", output[[1]], "\\b"), output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
 
     class(out)  <- c("check_spelling_interactive", class(out))
     attributes(out)[["replacements"]] <- output
     attributes(out)[["correct"]] <- function(text.var) {
-            mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
+            mgsub(paste0("\\b", output[[1]], "\\b"), output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
         }
     message("\nSpelling Check Complete!\n")
     out
@@ -468,12 +468,12 @@ check_spelling_interactive.factor <- function(text.var, range = 2,
 
     output <- output[apply(output, 1, function(x) x[1] != x[2]), ]
     
-    out <- mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
+    out <- mgsub(paste0("\\b", output[[1]], "\\b"), output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
 
     class(out)  <- c("check_spelling_interactive", class(out))
     attributes(out)[["replacements"]] <- output
     attributes(out)[["correct"]] <- function(text.var) {
-            mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
+            mgsub(paste0("\\b", output[[1]], "\\b"), output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
         }
     message("\nSpelling Check Complete!\n")    
     out
@@ -526,13 +526,13 @@ check_spelling_interactive.check_spelling <- function(text.var, range = 2,
 
     output <- output[apply(output, 1, function(x) x[1] != x[2]), ]
     
-    out <- mgsub(output[[1]], output[[2]], attributes(text.var)[["text.var"]], 
+    out <- mgsub(paste0("\\b", output[[1]], "\\b"), output[[2]], attributes(text.var)[["text.var"]], 
         ignore.case = TRUE, fixed=FALSE)
 
     class(out)  <- c("check_spelling_interactive", class(out))
     attributes(out)[["replacements"]] <- output
     attributes(out)[["correct"]] <- function(text.var) {
-            mgsub(output[[1]], output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
+            mgsub(paste0("\\b", output[[1]], "\\b"), output[[2]], text.var, ignore.case = TRUE, fixed=FALSE)
         }
     message("\nSpelling Check Complete!\n")
     out
@@ -570,7 +570,7 @@ check_spelling_interactive_helper <- function(out, suggests, click,
         }
 
         if (ans == "1") {
-            message("\n","Enter Repalcement:","\n")  
+            message("\n","Enter Replacement:","\n")  
             repl <- readLines(n=1)
 
             while (repl %in% c("0", "!")) {

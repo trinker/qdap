@@ -17,7 +17,7 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
-CHANGES IN qdap VERSION 2.2.5
+CHANGES IN qdap VERSION 2.2.5-
 ----------------------------------------------------------------
 
 
@@ -28,6 +28,9 @@ BUG FIXES
   of the alphabet.  The dictionary automatically uses `assume.first.correct=FALSE`
   if this occurs.  Reported by @CallumH of StackOverflow: 
   http://stackoverflow.com/q/33516466/1000343  See issue #217 for details.
+  
+* `check_spelling_interactive` replace substrings rather then bounded words.
+  This was caught by @chrisjacques  See issue #221
 
 NEW FEATURES
 
