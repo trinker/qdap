@@ -903,7 +903,7 @@ word_counts <- function(DF, x, y, z = NULL, g, alpha = .3) {
         ggplot2::xlab(NMS[1]) +
         ggplot2::theme_minimal() + 
         ggplot2::theme(panel.grid = ggplot2::element_blank(),
-            panel.margin = unit(1, "lines")) +
+            panel.spacing = unit(1, "lines")) +
         ggplot2::annotate("segment", x=-Inf, xend=Inf, y=-Inf, yend=-Inf)+
         ggplot2::annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf)
 
@@ -935,7 +935,7 @@ word_counts2 <- function(DF, x, y, z = NULL, g, alpha = .3) {
         ggplot2::xlab(NMS[1]) +
         ggplot2::theme_minimal() + 
         ggplot2::theme(panel.grid = ggplot2::element_blank(),
-            panel.margin = unit(1, "lines")) +
+            panel.spacing = unit(1, "lines")) +
         ggplot2::annotate("segment", x=-Inf, xend=Inf, y=-Inf, yend=-Inf)+
         ggplot2::annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf)
 

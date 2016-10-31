@@ -96,7 +96,7 @@
 #'       panel.border=element_rect(fill=NA,color="grey55"), 
 #'       panel.grid.major=element_blank(), 
 #'       panel.grid.minor=element_blank(), 
-#'       panel.margin=unit(0.25,"lines"),  
+#'       panel.spacing=unit(0.25,"lines"),  
 #'       # Specify facetting options
 #'       strip.background=element_rect(fill="grey30",color="grey10"), 
 #'       strip.text.x=element_text(size=base_size*0.8,color="grey55"), 

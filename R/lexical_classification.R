@@ -1018,7 +1018,7 @@ plot.lexical_classification_preprocessed <- function(x, jitter=.1,
         ggplot2::facet_wrap(~group, ncol=ncol) +
         ggplot2::theme_minimal() + 
         ggplot2::theme(panel.grid = ggplot2::element_blank(),
-            panel.margin = grid::unit(1, "lines")) +
+            panel.spacing = grid::unit(1, "lines")) +
         ggplot2::annotate("segment", x=-Inf, xend=Inf, y=-Inf, yend=-Inf)+
         ggplot2::annotate("segment", x=-Inf, xend=-Inf, y=-Inf, yend=Inf) +
         ggplot2::ylab("Content Rate") + 

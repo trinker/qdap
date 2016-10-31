@@ -5978,7 +5978,7 @@ rajSPLIT2$newb <- as.factor(sample(LETTERS[1:2], nrow(rajSPLIT2),
 
 z <- with(rajSPLIT2, gantt_plot(dialogue, list(fam.aff, sex),
     list(act, newb), size = 4))
-z + theme(panel.margin = unit(1, "lines")) + scale_colour_grey()
+z + theme(panel.spacing = unit(1, "lines")) + scale_colour_grey()
 z + scale_colour_brewer(palette="Dark2")
 z + scale_colour_manual(values=rep("black", 7))
 ## vector of colors
