@@ -31,6 +31,10 @@ BUG FIXES
   
 * `check_spelling_interactive` replace substrings rather then bounded words.
   This was caught by @chrisjacques  See issue #221
+  
+* `replace_abbreviation` threw an error because `data.frame` converts character
+  to factor by default and `nchar` no longer works on factor.  This was caught 
+  by @karilint  See issue #225
 
 NEW FEATURES
 

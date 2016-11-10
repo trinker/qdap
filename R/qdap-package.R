@@ -453,5 +453,5 @@ NULL
 #' @usage data(hamlet) 
 #' @format A data frame with 2007 rows and 7 variables 
 #' @references 
-#' \url{http://www.gutenberg.org}
+#' http://www.gutenberg.org
 NULL

@@ -31,6 +31,10 @@ And constructed with the following guidelines:
   
 * `check_spelling_interactive` replace substrings rather then bounded words.
   This was caught by @chrisjacques  See <a href="https://github.com/trinker/qdap/issues/221">issue #221</a>
+  
+* `replace_abbreviation` threw an error because `data.frame` converts character
+  to factor by default and `nchar` no longer works on factor.  This was caught 
+  by @karilint  See <a href="https://github.com/trinker/qdap/issues/225">issue #225</a>
 
 **NEW FEATURES**
 
