@@ -1,11 +1,10 @@
 language: r
 sudo: false
 cache: packages
-r_build_args: "--resave-data=best"
+r_build_args: --compact-vignettes=gs+qpdf --resave-data=best
+r_check_args: --as-cran
 env:
    global:
-     - R_BUILD_ARGS="--compact-vignettes=gs+qpdf --resave-data=best"
-     - R_CHECK_ARGS="--as-cran"
      - DISPLAY=:99.0
      - BOOTSTRAP_LATEX=1
 
@@ -19,6 +18,7 @@ r_github_packages:
 before_install:
   - sh -e /etc/init.d/xvfb start
   - tlmgr install index
+  - sudo apt-get install texinfo  
   
 after_success:
   - Rscript -e 'covr::coveralls()'
