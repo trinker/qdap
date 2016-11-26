@@ -18,22 +18,9 @@ r_github_packages:
 
 before_install:
   - sh -e /etc/init.d/xvfb start
-  - sudo add-apt-repository -y ppa:texlive-backports/ppa
+  - tlmgr install index
   
 after_success:
   - Rscript -e 'covr::coveralls()'
-  
 
-install:
-  - sh -e /etc/init.d/xvfb start
-  - sudo R CMD javareconf
-  - ./travis-tool.sh install_r_binary xml
-  - ./travis-tool.sh install_r_binary gplots
-  - ./travis-tool.sh install_r_binary rjava
-  - ./travis-tool.sh install_github hadley/devtools
-  - ./travis-tool.sh install_github trinker/qdapTools
-  - ./travis-tool.sh install_github trinker/qdapRegex
-  - ./travis-tool.sh install_github trinker/qdapDictionaries
-  - ./travis-tool.sh github_package ropensci/gender
-  - ./travis-tool.sh install_deps
 
