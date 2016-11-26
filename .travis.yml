@@ -15,12 +15,9 @@ r_github_packages:
   - trinker/qdapDictionaries
   - ropensci/gender
 
-apt_packages:
-  - texinfo
-  
+
 before_install:
   - sh -e /etc/init.d/xvfb start
-  - tlmgr install index
 
 
 after_success:
