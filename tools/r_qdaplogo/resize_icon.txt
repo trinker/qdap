@@ -1,0 +1,2 @@
+cd C:\Users\Tyler\GitHub\qdap\tools\qdap_logo
+ffmpeg -i r_qdapa.png -vf scale=250:-1 r_qdap.png

@@ -14,6 +14,7 @@ install:
   - ./travis-tool.sh install_r_binary tm
   - ./travis-tool.sh install_r_binary wordcloud
   - ./travis-tool.sh install_r_binary rjava
+  - ./travis-tool.sh install_r_binary proxy  
   - ./travis-tool.sh install_github hadley/devtools
   - ./travis-tool.sh install_github trinker/qdapTools
   - ./travis-tool.sh install_github trinker/qdapRegex
