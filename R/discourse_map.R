@@ -370,9 +370,8 @@ animated_discourse_map <- function(DF, edge.constant, sep = "_",
         weight[, "prop_wc"] <- edge.constant*weight[, "prop_wc"]
         cols <- igraph_weights[[i]][, c("from", "to", "color"), drop=FALSE]
         wkey <- colpaste2df(weight, 1:2, sep = sep, keep.orig=FALSE)[, 2:1]
-        edges <- bracketX(utils::capture.output(E(grp))[-c(1:2)])
-        ekey <- paste2(do.call(rbind, lapply(strsplit(edges, "->"), Trim)), 
-            sep = sep)
+        el <- ends(grp, E(grp), names=TRUE)
+        ekey <- paste(sep=sep, el[,1], el[,2])
         ckey <- colpaste2df(cols, 1:2, sep = sep, keep.orig=FALSE)[, 2:1]
 
         E(grp)$width <- NAer(ekey %l% wkey)
