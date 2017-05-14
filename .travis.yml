@@ -7,7 +7,8 @@ before_install:
 addons:
   apt:
     packages:
-      -texlive-latex-base
+    - qpdf
+    - texinfo
       
 r_github_packages: 
   
