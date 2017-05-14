@@ -7,7 +7,7 @@ before_install:
 addons:
   apt:
     packages:
-      -y ppa:texlive-backports/ppa
+      -texlive-latex-base
       
 r_github_packages: 
   
