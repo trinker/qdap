@@ -4,6 +4,11 @@ sudo: false
 before_install:
   - sh -e /etc/init.d/xvfb start
 
+addons:
+  apt:
+    packages:
+      -y ppa:texlive-backports/ppa
+      
 r_github_packages: 
   
 notifications:
