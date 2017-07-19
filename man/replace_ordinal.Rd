@@ -43,4 +43,3 @@ replace_ordinal(x, remove = TRUE)
 \code{\link[qdap]{replace_number}}
 }
 \keyword{ordinal-to-word}
-

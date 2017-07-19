@@ -17,4 +17,3 @@ View word_stats counts.
 \details{
 word_stats Method for counts
 }
-

@@ -17,4 +17,3 @@ View pos preprocessed.
 \details{
 pos Method for preprocessed
 }
-

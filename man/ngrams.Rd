@@ -77,4 +77,3 @@ sort(rowSums(as.matrix(m2)))
 }
 }
 \keyword{ngram}
-

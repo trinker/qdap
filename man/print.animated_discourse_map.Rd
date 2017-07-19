@@ -23,4 +23,3 @@
 \description{
 Prints an animated_discourse_map  object.
 }
-

@@ -17,4 +17,3 @@ the heatmap.}
 \description{
 Plots a end_mark_by object.
 }
-

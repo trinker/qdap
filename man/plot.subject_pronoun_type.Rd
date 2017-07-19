@@ -18,4 +18,3 @@
 \description{
 Plots an subject_pronoun_type object.
 }
-

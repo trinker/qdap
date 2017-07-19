@@ -14,4 +14,3 @@
 \description{
 Prints a table_count object
 }
-

@@ -21,4 +21,3 @@
 \description{
 Plots a cmspans object.
 }
-

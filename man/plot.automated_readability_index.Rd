@@ -14,4 +14,3 @@
 \description{
 Plots a automated_readability_index object.
 }
-

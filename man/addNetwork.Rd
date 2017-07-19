@@ -14,4 +14,3 @@
 \description{
 This operator allows you to add themes to a Network object.
 }
-

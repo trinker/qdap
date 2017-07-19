@@ -31,4 +31,3 @@ replacer(dat, NA, "FOO")
 }
 }
 \keyword{replace}
-

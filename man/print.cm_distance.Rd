@@ -38,4 +38,3 @@ console.}
 \description{
 Prints a cm_distance object.
 }
-

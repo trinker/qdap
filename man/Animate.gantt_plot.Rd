@@ -31,4 +31,3 @@ grouping variable.}
 \details{
 gantt_plot Method for Animate
 }
-

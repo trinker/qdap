@@ -14,4 +14,3 @@
 \description{
 Plots a question_type_preprocessed object.
 }
-

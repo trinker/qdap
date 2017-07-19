@@ -16,4 +16,3 @@
 \description{
 Prints a linsear_write_scores object.
 }
-

@@ -14,4 +14,3 @@
 \description{
 Prints an polysyllable_sum object
 }
-

@@ -86,4 +86,3 @@ cm_code.exclude(dat, list(P=qcv(A, B), Q=qcv(B, C), R=qcv(A, B, C)),
 \code{\link[qdap]{cm_code.transform}}
 }
 \keyword{co-occurrence}
-

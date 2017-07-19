@@ -25,4 +25,3 @@ A dataset containing act 1 of Romeo and Juliet with demographic information.
 \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
 }
 \keyword{datasets}
-

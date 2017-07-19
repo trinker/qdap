@@ -2,14 +2,14 @@
 % Please edit documentation in R/Network.R
 \name{qtheme}
 \alias{qtheme}
+\alias{theme_nightheat}
 \alias{theme_badkitchen}
 \alias{theme_cafe}
-\alias{theme_duskheat}
 \alias{theme_grayscale}
 \alias{theme_greyscale}
-\alias{theme_hipster}
-\alias{theme_nightheat}
 \alias{theme_norah}
+\alias{theme_hipster}
+\alias{theme_duskheat}
 \title{Add themes to a Network object.}
 \usage{
 qtheme(x = "generic", title, title.color, layout, legend, legend.cex,
@@ -203,4 +203,3 @@ theme_irish <- qtheme(x = "irish", bg = "grey25",
 m + theme_irish
 }
 }
-

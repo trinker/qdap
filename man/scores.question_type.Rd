@@ -17,4 +17,3 @@ View question_type scores.
 \details{
 question_type Method for scores
 }
-

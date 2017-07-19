@@ -14,4 +14,3 @@
 \description{
 Plots a animated_formality  object.
 }
-

@@ -14,4 +14,3 @@
 \description{
 Prints an end_mark_by object
 }
-

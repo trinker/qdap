@@ -16,4 +16,3 @@
 \description{
 Prints a phrase_net object.
 }
-

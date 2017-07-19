@@ -17,4 +17,3 @@
 \details{
 automated_readability_index Method for scores
 }
-

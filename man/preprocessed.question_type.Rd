@@ -17,4 +17,3 @@ View \code{\link[qdap]{question_type}} preprocessed.
 \details{
 question_type Method for preprocessed
 }
-

@@ -33,4 +33,3 @@ passed to \code{\link[ggplot2]{geom_point}} if a list.}
 \description{
 Plots a word_cor object.
 }
-

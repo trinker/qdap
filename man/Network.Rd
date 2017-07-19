@@ -17,4 +17,3 @@ Returns a network plot.
 \description{
 Create a network plot for select qdap outputs.
 }
-

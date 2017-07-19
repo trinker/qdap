@@ -17,4 +17,3 @@
 \details{
 discourse_map Method for visual
 }
-

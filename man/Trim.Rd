@@ -21,4 +21,3 @@ Remove leading/trailing white space.
 Trim(x)
 }
 }
-

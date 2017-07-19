@@ -17,4 +17,3 @@ View character_table scores.
 \details{
 character_table Method for scores
 }
-

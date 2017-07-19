@@ -36,4 +36,3 @@ strWrap(x, 10)
 \code{\link[base]{strwrap}}
 }
 \keyword{string-wrap}
-

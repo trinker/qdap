@@ -31,4 +31,3 @@ double spacing between speech chunks (speakers) is used.}
 \description{
 Prints a qdap_context object
 }
-

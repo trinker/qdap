@@ -32,4 +32,3 @@ plot(with(raj, type_token_ratio(dialogue, person)))
 \references{
 Baker, P. (2006) Using Corpora in Discourse Analysis. London: Continuum.
 }
-

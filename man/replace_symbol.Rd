@@ -49,4 +49,3 @@ replace_symbol(x)
 \code{\link[qdap]{replace_number}},
 }
 \keyword{symbol-replace}
-

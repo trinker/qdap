@@ -19,4 +19,3 @@ See \code{\link[base]{options}} for more.}
 \description{
 Prints a wfm object.
 }
-

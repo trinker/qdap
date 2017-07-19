@@ -245,4 +245,3 @@ ggplot(dat, aes(x=freq, y=Word)) +
 \code{\link[qdap]{colcomb2class}}
 }
 \keyword{parts-of-speech}
-

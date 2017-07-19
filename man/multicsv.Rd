@@ -29,6 +29,11 @@ the global environment in addition to the individual dataframes.}
 
 \item{envir}{the environment to use.}
 
+\item{\dots}{data.frame object(s) to write to a file or a list of data.frame 
+objects.  If the objects in a list are unnamed V + digit will be assigned.  
+Lists of dataframes (e.g., the output from \code{\link[qdap]{termco}} or 
+\code{\link[qdap]{polarity}}) can be passed as well.}
+
 \item{dir}{optional directory names.  If \code{NULL} a directory will be 
 created in the working directory with the data and time stamp as the folder 
 name.}
@@ -39,11 +44,6 @@ name.}
 
 \item{dataframes}{An optional character vector of dataframes in lieu of \dots 
 argument.}
-
-\item{\dots}{data.frame object(s) to write to a file or a list of data.frame 
-objects.  If the objects in a list are unnamed V + digit will be assigned.  
-Lists of dataframes (e.g., the output from \code{\link[qdap]{termco}} or 
-\code{\link[qdap]{polarity}}) can be passed as well.}
 }
 \value{
 \code{mcsv_r} - reads in multiple csv files at once.
@@ -98,4 +98,3 @@ delete("foo2")
 \code{\link[qdap]{condense}},
 \code{\link[base]{assign}}
 }
-

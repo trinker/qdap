@@ -52,4 +52,3 @@ View check_spelling check_spelling_interactive.
 \details{
 check_spelling Method for check_spelling_interactive
 }
-

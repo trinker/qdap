@@ -25,4 +25,3 @@ set.seed(10)
 add_s(sample(GradyAugmented, 10), FALSE)
 }
 \keyword{plural}
-

@@ -17,4 +17,3 @@ View \code{\link[qdap]{subject_pronoun_type}} preprocessed.
 \details{
 subject_pronoun_type Method for preprocessed
 }
-

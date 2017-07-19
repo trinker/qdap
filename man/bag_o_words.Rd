@@ -2,8 +2,8 @@
 % Please edit documentation in R/bag_o_words.R
 \name{bag_o_words}
 \alias{bag_o_words}
-\alias{breaker}
 \alias{unbag}
+\alias{breaker}
 \alias{word_split}
 \title{Bag of Words}
 \usage{
@@ -65,4 +65,3 @@ unbag(word_split(c(NA, DATA$state)))
 }
 }
 \keyword{bag-of-words}
-

@@ -17,4 +17,3 @@ View \code{\link[qdap]{word_length}} proportions.
 \details{
 word_length Method for proportions
 }
-

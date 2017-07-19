@@ -32,4 +32,3 @@ to add additional plot layers.}
 \description{
 Plots a weighted_wfm object.
 }
-

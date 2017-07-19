@@ -17,4 +17,3 @@
 \details{
 flesch_kincaid Method for scores
 }
-

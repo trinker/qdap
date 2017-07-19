@@ -64,4 +64,3 @@ Animate(DATA[["state"]], color=sample(colors(), nrow(DATA)),
 \seealso{
 \code{\link[ggplot2]{theme}}
 }
-

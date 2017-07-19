@@ -54,4 +54,3 @@ Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 \code{\link[qdap]{cm_range.temp}},
 }
 \keyword{coding}
-

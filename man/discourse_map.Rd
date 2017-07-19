@@ -203,4 +203,3 @@ saveVideo(FUN3(), video.name = "discourse_map.avi", interval = 0.2,
     outdir = loc2)    
 }
 }
-

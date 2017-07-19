@@ -17,4 +17,3 @@ View question_type counts.
 \details{
 question_type Method for counts
 }
-

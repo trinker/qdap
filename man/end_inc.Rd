@@ -34,4 +34,3 @@ end_inc(dat, "state", which.mode = TRUE)
 }
 }
 \keyword{incomplete}
-

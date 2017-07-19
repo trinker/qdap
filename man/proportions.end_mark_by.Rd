@@ -17,4 +17,3 @@ View \code{\link[qdap]{end_mark_by}} proportions.
 \details{
 end_mark_by Method for proportions
 }
-

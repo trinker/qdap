@@ -51,4 +51,3 @@ R News. Vol. 5(1), pp. 51-55.
 \code{\link[qdap]{replace_ordinal}}
 }
 \keyword{number-to-word}
-

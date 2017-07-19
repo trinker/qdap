@@ -23,4 +23,3 @@ will be recycled).}
 \code{sentiment_frame} - Generate a sentiment lookup hash table  
 for use with the \code{xxx.frame} argument of various sentiment functions.
 }
-

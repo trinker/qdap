@@ -14,4 +14,3 @@
 \description{
 Prints a cumulative_end_mark  object.
 }
-

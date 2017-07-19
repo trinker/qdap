@@ -32,4 +32,3 @@ name2sex(qcv(mary, jenn, linda, JAME, GABRIEL, OLIVA,
 }
 \keyword{gender}
 \keyword{name}
-

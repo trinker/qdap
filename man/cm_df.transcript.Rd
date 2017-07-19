@@ -61,12 +61,11 @@ DATA <- qdap::DATA
 ##  library(reports); delete("foo.doc")   #delete the file just created
 }
 }
-\author{
-BondedDust (stackoverflow.com), Gavin Simpson and Tyler Rinker <tyler.rinker@gmail.com>
-}
 \seealso{
 \code{\link[qdap]{cm_df2long}},
 \code{\link[qdap]{cm_df.temp}}
 }
+\author{
+BondedDust (stackoverflow.com), Gavin Simpson and Tyler Rinker <tyler.rinker@gmail.com>
+}
 \keyword{transcript}
-

@@ -14,4 +14,3 @@
 \description{
 Transposes a DocumentTermMatrix object
 }
-

@@ -17,4 +17,3 @@ View word_position scores.
 \details{
 word_position Method for scores
 }
-

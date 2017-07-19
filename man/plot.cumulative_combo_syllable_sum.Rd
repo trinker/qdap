@@ -14,4 +14,3 @@
 \description{
 Plots a cumulative_combo_syllable_sum object.
 }
-

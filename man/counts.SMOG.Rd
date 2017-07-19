@@ -17,4 +17,3 @@
 \details{
 SMOG Method for counts.
 }
-

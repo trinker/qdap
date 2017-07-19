@@ -28,4 +28,3 @@ grade level division lines.}
 \description{
 Plots a readability_score object.
 }
-

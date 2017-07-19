@@ -30,4 +30,3 @@ documents. Once the user has run this function
 vignette files.
 }
 \keyword{vignette}
-

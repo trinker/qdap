@@ -80,4 +80,3 @@ ggplot(x_long, aes(x = person, weight = Proportion)) +
 }
 }
 \keyword{letters}
-

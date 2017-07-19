@@ -72,4 +72,3 @@ with(DATA, word_list(state, person, cap = FALSE, cap.list=c("do", "we")))
 }
 }
 \keyword{word-list}
-

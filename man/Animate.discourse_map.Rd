@@ -45,4 +45,3 @@ edges tend to thin as time passes.  The actual duration the current edge
 stays as the \code{current.color} is based on word counts for that particular 
 flow of dialogue divided by total dialogue (words) used.
 }
-

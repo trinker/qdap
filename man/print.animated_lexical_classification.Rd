@@ -36,4 +36,3 @@ equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.}
 \description{
 Prints an animated_lexical_classification  object.
 }
-

@@ -25,4 +25,3 @@ Access the scores dataframes from select qdap outputs.
 
 \code{\link[qdap]{preprocessed}}
 }
-

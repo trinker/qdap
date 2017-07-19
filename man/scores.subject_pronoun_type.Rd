@@ -17,4 +17,3 @@ View subject_pronoun_type scores.
 \details{
 subject_pronoun_type Method for scores
 }
-

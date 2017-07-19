@@ -17,4 +17,3 @@ View \code{\link[qdap]{question_type}} proportions.
 \details{
 question_type Method for proportions
 }
-

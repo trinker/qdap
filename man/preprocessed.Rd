@@ -24,4 +24,3 @@ Access the preprocessed dataframes/lists from select qdap outputs.
 \code{\link[qdap]{proportions}},
 \code{\link[qdap]{visual}}
 }
-

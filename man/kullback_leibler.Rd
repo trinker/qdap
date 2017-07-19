@@ -46,4 +46,3 @@ sufficiency. Annals of Mathematical Statistics 22 (1): 79-86.
 doi:10.1214/aoms/1177729694
 }
 \keyword{Kullback-Leibler}
-

@@ -14,4 +14,3 @@
 \description{
 Prints a subject_pronoun_type object
 }
-

@@ -95,6 +95,7 @@ labeled as both imperative
  It is assumed the user has run \code{sentSplit} on their 
 data, otherwise some counts may not be accurate.
 }
+
 \examples{
 \dontrun{
 word_stats(mraja1spl$dialogue, mraja1spl$person)
@@ -137,4 +138,3 @@ word_stats(desc_wrds, mraja1spl$sex)
 }
 \keyword{descriptive}
 \keyword{statistic}
-

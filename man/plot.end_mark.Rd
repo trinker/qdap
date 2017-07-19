@@ -14,4 +14,3 @@
 \description{
 Plots an end_mark object.
 }
-

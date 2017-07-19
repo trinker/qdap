@@ -151,4 +151,3 @@ Map(function(x, y){
 }
 \keyword{position}
 \keyword{word}
-

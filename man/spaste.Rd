@@ -29,4 +29,3 @@ spaste(Top25Words, trailing = TRUE, leading = FALSE) #or
 spaste(Top25Words, , FALSE)
 }
 }
-

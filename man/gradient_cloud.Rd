@@ -127,4 +127,3 @@ invisible(lapply(split(pres_debates2012, pres_debates2012$time), function(x) {
 \code{\link[plotrix]{color.legend}}
 }
 \keyword{heatcloud}
-

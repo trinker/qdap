@@ -29,4 +29,3 @@ with(DATA, unique_by(state, person))
 }
 }
 \keyword{unique}
-

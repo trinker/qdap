@@ -17,4 +17,3 @@ View word_length scores.
 \details{
 word_length Method for scores
 }
-

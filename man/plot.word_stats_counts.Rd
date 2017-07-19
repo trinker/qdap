@@ -16,4 +16,3 @@
 \description{
 Plots a word_stats_counts object.
 }
-

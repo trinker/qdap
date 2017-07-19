@@ -29,4 +29,3 @@ value from \code{\link[qdap]{question_type}}.  Only used if \code{label} is
 \description{
 Plots a character_table  object.
 }
-

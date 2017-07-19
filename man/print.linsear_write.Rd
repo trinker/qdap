@@ -16,4 +16,3 @@
 \description{
 Prints an linsear_write object.
 }
-

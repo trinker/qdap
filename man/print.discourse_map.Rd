@@ -18,4 +18,3 @@
 \description{
 Prints a discourse_map object.
 }
-

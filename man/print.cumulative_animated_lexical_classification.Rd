@@ -14,4 +14,3 @@
 \description{
 Prints a cumulative_animated_lexical_classification  object.
 }
-

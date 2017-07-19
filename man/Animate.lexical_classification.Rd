@@ -91,4 +91,3 @@ indicate a more content laden current turn of talk, while the coloring may
 indicate a functional laden average of sentences.  Coloring is based on 
 percentage of conent words.
 }
-

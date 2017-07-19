@@ -69,4 +69,3 @@ plot(proportions(out))
 \code{\link[qdap]{pronoun_type}}
 }
 \keyword{pronouns}
-

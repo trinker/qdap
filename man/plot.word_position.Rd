@@ -21,4 +21,3 @@ plot.  If \code{FALSE} \code{\link[stats]{heatmap}} is used.}
 \description{
 Plots a word_position object.
 }
-

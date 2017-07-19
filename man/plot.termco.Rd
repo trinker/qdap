@@ -28,4 +28,3 @@ from \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.}
 \description{
 Plots a termco object.
 }
-

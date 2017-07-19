@@ -17,4 +17,3 @@ View \code{\link[qdap]{word_position}} preprocessed.
 \details{
 word_position Method for preprocessed
 }
-

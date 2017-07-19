@@ -17,4 +17,3 @@ View termco counts.
 \details{
 termco Method for counts
 }
-

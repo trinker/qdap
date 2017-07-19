@@ -21,4 +21,3 @@ A dataset containing Romeo and Juliet: Act 1.
 \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
 }
 \keyword{datasets}
-

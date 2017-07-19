@@ -17,4 +17,3 @@ scatterplot (length one or two; if two 1-points, 2-smooth fill).}
 \description{
 Plots a linsear_write object.
 }
-

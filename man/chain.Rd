@@ -98,4 +98,3 @@ Inspired by \pkg{magrittr}'s \code{\link[dplyr]{\%>\%}} functionality.
 \keyword{chain}
 \keyword{chaining}
 \keyword{pipe}
-

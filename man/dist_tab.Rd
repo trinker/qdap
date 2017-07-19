@@ -48,4 +48,3 @@ ltruncdf(out3, 4)
 }
 \keyword{distribution,}
 \keyword{frequency}
-

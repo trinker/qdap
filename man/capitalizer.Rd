@@ -36,4 +36,3 @@ capitalizer(bag_o_words("i like it but i'm not certain"), "like")
 capitalizer(bag_o_words("i like it but i'm not certain"), "like", FALSE)
 }
 }
-

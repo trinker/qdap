@@ -48,4 +48,3 @@ replace_contraction(x)
 \code{\link[qdap]{replace_symbol}}
 }
 \keyword{contraction}
-

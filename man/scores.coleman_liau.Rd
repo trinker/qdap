@@ -17,4 +17,3 @@
 \details{
 coleman_liau Method for scores
 }
-

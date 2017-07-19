@@ -25,4 +25,3 @@ from \code{\link[qdap]{termco}}.  Only used if \code{label} is TRUE.}
 \description{
 Prints a pos_by object.
 }
-

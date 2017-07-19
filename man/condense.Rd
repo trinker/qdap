@@ -29,4 +29,3 @@ write.csv(x = condense(counts(poldat)), file = "foo.csv")
 \seealso{
 \code{\link[qdap]{mcsv_w}}
 }
-

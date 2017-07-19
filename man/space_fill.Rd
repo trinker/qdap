@@ -53,4 +53,3 @@ space_fill(x, keeps)
 strip(space_fill(x, keeps))
 }
 }
-

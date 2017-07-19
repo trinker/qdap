@@ -17,4 +17,3 @@ View end_mark_by counts.
 \details{
 end_mark_by Method for counts
 }
-

@@ -17,4 +17,3 @@ View formality counts.
 \details{
 formality Method for counts
 }
-

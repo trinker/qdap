@@ -14,4 +14,3 @@
 \description{
 Prints a boolean_qdap object
 }
-

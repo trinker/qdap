@@ -30,4 +30,3 @@ grouping variable.}
 \details{
 gantt Method for Animate
 }
-

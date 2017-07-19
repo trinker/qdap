@@ -86,4 +86,3 @@ positive current turn of talk, while the coloring may indicate a negative
 sentences.  Coloring is based on percentage of formal parts of speech (i.e.,
 noun, adjective, preposition, article).
 }
-

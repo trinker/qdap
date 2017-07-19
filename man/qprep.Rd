@@ -65,4 +65,3 @@ qprep(x)
 \code{\link[qdap]{replace_number}},
 \code{\link[qdap]{replace_symbol}}
 }
-

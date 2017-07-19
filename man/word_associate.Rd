@@ -222,4 +222,3 @@ DATA2 <- qdap::DATA2
 \code{\link[wordcloud]{wordcloud}},
 \code{\link[igraph]{graph.adjacency}}
 }
-

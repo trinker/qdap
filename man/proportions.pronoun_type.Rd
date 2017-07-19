@@ -17,4 +17,3 @@ View \code{\link[qdap]{pronoun_type}} proportions.
 \details{
 pronoun_type Method for proportions
 }
-

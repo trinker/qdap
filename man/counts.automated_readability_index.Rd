@@ -15,4 +15,3 @@ automated_readability_index Method for counts.}
 \description{
 \code{counts.automated_readability_index} - View counts from \code{\link[qdap]{automated_readability_index}}.
 }
-

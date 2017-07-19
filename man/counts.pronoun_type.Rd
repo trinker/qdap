@@ -17,4 +17,3 @@ View pronoun_type counts.
 \details{
 pronoun_type Method for counts
 }
-

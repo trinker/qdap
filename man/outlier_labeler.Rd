@@ -33,4 +33,3 @@ tapply(mtcars$mpg, mtcars$cyl, outlier_labeler)
 }
 \keyword{scale,}
 \keyword{standardize}
-

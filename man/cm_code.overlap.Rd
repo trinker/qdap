@@ -82,4 +82,3 @@ head(out, 10)
 \code{\link[qdap]{cm_code.transform}}
 }
 \keyword{co-occurrence}
-

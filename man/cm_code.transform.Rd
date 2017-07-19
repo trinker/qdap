@@ -90,4 +90,3 @@ cm_code.transform(dat,
 \code{\link[qdap]{cm_code.overlap}}
 }
 \keyword{transform}
-

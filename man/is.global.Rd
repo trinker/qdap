@@ -26,9 +26,6 @@ FUN2 <- function(x = is.global(2)) x
 FUN2()
 FUN3 <- function() FUN2(); FUN3()
 }
-\author{
-Simon O'Hanlon and Tyler Rinker <tyler.rinker@gmail.com>
-}
 \references{
 \url{http://stackoverflow.com/questions/18637656/detect-if-environment-is-global-enviroment}
 }
@@ -36,4 +33,6 @@ Simon O'Hanlon and Tyler Rinker <tyler.rinker@gmail.com>
 \code{\link[base]{globalenv}},
 \code{\link[base]{parent.frame}}
 }
-
+\author{
+Simon O'Hanlon and Tyler Rinker <tyler.rinker@gmail.com>
+}

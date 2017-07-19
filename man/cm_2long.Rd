@@ -85,4 +85,3 @@ plot(out2)
 \code{\link[qdap]{cm_time2long}}
 }
 \keyword{long}
-

@@ -21,4 +21,3 @@ avoid this behavior use
 \description{
 Plots a sent_split object.
 }
-

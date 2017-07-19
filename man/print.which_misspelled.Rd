@@ -14,4 +14,3 @@
 \description{
 Prints a which_misspelled object.
 }
-

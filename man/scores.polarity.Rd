@@ -17,4 +17,3 @@
 \details{
 polarity Method for scores
 }
-

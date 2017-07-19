@@ -23,4 +23,3 @@
 \description{
 Plots a lexical_classification_preprocessed object.
 }
-

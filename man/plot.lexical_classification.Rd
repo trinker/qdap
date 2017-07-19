@@ -72,4 +72,3 @@ Plots a lexical_classification object as a heat map Gantt plot with lexical_clas
 time (measured in words) and lexical_classification scores per sentence.  In the dotplot 
 plot the black dots are the average lexical_classification per grouping variable.
 }
-

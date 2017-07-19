@@ -17,4 +17,3 @@ View subject_pronoun_type counts.
 \details{
 subject_pronoun_type Method for counts
 }
-

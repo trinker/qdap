@@ -17,4 +17,3 @@ View \code{\link[qdap]{pos_by}} proportions.
 \details{
 pos_by Method for proportions
 }
-

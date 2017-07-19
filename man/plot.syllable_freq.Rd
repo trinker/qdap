@@ -14,4 +14,3 @@
 \description{
 Plots a syllable_freq object.
 }
-

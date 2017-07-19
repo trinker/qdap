@@ -17,4 +17,3 @@ View \code{\link[qdap]{character_table}} proportions.
 \details{
 character_table Method for proportions
 }
-

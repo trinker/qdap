@@ -17,4 +17,3 @@ View character_table counts.
 \details{
 character_table Method for counts
 }
-

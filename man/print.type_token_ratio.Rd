@@ -16,4 +16,3 @@
 \description{
 Prints a type_token_ratio  object.
 }
-

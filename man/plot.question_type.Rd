@@ -28,4 +28,3 @@ from \code{\link[qdap]{question_type}}.  Only used if \code{label} is TRUE.}
 \description{
 Plots a question_type object.
 }
-

@@ -17,4 +17,3 @@ the output.}
 \description{
 Prints a word_stats object.
 }
-

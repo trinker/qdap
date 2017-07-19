@@ -41,4 +41,3 @@ prop(wdstraj$gts[, -1], 5)[1:15, 1:6]
 \keyword{percent,}
 \keyword{percentage}
 \keyword{proportion,}
-

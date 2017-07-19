@@ -18,4 +18,3 @@ to add additional plot layers.}
 \description{
 Plots a freq_terms object.
 }
-

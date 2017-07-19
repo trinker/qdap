@@ -21,4 +21,3 @@
 \description{
 Plots a polarity_score object.
 }
-

@@ -14,4 +14,3 @@
 \description{
 Plots a type_token_ratio object.
 }
-

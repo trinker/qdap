@@ -79,4 +79,3 @@ with(DATA.SPLIT, trans_context(state, person, inds=inds5, tot=F))
 \code{\link[qdap]{question_type}},
 \code{\link[qdap]{end_mark}}
 }
-
