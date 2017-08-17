@@ -16,4 +16,3 @@
 \description{
 Prints a word_proximity object
 }
-

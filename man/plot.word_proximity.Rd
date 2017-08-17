@@ -27,4 +27,3 @@ printed if \code{label} is \code{TRUE}.}
 \description{
 Plots a word_proximity object.
 }
-

@@ -17,4 +17,3 @@ View word_position counts.
 \details{
 word_position Method for counts
 }
-
