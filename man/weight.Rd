@@ -31,4 +31,3 @@ Weight a word_proximity object.
 A constant of .000000000001 is added to each element when log is used 
 to deal with the problem of \code{log(0)}.
 }
-

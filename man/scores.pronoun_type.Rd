@@ -17,4 +17,3 @@ View pronoun_type scores.
 \details{
 pronoun_type Method for scores
 }
-

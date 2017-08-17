@@ -17,4 +17,3 @@ View check_spelling_interactive preprocessed.
 \details{
 check_spelling_interactive Method for preprocessed
 }
-

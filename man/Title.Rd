@@ -18,4 +18,3 @@ Title(object) <- value
 Add title to select qdap objects that store a plot.
 }
 \keyword{title}
-

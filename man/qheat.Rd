@@ -2,13 +2,13 @@
 % Please edit documentation in R/qheat.R
 \name{qheat}
 \alias{qheat}
-\alias{qheat.character_table}
 \alias{qheat.default}
 \alias{qheat.diversity}
-\alias{qheat.pos_by}
-\alias{qheat.question_type}
 \alias{qheat.termco}
 \alias{qheat.word_stats}
+\alias{qheat.character_table}
+\alias{qheat.question_type}
+\alias{qheat.pos_by}
 \title{Quick Heatmap}
 \usage{
 qheat(mat, low = "white", high = "darkblue", values = FALSE, digits = 1,
@@ -175,4 +175,3 @@ qheat(dat1, values=TRUE, mat2=dat2)
 }
 }
 \keyword{heatmap}
-

@@ -18,4 +18,3 @@
 \description{
 Plots an pronoun_type object.
 }
-

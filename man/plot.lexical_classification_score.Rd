@@ -21,4 +21,3 @@
 \description{
 Plots a lexical_classification_score object.
 }
-

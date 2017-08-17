@@ -17,4 +17,3 @@ View termco scores.
 \details{
 termco Method for scores
 }
-

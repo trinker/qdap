@@ -14,4 +14,3 @@
 \description{
 Plots a diversity object.
 }
-

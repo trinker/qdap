@@ -16,4 +16,3 @@
 \description{
 Prints a kullback_leibler object.
 }
-

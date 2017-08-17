@@ -47,4 +47,3 @@ plot.
 Plots a formality object including the parts of speech used to 
 calculate contextual/formal speech.
 }
-

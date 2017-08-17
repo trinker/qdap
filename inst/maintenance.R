@@ -1,7 +1,7 @@
 #========
 # BUILD
 #========
-source("inst/build.R")
+source("inst/build.R"); update_date()
 
 #==========================
 # Run unit tests

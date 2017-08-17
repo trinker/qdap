@@ -43,4 +43,3 @@ right_just(left_just(CO2[1:15,]))
 }
 \keyword{justification}
 \keyword{justify,}
-

@@ -23,4 +23,3 @@ scraped from: \url{http://shakespeare.mit.edu/romeo_juliet/full.html}.
 \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
 }
 \keyword{datasets}
-

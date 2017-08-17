@@ -25,4 +25,3 @@ clean(x)
 }
 \keyword{character}
 \keyword{escaped}
-

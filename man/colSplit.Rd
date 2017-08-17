@@ -38,4 +38,3 @@ head(bar2, 10)
 \code{\link[qdap]{paste2}}
 }
 \keyword{column-split}
-

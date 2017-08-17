@@ -50,10 +50,9 @@ char2end(x3, "^", 2)
 beg2char(x3, "^", 2)
 }
 }
-\author{
-Josh O'Brien, Justin Haynes and Tyler Rinker <tyler.rinker@gmail.com>.
-}
 \references{
 \url{http://stackoverflow.com/q/15909626/1000343}
 }
-
+\author{
+Josh O'Brien, Justin Haynes and Tyler Rinker <tyler.rinker@gmail.com>.
+}

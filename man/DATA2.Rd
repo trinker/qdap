@@ -23,4 +23,3 @@ A repeated measures version of the \code{\link[qdap]{DATA}} dataset.
 }
 }
 \keyword{datasets}
-

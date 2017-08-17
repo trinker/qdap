@@ -71,4 +71,3 @@ all_words(space_fill(DATA$state, c("are you", "can be")))
 \seealso{
 \code{\link[qdap]{term_match}}
 }
-

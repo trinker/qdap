@@ -69,4 +69,3 @@ lapply(out7, head, n=3)
 }
 }
 \keyword{word-list}
-

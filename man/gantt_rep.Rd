@@ -66,4 +66,3 @@ tool of management. New York, Ronald Press.
 \code{\link[qdap]{gantt_plot}}
 }
 \keyword{Gantt}
-

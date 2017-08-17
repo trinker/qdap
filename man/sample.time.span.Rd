@@ -22,4 +22,3 @@ A fictitious dataset containing time spans for codes A and B.
 }
 }
 \keyword{datasets}
-

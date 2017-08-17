@@ -23,4 +23,3 @@ Animate select qdap objects.
 \code{\link[qdap]{preprocessed}},
 \code{\link[qdap]{proportions}}
 }
-

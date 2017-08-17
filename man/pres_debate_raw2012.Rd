@@ -18,4 +18,3 @@ A dataset containing the raw version of the first presidential debate.
 }
 }
 \keyword{datasets}
-

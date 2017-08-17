@@ -95,4 +95,3 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
 \keyword{sentence,}
 \keyword{split,}
 \keyword{turn-of-talk}
-

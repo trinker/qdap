@@ -16,4 +16,3 @@
 \description{
 Prints an coleman_liau object.
 }
-

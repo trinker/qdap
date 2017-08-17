@@ -14,4 +14,3 @@
 \description{
 Plots a discourse_map object.
 }
-

@@ -24,4 +24,3 @@ Access the visual-graph-plot object from select qdap outputs.
 \code{\link[qdap]{preprocessed}},
 \code{\link[qdap]{proportions}}
 }
-

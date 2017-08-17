@@ -27,4 +27,3 @@ x <- with(DATA, wfdf(state, list(sex, adult)))
 summary(x)
 }
 }
-

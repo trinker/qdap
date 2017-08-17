@@ -20,4 +20,3 @@ vectors.}
 \description{
 list Method for common
 }
-

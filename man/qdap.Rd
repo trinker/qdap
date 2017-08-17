@@ -2,8 +2,8 @@
 % Please edit documentation in R/qdap-package.R
 \docType{package}
 \name{qdap}
-\alias{package-qdap}
 \alias{qdap}
+\alias{package-qdap}
 \alias{qdap-package}
 \title{qdap: Quantitative Discourse Analysis Package}
 \description{
@@ -16,4 +16,3 @@ providing analysis and seamless integration with other R packages which
 enable higher level analysis and visualization of text.  This empowers 
 the researcher with more flexible, efficient and targeted methods and tools.
 }
-

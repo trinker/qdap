@@ -69,4 +69,3 @@ Plots a polarity_count object as a heat map Gantt plot with polarity over
 time (measured in words) and polarity scores per sentence.  In the dotplot 
 plot the black dots are the average polarity per grouping variable.
 }
-

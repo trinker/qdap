@@ -60,4 +60,3 @@ ltruncdf(out)
 }
 \keyword{coded}
 \keyword{dummy}
-

@@ -125,9 +125,6 @@ x + scale_color_manual(values=rep("black",
     length(levels(dat2$fam.aff_sex))))
 }
 }
-\author{
-Andrie de Vries and Tyler Rinker <tyler.rinker@gmail.com>.
-}
 \references{
 Clark, W. & Gantt, H. (1922) The Gantt chart, a working tool of 
 management. New York, Ronald Press.
@@ -139,5 +136,7 @@ management. New York, Ronald Press.
 \code{\link[ggplot2]{facet_grid}},
 \code{\link[ggplot2]{facet_wrap}}
 }
+\author{
+Andrie de Vries and Tyler Rinker <tyler.rinker@gmail.com>.
+}
 \keyword{Gantt}
-

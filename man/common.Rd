@@ -24,4 +24,3 @@ Returns a dataframe of all words that match the criteria set by
 \description{
 Find common words between grouping variables (e.g., people).
 }
-

@@ -195,4 +195,3 @@ with(pres_debates2012,
 \code{\link[qdap]{term_match}}
 }
 \keyword{dispersion}
-

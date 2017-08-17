@@ -14,4 +14,3 @@
 \description{
 Plots a cumulative_polarity object.
 }
-

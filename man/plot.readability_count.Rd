@@ -16,4 +16,3 @@
 \description{
 Plots a readability_count object.
 }
-

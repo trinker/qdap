@@ -65,4 +65,3 @@ method is offered as a quick approach to styling the figure.  For more control
 use \code{\link[igraph]{V}}, \code{\link[igraph]{E}}, and
 \code{plot.igraph}.
 }
-

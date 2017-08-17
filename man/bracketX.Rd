@@ -108,17 +108,16 @@ DATA$state  #notice number 1 and 10
 genX(DATA$state, c("is", "we"), c("too", "on"))
 }
 }
-\author{
-Martin Morgan and Tyler Rinker <tyler.rinker@gmail.com>.
-}
 \references{
 \url{http://stackoverflow.com/q/8621066/1000343}
 }
 \seealso{
 \code{\link[base]{regex}}
 }
+\author{
+Martin Morgan and Tyler Rinker <tyler.rinker@gmail.com>.
+}
 \keyword{bracket,}
 \keyword{bracket-remove,}
 \keyword{curly-braces}
 \keyword{parenthesis,}
-

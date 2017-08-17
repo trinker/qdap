@@ -55,4 +55,3 @@ dir_map(DIR)
 \seealso{
 \code{\link[qdap]{read.transcript}}
 }
-

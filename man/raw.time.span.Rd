@@ -12,4 +12,3 @@ data(raw.time.span)
 A dataset containing a list of named vectors of time spans.
 }
 \keyword{datasets}
-

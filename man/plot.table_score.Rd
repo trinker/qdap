@@ -19,4 +19,3 @@ the heatmap.}
 \description{
 Plots a table_score object.
 }
-

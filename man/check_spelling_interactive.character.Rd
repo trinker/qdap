@@ -53,4 +53,3 @@ View character check_spelling_interactive.
 \details{
 character Method for check_spelling_interactive
 }
-

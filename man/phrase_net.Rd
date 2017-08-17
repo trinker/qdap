@@ -93,4 +93,3 @@ lapply(seq_along(z), function(i) {
 \url{http://trinker.github.io/many-eye}
 }
 \keyword{phrase_net}
-

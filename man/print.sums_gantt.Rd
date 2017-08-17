@@ -14,4 +14,3 @@
 \description{
 Prints a sums_gantt object.
 }
-

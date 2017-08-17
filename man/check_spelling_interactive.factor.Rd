@@ -55,4 +55,3 @@ View factor check_spelling_interactive.
 \details{
 factor Method for check_spelling_interactive
 }
-

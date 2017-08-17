@@ -14,4 +14,3 @@
 \description{
 Plots a combo_syllable_sum object.
 }
-

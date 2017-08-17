@@ -131,4 +131,3 @@ plot(out3, label = TRUE, lab.digits = 3)
 }
 \keyword{question,}
 \keyword{question-count}
-

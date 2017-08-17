@@ -134,4 +134,3 @@ plot(x2, vertex.size=0, layout = l)
 \code{\link[igraph]{graph.adjacency}}
 }
 \keyword{network}
-

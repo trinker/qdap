@@ -55,6 +55,7 @@ dataframes at once.
 \section{Warning}{
  This will strip the class of the qdap object.
 }
+
 \examples{
 \dontrun{
 CO2$`Plant&Type&Treatment` <- paste2(CO2[, 1:3])
@@ -93,4 +94,3 @@ ltruncdf(z)
 \code{\link{paste2}}
 }
 \keyword{column-split}
-

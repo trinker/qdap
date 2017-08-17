@@ -52,4 +52,3 @@ plot(g, layout=layout.auto(g))
 }
 \keyword{Boolean-matrix}
 \keyword{adjacency-matrix,}
-

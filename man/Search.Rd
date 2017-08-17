@@ -2,8 +2,8 @@
 % Please edit documentation in R/Search.R
 \name{Search}
 \alias{Search}
-\alias{\%bs\%}
 \alias{boolean_search}
+\alias{\%bs\%}
 \title{Search Columns of a Data Frame}
 \usage{
 Search(dataframe, term, column.name = NULL, max.distance = 0.02, ...)
@@ -128,4 +128,3 @@ trans_context(raj$dialogue, raj$person, inds2)
 
 \code{\link[qdap]{termco}}
 }
-

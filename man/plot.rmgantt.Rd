@@ -19,4 +19,3 @@ the faceting is reversed.}
 \description{
 Plots a rmgantt object.
 }
-

@@ -105,6 +105,7 @@ replications decreases the error.  Use:
 to adjust the confidence in the 
 estimated p-values based on the number of replications.
 }
+
 \examples{
 \dontrun{
 foo <- list(
@@ -182,4 +183,3 @@ plot(out2, label.cex=2, label.dist=TRUE, digits=5)
 \keyword{association}
 \keyword{codes}
 \keyword{distance}
-

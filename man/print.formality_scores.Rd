@@ -14,4 +14,3 @@
 \description{
 Prints a formality_scores object
 }
-

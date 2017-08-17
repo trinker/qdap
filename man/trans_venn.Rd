@@ -69,6 +69,7 @@ variables. An alternative is to use a network plot with
 \{code{\link[qdap]{Dissimilarity}} measures labeling the edges between nodes 
 (grouping variables) or a heat map (\code{\link[qdap]{qheat}}).
 }
+
 \examples{
 \dontrun{
 with(DATA , trans_venn(state, person, legend.location = "topright"))
@@ -80,4 +81,3 @@ with(raj.act.1 , trans_venn(dialogue, person, legend.location = "topleft"))
 \code{\link[venneuler]{venneuler}}
 }
 \keyword{venn}
-

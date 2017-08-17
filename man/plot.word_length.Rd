@@ -28,4 +28,3 @@ from \code{\link[qdap]{word_length}}.  Only used if \code{label} is TRUE.}
 \description{
 Plots a word_length object.
 }
-

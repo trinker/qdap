@@ -17,4 +17,3 @@ View \code{\link[qdap]{termco}} proportions.
 \details{
 termco Method for proportions
 }
-

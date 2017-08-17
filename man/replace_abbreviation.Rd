@@ -53,4 +53,3 @@ replace_abbreviation(x, KEY)
 \code{\link[qdap]{replace_symbol}}
 }
 \keyword{abbreviation}
-

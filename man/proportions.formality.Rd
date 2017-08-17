@@ -17,4 +17,3 @@ View \code{\link[qdap]{formality}} proportions.
 \details{
 formality Method for proportions
 }
-

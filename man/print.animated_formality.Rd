@@ -35,4 +35,3 @@ equivalent to 1.0. See \code{\link[graphics]{mtext}} for more information.}
 \description{
 Prints a animated_formality  object.
 }
-

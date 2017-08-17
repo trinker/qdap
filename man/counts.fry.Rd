@@ -17,4 +17,3 @@
 \details{
 fry Method for counts.
 }
-

@@ -16,4 +16,3 @@
 \description{
 Prints an flesch_kincaid object.
 }
-

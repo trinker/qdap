@@ -17,4 +17,3 @@
 \details{
 linsear_write Method for scores
 }
-

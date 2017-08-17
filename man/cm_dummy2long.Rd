@@ -56,4 +56,3 @@ plot(cm_dummy2long(A))
 \code{\link[qdap]{cm_long2dummy}},
 \code{\link[qdap]{cm_combine.dummy}}
 }
-

@@ -17,4 +17,3 @@ View object_pronoun_type scores.
 \details{
 object_pronoun_type Method for scores
 }
-

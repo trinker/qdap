@@ -17,4 +17,3 @@ the output.}
 \description{
 Prints a sum_cmspans object.
 }
-

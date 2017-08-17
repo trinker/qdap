@@ -161,4 +161,3 @@ DATA <- qdap::DATA  ## Reset DATA
 \code{\link[qdap]{gradient_cloud}}
 }
 \keyword{wordcloud}
-

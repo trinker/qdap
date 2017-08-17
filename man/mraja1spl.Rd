@@ -28,4 +28,3 @@ and turns of talk split into sentences.
 \url{http://shakespeare.mit.edu/romeo_juliet/full.html}
 }
 \keyword{datasets}
-

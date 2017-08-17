@@ -14,4 +14,3 @@
 \description{
 Plots an animated_character  object.
 }
-

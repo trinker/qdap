@@ -16,4 +16,3 @@
 \description{
 Prints a polarity_score object.
 }
-

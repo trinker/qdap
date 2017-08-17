@@ -26,4 +26,3 @@ value from \code{\link[qdap]{termco}}.  Only used if \code{label} is
 \description{
 Prints a character_table object.
 }
-

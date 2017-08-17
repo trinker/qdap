@@ -30,4 +30,3 @@ DATA
 DATA <- qdap::DATA
 }
 }
-

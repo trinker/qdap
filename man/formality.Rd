@@ -60,6 +60,7 @@ probably need to contain a few hundred words for the measure to be minimally
 reliable. For single sentences, the F-value should only be computed for 
 purposes of illustration" (p. 24).
 }
+
 \examples{
 \dontrun{
 with(DATA, formality(state, person))
@@ -263,4 +264,3 @@ issue of Foundations of Science, 7 (3), 293-340.
 \keyword{formality,}
 \keyword{parts-of-speech,}
 \keyword{pos}
-

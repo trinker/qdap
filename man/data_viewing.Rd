@@ -2,10 +2,10 @@
 % Please edit documentation in R/htruncdf.R
 \name{htruncdf}
 \alias{htruncdf}
-\alias{ltruncdf}
-\alias{lview}
-\alias{qview}
 \alias{truncdf}
+\alias{ltruncdf}
+\alias{qview}
+\alias{lview}
 \title{Dataframe Viewing}
 \usage{
 htruncdf(dataframe, n = 10, width = 10, ...)
@@ -84,4 +84,3 @@ lview(lm(mpg~hp, data = mtcars))
 \seealso{
 \code{\link[utils]{head}}
 }
-

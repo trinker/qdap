@@ -63,4 +63,3 @@ plot(div.mod, high = "red", low = "yellow", values = TRUE)
 \url{http://arxiv.org/abs/physics/0512106}
 }
 \keyword{diversity}
-

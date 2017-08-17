@@ -20,4 +20,3 @@ If \code{FALSE} prints in ggplot graphics system.}
 \description{
 Plots a gantt object.
 }
-

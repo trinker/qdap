@@ -91,4 +91,3 @@ doi: 10.1037/0022-3514.59.3.475
 \code{\link[qdap]{subject_pronoun_type}}
 }
 \keyword{pronouns}
-

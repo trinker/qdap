@@ -27,4 +27,3 @@ graphic representation.}
 \description{
 Prints an fry object.
 }
-

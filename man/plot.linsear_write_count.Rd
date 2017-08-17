@@ -14,4 +14,3 @@
 \description{
 Plots a linsear_write_count object.
 }
-

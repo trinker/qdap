@@ -49,4 +49,3 @@ use but documented for completeness.
 \seealso{
 \code{\link[qdap]{termco}}
 }
-

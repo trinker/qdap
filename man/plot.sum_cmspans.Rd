@@ -49,4 +49,3 @@ cmspans object).
 \seealso{
 \code{\link[qdap]{summary.cmspans}}
 }
-

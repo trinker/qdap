@@ -23,4 +23,3 @@ proportion digits to print.}
 \description{
 Prints a lexical_classification_by  object.
 }
-

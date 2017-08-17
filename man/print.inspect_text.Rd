@@ -18,4 +18,3 @@ by \code{\link[base]{sink}}.}
 \description{
 Prints an inspect_text object.
 }
-

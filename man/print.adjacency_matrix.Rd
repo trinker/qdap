@@ -14,4 +14,3 @@
 \description{
 Prints an adjacency_matrix object.
 }
-

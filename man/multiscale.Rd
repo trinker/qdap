@@ -45,4 +45,3 @@ ltruncdf(out3, 10)
 \code{\link[base]{scale}}
 }
 \keyword{scale}
-

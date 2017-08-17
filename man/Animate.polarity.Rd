@@ -76,4 +76,3 @@ polarity is produced at th sentence level, therefor a label may indicate a
 positive current turn of talk, while the coloring may indicate a negative 
 sentences.
 }
-

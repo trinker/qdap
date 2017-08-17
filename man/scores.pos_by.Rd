@@ -17,4 +17,3 @@ View pos_by scores.
 \details{
 pos_by Method for scores
 }
-

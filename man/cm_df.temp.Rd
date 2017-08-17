@@ -60,4 +60,3 @@ Qualitative data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 \code{\link{cm_df.fill}}
 }
 \keyword{coding}
-

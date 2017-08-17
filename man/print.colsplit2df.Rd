@@ -14,4 +14,3 @@
 \description{
 Prints a colsplit2df object.
 }
-

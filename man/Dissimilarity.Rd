@@ -102,4 +102,3 @@ with(DATA, Dissimilarity(state, person))
 \code{\link[stats]{dist}}
 }
 \keyword{dissimilarity}
-

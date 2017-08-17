@@ -14,4 +14,3 @@
 \description{
 Prints a check_spelling_interactive object.
 }
-

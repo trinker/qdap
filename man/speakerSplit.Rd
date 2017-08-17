@@ -42,4 +42,3 @@ speakerSplit(DATA, sep = c(".", "_", ";"))
 DATA <- qdap::DATA  #reset DATA
 }
 }
-

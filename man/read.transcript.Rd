@@ -83,6 +83,7 @@ separator).  .doc files must be converted to .docx before reading in.
 file being read in is .docx.  The researcher should carefully investigate 
 each transcript for errors before further parsing the data.
 }
+
 \examples{
 \dontrun{
 #Note: to view the document below use the path:
@@ -135,14 +136,13 @@ read.transcript(text="34..    The New York Times reports a lot of words here.
     col.names=qcv(NO,    ARTICLE), sep="\\\\.\\\\.")
 }
 }
-\author{
-Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
-}
 \references{
 \url{https://github.com/trinker/qdap/wiki/Reading-.docx-\%5BMS-Word\%5D-Transcripts-into-R}
 }
 \seealso{
 \code{\link[qdap]{dir_map}}
 }
+\author{
+Bryan Goodrich and Tyler Rinker <tyler.rinker@gmail.com>.
+}
 \keyword{transcript}
-

@@ -15,4 +15,3 @@
 \description{
 Prints an lexical_classification object.
 }
-

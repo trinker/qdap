@@ -16,4 +16,3 @@
 \description{
 Prints an automated_readability_index object.
 }
-

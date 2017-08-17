@@ -105,4 +105,3 @@ do.call(grid.arrange, unlist(poldat2, recursive=FALSE))
 \keyword{chunks}
 \keyword{group}
 \keyword{text}
-

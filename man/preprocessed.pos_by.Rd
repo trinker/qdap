@@ -17,4 +17,3 @@ View pos_by preprocessed.
 \details{
 pos_by Method for preprocessed
 }
-

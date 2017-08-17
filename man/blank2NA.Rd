@@ -30,4 +30,3 @@ blank2NA(dat)
 \seealso{
 \code{\link[qdap]{rm_row}}
 }
-

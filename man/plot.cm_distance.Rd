@@ -50,4 +50,3 @@ This plotting method is not particularly well developed. It is
 suggested that the user further develop the graph via direct use of the 
 \pkg{igraph} package.
 }
-

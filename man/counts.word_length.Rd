@@ -17,4 +17,3 @@ View word_length counts.
 \details{
 word_length Method for counts
 }
-

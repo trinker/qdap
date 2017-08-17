@@ -17,4 +17,3 @@ View pos counts.
 \details{
 pos Method for counts
 }
-

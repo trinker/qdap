@@ -16,4 +16,3 @@
 \description{
 Prints an animated_character  object.
 }
-

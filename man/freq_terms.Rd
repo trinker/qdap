@@ -70,4 +70,3 @@ freq_terms(space_fill(DATA$state, "are you"), 500, char.keep="~~")
 \code{\link[qdap]{all_words}}
 }
 \keyword{frequent_terms}
-

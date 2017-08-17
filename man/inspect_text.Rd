@@ -2,8 +2,8 @@
 % Please edit documentation in R/inspect_text.R
 \name{inspect_text}
 \alias{inspect_text}
-\alias{inspect_text.Corpus}
 \alias{inspect_text.default}
+\alias{inspect_text.Corpus}
 \title{Inspect Text Vectors}
 \usage{
 inspect_text(text.var, grouping.var = NULL, ...)
@@ -47,4 +47,3 @@ inspect_text(crude)
 }
 }
 \keyword{print}
-

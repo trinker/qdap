@@ -102,4 +102,3 @@ as.data.frame(summary(z))
 \seealso{
 \code{\link[qdap]{plot.sum_cmspans}}
 }
-

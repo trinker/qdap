@@ -31,4 +31,3 @@ polarity.}
 \details{
 polarity Method for Network
 }
-

@@ -25,4 +25,3 @@
 \description{
 Plots a lexical object.
 }
-

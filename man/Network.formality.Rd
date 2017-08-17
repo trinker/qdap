@@ -40,4 +40,3 @@ hand to remove the missing values all together.}
 \details{
 formality Method for Network
 }
-

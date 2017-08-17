@@ -23,4 +23,3 @@ duplicates(DATA$state)
 duplicates(DATA$state[1])
 }
 }
-

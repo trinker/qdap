@@ -131,4 +131,3 @@ tool of management. New York, Ronald Press.
 \code{\link[qdap]{gantt_wrap}}
 }
 \keyword{Gantt}
-

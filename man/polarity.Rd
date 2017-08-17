@@ -577,4 +577,3 @@ reviews. National Conference on Artificial Intelligence.
 }
 \keyword{polarity}
 \keyword{sentiment,}
-

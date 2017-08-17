@@ -115,4 +115,3 @@ plot(out)
 \code{\link[qdap]{cm_code.transform}}
 }
 \keyword{co-occurrence}
-

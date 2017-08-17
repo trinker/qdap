@@ -14,4 +14,3 @@
 \description{
 Prints a wfm_summary object.
 }
-

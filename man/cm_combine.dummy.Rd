@@ -63,4 +63,3 @@ cm_combine.dummy(D2, combine.code = combines)
 \code{\link[qdap]{cm_long2dummy}}
 }
 \keyword{co-occurrence}
-

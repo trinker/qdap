@@ -45,6 +45,7 @@ choppy sentence and may indicate a false positive.  Sentences marked with
 `AAVE` may be the use of African American Vernacular English and not an 
 imperative sentence.
 }
+
 \examples{
 \dontrun{
 dat <- data.frame(name=c("sue", rep(c("greg", "tyler", "phil", 
@@ -60,4 +61,3 @@ imperative(dat, "name", "statement", , c("Alex"), warning=TRUE,
     parallel = TRUE)
 }
 }
-
