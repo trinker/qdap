@@ -29,6 +29,13 @@ Returns a parsed character vector.
 Use to clean text variables when importing a new data set.  Removes extra
 white spaces other textual anomalies that may cause errors.
 }
+\examples{
+\dontrun{
+x <- c("I like 456 dogs\\t  , don't you?", 'The end"')
+scrubber(x)
+scrubber(x, TRUE)
+}
+}
 \seealso{
 \code{\link[qdap]{strip}}
 }

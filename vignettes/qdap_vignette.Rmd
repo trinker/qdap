@@ -10,7 +10,7 @@ library(knitr)
 
 # qdap Package Vignette
 
-This is a temporary place holder for the actual *Introduction to qdap Vignette*.  The HTML vignette contains many images and is larger in size (~2.3 mb).  Rather than housing the HTML document on [CRAN](http://cran.r-project.org/) I am opting to store the Rmd file internally and the user will have to manually run `knitr` to render the HTML version.  The user may do this and replace this temporary vignette via the following options.  After running this the user may call the following to access the actual Introduction Vignette:
+This is a temporary place holder for the actual *Introduction to qdap Vignette*.  The HTML vignette contains many images and is larger in size (~2.3 mb).  Rather than housing the HTML document on [CRAN](https://CRAN.R-project.org) I am opting to store the Rmd file internally and the user will have to manually run `knitr` to render the HTML version.  The user may do this and replace this temporary vignette via the following options.  After running this the user may call the following to access the actual Introduction Vignette:
 
 ```{r eval=FALSE}
 browseVignettes(package = 'qdap')

@@ -47,7 +47,7 @@
 #' }
 #' \item{DOCUMENTATION}{ - A directory to store documents related to the project}
 #' \item{PLOTS}{ - A directory to store plots}
-#' \item{REPORTS}{ - A directory with report and presentation related tools.  Please see the \cr \href{https://dl.dropbox.com/u/61803503/packages/REPORT_WORKFLOW_GUIDE.pdf}{REPORT_WORKFLOW_GUIDE.pdf} for more details}
+#' \item{REPORTS}{ - A directory with report and presentation related tools.}
 #' \item{SCRIPTS}{ - A directory to store scripts; already contains the following:
 #' \itemize{
 #'     \item{01_clean_data.R}{ - initial cleaning of raw transcripts}
