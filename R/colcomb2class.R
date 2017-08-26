@@ -21,6 +21,7 @@
 #' and percents.
 #' @export
 #' @examples
+#' \dontrun{
 #' ## `termco` example
 #' ml <- list(
 #'     cat1 = c(" the ", " a ", " an "),
@@ -47,6 +48,7 @@
 #' ## data.frame example
 #' dat4 <- data.frame(X=LETTERS[1:5], matrix(sample(0:5, 20, TRUE), ncol = 4))
 #' colcomb2class(dat4, list(new = c("X1", "X4")))
+#' }
 colcomb2class <- function(dataframe, combined.columns, class = "list", 
     percent = TRUE, digits = 2, elim.old = TRUE, zero.replace = 0, 
     override = FALSE) {
