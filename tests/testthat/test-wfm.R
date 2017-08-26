@@ -6,21 +6,21 @@ test_that("wfm out puts a matrix with appropriate attributes",{
     wfm1 <- with(DATA, wfm(state, list(sex, adult)))[1:15, ]
     wfm2 <- wfm(DATA[["state"]], DATA[["person"]])[1:15, ]
     
-    wfm1_c <- structure(c(1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 
-        1, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 
+    wfm1_c <- structure(c(1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 1, 
+        1, 0, 1, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 
         0), .Dim = c(15L, 4L), .Dimnames = list(c("about", "already", 
         "am", "are", "be", "can", "certain", "computer", "distrust", 
-        "do", "dumb", "eat", "fun", "good", "how"), c("f.0", "f.1", "m.0", 
+        "do", "dumb", "eat", "f", "fun", "good"), c("f.0", "f.1", "m.0", 
         "m.1")))
     
-    wfm2_c <- structure(c(0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 
+    wfm2_c <- structure(c(0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 
-        0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0, 
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0, 
         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0), .Dim = c(15L, 
         5L), .Dimnames = list(c("about", "already", "am", "are", "be", 
         "can", "certain", "computer", "distrust", "do", "dumb", "eat", 
-        "fun", "good", "how"), c("greg", "researcher", "sally", "sam", 
+        "fun", "good", "greg"), c("greg", "researcher", "sally", "sam", 
         "teacher")))
     
     expect_equivalent(wfm1,wfm1_c)
@@ -62,7 +62,7 @@ test_that("wfdf out puts a matrix with appropriate attributes",{
 test_that("wfm_expanded expands",{
 
     expect_true(all(rownames(wfm_expanded(wfm(DATA$state, 
-        DATA$person)))[44:45] == "you"))
+        DATA$person)))[49:50] == "you"))
     
 })
 
@@ -99,7 +99,7 @@ test_that("wf_combine combines",{
     wc7 <- wfm_combine(y, WL6)
     wc8 <- wfm_combine(y, WL7)
     
-    wc1_c <- structure(c(1, 1, 18, 0, 0, 6, 0, 1, 9, 0, 2, 11, 0, 0, 4), .Dim = c(3L, 
+    wc1_c <- structure(c(1, 1, 19, 0, 0, 7, 0, 1, 10, 0, 2, 12, 0, 0, 5), .Dim = c(3L, 
         5L), .Dimnames = list(c("words 1", "words 2", "else.words"), 
             c("greg", "researcher", "sally", "sam", "teacher")), class = c("wfm", 
         "true.matrix", "matrix"))
@@ -132,7 +132,7 @@ test_that("wf_combine combines",{
             c("words 1", "else.words"), c("greg", "researcher", "sally", 
             "sam", "teacher")), class = c("wfm", "true.matrix", "matrix"
         ))
-    
+            
     wc8_c <- structure(c(1, 19, 0, 6, 1, 9, 2, 11, 0, 4), .Dim = c(2L, 5L), .Dimnames = list(
             c("WL7", "else.words"), c("greg", "researcher", "sally", 
             "sam", "teacher")), class = c("wfm", "true.matrix", "matrix"
@@ -158,35 +158,35 @@ test_that("weight produces matrices of the right class with right attributes",{
     w_wfm2 <- weight(WFM, "max")
     w_wfm3 <- weight(WFM, "scaled")
     
-    w_wfm1_c <- structure(list(dim = c(41L, 4L), dimnames = list(c("about", "already",                       
-        "am", "are", "be", "can", "certain", "computer", "distrust",                                       
-        "do", "dumb", "eat", "fun", "good", "how", "hungry", "i", "i'm",                                   
-        "is", "it", "it's", "let's", "liar", "move", "no", "not", "on",                                    
-        "shall", "should", "stinks", "talking", "telling", "the", "then",                                  
-        "there", "too", "truth", "way", "we", "what", "you"), c("f.0",                                     
-        "f.1", "m.0", "m.1")), class = c("weighted_wfm", "matrix"), 
-        weighting = "prop"), .Names = c("dim", 
-        "dimnames", "class", "weighting"))   
-    
-    w_wfm2_c <- structure(list(dim = c(41L, 4L), dimnames = list(c("about", "already", 
+    w_wfm1_c <- structure(list(dim = c(43L, 4L), dimnames = list(c("about", "already", 
         "am", "are", "be", "can", "certain", "computer", "distrust", 
-        "do", "dumb", "eat", "fun", "good", "how", "hungry", "i", "i'm", 
-        "is", "it", "it's", "let's", "liar", "move", "no", "not", "on", 
-        "shall", "should", "stinks", "talking", "telling", "the", "then", 
-        "there", "too", "truth", "way", "we", "what", "you"), c("f.0", 
-        "f.1", "m.0", "m.1")), class = c("weighted_wfm", "matrix"), 
-        weighting = "max"), .Names = c("dim", 
-        "dimnames", "class", "weighting"))
+        "do", "dumb", "eat", "f", "fun", "good", "how", "hungry", "i", 
+        "i'm", "is", "it", "it's", "let's", "liar", "m", "move", "no", 
+        "not", "on", "shall", "should", "stinks", "talking", "telling", 
+        "the", "then", "there", "too", "truth", "way", "we", "what", 
+        "you"), c("f.0", "f.1", "m.0", "m.1")), class = c("weighted_wfm", 
+        "matrix"), weighting = "prop"), .Names = c("dim", "dimnames", 
+        "class", "weighting"))
     
-    w_wfm3_c <- structure(list(dim = c(41L, 4L), dimnames = list(c("about", "already", 
+    w_wfm2_c <- structure(list(dim = c(43L, 4L), dimnames = list(c("about", "already", 
         "am", "are", "be", "can", "certain", "computer", "distrust", 
-        "do", "dumb", "eat", "fun", "good", "how", "hungry", "i", "i'm", 
-        "is", "it", "it's", "let's", "liar", "move", "no", "not", "on", 
-        "shall", "should", "stinks", "talking", "telling", "the", "then", 
-        "there", "too", "truth", "way", "we", "what", "you"), c("f.0", 
-        "f.1", "m.0", "m.1")), class = c("weighted_wfm", "matrix"), 
-        weighting = "scaled"), .Names = c("dim", 
-        "dimnames", "class", "weighting"))
+        "do", "dumb", "eat", "f", "fun", "good", "how", "hungry", "i", 
+        "i'm", "is", "it", "it's", "let's", "liar", "m", "move", "no", 
+        "not", "on", "shall", "should", "stinks", "talking", "telling", 
+        "the", "then", "there", "too", "truth", "way", "we", "what", 
+        "you"), c("f.0", "f.1", "m.0", "m.1")), class = c("weighted_wfm", 
+        "matrix"), weighting = "max"), .Names = c("dim", "dimnames", 
+        "class", "weighting"))
+    
+    w_wfm3_c <- structure(list(dim = c(43L, 4L), dimnames = list(c("about", "already", 
+        "am", "are", "be", "can", "certain", "computer", "distrust", 
+        "do", "dumb", "eat", "f", "fun", "good", "how", "hungry", "i", 
+        "i'm", "is", "it", "it's", "let's", "liar", "m", "move", "no", 
+        "not", "on", "shall", "should", "stinks", "talking", "telling", 
+        "the", "then", "there", "too", "truth", "way", "we", "what", 
+        "you"), c("f.0", "f.1", "m.0", "m.1")), class = c("weighted_wfm", 
+        "matrix"), weighting = "scaled"), .Names = c("dim", "dimnames", 
+        "class", "weighting"))
     
     expect_equivalent(attributes(w_wfm1), w_wfm1_c)
     expect_equivalent(attributes(w_wfm2), w_wfm2_c)

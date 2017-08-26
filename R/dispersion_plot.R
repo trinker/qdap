@@ -290,7 +290,7 @@ dispersion_plot <- function(text.var, match.terms, grouping.var = NULL,
     dat2 <- dat2[!is.na(dat2[["word"]]), ]
 
     the_plot <- ggplot(data = dat2, aes(x = word.num, y = grouping)) + 
-        geom_point(aes(position="dodge", color = summary), 
+        geom_point(aes(color = summary), 
             shape = symbol, size = size) + 
         theme_bw() + 
         theme(panel.background = element_rect(fill = bg.color), 
