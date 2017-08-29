@@ -742,8 +742,8 @@ as.Corpus.default <- function(text.var, grouping.var = NULL, demographic.vars,
     mycorpus
 }
 
-## helper readers
-qdap_tm_reader <- tm::readTabular(mapping=list(content="text.var", id="grouping"))
+## helper readers  ##removed 8-20-2017 b/s tm no longer uses this approach
+#qdap_tm_reader <- tm::readTabular(mapping=list(content="text.var", id="grouping"))
 
 compare <- function(v) {
     all(sapply( as.list(v[-1]), FUN=function(z) {identical(z, v[1])}))
