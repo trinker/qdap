@@ -35,6 +35,8 @@
 #' }
 replace_number  <-
 function(text.var, num.paste = TRUE, remove = FALSE) {
+    
+    text.var <- as.character(text.var)
 
     if (remove) return(gsub("[0-9]", "", text.var))
 
