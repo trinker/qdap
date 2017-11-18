@@ -2,7 +2,7 @@ Package: qdap
 Type: Package
 Title: Bridging the Gap Between Qualitative Data and Quantitative Analysis
 Version: 2.2.9
-Date: 2017-11-07
+Date: 2017-11-17
 Authors@R: c(person("Bryan", "Goodrich", role = "ctb"), person("Dason", "Kurkiewicz", role =
           "ctb"), person("Tyler", "Rinker", email = "tyler.rinker@gmail.com", role = c("aut",
           "cre")))
