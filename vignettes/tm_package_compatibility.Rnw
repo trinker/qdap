@@ -218,8 +218,9 @@ inspect(crude)
 
 <<freq_dat>>=
 tm_dat <- qdap_dat <- DATA[1:4, c(1, 4)]
-rownames(tm_dat) <- paste("docs", 1:nrow(tm_dat))
-tm_dat <- Corpus(DataframeSource(tm_dat[, 2, drop=FALSE]))
+tm_dat['doc_id'] <- paste("docs", 1:nrow(tm_dat))
+colnames(tm_dat)[2] <- c('text')
+tm_dat <- Corpus(DataframeSource(tm_dat))
 @
  
 \noindent Both \texttt{qdap\_dat} and \texttt{tm\_dat} are storing this basic information:
@@ -319,12 +320,13 @@ Now we'll look at some \textbf{qdap} functions that enable the user to move betw
 \hspace{.4cm} We'll again use the following preset data:
 
 <<data_set_up>>=
-tm_dat <- qdap_dat <- DATA[1:4, c (1, 4) ]
-rownames (tm_dat) <- paste ("docs", 1: nrow (tm_dat))
-tm_dat <- Corpus(DataframeSource (tm_dat[, 2, drop=FALSE]))
+tm_dat <- qdap_dat <- DATA[1:4, c(1, 4)]
+tm_dat['doc_id'] <- paste("docs", 1:nrow(tm_dat))
+colnames(tm_dat)[2] <- c('text')
+tm_dat <- Corpus(DataframeSource(tm_dat))
 
 qdap_wfm <- with (qdap_dat, wfm (state, person))
-tm_tdm <- TermDocumentMatrix (tm_dat,
+tm_tdm <- TermDocumentMatrix(tm_dat,
     control = list (
         removePunctuation = TRUE,
         wordLengths= c (0, Inf)

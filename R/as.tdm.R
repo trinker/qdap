@@ -545,7 +545,7 @@ wfm2xtab <- function(text.var, grouping.var = NULL, ...) {
 #' @export
 #' @importFrom qdapTools list2df
 #' @method as.data.frame Corpus
-as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "docs", 
+as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "doc_id", 
     text = "text", sent.split = FALSE) {
 
     if(!methods::is(x[[1]], "PlainTextDocument")) {
@@ -553,27 +553,14 @@ as.data.frame.Corpus <- function(x, row.names, optional, ..., doc = "docs",
     }
 
     qpaste <- function(x) paste(as.character(x), collapse = " ")
-    out <- qdapTools::list2df(lapply(x, qpaste), col1 = text, col2 = doc)[, 2:1]
 
-    metadat <- NLP::meta(x)
+    out <- data.frame(
+        qdapTools::list2df(lapply(x, qpaste), col1 = text, col2 = doc)[, 2:1],
+        NLP::meta(x),
+        stringsAsFactors = FALSE,
+        check.names = FALSE
+    )
 
-    if (all(unlist(lapply(NLP::meta(x, tag = "labels"), is.null)))){
-        NLP::meta(x, tag = "labels") <- paste("doc", qdapTools::pad(seq_len(length(x))))
-        metadat <- NLP::meta(x)
-    }
-
-    if(!is.null(metadat[["labels"]])) {
-        out[[1]] <- metadat[["labels"]]
-        if (!is.null(metadat[["MetaID"]]) && all.equal(metadat[["labels"]], metadat[["MetaID"]])){
-            metadat[["MetaID"]] <- NULL
-        }
-        colnames(metadat)[colnames(metadat) == "labels"] <- doc
-    }
-
-    if (ncol(metadat) > 1 && all(out[[1]] %in% metadat[[1]])) {
-        colnames(metadat)[1] <- doc
-        out <- key_merge(out, metadat)
-    }
 
     if (sent.split) {
         if(any(end_mark(out[["text"]]) == "_")) {
@@ -687,16 +674,16 @@ as.Corpus.default <- function(text.var, grouping.var = NULL, demographic.vars,
     LST <- sapply(split(DF[, "text.var"], DF[, "grouping"]), 
         paste, collapse = " ")
     # LST_DF <- qdapTools::list2df(LST, "text.var", "grouping")
-    LST_DF <- qdapTools::list2df(LST, "text.var", "id")
-    
+    LST_DF <- qdapTools::list2df(LST, "text", "doc_id")
+   
     # ## Use the tm package to convert to a Corpus
     # mycorpus <- tm::VCorpus(tm::DataframeSource(LST_DF), 
     #     readerControl=list(reader=qdap_tm_reader))
-    mycorpus <- replace_ids(tm::Corpus(tm::DataframeSource(LST_DF)), LST_DF[['id']])
+    mycorpus <- tm::Corpus(tm::DataframeSource(LST_DF))
     
     ## Add metadata info
-    NLP::meta(mycorpus, "MetaID") <- names(LST)
-    NLP::meta(mycorpus, "labels") <- names(LST)
+    NLP::meta(mycorpus, "MetaID") <- names(LST) #removed 11-12-2017
+    NLP::meta(mycorpus, "labels") <- names(LST) #removed 11-12-2017
     pers <- unname(Sys.info()["user"])
     if (!is.null(pers)) {
         tm::DublinCore(mycorpus, tag = "creator") <- pers
@@ -908,14 +895,14 @@ apply_as_df <- function(tm.corpus, qdapfun, ..., stopwords = NULL,
         if (group.null) {
             with(dat, qdapfun(text.var = text, tot = tot, ...)) 
         } else {
-            with(dat, qdapfun(text.var = text, grouping.var = docs, tot = tot, ...))
+            with(dat, qdapfun(text.var = text, grouping.var = doc_id, tot = tot, ...))
         }
     } else {
         if (any(theargs %in% "grouping.var")) {
             if (group.null) {
                 with(dat, qdapfun(text.var = text, ...))
             } else {
-                with(dat, qdapfun(text.var = text, grouping.var = docs, ...))
+                with(dat, qdapfun(text.var = text, grouping.var = doc_id, ...))
             }
         } else {
             with(dat, qdapfun(text.var = text, ...))
@@ -1009,10 +996,10 @@ tm_tdm_interface2 <- function(text.var, grouping.var, stopwords, char2space,
     #     readerControl=list(reader=qdap_tm_reader))
     #
     ## Updated approach per tm changes 8/16/2017
-    
-    LST_DF <- qdapTools::list2df(LST, "text.var", "id")
-    mycorpus <- replace_ids(tm::Corpus(tm::DataframeSource(LST_DF)), LST_DF[['id']])
-    
+  
+    LST_DF <- qdapTools::list2df(LST, "text", "doc_id")
+    ##mycorpus <- replace_ids(tm::Corpus(tm::DataframeSource(LST_DF)), LST_DF[['id']])
+    mycorpus <- tm::Corpus(tm::DataframeSource(LST_DF))  
     
     ## Add metadata info
     NLP::meta(mycorpus, "MetaID") <- names(LST)
@@ -1047,15 +1034,16 @@ tm_tdm_interface2 <- function(text.var, grouping.var, stopwords, char2space,
 
 }
 
-replace_ids <- function(corpus, ids){
 
-    stopifnot(length(corpus$content) == length(ids))
-    corpus$content <- Map(function(x, y) {
-        x$meta$id <- y
-        x
-    }, corpus$content, ids)
-    corpus
-}
+# replace_ids <- function(corpus, ids){
+
+#     stopifnot(length(corpus$content) == length(ids))
+#     corpus$content <- Map(function(x, y) {
+#         x$meta$id <- y
+#         x
+#     }, corpus$content, ids)
+#     corpus
+# }
 
 tm_dtm_interface2 <- function(text.var, grouping.var, stopwords, char2space, 
     apostrophe.remove, ...){
@@ -1100,10 +1088,11 @@ tm_dtm_interface2 <- function(text.var, grouping.var, stopwords, char2space,
     # ## Use the tm package to convert to a Corpus
     # mycorpus <- tm::VCorpus(tm::DataframeSource(LST_DF), 
     #     readerControl=list(reader=qdap_tm_reader))
-    
-    LST_DF <- qdapTools::list2df(LST, "text.var", "id")
-    mycorpus <- replace_ids(tm::Corpus(tm::DataframeSource(LST_DF)), LST_DF[['id']])
-    
+
+    LST_DF <- qdapTools::list2df(LST, "text", "doc_id")
+    ## mycorpus <- replace_ids(tm::Corpus(tm::DataframeSource(LST_DF)), LST_DF[['doc_id']])
+    mycorpus <- tm::Corpus(tm::DataframeSource(LST_DF))
+        
     ## Add metadata info
     NLP::meta(mycorpus, "MetaID") <- names(LST)
     NLP::meta(mycorpus, "labels") <- names(LST)
@@ -1143,12 +1132,12 @@ tm_dtm_interface2 <- function(text.var, grouping.var, stopwords, char2space,
 #' @method as.Corpus TermDocumentMatrix 
 as.Corpus.TermDocumentMatrix <- function(text.var, ...){
 
-    LST_DF <- qdapTools::list2df(mat2word_list(text.var), "text.var", "di")
+    LST_DF <- qdapTools::list2df(mat2word_list(text.var), "text", "doc_id")
 
     ## Use the tm package to convert to a Corpus
     # tm::VCorpus(tm::DataframeSource(LST_DF), 
     #     readerControl=list(reader=qdap_tm_reader))
-    replace_ids(tm::Corpus(tm::DataframeSource(LST_DF)), LST_DF[['id']])
+    tm::Corpus(tm::DataframeSource(LST_DF))
 
 }
 

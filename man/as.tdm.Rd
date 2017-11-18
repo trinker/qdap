@@ -57,7 +57,7 @@ as.DocumentTermMatrix(text.var, grouping.var = NULL, vowel.check = TRUE,
 
 \method{as.dtm}{wfm}(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-\method{as.data.frame}{Corpus}(x, row.names, optional, ..., doc = "docs",
+\method{as.data.frame}{Corpus}(x, row.names, optional, ..., doc = "doc_id",
   text = "text", sent.split = FALSE)
 
 as.Corpus(text.var, grouping.var = NULL, demographic.vars, ...)

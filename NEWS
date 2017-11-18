@@ -36,13 +36,7 @@ BUG FIXES
   to factor by default and `nchar` no longer works on factor.  This was caught 
   by @karilint  See issue #225
 
-NEW FEATURES
 
-MINOR FEATURES
-
-IMPROVEMENTS
-
-CHANGES
 
 
 

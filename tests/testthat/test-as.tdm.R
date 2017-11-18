@@ -1,5 +1,5 @@
 context("Checking as.tdm")
-
+# expect_true <- isTRUE; expect_equivalent <- all.equal
 
 test_that("as.tdm, as.dtm, as.DocumentTermMatrix, and as.TermDocumentMatrix 
     convert wfm, character and existing TermDocumentMatrix/DocumentTermMatrix",{
@@ -56,7 +56,7 @@ test_that("as.Corpus and as.data.frame methods work to convert between qadp/tm",
            demographic=DATA[, qcv(sex, adult, code)])
     expect_true(inherits(z, "Corpus"))
     expect_true(is.data.frame(as.data.frame(z)))
-    expect_true(all(dim(as.data.frame(z)) == c(5, 5)))
+    expect_true(all(dim(as.data.frame(z)) == c(5, 7)))
 
 })
 

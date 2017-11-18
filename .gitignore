@@ -1,6 +1,7 @@
 #################
 ## Eclipse
 #################
+tm_package_compatibility-concordance.tex
 *.pydevproject
 .project
 .metadata

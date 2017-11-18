@@ -352,12 +352,12 @@ tm_tdm_interface <- function(text.var, grouping.var, stopwords, char2space,
     # mycorpus <- tm::VCorpus(tm::DataframeSource(LST_DF), 
     #     readerControl=list(reader=qdap_tm_reader))
     
-    LST_DF <- qdapTools::list2df(LST, "text.var", "id")
+    LST_DF <- qdapTools::list2df(LST, "text", "doc_id")
     
     # ## Use the tm package to convert to a Corpus
     # mycorpus <- tm::VCorpus(tm::DataframeSource(LST_DF), 
     #     readerControl=list(reader=qdap_tm_reader))
-    mycorpus <- replace_ids(tm::Corpus(tm::DataframeSource(LST_DF)), LST_DF[['id']])
+    mycorpus <- tm::Corpus(tm::DataframeSource(LST_DF))
     
     ## Add metadata info
     NLP::meta(mycorpus, "MetaID") <- names(LST)
