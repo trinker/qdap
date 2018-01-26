@@ -11,14 +11,8 @@
 #' replacements.
 #' @param trailspace logical.  If \code{TRUE} inserts a trailing space in the 
 #' replacements.
-#' @param fixed logical. If \code{TRUE}, pattern is a string to be matched as is. 
-#' Overrides all conflicting arguments.
 #' @param trim logical.  If \code{TRUE} leading and trailing white spaces are 
 #' removed and multiple white spaces are reduced to a single white space.
-#' @param order.pattern logical.  If \code{TRUE} and \code{fixed = TRUE}, the 
-#' \code{pattern} string is sorted by number of characters to prevent substrings 
-#' replacing meta strings (e.g., \code{pattern = c("the", "then")} resorts to 
-#' search for "then" first).
 #' @param \dots Additional arguments passed to \code{\link[base]{gsub}}.
 #' @rdname multigsub
 #' @return \code{multigsub} - Returns a vector with the pattern replaced.
@@ -53,21 +47,14 @@
 #' }
 multigsub <-
 function (pattern, replacement, text.var, leadspace = FALSE, 
-    trailspace = FALSE, fixed = TRUE, trim = TRUE, order.pattern = fixed, 
-    ...) {
+    trailspace = FALSE, trim = TRUE, ...) {
 
     if (leadspace | trailspace) replacement <- spaste(replacement, trailing = trailspace, leading = leadspace)
-
-    if (fixed && order.pattern) {
-        ord <- rev(order(nchar(pattern)))
-        pattern <- pattern[ord]
-        if (length(replacement) != 1) replacement <- replacement[ord]
-    }
+    
     if (length(replacement) == 1) replacement <- rep(replacement, length(pattern))
-   
-    for (i in seq_along(pattern)){
-        text.var <- gsub(pattern[i], replacement[i], text.var, fixed = fixed, ...)
-    }
+    
+    names(replacement) = pattern
+    text.var = mgsub::mgsub(text.var,replacement)
 
     if (trim) text.var <- gsub("\\s+", " ", gsub("^\\s+|\\s+$", "", text.var, perl=TRUE), perl=TRUE)
     text.var
