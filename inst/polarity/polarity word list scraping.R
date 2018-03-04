@@ -11,7 +11,7 @@ neg[grep("[^a-zA-Z]", neg)]
 pos <- mgsub("-", " ", pos)
 neg <- mgsub(c("-", "f**k", "d*mn", "bull----", "bull****", "sh*t"), 
     c(" ", "fuck", "damn", "bullshit", "bullshit", "shit"), neg, fixed=TRUE)
-neg[neg == "naïve"] <- "naive"
+neg[neg == "naÃ¯ve"] <- "naive"
 
 neg <- replace_number(neg)
 pos <- replace_number(pos)
@@ -22,7 +22,7 @@ negation.words <- c("ain't", "aren't", "can't", "couldn't", "didn't", "doesn't",
   "nobody", "nor", "not")
 
 deamplification.words <- c("faintly", "barely", "very few", "very little", "little", "only", 
-  "few", "little", "slightly", "sparesly", "sporadically", "rarely", "seldom", "hardly")
+  "few", "little", "slightly", "sparsely", "sporadically", "rarely", "seldom", "hardly")
 
 amplification.words <- c("incalculably", "acutely", "awfully", "badly", "certainly", "colossally",
     "desperately", "enormously", "exceedingly", "exceptionally", "extraordinarily", "certainly", 
