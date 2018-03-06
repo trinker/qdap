@@ -1,3 +1,5 @@
-inst/Rmd_vgnette/* linguist-documentation
-inst/extra_statdoc/* linguist-documentation
+inst/staticdocs/* linguist-documentation
 inst/qdap_Demonstration/* linguist-documentation
+inst/Rmd_vignette/* linguist-documentation
+inst/web/* linguist-documentation
+inst/qdap_logo linguist-documentation
