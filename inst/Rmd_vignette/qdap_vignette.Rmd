@@ -6853,9 +6853,9 @@ options(markdown.HTML.stylesheet = "css/style.css")
 ## References
 <ul>
 <li> Fox, J. (2005). Programmer&#39;s niche: How do you spell that number?.  <em>R News, 5</em>(1), 51-55.</li>
-<li> Heylighen, F. (1999). Advantages and limitations of formal expression.  <em>Foundations of Science, 5</em>, 25-56. <a href="http://dx.doi.org/10.1023/A:1009686703349">10.1023/A:1009686703349</a></li>
+<li> Heylighen, F. (1999). Advantages and limitations of formal expression.  <em>Foundations of Science, 5</em>, 25-56. <a href="https://doi.org/10.1023/A:1009686703349">10.1023/A:1009686703349</a></li>
 <li>Heylighen, F. &  Dewaele, J.-M. (1999). Formality of language: Definition, measurement and behavioral determinants.  <a href="http://pespmc1.vub.ac.be/Papers/Formality.pdf"><a href="http://pespmc1.vub.ac.be/Papers/Formality.pdf">http://pespmc1.vub.ac.be/Papers/Formality.pdf</a></a></li>
-<li>Heylighen, F. &  Dewaele, J.-M. (2002). Variation in the contextuality of language: An empirical measure.  <em>Foundations of Science, 7</em>(3),  293-340. <a href="http://dx.doi.org/10.1023/A:1019661126744">doi: 10.1023/A:1019661126744</a></li>
+<li>Heylighen, F. &  Dewaele, J.-M. (2002). Variation in the contextuality of language: An empirical measure.  <em>Foundations of Science, 7</em>(3),  293-340. <a href="https://doi.org/10.1023/A:1019661126744">doi: 10.1023/A:1019661126744</a></li>
 <li>Hu, M. & Liu, B. (2004). Mining Opinion features in customer reviews.  <a href="http://www.cs.uic.edu/~liub/publications/aaai04-featureExtract.pdf"><a href="http://www.cs.uic.edu/%7Eliub/publications/aaai04-featureExtract.pdf">http://www.cs.uic.edu/~liub/publications/aaai04-featureExtract.pdf</a></a></li>
 <li>Rinker,  T. (2013). qdap: Quantitative discourse analysis package.  <a href="http://github.com/trinker/qdap"><a href="http://github.com/trinker/qdap">http://github.com/trinker/qdap</a></a></li>
 <li>Rinker, T. (2013). reports: Package to asssist in report writing.  <a href="http://github.com/trinker/reports"><a href="http://github.com/trinker/reports">http://github.com/trinker/reports</a></a></li>
