@@ -6,6 +6,7 @@ qdap
 [![](https://cranlogs.r-pkg.org/badges/qdap)](https://cran.r-project.org/package=qdap)
 
 
+
 [qdap](http://trinker.github.com/qdap_dev/) (Quantitative Discourse Analysis Package) is an R package designed to assist in quantitative discourse analysis.  The package stands as a bridge between qualitative transcripts of dialogue and statistical analysis & visualization.
 
 ## Installation
