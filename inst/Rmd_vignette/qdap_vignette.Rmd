@@ -1045,7 +1045,9 @@ trans_cloud(text, c("greg", "bob"), target.words=list(obs), caps.list=obs,
 
 <h4 id="mgsub">Multiple gsub</h4>
 
-The researcher may have the need to make multiple substitutions in a text.  An example of when this is needed is when a transcript is marked up with transcription coding convention specific to a particular transcription method.  These codes, while useful in some contexts, may lead to inaccurate word statistics.  The base R function `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/grep.html", "gsub")` makes a single replacement of these types of coding conventions. The `r FUN("multigsub")` (alias `r FUN("mgsub")`) takes a vector of patterns to search for as well as a vector of replacements.  Note that the replacements occur sequentially rather than all at once. This means a previous (first in pattern string) sub could alter or be altered by a later sub.  `r FUN("mgsub")` is useful throughout multiple stages of the research process.
+The researcher may have the need to make multiple substitutions in a text.  An example of when this is needed is when a transcript is marked up with transcription coding convention specific to a particular transcription method.  These codes, while useful in some contexts, may lead to inaccurate word statistics.  The base R function `r HR2("http://stat.ethz.ch/R-manual/R-devel/library/base/html/grep.html", "gsub")` makes a single replacement of these types of coding conventions. The `r FUN("multigsub")` (alias `r FUN("mgsub")`) takes a vector of patterns to search for as well as a vector of replacements.  Note that the replacements occur sequentially rather than all at once (unless the safe flag is set to `r TRUE`). This means a previous (first in pattern string) sub could alter or be altered by a later sub.  `r FUN("mgsub")` is useful throughout multiple stages of the research process.
+
+When the safe flag is set, replacements occur simultaneously. This results in slower processing, but ensures the integrity of the substitutions.
 
 `r FT(orange, 5, text="&diams;")` **Multiple Substitutions**`r FT(orange, 5, text="&diams;")`
 ```{r}
@@ -1056,6 +1058,7 @@ mgsub(c("it's", "I'm"), "SINGLE REPLACEMENT", DATA$state)
 mgsub("[[:punct:]]", "PUNC", DATA$state, fixed = FALSE)
 ## Iterative "I'm" converts to "I am" which converts to "INTERATIVE"
 mgsub(c("it's", "I'm", "I am"), c("it is", "I am", "ITERATIVE"), DATA$state)
+mgsub("hey ho, let's go!", c("hey", "ho"), c("ho", "hey"), safe = TRUE)
 ```
 
 

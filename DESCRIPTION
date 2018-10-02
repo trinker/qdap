@@ -11,7 +11,7 @@ Depends: R (>= 3.1.0), qdapDictionaries (>= 1.0.2), qdapRegex (>= 0.1.2), qdapTo
 Imports: chron, dplyr (>= 0.3), gdata, gender (>= 0.5.1), ggplot2 (>= 2.1.0), grid, gridExtra,
           igraph, methods, NLP, openNLP (>= 0.2-1), parallel, plotrix, RCurl, reports,
           reshape2, scales, stringdist, tidyr, tm (>= 0.7.2), tools, venneuler, wordcloud,
-          xlsx, XML
+          xlsx, XML, mgsub
 Suggests: koRpus, knitr, lda, proxy, stringi, SnowballC, testthat
 LazyData: TRUE
 VignetteBuilder: knitr
