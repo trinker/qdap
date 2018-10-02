@@ -19,7 +19,7 @@
 #' \code{pattern} string is sorted by number of characters to prevent substrings 
 #' replacing meta strings (e.g., \code{pattern = c("the", "then")} resorts to 
 #' search for "then" first).
-#' @param safe logical. If \code{TRUE} then a slower method is used which 
+#' @param simultaneous logical. If \code{TRUE} then a slower method is used which 
 #' guarantees no conflicts in simulataneous string substitution (e.g., pattern =
 #' c("hey", "ho"), replacement = c("ho", "hey"), text.var = "hey ho, let's go!"
 #' will return "ho hey, let's go!").
@@ -37,7 +37,7 @@
 #' multigsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
 #' mgsub(c("it's", "I'm"), c("it is", "I am"), DATA$state)
 #' mgsub("[[:punct:]]", "PUNC", DATA$state, fixed = FALSE)
-#' mgsub("hey ho, let's go!", c("hey", "ho"), c("ho", "hey"), safe = TRUE)
+#' mgsub("hey ho, let's go!", c("hey", "ho"), c("ho", "hey"), simultaneous = TRUE)
 #'
 #' ## ====================== 
 #' ## `sub_holder` Function
@@ -59,7 +59,7 @@
 multigsub <-
 function (pattern, replacement, text.var, leadspace = FALSE, 
     trailspace = FALSE, fixed = TRUE, trim = TRUE, order.pattern = fixed, 
-    safe = FALSE, ...) {
+    simultaneous = FALSE, ...) {
 
     if (leadspace | trailspace) replacement <- spaste(replacement, trailing = trailspace, leading = leadspace)
 
@@ -70,7 +70,7 @@ function (pattern, replacement, text.var, leadspace = FALSE,
     }
     if (length(replacement) == 1) replacement <- rep(replacement, length(pattern))
     
-    if (safe) {
+    if (simultaneous) {
       mgsub::mgsub(text.var, pattern, replacement, fixed = fixed, ...)
     } else {
       for (i in seq_along(pattern)){
