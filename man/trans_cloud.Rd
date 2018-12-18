@@ -6,8 +6,8 @@
 \usage{
 trans_cloud(text.var = NULL, grouping.var = NULL, word.list = NULL,
   stem = FALSE, target.words = NULL, expand.target = TRUE,
-  target.exclude = NULL, stopwords = NULL, min.freq = 1, caps = TRUE,
-  caps.list = NULL, random.order = FALSE, rot.per = 0,
+  target.exclude = NULL, stopwords = NULL, min.freq = 1,
+  caps = TRUE, caps.list = NULL, random.order = FALSE, rot.per = 0,
   cloud.colors = NULL, title = TRUE, cloud.font = NULL,
   title.font = NULL, title.color = "black", title.padj = -4.5,
   title.location = 3, title.cex = NULL, title.names = NULL,

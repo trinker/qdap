@@ -7,8 +7,8 @@
 \alias{syn_frame}
 \title{Search For Synonyms}
 \usage{
-synonyms(terms, return.list = TRUE, multiwords = TRUE, report.null = TRUE,
-  synonym.frame = qdapDictionaries::key.syn)
+synonyms(terms, return.list = TRUE, multiwords = TRUE,
+  report.null = TRUE, synonym.frame = qdapDictionaries::key.syn)
 
 syn(terms, return.list = TRUE, multiwords = TRUE, report.null = TRUE,
   synonym.frame = qdapDictionaries::key.syn)

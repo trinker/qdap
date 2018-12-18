@@ -6,8 +6,8 @@
 \usage{
 \method{plot}{sum_cmspans}(x, digits = 3, sep = ".", name.sep = "&",
   values = TRUE, high = "red", transpose = TRUE, plot = TRUE,
-  facet.vars = "time", rev.codes = !transpose, rev.stats = !transpose,
-  ...)
+  facet.vars = "time", rev.codes = !transpose,
+  rev.stats = !transpose, ...)
 }
 \arguments{
 \item{x}{The sum_cmspans object (the object produced by calling 

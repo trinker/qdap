@@ -17,20 +17,12 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
-CHANGES IN qdap VERSION 2.3.0
+CHANGES IN qdap VERSION 2.3.0 - 2.3.1
 ----------------------------------------------------------------
 
 
-BUG FIXES
-
-NEW FEATURES
-
-MINOR FEATURES
-
-IMPROVEMENTS
-
-CHANGES
-
+* Maintenance release in order to be compliant with the **tm** package's API 
+  changes.
 
 
 
@@ -47,11 +39,11 @@ BUG FIXES
   http://stackoverflow.com/q/33516466/1000343  See issue #217 for details.
   
 * `check_spelling_interactive` replace substrings rather then bounded words.
-  This was caught by @chrisjacques  See issue #221
+  This was caught by @chrisjacques.  See issue #221
   
 * `replace_abbreviation` threw an error because `data.frame` converts character
   to factor by default and `nchar` no longer works on factor.  This was caught 
-  by @karilint  See issue #225
+  by @karilint.  See issue #225
 
 
 

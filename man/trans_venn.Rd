@@ -4,11 +4,11 @@
 \alias{trans_venn}
 \title{Venn Diagram by Grouping Variable}
 \usage{
-trans_venn(text.var, grouping.var, stopwords = NULL, rm.duplicates = TRUE,
-  title = TRUE, title.font = NULL, title.color = "black",
-  title.cex = NULL, title.name = NULL, legend = TRUE, legend.cex = 0.8,
-  legend.location = "bottomleft", legend.text.col = "black",
-  legend.horiz = FALSE, ...)
+trans_venn(text.var, grouping.var, stopwords = NULL,
+  rm.duplicates = TRUE, title = TRUE, title.font = NULL,
+  title.color = "black", title.cex = NULL, title.name = NULL,
+  legend = TRUE, legend.cex = 0.8, legend.location = "bottomleft",
+  legend.text.col = "black", legend.horiz = FALSE, ...)
 }
 \arguments{
 \item{text.var}{The text variable.}

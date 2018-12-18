@@ -357,7 +357,7 @@ tm_tdm_interface <- function(text.var, grouping.var, stopwords, char2space,
     # ## Use the tm package to convert to a Corpus
     # mycorpus <- tm::VCorpus(tm::DataframeSource(LST_DF), 
     #     readerControl=list(reader=qdap_tm_reader))
-    mycorpus <- tm::Corpus(tm::DataframeSource(LST_DF))
+    mycorpus <- tm::VCorpus(tm::DataframeSource(LST_DF))
     
     ## Add metadata info
     NLP::meta(mycorpus, "MetaID") <- names(LST)

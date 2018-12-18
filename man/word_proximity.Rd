@@ -47,8 +47,6 @@ sentences between words (defaults to scaled).
 \description{
 \code{word_proximity} - Generate proximity measures to ascertain a mean 
 distance measure between word uses.
-
-\code{weight} - weight Method for word_proximity.
 }
 \details{
 Note that row names are the first word and column names are the 

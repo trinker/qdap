@@ -4,8 +4,9 @@
 \alias{replace_contraction}
 \title{Replace Contractions}
 \usage{
-replace_contraction(text.var, contraction = qdapDictionaries::contractions,
-  replace = NULL, ignore.case = TRUE, sent.cap = TRUE)
+replace_contraction(text.var,
+  contraction = qdapDictionaries::contractions, replace = NULL,
+  ignore.case = TRUE, sent.cap = TRUE)
 }
 \arguments{
 \item{text.var}{The text variable.}

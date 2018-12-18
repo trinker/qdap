@@ -4,8 +4,8 @@
 \alias{cm_range2long}
 \title{Transform Codes to Start-End Durations}
 \usage{
-cm_range2long(..., v.name = "variable", list.var = TRUE, debug = TRUE,
-  object = NULL)
+cm_range2long(..., v.name = "variable", list.var = TRUE,
+  debug = TRUE, object = NULL)
 }
 \arguments{
 \item{v.name}{An optional name for the column created for the list.var 

@@ -12,8 +12,8 @@
 \alias{Filter.rfswl}
 \title{Filter}
 \usage{
-\method{Filter}{all_words}(x, min = 1, max = Inf, count.apostrophe = TRUE,
-  stopwords = NULL, ignore.case = TRUE, ...)
+\method{Filter}{all_words}(x, min = 1, max = Inf,
+  count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...)
 
 \method{Filter}{TermDocumentMatrix}(x, min = 1, max = Inf,
   count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...)
@@ -21,14 +21,14 @@
 \method{Filter}{DocumentTermMatrix}(x, min = 1, max = Inf,
   count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...)
 
-Filter(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL,
-  ignore.case = TRUE, ...)
+Filter(x, min = 1, max = Inf, count.apostrophe = TRUE,
+  stopwords = NULL, ignore.case = TRUE, ...)
 
 \method{Filter}{wfm}(x, min = 1, max = Inf, count.apostrophe = TRUE,
   stopwords = NULL, ...)
 
-\method{Filter}{character}(x, min = 1, max = Inf, count.apostrophe = TRUE,
-  stopwords = NULL, ignore.case = TRUE, ...)
+\method{Filter}{character}(x, min = 1, max = Inf,
+  count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...)
 
 \method{Filter}{fwl}(x, min = 1, max = Inf, count.apostrophe = TRUE,
   stopwords = NULL, ignore.case = TRUE, ...)
@@ -36,8 +36,8 @@ Filter(x, min = 1, max = Inf, count.apostrophe = TRUE, stopwords = NULL,
 \method{Filter}{fswl}(x, min = 1, max = Inf, count.apostrophe = TRUE,
   stopwords = NULL, ignore.case = TRUE, ...)
 
-\method{Filter}{rfswl}(x, min = 1, max = Inf, count.apostrophe = TRUE,
-  stopwords = NULL, ignore.case = TRUE, ...)
+\method{Filter}{rfswl}(x, min = 1, max = Inf,
+  count.apostrophe = TRUE, stopwords = NULL, ignore.case = TRUE, ...)
 }
 \arguments{
 \item{x}{A filterable object (e.g., \code{\link[qdap]{wfm}},

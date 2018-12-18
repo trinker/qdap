@@ -17,7 +17,16 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
-**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.5-
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.3.0 - 2.3.1
+----------------------------------------------------------------
+
+
+* Maintenance release in order to be compliant with the **tm** package's API 
+  changes.
+
+
+
+**CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.2.5-2.2.9
 ----------------------------------------------------------------
 
 
@@ -27,22 +36,16 @@ And constructed with the following guidelines:
   dictionary that did not have at least one word beginning with all 26 letters
   of the alphabet.  The dictionary automatically uses `assume.first.correct=FALSE`
   if this occurs.  Reported by @CallumH of StackOverflow: 
-  <a href="http://stackoverflow.com/q/33516466/1000343" target="_blank">http://stackoverflow.com/q/33516466/1000343</a>  See <a href="https://github.com/trinker/qdap/issues/217">issue #217</a> for details.
+  http://stackoverflow.com/q/33516466/1000343  See <a href="https://github.com/trinker/qdap/issues/217">issue #217</a> for details.
   
 * `check_spelling_interactive` replace substrings rather then bounded words.
-  This was caught by @chrisjacques  See <a href="https://github.com/trinker/qdap/issues/221">issue #221</a>
+  This was caught by @chrisjacques.  See <a href="https://github.com/trinker/qdap/issues/221">issue #221</a>
   
 * `replace_abbreviation` threw an error because `data.frame` converts character
   to factor by default and `nchar` no longer works on factor.  This was caught 
-  by @karilint  See <a href="https://github.com/trinker/qdap/issues/225">issue #225</a>
+  by @karilint.  See <a href="https://github.com/trinker/qdap/issues/225">issue #225</a>
 
-**NEW FEATURES**
 
-**MINOR FEATURES**
-
-**IMPROVEMENTS**
-
-**CHANGES**
 
 
 
@@ -103,7 +106,7 @@ And constructed with the following guidelines:
   `rmarkdown` generated environment.
 
 * `polarity` no longer handled phrases (words + spaces) for `polarity.frame`.
-  This behavior was caught by @Benasso <a href="http://stackoverflow.com/q/27156834/1000343." target="_blank">http://stackoverflow.com/q/27156834/1000343.</a>
+  This behavior was caught by @Benasso http://stackoverflow.com/q/27156834/1000343.
   This bug is a result of the changes made to `bag_o_words` earlier this year.
   The bug has been fixed and a unit test put in place to ensure the bug is not
   reintroduced.
@@ -120,7 +123,7 @@ And constructed with the following guidelines:
 
 * `pos` threw an error if only one word was passed to `text.var`.   Fix:
   `drop = FALSE` has been added to data frame indexing.  Caught by 
-  StackOverflow user G_1991 <a href="http://stackoverflow.com/q/29896488/1000343." target="_blank">http://stackoverflow.com/q/29896488/1000343.</a>
+  StackOverflow user G_1991 http://stackoverflow.com/q/29896488/1000343.
 
 * `as.tdm.wfm` would error if no grouping variable was supplied.  This behavior
   has been corrected.
@@ -160,7 +163,7 @@ And constructed with the following guidelines:
 
 * `multigsub`/`mgsub` get a speed boost through better programming choices. See
   <a href="https://github.com/trinker/qdap/issues/201">issue #201</a> for details.  Thank you to @Alexey Ferapontov for his critical post
-  <a href="http://stackoverflow.com/q/27367914/1000343" target="_blank">http://stackoverflow.com/q/27367914/1000343</a> that inspired the changes.
+  http://stackoverflow.com/q/27367914/1000343 that inspired the changes.
 
 * `formality` and `pos` now have minimal unit tests.
 
@@ -223,7 +226,7 @@ And constructed with the following guidelines:
   `all_words` gains `char.keep` and `char2space` arguments to enable retention 
   of characters and multi word phrases.  These features are passed to 
   `freq_terms` as well.  Suggested by stackoverflow's lawyeR 
-  (<a href="http://stackoverflow.com/a/26162401/1000343)." target="_blank">http://stackoverflow.com/a/26162401/1000343).</a>
+  (http://stackoverflow.com/a/26162401/1000343).
 
 **CHANGES**
 
@@ -311,7 +314,7 @@ And constructed with the following guidelines:
 **MINOR FEATURES**
 
 * `dplyr`'s chaining pipe imported for convenience.  See 
-  <a href="http://www.rdocumentation.org/packages/magrittr/functions/magrittr" target="_blank">http://www.rdocumentation.org/packages/magrittr/functions/magrittr</a> for details.
+  http://www.rdocumentation.org/packages/magrittr/functions/magrittr for details.
 
 **IMPROVEMENTS**
 
@@ -425,7 +428,7 @@ And constructed with the following guidelines:
   vignette.  The user may also use the `build_qdap_vignette` directly.
 
 * `qdap` incorporates the changes from the `tm` package version: 0.6:
-  <a href="http://cran.r-project.org/web/packages/tm/news.html" target="_blank">http://cran.r-project.org/web/packages/tm/news.html</a>  Reference <a href="https://github.com/trinker/qdap/issues/187">issue #187</a>.
+  http://cran.r-project.org/web/packages/tm/news.html  Reference <a href="https://github.com/trinker/qdap/issues/187">issue #187</a>.
 
 **CHANGES** IN <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> VERSION 2.0.0
 ----------------------------------------------------------------
@@ -584,7 +587,7 @@ The `qdapTools` package now houses several former <a href="https://github.com/tr
 
 * `discourse_map` function provides a network mapping of the flow of discourse 
   between social actors.  Function output is `Animate` ready as well.  See
-  `?discourse_map` and <a href="http://trinker.github.io/qdap_examples/animation_dialogue" target="_blank">http://trinker.github.io/qdap_examples/animation_dialogue</a>
+  `?discourse_map` and http://trinker.github.io/qdap_examples/animation_dialogue
   for more.
 
 * `Animate` function added to convert select <a href="https://github.com/trinker/qdap" target="_blank">qdap</a> outputs to an animated  
@@ -1020,7 +1023,7 @@ relatively new to CRAN, made these changes sensible at this point.
   and function use for the package.  This is not currently a part of the build 
   but can be accessed via:
 
-  <a href="http://htmlpreview.github.io/?https://github.com/trinker/qdap/blob/master/vignettes/qdap_vignette.html" target="_blank">http://htmlpreview.github.io/?https://github.com/trinker/qdap/blob/master/vignettes/qdap_vignette.html</a>
+  http://htmlpreview.github.io/?https://github.com/trinker/qdap/blob/master/vignettes/qdap_vignette.html
 
   *Note* that the vignette may include development version functions not yet 
   available in the current CRAN version
@@ -1107,7 +1110,7 @@ qdap 0.2.3
 **BUG FIXES**
 
 * `genXtract` labels returned the word "right" rather than the right edge string.
-  See <a href="http://stackoverflow.com/a/15423439/1000343" target="_blank">http://stackoverflow.com/a/15423439/1000343</a> for an example of the old 
+  See http://stackoverflow.com/a/15423439/1000343 for an example of the old 
   behavior.  This behavior has been fixed.
 
 * `gradient_cloud`'s `min.freq ` locked at 1.  This has been fixed. (Manuel 

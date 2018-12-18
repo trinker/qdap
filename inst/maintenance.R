@@ -1,7 +1,7 @@
 #========
 # BUILD
 #========
-update_date(); source("inst/build.R")
+update_news(); source("inst/build.R")
 
 #==========================
 # Run unit tests

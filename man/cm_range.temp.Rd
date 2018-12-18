@@ -4,7 +4,8 @@
 \alias{cm_range.temp}
 \title{Range Code Sheet}
 \usage{
-cm_range.temp(codes, text.var = NULL, grouping.var = NULL, file = NULL)
+cm_range.temp(codes, text.var = NULL, grouping.var = NULL,
+  file = NULL)
 }
 \arguments{
 \item{codes}{Character vector of codes.}

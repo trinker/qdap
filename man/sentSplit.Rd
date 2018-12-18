@@ -8,9 +8,10 @@
 \alias{sent_detect_nlp}
 \title{Sentence Splitting}
 \usage{
-sentSplit(dataframe, text.var, rm.var = NULL, endmarks = c("?", ".", "!",
-  "|"), incomplete.sub = TRUE, rm.bracket = TRUE, stem.col = FALSE,
-  text.place = "right", verbose = is.global(2), ...)
+sentSplit(dataframe, text.var, rm.var = NULL, endmarks = c("?", ".",
+  "!", "|"), incomplete.sub = TRUE, rm.bracket = TRUE,
+  stem.col = FALSE, text.place = "right", verbose = is.global(2),
+  ...)
 
 sentCombine(text.var, grouping.var = NULL, as.list = FALSE)
 

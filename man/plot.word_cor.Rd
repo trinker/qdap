@@ -4,8 +4,8 @@
 \alias{plot.word_cor}
 \title{Plots a word_cor object}
 \usage{
-\method{plot}{word_cor}(x, label = TRUE, lab.digits = 3, high = "red",
-  low = "white", grid = NULL, ncol = NULL, ...)
+\method{plot}{word_cor}(x, label = TRUE, lab.digits = 3,
+  high = "red", low = "white", grid = NULL, ncol = NULL, ...)
 }
 \arguments{
 \item{x}{The word_cor object}

@@ -7,12 +7,12 @@
 word_network_plot(text.var, grouping.var = 1:length(text.var),
   target.words = NULL, stopwords = qdapDictionaries::Top100Words,
   label.cex = 0.8, label.size = 0.5, edge.curved = TRUE,
-  vertex.shape = "circle", edge.color = "gray70", label.colors = "black",
-  layout = NULL, title.name = NULL, title.padj = -4.5,
-  title.location = 3, title.font = NULL, title.cex = 0.8,
-  log.labels = FALSE, title.color = "black", legend = NULL,
-  legend.cex = 0.8, legend.location = c(-1.54, 1.41), plot = TRUE,
-  char2space = "~~", ...)
+  vertex.shape = "circle", edge.color = "gray70",
+  label.colors = "black", layout = NULL, title.name = NULL,
+  title.padj = -4.5, title.location = 3, title.font = NULL,
+  title.cex = 0.8, log.labels = FALSE, title.color = "black",
+  legend = NULL, legend.cex = 0.8, legend.location = c(-1.54, 1.41),
+  plot = TRUE, char2space = "~~", ...)
 }
 \arguments{
 \item{text.var}{The text variable.}

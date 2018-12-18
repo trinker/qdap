@@ -27,51 +27,53 @@ Matrix or Document Term Matrix}
 \usage{
 as.tdm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-as.TermDocumentMatrix(text.var, grouping.var = NULL, vowel.check = TRUE,
-  ...)
+as.TermDocumentMatrix(text.var, grouping.var = NULL,
+  vowel.check = TRUE, ...)
 
 as.dtm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-as.DocumentTermMatrix(text.var, grouping.var = NULL, vowel.check = TRUE,
-  ...)
+as.DocumentTermMatrix(text.var, grouping.var = NULL,
+  vowel.check = TRUE, ...)
 
-\method{as.tdm}{Corpus}(text.var, grouping.var = NULL, vowel.check = TRUE,
-  ...)
+\method{as.tdm}{Corpus}(text.var, grouping.var = NULL,
+  vowel.check = TRUE, ...)
 
-\method{as.tdm}{default}(text.var, grouping.var = NULL, vowel.check = TRUE,
-  ...)
+\method{as.tdm}{default}(text.var, grouping.var = NULL,
+  vowel.check = TRUE, ...)
 
 \method{as.tdm}{character}(text.var, grouping.var = NULL,
   vowel.check = TRUE, ...)
 
-\method{as.dtm}{Corpus}(text.var, grouping.var = NULL, vowel.check = TRUE,
-  ...)
+\method{as.dtm}{Corpus}(text.var, grouping.var = NULL,
+  vowel.check = TRUE, ...)
 
-\method{as.dtm}{default}(text.var, grouping.var = NULL, vowel.check = TRUE,
-  ...)
+\method{as.dtm}{default}(text.var, grouping.var = NULL,
+  vowel.check = TRUE, ...)
 
 \method{as.dtm}{character}(text.var, grouping.var = NULL,
   vowel.check = TRUE, ...)
 
-\method{as.tdm}{wfm}(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
+\method{as.tdm}{wfm}(text.var, grouping.var = NULL, vowel.check = TRUE,
+  ...)
 
-\method{as.dtm}{wfm}(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
+\method{as.dtm}{wfm}(text.var, grouping.var = NULL, vowel.check = TRUE,
+  ...)
 
-\method{as.data.frame}{Corpus}(x, row.names, optional, ..., doc = "doc_id",
-  text = "text", sent.split = FALSE)
+\method{as.data.frame}{Corpus}(x, row.names, optional, ...,
+  doc = "doc_id", text = "text", sent.split = FALSE)
 
 as.Corpus(text.var, grouping.var = NULL, demographic.vars, ...)
 
 \method{as.Corpus}{sent_split}(text.var, grouping.var = NULL,
   demographic.vars, ...)
 
-\method{as.Corpus}{default}(text.var, grouping.var = NULL, demographic.vars,
-  ...)
+\method{as.Corpus}{default}(text.var, grouping.var = NULL,
+  demographic.vars, ...)
 
 apply_as_tm(wfm.obj, tmfun, ..., to.qdap = TRUE)
 
-apply_as_df(tm.corpus, qdapfun, ..., stopwords = NULL, min = 1, max = Inf,
-  count.apostrophe = TRUE, ignore.case = TRUE)
+apply_as_df(tm.corpus, qdapfun, ..., stopwords = NULL, min = 1,
+  max = Inf, count.apostrophe = TRUE, ignore.case = TRUE)
 
 \method{as.Corpus}{TermDocumentMatrix}(text.var, ...)
 
@@ -181,40 +183,11 @@ a \code{\link[tm]{Corpus}}.
 \code{as.DocumentTermMatrix} - Create document term matrices from raw text or 
 \code{\link[qdap]{wfm}} for use with other text analysis packages.
 
-\code{as.tdm.Corpus} - Corpus method for \code{as.tdm} used to 
-convert to a \code{\link[tm]{DocumentTermMatrix}}.
-
-\code{as.tdm.default} - Default method for \code{as.tdm} used to 
-convert to a \code{\link[tm]{TermDocumentMatrix}}.
-
-\code{as.tdm.character} - character method for \code{as.tdm} used to 
-convert to a \code{\link[tm]{TermDocumentMatrix}}.
-
-\code{as.dtm.Corpus} - Corpus method for \code{as.dtm} used to 
-convert to a \code{\link[tm]{DocumentTermMatrix}}.
-
-\code{as.dtm.default} - Default method for \code{as.dtm} used to 
-convert to a \code{\link[tm]{DocumentTermMatrix}}.
-
-\code{as.dtm.character} - character method for \code{as.dtm} used to 
-convert to a \code{\link[tm]{DocumentTermMatrix}}.
-
-\code{as.tdm.wfm} - wfm method for \code{as.tdm} used to 
-convert to a \code{\link[tm]{TermDocumentMatrix}}.
-
-\code{as.dtm.wfm} - wfm method for \code{as.dtm} used to 
-convert to a \code{\link[tm]{TermDocumentMatrix}}.
-
 \code{as.data.frame} - Convert a \pkg{tm} package \code{\link[tm]{Corpus}} to 
 a \pkg{qdap} \code{\link[base]{data.frame}}.
 
 \code{as.Corpus} - Attempts to convert its argument into a \pkg{tm} package 
 \code{\link[tm]{Corpus}}.
-
-\code{as.Corpus.sent_split} - \code{sent_split} Method for \code{as.Corpus}.
-
-\code{as.Corpus.default} - Default method for \code{as.Corpus} used to 
-convert vectors (from a \code{data.frame}) to a \code{\link[tm]{Corpus}}.
 
 \code{apply_as_tm} - Apply functions intended to be used on the \pkg{tm} 
 package's \code{\link[tm]{TermDocumentMatrix}} to a \code{\link[qdap]{wfm}} 
@@ -225,15 +198,6 @@ dataframe.
 \code{apply_as_df} - Apply functions intended to be used on the \pkg{qdap} 
 package's \code{\link[base]{data.frame}} + \code{\link[qdap]{sentSplit}} to 
 a \pkg{tm} \code{\link[tm]{Corpus}} object.
-
-\code{as.Corpus.TermDocumentMatrix} - \code{TermDocumentMatrix} method for 
-\code{as.Corpus} used to convert a \code{\link[tm]{Corpus}}.
-
-\code{as.Corpus.DocumentTermMatrix} - \code{DocumentTermMatrix} method for 
-\code{as.Corpus} used to convert a \code{\link[tm]{Corpus}}.
-
-\code{as.Corpus.wfm} - \code{wfm} method for 
-\code{as.Corpus} used to convert a \code{\link[tm]{Corpus}}.
 }
 \details{
 Produces output that is identical to the \code{tm} package's 

@@ -4,7 +4,8 @@
 \alias{sentiment_frame}
 \title{Power Score (Sentiment Analysis)}
 \usage{
-sentiment_frame(positives, negatives, pos.weights = 1, neg.weights = -1)
+sentiment_frame(positives, negatives, pos.weights = 1,
+  neg.weights = -1)
 }
 \arguments{
 \item{positives}{A character vector of positive words.}

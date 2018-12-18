@@ -6,7 +6,8 @@
 \usage{
 lexical_classification(text.var, grouping.var = NULL,
   order.by.lexical_classification = TRUE,
-  function.words = qdapDictionaries::function.words, bracket = "all", ...)
+  function.words = qdapDictionaries::function.words, bracket = "all",
+  ...)
 }
 \arguments{
 \item{text.var}{The text variable.}

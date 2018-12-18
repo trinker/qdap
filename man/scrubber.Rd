@@ -4,8 +4,8 @@
 \alias{scrubber}
 \title{Clean Imported Text}
 \usage{
-scrubber(text.var, num2word = FALSE, rm.quote = TRUE, fix.comma = TRUE,
-  fix.space = TRUE, ...)
+scrubber(text.var, num2word = FALSE, rm.quote = TRUE,
+  fix.comma = TRUE, fix.space = TRUE, ...)
 }
 \arguments{
 \item{text.var}{The text variable.}

@@ -4,8 +4,8 @@
 \alias{plot.readability_score}
 \title{Plots a readability_score Object}
 \usage{
-\method{plot}{readability_score}(x, alpha = 0.3, auto.label, grid, div.col,
-  ...)
+\method{plot}{readability_score}(x, alpha = 0.3, auto.label, grid,
+  div.col, ...)
 }
 \arguments{
 \item{x}{The readability_score object.}

@@ -11,61 +11,61 @@
 \alias{qheat.pos_by}
 \title{Quick Heatmap}
 \usage{
-qheat(mat, low = "white", high = "darkblue", values = FALSE, digits = 1,
-  text.size = 3, text.color = "grey40", xaxis.col = "black",
-  yaxis.col = "black", order.by = NULL, grid = "white",
-  by.column = TRUE, auto.size = FALSE, mat2 = NULL, plot = TRUE,
-  facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "", ...)
+qheat(mat, low = "white", high = "darkblue", values = FALSE,
+  digits = 1, text.size = 3, text.color = "grey40",
+  xaxis.col = "black", yaxis.col = "black", order.by = NULL,
+  grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
+  plot = TRUE, facet.vars = NULL, facet.flip = FALSE,
+  diag.na = FALSE, diag.values = "", ...)
 
 \method{qheat}{default}(mat, low = "white", high = "darkblue",
   values = FALSE, digits = 1, text.size = 3, text.color = "grey40",
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
-  plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "", ...)
+  plot = TRUE, facet.vars = NULL, facet.flip = FALSE,
+  diag.na = FALSE, diag.values = "", ...)
 
 \method{qheat}{diversity}(mat, low = "white", high = "darkblue",
   values = FALSE, digits = 1, text.size = 3, text.color = "grey40",
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
-  plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "", ...)
+  plot = TRUE, facet.vars = NULL, facet.flip = FALSE,
+  diag.na = FALSE, diag.values = "", ...)
 
 \method{qheat}{termco}(mat, low = "white", high = "darkblue",
   values = FALSE, digits = 1, text.size = 3, text.color = "grey40",
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
-  plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "", ...)
+  plot = TRUE, facet.vars = NULL, facet.flip = FALSE,
+  diag.na = FALSE, diag.values = "", ...)
 
 \method{qheat}{word_stats}(mat, low = "white", high = "darkblue",
   values = FALSE, digits = 1, text.size = 3, text.color = "grey40",
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
-  plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "", ...)
+  plot = TRUE, facet.vars = NULL, facet.flip = FALSE,
+  diag.na = FALSE, diag.values = "", ...)
 
 \method{qheat}{character_table}(mat, low = "white", high = "darkblue",
   values = FALSE, digits = 1, text.size = 3, text.color = "grey40",
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
-  plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "", ...)
+  plot = TRUE, facet.vars = NULL, facet.flip = FALSE,
+  diag.na = FALSE, diag.values = "", ...)
 
 \method{qheat}{question_type}(mat, low = "white", high = "darkblue",
   values = FALSE, digits = 1, text.size = 3, text.color = "grey40",
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
-  plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "", ...)
+  plot = TRUE, facet.vars = NULL, facet.flip = FALSE,
+  diag.na = FALSE, diag.values = "", ...)
 
 \method{qheat}{pos_by}(mat, low = "white", high = "darkblue",
   values = FALSE, digits = 1, text.size = 3, text.color = "grey40",
   xaxis.col = "black", yaxis.col = "black", order.by = NULL,
   grid = "white", by.column = TRUE, auto.size = FALSE, mat2 = NULL,
-  plot = TRUE, facet.vars = NULL, facet.flip = FALSE, diag.na = FALSE,
-  diag.values = "", ...)
+  plot = TRUE, facet.vars = NULL, facet.flip = FALSE,
+  diag.na = FALSE, diag.values = "", ...)
 }
 \arguments{
 \item{mat}{A matrix or dataframe produced by many qdap functions in 
@@ -128,18 +128,6 @@ if \code{diag.na} is set to \code{TRUE}.  Default is to not print a value.}
 \description{
 A quick heatmap function for visualizing typical qdap dataframe/matrix 
 outputs.
-
-diversity Method for qheat
-
-termco Method for qheat
-
-word_stats Method for qheat
-
-character_table Method for qheat
-
-question_type Method for qheat
-
-pos_by Method for qheat
 }
 \details{
 \code{qheat} is useful for finding patterns and anomalies in large

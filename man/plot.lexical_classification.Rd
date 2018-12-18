@@ -5,12 +5,12 @@
 \title{Plots a lexical_classification Object}
 \usage{
 \method{plot}{lexical_classification}(x, bar.size = 5, low = "blue",
-  mid = "grey99", high = "red", ave.lexical_classification.shape = "+",
-  alpha = 1/4, shape = 19, point.size = 2.5, jitter = 0.1,
-  nrow = NULL, na.rm = TRUE, order.by.lexical_classification = TRUE,
-  plot = TRUE, error.bars = TRUE, error.bar.height = 0.5,
-  error.bar.size = 0.5, error.bar.color = "black", error.bar.alpha = 0.6,
-  ...)
+  mid = "grey99", high = "red",
+  ave.lexical_classification.shape = "+", alpha = 1/4, shape = 19,
+  point.size = 2.5, jitter = 0.1, nrow = NULL, na.rm = TRUE,
+  order.by.lexical_classification = TRUE, plot = TRUE,
+  error.bars = TRUE, error.bar.height = 0.5, error.bar.size = 0.5,
+  error.bar.color = "black", error.bar.alpha = 0.6, ...)
 }
 \arguments{
 \item{x}{The lexical_classification object.}

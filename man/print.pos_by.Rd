@@ -4,8 +4,8 @@
 \alias{print.pos_by}
 \title{Prints a pos_by Object.}
 \usage{
-\method{print}{pos_by}(x, digits = 1, percent = NULL, zero.replace = NULL,
-  ...)
+\method{print}{pos_by}(x, digits = 1, percent = NULL,
+  zero.replace = NULL, ...)
 }
 \arguments{
 \item{x}{The pos_by object}

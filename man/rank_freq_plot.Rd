@@ -5,10 +5,10 @@
 \alias{rank_freq_plot}
 \title{Rank Frequency Plot}
 \usage{
-rank_freq_mplot(text.var, grouping.var = NULL, ncol = 4, jitter = 0.2,
-  log.freq = TRUE, log.rank = TRUE, hap.col = "red", dis.col = "blue",
-  alpha = 1, shape = 1, title = "Rank-Frequency Plot", digits = 2,
-  plot = TRUE)
+rank_freq_mplot(text.var, grouping.var = NULL, ncol = 4,
+  jitter = 0.2, log.freq = TRUE, log.rank = TRUE, hap.col = "red",
+  dis.col = "blue", alpha = 1, shape = 1,
+  title = "Rank-Frequency Plot", digits = 2, plot = TRUE)
 
 rank_freq_plot(words, frequencies, plot = TRUE, title.ext = NULL,
   jitter.ammount = 0.1, log.scale = TRUE, hap.col = "red",

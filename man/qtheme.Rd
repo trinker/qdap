@@ -14,8 +14,8 @@
 \usage{
 qtheme(x = "generic", title, title.color, layout, legend, legend.cex,
   legend.text.color, legend.gradient, bg, vertex.color, vertex.size,
-  vertex.frame.color, vertex.label.color, vertex.label.cex, edge.label.color,
-  edge.label.cex)
+  vertex.frame.color, vertex.label.color, vertex.label.cex,
+  edge.label.color, edge.label.cex)
 
 theme_nightheat(x = pars[["x"]], title = pars[["title"]],
   title.color = pars[["title.color"]], layout = pars[["layout"]],

@@ -4,8 +4,8 @@
 \alias{chunker}
 \title{Break Text Into Ordered Word Chunks}
 \usage{
-chunker(text.var, grouping.var = NULL, n.words, n.chunks, as.string = TRUE,
-  rm.unequal = FALSE)
+chunker(text.var, grouping.var = NULL, n.words, n.chunks,
+  as.string = TRUE, rm.unequal = FALSE)
 }
 \arguments{
 \item{text.var}{The text variable}

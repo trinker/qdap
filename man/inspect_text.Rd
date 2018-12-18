@@ -27,12 +27,6 @@ Returns a named list (prints pretty).
 \description{
 \code{inspect_text} - Inspect a text vector with adjustable string wrapping; 
 created a pretty printed named list.
-
-\code{inspect_text.default} - Default method for \code{inspect_text} used to 
-convert to a vector to a pretty printed named list.
-
-\code{inspect_text.Corpus} - Corpus method for \code{inspect_text} used to 
-convert to a \code{\link[tm]{Corpus}}.
 }
 \examples{
 \dontrun{

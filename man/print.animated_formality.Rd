@@ -4,9 +4,10 @@
 \alias{print.animated_formality}
 \title{Prints a animated_formality  Object}
 \usage{
-\method{print}{animated_formality}(x, title = NULL, seed = sample(1:10000,
-  1), layout = layout.auto, pause = 0, legend = c(-0.5, -1.5, 0.5, -1.45),
-  legend.cex = 1, bg = NULL, net.legend.color = "black", ...)
+\method{print}{animated_formality}(x, title = NULL,
+  seed = sample(1:10000, 1), layout = layout.auto, pause = 0,
+  legend = c(-0.5, -1.5, 0.5, -1.45), legend.cex = 1, bg = NULL,
+  net.legend.color = "black", ...)
 }
 \arguments{
 \item{x}{The animated_formality  object.}

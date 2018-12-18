@@ -6,20 +6,22 @@ test_that("wfm out puts a matrix with appropriate attributes",{
     wfm1 <- with(DATA, wfm(state, list(sex, adult)))[1:15, ]
     wfm2 <- wfm(DATA[["state"]], DATA[["person"]])[1:15, ]
     
-    wfm1_c <- structure(c(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 
-        0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 
-        0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 
-        0), .Dim = c(15L, 4L), .Dimnames = list(c("about", "are", "be", 
-        "can", "certain", "how", "talking", "we", "what", "you", "good", 
-        "move", "on", "shall", "then"), c("f.0", "f.1", "m.0", "m.1")))
+    wfm1_c <- structure(c(1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 
+        1, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 
+        0), .Dim = c(15L, 4L), .Dimnames = list(c("about", "already", 
+        "am", "are", "be", "can", "certain", "computer", "distrust", 
+        "do", "dumb", "eat", "fun", "good", "how"), c("f.0", "f.1", "m.0", 
+        "m.1")))
     
-    wfm2_c <- structure(c(1, 1, 1, 1, 1, 2, 1, 2, 1, 1, 2, 1, 3, 1, 1, 0, 0, 
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0, 
-        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0), .Dim = c(15L, 
-        5L), .Dimnames = list(c("already", "am", "dumb", "eat", "hungry", 
-        "i", "is", "it", "let", "m", "no", "not", "s", "telling", "the"
-        ), c("greg", "researcher", "sally", "sam", "teacher")))
+    wfm2_c <- structure(c(0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1, 0, 
+        0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 2, 0, 
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0), .Dim = c(15L, 
+        5L), .Dimnames = list(c("about", "already", "am", "are", "be", 
+        "can", "certain", "computer", "distrust", "do", "dumb", "eat", 
+        "fun", "good", "how"), c("greg", "researcher", "sally", "sam", 
+        "teacher")))
     
     expect_equivalent(wfm1,wfm1_c)
     expect_equivalent(wfm2,wfm2_c)

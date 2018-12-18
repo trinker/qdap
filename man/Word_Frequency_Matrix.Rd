@@ -24,17 +24,18 @@
 wfm(text.var = NULL, grouping.var = NULL, output = "raw",
   stopwords = NULL, char2space = "~~", ...)
 
-\method{wfm}{wfdf}(text.var = NULL, grouping.var = NULL, output = "raw",
-  stopwords = NULL, char2space = "~~", ...)
+\method{wfm}{wfdf}(text.var = NULL, grouping.var = NULL,
+  output = "raw", stopwords = NULL, char2space = "~~", ...)
 
 \method{wfm}{character}(text.var = NULL, grouping.var = NULL,
   output = "raw", stopwords = NULL, char2space = "~~", ...)
 
-\method{wfm}{factor}(text.var = NULL, grouping.var = NULL, output = "raw",
-  stopwords = NULL, char2space = "~~", ...)
+\method{wfm}{factor}(text.var = NULL, grouping.var = NULL,
+  output = "raw", stopwords = NULL, char2space = "~~", ...)
 
-wfdf(text.var, grouping.var = NULL, stopwords = NULL, margins = FALSE,
-  output = "raw", digits = 2, char2space = "~~", ...)
+wfdf(text.var, grouping.var = NULL, stopwords = NULL,
+  margins = FALSE, output = "raw", digits = 2, char2space = "~~",
+  ...)
 
 wfm_expanded(text.var, grouping.var = NULL, ...)
 
@@ -131,12 +132,6 @@ packages. The output is not of the class "wfm".
 \description{
 \code{wfm} - Generate a word frequency matrix by grouping variable(s).
 
-\code{wfm.wfdf} - wfdf method for \code{wfm}.
-
-\code{wfm.character} - character method for \code{wfm}.
-
-\code{wfm.factor} - factor method for \code{wfm}.
-
 \code{wfdf} - Generate a word frequency data frame by grouping variable.
 
 \code{wfm_expanded} - Expand a word frequency matrix to have multiple rows 
@@ -152,29 +147,6 @@ weighting is sensible.
 weighting is sensible.
 
 \code{as.wfm} - Attempts to coerce a matrix to a \code{\link[qdap]{wfm}}.
-
-\code{as.wfm.matrix} - \code{matrix} method for \code{as.wfm} used to 
-convert matrices to a \code{wfm}.
-
-\code{as.wfm.default} - Default method for \code{as.wfm} used to 
-convert matrices to a \code{wfm}.
-
-\code{as.wfm.TermDocumentMatrix} - \code{TermDocumentMatrix} method for 
-\code{as.wfm} used to a \code{TermDocumentMatrix} to a \code{wfm}.
-
-\code{as.wfm.DocumentTermMatrix} - \code{DocumentTermMatrix} method for 
-\code{as.wfm} used to a \code{DocumentTermMatrix} to a \code{wfm}.
-
-\code{as.wfm.data.frame} - data.frame method for \code{as.wfm} used to 
-convert matrices to a \code{wfm}.
-
-\code{as.wfm.wfdf} - wfdf method for \code{as.wfm} used to 
-convert matrices to a \code{wfm}.
-
-\code{as.wfm.Corpus} - Corpus method for \code{as.wfm} used to 
-convert matrices to a \code{wfm}.
-
-\code{wfm.Corpus} - Corpus method for \code{wfm}.
 }
 \note{
 Words can be kept as one by inserting a double tilde (\code{"~~"}), or 

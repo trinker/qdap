@@ -8,8 +8,8 @@
 mcsv_r(files, a.names = NULL, l.name = NULL, list = TRUE, pos = 1,
   envir = as.environment(pos))
 
-mcsv_w(..., dir = NULL, open = FALSE, sep = ", ", dataframes = NULL,
-  pos = 1, envir = as.environment(pos))
+mcsv_w(..., dir = NULL, open = FALSE, sep = ", ",
+  dataframes = NULL, pos = 1, envir = as.environment(pos))
 }
 \arguments{
 \item{files}{csv file(s) to read.}

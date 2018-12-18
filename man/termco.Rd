@@ -12,11 +12,13 @@ termco(text.var, grouping.var = NULL, match.list, short.term = TRUE,
   apostrophe.remove = FALSE, char.keep = NULL, digit.remove = NULL,
   zero.replace = 0, ...)
 
-termco_d(text.var, grouping.var = NULL, match.string, short.term = FALSE,
-  ignore.case = TRUE, zero.replace = 0, percent = TRUE, digits = 2,
-  apostrophe.remove = FALSE, char.keep = NULL, digit.remove = TRUE, ...)
+termco_d(text.var, grouping.var = NULL, match.string,
+  short.term = FALSE, ignore.case = TRUE, zero.replace = 0,
+  percent = TRUE, digits = 2, apostrophe.remove = FALSE,
+  char.keep = NULL, digit.remove = TRUE, ...)
 
-term_match(text.var, terms, return.list = TRUE, apostrophe.remove = FALSE)
+term_match(text.var, terms, return.list = TRUE,
+  apostrophe.remove = FALSE)
 
 termco2mat(dataframe, drop.wc = TRUE, short.term = TRUE,
   rm.zerocol = FALSE, no.quote = TRUE, transform = TRUE,

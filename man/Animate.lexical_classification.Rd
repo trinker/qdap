@@ -5,10 +5,11 @@
 \title{Animate Formality}
 \usage{
 \method{Animate}{lexical_classification}(x, type = "network",
-  content = "red", functional = "yellow", edge.constant, wc.time = TRUE,
-  time.constant = 2, title = NULL, digits = 2, current.color = "black",
-  current.speaker.color = NULL, non.speaker.color = NA,
-  missing.color = "purple", all.color.line = "red", width = 65,
+  content = "red", functional = "yellow", edge.constant,
+  wc.time = TRUE, time.constant = 2, title = NULL, digits = 2,
+  current.color = "black", current.speaker.color = NULL,
+  non.speaker.color = NA, missing.color = "purple",
+  all.color.line = "red", width = 65,
   function.words = qdapDictionaries::function.words, left = "<<",
   right = ">>", coord = c(0, 0.5), just = c(0, 0.5), ...)
 }

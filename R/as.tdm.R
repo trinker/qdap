@@ -999,8 +999,8 @@ tm_tdm_interface2 <- function(text.var, grouping.var, stopwords, char2space,
   
     LST_DF <- qdapTools::list2df(LST, "text", "doc_id")
     ##mycorpus <- replace_ids(tm::Corpus(tm::DataframeSource(LST_DF)), LST_DF[['id']])
-    mycorpus <- tm::Corpus(tm::DataframeSource(LST_DF))  
-    
+    mycorpus <- tm::VCorpus(tm::DataframeSource(LST_DF))  
+            
     ## Add metadata info
     NLP::meta(mycorpus, "MetaID") <- names(LST)
     NLP::meta(mycorpus, "labels") <- names(LST)

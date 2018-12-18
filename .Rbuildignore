@@ -73,6 +73,8 @@ vignettes/cleaning_and_debugging.synctex.gz
 vignettes/cleaning_and_debugging.blg
 vignettes/cleaning_and_debugging.aux
 vignettes/cleaning_and_debugging.toc
+vignettes/tm_package_compatibility.Rnw
+vignettes/cleaning_and_debugging.Rnw
 tools/qdap_logo/r_qdapalogo.png
 tools/qdap_logo/r_qdapalogo.pdf
 tools/qdap_logo/r_qdapalogo.svg

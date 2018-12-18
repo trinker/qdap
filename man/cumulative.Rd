@@ -48,37 +48,4 @@ cumulative(x, ...)
 \description{
 \code{cumulative} - Generate rolling/cumulative scores for select \pkg{qdap} 
 objects.
-
-\code{cumulative.end_mark} - Generate end_mark over time (duration in 
-sentences).
-
-\code{cumulative.formality} - Generate formality over time (duration in 
-sentences).
-
-\code{cumulative.pos} - Generate formality over time (duration in 
-sentences).
-
-\code{cumulative.pos_by} - Generate formality over time (duration in 
-sentences).
-
-\code{cumulative.animated_formality} - Generate animated formality over time 
-(duration in sentences).
-
-\code{cumulative.lexical_classification} - Generate lexical_classification over time (duration in 
-sentences).
-
-\code{cumulative.animated_lexical_classification} - Generate animated lexical_classification over time 
-(duration in sentences).
-
-\code{cumulative.polarity} - Generate polarity over time (duration in 
-sentences).
-
-\code{cumulative.animated_polarity} - Generate animated polarity over time 
-(duration in sentences).
-
-\code{cumulative.syllable_freq} - Generate syllable_freq over time (duration in 
-sentences).
-
-\code{cumulative.combo_syllable_sum} - Generate combo_syllable_sum over time (duration in 
-sentences).
 }

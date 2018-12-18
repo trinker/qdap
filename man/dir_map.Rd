@@ -4,9 +4,9 @@
 \alias{dir_map}
 \title{Map Transcript Files from a Directory to a Script}
 \usage{
-dir_map(loc = "DATA/TRANSCRIPTS/CLEANED_TRANSCRIPTS", obj.prefix = "dat",
-  use.path = TRUE, col.names = c("person", "dialogue"), file = NULL,
-  copy2clip = interactive())
+dir_map(loc = "DATA/TRANSCRIPTS/CLEANED_TRANSCRIPTS",
+  obj.prefix = "dat", use.path = TRUE, col.names = c("person",
+  "dialogue"), file = NULL, copy2clip = interactive())
 }
 \arguments{
 \item{loc}{The path/location of the transcript data files.}

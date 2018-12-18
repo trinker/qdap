@@ -4,8 +4,8 @@
 \alias{word_cor}
 \title{Find Correlated Words}
 \usage{
-word_cor(text.var, grouping.var = qdapTools::id(text.var), word, r = 0.7,
-  values = TRUE, method = "pearson", ...)
+word_cor(text.var, grouping.var = qdapTools::id(text.var), word,
+  r = 0.7, values = TRUE, method = "pearson", ...)
 }
 \arguments{
 \item{text.var}{The text variable (or frequency matrix).}

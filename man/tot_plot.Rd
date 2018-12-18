@@ -6,7 +6,8 @@
 \usage{
 tot_plot(dataframe, text.var, grouping.var = NULL, facet.vars = NULL,
   tot = TRUE, transform = FALSE, ncol = NULL, ylab = NULL,
-  xlab = NULL, bar.space = 0, scale = NULL, space = NULL, plot = TRUE)
+  xlab = NULL, bar.space = 0, scale = NULL, space = NULL,
+  plot = TRUE)
 }
 \arguments{
 \item{dataframe}{A dataframe that contains the text variable and optionally 

@@ -5,10 +5,10 @@
 \title{Read Transcripts Into R}
 \usage{
 read.transcript(file, col.names = NULL, text.var = NULL,
-  merge.broke.tot = TRUE, header = FALSE, dash = "", ellipsis = "...",
-  quote2bracket = FALSE, rm.empty.rows = TRUE, na.strings = c("999", "NA",
-  "", " "), sep = NULL, skip = 0, nontext2factor = TRUE, text,
-  comment.char = "", ...)
+  merge.broke.tot = TRUE, header = FALSE, dash = "",
+  ellipsis = "...", quote2bracket = FALSE, rm.empty.rows = TRUE,
+  na.strings = c("999", "NA", "", " "), sep = NULL, skip = 0,
+  nontext2factor = TRUE, text, comment.char = "", ...)
 }
 \arguments{
 \item{file}{The name of the file which the data are to be read from. Each row 

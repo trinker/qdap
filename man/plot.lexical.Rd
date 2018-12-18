@@ -4,8 +4,8 @@
 \alias{plot.lexical}
 \title{Plots a lexical Object}
 \usage{
-\method{plot}{lexical}(x, min.freq = 1, rot.per = 0, random.order = FALSE,
-  title = TRUE, title.color = "blue", ...)
+\method{plot}{lexical}(x, min.freq = 1, rot.per = 0,
+  random.order = FALSE, title = TRUE, title.color = "blue", ...)
 }
 \arguments{
 \item{x}{The lexical object.}
