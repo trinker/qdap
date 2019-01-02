@@ -11,6 +11,9 @@ addons:
     - texinfo
       
 r_github_packages: 
+  - jimhester/covr  
+  - cran/chron
+  
   
 notifications:
   email:
