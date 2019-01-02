@@ -3,7 +3,7 @@ term.count <-
 function(str, mat){
     tester <- function(x, y){
         p <- suppressWarnings(unlist(gregexpr(x, y, fixed = TRUE)))
-        j <- suppressWarnings(if(length(p) == 1 && (is.na(str) |  p < 1)) { 
+        j <- suppressWarnings(if(length(p) == 1 && (is.na(p) |  p < 1)) { 
                 0 
             } else {
                 length(p)

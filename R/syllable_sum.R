@@ -50,7 +50,7 @@ syllable_sum <-
 function(text.var, parallel = FALSE, ...) {
     if (!parallel) {
         out <- unlist(lapply(as.character(text.var), function(x) {
-            sum(syllable_count(Trim(x))['syllables'], ...)
+            sum(syllable_count(Trim(x))[['syllables']], ...)
         }))
     } else {
         cl <- makeCluster(mc <- getOption("cl.cores", detectCores()/2))
@@ -59,7 +59,7 @@ function(text.var, parallel = FALSE, ...) {
             "reducer", "clean", "mgsub"), 
             envir = environment())
         m <- parLapply(cl, as.character(text.var), function(x) {
-                sum(syllable_count(Trim(x))['syllables'])
+                sum(syllable_count(Trim(x))[['syllables']])
             }
         )
         stopCluster(cl)
@@ -235,7 +235,7 @@ polysyllable_sum <-
 function(text.var, parallel = FALSE) {
     Var1 <- NULL
     counter <- function(x) {
-        v <- table(syllable_count(Trim(x))["syllables"])
+        v <- table(syllable_count(Trim(x))[["syllables"]])
         if (identical(c(v), integer(0))){
             return(0)
         }
@@ -290,7 +290,7 @@ combo_syllable_sum <-
 function(text.var, parallel = FALSE) {
     Trim <- function(x) gsub("^\\s+|\\s+$", "", x)
     counter <- function(x) {
-        w <- syllable_count(Trim(x))["syllables"]
+        w <- syllable_count(Trim(x))[["syllables"]]
         if (length(w) ==1 && is.na(w)) return(c(0, 0))     
         y <- as.data.frame(table(w))
         z <- subset(y, as.numeric(as.character(w)) >= 3)
