@@ -1,7 +1,6 @@
-<!--
-%\VignetteEngine{knitr}
+%\VignetteEngine{knitr::knitr}
 %\VignetteIndexEntry{An Introduction to qdap}
--->
+%\VignetteEncoding{UTF-8}
 
 ```{r setup, include=FALSE}
 # set global chunk options
@@ -64,9 +63,3 @@ con <- file(old[2], open = "wb")
 writeBin(bin, con)
 close(con)
 ```
-
-
-
-
-
-
