@@ -4,8 +4,15 @@
 \alias{space_fill}
 \title{Replace Spaces}
 \usage{
-space_fill(text.var, terms, sep = "~~", rm.extra = TRUE,
-  ignore.case = TRUE, fixed = FALSE, ...)
+space_fill(
+  text.var,
+  terms,
+  sep = "~~",
+  rm.extra = TRUE,
+  ignore.case = TRUE,
+  fixed = FALSE,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

@@ -4,8 +4,14 @@
 \alias{discourse_map}
 \title{Discourse Mapping}
 \usage{
-discourse_map(text.var, grouping.var, edge.constant, sep = "_",
-  condense = TRUE, ...)
+discourse_map(
+  text.var,
+  grouping.var,
+  edge.constant,
+  sep = "_",
+  condense = TRUE,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable or a  \code{"word_stats"} object (i.e., the 
@@ -190,7 +196,7 @@ FUN3 <- function() {
         par(mar=c(0, 0, 1, 0))
         set.seed(10)
         plot.igraph(ans2[[i]], edge.curved=TRUE, layout=layout.auto)
-        graphics::mtext("Discourse Map\\nRomeo and Juliet: Act 1", side=3)
+        graphics::mtext("Discourse Map\nRomeo and Juliet: Act 1", side=3)
         animation::ani.pause()
     })
 }

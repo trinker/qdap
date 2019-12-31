@@ -4,8 +4,14 @@
 \alias{phrase_net}
 \title{Phrase Nets}
 \usage{
-phrase_net(text.var, freq = 4, r = 0.35, edge.constant = 6,
-  vertex.constant = 3, ...)
+phrase_net(
+  text.var,
+  freq = 4,
+  r = 0.35,
+  edge.constant = 6,
+  vertex.constant = 3,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

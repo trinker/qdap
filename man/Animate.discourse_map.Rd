@@ -4,9 +4,17 @@
 \alias{Animate.discourse_map}
 \title{Discourse Map}
 \usage{
-\method{Animate}{discourse_map}(x, edge.constant, sep = "_",
-  current.color = "red", previous.color = "grey50", wc.time = TRUE,
-  time.constant = 2, title = NULL, ...)
+\method{Animate}{discourse_map}(
+  x,
+  edge.constant,
+  sep = "_",
+  current.color = "red",
+  previous.color = "grey50",
+  wc.time = TRUE,
+  time.constant = 2,
+  title = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{The discourse_map object.}

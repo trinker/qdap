@@ -4,7 +4,6 @@
 \name{qdap}
 \alias{qdap}
 \alias{package-qdap}
-\alias{qdap-package}
 \title{qdap: Quantitative Discourse Analysis Package}
 \description{
 This package automates many of the tasks associated with quantitative 

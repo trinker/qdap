@@ -5,14 +5,32 @@
 \alias{rank_freq_plot}
 \title{Rank Frequency Plot}
 \usage{
-rank_freq_mplot(text.var, grouping.var = NULL, ncol = 4,
-  jitter = 0.2, log.freq = TRUE, log.rank = TRUE, hap.col = "red",
-  dis.col = "blue", alpha = 1, shape = 1,
-  title = "Rank-Frequency Plot", digits = 2, plot = TRUE)
+rank_freq_mplot(
+  text.var,
+  grouping.var = NULL,
+  ncol = 4,
+  jitter = 0.2,
+  log.freq = TRUE,
+  log.rank = TRUE,
+  hap.col = "red",
+  dis.col = "blue",
+  alpha = 1,
+  shape = 1,
+  title = "Rank-Frequency Plot",
+  digits = 2,
+  plot = TRUE
+)
 
-rank_freq_plot(words, frequencies, plot = TRUE, title.ext = NULL,
-  jitter.ammount = 0.1, log.scale = TRUE, hap.col = "red",
-  dis.col = "blue")
+rank_freq_plot(
+  words,
+  frequencies,
+  plot = TRUE,
+  title.ext = NULL,
+  jitter.ammount = 0.1,
+  log.scale = TRUE,
+  hap.col = "red",
+  dis.col = "blue"
+)
 }
 \arguments{
 \item{text.var}{The text variable.}
@@ -112,5 +130,3 @@ invisible(lapply(seq_along(mod$fwl), function(i){
 Zipf, G. K. (1949). Human behavior and the principle of least 
 effort. Cambridge, Massachusetts: Addison-Wesley. p. 1.
 }
-\keyword{Zipf,}
-\keyword{rank-frequency}

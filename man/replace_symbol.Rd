@@ -4,8 +4,15 @@
 \alias{replace_symbol}
 \title{Replace Symbols With Word Equivalents}
 \usage{
-replace_symbol(text.var, dollar = TRUE, percent = TRUE, pound = TRUE,
-  at = TRUE, and = TRUE, with = TRUE)
+replace_symbol(
+  text.var,
+  dollar = TRUE,
+  percent = TRUE,
+  pound = TRUE,
+  at = TRUE,
+  and = TRUE,
+  with = TRUE
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

@@ -50,5 +50,3 @@ plot(g, layout=layout.auto(g))
 \seealso{
 \code{\link[stats]{dist}}
 }
-\keyword{Boolean-matrix}
-\keyword{adjacency-matrix,}

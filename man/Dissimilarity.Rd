@@ -4,8 +4,15 @@
 \alias{Dissimilarity}
 \title{Dissimilarity Statistics}
 \usage{
-Dissimilarity(text.var, grouping.var = NULL, method = "prop",
-  diag = FALSE, upper = FALSE, p = 2, ...)
+Dissimilarity(
+  text.var,
+  grouping.var = NULL,
+  method = "prop",
+  diag = FALSE,
+  upper = FALSE,
+  p = 2,
+  ...
+)
 }
 \arguments{
 \item{text.var}{A text variable or word frequency matrix object.}

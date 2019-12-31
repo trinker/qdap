@@ -5,8 +5,15 @@
 \alias{rm_empty_row}
 \title{Remove Rows That Contain Markers}
 \usage{
-rm_row(dataframe, search.column, terms, contains = FALSE,
-  ignore.case = FALSE, keep.rownames = FALSE, ...)
+rm_row(
+  dataframe,
+  search.column,
+  terms,
+  contains = FALSE,
+  ignore.case = FALSE,
+  keep.rownames = FALSE,
+  ...
+)
 
 rm_empty_row(dataframe)
 }

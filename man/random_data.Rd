@@ -5,12 +5,22 @@
 \alias{random_data}
 \title{Generate Random Dialogue Data}
 \usage{
-random_sent(n = 10, len = 14, range = len - 1,
-  dictionary = qdapDictionaries::Top200Words, endmark.fun = function()
-  sample(c(".", "!", "|", "?"), 1, prob = c(0.85, 0.05, 0.05, 0.05)))
+random_sent(
+  n = 10,
+  len = 14,
+  range = len - 1,
+  dictionary = qdapDictionaries::Top200Words,
+  endmark.fun = function() sample(c(".", "!", "|", "?"), 1, prob = c(0.85, 0.05, 0.05,
+    0.05))
+)
 
-random_data(n = 10, ..., n.people = 10, ages = 7:10,
-  people.names = unique(tolower(qdapDictionaries::NAMES[[1]])))
+random_data(
+  n = 10,
+  ...,
+  n.people = 10,
+  ages = 7:10,
+  people.names = unique(tolower(qdapDictionaries::NAMES[[1]]))
+)
 }
 \arguments{
 \item{n}{Number of sentences to create.}

@@ -4,8 +4,14 @@
 \alias{word_position}
 \title{Word Position}
 \usage{
-word_position(text.var, match.terms, digits = 2, percent = TRUE,
-  zero.replace = 0, ...)
+word_position(
+  text.var,
+  match.terms,
+  digits = 2,
+  percent = TRUE,
+  zero.replace = 0,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

@@ -6,8 +6,14 @@
 \alias{stem2df}
 \title{Stem Text}
 \usage{
-stemmer(text.var, rm.bracket = TRUE, capitalize = TRUE, warn = TRUE,
-  char.keep = "~~", ...)
+stemmer(
+  text.var,
+  rm.bracket = TRUE,
+  capitalize = TRUE,
+  warn = TRUE,
+  char.keep = "~~",
+  ...
+)
 
 stem_words(...)
 

@@ -4,8 +4,12 @@
 \alias{object_pronoun_type}
 \title{Count Object Pronouns Per Grouping Variable}
 \usage{
-object_pronoun_type(text.var, grouping.var = NULL,
-  object.pronoun.list = NULL, ...)
+object_pronoun_type(
+  text.var,
+  grouping.var = NULL,
+  object.pronoun.list = NULL,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable}

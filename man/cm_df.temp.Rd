@@ -4,8 +4,15 @@
 \alias{cm_df.temp}
 \title{Break Transcript Dialogue into Blank Code Matrix}
 \usage{
-cm_df.temp(dataframe, text.var, codes = NULL, file = NULL,
-  transpose = FALSE, strip = FALSE, ...)
+cm_df.temp(
+  dataframe,
+  text.var,
+  codes = NULL,
+  file = NULL,
+  transpose = FALSE,
+  strip = FALSE,
+  ...
+)
 }
 \arguments{
 \item{dataframe}{A dataframe containing a text variable.}

@@ -4,8 +4,15 @@
 \alias{imperative}
 \title{Intuitively Remark Sentences as Imperative}
 \usage{
-imperative(dataframe, person.var, text.var, lock.incomplete = FALSE,
-  additional.names = NULL, parallel = FALSE, warning = FALSE)
+imperative(
+  dataframe,
+  person.var,
+  text.var,
+  lock.incomplete = FALSE,
+  additional.names = NULL,
+  parallel = FALSE,
+  warning = FALSE
+)
 }
 \arguments{
 \item{dataframe}{A data.frame object.}

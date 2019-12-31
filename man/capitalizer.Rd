@@ -4,8 +4,7 @@
 \alias{capitalizer}
 \title{Capitalize Select Words}
 \usage{
-capitalizer(text, caps.list = NULL, I.list = TRUE,
-  apostrophe.remove = FALSE)
+capitalizer(text, caps.list = NULL, I.list = TRUE, apostrophe.remove = FALSE)
 }
 \arguments{
 \item{text}{A vector of words (generally from \code{bag_o_words} or 

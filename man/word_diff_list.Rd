@@ -4,8 +4,15 @@
 \alias{word_diff_list}
 \title{Differences In Word Use Between Groups}
 \usage{
-word_diff_list(text.var, grouping.var, vs.all = FALSE, vs.all.cut = 1,
-  stopwords = NULL, alphabetical = FALSE, digits = 2)
+word_diff_list(
+  text.var,
+  grouping.var,
+  vs.all = FALSE,
+  vs.all.cut = 1,
+  stopwords = NULL,
+  alphabetical = FALSE,
+  digits = 2
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

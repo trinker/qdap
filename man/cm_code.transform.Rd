@@ -4,8 +4,13 @@
 \alias{cm_code.transform}
 \title{Transform Codes}
 \usage{
-cm_code.transform(x2long.obj, overlap.code.list = NULL,
-  combine.code.list = NULL, exclude.code.list = NULL, rm.var = NULL)
+cm_code.transform(
+  x2long.obj,
+  overlap.code.list = NULL,
+  combine.code.list = NULL,
+  exclude.code.list = NULL,
+  rm.var = NULL
+)
 }
 \arguments{
 \item{x2long.obj}{An object from \code{\link[qdap]{cm_range2long}}, 

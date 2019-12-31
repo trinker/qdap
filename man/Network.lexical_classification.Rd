@@ -4,8 +4,15 @@
 \alias{Network.lexical_classification}
 \title{Network Lexical Classification}
 \usage{
-\method{Network}{lexical_classification}(x, functional = "yellow",
-  content = "red", edge.constant, title = NULL, digits = 2, ...)
+\method{Network}{lexical_classification}(
+  x,
+  functional = "yellow",
+  content = "red",
+  edge.constant,
+  title = NULL,
+  digits = 2,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{\link[qdap]{lexical_classification}} object.}

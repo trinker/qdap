@@ -4,8 +4,7 @@
 \alias{print.pos}
 \title{Prints a pos Object.}
 \usage{
-\method{print}{pos}(x, digits = 1, percent = NULL,
-  zero.replace = NULL, ...)
+\method{print}{pos}(x, digits = 1, percent = NULL, zero.replace = NULL, ...)
 }
 \arguments{
 \item{x}{The pos object}

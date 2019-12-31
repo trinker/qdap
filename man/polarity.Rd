@@ -4,13 +4,22 @@
 \alias{polarity}
 \title{Polarity Score (Sentiment Analysis)}
 \usage{
-polarity(text.var, grouping.var = NULL,
-  polarity.frame = qdapDictionaries::key.pol, constrain = FALSE,
+polarity(
+  text.var,
+  grouping.var = NULL,
+  polarity.frame = qdapDictionaries::key.pol,
+  constrain = FALSE,
   negators = qdapDictionaries::negation.words,
   amplifiers = qdapDictionaries::amplification.words,
   deamplifiers = qdapDictionaries::deamplification.words,
-  question.weight = 0, amplifier.weight = 0.8, n.before = 4,
-  n.after = 2, rm.incomplete = FALSE, digits = 3, ...)
+  question.weight = 0,
+  amplifier.weight = 0.8,
+  n.before = 4,
+  n.after = 2,
+  rm.incomplete = FALSE,
+  digits = 3,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}
@@ -575,5 +584,3 @@ reviews. National Conference on Artificial Intelligence.
 \seealso{
 \url{https://github.com/trestletech/Sermon-Sentiment-Analysis}
 }
-\keyword{polarity}
-\keyword{sentiment,}

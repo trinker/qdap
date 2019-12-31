@@ -108,7 +108,6 @@
 #' \url{http://www.slideshare.net/jeffreybreen/r-by-example-mining-twitter-for}
 #' 
 #' \url{http://hedonometer.org/papers.html} Links to papers on hedonometrics
-#' @keywords sentiment, polarity
 #' @export
 #' @importFrom qdapTools hash hash_look
 #' @rdname polarity

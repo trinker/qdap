@@ -4,9 +4,18 @@
 \alias{qprep}
 \title{Quick Preparation of Text}
 \usage{
-qprep(text.var, rm.dash = TRUE, bracket = "all", missing = NULL,
-  names = FALSE, abbreviation = qdapDictionaries::abbreviations,
-  replace = NULL, ignore.case = TRUE, num.paste = TRUE, ...)
+qprep(
+  text.var,
+  rm.dash = TRUE,
+  bracket = "all",
+  missing = NULL,
+  names = FALSE,
+  abbreviation = qdapDictionaries::abbreviations,
+  replace = NULL,
+  ignore.case = TRUE,
+  num.paste = TRUE,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

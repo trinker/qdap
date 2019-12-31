@@ -6,13 +6,29 @@
 \alias{sub_holder}
 \title{Multiple gsub}
 \usage{
-multigsub(pattern, replacement, text.var, leadspace = FALSE,
-  trailspace = FALSE, fixed = TRUE, trim = TRUE,
-  order.pattern = fixed, ...)
+multigsub(
+  pattern,
+  replacement,
+  text.var,
+  leadspace = FALSE,
+  trailspace = FALSE,
+  fixed = TRUE,
+  trim = TRUE,
+  order.pattern = fixed,
+  ...
+)
 
-mgsub(pattern, replacement, text.var, leadspace = FALSE,
-  trailspace = FALSE, fixed = TRUE, trim = TRUE,
-  order.pattern = fixed, ...)
+mgsub(
+  pattern,
+  replacement,
+  text.var,
+  leadspace = FALSE,
+  trailspace = FALSE,
+  fixed = TRUE,
+  trim = TRUE,
+  order.pattern = fixed,
+  ...
+)
 
 sub_holder(pattern, text.var, alpha.type = TRUE, ...)
 }

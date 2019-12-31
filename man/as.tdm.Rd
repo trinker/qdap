@@ -27,53 +27,56 @@ Matrix or Document Term Matrix}
 \usage{
 as.tdm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-as.TermDocumentMatrix(text.var, grouping.var = NULL,
-  vowel.check = TRUE, ...)
+as.TermDocumentMatrix(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
 as.dtm(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-as.DocumentTermMatrix(text.var, grouping.var = NULL,
-  vowel.check = TRUE, ...)
+as.DocumentTermMatrix(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-\method{as.tdm}{Corpus}(text.var, grouping.var = NULL,
-  vowel.check = TRUE, ...)
+\method{as.tdm}{Corpus}(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-\method{as.tdm}{default}(text.var, grouping.var = NULL,
-  vowel.check = TRUE, ...)
+\method{as.tdm}{default}(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-\method{as.tdm}{character}(text.var, grouping.var = NULL,
-  vowel.check = TRUE, ...)
+\method{as.tdm}{character}(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-\method{as.dtm}{Corpus}(text.var, grouping.var = NULL,
-  vowel.check = TRUE, ...)
+\method{as.dtm}{Corpus}(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-\method{as.dtm}{default}(text.var, grouping.var = NULL,
-  vowel.check = TRUE, ...)
+\method{as.dtm}{default}(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-\method{as.dtm}{character}(text.var, grouping.var = NULL,
-  vowel.check = TRUE, ...)
+\method{as.dtm}{character}(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-\method{as.tdm}{wfm}(text.var, grouping.var = NULL, vowel.check = TRUE,
-  ...)
+\method{as.tdm}{wfm}(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-\method{as.dtm}{wfm}(text.var, grouping.var = NULL, vowel.check = TRUE,
-  ...)
+\method{as.dtm}{wfm}(text.var, grouping.var = NULL, vowel.check = TRUE, ...)
 
-\method{as.data.frame}{Corpus}(x, row.names, optional, ...,
-  doc = "doc_id", text = "text", sent.split = FALSE)
+\method{as.data.frame}{Corpus}(
+  x,
+  row.names,
+  optional,
+  ...,
+  doc = "doc_id",
+  text = "text",
+  sent.split = FALSE
+)
 
 as.Corpus(text.var, grouping.var = NULL, demographic.vars, ...)
 
-\method{as.Corpus}{sent_split}(text.var, grouping.var = NULL,
-  demographic.vars, ...)
+\method{as.Corpus}{sent_split}(text.var, grouping.var = NULL, demographic.vars, ...)
 
-\method{as.Corpus}{default}(text.var, grouping.var = NULL,
-  demographic.vars, ...)
+\method{as.Corpus}{default}(text.var, grouping.var = NULL, demographic.vars, ...)
 
 apply_as_tm(wfm.obj, tmfun, ..., to.qdap = TRUE)
 
-apply_as_df(tm.corpus, qdapfun, ..., stopwords = NULL, min = 1,
-  max = Inf, count.apostrophe = TRUE, ignore.case = TRUE)
+apply_as_df(
+  tm.corpus,
+  qdapfun,
+  ...,
+  stopwords = NULL,
+  min = 1,
+  max = Inf,
+  count.apostrophe = TRUE,
+  ignore.case = TRUE
+)
 
 \method{as.Corpus}{TermDocumentMatrix}(text.var, ...)
 

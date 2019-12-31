@@ -4,13 +4,29 @@
 \alias{dispersion_plot}
 \title{Lexical Dispersion Plot}
 \usage{
-dispersion_plot(text.var, match.terms, grouping.var = NULL,
-  rm.vars = NULL, color = "blue", bg.color = "grey90",
-  horiz.color = "grey85", total.color = "black", symbol = "|",
-  title = "Lexical Dispersion Plot", rev.factor = TRUE, wrap = "'",
-  xlab = "Dialogue (Words)", ylab = NULL, size = 4, plot = TRUE,
-  char2space = "~~", apostrophe.remove = FALSE, scales = "free",
-  space = "free", ...)
+dispersion_plot(
+  text.var,
+  match.terms,
+  grouping.var = NULL,
+  rm.vars = NULL,
+  color = "blue",
+  bg.color = "grey90",
+  horiz.color = "grey85",
+  total.color = "black",
+  symbol = "|",
+  title = "Lexical Dispersion Plot",
+  rev.factor = TRUE,
+  wrap = "'",
+  xlab = "Dialogue (Words)",
+  ylab = NULL,
+  size = 4,
+  plot = TRUE,
+  char2space = "~~",
+  apostrophe.remove = FALSE,
+  scales = "free",
+  space = "free",
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

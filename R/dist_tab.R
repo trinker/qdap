@@ -13,7 +13,6 @@
 #' frequencies, cumulative frequencies, percentages and cumulative percentages 
 #' for each interval.
 #' @seealso \code{\link[base]{cut}}
-#' @keywords distribution, frequency
 #' @export 
 #' @examples
 #' \dontrun{

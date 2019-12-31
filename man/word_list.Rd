@@ -4,10 +4,20 @@
 \alias{word_list}
 \title{Raw Word Lists/Frequency Counts}
 \usage{
-word_list(text.var, grouping.var = NULL, stopwords = NULL,
-  alphabetical = FALSE, cut.n = 20, cap = TRUE, cap.list = NULL,
-  cap.I = TRUE, rm.bracket = TRUE, char.keep = NULL,
-  apostrophe.remove = FALSE, ...)
+word_list(
+  text.var,
+  grouping.var = NULL,
+  stopwords = NULL,
+  alphabetical = FALSE,
+  cut.n = 20,
+  cap = TRUE,
+  cap.list = NULL,
+  cap.I = TRUE,
+  rm.bracket = TRUE,
+  char.keep = NULL,
+  apostrophe.remove = FALSE,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

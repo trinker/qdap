@@ -4,13 +4,28 @@
 \alias{Animate.formality}
 \title{Animate Formality}
 \usage{
-\method{Animate}{formality}(x, contextual = "yellow", formal = "red",
-  edge.constant, wc.time = TRUE, time.constant = 2, title = NULL,
-  digits = 3, current.color = "black", current.speaker.color = NULL,
-  non.speaker.color = NA, missing.color = "purple",
-  all.color.line = "red", plus.300.color = "grey40",
-  under.300.color = "grey88", type = "network", width = 65,
-  coord = c(0, 0.5), just = c(0, 0.5), ...)
+\method{Animate}{formality}(
+  x,
+  contextual = "yellow",
+  formal = "red",
+  edge.constant,
+  wc.time = TRUE,
+  time.constant = 2,
+  title = NULL,
+  digits = 3,
+  current.color = "black",
+  current.speaker.color = NULL,
+  non.speaker.color = NA,
+  missing.color = "purple",
+  all.color.line = "red",
+  plus.300.color = "grey40",
+  under.300.color = "grey88",
+  type = "network",
+  width = 65,
+  coord = c(0, 0.5),
+  just = c(0, 0.5),
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{\link[qdap]{formality}} object.}

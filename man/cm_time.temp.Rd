@@ -4,8 +4,15 @@
 \alias{cm_time.temp}
 \title{Time Span Code Sheet}
 \usage{
-cm_time.temp(codes, grouping.var = NULL, start = ":00", end = NULL,
-  file = NULL, coding = FALSE, print = TRUE)
+cm_time.temp(
+  codes,
+  grouping.var = NULL,
+  start = ":00",
+  end = NULL,
+  file = NULL,
+  coding = FALSE,
+  print = TRUE
+)
 }
 \arguments{
 \item{codes}{List of codes.}

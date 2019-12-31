@@ -7,20 +7,41 @@
 \alias{correct}
 \title{Check Spelling}
 \usage{
-check_spelling(text.var, range = 2, assume.first.correct = TRUE,
-  method = "jw", dictionary = qdapDictionaries::GradyAugmented,
-  parallel = TRUE, cores = parallel::detectCores()/2, n.suggests = 8)
-
-which_misspelled(x, suggest = FALSE, range = 2,
+check_spelling(
+  text.var,
+  range = 2,
   assume.first.correct = TRUE,
-  dictionary = qdapDictionaries::GradyAugmented, method = "jw",
-  nchar.dictionary = nchar(dictionary),
-  first.char.dictionary = substring(dictionary, 1, 1), n.suggests = 8)
+  method = "jw",
+  dictionary = qdapDictionaries::GradyAugmented,
+  parallel = TRUE,
+  cores = parallel::detectCores()/2,
+  n.suggests = 8
+)
 
-check_spelling_interactive(text.var, range = 2,
-  assume.first.correct = TRUE, click = TRUE, method = "jw",
-  dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE,
-  cores = parallel::detectCores()/2, n.suggests = 8, ...)
+which_misspelled(
+  x,
+  suggest = FALSE,
+  range = 2,
+  assume.first.correct = TRUE,
+  dictionary = qdapDictionaries::GradyAugmented,
+  method = "jw",
+  nchar.dictionary = nchar(dictionary),
+  first.char.dictionary = substring(dictionary, 1, 1),
+  n.suggests = 8
+)
+
+check_spelling_interactive(
+  text.var,
+  range = 2,
+  assume.first.correct = TRUE,
+  click = TRUE,
+  method = "jw",
+  dictionary = qdapDictionaries::GradyAugmented,
+  parallel = TRUE,
+  cores = parallel::detectCores()/2,
+  n.suggests = 8,
+  ...
+)
 
 correct(x, ...)
 }

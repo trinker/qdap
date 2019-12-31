@@ -45,7 +45,6 @@
 #' \code{\link[qdap]{incomplete_replace}},
 #' \code{\link[qdap]{stem2df}} ,
 #' \code{\link[qdap]{TOT}} 
-#' @keywords sentence, split, turn-of-talk
 #' @export
 #' @examples
 #' \dontrun{

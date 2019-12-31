@@ -4,9 +4,18 @@
 \alias{Animate.character}
 \title{Animate Character}
 \usage{
-\method{Animate}{character}(x, wc.time = TRUE, time.constant = 2,
-  width = 65, coord = c(0, 0.5), just = c(0, 0.5), size = 5,
-  color = "black", border.color = NA, ...)
+\method{Animate}{character}(
+  x,
+  wc.time = TRUE,
+  time.constant = 2,
+  width = 65,
+  coord = c(0, 0.5),
+  just = c(0, 0.5),
+  size = 5,
+  color = "black",
+  border.color = NA,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{\link[base]{character}} object.}

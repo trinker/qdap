@@ -4,8 +4,7 @@
 \alias{print.termco}
 \title{Prints a termco object.}
 \usage{
-\method{print}{termco}(x, digits = NULL, percent = NULL,
-  zero.replace = NULL, ...)
+\method{print}{termco}(x, digits = NULL, percent = NULL, zero.replace = NULL, ...)
 }
 \arguments{
 \item{x}{The termco object}

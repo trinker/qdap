@@ -4,8 +4,7 @@
 \alias{cm_code.blank}
 \title{Blank Code Transformation}
 \usage{
-cm_code.blank(x2long.obj, combine.code.list, rm.var = NULL,
-  overlap = TRUE)
+cm_code.blank(x2long.obj, combine.code.list, rm.var = NULL, overlap = TRUE)
 }
 \arguments{
 \item{x2long.obj}{An object from \code{\link[qdap]{cm_range2long}}, 

@@ -6,12 +6,26 @@
 \alias{pos_tags}
 \title{Parts of Speech Tagging}
 \usage{
-pos(text.var, parallel = FALSE, cores = detectCores()/2,
-  progress.bar = TRUE, na.omit = FALSE, digits = 1, percent = TRUE,
-  zero.replace = 0, gc.rate = 10)
+pos(
+  text.var,
+  parallel = FALSE,
+  cores = detectCores()/2,
+  progress.bar = TRUE,
+  na.omit = FALSE,
+  digits = 1,
+  percent = TRUE,
+  zero.replace = 0,
+  gc.rate = 10
+)
 
-pos_by(text.var, grouping.var = NULL, digits = 1, percent = TRUE,
-  zero.replace = 0, ...)
+pos_by(
+  text.var,
+  grouping.var = NULL,
+  digits = 1,
+  percent = TRUE,
+  zero.replace = 0,
+  ...
+)
 
 pos_tags(type = "pretty")
 }

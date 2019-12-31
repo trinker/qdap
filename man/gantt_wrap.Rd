@@ -4,15 +4,35 @@
 \alias{gantt_wrap}
 \title{Gantt Plot}
 \usage{
-gantt_wrap(dataframe, plot.var, facet.vars = NULL, fill.var = NULL,
-  title = NULL, ylab = plot.var, xlab = "duration.default",
-  rev.factor = TRUE, transform = FALSE, ncol = NULL,
-  minor.line.freq = NULL, major.line.freq = NULL,
-  sig.dig.line.freq = 1, hms.scale = NULL, scale = NULL,
-  space = NULL, size = 3, rm.horiz.lines = FALSE, x.ticks = TRUE,
-  y.ticks = TRUE, legend.position = NULL, bar.color = NULL,
-  border.color = NULL, border.size = 2, border.width = 0.1,
-  constrain = TRUE, plot = TRUE)
+gantt_wrap(
+  dataframe,
+  plot.var,
+  facet.vars = NULL,
+  fill.var = NULL,
+  title = NULL,
+  ylab = plot.var,
+  xlab = "duration.default",
+  rev.factor = TRUE,
+  transform = FALSE,
+  ncol = NULL,
+  minor.line.freq = NULL,
+  major.line.freq = NULL,
+  sig.dig.line.freq = 1,
+  hms.scale = NULL,
+  scale = NULL,
+  space = NULL,
+  size = 3,
+  rm.horiz.lines = FALSE,
+  x.ticks = TRUE,
+  y.ticks = TRUE,
+  legend.position = NULL,
+  bar.color = NULL,
+  border.color = NULL,
+  border.size = 2,
+  border.width = 0.1,
+  constrain = TRUE,
+  plot = TRUE
+)
 }
 \arguments{
 \item{dataframe}{A data frame with plotting variable(s) and a column of start 

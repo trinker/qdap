@@ -4,8 +4,13 @@
 \alias{cm_long2dummy}
 \title{Stretch and Dummy Code cm_xxx2long}
 \usage{
-cm_long2dummy(dataframe, rm.var = NULL, code = "code",
-  start = "start", end = "end")
+cm_long2dummy(
+  dataframe,
+  rm.var = NULL,
+  code = "code",
+  start = "start",
+  end = "end"
+)
 }
 \arguments{
 \item{dataframe}{A dataframe that contains the person variable.}

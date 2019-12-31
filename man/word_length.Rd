@@ -4,8 +4,14 @@
 \alias{word_length}
 \title{Count of Word Lengths Type}
 \usage{
-word_length(text.var, grouping.var = NULL, percent = TRUE,
-  zero.replace = 0, digits = 2, ...)
+word_length(
+  text.var,
+  grouping.var = NULL,
+  percent = TRUE,
+  zero.replace = 0,
+  digits = 2,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

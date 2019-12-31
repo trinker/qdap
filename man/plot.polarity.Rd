@@ -4,12 +4,27 @@
 \alias{plot.polarity}
 \title{Plots a polarity Object}
 \usage{
-\method{plot}{polarity}(x, bar.size = 5, low = "blue",
-  mid = "grey99", high = "red", ave.polarity.shape = "+",
-  alpha = 1/4, shape = 19, point.size = 2.5, jitter = 0.1,
-  nrow = NULL, na.rm = TRUE, order.by.polarity = TRUE, plot = TRUE,
-  error.bars = TRUE, error.bar.height = 0.5, error.bar.size = 0.5,
-  error.bar.color = "black", ...)
+\method{plot}{polarity}(
+  x,
+  bar.size = 5,
+  low = "blue",
+  mid = "grey99",
+  high = "red",
+  ave.polarity.shape = "+",
+  alpha = 1/4,
+  shape = 19,
+  point.size = 2.5,
+  jitter = 0.1,
+  nrow = NULL,
+  na.rm = TRUE,
+  order.by.polarity = TRUE,
+  plot = TRUE,
+  error.bars = TRUE,
+  error.bar.height = 0.5,
+  error.bar.size = 0.5,
+  error.bar.color = "black",
+  ...
+)
 }
 \arguments{
 \item{x}{The polarity object.}

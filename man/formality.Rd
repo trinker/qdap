@@ -4,8 +4,13 @@
 \alias{formality}
 \title{Formality Score}
 \usage{
-formality(text.var, grouping.var = NULL, order.by.formality = TRUE,
-  digits = 2, ...)
+formality(
+  text.var,
+  grouping.var = NULL,
+  order.by.formality = TRUE,
+  digits = 2,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable (or an object from \code{\link[qdap]{pos}},
@@ -260,7 +265,3 @@ Heylighen, F., & Dewaele, J.M. (2002). Variation in the
 contextuality of language: An empirical measure. Context in Context, Special 
 issue of Foundations of Science, 7 (3), 293-340.
 }
-\keyword{explicit,}
-\keyword{formality,}
-\keyword{parts-of-speech,}
-\keyword{pos}

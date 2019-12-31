@@ -32,10 +32,10 @@ test_that("apply_as_tm applies tm functions and then optionally converts back",{
     x6 <- apply_as_tm(a, tm::weightSMART)
     x7 <- apply_as_tm(a, tm::weightTfIdf)
     
-    types <- list(c("wfm", "true.matrix", "matrix"), "list", "character", 
-        c("weighted_wfm", "matrix"), c("TermDocumentMatrix", "simple_triplet_matrix"
-        ), c("weighted_wfm", "matrix"), c("weighted_wfm", "matrix"
-    ))
+    types <- list(c("wfm", "true.matrix", "matrix", "array"), "list", "character", 
+        c("weighted_wfm", "matrix", "array"), c("TermDocumentMatrix", 
+        "simple_triplet_matrix"), c("weighted_wfm", "matrix", "array"
+    ), c("weighted_wfm", "matrix", "array"))
     
     expect_equivalent(lapply(list(x1, x2, x3, x4, x5, x6, x7), class), types)
 

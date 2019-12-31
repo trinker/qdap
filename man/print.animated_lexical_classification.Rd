@@ -4,10 +4,18 @@
 \alias{print.animated_lexical_classification}
 \title{Prints an animated_lexical_classification  Object}
 \usage{
-\method{print}{animated_lexical_classification}(x, title = NULL,
-  seed = sample(1:10000, 1), layout = layout.auto, pause = 0,
-  legend = c(-0.5, -1.5, 0.5, -1.45), legend.cex = 1, bg = NULL,
-  net.legend.color = "black", ...)
+\method{print}{animated_lexical_classification}(
+  x,
+  title = NULL,
+  seed = sample(1:10000, 1),
+  layout = layout.auto,
+  pause = 0,
+  legend = c(-0.5, -1.5, 0.5, -1.45),
+  legend.cex = 1,
+  bg = NULL,
+  net.legend.color = "black",
+  ...
+)
 }
 \arguments{
 \item{x}{The animated_lexical_classification  object.}

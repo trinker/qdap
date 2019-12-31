@@ -4,8 +4,15 @@
 \alias{word_cor}
 \title{Find Correlated Words}
 \usage{
-word_cor(text.var, grouping.var = qdapTools::id(text.var), word,
-  r = 0.7, values = TRUE, method = "pearson", ...)
+word_cor(
+  text.var,
+  grouping.var = qdapTools::id(text.var),
+  word,
+  r = 0.7,
+  values = TRUE,
+  method = "pearson",
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable (or frequency matrix).}
@@ -141,5 +148,3 @@ Marwick; see \url{http://stackoverflow.com/a/19925445/1000343} for more.
 \code{\link[qdap]{wfm}},
 \code{\link[stats]{cor}}
 }
-\keyword{association}
-\keyword{correlation,}

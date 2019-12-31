@@ -13,7 +13,6 @@
 #' @param \ldots Other arguments passed to \code{\link[qdap]{replace_number}}.
 #' @return Returns a parsed character vector.
 #' @seealso \code{\link[qdap]{strip}}
-#' @keywords parse, clean
 #' @export
 #' @examples
 #' \dontrun{

@@ -21,21 +21,52 @@
 \alias{wfm.Corpus}
 \title{Word Frequency Matrix}
 \usage{
-wfm(text.var = NULL, grouping.var = NULL, output = "raw",
-  stopwords = NULL, char2space = "~~", ...)
+wfm(
+  text.var = NULL,
+  grouping.var = NULL,
+  output = "raw",
+  stopwords = NULL,
+  char2space = "~~",
+  ...
+)
 
-\method{wfm}{wfdf}(text.var = NULL, grouping.var = NULL,
-  output = "raw", stopwords = NULL, char2space = "~~", ...)
+\method{wfm}{wfdf}(
+  text.var = NULL,
+  grouping.var = NULL,
+  output = "raw",
+  stopwords = NULL,
+  char2space = "~~",
+  ...
+)
 
-\method{wfm}{character}(text.var = NULL, grouping.var = NULL,
-  output = "raw", stopwords = NULL, char2space = "~~", ...)
+\method{wfm}{character}(
+  text.var = NULL,
+  grouping.var = NULL,
+  output = "raw",
+  stopwords = NULL,
+  char2space = "~~",
+  ...
+)
 
-\method{wfm}{factor}(text.var = NULL, grouping.var = NULL,
-  output = "raw", stopwords = NULL, char2space = "~~", ...)
+\method{wfm}{factor}(
+  text.var = NULL,
+  grouping.var = NULL,
+  output = "raw",
+  stopwords = NULL,
+  char2space = "~~",
+  ...
+)
 
-wfdf(text.var, grouping.var = NULL, stopwords = NULL,
-  margins = FALSE, output = "raw", digits = 2, char2space = "~~",
-  ...)
+wfdf(
+  text.var,
+  grouping.var = NULL,
+  stopwords = NULL,
+  margins = FALSE,
+  output = "raw",
+  digits = 2,
+  char2space = "~~",
+  ...
+)
 
 wfm_expanded(text.var, grouping.var = NULL, ...)
 

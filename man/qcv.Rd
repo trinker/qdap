@@ -4,8 +4,15 @@
 \alias{qcv}
 \title{Quick Character Vector}
 \usage{
-qcv(..., terms = NULL, space.wrap = FALSE, trailing = FALSE,
-  leading = FALSE, split = " ", rm.blank = TRUE)
+qcv(
+  ...,
+  terms = NULL,
+  space.wrap = FALSE,
+  trailing = FALSE,
+  leading = FALSE,
+  split = " ",
+  rm.blank = TRUE
+)
 }
 \arguments{
 \item{terms}{An optional argument to present the terms as one long character 

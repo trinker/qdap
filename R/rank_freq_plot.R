@@ -41,7 +41,6 @@
 #' @rdname rank_freq_plot
 #' @references Zipf, G. K. (1949). Human behavior and the principle of least 
 #' effort. Cambridge, Massachusetts: Addison-Wesley. p. 1.
-#' @keywords Zipf, rank-frequency
 #' @export
 #' @import RColorBrewer
 #' @importFrom qdapTools text2color

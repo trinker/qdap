@@ -4,12 +4,26 @@
 \alias{Animate.polarity}
 \title{Animate Polarity}
 \usage{
-\method{Animate}{polarity}(x, negative = "blue", positive = "red",
-  neutral = "yellow", edge.constant, wc.time = TRUE,
-  time.constant = 2, title = NULL, digits = 3, width = 65,
-  current.color = "black", current.speaker.color = NULL,
-  non.speaker.color = NA, ave.color.line = "red", type = "network",
-  coord = c(0, 0.5), just = c(0, 0.5), ...)
+\method{Animate}{polarity}(
+  x,
+  negative = "blue",
+  positive = "red",
+  neutral = "yellow",
+  edge.constant,
+  wc.time = TRUE,
+  time.constant = 2,
+  title = NULL,
+  digits = 3,
+  width = 65,
+  current.color = "black",
+  current.speaker.color = NULL,
+  non.speaker.color = NA,
+  ave.color.line = "red",
+  type = "network",
+  coord = c(0, 0.5),
+  just = c(0, 0.5),
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{\link[qdap]{polarity}} object.}

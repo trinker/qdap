@@ -47,8 +47,6 @@
 #' 
 #' Smith, E. A. & Senter, R. J. (1967) Automated readability index. 
 #' Technical Report AMRLTR-66-220, University of Cincinnati, Cincinnati, Ohio.
-#' @keywords readability, Automated Readability Index, Coleman Liau, SMOG, 
-#' Flesch-Kincaid, Fry, Linsear Write
 #' @export
 #' @importFrom qdapTools matrix2df 
 #' @examples

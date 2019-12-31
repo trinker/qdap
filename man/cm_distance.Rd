@@ -4,10 +4,19 @@
 \alias{cm_distance}
 \title{Distance Matrix Between Codes}
 \usage{
-cm_distance(dataframe, pvals = c(TRUE, FALSE), replications = 1000,
-  parallel = TRUE, extended.output = TRUE, time.var = TRUE,
-  code.var = "code", causal = FALSE, start.var = "start",
-  end.var = "end", cores = detectCores()/2)
+cm_distance(
+  dataframe,
+  pvals = c(TRUE, FALSE),
+  replications = 1000,
+  parallel = TRUE,
+  extended.output = TRUE,
+  time.var = TRUE,
+  code.var = "code",
+  causal = FALSE,
+  start.var = "start",
+  end.var = "end",
+  cores = detectCores()/2
+)
 }
 \arguments{
 \item{dataframe}{A data frame from the cm_x2long family 

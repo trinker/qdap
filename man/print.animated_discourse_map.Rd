@@ -4,8 +4,14 @@
 \alias{print.animated_discourse_map}
 \title{Prints an animated_discourse_map  Object}
 \usage{
-\method{print}{animated_discourse_map}(x, title = NULL,
-  seed = sample(1:10000, 1), layout = layout.auto, pause = 0, ...)
+\method{print}{animated_discourse_map}(
+  x,
+  title = NULL,
+  seed = sample(1:10000, 1),
+  layout = layout.auto,
+  pause = 0,
+  ...
+)
 }
 \arguments{
 \item{x}{The animated_discourse_map  object.}

@@ -5,11 +5,15 @@
 \alias{plot_gantt_base}
 \title{Gantt Durations}
 \usage{
-gantt(text.var, grouping.var, units = "words", sums = FALSE,
-  col.sep = "_")
+gantt(text.var, grouping.var, units = "words", sums = FALSE, col.sep = "_")
 
-plot_gantt_base(x, sums = NULL, fill.colors = NULL,
-  box.color = "white", title = NULL)
+plot_gantt_base(
+  x,
+  sums = NULL,
+  fill.colors = NULL,
+  box.color = "white",
+  title = NULL
+)
 }
 \arguments{
 \item{text.var}{The text variable}

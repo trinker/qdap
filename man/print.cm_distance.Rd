@@ -4,9 +4,18 @@
 \alias{print.cm_distance}
 \title{Prints a cm_distance Object}
 \usage{
-\method{print}{cm_distance}(x, mean.digits = 0, sd.digits = 2,
-  sd.mean.digits = 3, pval.digits = 3, new.order = NULL,
-  na.replace = "-", diag.replace = na.replace, print = TRUE, ...)
+\method{print}{cm_distance}(
+  x,
+  mean.digits = 0,
+  sd.digits = 2,
+  sd.mean.digits = 3,
+  pval.digits = 3,
+  new.order = NULL,
+  na.replace = "-",
+  diag.replace = na.replace,
+  print = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{The cm_distance object.}

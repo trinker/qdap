@@ -57,7 +57,6 @@
 #' are categorized by the select word rather than an implied do/does/did 
 #' question type.  A sentence that is marked "ok" over rides an implied 
 #' do/does/did label.  Those with undetermined sentence type are labeled unknown.
-#' @keywords question, question-count
 #' @export 
 #' @importFrom qdapTools lookup
 #' @seealso \code{\link[qdap]{colcomb2class}},

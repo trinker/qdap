@@ -4,8 +4,14 @@
 \alias{cm_df.fill}
 \title{Range Coding}
 \usage{
-cm_df.fill(dataframe, ranges, value = 1, text.var = NULL,
-  code.vars = NULL, transform = FALSE)
+cm_df.fill(
+  dataframe,
+  ranges,
+  value = 1,
+  text.var = NULL,
+  code.vars = NULL,
+  transform = FALSE
+)
 }
 \arguments{
 \item{dataframe}{A dataframe containing a text variable.}

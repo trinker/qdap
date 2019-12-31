@@ -22,7 +22,6 @@
 #' algorithm method.
 #' @references Sejnowski, T.J., and Rosenberg, C.R. (1987). "Parallel networks 
 #' that learn to pronounce English text" in Complex Systems, 1, 145-168. 
-#' @keywords syllable, syllabication, polysyllable
 #' @export
 #' @importFrom parallel parLapply clusterExport makeCluster detectCores stopCluster
 #' @importFrom qdapDictionaries view_data

@@ -11,7 +11,6 @@
 #' @param defualt.arrange logical.  If \code{TRUE} will arrange the columns with 
 #' text to the far right.
 #' @return Outputs a merged transcript dataframe with demographic information.
-#' @keywords merge, demographic
 #' @seealso \code{\link[base]{merge}}
 #' @export
 #' @examples

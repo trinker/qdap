@@ -4,10 +4,18 @@
 \alias{question_type}
 \title{Count of Question Type}
 \usage{
-question_type(text.var, grouping.var = NULL, neg.cont = FALSE,
-  percent = TRUE, zero.replace = 0, digits = 2,
-  contraction = qdapDictionaries::contractions, bracket = "all",
-  amplifiers = qdapDictionaries::amplification.words, ...)
+question_type(
+  text.var,
+  grouping.var = NULL,
+  neg.cont = FALSE,
+  percent = TRUE,
+  zero.replace = 0,
+  digits = 2,
+  contraction = qdapDictionaries::contractions,
+  bracket = "all",
+  amplifiers = qdapDictionaries::amplification.words,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable}
@@ -129,5 +137,3 @@ plot(out3, label = TRUE, lab.digits = 3)
 \code{\link[qdap]{colcomb2class}},
 \code{\link[qdap]{bracketX}}
 }
-\keyword{question,}
-\keyword{question-count}

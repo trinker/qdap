@@ -4,8 +4,12 @@
 \alias{speakerSplit}
 \title{Break and Stretch if Multiple Persons per Cell}
 \usage{
-speakerSplit(dataframe, person.var = 1, sep = c("and", "&", ","),
-  track.reps = FALSE)
+speakerSplit(
+  dataframe,
+  person.var = 1,
+  sep = c("and", "&", ","),
+  track.reps = FALSE
+)
 }
 \arguments{
 \item{dataframe}{A dataframe that contains the person variable.}

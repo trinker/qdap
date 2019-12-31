@@ -4,8 +4,13 @@
 \alias{plot.polarity_score}
 \title{Plots a polarity_score Object}
 \usage{
-\method{plot}{polarity_score}(x, error.bar.height = 0.35,
-  error.bar.size = 0.5, error.bar.alpha = 0.3, ...)
+\method{plot}{polarity_score}(
+  x,
+  error.bar.height = 0.35,
+  error.bar.size = 0.5,
+  error.bar.alpha = 0.3,
+  ...
+)
 }
 \arguments{
 \item{x}{The polarity_score object.}

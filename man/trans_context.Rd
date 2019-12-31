@@ -4,8 +4,15 @@
 \alias{trans_context}
 \title{Print Context Around Indices}
 \usage{
-trans_context(text.var, grouping.var, inds, n.before = 3, tot = TRUE,
-  n.after = n.before, ord.inds = TRUE)
+trans_context(
+  text.var,
+  grouping.var,
+  inds,
+  n.before = 3,
+  tot = TRUE,
+  n.after = n.before,
+  ord.inds = TRUE
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

@@ -4,8 +4,7 @@
 \alias{plot.cmspans}
 \title{Plots a cmspans object}
 \usage{
-\method{plot}{cmspans}(x, plot.var = NULL, facet.vars = NULL,
-  title = "Gantt Plot", ...)
+\method{plot}{cmspans}(x, plot.var = NULL, facet.vars = NULL, title = "Gantt Plot", ...)
 }
 \arguments{
 \item{x}{The sums_cmspans object}

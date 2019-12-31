@@ -4,10 +4,18 @@
 \alias{check_spelling_interactive.factor}
 \title{Check Spelling}
 \usage{
-\method{check_spelling_interactive}{factor}(text.var, range = 2,
-  assume.first.correct = TRUE, click = TRUE, method = "jw",
-  dictionary = qdapDictionaries::GradyAugmented, parallel = TRUE,
-  cores = parallel::detectCores()/2, n.suggests = 8, ...)
+\method{check_spelling_interactive}{factor}(
+  text.var,
+  range = 2,
+  assume.first.correct = TRUE,
+  click = TRUE,
+  method = "jw",
+  dictionary = qdapDictionaries::GradyAugmented,
+  parallel = TRUE,
+  cores = parallel::detectCores()/2,
+  n.suggests = 8,
+  ...
+)
 }
 \arguments{
 \item{text.var}{A \code{\link[base]{factor}} object, specifically a text vector 

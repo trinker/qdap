@@ -7,8 +7,14 @@
 \usage{
 paste2(multi.columns, sep = ".", handle.na = TRUE, trim = TRUE)
 
-colpaste2df(mat, combined.columns, sep = ".", name.sep = "&",
-  keep.orig = TRUE, ...)
+colpaste2df(
+  mat,
+  combined.columns,
+  sep = ".",
+  name.sep = "&",
+  keep.orig = TRUE,
+  ...
+)
 }
 \arguments{
 \item{multi.columns}{The multiple columns or a list of vectors to paste 

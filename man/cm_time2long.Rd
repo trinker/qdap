@@ -4,8 +4,13 @@
 \alias{cm_time2long}
 \title{Transform Codes to Start-End Times}
 \usage{
-cm_time2long(..., v.name = "variable", list.var = TRUE, debug = TRUE,
-  object = NULL)
+cm_time2long(
+  ...,
+  v.name = "variable",
+  list.var = TRUE,
+  debug = TRUE,
+  object = NULL
+)
 }
 \arguments{
 \item{v.name}{An optional name for the column created for the list.var 
@@ -77,5 +82,3 @@ Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 \code{\link{cm_df2long}},
 \code{\link{cm_time.temp}}
 }
-\keyword{coding,}
-\keyword{time-span}

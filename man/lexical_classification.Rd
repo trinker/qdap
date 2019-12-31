@@ -4,10 +4,14 @@
 \alias{lexical_classification}
 \title{Lexical Classification Score}
 \usage{
-lexical_classification(text.var, grouping.var = NULL,
+lexical_classification(
+  text.var,
+  grouping.var = NULL,
   order.by.lexical_classification = TRUE,
-  function.words = qdapDictionaries::function.words, bracket = "all",
-  ...)
+  function.words = qdapDictionaries::function.words,
+  bracket = "all",
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}
@@ -83,7 +87,7 @@ list(
         ordered.colors = TRUE,
         colors = colors
     )) 
-mtext("2012 Presidential Debates:\\nFunctional vs. Content Word Use", padj=1.25)
+mtext("2012 Presidential Debates:\nFunctional vs. Content Word Use", padj=1.25)
 legend(
     .05, .12, bty = "n",
     legend = c("functional", "content"), 
@@ -108,7 +112,7 @@ list(
         ordered.colors = TRUE,
         colors = colors
     )) 
-mtext("2012 Presidential Debates:\\nFunctional vs. Content Word Use", padj=1.25)
+mtext("2012 Presidential Debates:\nFunctional vs. Content Word Use", padj=1.25)
 legend(
     .05, .12, bty = "n",
     legend = c("functional", "content"), 
@@ -393,7 +397,3 @@ Pulvermuller, F. (1999). Words in the brain's language. Behavioral and Brain Sci
 
 Bell, A., Brenier, J. M., Gregory, M., Girand, C. & Jurafsky, D. (2009).  Predictability Effects on Durations of Content and Function Words in Conversational English.  Journal of Memory and Language, 60(1), 92-111. doi:10.1016/j.jml.2008.06.003
 }
-\keyword{content}
-\keyword{functional,}
-\keyword{lexical_classification,}
-\keyword{parts-of-speech,}

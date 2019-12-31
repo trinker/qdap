@@ -4,9 +4,18 @@
 \alias{Network.formality}
 \title{Network Formality}
 \usage{
-\method{Network}{formality}(x, contextual = "yellow", formal = "red",
-  edge.constant, title = NULL, digits = 3, plus.300.color = "grey40",
-  under.300.color = "grey88", missing.color = "purple", ...)
+\method{Network}{formality}(
+  x,
+  contextual = "yellow",
+  formal = "red",
+  edge.constant,
+  title = NULL,
+  digits = 3,
+  plus.300.color = "grey40",
+  under.300.color = "grey88",
+  missing.color = "purple",
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{\link[qdap]{formality}} object.}

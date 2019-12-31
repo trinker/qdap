@@ -4,11 +4,20 @@
 \alias{plot.cm_distance}
 \title{Plots a cm_distance object}
 \usage{
-\method{plot}{cm_distance}(x, digits = 3, constant = 1,
-  label.dist = FALSE, layout = igraph::layout.fruchterman.reingold,
-  label.cex = 1, label.cex.scale.by.n = FALSE, alpha = NULL,
-  label.color = "black", use.vertex.shape = FALSE, arrow.size = 0.6,
-  ...)
+\method{plot}{cm_distance}(
+  x,
+  digits = 3,
+  constant = 1,
+  label.dist = FALSE,
+  layout = igraph::layout.fruchterman.reingold,
+  label.cex = 1,
+  label.cex.scale.by.n = FALSE,
+  alpha = NULL,
+  label.color = "black",
+  use.vertex.shape = FALSE,
+  arrow.size = 0.6,
+  ...
+)
 }
 \arguments{
 \item{x}{A cm_distance object.}

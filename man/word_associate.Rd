@@ -4,18 +4,39 @@
 \alias{word_associate}
 \title{Find Associated Words}
 \usage{
-word_associate(text.var, grouping.var = NULL, match.string,
-  text.unit = "sentence", extra.terms = NULL, target.exclude = NULL,
-  stopwords = NULL, network.plot = FALSE, wordcloud = FALSE,
-  cloud.colors = c("black", "gray55"), title.color = "blue",
-  nw.label.cex = 0.8, title.padj = -4.5, nw.label.colors = NULL,
-  nw.layout = NULL, nw.edge.color = "gray90",
-  nw.label.proportional = TRUE, nw.title.padj = NULL,
-  nw.title.location = NULL, title.font = NULL, title.cex = NULL,
-  nw.edge.curved = TRUE, cloud.legend = NULL, cloud.legend.cex = 0.8,
-  cloud.legend.location = c(-0.03, 1.03), nw.legend = NULL,
-  nw.legend.cex = 0.8, nw.legend.location = c(-1.54, 1.41),
-  legend.override = FALSE, char2space = "~~", ...)
+word_associate(
+  text.var,
+  grouping.var = NULL,
+  match.string,
+  text.unit = "sentence",
+  extra.terms = NULL,
+  target.exclude = NULL,
+  stopwords = NULL,
+  network.plot = FALSE,
+  wordcloud = FALSE,
+  cloud.colors = c("black", "gray55"),
+  title.color = "blue",
+  nw.label.cex = 0.8,
+  title.padj = -4.5,
+  nw.label.colors = NULL,
+  nw.layout = NULL,
+  nw.edge.color = "gray90",
+  nw.label.proportional = TRUE,
+  nw.title.padj = NULL,
+  nw.title.location = NULL,
+  title.font = NULL,
+  title.cex = NULL,
+  nw.edge.curved = TRUE,
+  cloud.legend = NULL,
+  cloud.legend.cex = 0.8,
+  cloud.legend.location = c(-0.03, 1.03),
+  nw.legend = NULL,
+  nw.legend.cex = 0.8,
+  nw.legend.location = c(-1.54, 1.41),
+  legend.override = FALSE,
+  char2space = "~~",
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

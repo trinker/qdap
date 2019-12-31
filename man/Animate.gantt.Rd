@@ -4,8 +4,7 @@
 \alias{Animate.gantt}
 \title{Gantt Durations}
 \usage{
-\method{Animate}{gantt}(x, wc.time = TRUE, time.constant = 2,
-  colors = NULL, ...)
+\method{Animate}{gantt}(x, wc.time = TRUE, time.constant = 2, colors = NULL, ...)
 }
 \arguments{
 \item{x}{The gantt object.}

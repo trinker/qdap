@@ -9,8 +9,12 @@
 \usage{
 syllable_sum(text.var, parallel = FALSE, ...)
 
-syllable_count(text, remove.bracketed = TRUE, algorithm.report = FALSE,
-  env = qdap::env.syl)
+syllable_count(
+  text,
+  remove.bracketed = TRUE,
+  algorithm.report = FALSE,
+  env = qdap::env.syl
+)
 
 polysyllable_sum(text.var, parallel = FALSE)
 
@@ -90,6 +94,3 @@ cumulative(x3)
 Sejnowski, T.J., and Rosenberg, C.R. (1987). "Parallel networks 
 that learn to pronounce English text" in Complex Systems, 1, 145-168.
 }
-\keyword{polysyllable}
-\keyword{syllabication,}
-\keyword{syllable,}

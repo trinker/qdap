@@ -46,5 +46,3 @@ ltruncdf(out3, 4)
 \seealso{
 \code{\link[base]{cut}}
 }
-\keyword{distribution,}
-\keyword{frequency}

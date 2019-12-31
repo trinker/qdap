@@ -8,9 +8,16 @@
 \usage{
 Search(dataframe, term, column.name = NULL, max.distance = 0.02, ...)
 
-boolean_search(text.var, terms, ignore.case = TRUE, values = FALSE,
-  exclude = NULL, apostrophe.remove = FALSE, char.keep = NULL,
-  digit.remove = FALSE)
+boolean_search(
+  text.var,
+  terms,
+  ignore.case = TRUE,
+  values = FALSE,
+  exclude = NULL,
+  apostrophe.remove = FALSE,
+  char.keep = NULL,
+  digit.remove = FALSE
+)
 
 text.var \%bs\% terms
 }

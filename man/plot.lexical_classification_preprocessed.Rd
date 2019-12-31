@@ -4,8 +4,7 @@
 \alias{plot.lexical_classification_preprocessed}
 \title{Plots a lexical_classification_preprocessed Object}
 \usage{
-\method{plot}{lexical_classification_preprocessed}(x, jitter = 0.1,
-  text.size = 3.5, alpha = 0.3, ncol = 3, ...)
+\method{plot}{lexical_classification_preprocessed}(x, jitter = 0.1, text.size = 3.5, alpha = 0.3, ncol = 3, ...)
 }
 \arguments{
 \item{x}{The lexical_classification_preprocessed object.}

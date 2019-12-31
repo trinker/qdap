@@ -4,8 +4,7 @@
 \alias{multiscale}
 \title{Nested Standardization}
 \usage{
-multiscale(numeric.var, grouping.var, original_order = TRUE,
-  digits = 2)
+multiscale(numeric.var, grouping.var, original_order = TRUE, digits = 2)
 }
 \arguments{
 \item{numeric.var}{A numeric variable.}

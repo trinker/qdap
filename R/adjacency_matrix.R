@@ -17,7 +17,6 @@
 #' occurrences a variable had}
 #' @seealso 
 #' \code{\link[stats]{dist}}
-#' @keywords adjacency-matrix, Boolean-matrix
 #' @export 
 #' @examples
 #' \dontrun{

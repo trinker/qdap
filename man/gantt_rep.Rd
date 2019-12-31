@@ -4,8 +4,14 @@
 \alias{gantt_rep}
 \title{Generate Unit Spans for Repeated Measures}
 \usage{
-gantt_rep(rm.var, text.var, grouping.var = NULL, units = "words",
-  col.sep = "_", name.sep = "_")
+gantt_rep(
+  rm.var,
+  text.var,
+  grouping.var = NULL,
+  units = "words",
+  col.sep = "_",
+  name.sep = "_"
+)
 }
 \arguments{
 \item{rm.var}{An optional single vector or list of 1 or 2 of repeated 

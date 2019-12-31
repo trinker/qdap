@@ -5,8 +5,13 @@
 \alias{weight.word_proximity}
 \title{Proximity Matrix Between Words}
 \usage{
-word_proximity(text.var, terms, grouping.var = NULL, parallel = TRUE,
-  cores = parallel::detectCores()/2)
+word_proximity(
+  text.var,
+  terms,
+  grouping.var = NULL,
+  parallel = TRUE,
+  cores = parallel::detectCores()/2
+)
 
 \method{weight}{word_proximity}(x, type = "scale", ...)
 }

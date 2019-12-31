@@ -4,8 +4,7 @@
 \alias{key_merge}
 \title{Merge Demographic Information with Person/Text Transcript}
 \usage{
-key_merge(transcript.df, key.df, common.column = NULL,
-  defualt.arrange = TRUE)
+key_merge(transcript.df, key.df, common.column = NULL, defualt.arrange = TRUE)
 }
 \arguments{
 \item{transcript.df}{The text/person transcript dataframe}
@@ -37,5 +36,3 @@ htruncdf(merged.raj, 10, 40)
 \seealso{
 \code{\link[base]{merge}}
 }
-\keyword{demographic}
-\keyword{merge,}

@@ -12,15 +12,34 @@
 \alias{theme_duskheat}
 \title{Add themes to a Network object.}
 \usage{
-qtheme(x = "generic", title, title.color, layout, legend, legend.cex,
-  legend.text.color, legend.gradient, bg, vertex.color, vertex.size,
-  vertex.frame.color, vertex.label.color, vertex.label.cex,
-  edge.label.color, edge.label.cex)
+qtheme(
+  x = "generic",
+  title,
+  title.color,
+  layout,
+  legend,
+  legend.cex,
+  legend.text.color,
+  legend.gradient,
+  bg,
+  vertex.color,
+  vertex.size,
+  vertex.frame.color,
+  vertex.label.color,
+  vertex.label.cex,
+  edge.label.color,
+  edge.label.cex
+)
 
-theme_nightheat(x = pars[["x"]], title = pars[["title"]],
-  title.color = pars[["title.color"]], layout = pars[["layout"]],
-  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
-  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+theme_nightheat(
+  x = pars[["x"]],
+  title = pars[["title"]],
+  title.color = pars[["title.color"]],
+  layout = pars[["layout"]],
+  legend = pars[["legend"]],
+  legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]],
+  bg = pars[["bg"]],
   legend.text.color = pars[["legend.text.color"]],
   vertex.color = pars[["vertex.color"]],
   vertex.size = pars[["vertex.size"]],
@@ -28,12 +47,19 @@ theme_nightheat(x = pars[["x"]], title = pars[["title"]],
   vertex.label.color = pars[["vertex.label.color"]],
   vertex.label.cex = pars[["vertex.label.cex"]],
   edge.label.color = pars[["edge.label.color"]],
-  edge.label.cex = pars[["edge.label.cex"]], ...)
+  edge.label.cex = pars[["edge.label.cex"]],
+  ...
+)
 
-theme_badkitchen(x = pars[["x"]], title = pars[["title"]],
-  title.color = pars[["title.color"]], layout = pars[["layout"]],
-  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
-  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+theme_badkitchen(
+  x = pars[["x"]],
+  title = pars[["title"]],
+  title.color = pars[["title.color"]],
+  layout = pars[["layout"]],
+  legend = pars[["legend"]],
+  legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]],
+  bg = pars[["bg"]],
   legend.text.color = pars[["legend.text.color"]],
   vertex.color = pars[["vertex.color"]],
   vertex.size = pars[["vertex.size"]],
@@ -41,12 +67,19 @@ theme_badkitchen(x = pars[["x"]], title = pars[["title"]],
   vertex.label.color = pars[["vertex.label.color"]],
   vertex.label.cex = pars[["vertex.label.cex"]],
   edge.label.color = pars[["edge.label.color"]],
-  edge.label.cex = pars[["edge.label.cex"]], ...)
+  edge.label.cex = pars[["edge.label.cex"]],
+  ...
+)
 
-theme_cafe(x = pars[["x"]], title = pars[["title"]],
-  title.color = pars[["title.color"]], layout = pars[["layout"]],
-  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
-  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+theme_cafe(
+  x = pars[["x"]],
+  title = pars[["title"]],
+  title.color = pars[["title.color"]],
+  layout = pars[["layout"]],
+  legend = pars[["legend"]],
+  legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]],
+  bg = pars[["bg"]],
   legend.text.color = pars[["legend.text.color"]],
   vertex.color = pars[["vertex.color"]],
   vertex.size = pars[["vertex.size"]],
@@ -54,12 +87,19 @@ theme_cafe(x = pars[["x"]], title = pars[["title"]],
   vertex.label.color = pars[["vertex.label.color"]],
   vertex.label.cex = pars[["vertex.label.cex"]],
   edge.label.color = pars[["edge.label.color"]],
-  edge.label.cex = pars[["edge.label.cex"]], ...)
+  edge.label.cex = pars[["edge.label.cex"]],
+  ...
+)
 
-theme_grayscale(x = pars[["x"]], title = pars[["title"]],
-  title.color = pars[["title.color"]], layout = pars[["layout"]],
-  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
-  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+theme_grayscale(
+  x = pars[["x"]],
+  title = pars[["title"]],
+  title.color = pars[["title.color"]],
+  layout = pars[["layout"]],
+  legend = pars[["legend"]],
+  legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]],
+  bg = pars[["bg"]],
   legend.text.color = pars[["legend.text.color"]],
   vertex.color = pars[["vertex.color"]],
   vertex.size = pars[["vertex.size"]],
@@ -67,12 +107,19 @@ theme_grayscale(x = pars[["x"]], title = pars[["title"]],
   vertex.label.color = pars[["vertex.label.color"]],
   vertex.label.cex = pars[["vertex.label.cex"]],
   edge.label.color = pars[["edge.label.color"]],
-  edge.label.cex = pars[["edge.label.cex"]], ...)
+  edge.label.cex = pars[["edge.label.cex"]],
+  ...
+)
 
-theme_greyscale(x = pars[["x"]], title = pars[["title"]],
-  title.color = pars[["title.color"]], layout = pars[["layout"]],
-  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
-  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+theme_greyscale(
+  x = pars[["x"]],
+  title = pars[["title"]],
+  title.color = pars[["title.color"]],
+  layout = pars[["layout"]],
+  legend = pars[["legend"]],
+  legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]],
+  bg = pars[["bg"]],
   legend.text.color = pars[["legend.text.color"]],
   vertex.color = pars[["vertex.color"]],
   vertex.size = pars[["vertex.size"]],
@@ -80,12 +127,19 @@ theme_greyscale(x = pars[["x"]], title = pars[["title"]],
   vertex.label.color = pars[["vertex.label.color"]],
   vertex.label.cex = pars[["vertex.label.cex"]],
   edge.label.color = pars[["edge.label.color"]],
-  edge.label.cex = pars[["edge.label.cex"]], ...)
+  edge.label.cex = pars[["edge.label.cex"]],
+  ...
+)
 
-theme_norah(x = pars[["x"]], title = pars[["title"]],
-  title.color = pars[["title.color"]], layout = pars[["layout"]],
-  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
-  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+theme_norah(
+  x = pars[["x"]],
+  title = pars[["title"]],
+  title.color = pars[["title.color"]],
+  layout = pars[["layout"]],
+  legend = pars[["legend"]],
+  legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]],
+  bg = pars[["bg"]],
   legend.text.color = pars[["legend.text.color"]],
   vertex.color = pars[["vertex.color"]],
   vertex.size = pars[["vertex.size"]],
@@ -93,12 +147,19 @@ theme_norah(x = pars[["x"]], title = pars[["title"]],
   vertex.label.color = pars[["vertex.label.color"]],
   vertex.label.cex = pars[["vertex.label.cex"]],
   edge.label.color = pars[["edge.label.color"]],
-  edge.label.cex = pars[["edge.label.cex"]], ...)
+  edge.label.cex = pars[["edge.label.cex"]],
+  ...
+)
 
-theme_hipster(x = pars[["x"]], title = pars[["title"]],
-  title.color = pars[["title.color"]], layout = pars[["layout"]],
-  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
-  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+theme_hipster(
+  x = pars[["x"]],
+  title = pars[["title"]],
+  title.color = pars[["title.color"]],
+  layout = pars[["layout"]],
+  legend = pars[["legend"]],
+  legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]],
+  bg = pars[["bg"]],
   legend.text.color = pars[["legend.text.color"]],
   vertex.color = pars[["vertex.color"]],
   vertex.size = pars[["vertex.size"]],
@@ -106,12 +167,19 @@ theme_hipster(x = pars[["x"]], title = pars[["title"]],
   vertex.label.color = pars[["vertex.label.color"]],
   vertex.label.cex = pars[["vertex.label.cex"]],
   edge.label.color = pars[["edge.label.color"]],
-  edge.label.cex = pars[["edge.label.cex"]], ...)
+  edge.label.cex = pars[["edge.label.cex"]],
+  ...
+)
 
-theme_duskheat(x = pars[["x"]], title = pars[["title"]],
-  title.color = pars[["title.color"]], layout = pars[["layout"]],
-  legend = pars[["legend"]], legend.cex = pars[["legend.cex"]],
-  legend.gradient = pars[["legend.gradient"]], bg = pars[["bg"]],
+theme_duskheat(
+  x = pars[["x"]],
+  title = pars[["title"]],
+  title.color = pars[["title.color"]],
+  layout = pars[["layout"]],
+  legend = pars[["legend"]],
+  legend.cex = pars[["legend.cex"]],
+  legend.gradient = pars[["legend.gradient"]],
+  bg = pars[["bg"]],
   legend.text.color = pars[["legend.text.color"]],
   vertex.color = pars[["vertex.color"]],
   vertex.size = pars[["vertex.size"]],
@@ -119,7 +187,9 @@ theme_duskheat(x = pars[["x"]], title = pars[["title"]],
   vertex.label.color = pars[["vertex.label.color"]],
   vertex.label.cex = pars[["vertex.label.cex"]],
   edge.label.color = pars[["edge.label.color"]],
-  edge.label.cex = pars[["edge.label.cex"]], ...)
+  edge.label.cex = pars[["edge.label.cex"]],
+  ...
+)
 }
 \arguments{
 \item{x}{The name of the qtheme.}

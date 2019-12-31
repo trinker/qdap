@@ -33,7 +33,6 @@
 #'  Segalowitz, S. J. & Lane, K. (2004). Perceptual fluency and lexical access for function versus content words. Behavioral and Brain Sciences, 27, 307-308. doi:10.1017/S0140525X04310071 
 #'
 #' Bell, A., Brenier, J. M., Gregory, M., Girand, C. & Jurafsky, D. (2009).  Predictability Effects on Durations of Content and Function Words in Conversational English.  Journal of Memory and Language, 60(1), 92-111. doi:10.1016/j.jml.2008.06.003
-#' @keywords lexical_classification, parts-of-speech, functional, content
 #' @export
 #' @rdname lexical_classification
 #' @examples

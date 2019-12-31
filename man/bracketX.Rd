@@ -7,13 +7,26 @@
 \alias{genXtract}
 \title{Bracket Parsing}
 \usage{
-bracketX(text.var, bracket = "all", missing = NULL, names = FALSE,
-  fix.space = TRUE, scrub = fix.space)
+bracketX(
+  text.var,
+  bracket = "all",
+  missing = NULL,
+  names = FALSE,
+  fix.space = TRUE,
+  scrub = fix.space
+)
 
 bracketXtract(text.var, bracket = "all", with = FALSE, merge = TRUE)
 
-genX(text.var, left, right, missing = NULL, names = FALSE,
-  fix.space = TRUE, scrub = TRUE)
+genX(
+  text.var,
+  left,
+  right,
+  missing = NULL,
+  names = FALSE,
+  fix.space = TRUE,
+  scrub = TRUE
+)
 
 genXtract(text.var, left, right, with = FALSE, merge = TRUE)
 }
@@ -117,7 +130,3 @@ genX(DATA$state, c("is", "we"), c("too", "on"))
 \author{
 Martin Morgan and Tyler Rinker <tyler.rinker@gmail.com>.
 }
-\keyword{bracket,}
-\keyword{bracket-remove,}
-\keyword{curly-braces}
-\keyword{parenthesis,}

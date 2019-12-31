@@ -4,8 +4,14 @@
 \alias{plot.termco}
 \title{Plots a termco object}
 \usage{
-\method{plot}{termco}(x, label = FALSE, lab.digits = 1,
-  percent = NULL, zero.replace = NULL, ...)
+\method{plot}{termco}(
+  x,
+  label = FALSE,
+  lab.digits = 1,
+  percent = NULL,
+  zero.replace = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{The termco object.}

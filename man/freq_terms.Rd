@@ -4,8 +4,14 @@
 \alias{freq_terms}
 \title{Find Frequent Terms}
 \usage{
-freq_terms(text.var, top = 20, at.least = 1, stopwords = NULL,
-  extend = TRUE, ...)
+freq_terms(
+  text.var,
+  top = 20,
+  at.least = 1,
+  stopwords = NULL,
+  extend = TRUE,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

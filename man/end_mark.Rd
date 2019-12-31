@@ -5,11 +5,21 @@
 \alias{end_mark_by}
 \title{Sentence End Marks}
 \usage{
-end_mark(text.var, missing.end.mark = "_", missing.text = NA,
-  other.endmarks = NULL)
+end_mark(
+  text.var,
+  missing.end.mark = "_",
+  missing.text = NA,
+  other.endmarks = NULL
+)
 
-end_mark_by(text.var, grouping.var, digits = 3, percent = FALSE,
-  zero.replace = 0, ...)
+end_mark_by(
+  text.var,
+  grouping.var,
+  digits = 3,
+  percent = FALSE,
+  zero.replace = 0,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

@@ -32,7 +32,6 @@
 #' The user may wish to set to \code{FALSE} for use in knitr, sweave, etc.
 #' to add additional plot layers.
 #' @return Invisibly returns the ggplot2 object.
-#' @keywords sentence, split, turn-of-talk
 #' @import RColorBrewer
 #' @importFrom gridExtra grid.arrange
 #' @importFrom scales alpha

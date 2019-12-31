@@ -77,7 +77,6 @@
 #' depending on what the client/research team is comfortable utilizing. 
 #' 
 #' @return Creates a project template.
-#' @keywords project, workflow, is.global
 #' @export
 #' @importFrom reports delete folder new_report
 #' @importFrom tools file_ext

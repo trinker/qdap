@@ -4,8 +4,16 @@
 \alias{Network.polarity}
 \title{Network Polarity}
 \usage{
-\method{Network}{polarity}(x, negative = "blue", positive = "red",
-  neutral = "yellow", edge.constant, title = NULL, digits = 3, ...)
+\method{Network}{polarity}(
+  x,
+  negative = "blue",
+  positive = "red",
+  neutral = "yellow",
+  edge.constant,
+  title = NULL,
+  digits = 3,
+  ...
+)
 }
 \arguments{
 \item{x}{A \code{\link[qdap]{polarity}} object.}

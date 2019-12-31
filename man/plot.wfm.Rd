@@ -4,9 +4,16 @@
 \alias{plot.wfm}
 \title{Plots a wfm object}
 \usage{
-\method{plot}{wfm}(x, non.zero = FALSE, digits = 0, by.column = NULL,
-  high = ifelse(non.zero, "black", "blue"), grid = ifelse(non.zero,
-  "black", "white"), plot = TRUE, ...)
+\method{plot}{wfm}(
+  x,
+  non.zero = FALSE,
+  digits = 0,
+  by.column = NULL,
+  high = ifelse(non.zero, "black", "blue"),
+  grid = ifelse(non.zero, "black", "white"),
+  plot = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{The wfm object}

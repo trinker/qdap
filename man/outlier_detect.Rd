@@ -4,8 +4,12 @@
 \alias{outlier_detect}
 \title{Detect Outliers in Text}
 \usage{
-outlier_detect(text.var, grouping.var = NULL, FUN = word_count,
-  scale.by = "grouping")
+outlier_detect(
+  text.var,
+  grouping.var = NULL,
+  FUN = word_count,
+  scale.by = "grouping"
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

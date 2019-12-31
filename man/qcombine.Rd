@@ -44,5 +44,3 @@ qcombine(head(mtcars), B, elim.old = FALSE)
 \seealso{
 \code{\link[base]{transform}}
 }
-\keyword{combine,}
-\keyword{transform}

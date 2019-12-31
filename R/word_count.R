@@ -25,7 +25,6 @@
 #' @seealso \code{\link[qdap]{syllable_count}},
 #' \code{\link[qdap]{prop}},
 #' \code{\link[qdap]{colcomb2class}}
-#' @keywords word-count, character-count
 #' @export 
 #' @examples
 #' \dontrun{

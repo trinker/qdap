@@ -4,9 +4,12 @@
 \alias{replace_abbreviation}
 \title{Replace Abbreviations}
 \usage{
-replace_abbreviation(text.var,
-  abbreviation = qdapDictionaries::abbreviations, replace = NULL,
-  ignore.case = TRUE)
+replace_abbreviation(
+  text.var,
+  abbreviation = qdapDictionaries::abbreviations,
+  replace = NULL,
+  ignore.case = TRUE
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

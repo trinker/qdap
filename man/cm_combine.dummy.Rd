@@ -4,8 +4,7 @@
 \alias{cm_combine.dummy}
 \title{Find Co-occurrence Between Dummy Codes}
 \usage{
-cm_combine.dummy(cm.l2d.obj, combine.code, rm.var = "time",
-  overlap = TRUE)
+cm_combine.dummy(cm.l2d.obj, combine.code, rm.var = "time", overlap = TRUE)
 }
 \arguments{
 \item{cm.l2d.obj}{An object from \code{\link[qdap]{cm_long2dummy}}.}

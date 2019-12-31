@@ -4,8 +4,15 @@
 \alias{cm_df.transcript}
 \title{Transcript With Word Number}
 \usage{
-cm_df.transcript(text.var, grouping.var, file = NULL, indent = 4,
-  width = 70, space = 2, ...)
+cm_df.transcript(
+  text.var,
+  grouping.var,
+  file = NULL,
+  indent = 4,
+  width = 70,
+  space = 2,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

@@ -4,10 +4,21 @@
 \alias{tot_plot}
 \title{Visualize Word Length by Turn of Talk}
 \usage{
-tot_plot(dataframe, text.var, grouping.var = NULL, facet.vars = NULL,
-  tot = TRUE, transform = FALSE, ncol = NULL, ylab = NULL,
-  xlab = NULL, bar.space = 0, scale = NULL, space = NULL,
-  plot = TRUE)
+tot_plot(
+  dataframe,
+  text.var,
+  grouping.var = NULL,
+  facet.vars = NULL,
+  tot = TRUE,
+  transform = FALSE,
+  ncol = NULL,
+  ylab = NULL,
+  xlab = NULL,
+  bar.space = 0,
+  scale = NULL,
+  space = NULL,
+  plot = TRUE
+)
 }
 \arguments{
 \item{dataframe}{A dataframe that contains the text variable and optionally 
@@ -93,6 +104,3 @@ tot_plot(mraja1, "dialogue", grouping.var = c("sex", "fam.aff"), tot=FALSE)+
         y = mean(word.count) + (3 *sd(word.count)) + 2, label = "+3 sd")) 
 }
 }
-\keyword{sentence,}
-\keyword{split,}
-\keyword{turn-of-talk}

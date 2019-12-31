@@ -9,23 +9,37 @@
 \alias{linsear_write}
 \title{Readability Measures}
 \usage{
-automated_readability_index(text.var, grouping.var = NULL,
-  rm.incomplete = FALSE, ...)
+automated_readability_index(
+  text.var,
+  grouping.var = NULL,
+  rm.incomplete = FALSE,
+  ...
+)
 
 coleman_liau(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...)
 
-SMOG(text.var, grouping.var = NULL, output = "valid",
-  rm.incomplete = FALSE, ...)
+SMOG(
+  text.var,
+  grouping.var = NULL,
+  output = "valid",
+  rm.incomplete = FALSE,
+  ...
+)
 
-flesch_kincaid(text.var, grouping.var = NULL, rm.incomplete = FALSE,
-  ...)
+flesch_kincaid(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...)
 
-fry(text.var, grouping.var = NULL, rm.incomplete = FALSE,
-  auto.label = TRUE, grid = FALSE, div.col = "grey85", plot = TRUE,
-  ...)
+fry(
+  text.var,
+  grouping.var = NULL,
+  rm.incomplete = FALSE,
+  auto.label = TRUE,
+  grid = FALSE,
+  div.col = "grey85",
+  plot = TRUE,
+  ...
+)
 
-linsear_write(text.var, grouping.var = NULL, rm.incomplete = FALSE,
-  ...)
+linsear_write(text.var, grouping.var = NULL, rm.incomplete = FALSE, ...)
 }
 \arguments{
 \item{text.var}{The text variable.}
@@ -196,14 +210,3 @@ Journal of Reading, Vol. 12(8), pp. 639-646.
 Smith, E. A. & Senter, R. J. (1967) Automated readability index. 
 Technical Report AMRLTR-66-220, University of Cincinnati, Cincinnati, Ohio.
 }
-\keyword{Automated}
-\keyword{Coleman}
-\keyword{Flesch-Kincaid,}
-\keyword{Fry,}
-\keyword{Index,}
-\keyword{Liau,}
-\keyword{Linsear}
-\keyword{Readability}
-\keyword{SMOG,}
-\keyword{Write}
-\keyword{readability,}

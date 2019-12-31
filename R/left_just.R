@@ -14,7 +14,6 @@
 #' justification.  This could interfere with analysis and therefore the output 
 #' from \code{\link[qdap]{left_just}} should only be used for visualization 
 #' purposes, not analysis.
-#' @keywords justify, justification
 #' @export
 #' @examples
 #' \dontrun{

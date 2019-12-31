@@ -31,5 +31,3 @@ tapply(mtcars$mpg, mtcars$cyl, outlier_labeler)
 \seealso{
 \code{\link[base]{scale}}
 }
-\keyword{scale,}
-\keyword{standardize}

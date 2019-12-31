@@ -4,9 +4,16 @@
 \alias{cm_df2long}
 \title{Transform Codes to Start-End Durations}
 \usage{
-cm_df2long(df.temp.obj, v.name = "variable", list.var = TRUE,
-  code.vars = NULL, no.code = NA, add.start.end = TRUE,
-  repeat.vars = NULL, rev.code = FALSE)
+cm_df2long(
+  df.temp.obj,
+  v.name = "variable",
+  list.var = TRUE,
+  code.vars = NULL,
+  no.code = NA,
+  add.start.end = TRUE,
+  repeat.vars = NULL,
+  rev.code = FALSE
+)
 }
 \arguments{
 \item{df.temp.obj}{A character vector of names of object(s) created by 
@@ -66,6 +73,3 @@ Qualitative   data analysis. 2nd ed. Thousand Oaks, CA: SAGE Publications.
 \code{\link{cm_range2long}},
 \code{\link{cm_df.temp}}
 }
-\keyword{coding,}
-\keyword{span}
-\keyword{time}

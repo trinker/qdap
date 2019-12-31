@@ -4,8 +4,14 @@
 \alias{plot.word_length}
 \title{Plots a word_length Object}
 \usage{
-\method{plot}{word_length}(x, label = FALSE, lab.digits = 1,
-  percent = NULL, zero.replace = NULL, ...)
+\method{plot}{word_length}(
+  x,
+  label = FALSE,
+  lab.digits = 1,
+  percent = NULL,
+  zero.replace = NULL,
+  ...
+)
 }
 \arguments{
 \item{x}{The word_length object.}

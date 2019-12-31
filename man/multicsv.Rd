@@ -5,11 +5,24 @@
 \alias{mcsv_w}
 \title{Read/Write Multiple csv Files at a Time}
 \usage{
-mcsv_r(files, a.names = NULL, l.name = NULL, list = TRUE, pos = 1,
-  envir = as.environment(pos))
+mcsv_r(
+  files,
+  a.names = NULL,
+  l.name = NULL,
+  list = TRUE,
+  pos = 1,
+  envir = as.environment(pos)
+)
 
-mcsv_w(..., dir = NULL, open = FALSE, sep = ", ",
-  dataframes = NULL, pos = 1, envir = as.environment(pos))
+mcsv_w(
+  ...,
+  dir = NULL,
+  open = FALSE,
+  sep = ", ",
+  dataframes = NULL,
+  pos = 1,
+  envir = as.environment(pos)
+)
 }
 \arguments{
 \item{files}{csv file(s) to read.}

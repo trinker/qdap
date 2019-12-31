@@ -20,7 +20,6 @@
 #' variable(s) the \code{\link[stats]{sd}} will result in 0, thus 
 #' \code{\link[stats]{cor}} will will likely return a warning as in this 
 #' example: \code{cor(rep(3, 10), rnorm(10))}.
-#' @keywords correlation, association 
 #' @export
 #' @importFrom qdapTools list_vect2df
 #' @references The plotting method for the list output was inspired by Ben 

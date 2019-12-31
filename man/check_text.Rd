@@ -47,7 +47,7 @@ to fix the text.
 \dontrun{
 x <- c("i like", "i want. thet them .", "I am ! that|", "", NA, 
     "they,were there", ".", "   ", "?", "3;", "I like goud eggs!", 
-    "i 4like...", "\\\\tgreat",  "She said \\"yes\\"")
+    "i 4like...", "\\\\tgreat",  "She said \"yes\"")
 check_text(x)
 print(check_text(x), include.text=FALSE)
 

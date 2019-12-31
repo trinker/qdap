@@ -4,8 +4,7 @@
 \alias{Animate.gantt_plot}
 \title{Gantt Plot}
 \usage{
-\method{Animate}{gantt_plot}(x, wc.time = TRUE, time.constant = 2,
-  colors = NULL, ...)
+\method{Animate}{gantt_plot}(x, wc.time = TRUE, time.constant = 2, colors = NULL, ...)
 }
 \arguments{
 \item{x}{The gantt_plot object.}

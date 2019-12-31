@@ -10,7 +10,6 @@
 #' combined together by the named match.list. \code{TRUE} outputs the table 
 #' proportionally (see \code{\link[qdap]{prop}}).
 #' @return Returns a dataframe with combines columns.
-#' @keywords combine, transform
 #' @seealso \code{\link[base]{transform}}
 #' @export 
 #' @examples

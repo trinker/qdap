@@ -9,7 +9,6 @@
 #' \code{"3sd"}, \code{"2sd"} and \code{"1.5sd"}, corresponding to >= to 3, 2, 
 #' or 1.5 standard deviations.
 #' @seealso \code{\link[base]{scale}}
-#' @keywords scale, standardize
 #' @export
 #' @examples
 #' \dontrun{

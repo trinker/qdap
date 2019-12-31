@@ -4,8 +4,13 @@
 \alias{plot.lexical_classification_score}
 \title{Plots a lexical_classification_score Object}
 \usage{
-\method{plot}{lexical_classification_score}(x, error.bar.height = 0.35,
-  error.bar.size = 0.5, error.bar.alpha = 0.3, ...)
+\method{plot}{lexical_classification_score}(
+  x,
+  error.bar.height = 0.35,
+  error.bar.size = 0.5,
+  error.bar.alpha = 0.3,
+  ...
+)
 }
 \arguments{
 \item{x}{The lexical_classification_score object.}

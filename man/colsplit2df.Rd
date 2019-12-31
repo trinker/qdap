@@ -5,8 +5,15 @@
 \alias{lcolsplit2df}
 \title{Wrapper for colSplit that Returns Dataframe(s)}
 \usage{
-colsplit2df(dataframe, splitcols = 1, new.names = NULL, sep = ".",
-  keep.orig = FALSE, name.sep = "&", index.names = FALSE)
+colsplit2df(
+  dataframe,
+  splitcols = 1,
+  new.names = NULL,
+  sep = ".",
+  keep.orig = FALSE,
+  name.sep = "&",
+  index.names = FALSE
+)
 
 lcolsplit2df(qdap.list, keep.orig = FALSE)
 }

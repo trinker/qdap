@@ -4,9 +4,16 @@
 \alias{plot.weighted_wfm}
 \title{Plots a weighted_wfm object}
 \usage{
-\method{plot}{weighted_wfm}(x, non.zero = FALSE, digits = 0,
-  by.column = NULL, high = ifelse(non.zero, "black", "blue"),
-  grid = ifelse(non.zero, "black", "white"), plot = TRUE, ...)
+\method{plot}{weighted_wfm}(
+  x,
+  non.zero = FALSE,
+  digits = 0,
+  by.column = NULL,
+  high = ifelse(non.zero, "black", "blue"),
+  grid = ifelse(non.zero, "black", "white"),
+  plot = TRUE,
+  ...
+)
 }
 \arguments{
 \item{x}{The weighted_wfm object}

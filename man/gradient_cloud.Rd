@@ -4,15 +4,34 @@
 \alias{gradient_cloud}
 \title{Gradient Word Cloud}
 \usage{
-gradient_cloud(text.var, bigroup.var, rev.binary = FALSE, X = "red",
-  Y = "blue", stem = FALSE, stopwords = NULL, caps = TRUE,
-  caps.list = NULL, I.list = TRUE, random.order = FALSE,
-  rot.per = 0, min.freq = 1, max.word.size = NULL,
-  min.word.size = 0.5, breaks = 10, cloud.font = NULL,
-  title = NULL, title.font = NULL, title.color = "black",
-  title.padj = 0.25, title.location = 3, title.cex = NULL,
-  legend.cex = 0.8, legend.location = c(0.025, 0.025, 0.25, 0.04),
-  char2space = "~~")
+gradient_cloud(
+  text.var,
+  bigroup.var,
+  rev.binary = FALSE,
+  X = "red",
+  Y = "blue",
+  stem = FALSE,
+  stopwords = NULL,
+  caps = TRUE,
+  caps.list = NULL,
+  I.list = TRUE,
+  random.order = FALSE,
+  rot.per = 0,
+  min.freq = 1,
+  max.word.size = NULL,
+  min.word.size = 0.5,
+  breaks = 10,
+  cloud.font = NULL,
+  title = NULL,
+  title.font = NULL,
+  title.color = "black",
+  title.padj = 0.25,
+  title.location = 3,
+  title.cex = NULL,
+  legend.cex = 0.8,
+  legend.location = c(0.025, 0.025, 0.25, 0.04),
+  char2space = "~~"
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

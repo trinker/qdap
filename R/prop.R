@@ -12,7 +12,6 @@
 #' @param round logical.  If \code{TRUE} rounds the returned values (controlled 
 #' by digits).
 #' @return Returns a matrix with proportionally scaled values.
-#' @keywords proportion, percent, percentage
 #' @export
 #' @examples
 #' \dontrun{

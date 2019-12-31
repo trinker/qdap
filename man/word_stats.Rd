@@ -4,9 +4,17 @@
 \alias{word_stats}
 \title{Descriptive Word Statistics}
 \usage{
-word_stats(text.var, grouping.var = NULL, tot = NULL,
-  parallel = FALSE, rm.incomplete = FALSE, digit.remove = FALSE,
-  apostrophe.remove = FALSE, digits = 3, ...)
+word_stats(
+  text.var,
+  grouping.var = NULL,
+  tot = NULL,
+  parallel = FALSE,
+  rm.incomplete = FALSE,
+  digit.remove = FALSE,
+  apostrophe.remove = FALSE,
+  digits = 3,
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable or a  \code{"word_stats"} object (i.e., the 

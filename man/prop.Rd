@@ -4,8 +4,7 @@
 \alias{prop}
 \title{Convert Raw Numeric Matrix or Data Frame to Proportions}
 \usage{
-prop(mat, digits = 2, percent = FALSE, by.column = TRUE,
-  round = FALSE)
+prop(mat, digits = 2, percent = FALSE, by.column = TRUE, round = FALSE)
 }
 \arguments{
 \item{mat}{A numeric matrix or dataframe.}
@@ -39,6 +38,3 @@ wdstraj <- word_stats(rajSPLIT$dialogue, rajSPLIT$person)
 prop(wdstraj$gts[, -1], 5)[1:15, 1:6]
 }
 }
-\keyword{percent,}
-\keyword{percentage}
-\keyword{proportion,}

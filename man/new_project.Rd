@@ -4,8 +4,13 @@
 \alias{new_project}
 \title{Project Template}
 \usage{
-new_project(project = "new", path = getwd(), open = is.global(2),
-  github = FALSE, ...)
+new_project(
+  project = "new",
+  path = getwd(),
+  open = is.global(2),
+  github = FALSE,
+  ...
+)
 }
 \arguments{
 \item{project}{A character vector of the project name.}
@@ -94,6 +99,3 @@ the desktop or a git application such as \href{https://github.com/}{github},
 \href{https://bitbucket.org/}{bitbucket} or \href{https://www.dropbox.com/}{dropbox}, 
 depending on what the client/research team is comfortable utilizing.
 }
-\keyword{is.global}
-\keyword{project,}
-\keyword{workflow,}

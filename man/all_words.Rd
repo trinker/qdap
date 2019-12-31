@@ -4,9 +4,16 @@
 \alias{all_words}
 \title{Searches Text Column for Words}
 \usage{
-all_words(text.var, begins.with = NULL, contains = NULL,
-  alphabetical = TRUE, apostrophe.remove = FALSE,
-  char.keep = char2space, char2space = "~~", ...)
+all_words(
+  text.var,
+  begins.with = NULL,
+  contains = NULL,
+  alphabetical = TRUE,
+  apostrophe.remove = FALSE,
+  char.keep = char2space,
+  char2space = "~~",
+  ...
+)
 }
 \arguments{
 \item{text.var}{The text variable.}

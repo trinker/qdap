@@ -6,15 +6,33 @@
 \alias{\%sw\%}
 \title{Remove Stop Words}
 \usage{
-rm_stopwords(text.var, stopwords = qdapDictionaries::Top25Words,
-  unlist = FALSE, separate = TRUE, strip = FALSE, unique = FALSE,
-  char.keep = NULL, names = FALSE, ignore.case = TRUE,
-  apostrophe.remove = FALSE, ...)
+rm_stopwords(
+  text.var,
+  stopwords = qdapDictionaries::Top25Words,
+  unlist = FALSE,
+  separate = TRUE,
+  strip = FALSE,
+  unique = FALSE,
+  char.keep = NULL,
+  names = FALSE,
+  ignore.case = TRUE,
+  apostrophe.remove = FALSE,
+  ...
+)
 
-rm_stop(text.var, stopwords = qdapDictionaries::Top25Words,
-  unlist = FALSE, separate = TRUE, strip = FALSE, unique = FALSE,
-  char.keep = NULL, names = FALSE, ignore.case = TRUE,
-  apostrophe.remove = FALSE, ...)
+rm_stop(
+  text.var,
+  stopwords = qdapDictionaries::Top25Words,
+  unlist = FALSE,
+  separate = TRUE,
+  strip = FALSE,
+  unique = FALSE,
+  char.keep = NULL,
+  names = FALSE,
+  ignore.case = TRUE,
+  apostrophe.remove = FALSE,
+  ...
+)
 
 text.var \%sw\% stopwords
 }

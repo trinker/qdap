@@ -4,8 +4,7 @@
 \alias{print.character_table}
 \title{Prints a character_table object}
 \usage{
-\method{print}{character_table}(x, digits = 2, percent = NULL,
-  zero.replace = NULL, ...)
+\method{print}{character_table}(x, digits = 2, percent = NULL, zero.replace = NULL, ...)
 }
 \arguments{
 \item{x}{The character_table object}
