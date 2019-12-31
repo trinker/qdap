@@ -37,7 +37,21 @@ test_that("apply_as_tm applies tm functions and then optionally converts back",{
         "simple_triplet_matrix"), c("weighted_wfm", "matrix", "array"
     ), c("weighted_wfm", "matrix", "array"))
     
-    expect_equivalent(lapply(list(x1, x2, x3, x4, x5, x6, x7), class), types)
+    actual <- lapply(list(x1, x2, x3, x4, x5, x6, x7), class)
+    
+    ## Can't use because R 3.x and 4.x have different ways of class(matrix(M)) where the later says 'array' too
+    ## Eventually we can drop this portion until the excpect_equivalent
+    conds <- Map(function(a, e){
+        
+        list(actual = a[!a %in% 'array'], expected = e[!e %in% 'array'])
+        
+        }, actual, types)
+    
+    types <- conds$expected
+    actual <- conds$actual
+    
+    expect_equivalent(actual, types)
+    
 
 })
 
@@ -84,6 +98,19 @@ test_that("apply_as_df allows users to apply data.frame based functions to a Cor
     outs <- c("word_list", "Dissimilarity", "diversity", "character_table", 
         "termco", "word_cor", "freq_terms")
     
-    expect_equivalent(sapply(list(x1, x2, x3, x4, x5, x6, x7), is), outs)
+    actual <- lapply(list(x1, x2, x3, x4, x5, x6, x7), is)
+    
+    ## Can't use because R 3.x and 4.x have different ways of class(matrix(M)) where the later says 'array' too
+    ## Eventually we can drop this portion until the excpect_equivalent
+    conds <- Map(function(a, e){
+        
+        list(actual = a[!a %in% 'array'], expected = e[!e %in% 'array'])
+        
+        }, actual, outs)
+    
+    outs <- conds$expected
+    actual <- conds$actual
+    
+    expect_equivalent(actual, outs)
 
 })
