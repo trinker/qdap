@@ -145,7 +145,7 @@ locs <- unlist(setNames(lapply(wordlist, function(x){
      })
 }), wordlist), recursive=FALSE)
 
-fdl <- reports::folder(pres_context)
+fdl <- qdap:::folder(pres_context)
 Map(function(x, y){
     if (identical(integer(0), x)) return(NULL)
     z <- with(pres_debates2012, trans_context(dialogue, person, inds=x, n.before=1))

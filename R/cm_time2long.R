@@ -97,9 +97,9 @@ function(..., v.name = "variable", list.var = TRUE, debug = TRUE,
 
     if (list.var) {
         L2 <- lapply(seq_along(L2), function(i) data.frame(L2[[i]], 
-            VAR = objs[i]))
+            VAR = objs[i], stringsAsFactors = FALSE))
     }
-    DF <- data.frame(do.call(rbind, L2), row.names = NULL)
+    DF <- data.frame(do.call(rbind, L2), row.names = NULL, stringsAsFactors = FALSE)
     if (list.var) {
         colnames(DF)[ncol(DF)] <- v.name
     }

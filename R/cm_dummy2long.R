@@ -60,11 +60,11 @@ function(cm_long2dummy_obj, rm.var = "time") {
             dummy2span(x[, i])
         })
         data.frame(code = rep(colnames(x), sapply(out, nrow)),
-            do.call(rbind, out))
+            do.call(rbind, out), stringsAsFactors = FALSE)
     })
 
     DF <- data.frame(do.call(rbind, outs), 
-        rmvar = rep(names(outs), sapply(outs, nrow)), row.names = NULL)
+        rmvar = rep(names(outs), sapply(outs, nrow)), row.names = NULL, stringsAsFactors = FALSE)
 
     colnames(DF)[4] <- rm.var
     class(DF) <- c("cmspans", com, paste0("vname_", rm.var), 

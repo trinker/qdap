@@ -4,7 +4,9 @@
 \name{pres_debates2012}
 \alias{pres_debates2012}
 \title{2012 U.S. Presidential Debates}
-\format{A data frame with 2912 rows and 4 variables}
+\format{
+A data frame with 2912 rows and 4 variables
+}
 \usage{
 data(pres_debates2012)
 }

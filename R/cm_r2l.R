@@ -79,13 +79,13 @@ function(range.list, v.name = "variable", list.var = TRUE){
         z = COL[[n ]]))
     x3 <- lapply(x2, function(v){
         if (!any(v == ":")) {
-            dat <- data.frame(matrix(rep(v, each = 2), byrow = TRUE, ncol = 2))
+            dat <- data.frame(matrix(rep(v, each = 2), byrow = TRUE, ncol = 2), stringsAsFactors = FALSE)
             colnames(dat) <- c("start", "end")
             dat
         } else {
             if (sum(v == ":") & length(v) == 3){
                 v <- v[v != ":"]
-                dat <- data.frame(rbind(v, c(NA, NA)), row.names = NULL)
+                dat <- data.frame(rbind(v, c(NA, NA)), row.names = NULL, stringsAsFactors = FALSE)
                 colnames(dat) <- c("start", "end")
                 dat
             } else {
@@ -98,9 +98,9 @@ function(range.list, v.name = "variable", list.var = TRUE){
     })
     x3 <- lapply(seq_along(x3), function(i) {
         data.frame(x3[[i]], code = rep(names(range.list)[i], 
-            nrow(x3[[i]])), variable = rep(lv, nrow(x3[[i]])))
+            nrow(x3[[i]])), variable = rep(lv, nrow(x3[[i]])), stringsAsFactors = FALSE)
     })   
-    dat <- data.frame(do.call(rbind, x3), row.names = NULL)
+    dat <- data.frame(do.call(rbind, x3), row.names = NULL, stringsAsFactors = FALSE)
     DF <- dat[!is.na(dat[, 1]), ]
     invisible(lapply(1:2, function(i) {
         DF[, i] <<- as.numeric(as.character(DF[, i]))

@@ -4,7 +4,9 @@
 \name{raj.demographics}
 \alias{raj.demographics}
 \title{Romeo and Juliet Demographics}
-\format{A data frame with 34 rows and 4 variables}
+\format{
+A data frame with 34 rows and 4 variables
+}
 \usage{
 data(raj.demographics)
 }

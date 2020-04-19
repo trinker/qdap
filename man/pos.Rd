@@ -252,7 +252,7 @@ ggplot(dat, aes(x=freq, y=Word)) +
 }
 }
 \references{
-\href{openNLP}{http:/opennlp.apache.org}
+http:/opennlp.apache.org
 }
 \seealso{
 \code{\link[openNLP]{Maxent_POS_Tag_Annotator}},

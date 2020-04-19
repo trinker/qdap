@@ -4,13 +4,7 @@
 \alias{new_project}
 \title{Project Template}
 \usage{
-new_project(
-  project = "new",
-  path = getwd(),
-  open = is.global(2),
-  github = FALSE,
-  ...
-)
+new_project(project = "new", path = getwd(), open = is.global(2), ...)
 }
 \arguments{
 \item{project}{A character vector of the project name.}
@@ -22,10 +16,7 @@ current working directory.}
 The default is to test if \code{new_project} is being used in the global 
 environment, if it is then the project directory will be opened.}
 
-\item{github}{logical.  If \code{TRUE} the repo will be sent to public 
-\href{https://github.com/}{GitHub} account.}
-
-\item{\ldots}{Other arguments passed to \code{\link[reports]{new_report}}.}
+\item{\ldots}{ignored.}
 }
 \value{
 Creates a project template.
@@ -80,7 +71,6 @@ The project template includes these main directories and scripts:
 }
 \item{TABLES}{ - A directory to export tables to}  
 \item{WORD_LISTS}{ - A directory to store word lists that can be sourced and supplied to functions}
-\item{.Rprofile}{ - Performs certain tasks such as loading libraries, data and sourcing functions upon startup in \href{http://www.rstudio.com/}{RStudio}} 
 \item{extra_functions.R}{ - A script to store user made functions related to the project
 \itemize{
     \item{email}{ - A function to view, and optionally copy to the clipboard, emails for the client/lead researcher, analyst and/or other project members (information taking from ~/CORRESPONDENCE/CONTACT_INFO.txt file)}

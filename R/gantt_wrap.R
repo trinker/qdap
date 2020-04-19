@@ -1,7 +1,6 @@
 #' Gantt Plot
 #' 
-#' A \href{http://docs.ggplot2.org/current/}{ggplot2} wrapper that produces a 
-#' Gantt plot.
+#' A ggplot2 wrapper that produces a Gantt plot.
 #' 
 #' @param dataframe A data frame with plotting variable(s) and a column of start 
 #' and end times.

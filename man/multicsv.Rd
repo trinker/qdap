@@ -91,7 +91,7 @@ rm("mtcarsb", "CO2b")  # gone from .GlobalEnv
 mcsv_r(file.path(a, nms), paste0("foo.dat", 1:2))
 foo.dat1; foo.dat2
 rm("foo.dat1", "foo.dat2")  # gone from .GlobalEnv
-library(reports); delete("foo")
+delete("foo")
 
 ## mcsv_w EXAMPLES:
 (a <- mcsv_w(mtcars, CO2, dir="foo"))

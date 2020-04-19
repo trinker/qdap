@@ -4,7 +4,9 @@
 \name{sample.time.span}
 \alias{sample.time.span}
 \title{Minimal Time Span Data Set}
-\format{A data frame with 9 rows and 6 variables}
+\format{
+A data frame with 9 rows and 6 variables
+}
 \usage{
 data(sample.time.span)
 }

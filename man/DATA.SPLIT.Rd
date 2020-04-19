@@ -4,7 +4,9 @@
 \name{DATA.SPLIT}
 \alias{DATA.SPLIT}
 \title{Fictitious Split Sentence Classroom Dialogue}
-\format{A data frame with 15 rows and 8 variables}
+\format{
+A data frame with 15 rows and 8 variables
+}
 \usage{
 data(DATA.SPLIT)
 }

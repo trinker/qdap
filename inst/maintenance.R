@@ -3,6 +3,18 @@
 #========
 update_news(); source("inst/build.R")
 
+##===========================
+## Check Reverse Dependencies
+##===========================
+# 1. build 
+# 2. Move the tarbal to a folder called test
+# 3. Find the reverse dependencies
+deps <- tools::package_dependencies('qdap', reverse = TRUE)
+# deps <- list(qdap="NLPutils")
+# 4. Run the reverse checks by passing the directory that contains the tarbal
+results <- tools::check_packages_in_dir(dir = 'C:/Users/trinker/Desktop/test', reverse = deps)
+summary(results)
+
 
 #==========================
 # Run unit tests
@@ -62,7 +74,6 @@ v_from <- "inst/Rmd_vignette/qdap_vignette.html"
 file.copy(v_from, v_to, overwrite = TRUE)
 
 #STEP 3: move to trinker.guthub
-library(reports)
 file <- "C:/Users/trinker/GitHub/trinker.github.com/"
 incoming <- file.path(file, "qdap_dev")
 delete(incoming)
@@ -116,7 +127,6 @@ v_from <- "inst/Rmd_vignette/qdap_vignette.html"
 file.copy(v_from, v_to, overwrite = TRUE)
 
 #STEP 3: move to trinker.guthub
-library(reports)
 file <- "C:/Users/trinker/GitHub/trinker.github.com"
 incoming <- file.path(file, "qdap")
 # delete(incoming); file.copy(path, file, TRUE, TRUE); file.rename(file.path(file, "web"), incoming)
@@ -167,7 +177,7 @@ knitr::knit2html("inst/Rmd_vignette/qdap_vignette.Rmd",
     stylesheet='inst/Rmd_vignette/css/style.css',
     options=c("use_xhtml","smartypants","mathjax","highlight_code", "base64_images"))
 
-reports::delete("figure")
+delete("figure")
 
 knitr::knit2html("vignettes/qdap_vignette.Rmd", 
     "vignettes/qdap_vignette.html")
@@ -203,7 +213,7 @@ r2dev()
 library(qdap)
 library(ggplot2)
 library(pacman)
-library(reports)
+
 
 options(repos="http://cran.rstudio.com/")
 

@@ -19,7 +19,7 @@
 #' cm_range.temp(qcv(AA, BB, CC))
 #' with(DATA, cm_range.temp(qcv(AA, BB, CC), state, list(person, adult)))
 #' ## cm_range.temp(qcv(AA, BB, CC), file = "foo.txt")
-#' ## library(reports); delete("foo.txt")
+#' ## delete("foo.txt")
 #' }
 cm_range.temp <-
 function(codes, text.var = NULL, grouping.var = NULL, file=NULL) {

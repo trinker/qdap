@@ -4,7 +4,9 @@
 \name{rajPOS}
 \alias{rajPOS}
 \title{Romeo and Juliet Split in Parts of Speech}
-\format{A list with 4 elements}
+\format{
+A list with 4 elements
+}
 \usage{
 data(rajPOS)
 }

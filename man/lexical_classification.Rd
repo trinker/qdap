@@ -157,7 +157,6 @@ library(animation)
 library(grid)
 library(gridBase)
 library(qdap)
-library(reports)
 library(igraph)
 library(plotrix)
 
@@ -177,7 +176,7 @@ lex_bar <- Animate(lex_ani2, type="bar")
 lex_text <- Animate(lex_ani2, type="text", size = 3, width=125, color="white")
 
 ## Generate a folder
-loc <- reports::folder(animation_lexical_classification)
+loc <- folder(animation_lexical_classification)
 setwd(loc)
 
 ## Set up the plotting function
@@ -274,7 +273,7 @@ FUN(TRUE)
 
 ## EXAMPLE 2: Line + Text + Bar
 ## Generate a folder
-loc2 <- reports::folder(animation_lexical_classification2)
+loc2 <- folder(animation_lexical_classification2)
 setwd(loc2)
 
 lex_ani2 <- lexical_classification(mraja1spl$dialogue, mraja1spl$person)

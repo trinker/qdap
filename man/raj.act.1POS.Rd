@@ -8,8 +8,10 @@
 A dataset containing a list from \code{\link[qdap]{pos_by}} using the 
 \code{\link[qdap]{mraja1spl}} data set (see \code{\link[qdap]{pos_by}} for 
 more information).}
-\format{A list with 10 elements 
-\url{http://shakespeare.mit.edu/romeo_juliet/full.html}}
+\format{
+A list with 10 elements 
+\url{http://shakespeare.mit.edu/romeo_juliet/full.html}
+}
 \usage{
 data(raj.act.1POS)
 }

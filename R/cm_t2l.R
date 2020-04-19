@@ -111,13 +111,13 @@ function(time.list, list.var.name = "variable", list.var = TRUE,
         z = COL[[n - 1]]))
     x3 <- lapply(x2, function(v){
         if (!any(v == ":")) {
-            dat <- data.frame(matrix(rep(v, each = 2), byrow = TRUE, ncol = 2))
+            dat <- data.frame(matrix(rep(v, each = 2), byrow = TRUE, ncol = 2), stringsAsFactors = FALSE)
             colnames(dat) <- c("start", "end")
             dat
         } else {
             if (sum(v == ":") & length(v) == 3){
                 v <- v[v != ":"]
-                dat <- data.frame(rbind(v, c("00.00.00", "00.00.00")), row.names = NULL)
+                dat <- data.frame(rbind(v, c("00.00.00", "00.00.00")), row.names = NULL, stringsAsFactors = FALSE)
                 colnames(dat) <- c("start", "end")
                 dat
             } else {
@@ -146,7 +146,7 @@ function(time.list, list.var.name = "variable", list.var = TRUE,
         v[, 1]*60^2 + v[, 2]*60 + v[, 3]
     }
     x3 <- lapply(seq_along(x3), function(i) {
-        data.frame(code = names(x3)[i], apply(x3[[i]], 2, tonum))
+        data.frame(code = names(x3)[i], apply(x3[[i]], 2, tonum), stringsAsFactors = FALSE)
     })
     span <- tonum(x[[1]])
 
@@ -174,7 +174,7 @@ function(time.list, list.var.name = "variable", list.var = TRUE,
     DF$Start <- sec2hms(DF$start)
     DF$End <- sec2hms(DF$end)
     if (list.var) {
-        DF <- data.frame(DF, VAR = rep(lv, nrow(DF)))
+        DF <- data.frame(DF, VAR = rep(lv, nrow(DF)), stringsAsFactors = FALSE)
         colnames(DF)[ncol(DF)] <- list.var.name
     }
     class(DF) <- c("cmtime", cls, class(DF))

@@ -258,7 +258,7 @@ sjc.dend(t(presdeb), 2:4)
 
 ## Words correlated within turns of talk
 ## EXAMPLE 1
-library(reports)
+library(qdapTools)
 x <- factor(with(rajSPLIT, paste(act, pad(TOT(tot)), sep = "|")))
 dat <- wfm(rajSPLIT$dialogue, x)
 

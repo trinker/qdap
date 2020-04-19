@@ -116,8 +116,7 @@ Returns a Gantt style visualization. Invisibly returns the ggplot2
 list object.
 }
 \description{
-A \href{http://docs.ggplot2.org/current/}{ggplot2} wrapper that produces a 
-Gantt plot.
+A ggplot2 wrapper that produces a Gantt plot.
 }
 \note{
 For non-repeated measures data/plotting use \code{\link[qdap]{gantt}}; 

@@ -4,7 +4,9 @@
 \name{rajSPLIT}
 \alias{rajSPLIT}
 \title{Romeo and Juliet (Complete & Split)}
-\format{A data frame with 2151 rows and 8 variables}
+\format{
+A data frame with 2151 rows and 8 variables
+}
 \usage{
 data(rajSPLIT)
 }

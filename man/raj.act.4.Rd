@@ -4,7 +4,9 @@
 \name{raj.act.4}
 \alias{raj.act.4}
 \title{Romeo and Juliet: Act 4}
-\format{A data frame with 115 rows and 2 variables}
+\format{
+A data frame with 115 rows and 2 variables
+}
 \usage{
 data(raj.act.4)
 }

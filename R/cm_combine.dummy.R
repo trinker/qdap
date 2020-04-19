@@ -57,7 +57,7 @@ function(cm.l2d.obj, combine.code, rm.var = "time",
     if (is.data.frame(cm.l2d.obj) | is.matrix(cm.l2d.obj)) {
         NMS <- as.character(substitute(cm.l2d.obj))
         if(is.matrix(cm.l2d.obj)) {
-            cm.l2d.obj <- data.frame(cm.l2d.obj)
+            cm.l2d.obj <- data.frame(cm.l2d.obj, stringsAsFactors = FALSE)
         }
         cm.l2d.obj <- list(cm.l2d.obj)
         names(cm.l2d.obj) <- NMS
@@ -67,11 +67,11 @@ function(cm.l2d.obj, combine.code, rm.var = "time",
         rm.var <- "time"
     }
     for(i in seq_along(cm.l2d.obj)) {
-        cm.l2d.obj[[i]] <- data.frame(cm.l2d.obj[[i]])
+        cm.l2d.obj[[i]] <- data.frame(cm.l2d.obj[[i]], stringsAsFactors = FALSE)
         cm.l2d.obj[[i]][, rm.var] <- rep(names(cm.l2d.obj)[i], nrow(cm.l2d.obj[[i]]))
     }
 
-    DF <- data.frame(do.call(rbind, cm.l2d.obj), row.names=NULL)
+    DF <- data.frame(do.call(rbind, cm.l2d.obj), row.names=NULL, stringsAsFactors = FALSE)
     if (!is.list(combine.code)) {
         combine.code <- list(combine.code)
     }
@@ -112,7 +112,7 @@ function(cm.l2d.obj, combine.code, rm.var = "time",
     names(NEW) <- names(combine.code)
     tv <- ncol(DF)
     DF <- data.frame(DF[, -tv, drop=FALSE], do.call(cbind, NEW), 
-        DF[, tv, drop=FALSE])
+        DF[, tv, drop=FALSE], stringsAsFactors = FALSE)
 
     if (length(unique(DF[, rm.var])) > 1) {
         DF <- split(DF, DF[, rm.var])

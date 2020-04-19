@@ -27,7 +27,7 @@ colSplit <-
 function(column, col.sep = ".", name.sep = "&"){
     column <- as.data.frame(column)
     svar <- strsplit(as.character(column[, 1]), col.sep, fixed = TRUE)
-    svar <- data.frame(do.call('rbind', svar))
+    svar <- data.frame(do.call('rbind', svar), stringsAsFactors = FALSE)
     if (!is.null(name.sep) & length(unlist(strsplit(names(column), 
         name.sep, fixed = TRUE))) > 1){
         

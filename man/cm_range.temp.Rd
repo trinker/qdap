@@ -25,7 +25,7 @@ Generates a range coding sheet for coding words.
 cm_range.temp(qcv(AA, BB, CC))
 with(DATA, cm_range.temp(qcv(AA, BB, CC), state, list(person, adult)))
 ## cm_range.temp(qcv(AA, BB, CC), file = "foo.txt")
-## library(reports); delete("foo.txt")
+## delete("foo.txt")
 }
 }
 \references{

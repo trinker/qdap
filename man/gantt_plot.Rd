@@ -100,7 +100,7 @@ rajSPLIT <- qdap::rajSPLIT
 ani_gantt <- with(mraja1, gantt_plot(dialogue, person))
 
 library(animation)
-loc <- reports::folder(animation_gantt)
+loc <- folder(animation_gantt)
 
 ## Set up the plotting function
 oopt <- animation::ani.options(interval = 0.1)

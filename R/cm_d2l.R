@@ -29,7 +29,7 @@ cm_d2l <- function(dataframe, code.vars, no.code = NA,
     }
     E <- dataframe[, repeat.vars, drop = FALSE]
     lens <- sapply(D, length)
-    NEW <- data.frame(code = unlist(D), E[rep(1:nrow(E), lens), ])
+    NEW <- data.frame(code = unlist(D), E[rep(1:nrow(E), lens), ], stringsAsFactors = FALSE)
     rownames(NEW) <- NULL
     if (rev.code) {
         NEW[, "code"] <- factor(NEW[, "code"], levels = rev(c(code.vars, no.code)))

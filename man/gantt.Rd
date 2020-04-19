@@ -97,7 +97,7 @@ Animate(ani_gannt)
 Animate(plot(ani_gannt))
 
 library(animation)
-loc <- reports::folder(animation_gantt)
+loc <- folder(animation_gantt)
 
 ## Set up the plotting function
 oopt <- animation::ani.options(interval = 0.1)
@@ -125,6 +125,6 @@ tool of management. New York, Ronald Press.
 \code{\link[qdap]{gantt_plot}}
 }
 \author{
-DigEmAll (\url{stackoverflow.com}) and Tyler Rinker <tyler.rinker@gmail.com>.
+DigEmAll (stackoverflow.com) and Tyler Rinker <tyler.rinker@gmail.com>.
 }
 \keyword{Gantt}

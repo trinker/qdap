@@ -8,9 +8,7 @@
 #' @param open logical.  If \code{TRUE} the project will be opened in RStudio.  
 #' The default is to test if \code{new_project} is being used in the global 
 #' environment, if it is then the project directory will be opened.  
-#' @param github logical.  If \code{TRUE} the repo will be sent to public 
-#' \href{https://github.com/}{GitHub} account.
-#' @param \ldots Other arguments passed to \code{\link[reports]{new_report}}.
+#' @param \ldots ignored.
 #' @details The project template includes these main directories and scripts:
 #' \itemize{
 #' \item{CODEBOOK}{ - A directory to store coding conventions or demographics data:
@@ -57,7 +55,6 @@
 #' }
 #' \item{TABLES}{ - A directory to export tables to}  
 #' \item{WORD_LISTS}{ - A directory to store word lists that can be sourced and supplied to functions}
-#' \item{.Rprofile}{ - Performs certain tasks such as loading libraries, data and sourcing functions upon startup in \href{http://www.rstudio.com/}{RStudio}} 
 #' \item{extra_functions.R}{ - A script to store user made functions related to the project
 #' \itemize{
 #'     \item{email}{ - A function to view, and optionally copy to the clipboard, emails for the client/lead researcher, analyst and/or other project members (information taking from ~/CORRESPONDENCE/CONTACT_INFO.txt file)}
@@ -78,10 +75,9 @@
 #' 
 #' @return Creates a project template.
 #' @export
-#' @importFrom reports delete folder new_report
 #' @importFrom tools file_ext
 new_project <- function(project = "new", path = getwd(), 
-    open = is.global(2), github = FALSE, ...) {
+    open = is.global(2),  ...) {
 
     ## Replace spaces in path with underscores
     project <- sub("'", "", gsub("\\s+", "_", project))
@@ -202,26 +198,19 @@ new_project <- function(project = "new", path = getwd(),
     utils::write.csv(data.frame(person=""), file=paste0(y[[2]], "/", "KEY.csv"), 
         row.names = FALSE)
  
-    ## Copy .Rprofile to main directory
-    pdfloc6 <- file.path(root, "Rprofile.txt")
-    invisible(file.copy(pdfloc6, x))
-    invisible(file.rename(file.path(x, "Rprofile.txt"), 
-        file.path(x, ".Rprofile")))        
 
     ## Create the reports folder  with `new_report`
-    invisible(new_report(c("REPORTS", project), ...))
+    invisible(dir.create("REPORTS"))
+
     o <- paste0("Project \"", project, "\" created:\n", x, "\n") 
     class(o) <- "qdapProj"
 
-    ## Send to github
-    if (github) {
-      try(qdapTools::repo2github(project.dir = x))
-    }
-    
+
     ## Open Project in RStudio
     if (open) {
         open_project(file.path(x, project, paste0(project, ".Rproj")))
     }    
+    
     return(o) 
 }
 
@@ -266,3 +255,117 @@ open_project <- function(Rproj.loc) {
     message("Preparing to open project!")
     try(system(action, wait = FALSE, ignore.stderr = TRUE))
 }
+
+
+
+#' Easy File Handling
+#' 
+#' \code{delete} - Deletes files and directories.
+#' 
+#' @param file The name of the file in the working directory or the path to the 
+#' file to be deleted.  If \code{NULL} provides a menu of files from the working 
+#' directory.
+#' @param \ldots The name(s) of the folder to be created.  If both \ldots and
+#' \code{folder.name} are \code{NULL} creates a file in the working directory 
+#' with the creation date and time stamp.
+#' @param folder.name A character vector of the name(s) of the folder to be 
+#' created.  Default \code{NULL}  (if the \ldots  is \code{NULL} too) creates a 
+#' file in the working directory with the creation date and time stamp.  Use 
+#' this argument only if the directory names contain spaces.
+#' @return \code{delete} permanently removes a file/directory.
+#' @seealso  \code{\link[base]{unlink}}, 
+#' \code{\link[base]{file.remove}}, 
+#' \code{\link[base]{dir.create}}
+#' @rdname file_handling
+#' @export
+#' @examples
+#' \dontrun{
+#' (x <- folder("DELETE.ME"))
+#' which(dir() == "DELETE.ME")
+#' delete("DELETE.ME")
+#' which(dir() == "DELETE.ME")
+#' 
+#' folder("the/next/big/thing", "hello world", "now/is/the/time")
+#' 
+#' folder(cat, dog)
+#' lapply(c("cat", "dog"), delete)
+#' }
+delete <-
+function(file = NULL) {
+    x <- if (is.null(file)) {
+        utils::menu(dir())
+    } else {
+        file
+    }
+    unlink(x, recursive = TRUE, force = FALSE)
+}
+
+#' Create Folder
+#' 
+#' \code{folder} - Create a folder/directory.
+#' 
+#' @return \code{folder} creates a folder/directory.
+#' @rdname file_handling
+#' @export
+folder <- function(..., folder.name = NULL) {
+    if (!is.null(folder.name)) {
+        x <- strsplit(folder.name, split = ", ")
+    } else {
+        x <- substitute(...())
+    }
+    if (!is.null(x)) {
+        x <- unblanker(scrubber(unlist(lapply(x, function(y) {
+            as.character(y)}))))
+    }
+    if (is.null(x)) {
+        hfolder()
+    } else {
+        if (length(x) == 1) {
+            hfolder(x)
+        } else {
+            lapply(x, function(z) {
+                hfolder(z)
+            })
+        }
+    }
+}
+
+hfolder <- function(folder.name = NULL) {
+    if (is.null(folder.name)) {
+        FN <- mgsub(c(":", " "), c(".", "_"), 
+            substr(Sys.time(), 1, 19))
+    } else {
+        FN <-folder.name
+    }
+    parts <- unlist(strsplit(FN, "/"))
+    if (length(parts) == 1) {
+        x <- paste(getwd(), "/", FN, sep = "")
+    } else {
+
+        ## If nested path (multiple directories created)
+        if (!file.exists(dirname(FN))) {
+
+            y <- FN
+            z <- length(parts)
+            for (i in rev(seq_along(parts))) {
+                if(file.exists(y)) {
+                    z <- z + 1
+                    break
+                }
+                y <- dirname(paste(parts[1:i], collapse ="/"))
+                z <- z - 1
+            }
+            
+            for (i in z:(length(parts) - 1)) {
+                suppressWarnings(dir.create(paste(parts[1:i], collapse ="/")))
+            }
+        
+        }
+        x <- FN
+    }
+    dir.create(x)
+    return(x)
+}
+
+unblanker <-
+function(x)subset(x, nchar(x)>0)

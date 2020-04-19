@@ -4,7 +4,9 @@
 \name{raj}
 \alias{raj}
 \title{Romeo and Juliet (Unchanged & Complete)}
-\format{A data frame with 840 rows and 3 variables}
+\format{
+A data frame with 840 rows and 3 variables
+}
 \usage{
 data(raj)
 }

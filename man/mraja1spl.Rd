@@ -4,7 +4,9 @@
 \name{mraja1spl}
 \alias{mraja1spl}
 \title{Romeo and Juliet: Act 1 Dialogue Merged with Demographics and Split}
-\format{A data frame with 508 rows and 7 variables}
+\format{
+A data frame with 508 rows and 7 variables
+}
 \usage{
 data(mraja1spl)
 }

@@ -141,7 +141,6 @@ library(animation)
 library(grid)
 library(gridBase)
 library(qdap)
-library(reports)
 library(igraph)
 library(plotrix)
 
@@ -158,7 +157,7 @@ bgb <- edge_apply(bgb, label.color="yellow")
 form_bar <- Animate(form_ani2, as.network=FALSE)
 
 ## Generate a folder
-loc <- reports::folder(animation_formality)
+loc <- folder(animation_formality)
 
 ## Set up the plotting function
 oopt <- animation::ani.options(interval = 0.1)

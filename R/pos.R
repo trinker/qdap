@@ -39,7 +39,7 @@
 #' treated as a pronoun, verb and adjective respectively for "She + is + cool".
 #' @seealso \code{\link[openNLP]{Maxent_POS_Tag_Annotator}},
 #' \code{\link[qdap]{colcomb2class}}
-#' @references \href{openNLP}{http:/opennlp.apache.org}
+#' @references http:/opennlp.apache.org
 #' @keywords parts-of-speech
 #' @export
 #' @importFrom parallel parLapply makeCluster detectCores stopCluster clusterEvalQ clusterExport
@@ -233,7 +233,7 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
         }
     }
     
-    m2 <- data.frame(POStagged = unlist(lapply(m, "[[", 1)))
+    m2 <- data.frame(POStagged = unlist(lapply(m, "[[", 1)), stringsAsFactors = FALSE)
     m2$POStags <- lapply(m, "[[", 2)
 
     G4 <- mtabulate(m2$POStags)
@@ -245,15 +245,15 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
     })
     cons <- ifelse(percent, 100, 1)
 
-    G5 <- sapply(data.frame(G4, check.names = FALSE), 
+    G5 <- sapply(data.frame(G4, check.names = FALSE, stringsAsFactors = FALSE), 
         function(x) cons*(x/m2$word.count))
     ## Added data.frame wrap on 128-per Kurt Hornik's bug find
     if (is.vector(G5)) {
-        G5 <- data.frame(t(G5))
+        G5 <- data.frame(t(G5), stringsAsFactors = FALSE)
     }
     colnames(G5) <- paste0("prop", colnames(G5))
-    G4 <- data.frame(wrd.cnt = m2$word.count, G4, check.names = FALSE)
-    G5 <- data.frame(wrd.cnt = m2$word.count, G5, check.names = FALSE)
+    G4 <- data.frame(wrd.cnt = m2$word.count, G4, check.names = FALSE, stringsAsFactors = FALSE)
+    G5 <- data.frame(wrd.cnt = m2$word.count, G5, check.names = FALSE, stringsAsFactors = FALSE)
     if (any(is.na(G4$wrd.cnt))) {
         nas <- which(is.na(G4$wrd.cnt))
         G4[nas, 2:ncol(G4)] <- NA
@@ -263,7 +263,7 @@ function(text.var, parallel = FALSE, cores = detectCores()/2,
     rnp <- raw_pro_comb(G4[, -1, drop = FALSE], G5[, -1, drop = FALSE], 
         digits = digits, percent = percent, zero.replace = zero.replace, 
         override = TRUE)  
-    rnp <- data.frame(G4[, 1, drop = FALSE], rnp, check.names = FALSE)     
+    rnp <- data.frame(G4[, 1, drop = FALSE], rnp, check.names = FALSE, stringsAsFactors = FALSE)     
     POS <- list(text = text.var, POStagged = m2, POSprop = G5, POSfreq = G4,
         POSrnp = rnp, percent = percent, zero.replace = zero.replace)
     if(na.omit) POS <- lapply(POS, na.omit)
@@ -365,11 +365,11 @@ function(text.var, grouping.var = NULL, digits = 1, percent = TRUE,
             grouping <- unlist(grouping.var)
         } 
     } 
-    DF1 <- data.frame(grouping, text.var, check.names = FALSE)
+    DF1 <- data.frame(grouping, text.var, check.names = FALSE, stringsAsFactors = FALSE)
     L1 <- split(DF1, DF1$grouping)
     L2 <- lapply(L1, function(x) colSums(x[, -1], na.rm = TRUE))
-    DF2 <- data.frame(do.call("rbind", L2), check.names = FALSE)
-    DF2 <- data.frame(replace = rownames(DF2), DF2, check.names = FALSE)
+    DF2 <- data.frame(do.call("rbind", L2), check.names = FALSE, stringsAsFactors = FALSE)
+    DF2 <- data.frame(replace = rownames(DF2), DF2, check.names = FALSE, stringsAsFactors = FALSE)
     rownames(DF2) <- 1:nrow(DF2)
     colnames(DF2)[1] <- G
     o <- unclass(pos.list)
@@ -381,12 +381,12 @@ function(text.var, grouping.var = NULL, digits = 1, percent = TRUE,
     propby <- as.matrix(do.call(rbind, propby))
     propby[is.nan(propby)] <- 0
     o[["pos.by.prop"]] <- suppressWarnings(data.frame(DF2[, 1:2], propby, 
-        check.names = FALSE))
+        check.names = FALSE, stringsAsFactors = FALSE))
     rnp2 <- raw_pro_comb(o[["pos.by.freq"]][, -c(1:2)], 
         o[["pos.by.prop"]][, -c(1:2)], digits = digits, 
         percent = percent, zero.replace = zero.replace, override = TRUE)  
     o[["pos.by.rnp"]] <- data.frame(o[["pos.by.freq"]][, 1:2], 
-        rnp2, check.names = FALSE)     
+        rnp2, check.names = FALSE, stringsAsFactors = FALSE)     
     class(o) <- "pos_by"
     attributes(o)[["grouping.var"]] <- DF1[["grouping"]]
     return(o)
@@ -469,7 +469,7 @@ function(x, digits = 1, percent = NULL, zero.replace = NULL, ...) {
             } else {
                 DF <-  DF/100
             }
-            x$POSprop <- data.frame(x$POSprop[, 1:2], DF, check.names = FALSE) 
+            x$POSprop <- data.frame(x$POSprop[, 1:2], DF, check.names = FALSE, stringsAsFactors = FALSE) 
         }
     } else {
         percent <- x$percent 
@@ -513,7 +513,7 @@ function(x, digits = 1, percent = NULL, zero.replace = NULL, ...) {
                 DF <-  DF/100
             }
             x$pos.by.prop <- data.frame(x$pos.by.prop[, 1:2], DF, 
-                check.names = FALSE) 
+                check.names = FALSE, stringsAsFactors = FALSE) 
         }
     } else {
         percent <- x$percent 
@@ -525,7 +525,7 @@ function(x, digits = 1, percent = NULL, zero.replace = NULL, ...) {
         x$pos.by.prop[, -c(1:2), drop = FALSE], digits = digits, 
         percent = percent, zero.replace = zero.replace)  
     rnp <- data.frame(x$pos.by.freq[, 1:2, drop = FALSE], rnp, 
-        check.names = FALSE)     
+        check.names = FALSE, stringsAsFactors = FALSE)     
     print(rnp)
     options(width=WD)
 }
@@ -561,7 +561,7 @@ plot.pos_by <- function(x, label = FALSE, lab.digits = 1, percent = NULL,
                     DF <-  DF/100
                 }
                 x$pos.by.prop <- data.frame(x$pos.by.prop[, 1:2], DF, 
-                    check.names = FALSE) 
+                    check.names = FALSE, stringsAsFactors = FALSE) 
             }
         } else {
             percent <- x$percent 
@@ -572,7 +572,7 @@ plot.pos_by <- function(x, label = FALSE, lab.digits = 1, percent = NULL,
         rnp <- raw_pro_comb(x$pos.by.freq[, -c(1:2)], x$pos.by.prop[, -c(1:2)], 
             digits = lab.digits, percent = percent, , override = TRUE,
             zero.replace = x$zero.replace)  
-        rnp <- data.frame(x$pos.by.freq[, 1:2], rnp, check.names = FALSE) 
+        rnp <- data.frame(x$pos.by.freq[, 1:2], rnp, check.names = FALSE, stringsAsFactors = FALSE) 
         qheat(x$pos.by.prop, values=TRUE, mat2 = rnp, ...)
     } else {
         qheat(x$pos.by.prop, ...)  

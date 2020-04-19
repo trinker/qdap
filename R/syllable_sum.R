@@ -203,7 +203,7 @@ function(text, remove.bracketed = TRUE, algorithm.report = FALSE,
         k <- sapply(y, InDic)
 
         DF <- data.frame(words = y, syllables = n, in.dictionary = k, 
-            row.names = NULL)
+            row.names = NULL, stringsAsFactors = FALSE)
         if (algorithm.report == TRUE){
             list("ALGORITHM REPORT" = DF[which(DF$in.dictionary == 'NF'), ], 
                 "SYLLABLE DATAFRAME" = DF)
@@ -238,7 +238,7 @@ function(text.var, parallel = FALSE) {
         if (identical(c(v), integer(0))){
             return(0)
         }
-        y <- as.data.frame(v)
+        y <- as.data.frame(v, stringsAsFactors = FALSE)
         z <- subset(y, as.numeric(as.character(Var1)) >= 3)
         j <- sum(z$Freq)
         return(j)

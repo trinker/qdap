@@ -737,69 +737,72 @@ compare <- function(v) {
 }
 
 
-#' Transposes a TermDocumentMatrix object
-#' 
-#' Transposes a TermDocumentMatrix object
-#' 
-#' @param x The TermDocumentMatrix object
-#' @param \ldots ignored
-#' @export
-#' @method t TermDocumentMatrix
-t.TermDocumentMatrix <- function(x, ...) {
-     
-    x <- t(as.matrix(x))
+## ## Transposes a TermDocumentMatrix object
+## ## 
+## ## Transposes a TermDocumentMatrix object
+## ## 
+## ## @param x The TermDocumentMatrix object
+## ## @param \ldots ignored
+## ## @export
+## ## @method t TermDocumentMatrix
+## t.TermDocumentMatrix <- function(x, ...) {
+##      
+##     x <- t(as.matrix(x))
+## 
+##     z <- unlist(apply(x, 2, function(y) sum(y != 0)), use.names = FALSE)
+## 
+##     a <- list(
+##         unlist(apply(x, 2, function(y) which(y != 0)), use.names = FALSE),
+##         rep(seq_along(z), z),
+##         x[apply(x, 2, function(y) y != 0)],
+##         nrow(x),
+##         ncol(x),
+##         dimnames(x)
+##     )
+##     
+##     attributes(a) <- list(
+##         names = c("i", "j", "v", "nrow", "ncol", "dimnames"),
+##         class = c("DocumentTermMatrix", "simple_triplet_matrix"),
+##         weighting = c("term frequency", "tf")
+##     )
+##     
+##     a
+## }
 
-    z <- unlist(apply(x, 2, function(y) sum(y != 0)), use.names = FALSE)
+## ## Transposes a DocumentTermMatrix object
+## ## 
+## ## Transposes a DocumentTermMatrix object
+## ## 
+## ## @param x The DocumentTermMatrix object
+## ## @param \ldots ignored
+## ## @export
+## ## @method t DocumentTermMatrix
+## t.DocumentTermMatrix <- function(x, ...) {
+##      
+##     x <- t(as.matrix(x))
+## 
+##     z <- unlist(apply(x, 2, function(y) sum(y != 0)), use.names = FALSE)
+## 
+##     a <- list(
+##         unlist(apply(x, 2, function(y) which(y != 0)), use.names = FALSE),
+##         rep(seq_along(z), z),
+##         x[apply(x, 2, function(y) y != 0)],
+##         nrow(x),
+##         ncol(x),
+##         dimnames(x)
+##     )
+##     
+##     attributes(a) <- list(
+##         names = c("i", "j", "v", "nrow", "ncol", "dimnames"), 
+##         class = c("TermDocumentMatrix", "simple_triplet_matrix"),
+##         weighting = c("term frequency", "tf")
+##     )
+##     
+##     a
+## }
 
-    a <- list(
-        unlist(apply(x, 2, function(y) which(y != 0)), use.names = FALSE),
-        rep(seq_along(z), z),
-        x[apply(x, 2, function(y) y != 0)],
-        nrow(x),
-        ncol(x),
-        dimnames(x)
-    )
-    
-    attributes(a) <- list(
-        names = c("i", "j", "v", "nrow", "ncol", "dimnames"),
-        class = c("DocumentTermMatrix", "simple_triplet_matrix"),
-        weighting = c("term frequency", "tf")
-    )
-    
-    a
-}
 
-#' Transposes a DocumentTermMatrix object
-#' 
-#' Transposes a DocumentTermMatrix object
-#' 
-#' @param x The DocumentTermMatrix object
-#' @param \ldots ignored
-#' @export
-#' @method t DocumentTermMatrix
-t.DocumentTermMatrix <- function(x, ...) {
-     
-    x <- t(as.matrix(x))
 
-    z <- unlist(apply(x, 2, function(y) sum(y != 0)), use.names = FALSE)
-
-    a <- list(
-        unlist(apply(x, 2, function(y) which(y != 0)), use.names = FALSE),
-        rep(seq_along(z), z),
-        x[apply(x, 2, function(y) y != 0)],
-        nrow(x),
-        ncol(x),
-        dimnames(x)
-    )
-    
-    attributes(a) <- list(
-        names = c("i", "j", "v", "nrow", "ncol", "dimnames"), 
-        class = c("TermDocumentMatrix", "simple_triplet_matrix"),
-        weighting = c("term frequency", "tf")
-    )
-    
-    a
-}
 
 #' tm Package Compatibility Tools: Apply to or Convert to/from Term Document 
 #' Matrix or Document Term Matrix

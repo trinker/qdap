@@ -18,24 +18,18 @@ And constructed with the following guidelines:
 
 
 
-CHANGES IN qdap VERSION 2.3.3 - 
+CHANGES IN qdap VERSION 2.4.0 
 ----------------------------------------------------------------
 
-BUG FIXES
-
-NEW FEATURES
-
-MINOR FEATURES
-
-IMPROVEMENTS
+* Maintenance release in order to be compliant with R 4.0.0.
 
 CHANGES
 
+* `new_project` no longer uses the reports package.
 
   
 CHANGES IN qdap VERSION 2.3.0 - 2.3.2
 ----------------------------------------------------------------
-
 
 * Maintenance release in order to be compliant with the **tm** package's API 
   changes.
@@ -44,7 +38,6 @@ CHANGES IN qdap VERSION 2.3.0 - 2.3.2
 
 CHANGES IN qdap VERSION 2.2.5-2.2.9
 ----------------------------------------------------------------
-
 
 BUG FIXES
 
@@ -73,7 +66,6 @@ NEW FEATURES
 
 * `add_s` added to add -s, -es, or -ies to word endings.
 
-MINOR FEATURES
 
 IMPROVEMENTS
 
@@ -85,7 +77,6 @@ IMPROVEMENTS
   to attention.  Documentation and an error for `group.var = NULL` has been 
   updated to add clarity.
 
-CHANGES
 
 
 

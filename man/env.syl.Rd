@@ -4,7 +4,9 @@
 \name{env.syl}
 \alias{env.syl}
 \title{Syllable Lookup Environment}
-\format{A environment with the DICTIONARY data set.}
+\format{
+A environment with the DICTIONARY data set.
+}
 \usage{
 data(env.syl)
 }

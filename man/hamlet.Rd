@@ -4,7 +4,9 @@
 \name{hamlet}
 \alias{hamlet}
 \title{Hamlet (Complete & Split by Sentence)}
-\format{A data frame with 2007 rows and 7 variables}
+\format{
+A data frame with 2007 rows and 7 variables
+}
 \usage{
 data(hamlet)
 }

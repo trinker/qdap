@@ -118,7 +118,7 @@ cm_code.blank <- function(x2long.obj, combine.code.list, rm.var = NULL, overlap 
             if (is.null(addon) | identical(addon, character(0))) return(x)
             mat <- matrix(rep(0, nrow(x)*length(addon)), ncol = length(addon))
             colnames(mat) <- addon
-            dat <- data.frame(x, mat)
+            dat <- data.frame(x, mat, stringsAsFactors = FALSE)
             dat[, sort(colnames(dat))]
         })
     }
@@ -138,7 +138,7 @@ cm_code.blank <- function(x2long.obj, combine.code.list, rm.var = NULL, overlap 
         DF$start <- DF$start + 1
         DF$Start <- sec2hms(DF$start)
         DF$End <- sec2hms(DF$end) 
-        DF <- data.frame(DF[, -4, drop=FALSE], DF[, 4, drop=FALSE])
+        DF <- data.frame(DF[, -4, drop=FALSE], DF[, 4, drop=FALSE], stringsAsFactors = FALSE)
         class(DF) <- class(DF)[!grepl("vname_", class(DF))]
         class(DF) <- c("cmspans", which.cm(x2long.obj), 
             paste0("vname_", rm.var), class(DF))

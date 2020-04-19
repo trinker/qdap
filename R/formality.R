@@ -120,7 +120,6 @@
 #' library(grid)
 #' library(gridBase)
 #' library(qdap)
-#' library(reports)
 #' library(igraph)
 #' library(plotrix)
 #' 
@@ -137,7 +136,7 @@
 #' form_bar <- Animate(form_ani2, as.network=FALSE)
 #' 
 #' ## Generate a folder
-#' loc <- reports::folder(animation_formality)
+#' loc <- folder(animation_formality)
 #' 
 #' ## Set up the plotting function
 #' oopt <- animation::ani.options(interval = 0.1)
@@ -287,7 +286,7 @@ formality <- function(text.var, grouping.var = NULL,
 ##   WOR <- word_count(text.var)                                                      
     X <- pos.list[["pos.by.freq"]]                                                   
     nameX <- rownames(X)                                                             
-    X <- data.frame(X)                                                               
+    X <- data.frame(X, stringsAsFactors = FALSE)                                                               
     xn <- nrow(X)                                                                    
     X$JI <- rep(0, xn)                                                               
     X$JK <- rep(0, xn)                                                               
@@ -320,7 +319,7 @@ formality <- function(text.var, grouping.var = NULL,
             "VBN", "VBP", "VBZ", "JI", "JK")]),                                      
         adverb = rowSums(X[, names(X) %in% c("RB", "RBR", "RBS", "WRB",              
             "JI", "JK")]),                                                           
-        interj = rowSums(X[, names(X) %in% c("UH", "JI", "JK")]))                    
+        interj = rowSums(X[, names(X) %in% c("UH", "JI", "JK")]), stringsAsFactors = FALSE)                    
     DF1RS <- rowSums(DF1)       
     if (!gv) {                                                                       
         WOR <- sapply(split(WOR, grouping.var), sum, na.rm = TRUE)                   
@@ -334,11 +333,11 @@ formality <- function(text.var, grouping.var = NULL,
     FOR <- (rowSums(cbind(DF1[, "noun"], DF1[, "articles"], DF1[, "adj"], DF1[, "prep"])) -               
         rowSums(cbind(DF1[, "pronoun"], DF1[, "verb"], DF1[, "adverb"], DF1[, "interj"])) + 100)/2                                                                                     
     if(!gv) {                                                                        
-        FOR <- data.frame(replace = X[, 1], word.count = WOR, formality = FOR)       
+        FOR <- data.frame(replace = X[, 1], word.count = WOR, formality = FOR, stringsAsFactors = FALSE)       
         colnames(FOR)[1] <- G                                                        
     } else {                                                                         
         FOR <- data.frame(replace = X[, 1], word.count = WOR,                        
-            formality = FOR)                                                         
+            formality = FOR, stringsAsFactors = FALSE)                                                         
         colnames(FOR)[1] <- G                                                        
     }                                                                                
                 
@@ -349,14 +348,14 @@ formality <- function(text.var, grouping.var = NULL,
     if (!gv) {                                                                       
         prop.by <- data.frame(var=names(WOR),                                        
             word.count = WOR,                                                        
-            apply(DF1, 2, round, digits = digits))                                   
+            apply(DF1, 2, round, digits = digits), stringsAsFactors = FALSE)                                   
         freq.by <- data.frame(var=names(WOR),                                        
-            word.count = WOR, DF2)                                                   
+            word.count = WOR, DF2, stringsAsFactors = FALSE)                                                   
     } else {                                                                         
         prop.by <- data.frame(var="all",                                             
-            word.count = sum(WOR, na.rm = TRUE), DF1)                                
+            word.count = sum(WOR, na.rm = TRUE), DF1, stringsAsFactors = FALSE)                                
         freq.by <- data.frame(var="all",                                             
-            word.count = sum(WOR, na.rm = TRUE), DF2)                                
+            word.count = sum(WOR, na.rm = TRUE), DF2, stringsAsFactors = FALSE)                                
     }                                                                                
     colnames(prop.by)[1] <- colnames(freq.by)[1] <- colnames(FOR)[1]                 
     rownames(prop.by) <- rownames(freq.by) <- NULL                                   
@@ -725,7 +724,7 @@ Animate_formality_net <- function(x, contextual, formal,
     non.speaker.color = NA, ...){
 
     v <- cbind.data.frame(group=attributes(x)[["grouping.var"]], 
-        x[["POSfreq"]])
+        x[["POSfreq"]], stringsAsFactors = FALSE)
 
     nas <- which(is.na(x[["text"]]))
     x[["text"]][nas] <- ""
@@ -787,7 +786,7 @@ Animate_formality_net <- function(x, contextual, formal,
     }))[, -1]
 
     y <- colpaste2df(y, 1:2, keep.orig =FALSE, sep=qsep, name.sep="|")
-    y <- data.frame(y[, 7, drop=FALSE], y[, -7], check.names=FALSE) 
+    y <- data.frame(y[, 7, drop=FALSE], y[, -7], check.names=FALSE, stringsAsFactors = FALSE) 
     y[, "id"] <- 1:nrow(y) 
 
     ## get aggregated values iterating through rows
