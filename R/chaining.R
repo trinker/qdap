@@ -97,7 +97,7 @@
 #' 
 #' \code{\%>\%} - The \pkg{magrittr} "then" chain operator imported by 
 #' \pkg{dplyr}.  Imported for convenience.  See 
-#' \url{https://github.com/smbache/magrittr} for details.
+#' https://github.com/tidyverse/magrittr for details.
 #' 
 #' @param lhs The value to be piped.
 #' @param rhs A function or expression.

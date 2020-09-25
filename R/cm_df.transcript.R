@@ -1,7 +1,7 @@
 #' Transcript With Word Number
 #' 
 #' Output a transcript with word  number/index above for easy input back into 
-#' \href{http://trinker.github.com/qdap/}{qdap after coding.}
+#' qdap after coding.
 #' 
 #' @param text.var The text variable.
 #' @param grouping.var The grouping variables.  Default \code{NULL} generates 

@@ -23,9 +23,9 @@
 #' @importFrom qdapTools %l% matrix2df list2df list_df2df
 #' @details For an example of the video generated from the \code{Animate} 
 #' output of \code{discourse_map} see: 
-#' \url{https://www.youtube.com/watch?v=7LcqFZODXNo&feature=youtu.be}.  An HTML
+#' https://www.youtube.com/watch?v=7LcqFZODXNo&feature=youtu.be.  An HTML
 #' output can be viewed: 
-#' \url{http://trinker.github.io/qdap_examples/animation_dialogue}.
+#' http://trinker.github.io/qdap_examples/animation_dialogue/.
 #' @import igraph
 #' @examples
 #' \dontrun{

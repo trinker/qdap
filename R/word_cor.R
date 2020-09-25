@@ -23,7 +23,7 @@
 #' @export
 #' @importFrom qdapTools list_vect2df
 #' @references The plotting method for the list output was inspired by Ben 
-#' Marwick; see \url{http://stackoverflow.com/a/19925445/1000343} for more.
+#' Marwick; see https://stackoverflow.com/a/19925445/1000343 for more.
 #' @seealso \code{\link[qdap]{word_proximity}},
 #' \code{\link[tm]{findAssocs}},
 #' \code{\link[qdap]{word_associate}},

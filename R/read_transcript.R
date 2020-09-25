@@ -55,7 +55,7 @@
 #' @seealso \code{\link[qdap]{dir_map}}
 #' @export
 #' @import XML RCurl
-#' @importFrom gdata read.xls
+#' @importFrom openxlsx read.xlsx
 #' @importFrom tools file_ext
 #' @examples
 #' \dontrun{
@@ -143,16 +143,14 @@ function(file, col.names = NULL, text.var = NULL, merge.broke.tot = TRUE,
     }
     switch(y, 
         xlsx = {
-            x <- read.xls(file,  header = header, 
-                sep = sep, as.is=FALSE, na.strings= na.strings, 
-                strip.white = TRUE, stringsAsFactors = FALSE, 
-                blank.lines.skip = rm.empty.rows, ...)
+            x <- read.xlsx(file, colNames = header, 
+                sep.names = sep, na.strings= na.strings, 
+                skipEmptyRows = rm.empty.rows, ...)
             },
         xls = {
-            x <- read.xls(file,  header = header, 
-                sep = sep, as.is=FALSE, na.strings= na.strings, 
-                strip.white = TRUE, stringsAsFactors = FALSE, 
-                blank.lines.skip = rm.empty.rows, ...)
+            x <- read.xlsx(file, colNames = header, 
+                sep.names = sep, na.strings= na.strings, 
+                skipEmptyRows = rm.empty.rows, ...)
             },
         docx = {
             x <- read.docx(file, skip = skip, sep = sep)

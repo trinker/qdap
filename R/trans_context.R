@@ -153,7 +153,7 @@ trans_context <- function(text.var, grouping.var, inds, n.before = 3,
 #' @export
 #' @method print qdap_context
 #' @importFrom tools file_ext
-#' @importFrom xlsx write.xlsx
+#' @importFrom openxlsx write.xlsx
 print.qdap_context <- function(x, file = NULL, pretty = TRUE, width = 70, 
     sep.block = TRUE, double_space = TRUE, ...) {
 

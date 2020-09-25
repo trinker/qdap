@@ -577,9 +577,9 @@ ggplot() + theme_bw() +
 Hu, M., & Liu, B. (2004). Mining opinion features in customer 
 reviews. National Conference on Artificial Intelligence. 
 
-\url{http://www.slideshare.net/jeffreybreen/r-by-example-mining-twitter-for}
+https://www.slideshare.net/jeffreybreen/r-by-example-mining-twitter-for
 
-\url{http://hedonometer.org/papers.html} Links to papers on hedonometrics
+http://hedonometer.org/papers.html Links to papers on hedonometrics
 }
 \seealso{
 \url{https://github.com/trestletech/Sermon-Sentiment-Analysis}

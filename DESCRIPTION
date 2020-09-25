@@ -1,7 +1,7 @@
 Package: qdap
 Type: Package
 Title: Bridging the Gap Between Qualitative Data and Quantitative Analysis
-Version: 2.4.2
+Version: 2.4.3
 Authors@R: c(
              person("Tyler", "Rinker", email = "tyler.rinker@gmail.com", role = c("aut", "cre")),
              person("Bryan", "Goodrich", role = "ctb"), 
@@ -9,10 +9,10 @@ Authors@R: c(
             )
 Maintainer: Tyler Rinker <tyler.rinker@gmail.com>
 Depends: R (>= 3.1.0), qdapDictionaries (>= 1.0.2), qdapRegex (>= 0.1.2), qdapTools (>= 1.3.1), RColorBrewer
-Imports: chron, dplyr (>= 0.3), gdata, gender (>= 0.5.1), ggplot2 (>= 2.1.0), grid, gridExtra,
-          igraph, methods, NLP, openNLP (>= 0.2-1), parallel, plotrix, RCurl, 
+Imports: chron, dplyr (>= 0.3), gender (>= 0.5.1), ggplot2 (>= 2.1.0), grid, gridExtra,
+          igraph, methods, NLP, openNLP (>= 0.2-1), openxlsx, parallel, plotrix, RCurl, 
           reshape2, scales, stringdist, tidyr, tm (>= 0.7.6), tools, utils, venneuler, wordcloud,
-          xlsx, XML
+          XML
 Suggests: koRpus, knitr, lda, proxy, stringi, SnowballC, testthat
 LazyData: TRUE
 Description: Automates many of the tasks associated with quantitative discourse analysis of transcripts containing discourse
@@ -23,6 +23,6 @@ Description: Automates many of the tasks associated with quantitative discourse 
               and targeted analysis. 'qdap' is designed for transcript analysis, however, many functions are applicable to other
               areas of Text Mining/ Natural Language Processing.
 License: GPL-2
-URL: http://trinker.github.com/qdap/
-BugReports: http://github.com/trinker/qdap/issues
-RoxygenNote: 7.1.0
+URL: http://trinker.github.io/qdap/
+BugReports: https://github.com/trinker/qdap/issues
+RoxygenNote: 7.1.1

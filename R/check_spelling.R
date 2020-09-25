@@ -43,8 +43,8 @@
 #' @export
 #' @rdname check_spelling
 #' @seealso \code{\link[stringdist]{stringdist}}
-#' @references \url{http://stackoverflow.com/a/24454727/1000343} \cr
-#' \url{https://journal.r-project.org/archive/2011-2/RJournal_2011-2_Hornik+Murdoch.pdf}
+#' @references https://stackoverflow.com/a/24454727/1000343 \cr
+#' https://journal.r-project.org/archive/2011-2/RJournal_2011-2_Hornik+Murdoch.pdf
 #' @note A possible misspelled word is defined as not found in the 
 #' \code{dictionary}.  
 #' @examples

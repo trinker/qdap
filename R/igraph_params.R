@@ -4,7 +4,7 @@
 #' 
 #' @param x A list of \pkg{igraph} objects.
 #' @param \ldots Arguments passed \pkg{igraph}'s \code{\link[igraph]{V}} and \code{\link[igraph]{E}}.  
-#' See \href{http://igraph.sourceforge.net/doc/R/plot.common.html}{Drawing Graphs} 
+#' See https://igraph.org/redirect.html
 #' for more.
 #' @param hold.ends A vector of parameters passed to \dots that should not be 
 #' altered for the first and last (ends) objects in the list.

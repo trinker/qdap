@@ -43,7 +43,7 @@ index already.
 }
 \description{
 Output a transcript with word  number/index above for easy input back into 
-\href{http://trinker.github.com/qdap/}{qdap after coding.}
+qdap after coding.
 }
 \note{
 It is recommended that the researcher actually codes on the output 

@@ -8,7 +8,7 @@
 #' @param include logical.  If \code{TRUE} includes the character in the grab.
 #' @return returns a vector of text with char on/forward removed.
 #' @author Josh O'Brien, Justin Haynes and Tyler Rinker <tyler.rinker@@gmail.com>.
-#' @references \url{http://stackoverflow.com/q/15909626/1000343}
+#' @references https://stackoverflow.com/q/15909626/1000343
 #' @rdname beg2char
 #' @export
 #' @examples

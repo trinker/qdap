@@ -1,7 +1,6 @@
 #' Phrase Nets
 #' 
-#' Create \href{http://trinker.github.io/many-eye}{Many Eyes} 
-#' style phrase nets.
+#' Create Many Eyes style phrase nets.
 #' 
 #' @param text.var The text variable.
 #' @param freq The minimum word frequency occurrence.
@@ -10,11 +9,11 @@
 #' @param vertex.constant A constant to multiple the vertex label sizes by.
 #' @param \ldots Other arguments passed to \code{\link[qdap]{Filter}}.
 #' @return Returns an igraph object.
-#' @note While \href{http://trinker.github.io/many-eye}{Many Eyes} 
+#' @note While Many Eyes
 #' phrase nets inspired this function the two outputs are not identical.  The
 #' \code{\link[qdap]{phrase_net}} function operates off of correlations between 
 #' words in sentences.
-#' @references \url{http://trinker.github.io/many-eye}
+#' @references http://trinker.github.io/many-eye/
 #' @keywords phrase_net
 #' @export
 #' @importFrom reshape2 melt

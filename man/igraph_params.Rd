@@ -16,7 +16,7 @@ edge_apply(x, ..., hold.ends = c("label.color"))
 altered for the first and last (ends) objects in the list.}
 
 \item{\ldots}{Arguments passed \pkg{igraph}'s \code{\link[igraph]{V}} and \code{\link[igraph]{E}}.
-See \href{http://igraph.sourceforge.net/doc/R/plot.common.html}{Drawing Graphs} 
+See https://igraph.org/redirect.html
 for more.}
 }
 \value{

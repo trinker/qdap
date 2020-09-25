@@ -54,7 +54,6 @@
 #' @importFrom qdapTools lookup
 #' @importFrom plotrix color.legend
 #' @importFrom wordcloud wordcloud
-#' @importFrom gdata drop.levels
 #' @examples
 #' \dontrun{
 #' DATA$state <- space_fill(DATA$state, c("is fun", "too fun", "you liar"))
@@ -148,4 +147,10 @@ gradient_cloud <- function(text.var, bigroup.var, rev.binary = FALSE, X = "red",
     return(invisible(WF))
 }
 
+
+drop.levels <- function(x, reorder=TRUE, ...){
+  x <- x[, drop=TRUE]
+  if(reorder) x <- reorder(x, ...)
+  x
+}
 

@@ -1,7 +1,7 @@
 #' Takes a Matrix and Generates an Adjacency Matrix
 #' 
 #' Takes a matrix (wfm) or termco object and generates an adjacency matrix for 
-#' use with the \href{http://igraph.sourceforge.net/}{igraph} package.
+#' use with the igraph package.
 #' 
 #' @rdname adjacency_matrix
 #' @param matrix.obj A matrix object, preferably, of the class "termco"  

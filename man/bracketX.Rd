@@ -122,7 +122,7 @@ genX(DATA$state, c("is", "we"), c("too", "on"))
 }
 }
 \references{
-\url{http://stackoverflow.com/q/8621066/1000343}
+https://stackoverflow.com/q/8621066/1000343
 }
 \seealso{
 \code{\link[base]{regex}}

@@ -18,7 +18,7 @@
 #' the text.
 #' @return \code{bracketX} -  returns a vector of text with brackets removed.
 #' @rdname bracketX
-#' @references \url{http://stackoverflow.com/q/8621066/1000343}
+#' @references https://stackoverflow.com/q/8621066/1000343
 #' @export
 #' @seealso 
 #' \code{\link[base]{regex}}

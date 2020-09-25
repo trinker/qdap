@@ -78,7 +78,7 @@
 #' distance measure, cm_distance's matrix is asymmetrical. \code{cm_distance} 
 #' computes the distance by taking each span (start and end) for Code A and 
 #' comparing it to the nearest start or end for Code B.
-#' @references \url{http://stats.stackexchange.com/a/22333/7482}
+#' @references https://stats.stackexchange.com/a/22333/7482
 #' @keywords distance codes association
 #' @seealso \code{\link[qdap]{print.cm_distance}}
 #' @export

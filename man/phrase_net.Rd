@@ -30,11 +30,10 @@ phrase_net(
 Returns an igraph object.
 }
 \description{
-Create \href{http://trinker.github.io/many-eye}{Many Eyes} 
-style phrase nets.
+Create Many Eyes style phrase nets.
 }
 \note{
-While \href{http://trinker.github.io/many-eye}{Many Eyes} 
+While Many Eyes
 phrase nets inspired this function the two outputs are not identical.  The
 \code{\link[qdap]{phrase_net}} function operates off of correlations between 
 words in sentences.
@@ -96,6 +95,6 @@ lapply(seq_along(z), function(i) {
 }
 }
 \references{
-\url{http://trinker.github.io/many-eye}
+http://trinker.github.io/many-eye/
 }
 \keyword{phrase_net}

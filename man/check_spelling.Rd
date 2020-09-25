@@ -207,8 +207,8 @@ stats::setNames(lapply(meths, function(x) check_spelling(strings, method=x)), me
 }
 }
 \references{
-\url{http://stackoverflow.com/a/24454727/1000343} \cr
-\url{https://journal.r-project.org/archive/2011-2/RJournal_2011-2_Hornik+Murdoch.pdf}
+https://stackoverflow.com/a/24454727/1000343 \cr
+https://journal.r-project.org/archive/2011-2/RJournal_2011-2_Hornik+Murdoch.pdf
 }
 \seealso{
 \code{\link[stringdist]{stringdist}}

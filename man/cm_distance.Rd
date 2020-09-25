@@ -184,7 +184,7 @@ plot(out2, label.cex=2, label.dist=TRUE, digits=5)
 }
 }
 \references{
-\url{http://stats.stackexchange.com/a/22333/7482}
+https://stats.stackexchange.com/a/22333/7482
 }
 \seealso{
 \code{\link[qdap]{print.cm_distance}}
