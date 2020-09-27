@@ -79,13 +79,13 @@ The project template includes these main directories and scripts:
 }
 \item{LOG}{ - A text file documenting project changes/needs etc.}
 \item{PROJECT_WORKFLOW_GUIDE.pdf}{ - A pdf explaining the structure of the project template}
-\item{xxx.Rproj}{ - A project file used by \href{http://www.rstudio.com/}{RStudio}; clicking this will open the project in RStudio.} 
+\item{xxx.Rproj}{ - A project file used by RRtudio; clicking this will open the project in RStudio.} 
 \item{TO_DO}{ - A text file documenting project tasks}
 }
 
 The template comes with a .Rproj file.  This makes operating in 
-\href{http://www.rstudio.com/}{RStudio} very easy.  The file can be kept on 
-the desktop or a git application such as \href{https://github.com/}{github},
-\href{https://bitbucket.org/}{bitbucket} or \href{https://www.dropbox.com/}{dropbox}, 
+RStudio very easy.  The file can be kept on 
+the desktop or a git application such as github,
+bitbucket or dropbox, 
 depending on what the client/research team is comfortable utilizing.
 }

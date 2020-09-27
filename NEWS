@@ -17,12 +17,12 @@ And constructed with the following guidelines:
 * Bug fixes and misc. changes bumps the patch
 
 
-CHANGES IN qdap VERSION 2.4.3 
+
+CHANGES IN qdap VERSION 2.4.4  
 ----------------------------------------------------------------
 
 
-
-CHANGES IN qdap VERSION 2.4.2  
+CHANGES IN qdap VERSION 2.4.3  
 ----------------------------------------------------------------
 
 * Maintenance release in order to address the archival of the **gdata** package
